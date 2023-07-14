@@ -9,12 +9,20 @@ param (
 )
 
 $tspFiles = @()
+$allTspFiles = (Get-ChildItem -path ./specification tspconfig.yaml -Recurse).FullName -replace "$($pwd.Path)/"
 if ([string]::IsNullOrEmpty($TargetBranch) -or [string]::IsNullOrEmpty($SourceBranch)) {
-  $tspFiles = (Get-ChildItem -path ./specification tspconfig.yaml -Recurse).FullName -replace "$($pwd.Path)/"
+  $tspFiles = $allTspFiles
 }
 else {
   Write-Host "git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff --name-only `"$TargetBranch...$SourceBranch`" -- | Where-Object {`$_.StartsWith('specification')}"
-  $tspFiles = git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff --name-only `"$TargetBranch...$SourceBranch`" -- | Where-Object {$_.StartsWith('specification')}
+  $diffFiles = git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff --name-only `"$TargetBranch...$SourceBranch`" --
+  $engFiles = $diffFiles | Where-Object {$_.StartsWith('eng')}
+  if ($engFiles) {
+    $tspFiles = $allTspFiles
+  }
+  else {
+    $tspFiles = $diffFiles | Where-Object {$_.StartsWith('specification')}
+  }
 }
 
 $typespecFolders = @()
