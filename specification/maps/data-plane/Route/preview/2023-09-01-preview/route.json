@@ -1644,74 +1644,77 @@
         },
         "loadType": {
           "description": "Types of cargo that may be classified as hazardous materials and restricted from some roads. Available vehicleLoadType values are US Hazmat classes 1 through 9, plus generic classifications for use in other countries. Values beginning with USHazmat are for US routing while otherHazmat should be used for all other countries. loadType can be specified multiple times in a request.",
-          "type": "string",
-          "enum": [
-            "USHazmatClass1",
-            "USHazmatClass2",
-            "USHazmatClass3",
-            "USHazmatClass4",
-            "USHazmatClass5",
-            "USHazmatClass6",
-            "USHazmatClass7",
-            "USHazmatClass8",
-            "USHazmatClass9",
-            "otherHazmatExplosive",
-            "otherHazmatGeneral",
-            "otherHazmatHarmfulToWater"
-          ],
-          "x-ms-enum": {
-            "name": "VehicleLoadType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "USHazmatClass1",
-                "description": "Explosives"
-              },
-              {
-                "value": "USHazmatClass2",
-                "description": "Compressed gas"
-              },
-              {
-                "value": "USHazmatClass3",
-                "description": "Flammable liquids"
-              },
-              {
-                "value": "USHazmatClass4",
-                "description": "Flammable solids"
-              },
-              {
-                "value": "USHazmatClass5",
-                "description": "Oxidizers"
-              },
-              {
-                "value": "USHazmatClass6",
-                "description": "Poisons"
-              },
-              {
-                "value": "USHazmatClass7",
-                "description": "Radioactive"
-              },
-              {
-                "value": "USHazmatClass8",
-                "description": "Corrosives"
-              },
-              {
-                "value": "USHazmatClass9",
-                "description": "Miscellaneous"
-              },
-              {
-                "value": "otherHazmatExplosive",
-                "description": "Explosives"
-              },
-              {
-                "value": "otherHazmatGeneral",
-                "description": "Miscellaneous"
-              },
-              {
-                "value": "otherHazmatHarmfulToWater",
-                "description": "Harmful to water"
-              }
-            ]
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "USHazmatClass1",
+              "USHazmatClass2",
+              "USHazmatClass3",
+              "USHazmatClass4",
+              "USHazmatClass5",
+              "USHazmatClass6",
+              "USHazmatClass7",
+              "USHazmatClass8",
+              "USHazmatClass9",
+              "otherHazmatExplosive",
+              "otherHazmatGeneral",
+              "otherHazmatHarmfulToWater"
+            ],
+            "x-ms-enum": {
+              "name": "VehicleLoadType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "USHazmatClass1",
+                  "description": "Explosives"
+                },
+                {
+                  "value": "USHazmatClass2",
+                  "description": "Compressed gas"
+                },
+                {
+                  "value": "USHazmatClass3",
+                  "description": "Flammable liquids"
+                },
+                {
+                  "value": "USHazmatClass4",
+                  "description": "Flammable solids"
+                },
+                {
+                  "value": "USHazmatClass5",
+                  "description": "Oxidizers"
+                },
+                {
+                  "value": "USHazmatClass6",
+                  "description": "Poisons"
+                },
+                {
+                  "value": "USHazmatClass7",
+                  "description": "Radioactive"
+                },
+                {
+                  "value": "USHazmatClass8",
+                  "description": "Corrosives"
+                },
+                {
+                  "value": "USHazmatClass9",
+                  "description": "Miscellaneous"
+                },
+                {
+                  "value": "otherHazmatExplosive",
+                  "description": "Explosives"
+                },
+                {
+                  "value": "otherHazmatGeneral",
+                  "description": "Miscellaneous"
+                },
+                {
+                  "value": "otherHazmatHarmfulToWater",
+                  "description": "Harmful to water"
+                }
+              ]
+            }
           }
         }
       }
