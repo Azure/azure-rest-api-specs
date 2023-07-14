@@ -421,7 +421,7 @@
         },
         "created": {
           "type": "integer",
-          "format": "int64",
+          "format": "unixtime",
           "description": "A timestamp when this job or item was created (in unix epochs)."
         },
         "expires": {
@@ -492,7 +492,7 @@
         },
         "created": {
           "type": "integer",
-          "format": "int32",
+          "format": "unixtime",
           "description": "The first timestamp associated with generation activity for this completions response,\nrepresented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970."
         },
         "choices": {
@@ -625,7 +625,8 @@
         },
         "content": {
           "type": "string",
-          "description": "The text associated with this message payload."
+          "description": "The text associated with this message payload.",
+          "x-nullable": true
         },
         "name": {
           "type": "string",
@@ -638,7 +639,8 @@
         }
       },
       "required": [
-        "role"
+        "role",
+        "content"
       ]
     },
     "ChatRole": {
@@ -729,7 +731,7 @@
         },
         "created": {
           "type": "integer",
-          "format": "int32",
+          "format": "unixtime",
           "description": "The first timestamp associated with generation activity for this completions response,\nrepresented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970."
         },
         "prompt_annotations": {
@@ -1235,7 +1237,7 @@
       "properties": {
         "created": {
           "type": "integer",
-          "format": "int64",
+          "format": "unixtime",
           "description": "A timestamp when this job or item was created (in unix epochs)."
         },
         "data": {
