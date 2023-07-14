@@ -69,7 +69,7 @@ export async function main() {
   }
 
   // Format parent folder to include shared files
-  //await runCmd(`npx tsp format ..${path.sep}**${path.sep}*.tsp`, folder);
+  await runCmd(`npx tsp format ..${path.sep}**${path.sep}*.tsp`, folder);
 
   // Verify generated swagger file is in sync with one on disk
   const git = simpleGit();
