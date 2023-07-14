@@ -3394,6 +3394,79 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}": {
+      "get": {
+        "tags": [
+          "Resources"
+        ],
+        "operationId": "Resources_ListByParent",
+        "description": "Lists child resources of a given parent resource.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group containing the resource to get. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace of the resource provider."
+          },
+          {
+            "name": "parentResourcePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The parent resource identity.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource type of the resource.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of resources",
+            "schema": {
+              "$ref": "#/definitions/ResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/GenericResourceFilter"
+      }
+    },
     "/{resourceId}": {
       "head": {
         "tags": [
