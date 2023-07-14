@@ -11,6 +11,7 @@ param (
 $typespecFolders = @()
 
 $typespecFolders = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" "$SpecsRepoRootDirectory" "$TargetBranch" "$SourceBranch"
+$typespecFolders = $typespecFolders.Split('',[System.StringSplitOptions]::RemoveEmptyEntries)
 
 $exitCode = 0
 foreach ($typespecFolder in $typespecFolders) {
