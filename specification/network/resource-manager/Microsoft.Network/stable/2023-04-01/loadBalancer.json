@@ -1517,6 +1517,66 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/migrateToIpBased": {
+      "post": {
+        "tags": [
+          "LoadBalancers"
+        ],
+        "operationId": "LoadBalancers_MigrateToIpBased",
+        "description": "Migrate load balancer to IP Based",
+        "parameters": [
+          {
+            "name": "groupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group.",
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the load balancer.",
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/MigrateLoadBalancerToIpBasedRequest"
+            },
+            "description": "Parameters supplied to the migrateToIpBased Api."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request for migrating Load balancer to IP Based.",
+            "schema": {
+              "$ref": "#/definitions/MigratedPools"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Migrate load balancer to IP Based": {
+            "$ref": "./examples/MigrateLoadBalancerToIPBased.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2653,6 +2713,32 @@
         }
       },
       "description": "Individual port mappings for inbound NAT rule created for backend pool."
+    },
+    "MigrateLoadBalancerToIpBasedRequest": {
+      "type": "object",
+      "properties": {
+        "pools": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of pool names that should be migrated from Nic based to IP based pool"
+        }
+      },
+      "description": "The request for a migrateToIpBased API."
+    },
+    "MigratedPools": {
+      "type": "object",
+      "properties": {
+        "migratedPools": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of pools migrated from Nic based to IP based pool"
+        }
+      },
+      "description": "The response for a migrateToIpBased API."
     }
   }
 }
