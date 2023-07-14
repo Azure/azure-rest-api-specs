@@ -14,7 +14,7 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "format": "arm-id",
+          "format": "arm-resource-id",
           "description": "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\""
         },
         "name": {
@@ -35,6 +35,10 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "arm-resource-id": {
+      "type": "string",
+      "pattern": "/^(\/subscriptions\/([^/]+)(\/resourcegroups\/([^/]+))?)?\/providers\/([^/]+)\/([^/]+\/[^/]+)(\/([^/]+\/[^/]+))*$|^\/subscriptions\/([^/]+)(\/resourcegroups\/([^/]+))?$/i"
     },
     "AzureEntityResource": {
       "x-ms-client-name": "AzureEntityResource",
@@ -429,12 +433,12 @@
         "id": {
           "description": "Fully qualified ID for the async operation.",
           "type": "string",
-          "format": "arm-id"
+          "format": "arm-resource-id"
         },
         "resourceId": {
           "description": "Fully qualified ID of the resource against which the original async operation was started.",
           "type": "string",
-          "format": "arm-id",
+          "format": "arm-resource-id",
           "readOnly": true
         },
         "name": {
