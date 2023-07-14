@@ -9,8 +9,9 @@ param (
 )
 
 $tspFiles = @()
+$osSlash = [IO.Path]::DirectorySeparatorChar
 if ([string]::IsNullOrEmpty($TargetBranch) -or [string]::IsNullOrEmpty($SourceBranch)) {
-  $tspFiles = (Get-ChildItem -path ./specification tspconfig.yaml -Recurse)?.FullName -replace [Regex]::Escape("$($pwd.Path)$([IO.Path]::DirectorySeparatorChar)")
+  $tspFiles = (Get-ChildItem -path ./specification tspconfig.yaml -Recurse).FullName -replace [Regex]::Escape("$($pwd.Path)$osSlash")
 }
 else {
   Write-Host "git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff --name-only `"$TargetBranch...$SourceBranch`" -- | Where-Object {`$_.StartsWith('specification')}"
@@ -19,8 +20,10 @@ else {
 
 $typespecFolders = @()
 foreach ($file in $tspFiles) {
-  $file -match 'specification\/[^\/]*\/' | out-null
-  $typespecFolders += (Get-ChildItem -path $matches[0] tspconfig.yaml -Recurse).Directory.FullName -replace "$($pwd.Path)$([IO.Path]::DirectorySeparatorChar)"
+  $file -match "specification\$osSlash[^\$osSlash]*\$osSlash" | out-null
+  if ($matches) {
+    $typespecFolders += (Get-ChildItem -path $matches[0] tspconfig.yaml -Recurse).Directory.FullName -replace "$($pwd.Path)$osSlash"
+  }
 }
 $typespecFolders = $typespecFolders | Select-Object -Unique
 
