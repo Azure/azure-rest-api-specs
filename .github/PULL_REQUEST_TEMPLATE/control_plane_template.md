@@ -1,5 +1,11 @@
 # ARM (Control Plane) API Specification Update Pull Request 
 
+## PR review workflow diagram
+
+Please understand this diagram before proceeding. It explains how to get your PR approved & merged.
+
+![diagram](spec_pr_review_workflow_diagram.png)
+
 ## Purpose of this PR
 
 What's the purpose of this PR? Check all that apply. This is **mandatory**!
