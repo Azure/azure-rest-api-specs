@@ -113,7 +113,7 @@
         "operationId": "AzureLargeInstance_Start",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Restart an Azure Large Instance": {
+          "Start an Azure Large Instance": {
             "$ref": "./examples/AzureLargeInstance_Start.json"
           }
         },
@@ -185,7 +185,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
           },
           "202": {
             "description": "Accepted"
@@ -370,6 +373,7 @@
   },
   "definitions": {
     "AzureLargeInstanceListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -386,6 +390,7 @@
       "description": "The response from the List Azure Large Instances operation."
     },
     "AzureLargeInstance": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -481,6 +486,7 @@
       "description": "Describes the properties of an Azure Large instance."
     },
     "HardwareProfile": {
+      "type": "object",
       "properties": {
         "hardwareType": {
           "readOnly": true,
@@ -552,6 +558,7 @@
       "description": "Specifies the hardware settings for the Azure Large instance."
     },
     "Disk": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -572,6 +579,7 @@
       "description": "Specifies the disk information fo the Azure Large instance"
     },
     "StorageProfile": {
+      "type": "object",
       "properties": {
         "nfsIpAddress": {
           "readOnly": true,
@@ -590,6 +598,7 @@
       "description": "Specifies the storage settings for the Azure Large instance disks."
     },
     "OSProfile": {
+      "type": "object",
       "properties": {
         "computerName": {
           "type": "string",
@@ -613,6 +622,7 @@
       "description": "Specifies the operating system settings for the Azure Large instance."
     },
     "NetworkProfile": {
+      "type": "object",
       "properties": {
         "networkInterfaces": {
           "type": "array",
@@ -674,6 +684,7 @@
       "description": "AzureLargeInstance operation information"
     },
     "Result": {
+      "type": "object",
       "description": "Sample result definition",
       "properties": {
         "sampleProperty": {
