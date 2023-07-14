@@ -1,0 +1,563 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Target",
+    "description": "The Microsoft.Symphony Rest API spec.",
+    "version": "2023-05-22-preview",
+    "x-ms-code-generation-settings": {
+      "name": "SymphonyClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Symphony/targets/{targetsName}": {
+      "get": {
+        "operationId": "targets_Get",
+        "description": "Gets the properties of the specified target.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/targetsNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the targets resource.",
+            "schema": {
+              "$ref": "#/definitions/target"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "targets_Get": {
+            "$ref": "./examples/targets_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "targets_CreateOrUpdate",
+        "description": "Creates or updates the targets resource.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/targetsNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "targets",
+            "in": "body",
+            "required": true,
+            "description": "The target resource definition",
+            "schema": {
+              "$ref": "#/definitions/target"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updates the targets resource.",
+            "schema": {
+              "$ref": "#/definitions/target"
+            }
+          },
+          "201": {
+            "description": "Creates the targets resource.",
+            "schema": {
+              "$ref": "#/definitions/target"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "targets_CreateOrUpdate": {
+            "$ref": "./examples/targets_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "targets_Delete",
+        "description": "Deletes the targets resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/targetsNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deletes the targets resource."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "targets_Delete": {
+            "$ref": "./examples/targets_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "targets_Update",
+        "description": "Updates the targets resource.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/targetsNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "targets",
+            "in": "body",
+            "required": true,
+            "description": "The target properties to update.",
+            "schema": {
+              "$ref": "#/definitions/targetPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updates the targets resource.",
+            "schema": {
+              "$ref": "#/definitions/target"
+            }
+          },
+          "201": {
+            "description": "Updates the targets resource.",
+            "schema": {
+              "$ref": "#/definitions/target"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "targets_Update": {
+            "$ref": "./examples/targets_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Symphony/targets": {
+      "get": {
+        "operationId": "targets_ListByResourceGroup",
+        "description": "Lists all the targets under the resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all targets under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/targetListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "targets_ListByResourceGroup": {
+            "$ref": "./examples/targets_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Symphony/targets": {
+      "get": {
+        "operationId": "targets_ListBySubscription",
+        "description": "Lists all the targets under the subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all targets under the subscription.",
+            "schema": {
+              "$ref": "#/definitions/targetListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "targets_ListBySubscription": {
+            "$ref": "./examples/targets_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Symphony/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "description": "Lists all of the available Target REST API operations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "targetProperties": {
+      "description": "Properties of an target resource.",
+      "type": "object",
+      "properties": {
+        "components": {
+          "x-ms-client-flatten": true,
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "type"
+            ],
+            "description": "Defines a desired runtime component",
+            "properties": {
+              "dependencies": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "name": {
+                "type": "string"
+              },
+              "properties": {
+                "x-kubernetes-preserve-unknown-fields": "true"
+              },
+              "type": {
+                "type": "string"
+              }
+            }
+          },
+          "properties": {
+            "items": {
+              "x-ms-client-flatten": true,
+              "type": "object",
+              "required": [
+                "name",
+                "type"
+              ],
+              "description": "Defines a desired runtime component",
+              "properties": {
+                "dependencies": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "properties": {
+                  "x-kubernetes-preserve-unknown-fields": "true"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "string"
+        },
+        "topologies": {
+          "x-ms-client-flatten": true,
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Defines the device topology for a target or instance",
+            "properties": {
+              "bindings": {
+                "items": {
+                  "description": "Defines a component binding for a provider",
+                  "properties": {
+                    "config": {
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "type": "object"
+                    },
+                    "provider": {
+                      "type": "string"
+                    },
+                    "role": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "provider",
+                    "role"
+                  ],
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "device": {
+                "type": "string"
+              },
+              "selector": {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              }
+            }
+          },
+          "properties": {
+            "items": {
+              "x-ms-client-flatten": true,
+              "type": "object",
+              "description": "Defines the device topology for a target or instance",
+              "properties": {
+                "bindings": {
+                  "items": {
+                    "description": "Defines a component binding for a provider",
+                    "properties": {
+                      "config": {
+                        "additionalProperties": {
+                          "type": "string"
+                        },
+                        "type": "object"
+                      },
+                      "provider": {
+                        "type": "string"
+                      },
+                      "role": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "provider",
+                      "role"
+                    ],
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "device": {
+                  "type": "string"
+                },
+                "selector": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "version": {
+          "type": "string"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Succeeded",
+            "Canceled",
+            "Failed",
+            "Reconciling"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "target": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/targetProperties"
+        },
+        "extendedLocation": {
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The extended location type."
+            },
+            "name": {
+              "type": "string",
+              "description": "The extended location name."
+            }
+          }
+        }
+      },
+      "description": "The targets resource definition."
+    },
+    "targetPatch": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "The targets resource patch definition."
+    },
+    "targetListResult": {
+      "type": "object",
+      "description": "List of target resources returned.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/target"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "targetsNameParameter": {
+      "name": "targetsName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the target.",
+      "maxLength": 64,
+      "minLength": 3,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
