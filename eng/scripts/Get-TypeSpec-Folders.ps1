@@ -9,7 +9,7 @@ param (
 )
 
 $tspFiles = @()
-$osSlash = "$([IO.Path]::DirectorySeparatorChar)"
+$osSlash = [IO.Path]::DirectorySeparatorChar
 if ([string]::IsNullOrEmpty($TargetBranch) -or [string]::IsNullOrEmpty($SourceBranch)) {
   $tspFiles = (Get-ChildItem -path ./specification tspconfig.yaml -Recurse).FullName -replace [Regex]::Escape("$($pwd.Path)$osSlash")
 }
@@ -22,7 +22,7 @@ $typespecFolders = @()
 foreach ($file in $tspFiles) {
   $file -match "specification\$osSlash[^\$osSlash]*\$osSlash" | out-null
   if ($matches) {
-    $typespecFolders += (Get-ChildItem -path $matches[0] tspconfig.yaml -Recurse).Directory.FullName -replace "$($pwd.Path)$osSlash"
+    $typespecFolders += (Get-ChildItem -path $matches[0] tspconfig.yaml -Recurse).Directory.FullName -replace [Regex]::Escape("$($pwd.Path)$osSlash")
   }
 }
 $typespecFolders = $typespecFolders | Select-Object -Unique
