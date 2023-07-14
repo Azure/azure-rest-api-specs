@@ -9,7 +9,7 @@ param (
 )
 
 $tspFiles = @()
-$osSlash = [IO.Path]::DirectorySeparatorChar
+$osSlash = "$([IO.Path]::DirectorySeparatorChar)"
 if ([string]::IsNullOrEmpty($TargetBranch) -or [string]::IsNullOrEmpty($SourceBranch)) {
   $tspFiles = (Get-ChildItem -path ./specification tspconfig.yaml -Recurse).FullName -replace [Regex]::Escape("$($pwd.Path)$osSlash")
 }
