@@ -94,6 +94,12 @@
               "$ref": "#/definitions/StorageTask"
             }
           },
+          "201": {
+            "description": "OK -- Create storage task with the same properties specified in the request body.",
+            "schema": {
+              "$ref": "#/definitions/StorageTask"
+            }
+          },
           "202": {
             "description": "Accepted -- Create or update request accepted; operation will complete asynchronously.",
             "headers": {
@@ -398,7 +404,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageTasks/storageTasks/{storageTaskName}/storageTaskAssignmentsExecutionSummary": {
-      "post": {
+      "get": {
         "tags": [
           "StorageTasks"
         ],
