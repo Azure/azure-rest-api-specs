@@ -139,7 +139,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
           },
           "202": {
             "description": "Accepted"
@@ -739,6 +742,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": ".*",
       "description": "Name of the AzureLargeInstance.",
       "x-ms-parameter-location": "method"
     },
