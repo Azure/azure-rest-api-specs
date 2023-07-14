@@ -10,7 +10,7 @@ param (
 
 $tspFiles = @()
 if ([string]::IsNullOrEmpty($TargetBranch) -or [string]::IsNullOrEmpty($SourceBranch)) {
-  $tspFiles = (Get-ChildItem -path ./specification tspconfig.yaml -Recurse).FullName -replace "$($pwd.Path)$([IO.Path]::DirectorySeparatorChar)"
+  $tspFiles = (Get-ChildItem -path ./specification tspconfig.yaml -Recurse).FullName -replace [Regex]::Escape("$($pwd.Path)$([IO.Path]::DirectorySeparatorChar)")
 }
 else {
   Write-Host "git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff --name-only `"$TargetBranch...$SourceBranch`" -- | Where-Object {`$_.StartsWith('specification')}"
