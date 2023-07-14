@@ -947,6 +947,28 @@
         }
       }
     },
+    "ClusterPoolComputeProfile": {
+      "type": "object",
+      "description": "Cluster pool compute profile.",
+      "required": [
+        "vmSize"
+      ],
+      "properties": {
+        "vmSize": {
+          "type": "string",
+          "description": "The virtual machine SKU.",
+          "pattern": "^[a-zA-Z0-9_\\-]{0,256}$"
+        },
+        "count": {
+          "description": "The number of virtual machines.",
+          "type": "integer",
+          "format": "int32",
+          "default": 3,
+          "maximum": 10,
+          "minimum": 3
+        }
+      }
+    },
     "ClusterPoolNetworkProfile": {
       "type": "object",
       "description": "Cluster pool networking configuration.",
@@ -1045,6 +1067,14 @@
           "allOf": [
             {
               "$ref": "#/definitions/ClusterPoolProfile"
+            }
+          ]
+        },
+        "computeProfile": {
+          "description": "CLuster pool compute profile.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ClusterPoolComputeProfile"
             }
           ]
         },
@@ -1990,7 +2020,7 @@
         "url": {
           "type": "string",
           "description": "Url of the script file.",
-          "pattern": "^(https)|(http)://.*$"
+          "pattern": "^(https)|(http)|(abfss)|(abfs)|(wasbs)|(wasb)://.*$"
         },
         "parameters": {
           "type": "string",
@@ -2179,6 +2209,9 @@
     "ComputeProfile": {
       "type": "object",
       "description": "The compute profile.",
+      "required": [
+        "nodes"
+      ],
       "properties": {
         "nodes": {
           "type": "array",
@@ -2213,7 +2246,7 @@
           "description": "The number of virtual machines.",
           "type": "integer",
           "format": "int32",
-          "maximum": 1000.0,
+          "maximum": 500.0,
           "minimum": 1.0
         }
       }
