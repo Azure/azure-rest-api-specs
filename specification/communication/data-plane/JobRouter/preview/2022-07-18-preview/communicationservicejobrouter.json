@@ -1698,7 +1698,7 @@
           {
             "in": "query",
             "name": "hasCapacity",
-            "description": "If set to true, select only workers who have capacity for the channel specified by `channelId` or for any channel\r\n            if `channelId` not specified. If set to false, then will return all workers including workers without any capacity for jobs. Defaults to false.",
+            "description": "If set to true, select only workers who have capacity for the channel specified by `channelId` or for any channel if `channelId` not specified. If set to false, then will return all workers including workers without any capacity for jobs. Defaults to false.",
             "type": "boolean"
           },
           {
@@ -1802,7 +1802,7 @@
           "type": "string"
         },
         "note": {
-          "description": "(Optional) A note that will be appended to the jobs' Notes collection with th current timestamp.",
+          "description": "(Optional) A note that will be appended to the jobs' Notes collection with the current timestamp.",
           "maxLength": 2000,
           "minLength": 0,
           "type": "string"
@@ -1836,8 +1836,7 @@
     },
     "CancelJobResult": {
       "description": "Response payload from cancelling a job",
-      "type": "object",
-      "properties": {}
+      "type": "object"
     },
     "ChannelConfiguration": {
       "description": "Represents the capacity a job in this channel will consume from a worker",
@@ -1960,8 +1959,7 @@
     },
     "CloseJobResult": {
       "description": "Response payload from closing a job",
-      "type": "object",
-      "properties": {}
+      "type": "object"
     },
     "CommunicationError": {
       "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationError"
@@ -1992,8 +1990,7 @@
     },
     "CompleteJobResult": {
       "description": "Response payload from completing a job",
-      "type": "object",
-      "properties": {}
+      "type": "object"
     },
     "ConditionalQueueSelectorAttachment": {
       "description": "Describes a set of queue selectors that will be attached if the given condition resolves to true",
@@ -2066,8 +2063,7 @@
     },
     "DeclineJobOfferResult": {
       "description": "Response payload from declining a job",
-      "type": "object",
-      "properties": {}
+      "type": "object"
     },
     "DirectMapRouterRule": {
       "description": "A rule that return the same labels as the input labels.",
@@ -2355,10 +2351,11 @@
       }
     },
     "JobMatchingMode": {
-      "description": "",
+      "description": "The matching mode to be applied to this job.\r\n            \r\nSupported types:\r\n            \r\nQueueAndMatchMode: Used when matching worker to a job is required to be done right after job is queued.\r\nScheduleAndSuspendMode: Used for scheduling jobs to be queued at a future time. At specified time, matching of a worker to the job will not start automatically.\r\nSuspendMode: Used when matching workers to a job needs to be suspended.",
       "type": "object",
       "properties": {
         "modeType": {
+          "description": "Discriminator value used to differentiate between supported matching mode types.",
           "enum": [
             "queueAndMatchMode",
             "scheduleAndSuspendMode",
@@ -2535,7 +2532,7 @@
       "x-ms-discriminator-value": "pass-through"
     },
     "QueueAndMatchMode": {
-      "description": "",
+      "description": "Describes a matching mode where matching worker to a job is automatically started after job is queued successfully.",
       "type": "object"
     },
     "QueueLengthExceptionTrigger": {
@@ -2618,7 +2615,7 @@
         "labelsToUpsert": {
           "description": "(optional) Dictionary containing the labels to update (or add if not existing) in key-value pairs",
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": { }
         }
       },
       "x-ms-discriminator-value": "reclassify"
@@ -2629,8 +2626,7 @@
     },
     "ReclassifyJobResult": {
       "description": "Response payload from reclassifying a job",
-      "type": "object",
-      "properties": {}
+      "type": "object"
     },
     "RoundRobinMode": {
       "description": "Jobs are distributed in order to workers, starting with the worker that is after the last worker to receive a job.",
@@ -2728,7 +2724,7 @@
         "labels": {
           "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": { }
         },
         "assignments": {
           "description": "A collection of the assignments of the job.\r\nKey is AssignmentId.",
@@ -2741,7 +2737,7 @@
         "tags": {
           "description": "A set of non-identifying attributes attached to this job",
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": { }
         },
         "notes": {
           "description": "Notes attached to a job, sorted by timestamp",
@@ -2921,7 +2917,7 @@
         "labels": {
           "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": { }
         },
         "exceptionPolicyId": {
           "description": "(Optional) The ID of the exception policy that determines various job escalation rules.",
@@ -3085,12 +3081,12 @@
         "labels": {
           "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": { }
         },
         "tags": {
           "description": "A set of non-identifying attributes attached to this worker.",
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": { }
         },
         "channelConfigurations": {
           "description": "The channel(s) this worker can handle and their impact on the workers capacity.",
@@ -3298,10 +3294,12 @@
       "x-ms-discriminator-value": "rule-engine"
     },
     "ScheduleAndSuspendMode": {
+      "description": "Describes a matching mode used for scheduling jobs to be queued at a future time.\r\nAt the specified time, matching worker to a job will not start automatically.",
       "type": "object",
       "properties": {
         "scheduleAt": {
           "format": "date-time",
+          "description": "Scheduled time.",
           "type": "string"
         }
       }
@@ -3405,6 +3403,7 @@
       "x-ms-discriminator-value": "static"
     },
     "SuspendMode": {
+      "description": "Describes a matching mode where matching worker to a job is suspended.",
       "type": "object"
     },
     "UnassignJobRequest": {
@@ -3412,7 +3411,7 @@
       "type": "object",
       "properties": {
         "suspendMatching": {
-          "description": "If WaitForActivation is true, then the job is not queued for re-matching with a worker.",
+          "description": "If SuspendMatching is true, then the job is not queued for re-matching with a worker.",
           "type": "boolean"
         }
       }
