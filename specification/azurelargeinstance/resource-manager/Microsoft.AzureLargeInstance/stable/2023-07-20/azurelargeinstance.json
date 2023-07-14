@@ -112,6 +112,10 @@
         "description": "The operation to start an Azure Large Instance",
         "operationId": "AzureLargeInstance_Start",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+        },
         "x-ms-examples": {
           "Start an Azure Large Instance": {
             "$ref": "./examples/AzureLargeInstance_Start.json"
@@ -145,7 +149,12 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -161,6 +170,10 @@
         "description": "The operation to restart an Azure Large Instance",
         "operationId": "AzureLargeInstance_Restart",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+        },
         "x-ms-examples": {
           "Restart an Azure Large Instance": {
             "$ref": "./examples/AzureLargeInstance_Restart.json"
@@ -194,7 +207,12 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -210,6 +228,10 @@
         "description": "The operation to shutdown an Azure Large Instance",
         "operationId": "AzureLargeInstance_Shutdown",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+        },
         "x-ms-examples": {
           "Shutdown an AzureLarge instance": {
             "$ref": "./examples/AzureLargeInstance_Shutdown.json"
@@ -237,10 +259,18 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -414,6 +444,7 @@
       "description": "Azure Large instance info on Azure (ARM properties and AzureLargeInstance properties)"
     },
     "AzureLargeInstanceProperties": {
+      "type": "object",
       "properties": {
         "hardwareProfile": {
           "$ref": "#/definitions/HardwareProfile",
@@ -644,6 +675,7 @@
       "description": "Specifies the network settings for the Azure Large instance disks."
     },
     "IpAddress": {
+      "type": "object",
       "properties": {
         "ipAddress": {
           "type": "string",
