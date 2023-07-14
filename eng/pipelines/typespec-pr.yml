@@ -1,8 +1,4 @@
-trigger:
-  branches:
-    include:
-    - main
-    - typespec-next
+trigger: none
 
 pr:
   branches:
@@ -11,15 +7,10 @@ pr:
     - typespec-next
   paths:
     include:
-    - .gitattributes
-    - .prettierrc.json
-    - package-lock.json
-    - package.json
-    - tsconfig.json
-    - eng
+    - specification
 
 jobs:
-- job: Validate_All_Specs
+- job: Validate_Changed_Specs
   pool:
     name: azsdk-pool-mms-ubuntu-2204-general
     vmImage: ubuntu-22.04
@@ -33,6 +24,9 @@ jobs:
     condition: succeededOrFailed()
 
   - pwsh: |
-      $(Build.SourcesDirectory)/eng/scripts/Validate-TypeSpec.ps1 $(Build.SourcesDirectory)
-    displayName: Validate All Specs
+      $(Build.SourcesDirectory)/eng/scripts/Validate-TypeSpec.ps1 `
+        $(Build.SourcesDirectory) `
+        "origin/${env:SYSTEM_PULLREQUEST_TARGETBRANCH}" `
+        "${env:SYSTEM_PULLREQUEST_SOURCECOMMITID}"
+    displayName: Validate Changed Specs
     condition: succeededOrFailed()
