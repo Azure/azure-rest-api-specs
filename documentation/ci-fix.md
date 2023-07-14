@@ -136,7 +136,7 @@ NOTE: If your RP is RPaaS RP, since RPaaS requires swagger merge first. In this 
 
 If you see `Swagger ApiDocPreview ` check fail with a failure [like this one](https://github.com/Azure/azure-rest-api-specs/pull/24841/checks?check_run_id=15056283615):
 
-| Rule | Desc |
+| Rule | Message |
 |-|-|
 | ❌ RestBuild error | "logUrl":"https://apidrop.visualstudio.com/Content%20CI/_build/results?buildId=373646&view=logs&j=fd490c07-0b22-5182-fac9-6d67fe1e939b",<br/>"detail":"Run.ps1 failed with exit code 1 " |
 
