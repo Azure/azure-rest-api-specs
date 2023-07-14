@@ -162,7 +162,7 @@
         "parameters": [
           {
             "in": "query",
-            "name": "maxPageSize",
+            "name": "maxpagesize",
             "description": "Maximum page size",
             "type": "integer",
             "format": "int32"
@@ -352,7 +352,7 @@
         "parameters": [
           {
             "in": "query",
-            "name": "maxPageSize",
+            "name": "maxpagesize",
             "description": "Maximum page size",
             "type": "integer",
             "format": "int32"
@@ -542,7 +542,7 @@
         "parameters": [
           {
             "in": "query",
-            "name": "maxPageSize",
+            "name": "maxpagesize",
             "description": "Number of objects to return per page",
             "type": "integer",
             "format": "int32"
@@ -1021,20 +1021,6 @@
           },
           {
             "in": "query",
-            "name": "scheduledBefore",
-            "description": "If specified, filter on jobs that was scheduled before or at given timestamp. Range: (-Inf, scheduledBefore]",
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "in": "query",
-            "name": "scheduledAfter",
-            "description": "If specified, filter on jobs that was scheduled at or after given value. Range: [scheduledAfter, +Inf).",
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "in": "query",
             "name": "maxpagesize",
             "description": "Number of objects to return per page",
             "type": "integer",
@@ -1440,7 +1426,7 @@
         "parameters": [
           {
             "in": "query",
-            "name": "maxPageSize",
+            "name": "maxpagesize",
             "description": "Number of objects to return per page",
             "type": "integer",
             "format": "int32"
@@ -1717,7 +1703,7 @@
           },
           {
             "in": "query",
-            "name": "maxPageSize",
+            "name": "maxpagesize",
             "description": "Number of objects to return per page",
             "type": "integer",
             "format": "int32"
@@ -1850,7 +1836,8 @@
     },
     "CancelJobResult": {
       "description": "Response payload from cancelling a job",
-      "type": "object"
+      "type": "object",
+      "properties": {}
     },
     "ChannelConfiguration": {
       "description": "Represents the capacity a job in this channel will consume from a worker",
@@ -1973,7 +1960,8 @@
     },
     "CloseJobResult": {
       "description": "Response payload from closing a job",
-      "type": "object"
+      "type": "object",
+      "properties": {}
     },
     "CommunicationError": {
       "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationError"
@@ -2004,7 +1992,8 @@
     },
     "CompleteJobResult": {
       "description": "Response payload from completing a job",
-      "type": "object"
+      "type": "object",
+      "properties": {}
     },
     "ConditionalQueueSelectorAttachment": {
       "description": "Describes a set of queue selectors that will be attached if the given condition resolves to true",
@@ -2077,7 +2066,8 @@
     },
     "DeclineJobOfferResult": {
       "description": "Response payload from declining a job",
-      "type": "object"
+      "type": "object",
+      "properties": {}
     },
     "DirectMapRouterRule": {
       "description": "A rule that return the same labels as the input labels.",
@@ -2628,7 +2618,7 @@
         "labelsToUpsert": {
           "description": "(optional) Dictionary containing the labels to update (or add if not existing) in key-value pairs",
           "type": "object",
-          "additionalProperties": { }
+          "additionalProperties": {}
         }
       },
       "x-ms-discriminator-value": "reclassify"
@@ -2639,7 +2629,8 @@
     },
     "ReclassifyJobResult": {
       "description": "Response payload from reclassifying a job",
-      "type": "object"
+      "type": "object",
+      "properties": {}
     },
     "RoundRobinMode": {
       "description": "Jobs are distributed in order to workers, starting with the worker that is after the last worker to receive a job.",
@@ -2737,7 +2728,7 @@
         "labels": {
           "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
           "type": "object",
-          "additionalProperties": { }
+          "additionalProperties": {}
         },
         "assignments": {
           "description": "A collection of the assignments of the job.\r\nKey is AssignmentId.",
@@ -2750,7 +2741,7 @@
         "tags": {
           "description": "A set of non-identifying attributes attached to this job",
           "type": "object",
-          "additionalProperties": { }
+          "additionalProperties": {}
         },
         "notes": {
           "description": "Notes attached to a job, sorted by timestamp",
@@ -3094,12 +3085,12 @@
         "labels": {
           "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
           "type": "object",
-          "additionalProperties": { }
+          "additionalProperties": {}
         },
         "tags": {
           "description": "A set of non-identifying attributes attached to this worker.",
           "type": "object",
-          "additionalProperties": { }
+          "additionalProperties": {}
         },
         "channelConfigurations": {
           "description": "The channel(s) this worker can handle and their impact on the workers capacity.",
