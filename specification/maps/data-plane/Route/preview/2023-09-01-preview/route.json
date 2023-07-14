@@ -73,7 +73,7 @@
   "paths": {
     "/route/directions": {
       "post": {
-        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nRoute Directions V2 API returns the ideal route between an origin and a destination for automobile (driving), commercial trucks and walking routes, passing through a series of waypoints if they are specified. A waypoint is a specified geographical location defined by longitude and latitude that is used for navigational purposes. The route will consider factors such as current traffic and the typical road speeds on the requested day of the week and time of day.\n\nThe API returns the distance, estimated travel time, and a representation of the route geometry. Additional routing information such as an optimized waypoint order or turn by turn instructions is also available, depending on the parameters used.\n\nRoute Directions takes into account local laws, vehicle dimensions, cargo type, max speed, bridge and tunnel heights to calculate the truck specific route and avoid complex maneuvers and difficult roads. Not all trucks can travel the same routes as other vehicles due to certain restrictions based on the vehicle profile, cargo type or road. For example, highways often have separate speed limits for trucks, some roads do not allow trucks with flammable or hazardous materials, height and weight restriction on bridges.\n\nRouting supports up to 25 waypoints and up to 10 viaWaypoints between any two waypoints for driving and walking route. Each set of waypoints creates a separate route leg. ViaWaypoints define the route path and can be used for route construction through specific locations and do not create route legs like waypoints. Truck route supports up to 150 waypoints and does not support viaWaypoints.\n\nRouting availability in countries/regions is summarized in the [Routing coverage documentation](https://learn.microsoft.com/en-us/azure/azure-maps/routing-coverage).\n\n",
+        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nRoute Directions V2 API returns the ideal route between an origin and a destination for automobile (driving), commercial trucks and walking routes, passing through a series of waypoints if they are specified. A waypoint is a specified geographical location defined by longitude and latitude that is used for navigational purposes. The route will consider factors such as current traffic and the typical road speeds on the requested day of the week and time of day.\n\nThe API returns the distance, estimated travel time, and a representation of the route geometry. Additional routing information such as an optimized waypoint order or turn by turn instructions is also available, depending on the parameters used.\n\nRoute Directions takes into account local laws, vehicle dimensions, cargo type, max speed, bridge and tunnel heights to calculate the truck specific route and avoid complex maneuvers and difficult roads. Not all trucks can travel the same routes as other vehicles due to certain restrictions based on the vehicle profile or cargo type. For example, highways often have separate speed limits for trucks, some roads do not allow trucks with flammable or hazardous materials, height and weight restriction on bridges.\n\nRoute Directions supports up to 25 waypoints and up to 10 viaWaypoints between any two waypoints for driving and walking route. Each set of waypoints creates a separate route leg. ViaWaypoints define the route path and can be used for route construction through specific locations and do not create route legs like waypoints. Truck route supports up to 150 waypoints and does not support viaWaypoints.\n\nRouting availability in countries/regions is summarized in the [Routing coverage documentation](https://learn.microsoft.com/en-us/azure/azure-maps/routing-coverage).\n\n",
         "operationId": "Route_PostDirections",
         "consumes": [
           "application/geo+json"
@@ -252,9 +252,9 @@
           "format": "date-time"
         },
         "optimizeRoute": {
-          "description": "Specifies the parameter to use to optimize the route. If not defined, the default is \"fastestWithTraffic\" which returns the route to minimize the travel time using current traffic information.\n\nExample: \"optimizeRoute\":\"shortest\"",
+          "description": "Specifies the parameter to use to optimize the route. If not defined, the default is \"fastestWithoutTraffic\" which returns the route to minimize the travel time without using current traffic information.\n\nExample: \"optimizeRoute\":\"shortest\"",
           "type": "string",
-          "default": "fastestWithTraffic",
+          "default": "fastestWithoutTraffic",
           "enum": [
             "shortest",
             "fastestWithoutTraffic",
@@ -283,13 +283,13 @@
               {
                 "value": "fastestWithTraffic",
                 "name": "FastestWithTraffic",
-                "description": "The route is calculated to minimize the time using current traffic information."
+                "description": "The route is calculated to minimize the time using current traffic information. `Note`: Only supported for driving and truck travelMode."
               }
             ]
           }
         },
         "optimizeWaypointOrder": {
-          "description": "Re-order the route waypoints using a fast heuristic algorithm to reduce the route cost specified with the optimize parameter. The origin and destination are excluded from the optimized waypoint and their position is considered fixed. Acceptable values are true or false.\n\nThis parameter is only supported for the \"Driving\" and \"Truck\" travel modes. The parameter is available when the route is composed of more than two waypoints.",
+          "description": "Re-order the route waypoints using a fast heuristic algorithm to reduce the route cost specified with the optimize parameter. The origin and destination are excluded from the optimized waypoint and their position is considered fixed. Acceptable values are true or false.\n\nThis parameter is only supported for the driving and truck travel modes. The parameter is available when the route is composed of more than two waypoints.",
           "type": "boolean",
           "default": false
         },
@@ -325,7 +325,7 @@
                 },
                 {
                   "value": "tunnels",
-                  "description": "Avoids the use of tunnels in the route. `Note`: The parameter is available only for truck travelMode"
+                  "description": "Avoids the use of tunnels in the route. `Note`: Only supported for truck travelMode."
                 },
                 {
                   "value": "borderCrossings",
@@ -333,11 +333,11 @@
                 },
                 {
                   "value": "lowEmissionZones",
-                  "description": "Avoids low-emission zones in the route. `Note`: The parameter is available only for truck travelMode."
+                  "description": "Avoids low-emission zones in the route. `Note`: Only supported for truck travelMode."
                 },
                 {
                   "value": "unpavedRoads",
-                  "description": "Avoids unpaved roads in the route. `Note`: The parameter is available only for truck travelMode."
+                  "description": "Avoids unpaved roads in the route. `Note`: Only supported for truck travelMode."
                 }
               ]
             }
@@ -367,7 +367,7 @@
                 },
                 {
                   "value": "regionTravelSummary",
-                  "description": "Include travel summary of distance, time, and toll road distance by two entity types: country (e.g., US, Canada) and administrative division or subregion (e.g., \"state\" in US and \"province\" in Canada). `Note`: The parameter is available only for driving and walking travelMode"
+                  "description": "Include travel summary of distance, time, and toll road distance by two entity types: country (e.g., US, Canada) and administrative division or subregion (e.g., \"state\" in US and \"province\" in Canada). `Note`: Only supported for driving and walking travelMode"
                 },
                 {
                   "value": "routePath",
@@ -389,14 +389,14 @@
           "maximum": 3
         },
         "heading": {
-          "description": "The directional heading of the vehicle in degrees starting at true North and continuing in clockwise direction. North is 0 degrees, east is 90 degrees, south is 180 degrees, west is 270 degrees. Possible values 0-359",
+          "description": "The initial directional heading of the vehicle in degrees starting at true North and continuing in clockwise direction. North is 0 degrees, east is 90 degrees, south is 180 degrees, west is 270 degrees. Possible values 0-359",
           "type": "integer",
           "format": "int64",
           "minimum": 0,
           "maximum": 359
         },
         "vehicleSpec": {
-          "description": "Specifies the vehicle attributes such as size, weight, max speed, and type of cargo for truck routing only. This helps avoid low bridge clearances, road restrictions, difficult right turns to provide the optimized truck route based on the vehicle specifications.",
+          "description": "Specifies the vehicle attributes such as size, weight, max speed, type of cargo for truck routing only. This helps avoid low bridge clearances, road restrictions, difficult right turns to provide the optimized truck route based on the vehicle specifications.\n\n`Note`: Only supported for truck travelMode",
           "$ref": "#/definitions/VehicleSpec"
         }
       }
@@ -1592,58 +1592,58 @@
       }
     },
     "VehicleSpec": {
-      "description": "Vehicle attributes are specified inside of a vehicleSpec. Different regions may have different definitions for the truck classification and types, e.g., light truck, medium truck, heavy truck, etc. To get the most accurate results of the route restrictions based on the truck specs, specify the vehicle attributes.",
+      "description": "Vehicle attributes are specified inside of a vehicleSpec. Different regions may have different definitions for the truck classification and types, e.g., light truck, medium truck, heavy truck, etc. To get the most accurate results of the route restrictions based on the truck specs, specify the vehicle attributes.\n\n `Note`: Only supported for truck travelMode.",
       "type": "object",
       "properties": {
         "isVehicleCommercial": {
-          "description": "Whether the vehicle is used for commercial purposes. Commercial vehicles may not be allowed to drive on some roads.\n  `Note`: The parameter is available only for truck mode",
+          "description": "Whether the vehicle is used for commercial purposes. Commercial vehicles may not be allowed to drive on some roads.",
           "type": "boolean",
           "default": false
         },
         "length": {
           "x-ms-client-name": "lengthInMeters",
-          "description": "Length of the vehicle in meters. A value of 0 means that length restrictions are not considered. `Note`: The parameter is available only for truck mode.",
+          "description": "Length of the vehicle in meters. A value of 0 means that length restrictions are not considered.",
           "type": "number",
           "format": "double",
           "default": 0
         },
         "width": {
           "x-ms-client-name": "widthInMeters",
-          "description": "Width of the vehicle in meters. A value of 0 means that width restrictions are not considered. `Note`: The parameter is available only for truck mode.",
+          "description": "Width of the vehicle in meters. A value of 0 means that width restrictions are not considered.",
           "type": "number",
           "format": "double",
           "default": 0
         },
         "height": {
           "x-ms-client-name": "heightInMeters",
-          "description": "Height of the vehicle in meters. A value of 0 means that height restrictions are not considered. `Note`: The parameter is available only for truck mode.",
+          "description": "Height of the vehicle in meters. A value of 0 means that height restrictions are not considered.",
           "type": "number",
           "format": "double",
           "default": 0
         },
         "weight": {
           "x-ms-client-name": "weightInKilograms",
-          "description": "Weight of the vehicle in kilograms. `Note`: The parameter is available only for truck mode.",
+          "description": "Weight of the vehicle in kilograms. A value of 0 means that weight restrictions are not considered.",
           "format": "int64",
           "type": "integer",
           "default": 0
         },
         "maxSpeed": {
           "x-ms-client-name": "maxSpeedInKilometersPerHour",
-          "description": "Maximum speed of the vehicle in km/hour. The max speed in the vehicle profile is used to check whether a vehicle is allowed on motorways. \n\n* A value of 0 means that an appropriate value for the vehicle will be determined and applied during route planning.\n\n* A non-zero value may be overridden during route planning. For example, the current traffic flow is 60 km/hour. If the vehicle  maximum speed is set to 50 km/hour, the routing engine will consider 60 km/hour as this is the current situation.  If the maximum speed of the vehicle is provided as 80 km/hour but the current traffic flow is 60 km/hour, then routing engine will again use 60 km/hour. `Note`: The parameter is available only for truck mode.",
+          "description": "Maximum speed of the vehicle in km/hour. The max speed in the vehicle profile is used to check whether a vehicle is allowed on motorways.\n\nA value of 0 means that an appropriate value for the vehicle will be determined and applied during route planning.\n\nA non-zero value may be overridden during route planning. For example, the current traffic flow is 60 km/hour. If the vehicle maximum speed is set to 50 km/hour, the routing engine will consider 60 km/hour as this is the current situation. If the maximum speed of the vehicle is provided as 80 km/hour but the current traffic flow is 60 km/hour, then routing engine will again use 60 km/hour.",
           "format": "int64",
           "type": "integer",
           "default": 0
         },
         "axleWeight": {
           "x-ms-client-name": "axleWeightInKilograms",
-          "description": "Weight per axle of the vehicle in kg. A value of 0 means that weight restrictions per axle are not considered.`Note`: The parameter is available only for truck mode.",
+          "description": "Weight per axle of the vehicle in kg. A value of 0 means that weight restrictions per axle are not considered.",
           "format": "int64",
           "type": "integer",
           "default": 0
         },
         "loadType": {
-          "description": "Types of cargo that may be classified as hazardous materials and restricted from some roads. Available vehicleLoadType values are US Hazmat classes 1 through 9, plus generic classifications for use in other countries. Values beginning with USHazmat are for US routing while otherHazmat should be used for all other countries. vehicleLoadType can be specified multiple times. `Note`: The parameter is available only for truck mode.",
+          "description": "Types of cargo that may be classified as hazardous materials and restricted from some roads. Available vehicleLoadType values are US Hazmat classes 1 through 9, plus generic classifications for use in other countries. Values beginning with USHazmat are for US routing while otherHazmat should be used for all other countries. loadType can be specified multiple times in a request.",
           "type": "string",
           "enum": [
             "USHazmatClass1",
