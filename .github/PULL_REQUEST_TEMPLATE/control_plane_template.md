@@ -4,7 +4,7 @@
 
 Please understand this diagram before proceeding. It explains how to get your PR approved & merged.
 
-![diagram](spec_pr_review_workflow_diagram.png)
+![diagram](https://github.com/Azure/azure-rest-api-specs/assets/4429827/5e91ff2d-1f5c-4e96-87c2-390e7451da37)
 
 ## Purpose of this PR
 
