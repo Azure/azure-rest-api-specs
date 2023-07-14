@@ -10,7 +10,7 @@ param (
 
 $tspFiles = @()
 if ([string]::IsNullOrEmpty($TargetBranch) -or [string]::IsNullOrEmpty($SourceBranch)) {
-  $tspFiles = (Get-ChildItem -path ./specification tspconfig.yaml -Recurse).FullName -replace "$($pwd.Path)/"
+  $tspFiles = (Get-ChildItem -path ./specification tspconfig.yaml -Recurse).FullName -replace "$($pwd.Path)$([IO.Path]::DirectorySeparatorChar)"
 }
 else {
   Write-Host "git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff --name-only `"$TargetBranch...$SourceBranch`" -- | Where-Object {`$_.StartsWith('specification')}"
@@ -20,7 +20,7 @@ else {
 $typespecFolders = @()
 foreach ($file in $tspFiles) {
   $file -match 'specification\/[^\/]*\/' | out-null
-  $typespecFolders += (Get-ChildItem -path $matches[0] tspconfig.yaml -Recurse).Directory.FullName -replace "$($pwd.Path)/"
+  $typespecFolders += (Get-ChildItem -path $matches[0] tspconfig.yaml -Recurse).Directory.FullName -replace "$($pwd.Path)$([IO.Path]::DirectorySeparatorChar)"
 }
 $typespecFolders = $typespecFolders | Select-Object -Unique
 
