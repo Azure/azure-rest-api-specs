@@ -336,6 +336,17 @@ model CarbonEmissionDataListResult  {
    nextLink: string;
 }
 
+@doc("Response for available date range of carbon emission data")
+model CarbonEmissionDataAvailableDateRange {
+  @doc("Start date parameter, format is yyyy-MM-dd")
+  @format("date")
+  startDate: string;
+  
+  @doc("End date parameter, format is yyyy-MM-dd")
+  @format("date")
+  endDate: string;
+}
+
 #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-operation-missing-decorator" "Resource POST operation must be decorated with @armResourceAction." 
 #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-interface-requires-decorator" "Each resource interface must have an @armResourceOperations decorator"
 interface CarbonService {
@@ -345,4 +356,8 @@ interface CarbonService {
                                 @body
                                 @doc("Query parameters") 
                                 queryParameters:QueryFilter): CarbonEmissionDataListResult | ErrorResponse;
+
+  @doc("API for query carbon emission data available date range")
+  @post @route("/providers/Microsoft.Carbon/queryCarbonEmissionDataAvailableDateRange")
+  queryCarbonEmissionDataAvailableDateRange(...ApiVersionParameter): ArmResponse<CarbonEmissionDataAvailableDateRange> | ErrorResponse;
 }

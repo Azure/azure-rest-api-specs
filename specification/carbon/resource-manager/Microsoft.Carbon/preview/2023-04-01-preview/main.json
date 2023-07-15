@@ -44,6 +44,36 @@
     }
   ],
   "paths": {
+    "/providers/Microsoft.Carbon/queryCarbonEmissionDataAvailableDateRange": {
+      "post": {
+        "operationId": "CarbonService_QueryCarbonEmissionDataAvailableDateRange",
+        "description": "API for query carbon emission data available date range",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CarbonEmissionDataAvailableDateRange"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CarbonService_ListCarbonEmissionReports": {
+            "$ref": "./examples/carbonEmissionsDataAvailableDateRange.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Carbon/carbonEmissionReports": {
       "post": {
         "operationId": "CarbonService_ListCarbonEmissionReports",
@@ -156,6 +186,26 @@
         "changeRatioForLastMonth",
         "totalCarbonEmission12MonthsAgo",
         "changeRatioFor12Months"
+      ]
+    },
+    "CarbonEmissionDataAvailableDateRange": {
+      "type": "object",
+      "properties": {
+        "startDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Start date parameter, format is yyyy-MM-dd"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date",
+          "description": "End date parameter, format is yyyy-MM-dd"
+        }
+      },
+      "description": "Response for available date range of carbon emission data",
+      "required": [
+        "startDate",
+        "endDate"
       ]
     },
     "CarbonEmissionDataListResult": {
