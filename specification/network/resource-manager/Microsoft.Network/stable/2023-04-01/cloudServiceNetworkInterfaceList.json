@@ -39,7 +39,7 @@
         "tags": [
           "NetworkInterfaces"
         ],
-        "operationId": "NetworkInterfaces_ListCloudServiceRoleInstanceNetworkInterfaces",
+        "operationId": "NetworkInterfaces_GetCloudServiceRoleInstanceNetworkInterfaces",
         "description": "Gets information about all network interfaces in a role instance in a cloud service.",
         "parameters": [
           {
@@ -54,14 +54,20 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the cloud service."
+            "description": "The name of the cloud service.",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\.-]*[A-Za-z0-9_]$",
+            "minLength": 2,
+            "maxLength": 80
           },
           {
             "name": "roleInstanceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of role instance."
+            "description": "The name of role instance.",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\.-]*[A-Za-z0-9_]$",
+            "minLength": 2,
+            "maxLength": 80
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionCloudServiceParameter"
@@ -99,7 +105,7 @@
         "tags": [
           "NetworkInterfaces"
         ],
-        "operationId": "NetworkInterfaces_ListCloudServiceNetworkInterfaces",
+        "operationId": "NetworkInterfaces_GetCloudServiceNetworkInterfaces",
         "description": "Gets all network interfaces in a cloud service.",
         "parameters": [
           {
@@ -114,7 +120,10 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the cloud service."
+            "description": "The name of the cloud service.",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\.-]*[A-Za-z0-9_]$",
+            "minLength": 2,
+            "maxLength": 80
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionCloudServiceParameter"
@@ -152,7 +161,7 @@
         "tags": [
           "NetworkInterfaces"
         ],
-        "operationId": "NetworkInterfaces_GetCloudServiceNetworkInterface",
+        "operationId": "NetworkInterfaces_GetCloudServiceRoleInstanceNetworkInterface",
         "description": "Get the specified network interface in a cloud service.",
         "parameters": [
           {
@@ -167,21 +176,30 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the cloud service."
+            "description": "The name of the cloud service.",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\.-]*[A-Za-z0-9_]$",
+            "minLength": 2,
+            "maxLength": 80
           },
           {
             "name": "roleInstanceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of role instance."
+            "description": "The name of role instance.",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\.-]*[A-Za-z0-9_]$",
+            "minLength": 2,
+            "maxLength": 80
           },
           {
             "name": "networkInterfaceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the network interface."
+            "description": "The name of the network interface.",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\.-]*[A-Za-z0-9_]$",
+            "minLength": 2,
+            "maxLength": 80
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionCloudServiceParameter"
