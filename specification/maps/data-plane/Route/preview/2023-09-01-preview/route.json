@@ -207,7 +207,7 @@
         },
         "features": {
           "type": "array",
-          "description": "Driving and walking routes are defined by a set of waypoints(stops) and viaWaypoints (intermediate locations that the route must pass through). You can have a maximum of 25 waypoints, and a maximum of 10 viaWaypoints between each set of waypoints. Truck route supports up to 150 waypoints and viaWaypoints are not supported.\n\nA route must have a minimum of 2 waypoints and the start and end points of the route cannot be viaWaypoints.\n\nBoth waypoint and viaWaypoint locations must be specified as a valid GeoJSON Point feature object along with pointIndex that specifies the order of the locations. Refer to [RFC 7946](https://datatracker.ietf.org/doc/html/rfc7946) for details on the GeoJSON format.",
+          "description": "Driving and walking routes are defined by a set of waypoints(stops) and viaWaypoints (intermediate locations that the route must pass through). You can have a maximum of 25 waypoints, and a maximum of 10 viaWaypoints between each set of waypoints. Truck route supports up to 150 waypoints and viaWaypoints are not supported.\n\nA route must have a minimum of 2 waypoints and the start and end points of the route cannot be viaWaypoints.\n\nBoth waypoint and viaWaypoint locations must be specified as a valid GeoJSON Point feature object along with pointIndex that specifies the order of the locations. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the GeoJSON format.",
           "minimum": 2,
           "items": {
             "$ref": "#/definitions/InputWaypointFeaturesItem"
@@ -294,7 +294,7 @@
           "default": false
         },
         "avoid": {
-          "description": "Specifies restrictions that the route calculation should honor or minimize when determining the route. It can be a comma-separated list of values.\n\nExample: \"avoid\": [\"highways\", \"tolls\"]",
+          "description": "Specifies restrictions that the route calculation should honor when determining the route. Avoid supports multiple values in a request.\n\nExample: \"avoid\": [\"highways\", \"tolls\"]",
           "type": "array",
           "items": {
             "type": "string",
@@ -424,7 +424,7 @@
       ]
     },
     "FeatureCollection": {
-      "description": "feature collection",
+      "description": "`GeoJSON` FeatureCollection object that contains a list of Features. Refer to [RFC 7946, section 3.3](https://www.rfc-editor.org/rfc/rfc7946#section-3.3) for details.",
       "type": "object",
       "properties": {
         "type": {
@@ -492,7 +492,7 @@
       }
     },
     "Bbox": {
-      "description": "A rectangular area on the earth defined as a bounding box object. The sides of the rectangles are defined by latitude and longitude values. For more information, see Location and Area Types. When you specify this parameter, the geographical area is taken into account when computing the results of a location query.\n\nExample: [lon1, lat1, lon2, lat2]",
+      "description": "A rectangular area on the earth defined as a bounding box object. The sides of the rectangles are defined by latitude and longitude values. For more information, see [RFC 7946, Section 5](https://www.rfc-editor.org/rfc/rfc7946#section-5).\n\nExample: \"bbox\": [-10.0, -10.0, 10.0, 10.0]",
       "type": "array",
       "items": {
         "type": "number",
@@ -503,7 +503,7 @@
     },
     "Features": {
       "type": "array",
-      "description": "Features",
+      "description": "`GeoJSON` feature object that contains Geometry object and additional properties. Refer to [RFC 7946, Section 3.2](https://www.rfc-editor.org/rfc/rfc7946#section-3.2) for details.",
       "items": {
         "$ref": "#/definitions/FeaturesItem"
       }
@@ -534,7 +534,7 @@
     },
     "Geometry": {
       "type": "object",
-      "description": "Geometry",
+      "description": "A valid `GeoJSON` Geometry type. Please refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
       "properties": {
         "type": {
           "description": "Specifies the `GeoJSON` type. The only supported object type is Point. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
@@ -772,7 +772,7 @@
     },
     "FeatureProperties": {
       "type": "object",
-      "description": "Feature properties",
+      "description": "Specifies the feature properties of the route like itinerary, route legs and geometry, travel summary.",
       "properties": {
         "type": {
           "$ref": "#/definitions/FeaturePropertiesTypeEnum"
@@ -840,7 +840,7 @@
       }
     },
     "AdminDistrict": {
-      "description": "The country subdivision portion of an address.",
+      "description": "The subdivision name in the country or region for an address. This element is typically treated as the first order administrative subdivision, but in some cases it also contains the second, third, or fourth order subdivision in a country, dependency, or region.",
       "type": "object",
       "properties": {
         "longName": {
@@ -1643,7 +1643,7 @@
           "default": 0
         },
         "loadType": {
-          "description": "Types of cargo that may be classified as hazardous materials and restricted from some roads. Available vehicleLoadType values are US Hazmat classes 1 through 9, plus generic classifications for use in other countries. Values beginning with USHazmat are for US routing while otherHazmat should be used for all other countries. loadType can be specified multiple times in a request.",
+          "description": "Types of cargo that may be classified as hazardous materials and restricted from some roads. Available vehicleLoadType values are US Hazmat classes 1 through 9, plus generic classifications for use in other countries. Values beginning with USHazmat are for US routing while otherHazmat should be used for all other countries. vehicleLoadType supports multiple values in a request.",
           "type": "array",
           "items": {
             "type": "string",
