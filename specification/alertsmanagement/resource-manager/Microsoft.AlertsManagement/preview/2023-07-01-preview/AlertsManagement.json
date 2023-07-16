@@ -369,6 +369,42 @@
           }
         }
       }
+    },
+    "/{scope}/providers/Microsoft.AlertsManagement/alerts/{alertId}/enrichments": { 
+      "get": {
+        "operationId": "Alerts_GetEnrichments",
+        "description": "Get the enrichments of an alert.", 
+        "parameters": [
+          {
+            "$ref": "#/parameters/scope"
+          },
+          {
+            "$ref": "#/parameters/alertId"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Returns the attachments of the specified alert.",
+            "schema": {
+              "$ref": "#/definitions/alertEnrichments" // add this type
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AlertsManagementErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Resolve": {
+            "$ref": "./examples/Alerts_Enrichment.json"
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -1501,6 +1537,149 @@
         "displayName": {
           "type": "string",
           "description": "Monitor service display name"
+        }
+      }
+    },
+    "alertEnrichmentProperties": {
+      "type": "object",
+      "description": "Alert enrichment properties.",
+      "properties": {
+        "alertId": {
+          "type": "string",
+          "description": "Unique Id of the alert for which the enrichment is being retrieved",
+          "readOnly": true
+        },
+        "enrichments": {
+          "type": "array",
+          "description": "Enrichments details",
+          "items": {
+            "$ref": "#/definitions/alertEnrichmentItem"
+          }
+        }
+      }
+    },   
+    "alertEnrichmentItem": {
+      "type": "object",
+      "description": "Enrichment object.",
+      "discriminator": "type",
+      "required": [
+        "title",
+        "description",
+        "status",
+        "type"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The enrichment title."
+        },
+        "description": {
+          "type": "string",
+          "description": "The enrichment description."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the evaluation of the enrichment."
+        },
+        "type": {
+          "type": "string",
+          "description": "The enrichment type.",
+          "enum": [
+            "PrometheusInstantQuery",
+            "PrometheusRangeQuery"
+          ],
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PrometheusEnrichmentItem": {
+      "type": "object",
+      "description": "Prometheus enrichment object.",      
+      "required": [
+        "linkToApi",
+        "datasources",
+        "grafanaExplorePath",
+        "query"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/alertEnrichmentItem"
+        }
+      ],
+      "properties": {
+        "linkToApi": {
+          "type": "string",
+          "description": "TBD"
+        },
+        "datasources": {
+          "type": "array",
+          "description": "TBD",
+          "items": {
+            "type": "string",
+            "description": "TBD"
+          },
+          "x-ms-identifiers": []
+        },
+        "grafanaExplorePath": {
+          "type": "string",
+          "description": "TBD."
+        },
+        "query": {
+          "type": "string",
+          "description": "TBD"          
+        },
+        "results": {
+          "type": "object",
+          "description": "TBD"
+        }
+      }
+    },
+    "PrometheusInstantQueryItem": {
+      "type": "object",
+      "description": "Prometheus instant query enrichment object.",      
+      "required": [
+        "time"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrometheusEnrichmentItem"
+        }
+      ],
+      "properties": {
+        "time": {
+          "type": "string",
+          "description": "TBD"
+        }
+      }
+    },
+    "PrometheusRangeQueryItem": {
+      "type": "object",
+      "description": "Prometheus instant query enrichment object.",      
+      "required": [
+        "start",
+        "end",
+        "step"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrometheusEnrichmentItem"
+        }
+      ],
+      "properties": {
+        "start": {
+          "type": "string",
+          "description": "TBD"
+        },
+        "end": {
+          "type": "string",
+          "description": "TBD"
+        },
+        "step": {
+          "type": "string",
+          "description": "TBD"
         }
       }
     }
