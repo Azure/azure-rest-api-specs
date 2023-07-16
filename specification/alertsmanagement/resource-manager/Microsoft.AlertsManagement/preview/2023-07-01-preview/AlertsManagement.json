@@ -389,7 +389,7 @@
           "200": {
             "description": "OK. Returns the attachments of the specified alert.",
             "schema": {
-              "$ref": "#/definitions/alertEnrichments" // add this type
+              "$ref": "#/definitions/alertEnrichmentProperties"
             }
           },
           "default": {
@@ -1544,11 +1544,6 @@
       "type": "object",
       "description": "Alert enrichment properties.",
       "properties": {
-        "alertId": {
-          "type": "string",
-          "description": "Unique Id of the alert for which the enrichment is being retrieved",
-          "readOnly": true
-        },
         "enrichments": {
           "type": "array",
           "description": "Enrichments details",
