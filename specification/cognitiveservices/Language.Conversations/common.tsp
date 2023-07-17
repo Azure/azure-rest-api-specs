@@ -201,7 +201,7 @@ model KnowledgeBaseAnswer {
     @doc("Answer confidence score, value ranges from 0 to 1.")
     @minValue(0)
     @maxValue(1)
-    @projectedName("json", "confidence")
+    @projectedName("client", "confidence")
     confidenceScore?: float64;
 
     @doc("ID of the QnA result.")
