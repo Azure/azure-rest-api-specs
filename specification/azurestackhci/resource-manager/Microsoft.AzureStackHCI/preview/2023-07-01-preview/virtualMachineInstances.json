@@ -892,6 +892,18 @@
                   "description": "Specifies whether secure boot should be enabled on the virtual machine instance."
                 }
               }
+            },
+            "securityType": {
+              "type": "string",
+              "description": "Specifies the SecurityType of the virtual machine. EnableTPM and SecureBootEnabled must be set to true for SecurityType to function.",
+              "enum": [
+                "TrustedLaunch",
+                "ConfidentialVM"
+              ],
+              "x-ms-enum": {
+                "name": "SecurityTypes",
+                "modelAsString": true
+              }
             }
           },
           "description": "SecurityProfile - Specifies the security settings for the virtual machine instance."
