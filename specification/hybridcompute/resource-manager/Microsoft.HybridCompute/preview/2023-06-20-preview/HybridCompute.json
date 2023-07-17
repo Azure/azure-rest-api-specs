@@ -2321,10 +2321,10 @@
     "ArcEnabledEsuStatus": {
       "type": "string",
       "enum": [
-        "enrolled",
-        "unenrolled",
-        "ineligible",
-        "unknown"
+        "Enrolled",
+        "NotEnrolled",
+        "Ineligible",
+        "Unknown"
       ],
       "x-ms-enum": {
         "name": "ArcEnabledEsuStatus",
@@ -2332,16 +2332,28 @@
       },
       "description": "The ESU enrollment state."
     },
+    "EsuKeyState": {
+      "type": "string",
+      "enum": [
+        "NotActive",
+        "Active"
+      ],
+      "x-ms-enum": {
+        "name": "EsuKeyState",
+        "modelAsString": true
+      },
+      "description": "The ESU key state."
+    },
     "EsuEnrollmentUpdateRecord": {
       "type": "object",
       "properties": {
-        "oldState": {
+        "arcEsuEnrollmentState": {
           "$ref": "#/definitions/ArcEnabledEsuStatus",
-          "description": "The old ESU enrollment state."
+          "description": "The Arc ESU enrollment state."
         },
-        "newState": {
-          "$ref": "#/definitions/ArcEnabledEsuStatus",
-          "description": "The new ESU enrollment state."
+        "esuKeyState": {
+          "$ref": "#/definitions/EsuKeyState",
+          "description": "The ESU Key state."
         },
         "time": {
           "type": "string",
@@ -2355,6 +2367,11 @@
       "properties": {
         "arcEsuEnrolled": {
           "$ref": "#/definitions/ArcEsuEnrolled"
+        },
+        "esuKeyActive":  {
+          "readOnly":  true,
+          "type": "boolean",
+          "description": "Indicates whether there is an ESU Key currently active for the machine."
         },
         "esuKeys": {
           "readOnly": true,
@@ -2402,6 +2419,14 @@
       "readOnly": true,
       "type": "object",
       "properties": {
+        "arcEsuEnrollmentState": {
+          "$ref": "#/definitions/ArcEnabledEsuStatus",
+          "description": "The Arc ESU enrollment state."
+        },
+        "esuKeyActive":  {
+          "type": "boolean",
+          "description": "Indicates whether there is an ESU Key currently active for the machine."
+        },
         "esuKeys": {
           "type": "array",
           "items": {
