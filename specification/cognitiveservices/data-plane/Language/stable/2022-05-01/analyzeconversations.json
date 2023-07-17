@@ -894,7 +894,9 @@
         "id": {
           "type": "string",
           "description": "id",
-          "readOnly": true
+          "x-ms-mutability": [
+            "create"
+          ]
         }
       },
       "description": "Resource model",
@@ -2660,7 +2662,8 @@
       "type": "string",
       "description": "Analyze Conversations Service Versions",
       "enum": [
-        "2022-05-01"
+        "2022-05-01",
+        "2023-04-01"
       ],
       "x-ms-enum": {
         "name": "Versions",
@@ -2670,6 +2673,11 @@
             "name": "v2022_05_01",
             "value": "2022-05-01",
             "description": "Version 2022-05-01"
+          },
+          {
+            "name": "v2023_04_01",
+            "value": "2023-04-01",
+            "description": "Version 2023-04-01"
           }
         ]
       }
@@ -3050,7 +3058,8 @@
       "description": "The extra information object kind.",
       "enum": [
         "EntitySubtype",
-        "ListKey"
+        "ListKey",
+        "RegexKey"
       ],
       "x-ms-enum": {
         "name": "extraInformationKind",
@@ -3065,6 +3074,11 @@
             "name": "ListKey",
             "value": "ListKey",
             "description": "List key."
+          },
+          {
+            "name": "RegexKey",
+            "value": "RegexKey",
+            "description": "Regex Key"
           }
         ]
       }
