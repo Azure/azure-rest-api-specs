@@ -3,6 +3,7 @@
   "info": {
     "title": "Microsoft Cognitive Language Service - Analyze Conversations",
     "version": "2022-05-01",
+    "description": "The language service conversations API is a suite of natural language processing (NLP) skills that can be used to analyze structured conversations (textual or spoken). The synchronous API in this suite accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, Conversational Language Understanding, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\n\n In some cases, this API needs to forward requests and responses between the caller and an upstream service. The asynchronous APIs in this suite enable tasks like Conversation Summarization and Conversational PII detection.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -905,7 +906,7 @@
     },
     "DateTimeSubKind": {
       "type": "string",
-      "description": "Datetime entity kind.",
+      "description": "The Datetime SubKind.",
       "enum": [
         "Time",
         "Date",
@@ -927,9 +928,6 @@
         }
       },
       "description": "The concrete entity Subtype model of extra information.",
-      "required": [
-        "value"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/BaseExtraInformation"
@@ -1264,9 +1262,6 @@
         }
       },
       "description": "The list key extra data kind.",
-      "required": [
-        "key"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/BaseExtraInformation"
@@ -1298,8 +1293,7 @@
         },
         "show-all-intents": {
           "type": "boolean",
-          "description": "Set true to show all intents.",
-          "x-ms-client-name": "showAllIntents"
+          "description": "Set true to show all intents."
         },
         "timezoneOffset": {
           "type": "number",
@@ -1312,8 +1306,7 @@
         },
         "bing-spell-check-subscription-key": {
           "type": "string",
-          "description": "The subscription key to use when enabling Bing spell check",
-          "x-ms-client-name": "bingSpellCheckSubscriptionKey"
+          "description": "The subscription key to use when enabling Bing spell check"
         }
       },
       "description": "This customizes how the service calls LUIS Generally Available projects."
@@ -1902,12 +1895,6 @@
         }
       },
       "description": "represents the resolution of a date and/or time span.",
-      "required": [
-        "begin",
-        "end",
-        "duration",
-        "modifier"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
