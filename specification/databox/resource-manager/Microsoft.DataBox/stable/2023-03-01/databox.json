@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-12-01",
+    "version": "2023-03-01",
     "title": "DataBoxManagementClient"
   },
   "host": "management.azure.com",
@@ -3757,6 +3757,85 @@
         }
       }
     },
+    "JobDelayDetails": {
+      "description": "Job Delay Notification details",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Status of notification",
+          "enum": [
+            "Active",
+            "Resolved"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "DelayNotificationStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Active",
+                "description": "Delay is still active"
+              },
+              {
+                "value": "Resolved",
+                "description": "Delay has been resolved"
+              }
+            ]
+          }
+        },
+        "errorCode": {
+          "description": "Delay Error code",
+          "enum": [
+            "InternalIssueDelay",
+            "ActiveOrderLimitBreachedDelay",
+            "HighDemandDelay",
+            "LargeNumberOfFilesDelay"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PortalDelayErrorCode",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "InternalIssueDelay",
+                "description": "Delay due to any internal reasons"
+              },
+              {
+                "value": "ActiveOrderLimitBreachedDelay",
+                "description": "Active Order limit breached."
+              },
+              {
+                "value": "ActiveOrderLimitBreachedDelay",
+                "description": "High demand"
+              },
+              {
+                "value": "ActiveOrderLimitBreachedDelay",
+                "description": "Slow copy due to large number of files"
+              }
+            ]
+          }
+        },
+        "description": {
+          "description": "Description of the delay.",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "Timestamp when the delay notification was created.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resolutionTime": {
+          "format": "date-time",
+          "description": "Timestamp when the delay notification was resolved.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "JobDetails": {
       "description": "Job details.",
       "required": [
@@ -4404,6 +4483,124 @@
             ]
           }
         },
+        "delayedStage": {
+          "description": "Name of the stage where delay might be present.",
+          "enum": [
+            "DeviceOrdered",
+            "DevicePrepared",
+            "Dispatched",
+            "Delivered",
+            "PickedUp",
+            "AtAzureDC",
+            "DataCopy",
+            "Completed",
+            "CompletedWithErrors",
+            "Cancelled",
+            "Failed_IssueReportedAtCustomer",
+            "Failed_IssueDetectedAtAzureDC",
+            "Aborted",
+            "CompletedWithWarnings",
+            "ReadyToDispatchFromAzureDC",
+            "ReadyToReceiveAtAzureDC",
+            "Created",
+            "ShippedToAzureDC",
+            "AwaitingShipmentDetails",
+            "PreparingToShipFromAzureDC",
+            "ShippedToCustomer"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "StageName",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "DeviceOrdered",
+                "description": "An order has been created."
+              },
+              {
+                "value": "DevicePrepared",
+                "description": "A device has been prepared for the order."
+              },
+              {
+                "value": "Dispatched",
+                "description": "Device has been dispatched to the user of the order."
+              },
+              {
+                "value": "Delivered",
+                "description": "Device has been delivered to the user of the order."
+              },
+              {
+                "value": "PickedUp",
+                "description": "Device has been picked up from user and in transit to Azure datacenter."
+              },
+              {
+                "value": "AtAzureDC",
+                "description": "Device has been received at Azure datacenter from the user."
+              },
+              {
+                "value": "DataCopy",
+                "description": "Data copy from the device at Azure datacenter."
+              },
+              {
+                "value": "Completed",
+                "description": "Order has completed."
+              },
+              {
+                "value": "CompletedWithErrors",
+                "description": "Order has completed with errors."
+              },
+              {
+                "value": "Cancelled",
+                "description": "Order has been cancelled."
+              },
+              {
+                "value": "Failed_IssueReportedAtCustomer",
+                "description": "Order has failed due to issue reported by user."
+              },
+              {
+                "value": "Failed_IssueDetectedAtAzureDC",
+                "description": "Order has failed due to issue detected at Azure datacenter."
+              },
+              {
+                "value": "Aborted",
+                "description": "Order has been aborted."
+              },
+              {
+                "value": "CompletedWithWarnings",
+                "description": "Order has completed with warnings."
+              },
+              {
+                "value": "ReadyToDispatchFromAzureDC",
+                "description": "Device is ready to be handed to customer from Azure DC."
+              },
+              {
+                "value": "ReadyToReceiveAtAzureDC",
+                "description": "Device can be dropped off at Azure DC."
+              },
+              {
+                "value": "Created",
+                "description": "Job created by the customer."
+              },
+              {
+                "value": "ShippedToAzureDC",
+                "description": "User shipped the device to AzureDC."
+              },
+              {
+                "value": "AwaitingShipmentDetails",
+                "description": "Awaiting shipment details of device from customer."
+              },
+              {
+                "value": "PreparingToShipFromAzureDC",
+                "description": "Preparing the device to ship to customer."
+              },
+              {
+                "value": "ShippedToCustomer",
+                "description": "Shipped the device to customer."
+              }
+            ]
+          }
+        },
         "startTime": {
           "format": "date-time",
           "description": "Time at which the job was started in UTC ISO 8601 format.",
@@ -4802,6 +4999,14 @@
         "jobStageDetails": {
           "description": "Job Stage Details",
           "type": "object",
+          "readOnly": true
+        },
+        "delayInformation": {
+          "description": "Delay information for the job stages.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobDelayDetails"
+          },
           "readOnly": true
         }
       }
