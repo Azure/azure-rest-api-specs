@@ -64,9 +64,11 @@ model KnowledgeBaseAnswer {
     @doc("Answer confidence score, value ranges from 0 to 1.")
     @minValue(0)
     @maxValue(1)
+    @projectedName("json", "confidence")
     confidenceScore?: float64;
 
     @doc("ID of the QnA result.")
+    @projectedName("json", "qnaId")
     id?: int32;
 
     @doc("Source of QnA result.")
@@ -80,6 +82,7 @@ model KnowledgeBaseAnswer {
     dialog?: KnowledgeBaseAnswerDialog;
 
     @doc("Answer span object of QnA with respect to user's question.")
+    @projectedName("json", "shortAnswer")
     answerSpan?: AnswerSpan;
 }
 
