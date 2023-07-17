@@ -1204,6 +1204,11 @@
         "enableAutomaticUpgrade": {
           "type": "boolean",
           "description": "If set to true, when a new Gallery Application version is available in PIR/SIG, it will be automatically updated for the VM/VMSS"
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state, which only appears in the response."
         }
       },
       "required": [
@@ -1266,6 +1271,10 @@
             "packageReferenceId"
           ],
           "description": "Specifies the gallery applications that should be made available to the VM/VMSS"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of gallery application. Call ListNext() with this to fetch the next page of gallery application."
         }
       },
       "description": "Contains the list of gallery applications that should be made available to the VM/VMSS"
