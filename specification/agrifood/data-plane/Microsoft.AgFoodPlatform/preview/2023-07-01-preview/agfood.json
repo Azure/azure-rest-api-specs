@@ -28,6 +28,22 @@
             "type": "string"
           },
           {
+            "in": "query",
+            "name": "maxPageSize",
+            "format": "int32",
+            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "default": 50,
+            "maximum": 1000,
+            "minimum": 10,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "skipToken",
+            "description": "Skip token for getting next set of results.",
+            "type": "string"
+          },
+          {
             "in": "body",
             "name": "searchFarmOperationQuery",
             "description": "Query filters.",
@@ -2991,6 +3007,22 @@
             "type": "string"
           },
           {
+            "in": "query",
+            "name": "maxPageSize",
+            "format": "int32",
+            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "default": 50,
+            "maximum": 1000,
+            "minimum": 10,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "skipToken",
+            "description": "Skip token for getting next set of results.",
+            "type": "string"
+          },
+          {
             "in": "body",
             "name": "searchFieldQuery",
             "description": "Query filters.",
@@ -3368,6 +3400,22 @@
             "name": "api-version",
             "description": "The requested API version",
             "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "maxPageSize",
+            "format": "int32",
+            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "default": 50,
+            "maximum": 1000,
+            "minimum": 10,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "skipToken",
+            "description": "Skip token for getting next set of results.",
             "type": "string"
           },
           {
@@ -7778,58 +7826,25 @@
         }
       }
     },
-    "/parties/{partyId}/resource-types/{resourceType}/resources/{resourceId}:overlap": {
-      "get": {
+    "/parties:overlap": {
+      "post": {
         "tags": [
           "Parties"
         ],
         "description": "Returns overlapping area between two resources.",
-        "operationId": "Parties_GetOverlap",
+        "operationId": "Parties_PostOverlap",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "partyId",
-            "description": "Id of the party.",
+            "in": "body",
+            "name": "resources",
+            "description": "Overlap resources payload with array of resources",
             "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "resourceType",
-            "description": "ResourceType of the resource.\r\ni.e. Field, SeasonalField, Zones, Prescriptions, ApplicationData, HarvestData, TillageData, PlantingData, PlantTissueAnalysis.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "resourceId",
-            "description": "Id of the resource.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "otherPartyId",
-            "description": "PartyId of the other resource.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "otherResourceType",
-            "description": "ResourceType of the resource.\r\ni.e. Field, SeasonalField, Zones, Prescriptions, ApplicationData, HarvestData, TillageData, PlantingData, PlantTissueAnalysis.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "otherResourceId",
-            "description": "Id of the other resource.",
-            "required": true,
-            "type": "string"
+            "schema": {
+              "$ref": "#/definitions/PartyOverlap"
+            }
           },
           {
             "in": "query",
@@ -8080,6 +8095,22 @@
             "name": "api-version",
             "description": "The requested API version",
             "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "maxPageSize",
+            "format": "int32",
+            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "default": 50,
+            "maximum": 1000,
+            "minimum": 10,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "skipToken",
+            "description": "Skip token for getting next set of results.",
             "type": "string"
           },
           {
@@ -8460,6 +8491,22 @@
             "name": "api-version",
             "description": "The requested API version",
             "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "maxPageSize",
+            "format": "int32",
+            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "default": 50,
+            "maximum": 1000,
+            "minimum": 10,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "skipToken",
+            "description": "Skip token for getting next set of results.",
             "type": "string"
           },
           {
@@ -9536,6 +9583,22 @@
             "type": "string"
           },
           {
+            "in": "query",
+            "name": "maxPageSize",
+            "format": "int32",
+            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "default": 50,
+            "maximum": 1000,
+            "minimum": 10,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "skipToken",
+            "description": "Skip token for getting next set of results.",
+            "type": "string"
+          },
+          {
             "in": "body",
             "name": "searchPrescriptionQuery",
             "description": "Query filters.",
@@ -10348,6 +10411,22 @@
             "name": "api-version",
             "description": "The requested API version",
             "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "maxPageSize",
+            "format": "int32",
+            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "default": 50,
+            "maximum": 1000,
+            "minimum": 10,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "skipToken",
+            "description": "Skip token for getting next set of results.",
             "type": "string"
           },
           {
@@ -13028,6 +13107,22 @@
             "type": "string"
           },
           {
+            "in": "query",
+            "name": "maxPageSize",
+            "format": "int32",
+            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "default": 50,
+            "maximum": 1000,
+            "minimum": 10,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "skipToken",
+            "description": "Skip token for getting next set of results.",
+            "type": "string"
+          },
+          {
             "in": "body",
             "name": "searchFarmOperationQuery",
             "description": "Query filters.",
@@ -13192,7 +13287,7 @@
         }
       }
     },
-    "/weather-data/:fetch": {
+    "/weather-data:fetch": {
       "post": {
         "tags": [
           "WeatherData"
@@ -13464,6 +13559,22 @@
             "name": "api-version",
             "description": "The requested API version",
             "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "maxPageSize",
+            "format": "int32",
+            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "default": 50,
+            "maximum": 1000,
+            "minimum": 10,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "skipToken",
+            "description": "Skip token for getting next set of results.",
             "type": "string"
           },
           {
@@ -13918,10 +14029,6 @@
         },
         "skipToken": {
           "description": "Token used in retrieving the next page. If null, there are no additional pages.",
-          "type": "string"
-        },
-        "nextLink": {
-          "description": "Continuation link (absolute URI) to the next page of results in the list.",
           "type": "string"
         }
       }
@@ -15401,10 +15508,6 @@
         "skipToken": {
           "description": "Token used in retrieving the next page. If null, there are no additional pages.",
           "type": "string"
-        },
-        "nextLink": {
-          "description": "Continuation link (absolute URI) to the next page of results in the list.",
-          "type": "string"
         }
       }
     },
@@ -15707,10 +15810,6 @@
         },
         "skipToken": {
           "description": "Token used in retrieving the next page. If null, there are no additional pages.",
-          "type": "string"
-        },
-        "nextLink": {
-          "description": "Continuation link (absolute URI) to the next page of results in the list.",
           "type": "string"
         }
       }
@@ -16956,6 +17055,30 @@
         }
       }
     },
+    "OverlapResource": {
+      "description": "Schema of overlap resource.",
+      "type": "object",
+      "properties": {
+        "partyId": {
+          "description": "Party Id of the resource.",
+          "type": "string"
+        },
+        "resourceType": {
+          "description": "Resource type of the resource.",
+          "type": "string"
+        },
+        "resourceId": {
+          "description": "Id of the resource.",
+          "type": "string"
+        },
+        "resourceArea": {
+          "format": "double",
+          "description": "Acreage of resource.",
+          "type": "number",
+          "readOnly": true
+        }
+      }
+    },
     "Party": {
       "description": "Schema of party resource.",
       "type": "object",
@@ -17053,23 +17176,40 @@
         }
       }
     },
+    "PartyOverlap":{
+      "description": "Party overlap request contains a list of resources to get the overlapping area.",
+      "required":[
+        "resources"
+      ],
+      "type": "object",
+      "properties": {
+        "resources": {
+          "description": "List of resources.",
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "$ref": "#/definitions/OverlapResource"
+          }
+        }
+      }
+    },
     "PartyOverlapResponse": {
       "description": "Schema of resource overlap response.",
       "type": "object",
       "properties": {
-        "resourceArea": {
-          "format": "double",
-          "description": "Acreage of resource.",
-          "type": "number"
-        },
-        "otherResourceArea": {
-          "format": "double",
-          "description": "Acreage of other resource.",
-          "type": "number"
+        "resources": {
+          "description": "List of resources with area.",
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "$ref": "#/definitions/OverlapResource"
+          }
         },
         "overlappingArea": {
           "format": "double",
-          "description": "Acreage of intersecting resource.",
+          "description": "Acreage of overlapping resource.",
           "type": "number"
         }
       }
@@ -17388,10 +17528,6 @@
         "skipToken": {
           "description": "Token used in retrieving the next page. If null, there are no additional pages.",
           "type": "string"
-        },
-        "nextLink": {
-          "description": "Continuation link (absolute URI) to the next page of results in the list.",
-          "type": "string"
         }
       }
     },
@@ -17650,10 +17786,6 @@
         },
         "skipToken": {
           "description": "Token used in retrieving the next page. If null, there are no additional pages.",
-          "type": "string"
-        },
-        "nextLink": {
-          "description": "Continuation link (absolute URI) to the next page of results in the list.",
           "type": "string"
         }
       }
@@ -18110,10 +18242,6 @@
         "skipToken": {
           "description": "Token used in retrieving the next page. If null, there are no additional pages.",
           "type": "string"
-        },
-        "nextLink": {
-          "description": "Continuation link (absolute URI) to the next page of results in the list.",
-          "type": "string"
         }
       }
     },
@@ -18545,18 +18673,6 @@
           "description": "Maximum last modified date of resource (inclusive).",
           "type": "string"
         },
-        "maxPageSize": {
-          "format": "int32",
-          "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
-          "default": 50,
-          "maximum": 1000,
-          "minimum": 10,
-          "type": "integer"
-        },
-        "skipToken": {
-          "description": "Skip token for getting next set of results.",
-          "type": "string"
-        },
         "minArea": {
           "format": "double",
           "description": "Minimum acreage of the boundary (inclusive).",
@@ -18695,18 +18811,6 @@
         "maxLastModifiedDateTime": {
           "format": "date-time",
           "description": "Maximum last modified date of resource (inclusive).",
-          "type": "string"
-        },
-        "maxPageSize": {
-          "format": "int32",
-          "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
-          "default": 50,
-          "maximum": 1000,
-          "minimum": 10,
-          "type": "integer"
-        },
-        "skipToken": {
-          "description": "Skip token for getting next set of results.",
           "type": "string"
         },
         "intersectsWithGeometry": {
@@ -18878,18 +18982,6 @@
           "description": "Maximum last modified date of resource (inclusive).",
           "type": "string"
         },
-        "maxPageSize": {
-          "format": "int32",
-          "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
-          "default": 50,
-          "maximum": 1000,
-          "minimum": 10,
-          "type": "integer"
-        },
-        "skipToken": {
-          "description": "Skip token for getting next set of results.",
-          "type": "string"
-        },
         "minArea": {
           "format": "double",
           "description": "Minimum acreage of the boundary (inclusive).",
@@ -18987,18 +19079,6 @@
         "maxLastModifiedDateTime": {
           "format": "date-time",
           "description": "Maximum last modified date of resource (inclusive).",
-          "type": "string"
-        },
-        "maxPageSize": {
-          "format": "int32",
-          "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
-          "default": 50,
-          "maximum": 1000,
-          "minimum": 10,
-          "type": "integer"
-        },
-        "skipToken": {
-          "description": "Skip token for getting next set of results.",
           "type": "string"
         },
         "intersectsWithGeometry": {
@@ -19140,18 +19220,6 @@
           "description": "Maximum last modified date of resource (inclusive).",
           "type": "string"
         },
-        "maxPageSize": {
-          "format": "int32",
-          "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
-          "default": 50,
-          "maximum": 1000,
-          "minimum": 10,
-          "type": "integer"
-        },
-        "skipToken": {
-          "description": "Skip token for getting next set of results.",
-          "type": "string"
-        },
         "minArea": {
           "format": "double",
           "description": "Minimum acreage of the boundary (inclusive).",
@@ -19258,18 +19326,6 @@
           "description": "Maximum last modified date of resource (inclusive).",
           "type": "string"
         },
-        "maxPageSize": {
-          "format": "int32",
-          "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
-          "default": 50,
-          "maximum": 1000,
-          "minimum": 10,
-          "type": "integer"
-        },
-        "skipToken": {
-          "description": "Skip token for getting next set of results.",
-          "type": "string"
-        },
         "intersectsWithGeometry": {
           "$ref": "#/definitions/GeoJsonObject"
         }
@@ -19364,18 +19420,6 @@
         "maxLastModifiedDateTime": {
           "format": "date-time",
           "description": "Maximum last modified date of resource (inclusive).",
-          "type": "string"
-        },
-        "maxPageSize": {
-          "format": "int32",
-          "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
-          "default": 50,
-          "maximum": 1000,
-          "minimum": 10,
-          "type": "integer"
-        },
-        "skipToken": {
-          "description": "Skip token for getting next set of results.",
           "type": "string"
         },
         "intersectsWithGeometry": {
@@ -19507,18 +19551,6 @@
           "description": "Maximum last modified date of resource (inclusive).",
           "type": "string"
         },
-        "maxPageSize": {
-          "format": "int32",
-          "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
-          "default": 50,
-          "maximum": 1000,
-          "minimum": 10,
-          "type": "integer"
-        },
-        "skipToken": {
-          "description": "Skip token for getting next set of results.",
-          "type": "string"
-        },
         "minArea": {
           "format": "double",
           "description": "Minimum acreage of the boundary (inclusive).",
@@ -19609,18 +19641,6 @@
         "maxLastModifiedDateTime": {
           "format": "date-time",
           "description": "Maximum last modified date of resource (inclusive).",
-          "type": "string"
-        },
-        "maxPageSize": {
-          "format": "int32",
-          "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
-          "default": 50,
-          "maximum": 1000,
-          "minimum": 10,
-          "type": "integer"
-        },
-        "skipToken": {
-          "description": "Skip token for getting next set of results.",
           "type": "string"
         },
         "intersectsWithGeometry": {
@@ -19971,10 +19991,6 @@
         },
         "skipToken": {
           "description": "Token used in retrieving the next page. If null, there are no additional pages.",
-          "type": "string"
-        },
-        "nextLink": {
-          "description": "Continuation link (absolute URI) to the next page of results in the list.",
           "type": "string"
         }
       }
@@ -21383,10 +21399,6 @@
         "skipToken": {
           "description": "Token used in retrieving the next page. If null, there are no additional pages.",
           "type": "string"
-        },
-        "nextLink": {
-          "description": "Continuation link (absolute URI) to the next page of results in the list.",
-          "type": "string"
         }
       }
     },
@@ -21950,10 +21962,6 @@
         },
         "skipToken": {
           "description": "Token used in retrieving the next page. If null, there are no additional pages.",
-          "type": "string"
-        },
-        "nextLink": {
-          "description": "Continuation link (absolute URI) to the next page of results in the list.",
           "type": "string"
         }
       }
