@@ -19,7 +19,20 @@
           "patchStatus": "InProgress",
           "configuration": {
             "patchId": "1ce4b2a0"
-          }
+          },
+          "availablePatches": [
+            {
+              "patchId": "1ce4b2a0",
+              "newRunImage": "mcr.microsoft.com/oryx/builder:run-dotnet-aspnet-7.0.7-cbl-mariner2.0",
+              "oldRunImage": "mcr.microsoft.com/oryx/builder:run-dotnet-aspnet-7.0.5-cbl-mariner2.0",
+              "targetResourceGroup": "test-rg",
+              "targetContainerAppEnv": "test-env",
+              "targetContainerApp": "test-app",
+              "targetContainerName": "test-container",
+              "targetImageName": "testregistry.azurecr.io/test-image:latest",
+              "reason": "Newer run image available."
+            }
+          ]
         },
         "systemData": {
           "createdBy": "sample@microsoft.com",

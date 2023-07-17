@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ContainerApps API Client",
-    "version": "2023-05-01-preview"
+    "version": "2023-05-02-preview"
   },
   "schemes": [
     "https"
@@ -51,14 +51,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "builderName",
-            "in": "path",
-            "required": true,
-            "description": "The name of the builder",
-            "minLength": 2,
-            "maxLength": 32,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "$ref": "./Builders.json#/parameters/BuilderNameParameter"
           }
         ],
         "responses": {
@@ -66,6 +59,12 @@
             "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PatchCollection"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
         }
@@ -119,8 +118,8 @@
         "tags": [
           "Patches"
         ],
-        "operationId": "Patches_CreateOrUpdate",
-        "description": "Create a PatchResource.",
+        "operationId": "Patches_Update",
+        "description": "Update a PatchResource with patch id.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -141,7 +140,7 @@
             "name": "patchEnvelope",
             "in": "body",
             "required": true,
-            "description": "Resource create or update parameters.",
+            "description": "Update parameters.",
             "schema": {
               "$ref": "#/definitions/PatchResource"
             }
@@ -149,13 +148,13 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM create or update operation completed successfully.",
+            "description": "ARM update operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PatchResource"
             }
           },
           "201": {
-            "description": "ARM create or update operation has been started.",
+            "description": "ARM update operation has been started.",
             "schema": {
               "$ref": "#/definitions/PatchResource"
             },
@@ -174,71 +173,10 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Builds_CreateOrUpdate_WithConfig": {
-            "$ref": "./examples/Patches_CreateOrUpdate.json"
-          },
-          "Builds_CreateOrUpdate_NoConfig": {
-            "$ref": "./examples/Patches_CreateOrUpdate_NoConfig.json"
+          "Patches_Update_WithConfig": {
+            "$ref": "./examples/Patches_Update.json"
           }
         }
-      },
-      "delete": {
-        "tags": [
-          "Patches"
-        ],
-        "operationId": "Patches_Delete",
-        "description": "Delete a PatchResource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./Builders.json#/parameters/BuilderNameParameter"
-          },
-          {
-            "$ref": "#/parameters/PatchNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully.",
-            "schema": {
-              "$ref": "#/definitions/PatchResource"
-            }
-          },
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
-          "204": {
-            "description": "Resource deleted successfully."
-          },
-          "default": {
-            "description": "Common error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Patches_Delete_0": {
-            "$ref": "./examples/Patches_Delete.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
       }
     }
   },
