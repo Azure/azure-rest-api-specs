@@ -298,15 +298,18 @@
           "format": "double",
           "description": "Minimum threshold score for answers, value ranges from 0 to 1.",
           "minimum": 0,
-          "maximum": 1
+          "maximum": 1,
+          "x-ms-client-name": "confidenceThreshold"
         },
         "context": {
           "$ref": "#/definitions/KnowledgeBaseAnswerContext",
-          "description": "Context object with previous QnA's information."
+          "description": "Context object with previous QnA's information.",
+          "x-ms-client-name": "answerContext"
         },
         "rankerType": {
           "$ref": "#/definitions/RankerKind",
-          "description": "Type of ranker to be used."
+          "description": "Type of ranker to be used.",
+          "x-ms-client-name": "rankerKind"
         },
         "filters": {
           "$ref": "#/definitions/QueryFilters",
@@ -314,7 +317,8 @@
         },
         "answerSpanRequest": {
           "$ref": "#/definitions/ShortAnswerOptions",
-          "description": "To configure Answer span prediction feature."
+          "description": "To configure Answer span prediction feature.",
+          "x-ms-client-name": "shortAnswerOptions"
         },
         "includeUnstructuredSources": {
           "type": "boolean",
@@ -1106,12 +1110,14 @@
           "format": "double",
           "description": "Answer confidence score, value ranges from 0 to 1.",
           "minimum": 0,
-          "maximum": 1
+          "maximum": 1,
+          "x-ms-client-name": "confidence"
         },
         "id": {
           "type": "integer",
           "format": "int32",
-          "description": "ID of the QnA result."
+          "description": "ID of the QnA result.",
+          "x-ms-client-name": "qnaId"
         },
         "source": {
           "type": "string",
@@ -1127,7 +1133,8 @@
         },
         "answerSpan": {
           "$ref": "#/definitions/AnswerSpan",
-          "description": "Answer span object of QnA with respect to user's question."
+          "description": "Answer span object of QnA with respect to user's question.",
+          "x-ms-client-name": "shortAnswer"
         }
       },
       "description": "Represents knowledge base answer."
@@ -1142,7 +1149,8 @@
         },
         "previousUserQuery": {
           "type": "string",
-          "description": "Previous user query."
+          "description": "Previous user query.",
+          "x-ms-client-name": "previousQuestion"
         }
       },
       "description": "Context object with previous QnA's information.",
@@ -1677,7 +1685,8 @@
           "format": "double",
           "description": "Minimum threshold score required to include an answer span, value ranges from 0 to 1.",
           "minimum": 0,
-          "maximum": 1
+          "maximum": 1,
+          "x-ms-client-name": "confidenceThreshold"
         },
         "topAnswersWithSpan": {
           "type": "integer",
@@ -1694,16 +1703,9 @@
       ]
     },
     "SourceFilter": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "List of sources in knowledge base.",
-          "x-typespec-name": "string[]"
-        }
+      "type": "array",
+      "items": {
+        "type": "string"
       },
       "description": "Find QnAs that are associated with any of the given list of sources in knowledge base."
     },

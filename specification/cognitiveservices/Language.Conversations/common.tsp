@@ -64,11 +64,11 @@ model KnowledgeBaseAnswer {
     @doc("Answer confidence score, value ranges from 0 to 1.")
     @minValue(0)
     @maxValue(1)
-    @projectedName("json", "confidence")
+    @projectedName("client", "confidence")
     confidenceScore?: float64;
 
     @doc("ID of the QnA result.")
-    @projectedName("json", "qnaId")
+    @projectedName("client", "qnaId")
     id?: int32;
 
     @doc("Source of QnA result.")
@@ -82,7 +82,7 @@ model KnowledgeBaseAnswer {
     dialog?: KnowledgeBaseAnswerDialog;
 
     @doc("Answer span object of QnA with respect to user's question.")
-    @projectedName("json", "shortAnswer")
+    @projectedName("client", "shortAnswer")
     answerSpan?: AnswerSpan;
 }
 
@@ -143,18 +143,22 @@ model AnswersOptions {
     @doc("Minimum threshold score for answers, value ranges from 0 to 1.")
     @maxValue(1)
     @minValue(0)
+    @projectedName("client", "confidenceThreshold")
     confidenceScoreThreshold?: float64;
 
     @doc("Context object with previous QnA's information.")
+    @projectedName("client", "answerContext")
     context?: KnowledgeBaseAnswerContext;
 
     @doc("Type of ranker to be used.")
+    @projectedName("client", "rankerKind")
     rankerType?: RankerKind;
 
     @doc("Filter QnAs based on given metadata list and knowledge base sources.")
     filters?: QueryFilters;
 
     @doc("To configure Answer span prediction feature.")
+    @projectedName("client", "shortAnswerOptions")
     answerSpanRequest?: ShortAnswerOptions;
 
     @doc("(Optional) Flag to enable Query over Unstructured Sources.")
@@ -176,6 +180,7 @@ model KnowledgeBaseAnswerContext {
     previousQnaId: int32;
 
     @doc("Previous user query.")
+    @projectedName("client", "previousQuestion")
     previousUserQuery?: string;
 }
 
@@ -210,10 +215,7 @@ model MetadataRecord {
 }
 
 @doc("Find QnAs that are associated with any of the given list of sources in knowledge base.")
-model SourceFilter {
-    @doc("List of sources in knowledge base.")
-    type?: Array<string>;
-}
+model SourceFilter is Array<string>;
 
 //todo: add enum member descriptions
 @doc("Set to 'OR' or 'AND' for using corresponding logical operation.")
@@ -232,6 +234,7 @@ model ShortAnswerOptions {
     @doc("Minimum threshold score required to include an answer span, value ranges from 0 to 1.")
     @maxValue(1)
     @minValue(0)
+    @projectedName("client", "confidenceThreshold")
     confidenceScoreThreshold?: float64;
 
     @doc("Number of Top answers to be considered for span prediction from 1 to 10.")
