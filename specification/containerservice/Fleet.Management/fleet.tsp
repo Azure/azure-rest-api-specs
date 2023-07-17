@@ -29,8 +29,12 @@ model Fleet is TrackedResource<FleetProperties> {
   @segment("fleets")
   @visibility("create", "read")
   name: string;
-
   ...EntityTag;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "https://github.com/Azure/typespec-azure/issues/2840"
+  @added(Versions.v2023_06_15_preview)
+  @doc("Managed identity.")
+  identity?: Azure.ResourceManager.Foundations.ManagedIdentityProperties;
 }
 
 @doc("Fleet properties.")
@@ -56,6 +60,16 @@ model FleetHubProfile {
   @maxLength(54)
   dnsPrefix?: string;
 
+  @added(Versions.v2023_06_15_preview)
+  @doc("The access profile for the Fleet hub API server.")
+  @visibility("read", "create")
+  apiServerAccessProfile?: APIServerAccessProfile;
+
+  @added(Versions.v2023_06_15_preview)
+  @doc("The agent profile for the Fleet hub.")
+  @visibility("read", "create")
+  agentProfile?: AgentProfile;
+
   @visibility("read")
   @doc("The FQDN of the Fleet hub.")
   fqdn?: string;
@@ -65,7 +79,36 @@ model FleetHubProfile {
   kubernetesVersion?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
+scalar SubnetResourceId
+  extends Azure.ResourceManager.ResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworks/subnets",
+    }
+  ]>;
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "match existing AKS APIServerAccessProfile"
+@doc("Access profile for the Fleet hub API server.")
+model APIServerAccessProfile {
+  @visibility("read", "create")
+  @doc("Whether to create the Fleet hub as a private cluster or not.")
+  enablePrivateCluster?: boolean;
+
+  @visibility("read", "create")
+  @doc("Whether to enable apiserver vnet integration for the Fleet hub or not.")
+	enableVnetIntegration?: boolean;
+
+  @visibility("read", "create")
+  @doc("The subnet to be used when apiserver vnet integration is enabled. It is required when creating a new Fleet with BYO vnet.")
+	subnetId?: SubnetResourceId;
+}
+
+@doc("Agent profile for the Fleet hub.")
+model AgentProfile {
+  @visibility("read", "create")
+  @doc("The ID of the subnet which the Fleet hub node will join on startup. If this is not specified, a vnet and subnet will be generated and used.")
+  subnetId?: SubnetResourceId;
+}
+
 @lroStatus
 @doc("The provisioning state of the last accepted operation.")
 enum FleetProvisioningState {
@@ -82,6 +125,11 @@ model FleetPatch {
   // adding a response header in the model currently impacts the model used in the List result model.
   // omitting it for now as response headers do not impact SDK generation.
   // ...EtagResponseEnvelope;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "https://github.com/Azure/typespec-azure/issues/2840"
+  @added(Versions.v2023_06_15_preview)
+  @doc("Managed identity.")
+  identity?: Azure.ResourceManager.Foundations.ManagedIdentityProperties;
 }
 
 @doc("One credential result item.")
@@ -109,14 +157,15 @@ interface Fleets {
   get is ArmResourceRead<Fleet>;
 
   @doc("Creates or updates a Fleet.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  @operationId("Fleets_CreateOrUpdate")
+  create is ArmResourceCreateOrUpdateAsync<
     Fleet,
     BaseParameters<Fleet> &
       IfMatchParameters<Fleet> &
       IfNoneMatchParameters<Fleet>
   >;
 
-  update is ArmCustomPatchSync<
+  update is ArmCustomPatchAsync<
     Fleet,
     FleetPatch,
     BaseParameters<Fleet> & IfMatchParameters<Fleet>
@@ -130,6 +179,7 @@ interface Fleets {
   @doc("Lists fleets in the specified subscription and resource group.")
   listByResourceGroup is ArmResourceListByParent<Fleet>;
 
+  @operationId("Fleets_ListBySubscription")
   @doc("Lists fleets in the specified subscription.")
   listBySubscription is ArmListBySubscription<Fleet>;
 

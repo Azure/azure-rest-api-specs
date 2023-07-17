@@ -24,7 +24,6 @@ model FleetMember is ProxyResource<FleetMemberProperties> {
   @segment("members")
   @visibility("create", "read")
   name: string;
-
   ...EntityTag;
 }
 
@@ -57,7 +56,6 @@ model FleetMemberProperties {
   provisioningState?: FleetMemberProvisioningState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @lroStatus
 @doc("The provisioning state of the last accepted operation.")
 enum FleetMemberProvisioningState {
@@ -79,18 +77,9 @@ interface FleetMembers {
   >;
 
   @added(Versions.v2023_03_15_preview)
-  update is ArmResourcePatchSync<
-    FleetMember,
-    FleetMemberProperties,
-    BaseParameters<FleetMember> & IfMatchParameters<FleetMember>
-  >;
+  update is ArmResourcePatchAsync<FleetMember, FleetMemberProperties, BaseParameters<FleetMember> &
+  IfMatchParameters<FleetMember>>;
 
-  @extension(
-    "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "location",
-    }
-  )
   delete is ArmResourceDeleteAsync<
     FleetMember,
     BaseParameters<FleetMember> & IfMatchParameters<FleetMember>
