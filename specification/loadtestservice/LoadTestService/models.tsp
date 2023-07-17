@@ -867,6 +867,7 @@ model MetricDimensions {
   'startDateTime_ISO/endDateTime_ISO'.
   """)
   @query
+  @projectedName("python", "time_interval")
   timespan?: string;
 };
 
