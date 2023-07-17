@@ -21,7 +21,6 @@
           "SpringEnvironments"
         ],
         "summary": "Get all the Spring Environments for a subscription.",
-        "description": "Get all the Spring Environments for a subscription.",
         "operationId": "SpringEnvironments_ListBySubscription",
         "parameters": [
           {
@@ -61,7 +60,6 @@
           "SpringEnvironments"
         ],
         "summary": "Get all the Spring Environments in a resource group.",
-        "description": "Get all the Spring Environments in a resource group.",
         "operationId": "SpringEnvironments_ListByResourceGroup",
         "parameters": [
           {
@@ -105,7 +103,7 @@
         ],
         "summary": "Get the properties of a Spring Environment.",
         "description": "Get a Spring Environment and its properties.",
-        "operationId": "SpringEnvironment_Get",
+        "operationId": "SpringEnvironments_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -413,7 +411,15 @@
             },
             "zoneRedundant": {
               "description": "Whether or not this Spring Environment is zone-redundant.",
-              "type": "boolean",
+              "enum": [
+                "True",
+                "False"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "ZoneRedundantBoolean",
+                "modelAsString": true
+              },
               "x-ms-mutability": [
                 "create",
                 "read"
@@ -424,7 +430,8 @@
               "type": "string",
               "readOnly": true
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     }

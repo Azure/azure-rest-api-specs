@@ -307,6 +307,9 @@
           "List replicas of a JavaApp": {
             "$ref": "./examples/v2/Revisions/Replicas_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -421,7 +424,8 @@
               "description": "Azure Spring Apps Revision Template with all possible settings and the\ndefaults if user did not provide them. The defaults are populated\nas they were at the creation time",
               "$ref": "./CommonDefinitions.json#/definitions/SpringAppsTemplate"
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -442,7 +446,8 @@
               "type": "string",
               "readOnly": true
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },

@@ -54,6 +54,9 @@
           "EurekaServers_List_Consumption": {
             "$ref": "./examples/v2/SpringMiddlewares/EurekaServers_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -96,6 +99,9 @@
           "EurekaServers_List_Consumption": {
             "$ref": "./examples/v2/SpringMiddlewares/ConfigServers_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -541,7 +547,8 @@
               "$ref": "#/definitions/ConfigServerSettings",
               "description": "Settings of config server."
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -601,7 +608,8 @@
                 ]
               }
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -713,7 +721,15 @@
         },
         "strictHostKeyChecking": {
           "description": "Strict host key checking or not.",
-          "type": "boolean"
+          "enum": [
+            "True",
+            "False"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EnumAsBoolean",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -775,7 +791,15 @@
         },
         "strictHostKeyChecking": {
           "description": "Strict host key checking or not.",
-          "type": "boolean"
+          "enum": [
+            "True",
+            "False"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EnumAsBoolean",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -785,7 +809,15 @@
       "properties": {
         "isValid": {
           "description": "Indicate if the config server settings are valid",
-          "type": "boolean"
+          "enum": [
+            "True",
+            "False"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EnumAsBoolean",
+            "modelAsString": true
+          }
         },
         "details": {
           "description": "The detail validation results",
