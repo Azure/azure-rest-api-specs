@@ -402,7 +402,7 @@
       }
     },
     "RouteDirectionsResponse": {
-      "description": "This object is returned from a successful call",
+      "description": "This object is returned from a successful call.",
       "type": "object",
       "allOf": [
         {
@@ -410,10 +410,10 @@
         },
         {
           "type": "object",
-          "description": "alternative routes",
+          "description": "Alternative route.",
           "properties": {
             "alternativeRoutes": {
-              "description": "alternative route",
+              "description": "Alternative route.",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/FeatureCollection"
@@ -443,12 +443,12 @@
       "type": "object",
       "properties": {
         "countryRegion": {
-          "description": "Country region name",
+          "description": "Country region name.",
           "type": "string",
           "readOnly": true
         },
         "adminDistricts": {
-          "description": "adminDistrict array",
+          "description": "adminDistrict array.",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -510,11 +510,11 @@
     },
     "FeaturesItem": {
       "type": "object",
-      "description": "Feature Item",
+      "description": "GeoJSON feature object that contains Geometry object and additional properties of the route.",
       "allOf": [
         {
           "type": "object",
-          "description": "Feature Item",
+          "description": "GeoJSON feature object that contains Geometry object and additional properties of the route.",
           "properties": {
             "type": {
               "$ref": "#/definitions/FeaturesItemTypeEnum"
@@ -534,10 +534,10 @@
     },
     "Geometry": {
       "type": "object",
-      "description": "A valid `GeoJSON` Geometry type. Please refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+      "description": "A valid `GeoJSON` Geometry object. Please refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
       "properties": {
         "type": {
-          "description": "Specifies the `GeoJSON` type. The only supported object type is Point. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+          "description": "Specifies the geometry type for the 'GeoJSON` Geometry object. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
           "type": "string"
         }
       },
@@ -548,7 +548,7 @@
     },
     "PointGeometry": {
       "type": "object",
-      "description": "Feature Item",
+      "description": "Specifies the `GeoJSON` Point Geometry object. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
       "x-ms-discriminator-value": "Point",
       "allOf": [
         {
@@ -561,7 +561,7 @@
     },
     "MultiLineStringGeometry": {
       "type": "object",
-      "description": "Feature Item",
+      "description": "Specifies the `GeoJSON` MultiLineString Geometry object. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
       "x-ms-discriminator-value": "MultiLineString",
       "allOf": [
         {
@@ -574,7 +574,7 @@
     },
     "InputWaypointFeaturesItem": {
       "type": "object",
-      "description": "Waypoint Feature Item",
+      "description": "Specifies the input waypoint and viawaypoint `GeoJSON` feature object and additional properties. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
       "properties": {
         "type": {
           "$ref": "#/definitions/FeaturesItemTypeEnum"
@@ -595,7 +595,7 @@
     },
     "InputWaypointProperties": {
       "type": "object",
-      "description": "Waypoint properties",
+      "description": "Specifies the properties of a Waypoint which is a specific location or point along a route or trip that serves as a reference or stopping point.",
       "properties": {
         "pointIndex": {
           "description": "Identify and order the sequence of waypoints in the route. The default value is the `index value` of a features array.",
@@ -610,7 +610,7 @@
     "WaypointProperties": {
       "x-ms-discriminator-value": "Waypoint",
       "type": "object",
-      "description": "Waypoint properties",
+      "description": "Specifies the properties of a Waypoint which is a specific location or point along a route or trip that serves as a reference or stopping point.",
       "allOf": [
         {
           "$ref": "#/definitions/FeatureProperties"
@@ -623,7 +623,7 @@
     "ManeuverPointProperties": {
       "x-ms-discriminator-value": "ManeuverPoint",
       "type": "object",
-      "description": "ManeuverPoint properties",
+      "description": "Specifies the driving instructions and additional properties for each maneuver point in the RouteLeg.",
       "allOf": [
         {
           "$ref": "#/definitions/FeatureProperties"
@@ -634,7 +634,7 @@
       ]
     },
     "NavigationPointProperties": {
-      "description": "Waypoint and ManeuverPoint properties",
+      "description": "Waypoint and ManeuverPoint properties.",
       "type": "object",
       "properties": {
         "legPointIndex": {
@@ -646,7 +646,7 @@
           "readOnly": true
         },
         "steps": {
-          "description": "steps between two consecutive maneuver points",
+          "description": "Steps between two consecutive maneuver points.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Step"
@@ -659,7 +659,7 @@
           "$ref": "#/definitions/SideOfStreetEnum"
         },
         "signs": {
-          "description": "Signage text for the route. There may be more than one sign value",
+          "description": "Signage text for the route. There may be more than one sign value.",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -695,13 +695,13 @@
     "ViaWaypointProperties": {
       "x-ms-discriminator-value": "ViaWaypoint",
       "type": "object",
-      "description": "ViaWaypoint properties",
+      "description": "Specifies the properties of a ViaWaypoint which is a waypoint that must be passed through or visited along a route or trip.",
       "allOf": [
         {
           "$ref": "#/definitions/FeatureProperties"
         },
         {
-          "description": "ViaWaypoint Properties",
+          "description": "Specifies the properties of a ViaWaypoint which is a waypoint that must be passed through or visited along a route or trip.",
           "type": "object",
           "properties": {
             "names": {
@@ -722,14 +722,14 @@
     "RoutePathProperties": {
       "x-ms-discriminator-value": "RoutePath",
       "type": "object",
-      "description": "RoutePath properties",
+      "description": "Specifies the properties that describe the route's path in the response.",
       "allOf": [
         {
           "$ref": "#/definitions/FeatureProperties"
         },
         {
           "type": "object",
-          "description": "RoutePath properties",
+          "description": "Specifies the properties that describe the route's path in the response.",
           "properties": {
             "resourceId": {
               "description": "A unique ID for the resource.",
@@ -784,7 +784,7 @@
       ]
     },
     "FeaturePropertiesTypeEnum": {
-      "description": "Output type",
+      "description": "Output type.",
       "type": "string",
       "readOnly": true,
       "enum": [
@@ -863,7 +863,7 @@
     },
     "Leg": {
       "x-ms-client-name": "RouteLeg",
-      "description": "Information about a section of a route between two waypoints. For more information about the fields contained ina routeLeg.",
+      "description": "Information about a section of a route between two waypoints. More information about the fields contained in a RouteLeg:",
       "type": "object",
       "properties": {
         "description": {
@@ -908,12 +908,12 @@
           "$ref": "#/definitions/PathLegRange"
         },
         "distanceInMeters": {
-          "description": "The physical distance in meters covered by the sub-leg",
+          "description": "The physical distance in meters covered by the sub-leg.",
           "type": "number",
           "readOnly": true
         },
         "durationInSeconds": {
-          "description": "The time, in seconds, that it takes to travel the corresponding travelDistance by the sub-leg",
+          "description": "The time, in seconds, that it takes to travel the corresponding travelDistance by the sub-leg.",
           "format": "int64",
           "type": "integer",
           "readOnly": true
@@ -948,7 +948,7 @@
           "$ref": "#/definitions/LegIndex"
         },
         "pointIndex": {
-          "description": "index of a point within a specific leg",
+          "description": "Index of a point within a specific leg.",
           "format": "int64",
           "type": "integer",
           "readOnly": true
@@ -966,12 +966,12 @@
       "type": "object",
       "properties": {
         "hintType": {
-          "description": "hint type",
+          "description": "hint type.",
           "type": "string",
           "readOnly": true
         },
         "text": {
-          "description": "hint text",
+          "description": "hint text.",
           "type": "string",
           "readOnly": true
         }
@@ -1141,6 +1141,11 @@
             "value": "BearRightThenTurnRight",
             "name": "BearRightThenTurnRight",
             "description": "Bear right and then turn right."
+          },
+          {
+            "value": "BearThenKeep",
+            "name": "BearThenKeep",
+            "description": "Bear instruction and then a keep instruction"
           },
           {
             "value": "DepartStart",
@@ -1316,6 +1321,16 @@
             "value": "TurnLeftThenBearLeft",
             "name": "TurnLeftThenBearLeft",
             "description": "Turn left and then bear left."
+          },
+          {
+            "value": "TurnLeftThenBearRight",
+            "name": "TurnLeftThenBearRight",
+            "description": "Turn left and then bear right."
+          },
+          {
+            "value": "TurnLeftThenTurnLeft",
+            "name": "TurnLeftThenTurnLeft",
+            "description": "Turn left and then turn left again."
           },
           {
             "value": "TurnLeftThenTurnRight",
@@ -1721,7 +1736,7 @@
     },
     "NextLink": {
       "type": "string",
-      "description": "The is the link to the next page of the features returned. If it's the last page, no this field."
+      "description": "The is the link to the next page of the features returned."
     },
     "OptionalId": {
       "type": "object",
@@ -1734,7 +1749,7 @@
       }
     },
     "RouteTravelMode": {
-      "description": "The mode of travel for the route path",
+      "description": "The mode of travel for the route path in the response.",
       "type": "string",
       "default": "driving",
       "enum": [
@@ -1749,19 +1764,19 @@
         "values": [
           {
             "value": "driving",
-            "description": "driving"
+            "description": "Routes optimized for cars."
           },
           {
             "value": "truck",
-            "description": "truck"
+            "description": "Routes optimized for large size trucks based on the vehicle specification."
           },
           {
             "value": "walking",
-            "description": "walking"
+            "description": "Routes optimized for pedestrians."
           },
           {
             "value": "other",
-            "description": "Other"
+            "description": "RouteTravelMode is returned as \"other\" for the truck travelMode when the truck route is not available for a particular section of a route."
           }
         ]
       }
