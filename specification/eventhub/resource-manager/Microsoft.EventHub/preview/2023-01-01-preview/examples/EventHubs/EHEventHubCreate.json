@@ -3,7 +3,7 @@
     "namespaceName": "sdk-Namespace-5357",
     "resourceGroupName": "Default-NotificationHubs-AustraliaEast",
     "eventHubName": "sdk-EventHub-6547",
-    "api-version": "2022-10-01-preview",
+    "api-version": "2023-01-01-preview",
     "subscriptionId": "5f750a97-50d9-4e36-8081-c9ee4c0210d4",
     "parameters": {
       "properties": {
@@ -13,16 +13,20 @@
         "captureDescription": {
           "enabled": true,
           "encoding": "Avro",
-          "intervalInSeconds": 120,
-          "sizeLimitInBytes": 10485763,
           "destination": {
             "name": "EventHubArchive.AzureBlockBlob",
             "properties": {
               "storageAccountResourceId": "/subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-Storage-SouthCentralUS/providers/Microsoft.ClassicStorage/storageAccounts/arjunteststorage",
               "blobContainer": "container",
               "archiveNameFormat": "{Namespace}/{EventHub}/{PartitionId}/{Year}/{Month}/{Day}/{Hour}/{Minute}/{Second}"
+            },
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentity": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/ud2"
             }
-          }
+          },
+          "intervalInSeconds": 120,
+          "sizeLimitInBytes": 10485763
         },
         "retentionDescription": {
           "cleanupPolicy": "Compact",
@@ -59,6 +63,10 @@
                 "storageAccountResourceId": "/subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-Storage-SouthCentralUS/providers/Microsoft.ClassicStorage/storageAccounts/arjunteststorage",
                 "blobContainer": "container",
                 "archiveNameFormat": "{Namespace}/{EventHub}/{PartitionId}/{Year}/{Month}/{Day}/{Hour}/{Minute}/{Second}"
+              },
+              "identity": {
+                "type": "UserAssigned",
+                "userAssignedIdentity": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/ud2"
               }
             },
             "intervalInSeconds": 120,

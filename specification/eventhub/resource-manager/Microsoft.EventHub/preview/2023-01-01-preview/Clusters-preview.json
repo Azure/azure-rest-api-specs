@@ -3,7 +3,7 @@
   "info": {
     "title": "EventHubManagementClient",
     "description": "Azure Event Hubs client for managing Event Hubs Cluster, IPFilter Rules and VirtualNetworkRules resources.",
-    "version": "2022-10-01-preview"
+    "version": "2023-01-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -386,6 +386,25 @@
               "readOnly": true,
               "type": "string",
               "description": "The UTC time when the Event Hubs Cluster was created."
+            },
+            "provisioningState": {
+              "readOnly": true,
+              "type": "string",
+              "enum": [
+                "Unknown",
+                "Creating",
+                "Deleting",
+                "Scaling",
+                "Active",
+                "Failed",
+                "Succeeded",
+                "Canceled"
+              ],
+              "x-ms-enum": {
+                "name": "provisioningState",
+                "modelAsString": true
+              },
+              "description": "Provisioning state of the Cluster."
             },
             "updatedAt": {
               "readOnly": true,
