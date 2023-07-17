@@ -939,14 +939,14 @@
           "name": "parameters",
           "in": "body",
           "required": true,
-          "description": "The object for updating VM size setting of specified ComputeInstance.",
+          "description": "The object for updating VM size setting of specified Compute Instance.",
           "schema": {
-            "$ref": "#/definitions/TargetVMSize"
+            "$ref": "#/definitions/ResizeSchema"
           }
         }
       ],
       "responses": {
-        "200": {
+        "202": {
           "description": "Success."
         },
         "default": {
@@ -3886,9 +3886,9 @@
         }
       }
     },
-    "TargetVMSize": {
+    "ResizeSchema": {
       "type": "object",
-      "description": "Target size for VM resize.",
+      "description": "Schema for Compute Instance resize.",
       "properties": {
         "targetVMSize": {
           "type": "string",
