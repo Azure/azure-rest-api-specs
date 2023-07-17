@@ -77,6 +77,95 @@
         }
       }
     },
+    "/providers/Microsoft.AppComplianceAutomation/getCollectionCount": {
+      "post": {
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Get the resource count.",
+        "operationId": "Reports_GetCollectionCount",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Get collection count's request object.",
+            "required": true,
+            "schema": {
+              "description": "Get collection count's request object.",
+              "$ref": "#/definitions/GetCollectionCountRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GetCollectionCountResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reports_GetCollectionCount": {
+            "$ref": "./examples/Reports_GetCollectionCount.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AppComplianceAutomation/getOverviewStatus": {
+      "post": {
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Get the resource overview status.",
+        "operationId": "Reports_GetOverviewStatus",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Get overview status request object.",
+            "required": true,
+            "schema": {
+              "description": "Get overview status request object.",
+              "$ref": "#/definitions/GetOverviewStatusRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GetOverviewStatusResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reports_GetOverviewStatus": {
+            "$ref": "./examples/Reports_GetOverviewStatus.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.AppComplianceAutomation/operations": {
       "get": {
         "tags": [
@@ -286,6 +375,12 @@
           },
           {
             "$ref": "#/parameters/SelectParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/OrderByParameter"
           },
           {
             "$ref": "#/parameters/OfferGuidParameter"
@@ -578,6 +673,12 @@
           },
           {
             "$ref": "#/parameters/SelectParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/OrderByParameter"
           }
         ],
         "responses": {
@@ -802,6 +903,12 @@
             "$ref": "#/parameters/SelectParameter"
           },
           {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/OrderByParameter"
+          },
+          {
             "$ref": "#/parameters/ReportCreatorTenantIdParameter"
           },
           {
@@ -957,6 +1064,12 @@
           },
           {
             "$ref": "#/parameters/SelectParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/OrderByParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1247,6 +1360,54 @@
     }
   },
   "definitions": {
+    "GetOverviewStatusRequest": {
+      "description": "The get overview status request body.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The resource type.",
+          "type": "string"
+        }
+      }
+    },
+    "GetOverviewStatusResponse": {
+      "description": "The get overview status response.",
+      "type": "object",
+      "properties": {
+        "statusList": {
+          "type": "array",
+          "description": "List of different status items.",
+          "items": {
+            "description": "Single status item.",
+            "$ref": "#/definitions/StatusItem"
+          },
+          "x-ms-identifiers": [
+            "statusName"
+          ]
+        }
+      }
+    },
+    "GetCollectionCountRequest": {
+      "description": "The get collection count request body.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The resource type.",
+          "type": "string"
+        }
+      }
+    },
+    "GetCollectionCountResponse": {
+      "description": "The get collection count response.",
+      "type": "object",
+      "properties": {
+        "count": {
+          "description": "The count of the specified resource.",
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
     "OverviewStatus": {
       "description": "The overview of the compliance result for one report.",
       "type": "object",
@@ -1307,6 +1468,20 @@
         },
         "location": {
           "description": "The region of 'bring your own storage' account",
+          "type": "string"
+        }
+      }
+    },
+    "StatusItem": {
+      "type": "object",
+      "description": "Single status.",
+      "properties": {
+        "statusName": {
+          "description": "Status name - e.g. \"Active\", \"Failed\".",
+          "type": "string"
+        },
+        "statusValue": {
+          "description": "Status value. e.g. \"100\", or \"100%\".",
           "type": "string"
         }
       }
@@ -2857,6 +3032,24 @@
       "required": false,
       "type": "string",
       "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. ?$select=reportName,id.",
+      "x-ms-parameter-location": "method",
+      "minLength": 1
+    },
+    "OrderByParameter": {
+      "name": "$orderby",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "OData order by query option.",
+      "x-ms-parameter-location": "method",
+      "minLength": 1
+    },
+    "FilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The filter to apply on the operation.",
       "x-ms-parameter-location": "method",
       "minLength": 1
     }
