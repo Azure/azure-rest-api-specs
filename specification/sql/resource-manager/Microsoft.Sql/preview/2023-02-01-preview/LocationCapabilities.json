@@ -586,14 +586,16 @@
       "properties": {
         "name": {
           "description": "The job agent edition name.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "supportedSkus": {
           "description": "The list of supported SKUs for the edition.",
           "type": "array",
           "items": {
             "$ref": "../../../common/v1/types.json#/definitions/Sku"
-          }
+          },
+          "readOnly": true
         },
         "status": {
           "description": "The status of the capability.",
@@ -625,7 +627,7 @@
           "readOnly": true
         },
         "supportedEditions": {
-          "description": "The list of supported skus.",
+          "description": "The list of supported editions.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/JobAgentEditionCapability"
