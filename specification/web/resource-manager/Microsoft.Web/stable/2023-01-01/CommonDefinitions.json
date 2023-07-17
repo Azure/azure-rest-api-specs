@@ -1095,7 +1095,7 @@
         "value": {
           "description": "Metadata property value.",
           "type": "string"
-        },
+        },      
         "secretRef": {
           "description": "Name of the Container App secret from which to pull the metadata property value.",
           "type": "string"
@@ -2919,8 +2919,8 @@
               "$ref": "#/definitions/SiteConfig",
               "description": "Configuration of the app."
             },
-            "dapr": {
-              "$ref": "#/definitions/Dapr",
+            "daprConfig": {
+              "$ref": "#/definitions/DaprConfig",
               "description": "Dapr configuration of the app."
             },
             "trafficManagerHostNames": {
@@ -3574,7 +3574,7 @@
         }
       }
     },
-    "Dapr": {
+    "DaprConfig": {
       "description": "App Dapr configuration.",
       "type": "object",
       "properties": {
