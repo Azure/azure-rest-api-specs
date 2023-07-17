@@ -349,6 +349,13 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "name": "resourceGroup",
+            "in": "path",
+            "description": "The name of the Azure resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "configurationName",
             "in": "path",
             "description": "Advisor configuration name. Value must be 'default'",
@@ -377,13 +384,6 @@
               "name": "ConfigurationName",
               "modelAsString": true
             }
-          },
-          {
-            "name": "resourceGroup",
-            "in": "path",
-            "description": "The name of the Azure resource group.",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
