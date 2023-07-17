@@ -85,7 +85,6 @@ system.
 model TrialMatcherInferenceEvidence {
   @doc("A piece of evidence from the eligibility criteria text of a clinical trial.")
   eligibilityCriteriaEvidence?: string;
-
   ...InferenceEvidence;
 }
 

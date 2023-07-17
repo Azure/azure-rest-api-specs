@@ -404,6 +404,5 @@ model ResponseError {
   @header("x-ms-error-code")
   @doc("Error code.")
   msErrorCode?: string;
-
   ...ErrorResponse;
 }

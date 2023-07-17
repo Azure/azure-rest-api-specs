@@ -24,7 +24,6 @@ model FleetMember is ProxyResource<FleetMemberProperties> {
   @segment("members")
   @visibility("create", "read")
   name: string;
-
   ...EntityTag;
 }
 
