@@ -3,7 +3,7 @@
   "info": {
     "title": "EventHubManagementClient",
     "description": "Azure Event Hubs client for managing namespaces.",
-    "version": "2023-01-01-preview"
+    "version": "2022-10-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -124,9 +124,6 @@
         "x-ms-examples": {
           "NamespaceCreate": {
             "$ref": "./examples/NameSpaces/EHNameSpaceCreate.json"
-          },
-          "NamespaceWithGeoDRCreate": {
-            "$ref": "./examples/NameSpaces/NamespaceWithGeoDRCreate.json"
           }
         },
         "description": "Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.",
@@ -324,57 +321,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/failover": {
-      "post": {
-        "tags": [
-          "Namespaces Geo DR Failover"
-        ],
-        "operationId": "GeoDR_Failover",
-        "x-ms-examples": {
-          "NameSpaceCreate": {
-            "$ref": "./examples/NameSpaces/EHNamespaceFailover.json"
-          }
-        },
-        "description": "GeoDR Failover",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
-          },
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FailOver"
-            },
-            "description": "Parameters for updating a namespace resource."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Failover triggered successfully.",
-            "schema": {
-              "$ref": "#/definitions/EHNamespace"
-            }
-          },
-          "default": {
-            "description": "EventHubEventHub error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/privateEndpointConnections": {
       "get": {
         "tags": [
@@ -382,7 +328,7 @@
         ],
         "operationId": "PrivateEndpointConnections_List",
         "x-ms-examples": {
-          "PrivateEndPointConnectionList": {
+          "NameSpaceCreate": {
             "$ref": "./examples/NameSpaces/PrivateEndPointConnectionList.json"
           }
         },
@@ -855,10 +801,6 @@
             "alternateName": {
               "type": "string",
               "description": "Alternate name specified when alias and namespace names are same."
-            },
-            "geoDataReplication": {
-              "$ref": "#/definitions/GeoDataReplicationProperties",
-              "description": "Geo Data Replication settings for the namespace"
             }
           },
           "description": "Namespace properties supplied for create namespace operation."
@@ -911,74 +853,6 @@
         "name"
       ],
       "description": "SKU parameters supplied to the create namespace operation"
-    },
-    "GeoDataReplicationProperties": {
-      "type": "object",
-      "properties": {
-        "maxReplicationLagDurationInSeconds": {
-          "format": "int32",
-          "type": "integer",
-          "description": "The maximum acceptable lag for data replication operations from the primary replica to a quorum of secondary replicas.  When the lag exceeds the configured amount, operations on the primary replica will be failed."
-        },
-        "locations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NamespaceReplicaLocation"
-          },
-          "x-ms-identifiers": [],
-          "description": "A list of regions where replicas of the namespace are maintained."
-        }
-      },
-      "description": "GeoDR Replication properties"
-    },
-    "NamespaceReplicaLocation": {
-      "type": "object",
-      "properties": {
-        "locationName": {
-          "type": "string",
-          "description": "Azure regions where a replica of the namespace is maintained"
-        },
-        "roleType": {
-          "type": "string",
-          "description": "GeoDR Role Types",
-          "enum": [
-            "Primary",
-            "Secondary"
-          ],
-          "x-ms-enum": {
-            "name": "GeoDRRoleType",
-            "modelAsString": true
-          }
-        },
-        "clusterArmId": {
-          "type": "string",
-          "description": "Optional property that denotes the ARM ID of the Cluster. This is required, if a namespace replica should be placed in a Dedicated Event Hub Cluster"
-        }
-      },
-      "description": "Namespace replication properties"
-    },
-    "FailOver": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/FailOverProperties"
-        }
-      }
-    },
-    "FailOverProperties": {
-      "type": "object",
-      "properties": {
-        "primaryLocation": {
-          "type": "string",
-          "description": "Query parameter for the new primary location after failover."
-        },
-        "maximumGracePeriodInMins": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Maximum time duration allowed complete data replication from primary to secondary. Use maximumGracePeriodInMins = 0: For Unplanned Geo-Failover, which switches the role between primary and secondary immediately. The data that is not being replicated yet will be discarded. Use maximumGracePeriodInMins > 0: For Planned Geo-Failover/DR Drill, continue replicating data until grace period expires.  Any data that is not replicated during the grace period will be discarded. During the replication the namespace stops accepting any new publishing requests"
-        }
-      }
     },
     "Identity": {
       "x-ms-client-flatten": true,
