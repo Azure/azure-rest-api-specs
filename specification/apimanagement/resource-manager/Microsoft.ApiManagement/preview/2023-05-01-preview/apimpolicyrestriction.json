@@ -3,7 +3,7 @@
   "info": {
     "title": "ApiManagementClient",
     "description": "REST API for performing policy restrictions on any created/updated policies in an Azure API Management deployment.",
-    "version": "2023-03-01-preview"
+    "version": "2023-05-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -289,18 +289,6 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Policy restriction configuration was successfully created.",
-            "schema": {
-              "$ref": "./definitions.json#/definitions/PolicyRestrictionContract"
-            },
-            "headers": {
-              "ETag": {
-                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                "type": "string"
-              }
-            }
-          },
           "200": {
             "description": "Policy restriction configuration of the Api Management service was successfully updated.",
             "schema": {
@@ -309,6 +297,18 @@
             "headers": {
               "ETag": {
                 "description": "Current entity state version",
+                "type": "string"
+              }
+            }
+          },
+          "201": {
+            "description": "Policy restriction configuration was successfully created.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/PolicyRestrictionContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
               }
             }
