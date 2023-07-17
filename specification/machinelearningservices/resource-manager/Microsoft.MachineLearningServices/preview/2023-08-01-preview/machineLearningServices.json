@@ -1906,7 +1906,7 @@
             "name": "remoteLoginPortPublicAccess",
             "modelAsString": true
           }
-        },
+        },       
         "allocationState": {
           "type": "string",
           "readOnly": true,
@@ -2106,6 +2106,20 @@
             "modelAsString": true
           }
         },
+        "enableOSPatching": {
+          "type": "boolean",
+          "default": false,
+          "title": "Enable Auto OS Patching.",
+          "description": "Enable Auto OS Patching. Possible values are: true, false.",
+          "x-nullable": true
+        },
+        "releaseQuotaOnStop": {
+          "type": "boolean",
+          "default": false,
+          "title": "Release quota if compute instance stopped.",
+          "description": "Release quota if compute instance stopped. Possible values are: true - release quota if compute instance stopped. false - don't release quota when compute instance stopped.",
+          "x-nullable": true
+        },
         "personalComputeInstanceSettings": {
           "title": "Personal Compute Instance settings.",
           "description": "Settings for a personal compute instance.",
@@ -2175,6 +2189,10 @@
           "description": "ComputeInstance version.",
           "$ref": "#/definitions/ComputeInstanceVersion",
           "readOnly": true
+        },
+        "autoRestartAfterUpdates": {
+          "type": "boolean",
+          "description": "Indicates whether this compute instance allow auto reboot when reboot is required after os patching."
         }
       }
     },
@@ -2875,6 +2893,18 @@
         "isLatestOsImageVersion": {
           "type": "boolean",
           "description": "Specifies whether this compute instance is running on the latest operating system image."
+        },
+        "rebootPending": {
+          "type": "boolean",
+          "description": "Specifies whether this compute instance is pending for reboot to finish os patching."
+        },
+        "patchStatus": {
+          "type": "string",
+          "description": "The os patching status."
+        },
+        "latestUpdateTime": {
+          "type": "string",
+          "description": "Time of the lastest os patching."
         }
       }
     },
