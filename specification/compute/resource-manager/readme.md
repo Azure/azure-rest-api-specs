@@ -247,6 +247,25 @@ directive:
     from: virtualMachineScaleSet.json
     where:
       - $.definitions.VirtualMachineScaleSetVMExtension
+  - suppress: ResourceNameRestriction
+    from: virtualMachine.json
+    reason: there is no VM naming requirement. It only follows ARM resource naming requirement.
+  - suppress: LroErrorContent
+    from: virtualMachine.json
+    reason: CRP API uses its own API error model for backwards compatibility
+  - suppress: LroErrorContent
+    from: virtualMachineScaleSet.json
+    reason: CRP API uses its own API error model for backwards compatibility
+  - where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/VMApplications/{applicationName}"].get
+    suppress:
+      - ParametersInPointGet
+    reason: HTTP parameter $expand=instanceView follows established convetions of Microsoft.Compute/VirtualMachines
+  - where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/applications/{applicationName}"].get
+    suppress:
+      - ParametersInPointGet
+    reason: HTTP parameter $expand=instanceView follows established convetions of Microsoft.Compute/virtualMachineScaleSets/virtualMachines
 ```
 
 ### Tag: package-2023-09-01
