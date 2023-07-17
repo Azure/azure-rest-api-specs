@@ -87,6 +87,7 @@ The bio-medical category related to the coded concept, e.g. Diagnosis, Symptom, 
 model TrialMatcherInference {
   @doc("The type of the Trial Matcher inference.")
   type: TrialMatcherInferenceType;
+
   ...Inference;
 
   @doc("The evidence corresponding to the inference value.")
@@ -328,6 +329,7 @@ model ContactDetails {
 model ClinicalTrialResearchFacility {
   @doc("The facility's name.")
   name: string;
+
   ...GeographicLocation;
 }
 
