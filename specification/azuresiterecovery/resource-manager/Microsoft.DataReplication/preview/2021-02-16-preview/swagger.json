@@ -134,18 +134,6 @@
             "schema": {
               "$ref": "#/definitions/ArmError"
             }
-          },
-          "202": {
-            "description": "Returns success on creation.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Tracking URL for long running operation.",
-                "type": "string"
-              },
-              "Location": {
-                "type": "string"
-              }
-            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -196,9 +184,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
-          },
           "202": {
             "description": "Returns success on deletion.",
             "headers": {
@@ -840,18 +825,6 @@
             "schema": {
               "$ref": "#/definitions/ArmError"
             }
-          },
-          "202": {
-            "description": "Returns success on creation.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Tracking URL for long running operation.",
-                "type": "string"
-              },
-              "Location": {
-                "type": "string"
-              }
-            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -970,9 +943,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
-          },
           "202": {
             "description": "Returns success on deletion.",
             "headers": {
@@ -1289,18 +1259,6 @@
             "schema": {
               "$ref": "#/definitions/ArmError"
             }
-          },
-          "202": {
-            "description": "Returns success on creation.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Tracking URL for long running operation.",
-                "type": "string"
-              },
-              "Location": {
-                "type": "string"
-              }
-            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -1435,9 +1393,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
-          },
           "202": {
             "description": "Returns success on deletion.",
             "headers": {
@@ -1715,18 +1670,6 @@
             "schema": {
               "$ref": "#/definitions/ArmError"
             }
-          },
-          "202": {
-            "description": "Returns success on creation.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Tracking URL for long running operation.",
-                "type": "string"
-              },
-              "Location": {
-                "type": "string"
-              }
-            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -1867,9 +1810,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -2018,9 +1958,6 @@
                 "type": "string"
               }
             }
-          },
-          "204": {
-            "description": "No Content"
           },
           "200": {
             "description": "Success",
@@ -2365,18 +2302,6 @@
             "schema": {
               "$ref": "#/definitions/ArmError"
             }
-          },
-          "202": {
-            "description": "Returns success on creation.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Tracking URL for long running operation.",
-                "type": "string"
-              },
-              "Location": {
-                "type": "string"
-              }
-            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -2427,9 +2352,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
-          },
           "202": {
             "description": "Returns success on deletion.",
             "headers": {
@@ -2661,10 +2583,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/OperationModel"
-              }
+              "$ref": "#/definitions/OperationModelCollection"
             }
           },
           "default": {
@@ -2673,6 +2592,9 @@
               "$ref": "#/definitions/ArmError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Operations_List": {
@@ -2849,18 +2771,6 @@
             "schema": {
               "$ref": "#/definitions/ArmError"
             }
-          },
-          "202": {
-            "description": "Returns success on creation.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Tracking URL for long running operation.",
-                "type": "string"
-              },
-              "Location": {
-                "type": "string"
-              }
-            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -2979,9 +2889,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
-          },
           "202": {
             "description": "Returns success on deletion.",
             "headers": {
@@ -3539,7 +3446,11 @@
         },
         "location": {
           "description": "Gets or sets the location of the resource.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "apiVersion": {
           "description": "Gets or sets the Api version.",
@@ -4022,7 +3933,11 @@
         "location": {
           "description": "Gets or sets the location of the fabric.",
           "minLength": 1,
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "properties": {
           "$ref": "#/definitions/FabricModelProperties"
@@ -4161,11 +4076,6 @@
       "description": "Fabric model for update.",
       "type": "object",
       "properties": {
-        "location": {
-          "description": "Gets or sets the location of the fabric.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/FabricModelProperties"
         },
@@ -5136,6 +5046,24 @@
         },
         "display": {
           "$ref": "#/definitions/OperationModelProperties"
+        }
+      }
+    },
+    "OperationModelCollection": {
+      "description": "Operation model collection.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the list of protected items.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationModel"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "Gets or sets the value of next link.",
+          "type": "string"
         }
       }
     },
@@ -6904,7 +6832,11 @@
         "location": {
           "description": "Gets or sets the location of the vault.",
           "minLength": 1,
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "properties": {
           "$ref": "#/definitions/VaultModelProperties"
@@ -7006,11 +6938,6 @@
       "description": "Vault model for update.",
       "type": "object",
       "properties": {
-        "location": {
-          "description": "Gets or sets the location of the vault.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/VaultModelProperties"
         },
