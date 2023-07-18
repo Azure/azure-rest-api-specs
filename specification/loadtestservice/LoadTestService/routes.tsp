@@ -452,7 +452,7 @@ numeric, underscore or hyphen characters.
 
       @doc("Metric namespace to query metric definitions for.")
       @query
-      metricNamespace?: string;
+      metricNamespace: string;
     },
     MetricDefinitionCollection
   >;
