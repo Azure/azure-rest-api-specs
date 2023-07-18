@@ -2709,7 +2709,10 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -2913,7 +2916,7 @@
         ],
         "summary": "List Backups",
         "description": "List all backups Under a Backup Vault",
-        "operationId": "Backups_ListByBackupVault",
+        "operationId": "Backups_ListByVault",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -2949,7 +2952,10 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -2995,7 +3001,10 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -3042,7 +3051,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK created",
+            "description": "OK - backup created updated",
             "schema": {
               "$ref": "#/definitions/backup"
             }
@@ -3054,10 +3063,18 @@
             }
           },
           "202": {
-            "description": "Accepted -- Create request accepted; operation will complete asynchronously"
+            "description": "Accepted -- Create request accepted; operation will complete asynchronously",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
-            "description": "Error response describing why the operation failed."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -7574,69 +7591,9 @@
           "minLength": 36,
           "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
         },
-        "creationDate": {
-          "title": "creationDate",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "The creation date of the backup",
-          "example": "2017-08-15 13:23:33"
-        },
-        "provisioningState": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure lifecycle management"
-        },
-        "size": {
-          "type": "integer",
-          "readOnly": true,
-          "description": "Size of backup in bytes",
-          "format": "int64"
-        },
         "label": {
           "type": "string",
           "description": "Label for backup"
-        },
-        "backupType": {
-          "title": "backupType",
-          "type": "string",
-          "readOnly": true,
-          "description": "Type of backup Manual or Scheduled",
-          "enum": [
-            "Manual",
-            "Scheduled"
-          ],
-          "x-ms-enum": {
-            "name": "backupType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Manual",
-                "description": "Manual backup"
-              },
-              {
-                "value": "Scheduled",
-                "description": "Scheduled backup"
-              }
-            ]
-          },
-          "example": "Manual"
-        },
-        "failureReason": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Failure reason"
-        },
-        "useExistingSnapshot": {
-          "type": "boolean",
-          "description": "Manual backup an already existing snapshot. This will always be false for scheduled backups and true/false for manual backups",
-          "example": true,
-          "default": false
-        },
-        "backupPolicyResourceId": {
-          "type": "string",
-          "readOnly": true,
-          "description": "ResourceId used to identify the backup policy"
         }
       }
     },
@@ -8810,6 +8767,7 @@
       "name": "backupVaultName",
       "in": "path",
       "required": true,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,63}$",
       "type": "string",
       "description": "The name of the Backup Vault",
       "x-ms-parameter-location": "method"
