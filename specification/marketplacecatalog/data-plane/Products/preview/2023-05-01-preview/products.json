@@ -61,7 +61,7 @@
             "type": "array",
             "name": "locations",
             "in": "query",
-            "description": "Locations to search. Enumeration of the Azure datacenter regions. See https://azure.microsoft.com/regions/",
+            "description": "Retrurn products available in selected location. Enumeration of the Azure datacenter regions. See https://azure.microsoft.com/regions/",
             "collectionFormat": "multi",
             "items": {
               "type": "string"
@@ -147,7 +147,7 @@
         "tags": [
           "ListingPublicProducts"
         ],
-        "summary": "Public Products API provides an unauthenticated endpoint for consuming commercial Marketplace public products. In addition, it enables filtering on selected product properties, search, and getting starting price information per product. Each API request must include an API key allocated to you (see X-API-Key description).Send an email to MKPL_Platform_API_DL@microsoft.com including the following details to get the API Key:\n- Customer name\n- Service/Product name\n- AD Registered App ID (if available)\n- Focal point email\n- Use case/scenario\n- Expected traffic volume, including peak requests per second (daily)",
+        "summary": "Public Products API provides an unauthenticated endpoint for consuming commercial 3rd party Marketplace public products and 1st party Azure products. In addition, it enables Odata filtering on selected product properties.  Each API request must include an API key allocated to you (see X-API-Key description).Send an email to MKPL_Platform_API_DL@microsoft.com including the following details to get the API Key:\n- Customer name\n- Service/Product name\n- AD Registered App ID (if available)\n- Focal point email\n- Use case/scenario\n- Expected traffic volume, including peak requests per second (daily)",
         "x-ms-examples": {
           "Product_Get": {
             "$ref": "./examples/PublicProducts_List.json"
@@ -167,7 +167,7 @@
             "type": "string",
             "name": "storefront",
             "in": "query",
-            "description": "Relevant storefront, possible values - 'azure, amp, appsource'. Default='azure'",
+            "description": "Return products available in Azure Portal Marketplace, AppSource or Azure Marketplace portal. The possible values are: \n- `azure` - Azure Portal Marketplace\n- `amp` - Azure Marketplace portal\n- `appsource` - AppSource portal\nThe default value is 'azure'",
             "default": "azure"
           },
           {
@@ -181,7 +181,7 @@
             "type": "array",
             "name": "locations",
             "in": "query",
-            "description": "Locations to search. Enumeration of the Azure datacenter regions. See https://azure.microsoft.com/regions/",
+            "description": "Retrurn products available in selected location. Enumeration of the Azure datacenter regions. See https://azure.microsoft.com/regions/",
             "collectionFormat": "multi",
             "items": {
               "type": "string"
@@ -270,7 +270,7 @@
         "tags": [
           "ListingPublicSkus"
         ],
-        "summary": "Public Skus API provides an unauthenticated endpoint for consuming commercial Marketplace public skus. In addition, it enables filtering on selected sku properties or attributes, and search. Each API request must include an API key allocated to you (see X-API-Key description).Send an email to MKPL_Platform_API_DL@microsoft.com including the following details to get the API Key:\n- Customer name\n- Service/Product name\n- AD Registered App ID (if available)\n- Focal point email\n- Use case/scenario\n- Expected traffic volume, including peak requests per second (daily)",
+        "summary": "Public Skus API provides an unauthenticated endpoint for consuming commercial 3rd party Marketplace public skus and 1st party Azure skus. In addition, it enables Odata filtering on selected sku properties or attributes. Each API request must include an API key allocated to you (see X-API-Key description).Send an email to MKPL_Platform_API_DL@microsoft.com including the following details to get the API Key:\n- Customer name\n- Service/Product name\n- AD Registered App ID (if available)\n- Focal point email\n- Use case/scenario\n- Expected traffic volume, including peak requests per second (daily)",
         "x-ms-examples": {
           "Product_Get": {
             "$ref": "./examples/PublicSkus_List.json"
@@ -311,7 +311,7 @@
             "type": "array",
             "name": "locations",
             "in": "query",
-            "description": "Locations to search. Enumeration of the Azure datacenter regions. See https://azure.microsoft.com/regions/",
+            "description": "Retrurn skus available in selected location. Enumeration of the Azure datacenter regions. See https://azure.microsoft.com/regions/",
             "collectionFormat": "multi",
             "items": {
               "type": "string"
@@ -481,7 +481,7 @@
           "description": "Unique product identifier"
         },
         "productType": {
-          "description": "The delivery method or deployment model. Possible values:\n- `SaaS` - The product is a Software solution purchased on pay-as-you-go basis from a cloud service provider\n- `VirtualMachine` -  The product is Image service instances with usage-based pricing\n- `AzureApplication` - Products published as Solution Templates (ST) or Azure Managed Apps (AMA) plans that deploy Azure resources to the customer tenant \n- `DynamicsCE` - All Dynamics products except for DynamicsBC and DynamicsOps\n- `DynamicsBC` - Dynamics 365 business Central \n- `Container` -  The product is delivered as Container\n- `DynamicsOps` - Dynamics 365 Operations Apps\n- `None` - Product type returned for Azure Services, Container Extensions and VM extensions\n- `IotEdgeModules` - Resource is delivered as IoT Edge Module\n- `ContainerApps` - Resource is delivered as Container App\n- `ConsultingServices` Consulting Services (available only in Azure Marketplace as listing offers)\n- `ManagedServices` - The product is delivered as Managed Service\n- `PowerBI` - Power BI products\n- `CosellOnly` - Products available in scope of Co-Sell program only\n- `PowerBIVisuals` - Power BI Visuals products\n- `Office365` - Office 365 products\n- `DevService` - Dev Service\n- `AADApps` - Azure Active Directory Applications\n- `VisualStudioExtension` - Visual Studio Extensions",
+          "description": "The delivery method or deployment model. Possible values:\n- `SaaS` - The product is a Software solution purchased on pay-as-you-go basis from a cloud service provider\n- `VirtualMachine` -  The product is Image service instances with usage-based pricing\n- `AzureApplication` - Products published as Solution Templates (ST) or Azure Managed Apps (AMA) plans that deploy Azure resources to the customer tenant \n- `DynamicsCE` - All Dynamics products except for DynamicsBC and DynamicsOps\n- `DynamicsBC` - Dynamics 365 business Central \n- `Container` -  The product is delivered as Container\n- `DynamicsOps` - Dynamics 365 Operations Apps\n- `None` - Product type returned for Azure Services, Container Extensions and VM extensions\n- `IotEdgeModules` - Resource is delivered as IoT Edge Module\n- `ContainerApps` - Resource is delivered as Container App\n- `ConsultingServices` Consulting Services (available only in Azure Marketplace as listing offers)\n- `ManagedServices` - The product is delivered as Managed Service\n- `PowerBI` - Power BI products\n- `CosellOnly` - Products available in scope of Co-Sell program only\n- `PowerBIVisuals` - Power BI Visuals products\n- `Office365` - Office 365 products\n- `DevService` - Dev Service\n- `AADApps` - Azure Active Directory Applications\n- `VisualStudioExtension` - Visual Studio Extensions\n- `SolutionTemplate` - Solution Template plan type (applicable to Azure Applications only)\n- `ManagedApplication` - Managed Application plan type (applicable to Azure Applications only)",
           "allOf": [
             {
               "$ref": "#/definitions/ProductType"
@@ -613,7 +613,7 @@
         },	
         "attributes": {
           "type": "array",
-          "description": "The product attributes",
+          "description": "Set of products attributes (varies per product type), where each attribute is represented by a pair of key (attribute name) and value(attribute value)",
           "items": {
             "$ref": "#/definitions/Attribute"
           }
@@ -775,7 +775,7 @@
     },
     "AzureBenefit": {
       "type": "string",
-      "description": "Eligibility for Azure consumption commitment benefit (https://docs.microsoft.com/en-us/marketplace/azure-consumption-commitment-benefit)",
+      "description": "Eligibility for Azure consumption commitment benefit (https://docs.microsoft.com/en-us/marketplace/azure-consumption-commitment-benefit). Possible values: \n- `Eligible` - The product is eligible for Azure consumption commitment benefit\n- `NotEligible` - The product is not eligible for Azure consumption commitment benefit",
       "enum": [
         "Eligible",
         "NotEligible"
@@ -800,7 +800,7 @@
     },
     "PublisherType": {
       "type": "string",
-      "description": "A value indicating whether this is a Microsoft or third party product",
+      "description": "A value indicating whether this is a Microsoft or third party product. Possible values:\n- `Microsoft` - Product is published by Microsoft (1st party product)\n- `Third Party` - Product is published by Third Party Vendor",
       "enum": [
         "Microsoft",
         "ThirdParty"
@@ -812,7 +812,7 @@
     },
     "PublishingStage": {
       "type": "string",
-      "description": "The product publishing stage. Possible values are: Preview, Public",
+      "description": "Product publishing stage. Possible values:\n- `Preview` - Product is available to restricted audience\n- `Public` - Product is publicly available in the Marketplace",
       "enum": [
         "Preview",
         "Public"
@@ -824,7 +824,7 @@
     },
     "ProductType": {
       "type": "string",
-      "description": "The delivery method or deployment model",
+      "description": "The delivery method or deployment model. Possible values:\n- `SaaS` - The product is a Software solution purchased on pay-as-you-go basis from a cloud service provider\n- `VirtualMachine` -  The product is Image service instances with usage-based pricing\n- `AzureApplication` - Products published as Solution Templates (ST) or Azure Managed Apps (AMA) plans that deploy Azure resources to the customer tenant \n- `DynamicsCE` - All Dynamics products except for DynamicsBC and DynamicsOps\n- `DynamicsBC` - Dynamics 365 business Central \n- `Container` -  The product is delivered as Container\n- `DynamicsOps` - Dynamics 365 Operations Apps\n- `None` - Product type returned for Azure Services, Container Extensions and VM extensions\n- `IotEdgeModules` - Resource is delivered as IoT Edge Module\n- `ContainerApps` - Resource is delivered as Container App\n- `ConsultingServices` Consulting Services (available only in Azure Marketplace as listing offers)\n- `ManagedServices` - The product is delivered as Managed Service\n- `PowerBI` - Power BI products\n- `CosellOnly` - Products available in scope of Co-Sell program only\n- `PowerBIVisuals` - Power BI Visuals products\n- `Office365` - Office 365 products\n- `DevService` - Dev Service\n- `AADApps` - Azure Active Directory Applications\n- `VisualStudioExtension` - Visual Studio Extensions\n- `SolutionTemplate` - Solution Template plan type (applicable to Azure Applications only)\n- `ManagedApplication` - Managed Application plan type (applicable to Azure Applications only)",
       "enum": [
         "None",
         "DevService",
@@ -932,7 +932,7 @@
     },
     "PlanSummary": {
       "type": "object",
-      "description": "Summary description of the plan",
+      "description": "Returns a subset of Plan attributes",
       "required": [
         "planType"
       ],
@@ -958,7 +958,7 @@
           ]
         },
         "cspState": {
-          "description": "A value indicating whether the product is available for purchase through CSP channel",
+          "description": "Value showing whether the plan is available for purchase through CSP channel. Possible values: \n- `OptIn` - Plan configured CSP program opt-in for any partner in the CSP Program\n- `Optout` - Plan configured CSP program opt-out\n- `SelectiveOptIn` - Plan configured CSP program opt-in for specific partners in the CSP program ISV selects",
           "allOf": [
             {
               "$ref": "#/definitions/CspState"
@@ -1046,7 +1046,7 @@
     },
     "VmArchitectureType": {
       "type": "string",
-      "description": "VM Architecture Type",
+      "description": "VM Architecture Type. Applicable to Virtual Machine products only. PossibleValues:\n- `Arm64` - The VM image architecture of the plan is Arm64\n- `X64Gen1` - The VM image architecture of the plan is X64 Generation1\n- `X64Gen2` - The VM image architecture of the plan is X64 Generation2",
       "enum": [
         "X64Gen1",
         "X64Gen2",
@@ -1059,7 +1059,7 @@
     },
     "CspState": {
       "type": "string",
-      "description": "Value showing whether the plan is available for purchase through CSP channel. For more information see, https://docs.microsoft.com/en-us/azure/marketplace/cloud-solution-providers",
+      "description": "Value showing whether the plan is available for purchase through CSP channel. Possible values: \n- `OptIn` - Plan configured CSP program opt-in for any partner in the CSP Program\n- `Optout` - Plan configured CSP program opt-out\n- `SelectiveOptIn` - Plan configured CSP program opt-in for specific partners in the CSP program ISV selects.\nFor more information see, https://docs.microsoft.com/en-us/azure/marketplace/cloud-solution-providers",
       "enum": [
         "OptIn",
         "OptOut",
@@ -1084,7 +1084,7 @@
         },
         "relatedSkus": {
           "type": "array",
-          "description": "Pointing to a planId of plan related to this plan",
+          "description": "Pointing to a related SKU object",
           "items": {
             "$ref": "#/definitions/PlanSkuRelation"
           }
@@ -1093,7 +1093,7 @@
     },
     "PlanSkuRelation": {
       "type": "object",
-      "description": "Related plan information",
+      "description": "Pointing to a related SKU object",
       "properties": {
         "sku": {
           "description": "The Sku",
@@ -1592,7 +1592,7 @@
         },
         "skuAttributes": {
           "type": "array",
-          "description": "List of SKU attributes",
+          "description": "Set of SKU attributes (varies per sku type), where each attribute is represented by a pair of key (attribute name) and value(attribute value)",
           "items": {
             "$ref": "#/definitions/Attribute"
           }
@@ -1985,7 +1985,7 @@
     },
     "CatalogApiResponse": {
       "type": "object",
-      "description": "Response page composed of a list of Product Summaries together with a next page link",
+      "description": "Response page composed of a list of Product objects(that includes subset of product attributes) together with a next page link.\nUsually product attributes returned in the list are used to build product tiles for Marketplace Gallery.\nNote:note The max number of items returned per page is 100. In specific cases for performance optimization, please contact Microsoft Marketplace team MKPL_Platform_API_DL@microsoft.com",
       "properties": {
         "items": {
           "type": "array",
@@ -2154,7 +2154,7 @@
           "format": "int32"
         },
         "cspState": {
-          "description": "A value indicating whether the product is available for purchase through CSP channel",
+          "description": "Value showing whether the plan is available for purchase through CSP channel. Possible values: \n- `OptIn` - Plan configured CSP program opt-in for any partner in the CSP Program\n- `Optout` - Plan configured CSP program opt-out\n- `SelectiveOptIn` - Plan configured CSP program opt-in for specific partners in the CSP program ISV selects",
           "allOf": [
             {
               "$ref": "#/definitions/CspState"
@@ -2191,7 +2191,7 @@
     },		
     "ProductSummary": {
       "type": "object",
-      "description": "Summary description of the product",
+      "description": "Returns a subset of Product attributes",
       "required": [
         "productType"
       ],
@@ -2224,7 +2224,7 @@
           "description": "Publisher id"
         },
         "azureBenefit": {
-          "description": "Eligibility for Azure consumption commitment benefit (https://docs.microsoft.com/en-us/marketplace/azure-consumption-commitment-benefit). Possible values: \n- `Eligible` - Product is eligible for Azure consumption commitment benefit\n- `NotEligible` - Product is not eligible for Azure consumption commitment benefit",
+          "description": "Eligibility for Azure consumption commitment benefit (https://docs.microsoft.com/en-us/marketplace/azure-consumption-commitment-benefit). Possible values: \n- `Eligible` - The product is eligible for Azure consumption commitment benefit\n- `NotEligible` - The product is not eligible for Azure consumption commitment benefit",
           "allOf": [
             {
               "$ref": "#/definitions/AzureBenefit"
@@ -2403,7 +2403,7 @@
         },	
         "attributes": {
           "type": "array",
-          "description": "The product attributes",
+          "description": "Set of products attributes (varies per product type), where each attribute is represented by a pair of key (attribute name) and value(attribute value)",
           "items": {
             "$ref": "#/definitions/Attribute"
           }
