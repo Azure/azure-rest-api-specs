@@ -3133,10 +3133,18 @@
             "description": "Accepted -- Create or update request accepted; operation will complete asynchronously",
             "schema": {
               "$ref": "#/definitions/backup"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -3181,13 +3189,21 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted -- Create or update request accepted; operation will complete asynchronously"
+            "description": "Accepted -- Create or update request accepted; operation will complete asynchronously",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "NoContent -- Resource does not exist."
           },
           "default": {
-            "description": "Error response describing why the operation failed."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -4294,7 +4310,10 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -4337,7 +4356,10 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -4450,10 +4472,18 @@
             "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/backupVault"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -4495,13 +4525,21 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted -- Delete request accepted; operation will complete asynchronously"
+            "description": "Accepted -- Delete request accepted; operation will complete asynchronously",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "NoContent -- Resource does not exist."
           },
           "default": {
-            "description": "Error response describing why the operation failed."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -7471,10 +7509,6 @@
     "backupPatch": {
       "description": "Backup patch",
       "type": "object",
-      "x-ms-azure-resource": true,
-      "required": [
-        "properties"
-      ],
       "properties": {
         "properties": {
           "description": "Backup Patch Properties",
@@ -7581,16 +7615,6 @@
       "description": "Backup patch properties",
       "type": "object",
       "properties": {
-        "backupId": {
-          "title": "backupId",
-          "type": "string",
-          "readOnly": true,
-          "description": "UUID v4 used to identify the Backup",
-          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-          "maxLength": 36,
-          "minLength": 36,
-          "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
-        },
         "label": {
           "type": "string",
           "description": "Label for backup"
