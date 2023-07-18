@@ -1,0 +1,282 @@
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
+
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.Core;
+using OpenAPI;
+
+//@useAuth(ApiKeyAuth<ApiKeyLocation.header, "SharedAccessKey">)
+@useAuth(AzureAuth)
+@service({
+  title: "Azure.SchemaRegistry",
+})
+
+// Supported operations.
+//  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups?api-version={apiVersion}
+//  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/$schemas/{id}?api-version={apiVersion}
+//  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{schemaName}/versions/?api-version={apiVersion}
+//  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{schemaName}/versions/{schemaVersion}?api-version={apiVersion}
+//  POST https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{schemaName}/:get-id?api-version={apiVersion}
+//  PUT https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{schemaName}?api-version={apiVersion}
+@server(
+  "{endpoint}",
+  "The Schema Registry service endpoint.",
+  {
+    // useSchemePrefix: true --> just specify https:// in the url
+    @doc("The Schema Registry service endpoint, for example my-namespace.servicebus.windows.net.")
+    @extension("x-ms-parameter-location", "client")
+    @extension("x-ms-skip-url-encoding", true)
+    endpoint: url,
+  }
+)
+@versioned(ServiceApiVersions)
+namespace Azure.SchemaRegistry;
+
+@doc("Azure Core Version")
+enum ServiceApiVersions {
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @doc("Azure Schema Registry 2022-10 Version")
+  v2022_10: "2022-10",
+}
+
+@doc("Azure Active Directory OAuth2 Flow")
+model AzureAuth
+  is OAuth2Auth<[
+    {
+      type: OAuth2FlowType.implicit;
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
+      // add description to below: "impersonate your user account"
+      scopes: ["user_impersonation"];
+    }
+  ]>;
+
+// ROUTES
+alias resourceOperations = Azure.Core.StandardResourceOperations;
+
+interface SchemaOperations {
+  // List schema groups
+  //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups?api-version={apiVersion}
+  @summary("Get list of schema groups.")
+  @doc("Gets the list of schema groups user is authorized to access.")
+  @sharedRoute
+  // TODO: add x-ms-examples
+  // TODO: check if return type should be SchemaGroups
+  // TODO: add response specifics
+  op listSchemaGroups is resourceOperations.ResourceList<SchemaGroup>;
+
+  //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/$schemas/{id}?api-version={apiVersion}
+  @summary("Get a registered schema by its unique ID reference.")
+  @doc("Gets a registered schema by its unique ID.  Azure Schema Registry guarantees that ID is unique within a namespace. Operation response type is based on serialization of schema requested.")
+  // TODO: add x-ms-examples
+  // TODO: add response specifics
+  getSchemaById is resourceOperations.ResourceRead<SchemaId>;
+
+  //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{schemaName}/versions/?api-version={apiVersion}
+  @summary("List schema versions.")
+  @doc("Gets the list of all versions of one schema.")
+  // TODO: add x-ms-examples
+  // TODO: add response specifics
+  op listSchemaVersions is resourceOperations.ResourceList<Version>;
+
+  //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{schemaName}/versions/{schemaVersion}?api-version={apiVersion}
+  @summary("Get specific schema versions.")
+  @doc("Gets one specific version of one schema.")
+  op getSchemaByVersion is resourceOperations.ResourceRead<Version>;
+  //  POST https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{schemaName}:get-id?api-version={apiVersion}
+  @summary("Get ID for existing schema.")
+  @doc("Gets the ID referencing an existing schema within the specified schema group, as matched by schema content comparison.")
+  @action("get-id")
+  op getSchemaIdByContent is resourceOperations.ResourceAction<
+
+    Schema,
+    {
+      // request headers
+      ...SchemaContentType;
+
+      // request body
+      @doc("String representation (UTF-8) of the registered schema.")
+      @body
+      schemaContent: bytes;
+    },
+    {
+      // response headers
+      ...SchemaHeaders;
+
+      // TODO: not emitting a `produces` property in openapi
+    }
+  >;
+
+  //  PUT https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{schemaName}?api-version={apiVersion}
+  @summary("Register schema.")
+  @doc("Registers")
+  // TODO: add x-ms-examples
+  // TODO: add response specifics
+  op registerSchema is resourceOperations.ResourceCreateOrReplace<Schema>;
+
+// TODO: probably above won't work, so figure out how to specify parameters below
+// parameters both in the route + body
+//  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Register operation does not use create/replace"
+//  @summary("Register new schema")
+//  @doc("Register new schema. If schema of specified name does not exist in specified group, schema is created at version 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.\n")
+//  // TODO: how to specify route params?
+//  //@route("/$schemaGroups/{groupName}/schemas/{schemaName}")
+//  @put
+//  // TODO: add x-ms-examples
+//  // TODO: add response specifics
+//  op registerSchema is Azure.Core.Foundations.Operation<
+//    {
+//      ...SchemaContentType;
+//      // request parameters
+//      ...SchemaGroup;
+//      ...Schema;
+//
+//      //@doc("String representation (UTF-8) of the registered schema.")
+//      //@body
+//      //schemaContent: bytes;
+//    },
+//    SchemaHeaders & Azure.Core.Foundations.ErrorResponse
+//  >;
+}
+
+// Models
+
+@doc("The content type for given schema. Each schema type has an associated content-type.")
+model SchemaContentType {
+  @doc("The content type for given schema.")
+  @header("content-type")
+  contentType: "application/json; serialization=Avro" | "application/json; serialization=json" | "text/plain; charset=utf-8";
+}
+
+@doc("No Content.")
+model SchemaHeaders {
+  @doc("URL location of schema, identified by schema group, schema name, and version.")
+  @header
+  location: string;
+
+  @doc("References specific schema in registry namespace.")
+  @header
+  schemaId: string;
+
+  @doc("URL location of schema, identified by schema ID.")
+  @header
+  schemaIdLocation: string;
+
+  @doc("References schema group.")
+  @header
+  schemaGroupName: string;
+
+  @doc("References schema name.")
+  @header
+  schemaName: string;
+
+  @doc("Version of the returned schema.")
+  @header
+  schemaVersion: int32;
+}
+
+@doc("Object received from the registry containing schema identifiers.")
+@resource("$schemaGroups/$schemas")
+model SchemaId {
+  @key("id")
+  @doc("Schema ID that uniquely identifies a schema in the registry namespace.")
+  @visibility("read")
+  id: string;
+}
+
+@doc("Schema Group resource.")
+@resource("$schemaGroups")
+model SchemaGroup {
+  @key("groupName")
+  @doc("Name of schema group.")
+  @visibility("read")
+  groupName: string;
+}
+
+@doc("Schemas resource.")
+@resource("schemas")
+@parentResource(SchemaGroup)
+model Schema {
+  @key("schemaName")
+  @doc("Name of schema.")
+  @visibility("read")
+  @maxLength(50)
+  @pattern("^[A-Za-z0-9][^\\\\/$:]*$")
+  @extension("x-ms-parameter-location", "method")
+  schemaName: string;
+
+  // TODO: possible to overwrite body of resource to be below?
+  //@doc("String representation (UTF-8) of the registered schema.")
+  //@body
+  //schemaContent: bytes;
+}
+
+@doc("Schema versions resource.")
+@resource("versions")
+@parentResource(Schema)
+model Version {
+  @key("schemaVersion")
+  @doc("Version number of specific schema.")
+  @visibility("read")
+  @extension("x-ms-parameter-location", "method")
+  schemaVersion: int32;
+}
+
+@doc("Object received from the registry containing the list of schema groups and link to next batch page.")
+model SchemaGroups {
+  @doc("Array of schema groups.")
+  @visibility("read")
+  groups: SchemaGroup[];
+
+  @doc("URI to next batch of schema groups.")
+  @visibility("read")
+  nextLink: string;
+}
+
+@doc("Object received from the registry containing the list of schema versions and link to next batch page.")
+model SchemaVersions {
+  @doc("Array of schema version integers.")
+  @visibility("read")
+  versions: Versions[];
+
+  @doc("URI to next batch of schema versions.")
+  @visibility("read")
+  nextLink: string;
+}
+
+//@doc("Faked shared model")
+//model FakedSharedModel {
+//  @doc("The tag.")
+//  tag: string;
+//
+//  @doc("The created date.")
+//  createdDate: utcDateTime;
+//}
+//
+//interface Widgets {
+//  @doc("Fetch a Widget by name.")
+//  getWidget is ResourceRead<Widget>;
+//
+//  @doc("Gets status of a Widget operation.")
+//  getWidgetOperationStatus is GetResourceOperationStatus<Widget>;
+//
+//  @doc("Creates or updates a Widget asynchronously.")
+//  @pollingOperation(Widgets.getWidgetOperationStatus)
+//  createOrUpdateWidget is LongRunningResourceCreateOrUpdate<Widget>;
+//
+//  @doc("Delete a Widget asynchronously.")
+//  @pollingOperation(Widgets.getWidgetOperationStatus)
+//  deleteWidget is LongRunningResourceDelete<Widget>;
+//
+//  @doc("List Widget resources")
+//  listWidgets is ResourceList<
+//    Widget,
+//    {
+//      parameters: StandardListQueryParameters;
+//    }
+//  >;
+//}
+//
