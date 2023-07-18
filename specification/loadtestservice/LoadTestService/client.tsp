@@ -45,8 +45,10 @@ interface TestRunOperations {
     GetTestRunFile is LoadTestRun.GetTestRunFile;
     ListMetricDimensionValues is LoadTestRun.ListMetricDimensionValues;
     @projectedName("python", "get_metric_definitions")
+    @projectedName("java", "getMetricDefinitions")
     ListMetricDefinitions is LoadTestRun.ListMetricDefinitions;
     @projectedName("python", "get_metric_namespaces")
+    @projectedName("java", "getMetricNamespaces")
     ListMetricNamespaces is LoadTestRun.ListMetricNamespaces;
     ListMetrics is LoadTestRun.ListMetrics;
     ListTestRuns is LoadTestRun.ListTestRuns;
