@@ -472,7 +472,7 @@ numeric, underscore or hyphen characters.
 
       @doc("The aggregation")
       @query
-      aggregation: string;
+      aggregation?: string;
 
       // TODO: check DPG sdks, this is the correct definition but might cause breaks for some languages
       @doc("The interval (i.e. timegrain) of the query.")
