@@ -344,3 +344,15 @@ terraform:
     clear-output-folder: false
 ```
 
+# Suppressions
+
+``` yaml
+suppressions:
+  - code: LroPostReturn
+    reason: The linter incorrectly flags LRO POST operations with no payload response, should allow to be a 202/204 NoContent for the LRO empty response case
+    from: netapp.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/backupVaults/{backupVaultName}/backups/{backupName}/restoreFiles"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/backupVaults/{backupVaultName}/backups/{backupName}/migrateBackups"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/migrateBackups"].post
+```
