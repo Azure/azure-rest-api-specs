@@ -17,7 +17,8 @@ else {
   Write-Host "git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff --name-only `"$TargetBranch...$SourceBranch`" -- | Where-Object {`$_.StartsWith('specification')}"
   $diffFiles = git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff --name-only `"$TargetBranch...$SourceBranch`" --
   $engFiles = $diffFiles | Where-Object {$_.StartsWith('eng')}
-  if ($engFiles) {
+  $repoRootFiles = $diffFiles | Where-Object {$_ -notmatch '/'}
+  if ($engFiles -or $repoRootFiles) {
     $tspFiles = $allTspFiles
   }
   else {
