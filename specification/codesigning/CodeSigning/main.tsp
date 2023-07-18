@@ -52,7 +52,7 @@ interface CertificateProfileOperations {
   @route("/codesigningaccounts/{codeSigningAccountName}/certificateprofiles/{certificateProfileName}/sign/{operationId}")
   getCodeSigningStatus is Foundations.GetOperationStatus<
     CodeSigningOptions,
-    CodeSignOperationStatus
+    CodeSignResult
   >;
 
   @summary("Gets the codesigning root certificate on the certificate chain for that account and profile name.")
