@@ -168,7 +168,7 @@ model LuisParameters extends Record<unknown> {
 model LuisCallingOptions {
   @doc("Enable verbose response.")
   verbose?: boolean;
-  
+
   @doc("Save log to add in training utterances later.")
   log?: boolean;
 
