@@ -17,7 +17,7 @@ using Azure.Core.Traits;
   title: "Microsoft Cognitive Language Service - Analyze Conversations",
 })
 @server(
-  "{endpoint}/language",
+  "{endpoint}",
   "Single server endpoint",
   {
     @doc("Supported Cognitive Services endpoint (e.g., https://<resource-name>.api.cognitiveservices.azure.com).")
@@ -1542,12 +1542,52 @@ op analyzeConversation is Azure.Core.StandardResourceOperations.ResourceCollecti
   AnalyzeConversationTaskResult
 >;
 
-// @doc("Submit a collection of conversations for analysis. Specify one or more unique tasks to be executed.")
-// @summary("Submit analysis job for conversations")
+@added(Versions.v2023_04_01)
+@doc("Submit a collection of conversations for analysis. Specify one or more unique tasks to be executed.")
+@summary("Submit analysis job for conversations")
+@TypeSpec.Rest.actionSeparator("/")
+@TypeSpec.Rest.action("analyze-conversations/jobs")
+op submitJob is Azure.Core.StandardResourceOperations.ResourceCollectionAction<
+  Conversations,
+  AnalyzeConversationJobsInput,
+  AnalyzeConversationJobResult
+>;
+
+// @added(Versions.v2023_04_01)
+// @doc("Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.")
+// @summary("Get analysis status and results")
 // @TypeSpec.Rest.actionSeparator("/")
 // @TypeSpec.Rest.action("analyze-conversations/jobs")
-// op submitJob is Azure.Core.StandardResourceOperations.ResourceCollectionAction<
+// op jobStatus is Azure.Core.StandardResourceOperations.GetResourceOperationStatus<
+// Conversations,
+// AnalyzeConversationJobState>;
+
+
+// @added(Versions.v2023_04_01)
+// @doc("Cancel a long-running job for text analysis of conversations.")
+// @summary("Cancel a long-running Text Analysis conversations job")
+// @TypeSpec.Rest.actionSeparator("/")
+// @TypeSpec.Rest.action("analyze-conversations/jobs:cancel")
+// @pollingOperation(jobStatus)
+// op cancelJob is Azure.Core.StandardResourceOperations.LongRunningResourceCollectionAction<
 //   Conversations,
-//   AnalyzeConversationJobsInput,
+//   JobId,
 //   AnalyzeConversationTaskResult
 // >;
+
+@added(Versions.v2023_04_01)
+@doc("show stats parameter")
+model ShowStats{
+  @query
+  @doc("(Optional) if set to true, response will contain request and document level statistics.")
+  showStats: boolean;
+}
+
+@added(Versions.v2023_04_01)
+@doc("Job ID parameter")
+model JobId{
+  @path
+  @format("uuid")
+  @doc("Job ID")
+  jobId: string;
+}

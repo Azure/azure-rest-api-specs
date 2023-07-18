@@ -13,7 +13,7 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}/language",
+    "hostTemplate": "{endpoint}",
     "useSchemePrefix": false,
     "parameters": [
       {
@@ -68,6 +68,46 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/AnalyzeConversationTaskResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/language/analyze-conversations/jobs": {
+      "post": {
+        "operationId": "SubmitJob",
+        "summary": "Submit analysis job for conversations",
+        "description": "Submit a collection of conversations for analysis. Specify one or more unique tasks to be executed.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeConversationJobsInput"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeConversationJobResult"
             }
           },
           "default": {
@@ -1529,24 +1569,6 @@
         "error"
       ]
     },
-    "DocumentErrorItem": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ID of the input document."
-        },
-        "error": {
-          "$ref": "#/definitions/ErrorResponseItem",
-          "description": "Error encountered."
-        }
-      },
-      "description": "Contains details of errors encountered during a job execution.",
-      "required": [
-        "id",
-        "error"
-      ]
-    },
     "EntitySubtype": {
       "type": "object",
       "properties": {
@@ -1686,19 +1708,6 @@
       }
     },
     "ErrorResponse": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "The error object."
-        }
-      },
-      "description": "Error response.",
-      "required": [
-        "error"
-      ]
-    },
-    "ErrorResponseItem": {
       "type": "object",
       "properties": {
         "error": {
@@ -2013,7 +2022,7 @@
         "errors": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ErrorResponseItem"
+            "$ref": "#/definitions/ErrorResponse"
           },
           "x-ms-identifiers": [],
           "description": "errors",
@@ -2023,6 +2032,20 @@
       "description": "job errors",
       "required": [
         "errors"
+      ]
+    },
+    "JobId": {
+      "type": "object",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "Job ID",
+          "format": "uuid"
+        }
+      },
+      "description": "Job ID parameter",
+      "required": [
+        "jobId"
       ]
     },
     "JobState": {
@@ -2058,7 +2081,7 @@
         "errors": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ErrorResponseItem"
+            "$ref": "#/definitions/ErrorResponse"
           },
           "x-ms-identifiers": [],
           "description": "errors",
@@ -2698,7 +2721,7 @@
         "errors": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DocumentErrorItem"
+            "$ref": "#/definitions/DocumentError"
           },
           "description": "Errors by document id.",
           "x-typespec-name": "DocumentError[]"
@@ -3100,6 +3123,19 @@
       "description": "To configure Answer span prediction feature.",
       "required": [
         "enable"
+      ]
+    },
+    "ShowStats": {
+      "type": "object",
+      "properties": {
+        "showStats": {
+          "type": "boolean",
+          "description": "(Optional) if set to true, response will contain request and document level statistics."
+        }
+      },
+      "description": "show stats parameter",
+      "required": [
+        "showStats"
       ]
     },
     "SourceFilter": {
