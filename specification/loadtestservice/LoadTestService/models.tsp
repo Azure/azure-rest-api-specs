@@ -856,7 +856,7 @@ model MetricDimensions {
 
   @doc("Metric name")
   @query
-  metricName?: string;
+  metricName: string;
 
   @doc("Metric namespace to query metric definitions for.")
   @query
@@ -868,7 +868,7 @@ model MetricDimensions {
   """)
   @query
   @projectedName("python", "time_interval")
-  timespan?: string;
+  timespan: string;
 };
 
 @doc("Test run app component")
