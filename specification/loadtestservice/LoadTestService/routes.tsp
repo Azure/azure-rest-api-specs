@@ -497,7 +497,7 @@ The timespan of the query. It is a string with the following format
 
       @doc("Metric dimension filter ")
       @body
-      body: MetricRequestPayload;
+      body?: MetricRequestPayload;
     },
     Metrics
   >;
