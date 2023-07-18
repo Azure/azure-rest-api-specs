@@ -13,6 +13,7 @@ using Azure.Core;
 using Azure.Core.Traits;
 
 @useAuth(apim_key)
+@doc("The language service conversations API is a suite of natural language processing (NLP) skills that can be used to analyze structured conversations (textual or spoken). The synchronous API in this suite accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, Conversational Language Understanding, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\n\n In some cases, this API needs to forward requests and responses between the caller and an upstream service. The asynchronous APIs in this suite enable tasks like Conversation Summarization and Conversational PII detection.")
 @service({
   title: "Microsoft Cognitive Language Service - Analyze Conversations",
 })
@@ -162,13 +163,13 @@ model LuisParameters extends Record<unknown> {
 model LuisCallingOptions {
   @doc("Enable verbose response.")
   verbose?: boolean;
-
+  
   @doc("Save log to add in training utterances later.")
   log?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("Set true to show all intents.")
-  @projectedName("json", "show-all-intents")
-  showAllIntents?: boolean;
+  "show-all-intents"?: boolean;
 
   @doc("The timezone offset for the location of the request.")
   timezoneOffset?: float32;
@@ -176,9 +177,9 @@ model LuisCallingOptions {
   @doc("Enable spell checking.")
   spellCheck?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The subscription key to use when enabling Bing spell check")
-  @projectedName("json", "bing-spell-check-subscription-key")
-  bingSpellCheckSubscriptionKey?: string;
+  "bing-spell-check-subscription-key"?: string;
 }
 
 @doc("This is a set of request parameters for Customized Conversation projects.")
@@ -319,7 +320,7 @@ model EntitySubtype extends BaseExtraInformation {
   extraInformationKind: extraInformationKind.EntitySubtype;
 
   @doc("The Subtype of an extracted entity type.")
-  value: string;
+  value?: string;
 }
 
 @doc("The list key extra data kind.")
@@ -328,7 +329,7 @@ model ListKey extends BaseExtraInformation {
   extraInformationKind: extraInformationKind.ListKey;
 
   @doc("The canonical form of the extracted entity.")
-  key: string;
+  key?: string;
 }
 
 @doc("The abstract base class for entity resolutions.")
@@ -499,16 +500,16 @@ model TemporalSpanResolution extends BaseResolution {
   resolutionKind: resolutionKind.TemporalSpanResolution;
 
   @doc("represents the resolution of a date and/or time span.")
-  begin: TimeExpression;
+  begin?: TimeExpression;
 
   @doc("represents the resolution of a date and/or time span.")
-  end: TimeExpression;
+  end?: TimeExpression;
 
   @doc("An optional duration value formatted based on the ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations)")
-  duration: string;
+  duration?: string;
 
   @doc("An optional modifier of a date/time instance.")
-  modifier: TemporalModifier;
+  modifier?: TemporalModifier;
 }
 
 @doc("represents the resolution of numeric intervals.")
@@ -643,7 +644,7 @@ enum AreaUnit {
 }
 
 //todo: add enum member descriptions
-@doc("Datetime entity kind.")
+@doc("The Datetime SubKind.")
 enum DateTimeSubKind {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Time' should have a documentation or description, please use decorator @doc to add it."
   Time,

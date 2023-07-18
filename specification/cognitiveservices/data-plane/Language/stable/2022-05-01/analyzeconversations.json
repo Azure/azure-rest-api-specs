@@ -3,6 +3,7 @@
   "info": {
     "title": "Microsoft Cognitive Language Service - Analyze Conversations",
     "version": "2022-05-01",
+    "description": "The language service conversations API is a suite of natural language processing (NLP) skills that can be used to analyze structured conversations (textual or spoken). The synchronous API in this suite accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, Conversational Language Understanding, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\n\n In some cases, this API needs to forward requests and responses between the caller and an upstream service. The asynchronous APIs in this suite enable tasks like Conversation Summarization and Conversational PII detection.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -298,15 +299,18 @@
           "format": "double",
           "description": "Minimum threshold score for answers, value ranges from 0 to 1.",
           "minimum": 0,
-          "maximum": 1
+          "maximum": 1,
+          "x-ms-client-name": "confidenceThreshold"
         },
         "context": {
           "$ref": "#/definitions/KnowledgeBaseAnswerContext",
-          "description": "Context object with previous QnA's information."
+          "description": "Context object with previous QnA's information.",
+          "x-ms-client-name": "answerContext"
         },
         "rankerType": {
           "$ref": "#/definitions/RankerKind",
-          "description": "Type of ranker to be used."
+          "description": "Type of ranker to be used.",
+          "x-ms-client-name": "rankerKind"
         },
         "filters": {
           "$ref": "#/definitions/QueryFilters",
@@ -314,7 +318,8 @@
         },
         "answerSpanRequest": {
           "$ref": "#/definitions/ShortAnswerOptions",
-          "description": "To configure Answer span prediction feature."
+          "description": "To configure Answer span prediction feature.",
+          "x-ms-client-name": "shortAnswerOptions"
         },
         "includeUnstructuredSources": {
           "type": "boolean",
@@ -901,7 +906,7 @@
     },
     "DateTimeSubKind": {
       "type": "string",
-      "description": "Datetime entity kind.",
+      "description": "The Datetime SubKind.",
       "enum": [
         "Time",
         "Date",
@@ -923,9 +928,6 @@
         }
       },
       "description": "The concrete entity Subtype model of extra information.",
-      "required": [
-        "value"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/BaseExtraInformation"
@@ -1106,12 +1108,14 @@
           "format": "double",
           "description": "Answer confidence score, value ranges from 0 to 1.",
           "minimum": 0,
-          "maximum": 1
+          "maximum": 1,
+          "x-ms-client-name": "confidence"
         },
         "id": {
           "type": "integer",
           "format": "int32",
-          "description": "ID of the QnA result."
+          "description": "ID of the QnA result.",
+          "x-ms-client-name": "qnaId"
         },
         "source": {
           "type": "string",
@@ -1127,7 +1131,8 @@
         },
         "answerSpan": {
           "$ref": "#/definitions/AnswerSpan",
-          "description": "Answer span object of QnA with respect to user's question."
+          "description": "Answer span object of QnA with respect to user's question.",
+          "x-ms-client-name": "shortAnswer"
         }
       },
       "description": "Represents knowledge base answer."
@@ -1142,7 +1147,8 @@
         },
         "previousUserQuery": {
           "type": "string",
-          "description": "Previous user query."
+          "description": "Previous user query.",
+          "x-ms-client-name": "previousQuestion"
         }
       },
       "description": "Context object with previous QnA's information.",
@@ -1256,9 +1262,6 @@
         }
       },
       "description": "The list key extra data kind.",
-      "required": [
-        "key"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/BaseExtraInformation"
@@ -1290,8 +1293,7 @@
         },
         "show-all-intents": {
           "type": "boolean",
-          "description": "Set true to show all intents.",
-          "x-ms-client-name": "showAllIntents"
+          "description": "Set true to show all intents."
         },
         "timezoneOffset": {
           "type": "number",
@@ -1304,8 +1306,7 @@
         },
         "bing-spell-check-subscription-key": {
           "type": "string",
-          "description": "The subscription key to use when enabling Bing spell check",
-          "x-ms-client-name": "bingSpellCheckSubscriptionKey"
+          "description": "The subscription key to use when enabling Bing spell check"
         }
       },
       "description": "This customizes how the service calls LUIS Generally Available projects."
@@ -1677,7 +1678,8 @@
           "format": "double",
           "description": "Minimum threshold score required to include an answer span, value ranges from 0 to 1.",
           "minimum": 0,
-          "maximum": 1
+          "maximum": 1,
+          "x-ms-client-name": "confidenceThreshold"
         },
         "topAnswersWithSpan": {
           "type": "integer",
@@ -1694,16 +1696,9 @@
       ]
     },
     "SourceFilter": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "List of sources in knowledge base.",
-          "x-typespec-name": "string[]"
-        }
+      "type": "array",
+      "items": {
+        "type": "string"
       },
       "description": "Find QnAs that are associated with any of the given list of sources in knowledge base."
     },
@@ -1900,12 +1895,6 @@
         }
       },
       "description": "represents the resolution of a date and/or time span.",
-      "required": [
-        "begin",
-        "end",
-        "duration",
-        "modifier"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
