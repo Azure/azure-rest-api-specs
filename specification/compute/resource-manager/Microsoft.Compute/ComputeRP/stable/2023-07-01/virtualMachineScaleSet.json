@@ -3572,6 +3572,64 @@
       },
       "description": "Specifies the hardware settings for the virtual machine scale set."
     },
+    "AutoModelUpdateConfiguration": {
+      "properties": {
+        "autoModelUpdateOverrides": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AutoModelUpdateOverride"
+          },
+          "description": "List of override configurations, one per standard."
+        }
+      },
+      "description": "Configurations for automatic updates of virtual machine scaleset model."
+    },
+    "AutoModelUpdateOverride": {
+      "properties": {
+        "overrideProperties": {
+          "$ref": "#/definitions/OverrideProperties",
+          "description": "Properties for the current model update override."
+        },
+        "overrideType": {
+          "type": "string",
+          "description": "Type of the override operation."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether this override is enabled or not."
+        },
+        "disableAutoRollback": {
+          "type": "boolean",
+          "description": "Whether automatic rollback to previous version of scale set model be disabled."
+        }
+      },
+      "description": "Specifies the model override along with its configuration."
+    },
+    "OverrideProperties": {
+      "properties": {
+        "overrideConfigs": {
+          "type": "array",
+          "items": {
+            "$ref": "#definitions/OverrideConfig"
+          },
+          "description": "List of model override key value pairs."
+        }
+      },
+      "description": "Specifies the properties for a single override type."
+    },
+    "OverrideConfig": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Fully qualified JSON path of the virtual machine scaleset model field that needs to be updated."
+        },
+        "value": {
+          "type": "string",
+          "description": "Target value to update the field to."
+        }
+      },
+      "description": "A name value pair specifying the field and the target values which are candidates for override."
+    },
     "AutomaticRepairsPolicy": {
       "properties": {
         "enabled": {
@@ -4863,6 +4921,10 @@
         "automaticRepairsPolicy": {
           "$ref": "#/definitions/AutomaticRepairsPolicy",
           "description": "Policy for automatic repairs."
+        },
+        "autoModelUpdateConfiguration": {
+          "$ref": "#/definitions/AutoModelUpdateConfiguration",
+          "description": "Configurations for platform driven automatic updates of VMScaleSet model to conform to standards."
         },
         "virtualMachineProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetVMProfile",
