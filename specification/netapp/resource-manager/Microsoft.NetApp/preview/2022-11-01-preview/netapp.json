@@ -4415,7 +4415,10 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -4594,11 +4597,14 @@
           "200": {
             "description": "OK - terminal state"
           },
-          "202": {
+          "204": {
             "description": "Accepted"
           },
           "default": {
-            "description": "Error response describing why the operation failed."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -4650,11 +4656,17 @@
           }
         ],
         "responses": {
-          "202": {
+          "200": {
+            "description": "OK - terminal state"
+          },
+          "204": {
             "description": "Accepted"
           },
           "default": {
-            "description": "Error response describing why the operation failed."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -4700,11 +4712,17 @@
           }
         ],
         "responses": {
-          "202": {
+          "200": {
+            "description": "OK - terminal state"
+          },
+          "204": {
             "description": "Accepted"
           },
           "default": {
-            "description": "Error response describing why the operation failed."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
