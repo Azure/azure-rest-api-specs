@@ -18,7 +18,7 @@ else {
   $diffFiles = git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff --name-only `"$TargetBranch...$SourceBranch`" --
   $engFiles = $diffFiles | Where-Object {$_.StartsWith('eng')}
   $repoRootFiles = $diffFiles | Where-Object {$_ -notmatch '/'}
-  if ($engFiles -or $repoRootFiles) {
+  if ($repoRootFiles) {
     $tspFiles = $allTspFiles
   }
   else {
