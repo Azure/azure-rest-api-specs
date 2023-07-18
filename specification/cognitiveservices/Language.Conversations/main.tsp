@@ -163,13 +163,13 @@ model LuisParameters extends Record<unknown> {
 model LuisCallingOptions {
   @doc("Enable verbose response.")
   verbose?: boolean;
-  
+
   @doc("Save log to add in training utterances later.")
   log?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("Set true to show all intents.")
-  "show-all-intents"?: boolean;
+  `show-all-intents`?: boolean;
 
   @doc("The timezone offset for the location of the request.")
   timezoneOffset?: float32;
@@ -179,7 +179,7 @@ model LuisCallingOptions {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The subscription key to use when enabling Bing spell check")
-  "bing-spell-check-subscription-key"?: string;
+  `bing-spell-check-subscription-key`?: string;
 }
 
 @doc("This is a set of request parameters for Customized Conversation projects.")
