@@ -5,21 +5,13 @@
     "title": "DataBoxEdgeManagementClient"
   },
   "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "paths": {
     "/providers/Microsoft.DataBoxEdge/operations": {
       "get": {
-        "tags": [
-          "Operations"
-        ],
+        "tags": ["Operations"],
         "summary": "List all the supported operations.",
         "operationId": "Operations_List",
         "parameters": [
@@ -53,9 +45,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DataBoxEdge/availableSkus": {
       "get": {
-        "tags": [
-          "AvailableSkus"
-        ],
+        "tags": ["AvailableSkus"],
         "summary": "List all the available Skus and information related to them.",
         "operationId": "AvailableSkus_List",
         "parameters": [
@@ -92,9 +82,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices": {
       "get": {
-        "tags": [
-          "Devices"
-        ],
+        "tags": ["Devices"],
         "description": "Gets all the Data Box Edge/Data Box Gateway devices in a subscription.",
         "operationId": "Devices_ListBySubscription",
         "parameters": [
@@ -138,9 +126,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices": {
       "get": {
-        "tags": [
-          "Devices"
-        ],
+        "tags": ["Devices"],
         "description": "Gets all the Data Box Edge/Data Box Gateway devices in a resource group.",
         "operationId": "Devices_ListByResourceGroup",
         "parameters": [
@@ -187,9 +173,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}": {
       "get": {
-        "tags": [
-          "Devices"
-        ],
+        "tags": ["Devices"],
         "description": "Gets the properties of the Data Box Edge/Data Box Gateway device.",
         "operationId": "Devices_Get",
         "parameters": [
@@ -234,9 +218,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Devices"
-        ],
+        "tags": ["Devices"],
         "description": "Creates or updates a Data Box Edge/Data Box Gateway resource.",
         "operationId": "Devices_CreateOrUpdate",
         "parameters": [
@@ -290,9 +272,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Devices"
-        ],
+        "tags": ["Devices"],
         "description": "Deletes the Data Box Edge/Data Box Gateway device.",
         "operationId": "Devices_Delete",
         "parameters": [
@@ -347,9 +327,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "Devices"
-        ],
+        "tags": ["Devices"],
         "description": "Modifies a Data Box Edge/Data Box Gateway resource.",
         "operationId": "Devices_Update",
         "parameters": [
@@ -402,9 +380,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/alerts": {
       "get": {
-        "tags": [
-          "Alerts"
-        ],
+        "tags": ["Alerts"],
         "description": "Gets all the alerts for a Data Box Edge/Data Box Gateway device.",
         "operationId": "Alerts_ListByDataBoxEdgeDevice",
         "parameters": [
@@ -451,9 +427,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/alerts/{name}": {
       "get": {
-        "tags": [
-          "Alerts"
-        ],
+        "tags": ["Alerts"],
         "summary": "Gets an alert by name.",
         "operationId": "Alerts_Get",
         "parameters": [
@@ -504,9 +478,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/bandwidthSchedules": {
       "get": {
-        "tags": [
-          "BandwidthSchedules"
-        ],
+        "tags": ["BandwidthSchedules"],
         "description": "Gets all the bandwidth schedules for a Data Box Edge/Data Box Gateway device.",
         "operationId": "BandwidthSchedules_ListByDataBoxEdgeDevice",
         "parameters": [
@@ -553,9 +525,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/bandwidthSchedules/{name}": {
       "get": {
-        "tags": [
-          "BandwidthSchedules"
-        ],
+        "tags": ["BandwidthSchedules"],
         "description": "Gets the properties of the specified bandwidth schedule.",
         "operationId": "BandwidthSchedules_Get",
         "parameters": [
@@ -604,9 +574,7 @@
         }
       },
       "put": {
-        "tags": [
-          "BandwidthSchedules"
-        ],
+        "tags": ["BandwidthSchedules"],
         "description": "Creates or updates a bandwidth schedule.",
         "operationId": "BandwidthSchedules_CreateOrUpdate",
         "parameters": [
@@ -668,9 +636,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "BandwidthSchedules"
-        ],
+        "tags": ["BandwidthSchedules"],
         "description": "Deletes the specified bandwidth schedule.",
         "operationId": "BandwidthSchedules_Delete",
         "parameters": [
@@ -734,9 +700,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/deviceCapacityCheck": {
       "post": {
-        "tags": [
-          "DeviceCapacityCheck"
-        ],
+        "tags": ["DeviceCapacityCheck"],
         "description": "Posts the device capacity request info to check feasibility.",
         "operationId": "DeviceCapacityCheck_CheckResourceCreationFeasibility",
         "parameters": [
@@ -809,9 +773,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/deviceCapacityInfo/default": {
       "get": {
-        "tags": [
-          "DeviceCapacityInfo"
-        ],
+        "tags": ["DeviceCapacityInfo"],
         "description": "Gets the properties of the specified device capacity info.",
         "operationId": "DeviceCapacityInfo_GetDeviceCapacityInfo",
         "parameters": [
@@ -855,9 +817,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/diagnosticProactiveLogCollectionSettings/default": {
       "get": {
-        "tags": [
-          "DiagnosticSettings"
-        ],
+        "tags": ["DiagnosticSettings"],
         "description": "Gets the proactive log collection settings of the specified Data Box Edge/Data Box Gateway device.",
         "operationId": "DiagnosticSettings_GetDiagnosticProactiveLogCollectionSettings",
         "parameters": [
@@ -899,9 +859,7 @@
         }
       },
       "put": {
-        "tags": [
-          "DiagnosticSettings"
-        ],
+        "tags": ["DiagnosticSettings"],
         "description": "Updates the proactive log collection settings on a Data Box Edge/Data Box Gateway device.",
         "operationId": "DiagnosticSettings_UpdateDiagnosticProactiveLogCollectionSettings",
         "parameters": [
@@ -958,9 +916,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/diagnosticRemoteSupportSettings/default": {
       "get": {
-        "tags": [
-          "DiagnosticSettings"
-        ],
+        "tags": ["DiagnosticSettings"],
         "description": "Gets the diagnostic remote support settings of the specified Data Box Edge/Data Box Gateway device.",
         "operationId": "DiagnosticSettings_GetDiagnosticRemoteSupportSettings",
         "parameters": [
@@ -1002,9 +958,7 @@
         }
       },
       "put": {
-        "tags": [
-          "DiagnosticSettings"
-        ],
+        "tags": ["DiagnosticSettings"],
         "description": "Updates the diagnostic remote support settings on a Data Box Edge/Data Box Gateway device.",
         "operationId": "DiagnosticSettings_UpdateDiagnosticRemoteSupportSettings",
         "parameters": [
@@ -1061,9 +1015,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/downloadUpdates": {
       "post": {
-        "tags": [
-          "Devices"
-        ],
+        "tags": ["Devices"],
         "summary": "Downloads the updates on a Data Box Edge/Data Box Gateway device.",
         "operationId": "Devices_DownloadUpdates",
         "parameters": [
@@ -1117,9 +1069,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/generateCertificate": {
       "post": {
-        "tags": [
-          "Devices"
-        ],
+        "tags": ["Devices"],
         "description": "Generates certificate for activation key.",
         "operationId": "Devices_GenerateCertificate",
         "parameters": [
@@ -1163,9 +1113,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/getExtendedInformation": {
       "post": {
-        "tags": [
-          "Devices"
-        ],
+        "tags": ["Devices"],
         "description": "Gets additional information for the specified Azure Stack Edge/Data Box Gateway device.",
         "operationId": "Devices_GetExtendedInformation",
         "parameters": [
@@ -1209,9 +1157,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/installUpdates": {
       "post": {
-        "tags": [
-          "Devices"
-        ],
+        "tags": ["Devices"],
         "summary": "Installs the updates on the Data Box Edge/Data Box Gateway device.",
         "operationId": "Devices_InstallUpdates",
         "parameters": [
@@ -1265,9 +1211,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/jobs/{name}": {
       "get": {
-        "tags": [
-          "Jobs"
-        ],
+        "tags": ["Jobs"],
         "summary": "Gets the details of a specified job on a Data Box Edge/Data Box Gateway device.",
         "operationId": "Jobs_Get",
         "parameters": [
@@ -1318,9 +1262,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/networkSettings/default": {
       "get": {
-        "tags": [
-          "Devices"
-        ],
+        "tags": ["Devices"],
         "description": "Gets the network settings of the specified Data Box Edge/Data Box Gateway device.",
         "operationId": "Devices_GetNetworkSettings",
         "parameters": [
@@ -1364,9 +1306,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/nodes": {
       "get": {
-        "tags": [
-          "Nodes"
-        ],
+        "tags": ["Nodes"],
         "description": "Gets all the nodes currently configured under this Data Box Edge device",
         "operationId": "Nodes_ListByDataBoxEdgeDevice",
         "parameters": [
@@ -1413,9 +1353,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/operationsStatus/{name}": {
       "get": {
-        "tags": [
-          "OperationsStatus"
-        ],
+        "tags": ["OperationsStatus"],
         "summary": "Gets the details of a specified job on a Data Box Edge/Data Box Gateway device.",
         "operationId": "OperationsStatus_Get",
         "parameters": [
@@ -1466,9 +1404,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/orders": {
       "get": {
-        "tags": [
-          "Orders"
-        ],
+        "tags": ["Orders"],
         "summary": "Lists all the orders related to a Data Box Edge/Data Box Gateway device.",
         "operationId": "Orders_ListByDataBoxEdgeDevice",
         "parameters": [
@@ -1515,9 +1451,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/orders/default": {
       "get": {
-        "tags": [
-          "Orders"
-        ],
+        "tags": ["Orders"],
         "summary": "Gets a specific order by name.",
         "operationId": "Orders_Get",
         "parameters": [
@@ -1559,9 +1493,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Orders"
-        ],
+        "tags": ["Orders"],
         "summary": "Creates or updates an order.",
         "operationId": "Orders_CreateOrUpdate",
         "parameters": [
@@ -1616,9 +1548,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Orders"
-        ],
+        "tags": ["Orders"],
         "summary": "Deletes the order related to the device.",
         "operationId": "Orders_Delete",
         "parameters": [
@@ -1675,9 +1605,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/orders/default/listDCAccessCode": {
       "post": {
-        "tags": [
-          "Orders"
-        ],
+        "tags": ["Orders"],
         "summary": "Gets the DCAccess Code",
         "operationId": "Orders_ListDCAccessCode",
         "parameters": [
@@ -1721,9 +1649,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/roles": {
       "get": {
-        "tags": [
-          "Roles"
-        ],
+        "tags": ["Roles"],
         "description": "Lists all the roles configured in a Data Box Edge/Data Box Gateway device.",
         "operationId": "Roles_ListByDataBoxEdgeDevice",
         "parameters": [
@@ -1770,9 +1696,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/roles/{name}": {
       "get": {
-        "tags": [
-          "Roles"
-        ],
+        "tags": ["Roles"],
         "description": "Gets a specific role by name.",
         "operationId": "Roles_Get",
         "parameters": [
@@ -1821,9 +1745,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Roles"
-        ],
+        "tags": ["Roles"],
         "description": "Create or update a role.",
         "operationId": "Roles_CreateOrUpdate",
         "parameters": [
@@ -1885,9 +1807,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Roles"
-        ],
+        "tags": ["Roles"],
         "description": "Deletes the role on the device.",
         "operationId": "Roles_Delete",
         "parameters": [
@@ -1951,9 +1871,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/roles/{roleName}/addons": {
       "get": {
-        "tags": [
-          "Addons"
-        ],
+        "tags": ["Addons"],
         "description": "Lists all the addons configured in the role.",
         "operationId": "Addons_ListByRole",
         "parameters": [
@@ -2007,9 +1925,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/roles/{roleName}/addons/{addonName}": {
       "get": {
-        "tags": [
-          "Addons"
-        ],
+        "tags": ["Addons"],
         "description": "Gets a specific addon by name.",
         "operationId": "Addons_Get",
         "parameters": [
@@ -2065,9 +1981,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Addons"
-        ],
+        "tags": ["Addons"],
         "description": "Create or update a addon.",
         "operationId": "Addons_CreateOrUpdate",
         "parameters": [
@@ -2136,9 +2050,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Addons"
-        ],
+        "tags": ["Addons"],
         "description": "Deletes the addon on the device.",
         "operationId": "Addons_Delete",
         "parameters": [
@@ -2209,9 +2121,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/roles/{roleName}/monitoringConfig": {
       "get": {
-        "tags": [
-          "MonitoringConfig"
-        ],
+        "tags": ["MonitoringConfig"],
         "summary": "Lists metric configurations in a role.",
         "operationId": "MonitoringConfig_List",
         "parameters": [
@@ -2265,9 +2175,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/roles/{roleName}/monitoringConfig/default": {
       "get": {
-        "tags": [
-          "MonitoringConfig"
-        ],
+        "tags": ["MonitoringConfig"],
         "summary": "Gets a  metric configuration of a role.",
         "operationId": "MonitoringConfig_Get",
         "parameters": [
@@ -2316,9 +2224,7 @@
         }
       },
       "put": {
-        "tags": [
-          "MonitoringConfig"
-        ],
+        "tags": ["MonitoringConfig"],
         "summary": "Creates a new metric configuration or updates an existing one for a role.",
         "operationId": "MonitoringConfig_CreateOrUpdate",
         "parameters": [
@@ -2380,9 +2286,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "MonitoringConfig"
-        ],
+        "tags": ["MonitoringConfig"],
         "summary": "deletes a new metric configuration for a role.",
         "operationId": "MonitoringConfig_Delete",
         "parameters": [
@@ -2446,9 +2350,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/scanForUpdates": {
       "post": {
-        "tags": [
-          "Devices"
-        ],
+        "tags": ["Devices"],
         "summary": "Scans for updates on a Data Box Edge/Data Box Gateway device.",
         "operationId": "Devices_ScanForUpdates",
         "parameters": [
@@ -2502,9 +2404,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/securitySettings/default/update": {
       "post": {
-        "tags": [
-          "Devices"
-        ],
+        "tags": ["Devices"],
         "description": "Updates the security settings on a Data Box Edge/Data Box Gateway device.",
         "operationId": "Devices_CreateOrUpdateSecuritySettings",
         "parameters": [
@@ -2567,9 +2467,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/shares": {
       "get": {
-        "tags": [
-          "Shares"
-        ],
+        "tags": ["Shares"],
         "summary": "Lists all the shares in a Data Box Edge/Data Box Gateway device.",
         "operationId": "Shares_ListByDataBoxEdgeDevice",
         "parameters": [
@@ -2616,9 +2514,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/shares/{name}": {
       "get": {
-        "tags": [
-          "Shares"
-        ],
+        "tags": ["Shares"],
         "summary": "Gets a share by name.",
         "operationId": "Shares_Get",
         "parameters": [
@@ -2667,9 +2563,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Shares"
-        ],
+        "tags": ["Shares"],
         "summary": "Creates a new share or updates an existing share on the device.",
         "operationId": "Shares_CreateOrUpdate",
         "parameters": [
@@ -2731,9 +2625,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Shares"
-        ],
+        "tags": ["Shares"],
         "description": "Deletes the share on the Data Box Edge/Data Box Gateway device.",
         "operationId": "Shares_Delete",
         "parameters": [
@@ -2797,9 +2689,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/shares/{name}/refresh": {
       "post": {
-        "tags": [
-          "Shares"
-        ],
+        "tags": ["Shares"],
         "summary": "Refreshes the share metadata with the data from the cloud.",
         "operationId": "Shares_Refresh",
         "parameters": [
@@ -2860,9 +2750,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/storageAccountCredentials": {
       "get": {
-        "tags": [
-          "StorageAccountCredentials"
-        ],
+        "tags": ["StorageAccountCredentials"],
         "summary": "Gets all the storage account credentials in a Data Box Edge/Data Box Gateway device.",
         "operationId": "StorageAccountCredentials_ListByDataBoxEdgeDevice",
         "parameters": [
@@ -2909,9 +2797,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/storageAccountCredentials/{name}": {
       "get": {
-        "tags": [
-          "StorageAccountCredentials"
-        ],
+        "tags": ["StorageAccountCredentials"],
         "description": "Gets the properties of the specified storage account credential.",
         "operationId": "StorageAccountCredentials_Get",
         "parameters": [
@@ -2960,9 +2846,7 @@
         }
       },
       "put": {
-        "tags": [
-          "StorageAccountCredentials"
-        ],
+        "tags": ["StorageAccountCredentials"],
         "description": "Creates or updates the storage account credential.",
         "operationId": "StorageAccountCredentials_CreateOrUpdate",
         "parameters": [
@@ -3024,9 +2908,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "StorageAccountCredentials"
-        ],
+        "tags": ["StorageAccountCredentials"],
         "description": "Deletes the storage account credential.",
         "operationId": "StorageAccountCredentials_Delete",
         "parameters": [
@@ -3090,9 +2972,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/storageAccounts": {
       "get": {
-        "tags": [
-          "StorageAccounts"
-        ],
+        "tags": ["StorageAccounts"],
         "summary": "Lists all the StorageAccounts in a Data Box Edge/Data Box Gateway device.",
         "operationId": "StorageAccounts_ListByDataBoxEdgeDevice",
         "parameters": [
@@ -3139,9 +3019,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/storageAccounts/{storageAccountName}": {
       "get": {
-        "tags": [
-          "StorageAccounts"
-        ],
+        "tags": ["StorageAccounts"],
         "summary": "Gets a StorageAccount by name.",
         "operationId": "StorageAccounts_Get",
         "parameters": [
@@ -3190,9 +3068,7 @@
         }
       },
       "put": {
-        "tags": [
-          "StorageAccounts"
-        ],
+        "tags": ["StorageAccounts"],
         "summary": "Creates a new StorageAccount or updates an existing StorageAccount on the device.",
         "operationId": "StorageAccounts_CreateOrUpdate",
         "parameters": [
@@ -3254,9 +3130,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "StorageAccounts"
-        ],
+        "tags": ["StorageAccounts"],
         "description": "Deletes the StorageAccount on the Data Box Edge/Data Box Gateway device.",
         "operationId": "StorageAccounts_Delete",
         "parameters": [
@@ -3317,9 +3191,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/storageAccounts/{storageAccountName}/containers": {
       "get": {
-        "tags": [
-          "Containers"
-        ],
+        "tags": ["Containers"],
         "summary": "Lists all the containers of a storage Account in a Data Box Edge/Data Box Gateway device.",
         "operationId": "Containers_ListByStorageAccount",
         "parameters": [
@@ -3373,9 +3245,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/storageAccounts/{storageAccountName}/containers/{containerName}": {
       "get": {
-        "tags": [
-          "Containers"
-        ],
+        "tags": ["Containers"],
         "summary": "Gets a container by name.",
         "operationId": "Containers_Get",
         "parameters": [
@@ -3431,9 +3301,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Containers"
-        ],
+        "tags": ["Containers"],
         "summary": "Creates a new container or updates an existing container on the device.",
         "operationId": "Containers_CreateOrUpdate",
         "parameters": [
@@ -3502,9 +3370,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Containers"
-        ],
+        "tags": ["Containers"],
         "description": "Deletes the container on the Data Box Edge/Data Box Gateway device.",
         "operationId": "Containers_Delete",
         "parameters": [
@@ -3572,9 +3438,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/storageAccounts/{storageAccountName}/containers/{containerName}/refresh": {
       "post": {
-        "tags": [
-          "Containers"
-        ],
+        "tags": ["Containers"],
         "summary": "Refreshes the container metadata with the data from the cloud.",
         "operationId": "Containers_Refresh",
         "parameters": [
@@ -3642,9 +3506,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/triggers": {
       "get": {
-        "tags": [
-          "Triggers"
-        ],
+        "tags": ["Triggers"],
         "description": "Lists all the triggers configured in the device.",
         "operationId": "Triggers_ListByDataBoxEdgeDevice",
         "parameters": [
@@ -3698,9 +3560,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/triggers/{name}": {
       "get": {
-        "tags": [
-          "Triggers"
-        ],
+        "tags": ["Triggers"],
         "description": "Get a specific trigger by name.",
         "operationId": "Triggers_Get",
         "parameters": [
@@ -3749,9 +3609,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Triggers"
-        ],
+        "tags": ["Triggers"],
         "description": "Creates or updates a trigger.",
         "operationId": "Triggers_CreateOrUpdate",
         "parameters": [
@@ -3813,9 +3671,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Triggers"
-        ],
+        "tags": ["Triggers"],
         "description": "Deletes the trigger on the gateway device.",
         "operationId": "Triggers_Delete",
         "parameters": [
@@ -3879,9 +3735,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/triggerSupportPackage": {
       "post": {
-        "tags": [
-          "SupportPackages"
-        ],
+        "tags": ["SupportPackages"],
         "summary": "Triggers support package on the device",
         "operationId": "SupportPackages_TriggerSupportPackage",
         "parameters": [
@@ -3944,9 +3798,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/updateExtendedInformation": {
       "post": {
-        "tags": [
-          "Devices"
-        ],
+        "tags": ["Devices"],
         "description": "Gets additional information for the specified Data Box Edge/Data Box Gateway device.",
         "operationId": "Devices_UpdateExtendedInformation",
         "parameters": [
@@ -3999,9 +3851,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/updateSummary/default": {
       "get": {
-        "tags": [
-          "Devices"
-        ],
+        "tags": ["Devices"],
         "summary": "Gets information about the availability of updates based on the last scan of the device. It also gets information about any ongoing download or install jobs on the device.",
         "operationId": "Devices_GetUpdateSummary",
         "parameters": [
@@ -4045,9 +3895,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/uploadCertificate": {
       "post": {
-        "tags": [
-          "Devices"
-        ],
+        "tags": ["Devices"],
         "description": "Uploads registration certificate for the device.",
         "operationId": "Devices_UploadCertificate",
         "parameters": [
@@ -4100,9 +3948,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/users": {
       "get": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "description": "Gets all the users registered on a Data Box Edge/Data Box Gateway device.",
         "operationId": "Users_ListByDataBoxEdgeDevice",
         "parameters": [
@@ -4156,9 +4002,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/users/{name}": {
       "get": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "description": "Gets the properties of the specified user.",
         "operationId": "Users_Get",
         "parameters": [
@@ -4207,9 +4051,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "description": "Creates a new user or updates an existing user's information on a Data Box Edge/Data Box Gateway device.",
         "operationId": "Users_CreateOrUpdate",
         "parameters": [
@@ -4271,9 +4113,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "description": "Deletes the user on a databox edge/gateway device.",
         "operationId": "Users_Delete",
         "parameters": [
@@ -4339,9 +4179,7 @@
   "definitions": {
     "Addon": {
       "description": "Role Addon",
-      "required": [
-        "kind"
-      ],
+      "required": ["kind"],
       "type": "object",
       "allOf": [
         {
@@ -4351,10 +4189,7 @@
       "properties": {
         "kind": {
           "description": "Addon type.",
-          "enum": [
-            "IotEdge",
-            "ArcForKubernetes"
-          ],
+          "enum": ["IotEdge", "ArcForKubernetes"],
           "type": "string",
           "x-ms-enum": {
             "name": "AddonType",
@@ -4392,9 +4227,7 @@
     },
     "Address": {
       "description": "The shipping address of the customer.",
-      "required": [
-        "country"
-      ],
+      "required": ["country"],
       "type": "object",
       "properties": {
         "addressLine1": {
@@ -4519,11 +4352,7 @@
         },
         "severity": {
           "description": "Severity of the alert.",
-          "enum": [
-            "Informational",
-            "Warning",
-            "Critical"
-          ],
+          "enum": ["Informational", "Warning", "Critical"],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -4548,10 +4377,7 @@
     },
     "ArcAddon": {
       "description": "Arc Addon.",
-      "required": [
-        "properties",
-        "kind"
-      ],
+      "required": ["properties", "kind"],
       "type": "object",
       "allOf": [
         {
@@ -4615,10 +4441,7 @@
         },
         "hostPlatform": {
           "description": "Host OS supported by the Arc addon.",
-          "enum": [
-            "Windows",
-            "Linux"
-          ],
+          "enum": ["Windows", "Linux"],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -4628,10 +4451,7 @@
         },
         "hostPlatformType": {
           "description": "Platform where the runtime is hosted.",
-          "enum": [
-            "KubernetesCluster",
-            "LinuxVM"
-          ],
+          "enum": ["KubernetesCluster", "LinuxVM"],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -4683,10 +4503,7 @@
     },
     "AsymmetricEncryptedSecret": {
       "description": "Represent the secrets intended for encryption with asymmetric key pair.",
-      "required": [
-        "value",
-        "encryptionAlgorithm"
-      ],
+      "required": ["value", "encryptionAlgorithm"],
       "type": "object",
       "properties": {
         "value": {
@@ -4700,11 +4517,7 @@
         },
         "encryptionAlgorithm": {
           "description": "The algorithm used to encrypt \"Value\".",
-          "enum": [
-            "None",
-            "AES256",
-            "RSAES_PKCS1_v_1_5"
-          ],
+          "enum": ["None", "AES256", "RSAES_PKCS1_v_1_5"],
           "type": "string",
           "x-ms-enum": {
             "name": "EncryptionAlgorithm",
@@ -4725,11 +4538,7 @@
     },
     "AzureContainerInfo": {
       "description": "Azure container mapping of the endpoint.",
-      "required": [
-        "storageAccountCredentialId",
-        "containerName",
-        "dataFormat"
-      ],
+      "required": ["storageAccountCredentialId", "containerName", "dataFormat"],
       "type": "object",
       "properties": {
         "storageAccountCredentialId": {
@@ -4742,11 +4551,7 @@
         },
         "dataFormat": {
           "description": "Storage format used for the file represented by the share.",
-          "enum": [
-            "BlockBlob",
-            "PageBlob",
-            "AzureFile"
-          ],
+          "enum": ["BlockBlob", "PageBlob", "AzureFile"],
           "type": "string",
           "x-ms-enum": {
             "name": "AzureContainerDataFormat",
@@ -4757,9 +4562,7 @@
     },
     "BandwidthSchedule": {
       "description": "The bandwidth schedule details.",
-      "required": [
-        "properties"
-      ],
+      "required": ["properties"],
       "type": "object",
       "allOf": [
         {
@@ -4781,12 +4584,7 @@
     },
     "BandwidthScheduleProperties": {
       "description": "The properties of the bandwidth schedule.",
-      "required": [
-        "start",
-        "stop",
-        "rateInMbps",
-        "days"
-      ],
+      "required": ["start", "stop", "rateInMbps", "days"],
       "type": "object",
       "properties": {
         "start": {
@@ -4849,10 +4647,7 @@
     },
     "ClientAccessRight": {
       "description": "The mapping between a particular client IP and the type of access client has on the NFS share.",
-      "required": [
-        "client",
-        "accessPermission"
-      ],
+      "required": ["client", "accessPermission"],
       "type": "object",
       "properties": {
         "client": {
@@ -4861,11 +4656,7 @@
         },
         "accessPermission": {
           "description": "Type of access to be allowed for the client.",
-          "enum": [
-            "NoAccess",
-            "ReadOnly",
-            "ReadWrite"
-          ],
+          "enum": ["NoAccess", "ReadOnly", "ReadWrite"],
           "type": "string",
           "x-ms-enum": {
             "name": "ClientPermissionType",
@@ -4876,9 +4667,7 @@
     },
     "CloudEdgeManagementRole": {
       "description": "The preview of Virtual Machine Cloud Management from the Azure supports deploying and managing VMs on your Azure Stack Edge device from Azure Portal. \r\nFor more information, refer to: https://docs.microsoft.com/en-us/azure/databox-online/azure-stack-edge-gpu-virtual-machine-overview\r\nBy using this feature, you agree to the preview legal terms. See the https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/ for additional details.",
-      "required": [
-        "kind"
-      ],
+      "required": ["kind"],
       "type": "object",
       "allOf": [
         {
@@ -4911,17 +4700,12 @@
     },
     "CloudEdgeManagementRoleProperties": {
       "description": "CloudEdgeManagement Role properties.",
-      "required": [
-        "roleStatus"
-      ],
+      "required": ["roleStatus"],
       "type": "object",
       "properties": {
         "localManagementStatus": {
           "description": "Local Edge Management Status",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
+          "enum": ["Enabled", "Disabled"],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -4936,10 +4720,7 @@
         },
         "roleStatus": {
           "description": "Role status.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
+          "enum": ["Enabled", "Disabled"],
           "type": "string",
           "x-ms-enum": {
             "name": "RoleStatus",
@@ -5135,10 +4916,7 @@
     },
     "ComputeResource": {
       "description": "Compute infrastructure Resource",
-      "required": [
-        "processorCount",
-        "memoryInGB"
-      ],
+      "required": ["processorCount", "memoryInGB"],
       "type": "object",
       "properties": {
         "processorCount": {
@@ -5155,12 +4933,7 @@
     },
     "ContactDetails": {
       "description": "Contains all the contact details of the customer.",
-      "required": [
-        "contactPerson",
-        "companyName",
-        "phone",
-        "emailList"
-      ],
+      "required": ["contactPerson", "companyName", "phone", "emailList"],
       "type": "object",
       "properties": {
         "contactPerson": {
@@ -5188,9 +4961,7 @@
     },
     "Container": {
       "description": "Represents a container on the  Data Box Edge/Gateway device.",
-      "required": [
-        "properties"
-      ],
+      "required": ["properties"],
       "type": "object",
       "allOf": [
         {
@@ -5233,20 +5004,12 @@
     },
     "ContainerProperties": {
       "description": "The container properties.",
-      "required": [
-        "dataFormat"
-      ],
+      "required": ["dataFormat"],
       "type": "object",
       "properties": {
         "containerStatus": {
           "description": "Current status of the container.",
-          "enum": [
-            "OK",
-            "Offline",
-            "Unknown",
-            "Updating",
-            "NeedsAttention"
-          ],
+          "enum": ["OK", "Offline", "Unknown", "Updating", "NeedsAttention"],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -5256,11 +5019,7 @@
         },
         "dataFormat": {
           "description": "DataFormat for Container",
-          "enum": [
-            "BlockBlob",
-            "PageBlob",
-            "AzureFile"
-          ],
+          "enum": ["BlockBlob", "PageBlob", "AzureFile"],
           "type": "string",
           "x-ms-enum": {
             "name": "AzureContainerDataFormat",
@@ -5282,9 +5041,7 @@
     },
     "DataBoxEdgeDevice": {
       "description": "The Data Box Edge/Gateway device.",
-      "required": [
-        "location"
-      ],
+      "required": ["location"],
       "type": "object",
       "allOf": [
         {
@@ -5295,10 +5052,7 @@
         "location": {
           "description": "The location of the device. This is a supported and registered Azure geographical region (for example, West US, East US, or Southeast Asia). The geographical region of a device cannot be changed once it is created, but if an identical geographical region is specified on update, the request will succeed.",
           "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-mutability": ["read", "create"]
         },
         "tags": {
           "description": "The list of tags that describe the device. These tags can be used to view and group this device (across resource groups).",
@@ -5464,11 +5218,7 @@
         },
         "clusterWitnessType": {
           "description": "Cluster Witness Type",
-          "enum": [
-            "None",
-            "Cloud",
-            "FileShare"
-          ],
+          "enum": ["None", "Cloud", "FileShare"],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -5590,9 +5340,7 @@
         },
         "deviceType": {
           "description": "The type of the Data Box Edge/Gateway device.",
-          "enum": [
-            "DataBoxEdgeDevice"
-          ],
+          "enum": ["DataBoxEdgeDevice"],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -5698,10 +5446,7 @@
     },
     "DataBoxEdgeMoveRequest": {
       "description": "Resource Move details",
-      "required": [
-        "targetResourceGroup",
-        "resources"
-      ],
+      "required": ["targetResourceGroup", "resources"],
       "type": "object",
       "properties": {
         "targetResourceGroup": {
@@ -5775,9 +5520,7 @@
         },
         "tier": {
           "description": "The Sku tier.",
-          "enum": [
-            "Standard"
-          ],
+          "enum": ["Standard"],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -5822,9 +5565,7 @@
           "items": {
             "$ref": "#/definitions/SkuLocationInfo"
           },
-          "x-ms-identifiers": [
-            "location"
-          ],
+          "x-ms-identifiers": ["location"],
           "readOnly": true
         },
         "costs": {
@@ -5834,17 +5575,12 @@
           "items": {
             "$ref": "#/definitions/SkuCost"
           },
-          "x-ms-identifiers": [
-            "meterId"
-          ],
+          "x-ms-identifiers": ["meterId"],
           "readOnly": true
         },
         "signupOption": {
           "description": "Sku can be signed up by customer or not.",
-          "enum": [
-            "None",
-            "Available"
-          ],
+          "enum": ["None", "Available"],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -5854,10 +5590,7 @@
         },
         "version": {
           "description": "Availability of the Sku as preview/stable.",
-          "enum": [
-            "Stable",
-            "Preview"
-          ],
+          "enum": ["Stable", "Preview"],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -5867,10 +5600,7 @@
         },
         "availability": {
           "description": "Links to the next set of results",
-          "enum": [
-            "Available",
-            "Unavailable"
-          ],
+          "enum": ["Available", "Unavailable"],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -5883,11 +5613,7 @@
           "uniqueItems": false,
           "type": "array",
           "items": {
-            "enum": [
-              "NotApplicable",
-              "ShippedToCustomer",
-              "SelfPickup"
-            ],
+            "enum": ["NotApplicable", "ShippedToCustomer", "SelfPickup"],
             "type": "string",
             "x-ms-enum": {
               "name": "ShipmentType",
@@ -5904,9 +5630,7 @@
           "items": {
             "$ref": "#/definitions/SkuCapability"
           },
-          "x-ms-identifiers": [
-            "name"
-          ],
+          "x-ms-identifiers": ["name"],
           "readOnly": true
         }
       }
@@ -5922,10 +5646,7 @@
           "items": {
             "$ref": "#/definitions/DataBoxEdgeSku"
           },
-          "x-ms-identifiers": [
-            "name",
-            "resourceType"
-          ],
+          "x-ms-identifiers": ["name", "resourceType"],
           "readOnly": true
         },
         "nextLink": {
@@ -5941,10 +5662,7 @@
       "properties": {
         "type": {
           "description": "DataResidencyType enum",
-          "enum": [
-            "GeoZoneReplication",
-            "ZoneReplication"
-          ],
+          "enum": ["GeoZoneReplication", "ZoneReplication"],
           "type": "string",
           "x-ms-enum": {
             "name": "DataResidencyType",
@@ -6023,9 +5741,7 @@
     },
     "DeviceCapacityRequestInfo": {
       "description": "Object for Capturing DeviceCapacityRequestInfo",
-      "required": [
-        "properties"
-      ],
+      "required": ["properties"],
       "type": "object",
       "properties": {
         "properties": {
@@ -6037,9 +5753,7 @@
     },
     "DeviceCapacityRequestInfoProperties": {
       "description": "Properties of Device Capacity Request Info containing VM's to be checked and their corresponding results.",
-      "required": [
-        "vmPlacementQuery"
-      ],
+      "required": ["vmPlacementQuery"],
       "type": "object",
       "properties": {
         "vmPlacementQuery": {
@@ -6068,9 +5782,7 @@
     },
     "DiagnosticProactiveLogCollectionSettings": {
       "description": "The diagnostic proactive log collection settings of a device.",
-      "required": [
-        "properties"
-      ],
+      "required": ["properties"],
       "type": "object",
       "allOf": [
         {
@@ -6092,9 +5804,7 @@
     },
     "DiagnosticRemoteSupportSettings": {
       "description": "The remote support settings of a device.",
-      "required": [
-        "properties"
-      ],
+      "required": ["properties"],
       "type": "object",
       "allOf": [
         {
@@ -6125,9 +5835,7 @@
           "items": {
             "$ref": "#/definitions/RemoteSupportSettings"
           },
-          "x-ms-identifiers": [
-            "remoteApplicationType"
-          ]
+          "x-ms-identifiers": ["remoteApplicationType"]
         }
       }
     },
@@ -6217,10 +5925,7 @@
     },
     "FileEventTrigger": {
       "description": "Trigger details.",
-      "required": [
-        "properties",
-        "kind"
-      ],
+      "required": ["properties", "kind"],
       "type": "object",
       "allOf": [
         {
@@ -6253,9 +5958,7 @@
     },
     "FileSourceInfo": {
       "description": "File source details.",
-      "required": [
-        "shareId"
-      ],
+      "required": ["shareId"],
       "type": "object",
       "properties": {
         "shareId": {
@@ -6266,10 +5969,7 @@
     },
     "FileTriggerProperties": {
       "description": "File trigger properties.",
-      "required": [
-        "sourceInfo",
-        "sinkInfo"
-      ],
+      "required": ["sourceInfo", "sinkInfo"],
       "type": "object",
       "properties": {
         "sourceInfo": {
@@ -6348,10 +6048,7 @@
     },
     "ImageRepositoryCredential": {
       "description": "Image repository credential.",
-      "required": [
-        "imageRepositoryUrl",
-        "userName"
-      ],
+      "required": ["imageRepositoryUrl", "userName"],
       "type": "object",
       "properties": {
         "imageRepositoryUrl": {
@@ -6370,10 +6067,7 @@
     },
     "IoTAddon": {
       "description": "IoT Addon.",
-      "required": [
-        "properties",
-        "kind"
-      ],
+      "required": ["properties", "kind"],
       "type": "object",
       "allOf": [
         {
@@ -6406,10 +6100,7 @@
     },
     "IoTAddonProperties": {
       "description": "IoT addon properties.",
-      "required": [
-        "ioTDeviceDetails",
-        "ioTEdgeDeviceDetails"
-      ],
+      "required": ["ioTDeviceDetails", "ioTEdgeDeviceDetails"],
       "type": "object",
       "properties": {
         "ioTDeviceDetails": {
@@ -6427,10 +6118,7 @@
         },
         "hostPlatform": {
           "description": "Host OS supported by the IoT addon.",
-          "enum": [
-            "Windows",
-            "Linux"
-          ],
+          "enum": ["Windows", "Linux"],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -6440,10 +6128,7 @@
         },
         "hostPlatformType": {
           "description": "Platform where the runtime is hosted.",
-          "enum": [
-            "KubernetesCluster",
-            "LinuxVM"
-          ],
+          "enum": ["KubernetesCluster", "LinuxVM"],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -6473,10 +6158,7 @@
     },
     "IoTDeviceInfo": {
       "description": "Metadata of IoT device/IoT Edge device to be configured.",
-      "required": [
-        "deviceId",
-        "ioTHostHub"
-      ],
+      "required": ["deviceId", "ioTHostHub"],
       "type": "object",
       "properties": {
         "deviceId": {
@@ -6499,10 +6181,7 @@
     },
     "IoTEdgeAgentInfo": {
       "description": "IoT edge agent details is optional, this will be used for download system Agent module while bootstrapping IoT Role if specified.",
-      "required": [
-        "imageName",
-        "tag"
-      ],
+      "required": ["imageName", "tag"],
       "type": "object",
       "properties": {
         "imageName": {
@@ -6521,9 +6200,7 @@
     },
     "IoTRole": {
       "description": "Compute role.",
-      "required": [
-        "kind"
-      ],
+      "required": ["kind"],
       "type": "object",
       "allOf": [
         {
@@ -6566,10 +6243,7 @@
       "properties": {
         "hostPlatform": {
           "description": "Host OS supported by the IoT role.",
-          "enum": [
-            "Windows",
-            "Linux"
-          ],
+          "enum": ["Windows", "Linux"],
           "type": "string",
           "x-ms-enum": {
             "name": "PlatformType",
@@ -6591,9 +6265,7 @@
           "items": {
             "$ref": "#/definitions/MountPointMap"
           },
-          "x-ms-identifiers": [
-            "shareId"
-          ]
+          "x-ms-identifiers": ["shareId"]
         },
         "ioTEdgeAgentInfo": {
           "$ref": "#/definitions/IoTEdgeAgentInfo",
@@ -6601,10 +6273,7 @@
         },
         "hostPlatformType": {
           "description": "Platform where the Iot runtime is hosted.",
-          "enum": [
-            "KubernetesCluster",
-            "LinuxVM"
-          ],
+          "enum": ["KubernetesCluster", "LinuxVM"],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -6618,10 +6287,7 @@
         },
         "roleStatus": {
           "description": "Role status.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
+          "enum": ["Enabled", "Disabled"],
           "type": "string",
           "x-ms-enum": {
             "name": "RoleStatus",
@@ -6879,9 +6545,7 @@
     },
     "KubernetesClusterInfo": {
       "description": "Kubernetes cluster configuration",
-      "required": [
-        "version"
-      ],
+      "required": ["version"],
       "type": "object",
       "properties": {
         "etcdInfo": {
@@ -6896,10 +6560,7 @@
           "items": {
             "$ref": "#/definitions/NodeInfo"
           },
-          "x-ms-identifiers": [
-            "name",
-            "type"
-          ],
+          "x-ms-identifiers": ["name", "type"],
           "readOnly": true
         },
         "version": {
@@ -6925,9 +6586,7 @@
     },
     "KubernetesRole": {
       "description": "The limited preview of Kubernetes Cluster Management from the Azure supports:\r\n1. Using a simple turn-key option in Azure Portal, deploy a Kubernetes cluster on your Azure Stack Edge device. \r\n2. Configure Kubernetes cluster running on your device with Arc enabled Kubernetes with a click of a button in the Azure Portal. \r\n Azure Arc enables organizations to view, manage, and govern their on-premises Kubernetes clusters using the Azure Portal, command line tools, and APIs.\r\n3. Easily configure Persistent Volumes using SMB and NFS shares for storing container data. \r\n For more information, refer to the document here: https://databoxupdatepackages.blob.core.windows.net/documentation/Microsoft-Azure-Stack-Edge-K8-Cloud-Management-20210323.pdf \r\n Or Demo: https://databoxupdatepackages.blob.core.windows.net/documentation/Microsoft-Azure-Stack-Edge-K8S-Cloud-Management-20210323.mp4\r\n By using this feature, you agree to the preview legal terms. See the https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/",
-      "required": [
-        "kind"
-      ],
+      "required": ["kind"],
       "type": "object",
       "allOf": [
         {
@@ -6960,9 +6619,7 @@
     },
     "KubernetesRoleCompute": {
       "description": "Kubernetes role compute resource",
-      "required": [
-        "vmProfile"
-      ],
+      "required": ["vmProfile"],
       "type": "object",
       "properties": {
         "vmProfile": {
@@ -7011,10 +6668,7 @@
       "properties": {
         "hostPlatform": {
           "description": "Host OS supported by the Kubernetes role.",
-          "enum": [
-            "Windows",
-            "Linux"
-          ],
+          "enum": ["Windows", "Linux"],
           "type": "string",
           "x-ms-enum": {
             "name": "PlatformType",
@@ -7041,10 +6695,7 @@
         },
         "hostPlatformType": {
           "description": "Platform where the runtime is hosted.",
-          "enum": [
-            "KubernetesCluster",
-            "LinuxVM"
-          ],
+          "enum": ["KubernetesCluster", "LinuxVM"],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -7062,10 +6713,7 @@
         },
         "roleStatus": {
           "description": "Role status.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
+          "enum": ["Enabled", "Disabled"],
           "type": "string",
           "x-ms-enum": {
             "name": "RoleStatus",
@@ -7076,9 +6724,7 @@
     },
     "KubernetesRoleResources": {
       "description": "Kubernetes role resources",
-      "required": [
-        "compute"
-      ],
+      "required": ["compute"],
       "type": "object",
       "properties": {
         "storage": {
@@ -7107,10 +6753,7 @@
           "items": {
             "$ref": "#/definitions/KubernetesRoleStorageClassInfo"
           },
-          "x-ms-identifiers": [
-            "name",
-            "type"
-          ],
+          "x-ms-identifiers": ["name", "type"],
           "readOnly": true
         },
         "endpoints": {
@@ -7120,9 +6763,7 @@
           "items": {
             "$ref": "#/definitions/MountPointMap"
           },
-          "x-ms-identifiers": [
-            "shareId"
-          ]
+          "x-ms-identifiers": ["shareId"]
         }
       }
     },
@@ -7142,11 +6783,7 @@
         },
         "posixCompliant": {
           "description": "If provisioned storage is posix compliant.",
-          "enum": [
-            "Invalid",
-            "Enabled",
-            "Disabled"
-          ],
+          "enum": ["Invalid", "Enabled", "Disabled"],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -7174,9 +6811,7 @@
     },
     "MECRole": {
       "description": "MEC role.",
-      "required": [
-        "kind"
-      ],
+      "required": ["kind"],
       "type": "object",
       "allOf": [
         {
@@ -7209,9 +6844,7 @@
     },
     "MECRoleProperties": {
       "description": "MEC role properties.",
-      "required": [
-        "roleStatus"
-      ],
+      "required": ["roleStatus"],
       "type": "object",
       "properties": {
         "connectionString": {
@@ -7228,10 +6861,7 @@
         },
         "roleStatus": {
           "description": "Role status.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
+          "enum": ["Enabled", "Disabled"],
           "type": "string",
           "x-ms-enum": {
             "name": "RoleStatus",
@@ -7242,10 +6872,7 @@
     },
     "MetricConfiguration": {
       "description": "Metric configuration.",
-      "required": [
-        "resourceId",
-        "counterSets"
-      ],
+      "required": ["resourceId", "counterSets"],
       "type": "object",
       "properties": {
         "resourceId": {
@@ -7273,9 +6900,7 @@
     },
     "MetricCounter": {
       "description": "The metric counter",
-      "required": [
-        "name"
-      ],
+      "required": ["name"],
       "type": "object",
       "properties": {
         "name": {
@@ -7293,9 +6918,7 @@
           "items": {
             "$ref": "#/definitions/MetricDimension"
           },
-          "x-ms-identifiers": [
-            "sourceName"
-          ]
+          "x-ms-identifiers": ["sourceName"]
         },
         "additionalDimensions": {
           "description": "The additional dimensions to be added to metric.",
@@ -7304,17 +6927,13 @@
           "items": {
             "$ref": "#/definitions/MetricDimension"
           },
-          "x-ms-identifiers": [
-            "sourceName"
-          ]
+          "x-ms-identifiers": ["sourceName"]
         }
       }
     },
     "MetricCounterSet": {
       "description": "The metric counter set",
-      "required": [
-        "counters"
-      ],
+      "required": ["counters"],
       "type": "object",
       "properties": {
         "counters": {
@@ -7324,18 +6943,13 @@
           "items": {
             "$ref": "#/definitions/MetricCounter"
           },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "x-ms-identifiers": ["name"]
         }
       }
     },
     "MetricDimension": {
       "description": "The metric dimension",
-      "required": [
-        "sourceType",
-        "sourceName"
-      ],
+      "required": ["sourceType", "sourceName"],
       "type": "object",
       "properties": {
         "sourceType": {
@@ -7424,9 +7038,7 @@
           "items": {
             "$ref": "#/definitions/MetricDimension_V1"
           },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "x-ms-identifiers": ["name"]
         },
         "fillGapWithZero": {
           "description": "Set true to fill the gaps with zero.",
@@ -7434,10 +7046,7 @@
         },
         "category": {
           "description": "Metric category.",
-          "enum": [
-            "Capacity",
-            "Transaction"
-          ],
+          "enum": ["Capacity", "Transaction"],
           "type": "string",
           "x-ms-enum": {
             "name": "MetricCategory",
@@ -7495,9 +7104,7 @@
     },
     "MonitoringMetricConfiguration": {
       "description": "The metric setting details for the role",
-      "required": [
-        "properties"
-      ],
+      "required": ["properties"],
       "type": "object",
       "allOf": [
         {
@@ -7540,9 +7147,7 @@
     },
     "MonitoringMetricConfigurationProperties": {
       "description": "Metrics properties",
-      "required": [
-        "metricConfigurations"
-      ],
+      "required": ["metricConfigurations"],
       "type": "object",
       "properties": {
         "metricConfigurations": {
@@ -7558,9 +7163,7 @@
     },
     "MountPointMap": {
       "description": "The share mount point.",
-      "required": [
-        "shareId"
-      ],
+      "required": ["shareId"],
       "type": "object",
       "properties": {
         "shareId": {
@@ -7579,10 +7182,7 @@
         },
         "mountType": {
           "description": "Mounting type.",
-          "enum": [
-            "Volume",
-            "HostPath"
-          ],
+          "enum": ["Volume", "HostPath"],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -7658,10 +7258,7 @@
         },
         "status": {
           "description": "Value indicating whether this adapter is valid.",
-          "enum": [
-            "Inactive",
-            "Active"
-          ],
+          "enum": ["Inactive", "Active"],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -7671,10 +7268,7 @@
         },
         "rdmaStatus": {
           "description": "Value indicating whether this adapter is RDMA capable.",
-          "enum": [
-            "Incapable",
-            "Capable"
-          ],
+          "enum": ["Incapable", "Capable"],
           "type": "string",
           "x-ms-enum": {
             "name": "NetworkAdapterRDMAStatus",
@@ -7683,10 +7277,7 @@
         },
         "dhcpStatus": {
           "description": "Value indicating whether this adapter has DHCP enabled.",
-          "enum": [
-            "Disabled",
-            "Enabled"
-          ],
+          "enum": ["Disabled", "Enabled"],
           "type": "string",
           "x-ms-enum": {
             "name": "NetworkAdapterDHCPStatus",
@@ -7726,11 +7317,7 @@
       "properties": {
         "networkGroup": {
           "description": "The network group.",
-          "enum": [
-            "None",
-            "NonRDMA",
-            "RDMA"
-          ],
+          "enum": ["None", "NonRDMA", "RDMA"],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -7779,9 +7366,7 @@
           "items": {
             "$ref": "#/definitions/NetworkAdapter"
           },
-          "x-ms-identifiers": [
-            "adapterId"
-          ],
+          "x-ms-identifiers": ["adapterId"],
           "readOnly": true
         }
       }
@@ -7814,11 +7399,7 @@
         },
         "type": {
           "description": "Node type - Master/Worker",
-          "enum": [
-            "Invalid",
-            "Master",
-            "Worker"
-          ],
+          "enum": ["Invalid", "Master", "Worker"],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -7833,10 +7414,7 @@
           "items": {
             "$ref": "#/definitions/KubernetesIPConfiguration"
           },
-          "x-ms-identifiers": [
-            "ipAddress",
-            "port"
-          ]
+          "x-ms-identifiers": ["ipAddress", "port"]
         }
       }
     },
@@ -7867,13 +7445,7 @@
       "properties": {
         "nodeStatus": {
           "description": "The current status of the individual node",
-          "enum": [
-            "Unknown",
-            "Up",
-            "Down",
-            "Rebooting",
-            "ShuttingDown"
-          ],
+          "enum": ["Unknown", "Up", "Down", "Rebooting", "ShuttingDown"],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -8027,9 +7599,7 @@
     },
     "OperationsList": {
       "description": "The list of operations used for the discovery of available provider operations.",
-      "required": [
-        "value"
-      ],
+      "required": ["value"],
       "type": "object",
       "properties": {
         "value": {
@@ -8039,9 +7609,7 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "x-ms-identifiers": ["name"]
         },
         "nextLink": {
           "description": "Link to the next set of results.",
@@ -8099,9 +7667,7 @@
     "OrderProperties": {
       "description": "Order properties.",
       "type": "object",
-      "required": [
-        "contactInformation"
-      ],
+      "required": ["contactInformation"],
       "properties": {
         "orderId": {
           "description": "It specify the order resource id.",
@@ -8128,9 +7694,7 @@
           "items": {
             "$ref": "#/definitions/OrderStatus"
           },
-          "x-ms-identifiers": [
-            "trackingInformation/serialNumber"
-          ],
+          "x-ms-identifiers": ["trackingInformation/serialNumber"],
           "readOnly": true
         },
         "serialNumber": {
@@ -8145,9 +7709,7 @@
           "items": {
             "$ref": "#/definitions/TrackingInfo"
           },
-          "x-ms-identifiers": [
-            "serialNumber"
-          ],
+          "x-ms-identifiers": ["serialNumber"],
           "readOnly": true
         },
         "returnTrackingInfo": {
@@ -8157,18 +7719,12 @@
           "items": {
             "$ref": "#/definitions/TrackingInfo"
           },
-          "x-ms-identifiers": [
-            "serialNumber"
-          ],
+          "x-ms-identifiers": ["serialNumber"],
           "readOnly": true
         },
         "shipmentType": {
           "description": "ShipmentType of the order",
-          "enum": [
-            "NotApplicable",
-            "ShippedToCustomer",
-            "SelfPickup"
-          ],
+          "enum": ["NotApplicable", "ShippedToCustomer", "SelfPickup"],
           "type": "string",
           "x-ms-enum": {
             "name": "ShipmentType",
@@ -8179,9 +7735,7 @@
     },
     "OrderStatus": {
       "description": "Represents a single status change.",
-      "required": [
-        "status"
-      ],
+      "required": ["status"],
       "type": "object",
       "properties": {
         "status": {
@@ -8238,10 +7792,7 @@
     },
     "PeriodicTimerEventTrigger": {
       "description": "Trigger details.",
-      "required": [
-        "properties",
-        "kind"
-      ],
+      "required": ["properties", "kind"],
       "type": "object",
       "allOf": [
         {
@@ -8274,10 +7825,7 @@
     },
     "PeriodicTimerProperties": {
       "description": "Periodic timer trigger properties.",
-      "required": [
-        "sourceInfo",
-        "sinkInfo"
-      ],
+      "required": ["sourceInfo", "sinkInfo"],
       "type": "object",
       "properties": {
         "sourceInfo": {
@@ -8297,10 +7845,7 @@
     },
     "PeriodicTimerSourceInfo": {
       "description": "Periodic timer event source.",
-      "required": [
-        "startTime",
-        "schedule"
-      ],
+      "required": ["startTime", "schedule"],
       "type": "object",
       "properties": {
         "startTime": {
@@ -8320,17 +7865,12 @@
     },
     "ProactiveLogCollectionSettingsProperties": {
       "description": "The properties of proactive log collection settings.",
-      "required": [
-        "userConsent"
-      ],
+      "required": ["userConsent"],
       "type": "object",
       "properties": {
         "userConsent": {
           "description": "Proactive diagnostic collection consent flag",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
+          "enum": ["Enabled", "Disabled"],
           "type": "string",
           "x-ms-enum": {
             "name": "ProactiveDiagnosticsConsent",
@@ -8341,17 +7881,12 @@
     },
     "RawCertificateData": {
       "description": "Raw Certificate Data.",
-      "required": [
-        "certificate"
-      ],
+      "required": ["certificate"],
       "type": "object",
       "properties": {
         "authenticationType": {
           "description": "The authentication type.",
-          "enum": [
-            "Invalid",
-            "AzureActiveDirectory"
-          ],
+          "enum": ["Invalid", "AzureActiveDirectory"],
           "type": "string",
           "x-ms-enum": {
             "name": "AuthenticationType",
@@ -8393,12 +7928,7 @@
       "properties": {
         "remoteApplicationType": {
           "description": "Remote application type",
-          "enum": [
-            "Powershell",
-            "WAC",
-            "LocalUI",
-            "AllApplications"
-          ],
+          "enum": ["Powershell", "WAC", "LocalUI", "AllApplications"],
           "type": "string",
           "x-ms-enum": {
             "name": "RemoteApplicationType",
@@ -8407,12 +7937,7 @@
         },
         "accessLevel": {
           "description": "Access level allowed for this remote application type",
-          "enum": [
-            "None",
-            "ReadOnly",
-            "ReadWrite",
-            "FullAccess"
-          ],
+          "enum": ["None", "ReadOnly", "ReadWrite", "FullAccess"],
           "type": "string",
           "x-ms-enum": {
             "name": "AccessLevel",
@@ -8432,11 +7957,7 @@
       "properties": {
         "type": {
           "description": "Identity type",
-          "enum": [
-            "None",
-            "SystemAssigned",
-            "UserAssigned"
-          ],
+          "enum": ["None", "SystemAssigned", "UserAssigned"],
           "type": "string",
           "x-ms-enum": {
             "name": "MsiIdentityType",
@@ -8461,11 +7982,7 @@
       "properties": {
         "operationInProgress": {
           "description": "Denotes whether move operation is in progress",
-          "enum": [
-            "None",
-            "ResourceMoveInProgress",
-            "ResourceMoveFailed"
-          ],
+          "enum": ["None", "ResourceMoveInProgress", "ResourceMoveFailed"],
           "type": "string",
           "x-ms-enum": {
             "name": "ResourceMoveStatus",
@@ -8481,9 +7998,7 @@
     },
     "Role": {
       "description": "Compute role.",
-      "required": [
-        "kind"
-      ],
+      "required": ["kind"],
       "type": "object",
       "allOf": [
         {
@@ -8539,9 +8054,7 @@
     },
     "RoleSinkInfo": {
       "description": "Compute role against which events will be raised.",
-      "required": [
-        "roleId"
-      ],
+      "required": ["roleId"],
       "type": "object",
       "properties": {
         "roleId": {
@@ -8566,9 +8079,7 @@
     },
     "SecuritySettings": {
       "description": "The security settings of a device.",
-      "required": [
-        "properties"
-      ],
+      "required": ["properties"],
       "type": "object",
       "allOf": [
         {
@@ -8585,9 +8096,7 @@
     },
     "SecuritySettingsProperties": {
       "description": "The properties of security settings.",
-      "required": [
-        "deviceAdminPassword"
-      ],
+      "required": ["deviceAdminPassword"],
       "type": "object",
       "properties": {
         "deviceAdminPassword": {
@@ -8607,17 +8116,13 @@
           "items": {
             "$ref": "#/definitions/MetricSpecification_V1"
           },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "x-ms-identifiers": ["name"]
         }
       }
     },
     "Share": {
       "description": "Represents a share on the  Data Box Edge/Gateway device.",
-      "required": [
-        "properties"
-      ],
+      "required": ["properties"],
       "type": "object",
       "allOf": [
         {
@@ -8639,10 +8144,7 @@
     },
     "ShareAccessRight": {
       "description": "Specifies the mapping between this particular user and the type of access he has on shares on this device.",
-      "required": [
-        "shareId",
-        "accessType"
-      ],
+      "required": ["shareId", "accessType"],
       "type": "object",
       "properties": {
         "shareId": {
@@ -8651,11 +8153,7 @@
         },
         "accessType": {
           "description": "Type of access to be allowed on the share for this user.",
-          "enum": [
-            "Change",
-            "Read",
-            "Custom"
-          ],
+          "enum": ["Change", "Read", "Custom"],
           "type": "string",
           "x-ms-enum": {
             "name": "ShareAccessType",
@@ -8687,11 +8185,7 @@
     },
     "ShareProperties": {
       "description": "The share properties.",
-      "required": [
-        "shareStatus",
-        "monitoringStatus",
-        "accessProtocol"
-      ],
+      "required": ["shareStatus", "monitoringStatus", "accessProtocol"],
       "type": "object",
       "properties": {
         "description": {
@@ -8700,13 +8194,7 @@
         },
         "shareStatus": {
           "description": "Current status of the share.",
-          "enum": [
-            "Offline",
-            "Unknown",
-            "OK",
-            "Updating",
-            "NeedsAttention"
-          ],
+          "enum": ["Offline", "Unknown", "OK", "Updating", "NeedsAttention"],
           "type": "string",
           "x-ms-enum": {
             "name": "ShareStatus",
@@ -8715,10 +8203,7 @@
         },
         "monitoringStatus": {
           "description": "Current monitoring status of the share.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
+          "enum": ["Enabled", "Disabled"],
           "type": "string",
           "x-ms-enum": {
             "name": "MonitoringStatus",
@@ -8731,10 +8216,7 @@
         },
         "accessProtocol": {
           "description": "Access protocol to be used by the share.",
-          "enum": [
-            "SMB",
-            "NFS"
-          ],
+          "enum": ["SMB", "NFS"],
           "type": "string",
           "x-ms-enum": {
             "name": "ShareAccessProtocol",
@@ -8748,9 +8230,7 @@
           "items": {
             "$ref": "#/definitions/UserAccessRight"
           },
-          "x-ms-identifiers": [
-            "userId"
-          ]
+          "x-ms-identifiers": ["userId"]
         },
         "clientAccessRights": {
           "description": "List of IP addresses and corresponding access rights on the share(required for NFS protocol).",
@@ -8759,9 +8239,7 @@
           "items": {
             "$ref": "#/definitions/ClientAccessRight"
           },
-          "x-ms-identifiers": [
-            "client"
-          ]
+          "x-ms-identifiers": ["client"]
         },
         "refreshDetails": {
           "$ref": "#/definitions/RefreshDetails",
@@ -8774,17 +8252,12 @@
           "items": {
             "$ref": "#/definitions/MountPointMap"
           },
-          "x-ms-identifiers": [
-            "shareId"
-          ],
+          "x-ms-identifiers": ["shareId"],
           "readOnly": true
         },
         "dataPolicy": {
           "description": "Data policy of the share.",
-          "enum": [
-            "Cloud",
-            "Local"
-          ],
+          "enum": ["Cloud", "Local"],
           "type": "string",
           "x-ms-enum": {
             "name": "DataPolicy",
@@ -8838,9 +8311,7 @@
         },
         "tier": {
           "description": "The SKU tier. This is based on the SKU name.",
-          "enum": [
-            "Standard"
-          ],
+          "enum": ["Standard"],
           "type": "string",
           "x-ms-enum": {
             "name": "SkuTier",
@@ -8920,9 +8391,7 @@
     },
     "StorageAccount": {
       "description": "Represents a Storage Account on the  Data Box Edge/Gateway device.",
-      "required": [
-        "properties"
-      ],
+      "required": ["properties"],
       "type": "object",
       "allOf": [
         {
@@ -8944,9 +8413,7 @@
     },
     "StorageAccountCredential": {
       "description": "The storage account credential.",
-      "required": [
-        "properties"
-      ],
+      "required": ["properties"],
       "type": "object",
       "allOf": [
         {
@@ -8989,11 +8456,7 @@
     },
     "StorageAccountCredentialProperties": {
       "description": "The storage account credential properties.",
-      "required": [
-        "alias",
-        "sslStatus",
-        "accountType"
-      ],
+      "required": ["alias", "sslStatus", "accountType"],
       "type": "object",
       "properties": {
         "alias": {
@@ -9014,10 +8477,7 @@
         },
         "sslStatus": {
           "description": "Signifies whether SSL needs to be enabled or not.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
+          "enum": ["Enabled", "Disabled"],
           "type": "string",
           "x-ms-enum": {
             "name": "SSLStatus",
@@ -9030,10 +8490,7 @@
         },
         "accountType": {
           "description": "Type of storage accessed on the storage account.",
-          "enum": [
-            "GeneralPurposeStorage",
-            "BlobStorage"
-          ],
+          "enum": ["GeneralPurposeStorage", "BlobStorage"],
           "type": "string",
           "x-ms-enum": {
             "name": "AccountType",
@@ -9069,9 +8526,7 @@
     },
     "StorageAccountProperties": {
       "description": "The storage account properties.",
-      "required": [
-        "dataPolicy"
-      ],
+      "required": ["dataPolicy"],
       "type": "object",
       "properties": {
         "description": {
@@ -9080,13 +8535,7 @@
         },
         "storageAccountStatus": {
           "description": "Current status of the storage account",
-          "enum": [
-            "OK",
-            "Offline",
-            "Unknown",
-            "Updating",
-            "NeedsAttention"
-          ],
+          "enum": ["OK", "Offline", "Unknown", "Updating", "NeedsAttention"],
           "type": "string",
           "x-ms-enum": {
             "name": "StorageAccountStatus",
@@ -9095,10 +8544,7 @@
         },
         "dataPolicy": {
           "description": "Data policy of the storage Account.",
-          "enum": [
-            "Cloud",
-            "Local"
-          ],
+          "enum": ["Cloud", "Local"],
           "type": "string",
           "x-ms-enum": {
             "name": "DataPolicy",
@@ -9143,9 +8589,7 @@
           "items": {
             "$ref": "#/definitions/SubscriptionRegisteredFeatures"
           },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "x-ms-identifiers": ["name"]
         }
       }
     },
@@ -9214,9 +8658,7 @@
     },
     "Trigger": {
       "description": "Trigger details.",
-      "required": [
-        "kind"
-      ],
+      "required": ["kind"],
       "type": "object",
       "allOf": [
         {
@@ -9226,10 +8668,7 @@
       "properties": {
         "kind": {
           "description": "Trigger Kind.",
-          "enum": [
-            "FileEvent",
-            "PeriodicTimerEvent"
-          ],
+          "enum": ["FileEvent", "PeriodicTimerEvent"],
           "type": "string",
           "x-ms-enum": {
             "name": "TriggerEventType",
@@ -9267,9 +8706,7 @@
     },
     "TriggerSupportPackageRequest": {
       "description": "The request object for trigger support package.",
-      "required": [
-        "properties"
-      ],
+      "required": ["properties"],
       "type": "object",
       "allOf": [
         {
@@ -9299,11 +8736,7 @@
         },
         "updateType": {
           "description": "Type of the Update",
-          "enum": [
-            "Software",
-            "Kubernetes",
-            "Firmware"
-          ],
+          "enum": ["Software", "Kubernetes", "Firmware"],
           "type": "string",
           "x-ms-enum": {
             "name": "UpdateType",
@@ -9325,11 +8758,7 @@
         },
         "rebootBehavior": {
           "description": "Indicates if updates are available and at least one of the updates needs a reboot.",
-          "enum": [
-            "NeverReboots",
-            "RequiresReboot",
-            "RequestReboot"
-          ],
+          "enum": ["NeverReboots", "RequiresReboot", "RequestReboot"],
           "type": "string",
           "x-ms-enum": {
             "name": "InstallRebootBehavior",
@@ -9338,11 +8767,7 @@
         },
         "installationImpact": {
           "description": "Impact of Installing an updateType",
-          "enum": [
-            "None",
-            "DeviceRebooted",
-            "KubernetesWorkloadsDown"
-          ],
+          "enum": ["None", "DeviceRebooted", "KubernetesWorkloadsDown"],
           "type": "string",
           "x-ms-enum": {
             "name": "InstallationImpact",
@@ -9372,12 +8797,7 @@
       "properties": {
         "downloadPhase": {
           "description": "The download phase.",
-          "enum": [
-            "Unknown",
-            "Initializing",
-            "Downloading",
-            "Verifying"
-          ],
+          "enum": ["Unknown", "Initializing", "Downloading", "Verifying"],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -9572,11 +8992,7 @@
         },
         "rebootBehavior": {
           "description": "Indicates if updates are available and at least one of the updates needs a reboot.",
-          "enum": [
-            "NeverReboots",
-            "RequiresReboot",
-            "RequestReboot"
-          ],
+          "enum": ["NeverReboots", "RequiresReboot", "RequestReboot"],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -9586,12 +9002,7 @@
         },
         "ongoingUpdateOperation": {
           "description": "The current update operation.",
-          "enum": [
-            "None",
-            "Scan",
-            "Download",
-            "Install"
-          ],
+          "enum": ["None", "Scan", "Download", "Install"],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -9637,9 +9048,7 @@
           "items": {
             "$ref": "#/definitions/UpdateDetails"
           },
-          "x-ms-identifiers": [
-            "updateTitle"
-          ],
+          "x-ms-identifiers": ["updateTitle"],
           "readOnly": true
         },
         "totalUpdateSizeInBytes": {
@@ -9658,9 +9067,7 @@
     },
     "UploadCertificateRequest": {
       "description": "The upload certificate request.",
-      "required": [
-        "properties"
-      ],
+      "required": ["properties"],
       "type": "object",
       "properties": {
         "properties": {
@@ -9676,10 +9083,7 @@
       "properties": {
         "authType": {
           "description": "Specifies authentication type.",
-          "enum": [
-            "Invalid",
-            "AzureActiveDirectory"
-          ],
+          "enum": ["Invalid", "AzureActiveDirectory"],
           "type": "string",
           "x-ms-enum": {
             "name": "AuthenticationType",
@@ -9725,9 +9129,7 @@
     },
     "User": {
       "description": "Represents a user who has access to one or more shares on the Data Box Edge/Gateway device.",
-      "required": [
-        "properties"
-      ],
+      "required": ["properties"],
       "type": "object",
       "allOf": [
         {
@@ -9749,10 +9151,7 @@
     },
     "UserAccessRight": {
       "description": "The mapping between a particular user and the access type on the SMB share.",
-      "required": [
-        "userId",
-        "accessType"
-      ],
+      "required": ["userId", "accessType"],
       "type": "object",
       "properties": {
         "userId": {
@@ -9761,11 +9160,7 @@
         },
         "accessType": {
           "description": "Type of access to be allowed for the user.",
-          "enum": [
-            "Change",
-            "Read",
-            "Custom"
-          ],
+          "enum": ["Change", "Read", "Custom"],
           "type": "string",
           "x-ms-enum": {
             "name": "ShareAccessType",
@@ -9797,9 +9192,7 @@
     },
     "UserProperties": {
       "description": "The user properties.",
-      "required": [
-        "userType"
-      ],
+      "required": ["userType"],
       "type": "object",
       "properties": {
         "encryptedPassword": {
@@ -9813,18 +9206,12 @@
           "items": {
             "$ref": "#/definitions/ShareAccessRight"
           },
-          "x-ms-identifiers": [
-            "shareId"
-          ],
+          "x-ms-identifiers": ["shareId"],
           "readOnly": true
         },
         "userType": {
           "description": "Type of the user.",
-          "enum": [
-            "Share",
-            "LocalManagement",
-            "ARM"
-          ],
+          "enum": ["Share", "LocalManagement", "ARM"],
           "type": "string",
           "x-ms-enum": {
             "name": "UserType",
@@ -9921,9 +9308,7 @@
   },
   "security": [
     {
-      "azure_auth": [
-        "user_impersonation"
-      ]
+      "azure_auth": ["user_impersonation"]
     }
   ],
   "tags": []
