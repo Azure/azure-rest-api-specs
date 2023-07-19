@@ -835,7 +835,7 @@ enum SummaryAspect {
   chapterTitle,
 
   @doc("Generic narrative summary of any conversation. It generally converts the conversational language into formal written language, compresses the text length, and keeps the salient information.")
-  narritive,
+  narrative,
 }
 
 @doc("Result for the summarization task on the conversation.")
