@@ -317,8 +317,7 @@ enum extraInformationKind {
   EntitySubtype,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'ListKey' should have a documentation or description, please use decorator @doc to add it."
   ListKey,
-
-  @doc("Regex Key")
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'RegexKey' should have a documentation or description, please use decorator @doc to add it."
   RegexKey,
 }
 
