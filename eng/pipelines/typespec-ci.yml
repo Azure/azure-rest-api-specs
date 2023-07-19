@@ -21,8 +21,8 @@ pr:
 jobs:
 - job: Validate_All_Specs
   pool:
-    name: $(Pool)
-    vmImage: $(OSVmImage)
+    name: azsdk-pool-mms-ubuntu-2204-general
+    vmImage: ubuntu-22.04
 
   steps:
   - script: npm ci
