@@ -37,7 +37,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{iotHubName}/networkSecurityPerimeterConfigurations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/networkSecurityPerimeterConfigurations": {
       "get": {
         "tags": [
           "NetworkSecurityPerimeterConfigurations"
@@ -46,16 +46,16 @@
         "operationId": "NetworkSecurityPerimeterConfigurations_ListByIotHub",
         "parameters": [
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+            "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "$ref": "#/parameters/IotHubNameParameter"
+            "$ref": "#/parameters/resourceName"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -76,7 +76,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{iotHubName}/networkSecurityPerimeterConfigurations/{nspConfigName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/networkSecurityPerimeterConfigurations/{nspConfigName}": {
       "get": {
         "tags": [
           "NetworkSecurityPerimeterConfigurations"
@@ -85,10 +85,10 @@
         "operationId": "NetworkSecurityPerimeterConfigurations_Get",
         "parameters": [
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+            "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "$ref": "#/parameters/IotHubNameParameter"
+            "$ref": "#/parameters/resourceName"
           },
           {
             "name": "nspConfigName",
@@ -97,10 +97,10 @@
             "type": "string"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -121,7 +121,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{iotHubName}/networkSecurityPerimeterConfigurations/{nspConfigName}/reconcile": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/networkSecurityPerimeterConfigurations/{nspConfigName}/reconcile": {
       "post": {
         "tags": [
           "NetworkSecurityPerimeterConfigurations"
@@ -130,10 +130,10 @@
         "operationId": "NetworkSecurityPerimeterConfigurations_Reconcile",
         "parameters": [
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+            "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "$ref": "#/parameters/IotHubNameParameter"
+            "$ref": "#/parameters/resourceName"
           },
           {
             "name": "nspConfigName",
@@ -142,10 +142,10 @@
             "type": "string"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -366,6 +366,38 @@
           }
         }
       }
+    }
+  },
+  "parameters": {
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription identifier.",
+      "required": true,
+      "type": "string"
+    },
+    "api-version": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The version of the API.",
+      "required": true,
+      "type": "string"
+    },
+    "resourceGroupName": {
+      "name": "resourceGroupName",
+      "description": "The name of the resource group that contains the IoT hub.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceName": {
+      "name": "resourceName",
+      "in": "path",
+      "description": "The name of the IoT hub.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }
