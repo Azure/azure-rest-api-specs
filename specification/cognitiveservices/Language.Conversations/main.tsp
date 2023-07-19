@@ -314,11 +314,9 @@ model BaseExtraInformation {
 enum extraInformationKind {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'EntitySubtype' should have a documentation or description, please use decorator @doc to add it."
   EntitySubtype,
-
-  @doc("List key.")
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'ListKey' should have a documentation or description, please use decorator @doc to add it."
   ListKey,
-
-  @doc("Regex Key")
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'RegexKey' should have a documentation or description, please use decorator @doc to add it."
   RegexKey,
 }
 
@@ -581,7 +579,7 @@ model AnalyzeConversationJobsInput {
 
   @doc("Analysis Input")
   analysisInput: MultiLanguageConversationAnalysisInput;
-  
+
   @doc("Set of tasks to execute on the input conversation.")
   tasks: Array<AnalyzeConversationLROTask>;
 }
@@ -1341,14 +1339,11 @@ enum VolumeUnit {
   Minim,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Cord' should have a documentation or description, please use decorator @doc to add it."
   Cord,
-
-  @doc("The Volume Unit of measurement")
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Cord' should have a documentation or description, please use decorator @doc to add it."
   Peck,
-
-  @doc("The Volume Unit of measurement")
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Bushel' should have a documentation or description, please use decorator @doc to add it."
   Bushel,
-
-  @doc("The Volume Unit of measurement")
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Hogshead' should have a documentation or description, please use decorator @doc to add it."
   Hogshead,
 }
 
