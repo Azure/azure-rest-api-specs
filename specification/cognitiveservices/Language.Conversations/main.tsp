@@ -167,7 +167,7 @@ model LuisParameters extends Record<unknown> {
 model LuisCallingOptions {
   @doc("Enable verbose response.")
   verbose?: boolean;
-
+  
   @doc("Save log to add in training utterances later.")
   log?: boolean;
 
@@ -314,11 +314,9 @@ model BaseExtraInformation {
 enum extraInformationKind {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'EntitySubtype' should have a documentation or description, please use decorator @doc to add it."
   EntitySubtype,
-
-  @doc("List key.")
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'ListKey' should have a documentation or description, please use decorator @doc to add it."
   ListKey,
-
-  @doc("Regex Key")
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'RegexKey' should have a documentation or description, please use decorator @doc to add it."
   RegexKey,
 }
 
@@ -1341,14 +1339,11 @@ enum VolumeUnit {
   Minim,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Cord' should have a documentation or description, please use decorator @doc to add it."
   Cord,
-
-  @doc("The Volume Unit of measurement")
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Cord' should have a documentation or description, please use decorator @doc to add it."
   Peck,
-
-  @doc("The Volume Unit of measurement")
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Bushel' should have a documentation or description, please use decorator @doc to add it."
   Bushel,
-
-  @doc("The Volume Unit of measurement")
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Hogshead' should have a documentation or description, please use decorator @doc to add it."
   Hogshead,
 }
 
