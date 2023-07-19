@@ -32,6 +32,7 @@
   "responses": {
     "200": {
       "body": {
+        "id": "foo/bar/id",
         "properties": {
           "metricConfigurations": [
             {
@@ -52,6 +53,14 @@
         }
       }
     },
-    "202": {}
+    "202": {
+      "description": "ACCEPTED",
+      "headers": {
+        "Azure-AsyncOperation": {
+          "description": "URL to query for status of the operation.",
+          "type": "string"
+        }
+      }
+    }
   }
 }
