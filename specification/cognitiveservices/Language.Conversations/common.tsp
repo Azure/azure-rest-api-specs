@@ -475,7 +475,7 @@ enum Sentiment {
 @added(Versions.v2023_04_01)
 model SentimentConfidenceScores {
     @doc("Confidence score for positive sentiment")
-    postive: float64;
+    positive: float64;
 
     @doc("Confidence score for neutral sentiment")
     neutral: float64;
