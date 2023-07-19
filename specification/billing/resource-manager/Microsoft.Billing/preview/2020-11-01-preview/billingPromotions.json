@@ -140,7 +140,7 @@
           "Promotion_CheckEligibility"
         ],
         "operationId": "Promotion_CheckEligibility",
-        "description": "Checks the eligibility of a subscription for all active promotions.",
+        "description": "Checks the eligibility of a subscription for a given promotion.",
         "x-ms-examples": {
           "PromotionCheckEligibility": {
             "$ref": "./examples/PromotionCheckEligibility.json"
@@ -162,6 +162,42 @@
             "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PromotionCheckEligibilityResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/promotions": {
+      "get": {
+        "tags": [
+          "Promotions_CheckEligibility"
+        ],
+        "operationId": "Promotions_CheckEligibility",
+        "description": "Checks the eligibility of a subscription for all active promotions.",
+        "x-ms-examples": {
+          "PromotionsCheckEligibility": {
+            "$ref": "./examples/PromotionsCheckEligibility.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PromotionsCheckEligibilityResponse"
             }
           },
           "default": {
@@ -217,21 +253,10 @@
     },
     "PromotionList": {
       "description": "The list of promotions.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of promotions.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/PromotionResponse"
-          }
-        },
-        "nextLink": {
-          "description": "The link (url) to the next page of results.",
-          "type": "string",
-          "readOnly": true
-        }
+      "type": "array",
+      "readOnly": true,
+      "items": {
+        "$ref": "#/definitions/PromotionResponse"
       }
     },
     "PromotionResponse": {
@@ -313,7 +338,37 @@
         }
       }
     },
+    "PromotionsCheckEligibilityResponse": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PromotionCheckEligibilityResponsePropertiesList"
+        }
+      }
+    },
     "PromotionCheckEligibilityResponseProperties": {
+      "type": "object",
+      "properties": {
+        "promotion": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PromotionEligibilityProperties"
+        }
+      }
+    },
+    "PromotionCheckEligibilityResponsePropertiesList": {
+      "type": "object",
+      "properties": {
+        "promotions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PromotionEligibilityProperties"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "PromotionEligibilityProperties": {
       "type": "object",
       "properties": {
         "id": {
@@ -331,6 +386,10 @@
         "reason": {
           "type": "string",
           "description": "Reason in case the subscription is not eligible for promotion."
+        },
+        "details": {
+          "type": "string",
+          "description": "The reasonCode for the sub if it is invalid."
         },
         "eligibilitySubscriptionId": {
           "type": "string",
