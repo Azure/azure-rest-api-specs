@@ -20,18 +20,15 @@
   },
   "responses": {
     "200": {
-      "id": "foo/bar/id"
+      "description": "ACCEPTED",
+      "headers": {
+        "Azure-AsyncOperation": "https://foo.com/TriggerSupportPackage"
+      }
     },
     "202": {
       "description": "ACCEPTED",
       "headers": {
-        "Location": {
-          "type": "string"
-        },
-        "Azure-AsyncOperation": {
-          "description": "Accepted the request to refresh the share on the device.",
-          "type": "string"
-        }
+        "Azure-AsyncOperation": "https://foo.com/ShareRefreshPost"
       }
     }
   }
