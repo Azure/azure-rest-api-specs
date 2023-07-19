@@ -3,6 +3,7 @@
   "info": {
     "title": "Microsoft Cognitive Language Service - Analyze Conversations",
     "version": "2022-05-01",
+    "description": "The language service conversations API is a suite of natural language processing (NLP) skills that can be used to analyze structured conversations (textual or spoken). The synchronous API in this suite accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, Conversational Language Understanding, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\n\n In some cases, this API needs to forward requests and responses between the caller and an upstream service. The asynchronous APIs in this suite enable tasks like Conversation Summarization and Conversational PII detection.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -119,7 +120,7 @@
           "description": "The numeric value that the extracted text denotes."
         },
         "unit": {
-          "$ref": "#/definitions/unit",
+          "$ref": "#/definitions/AgeUnit",
           "description": "The Age Unit of measurement"
         }
       },
@@ -133,6 +134,21 @@
           "$ref": "#/definitions/BaseResolution"
         }
       ]
+    },
+    "AgeUnit": {
+      "type": "string",
+      "description": "The Age Unit of measurement",
+      "enum": [
+        "Unspecified",
+        "Year",
+        "Month",
+        "Week",
+        "Day"
+      ],
+      "x-ms-enum": {
+        "name": "AgeUnit",
+        "modelAsString": true
+      }
     },
     "AnalysisParameters": {
       "type": "object",
@@ -199,14 +215,7 @@
       ],
       "x-ms-enum": {
         "name": "AnalyzeConversationTaskKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Conversation",
-            "value": "Conversation",
-            "description": "Conversation task"
-          }
-        ]
+        "modelAsString": true
       }
     },
     "AnalyzeConversationTaskResult": {
@@ -234,14 +243,7 @@
       ],
       "x-ms-enum": {
         "name": "AnalyzeConversationTaskResultsKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ConversationResult",
-            "value": "ConversationResult",
-            "description": "Conversational task result."
-          }
-        ]
+        "modelAsString": true
       }
     },
     "AnswerSpan": {
@@ -297,15 +299,18 @@
           "format": "double",
           "description": "Minimum threshold score for answers, value ranges from 0 to 1.",
           "minimum": 0,
-          "maximum": 1
+          "maximum": 1,
+          "x-ms-client-name": "confidenceThreshold"
         },
         "context": {
           "$ref": "#/definitions/KnowledgeBaseAnswerContext",
-          "description": "Context object with previous QnA's information."
+          "description": "Context object with previous QnA's information.",
+          "x-ms-client-name": "answerContext"
         },
         "rankerType": {
           "$ref": "#/definitions/RankerKind",
-          "description": "Type of ranker to be used."
+          "description": "Type of ranker to be used.",
+          "x-ms-client-name": "rankerKind"
         },
         "filters": {
           "$ref": "#/definitions/QueryFilters",
@@ -313,7 +318,8 @@
         },
         "answerSpanRequest": {
           "$ref": "#/definitions/ShortAnswerOptions",
-          "description": "To configure Answer span prediction feature."
+          "description": "To configure Answer span prediction feature.",
+          "x-ms-client-name": "shortAnswerOptions"
         },
         "includeUnstructuredSources": {
           "type": "boolean",
@@ -380,74 +386,7 @@
       ],
       "x-ms-enum": {
         "name": "AreaUnit",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Unspecified",
-            "value": "Unspecified",
-            "description": "Unspecified unit of area."
-          },
-          {
-            "name": "SquareKilometer",
-            "value": "SquareKilometer",
-            "description": "SI unit of area."
-          },
-          {
-            "name": "SquareHectometer",
-            "value": "SquareHectometer",
-            "description": "SI unit of area."
-          },
-          {
-            "name": "SquareDecameter",
-            "value": "SquareDecameter",
-            "description": "SI unit of area."
-          },
-          {
-            "name": "SquareDecimeter",
-            "value": "SquareDecimeter",
-            "description": "SI unit of area."
-          },
-          {
-            "name": "SquareMeter",
-            "value": "SquareMeter",
-            "description": "SI unit of area."
-          },
-          {
-            "name": "SquareCentimeter",
-            "value": "SquareCentimeter",
-            "description": "SI unit of area."
-          },
-          {
-            "name": "SquareMillimeter",
-            "value": "SquareMillimeter",
-            "description": "SI unit of area."
-          },
-          {
-            "name": "SquareInch",
-            "value": "SquareInch",
-            "description": "Imperial unit of area."
-          },
-          {
-            "name": "SquareFoot",
-            "value": "SquareFoot",
-            "description": "Imperial unit of area."
-          },
-          {
-            "name": "SquareMile",
-            "value": "SquareMile",
-            "description": "Imperial unit of area."
-          },
-          {
-            "name": "SquareYard",
-            "value": "SquareYard",
-            "description": "Imperial unit of area."
-          },
-          {
-            "name": "Acre",
-            "value": "Acre",
-            "description": "Imperial unit of area."
-          }
-        ]
+        "modelAsString": true
       }
     },
     "Azure.Core.Foundations.Error": {
@@ -967,7 +906,7 @@
     },
     "DateTimeSubKind": {
       "type": "string",
-      "description": "Datetime entity kind.",
+      "description": "The Datetime SubKind.",
       "enum": [
         "Time",
         "Date",
@@ -977,34 +916,7 @@
       ],
       "x-ms-enum": {
         "name": "DateTimeSubKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Time",
-            "value": "Time",
-            "description": "Datetime unit."
-          },
-          {
-            "name": "Date",
-            "value": "Date",
-            "description": "Datetime unit."
-          },
-          {
-            "name": "DateTime",
-            "value": "DateTime",
-            "description": "Datetime unit."
-          },
-          {
-            "name": "Duration",
-            "value": "Duration",
-            "description": "Datetime unit."
-          },
-          {
-            "name": "Set",
-            "value": "Set",
-            "description": "Datetime unit."
-          }
-        ]
+        "modelAsString": true
       }
     },
     "EntitySubtype": {
@@ -1016,9 +928,6 @@
         }
       },
       "description": "The concrete entity Subtype model of extra information.",
-      "required": [
-        "value"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/BaseExtraInformation"
@@ -1050,99 +959,7 @@
       ],
       "x-ms-enum": {
         "name": "ErrorCode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "InvalidRequest",
-            "value": "InvalidRequest",
-            "description": "Human-readable error code."
-          },
-          {
-            "name": "InvalidArgument",
-            "value": "InvalidArgument",
-            "description": "Human-readable error code."
-          },
-          {
-            "name": "Unauthorized",
-            "value": "Unauthorized",
-            "description": "Human-readable error code."
-          },
-          {
-            "name": "Forbidden",
-            "value": "Forbidden",
-            "description": "Human-readable error code."
-          },
-          {
-            "name": "NotFound",
-            "value": "NotFound",
-            "description": "Human-readable error code."
-          },
-          {
-            "name": "ProjectNotFound",
-            "value": "ProjectNotFound",
-            "description": "Human-readable error code."
-          },
-          {
-            "name": "OperationNotFound",
-            "value": "OperationNotFound",
-            "description": "Human-readable error code."
-          },
-          {
-            "name": "AzureCognitiveSearchNotFound",
-            "value": "AzureCognitiveSearchNotFound",
-            "description": "Human-readable error code."
-          },
-          {
-            "name": "AzureCognitiveSearchIndexNotFound",
-            "value": "AzureCognitiveSearchIndexNotFound",
-            "description": "Human-readable error code."
-          },
-          {
-            "name": "TooManyRequests",
-            "value": "TooManyRequests",
-            "description": "Human-readable error code."
-          },
-          {
-            "name": "AzureCognitiveSearchThrottling",
-            "value": "AzureCognitiveSearchThrottling",
-            "description": "Human-readable error code."
-          },
-          {
-            "name": "AzureCognitiveSearchIndexLimitReached",
-            "value": "AzureCognitiveSearchIndexLimitReached",
-            "description": "Human-readable error code."
-          },
-          {
-            "name": "InternalServerError",
-            "value": "InternalServerError",
-            "description": "Human-readable error code."
-          },
-          {
-            "name": "ServiceUnavailable",
-            "value": "ServiceUnavailable",
-            "description": "Human-readable error code."
-          },
-          {
-            "name": "Timeout",
-            "value": "Timeout",
-            "description": "Human-readable error code."
-          },
-          {
-            "name": "QuotaExceeded",
-            "value": "QuotaExceeded",
-            "description": "Human-readable error code."
-          },
-          {
-            "name": "Conflict",
-            "value": "Conflict",
-            "description": "Human-readable error code."
-          },
-          {
-            "name": "Warning",
-            "value": "Warning",
-            "description": "Human-readable error code."
-          }
-        ]
+        "modelAsString": true
       }
     },
     "ErrorResponse": {
@@ -1202,74 +1019,7 @@
       ],
       "x-ms-enum": {
         "name": "InformationUnit",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Unspecified",
-            "value": "Unspecified",
-            "description": "The information (data) Unit of measurement."
-          },
-          {
-            "name": "Bit",
-            "value": "Bit",
-            "description": "The information (data) Unit of measurement."
-          },
-          {
-            "name": "Kilobit",
-            "value": "Kilobit",
-            "description": "The information (data) Unit of measurement."
-          },
-          {
-            "name": "Megabit",
-            "value": "Megabit",
-            "description": "The information (data) Unit of measurement."
-          },
-          {
-            "name": "Gigabit",
-            "value": "Gigabit",
-            "description": "The information (data) Unit of measurement."
-          },
-          {
-            "name": "Terabit",
-            "value": "Terabit",
-            "description": "The information (data) Unit of measurement."
-          },
-          {
-            "name": "Petabit",
-            "value": "Petabit",
-            "description": "The information (data) Unit of measurement."
-          },
-          {
-            "name": "Byte",
-            "value": "Byte",
-            "description": "The information (data) Unit of measurement."
-          },
-          {
-            "name": "Kilobyte",
-            "value": "Kilobyte",
-            "description": "The information (data) Unit of measurement."
-          },
-          {
-            "name": "Megabyte",
-            "value": "Megabyte",
-            "description": "The information (data) Unit of measurement."
-          },
-          {
-            "name": "Gigabyte",
-            "value": "Gigabyte",
-            "description": "The information (data) Unit of measurement."
-          },
-          {
-            "name": "Terabyte",
-            "value": "Terabyte",
-            "description": "The information (data) Unit of measurement."
-          },
-          {
-            "name": "Petabyte",
-            "value": "Petabyte",
-            "description": "The information (data) Unit of measurement."
-          }
-        ]
+        "modelAsString": true
       }
     },
     "InnerErrorCode": {
@@ -1293,79 +1043,7 @@
       ],
       "x-ms-enum": {
         "name": "InnerErrorCode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "InvalidRequest",
-            "value": "InvalidRequest",
-            "description": "Human-readable error code."
-          },
-          {
-            "name": "InvalidParameterValue",
-            "value": "InvalidParameterValue",
-            "description": "Human-readable error code."
-          },
-          {
-            "name": "KnowledgeBaseNotFound",
-            "value": "KnowledgeBaseNotFound",
-            "description": "Human-readable error code."
-          },
-          {
-            "name": "AzureCognitiveSearchNotFound",
-            "value": "AzureCognitiveSearchNotFound",
-            "description": "Human-readable error code."
-          },
-          {
-            "name": "AzureCognitiveSearchThrottling",
-            "value": "AzureCognitiveSearchThrottling",
-            "description": "Human-readable error code."
-          },
-          {
-            "name": "ExtractionFailure",
-            "value": "ExtractionFailure",
-            "description": "Human-readable error code."
-          },
-          {
-            "name": "InvalidRequestBodyFormat",
-            "value": "InvalidRequestBodyFormat",
-            "description": "Human-readable error code."
-          },
-          {
-            "name": "EmptyRequest",
-            "value": "EmptyRequest",
-            "description": "Human-readable error code."
-          },
-          {
-            "name": "MissingInputDocuments",
-            "value": "MissingInputDocuments",
-            "description": "Human-readable error code."
-          },
-          {
-            "name": "InvalidDocument",
-            "value": "InvalidDocument",
-            "description": "Human-readable error code."
-          },
-          {
-            "name": "ModelVersionIncorrect",
-            "value": "ModelVersionIncorrect",
-            "description": "Human-readable error code."
-          },
-          {
-            "name": "InvalidDocumentBatch",
-            "value": "InvalidDocumentBatch",
-            "description": "Human-readable error code."
-          },
-          {
-            "name": "UnsupportedLanguageCode",
-            "value": "UnsupportedLanguageCode",
-            "description": "Human-readable error code."
-          },
-          {
-            "name": "InvalidCountryHint",
-            "value": "InvalidCountryHint",
-            "description": "Human-readable error code."
-          }
-        ]
+        "modelAsString": true
       }
     },
     "InnerErrorModel": {
@@ -1426,14 +1104,18 @@
           "description": "Answer text."
         },
         "confidenceScore": {
+          "type": "number",
+          "format": "double",
           "description": "Answer confidence score, value ranges from 0 to 1.",
           "minimum": 0,
-          "maximum": 1
+          "maximum": 1,
+          "x-ms-client-name": "confidence"
         },
         "id": {
           "type": "integer",
           "format": "int32",
-          "description": "ID of the QnA result."
+          "description": "ID of the QnA result.",
+          "x-ms-client-name": "qnaId"
         },
         "source": {
           "type": "string",
@@ -1449,7 +1131,8 @@
         },
         "answerSpan": {
           "$ref": "#/definitions/AnswerSpan",
-          "description": "Answer span object of QnA with respect to user's question."
+          "description": "Answer span object of QnA with respect to user's question.",
+          "x-ms-client-name": "shortAnswer"
         }
       },
       "description": "Represents knowledge base answer."
@@ -1464,7 +1147,8 @@
         },
         "previousUserQuery": {
           "type": "string",
-          "description": "Previous user query."
+          "description": "Previous user query.",
+          "x-ms-client-name": "previousQuestion"
         }
       },
       "description": "Context object with previous QnA's information.",
@@ -1544,7 +1228,7 @@
     },
     "LengthUnit": {
       "type": "string",
-      "description": "THe length unit of measurement.",
+      "description": "The length unit of measurement.",
       "enum": [
         "Unspecified",
         "Kilometer",
@@ -1566,94 +1250,7 @@
       ],
       "x-ms-enum": {
         "name": "LengthUnit",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Unspecified",
-            "value": "Unspecified",
-            "description": "THe length unit of measurement."
-          },
-          {
-            "name": "Kilometer",
-            "value": "Kilometer",
-            "description": "THe length unit of measurement."
-          },
-          {
-            "name": "Hectometer",
-            "value": "Hectometer",
-            "description": "THe length unit of measurement."
-          },
-          {
-            "name": "Decameter",
-            "value": "Decameter",
-            "description": "THe length unit of measurement."
-          },
-          {
-            "name": "Meter",
-            "value": "Meter",
-            "description": "THe length unit of measurement."
-          },
-          {
-            "name": "Decimeter",
-            "value": "Decimeter",
-            "description": "THe length unit of measurement."
-          },
-          {
-            "name": "Centimeter",
-            "value": "Centimeter",
-            "description": "THe length unit of measurement."
-          },
-          {
-            "name": "Millimeter",
-            "value": "Millimeter",
-            "description": "THe length unit of measurement."
-          },
-          {
-            "name": "Micrometer",
-            "value": "Micrometer",
-            "description": "THe length unit of measurement."
-          },
-          {
-            "name": "Nanometer",
-            "value": "Nanometer",
-            "description": "THe length unit of measurement."
-          },
-          {
-            "name": "Picometer",
-            "value": "Picometer",
-            "description": "THe length unit of measurement."
-          },
-          {
-            "name": "Mile",
-            "value": "Mile",
-            "description": "THe length unit of measurement."
-          },
-          {
-            "name": "Yard",
-            "value": "Yard",
-            "description": "THe length unit of measurement."
-          },
-          {
-            "name": "Inch",
-            "value": "Inch",
-            "description": "THe length unit of measurement."
-          },
-          {
-            "name": "Foot",
-            "value": "Foot",
-            "description": "THe length unit of measurement."
-          },
-          {
-            "name": "LightYear",
-            "value": "LightYear",
-            "description": "THe length unit of measurement."
-          },
-          {
-            "name": "Pt",
-            "value": "Pt",
-            "description": "THe length unit of measurement."
-          }
-        ]
+        "modelAsString": true
       }
     },
     "ListKey": {
@@ -1665,9 +1262,6 @@
         }
       },
       "description": "The list key extra data kind.",
-      "required": [
-        "key"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/BaseExtraInformation"
@@ -1683,19 +1277,7 @@
       ],
       "x-ms-enum": {
         "name": "LogicalOperationKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AND",
-            "value": "AND",
-            "description": "Set to AND."
-          },
-          {
-            "name": "OR",
-            "value": "OR",
-            "description": "Set to OR."
-          }
-        ]
+        "modelAsString": true
       }
     },
     "LuisCallingOptions": {
@@ -1711,10 +1293,11 @@
         },
         "show-all-intents": {
           "type": "boolean",
-          "description": "Set true to show all intents.",
-          "x-ms-client-name": "showAllIntents"
+          "description": "Set true to show all intents."
         },
         "timezoneOffset": {
+          "type": "number",
+          "format": "float",
           "description": "The timezone offset for the location of the request."
         },
         "spellCheck": {
@@ -1723,8 +1306,7 @@
         },
         "bing-spell-check-subscription-key": {
           "type": "string",
-          "description": "The subscription key to use when enabling Bing spell check",
-          "x-ms-client-name": "bingSpellCheckSubscriptionKey"
+          "description": "The subscription key to use when enabling Bing spell check"
         }
       },
       "description": "This customizes how the service calls LUIS Generally Available projects."
@@ -1826,19 +1408,7 @@
       ],
       "x-ms-enum": {
         "name": "Modality",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "transcript",
-            "value": "transcript",
-            "description": "Transcript conversational modality."
-          },
-          {
-            "name": "text",
-            "value": "text",
-            "description": "Text conversational modality."
-          }
-        ]
+        "modelAsString": true
       }
     },
     "NoneLinkedTargetIntentResult": {
@@ -1869,39 +1439,7 @@
       ],
       "x-ms-enum": {
         "name": "NumberKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Integer",
-            "value": "Integer",
-            "description": "The type of the extracted number entity."
-          },
-          {
-            "name": "Decimal",
-            "value": "Decimal",
-            "description": "The type of the extracted number entity."
-          },
-          {
-            "name": "Power",
-            "value": "Power",
-            "description": "The type of the extracted number entity."
-          },
-          {
-            "name": "Fraction",
-            "value": "Fraction",
-            "description": "The type of the extracted number entity."
-          },
-          {
-            "name": "Percent",
-            "value": "Percent",
-            "description": "The type of the extracted number entity."
-          },
-          {
-            "name": "Unspecified",
-            "value": "Unspecified",
-            "description": "The type of the extracted number entity."
-          }
-        ]
+        "modelAsString": true
       }
     },
     "NumberResolution": {
@@ -2088,59 +1626,7 @@
       ],
       "x-ms-enum": {
         "name": "RangeKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Number",
-            "value": "Number",
-            "description": "The kind of range that the resolution object represents."
-          },
-          {
-            "name": "Speed",
-            "value": "Speed",
-            "description": "The kind of range that the resolution object represents."
-          },
-          {
-            "name": "Weight",
-            "value": "Weight",
-            "description": "The kind of range that the resolution object represents."
-          },
-          {
-            "name": "Length",
-            "value": "Length",
-            "description": "The kind of range that the resolution object represents."
-          },
-          {
-            "name": "Volume",
-            "value": "Volume",
-            "description": "The kind of range that the resolution object represents."
-          },
-          {
-            "name": "Area",
-            "value": "Area",
-            "description": "The kind of range that the resolution object represents."
-          },
-          {
-            "name": "Age",
-            "value": "Age",
-            "description": "The kind of range that the resolution object represents."
-          },
-          {
-            "name": "Information",
-            "value": "Information",
-            "description": "The kind of range that the resolution object represents."
-          },
-          {
-            "name": "Temperature",
-            "value": "Temperature",
-            "description": "The kind of range that the resolution object represents."
-          },
-          {
-            "name": "Currency",
-            "value": "Currency",
-            "description": "The kind of range that the resolution object represents."
-          }
-        ]
+        "modelAsString": true
       }
     },
     "RankerKind": {
@@ -2177,24 +1663,7 @@
       ],
       "x-ms-enum": {
         "name": "RelativeTo",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Current",
-            "value": "Current",
-            "description": "The reference point that the ordinal number denotes."
-          },
-          {
-            "name": "End",
-            "value": "End",
-            "description": "The reference point that the ordinal number denotes."
-          },
-          {
-            "name": "Start",
-            "value": "Start",
-            "description": "The reference point that the ordinal number denotes."
-          }
-        ]
+        "modelAsString": true
       }
     },
     "ShortAnswerOptions": {
@@ -2209,7 +1678,8 @@
           "format": "double",
           "description": "Minimum threshold score required to include an answer span, value ranges from 0 to 1.",
           "minimum": 0,
-          "maximum": 1
+          "maximum": 1,
+          "x-ms-client-name": "confidenceThreshold"
         },
         "topAnswersWithSpan": {
           "type": "integer",
@@ -2226,16 +1696,9 @@
       ]
     },
     "SourceFilter": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "List of sources in knowledge base.",
-          "x-typespec-name": "string[]"
-        }
+      "type": "array",
+      "items": {
+        "type": "string"
       },
       "description": "Find QnAs that are associated with any of the given list of sources in knowledge base."
     },
@@ -2284,79 +1747,7 @@
       ],
       "x-ms-enum": {
         "name": "SpeedUnit",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Unspecified",
-            "value": "Unspecified",
-            "description": "The speed Unit of measurement"
-          },
-          {
-            "name": "MetersPerSecond",
-            "value": "MetersPerSecond",
-            "description": "The speed Unit of measurement"
-          },
-          {
-            "name": "KilometersPerHour",
-            "value": "KilometersPerHour",
-            "description": "The speed Unit of measurement"
-          },
-          {
-            "name": "KilometersPerMinute",
-            "value": "KilometersPerMinute",
-            "description": "The speed Unit of measurement"
-          },
-          {
-            "name": "KilometersPerSecond",
-            "value": "KilometersPerSecond",
-            "description": "The speed Unit of measurement"
-          },
-          {
-            "name": "MilesPerHour",
-            "value": "MilesPerHour",
-            "description": "The speed Unit of measurement"
-          },
-          {
-            "name": "Knot",
-            "value": "Knot",
-            "description": "The speed Unit of measurement"
-          },
-          {
-            "name": "FootPerSecond",
-            "value": "FootPerSecond",
-            "description": "The speed Unit of measurement"
-          },
-          {
-            "name": "FootPerMinute",
-            "value": "FootPerMinute",
-            "description": "The speed Unit of measurement"
-          },
-          {
-            "name": "YardsPerMinute",
-            "value": "YardsPerMinute",
-            "description": "The speed Unit of measurement"
-          },
-          {
-            "name": "YardsPerSecond",
-            "value": "YardsPerSecond",
-            "description": "The speed Unit of measurement"
-          },
-          {
-            "name": "MetersPerMillisecond",
-            "value": "MetersPerMillisecond",
-            "description": "The speed Unit of measurement"
-          },
-          {
-            "name": "CentimetersPerMillisecond",
-            "value": "CentimetersPerMillisecond",
-            "description": "The speed Unit of measurement"
-          },
-          {
-            "name": "KilometersPerMillisecond",
-            "value": "KilometersPerMillisecond",
-            "description": "The speed Unit of measurement"
-          }
-        ]
+        "modelAsString": true
       }
     },
     "StringIndexType": {
@@ -2452,34 +1843,7 @@
       ],
       "x-ms-enum": {
         "name": "TemperatureUnit",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Unspecified",
-            "value": "Unspecified",
-            "description": "The temperature Unit of measurement."
-          },
-          {
-            "name": "Fahrenheit",
-            "value": "Fahrenheit",
-            "description": "The temperature Unit of measurement."
-          },
-          {
-            "name": "Kelvin",
-            "value": "Kelvin",
-            "description": "The temperature Unit of measurement."
-          },
-          {
-            "name": "Rankine",
-            "value": "Rankine",
-            "description": "The temperature Unit of measurement."
-          },
-          {
-            "name": "Celsius",
-            "value": "Celsius",
-            "description": "The temperature Unit of measurement."
-          }
-        ]
+        "modelAsString": true
       }
     },
     "TemporalModifier": {
@@ -2507,99 +1871,7 @@
       ],
       "x-ms-enum": {
         "name": "TemporalModifier",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AfterApprox",
-            "value": "AfterApprox",
-            "description": "An optional modifier of a date/time instance."
-          },
-          {
-            "name": "Before",
-            "value": "Before",
-            "description": "An optional modifier of a date/time instance."
-          },
-          {
-            "name": "BeforeStart",
-            "value": "BeforeStart",
-            "description": "An optional modifier of a date/time instance."
-          },
-          {
-            "name": "Approx",
-            "value": "Approx",
-            "description": "An optional modifier of a date/time instance."
-          },
-          {
-            "name": "ReferenceUndefined",
-            "value": "ReferenceUndefined",
-            "description": "An optional modifier of a date/time instance."
-          },
-          {
-            "name": "SinceEnd",
-            "value": "SinceEnd",
-            "description": "An optional modifier of a date/time instance."
-          },
-          {
-            "name": "AfterMid",
-            "value": "AfterMid",
-            "description": "An optional modifier of a date/time instance."
-          },
-          {
-            "name": "Start",
-            "value": "Start",
-            "description": "An optional modifier of a date/time instance."
-          },
-          {
-            "name": "After",
-            "value": "After",
-            "description": "An optional modifier of a date/time instance."
-          },
-          {
-            "name": "BeforeEnd",
-            "value": "BeforeEnd",
-            "description": "An optional modifier of a date/time instance."
-          },
-          {
-            "name": "Until",
-            "value": "Until",
-            "description": "An optional modifier of a date/time instance."
-          },
-          {
-            "name": "End",
-            "value": "End",
-            "description": "An optional modifier of a date/time instance."
-          },
-          {
-            "name": "Less",
-            "value": "Less",
-            "description": "An optional modifier of a date/time instance."
-          },
-          {
-            "name": "Since",
-            "value": "Since",
-            "description": "An optional modifier of a date/time instance."
-          },
-          {
-            "name": "AfterStart",
-            "value": "AfterStart",
-            "description": "An optional modifier of a date/time instance."
-          },
-          {
-            "name": "BeforeApprox",
-            "value": "BeforeApprox",
-            "description": "An optional modifier of a date/time instance."
-          },
-          {
-            "name": "Mid",
-            "value": "Mid",
-            "description": "An optional modifier of a date/time instance."
-          },
-          {
-            "name": "More",
-            "value": "More",
-            "description": "An optional modifier of a date/time instance."
-          }
-        ]
+        "modelAsString": true
       }
     },
     "TemporalSpanResolution": {
@@ -2623,12 +1895,6 @@
         }
       },
       "description": "represents the resolution of a date and/or time span.",
-      "required": [
-        "begin",
-        "end",
-        "duration",
-        "modifier"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
@@ -2745,128 +2011,103 @@
         "values": [
           {
             "name": "Unspecified",
-            "value": "Unspecified",
-            "description": "The Volume Unit of measurement"
+            "value": "Unspecified"
           },
           {
             "name": "CubicMeter",
-            "value": "CubicMeter",
-            "description": "The Volume Unit of measurement"
+            "value": "CubicMeter"
           },
           {
             "name": "CubicCentimeter",
-            "value": "CubicCentimeter",
-            "description": "The Volume Unit of measurement"
+            "value": "CubicCentimeter"
           },
           {
             "name": "CubicMillimeter",
-            "value": "CubicMillimeter",
-            "description": "The Volume Unit of measurement"
+            "value": "CubicMillimeter"
           },
           {
             "name": "Hectoliter",
-            "value": "Hectoliter",
-            "description": "The Volume Unit of measurement"
+            "value": "Hectoliter"
           },
           {
             "name": "Decaliter",
-            "value": "Decaliter",
-            "description": "The Volume Unit of measurement"
+            "value": "Decaliter"
           },
           {
             "name": "Liter",
-            "value": "Liter",
-            "description": "The Volume Unit of measurement"
+            "value": "Liter"
           },
           {
             "name": "Centiliter",
-            "value": "Centiliter",
-            "description": "The Volume Unit of measurement"
+            "value": "Centiliter"
           },
           {
             "name": "Milliliter",
-            "value": "Milliliter",
-            "description": "The Volume Unit of measurement"
+            "value": "Milliliter"
           },
           {
             "name": "CubicYard",
-            "value": "CubicYard",
-            "description": "The Volume Unit of measurement"
+            "value": "CubicYard"
           },
           {
             "name": "CubicInch",
-            "value": "CubicInch",
-            "description": "The Volume Unit of measurement"
+            "value": "CubicInch"
           },
           {
             "name": "CubicFoot",
-            "value": "CubicFoot",
-            "description": "The Volume Unit of measurement"
+            "value": "CubicFoot"
           },
           {
             "name": "CubicMile",
-            "value": "CubicMile",
-            "description": "The Volume Unit of measurement"
+            "value": "CubicMile"
           },
           {
             "name": "FluidOunce",
-            "value": "FluidOunce",
-            "description": "The Volume Unit of measurement"
+            "value": "FluidOunce"
           },
           {
             "name": "Teaspoon",
-            "value": "Teaspoon",
-            "description": "The Volume Unit of measurement"
+            "value": "Teaspoon"
           },
           {
             "name": "Tablespoon",
-            "value": "Tablespoon",
-            "description": "The Volume Unit of measurement"
+            "value": "Tablespoon"
           },
           {
             "name": "Pint",
-            "value": "Pint",
-            "description": "The Volume Unit of measurement"
+            "value": "Pint"
           },
           {
             "name": "Quart",
-            "value": "Quart",
-            "description": "The Volume Unit of measurement"
+            "value": "Quart"
           },
           {
             "name": "Cup",
-            "value": "Cup",
-            "description": "The Volume Unit of measurement"
+            "value": "Cup"
           },
           {
             "name": "Gill",
-            "value": "Gill",
-            "description": "The Volume Unit of measurement"
+            "value": "Gill"
           },
           {
             "name": "Pinch",
-            "value": "Pinch",
-            "description": "The Volume Unit of measurement"
+            "value": "Pinch"
           },
           {
             "name": "FluidDram",
-            "value": "FluidDram",
-            "description": "The Volume Unit of measurement"
+            "value": "FluidDram"
           },
           {
             "name": "Barrel",
-            "value": "Barrel",
-            "description": "The Volume Unit of measurement"
+            "value": "Barrel"
           },
           {
             "name": "Minim",
-            "value": "Minim",
-            "description": "The Volume Unit of measurement"
+            "value": "Minim"
           },
           {
             "name": "Cord",
-            "value": "Cord",
-            "description": "The Volume Unit of measurement"
+            "value": "Cord"
           },
           {
             "name": "Peck",
@@ -2933,89 +2174,7 @@
       ],
       "x-ms-enum": {
         "name": "WeightUnit",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Unspecified",
-            "value": "Unspecified",
-            "description": "The weight Unit of measurement."
-          },
-          {
-            "name": "Kilogram",
-            "value": "Kilogram",
-            "description": "The weight Unit of measurement."
-          },
-          {
-            "name": "Gram",
-            "value": "Gram",
-            "description": "The weight Unit of measurement."
-          },
-          {
-            "name": "Milligram",
-            "value": "Milligram",
-            "description": "The weight Unit of measurement."
-          },
-          {
-            "name": "Gallon",
-            "value": "Gallon",
-            "description": "The weight Unit of measurement."
-          },
-          {
-            "name": "MetricTon",
-            "value": "MetricTon",
-            "description": "The weight Unit of measurement."
-          },
-          {
-            "name": "Ton",
-            "value": "Ton",
-            "description": "The weight Unit of measurement."
-          },
-          {
-            "name": "Pound",
-            "value": "Pound",
-            "description": "The weight Unit of measurement."
-          },
-          {
-            "name": "Ounce",
-            "value": "Ounce",
-            "description": "The weight Unit of measurement."
-          },
-          {
-            "name": "Grain",
-            "value": "Grain",
-            "description": "The weight Unit of measurement."
-          },
-          {
-            "name": "PennyWeight",
-            "value": "PennyWeight",
-            "description": "The weight Unit of measurement."
-          },
-          {
-            "name": "LongTonBritish",
-            "value": "LongTonBritish",
-            "description": "The weight Unit of measurement."
-          },
-          {
-            "name": "ShortTonUS",
-            "value": "ShortTonUS",
-            "description": "The weight Unit of measurement."
-          },
-          {
-            "name": "ShortHundredWeightUS",
-            "value": "ShortHundredWeightUS",
-            "description": "The weight Unit of measurement."
-          },
-          {
-            "name": "Stone",
-            "value": "Stone",
-            "description": "The weight Unit of measurement."
-          },
-          {
-            "name": "Dram",
-            "value": "Dram",
-            "description": "The weight Unit of measurement."
-          }
-        ]
+        "modelAsString": true
       }
     },
     "apim_key": {
@@ -3067,8 +2226,7 @@
         "values": [
           {
             "name": "EntitySubtype",
-            "value": "EntitySubtype",
-            "description": "Entity Subtype."
+            "value": "EntitySubtype"
           },
           {
             "name": "ListKey",
@@ -3097,19 +2255,7 @@
       ],
       "x-ms-enum": {
         "name": "projectKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Conversation",
-            "value": "Conversation",
-            "description": "The type of the project."
-          },
-          {
-            "name": "Orchestration",
-            "value": "Orchestration",
-            "description": "The type of the project."
-          }
-        ]
+        "modelAsString": true
       }
     },
     "resolutionKind": {
@@ -3134,84 +2280,7 @@
       ],
       "x-ms-enum": {
         "name": "resolutionKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "BooleanResolution",
-            "value": "BooleanResolution",
-            "description": "The entity resolution object kind."
-          },
-          {
-            "name": "DateTimeResolution",
-            "value": "DateTimeResolution",
-            "description": "The entity resolution object kind."
-          },
-          {
-            "name": "NumberResolution",
-            "value": "NumberResolution",
-            "description": "The entity resolution object kind."
-          },
-          {
-            "name": "OrdinalResolution",
-            "value": "OrdinalResolution",
-            "description": "The entity resolution object kind."
-          },
-          {
-            "name": "SpeedResolution",
-            "value": "SpeedResolution",
-            "description": "The entity resolution object kind."
-          },
-          {
-            "name": "WeightResolution",
-            "value": "WeightResolution",
-            "description": "The entity resolution object kind."
-          },
-          {
-            "name": "LengthResolution",
-            "value": "LengthResolution",
-            "description": "The entity resolution object kind."
-          },
-          {
-            "name": "VolumeResolution",
-            "value": "VolumeResolution",
-            "description": "The entity resolution object kind."
-          },
-          {
-            "name": "AreaResolution",
-            "value": "AreaResolution",
-            "description": "The entity resolution object kind."
-          },
-          {
-            "name": "AgeResolution",
-            "value": "AgeResolution",
-            "description": "The entity resolution object kind."
-          },
-          {
-            "name": "InformationResolution",
-            "value": "InformationResolution",
-            "description": "The entity resolution object kind."
-          },
-          {
-            "name": "TemperatureResolution",
-            "value": "TemperatureResolution",
-            "description": "The entity resolution object kind."
-          },
-          {
-            "name": "CurrencyResolution",
-            "value": "CurrencyResolution",
-            "description": "The entity resolution object kind."
-          },
-          {
-            "name": "NumericRangeResolution",
-            "value": "NumericRangeResolution",
-            "description": "The entity resolution object kind."
-          },
-          {
-            "name": "TemporalSpanResolution",
-            "value": "TemporalSpanResolution",
-            "description": "The entity resolution object kind."
-          }
-        ]
+        "modelAsString": true
       }
     },
     "targetProjectKind": {
@@ -3225,71 +2294,7 @@
       ],
       "x-ms-enum": {
         "name": "targetProjectKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Luis",
-            "value": "Luis",
-            "description": "The type of a target service."
-          },
-          {
-            "name": "Conversation",
-            "value": "Conversation",
-            "description": "The type of a target service."
-          },
-          {
-            "name": "QuestionAnswering",
-            "value": "QuestionAnswering",
-            "description": "The type of a target service."
-          },
-          {
-            "name": "NonLinked",
-            "value": "NonLinked",
-            "description": "The type of a target service."
-          }
-        ]
-      }
-    },
-    "unit": {
-      "type": "string",
-      "description": "The Age Unit of measurement",
-      "enum": [
-        "Unspecified",
-        "Year",
-        "Month",
-        "Week",
-        "Day"
-      ],
-      "x-ms-enum": {
-        "name": "unit",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Unspecified",
-            "value": "Unspecified",
-            "description": "The Age Unit of measurement"
-          },
-          {
-            "name": "Year",
-            "value": "Year",
-            "description": "The Age Unit of measurement"
-          },
-          {
-            "name": "Month",
-            "value": "Month",
-            "description": "The Age Unit of measurement"
-          },
-          {
-            "name": "Week",
-            "value": "Week",
-            "description": "The Age Unit of measurement"
-          },
-          {
-            "name": "Day",
-            "value": "Day",
-            "description": "The Age Unit of measurement"
-          }
-        ]
+        "modelAsString": true
       }
     }
   },
