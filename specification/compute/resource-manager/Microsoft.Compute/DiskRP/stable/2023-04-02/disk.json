@@ -766,6 +766,12 @@
         "optimizedForFrequentAttach": {
           "type": "boolean",
           "description": "Setting this property to true improves reliability and performance of data disks that are frequently (more than 5 times a day) by detached from one virtual machine and attached to another. This property should not be set for disks that are not detached and attached frequently as it causes the disks to not align with the fault domain of the virtual machine."
+        },
+        "LastOwnershipUpdateTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the disk ownership last updated."
         }
       },
       "required": [
