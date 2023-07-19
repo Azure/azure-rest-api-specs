@@ -1104,7 +1104,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "GET all Machine Extensions": {
+          "GET all Machine Extensions - List": {
             "$ref": "./examples/extension/Extension_List.json"
           }
         }
@@ -2240,6 +2240,7 @@
       "type": "object",
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "type": "object",
           "properties": {
             "esuProfile": {
@@ -2267,6 +2268,7 @@
       "type": "object",
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "type": "object",
           "properties": {
             "esuProfile": {
@@ -2316,7 +2318,8 @@
           "type": "string",
           "description": "The current status of the license profile key."
         }
-      }
+      },
+      "description":"ESU key"
     },
     "ArcEnabledEsuStatus": {
       "type": "string",
@@ -2348,7 +2351,8 @@
           "format": "date-time",
           "description": "The time that the state has been changed."
         }
-      }
+      },
+      "description": "ESU enrollment record."
     },
     "EsuProfileProperties": {
       "type": "object",
