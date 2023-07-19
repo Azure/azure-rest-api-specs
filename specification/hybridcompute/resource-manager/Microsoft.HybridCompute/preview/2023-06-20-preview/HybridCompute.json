@@ -2319,7 +2319,7 @@
           "description": "The current status of the license profile key."
         }
       },
-      "description":"ESU key"
+      "description": "ESU key"
     },
     "ArcEnabledEsuStatus": {
       "type": "string",
@@ -2372,9 +2372,17 @@
         "arcEsuEnrolled": {
           "$ref": "#/definitions/ArcEsuEnrolled"
         },
-        "esuKeyActive":  {
-          "readOnly":  true,
-          "type": "boolean",
+        "esuKeyActive": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "esuKeyActive",
+            "modelAsString": true
+          },
           "description": "Indicates whether there is an ESU Key currently active for the machine."
         },
         "esuKeys": {
@@ -2427,8 +2435,16 @@
           "$ref": "#/definitions/ArcEnabledEsuStatus",
           "description": "The Arc ESU enrollment state."
         },
-        "esuKeyActive":  {
-          "type": "boolean",
+        "esuKeyActive": {
+          "type": "string",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "esuKeyActiveInMachineEsuProperties",
+            "modelAsString": true
+          },
           "description": "Indicates whether there is an ESU Key currently active for the machine."
         },
         "esuKeys": {
@@ -2439,7 +2455,8 @@
           "description": "The list of ESU keys.",
           "x-ms-identifiers": []
         }
-      }
+      },
+      "description": "Properties for the Machine ESU profile."
     },
     "ResourceUpdate": {
       "type": "object",
