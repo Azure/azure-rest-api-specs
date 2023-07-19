@@ -49,7 +49,7 @@ enum StringIndexType {
 
 @doc("Returns the current state of the task.")
 @added(Versions.v2023_04_01)
-model TaskState{
+model TaskState {
     @doc("The last updated time in UTC for the task.")
     lastUpdateDateTime: utcDateTime;
 
@@ -59,7 +59,7 @@ model TaskState{
 
 @doc("The status of the task at the mentioned last update time.")
 @added(Versions.v2023_04_01)
-enum State{
+enum State {
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'notStarted' should have a documentation or description, please use decorator @doc to add it."
     notStarted,
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'running' should have a documentation or description, please use decorator @doc to add it."
@@ -78,28 +78,28 @@ enum State{
 
 @doc("Base task object.")
 @added(Versions.v2023_04_01)
-model TaskIdentifier{
+model TaskIdentifier {
     @doc("task name")
     taskName: string;
 }
 
 @doc("Base parameters object for a text analysis task.")
 @added(Versions.v2023_04_01)
-model TaskParameters{
+model TaskParameters {
     @doc("logging opt out")
-    loggingOptOut: boolean=false;
+    loggingOptOut: boolean = false;
 }
 
 @doc("Parameters object for a text analysis task using pre-built models.")
 @added(Versions.v2023_04_01)
-model PreBuiltTaskParameters extends TaskParameters{
+model PreBuiltTaskParameters extends TaskParameters {
     @doc("model version")
-    modelVersion: string="latest"
+    modelVersion: string = "latest";
 }
 
 @doc("job state")
 @added(Versions.v2023_04_01)
-model JobState{
+model JobState {
     @doc("display name")
     displayName?: string;
 
@@ -122,19 +122,19 @@ model JobState{
     errors?: Array<ErrorResponse>;
 
     @doc("next link")
-    nextlink?:string;
+    nextlink?: string;
 }
 
 @doc("job errors")
 @added(Versions.v2023_04_01)
-model JobErrors{
+model JobErrors {
     @doc("errors")
     errors: Array<ErrorResponse>;
 }
 
 @doc("Contains details of errors encountered during a job execution.")
 @added(Versions.v2023_04_01)
-model DocumentError{
+model DocumentError {
     @doc("The ID of the input document.")
     id: string;
 
@@ -144,7 +144,7 @@ model DocumentError{
 
 @doc("Contains details of warnings encountered during a job execution.")
 @added(Versions.v2023_04_01)
-model InputWarning{
+model InputWarning {
     @doc("Warning code.")
     code: string;
 
@@ -157,7 +157,7 @@ model InputWarning{
 
 @doc("if showStats=true was specified in the request this field will contain information about the request payload.")
 @added(Versions.v2023_04_01)
-model RequestStatistics{
+model RequestStatistics {
     @doc("Number of documents submitted in the request.")
     documentsCount: int32;
 
@@ -173,7 +173,7 @@ model RequestStatistics{
 
 @doc("Pre built result")
 @added(Versions.v2023_04_01)
-model PreBuiltResult{
+model PreBuiltResult {
     @doc("Errors by document id.")
     errors: Array<DocumentError>;
 
@@ -457,20 +457,23 @@ enum ErrorCode {
 
 @doc("Predicted sentiment")
 @added(Versions.v2023_04_01)
-enum Sentiment{
+enum Sentiment {
     @doc("Positive statement")
     positive,
+
     @doc("Neutral statement")
     neutral,
+
     @doc("Negative statement")
     negative,
+
     @doc("Mixed statement")
     mixed,
 }
 
 @doc("Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative.")
 @added(Versions.v2023_04_01)
-model SentimentConfidenceScores{
+model SentimentConfidenceScores {
     @doc("Confidence score for positive sentiment")
     postive: float64;
 
@@ -481,10 +484,9 @@ model SentimentConfidenceScores{
     negative: float64;
 }
 
-
 @doc("Supported parameters for an Abstractive Summarization task.")
 @added(Versions.v2023_04_01)
-model AbstractiveSummarizationTaskParameterBase{
+model AbstractiveSummarizationTaskParameterBase {
     @doc("It controls the approximate number of sentences in the output summaries.")
     sentenceCount: int32;
 
@@ -494,7 +496,7 @@ model AbstractiveSummarizationTaskParameterBase{
 
 @doc("The context of the summary.")
 @added(Versions.v2023_04_01)
-model SummaryContext{
+model SummaryContext {
     @doc("Start position for the context. Use of different 'stringIndexType' values can affect the offset returned.")
     offset: int32;
 
