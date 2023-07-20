@@ -34,7 +34,7 @@ else {
     $changedFiles = $allChangedFiles
   }
   else {
-    $changedFiles = $diffFiles | Where-Object {$_.StartsWith('specification')}
+    $changedFiles = $diffFiles | Where-Object {if ($_) { $_.StartsWith('specification') }}
   }
 }
 
