@@ -79,6 +79,7 @@ input-file:
   - Microsoft.Sql/preview/2023-02-01-preview/InstanceFailoverGroups.json
   - Microsoft.Sql/preview/2023-02-01-preview/InstancePools.json
   - Microsoft.Sql/preview/2023-02-01-preview/JobAgents.json
+  - Microsoft.Sql/preview/2023-02-01-preview/JobPrivateEndpoints.json
   - Microsoft.Sql/preview/2023-02-01-preview/JobCredentials.json
   - Microsoft.Sql/preview/2023-02-01-preview/JobExecutions.json
   - Microsoft.Sql/preview/2023-02-01-preview/JobStepExecutions.json
