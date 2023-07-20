@@ -37,6 +37,9 @@ directive:
   - from: gallery.json
     where: $.definitions.GalleryTargetExtendedLocation.properties.storageAccountType["x-ms-enum"].name
     transform: return "EdgeZoneStorageAccountType"
+  - from: gallery.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{galleryApplicationName}/versions/{galleryApplicationVersionName}"].get.parameters[5]["x-ms-enum"].name
+    transform: return "ApplicationVersionsReplicationStatusTypes"
 ```
 
 ``` yaml $(csharp) && !$(multiapi) && !$(csharp-profile)
