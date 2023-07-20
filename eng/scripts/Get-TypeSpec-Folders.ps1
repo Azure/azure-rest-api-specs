@@ -28,15 +28,15 @@ else {
   }
   Write-Host
 
-  $engFiles = $diffFiles | Where-Object {if ($_) { $_.StartsWith('eng') }}
+  $engFiles = $changedFiles | Where-Object {if ($_) { $_.StartsWith('eng') }}
   Write-Host "engFiles: '$engFiles'"
 
-  $repoRootFiles = $diffFiles | Where-Object {$_ -notmatch [Regex]::Escape([IO.Path]::DirectorySeparatorChar)}
+  $repoRootFiles = $changedFiles | Where-Object {$_ -notmatch [Regex]::Escape([IO.Path]::DirectorySeparatorChar)}
   if ($engFiles -or $repoRootFiles) {
     $changedFiles = $allChangedFiles
   }
   else {
-    $changedFiles = $diffFiles | Where-Object {if ($_) { $_.StartsWith('specification') }}
+    $changedFiles = $changedFiles | Where-Object {if ($_) { $_.StartsWith('specification') }}
   }
 }
 
