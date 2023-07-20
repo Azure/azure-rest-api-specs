@@ -1,4 +1,5 @@
 // no-op
+// another no-op
 
 @doc("Faked shared model")
 model FakedSharedModel {
