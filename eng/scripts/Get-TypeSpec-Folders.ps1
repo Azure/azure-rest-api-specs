@@ -8,28 +8,40 @@ param (
   [string]$SourceBranch
 )
 
-$tspFiles = @()
-$allTspFiles = (Get-ChildItem -path ./specification tspconfig.yaml -Recurse).FullName -replace "$($pwd.Path)/"
+$changedFiles = @()
+$allChangedFiles = (Get-ChildItem -path ./specification tspconfig.yaml -Recurse).Directory.FullName | ForEach-Object {[IO.Path]::GetRelativePath($($pwd.path), $_)}
+$allChangedFiles = $changedFiles -replace '\\', '/'
+
 if ([string]::IsNullOrEmpty($TargetBranch) -or [string]::IsNullOrEmpty($SourceBranch)) {
-  $tspFiles = $allTspFiles
+  $changedFiles = $allChangedFiles
 }
 else {
-  Write-Host "git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff --name-only `"$TargetBranch...$SourceBranch`" -- | Where-Object {`$_.StartsWith('specification')}"
-  $diffFiles = git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff --name-only `"$TargetBranch...$SourceBranch`" --
+  Write-Host "git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff --name-only `"$TargetBranch...$SourceBranch`" --"
+  $changedFiles = git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff --name-only `"$TargetBranch...$SourceBranch`" --
+  $changedFiles = $changedFiles -replace '\\', '/'
+
+  Write-Host "changedFiles:"
+  foreach ($changedFile in $changedFiles) {
+    Write-Host "  $changedFile"
+  }
+  Write-Host
+
   $engFiles = $diffFiles | Where-Object {$_.StartsWith('eng')}
   $repoRootFiles = $diffFiles | Where-Object {$_ -notmatch [Regex]::Escape([IO.Path]::DirectorySeparatorChar)}
   if ($engFiles -or $repoRootFiles) {
-    $tspFiles = $allTspFiles
+    $changedFiles = $allChangedFiles
   }
   else {
-    $tspFiles = $diffFiles | Where-Object {$_.StartsWith('specification')}
+    $changedFiles = $diffFiles | Where-Object {$_.StartsWith('specification')}
   }
 }
 
 $typespecFolders = @()
-foreach ($file in $tspFiles) {
-  $file -match 'specification\/[^\/]*\/' | out-null
-  $typespecFolders += (Get-ChildItem -path $matches[0] tspconfig.yaml -Recurse).Directory.FullName -replace "$($pwd.Path)/"
+foreach ($file in $changedFiles) {
+  if ($file -match 'specification\/[^\/]*\/') {
+    $typespecFolder = (Get-ChildItem -path $matches[0] tspconfig.yaml -Recurse).Directory.FullName | ForEach-Object {if ($_) { [IO.Path]::GetRelativePath($($pwd.path), $_) }}
+    $typespecFolders += $typespecFolder -replace '\\', '/'
+  }
 }
 $typespecFolders = $typespecFolders | Select-Object -Unique
 
