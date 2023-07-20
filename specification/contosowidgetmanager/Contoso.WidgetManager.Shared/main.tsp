@@ -1,3 +1,5 @@
+// no-op
+
 @doc("Faked shared model")
 model FakedSharedModel {
   @doc("The tag.")
