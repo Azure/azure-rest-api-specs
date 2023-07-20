@@ -10,7 +10,7 @@ param (
 
 $changedFiles = @()
 $allChangedFiles = (Get-ChildItem -path ./specification tspconfig.yaml -Recurse).Directory.FullName | ForEach-Object {[IO.Path]::GetRelativePath($($pwd.path), $_)}
-$allChangedFiles = $changedFiles -replace '\\', '/'
+$allChangedFiles = $allChangedFiles -replace '\\', '/'
 
 Write-Host "allChangedFiles: '$allChangedFiles'"
 
