@@ -806,7 +806,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/environments": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/listEnvironments": {
       "post": {
         "tags": [
           "accessandaccounts"
@@ -863,7 +863,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/cluster": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/listClusters": {
       "post": {
         "tags": [
           "accessandaccounts"
@@ -879,9 +879,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/EnvironmentParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -923,7 +920,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/role-bindings": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/listRoleBindings": {
       "post": {
         "tags": [
           "accessandaccounts"
@@ -939,12 +936,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/CrnPatternParameter"
-          },
-          {
-            "$ref": "#/parameters/PrincipalParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1759,7 +1750,7 @@
           "description": "Metadata of the record",
           "$ref": "#/definitions/MetadataEntity"
         },
-        "display_name": {
+        "displayName": {
           "description": "Display name of the user",
           "type": "string"
         }
@@ -1814,15 +1805,15 @@
           "description": "The cloud service provider region",
           "type": "string"
         },
-        "kafka_bootstrap_endpoint": {
+        "kafkaBootstrapEndpoint": {
           "description": "The bootstrap endpoint used by Kafka clients to connect to the cluster",
           "type": "string"
         },
-        "http_endpoint": {
+        "httpEndpoint": {
           "description": "The cluster HTTP request URL.",
           "type": "string"
         },
-        "api_endpoint": {
+        "apiEndpoint": {
           "description": "The Kafka API cluster endpoint",
           "type": "string"
         },
@@ -1856,7 +1847,7 @@
           "description": "API URL for accessing or modifying the referred object",
           "type": "string"
         },
-        "resource_name": {
+        "resourceName": {
           "description": "CRN reference to the referred resource",
           "type": "string"
         }
@@ -1878,7 +1869,7 @@
           "description": "API URL for accessing or modifying the referred object",
           "type": "string"
         },
-        "resource_name": {
+        "resourceName": {
           "description": "CRN reference to the referred resource",
           "type": "string"
         }
@@ -1900,7 +1891,7 @@
           "description": "API URL for accessing or modifying the referred object",
           "type": "string"
         },
-        "resource_name": {
+        "resourceName": {
           "description": "CRN reference to the referred resource",
           "type": "string"
         }
@@ -1946,7 +1937,7 @@
           "description": "Metadata of the record",
           "$ref": "#/definitions/MetadataEntity"
         },
-        "display_name": {
+        "displayName": {
           "description": "Display name of the user",
           "type": "string"
         },
@@ -2005,11 +1996,11 @@
           "description": "The principal User or Group to bind the role to",
           "type": "string"
         },
-        "role_name": {
+        "roleName": {
           "description": "The name of the role to bind to the principal",
           "type": "string"
         },
-        "crn_pattern": {
+        "crnPattern": {
           "description": "A CRN that specifies the scope and resource patterns necessary for the role to bind",
           "type": "string"
         }
@@ -2071,27 +2062,6 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
-    },
-    "CrnPatternParameter": {
-      "name": "crn_pattern",
-      "in": "query",
-      "description": "Crn pattern",
-      "required": true,
-      "type": "string"
-    },
-    "PrincipalParameter": {
-      "name": "principal",
-      "in": "query",
-      "description": "Principal name",
-      "required": true,
-      "type": "string"
-    },
-    "EnvironmentParameter": {
-      "name": "environment",
-      "in": "query",
-      "description": "Environment name",
-      "required": true,
-      "type": "string"
     }
   }
 }
