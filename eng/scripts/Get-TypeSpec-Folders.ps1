@@ -11,18 +11,19 @@ param (
 $changedFiles = @()
 if ([string]::IsNullOrEmpty($TargetBranch) -or [string]::IsNullOrEmpty($SourceBranch)) {
   $changedFiles = (Get-ChildItem -path ./specification tspconfig.yaml -Recurse).Directory.FullName | ForEach-Object {[IO.Path]::GetRelativePath($($pwd.path), $_)}
+  $changedFiles = $changedFiles -replace '\\', '/'
 }
 else {
   Write-Host "git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff --name-only `"$TargetBranch...$SourceBranch`" -- | Where-Object {`$_.StartsWith('specification')}"
   $changedFiles = git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff --name-only `"$TargetBranch...$SourceBranch`" -- | Where-Object {$_.StartsWith('specification')}
-}
-$changedFiles = $changedFiles -replace '\\', '/'
+  $changedFiles = $changedFiles -replace '\\', '/'
 
-Write-Host "changedFiles:"
-foreach ($changedFile in $changedFiles) {
-  Write-Host "  $changedFile"
+  Write-Host "changedFiles:"
+  foreach ($changedFile in $changedFiles) {
+    Write-Host "  $changedFile"
+  }
+  Write-Host
 }
-Write-Host
 
 $typespecFolders = @()
 foreach ($file in $changedFiles) {
