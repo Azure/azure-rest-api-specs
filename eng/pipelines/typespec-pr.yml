@@ -7,7 +7,7 @@ pr:
     - typespec-next
 
 jobs:
-- job: Validate_Changed_Specs
+- job: Validate_Impacted_Specs
   pool:
     name: azsdk-pool-mms-ubuntu-2204-general
     vmImage: ubuntu-22.04
@@ -25,5 +25,5 @@ jobs:
         $(Build.SourcesDirectory) `
         "origin/${env:SYSTEM_PULLREQUEST_TARGETBRANCH}" `
         "${env:SYSTEM_PULLREQUEST_SOURCECOMMITID}"
-    displayName: Validate Changed Specs
+    displayName: Validate Impacted Specs
     condition: succeededOrFailed()
