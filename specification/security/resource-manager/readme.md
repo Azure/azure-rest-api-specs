@@ -68,7 +68,6 @@ directive:
     where: $.paths
     from: applications.json
     reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
-  - suppress: OperationsAPIImplementation
     where: $.paths
     from: integrations.json
     reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
@@ -82,7 +81,7 @@ These are the global settings for the Security API.
 title: SecurityCenter
 description: API spec for Microsoft.Security (Azure Security Center) resource provider
 openapi-type: arm
-tag: package-preview-2023-07
+tag: package-composite-v3
 ```
 
 ### Composite packages
