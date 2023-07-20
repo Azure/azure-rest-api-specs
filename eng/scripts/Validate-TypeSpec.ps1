@@ -8,19 +8,19 @@ param (
   [string]$SourceBranch
 )
 
-$typespecFolders = @()
+$exitCode = 0
 
 $typespecFolders = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" "$SpecsRepoRootDirectory" "$TargetBranch" "$SourceBranch"
-$typespecFolders = $typespecFolders.Split('',[System.StringSplitOptions]::RemoveEmptyEntries)
-
-$exitCode = 0
-foreach ($typespecFolder in $typespecFolders) {
-  npx --no tsv $typespecFolder 2>&1 | Write-Host
-  if ($LASTEXITCODE) {
-    $exitCode = 1
-  }
-  git restore .
-  git clean -df
+if ($typespecFolders) {
+  $typespecFolders = $typespecFolders.Split('',[System.StringSplitOptions]::RemoveEmptyEntries)
+  foreach ($typespecFolder in $typespecFolders) {
+    npx --no tsv $typespecFolder 2>&1 | Write-Host
+    if ($LASTEXITCODE) {
+      $exitCode = 1
+    }
+    git restore .
+    git clean -df
+  }  
 }
 
 exit $exitCode
