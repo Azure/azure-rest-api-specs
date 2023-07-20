@@ -12,8 +12,6 @@ $changedFiles = @()
 $allChangedFiles = (Get-ChildItem -path ./specification tspconfig.yaml -Recurse).Directory.FullName | ForEach-Object {[IO.Path]::GetRelativePath($($pwd.path), $_)}
 $allChangedFiles = $allChangedFiles -replace '\\', '/'
 
-Write-Host "allChangedFiles: '$allChangedFiles'"
-
 if ([string]::IsNullOrEmpty($TargetBranch) -or [string]::IsNullOrEmpty($SourceBranch)) {
   $changedFiles = $allChangedFiles
 }
@@ -29,8 +27,6 @@ else {
   Write-Host
 
   $engFiles = $changedFiles | Where-Object {if ($_) { $_.StartsWith('eng') }}
-  Write-Host "engFiles: '$engFiles'"
-
   $repoRootFiles = $changedFiles | Where-Object {$_ -notmatch [Regex]::Escape([IO.Path]::DirectorySeparatorChar)}
   if ($engFiles -or $repoRootFiles) {
     $changedFiles = $allChangedFiles
