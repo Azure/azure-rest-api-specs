@@ -43,6 +43,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ListUsagesResult"
+            },
+            "default": {
+              "description": "Common error response.",
+              "schema": {
+                "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+              }
             }
           }
         },
@@ -55,10 +61,60 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/usages": {
+      "get": {
+        "tags": [
+          "Usages"
+        ],
+        "operationId": "ManagedEnvironmentUsages_List",
+        "description": "Gets the current usage information as well as the limits for environment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "Name of the Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ListUsagesResult"
+            },
+            "default": {
+              "description": "Common error response.",
+              "schema": {
+                "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List managed environment usages": {
+            "$ref": "./examples/ManagedEnvironmentUsages_List.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
     "UsageName": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "string",
@@ -72,6 +128,7 @@
       "description": "The Usage Names."
     },
     "Usage": {
+      "type": "object",
       "properties": {
         "unit": {
           "type": "string",
@@ -108,6 +165,7 @@
       "description": "Describes Compute Resource Usage."
     },
     "ListUsagesResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
