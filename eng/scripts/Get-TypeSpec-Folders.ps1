@@ -8,19 +8,29 @@ param (
   [string]$SourceBranch
 )
 
-$tspFiles = @()
+$changedFiles = @()
 if ([string]::IsNullOrEmpty($TargetBranch) -or [string]::IsNullOrEmpty($SourceBranch)) {
-  $tspFiles = (Get-ChildItem -path ./specification tspconfig.yaml -Recurse).FullName -replace "$($pwd.Path)/"
+  $changedFiles = (Get-ChildItem -path ./specification tspconfig.yaml -Recurse).Directory.FullName | ForEach-Object {[IO.Path]::GetRelativePath($($pwd.path), $_)}
+  $changedFiles = $changedFiles -replace '\\', '/'
 }
 else {
   Write-Host "git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff --name-only `"$TargetBranch...$SourceBranch`" -- | Where-Object {`$_.StartsWith('specification')}"
-  $tspFiles = git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff --name-only `"$TargetBranch...$SourceBranch`" -- | Where-Object {$_.StartsWith('specification')}
+  $changedFiles = git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff --name-only `"$TargetBranch...$SourceBranch`" -- | Where-Object {$_.StartsWith('specification')}
+  $changedFiles = $changedFiles -replace '\\', '/'
+
+  Write-Host "changedFiles:"
+  foreach ($changedFile in $changedFiles) {
+    Write-Host "  $changedFile"
+  }
+  Write-Host
 }
 
 $typespecFolders = @()
-foreach ($file in $tspFiles) {
-  $file -match 'specification\/[^\/]*\/' | out-null
-  $typespecFolders += (Get-ChildItem -path $matches[0] tspconfig.yaml -Recurse).Directory.FullName -replace "$($pwd.Path)/"
+foreach ($file in $changedFiles) {
+  if ($file -match 'specification\/[^\/]*\/') {
+    $typespecFolder = (Get-ChildItem -path $matches[0] tspconfig.yaml -Recurse).Directory.FullName | ForEach-Object {if ($_) { [IO.Path]::GetRelativePath($($pwd.path), $_) }}
+    $typespecFolders += $typespecFolder -replace '\\', '/'
+  }
 }
 $typespecFolders = $typespecFolders | Select-Object -Unique
 
