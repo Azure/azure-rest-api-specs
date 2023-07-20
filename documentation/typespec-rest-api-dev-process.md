@@ -76,7 +76,7 @@ Please first review recommended folder structure detailed in [this document](htt
 ```cli
    npx tsp init https://aka.ms/typespec/azure-init
 ```
-4. Select `(rest-api-spec reo) ARM` or `(rest-api-spec reo) Data-plane` and answer appropriate naming questions.
+4. Select `(rest-api-spec repo) ARM` or `(rest-api-spec repo) Data-plane` and answer appropriate naming questions.
 5. Compile the generated TypeSpec project with command:
 
 ```cli
