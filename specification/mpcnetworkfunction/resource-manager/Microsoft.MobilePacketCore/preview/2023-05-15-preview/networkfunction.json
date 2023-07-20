@@ -469,20 +469,16 @@
       "type": "object",
       "properties": {
         "sku": {
-          "type": "string",
+          "$ref": "#/definitions/SkuDefinitions",
           "description": "Provisioned SKU Value.",
           "x-ms-mutability": [
             "read",
             "create"
           ]
         },
-        "workloadTypes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/WorkloadType"
-          },
-          "x-typespec-name": "WorkloadType[]",
-          "description": "Types of workloads co-located in the same infrastructure",
+        "networkFunctionType": {
+          "$ref": "#/definitions/NetworkFunctionType",
+          "description": "Type of network function",
           "x-ms-mutability": [
             "read",
             "create"
@@ -500,8 +496,17 @@
         "infrastructureElementCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Count of infrastructure elements (kubernetes nodes for containerized network functions, virtual machines for virtual network functions)",
+          "description": "Count of infrastructure elements used by this network function (vCPUs, in units of 8)",
           "readOnly": true
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Capacity of the network function in units of 10000.  This represents the session count or the Simultaneously Attached Users (SAU) count as applicable",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "userDescription": {
           "type": "string",
@@ -520,7 +525,7 @@
       "description": "Network Function Properties.",
       "required": [
         "sku",
-        "workloadTypes",
+        "networkFunctionType",
         "networkFunctionAdministrativeState"
       ]
     },
@@ -537,6 +542,102 @@
         }
       },
       "description": "The type used for updating tags in NetworkFunctionResource resources."
+    },
+    "NetworkFunctionType": {
+      "type": "string",
+      "description": "Type of Network Function",
+      "enum": [
+        "AMF",
+        "SMF",
+        "UPF",
+        "NRF",
+        "NSSF",
+        "MME",
+        "SaegwControlPlane",
+        "SaegwUserPlane",
+        "Saegw",
+        "ePDG",
+        "N3IWF",
+        "RemotePaaS",
+        "EMS",
+        "OperationsPolicyManager"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkFunctionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AMF",
+            "value": "AMF",
+            "description": "Access and Mobility Function"
+          },
+          {
+            "name": "SMF",
+            "value": "SMF",
+            "description": "Session Management Function"
+          },
+          {
+            "name": "UPF",
+            "value": "UPF",
+            "description": "User Plane Function"
+          },
+          {
+            "name": "NRF",
+            "value": "NRF",
+            "description": "Network Repository Function"
+          },
+          {
+            "name": "NSSF",
+            "value": "NSSF",
+            "description": "Network Slice Selection Function"
+          },
+          {
+            "name": "MME",
+            "value": "MME",
+            "description": "Mobility Management Entity"
+          },
+          {
+            "name": "SaegwControlPlane",
+            "value": "SaegwControlPlane",
+            "description": "System Architecture Evolution Gateway Control Plane, control and user plane separation (CUPS) architecture"
+          },
+          {
+            "name": "SaegwUserPlane",
+            "value": "SaegwUserPlane",
+            "description": "System Architecture Evolution Gateway User Plane, control and user plane separation (CUPS) architecture"
+          },
+          {
+            "name": "Saegw",
+            "value": "Saegw",
+            "description": "System Architecture Evolution Gateway.  This combines the Serving Gateway (SGW) and the Packet Data Network Gateway (PGW) functionality"
+          },
+          {
+            "name": "ePDG",
+            "value": "ePDG",
+            "description": "Evolved Packet Data Gateway"
+          },
+          {
+            "name": "N3IWF",
+            "value": "N3IWF",
+            "description": "Non-3GPP Interworking Function"
+          },
+          {
+            "name": "RemotePaaS",
+            "value": "RemotePaaS",
+            "description": "Remote Platform As A Service Components"
+          },
+          {
+            "name": "EMS",
+            "value": "EMS",
+            "description": "Element Management System"
+          },
+          {
+            "name": "OperationsPolicyManager",
+            "value": "OperationsPolicyManager",
+            "description": "Operations and Policy Manager"
+          }
+        ]
+      }
     },
     "ProvisioningState": {
       "type": "string",
@@ -589,6 +690,42 @@
         ]
       }
     },
+    "SkuDefinitions": {
+      "type": "string",
+      "description": "SKU Definitions",
+      "enum": [
+        "AzureLab",
+        "AzureProduction",
+        "NexusLab",
+        "NexusProduction"
+      ],
+      "x-ms-enum": {
+        "name": "SkuDefinitions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureLab",
+            "value": "AzureLab",
+            "description": "Azure Lab SKU"
+          },
+          {
+            "name": "AzureProduction",
+            "value": "AzureProduction",
+            "description": "Azure Production SKU"
+          },
+          {
+            "name": "NexusLab",
+            "value": "NexusLab",
+            "description": "Nexus Lab SKU"
+          },
+          {
+            "name": "NexusProduction",
+            "value": "NexusProduction",
+            "description": "Nexus Production SKU"
+          }
+        ]
+      }
+    },
     "Versions": {
       "type": "string",
       "description": "API Versions",
@@ -603,120 +740,6 @@
             "name": "v2023_05_15_preview",
             "value": "2023-05-15-preview",
             "description": "May 15, 2023 Preview API Version"
-          }
-        ]
-      }
-    },
-    "WorkloadType": {
-      "type": "string",
-      "description": "Type of Workload",
-      "enum": [
-        "AMF",
-        "SMF",
-        "UPF",
-        "NRF",
-        "NSSF",
-        "MME",
-        "SGWControlPlane",
-        "PGWControlPlane",
-        "SGWUserPlane",
-        "PGWUserPlane",
-        "GGSN",
-        "SGSN",
-        "ePDG",
-        "N3IWF",
-        "PaaS",
-        "EMS",
-        "OperationsPolicyManager"
-      ],
-      "x-ms-enum": {
-        "name": "WorkloadType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AMF",
-            "value": "AMF",
-            "description": "Access and Mobility Function"
-          },
-          {
-            "name": "SMF",
-            "value": "SMF",
-            "description": "Session Management Function"
-          },
-          {
-            "name": "UPF",
-            "value": "UPF",
-            "description": "User Plane Function"
-          },
-          {
-            "name": "NRF",
-            "value": "NRF",
-            "description": "Network Repository Function"
-          },
-          {
-            "name": "NSSF",
-            "value": "NSSF",
-            "description": "Network Slice Selection Function"
-          },
-          {
-            "name": "MME",
-            "value": "MME",
-            "description": "Mobility Management Entity"
-          },
-          {
-            "name": "SGWControlPlane",
-            "value": "SGWControlPlane",
-            "description": "Serving Gateway Control Plane"
-          },
-          {
-            "name": "PGWControlPlane",
-            "value": "PGWControlPlane",
-            "description": "Packet Data Network Gateway Control Plane"
-          },
-          {
-            "name": "SGWUserPlane",
-            "value": "SGWUserPlane",
-            "description": "Serving Gateway User Plane"
-          },
-          {
-            "name": "PGWUserPlane",
-            "value": "PGWUserPlane",
-            "description": "Packet Data Network Gateway User Plane"
-          },
-          {
-            "name": "GGSN",
-            "value": "GGSN",
-            "description": "Gateway GPRS support node"
-          },
-          {
-            "name": "SGSN",
-            "value": "SGSN",
-            "description": "Serving GPRS support node"
-          },
-          {
-            "name": "ePDG",
-            "value": "ePDG",
-            "description": "Evolved Packet Data Gateway"
-          },
-          {
-            "name": "N3IWF",
-            "value": "N3IWF",
-            "description": "N3 Interworking Function"
-          },
-          {
-            "name": "PaaS",
-            "value": "PaaS",
-            "description": "Platform As A Service"
-          },
-          {
-            "name": "EMS",
-            "value": "EMS",
-            "description": "Element Management System"
-          },
-          {
-            "name": "OperationsPolicyManager",
-            "value": "OperationsPolicyManager",
-            "description": "Operations and Policy Manager"
           }
         ]
       }

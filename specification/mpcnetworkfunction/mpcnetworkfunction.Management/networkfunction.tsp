@@ -25,11 +25,11 @@ model NetworkFunctionResource
 model NetworkFunctionResourceProperties {
   @doc("Provisioned SKU Value.")
   @visibility("create", "read")
-  sku: string;
+  sku: SkuDefinitions;
 
-  @doc("Types of workloads co-located in the same infrastructure")
+  @doc("Type of network function")
   @visibility("create", "read")
-  workloadTypes: Array<WorkloadType>;
+  networkFunctionType: NetworkFunctionType;
 
   @doc("Administrative state of the network function")
   networkFunctionAdministrativeState: NetworkFunctionAdministrativeState;
@@ -38,9 +38,13 @@ model NetworkFunctionResourceProperties {
   @visibility("read")
   networkFunctionOperationalStatus?: NetworkFunctionOperationalStatus;
 
-  @doc("Count of infrastructure elements (kubernetes nodes for containerized network functions, virtual machines for virtual network functions)")
+  @doc("Count of infrastructure elements used by this network function (vCPUs, in units of 8)")
   @visibility("read")
   infrastructureElementCount?: int32;
+
+  @doc("Capacity of the network function in units of 10000.  This represents the session count or the Simultaneously Attached Users (SAU) count as applicable")
+  @visibility("create", "read")
+  capacity?: int32;
 
   @doc("User provided description")
   userDescription?: string;
@@ -63,8 +67,20 @@ interface NetworkFunctions {
     listBySubscription is ArmListBySubscription<NetworkFunctionResource>;
 }
 
-@doc("Type of Workload")
-enum WorkloadType {
+@doc("SKU Definitions")
+enum SkuDefinitions {
+  @doc("Azure Lab SKU")
+  AzureLab,
+  @doc("Azure Production SKU")
+  AzureProduction,
+  @doc("Nexus Lab SKU")
+  NexusLab,
+  @doc("Nexus Production SKU")
+  NexusProduction
+}
+
+@doc("Type of Network Function")
+enum NetworkFunctionType {
   @doc("Access and Mobility Function")
   AMF,
   @doc("Session Management Function")
@@ -77,24 +93,18 @@ enum WorkloadType {
   NSSF,
   @doc("Mobility Management Entity")
   MME,
-  @doc("Serving Gateway Control Plane")
-  SGWControlPlane,
-  @doc("Packet Data Network Gateway Control Plane")
-  PGWControlPlane,
-  @doc("Serving Gateway User Plane")
-  SGWUserPlane,
-  @doc("Packet Data Network Gateway User Plane")
-  PGWUserPlane,
-  @doc("Gateway GPRS support node")
-  GGSN,
-  @doc("Serving GPRS support node")
-  SGSN,
+  @doc("System Architecture Evolution Gateway Control Plane, control and user plane separation (CUPS) architecture")
+  SaegwControlPlane,
+  @doc("System Architecture Evolution Gateway User Plane, control and user plane separation (CUPS) architecture")
+  SaegwUserPlane,
+  @doc("System Architecture Evolution Gateway.  This combines the Serving Gateway (SGW) and the Packet Data Network Gateway (PGW) functionality")
+  Saegw,
   @doc("Evolved Packet Data Gateway")
   ePDG,
-  @doc("N3 Interworking Function")
+  @doc("Non-3GPP Interworking Function")
   N3IWF,
-  @doc("Platform As A Service")
-  PaaS,
+  @doc("Remote Platform As A Service Components")
+  RemotePaaS,
   @doc("Element Management System")
   EMS,
   @doc("Operations and Policy Manager")
