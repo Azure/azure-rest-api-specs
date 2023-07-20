@@ -9,9 +9,8 @@ param (
 )
 
 $tspFiles = @()
-$sanitizedPwd = $($pwd.path) -replace '\\', '/'
 if ([string]::IsNullOrEmpty($TargetBranch) -or [string]::IsNullOrEmpty($SourceBranch)) {
-  $tspFiles = (Get-ChildItem -path ./specification tspconfig.yaml -Recurse).Directory.FullName -replace '\\', '/' | ForEach-Object {[IO.Path]::GetRelativePath($sanitizedPwd, $_)}
+  $tspFiles = (Get-ChildItem -path ./specification tspconfig.yaml -Recurse).Directory.FullName | ForEach-Object {[IO.Path]::GetRelativePath($($pwd.path), $_)}
 }
 else {
   Write-Host "git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff --name-only `"$TargetBranch...$SourceBranch`" -- | Where-Object {`$_.StartsWith('specification')}"
@@ -22,7 +21,8 @@ $tspFiles -replace '\\', '/'
 $typespecFolders = @()
 foreach ($file in $tspFiles) {
   if ($file -match 'specification\/[^\/]*\/') {
-    $typespecFolders += (Get-ChildItem -path $matches[0] tspconfig.yaml -Recurse).Directory.FullName -replace '\\', '/' | ForEach-Object {[IO.Path]::GetRelativePath($sanitizedPwd, $_)}
+    $typespecFolder = (Get-ChildItem -path $matches[0] tspconfig.yaml -Recurse).Directory.FullName | ForEach-Object {[IO.Path]::GetRelativePath($($pwd.path), $_)}
+    $typespecFolders += $typespecFolder -replace '\\', '/'
   }
 }
 $typespecFolders = $typespecFolders | Select-Object -Unique
