@@ -71,14 +71,14 @@
             "type": "boolean",
             "name": "includeStopSoldPlans",
             "in": "query",
-            "description": "Denotes whether to include stop sold plans",
+            "description": "Indicates whether to include in the response the product's plans/SKUs that are no longer available for purchase. By default, includeStopSoldPlans is set to FALSE.",
             "default": false
           },
           {
             "type": "array",
             "name": "hideKeys",
             "in": "query",
-            "description": "Add hide key to retrieve preview items. Hidekeys are provided in 'multi' format. Example: HideKey[]=first",
+            "description": "This key is utilized to retrieve preview products and is generated within the Partner Center during the offer publishing process.",
             "collectionFormat": "multi",
             "items": {
               "type": "string"
@@ -88,21 +88,21 @@
             "type": "boolean",
             "name": "excludeSkuDetails",
             "in": "query",
-            "description": "Exclude availabilities or sku details",
+            "description": "By default SKU details are included (excludeSkuDetails = FALSE ), to exclude SKU details in the response, set excludeSkuDetails to TRUE.",
             "default": false
           },
           {
             "type": "boolean",
             "name": "includeFutureAvailabilities",
             "in": "query",
-            "description": "Denotes whether to include future availabilities",
+            "description": "Indicates whether to include the product's plans/SKU availabilities with future dates in the response. By default, includeFutureAvailabilities is set to FALSE.",
             "default": false
           },		  
           {
             "type": "string",
             "name": "skuId",
             "in": "query",
-            "description": "Filter by SKU ID, the result will include the product only with this specific SKU",
+            "description": "Apply SKU ID filtering to the results and only return products that include SKUs matching the selected SKU ID.",
             "default": "en"
           },	
           {
@@ -197,7 +197,7 @@
             "type": "array",
             "name": "hideKeys",
             "in": "query",
-            "description": "Add hide key to retrieve preview items. Hidekeys are provided in 'multi' format. Example: HideKey[]=first",
+            "description": "This key is utilized to retrieve preview products and is generated within the Partner Center during the offer publishing process.",
             "collectionFormat": "multi",
             "items": {
               "type": "string"
@@ -378,20 +378,20 @@
   },
   "definitions": {
     "ErrorResponse": {
-      "description": "The Catalog API error response object",
+      "description": "The API error response object",
       "type": "object",
       "required": [
         "error"
       ],
       "properties": {
         "error": {
-          "description": "The Catalog API response details",
+          "description": "The API response details",
           "$ref": "#/definitions/ErrorResponseDetails"
         }
       }
     },
     "ErrorResponseDetails": {
-      "description": "The Catalog API error response details object",
+      "description": "The API error response details object",
       "type": "object",
       "required": [
         "code",
@@ -564,7 +564,7 @@
         },
         "plans": {
           "type": "array",
-          "description": "Plans available for the offer details",
+          "description": "Full set of plan/SKU attributes",
           "items": {
             "$ref": "#/definitions/PlanDetails"
           }
@@ -655,7 +655,7 @@
           ]
         },
         "marketingMaterial": {
-          "description": "Marketing material added by the publisher",
+          "description": "Includes links to the learning and marketing materials as configured by the publisher",
           "allOf": [
             {
               "$ref": "#/definitions/MarketingMaterial"
@@ -888,7 +888,7 @@
     },
     "Attribute": {
       "type": "object",
-      "description": "An attribute on a product or a SKU",
+      "description": "Represents a SKU attribute, which consists of a key and value. The attributes may differ across various services.",
       "properties": {
         "key": {
           "type": "string",
@@ -966,7 +966,7 @@
           ]
         },
         "metadata": {
-          "description": "Additional plan metadata",
+          "description": "Expanded plan/SKU metadata.",
           "allOf": [
             {
               "$ref": "#/definitions/PlanMetadata"
@@ -1084,7 +1084,7 @@
         },
         "relatedSkus": {
           "type": "array",
-          "description": "Pointing to a related SKU object",
+          "description": "Pointing to a planId of plans that are related to this plan",
           "items": {
             "$ref": "#/definitions/PlanSkuRelation"
           }
@@ -1129,7 +1129,7 @@
     },
     "VmSecurityType": {
       "type": "string",
-      "description": "VM Security type",
+      "description": "VM security type. Applicable to Virtual Machine products only. Possible values:\n- Standard - Basic level of security for the virtual machine\n- Trusted - protects against persistent and advanced attacks on Gen2 virtual machines with configurable features like security boot and virtual Trusted Platform Module(vTPM)\n- Confidential - on top of Trusted Launch, Confidential virtual machines offer higher confidentiality and integrity guaranteed with hardware-based trusted execution environment",
       "enum": [
         "None",
         "Trusted",
@@ -1182,7 +1182,7 @@
     },
     "MarketingMaterial": {
       "type": "object",
-      "description": "Defines the marketing material from the publisher",
+      "description": "Includes links to the learning and marketing materials as configured by the publisher",
       "properties": {
         "path": {
           "type": "string",
@@ -1196,7 +1196,7 @@
     },
     "LegalTermsType": {
       "type": "string",
-      "description": "Supported legal terms type",
+      "description": "Supported legal terms type. Possible values:\n- `EA` - Microsoft Enterprise Agreement\n- `None` - None",
       "enum": [
         "None",
         "EA"
@@ -1226,7 +1226,7 @@
     },
     "ImageGroup": {
       "type": "object",
-      "description": "Image Group",
+      "description": "List of image objects",
       "properties": {
         "context": {
           "type": "string",
@@ -1243,7 +1243,7 @@
     },
     "Image": {
       "type": "object",
-      "description": "Image item",
+      "description": "Includes link to the product image (can be displayed on Product Detailes page).",
       "properties": {
         "id": {
           "type": "string",
@@ -1275,7 +1275,7 @@
           "description": "Artifact uri"
         },
         "artifactType": {
-          "description": "The type of the artifact. Possible values:\n- `Custom` - Custom artifact type\n- `Fragment` - Contains link to the nested ARM template\n- `Metadata` - Metadata artifact type\n- `Template` - Contains link to the main ARM template ",
+          "description": "The type of the artifact. Possible values:\n- `Custom` - Custom artifact type\n- `Fragment` - Contains link to the nested ARM template\n- `Metadata` - Metadata artifact type\n- `Template` - Contains link to the main ARM template",
           "allOf": [
             {
               "$ref": "#/definitions/ArtifactType"
@@ -1286,7 +1286,7 @@
     },
     "ArtifactType": {
       "type": "string",
-      "description": "The type of the artifact",
+      "description": "The type of the artifact. Possible values:\n- `Custom` - Custom artifact type\n- `Fragment` - Contains link to the nested ARM template\n- `Metadata` - Metadata artifact type\n- `Template` - Contains link to the main ARM template",
       "enum": [
         "Template",
         "Fragment",
@@ -1345,7 +1345,7 @@
     },
     "PlanDetails": {
       "type": "object",
-      "description": "Summary description of the plan",
+      "description": "Full set of plan/SKU attributes",
       "required": [
         "planType",
         "isHidden",
@@ -1382,7 +1382,7 @@
           ]
         },
         "metadata": {
-          "description": "Additional plan metadata",
+          "description": "Expanded plan/SKU metadata.",
           "allOf": [
             {
               "$ref": "#/definitions/PlanMetadata"
@@ -1556,7 +1556,7 @@
         },
         "location": { 
           "type": "string",
-          "description": "Location (region)"
+          "description": "SKU location"
         },
         "armRegionName": { 
           "type": "string",
@@ -1564,7 +1564,7 @@
         },
         "cloud": { 
           "type": "string",
-          "description": "The cloud, such as 'Global'"
+          "description": "Applicable cloud, such as 'Global'"
         },
         "locationType": { 
           "type": "string",
@@ -1584,7 +1584,7 @@
         },
         "feature": { 
           "type": "string",
-          "description": "The feature"
+          "description": "The feature, such as 'Spot'"
         },
         "serviceType": { 
           "type": "string",
@@ -1607,7 +1607,7 @@
         },
         "offeringProperties": {
           "type": "array",
-          "description": "Offering properties such as: product code (UPN), term id, meter type, offering id",
+          "description": "SKU price related properties.",
           "items": {
             "$ref": "#/definitions/OfferingProperties"
           }
@@ -1634,7 +1634,7 @@
           "type": "string",
           "description": "The number of cores"
         },
-        "RAM": {
+        "ram": {
           "type": "string",
           "description": "The Ram"
         },
@@ -1654,7 +1654,7 @@
     },
     "OfferingProperties": {
       "type": "object",
-      "description": "Properties related to the price",
+      "description": "SKU price related properties",
       "properties": {
         "productCode": {
           "type": "string",
@@ -1757,7 +1757,7 @@
           "description": "Consumption resource id"
         },
         "price": {
-          "description": "Price for this meter",
+          "description": "Retail price with currency",
           "allOf": [
             {
               "$ref": "#/definitions/Price"
@@ -1779,7 +1779,7 @@
     },
     "Price": {
       "type": "object",
-      "description": "Pricing details",
+      "description": "Retail price with currency",
       "required": [
         "isPIRequired",
         "listPrice",
@@ -1862,7 +1862,7 @@
           "description": "Term description"
         },
         "price": {
-          "description": "Price for the term",
+          "description": "Retail price with currency",
           "allOf": [
             {
               "$ref": "#/definitions/Price"
@@ -1936,7 +1936,7 @@
           "description": "Description"
         },
         "price": {
-          "description": "Price",
+          "description": "Retail price with currency",
           "allOf": [
             {
               "$ref": "#/definitions/Price"
@@ -2033,7 +2033,7 @@
         },
         "productDescription": {
           "type": "string",
-          "description": "PThe product description text"
+          "description": "The product description text"
         },
         "serviceFamily": {
           "type": "string",
@@ -2182,7 +2182,7 @@
         },
         "offeringProperties": {
           "type": "array",
-          "description": "Offering properties such as: product code (UPN), term id, meter type, offering id",
+          "description": "SKU price related properties",
           "items": {
             "$ref": "#/definitions/OfferingProperties"
           }
