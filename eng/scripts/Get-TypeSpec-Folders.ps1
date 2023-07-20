@@ -12,6 +12,8 @@ $changedFiles = @()
 $allChangedFiles = (Get-ChildItem -path ./specification tspconfig.yaml -Recurse).Directory.FullName | ForEach-Object {[IO.Path]::GetRelativePath($($pwd.path), $_)}
 $allChangedFiles = $changedFiles -replace '\\', '/'
 
+Write-Host "allChangedFiles: '$allChangedFiles'"
+
 if ([string]::IsNullOrEmpty($TargetBranch) -or [string]::IsNullOrEmpty($SourceBranch)) {
   $changedFiles = $allChangedFiles
 }
