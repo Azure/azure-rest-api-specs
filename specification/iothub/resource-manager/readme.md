@@ -37,6 +37,7 @@ These settings apply only when `--tag=package-preview-2023-07` is specified on t
 ```yaml $(tag) == 'package-preview-2023-07'
 input-file:
   - Microsoft.Devices/preview/2023-07-15-preview/iothub.json
+  - Microsoft.Devices/preview/2023-07-15-preview/NetworkSecurityPerimeterConfigurations.json
 ```
 ### Tag: package-preview-2023-06
 
