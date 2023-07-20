@@ -68,9 +68,6 @@ directive:
     where: $.paths
     from: applications.json
     reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
-    where: $.paths
-    from: integrations.json
-    reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
 ```
 
 ### Basic Information
