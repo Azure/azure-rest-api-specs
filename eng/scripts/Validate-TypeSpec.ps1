@@ -25,8 +25,8 @@ if ($typespecFolders) {
     if ($LASTEXITCODE) {
       $exitCode = 1
     }
-    # git restore .
-    # git clean -df
+    git restore .
+    git clean -df
   }
 }
 
