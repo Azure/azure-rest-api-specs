@@ -48,10 +48,10 @@
   "paths": {
     "/providers/Microsoft.NetworkAnalytics/operations": {
       "get": {
+        "operationId": "Operations_List",
         "tags": [
           "Operations"
         ],
-        "operationId": "Operations_List",
         "description": "List the operations for the provider",
         "parameters": [
           {
@@ -72,9 +72,6 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Operations_List_MaximumSet_Gen": {
             "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
@@ -82,15 +79,18 @@
           "Operations_List_MinimumSet_Gen": {
             "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkAnalytics/dataLakeHouses": {
       "get": {
+        "operationId": "Storage_ListBySubscription",
         "tags": [
           "Storage"
         ],
-        "operationId": "Storage_ListBySubscription",
         "description": "List DataLakeHouseResources resources by subscription ID",
         "parameters": [
           {
@@ -114,9 +114,6 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Storage_ListBySubscription_MaximumSet_Gen": {
             "$ref": "./examples/Storage_ListBySubscription_MaximumSet_Gen.json"
@@ -124,15 +121,18 @@
           "Storage_ListBySubscription_MinimumSet_Gen": {
             "$ref": "./examples/Storage_ListBySubscription_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataLakeHouses": {
       "get": {
+        "operationId": "Storage_ListByResourceGroup",
         "tags": [
           "Storage"
         ],
-        "operationId": "Storage_ListByResourceGroup",
         "description": "List DataLakeHouseResources resources by resource group",
         "parameters": [
           {
@@ -159,9 +159,6 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Storage_ListByResourceGroup_MaximumSet_Gen": {
             "$ref": "./examples/Storage_ListByResourceGroup_MaximumSet_Gen.json"
@@ -169,15 +166,18 @@
           "Storage_ListByResourceGroup_MinimumSet_Gen": {
             "$ref": "./examples/Storage_ListByResourceGroup_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataLakeHouses/{storageName}": {
       "get": {
+        "operationId": "Storage_Get",
         "tags": [
           "Storage"
         ],
-        "operationId": "Storage_Get",
         "description": "Get a DataLakeHouseResources",
         "parameters": [
           {
@@ -192,8 +192,8 @@
           {
             "name": "storageName",
             "in": "path",
-            "required": true,
             "description": "The data lake house resource name",
+            "required": true,
             "type": "string"
           }
         ],
@@ -221,10 +221,10 @@
         }
       },
       "put": {
+        "operationId": "Storage_CreateOrUpdate",
         "tags": [
           "Storage"
         ],
-        "operationId": "Storage_CreateOrUpdate",
         "description": "Create a DataLakeHouseResources",
         "parameters": [
           {
@@ -239,15 +239,15 @@
           {
             "name": "storageName",
             "in": "path",
-            "required": true,
             "description": "The data lake house resource name",
+            "required": true,
             "type": "string"
           },
           {
             "name": "resource",
             "in": "body",
-            "required": true,
             "description": "Resource create parameters.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/DataLakeHouseResources"
             }
@@ -262,15 +262,15 @@
           },
           "201": {
             "description": "ARM create operation completed successfully.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/DataLakeHouseResources"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -280,10 +280,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Storage_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/Storage_CreateOrUpdate_MaximumSet_Gen.json"
@@ -291,13 +287,17 @@
           "Storage_CreateOrUpdate_MinimumSet_Gen": {
             "$ref": "./examples/Storage_CreateOrUpdate_MinimumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
+        "operationId": "Storage_Update",
         "tags": [
           "Storage"
         ],
-        "operationId": "Storage_Update",
         "description": "Update a DataLakeHouseResources",
         "parameters": [
           {
@@ -312,15 +312,15 @@
           {
             "name": "storageName",
             "in": "path",
-            "required": true,
             "description": "The data lake house resource name",
+            "required": true,
             "type": "string"
           },
           {
             "name": "properties",
             "in": "body",
-            "required": true,
             "description": "The resource properties to be updated.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/DataLakeHouseResourcesUpdate"
             }
@@ -350,10 +350,10 @@
         }
       },
       "delete": {
+        "operationId": "Storage_Delete",
         "tags": [
           "Storage"
         ],
-        "operationId": "Storage_Delete",
         "description": "Delete a DataLakeHouseResources",
         "parameters": [
           {
@@ -368,8 +368,8 @@
           {
             "name": "storageName",
             "in": "path",
-            "required": true,
             "description": "The data lake house resource name",
+            "required": true,
             "type": "string"
           }
         ],
@@ -381,13 +381,13 @@
             "description": "Resource deletion accepted.",
             "headers": {
               "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
               "Location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -401,10 +401,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Storage_Delete_MaximumSet_Gen": {
             "$ref": "./examples/Storage_Delete_MaximumSet_Gen.json"
@@ -412,13 +408,18 @@
           "Storage_Delete_MinimumSet_Gen": {
             "$ref": "./examples/Storage_Delete_MinimumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
   "definitions": {
     "AzureDataExplorerProperties": {
       "type": "object",
+      "description": "ADx Properties",
       "properties": {
         "virtualNetworkConfiguration": {
           "$ref": "#/definitions/VirtualNetworkConfiguration",
@@ -432,33 +433,32 @@
           "description": "Kusto Cluster Principal Assignments"
         }
       },
-      "description": "ADx Properties",
       "required": [
         "kustoClusterPrincipalAssignments"
       ]
     },
     "BlobServices": {
       "type": "object",
+      "description": "Configuration for creating Blob Service",
       "properties": {
         "restorePolicy": {
           "$ref": "#/definitions/RestorePolicy",
           "description": "Restore Policy"
         }
       },
-      "description": "Configuration for creating Blob Service",
       "required": [
         "restorePolicy"
       ]
     },
     "BronzeStorageAccountProperties": {
       "type": "object",
+      "description": "Configuration for BronzeAccount",
       "properties": {
         "isSftpEnabled": {
           "type": "boolean",
           "description": "Enables Secure File Transfer Protocol, if set to true"
         }
       },
-      "description": "Configuration for BronzeAccount",
       "required": [
         "isSftpEnabled"
       ]
@@ -478,6 +478,7 @@
     },
     "CommonStorageAccountProperties": {
       "type": "object",
+      "description": "Common Storage Account Properties.",
       "properties": {
         "publicNetworkAccess": {
           "type": "string",
@@ -501,11 +502,11 @@
           "$ref": "#/definitions/PrivateEndPoint",
           "description": "Private End Point"
         }
-      },
-      "description": "Common Storage Account Properties."
+      }
     },
     "DataLakeHouseResources": {
       "type": "object",
+      "description": "The data lake house resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/StorageProperties",
@@ -517,7 +518,6 @@
           ]
         }
       },
-      "description": "The data lake house resource",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -526,13 +526,14 @@
     },
     "DataLakeHouseResourcesListResult": {
       "type": "object",
+      "description": "The response of a DataLakeHouseResources list operation.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The DataLakeHouseResources items on this page",
           "items": {
             "$ref": "#/definitions/DataLakeHouseResources"
           },
-          "description": "The DataLakeHouseResources items on this page",
           "x-typespec-name": "DataLakeHouseResources[]"
         },
         "nextLink": {
@@ -542,38 +543,37 @@
           "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
-      "description": "The response of a DataLakeHouseResources list operation.",
       "required": [
         "value"
       ]
     },
     "DataLakeHouseResourcesUpdate": {
       "type": "object",
+      "description": "The type used for update operations of the DataLakeHouseResources.",
       "properties": {
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Resource tags.",
           "x-typespec-name": "Record<string>"
         },
         "properties": {
           "$ref": "#/definitions/DataLakeHouseResourcesUpdateProperties",
           "x-ms-client-flatten": true
         }
-      },
-      "description": "The type used for update operations of the DataLakeHouseResources."
+      }
     },
     "DataLakeHouseResourcesUpdateProperties": {
       "type": "object",
+      "description": "The updatable properties of the DataLakeHouseResources.",
       "properties": {
         "managedResourceGroupConfiguration": {
           "$ref": "#/definitions/ManagedResourceGroupConfigurationUpdate",
           "description": "Managed Resource Group configuration."
         }
-      },
-      "description": "The updatable properties of the DataLakeHouseResources."
+      }
     },
     "DefaultAction": {
       "type": "string",
@@ -588,6 +588,7 @@
     },
     "IPRules": {
       "type": "object",
+      "description": "IP rule with specific IP or IP range in CIDR format.",
       "properties": {
         "value": {
           "type": "string",
@@ -598,13 +599,13 @@
           "description": "The action of virtual network rule."
         }
       },
-      "description": "IP rule with specific IP or IP range in CIDR format.",
       "required": [
         "action"
       ]
     },
     "KustoClusterPrincipalAssignments": {
       "type": "object",
+      "description": "ADx Role assignments",
       "properties": {
         "systemIdentityName": {
           "type": "string",
@@ -622,7 +623,6 @@
           "description": "Principal type."
         }
       },
-      "description": "ADx Role assignments",
       "required": [
         "role",
         "principalType"
@@ -654,6 +654,7 @@
     },
     "ManagedResourceGroupConfiguration": {
       "type": "object",
+      "description": "ManagedResourceGroup related properties",
       "properties": {
         "name": {
           "type": "string",
@@ -664,7 +665,6 @@
           "description": "Managed Resource Group location"
         }
       },
-      "description": "ManagedResourceGroup related properties",
       "required": [
         "name",
         "location"
@@ -672,6 +672,7 @@
     },
     "ManagedResourceGroupConfigurationUpdate": {
       "type": "object",
+      "description": "ManagedResourceGroup related properties",
       "properties": {
         "name": {
           "type": "string",
@@ -681,11 +682,11 @@
           "type": "string",
           "description": "Managed Resource Group location"
         }
-      },
-      "description": "ManagedResourceGroup related properties"
+      }
     },
     "NetworkAcls": {
       "type": "object",
+      "description": "Network rule set",
       "properties": {
         "bypass": {
           "$ref": "#/definitions/Bypass",
@@ -693,28 +694,28 @@
         },
         "virtualNetworkRule": {
           "type": "array",
+          "description": "Virtual Network Rule",
           "items": {
             "$ref": "#/definitions/VirtualNetworkRule"
           },
-          "description": "Virtual Network Rule",
           "x-typespec-name": "VirtualNetworkRule[]"
         },
         "ipRules": {
           "type": "array",
+          "description": "IP rule with specific IP or IP range in CIDR format.",
           "items": {
             "$ref": "#/definitions/IPRules"
           },
           "x-ms-identifiers": [],
-          "description": "IP rule with specific IP or IP range in CIDR format.",
           "x-typespec-name": "IPRules[]"
         },
         "resourceAccessRules": {
           "type": "array",
+          "description": "Resource Access Rules.",
           "items": {
             "$ref": "#/definitions/ResourceAccessRules"
           },
           "x-ms-identifiers": [],
-          "description": "Resource Access Rules.",
           "x-typespec-name": "ResourceAccessRules[]"
         },
         "defaultAction": {
@@ -722,7 +723,6 @@
           "description": "Default Action"
         }
       },
-      "description": "Network rule set",
       "required": [
         "bypass",
         "virtualNetworkRule",
@@ -763,6 +763,7 @@
     },
     "PrivateEndPoint": {
       "type": "object",
+      "description": "Private End Point Resource",
       "properties": {
         "subnetId": {
           "type": "string",
@@ -774,10 +775,10 @@
         },
         "groupIds": {
           "type": "array",
+          "description": "The private link resource group id.",
           "items": {
             "type": "string"
           },
-          "description": "The private link resource group id.",
           "x-typespec-name": "string[]"
         },
         "customDnsConfigs": {
@@ -785,7 +786,6 @@
           "description": "The private link resource customDnsConfigs."
         }
       },
-      "description": "Private End Point Resource",
       "required": [
         "subnetId",
         "privateLinkServiceId",
@@ -849,6 +849,7 @@
     },
     "ResourceAccessRules": {
       "type": "object",
+      "description": "Resource Access Rules.",
       "properties": {
         "tenantId": {
           "type": "string",
@@ -859,7 +860,6 @@
           "description": "Resource ID"
         }
       },
-      "description": "Resource Access Rules.",
       "required": [
         "tenantId",
         "resourceId"
@@ -867,6 +867,7 @@
     },
     "RestorePolicy": {
       "type": "object",
+      "description": "Restore Policy",
       "properties": {
         "enabled": {
           "type": "boolean",
@@ -878,7 +879,6 @@
           "description": "Restore Policy in days"
         }
       },
-      "description": "Restore Policy",
       "required": [
         "enabled",
         "days"
@@ -886,6 +886,7 @@
     },
     "StorageProperties": {
       "type": "object",
+      "description": "Details of the NetworkAnalytics Storage.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -928,7 +929,6 @@
           ]
         }
       },
-      "description": "Details of the NetworkAnalytics Storage.",
       "required": [
         "uniqueIdentifierName",
         "commonStorageAccountProperties",
@@ -941,7 +941,8 @@
       "enum": [
         "2022-11-15-preview",
         "2023-03-31-preview",
-        "2023-04-30-preview"
+        "2023-04-30-preview",
+        "2023-11-15"
       ],
       "x-ms-enum": {
         "name": "Versions",
@@ -961,12 +962,18 @@
             "name": "v2023_04_30_preview",
             "value": "2023-04-30-preview",
             "description": "The 2023-04-30-preview version."
+          },
+          {
+            "name": "v2023_11_15",
+            "value": "2023-11-15",
+            "description": "The 2023-11-15 stable version."
           }
         ]
       }
     },
     "VirtualNetworkConfiguration": {
       "type": "object",
+      "description": "Virtual Network Configuration",
       "properties": {
         "subnetId": {
           "type": "string",
@@ -981,7 +988,6 @@
           "description": "Data Management Public Ip ID"
         }
       },
-      "description": "Virtual Network Configuration",
       "required": [
         "subnetId",
         "enginePublicIpId",
@@ -990,6 +996,7 @@
     },
     "VirtualNetworkRule": {
       "type": "object",
+      "description": "Virtual Network Rule",
       "properties": {
         "id": {
           "type": "string",
@@ -1004,7 +1011,6 @@
           "description": "Gets the state of virtual network rule."
         }
       },
-      "description": "Virtual Network Rule",
       "required": [
         "id"
       ]

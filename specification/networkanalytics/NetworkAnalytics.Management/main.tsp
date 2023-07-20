@@ -30,10 +30,14 @@ enum Versions {
   v2023_03_31_preview: "2023-03-31-preview",
   @doc("The 2023-04-30-preview version.")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  v2023_04_30_preview: "2023-04-30-preview"
+  v2023_04_30_preview: "2023-04-30-preview",
+  @doc("The 2023-11-15 stable version.")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  v2023_11_15: "2023-11-15"
 }
 
 @doc("The data lake house resource")
+@removed(Versions.v2023_11_15)
 model DataLakeHouseResources is TrackedResource < StorageProperties > {
     @doc("The data lake house resource name")
     @key("storageName")
@@ -45,6 +49,7 @@ model DataLakeHouseResources is TrackedResource < StorageProperties > {
 @doc("The network analytics product resource")
 @singleton
 @added(Versions.v2023_03_31_preview)
+@removed(Versions.v2023_11_15)
 model NetworkAnalyticsProducts is ProxyResource < NetworkAnalyticsProductsProperties > {
     @doc("The network analytics product name")
     @key("networkAnalyticsProductName")
@@ -55,6 +60,7 @@ model NetworkAnalyticsProducts is ProxyResource < NetworkAnalyticsProductsProper
 
 @doc("The data connector resource")
 @added(Versions.v2023_03_31_preview)
+@removed(Versions.v2023_11_15)
 model DataConnectors is TrackedResource <DataConnectorsProperties> {
     @doc("The data connector name")
     @key("dataConnectorName")
@@ -64,6 +70,7 @@ model DataConnectors is TrackedResource <DataConnectorsProperties> {
 }
 
 @doc("Details of the NetworkAnalytics Storage.")
+@removed(Versions.v2023_11_15)
 model StorageProperties {
     @doc("Storage properties")
     @visibility("read")
@@ -88,6 +95,7 @@ model StorageProperties {
 
 @doc("Details of the network analytics product properties")
 @added(Versions.v2023_03_31_preview)
+@removed(Versions.v2023_11_15)
 model NetworkAnalyticsProductsProperties {
     @doc("The network analytics product provisioning state")
     @visibility("read")
@@ -100,6 +108,7 @@ model NetworkAnalyticsProductsProperties {
 
 @doc("Details of the Data Connector Properties. The product details are to be added from the supported values which can be fetched by making a GET call on the Network Analytics Product resource.")
 @added(Versions.v2023_03_31_preview)
+@removed(Versions.v2023_11_15)
 model DataConnectorsProperties {
     @doc("The data connector provisioning state")
     @visibility("read")
@@ -157,6 +166,7 @@ model ManagedResourceGroupConfiguration {
 
 @doc("The network analytics product information")
 @added(Versions.v2023_03_31_preview)
+@removed(Versions.v2023_11_15)
 model NetworkAnalyticsProductInformation {
     @doc("Name of the network analytics product")
     @minLength(3)
@@ -171,6 +181,7 @@ model NetworkAnalyticsProductInformation {
 
 @doc("Data Connector Information")
 @added(Versions.v2023_03_31_preview)
+@removed(Versions.v2023_11_15)
 model NetworkAnalyticsProductConnectorInformation {
     @doc("The connector name")
     @minLength(3)
@@ -182,6 +193,7 @@ model NetworkAnalyticsProductConnectorInformation {
 
 @doc("The data retention, dataset and compute configurations for the connector")
 @added(Versions.v2023_03_31_preview)
+@removed(Versions.v2023_11_15)
 model DataConnectorConfiguration {
   @doc("The data retention configuration")
   dataRetentionProperties?: DataRetentionProperties,
@@ -193,6 +205,7 @@ model DataConnectorConfiguration {
 
 @doc("The data retention properties")
 @added(Versions.v2023_03_31_preview)
+@removed(Versions.v2023_11_15)
 model DataRetentionProperties {
     @doc("The Azure data explorer retention properties")
     dataExplorer?: RetentionProperties,
@@ -206,6 +219,7 @@ model DataRetentionProperties {
 
 @doc("The retention properties model")
 @added(Versions.v2023_03_31_preview)
+@removed(Versions.v2023_11_15)
 model RetentionProperties {
     @doc("The data retention period in days")
     retentionDays: int32
@@ -213,6 +227,7 @@ model RetentionProperties {
 
 @doc("The connector dataset information ")
 @added(Versions.v2023_03_31_preview)
+@removed(Versions.v2023_11_15)
 model DatasetConfiguration {
     @doc("The name of the dataset")
     datasetName?: string,
@@ -224,6 +239,7 @@ model DatasetConfiguration {
 
 @doc("The compute configuration")
 @added(Versions.v2023_03_31_preview)
+@removed(Versions.v2023_11_15)
 model ComputeConfiguration {
     @doc("The data connector throughput configuration.")
     throughput: Throughput;
@@ -231,6 +247,7 @@ model ComputeConfiguration {
 
 @doc("The data connector throughput configuration")
 @added(Versions.v2023_03_31_preview)
+@removed(Versions.v2023_11_15)
 model Throughput {
     @doc("The data connector throughput tier.")
     tier: throughputTier;
@@ -238,6 +255,7 @@ model Throughput {
 
 @doc("The data connector throughput tier for the ADX cluster.")
 @added(Versions.v2023_03_31_preview)
+@removed(Versions.v2023_11_15)
 enum throughputTier{
     @doc("The Basic throughput tier.")
     Basic,
@@ -248,9 +266,11 @@ enum throughputTier{
 }
 
 @doc("Common Storage Account Properties.")
+@removed(Versions.v2023_11_15)
 model CommonStorageAccountProperties {
     @visibility("create", "read")
     @doc("The SKU of the storage account.")
+    @removed(Versions.v2023_11_15)
     @added(Versions.v2023_03_31_preview)
     sku : Sku;
     @visibility("create")
@@ -267,6 +287,7 @@ model CommonStorageAccountProperties {
 
 @doc("The SKU of the storage account.")
 @added(Versions.v2023_03_31_preview)
+@removed(Versions.v2023_11_15)
 model Sku {
     @doc("The name of the SKU.")
 	name: SkuName;
@@ -274,6 +295,7 @@ model Sku {
 
 @doc("The storage redundancy options.")
 @added(Versions.v2023_03_31_preview)
+@removed(Versions.v2023_11_15)
 enum SkuName {
     @doc("The locally redundant storage.")
     Standard_LRS,
@@ -286,12 +308,14 @@ enum SkuName {
 }
 
 @doc("Configuration for BronzeAccount")
+@removed(Versions.v2023_11_15)
 model BronzeStorageAccountProperties {
     @doc("Enables Secure File Transfer Protocol, if set to true")
     isSftpEnabled: boolean;
 }
 
 @doc("ADx Properties")
+@removed(Versions.v2023_11_15)
 model AzureDataExplorerProperties {
     @visibility("create")
     @doc("Virtual Network Configuration")
@@ -301,15 +325,18 @@ model AzureDataExplorerProperties {
     @visibility("create", "read")
     @doc("The ADX SKU details")
     @added(Versions.v2023_03_31_preview)
+    @removed(Versions.v2023_11_15)
     adxSku: AdxSku;
     @doc("An array represents the availability zones of the cluster.")
     @visibility("create", "read")
     @added(Versions.v2023_03_31_preview)
+    @removed(Versions.v2023_11_15)
     zones ?: string[];
 }
 
 @doc("The ADX SKU details")
 @added(Versions.v2023_03_31_preview)
+@removed(Versions.v2023_11_15)
 model AdxSku {
 	@doc("SKU name.")
 	name: AdxSkuName;
@@ -321,6 +348,7 @@ model AdxSku {
 
 @doc("The ADX SKU tier options.")
 @added(Versions.v2023_03_31_preview)
+@removed(Versions.v2023_11_15)
 enum SkuTier {
     @doc("The Basic tier.")
     Basic,
@@ -330,6 +358,7 @@ enum SkuTier {
 
 @doc("The ADX SKU name options.")
 @added(Versions.v2023_03_31_preview)
+@removed(Versions.v2023_11_15)
 enum AdxSkuName {
   @doc("The Dev_No_SLA_Standard_D11_v2 SKU")
   Dev_No_SLA_Standard_D11_v2: "Dev(No SLA)_Standard_D11_v2",
@@ -462,6 +491,7 @@ enum AdxSkuName {
 }
 
 @doc("The KustoRole options.")
+@removed(Versions.v2023_11_15)
 enum KustoRole {
   @doc("The Kusto Cluster Admin role.")
   AllDatabasesAdmin,
@@ -470,6 +500,7 @@ enum KustoRole {
 }
 
 @doc("The PrincipalType options.")
+@removed(Versions.v2023_11_15)
 enum PrincipalType {
   @doc("The principal is an app.")
   App,
@@ -480,6 +511,7 @@ enum PrincipalType {
 }
 
 @doc("ADx Role assignments")
+@removed(Versions.v2023_11_15)
 model KustoClusterPrincipalAssignments {
     @visibility("create")
     @doc("system Identity Name")
@@ -491,6 +523,7 @@ model KustoClusterPrincipalAssignments {
 }
 
 @doc("Private End Point Resource")
+@removed(Versions.v2023_11_15)
 model PrivateEndPoint {
     @doc("Resource ID of a subnet")
     subnetId: string;
@@ -558,6 +591,7 @@ model NetworkAcls {
 }
 
 @doc("Restore Policy")
+@removed(Versions.v2023_11_15)
 model RestorePolicy {
     @doc("Restore Policy enabled or disabled boolean value")
     enabled: boolean;
@@ -566,12 +600,14 @@ model RestorePolicy {
 }
 
 @doc("Configuration for creating Blob Service")
+@removed(Versions.v2023_11_15)
 model BlobServices {
     @doc("Restore Policy")
     restorePolicy: RestorePolicy;
 }
 
 @doc("Virtual Network Configuration")
+@removed(Versions.v2023_11_15)
 model VirtualNetworkConfiguration {
     @doc("Resource ID of a subnet")
     subnetId: string;
@@ -632,11 +668,281 @@ model MetricsIngestionEndpointProperties {
     managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
   }
 
+@doc("The data product resource.")
+@added(Versions.v2023_11_15)
+model DataProduct is TrackedResource<DataProductProperties>{
+    @doc("The data product resource name")
+    @key("dataProductName")    
+    @segment("dataProducts")
+    @path
+    name: string;
+}
+
+@doc("The data product properties.")
+@added(Versions.v2023_11_15)
+model DataProductProperties{
+    @doc("Latest provisioning state  of data product.")
+    @visibility("read")
+    provisioningState ?: ProvisioningState;
+    @doc("Data product publisher name.")
+    @visibility("create", "read")
+    publisher: string;
+    @doc("Product name of data product.")
+    @visibility("create", "read")
+    product: string;
+    @doc("Major version of data product.")
+    @visibility("create", "read")
+    majorVersion: string;
+    @doc("List of name or email associated with data product resource deployment.")
+    @visibility("create", "read","update")
+    owners?: string[];
+    @doc("Flag for redundancy of data product.")
+    @visibility("create","read")
+    redundancy?: boolean;    
+    @doc("Purview account url for data product to connect to.")
+    @visibility("create", "update")
+    purviewAccount?: string;
+    @doc("Flag to enable private link for data product resource.")
+    @visibility("create", "update","read")
+    privateLinksEnabled?: boolean = false;
+    @doc("Flag to enable public access of data product resource.")
+    @visibility("create","read")
+    publicNetworkAccess?: boolean;
+    @doc("Network rule set for data product.")
+    @visibility("create","read")
+    networkacls ?: NetworkAcls;
+    @doc("Managed resource group configuration.")
+    @visibility("create")
+    managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
+    @doc("List of available minor versions of the data product resource.")
+    @visibility("read")
+    availableMinorVersions?: string[];
+    @doc("Current configured minor version of the data product resource.")
+    @visibility("read","update")
+    currentMinorVersion?: string;
+    @doc("Documentation link for the data product based on definition file.")
+    @visibility("read")
+    documentation?: string;
+    @doc("Resource links which exposed to the customer to query the data.")
+    @visibility("read")
+    consumptionUrls?: ConsumptionUrlsProperties;
+    @doc("Key vault url.")
+    @visibility("read")
+    keyVaultUrl?: string;
+    @doc("Managed Identity field")    
+    @visibility("create","update")
+    managedIdentity?: ManagedServiceIdentity;    
+}
+
+@doc("Details of Consumption Properties")
+@added(Versions.v2023_11_15)
+model ConsumptionUrlsProperties{
+  @doc("Ingestion url to upload the data.")
+  @visibility("read")
+  ingestionUrl?: string;
+  @doc("Url to consume file type.")
+  @visibility("read")
+  fileAccessUrl?: string;
+  @doc("Url to consume the processed data.")
+  @visibility("read")  
+  queryUrl?: string;
+}
+
+@doc("The details for storage account sas creation.")
+@added(Versions.v2023_11_15)
+model AccountSas {
+  @doc("Sas token start timestamp.")
+  @format("date-time")
+  startTimeStamp: string;
+  @doc("Sas token expiry timestamp.")
+  @format("date-time")
+  expiryTimeStamp: string;
+  @doc("Ip Address")  
+  ipAddress: string;
+}
+
+@doc("Details of storage account sas token .")
+@added(Versions.v2023_11_15)
+model AccountSasToken{
+  @doc("Field to specify storage account sas token.")
+  storageAccountSasToken: string;
+} 
+
+@doc("Details of storage container account sas token .")
+@added(Versions.v2023_11_15)
+model ContainerSasToken{
+  @doc("Field to specify storage container sas token.")
+  storageContainerSasToken: string;
+} 
+
+@doc("Details for KeyVault.")
+@added(Versions.v2023_11_15)
+model KeyVaultInfo{
+  @doc("key vault url.")
+  keyVaultUrl: string;
+}
+
+@doc("The data type resource.")
+@added(Versions.v2023_11_15)
+@parentResource(DataProduct)
+model DataType is ProxyResource<DataTypeProperties>{
+  @doc("The data type name.")
+  @segment("dataTypes")
+  @key("dataTypeName")  
+  @path
+  name: string;  
+}
+
+@doc("The data type properties")
+@added(Versions.v2023_11_15)
+model DataTypeProperties{
+    @doc("Latest provisioning state  of data product.")
+    @visibility("read")
+    provisioningState ?: ProvisioningState;
+    @doc("State of data type.")
+    @visibility("read","create","update")
+    state?: DataTypeState;
+    @doc("Reason for the state of data type.")
+    @visibility("read")
+    stateReason?: string;
+    @doc("Field for storage output retention in days.")
+    @visibility("read","create","update")
+    storageOutputRetention?: int32,
+    @doc("Field for database cache retention in days.")
+    @visibility("read","create","update")
+    databaseCacheRetention?: int32,
+    @doc("Field for database data retention in days.")
+    @visibility("read","create","update")
+    databaseRetention?: int32,
+    @doc("Url for data visualization.")
+    @visibility("read")
+    visualizationUrl?: string;
+}
+
+@doc("The data type state")
+@added(Versions.v2023_11_15)
+enum DataTypeState{
+  @doc("Field to specify stopped state.")
+  Stopped;
+  @doc("Field to specify running state.")
+  Running;
+}
+
+@doc("The details for container sas creation.")
+@added(Versions.v2023_11_15)
+model ContainerSaS is AccountSas{}
+
+@doc("The details for role assignment response.")
+@added(Versions.v2023_11_15)
+model RoleAssignmentDetail is RoleAssignmentCommonProperties{  
+  @doc("Id of role assignment request")  
+  roleAssignmentId: string;  
+}
+
+@doc("list role assignments.")
+@added(Versions.v2023_11_15)
+model ListRoleAssignments{
+  @doc("Count of role assignments.")
+  count: int32;
+  @doc("list of role assignments")
+  @extension("x-ms-identifiers", ["roleAssignmentId"])
+  roleAssignmentResponse: RoleAssignmentDetail[];
+}
+
+@doc("The data type state")
+@added(Versions.v2023_11_15)
+enum DataProductUserRole{
+  @doc("Field to specify user of type Reader.")
+  Reader;
+  @doc("""
+Field to specify user of type SensitiveReader.
+This user has privileged access to read sensitive data of a data product.
+""")
+  SensitiveReader;
+}
+
+
+@doc("The details for role assignment common properties.")
+@added(Versions.v2023_11_15)
+model RoleAssignmentCommonProperties{
+  @doc("Role Id of the Built-In Role")
+  roleId: string;
+  @doc("Object ID of the AAD principal or security-group.")  
+  principalId: string;
+  @doc("User name.")
+  userName:string;
+  @doc("Data Type Scope at which the role assignment is created.")
+  dataTypeScope:string[];
+  @doc("Type of the principal Id: User, Group or ServicePrincipal")
+  principalType:string;
+  @doc("Data Product role to be assigned to a user.")
+  role: DataProductUserRole;
+}
+
+@doc("The data catalog resource.")
+@singleton
+@added(Versions.v2023_11_15)
+model DataProductsCatalog is ProxyResource < DataProductsCatalogProperties > {
+    @doc("The data catalog name")
+    @key("dataProductsCatalogName")
+    @segment("dataProductsCatalogs")
+    @path
+    name: string;
+}
+
+@doc("Details for data catalog properties.")
+@added(Versions.v2023_11_15)
+model DataProductsCatalogProperties {
+  
+  @doc("The data catalog provisioning state.")
+  @visibility("read")
+  provisioningState ?: ProvisioningState;
+  
+  @doc("The data product publisher information.")  
+  publishers: PublisherInformation[];
+}
+
+@doc("Details for Publisher Information.")
+@added(Versions.v2023_11_15)
+model PublisherInformation {
+
+  @doc("Name of the publisher.")
+  publisherName: string;
+
+  @doc("Data product information.")  
+  dataProducts: DataProductInformation[];
+
+}
+
+@added(Versions.v2023_11_15)
+@doc("Data Product Information")
+model DataProductInformation{
+
+  @doc("Name of data product.")
+  dataProductName : string;
+
+  @doc("Description about data product.")
+  description : string;
+
+  @doc("Version information of data product.")
+  dataProductVersions: DataProductVersion[];
+
+}
+
+@doc("Data Product Version.")
+@added(Versions.v2023_11_15)
+model DataProductVersion{
+  @doc("Version of data product")
+  version: string;
+}
+
 @armResourceOperations
+@removed(Versions.v2023_11_15)
 interface Storage
   extends TrackedResourceOperations<DataLakeHouseResources, StorageProperties> {}
 
 @added(Versions.v2023_03_31_preview)
+@removed(Versions.v2023_11_15)
 @armResourceOperations(NetworkAnalyticsProducts)
 interface NetworkAnalyticsProduct
   extends TrackedResourceOperations<
@@ -645,6 +951,7 @@ interface NetworkAnalyticsProduct
     > {}
 
 @added(Versions.v2023_03_31_preview)
+@removed(Versions.v2023_11_15)
 @armResourceOperations(DataConnectors)
 interface DataConnector
   extends TrackedResourceOperations<DataConnectors, DataConnectorsProperties> {}
@@ -652,3 +959,69 @@ interface DataConnector
 @added(Versions.v2023_04_30_preview)
 @armResourceOperations(MetricsIngestionEndpointProperties)
 interface MetricsIngestionEndpoints extends ExtensionResourceOperations<MetricsIngestionEndpointResources, MetricsIngestionEndpointProperties> {}
+
+@doc("Operations on data catalog resource.")
+@added(Versions.v2023_11_15)
+@armResourceOperations
+interface DataProductsCatalogs {
+  @doc("Retrieve data type resource.")
+  get is ArmResourceRead<DataProductsCatalog>;
+}
+
+@doc("Operations on data type resource.")
+@added(Versions.v2023_11_15)
+@armResourceOperations
+interface DataTypes {
+
+  @doc("Create data type resource.")
+  create is ArmResourceCreateOrUpdateAsync<DataType>;
+  
+  @doc("Retrieve data type resource.")
+  get is ArmResourceRead<DataType>;
+
+  @doc("Update data type resource.")
+  update is ArmResourcePatchAsync<DataType,DataTypeProperties>;
+
+  @doc("Delete data type resource.")
+  @segment("deleteData")
+  delete is ArmResourceDeleteWithoutOkAsync<DataType>;
+
+  @doc("Generate sas token for storage container.")
+  generateStorageContainerSasToken is
+  ArmResourceActionAsync<DataType,ContainerSaS,ContainerSasToken>;
+}
+
+@doc("Operations on data product resource.")
+@added(Versions.v2023_11_15)
+@armResourceOperations
+interface DataProducts {
+
+  @doc("Create data product resource.")
+  create is ArmResourceCreateOrUpdateAsync<DataProduct>;
+
+  @doc("Retrieve data product resource.")
+  get is ArmResourceRead<DataProduct>;
+
+  @doc("Update data product resource.")
+  update is ArmResourcePatchAsync<DataProduct, DataProductProperties>;
+
+  @doc("Delete data product resource.")
+  delete is ArmResourceDeleteWithoutOkAsync<DataProduct>;
+
+  @doc("Generate sas token for storage account.")
+  generateStorageAccountSasToken is 
+  ArmResourceActionAsync<DataProduct,AccountSas,AccountSasToken>;
+
+  @doc("Initiate key rotation on Data Product.")
+  rotateKey is ArmResourceActionNoContentAsync<DataProduct,KeyVaultInfo>;
+
+  @doc("Assign role to the data product.")
+  addUserRole is ArmResourceActionAsync<DataProduct,RoleAssignmentCommonProperties,RoleAssignmentDetail>;
+
+  @doc("Remove role from the data product.")
+  removeUserRole is ArmResourceActionNoContentAsync<DataProduct,RoleAssignmentDetail>;
+
+  @doc("List user roles associated with the data product.")
+  listRolesAssignments is ArmResourceActionAsync<DataProduct,{},ListRoleAssignments>;
+
+}
