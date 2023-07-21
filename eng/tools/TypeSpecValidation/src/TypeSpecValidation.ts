@@ -5,8 +5,6 @@ import { parseArgs, ParseArgsConfig } from "node:util";
 import path from "path";
 import { simpleGit } from "simple-git";
 
-debug.enable("simple-git");
-
 async function runCmd(cmd: string, cwd: string) {
   console.log(`run command:${cmd}`);
   const { err, stdout, stderr } = (await new Promise((res) =>
@@ -39,12 +37,22 @@ async function checkFileExists(file: string) {
 export async function main() {
   const args = process.argv.slice(2);
   const options = {
+    debug: {
+      type: "boolean",
+      short: "d",
+      default: false,
+    },
     folder: {
       type: "string",
       short: "f",
     },
   };
   const parsedArgs = parseArgs({ args, options, allowPositionals: true } as ParseArgsConfig);
+
+  if (parsedArgs.values.debug) {
+    debug.enable("simple-git");
+  }
+
   const folder = parsedArgs.positionals[0];
   console.log("Running TypeSpecValidation on folder:", folder);
 
