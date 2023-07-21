@@ -5,7 +5,9 @@ param (
   [Parameter(Position = 1, Mandatory = $false)]
   [string]$TargetBranch,
   [Parameter(Position = 2, Mandatory = $false)]
-  [string]$SourceBranch
+  [string]$SourceBranch,
+  [Parameter(Mandatory = $false)]
+  [switch]$Debug
 )
 
 $exitCode = 0
@@ -21,7 +23,7 @@ Write-Host
 if ($typespecFolders) {
   $typespecFolders = $typespecFolders.Split('',[System.StringSplitOptions]::RemoveEmptyEntries)
   foreach ($typespecFolder in $typespecFolders) {
-    npx --no tsv $typespecFolder 2>&1 | Write-Host
+    npx --no tsv $typespecFolder --debug $Debug 2>&1 | Write-Host
     if ($LASTEXITCODE) {
       $exitCode = 1
     }
