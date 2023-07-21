@@ -292,10 +292,6 @@ input-file:
   - Microsoft.Compute/common-types/v1/common.json
   - Microsoft.Compute/DiskRP/stable/2023-01-02/diskRPCommon.json
   - Microsoft.Compute/DiskRP/stable/2023-01-02/disk.json
-  - Microsoft.Compute/DiskRP/stable/2023-01-02/diskAccess.json
-  - Microsoft.Compute/DiskRP/stable/2023-01-02/diskEncryptionSet.json
-  - Microsoft.Compute/DiskRP/stable/2023-01-02/diskRestorePoint.json
-  - Microsoft.Compute/DiskRP/stable/2023-01-02/snapshot.json
 ```
 
 ### Tag: package-2023-03-01
@@ -341,18 +337,6 @@ These settings apply only when `--tag=package-2023-03-01-only` is specified on t
 input-file:
   - Microsoft.Compute/common-types/v1/common.json
   - Microsoft.Compute/ComputeRP/stable/2023-03-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2023-03-01/logAnalytic.json
   - Microsoft.Compute/ComputeRP/stable/2023-03-01/runCommand.json 
 ```
 
