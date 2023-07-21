@@ -26,10 +26,16 @@ batch:
   - tag: package-2023-03-01-only
   - tag: package-2023-01-02-only
   - multiclient: true
+  - multiapiscript: true
 ```
 
 ``` yaml $(multiclient)
-output-folder: $(python-sdks-folder)/compute/azure-mgmt-computetest/azure/mgmt/computetest/
+output-folder: $(python-sdks-folder)/computetest/azure-mgmt-computetest/azure/mgmt/computetest/
+perform-load: false
+```
+
+``` yaml $(multiapiscript)
+output-folder: $(python-sdks-folder)/computetest/azure-mgmt-computetest/azure/mgmt/computetest/_generate
 perform-load: false
 ```
 
