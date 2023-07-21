@@ -40,8 +40,8 @@ model ChatMessage {
   @doc("""
     The name of the author of this message. When the `role` of a message is `function`, this `name` is required and
     must match the name of the function whose response is in the `content` of the message. For other `role` values,
-    `name` is optional and provides an extra identifier for the messenger, e.g. 'example-user', 'Alice', or
-    'BlackBeardBot'. May contain a-z, A-Z, 0-9, and underscores, with a maximum length of 64 characters.
+    `name` is optional and provides an extra identifier for the messenger. May contain a-z, A-Z, 0-9, and underscores,
+    with a maximum length of 64 characters.
     """)
   @added(ServiceApiVersions.v2023_07_01_Preview)
   name?: string;
