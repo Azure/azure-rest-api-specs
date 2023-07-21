@@ -9,7 +9,7 @@ param (
   [Parameter(Mandatory = $false)]
   [switch]$GitClean,
   [Parameter(Mandatory = $false)]
-  [switch]$Debug
+  [switch]$Verbose
 )
 
 $exitCode = 0
@@ -25,7 +25,7 @@ Write-Host
 if ($typespecFolders) {
   $typespecFolders = $typespecFolders.Split('',[System.StringSplitOptions]::RemoveEmptyEntries)
   foreach ($typespecFolder in $typespecFolders) {
-    npx --no tsv $typespecFolder --debug $Debug 2>&1 | Write-Host
+    npx --no tsv $typespecFolder --verbose $Verbose 2>&1 | Write-Host
     if ($LASTEXITCODE) {
       $exitCode = 1
     }

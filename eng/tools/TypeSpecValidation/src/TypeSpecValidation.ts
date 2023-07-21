@@ -37,19 +37,19 @@ async function checkFileExists(file: string) {
 export async function main() {
   const args = process.argv.slice(2);
   const options = {
-    debug: {
-      type: "boolean",
-      short: "d",
-      default: false,
-    },
     folder: {
       type: "string",
       short: "f",
     },
+    verbose: {
+      type: "boolean",
+      short: "v",
+      default: false,
+    },
   };
   const parsedArgs = parseArgs({ args, options, allowPositionals: true } as ParseArgsConfig);
 
-  if (parsedArgs.values.debug) {
+  if (parsedArgs.values.verbose) {
     debug.enable("simple-git");
   }
 
