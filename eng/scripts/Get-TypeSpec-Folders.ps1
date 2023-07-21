@@ -13,6 +13,9 @@ $allChangedFiles = (Get-ChildItem -path ./specification tspconfig.yaml -Recurse)
 $allChangedFiles = $allChangedFiles -replace '\\', '/'
 
 if ([string]::IsNullOrEmpty($TargetBranch) -or [string]::IsNullOrEmpty($SourceBranch)) {
+  if ($TargetBranch -or $SourceBranch) {
+    throw "Please provide both target branch and source branch."
+  }
   $changedFiles = $allChangedFiles
 }
 else {
