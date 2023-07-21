@@ -29,7 +29,7 @@ op CustomOperation<
 
   @doc("Mandatory API version parameter")
   @query("api-version")
-  apiVersion: string
+  apiVersion: string,
 ): TResponse | TError;
 
 @doc("Defines Text Translation custom Operations which doesn't have any content in the request")
@@ -38,7 +38,7 @@ op CustomGetOperation<TParams, TResponse, Traits = {}, TError = ErrorResponse>(
 
   @doc("Mandatory API version parameter")
   @query("api-version")
-  apiVersion: string
+  apiVersion: string,
 ): TResponse | TError;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
