@@ -26,9 +26,10 @@ using TypeSpec.Versioning;
   "Azure OpenAI APIs for completions and search",
   {
     @doc("""
-Supported Cognitive Services endpoints (protocol and hostname, for example:
-https://westus.api.cognitive.microsoft.com).
-""")
+      The connection endpoint for an Azure OpenAI resource as obtained via Azure Portal or Azure AI Studio.
+      This URL should include protocol and hostname with no additional path information. An example could be:
+      https://my-resource.openai.azure.com .
+    """)
     endpoint: string,
   }
 )
