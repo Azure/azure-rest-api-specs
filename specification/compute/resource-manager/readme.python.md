@@ -5,7 +5,7 @@ These settings apply only when `--track2` is specified on the command line.
 ``` yaml
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-computetest
+package-name: azure-mgmt-computex
 no-namespace-folders: true
 package-version: 1.0.0b1
 combine-operation-files: true
@@ -29,7 +29,7 @@ batch:
 ```
 
 ``` yaml $(multiapiscript)
-output-folder: $(python-sdks-folder)/computetest/azure-mgmt-computetest/azure/mgmt/computetest
+output-folder: $(python-sdks-folder)/computex/azure-mgmt-computex/azure/mgmt/computex
 perform-load: false
 ```
 
@@ -39,8 +39,8 @@ These settings apply only when `--tag=package-2023-03-01-only --python` is speci
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2023-03-01-only'
-namespace: azure.mgmt.computetest.v2023_03_01
-output-folder: $(python-sdks-folder)/computetest/azure-mgmt-computetest/azure/mgmt/computetest/v2023_03_01
+namespace: azure.mgmt.computex.v2023_03_01
+output-folder: $(python-sdks-folder)/computex/azure-mgmt-computex/azure/mgmt/computex/v2023_03_01
 ```
 
 ### Tag: package-2023-01-02-only
@@ -49,6 +49,6 @@ These settings apply only when `--tag=package-2023-01-02-only --python` is speci
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2023-01-02-only'
-namespace: azure.mgmt.computetest.v2023_01_02
-output-folder: $(python-sdks-folder)/computetest/azure-mgmt-computetest/azure/mgmt/computetest/v2023_01_02
+namespace: azure.mgmt.computex.v2023_01_02
+output-folder: $(python-sdks-folder)/computex/azure-mgmt-computex/azure/mgmt/computex/v2023_01_02
 ```
