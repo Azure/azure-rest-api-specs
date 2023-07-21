@@ -28,11 +28,11 @@ These are the global settings for the MySql API.
 title: MySQLManagementClient
 description: The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MySQL resources including servers, databases, firewall rules, VNET rules, log files and configurations with new business model.
 openapi-type: arm
-tag: package-flexibleserver-2022-09-30-preview
+tag: package-flexibleserver-2023-06-30-privatelink
 ```
 
 ``` yaml $(package-flexibleservers)
-tag: package-flexibleserver-2022-09-30-preview
+tag: package-flexibleserver-2023-06-30-privatelink
 ```
 
 ``` yaml $(package-singleservers)
@@ -210,6 +210,17 @@ input-file:
 - Microsoft.DBforMySQL/AAD/preview/2021-12-01-preview/AzureADAdministrator.json
 - Microsoft.DBforMySQL/PrivateLink/preview/2022-09-30-preview/PrivateEndpointConnections.json
 - Microsoft.DBforMySQL/PrivateLink/preview/2022-09-30-preview/PrivateLinkResources.json
+```
+
+### Tag: package-flexibleserver-2023-06-30-privatelink
+
+These settings apply only when `--tag=package-flexibleserver-2023-06-30-privatelink` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2023-06-30-privatelink'
+input-file:
+- Microsoft.DBforMySQL/common-types/v1/common-types.json
+- Microsoft.DBforMySQL/PrivateLink/stable/2023-06-30/PrivateEndpointConnections.json
+- Microsoft.DBforMySQL/PrivateLink/stable/2023-06-30/PrivateLinkResources.json
 ```
 
 ## Suppression
