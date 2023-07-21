@@ -25,6 +25,6 @@ jobs:
         $(Build.SourcesDirectory) `
         "origin/${env:SYSTEM_PULLREQUEST_TARGETBRANCH}" `
         "${env:SYSTEM_PULLREQUEST_SOURCECOMMITID}" `
-        -GitClean
+        --GitClean
     displayName: Validate Impacted Specs
     condition: succeededOrFailed()
