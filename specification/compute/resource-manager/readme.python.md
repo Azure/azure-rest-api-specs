@@ -25,6 +25,12 @@ clear-output-folder: true
 batch:
   - tag: package-2023-03-01-only
   - tag: package-2023-01-02-only
+  - multiclient: true
+```
+
+``` yaml $(multiclient)
+output-folder: $(python-sdks-folder)/compute/azure-mgmt-computetest/azure/mgmt/computetest/
+perform-load: false
 ```
 
 ### Tag: package-2023-03-01-only
