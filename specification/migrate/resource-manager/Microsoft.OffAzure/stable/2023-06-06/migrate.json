@@ -916,7 +916,7 @@
           "HypervClusterController"
         ],
         "operationId": "HypervClusterController_CreateCluster",
-        "description": "Method to put a Hyper-V cluster.",
+        "description": "Method to create or update a Hyper-V cluster.",
         "parameters": [
           {
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2058,75 +2058,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/machines/{machineName}/softwareInventory/default": {
-      "post": {
-        "tags": [
-          "HypervMachinesController"
-        ],
-        "operationId": "HypervMachinesController_GetMachineSoftwareInventory",
-        "description": "Method to get a machines software inventory like applications and roles.",
-        "parameters": [
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "description": " HypervMachine name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "description": "The content of the action request",
-            "schema": {
-              "type": "object",
-              "properties": {},
-              "x-typespec-name": "{}"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/HypervVmSoftwareInventory"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "HypervMachinesController_GetMachineSoftwareInventory_MaximumSet_Gen": {
-            "$ref": "./examples/HypervMachinesController_GetMachineSoftwareInventory_MaximumSet_Gen.json"
-          },
-          "HypervMachinesController_GetMachineSoftwareInventory_MinimumSet_Gen": {
-            "$ref": "./examples/HypervMachinesController_GetMachineSoftwareInventory_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/operationsStatus/{operationStatusName}": {
       "get": {
         "tags": [
@@ -2649,56 +2580,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/usage": {
-      "get": {
-        "tags": [
-          "HypervSitesController"
-        ],
-        "operationId": "HypervSitesController_GetUsage",
-        "description": "Method to get site error summary.",
-        "parameters": [
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SiteUsageResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "HypervSitesController_GetUsage_MaximumSet_Gen": {
-            "$ref": "./examples/HypervSitesController_GetUsage_MaximumSet_Gen.json"
-          },
-          "HypervSitesController_GetUsage_MinimumSet_Gen": {
-            "$ref": "./examples/HypervSitesController_GetUsage_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importSites": {
       "get": {
         "tags": [
@@ -3030,116 +2911,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importSites/{siteName}/deletejobs": {
-      "get": {
-        "tags": [
-          "ImportJobsController"
-        ],
-        "operationId": "ImportJobsController_ListDeletejobs",
-        "description": "Method to get all delete import machines job for the given site.",
-        "parameters": [
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PagedV20200201DeleteImportMachinesJobDeleteImportMachinesJobCollection"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "ImportJobsController_ListDeletejobs_MaximumSet_Gen": {
-            "$ref": "./examples/ImportJobsController_ListDeletejobs_MaximumSet_Gen.json"
-          },
-          "ImportJobsController_ListDeletejobs_MinimumSet_Gen": {
-            "$ref": "./examples/ImportJobsController_ListDeletejobs_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importSites/{siteName}/deleteJobs/{jobName}": {
-      "get": {
-        "tags": [
-          "ImportJobsController"
-        ],
-        "operationId": "ImportJobsController_GetDeletejob",
-        "description": "Gets the delete imported machines job with the given job name.",
-        "parameters": [
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "required": true,
-            "description": "Job Arm Name.",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/V20200201DeleteImportMachinesJob"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ImportJobsController_GetDeletejob_MaximumSet_Gen": {
-            "$ref": "./examples/ImportJobsController_GetDeletejob_MaximumSet_Gen.json"
-          },
-          "ImportJobsController_GetDeletejob_MinimumSet_Gen": {
-            "$ref": "./examples/ImportJobsController_GetDeletejob_MinimumSet_Gen.json"
-          }
-        }
-      },
       "patch": {
         "tags": [
           "ImportJobsController"
@@ -9897,7 +9669,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "resource",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -9908,7 +9680,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM update operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ServerMachineResource"
             }
@@ -9926,20 +9698,6 @@
               "$ref": "#/definitions/ServerMachineResource"
             }
           },
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -9948,7 +9706,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -12072,75 +11830,6 @@
           },
           "VmwareSoftwareInventoriesController_GetMachineSoftwareInventory_MinimumSet_Gen": {
             "$ref": "./examples/VmwareSoftwareInventoriesController_GetMachineSoftwareInventory_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/machines/{machineName}/softwareInventory/default": {
-      "post": {
-        "tags": [
-          "MachinesController"
-        ],
-        "operationId": "MachinesController_GetMachineSoftwareInventory",
-        "description": "Method to get a machines software inventory like applications and roles.",
-        "parameters": [
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "description": "Machine name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "description": "The content of the action request",
-            "schema": {
-              "type": "object",
-              "properties": {},
-              "x-typespec-name": "{}"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/VmwareMachineSoftwareInventory"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "MachinesController_GetMachineSoftwareInventory_MaximumSet_Gen": {
-            "$ref": "./examples/MachinesController_GetMachineSoftwareInventory_MaximumSet_Gen.json"
-          },
-          "MachinesController_GetMachineSoftwareInventory_MinimumSet_Gen": {
-            "$ref": "./examples/MachinesController_GetMachineSoftwareInventory_MinimumSet_Gen.json"
           }
         }
       }
@@ -15100,31 +14789,6 @@
       },
       "description": "Hyper-V site usage."
     },
-    "HypervVmSoftwareInventory": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Gets the relative URL to get this VMWare machine.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Handled by resource provider.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets the Name of the machine.",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/MachineSoftwareInventoryProperties",
-          "description": "Gets or sets software inventory properties."
-        }
-      },
-      "description": "HyperV VM software inventory REST resource."
-    },
     "IisApplicationUnit": {
       "type": "object",
       "properties": {
@@ -16449,27 +16113,6 @@
       },
       "description": "OtherDatabase in the guest virtual machine."
     },
-    "PagedV20200201DeleteImportMachinesJobDeleteImportMachinesJobCollection": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/V20200201DeleteImportMachinesJobDeleteImportMachinesJobCollection"
-          },
-          "x-ms-identifiers": [],
-          "x-typespec-name": "V20200201DeleteImportMachinesJobDeleteImportMachinesJobCollection[]",
-          "description": "The V20200201DeleteImportMachinesJobDeleteImportMachinesJobCollection items on this page",
-          "readOnly": true
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The link to the next page of items",
-          "readOnly": true
-        }
-      },
-      "description": "Paged collection of V20200201DeleteImportMachinesJobDeleteImportMachinesJobCollection items"
-    },
     "PagedV20200201ExportImportedMachinesJobExportImportedMachinesJobCollection": {
       "type": "object",
       "properties": {
@@ -17672,38 +17315,6 @@
         }
       },
       "description": "Class for site properties."
-    },
-    "SiteUsageResponse": {
-      "type": "object",
-      "properties": {
-        "machineCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the number of machines discovered in the site."
-        },
-        "runAsAccountCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the number of run as accounts in the site."
-        },
-        "hostCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the number of hosts part of the site."
-        },
-        "clusterCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the number of clusters part of the site."
-        }
-      },
-      "description": "Hyper-V site usage.",
-      "required": [
-        "machineCount",
-        "runAsAccountCount",
-        "hostCount",
-        "clusterCount"
-      ]
     },
     "SitesProperties": {
       "type": "object",
@@ -19477,26 +19088,6 @@
         }
       },
       "description": "The delete import machines job web model."
-    },
-    "V20200201DeleteImportMachinesJobDeleteImportMachinesJobCollection": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/V20200201DeleteImportMachinesJob"
-          },
-          "x-typespec-name": "V20200201DeleteImportMachinesJob[]",
-          "description": "Gets the list of jobs.",
-          "readOnly": true
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets the value of next link.",
-          "readOnly": true
-        }
-      },
-      "description": "Delete import machines job collection."
     },
     "V20200201ExportImportedMachinesJob": {
       "type": "object",
