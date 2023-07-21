@@ -557,6 +557,7 @@
           "description": "The status of the email. Any value other than Delivered is considered failed.",
           "type": "string",
           "enum": [
+            "AsynchronousBounced",
             "Bounced",
             "Delivered",
             "Failed",
@@ -569,8 +570,12 @@
             "modelAsString": true,
             "values": [
               {
+                "value": "AsychronousBounced",
+                "description": "Hard bounce detected asynchronously while sending the email"
+              },
+              {
                 "value": "Bounced",
-                "description": "Hard bounce detected while sending the email"
+                "description": "Hard bounce detected synchronously while sending the email"
               },
               {
                 "value": "Delivered",
