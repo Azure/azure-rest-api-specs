@@ -66,7 +66,7 @@
             "items": {
               "type": "string"
             }
-          },		  
+          },
           {
             "type": "boolean",
             "name": "includeStopSoldPlans",
@@ -83,7 +83,7 @@
             "items": {
               "type": "string"
             }
-          },	
+          },
           {
             "type": "boolean",
             "name": "excludeSkuDetails",
@@ -97,21 +97,21 @@
             "in": "query",
             "description": "Indicates whether to include the product's plans/SKU availabilities with future dates in the response. By default, includeFutureAvailabilities is set to FALSE.",
             "default": false
-          },		  
+          },
           {
             "type": "string",
             "name": "skuId",
             "in": "query",
             "description": "Apply SKU ID filtering to the results and only return products that include SKUs matching the selected SKU ID.",
             "default": "en"
-          },	
+          },
           {
             "type": "string",
             "name": "x-ms-pricing-audience",
             "in": "header",
             "required": false,
             "description": "DirectCommercial or PartnerCommercial, DirectCommercial is the default"
-          },		  
+          },
           {
             "type": "string",
             "name": "X-API-Key",
@@ -186,7 +186,7 @@
             "items": {
               "type": "string"
             }
-          },		  
+          },
           {
             "type": "string",
             "name": "market",
@@ -290,16 +290,16 @@
             "type": "string",
             "name": "serviceFamily",
             "in": "query",
-			"required": true,
+            "required": true,
             "description": "The service family of the product, such as 'Compute'"
           },
           {
             "type": "string",
             "name": "service",
             "in": "query",
-			"required": true,			
+            "required": true,
             "description": "The service name of the product, such as 'Virtual Machines'"
-          },		  
+          },
           {
             "type": "string",
             "name": "language",
@@ -316,7 +316,7 @@
             "items": {
               "type": "string"
             }
-          },		  
+          },
           {
             "type": "string",
             "name": "market",
@@ -413,7 +413,7 @@
       "description": "Summary description of the product",
       "required": [
         "productType",
-		"productId",
+        "productId",
         "isPrivate",
         "isStopSell"
       ],
@@ -495,7 +495,7 @@
         "productFamily": {
           "type": "string",
           "description": "Product Family"
-        },		
+        },
         "operatingSystems": {
           "type": "array",
           "description": "Operating system info for this product",
@@ -536,7 +536,7 @@
         "description": {
           "type": "string",
           "description": "The product description text"
-        },			
+        },
         "ratingBuckets": {
           "type": "array",
           "description": "Rating buckets, Above1, Above2, Above3, Above4",
@@ -599,25 +599,25 @@
           "type": "string",
           "description": "The service family of the product, such as 'Compute'"
         },
-		"service": {
+        "service": {
           "type": "string",
           "description": "The service name of the product, such as 'Virtual Machines'"
         },
-		"productId": {
+        "productId": {
           "type": "string",
           "description": "The unique id of the product"
-        },		
-		"hasMarketplaceFootprint": {
+        },
+        "hasMarketplaceFootprint": {
           "type": "boolean",
           "description": "Indication if product has a representation in the marketplace"
-        },	
+        },
         "attributes": {
           "type": "array",
           "description": "Set of products attributes (varies per product type), where each attribute is represented by a pair of key (attribute name) and value(attribute value)",
           "items": {
             "$ref": "#/definitions/Attribute"
           }
-        },		
+        },
         "language": {
           "type": "string",
           "description": "The product language"
@@ -899,7 +899,7 @@
           "description": "The attribute value"
         }
       }
-    },	
+    },
     "MarketStartPrice": {
       "type": "object",
       "description": "Retail price of the product's cheapest plan",
@@ -1038,10 +1038,10 @@
           "type": "boolean",
           "description": "Indication that the plan is accessible to restricted audience only"
         },
-		"hasRI": {
+        "hasRI": {
           "type": "boolean",
           "description": "Indication whether the SKU supports reservations"
-        }			
+        }
       }
     },
     "VmArchitectureType": {
@@ -1546,47 +1546,47 @@
             "type": "string"
           }
         },
-        "skuType": { 
+        "skuType": {
           "type": "string",
           "description": "SKU type"
         },
-        "skuTitle": { 
+        "skuTitle": {
           "type": "string",
           "description": "Sku title localized"
         },
-        "location": { 
+        "location": {
           "type": "string",
           "description": "SKU location"
         },
-        "armRegionName": { 
+        "armRegionName": {
           "type": "string",
           "description": "The Arm region name"
         },
-        "cloud": { 
+        "cloud": {
           "type": "string",
           "description": "Applicable cloud, such as 'Global'"
         },
-        "locationType": { 
+        "locationType": {
           "type": "string",
           "description": "The location type, such as 'Region'"
         },
-        "region": { 
+        "region": {
           "type": "string",
           "description": "The region"
         },
-        "skuGroupId": { 
+        "skuGroupId": {
           "type": "string",
           "description": "The sku group id"
         },
-        "zone": { 
+        "zone": {
           "type": "string",
           "description": "The zone, such as 'Zone 1'"
         },
-        "feature": { 
+        "feature": {
           "type": "string",
           "description": "The feature, such as 'Spot'"
         },
-        "serviceType": { 
+        "serviceType": {
           "type": "string",
           "description": "The service type"
         },
@@ -1649,7 +1649,7 @@
         "accessTier": {
           "type": "string",
           "description": "The access tier, such as 'Standard'"
-        }		
+        }
       }
     },
     "OfferingProperties": {
@@ -1679,9 +1679,9 @@
         "type": {
           "type": "string",
           "description": "Entitlement, Consumption or Reservation"
-        }		
+        }
       }
-    },		
+    },
     "Availability": {
       "type": "object",
       "description": "Availability for a given plan",
@@ -2018,12 +2018,12 @@
           "format": "uri"
         }
       }
-    },	
+    },
     "SkuSummary": {
       "type": "object",
       "description": "Summary description of the SKU",
       "properties": {
-		"productId": {
+        "productId": {
           "type": "string",
           "description": "The unique id of the product"
         },
@@ -2089,8 +2089,8 @@
         "skuType": {
           "type": "string",
           "description": "Sku type"
-        },        
-		"language": {
+        },
+        "language": {
           "type": "string",
           "description": "Language"
         },
@@ -2107,39 +2107,39 @@
           "description": "Latest update date of the SKU",
           "format": "date-time"
         },
-        "location": { 
+        "location": {
           "type": "string",
           "description": "Location (region)"
         },
-        "armRegionName": { 
+        "armRegionName": {
           "type": "string",
           "description": "The Arm region name"
         },
-        "cloud": { 
+        "cloud": {
           "type": "string",
           "description": "The cloud, such as 'Global'"
         },
-        "locationType": { 
+        "locationType": {
           "type": "string",
           "description": "The location type, such as 'Region'"
         },
-        "region": { 
+        "region": {
           "type": "string",
           "description": "The region"
         },
-        "skuGroupId": { 
+        "skuGroupId": {
           "type": "string",
           "description": "The sku group id"
         },
-        "zone": { 
+        "zone": {
           "type": "string",
           "description": "The zone, such as 'Zone 1'"
         },
-        "feature": { 
+        "feature": {
           "type": "string",
           "description": "The feature"
         },
-        "serviceType": { 
+        "serviceType": {
           "type": "string",
           "description": "The service type"
         },
@@ -2161,10 +2161,10 @@
             }
           ]
         },
-		"hasRI": {
+        "hasRI": {
           "type": "boolean",
           "description": "Indication whether the SKU supports reservations"
-        },	
+        },
         "skuAttributes": {
           "type": "array",
           "description": "The SKU attributes",
@@ -2188,7 +2188,7 @@
           }
         }
       }
-    },		
+    },
     "ProductSummary": {
       "type": "object",
       "description": "Returns a subset of Product attributes",
@@ -2273,7 +2273,7 @@
         "productFamily": {
           "type": "string",
           "description": "Product Family"
-        },		
+        },
         "operatingSystems": {
           "type": "array",
           "description": "Operating system info for this product",
@@ -2322,7 +2322,7 @@
         "privacyPolicyUri": {
           "type": "string",
           "description": "The privacy policy of the product"
-        },		
+        },
         "ratingBuckets": {
           "type": "array",
           "description": "Rating buckets, Above1, Above2, Above3, Above4",
@@ -2374,7 +2374,7 @@
           "description": "Latest update date of the product",
           "format": "date-time"
         },
-		"locations": {
+        "locations": {
           "type": "array",
           "description": "List of locations which are available on the SKUs",
           "items": {
@@ -2385,29 +2385,29 @@
           "type": "string",
           "description": "The service family of the product, such as 'Compute'"
         },
-		"service": {
+        "service": {
           "type": "string",
           "description": "The service name of the product, such as 'Virtual Machines'"
         },
-		"productId": {
+        "productId": {
           "type": "string",
           "description": "The unique id of the product"
         },
-		"hasRIPlans": {
+        "hasRIPlans": {
           "type": "boolean",
           "description": "Indication whether the product has plans with reservations"
-        },					
-		"hasMarketplaceFootprint": {
+        },
+        "hasMarketplaceFootprint": {
           "type": "boolean",
           "description": "Indication if product has a representation in the marketplace"
-        },	
+        },
         "attributes": {
           "type": "array",
           "description": "Set of products attributes (varies per product type), where each attribute is represented by a pair of key (attribute name) and value(attribute value)",
           "items": {
             "$ref": "#/definitions/Attribute"
           }
-        }		
+        }
       }
     }
   },
