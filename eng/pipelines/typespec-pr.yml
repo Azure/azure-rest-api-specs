@@ -26,6 +26,6 @@ jobs:
         "origin/${env:SYSTEM_PULLREQUEST_TARGETBRANCH}" `
         "${env:SYSTEM_PULLREQUEST_SOURCECOMMITID}" `
         -GitClean `
-        -Verbose $(System.Debug)
+        -Verbose:$(System.Debug)
     displayName: Validate Impacted Specs
     condition: succeededOrFailed()
