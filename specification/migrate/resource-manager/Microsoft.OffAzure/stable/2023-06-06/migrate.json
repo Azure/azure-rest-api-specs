@@ -944,7 +944,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -955,7 +955,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "ARM update operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/HypervCluster"
             }
@@ -973,6 +973,20 @@
               "$ref": "#/definitions/HypervCluster"
             }
           },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -981,7 +995,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -2907,73 +2921,6 @@
           },
           "ImportSitesController_DeleteImportedMachines_MinimumSet_Gen": {
             "$ref": "./examples/ImportSitesController_DeleteImportedMachines_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importSites/{siteName}/deleteJobs/{jobName}": {
-      "patch": {
-        "tags": [
-          "ImportJobsController"
-        ],
-        "operationId": "ImportJobsController_UpdateDeleteMachinesJob",
-        "description": "Patch the delete imported machines job object.",
-        "parameters": [
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "required": true,
-            "description": "Job Arm Name.",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "description": "Job body with updated properties.",
-            "schema": {
-              "$ref": "#/definitions/V20200201DeleteImportMachinesJob"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/V20200201DeleteImportMachinesJob"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ImportJobsController_UpdateDeleteMachinesJob_MaximumSet_Gen": {
-            "$ref": "./examples/ImportJobsController_UpdateDeleteMachinesJob_MaximumSet_Gen.json"
-          },
-          "ImportJobsController_UpdateDeleteMachinesJob_MinimumSet_Gen": {
-            "$ref": "./examples/ImportJobsController_UpdateDeleteMachinesJob_MinimumSet_Gen.json"
           }
         }
       }
@@ -9669,7 +9616,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -9680,7 +9627,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "ARM update operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ServerMachineResource"
             }
@@ -9698,6 +9645,20 @@
               "$ref": "#/definitions/ServerMachineResource"
             }
           },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -9706,7 +9667,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -13002,21 +12963,6 @@
       },
       "description": "The connectors of the web server."
     },
-    "CosmosDBDeleteImportedMachinesJobEntityDeleteImportedMachinesJobPropertiesJobState": {
-      "type": "string",
-      "description": "Cosmos db Imported Machines JobEntity",
-      "enum": [
-        "Unknown",
-        "Verified",
-        "VerifiedWithErrors",
-        "Completed",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "CosmosDBDeleteImportedMachinesJobEntityDeleteImportedMachinesJobPropertiesJobState",
-        "modelAsString": true
-      }
-    },
     "CosmosDBImportMachinesJobEntityImportMachinesJobPropertiesJobResult": {
       "type": "string",
       "description": "JobResultValues",
@@ -13033,62 +12979,6 @@
         "name": "CosmosDBImportMachinesJobEntityImportMachinesJobPropertiesJobResult",
         "modelAsString": true
       }
-    },
-    "CosmosDbDeleteImportedMachinesJobEntityDeleteImportedMachinesJobProperties": {
-      "type": "object",
-      "properties": {
-        "blobName": {
-          "type": "string",
-          "description": "blob name"
-        },
-        "errorSasUri": {
-          "type": "string",
-          "description": "error Sas Uri"
-        },
-        "jobState": {
-          "$ref": "#/definitions/CosmosDBDeleteImportedMachinesJobEntityDeleteImportedMachinesJobPropertiesJobState",
-          "description": "job State"
-        },
-        "numberOfMachinesDeleted": {
-          "type": "integer",
-          "format": "int32",
-          "description": "number Of Machines Deleted"
-        },
-        "deletionConfirmation": {
-          "type": "boolean",
-          "description": "deletion Confirmation"
-        },
-        "errors": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-typespec-name": "string[]",
-          "description": "errors list",
-          "readOnly": true
-        },
-        "status": {
-          "type": "string",
-          "description": "Gets or sets the Job status."
-        },
-        "startTime": {
-          "type": "string",
-          "description": "Gets or sets the Job start time."
-        },
-        "endTime": {
-          "type": "string",
-          "description": "Gets or sets the Job end time."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Gets or sets the Display name."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation."
-        }
-      },
-      "description": "Delete Imported Machines Job Properties"
     },
     "CosmosDbExportImportedMachinesJobEntityExportImportedMachinesJobEntityProperties": {
       "type": "object",
@@ -19063,31 +18953,6 @@
         }
       },
       "description": "Import URI response class."
-    },
-    "V20200201DeleteImportMachinesJob": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "Handled by resource provider. Type = Microsoft.OffAzure/ImportSites/DeleteJobs.",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/CosmosDbDeleteImportedMachinesJobEntityDeleteImportedMachinesJobProperties",
-          "description": "Gets or sets the delete import machines job properties."
-        },
-        "id": {
-          "type": "string",
-          "description": "Gets or sets the relative ARM name to get job.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the Job ID.",
-          "readOnly": true
-        }
-      },
-      "description": "The delete import machines job web model."
     },
     "V20200201ExportImportedMachinesJob": {
       "type": "object",
