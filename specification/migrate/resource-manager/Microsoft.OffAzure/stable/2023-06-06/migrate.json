@@ -61,10 +61,10 @@
       "name": "DependencyMapController"
     },
     {
-      "name": "MachinesController"
+      "name": "VmwareSoftwareInventoriesController"
     },
     {
-      "name": "VmwareMachinesController"
+      "name": "MachinesController"
     },
     {
       "name": "VcenterController"
@@ -1050,12 +1050,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/errorSummary": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/computeErrorSummary": {
       "post": {
         "tags": [
           "HypervSitesController"
         ],
-        "operationId": "HypervSitesController_ErrorSummary",
+        "operationId": "HypervSitesController_ComputeErrorSummary",
         "description": "Method to get site error summary.",
         "parameters": [
           {
@@ -1102,11 +1102,11 @@
           }
         },
         "x-ms-examples": {
-          "HypervSitesController_ErrorSummary_MaximumSet_Gen": {
-            "$ref": "./examples/HypervSitesController_ErrorSummary_MaximumSet_Gen.json"
+          "HypervSitesController_ComputeErrorSummary_MaximumSet_Gen": {
+            "$ref": "./examples/HypervSitesController_ComputeErrorSummary_MaximumSet_Gen.json"
           },
-          "HypervSitesController_ErrorSummary_MinimumSet_Gen": {
-            "$ref": "./examples/HypervSitesController_ErrorSummary_MinimumSet_Gen.json"
+          "HypervSitesController_ComputeErrorSummary_MinimumSet_Gen": {
+            "$ref": "./examples/HypervSitesController_ComputeErrorSummary_MinimumSet_Gen.json"
           }
         }
       }
@@ -2054,75 +2054,6 @@
           },
           "HypervMachinesController_Update_MinimumSet_Gen": {
             "$ref": "./examples/HypervMachinesController_Update_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/machines/{machineName}/applications": {
-      "post": {
-        "tags": [
-          "HypervMachinesController"
-        ],
-        "operationId": "HypervMachinesController_Applications",
-        "description": "Method to get machine with application and roles present in it.",
-        "parameters": [
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "description": " HypervMachine name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "description": "The content of the action request",
-            "schema": {
-              "type": "object",
-              "properties": {},
-              "x-typespec-name": "{}"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/HypervMachine"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "HypervMachinesController_Applications_MaximumSet_Gen": {
-            "$ref": "./examples/HypervMachinesController_Applications_MaximumSet_Gen.json"
-          },
-          "HypervMachinesController_Applications_MinimumSet_Gen": {
-            "$ref": "./examples/HypervMachinesController_Applications_MinimumSet_Gen.json"
           }
         }
       }
@@ -9149,12 +9080,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/errorSummary": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/computeErrorSummary": {
       "post": {
         "tags": [
           "ServerSitesController"
         ],
-        "operationId": "ServerSitesController_ErrorSummary",
+        "operationId": "ServerSitesController_ComputeErrorSummary",
         "description": "Get the error summary for a server site.",
         "parameters": [
           {
@@ -9201,11 +9132,72 @@
           }
         },
         "x-ms-examples": {
-          "ServerSitesController_ErrorSummary_MaximumSet_Gen": {
-            "$ref": "./examples/ServerSitesController_ErrorSummary_MaximumSet_Gen.json"
+          "ServerSitesController_ComputeErrorSummary_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSitesController_ComputeErrorSummary_MaximumSet_Gen.json"
           },
-          "ServerSitesController_ErrorSummary_MinimumSet_Gen": {
-            "$ref": "./examples/ServerSitesController_ErrorSummary_MinimumSet_Gen.json"
+          "ServerSitesController_ComputeErrorSummary_MinimumSet_Gen": {
+            "$ref": "./examples/ServerSitesController_ComputeErrorSummary_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/computeUsage": {
+      "post": {
+        "tags": [
+          "ServerSitesController"
+        ],
+        "operationId": "ServerSitesController_ComputeUsage",
+        "description": "Get a serve site usage.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "description": "Site name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The content of the action request",
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "x-typespec-name": "{}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerSiteUsageResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServerSitesController_ComputeUsage_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSitesController_ComputeUsage_MaximumSet_Gen.json"
+          },
+          "ServerSitesController_ComputeUsage_MinimumSet_Gen": {
+            "$ref": "./examples/ServerSitesController_ComputeUsage_MinimumSet_Gen.json"
           }
         }
       }
@@ -9234,25 +9226,41 @@
             "description": "Site name",
             "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The content of the action request",
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "x-typespec-name": "{}"
+            }
           }
         ],
         "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "x-typespec-name": "{}"
+            }
+          },
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "description": "Resource operation accepted.",
             "headers": {
               "Retry-After": {
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
               },
-              "location": {
+              "Location": {
                 "description": "The Location header contains the URL where the status of the long running operation can be checked.",
                 "type": "string"
               }
             }
-          },
-          "204": {
-            "description": "Action completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -10009,75 +10017,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/machines/{machineName}/applications": {
-      "post": {
-        "tags": [
-          "ServersController"
-        ],
-        "operationId": "ServersController_Applications",
-        "description": "Method to get machine with application and roles present in it.",
-        "parameters": [
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "description": " A server machine name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "description": "The content of the action request",
-            "schema": {
-              "type": "object",
-              "properties": {},
-              "x-typespec-name": "{}"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ServerMachineResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ServersController_Applications_MaximumSet_Gen": {
-            "$ref": "./examples/ServersController_Applications_MaximumSet_Gen.json"
-          },
-          "ServersController_Applications_MinimumSet_Gen": {
-            "$ref": "./examples/ServersController_Applications_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/operationsStatus/{operationStatusName}": {
       "get": {
         "tags": [
@@ -10600,67 +10539,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/usage": {
-      "post": {
-        "tags": [
-          "ServerSitesController"
-        ],
-        "operationId": "ServerSitesController_Usage",
-        "description": "Get a serve site usage.",
-        "parameters": [
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "description": "The content of the action request",
-            "schema": {
-              "type": "object",
-              "properties": {},
-              "x-typespec-name": "{}"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ServerSiteUsageResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ServerSitesController_Usage_MaximumSet_Gen": {
-            "$ref": "./examples/ServerSitesController_Usage_MaximumSet_Gen.json"
-          },
-          "ServerSitesController_Usage_MinimumSet_Gen": {
-            "$ref": "./examples/ServerSitesController_Usage_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites": {
       "get": {
         "tags": [
@@ -11009,12 +10887,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/errorSummary": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/computeErrorSummary": {
       "post": {
         "tags": [
           "Sites"
         ],
-        "operationId": "Sites_ErrorSummary",
+        "operationId": "Sites_ComputeErrorSummary",
         "description": "Method to get site error summary.",
         "parameters": [
           {
@@ -11061,11 +10939,72 @@
           }
         },
         "x-ms-examples": {
-          "Sites_ErrorSummary_MaximumSet_Gen": {
-            "$ref": "./examples/Sites_ErrorSummary_MaximumSet_Gen.json"
+          "Sites_ComputeErrorSummary_MaximumSet_Gen": {
+            "$ref": "./examples/Sites_ComputeErrorSummary_MaximumSet_Gen.json"
           },
-          "Sites_ErrorSummary_MinimumSet_Gen": {
-            "$ref": "./examples/Sites_ErrorSummary_MinimumSet_Gen.json"
+          "Sites_ComputeErrorSummary_MinimumSet_Gen": {
+            "$ref": "./examples/Sites_ComputeErrorSummary_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/computeUsage": {
+      "post": {
+        "tags": [
+          "Sites"
+        ],
+        "operationId": "Sites_ComputeUsage",
+        "description": "Method to get site error summary.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "description": "Site name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The content of the action request",
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "x-typespec-name": "{}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VmwareSiteUsage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Sites_ComputeUsage_MaximumSet_Gen": {
+            "$ref": "./examples/Sites_ComputeUsage_MaximumSet_Gen.json"
+          },
+          "Sites_ComputeUsage_MinimumSet_Gen": {
+            "$ref": "./examples/Sites_ComputeUsage_MinimumSet_Gen.json"
           }
         }
       }
@@ -11094,18 +11033,37 @@
             "description": "Site name",
             "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The content of the action request",
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "x-typespec-name": "{}"
+            }
           }
         ],
         "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "x-typespec-name": "{}"
+            }
+          },
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "description": "Resource operation accepted.",
             "headers": {
               "Retry-After": {
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
               },
-              "location": {
+              "Location": {
                 "description": "The Location header contains the URL where the status of the long running operation can be checked.",
                 "type": "string"
               }
@@ -11999,13 +11957,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/machines/{machineName}/applications": {
-      "post": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/machines/{machineName}/softwareinventories": {
+      "get": {
         "tags": [
-          "VmwareMachinesController"
+          "VmwareSoftwareInventoriesController"
         ],
-        "operationId": "VmwareMachinesController_Applications",
-        "description": "Method to get machine with application and roles present in it.",
+        "operationId": "VmwareSoftwareInventoriesController_ListByMachineResource",
+        "description": "List VmwareMachineSoftwareInventory resources by MachineResource",
         "parameters": [
           {
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -12031,24 +11989,74 @@
             "description": "Machine name",
             "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "description": "The content of the action request",
-            "schema": {
-              "type": "object",
-              "properties": {},
-              "x-typespec-name": "{}"
-            }
           }
         ],
         "responses": {
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MachineResource"
+              "$ref": "#/definitions/VmwareMachineSoftwareInventoryListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "VmwareSoftwareInventoriesController_ListByMachineResource_MaximumSet_Gen": {
+            "$ref": "./examples/VmwareSoftwareInventoriesController_ListByMachineResource_MaximumSet_Gen.json"
+          },
+          "VmwareSoftwareInventoriesController_ListByMachineResource_MinimumSet_Gen": {
+            "$ref": "./examples/VmwareSoftwareInventoriesController_ListByMachineResource_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/machines/{machineName}/softwareInventories/default": {
+      "get": {
+        "tags": [
+          "VmwareSoftwareInventoriesController"
+        ],
+        "operationId": "VmwareSoftwareInventoriesController_GetMachineSoftwareInventory",
+        "description": "Method to get a machines software inventory like applications and roles.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "description": "Site name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "description": "Machine name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VmwareMachineSoftwareInventory"
             }
           },
           "default": {
@@ -12059,11 +12067,11 @@
           }
         },
         "x-ms-examples": {
-          "VmwareMachinesController_Applications_MaximumSet_Gen": {
-            "$ref": "./examples/VmwareMachinesController_Applications_MaximumSet_Gen.json"
+          "VmwareSoftwareInventoriesController_GetMachineSoftwareInventory_MaximumSet_Gen": {
+            "$ref": "./examples/VmwareSoftwareInventoriesController_GetMachineSoftwareInventory_MaximumSet_Gen.json"
           },
-          "VmwareMachinesController_Applications_MinimumSet_Gen": {
-            "$ref": "./examples/VmwareMachinesController_Applications_MinimumSet_Gen.json"
+          "VmwareSoftwareInventoriesController_GetMachineSoftwareInventory_MinimumSet_Gen": {
+            "$ref": "./examples/VmwareSoftwareInventoriesController_GetMachineSoftwareInventory_MinimumSet_Gen.json"
           }
         }
       }
@@ -12817,68 +12825,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/usage": {
-      "post": {
-        "tags": [
-          "Sites"
-        ],
-        "operationId": "Sites_Usage",
-        "description": "Method to get site error summary.",
-        "parameters": [
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "description": "The content of the action request",
-            "schema": {
-              "type": "object",
-              "properties": {},
-              "x-typespec-name": "{}"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/VmwareSiteUsage"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Sites_Usage_MaximumSet_Gen": {
-            "$ref": "./examples/Sites_Usage_MaximumSet_Gen.json"
-          },
-          "Sites_Usage_MinimumSet_Gen": {
-            "$ref": "./examples/Sites_Usage_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/vCenters": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/vcenters": {
       "get": {
         "tags": [
           "VcenterController"
@@ -12938,7 +12885,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/vCenters/{vcenterName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/vcenters/{vcenterName}": {
       "get": {
         "tags": [
           "VcenterController"
@@ -13430,6 +13377,22 @@
           "x-typespec-name": "string[]",
           "description": "errors list",
           "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Gets or sets the Job status."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "Gets or sets the Job start time."
+        },
+        "endTime": {
+          "type": "string",
+          "description": "Gets or sets the Job end time."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Gets or sets the Display name."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -16198,6 +16161,11 @@
           "$ref": "#/definitions/AppsAndRoles",
           "description": "Apps And Roles of the machine entity.",
           "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "provisioning state enum",
+          "readOnly": true
         }
       },
       "description": "Class for machine software inventory properties."
@@ -18642,6 +18610,10 @@
         "status": {
           "$ref": "#/definitions/SqlServerStatus",
           "description": "Gets or sets the powered on status."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation."
         }
       },
       "description": "Class for SQL Server properties."
@@ -19502,22 +19474,6 @@
           "type": "string",
           "description": "Gets or sets the Job ID.",
           "readOnly": true
-        },
-        "status": {
-          "type": "string",
-          "description": "Gets or sets the Job status."
-        },
-        "startTime": {
-          "type": "string",
-          "description": "Gets or sets the Job start time."
-        },
-        "endTime": {
-          "type": "string",
-          "description": "Gets or sets the Job end time."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Gets or sets the Display name."
         }
       },
       "description": "The delete import machines job web model."
@@ -20455,27 +20411,45 @@
     "VmwareMachineSoftwareInventory": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Gets the relative URL to get this VMWare machine.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Handled by resource provider.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets the Name of the machine.",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/MachineSoftwareInventoryProperties",
-          "description": "Gets or sets software inventory properties."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
-      "description": "VMware Machine software inventory REST resource."
+      "description": "An software inventory resource belonging to a machine resource.",
+      "allOf": [
+        {
+          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "VmwareMachineSoftwareInventoryListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VmwareMachineSoftwareInventory"
+          },
+          "x-typespec-name": "VmwareMachineSoftwareInventory[]",
+          "description": "The VmwareMachineSoftwareInventory items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a VmwareMachineSoftwareInventory list operation.",
+      "required": [
+        "value"
+      ]
     },
     "VmwareNetworkAdapter": {
       "type": "object",
