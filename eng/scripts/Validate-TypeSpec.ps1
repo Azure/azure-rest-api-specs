@@ -28,7 +28,9 @@ if ($typespecFolders) {
       $exitCode = 1
     }
     if ($GitClean) {
+      Write-Host "git restore ."
       git restore .
+      Write-Host "git clean -df"
       git clean -df
     }
   }
