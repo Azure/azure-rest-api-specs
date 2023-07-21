@@ -6,7 +6,7 @@ param (
   [string]$TargetBranch,
   [Parameter(Position = 2, Mandatory = $false)]
   [string]$SourceBranch,
-  [Parameter(Position = 2, Mandatory = $false)]
+  [Parameter(Position = 3, Mandatory = $false)]
   [switch]$GitClean
 )
 
