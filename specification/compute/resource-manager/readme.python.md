@@ -26,16 +26,10 @@ batch:
   - tag: package-2023-03-01-only
   - tag: package-2023-01-02-only
   - multiapiscript: true
-  - multiclientscript: true
-```
-
-# only need for new service
-``` yaml $(multiclientscript)
-output-folder: $(python-sdks-folder)/computetest/azure-mgmt-computetest/azure/mgmt/computetest/
 ```
 
 ``` yaml $(multiapiscript)
-output-folder: $(python-sdks-folder)/computetest/azure-mgmt-computetest/azure/mgmt/computetest/_generated
+output-folder: $(python-sdks-folder)/computetest/azure-mgmt-computetest/azure/mgmt/computetest
 perform-load: false
 ```
 
@@ -46,7 +40,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 
 ``` yaml $(tag) == 'package-2023-03-01-only'
 namespace: azure.mgmt.computetest.v2023_03_01
-output-folder: $(python-sdks-folder)/computetest/azure-mgmt-computetest/azure/mgmt/computetest/_generated/v2023_03_01
+output-folder: $(python-sdks-folder)/computetest/azure-mgmt-computetest/azure/mgmt/computetest/v2023_03_01
 ```
 
 ### Tag: package-2023-01-02-only
@@ -56,5 +50,5 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 
 ``` yaml $(tag) == 'package-2023-01-02-only'
 namespace: azure.mgmt.computetest.v2023_01_02
-output-folder: $(python-sdks-folder)/computetest/azure-mgmt-computetest/azure/mgmt/computetest/_generated/v2023_01_02
+output-folder: $(python-sdks-folder)/computetest/azure-mgmt-computetest/azure/mgmt/computetest/v2023_01_02
 ```
