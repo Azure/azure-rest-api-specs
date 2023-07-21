@@ -21,12 +21,12 @@ jobs:
     condition: succeededOrFailed()
 
   - pwsh: |
-      $verbose = ('$(System.Debug)' -eq 'true') ? "-Verbose:true" : "-Verbose:false"
+      $verbose = ('$(System.Debug)' -eq 'true') ? '$true' : '$false'
       $(Build.SourcesDirectory)/eng/scripts/Validate-TypeSpec.ps1 `
         $(Build.SourcesDirectory) `
         "origin/${env:SYSTEM_PULLREQUEST_TARGETBRANCH}" `
         "${env:SYSTEM_PULLREQUEST_SOURCECOMMITID}" `
         -GitClean `
-        -Verbose:$false
+        -Verbose:$verbose
     displayName: Validate Impacted Specs
     condition: succeededOrFailed()

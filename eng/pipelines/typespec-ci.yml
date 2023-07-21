@@ -21,7 +21,7 @@ jobs:
     condition: succeededOrFailed()
 
   - pwsh: |
-      $verbose = ('$(System.Debug)' -eq 'true') ? "-Verbose:true" : "-Verbose:false"
-      $(Build.SourcesDirectory)/eng/scripts/Validate-TypeSpec.ps1 $(Build.SourcesDirectory) -GitClean $verbose
+      $verbose = ('$(System.Debug)' -eq 'true') ? '$true' : '$false'
+      $(Build.SourcesDirectory)/eng/scripts/Validate-TypeSpec.ps1 $(Build.SourcesDirectory) -GitClean -Verbose:$verbose
     displayName: Validate All Specs
     condition: succeededOrFailed()
