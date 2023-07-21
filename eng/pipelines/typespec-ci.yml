@@ -21,6 +21,6 @@ jobs:
     condition: succeededOrFailed()
 
   - pwsh: |
-      $(Build.SourcesDirectory)/eng/scripts/Validate-TypeSpec.ps1 $(Build.SourcesDirectory) -Debug:$(System.Debug)
+      $(Build.SourcesDirectory)/eng/scripts/Validate-TypeSpec.ps1 $(Build.SourcesDirectory) -GitClean -Debug:$(System.Debug)
     displayName: Validate All Specs
     condition: succeededOrFailed()

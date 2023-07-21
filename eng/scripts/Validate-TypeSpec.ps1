@@ -7,6 +7,8 @@ param (
   [Parameter(Position = 2, Mandatory = $false)]
   [string]$SourceBranch,
   [Parameter(Mandatory = $false)]
+  [switch]$GitClean,
+  [Parameter(Mandatory = $false)]
   [switch]$Debug
 )
 
@@ -27,8 +29,12 @@ if ($typespecFolders) {
     if ($LASTEXITCODE) {
       $exitCode = 1
     }
-    git restore .
-    git clean -df
+    if ($GitClean) {
+      Write-Host "git restore ."
+      git restore .
+      Write-Host "git clean -df"
+      git clean -df
+    }
   }
 }
 
