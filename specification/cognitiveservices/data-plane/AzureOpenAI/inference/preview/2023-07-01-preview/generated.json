@@ -21,7 +21,7 @@
         "name": "endpoint",
         "in": "path",
         "required": true,
-        "description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus.api.cognitive.microsoft.com).",
+        "description": "  The connection endpoint for an Azure OpenAI resource as obtained via Azure Portal or Azure AI Studio.\n  This URL should include protocol and hostname with no additional path information. An example could be:\n  https://my-resource.openai.azure.com .",
         "type": "string"
       }
     ]
@@ -630,7 +630,7 @@
         },
         "name": {
           "type": "string",
-          "description": "The name of the author of this message. `name` is required if role is `function`, and it should be the name of the\nfunction whose response is in the `content`. May contain a-z, A-Z, 0-9, and underscores, with a maximum length of\n64 characters."
+          "description": "The name of the author of this message. When the `role` of a message is `function`, this `name` is required and\nmust match the name of the function whose response is in the `content` of the message. For other `role` values,\n`name` is optional and provides an extra identifier for the messenger, e.g. 'example-user', 'Alice', or\n'BlackBeardBot'. May contain a-z, A-Z, 0-9, and underscores, with a maximum length of 64 characters."
         },
         "function_call": {
           "$ref": "#/definitions/FunctionCall",
