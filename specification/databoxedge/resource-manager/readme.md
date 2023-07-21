@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for DataBox.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for DataBox Edge, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,18 +15,28 @@ To build the SDK for DataBox Edge, simply [Install AutoRest](https://aka.ms/auto
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the DataBox Edge API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-03-01
+tag: package-2023-07
+```
+
+
+### Tag: package-2023-07
+
+These settings apply only when `--tag=package-2023-07` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-07'
+input-file:
+  - Microsoft.DataBoxEdge/stable/2023-07-01/databoxedge.json
 ```
 ### Tag: package-2023-01-01-preview
 
@@ -36,6 +46,7 @@ These settings apply only when `--tag=package-2023-01-01-preview` is specified o
 input-file:
 - Microsoft.DataBoxEdge/preview/2023-01-01-preview/databoxedge.json
 ```
+
 ### Tag: package-2022-12-01-preview
 
 These settings apply only when `--tag=package-2022-12-01-preview` is specified on the command line.
@@ -44,6 +55,7 @@ These settings apply only when `--tag=package-2022-12-01-preview` is specified o
 input-file:
 - Microsoft.DataBoxEdge/preview/2022-12-01-preview/databoxedge.json
 ```
+
 ### Tag: package-2022-04-01-preview
 
 These settings apply only when `--tag=package-2022-04-01-preview` is specified on the command line.
@@ -52,6 +64,7 @@ These settings apply only when `--tag=package-2022-04-01-preview` is specified o
 input-file:
 - Microsoft.DataBoxEdge/preview/2022-04-01-preview/databoxedge.json
 ```
+
 ### Tag: package-2022-03-01
 
 These settings apply only when `--tag=package-2022-03-01` is specified on the command line.
@@ -60,6 +73,7 @@ These settings apply only when `--tag=package-2022-03-01` is specified on the co
 input-file:
 - Microsoft.DataBoxEdge/stable/2022-03-01/databoxedge.json
 ```
+
 ### Tag: package-2021-06-01
 
 These settings apply only when `--tag=package-2021-06-01` is specified on the command line.
@@ -68,6 +82,7 @@ These settings apply only when `--tag=package-2021-06-01` is specified on the co
 input-file:
 - Microsoft.DataBoxEdge/stable/2021-06-01/databoxedge.json
 ```
+
 ### Tag: package-2021-06-01-preview
 
 These settings apply only when `--tag=package-2021-06-01-preview` is specified on the command line.
@@ -76,6 +91,7 @@ These settings apply only when `--tag=package-2021-06-01-preview` is specified o
 input-file:
 - Microsoft.DataBoxEdge/preview/2021-06-01-preview/databoxedge.json
 ```
+
 ### Tag: package-2021-02-01
 
 These settings apply only when `--tag=package-2021-02-01` is specified on the command line.
@@ -84,6 +100,7 @@ These settings apply only when `--tag=package-2021-02-01` is specified on the co
 input-file:
 - Microsoft.DataBoxEdge/stable/2021-02-01/databoxedge.json
 ```
+
 ### Tag: package-2021-02-01-preview
 
 These settings apply only when `--tag=package-2021-02-01-preview` is specified on the command line.
@@ -92,6 +109,7 @@ These settings apply only when `--tag=package-2021-02-01-preview` is specified o
 input-file:
 - Microsoft.DataBoxEdge/preview/2021-02-01-preview/databoxedge.json
 ```
+
 ### Tag: package-2020-12-01
 
 These settings apply only when `--tag=package-2020-12-01` is specified on the command line.
@@ -100,6 +118,7 @@ These settings apply only when `--tag=package-2020-12-01` is specified on the co
 input-file:
 - Microsoft.DataBoxEdge/stable/2020-12-01/databoxedge.json
 ```
+
 ### Tag: package-2020-09-01-preview
 
 These settings apply only when `--tag=package-2020-09-01-preview` is specified on the command line.
@@ -108,6 +127,7 @@ These settings apply only when `--tag=package-2020-09-01-preview` is specified o
 input-file:
 - Microsoft.DataBoxEdge/preview/2020-09-01-preview/databoxedge.json
 ```
+
 ### Tag: package-2020-09-01
 
 These settings apply only when `--tag=package-2020-09-01` is specified on the command line.
@@ -116,6 +136,7 @@ These settings apply only when `--tag=package-2020-09-01` is specified on the co
 input-file:
 - Microsoft.DataBoxEdge/stable/2020-09-01/databoxedge.json
 ```
+
 ### Tag: package-2020-05-preview
 
 These settings apply only when `--tag=package-2020-05-preview` is specified on the command line.
@@ -162,8 +183,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -215,6 +236,3 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-
-
