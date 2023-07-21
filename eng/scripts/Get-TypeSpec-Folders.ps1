@@ -18,7 +18,7 @@ if ([string]::IsNullOrEmpty($TargetBranch) -or [string]::IsNullOrEmpty($SourceBr
 else {
   Write-Host "git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff --name-only `"$TargetBranch...$SourceBranch`" --"
   $changedFiles = git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff --name-only `"$TargetBranch...$SourceBranch`" --
-  $changedFiles = $changedFiles -replace '\\', '/'
+  $changedFiles = $changedFiles -replace '\\', '/' | Sort-Object
 
   Write-Host "changedFiles:"
   foreach ($changedFile in $changedFiles) {
@@ -43,6 +43,6 @@ foreach ($file in $changedFiles) {
     $typespecFolders += $typespecFolder -replace '\\', '/'
   }
 }
-$typespecFolders = $typespecFolders | Select-Object -Unique
+$typespecFolders = $typespecFolders | Select-Object -Unique | Sort-Object
 
 return $typespecFolders
