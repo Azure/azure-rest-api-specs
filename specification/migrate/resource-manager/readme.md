@@ -28,15 +28,6 @@ input-file:
   - Microsoft.OffAzure/stable/2023-06-06/migrate.json
 ```
 
-### Tag: package-2022-10
-
-These settings apply only when `--tag=package-2022-10` is specified on the command line.
-
-```yaml $(tag) == 'package-2022-10'
-input-file:
-  - Microsoft.OffAzure/stable/2022-10-27/migrate.json
-```
-
 ### Tag: package-migrate-2018-02 and java
 
 These settings apply only when `--tag=package-migrate-2018-02 --java` is specified on the command line.
