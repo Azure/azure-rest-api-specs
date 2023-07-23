@@ -51,7 +51,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/Scope"
+            "$ref": "../../../common/v1/types.json#/parameters/Scope"
           },
           {
             "$ref": "#/parameters/AssessmentName"
@@ -93,7 +93,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/Scope"
+            "$ref": "../../../common/v1/types.json#/parameters/Scope"
           },
           {
             "$ref": "#/parameters/AssessmentName"
@@ -133,7 +133,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/Scope"
+            "$ref": "../../../common/v1/types.json#/parameters/Scope"
           },
           {
             "$ref": "#/parameters/AssessmentName"
@@ -182,7 +182,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/Scope"
+            "$ref": "../../../common/v1/types.json#/parameters/Scope"
           },
           {
             "$ref": "#/parameters/AssessmentName"
@@ -343,8 +343,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[-\\w\\._\\(\\)]+$",
-      "description": "The Assessment Key - A unique key for the assessment type",
+      "description": "The Assessment Key - Unique key for the assessment type",
       "x-ms-parameter-location": "method"
     },
     "GovernanceAssignmentBody": {
@@ -355,14 +354,6 @@
         "$ref": "#/definitions/GovernanceAssignment"
       },
       "description": "Governance assignment over a subscription scope",
-      "x-ms-parameter-location": "method"
-    },
-    "Scope": {
-      "name": "scope",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The scope of the Governance assignments. Valid scopes are: subscription (format: 'subscriptions/{subscriptionId}'), or security connector (format: 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName})'",
       "x-ms-parameter-location": "method"
     }
   }

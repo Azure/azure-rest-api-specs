@@ -314,29 +314,11 @@
     },
     "OperationStatus": {
       "type": "object",
-      "description": "A status describing the success/failure of the extension's enablement/disablement operation.",
+      "description": "A status describing the success/failure of the enablement/disablement operation.",
       "properties": {
         "code": {
           "type": "string",
-          "description": "The operation status code.",
-          "enum": [
-            "Succeeded",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "code",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Succeeded",
-                "description": "Extension was created/updated successfully."
-              },
-              {
-                "value": "Failed",
-                "description": "Extension was not created/updated successfully. See operation status message for more details."
-              }
-            ]
-          }
+          "description": "The operation status code."
         },
         "message": {
           "type": "string",
