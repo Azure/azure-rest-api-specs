@@ -32,7 +32,7 @@ using Azure.Core;
 )
 @doc("Defender EASM discovers and maps your digital attack surface to provide an \"outside-in\" perspective using probes to discover assets. The assets are provided with detailed metadata associated, including vulnerabilities, configurations and web components, allowing customers to view and prioritize external risk. The EASM REST API enables you to develop clients that integrate with your application.")
 namespace Easm {
-    @doc("The Contoso Widget Manager service version.")
+    @doc("The Easm service version.")
     enum Versions {
         @doc("Version 2023-03-01-preview")
         @useDependency(Azure.Core.Versions.v1_0_Preview_2)
