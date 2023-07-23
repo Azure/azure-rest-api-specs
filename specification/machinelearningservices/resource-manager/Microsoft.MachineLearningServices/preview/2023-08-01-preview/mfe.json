@@ -11675,7 +11675,7 @@
             "description": "Serverless Endpoint entity to apply during operation.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PartialMinimalTrackedResourceWithSku"
+              "$ref": "#/definitions/PartialMinimalTrackedResourceWithSkuAndIdentity"
             }
           }
         ],
@@ -23131,6 +23131,26 @@
         }
       ],
       "properties": {
+        "sku": {
+          "description": "Sku details required for ARM contract for Autoscaling.",
+          "$ref": "#/definitions/PartialSku"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PartialMinimalTrackedResourceWithSkuAndIdentity": {
+      "description": "Strictly used in update requests.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PartialMinimalTrackedResource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "description": "Managed service identity (system assigned and/or user assigned identities)",
+          "$ref": "#/definitions/PartialManagedServiceIdentity"
+        },
         "sku": {
           "description": "Sku details required for ARM contract for Autoscaling.",
           "$ref": "#/definitions/PartialSku"
