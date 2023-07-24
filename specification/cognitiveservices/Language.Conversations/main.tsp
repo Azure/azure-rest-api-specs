@@ -534,7 +534,7 @@ model LuisTargetIntentResult extends TargetIntentResult {
   targetProjectKind: targetProjectKind.Luis;
 
   @doc("The actual response from a LUIS Generally Available application.")
-  result?: Record<never>;
+  result?: Record<string>;
 }
 
 @doc("It is a wrap up a Question Answering KB response.")
