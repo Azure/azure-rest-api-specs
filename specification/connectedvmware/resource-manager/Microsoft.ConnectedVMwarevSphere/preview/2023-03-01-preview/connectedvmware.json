@@ -2045,8 +2045,8 @@
           },
           {
             "in": "query",
-            "name": "retain",
-            "description": "Whether to just disable the VM from azure and retain the VM in the VMM.",
+            "name": "deleteFromHost",
+            "description": "Whether to delete the VM from the vCenter.",
             "required": false,
             "type": "boolean"
           },
@@ -4228,6 +4228,13 @@
           },
           {
             "in": "query",
+            "name": "deleteFromHost",
+            "description": "Whether to delete the VM from the vCenter.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "in": "query",
             "name": "force",
             "description": "Whether force delete was specified.",
             "required": false,
@@ -5889,7 +5896,7 @@
           "type": "string",
           "readOnly": true
         },
-        "vmId": {
+        "resourceUid": {
           "description": "Gets or sets a unique identifier for the vm resource.",
           "type": "string",
           "readOnly": true
