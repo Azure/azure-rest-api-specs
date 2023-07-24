@@ -5,7 +5,9 @@ param (
   [Parameter(Position = 1, Mandatory = $false)]
   [string]$TargetBranch,
   [Parameter(Position = 2, Mandatory = $false)]
-  [string]$SourceBranch
+  [string]$SourceBranch,
+  [Parameter(Mandatory = $false)]
+  [switch]$GitClean
 )
 
 $exitCode = 0
@@ -25,8 +27,12 @@ if ($typespecFolders) {
     if ($LASTEXITCODE) {
       $exitCode = 1
     }
-    git restore .
-    git clean -df
+    if ($GitClean) {
+      Write-Host "git restore ."
+      git restore .
+      Write-Host "git clean -df"
+      git clean -df
+    }
   }
 }
 
