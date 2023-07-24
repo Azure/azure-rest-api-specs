@@ -266,7 +266,7 @@ namespace Easm {
         @route("/tasks/{taskId}:cancel")
         @doc("Cancel a task by taskId.")
         @post
-        CancelTasks is Foundations.Operation<{
+        CancelTask is Foundations.Operation<{
           ...TaskIdParameter
         }, TaskResponse, {}, ErrorResponse>;
     }
