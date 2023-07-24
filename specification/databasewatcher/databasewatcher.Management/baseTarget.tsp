@@ -2,7 +2,6 @@ import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-providerhub";
-import "@azure-tools/typespec-providerhub-controller";
 
 namespace Microsoft.DatabaseWatcher;
 
@@ -43,7 +42,10 @@ model VaultSecret {
 
 @doc("Target states.")
 enum TargetCollectionStatus {
+  @doc("Denotes a target that is enabled.")
   Enabled,
+
+  @doc("Denotes a target that is disabled.")
   Disabled,
 }
 
