@@ -45,43 +45,43 @@ namespace Easm {
         @route("/assets")
         @doc("Retrieve a list of assets for the provided search parameters.")
         @get
-        ListAssets is Foundations.Operation<
-            {
-                ...FilterParameter;
-                ...OrderByParameter;
-                ...SkipParameter;
-                ...MaxPageSizeParameter;
-                ...MarkParameter;
-            },
-            AssetPageResponse,
-            {},
-            ErrorResponse
-        >;
+        op Assets_List(
+            ...FilterParameter,
+            ...OrderByParameter,
+            ...SkipParameter,
+            ...MaxPageSizeParameter,
+            ...MarkParameter,
+            ...ApiVersionParameter,
+        ): AssetPageResponse | ErrorResponse;
 
         @route("/assets")
         @doc("Update labels on assets matching the provided filter.")
         @post
-        UpdateAssets is Foundations.Operation<
-            {
-                ...RequiredFilterParameter;
-                ...AssetUpdateRequest;
-            },
-            TaskResponse,
-            {},
-            ErrorResponse
-        >;
+        op Assets_Update(
+            ...RequiredFilterParameter,
+            ...ApiVersionParameter,
+            @body assetUpdateRequest: AssetUpdateRequest,
+        ): TaskResponse | ErrorResponse;
 
         @route("/assets/{assetId}")
         @doc("Retrieve an asset by assetId.")
         @get
-        GetAsset is Foundations.Operation<
-            {
-                ...AssetIdParameter;
-            },
-            AssetResponse,
-            {},
-            ErrorResponse
-        >;
+        op Assets_Get(
+            ...AssetIdParameter,
+            ...ApiVersionParameter,
+        ): AssetResponse | ErrorResponse;
+
+        @route("/assets/{assetId}/observations")
+        @doc("Retrieve observations on an asset.")
+        @get
+        op Assets_Observations(
+            ...AssetIdParameter,
+            ...FilterParameter,
+            ...OrderByParameter,
+            ...SkipParameter,
+            ...MaxPageSizeParameter,
+            ...ApiVersionParameter,
+        ): ObservationPageResponse | ErrorResponse;
     }
 
     @tag("Data Connections")
@@ -90,64 +90,44 @@ namespace Easm {
         @route("/dataConnections")
         @doc("Retrieve a list of data connections.")
         @get
-        ListDataConnections is Foundations.Operation<
-            {
-                ...SkipParameter;
-                ...MarkParameter;
-            },
-            DataConnectionPageResponse,
-            {},
-            ErrorResponse
-        >;
+        op DataConnections_List(
+            ...SkipParameter,
+            ...MaxPageSizeParameter,
+            ...ApiVersionParameter,
+        ): DataConnectionPageResponse | ErrorResponse;
 
         @route("/dataConnections:validate")
-        @doc("Validate a data connection with a given dataConnection name.")
+        @doc("Validate a data connection with a given dataConnectionName.")
         @post
-        ValidateDataConnection is Foundations.Operation<
-            {
-                ...DataConnectionRequest;
-            },
-            ValidateResponse,
-            {},
-            ErrorResponse
-        >;
+        op DataConnections_Validate(
+            ...ApiVersionParameter,
+            @body dataConnectionRequest: DataConnectionRequest,
+        ): ValidateResponse | ErrorResponse;
 
         @route("/dataConnections/{dataConnectionName}")
         @doc("Retrieve a data connection with a given dataConnectionName.")
         @get
-        GetDataConnection is Foundations.Operation<
-            {
-                ...DataConnectionNameParameter;
-            },
-            DataConnectionResponse,
-            {},
-            ErrorResponse
-        >;
+        op DataConnections_Get(
+            ...DataConnectionNameParameter,
+            ...ApiVersionParameter,
+        ): DataConnectionResponse | ErrorResponse;
 
         @route("/dataConnections/{dataConnectionName}")
         @doc("Create or update a data connection with a given dataConnectionName.")
         @put
-        PutDataConnection is Foundations.Operation<
-            {
-                ...DataConnectionNameParameter;
-                ...DataConnectionRequest;
-            },
-            DataConnectionResponse,
-            {},
-            ErrorResponse
-        >;
+        op DataConnections_Put(
+            ...DataConnectionNameParameter,
+            ...ApiVersionParameter,
+            @body dataConnectionRequest: DataConnectionRequest,
+        ): DataConnectionResponse | ErrorResponse;
 
         @route("/dataConnections/{dataConnectionName}")
         @doc("Delete a data connection with a given dataConnectionName.")
         @delete
-        DeleteDataConnection is Foundations.Operation<
-            {
-                ...DataConnectionNameParameter;
-            },
-            NoContentResponse,
-            {},
-            ErrorResponse
-        >;
+        op DataConnections_Delete(
+            ...DataConnectionNameParameter,
+            ...ApiVersionParameter,
+        ): NoContentResponse | ErrorResponse;
     }
 
     @tag("Discovery Groups")
@@ -156,80 +136,57 @@ namespace Easm {
         @route("/discoGroups")
         @doc("Retrieve a list of discovery group for the provided search parameters.")
         @get
-        ListDiscoveryGroups is Foundations.Operation<
-            {
-                ...FilterParameter;
-                ...SkipParameter;
-                ...MaxPageSizeParameter;
-            },
-            DiscoGroupPageResponse,
-            {},
-            ErrorResponse
-        >;
+        op DiscoveryGroups_List(
+            ...FilterParameter,
+            ...SkipParameter,
+            ...MaxPageSizeParameter,
+            ...ApiVersionParameter,
+        ): DiscoGroupPageResponse | ErrorResponse;
 
         @route("/discoGroups:validate")
         @doc("Validate a discovery group with a given groupName.")
         @post
-        ValidateDiscoveryGroup is Foundations.Operation<
-            {
-                ...DiscoGroupRequest;
-            },
-            ValidateResponse,
-            {},
-            ErrorResponse
-        >;
+        op DiscoveryGroups_Validate(
+            ...ApiVersionParameter,
+            ...DiscoGroupNameParameter,
+            @body discoGroupRequest: DiscoGroupRequest,
+        ): ValidateResponse | ErrorResponse;
 
         @route("/discoGroups/{groupName}")
         @doc("Retrieve a discovery group with a given groupName.")
         @get
-        GetDiscoveryGroup is Foundations.Operation<
-            {
-                ...DiscoGroupNameParameter;
-            },
-            DiscoGroupResponse,
-            {},
-            ErrorResponse
-        >;
+        op DiscoveryGroups_Get(
+            ...DiscoGroupNameParameter,
+            ...ApiVersionParameter,
+        ): DiscoGroupResponse | ErrorResponse;
 
         @route("/discoGroups/{groupName}")
         @doc("Create a discovery group with a given groupName.")
         @put
-        PutDiscoveryGroup is Foundations.Operation<
-            {
-                ...DiscoGroupNameParameter;
-                ...DiscoGroupRequest;
-            },
-            DiscoGroupResponse,
-            {},
-            ErrorResponse
-        >;
+        op DiscoveryGroups_Put(
+            ...DiscoGroupNameParameter,
+            ...ApiVersionParameter,
+            @body discoGroupRequest: DiscoGroupRequest,
+        ): DiscoGroupResponse | ErrorResponse;
 
         @route("/discoGroups/{groupName}:run")
         @doc("Run a discovery group with a given groupName.")
         @post
-        RunDiscoveryGroup is Foundations.Operation<
-            {
-                ...DiscoGroupNameParameter;
-            },
-            NoContentResponse,
-            {},
-            ErrorResponse
-        >;
+        op DiscoveryGroups_Run(
+            ...DiscoGroupNameParameter,
+            ...ApiVersionParameter,
+        ): NoContentResponse | ErrorResponse;
 
         @route("/discoGroups/{groupName}/runs")
         @doc("Retrieve a collection of discovery run results for a discovery group with a given groupName.")
         @get
-        ListRuns is Foundations.Operation<
-            {
-                ...DiscoGroupNameParameter;
-                ...FilterParameter;
-                ...SkipParameter;
-                ...MaxPageSizeParameter;
-            },
-            DiscoRunPageResponse,
-            {},
-            ErrorResponse
-        >;
+        op DiscoveryGroups_ListRuns(
+            ...DiscoGroupNameParameter,
+            ...FilterParameter,
+            ...SkipParameter,
+            ...MaxPageSizeParameter,
+            ...ApiVersionParameter,
+        ): DiscoRunPageResponse | ErrorResponse;
     }
 
     @tag("Discovery Templates")
@@ -238,28 +195,20 @@ namespace Easm {
         @route("/discoTemplates")
         @doc("Retrieve a list of disco templates for the provided search parameters.")
         @get
-        ListDiscoveryTemplates is Foundations.Operation<
-            {
-                ...FilterParameter;
-                ...SkipParameter;
-                ...MaxPageSizeParameter;
-            },
-            DiscoTemplatePageResponse,
-            {},
-            ErrorResponse
-        >;
+        op DiscoveryTemplates_List(
+            ...FilterParameter,
+            ...SkipParameter,
+            ...MaxPageSizeParameter,
+            ...ApiVersionParameter,
+        ): DiscoTemplatePageResponse | ErrorResponse;
 
         @route("/discoTemplates/{templateId}")
         @doc("Retrieve a disco template with a given templateId.")
         @get
-        GetDiscoveryTemplate is Foundations.Operation<
-            {
-                ...DiscoTemplateIdParameter;
-            },
-            DiscoTemplateResponse,
-            {},
-            ErrorResponse
-        >;
+        op DiscoveryTemplates_Get(
+            ...DiscoTemplateIdParameter,
+            ...ApiVersionParameter,
+        ): DiscoTemplateResponse | ErrorResponse;
     }
 
     @tag("Reports")
@@ -268,36 +217,25 @@ namespace Easm {
         @route("/reports/assets:getBillable")
         @doc("Get billable assets summary for the workspace.")
         @post
-        BillableReports is Foundations.Operation<
-            {},
-            ReportBillableAssetSummaryResponse,
-            {},
-            ErrorResponse
-        >;
+        op Reports_Billable(
+            ...ApiVersionParameter,
+        ): ReportBillableAssetSummaryResponse | ErrorResponse;
 
         @route("/reports/assets:getSnapshot")
         @doc("Get the most recent snapshot of asset summary values for the snapshot request.")
         @post
-        SnapshotReports is Foundations.Operation<
-            {
-                ...ReportAssetSnapshotRequest;
-            },
-            ReportAssetSnapshotResponse,
-            {},
-            ErrorResponse
-        >;
+        op Reports_Snapshot(
+            ...ApiVersionParameter,
+            @body reportAssetSnapshotRequest: ReportAssetSnapshotRequest,
+        ): ReportAssetSnapshotResponse | ErrorResponse;
 
         @route("/reports/assets:getSummary")
         @doc("Get asset summary details for the summary request.")
         @post
-        SummaryReports is Foundations.Operation<
-            {
-                ...ReportAssetSummaryRequest;
-            },
-            ReportAssetSummaryResponse,
-            {},
-            ErrorResponse
-        >;
+        op Reports_Summary(
+            ...ApiVersionParameter,
+            @body reportAssetSummaryRequest: ReportAssetSummaryRequest,
+        ): ReportAssetSummaryResponse | ErrorResponse;
     }
 
     @tag("Saved Filters")
@@ -306,53 +244,37 @@ namespace Easm {
         @route("/savedFilters")
         @doc("Retrieve a list of saved filters for the provided search parameters.")
         @get
-        ListSavedFilters is Foundations.Operation<
-            {
-                ...FilterParameter;
-                ...SkipParameter;
-                ...MaxPageSizeParameter;
-            },
-            SavedFilterPageResponse,
-            {},
-            ErrorResponse
-        >;
+        op SavedFilters_List(
+            ...FilterParameter,
+            ...SkipParameter,
+            ...MaxPageSizeParameter,
+            ...ApiVersionParameter,
+        ): SavedFilterPageResponse | ErrorResponse;
 
         @route("/savedFilters/{filterName}")
         @doc("Retrieve a saved filter by filterName.")
         @get
-        GetSavedFilter is Foundations.Operation<
-            {
-                ...SavedFilterNameParameter;
-            },
-            SavedFilterResponse,
-            {},
-            ErrorResponse
-        >;
+        op SavedFilters_Get(
+            ...SavedFilterNameParameter,
+            ...ApiVersionParameter,
+        ): SavedFilterResponse | ErrorResponse;
 
         @route("/savedFilters/{filterName}")
         @doc("Create or update a saved filter with a given filterName.")
         @put
-        PutSavedFilter is Foundations.Operation<
-            {
-                ...SavedFilterNameParameter;
-                ...SavedFilterRequest;
-            },
-            SavedFilterResponse,
-            {},
-            ErrorResponse
-        >;
+        op SavedFilters_Put(
+            ...SavedFilterNameParameter,
+            ...ApiVersionParameter,
+            @body savedFilterRequest: SavedFilterRequest,
+        ): SavedFilterResponse | ErrorResponse;
 
         @route("/savedFilters/{filterName}")
         @doc("Delete a saved filter with a given filterName.")
         @delete
-        DeleteSavedFilter is Foundations.Operation<
-            {
-                ...SavedFilterNameParameter;
-            },
-            NoContentResponse,
-            {},
-            ErrorResponse
-        >;
+        op SavedFilters_Delete(
+            ...SavedFilterNameParameter,
+            ...ApiVersionParameter,
+        ): NoContentResponse | ErrorResponse;
     }
 
     @tag("Tasks")
@@ -361,41 +283,29 @@ namespace Easm {
         @route("/tasks")
         @doc("Retrieve a list of tasks for the provided search parameters.")
         @get
-        ListTasks is Foundations.Operation<
-            {
-                ...FilterParameter;
-                ...OrderByParameter;
-                ...SkipParameter;
-                ...MaxPageSizeParameter;
-            },
-            TaskPageResponse,
-            {},
-            ErrorResponse
-        >;
+        op Tasks_List(
+            ...FilterParameter,
+            ...OrderByParameter,
+            ...SkipParameter,
+            ...MaxPageSizeParameter,
+            ...ApiVersionParameter,
+        ): TaskPageResponse | ErrorResponse;
 
         @route("/tasks/{taskId}")
         @doc("Retrieve a task by taskId.")
         @get
-        GetTask is Foundations.Operation<
-            {
-                ...TaskIdParameter;
-            },
-            TaskResponse,
-            {},
-            ErrorResponse
-        >;
+        op Tasks_Get(
+            ...TaskIdParameter,
+            ...ApiVersionParameter,
+        ): TaskResponse | ErrorResponse;
 
         @route("/tasks/{taskId}:cancel")
         @doc("Cancel a task by taskId.")
         @post
-        CancelTask is Foundations.Operation<
-            {
-                ...TaskIdParameter;
-            },
-            TaskResponse,
-            {},
-            ErrorResponse
-        >;
+        op Tasks_Cancel(
+            ...TaskIdParameter,
+            ...ApiVersionParameter,
+        ): TaskResponse | ErrorResponse;
     }
 
     @doc("AlexaInfo")
