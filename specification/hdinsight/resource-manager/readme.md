@@ -110,6 +110,13 @@ directive:
     reason: Update the default error response to a new format would be a braking change for service.
 ```
 
+### Tag: package-hdinsightonaks-2023-06-preview
+These settings apply only when `--tag=package-hdinsightonaks-2023-06-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-hdinsightonaks-2023-06-preview'
+input-file:
+  - Microsoft.HDInsight/HDInsightOnAks/preview/2023-06-01-preview/hdinsight.json
+```
 
 ### Tag: package-2023-04-preview
 
@@ -128,6 +135,7 @@ input-file:
   - Microsoft.HDInsight/preview/2023-04-15-preview/scriptActions.json
   - Microsoft.HDInsight/preview/2023-04-15-preview/virtualMachines.json
 ```
+
 ### Tag: package-2021-06
 
 These settings apply only when `--tag=package-2021-06` is specified on the command line.
@@ -218,6 +226,20 @@ csharp:
   namespace: Microsoft.Azure.Management.HDInsight
   output-folder: $(csharp-sdks-folder)/hdinsight/Microsoft.Azure.Management.HDInsight/src/Generated
   clear-output-folder: true
+```
+
+## Tag: package-hdinsightonaks-2023-06-preview and java
+
+These settings apply only when `--tag=package-hdinsightonaks-2023-06-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-hdinsightonaks-2023-06-preview' && $(java)
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.hdinsightonaks
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-hdinsightonaks
 ```
 
 ## Java

@@ -22,3 +22,28 @@ output-folder: $(python-sdks-folder)/hdinsight/azure-mgmt-hdinsight/azure/mgmt/h
 modelerfour:
   lenient-model-deduplication: true
 ```
+
+## Tag: package-hdinsightonaks-2023-06-preview and python
+
+These settings apply only when `--tag=package-hdinsightonaks-2023-06-preview --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
+
+``` yaml $(tag) == 'package-hdinsightonaks-2023-06-preview' && $(python)
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+namespace: azure.mgmt.hdinsightonaks
+package-name: azure-mgmt-hdinsightonaks
+package-version: 1.0.0b1
+clear-output-folder: true
+```
+
+``` yaml $(tag) == 'package-hdinsightonaks-2023-06-preview' && $(python)
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/hdinsight/azure-mgmt-hdinsight/azure/mgmt/hdinsightonaks
+```
+
+``` yaml $(tag) == 'package-hdinsightonaks-2023-06-preview' && $(python)
+modelerfour:
+  lenient-model-deduplication: true
+```
