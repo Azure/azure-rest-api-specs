@@ -415,24 +415,6 @@
     }
   },
   "definitions": {
-    "Tags": {
-      "description": "Tags for Confidential Ledger Resource",
-      "type": "object",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Additional tags for Confidential Ledger",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ]
-        }
-      }
-    },
     "ResourceProviderOperationList": {
       "description": "List containing this Resource Provider's available operations.",
       "type": "object",
@@ -608,6 +590,10 @@
           "readOnly": true,
           "description": "Internal namespace for the Ledger"
         },
+        "runningState": {
+          "description": "Object representing RunningState for Ledger.",
+          "$ref": "#/definitions/RunningState"
+        },
         "ledgerType": {
           "description": "Type of Confidential Ledger",
           "$ref": "#/definitions/ConfidentialLedgerType"
@@ -643,16 +629,9 @@
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        },
-        {
-          "$ref": "#/definitions/Tags"
         }
       ],
       "properties": {
-        "runningState": {
-          "description": "Object representing RunningState for Ledger.",
-          "$ref": "#/definitions/RunningState"
-        },
         "properties": {
           "description": "Properties of Confidential Ledger Resource.",
           "$ref": "#/definitions/LedgerProperties"

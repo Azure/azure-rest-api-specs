@@ -8,16 +8,17 @@ using Azure.Core;
 
 namespace AnomalyDetector.Multivariate;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("Field that indicates how missing values will be filled.")
 enum FillNAMethod {
-  "Previous",
-  "Subsequent",
-  "Linear",
-  "Zero",
-  "Fixed",
+  Previous,
+  Subsequent,
+  Linear,
+  Zero,
+  Fixed,
 }
 
-@fixed
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 enum MultivariateBatchDetectionStatus {
   Created: "CREATED",
   Running: "RUNNING",
@@ -28,30 +29,38 @@ enum MultivariateBatchDetectionStatus {
 @doc("Data schema of the input data source. The default is OneTable.")
 enum DataSchema {
   @doc("OneTable means that your input data is in one CSV file, which contains one time stamp column and several variable columns. The default DataSchema value is OneTable.")
-  "OneTable",
+  OneTable,
+
   @doc("MultiTable means that your input data is separated in multiple CSV files. Each file contains one time stamp column and one variable column, and the CSV file name should indicate the name of the variable. The default DataSchema value is OneTable.")
-  "MultiTable",
+  MultiTable,
 }
 
-@fixed
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 enum AlignMode {
-  "Inner",
-  "Outer",
+  Inner,
+  Outer,
 }
 
-@fixed
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 enum ModelStatus {
+  @doc("The model has been created. Training has been scheduled but not yet started.")
   Created: "CREATED",
+
+  @doc("The model is being trained.")
   Running: "RUNNING",
+
+  @doc("The model has been trained and is ready to be used for anomaly detection.")
   Ready: "READY",
+
+  @doc("The model training failed.")
   Failed: "FAILED",
 }
 
 @doc("Detection results for the resultId value.")
 @resource("multivariate/detect-batch")
 model MultivariateDetectionResult {
+  #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "Properties in response-only schemas should not be marked readOnly"
   @doc("Result identifier that's used to fetch the results of an inference call.")
-  @visibility("read")
   @key
   @format("uuid")
   resultId: string;
@@ -70,6 +79,7 @@ model MultivariateBatchDetectionResultSummary {
 
   @doc("Error message when detection fails.")
   errors?: ErrorResponse[];
+
   @doc("Variable status.")
   variableStates?: VariableState[];
 
@@ -83,7 +93,6 @@ will need another API to get detection results.
 @doc("Error information that the API returned.")
 @error
 model ErrorResponse {
-
   @doc("Error code.")
   code: string;
 
@@ -96,6 +105,7 @@ model VariableState {
   @doc("Variable name in variable states.")
   variable?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Service uppercases common acronyms like NA."
   @doc("Proportion of missing values that need to be filled by fillNAMethod.")
   @minValue(0.0)
   @maxValue(1.0)
@@ -105,10 +115,10 @@ model VariableState {
   effectiveCount?: int32;
 
   @doc("First valid time stamp with a value of input data.")
-  firstTimestamp?: zonedDateTime;
+  firstTimestamp?: utcDateTime;
 
   @doc("Last valid time stamp with a value of input data.")
-  lastTimestamp?: zonedDateTime;
+  lastTimestamp?: utcDateTime;
 }
 
 @doc("""
@@ -120,34 +130,35 @@ model MultivariateBatchDetectionOptions {
 Source link to the input data to indicate an accessible Azure Storage URI.
 It either points to an Azure Blob Storage folder or points to a CSV file in
 Azure Blob Storage, based on your data schema selection. The data schema should
-be exactly the same as those used in the training phase.
+be exactly the same as those used in the training phase. The input data must
+contain at least slidingWindow entries preceding the start time of the data
+to be detected.
 """)
-  dataSource: string;
+  dataSource: url;
 
   @doc("""
-Number of top contributed
-variables for one anomalous time stamp in the response. The default is
-10.
+Number of top contributed variables for one anomalous time stamp in the response.
 """)
-  topContributorCount: int32;
+  topContributorCount?: int32 = 10;
 
   @doc("""
 Start date/time of data for detection, which should
 be in ISO 8601 format.
 """)
-  startTime: zonedDateTime;
+  startTime: utcDateTime;
 
   @doc("""
 End date/time of data for detection, which should
 be in ISO 8601 format.
 """)
-  endTime: zonedDateTime;
+  endTime: utcDateTime;
 }
 
 @doc("Anomaly status and information.")
 model AnomalyState {
   @doc("Time stamp for this anomaly.")
-  timestamp: zonedDateTime;
+  timestamp: utcDateTime;
+
   @doc("Detailed value of this anomalous time stamp.")
   value?: AnomalyValue;
 
@@ -174,6 +185,7 @@ Raw anomaly score of severity, to help indicate the degree of abnormality.
   @minValue(0.0)
   @maxValue(2.0)
   score: float32;
+
   @doc("Interpretation of this anomalous time stamp.")
   interpretation?: AnomalyInterpretation[];
 }
@@ -188,6 +200,7 @@ This score shows the percentage that contributes to the anomalous time stamp. It
 number between 0 and 1.
 """)
   contributionScore?: float32;
+
   @doc("Correlation changes among the anomalous variables.")
   correlationChanges?: CorrelationChanges;
 }
@@ -208,7 +221,7 @@ Source link to the input data to indicate an accessible Azure Storage URI.
 It either points to an Azure Blob Storage folder or points to a CSV file in
 Azure Blob Storage, based on your data schema selection.
 """)
-  dataSource: string;
+  dataSource: url;
 
   @doc("""
 Data schema of the input data source. The default
@@ -220,13 +233,13 @@ is OneTable.
 Start date/time of training data, which should be
 in ISO 8601 format.
 """)
-  startTime: zonedDateTime;
+  startTime: utcDateTime;
 
   @doc("""
 End date/time of training data, which should be
 in ISO 8601 format.
 """)
-  endTime: zonedDateTime;
+  endTime: utcDateTime;
 
   @doc("""
 Display name of the model. Maximum length is 24
@@ -245,13 +258,15 @@ detect whether the time stamp is an anomaly or not.
   alignPolicy?: AlignPolicy;
 
   @doc("Model status.")
+  @visibility("read")
   status?: ModelStatus;
 
-  @visibility("read")
   @doc("Error messages after failure to create a model.")
+  @visibility("read")
   errors?: ErrorResponse[];
 
   @doc("Diagnostics information to help inspect the states of a model or variable.")
+  @visibility("read")
   diagnosticsInfo?: DiagnosticsInfo;
 }
 
@@ -263,6 +278,7 @@ time range.
 """)
   alignMode?: AlignMode;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Service uppercases common acronyms like NA."
   @doc("""
 Field that indicates how missing values will be filled.
 """)
@@ -276,6 +292,7 @@ Field that indicates how missing values will be filled.
 model DiagnosticsInfo {
   @doc("Model status.")
   modelState?: ModelState;
+
   @doc("Variable status.")
   variableStates?: VariableState[];
 }
@@ -307,17 +324,17 @@ epoch.
 @doc("Response of getting a model.")
 @resource("multivariate/models")
 model AnomalyDetectionModel {
+  #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "Properties in response-only schemas should not be marked readOnly"
   @doc("Model identifier.")
-  @visibility("read")
   @key
   @format("uuid")
   modelId: string;
 
   @doc("Date and time (UTC) when the model was created.")
-  createdTime: zonedDateTime;
+  createdTime: utcDateTime;
 
   @doc("Date and time (UTC) when the model was last updated.")
-  lastUpdatedTime: zonedDateTime;
+  lastUpdatedTime: utcDateTime;
 
   @doc("""
 Training result of a model, including its status, errors, and diagnostics
@@ -357,7 +374,7 @@ Number of top contributed
 variables for one anomalous time stamp in the response. The default is
 10.
 """)
-  topContributorCount: int32;
+  topContributorCount?: int32 = 10;
 }
 
 @doc("Variable values.")
@@ -372,11 +389,11 @@ model VariableValues {
   values: float32[];
 }
 
-
 @doc("Results of the last detection.")
 model MultivariateLastDetectionResult {
   @doc("Variable status.")
   variableStates?: VariableState[];
+
   @doc("Anomaly status and information.")
   results?: AnomalyState[];
 }
@@ -384,8 +401,9 @@ model MultivariateLastDetectionResult {
 @doc("Error response.")
 @error
 model ResponseError {
-  @header
+  @header("x-ms-error-code")
   @doc("Error code.")
-  "x-ms-error-code"?: string,
-  ...ErrorResponse
+  msErrorCode?: string;
+
+  ...ErrorResponse;
 }
