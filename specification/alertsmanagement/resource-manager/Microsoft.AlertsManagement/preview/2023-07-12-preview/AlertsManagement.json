@@ -1676,12 +1676,10 @@
         }
       }
     },
-    "PrometheusEnrichmentResource": {
-      "discriminator": "type",
+    "PrometheusEnrichmentProperties": {
       "type": "object",
       "description": "Prometheus enrichment object.",
       "required": [
-        "type",
         "linkToApi",
         "datasources",
         "grafanaExplorePath",
@@ -1689,7 +1687,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/alertEnrichmentResource"
+          "$ref": "#/definitions/alertEnrichmentProperties"
         }
       ],
       "properties": {
@@ -1725,7 +1723,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/PrometheusEnrichmentResource"
+          "$ref": "#/definitions/PrometheusEnrichmentProperties"
         }
       ],
       "properties": {
@@ -1746,7 +1744,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/PrometheusEnrichmentResource"
+          "$ref": "#/definitions/PrometheusEnrichmentProperties"
         }
       ],
       "properties": {
