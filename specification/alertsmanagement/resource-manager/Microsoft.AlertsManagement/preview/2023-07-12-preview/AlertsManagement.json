@@ -1638,6 +1638,7 @@
     "alertEnrichmentProperties": {
       "type": "object",
       "description": "Alert enrichment properties.",
+      "discriminator": "type",
       "required": [
         "title",
         "description",
@@ -1714,6 +1715,7 @@
       }
     },
     "PrometheusInstantQuery": {
+      "x-ms-discriminator-value": "PrometheusInstantQuery",
       "type": "object",
       "description": "Prometheus instant query enrichment object.",
       "required": [
@@ -1732,6 +1734,7 @@
       }
     },
     "PrometheusRangeQuery": {
+      "x-ms-discriminator-value": "PrometheusRangeQuery",
       "type": "object",
       "description": "Prometheus instant query enrichment object.",
       "required": [
