@@ -84,46 +84,6 @@
           }
         }
       }
-    },
-    "/language/analyze-conversations/jobs": {
-      "post": {
-        "operationId": "SubmitJob",
-        "summary": "Submit analysis job for conversations",
-        "description": "Submit a collection of conversations for analysis. Specify one or more unique tasks to be executed.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/AnalyzeConversationJobsInput"
-            },
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/AnalyzeConversationJobResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -1569,6 +1529,24 @@
         "error"
       ]
     },
+    "DocumentErrorItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the input document."
+        },
+        "error": {
+          "$ref": "#/definitions/ErrorResponseItem",
+          "description": "Error encountered."
+        }
+      },
+      "description": "Contains details of errors encountered during a job execution.",
+      "required": [
+        "id",
+        "error"
+      ]
+    },
     "EntitySubtype": {
       "type": "object",
       "properties": {
@@ -1708,6 +1686,19 @@
       }
     },
     "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "description": "Error response.",
+      "required": [
+        "error"
+      ]
+    },
+    "ErrorResponseItem": {
       "type": "object",
       "properties": {
         "error": {
@@ -2022,7 +2013,7 @@
         "errors": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ErrorResponse"
+            "$ref": "#/definitions/ErrorResponseItem"
           },
           "x-ms-identifiers": [],
           "description": "errors",
@@ -2067,7 +2058,7 @@
         "errors": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ErrorResponse"
+            "$ref": "#/definitions/ErrorResponseItem"
           },
           "x-ms-identifiers": [],
           "description": "errors",
@@ -2707,7 +2698,7 @@
         "errors": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DocumentError"
+            "$ref": "#/definitions/DocumentErrorItem"
           },
           "description": "Errors by document id.",
           "x-typespec-name": "DocumentError[]"
