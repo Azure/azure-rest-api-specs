@@ -1,0 +1,699 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.IbmPower",
+    "description": "Microsoft IbmPower Azure Resource Provider specification.",
+    "version": "2023-05-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azureAuth": [
+        "userImpersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azureAuth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "userImpersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IbmPower/powerVirtualMachines": {
+      "get": {
+        "tags": [
+          "PowerVirtualMachines"
+        ],
+        "description": "List all IBM PowerVMs in the subscription.",
+        "operationId": "IbmPowerVmListSubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/powerVmList"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List resource group interfaces": {
+            "$ref": "examples/PowerVmGetSubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IbmPower/powerVirtualMachines": {
+      "get": {
+        "tags": [
+          "PowerVirtualMachines"
+        ],
+        "description": "List all IBM PowerVMs in the resource group.",
+        "operationId": "IbmPowerVmListResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/powerVmList"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List resource group interfaces": {
+            "$ref": "examples/PowerVmGetRg.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IbmPower/powerVirtualMachines/{powerVmName}/interfaces": {
+      "get": {
+        "tags": [
+          "PowerVirtualMachines"
+        ],
+        "description": "List all the IBM Power Interfaces associated with a specified IBM PowerVm.",
+        "operationId": "IbmPowerVmListInterfaces",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/powerVmName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/interfacesList"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List resource group interfaces": {
+            "$ref": "examples/PowerVmGetInterfaces.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IbmPower/powerVirtualMachines/{powerVmName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/powerVmName"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "description": "Get a specific PowerVM.",
+        "tags": [
+          "PowerVirtualMachines"
+        ],
+        "operationId": "IbmPowerVmGet",
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/powerVm"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get interface": {
+            "$ref": "examples/PowerVmGetSingle.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PowerVirtualMachines"
+        ],
+        "description": "Create or update a specific PowerVM.",
+        "operationId": "IbmPowerVmCreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "name": "powerVmObject",
+            "in": "body",
+            "description": "The IBM PowerVM interface object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/powerVm"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/powerVm"
+            }
+          },
+          "201": {
+            "description": "Request received successfully. Operation will complete asynchronously, check provisioningState for status.",
+            "schema": {
+              "$ref": "#/definitions/powerVm"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update interface": {
+            "$ref": "examples/PowerVmPut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PowerVirtualMachines"
+        ],
+        "description": "Delete a specific PowerVM.",
+        "operationId": "IbmPowerVmDelete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "202": {
+            "description": "Request received successfully. Operation will complete asynchronously, check provisioningState for status."
+          },
+          "204": {
+            "description": "The PowerVM was not found."
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete interface": {
+            "$ref": "examples/PowerVmDelete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "PowerVirtualMachines"
+        ],
+        "description": "Patch a specific PowerVM.  Only used to update tags.",
+        "operationId": "IbmPowerVmUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "name": "powerVmObject",
+            "in": "body",
+            "description": "The IBM PowerVM patch object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/powerVm"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - updated.",
+            "schema": {
+              "$ref": "#/definitions/powerVm"
+            }
+          },
+          "202": {
+            "description": "Request received successfully. Operation will complete asynchronously, check provisioningState for status."
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update interface": {
+            "$ref": "examples/PowerVmPatch.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IbmPower/powerVirtualMachines/{powerVmName}/interfaces/{interfaceName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/powerVmName"
+        },
+        {
+          "$ref": "#/parameters/interfaceName"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "description": "Get the interface for a specific Power VM.",
+        "tags": [
+          "Interfaces"
+        ],
+        "operationId": "InterfacesGet",
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/interfaceObject"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get interface": {
+            "$ref": "examples/InterfaceGetSingle.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Interfaces"
+        ],
+        "description": "Create or update the interface for a specific Power VM.",
+        "operationId": "InterfacesCreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "name": "interfaceObject",
+            "in": "body",
+            "description": "The IBM Power VM interface object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/interfaceObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/interfaceObject"
+            }
+          },
+          "201": {
+            "description": "Ok- Created.",
+            "schema": {
+              "$ref": "#/definitions/interfaceObject"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update interface": {
+            "$ref": "examples/InterfacePut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Interfaces"
+        ],
+        "description": "Delete the interface for a specific Power VM.",
+        "operationId": "InterfacesDelete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "202": {
+            "description": "Request received successfully. Operation will complete asynchronously, check provisioningState for status."
+          },
+          "204": {
+            "description": "The interface was not found."
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete interface": {
+            "$ref": "examples/InterfaceDelete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Interfaces"
+        ],
+        "description": "Patch the interface for a specific Power VM.",
+        "operationId": "InterfaceUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "name": "interfaceObject",
+            "in": "body",
+            "description": "The IBM Power VM interface patch object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/interfaceObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - updated.",
+            "schema": {
+              "$ref": "#/definitions/interfaceObject"
+            }
+          },
+          "202": {
+            "description": "Request received successfully. Operation will complete asynchronously, check provisioningState for status."
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update interface": {
+            "$ref": "examples/InterfacePatch.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.IbmPower/operations": {
+      "get": {
+        "description": "Lists all of the available API operations for IBM Power VM resource.",
+        "operationId": "Operations_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListConnectedClusterOperationsExample": {
+            "$ref": "examples/ListIbmPowerOperations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "powerVmList": {
+      "description": "Lists IBM Power VM resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of IBM Power VMs.",
+          "items": {
+            "$ref": "#/definitions/powerVm"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      }
+    },
+    "interfacesList": {
+      "description": "List of IBM Power interfaces.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of IBM Power interfaces.",
+          "items": {
+            "$ref": "#/definitions/interfaceObject"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      }
+    },
+    "powerVm": {
+      "description": "Model representing a IBM Power VM object.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "Resource Etag."
+        },
+        "properties": {
+          "description": "IBM Power VM interface properties.",
+          "$ref": "#/definitions/powerVmProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "powerVmProperties": {
+      "description": "Basic PowerVm properties needed for the request and response.",
+      "type": "object",
+      "required": [
+        "podId",
+        "vmId",
+        "memory",
+        "cpu",
+        "subnetResourceId",
+        "provisioningState"
+      ],
+      "properties": {
+        "podId": {
+          "description": "The IBM Power POD ASR baremetal ID.",
+          "type": "string"
+        },
+        "vmId": {
+          "description": "The VM ID in a GUID format.",
+          "type": "string"
+        },
+        "memory": {
+          "description": "The Power VM memory specs.",
+          "type": "string"
+        },
+        "cpu": {
+          "description": "The Power VM CPU specs.",
+          "type": "string"
+        },
+        "subnetResourceId": {
+          "description": "The Microsoft.BareMetal/AzureHostedService delegated subnet ID.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/provisioningState"
+        }
+      }
+    },
+    "provisioningState": {
+      "type": "string",
+      "description": "The current provisioning state.",
+      "enum": [
+        "Creating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "provisioningState",
+        "modelAsString": true
+      }
+    },
+    "interfaceObject": {
+      "description": "Model representing a IBM PowerVM interface object details.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "Resource Etag."
+        },
+        "properties": {
+          "description": "IBM PowerVM interface properties.",
+          "$ref": "#/definitions/interfaceProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "interfaceProperties": {
+      "description": "IBM Power node properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/provisioningState"
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "IP address to be allocated in the delegated subnet of the associated Power VM."
+        },
+        "vlanId": {
+          "description": "VLAN ID for the delegated subnet of the associated Power VM.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "powerVmName": {
+      "name": "powerVmName",
+      "description": "The name of the PowerVM. The name is case insensitive.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "interfaceName": {
+      "name": "interfaceName",
+      "description": "The name of the interface. The name is case insensitive.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
