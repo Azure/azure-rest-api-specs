@@ -462,7 +462,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NspAccessRulePutRequest"
+              "$ref": "#/definitions/NspAccessRule"
             },
             "description": "Parameters that hold the NspAccessRule resource to be created/updated."
           }
@@ -1348,12 +1348,12 @@
       },
       "description": "Properties of NSP profile."
     },
-    "NspAccessRulePutRequest": {
+    "NspAccessRule": {
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NspAccessRulePutRequestProperties",
+          "$ref": "#/definitions/NspAccessRuleProperties",
           "description": "Properties of the NSP access rule."
         },
         "name": {
@@ -1378,24 +1378,6 @@
       ],
       "description": "The NSP access rule resource"
     },
-    "NspAccessRule": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/NspAccessRulePutRequest"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "x-ms-client-flatten": true,
-              "$ref": "#/definitions/NspAccessRuleProperties",
-              "description": "Properties of the NSP access rule."
-            }
-          }
-        }
-      ],
-      "description": "The NSP access rule resource"
-    },
     "NspAccessRuleListResult": {
       "type": "object",
       "properties": {
@@ -1413,7 +1395,7 @@
       },
       "description": "Result of the request to list NSP access rules. Contains a list of NSP access rules and a URL link to get the next set of results."
     },
-    "NspAccessRulePutRequestProperties": {
+    "NspAccessRuleProperties": {
       "type": "object",
       "properties": {
         "provisioningState": {
@@ -1455,42 +1437,16 @@
           },
           "description": "List of subscription ids"
         },
-        "emailAddresses": {
+        "networkSecurityPerimeters": {
+          "readOnly": true,
           "type": "array",
           "items": {
-            "type": "string"
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/PerimeterBasedAccessRule"
           },
-          "description": "Outbound rules email address format."
-        },
-        "phoneNumbers": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Outbound rules phone number format."
+          "description": "Inbound rule specified by the perimeter id."
         }
       },
-      "description": "Properties of NSP access rule for Put request."
-    },
-    "NspAccessRuleProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/NspAccessRulePutRequestProperties"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "networkSecurityPerimeters": {
-              "type": "array",
-              "items": {
-                "x-ms-client-flatten": true,
-                "$ref": "#/definitions/PerimeterBasedAccessRule"
-              },
-              "description": "Inbound rule specified by the perimeter id."
-            }
-          }
-        }
-      ],
       "description": "Properties of NSP access rule."
     },
     "SubscriptionId": {
@@ -1506,6 +1462,7 @@
       "type": "object",
       "properties": {
         "id": {
+          "readOnly": true,
           "type": "string",
           "description": "NSP id in the ARM id format."
         },
