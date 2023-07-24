@@ -1,5 +1,11 @@
 # ARM (Control Plane) API Specification Update Pull Request 
 
+## PR review workflow diagram
+
+Please understand this diagram before proceeding. It explains how to get your PR approved & merged.
+
+![diagram](https://github.com/Azure/azure-rest-api-specs/assets/4429827/5e91ff2d-1f5c-4e96-87c2-390e7451da37)
+
 ## Purpose of this PR
 
 What's the purpose of this PR? Check all that apply. This is **mandatory**!

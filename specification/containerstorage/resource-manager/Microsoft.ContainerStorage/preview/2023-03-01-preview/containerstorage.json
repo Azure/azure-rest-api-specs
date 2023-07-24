@@ -55,10 +55,10 @@
   "paths": {
     "/providers/Microsoft.ContainerStorage/operations": {
       "get": {
+        "operationId": "Operations_List",
         "tags": [
           "Operations"
         ],
-        "operationId": "Operations_List",
         "description": "List the operations for the provider",
         "parameters": [
           {
@@ -79,9 +79,6 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Operations_List_MaximumSet_Gen": {
             "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
@@ -89,15 +86,18 @@
           "Operations_List_MinimumSet_Gen": {
             "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerStorage/pools": {
       "get": {
+        "operationId": "Pools_ListBySubscription",
         "tags": [
           "Pools"
         ],
-        "operationId": "Pools_ListBySubscription",
         "description": "List Pool resources by subscription ID",
         "parameters": [
           {
@@ -121,9 +121,6 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Pools_ListBySubscription_MaximumSet_Gen": {
             "$ref": "./examples/Pools_ListBySubscription_MaximumSet_Gen.json"
@@ -131,15 +128,18 @@
           "Pools_ListBySubscription_MinimumSet_Gen": {
             "$ref": "./examples/Pools_ListBySubscription_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerStorage/pools": {
       "get": {
+        "operationId": "Pools_ListByResourceGroup",
         "tags": [
           "Pools"
         ],
-        "operationId": "Pools_ListByResourceGroup",
         "description": "List Pool resources by resource group",
         "parameters": [
           {
@@ -166,9 +166,6 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Pools_ListByResourceGroup_MaximumSet_Gen": {
             "$ref": "./examples/Pools_ListByResourceGroup_MaximumSet_Gen.json"
@@ -176,15 +173,18 @@
           "Pools_ListByResourceGroup_MinimumSet_Gen": {
             "$ref": "./examples/Pools_ListByResourceGroup_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerStorage/pools/{poolName}": {
       "get": {
+        "operationId": "Pools_Get",
         "tags": [
           "Pools"
         ],
-        "operationId": "Pools_Get",
         "description": "Get a Pool",
         "parameters": [
           {
@@ -199,8 +199,8 @@
           {
             "name": "poolName",
             "in": "path",
-            "required": true,
             "description": "Pool Object",
+            "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
@@ -229,10 +229,10 @@
         }
       },
       "put": {
+        "operationId": "Pools_CreateOrUpdate",
         "tags": [
           "Pools"
         ],
-        "operationId": "Pools_CreateOrUpdate",
         "description": "Create a Pool",
         "parameters": [
           {
@@ -247,16 +247,16 @@
           {
             "name": "poolName",
             "in": "path",
-            "required": true,
             "description": "Pool Object",
+            "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "resource",
             "in": "body",
-            "required": true,
             "description": "Resource create parameters.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/Pool"
             }
@@ -271,15 +271,15 @@
           },
           "201": {
             "description": "ARM create operation completed successfully.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Pool"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -302,11 +302,86 @@
         },
         "x-ms-long-running-operation": true
       },
-      "delete": {
+      "patch": {
+        "operationId": "Pools_Update",
         "tags": [
           "Pools"
         ],
+        "description": "Update a Pool",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "Pool Object",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PoolUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_Update_MaximumSet_Gen": {
+            "$ref": "./examples/Pools_Update_MaximumSet_Gen.json"
+          },
+          "Pools_Update_MinimumSet_Gen": {
+            "$ref": "./examples/Pools_Update_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
         "operationId": "Pools_Delete",
+        "tags": [
+          "Pools"
+        ],
         "description": "Delete a Pool",
         "parameters": [
           {
@@ -321,8 +396,8 @@
           {
             "name": "poolName",
             "in": "path",
-            "required": true,
             "description": "Pool Object",
+            "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
@@ -335,13 +410,13 @@
             "description": "Resource deletion accepted.",
             "headers": {
               "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
               "Location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -367,439 +442,14 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "tags": [
-          "Pools"
-        ],
-        "operationId": "Pools_Update",
-        "description": "Update a Pool",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "poolName",
-            "in": "path",
-            "required": true,
-            "description": "Pool Object",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "required": true,
-            "description": "The resource properties to be updated.",
-            "schema": {
-              "$ref": "#/definitions/PoolUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Pool"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "Location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Pools_Update_MaximumSet_Gen": {
-            "$ref": "./examples/Pools_Update_MaximumSet_Gen.json"
-          },
-          "Pools_Update_MinimumSet_Gen": {
-            "$ref": "./examples/Pools_Update_MinimumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerStorage/pools/{poolName}/volumes": {
-      "get": {
-        "tags": [
-          "Volumes"
-        ],
-        "operationId": "Volumes_ListByPool",
-        "description": "List Volume resources by Pool",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "poolName",
-            "in": "path",
-            "required": true,
-            "description": "Pool Object",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/VolumeListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Volumes_ListByPool_MaximumSet_Gen": {
-            "$ref": "./examples/Volumes_ListByPool_MaximumSet_Gen.json"
-          },
-          "Volumes_ListByPool_MinimumSet_Gen": {
-            "$ref": "./examples/Volumes_ListByPool_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerStorage/pools/{poolName}/volumes/{volumeName}": {
-      "get": {
-        "tags": [
-          "Volumes"
-        ],
-        "operationId": "Volumes_Get",
-        "description": "Get a Volume",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "poolName",
-            "in": "path",
-            "required": true,
-            "description": "Pool Object",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "volumeName",
-            "in": "path",
-            "required": true,
-            "description": "Volume Resource",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Volume"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Volumes_Get_MaximumSet_Gen": {
-            "$ref": "./examples/Volumes_Get_MaximumSet_Gen.json"
-          },
-          "Volumes_Get_MinimumSet_Gen": {
-            "$ref": "./examples/Volumes_Get_MinimumSet_Gen.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Volumes"
-        ],
-        "operationId": "Volumes_CreateOrUpdate",
-        "description": "Create a Volume",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "poolName",
-            "in": "path",
-            "required": true,
-            "description": "Pool Object",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "volumeName",
-            "in": "path",
-            "required": true,
-            "description": "Volume Resource",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "required": true,
-            "description": "Resource create parameters.",
-            "schema": {
-              "$ref": "#/definitions/Volume"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Volume"
-            }
-          },
-          "201": {
-            "description": "ARM create operation completed successfully.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Volume"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Volumes_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/Volumes_CreateOrUpdate_MaximumSet_Gen.json"
-          },
-          "Volumes_CreateOrUpdate_MinimumSet_Gen": {
-            "$ref": "./examples/Volumes_CreateOrUpdate_MinimumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "tags": [
-          "Volumes"
-        ],
-        "operationId": "Volumes_Delete",
-        "description": "Delete a Volume",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "poolName",
-            "in": "path",
-            "required": true,
-            "description": "Pool Object",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "volumeName",
-            "in": "path",
-            "required": true,
-            "description": "Volume Resource",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "Location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
-              }
-            }
-          },
-          "204": {
-            "description": "Resource deleted successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Volumes_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/Volumes_Delete_MaximumSet_Gen.json"
-          },
-          "Volumes_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/Volumes_Delete_MinimumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "tags": [
-          "Volumes"
-        ],
-        "operationId": "Volumes_Update",
-        "description": "Update a Volume",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "poolName",
-            "in": "path",
-            "required": true,
-            "description": "Pool Object",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "volumeName",
-            "in": "path",
-            "required": true,
-            "description": "Volume Resource",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "required": true,
-            "description": "The resource properties to be updated.",
-            "schema": {
-              "$ref": "#/definitions/VolumeUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Volume"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "Location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Volumes_Update_MaximumSet_Gen": {
-            "$ref": "./examples/Volumes_Update_MaximumSet_Gen.json"
-          },
-          "Volumes_Update_MinimumSet_Gen": {
-            "$ref": "./examples/Volumes_Update_MinimumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerStorage/pools/{poolName}/volumeSnapshots": {
       "get": {
+        "operationId": "VolumeSnapshots_ListByPool",
         "tags": [
           "VolumeSnapshots"
         ],
-        "operationId": "VolumeSnapshots_ListByPool",
         "description": "List VolumeSnapshot resources by Pool",
         "parameters": [
           {
@@ -814,8 +464,8 @@
           {
             "name": "poolName",
             "in": "path",
-            "required": true,
             "description": "Pool Object",
+            "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
@@ -834,9 +484,6 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "VolumeSnapshots_ListByPool_MaximumSet_Gen": {
             "$ref": "./examples/VolumeSnapshots_ListByPool_MaximumSet_Gen.json"
@@ -844,15 +491,18 @@
           "VolumeSnapshots_ListByPool_MinimumSet_Gen": {
             "$ref": "./examples/VolumeSnapshots_ListByPool_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerStorage/pools/{poolName}/volumeSnapshots/{volumeSnapshotName}": {
       "get": {
+        "operationId": "VolumeSnapshots_Get",
         "tags": [
           "VolumeSnapshots"
         ],
-        "operationId": "VolumeSnapshots_Get",
         "description": "Get a VolumeSnapshot",
         "parameters": [
           {
@@ -867,16 +517,16 @@
           {
             "name": "poolName",
             "in": "path",
-            "required": true,
             "description": "Pool Object",
+            "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "volumeSnapshotName",
             "in": "path",
-            "required": true,
             "description": "Volume Snapshot Resource",
+            "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
@@ -905,10 +555,10 @@
         }
       },
       "put": {
+        "operationId": "VolumeSnapshots_CreateOrUpdate",
         "tags": [
           "VolumeSnapshots"
         ],
-        "operationId": "VolumeSnapshots_CreateOrUpdate",
         "description": "Create a VolumeSnapshot",
         "parameters": [
           {
@@ -923,24 +573,24 @@
           {
             "name": "poolName",
             "in": "path",
-            "required": true,
             "description": "Pool Object",
+            "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "volumeSnapshotName",
             "in": "path",
-            "required": true,
             "description": "Volume Snapshot Resource",
+            "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "resource",
             "in": "body",
-            "required": true,
             "description": "Resource create parameters.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/VolumeSnapshot"
             }
@@ -955,15 +605,15 @@
           },
           "201": {
             "description": "ARM create operation completed successfully.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/VolumeSnapshot"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -986,11 +636,94 @@
         },
         "x-ms-long-running-operation": true
       },
-      "delete": {
+      "patch": {
+        "operationId": "VolumeSnapshots_Update",
         "tags": [
           "VolumeSnapshots"
         ],
+        "description": "Update a VolumeSnapshot",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "Pool Object",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "volumeSnapshotName",
+            "in": "path",
+            "description": "Volume Snapshot Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VolumeSnapshotUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VolumeSnapshot"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VolumeSnapshots_Update_MaximumSet_Gen": {
+            "$ref": "./examples/VolumeSnapshots_Update_MaximumSet_Gen.json"
+          },
+          "VolumeSnapshots_Update_MinimumSet_Gen": {
+            "$ref": "./examples/VolumeSnapshots_Update_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
         "operationId": "VolumeSnapshots_Delete",
+        "tags": [
+          "VolumeSnapshots"
+        ],
         "description": "Delete a VolumeSnapshot",
         "parameters": [
           {
@@ -1005,16 +738,16 @@
           {
             "name": "poolName",
             "in": "path",
-            "required": true,
             "description": "Pool Object",
+            "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "volumeSnapshotName",
             "in": "path",
-            "required": true,
             "description": "Volume Snapshot Resource",
+            "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
@@ -1027,13 +760,13 @@
             "description": "Resource deletion accepted.",
             "headers": {
               "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
               "Location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1059,13 +792,15 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
-      },
-      "patch": {
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerStorage/pools/{poolName}/volumes": {
+      "get": {
+        "operationId": "Volumes_ListByPool",
         "tags": [
-          "VolumeSnapshots"
+          "Volumes"
         ],
-        "operationId": "VolumeSnapshots_Update",
-        "description": "Update a VolumeSnapshot",
+        "description": "List Volume resources by Pool",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1079,26 +814,135 @@
           {
             "name": "poolName",
             "in": "path",
-            "required": true,
             "description": "Pool Object",
+            "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "volumeSnapshotName",
-            "in": "path",
-            "required": true,
-            "description": "Volume Snapshot Resource",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "required": true,
-            "description": "The resource properties to be updated.",
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/VolumeSnapshotUpdate"
+              "$ref": "#/definitions/VolumeListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Volumes_ListByPool_MaximumSet_Gen": {
+            "$ref": "./examples/Volumes_ListByPool_MaximumSet_Gen.json"
+          },
+          "Volumes_ListByPool_MinimumSet_Gen": {
+            "$ref": "./examples/Volumes_ListByPool_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerStorage/pools/{poolName}/volumes/{volumeName}": {
+      "get": {
+        "operationId": "Volumes_Get",
+        "tags": [
+          "Volumes"
+        ],
+        "description": "Get a Volume",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "Pool Object",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "volumeName",
+            "in": "path",
+            "description": "Volume Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Volumes_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Volumes_Get_MaximumSet_Gen.json"
+          },
+          "Volumes_Get_MinimumSet_Gen": {
+            "$ref": "./examples/Volumes_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Volumes_CreateOrUpdate",
+        "tags": [
+          "Volumes"
+        ],
+        "description": "Create a Volume",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "Pool Object",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "volumeName",
+            "in": "path",
+            "description": "Volume Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Volume"
             }
           }
         ],
@@ -1106,20 +950,19 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/VolumeSnapshot"
+              "$ref": "#/definitions/Volume"
             }
           },
-          "202": {
-            "description": "Resource update request accepted.",
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            },
             "headers": {
               "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
-                "format": "int32"
-              },
-              "Location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -1131,15 +974,172 @@
           }
         },
         "x-ms-examples": {
-          "VolumeSnapshots_Update_MaximumSet_Gen": {
-            "$ref": "./examples/VolumeSnapshots_Update_MaximumSet_Gen.json"
+          "Volumes_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/Volumes_CreateOrUpdate_MaximumSet_Gen.json"
           },
-          "VolumeSnapshots_Update_MinimumSet_Gen": {
-            "$ref": "./examples/VolumeSnapshots_Update_MinimumSet_Gen.json"
+          "Volumes_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/Volumes_CreateOrUpdate_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Volumes_Update",
+        "tags": [
+          "Volumes"
+        ],
+        "description": "Update a Volume",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "Pool Object",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "volumeName",
+            "in": "path",
+            "description": "Volume Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VolumeUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Volumes_Update_MaximumSet_Gen": {
+            "$ref": "./examples/Volumes_Update_MaximumSet_Gen.json"
+          },
+          "Volumes_Update_MinimumSet_Gen": {
+            "$ref": "./examples/Volumes_Update_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Volumes_Delete",
+        "tags": [
+          "Volumes"
+        ],
+        "description": "Delete a Volume",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "Pool Object",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "volumeName",
+            "in": "path",
+            "description": "Volume Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Volumes_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/Volumes_Delete_MaximumSet_Gen.json"
+          },
+          "Volumes_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/Volumes_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -1244,14 +1244,14 @@
     },
     "DiskPoolProperties": {
       "type": "object",
+      "description": "Disk Pool Properties",
       "properties": {
         "csiParams": {
           "type": "object",
+          "description": "List of KV pairs to set in StorageClass to configure CSI driver.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "List of KV pairs to set in StorageClass to configure CSI driver.",
-          "x-typespec-name": "Record<string>"
+          }
         },
         "maxVolumeCapacityGiB": {
           "type": "integer",
@@ -1261,17 +1261,16 @@
         },
         "disks": {
           "type": "array",
+          "description": "Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying multiple disks (same syntax as tags).",
           "items": {
             "type": "string"
-          },
-          "description": "Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying multiple disks (same syntax as tags).",
-          "x-typespec-name": "string[]"
+          }
         }
-      },
-      "description": "Disk Pool Properties"
+      }
     },
     "DiskProperties": {
       "type": "object",
+      "description": "Disk Properties Model",
       "properties": {
         "resourceId": {
           "type": "string",
@@ -1303,7 +1302,6 @@
           "description": "Used to import SSD to discover WWN"
         }
       },
-      "description": "Disk Properties Model",
       "required": [
         "resourceId",
         "wwn",
@@ -1340,6 +1338,7 @@
     },
     "ElasticSanPoolProperties": {
       "type": "object",
+      "description": "Elastic San Pool Properties",
       "properties": {
         "sanName": {
           "type": "string",
@@ -1354,7 +1353,6 @@
           "description": "Volume group of an existing SAN."
         }
       },
-      "description": "Elastic San Pool Properties",
       "required": [
         "sanName",
         "resourceGroup",
@@ -1363,6 +1361,7 @@
     },
     "ElasticSanPoolPropertiesUpdate": {
       "type": "object",
+      "description": "Elastic San Pool Properties",
       "properties": {
         "sanName": {
           "type": "string",
@@ -1376,8 +1375,7 @@
           "type": "string",
           "description": "Volume group of an existing SAN."
         }
-      },
-      "description": "Elastic San Pool Properties"
+      }
     },
     "EncryptionType": {
       "type": "string",
@@ -1399,22 +1397,21 @@
     },
     "EphemeralPoolProperties": {
       "type": "object",
+      "description": "Ephemeral Pool Properties",
       "properties": {
         "diskSelector": {
           "type": "array",
+          "description": "Template name or KV pairs containing disk selection criteria, e.g. model=\"Microsoft NVMe Direct Disk\" to match all Lsv2 NVMe disks.",
           "items": {
             "type": "string"
-          },
-          "description": "Template name or KV pairs containing disk selection criteria, e.g. model=\"Microsoft NVMe Direct Disk\" to match all Lsv2 NVMe disks.",
-          "x-typespec-name": "string[]"
+          }
         },
         "disks": {
           "type": "array",
+          "description": "Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying multiple disks (same syntax as tags).",
           "items": {
             "type": "string"
-          },
-          "description": "Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying multiple disks (same syntax as tags).",
-          "x-typespec-name": "string[]"
+          }
         },
         "diskFormat": {
           "type": "boolean",
@@ -1422,7 +1419,6 @@
           "default": false
         }
       },
-      "description": "Ephemeral Pool Properties",
       "required": [
         "diskSelector",
         "disks"
@@ -1430,38 +1426,37 @@
     },
     "EphemeralPoolPropertiesUpdate": {
       "type": "object",
+      "description": "Ephemeral Pool Properties",
       "properties": {
         "diskSelector": {
           "type": "array",
+          "description": "Template name or KV pairs containing disk selection criteria, e.g. model=\"Microsoft NVMe Direct Disk\" to match all Lsv2 NVMe disks.",
           "items": {
             "type": "string"
-          },
-          "description": "Template name or KV pairs containing disk selection criteria, e.g. model=\"Microsoft NVMe Direct Disk\" to match all Lsv2 NVMe disks.",
-          "x-typespec-name": "string[]"
+          }
         },
         "disks": {
           "type": "array",
+          "description": "Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying multiple disks (same syntax as tags).",
           "items": {
             "type": "string"
-          },
-          "description": "Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying multiple disks (same syntax as tags).",
-          "x-typespec-name": "string[]"
+          }
         },
         "diskFormat": {
           "type": "boolean",
           "description": "Consent to format the local disks.",
           "default": false
         }
-      },
-      "description": "Ephemeral Pool Properties"
+      }
     },
     "ManagedPoolProperties": {
       "type": "object",
-      "properties": {},
-      "description": "Managed Pool Properties"
+      "description": "Managed Pool Properties",
+      "properties": {}
     },
     "NetworkRuleSet": {
       "type": "object",
+      "description": "Network Rule Set definition",
       "properties": {
         "defaultAction": {
           "$ref": "#/definitions/Action",
@@ -1469,14 +1464,12 @@
         },
         "virtualNetworkRules": {
           "type": "array",
+          "description": "Virtual network rules",
           "items": {
             "$ref": "#/definitions/VirtualNetworkRule"
-          },
-          "description": "Virtual network rules",
-          "x-typespec-name": "VirtualNetworkRule[]"
+          }
         }
       },
-      "description": "Network Rule Set definition",
       "required": [
         "defaultAction",
         "virtualNetworkRules"
@@ -1484,6 +1477,7 @@
     },
     "PlacementProperties": {
       "type": "object",
+      "description": "Placement Properties Model",
       "properties": {
         "affinityLabelSelector": {
           "type": "string",
@@ -1498,7 +1492,6 @@
           "description": "When unsatisfiable"
         }
       },
-      "description": "Placement Properties Model",
       "required": [
         "affinityLabelSelector",
         "antiAffinityLabelSelector",
@@ -1507,6 +1500,7 @@
     },
     "Pool": {
       "type": "object",
+      "description": "Pool resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/PoolProperties",
@@ -1518,7 +1512,6 @@
           ]
         }
       },
-      "description": "Pool resource",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -1527,29 +1520,28 @@
     },
     "PoolListResult": {
       "type": "object",
+      "description": "The response of a Pool list operation.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The Pool items on this page",
           "items": {
             "$ref": "#/definitions/Pool"
-          },
-          "description": "The Pool items on this page",
-          "x-typespec-name": "Pool[]"
+          }
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+          "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a Pool list operation.",
       "required": [
         "value"
       ]
     },
     "PoolProperties": {
       "type": "object",
+      "description": "Pool Properties",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -1562,11 +1554,10 @@
         },
         "zones": {
           "type": "array",
+          "description": "List of availability zones that resources can be created in.",
           "items": {
             "type": "string"
-          },
-          "description": "List of availability zones that resources can be created in.",
-          "x-typespec-name": "string[]"
+          }
         },
         "poolCapacityGiB": {
           "type": "integer",
@@ -1575,11 +1566,10 @@
         },
         "assignments": {
           "type": "array",
+          "description": "List of resources that should have access to the pool. Typically ARM references to AKS clusters or ACI Container Groups. For local and standard this must be a single reference. For portable there can be many.",
           "items": {
             "type": "string"
-          },
-          "description": "List of resources that should have access to the pool. Typically ARM references to AKS clusters or ACI Container Groups. For local and standard this must be a single reference. For portable there can be many.",
-          "x-typespec-name": "string[]"
+          }
         },
         "ephemeralPoolProperties": {
           "$ref": "#/definitions/EphemeralPoolProperties",
@@ -1594,7 +1584,6 @@
           "description": "Elastic San Pool Properties"
         }
       },
-      "description": "Pool Properties",
       "required": [
         "poolType",
         "zones",
@@ -1641,24 +1630,24 @@
     },
     "PoolUpdate": {
       "type": "object",
+      "description": "The type used for update operations of the Pool.",
       "properties": {
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "Resource tags.",
-          "x-typespec-name": "Record<string>"
+          }
         },
         "properties": {
           "$ref": "#/definitions/PoolUpdateProperties",
           "x-ms-client-flatten": true
         }
-      },
-      "description": "The type used for update operations of the Pool."
+      }
     },
     "PoolUpdateProperties": {
       "type": "object",
+      "description": "The updatable properties of the Pool.",
       "properties": {
         "poolType": {
           "$ref": "#/definitions/PoolType",
@@ -1666,11 +1655,10 @@
         },
         "zones": {
           "type": "array",
+          "description": "List of availability zones that resources can be created in.",
           "items": {
             "type": "string"
-          },
-          "description": "List of availability zones that resources can be created in.",
-          "x-typespec-name": "string[]"
+          }
         },
         "poolCapacityGiB": {
           "type": "integer",
@@ -1679,11 +1667,10 @@
         },
         "assignments": {
           "type": "array",
+          "description": "List of resources that should have access to the pool. Typically ARM references to AKS clusters or ACI Container Groups. For local and standard this must be a single reference. For portable there can be many.",
           "items": {
             "type": "string"
-          },
-          "description": "List of resources that should have access to the pool. Typically ARM references to AKS clusters or ACI Container Groups. For local and standard this must be a single reference. For portable there can be many.",
-          "x-typespec-name": "string[]"
+          }
         },
         "ephemeralPoolProperties": {
           "$ref": "#/definitions/EphemeralPoolPropertiesUpdate",
@@ -1697,8 +1684,7 @@
           "$ref": "#/definitions/ElasticSanPoolPropertiesUpdate",
           "description": "Elastic San Pool Properties"
         }
-      },
-      "description": "The updatable properties of the Pool."
+      }
     },
     "ProtocolType": {
       "type": "string",
@@ -1804,6 +1790,7 @@
     },
     "Sku": {
       "type": "object",
+      "description": "Sku definition",
       "properties": {
         "name": {
           "$ref": "#/definitions/SkuName",
@@ -1814,7 +1801,6 @@
           "description": "Sku Account Tier"
         }
       },
-      "description": "Sku definition",
       "required": [
         "name",
         "tier"
@@ -1852,6 +1838,7 @@
     },
     "VirtualNetworkRule": {
       "type": "object",
+      "description": "Virtual Network Rule definition",
       "properties": {
         "action": {
           "$ref": "#/definitions/Action",
@@ -1863,13 +1850,13 @@
           "description": "Id of rule"
         }
       },
-      "description": "Virtual Network Rule definition",
       "required": [
         "id"
       ]
     },
     "Volume": {
       "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/VolumeProperties",
@@ -1881,7 +1868,6 @@
           ]
         }
       },
-      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -1914,23 +1900,21 @@
     },
     "VolumeListResult": {
       "type": "object",
+      "description": "The response of a Volume list operation.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The Volume items on this page",
           "items": {
             "$ref": "#/definitions/Volume"
-          },
-          "description": "The Volume items on this page",
-          "x-typespec-name": "Volume[]"
+          }
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+          "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a Volume list operation.",
       "required": [
         "value"
       ]
@@ -1961,6 +1945,7 @@
     },
     "VolumeProperties": {
       "type": "object",
+      "description": "Volume Properties",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -1969,11 +1954,10 @@
         },
         "labels": {
           "type": "object",
+          "description": "String KV pairs indicating labels",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "String KV pairs indicating labels",
-          "x-typespec-name": "Record<string>"
+          }
         },
         "capacityGiB": {
           "type": "integer",
@@ -1990,14 +1974,12 @@
         },
         "mountOptions": {
           "type": "array",
+          "description": "List of string mount options",
           "items": {
             "type": "string"
-          },
-          "description": "List of string mount options",
-          "x-typespec-name": "string[]"
+          }
         }
       },
-      "description": "Volume Properties",
       "required": [
         "labels",
         "capacityGiB",
@@ -2008,6 +1990,7 @@
     },
     "VolumeSnapshot": {
       "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/VolumeSnapshotProperties",
@@ -2019,7 +2002,6 @@
           ]
         }
       },
-      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -2028,29 +2010,28 @@
     },
     "VolumeSnapshotListResult": {
       "type": "object",
+      "description": "The response of a VolumeSnapshot list operation.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The VolumeSnapshot items on this page",
           "items": {
             "$ref": "#/definitions/VolumeSnapshot"
-          },
-          "description": "The VolumeSnapshot items on this page",
-          "x-typespec-name": "VolumeSnapshot[]"
+          }
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+          "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a VolumeSnapshot list operation.",
       "required": [
         "value"
       ]
     },
     "VolumeSnapshotProperties": {
       "type": "object",
+      "description": "Volume Snapshot Properties",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -2071,14 +2052,12 @@
         },
         "mountOptions": {
           "type": "array",
+          "description": "List of string mount options",
           "items": {
             "type": "string"
-          },
-          "description": "List of string mount options",
-          "x-typespec-name": "string[]"
+          }
         }
       },
-      "description": "Volume Snapshot Properties",
       "required": [
         "source",
         "volumeMode",
@@ -2088,16 +2067,17 @@
     },
     "VolumeSnapshotUpdate": {
       "type": "object",
+      "description": "The type used for update operations of the VolumeSnapshot.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/VolumeSnapshotUpdateProperties",
           "x-ms-client-flatten": true
         }
-      },
-      "description": "The type used for update operations of the VolumeSnapshot."
+      }
     },
     "VolumeSnapshotUpdateProperties": {
       "type": "object",
+      "description": "The updatable properties of the VolumeSnapshot.",
       "properties": {
         "source": {
           "type": "string",
@@ -2113,35 +2093,33 @@
         },
         "mountOptions": {
           "type": "array",
+          "description": "List of string mount options",
           "items": {
             "type": "string"
-          },
-          "description": "List of string mount options",
-          "x-typespec-name": "string[]"
+          }
         }
-      },
-      "description": "The updatable properties of the VolumeSnapshot."
+      }
     },
     "VolumeUpdate": {
       "type": "object",
+      "description": "The type used for update operations of the Volume.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/VolumeUpdateProperties",
           "x-ms-client-flatten": true
         }
-      },
-      "description": "The type used for update operations of the Volume."
+      }
     },
     "VolumeUpdateProperties": {
       "type": "object",
+      "description": "The updatable properties of the Volume.",
       "properties": {
         "labels": {
           "type": "object",
+          "description": "String KV pairs indicating labels",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "String KV pairs indicating labels",
-          "x-typespec-name": "Record<string>"
+          }
         },
         "capacityGiB": {
           "type": "integer",
@@ -2158,14 +2136,12 @@
         },
         "mountOptions": {
           "type": "array",
+          "description": "List of string mount options",
           "items": {
             "type": "string"
-          },
-          "description": "List of string mount options",
-          "x-typespec-name": "string[]"
+          }
         }
-      },
-      "description": "The updatable properties of the Volume."
+      }
     },
     "WhenUnsatisfiable": {
       "type": "string",
