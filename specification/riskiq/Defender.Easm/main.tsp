@@ -11,7 +11,7 @@ using Azure.Core;
 @useAuth(OAuth2Auth<[ImplicitFlow]>)
 @versioned(Easm.Versions)
 @service({
-    title: "Defender EASM"
+    title: "Defender EASM",
 })
 @server(
     "{endpoint}/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}",
@@ -36,7 +36,7 @@ namespace Easm {
     enum Versions {
         @doc("Version 2023-03-01-preview")
         @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-        v2023_03_01_preview: "2023-03-01-preview"
+        v2023_03_01_preview: "2023-03-01-preview",
     }
 
     @tag("Assets")
@@ -45,28 +45,43 @@ namespace Easm {
         @route("/assets")
         @doc("Retrieve a list of assets for the provided search parameters.")
         @get
-        ListAssets is Foundations.Operation<{
-          ...FilterParameter, 
-          ...OrderByParameter, 
-          ...SkipParameter, 
-          ...MaxPageSizeParameter, 
-          ...MarkParameter}, 
-          AssetPageResponse, {}, ErrorResponse>;
+        ListAssets is Foundations.Operation<
+            {
+                ...FilterParameter;
+                ...OrderByParameter;
+                ...SkipParameter;
+                ...MaxPageSizeParameter;
+                ...MarkParameter;
+            },
+            AssetPageResponse,
+            {},
+            ErrorResponse
+        >;
 
         @route("/assets")
         @doc("Update labels on assets matching the provided filter.")
         @post
-        UpdateAssets is Foundations.Operation<{
-          ...RequiredFilterParameter,
-          ...AssetUpdateRequest}, 
-          TaskResponse, {}, ErrorResponse>;
-        
+        UpdateAssets is Foundations.Operation<
+            {
+                ...RequiredFilterParameter;
+                ...AssetUpdateRequest;
+            },
+            TaskResponse,
+            {},
+            ErrorResponse
+        >;
+
         @route("/assets/{assetId}")
         @doc("Retrieve an asset by assetId.")
         @get
-        GetAsset is Foundations.Operation<{
-          ...AssetIdParameter}, 
-          AssetResponse, {}, ErrorResponse>;
+        GetAsset is Foundations.Operation<
+            {
+                ...AssetIdParameter;
+            },
+            AssetResponse,
+            {},
+            ErrorResponse
+        >;
     }
 
     @tag("Data Connections")
@@ -75,39 +90,64 @@ namespace Easm {
         @route("/dataConnections")
         @doc("Retrieve a list of data connections.")
         @get
-        ListDataConnections is Foundations.Operation<{
-          ...SkipParameter, 
-          ...MarkParameter}, 
-          DataConnectionPageResponse, {}, ErrorResponse>;
+        ListDataConnections is Foundations.Operation<
+            {
+                ...SkipParameter;
+                ...MarkParameter;
+            },
+            DataConnectionPageResponse,
+            {},
+            ErrorResponse
+        >;
 
         @route("/dataConnections:validate")
         @doc("Validate a data connection with a given dataConnection name.")
         @post
-        ValidateDataConnection is Foundations.Operation<{
-          ...DataConnectionRequest}, 
-          ValidateResponse, {}, ErrorResponse>;
+        ValidateDataConnection is Foundations.Operation<
+            {
+                ...DataConnectionRequest;
+            },
+            ValidateResponse,
+            {},
+            ErrorResponse
+        >;
 
         @route("/dataConnections/{dataConnectionName}")
         @doc("Retrieve a data connection with a given dataConnectionName.")
         @get
-        GetDataConnection is Foundations.Operation<{
-          ...DataConnectionNameParameter}, 
-          DataConnectionResponse, {}, ErrorResponse>;
+        GetDataConnection is Foundations.Operation<
+            {
+                ...DataConnectionNameParameter;
+            },
+            DataConnectionResponse,
+            {},
+            ErrorResponse
+        >;
 
         @route("/dataConnections/{dataConnectionName}")
         @doc("Create or update a data connection with a given dataConnectionName.")
         @put
-        PutDataConnection is Foundations.Operation<{
-          ...DataConnectionNameParameter, 
-          ...DataConnectionRequest}, 
-          DataConnectionResponse, {}, ErrorResponse>;
+        PutDataConnection is Foundations.Operation<
+            {
+                ...DataConnectionNameParameter;
+                ...DataConnectionRequest;
+            },
+            DataConnectionResponse,
+            {},
+            ErrorResponse
+        >;
 
         @route("/dataConnections/{dataConnectionName}")
         @doc("Delete a data connection with a given dataConnectionName.")
         @delete
-        DeleteDataConnection is Foundations.Operation<{
-          ...DataConnectionNameParameter}, 
-          NoContentResponse, {}, ErrorResponse>;
+        DeleteDataConnection is Foundations.Operation<
+            {
+                ...DataConnectionNameParameter;
+            },
+            NoContentResponse,
+            {},
+            ErrorResponse
+        >;
     }
 
     @tag("Discovery Groups")
@@ -116,50 +156,80 @@ namespace Easm {
         @route("/discoGroups")
         @doc("Retrieve a list of discovery group for the provided search parameters.")
         @get
-        ListDiscoveryGroups is Foundations.Operation<{
-          ...FilterParameter,
-          ...SkipParameter,
-          ...MaxPageSizeParameter
-        }, DiscoGroupPageResponse, {}, ErrorResponse>;
+        ListDiscoveryGroups is Foundations.Operation<
+            {
+                ...FilterParameter;
+                ...SkipParameter;
+                ...MaxPageSizeParameter;
+            },
+            DiscoGroupPageResponse,
+            {},
+            ErrorResponse
+        >;
 
         @route("/discoGroups:validate")
         @doc("Validate a discovery group with a given groupName.")
         @post
-        ValidateDiscoveryGroup is Foundations.Operation<{
-          ...DiscoGroupRequest
-        }, ValidateResponse, {}, ErrorResponse>;
+        ValidateDiscoveryGroup is Foundations.Operation<
+            {
+                ...DiscoGroupRequest;
+            },
+            ValidateResponse,
+            {},
+            ErrorResponse
+        >;
 
         @route("/discoGroups/{groupName}")
         @doc("Retrieve a discovery group with a given groupName.")
         @get
-        GetDiscoveryGroup is Foundations.Operation<{
-          ...DiscoGroupNameParameter
-        }, DiscoGroupResponse, {}, ErrorResponse>;
+        GetDiscoveryGroup is Foundations.Operation<
+            {
+                ...DiscoGroupNameParameter;
+            },
+            DiscoGroupResponse,
+            {},
+            ErrorResponse
+        >;
 
         @route("/discoGroups/{groupName}")
         @doc("Create a discovery group with a given groupName.")
         @put
-        PutDiscoveryGroup is Foundations.Operation<{
-          ...DiscoGroupNameParameter,
-          ...DiscoGroupRequest
-        }, DiscoGroupResponse, {}, ErrorResponse>;
+        PutDiscoveryGroup is Foundations.Operation<
+            {
+                ...DiscoGroupNameParameter;
+                ...DiscoGroupRequest;
+            },
+            DiscoGroupResponse,
+            {},
+            ErrorResponse
+        >;
 
         @route("/discoGroups/{groupName}:run")
         @doc("Run a discovery group with a given groupName.")
         @post
-        RunDiscoveryGroup is Foundations.Operation<{
-          ...DiscoGroupNameParameter
-        }, NoContentResponse, {}, ErrorResponse>;
+        RunDiscoveryGroup is Foundations.Operation<
+            {
+                ...DiscoGroupNameParameter;
+            },
+            NoContentResponse,
+            {},
+            ErrorResponse
+        >;
 
         @route("/discoGroups/{groupName}/runs")
         @doc("Retrieve a collection of discovery run results for a discovery group with a given groupName.")
         @get
-        ListRuns is Foundations.Operation<{
-          ...DiscoGroupNameParameter,
-          ...FilterParameter, 
-          ...SkipParameter,
-          ...MaxPageSizeParameter
-        }, DiscoRunPageResponse, {}, ErrorResponse>;
+        ListRuns is Foundations.Operation<
+            {
+                ...DiscoGroupNameParameter;
+                ...FilterParameter;
+                ...SkipParameter;
+                ...MaxPageSizeParameter;
+            },
+            DiscoRunPageResponse,
+            {},
+            ErrorResponse
+        >;
     }
 
     @tag("Discovery Templates")
@@ -168,18 +238,28 @@ namespace Easm {
         @route("/discoTemplates")
         @doc("Retrieve a list of disco templates for the provided search parameters.")
         @get
-        ListDiscoveryTemplates is Foundations.Operation<{
-          ...FilterParameter,
-          ...SkipParameter,
-          ...MaxPageSizeParameter
-        }, DiscoTemplatePageResponse, {}, ErrorResponse>;
+        ListDiscoveryTemplates is Foundations.Operation<
+            {
+                ...FilterParameter;
+                ...SkipParameter;
+                ...MaxPageSizeParameter;
+            },
+            DiscoTemplatePageResponse,
+            {},
+            ErrorResponse
+        >;
 
         @route("/discoTemplates/{templateId}")
         @doc("Retrieve a disco template with a given templateId.")
         @get
-        GetDiscoveryTemplate is Foundations.Operation<{
-          ...DiscoTemplateIdParameter
-        }, DiscoTemplateResponse, {}, ErrorResponse>;
+        GetDiscoveryTemplate is Foundations.Operation<
+            {
+                ...DiscoTemplateIdParameter;
+            },
+            DiscoTemplateResponse,
+            {},
+            ErrorResponse
+        >;
     }
 
     @tag("Reports")
@@ -188,21 +268,36 @@ namespace Easm {
         @route("/reports/assets:getBillable")
         @doc("Get billable assets summary for the workspace.")
         @post
-        BillableReports is Foundations.Operation<{},ReportBillableAssetSummaryResponse, {}, ErrorResponse>;
+        BillableReports is Foundations.Operation<
+            {},
+            ReportBillableAssetSummaryResponse,
+            {},
+            ErrorResponse
+        >;
 
         @route("/reports/assets:getSnapshot")
         @doc("Get the most recent snapshot of asset summary values for the snapshot request.")
         @post
-        SnapshotReports is Foundations.Operation<{
-          ...ReportAssetSnapshotRequest
-        }, ReportAssetSnapshotResponse, {}, ErrorResponse>;
+        SnapshotReports is Foundations.Operation<
+            {
+                ...ReportAssetSnapshotRequest;
+            },
+            ReportAssetSnapshotResponse,
+            {},
+            ErrorResponse
+        >;
 
         @route("/reports/assets:getSummary")
         @doc("Get asset summary details for the summary request.")
         @post
-        SummaryReports is Foundations.Operation<{
-          ...ReportAssetSummaryRequest
-        }, ReportAssetSummaryResponse, {}, ErrorResponse>
+        SummaryReports is Foundations.Operation<
+            {
+                ...ReportAssetSummaryRequest;
+            },
+            ReportAssetSummaryResponse,
+            {},
+            ErrorResponse
+        >;
     }
 
     @tag("Saved Filters")
@@ -211,33 +306,53 @@ namespace Easm {
         @route("/savedFilters")
         @doc("Retrieve a list of saved filters for the provided search parameters.")
         @get
-        ListSavedFilters is Foundations.Operation<{
-          ...FilterParameter,
-          ...SkipParameter,
-          ...MaxPageSizeParameter
-        }, SavedFilterPageResponse, {}, ErrorResponse>;
+        ListSavedFilters is Foundations.Operation<
+            {
+                ...FilterParameter;
+                ...SkipParameter;
+                ...MaxPageSizeParameter;
+            },
+            SavedFilterPageResponse,
+            {},
+            ErrorResponse
+        >;
 
         @route("/savedFilters/{filterName}")
         @doc("Retrieve a saved filter by filterName.")
         @get
-        GetSavedFilter is Foundations.Operation<{
-          ...SavedFilterNameParameter
-        }, SavedFilterResponse, {}, ErrorResponse>;
+        GetSavedFilter is Foundations.Operation<
+            {
+                ...SavedFilterNameParameter;
+            },
+            SavedFilterResponse,
+            {},
+            ErrorResponse
+        >;
 
         @route("/savedFilters/{filterName}")
         @doc("Create or update a saved filter with a given filterName.")
         @put
-        PutSavedFilter is Foundations.Operation<{
-          ...SavedFilterNameParameter,
-          ...SavedFilterRequest
-        }, SavedFilterResponse, {}, ErrorResponse>;
+        PutSavedFilter is Foundations.Operation<
+            {
+                ...SavedFilterNameParameter;
+                ...SavedFilterRequest;
+            },
+            SavedFilterResponse,
+            {},
+            ErrorResponse
+        >;
 
         @route("/savedFilters/{filterName}")
         @doc("Delete a saved filter with a given filterName.")
         @delete
-        DeleteSavedFilter is Foundations.Operation<{
-          ...SavedFilterNameParameter
-        }, NoContentResponse, {}, ErrorResponse>;
+        DeleteSavedFilter is Foundations.Operation<
+            {
+                ...SavedFilterNameParameter;
+            },
+            NoContentResponse,
+            {},
+            ErrorResponse
+        >;
     }
 
     @tag("Tasks")
@@ -246,26 +361,41 @@ namespace Easm {
         @route("/tasks")
         @doc("Retrieve a list of tasks for the provided search parameters.")
         @get
-        ListTasks is Foundations.Operation<{
-          ...FilterParameter, 
-          ...OrderByParameter, 
-          ...SkipParameter, 
-          ...MaxPageSizeParameter
-        }, TaskPageResponse, {}, ErrorResponse>;
+        ListTasks is Foundations.Operation<
+            {
+                ...FilterParameter;
+                ...OrderByParameter;
+                ...SkipParameter;
+                ...MaxPageSizeParameter;
+            },
+            TaskPageResponse,
+            {},
+            ErrorResponse
+        >;
 
         @route("/tasks/{taskId}")
         @doc("Retrieve a task by taskId.")
         @get
-        GetTask is Foundations.Operation<{
-          ...TaskIdParameter
-        }, TaskResponse, {}, ErrorResponse>;
+        GetTask is Foundations.Operation<
+            {
+                ...TaskIdParameter;
+            },
+            TaskResponse,
+            {},
+            ErrorResponse
+        >;
 
         @route("/tasks/{taskId}:cancel")
         @doc("Cancel a task by taskId.")
         @post
-        CancelTask is Foundations.Operation<{
-          ...TaskIdParameter
-        }, TaskResponse, {}, ErrorResponse>;
+        CancelTask is Foundations.Operation<
+            {
+                ...TaskIdParameter;
+            },
+            TaskResponse,
+            {},
+            ErrorResponse
+        >;
     }
 
     @doc("AlexaInfo")
@@ -346,7 +476,6 @@ namespace Easm {
 
         @doc("The date this asset was last updated for this workspace.")
         updatedDate?: utcDateTime;
-
         state?: AssetState;
 
         @doc("An optional customer provided identifier for this asset.")
@@ -363,7 +492,6 @@ namespace Easm {
 
         @doc("The history of how this asset was pulled into the workspace through the discovery process.")
         auditTrail?: AuditTrailItem[];
-
         reason?: string;
     }
 
@@ -472,6 +600,8 @@ namespace Easm {
     @doc("Banner")
     model Banner {
         port?: int32;
+
+        @projectedName("csharp", "BannerProperty")
         banner?: string;
         firstSeen?: utcDateTime;
         lastSeen?: utcDateTime;
@@ -605,7 +735,6 @@ namespace Easm {
         @doc("A message that specifies details about data connection if inactive.")
         inactiveMessage?: string;
     }
-    
 
     @doc("DependentResource")
     model DependentResource {
@@ -706,7 +835,6 @@ namespace Easm {
 
         @doc("The list of excludes used for the disco group runs, aka assets to exclude from the discovery algorithm.")
         excludes?: DiscoSource[];
-
         latestRun?: DiscoRunResponse;
 
         @doc("The date for the disco group was created.")
@@ -866,7 +994,6 @@ namespace Easm {
 
         @doc("This is an array of details about specific errors that led to this reported error.")
         details?: ErrorDetail[];
-
         innererror?: InnerError;
     }
 
@@ -875,7 +1002,6 @@ namespace Easm {
     model ErrorResponse {
         @header("x-ms-error-code")
         errorCode: string;
-
         error: ErrorDetail;
     }
 
@@ -1009,6 +1135,7 @@ namespace Easm {
 
     @doc("IpBlock")
     model IpBlock {
+        @projectedName("csharp", "IpBlockProperty")
         ipBlock?: string;
         sources?: Source[];
         firstSeen?: utcDateTime;
@@ -1258,6 +1385,7 @@ namespace Easm {
 
     @doc("Port")
     model Port {
+        @projectedName("csharp", "PortProperty")
         port?: int32;
         firstSeen?: utcDateTime;
         lastSeen?: utcDateTime;
@@ -1309,7 +1437,6 @@ namespace Easm {
 
         @doc("A description of what the metric represents.")
         description?: string;
-
         assets?: AssetPageResponse;
     }
 
@@ -1426,7 +1553,6 @@ namespace Easm {
 
         @doc("The name that can be used for display purposes.")
         displayName?: string;
-
         filter?: string;
         description?: string;
     }
@@ -1467,6 +1593,7 @@ namespace Easm {
 
     @doc("Source")
     model Source {
+        @projectedName("csharp", "SourceProperty")
         source?: string;
         firstSeen?: utcDateTime;
         lastSeen?: utcDateTime;
