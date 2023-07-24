@@ -360,10 +360,20 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Failover triggered successfully.",
-            "schema": {
-              "$ref": "#/definitions/EHNamespace"
+          "202": {
+            "description": "Accepted. The failover policy change operation will complete asynchronously.",
+            "headers": {
+              "azure-AsyncOperation": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              },
+              "location": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              },
+              "schema": {
+                "$ref": "#/definitions/EHNamespace"
+              }
             }
           },
           "default": {
