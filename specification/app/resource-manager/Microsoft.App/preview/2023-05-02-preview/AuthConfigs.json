@@ -285,6 +285,10 @@
             "httpSettings": {
               "$ref": "#/definitions/HttpSettings",
               "description": "The configuration settings of the HTTP requests for authentication and authorization requests made against ContainerApp Service Authentication/Authorization."
+            },
+            "encryptionSettings": {
+              "$ref": "#/definitions/EncryptionSettings",
+              "description": "The configuration settings of the secrets references of encryption key and signing key for ContainerApp Service Authentication/Authorization."
             }
           },
           "x-ms-client-flatten": true
@@ -351,6 +355,20 @@
         "forwardProxy": {
           "$ref": "#/definitions/ForwardProxy",
           "description": "The configuration settings of a forward proxy used to make the requests."
+        }
+      }
+    },
+    "EncryptionSettings": {
+      "description": "The configuration settings of the secrets references of encryption key and signing key for ContainerApp Service Authentication/Authorization.",
+      "type": "object",
+      "properties": {
+        "containerAppAuthEncryptionSecretName": {
+          "description": "The secret name which is referenced for EncryptionKey.",
+          "type": "string"
+        },
+        "containerAppAuthSigningSecretName": {
+          "description": "The secret name which is referenced for SigningKey.",
+          "type": "string"
         }
       }
     },
