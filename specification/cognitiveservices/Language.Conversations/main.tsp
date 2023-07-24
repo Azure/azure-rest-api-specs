@@ -1406,25 +1406,27 @@ op analyzeConversation is Azure.Core.StandardResourceOperations.ResourceCollecti
   AnalyzeConversationTaskResult
 >;
 
-@added(Versions.v2023_04_01)
-@doc("Submit a collection of conversations for analysis. Specify one or more unique tasks to be executed.")
-@summary("Submit analysis job for conversations")
-@TypeSpec.Rest.actionSeparator("/")
-@TypeSpec.Rest.action("analyze-conversations/jobs")
-op submitJob is Azure.Core.StandardResourceOperations.ResourceCollectionAction<
-  Conversations,
-  AnalyzeConversationJobsInput,
-  AnalyzeConversationJobResult
->;
+// @added(Versions.v2023_04_01)
+// @doc("Submit a collection of conversations for analysis. Specify one or more unique tasks to be executed.")
+// @summary("Submit analysis job for conversations")
+// @TypeSpec.Rest.actionSeparator("/")
+// @TypeSpec.Rest.action("analyze-conversations/jobs")
+// @pollingOperation(jobStatus)
+// op submitJob is Azure.Core.StandardResourceOperations.LongRunningResourceCollectionAction<
+//   Conversations,
+//   AnalyzeConversationJobsInput,
+//   AnalyzeConversationJobResult
+//   >;
 
 // @added(Versions.v2023_04_01)
 // @doc("Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.")
 // @summary("Get analysis status and results")
 // @TypeSpec.Rest.actionSeparator("/")
-// @TypeSpec.Rest.action("analyze-conversations/jobs")
+// @TypeSpec.Rest.action("analyze-conversations")
 // op jobStatus is Azure.Core.StandardResourceOperations.GetResourceOperationStatus<
 // Conversations,
-// AnalyzeConversationJobState>;
+// AnalyzeConversationJobState
+// >;
 
 // @added(Versions.v2023_04_01)
 // @doc("Cancel a long-running job for text analysis of conversations.")
@@ -1437,6 +1439,9 @@ op submitJob is Azure.Core.StandardResourceOperations.ResourceCollectionAction<
 //   JobId,
 //   AnalyzeConversationTaskResult
 // >;
+
+
+//parameter objects
 
 // @added(Versions.v2023_04_01)
 // @doc("show stats parameter")
