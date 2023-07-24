@@ -3,7 +3,7 @@
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
     "api-version": "2023-04-02",
-    "diskName": "myDisk2",
+    "diskName": "myDisk",
     "disk": {
       "location": "West US",
       "properties": {
@@ -17,6 +17,7 @@
   "responses": {
     "202": {
       "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
         "properties": {
           "creationData": {
             "createOption": "CopyFromSanSnapshot",
@@ -25,11 +26,12 @@
           "provisioningState": "Updating"
         },
         "location": "West US",
-        "name": "myDisk2"
+        "name": "myDisk"
       }
     },
     "200": {
       "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
         "properties": {
           "creationData": {
             "createOption": "CopyFromSanSnapshot",
@@ -38,7 +40,7 @@
           "provisioningState": "Succeeded"
         },
         "location": "West US",
-        "name": "myDisk2"
+        "name": "myDisk"
       }
     }
   }
