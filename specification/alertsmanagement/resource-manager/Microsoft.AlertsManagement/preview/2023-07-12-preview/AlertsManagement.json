@@ -372,7 +372,7 @@
     },
     "/{scope}/providers/Microsoft.AlertsManagement/alerts/{alertId}/enrichments": {
       "get": {
-        "operationId": "Alerts_ListEnrichmentsByScope",
+        "operationId": "Alerts_ListEnrichments",
         "description": "Get the enrichments of an alert.",
         "parameters": [
           {
@@ -411,53 +411,7 @@
         },
         "x-ms-examples": {
           "Resolve": {
-            "$ref": "./examples/Alerts_Enrichment_resource_scope.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alerts/{alertId}/enrichments": {
-      "get": {
-        "operationId": "Alerts_ListEnrichmentsBySubscription",
-        "description": "Get the enrichments of an alert.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/alertId"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "$skiptoken",
-            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. Returns the attachments of the specified alert.",
-            "schema": {
-              "$ref": "#/definitions/alertEnrichmentResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Resolve": {
-            "$ref": "./examples/Alerts_Enrichment_subscription_scope.json"
+            "$ref": "./examples/Alerts_ListEnrichments.json"
           }
         }
       }
