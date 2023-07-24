@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2023-04-02",
+    "diskName": "myDisk2",
+    "disk": {
+      "location": "West US",
+      "properties": {
+        "creationData": {
+          "createOption": "CopyFromSanSnapshot",
+          "sourceResourceId": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.ElasticSan/elasticSans/myElasticSan/volumegroups/myElasticSanVolumeGroup/snapshots/myElasticSanVolumeSnapshot"
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "properties": {
+          "creationData": {
+            "createOption": "CopyFromSanSnapshot",
+            "sourceResourceId": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.ElasticSan/elasticSans/myElasticSan/volumegroups/myElasticSanVolumeGroup/snapshots/myElasticSanVolumeSnapshot"
+          },
+          "provisioningState": "Updating"
+        },
+        "location": "West US",
+        "name": "myDisk2"
+      }
+    },
+    "200": {
+      "body": {
+        "properties": {
+          "creationData": {
+            "createOption": "CopyFromSanSnapshot",
+            "sourceResourceId": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.ElasticSan/elasticSans/myElasticSan/volumegroups/myElasticSanVolumeGroup/snapshots/myElasticSanVolumeSnapshot"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "location": "West US",
+        "name": "myDisk2"
+      }
+    }
+  }
+}
