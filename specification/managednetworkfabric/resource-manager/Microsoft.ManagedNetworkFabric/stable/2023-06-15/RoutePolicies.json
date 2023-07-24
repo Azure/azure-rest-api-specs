@@ -619,6 +619,12 @@
       "type": "object",
       "description": "Route Policy patchable properties.",
       "properties": {
+        "defaultAction": {
+          "type": "string",
+          "description": "Default action that needs to be applied when no condition is matched. Example: Permit | Deny.",
+          "default": "Deny",
+          "$ref": "./common.json#/definitions/CommunityActionTypes"
+        },
         "statements": {
           "type": "array",
           "description": "Route Policy statements.",
@@ -688,16 +694,12 @@
         "type": {
           "type": "string",
           "description": "Type of the condition used.",
-          "default": "Or",
-          "minLength": 1,
-          "enum": [
-            "Or",
-            "And"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "RoutePolicyConditionType"
-          }
+          "$ref": "#/definitions/RoutePolicyConditionType"
+        },
+        "conditionType": {
+          "type": "string",
+          "description": "Type of the condition used.",
+          "$ref": "#/definitions/RoutePolicyConditionType"
         },
         "ipPrefixId": {
           "type": "string",
@@ -875,6 +877,20 @@
             "description": "ARM Resource ID of IP Extended Community."
           }
         }
+      }
+    },
+    "RoutePolicyConditionType": {
+      "type": "string",
+      "description": "Type of the condition used.",
+      "default": "Or",
+      "minLength": 1,
+      "enum": [
+        "Or",
+        "And"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "RoutePolicyConditionType"
       }
     }
   },
