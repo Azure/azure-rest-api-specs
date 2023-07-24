@@ -36,7 +36,7 @@ namespace Easm {
     enum Versions {
         @doc("Version 2023-03-01-preview")
         @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-        `2023-03-01-preview`,
+        v2023_03_01_preview: "2023-03-01-preview"
     }
 
     @tag("Assets")
