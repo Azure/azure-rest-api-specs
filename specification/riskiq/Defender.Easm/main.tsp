@@ -84,10 +84,8 @@ namespace Easm {
         @doc("Validate a data connection with a given dataConnection name.")
         @post
         ValidateDataConnection is Foundations.Operation<{
-          ...SkipParameter, 
-          ...MarkParameter, 
           ...DataConnectionRequest}, 
-          DataConnectionResponse, {}, ErrorResponse>;
+          ValidateResponse, {}, ErrorResponse>;
 
         @route("/dataConnections/{dataConnectionName}")
         @doc("Retrieve a data connection with a given dataConnectionName.")
@@ -128,7 +126,6 @@ namespace Easm {
         @doc("Validate a discovery group with a given groupName.")
         @post
         ValidateDiscoveryGroup is Foundations.Operation<{
-          ...DiscoGroupNameParameter,
           ...DiscoGroupRequest
         }, ValidateResponse, {}, ErrorResponse>;
 
