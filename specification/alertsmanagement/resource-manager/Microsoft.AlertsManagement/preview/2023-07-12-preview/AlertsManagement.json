@@ -382,26 +382,82 @@
             "$ref": "#/parameters/alertId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "OK. Returns the attachments of the specified alert.",
             "schema": {
-              "$ref": "#/definitions/alertEnrichmentProperties"
+              "$ref": "#/definitions/alertEnrichmentResponse"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/AlertsManagementErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "Resolve": {
-            "$ref": "./examples/Alerts_Enrichment.json"
+            "$ref": "./examples/Alerts_Enrichment_resource_scope.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alerts/{alertId}/enrichments": {
+      "get": {
+        "operationId": "Alerts_GetEnrichments",
+        "description": "Get the enrichments of an alert.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/alertId"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Returns the attachments of the specified alert.",
+            "schema": {
+              "$ref": "#/definitions/alertEnrichmentResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Resolve": {
+            "$ref": "./examples/Alerts_Enrichment_subscription_scope.json"
           }
         }
       }
@@ -1540,22 +1596,48 @@
         }
       }
     },
-    "alertEnrichmentProperties": {
+    "alertEnrichmentResponse": {
       "type": "object",
-      "description": "Alert enrichment properties.",
+      "description": "List of alert enrichments.",
+      "required": [
+        "value"
+      ],
       "properties": {
-        "enrichments": {
+        "value": {
           "type": "array",
           "description": "Enrichments details",
           "items": {
-            "$ref": "#/definitions/alertEnrichmentItem"
+            "$ref": "#/definitions/alertEnrichmentResource"
           }
+        },
+        "nextLink": {
+          "description": "URL to fetch the next set of enrichments.",
+          "type": "string"
         }
       }
     },
-    "alertEnrichmentItem": {
+    "alertEnrichmentResource": {
       "type": "object",
-      "description": "Enrichment object.",
+      "description": "A single alert enrichment resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/alertEnrichmentProperties",
+          "x-ms-client-flatten": true,
+          "description": "alert enrichment properties."
+        }
+      }
+    },
+    "alertEnrichmentProperties": {
+      "type": "object",
+      "description": "Alert enrichment properties.",
       "discriminator": "type",
       "required": [
         "title",
@@ -1594,7 +1676,7 @@
         }
       }
     },
-    "PrometheusEnrichmentItem": {
+    "PrometheusEnrichmentResource": {
       "type": "object",
       "description": "Prometheus enrichment object.",
       "required": [
@@ -1605,7 +1687,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/alertEnrichmentItem"
+          "$ref": "#/definitions/alertEnrichmentResource"
         }
       ],
       "properties": {
@@ -1640,7 +1722,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/PrometheusEnrichmentItem"
+          "$ref": "#/definitions/PrometheusEnrichmentResource"
         }
       ],
       "properties": {
@@ -1660,7 +1742,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/PrometheusEnrichmentItem"
+          "$ref": "#/definitions/PrometheusEnrichmentResource"
         }
       ],
       "properties": {

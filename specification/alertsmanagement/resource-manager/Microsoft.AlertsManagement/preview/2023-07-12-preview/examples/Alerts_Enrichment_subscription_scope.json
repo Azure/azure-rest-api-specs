@@ -1,0 +1,133 @@
+{
+  "parameters": {
+    "api-version": "2023-07-12-preview",
+    "subscriptionId": "9e261de7-c804-4b9d-9ebf-6f50fe350a9a",
+    "alertId": "66114d64-d9d9-478b-95c9-b789d6502101"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "id": "/subscriptions/a07b1ff7-1921-42ae-890f-ae02684f4c86/resourceGroups/runnerresources/providers/Microsoft.AlertsManagement/alerts/18a42e4c-619f-44c6-a3a2-3883f727cb11/attachments/215cbeac-b800-8822-d698-30b11029c5d6",
+            "name": "NodeRecordingRulesRuleGroup",
+            "type": "Microsoft.AlertsManagement/alerts/enrichments",
+            "properties": {
+              "title": "Number of OOM killed events by container",
+              "description": "Enrichment description",
+              "status": "Succeeded",
+              "type": "PrometheusInstantQuery",
+              "grafanaExplorePath": "/explore?left=%7B%22datasource%22...",
+              "linkToApi": "",
+              "datasources": [
+                "/subscriptions/72fa99ef-9c84-4a7c-b343-ec62da107d81/resourceGroups/SyntheticRules/providers/microsoft.monitor/accounts/canaryamw"
+              ],
+              "query": "sum by (cluster,container,replicaset,namespace)(label_replace( kube_pod_container_status_last_terminated_reason{reason='OOMKilled', cluster='cluster1', namespace='namespace1'}'}, 'replicaset', '$1', 'pod', '(.*)(-[a-z0-9]{5})$')) > 0",
+              "time": "2015-07-01T20:10:51.781Z"
+            }
+          },
+          {
+            "id": "/subscriptions/a07b1ff7-1921-42ae-890f-ae02684f4c86/resourceGroups/runnerresources/providers/Microsoft.AlertsManagement/alerts/18a42e4c-619f-44c6-a3a2-3883f727cb11/attachments/215cbeac-b800-8822-d698-30b11029c5d6",
+            "name": "NodeRecordingRulesRuleGroup",
+            "type": "Microsoft.AlertsManagement/alerts/enrichments",
+            "properties": {
+              "title": "Number of OOM killed events by container",
+              "description": "Enrichment description",
+              "status": "Pending",
+              "type": "PrometheusInstantQuery",
+              "linkToApi": "",
+              "grafanaExplorePath": "/explore?left=%7B%22datasource%22...",
+              "datasources": [
+                "/subscriptions/72fa99ef-9c84-4a7c-b343-ec62da107d81/resourceGroups/SyntheticRules/providers/microsoft.monitor/accounts/canaryamw"
+              ],
+              "query": "topK(5, sum by (cluster,container,pod,namespace)(kube_pod_container_status_last_terminated_reason{reason='OOMKilled', cluster='cluster1', namespace='namespace' , container='[#$.enrichmentQueries.2a.result[0].labels.container#]'))",
+              "time": "2015-07-01T20:10:51.781Z"
+            }
+          },
+          {
+            "id": "/subscriptions/a07b1ff7-1921-42ae-890f-ae02684f4c86/resourceGroups/runnerresources/providers/Microsoft.AlertsManagement/alerts/18a42e4c-619f-44c6-a3a2-3883f727cb11/attachments/215cbeac-b800-8822-d698-30b11029c5d6",
+            "name": "NodeRecordingRulesRuleGroup",
+            "type": "Microsoft.AlertsManagement/alerts/enrichments",
+            "properties": {
+              "title": "Number of OOM killed events by container",
+              "description": "Enrichment description",
+              "status": "Succeeded",
+              "type": "PrometheusRangeQuery",
+              "linkToApi": "",
+              "grafanaExplorePath": "/explore?left=%7B%22datasource%22...",
+              "datasources": [
+                "/subscriptions/72fa99ef-9c84-4a7c-b343-ec62da107d81/resourceGroups/SyntheticRules/providers/microsoft.monitor/accounts/canaryamw"
+              ],
+              "query": "sum by (cluster,container,replicaset,namespace)(label_replace( kube_pod_container_status_last_terminated_reason{reason='OOMKilled', cluster='cluster1', namespace='namespace1'}'}, 'replicaset', '$1', 'pod', '(.*)(-[a-z0-9]{5})$')) > 0",
+              "start": "2015-07-01T20:10:51.781Z",
+              "end": "2015-07-01T20:20:51.781Z",
+              "step": "PT15S"
+            }
+          },
+          {
+            "id": "/subscriptions/a07b1ff7-1921-42ae-890f-ae02684f4c86/resourceGroups/runnerresources/providers/Microsoft.AlertsManagement/alerts/18a42e4c-619f-44c6-a3a2-3883f727cb11/attachments/215cbeac-b800-8822-d698-30b11029c5d6",
+            "name": "NodeRecordingRulesRuleGroup",
+            "type": "Microsoft.AlertsManagement/alerts/enrichments",
+            "properties": {
+              "title": "Number of OOM killed events by container",
+              "description": "Enrichment description",
+              "status": "Succeeded",
+              "type": "PrometheusRangeQuery",
+              "linkToApi": "",
+              "grafanaExplorePath": "/explore?left=%7B%22datasource%22...",
+              "datasources": [
+                "/subscriptions/72fa99ef-9c84-4a7c-b343-ec62da107d81/resourceGroups/SyntheticRules/providers/microsoft.monitor/accounts/canaryamw"
+              ],
+              "query": "sum by (cluster,container,replicaset,namespace)(label_replace( kube_pod_container_status_last_terminated_reason{reason='OOMKilled', cluster='cluster1', namespace='namespace'}'}, 'replicaset', '$1', 'pod', '(.*)(-[a-z0-9]{5})$')) > 0",
+              "start": "2015-07-01T20:10:51.781Z",
+              "end": "2015-07-01T20:20:51.781Z",
+              "step": "PT15S"
+            }
+          },
+          {
+            "id": "/subscriptions/a07b1ff7-1921-42ae-890f-ae02684f4c86/resourceGroups/runnerresources/providers/Microsoft.AlertsManagement/alerts/18a42e4c-619f-44c6-a3a2-3883f727cb11/attachments/215cbeac-b800-8822-d698-30b11029c5d6",
+            "name": "NodeRecordingRulesRuleGroup",
+            "type": "Microsoft.AlertsManagement/alerts/enrichments",
+            "properties": {
+              "title": "Number of OOM killed events by container",
+              "description": "Enrichment description",
+              "status": "Failed",
+              "type": "PrometheusRangeQuery",
+              "linkToApi": "",
+              "grafanaExplorePath": "/explore?left=%7B%22datasource%22...",
+              "errorMessage": "Calling Prometheus query API failed",
+              "datasources": [
+                "/subscriptions/72fa99ef-9c84-4a7c-b343-ec62da107d81/resourceGroups/SyntheticRules/providers/microsoft.monitor/accounts/canaryamw"
+              ],
+              "query": "sum by (cluster,container,replicaset,namespace)(label_replace( kube_pod_container_status_last_terminated_reason{reason='OOMKilled', cluster='cluster1', namespace='namespace'}'}, 'replicaset', '$1', 'pod', '(.*)(-[a-z0-9]{5})$')) > 0",
+              "start": "2015-07-01T20:10:51.781Z",
+              "end": "2015-07-01T20:20:51.781Z",
+              "step": "PT15S"
+            }
+          },
+          {
+            "id": "/subscriptions/a07b1ff7-1921-42ae-890f-ae02684f4c86/resourceGroups/runnerresources/providers/Microsoft.AlertsManagement/alerts/18a42e4c-619f-44c6-a3a2-3883f727cb11/attachments/215cbeac-b800-8822-d698-30b11029c5d6",
+            "name": "NodeRecordingRulesRuleGroup",
+            "type": "Microsoft.AlertsManagement/alerts/enrichments",
+            "properties": {
+              "title": "Number of OOM killed events by container",
+              "description": "Enrichment description",
+              "status": "InProgress",
+              "type": "PrometheusRangeQuery",
+              "linkToApi": "",
+              "grafanaExplorePath": "/explore?left=%7B%22datasource%22...",
+              "datasources": [
+                "/subscriptions/72fa99ef-9c84-4a7c-b343-ec62da107d81/resourceGroups/SyntheticRules/providers/microsoft.monitor/accounts/canaryamw"
+              ],
+              "query": "sum by (cluster,container,replicaset,namespace)(label_replace( kube_pod_container_status_last_terminated_reason{reason='OOMKilled', cluster='cluster1', namespace='namespace'}'}, 'replicaset', '$1', 'pod', '(.*)(-[a-z0-9]{5})$')) > 0",
+              "start": "2015-07-01T20:10:51.781Z",
+              "end": "2015-07-01T20:20:51.781Z",
+              "step": "PT15S"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
