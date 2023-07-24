@@ -465,6 +465,12 @@
           "format": "int64",
           "type": "integer",
           "readOnly": true
+        },
+        "durationTrafficInSeconds": {
+          "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance with current traffic conditions. This value is always provided for the complete route and does not depend on the availability of traffic information.",
+          "format": "int64",
+          "type": "integer",
+          "readOnly": true
         }
       }
     },
@@ -866,6 +872,12 @@
         },
         "durationInSeconds": {
           "description": "Estimated travel time in seconds property that includes the delay due to real-time traffic. Note that even when traffic=false travelTimeInSeconds still includes the delay due to traffic. If DepartAt is in the future, travel time is calculated using time-dependent historic traffic data.",
+          "format": "int64",
+          "type": "integer",
+          "readOnly": true
+        },
+        "durationTrafficInSeconds": {
+          "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance with current traffic conditions. This value is always provided for the complete route and does not depend on the availability of traffic information.",
           "format": "int64",
           "type": "integer",
           "readOnly": true
