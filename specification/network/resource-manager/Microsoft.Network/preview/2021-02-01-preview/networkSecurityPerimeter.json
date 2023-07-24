@@ -462,7 +462,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NspAccessRule"
+              "$ref": "#/definitions/NspAccessRulePutRequest"
             },
             "description": "Parameters that hold the NspAccessRule resource to be created/updated."
           }
@@ -1081,48 +1081,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}/reconcile": {
-      "parameters": [
-        {
-          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
-        },
-        {
-          "$ref": "#/parameters/LinkNameParameter"
-        },
-        {
-          "$ref": "./network.json#/parameters/ApiVersionParameter"
-        }
-      ],
-      "post": {
-        "tags": [
-          "NspLinkReconcile"
-        ],
-        "operationId": "NspLinkReconcile_Post",
-        "description": "Reconcile NSP link resource.",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NspLinkReconcile": {
-            "$ref": "./examples/NspLinkReconcile.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}": {
       "parameters": [
         {
@@ -1254,48 +1212,6 @@
         "x-ms-examples": {
           "NspLinkReferenceList": {
             "$ref": "./examples/NspLinkReferenceList.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}/reconcile": {
-      "parameters": [
-        {
-          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
-        },
-        {
-          "$ref": "#/parameters/LinkReferenceNameParameter"
-        },
-        {
-          "$ref": "./network.json#/parameters/ApiVersionParameter"
-        }
-      ],
-      "post": {
-        "tags": [
-          "NspLinkReferenceReconcile"
-        ],
-        "operationId": "NspLinkReferenceReconcile_Post",
-        "description": "Reconcile NSP linkReference resource.",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NspLinkReferenceReconcile": {
-            "$ref": "./examples/NspLinkReferenceReconcile.json"
           }
         }
       }
@@ -1432,12 +1348,12 @@
       },
       "description": "Properties of NSP profile."
     },
-    "NspAccessRule": {
+    "NspAccessRulePutRequest": {
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NspAccessRuleProperties",
+          "$ref": "#/definitions/NspAccessRulePutRequestProperties",
           "description": "Properties of the NSP access rule."
         },
         "name": {
@@ -1462,6 +1378,24 @@
       ],
       "description": "The NSP access rule resource"
     },
+    "NspAccessRule": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/NspAccessRulePutRequest"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "x-ms-client-flatten": true,
+              "$ref": "#/definitions/NspAccessRuleProperties",
+              "description": "Properties of the NSP access rule."
+            }
+          }
+        }
+      ],
+      "description": "The NSP access rule resource"
+    },
     "NspAccessRuleListResult": {
       "type": "object",
       "properties": {
@@ -1479,7 +1413,7 @@
       },
       "description": "Result of the request to list NSP access rules. Contains a list of NSP access rules and a URL link to get the next set of results."
     },
-    "NspAccessRuleProperties": {
+    "NspAccessRulePutRequestProperties": {
       "type": "object",
       "properties": {
         "provisioningState": {
@@ -1520,16 +1454,29 @@
             "$ref": "#/definitions/SubscriptionId"
           },
           "description": "List of subscription ids"
-        },
-        "networkSecurityPerimeters": {
-          "type": "array",
-          "items": {
-            "x-ms-client-flatten": true,
-            "$ref": "#/definitions/PerimeterBasedAccessRule"
-          },
-          "description": "Inbound rule specified by the perimeter id."
         }
       },
+      "description": "Properties of NSP access rule for Put request."
+    },
+    "NspAccessRuleProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/NspAccessRulePutRequestProperties"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "networkSecurityPerimeters": {
+              "type": "array",
+              "items": {
+                "x-ms-client-flatten": true,
+                "$ref": "#/definitions/PerimeterBasedAccessRule"
+              },
+              "description": "Inbound rule specified by the perimeter id."
+            }
+          }
+        }
+      ],
       "description": "Properties of NSP access rule."
     },
     "SubscriptionId": {
