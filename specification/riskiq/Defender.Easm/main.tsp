@@ -45,7 +45,7 @@ namespace Easm {
         @route("/assets")
         @doc("Retrieve a list of assets for the provided search parameters.")
         @get
-        List is Foundations.Operation<{
+        ListAssets is Foundations.Operation<{
           ...FilterParameter, 
           ...OrderByParameter, 
           ...SkipParameter, 
@@ -56,7 +56,7 @@ namespace Easm {
         @route("/assets")
         @doc("Update labels on assets matching the provided filter.")
         @post
-        Update is Foundations.Operation<{
+        UpdateAssets is Foundations.Operation<{
           ...RequiredFilterParameter,
           ...AssetUpdateRequest}, 
           TaskResponse, {}, ErrorResponse>;
@@ -64,7 +64,7 @@ namespace Easm {
         @route("/assets/{assetId}")
         @doc("Retrieve an asset by assetId.")
         @get
-        Get is Foundations.Operation<{
+        GetAsset is Foundations.Operation<{
           ...AssetIdParameter}, 
           AssetResponse, {}, ErrorResponse>;
     }
@@ -75,7 +75,7 @@ namespace Easm {
         @route("/dataConnections")
         @doc("Retrieve a list of data connections.")
         @get
-        List is Foundations.Operation<{
+        ListDataConnections is Foundations.Operation<{
           ...SkipParameter, 
           ...MarkParameter}, 
           DataConnectionPageResponse, {}, ErrorResponse>;
@@ -83,7 +83,7 @@ namespace Easm {
         @route("/dataConnections:validate")
         @doc("Validate a data connection with a given dataConnection name.")
         @post
-        Validate is Foundations.Operation<{
+        ValidateDataConnection is Foundations.Operation<{
           ...SkipParameter, 
           ...MarkParameter, 
           ...DataConnectionRequest}, 
@@ -92,14 +92,14 @@ namespace Easm {
         @route("/dataConnections/{dataConnectionName}")
         @doc("Retrieve a data connection with a given dataConnectionName.")
         @get
-        Get is Foundations.Operation<{
+        GetDataConnection is Foundations.Operation<{
           ...DataConnectionNameParameter}, 
           DataConnectionResponse, {}, ErrorResponse>;
 
         @route("/dataConnections/{dataConnectionName}")
         @doc("Create or update a data connection with a given dataConnectionName.")
         @put
-        Put is Foundations.Operation<{
+        PutDataConnection is Foundations.Operation<{
           ...DataConnectionNameParameter, 
           ...DataConnectionRequest}, 
           DataConnectionResponse, {}, ErrorResponse>;
@@ -107,7 +107,7 @@ namespace Easm {
         @route("/dataConnections/{dataConnectionName}")
         @doc("Delete a data connection with a given dataConnectionName.")
         @delete
-        Delete is Foundations.Operation<{
+        DeleteDataConnection is Foundations.Operation<{
           ...DataConnectionNameParameter}, 
           NoContentResponse, {}, ErrorResponse>;
     }
@@ -118,7 +118,7 @@ namespace Easm {
         @route("/discoGroups")
         @doc("Retrieve a list of discovery group for the provided search parameters.")
         @get
-        List is Foundations.Operation<{
+        ListDiscoveryGroups is Foundations.Operation<{
           ...FilterParameter,
           ...SkipParameter,
           ...MaxPageSizeParameter
@@ -127,7 +127,7 @@ namespace Easm {
         @route("/discoGroups:validate")
         @doc("Validate a discovery group with a given groupName.")
         @post
-        Validate is Foundations.Operation<{
+        ValidateDiscoveryGroup is Foundations.Operation<{
           ...DiscoGroupNameParameter,
           ...DiscoGroupRequest
         }, ValidateResponse, {}, ErrorResponse>;
@@ -135,14 +135,14 @@ namespace Easm {
         @route("/discoGroups/{groupName}")
         @doc("Retrieve a discovery group with a given groupName.")
         @get
-        Get is Foundations.Operation<{
+        GetDiscoveryGroup is Foundations.Operation<{
           ...DiscoGroupNameParameter
         }, DiscoGroupResponse, {}, ErrorResponse>;
 
         @route("/discoGroups/{groupName}")
         @doc("Create a discovery group with a given groupName.")
         @put
-        Put is Foundations.Operation<{
+        PutDiscoveryGroup is Foundations.Operation<{
           ...DiscoGroupNameParameter,
           ...DiscoGroupRequest
         }, DiscoGroupResponse, {}, ErrorResponse>;
@@ -150,7 +150,7 @@ namespace Easm {
         @route("/discoGroups/{groupName}:run")
         @doc("Run a discovery group with a given groupName.")
         @post
-        Run is Foundations.Operation<{
+        RunDiscoveryGroup is Foundations.Operation<{
           ...DiscoGroupNameParameter
         }, NoContentResponse, {}, ErrorResponse>;
 
@@ -171,7 +171,7 @@ namespace Easm {
         @route("/discoTemplates")
         @doc("Retrieve a list of disco templates for the provided search parameters.")
         @get
-        List is Foundations.Operation<{
+        ListDiscoveryTemplates is Foundations.Operation<{
           ...FilterParameter,
           ...SkipParameter,
           ...MaxPageSizeParameter
@@ -180,7 +180,7 @@ namespace Easm {
         @route("/discoTemplates/{templateId}")
         @doc("Retrieve a disco template with a given templateId.")
         @get
-        Get is Foundations.Operation<{
+        GetDiscoveryTemplate is Foundations.Operation<{
           ...DiscoTemplateIdParameter
         }, DiscoTemplateResponse, {}, ErrorResponse>;
     }
@@ -191,19 +191,19 @@ namespace Easm {
         @route("/reports/assets:getBillable")
         @doc("Get billable assets summary for the workspace.")
         @post
-        Billable is Foundations.Operation<{},ReportBillableAssetSummaryResponse, {}, ErrorResponse>;
+        BillableReports is Foundations.Operation<{},ReportBillableAssetSummaryResponse, {}, ErrorResponse>;
 
         @route("/reports/assets:getSnapshot")
         @doc("Get the most recent snapshot of asset summary values for the snapshot request.")
         @post
-        Snapshot is Foundations.Operation<{
+        SnapshotReports is Foundations.Operation<{
           ...ReportAssetSnapshotRequest
         }, ReportAssetSnapshotResponse, {}, ErrorResponse>;
 
         @route("/reports/assets:getSummary")
         @doc("Get asset summary details for the summary request.")
         @post
-        Summary is Foundations.Operation<{
+        SummaryReports is Foundations.Operation<{
           ...ReportAssetSummaryRequest
         }, ReportAssetSummaryResponse, {}, ErrorResponse>
     }
@@ -214,7 +214,7 @@ namespace Easm {
         @route("/savedFilters")
         @doc("Retrieve a list of saved filters for the provided search parameters.")
         @get
-        List is Foundations.Operation<{
+        ListSavedFilters is Foundations.Operation<{
           ...FilterParameter,
           ...SkipParameter,
           ...MaxPageSizeParameter
@@ -223,14 +223,14 @@ namespace Easm {
         @route("/savedFilters/{filterName}")
         @doc("Retrieve a saved filter by filterName.")
         @get
-        Get is Foundations.Operation<{
+        GetSavedFilter is Foundations.Operation<{
           ...SavedFilterNameParameter
         }, SavedFilterResponse, {}, ErrorResponse>;
 
         @route("/savedFilters/{filterName}")
         @doc("Create or update a saved filter with a given filterName.")
         @put
-        Put is Foundations.Operation<{
+        PutSavedFilter is Foundations.Operation<{
           ...SavedFilterNameParameter,
           ...SavedFilterRequest
         }, SavedFilterResponse, {}, ErrorResponse>;
@@ -238,7 +238,7 @@ namespace Easm {
         @route("/savedFilters/{filterName}")
         @doc("Delete a saved filter with a given filterName.")
         @delete
-        Delete is Foundations.Operation<{
+        DeleteSavedFilter is Foundations.Operation<{
           ...SavedFilterNameParameter
         }, NoContentResponse, {}, ErrorResponse>;
     }
@@ -249,7 +249,7 @@ namespace Easm {
         @route("/tasks")
         @doc("Retrieve a list of tasks for the provided search parameters.")
         @get
-        List is Foundations.Operation<{
+        ListTasks is Foundations.Operation<{
           ...FilterParameter, 
           ...OrderByParameter, 
           ...SkipParameter, 
@@ -259,14 +259,14 @@ namespace Easm {
         @route("/tasks/{taskId}")
         @doc("Retrieve a task by taskId.")
         @get
-        Get is Foundations.Operation<{
+        GetTask is Foundations.Operation<{
           ...TaskIdParameter
         }, TaskResponse, {}, ErrorResponse>;
 
         @route("/tasks/{taskId}:cancel")
         @doc("Cancel a task by taskId.")
         @post
-        Cancel is Foundations.Operation<{
+        CancelTasks is Foundations.Operation<{
           ...TaskIdParameter
         }, TaskResponse, {}, ErrorResponse>;
     }
@@ -424,7 +424,7 @@ namespace Easm {
         externalId?: string;
 
         @doc("Any Labels to update the asset with.")
-        labels?: {};
+        labels?: Record<boolean>;
 
         @doc("A list of asset types to cascade the updates to.")
         transfers?: AssetUpdateTransfers;
@@ -975,7 +975,7 @@ namespace Easm {
         code?: string;
 
         @doc("This is an additional field representing the value that caused the error to help with debugging.")
-        value?: {};
+        value?: unknown;
     }
 
     @doc("InventoryAsset")
@@ -1577,7 +1577,7 @@ namespace Easm {
         reason?: string;
 
         @doc("Attributes unique to the task.  This differs by task type.")
-        metadata?: {};
+        metadata?: unknown;
     }
 
     @doc("ValidateResponse")
