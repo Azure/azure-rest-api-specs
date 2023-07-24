@@ -109,11 +109,16 @@ directive:
   - suppress: R4007 # to suppress (DefaultErrorResponseSchema)
     reason: Update the default error response to a new format would be a braking change for service.
 ```
+  - code: MISSING_APIS_IN_DEFAULT_TAG
+    reason: 2023-06-01-preview api version is new added for HDIsight on Aks.
 
 ### Tag: package-hdinsightonaks-2023-06-preview
 These settings apply only when `--tag=package-hdinsightonaks-2023-06-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-hdinsightonaks-2023-06-preview'
+openapi-type: arm
+openapi-subtype: rpaas
+azure-arm: true
 input-file:
   - Microsoft.HDInsight/HDInsightOnAks/preview/2023-06-01-preview/hdinsight.json
 ```
