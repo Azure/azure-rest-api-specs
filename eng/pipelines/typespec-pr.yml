@@ -24,6 +24,7 @@ jobs:
       $(Build.SourcesDirectory)/eng/scripts/Validate-TypeSpec.ps1 `
         $(Build.SourcesDirectory) `
         "origin/${env:SYSTEM_PULLREQUEST_TARGETBRANCH}" `
-        "${env:SYSTEM_PULLREQUEST_SOURCECOMMITID}"
+        "${env:SYSTEM_PULLREQUEST_SOURCECOMMITID}" `
+        -GitClean
     displayName: Validate Impacted Specs
     condition: succeededOrFailed()
