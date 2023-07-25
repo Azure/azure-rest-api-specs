@@ -48,6 +48,17 @@ export async function main() {
   const folder = parsedArgs.positionals[0];
   console.log("Running TypeSpecValidation on folder:", folder);
 
+  // Verify specs' path requirements
+  let leafDir = folder.substring(folder.lastIndexOf(path.sep) + 1);
+  if (leafDir.includes(".") && !/\w\.[A-Z]/.test(leafDir)) {
+    throw new Error(
+      "Please rename the folder " +
+        leafDir +
+        " to " +
+        leafDir.replace(/\.\w/g, (l) => l.toUpperCase())
+    );
+  }
+
   // Verify all specs are using root level pacakge.json
   let expected_npm_prefix = process.cwd();
   const actual_npm_prefix = (await runCmd(`npm prefix`, folder)).trim();
