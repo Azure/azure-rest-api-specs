@@ -59,88 +59,112 @@ model NetworkFunctionResourceProperties {
 
 @armResourceOperations(NetworkFunctionResource)
 interface NetworkFunctions {
-    get is ArmResourceRead<NetworkFunctionResource>;
-    createOrUpdate is ArmResourceCreateOrUpdateSync<NetworkFunctionResource>; 
-    updateTags is ArmTagsPatchSync<NetworkFunctionResource>;               
-    delete is ArmResourceDeleteSync<NetworkFunctionResource>;         
-    listByResourceGroup is ArmResourceListByParent<NetworkFunctionResource>;
-    listBySubscription is ArmListBySubscription<NetworkFunctionResource>;
+  get is ArmResourceRead<NetworkFunctionResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateSync<NetworkFunctionResource>;
+  updateTags is ArmTagsPatchSync<NetworkFunctionResource>;
+  delete is ArmResourceDeleteSync<NetworkFunctionResource>;
+  listByResourceGroup is ArmResourceListByParent<NetworkFunctionResource>;
+  listBySubscription is ArmListBySubscription<NetworkFunctionResource>;
 }
 
 @doc("SKU Definitions")
 enum SkuDefinitions {
   @doc("Azure Lab SKU")
   AzureLab,
+
   @doc("Azure Production SKU")
   AzureProduction,
+
   @doc("Nexus Lab SKU")
   NexusLab,
+
   @doc("Nexus Production SKU")
-  NexusProduction
+  NexusProduction,
 }
 
 @doc("Type of Network Function")
 enum NetworkFunctionType {
   @doc("Access and Mobility Function")
   AMF,
+
   @doc("Session Management Function")
   SMF,
+
   @doc("User Plane Function")
   UPF,
+
   @doc("Network Repository Function")
   NRF,
+
   @doc("Network Slice Selection Function")
   NSSF,
+
   @doc("Mobility Management Entity")
   MME,
+
   @doc("System Architecture Evolution Gateway Control Plane, control and user plane separation (CUPS) architecture")
   SaegwControlPlane,
+
   @doc("System Architecture Evolution Gateway User Plane, control and user plane separation (CUPS) architecture")
   SaegwUserPlane,
+
   @doc("System Architecture Evolution Gateway.  This combines the Serving Gateway (SGW) and the Packet Data Network Gateway (PGW) functionality")
   Saegw,
+
   @doc("Evolved Packet Data Gateway")
   ePDG,
+
   @doc("Non-3GPP Interworking Function")
   N3IWF,
+
   @doc("Remote Platform As A Service Components")
   RemotePaaS,
+
   @doc("Element Management System")
   EMS,
+
   @doc("Operations and Policy Manager")
-  OperationsPolicyManager
+  OperationsPolicyManager,
 }
 
 @doc("Network Function Administrative State enumerations")
 enum NetworkFunctionAdministrativeState {
   @doc("Resource has been commissioned")
   Commissioned,
+
   @doc("Resource has been decommissioned")
-  Decommissioned
+  Decommissioned,
 }
 
 @doc("Network Function Operational Status enumerations")
 enum NetworkFunctionOperationalStatus {
   @doc("Resource is inactive")
   Inactive,
+
   @doc("Resource has been deployed, awaiting provisioning")
   InstantiatedNotProvisioned,
+
   @doc("Resource has been deployed and provisioned, awaiting testing")
   InstantiatedProvisioned,
+
   @doc("Resource is fully deployed and operational")
-  Active
+  Active,
 }
 
 @doc("Provisioning state of the resource")
 @Azure.Core.lroStatus
 enum ProvisioningState {
   ...ResourceProvisioningState,
+
   @doc("Resource is getting provisioned")
   Provisioning,
+
   @doc("Resource is updating")
   Updating,
+
   @doc("Resource is getting deleted")
   Deleting,
+
   @doc("Resource has been accepted")
   Accepted,
 }
