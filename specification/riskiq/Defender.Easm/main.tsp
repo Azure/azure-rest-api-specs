@@ -70,18 +70,6 @@ namespace Easm {
             ...AssetIdParameter,
             ...ApiVersionParameter,
         ): AssetResponse | ErrorResponse;
-
-        @route("/assets/{assetId}/observations")
-        @doc("Retrieve observations on an asset.")
-        @get
-        op Assets_Observations(
-            ...AssetIdParameter,
-            ...FilterParameter,
-            ...OrderByParameter,
-            ...SkipParameter,
-            ...MaxPageSizeParameter,
-            ...ApiVersionParameter,
-        ): ObservationPageResponse | ErrorResponse;
     }
 
     @tag("Data Connections")
@@ -1112,20 +1100,6 @@ namespace Easm {
 
         @doc("log analytics workspace id")
         workspaceId?: string;
-    }
-
-    @doc("ObservationPageResponse")
-    model ObservationPageResponse {
-        @statusCode statusCode: 200;
-
-        @doc("The total number of items available in the full result set.")
-        totalElements?: int64;
-
-        @doc("The link to access the next page of results.  Not set if at the end of the result set.")
-        nextLink?: string;
-
-        @doc("The items in the current page of results.")
-        value?: ObservationResponse[];
     }
 
     @doc("ObservationResponse")
