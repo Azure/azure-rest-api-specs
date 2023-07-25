@@ -1102,15 +1102,6 @@ namespace Easm {
         workspaceId?: string;
     }
 
-    @doc("ObservationResponse")
-    model ObservationResponse {
-        name?: string;
-        type?: string[];
-        priority?: ObservationPriority;
-        cvssScoreV2?: float32;
-        cvssScoreV3?: float32;
-    }
-
     @doc("ObservedBoolean")
     model ObservedBoolean {
         value?: boolean;
@@ -1628,13 +1619,6 @@ namespace Easm {
         domain,
         host,
         ipAddress,
-    }
-
-    enum ObservationPriority {
-        high,
-        medium,
-        low,
-        none,
     }
 
     enum TaskState {
