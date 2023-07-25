@@ -18,10 +18,10 @@ using OpenAPI;
 // Supported operations.
 //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups?api-version={apiVersion}
 //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/$schemas/{id}?api-version={apiVersion}
-//  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{schemaName}/versions/?api-version={apiVersion}
-//  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{schemaName}/versions/{schemaVersion}?api-version={apiVersion}
-//  POST https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{schemaName}/:get-id?api-version={apiVersion}
-//  PUT https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{schemaName}?api-version={apiVersion}
+//  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}/versions/?api-version={apiVersion}
+//  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}/versions/{schemaVersion}?api-version={apiVersion}
+//  POST https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}/:get-id?api-version={apiVersion}
+//  PUT https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}?api-version={apiVersion}
 @server(
   "{endpoint}",
   "The Schema Registry service endpoint.",
@@ -73,20 +73,20 @@ interface SchemaOperations {
   @doc("Gets a registered schema by its unique ID.  Azure Schema Registry guarantees that ID is unique within a namespace. Operation response type is based on serialization of schema requested.")
   // TODO: add x-ms-examples
   // TODO: add response specifics
-  getSchemaById is resourceOperations.ResourceRead<SchemaId>;
+  getSchemaById is resourceOperations.ResourceRead<SchemaId & SchemaContentType>;
 
-  //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{schemaName}/versions/?api-version={apiVersion}
+  //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}/versions/?api-version={apiVersion}
   @summary("List schema versions.")
   @doc("Gets the list of all versions of one schema.")
   // TODO: add x-ms-examples
   // TODO: add response specifics
   op listSchemaVersions is resourceOperations.ResourceList<Version>;
 
-  //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{schemaName}/versions/{schemaVersion}?api-version={apiVersion}
+  //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}/versions/{schemaVersion}?api-version={apiVersion}
   @summary("Get specific schema versions.")
   @doc("Gets one specific version of one schema.")
   op getSchemaByVersion is resourceOperations.ResourceRead<Version>;
-  //  POST https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{schemaName}:get-id?api-version={apiVersion}
+  //  POST https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}:get-id?api-version={apiVersion}
   @summary("Get ID for existing schema.")
   @doc("Gets the ID referencing an existing schema within the specified schema group, as matched by schema content comparison.")
   @action("get-id")
@@ -110,36 +110,19 @@ interface SchemaOperations {
     }
   >;
 
-  //  PUT https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{schemaName}?api-version={apiVersion}
-  @summary("Register schema.")
-  @doc("Registers")
+  //  PUT https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}?api-version={apiVersion}
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Register operation does not use create/replace naming"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Register operation does not use standard createOrReplace operation."
+  @summary("Register new schema")
+  @doc("Register new schema. If schema of specified name does not exist in specified group, schema is created at version 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.\n")
+  @route("/$schemaGroups/{groupName}/schemas/{name}")
+  @put
   // TODO: add x-ms-examples
   // TODO: add response specifics
-  op registerSchema is resourceOperations.ResourceCreateOrReplace<Schema>;
-
-// TODO: probably above won't work, so figure out how to specify parameters below
-// parameters both in the route + body
-//  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Register operation does not use create/replace"
-//  @summary("Register new schema")
-//  @doc("Register new schema. If schema of specified name does not exist in specified group, schema is created at version 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.\n")
-//  // TODO: how to specify route params?
-//  //@route("/$schemaGroups/{groupName}/schemas/{schemaName}")
-//  @put
-//  // TODO: add x-ms-examples
-//  // TODO: add response specifics
-//  op registerSchema is Azure.Core.Foundations.Operation<
-//    {
-//      ...SchemaContentType;
-//      // request parameters
-//      ...SchemaGroup;
-//      ...Schema;
-//
-//      //@doc("String representation (UTF-8) of the registered schema.")
-//      //@body
-//      //schemaContent: bytes;
-//    },
-//    SchemaHeaders & Azure.Core.Foundations.ErrorResponse
-//  >;
+  op registerSchema is Azure.Core.Foundations.Operation<
+    Azure.Core.Foundations.ItemKeysOf<Schema> & Body<bytes> & SchemaContentType,
+    Foundations.ResourceOkResponse<SchemaHeaders & Schema> | Foundations.ResourceCreatedResponse<SchemaHeaders & Schema>
+  >;
 }
 
 // Models
@@ -200,18 +183,16 @@ model SchemaGroup {
 @resource("schemas")
 @parentResource(SchemaGroup)
 model Schema {
-  @key("schemaName")
+  @key("name")
   @doc("Name of schema.")
   @visibility("read")
   @maxLength(50)
   @pattern("^[A-Za-z0-9][^\\\\/$:]*$")
   @extension("x-ms-parameter-location", "method")
-  schemaName: string;
+  name: string;
 
-  // TODO: possible to overwrite body of resource to be below?
-  //@doc("String representation (UTF-8) of the registered schema.")
-  //@body
-  //schemaContent: bytes;
+  @doc("String representation (UTF-8) of the registered schema.")
+  schemaContent: bytes;
 }
 
 @doc("Schema versions resource.")
@@ -246,37 +227,3 @@ model SchemaVersions {
   @visibility("read")
   nextLink: string;
 }
-
-//@doc("Faked shared model")
-//model FakedSharedModel {
-//  @doc("The tag.")
-//  tag: string;
-//
-//  @doc("The created date.")
-//  createdDate: utcDateTime;
-//}
-//
-//interface Widgets {
-//  @doc("Fetch a Widget by name.")
-//  getWidget is ResourceRead<Widget>;
-//
-//  @doc("Gets status of a Widget operation.")
-//  getWidgetOperationStatus is GetResourceOperationStatus<Widget>;
-//
-//  @doc("Creates or updates a Widget asynchronously.")
-//  @pollingOperation(Widgets.getWidgetOperationStatus)
-//  createOrUpdateWidget is LongRunningResourceCreateOrUpdate<Widget>;
-//
-//  @doc("Delete a Widget asynchronously.")
-//  @pollingOperation(Widgets.getWidgetOperationStatus)
-//  deleteWidget is LongRunningResourceDelete<Widget>;
-//
-//  @doc("List Widget resources")
-//  listWidgets is ResourceList<
-//    Widget,
-//    {
-//      parameters: StandardListQueryParameters;
-//    }
-//  >;
-//}
-//

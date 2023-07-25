@@ -108,7 +108,7 @@
         }
       }
     },
-    "/$schemaGroups/{groupName}/schemas/{schemaName}:get-id": {
+    "/$schemaGroups/{groupName}/schemas/{name}:get-id": {
       "post": {
         "operationId": "SchemaOperations_GetSchemaIdByContent",
         "summary": "Get ID for existing schema.",
@@ -130,7 +130,7 @@
             "type": "string"
           },
           {
-            "name": "schemaName",
+            "name": "name",
             "in": "path",
             "description": "Name of schema.",
             "required": true,
@@ -196,11 +196,16 @@
         }
       }
     },
-    "/$schemaGroups/{groupName}/schemas/{schemaName}": {
+    "/$schemaGroups/{groupName}/schemas/{name}": {
       "put": {
         "operationId": "SchemaOperations_RegisterSchema",
-        "summary": "Register schema.",
-        "description": "Registers",
+        "summary": "Register new schema",
+        "description": "Register new schema. If schema of specified name does not exist in specified group, schema is created at version 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.\n",
+        "consumes": [
+          "application/json; serialization=Avro",
+          "application/json; serialization=json",
+          "text/plain; charset=utf-8"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -213,7 +218,7 @@
             "type": "string"
           },
           {
-            "name": "schemaName",
+            "name": "name",
             "in": "path",
             "description": "Name of schema.",
             "required": true,
@@ -223,12 +228,12 @@
             "x-ms-parameter-location": "method"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
-            "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Schema"
+              "type": "string",
+              "format": "binary"
             }
           }
         ],
@@ -237,12 +242,66 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Schema"
+            },
+            "headers": {
+              "location": {
+                "type": "string",
+                "description": "URL location of schema, identified by schema group, schema name, and version."
+              },
+              "schema-id": {
+                "type": "string",
+                "description": "References specific schema in registry namespace."
+              },
+              "schema-id-location": {
+                "type": "string",
+                "description": "URL location of schema, identified by schema ID."
+              },
+              "schema-group-name": {
+                "type": "string",
+                "description": "References schema group."
+              },
+              "schema-name": {
+                "type": "string",
+                "description": "References schema name."
+              },
+              "schema-version": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Version of the returned schema."
+              }
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/Schema"
+            },
+            "headers": {
+              "location": {
+                "type": "string",
+                "description": "URL location of schema, identified by schema group, schema name, and version."
+              },
+              "schema-id": {
+                "type": "string",
+                "description": "References specific schema in registry namespace."
+              },
+              "schema-id-location": {
+                "type": "string",
+                "description": "URL location of schema, identified by schema ID."
+              },
+              "schema-group-name": {
+                "type": "string",
+                "description": "References schema group."
+              },
+              "schema-name": {
+                "type": "string",
+                "description": "References schema name."
+              },
+              "schema-version": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Version of the returned schema."
+              }
             }
           },
           "default": {
@@ -260,7 +319,7 @@
         }
       }
     },
-    "/$schemaGroups/{groupName}/schemas/{schemaName}/versions": {
+    "/$schemaGroups/{groupName}/schemas/{name}/versions": {
       "get": {
         "operationId": "SchemaOperations_ListSchemaVersions",
         "summary": "List schema versions.",
@@ -277,7 +336,7 @@
             "type": "string"
           },
           {
-            "name": "schemaName",
+            "name": "name",
             "in": "path",
             "description": "Name of schema.",
             "required": true,
@@ -331,7 +390,7 @@
         }
       }
     },
-    "/$schemaGroups/{groupName}/schemas/{schemaName}/versions/{schemaVersion}": {
+    "/$schemaGroups/{groupName}/schemas/{name}/versions/{schemaVersion}": {
       "get": {
         "operationId": "SchemaOperations_GetSchemaByVersion",
         "summary": "Get specific schema versions.",
@@ -348,7 +407,7 @@
             "type": "string"
           },
           {
-            "name": "schemaName",
+            "name": "name",
             "in": "path",
             "description": "Name of schema.",
             "required": true,
@@ -394,6 +453,12 @@
         "operationId": "SchemaOperations_GetSchemaById",
         "summary": "Get a registered schema by its unique ID reference.",
         "description": "Gets a registered schema by its unique ID.  Azure Schema Registry guarantees that ID is unique within a namespace. Operation response type is based on serialization of schema requested.",
+        "produces": [
+          "application/json; serialization=Avro",
+          "application/json; serialization=json",
+          "text/plain; charset=utf-8",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -541,17 +606,23 @@
       "type": "object",
       "description": "Schemas resource.",
       "properties": {
-        "schemaName": {
+        "name": {
           "type": "string",
           "description": "Name of schema.",
           "maxLength": 50,
           "pattern": "^[A-Za-z0-9][^\\\\/$:]*$",
           "readOnly": true,
           "x-ms-parameter-location": "method"
+        },
+        "schemaContent": {
+          "type": "string",
+          "format": "byte",
+          "description": "String representation (UTF-8) of the registered schema."
         }
       },
       "required": [
-        "schemaName"
+        "name",
+        "schemaContent"
       ]
     },
     "SchemaContentType": {
