@@ -43,7 +43,9 @@ $typespecFolders = @()
 foreach ($file in $changedFiles) {
   if ($file -match 'specification\/[^\/]*\/') {
     $typespecFolder = (Get-ChildItem -path $matches[0] tspconfig.yaml -Recurse).Directory.FullName | ForEach-Object {if ($_) { [IO.Path]::GetRelativePath($($pwd.path), $_) }}
-    $typespecFolders += $typespecFolder -replace '\\', '/'
+    if (!(Get-ChildITem -path $typespecFolder .skip-typespec-validation)) {
+      $typespecFolders += $typespecFolder -replace '\\', '/'
+    } 
   }
 }
 $typespecFolders = $typespecFolders | Select-Object -Unique | Sort-Object
