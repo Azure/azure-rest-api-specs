@@ -41,10 +41,10 @@
             "in": "body",
             "name": "createRoomRequest",
             "description": "The create room request body.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/CreateRoomRequest"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
@@ -61,8 +61,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "x-ms-client-name": "ErrorCode",
-                "type": "string"
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
               }
             }
           }
@@ -84,6 +84,12 @@
         ],
         "parameters": [
           {
+            "in": "query",
+            "name": "nextLink",
+            "description": "Opaque url that, if not null, can be used to fetch the next page of results.",
+            "type": "string"
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -101,8 +107,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "x-ms-client-name": "ErrorCode",
-                "type": "string"
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
               }
             }
           }
@@ -154,8 +160,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "x-ms-client-name": "ErrorCode",
-                "type": "string"
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
               }
             }
           }
@@ -213,8 +219,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "x-ms-client-name": "ErrorCode",
-                "type": "string"
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
               }
             }
           }
@@ -257,8 +263,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "x-ms-client-name": "ErrorCode",
-                "type": "string"
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
               }
             }
           }
@@ -306,8 +312,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "x-ms-client-name": "ErrorCode",
-                "type": "string"
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
               }
             }
           }
@@ -369,8 +375,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "x-ms-client-name": "ErrorCode",
-                "type": "string"
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
               }
             }
           }
@@ -528,7 +534,7 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "A collection of rooms",
+          "description": "A collection of rooms.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RoomModel"
