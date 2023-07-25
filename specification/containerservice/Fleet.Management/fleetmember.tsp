@@ -24,6 +24,7 @@ model FleetMember is ProxyResource<FleetMemberProperties> {
   @segment("members")
   @visibility("create", "read")
   name: string;
+
   ...EntityTag;
 }
 
@@ -78,13 +79,16 @@ interface FleetMembers {
   >;
 
   @added(Versions.v2023_03_15_preview)
-  update is ArmResourcePatchSync<FleetMember, FleetMemberProperties, BaseParameters<FleetMember> &
-  IfMatchParameters<FleetMember>>;
+  update is ArmResourcePatchSync<
+    FleetMember,
+    FleetMemberProperties,
+    BaseParameters<FleetMember> & IfMatchParameters<FleetMember>
+  >;
 
   @extension(
     "x-ms-long-running-operation-options",
     {
-      "final-state-via": "location",
+      `final-state-via`: "location",
     }
   )
   delete is ArmResourceDeleteAsync<
