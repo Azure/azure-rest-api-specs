@@ -26,14 +26,9 @@ directive:
 - rename-model:
     from: 'SqlVulnerabilityAssessmentScanError'
     to: 'VulnerabilityAssessmentScanForSqlError'
-- from: swagger-document
-  where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/sqlVulnerabilityAssessments/{vulnerabilityAssessmentName}"].get.parameters[2]
-  transform: > 
-    $["x-ms-enum"].name = "SQLVulnerabilityAssessmentName"
-- from: swagger-document
-  where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments/{vulnerabilityAssessmentName}"].get.parameters[3]
-  transform: > 
-    $["x-ms-enum"].name = "SQLVulnerabilityAssessmentName"
+- from: Servers.json
+  where: $.definitions.PrivateEndpointConnectionProperties
+  transform: $['x-ms-client-name'] = "ServerPrivateEndpointConnectionProperties";
 ```
 
 ``` yaml $(go) && !$(track2)
