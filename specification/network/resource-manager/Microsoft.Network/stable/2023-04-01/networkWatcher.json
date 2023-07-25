@@ -4234,7 +4234,8 @@
             "MMAWorkspaceMachine",
             "MMAWorkspaceNetwork",
             "AzureArcVM",
-            "AzureVMSS"
+            "AzureVMSS",
+            "AzureArcNetwork"
           ],
           "x-ms-enum": {
             "name": "EndpointType",
@@ -4273,6 +4274,14 @@
             "modelAsString": true
           },
           "description": "Test coverage for the endpoint."
+        },
+        "locationDetails": {
+          "$ref": "#/definitions/ConnectionMonitorEndPointLocationDetails",
+          "description": "Location details for 'AzureArcNetwork' endpoint type."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription ID for connection monitor endpoint."
         }
       },
       "required": [
@@ -4777,6 +4786,14 @@
         }
       },
       "description": "List of connection states snapshots."
+    },
+    "ConnectionMonitorEndPointLocationDetails": {
+      "properties": {
+        "region": {
+          "type": "string",
+          "description": "Region for endpoint type 'AzureArcNetwork'."
+        }
+      }
     }
   }
 }
