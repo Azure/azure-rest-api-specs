@@ -1325,6 +1325,18 @@
           "type": "string",
           "description": "Free form content of the entire configuration file."
         },
+        "encoding": {
+          "type": "string",
+          "description": "This property indicates if the content is encoded and is case-insensitive. Please set the value to base64 if the content is base64 encoded. Set it to none or skip it if the content is plain text.",
+          "enum": [
+            "Base64",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ContentEncoding",
+            "modelAsString": true
+          }
+        },
         "path": {
           "type": "string",
           "description": "Path of the config file if content is specified."
