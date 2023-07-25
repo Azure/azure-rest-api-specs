@@ -880,7 +880,11 @@
         },
         "regionTravelSummary": {
           "description": "Include travel summary of distance, time, and toll road distance by two entity types: country (e.g. US, Canada) and administrative division or subregion (e.g. “state” in US and “province” in Canada).",
-          "$ref": "#/definitions/RegionTravelSummary"
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/RegionTravelSummary"
+          }
         }
       }
     },
