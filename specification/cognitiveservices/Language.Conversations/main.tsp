@@ -2,11 +2,13 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-autorest";
 import "./common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using Autorest;
 using Azure.Core;
 using Azure.Core.Traits;
 
@@ -161,7 +163,7 @@ model LuisParameters extends Record<unknown> {
 model LuisCallingOptions {
   @doc("Enable verbose response.")
   verbose?: boolean;
-
+  
   @doc("Save log to add in training utterances later.")
   log?: boolean;
 
