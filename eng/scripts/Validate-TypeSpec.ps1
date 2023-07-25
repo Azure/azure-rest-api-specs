@@ -4,15 +4,13 @@ param (
   [string] $SpecsRepoRootDirectory,
   [Parameter(Position = 1, Mandatory = $false)]
   [string]$TargetBranch,
-  [Parameter(Position = 2, Mandatory = $false)]
-  [string]$SourceBranch,
   [Parameter(Mandatory = $false)]
   [switch]$GitClean
 )
 
 $exitCode = 0
 
-$typespecFolders = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" "$SpecsRepoRootDirectory" "$TargetBranch" "$SourceBranch"
+$typespecFolders = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" "$SpecsRepoRootDirectory" "$TargetBranch"
 
 Write-Host "typespecFolders:"
 foreach ($typespecFolder in $typespecFolders) {

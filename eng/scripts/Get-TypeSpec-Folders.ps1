@@ -3,24 +3,19 @@ param (
   [Parameter(Position = 0, Mandatory = $true)]
   [string] $SpecsRepoRootDirectory,
   [Parameter(Position = 1, Mandatory = $false)]
-  [string]$TargetBranch,
-  [Parameter(Position = 2, Mandatory = $false)]
-  [string]$SourceBranch
+  [string]$TargetBranch
 )
 
 $changedFiles = @()
 $allChangedFiles = (Get-ChildItem -path ./specification tspconfig.yaml -Recurse).Directory.FullName | ForEach-Object {[IO.Path]::GetRelativePath($($pwd.path), $_)}
 $allChangedFiles = $allChangedFiles -replace '\\', '/'
 
-if ([string]::IsNullOrEmpty($TargetBranch) -or [string]::IsNullOrEmpty($SourceBranch)) {
-  if ($TargetBranch -or $SourceBranch) {
-    throw "Please provide both target branch and source branch."
-  }
+if ([string]::IsNullOrEmpty($TargetBranch)) {
   $changedFiles = $allChangedFiles
 }
 else {
-  Write-Host "git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff --name-only `"$TargetBranch...$SourceBranch`" --"
-  $changedFiles = git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff --name-only `"$TargetBranch...$SourceBranch`" --
+  Write-Host "git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff --name-only `"$TargetBranch`" --"
+  $changedFiles = git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff --name-only `"$TargetBranch`" --
   $changedFiles = $changedFiles -replace '\\', '/' | Sort-Object
 
   Write-Host "changedFiles:"
