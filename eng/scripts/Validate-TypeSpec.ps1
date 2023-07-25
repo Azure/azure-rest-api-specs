@@ -23,7 +23,8 @@ Write-Host
 if ($typespecFolders) {
   $typespecFolders = $typespecFolders.Split('',[System.StringSplitOptions]::RemoveEmptyEntries)
   foreach ($typespecFolder in $typespecFolders) {
-    npx --no tsv $typespecFolder 2>&1 | Write-Host
+    $verbose = $PSCmdlet.MyInvocation.BoundParameters["Verbose"].IsPresent ? "--verbose" : ""
+    npx --no tsv $typespecFolder $verbose 2>&1 | Write-Host
     if ($LASTEXITCODE) {
       $exitCode = 1
     }
