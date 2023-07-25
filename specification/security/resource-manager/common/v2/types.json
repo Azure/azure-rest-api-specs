@@ -458,12 +458,13 @@
       "maxLength": 90,
       "x-ms-parameter-location": "method"
     },
-    "ApiVersion": {
+    "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "API version for the operation"
+      "description": "API version for the operation",
+      "minLength": 1
     },
     "AscLocation": {
       "name": "ascLocation",
@@ -482,12 +483,14 @@
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
-    "Scope": {
+    "ScopeParameter": {
       "name": "scope",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Scope of the query. can be subscription (/subscriptions/{subscriptionId}) or management group (/providers/Microsoft.Management/managementGroups/mgName) or a security connector scope: (format: 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName})'",
+      "description": "The scope at which the operation is performed.",
+      "minLength": 1,
+      "maxLength": 90,
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
