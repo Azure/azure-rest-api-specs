@@ -104,7 +104,7 @@
           "200": {
             "description": "Successfully retrieved the private endpoint.",
             "schema": {
-              "$ref": "#/definitions/JobPrivateEndpoints"
+              "$ref": "#/definitions/JobPrivateEndpoint"
             }
           },
           "default": {
@@ -150,7 +150,7 @@
             "description": "The requested private endpoint state.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/JobPrivateEndpoints"
+              "$ref": "#/definitions/JobPrivateEndpoint"
             }
           },
           {
@@ -164,11 +164,11 @@
           "200": {
             "description": "Successfully updated the private endpoint.",
             "schema": {
-              "$ref": "#/definitions/JobPrivateEndpoints"
+              "$ref": "#/definitions/JobPrivateEndpoint"
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 CannotUseTrailingWhitespacesInDatabaseName - The database name validation failed.\n\n * 400 ElasticJobAgentIsBusy - The Elastic Job Agent '{0}' is currently busy processing another request. Please retry operation later.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 ElasticJobAgentInvalidOperationParameter - An invalid operation parameter was identified for this Elastic Job Agent operation. {0}\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 ElasticJobAgentResourceAlreadyExists - Elastic job agent '{0}' already contains the resource '{1}'\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 PropertyChangeUnsupported - Property cannot be modified.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 ServerDisabled - Server is disabled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 CannotUseTrailingWhitespacesInDatabaseName - The database name validation failed.\n\n * 400 ElasticJobAgentIsBusy - The Elastic Job Agent '{0}' is currently busy processing another request. Please retry operation later.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 ElasticJobAgentInvalidOperationParameter - An invalid operation parameter was identified for this Elastic Job Agent operation. {0}\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 ElasticJobAgentResourceAlreadyExists - Elastic job agent '{0}' already contains the resource '{1}'\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 PropertyChangeUnsupported - Property cannot be modified.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 ServerDisabled - Server is disabled.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources."
           },
           "202": {
             "description": "Accepted"
@@ -176,7 +176,7 @@
           "201": {
             "description": "Successfully created the private endpoint.",
             "schema": {
-              "$ref": "#/definitions/JobPrivateEndpoints"
+              "$ref": "#/definitions/JobPrivateEndpoint"
             }
           }
         },
@@ -229,7 +229,7 @@
             "description": "Successfully deleted the private endpoint."
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 ElasticJobAgentInvalidOperationParameter - An invalid operation parameter was identified for this Elastic Job Agent operation. {0}\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 CannotUseTrailingWhitespacesInDatabaseName - The database name validation failed.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 ElasticJobAgentIsBusy - The Elastic Job Agent '{0}' is currently busy processing another request. Please retry operation later.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 ServerDisabled - Server is disabled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources."
+            "description": "*** Error Responses: ***\n\n * 400 ElasticJobAgentInvalidOperationParameter - An invalid operation parameter was identified for this Elastic Job Agent operation. {0}\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 CannotUseTrailingWhitespacesInDatabaseName - The database name validation failed.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 ElasticJobAgentIsBusy - The Elastic Job Agent '{0}' is currently busy processing another request. Please retry operation later.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 ServerDisabled - Server is disabled.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources."
           },
           "202": {
             "description": "Accepted"
@@ -251,6 +251,22 @@
     }
   },
   "definitions": {
+    "JobPrivateEndpoint": {
+      "description": "A job agent private endpoint.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JobPrivateEndpointProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "JobPrivateEndpointListResult": {
       "description": "A list of job agent private endpoints.",
       "type": "object",
@@ -259,7 +275,7 @@
           "description": "Array of results.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JobPrivateEndpoints"
+            "$ref": "#/definitions/JobPrivateEndpoint"
           },
           "readOnly": true
         },
@@ -285,22 +301,6 @@
           "description": "Private endpoint id of the private endpoint.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "JobPrivateEndpoints": {
-      "description": "A group of job agent private endpoints.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/JobPrivateEndpointProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
         }
       }
     }
