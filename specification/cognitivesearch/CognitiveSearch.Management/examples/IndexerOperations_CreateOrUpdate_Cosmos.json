@@ -1,0 +1,79 @@
+{
+  "operationId": "IndexerOperations_CreateOrUpdate",
+  "title": "IndexerOperations_CreateOrUpdate",
+  "parameters": {
+    "name": "my-index",
+    "indexerName": "my-indexer",
+    "resourceGroupName": "my-rg",
+    "api-version": "2023-05-01-preview",
+    "subscriptionId": "my-subscription",
+    "resource": {
+      "location": "westus",
+      "properties": {
+        "description": "Test indexer",
+        "failurePolicy": {
+          "type": "TolerateFailures"
+        },
+        "dataSource": {
+          "connection": {
+            "authenticationType": "Credentials",
+            "connectionString": "DefaultEndpointsProtocol=https;AccountName=;AccountKey=;EndpointSuffix=core.windows.net"
+          },
+          "properties": {
+            "kind": "CosmosDb/NoSql",
+            "collectionName": "testCosmosCollectionName",
+            "query": "test query"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/my-subscription/resourceGroups/my-rg/providers/Microsoft.CognitiveSearch/indexes/my-index/indexer/my-indexer",
+        "type": "Microsoft.CognitiveSearch/indexes/indexers",
+        "location": "westus",
+        "properties": {
+          "description": "Test indexer",
+          "failurePolicy": {
+            "type": "TolerateFailures"
+          },
+          "dataSource": {
+            "connection": {
+              "authenticationType": "Credentials"
+            },
+            "properties": {
+              "kind": "CosmosDb/NoSql",
+              "collectionName": "testCosmosCollectionName",
+              "query": "test query"
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/my-subscription/resourceGroups/my-rg/providers/Microsoft.CognitiveSearch/indexes/my-index/indexer/my-indexer",
+        "type": "Microsoft.CognitiveSearch/indexes/indexers",
+        "location": "westus",
+        "properties": {
+          "description": "Test indexer",
+          "failurePolicy": {
+            "type": "TolerateFailures"
+          },
+          "dataSource": {
+            "connection": {
+              "authenticationType": "Credentials"
+            },
+            "properties": {
+              "kind": "CosmosDb/NoSql",
+              "collectionName": "testCosmosCollectionName",
+              "query": "test query"
+            }
+          }
+        }
+      }
+    }
+  }
+}

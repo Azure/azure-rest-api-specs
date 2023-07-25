@@ -1,0 +1,58 @@
+{
+  "operationId": "IndexerOperations_Update",
+  "title": "IndexerOperations_Update",
+  "parameters": {
+    "name": "my-index",
+    "indexerName": "my-indexer",
+    "resourceGroupName": "my-rg",
+    "api-version": "2023-05-01-preview",
+    "subscriptionId": "my-subscription",
+    "properties": {
+      "properties": {
+        "description": "Test indexer01",
+        "failurePolicy": {
+          "type": "TolerateFailures"
+        },
+        "dataSource": {
+          "connection": {
+            "authenticationType": "Credentials",
+            "connectionString": "DefaultEndpointsProtocol=https;AccountName=;AccountKey=;EndpointSuffix=core.windows.net"
+          },
+          "properties": {
+            "kind": "Sql/AzureSql",
+            "tableOrViewName": "testsqldatabase"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/my-subscription/resourceGroups/my-rg/providers/Microsoft.CognitiveSearch/indexes/my-index/indexers/my-indexer",
+        "location": "West US",
+        "type": "Microsoft.CognitiveSearch/indexes/indexers",
+        "properties": {
+          "description": "Test indexer01",
+          "failurePolicy": {
+            "type": "TolerateFailures"
+          },
+          "dataSource": {
+            "connection": {
+              "authenticationType": "Credentials"
+            },
+            "properties": {
+              "kind": "Sql/AzureSql",
+              "tableOrViewName": "testsqldatabase"
+            }
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/providers/Microsoft.CognitiveSearch/operationResults/{operationId}"
+      }
+    }
+  }
+}
