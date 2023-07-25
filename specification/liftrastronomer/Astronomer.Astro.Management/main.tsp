@@ -1,3 +1,5 @@
+import "./LiftrBase.Data/main.tsp";
+
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-autorest";
@@ -9,6 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+using LiftrBase.Data;
 
 @armProviderNamespace
 @service({
@@ -19,21 +22,22 @@ namespace Astronomer.Astro;
 
 @doc("Supported API versions for the Astronomer.Astro resource provider.")
 enum Versions {
+    @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview, LiftrBase.Data.Versions.v1_preview")
     @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-    v1_preview: "2023-06-01-preview",
+    @useDependency(LiftrBase.Versions.v1_preview)
+    @useDependency(LiftrBase.Data.Versions.v1_preview)
+    v1_preview: "2023-07-01-preview",
 }
-
-@doc("A string that represents a URI.")
-scalar Uri extends string;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("Organization Resource by Astronomer")
 model OrganizationResource is TrackedResource<OrganizationProperties> {
     @key("organizationName")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$")
     @segment("organizations")
-    @minLength(4)
-    @maxLength(20)
+    @minLength(1)
+    @maxLength(50)
     @doc("Name of the Organizations resource")
     @path
     name: string;
@@ -41,34 +45,10 @@ model OrganizationResource is TrackedResource<OrganizationProperties> {
 }
 
 @armResourceOperations
-interface Organizations
-    extends TrackedResourceOperations<
-            OrganizationResource,
-            OrganizationProperties
-        > {}
-
-@doc("Properties specific to the Astronomer Organization resource")
-model OrganizationProperties {
-    @visibility("read")
-    @doc("Provisioning State of the resource")
-    provisioningState?: ResourceProvisioningState;
-
-    @doc("Astronomer Organization properties")
-    astronomerOrganizationProperties?: AstronomerOrganizationProperties;
-}
-
-@doc("Properties of the Astronomer account")
-model AstronomerOrganizationProperties {
-    @doc("Astronomer Organization Information")
-    organizationInfo?: OrganizationInfo;
-}
-
-@doc("Organization Info of the Astronomer account")
-model OrganizationInfo{
-
-  @doc("Organization id")
-  organizationId?: string;
-
-  @doc("Astronomer account region")
-  regionId?: string;
+interface Organizations {
+    get is ArmResourceRead<OrganizationResource>;
+    createOrUpdate is ArmResourceCreateOrUpdateAsync<OrganizationResource>;
+    delete is ArmResourceDeleteAsync<OrganizationResource>;
+    listByResourceGroup is ArmResourceListByParent<OrganizationResource>;
+    listBySubscription is ArmListBySubscription<OrganizationResource>;
 }
