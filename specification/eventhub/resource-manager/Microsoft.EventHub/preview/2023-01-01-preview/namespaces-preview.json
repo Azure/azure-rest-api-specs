@@ -336,7 +336,6 @@
           }
         },
         "description": "GeoDR Failover",
-        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
@@ -361,6 +360,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Namespace failed over."
+          },
           "202": {
             "description": "Accepted. The failover policy change operation will complete asynchronously.",
             "headers": {
@@ -380,7 +382,8 @@
               "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/privateEndpointConnections": {
@@ -420,7 +423,7 @@
             }
           },
           "default": {
-            "description": "EventHubEventHub error response describing why the operation failed.",
+            "description": "EventHub error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
             }
