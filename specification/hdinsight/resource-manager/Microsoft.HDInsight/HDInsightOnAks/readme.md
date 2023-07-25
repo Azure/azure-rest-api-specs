@@ -1,8 +1,8 @@
-# HDInsight
+# HDInsight On Aks
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for HDInsight.
+This is the AutoRest configuration file for HDInsight On Aks.
 
 ---
 
@@ -41,7 +41,7 @@ These settings apply only when `--tag=package-2023-06-preview` is specified on t
 
 ```yaml $(tag) == 'package-2023-06-preview'
 input-file:
-  - Microsoft.HDInsight/HDInsightOnAks/preview/2023-06-01-preview/hdinsight.json
+  - preview/2023-06-01-preview/hdinsight.json
 suppressions:
   - code: MISSING_APIS_IN_DEFAULT_TAG
     reason: Remove deprecated APIs in new API version.
