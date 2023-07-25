@@ -148,7 +148,7 @@
             "required": true,
             "description": "Name of S3Bucket",
             "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
           }
         ],
         "responses": {
@@ -193,7 +193,7 @@
             "required": true,
             "description": "Name of S3Bucket",
             "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
           },
           {
             "name": "resource",
@@ -264,7 +264,7 @@
             "required": true,
             "description": "Name of S3Bucket",
             "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
           },
           {
             "name": "properties",
@@ -319,7 +319,7 @@
           "S3Buckets"
         ],
         "operationId": "S3Buckets_Delete",
-        "description": "Delete a S3Bucket. Please note that end user resource deletion is currently restricted, but it will be enabled in the future.",
+        "description": "Delete a S3Bucket",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -336,7 +336,7 @@
             "required": true,
             "description": "Name of S3Bucket",
             "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
           }
         ],
         "responses": {
@@ -402,6 +402,14 @@
         "awsRegion": {
           "type": "string",
           "description": "Gets and sets the property awsRegion. "
+        },
+        "awsTags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets and sets the property awsTags. ",
+          "x-typespec-name": "Record<string>"
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
