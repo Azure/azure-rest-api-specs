@@ -452,7 +452,7 @@ numeric, underscore or hyphen characters.
 
       @doc("Metric namespace to query metric definitions for.")
       @query
-      metricNamespace?: string;
+      metricNamespace: string;
     },
     MetricDefinitionCollection
   >;
@@ -472,7 +472,7 @@ numeric, underscore or hyphen characters.
 
       @doc("The aggregation")
       @query
-      aggregation: string;
+      aggregation?: string;
 
       // TODO: check DPG sdks, this is the correct definition but might cause breaks for some languages
       @doc("The interval (i.e. timegrain) of the query.")
@@ -497,7 +497,7 @@ The timespan of the query. It is a string with the following format
 
       @doc("Metric dimension filter ")
       @body
-      body: MetricRequestPayload;
+      body?: MetricRequestPayload;
     },
     Metrics
   >;
