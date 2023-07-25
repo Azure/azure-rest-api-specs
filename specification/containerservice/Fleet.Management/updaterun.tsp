@@ -211,7 +211,7 @@ model UpdateRunStatus {
 model NodeImageSelectionStatus {
   @visibility("read")
   @doc("The image versions to upgrade the nodes to.")
-  selectedNodeImageVersions: NodeImageVersion[];
+  selectedNodeImageVersions?: NodeImageVersion[];
 }
 
 @doc("The node upgrade image version.")
@@ -219,7 +219,7 @@ model NodeImageSelectionStatus {
 model NodeImageVersion {
   @visibility("read")
   @doc("The image version to upgrade the nodes to (e.g., 'AKSUbuntu-1804gen2containerd-2022.12.13').")
-  version: string;
+  version?: string;
 }
 
 @doc("The status of a UpdateStage.")
