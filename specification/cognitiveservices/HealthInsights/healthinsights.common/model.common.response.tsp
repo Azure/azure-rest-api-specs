@@ -1,3 +1,4 @@
+import "@azure-tools/typespec-azure-core";
 import "./model.common.shared.tsp";
 
 using TypeSpec.Rest;
@@ -26,6 +27,7 @@ alias Response = {
 
   @doc("The status of the processing job.")
   @visibility("read")
+  @Azure.Core.lroStatus
   status: JobStatus;
 
   @doc("An array of errors, if any errors occurred during the processing job.")
@@ -97,6 +99,7 @@ enum JobStatus {
   Succeeded: "succeeded",
   Failed: "failed",
   PartiallyCompleted: "partiallyCompleted",
+  Canceled: "Canceled",
 }
 
 @doc("The version of the model used for inference, expressed as the model date.")
