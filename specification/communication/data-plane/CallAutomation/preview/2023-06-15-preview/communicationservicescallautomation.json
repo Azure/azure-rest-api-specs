@@ -660,7 +660,7 @@
         ],
         "summary": "Send dtmf tones.",
         "description": "Send dtmf tones.",
-        "operationId": "CallMedia_SendDtmf",
+        "operationId": "CallMedia_SendDtmfTones",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -670,12 +670,12 @@
             "type": "string"
           },
           {
-            "name": "sendDtmfRequest",
+            "name": "sendDtmfTonesRequest",
             "in": "body",
             "description": "The send dtmf request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SendDtmfRequest"
+              "$ref": "#/definitions/SendDtmfTonesRequest"
             }
           },
           {
@@ -704,15 +704,15 @@
             }
           },
           "202": {
-            "description": "Returns the send dtmf response",
+            "description": "Returns the send dtmf tones response",
             "schema": {
-              "$ref": "#/definitions/SendDtmfResult"
+              "$ref": "#/definitions/SendDtmfTonesResult"
             }
           }
         },
         "x-ms-examples": {
-          "CallMedia_SendDtmf": {
-            "$ref": "./examples/CallMedia_SendDtmf.json"
+          "CallMedia_SendDtmfTones": {
+            "$ref": "./examples/CallMedia_SendDtmfTones.json"
           }
         }
       }
@@ -1767,7 +1767,7 @@
         }
       }
     },
-    "SendDtmfRequest": {
+    "SendDtmfTonesRequest": {
       "required": [
         "tones",
         "targetParticipant"
@@ -1791,7 +1791,7 @@
         }
       }
     },
-    "SendDtmfResult": {
+    "SendDtmfTonesResult": {
       "type": "object",
       "properties": {
         "operationContext": {
@@ -2684,7 +2684,7 @@
         }
       }
     },
-    "SendDtmfCompleted": {
+    "SendDtmfTonesCompleted": {
       "type": "object",
       "properties": {
         "callConnectionId": {
@@ -2709,7 +2709,7 @@
         }
       }
     },
-    "SendDtmfFailed": {
+    "SendDtmfTonesFailed": {
       "type": "object",
       "properties": {
         "callConnectionId": {
