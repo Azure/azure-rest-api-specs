@@ -26,20 +26,6 @@ batch:
   - tag: package-2015-03-preview
 ```
 
-### Tag: package-hdinsightonaks-2023-06-preview and go
-
-These settings apply only when `--tag=package-hdinsightonaks-2023-06-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-hdinsightonaks-2023-06-preview' && $(go)
-license-header: MICROSOFT_MIT_NO_VERSION
-module-name: sdk/resourcemanager/hdinsight/armhdinsightonaks
-module: github.com/Azure/azure-sdk-for-go/$(module-name)
-output-folder: $(go-sdk-folder)/$(module-name)
-azure-arm: true
-output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2023-06-01-preview/$(namespace)
-```
-
 ### Tag: package-2021-06 and go
 
 These settings apply only when `--tag=package-2021-06 --go` is specified on the command line.

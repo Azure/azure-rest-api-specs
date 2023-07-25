@@ -110,36 +110,6 @@ directive:
     reason: Update the default error response to a new format would be a braking change for service.
 ```
 
-``` yaml
-directive:
-  - suppress:  MISSING_APIS_IN_DEFAULT_TAG
-    reason: 2023-06-01-preview api version is new added for HDIsight on Aks.
-
-```
-
-### Tag: package-hdinsightonaks-2023-06-preview
-These settings apply only when `--tag=package-hdinsightonaks-2023-06-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-hdinsightonaks-2023-06-preview'
-openapi-type: arm
-openapi-subtype: rpaas
-azure-arm: true
-input-file:
-  - Microsoft.HDInsight/HDInsightOnAks/preview/2023-06-01-preview/hdinsight.json
-suppressions:
-  - code: MISSING_APIS_IN_DEFAULT_TAG
-    reason: Remove deprecated APIs in new API version.
-  - code: ResourceNameRestriction
-    reason: Keep compatibility with old API version.
-  - code: PatchBodyParametersSchema
-    reason: The "location" property is a must for a tracked resource.
-  - code: TrackedResourcePatchOperation
-    reason: This is a false positive, the "tags" property is defined in TrackedResource.
-  - code: OperationIdNounVerb
-    reason: This is false alarm. We checked that the operation id "Clusters_ListByClusterPoolName" is correct.
-  - code: GetCollectionOnlyHasValueAndNextLink
-    reason: This is false alarm.
-```
 
 ### Tag: package-2023-04-preview
 
@@ -249,20 +219,6 @@ csharp:
   namespace: Microsoft.Azure.Management.HDInsight
   output-folder: $(csharp-sdks-folder)/hdinsight/Microsoft.Azure.Management.HDInsight/src/Generated
   clear-output-folder: true
-```
-
-## Tag: package-hdinsightonaks-2023-06-preview and java
-
-These settings apply only when `--tag=package-hdinsightonaks-2023-06-preview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-hdinsightonaks-2023-06-preview' && $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.hdinsightonaks
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-hdinsightonaks
 ```
 
 ## Java

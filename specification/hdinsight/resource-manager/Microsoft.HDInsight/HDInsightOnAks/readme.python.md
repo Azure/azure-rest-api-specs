@@ -7,15 +7,15 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 ``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-namespace: azure.mgmt.hdinsight
-package-name: azure-mgmt-hdinsight
+namespace: azure.mgmt.hdinsightonaks
+package-name: azure-mgmt-hdinsightonaks
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/hdinsight/azure-mgmt-hdinsight/azure/mgmt/hdinsight
+output-folder: $(python-sdks-folder)/hdinsight/azure-mgmt-hdinsightonaks/azure/mgmt/hdinsightonaks
 ```
 
 ``` yaml $(python)
