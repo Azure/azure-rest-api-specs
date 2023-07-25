@@ -10,4 +10,9 @@ typescript:
   payload-flattening-threshold: 2
   output-folder: "$(typescript-sdks-folder)/sdk/storagecache/arm-storagecache"
   generate-metadata: true
+directive:
+  - from: swagger-document
+    where: $.definitions.CacheIdentity.properties
+    transform: >
+      $['userAssignedIdentities']['$ref'] = "amlfilesystem.json#/definitions/UserAssignedIdentities";
 ```

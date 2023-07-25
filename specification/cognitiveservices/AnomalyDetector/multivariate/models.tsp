@@ -8,15 +8,17 @@ using Azure.Core;
 
 namespace AnomalyDetector.Multivariate;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("Field that indicates how missing values will be filled.")
 enum FillNAMethod {
-  "Previous",
-  "Subsequent",
-  "Linear",
-  "Zero",
-  "Fixed",
+  Previous,
+  Subsequent,
+  Linear,
+  Zero,
+  Fixed,
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 enum MultivariateBatchDetectionStatus {
   Created: "CREATED",
   Running: "RUNNING",
@@ -27,20 +29,30 @@ enum MultivariateBatchDetectionStatus {
 @doc("Data schema of the input data source. The default is OneTable.")
 enum DataSchema {
   @doc("OneTable means that your input data is in one CSV file, which contains one time stamp column and several variable columns. The default DataSchema value is OneTable.")
-  "OneTable",
+  OneTable,
+
   @doc("MultiTable means that your input data is separated in multiple CSV files. Each file contains one time stamp column and one variable column, and the CSV file name should indicate the name of the variable. The default DataSchema value is OneTable.")
-  "MultiTable",
+  MultiTable,
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 enum AlignMode {
-  "Inner",
-  "Outer",
+  Inner,
+  Outer,
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 enum ModelStatus {
+  @doc("The model has been created. Training has been scheduled but not yet started.")
   Created: "CREATED",
+
+  @doc("The model is being trained.")
   Running: "RUNNING",
+
+  @doc("The model has been trained and is ready to be used for anomaly detection.")
   Ready: "READY",
+
+  @doc("The model training failed.")
   Failed: "FAILED",
 }
 
@@ -67,6 +79,7 @@ model MultivariateBatchDetectionResultSummary {
 
   @doc("Error message when detection fails.")
   errors?: ErrorResponse[];
+
   @doc("Variable status.")
   variableStates?: VariableState[];
 
@@ -80,7 +93,6 @@ will need another API to get detection results.
 @doc("Error information that the API returned.")
 @error
 model ErrorResponse {
-
   @doc("Error code.")
   code: string;
 
@@ -118,16 +130,16 @@ model MultivariateBatchDetectionOptions {
 Source link to the input data to indicate an accessible Azure Storage URI.
 It either points to an Azure Blob Storage folder or points to a CSV file in
 Azure Blob Storage, based on your data schema selection. The data schema should
-be exactly the same as those used in the training phase.
+be exactly the same as those used in the training phase. The input data must
+contain at least slidingWindow entries preceding the start time of the data
+to be detected.
 """)
-  dataSource: string;
+  dataSource: url;
 
   @doc("""
-Number of top contributed
-variables for one anomalous time stamp in the response. The default is
-10.
+Number of top contributed variables for one anomalous time stamp in the response.
 """)
-  topContributorCount: int32;
+  topContributorCount?: int32 = 10;
 
   @doc("""
 Start date/time of data for detection, which should
@@ -146,6 +158,7 @@ be in ISO 8601 format.
 model AnomalyState {
   @doc("Time stamp for this anomaly.")
   timestamp: utcDateTime;
+
   @doc("Detailed value of this anomalous time stamp.")
   value?: AnomalyValue;
 
@@ -172,6 +185,7 @@ Raw anomaly score of severity, to help indicate the degree of abnormality.
   @minValue(0.0)
   @maxValue(2.0)
   score: float32;
+
   @doc("Interpretation of this anomalous time stamp.")
   interpretation?: AnomalyInterpretation[];
 }
@@ -186,6 +200,7 @@ This score shows the percentage that contributes to the anomalous time stamp. It
 number between 0 and 1.
 """)
   contributionScore?: float32;
+
   @doc("Correlation changes among the anomalous variables.")
   correlationChanges?: CorrelationChanges;
 }
@@ -206,7 +221,7 @@ Source link to the input data to indicate an accessible Azure Storage URI.
 It either points to an Azure Blob Storage folder or points to a CSV file in
 Azure Blob Storage, based on your data schema selection.
 """)
-  dataSource: string;
+  dataSource: url;
 
   @doc("""
 Data schema of the input data source. The default
@@ -277,6 +292,7 @@ Field that indicates how missing values will be filled.
 model DiagnosticsInfo {
   @doc("Model status.")
   modelState?: ModelState;
+
   @doc("Variable status.")
   variableStates?: VariableState[];
 }
@@ -373,11 +389,11 @@ model VariableValues {
   values: float32[];
 }
 
-
 @doc("Results of the last detection.")
 model MultivariateLastDetectionResult {
   @doc("Variable status.")
   variableStates?: VariableState[];
+
   @doc("Anomaly status and information.")
   results?: AnomalyState[];
 }
@@ -387,6 +403,7 @@ model MultivariateLastDetectionResult {
 model ResponseError {
   @header("x-ms-error-code")
   @doc("Error code.")
-  msErrorCode?: string,
-  ...ErrorResponse
+  msErrorCode?: string;
+
+  ...ErrorResponse;
 }
