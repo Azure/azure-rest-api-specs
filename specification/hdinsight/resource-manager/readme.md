@@ -109,8 +109,13 @@ directive:
   - suppress: R4007 # to suppress (DefaultErrorResponseSchema)
     reason: Update the default error response to a new format would be a braking change for service.
 ```
-  - code: MISSING_APIS_IN_DEFAULT_TAG
+
+``` yaml
+directive:
+  - suppress:  MISSING_APIS_IN_DEFAULT_TAG
     reason: 2023-06-01-preview api version is new added for HDIsight on Aks.
+
+```
 
 ### Tag: package-hdinsightonaks-2023-06-preview
 These settings apply only when `--tag=package-hdinsightonaks-2023-06-preview` is specified on the command line.
@@ -130,6 +135,10 @@ suppressions:
     reason: The "location" property is a must for a tracked resource.
   - code: TrackedResourcePatchOperation
     reason: This is a false positive, the "tags" property is defined in TrackedResource.
+  - code: OperationIdNounVerb
+    reason: This is false alarm. We checked that the operation id "Clusters_ListByClusterPoolName" is correct.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    reason: This is false alarm.
 ```
 
 ### Tag: package-2023-04-preview

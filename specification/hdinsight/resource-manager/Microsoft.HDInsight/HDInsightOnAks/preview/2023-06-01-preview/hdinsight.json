@@ -105,13 +105,13 @@
         ],
         "responses": {
           "201": {
-            "description": "ClusterPool create/update request accepted.",
+            "description": "ClusterPool is created.",
             "schema": {
               "$ref": "#/definitions/ClusterPool"
             }
           },
           "200": {
-            "description": "Successful.",
+            "description": "Update successful.",
             "schema": {
               "$ref": "#/definitions/ClusterPool"
             }
@@ -168,6 +168,11 @@
           },
           "202": {
             "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ClusterPool"
             }
@@ -211,7 +216,12 @@
             "description": "Successful."
           },
           "202": {
-            "description": "Accepted response definition."
+            "description": "Accepted response definition.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No content - The Cluster Pool doesn't exist."
@@ -487,13 +497,13 @@
         ],
         "responses": {
           "201": {
-            "description": "Cluster create/update request accepted.",
+            "description": "Cluster is created.",
             "schema": {
               "$ref": "#/definitions/Cluster"
             }
           },
           "200": {
-            "description": "Successful.",
+            "description": "Update successful.",
             "schema": {
               "$ref": "#/definitions/Cluster"
             }
@@ -553,6 +563,11 @@
           },
           "202": {
             "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Cluster"
             }
@@ -599,7 +614,12 @@
             "description": "Successful."
           },
           "202": {
-            "description": "Cluster delete request accepted."
+            "description": "Cluster delete request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No content - The Cluster doesn't exist."
@@ -2129,7 +2149,8 @@
       "description": "The script action profile list.",
       "items": {
         "$ref": "#/definitions/ScriptActionProfile"
-      }
+      },
+      "x-ms-identifiers": []
     },
     "ScriptActionProfile": {
       "type": "object",
@@ -2167,6 +2188,7 @@
         },
         "timeoutInMinutes": {
           "type": "integer",
+          "format": "int32",
           "description": "Timeout duration for the script action in minutes."
         },
         "shouldPersist": {
@@ -2883,6 +2905,7 @@
           }
         }
       },
+      "x-ms-identifiers": [],
       "example": [
         {
           "name": "HDFS",
