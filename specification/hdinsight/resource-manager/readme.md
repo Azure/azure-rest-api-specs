@@ -121,6 +121,15 @@ openapi-subtype: rpaas
 azure-arm: true
 input-file:
   - Microsoft.HDInsight/HDInsightOnAks/preview/2023-06-01-preview/hdinsight.json
+suppressions:
+  - code: MISSING_APIS_IN_DEFAULT_TAG
+    reason: Remove deprecated APIs in new API version.
+  - code: ResourceNameRestriction
+    reason: Keep compatibility with old API version.
+  - code: PatchBodyParametersSchema
+    reason: The "location" property is a must for a tracked resource.
+  - code: TrackedResourcePatchOperation
+    reason: This is a false positive, the "tags" property is defined in TrackedResource.
 ```
 
 ### Tag: package-2023-04-preview
