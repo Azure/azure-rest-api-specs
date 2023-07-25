@@ -366,7 +366,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/SpringEnvironment"
+          "$ref": "#/definitions/SpringEnvironmentForPatch"
         }
       ],
       "required": []
@@ -403,7 +403,15 @@
             },
             "environmentId": {
               "description": "The resource Id of the App Environment that the Spring Apps instance builds on",
-              "type": "string"
+              "type": "string",
+              "format": "arm-id",
+              "x-ms-arm-id-details": {
+                "allowedResources": [
+                  {
+                    "type": "Microsoft.App/managedEnvironments"
+                  }
+                ]
+              }
             },
             "infraResourceGroup": {
               "description": "The name of the resource group that contains the infrastructure resources",
@@ -412,12 +420,12 @@
             "zoneRedundant": {
               "description": "Whether or not this Spring Environment is zone-redundant.",
               "enum": [
-                "true",
-                "false"
+                "ZoneRedundant",
+                "None"
               ],
               "type": "string",
               "x-ms-enum": {
-                "name": "ZoneRedundantBoolean",
+                "name": "ZoneRedundantEnum",
                 "modelAsString": true
               },
               "x-ms-mutability": [
@@ -431,6 +439,23 @@
               "readOnly": true
             }
           },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SpringEnvironmentForPatch": {
+      "description": "An environment for hosting Azure Spring Apps in PATCH request body",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Spring environment resource specific properties",
+          "type": "object",
+          "properties": {},
           "x-ms-client-flatten": true
         }
       }

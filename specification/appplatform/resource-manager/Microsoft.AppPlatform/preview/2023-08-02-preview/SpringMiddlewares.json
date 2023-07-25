@@ -705,7 +705,8 @@
         },
         "password": {
           "description": "Password of git repository basic auth.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "hostKey": {
           "description": "Public sshKey of git repository.",
@@ -717,7 +718,8 @@
         },
         "privateKey": {
           "description": "Private sshKey algorithm of git repository.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "strictHostKeyChecking": {
           "description": "Strict host key checking or not.",
@@ -775,7 +777,8 @@
         },
         "password": {
           "description": "Password of git repository basic auth.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "hostKey": {
           "description": "Public sshKey of git repository.",
@@ -787,17 +790,18 @@
         },
         "privateKey": {
           "description": "Private sshKey algorithm of git repository.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "strictHostKeyChecking": {
           "description": "Strict host key checking or not.",
           "enum": [
-            "true",
-            "false"
+            "Strict",
+            "None"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "EnumAsBoolean",
+            "name": "StrictHostKeyCheckingEnum",
             "modelAsString": true
           }
         }
