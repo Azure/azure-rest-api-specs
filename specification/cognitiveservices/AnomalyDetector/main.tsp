@@ -9,7 +9,9 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 @versioned(APIVersion)
-@service({title: "Anomaly Detector"})
+@service({
+  title: "Anomaly Detector",
+})
 @useAuth(AnomalyDetectorApiKeyAuth)
 @server(
   "{Endpoint}/anomalydetector/{ApiVersion}",
@@ -20,7 +22,7 @@ Supported Azure Cognitive Services endpoints (protocol and host name, such as
 https://westus2.api.cognitive.microsoft.com).
 """)
     Endpoint: string,
-    
+
     @doc("Api Version")
     @path
     ApiVersion: APIVersion,
@@ -47,7 +49,8 @@ discover incidents and establish a logic flow for root cause analysis.
 namespace AnomalyDetector;
 
 @doc("The secret key for your Azure Cognitive Services subscription.")
-model AnomalyDetectorApiKeyAuth is ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">;
+model AnomalyDetectorApiKeyAuth
+  is ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
 enum APIVersion {

@@ -55,12 +55,6 @@ directive:
     transform: >
       $.type = "object";
       $.additionalProperties["$ref"] = "#/definitions/ExceptionAction";
-
-# Rename CommunicationError to JobRouterError
-  - from: swagger-document
-    where: '$.definitions.CommunicationError'
-    transform: >
-      $["x-ms-client-name"] = "JobRouterError";
 ```
 
 
