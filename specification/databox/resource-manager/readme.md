@@ -38,11 +38,6 @@ input-file:
 - Microsoft.DataBox/stable/2023-03-01/databox.json
 ```
 
-``` yaml
-openapi-type: arm
-tag: package-2022-12
-```
-
 ### Tag: package-2022-12
 
 These settings apply only when `--tag=package-2022-12` is specified on the command line.
