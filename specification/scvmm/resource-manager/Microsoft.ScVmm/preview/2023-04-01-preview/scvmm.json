@@ -4688,6 +4688,11 @@
           "type": "integer",
           "format": "int32",
           "description": "Gets or sets the generation for the vm."
+        },
+        "biosGuid": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Gets or sets the bios guid for the vm."
         }
       },
       "description": "Specifies the vmmServer infrastructure specific settings for the virtual machine instance."
@@ -5997,6 +6002,12 @@
         "cloud": {
           "description": "Cloud inventory resource details where the VM is present.",
           "$ref": "#/definitions/InventoryItemDetails"
+        },
+        "biosGuid": {
+          "description": "Gets or sets the bios guid.",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "VirtualMachine"
