@@ -23,13 +23,15 @@ multiapi: true
 default-api-version: "2023-03-01"
 clear-output-folder: true
 batch:
+  - tag: package-2023-03-01-only
+  - tag: package-2023-01-02-only
   - multiapiscript: true
 ```
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/computex/azure-mgmt-computex/azure/mgmt/computex
-clear-output-folder: false
 perform-load: false
+clear-output-folder: false
 ```
 
 ### Tag: package-2023-03-01-only
