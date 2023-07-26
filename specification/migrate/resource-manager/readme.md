@@ -11,6 +11,8 @@ This is the AutoRest configuration file for Azure Migrate.
 ``` yaml $(java) && $(multiapi)
 batch:
   - tag: package-migrate-2018-02
+  - tag: package-migrate-2019-10
+  - tag: package-migrate-2017-11
   - tag: package-migrate-2020-01
   - tag: package-migrate-2020-07
   - tag: package-hubmigrate-2020-05
@@ -21,26 +23,13 @@ batch:
 
 ### Tag: package-migrate-2018-02 and java
 
-These settings apply only when `--tag=package-2018-02 --java` is specified on the command line.
+These settings apply only when `--tag=package-migrate-2018-02 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
 ``` yaml $(tag) == 'package-migrate-2018-02' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.azuremigrate.v2018_02_02
   output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-v2018_02_02
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-migrate-2017-11 and java
-
-These settings apply only when `--tag=package-migrate-2017-11 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-migrate-2017-11' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.azuremigrate.v2017_11_11
-  output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-v2017_11_11
 regenerate-manager: true
 generate-interface: true
 ```
@@ -54,6 +43,19 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 java:
   namespace: com.microsoft.azure.management.azuremigrate.v2019_10_01
   output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-v2019_10_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-migrate-2017-11 and java
+
+These settings apply only when `--tag=package-migrate-2017-11 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-migrate-2017-11' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.azuremigrate.v2017_11_11
+  output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-v2017_11_11
 regenerate-manager: true
 generate-interface: true
 ```
@@ -153,7 +155,7 @@ These settings apply only when `--tag=package-migrate-2018-02` is specified on t
 
 ``` yaml $(tag) == 'package-migrate-2018-02'
 input-file:
-- Microsoft.Migrate/stable/2018-02-02/migrate.json
+- Microsoft.Migrate/AssessmentProjects/stable/2018-02-02/migrate.json
 ```
 
 ### Tag: package-migrate-2019-10
@@ -162,7 +164,16 @@ These settings apply only when `--tag=package-migrate-2019-10` is specified on t
 
 ``` yaml $(tag) == 'package-migrate-2019-10'
 input-file:
-- Microsoft.Migrate/stable/2019-10-01/migrate.json
+- Microsoft.Migrate/AssessmentProjects/stable/2019-10-01/migrate.json
+```
+
+### Tag: package-migrate-2017-11
+
+These settings apply only when `--tag=package-migrate-2017-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-migrate-2017-11'
+input-file:
+- Microsoft.Migrate/AssessmentProjects/preview/2017-11-11-preview/migrate.json
 ```
 
 ### Tag: package-migrate-2017-11
@@ -216,7 +227,7 @@ These settings apply only when `--tag=package-migrateengine-2022-05` is specifie
 
 ``` yaml $(tag) == 'package-migrateengine-2022-05'
 input-file:
-- Microsoft.Migrate/preview/2022-05-01-preview/migrateEngine.json
+- Microsoft.Migrate/MordernizeProjects/preview/2022-05-01-preview/migrateEngine.json
 ```
 
 ## Suppression

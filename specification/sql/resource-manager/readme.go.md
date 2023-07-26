@@ -26,6 +26,9 @@ directive:
 - rename-model:
     from: 'SqlVulnerabilityAssessmentScanError'
     to: 'VulnerabilityAssessmentScanForSqlError'
+- from: Servers.json
+  where: $.definitions.PrivateEndpointConnectionProperties
+  transform: $['x-ms-client-name'] = "ServerPrivateEndpointConnectionProperties";
 ```
 
 ``` yaml $(go) && !$(track2)
