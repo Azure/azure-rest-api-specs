@@ -154,9 +154,6 @@
               }
             }
           },
-          "200": {
-            "description": "Accepted -- Resource was deleted."
-          },
           "204": {
             "description": "NoContent -- specified storage task does not exist."
           },
@@ -406,8 +403,8 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageTasks/storageTasks/{storageTaskName}/storageTaskAssignmentsExecutionSummary": {
-      "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageTasks/storageTasks/{storageTaskName}/fetchReportSummary": {
+      "post": {
         "tags": [
           "StorageTasks"
         ],
@@ -426,22 +423,19 @@
             "$ref": "#/parameters/StorageTaskName"
           },
           {
-            "name": "$maxpagesize",
-            "in": "query",
-            "type": "string",
-            "description": "Optional, specifies the maximum number of storage task assignment Ids to be included in the list response."
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "type": "string",
-            "description": "Optional. When specified, it can be used to query using reporting properties."
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/StorageTaskReportParameters"
+            },
+            "description": "The parameters to create a Storage Task."
           }
         ],
         "responses": {
@@ -756,6 +750,22 @@
       },
       "description": "Fetch the Storage task assignment ARM ids."
     },
+    "StorageTaskReportParameters": {
+      "type": "object",
+      "properties": {
+        "filterCondition": {
+          "type": "string",
+          "description": "Filter the response based on the condition provided. Filter options such as startTime gt '2023-06-26T20:51:24.4494016Z' and other comparison operators can be used as described in https://learn.microsoft.com/en-us/rest/api/storageservices/querying-tables-and-entities#supported-comparison-operators"
+        },
+        "maxPageSize": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 200,
+          "format": "int64",
+          "description": "Request for a max page size."
+        }
+      }
+    },
     "StorageTasksRunSummaryList": {
       "type": "object",
       "properties": {
@@ -801,12 +811,12 @@
         "startTime": {
           "readOnly": true,
           "type": "string",
-          "description": "Start time of the run instance. Filter options such startTime gt '2023-06-26T20:51:24.4494016Z' and other comparison operators can be used as described for DateTime properties in https://learn.microsoft.com/en-us/rest/api/storageservices/querying-tables-and-entities#supported-comparison-operators"
+          "description": "Start time of the run instance. Filter options such as startTime gt '2023-06-26T20:51:24.4494016Z' and other comparison operators can be used as described for DateTime properties in https://learn.microsoft.com/en-us/rest/api/storageservices/querying-tables-and-entities#supported-comparison-operators"
         },
         "finishTime": {
           "readOnly": true,
           "type": "string",
-          "description": "End time of the run instance. Filter options such startTime gt '2023-06-26T20:51:24.4494016Z' and other comparison operators can be used as described for DateTime properties in https://learn.microsoft.com/en-us/rest/api/storageservices/querying-tables-and-entities#supported-comparison-operators"
+          "description": "End time of the run instance. Filter options such as startTime gt '2023-06-26T20:51:24.4494016Z' and other comparison operators can be used as described for DateTime properties in https://learn.microsoft.com/en-us/rest/api/storageservices/querying-tables-and-entities#supported-comparison-operators"
         },
         "objectsTargetedCount": {
           "readOnly": true,
