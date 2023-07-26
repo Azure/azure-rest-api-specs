@@ -432,7 +432,14 @@
         "resourceId": {
           "description": "The integration root resource Id",
           "type": "string",
-          "readOnly": true
+          "format": "arm-id",
+		  "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Security/integrations"
+              }
+            ]
+          }
         },
         "distance": {
           "description": "The number of nodes between integration and the root integration resource",
