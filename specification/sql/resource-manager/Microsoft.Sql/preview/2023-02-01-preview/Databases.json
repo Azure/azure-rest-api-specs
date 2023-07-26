@@ -1949,13 +1949,6 @@
           "x-ms-mutability": [
             "create"
           ]
-        },
-        "networkIsolation": {
-          "$ref": "#/definitions/NetworkIsolationSettings",
-          "description": "Optional resource information to enable network isolation for request.",
-          "x-ms-mutability": [
-            "create"
-          ]
         }
       }
     },
@@ -2017,13 +2010,6 @@
         "authenticationType": {
           "description": "Authentication type.",
           "type": "string",
-          "x-ms-mutability": [
-            "create"
-          ]
-        },
-        "networkIsolation": {
-          "$ref": "#/definitions/NetworkIsolationSettings",
-          "description": "Optional resource information to enable network isolation for request.",
           "x-ms-mutability": [
             "create"
           ]
@@ -2103,38 +2089,6 @@
             "$ref": "#/definitions/PrivateEndpointConnectionRequestStatus"
           },
           "readOnly": true
-        }
-      }
-    },
-    "NetworkIsolationSettings": {
-      "description": "Contains the ARM resources for which to create private endpoint connection.",
-      "type": "object",
-      "properties": {
-        "storageAccountResourceId": {
-          "description": "The resource id for the storage account used to store BACPAC file. If set, private endpoint connection will be created for the storage account. Must match storage account used for StorageUri parameter.",
-          "type": "string",
-          "format": "arm-id",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {}
-            ]
-          },
-          "x-ms-mutability": [
-            "create"
-          ]
-        },
-        "sqlServerResourceId": {
-          "description": "The resource id for the SQL server which is the target of this request. If set, private endpoint connection will be created for the SQL server. Must match server which is target of the operation.",
-          "type": "string",
-          "format": "arm-id",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {}
-            ]
-          },
-          "x-ms-mutability": [
-            "create"
-          ]
         }
       }
     },
