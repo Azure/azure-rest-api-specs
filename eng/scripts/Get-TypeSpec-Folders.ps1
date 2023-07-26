@@ -9,7 +9,8 @@ param (
 )
 
 $changedFiles = @()
-$allChangedFiles = (Get-ChildItem -path ./specification tspconfig.yaml -Recurse).Directory.FullName | ForEach-Object {[IO.Path]::GetRelativePath($($pwd.path), $_)}
+$allChangedFiles = (Get-ChildItem -path ./specification tspconfig.yaml -Recurse).Directory.FullName
+  | ForEach-Object {if ($_ -and !(Get-ChildITem -force -path $_ .skip-typespec-validation)){[IO.Path]::GetRelativePath($($pwd.path), $_)}}
 $allChangedFiles = $allChangedFiles -replace '\\', '/'
 
 if ([string]::IsNullOrEmpty($TargetBranch) -or [string]::IsNullOrEmpty($SourceBranch)) {
@@ -43,7 +44,7 @@ $typespecFolders = @()
 foreach ($file in $changedFiles) {
   if ($file -match 'specification\/[^\/]*\/') {
     $typespecFolder = (Get-ChildItem -path $matches[0] tspconfig.yaml -Recurse).Directory.FullName
-      | ForEach-Object {if ($_ -and !(Get-ChildITem -force -path $_ .skip-typespec-validation)) { [IO.Path]::GetRelativePath($($pwd.path), $_) }}
+      | ForEach-Object {if ($_) { [IO.Path]::GetRelativePath($($pwd.path), $_) }}
     $typespecFolders += $typespecFolder -replace '\\', '/'
   }
 }
