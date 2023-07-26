@@ -39,6 +39,15 @@ directive:
 
 ### Tag: package-2023-05-01-preview-only
 
+These settings apply only when `--tag=package-2023-06-01-preview-only` is specified on the command line
+
+``` yaml $(tag) == 'package-2023-06-01-preview-only'
+input-file:
+- Microsoft.Insights/preview/2023-06-01-preview/privateLinkScopes_API.json
+```
+
+### Tag: package-2023-05-01-preview-only
+
 These settings apply only when `--tag=package-2023-05-01-preview-only` is specified on the command line
 
 ``` yaml $(tag) == 'package-2023-05-01-preview-only'
