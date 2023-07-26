@@ -112,11 +112,6 @@
             "format": "int32"
           },
           {
-            "in": "query",
-            "name": "after",
-            "type": "string"
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -134,6 +129,10 @@
             },
             "x-ms-error-response": true
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         }
       }
     }
@@ -182,8 +181,7 @@
           }
         },
         "nextLink": {
-          "type": "string",
-	  "example": "/messages/channels/#CHANNEL_ID#/templates?maxPageSize=4&api-version=2023-02-01-preview&after=#AFTER#"
+          "type": "string"
         }
       }
     },
@@ -209,8 +207,7 @@
       "description": "The template object used to create templates.",
       "required": [
         "language",
-        "name",
-        "parameters"
+        "name"
       ],
       "type": "object",
       "properties": {
@@ -224,80 +221,221 @@
           "type": "string",
           "example": "en_US"
         },
-        "parameters": {
-          "description": "Array of parameters for the content of the template.",
+        "values": {
+          "description": "The template values.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/MessageTemplateValue"
+          }
+        },
+        "bindings": {
+          "$ref": "#/definitions/MessageTemplateBindings"
+        }
+      }
+    },
+    "MessageTemplateBindings": {
+      "description": "The binding object to link values to the template specific locations",
+      "type": "object",
+      "properties": {
+        "whatsApp": {
+          "$ref": "#/definitions/MessageTemplateBindingsWhatsApp"
+        }
+      }
+    },
+    "MessageTemplateBindingsWhatsApp": {
+      "description": "The template bindings for WhatsApp",
+      "type": "object",
+      "properties": {
+        "header": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MessageTemplateParameter"
+            "$ref": "#/definitions/MessageTemplateBindingsWhatsAppComponent"
+          }
+        },
+        "body": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MessageTemplateBindingsWhatsAppComponent"
+          }
+        },
+        "footer": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MessageTemplateBindingsWhatsAppComponent"
+          }
+        },
+        "button": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MessageTemplateBindingsWhatsAppButton"
           }
         }
       }
     },
-    "MessageTemplateParameter": {
-      "description": "The class describes a parameter of a template.",
+    "MessageTemplateBindingsWhatsAppButton": {
+      "description": "The template bindings component button for WhatsApp",
       "required": [
-        "type",
-        "value"
+        "refValue"
       ],
       "type": "object",
       "properties": {
-        "component": {
-          "description": "The component name of the parameter.",
-          "type": "string",
-          "example": "Header;Footer;Body"
-        },
-        "value": {
-          "description": "The text value of the parameter.",
-          "type": "string"
-        },
-        "type": {
-          "$ref": "#/definitions/MessageTemplateParameterType"
-        },
         "subType": {
-          "description": "The [Optional] sub type of the parameter.",
-          "type": "string",
-          "example": "QuickReply;Url"
+          "$ref": "#/definitions/MessageTemplateValueWhatsAppSubType"
         },
-        "location": {
-          "$ref": "#/definitions/MessageTemplateParameterLocation"
+        "refValue": {
+          "description": "The reference to the value in the Microsoft.Azure.Communication.CrossPlatformMessages.Contract.Model.Notifications.V1.Requests.MessageTemplate.Values dictionary.",
+          "type": "string",
+          "example": "title"
+        }
+      }
+    },
+    "MessageTemplateBindingsWhatsAppComponent": {
+      "description": "The template bindings component for WhatsApp",
+      "required": [
+        "refValue"
+      ],
+      "type": "object",
+      "properties": {
+        "refValue": {
+          "description": "The reference to the value in the Microsoft.Azure.Communication.CrossPlatformMessages.Contract.Model.Notifications.V1.Requests.MessageTemplate.Values dictionary.",
+          "type": "string",
+          "example": "title"
         }
       }
     },
     "MessageTemplateParameterLocation": {
-      "description": "The location's additional information.\r\nMessageTemplateParameter.Value is the name of the location.",
+      "description": "The message template's location value information.",
       "type": "object",
       "properties": {
+        "name": {
+          "description": "The [Optional] name of the location.",
+          "type": "string",
+          "example": "Microsoft"
+        },
         "address": {
-          "description": "The address of the location.",
+          "description": "The [Optional] address of the location.",
           "type": "string",
           "example": "1 Microsoft Way, Redmond, WA 98052, USA"
         },
         "latitude": {
-          "format": "float",
+          "format": "double",
           "description": "The latitude of the location.",
           "type": "number",
           "example": 47.639423
         },
         "longitude": {
-          "format": "float",
+          "format": "double",
           "description": "The longitude of the location.",
           "type": "number",
           "example": -122.12831
         }
       }
     },
-    "MessageTemplateParameterType": {
+    "MessageTemplateValue": {
+      "description": "The class describes a parameter of a template.",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/MessageTemplateValueKind"
+        },
+        "text": {
+          "$ref": "#/definitions/MessageTemplateValueText"
+        },
+        "image": {
+          "$ref": "#/definitions/MessageTemplateValueMedia"
+        },
+        "document": {
+          "$ref": "#/definitions/MessageTemplateValueMedia"
+        },
+        "video": {
+          "$ref": "#/definitions/MessageTemplateValueMedia"
+        },
+        "location": {
+          "$ref": "#/definitions/MessageTemplateParameterLocation"
+        },
+        "quickAction": {
+          "$ref": "#/definitions/MessageTemplateValueQuickAction"
+        }
+      }
+    },
+    "MessageTemplateValueKind": {
+      "description": "The template value kind.",
       "enum": [
         "text",
         "image",
         "document",
         "video",
         "location",
-        "button"
+        "quick_action"
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "MessageTemplateParameterType",
+        "name": "MessageTemplateValueKind",
+        "modelAsString": true
+      }
+    },
+    "MessageTemplateValueMedia": {
+      "description": "The message template's media value information.\r\nCould be an image, document or video.",
+      "type": "object",
+      "properties": {
+        "url": {
+          "format": "uri",
+          "description": "The (public) URL of the media.",
+          "type": "string",
+          "example": "https://www.example.com/image.png"
+        },
+        "caption": {
+          "description": "The [optional] caption of the media object.",
+          "type": "string"
+        },
+        "fileName": {
+          "description": "The [optional] filename of the media file.",
+          "type": "string"
+        }
+      }
+    },
+    "MessageTemplateValueQuickAction": {
+      "description": "The message template's quick action value information.",
+      "type": "object",
+      "properties": {
+        "text": {
+          "description": "The [Optional] quick action text",
+          "type": "string",
+          "example": "Yes"
+        },
+        "payload": {
+          "description": "The [Optional] quick action payload",
+          "type": "string",
+          "example": "cGF5bG9hZA=="
+        }
+      }
+    },
+    "MessageTemplateValueText": {
+      "description": "The message template's text value information.",
+      "required": [
+        "text"
+      ],
+      "type": "object",
+      "properties": {
+        "text": {
+          "description": "The text value.",
+          "type": "string",
+          "example": "John DOE"
+        }
+      }
+    },
+    "MessageTemplateValueWhatsAppSubType": {
+      "description": "The WhatsApp button sub type",
+      "enum": [
+        "quickReply",
+        "url"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MessageTemplateValueWhatsAppSubType",
         "modelAsString": true
       }
     },
