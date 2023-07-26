@@ -28,7 +28,7 @@ These are the global settings for the RecoveryServicesBackup API.
 title: Recovery Services Backup Client
 description: Open API 2.0 Specs for Azure RecoveryServices Backup service
 openapi-type: arm
-tag: package-2023-04
+tag: package-2023-06
 csharp-sdks-folder: ./Generated/CSharp
 python-sdks-folder: ./Generated/Python
 go-sdk-folder: ./Generated/Golang
@@ -454,4 +454,8 @@ directive:
     from: bms.json
     where: $.definitions.RecoveryPointResource
     reason: This is an existing resource in our service and is present across API version. Suppressing for API versions 2021-11-15, 2023-01-15 for fixing completeness for CRR Get recoverypoints API.
+  - suppress: LroErrorContent  
+    from: bms.json
+    reason: The azure backup service's API infra handles the conversation from execptions to custom error CloudError. Changing this would be breaking change for our service.
+  
 ```
