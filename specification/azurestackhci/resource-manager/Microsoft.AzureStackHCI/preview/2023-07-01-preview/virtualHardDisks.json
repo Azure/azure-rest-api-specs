@@ -138,6 +138,10 @@
             "$ref": "./examples/DeleteVirtualHardDisk.json"
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -161,6 +165,9 @@
           },
           "200": {
             "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
           },
           "204": {
             "description": "No content"
@@ -222,7 +229,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualHardDisks": {
       "get": {
-        "operationId": "VirtualHardDisks_ListByResourceGroup",
+        "operationId": "VirtualHardDisks_List",
         "description": "Lists all of the virtual hard disks in the specified resource group. Use the nextLink property in the response to get the next page of virtual hard disks.",
         "x-ms-examples": {
           "ListVirtualHardDiskByResourceGroup": {
@@ -261,10 +268,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/virtualHardDisks": {
       "get": {
-        "operationId": "VirtualHardDisks_ListBySubscription",
+        "operationId": "VirtualHardDisks_ListAll",
         "description": "Lists all of the virtual hard disks in the specified subscription. Use the nextLink property in the response to get the next page of virtual hard disks.",
         "x-ms-examples": {
-          "ListVirtualHardDiskByResourceGroup": {
+          "ListVirtualHardDiskBySubscription": {
             "$ref": "./examples/ListVirtualHardDiskBySubscription.json"
           }
         },
@@ -412,6 +419,7 @@
       "type": "object",
       "description": "The virtual hard disk resource definition.",
       "x-ms-azure-resource": true,
+      "x-ms-client-flatten": true,
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -462,7 +470,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[-_a-zA-Z0-9]{1,80}$",
+      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$",
       "x-ms-parameter-location": "method",
       "maxLength": 80,
       "minLength": 1,

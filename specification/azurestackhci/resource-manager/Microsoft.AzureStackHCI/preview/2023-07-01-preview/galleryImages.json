@@ -138,6 +138,10 @@
             "$ref": "./examples/DeleteGalleryImage.json"
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -162,6 +166,9 @@
           "200": {
             "description": "OK"
           },
+          "202": {
+            "description": "Accepted"
+          },
           "204": {
             "description": "No content"
           }
@@ -174,10 +181,6 @@
           "UpdateGalleryImage": {
             "$ref": "./examples/UpdateGalleryImage.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         },
         "parameters": [
           {
@@ -222,7 +225,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/galleryImages": {
       "get": {
-        "operationId": "GalleryImages_ListByResourceGroup",
+        "operationId": "GalleryImages_List",
         "description": "Lists all of the gallery images in the specified resource group. Use the nextLink property in the response to get the next page of gallery images.",
         "x-ms-examples": {
           "ListGalleryImageByResourceGroup": {
@@ -261,10 +264,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/galleryImages": {
       "get": {
-        "operationId": "GalleryImages_ListBySubscription",
+        "operationId": "GalleryImages_ListAll",
         "description": "Lists all of the gallery images in the specified subscription. Use the nextLink property in the response to get the next page of gallery images.",
         "x-ms-examples": {
-          "ListGalleryImageByResourceGroup": {
+          "ListGalleryImageBySubscription": {
             "$ref": "./examples/ListGalleryImageBySubscription.json"
           }
         },
@@ -301,9 +304,9 @@
       "type": "object",
       "x-ms-client-flatten": true,
       "properties": {
-        "containerName": {
+        "containerId": {
           "type": "string",
-          "description": "Container Name for storage container"
+          "description": "Storage ContainerID of the storage container to be used for gallery image"
         },
         "imagePath": {
           "type": "string",
@@ -373,6 +376,9 @@
           "$ref": "#/definitions/GalleryImageStatus"
         }
       },
+      "required": [
+        "osType"
+      ],
       "description": "Properties under the gallery image resource"
     },
     "GalleryImageStatus": {
@@ -503,6 +509,7 @@
       "type": "object",
       "description": "The gallery images resource definition.",
       "x-ms-azure-resource": true,
+      "x-ms-client-flatten": true,
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,

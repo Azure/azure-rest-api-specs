@@ -137,6 +137,10 @@
             "$ref": "./examples/DeleteVirtualNetwork.json"
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -160,6 +164,9 @@
           },
           "200": {
             "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
           },
           "204": {
             "description": "No content"
@@ -221,7 +228,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualNetworks": {
       "get": {
-        "operationId": "VirtualNetworks_ListByResourceGroup",
+        "operationId": "VirtualNetworks_List",
         "description": "Lists all of the virtual networks in the specified resource group. Use the nextLink property in the response to get the next page of virtual networks.",
         "x-ms-examples": {
           "ListVirtualNetworkByResourceGroup": {
@@ -260,7 +267,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/virtualNetworks": {
       "get": {
-        "operationId": "VirtualNetworks_ListBySubscription",
+        "operationId": "VirtualNetworks_ListAll",
         "description": "Lists all of the virtual networks in the specified subscription. Use the nextLink property in the response to get the next page of virtual networks.",
         "x-ms-examples": {
           "ListVirtualNetworkBySubscription": {
@@ -439,14 +446,6 @@
                     },
                     "description": "RouteTable for the subnet"
                   },
-                  "ipPools": {
-                    "type": "array",
-                    "description": "network associated pool of IP Addresses",
-                    "items": {
-                      "$ref": "#/definitions/IPPool"
-                    },
-                    "x-ms-identifiers": []
-                  },
                   "vlan": {
                     "type": "integer",
                     "format": "int32",
@@ -524,53 +523,11 @@
       },
       "description": "The observed state of virtual networks"
     },
-    "IPPoolInfo": {
-      "type": "object",
-      "properties": {
-        "used": {
-          "type": "string",
-          "readOnly": true,
-          "description": "no. of ip addresses allocated from the ip pool"
-        },
-        "available": {
-          "type": "string",
-          "readOnly": true,
-          "description": "no. of ip addresses available in the ip pool"
-        }
-      }
-    },
-    "IPPool": {
-      "type": "object",
-      "properties": {
-        "ipPoolType": {
-          "type": "string",
-          "enum": [
-            "vm",
-            "vippool"
-          ],
-          "x-ms-enum": {
-            "name": "IPPoolTypeEnum",
-            "modelAsString": false
-          },
-          "description": "ip pool type"
-        },
-        "start": {
-          "type": "string",
-          "description": "start of the ip address pool"
-        },
-        "end": {
-          "type": "string",
-          "description": "end of the ip address pool"
-        },
-        "info": {
-          "$ref": "#/definitions/IPPoolInfo"
-        }
-      }
-    },
     "VirtualNetworks": {
       "type": "object",
       "description": "The virtual network resource definition.",
       "x-ms-azure-resource": true,
+      "x-ms-client-flatten": true,
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,

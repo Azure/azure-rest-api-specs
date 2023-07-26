@@ -138,6 +138,10 @@
             "$ref": "./examples/DeleteStorageContainer.json"
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -161,6 +165,9 @@
           },
           "200": {
             "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
           },
           "204": {
             "description": "No content"
@@ -222,7 +229,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/storageContainers": {
       "get": {
-        "operationId": "StorageContainers_ListByResourceGroup",
+        "operationId": "StorageContainers_List",
         "description": "Lists all of the storage containers in the specified resource group. Use the nextLink property in the response to get the next page of storage containers.",
         "x-ms-examples": {
           "ListStorageContainerByResourceGroup": {
@@ -261,10 +268,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/storageContainers": {
       "get": {
-        "operationId": "StorageContainers_ListBySubscription",
+        "operationId": "StorageContainers_ListAll",
         "description": "Lists all of the storage containers in the specified subscription. Use the nextLink property in the response to get the next page of storage containers.",
         "x-ms-examples": {
-          "ListStorageContainerByResourceGroup": {
+          "ListStorageContainerBySubscription": {
             "$ref": "./examples/ListStorageContainerBySubscription.json"
           }
         },
@@ -378,6 +385,7 @@
       "type": "object",
       "description": "The storage container resource definition.",
       "x-ms-azure-resource": true,
+      "x-ms-client-flatten": true,
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,

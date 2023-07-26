@@ -138,6 +138,10 @@
             "$ref": "./examples/DeleteNetworkInterface.json"
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -161,6 +165,9 @@
           },
           "200": {
             "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
           },
           "204": {
             "description": "No content"
@@ -222,7 +229,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/networkInterfaces": {
       "get": {
-        "operationId": "NetworkInterfaces_ListByResourceGroup",
+        "operationId": "NetworkInterfaces_List",
         "description": "Lists all of the network interfaces in the specified resource group. Use the nextLink property in the response to get the next page of network interfaces.",
         "x-ms-examples": {
           "ListNetworkInterfaceByResourceGroup": {
@@ -261,7 +268,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/networkInterfaces": {
       "get": {
-        "operationId": "NetworkInterfaces_ListBySubscription",
+        "operationId": "NetworkInterfaces_ListAll",
         "description": "Lists all of the network interfaces in the specified subscription. Use the nextLink property in the response to get the next page of network interfaces.",
         "x-ms-examples": {
           "ListNetworkInterfaceBySubscription": {
@@ -417,18 +424,6 @@
               "type": "string",
               "description": "PrivateIPAddress - Private IP address of the IP configuration."
             },
-            "privateIPAllocationMethod": {
-              "type": "string",
-              "description": "PrivateIPAllocationMethod - The private IP address allocation method. Possible values include: 'Static', 'Dynamic'",
-              "enum": [
-                "Dynamic",
-                "Static"
-              ],
-              "x-ms-enum": {
-                "name": "PrivateIPAllocationMethodEnum",
-                "modelAsString": true
-              }
-            },
             "subnet": {
               "type": "object",
               "properties": {
@@ -449,6 +444,7 @@
       "type": "object",
       "description": "The network interface resource definition.",
       "x-ms-azure-resource": true,
+      "x-ms-client-flatten": true,
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
