@@ -132,6 +132,9 @@
         ],
         "responses": {
           "200": {
+            "headers": {
+              "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/microsoft.insights/privateLinkScopes/scopeName?api-version=2023-06-01"
+            },
             "description": "Successful request when deleting a Azure Monitor PrivateLinkScope."
           },
           "204": {
@@ -891,10 +894,12 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Resource tags"
+          "description": "Resource tags",
+          "type": "object"
         }
       },
-      "description": "A container holding only the Tags for a resource, allowing the user to update the tags on a PrivateLinkScope instance."
+      "description": "A container holding only the Tags for a resource, allowing the user to update the tags on a PrivateLinkScope instance.",
+      "type": "object"
     },
     "AzureMonitorPrivateLinkScope": {
       "properties": {
@@ -917,10 +922,12 @@
       "required": [
         "properties"
       ],
-      "description": "An Azure Monitor PrivateLinkScope definition."
+      "description": "An Azure Monitor PrivateLinkScope definition.",
+      "type": "object"
     },
     "AzureMonitorPrivateLinkScopeProperties": {
       "description": "Properties that define a Azure Monitor PrivateLinkScope resource.",
+      "type": "object",
       "properties": {
         "provisioningState": {
           "type": "string",
@@ -962,7 +969,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AccessModeSettingsExclusion"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -1002,6 +1010,7 @@
     },
     "AzureMonitorPrivateLinkScopeListResult": {
       "description": "Describes the list of Azure Monitor PrivateLinkScope resources.",
+      "type": "object",
       "required": [
         "value"
       ],
