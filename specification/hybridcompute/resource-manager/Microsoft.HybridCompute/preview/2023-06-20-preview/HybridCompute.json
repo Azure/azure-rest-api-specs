@@ -2251,6 +2251,20 @@
             "provisioningState": {
               "readOnly": true,
               "type": "string",
+              "enum": [
+                "Creating",
+                "Updating",
+                "Deleting",
+                "Succeeded",
+                "Failed",
+                "Accepted",
+                "Canceled",
+                "Deleted"
+              ],
+              "x-ms-enum": {
+                "name": "LicenseProfileProvisioningState",
+                "modelAsString": true
+              },
               "description": "The provisioning state, which only appears in the response."
             }
           },
@@ -2338,7 +2352,7 @@
     "EsuKeyState": {
       "type": "string",
       "enum": [
-        "NotActive",
+        "Inactive",
         "Active"
       ],
       "x-ms-enum": {
@@ -2369,20 +2383,11 @@
     "EsuProfileProperties": {
       "type": "object",
       "properties": {
-        "arcEsuEnrolled": {
-          "$ref": "#/definitions/ArcEsuEnrolled"
+        "arcEsuEnrollmentState": {
+          "$ref": "#/definitions/ArcEnabledEsuStatus"
         },
-        "esuKeyActive": {
-          "readOnly": true,
-          "type": "string",
-          "enum": [
-            "true",
-            "false"
-          ],
-          "x-ms-enum": {
-            "name": "esuKeyActive",
-            "modelAsString": true
-          },
+        "esuKeyState": {
+          "$ref": "#/definitions/EsuKeyState",
           "description": "Indicates whether there is an ESU Key currently active for the machine."
         },
         "esuKeys": {
@@ -2406,23 +2411,11 @@
       },
       "description": "Describes the properties of a License Profile."
     },
-    "ArcEsuEnrolled": {
-      "type": "string",
-      "enum": [
-        "true",
-        "false"
-      ],
-      "x-ms-enum": {
-        "name": "ArcEsuEnrolled",
-        "modelAsString": true
-      },
-      "description": "Specifies wether the machine has enrolled in ESU or not."
-    },
     "EsuProfileUpdateProperties": {
       "type": "object",
       "properties": {
-        "arcEsuEnrolled": {
-          "$ref": "#/definitions/ArcEsuEnrolled"
+        "arcEsuEnrollmentState": {
+          "$ref": "#/definitions/ArcEnabledEsuStatus"
         }
       },
       "description": "Describes the Update properties of a License Profile."
@@ -2435,16 +2428,8 @@
           "$ref": "#/definitions/ArcEnabledEsuStatus",
           "description": "The Arc ESU enrollment state."
         },
-        "esuKeyActive": {
-          "type": "string",
-          "enum": [
-            "true",
-            "false"
-          ],
-          "x-ms-enum": {
-            "name": "esuKeyActiveInMachineEsuProperties",
-            "modelAsString": true
-          },
+        "esuKeyState": {
+          "$ref": "#/definitions/EsuKeyState",
           "description": "Indicates whether there is an ESU Key currently active for the machine."
         },
         "serverType": {
