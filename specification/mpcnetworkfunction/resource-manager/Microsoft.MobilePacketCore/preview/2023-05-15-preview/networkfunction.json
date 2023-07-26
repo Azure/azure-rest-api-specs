@@ -182,7 +182,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./common.json#/parameters/NetworkFunctionNameParameter"
+            "$ref": "#/parameters/NetworkFunctionNameParameter"
           }
         ],
         "responses": {
@@ -222,7 +222,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./common.json#/parameters/NetworkFunctionNameParameter"
+            "$ref": "#/parameters/NetworkFunctionNameParameter"
           },
           {
             "name": "resource",
@@ -277,7 +277,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./common.json#/parameters/NetworkFunctionNameParameter"
+            "$ref": "#/parameters/NetworkFunctionNameParameter"
           },
           {
             "name": "properties",
@@ -326,7 +326,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./common.json#/parameters/NetworkFunctionNameParameter"
+            "$ref": "#/parameters/NetworkFunctionNameParameter"
           }
         ],
         "responses": {
@@ -735,5 +735,16 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "NetworkFunctionNameParameter": {
+      "name": "networkFunctionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the network function.",
+      "x-ms-parameter-location": "method"
+    }
+  }
 }
