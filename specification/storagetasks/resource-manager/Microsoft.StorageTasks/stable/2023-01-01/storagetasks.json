@@ -438,7 +438,7 @@
             "schema": {
               "$ref": "#/definitions/StorageTaskReportParameters"
             },
-            "description": "The parameters to create a Storage Task."
+            "description": "Optional filter conditions."
           }
         ],
         "responses": {
@@ -457,6 +457,51 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageTasks/previewActions": {
+      "post": {
+        "tags": [
+          "StorageTasks"
+        ],
+        "operationId": "StorageTaskActionsPreview",
+        "description": "Runs the input conditions against input object metadata properties and designates matched objects in response.",
+        "x-ms-examples": {
+          "PerformStorageTaskActionsPreview": {
+            "$ref": "./examples/misc/PerformStorageTaskActionsPreview.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageTaskPreviewAction"
+            },
+            "description": "The parameters to preview action condition."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Storage tasks preview action was performed and returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageTaskPreviewAction"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
         }
       }
     }
@@ -897,6 +942,157 @@
         }
       },
       "description": "Storage task execution report for a run instance."
+    },
+    "StorageTaskPreviewAction": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/StorageTaskPreviewActionProperties",
+          "description": "Properties of the storage task preview."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "Storage Task Preview Action."
+    },
+    "StorageTaskPreviewActionProperties": {
+      "type": "object",
+      "properties": {
+        "container": {
+          "type": "object",
+          "$ref": "#/definitions/StorageTaskPreviewContainerProperties",
+          "description": "Preview action container properties to be tested for a match with the provided condition."
+        },
+        "blobs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageTaskPreviewBlobProperties"
+          },
+          "x-ms-identifiers": [],
+          "description": "Preview action container properties to be tested for a match with the provided condition."
+        },
+        "action": {
+          "type": "object",
+          "$ref": "#/definitions/StorageTaskPreviewActionCondition",
+          "description": "Preview action container properties to be tested for a match with the provided condition."
+        }
+      },
+      "required": [
+        "container",
+        "blobs",
+        "action"
+      ],
+      "description": "Storage task preview action properties."
+    },
+    "StorageTaskPreviewActionCondition": {
+      "type": "object",
+      "properties": {
+        "if": {
+          "$ref": "#/definitions/StorageTaskPreviewActionIfCondition",
+          "description": "The condition to be tested for a match with container and blob properties."
+        },
+        "elseBlockExists": {
+          "type": "boolean",
+          "description": "Specify whether the else block is present in the condition."
+        }
+      },
+      "required": [
+        "if",
+        "elseBlockExists"
+      ],
+      "description": "Represents the storage task conditions to be tested for a match with container and blob properties."
+    },
+    "StorageTaskPreviewActionIfCondition": {
+      "type": "object",
+      "properties": {
+        "condition": {
+          "type": "string",
+          "description": "Storage task condition to bes tested for a match."
+        }
+      },
+      "description": "Represents storage task preview action condition."
+    },
+    "StorageTaskPreviewContainerProperties": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "property for the container name."
+        },
+        "metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageTaskPreviewKeyValueProperties"
+          },
+          "x-ms-identifiers": [],
+          "description": "metadata key value pairs to be tested for a match againsg the provided condition."
+        }
+      },
+      "description": "Storage task preview container properties"
+    },
+    "StorageTaskPreviewBlobProperties": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "property for the container name."
+        },
+        "properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageTaskPreviewKeyValueProperties"
+          },
+          "x-ms-identifiers": [],
+          "description": "properties key value pairs to be tested for a match againsg the provided condition."
+        },
+        "metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageTaskPreviewKeyValueProperties"
+          },
+          "x-ms-identifiers": [],
+          "description": "metadata key value pairs to be tested for a match againsg the provided condition."
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageTaskPreviewKeyValueProperties"
+          },
+          "x-ms-identifiers": [],
+          "description": "tags key value pairs to be tested for a match againsg the provided condition."
+        },
+        "matchedBlock": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "If",
+            "Else",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "matchedBlockName",
+            "modelAsString": true
+          },
+          "description": "Represents the condition block name that matched blob properties."
+        }
+      },
+      "description": "Storage task preview container properties"
+    },
+    "StorageTaskPreviewKeyValueProperties": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Represents the key property of the pair."
+        },
+        "value": {
+          "type": "string",
+          "description": "Represents the value property of the pair."
+        }
+      },
+      "description": "Storage task preview object key value pair properties."
     }
   },
   "parameters": {
