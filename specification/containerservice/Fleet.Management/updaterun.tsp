@@ -112,7 +112,7 @@ model ManagedClusterUpdate {
   @visibility("create", "read")
   @doc("The node image upgrade to be applied to the target nodes in update run.")
   @added(Versions.v2023_06_15_preview)
-  nodeImageSelection: NodeImageSelection;
+  nodeImageSelection?: NodeImageSelection;
 }
 
 @doc("The node image upgrade to be applied to the target nodes in update run.")
