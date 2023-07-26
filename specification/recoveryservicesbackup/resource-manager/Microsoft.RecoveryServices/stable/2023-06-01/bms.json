@@ -2034,6 +2034,9 @@
           },
           "Create or Update Hourly Azure Storage Protection Policy": {
             "$ref": "./examples/AzureStorage/ProtectionPolicies_CreateOrUpdate_Hourly.json"
+          },
+          "Create or Update Azure Storage Vault Standard Protection Policy": {
+            "$ref": "./examples/AzureStorage/ProtectionPolicies_CreateOrUpdate_Hardened.json"
           }
         }
       },
@@ -5169,6 +5172,10 @@
         "retentionPolicy": {
           "$ref": "#/definitions/RetentionPolicy",
           "description": "Retention policy with the details on backup copy retention ranges."
+        },
+        "vaultRetentionPolicy": {
+          "$ref": "#/definitions/VaultRetentionPolicy",
+          "description": "Retention policy with the details on hardened backup copy retention ranges."
         },
         "timeZone": {
           "description": "TimeZone optional input as string. For example: TimeZone = \"Pacific Standard Time\".",
@@ -9489,6 +9496,23 @@
         }
       },
       "x-ms-discriminator-value": "ValidateRestoreOperationRequest"
+    },
+    "VaultRetentionPolicy": {
+      "description": "Vault retention policy for AzureFileShare",
+      "required": [
+        "vaultRetention",
+        "snapshotRetentionInDays"
+      ],
+      "type": "object",
+      "properties": {
+        "vaultRetention": {
+          "$ref": "#/definitions/RetentionPolicy",
+        },
+        "snapshotRetentionInDays": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
     },
     "WeeklyRetentionFormat": {
       "description": "Weekly retention format.",
