@@ -1,47 +1,29 @@
 {
-  "operationId": "Patcges_Get",
+  "operationId": "Patches_Get",
   "title": "Patches_Get_0",
   "parameters": {
     "api-version": "2023-05-02-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg",
     "builderName": "testBuilder",
-    "buildName": "testPatch"
+    "patchName": "testPatch"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg/providers/Microsoft.App/builders/testBuilder/patches/testPatch",
-        "name": "testPatch",
-        "type": "Microsoft.App/builders/patches",
-        "properties": {
-          "provisioningState": "Succeeded",
-          "patchStatus": "InProgress",
-          "configuration": {
-            "patchId": "1ce4b2a0"
-          },
-          "availablePatches": [
-            {
-              "patchId": "1ce4b2a0",
-              "newRunImage": "mcr.microsoft.com/oryx/builder:run-dotnet-aspnet-7.0.7-cbl-mariner2.0",
-              "oldRunImage": "mcr.microsoft.com/oryx/builder:run-dotnet-aspnet-7.0.5-cbl-mariner2.0",
-              "targetResourceGroup": "test-rg",
-              "targetContainerAppEnv": "test-env",
-              "targetContainerApp": "test-app",
-              "targetContainerName": "test-container",
-              "targetImageName": "testregistry.azurecr.io/test-image:latest",
-              "reason": "Newer run image available."
-            }
-          ]
-        },
-        "systemData": {
-          "createdBy": "sample@microsoft.com",
-          "createdByType": "User",
-          "createdAt": "2022-10-11T11:05:51.4940669Z",
-          "lastModifiedBy": "sample@microsoft.com",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2022-10-11T11:05:51.4940669Z"
-        }
+        "value": [
+          {
+            "patchId": "1ce4b2a0",
+            "targetImageName": "testregistry.azurecr.io/test-image:latest",
+            "newRunImage": "mcr.microsoft.com/oryx/builder:run-dotnet-aspnet-7.0.7-cbl-mariner2.0",
+            "oldRunImage": "mcr.microsoft.com/oryx/builder:run-dotnet-aspnet-7.0.5-cbl-mariner2.0",
+            "reason": "Newer run image available.",
+            "targetResourceGroup": "test-rg",
+            "targetContainerAppEnv": "test-env",
+            "targetContainerApp": "test-app",
+            "targetContainerName": "test-container"
+          }
+        ]
       }
     }
   }

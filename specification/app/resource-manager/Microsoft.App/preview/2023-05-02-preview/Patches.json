@@ -67,6 +67,11 @@
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Patches_Apply_0": {
+            "$ref": "./examples/Patches_ListByBuilderResource.json"
+          }
         }
       }
     },
@@ -96,9 +101,9 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Patch list retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/PatchResource"
+              "$ref": "#/definitions/PatchList"
             }
           },
           "default": {
@@ -113,13 +118,15 @@
             "$ref": "./examples/Patches_Get.json"
           }
         }
-      },
-      "put": {
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/builders/{builderName}/patches/{patchName}/apply": {
+      "post": {
         "tags": [
           "Patches"
         ],
-        "operationId": "Patches_Update",
-        "description": "Update a PatchResource with patch id.",
+        "operationId": "Patches_Apply",
+        "description": "Apply a PatchResource with patch id.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -137,24 +144,18 @@
             "$ref": "#/parameters/PatchNameParameter"
           },
           {
-            "name": "patchEnvelope",
-            "in": "body",
-            "required": true,
-            "description": "Update parameters.",
-            "schema": {
-              "$ref": "#/definitions/PatchResource"
-            }
+            "$ref": "#/definitions/PatchConfiguration"
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM update operation completed successfully.",
+            "description": "Patching operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PatchResource"
             }
           },
           "201": {
-            "description": "ARM update operation has been started.",
+            "description": "Patching operation has been started.",
             "schema": {
               "$ref": "#/definitions/PatchResource"
             },
@@ -175,8 +176,53 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Patches_Update_WithConfig": {
-            "$ref": "./examples/Patches_Update.json"
+          "Patches_Apply_0": {
+            "$ref": "./examples/Patches_Apply.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/builders/{builderName}/patches/{patchName}/delete": {
+      "put": {
+        "tags": [
+          "Patches"
+        ],
+        "operationId": "Patches_Delete",
+        "description": "Delete specific patch by patch id.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./Builders.json#/parameters/BuilderNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PatchNameParameter"
+          },
+          {
+            "$ref": "#/definitions/PatchConfiguration"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Patch deletion completed successfully."
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patches_Apply_0": {
+            "$ref": "./examples/Patches_Delete.json"
           }
         }
       }
@@ -239,6 +285,55 @@
         "modelAsString": true
       },
       "readOnly": true
+    },
+    "PatchList": {
+      "description": "List of patches to be applied.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/PatchObject"
+      }
+    },
+    "PatchObject": {
+      "description": "Individual patch object.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Patch Id"
+        },
+        "targetImage": {
+          "type": "string",
+          "description": "The name of the target image for the patch."
+        },
+        "newRunImage": {
+          "type": "string",
+          "description": "The name of new run image for the target image."
+        },
+        "oldRunImage": {
+          "type": "string",
+          "description": "The name of old run image for the target image."
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the patch."
+        },
+        "targetResourceGroup": {
+          "type": "string",
+          "description": "The name of the target resource group for the patch."
+        },
+        "targetContainerAppEnvironmentName": {
+          "type": "string",
+          "description": "The name of the target container app environment for the patch."
+        },
+        "targetContainerAppName": {
+          "type": "string",
+          "description": "The name of the target container app for the patch."
+        },
+        "targetContainerName": {
+          "type": "string",
+          "description": "The name of the target container for the patch."
+        }
+      }
     },
     "PatchProperties": {
       "type": "object",
