@@ -20,7 +20,10 @@
         "osProfile": {
           "computerName": "luamaster",
           "adminUsername": "localadmin",
-          "adminPassword": "password"
+          "adminPassword": "password",
+          "windowsConfiguration": {
+            "provisionVMConfigAgent": true
+          }
         },
         "networkProfile": {
           "networkInterfaces": [
@@ -73,7 +76,21 @@
               "secureBootEnabled": true
             }
           },
-          "provisioningState": "Accepted"
+          "provisioningState": "Accepted",
+          "instanceView": {
+            "vmAgent": {
+              "vmVMConfigAgentVersion": "1.0.0",
+              "statuses": [
+                {
+                  "code": "Ok",
+                  "level": "Info",
+                  "displayStatus": "Ok",
+                  "message": "The agent is healthy",
+                  "time": "2009-06-15T13:45:30"
+                }
+              ]
+            }
+          }
         }
       }
     },
@@ -105,7 +122,21 @@
               }
             ]
           },
-          "provisioningState": "Succeeded"
+          "provisioningState": "Succeeded",
+          "instanceView": {
+            "vmAgent": {
+              "vmVMConfigAgentVersion": "1.0.0",
+              "statuses": [
+                {
+                  "code": "Ok",
+                  "level": "Info",
+                  "displayStatus": "Ok",
+                  "message": "The agent is healthy",
+                  "time": "2009-06-15T13:45:30"
+                }
+              ]
+            }
+          }
         }
       }
     }
