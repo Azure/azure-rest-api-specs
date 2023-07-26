@@ -3148,7 +3148,8 @@
           "type": "string",
           "readOnly": true
         }
-      }
+      },
+      "x-ms-discriminator-value": "AzStackHCI"
     },
     "CheckNameAvailabilityModel": {
       "description": "Check name availability model.",
@@ -3296,7 +3297,8 @@
           "minLength": 1,
           "type": "string"
         }
-      }
+      },
+      "discriminator": "instanceType"
     },
     "DraModelProperties": {
       "description": "Dra model properties.",
@@ -3579,7 +3581,8 @@
           "minLength": 1,
           "type": "string"
         }
-      }
+      },
+      "discriminator": "instanceType"
     },
     "EventModelProperties": {
       "description": "Event model properties.",
@@ -3727,7 +3730,8 @@
           "minLength": 1,
           "type": "string"
         }
-      }
+      },
+      "discriminator": "instanceType"
     },
     "FabricModelProperties": {
       "description": "Fabric model properties.",
@@ -3893,7 +3897,8 @@
           "readOnly": true,
           "x-ms-identifiers": []
         }
-      }
+      },
+      "x-ms-discriminator-value": "FailoverWorkflowDetails"
     },
     "HealthErrorModel": {
       "description": "Health error model.",
@@ -4014,7 +4019,8 @@
           "type": "string",
           "readOnly": true
         }
-      }
+      },
+      "x-ms-discriminator-value": "HyperVMigrate"
     },
     "HyperVToAzStackHCIDiskInput": {
       "description": "HyperVToAzStack disk input.",
@@ -4089,7 +4095,8 @@
           "type": "string",
           "readOnly": true
         }
-      }
+      },
+      "x-ms-discriminator-value": "HyperVToAzStackHCI"
     },
     "HyperVToAzStackHCINicInput": {
       "description": "HyperVToAzStackHCI NIC properties.",
@@ -4153,7 +4160,8 @@
           "description": "Gets or sets a value indicating whether VM needs to be shut down.",
           "type": "boolean"
         }
-      }
+      },
+      "x-ms-discriminator-value": "HyperVToAzStackHCI"
     },
     "HyperVToAzStackHCIPolicyModelCustomProperties": {
       "description": "HyperV To AzStackHCI Policy model custom properties.",
@@ -4184,7 +4192,8 @@
           "description": "Gets or sets the app consistent snapshot frequency (in minutes).",
           "type": "integer"
         }
-      }
+      },
+      "x-ms-discriminator-value": "HyperVToAzStackHCI"
     },
     "HyperVToAzStackHCIProtectedDiskProperties": {
       "description": "HyperVToAzStackHCI protected disk properties.",
@@ -4490,7 +4499,8 @@
           "type": "string",
           "readOnly": true
         }
-      }
+      },
+      "x-ms-discriminator-value": "HyperVToAzStackHCI"
     },
     "HyperVToAzStackHCIProtectedNicProperties": {
       "description": "HyperVToAzStackHCI NIC properties.",
@@ -4555,7 +4565,8 @@
           },
           "readOnly": true
         }
-      }
+      },
+      "x-ms-discriminator-value": "HyperVToAzStackHCI"
     },
     "HyperVToAzStackHCIReplicationExtensionModelCustomProperties": {
       "description": "HyperV to AzStackHCI Replication extension model custom properties.",
@@ -4648,7 +4659,8 @@
           "type": "string",
           "readOnly": true
         }
-      }
+      },
+      "x-ms-discriminator-value": "HyperVToAzStackHCI"
     },
     "IdentityModel": {
       "description": "Identity model.",
@@ -4843,7 +4855,8 @@
           "minLength": 1,
           "type": "string"
         }
-      }
+      },
+      "discriminator": "instanceType"
     },
     "PlannedFailoverModelProperties": {
       "description": "Planned failover model properties.",
@@ -4931,7 +4944,8 @@
           "minLength": 1,
           "type": "string"
         }
-      }
+      },
+      "discriminator": "instanceType"
     },
     "PolicyModelProperties": {
       "description": "Policy model properties.",
@@ -5106,7 +5120,8 @@
           "minLength": 1,
           "type": "string"
         }
-      }
+      },
+      "discriminator": "instanceType"
     },
     "ProtectedItemModelProperties": {
       "description": "Protected item model properties.",
@@ -5462,7 +5477,8 @@
           "minLength": 1,
           "type": "string"
         }
-      }
+      },
+      "discriminator": "instanceType"
     },
     "RecoveryPointModelProperties": {
       "description": "Recovery point model properties.",
@@ -5569,7 +5585,8 @@
           "minLength": 1,
           "type": "string"
         }
-      }
+      },
+      "discriminator": "instanceType"
     },
     "ReplicationExtensionModelProperties": {
       "description": "Replication extension model properties.",
@@ -5732,7 +5749,8 @@
           "type": "string",
           "readOnly": true
         }
-      }
+      },
+      "x-ms-discriminator-value": "TestFailoverCleanupWorkflowDetails"
     },
     "TestFailoverWorkflowModelCustomProperties": {
       "description": "Test failover workflow model custom properties.",
@@ -5752,7 +5770,8 @@
           "readOnly": true,
           "x-ms-identifiers": []
         }
-      }
+      },
+      "x-ms-discriminator-value": "TestFailoverWorkflowDetails"
     },
     "VMwareDraModelCustomProperties": {
       "description": "VMware DRA model custom properties.",
@@ -5775,7 +5794,8 @@
         "marsAuthenticationIdentity": {
           "$ref": "#/definitions/IdentityModel"
         }
-      }
+      },
+      "x-ms-discriminator-value": "VMware"
     },
     "VMwareMigrateFabricModelCustomProperties": {
       "description": "VMware migrate fabric model custom properties.",
@@ -5800,7 +5820,8 @@
           "minLength": 1,
           "type": "string"
         }
-      }
+      },
+      "x-ms-discriminator-value": "VMwareMigrate"
     },
     "VMwareToAzStackHCIDiskInput": {
       "description": "VMwareToAzStack disk input.",
@@ -5909,7 +5930,8 @@
           "description": "Gets or sets a value indicating whether VM needs to be shut down.",
           "type": "boolean"
         }
-      }
+      },
+      "x-ms-discriminator-value": "VMwareToAzStackHCI"
     },
     "VMwareToAzStackHCIPolicyModelCustomProperties": {
       "description": "VMware To AzStackHCI Policy model custom properties.",
@@ -5940,7 +5962,8 @@
           "description": "Gets or sets the app consistent snapshot frequency (in minutes).",
           "type": "integer"
         }
-      }
+      },
+      "x-ms-discriminator-value": "VMwareToAzStackHCI"
     },
     "VMwareToAzStackHCIProtectedDiskProperties": {
       "description": "VMwareToAzStackHCI protected disk properties.",
@@ -6293,7 +6316,8 @@
           "type": "string",
           "readOnly": true
         }
-      }
+      },
+      "x-ms-discriminator-value": "VMwareToAzStackHCI"
     },
     "VMwareToAzStackHCIProtectedNicProperties": {
       "description": "VMwareToAzStackHCI NIC properties.",
@@ -6441,7 +6465,8 @@
           "type": "string",
           "readOnly": true
         }
-      }
+      },
+      "x-ms-discriminator-value": "VMwareToAzStackHCI"
     },
     "VaultModel": {
       "description": "Vault model.",
@@ -6678,7 +6703,8 @@
           },
           "readOnly": true
         }
-      }
+      },
+      "discriminator": "instanceType"
     },
     "WorkflowModelProperties": {
       "description": "Workflow model properties.",
