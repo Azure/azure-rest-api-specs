@@ -295,7 +295,15 @@
       "properties": {
         "targetServerAzureResourceId": {
           "description": "ARM resource id of the server the private endpoint will target.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Sql/servers"
+              }
+            ]
+          }
         },
         "privateEndpointId": {
           "description": "Private endpoint id of the private endpoint.",
