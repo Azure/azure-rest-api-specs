@@ -126,8 +126,8 @@ directive:
     reason: API stewardship board recommend to use format "unixtime" which is not supported by linter at the moment. 
 ```
 
-## AzureOpenAI 2023-06-01-preview
-These settings apply only when `--tag=release_2023_06_01_preview` is specified on the command line.
+## AzureOpenAI 2023-07-01-preview
+These settings apply only when `--tag=release_2023_07_01_preview` is specified on the command line.
 
 ``` yaml $(tag) == 'release_2023_07_01_preview'
 input-file: preview/2023-07-01-preview/azureopenai.json
