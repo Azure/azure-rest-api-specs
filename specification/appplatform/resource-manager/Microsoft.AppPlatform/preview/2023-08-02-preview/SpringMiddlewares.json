@@ -15,7 +15,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/springEnvironments/{springEnvironmentName}/eurekaServers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/javaEnvironments/{javaEnvironmentName}/eurekaServers": {
       "get": {
         "tags": [
           "EurekaServers"
@@ -30,7 +30,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SpringEnvironmentNameParameter"
+            "$ref": "#/parameters/JavaEnvironmentNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -60,7 +60,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/springEnvironments/{springEnvironmentName}/configServers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/javaEnvironments/{javaEnvironmentName}/configServers": {
       "get": {
         "tags": [
           "ConfigServers"
@@ -75,7 +75,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SpringEnvironmentNameParameter"
+            "$ref": "#/parameters/JavaEnvironmentNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -105,7 +105,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/springEnvironments/{springEnvironmentName}/configServers/{configServerName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/javaEnvironments/{javaEnvironmentName}/configServers/{configServerName}": {
       "get": {
         "tags": [
           "ConfigServers"
@@ -121,7 +121,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SpringEnvironmentNameParameter"
+            "$ref": "#/parameters/JavaEnvironmentNameParameter"
           },
           {
             "$ref": "#/parameters/ConfigServerNameParameter"
@@ -165,7 +165,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SpringEnvironmentNameParameter"
+            "$ref": "#/parameters/JavaEnvironmentNameParameter"
           },
           {
             "$ref": "#/parameters/ConfigServerNameParameter"
@@ -219,7 +219,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SpringEnvironmentNameParameter"
+            "$ref": "#/parameters/JavaEnvironmentNameParameter"
           },
           {
             "$ref": "#/parameters/ConfigServerNameParameter"
@@ -261,7 +261,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/springEnvironments/{springEnvironmentName}/configServers/{configServerName}/validate": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/javaEnvironments/{javaEnvironmentName}/configServers/{configServerName}/validate": {
       "post": {
         "tags": [
           "ConfigServers"
@@ -277,7 +277,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SpringEnvironmentNameParameter"
+            "$ref": "#/parameters/JavaEnvironmentNameParameter"
           },
           {
             "$ref": "#/parameters/ConfigServerNameParameter"
@@ -322,7 +322,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/springEnvironments/{springEnvironmentName}/eurekaServers/{eurekaServerName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/javaEnvironments/{javaEnvironmentName}/eurekaServers/{eurekaServerName}": {
       "get": {
         "tags": [
           "EurekaServers"
@@ -338,7 +338,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SpringEnvironmentNameParameter"
+            "$ref": "#/parameters/JavaEnvironmentNameParameter"
           },
           {
             "$ref": "#/parameters/EurekaServerNameParameter"
@@ -382,7 +382,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SpringEnvironmentNameParameter"
+            "$ref": "#/parameters/JavaEnvironmentNameParameter"
           },
           {
             "$ref": "#/parameters/EurekaServerNameParameter"
@@ -444,7 +444,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SpringEnvironmentNameParameter"
+            "$ref": "#/parameters/JavaEnvironmentNameParameter"
           },
           {
             "$ref": "#/parameters/EurekaServerNameParameter"
@@ -856,10 +856,10 @@
     }
   },
   "parameters": {
-    "SpringEnvironmentNameParameter": {
-      "name": "springEnvironmentName",
+    "JavaEnvironmentNameParameter": {
+      "name": "javaEnvironmentName",
       "in": "path",
-      "description": "Name of the Spring Environment.",
+      "description": "Name of the Java Environment.",
       "required": true,
       "type": "string",
       "pattern": "^[-\\w\\._\\(\\)]+$"

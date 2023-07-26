@@ -15,13 +15,13 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AppPlatform/springEnvironments": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AppPlatform/javaEnvironments": {
       "get": {
         "tags": [
-          "SpringEnvironments"
+          "JavaEnvironments"
         ],
-        "summary": "Get all the Spring Environments for a subscription.",
-        "operationId": "SpringEnvironments_ListBySubscription",
+        "summary": "Get all the Java Environments for a subscription.",
+        "operationId": "JavaEnvironments_ListBySubscription",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -34,7 +34,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SpringEnvironmentsCollection"
+              "$ref": "#/definitions/JavaEnvironmentsCollection"
             }
           },
           "default": {
@@ -49,18 +49,18 @@
         },
         "x-ms-examples": {
           "List environments by subscription": {
-            "$ref": "./examples/v2/SpringEnvironments/SpringEnvironments_ListBySubscription.json"
+            "$ref": "./examples/v2/JavaEnvironments/JavaEnvironments_ListBySubscription.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/springEnvironments": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/javaEnvironments": {
       "get": {
         "tags": [
-          "SpringEnvironments"
+          "JavaEnvironments"
         ],
-        "summary": "Get all the Spring Environments in a resource group.",
-        "operationId": "SpringEnvironments_ListByResourceGroup",
+        "summary": "Get all the Java Environments in a resource group.",
+        "operationId": "JavaEnvironments_ListByResourceGroup",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -76,7 +76,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SpringEnvironmentsCollection"
+              "$ref": "#/definitions/JavaEnvironmentsCollection"
             }
           },
           "default": {
@@ -91,19 +91,19 @@
         },
         "x-ms-examples": {
           "List environments by resource group": {
-            "$ref": "./examples/v2/SpringEnvironments/SpringEnvironments_ListByResourceGroup.json"
+            "$ref": "./examples/v2/JavaEnvironments/JavaEnvironments_ListByResourceGroup.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/springEnvironments/{springEnvironmentName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/javaEnvironments/{javaEnvironmentName}": {
       "get": {
         "tags": [
-          "SpringEnvironments"
+          "JavaEnvironments"
         ],
-        "summary": "Get the properties of a Spring Environment.",
-        "description": "Get a Spring Environment and its properties.",
-        "operationId": "SpringEnvironments_Get",
+        "summary": "Get the properties of a Java Environment.",
+        "description": "Get a Java Environment and its properties.",
+        "operationId": "JavaEnvironments_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -112,7 +112,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SpringEnvironmentNameParameter"
+            "$ref": "#/parameters/JavaEnvironmentNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -120,9 +120,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Success. The response describes the corresponding Spring Environment.",
+            "description": "Success. The response describes the corresponding Java Environment.",
             "schema": {
-              "$ref": "#/definitions/SpringEnvironment"
+              "$ref": "#/definitions/JavaEnvironment"
             }
           },
           "default": {
@@ -134,17 +134,17 @@
         },
         "x-ms-examples": {
           "Get environments by name": {
-            "$ref": "./examples/v2/SpringEnvironments/SpringEnvironments_Get.json"
+            "$ref": "./examples/v2/JavaEnvironments/JavaEnvironments_Get.json"
           }
         }
       },
       "put": {
         "tags": [
-          "SpringEnvironments"
+          "JavaEnvironments"
         ],
-        "summary": "Creates or updates a Spring Environment.",
-        "description": "Create a new Spring Environment or update an exiting Spring Environment.",
-        "operationId": "SpringEnvironments_CreateOrUpdate",
+        "summary": "Creates or updates a Java Environment.",
+        "description": "Create a new Java Environment or update an exiting Java Environment.",
+        "operationId": "JavaEnvironments_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -153,10 +153,10 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SpringEnvironmentNameParameter"
+            "$ref": "#/parameters/JavaEnvironmentNameParameter"
           },
           {
-            "$ref": "#/parameters/SpringEnvironmentEnvelopePutParameter"
+            "$ref": "#/parameters/JavaEnvironmentEnvelopePutParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -164,15 +164,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Success. The response describes the updated Spring Environment.",
+            "description": "Success. The response describes the updated Java Environment.",
             "schema": {
-              "$ref": "#/definitions/SpringEnvironment"
+              "$ref": "#/definitions/JavaEnvironment"
             }
           },
           "201": {
-            "description": "Created. The response describes the new Spring Environment and contains an Azure-AsyncOperation header to query the operation result.",
+            "description": "Created. The response describes the new Java Environment and contains an Azure-AsyncOperation header to query the operation result.",
             "schema": {
-              "$ref": "#/definitions/SpringEnvironment"
+              "$ref": "#/definitions/JavaEnvironment"
             }
           },
           "default": {
@@ -185,16 +185,16 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create environments": {
-            "$ref": "./examples/v2/SpringEnvironments/SpringEnvironments_CreateOrUpdate.json"
+            "$ref": "./examples/v2/JavaEnvironments/JavaEnvironments_CreateOrUpdate.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "SpringEnvironments"
+          "JavaEnvironments"
         ],
-        "summary": "Delete a Spring Environment.",
-        "operationId": "SpringEnvironments_Delete",
+        "summary": "Delete a Java Environment.",
+        "operationId": "JavaEnvironments_Delete",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -203,7 +203,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SpringEnvironmentNameParameter"
+            "$ref": "#/parameters/JavaEnvironmentNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -233,18 +233,18 @@
         },
         "x-ms-examples": {
           "Delete environment by name": {
-            "$ref": "./examples/v2/SpringEnvironments/SpringEnvironments_Delete.json"
+            "$ref": "./examples/v2/JavaEnvironments/JavaEnvironments_Delete.json"
           }
         },
         "x-ms-long-running-operation": true
       },
       "patch": {
         "tags": [
-          "SpringEnvironments"
+          "JavaEnvironments"
         ],
-        "summary": "Update Spring Environment's properties.",
-        "description": "Operation to update an exiting Spring Environment.",
-        "operationId": "SpringEnvironments_Update",
+        "summary": "Update Java Environment's properties.",
+        "description": "Operation to update an exiting Java Environment.",
+        "operationId": "JavaEnvironments_Update",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -253,10 +253,10 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SpringEnvironmentNameParameter"
+            "$ref": "#/parameters/JavaEnvironmentNameParameter"
           },
           {
-            "$ref": "#/parameters/SpringEnvironmentEnvelopePatchParameter"
+            "$ref": "#/parameters/JavaEnvironmentEnvelopePatchParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -264,13 +264,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success. The response describes the updated Spring Environment.",
+            "description": "Success. The response describes the updated Java Environment.",
             "schema": {
-              "$ref": "#/definitions/SpringEnvironment"
+              "$ref": "#/definitions/JavaEnvironment"
             }
           },
           "202": {
-            "description": "Accepted. The response indicates the exiting Spring Environment is now updating and contains a Location\r\nheader to query the operation result.",
+            "description": "Accepted. The response indicates the exiting Java Environment is now updating and contains a Location\r\nheader to query the operation result.",
             "headers": {
               "Location": {
                 "type": "string"
@@ -286,16 +286,16 @@
         },
         "x-ms-examples": {
           "Patch Managed Environment": {
-            "$ref": "./examples/v2/SpringEnvironments/SpringEnvironments_Patch.json"
+            "$ref": "./examples/v2/JavaEnvironments/JavaEnvironments_Patch.json"
           }
         },
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/springEnvironments/{springEnvironmentName}/checkNameAvailability": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/javaEnvironments/{javaEnvironmentName}/checkNameAvailability": {
       "post": {
         "tags": [
-          "SpringEnvironments"
+          "JavaEnvironments"
         ],
         "summary": "Checks the resource name availability.",
         "description": "Checks if resource name is available.",
@@ -308,7 +308,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SpringEnvironmentNameParameter"
+            "$ref": "#/parameters/JavaEnvironmentNameParameter"
           },
           {
             "$ref": "#/parameters/CheckNameAvailabilityParameter"
@@ -332,16 +332,16 @@
           }
         },
         "x-ms-examples": {
-          "SpringEnvironments_CheckNameAvailability": {
-            "$ref": "./examples/v2/SpringEnvironments/SpringEnvironments_CheckNameAvailability.json"
+          "JavaEnvironments_CheckNameAvailability": {
+            "$ref": "./examples/v2/JavaEnvironments/JavaEnvironments_CheckNameAvailability.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "SpringEnvironmentsCollection": {
-      "description": "Collection of Spring Environments",
+    "JavaEnvironmentsCollection": {
+      "description": "Collection of Java Environments",
       "required": [
         "value"
       ],
@@ -351,7 +351,7 @@
           "description": "Collection of resources.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SpringEnvironment"
+            "$ref": "#/definitions/JavaEnvironment"
           }
         },
         "nextLink": {
@@ -361,17 +361,17 @@
         }
       }
     },
-    "SpringEnvironmentForPatchBody": {
+    "JavaEnvironmentForPatchBody": {
       "description": "An environment for hosting Azure Spring Apps only for patch body",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/SpringEnvironmentForPatch"
+          "$ref": "#/definitions/JavaEnvironmentForPatch"
         }
       ],
       "required": []
     },
-    "SpringEnvironment": {
+    "JavaEnvironment": {
       "description": "An environment for hosting Azure Spring Apps",
       "type": "object",
       "allOf": [
@@ -381,7 +381,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "Spring environment resource specific properties",
+          "description": "Java environment resource specific properties",
           "type": "object",
           "properties": {
             "provisioningState": {
@@ -418,7 +418,7 @@
               "type": "string"
             },
             "zoneRedundant": {
-              "description": "Whether or not this Spring Environment is zone-redundant.",
+              "description": "Whether or not this Java Environment is zone-redundant.",
               "enum": [
                 "ZoneRedundant",
                 "None"
@@ -434,7 +434,7 @@
               ]
             },
             "defaultDomain": {
-              "description": "Default Domain Name for the spring environment",
+              "description": "Default Domain Name for the Java environment",
               "type": "string",
               "readOnly": true
             }
@@ -443,7 +443,7 @@
         }
       }
     },
-    "SpringEnvironmentForPatch": {
+    "JavaEnvironmentForPatch": {
       "description": "An environment for hosting Azure Spring Apps in PATCH request body",
       "type": "object",
       "allOf": [
@@ -453,7 +453,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "Spring environment resource specific properties",
+          "description": "Java environment resource specific properties",
           "type": "object",
           "properties": {},
           "x-ms-client-flatten": true
@@ -462,30 +462,30 @@
     }
   },
   "parameters": {
-    "SpringEnvironmentNameParameter": {
-      "name": "springEnvironmentName",
+    "JavaEnvironmentNameParameter": {
+      "name": "javaEnvironmentName",
       "in": "path",
-      "description": "Name of the Spring Environment.",
+      "description": "Name of the Java Environment.",
       "required": true,
       "type": "string",
       "pattern": "^[-\\w\\._\\(\\)]+$"
     },
-    "SpringEnvironmentEnvelopePatchParameter": {
+    "JavaEnvironmentEnvelopePatchParameter": {
       "name": "environmentEnvelope",
       "in": "body",
-      "description": "Configuration details of the Spring Environment.",
+      "description": "Configuration details of the Java Environment.",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/SpringEnvironmentForPatchBody"
+        "$ref": "#/definitions/JavaEnvironmentForPatchBody"
       }
     },
-    "SpringEnvironmentEnvelopePutParameter": {
+    "JavaEnvironmentEnvelopePutParameter": {
       "name": "environmentEnvelope",
       "in": "body",
-      "description": "Configuration details of the Spring Environment.",
+      "description": "Configuration details of the Java Environment.",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/SpringEnvironment"
+        "$ref": "#/definitions/JavaEnvironment"
       }
     },
     "CheckNameAvailabilityParameter": {
