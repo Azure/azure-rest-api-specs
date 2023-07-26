@@ -48,6 +48,7 @@ directive:
       - storageContainers.json
       - virtualHardDisks.json
       - virtualMachines.json
+      - virtualMachineInstances.json
       - virtualNetworks.json
       - offers.json
       - publishers.json
