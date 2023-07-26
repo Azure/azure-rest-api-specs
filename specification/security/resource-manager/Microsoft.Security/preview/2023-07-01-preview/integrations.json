@@ -79,24 +79,24 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Security/integrationsMetadata": {
+    "/{scope}/providers/Microsoft.Security/integrationTablesConfigurations": {
       "get": {
         "x-ms-examples": {
-          "Try to get Service Now metadata by subscription scope": {
-            "$ref": "./examples/integrations/TryGetServiceNowMetadataBySubscription_example.json"
+          "Try to get Service Now tables configurations by subscription scope": {
+            "$ref": "./examples/integrations/TryGetServiceNowTablesConfigurationsBySubscription_example.json"
           },
-          "Try to get Service Now metadata by security connector scope": {
-            "$ref": "./examples/integrations/TryGetServiceNowMetadataBySecurityConnector_example.json"
+          "Try to get Service Now tables configurations by security connector scope": {
+            "$ref": "./examples/integrations/TryGetServiceNowTablesConfigurationsBySecurityConnector_example.json"
           },
-          "Try to get Service Now metadata by management group scope": {
-            "$ref": "./examples/integrations/TryGetServiceNowMetadataByManagementGroup_example.json"
+          "Try to get Service Now tables configurations by management group scope": {
+            "$ref": "./examples/integrations/TryGetServiceNowTablesConfigurationsByManagementGroup_example.json"
           }
         },
         "tags": [
-          "TryGetServiceNowMetadata"
+          "TryGetServiceNowTablesConfigurations"
         ],
-        "description": "Try to get Service Now metadata over a scope",
-        "operationId": "ServiceNowMetadata_Get",
+        "description": "Try to get Service Now tables configurations over a scope",
+        "operationId": "ServiceNowTablesConfigurations_Get",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -112,7 +112,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ServiceNowMetadataResponse"
+              "$ref": "#/definitions/ServiceNowTablesConfigurationsResponse"
             }
           },
           "default": {
@@ -511,10 +511,10 @@
               "type": "string",
               "x-ms-secret": true
             },
-            "tableMetadata": {
+            "tablesConfigurations": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/ServiceNowTableMetadata"
+                "$ref": "#/definitions/ServiceNowTablesConfigurations"
               }
             }
           }
@@ -550,8 +550,8 @@
         }
       }
     },
-    "ServiceNowMetadataResponse": {
-      "description": "Describes the Service Now authentication response and if successful, contains tables metadata response",
+    "ServiceNowTablesConfigurationsResponse": {
+      "description": "Describes the Service Now authentication response and if successful, contains tables table configurations response",
       "type": "object",
       "properties": {
         "authenticationSucceeded": {
@@ -566,17 +566,17 @@
           "type": "string",
           "description": "Describes the authentication error - empty string if authentication succeeded"
         },
-        "serviceNowTablesMetadata": {
+        "serviceNowTablesTablesConfigurations": {
           "type": "array",
           "description": "Describes a collection of tables columns, each item contains column table name and column details",
           "items": {
-            "$ref": "#/definitions/ServiceNowTableMetadata"
+            "$ref": "#/definitions/ServiceNowTablesConfigurations"
           }
         }
       }
     },
-    "ServiceNowTableMetadata": {
-      "description": "Service Now table name and column metadata",
+    "ServiceNowTablesConfigurations": {
+      "description": "Service Now table name and column configuration",
       "type": "object",
       "properties": {
         "table": {
