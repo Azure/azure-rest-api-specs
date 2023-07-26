@@ -66,23 +66,12 @@ These settings apply only when `--tag=package-preview-2023-07` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-07'
 input-file:
-  - Microsoft.AzureStackHCI/preview/2023-07-01-preview/arcSettings.json
-  - Microsoft.AzureStackHCI/preview/2023-07-01-preview/clusters.json
-  - Microsoft.AzureStackHCI/preview/2023-07-01-preview/common.json
-  - Microsoft.AzureStackHCI/preview/2023-07-01-preview/extensions.json
   - Microsoft.AzureStackHCI/preview/2023-07-01-preview/galleryImages.json
   - Microsoft.AzureStackHCI/preview/2023-07-01-preview/marketplaceGalleryImages.json
   - Microsoft.AzureStackHCI/preview/2023-07-01-preview/networkInterfaces.json
-  - Microsoft.AzureStackHCI/preview/2023-07-01-preview/offers.json
-  - Microsoft.AzureStackHCI/preview/2023-07-01-preview/operations.json
-  - Microsoft.AzureStackHCI/preview/2023-07-01-preview/publishers.json
-  - Microsoft.AzureStackHCI/preview/2023-07-01-preview/skus.json
   - Microsoft.AzureStackHCI/preview/2023-07-01-preview/storageContainers.json
-  - Microsoft.AzureStackHCI/preview/2023-07-01-preview/updateRuns.json
-  - Microsoft.AzureStackHCI/preview/2023-07-01-preview/updateSummaries.json
-  - Microsoft.AzureStackHCI/preview/2023-07-01-preview/updates.json
   - Microsoft.AzureStackHCI/preview/2023-07-01-preview/virtualHardDisks.json
-  - Microsoft.AzureStackHCI/preview/2023-07-01-preview/virtualMachines.json
+  - Microsoft.AzureStackHCI/preview/2023-07-01-preview/virtualMachineInstances.json
   - Microsoft.AzureStackHCI/preview/2023-07-01-preview/virtualNetworks.json
 ```
 ### Tag: package-2023-03
