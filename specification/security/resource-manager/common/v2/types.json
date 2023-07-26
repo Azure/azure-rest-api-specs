@@ -196,6 +196,26 @@
       "maxLength": 90,
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
+    },
+    "AssessmentNameParameter": {
+      "name": "assessmentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "description": "The Assessment Key - Unique key for the assessment type",
+      "x-ms-parameter-location": "method"
+    },
+    "PricingNameParameter": {
+      "name": "pricingName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "name of the pricing configuration",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9_]+$",
+      "minLength": 3,
+      "maxLength": 63,
+      "x-ms-parameter-location": "method"
     }
   }
 }
