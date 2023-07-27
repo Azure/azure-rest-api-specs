@@ -5133,7 +5133,7 @@
           "$ref": "#/definitions/amount"
         },
         "closedBalance": {
-          "description": "The balance after the event. ",
+          "description": "The balance after the event, Note: This will not be returned for Proxy Organization Type in Multi-MACC.",
           "readOnly": true,
           "$ref": "#/definitions/amount"
         },
@@ -5372,7 +5372,38 @@
           "readOnly": true,
           "type": "string",
           "description": "The eTag for the resource."
+        },
+        "OrgType": {
+          "description": "The organization type of the lot.",
+          "type": "string",
+          "enum": [
+            "Origin",
+            "Proxy"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "OrgType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Origin",
+                "description": "Origin/Primary organization type for MACC",
+                "name": "OriginOrgType"
+              },
+              {
+                "value": "Proxy",
+                "description": "Proxy/Contributor organization type for MACC",
+                "name": "ProxyOrgType"
+              }
+            ]
+          }
+        },
+        "UsedAmount": {
+          "description": "The amount used in total.",
+          "readOnly": true,
+          "$ref": "#/definitions/amount"
         }
+
       }
     },
     "CreditSummary": {
