@@ -247,6 +247,11 @@ directive:
     from: virtualMachineScaleSet.json
     where:
       - $.definitions.VirtualMachineScaleSetVMExtension
+  - where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{galleryImageName}/versionNames/latest"].get
+    suppress:
+      - PathForNestedResource
+    reason: The.
 ```
 ### Tag: package-2022-08-03
 
