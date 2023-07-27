@@ -30,10 +30,12 @@ directive:
 
     where:
       - $.definitions.AccessToken.properties.accessToken
-      - $.definitions.CognitiveServicesTranslatorSecret.properties.speechCognitiveServicesPrimaryKey
-      - $.definitions.CognitiveServicesTranslatorSecret.properties.speechCognitiveServicesSecondaryKey
-      - $.definitions.CognitiveServicesTranslatorSecret.properties.translatorCognitiveServicesPrimaryKey
-      - $.definitions.CognitiveServicesTranslatorSecret.properties.translatorCognitiveServicesSecondaryKey
+      - $.definitions.CognitiveServicesSecrets.properties.speechCognitiveServicesPrimaryKey
+      - $.definitions.CognitiveServicesSecrets.properties.speechCognitiveServicesSecondaryKey
+      - $.definitions.CognitiveServicesSecrets.properties.translatorCognitiveServicesPrimaryKey
+      - $.definitions.CognitiveServicesSecrets.properties.translatorCognitiveServicesSecondaryKey
+      - $.definitions.CognitiveServicesSecrets.properties.ocrCognitiveServicesPrimaryKey
+      - $.definitions.CognitiveServicesSecrets.properties.ocrCognitiveServicesSecondaryKey
     reason: Secrets are OK to return in a POST response.
 
     suppressions:
@@ -41,8 +43,8 @@ directive:
     reason: Design forces this behavior (and it's actually the correct behavior that doesn't violate Microsoft API guidelines).
   - code: AddedReadOnlyPropertyInResponse
     reason: Design forces this behavior (and it's actually the correct behavior that doesn't violate Microsoft API guidelines).
-  - code: RemovedProperty
-    reason: Design forces this behavior (and it's actually the correct behavior that doesn't violate Microsoft API guidelines).
+  - code: ReferenceRedirection
+    reason: Rename that does not affect api usage. It is solely semantic and does not violate Microsoft API guidelines.
 
 ```
 ---

@@ -867,7 +867,7 @@
           "Arc"
         ],
         "operationId": "Accounts_ListVIExtensionDependenciesData",
-        "description": "Get subscription's cognitive services and translator instance secrets",
+        "description": "Get subscription's cognitive services (Speech, Translator, and OCR) instance secrets",
         "x-ms-examples": {
           "List accounts by resource group": {
             "$ref": "./examples/ViCognitiveServicesSecretsExample.json"
@@ -889,9 +889,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The subscription's Cognitive Service and Translator instances secret.",
+            "description": "The subscription's Cognitive Services (Speech, Translator, and OCR) instances secret.",
             "schema": {
-              "$ref": "#/definitions/CognitiveServicesTranslatorSecret"
+              "$ref": "#/definitions/CognitiveServicesSecrets"
             }
           },
           "400": {
@@ -930,7 +930,7 @@
           "Arc"
         ],
         "operationId": "Accounts_RegenerateExtensionDependenciesKeys",
-        "description": "Regenerate subscription's cognitive services and translator instance keys",
+        "description": "Regenerate subscription's cognitive services (Speech, Translator, and OCR) instance keys",
         "x-ms-examples": {
           "List accounts by resource group": {
             "$ref": "./examples/ViRotateCognitiveServicesSecretsExample.json"
@@ -1189,8 +1189,8 @@
         }
       ]
     },
-    "CognitiveServicesTranslatorSecret": {
-      "description": "The subscription's Cognitive Service and Translator instances secret.",
+    "CognitiveServicesSecrets": {
+      "description": "The subscription's Cognitive Services (Speech, Translator, and OCR) instances secret.",
       "type": "object",
       "properties": {
         "speechCognitiveServicesEndpoint": {
@@ -1203,6 +1203,12 @@
           "type": "string",
           "readOnly": true,
           "description": "The Cognitive Services instance endpoint",
+          "example": "url"
+        },
+        "ocrCognitiveServicesEndpoint": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The OCR Cognitive Services instance endpoint",
           "example": "url"
         },
         "speechCognitiveServicesPrimaryKey": {
@@ -1232,11 +1238,25 @@
           "description": "The Translator instance secret.",
           "x-ms-secret": true,
           "example": "d03ks3********************s83mdy"
+        },
+        "ocrCognitiveServicesPrimaryKey": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The OCR instance secret.",
+          "x-ms-secret": true,
+          "example": "d3d9s3********************s83q9c"
+        },
+        "ocrCognitiveServicesSecondaryKey": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The OCR instance secret.",
+          "x-ms-secret": true,
+          "example": "4j9ds3********************9ebc10"
         }
       }
     },
     "RegenerateExtensionDependenciesKeys": {
-      "description": "The subscription's Cognitive Service and Translator instances secret.",
+      "description": "The subscription's Cognitive Services (Speech, Translator, and OCR) instances secret.",
       "type": "object",
       "properties": {
         "speechCognitiveServicesPrimaryKey": {
@@ -1254,6 +1274,14 @@
         "translatorCognitiveServicesSecondaryKey": {
           "type": "boolean",
           "description": "Represents wether to rotate the translatorCognitiveServicesSecondaryKey"
+        },
+        "ocrCognitiveServicesPrimaryKey": {
+          "type": "boolean",
+          "description": "Represents wether to rotate the ocrCognitiveServicesPrimaryKey"
+        },
+        "ocrCognitiveServicesSecondaryKey": {
+          "type": "boolean",
+          "description": "Represents wether to rotate the ocrCognitiveServicesSecondaryKey"
         }
       }
     },
