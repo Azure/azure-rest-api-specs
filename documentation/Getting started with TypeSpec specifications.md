@@ -10,12 +10,12 @@ Within the azure-rest-api-specs repository, the TypeSpec specification serves as
 
 #### General:
 - :white_check_mark: Do include `tspconfig.yaml`.
-- :white_check_mark: Do include examples folder
-- :x: Do NOT include package.json
+- :white_check_mark: Do include examples folder.
+- :x: Do NOT include package.json.
 - :x: Do NOT modify any generated files under `resource-manager` or `data-plane`.
 
 #### ARM:
-- :white_check_mark: TypeSpec folder name should end with `.Management`
+- :white_check_mark: TypeSpec folder name should end with `.Management`.
 - :white_check_mark: This `tspconfig.yaml` is [standard for ARM](https://github.com/microsoft/typespec/blob/main/eng/feeds/arm/tspconfig.yaml). The one thing you may customize is the output json file name for `typespec-autorest` emitter.
 
 #### Data-Plane:
