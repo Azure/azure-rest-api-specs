@@ -79,7 +79,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Security/getIntegrationTablesConfigurations/{configurationName}": {
+    "/{scope}/providers/Microsoft.Security/getIntegrationTablesConfigurations": {
       "post": {
         "x-ms-examples": {
           "Try to get Service Now tables configurations by subscription scope": {
@@ -106,9 +106,6 @@
           },
           {
             "$ref": "#/parameters/ServiceNowAuthenticationDetailsBody"
-          },
-          {
-            "$ref": "#/parameters/IntegrationTablesConfigurationName"
           }
         ],
         "responses": {
@@ -623,17 +620,6 @@
     }
   },
   "parameters": {
-    "IntegrationTablesConfigurationName": {
-      "name": "configurationName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "current"
-      ],
-      "description": "Integration tables configuration name.",
-      "x-ms-parameter-location": "method"
-    },
     "IntegrationId": {
       "name": "integrationId",
       "in": "path",
