@@ -1384,6 +1384,29 @@
               }
             }
           }
+        },
+        "isBackingResource": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Resource in Microsoft tenant. Created and managed by the source RP and invisible to end users. Regular resource associations cannot be created as the customers do not have visibility of these resources. "
+        },
+        "applicableFeatures": {
+          "readOnly": true,
+          "type": "array",
+          "description": "The applicable feature is to indicate that the NSP controls related to backing association are only applicable to a specific feature in backing resource's data plane.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "parentAssociationName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Source Resource Association name"
+        },
+        "sourceResourceId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "ARM Id of source resource"
         }
       }
     },
