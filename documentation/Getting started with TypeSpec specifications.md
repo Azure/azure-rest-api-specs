@@ -13,7 +13,7 @@ Please note TypeSpec specification is REQUIRED for all new ARM services.
 - :white_check_mark: Do include `tspconfig.yaml`.
 - :white_check_mark: Do include examples folder
 - :x: Do NOT include package.json
-- :x: Do NOT modify 
+- :x: Do NOT modify any generated files under `resource-manager` or `data-plane`.
 
 #### ARM:
 - :white_check_mark: TypeSpec folder name should end with `.Management`
