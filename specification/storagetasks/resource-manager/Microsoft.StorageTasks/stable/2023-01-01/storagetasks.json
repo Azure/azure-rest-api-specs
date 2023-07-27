@@ -403,8 +403,8 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageTasks/storageTasks/{storageTaskName}/fetchReportSummary": {
-      "post": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageTasks/storageTasks/{storageTaskName}/reports": {
+      "get": {
         "tags": [
           "StorageTasks"
         ],
@@ -413,9 +413,6 @@
         "x-ms-examples": {
           "ListStorageTasksByResourceGroup": {
             "$ref": "./examples/storageTasksList/ListStorageTasksRunReportSummary.json"
-          },
-          "ListStorageTasksRunReportSummaryWithFilter": {
-            "$ref": "./examples/storageTasksList/ListStorageTasksRunReportSummaryWithFilter.json"
           }
         },
         "parameters": [
@@ -426,26 +423,29 @@
             "$ref": "#/parameters/StorageTaskName"
           },
           {
+            "name": "$maxpagesize",
+            "in": "query",
+            "type": "string",
+            "description": "Optional, specifies the maximum number of storage task assignment Ids to be included in the list response."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "type": "string",
+            "description": "Optional. When specified, it can be used to query using reporting properties."
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/StorageTaskReportParameters"
-            },
-            "description": "Optional filter conditions."
           }
         ],
         "responses": {
           "200": {
             "description": "OK -- Storage tasks run report summary retrieved and returned successfully.",
             "schema": {
-              "$ref": "#/definitions/StorageTasksRunSummaryList"
+              "$ref": "#/definitions/StorageTaskReportSummary"
             }
           },
           "default": {
@@ -511,7 +511,7 @@
       "type": "object",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/StorageTaskIdentity",
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identity of the resource."
         },
         "properties": {
@@ -531,7 +531,7 @@
       "type": "object",
       "properties": {
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The identity of the resource."
         },
         "tags": {
@@ -548,37 +548,6 @@
         }
       },
       "description": "Parameters of the storage task update request"
-    },
-    "StorageTaskIdentity": {
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The principal ID of resource identity."
-        },
-        "tenantId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The tenant ID of resource."
-        },
-        "type": {
-          "type": "string",
-          "description": "The identity type.",
-          "enum": [
-            "None",
-            "SystemAssigned"
-          ],
-          "x-ms-enum": {
-            "name": "IdentityType",
-            "modelAsString": true
-          }
-        }
-      },
-      "required": [
-        "type"
-      ],
-      "description": "Identity for the storage task."
     },
     "StorageTaskProperties": {
       "type": "object",
@@ -798,30 +767,14 @@
       },
       "description": "Fetch the Storage task assignment ARM ids."
     },
-    "StorageTaskReportParameters": {
-      "type": "object",
-      "properties": {
-        "filterCondition": {
-          "type": "string",
-          "description": "Filter the response based on the condition provided. Filter options such as startTime gt '2023-06-26T20:51:24.4494016Z' and other comparison operators can be used as described in https://learn.microsoft.com/en-us/rest/api/storageservices/querying-tables-and-entities#supported-comparison-operators"
-        },
-        "maxPageSize": {
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 200,
-          "format": "int64",
-          "description": "Request for a max page size."
-        }
-      }
-    },
-    "StorageTasksRunSummaryList": {
+    "StorageTaskReportSummary": {
       "type": "object",
       "properties": {
         "value": {
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/StorageTaskRunStatus"
+            "$ref": "#/definitions/StorageTaskReportInstance"
           },
           "x-ms-identifiers": [],
           "description": "Gets storage tasks run result summary."
@@ -834,7 +787,21 @@
       },
       "description": "Fetch Storage Tasks Run Summary."
     },
-    "StorageTaskRunStatus": {
+    "StorageTaskReportInstance": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageTaskReportProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "Storage Tasks run report instance"
+    },
+    "StorageTaskReportProperties": {
       "type": "object",
       "properties": {
         "taskAssignmentId": {
