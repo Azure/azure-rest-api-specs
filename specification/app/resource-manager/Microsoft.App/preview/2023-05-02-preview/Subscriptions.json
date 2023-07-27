@@ -15,13 +15,13 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.App/getVerificationId": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.App/getCustomDomainVerificationId": {
       "post": {
         "tags": [
           "Subscriptions"
         ],
         "description": "Get the verification id of a subscription used for verifying custom domains",
-        "operationId": "GetVerificationId",
+        "operationId": "GetCustomDomainVerificationId",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -32,9 +32,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. The verification id has been returned successfully.",
+            "description": "OK. The custom domain verification id has been returned successfully.",
             "schema": {
-              "$ref": "#/definitions/VerificationId"
+              "$ref": "#/definitions/CustomDomainVerificationId"
             }
           },
           "default": {
@@ -46,15 +46,15 @@
         },
         "x-ms-examples": {
           "List all operations": {
-            "$ref": "./examples/Subscriptions_GetVerificationId.json"
+            "$ref": "./examples/Subscriptions_GetCustomDomainVerificationId.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "VerificationId": {
-      "description": "Verification Id of a subscription",
+    "CustomDomainVerificationId": {
+      "description": "Custom domain verification Id of a subscription",
       "type": "string",
       "readOnly": true
     }
