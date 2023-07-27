@@ -39,6 +39,10 @@ These settings apply only when `--tag=package-2021-09-preview` is specified on t
 ``` yaml $(tag) == 'package-2021-09-preview'
 input-file:
 - Microsoft.HDInsight/preview/2021-09-15-preview/hdinsight.json
+
+suppressions:
+  - code: ResourceNameRestriction
+    reason: Suppress it because the resource name in other existing apis doesn't have restriction.
 ```
 
 ---
