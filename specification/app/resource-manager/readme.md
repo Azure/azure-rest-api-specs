@@ -41,6 +41,7 @@ input-file:
   - Microsoft.App/preview/2023-05-02-preview/BillingMeters.json
   - Microsoft.App/preview/2023-05-02-preview/Builders.json
   - Microsoft.App/preview/2023-05-02-preview/Builds.json
+  - Microsoft.App/preview/2023-05-02-preview/Patches.json
   - Microsoft.App/preview/2023-05-02-preview/CommonDefinitions.json
   - Microsoft.App/preview/2023-05-02-preview/ConnectedEnvironments.json
   - Microsoft.App/preview/2023-05-02-preview/ConnectedEnvironmentsCertificates.json
