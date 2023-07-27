@@ -879,7 +879,7 @@
             "description": "Quota requests payload.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SubscriptionQuotaAllocationRequest"
+              "$ref": "#/definitions/SubscriptionQuotaLimit"
             }
           }
         ],
@@ -957,7 +957,7 @@
             "description": "Quota requests payload.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SubscriptionQuotaAllocationRequest"
+              "$ref": "#/definitions/SubscriptionQuotaLimit"
             }
           }
         ],
@@ -1493,12 +1493,14 @@
         "limit": {
           "type": "integer",
           "format": "int64",
-          "description": "The total quota limit for the subscription."
+          "description": "The total quota limit for the subscription.",
+          "readOnly": true
         },
         "nonShareableQuota": {
           "type": "integer",
           "format": "int64",
-          "description": "The non shareable quota for the subscription."
+          "description": "The non shareable quota for the subscription.",
+          "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/RequestState",
