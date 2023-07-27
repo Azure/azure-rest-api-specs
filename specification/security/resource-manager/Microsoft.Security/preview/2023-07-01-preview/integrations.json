@@ -79,8 +79,8 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Security/integrationTablesConfigurations": {
-      "get": {
+    "/{scope}/providers/Microsoft.Security/integrationTablesConfigurations/{configurationName}": {
+      "post": {
         "x-ms-examples": {
           "Try to get Service Now tables configurations by subscription scope": {
             "$ref": "./examples/integrations/TryGetServiceNowTablesConfigurationsBySubscription_example.json"
@@ -106,6 +106,9 @@
           },
           {
             "$ref": "#/parameters/ServiceNowAuthenticationDetailsBody"
+          },
+          {
+            "$ref": "#/parameters/IntegrationTablesConfigurationName"
           }
         ],
         "responses": {
@@ -620,6 +623,17 @@
     }
   },
   "parameters": {
+    "IntegrationTablesConfigurationName": {
+      "name": "configurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "current"
+      ],
+      "description": "Integration tables configuration name.",
+      "x-ms-parameter-location": "method"
+    },
     "IntegrationId": {
       "name": "integrationId",
       "in": "path",
