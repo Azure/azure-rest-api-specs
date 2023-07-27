@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2023-03-01-preview"
+    "version": "2023-07-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -356,6 +356,89 @@
             "schema": {
               "$ref": "#/definitions/ManagedAzResiliencyStatus"
             }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/getmaintenancewindowstatus": {
+      "post": {
+        "tags": [
+          "managedMaintenanceWindowStatus"
+        ],
+        "summary": "Action to get Maintenance Window Status of the Service Fabric Managed Clusters.",
+        "description": "Action to get Maintenance Window Status of the Service Fabric Managed Clusters.",
+        "operationId": "managedMaintenanceWindowStatus_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "x-ms-examples": {
+          "Maintenance Window Status": {
+            "$ref": "./examples/managedMaintenanceWindowStatusGet_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedMaintenanceWindowStatus"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/applymaintenancewindow": {
+      "post": {
+        "tags": [
+          "managedApplyMaintenanceWindow"
+        ],
+        "summary": "Action to Apply Maintenance window on the Service Fabric Managed Clusters, right now. Any pending update will be applied.",
+        "description": "Action to Apply Maintenance window on the Service Fabric Managed Clusters, right now. Any pending update will be applied.",
+        "operationId": "managedApplyMaintenanceWindow_Put",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "x-ms-examples": {
+          "Maintenance Window Status": {
+            "$ref": "./examples/managedApplyMaintenanceWindowPut_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully."
           },
           "default": {
             "description": "The detailed error response.",
@@ -1321,6 +1404,18 @@
             ]
           },
           "description": "Specify the resource id of a public IP prefix that the load balancer will allocate a public IP address from. Only supports IPv4."
+        },
+        "ddosProtectionPlanId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/ddosProtectionPlans"
+              }
+            ]
+          },
+          "description": "Specify the resource id of a DDoS network protection plan that will be associated with the virtual network of the cluster."
         }
       },
       "description": "Describes the managed cluster resource properties."
@@ -1417,6 +1512,50 @@
         }
       },
       "description": "Describes the result of the request to list Managed VM Sizes for Service Fabric Managed Clusters."
+    },
+    "ManagedMaintenanceWindowStatus": {
+      "type": "object",
+      "properties": {
+        "isWindowEnabled": {
+          "type": "boolean",
+          "description": "If maintenance window is enabled on this cluster.",
+          "readOnly": true
+        },
+        "isRegionReady": {
+          "type": "boolean",
+          "description": "If the SFMC region is ready to configure maintenance windows.",
+          "readOnly": true
+        },
+        "isWindowActive": {
+          "type": "boolean",
+          "description": "If maintenance window is active.",
+          "readOnly": true
+        },
+        "canApplyUpdates": {
+          "type": "boolean",
+          "description": "If updates can be applied.",
+          "readOnly": true
+        },
+        "lastWindowStatusUpdateAtUTC": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last window update time in UTC.",
+          "readOnly": true
+        },
+        "lastWindowStartTimeUTC": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last window start time in UTC.",
+          "readOnly": true
+        },
+        "lastWindowEndTimeUTC": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last window end time in UTC.",
+          "readOnly": true
+        }
+      },
+      "description": "Describes the maintenance window status of the Service Fabric Managed Cluster."
     },
     "ResourceAzStatus": {
       "type": "object",
@@ -1941,7 +2080,7 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2023-03-01-preview\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2023-07-01-preview\" for this specification.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"
