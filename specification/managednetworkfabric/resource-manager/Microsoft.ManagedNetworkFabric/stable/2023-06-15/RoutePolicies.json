@@ -694,12 +694,16 @@
         "type": {
           "type": "string",
           "description": "Type of the condition used.",
-          "$ref": "#/definitions/RoutePolicyConditionType"
-        },
-        "conditionType": {
-          "type": "string",
-          "description": "Type of the condition used.",
-          "$ref": "#/definitions/RoutePolicyConditionType"
+          "default": "Or",
+          "minLength": 1,
+          "enum": [
+            "Or",
+            "And"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "RoutePolicyConditionType"
+          }
         },
         "ipPrefixId": {
           "type": "string",
@@ -877,20 +881,6 @@
             "description": "ARM Resource ID of IP Extended Community."
           }
         }
-      }
-    },
-    "RoutePolicyConditionType": {
-      "type": "string",
-      "description": "Type of the condition used.",
-      "default": "Or",
-      "minLength": 1,
-      "enum": [
-        "Or",
-        "And"
-      ],
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "RoutePolicyConditionType"
       }
     }
   },

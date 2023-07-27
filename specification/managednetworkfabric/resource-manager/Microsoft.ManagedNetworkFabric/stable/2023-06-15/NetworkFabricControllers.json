@@ -477,6 +477,14 @@
         "expressRouteCircuitId": {
           "type": "string",
           "description": "The express route circuit Azure resource ID, must be of type Microsoft.Network/expressRouteCircuits/circuitName. The ExpressRoute Circuit is a mandatory attribute.",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/expressRouteCircuits"
+              }
+            ]
+          },
           "example": "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourcegroups/example-rg/providers/Microsoft.Network/expressRouteCircuits/example-circuit"
         },
         "expressRouteAuthorizationKey": {
