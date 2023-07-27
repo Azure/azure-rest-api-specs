@@ -1622,10 +1622,16 @@
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-examples": {
-          "EventsGetByBillingAccount": {
+          "EventsGetByBillingAccountMultiMACC-Contributor": {
+            "$ref": "./examples/EventsGetByBillingAccountMultiMACC-Contributor.json"
+          },
+          "EventsGetByBillingAccountSingleEntityMACC/MultiMACC-Primary": {
             "$ref": "./examples/EventsGetByBillingAccount.json"
           },
-          "EventsGetByBillingAccountWithFilters": {
+          "EventsGetByBillingAccountWithFiltersMultiMACC-Contributor.json": {
+            "$ref": "./examples/EventsGetByBillingAccountWithFiltersMultiMACC-Contributor.json"
+          },
+          "EventsGetByBillingAccountWithFiltersSingleEntityMACC/MultiMACC-Primary": {
             "$ref": "./examples/EventsGetByBillingAccountWithFilters.json"
           }
         },
@@ -1719,10 +1725,22 @@
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-examples": {
-          "LotsListByBillingAccount": {
+          "LotsListByBillingAccountMultiMACC-Primary": {
+            "$ref": "./examples/LotsListByBillingAccountMultiMACC-Primary.json"
+          },
+          "LotsListByBillingAccountMultiMACC-Contributor": {
+            "$ref": "./examples/LotsListByBillingAccountMultiMACC-Contributor.json"
+          },
+          "LotsListByBillingAccountSingleEntityMACC": {
             "$ref": "./examples/LotsListByBillingAccount.json"
           },
-          "LotsListByBillingAccountWithStatusFilter": {
+          "LotsListByBillingAccountWithStatusFilterMultiMACC-Primary": {
+            "$ref": "./examples/LotsListByBillingAccountWithFiltersMultiMACC-Primary.json"
+          },
+          "LotsListByBillingAccountWithStatusFilterMultiMACC-Contributor": {
+            "$ref": "./examples/LotsListByBillingAccountWithFiltersMultiMACC-Contributor.json"
+          },
+          "LotsListByBillingAccountWithStatusFilterSingleEntityMACC": {
             "$ref": "./examples/LotsListByBillingAccountWithFilters.json"
           }
         },
@@ -5377,7 +5395,7 @@
           "description": "The organization type of the lot.",
           "type": "string",
           "enum": [
-            "Origin",
+            "Primary",
             "Contributor"
           ],
           "readOnly": true,
@@ -5386,9 +5404,9 @@
             "modelAsString": true,
             "values": [
               {
-                "value": "Origin",
-                "description": "Origin/Primary organization type for MACC",
-                "name": "OriginOrgType"
+                "value": "Primary",
+                "description": "Primary organization type for MACC",
+                "name": "PrimaryOrgType"
               },
               {
                 "value": "Contributor",
