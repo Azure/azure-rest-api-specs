@@ -860,105 +860,107 @@
           }
         }
       }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/allowedVmSizesForResize": {
-    "get": {
-      "tags": [
-        "OperationalizationClusters",
-        "MachineLearningComputes",
-        "VirtualMachineSizes"
-      ],
-      "operationId": "Compute_AllowedResizeSizes",
-      "description": "Returns supported virtual machine sizes for resize",
-      "x-ms-long-running-operation": true,
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/WorkspaceNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ComputeNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "OK",
-          "schema": {
-            "$ref": "#/definitions/VirtualMachineSizeListResult"
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/allowedVmSizesForResize": {
+      "get": {
+        "tags": [
+          "OperationalizationClusters",
+          "MachineLearningComputes",
+          "VirtualMachineSizes"
+        ],
+        "operationId": "Compute_AllowedResizeSizes",
+        "description": "Returns supported virtual machine sizes for resize",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ComputeNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineSizeListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
-        "default": {
-          "description": "Error response describing why the operation failed.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+        "x-ms-examples": {
+          "List VM Sizes": {
+            "$ref": "./examples/Compute/allowedVMSizesForResize.json"
           }
-        }
-      },
-      "x-ms-examples": {
-        "List VM Sizes": {
-          "$ref": "./examples/Compute/allowedVMSizesForResize.json"
         }
       }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/resize": {
-    "post": {
-      "tags": [
-        "OperationalizationClusters",
-        "MachineLearningComputes"
-      ],
-      "operationId": "Compute_Resize",
-      "description": "Updates the size of a Compute Instance.",
-      "x-ms-long-running-operation": true,
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/WorkspaceNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ComputeNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "name": "parameters",
-          "in": "body",
-          "required": true,
-          "description": "The object for updating VM size setting of specified Compute Instance.",
-          "schema": {
-            "$ref": "#/definitions/ResizeSchema"
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/resize": {
+      "post": {
+        "tags": [
+          "OperationalizationClusters",
+          "MachineLearningComputes"
+        ],
+        "operationId": "Compute_Resize",
+        "description": "Updates the size of a Compute Instance.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ComputeNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "description": "The object for updating VM size setting of specified Compute Instance.",
+            "schema": {
+              "$ref": "#/definitions/ResizeSchema"
+            }
           }
-        }
-      ],
-      "responses": {
-        "202": {
-          "description": "Success."
-        },
-        "default": {
-          "description": "Error response describing why the operation failed.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "202": {
+            "description": "Success."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
-        }
-      },
-      "x-ms-examples": {
-        "List VM Sizes": {
-          "$ref": "./examples/Compute/resize.json"
+        },
+        "x-ms-examples": {
+          "List VM Sizes": {
+            "$ref": "./examples/Compute/resize.json"
+          }
         }
       }
     }
