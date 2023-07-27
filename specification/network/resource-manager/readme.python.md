@@ -51,6 +51,7 @@ batch:
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/
 perform-load: false
+clear-output-folder: false
 ```
 
 ### Tag: package-2023-02 and python
