@@ -8183,13 +8183,15 @@
       "description": "Holds information on upgrades and compatibility for given major.minor mesh release.",
       "properties": {
         "revision": {
-          "type": "string"
+          "type": "string",
+          "description": "The mesh release version."
         },
         "upgrades": {
           "type": "array",
           "description": "List of revisions available for upgrade of a specific mesh revision",
           "items": {
-            "type": "string"
+            "type": "string",
+            "description": "The revisions."
           }
         },
         "compatibleWith": {
@@ -8204,12 +8206,15 @@
     },
     "CompatibleVersions": {
       "type": "object",
+      "description": "List of compatible versions.",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "The product name."
         },
         "versions": {
           "type": "array",
+          "description": "The product versions.",
           "items": {
             "type": "string"
           }
