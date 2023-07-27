@@ -100,6 +100,33 @@ input-file:
 # Needed when there is more than one input file
 override-info:
   title: PolicyClient
+
+suppressions:
+  - code: PathForPutOperation
+    from: policyDefinitions.json
+    reason: Policy definitions can be created at management group or subscriptions
+  - code: PathForPutOperation
+    from: policySetDefinitions.json
+    reason: Policy sets can be created at management group or subscriptions
+  - code: PathForPutOperation
+    from: policyAssignments.json
+    reason: Policy assignments can be created at management group or subscriptions
+  - code: DeleteResponseBodyEmpty
+    from: policyAssignments.json
+    reason: Policy assignment body is returned on delete and this must match API
+  - code: RequestSchemaForTrackedResourcesMustHaveTags
+    from: policyAssignments.json
+    reason: Policy assignments are not tracked resources
+  - code: RepeatedPathInfo
+    from: policyAssignments.json
+    reason: Service requires the scope to be in the body
+  - code: PutResponseSchemaDescription
+    from: policyAssignments.json
+    reason: Service only returns 201 on all successful PUTs
+  - code: UnSupportedPatchProperties
+    from: policyAssignments.json
+    reason: The location property represents the user-assigned identity location and is changeable for policy assignments
+
 ```
 
 ### Tag: package-2022-12

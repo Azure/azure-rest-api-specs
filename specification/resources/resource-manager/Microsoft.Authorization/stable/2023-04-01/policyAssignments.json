@@ -61,6 +61,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[^<>*%&:\\?.+\/]*[^<>*%&:\\?.+\/ ]+$",
             "description": "The name of the policy assignment to delete."
           },
           {
@@ -129,6 +130,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[^<>*%&:\\?.+\/]*[^<>*%&:\\?.+\/ ]+$",
             "description": "The name of the policy assignment."
           },
           {
@@ -197,6 +199,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[^<>*%&:\\?.+\/]*[^<>*%&:\\?.+\/ ]+$",
             "description": "The name of the policy assignment to get."
           },
           {
@@ -253,6 +256,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[^<>*%&:\\?.+\/]*[^<>*%&:\\?.+\/ ]+$",
             "description": "The name of the policy assignment."
           },
           {
@@ -1013,14 +1017,16 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The ID of the target subscription."
+      "description": "The ID of the target subscription.",
+      "x-ms-parameter-location": "method"
     },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "The API version to use for the operation."
+      "description": "The API version to use for the operation.",
+      "x-ms-parameter-location": "method"
     },
     "ManagementGroupIdParameter": {
       "name": "managementGroupId",
