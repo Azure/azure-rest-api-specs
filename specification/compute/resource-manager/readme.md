@@ -251,7 +251,7 @@ directive:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{galleryImageName}/versionNames/latest"].get
     suppress:
       - PathForNestedResource
-    reason: The.
+    reason: This is a bug with the LintDiff rule checking the last parameter in this list.
 ```
 ### Tag: package-2022-08-03
 
