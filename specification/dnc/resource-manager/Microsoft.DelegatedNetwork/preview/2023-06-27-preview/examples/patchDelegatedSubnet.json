@@ -3,7 +3,12 @@
     "subscriptionId": "613192d7-503f-477a-9cfe-4efc3ee2bd60",
     "resourceGroupName": "TestRG",
     "resourceName": "delegated1",
-    "api-version": "2023-05-18-preview"
+    "api-version": "2023-06-27-preview",
+    "parameters": {
+      "tags": {
+        "key": "value"
+      }
+    }
   },
   "responses": {
     "200": {
@@ -13,6 +18,9 @@
         "location": "West US",
         "name": "delegated1",
         "type": "Microsoft.DelegatedNetwork/delegatedSubnets",
+        "tags": {
+          "key": "value"
+        },
         "properties": {
           "provisioningState": "Succeeded",
           "resourceGuid": "5a82cbcf-e8ea-4175-ac2b-ad36a73f9801",
@@ -21,7 +29,8 @@
           },
           "controllerDetails": {
             "id": "/subscriptions/613192d7-503f-477a-9cfe-4efc3ee2bd60/resourceGroups/TestRG/providers/Microsoft.DelegatedNetwork/controller/dnctestcontroller"
-          }
+          },
+          "allocationBlockPrefixSize": 32
         }
       }
     }

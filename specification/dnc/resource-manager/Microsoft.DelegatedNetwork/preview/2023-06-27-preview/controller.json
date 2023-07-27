@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-05-18-preview",
+    "version": "2023-06-27-preview",
     "title": "DNC",
     "description": "DNC web api provides way to create, get and delete dnc controller"
   },
@@ -34,18 +34,18 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DelegatedNetwork/delegatedSubnets/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DelegatedNetwork/controller/{resourceName}": {
       "get": {
-        "description": "Gets details about the specified dnc DelegatedSubnet Link.",
+        "description": "Gets details about the specified dnc controller.",
         "x-ms-examples": {
-          "Get details of a delegated subnet": {
-            "$ref": "./examples/getDelegatedSubnet.json"
+          "Get details of a controller": {
+            "$ref": "./examples/getController.json"
           }
         },
         "tags": [
-          "DNCDelegatedSubnet"
+          "Controller"
         ],
-        "operationId": "DelegatedSubnetService_GetDetails",
+        "operationId": "Controller_GetDetails",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
@@ -64,7 +64,7 @@
           "200": {
             "description": "OK. The operation was successful.",
             "schema": {
-              "$ref": "#/definitions/DelegatedSubnet"
+              "$ref": "#/definitions/DelegatedController"
             }
           },
           "default": {
@@ -76,16 +76,16 @@
         }
       },
       "put": {
-        "description": "Put delegated subnet resource",
+        "description": "Create a dnc controller",
         "x-ms-examples": {
-          "put delegated subnet": {
-            "$ref": "./examples/putDelegatedSubnet.json"
+          "Create controller": {
+            "$ref": "./examples/putController.json"
           }
         },
         "tags": [
-          "DNCDelegatedSubnet"
+          "Controller"
         ],
-        "operationId": "DelegatedSubnetService_PutDetails",
+        "operationId": "Controller_Create",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
@@ -104,72 +104,22 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DelegatedSubnet"
+              "$ref": "#/definitions/DelegatedController"
             },
-            "description": "Delegated subnet details."
+            "description": "controller type parameters"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK. The operation was successful.",
+            "description": "OK. The operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DelegatedSubnet"
+              "$ref": "#/definitions/DelegatedController"
             }
           },
           "201": {
-            "description": "InProgress. The operation is still in progress",
+            "description": "InProgress. The operation is still in progress.",
             "schema": {
-              "$ref": "#/definitions/DelegatedSubnet"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "description": "Patch delegated subnet resource",
-        "x-ms-examples": {
-          "patch delegated subnet": {
-            "$ref": "./examples/patchDelegatedSubnet.json"
-          }
-        },
-        "tags": [
-          "DNCDelegatedSubnet"
-        ],
-        "operationId": "DelegatedSubnetService_PatchDetails",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ResourceUpdateParameters"
-            },
-            "description": "Delegated subnet details."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The operation was successful.",
-            "schema": {
-              "$ref": "#/definitions/DelegatedSubnet"
+              "$ref": "#/definitions/DelegatedController"
             }
           },
           "default": {
@@ -182,16 +132,16 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "description": "Delete dnc DelegatedSubnet.",
+        "description": "Deletes the DNC controller",
         "x-ms-examples": {
-          "delete delegated subnet": {
-            "$ref": "./examples/deleteDelegatedSubnet.json"
+          "Delete controller": {
+            "$ref": "./examples/deleteController.json"
           }
         },
         "tags": [
-          "DNCDelegatedSubnet"
+          "Controller"
         ],
-        "operationId": "DelegatedSubnetService_DeleteDetails",
+        "operationId": "Controller_Delete",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
@@ -204,9 +154,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ForceDeleteParameter"
           }
         ],
         "responses": {
@@ -227,18 +174,67 @@
           }
         },
         "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "description": "Update dnc controller",
+        "x-ms-examples": {
+          "update controller": {
+            "$ref": "./examples/patchController.json"
+          }
+        },
+        "tags": [
+          "Controller"
+        ],
+        "operationId": "Controller_Patch",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ControllerResourceUpdateParameters"
+            },
+            "description": "controller type parameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DelegatedController"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DelegatedNetwork/delegatedSubnets": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DelegatedNetwork/controllers": {
       "get": {
         "tags": [
-          "DelegatedSubnets"
+          "DelegatedControllers"
         ],
-        "description": "Get all the DelegatedSubnets resources in a subscription.",
-        "operationId": "DelegatedSubnetService_ListBySubscription",
+        "description": "Get all the delegatedController resources in a subscription.",
+        "operationId": "DelegatedNetwork_ListBySubscription",
         "x-ms-examples": {
-          "Get DelegatedSubnets resources by subscription": {
-            "$ref": "./examples/delegatedSubnetListBySub.json"
+          "Get DelegatedController resources by subscription": {
+            "$ref": "./examples/controllerListBySub.json"
           }
         },
         "x-ms-pageable": {
@@ -254,9 +250,9 @@
         ],
         "responses": {
           "200": {
-            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the DelegatedSubnets in the subscription.",
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the DelegatedControllers in the subscription.",
             "schema": {
-              "$ref": "#/definitions/DelegatedSubnets"
+              "$ref": "#/definitions/DelegatedControllers"
             }
           },
           "default": {
@@ -268,16 +264,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DelegatedNetwork/delegatedSubnets": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DelegatedNetwork/controllers": {
       "get": {
         "tags": [
-          "DelegatedSubnets"
+          "DelegatedControllers"
         ],
-        "description": "Get all the DelegatedSubnets resources in a resource group.",
-        "operationId": "DelegatedSubnetService_ListByResourceGroup",
+        "description": "Get all the delegatedController resources in a resource group.",
+        "operationId": "DelegatedNetwork_ListByResourceGroup",
         "x-ms-examples": {
-          "Get DelegatedSubnets resources by resource group": {
-            "$ref": "./examples/delegatedSubnetListByRG.json"
+          "Get DelegatedNetwork resources by resource group": {
+            "$ref": "./examples/controllerListByRG.json"
           }
         },
         "x-ms-pageable": {
@@ -296,9 +292,9 @@
         ],
         "responses": {
           "200": {
-            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the DelegatedSubnets in the resource group.",
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the delegatedControllers in the resource group.",
             "schema": {
-              "$ref": "#/definitions/DelegatedSubnets"
+              "$ref": "#/definitions/DelegatedControllers"
             }
           },
           "default": {
@@ -312,7 +308,7 @@
     }
   },
   "definitions": {
-    "DelegatedSubnetResource": {
+    "ControllerResource": {
       "description": "Represents an instance of a resource.",
       "type": "object",
       "properties": {
@@ -345,8 +341,9 @@
       },
       "x-ms-azure-resource": true
     },
-    "ResourceUpdateParameters": {
+    "ControllerResourceUpdateParameters": {
       "description": "Parameters for updating a resource.",
+      "type": "object",
       "properties": {
         "tags": {
           "type": "object",
@@ -357,20 +354,20 @@
         }
       }
     },
-    "DelegatedSubnets": {
-      "description": "An array of DelegatedSubnet resources.",
+    "DelegatedControllers": {
+      "description": "An array of Delegated controller resources.",
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DelegatedSubnet"
+            "$ref": "#/definitions/DelegatedController"
           },
-          "description": "An array of DelegatedSubnet resources."
+          "description": "An array of Delegated controller resources."
         },
         "nextLink": {
           "type": "string",
-          "description": "The URL to get the next set of DelegatedSubnet resources.",
+          "description": "The URL to get the next set of controllers.",
           "readOnly": true
         }
       },
@@ -378,24 +375,23 @@
         "value"
       ]
     },
-    "DelegatedSubnet": {
-      "description": "Represents an instance of a orchestrator.",
+    "DelegatedController": {
+      "description": "Represents an instance of a DNC controller.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/DelegatedSubnetResource"
+          "$ref": "#/definitions/ControllerResource"
         }
       ],
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DelegatedSubnetProperties",
+          "$ref": "#/definitions/DelegatedControllerProperties",
           "description": "Properties of the provision operation request."
         }
       }
     },
-    "DelegatedSubnetProperties": {
-      "description": "Properties of delegated subnet",
+    "DelegatedControllerProperties": {
+      "description": "Properties of Delegated controller resource.",
       "type": "object",
       "properties": {
         "resourceGuid": {
@@ -412,29 +408,39 @@
             "Provisioning"
           ],
           "x-ms-enum": {
-            "name": "DelegatedSubnetState",
+            "name": "ControllerState",
             "modelAsString": true
           },
           "readOnly": true,
-          "description": "The current state of dnc delegated subnet resource."
+          "description": "The current state of dnc controller resource."
         },
-        "subnetDetails": {
-          "description": "subnet details",
-          "$ref": "#/definitions/subnetDetails"
+        "dncAppId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "dnc application id should be used by customer to authenticate with dnc gateway."
         },
-        "controllerDetails": {
-          "$ref": "./common-types.json#/definitions/controllerDetails",
-          "description": "Properties of the controller."
-        }
-      }
-    },
-    "subnetDetails": {
-      "description": "Properties of orchestrator",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "subnet arm resource id",
-          "type": "string"
+        "dncTenantId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "tenant id of dnc application id"
+        },
+        "dncEndpoint": {
+          "type": "string",
+          "readOnly": true,
+          "description": "dnc endpoint url that customers can use to connect to"
+        },
+        "purpose": {
+          "type": "string",
+          "enum": [
+            "test",
+            "prod"
+          ],
+          "default": "prod",
+          "x-ms-enum": {
+            "name": "ControllerPurpose",
+            "modelAsString": true
+          },
+          "description": "The purpose of the dnc controller resource."
         }
       }
     }
@@ -450,14 +456,6 @@
       "maxLength": 63,
       "x-ms-parameter-location": "method",
       "description": "The name of the resource. It must be a minimum of 3 characters, and a maximum of 63."
-    },
-    "ForceDeleteParameter": {
-      "name": "forceDelete",
-      "in": "query",
-      "required": false,
-      "type": "boolean",
-      "description": "Force delete resource",
-      "x-ms-parameter-location": "method"
     }
   }
 }
