@@ -248,7 +248,7 @@ directive:
     where:
       - $.definitions.VirtualMachineScaleSetVMExtension
   - where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{galleryImageName}/versionNames/latest"].get
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{galleryImageName}/versionNames/latest"]
     suppress:
       - PathForNestedResource
     reason: This is a bug with the LintDiff rule checking the last parameter in this list.
