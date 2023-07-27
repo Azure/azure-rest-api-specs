@@ -30,7 +30,16 @@ else {
   Write-Host
 
   $engFiles = $changedFiles | Where-Object {if ($_) { $_.StartsWith('eng') }}
-  $repoRootFiles = $changedFiles | Where-Object {$_ -notmatch [Regex]::Escape([IO.Path]::DirectorySeparatorChar)}
+
+  $rootFilesImpactingTypeSpec = @(
+    ".gitattributes",
+    ".prettierrc.json",
+    "package-lock.json",
+    "package.json",
+    "tsconfig.json"
+  )
+  $repoRootFiles = $changedFiles | Where-Object {$_ -in $rootFilesImpactingTypeSpec}
+
   if ($engFiles -or $repoRootFiles) {
     $changedFiles = $allChangedFiles
   }
