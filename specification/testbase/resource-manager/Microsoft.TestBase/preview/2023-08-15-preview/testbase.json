@@ -79,7 +79,7 @@
           "Test Base Account"
         ],
         "operationId": "TestBaseAccounts_ListBySubscription",
-        "description": "Lists all the Test Base Accounts in a subscription. This API is required by ARM guidelines.",
+        "description": "Lists all the Test Base Accounts in a subscription.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -892,6 +892,235 @@
         "x-ms-examples": {
           "FirstPartyAppsGet": {
             "$ref": "./examples/FirstPartyAppGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/galleryApps": {
+      "get": {
+        "tags": [
+          "Gallery Applications"
+        ],
+        "operationId": "GalleryApps_List",
+        "description": "Lists all gallery applications currently available for test runs under a Test Base Account which matches user query.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/KeywordParameter"
+          },
+          {
+            "name": "applicationType",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Winget"
+            ],
+            "x-ms-enum": {
+              "name": "applicationType",
+              "modelAsString": true
+            },
+            "x-ms-parameter-location": "method",
+            "description": "The type of the gallery application."
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "popularity",
+              "relevance"
+            ],
+            "x-ms-enum": {
+              "name": "orderBy",
+              "modelAsString": true
+            },
+            "default": "relevance",
+            "x-ms-parameter-location": "method",
+            "description": "The order of result list."
+          },
+          {
+            "$ref": "#/parameters/TopFilter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/GalleryAppListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GalleryAppsList": {
+            "$ref": "./examples/GalleryAppsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/galleryApps/{galleryAppName}": {
+      "get": {
+        "tags": [
+          "Gallery Applications"
+        ],
+        "operationId": "GalleryApps_Get",
+        "description": "Gets a gallery application to prepare a test run for a Test Base Account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GalleryAppNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/GalleryAppResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GalleryAppsGet": {
+            "$ref": "./examples/GalleryAppGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/galleryApps/{galleryAppName}/galleryAppSkus": {
+      "get": {
+        "tags": [
+          "Gallery Applications"
+        ],
+        "operationId": "GalleryAppSkus_List",
+        "description": "Lists all SKUs of a gallery application currently available for test runs under a Test Base Account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GalleryAppNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/GalleryAppSkuListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GalleryAppSkusList": {
+            "$ref": "./examples/GalleryAppsSkusList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/galleryApps/{galleryAppName}/galleryAppSkus/{galleryAppSkuName}": {
+      "get": {
+        "tags": [
+          "Gallery Applications"
+        ],
+        "operationId": "GalleryAppSkus_Get",
+        "description": "Gets a gallery application SKU to prepare a test run for a Test Base Account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GalleryAppNameParameter"
+          },
+          {
+            "name": "galleryAppSkuName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "description": "The resource name of a gallery application SKU."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/GalleryAppSkuResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GalleryAppsSkuGet": {
+            "$ref": "./examples/GalleryAppSkuGet.json"
           }
         }
       }
@@ -3737,7 +3966,7 @@
         },
         "interopExecutionMode": {
           "type": "string",
-          "description": "Specifies how the first party applications should be interoperated with user's application.",
+          "description": "Specifies how the first party applications should be inter-operated with user's application.",
           "enum": [
             "firstPartyAppWithTests",
             "firstPartyApp"
@@ -3785,6 +4014,179 @@
           "description": "The ring info of a first party application of a Test Base Account."
         }
       }
+    },
+    "GalleryAppDefinition": {
+      "description": "Properties of the definition of a gallery application used in Test Base package.",
+      "type": "object",
+      "properties": {
+        "skuId": {
+          "type": "string",
+          "description": "The SKU id of the gallery application."
+        },
+        "isConsented": {
+          "type": "boolean",
+          "description": "Whether the statement of the gallery application is accepted.",
+          "default": false
+        }
+      },
+      "required": [
+        "skuId"
+      ]
+    },
+    "GalleryAppListResult": {
+      "description": "A list of currently available gallery applications.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GalleryAppResource"
+          },
+          "description": "The list of currently available gallery applications."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if value contains incomplete list of results."
+        }
+      }
+    },
+    "GalleryAppResource": {
+      "description": "The gallery application resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GalleryAppProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of a gallery application."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "GalleryAppProperties": {
+      "description": "Properties of a gallery application.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "applicationType": {
+          "$ref": "#/definitions/GalleryAppType",
+          "description": "The application type of a gallery application."
+        },
+        "applicationId": {
+          "type": "string",
+          "description": "The id of a gallery application."
+        },
+        "applicationName": {
+          "type": "string",
+          "description": "The name of a gallery application."
+        },
+        "popularity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of users using a gallery application.",
+          "default": 0
+        }
+      },
+      "required": [
+        "applicationType",
+        "applicationId",
+        "applicationName",
+        "popularity"
+      ]
+    },
+    "GalleryAppType": {
+      "description": "The type of a gallery application.",
+      "type": "string",
+      "enum": [
+        "Winget"
+      ],
+      "x-ms-enum": {
+        "name": "applicationType",
+        "modelAsString": true
+      }
+    },
+    "GalleryAppSkuListResult": {
+      "description": "A list of currently available SKUs of a gallery application.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GalleryAppSkuResource"
+          },
+          "description": "The list of currently available SKUs of a gallery applications."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if value contains incomplete list of results."
+        }
+      }
+    },
+    "GalleryAppSkuResource": {
+      "description": "The gallery application resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GalleryAppSkuProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of a gallery application SKU."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "GalleryAppSkuProperties": {
+      "description": "Properties of a gallery application SKU.",
+      "type": "object",
+      "discriminator": "applicationType",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "applicationType": {
+          "$ref": "#/definitions/GalleryAppType",
+          "description": "The application type of a gallery application."
+        }
+      },
+      "required": [
+        "applicationType"
+      ]
+    },
+    "WingetAppSkuProperties": {
+      "description": "The detailed properties of a winget Gallery application SKU.",
+      "type": "object",
+      "x-ms-discriminator-value": "Winget",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "The version of a winget Gallery application SKU."
+        },
+        "license": {
+          "type": "string",
+          "description": "The license description of a winget Gallery application SKU."
+        },
+        "licenseUrl": {
+          "type": "string",
+          "description": "The license URL of a winget Gallery application SKU."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/GalleryAppSkuProperties"
+        }
+      ]
     },
     "TestTypeListResult": {
       "description": "A list of test types.",
@@ -4071,6 +4473,14 @@
           "items": {
             "$ref": "#/definitions/FirstPartyAppDefinition"
           }
+        },
+        "galleryApps": {
+          "description": "The list of gallery apps to test along with user application.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GalleryAppDefinition"
+          },
+          "readOnly": true
         },
         "tests": {
           "type": "array",
@@ -6529,6 +6939,30 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "The available In-place Upgrade OS resource name."
+    },
+    "GalleryAppNameParameter": {
+      "name": "galleryAppName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The resource name of a gallery application."
+    },
+    "KeywordParameter": {
+      "name": "keyword",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The keywords which listed results should be related to."
+    },
+    "TopFilter": {
+      "name": "top",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "x-ms-parameter-location": "method",
+      "description": "According to the reverse order of time, how many first ones are taken."
     }
   }
 }

@@ -90,7 +90,7 @@
           "Test Base Action Requests"
         ],
         "operationId": "ActionRequests_Delete",
-        "description": "Create (submit) an action request. Only requests in review can be deleted.",
+        "description": "Delete (revoke) an action request. Only requests in review can be deleted.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -153,7 +153,7 @@
             "$ref": "#/parameters/RequestTypeFilter"
           },
           {
-            "$ref": "#/parameters/TopFilter"
+            "$ref": "./testbase.json#/parameters/TopFilter"
           }
         ],
         "responses": {
@@ -171,7 +171,7 @@
           }
         },
         "x-ms-examples": {
-          "ActionRequestDelete": {
+          "ActionRequestList": {
             "$ref": "./examples/ActionRequestList.json"
           }
         }
@@ -317,14 +317,6 @@
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
-    },
-    "TopFilter": {
-      "name": "top",
-      "in": "query",
-      "required": false,
-      "type": "integer",
-      "x-ms-parameter-location": "method",
-      "description": "According to the reverse order of time, how many first ones are taken."
     }
   }
 }
