@@ -6,9 +6,15 @@
     "description": "REST API for managing Azure Lab Services images."
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -43,7 +49,9 @@
         }
       ],
       "get": {
-        "tags": ["Image"],
+        "tags": [
+          "Image"
+        ],
         "summary": "Gets all images.",
         "description": "Gets all images from galleries attached to a lab plan.",
         "operationId": "Images_ListByLabPlan",
@@ -90,7 +98,9 @@
         }
       ],
       "get": {
-        "tags": ["Image"],
+        "tags": [
+          "Image"
+        ],
         "summary": "Gets an image.",
         "description": "Gets an image resource.",
         "operationId": "Images_Get",
@@ -115,7 +125,9 @@
         }
       },
       "put": {
-        "tags": ["Image"],
+        "tags": [
+          "Image"
+        ],
         "summary": "Updates an image via PUT.",
         "description": "Updates an image resource via PUT. Creating new resources via PUT will not function.",
         "operationId": "Images_CreateOrUpdate",
@@ -151,10 +163,14 @@
         }
       },
       "patch": {
-        "tags": ["Image"],
+        "tags": [
+          "Image"
+        ],
         "summary": "Updates an image.",
         "description": "Updates an image resource.",
-        "consumes": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
         "operationId": "Images_Update",
         "parameters": [
           {
@@ -210,7 +226,9 @@
           "x-ms-client-flatten": true
         }
       },
-      "required": ["properties"]
+      "required": [
+        "properties"
+      ]
     },
     "PagedImages": {
       "description": "Paged list of Lab services virtual machine images.",
@@ -340,7 +358,9 @@
           "readOnly": true
         }
       },
-      "required": ["enabledState"]
+      "required": [
+        "enabledState"
+      ]
     }
   },
   "parameters": {

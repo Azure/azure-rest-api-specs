@@ -9,12 +9,20 @@
     }
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -42,7 +50,9 @@
         }
       ],
       "get": {
-        "tags": ["OperationResults"],
+        "tags": [
+          "OperationResults"
+        ],
         "summary": "Get an azure operation result.",
         "description": "Returns an azure operation result.",
         "operationId": "OperationResults_Get",
@@ -142,7 +152,9 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail"
         }
       },
-      "required": ["status"]
+      "required": [
+        "status"
+      ]
     }
   },
   "parameters": {

@@ -9,12 +9,20 @@
     }
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -36,7 +44,9 @@
         }
       ],
       "get": {
-        "tags": ["Operations"],
+        "tags": [
+          "Operations"
+        ],
         "summary": "Get all operations",
         "description": "Returns a list of all operations.",
         "operationId": "Operations_List",
@@ -110,7 +120,10 @@
     },
     "enableState": {
       "type": "string",
-      "enum": ["Enabled", "Disabled"],
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
       "description": "Property enabled state.",
       "x-ms-enum": {
         "name": "EnableState",
@@ -119,7 +132,11 @@
     },
     "connectionType": {
       "type": "string",
-      "enum": ["Public", "Private", "None"],
+      "enum": [
+        "Public",
+        "Private",
+        "None"
+      ],
       "description": "A connection type for access labs and VMs (Public, Private or None).",
       "x-ms-enum": {
         "name": "ConnectionType",
@@ -146,7 +163,10 @@
     },
     "osType": {
       "type": "string",
-      "enum": ["Windows", "Linux"],
+      "enum": [
+        "Windows",
+        "Linux"
+      ],
       "description": "The operating system type.",
       "x-ms-enum": {
         "name": "OsType",
@@ -155,7 +175,10 @@
     },
     "osState": {
       "type": "string",
-      "enum": ["Generalized", "Specialized"],
+      "enum": [
+        "Generalized",
+        "Specialized"
+      ],
       "description": "The operating system state.",
       "x-ms-enum": {
         "name": "OsState",
@@ -174,7 +197,11 @@
     },
     "shutdownOnIdleMode": {
       "type": "string",
-      "enum": ["None", "UserAbsence", "LowUsage"],
+      "enum": [
+        "None",
+        "UserAbsence",
+        "LowUsage"
+      ],
       "description": "Defines whether to shut down VM on idle and the criteria for idle detection.",
       "x-ms-enum": {
         "name": "shutdownOnIdleMode",

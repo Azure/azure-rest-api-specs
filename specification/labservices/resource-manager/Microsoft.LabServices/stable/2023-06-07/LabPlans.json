@@ -6,7 +6,9 @@
     "description": "REST API for managing Azure Lab Services lab plans."
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
+  "schemes": [
+    "https"
+  ],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -18,8 +20,12 @@
       }
     }
   },
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.LabServices/labPlans": {
       "parameters": [
@@ -37,7 +43,9 @@
         }
       ],
       "get": {
-        "tags": ["LabPlan"],
+        "tags": [
+          "LabPlan"
+        ],
         "summary": "Get all lab plans for a subscription.",
         "description": "Returns a list of all lab plans within a subscription",
         "operationId": "LabPlans_ListBySubscription",
@@ -78,7 +86,9 @@
         }
       ],
       "get": {
-        "tags": ["LabPlan"],
+        "tags": [
+          "LabPlan"
+        ],
         "summary": "Get all lab plans for a subscription and resource group.",
         "description": "Returns a list of all lab plans for a subscription and resource group.",
         "operationId": "LabPlans_ListByResourceGroup",
@@ -122,7 +132,9 @@
         }
       ],
       "get": {
-        "tags": ["LabPlan"],
+        "tags": [
+          "LabPlan"
+        ],
         "summary": "Retrieves a Lab Plan resource.",
         "description": "Retrieves the properties of a Lab Plan.",
         "operationId": "LabPlans_Get",
@@ -147,7 +159,9 @@
         }
       },
       "put": {
-        "tags": ["LabPlan"],
+        "tags": [
+          "LabPlan"
+        ],
         "summary": "Updates or creates a Lab Plan resource.",
         "description": "Operation to create or update a Lab Plan resource.",
         "operationId": "LabPlans_CreateOrUpdate",
@@ -199,10 +213,14 @@
         }
       },
       "patch": {
-        "tags": ["LabPlan"],
+        "tags": [
+          "LabPlan"
+        ],
         "summary": "Updates a Lab Plan resource.",
         "description": "Operation to update a Lab Plan resource.",
-        "consumes": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
         "operationId": "LabPlans_Update",
         "parameters": [
           {
@@ -246,7 +264,9 @@
         }
       },
       "delete": {
-        "tags": ["LabPlan"],
+        "tags": [
+          "LabPlan"
+        ],
         "summary": "Deletes a Lab Plan resource.",
         "description": "Operation to delete a Lab Plan resource. Deleting a lab plan does not delete labs associated with a lab plan, nor does it delete shared images added to a gallery via the lab plan permission container.",
         "operationId": "LabPlans_Delete",
@@ -294,7 +314,9 @@
         }
       ],
       "post": {
-        "tags": ["VirtualMachine"],
+        "tags": [
+          "VirtualMachine"
+        ],
         "summary": "Save an image from a lab VM to the attached shared image gallery.",
         "description": "Saves an image from a lab VM to the attached shared image gallery.",
         "operationId": "LabPlans_SaveImage",
@@ -360,7 +382,9 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Identity"
         }
       },
-      "required": ["properties"]
+      "required": [
+        "properties"
+      ]
     },
     "PagedLabPlans": {
       "description": "Paged list of lab plans.",
