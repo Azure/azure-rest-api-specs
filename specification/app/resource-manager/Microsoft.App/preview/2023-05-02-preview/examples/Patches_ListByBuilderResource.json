@@ -12,14 +12,58 @@
         "value": [
           {
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/builders/testBuilder/patches/testPatch-25fe4b",
-            "name": "testPatch",
+            "name": "testPatch-25fe4b",
             "type": "Microsoft.App/builders/patches",
             "properties": {
               "provisioningState": "Succeeded",
               "patchStatus": "NotStarted",
-              "configuration": {
-                "patchId": ""
+              "patchDetails": {
+                "patchName": "testPatch-25fe4b",
+                "targetImageName": "testregistry.azurecr.io/test-image:latest",
+                "newRunImage": "mcr.microsoft.com/oryx/builder:run-dotnet-aspnet-7.0.7-cbl-mariner2.0",
+                "oldRunImage": "mcr.microsoft.com/oryx/builder:run-dotnet-aspnet-7.0.5-cbl-mariner2.0",
+                "reason": "Newer run image available.",
+                "targetResourceGroup": "rg",
+                "targetContainerAppEnv": "test-env",
+                "targetContainerApp": "test-app",
+                "targetContainerName": "test-container"
               }
+            },
+            "systemData": {
+              "createdBy": "sample@microsoft.com",
+              "createdByType": "User",
+              "createdAt": "2022-10-11T11:05:51.4940669Z",
+              "lastModifiedBy": "sample@microsoft.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2022-10-11T11:05:51.4940669Z"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/builders/testBuilder/patches/testPatch-27c3d5",
+            "name": "testPatch-27c3d5",
+            "type": "Microsoft.App/builders/patches",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "patchStatus": "NotStarted",
+              "patchDetails": {
+                "patchName": "testPatch-27c3d5",
+                "targetImageName": "private-repository-k8s.k8se-system/test-image:latest",
+                "newRunImage": "mcr.microsoft.com/oryx/builder:run-dotnet-aspnet-7.0.7-cbl-mariner2.0",
+                "oldRunImage": "mcr.microsoft.com/oryx/builder:run-dotnet-aspnet-7.0.5-cbl-mariner2.0",
+                "reason": "Newer run image available.",
+                "targetResourceGroup": "rg",
+                "targetContainerAppEnv": "test-env",
+                "targetContainerApp": "test-app2",
+                "targetContainerName": "test-container"
+              }
+            },
+            "systemData": {
+              "createdBy": "sample@microsoft.com",
+              "createdByType": "User",
+              "createdAt": "2022-10-11T11:05:51.4940669Z",
+              "lastModifiedBy": "sample@microsoft.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2022-10-11T11:05:51.4940669Z"
             }
           }
         ],
