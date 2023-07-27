@@ -2049,7 +2049,39 @@
       ],
       "x-ms-enum": {
         "name": "UpdateState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has not been started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that is running."
+          },
+          {
+            "name": "Stopping",
+            "value": "Stopping",
+            "description": "The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that is being stopped."
+          },
+          {
+            "name": "Stopped",
+            "value": "Stopped",
+            "description": "The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has stopped."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has failed."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has completed."
+          }
+        ]
       }
     },
     "UpdateStatus": {
