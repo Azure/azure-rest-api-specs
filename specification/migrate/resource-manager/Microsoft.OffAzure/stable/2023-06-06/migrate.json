@@ -88,6 +88,9 @@
       "name": "HypervSites"
     },
     {
+      "name": "HypervOperationsStatusController"
+    },
+    {
       "name": "HypervJobs"
     },
     {
@@ -944,7 +947,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "resource",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -955,7 +958,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM update operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/HypervCluster"
             }
@@ -973,20 +976,6 @@
               "$ref": "#/definitions/HypervCluster"
             }
           },
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -995,15 +984,12 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "HypervClusterController_CreateCluster_MaximumSet_Gen": {
             "$ref": "./examples/HypervClusterController_CreateCluster_MaximumSet_Gen.json"
-          },
-          "HypervClusterController_CreateCluster_MinimumSet_Gen": {
-            "$ref": "./examples/HypervClusterController_CreateCluster_MinimumSet_Gen.json"
           }
         }
       },
@@ -1585,7 +1571,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "resource",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -1596,7 +1582,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM update operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/HypervHost"
             }
@@ -1614,20 +1600,6 @@
               "$ref": "#/definitions/HypervHost"
             }
           },
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1636,7 +1608,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -1685,6 +1657,20 @@
           "200": {
             "description": "Resource deleted successfully."
           },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
           "204": {
             "description": "Resource deleted successfully."
           },
@@ -1695,6 +1681,10 @@
             }
           }
         },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "HypervHostController_Delete_MaximumSet_Gen": {
             "$ref": "./examples/HypervHostController_Delete_MaximumSet_Gen.json"
@@ -2075,10 +2065,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/operationsStatus/{operationStatusName}": {
       "get": {
         "tags": [
-          "HypervSites"
+          "HypervOperationsStatusController"
         ],
-        "operationId": "HypervSites_GetHypervOperationsStatus",
-        "description": "A operation status resource belonging to a site resource.",
+        "operationId": "HypervOperationsStatusController_GetHypervOperationsStatus",
+        "description": "Method to get operation status.",
         "parameters": [
           {
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2121,11 +2111,11 @@
           }
         },
         "x-ms-examples": {
-          "HypervSites_GetHypervOperationsStatus_MaximumSet_Gen": {
-            "$ref": "./examples/HypervSites_GetHypervOperationsStatus_MaximumSet_Gen.json"
+          "HypervOperationsStatusController_GetHypervOperationsStatus_MaximumSet_Gen": {
+            "$ref": "./examples/HypervOperationsStatusController_GetHypervOperationsStatus_MaximumSet_Gen.json"
           },
-          "HypervSites_GetHypervOperationsStatus_MinimumSet_Gen": {
-            "$ref": "./examples/HypervSites_GetHypervOperationsStatus_MinimumSet_Gen.json"
+          "HypervOperationsStatusController_GetHypervOperationsStatus_MinimumSet_Gen": {
+            "$ref": "./examples/HypervOperationsStatusController_GetHypervOperationsStatus_MinimumSet_Gen.json"
           }
         }
       }
@@ -2546,7 +2536,7 @@
             "required": true,
             "description": "The content of the action request",
             "schema": {
-              "$ref": "#/definitions/MachineMetadataList"
+              "$ref": "#/definitions/MachineMetadataCollection"
             }
           }
         ],
@@ -3634,7 +3624,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "resource",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -3645,7 +3635,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM update operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MasterSite"
             }
@@ -3663,20 +3653,6 @@
               "$ref": "#/definitions/MasterSite"
             }
           },
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -3685,7 +3661,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -4866,7 +4842,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "resource",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -4877,7 +4853,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM update operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SqlDiscoverySiteDataSourceResource"
             }
@@ -4895,20 +4871,6 @@
               "$ref": "#/definitions/SqlDiscoverySiteDataSourceResource"
             }
           },
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -4917,7 +4879,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -6751,7 +6713,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "resource",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -6762,7 +6724,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM update operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DiscoverySiteDataSource"
             }
@@ -6780,20 +6742,6 @@
               "$ref": "#/definitions/DiscoverySiteDataSource"
             }
           },
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -6802,7 +6750,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -8553,7 +8501,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "resource",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -8564,7 +8512,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM update operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ServerSiteResource"
             }
@@ -8582,20 +8530,6 @@
               "$ref": "#/definitions/ServerSiteResource"
             }
           },
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -8604,7 +8538,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -10114,7 +10048,7 @@
             "required": true,
             "description": "The content of the action request",
             "schema": {
-              "$ref": "#/definitions/MachineMetadataList"
+              "$ref": "#/definitions/MachineMetadataCollection"
             }
           }
         ],
@@ -11219,7 +11153,7 @@
           "HypervJobsController"
         ],
         "operationId": "HypervJobsController_ListByVmwareSite",
-        "description": "List VmwareJobResource resources by VmwareSite",
+        "description": "List VmwareJob resources by VmwareSite",
         "parameters": [
           {
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -11243,7 +11177,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/VmwareJobResourceListResult"
+              "$ref": "#/definitions/VmwareJobListResult"
             }
           },
           "default": {
@@ -11272,7 +11206,7 @@
           "HypervJobsController"
         ],
         "operationId": "HypervJobsController_Get",
-        "description": "Get a VmwareJobResource",
+        "description": "Get a VmwareJob",
         "parameters": [
           {
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -11304,7 +11238,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/VmwareJobResource"
+              "$ref": "#/definitions/VmwareJob"
             }
           },
           "default": {
@@ -12273,7 +12207,7 @@
             "required": true,
             "description": "The content of the action request",
             "schema": {
-              "$ref": "#/definitions/MachineMetadataList"
+              "$ref": "#/definitions/MachineMetadataCollection"
             }
           }
         ],
@@ -12471,7 +12405,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "resource",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -12482,7 +12416,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM update operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Vcenter"
             }
@@ -12500,20 +12434,6 @@
               "$ref": "#/definitions/Vcenter"
             }
           },
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -12522,7 +12442,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -13596,7 +13516,8 @@
         "AppsAndRoles",
         "DependencyMap",
         "StaticData",
-        "SQLServerConnectionInfo"
+        "SQLServerConnectionInfo",
+        "DiscoveryTargets"
       ],
       "x-ms-enum": {
         "name": "HealthErrorDetailsDiscoveryScope",
@@ -13739,7 +13660,10 @@
           "description": "The status of the last operation."
         }
       },
-      "description": "The properties of Hyperv Cluster"
+      "description": "The properties of Hyperv Cluster",
+      "required": [
+        "createdTimestamp"
+      ]
     },
     "HypervDisk": {
       "type": "object",
@@ -13953,11 +13877,6 @@
     "HypervMachineProperties": {
       "type": "object",
       "properties": {
-        "hostProcessorInfo": {
-          "$ref": "#/definitions/ProcessorInfo",
-          "description": "Gets the Information about Host Processor.",
-          "readOnly": true
-        },
         "instanceUuid": {
           "type": "string",
           "description": "On-premise Instance UUID of the machine.",
@@ -14194,10 +14113,24 @@
           "description": "Gets the data related to SpringBoot discovery.",
           "readOnly": true
         },
+        "iisDiscovery": {
+          "$ref": "#/definitions/WebAppDiscovery",
+          "description": "Gets the data related to iis discovery.",
+          "readOnly": true
+        },
+        "tomcatDiscovery": {
+          "$ref": "#/definitions/WebAppDiscovery",
+          "description": "Gets the data related to tomcat discovery.",
+          "readOnly": true
+        },
         "appsAndRoles": {
           "$ref": "#/definitions/AppsAndRoles",
           "description": "Apps And Roles of the Server.",
           "readOnly": true
+        },
+        "productSupportStatus": {
+          "$ref": "#/definitions/ProductSupportStatus",
+          "description": "product support status."
         },
         "numberOfProcessorCore": {
           "type": "integer",
@@ -14236,6 +14169,14 @@
           "description": "Gets the marking machine creation.",
           "readOnly": true
         },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-typespec-name": "Record<string>",
+          "description": "Gets or sets tags on the resource."
+        },
         "updatedTimestamp": {
           "type": "string",
           "description": "Gets the timestamp marking last updated on the machine.",
@@ -14243,7 +14184,8 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation."
+          "description": "The status of the last operation.",
+          "readOnly": true
         }
       },
       "description": "The properties of AddressResource"
@@ -14269,6 +14211,10 @@
           "type": "string",
           "description": "Gets or sets the run as account ID of the machine."
         },
+        "productSupportStatus": {
+          "$ref": "#/definitions/ProductSupportStatus",
+          "description": "product support status."
+        },
         "numberOfProcessorCore": {
           "type": "integer",
           "format": "int32",
@@ -14291,9 +14237,13 @@
           "type": "string",
           "description": "Gets or sets the BIOS GUID."
         },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation."
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-typespec-name": "Record<string>",
+          "description": "Gets or sets tags on the resource."
         }
       },
       "description": "The updatable properties of the HypervMachine."
@@ -14675,9 +14625,9 @@
         "tags": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/Azure.ResourceManager.Object"
+            "type": "string"
           },
-          "x-typespec-name": "Record<Azure.ResourceManager.Object>",
+          "x-typespec-name": "Record<string>",
           "description": "Gets or sets tags on the resource."
         },
         "isDeleted": {
@@ -14790,9 +14740,9 @@
         "tags": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/Azure.ResourceManager.Object"
+            "type": "string"
           },
-          "x-typespec-name": "Record<Azure.ResourceManager.Object>",
+          "x-typespec-name": "Record<string>",
           "description": "Gets or sets tags on the resource."
         }
       },
@@ -15403,7 +15353,8 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation."
+          "description": "The status of the last operation.",
+          "readOnly": true
         }
       },
       "description": "Job REST Resource."
@@ -15435,7 +15386,7 @@
         "tags"
       ]
     },
-    "MachineMetadataList": {
+    "MachineMetadataCollection": {
       "type": "object",
       "properties": {
         "value": {
@@ -15509,14 +15460,6 @@
     "MachineResourceUpdateProperties": {
       "type": "object",
       "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/Azure.ResourceManager.Object"
-          },
-          "x-typespec-name": "Record<Azure.ResourceManager.Object>",
-          "description": "Gets or sets tags on the VMware machine."
-        },
         "firmware": {
           "type": "string",
           "description": "Gets or sets the firmware."
@@ -15524,6 +15467,10 @@
         "runAsAccountId": {
           "type": "string",
           "description": "Gets or sets the run as account ID of the machine."
+        },
+        "productSupportStatus": {
+          "$ref": "#/definitions/ProductSupportStatus",
+          "description": "product support status."
         },
         "numberOfProcessorCore": {
           "type": "integer",
@@ -15547,9 +15494,13 @@
           "type": "string",
           "description": "Gets or sets the BIOS GUID."
         },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation."
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-typespec-name": "Record<string>",
+          "description": "Gets or sets tags on the VMware machine."
         }
       },
       "description": "The updatable properties of the MachineResource."
@@ -15729,6 +15680,11 @@
       },
       "description": "Nonce Request REST Resource."
     },
+    "Object": {
+      "type": "object",
+      "properties": {},
+      "description": "object model"
+    },
     "OperatingSystem": {
       "type": "object",
       "properties": {
@@ -15783,6 +15739,11 @@
           "$ref": "#/definitions/OperationStatusError",
           "description": "Gets the error.",
           "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationStatusProperties",
+          "description": "Operation status properties",
+          "readOnly": true
         }
       },
       "description": "Operation status REST resource."
@@ -15803,6 +15764,16 @@
       },
       "description": "Class for operation status errors."
     },
+    "OperationStatusProperties": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "string",
+          "description": "Gets or sets the result or output of the workflow."
+        }
+      },
+      "description": "Class for operation result properties."
+    },
     "OracleDiscovery": {
       "type": "object",
       "properties": {
@@ -15816,17 +15787,16 @@
           "format": "int64",
           "description": "Gets or sets number of successfully discovered databases."
         },
+        "shallowDiscoveryStatus": {
+          "$ref": "#/definitions/ShallowDiscoveryStatus",
+          "description": "Gets or sets status of partner shallow discovery."
+        },
         "discoveryScopeStatus": {
           "$ref": "#/definitions/DiscoveryScopeStatus",
           "description": "Gets or sets status of partner discovery."
         }
       },
-      "description": "Data related to a machine's Oracle discovery.",
-      "required": [
-        "totalInstanceCount",
-        "totalDatabaseCount",
-        "discoveryScopeStatus"
-      ]
+      "description": "Data related to a machine's Oracle discovery."
     },
     "OtherDatabase": {
       "type": "object",
@@ -16120,18 +16090,44 @@
       },
       "description": "Processor Information."
     },
+    "ProductSupportStatus": {
+      "type": "object",
+      "properties": {
+        "currentVersion": {
+          "type": "string",
+          "description": "current version."
+        },
+        "esuStatus": {
+          "$ref": "#/definitions/esuStatus",
+          "description": "esu status."
+        },
+        "supportStatus": {
+          "$ref": "#/definitions/supportStatus",
+          "description": "support status."
+        },
+        "supportEndDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "support end date."
+        },
+        "esuYear": {
+          "$ref": "#/definitions/esuYear",
+          "description": "esu year."
+        }
+      },
+      "description": "product support status."
+    },
     "ProvisioningState": {
       "type": "string",
       "description": "The status of the current operation.",
       "enum": [
-        "Succeeded",
+        "Created",
+        "Updated",
+        "Running",
+        "Completed",
         "Failed",
-        "Canceled",
-        "Provisioning",
-        "Updating",
-        "Deleting",
-        "Accepted",
-        "InProgress"
+        "Succeeded",
+        "Canceled"
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
@@ -16245,22 +16241,6 @@
       ],
       "x-ms-enum": {
         "name": "SQLDiscoveryScopeStatus",
-        "modelAsString": true
-      }
-    },
-    "SQLDiscoverySqlMetadataDiscoveryPipe": {
-      "type": "string",
-      "description": "SQLDiscovery SqlMetadataDiscoveryPipe",
-      "enum": [
-        "Unknown",
-        "VMware",
-        "PowerShell",
-        "SSH",
-        "CIM",
-        "Other"
-      ],
-      "x-ms-enum": {
-        "name": "SQLDiscoverySqlMetadataDiscoveryPipe",
         "modelAsString": true
       }
     },
@@ -16439,14 +16419,6 @@
           "description": "Gets the Display name of the machine.\n            For server entity hydrated\nFQDN is set as display name\n            as the server id and server name are\nsame.",
           "readOnly": true
         },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/Azure.ResourceManager.Object"
-          },
-          "x-typespec-name": "Record<Azure.ResourceManager.Object>",
-          "description": "Gets or sets tags on the Server machine."
-        },
         "fqdn": {
           "type": "string",
           "description": "Gets or sets the FQDN/IPAddress of the server."
@@ -16575,6 +16547,16 @@
           "description": "Gets the data related to SpringBoot discovery.",
           "readOnly": true
         },
+        "iisDiscovery": {
+          "$ref": "#/definitions/WebAppDiscovery",
+          "description": "Gets the data related to iis discovery.",
+          "readOnly": true
+        },
+        "tomcatDiscovery": {
+          "$ref": "#/definitions/WebAppDiscovery",
+          "description": "Gets the data related to tomcat discovery.",
+          "readOnly": true
+        },
         "appsAndRoles": {
           "$ref": "#/definitions/AppsAndRoles",
           "description": "Apps And Roles of the Server.",
@@ -16611,6 +16593,14 @@
           "type": "string",
           "description": "Gets the marking machine creation.",
           "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Azure.ResourceManager.Object"
+          },
+          "x-typespec-name": "Record<Azure.ResourceManager.Object>",
+          "description": "Gets or sets tags on the Server machine."
         },
         "updatedTimestamp": {
           "type": "string",
@@ -16746,10 +16736,6 @@
         "discoverySolutionId": {
           "type": "string",
           "description": "Gets or sets the ARM ID of migration hub solution for SDS."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation."
         }
       },
       "description": "The updatable properties of the ServerSiteResource."
@@ -16789,6 +16775,24 @@
         "runAsAccounts",
         "serverCount"
       ]
+    },
+    "ShallowDiscoveryStatus": {
+      "type": "string",
+      "description": "Shallow Discovery Status.",
+      "enum": [
+        "DiscoverySucceededAtleastOnce",
+        "DiscoveryFailed",
+        "RunAsAccountNotAssociated",
+        "DiscoveryNotStarted",
+        "DiscoveryInProgress",
+        "Disabled",
+        "DiscoveryPartiallySucceded",
+        "DiscoverySucceeded"
+      ],
+      "x-ms-enum": {
+        "name": "ShallowDiscoveryStatus",
+        "modelAsString": true
+      }
     },
     "SharePointServer": {
       "type": "object",
@@ -16880,7 +16884,7 @@
           "description": "The link to fetch more models."
         }
       },
-      "description": "The properties of ServerSiteResource.",
+      "description": "Site error summary.",
       "required": [
         "applianceName",
         "discoveryScopeErrorSummaries"
@@ -16984,7 +16988,16 @@
     },
     "SiteHealthSummaryFabricLayoutUpdateSourcesItem": {
       "type": "string",
-      "description": "SiteHealthSummary FabricLayout UpdateSources"
+      "description": "SiteHealthSummary FabricLayout UpdateSources",
+      "enum": [
+        "RefreshFabricLayout",
+        "RefreshFabricLayoutGuest",
+        "RefreshFabricLayoutDependencyMap"
+      ],
+      "x-ms-enum": {
+        "name": "SiteHealthSummaryFabricLayoutUpdateSourcesItem",
+        "modelAsString": true
+      }
     },
     "SiteProperties": {
       "type": "object",
@@ -17083,10 +17096,11 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation."
+          "description": "The status of the last operation.",
+          "readOnly": true
         }
       },
-      "description": "The properties of VMwareSiteResource"
+      "description": "The properties of SiteResource"
     },
     "SpringBootDiscovery": {
       "type": "object",
@@ -17101,17 +17115,16 @@
           "format": "int64",
           "description": "Gets or sets number of successfully discovered applications."
         },
+        "shallowDiscoveryStatus": {
+          "$ref": "#/definitions/ShallowDiscoveryStatus",
+          "description": "Gets or sets status of partner shallow discovery."
+        },
         "discoveryScopeStatus": {
           "$ref": "#/definitions/DiscoveryScopeStatus",
           "description": "Gets or sets status of partner discovery."
         }
       },
-      "description": "Data related to a machine's spring boot discovery.",
-      "required": [
-        "totalInstanceCount",
-        "totalApplicationCount",
-        "discoveryScopeStatus"
-      ]
+      "description": "Data related to a machine's spring boot discovery."
     },
     "SqlAvailabilityGroup": {
       "type": "object",
@@ -17503,7 +17516,7 @@
           "description": "sql Metadata Hydrated RunAsAccountId"
         },
         "sqlMetadataDiscoveryPipe": {
-          "$ref": "#/definitions/SQLDiscoverySqlMetadataDiscoveryPipe",
+          "$ref": "#/definitions/SqlMetadataDiscoveryPipe",
           "description": "sql Metadata DiscoveryPipe"
         },
         "discoveryScopeStatus": {
@@ -17643,6 +17656,22 @@
       ],
       "x-ms-enum": {
         "name": "SqlMachineOverviewFciRole",
+        "modelAsString": true
+      }
+    },
+    "SqlMetadataDiscoveryPipe": {
+      "type": "string",
+      "description": "SQL metadata discovery pipe",
+      "enum": [
+        "Unknown",
+        "VMware",
+        "PowerShell",
+        "SSH",
+        "CIM",
+        "Other"
+      ],
+      "x-ms-enum": {
+        "name": "SqlMetadataDiscoveryPipe",
         "modelAsString": true
       }
     },
@@ -18457,9 +18486,9 @@
         "tags": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/Azure.ResourceManager.Object"
+            "type": "string"
           },
-          "x-typespec-name": "Record<Azure.ResourceManager.Object>",
+          "x-typespec-name": "Record<string>",
           "description": "Gets tags that can be used with ODATA.",
           "readOnly": true
         },
@@ -19376,7 +19405,7 @@
         "value"
       ]
     },
-    "VmwareJobResource": {
+    "VmwareJob": {
       "type": "object",
       "properties": {
         "properties": {
@@ -19396,16 +19425,16 @@
         }
       ]
     },
-    "VmwareJobResourceListResult": {
+    "VmwareJobListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/VmwareJobResource"
+            "$ref": "#/definitions/VmwareJob"
           },
-          "x-typespec-name": "VmwareJobResource[]",
-          "description": "The VmwareJobResource items on this page"
+          "x-typespec-name": "VmwareJob[]",
+          "description": "The VmwareJob items on this page"
         },
         "nextLink": {
           "type": "string",
@@ -19414,7 +19443,7 @@
           "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
-      "description": "The response of a VmwareJobResource list operation.",
+      "description": "The response of a VmwareJob list operation.",
       "required": [
         "value"
       ]
@@ -19422,19 +19451,6 @@
     "VmwareMachineProperties": {
       "type": "object",
       "properties": {
-        "hostProcessorInfo": {
-          "$ref": "#/definitions/ProcessorInfo",
-          "description": "Gets the Information about Host Processor.",
-          "readOnly": true
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/Azure.ResourceManager.Object"
-          },
-          "x-typespec-name": "Record<Azure.ResourceManager.Object>",
-          "description": "Gets or sets tags on the VMware machine."
-        },
         "vCenterFqdn": {
           "type": "string",
           "description": "VCenter FQDN/IPAddress.",
@@ -19656,10 +19672,24 @@
           "description": "Gets the data related to SpringBoot discovery.",
           "readOnly": true
         },
+        "iisDiscovery": {
+          "$ref": "#/definitions/WebAppDiscovery",
+          "description": "Gets the data related to iis discovery.",
+          "readOnly": true
+        },
+        "tomcatDiscovery": {
+          "$ref": "#/definitions/WebAppDiscovery",
+          "description": "Gets the data related to tomcat discovery.",
+          "readOnly": true
+        },
         "appsAndRoles": {
           "$ref": "#/definitions/AppsAndRoles",
           "description": "Apps And Roles of the Server.",
           "readOnly": true
+        },
+        "productSupportStatus": {
+          "$ref": "#/definitions/ProductSupportStatus",
+          "description": "product support status."
         },
         "numberOfProcessorCore": {
           "type": "integer",
@@ -19698,6 +19728,14 @@
           "description": "Gets the marking machine creation.",
           "readOnly": true
         },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-typespec-name": "Record<string>",
+          "description": "Gets or sets tags on the VMware machine."
+        },
         "updatedTimestamp": {
           "type": "string",
           "description": "Gets the timestamp marking last updated on the machine.",
@@ -19705,7 +19743,8 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation."
+          "description": "The status of the last operation.",
+          "readOnly": true
         }
       },
       "description": "Class for machine properties."
@@ -19968,12 +20007,7 @@
           "description": "Gets or sets status of partner discovery."
         }
       },
-      "description": "Data related to a machine's WebApps discovery.",
-      "required": [
-        "totalWebServerCount",
-        "totalWebApplicationCount",
-        "discoveryScopeStatus"
-      ]
+      "description": "Data related to a machine's WebApps discovery."
     },
     "WebAppExtendedMachine": {
       "type": "object",
@@ -20088,9 +20122,9 @@
         "tags": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/Azure.ResourceManager.Object"
+            "type": "string"
           },
-          "x-typespec-name": "Record<Azure.ResourceManager.Object>",
+          "x-typespec-name": "Record<string>",
           "description": "Gets or sets Tags."
         }
       },
@@ -20590,9 +20624,9 @@
         "tags": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/Azure.ResourceManager.Object"
+            "type": "string"
           },
-          "x-typespec-name": "Record<Azure.ResourceManager.Object>",
+          "x-typespec-name": "Record<string>",
           "description": "Gets tags that can be used with ODATA.",
           "readOnly": true
         },
@@ -20786,6 +20820,47 @@
         }
       },
       "description": "Class for web server properties."
+    },
+    "esuStatus": {
+      "type": "string",
+      "description": "esu Status",
+      "enum": [
+        "Unknown",
+        "Active",
+        "InActive"
+      ],
+      "x-ms-enum": {
+        "name": "esuStatus",
+        "modelAsString": true
+      }
+    },
+    "esuYear": {
+      "type": "string",
+      "description": "esu year",
+      "enum": [
+        "Unknown",
+        "FirstYear",
+        "SecondYear",
+        "ThirdYear",
+        "UpgradeYear"
+      ],
+      "x-ms-enum": {
+        "name": "esuYear",
+        "modelAsString": true
+      }
+    },
+    "supportStatus": {
+      "type": "string",
+      "description": "support status",
+      "enum": [
+        "Unknown",
+        "Mainstream",
+        "Extended"
+      ],
+      "x-ms-enum": {
+        "name": "supportStatus",
+        "modelAsString": true
+      }
     }
   },
   "parameters": {}
