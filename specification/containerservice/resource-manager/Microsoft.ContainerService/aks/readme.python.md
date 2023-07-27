@@ -86,6 +86,7 @@ batch:
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/
 perform-load: false
+clear-output-folder: false
 ```
 
 ### Tag: package-2023-06 and python
