@@ -113,8 +113,11 @@ model AgentProfile {
 @doc("The provisioning state of the last accepted operation.")
 enum FleetProvisioningState {
   ...ResourceProvisioningState,
+  @doc("The provisioning state of a fleet being created.")
   Creating,
+  @doc("The provisioning state of a fleet being updated.")
   Updating,
+  @doc("The provisioning state of a fleet being deleted.")
   Deleting,
 }
 

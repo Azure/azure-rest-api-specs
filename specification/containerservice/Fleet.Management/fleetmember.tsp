@@ -60,8 +60,11 @@ model FleetMemberProperties {
 @doc("The provisioning state of the last accepted operation.")
 enum FleetMemberProvisioningState {
   ...ResourceProvisioningState,
+  @doc("The provisioning state of a member joining a fleet.")
   Joining,
+  @doc("The provisioning state of a member leaving a fleet.")
   Leaving,
+  @doc("The provisioning state of a member being updated.")
   Updating,
 }
 

@@ -209,6 +209,7 @@ model UpdateRunStatus {
 @doc("The node image upgrade specs for the update run.")
 @added(Versions.v2023_06_15_preview)
 model NodeImageSelectionStatus {
+  @extension("x-ms-identifiers", ["version"])
   @visibility("read")
   @doc("The image versions to upgrade the nodes to.")
   selectedNodeImageVersions?: NodeImageVersion[];
