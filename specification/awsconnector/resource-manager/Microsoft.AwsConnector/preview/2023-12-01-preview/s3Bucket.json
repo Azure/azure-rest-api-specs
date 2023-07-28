@@ -46,10 +46,10 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/s3Buckets": {
       "get": {
+        "operationId": "S3Buckets_ListBySubscription",
         "tags": [
           "S3Buckets"
         ],
-        "operationId": "S3Buckets_ListBySubscription",
         "description": "List S3Bucket resources by subscription ID",
         "parameters": [
           {
@@ -73,22 +73,22 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "S3Buckets_ListBySubscription": {
             "$ref": "./examples/S3Buckets_ListBySubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/s3Buckets": {
       "get": {
+        "operationId": "S3Buckets_ListByResourceGroup",
         "tags": [
           "S3Buckets"
         ],
-        "operationId": "S3Buckets_ListByResourceGroup",
         "description": "List S3Bucket resources by resource group",
         "parameters": [
           {
@@ -115,22 +115,22 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "S3Buckets_ListByResourceGroup": {
             "$ref": "./examples/S3Buckets_ListByResourceGroup.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/s3Buckets/{name}": {
       "get": {
+        "operationId": "S3Buckets_Get",
         "tags": [
           "S3Buckets"
         ],
-        "operationId": "S3Buckets_Get",
         "description": "Get a S3Bucket",
         "parameters": [
           {
@@ -145,8 +145,8 @@
           {
             "name": "name",
             "in": "path",
-            "required": true,
             "description": "Name of S3Bucket",
+            "required": true,
             "type": "string",
             "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
           }
@@ -172,10 +172,10 @@
         }
       },
       "put": {
+        "operationId": "S3Buckets_CreateOrUpdate",
         "tags": [
           "S3Buckets"
         ],
-        "operationId": "S3Buckets_CreateOrUpdate",
         "description": "Create a S3Bucket. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
         "parameters": [
           {
@@ -190,16 +190,16 @@
           {
             "name": "name",
             "in": "path",
-            "required": true,
             "description": "Name of S3Bucket",
+            "required": true,
             "type": "string",
             "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
           },
           {
             "name": "resource",
             "in": "body",
-            "required": true,
             "description": "Resource create parameters.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/S3Bucket"
             }
@@ -214,15 +214,15 @@
           },
           "201": {
             "description": "ARM create operation completed successfully.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/S3Bucket"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -243,10 +243,10 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
+        "operationId": "S3Buckets_Update",
         "tags": [
           "S3Buckets"
         ],
-        "operationId": "S3Buckets_Update",
         "description": "Update a S3Bucket",
         "parameters": [
           {
@@ -261,16 +261,16 @@
           {
             "name": "name",
             "in": "path",
-            "required": true,
             "description": "Name of S3Bucket",
+            "required": true,
             "type": "string",
             "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
           },
           {
             "name": "properties",
             "in": "body",
-            "required": true,
             "description": "The resource properties to be updated.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/S3BucketTagsUpdate"
             }
@@ -287,13 +287,13 @@
             "description": "Resource update request accepted.",
             "headers": {
               "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
               "Location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -315,10 +315,10 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
+        "operationId": "S3Buckets_Delete",
         "tags": [
           "S3Buckets"
         ],
-        "operationId": "S3Buckets_Delete",
         "description": "Delete a S3Bucket",
         "parameters": [
           {
@@ -333,8 +333,8 @@
           {
             "name": "name",
             "in": "path",
-            "required": true,
             "description": "Name of S3Bucket",
+            "required": true,
             "type": "string",
             "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
           }
@@ -347,13 +347,13 @@
             "description": "Resource deletion accepted.",
             "headers": {
               "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
               "Location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -382,6 +382,7 @@
   "definitions": {
     "AwsCommonProperties": {
       "type": "object",
+      "description": "Definition of AwsCommon",
       "properties": {
         "publicCloudConnectorsResourceId": {
           "type": "string",
@@ -405,22 +406,21 @@
         },
         "awsTags": {
           "type": "object",
+          "description": "Gets and sets the property awsTags. ",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "Gets and sets the property awsTags. ",
-          "x-typespec-name": "Record<string>"
+          }
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Gets and sets the property provisioningState. The status of the last operation.",
           "readOnly": true
         }
-      },
-      "description": "Definition of AwsCommon"
+      }
     },
     "AwsS3BucketProperties": {
       "type": "object",
+      "description": "Definition of awsS3Bucket",
       "properties": {
         "creationDate": {
           "type": "string",
@@ -431,8 +431,7 @@
           "type": "string",
           "description": "Gets and sets the property bucketName. <p>The name of the bucket.</p>"
         }
-      },
-      "description": "Definition of awsS3Bucket"
+      }
     },
     "ProvisioningState": {
       "type": "string",
@@ -490,6 +489,7 @@
     },
     "S3Bucket": {
       "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/S3BucketProperties",
@@ -501,7 +501,6 @@
           ]
         }
       },
-      "description": "A Microsoft.AwsConnector resource",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -510,36 +509,34 @@
     },
     "S3BucketListResult": {
       "type": "object",
+      "description": "The response of a S3Bucket list operation.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The S3Bucket items on this page",
           "items": {
             "$ref": "#/definitions/S3Bucket"
-          },
-          "description": "The S3Bucket items on this page",
-          "x-typespec-name": "S3Bucket[]"
+          }
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+          "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a S3Bucket list operation.",
       "required": [
         "value"
       ]
     },
     "S3BucketProperties": {
       "type": "object",
+      "description": "Definition of S3Bucket",
       "properties": {
         "awsProperties": {
           "$ref": "#/definitions/AwsS3BucketProperties",
           "description": "Gets and sets the property awsProperties. "
         }
       },
-      "description": "Definition of S3Bucket",
       "allOf": [
         {
           "$ref": "#/definitions/AwsCommonProperties"
@@ -548,17 +545,16 @@
     },
     "S3BucketTagsUpdate": {
       "type": "object",
+      "description": "The type used for updating tags in S3Bucket resources.",
       "properties": {
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "Resource tags.",
-          "x-typespec-name": "Record<string>"
+          }
         }
-      },
-      "description": "The type used for updating tags in S3Bucket resources."
+      }
     }
   },
   "parameters": {}
