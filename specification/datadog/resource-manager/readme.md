@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Datadog.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Datadog, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,22 +15,31 @@ To build the SDK for Datadog, simply [Install AutoRest](https://aka.ms/autorest/
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Datadog API.
 
 ``` yaml
 title: DatadogManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2020-02-01-preview
+tag: package-2023-07
 ```
 
+
+### Tag: package-2023-07
+
+These settings apply only when `--tag=package-2023-07` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-07'
+input-file:
+  - Microsoft.Datadog/stable/2023-07-07/swagger.json
+```
 ### Tag: package-2021-03
 
 These settings apply only when `--tag=package-2021-03` is specified on the command line.
