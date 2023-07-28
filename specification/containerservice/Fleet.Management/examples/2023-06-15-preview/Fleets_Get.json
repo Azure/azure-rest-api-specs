@@ -1,18 +1,11 @@
 {
-  "operationId": "Fleets_Update",
-  "title": "Update a Fleet.",
+  "operationId": "Fleets_Get",
+  "title": "Gets a Fleet resource.",
   "parameters": {
-    "api-version": "2022-09-02-preview",
+    "api-version": "2023-06-15-preview",
     "subscriptionId": "subid1",
     "resourceGroupName": "rg1",
-    "fleetName": "fleet1",
-    "If-Match": "dfjkwelr7384",
-    "properties": {
-      "tags": {
-        "tier": "secure",
-        "env": "prod"
-      }
-    }
+    "fleetName": "fleet1"
   },
   "responses": {
     "200": {
@@ -32,8 +25,8 @@
           "lastModifiedAt": "2022-03-23T05:40:40.657Z"
         },
         "tags": {
-          "tier": "secure",
-          "env": "prod"
+          "tier": "production",
+          "archv2": ""
         },
         "location": "East US",
         "eTag": "23ujdflewrj3=",
@@ -45,12 +38,6 @@
           },
           "provisioningState": "Succeeded"
         }
-      }
-    },
-    "202": {
-      "headers": {
-        "Retry-After": "20",
-        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/locations/eastus/operations/00000000-0000-0000-0000-000000000000?api-version=2022-02-01"
       }
     }
   }

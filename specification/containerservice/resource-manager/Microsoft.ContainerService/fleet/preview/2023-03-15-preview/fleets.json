@@ -358,6 +358,20 @@
               "$ref": "#/definitions/Fleet"
             }
           },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -369,7 +383,11 @@
           "Update a Fleet.": {
             "$ref": "./examples/Fleets_PatchTags.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Fleets_Delete",
@@ -764,6 +782,20 @@
               "$ref": "#/definitions/FleetMember"
             }
           },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -775,7 +807,11 @@
           "Updates a FleetMember resource synchronously.": {
             "$ref": "./examples/FleetMembers_Update.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "FleetMembers_Delete",
@@ -1149,7 +1185,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
@@ -1552,15 +1588,18 @@
           },
           {
             "name": "Joining",
-            "value": "Joining"
+            "value": "Joining",
+            "description": "The provisioning state of a member joining a fleet."
           },
           {
             "name": "Leaving",
-            "value": "Leaving"
+            "value": "Leaving",
+            "description": "The provisioning state of a member leaving a fleet."
           },
           {
             "name": "Updating",
-            "value": "Updating"
+            "value": "Updating",
+            "description": "The provisioning state of a member being updated."
           }
         ]
       }
@@ -1648,15 +1687,18 @@
           },
           {
             "name": "Creating",
-            "value": "Creating"
+            "value": "Creating",
+            "description": "The provisioning state of a fleet being created."
           },
           {
             "name": "Updating",
-            "value": "Updating"
+            "value": "Updating",
+            "description": "The provisioning state of a fleet being updated."
           },
           {
             "name": "Deleting",
-            "value": "Deleting"
+            "value": "Deleting",
+            "description": "The provisioning state of a fleet being deleted."
           }
         ]
       }
@@ -2007,7 +2049,39 @@
       ],
       "x-ms-enum": {
         "name": "UpdateState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has not been started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that is running."
+          },
+          {
+            "name": "Stopping",
+            "value": "Stopping",
+            "description": "The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that is being stopped."
+          },
+          {
+            "name": "Stopped",
+            "value": "Stopped",
+            "description": "The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has stopped."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has failed."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has completed."
+          }
+        ]
       }
     },
     "UpdateStatus": {
