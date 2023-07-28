@@ -27,16 +27,16 @@
           "url": "https://docs.microsoft.com/en-us/rest/api/SaaSHub/"
         },
         "x-ms-examples": {
-          "ListCloudServicesByListBySubscription": {
+          "List CloudServices By Cloud Subscription": {
             "$ref": "./examples/CloudService_List_BySubscription.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -49,7 +49,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -69,19 +69,19 @@
           "url": "https://docs.microsoft.com/en-us/rest/api/SaaSHub/"
         },
         "x-ms-examples": {
-          "ListCloudServicesByResourceGroup": {
+          "List CloudServices by Resource Group": {
             "$ref": "./examples/CloudService_List_ByResourceGroup.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -94,7 +94,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -114,22 +114,22 @@
           "url": "https://docs.microsoft.com/en-us/rest/api/SaaSHub/"
         },
         "x-ms-examples": {
-          "GetCloudService": {
+          "Get CloudService": {
             "$ref": "./examples/CloudService_Get.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/CloudServiceResourceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -142,7 +142,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -154,13 +154,13 @@
         "operationId": "CloudServices_Create",
         "description": "Creates or updates a SaaSHub cloud service.",
         "x-ms-examples": {
-          "CreateCloudService": {
+          "Create CloudService": {
             "$ref": "./examples/CloudService_Put.json"
           },
-          "CreateCloudServiceWithOriginal": {
+          "Create CloudService With Original CloudService": {
             "$ref": "./examples/CloudService_Put_WithOriginal.json"
           },
-          "CreateCloudServiceWithCoterminous": {
+          "Create CloudService With Coterminous": {
             "$ref": "./examples/CloudService_Put_Coterminous.json"
           }
         },
@@ -170,16 +170,16 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/CloudServiceResourceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -207,7 +207,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -219,28 +219,31 @@
         "operationId": "CloudServices_Update",
         "description": "Updates the properties of a SaaSHub cloud service.",
         "x-ms-examples": {
-          "AutoRenewOn": {
+          "Turn Auto Renew On": {
             "$ref": "./examples/CloudService_Patch_AutoRenew_On.json"
           },
-          "AutoRenewOff": {
+          "Turn Auto Renew Off": {
             "$ref": "./examples/CloudService_Patch_AutoRenew_Off.json"
           },
-          "AutoRenewOnUpdateRenewalTermDetails": {
+          "Update Auto Renew and Update Renewal Term Details at the same time": {
             "$ref": "./examples/CloudService_Patch_AutoRenew_On_UpdateRenewalTermDetails.json"
           },
-          "ChangeQuantity": {
+          "Change Quantity": {
             "$ref": "./examples/CloudService_Patch_ChangeQuantity.json"
           },
-          "TermUpdate": {
+          "Sku or Term Update": {
             "$ref": "./examples/CloudService_Patch_TermUpdate.json"
+          },
+          "Sku or Term Update with Quantity Change": {
+            "$ref": "./examples/CloudService_Patch_QuantityTermUpdate.json"
           },
           "Coterminous": {
             "$ref": "./examples/CloudService_Patch_Coterminous.json"
           },
-          "ExtendTrial": {
+          "Extend Trial": {
             "$ref": "./examples/CloudService_Patch_ExtendTrial.json"
           },
-          "ProvisioningTenant": {
+          "Update Provisioning Tenant": {
             "$ref": "./examples/CloudService_Patch_ProvisioningTenant.json"
           }
         },
@@ -250,16 +253,16 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/CloudServiceResourceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -295,7 +298,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -307,7 +310,7 @@
         "operationId": "CloudServices_Delete",
         "description": "Deletes a SaaSHub cloud service resource.",
         "x-ms-examples": {
-          "DeleteCloudService": {
+          "Delete CloudService": {
             "$ref": "./examples/CloudService_Delete.json"
           }
         },
@@ -317,16 +320,16 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/CloudServiceResourceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -353,7 +356,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -367,7 +370,7 @@
         "operationId": "CloudServices_Cancel",
         "description": "Cancels a SaaSHub cloud service.",
         "x-ms-examples": {
-          "CancelCloudService": {
+          "Cancel CloudService": {
             "$ref": "./examples/CloudService_Cancel.json"
           }
         },
@@ -377,16 +380,16 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/CloudServiceResourceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -402,7 +405,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -416,7 +419,7 @@
         "operationId": "CloudServices_Merge",
         "description": "Merges multiple cloud service resources into one target cloud service resource. The resource name in URL is the target, and the list of source cloud service resource and quantity will be specified in request payload",
         "x-ms-examples": {
-          "MergeCloudService": {
+          "Merge CloudService": {
             "$ref": "./examples/CloudService_Merge.json"
           }
         },
@@ -426,16 +429,16 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/CloudServiceResourceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -460,7 +463,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -474,37 +477,37 @@
         "operationId": "ProviderLevelActions_CanCreate",
         "description": "Evaluates whether the request payload can create a new resource. Currently only supports CloudService resource type.",
         "x-ms-examples": {
-          "NewPurchasePass": {
+          "New Purchase - Passed": {
             "$ref": "./examples/evaluateOnly/CloudService_CanCreate_NewPurchase_Pass.json"
           },
-          "PurchaseWithOriginalPass": {
+          "Purchase With Original - Passed": {
             "$ref": "./examples/evaluateOnly/CloudService_CanCreate_WithOriginal_Pass.json"
           },
-          "PurchaseFailAddOn": {
+          "Purchase AddOn - Failed": {
             "$ref": "./examples/evaluateOnly/CloudService_CanCreate_Fail_AddOn.json"
           },
-          "PurchaseFailCoterm": {
+          "Purchase with Coterm - Failed": {
             "$ref": "./examples/evaluateOnly/CloudService_CanCreate_Fail_Coterm.json"
           },
-          "PurchaseFailPromotion": {
+          "Purchase Promotion - Failed": {
             "$ref": "./examples/evaluateOnly/CloudService_CanCreate_Fail_Promotion.json"
           },
-          "PurchaseFailFuturePrice": {
+          "Purchase with Future Price - Failed": {
             "$ref": "./examples/evaluateOnly/CloudService_CanCreate_Fail_FuturePrice.json"
           },
-          "InvalidRequestBody": {
+          "Invalid Request Body": {
             "$ref": "./examples/evaluateOnly/CloudService_CanCreate_InvalidRequestBody.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -526,7 +529,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -540,16 +543,16 @@
         "operationId": "CloudServices_CanUpdate",
         "description": "Evaluates whether the request payload can update an existing cloud service resource.",
         "x-ms-examples": {
-          "UpdatePass": {
+          "Update Passed": {
             "$ref": "./examples/evaluateOnly/CloudService_CanUpdate_Pass.json"
           },
-          "UpdateFailWithNoAdditionalInfo": {
+          "Update Failed With No Additional Info": {
             "$ref": "./examples/evaluateOnly/CloudService_CanUpdate_FailWithNoAdditionalInfo.json"
           },
-          "UpdateFailRefundableQuantity": {
+          "Update Failed Caused by Refundable Quantity": {
             "$ref": "./examples/evaluateOnly/CloudService_CanUpdate_Fail_RefundableQuantity.json"
           },
-          "UpdateFailCoterm": {
+          "Update Failed Caused by Coterm": {
             "$ref": "./examples/evaluateOnly/CloudService_CanUpdate_Fail_Coterm.json"
           },
           "InvalidRequestBody": {
@@ -558,16 +561,16 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/CloudServiceResourceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -589,7 +592,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -603,10 +606,10 @@
         "operationId": "CloudServices_CanCancel",
         "description": "Evaluates whether an existing cloud service resource can be cancelled.",
         "x-ms-examples": {
-          "CancelPass": {
+          "Cancel Passed": {
             "$ref": "./examples/evaluateOnly/CloudService_CanCancel_Pass.json"
           },
-          "CancelFail": {
+          "Cancel Failed": {
             "$ref": "./examples/evaluateOnly/CloudService_CanCancel_Fail.json"
           },
           "InvalidRequestBody": {
@@ -615,16 +618,16 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/CloudServiceResourceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -637,7 +640,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -651,13 +654,13 @@
         "operationId": "CloudServices_CanMerge",
         "description": "Evaluates whether the source cloud service resource can be merged to target cloud service resource.",
         "x-ms-examples": {
-          "UpdatePass": {
+          "Merge Pass": {
             "$ref": "./examples/evaluateOnly/CloudService_CanMerge_Pass.json"
           },
-          "UpdateFail": {
+          "Merge Failed": {
             "$ref": "./examples/evaluateOnly/CloudService_CanMerge_Fail.json"
           },
-          "UpdateFailSourceCloudService": {
+          "Merge Failed Caused by Source CloudService": {
             "$ref": "./examples/evaluateOnly/CloudService_CanMerge_Fail_SourceCloudService.json"
           },
           "InvalidRequestBody": {
@@ -666,16 +669,16 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/CloudServiceResourceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -697,7 +700,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -705,6 +708,157 @@
     }
   },
   "definitions": {
+    "ErrorDetail": {
+			"description": "The error detail.",
+			"type": "object",
+			"properties": {
+				"code": {
+					"readOnly": true,
+					"type": "string",
+					"description": "The error code."
+				},
+				"message": {
+					"readOnly": true,
+					"type": "string",
+					"description": "The error message."
+				},
+				"target": {
+					"readOnly": true,
+					"type": "string",
+					"description": "The error target."
+				},
+				"details": {
+					"readOnly": true,
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/ErrorDetail"
+					},
+					"x-ms-identifiers": [
+						"message",
+						"target"
+					],
+					"description": "The error details."
+				},
+				"additionalInfo": {
+					"readOnly": true,
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/ErrorAdditionalInfo"
+					},
+					"x-ms-identifiers": [],
+					"description": "The error additional info."
+				}
+			}
+		},
+		"ErrorResponse": {
+			"title": "Error response",
+			"description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+			"type": "object",
+			"properties": {
+				"error": {
+					"description": "The error object.",
+					"$ref": "#/definitions/ErrorDetail"
+				}
+			}
+		},
+		"ErrorAdditionalInfo": {
+			"type": "object",
+			"properties": {
+				"type": {
+					"readOnly": true,
+					"type": "string",
+					"description": "The additional info type."
+				},
+				"info": {
+					"readOnly": true,
+					"type": "object",
+					"description": "The additional info."
+				}
+			},
+			"description": "The resource management error additional info."
+		},
+    "systemData": {
+			"description": "Metadata pertaining to creation and last modification of the resource.",
+			"type": "object",
+			"readOnly": true,
+			"properties": {
+				"createdBy": {
+					"type": "string",
+					"description": "The identity that created the resource."
+				},
+				"createdByType": {
+					"type": "string",
+					"description": "The type of identity that created the resource.",
+					"enum": [
+						"User",
+						"Application",
+						"ManagedIdentity",
+						"Key"
+					],
+					"x-ms-enum": {
+						"name": "createdByType",
+						"modelAsString": true
+					}
+				},
+				"createdAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": "The timestamp of resource creation (UTC)."
+				},
+				"lastModifiedBy": {
+					"type": "string",
+					"description": "The identity that last modified the resource."
+				},
+				"lastModifiedByType": {
+					"type": "string",
+					"description": "The type of identity that last modified the resource.",
+					"enum": [
+						"User",
+						"Application",
+						"ManagedIdentity",
+						"Key"
+					],
+					"x-ms-enum": {
+						"name": "createdByType",
+						"modelAsString": true
+					}
+				},
+				"lastModifiedAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": "The timestamp of resource last modification (UTC)"
+				}
+			}
+		},
+		"Resource": {
+			"title": "Resource",
+			"description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+			"type": "object",
+			"properties": {
+				"id": {
+					"readOnly": true,
+					"type": "string",
+					"description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+				},
+				"name": {
+					"readOnly": true,
+					"type": "string",
+					"description": "The name of the resource"
+				},
+				"type": {
+					"readOnly": true,
+					"type": "string",
+					"description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\""
+				},
+				"systemData": {
+					"readOnly": true,
+					"type": "object",
+					"description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+					"$ref": "#/definitions/systemData"
+				}
+			},
+			"x-ms-azure-resource": true
+		},
     "ListCloudServicesResult": {
       "description": "The list of SaaSHub cloud service.",
       "type": "object",
@@ -756,7 +910,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -1421,7 +1575,38 @@
       "pattern": "^[-_0-9a-zA-Z]{3,50}$",
       "minLength": 3,
       "maxLength": 50
-    }
+    },
+    "SubscriptionIdParameter": {
+			"name": "subscriptionId",
+			"in": "path",
+			"description": "The subscription Id that uniquely identifies a subscription.",
+			"required": true,
+			"type": "string",
+			"x-ms-parameter-location": "method",
+			"pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
+		},
+		"ResourceGroupNameParameter": {
+			"name": "resourceGroupName",
+			"in": "path",
+			"description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+			"required": true,
+			"type": "string",
+			"x-ms-parameter-location": "method",
+			"pattern": "^[-_0-9a-zA-Z]{1,50}$",
+			"minLength": 1,
+			"maxLength": 50
+		},
+		"ApiVersionParameter": {
+			"name": "api-version",
+			"in": "query",
+			"description": "The version of the API to be used with the client request.",
+			"required": true,
+			"type": "string",
+			"x-ms-parameter-location": "method",
+			"pattern": "^[-_0-9a-zA-Z]{1,50}$",
+			"minLength": 1,
+			"maxLength": 50
+		}
   },
   "security": [
     {
