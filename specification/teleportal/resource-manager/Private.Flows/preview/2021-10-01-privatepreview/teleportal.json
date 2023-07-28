@@ -1,0 +1,572 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-10-01-privatepreview",
+    "title": "teleportal",
+    "description": "Description of the new service",
+    "x-ms-code-generation-settings": {
+      "name": "teleportalClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Private.Flows/flows/{flowName}": {
+      "get": {
+        "x-ms-examples": {
+          "Gets flow resource": {
+            "$ref": "examples/getFlow.json"
+          }
+        },
+        "operationId": "Flows_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/flowNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the flows resource.",
+            "schema": {
+              "$ref": "#/definitions/flow"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Flows_CreateOrUpdate",
+        "x-ms-examples": {
+          "Creates or updates the flow resource": {
+            "$ref": "examples/createOrUpdateFlow.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/flowNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "flow",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/flow"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updates the flows resource.",
+            "schema": {
+              "$ref": "#/definitions/flow"
+            }
+          },
+          "201": {
+            "description": "Creates the flows resource.",
+            "schema": {
+              "$ref": "#/definitions/flow"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Deletes the flow resource": {
+            "$ref": "examples/deleteFlow.json"
+          }
+        },
+        "operationId": "Flows_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/flowNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deletes the flows resource."
+          },
+          "204": {
+            "description": "Deletes the flows resource."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Flows_Update",
+        "x-ms-examples": {
+          "Creates or updates the flow resource": {
+            "$ref": "examples/patchFlow.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/flowNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "flow",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/flowsPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updates the flows resource.",
+            "schema": {
+              "$ref": "#/definitions/flow"
+            }
+          },
+          "202": {
+            "description": "Creates the flows resource.",
+            "schema": {
+              "$ref": "#/definitions/flow"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Private.Flows/flows": {
+      "get": {
+        "x-ms-examples": {
+          "Gets flows in a resource group": {
+            "$ref": "examples/listFlowsByResourceGroup.json"
+          }
+        },
+        "operationId": "Flows_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all flows under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/flowsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Private.Flows/flows": {
+      "get": {
+        "x-ms-examples": {
+          "Gets flows in a subscription": {
+            "$ref": "examples/listFlowsBySubscription.json"
+          }
+        },
+        "operationId": "Flows_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all flows under the subscription.",
+            "schema": {
+              "$ref": "#/definitions/flowsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Private.Flows/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "List operations": {
+            "$ref": "./examples/listOperations.json"
+          }
+        },
+        "description": "Lists all of the available Private.Flows REST API operations.",
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "flowProperties": {
+      "type": "object",
+      "properties": {
+        "acceptableUsePolicyForm": {
+          "type": "string",
+          "description": "Link to signed Acceptable Use Policy (AUP) form"
+        },
+        "averageDailyData": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Daily estimate on data size in GB"
+        },
+        "cloud": {
+          "type": "string",
+          "description": "Cloud the flow will be onboarded to"
+        },
+        "storageLocation": {
+          "enum": [
+            "CloudVault",
+            "Other"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "storageLocation",
+            "modelAsString": true
+          },
+          "description": "Data currently stored in CloudVault?"
+        },
+        "dataTypes": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "OfficialBuilds",
+              "VHDs",
+              "OfficeDocuments",
+              "Scripts",
+              "JSON",
+              "Database",
+              "Other"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "dataTypes",
+              "modelAsString": true
+            }
+          },
+          "description": "List of data types that this Dataflow will service"
+        },
+        "dataUse": {
+          "type": "string",
+          "description": "How will the data be used on the high side?"
+        },
+        "destination": {
+          "type": "string",
+          "description": "What is the destination of this data? (beyond the high-side Storage Account?)"
+        },
+        "email": {
+          "type": "string",
+          "description": "Microsoft corporate e-mail address"
+        },
+        "highSideIcmNumber": {
+          "type": "integer",
+          "format": "int64",
+          "description": "ICM Number in high side where onboarding details are entered"
+        },
+        "accessForManualTransfers": {
+          "enum": [
+            "JIT",
+            "None"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "accessForManualTransfers",
+            "modelAsString": true
+          },
+          "description": "Please confirm JIT will be used for manual transfers, whether that be access to the source Storage Container or any service which interacts with the Storage Account"
+        },
+        "keyVaultUri": {
+          "type": "string",
+          "description": "AME, PME, or TORUS only! AKV Chain Containing SAS Token"
+        },
+        "usage": {
+          "enum": [
+            "Manual",
+            "Automatic"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "usage",
+            "modelAsString": true
+          },
+          "description": "Does your service have manual upload through the Teleport pipeline"
+        },
+        "manualUsersStatus": {
+          "enum": [
+            "Tented",
+            "Standard"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "manualUsersStatus",
+            "modelAsString": true
+          },
+          "description": "Status of manual users"
+        },
+        "maxDataGB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Enter the max (99th percentile) data sent in a day (GB)"
+        },
+        "origin": {
+          "type": "string",
+          "description": "What is the system of origin for this data?"
+        },
+        "primaryContactAlias": {
+          "type": "string",
+          "description": "Primary contact's alias for this data flow"
+        },
+        "secondaryContactsAliases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Secondary contacts' aliases for this dataflow"
+        },
+        "serviceName": {
+          "type": "string",
+          "description": "Service Name"
+        },
+        "serviceTreeId": {
+          "type": "string",
+          "description": "Service Tree ID of the service"
+        },
+        "storageAccountName": {
+          "type": "string",
+          "description": "Storage Account"
+        },
+        "storageContainerName": {
+          "type": "string",
+          "description": "Storage Container"
+        },
+        "storageContainerType": {
+          "enum": [
+            "Blob",
+            "Table"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "storageContainerType",
+            "modelAsString": true
+          },
+          "description": "Transfer Storage Blobs or Tables"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription ID for the storage account to be onboarded"
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of flow"
+        },
+        "useCase": {
+          "type": "string",
+          "description": "Use case for this data flow."
+        },
+        "provisioningState": {
+          "enum": [
+            "Failed",
+            "Succeeded",
+            "Canceled",
+            "Accepted"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "storageAccountName",
+        "storageContainerName"
+      ],
+      "description": "Properties of flow"
+    },
+    "flow": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/flowProperties"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "The flow resource definition."
+    },
+    "flowsPatch": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "The flows resource patch definition."
+    },
+    "flowsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/flow"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "flowNameParameter": {
+      "x-ms-parameter-location": "method",
+      "name": "flowName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 3,
+      "description": "The name for the flow that is to be onboarded."
+    }
+  }
+}

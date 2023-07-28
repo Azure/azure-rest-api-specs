@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "test-rg",
+    "vmwareApplicationName": "VMwareBackupAppliance",
+    "api-version": "2022-04-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "name": "VMwareBackupAppliance",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.BackupSolutions/VMwareApplications/VMwareBackupAppliance",
+        "type": "Microsoft.BackupSolutions/VMwareApplications",
+        "location": "westeurope",
+        "tags": {
+          "MABUsed": "Yes"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "managedResourceGroupConfiguration": {
+            "name": "mrg-VMwareBackupAppliance"
+          },
+          "arcVMwareEnvironment": {
+            "customLocation": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test-rg/providers/microsoft.extendedlocation/customlocations/CL1",
+            "resources": [
+              {
+                "objectType": "VMwarevCenterResource",
+                "vCenterResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.ConnectedVMwarevSphere/VCenters/vCenter1",
+                "fqdn": "10.175.0.2",
+                "port": 443,
+                "credentials": {
+                  "username": "cloudadmin@vsphere.local"
+                },
+                "kind": "AVS"
+              }
+            ]
+          },
+          "backupClusterProperties": {
+            "objectType": "ProvisionedClusterProperties",
+            "nodeCount": 1,
+            "name": "BackupCluster01",
+            "dhcpNetworkSegmentName": "segment1",
+            "dhcpControlPlaneIp": "192.16.1.30"
+          },
+          "propertyBag": {
+            "PropertyKey": "PropertyValue"
+          }
+        }
+      }
+    }
+  }
+}

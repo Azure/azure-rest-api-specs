@@ -1,0 +1,731 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.ManagedStorageClass",
+    "version": "2023-02-01-preview",
+    "x-cadl-generated": [
+      {
+        "emitter": "@azure-tools/cadl-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "ManagedStorageClass"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.ManagedStorageClass/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List_0": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedStorageClass/managedstorageclass": {
+      "get": {
+        "tags": [
+          "ManagedStorageClass"
+        ],
+        "operationId": "ManagedStorageClass_ListBySubscription",
+        "description": "List ManagedStorageClassResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedStorageClassResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ManagedStorageClass_ListBySubscription_0": {
+            "$ref": "./examples/ManagedStorageClass_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedStorageClass/managedstorageclass": {
+      "get": {
+        "tags": [
+          "ManagedStorageClass"
+        ],
+        "operationId": "ManagedStorageClass_ListByResourceGroup",
+        "description": "List ManagedStorageClassResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedStorageClassResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ManagedStorageClass_ListByResourceGroup_0": {
+            "$ref": "./examples/ManagedStorageClass_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedStorageClass/managedstorageclass/{managedstorageclassName}": {
+      "get": {
+        "tags": [
+          "ManagedStorageClass"
+        ],
+        "operationId": "ManagedStorageClass_Get",
+        "description": "Get a ManagedStorageClassResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedstorageclassName",
+            "in": "path",
+            "required": true,
+            "description": "Name of ManagedStorageClass",
+            "maxLength": 64,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedStorageClassResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedStorageClass_Get_0": {
+            "$ref": "./examples/ManagedStorageClass_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ManagedStorageClass"
+        ],
+        "operationId": "ManagedStorageClass_CreateOrUpdate",
+        "description": "Create a ManagedStorageClassResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedstorageclassName",
+            "in": "path",
+            "required": true,
+            "description": "Name of ManagedStorageClass",
+            "maxLength": 64,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/ManagedStorageClassResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedStorageClassResource"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ManagedStorageClassResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedStorageClass_CreateOrUpdate_0": {
+            "$ref": "./examples/ManagedStorageClass_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "ManagedStorageClass"
+        ],
+        "operationId": "ManagedStorageClass_Update",
+        "description": "Update a ManagedStorageClassResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedstorageclassName",
+            "in": "path",
+            "required": true,
+            "description": "Name of ManagedStorageClass",
+            "maxLength": 64,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/ManagedStorageClassResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedStorageClassResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedStorageClass_Update_0": {
+            "$ref": "./examples/ManagedStorageClass_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ManagedStorageClass"
+        ],
+        "operationId": "ManagedStorageClass_Delete",
+        "description": "Delete a ManagedStorageClassResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedstorageclassName",
+            "in": "path",
+            "required": true,
+            "description": "Name of ManagedStorageClass",
+            "maxLength": 64,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedStorageClass_Delete_0": {
+            "$ref": "./examples/ManagedStorageClass_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "DataResilienceTier": {
+      "type": "string",
+      "description": "Data resilience tier of a storage class",
+      "enum": [
+        "NotDataResilient",
+        "DataResilient"
+      ],
+      "x-ms-enum": {
+        "name": "DataResilienceTier",
+        "modelAsString": true
+      }
+    },
+    "ExtendedLocation": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "extended location type: CustomLocation"
+        },
+        "name": {
+          "type": "string",
+          "description": "extended location resource id"
+        }
+      },
+      "description": "extended location",
+      "required": [
+        "type",
+        "name"
+      ]
+    },
+    "FailoverTier": {
+      "type": "string",
+      "description": "Failover tier of a storage class",
+      "enum": [
+        "NotAvailable",
+        "Slow",
+        "Fast",
+        "Super"
+      ],
+      "x-ms-enum": {
+        "name": "FailoverTier",
+        "modelAsString": true
+      }
+    },
+    "ManagedStorageClassProperties": {
+      "type": "object",
+      "properties": {
+        "allowVolumeExpansion": {
+          "$ref": "#/definitions/VolumeExpansion",
+          "description": "[Native] Volume can be expanded or not",
+          "readOnly": true
+        },
+        "mountOptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "[Native] Additional mount options",
+          "readOnly": true
+        },
+        "provisioner": {
+          "type": "string",
+          "description": "[Native] Provisioner name",
+          "readOnly": true
+        },
+        "volumeBindingMode": {
+          "type": "string",
+          "description": "[Native] Binding mode of volumes: Immediate, WaitForFirstConsumer",
+          "readOnly": true
+        },
+        "accessMode": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "The access mode: [RWO, RWX] or [RWO]",
+          "readOnly": true
+        },
+        "dataResilience": {
+          "$ref": "#/definitions/DataResilienceTier",
+          "description": "Allow single data node failure",
+          "readOnly": true
+        },
+        "failoverSpeed": {
+          "$ref": "#/definitions/FailoverTier",
+          "description": "Failover speed: NA, Slow, Fast"
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Limitations",
+          "readOnly": true
+        },
+        "performance": {
+          "$ref": "#/definitions/PerformanceTier",
+          "description": "Performance tier"
+        },
+        "priority": {
+          "description": "Selection priority when multiple storage classes meet the criteria. 0: Highest, -1: Never use"
+        },
+        "storageClassType": {
+          "$ref": "#/definitions/SCType",
+          "description": "Type of the ManagedStorageClass"
+        },
+        "templateParameters": {
+          "$ref": "#/definitions/TemplateParameterProperties",
+          "description": "Parameters to create new ManagedStorageClass"
+        },
+        "status": {
+          "$ref": "#/definitions/ManagedStorageClassStatus",
+          "description": "Actual Status of the ManagedStorageClass",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Resource provision state",
+          "readOnly": true
+        }
+      },
+      "description": "The properties of ManagedStorageClass",
+      "required": [
+        "storageClassType"
+      ]
+    },
+    "ManagedStorageClassResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedStorageClassProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "Custom location of ManagedStorageClass"
+        }
+      },
+      "description": "A ManagedStorageClass",
+      "required": [
+        "extendedLocation"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ManagedStorageClassResourceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedStorageClassResource"
+          },
+          "x-cadl-name": "ManagedStorageClassResource[]",
+          "description": "The ManagedStorageClassResource items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a ManagedStorageClassResource list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "ManagedStorageClassResourceUpdate": {
+      "type": "object",
+      "properties": {
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "Custom location of ManagedStorageClass"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/ManagedStorageClassResourceUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "The type used for update operations of the ManagedStorageClassResource."
+    },
+    "ManagedStorageClassResourceUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "failoverSpeed": {
+          "$ref": "#/definitions/FailoverTier",
+          "description": "Failover speed: NA, Slow, Fast"
+        },
+        "performance": {
+          "$ref": "#/definitions/PerformanceTier",
+          "description": "Performance tier"
+        },
+        "priority": {
+          "description": "Selection priority when multiple storage classes meet the criteria. 0: Highest, -1: Never use"
+        },
+        "storageClassType": {
+          "$ref": "#/definitions/SCType",
+          "description": "Type of the ManagedStorageClass"
+        },
+        "templateParameters": {
+          "$ref": "#/definitions/TemplateParameterProperties",
+          "description": "Parameters to create new ManagedStorageClass"
+        }
+      },
+      "description": "The updatable properties of the ManagedStorageClassResource."
+    },
+    "ManagedStorageClassStatus": {
+      "type": "object",
+      "properties": {
+        "scProvisioningState": {
+          "$ref": "#/definitions/SCProvisioningState",
+          "description": "The status of the ManagedStorageClass",
+          "readOnly": true
+        }
+      },
+      "description": "The status of the ManagedStorageClass"
+    },
+    "PerformanceTier": {
+      "type": "string",
+      "description": "Performance tier of a storage class",
+      "enum": [
+        "Undefined",
+        "Basic",
+        "Standard",
+        "Premium",
+        "Ultra"
+      ],
+      "x-ms-enum": {
+        "name": "PerformanceTier",
+        "modelAsString": true
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "SCProvisioningState": {
+      "type": "string",
+      "description": "Provision state of a managed storage class",
+      "enum": [
+        "Provisioning",
+        "Provisioned",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "SCProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "SCType": {
+      "type": "string",
+      "description": "Type of a managed storage class",
+      "enum": [
+        "Native",
+        "RWX",
+        "S3"
+      ],
+      "x-ms-enum": {
+        "name": "SCType",
+        "modelAsString": true
+      }
+    },
+    "TemplateParameterProperties": {
+      "type": "object",
+      "properties": {
+        "backingStorageClassName": {
+          "type": "string",
+          "description": "The backing storageclass used to create new storageclass"
+        },
+        "accessKeyId": {
+          "type": "string",
+          "description": "[S3] accessKeyId"
+        },
+        "secretAccessKey": {
+          "type": "string",
+          "description": "[S3] S3 SecretAccessKey",
+          "format": "password",
+          "x-ms-secret": true
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "[S3] S3 Endpoint"
+        },
+        "region": {
+          "type": "string",
+          "description": "[S3] S3 Region"
+        }
+      },
+      "description": "The properties to create new ManagedStorageClass"
+    },
+    "VolumeExpansion": {
+      "type": "string",
+      "description": "Ability to expand volumes of a storage class",
+      "enum": [
+        "Allow",
+        "Disallow"
+      ],
+      "x-ms-enum": {
+        "name": "VolumeExpansion",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {}
+}

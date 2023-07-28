@@ -1,0 +1,4665 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Test Base",
+    "description": "Test Base",
+    "version": "2020-12-16-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.TestBase/skus": {
+      "get": {
+        "tags": [
+          "Test Base Account"
+        ],
+        "operationId": "Skus_List",
+        "description": "Lists the available SKUs of Test Base Account in a subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/TestBaseAccountSKUListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TestBaseAccountSKUsList": {
+            "$ref": "./examples/TestBaseAccountSKUsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.TestBase/testBaseAccounts": {
+      "get": {
+        "tags": [
+          "Test Base Account"
+        ],
+        "operationId": "TestBaseAccounts_ListBySubscription",
+        "description": "Lists all the Test Base Accounts in a subscription. This API is required by ARM guidelines.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountIncludeSoftDeletedParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/TestBaseAccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TestBaseAccountsListBySubscription": {
+            "$ref": "./examples/TestBaseAccountsListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts": {
+      "get": {
+        "tags": [
+          "Test Base Account"
+        ],
+        "operationId": "TestBaseAccounts_ListByResourceGroup",
+        "description": "Lists all the Test Base Accounts in a resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountIncludeSoftDeletedParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/TestBaseAccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TestBaseAccountsList": {
+            "$ref": "./examples/TestBaseAccountsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}": {
+      "put": {
+        "tags": [
+          "Test Base Account"
+        ],
+        "operationId": "TestBaseAccounts_Create",
+        "description": "Create or replace (overwrite/recreate, with potential downtime) a Test Base Account in the specified subscription.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestBaseAccountResource"
+            },
+            "description": "Parameters supplied to create a Test Base Account."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountRestoreSoftDeletedParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Test Base Account was successfully created or updated.",
+            "schema": {
+              "$ref": "#/definitions/TestBaseAccountResource"
+            }
+          },
+          "201": {
+            "description": "The Test Base Account 'create' or 'update' operation was successfully enqueued. Check provisioningState to see detailed status.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/TestBaseAccountResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestBaseAccountCreate": {
+            "$ref": "./examples/TestBaseAccountCreate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Test Base Account"
+        ],
+        "operationId": "TestBaseAccounts_Update",
+        "description": "Update an existing Test Base Account.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestBaseAccountUpdateParameters"
+            },
+            "description": "Parameters supplied to update a Test Base Account."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The existing Test Base Account was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/TestBaseAccountResource"
+            }
+          },
+          "201": {
+            "description": "The Test Base Account 'update' operation was successfully enqueued. Follow the Location header to poll for final outcome.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "202": {
+            "description": "The Test Base Account 'update' operation was successfully enqueued. Follow the Location header to poll for final outcome.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestBaseAccountUpdate": {
+            "$ref": "./examples/TestBaseAccountUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Test Base Account"
+        ],
+        "operationId": "TestBaseAccounts_Delete",
+        "description": "Deletes a Test Base Account.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Test Base Account 'delete' operation was completed successfully."
+          },
+          "202": {
+            "description": "The Test Base Account 'delete' operation was successfully enqueued. Follow the Location header to poll for final outcome.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The Test Base Account 'delete' operation was completed successfully."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestBaseAccountDelete": {
+            "$ref": "./examples/TestBaseAccountDelete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Test Base Account"
+        ],
+        "operationId": "TestBaseAccounts_Get",
+        "description": "Gets a Test Base Account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Test Base Account was successfully found.",
+            "schema": {
+              "$ref": "#/definitions/TestBaseAccountResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestBaseAccountGet": {
+            "$ref": "./examples/TestBaseAccountGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/offboard": {
+      "post": {
+        "tags": [
+          "Test Base Account"
+        ],
+        "operationId": "TestBaseAccounts_Offboard",
+        "description": "Offboard a Test Base Account.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Test Base Account 'offboard' operation was completed successfully."
+          },
+          "202": {
+            "description": "The Test Base Account 'offboard' operation was successfully enqueued. Follow the Location header to poll for final outcome.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The Test Base Account 'offboard' operation was completed successfully."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestBaseAccountOffboard": {
+            "$ref": "./examples/TestBaseAccountOffboard.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/usages": {
+      "get": {
+        "tags": [
+          "Test Base Account"
+        ],
+        "operationId": "Usage_List",
+        "description": "Lists the usage data of a Test Base Account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The usage of the Test Base Account was returned.",
+            "schema": {
+              "$ref": "#/definitions/TestBaseAccountUsageDataList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TestBaseAccountUsagesList": {
+            "$ref": "./examples/TestBaseAccountUsagesList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/getFileUploadUrl": {
+      "post": {
+        "tags": [
+          "Test Base Package"
+        ],
+        "operationId": "TestBaseAccounts_GetFileUploadUrl",
+        "description": "Gets the file upload URL of a Test Base Account.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/GetFileUploadURLParameters"
+            },
+            "description": "Parameters supplied to the Test Base Account GetFileUploadURL operation."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The file upload URL of the Test Base Account was returned.",
+            "schema": {
+              "$ref": "#/definitions/FileUploadURLResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestBaseAccountGetFileUploadUrl": {
+            "$ref": "./examples/TestBaseAccountGetFileUploadUrl.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/availableOSs": {
+      "get": {
+        "tags": [
+          "Test Base Package"
+        ],
+        "operationId": "AvailableOS_List",
+        "description": "Lists all the available OSs to run a package under a Test Base Account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OSUpdateTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/AvailableOSListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "AvailableOSsList": {
+            "$ref": "./examples/AvailableOSsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/availableOSs/{availableOSResourceName}": {
+      "get": {
+        "tags": [
+          "Test Base Package"
+        ],
+        "operationId": "AvailableOS_Get",
+        "description": "Gets an available OS to run a package under a Test Base Account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "name": "availableOSResourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "description": "The resource name of an Available OS."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/AvailableOSResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AvailableOSGet": {
+            "$ref": "./examples/AvailableOSGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/flightingRings": {
+      "get": {
+        "tags": [
+          "Test Base Package"
+        ],
+        "operationId": "FlightingRings_List",
+        "description": "Lists all the flighting rings of a Test Base Account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/FlightingRingListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "FlightingRingsList": {
+            "$ref": "./examples/FlightingRingsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/flightingRings/{flightingRingResourceName}": {
+      "get": {
+        "tags": [
+          "Test Base Package"
+        ],
+        "operationId": "FlightingRings_Get",
+        "description": "Gets a flighting ring of a Test Base Account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "name": "flightingRingResourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "description": "The resource name of a flighting ring."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/FlightingRingResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FlightingRingGet": {
+            "$ref": "./examples/FlightingRingGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/testTypes": {
+      "get": {
+        "tags": [
+          "Test Base Package"
+        ],
+        "operationId": "TestTypes_List",
+        "description": "Lists all the test types of a Test Base Account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/TestTypeListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TestTypesList": {
+            "$ref": "./examples/TestTypesList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/testTypes/{testTypeResourceName}": {
+      "get": {
+        "tags": [
+          "Test Base Package"
+        ],
+        "operationId": "TestTypes_Get",
+        "description": "Gets a test type of a Test Base Account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "name": "testTypeResourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "description": "The resource name of a test type."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/TestTypeResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestTypeGet": {
+            "$ref": "./examples/TestTypeGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/checkPackageNameAvailability": {
+      "post": {
+        "tags": [
+          "Test Base Package"
+        ],
+        "operationId": "TestBaseAccounts_CheckPackageNameAvailability",
+        "description": "Checks that the Test Base Package name and version is valid and is not already in use.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PackageCheckNameAvailabilityParameters"
+            },
+            "description": "Parameters supplied to the Test Base Package CheckNameAvailability operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Name is available",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CheckPackageNameAvailability": {
+            "$ref": "./examples/CheckPackageNameAvailability.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/packages": {
+      "get": {
+        "tags": [
+          "Test Base Package"
+        ],
+        "operationId": "Packages_ListByTestBaseAccount",
+        "description": "Lists all the packages under a Test Base Account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/PackageListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "PackagesList": {
+            "$ref": "./examples/PackagesList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/packages/{packageName}": {
+      "put": {
+        "tags": [
+          "Test Base Package"
+        ],
+        "operationId": "Packages_Create",
+        "description": "Create or replace (overwrite/recreate, with potential downtime) a Test Base Package.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PackageResource"
+            },
+            "description": "Parameters supplied to create a Test Base Package."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PackageNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Test Base Package was successfully created or updated.",
+            "schema": {
+              "$ref": "#/definitions/PackageResource"
+            }
+          },
+          "201": {
+            "description": "The Test Base Package 'create' or 'update' operation was successfully enqueued. Check provisioningState to see detailed status.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/PackageResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PackageCreate": {
+            "$ref": "./examples/PackageCreate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Test Base Package"
+        ],
+        "operationId": "Packages_Update",
+        "description": "Update an existing Test Base Package.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PackageUpdateParameters"
+            },
+            "description": "Parameters supplied to update a Test Base Package."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PackageNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The existing Test Base Package was successfully updated. Check provisioningState to see detailed status.",
+            "schema": {
+              "$ref": "#/definitions/PackageResource"
+            }
+          },
+          "201": {
+            "description": "The Test Base Package 'update' operation was successfully enqueued. Follow the Location header to poll for final outcome.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "202": {
+            "description": "The Test Base Package 'update' operation was successfully enqueued. Follow the Location header to poll for final outcome.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PackageUpdate": {
+            "$ref": "./examples/PackageUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Test Base Package"
+        ],
+        "operationId": "Packages_Delete",
+        "description": "Deletes a Test Base Package.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PackageNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Test Base Package 'delete' operation was completed successfully."
+          },
+          "202": {
+            "description": "The Test Base Package 'delete' operation was successfully enqueued. Follow the Location header to poll for final outcome.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The Test Base Package 'delete' operation was completed successfully."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PackageDelete": {
+            "$ref": "./examples/PackageDelete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Test Base Package"
+        ],
+        "operationId": "Packages_Get",
+        "description": "Gets a Test Base Package.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PackageNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Test Base Package was successfully found.",
+            "schema": {
+              "$ref": "#/definitions/PackageResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PackageGet": {
+            "$ref": "./examples/PackageGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/packages/{packageName}/hardDelete": {
+      "post": {
+        "tags": [
+          "Test Base Package"
+        ],
+        "operationId": "Packages_HardDelete",
+        "description": "Hard Delete a Test Base Package.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PackageNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Test Base Package 'HardDelete' operation was completed successfully."
+          },
+          "202": {
+            "description": "The Test Base Package 'HardDelete' operation was successfully enqueued. Follow the Location header to poll for final outcome.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The Test Base Package 'HardDelete' operation was completed successfully."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PackageHardDelete": {
+            "$ref": "./examples/PackageHardDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/packages/{packageName}/getDownloadUrl": {
+      "post": {
+        "tags": [
+          "Test Base Package"
+        ],
+        "operationId": "Packages_GetDownloadURL",
+        "description": "Gets the download URL of a package.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PackageNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The package download URL is returned.",
+            "schema": {
+              "$ref": "#/definitions/DownloadURLResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PackageGetDownloadURL": {
+            "$ref": "./examples/PackageGetDownloadURL.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/testSummaries": {
+      "get": {
+        "tags": [
+          "Test Result"
+        ],
+        "operationId": "TestSummaries_List",
+        "description": "Lists the Test Summaries of all the packages under a Test Base Account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/TestSummaryListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TestSummariesList": {
+            "$ref": "./examples/TestSummariesList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/testSummaries/{testSummaryName}": {
+      "get": {
+        "tags": [
+          "Test Result"
+        ],
+        "operationId": "TestSummaries_Get",
+        "description": "Gets a Test Summary with specific name from all the Test Summaries of all the packages under a Test Base Account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "name": "testSummaryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "description": "The name of the Test Summary."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/TestSummaryResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestSummaryGet": {
+            "$ref": "./examples/TestSummaryGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/packages/{packageName}/testResults": {
+      "get": {
+        "tags": [
+          "Test Result"
+        ],
+        "operationId": "TestResults_List",
+        "description": "Lists all the Test Results with specified OS Update type for a Test Base Package. Can be filtered by osName, releaseName, flightingRing, buildVersion, buildRevision.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PackageNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OSUpdateTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/TestResultListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TestResultsList": {
+            "$ref": "./examples/TestResultsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/packages/{packageName}/testResults/{testResultName}": {
+      "get": {
+        "tags": [
+          "Test Result"
+        ],
+        "operationId": "TestResults_Get",
+        "description": "Get the Test Result by Id with specified OS Update type for a Test Base Package.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PackageNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TestResultNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/TestResultResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestResultGet": {
+            "$ref": "./examples/TestResultGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/packages/{packageName}/osUpdates": {
+      "get": {
+        "tags": [
+          "Test Result"
+        ],
+        "operationId": "OSUpdates_List",
+        "description": "Lists the OS Updates in which the package were tested before.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PackageNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OSUpdateTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/OSUpdateListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "OSUpdatesList": {
+            "$ref": "./examples/OSUpdatesList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/packages/{packageName}/osUpdates/{osUpdateResourceName}": {
+      "get": {
+        "tags": [
+          "Test Result"
+        ],
+        "operationId": "OSUpdates_Get",
+        "description": "Gets an OS Update by name in which the package was tested before.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PackageNameParameter"
+          },
+          {
+            "name": "osUpdateResourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "description": "The resource name of an OS Update."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/OSUpdateResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OSUpdateGet": {
+            "$ref": "./examples/OSUpdateGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/packages/{packageName}/favoriteProcesses": {
+      "get": {
+        "tags": [
+          "Test Result"
+        ],
+        "operationId": "FavoriteProcesses_List",
+        "description": "Lists the favorite processes for a specific package.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PackageNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/FavoriteProcessListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "FavoriteProcessesList": {
+            "$ref": "./examples/FavoriteProcessesList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/packages/{packageName}/favoriteProcesses/{favoriteProcessResourceName}": {
+      "put": {
+        "tags": [
+          "Test Result"
+        ],
+        "operationId": "FavoriteProcesses_Create",
+        "description": "Create or replace a favorite process for a Test Base Package.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FavoriteProcessResource"
+            },
+            "description": "Parameters supplied to create a favorite process in a package."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PackageNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FavoriteProcessResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The favorite processes was successfully created or updated.",
+            "schema": {
+              "$ref": "#/definitions/FavoriteProcessResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FavoriteProcessCreate": {
+            "$ref": "./examples/FavoriteProcessCreate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Test Result"
+        ],
+        "operationId": "FavoriteProcesses_Delete",
+        "description": "Deletes a favorite process for a specific package.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PackageNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FavoriteProcessResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The package favorite process 'delete' operation was completed successfully."
+          },
+          "204": {
+            "description": "The package favorite process 'delete' operation was completed successfully."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FavoriteProcessDelete": {
+            "$ref": "./examples/FavoriteProcessDelete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Test Result"
+        ],
+        "operationId": "FavoriteProcesses_Get",
+        "description": "Gets a favorite process for a Test Base Package.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PackageNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FavoriteProcessResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/FavoriteProcessResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FavoriteProcessGet": {
+            "$ref": "./examples/FavoriteProcessGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/packages/{packageName}/testResults/{testResultName}/analysisResults": {
+      "get": {
+        "tags": [
+          "Test Result"
+        ],
+        "operationId": "AnalysisResults_List",
+        "description": "Lists the Analysis Results of a Test Result. The result collection will only contain one element as all the data will be nested in a singleton object.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PackageNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TestResultNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AnalysisResultTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/AnalysisResultListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "MemoryUtilizationAnalysisResultsList": {
+            "$ref": "./examples/MemoryUtilizationAnalysisResultsList.json"
+          },
+          "CPUUtilizationAnalysisResultsList": {
+            "$ref": "./examples/CPUUtilizationAnalysisResultsList.json"
+          },
+          "MemoryRegressionAnalysisResultsList": {
+            "$ref": "./examples/MemoryRegressionAnalysisResultsList.json"
+          },
+          "CPURegressionAnalysisResultsList": {
+            "$ref": "./examples/CPURegressionAnalysisResultsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/packages/{packageName}/testResults/{testResultName}/analysisResults/{analysisResultName}": {
+      "get": {
+        "tags": [
+          "Test Result"
+        ],
+        "operationId": "AnalysisResults_Get",
+        "description": "Gets an Analysis Result of a Test Result by name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PackageNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TestResultNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AnalysisResultNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/AnalysisResultSingletonResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MemoryUtilizationAnalysisResultGet": {
+            "$ref": "./examples/MemoryUtilizationAnalysisResultGet.json"
+          },
+          "CPUUtilizationAnalysisResultGet": {
+            "$ref": "./examples/CPUUtilizationAnalysisResultGet.json"
+          },
+          "MemoryRegressionAnalysisResultGet": {
+            "$ref": "./examples/MemoryRegressionAnalysisResultGet.json"
+          },
+          "CPURegressionAnalysisResultGet": {
+            "$ref": "./examples/CPURegressionAnalysisResultGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/packages/{packageName}/testResults/{testResultName}/getDownloadUrl": {
+      "post": {
+        "tags": [
+          "Test Result"
+        ],
+        "operationId": "TestResults_GetDownloadURL",
+        "description": "Gets the download URL of the test result.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PackageNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TestResultNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/DownloadURLResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestResultGetDownloadURL": {
+            "$ref": "./examples/TestResultGetDownloadURL.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/packages/{packageName}/testResults/{testResultName}/getVideoDownloadUrl": {
+      "post": {
+        "tags": [
+          "Test Result"
+        ],
+        "operationId": "TestResults_GetVideoDownloadURL",
+        "description": "Gets the download URL of the test execution screen recording.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PackageNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TestResultNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/DownloadURLResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestResultGetVideoDownloadURL": {
+            "$ref": "./examples/TestResultGetVideoDownloadURL.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/emailEvents": {
+      "get": {
+        "tags": [
+          "Test Base Email Event"
+        ],
+        "operationId": "EmailEvents_List",
+        "description": "Lists all the email events of a Test Base Account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/EmailEventListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "EmailEventsList": {
+            "$ref": "./examples/EmailEventsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/emailEvents/{emailEventResourceName}": {
+      "get": {
+        "tags": [
+          "Test Base Email Event"
+        ],
+        "operationId": "EmailEvents_Get",
+        "description": "Gets a email event of a Test Base Account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "name": "emailEventResourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "description": "The resource name of an email event."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/EmailEventResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EmailEventGet": {
+            "$ref": "./examples/EmailEventGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/customerEvents": {
+      "get": {
+        "tags": [
+          "Test Base Customer Notification Events"
+        ],
+        "operationId": "CustomerEvents_ListByTestBaseAccount",
+        "description": "Lists all notification events subscribed under a Test Base Account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/CustomerEventListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "CustomerEventsList": {
+            "$ref": "./examples/CustomerEventsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/customerEvents/{customerEventName}": {
+      "put": {
+        "tags": [
+          "Test Base Customer Event"
+        ],
+        "operationId": "CustomerEvents_Create",
+        "description": "Create or replace a Test Base Customer Event.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomerEventResource"
+            },
+            "description": "Parameters supplied to create a Test Base CustomerEvent."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomerEventNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Test Base Customer Event was successfully created or updated.",
+            "schema": {
+              "$ref": "#/definitions/CustomerEventResource"
+            }
+          },
+          "201": {
+            "description": "The Test Base Customer Event 'create' or 'update' operation was successfully enqueued. Check provisioningState to see detailed status.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/CustomerEventResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CustomerEventCreate": {
+            "$ref": "./examples/CustomerEventCreate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Test Base Customer Event"
+        ],
+        "operationId": "CustomerEvents_Delete",
+        "description": "Deletes a Test Base Customer Event.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomerEventNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Test Base Customer Event 'delete' operation was completed successfully."
+          },
+          "202": {
+            "description": "The Test Base Customer Event 'delete' operation was successfully enqueued. Follow the Location header to poll for final outcome.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The Test Base Customer Event 'delete' operation was completed successfully."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CustomerEventDelete": {
+            "$ref": "./examples/CustomerEventDelete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Test Base Customer Event"
+        ],
+        "operationId": "CustomerEvents_Get",
+        "description": "Gets a Test Base CustomerEvent.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomerEventNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Test Base Customer Event was successfully found.",
+            "schema": {
+              "$ref": "#/definitions/CustomerEventResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CustomerEventGet": {
+            "$ref": "./examples/CustomerEventGet.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.TestBase/operations": {
+      "get": {
+        "tags": [
+          "Operation"
+        ],
+        "description": "Lists all of the available REST API operations of the Microsoft.TestBase provider.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "OperationsList": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "description": "The Resource definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ProxyResource": {
+      "description": "The resource model definition for an ARM proxy resource. It will have everything other than required location and tags",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "Tags": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Resource tags."
+    },
+    "TrackedResource": {
+      "description": "The resource model definition for an ARM tracked top level resource",
+      "properties": {
+        "tags": {
+          "description": "The tags of the resource.",
+          "$ref": "#/definitions/Tags"
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Etag."
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "ErrorResponse": {
+      "description": "The error response send when an operation fails.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error.",
+          "readOnly": true
+        },
+        "details": {
+          "description": "The error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "TestBaseAccountSKUListResult": {
+      "description": "A list of Test Base Account SKUs.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TestBaseAccountSKU"
+          },
+          "description": "The list of Test Base Account SKUs."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if value contains incomplete list of results."
+        }
+      }
+    },
+    "TestBaseAccountSKU": {
+      "description": "Describes a Test Base Account SKU.",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The type of resource the SKU applies to."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU. This is typically a letter + number code, such as B0 or S0."
+        },
+        "tier": {
+          "type": "string",
+          "description": "The tier of this particular SKU.",
+          "enum": [
+            "Standard"
+          ],
+          "x-ms-enum": {
+            "name": "tier",
+            "modelAsString": true
+          }
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "The capabilities of a SKU.",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/TestBaseAccountSKUCapability"
+          }
+        },
+        "locations": {
+          "description": "The locations that the SKU is available.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "tier"
+      ]
+    },
+    "TestBaseAccountSKUCapability": {
+      "description": "Properties of the Test Base Account SKU Capability.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "An invariant to describe the feature, such as 'SLA'."
+        },
+        "value": {
+          "type": "string",
+          "description": "An invariant if the feature is measured by quantity, such as 99.9%."
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "SystemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The type of identity that last modified the resource."
+        }
+      }
+    },
+    "TestBaseAccountListResult": {
+      "description": "A list of Test Base Accounts.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TestBaseAccountResource"
+          },
+          "description": "The list of Test Base Accounts."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if value contains incomplete list of results."
+        }
+      }
+    },
+    "TestBaseAccountResource": {
+      "description": "The Test Base Account resource.",
+      "properties": {
+        "systemData": {
+          "description": "The system metadata relating to this resource",
+          "$ref": "#/definitions/SystemData"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TestBaseAccountResourceProperties",
+          "description": "Properties of a Test Base Account."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "TestBaseAccountResourceProperties": {
+      "description": "The properties of a Test Base Account resource.",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "sku": {
+          "description": "The SKU of the Test Base Account.",
+          "$ref": "#/definitions/TestBaseAccountSKU"
+        },
+        "accessLevel": {
+          "description": "The access level of the Test Base Account.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "required": [
+        "sku"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "ARM provisioning state, see https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Cancelled",
+        "Creating",
+        "Deleting",
+        "Updating"
+      ],
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "provisioningState",
+        "modelAsString": true
+      }
+    },
+    "TestBaseAccountUpdateParameters": {
+      "description": "Parameters supplied to update a Test Base Account.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TestBaseAccountUpdateParameterProperties",
+          "x-ms-client-flatten": true,
+          "description": "Test Base Account update parameters."
+        },
+        "tags": {
+          "description": "The tags of the Test Base Account.",
+          "$ref": "#/definitions/Tags"
+        }
+      }
+    },
+    "TestBaseAccountUpdateParameterProperties": {
+      "description": "Parameters supplied to update a Test Base Account.",
+      "properties": {
+        "sku": {
+          "description": "The SKU of the Test Base Account.",
+          "$ref": "#/definitions/TestBaseAccountSKU"
+        }
+      }
+    },
+    "TestBaseAccountUsageDataList": {
+      "description": "A list of Test Base Account usage data.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TestBaseAccountUsageData"
+          },
+          "description": "The list of Test Base Account usage data."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if value contains incomplete list of results."
+        }
+      }
+    },
+    "TestBaseAccountUsageData": {
+      "description": "The usage data of a Test Base Account.",
+      "properties": {
+        "id": {
+          "description": "Fully qualified ARM resource id",
+          "type": "string"
+        },
+        "name": {
+          "$ref": "#/definitions/TestBaseAccountUsageName",
+          "description": "Localizable String object containing the name and a localized value."
+        },
+        "unit": {
+          "description": "Representing the units of the usage quota. Possible values are: Count, Bytes, Seconds, Percent, CountPerSecond, BytesPerSecond.",
+          "type": "string"
+        },
+        "limit": {
+          "format": "int64",
+          "description": "The maximum permitted value for the usage quota. If there is no limit, this value will be -1.",
+          "type": "integer"
+        },
+        "currentValue": {
+          "format": "int64",
+          "description": "Current value for the usage quota.",
+          "type": "integer"
+        }
+      }
+    },
+    "TestBaseAccountUsageName": {
+      "description": "Localizable String object containing the name and a localized value.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The identifier of the usage.",
+          "type": "string"
+        },
+        "localizedValue": {
+          "description": "Localized name of the usage.",
+          "type": "string"
+        }
+      }
+    },
+    "GetFileUploadURLParameters": {
+      "description": "The parameters supplied to the Test Base Account GetFileUploadURL action.",
+      "properties": {
+        "blobName": {
+          "type": "string",
+          "description": "The custom file name of the uploaded blob."
+        }
+      }
+    },
+    "FileUploadURLResponse": {
+      "description": "The URL response",
+      "properties": {
+        "uploadUrl": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL used for uploading the package."
+        },
+        "blobPath": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The blob path of the uploaded package. It will be used as the 'blobPath' property of PackageResource."
+        }
+      }
+    },
+    "AvailableOSListResult": {
+      "description": "A list of available OSs.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AvailableOSResource"
+          },
+          "description": "The list of available OSs."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if value contains incomplete list of results."
+        }
+      }
+    },
+    "AvailableOSResource": {
+      "description": "The Available OS resource.",
+      "properties": {
+        "systemData": {
+          "description": "The system metadata relating to this resource",
+          "$ref": "#/definitions/SystemData"
+        },
+        "properties": {
+          "$ref": "#/definitions/AvailableOSProperties",
+          "x-ms-client-flatten": true,
+          "description": "Available OS properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AvailableOSProperties": {
+      "description": "The Available OS properties.",
+      "properties": {
+        "osId": {
+          "type": "string",
+          "description": "The Id of an Available OS of a Test Base Account."
+        },
+        "osName": {
+          "type": "string",
+          "description": "The name of an Available OS of a Test Base Account."
+        },
+        "osVersion": {
+          "type": "string",
+          "description": "The version of an Available OS of a Test Base Account."
+        },
+        "insiderChannel": {
+          "type": "string",
+          "description": "The insider channel of an Available OS of a Test Base Account."
+        },
+        "osUpdateType": {
+          "type": "string",
+          "description": "The OS update type of an Available OS of a Test Base Account."
+        },
+        "osPlatform": {
+          "type": "string",
+          "description": "The Platform of an Available OS of a Test Base Account."
+        }
+      }
+    },
+    "FlightingRingListResult": {
+      "description": "A list of flighting rings.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FlightingRingResource"
+          },
+          "description": "The list of flighting rings."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if value contains incomplete list of results."
+        }
+      }
+    },
+    "FlightingRingResource": {
+      "description": "The flighting ring resource.",
+      "properties": {
+        "systemData": {
+          "description": "The system metadata relating to this resource",
+          "$ref": "#/definitions/SystemData"
+        },
+        "properties": {
+          "$ref": "#/definitions/FlightingRingProperties",
+          "x-ms-client-flatten": true,
+          "description": "Flighting Ring properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "FlightingRingProperties": {
+      "description": "The Flighting Ring properties.",
+      "properties": {
+        "actualFlightingRingName": {
+          "type": "string",
+          "description": "The actual name of a flighting ring of a Test Base Account."
+        }
+      }
+    },
+    "TestTypeListResult": {
+      "description": "A list of test types.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TestTypeResource"
+          },
+          "description": "The list of test types."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if value contains incomplete list of results."
+        }
+      }
+    },
+    "TestTypeResource": {
+      "description": "The test type resource.",
+      "properties": {
+        "systemData": {
+          "description": "The system metadata relating to this resource",
+          "$ref": "#/definitions/SystemData"
+        },
+        "properties": {
+          "$ref": "#/definitions/TestTypeProperties",
+          "x-ms-client-flatten": true,
+          "description": "Test Type properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "TestTypeProperties": {
+      "description": "The Test Type properties.",
+      "properties": {
+        "actualTestTypeName": {
+          "type": "string",
+          "description": "The actual name of a test type of a Test Base Account."
+        }
+      }
+    },
+    "PackageCheckNameAvailabilityParameters": {
+      "description": "Parameters body to pass for Test Base Package name availability check.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Resource name to verify."
+        },
+        "applicationName": {
+          "type": "string",
+          "description": "Application name to verify."
+        },
+        "version": {
+          "type": "string",
+          "description": "Version name to verify."
+        },
+        "type": {
+          "type": "string",
+          "description": "fully qualified resource type which includes provider namespace."
+        }
+      },
+      "required": [
+        "name",
+        "applicationName",
+        "version",
+        "type"
+      ]
+    },
+    "CheckNameAvailabilityResult": {
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Value indicating the availability of the name: true if the name is available; otherwise, false."
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for unavailability of a name. Required if nameAvailable == false.",
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "x-ms-enum": {
+            "name": "reason",
+            "modelAsString": true
+          }
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The detailed info regarding the reason associated with the name. Required if nameAvailable == false."
+        }
+      },
+      "description": "Description of a Check Name availability response properties."
+    },
+    "PackageListResult": {
+      "description": "A list of Test Base Packages.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PackageResource"
+          },
+          "description": "The list of Test Base Packages."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if value contains incomplete list of results."
+        }
+      }
+    },
+    "PackageResource": {
+      "description": "The Test Base Package resource.",
+      "properties": {
+        "systemData": {
+          "description": "The system metadata relating to this resource",
+          "$ref": "#/definitions/SystemData"
+        },
+        "properties": {
+          "$ref": "#/definitions/PackageProperties",
+          "x-ms-client-flatten": true,
+          "description": "Test Base Package properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "PackageProperties": {
+      "description": "The properties of the Test Base Package.",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "applicationName": {
+          "type": "string",
+          "description": "Application name"
+        },
+        "version": {
+          "type": "string",
+          "description": "Application version"
+        },
+        "testTypes": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/TestType"
+          },
+          "description": "OOB, functional or both. Mapped to the data in 'tests' property."
+        },
+        "targetOSList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TargetOSInfo"
+          },
+          "description": "Specifies the target OSs of specific OS Update types."
+        },
+        "packageStatus": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The status of the package.",
+          "enum": [
+            "Unknown",
+            "Registered",
+            "Ready",
+            "Error",
+            "ValidatingPackage",
+            "PreValidationCheckPass",
+            "Deleted",
+            "ValidationLongerThanUsual",
+            "VerifyingPackage"
+          ],
+          "x-ms-enum": {
+            "name": "packageStatus",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC timestamp when the package was last modified."
+        },
+        "flightingRing": {
+          "type": "string",
+          "description": "The flighting ring for feature update."
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Flag showing that whether the package is enabled. It doesn't schedule test for package which is not enabled."
+        },
+        "blobPath": {
+          "type": "string",
+          "description": "The file path of the package."
+        },
+        "validationResults": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PackageValidationResult"
+          },
+          "description": "The validation results. There's validation on package when it's created or updated."
+        },
+        "tests": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Test"
+          },
+          "description": "The detailed test information."
+        }
+      },
+      "required": [
+        "applicationName",
+        "version",
+        "targetOSList",
+        "flightingRing",
+        "blobPath",
+        "tests"
+      ]
+    },
+    "TestType": {
+      "type": "string",
+      "description": "The test type.",
+      "enum": [
+        "OutOfBoxTest",
+        "FunctionalTest"
+      ],
+      "x-ms-enum": {
+        "name": "testType",
+        "modelAsString": true
+      }
+    },
+    "TargetOSInfo": {
+      "description": "The information of the target OS to be tested.",
+      "properties": {
+        "osUpdateType": {
+          "type": "string",
+          "description": "Specifies the OS update type to test against, e.g., 'Security updates' or 'Feature updates'."
+        },
+        "targetOSs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Specifies the target OSs to be tested."
+        }
+      },
+      "required": [
+        "osUpdateType",
+        "targetOSs"
+      ]
+    },
+    "PackageValidationResult": {
+      "description": "The validation results. There's validation on package when it's created or updated.",
+      "properties": {
+        "validationName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Validation name."
+        },
+        "isValid": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Indicates whether the package passed the validation."
+        },
+        "errors": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "Error information."
+        }
+      }
+    },
+    "Test": {
+      "description": "The definition of a Test.",
+      "properties": {
+        "testType": {
+          "$ref": "#/definitions/TestType",
+          "description": "The type of the test."
+        },
+        "validationRunStatus": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The status of the validation run of the package.",
+          "enum": [
+            "Unknown",
+            "Pending",
+            "Passed",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "validationRunStatus",
+            "modelAsString": true
+          }
+        },
+        "isActive": {
+          "type": "boolean",
+          "description": "Indicates if this test is active.It doesn't schedule test for not active Test."
+        },
+        "commands": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Command"
+          },
+          "description": "The commands used in the test."
+        }
+      },
+      "required": [
+        "testType",
+        "commands"
+      ]
+    },
+    "Command": {
+      "description": "The command used in the test",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the command."
+        },
+        "action": {
+          "type": "string",
+          "description": "The action of the command.",
+          "enum": [
+            "Install",
+            "Launch",
+            "Close",
+            "Uninstall",
+            "Custom"
+          ],
+          "x-ms-enum": {
+            "name": "action",
+            "modelAsString": true
+          }
+        },
+        "contentType": {
+          "type": "string",
+          "description": "The type of command content.",
+          "enum": [
+            "Inline",
+            "File",
+            "Path"
+          ],
+          "x-ms-enum": {
+            "name": "contentType",
+            "modelAsString": true
+          }
+        },
+        "content": {
+          "type": "string",
+          "description": "The content of the command. The content depends on source type."
+        },
+        "runElevated": {
+          "type": "boolean",
+          "description": "Specifies whether to run the command as administrator."
+        },
+        "restartAfter": {
+          "type": "boolean",
+          "description": "Specifies whether to restart the VM after the command executed."
+        },
+        "maxRunTime": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the max run time of the command."
+        },
+        "runAsInteractive": {
+          "type": "boolean",
+          "description": "Specifies whether to run the command in interactive mode."
+        },
+        "alwaysRun": {
+          "type": "boolean",
+          "description": "Specifies whether to run the command even if a previous command is failed."
+        },
+        "applyUpdateBefore": {
+          "type": "boolean",
+          "description": "Specifies whether to apply update before the command."
+        }
+      },
+      "required": [
+        "name",
+        "action",
+        "contentType",
+        "content"
+      ]
+    },
+    "PackageUpdateParameters": {
+      "description": "Parameters supplied to update a Test Base Package.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PackageUpdateParameterProperties",
+          "x-ms-client-flatten": true,
+          "description": "Test Base Package update parameters."
+        },
+        "tags": {
+          "description": "The tags of the Package.",
+          "$ref": "#/definitions/Tags"
+        }
+      }
+    },
+    "PackageUpdateParameterProperties": {
+      "description": "Parameters supplied to update a Test Base Package.",
+      "properties": {
+        "targetOSList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TargetOSInfo"
+          },
+          "description": "Specifies the target OSs of specific OS Update types."
+        },
+        "flightingRing": {
+          "type": "string",
+          "description": "The flighting ring for feature update."
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether the package is enabled. It doesn't schedule test for package which is not enabled."
+        },
+        "blobPath": {
+          "type": "string",
+          "description": "The file name of the package."
+        },
+        "tests": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Test"
+          },
+          "description": "The detailed test information."
+        }
+      }
+    },
+    "DownloadURLResponse": {
+      "description": "The response of getting a download URL.",
+      "properties": {
+        "downloadUrl": {
+          "type": "string",
+          "readOnly": true,
+          "x-ms-secret": true,
+          "description": "The download URL."
+        },
+        "expirationTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "Expiry date of the download URL."
+        }
+      }
+    },
+    "TestSummaryListResult": {
+      "description": "A list of Test Summaries.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TestSummaryResource"
+          },
+          "description": "The list of Test Summaries."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if value contains incomplete list of results."
+        }
+      }
+    },
+    "TestSummaryResource": {
+      "description": "Summary of a Test.",
+      "properties": {
+        "systemData": {
+          "description": "The system metadata relating to this resource",
+          "$ref": "#/definitions/SystemData"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TestSummaryProperties",
+          "description": "Properties of a Test Summary."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "TestSummaryProperties": {
+      "description": "Properties of a Test Summary.",
+      "properties": {
+        "testSummaryId": {
+          "type": "string",
+          "description": "The Id of the current Test Summary."
+        },
+        "packageId": {
+          "type": "string",
+          "description": "The Azure resource Id of package."
+        },
+        "applicationName": {
+          "type": "string",
+          "description": "Application name."
+        },
+        "applicationVersion": {
+          "type": "string",
+          "description": "Application version."
+        },
+        "executionStatus": {
+          "$ref": "#/definitions/TestExecutionStatus",
+          "description": "The execution status of last test."
+        },
+        "testStatus": {
+          "$ref": "#/definitions/TestStatus",
+          "description": "The status of last test."
+        },
+        "grade": {
+          "$ref": "#/definitions/TestGrade",
+          "description": "The grade of the test."
+        },
+        "testRunTime": {
+          "type": "string",
+          "description": "The run time of the last test."
+        },
+        "featureUpdatesTestSummary": {
+          "$ref": "#/definitions/OSUpdatesTestSummary",
+          "description": "The result summary of tests triggered by feature updates"
+        },
+        "securityUpdatesTestSummary": {
+          "$ref": "#/definitions/OSUpdatesTestSummary",
+          "description": "The result summary of tests triggered by security updates"
+        }
+      }
+    },
+    "TestExecutionStatus": {
+      "type": "string",
+      "description": "The execution status of a test.",
+      "enum": [
+        "None",
+        "InProgress",
+        "Processing",
+        "Completed",
+        "NotExecuted",
+        "Incomplete",
+        "Failed",
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "executionStatus",
+        "modelAsString": true
+      }
+    },
+    "TestStatus": {
+      "type": "string",
+      "description": "The status of a test.",
+      "enum": [
+        "None",
+        "TestExecutionInProgress",
+        "DataProcessing",
+        "TestFailure",
+        "UpdateFailure",
+        "TestAndUpdateFailure",
+        "InfrastructureFailure",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "testStatus",
+        "modelAsString": true
+      }
+    },
+    "TestGrade": {
+      "type": "string",
+      "description": "The grade of a test.",
+      "enum": [
+        "None",
+        "NotAvailable",
+        "Pass",
+        "Fail"
+      ],
+      "x-ms-enum": {
+        "name": "grade",
+        "modelAsString": true
+      }
+    },
+    "OSUpdatesTestSummary": {
+      "description": "The summary of some tests.",
+      "properties": {
+        "executionStatus": {
+          "$ref": "#/definitions/TestExecutionStatus",
+          "description": "The status of the last test."
+        },
+        "testStatus": {
+          "$ref": "#/definitions/TestStatus",
+          "description": "The status of last test."
+        },
+        "grade": {
+          "$ref": "#/definitions/TestGrade",
+          "description": "The grade of last test."
+        },
+        "testRunTime": {
+          "type": "string",
+          "description": "The run time of the last test."
+        },
+        "osUpdateTestSummaries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OSUpdateTestSummary"
+          },
+          "description": "Detailed summary for each OS update"
+        }
+      }
+    },
+    "OSUpdateTestSummary": {
+      "description": "The summary of a test.",
+      "properties": {
+        "osName": {
+          "type": "string",
+          "description": "The operating system name. e.g. Windows 10 1809."
+        },
+        "releaseName": {
+          "type": "string",
+          "description": "The name of the tested release (OS update)."
+        },
+        "buildVersion": {
+          "type": "string",
+          "description": "The build version of the tested release (OS update)"
+        },
+        "buildRevision": {
+          "type": "string",
+          "description": "The build revision of the tested release (OS update)"
+        },
+        "releaseVersionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The release version date."
+        },
+        "flightingRing": {
+          "type": "string",
+          "description": "The flighting ring, only for release of feature updates."
+        },
+        "executionStatus": {
+          "$ref": "#/definitions/TestExecutionStatus",
+          "description": "The execution status of the test."
+        },
+        "testStatus": {
+          "$ref": "#/definitions/TestStatus",
+          "description": "The status of the test."
+        },
+        "grade": {
+          "$ref": "#/definitions/TestGrade",
+          "description": "The grade of the test."
+        },
+        "testRunTime": {
+          "type": "string",
+          "description": "The run time of the test."
+        },
+        "testType": {
+          "type": "string",
+          "description": "The test type of the package"
+        }
+      }
+    },
+    "TestResultListResult": {
+      "description": "A list of Test Results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TestResultResource"
+          },
+          "description": "The list of Test Results."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if value contains incomplete list of results."
+        }
+      }
+    },
+    "TestResultResource": {
+      "description": "The Test Result Resource.",
+      "properties": {
+        "systemData": {
+          "description": "The system metadata relating to this resource",
+          "$ref": "#/definitions/SystemData"
+        },
+        "properties": {
+          "$ref": "#/definitions/TestResultProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a Test Result."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "TestResultProperties": {
+      "description": "The properties of a Test Result.",
+      "properties": {
+        "baselineTestResultId": {
+          "type": "string",
+          "description": "Azure Id of the baseline test result."
+        },
+        "packageId": {
+          "type": "string",
+          "description": "Resource Id of the package."
+        },
+        "applicationName": {
+          "type": "string",
+          "description": "Application name."
+        },
+        "applicationVersion": {
+          "type": "string",
+          "description": "Application version."
+        },
+        "osName": {
+          "type": "string",
+          "description": "The operating system name, e.g. Windows 10 1809."
+        },
+        "releaseName": {
+          "type": "string",
+          "description": "The name of the tested release (OS update)."
+        },
+        "releaseVersionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The release version date of the tested release."
+        },
+        "flightingRing": {
+          "type": "string",
+          "description": "The flighting ring, only for release of feature updates."
+        },
+        "buildVersion": {
+          "type": "string",
+          "description": "The build version of the tested release (OS update)."
+        },
+        "buildRevision": {
+          "type": "string",
+          "description": "The build revision of the tested release (OS update)."
+        },
+        "testType": {
+          "type": "string",
+          "description": "Test type. E.g. 'Out of box test' or 'Functional test'."
+        },
+        "testRunTime": {
+          "type": "string",
+          "description": "The run time of the test."
+        },
+        "isDownloadDataAvailable": {
+          "type": "boolean",
+          "description": "Whether download data is available."
+        },
+        "isVideoAvailable": {
+          "type": "boolean",
+          "description": "Whether video data is available."
+        },
+        "executionStatus": {
+          "$ref": "#/definitions/TestExecutionStatus",
+          "description": "The execution status of the test."
+        },
+        "testStatus": {
+          "$ref": "#/definitions/TestStatus",
+          "description": "The status of the test."
+        },
+        "grade": {
+          "$ref": "#/definitions/TestGrade",
+          "description": "The grade of the test."
+        },
+        "kbNumber": {
+          "type": "string",
+          "description": "KB number."
+        },
+        "packageVersion": {
+          "type": "string",
+          "description": "The version of the Windows update package."
+        },
+        "analysisSummaries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TestResultAnalysisSummary"
+          },
+          "description": "List of analysis summaries."
+        }
+      }
+    },
+    "TestResultAnalysisSummary": {
+      "description": "The summary of a Test Analysis Result.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Metric name"
+        },
+        "analysisStatus": {
+          "type": "string",
+          "description": "The analysis status.",
+          "enum": [
+            "None",
+            "Completed",
+            "InProgress",
+            "Failed",
+            "Succeeded",
+            "Available",
+            "NotAvailable"
+          ],
+          "x-ms-enum": {
+            "name": "analysisStatus",
+            "modelAsString": true
+          }
+        },
+        "grade": {
+          "$ref": "#/definitions/TestGrade",
+          "description": "The grade of the test result."
+        }
+      }
+    },
+    "OSUpdateListResult": {
+      "description": "A list of OS Updates.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OSUpdateResource"
+          },
+          "description": "The list of OS Updates."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if value contains incomplete list of results."
+        }
+      }
+    },
+    "OSUpdateResource": {
+      "description": "An OS Update.",
+      "properties": {
+        "systemData": {
+          "description": "The system metadata relating to this resource",
+          "$ref": "#/definitions/SystemData"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OSUpdateProperties",
+          "description": "Properties of an OS Update."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "OSUpdateProperties": {
+      "description": "Properties of an OS Update.",
+      "properties": {
+        "osName": {
+          "type": "string",
+          "description": "The name of the OS."
+        },
+        "release": {
+          "type": "string",
+          "description": "The name of tested release."
+        },
+        "flightingRing": {
+          "type": "string",
+          "description": "The flighting ring, only for release of feature updates."
+        },
+        "buildVersion": {
+          "type": "string",
+          "description": "The build version of the tested release (OS update)."
+        },
+        "buildRevision": {
+          "type": "string",
+          "description": "The build revision of the tested release (OS update)"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of this release (OS update).",
+          "enum": [
+            "SecurityUpdate",
+            "FeatureUpdate"
+          ],
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true
+          }
+        },
+        "releaseVersionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The release version date the tested release (OS update)"
+        }
+      }
+    },
+    "FavoriteProcessListResult": {
+      "description": "A list of favorite processes for a package.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FavoriteProcessResource"
+          },
+          "description": "The list of favorite processes for a package."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if value contains incomplete list of results."
+        }
+      }
+    },
+    "FavoriteProcessResource": {
+      "description": "A favorite process identifier.",
+      "properties": {
+        "systemData": {
+          "description": "The system metadata relating to this resource",
+          "$ref": "#/definitions/SystemData"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FavoriteProcessProperties",
+          "description": "Properties of a favorite process identifier."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "FavoriteProcessProperties": {
+      "description": "Properties of a favorite process identifier.",
+      "properties": {
+        "actualProcessName": {
+          "type": "string",
+          "description": "The actual name of the favorite process. It will be equal to resource name except for the scenario that the process name contains characters that are not allowed in the resource name."
+        }
+      },
+      "required": [
+        "actualProcessName"
+      ]
+    },
+    "AnalysisResultListResult": {
+      "description": "A list of Analysis Results. It will only contain one element as all the data will be nested in a singleton object.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnalysisResultSingletonResource"
+          },
+          "description": "The list of Analysis Results."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if value contains incomplete list of results."
+        }
+      }
+    },
+    "AnalysisResultSingletonResource": {
+      "description": "The Analysis Result Singleton Resource.",
+      "properties": {
+        "systemData": {
+          "description": "The system metadata relating to this resource",
+          "$ref": "#/definitions/SystemData"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AnalysisResultSingletonResourceProperties",
+          "description": "Properties of an Analysis Result."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AnalysisResultSingletonResourceProperties": {
+      "description": "The properties of Analysis Result resource.",
+      "discriminator": "analysisResultType",
+      "required": [
+        "analysisResultType"
+      ],
+      "properties": {
+        "grade": {
+          "$ref": "#/definitions/TestGrade",
+          "description": "The grade of the test."
+        },
+        "analysisResultType": {
+          "description": "Type of the Analysis Result.",
+          "enum": [
+            "ScriptExecution",
+            "Reliability",
+            "CPUUtilization",
+            "MemoryUtilization",
+            "CPURegression",
+            "MemoryRegression",
+            "TestAnalysis"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "analysisResultType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ScriptExecutionResultSingletonResourceProperties": {
+      "description": "The properties of Script Execution Result.",
+      "x-ms-discriminator-value": "ScriptExecution",
+      "properties": {
+        "scriptExecutionResults": {
+          "description": "The result array data.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScriptExecutionResult"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalysisResultSingletonResourceProperties"
+        }
+      ]
+    },
+    "ScriptExecutionResult": {
+      "description": "The Script Execution Result.",
+      "properties": {
+        "scriptName": {
+          "type": "string",
+          "description": "Name of script."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of script execution."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of script execution."
+        },
+        "exitCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Exit code."
+        },
+        "timedOut": {
+          "type": "boolean",
+          "description": "Whether the script execution is timed out."
+        }
+      }
+    },
+    "ReliabilityResultSingletonResourceProperties": {
+      "description": "The properties of Reliability Result.",
+      "x-ms-discriminator-value": "Reliability",
+      "properties": {
+        "reliabilityResults": {
+          "description": "The result array data.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReliabilityResult"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalysisResultSingletonResourceProperties"
+        }
+      ]
+    },
+    "ReliabilityResult": {
+      "description": "The Reliability Result.",
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "description": "File name."
+        },
+        "launchCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of number of launches."
+        },
+        "crashCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of number of crashes."
+        },
+        "hangCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of number of hangs."
+        },
+        "regressionGrade": {
+          "$ref": "#/definitions/TestGrade",
+          "description": "The regression grade."
+        },
+        "crashRegressionGrade": {
+          "$ref": "#/definitions/TestGrade",
+          "description": "The statistic regression grade for crash signal."
+        },
+        "crashRegressionTestDetails": {
+          "$ref": "#/definitions/RegressionTestDetails",
+          "description": "Details related to the crash regression analysis."
+        },
+        "hangRegressionGrade": {
+          "$ref": "#/definitions/TestGrade",
+          "description": "The statistic regression grade for hang signal."
+        },
+        "hangRegressionTestDetails": {
+          "$ref": "#/definitions/RegressionTestDetails",
+          "description": "Details related to the hang regression analysis."
+        }
+      }
+    },
+    "RegressionTestDetails": {
+      "description": "The details of a regression test.",
+      "properties": {
+        "diff": {
+          "type": "number",
+          "format": "double",
+          "description": "Difference between the two datasets being analyzed."
+        },
+        "isRegressed": {
+          "type": "boolean",
+          "description": "Indicates if a regression was inferred."
+        }
+      }
+    },
+    "CPUUtilizationResultSingletonResourceProperties": {
+      "description": "The properties of CPU Utilization Result.",
+      "x-ms-discriminator-value": "CPUUtilization",
+      "properties": {
+        "cpuUtilizationResults": {
+          "description": "The result array data.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UtilizationResult"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalysisResultSingletonResourceProperties"
+        }
+      ]
+    },
+    "MemoryUtilizationResultSingletonResourceProperties": {
+      "description": "The properties of Memory Utilization Result.",
+      "x-ms-discriminator-value": "MemoryUtilization",
+      "properties": {
+        "memoryUtilizationResults": {
+          "description": "The result array data.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UtilizationResult"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalysisResultSingletonResourceProperties"
+        }
+      ]
+    },
+    "UtilizationResult": {
+      "description": "The Utilization Result.",
+      "properties": {
+        "process": {
+          "type": "string",
+          "description": "Process name, or '_total' for all processes"
+        },
+        "upperBound": {
+          "$ref": "#/definitions/UtilizationBound",
+          "description": "Upper bound"
+        },
+        "lowerBound": {
+          "$ref": "#/definitions/UtilizationBound",
+          "description": "Lower bound"
+        },
+        "utilization": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UtilizationEntry"
+          },
+          "description": "Utilization data"
+        }
+      }
+    },
+    "UtilizationBound": {
+      "description": "The bound of a utilization result.",
+      "properties": {
+        "percentile": {
+          "type": "number",
+          "format": "double",
+          "description": "The percentile of the bound."
+        },
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "The value of the bound."
+        }
+      }
+    },
+    "UtilizationEntry": {
+      "description": "The utilization entry.",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp."
+        },
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "The value."
+        }
+      }
+    },
+    "CPURegressionResultSingletonResourceProperties": {
+      "description": "The properties of CPU Regression Result.",
+      "x-ms-discriminator-value": "CPURegression",
+      "properties": {
+        "cpuRegressionResults": {
+          "description": "The result array data.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegressionResult"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalysisResultSingletonResourceProperties"
+        }
+      ]
+    },
+    "MemoryRegressionResultSingletonResourceProperties": {
+      "description": "The properties of Memory Regression Result.",
+      "x-ms-discriminator-value": "MemoryRegression",
+      "properties": {
+        "memoryRegressionResults": {
+          "description": "The result array data.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegressionResult"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalysisResultSingletonResourceProperties"
+        }
+      ]
+    },
+    "RegressionResult": {
+      "description": "The regression result.",
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "description": "FileName of the binary being analyzed."
+        },
+        "grade": {
+          "$ref": "#/definitions/TestGrade",
+          "description": "The grade of the test."
+        },
+        "details": {
+          "type": "string",
+          "description": "Message that facilitates debugging a particular regression, if any was inferred."
+        },
+        "diff": {
+          "type": "number",
+          "format": "double",
+          "description": "Difference between the two datasets being analyzed."
+        },
+        "isRegressed": {
+          "type": "boolean",
+          "description": "Indicates if a regression was inferred."
+        }
+      }
+    },
+    "TestAnalysisResultSingletonResourceProperties": {
+      "description": "The properties of Test Analysis Result.",
+      "x-ms-discriminator-value": "TestAnalysis",
+      "properties": {
+        "testAnalysisResult": {
+          "$ref": "#/definitions/TestAnalysisResult",
+          "description": "The result of test analysis."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalysisResultSingletonResourceProperties"
+        }
+      ]
+    },
+    "TestAnalysisResult": {
+      "description": "The test analysis result.",
+      "properties": {
+        "blobData": {
+          "type": "string",
+          "description": "The data to provide more failure analysis information."
+        },
+        "testAnalysisStatus": {
+          "type": "string",
+          "description": "The status of the analysis.",
+          "enum": [
+            "None",
+            "Analyzing",
+            "Completed",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "testAnalysisStatus",
+            "modelAsString": true
+          }
+        },
+        "identifiedFailures": {
+          "description": "The array of identified failures.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IdentifiedFailure"
+          }
+        }
+      }
+    },
+    "IdentifiedFailure": {
+      "description": "The failure identified.",
+      "properties": {
+        "failureId": {
+          "type": "string",
+          "description": "The Failure Id."
+        },
+        "category": {
+          "type": "string",
+          "description": "The category of the failure.",
+          "enum": [
+            "None",
+            "Unidentified",
+            "Package",
+            "OSUpdate",
+            "Infrastructure"
+          ],
+          "x-ms-enum": {
+            "name": "category",
+            "modelAsString": true
+          }
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Message that shows information about the failure."
+        },
+        "guidance": {
+          "type": "string",
+          "description": "Guidance that shows what the customer needs to do for this failure."
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "A list of operations supported by the resource provider.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of operations supported by the Test Base resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "Operation": {
+      "description": "REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "readOnly": true,
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that describes the operation.",
+          "properties": {
+            "provider": {
+              "description": "The resource provider name: Microsoft.TestBase.",
+              "readOnly": true,
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: read, write, delete, listPackages, etc.",
+              "readOnly": true,
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource type on which the operation is performed.",
+              "readOnly": true,
+              "type": "string"
+            },
+            "description": {
+              "description": "Friendly name of the operation.",
+              "readOnly": true,
+              "type": "string"
+            }
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Extra properties of the operation.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OperationProperties": {
+      "description": "Operation properties.",
+      "type": "object",
+      "properties": {}
+    },
+    "EmailEventListResult": {
+      "description": "A list of email events.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EmailEventResource"
+          },
+          "description": "The list of email events."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if value contains incomplete list of results."
+        }
+      }
+    },
+    "EmailEventResource": {
+      "description": "The email event resource.",
+      "properties": {
+        "systemData": {
+          "description": "The system metadata relating to this resource",
+          "$ref": "#/definitions/SystemData"
+        },
+        "properties": {
+          "$ref": "#/definitions/EmailEventProperties",
+          "x-ms-client-flatten": true,
+          "description": "Email Event properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "EmailEventProperties": {
+      "description": "The Email Event properties.",
+      "properties": {
+        "eventId": {
+          "type": "string",
+          "description": "The identifier of the email event."
+        },
+        "eventName": {
+          "type": "string",
+          "description": "The name of the email event."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the email event."
+        }
+      }
+    },
+    "CustomerEventListResult": {
+      "description": "A list of Test Base Customer Events.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomerEventResource"
+          },
+          "description": "The list of Test Base Customer Events."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if value contains incomplete list of results."
+        }
+      }
+    },
+    "CustomerEventResource": {
+      "description": "The Customer Notification Event resource.",
+      "properties": {
+        "systemData": {
+          "description": "The system metadata relating to this resource",
+          "$ref": "#/definitions/SystemData"
+        },
+        "properties": {
+          "$ref": "#/definitions/CustomerEventProperties",
+          "x-ms-client-flatten": true,
+          "description": "Customer Notification Event properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CustomerEventProperties": {
+      "description": "A notification events subscribed to be received by customer.",
+      "properties": {
+        "eventName": {
+          "type": "string",
+          "description": "The name of the event subscribed to."
+        },
+        "receivers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NotificationEventReceiver"
+          },
+          "description": "The notification event receivers."
+        }
+      },
+      "required": [
+        "eventName",
+        "receivers"
+      ]
+    },
+    "NotificationEventReceiver": {
+      "description": "A notification event receivers.",
+      "properties": {
+        "receiverType": {
+          "type": "string",
+          "description": "The type of the notification event receiver."
+        },
+        "receiverValue": {
+          "description": "The notification event receiver value.",
+          "$ref": "#/definitions/NotificationReceiverValue"
+        }
+      }
+    },
+    "NotificationReceiverValue": {
+      "description": "A notification event receiver value.",
+      "properties": {
+        "userObjectReceiverValue": {
+          "description": "The user object receiver value.",
+          "$ref": "#/definitions/UserObjectReceiverValue"
+        },
+        "subscriptionReceiverValue": {
+          "description": "The user object receiver value.",
+          "$ref": "#/definitions/SubscriptionReceiverValue"
+        },
+        "distributionGroupListReceiverValue": {
+          "description": "The user object receiver value.",
+          "$ref": "#/definitions/DistributionGroupListReceiverValue"
+        }
+      }
+    },
+    "UserObjectReceiverValue": {
+      "description": "The user object receiver value.",
+      "properties": {
+        "userObjectIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "user object ids."
+        }
+      }
+    },
+    "SubscriptionReceiverValue": {
+      "description": "The subscription role receiver value.",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "The subscription id of the notification receiver."
+        },
+        "subscriptionName": {
+          "type": "string",
+          "description": "The subscription name of the notification receiver."
+        },
+        "role": {
+          "type": "string",
+          "description": "The role of the notification receiver."
+        }
+      }
+    },
+    "DistributionGroupListReceiverValue": {
+      "description": "The user object receiver value.",
+      "properties": {
+        "distributionGroups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of distribution groups."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to be used with the HTTP request."
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription ID. This is a GUID-formatted string."
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The name of the resource group that contains the resource."
+    },
+    "TestBaseAccountNameParameter": {
+      "name": "testBaseAccountName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The resource name of the Test Base Account."
+    },
+    "PackageNameParameter": {
+      "name": "packageName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The resource name of the Test Base Package."
+    },
+    "FavoriteProcessResourceNameParameter": {
+      "name": "favoriteProcessResourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The resource name of a favorite process in a package. If the process name contains characters that are not allowed in Azure Resource Name, we use 'actualProcessName' in request body to submit the name."
+    },
+    "TestResultNameParameter": {
+      "name": "testResultName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The Test Result Name. It equals to {osName}-{TestResultId} string."
+    },
+    "OSUpdateTypeParameter": {
+      "name": "osUpdateType",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "SecurityUpdate",
+        "FeatureUpdate"
+      ],
+      "x-ms-enum": {
+        "name": "osUpdateType",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method",
+      "description": "The type of the OS Update."
+    },
+    "AnalysisResultTypeParameter": {
+      "name": "analysisResultType",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "ScriptExecution",
+        "Reliability",
+        "MemoryUtilization",
+        "CPUUtilization",
+        "MemoryRegression",
+        "CPURegression",
+        "TestAnalysis"
+      ],
+      "x-ms-enum": {
+        "name": "analysisResultType",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method",
+      "description": "The type of the Analysis Result of a Test Result."
+    },
+    "AnalysisResultNameParameter": {
+      "name": "analysisResultName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "scriptExecution",
+        "reliability",
+        "memoryUtilization",
+        "cpuUtilization",
+        "memoryRegression",
+        "cpuRegression",
+        "testAnalysis"
+      ],
+      "x-ms-enum": {
+        "name": "analysisResultName",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method",
+      "description": "The name of the Analysis Result of a Test Result."
+    },
+    "FilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Odata filter"
+    },
+    "TestBaseAccountIncludeSoftDeletedParameter": {
+      "name": "getDeleted",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method",
+      "description": "The flag indicating if we need to include the Test Base Accounts which were soft deleted before."
+    },
+    "TestBaseAccountRestoreSoftDeletedParameter": {
+      "name": "restore",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method",
+      "description": "The flag indicating if we would like to restore the Test Base Accounts which were soft deleted before."
+    },
+    "CustomerEventNameParameter": {
+      "name": "customerEventName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The resource name of the Test Base Customer event."
+    }
+  }
+}

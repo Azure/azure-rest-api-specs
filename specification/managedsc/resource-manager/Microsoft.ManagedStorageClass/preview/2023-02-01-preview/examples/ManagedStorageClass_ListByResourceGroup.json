@@ -1,0 +1,42 @@
+{
+  "operationId": "ManagedStorageClass_ListByResourceGroup",
+  "title": "ManagedStorageClass_ListByResourceGroup_0",
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "example",
+    "api-version": "2023-02-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/example/providers/Microsoft.ManagedStorageClass/managedstorageclass/testrwx",
+            "name": "testrwx",
+            "type": "microsoft.managedstorageclass/managedstorageclass",
+            "location": "westus",
+            "extendedLocation": {
+              "name": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/example/providers/Microsoft.ExtendedLocation/customLocations/example",
+              "type": "CustomLocation"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "performance": "Basic",
+              "storageClassType": "RWX",
+              "templateParameters": {
+                "backingStorageClassName": "default"
+              },
+              "accessMode": [
+                "RWO",
+                "RWX"
+              ],
+              "allowVolumeExpansion": "Allow",
+              "provisioner": "rwx.csi.microsoft.com",
+              "volumeBindingMode": "Immediate"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

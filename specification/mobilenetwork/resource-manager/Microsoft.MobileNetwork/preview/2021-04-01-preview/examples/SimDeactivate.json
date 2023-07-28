@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "api-version": "2021-04-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "testResourceGroupName",
+    "simName": "testSim"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testSim",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/sims/testSim",
+        "type": "Microsoft.MobileNetwork/sims",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "location": "testLocation",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "activationState": "Deactivated",
+          "integratedCircuitCardIdentifier": "8900000000000000000",
+          "internationalMobileSubscriberIdentity": "00000",
+          "mobileNetwork": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork"
+          },
+          "deviceType": "Video camera",
+          "simPolicy": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/simPolicies/MySimPolicy"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.MobileNetwork/locations/testLocation/operationStatuses/testOperation?api-version=2021-04-01-preview"
+      },
+      "body": {
+        "name": "testSim",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/sims/testSim",
+        "type": "Microsoft.MobileNetwork/sims",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "location": "testLocation",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "activationState": "Deactivating",
+          "integratedCircuitCardIdentifier": "8900000000000000000",
+          "internationalMobileSubscriberIdentity": "00000",
+          "mobileNetwork": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork"
+          },
+          "deviceType": "Video camera",
+          "simPolicy": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/simPolicies/MySimPolicy"
+          }
+        }
+      }
+    }
+  }
+}

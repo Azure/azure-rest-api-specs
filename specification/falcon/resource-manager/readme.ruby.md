@@ -2,10 +2,12 @@
 
 These settings apply only when `--ruby` is specified on the command line.
 
-```yaml
+```yaml $(ruby)
+namespace: "Azure::Falcon::Mgmt::V2020_09_02_preview"
 package-name: azure_mgmt_falcon
-package-version: 2020-01-20-preview
+package-version: 2020-09-02-preview
 azure-arm: true
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_falcon/lib
 ```
 
 ### Tag: package-2020-01-20-preview and ruby
@@ -15,5 +17,4 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 ```yaml $(tag) == 'package-2020-01-20-preview' && $(ruby)
 namespace: "Azure::Falcon::Mgmt::V2020_01_20_preview"
-output-folder: $(ruby-sdks-folder)/management/azure_mgmt_falcon/lib
 ```

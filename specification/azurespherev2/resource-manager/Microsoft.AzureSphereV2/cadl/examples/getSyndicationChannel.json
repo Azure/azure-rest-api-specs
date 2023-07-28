@@ -1,0 +1,33 @@
+{
+  "operationId": "SyndicationChannels_Get",
+  "title": "SyndicationChannels_Get",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "MyResourceGroup1",
+    "catalogName": "MyCatalog1",
+    "syndicationChannelName": "MySyndicationChannel1",
+    "serialNumber": "active",
+    "api-version": "2022-09-01-privatepreview"
+  },
+  "responses": {
+    "200": {
+      "description": "The syndication channel details.",
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphereV2/catalogs/MyCatalog1/syndicationChannels/MySyndicationChannel1",
+        "name": "MySyndicationChannel1",
+        "type": "Microsoft.AzureSphereV2/catalogs/syndicationChannels",
+        "properties": {
+          "compatibilityData": {
+            "manufacturerName": "DeviceManufacturer",
+            "modelName": "DeviceModel"
+          },
+          "platform": "imx8ulp",
+          "dependencyChannels": [
+            "imx8ulp-daily"
+          ]
+        },
+        "location": "westus3"
+      }
+    }
+  }
+}

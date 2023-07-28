@@ -1,0 +1,26 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
+    "virtualMachineName": "myMachine",
+    "api-version": "2022-07-15-preview",
+    "extensionUpgradeParameters": {
+      "extensionTargets": {
+        "Microsoft.Compute.CustomScriptExtension": {
+          "targetVersion": "1.10"
+        },
+        "Microsoft.Azure.Monitoring": {
+          "targetVersion": "2.0"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.ConnectedVMwarevSphere/locations/WESTEUROPE/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2022-07-15-preview"
+      }
+    }
+  }
+}

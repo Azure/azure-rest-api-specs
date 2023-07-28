@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "subscriptionId": "476f61a4-952c-422a-b4db-568a828f35df",
+    "resourceGroupName": "contoso-rg1",
+    "api-version": "2020-12-16-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/476f61a4-952c-422a-b4db-568a828f35df/resourceGroups/contoso-rg1/providers/Microsoft.TestBase/testBaseAccounts/contoso-testBaseAccount1",
+            "name": "contoso-testBaseAccount1",
+            "type": "Microsoft.TestBase/testBaseAccounts",
+            "location": "westus",
+            "tags": {},
+            "properties": {
+              "provisioningState": "Succeeded",
+              "sku": {
+                "name": "S0",
+                "tier": "Standard",
+                "capabilities": [
+                  {
+                    "name": "SLA",
+                    "value": "99.9%"
+                  },
+                  {
+                    "name": "maximumPackageCount",
+                    "value": "5"
+                  },
+                  {
+                    "name": "packageMaximumRunSeconds",
+                    "value": "3600"
+                  }
+                ]
+              },
+              "accessLevel": "EarlyAccess"
+            }
+          },
+          {
+            "id": "/subscriptions/476f61a4-952c-422a-b4db-568a828f35df/resourceGroups/contoso-rg2/providers/Microsoft.TestBase/testBaseAccounts/contoso-testBaseAccount2",
+            "name": "contoso-testBaseAccount2",
+            "type": "Microsoft.TestBase/testBaseAccounts",
+            "location": "eastus",
+            "tags": {},
+            "properties": {
+              "provisioningState": "Succeeded",
+              "sku": {
+                "name": "S0",
+                "tier": "Standard",
+                "capabilities": [
+                  {
+                    "name": "SLA",
+                    "value": "99.999%"
+                  },
+                  {
+                    "name": "maximumPackageCount",
+                    "value": "100"
+                  },
+                  {
+                    "name": "packageMaximumRunSeconds",
+                    "value": "10800"
+                  }
+                ]
+              },
+              "accessLevel": "EarlyAccess"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

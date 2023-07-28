@@ -1,0 +1,35 @@
+namespace Microsoft.AzureSphereV2;
+
+using Azure.ResourceManager;
+using Cadl.Http;
+using Cadl.Rest;
+
+@doc("An Azure Sphere artifact is a binary can be deployed to an Azure Sphere device.")
+@parentResource(Catalog)
+model Artifact is TrackedResource<ArtifactProperties> {
+  @doc("Name of the artifact")
+  @key("artifactName")
+  @segment("artifacts")
+  @visibility("read")
+  @path()
+  name: string;
+}
+
+@doc("The properties of artifact.")
+model ArtifactProperties is ResourceProperties {
+  @doc("Optional: The Sha256 hash of the artifact. If provided it will be used to verify the contents retrieved from the provided Uri.")
+  @visibility("read, write")
+  sha256Hash?: string;
+
+  @doc("The Azure Blob SAS Uri of the artifact.")
+  @visibility("read, write")
+  sasUri: string;
+
+  @doc("The artifact type.")
+  @visibility("read, write")
+  artifactType: string;
+}
+
+@armResourceOperations(Artifact)
+interface Artifacts extends ResourceRead<Artifact>, ResourceCreate<Artifact>, ResourceUpdateNoProperties<Artifact>, ResourceDelete<Artifact>, ResourceCollectionOperations<Artifact> {
+}

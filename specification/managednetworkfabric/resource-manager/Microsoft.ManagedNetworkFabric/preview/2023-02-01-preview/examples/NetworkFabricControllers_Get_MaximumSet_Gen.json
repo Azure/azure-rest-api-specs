@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "subscriptionId": "subscriptionId",
+    "resourceGroupName": "resourceGroupName",
+    "api-version": "2023-02-01-preview",
+    "networkFabricControllerName": "networkFabricControllerName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "infrastructureServices": {
+            "ipv4AddressSpaces": [
+              "172.253.0.0/19"
+            ]
+          },
+          "workloadServices": {
+            "ipv4AddressSpaces": [
+              "172.253.28.0/22"
+            ],
+            "ipv6AddressSpaces": []
+          },
+          "managedResourceGroupConfiguration": {
+            "name": "managedResourceGroupName",
+            "location": "eastus"
+          },
+          "networkFabricIds": [],
+          "infrastructureExpressRouteConnections": [
+            {
+              "expressRouteCircuitId": "/subscriptions/xxxxx/resourceGroups/resourceGroupName/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName"
+            }
+          ],
+          "workloadExpressRouteConnections": [
+            {
+              "expressRouteCircuitId": "/subscriptions/xxxxx/resourceGroups/resourceGroupName/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName"
+            }
+          ]
+        },
+        "location": "eastus",
+        "id": "/subscriptions/xxxxx/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/networkFabricControllers/networkFabricControllerName",
+        "name": "NetworkFabricName",
+        "type": "microsoft.managednetworkfabric/networkfabriccontrollers",
+        "systemData": {
+          "createdBy": "user@company.com",
+          "createdByType": "User",
+          "createdAt": "2022-09-16T05:01:43.008Z",
+          "lastModifiedBy": "User",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-09-16T05:01:43.008Z"
+        }
+      }
+    }
+  }
+}

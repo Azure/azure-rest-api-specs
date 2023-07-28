@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "api-version": "2022-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "monitorName": "myMonitor",
+    "ruleSetName": "default",
+    "requestBody": {
+      "properties": {
+        "logRules": {
+          "sendAadLogs": false,
+          "sendSubscriptionLogs": true,
+          "sendResourceLogs": true,
+          "filteringTags": [
+            {
+              "name": "Environment",
+              "value": "Prod",
+              "action": "Include"
+            },
+            {
+              "name": "Environment",
+              "value": "Dev",
+              "action": "Exclude"
+            }
+          ]
+        },
+        "metricRules": {
+          "filteringTags": []
+        },
+        "automuting": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Datadog/monitors/myMonitor/tagRules/default",
+        "type": "Microsoft.Datadog/monitors/tagRules",
+        "properties": {
+          "logRules": {
+            "sendAadLogs": false,
+            "sendSubscriptionLogs": true,
+            "sendResourceLogs": true,
+            "filteringTags": [
+              {
+                "name": "Environment",
+                "value": "Prod",
+                "action": "Include"
+              },
+              {
+                "name": "Environment",
+                "value": "Dev",
+                "action": "Exclude"
+              }
+            ]
+          },
+          "metricRules": {
+            "filteringTags": []
+          },
+          "automuting": true
+        }
+      }
+    }
+  }
+}

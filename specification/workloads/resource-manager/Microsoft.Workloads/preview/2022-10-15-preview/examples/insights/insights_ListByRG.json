@@ -1,0 +1,388 @@
+{
+  "parameters": {
+    "api-version": "2022-10-15-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroup1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.Workloads/insights/InsightInstance1",
+            "name": "InsightInstance1",
+            "type": "Microsoft.Workloads/insights",
+            "location": "westus",
+            "tags": {
+              "key": "value"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "errors": [
+                {
+                  "code": "0000",
+                  "message": "Error message",
+                  "target": "",
+                  "details": "Error details",
+                  "innerError": "Error stack trace"
+                }
+              ],
+              "workloadType": "WorkloadType1",
+              "workloadProvider": "WorkloadProvider1",
+              "resourcesDiscoveryDataFeeds": [
+                {
+                  "name": "resourcesDiscoveryDataFeed1",
+                  "dataFeedType": "AzureLogAnalyticsDataFeed",
+                  "dataFeedClass": "Raw",
+                  "details": {
+                    "query": "kustoBasedQuery1"
+                  },
+                  "dataStore": {
+                    "workspaceArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.operationalinsights/workspaces/myWorkspace1",
+                    "dataStoreType": "AzureLogAnalyticsDataStore"
+                  },
+                  "trigger": {
+                    "granularity": "seconds",
+                    "value": 60,
+                    "startFrom": "2021-08-19T15:10:46.196Z",
+                    "triggerType": "ScheduleTrigger"
+                  },
+                  "schema": {
+                    "datasets": [
+                      {
+                        "name": "dataset11",
+                        "impactCategory": "impactCategory1",
+                        "datasetType": "StaticDataset",
+                        "resourceIdColumns": [
+                          {
+                            "name": "resourceIdColumnName11",
+                            "alias": "columnAlias",
+                            "columnType": "string"
+                          }
+                        ],
+                        "dimensionColumns": [
+                          {
+                            "name": "dimensionColumnName11",
+                            "alias": "columnAlias",
+                            "columnType": "string"
+                          },
+                          {
+                            "name": "dimensionColumnName12",
+                            "alias": "columnAlias",
+                            "columnType": "string"
+                          }
+                        ],
+                        "timestampColumn": {
+                          "name": "timestampColumnName1",
+                          "alias": "columnAlias",
+                          "columnType": "timestamp"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "telemetryDataFeeds": [
+                {
+                  "name": "telemetryDataFeed1",
+                  "dataFeedType": "AzureLogAnalyticsDataFeed",
+                  "dataFeedClass": "Raw",
+                  "details": {
+                    "query": "kustoBasedQuery2"
+                  },
+                  "dataStore": {
+                    "workspaceArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.operationalinsights/workspaces/myWorkspace2",
+                    "dataStoreType": "AzureLogAnalyticsDataStore"
+                  },
+                  "trigger": {
+                    "granularity": "seconds",
+                    "value": 60,
+                    "startFrom": "2021-08-19T15:10:46.196Z",
+                    "triggerType": "ScheduleTrigger"
+                  },
+                  "schema": {
+                    "datasets": [
+                      {
+                        "name": "dataset21",
+                        "impactCategory": "impactCategory2",
+                        "datasetType": "StaticDataset",
+                        "resourceIdColumns": [
+                          {
+                            "name": "resourceIdColumnName21",
+                            "alias": "columnAlias",
+                            "columnType": "string"
+                          },
+                          {
+                            "name": "resourceIdColumnName22",
+                            "alias": "columnAlias",
+                            "columnType": "string"
+                          }
+                        ],
+                        "dimensionColumns": [
+                          {
+                            "name": "dimensionColumnName21",
+                            "alias": "columnAlias",
+                            "columnType": "string"
+                          },
+                          {
+                            "name": "dimensionColumnName22",
+                            "alias": "columnAlias",
+                            "columnType": "string"
+                          }
+                        ],
+                        "timestampColumn": {
+                          "name": "timestampColumnName2",
+                          "alias": "columnAlias",
+                          "columnType": "date"
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "telemetryDataFeed2",
+                  "dataFeedType": "AzureLogAnalyticsDataFeed",
+                  "dataFeedClass": "Anomaly",
+                  "details": {
+                    "query": "kustoBasedAnomalyQuery3"
+                  },
+                  "dataStore": {
+                    "workspaceArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.operationalinsights/workspaces/myWorkspace3",
+                    "dataStoreType": "AzureLogAnalyticsDataStore"
+                  },
+                  "trigger": {
+                    "granularity": "seconds",
+                    "value": 120,
+                    "startFrom": "2021-08-19T15:10:46.196Z",
+                    "triggerType": "ScheduleTrigger"
+                  },
+                  "schema": {
+                    "datasets": [
+                      {
+                        "name": "dataset31",
+                        "impactCategory": "impactCategory3",
+                        "datasetType": "StaticDataset",
+                        "resourceIdColumns": [
+                          {
+                            "name": "resourceIdColumnName31",
+                            "alias": "columnAlias",
+                            "columnType": "string"
+                          }
+                        ],
+                        "dimensionColumns": [
+                          {
+                            "name": "dimensionColumnName31",
+                            "alias": "columnAlias",
+                            "columnType": "string"
+                          },
+                          {
+                            "name": "dimensionColumnName32",
+                            "alias": "columnAlias",
+                            "columnType": "string"
+                          }
+                        ],
+                        "timestampColumn": {
+                          "name": "timestampColumnName3",
+                          "alias": "columnAlias",
+                          "columnType": "date"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "outputDataStores": [
+                {
+                  "workspaceArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.operationalinsights/workspaces/myWorkspace",
+                  "dataStoreType": "AzureLogAnalyticsDataStore"
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.Workloads/insights/InsightInstance2",
+            "name": "InsightInstance2",
+            "type": "Microsoft.Workloads/insights",
+            "location": "westus",
+            "tags": {
+              "key": "value"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "workloadType": "WorkloadType2",
+              "workloadProvider": "WorkloadProvider2",
+              "resourcesDiscoveryDataFeeds": [
+                {
+                  "name": "resourcesDiscoveryDataFeed1",
+                  "dataFeedType": "AzureLogAnalyticsDataFeed",
+                  "dataFeedClass": "Raw",
+                  "details": {
+                    "query": "kustoBasedQuery1"
+                  },
+                  "dataStore": {
+                    "workspaceArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.operationalinsights/workspaces/myWorkspace1",
+                    "dataStoreType": "AzureLogAnalyticsDataStore"
+                  },
+                  "trigger": {
+                    "granularity": "seconds",
+                    "value": 60,
+                    "startFrom": "2021-08-19T15:10:46.196Z",
+                    "triggerType": "ScheduleTrigger"
+                  },
+                  "schema": {
+                    "datasets": [
+                      {
+                        "name": "dataset11",
+                        "impactCategory": "impactCategory1",
+                        "datasetType": "StaticDataset",
+                        "resourceIdColumns": [
+                          {
+                            "name": "resourceIdColumnName11",
+                            "alias": "columnAlias",
+                            "columnType": "string"
+                          }
+                        ],
+                        "dimensionColumns": [
+                          {
+                            "name": "dimensionColumnName11",
+                            "alias": "columnAlias",
+                            "columnType": "string"
+                          },
+                          {
+                            "name": "dimensionColumnName12",
+                            "alias": "columnAlias",
+                            "columnType": "string"
+                          }
+                        ],
+                        "timestampColumn": {
+                          "name": "timestampColumnName1",
+                          "alias": "columnAlias",
+                          "columnType": "timestamp"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "telemetryDataFeeds": [
+                {
+                  "name": "telemetryDataFeed1",
+                  "dataFeedType": "AzureLogAnalyticsDataFeed",
+                  "dataFeedClass": "Raw",
+                  "details": {
+                    "query": "kustoBasedQuery2"
+                  },
+                  "dataStore": {
+                    "workspaceArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.operationalinsights/workspaces/myWorkspace2",
+                    "dataStoreType": "AzureLogAnalyticsDataStore"
+                  },
+                  "trigger": {
+                    "granularity": "seconds",
+                    "value": 60,
+                    "startFrom": "2021-08-19T15:10:46.196Z",
+                    "triggerType": "ScheduleTrigger"
+                  },
+                  "schema": {
+                    "datasets": [
+                      {
+                        "name": "dataset21",
+                        "impactCategory": "impactCategory2",
+                        "datasetType": "StaticDataset",
+                        "resourceIdColumns": [
+                          {
+                            "name": "resourceIdColumnName21",
+                            "alias": "columnAlias",
+                            "columnType": "string"
+                          },
+                          {
+                            "name": "resourceIdColumnName22",
+                            "alias": "columnAlias",
+                            "columnType": "string"
+                          }
+                        ],
+                        "dimensionColumns": [
+                          {
+                            "name": "dimensionColumnName21",
+                            "alias": "columnAlias",
+                            "columnType": "string"
+                          },
+                          {
+                            "name": "dimensionColumnName22",
+                            "alias": "columnAlias",
+                            "columnType": "string"
+                          }
+                        ],
+                        "timestampColumn": {
+                          "name": "timestampColumnName2",
+                          "alias": "columnAlias",
+                          "columnType": "date"
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "details": {
+                    "query": "kustoBasedAnomalyQuery3"
+                  },
+                  "dataStore": {
+                    "workspaceArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.operationalinsights/workspaces/myWorkspace3",
+                    "dataStoreType": "AzureLogAnalyticsDataStore"
+                  },
+                  "name": "telemetryDataFeed2",
+                  "dataFeedType": "AzureLogAnalyticsDataFeed",
+                  "dataFeedClass": "Anomaly",
+                  "trigger": {
+                    "granularity": "seconds",
+                    "value": 120,
+                    "startFrom": "2021-08-19T15:10:46.196Z",
+                    "triggerType": "ScheduleTrigger"
+                  },
+                  "schema": {
+                    "datasets": [
+                      {
+                        "name": "dataset31",
+                        "impactCategory": "impactCategory",
+                        "datasetType": "StaticDataset",
+                        "resourceIdColumns": [
+                          {
+                            "name": "resourceIdColumnName31",
+                            "alias": "columnAlias",
+                            "columnType": "string"
+                          }
+                        ],
+                        "dimensionColumns": [
+                          {
+                            "name": "dimensionColumnName31",
+                            "alias": "columnAlias",
+                            "columnType": "string"
+                          },
+                          {
+                            "name": "dimensionColumnName32",
+                            "alias": "columnAlias",
+                            "columnType": "string"
+                          }
+                        ],
+                        "timestampColumn": {
+                          "name": "timestampColumnName3",
+                          "alias": "columnAlias",
+                          "columnType": "date"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "outputDataStores": [
+                {
+                  "workspaceArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.operationalinsights/workspaces/myWorkspace",
+                  "dataStoreType": "AzureLogAnalyticsDataStore"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

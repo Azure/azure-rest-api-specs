@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2022-03-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "mobileNetworkName": "testMobileNetworkName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.MobileNetwork/sims/testSim"
+          }
+        ],
+        "nextLink": "nextLink"
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.MobileNetwork/locations/testLocation/operationStatuses/testOperation?api-version=2022-03-01-preview"
+      },
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.MobileNetwork/sims/testSim"
+          }
+        ],
+        "nextLink": "nextLink"
+      }
+    }
+  }
+}

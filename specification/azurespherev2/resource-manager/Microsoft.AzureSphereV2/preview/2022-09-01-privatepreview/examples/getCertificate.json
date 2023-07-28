@@ -1,0 +1,26 @@
+{
+  "operationId": "Certificates_Get",
+  "title": "Certificates_Get",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "MyResourceGroup1",
+    "catalogName": "MyCatalog1",
+    "serialNumber": "active",
+    "api-version": "2022-09-01-privatepreview"
+  },
+  "responses": {
+    "200": {
+      "description": "The active certificate.",
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphereV2/catalogs/MyCatalog1/certificates/CertificateSerialNumber1",
+        "name": "CertificateSerialNumber1",
+        "type": "Microsoft.AzureSphereV2/catalogs/certificates",
+        "properties": {
+          "certificate": "ABase64EncodedCertificate",
+          "notBefore": "2022-06-23T21:25:37.258",
+          "notAfter": "2022-06-23T21:25:37.258"
+        }
+      }
+    }
+  }
+}

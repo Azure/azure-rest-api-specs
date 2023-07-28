@@ -1,0 +1,583 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-09-22-privatepreview",
+    "title": "oryx",
+    "description": "Oryx service that enables customers to build and deploy code from source into containers without defining a dockerfile"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Oryx/worker/{workerName}": {
+      "get": {
+        "tags": [
+          "Workers"
+        ],
+        "operationId": "Workers_Get",
+        "description": "Gets the worker.",
+        "x-ms-examples": {
+          "Get a worker": {
+            "$ref": "./examples/WorkerGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the worker.",
+            "schema": {
+              "$ref": "#/definitions/Worker"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Workers"
+        ],
+        "operationId": "Workers_Delete",
+        "description": "Deletes the worker.",
+        "x-ms-examples": {
+          "Delete a worker": {
+            "$ref": "./examples/WorkerDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "202": {
+            "description": "Accepted - Returns this status until the asynchronous operation has completed."
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "put": {
+        "tags": [
+          "Workers"
+        ],
+        "operationId": "Workers_CreateOrUpdate",
+        "description": "Creates a new worker.",
+        "x-ms-examples": {
+          "Create or update worker": {
+            "$ref": "./examples/WorkerCreate.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Worker"
+            },
+            "description": "Parameters supplied to the create or update a worker."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created - Returns information about the worker, including provisioning status.",
+            "schema": {
+              "$ref": "#/definitions/Worker"
+            }
+          },
+          "201": {
+            "description": "Created - Returns information about the worker, including provisioning status.",
+            "schema": {
+              "$ref": "#/definitions/Worker"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "Workers"
+        ],
+        "operationId": "Workers_Update",
+        "description": "Updates a worker.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkerUpdate"
+            },
+            "description": "The update to the worker."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the worker.",
+            "schema": {
+              "$ref": "#/definitions/Worker"
+            }
+          },
+          "202": {
+            "description": "Accepted - Returns this status until the asynchronous operation has completed."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a worker's tags.": {
+            "$ref": "./examples/WorkerUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Oryx/worker": {
+      "get": {
+        "tags": [
+          "Workers"
+        ],
+        "operationId": "Workers_ListByResourceGroup",
+        "description": "Gets all the workers within a resource group.",
+        "x-ms-examples": {
+          "Lists workers by resource group": {
+            "$ref": "./examples/WorkersListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of workers.",
+            "schema": {
+              "$ref": "#/definitions/WorkerListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Oryx/worker": {
+      "get": {
+        "tags": [
+          "Workers"
+        ],
+        "operationId": "Workers_ListBySubscription",
+        "description": "Gets all the workers within a subscription.",
+        "x-ms-examples": {
+          "Lists workers by subscription": {
+            "$ref": "./examples/WorkersListBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of workers.",
+            "schema": {
+              "$ref": "#/definitions/WorkerListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Oryx/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "List operations": {
+            "$ref": "./examples/WorkerOperationsList.json"
+          }
+        },
+        "description": "Request to list operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the list of operations under Microsoft.Oryx resource provider.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderOperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorDefinition": {
+      "type": "object",
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ManagedResourceGroupConfiguration": {
+      "type": "object",
+      "description": "Configuration of the managed resource group associated with the worker.",
+      "properties": {
+        "name": {
+          "description": "The resource group name.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "location": {
+          "description": "The resource group location.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "Result": {
+      "type": "object",
+      "description": "Sample result definition",
+      "properties": {
+        "sampleProperty": {
+          "type": "string",
+          "description": "Sample property of type string"
+        }
+      }
+    },
+    "Worker": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WorkerProperties",
+          "description": "The worker properties."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Information about worker."
+    },
+    "WorkerListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Worker"
+          },
+          "description": "The array of workers."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "description": "List of workers."
+    },
+    "WorkerProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Worker instance provisioning state.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "managedResourceGroupConfiguration": {
+          "$ref": "#/definitions/ManagedResourceGroupConfiguration"
+        }
+      },
+      "description": "The worker properties."
+    },
+    "WorkerUpdate": {
+      "description": "An update to a worker.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ResourceProviderOperationList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of resource provider operations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderOperation"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "Link to next page of results.",
+          "type": "string"
+        }
+      },
+      "description": "Results of the request to list operations."
+    },
+    "ResourceProviderOperation": {
+      "type": "object",
+      "properties": {
+        "isDataAction": {
+          "type": "string",
+          "description": "Indicates whether the operation applies to data-plane."
+        },
+        "name": {
+          "type": "string",
+          "description": "Operation name, in format of {provider}/{resource}/{operation}"
+        },
+        "display": {
+          "type": "object",
+          "properties": {
+            "provider": {
+              "type": "string",
+              "description": "The resource provider."
+            },
+            "resource": {
+              "type": "string",
+              "description": "Resource on which the operation is performed."
+            },
+            "operation": {
+              "type": "string",
+              "description": "Type of operation: get, read, delete, etc."
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of this operation."
+            }
+          },
+          "description": "Display metadata associated with the operation."
+        }
+      },
+      "description": "Results of the request to list operations."
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)",
+      "x-ms-parameter-location": "client"
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to be used with the HTTP request.",
+      "x-ms-parameter-location": "client"
+    },
+    "WorkerNameParameter": {
+      "name": "workerName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the worker.",
+      "x-ms-parameter-location": "method",
+      "maxLength": 64,
+      "minLength": 3
+    }
+  }
+}

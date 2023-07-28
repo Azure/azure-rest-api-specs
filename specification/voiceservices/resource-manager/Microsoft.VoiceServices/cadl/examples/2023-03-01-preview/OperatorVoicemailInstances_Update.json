@@ -1,0 +1,39 @@
+{
+  "operationId": "OperatorVoicemailInstances_Update",
+  "title": "UpdateOperatorVoicemailInstanceResource",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2023-03-01-preview",
+    "name": "myname",
+    "operatorVoicemailInstanceName": "myname",
+    "location": "useast",
+    "properties": {}
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.VoiceServices/OperatorVoicemailInstances/myname",
+        "name": "myline",
+        "location": "useast",
+        "type": "Microsoft.VoiceServices/OperatorVoicemailInstances",
+        "sku": {
+          "name": "Basic"
+        },
+        "properties": {
+          "voipConnections": [
+            {
+              "remoteDomain": "example.com",
+              "allowedSignalingSourceAddressPrefixes": [
+                "192.0.2.0/24"
+              ],
+              "allowedMediaSourceAddressPrefixes": [
+                "192.0.2.0/24"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,75 @@
+import "./workspacesCore.cadl";
+
+namespace Microsoft.AutonomousDevelopmentPlatform;
+
+using OpenAPI;
+using Cadl.Http;
+using Cadl.Rest;
+using Azure.ResourceManager;
+
+namespace CheckNameAvailability {
+  @tag("checkNameAvailability")
+  @doc("Checks the resource name is available.")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.AutonomousDevelopmentPlatform/checkNameAvailability")
+  @post op post(
+    ...SubscriptionIdParameter,
+    ...ApiVersionParameter,
+    @doc("The checkNameAvailability parameters.")
+    @body parameters: CheckNameAvailabilityParameters): ArmResponse<CheckNameAvailabilityResult> | ErrorResponse;
+}
+
+@doc("Workspace Properties")
+model WorkspaceProperties is WorkspacePropertiesBase {
+  @visibility("read")
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState;
+
+  @visibility("read")
+  @doc("The data-plane endpoint uri.")
+  endpoint?: string;
+}
+
+@doc("The managed identity.")
+model ManagedIdentity extends ManagedIdentityProperties {}
+
+@doc("Check name availability parameters")
+model CheckNameAvailabilityParameters {
+  @doc("The name to be checked.")
+  name: string;
+
+  @doc("The resource type to be checked.")
+  type: ResourceType;
+}
+
+@doc("Check name availability result")
+model CheckNameAvailabilityResult {
+  @visibility("read")
+  @doc("Gets a boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used.")
+  nameAvailable?: boolean;
+
+  @visibility("read")
+  @doc("Gets the reason that the resource name could not be used. The reason element is only returned if nameAvailable is false.")
+  reason?: Reason;
+
+  @visibility("read")
+  @doc("Gets an error message explaining the Reason value in more detail.")
+  message?: string;
+}
+
+@doc("Resource Types supported for Check Name Availability")
+@knownValues(ResourceTypeKV)
+model ResourceType is string {}
+
+enum ResourceTypeKV {
+  "Microsoft.AutonomousDevelopmentPlatform/accounts",
+  "Microsoft.AutonomousDevelopmentPlatform/workspaces"
+}
+
+@doc("Reasons for the unavailability of the name")
+@knownValues(ReasonKV)
+model Reason is string {}
+
+enum ReasonKV {
+  Invalid,
+  AlreadyExists
+}

@@ -174,13 +174,13 @@
         ],
         "responses": {
           "201": {
-            "description": "Create successful. The header contains ‘Azure-AsyncOperation’ header pointing to an operations resource. The operation URI can be queried to find the current state of the operation.",
+            "description": "Create successful. The header contains ï¿½Azure-AsyncOperationï¿½ header pointing to an operations resource. The operation URI can be queried to find the current state of the operation.",
             "schema": {
               "$ref": "#/definitions/VnfManagerDevice"
             }
           },
           "202": {
-            "description": "Accepted. The header contains ‘Azure-AsyncOperation’ header pointing to an operations resource. The operation URI can be queried to find the current state of the operation.",
+            "description": "Accepted. The header contains ï¿½Azure-AsyncOperationï¿½ header pointing to an operations resource. The operation URI can be queried to find the current state of the operation.",
             "schema": {
               "$ref": "#/definitions/VnfManagerDevice"
             }
@@ -466,39 +466,39 @@
         }
       }
     },
-      "DeviceRegistrationKey": {
-        "description": "Vnf Manager Device registration key",
-        "properties": {
-          "mecRegistrationKey": {
-            "type": "string",
-            "description": "The registration key for Vnf Manager Device."
-          }
+    "DeviceRegistrationKey": {
+      "description": "Vnf Manager Device registration key",
+      "properties": {
+        "mecRegistrationKey": {
+          "type": "string",
+          "description": "The registration key for Vnf Manager Device."
         }
-      },
-      "VNFRef": {
-        "description": "VNF ref",
-        "properties": {
-          "vnfRef": {
-            "type": "string",
-            "description": "The reference to to VNF deployed on the Vnf Manager device."
-          }
-        }
-      },
-      "VnfManagerDeviceListResult": {
-        "properties": {
-          "value": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/VnfManagerDevice"
-            },
-            "description": "A list of VnfManagerDevices in a resource group."
-          },
-          "nextLink": {
-            "type": "string",
-            "description": "The URL to get the next set of results."
-          }
-        },
-        "description": "Response for VnfManagerDevices API service call."
       }
+    },
+    "VNFRef": {
+      "description": "VNF ref",
+      "properties": {
+        "vnfRef": {
+          "type": "string",
+          "description": "The reference to to VNF deployed on the Vnf Manager device."
+        }
+      }
+    },
+    "VnfManagerDeviceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VnfManagerDevice"
+          },
+          "description": "A list of VnfManagerDevices in a resource group."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for VnfManagerDevices API service call."
     }
+  }
 }

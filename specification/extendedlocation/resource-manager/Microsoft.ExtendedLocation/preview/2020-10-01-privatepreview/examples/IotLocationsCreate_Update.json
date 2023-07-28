@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "api-version": "2020-10-01-privatepreview",
+    "subscriptionId": "11111111-2222-3333-4444-555555555555",
+    "resourceGroupName": "testresourcegroup",
+    "resourceName": "iotLocation01",
+    "parameters": {
+      "location": "West US",
+      "properties": {
+        "iotHubConfiguration": {
+          "iotHubConnectionString": "iotHubConnectionString"
+        },
+        "eventHubConfiguration": {
+          "eventHubConnectionString": "eventHubConnectionString"
+        },
+        "hydrationInformation": {
+          "destinationResourceGroupId": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testrg",
+          "providerNameSpace": "Microsoft.Contoso",
+          "location": "West US"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testrg/providers/Microsoft.ExtendedLocation/iotLocations/iotLocation01",
+        "name": "iotLocation01",
+        "type": "Microsoft.ExtendedLocation/iotLocations",
+        "location": "West US",
+        "properties": {
+          "iotHubConfiguration": {
+            "iotHubConnectionString": "iotHubConnectionString"
+          },
+          "eventHubConfiguration": {
+            "eventHubConnectionString": "eventHubConnectionString"
+          },
+          "hydrationInformation": {
+            "destinationResourceGroupId": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testrg",
+            "providerNameSpace": "Microsoft.Contoso",
+            "location": "West US"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testrg/providers/Microsoft.ExtendedLocation/iotLocations/iotLocation01",
+        "name": "iotLocation01",
+        "type": "Microsoft.ExtendedLocation/iotLocations",
+        "location": "West US",
+        "properties": {
+          "iotHubConfiguration": {
+            "iotHubConnectionString": "iotHubConnectionString"
+          },
+          "eventHubConfiguration": {
+            "eventHubConnectionString": "eventHubConnectionString"
+          },
+          "hydrationInformation": {
+            "destinationResourceGroupId": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testrg",
+            "providerNameSpace": "Microsoft.Contoso",
+            "location": "West US"
+          },
+          "provisioningState": "Accepted"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "parameters": {
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "test-rg",
+    "clusterName": "myCluster",
+    "arcSettingName": "default",
+    "extensionName": "MicrosoftMonitoringAgent",
+    "extension": {
+      "properties": {
+        "extensionParameters": {
+          "publisher": "Microsoft.Compute",
+          "typeHandlerVersion": "1.10",
+          "type": "MicrosoftMonitoringAgent",
+          "settings": {
+            "workspaceId": "xx"
+          },
+          "protectedSettings": {
+            "workspaceKey": "xx"
+          }
+        }
+      }
+    },
+    "api-version": "2022-05-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/myCluster/arcSettings/default/extensions/MicrosoftMonitoringAgent",
+        "name": "MicrosoftMonitoringAgent",
+        "type": "Microsoft.AzureStackHCI/clusters/arcSettings/extensions",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2021-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-01-02T17:18:19.1234567Z"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "extensionParameters": {
+            "publisher": "Microsoft.Compute",
+            "type": "string",
+            "typeHandlerVersion": "1.10.3",
+            "autoUpgradeMinorVersion": false,
+            "settings": {
+              "workspaceId": "xx"
+            }
+          },
+          "aggregateState": "PartiallySucceeded",
+          "perNodeExtensionDetails": [
+            {
+              "name": "Node-1",
+              "extension": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-1/Extensions/MicrosoftMonitoringAgent",
+              "state": "Succeeded"
+            },
+            {
+              "name": "Node-2",
+              "extension": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-2/Extensions/MicrosoftMonitoringAgent",
+              "state": "Failed"
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/myCluster/arcSettings/default/extensions/MicrosoftMonitoringAgent",
+        "name": "MicrosoftMonitoringAgent",
+        "type": "Microsoft.AzureStackHCI/clusters/arcSettings/extensions",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2021-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-01-02T17:18:19.1234567Z"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "extensionParameters": {
+            "publisher": "Microsoft.Compute",
+            "type": "string",
+            "typeHandlerVersion": "1.10.3",
+            "autoUpgradeMinorVersion": false,
+            "settings": {
+              "workspaceId": "xx"
+            }
+          },
+          "aggregateState": "PartiallySucceeded",
+          "perNodeExtensionDetails": [
+            {
+              "name": "Node-1",
+              "extension": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-1/Extensions/MicrosoftMonitoringAgent",
+              "state": "Succeeded"
+            },
+            {
+              "name": "Node-2",
+              "extension": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-2/Extensions/MicrosoftMonitoringAgent",
+              "state": "Failed"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

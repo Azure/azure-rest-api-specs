@@ -1,0 +1,403 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Foundational ARM Client",
+    "description": "DstsServiceClientIdentity Provider",
+    "version": "2021-08-10-privatepreview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureCIS/dstsServiceClientIdentities": {
+      "get": {
+        "description": "Lists all the DstsServiceClientIdentities in a subscription.",
+        "x-ms-examples": {
+          "Get DstsServiceClientIdentities in a subscription": {
+            "$ref": "./examples/GetAllDstsServiceClientIdentity.json"
+          }
+        },
+        "operationId": "DstsServiceClientIdentity_listSubscriptionLevel",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of DstsServiceClientIdentities.",
+            "schema": {
+              "$ref": "#/definitions/DstsServiceClientIdentityModelArray"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCIS/dstsServiceClientIdentities": {
+      "get": {
+        "description": "Lists all the DstsServiceClientIdentities in a ResourceGroup.",
+        "x-ms-examples": {
+          "Get DstsServiceClientIdentities in a ResourceGroup": {
+            "$ref": "./examples/GetDstsServiceClientIdentityUnderResourceGroup.json"
+          }
+        },
+        "operationId": "DstsServiceClientIdentities_listResourceGroupLevel",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of DstsServiceClientIdentities.",
+            "schema": {
+              "$ref": "#/definitions/DstsServiceClientIdentityModelArray"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCIS/dstsServiceClientIdentities/{resourceName}": {
+      "put": {
+        "description": "Create or update DstsServiceClientIdentity.",
+        "x-ms-examples": {
+          "Create or update a DstsServiceClientIdentity": {
+            "$ref": "./examples/CreateDstsServiceClientIdentity.json"
+          }
+        },
+        "operationId": "DstsServiceClientIdentity_CreateUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "DstsServiceClientIdentity",
+            "description": "DstsServiceClientIdentity details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DstsServiceClientIdentityModel"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "DstsServiceClientIdentity Resource created successfully.",
+            "schema": {
+              "$ref": "#/definitions/DstsServiceClientIdentityModel"
+            }
+          },
+          "200": {
+            "description": "DstsServiceClientIdentity Resource updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/DstsServiceClientIdentityModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "description": "Patch DstsServiceClientIdentity.",
+        "x-ms-examples": {
+          "Patch DstsServiceClientIdentity": {
+            "$ref": "./examples/PatchDstsServiceClientIdentity.json"
+          }
+        },
+        "operationId": "DstsServiceClientIdentity_patch",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "DstsServiceClientIdentity",
+            "description": "DstsServiceClientIdentity details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DstsServiceClientIdentityModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Patch request has been accepted, DstsServiceClientIdentity is already in the required state.",
+            "schema": {
+              "$ref": "#/definitions/DstsServiceClientIdentityModel"
+            }
+          },
+          "202": {
+            "description": "Patch request has been accepted",
+            "headers": {
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Returns a DstsServiceClientIdentity info",
+        "x-ms-examples": {
+          "Get DstsServiceClientIdentity": {
+            "$ref": "./examples/GetDstsServiceClientIdentity.json"
+          }
+        },
+        "operationId": "DstsServiceClientIdentityInfo_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "DstsServiceClientIdentity info.",
+            "schema": {
+              "$ref": "#/definitions/DstsServiceClientIdentityModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete DstsServiceClientIdentity",
+        "x-ms-examples": {
+          "Delete a DstsServiceClientIdentity": {
+            "$ref": "./examples/DeleteDstsServiceClientIdentity.json"
+          }
+        },
+        "operationId": "DstsServiceClientIdentity_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "DstsServiceClientIdentity was deleted successfully."
+          },
+          "202": {
+            "description": "Delete DstsServiceAccount request has been accepted.",
+            "headers": {
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "DstsServiceClientIdentity does not exist."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DstsServiceClientIdentityResource": {
+      "required": [
+        "accountName"
+      ],
+      "type": "object",
+      "description": "DscmResource details",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning State of the resource."
+        },
+        "dstsInstance": {
+          "type": "string",
+          "description": "Dsts instance on which the ServiceClientIdentity should be created. If not specified, the ServiceClientIdentity is created on the regional dsts instance corresponding to the resource location. Example: useast-dsts.dsts.core.windows.net"
+        },
+        "accountName": {
+          "type": "string",
+          "description": "Name of the ServiceClientIdentity, to be specified optionally if the ServiceClientIdentityGroup does not specify a naming pattern for its member ServiceClientIdentity. Example: ProdUSEastStorageClient"
+        },
+        "groupName": {
+          "type": "string",
+          "description": "Name of the ServiceClientIdentityGroup in Dscm to which the ServiceClientIdentity belongs. Example: ProductionGroup"
+        },
+        "subscriptions": {
+          "type": "string",
+          "description": "Name of the subscriptions for the SCI. Example: 149b7d43-02c2-4384-822e-592319c408c9"
+        },
+        "armRegion": {
+          "type": "string",
+          "description": "Name of region for new region support"
+        },
+        "subjectNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Subject name of the certificate to be used for ServiceClientIdentity. Example: test.service.core.azure-test.net"
+        }
+      }
+    },
+    "DstsServiceClientIdentityModel": {
+      "type": "object",
+      "description": "DstsServiceClientIdentity Response",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DstsServiceClientIdentityResource",
+          "description": "DstsServiceClientIdentityResource detail"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ProvisioningState": {
+      "description": "Provisioning status of the resource.",
+      "readOnly": true,
+      "enum": [
+        "Failed",
+        "Succeeded",
+        "Canceled",
+        "Accepted"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "DstsServiceClientIdentityModelArray": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DstsServiceClientIdentityModel"
+          },
+          "description": "An array of Dsts ServiceClientIdentity resources"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "description": "List of DstsServiceClientIdentity"
+    }
+  },
+  "parameters": {
+    "ResourceNameParameter": {
+      "name": "resourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of resource.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

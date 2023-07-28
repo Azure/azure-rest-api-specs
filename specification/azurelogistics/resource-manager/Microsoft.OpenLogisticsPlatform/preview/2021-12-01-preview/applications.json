@@ -1,0 +1,341 @@
+{
+  "x-generator": "NSwag v13.2.5.0 (NJsonSchema v10.1.7.0 (Newtonsoft.Json v12.0.0.0))",
+  "swagger": "2.0",
+  "info": {
+    "title": "OSCPControlPlaneServiceAPI",
+    "description": "REST APIs for OSCP Control Plane Service",
+    "version": "2021-12-01-preview"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenLogisticsPlatform/workspaces/{workspaceName}/applications/": {
+      "get": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Application_List",
+        "x-ms-examples": {
+          "Application List": {
+            "$ref": "./examples/Application_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "workspaces.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApplicationList"
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenLogisticsPlatform/workspaces/{workspaceName}/applications/{applicationName}": {
+      "get": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Application_Get",
+        "x-ms-examples": {
+          "Application Get": {
+            "$ref": "./examples/Application_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "workspaces.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Application_Put",
+        "x-ms-examples": {
+          "Application Put": {
+            "$ref": "./examples/Application_Put.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "workspaces.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "Application",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "449": {
+            "description": "A concurrent create/update/delete operation is ongoing for this application. Please retry later.",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false
+      },
+      "delete": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Application_Delete",
+        "x-ms-examples": {
+          "Application Delete": {
+            "$ref": "./examples/Application_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "workspaces.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "204": {
+            "description": ""
+          },
+          "449": {
+            "description": "A concurrent create/update/delete operation is ongoing for this application. Please retry later.",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Application": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "displayName": {
+              "type": "string",
+              "description": "Name to display for application to register"
+            },
+            "applicationDefinitionId": {
+              "type": "string",
+              "description": "Manifest id for application to register"
+            },
+            "parameters": {
+              "type": "object",
+              "description": "Parameters required by application to register, should match parameters in application manifest",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "resources": {
+              "type": "array",
+              "description": "List of resources required by application to register, e.g. share. should match resources in application manifest",
+              "items": {
+                "$ref": "#/definitions/ApplicationResource"
+              }
+            },
+            "provisioningState": {
+              "description": "The provisioning state of the resource.",
+              "readOnly": true,
+              "$ref": "#/definitions/ApplicationProvisioningState"
+            },
+            "status": {
+              "type": "string",
+              "description": "ISV provided status on application"
+            }
+          }
+        }
+      }
+    },
+    "ApplicationResource": {
+      "type": "object",
+      "description": "A resources required by application to register, e.g. share. should match resources in application manifest",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/ApplicationResourceShareProperties"
+        }
+      }
+    },
+    "ApplicationResourceShareProperties": {
+      "type": "object",
+      "description": "The share-specific properties for shares affiliated with application",
+      "properties": {
+        "accessAssignments": {
+          "type": "array",
+          "items": {
+            "$ref": "shares.json#/definitions/AccessAssignment"
+          }
+        }
+      }
+    },
+    "ApplicationList": {
+      "description": "The list of Application resources.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of Application resources list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of Applications.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Application"
+          }
+        }
+      }
+    },
+    "ApplicationProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Accepted",
+        "Succeeded",
+        "Creating",
+        "Deleting",
+        "Failed"
+      ]
+    }
+  },
+  "parameters": {
+    "ApplicationNameParameter": {
+      "type": "string",
+      "name": "applicationName",
+      "description": "Application Name",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

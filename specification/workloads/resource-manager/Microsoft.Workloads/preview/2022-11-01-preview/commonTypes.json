@@ -1,0 +1,52 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-11-01-preview",
+    "title": "Workloads Client",
+    "description": "Workloads client provides access to various workload operations"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "ManagedServiceIdentityType": {
+      "description": "Type of managed service identity (only None, UserAssigned types are allowed).",
+      "enum": [
+        "None",
+        "UserAssigned"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ManagedServiceIdentityType",
+        "modelAsString": true
+      }
+    },
+    "UserAssignedServiceIdentity": {
+      "description": "Managed service identity (user assigned identities)",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of manage identity",
+          "$ref": "#/definitions/ManagedServiceIdentityType"
+        },
+        "userAssignedIdentities": {
+          "description": "User assigned identities dictionary",
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/UserAssignedIdentities"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    }
+  },
+  "parameters": {}
+}

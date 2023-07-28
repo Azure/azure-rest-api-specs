@@ -1,0 +1,129 @@
+{
+  "parameters": {
+    "subscriptionId": "subscriptionId",
+    "resourceGroupName": "resourceGroupName",
+    "api-version": "2023-02-01-preview",
+    "l3IsolationDomainName": "example-l3domain",
+    "body": {
+      "properties": {
+        "networkFabricId": "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/networkFabrics/FabricName",
+        "redistributeConnectedSubnets": "True",
+        "redistributeStaticRoutes": "False",
+        "aggregateRouteConfiguration": {
+          "ipv4Routes": [
+            {
+              "prefix": "10.0.0.0/24"
+            }
+          ],
+          "ipv6Routes": [
+            {
+              "prefix": "10.0.0.1"
+            }
+          ]
+        },
+        "description": "creating L3 isolation domain",
+        "connectedSubnetRoutePolicy": {
+          "exportRoutePolicyId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/routePolicies/routePolicyName2"
+        }
+      },
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "networkFabricId": "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/networkFabrics/FabricName",
+          "disabledOnResources": [
+            ""
+          ],
+          "administrativeState": "Enabled",
+          "optionBDisabledOnResources": [
+            ""
+          ],
+          "provisioningState": "Succeeded",
+          "redistributeConnectedSubnets": "True",
+          "redistributeStaticRoutes": "False",
+          "aggregateRouteConfiguration": {
+            "ipv4Routes": [
+              {
+                "prefix": "10.0.0.0/24"
+              }
+            ],
+            "ipv6Routes": [
+              {
+                "prefix": "3FFE:FFFF:0:CD30::a0/29"
+              }
+            ]
+          },
+          "description": "creating L3 isolation domain",
+          "connectedSubnetRoutePolicy": {
+            "exportRoutePolicyId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/routePolicies/routePolicyName",
+            "administrativeState": "Enabled"
+          }
+        },
+        "location": "eastus",
+        "id": "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/example-l3domain",
+        "name": "example-l3domain",
+        "type": "microsoft.managednetworkfabric/l3isolationdomains",
+        "systemData": {
+          "createdBy": "email@address.com",
+          "createdByType": "User",
+          "createdAt": "2023-02-09T18:35:44.070Z",
+          "lastModifiedBy": "UserId",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-02-09T18:35:44.070Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "networkFabricId": "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/networkFabrics/FabricName",
+          "disabledOnResources": [
+            ""
+          ],
+          "administrativeState": "Enabled",
+          "optionBDisabledOnResources": [
+            ""
+          ],
+          "provisioningState": "Succeeded",
+          "redistributeConnectedSubnets": "True",
+          "redistributeStaticRoutes": "False",
+          "aggregateRouteConfiguration": {
+            "ipv4Routes": [
+              {
+                "prefix": "10.0.0.0/24"
+              }
+            ],
+            "ipv6Routes": [
+              {
+                "prefix": "3FFE:FFFF:0:CD30::a0/29"
+              }
+            ]
+          },
+          "description": "creating L3 isolation domain",
+          "connectedSubnetRoutePolicy": {
+            "exportRoutePolicyId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/routePolicies/routePolicyName",
+            "administrativeState": "Enabled"
+          }
+        },
+        "location": "eastus",
+        "id": "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/example-l3domain",
+        "name": "example-l3domain",
+        "type": "microsoft.managednetworkfabric/l3isolationdomains",
+        "systemData": {
+          "createdBy": "email@address.com",
+          "createdByType": "User",
+          "createdAt": "2023-02-09T18:35:44.070Z",
+          "lastModifiedBy": "UserId",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-02-09T18:35:44.070Z"
+        }
+      }
+    }
+  }
+}

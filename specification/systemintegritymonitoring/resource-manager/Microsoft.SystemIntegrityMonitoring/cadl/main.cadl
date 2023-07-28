@@ -1,0 +1,90 @@
+import "@cadl-lang/rest";
+import "@cadl-lang/openapi3";
+import "@cadl-lang/versioning";
+import "@azure-tools/cadl-providerhub";
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-azure-resource-manager";
+
+import "./simHub.cadl";
+import "./deviceprofile.cadl";
+import "./attestation.cadl";
+
+@armProviderNamespace
+@service({title: "Microsoft.SystemIntegrityMonitoring", version: "2022-08-01-preview"})
+@versionedDependency(Azure.Core.Versions.v1_0_Preview_1)
+@versionedDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+namespace Microsoft.SystemIntegrityMonitoring;
+
+using Cadl.Http;
+using Cadl.Rest;
+using Cadl.Versioning;
+using Azure.Core;
+using Azure.ResourceManager;
+
+interface Operations extends Azure.ResourceManager.Operations {}
+
+@doc("A SystemIntegrityMonitoring Hub.")
+model SIMHubResource is TrackedResource<SIMHubProperties> {
+  @pattern("^[a-zA-Z0-9-]{3,64}$")
+  @key("simHubName")
+  @segment("simHubs")
+  @doc("Name of the resource")
+  @visibility("read")
+  @path
+  name: string;
+}
+
+@doc("A device profile that holds measurement profiles uploaded by a clean room device. Scoped under a SIM Hub.")
+@parentResource(SIMHubResource)
+model DeviceProfileResource is TrackedResource<DeviceProfileProperties> {
+  @pattern("^[a-zA-Z0-9-]{3,64}$")
+  @key("deviceProfileName")
+  @segment("deviceProfiles")
+  @doc("Name of the resource")
+  @visibility("read")
+  @path
+  name: string;
+}
+
+@armResourceOperations
+interface SIMHubs extends ResourceOperations<SIMHubResource, SIMHubProperties> {}
+
+@armResourceOperations
+interface DeviceProfiles extends ResourceOperations<DeviceProfileResource, DeviceProfileProperties> {
+  @post
+  @segment("uploadMeasurementProfile")
+  @doc("Upload a new device measurement profile version")
+  op UploadNewMeasurementProfileVersion(
+	...ResourceInstanceParameters<DeviceProfileResource>,
+
+	@body
+	newMeasurementProfilePayload: NewMeasurementProfilePayload
+  ): ArmResponse<DeviceProfileResource> | ErrorResponse;
+
+  @post
+  @segment("initiate")
+  @doc("Initiates operations that require challenge and service context values.")
+  op Initiate(
+	...ResourceInstanceParameters<DeviceProfileResource>,
+  ): ArmResponse<InitiateRequestResponse> | ErrorResponse;
+
+  @post
+  @segment("applyForResourceConnection")
+  @doc("Applies measurement profile version to specified azure resource connections.")
+  op ApplyForResourceConnections(
+	...ResourceInstanceParameters<DeviceProfileResource>,
+
+	@body
+	applyForResourceConnectionPayload: ApplyForResourceConnectionPayload
+  ): ArmResponse<DeviceProfileResource> | ErrorResponse;
+
+  @post
+  @segment("removeForResourceConnection")
+  @doc("Removes measurement profile version currently applied to specified azure resource connections.")
+  op RemoveForResourceConnection(
+	...ResourceInstanceParameters<DeviceProfileResource>,
+
+	@body
+	removeForResourceConnectionPayload: RemoveForResourceConnectionPayload
+  ): ArmResponse<DeviceProfileResource> | ErrorResponse;
+}

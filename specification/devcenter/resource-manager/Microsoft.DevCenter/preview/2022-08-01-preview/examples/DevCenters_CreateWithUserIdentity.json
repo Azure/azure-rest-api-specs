@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "api-version": "2022-08-01-preview",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "rg1",
+    "devCenterName": "Contoso",
+    "body": {
+      "tags": {
+        "CostCode": "12345"
+      },
+      "location": "centralus",
+      "properties": {},
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/identityGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testidentity1": {}
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/rg1/providers/Microsoft.DevCenter/devcenters/Contoso",
+        "name": "Contoso",
+        "type": "Microsoft.DevCenter/devcenters",
+        "tags": {
+          "CostCode": "12345"
+        },
+        "location": "centralus",
+        "properties": {
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-11-11T22:00:08.896Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-11-11T22:00:10.896Z"
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/identityGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testidentity1": {
+              "clientId": "e35621a5-f615-4a20-940e-de8a84b15abc",
+              "principalId": "2111b8fc-e123-485a-b408-bf1153189494"
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/rg1/providers/Microsoft.DevCenter/devcenters/Contoso",
+        "name": "Contoso",
+        "type": "Microsoft.DevCenter/devcenters",
+        "tags": {
+          "CostCode": "12345"
+        },
+        "location": "centralus",
+        "properties": {
+          "provisioningState": "Accepted"
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-11-11T22:00:08.896Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-11-11T22:00:10.896Z"
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/identityGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testidentity1": {
+              "clientId": "e35621a5-f615-4a20-940e-de8a84b15abc",
+              "principalId": "2111b8fc-e123-485a-b408-bf1153189494"
+            }
+          }
+        }
+      }
+    }
+  }
+}

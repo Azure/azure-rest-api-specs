@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "subscriptionId": "8e17e36c-42e9-4cd5-a078-7b44883414e0",
+    "location": "centralus",
+    "api-version": "2021-12-01-preview",
+    "body": {
+      "appLocation": "eastus",
+      "sapProduct": "S4HANA",
+      "environment": "Prod",
+      "databaseType": "HANA",
+      "deploymentType": "ThreeTier",
+      "dbVmSku": "Standard_M32ts"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "diskConfigurations": [
+          {
+            "volume": "hana/data",
+            "diskType": "P10",
+            "diskCount": 4,
+            "diskSizeGB": 128,
+            "diskIopsReadWrite": 500,
+            "diskMBpsReadWrite": 100,
+            "diskStorageType": "Premium_LRS"
+          },
+          {
+            "volume": "hana/log",
+            "diskType": "P10",
+            "diskCount": 3,
+            "diskSizeGB": 128,
+            "diskIopsReadWrite": 500,
+            "diskMBpsReadWrite": 100,
+            "diskStorageType": "Premium_LRS"
+          },
+          {
+            "volume": "hana/shared",
+            "diskType": "P15",
+            "diskCount": 1,
+            "diskSizeGB": 256,
+            "diskIopsReadWrite": 1100,
+            "diskMBpsReadWrite": 125,
+            "diskStorageType": "Premium_LRS"
+          },
+          {
+            "volume": "usr/sap",
+            "diskType": "P6",
+            "diskCount": 1,
+            "diskSizeGB": 64,
+            "diskIopsReadWrite": 240,
+            "diskMBpsReadWrite": 50,
+            "diskStorageType": "Premium_LRS"
+          },
+          {
+            "volume": "backup",
+            "diskType": "P15",
+            "diskCount": 2,
+            "diskSizeGB": 256,
+            "diskIopsReadWrite": 1100,
+            "diskMBpsReadWrite": 125,
+            "diskStorageType": "Premium_LRS"
+          },
+          {
+            "volume": "os",
+            "diskType": "P6",
+            "diskCount": 1,
+            "diskSizeGB": 64,
+            "diskIopsReadWrite": 240,
+            "diskMBpsReadWrite": 50,
+            "diskStorageType": "Premium_LRS"
+          }
+        ]
+      }
+    }
+  }
+}

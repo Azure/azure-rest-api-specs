@@ -99,13 +99,37 @@
       "readOnly": true,
       "description": "The current provisioning state.",
       "enum": [
-        "Succeeded",
-        "Updating",
+        "NotSpecified",
+        "Accepted",
+        "Running",
+        "Creating",
+        "Created",
         "Deleting",
-        "Failed"
+        "Deleted",
+        "Canceled",
+        "Failed",
+        "Succeeded",
+        "MovingResources",
+        "TransientFailure"
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "VendorProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The vendor provisioning state.",
+      "enum": [
+        "NotProvisioned",
+        "Provisioning",
+        "Provisioned",
+        "DeploymentFailed",
+        "Deprovisioned"
+      ],
+      "x-ms-enum": {
+        "name": "VendorProvisioningState",
         "modelAsString": true
       }
     },

@@ -1,0 +1,100 @@
+{
+  "parameters": {
+    "api-version": "2021-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "monitorName": "myMonitor",
+    "resource": {
+      "tags": {
+        "Environment": "Dev"
+      },
+      "monitoringStatus": "Enabled",
+      "marketplaceSubscriptionStatus": "Active",
+      "dynatraceEnvironmentProperties": {
+        "accountInfo": {},
+        "environmentInfo": {},
+        "singleSignOnProperties": {}
+      },
+      "userInfo": {
+        "firstName": "Alice",
+        "lastName": "Bobab",
+        "emailAddress": "alice@microsoft.com",
+        "phoneNumber": "123456",
+        "country": "westus2"
+      },
+      "planData": {
+        "usageType": "Committed",
+        "billingCycle": "Monthly",
+        "planDetails": "dynatraceapitestplan",
+        "effectiveDate": "2019-08-30T15:14:33+02:00"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "identity": {
+          "principalId": "4534676867978",
+          "tenantId": "23456789001",
+          "type": "SystemAssigned"
+        },
+        "properties": {
+          "monitoringStatus": "Enabled",
+          "marketplaceSubscriptionStatus": "Active",
+          "dynatraceEnvironmentProperties": {
+            "userId": "alice123",
+            "accountInfo": {
+              "accountId": "1234567890",
+              "regionId": "wus2"
+            },
+            "environmentInfo": {
+              "environmentId": "a23xcv456",
+              "ingestionKey": "1234567890",
+              "logsIngestionEndpoint": "https://dynatrace.com",
+              "landingURL": "https://a23xcv456.dynatrace.com"
+            },
+            "singleSignOnProperties": {
+              "singleSignOnState": "Enable",
+              "enterpriseAppId": "00000000-0000-0000-0000-000000000000",
+              "singleSignOnUrl": "https://www.dynatrace.io/IAmSomeHash",
+              "aadDomains": [
+                "mpliftrdt20210811outlook.onmicrosoft.com"
+              ]
+            }
+          },
+          "userInfo": {
+            "firstName": "Alice",
+            "lastName": "Bobab",
+            "emailAddress": "alice@microsoft.com",
+            "phoneNumber": "123456",
+            "country": "westus2"
+          },
+          "planData": {
+            "usageType": "Committed",
+            "billingCycle": "Monthly",
+            "planDetails": "dynatraceapitestplan",
+            "effectiveDate": "2019-08-30T15:14:33+02:00"
+          },
+          "liftrResourceCategory": "Unknown",
+          "liftrResourcePreference": 28,
+          "provisioningState": "Accepted"
+        },
+        "systemData": {
+          "createdBy": "alice@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2021-07-16T04:25:21.040Z",
+          "lastModifiedBy": "alice@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-07-16T04:25:21.040Z"
+        },
+        "tags": {
+          "Environment": "Dev"
+        },
+        "location": "West US 2",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/monitors/myMonitor",
+        "name": "myMonitor",
+        "type": "Dynatrace.Observability/monitors"
+      }
+    }
+  }
+}

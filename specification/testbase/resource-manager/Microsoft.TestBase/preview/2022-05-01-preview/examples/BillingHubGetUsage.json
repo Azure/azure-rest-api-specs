@@ -1,0 +1,130 @@
+{
+  "parameters": {
+    "subscriptionId": "7b053408-0960-40b0-b950-99b0461aa9a8",
+    "resourceGroupName": "contoso-rg1",
+    "testBaseAccountName": "contoso-testBaseAccount1",
+    "api-version": "2022-05-01-preview",
+    "startTimeStamp": "2022-01-12T12:05:25.632Z",
+    "endTimeStamp": "2022-03-12T12:05:25.632Z",
+    "continuousToken": "limit-50-offset-200"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "totalUsedFreeHours": 0,
+        "totalUsedBillableHours": 0,
+        "totalCharges": 0,
+        "packageUsageEntries": [
+          {
+            "applicationName": "test",
+            "applicationVersion": "1",
+            "azureResourceUri": "/SUBSCRIPTIONS/7B053408-0960-40B0-B950-99B0461AA9A8/RESOURCEGROUPS/INTEGRATION-TEST/PROVIDERS/MICROSOFT.TESTBASE/TESTBASEACCOUNTS/TESTBASE-INTEGRATIONTEST/packages/test-1",
+            "totalUsedFreeHours": 20,
+            "totalUsedBillableHours": 5,
+            "totalCharges": 40,
+            "usageEntriesGroupedByUpdateType": [
+              {
+                "updateType": "Security",
+                "totalUsedFreeHours": 10,
+                "totalUsedBillableHours": 5,
+                "totalCharges": 40,
+                "usageGroups": [
+                  {
+                    "totalUsedFreeHours": 10,
+                    "totalUsedBillableHours": 5,
+                    "totalCharges": 40,
+                    "releaseBuildRevision": 1237,
+                    "releaseBuildNumber": 19044,
+                    "releaseBuildDate": "2022-03-15T13:59:19.313Z",
+                    "osBuild": "Windows Server 2022",
+                    "release": "2022.02 B",
+                    "testType": "Out of box test",
+                    "productFamily": "Windows",
+                    "executionUsageDetails": [
+                      {
+                        "applicationName": "test",
+                        "applicationVersion": "1",
+                        "executionRequestId": "6298c3dc-7fed-4028-a5b8-34654322a1fe",
+                        "sku": "TBD",
+                        "meterId": "0f08918b-df38-4439-a328-b2b2254af793",
+                        "startTimeStamp": "2022-03-14T08:11:58.761Z",
+                        "endTimeStamp": "2022-03-14T08:11:58.761Z",
+                        "osBuild": "Windows Server 2022",
+                        "release": "2022.02 B",
+                        "testType": "Out of box test",
+                        "updateType": "Security",
+                        "usedFreeHours": 5,
+                        "usedBillableHours": 0,
+                        "billedCharges": 0
+                      },
+                      {
+                        "applicationName": "test",
+                        "applicationVersion": "1",
+                        "executionRequestId": "01187855-12bf-49f9-ae39-87acff5f6081",
+                        "sku": "TBD",
+                        "meterId": "bd84f3e2-a1f0-4a6f-b493-c7e42be94293",
+                        "startTimeStamp": "2022-03-14T08:11:58.761Z",
+                        "endTimeStamp": "2022-03-14T08:11:58.761Z",
+                        "osBuild": "Windows Server 2022",
+                        "release": "2022.02 B",
+                        "testType": "Out of box test",
+                        "updateType": "Security",
+                        "usedFreeHours": 5,
+                        "usedBillableHours": 5,
+                        "billedCharges": 40
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "updateType": "Feature",
+                "totalUsedFreeHours": 10,
+                "totalUsedBillableHours": 0,
+                "totalCharges": 0,
+                "usageGroups": [
+                  {
+                    "totalUsedFreeHours": 10,
+                    "totalUsedBillableHours": 0,
+                    "totalCharges": 0,
+                    "releaseBuildRevision": 1237,
+                    "releaseBuildNumber": 19044,
+                    "releaseBuildDate": "2022-03-15T13:59:19.313Z",
+                    "osBuild": "Windows 10 21H2",
+                    "release": "2021.09 B",
+                    "testType": "Out of box test",
+                    "productFamily": "Windows",
+                    "executionUsageDetails": [
+                      {
+                        "applicationName": "test",
+                        "applicationVersion": "1",
+                        "executionRequestId": "94d6ab44-dba2-4231-9aaf-7dd05aed1758",
+                        "sku": "TBD",
+                        "meterId": "1bbce8b9-b86e-43dc-8732-f69540b8f97a",
+                        "startTimeStamp": "2022-03-14T08:11:58.761Z",
+                        "endTimeStamp": "2022-03-14T08:11:58.761Z",
+                        "osBuild": "Windows 10 21H2",
+                        "release": "2021.09 B",
+                        "testType": "Out of box test",
+                        "updateType": "Feature",
+                        "usedFreeHours": 10,
+                        "usedBillableHours": 0,
+                        "billedCharges": 0
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "nextRequest": {
+          "startTimeStamp": "2022-03-23T06:17:05.867Z",
+          "endTimeStamp": "2022-03-23T06:17:05.868Z",
+          "pageSize": 50,
+          "pageIndex": 15
+        }
+      }
+    }
+  }
+}

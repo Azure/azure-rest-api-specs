@@ -1,0 +1,1956 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "DeviceUpdate",
+    "description": "Microsoft Device Update resource provider.",
+    "version": "2022-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DeviceUpdate/checknameavailability": {
+      "post": {
+        "description": "Checks ADU resource name availability.",
+        "operationId": "CheckNameAvailability",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityRequest"
+            },
+            "in": "body",
+            "name": "request",
+            "required": true,
+            "description": "Check Name Availability Request."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Check Name Availability Response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CheckNameAvailability_Available": {
+            "$ref": "./examples/CheckNameAvailability_Available.json"
+          },
+          "CheckNameAvailability_AlreadyExists": {
+            "$ref": "./examples/CheckNameAvailability_AlreadyExists.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DeviceUpdate/accounts": {
+      "get": {
+        "description": "Returns list of Accounts.",
+        "operationId": "Accounts_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Accounts.",
+            "schema": {
+              "$ref": "#/definitions/AccountList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get list of Accounts": {
+            "$ref": "./examples/Accounts/Accounts_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts": {
+      "get": {
+        "description": "Returns list of Accounts.",
+        "operationId": "Accounts_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Accounts.",
+            "schema": {
+              "$ref": "#/definitions/AccountList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets list of Accounts": {
+            "$ref": "./examples/Accounts/Accounts_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts/{accountName}": {
+      "get": {
+        "description": "Returns account details for the given account name.",
+        "operationId": "Accounts_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Account details.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets Account details": {
+            "$ref": "./examples/Accounts/Accounts_Get.json"
+          }
+        }
+      },
+      "head": {
+        "description": "Checks whether account exists.",
+        "operationId": "Accounts_Head",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Account exists."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Checks whether account exists": {
+            "$ref": "./examples/Accounts/Accounts_Head.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Creates or updates Account.",
+        "operationId": "Accounts_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "Account",
+            "description": "Account details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Async operation to create or update Account was created.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates Account": {
+            "$ref": "./examples/Accounts/Accounts_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes account.",
+        "operationId": "Accounts_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Account was deleted."
+          },
+          "202": {
+            "description": "Async operation to delete Account was created."
+          },
+          "204": {
+            "description": "Account has been already deleted."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes an account": {
+            "$ref": "./examples/Accounts/Accounts_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates account's patchable properties",
+        "operationId": "Accounts_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "accountUpdatePayload",
+            "description": "Updated Account.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Account updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "201": {
+            "description": "Async operation to update accounts was created.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Updates Account": {
+            "$ref": "./examples/Accounts/Accounts_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/instances": {
+      "get": {
+        "description": "Returns instances for the given account name.",
+        "operationId": "Instances_ListByAccount",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Instances.",
+            "schema": {
+              "$ref": "#/definitions/InstanceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets list of Instances by Account": {
+            "$ref": "./examples/Instances/Instances_ListByAccount.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/instances/{instanceName}": {
+      "get": {
+        "description": "Returns instance details for the given instance and account name.",
+        "operationId": "Instances_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Instance details.",
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets list of Instances": {
+            "$ref": "./examples/Instances/Instances_Get.json"
+          }
+        }
+      },
+      "head": {
+        "description": "Checks whether instance exists.",
+        "operationId": "Instances_Head",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Instance exists."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Checks whether instance exists.": {
+            "$ref": "./examples/Instances/Instances_Head.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Creates or updates instance.",
+        "operationId": "Instances_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          },
+          {
+            "name": "Instance",
+            "description": "Instance details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Async operation to create or update Instance was created.",
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates Instance": {
+            "$ref": "./examples/Instances/Instances_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes instance.",
+        "operationId": "Instances_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Instance was deleted."
+          },
+          "202": {
+            "description": "Async operation to delete Instance was created."
+          },
+          "204": {
+            "description": "Instance has been already deleted."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes instance": {
+            "$ref": "./examples/Instances/Instances_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates instance's tags.",
+        "operationId": "Instances_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          },
+          {
+            "name": "tagUpdatePayload",
+            "description": "Updated tags.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Instance updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates Instance": {
+            "$ref": "./examples/Instances/Instances_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "List all private endpoint connections in a device update account.",
+        "operationId": "PrivateEndpointConnections_ListByAccount",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionList": {
+            "$ref": "./examples/PrivateEndpointConnections/PrivateEndpointConnection_ListByAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Get the specified private endpoint connection associated with the device update account.",
+        "operationId": "PrivateEndpointConnections_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "./privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionGet": {
+            "$ref": "./examples/PrivateEndpointConnections/PrivateEndpointConnection_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Update the state of specified private endpoint connection associated with the device update account.",
+        "operationId": "PrivateEndpointConnections_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "./privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          },
+          {
+            "name": "privateEndpointConnection",
+            "in": "body",
+            "description": "The parameters for creating a private endpoint connection.",
+            "required": true,
+            "schema": {
+              "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionCreateOrUpdate": {
+            "$ref": "./examples/PrivateEndpointConnections/PrivateEndpointConnection_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Deletes the specified private endpoint connection associated with the device update account.",
+        "operationId": "PrivateEndpointConnections_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "./privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the operation completed synchronously."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The private endpoint connection does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionDelete": {
+            "$ref": "./examples/PrivateEndpointConnections/PrivateEndpointConnection_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "List all private link resources in a device update account.",
+        "operationId": "PrivateLinkResources_ListByAccount",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResourcesList": {
+            "$ref": "./examples/PrivateLinkResources/PrivateLinkResources_ListByAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/privateLinkResources/{groupId}": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "Get the specified private link resource associated with the device update account.",
+        "operationId": "PrivateLinkResources_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GroupIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/GroupInformation"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResourcesGet": {
+            "$ref": "./examples/PrivateLinkResources/PrivateLinkResources_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/privateEndpointConnectionProxies": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnectionProxies"
+        ],
+        "description": "(INTERNAL - DO NOT USE) List all private endpoint connection proxies in a device update account.",
+        "operationId": "PrivateEndpointConnectionProxies_ListByAccount",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxyListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionProxyList": {
+            "$ref": "./examples/PrivateEndpointConnectionProxies/PrivateEndpointConnectionProxy_ListByAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyId}/validate": {
+      "post": {
+        "description": "(INTERNAL - DO NOT USE) Validates a private endpoint connection proxy object.",
+        "operationId": "PrivateEndpointConnectionProxies_Validate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionProxyIdParameter"
+          },
+          {
+            "name": "privateEndpointConnectionProxy",
+            "in": "body",
+            "description": "The parameters for creating a private endpoint connection proxy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Validate private endpoint connection proxy empty response."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionProxyValidate": {
+            "$ref": "./examples/PrivateEndpointConnectionProxies/PrivateEndpointConnectionProxy_Validate.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyId}/updatePrivateEndpointProperties": {
+      "post": {
+        "description": "(INTERNAL - DO NOT USE) Updates a private endpoint inside the private endpoint connection proxy object.",
+        "operationId": "PrivateEndpointConnectionProxies_UpdatePrivateEndpointProperties",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionProxyIdParameter"
+          },
+          {
+            "name": "privateEndpointUpdate",
+            "in": "body",
+            "description": "The parameters for updating a private endpoint connection proxy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update private endpoint in private endpoint connection proxy empty response."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionProxyPrivateEndpointUpdate": {
+            "$ref": "./examples/PrivateEndpointConnectionProxies/PrivateEndpointConnectionProxy_PrivateEndpointUpdate.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyId}": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "(INTERNAL - DO NOT USE) Get the specified private endpoint connection proxy associated with the device update account.",
+        "operationId": "PrivateEndpointConnectionProxies_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionProxyIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionProxyGet": {
+            "$ref": "./examples/PrivateEndpointConnectionProxies/PrivateEndpointConnectionProxy_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PrivateEndpointConnectionProxies"
+        ],
+        "description": "(INTERNAL - DO NOT USE) Creates or updates the specified private endpoint connection proxy resource associated with the device update account.",
+        "operationId": "PrivateEndpointConnectionProxies_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionProxyIdParameter"
+          },
+          {
+            "name": "privateEndpointConnectionProxy",
+            "in": "body",
+            "description": "The parameters for creating a private endpoint connection proxy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionProxyCreateOrUpdate": {
+            "$ref": "./examples/PrivateEndpointConnectionProxies/PrivateEndpointConnectionProxy_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "PrivateEndpointConnectionProxies"
+        ],
+        "description": "(INTERNAL - DO NOT USE) Deletes the specified private endpoint connection proxy associated with the device update account.",
+        "operationId": "PrivateEndpointConnectionProxies_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionProxyIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the operation completed synchronously."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The private endpoint connection does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionProxyDelete": {
+            "$ref": "./examples/PrivateEndpointConnectionProxies/PrivateEndpointConnectionProxy_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/providers/Microsoft.DeviceUpdate/operations": {
+      "get": {
+        "description": "Returns list of operations for Microsoft.DeviceUpdate resource provider.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation details.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets list of Operations": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Account": {
+      "description": "Device Update account details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Device Update account properties.",
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "description": "Provisioning state.",
+              "type": "string",
+              "enum": [
+                "Succeeded",
+                "Deleted",
+                "Failed",
+                "Canceled",
+                "Accepted",
+                "Creating"
+              ],
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "ProvisioningState",
+                "modelAsString": true
+              }
+            },
+            "hostName": {
+              "description": "API host name.",
+              "type": "string",
+              "readOnly": true
+            },
+            "publicNetworkAccess": {
+              "description": "Whether or not public network access is allowed for the account.",
+              "default": "Enabled",
+              "enum": [
+                "Enabled",
+                "Disabled"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "PublicNetworkAccess",
+                "modelAsString": true
+              }
+            },
+            "privateEndpointConnections": {
+              "description": "List of private endpoint connections associated with the account.",
+              "type": "array",
+              "items": {
+                "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnection"
+              }
+            },
+            "sku": {
+              "description": "Device Update Sku",
+              "type": "string",
+              "enum": [
+                "Free",
+                "Standard"
+              ],
+              "default": "Standard",
+              "readOnly": false,
+              "x-ms-enum": {
+                "name": "SKU",
+                "modelAsString": true
+              }
+            },
+            "locations": {
+              "description": "Device Update account primary and failover location details",
+              "readOnly": true,
+              "x-ms-identifiers": [],
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Location"
+              }
+            }
+          }
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The type of identity used for the resource."
+        }
+      }
+    },
+    "Location": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "role": {
+          "description": "Whether the location is primary or failover",
+          "default": "Primary",
+          "enum": [
+            "Primary",
+            "Failover"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Role",
+            "modelAsString": true
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "AccountList": {
+      "description": "List of Accounts.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of Accounts list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "List of Accounts.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Account"
+          }
+        }
+      }
+    },
+    "Instance": {
+      "description": "Device Update instance details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Device Update instance properties.",
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "description": "Provisioning state.",
+              "type": "string",
+              "enum": [
+                "Succeeded",
+                "Deleted",
+                "Failed",
+                "Canceled",
+                "Accepted",
+                "Creating"
+              ],
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "ProvisioningState",
+                "modelAsString": true
+              }
+            },
+            "accountName": {
+              "description": "Parent Device Update Account name which Instance belongs to.",
+              "type": "string",
+              "readOnly": true
+            },
+            "iotHubs": {
+              "description": "List of IoT Hubs associated with the account.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IotHubSettings"
+              }
+            },
+            "enableDiagnostics": {
+              "description": "Enables or Disables the diagnostic logs collection",
+              "type": "boolean"
+            },
+            "diagnosticStorageProperties": {
+              "$ref": "#/definitions/DiagnosticStorageProperties"
+            }
+          }
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "DiagnosticStorageProperties": {
+      "description": "Customer-initiated diagnostic log collection storage properties",
+      "type": "object",
+      "properties": {
+        "authenticationType": {
+          "description": "Authentication Type",
+          "enum": [
+            "KeyBased"
+          ],
+          "type": "string",
+          "readOnly": false,
+          "x-ms-enum": {
+            "name": "AuthenticationType",
+            "modelAsString": true
+          }
+        },
+        "connectionString": {
+          "description": "ConnectionString of the diagnostic storage account",
+          "x-ms-secret": true,
+          "type": "string"
+        },
+        "resourceId": {
+          "description": "ResourceId of the diagnostic storage account",
+          "type": "string"
+        }
+      },
+      "required": [
+        "authenticationType",
+        "resourceId"
+      ]
+    },
+    "InstanceList": {
+      "description": "List of Instances.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of Instances list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "List of Instances.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Instance"
+          }
+        }
+      }
+    },
+    "IotHubSettings": {
+      "type": "object",
+      "description": "Device Update account integration with IoT Hub settings.",
+      "properties": {
+        "resourceId": {
+          "description": "IoTHub resource ID",
+          "type": "string",
+          "minLength": 108,
+          "maxLength": 244
+        }
+      },
+      "required": [
+        "resourceId"
+      ]
+    },
+    "AccountUpdate": {
+      "description": "Request payload used to update and existing Accounts.",
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The type of identity used for the resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TagUpdate"
+        }
+      ]
+    },
+    "TagUpdate": {
+      "description": "Request payload used to update an existing resource's tags.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "List of key value pairs that describe the resource. This will overwrite the existing tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PrivateLinkResourceListResult": {
+      "description": "The available private link resources for an Account",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of available private link resources for an Account",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupInformation"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of private link resources.",
+          "type": "string"
+        }
+      }
+    },
+    "GroupInformation": {
+      "description": "The group information for creating a private endpoint on an Account",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties for a group information object",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GroupInformationProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "GroupInformationProperties": {
+      "description": "The properties for a group information object",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./privatelinks.json#/definitions/PrivateLinkResourceProperties"
+        }
+      ],
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of private link group ID.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "GroupIdProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PrivateEndpointConnectionProxyListResult": {
+      "description": "The available private endpoint connection proxies for an Account (not to be used by anyone, here because of ARM requirements)",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of available private endpoint connection proxies for an Account",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionProxy"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of private endpoint connection proxies.",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateEndpointConnectionProxy": {
+      "description": "Private endpoint connection proxy details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        },
+        {
+          "$ref": "#/definitions/PrivateEndpointConnectionProxyProperties"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Private endpoint connection proxy object property bag.",
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "provisioningState": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxyProvisioningState",
+              "description": "The provisioning state of the private endpoint connection proxy resource."
+            }
+          }
+        }
+      }
+    },
+    "PrivateEndpointConnectionProxyProperties": {
+      "description": "Private endpoint connection proxy object properties.",
+      "type": "object",
+      "x-ms-client-flatten": true,
+      "properties": {
+        "eTag": {
+          "description": "ETag from NRP.",
+          "type": "string",
+          "readOnly": true
+        },
+        "remotePrivateEndpoint": {
+          "description": "Remote private endpoint details.",
+          "$ref": "#/definitions/RemotePrivateEndpoint"
+        },
+        "status": {
+          "description": "Operation status.",
+          "type": "string"
+        }
+      }
+    },
+    "RemotePrivateEndpoint": {
+      "description": "Remote private endpoint details.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Remote endpoint resource ID.",
+          "type": "string"
+        },
+        "location": {
+          "description": "ARM location of the remote private endpoint.",
+          "type": "string"
+        },
+        "immutableSubscriptionId": {
+          "description": "Original subscription ID needed by Microsoft.Network.",
+          "type": "string"
+        },
+        "immutableResourceId": {
+          "description": "Original resource ID needed by Microsoft.Network.",
+          "type": "string"
+        },
+        "vnetTrafficTag": {
+          "description": "Virtual network traffic tag.",
+          "type": "string"
+        },
+        "manualPrivateLinkServiceConnections": {
+          "description": "List of private link service connections that need manual approval.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkServiceConnection"
+          }
+        },
+        "privateLinkServiceConnections": {
+          "description": "List of automatically approved private link service connections.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkServiceConnection"
+          }
+        },
+        "privateLinkServiceProxies": {
+          "description": "List of private link service proxies.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkServiceProxy"
+          }
+        },
+        "connectionDetails": {
+          "description": "List of connection details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectionDetails"
+          }
+        }
+      }
+    },
+    "PrivateEndpointUpdate": {
+      "description": "Private endpoint update details.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Remote endpoint resource ID.",
+          "type": "string"
+        },
+        "location": {
+          "description": "ARM location of the remote private endpoint.",
+          "type": "string"
+        },
+        "immutableSubscriptionId": {
+          "description": "Original subscription ID needed by Microsoft.Network.",
+          "type": "string"
+        },
+        "immutableResourceId": {
+          "description": "Original resource ID needed by Microsoft.Network.",
+          "type": "string"
+        },
+        "vnetTrafficTag": {
+          "description": "Virtual network traffic tag.",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkServiceConnection": {
+      "description": "Private link service connection details.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Private link service connection name.",
+          "type": "string"
+        },
+        "groupIds": {
+          "description": "List of group IDs.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requestMessage": {
+          "description": "Request message.",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkServiceProxy": {
+      "description": "Private link service proxy details.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "NRP resource ID.",
+          "type": "string"
+        },
+        "remotePrivateLinkServiceConnectionState": {
+          "description": "Remote private link service connection state",
+          "$ref": "./privatelinks.json#/definitions/PrivateLinkServiceConnectionState"
+        },
+        "remotePrivateEndpointConnection": {
+          "description": "Remote private endpoint connection details.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/RemotePrivateEndpointConnection"
+            }
+          ]
+        },
+        "groupConnectivityInformation": {
+          "description": "Group connectivity information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupConnectivityInformation"
+          }
+        }
+      }
+    },
+    "RemotePrivateEndpointConnection": {
+      "description": "Remote private endpoint connection details.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Remote private endpoint connection ID.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "GroupConnectivityInformation": {
+      "description": "Group connectivity details.",
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "description": "Group ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "memberName": {
+          "description": "Member name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "customerVisibleFqdns": {
+          "description": "List of customer visible FQDNs.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "internalFqdn": {
+          "description": "Internal FQDN.",
+          "type": "string",
+          "readOnly": true
+        },
+        "redirectMapId": {
+          "description": "Redirect map ID.",
+          "type": "string"
+        },
+        "privateLinkServiceArmRegion": {
+          "description": "PrivateLinkService ARM region.",
+          "type": "string"
+        }
+      }
+    },
+    "ConnectionDetails": {
+      "description": "Private endpoint connection proxy object properties.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Connection details ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "privateIpAddress": {
+          "description": "Private IP address.",
+          "type": "string",
+          "readOnly": true
+        },
+        "linkIdentifier": {
+          "description": "Link ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "groupId": {
+          "description": "Group ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "memberName": {
+          "description": "Member name.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnectionProxyProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Creating",
+        "Deleting",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointConnectionProxyProvisioningState",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription ID."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "ADU schema API version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The resource group name.",
+      "x-ms-parameter-location": "method"
+    },
+    "AccountNameParameter": {
+      "name": "accountName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Account name.",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$",
+      "minLength": 3,
+      "maxLength": 24
+    },
+    "InstanceNameParameter": {
+      "name": "instanceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Instance name.",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$",
+      "minLength": 3,
+      "maxLength": 36
+    },
+    "GroupIdParameter": {
+      "name": "groupId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The group ID of the private link resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "PrivateEndpointConnectionProxyIdParameter": {
+      "name": "privateEndpointConnectionProxyId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the private endpoint connection proxy object.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

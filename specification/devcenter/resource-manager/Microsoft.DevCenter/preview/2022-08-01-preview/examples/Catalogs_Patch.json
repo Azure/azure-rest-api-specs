@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2022-08-01-preview",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "rg1",
+    "devCenterName": "Contoso",
+    "catalogName": "{catalogName}",
+    "body": {
+      "properties": {
+        "gitHub": {
+          "path": "/environments"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/rg1/providers/Microsoft.DevCenter/devcenters/Contoso/catalogs/{catalogName}",
+        "name": "{catalogName}",
+        "type": "Microsoft.DevCenter/devcenters/catalogs",
+        "properties": {
+          "gitHub": {
+            "uri": "https://github.com/Contoso/centralrepo-fake.git",
+            "branch": "main",
+            "secretIdentifier": "https://contosokv.vault.azure.net/secrets/CentralRepoPat",
+            "path": "/environments"
+          },
+          "lastSyncTime": "2020-11-18T18:28:00.314Z",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "User1",
+          "createdByType": "User",
+          "createdAt": "2020-11-18T18:24:24.818Z",
+          "lastModifiedBy": "User1",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-11-18T18:24:24.818Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DevCenter/locations/CENTRALUS/operationStatuses/722e7bc4-60fa-4e6b-864f-d5bf12b9adc4"
+      }
+    }
+  }
+}

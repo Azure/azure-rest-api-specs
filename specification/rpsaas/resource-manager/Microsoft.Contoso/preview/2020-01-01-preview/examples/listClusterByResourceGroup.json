@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "resourceGroupName": "testRG",
+    "api-version": "2020-01-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "testCluster",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Contoso/towers/testTower",
+            "type": "Microsoft.Contoso/clusters",
+            "location": "East US",
+            "properties": {
+              "cluster": "test-cluster",
+              "datacenter": "dc1",
+              "dummyVolume": {
+                "sizeLimit": "1Gi"
+              },
+              "serviceAccountName": "cassandra",
+              "nodes": 3
+            }
+          },
+          {
+            "name": "testCluster",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Contoso/towers/testTower2",
+            "type": "Microsoft.Contoso/clusters",
+            "location": "East US",
+            "properties": {
+              "cluster": "test-cluster",
+              "datacenter": "dc1",
+              "dummyVolume": {
+                "sizeLimit": "1Gi"
+              },
+              "serviceAccountName": "cassandra",
+              "nodes": 3
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "api-version": "2022-03-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "packetCoreControlPlaneName": "TestPacketCoreCP",
+    "packetCoreDataPlaneName": "TestPacketCoreDP",
+    "attachedDataNetworkName": "TestAttachedDataNetwork",
+    "parameters": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "TestAccessPoint",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP/packetCoreDataPlanes/TestPacketCoreDP/attachedDataNetworks/TestAttachedDataNetwork",
+        "type": "Microsoft.MobileNetwork/attachedDataNetwork",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "location": "eastus",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "userPlaneDataInterface": {
+            "name": "N6"
+          },
+          "naptConfiguration": {
+            "enabled": "Enabled",
+            "portRange": {
+              "minPort": 1024,
+              "maxPort": 65535
+            },
+            "portReuseHoldTime": {
+              "tcp": 120,
+              "udp": 60
+            },
+            "pinholeLimits": 65536,
+            "pinholeTimeouts": {
+              "tcp": 7440,
+              "udp": 300,
+              "icmp": 60
+            }
+          },
+          "userEquipmentAddressPoolPrefix": [
+            "2.2.0.0/16"
+          ],
+          "userEquipmentStaticAddressPoolPrefix": [
+            "2.4.0.0/16"
+          ]
+        }
+      }
+    }
+  }
+}

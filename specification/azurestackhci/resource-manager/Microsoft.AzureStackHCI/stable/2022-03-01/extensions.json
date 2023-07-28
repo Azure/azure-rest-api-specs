@@ -1,0 +1,500 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-03-01",
+    "title": "AzureStackHCI",
+    "description": "Azure Stack HCI management service"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions": {
+      "get": {
+        "operationId": "Extensions_ListByArcSetting",
+        "description": "List all Extensions under ArcSetting resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ArcSettingNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExtensionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Extensions under ArcSetting resource": {
+            "$ref": "./examples/ListExtensionsByArcSetting.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions/{extensionName}": {
+      "get": {
+        "operationId": "Extensions_Get",
+        "description": "Get particular Arc Extension of HCI Cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ArcSettingNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Extension"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ArcSettings Extension": {
+            "$ref": "./examples/GetExtension.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Extensions_Create",
+        "description": "Create Extension for HCI cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ArcSettingNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionNameParameter"
+          },
+          {
+            "name": "extension",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Extension"
+            },
+            "description": "Details of the Machine Extension to be created."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succeeded",
+            "schema": {
+              "$ref": "#/definitions/Extension"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Extension"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create Arc Extension": {
+            "$ref": "./examples/PutExtension.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Extensions_Update",
+        "description": "Update Extension for HCI cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ArcSettingNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionNameParameter"
+          },
+          {
+            "name": "extension",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Extension"
+            },
+            "description": "Details of the Machine Extension to be created."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Extension"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
+        "x-ms-examples": {
+          "Update Arc Extension": {
+            "$ref": "./examples/PatchExtension.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Extensions_Delete",
+        "description": "Delete particular Arc Extension of HCI Cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ArcSettingNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Delete Arc Extension": {
+            "$ref": "./examples/DeleteExtension.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Extension": {
+      "description": "Details of a particular extension in HCI Cluster.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "description": "System data of Extension resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "x-ms-client-flatten": true,
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Describes Machine Extension Properties.",
+          "$ref": "#/definitions/ExtensionProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ExtensionProperties": {
+      "description": "Status of Arc Extension for a particular node in HCI Cluster.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the Extension proxy resource.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Accepted",
+            "Provisioning"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "extensionParameters": {
+          "description": "Parameters specific to this extension type.",
+          "$ref": "#/definitions/ExtensionParameters",
+          "x-ms-client-flatten": true
+        },
+        "aggregateState": {
+          "description": "Aggregate state of Arc Extensions across the nodes in this HCI cluster.",
+          "type": "string",
+          "enum": [
+            "NotSpecified",
+            "Error",
+            "Succeeded",
+            "Canceled",
+            "Failed",
+            "Connected",
+            "Disconnected",
+            "Deleted",
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Moving",
+            "PartiallySucceeded",
+            "PartiallyConnected",
+            "InProgress"
+          ],
+          "x-ms-enum": {
+            "name": "ExtensionAggregateState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "perNodeExtensionDetails": {
+          "description": "State of Arc Extension in each of the nodes.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PerNodeExtensionState"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "PerNodeExtensionState": {
+      "description": "Status of Arc Extension for a particular node in HCI Cluster.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the node in HCI Cluster.",
+          "type": "string",
+          "readOnly": true
+        },
+        "extension": {
+          "description": "Fully qualified resource ID for the particular Arc Extension on this node.",
+          "type": "string",
+          "readOnly": true
+        },
+        "state": {
+          "description": "State of Arc Extension in this node.",
+          "type": "string",
+          "enum": [
+            "NotSpecified",
+            "Error",
+            "Succeeded",
+            "Canceled",
+            "Failed",
+            "Connected",
+            "Disconnected",
+            "Deleted",
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Moving"
+          ],
+          "x-ms-enum": {
+            "name": "NodeExtensionState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ExtensionList": {
+      "description": "List of Extensions in HCI cluster.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of Extensions in HCI cluster.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Extension"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to the next set of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ExtensionParameters": {
+      "description": "Describes the properties of a Machine Extension. This object mirrors the definition in HybridCompute.",
+      "type": "object",
+      "properties": {
+        "forceUpdateTag": {
+          "type": "string",
+          "description": "How the extension handler should be forced to update even if the extension configuration has not changed."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The name of the extension handler publisher."
+        },
+        "type": {
+          "type": "string",
+          "description": "Specifies the type of the extension; an example is \"CustomScriptExtension\"."
+        },
+        "typeHandlerVersion": {
+          "type": "string",
+          "description": "Specifies the version of the script handler."
+        },
+        "autoUpgradeMinorVersion": {
+          "type": "boolean",
+          "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true."
+        },
+        "settings": {
+          "type": "object",
+          "description": "Json formatted public settings for the extension."
+        },
+        "protectedSettings": {
+          "type": "object",
+          "description": "Protected settings (may contain secrets).",
+          "x-ms-secret": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ClusterNameParameter": {
+      "name": "clusterName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the cluster.",
+      "x-ms-parameter-location": "method"
+    },
+    "ArcSettingNameParameter": {
+      "name": "arcSettingName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the proxy resource holding details of HCI ArcSetting information.",
+      "x-ms-parameter-location": "method"
+    },
+    "ExtensionNameParameter": {
+      "name": "extensionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the machine extension.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

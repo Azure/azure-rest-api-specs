@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2023-01-01-preview",
+    "portalExtensionName": "declarativeportalextension",
+    "resourceGroupName": "testRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "slotName": "myfeaturea",
+    "parameters": {
+      "properties": {
+        "source": {
+          "kind": "Version",
+          "value": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/storage/versions/someversion"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/declarativeportalextension/slots/myfeaturea",
+        "name": "myfeaturea",
+        "type": "Microsoft.PortalServices/extensions/slots",
+        "tags": {},
+        "properties": {
+          "provisioningState": "InProgress",
+          "source": {
+            "kind": "Version",
+            "value": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/storage/versions/someversion"
+          },
+          "nextStage": "myfeaturea"
+        }
+      }
+    }
+  }
+}

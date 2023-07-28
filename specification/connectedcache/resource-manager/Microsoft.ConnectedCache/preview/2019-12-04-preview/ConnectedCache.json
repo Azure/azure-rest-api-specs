@@ -9,12 +9,20 @@
     }
   },
   "host": "management.azure.com",
-  "schemes": [ "https" ],
-  "consumes": [ "application/json" ],
-  "produces": [ "application/json" ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": [ "user_impersonation" ]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -31,7 +39,9 @@
   "paths": {
     "/providers/Microsoft.ConnectedCache/operations": {
       "get": {
-        "tags": [ "Operations" ],
+        "tags": [
+          "Operations"
+        ],
         "operationId": "Operations_List",
         "x-ms-examples": {
           "ConnectedCacheOperationsList": {
@@ -148,12 +158,6 @@
               "$ref": "#/definitions/ConnectedCache"
             }
           },
-          "201": {
-            "description": "The request was successful; response contains the updated Connected Cache node.",
-            "schema": {
-              "$ref": "#/definitions/ConnectedCache"
-            }
-          },
           "default": {
             "description": "Error response describing the reason for operation failure. 404 - NotFound (cacheNodes could not be created/updated)",
             "schema": {
@@ -163,7 +167,9 @@
         }
       },
       "delete": {
-        "tags": [ "cacheNodes" ],
+        "tags": [
+          "cacheNodes"
+        ],
         "summary": "Deletes a cache Nodes resource.",
         "description": "Deletes an existing cache Node.",
         "operationId": "cacheNode_Delete",
