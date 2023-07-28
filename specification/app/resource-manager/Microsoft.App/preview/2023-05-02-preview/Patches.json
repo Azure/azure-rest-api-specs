@@ -1,0 +1,404 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ContainerApps API Client",
+    "version": "2023-05-02-preview"
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/builders/{builderName}/patches": {
+      "get": {
+        "tags": [
+          "Patches"
+        ],
+        "operationId": "Patches_ListByBuilderResource",
+        "description": "List PatchResource resources by BuilderResource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./Builders.json#/parameters/BuilderNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PatchCollection"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patches_Apply_0": {
+            "$ref": "./examples/Patches_ListByBuilderResource.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/builders/{builderName}/patches/{patchName}": {
+      "get": {
+        "tags": [
+          "Patches"
+        ],
+        "operationId": "Patches_Get",
+        "description": "Get the details of a specific patch.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./Builders.json#/parameters/BuilderNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PatchNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Patch details retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/PatchResource"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patches_Get_0": {
+            "$ref": "./examples/Patches_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Patches"
+        ],
+        "operationId": "Patches_Delete",
+        "description": "Delete specific patch by patch name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./Builders.json#/parameters/BuilderNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PatchNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Patch deletion completed successfully."
+          },
+          "201": {
+            "description": "Patch deletion has been started."
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Patches_Delete_0": {
+            "$ref": "./examples/Patches_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/builders/{builderName}/patches/{patchName}/apply": {
+      "post": {
+        "tags": [
+          "Patches"
+        ],
+        "operationId": "Patches_Apply",
+        "description": "Apply a PatchResource with patch id.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./Builders.json#/parameters/BuilderNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PatchNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Patching operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PatchResource"
+            }
+          },
+          "201": {
+            "description": "Patching operation has been started.",
+            "schema": {
+              "$ref": "#/definitions/PatchResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Patches_Apply_0": {
+            "$ref": "./examples/Patches_Apply.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PatchResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PatchProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "The resource representation of a patch.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Resource instance provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "DetectionStatus": {
+      "type": "string",
+      "description": "The status of the patch detection.",
+      "enum": [
+        "Succeeded",
+        "ImageInspectionFailed",
+        "RunImageNotRecognized",
+        "RegistryLoginFailed",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "DetectionStatus",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "PatchStatus": {
+      "type": "string",
+      "description": "The status of the patch once it has been provisioned",
+      "enum": [
+        "NotStarted",
+        "RebaseInProgress",
+        "CreatingRevision",
+        "Succeeded",
+        "Canceled",
+        "RebaseFailed",
+        "RevisionCreationFailed",
+        "ImagePushPullFailed"
+      ],
+      "x-ms-enum": {
+        "name": "PatchStatus",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "PatchDetails": {
+      "description": "Individual patch object.",
+      "type": "object",
+      "properties": {
+        "targetImage": {
+          "type": "string",
+          "description": "The name of the target image for the patch."
+        },
+        "newRunImage": {
+          "type": "string",
+          "description": "The name of new run image for the target image."
+        },
+        "oldRunImage": {
+          "type": "string",
+          "description": "The name of old run image for the target image."
+        },
+        "patchType": {
+          "type": "string",
+          "description": "The type for the patch.",
+          "enum": [
+            "RunImageSecurity",
+            "OSSecurity",
+            "Other"
+          ],
+          "x-ms-enum": {
+            "name": "PatchType",
+            "modelAsString": true
+          }
+        },
+        "targetEnvironmentId": {
+          "type": "string",
+          "description": "The id of the target environment for the patch."
+        },
+        "targetContainerAppId": {
+          "type": "string",
+          "description": "The id of the target container app for the patch."
+        },
+        "targetContainerName": {
+          "type": "string",
+          "description": "The name of the target container for the patch."
+        }
+      },
+      "readOnly": true
+    },
+    "PatchProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Patch provisioning state.",
+          "readOnly": true
+        },
+        "detectionStatus": {
+          "$ref": "#/definitions/DetectionStatus",
+          "description": "The status of the patch detection.",
+          "readOnly": true
+        },
+        "patchStatus": {
+          "$ref": "#/definitions/PatchStatus",
+          "description": "The status of the patch once it has been provisioned",
+          "readOnly": true
+        },
+        "patchDetails": {
+          "type": "object",
+          "$ref": "#/definitions/PatchDetails",
+          "description": "Detailed info about the specific patch."
+        }
+      },
+      "readOnly": true
+    },
+    "PatchCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PatchResource"
+          },
+          "description": "The PatchResource items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "the link to the next page of items"
+        }
+      },
+      "description": "The response of a PatchResource list resources",
+      "required": [
+        "value"
+      ]
+    }
+  },
+  "parameters": {
+    "PatchNameParameter": {
+      "name": "patchName",
+      "in": "path",
+      "required": true,
+      "description": "The name of the patch",
+      "minLength": 2,
+      "maxLength": 64,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
