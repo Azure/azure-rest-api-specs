@@ -73,52 +73,6 @@
             "$ref": "./examples/Patches_ListByBuilderResource.json"
           }
         }
-      },
-      "delete": {
-        "tags": [
-          "Patches"
-        ],
-        "operationId": "Patches_Delete",
-        "description": "Delete specific patch by patch id.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./Builders.json#/parameters/BuilderNameParameter"
-          },
-          {
-            "$ref": "#/parameters/PatchNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Patch deletion completed successfully."
-          },
-          "201": {
-            "description": "Patch deletion has been started."
-          },
-          "default": {
-            "description": "Common error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-examples": {
-          "Patches_Apply_0": {
-            "$ref": "./examples/Patches_Delete.json"
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/builders/{builderName}/patches/{patchName}": {
@@ -162,6 +116,52 @@
         "x-ms-examples": {
           "Patches_Get_0": {
             "$ref": "./examples/Patches_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Patches"
+        ],
+        "operationId": "Patches_Delete",
+        "description": "Delete specific patch by patch name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./Builders.json#/parameters/BuilderNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PatchNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Patch deletion completed successfully."
+          },
+          "201": {
+            "description": "Patch deletion has been started."
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Patches_Delete_0": {
+            "$ref": "./examples/Patches_Delete.json"
           }
         }
       }
@@ -253,13 +253,26 @@
       "enum": [
         "Succeeded",
         "Failed",
-        "Canceled",
-        "Creating",
-        "Updating",
-        "Deleting"
+        "Canceled"
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "DetectionStatus": {
+      "type": "string",
+      "description": "The status of the patch detection.",
+      "enum": [
+        "Succeeded",
+        "ImageInspectionFailed",
+        "RunImageNotRecognized",
+        "RegistryLoginFailed",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "DetectionStatus",
         "modelAsString": true
       },
       "readOnly": true
@@ -269,10 +282,13 @@
       "description": "The status of the patch once it has been provisioned",
       "enum": [
         "NotStarted",
-        "InProgress",
+        "RebaseInProgress",
+        "CreatingRevision",
         "Succeeded",
         "Canceled",
-        "Failed"
+        "RebaseFailed",
+        "RevisionCreationFailed",
+        "ImagePushPullFailed"
       ],
       "x-ms-enum": {
         "name": "PatchStatus",
@@ -280,14 +296,10 @@
       },
       "readOnly": true
     },
-    "PatchObject": {
+    "PatchDetails": {
       "description": "Individual patch object.",
       "type": "object",
       "properties": {
-        "patchName": {
-          "type": "string",
-          "description": "The name of the patch."
-        },
         "targetImage": {
           "type": "string",
           "description": "The name of the target image for the patch."
@@ -300,27 +312,33 @@
           "type": "string",
           "description": "The name of old run image for the target image."
         },
-        "reason": {
+        "patchType": {
           "type": "string",
-          "description": "The reason for the patch."
+          "description": "The type for the patch.",
+          "enum": [
+            "RunImageSecurity",
+            "OSSecurity",
+            "Other"
+          ],
+          "x-ms-enum": {
+            "name": "PatchType",
+            "modelAsString": true
+          }
         },
-        "targetResourceGroup": {
+        "targetEnvironmentId": {
           "type": "string",
-          "description": "The name of the target resource group for the patch."
+          "description": "The id of the target environment for the patch."
         },
-        "targetContainerAppEnvironmentName": {
+        "targetContainerAppId": {
           "type": "string",
-          "description": "The name of the target container app environment for the patch."
-        },
-        "targetContainerAppName": {
-          "type": "string",
-          "description": "The name of the target container app for the patch."
+          "description": "The id of the target container app for the patch."
         },
         "targetContainerName": {
           "type": "string",
           "description": "The name of the target container for the patch."
         }
-      }
+      },
+      "readOnly": true
     },
     "PatchProperties": {
       "type": "object",
@@ -330,6 +348,11 @@
           "description": "Patch provisioning state.",
           "readOnly": true
         },
+        "detectionStatus": {
+          "$ref": "#/definitions/DetectionStatus",
+          "description": "The status of the patch detection.",
+          "readOnly": true
+        },
         "patchStatus": {
           "$ref": "#/definitions/PatchStatus",
           "description": "The status of the patch once it has been provisioned",
@@ -337,10 +360,11 @@
         },
         "patchDetails": {
           "type": "object",
-          "$ref": "#/definitions/PatchObject",
+          "$ref": "#/definitions/PatchDetails",
           "description": "Detailed info about the specific patch."
         }
-      }
+      },
+      "readOnly": true
     },
     "PatchCollection": {
       "type": "object",

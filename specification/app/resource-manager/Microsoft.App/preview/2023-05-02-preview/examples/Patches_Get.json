@@ -17,16 +17,15 @@
           "type": "Microsoft.App/builders/patches",
           "properties": {
             "provisioningState": "Succeeded",
+            "detectionStatus": "Succeeded",
             "patchStatus": "NotStarted",
             "patchDetails": {
-              "patchName": "testPatch-25fe4b",
               "targetImageName": "testregistry.azurecr.io/test-image:latest",
               "newRunImage": "mcr.microsoft.com/oryx/builder:run-dotnet-aspnet-7.0.7-cbl-mariner2.0",
               "oldRunImage": "mcr.microsoft.com/oryx/builder:run-dotnet-aspnet-7.0.5-cbl-mariner2.0",
-              "reason": "Newer run image available.",
-              "targetResourceGroup": "rg",
-              "targetContainerAppEnv": "test-env",
-              "targetContainerApp": "test-app",
+              "patchType": "RunImageSecurity",
+              "targetEnvironmentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/test-env",
+              "targetContainerAppId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/containerApps/test-app",
               "targetContainerName": "test-container"
             }
           },
