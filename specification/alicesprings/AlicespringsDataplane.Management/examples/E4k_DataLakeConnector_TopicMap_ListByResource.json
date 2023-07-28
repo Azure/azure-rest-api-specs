@@ -1,0 +1,65 @@
+{
+  "title": "DatalakeConnectorTopicMap_ListByDatalakeConnectorResource",
+  "operationId": "DatalakeConnectorTopicMap_ListByDatalakeConnectorResource",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "test-rg",
+    "e4kName": "test",
+    "dataLakeConnectorName": "test",
+    "api-version": "2023-07-17-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "extendedLocation": {
+              "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.ExtendedLocation/customLocations/test",
+              "type": "CustomLocation"
+            },
+            "location": "test",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.AlicespringsDataplane/e4k/test/dataLakeConnector/test/topicMap/resourceName",
+            "type": "Microsoft.AlicespringsDataplane/e4k/dataLakeConnector/topicMap",
+            "systemData": {
+              "createdBy": "user1",
+              "createdByType": "User",
+              "createdAt": "2023-06-20T22:54:18.5423954Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-06-20T23:18:19.1234567Z"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "dataLakeConnectorRef": "datalake",
+              "mapping": {
+                "clientId": "clientid",
+                "allowedLatency": 2,
+                "maxMessagesPerBatch": 234351,
+                "messagePayloadType": "json",
+                "mqttSourceTopic": "my/topic",
+                "qos": 1,
+                "deltaTable": {
+                  "tableName": "smoketest",
+                  "schema": [
+                    {
+                      "name": "xyz",
+                      "format": "boolean",
+                      "optional": true,
+                      "mapping": "xyz"
+                    },
+                    {
+                      "name": "xyz2",
+                      "format": "int8",
+                      "optional": true,
+                      "mapping": "xyz2"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

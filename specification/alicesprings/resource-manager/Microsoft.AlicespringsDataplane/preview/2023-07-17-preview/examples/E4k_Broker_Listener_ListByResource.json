@@ -1,0 +1,45 @@
+{
+  "title": "BrokerListener_ListByBrokerResource",
+  "operationId": "BrokerListener_ListByBrokerResource",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "test-rg",
+    "e4kName": "test",
+    "brokerName": "test",
+    "api-version": "2023-07-17-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "extendedLocation": {
+              "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.ExtendedLocation/customLocations/test",
+              "type": "CustomLocation"
+            },
+            "location": "test",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.AlicespringsDataplane/e4k/test/broker/test/authentication/resourceName",
+            "type": "Microsoft.AlicespringsDataplane/e4k/broker/listener",
+            "systemData": {
+              "createdBy": "user1",
+              "createdByType": "User",
+              "createdAt": "2023-06-20T22:54:18.5423954Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-06-20T23:18:19.1234567Z"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "authenticationEnabled": false,
+              "authorizationEnabled": false,
+              "brokerRef": "broker",
+              "port": 1883,
+              "serviceName": "azedge-dmqtt-frontend",
+              "serviceType": "clusterIp"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

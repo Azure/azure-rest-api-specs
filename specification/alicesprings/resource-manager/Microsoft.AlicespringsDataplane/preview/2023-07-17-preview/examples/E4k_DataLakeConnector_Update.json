@@ -1,0 +1,83 @@
+{
+  "title": "DatalakeConnector_Update",
+  "operationId": "DatalakeConnector_Update",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "test-rg",
+    "e4kName": "test",
+    "dataLakeConnectorName": "test",
+    "properties": {
+      "properties": {
+        "databaseFormat": "delta",
+        "image": {
+          "repository": "onelake",
+          "tag": "edge",
+          "pullPolicy": "IfNotPresent"
+        },
+        "protocol": "v5",
+        "target": {
+          "datalakeStorage": {
+            "authentication": {
+              "accessTokenSecretName": "my-secret"
+            },
+            "endpoint": "e4ksmoketestonelake"
+          }
+        }
+      }
+    },
+    "api-version": "2023-07-17-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "extendedLocation": {
+          "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.ExtendedLocation/customLocations/test",
+          "type": "CustomLocation"
+        },
+        "location": "test",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.AlicespringsDataplane/e4k/test/dataLakeConnector/test",
+        "type": "Microsoft.AlicespringsDataplane/e4k/dataLakeConnector",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2023-06-20T22:54:18.5423954Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-06-20T23:18:19.1234567Z"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "image": {
+            "repository": "onelake",
+            "tag": "edge",
+            "pullPolicy": "IfNotPresent"
+          },
+          "instances": 1,
+          "protocol": "v5",
+          "logLevel": "debug",
+          "databaseFormat": "delta",
+          "target": {
+            "datalakeStorage": {
+              "authentication": {
+                "accessTokenSecretName": "my-secret"
+              },
+              "endpoint": "e4ksmoketestonelake"
+            }
+          },
+          "localBrokerConnection": {
+            "endpoint": "azedge-dmqtt-frontend:1883",
+            "tls": {
+              "tlsEnabled": false
+            },
+            "authentication": {
+              "kubernetes": {
+                "serviceAccountTokenName": "sat",
+                "secretPath": "/var/run/serviceaccount/localbroker"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

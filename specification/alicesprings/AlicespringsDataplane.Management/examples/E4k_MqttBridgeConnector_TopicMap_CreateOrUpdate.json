@@ -1,0 +1,130 @@
+{
+  "title": "MqttBridgeTopicMap_CreateOrUpdate",
+  "operationId": "MqttBridgeTopicMap_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "test-rg",
+    "e4kName": "test",
+    "mqttBridgeConnectorName": "test",
+    "topicMapName": "test",
+    "resource": {
+      "extendedLocation": {
+        "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.ExtendedLocation/customLocations/test",
+        "type": "CustomLocation"
+      },
+      "location": "test",
+      "properties": {
+        "mqttBridgeConnectorRef": "my-bridge-connector",
+        "routes": [
+          {
+            "direction": "remote-to-local",
+            "name": "first-route",
+            "qos": 0,
+            "source": "my-remote-topic",
+            "target": "my-local-topic",
+            "sharedSubscription": {
+              "groupMinimumShareNumber": 3,
+              "groupName": "group1"
+            }
+          },
+          {
+            "direction": "local-to-remote",
+            "name": "second-route",
+            "qos": 1,
+            "source": "my-local-topic",
+            "target": "my-remote-topic"
+          }
+        ]
+      }
+    },
+    "api-version": "2023-07-17-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "extendedLocation": {
+          "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.ExtendedLocation/customLocations/test",
+          "type": "CustomLocation"
+        },
+        "location": "test",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.AlicespringsDataplane/e4k/test/mqttBridgeConnector/test/topicMap/test",
+        "type": "Microsoft.AlicespringsDataplane/e4k/mqttBridgeConnector/topicMap",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2023-06-20T22:54:18.5423954Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-06-20T23:18:19.1234567Z"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "mqttBridgeConnectorRef": "my-bridge-connector",
+          "routes": [
+            {
+              "direction": "remote-to-local",
+              "name": "first-route",
+              "qos": 0,
+              "source": "my-remote-topic",
+              "target": "my-local-topic",
+              "sharedSubscription": {
+                "groupMinimumShareNumber": 3,
+                "groupName": "group1"
+              }
+            },
+            {
+              "direction": "local-to-remote",
+              "name": "second-route",
+              "qos": 1,
+              "source": "my-local-topic",
+              "target": "my-remote-topic"
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "extendedLocation": {
+          "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.ExtendedLocation/customLocations/test",
+          "type": "CustomLocation"
+        },
+        "location": "test",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.AlicespringsDataplane/e4k/test/mqttBridgeConnector/test/topicMap/test",
+        "type": "Microsoft.AlicespringsDataplane/e4k/mqttBridgeConnector/topicMap",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2023-06-20T22:54:18.5423954Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-06-20T23:18:19.1234567Z"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "mqttBridgeConnectorRef": "my-bridge-connector",
+          "routes": [
+            {
+              "direction": "remote-to-local",
+              "name": "first-route",
+              "qos": 0,
+              "source": "my-remote-topic",
+              "target": "my-local-topic",
+              "sharedSubscription": {
+                "groupMinimumShareNumber": 3,
+                "groupName": "group1"
+              }
+            },
+            {
+              "direction": "local-to-remote",
+              "name": "second-route",
+              "qos": 1,
+              "source": "my-local-topic",
+              "target": "my-remote-topic"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
