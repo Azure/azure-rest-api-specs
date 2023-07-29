@@ -2110,6 +2110,38 @@
         },
         "metastoreSpec": {
           "$ref": "#/definitions/SparkMetastoreSpec"
+        },
+        "userPluginsSpec": {
+          "$ref": "#/definitions/SparkUserPlugins"
+        }
+      }
+    },
+    "SparkUserPlugins": {
+      "type": "object",
+      "description": "Spark user plugins spec",
+      "properties": {
+        "plugins": {
+          "type": "array",
+          "description": "Spark user plugins.",
+          "items": {
+            "$ref": "#/definitions/SparkUserPlugin"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SparkUserPlugin": {
+      "type": "object",
+      "description": "Spark user plugin.",
+      "required": [
+        "path"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Fully qualified path to the folder containing the plugins.",
+          "minLength": 1,
+          "pattern": "^(https)|(abfss)://.*$"
         }
       }
     },
