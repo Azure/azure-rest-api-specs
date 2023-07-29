@@ -1,0 +1,425 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.Edge",
+    "version": "2023-07-01-preview"
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Updates"
+    }
+  ],
+  "paths": {
+    "/{resourceUri}/providers/Microsoft.Edge/updates": {
+      "get": {
+        "tags": [
+          "Updates"
+        ],
+        "operationId": "Updates_List",
+        "description": "List Update resources by parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/entity-types.json#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdateListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Updates_List_MaximumSet_Gen": {
+            "$ref": "./examples/Updates_List_MaximumSet_Gen.json"
+          },
+          "Updates_List_MinimumSet_Gen": {
+            "$ref": "./examples/Updates_List_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Edge/updates/{updateName}": {
+      "get": {
+        "tags": [
+          "Updates"
+        ],
+        "operationId": "Updates_Get",
+        "description": "Get a Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/entity-types.json#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "updateName",
+            "in": "path",
+            "required": true,
+            "description": "Name of update",
+            "type": "string",
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Update"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Updates_Get_MaximumSet_Gen.json"
+          },
+          "Updates_Get_MinimumSet_Gen": {
+            "$ref": "./examples/Updates_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Updates"
+        ],
+        "operationId": "Updates_CreateOrModify",
+        "description": "Create an Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/entity-types.json#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "updateName",
+            "in": "path",
+            "required": true,
+            "description": "Name of update",
+            "type": "string",
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/Update"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation update completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Update"
+            }
+          },
+          "201": {
+            "description": "ARM create operation triggered successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Update"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Updates_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/Updates_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "Updates_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/Updates_CreateOrUpdate_MinimumSet_Gen.json"
+          },
+          "Updates_CreateOrModify_MaximumSet_Gen": {
+            "$ref": "./examples/Updates_CreateOrModify_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Updates"
+        ],
+        "operationId": "Updates_Modify",
+        "description": "Update a Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/entity-types.json#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "updateName",
+            "in": "path",
+            "required": true,
+            "description": "Name of update",
+            "type": "string",
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/ModifyUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Update"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates_Update_MaximumSet_Gen": {
+            "$ref": "./examples/Updates_Update_MaximumSet_Gen.json"
+          },
+          "Updates_Update_MinimumSet_Gen": {
+            "$ref": "./examples/Updates_Update_MinimumSet_Gen.json"
+          },
+          "Updates_Modify_MaximumSet_Gen": {
+            "$ref": "./examples/Updates_Modify_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Updates"
+        ],
+        "operationId": "Updates_Delete",
+        "description": "Delete an Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/entity-types.json#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "updateName",
+            "in": "path",
+            "required": true,
+            "description": "Name of update",
+            "type": "string",
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/Updates_Delete_MaximumSet_Gen.json"
+          },
+          "Updates_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/Updates_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Update": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "An Edge Aggregation resource for update",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "UpdateListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Update"
+          },
+          "description": "The Update items on this page",
+          "x-typespec-name": "Update[]"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a Update list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "UpdateProperties": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The Status",
+          "enum": [
+            "Unknown",
+            "UpdateAvailable",
+            "UptoDate",
+            "UpdateInProgress",
+            "NeedsAttention"
+          ],
+          "x-ms-enum": {
+            "name": "Update Status",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Unknown",
+                "value": "Unknown",
+                "description": "The device is in Unknown state"
+              },
+              {
+                "name": "UpdateAvailable",
+                "value": "UpdateAvailable",
+                "description": "The device is in UpdateAvailable state"
+              },
+              {
+                "name": "UptoDate",
+                "value": "UptoDate",
+                "description": "The device is in UptoDate state"
+              },
+              {
+                "name": "UpdateInProgress",
+                "value": "UpdateInProgress",
+                "description": "The device is in UpdateInProgress state"
+              },
+              {
+                "name": "NeedsAttention",
+                "value": "NeedsAttention",
+                "description": "The device is in NeedsAttention state"
+              }
+            ]
+          }
+        },
+        "provisioningState": {
+          "$ref": "../../../common-types/v1/entity-types.json#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "description": "Update properties"
+    },
+    "ModifyUpdate": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ModifyUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "The type used for update operations of the Update."
+    },
+    "ModifyUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The Status"
+        }
+      },
+      "description": "The updatable properties of the Update."
+    }
+  }
+}
