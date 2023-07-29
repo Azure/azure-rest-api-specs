@@ -124,21 +124,21 @@
             "required": true,
             "description": "Resource create or replace parameters.",
             "schema": {
-              "$ref": "#/definitions/AssetCreateOrReplace"
+              "$ref": "#/definitions/Asset"
             }
           }
         ],
         "responses": {
           "200": {
             "x-nullable": false,
-            "description": "Asset is created or replaced successfully.",
+            "description": "Asset is created or updated (replaced) successfully.",
             "schema": {
               "$ref": "#/definitions/Asset"
             }
           },
           "201": {
             "x-nullable": false,
-            "description": "Async operation to create or replace the Asset.",
+            "description": "Async operation to create or update (replace) the Asset.",
             "schema": {
               "$ref": "#/definitions/Asset"
             }
@@ -188,7 +188,7 @@
             "required": true,
             "description": "Resource Update parameters.",
             "schema": {
-              "$ref": "#/definitions/Asset"
+              "$ref": "#/definitions/AssetPatchPayload"
             }
           }
         ],
@@ -202,6 +202,11 @@
           "202": {
             "x-nullable": false,
             "description": "Async operation to update the Asset.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Asset"
             }
@@ -242,6 +247,11 @@
         ],
         "responses": {
           "202": {
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
             "description": "Async operation to delete the Asset."
           },
           "204": {
@@ -312,6 +322,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]*[a-zA-Z0-9]$",
       "maxLength": 64,
       "minLength": 3
     }
@@ -324,7 +335,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Asset"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string"
@@ -343,7 +355,21 @@
           "description": "Asset resource properties."
         },
         "extendedLocation": {
-          "$ref": "#/definitions/ExtendedLocation",
+          "type": "object",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The extended location type."
+            },
+            "name": {
+              "type": "string",
+              "description": "The extended location name."
+            }
+          },
           "description": "The extended location."
         }
       },
@@ -354,48 +380,27 @@
       ],
       "description": "Asset definition."
     },
-    "AssetCreateOrReplace": {
+    "AssetPatchPayload": {
       "type": "object",
-      "required": [
-        "extendedLocation"
-      ],
       "properties": {
-        "properties": {
-          "required": [
-            "connectivityProfileUri"
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
           ],
+          "description": "Resource tags."
+        },
+        "properties": {
           "$ref": "#/definitions/AssetProperties",
           "description": "Asset resource properties."
-        },
-        "extendedLocation": {
-          "$ref": "#/definitions/ExtendedLocation",
-          "description": "The extended location."
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ],
-      "description": "Asset definition for Create or Update."
-    },
-    "ExtendedLocation": {
-      "type": "object",
-      "x-ms-mutability": [
-        "read",
-        "create"
-      ],
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The extended location type."
-        },
-        "name": {
-          "type": "string",
-          "description": "The extended location name."
-        }
-      },
-      "description": "The extended location."
+      "description": "Asset definition for Patch operation."
     },
     "AssetProperties": {
       "description": "Defines the asset properties.",
@@ -404,7 +409,6 @@
         "uuid": {
           "type": "string",
           "description": "Globally unique, immutable, non-reusable id.",
-          "format": "uuid",
           "readOnly": true
         },
         "assetType": {
@@ -441,6 +445,7 @@
         },
         "version": {
           "type": "integer",
+          "format": "int32",
           "description": "An integer that is incremented each time the resource is modified.",
           "readOnly": true
         },
@@ -477,13 +482,11 @@
           "description": "Asset serial number."
         },
         "defaultDataPointsConfiguration": {
-          "type": "object",
-          "additionalProperties": {},
+          "type": "string",
           "description": "Protocol-specific default configuration for all data points. Each data point can have its own configuration that overrides the default settings here. This assumes that each asset instance has one protocol."
         },
         "defaultEventsConfiguration": {
-          "type": "object",
-          "additionalProperties": {},
+          "type": "string",
           "description": "Protocol-specific default configuration for all events. Each event can have its own configuration that overrides the default settings here. This assumes that each asset instance has one protocol."
         },
         "dataPoints": {
@@ -512,17 +515,45 @@
                   "none",
                   "counter",
                   "gauge",
-                  "histogram"
+                  "histogram",
+                  "log"
                 ],
-                "description": "An indication of how the data point should be mapped to OpenTelemetry (none, histogram, gauge, counter, etc.)."
+                "x-ms-enum": {
+                  "name": "DataPointsObservabilityMode",
+                  "modelAsString": true,
+                  "values": [
+                    {
+                      "name": "None",
+                      "value": "none"
+                    },
+                    {
+                      "name": "Counter",
+                      "value": "counter"
+                    },
+                    {
+                      "name": "Gauge",
+                      "value": "gauge"
+                    },
+                    {
+                      "name": "Histogram",
+                      "value": "histogram"
+                    },
+                    {
+                      "name": "Log",
+                      "value": "log"
+                    }
+                  ]
+                },
+                "default": "none",
+                "description": "An indication of how the data point should be mapped to OpenTelemetry."
               },
               "dataPointConfiguration": {
-                "type": "object",
-                "additionalProperties": {},
+                "type": "string",
                 "description": "Protocol-specific configuration for the data point. For OPC UA, this could include configuration like, publishingInterval, samplingInterval, and queueSize."
               }
             }
           },
+          "x-ms-identifiers": [],
           "description": "Array of data points that are part of the asset. Each data point can reference an asset type capability and have per-data point configuration. See below for more details for the definition of the dataPoints element."
         },
         "events": {
@@ -549,19 +580,32 @@
                 "type": "string",
                 "enum": [
                   "none",
-                  "counter",
-                  "gauge",
-                  "histogram"
+                  "log"
                 ],
-                "description": "An indication of how the event should be mapped to OpenTelemetry (none, histogram, gauge, counter, etc.)."
+                "x-ms-enum": {
+                  "name": "EventsObservabilityMode",
+                  "modelAsString": true,
+                  "values": [
+                    {
+                      "name": "None",
+                      "value": "none"
+                    },
+                    {
+                      "name": "Log",
+                      "value": "log"
+                    }
+                  ]
+                },
+                "default": "none",
+                "description": "An indication of how the event should be mapped to OpenTelemetry."
               },
               "eventConfiguration": {
-                "type": "object",
-                "additionalProperties": {},
+                "type": "string",
                 "description": "Protocol-specific configuration for the event. For OPC UA, this could include configuration like, publishingInterval, samplingInterval, and queueSize."
               }
             }
           },
+          "x-ms-identifiers": [],
           "description": "Array of events that are part of the asset. Each event can reference an asset type capability and have per-event configuration. See below for more details about the definition of the events element."
         },
         "status": {
@@ -575,6 +619,7 @@
                 "properties": {
                   "code": {
                     "type": "integer",
+                    "format": "int32",
                     "description": "Error code for classification of errors (ex: 400, 404, 500, etc.)."
                   },
                   "message": {
@@ -583,10 +628,12 @@
                   }
                 }
               },
+              "x-ms-identifiers": [],
               "description": "Array object to transfer and persist errors that originate from the Edge."
             },
             "version": {
               "type": "integer",
+              "format": "int32",
               "description": "A read only incremental counter indicating the number of times the configuration has been modified from the perspective of the current actual (Edge) state of the Asset. Edge would be the only writer of this value and would sync back up to the cloud. In steady state, this should equal version."
             }
           },

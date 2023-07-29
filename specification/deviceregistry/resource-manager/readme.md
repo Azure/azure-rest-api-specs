@@ -35,6 +35,7 @@ These settings apply only when `--tag=package-2023-06-21-preview` is specified o
 ```yaml $(tag) == 'package-2023-06-21-preview'
 input-file:
   - Microsoft.DeviceRegistry/preview/2023-06-21-preview/asset.json
+  - Microsoft.DeviceRegistry/preview/2023-06-21-preview/assetendpointprofile.json
   - Microsoft.DeviceRegistry/preview/2023-06-21-preview/deviceregistry.json
 ```
 
