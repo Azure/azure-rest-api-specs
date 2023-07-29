@@ -27,7 +27,7 @@
           "url": "https://docs.microsoft.com/en-us/rest/api/SaaSHub/"
         },
         "x-ms-examples": {
-          "ListCloudServicesByListBySubscription": {
+          "List CloudServices By Cloud Subscription": {
             "$ref": "./examples/CloudService_List_BySubscription.json"
           }
         },
@@ -69,7 +69,7 @@
           "url": "https://docs.microsoft.com/en-us/rest/api/SaaSHub/"
         },
         "x-ms-examples": {
-          "ListCloudServicesByResourceGroup": {
+          "List CloudServices by Resource Group": {
             "$ref": "./examples/CloudService_List_ByResourceGroup.json"
           }
         },
@@ -114,7 +114,7 @@
           "url": "https://docs.microsoft.com/en-us/rest/api/SaaSHub/"
         },
         "x-ms-examples": {
-          "GetCloudService": {
+          "Get CloudService": {
             "$ref": "./examples/CloudService_Get.json"
           }
         },
@@ -154,13 +154,13 @@
         "operationId": "CloudServices_Create",
         "description": "Creates or updates a SaaSHub cloud service.",
         "x-ms-examples": {
-          "CreateCloudService": {
+          "Create CloudService": {
             "$ref": "./examples/CloudService_Put.json"
           },
-          "CreateCloudServiceWithOriginal": {
+          "Create CloudService With Original CloudService": {
             "$ref": "./examples/CloudService_Put_WithOriginal.json"
           },
-          "CreateCloudServiceWithCoterminous": {
+          "Create CloudService With Coterminous": {
             "$ref": "./examples/CloudService_Put_Coterminous.json"
           }
         },
@@ -219,28 +219,31 @@
         "operationId": "CloudServices_Update",
         "description": "Updates the properties of a SaaSHub cloud service.",
         "x-ms-examples": {
-          "AutoRenewOn": {
+          "Turn Auto Renew On": {
             "$ref": "./examples/CloudService_Patch_AutoRenew_On.json"
           },
-          "AutoRenewOff": {
+          "Turn Auto Renew Off": {
             "$ref": "./examples/CloudService_Patch_AutoRenew_Off.json"
           },
-          "AutoRenewOnUpdateRenewalTermDetails": {
+          "Update Auto Renew and Update Renewal Term Details at the same time": {
             "$ref": "./examples/CloudService_Patch_AutoRenew_On_UpdateRenewalTermDetails.json"
           },
-          "ChangeQuantity": {
+          "Change Quantity": {
             "$ref": "./examples/CloudService_Patch_ChangeQuantity.json"
           },
-          "TermUpdate": {
+          "Sku or Term Update": {
             "$ref": "./examples/CloudService_Patch_TermUpdate.json"
+          },
+          "Sku or Term Update with Quantity Change": {
+            "$ref": "./examples/CloudService_Patch_QuantityTermUpdate.json"
           },
           "Coterminous": {
             "$ref": "./examples/CloudService_Patch_Coterminous.json"
           },
-          "ExtendTrial": {
+          "Extend Trial": {
             "$ref": "./examples/CloudService_Patch_ExtendTrial.json"
           },
-          "ProvisioningTenant": {
+          "Update Provisioning Tenant": {
             "$ref": "./examples/CloudService_Patch_ProvisioningTenant.json"
           }
         },
@@ -307,7 +310,7 @@
         "operationId": "CloudServices_Delete",
         "description": "Deletes a SaaSHub cloud service resource.",
         "x-ms-examples": {
-          "DeleteCloudService": {
+          "Delete CloudService": {
             "$ref": "./examples/CloudService_Delete.json"
           }
         },
@@ -367,7 +370,7 @@
         "operationId": "CloudServices_Cancel",
         "description": "Cancels a SaaSHub cloud service.",
         "x-ms-examples": {
-          "CancelCloudService": {
+          "Cancel CloudService": {
             "$ref": "./examples/CloudService_Cancel.json"
           }
         },
@@ -416,7 +419,7 @@
         "operationId": "CloudServices_Merge",
         "description": "Merges multiple cloud service resources into one target cloud service resource. The resource name in URL is the target, and the list of source cloud service resource and quantity will be specified in request payload",
         "x-ms-examples": {
-          "MergeCloudService": {
+          "Merge CloudService": {
             "$ref": "./examples/CloudService_Merge.json"
           }
         },
@@ -474,25 +477,25 @@
         "operationId": "ProviderLevelActions_CanCreate",
         "description": "Evaluates whether the request payload can create a new resource. Currently only supports CloudService resource type.",
         "x-ms-examples": {
-          "NewPurchasePass": {
+          "New Purchase - Passed": {
             "$ref": "./examples/evaluateOnly/CloudService_CanCreate_NewPurchase_Pass.json"
           },
-          "PurchaseWithOriginalPass": {
+          "Purchase With Original - Passed": {
             "$ref": "./examples/evaluateOnly/CloudService_CanCreate_WithOriginal_Pass.json"
           },
-          "PurchaseFailAddOn": {
+          "Purchase AddOn - Failed": {
             "$ref": "./examples/evaluateOnly/CloudService_CanCreate_Fail_AddOn.json"
           },
-          "PurchaseFailCoterm": {
+          "Purchase with Coterm - Failed": {
             "$ref": "./examples/evaluateOnly/CloudService_CanCreate_Fail_Coterm.json"
           },
-          "PurchaseFailPromotion": {
+          "Purchase Promotion - Failed": {
             "$ref": "./examples/evaluateOnly/CloudService_CanCreate_Fail_Promotion.json"
           },
-          "PurchaseFailFuturePrice": {
+          "Purchase with Future Price - Failed": {
             "$ref": "./examples/evaluateOnly/CloudService_CanCreate_Fail_FuturePrice.json"
           },
-          "InvalidRequestBody": {
+          "Invalid Request Body": {
             "$ref": "./examples/evaluateOnly/CloudService_CanCreate_InvalidRequestBody.json"
           }
         },
@@ -540,16 +543,16 @@
         "operationId": "CloudServices_CanUpdate",
         "description": "Evaluates whether the request payload can update an existing cloud service resource.",
         "x-ms-examples": {
-          "UpdatePass": {
+          "Update Passed": {
             "$ref": "./examples/evaluateOnly/CloudService_CanUpdate_Pass.json"
           },
-          "UpdateFailWithNoAdditionalInfo": {
+          "Update Failed With No Additional Info": {
             "$ref": "./examples/evaluateOnly/CloudService_CanUpdate_FailWithNoAdditionalInfo.json"
           },
-          "UpdateFailRefundableQuantity": {
+          "Update Failed Caused by Refundable Quantity": {
             "$ref": "./examples/evaluateOnly/CloudService_CanUpdate_Fail_RefundableQuantity.json"
           },
-          "UpdateFailCoterm": {
+          "Update Failed Caused by Coterm": {
             "$ref": "./examples/evaluateOnly/CloudService_CanUpdate_Fail_Coterm.json"
           },
           "InvalidRequestBody": {
@@ -603,10 +606,10 @@
         "operationId": "CloudServices_CanCancel",
         "description": "Evaluates whether an existing cloud service resource can be cancelled.",
         "x-ms-examples": {
-          "CancelPass": {
+          "Cancel Passed": {
             "$ref": "./examples/evaluateOnly/CloudService_CanCancel_Pass.json"
           },
-          "CancelFail": {
+          "Cancel Failed": {
             "$ref": "./examples/evaluateOnly/CloudService_CanCancel_Fail.json"
           },
           "InvalidRequestBody": {
@@ -651,13 +654,13 @@
         "operationId": "CloudServices_CanMerge",
         "description": "Evaluates whether the source cloud service resource can be merged to target cloud service resource.",
         "x-ms-examples": {
-          "UpdatePass": {
+          "Merge Pass": {
             "$ref": "./examples/evaluateOnly/CloudService_CanMerge_Pass.json"
           },
-          "UpdateFail": {
+          "Merge Failed": {
             "$ref": "./examples/evaluateOnly/CloudService_CanMerge_Fail.json"
           },
-          "UpdateFailSourceCloudService": {
+          "Merge Failed Caused by Source CloudService": {
             "$ref": "./examples/evaluateOnly/CloudService_CanMerge_Fail_SourceCloudService.json"
           },
           "InvalidRequestBody": {
