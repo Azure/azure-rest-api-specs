@@ -675,7 +675,11 @@ model DataProduct is TrackedResource<DataProductProperties>{
     @key("dataProductName")    
     @segment("dataProducts")
     @path
+    @pattern("^[a-z][a-z0-9]*$")
+    @minLength(3)
+    @maxLength(63)
     name: string;
+    ...ManagedServiceIdentity;
 }
 
 @doc("The data product properties.")
@@ -729,9 +733,6 @@ model DataProductProperties{
     @doc("Key vault url.")
     @visibility("read")
     keyVaultUrl?: string;
-    @doc("Managed Identity field")    
-    @visibility("create","update")
-    managedIdentity?: ManagedServiceIdentity;    
 }
 
 @doc("Details of Consumption Properties")
@@ -989,6 +990,10 @@ interface DataTypes {
   @doc("Generate sas token for storage container.")
   generateStorageContainerSasToken is
   ArmResourceActionAsync<DataType,ContainerSaS,ContainerSasToken>;
+  
+  @doc("List data type by parent resource.")
+  listByParent is ArmResourceListByParent<DataType>;
+
 }
 
 @doc("Operations on data product resource.")
@@ -1023,5 +1028,11 @@ interface DataProducts {
 
   @doc("List user roles associated with the data product.")
   listRolesAssignments is ArmResourceActionAsync<DataProduct,{},ListRoleAssignments>;
+
+  @doc("List data products by resource group.")
+  listByResourceGroup is ArmResourceListByParent<DataProduct>;
+  
+  @doc("List data products by subscription.")
+  listBySubscription is ArmListBySubscription<DataProduct>;
 
 }
