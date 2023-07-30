@@ -27,7 +27,17 @@ These are the global settings for the edgesites.
 ```yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-2023-06-01-preview
+tag: package-2023-08-01-preview
+```
+
+### Tag: package-2023-08-01-preview
+
+These settings apply only when `--tag=package-2023-08-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-08-01-preview'
+input-file:
+  - Microsoft.Edge/preview/2023-08-01-preview/edgesites.json
+  - Microsoft.Edge/preview/2023-08-01-preview/siteAwareResourceTypes.json
 ```
 
 ### Tag: package-2023-06-01-preview
@@ -36,7 +46,7 @@ These settings apply only when `--tag=package-2023-06-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-06-01-preview'
 input-file:
-  - preview/2023-06-01-preview/edgesites.json
+  - Microsoft.Edge/preview/2023-06-01-preview/edgesites.json
 ```
 
 ---
@@ -52,11 +62,11 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
+  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
-  - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-powershell
 ```
 ## Az
 
