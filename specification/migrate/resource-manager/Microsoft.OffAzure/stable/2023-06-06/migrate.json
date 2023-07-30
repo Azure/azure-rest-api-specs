@@ -46,7 +46,7 @@
       "name": "HypervClusterController"
     },
     {
-      "name": "Sites"
+      "name": "SitesController"
     },
     {
       "name": "VmwareOperationsStatus"
@@ -109,10 +109,13 @@
       "name": "ServerSitesController"
     },
     {
+      "name": "ServerOperationsStatusController"
+    },
+    {
       "name": "ServerDependencyMapController"
     },
     {
-      "name": "ServerRunAsAccounts"
+      "name": "ServerRunAsAccountsController"
     },
     {
       "name": "ServerJobsController"
@@ -285,7 +288,7 @@
           "ImportSitesController"
         ],
         "operationId": "ImportSitesController_ListBySubscription",
-        "description": "List ImportSiteResource resources by subscription ID",
+        "description": "List ImportSite resources by subscription ID",
         "parameters": [
           {
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -298,7 +301,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ImportSiteResourceListResult"
+              "$ref": "#/definitions/ImportSiteListResult"
             }
           },
           "default": {
@@ -409,9 +412,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.OffAzure/vmwareSites": {
       "get": {
         "tags": [
-          "Sites"
+          "SitesController"
         ],
-        "operationId": "Sites_ListBySubscription",
+        "operationId": "SitesController_ListBySubscription",
         "summary": "Get all vmware sites.",
         "description": "Get all the vmware sites in the subscription.",
         "parameters": [
@@ -440,11 +443,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Sites_ListBySubscription_MaximumSet_Gen": {
-            "$ref": "./examples/Sites_ListBySubscription_MaximumSet_Gen.json"
+          "SitesController_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/SitesController_ListBySubscription_MaximumSet_Gen.json"
           },
-          "Sites_ListBySubscription_MinimumSet_Gen": {
-            "$ref": "./examples/Sites_ListBySubscription_MinimumSet_Gen.json"
+          "SitesController_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/SitesController_ListBySubscription_MinimumSet_Gen.json"
           }
         }
       }
@@ -639,7 +642,7 @@
             "type": "string"
           },
           {
-            "name": "properties",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "The resource properties to be updated.",
@@ -751,7 +754,7 @@
             "required": true,
             "description": "The content of the action request",
             "schema": {
-              "$ref": "#/definitions/HypervSite"
+              "$ref": "#/definitions/DependencyMapServiceMapextensionsClientGroupMembersRequest"
             }
           }
         ],
@@ -759,7 +762,9 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DependencyMapServiceMapextensionsClientGroupMembersRequest"
+              "type": "object",
+              "properties": {},
+              "x-typespec-name": "{}"
             }
           },
           "202": {
@@ -947,7 +952,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -958,7 +963,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "ARM update operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/HypervCluster"
             }
@@ -984,12 +989,15 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "HypervClusterController_CreateCluster_MaximumSet_Gen": {
             "$ref": "./examples/HypervClusterController_CreateCluster_MaximumSet_Gen.json"
+          },
+          "HypervClusterController_CreateCluster_MinimumSet_Gen": {
+            "$ref": "./examples/HypervClusterController_CreateCluster_MinimumSet_Gen.json"
           }
         }
       },
@@ -1142,7 +1150,7 @@
             "required": true,
             "description": "The content of the action request",
             "schema": {
-              "$ref": "#/definitions/HypervSite"
+              "$ref": "#/definitions/DependencyMapServiceMapextensionsExportDependenciesRequest"
             }
           }
         ],
@@ -1150,7 +1158,9 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DependencyMapServiceMapextensionsExportDependenciesRequest"
+              "type": "object",
+              "properties": {},
+              "x-typespec-name": "{}"
             }
           },
           "202": {
@@ -1298,7 +1308,7 @@
             "required": true,
             "description": "The content of the action request",
             "schema": {
-              "$ref": "#/definitions/HypervSite"
+              "$ref": "#/definitions/DependencyMapServiceMapextensionsScopeMapRequest"
             }
           }
         ],
@@ -1306,7 +1316,9 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DependencyMapServiceMapextensionsScopeMapRequest"
+              "type": "object",
+              "properties": {},
+              "x-typespec-name": "{}"
             }
           },
           "202": {
@@ -1375,7 +1387,7 @@
             "required": true,
             "description": "The content of the action request",
             "schema": {
-              "$ref": "#/definitions/HypervSite"
+              "$ref": "#/definitions/DependencyMapServiceMapextensionsSingleMachineDetailedMapRequest"
             }
           }
         ],
@@ -1383,7 +1395,9 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DependencyMapServiceMapextensionsSingleMachineDetailedMapRequest"
+              "type": "object",
+              "properties": {},
+              "x-typespec-name": "{}"
             }
           },
           "202": {
@@ -1571,7 +1585,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -1582,7 +1596,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "ARM update operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/HypervHost"
             }
@@ -1608,7 +1622,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -2029,7 +2043,7 @@
             "type": "string"
           },
           {
-            "name": "properties",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "The resource properties to be updated.",
@@ -2332,7 +2346,7 @@
             "required": true,
             "description": "The content of the action request",
             "schema": {
-              "$ref": "#/definitions/HypervSite"
+              "$ref": "#/definitions/DependencyMapServiceMapextensionsServerGroupMembersRequest"
             }
           }
         ],
@@ -2340,7 +2354,9 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DependencyMapServiceMapextensionsServerGroupMembersRequest"
+              "type": "object",
+              "properties": {},
+              "x-typespec-name": "{}"
             }
           },
           "202": {
@@ -2459,7 +2475,7 @@
             "required": true,
             "description": "The content of the action request",
             "schema": {
-              "$ref": "#/definitions/HypervSite"
+              "$ref": "#/definitions/UpdateMachineDepMapStatus"
             }
           }
         ],
@@ -2467,7 +2483,9 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/UpdateMachineDepMapStatus"
+              "type": "object",
+              "properties": {},
+              "x-typespec-name": "{}"
             }
           },
           "202": {
@@ -2606,7 +2624,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ImportSiteResourceListResult"
+              "$ref": "#/definitions/ImportSiteListResult"
             }
           },
           "default": {
@@ -2635,7 +2653,7 @@
           "ImportSitesController"
         ],
         "operationId": "ImportSitesController_Get",
-        "description": "Get a ImportSiteResource",
+        "description": "Get a ImportSite",
         "parameters": [
           {
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2659,7 +2677,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ImportSiteResource"
+              "$ref": "#/definitions/ImportSite"
             }
           },
           "default": {
@@ -2683,7 +2701,7 @@
           "ImportSitesController"
         ],
         "operationId": "ImportSitesController_Create",
-        "description": "Create a ImportSiteResource",
+        "description": "Create a ImportSite",
         "parameters": [
           {
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2708,7 +2726,7 @@
             "required": true,
             "description": "Resource create parameters.",
             "schema": {
-              "$ref": "#/definitions/ImportSiteResource"
+              "$ref": "#/definitions/ImportSite"
             }
           }
         ],
@@ -2716,7 +2734,7 @@
           "200": {
             "description": "ARM update operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ImportSiteResource"
+              "$ref": "#/definitions/ImportSite"
             }
           },
           "201": {
@@ -2729,7 +2747,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/ImportSiteResource"
+              "$ref": "#/definitions/ImportSite"
             }
           },
           "default": {
@@ -2753,7 +2771,7 @@
           "ImportSitesController"
         ],
         "operationId": "ImportSitesController_Update",
-        "description": "Update a ImportSiteResource",
+        "description": "Update a ImportSite",
         "parameters": [
           {
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2773,12 +2791,12 @@
             "type": "string"
           },
           {
-            "name": "properties",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "The resource properties to be updated.",
             "schema": {
-              "$ref": "#/definitions/ImportSiteResourceUpdate"
+              "$ref": "#/definitions/ImportSiteUpdate"
             }
           }
         ],
@@ -2786,7 +2804,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ImportSiteResource"
+              "$ref": "#/definitions/ImportSite"
             }
           },
           "default": {
@@ -2810,7 +2828,7 @@
           "ImportSitesController"
         ],
         "operationId": "ImportSitesController_Delete",
-        "description": "Delete a ImportSiteResource",
+        "description": "Delete a ImportSite",
         "parameters": [
           {
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2885,7 +2903,9 @@
             "required": true,
             "description": "The content of the action request",
             "schema": {
-              "$ref": "#/definitions/V20190501PreviewSasUriResponse"
+              "type": "object",
+              "properties": {},
+              "x-typespec-name": "{}"
             }
           }
         ],
@@ -2893,9 +2913,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "type": "object",
-              "properties": {},
-              "x-typespec-name": "{}"
+              "$ref": "#/definitions/SasUriResponse"
             }
           },
           "default": {
@@ -2945,7 +2963,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PagedV20200201ExportImportedMachinesJobExportImportedMachinesJobCollection"
+              "$ref": "#/definitions/PagedExportImportedMachinesJobCollection"
             }
           },
           "default": {
@@ -3006,7 +3024,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/V20200201ExportImportedMachinesJob"
+              "$ref": "#/definitions/ExportImportedMachinesJob"
             }
           },
           "default": {
@@ -3026,13 +3044,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importSites/{siteName}/importJob/{jobName}": {
-      "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importSites/{siteName}/exportUri": {
+      "post": {
         "tags": [
-          "ImportJobsController"
+          "ImportSitesController"
         ],
-        "operationId": "ImportJobsController_GetImportjob",
-        "description": "Gets the import job with the given job name.",
+        "operationId": "ImportSitesController_ExportUri",
+        "description": "Method to export  a site.",
         "parameters": [
           {
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -3052,19 +3070,20 @@
             "type": "string"
           },
           {
-            "name": "jobName",
-            "in": "path",
+            "name": "body",
+            "in": "body",
             "required": true,
-            "description": "Job Arm Name.",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "description": "The content of the action request",
+            "schema": {
+              "$ref": "#/definitions/SasUriResponse"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/V20200201ImportMachinesJob"
+              "$ref": "#/definitions/SasUriResponse"
             }
           },
           "default": {
@@ -3075,16 +3094,16 @@
           }
         },
         "x-ms-examples": {
-          "ImportJobsController_GetImportjob_MaximumSet_Gen": {
-            "$ref": "./examples/ImportJobsController_GetImportjob_MaximumSet_Gen.json"
+          "ImportSitesController_ExportUri_MaximumSet_Gen": {
+            "$ref": "./examples/ImportSitesController_ExportUri_MaximumSet_Gen.json"
           },
-          "ImportJobsController_GetImportjob_MinimumSet_Gen": {
-            "$ref": "./examples/ImportJobsController_GetImportjob_MinimumSet_Gen.json"
+          "ImportSitesController_ExportUri_MinimumSet_Gen": {
+            "$ref": "./examples/ImportSitesController_ExportUri_MinimumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importSites/{siteName}/importjobs": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importSites/{siteName}/importJobs": {
       "get": {
         "tags": [
           "ImportJobsController"
@@ -3137,13 +3156,71 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importSites/{siteName}/ImportJobs/{jobName}": {
+      "get": {
+        "tags": [
+          "ImportJobsController"
+        ],
+        "operationId": "ImportJobsController_GetImportjob",
+        "description": "Gets the import job with the given job name.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "description": "Site name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "Job Arm Name.",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ImportMachinesJob"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ImportJobsController_GetImportjob_MaximumSet_Gen": {
+            "$ref": "./examples/ImportJobsController_GetImportjob_MaximumSet_Gen.json"
+          },
+          "ImportJobsController_GetImportjob_MinimumSet_Gen": {
+            "$ref": "./examples/ImportJobsController_GetImportjob_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importSites/{siteName}/importUri": {
       "post": {
         "tags": [
           "ImportSitesController"
         ],
         "operationId": "ImportSitesController_ImportUri",
-        "description": "Method to refresh a site.",
+        "description": "Method to import a site.",
         "parameters": [
           {
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -3201,8 +3278,8 @@
         "tags": [
           "ImportJobsController"
         ],
-        "operationId": "ImportJobsController_ListByImportSiteResource",
-        "description": "List ImportJobResource resources by ImportSiteResource",
+        "operationId": "ImportJobsController_ListByImportSite",
+        "description": "List ImportJob resources by ImportSite",
         "parameters": [
           {
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -3226,7 +3303,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ImportJobResourceListResult"
+              "$ref": "#/definitions/ImportJobListResult"
             }
           },
           "default": {
@@ -3240,11 +3317,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "ImportJobsController_ListByImportSiteResource_MaximumSet_Gen": {
-            "$ref": "./examples/ImportJobsController_ListByImportSiteResource_MaximumSet_Gen.json"
+          "ImportJobsController_ListByImportSite_MaximumSet_Gen": {
+            "$ref": "./examples/ImportJobsController_ListByImportSite_MaximumSet_Gen.json"
           },
-          "ImportJobsController_ListByImportSiteResource_MinimumSet_Gen": {
-            "$ref": "./examples/ImportJobsController_ListByImportSiteResource_MinimumSet_Gen.json"
+          "ImportJobsController_ListByImportSite_MinimumSet_Gen": {
+            "$ref": "./examples/ImportJobsController_ListByImportSite_MinimumSet_Gen.json"
           }
         }
       }
@@ -3255,7 +3332,7 @@
           "ImportJobsController"
         ],
         "operationId": "ImportJobsController_Get",
-        "description": "Get a ImportJobResource",
+        "description": "Get a ImportJob",
         "parameters": [
           {
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -3287,7 +3364,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ImportJobResource"
+              "$ref": "#/definitions/ImportJob"
             }
           },
           "default": {
@@ -3312,8 +3389,8 @@
         "tags": [
           "ImportMachinesController"
         ],
-        "operationId": "ImportMachinesController_ListByImportSiteResource",
-        "description": "List ImportMachineResource resources by ImportSiteResource",
+        "operationId": "ImportMachinesController_ListByImportSite",
+        "description": "List ImportMachine resources by ImportSite",
         "parameters": [
           {
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -3366,7 +3443,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ImportMachineResourceListResult"
+              "$ref": "#/definitions/ImportMachineListResult"
             }
           },
           "default": {
@@ -3380,11 +3457,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "ImportMachinesController_ListByImportSiteResource_MaximumSet_Gen": {
-            "$ref": "./examples/ImportMachinesController_ListByImportSiteResource_MaximumSet_Gen.json"
+          "ImportMachinesController_ListByImportSite_MaximumSet_Gen": {
+            "$ref": "./examples/ImportMachinesController_ListByImportSite_MaximumSet_Gen.json"
           },
-          "ImportMachinesController_ListByImportSiteResource_MinimumSet_Gen": {
-            "$ref": "./examples/ImportMachinesController_ListByImportSiteResource_MinimumSet_Gen.json"
+          "ImportMachinesController_ListByImportSite_MinimumSet_Gen": {
+            "$ref": "./examples/ImportMachinesController_ListByImportSite_MinimumSet_Gen.json"
           }
         }
       }
@@ -3395,7 +3472,7 @@
           "ImportMachinesController"
         ],
         "operationId": "ImportMachinesController_Get",
-        "description": "Get a ImportMachineResource",
+        "description": "Get a ImportMachine",
         "parameters": [
           {
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -3427,7 +3504,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ImportMachineResource"
+              "$ref": "#/definitions/ImportMachine"
             }
           },
           "default": {
@@ -3451,7 +3528,7 @@
           "ImportMachinesController"
         ],
         "operationId": "ImportMachinesController_Delete",
-        "description": "Delete a ImportMachineResource",
+        "description": "Delete a ImportMachine",
         "parameters": [
           {
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -3624,7 +3701,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -3635,7 +3712,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "ARM update operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MasterSite"
             }
@@ -3661,7 +3738,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -3856,12 +3933,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/getErrorSummary": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/errorSummary": {
       "post": {
         "tags": [
           "MasterSitesController"
         ],
-        "operationId": "MasterSitesController_GetErrorSummary",
+        "operationId": "MasterSitesController_ErrorSummary",
         "description": "Method to get error summary from master site for an appliance.",
         "parameters": [
           {
@@ -3906,11 +3983,11 @@
           }
         },
         "x-ms-examples": {
-          "MasterSitesController_GetErrorSummary_MaximumSet_Gen": {
-            "$ref": "./examples/MasterSitesController_GetErrorSummary_MaximumSet_Gen.json"
+          "MasterSitesController_ErrorSummary_MaximumSet_Gen": {
+            "$ref": "./examples/MasterSitesController_ErrorSummary_MaximumSet_Gen.json"
           },
-          "MasterSitesController_GetErrorSummary_MinimumSet_Gen": {
-            "$ref": "./examples/MasterSitesController_GetErrorSummary_MinimumSet_Gen.json"
+          "MasterSitesController_ErrorSummary_MinimumSet_Gen": {
+            "$ref": "./examples/MasterSitesController_ErrorSummary_MinimumSet_Gen.json"
           }
         }
       }
@@ -4842,7 +4919,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -4853,7 +4930,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "ARM update operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SqlDiscoverySiteDataSourceResource"
             }
@@ -4879,7 +4956,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -6027,7 +6104,7 @@
             "type": "string"
           },
           {
-            "name": "properties",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "The resource properties to be updated.",
@@ -6713,7 +6790,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -6724,7 +6801,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "ARM update operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DiscoverySiteDataSource"
             }
@@ -6750,7 +6827,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -7269,7 +7346,7 @@
             "type": "string"
           },
           {
-            "name": "properties",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "The resource properties to be updated.",
@@ -7926,7 +8003,7 @@
             "type": "string"
           },
           {
-            "name": "properties",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "The resource properties to be updated.",
@@ -8501,7 +8578,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -8512,7 +8589,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "ARM update operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ServerSiteResource"
             }
@@ -8538,7 +8615,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -8575,7 +8652,7 @@
             "type": "string"
           },
           {
-            "name": "properties",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "The resource properties to be updated.",
@@ -8687,7 +8764,7 @@
             "required": true,
             "description": "The content of the action request",
             "schema": {
-              "$ref": "#/definitions/ServerSiteResource"
+              "$ref": "#/definitions/DependencyMapServiceMapextensionsClientGroupMembersRequest"
             }
           }
         ],
@@ -8695,7 +8772,9 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DependencyMapServiceMapextensionsClientGroupMembersRequest"
+              "type": "object",
+              "properties": {},
+              "x-typespec-name": "{}"
             }
           },
           "202": {
@@ -9123,7 +9202,7 @@
             "required": true,
             "description": "The content of the action request",
             "schema": {
-              "$ref": "#/definitions/ServerSiteResource"
+              "$ref": "#/definitions/DependencyMapServiceMapextensionsSingleMachineDetailedMapRequest"
             }
           }
         ],
@@ -9131,7 +9210,9 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DependencyMapServiceMapextensionsScopeMapRequest"
+              "type": "object",
+              "properties": {},
+              "x-typespec-name": "{}"
             }
           },
           "202": {
@@ -9200,7 +9281,7 @@
             "required": true,
             "description": "The content of the action request",
             "schema": {
-              "$ref": "#/definitions/ServerSiteResource"
+              "$ref": "#/definitions/DependencyMapServiceMapextensionsScopeMapRequest"
             }
           }
         ],
@@ -9208,7 +9289,9 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DependencyMapServiceMapextensionsSingleMachineDetailedMapRequest"
+              "type": "object",
+              "properties": {},
+              "x-typespec-name": "{}"
             }
           },
           "202": {
@@ -9252,7 +9335,7 @@
           "ServerJobsController"
         ],
         "operationId": "ServerJobsController_ListByServerSiteResource",
-        "description": "List ServerJobResource resources by ServerSiteResource",
+        "description": "List ServerJob resources by ServerSiteResource",
         "parameters": [
           {
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -9276,7 +9359,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ServerJobResourceListResult"
+              "$ref": "#/definitions/ServerJobListResult"
             }
           },
           "default": {
@@ -9305,7 +9388,7 @@
           "ServerJobsController"
         ],
         "operationId": "ServerJobsController_Get",
-        "description": "Get a ServerJobResource",
+        "description": "Get a ServerJob",
         "parameters": [
           {
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -9337,7 +9420,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ServerJobResource"
+              "$ref": "#/definitions/ServerJob"
             }
           },
           "default": {
@@ -9416,13 +9499,42 @@
         "description": "Get all machines in a site.",
         "parameters": [
           {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "required": false,
+            "description": "filter query",
+            "type": "string"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "required": false,
+            "description": "page size  query",
+            "type": "string"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "required": false,
+            "description": "Optional parameter for continuation token.",
+            "type": "string"
+          },
+          {
+            "name": "totalRecordCount",
+            "in": "query",
+            "required": false,
+            "description": "Total count of machines in the given site.",
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "siteName",
@@ -9437,7 +9549,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ServerMachineResourceListResult"
+              "$ref": "#/definitions/ServerListResult"
             }
           },
           "default": {
@@ -9466,7 +9578,7 @@
           "ServersController"
         ],
         "operationId": "ServersController_GetMachine",
-        "description": "Get a ServerMachineResource",
+        "description": "Get a Server",
         "parameters": [
           {
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -9498,7 +9610,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ServerMachineResource"
+              "$ref": "#/definitions/Server"
             }
           },
           "default": {
@@ -9517,12 +9629,159 @@
           }
         }
       },
+      "put": {
+        "tags": [
+          "ServersController"
+        ],
+        "operationId": "ServersController_CreateMachine",
+        "description": "Create a Server",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "description": "Site name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "description": " A server machine name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM update operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ServersController_CreateMachine_MaximumSet_Gen": {
+            "$ref": "./examples/ServersController_CreateMachine_MaximumSet_Gen.json"
+          },
+          "ServersController_CreateMachine_MinimumSet_Gen": {
+            "$ref": "./examples/ServersController_CreateMachine_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ServersController"
+        ],
+        "operationId": "ServersController_UpdateMachine",
+        "description": "Update a Server machine",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "description": "Site name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "description": " A server machine name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/ServerUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServersController_UpdateMachine_MaximumSet_Gen": {
+            "$ref": "./examples/ServersController_UpdateMachine_MaximumSet_Gen.json"
+          },
+          "ServersController_UpdateMachine_MinimumSet_Gen": {
+            "$ref": "./examples/ServersController_UpdateMachine_MinimumSet_Gen.json"
+          }
+        }
+      },
       "delete": {
         "tags": [
           "ServersController"
         ],
         "operationId": "ServersController_DeleteMachine",
-        "description": "Delete a ServerMachineResource",
+        "description": "Delete a Server",
         "parameters": [
           {
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -9577,9 +9836,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/operationsStatus/{operationStatusName}": {
       "get": {
         "tags": [
-          "ServerSitesController"
+          "ServerOperationsStatusController"
         ],
-        "operationId": "ServerSitesController_GetServerSiteOperationsStatus",
+        "operationId": "ServerOperationsStatusController_GetServerSiteOperationsStatus",
         "description": "A operation status resource belonging to a site resource.",
         "parameters": [
           {
@@ -9623,11 +9882,11 @@
           }
         },
         "x-ms-examples": {
-          "ServerSitesController_GetServerSiteOperationsStatus_MaximumSet_Gen": {
-            "$ref": "./examples/ServerSitesController_GetServerSiteOperationsStatus_MaximumSet_Gen.json"
+          "ServerOperationsStatusController_GetServerSiteOperationsStatus_MaximumSet_Gen": {
+            "$ref": "./examples/ServerOperationsStatusController_GetServerSiteOperationsStatus_MaximumSet_Gen.json"
           },
-          "ServerSitesController_GetServerSiteOperationsStatus_MinimumSet_Gen": {
-            "$ref": "./examples/ServerSitesController_GetServerSiteOperationsStatus_MinimumSet_Gen.json"
+          "ServerOperationsStatusController_GetServerSiteOperationsStatus_MinimumSet_Gen": {
+            "$ref": "./examples/ServerOperationsStatusController_GetServerSiteOperationsStatus_MinimumSet_Gen.json"
           }
         }
       }
@@ -9705,10 +9964,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/runAsAccounts": {
       "get": {
         "tags": [
-          "ServerRunAsAccounts"
+          "ServerRunAsAccountsController"
         ],
-        "operationId": "ServerRunAsAccounts_ListByServerSiteResource",
-        "description": "List ServerRunAsAccountResource resources by ServerSiteResource",
+        "operationId": "ServerRunAsAccountsController_ListByServerSiteResource",
+        "description": "List ServerRunAsAccount resources by ServerSiteResource",
         "parameters": [
           {
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -9732,7 +9991,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ServerRunAsAccountResourceListResult"
+              "$ref": "#/definitions/ServerRunAsAccountListResult"
             }
           },
           "default": {
@@ -9746,11 +10005,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "ServerRunAsAccounts_ListByServerSiteResource_MaximumSet_Gen": {
-            "$ref": "./examples/ServerRunAsAccounts_ListByServerSiteResource_MaximumSet_Gen.json"
+          "ServerRunAsAccountsController_ListByServerSiteResource_MaximumSet_Gen": {
+            "$ref": "./examples/ServerRunAsAccountsController_ListByServerSiteResource_MaximumSet_Gen.json"
           },
-          "ServerRunAsAccounts_ListByServerSiteResource_MinimumSet_Gen": {
-            "$ref": "./examples/ServerRunAsAccounts_ListByServerSiteResource_MinimumSet_Gen.json"
+          "ServerRunAsAccountsController_ListByServerSiteResource_MinimumSet_Gen": {
+            "$ref": "./examples/ServerRunAsAccountsController_ListByServerSiteResource_MinimumSet_Gen.json"
           }
         }
       }
@@ -9758,10 +10017,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/runAsAccounts/{accountName}": {
       "get": {
         "tags": [
-          "ServerRunAsAccounts"
+          "ServerRunAsAccountsController"
         ],
-        "operationId": "ServerRunAsAccounts_Get",
-        "description": "Get a ServerRunAsAccountResource",
+        "operationId": "ServerRunAsAccountsController_Get",
+        "description": "Get a ServerRunAsAccount",
         "parameters": [
           {
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -9793,7 +10052,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ServerRunAsAccountResource"
+              "$ref": "#/definitions/ServerRunAsAccount"
             }
           },
           "default": {
@@ -9804,11 +10063,11 @@
           }
         },
         "x-ms-examples": {
-          "ServerRunAsAccounts_Get_MaximumSet_Gen": {
-            "$ref": "./examples/ServerRunAsAccounts_Get_MaximumSet_Gen.json"
+          "ServerRunAsAccountsController_Get_MaximumSet_Gen": {
+            "$ref": "./examples/ServerRunAsAccountsController_Get_MaximumSet_Gen.json"
           },
-          "ServerRunAsAccounts_Get_MinimumSet_Gen": {
-            "$ref": "./examples/ServerRunAsAccounts_Get_MinimumSet_Gen.json"
+          "ServerRunAsAccountsController_Get_MinimumSet_Gen": {
+            "$ref": "./examples/ServerRunAsAccountsController_Get_MinimumSet_Gen.json"
           }
         }
       }
@@ -9844,7 +10103,7 @@
             "required": true,
             "description": "The content of the action request",
             "schema": {
-              "$ref": "#/definitions/ServerSiteResource"
+              "$ref": "#/definitions/DependencyMapServiceMapextensionsServerGroupMembersRequest"
             }
           }
         ],
@@ -9852,7 +10111,9 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DependencyMapServiceMapextensionsServerGroupMembersRequest"
+              "type": "object",
+              "properties": {},
+              "x-typespec-name": "{}"
             }
           },
           "202": {
@@ -9971,7 +10232,7 @@
             "required": true,
             "description": "The content of the action request",
             "schema": {
-              "$ref": "#/definitions/ServerSiteResource"
+              "$ref": "#/definitions/UpdateMachineDepMapStatus"
             }
           }
         ],
@@ -9979,7 +10240,9 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/UpdateMachineDepMapStatus"
+              "type": "object",
+              "properties": {},
+              "x-typespec-name": "{}"
             }
           },
           "202": {
@@ -10099,9 +10362,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites": {
       "get": {
         "tags": [
-          "Sites"
+          "SitesController"
         ],
-        "operationId": "Sites_ListByResourceGroup",
+        "operationId": "SitesController_ListByResourceGroup",
         "summary": "Get all vmware sites.",
         "description": "Get all the vmware sites in the resource group.",
         "parameters": [
@@ -10133,11 +10396,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Sites_ListByResourceGroup_MaximumSet_Gen": {
-            "$ref": "./examples/Sites_ListByResourceGroup_MaximumSet_Gen.json"
+          "SitesController_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/SitesController_ListByResourceGroup_MaximumSet_Gen.json"
           },
-          "Sites_ListByResourceGroup_MinimumSet_Gen": {
-            "$ref": "./examples/Sites_ListByResourceGroup_MinimumSet_Gen.json"
+          "SitesController_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/SitesController_ListByResourceGroup_MinimumSet_Gen.json"
           }
         }
       }
@@ -10145,9 +10408,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}": {
       "get": {
         "tags": [
-          "Sites"
+          "SitesController"
         ],
-        "operationId": "Sites_Get",
+        "operationId": "SitesController_Get",
         "description": "Get a VmwareSite",
         "parameters": [
           {
@@ -10183,19 +10446,19 @@
           }
         },
         "x-ms-examples": {
-          "Sites_Get_MaximumSet_Gen": {
-            "$ref": "./examples/Sites_Get_MaximumSet_Gen.json"
+          "SitesController_Get_MaximumSet_Gen": {
+            "$ref": "./examples/SitesController_Get_MaximumSet_Gen.json"
           },
-          "Sites_Get_MinimumSet_Gen": {
-            "$ref": "./examples/Sites_Get_MinimumSet_Gen.json"
+          "SitesController_Get_MinimumSet_Gen": {
+            "$ref": "./examples/SitesController_Get_MinimumSet_Gen.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "Sites"
+          "SitesController"
         ],
-        "operationId": "Sites_Delete",
+        "operationId": "SitesController_Delete",
         "description": "Delete a VmwareSite",
         "parameters": [
           {
@@ -10231,19 +10494,19 @@
           }
         },
         "x-ms-examples": {
-          "Sites_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/Sites_Delete_MaximumSet_Gen.json"
+          "SitesController_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/SitesController_Delete_MaximumSet_Gen.json"
           },
-          "Sites_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/Sites_Delete_MinimumSet_Gen.json"
+          "SitesController_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/SitesController_Delete_MinimumSet_Gen.json"
           }
         }
       },
       "put": {
         "tags": [
-          "Sites"
+          "SitesController"
         ],
-        "operationId": "Sites_Create",
+        "operationId": "SitesController_Create",
         "description": "Create a VmwareSite",
         "parameters": [
           {
@@ -10301,19 +10564,19 @@
           }
         },
         "x-ms-examples": {
-          "Sites_Create_MaximumSet_Gen": {
-            "$ref": "./examples/Sites_Create_MaximumSet_Gen.json"
+          "SitesController_Create_MaximumSet_Gen": {
+            "$ref": "./examples/SitesController_Create_MaximumSet_Gen.json"
           },
-          "Sites_Create_MinimumSet_Gen": {
-            "$ref": "./examples/Sites_Create_MinimumSet_Gen.json"
+          "SitesController_Create_MinimumSet_Gen": {
+            "$ref": "./examples/SitesController_Create_MinimumSet_Gen.json"
           }
         }
       },
       "patch": {
         "tags": [
-          "Sites"
+          "SitesController"
         ],
-        "operationId": "Sites_Update",
+        "operationId": "SitesController_Update",
         "description": "Update a VmwareSite",
         "parameters": [
           {
@@ -10334,7 +10597,7 @@
             "type": "string"
           },
           {
-            "name": "properties",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "The resource properties to be updated.",
@@ -10358,11 +10621,11 @@
           }
         },
         "x-ms-examples": {
-          "Sites_Update_MaximumSet_Gen": {
-            "$ref": "./examples/Sites_Update_MaximumSet_Gen.json"
+          "SitesController_Update_MaximumSet_Gen": {
+            "$ref": "./examples/SitesController_Update_MaximumSet_Gen.json"
           },
-          "Sites_Update_MinimumSet_Gen": {
-            "$ref": "./examples/Sites_Update_MinimumSet_Gen.json"
+          "SitesController_Update_MinimumSet_Gen": {
+            "$ref": "./examples/SitesController_Update_MinimumSet_Gen.json"
           }
         }
       }
@@ -10398,7 +10661,7 @@
             "required": true,
             "description": "The content of the action request",
             "schema": {
-              "$ref": "#/definitions/VmwareSite"
+              "$ref": "#/definitions/DependencyMapServiceMapextensionsClientGroupMembersRequest"
             }
           }
         ],
@@ -10406,7 +10669,9 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DependencyMapServiceMapextensionsClientGroupMembersRequest"
+              "type": "object",
+              "properties": {},
+              "x-typespec-name": "{}"
             }
           },
           "202": {
@@ -10447,9 +10712,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/computeErrorSummary": {
       "post": {
         "tags": [
-          "Sites"
+          "SitesController"
         ],
-        "operationId": "Sites_ComputeErrorSummary",
+        "operationId": "SitesController_ComputeErrorSummary",
         "description": "Method to get site error summary.",
         "parameters": [
           {
@@ -10496,11 +10761,11 @@
           }
         },
         "x-ms-examples": {
-          "Sites_ComputeErrorSummary_MaximumSet_Gen": {
-            "$ref": "./examples/Sites_ComputeErrorSummary_MaximumSet_Gen.json"
+          "SitesController_ComputeErrorSummary_MaximumSet_Gen": {
+            "$ref": "./examples/SitesController_ComputeErrorSummary_MaximumSet_Gen.json"
           },
-          "Sites_ComputeErrorSummary_MinimumSet_Gen": {
-            "$ref": "./examples/Sites_ComputeErrorSummary_MinimumSet_Gen.json"
+          "SitesController_ComputeErrorSummary_MinimumSet_Gen": {
+            "$ref": "./examples/SitesController_ComputeErrorSummary_MinimumSet_Gen.json"
           }
         }
       }
@@ -10508,9 +10773,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/computeUsage": {
       "post": {
         "tags": [
-          "Sites"
+          "SitesController"
         ],
-        "operationId": "Sites_ComputeUsage",
+        "operationId": "SitesController_ComputeUsage",
         "description": "Method to get site error summary.",
         "parameters": [
           {
@@ -10557,11 +10822,11 @@
           }
         },
         "x-ms-examples": {
-          "Sites_ComputeUsage_MaximumSet_Gen": {
-            "$ref": "./examples/Sites_ComputeUsage_MaximumSet_Gen.json"
+          "SitesController_ComputeUsage_MaximumSet_Gen": {
+            "$ref": "./examples/SitesController_ComputeUsage_MaximumSet_Gen.json"
           },
-          "Sites_ComputeUsage_MinimumSet_Gen": {
-            "$ref": "./examples/Sites_ComputeUsage_MinimumSet_Gen.json"
+          "SitesController_ComputeUsage_MinimumSet_Gen": {
+            "$ref": "./examples/SitesController_ComputeUsage_MinimumSet_Gen.json"
           }
         }
       }
@@ -10569,9 +10834,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/exportApplications": {
       "post": {
         "tags": [
-          "Sites"
+          "SitesController"
         ],
-        "operationId": "Sites_ExportApplications",
+        "operationId": "SitesController_ExportApplications",
         "description": "Method to generate report containing\r\n            machine and the deep discovery of the application installed in the machine.",
         "parameters": [
           {
@@ -10638,11 +10903,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Sites_ExportApplications_MaximumSet_Gen": {
-            "$ref": "./examples/Sites_ExportApplications_MaximumSet_Gen.json"
+          "SitesController_ExportApplications_MaximumSet_Gen": {
+            "$ref": "./examples/SitesController_ExportApplications_MaximumSet_Gen.json"
           },
-          "Sites_ExportApplications_MinimumSet_Gen": {
-            "$ref": "./examples/Sites_ExportApplications_MinimumSet_Gen.json"
+          "SitesController_ExportApplications_MinimumSet_Gen": {
+            "$ref": "./examples/SitesController_ExportApplications_MinimumSet_Gen.json"
           }
         }
       }
@@ -10678,7 +10943,7 @@
             "required": true,
             "description": "The content of the action request",
             "schema": {
-              "$ref": "#/definitions/VmwareSite"
+              "$ref": "#/definitions/DependencyMapServiceMapextensionsExportDependenciesRequest"
             }
           }
         ],
@@ -10686,7 +10951,9 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DependencyMapServiceMapextensionsExportDependenciesRequest"
+              "type": "object",
+              "properties": {},
+              "x-typespec-name": "{}"
             }
           },
           "202": {
@@ -10727,9 +10994,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/exportMachineErrors": {
       "post": {
         "tags": [
-          "Sites"
+          "SitesController"
         ],
-        "operationId": "Sites_ExportMachineErrors",
+        "operationId": "SitesController_ExportMachineErrors",
         "description": "Method to generate report containing \r\n            machine and the errors encountered during guest discovery of the machine.",
         "parameters": [
           {
@@ -10794,11 +11061,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Sites_ExportMachineErrors_MaximumSet_Gen": {
-            "$ref": "./examples/Sites_ExportMachineErrors_MaximumSet_Gen.json"
+          "SitesController_ExportMachineErrors_MaximumSet_Gen": {
+            "$ref": "./examples/SitesController_ExportMachineErrors_MaximumSet_Gen.json"
           },
-          "Sites_ExportMachineErrors_MinimumSet_Gen": {
-            "$ref": "./examples/Sites_ExportMachineErrors_MinimumSet_Gen.json"
+          "SitesController_ExportMachineErrors_MinimumSet_Gen": {
+            "$ref": "./examples/SitesController_ExportMachineErrors_MinimumSet_Gen.json"
           }
         }
       }
@@ -10806,9 +11073,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/exportMachines": {
       "post": {
         "tags": [
-          "Sites"
+          "SitesController"
         ],
-        "operationId": "Sites_ExportMachines",
+        "operationId": "SitesController_ExportMachines",
         "description": "Method to generate report containing \r\n            machine and the deep discovery of the application installed in the machine.",
         "parameters": [
           {
@@ -10873,11 +11140,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Sites_ExportMachines_MaximumSet_Gen": {
-            "$ref": "./examples/Sites_ExportMachines_MaximumSet_Gen.json"
+          "SitesController_ExportMachines_MaximumSet_Gen": {
+            "$ref": "./examples/SitesController_ExportMachines_MaximumSet_Gen.json"
           },
-          "Sites_ExportMachines_MinimumSet_Gen": {
-            "$ref": "./examples/Sites_ExportMachines_MinimumSet_Gen.json"
+          "SitesController_ExportMachines_MinimumSet_Gen": {
+            "$ref": "./examples/SitesController_ExportMachines_MinimumSet_Gen.json"
           }
         }
       }
@@ -10913,7 +11180,7 @@
             "required": true,
             "description": "The content of the action request",
             "schema": {
-              "$ref": "#/definitions/VmwareSite"
+              "$ref": "#/definitions/DependencyMapServiceMapextensionsScopeMapRequest"
             }
           }
         ],
@@ -10921,7 +11188,9 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DependencyMapServiceMapextensionsSingleMachineDetailedMapRequest"
+              "type": "object",
+              "properties": {},
+              "x-typespec-name": "{}"
             }
           },
           "202": {
@@ -10990,7 +11259,7 @@
             "required": true,
             "description": "The content of the action request",
             "schema": {
-              "$ref": "#/definitions/VmwareSite"
+              "$ref": "#/definitions/DependencyMapServiceMapextensionsSingleMachineDetailedMapRequest"
             }
           }
         ],
@@ -10998,7 +11267,9 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DependencyMapServiceMapextensionsSingleMachineDetailedMapRequest"
+              "type": "object",
+              "properties": {},
+              "x-typespec-name": "{}"
             }
           },
           "202": {
@@ -11042,7 +11313,7 @@
           "VmwareHostController"
         ],
         "operationId": "VmwareHostController_ListByVmwareSite",
-        "description": "List VmwareHostResource resources by VmwareSite",
+        "description": "List VmwareHost resources by VmwareSite",
         "parameters": [
           {
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -11066,7 +11337,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/VmwareHostResourceListResult"
+              "$ref": "#/definitions/VmwareHostListResult"
             }
           },
           "default": {
@@ -11095,7 +11366,7 @@
           "VmwareHostController"
         ],
         "operationId": "VmwareHostController_Get",
-        "description": "Get a VmwareHostResource",
+        "description": "Get a VmwareHost",
         "parameters": [
           {
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -11127,7 +11398,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/VmwareHostResource"
+              "$ref": "#/definitions/VmwareHost"
             }
           },
           "default": {
@@ -11261,9 +11532,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/listHealthSummary": {
       "post": {
         "tags": [
-          "Sites"
+          "SitesController"
         ],
-        "operationId": "Sites_ListHealthSummary",
+        "operationId": "SitesController_ListHealthSummary",
         "description": "Method to get site health summary.",
         "parameters": [
           {
@@ -11299,11 +11570,11 @@
           }
         },
         "x-ms-examples": {
-          "Sites_ListHealthSummary_MaximumSet_Gen": {
-            "$ref": "./examples/Sites_ListHealthSummary_MaximumSet_Gen.json"
+          "SitesController_ListHealthSummary_MaximumSet_Gen": {
+            "$ref": "./examples/SitesController_ListHealthSummary_MaximumSet_Gen.json"
           },
-          "Sites_ListHealthSummary_MinimumSet_Gen": {
-            "$ref": "./examples/Sites_ListHealthSummary_MinimumSet_Gen.json"
+          "SitesController_ListHealthSummary_MinimumSet_Gen": {
+            "$ref": "./examples/SitesController_ListHealthSummary_MinimumSet_Gen.json"
           }
         }
       }
@@ -11481,7 +11752,7 @@
             "type": "string"
           },
           {
-            "name": "properties",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "The resource properties to be updated.",
@@ -11792,9 +12063,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/refresh": {
       "post": {
         "tags": [
-          "Sites"
+          "SitesController"
         ],
-        "operationId": "Sites_Refresh",
+        "operationId": "SitesController_Refresh",
         "description": "Method to refresh a site.",
         "parameters": [
           {
@@ -11850,11 +12121,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Sites_Refresh_MaximumSet_Gen": {
-            "$ref": "./examples/Sites_Refresh_MaximumSet_Gen.json"
+          "SitesController_Refresh_MaximumSet_Gen": {
+            "$ref": "./examples/SitesController_Refresh_MaximumSet_Gen.json"
           },
-          "Sites_Refresh_MinimumSet_Gen": {
-            "$ref": "./examples/Sites_Refresh_MinimumSet_Gen.json"
+          "SitesController_Refresh_MinimumSet_Gen": {
+            "$ref": "./examples/SitesController_Refresh_MinimumSet_Gen.json"
           }
         }
       }
@@ -12001,7 +12272,7 @@
             "required": true,
             "description": "The content of the action request",
             "schema": {
-              "$ref": "#/definitions/VmwareSite"
+              "$ref": "#/definitions/DependencyMapServiceMapextensionsServerGroupMembersRequest"
             }
           }
         ],
@@ -12009,7 +12280,9 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DependencyMapServiceMapextensionsServerGroupMembersRequest"
+              "type": "object",
+              "properties": {},
+              "x-typespec-name": "{}"
             }
           },
           "202": {
@@ -12050,9 +12323,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/summary": {
       "post": {
         "tags": [
-          "Sites"
+          "SitesController"
         ],
-        "operationId": "Sites_Summary",
+        "operationId": "SitesController_Summary",
         "description": "Method to get site usage/summary.",
         "parameters": [
           {
@@ -12088,11 +12361,11 @@
           }
         },
         "x-ms-examples": {
-          "Sites_Summary_MaximumSet_Gen": {
-            "$ref": "./examples/Sites_Summary_MaximumSet_Gen.json"
+          "SitesController_Summary_MaximumSet_Gen": {
+            "$ref": "./examples/SitesController_Summary_MaximumSet_Gen.json"
           },
-          "Sites_Summary_MinimumSet_Gen": {
-            "$ref": "./examples/Sites_Summary_MinimumSet_Gen.json"
+          "SitesController_Summary_MinimumSet_Gen": {
+            "$ref": "./examples/SitesController_Summary_MinimumSet_Gen.json"
           }
         }
       }
@@ -12255,6 +12528,136 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/updateRunAsAccount": {
+      "post": {
+        "tags": [
+          "VmwarePropertiesController"
+        ],
+        "operationId": "VmwarePropertiesController_UpdateRunAsAccount",
+        "description": "Method to associate Run as account to machine\r\n            in a site.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "description": "Site name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          },
+          {
+            "name": "updateMachineRunAsAccount",
+            "in": "body",
+            "required": true,
+            "description": "The content of the action request",
+            "schema": {
+              "$ref": "#/definitions/UpdateMachineRunAsAccount"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "VmwarePropertiesController_UpdateRunAsAccount_MaximumSet_Gen": {
+            "$ref": "./examples/VmwarePropertiesController_UpdateRunAsAccount_MaximumSet_Gen.json"
+          },
+          "VmwarePropertiesController_UpdateRunAsAccount_MinimumSet_Gen": {
+            "$ref": "./examples/VmwarePropertiesController_UpdateRunAsAccount_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/updateTags": {
+      "post": {
+        "tags": [
+          "VmwarePropertiesController"
+        ],
+        "operationId": "VmwarePropertiesController_UpdateTags",
+        "description": "Method to associate Run as account to machine\r\n            in a site.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "description": "Site name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          },
+          {
+            "name": "updateMachineTags",
+            "in": "body",
+            "required": true,
+            "description": "The content of the action request",
+            "schema": {
+              "$ref": "#/definitions/UpdateMachineTags"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "VmwarePropertiesController_UpdateTags_MaximumSet_Gen": {
+            "$ref": "./examples/VmwarePropertiesController_UpdateTags_MaximumSet_Gen.json"
+          },
+          "VmwarePropertiesController_UpdateTags_MinimumSet_Gen": {
+            "$ref": "./examples/VmwarePropertiesController_UpdateTags_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/vcenters": {
       "get": {
         "tags": [
@@ -12405,7 +12808,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -12416,7 +12819,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "ARM update operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Vcenter"
             }
@@ -12442,7 +12845,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -12729,37 +13132,6 @@
       },
       "description": "The connectors of the web server."
     },
-    "CosmosDBImportMachinesJobEntityImportMachinesJobPropertiesJobResult": {
-      "type": "string",
-      "description": "JobResultValues",
-      "enum": [
-        "Unknown",
-        "Completed",
-        "CompletedWithWarnings",
-        "CompletedWithErrors",
-        "Failed",
-        "WaitingForBlobUpload",
-        "InProgress"
-      ],
-      "x-ms-enum": {
-        "name": "CosmosDBImportMachinesJobEntityImportMachinesJobPropertiesJobResult",
-        "modelAsString": true
-      }
-    },
-    "CosmosDbExportImportedMachinesJobEntityExportImportedMachinesJobEntityProperties": {
-      "type": "object",
-      "properties": {
-        "blobName": {
-          "type": "string",
-          "description": "blob name"
-        },
-        "sasUri": {
-          "type": "string",
-          "description": "sas uri"
-        }
-      },
-      "description": " Export Imported Machines JobEntity Properties "
-    },
     "DependencyMapDiscovery": {
       "type": "object",
       "properties": {
@@ -12802,6 +13174,20 @@
         "name": "DependencyMapDiscoveryScopeStatus",
         "modelAsString": true
       }
+    },
+    "DependencyMapMachineInput": {
+      "type": "object",
+      "properties": {
+        "machineId": {
+          "type": "string",
+          "description": "Gets or sets the ARM id of the machine."
+        },
+        "isDependencyMapToBeEnabled": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether\n            dependency mapping is to\nbe enabled or not."
+        }
+      },
+      "description": "Machine class."
     },
     "DependencyMapServiceMapextensionsClientGroupMembersRequest": {
       "type": "object",
@@ -13244,6 +13630,79 @@
       },
       "description": "ExchangeServer in the guest virtual machine."
     },
+    "ExportImportedMachinesJob": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type name for export job.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ExportImportedMachinesJobEntityProperties",
+          "description": "Gets or sets the export machines job properties."
+        },
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the relative ARM name to get job."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the Job ID."
+        },
+        "status": {
+          "type": "string",
+          "description": "Gets or sets the Job status."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "Gets or sets the Job start time."
+        },
+        "endTime": {
+          "type": "string",
+          "description": "Gets or sets the Job end time."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Gets or sets the Display name."
+        }
+      },
+      "description": "Export machines job REST resource."
+    },
+    "ExportImportedMachinesJobCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExportImportedMachinesJob"
+          },
+          "x-typespec-name": "ExportImportedMachinesJob[]",
+          "description": "Gets the list of jobs.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the value of next link.",
+          "readOnly": true
+        }
+      },
+      "description": "Export imported machines job collection."
+    },
+    "ExportImportedMachinesJobEntityProperties": {
+      "type": "object",
+      "properties": {
+        "blobName": {
+          "type": "string",
+          "description": "blob name"
+        },
+        "sasUri": {
+          "type": "string",
+          "description": "sas uri"
+        }
+      },
+      "description": " Export Imported Machines JobEntity Properties "
+    },
     "ExportMachinesRequest": {
       "type": "object",
       "properties": {
@@ -13660,10 +14119,7 @@
           "description": "The status of the last operation."
         }
       },
-      "description": "The properties of Hyperv Cluster",
-      "required": [
-        "createdTimestamp"
-      ]
+      "description": "The properties of Hyperv Cluster"
     },
     "HypervDisk": {
       "type": "object",
@@ -14323,7 +14779,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/RunAsAccountRunAsAccountProperties",
+          "$ref": "#/definitions/RunAsAccountProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -14888,7 +15344,7 @@
         "value"
       ]
     },
-    "ImportJobResource": {
+    "ImportJob": {
       "type": "object",
       "properties": {
         "properties": {
@@ -14908,16 +15364,16 @@
         }
       ]
     },
-    "ImportJobResourceListResult": {
+    "ImportJobListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ImportJobResource"
+            "$ref": "#/definitions/ImportJob"
           },
-          "x-typespec-name": "ImportJobResource[]",
-          "description": "The ImportJobResource items on this page"
+          "x-typespec-name": "ImportJob[]",
+          "description": "The ImportJob items on this page"
         },
         "nextLink": {
           "type": "string",
@@ -14926,7 +15382,50 @@
           "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
-      "description": "The response of a ImportJobResource list operation.",
+      "description": "The response of a ImportJob list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "ImportMachine": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ImportMachineProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "An machine resource belonging to a site resource.",
+      "allOf": [
+        {
+          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ImportMachineListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImportMachine"
+          },
+          "x-typespec-name": "ImportMachine[]",
+          "description": "The ImportMachine items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a ImportMachine list operation.",
       "required": [
         "value"
       ]
@@ -15103,57 +15602,64 @@
           "description": "Gets the timestamp marking last updated on the machine.",
           "readOnly": true
         },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-typespec-name": "Record<string>",
+          "description": "machine tags"
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation."
         }
       },
-      "description": "Class for machine properties."
-    },
-    "ImportMachineResource": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ImportMachineProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "description": "An machine resource belonging to a site resource.",
-      "allOf": [
-        {
-          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "ImportMachineResourceListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ImportMachineResource"
-          },
-          "x-typespec-name": "ImportMachineResource[]",
-          "description": "The ImportMachineResource items on this page"
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
-        }
-      },
-      "description": "The response of a ImportMachineResource list operation.",
+      "description": "Class for machine properties.",
       "required": [
-        "value"
+        "tags"
       ]
     },
-    "ImportMachinesJobEntityImportMachinesJobProperties": {
+    "ImportMachinesJob": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Handled by resource provider. Type =\nMicrosoft.OffAzure/ImportSites/jobs/importJobs.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ImportMachinesJobProperties",
+          "description": "Gets or sets the import job properties."
+        },
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the relative ARM name to get job."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the Job ID."
+        },
+        "status": {
+          "type": "string",
+          "description": "Gets or sets the Job status."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "Gets or sets the Job start time."
+        },
+        "endTime": {
+          "type": "string",
+          "description": "Gets or sets the Job end time."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Gets or sets the Display name."
+        }
+      },
+      "description": "Import machines Job REST Resource."
+    },
+    "ImportMachinesJobProperties": {
       "type": "object",
       "properties": {
         "blobName": {
@@ -15165,7 +15671,7 @@
           "description": "blob sasUri"
         },
         "jobResult": {
-          "$ref": "#/definitions/CosmosDBImportMachinesJobEntityImportMachinesJobPropertiesJobResult",
+          "$ref": "#/definitions/JobResult",
           "description": "job Result"
         },
         "numberOfMachinesImported": {
@@ -15179,41 +15685,17 @@
           "description": "blob Creation TimeStamp"
         },
         "errorSummary": {
-          "$ref": "#/definitions/ImportMachinesJobEntityImportMachinesJobPropertiesJobErrorSummary",
+          "$ref": "#/definitions/JobErrorSummary",
           "description": "error summary"
         }
       },
       "description": "ImportMachines JobProperties"
     },
-    "ImportMachinesJobEntityImportMachinesJobPropertiesJobErrorSummary": {
-      "type": "object",
-      "properties": {
-        "errors": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-typespec-name": "string[]",
-          "description": "errors list"
-        },
-        "errorCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "error count"
-        },
-        "warningCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "warning Count"
-        }
-      },
-      "description": "Job Error Summary"
-    },
-    "ImportSiteResource": {
+    "ImportSite": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ImportSitesProperties",
+          "$ref": "#/definitions/ImportSiteProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -15222,23 +15704,23 @@
           ]
         }
       },
-      "description": "A ImportSiteResource",
+      "description": "A ImportSite",
       "allOf": [
         {
           "$ref": "../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ]
     },
-    "ImportSiteResourceListResult": {
+    "ImportSiteListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ImportSiteResource"
+            "$ref": "#/definitions/ImportSite"
           },
-          "x-typespec-name": "ImportSiteResource[]",
-          "description": "The ImportSiteResource items on this page"
+          "x-typespec-name": "ImportSite[]",
+          "description": "The ImportSite items on this page"
         },
         "nextLink": {
           "type": "string",
@@ -15247,44 +15729,12 @@
           "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
-      "description": "The response of a ImportSiteResource list operation.",
+      "description": "The response of a ImportSite list operation.",
       "required": [
         "value"
       ]
     },
-    "ImportSiteResourceUpdate": {
-      "type": "object",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-typespec-name": "Record<string>",
-          "description": "Resource tags."
-        },
-        "properties": {
-          "$ref": "#/definitions/ImportSiteResourceUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "description": "The type used for update operations of the ImportSiteResource."
-    },
-    "ImportSiteResourceUpdateProperties": {
-      "type": "object",
-      "properties": {
-        "discoverySolutionId": {
-          "type": "string",
-          "description": "Gets or sets the ARM ID of migration hub solution for SDS."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation."
-        }
-      },
-      "description": "The updatable properties of the ImportSiteResource."
-    },
-    "ImportSitesProperties": {
+    "ImportSiteProperties": {
       "type": "object",
       "properties": {
         "discoverySolutionId": {
@@ -15307,6 +15757,62 @@
         }
       },
       "description": "The properties of ImportSiteResource"
+    },
+    "ImportSiteUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-typespec-name": "Record<string>",
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/ImportSiteUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "The type used for update operations of the ImportSite."
+    },
+    "ImportSiteUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "discoverySolutionId": {
+          "type": "string",
+          "description": "Gets or sets the ARM ID of migration hub solution for SDS."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation."
+        }
+      },
+      "description": "The updatable properties of the ImportSite."
+    },
+    "JobErrorSummary": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-typespec-name": "string[]",
+          "description": "errors list"
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "error count"
+        },
+        "warningCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "warning Count"
+        }
+      },
+      "description": "Job Error Summary"
     },
     "JobProperties": {
       "type": "object",
@@ -15358,6 +15864,23 @@
         }
       },
       "description": "Job REST Resource."
+    },
+    "JobResult": {
+      "type": "string",
+      "description": "JobResultValues",
+      "enum": [
+        "Unknown",
+        "Completed",
+        "CompletedWithWarnings",
+        "CompletedWithErrors",
+        "Failed",
+        "WaitingForBlobUpload",
+        "InProgress"
+      ],
+      "x-ms-enum": {
+        "name": "JobResult",
+        "modelAsString": true
+      }
     },
     "MachineMetadata": {
       "type": "object",
@@ -15568,7 +16091,7 @@
       "type": "object",
       "properties": {
         "publicNetworkAccess": {
-          "$ref": "#/definitions/V202007MasterSitePropertiesPublicNetworkAccess",
+          "$ref": "#/definitions/MasterSitePropertiesPublicNetworkAccess",
           "description": "Gets or sets the state of public network access."
         },
         "allowMultipleSites": {
@@ -15590,9 +16113,9 @@
         "privateEndpointConnections": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PendpointConnection"
+            "$ref": "#/definitions/PrivateEndpointConnection"
           },
-          "x-typespec-name": "PendpointConnection[]",
+          "x-typespec-name": "PrivateEndpointConnection[]",
           "description": "Gets the private endpoint connections.",
           "readOnly": true
         },
@@ -15612,6 +16135,19 @@
         }
       },
       "description": "Class for site properties."
+    },
+    "MasterSitePropertiesPublicNetworkAccess": {
+      "type": "string",
+      "description": "PublicNetworkAccess",
+      "enum": [
+        "NotSpecified",
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "MasterSitePropertiesPublicNetworkAccess",
+        "modelAsString": true
+      }
     },
     "MasterSiteUpdate": {
       "type": "object",
@@ -15635,7 +16171,7 @@
       "type": "object",
       "properties": {
         "publicNetworkAccess": {
-          "$ref": "#/definitions/V202007MasterSitePropertiesPublicNetworkAccess",
+          "$ref": "#/definitions/MasterSitePropertiesPublicNetworkAccess",
           "description": "Gets or sets the state of public network access."
         },
         "allowMultipleSites": {
@@ -15819,17 +16355,17 @@
       },
       "description": "OtherDatabase in the guest virtual machine."
     },
-    "PagedV20200201ExportImportedMachinesJobExportImportedMachinesJobCollection": {
+    "PagedExportImportedMachinesJobCollection": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/V20200201ExportImportedMachinesJobExportImportedMachinesJobCollection"
+            "$ref": "#/definitions/ExportImportedMachinesJobCollection"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "V20200201ExportImportedMachinesJobExportImportedMachinesJobCollection[]",
-          "description": "The V20200201ExportImportedMachinesJobExportImportedMachinesJobCollection items on this page",
+          "x-typespec-name": "ExportImportedMachinesJobCollection[]",
+          "description": "The ExportImportedMachinesJobCollection items on this page",
           "readOnly": true
         },
         "nextLink": {
@@ -15838,7 +16374,7 @@
           "readOnly": true
         }
       },
-      "description": "Paged collection of V20200201ExportImportedMachinesJobExportImportedMachinesJobCollection items"
+      "description": "Paged collection of ExportImportedMachinesJobCollection items"
     },
     "PagedV20200201ImportMachinesJobImportMachinesJobCollection": {
       "type": "object",
@@ -15860,37 +16396,6 @@
         }
       },
       "description": "Paged collection of V20200201ImportMachinesJobImportMachinesJobCollection items"
-    },
-    "PendpointConnection": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Relative URL to get this Sites.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets the name of the resource.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Gets the resource type.",
-          "readOnly": true
-        },
-        "eTag": {
-          "type": "string",
-          "description": "Gets the tag for optimistic concurrency control.",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionPropertiesV2",
-          "description": "Gets the properties of the object.",
-          "readOnly": true
-        }
-      },
-      "description": "REST model used to encapsulate the user visible state of a PrivateEndpoint."
     },
     "PrivateEndpointConnection": {
       "type": "object",
@@ -16155,6 +16660,20 @@
       },
       "description": "PrivateEndpointModelsResourceId"
     },
+    "RunAsAccountMachineInput": {
+      "type": "object",
+      "properties": {
+        "machineId": {
+          "type": "string",
+          "description": "Gets or sets the ARM id of the machine."
+        },
+        "runAsAccountId": {
+          "type": "string",
+          "description": "run as AccountId"
+        }
+      },
+      "description": "Machine class."
+    },
     "RunAsAccountProperties": {
       "type": "object",
       "properties": {
@@ -16191,41 +16710,6 @@
       },
       "description": "Class for run as account properties."
     },
-    "RunAsAccountRunAsAccountProperties": {
-      "type": "object",
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "Display name of the run as account.",
-          "readOnly": true
-        },
-        "credentialType": {
-          "type": "string",
-          "description": "Gets the credential type of the run as account.",
-          "readOnly": true
-        },
-        "createdTimestamp": {
-          "type": "string",
-          "description": "Timestamp marking run as account creation.",
-          "readOnly": true
-        },
-        "updatedTimestamp": {
-          "type": "string",
-          "description": "Timestamp marking last updated on the run as account.",
-          "readOnly": true
-        },
-        "applianceName": {
-          "type": "string",
-          "description": "Gets the appliance name of the run as account.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation."
-        }
-      },
-      "description": "Class for run as account properties."
-    },
     "SQLDiscoveryScopeStatus": {
       "type": "string",
       "description": "SQLDiscoveryScope Status",
@@ -16257,6 +16741,26 @@
         }
       },
       "description": "Import URI response class."
+    },
+    "Server": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServerProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "A machine resource belonging to a site resource.",
+      "allOf": [
+        {
+          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "ServerDisk": {
       "type": "object",
@@ -16294,7 +16798,7 @@
       },
       "description": "Server disk details."
     },
-    "ServerJobResource": {
+    "ServerJob": {
       "type": "object",
       "properties": {
         "properties": {
@@ -16314,16 +16818,16 @@
         }
       ]
     },
-    "ServerJobResourceListResult": {
+    "ServerJobListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ServerJobResource"
+            "$ref": "#/definitions/ServerJob"
           },
-          "x-typespec-name": "ServerJobResource[]",
-          "description": "The ServerJobResource items on this page"
+          "x-typespec-name": "ServerJob[]",
+          "description": "The ServerJob items on this page"
         },
         "nextLink": {
           "type": "string",
@@ -16332,41 +16836,21 @@
           "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
-      "description": "The response of a ServerJobResource list operation.",
+      "description": "The response of a ServerJob list operation.",
       "required": [
         "value"
       ]
     },
-    "ServerMachineResource": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ServerProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "description": "A machine resource belonging to a site resource.",
-      "allOf": [
-        {
-          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "ServerMachineResourceListResult": {
+    "ServerListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ServerMachineResource"
+            "$ref": "#/definitions/Server"
           },
-          "x-typespec-name": "ServerMachineResource[]",
-          "description": "The ServerMachineResource items on this page"
+          "x-typespec-name": "Server[]",
+          "description": "The Server items on this page"
         },
         "nextLink": {
           "type": "string",
@@ -16375,7 +16859,7 @@
           "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
-      "description": "The response of a ServerMachineResource list operation.",
+      "description": "The response of a Server list operation.",
       "required": [
         "value"
       ]
@@ -16447,6 +16931,11 @@
         "validationRequired": {
           "type": "string",
           "description": "Gets or sets the validation required for the machine."
+        },
+        "processorInfo": {
+          "$ref": "#/definitions/ProcessorInfo",
+          "description": "Processor Info of the Server machine.",
+          "readOnly": true
         },
         "firmware": {
           "type": "string",
@@ -16562,6 +17051,10 @@
           "description": "Apps And Roles of the Server.",
           "readOnly": true
         },
+        "productSupportStatus": {
+          "$ref": "#/definitions/ProductSupportStatus",
+          "description": "product support status."
+        },
         "numberOfProcessorCore": {
           "type": "integer",
           "format": "int32",
@@ -16614,11 +17107,11 @@
       },
       "description": "Server REST resource."
     },
-    "ServerRunAsAccountResource": {
+    "ServerRunAsAccount": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/RunAsAccountRunAsAccountProperties",
+          "$ref": "#/definitions/RunAsAccountProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -16634,16 +17127,16 @@
         }
       ]
     },
-    "ServerRunAsAccountResourceListResult": {
+    "ServerRunAsAccountListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ServerRunAsAccountResource"
+            "$ref": "#/definitions/ServerRunAsAccount"
           },
-          "x-typespec-name": "ServerRunAsAccountResource[]",
-          "description": "The ServerRunAsAccountResource items on this page"
+          "x-typespec-name": "ServerRunAsAccount[]",
+          "description": "The ServerRunAsAccount items on this page"
         },
         "nextLink": {
           "type": "string",
@@ -16652,7 +17145,7 @@
           "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
-      "description": "The response of a ServerRunAsAccountResource list operation.",
+      "description": "The response of a ServerRunAsAccount list operation.",
       "required": [
         "value"
       ]
@@ -16775,6 +17268,97 @@
         "runAsAccounts",
         "serverCount"
       ]
+    },
+    "ServerUpdate": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServerUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "The type used for update operations of the Server."
+    },
+    "ServerUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "fqdn": {
+          "type": "string",
+          "description": "Gets or sets the FQDN/IPAddress of the server."
+        },
+        "networkAdapters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerNetworkAdapter"
+          },
+          "x-ms-identifiers": [],
+          "x-typespec-name": "ServerNetworkAdapter[]",
+          "description": "Gets or sets the network adapters of the server."
+        },
+        "hydratedFqdn": {
+          "type": "string",
+          "description": "Gets or sets the FQDN of machine which can be changed."
+        },
+        "disks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerDisk"
+          },
+          "x-typespec-name": "ServerDisk[]",
+          "description": "Gets or sets the disk details of server."
+        },
+        "validationRequired": {
+          "type": "string",
+          "description": "Gets or sets the validation required for the machine."
+        },
+        "firmware": {
+          "type": "string",
+          "description": "Gets or sets the firmware."
+        },
+        "runAsAccountId": {
+          "type": "string",
+          "description": "Gets or sets the run as account ID of the machine."
+        },
+        "productSupportStatus": {
+          "$ref": "#/definitions/ProductSupportStatus",
+          "description": "product support status."
+        },
+        "numberOfProcessorCore": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the Number of Processor Cores \n            allocated for the\nmachine."
+        },
+        "allocatedMemoryInMb": {
+          "type": "number",
+          "format": "float",
+          "description": "Gets or sets the allocated Memory in MB."
+        },
+        "operatingSystemDetails": {
+          "$ref": "#/definitions/OperatingSystem",
+          "description": "Gets or sets the Operating System Details installed on the machine."
+        },
+        "biosSerialNumber": {
+          "type": "string",
+          "description": "Gets or sets the Machine BIOS serial number."
+        },
+        "biosGuid": {
+          "type": "string",
+          "description": "Gets or sets the BIOS GUID."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Azure.ResourceManager.Object"
+          },
+          "x-typespec-name": "Record<Azure.ResourceManager.Object>",
+          "description": "Gets or sets tags on the Server machine."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the server resource."
+        }
+      },
+      "description": "The updatable properties of the Server."
     },
     "ShallowDiscoveryStatus": {
       "type": "string",
@@ -17679,7 +18263,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/RunAsAccountRunAsAccountProperties",
+          "$ref": "#/definitions/RunAsAccountProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -18356,6 +18940,24 @@
       },
       "description": "SystemCenter in the guest virtual machine."
     },
+    "TagsMachineInput": {
+      "type": "object",
+      "properties": {
+        "machineId": {
+          "type": "string",
+          "description": "Gets or sets the ARM id of the machine."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-typespec-name": "Record<string>",
+          "description": "run as AccountId"
+        }
+      },
+      "description": "Machine class."
+    },
     "TomcatEngineUnit": {
       "type": "object",
       "properties": {
@@ -18746,28 +19348,44 @@
         "machines": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/UpdateMachineDepMapStatusDependencyMapMachineInput"
+            "$ref": "#/definitions/DependencyMapMachineInput"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "UpdateMachineDepMapStatusDependencyMapMachineInput[]",
+          "x-typespec-name": "DependencyMapMachineInput[]",
           "description": "Gets or sets the machine collection."
         }
       },
       "description": "Defines class that represents input to enable or disable DMP on machine\n      \n      for cosmos entity operation."
     },
-    "UpdateMachineDepMapStatusDependencyMapMachineInput": {
+    "UpdateMachineRunAsAccount": {
       "type": "object",
       "properties": {
-        "machineId": {
-          "type": "string",
-          "description": "Gets or sets the ARM id of the machine."
-        },
-        "isDependencyMapToBeEnabled": {
-          "type": "boolean",
-          "description": "Gets or sets a value indicating whether\n            dependency mapping is to\nbe enabled or not."
+        "machines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RunAsAccountMachineInput"
+          },
+          "x-ms-identifiers": [],
+          "x-typespec-name": "RunAsAccountMachineInput[]",
+          "description": "Gets or sets the machine collection."
         }
       },
-      "description": "Machine class."
+      "description": "Defines class that represents input to update RunAsAccount on machine\n      \n      for cosmos entity operation."
+    },
+    "UpdateMachineTags": {
+      "type": "object",
+      "properties": {
+        "machines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TagsMachineInput"
+          },
+          "x-ms-identifiers": [],
+          "x-typespec-name": "TagsMachineInput[]",
+          "description": "Gets or sets the machine collection."
+        }
+      },
+      "description": "Defines class that represents input to update Tags on machine\n      \n      for cosmos entity operation."
     },
     "V20180501PreviewVmwareRunAsAccount": {
       "type": "object",
@@ -18788,7 +19406,7 @@
           "readOnly": true
         },
         "properties": {
-          "$ref": "#/definitions/RunAsAccountRunAsAccountProperties",
+          "$ref": "#/definitions/RunAsAccountProperties",
           "description": "Gets nested properties.",
           "readOnly": true
         }
@@ -18815,127 +19433,15 @@
       },
       "description": "Collection of VMware run as accounts."
     },
-    "V20190501PreviewSasUriResponse": {
-      "type": "object",
-      "properties": {
-        "jobArmId": {
-          "type": "string",
-          "description": "Gets or sets the job ARM ID."
-        },
-        "uri": {
-          "type": "string",
-          "description": "Gets or sets the SAS URI."
-        }
-      },
-      "description": "Import URI response class."
-    },
-    "V20200201ExportImportedMachinesJob": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "Type name for export job.",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/CosmosDbExportImportedMachinesJobEntityExportImportedMachinesJobEntityProperties",
-          "description": "Gets or sets the export machines job properties."
-        },
-        "id": {
-          "type": "string",
-          "description": "Gets or sets the relative ARM name to get job."
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the Job ID."
-        },
-        "status": {
-          "type": "string",
-          "description": "Gets or sets the Job status."
-        },
-        "startTime": {
-          "type": "string",
-          "description": "Gets or sets the Job start time."
-        },
-        "endTime": {
-          "type": "string",
-          "description": "Gets or sets the Job end time."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Gets or sets the Display name."
-        }
-      },
-      "description": "Export machines job REST resource."
-    },
-    "V20200201ExportImportedMachinesJobExportImportedMachinesJobCollection": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/V20200201ExportImportedMachinesJob"
-          },
-          "x-typespec-name": "V20200201ExportImportedMachinesJob[]",
-          "description": "Gets the list of jobs.",
-          "readOnly": true
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets the value of next link.",
-          "readOnly": true
-        }
-      },
-      "description": "Export imported machines job collection."
-    },
-    "V20200201ImportMachinesJob": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "Handled by resource provider. Type =\nMicrosoft.OffAzure/ImportSites/jobs/importJobs.",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/ImportMachinesJobEntityImportMachinesJobProperties",
-          "description": "Gets or sets the import job properties."
-        },
-        "id": {
-          "type": "string",
-          "description": "Gets or sets the relative ARM name to get job."
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the Job ID."
-        },
-        "status": {
-          "type": "string",
-          "description": "Gets or sets the Job status."
-        },
-        "startTime": {
-          "type": "string",
-          "description": "Gets or sets the Job start time."
-        },
-        "endTime": {
-          "type": "string",
-          "description": "Gets or sets the Job end time."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Gets or sets the Display name."
-        }
-      },
-      "description": "Import machines Job REST Resource."
-    },
     "V20200201ImportMachinesJobImportMachinesJobCollection": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/V20200201ImportMachinesJob"
+            "$ref": "#/definitions/ImportMachinesJob"
           },
-          "x-typespec-name": "V20200201ImportMachinesJob[]",
+          "x-typespec-name": "ImportMachinesJob[]",
           "description": "Gets the list of jobs.",
           "readOnly": true
         },
@@ -18946,19 +19452,6 @@
         }
       },
       "description": "Collection of VMware jobs."
-    },
-    "V202007MasterSitePropertiesPublicNetworkAccess": {
-      "type": "string",
-      "description": "PublicNetworkAccess",
-      "enum": [
-        "NotSpecified",
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "V202007MasterSitePropertiesPublicNetworkAccess",
-        "modelAsString": true
-      }
     },
     "VMwareDatastoreType": {
       "type": "string",
@@ -19312,6 +19805,49 @@
       },
       "description": "Second level object returned as part of Machine REST resource."
     },
+    "VmwareHost": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VmwareHostProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "A host resource belonging to a site resource.",
+      "allOf": [
+        {
+          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "VmwareHostListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VmwareHost"
+          },
+          "x-typespec-name": "VmwareHost[]",
+          "description": "The VmwareHost items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a VmwareHost list operation.",
+      "required": [
+        "value"
+      ]
+    },
     "VmwareHostProperties": {
       "type": "object",
       "properties": {
@@ -19361,49 +19897,6 @@
         }
       },
       "description": "Class for host properties."
-    },
-    "VmwareHostResource": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/VmwareHostProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "description": "A host resource belonging to a site resource.",
-      "allOf": [
-        {
-          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "VmwareHostResourceListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VmwareHostResource"
-          },
-          "x-typespec-name": "VmwareHostResource[]",
-          "description": "The VmwareHostResource items on this page"
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
-        }
-      },
-      "description": "The response of a VmwareHostResource list operation.",
-      "required": [
-        "value"
-      ]
     },
     "VmwareJob": {
       "type": "object",
@@ -19837,7 +20330,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/RunAsAccountRunAsAccountProperties",
+          "$ref": "#/definitions/RunAsAccountProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
