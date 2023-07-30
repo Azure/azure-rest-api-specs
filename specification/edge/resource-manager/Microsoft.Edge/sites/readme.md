@@ -36,8 +36,8 @@ These settings apply only when `--tag=package-2023-08-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-08-01-preview'
 input-file:
-  - Microsoft.Edge/preview/2023-08-01-preview/edgesites.json
-  - Microsoft.Edge/preview/2023-08-01-preview/siteAwareResourceTypes.json
+  - preview/2023-08-01-preview/edgesites.json
+  - preview/2023-08-01-preview/siteAwareResourceTypes.json
 ```
 
 ### Tag: package-2023-06-01-preview
@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2023-06-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-06-01-preview'
 input-file:
-  - Microsoft.Edge/preview/2023-06-01-preview/edgesites.json
+  - preview/2023-06-01-preview/edgesites.json
 ```
 
 ---
@@ -67,6 +67,8 @@ swagger-to-sdk:
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
   - repo: azure-powershell
+  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
 ```
 ## Az
 
