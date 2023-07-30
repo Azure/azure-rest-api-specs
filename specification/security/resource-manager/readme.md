@@ -73,7 +73,6 @@ directive:
     from: applications.json
     reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
   - suppress: OBJECT_ADDITIONAL_PROPERTIES
-    where: $.paths
     from: subAssessments.json
     reason: Service returns dynamic properties that are not defined in the swagger.
 ```
