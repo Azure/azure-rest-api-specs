@@ -28,6 +28,10 @@ directive:
     from: securityContacts.json
     where: $.definitions.SecurityContactProperties.properties.email.format
     reason: email format is allowed
+  - suppress: PageableOperation
+    from: securityContacts.json
+    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Security/securityContacts"].get'
+    reason: Service does not support pagination.
   - suppress: ValidFormats
     from: automations.json
     where: $.definitions.AutomationActionLogicApp.properties.uri.format
@@ -68,6 +72,10 @@ directive:
     where: $.paths
     from: applications.json
     reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    where: $.paths
+    from: subAssessments.json
+    reason: Service returns dynamic properties that are not defined in the swagger.
 ```
 
 ### Basic Information
