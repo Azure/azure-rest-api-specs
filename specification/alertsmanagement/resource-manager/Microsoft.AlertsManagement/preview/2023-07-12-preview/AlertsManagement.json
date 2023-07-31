@@ -372,7 +372,7 @@
     },
     "/{scope}/providers/Microsoft.AlertsManagement/alerts/{alertId}/enrichments": {
       "get": {
-        "operationId": "Alerts_ListEnrichments",
+        "operationId": "Alerts_GetEnrichments",
         "description": "Get the enrichments of an alert.",
         "parameters": [
           {
@@ -383,18 +383,11 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "$skiptoken",
-            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
-            "in": "query",
-            "required": false,
-            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK. Returns the attachments of the specified alert.",
+            "description": "OK. Returns the enrichments of the specified alert.",
             "schema": {
               "$ref": "#/definitions/alertEnrichmentResponse"
             }
@@ -406,12 +399,9 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Resolve": {
-            "$ref": "./examples/Alerts_ListEnrichments.json"
+            "$ref": "./examples/Alerts_GetEnrichments.json"
           }
         }
       }
@@ -1537,47 +1527,38 @@
       }
     },
     "alertEnrichmentResponse": {
-      "type": "object",
-      "description": "List of alert enrichments.",
-      "required": [
-        "value"
-      ],
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Enrichments details",
-          "items": {
-            "$ref": "#/definitions/alertEnrichmentResource"
-          }
-        },
-        "nextLink": {
-          "description": "URL to fetch the next set of enrichments.",
-          "type": "string"
-        }
-      }
-    },
-    "alertEnrichmentResource": {
-      "type": "object",
-      "description": "A single alert enrichment resource.",
+      "description": "The alert's enrichments.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
-      ],
-      "required": [
-        "properties"
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/alertEnrichmentProperties",
-          "x-ms-client-flatten": true,
-          "description": "alert enrichment properties."
+          "$ref": "#/definitions/alertEnrichmentProperties"
         }
       }
     },
     "alertEnrichmentProperties": {
       "type": "object",
-      "description": "Alert enrichment properties.",
+      "description": "Properties of the alert enrichment item.",
+      "properties": {
+        "alertId": {
+          "type": "string",
+          "description": "Unique Id of the alert for which the enrichments are being retrieved.",
+          "readOnly": true
+        },
+        "enrichments": {
+          "type": "array",
+          "description": "Enrichment details",
+          "items": {
+            "$ref": "#/definitions/alertEnrichmentItem"
+          }
+        }
+      }
+    },
+    "alertEnrichmentItem": {
+      "description": "Alert enrichment item.",
       "discriminator": "type",
       "required": [
         "title",
@@ -1616,8 +1597,7 @@
         }
       }
     },
-    "PrometheusEnrichmentProperties": {
-      "type": "object",
+    "PrometheusEnrichmentItem": {
       "description": "Prometheus enrichment object.",
       "required": [
         "linkToApi",
@@ -1627,7 +1607,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/alertEnrichmentProperties"
+          "$ref": "#/definitions/alertEnrichmentItem"
         }
       ],
       "properties": {
@@ -1663,7 +1643,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/PrometheusEnrichmentProperties"
+          "$ref": "#/definitions/PrometheusEnrichmentItem"
         }
       ],
       "properties": {
@@ -1675,7 +1655,6 @@
     },
     "PrometheusRangeQuery": {
       "x-ms-discriminator-value": "PrometheusRangeQuery",
-      "type": "object",
       "description": "Prometheus instant query enrichment object.",
       "required": [
         "start",
@@ -1684,7 +1663,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/PrometheusEnrichmentProperties"
+          "$ref": "#/definitions/PrometheusEnrichmentItem"
         }
       ],
       "properties": {
