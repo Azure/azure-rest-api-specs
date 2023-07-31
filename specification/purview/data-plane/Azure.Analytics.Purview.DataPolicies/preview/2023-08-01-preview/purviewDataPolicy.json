@@ -124,7 +124,7 @@
           }
         },
         "x-ms-examples": {
-          "DevopsSqlSecurityAuditorPolicy_CreateOrReplace": {
+          "CreateOrReplace_DataPolicy": {
             "$ref": "./examples/DataPolicy_CreateOrReplace.json"
           }
         }
@@ -140,11 +140,7 @@
             "$ref": "#/parameters/policy-name"
           },
           {
-            "in": "header",
-            "name": "If-Match",
-            "description": "Http Etag value of a policy to be deleted.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/if-match"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -168,7 +164,7 @@
           }
         },
         "x-ms-examples": {
-          "DevopsSqlSecurityAuditorPolicy_Delete": {
+          "Delete_DataPolicy": {
             "$ref": "./examples/DataPolicy_Delete.json"
           }
         }
@@ -217,7 +213,7 @@
           }
         },
         "x-ms-examples": {
-          "DevopsSqlSecurityAuditorPolicy_Get": {
+          "Get_DataPolicy": {
             "$ref": "./examples/DataPolicy_Get.json"
           }
         }
@@ -226,10 +222,10 @@
     "/data-policies/{policy-name}:bind": {
       "post": {
         "tags": [
-          "Publish_DataPolicy"
+          "Bind_DataPolicy"
         ],
         "description": "Publishes a data policy to the datasource. The policy is identified by the policy name. Datasource is inferred from the policy",
-        "operationId": "Publish_DataPolicy",
+        "operationId": "Bind_DataPolicy",
         "consumes": [
           "application/json"
         ],
@@ -241,11 +237,7 @@
             "$ref": "#/parameters/policy-name"
           },
           {
-            "in": "header",
-            "name": "If-Match",
-            "description": "Http Etag value of a policy to be updated. Required only during the replace operation",
-            "type": "string",
-            "required": true
+            "$ref": "#/parameters/if-match"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -278,7 +270,7 @@
           }
         },
         "x-ms-examples": {
-          "DevopsSqlSecurityAuditorPolicy_CreateOrReplace": {
+          "Bind_DataPolicy": {
             "$ref": "./examples/DataPolicy_Bind.json"
           }
         }
@@ -302,11 +294,7 @@
             "$ref": "#/parameters/policy-name"
           },
           {
-            "in": "header",
-            "name": "If-Match",
-            "description": "Http Etag value of a policy to be updated. Required only during the replace operation",
-            "type": "string",
-            "required": true
+            "$ref": "#/parameters/if-match"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -339,7 +327,7 @@
           }
         },
         "x-ms-examples": {
-          "DevopsSqlSecurityAuditorPolicy_CreateOrReplace": {
+          "Unbind_DataPolicy": {
             "$ref": "./examples/DataPolicy_UnBind.json"
           }
         }
