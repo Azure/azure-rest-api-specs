@@ -1142,70 +1142,6 @@
     }
   },
   "definitions": {
-    "Error": {
-      "type": "object",
-      "description": "Standard error response as per MS guidelines. We may skip some fields.",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "target": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        },
-        "innerError": {
-          "$ref": "#/definitions/InnerError"
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDetails"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "ErrorContent": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Error"
-        }
-      }
-    },
-    "ErrorDetails": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "target": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        }
-      }
-    },
-    "InnerError": {
-      "type": "object",
-      "properties": {
-        "trace": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "context": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        }
-      }
-    },
     "RequestState": {
       "description": "Request status.",
       "enum": [
@@ -1252,7 +1188,7 @@
           }
         },
         "error": {
-          "$ref": "#/definitions/Error",
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse",
           "readOnly": true
         }
       }
