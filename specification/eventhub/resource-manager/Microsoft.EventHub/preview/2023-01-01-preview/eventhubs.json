@@ -390,6 +390,28 @@
       },
       "description": "The result of the List EventHubs operation."
     },
+    "CaptureIdentity": {
+      "type": "object",
+      "description": "A value that indicates whether capture description is enabled.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of Azure Active Directory Managed Identity.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "CaptureIdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "ARM ID of Managed User Identity. This property is required is the type is UserAssignedIdentity. If type is SystemAssigned, then the System Assigned Identity Associated with the namespace will be used."
+        }
+      }
+    },
     "Destination": {
       "properties": {
         "name": {
@@ -397,26 +419,7 @@
           "description": "Name for capture destination"
         },
         "identity": {
-          "type": "object",
-          "description": "A value that indicates whether capture description is enabled.",
-          "properties": {
-            "type": {
-              "type": "string",
-              "description": "Type of Azure Active Directory Managed Identity.",
-              "enum": [
-                "SystemAssigned",
-                "UserAssigned"
-              ],
-              "x-ms-enum": {
-                "name": "ManagedServiceIdentityType",
-                "modelAsString": false
-              }
-            },
-            "userAssignedIdentity": {
-              "type": "string",
-              "description": "ARM ID of Managed User Identity. This property is required is the type is UserAssignedIdentity. If type is SystemAssigned, then the System Assigned Identity Associated with the namespace will be used."
-            }
-          }
+          "$ref": "#/definitions/CaptureIdentity"
         },
         "properties": {
           "x-ms-client-flatten": true,
