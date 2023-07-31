@@ -207,6 +207,9 @@
           "Create a scale set with Fpga Network Interfaces.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_FromWithFpgaNetworkInterface.json"
           },
+          "Create a scale set with Network Interfaces with public ip address dns settings.": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_FromWithNetworkInterfaceWithDnsSettings.json"
+          },
           "Create a scale set with Uefi Settings of secureBoot and vTPM.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithUefiSettings.json"
           },
@@ -4402,6 +4405,20 @@
         "domainNameLabel": {
           "type": "string",
           "description": "The Domain name label.The concatenation of the domain name label and vm index will be the domain name labels of the PublicIPAddress resources that will be created"
+        },
+        "domainNameLabelScope": {
+          "type": "string",
+          "description": "The Domain name label scope.The concatenation of the hashed domain name label that generated according to the policy from domain name label scope and vm index will be the domain name labels of the PublicIPAddress resources that will be created",
+          "enum": [
+            "TenantReuse",
+            "SubscriptionReuse",
+            "ResourceGroupReuse",
+            "NoReuse"
+          ],
+          "x-ms-enum": {
+            "name": "DomainNameLabelScopeTypes",
+            "modelAsString": true
+          }
         }
       },
       "required": [
