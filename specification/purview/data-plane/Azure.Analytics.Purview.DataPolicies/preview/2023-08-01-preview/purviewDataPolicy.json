@@ -1,0 +1,628 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Purview data policies REST API Document",
+    "version": "2023-08-01-preview"
+  },
+  "paths": {
+    "/data-policies": {
+      "get": {
+        "tags": [
+          "List_DataPolicy"
+        ],
+        "summary": "API to list the purview data policies",
+        "description": "List all data policies.",
+        "operationId": "List_DataPolicy",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataPolicyList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Policy service",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        },
+        "x-ms-examples": {
+          "DevopsPolicy_List": {
+            "$ref": "./examples/DataPolicy_List.json"
+          }
+        }
+      }
+    },
+    "/data-policies/{policy-name}": {
+      "put": {
+        "tags": [
+          "CreateOrReplace_DataPolicy"
+        ],
+        "description": "Create/replace data policy",
+        "operationId": "CreateOrReplace_DataPolicy",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/policy-name"
+          },
+          {
+            "$ref": "#/parameters/if-match"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Data policy object to create or update..",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/DataPolicy"
+            },
+            "headers": {
+              "ETag": {
+                "description": "An HTTP entity tag associated with the policy entity",
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataPolicy"
+            },
+            "headers": {
+              "ETag": {
+                "description": "An HTTP entity tag associated with the policy entity",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An error response received from the Policy service",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevopsSqlSecurityAuditorPolicy_CreateOrReplace": {
+            "$ref": "./examples/DataPolicy_CreateOrReplace.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Delete_DataPolicy"
+        ],
+        "description": "Deletes a data policy. The policy is identified by the policy name field.",
+        "operationId": "Delete_DataPolicy",
+        "parameters": [
+          {
+            "$ref": "#/parameters/policy-name"
+          },
+          {
+            "in": "header",
+            "name": "If-Match",
+            "description": "Http Etag value of a policy to be deleted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "An error response received from the Policy Service",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevopsSqlSecurityAuditorPolicy_Delete": {
+            "$ref": "./examples/DataPolicy_Delete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Get_DataPolicy"
+        ],
+        "description": "Get data policy by name",
+        "operationId": "Get_DataPolicy",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/policy-name"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataPolicy"
+            },
+            "headers": {
+              "ETag": {
+                "description": "An HTTP entity tag associated with the policy entity",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An error response received from the Policy service",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevopsSqlSecurityAuditorPolicy_Get": {
+            "$ref": "./examples/DataPolicy_Get.json"
+          }
+        }
+      }
+    },
+    "/data-policies/{policy-name}:bind": {
+      "post": {
+        "tags": [
+          "Publish_DataPolicy"
+        ],
+        "description": "Publishes a data policy to the datasource. The policy is identified by the policy name. Datasource is inferred from the policy",
+        "operationId": "Publish_DataPolicy",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/policy-name"
+          },
+          {
+            "in": "header",
+            "name": "If-Match",
+            "description": "Http Etag value of a policy to be updated. Required only during the replace operation",
+            "type": "string",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataPolicy"
+            },
+            "headers": {
+              "ETag": {
+                "description": "An HTTP entity tag associated with the policy entity",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An error response received from the Policy service",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevopsSqlSecurityAuditorPolicy_CreateOrReplace": {
+            "$ref": "./examples/DataPolicy_Bind.json"
+          }
+        }
+      }
+    },
+    "/data-policies/{policy-name}:unbind": {
+      "post": {
+        "tags": [
+          "Unbind_DataPolicy"
+        ],
+        "description": "Unbinds the data policy identified by name from the datasource. Datasource is inferred from the policy. The policy goes into draft mode.",
+        "operationId": "Unbind_DataPolicy",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/policy-name"
+          },
+          {
+            "in": "header",
+            "name": "If-Match",
+            "description": "Http Etag value of a policy to be updated. Required only during the replace operation",
+            "type": "string",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataPolicy"
+            },
+            "headers": {
+              "ETag": {
+                "description": "An HTTP entity tag associated with the policy entity",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An error response received from the Policy Service",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevopsSqlSecurityAuditorPolicy_CreateOrReplace": {
+            "$ref": "./examples/DataPolicy_UnBind.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DataPolicyList": {
+      "required": [
+        "value"
+      ],
+      "description": "A paginated list of purview data policies",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "A list of purview data policies",
+          "items": {
+            "$ref": "#/definitions/DataPolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Pagination link"
+        }
+      }
+    },
+    "DataPolicy": {
+      "required": [
+        "decisionRules",
+        "members",
+        "description"
+      ],
+      "type": "object",
+      "description": "Purview data policy",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The policy id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The policy name"
+        },
+        "kind": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The policy kind"
+        },
+        "source": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The policy source"
+        },
+        "state": {
+          "description": "The state of the policy",
+          "enum": [
+            "Enabled",
+            "Draft"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "name": "state",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "The policy description"
+        },
+        "schemaVersion": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The schema version of the policy"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The etag version of a policy"
+        },
+        "scopes": {
+          "type": "array",
+          "readOnly": true,
+          "description": "Array of scopes where the policy is published",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "members": {
+          "type": "object",
+          "description": "Members of the policy",
+          "$ref": "#/definitions/PolicyMembers"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+        },
+        "decisionRules": {
+          "type": "array",
+          "description": "Array of decisionRules for the policy",
+          "items": {
+            "$ref": "#/definitions/PolicyDecisionRule"
+          }
+        }
+      }
+    },
+    "PolicyMembers": {
+      "type": "object",
+      "description": "Policy member",
+      "properties": {
+        "fabricItemMembers": {
+          "type": "array",
+          "description": "Array of azure active directory members",
+          "items": {
+            "$ref": "#/definitions/FabricItemMember"
+          },
+          "x-ms-identifiers": []
+        },
+        "aadMembers": {
+          "type": "array",
+          "description": "Array of azure active directory members",
+          "items": {
+            "$ref": "#/definitions/AADMember"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "AADMember": {
+      "type": "object",
+      "description": "Azure active directory member",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "The tenantId of the member"
+        },
+        "objectId": {
+          "type": "string",
+          "description": "The objectId of the member"
+        },
+        "objectType": {
+          "type": "string",
+          "description": "The objectType of the member.",
+          "enum": [
+            "User",
+            "Group",
+            "ServicePrincipal"
+          ],
+          "x-ms-enum": {
+            "name": "objectType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "FabricItemMember": {
+      "type": "object",
+      "description": "Microsoft fabric item member",
+      "properties": {
+        "sourcePath": {
+          "type": "string",
+          "description": "Source path of the member"
+        },
+        "itemAccess": {
+          "type": "array",
+          "description": "Array of access items for the member",
+          "items": {
+            "type": "string",
+            "description": "access item"
+          }
+        }
+      }
+    },
+    "PolicyDecisionRule": {
+      "type": "object",
+      "description": "Purview RBAC policy decision rule",
+      "required": [
+        "effect"
+      ],
+      "properties": {
+        "effect": {
+          "description": "The effect for rule",
+          "enum": [
+            "Permit",
+            "Deny"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Decision",
+            "modelAsString": true
+          }
+        },
+        "permission": {
+          "type": "array",
+          "description": "Array of attribute predicates",
+          "items": {
+            "$ref": "#/definitions/AttributePredicate"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "AttributePredicate": {
+      "type": "object",
+      "description": "Attribute predicate for a policy permission",
+      "properties": {
+        "attributeName": {
+          "type": "string",
+          "description": "AttributeName of a policy permission"
+        },
+        "attributeValueIncludedIn": {
+          "type": "array",
+          "description": "values for a policy permission",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "api-version": {
+      "in": "query",
+      "name": "api-version",
+      "description": "The api version to use.",
+      "required": true,
+      "type": "string",
+      "x-ms-client-name": "ApiVersion",
+      "x-ms-parameter-location": "client"
+    },
+    "endpoint": {
+      "in": "path",
+      "name": "endpoint",
+      "description": "The endpoint of your Purview account. Example: https://{accountName}.purview.azure.com.",
+      "required": true,
+      "type": "string",
+      "format": "url",
+      "x-ms-parameter-location": "client",
+      "x-ms-skip-url-encoding": true
+    },
+    "policy-name": {
+      "in": "path",
+      "name": "policy-name",
+      "description": "Name of the policy to be deleted.",
+      "required": true,
+      "type": "string"
+    },
+    "if-match": {
+      "in": "header",
+      "name": "If-Match",
+      "description": "Http Etag value of a policy to be updated. Required only during the replace operation",
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/endpoint"
+      }
+    ]
+  },
+  "basePath": "/policyStore",
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
