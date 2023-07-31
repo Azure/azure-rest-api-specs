@@ -41,6 +41,7 @@ These settings apply only when `--tag=package-2023-08` is specified on the comma
 input-file:
   - Microsoft.CostManagement/stable/2023-08-01/common-types.json
   - Microsoft.CostManagement/stable/2023-08-01/costmanagement.benefits.json
+  - Microsoft.CostManagement/stable/2023-08-01/costmanagement.budgets.json
   - Microsoft.CostManagement/stable/2023-08-01/costmanagement.exports.json
   - Microsoft.CostManagement/stable/2023-08-01/costmanagement.generatecostdetailsreport.json
   - Microsoft.CostManagement/stable/2023-08-01/costmanagement.generatedetailedcostreport.json
