@@ -21,11 +21,11 @@ using Azure.Core.Traits;
   title: "Microsoft Cognitive Language Service - Analyze Conversations",
 })
 @server(
-  "{endpoint}",
+  "{Endpoint}",
   "Single server endpoint",
   {
     @doc("Supported Cognitive Services endpoint (e.g., https://<resource-name>.api.cognitiveservices.azure.com).")
-    endpoint: string,
+    Endpoint: string,
   }
 )
 @versioned(Versions)
