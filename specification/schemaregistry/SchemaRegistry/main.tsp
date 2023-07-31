@@ -27,7 +27,7 @@ using OpenAPI;
   "The Schema Registry service endpoint.",
   {
     // useSchemePrefix: true --> just specify https:// in the url
-    @doc("The Schema Registry service endpoint, for example my-namespace.servicebus.windows.net.")
+    @doc("The Schema Registry service endpoint, for example https://my-namespace.servicebus.windows.net.")
     @extension("x-ms-parameter-location", "client")
     @extension("x-ms-skip-url-encoding", true)
     endpoint: url,
@@ -64,68 +64,72 @@ interface SchemaOperations {
   @doc("Gets the list of schema groups user is authorized to access.")
   @sharedRoute
   // TODO: add x-ms-examples
-  // TODO: check if return type should be SchemaGroups
-  // TODO: add response specifics
   op listSchemaGroups is resourceOperations.ResourceList<SchemaGroup>;
 
   //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/$schemas/{id}?api-version={apiVersion}
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard read operation w/ SchemaId resource doesn't allow returning binary schema and headers."
   @summary("Get a registered schema by its unique ID reference.")
   @doc("Gets a registered schema by its unique ID.  Azure Schema Registry guarantees that ID is unique within a namespace. Operation response type is based on serialization of schema requested.")
+  @route("/$schemaGroups/$schemas/{id}")
+  @get
   // TODO: add x-ms-examples
-  // TODO: add response specifics
-  getSchemaById is resourceOperations.ResourceRead<SchemaId & SchemaContentType>;
+  // TODO: produces has extra "application/json" content type --> how to remove?
+  op getSchemaById is Azure.Core.Foundations.Operation<
+    Azure.Core.Foundations.ItemKeysOf<SchemaId>,
+    Foundations.ResourceOkResponse<SchemaHeaders & Body<bytes>> & SchemaContentType
+  >;
 
   //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}/versions/?api-version={apiVersion}
   @summary("List schema versions.")
   @doc("Gets the list of all versions of one schema.")
   // TODO: add x-ms-examples
-  // TODO: add response specifics
   op listSchemaVersions is resourceOperations.ResourceList<Version>;
 
   //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}/versions/{schemaVersion}?api-version={apiVersion}
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard read operation w/ Version resource doesn't allow returning non-version response."
   @summary("Get specific schema versions.")
   @doc("Gets one specific version of one schema.")
-  op getSchemaByVersion is resourceOperations.ResourceRead<Version>;
+  @route("/$schemaGroups/{groupName}/schemas/{name}/versions/{schemaVersion}")
+  @get
+  // TODO: add x-ms-examples
+  op getSchemaByVersion is Azure.Core.Foundations.Operation<
+    Azure.Core.Foundations.ItemKeysOf<Version>,
+    Foundations.ResourceOkResponse<SchemaHeaders & Body<bytes>> & SchemaContentType
+  >;
+
   //  POST https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}:get-id?api-version={apiVersion}
   @summary("Get ID for existing schema.")
   @doc("Gets the ID referencing an existing schema within the specified schema group, as matched by schema content comparison.")
   @action("get-id")
   op getSchemaIdByContent is resourceOperations.ResourceAction<
-
     Schema,
     {
-      // request headers
       ...SchemaContentType;
 
-      // request body
       @doc("String representation (UTF-8) of the registered schema.")
       @body
       schemaContent: bytes;
     },
-    {
-      // response headers
-      ...SchemaHeaders;
-
-      // TODO: not emitting a `produces` property in openapi
-    }
+    SchemaHeaders
   >;
 
   //  PUT https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}?api-version={apiVersion}
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Register operation does not use create/replace naming"
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Register operation does not use standard createOrReplace operation."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard createOrReplace operation does not allow passing in binary body to request."
   @summary("Register new schema")
   @doc("Register new schema. If schema of specified name does not exist in specified group, schema is created at version 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.\n")
   @route("/$schemaGroups/{groupName}/schemas/{name}")
   @put
   // TODO: add x-ms-examples
-  // TODO: add response specifics
   op registerSchema is Azure.Core.Foundations.Operation<
     Azure.Core.Foundations.ItemKeysOf<Schema> & Body<bytes> & SchemaContentType,
-    Foundations.ResourceOkResponse<SchemaHeaders & Schema> | Foundations.ResourceCreatedResponse<SchemaHeaders & Schema>
+    NoContentResponse<SchemaHeaders>
   >;
 }
 
 // Models
+
+alias NoContentResponse<T> = TypeSpec.Http.Response<204> & T;
 
 @doc("The content type for given schema. Each schema type has an associated content-type.")
 model SchemaContentType {
@@ -204,26 +208,4 @@ model Version {
   @visibility("read")
   @extension("x-ms-parameter-location", "method")
   schemaVersion: int32;
-}
-
-@doc("Object received from the registry containing the list of schema groups and link to next batch page.")
-model SchemaGroups {
-  @doc("Array of schema groups.")
-  @visibility("read")
-  groups: SchemaGroup[];
-
-  @doc("URI to next batch of schema groups.")
-  @visibility("read")
-  nextLink: string;
-}
-
-@doc("Object received from the registry containing the list of schema versions and link to next batch page.")
-model SchemaVersions {
-  @doc("Array of schema version integers.")
-  @visibility("read")
-  versions: Versions[];
-
-  @doc("URI to next batch of schema versions.")
-  @visibility("read")
-  nextLink: string;
 }
