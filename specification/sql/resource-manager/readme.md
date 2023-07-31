@@ -917,7 +917,7 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ManagedServerSecurityAlertPolicies.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/Operations.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/PrivateEndpointConnections.json
+- ./Microsoft.Sql/preview/2022-08-01-preview/PrivateEndpointConnections.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/PrivateLinkResources.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/RecoverableManagedDatabases.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/RestorePoints.json
@@ -955,7 +955,6 @@ input-file:
 - ./Microsoft.Sql/preview/2021-05-01-preview/ServerConnectionPolicies.json
 - ./Microsoft.Sql/preview/2021-11-01-preview/DistributedAvailabilityGroups.json
 - ./Microsoft.Sql/preview/2021-11-01-preview/ServerTrustCertificates.json
-- ./Microsoft.Sql/preview/2021-11-01-preview/IPv6FirewallRules.json
 - ./Microsoft.Sql/preview/2021-11-01-preview/EndpointCertificates.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ManagedDatabaseSensitivityLabels.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/SensitivityLabels.json
@@ -963,21 +962,9 @@ input-file:
 - ./Microsoft.Sql/preview/2021-11-01-preview/DatabaseAdvancedThreatProtectionSettings.json
 - ./Microsoft.Sql/preview/2021-11-01-preview/ServerAdvancedThreatProtectionSettings.json
 - ./Microsoft.Sql/preview/2021-11-01-preview/ManagedServerDnsAliases.json
-- ./Microsoft.Sql/preview/2022-02-01-preview/DatabaseSqlVulnerabilityAssessmentBaselines.json
-- ./Microsoft.Sql/preview/2022-02-01-preview/DatabaseSqlVulnerabilityAssessmentExecuteScan.json
-- ./Microsoft.Sql/preview/2022-02-01-preview/DatabaseSqlVulnerabilityAssessmentRuleBaselines.json
-- ./Microsoft.Sql/preview/2022-02-01-preview/DatabaseSqlVulnerabilityAssessmentScanResult.json
-- ./Microsoft.Sql/preview/2022-02-01-preview/DatabaseSqlVulnerabilityAssessmentScans.json
-- ./Microsoft.Sql/preview/2022-02-01-preview/DatabaseSqlVulnerabilityAssessmentsSettings.json
 - ./Microsoft.Sql/preview/2022-02-01-preview/ManagedDatabaseAdvancedThreatProtectionSettings.json
 - ./Microsoft.Sql/preview/2022-02-01-preview/ManagedInstanceAdvancedThreatProtectionSettings.json
 - ./Microsoft.Sql/preview/2022-02-01-preview/ReplicationLinks.json
-- ./Microsoft.Sql/preview/2022-02-01-preview/SqlVulnerabilityAssessmentBaseline.json
-- ./Microsoft.Sql/preview/2022-02-01-preview/SqlVulnerabilityAssessmentExecuteScan.json
-- ./Microsoft.Sql/preview/2022-02-01-preview/SqlVulnerabilityAssessmentRuleBaseline.json
-- ./Microsoft.Sql/preview/2022-02-01-preview/SqlVulnerabilityAssessmentScanResult.json
-- ./Microsoft.Sql/preview/2022-02-01-preview/SqlVulnerabilityAssessmentScans.json
-- ./Microsoft.Sql/preview/2022-02-01-preview/SqlVulnerabilityAssessmentsSettings.json
 - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedDatabaseMoveOperations.json
 - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedInstanceDtcs.json
 - ./Microsoft.Sql/preview/2022-05-01-preview/SynapseLinkWorkspaces.json
@@ -999,6 +986,18 @@ input-file:
 - ./Microsoft.Sql/preview/2022-08-01-preview/TransparentDataEncryptions.json
 - ./Microsoft.Sql/preview/2022-11-01-preview/FailoverGroups.json
 - ./Microsoft.Sql/preview/2022-11-01-preview/IPv6FirewallRules.json
+- ./Microsoft.Sql/preview/2022-11-01-preview/SqlVulnerabilityAssessmentBaseline.json
+- ./Microsoft.Sql/preview/2022-11-01-preview/SqlVulnerabilityAssessmentExecuteScan.json
+- ./Microsoft.Sql/preview/2022-11-01-preview/SqlVulnerabilityAssessmentRuleBaseline.json
+- ./Microsoft.Sql/preview/2022-11-01-preview/SqlVulnerabilityAssessmentScanResult.json
+- ./Microsoft.Sql/preview/2022-11-01-preview/SqlVulnerabilityAssessmentScans.json
+- ./Microsoft.Sql/preview/2022-11-01-preview/SqlVulnerabilityAssessmentsSettings.json
+- ./Microsoft.Sql/preview/2022-11-01-preview/DatabaseSqlVulnerabilityAssessmentBaselines.json
+- ./Microsoft.Sql/preview/2022-11-01-preview/DatabaseSqlVulnerabilityAssessmentExecuteScan.json
+- ./Microsoft.Sql/preview/2022-11-01-preview/DatabaseSqlVulnerabilityAssessmentRuleBaselines.json
+- ./Microsoft.Sql/preview/2022-11-01-preview/DatabaseSqlVulnerabilityAssessmentScanResult.json
+- ./Microsoft.Sql/preview/2022-11-01-preview/DatabaseSqlVulnerabilityAssessmentScans.json
+- ./Microsoft.Sql/preview/2022-11-01-preview/DatabaseSqlVulnerabilityAssessmentsSettings.json
 
 
 # Needed when there is more than one input file
