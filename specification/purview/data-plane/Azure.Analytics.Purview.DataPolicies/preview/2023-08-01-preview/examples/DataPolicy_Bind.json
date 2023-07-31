@@ -3,59 +3,59 @@
     "Endpoint": "{endpoint}",
     "policy-name": "purview-test-policy",
     "api-version": "2023-08-01-preview",
-    "body": {},
-    "responses": {
-      "200": {
-        "headers": {
-          "x-ms-request-id": "8e58266a-de42-40d5-b3c4-c6a7e159cfba",
-          "ETag": "2"
-        },
-        "body": {
-          "name": "purview-test-policy",
-          "id": "c8b7977b-7bb0-4f61-82c4-5b015b13e571",
-          "kind": "Policy",
-          "etag": "2",
-          "source": "Purview.AccessControl",
-          "Description": "This is a test policy",
-          "scopes": [
-            "/subscriptions/56bb0a7b-861d-44b0-9220-9db0dd88e798/resourceGroups/test-rg/providers/Microsoft.Sql/servers/test-server/**"
-          ],
-          "state": "Enabled",
-          "schemaVersion": "2.0",
-          "decisionRules": [
-            {
-              "effect": "Permit",
-              "permission": [
-                {
-                  "attributeName": "Action",
-                  "attributeValueIncludedIn": [
-                    "Read"
-                  ]
-                },
-                {
-                  "attributeName": "Path",
-                  "attributeValueIncludedIn": [
-                    "/subscriptions/56bb0a7b-861d-44b0-9220-9db0dd88e798/resourceGroups/test-rg/providers/Microsoft.Sql/servers/test-server/**"
-                  ]
-                }
-              ]
-            }
-          ],
-          "members": {
-            "aadMembers": [
+    "body": {}
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "x-ms-request-id": "8e58266a-de42-40d5-b3c4-c6a7e159cfba",
+        "ETag": "2"
+      },
+      "body": {
+        "name": "purview-test-policy",
+        "id": "c8b7977b-7bb0-4f61-82c4-5b015b13e571",
+        "kind": "Policy",
+        "etag": "2",
+        "source": "Purview.AccessControl",
+        "Description": "This is a test policy",
+        "scopes": [
+          "/subscriptions/56bb0a7b-861d-44b0-9220-9db0dd88e798/resourceGroups/test-rg/providers/Microsoft.Sql/servers/test-server/**"
+        ],
+        "state": "Enabled",
+        "schemaVersion": "2.0",
+        "decisionRules": [
+          {
+            "effect": "Permit",
+            "permission": [
               {
-                "tenantId": "7972a1e5-4861-43cf-9e1c-1d8669148a2e",
-                "objectId": "5b3a30f8-dee3-4a5e-bf48-feddbdf174b1",
-                "objectType": "User"
+                "attributeName": "Action",
+                "attributeValueIncludedIn": [
+                  "Read"
+                ]
+              },
+              {
+                "attributeName": "Path",
+                "attributeValueIncludedIn": [
+                  "/subscriptions/56bb0a7b-861d-44b0-9220-9db0dd88e798/resourceGroups/test-rg/providers/Microsoft.Sql/servers/test-server/**"
+                ]
               }
             ]
-          },
-          "systemData": {
-            "createdBy": "5b3a30f8-dee3-4a5e-bf48-feddbdf174b1",
-            "createdAt": "2023-06-26T10:11:52.4742064Z",
-            "lastModifiedBy": "5b3a30f8-dee3-4a5e-bf48-feddbdf174b1",
-            "lastModifiedAt": "2023-06-26T10:11:52.4742064Z"
           }
+        ],
+        "members": {
+          "aadMembers": [
+            {
+              "tenantId": "7972a1e5-4861-43cf-9e1c-1d8669148a2e",
+              "objectId": "5b3a30f8-dee3-4a5e-bf48-feddbdf174b1",
+              "objectType": "User"
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "5b3a30f8-dee3-4a5e-bf48-feddbdf174b1",
+          "createdAt": "2023-06-26T10:11:52.4742064Z",
+          "lastModifiedBy": "5b3a30f8-dee3-4a5e-bf48-feddbdf174b1",
+          "lastModifiedAt": "2023-06-26T10:11:52.4742064Z"
         }
       }
     }
