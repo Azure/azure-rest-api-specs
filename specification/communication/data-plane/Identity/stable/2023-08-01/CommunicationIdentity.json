@@ -133,20 +133,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "header",
-            "name": "Repeatability-Request-ID",
-            "description": "If specified, the client directs that the request is repeatable; that is, that the client can make the request multiple times with the same Repeatability-Request-Id and get back an appropriate response without the server executing the request multiple times. The value of the Repeatability-Request-Id is an opaque string representing a client-generated, globally unique for all time, identifier for the request. It is recommended to use version 4 (random) UUIDs. Internal identifiers shouldn't be used. The value should be an opaque meaningless string in UUID format.",
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "in": "header",
-            "name": "Repeatability-First-Sent",
-            "description": "If Repeatability-Request-ID header is specified, then Repeatability-First-Sent header must also be specified. The value should be the date and time at which the request was first created, expressed using the IMF-fixdate form of HTTP-date",
-            "type": "string",
-            "format": "date-time-rfc1123"
           }
         ],
         "responses": {
@@ -157,17 +143,11 @@
             }
           },
           "204": {
-            "description": "No Content",
-            "headers": {
-              "Repeatability-Result": {
-                "description": "Result of idempotent request. Present only in case of idempotent processing.",
-                "type": "string"
-              }
-            }
+            "description": "No Content"
           }
         },
         "x-ms-examples": {
-          "Revoke access tokens with optional idempotent processing using Repeatability-Request-ID and Repeatability-First-Sent headers. If the headers are not provided, the request will be processed in a non-idempotent way which can lead to more tokens being revoked than intended on a retry.": {
+          "Revoke access tokens": {
             "$ref": "./examples/RevokeAccessTokens.json"
           }
         }

@@ -301,7 +301,7 @@
       },
       "type": "object"
     },
-    "InputError": {
+    "DocumentError": {
       "type": "object",
       "description": "Contains details of errors encountered during a job execution.",
       "required": [
@@ -311,7 +311,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The ID of the input."
+          "description": "The ID of the input document."
         },
         "error": {
           "type": "object",
@@ -372,16 +372,16 @@
           "description": "Number of transactions for the request."
         }
       },
-      "additionalProperties": true,
       "description": "if showStats=true was specified in the request this field will contain information about the request payload."
     },
     "PreBuiltResult": {
+      "type": "object",
       "properties": {
         "errors": {
           "type": "array",
           "description": "Errors by document id.",
           "items": {
-            "$ref": "#/definitions/InputError"
+            "$ref": "#/definitions/DocumentError"
           }
         },
         "statistics": {

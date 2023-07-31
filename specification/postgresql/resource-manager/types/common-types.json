@@ -5,7 +5,40 @@
     "title": "Common types"
   },
   "paths": {},
-  "definitions": {},
+  "definitions": {
+    "CapabilityBase": {
+      "type": "object",
+      "description": "Base object for representing capability",
+      "properties": {
+        "status": {
+          "description": "The status of the capability.",
+          "enum": [
+            "Visible",
+            "Available",
+            "Default",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-ms-enum": {
+            "name": "CapabilityStatus",
+            "modelAsString": false
+          }
+        },
+        "reason": {
+          "description": "The reason for the capability not being available.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    }
+  },
   "parameters": {
     "ServerNameParameter": {
       "name": "serverName",
