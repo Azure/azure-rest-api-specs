@@ -1,5 +1,6 @@
 {
     "operationId": "Patches_ListByBuilderResource",
+    "title": "Patches_ListByBuilderResource_0",
     "parameters": {
       "api-version": "2023-05-02-preview",
       "subscriptionId": "00000000-0000-0000-0000-000000000000",
@@ -16,12 +17,13 @@
               "type": "Microsoft.App/builders/patches",
               "properties": {
                 "provisioningState": "Succeeded",
-                "patchStatus": "NotStarted",
+                "detectionStatus": "Succeeded",
+                "patchApplyStatus": "NotStarted",
                 "patchDetails": {
                   "targetImageName": "testregistry.azurecr.io/test-image:latest",
                   "newRunImage": "mcr.microsoft.com/oryx/builder:run-dotnet-aspnet-7.0.7-cbl-mariner2.0",
                   "oldRunImage": "mcr.microsoft.com/oryx/builder:run-dotnet-aspnet-7.0.5-cbl-mariner2.0",
-                  "patchType": "RunImageSecurity",
+                  "patchType": "FrameworkSecurity",
                   "targetEnvironmentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/test-env",
                   "targetContainerAppId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/containerApps/test-app",
                   "targetContainerName": "test-container"
@@ -42,14 +44,42 @@
               "type": "Microsoft.App/builders/patches",
               "properties": {
                 "provisioningState": "Succeeded",
-                "patchStatus": "NotStarted",
+                "detectionStatus": "Succeeded",
+                "patchApplyStatus": "NotStarted",
                 "patchDetails": {
                   "targetImageName": "private-repository-k8s.k8se-system/test-image:latest",
                   "newRunImage": "mcr.microsoft.com/oryx/builder:run-dotnet-aspnet-7.0.7-cbl-mariner2.0",
                   "oldRunImage": "mcr.microsoft.com/oryx/builder:run-dotnet-aspnet-7.0.5-cbl-mariner2.0",
-                  "patchType": "RunImageSecurity",
+                  "patchType": "FrameworkSecurity",
                   "targetEnvironmentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/test-env",
                   "targetContainerAppId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/containerApps/test-app2",
+                  "targetContainerName": "test-container"
+                }
+              },
+              "systemData": {
+                "createdBy": "sample@microsoft.com",
+                "createdByType": "User",
+                "createdAt": "2022-10-11T11:05:51.4940669Z",
+                "lastModifiedBy": "sample@microsoft.com",
+                "lastModifiedByType": "User",
+                "lastModifiedAt": "2022-10-11T11:05:51.4940669Z"
+              }
+            },
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/builders/testBuilder/patches/testPatch-29e7a",
+              "name": "testPatch-29e7a",
+              "type": "Microsoft.App/builders/patches",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "detectionStatus": "RegistryLoginFailed",
+                "patchApplyStatus": null,
+                "patchDetails": {
+                  "targetImageName": "private-repository-k8s.k8se-system/test-image:failed-test",
+                  "newRunImage": null,
+                  "oldRunImage": null,
+                  "patchType": null,
+                  "targetEnvironmentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/test-env",
+                  "targetContainerAppId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/containerApps/test-app3",
                   "targetContainerName": "test-container"
                 }
               },

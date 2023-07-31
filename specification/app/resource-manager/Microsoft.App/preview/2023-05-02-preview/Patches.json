@@ -69,7 +69,7 @@
           }
         },
         "x-ms-examples": {
-          "Patches_Apply_0": {
+          "Patches_ListByBuilderResource_0": {
             "$ref": "./examples/Patches_ListByBuilderResource.json"
           }
         }
@@ -146,8 +146,13 @@
           "200": {
             "description": "Patch deletion completed successfully."
           },
-          "201": {
-            "description": "Patch deletion has been started."
+          "202": {
+            "description": "Patch deletion has been started.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Common error response.",
@@ -157,8 +162,9 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Patches_Delete_0": {
             "$ref": "./examples/Patches_Delete.json"
@@ -197,7 +203,7 @@
               "$ref": "#/definitions/PatchResource"
             }
           },
-          "201": {
+          "202": {
             "description": "Patching operation has been started.",
             "schema": {
               "$ref": "#/definitions/PatchResource"
@@ -218,6 +224,7 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Patches_Apply_0": {
             "$ref": "./examples/Patches_Apply.json"
@@ -277,7 +284,7 @@
       },
       "readOnly": true
     },
-    "PatchStatus": {
+    "PatchApplyStatus": {
       "type": "string",
       "description": "The status of the patch once it has been provisioned",
       "enum": [
@@ -288,10 +295,12 @@
         "Canceled",
         "RebaseFailed",
         "RevisionCreationFailed",
-        "ImagePushPullFailed"
+        "ImagePushPullFailed",
+        null
       ],
+      "nullable": true,
       "x-ms-enum": {
-        "name": "PatchStatus",
+        "name": "PatchApplyStatus",
         "modelAsString": true
       },
       "readOnly": true
@@ -306,20 +315,25 @@
         },
         "newRunImage": {
           "type": "string",
-          "description": "The name of new run image for the target image."
+          "description": "The name of new run image for the target image.",
+          "nullable": true
         },
         "oldRunImage": {
           "type": "string",
-          "description": "The name of old run image for the target image."
+          "description": "The name of old run image for the target image.",
+          "nullable": true
         },
         "patchType": {
           "type": "string",
           "description": "The type for the patch.",
           "enum": [
-            "RunImageSecurity",
+            "FrameworkSecurity",
             "OSSecurity",
-            "Other"
+            "FrameworkAndOS",
+            "Other",
+            null
           ],
+          "nullable": true,
           "x-ms-enum": {
             "name": "PatchType",
             "modelAsString": true
@@ -353,8 +367,8 @@
           "description": "The status of the patch detection.",
           "readOnly": true
         },
-        "patchStatus": {
-          "$ref": "#/definitions/PatchStatus",
+        "patchApplyStatus": {
+          "$ref": "#/definitions/PatchApplyStatus",
           "description": "The status of the patch once it has been provisioned",
           "readOnly": true
         },
