@@ -34,13 +34,12 @@
   ],
   "security": [
     {
-      "apim_key": []
+      "ApiKeyAuth": []
     }
   ],
   "securityDefinitions": {
-    "apim_key": {
+    "ApiKeyAuth": {
       "type": "apiKey",
-      "description": "A subscription key for a Language service resource",
       "in": "header",
       "name": "Ocp-Apim-Subscription-Key"
     }
@@ -2054,41 +2053,6 @@
         "name": "WeightUnit",
         "modelAsString": true
       }
-    },
-    "apim_key": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "apiKey"
-          ],
-          "description": "API key authentication"
-        },
-        "in": {
-          "type": "string",
-          "enum": [
-            "header"
-          ],
-          "description": "location of the API key"
-        },
-        "name": {
-          "type": "string",
-          "enum": [
-            "Ocp-Apim-Subscription-Key"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "description": "name of the API key"
-        }
-      },
-      "description": "A subscription key for a Language service resource",
-      "required": [
-        "type",
-        "in",
-        "name"
-      ]
     },
     "extraInformationKind": {
       "type": "string",
