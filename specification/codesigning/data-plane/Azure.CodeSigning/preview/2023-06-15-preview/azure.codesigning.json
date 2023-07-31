@@ -63,38 +63,32 @@
           {
             "name": "codeSigningAccountName",
             "in": "path",
-            "required": true,
             "description": "Azure CodeSigning account name.",
+            "required": true,
             "type": "string"
           },
           {
             "name": "certificateProfileName",
             "in": "path",
-            "required": true,
             "description": "Azure Codesigning certificate profile name under a codesign account.",
+            "required": true,
             "type": "string"
           },
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/CodeSigningSubmissionOptions"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Operation-Location": {
-                "description": "The location for monitoring the operation state.",
-                "type": "string",
-                "format": "uri"
-              }
-            },
             "schema": {
               "type": "object",
+              "description": "Provides status details for long running operations.",
               "properties": {
                 "id": {
                   "type": "string",
@@ -113,24 +107,29 @@
                   "description": "The result of the operation."
                 }
               },
-              "description": "Provides status details for long running operations.",
               "required": [
                 "id",
                 "status"
-              ],
-              "x-typespec-name": "Azure.Core.ResourceOperationStatus<CertificateProfile, CodeSignOperationStatus, Azure.Core.Foundations.Error>"
+              ]
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
@@ -153,8 +152,8 @@
           {
             "name": "operationId",
             "in": "path",
-            "required": true,
             "description": "The unique ID of the operation.",
+            "required": true,
             "type": "string"
           },
           {
@@ -169,6 +168,7 @@
             "description": "The request has succeeded.",
             "schema": {
               "type": "object",
+              "description": "Provides status details for long running operations.",
               "properties": {
                 "id": {
                   "type": "string",
@@ -187,24 +187,22 @@
                   "description": "The result of the operation."
                 }
               },
-              "description": "Provides status details for long running operations.",
               "required": [
                 "id",
                 "status"
-              ],
-              "x-typespec-name": "Azure.Core.Foundations.OperationStatus<CodeSignResult, Azure.Core.Foundations.Error>"
+              ]
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
@@ -227,15 +225,15 @@
           {
             "name": "codeSigningAccountName",
             "in": "path",
-            "required": true,
             "description": "Azure CodeSigning account name.",
+            "required": true,
             "type": "string"
           },
           {
             "name": "certificateProfileName",
             "in": "path",
-            "required": true,
             "description": "Azure Codesigning certificate profile name under a codesign account.",
+            "required": true,
             "type": "string"
           }
         ],
@@ -244,50 +242,47 @@
             "description": "The request has succeeded.",
             "schema": {
               "type": "object",
+              "description": "Paged collection of ExtendedKeyUsage items",
               "properties": {
                 "value": {
                   "type": "array",
+                  "description": "The ExtendedKeyUsage items on this page",
                   "items": {
                     "$ref": "#/definitions/ExtendedKeyUsage"
                   },
-                  "x-ms-identifiers": [],
-                  "description": "The ExtendedKeyUsage items on this page",
-                  "x-typespec-name": "ExtendedKeyUsage[]"
+                  "x-ms-identifiers": []
                 },
                 "nextLink": {
                   "type": "string",
                   "format": "uri",
-                  "description": "The link to the next page of items",
-                  "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+                  "description": "The link to the next page of items"
                 }
               },
-              "description": "Paged collection of ExtendedKeyUsage items",
               "required": [
                 "value"
-              ],
-              "x-typespec-name": "Azure.Core.Foundations.CustomPage<ExtendedKeyUsage, Azure.Core.(anonymous model)>"
+              ]
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "GetSignEku": {
             "$ref": "./examples/CertificateProfile_GetSignEku.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -296,6 +291,10 @@
         "operationId": "CertificateProfileOperations_GetSignRootCertificate",
         "summary": "Gets the codesigning root certificate on the certificate chain for that account and profile name.",
         "description": "The root certificate is generated as part of the initial account creation and it is used to sign the bits for the profile provided.",
+        "produces": [
+          "application/x-x509-ca-cert",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -316,21 +315,17 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
-        "produces": [
-          "application/x-x509-ca-cert",
-          "application/json"
-        ],
         "x-ms-examples": {
           "GetSignRootCertificate": {
             "$ref": "./examples/CertificateProfile_GetSignRootCert.json"
@@ -342,6 +337,7 @@
   "definitions": {
     "Azure.Core.Foundations.Error": {
       "type": "object",
+      "description": "The error object.",
       "properties": {
         "code": {
           "type": "string",
@@ -357,19 +353,17 @@
         },
         "details": {
           "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
-          "x-ms-identifiers": [],
-          "description": "An array of details about specific errors that led to this reported error.",
-          "x-typespec-name": "Azure.Core.Foundations.Error[]"
+          "x-ms-identifiers": []
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
           "description": "An object containing more specific information than the current object about the error."
         }
       },
-      "description": "The error object.",
       "required": [
         "code",
         "message"
@@ -377,19 +371,20 @@
     },
     "Azure.Core.Foundations.ErrorResponse": {
       "type": "object",
+      "description": "A response containing error details.",
       "properties": {
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
           "description": "The error object."
         }
       },
-      "description": "A response containing error details.",
       "required": [
         "error"
       ]
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
       "properties": {
         "code": {
           "type": "string",
@@ -399,8 +394,7 @@
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
           "description": "Inner error."
         }
-      },
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses."
+      }
     },
     "Azure.Core.Foundations.OperationState": {
       "type": "string",
@@ -440,6 +434,7 @@
     },
     "CertificateProfile": {
       "type": "object",
+      "description": "Azure CodeSigning certificate profile configured on a codesign account.",
       "properties": {
         "certificateProfileName": {
           "type": "string",
@@ -450,13 +445,13 @@
           ]
         }
       },
-      "description": "Azure CodeSigning certificate profile configured on a codesign account.",
       "required": [
         "certificateProfileName"
       ]
     },
     "CodeSignOperationStatus": {
       "type": "object",
+      "description": "The codesign operation status response.",
       "properties": {
         "id": {
           "type": "string",
@@ -467,13 +462,13 @@
           "description": "The result of the codesign operation including the signature and signing certificate."
         }
       },
-      "description": "The codesign operation status response.",
       "required": [
         "id"
       ]
     },
     "CodeSignResult": {
       "type": "object",
+      "description": "The sign status model.",
       "properties": {
         "operationId": {
           "type": "string",
@@ -490,13 +485,13 @@
           "description": "Signing certificate corresponding to the private key used to codesign the requested\ndigest."
         }
       },
-      "description": "The sign status model.",
       "required": [
         "operationId"
       ]
     },
     "CodeSigningAccount": {
       "type": "object",
+      "description": "Azure CodeSigning customer account created upon registration on the service.",
       "properties": {
         "codeSigningAccountName": {
           "type": "string",
@@ -507,13 +502,13 @@
           ]
         }
       },
-      "description": "Azure CodeSigning customer account created upon registration on the service.",
       "required": [
         "codeSigningAccountName"
       ]
     },
     "CodeSigningSubmissionOptions": {
       "type": "object",
+      "description": "The codesign request information to be signed by the service.",
       "properties": {
         "signatureAlgorithm": {
           "$ref": "#/definitions/SignatureAlgorithm",
@@ -526,24 +521,21 @@
         },
         "fileHashList": {
           "type": "array",
+          "description": "List of full file digital signatures.",
           "items": {
             "type": "string",
             "format": "byte"
-          },
-          "description": "List of full file digital signatures.",
-          "x-typespec-name": "bytes[]"
+          }
         },
         "authenticodeHashList": {
           "type": "array",
+          "description": "List of authenticode digital signatures.",
           "items": {
             "type": "string",
             "format": "byte"
-          },
-          "description": "List of authenticode digital signatures.",
-          "x-typespec-name": "bytes[]"
+          }
         }
       },
-      "description": "The codesign request information to be signed by the service.",
       "required": [
         "signatureAlgorithm",
         "digest"
@@ -551,21 +543,20 @@
     },
     "ExtendedKeyUsage": {
       "type": "object",
+      "description": "Extended key usage object identifier that are allowed.",
       "properties": {
         "ekus": {
           "type": "array",
+          "description": "An element of ekus.",
           "items": {
             "type": "string"
           },
-          "description": "An element of ekus.",
-          "x-typespec-name": "string[]",
           "x-ms-mutability": [
             "read",
             "update"
           ]
         }
       },
-      "description": "Extended key usage object identifier that are allowed.",
       "required": [
         "ekus"
       ]
@@ -665,26 +656,26 @@
     "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
-      "required": true,
       "description": "The API version to use for this operation.",
-      "x-ms-client-name": "apiVersion",
+      "required": true,
       "type": "string",
       "minLength": 1,
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
     },
     "CodeSigningOptions.certificateProfileName": {
       "name": "certificateProfileName",
       "in": "path",
-      "required": true,
       "description": "Certificate profile name.",
+      "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
     "CodeSigningOptions.codeSigningAccountName": {
       "name": "codeSigningAccountName",
       "in": "path",
-      "required": true,
       "description": "CodeSigning account name.",
+      "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
     }
