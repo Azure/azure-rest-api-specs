@@ -1,13 +1,11 @@
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-autorest";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
-using Autorest;
 
 @useAuth(
   OAuth2Auth<[
@@ -45,23 +43,17 @@ interface CertificateProfileOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is a custom operation status endpoint."
   @summary("Gets the status of a codesigning operation.")
   @doc("This status operation requires that a Sign request has been submitted and the operationId is known.")
-  @example(
-    "./examples/CertificateProfile_GetSigningOperationStatus.json",
-    "GetSigningOperationStatus"
-  )
   @route("/codesigningaccounts/{codeSigningAccountName}/certificateprofiles/{certificateProfileName}/sign/{operationId}")
   getCodeSigningStatus is Foundations.GetOperationStatus<
     CodeSigningOptions,
     CodeSignResult
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/rpc-operation-request-body" "no body included, bytesbody is the response object."
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Service needs rpc paths to follow pattern of other services."
   @summary("Gets the codesigning root certificate on the certificate chain for that account and profile name.")
   @doc("The root certificate is generated as part of the initial account creation and it is used to sign the bits for the profile provided.")
   @route("/codesigningaccounts/{codeSigningAccountName}/certificateprofiles/{certificateProfileName}/sign/rootcert")
-  @example(
-    "./examples/CertificateProfile_GetSignRootCert.json",
-    "GetSignRootCertificate"
-  )
   getSignRootCertificate is RpcOperation<
     CodeSigningOptions,
     BytesBody<"application/x-x509-ca-cert">
@@ -69,12 +61,10 @@ interface CertificateProfileOperations {
 
   @summary("Gets a list of extended key usage object identifiers that are allowed for this account and profile combination.")
   @doc("The list of extended key usages are used to determine the purpose of the certificate usage as part of the codesigning operation.")
-  @example("./examples/CertificateProfile_GetSignEku.json", "GetSignEku")
   listSignEkus is StandardResourceOperations.ResourceList<ExtendedKeyUsage>;
 
   @summary("Submit a codesign operation.")
   @doc("Submit a codesign operation under the created codesign account and profile name provided.")
-  @example("./examples/CertificateProfile_Sign.json", "Sign")
   @pollingOperation(CertificateProfileOperations.getCodeSigningStatus)
   sign is StandardResourceOperations.LongRunningResourceAction<
     CertificateProfile,
