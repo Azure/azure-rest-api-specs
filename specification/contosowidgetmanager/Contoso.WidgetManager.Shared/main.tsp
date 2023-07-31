@@ -1,4 +1,4 @@
-@doc("Faked shared model")
+@doc("Faked the shared model")
 model FakedSharedModel {
   @doc("The tag.")
   tag: string;
