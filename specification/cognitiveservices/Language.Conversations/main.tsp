@@ -1,29 +1,24 @@
-import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 import "./common.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Rest;
+using OpenAPI;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 using Azure.ClientGenerator.Core;
 
-@useAuth(
-  TypeSpec.Http.ApiKeyAuth<
-    TypeSpec.Http.ApiKeyLocation.header,
-    "Ocp-Apim-Subscription-Key"
-  >
-)
+@useAuth(apim_key)
 @doc("The language service conversations API is a suite of natural language processing (NLP) skills that can be used to analyze structured conversations (textual or spoken). The synchronous API in this suite accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, Conversational Language Understanding, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\n\n In some cases, this API needs to forward requests and responses between the caller and an upstream service. The asynchronous APIs in this suite enable tasks like Conversation Summarization and Conversational PII detection.")
 @service({
   title: "Microsoft Cognitive Language Service - Analyze Conversations",
 })
 @server(
-  "{Endpoint}",
+  "{endpoint}",
   "Single server endpoint",
   {
     @doc("Supported Cognitive Services endpoint (e.g., https://<resource-name>.api.cognitiveservices.azure.com).")
@@ -52,6 +47,11 @@ model Conversations {
   @visibility("create")
   id: string;
 }
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
+@doc("A subscription key for a Language service resource")
+model apim_key
+  is ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
 @doc("These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently, Azure Active Directory [v1.0 or v2.0](https://docs.microsoft.com/azure/active-directory/develop/azure-ad-endpoint-comparison) supports Work, School, and Guests but does not support Personal accounts.")
@@ -89,7 +89,7 @@ model AnalyzeConversationTask {
 @discriminator("kind")
 model AnalyzeConversationTaskResult {
   @doc("The base class of a conversation input task result.")
-  kind: AnalyzeConversationTaskResultsKind;
+  kind: AnalyzeConversationTaskResultsKind.ConversationResult;
 }
 
 @doc("The input for a custom conversation task.")
@@ -537,6 +537,10 @@ model TemporalSpanResolution extends BaseResolution {
 
   @doc("An optional modifier of a date/time instance.")
   modifier?: TemporalModifier;
+
+  @doc("An optional triplet containing the beginning, the end, and the duration all stated as ISO 8601 formatted strings.")
+  @added(Versions.v2023_04_01)
+  timex: string;
 }
 
 @doc("represents the resolution of numeric intervals.")
@@ -562,9 +566,8 @@ model LuisTargetIntentResult extends TargetIntentResult {
   @doc("It is a wrap up of LUIS Generally Available response.")
   targetProjectKind: targetProjectKind.Luis;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "LuisTargetIntentResult.result should not use ': Record<unknown>'. Use ': Record<string>' instead."
   @doc("The actual response from a LUIS Generally Available application.")
-  result?: {};
+  result?: Record<never>;
 }
 
 @doc("It is a wrap up a Question Answering KB response.")
@@ -582,13 +585,16 @@ model AnalyzeConversationJobsInput {
   @doc("Display name for the analysis job.")
   displayName?: string;
 
+  @added(Versions.v2023_04_01)
   @doc("Analysis Input")
   analysisInput: MultiLanguageConversationAnalysisInput;
 
+  @added(Versions.v2023_04_01)
   @doc("Set of tasks to execute on the input conversation.")
   tasks: Array<AnalyzeConversationLROTask>;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
 @doc("Base class for a long-running conversation input task.")
 @discriminator("kind")
 @added(Versions.v2023_04_01)
@@ -1343,7 +1349,7 @@ enum VolumeUnit {
   Minim,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Cord' should have a documentation or description, please use decorator @doc to add it."
   Cord,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Peck' should have a documentation or description, please use decorator @doc to add it."
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Cord' should have a documentation or description, please use decorator @doc to add it."
   Peck,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Bushel' should have a documentation or description, please use decorator @doc to add it."
   Bushel,
@@ -1388,9 +1394,11 @@ enum WeightUnit {
   Dram,
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-operation-id" "Operation ID is automatically generated by the OpenAPI emitters and should not normally be specified."
 @doc("Analyzes the input conversation utterance.")
 @TypeSpec.Rest.actionSeparator("/:")
 @TypeSpec.Rest.action("analyze-conversations")
+@operationId("ConversationAnalysis_AnalyzeConversation")
 //removed examples due to bug
 // @example(
 //   "../../../../data-plane/Language/stable/2022-05-01/examples/conversations/SuccessfulAnalyzeConversations.json",
@@ -1412,62 +1420,40 @@ op analyzeConversation is Azure.Core.StandardResourceOperations.ResourceCollecti
 >;
 
 @added(Versions.v2023_04_01)
+@TypeSpec.Rest.resource("language/analyze-conversations/jobs")
+@doc("jobId")
+model JobId {
+  @key
+  @doc("Job ID")
+  @visibility("read")
+  @projectedName("csharp", "job-id")
+  jobId: string;
+
+  @Azure.Core.lroStatus
+  @doc("operation status")
+  status: "Canceled" | "Succeeded" | "Failed";
+}
+#suppress "@azure-tools/typespec-azure-core/no-operation-id" "Operation ID is automatically generated by the OpenAPI emitters and should not normally be specified."
+@added(Versions.v2023_04_01)
+@doc("Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.")
+@summary("Get analysis status and results")
+@operationId("AnalyzeConversation_JobStatus")
+op jobStatus is Azure.Core.StandardResourceOperations.ResourceRead<JobId>;
+
+#suppress "@azure-tools/typespec-azure-core/no-operation-id" "Operation ID is automatically generated by the OpenAPI emitters and should not normally be specified."
+@added(Versions.v2023_04_01)
 @doc("Submit a collection of conversations for analysis. Specify one or more unique tasks to be executed.")
 @summary("Submit analysis job for conversations")
-@TypeSpec.Rest.actionSeparator("/")
-@TypeSpec.Rest.action("analyze-conversations/jobs")
-@pollingOperation(jobStatus)
-op submitJob is Azure.Core.StandardResourceOperations.LongRunningResourceCollectionAction<
-  Conversations,
-  AnalyzeConversationJobsInput,
-  AnalyzeConversationJobResult
->;
+@Azure.Core.pollingOperation(jobStatus)
+@operationId("AnalyzeConversation_SubmitJob")
+op submitJob is Azure.Core.LongRunningResourceCreateWithServiceProvidedName<JobId>;
 
-// @added(Versions.v2023_04_01)
-// @doc("Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.")
-// @summary("Get analysis status and results")
-// @TypeSpec.Rest.actionSeparator("/")
-// @TypeSpec.Rest.action("analyze-conversations")
-// op jobStatus is Azure.Core.StandardResourceOperations.GetResourceOperationStatus<
-// Conversations,
-// AnalyzeConversationJobState>;
-
-
+#suppress "@azure-tools/typespec-azure-core/no-operation-id" "Operation ID is automatically generated by the OpenAPI emitters and should not normally be specified."
 @added(Versions.v2023_04_01)
 @doc("Cancel a long-running job for text analysis of conversations.")
 @summary("Cancel a long-running Text Analysis conversations job")
-@TypeSpec.Rest.actionSeparator("/")
-@TypeSpec.Rest.action("analyze-conversations/jobs:cancel")
 @pollingOperation(jobStatus)
-op cancelJob is Azure.Core.StandardResourceOperations.LongRunningResourceCollectionAction<
-  Conversations,
-  JobId,
-  AnalyzeConversationTaskResult
->;
-
-@added(Versions.v2023_04_01)
-@doc("show stats parameter")
-model ShowStats {
-  @query
-  @doc("(Optional) if set to true, response will contain request and document level statistics.")
-  showStats: boolean;
-}
-
-//parameter objects
-
-@added(Versions.v2023_04_01)
-@doc("show stats parameter")
-model ShowStats{
-  @query
-  @doc("(Optional) if set to true, response will contain request and document level statistics.")
-  showStats: boolean;
-}
-
-@added(Versions.v2023_04_01)
-@doc("Job ID parameter")
-model JobId{
-  @path
-  @format("uuid")
-  @doc("Job ID")
-  jobId: string;
-}
+@operationId("AnalyzeConversation_CancelJob")
+@TypeSpec.Rest.actionSeparator(":")
+@TypeSpec.Rest.action("cancel")
+op cancel is Azure.Core.StandardResourceOperations.LongRunningResourceCreateWithServiceProvidedName<JobId>;

@@ -46,151 +46,9 @@
   },
   "tags": [],
   "paths": {
-    "/{jobId}/language/analyze-conversations/jobs:cancel": {
-      "post": {
-        "operationId": "CancelJob",
-        "summary": "Cancel a long-running Text Analysis conversations job",
-        "description": "Cancel a long-running job for text analysis of conversations.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/JobId"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Operation-Location": {
-                "description": "The location for monitoring the operation state.",
-                "type": "string",
-                "format": "uri"
-              }
-            },
-            "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "The unique ID of the operation."
-                },
-                "status": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-                  "description": "The status of the operation"
-                },
-                "error": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
-                  "description": "Error object that describes the error when status is \"Failed\"."
-                },
-                "result": {
-                  "$ref": "#/definitions/AnalyzeConversationTaskResult",
-                  "description": "The result of the operation."
-                }
-              },
-              "description": "Provides status details for long running operations.",
-              "required": [
-                "id",
-                "status"
-              ],
-              "x-typespec-name": "Azure.Core.ResourceOperationStatus<Conversations, AnalyzeConversationTaskResult, Azure.Core.Foundations.Error>"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/language/{id}/operations/{operationId}/analyze-conversations/jobs": {
-      "get": {
-        "operationId": "JobStatus",
-        "summary": "Get analysis status and results",
-        "description": "Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "description": "id",
-            "type": "string"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "required": true,
-            "description": "The unique ID of the operation.",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "The unique ID of the operation."
-                },
-                "status": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-                  "description": "The status of the operation"
-                },
-                "error": {
-                  "$ref": "#/definitions/ErrorResponse",
-                  "description": "Error object that describes the error when status is \"Failed\"."
-                },
-                "result": {
-                  "$ref": "#/definitions/AnalyzeConversationJobState",
-                  "description": "The result of the operation."
-                }
-              },
-              "description": "Provides status details for long running operations.",
-              "required": [
-                "id",
-                "status"
-              ],
-              "x-typespec-name": "Azure.Core.ResourceOperationStatus<Conversations, AnalyzeConversationJobState, ErrorResponse>"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/language/:analyze-conversations": {
       "post": {
-        "operationId": "AnalyzeConversation",
+        "operationId": "ConversationAnalysis_AnalyzeConversation",
         "description": "Analyzes the input conversation utterance.",
         "parameters": [
           {
@@ -229,7 +87,7 @@
     },
     "/language/analyze-conversations/jobs": {
       "post": {
-        "operationId": "SubmitJob",
+        "operationId": "AnalyzeConversation_SubmitJob",
         "summary": "Submit analysis job for conversations",
         "description": "Submit a collection of conversations for analysis. Specify one or more unique tasks to be executed.",
         "parameters": [
@@ -237,50 +95,108 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "body",
+            "name": "resource",
             "in": "body",
+            "required": true,
+            "description": "The resource instance.",
             "schema": {
-              "$ref": "#/definitions/AnalyzeConversationJobsInput"
-            },
-            "required": true
+              "$ref": "#/definitions/JobId"
+            }
           }
         ],
         "responses": {
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
-              "Operation-Location": {
-                "description": "The location for monitoring the operation state.",
+              "Location": {
+                "description": "The location of an instance of JobId",
                 "type": "string",
                 "format": "uri"
               }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
             },
             "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "The unique ID of the operation."
-                },
-                "status": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-                  "description": "The status of the operation"
-                },
-                "error": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
-                  "description": "Error object that describes the error when status is \"Failed\"."
-                },
-                "result": {
-                  "$ref": "#/definitions/AnalyzeConversationJobResult",
-                  "description": "The result of the operation."
-                }
-              },
-              "description": "Provides status details for long running operations.",
-              "required": [
-                "id",
-                "status"
-              ],
-              "x-typespec-name": "Azure.Core.ResourceOperationStatus<Conversations, AnalyzeConversationJobResult, Azure.Core.Foundations.Error>"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/language/analyze-conversations/jobs/{jobId}": {
+      "get": {
+        "operationId": "AnalyzeConversation_JobStatus",
+        "summary": "Get analysis status and results",
+        "description": "Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "description": "Job ID",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/JobId"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/language/analyze-conversations/jobs:cancel": {
+      "post": {
+        "operationId": "AnalyzeConversation_CancelJob",
+        "summary": "Cancel a long-running Text Analysis conversations job",
+        "description": "Cancel a long-running job for text analysis of conversations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "The resource instance.",
+            "schema": {
+              "$ref": "#/definitions/JobId"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Location": {
+                "description": "The location of an instance of JobId",
+                "type": "string",
+                "format": "uri"
+              }
             }
           },
           "default": {
@@ -979,42 +895,6 @@
         }
       },
       "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses."
-    },
-    "Azure.Core.Foundations.OperationState": {
-      "type": "string",
-      "description": "Enum describing allowed operation states.",
-      "enum": [
-        "InProgress",
-        "Succeeded",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "OperationState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "The operation is in progress."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "The operation has completed successfully."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "The operation has failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "The operation has been canceled by the user."
-          }
-        ]
-      }
     },
     "BaseExtraInformation": {
       "type": "object",
@@ -1768,6 +1648,24 @@
           "description": "The ID of the input document."
         },
         "error": {
+          "$ref": "#/definitions/ErrorResponse",
+          "description": "Error encountered."
+        }
+      },
+      "description": "Contains details of errors encountered during a job execution.",
+      "required": [
+        "id",
+        "error"
+      ]
+    },
+    "DocumentErrorItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the input document."
+        },
+        "error": {
           "$ref": "#/definitions/ErrorResponseItem",
           "description": "Error encountered."
         }
@@ -2254,6 +2152,31 @@
       "description": "job errors",
       "required": [
         "errors"
+      ]
+    },
+    "JobId": {
+      "type": "object",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "Job ID",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Canceled",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-typespec-name": "Canceled | Succeeded | Failed",
+          "description": "operation status"
+        }
+      },
+      "description": "jobId",
+      "required": [
+        "jobId",
+        "status"
       ]
     },
     "JobState": {
@@ -2929,7 +2852,7 @@
         "errors": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DocumentError"
+            "$ref": "#/definitions/DocumentErrorItem"
           },
           "description": "Errors by document id.",
           "x-typespec-name": "DocumentError[]"
@@ -3331,19 +3254,6 @@
       "description": "To configure Answer span prediction feature.",
       "required": [
         "enable"
-      ]
-    },
-    "ShowStats": {
-      "type": "object",
-      "properties": {
-        "showStats": {
-          "type": "boolean",
-          "description": "(Optional) if set to true, response will contain request and document level statistics."
-        }
-      },
-      "description": "show stats parameter",
-      "required": [
-        "showStats"
       ]
     },
     "SourceFilter": {
@@ -4745,15 +4655,6 @@
       "x-ms-client-name": "apiVersion",
       "type": "string",
       "minLength": 1,
-      "x-ms-parameter-location": "method"
-    },
-    "JobId": {
-      "name": "jobId",
-      "in": "path",
-      "required": true,
-      "description": "Job ID",
-      "type": "string",
-      "format": "uuid",
       "x-ms-parameter-location": "method"
     }
   }
