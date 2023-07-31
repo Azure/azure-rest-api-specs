@@ -10,7 +10,7 @@
         "properties": {
           "alertId": "66114d64-d9d9-478b-95c9-b789d6502101",
           "enrichments": [
-          {
+            {
               "title": "Number of OOM killed events by container",
               "description": "Enrichment description",
               "status": "Succeeded",
@@ -22,8 +22,8 @@
               ],
               "query": "sum by (cluster,container,replicaset,namespace)(label_replace( kube_pod_container_status_last_terminated_reason{reason='OOMKilled', cluster='cluster1', namespace='namespace1'}'}, 'replicaset', '$1', 'pod', '(.*)(-[a-z0-9]{5})$')) > 0",
               "time": "2015-07-01T20:10:51.781Z"
-          },
-          {
+            },
+            {
               "title": "Number of OOM killed events by container",
               "description": "Enrichment description",
               "status": "Succeeded",
@@ -37,8 +37,8 @@
               "start": "2015-07-01T20:10:51.781Z",
               "end": "2015-07-01T20:20:51.781Z",
               "step": "PT15S"
-          },
-          {
+            },
+            {
               "title": "Number of OOM killed events by container",
               "description": "Enrichment description",
               "status": "Succeeded",
@@ -52,9 +52,8 @@
               "start": "2015-07-01T20:10:51.781Z",
               "end": "2015-07-01T20:20:51.781Z",
               "step": "PT15S"
-            
-          },
-          {
+            },
+            {
               "title": "Number of OOM killed events by container",
               "description": "Enrichment description",
               "status": "Failed",
@@ -69,9 +68,9 @@
               "start": "2015-07-01T20:10:51.781Z",
               "end": "2015-07-01T20:20:51.781Z",
               "step": "PT15S"
-            
-          }
-        ]
+            }
+          ]
+        }
       }
     }
   }
