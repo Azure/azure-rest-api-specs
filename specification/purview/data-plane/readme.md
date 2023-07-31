@@ -206,6 +206,15 @@ input-file:
   - Azure.Analytics.Purview.Share/preview/2023-05-30-preview/share.json
 ```
 
+### Tag: package-2023-08-01-preview
+
+These settings apply only when `--tag=package-2023-08-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-08-01-preview'
+input-file:
+  - Azure.Analytics.Purview.DataPolicies/preview/2023-08-01-preview/purviewDataPolicy.json
+```
+
 ---
 
 # Code Generation
