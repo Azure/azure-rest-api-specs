@@ -58,12 +58,10 @@ model AzureAuth
 alias resourceOperations = Azure.Core.StandardResourceOperations;
 
 interface SchemaOperations {
-  // List schema groups
   //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups?api-version={apiVersion}
   @summary("Get list of schema groups.")
   @doc("Gets the list of schema groups user is authorized to access.")
   @sharedRoute
-  // TODO: add x-ms-examples
   op listSchemaGroups is resourceOperations.ResourceList<SchemaGroup>;
 
   //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/$schemas/{id}?api-version={apiVersion}
@@ -72,7 +70,6 @@ interface SchemaOperations {
   @doc("Gets a registered schema by its unique ID.  Azure Schema Registry guarantees that ID is unique within a namespace. Operation response type is based on serialization of schema requested.")
   @route("/$schemaGroups/$schemas/{id}")
   @get
-  // TODO: add x-ms-examples
   // TODO: produces has extra "application/json" content type --> how to remove?
   op getSchemaById is Azure.Core.Foundations.Operation<
     Azure.Core.Foundations.ItemKeysOf<SchemaId>,
@@ -82,7 +79,6 @@ interface SchemaOperations {
   //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}/versions/?api-version={apiVersion}
   @summary("List schema versions.")
   @doc("Gets the list of all versions of one schema.")
-  // TODO: add x-ms-examples
   op listSchemaVersions is resourceOperations.ResourceList<Version>;
 
   //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}/versions/{schemaVersion}?api-version={apiVersion}
@@ -91,7 +87,6 @@ interface SchemaOperations {
   @doc("Gets one specific version of one schema.")
   @route("/$schemaGroups/{groupName}/schemas/{name}/versions/{schemaVersion}")
   @get
-  // TODO: add x-ms-examples
   op getSchemaByVersion is Azure.Core.Foundations.Operation<
     Azure.Core.Foundations.ItemKeysOf<Version>,
     Foundations.ResourceOkResponse<SchemaHeaders & Body<bytes>> & SchemaContentType
@@ -120,7 +115,6 @@ interface SchemaOperations {
   @doc("Register new schema. If schema of specified name does not exist in specified group, schema is created at version 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.\n")
   @route("/$schemaGroups/{groupName}/schemas/{name}")
   @put
-  // TODO: add x-ms-examples
   op registerSchema is Azure.Core.Foundations.Operation<
     Azure.Core.Foundations.ItemKeysOf<Schema> & Body<bytes> & SchemaContentType,
     NoContentResponse<SchemaHeaders>
