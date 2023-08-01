@@ -4,7 +4,7 @@
 
 Please understand this diagram before proceeding. It explains how to get your PR approved & merged.
 
-![diagram](https://github.com/Azure/azure-rest-api-specs/assets/4429827/c0409cfd-c406-49f3-9c5f-9fcab0a64438)
+![diagram](https://github.com/Azure/azure-rest-api-specs/assets/4429827/8cb0b0e5-55ba-44a4-9848-2faead57fcc0)
 
 [1]  
 [ARM PR review queue for azure-rest-api-specs repo](https://github.com/Azure/azure-rest-api-specs/pulls?q=is%3Aopen+is%3Apr+label%3AWaitForARMFeedback+-label%3AIDCDevDiv+draft%3Afalse+)  
