@@ -40,15 +40,17 @@ and followed the instructions by checking all the boxes:
 ### Breaking changes review (Step 1)
 
 - If the automation determines you have breaking changes, i.e. Step 1 from the diagram applies to you,
-  you must follow the [Breaking changes process].  
-  **IMPORTANT** This applies even if you claim you can skip the breaking change review, for any reason. Such claims must be reviewed too, and the process is the same.
+  you must follow the [breaking changes process].  
+  **IMPORTANT** This applies even if:
+  - The tool fails while it shouldn't, e.g. due to runtime exception, or incorrect detection of breaking changes.
+  - You believe there is no need for you to request breaking change approval, for any reason. 
+    Such claims must be reviewed, and the process is the same.
 
 ### ARM API changes review (Step 2)
 
 - If this PR is in purview of ARM review then automation will add the `ARMReview` label.
 - If you want to force ARM review, add the label yourself.
 - Proceed according to the diagram at the top of this comment.
-
 
 ## Getting help
 
@@ -62,4 +64,4 @@ and followed the instructions by checking all the boxes:
 [List of SDK breaking changes approvers]: https://teams.microsoft.com/l/message/19:0351f5f9404446e4b4fd4eaf2c27448d@thread.skype/1689115217750?tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47&groupId=3e17dcb0-4257-4a30-b843-77f47f1d4121&parentMessageId=1689115217750&teamName=Azure%20SDK&channelName=API%20Spec%20Review&createdTime=1689115217750
 [public repo merge queue]: https://github.com/Azure/azure-rest-api-specs/pulls?q=is%3Aopen+is%3Apr+label%3AMergeRequested+-label%3AIDCDevDiv+draft%3Afalse+sort%3Acreated-asc
 [private repo merge queue]: https://github.com/Azure/azure-rest-api-specs-pr/pulls?q=is%3Aopen+is%3Apr+label%3AMergeRequested+-label%3AIDCDevDiv+draft%3Afalse+sort%3Acreated-asc
-[Breaking changes process]: https://eng.ms/docs/cloud-ai-platform/azure-core/azure-core-pm-and-design/trusted-platform-pm-karimb/service-lifecycle-and-actions-team/service-lifecycle-actions-team/apex/media/launchingproductbreakingchanges#breaking-change-process-1
+[breaking changes process]: https://eng.ms/docs/cloud-ai-platform/azure-core/azure-core-pm-and-design/trusted-platform-pm-karimb/service-lifecycle-and-actions-team/service-lifecycle-actions-team/apex/media/launchingproductbreakingchanges#breaking-change-process-1
