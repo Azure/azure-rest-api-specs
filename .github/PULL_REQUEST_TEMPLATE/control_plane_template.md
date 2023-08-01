@@ -4,7 +4,18 @@
 
 Please understand this diagram before proceeding. It explains how to get your PR approved & merged.
 
-![diagram](https://github.com/Azure/azure-rest-api-specs/assets/4429827/5e91ff2d-1f5c-4e96-87c2-390e7451da37)
+![diagram](https://github.com/Azure/azure-rest-api-specs/assets/4429827/8cb0b0e5-55ba-44a4-9848-2faead57fcc0)
+
+[1]  
+[ARM PR review queue for azure-rest-api-specs repo](https://github.com/Azure/azure-rest-api-specs/pulls?q=is%3Aopen+is%3Apr+label%3AWaitForARMFeedback+-label%3AIDCDevDiv+draft%3Afalse+)  
+  [ARM PR review queue for azure-rest-api-specs-pr repo](https://github.com/Azure/azure-rest-api-specs-pr/pulls?q=is%3Aopen+is%3Apr+label%3AWaitForARMFeedback+-label%3AIDCDevDiv+draft%3Afalse+sort%3Acreated-asc)  
+The PRs are processed last (bottom) to first. Your PR may be on 2nd or later page.  
+If your PR is not on the queue, remove the `ARMChangesRequested` label. Most of the time automation should do it, but you can do it manually if necessary.  
+[2] https://aka.ms/azsdk/support/specreview-channel  
+[3] [List of SDK breaking changes approvers](https://teams.microsoft.com/l/message/19:0351f5f9404446e4b4fd4eaf2c27448d@thread.skype/1689115217750?tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47&groupId=3e17dcb0-4257-4a30-b843-77f47f1d4121&parentMessageId=1689115217750&teamName=Azure%20SDK&channelName=API%20Spec%20Review&createdTime=1689115217750) in pinned Teams announcement  
+[4]  
+[ARM PR merge queue for azure-rest-api-specs repo](https://github.com/Azure/azure-rest-api-specs/pulls?q=is%3Aopen+is%3Apr+label%3AMergeRequested+-label%3AIDCDevDiv+draft%3Afalse)  
+  [ARM PR merge queue for azure-rest-api-specs-pr repo](https://github.com/Azure/azure-rest-api-specs-pr/pulls?q=is%3Aopen+is%3Apr+label%3AMergeRequested+-label%3AIDCDevDiv+draft%3Afalse+sort%3Acreated-asc)  
 
 ## Purpose of this PR
 
