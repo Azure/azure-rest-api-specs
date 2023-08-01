@@ -1210,32 +1210,12 @@
     "GroupQuotaLimit": {
       "type": "object",
       "description": "Group Quota limit.",
-      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The resource ID.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "type": {
-          "description": "The type.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "name": {
-          "description": "The resource name.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
         "properties": {
           "description": "Group Quota properties for the specified resource.",
           "$ref": "#/definitions/GroupQuotaDetails"
@@ -1371,23 +1351,12 @@
     "SubscriptionQuotaAllocations": {
       "type": "object",
       "description": "Quota assigned to a subscription for the specific Resource Provider, Location, ResourceName. This will include the GroupQuota and total quota assigned to the subscription. Only the Group quota assigned to the subscription can be assigned back to the MG Group Quota.",
-      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The type.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The resource name.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "description": "Quota properties for the specified resource.",
           "$ref": "#/definitions/SubscriptionQuotaDetails"
