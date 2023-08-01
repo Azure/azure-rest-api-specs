@@ -57,6 +57,9 @@
         "description": "The operation to start an Azure Bare Metal instance",
         "operationId": "AzureBareMetalInstances_Start",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Start an Azure Bare Metal instance": {
             "$ref": "./examples/AzureBareMetalInstances_Start.json"
@@ -83,11 +86,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
-            "description": "Accepted",
+            "description": "Accepted. The response indicates that the existing Bare Metal Instance is now turning on and includes a 'Location' header to query the operation result.",
             "headers" : {
               "Location" : {
                 "type": "string",
@@ -113,6 +113,9 @@
         "description": "The operation to restart an Azure Bare Metal Instance",
         "operationId": "AzureBareMetalInstances_Restart",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Restart an Azure Bare Metal Instance": {
             "$ref": "./examples/AzureBareMetalInstances_Restart.json"
@@ -142,13 +145,10 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
-            "description": "Accepted",
+            "description": "Accepted. The response indicates that the existing Bare Metal Instance is now turning off and includes a 'Location' header to query the operation result.",
             "headers" : {
-              "Location" : {
+              "location" : {
                 "type": "string",
                 "description": "URL to track the operation status of the Microsoft Bare Metal Infrastructure in the specified location."
               }
@@ -172,6 +172,9 @@
         "description": "The operation to shutdown an Azure Bare Metal Instance",
         "operationId": "AzureBareMetalInstances_Shutdown",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Shutdown an Azure Bare Metal Instance": {
             "$ref": "./examples/AzureBareMetalInstances_Shutdown.json"
@@ -198,13 +201,10 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
-            "description": "Accepted",
+            "description": "Accepted. The response indicates that the existing Bare Metal Instance is now turning off and includes a 'Location' header to query the operation result.",
             "headers" : {
-              "Location" : {
+              "location" : {
                 "type": "string",
                 "description": "URL to track the operation status of the Microsoft Bare Metal Infrastructure in the specified location."
               }
