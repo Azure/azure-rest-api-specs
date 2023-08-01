@@ -1527,32 +1527,12 @@
     "GroupQuotasEntity": {
       "type": "object",
       "description": "Properties and filters for ShareQuota. The request parameter is optional, if there are no filters specified.",
-      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "Entity resource Id.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "type": {
-          "type": "string",
-          "description": "Type of the entity - Microsoft.Quota/GroupQuotas,",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "name": {
-          "type": "string",
-          "description": "The entity name. The entity name is provided in the request, so it is not needed in the request body. The response will include it.",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
         "properties": {
           "title": "Properties",
           "type": "object",
