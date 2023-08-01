@@ -964,6 +964,7 @@
       "description": "Properties under the virtual machine instance resource"
     },
     "SshPublicKey": {
+      "type": "object",
       "properties": {
         "path": {
           "type": "string",
@@ -977,6 +978,7 @@
       "description": "Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed."
     },
     "SshConfiguration": {
+      "type": "object",
       "properties": {
         "publicKeys": {
           "type": "array",
@@ -992,6 +994,7 @@
       "description": "SSH configuration for Linux based VMs running on Azure"
     },
     "VirtualMachineInstanceStatus": {
+      "type": "object",
       "x-ms-client-flatten": true,
       "readOnly": true,
       "properties": {
@@ -1021,6 +1024,7 @@
           }
         },
         "provisioningStatus": {
+          "type": "object",
           "properties": {
             "operationId": {
               "type": "string",
@@ -1069,6 +1073,7 @@
       "description": "The virtual machine instance resource definition."
     },
     "VirtualMachineInstanceView": {
+      "type": "object",
       "properties": {
         "vmAgent": {
           "$ref": "#/definitions/VirtualMachineVMConfigAgentInstanceView",
@@ -1096,6 +1101,7 @@
       "description": "The instance view of the VM Config Agent running on the virtual machine."
     },
     "InstanceViewStatus": {
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -1223,6 +1229,7 @@
           "description": "ComputerName - name of the computer"
         },
         "linuxConfiguration": {
+          "type": "object",
           "properties": {
             "provisionVMAgent": {
               "type": "boolean",
@@ -1235,6 +1242,7 @@
           }
         },
         "windowsConfiguration": {
+          "type": "object",
           "properties": {
             "provisionVMAgent": {
               "type": "boolean",
