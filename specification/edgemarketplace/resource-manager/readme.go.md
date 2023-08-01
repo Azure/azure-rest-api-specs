@@ -22,9 +22,19 @@ azure-arm: true
 batch:
   - tag: package-2023-04-01-preview
   - tag: package-2023-06-01-preview
+  - tag: package-2023-08-01
 ```
 
 Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+### Tag: package-2023-08-01 and go
+
+These settings apply only when `--tag=package-package-2023-08-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2023-08-01' && $(go)
+output-folder: $(go-sdk-folder)/services/stable/$(namespace)/mgmt/2023-08-01/$(namespace)
+```
 
 ### Tag: package-2023-04-01-preview and go
 

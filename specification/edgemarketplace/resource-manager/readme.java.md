@@ -33,6 +33,20 @@ directive:
 ``` yaml $(java) && $(multiapi)
 batch:
   - tag: package-2023-04
+  - tag: package-2023-08
+```
+
+### Tag: package-2023-08 and java
+
+These settings apply only when `--tag=package-2023-08 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2023-08' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.edgemarketplace.v2023_08_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/edgemarketplace/mgmt-v2023_08_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2023-04 and java
