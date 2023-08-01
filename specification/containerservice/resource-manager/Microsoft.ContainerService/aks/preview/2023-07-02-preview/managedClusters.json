@@ -7108,27 +7108,27 @@
         "isDefaultVersion": {
           "type": "boolean",
           "readOnly": true
-          },
+        },
         "support": {
           "type": "string",
           "enum": [
             "Preview",
             "Stable"
           ],
-           "x-ms-enum": {
-             "name": "GuardrailsSupport",
-             "modelAsString": true,
-             "value": [
-                {
+          "x-ms-enum": {
+            "name": "GuardrailsSupport",
+            "modelAsString": true,
+            "value": [
+              {
                 "value": "Preview",
                 "description": "The version is preview. It is not recommended to use preview versions on critical production clusters. The preview version may not support all use-cases."
-                },
-                {
+              },
+              {
                 "value": "Stable",
                 "description": "The version is stable and can be used on critical production clusters."
-                }
-             ]
-           },
+              }
+            ]
+          },
           "description": "Whether the version is preview or stable.",
           "readOnly": true
         }
@@ -7137,11 +7137,11 @@
     "GuardrailsAvailableVersion": {
       "type": "object",
       "properties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubResource"
-        }
-      ],
+        "allOf": [
+          {
+            "$ref": "#/definitions/SubResource"
+          }
+        ],
         "properties": {
           "$ref": "#/definitions/GuardrailsAvailableVersionsProperties",
           "x-ms-client-flatten": true
@@ -7149,7 +7149,7 @@
       },
       "required": [
         "properties"
-        ]
+      ]
     },
     "GuardrailsAvailableVersionsList": {
       "type": "object",
