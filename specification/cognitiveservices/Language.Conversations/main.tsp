@@ -2,27 +2,30 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-autorest";
 import "./common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Autorest;
 using Azure.Core;
 using Azure.Core.Traits;
 
-@useAuth(apim_key)
+@useAuth(
+  TypeSpec.Http.ApiKeyAuth<
+    TypeSpec.Http.ApiKeyLocation.header,
+    "Ocp-Apim-Subscription-Key"
+  >
+)
 @doc("The language service conversations API is a suite of natural language processing (NLP) skills that can be used to analyze structured conversations (textual or spoken). The synchronous API in this suite accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, Conversational Language Understanding, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\n\n In some cases, this API needs to forward requests and responses between the caller and an upstream service. The asynchronous APIs in this suite enable tasks like Conversation Summarization and Conversational PII detection.")
 @service({
   title: "Microsoft Cognitive Language Service - Analyze Conversations",
 })
 @server(
-  "{endpoint}",
+  "{Endpoint}",
   "Single server endpoint",
   {
     @doc("Supported Cognitive Services endpoint (e.g., https://<resource-name>.api.cognitiveservices.azure.com).")
-    endpoint: string,
+    Endpoint: string,
   }
 )
 @versioned(Versions)
@@ -43,11 +46,6 @@ model Conversations {
   @visibility("create")
   id: string;
 }
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
-@doc("A subscription key for a Language service resource")
-model apim_key
-  is ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
 @doc("These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently, Azure Active Directory [v1.0 or v2.0](https://docs.microsoft.com/azure/active-directory/develop/azure-ad-endpoint-comparison) supports Work, School, and Guests but does not support Personal accounts.")
@@ -163,13 +161,13 @@ model LuisParameters extends Record<unknown> {
 model LuisCallingOptions {
   @doc("Enable verbose response.")
   verbose?: boolean;
-  
+
   @doc("Save log to add in training utterances later.")
   log?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("Set true to show all intents.")
-  "show-all-intents"?: boolean;
+  `show-all-intents`?: boolean;
 
   @doc("The timezone offset for the location of the request.")
   timezoneOffset?: float32;
@@ -179,7 +177,7 @@ model LuisCallingOptions {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The subscription key to use when enabling Bing spell check")
-  "bing-spell-check-subscription-key"?: string;
+  `bing-spell-check-subscription-key`?: string;
 }
 
 @doc("This is a set of request parameters for Customized Conversation projects.")
@@ -349,6 +347,7 @@ model QuantityResolution {
 model AgeResolution extends BaseResolution {
   @doc("Represents the Age entity resolution model.")
   resolutionKind: resolutionKind.AgeResolution;
+
   ...QuantityResolution;
 
   @doc("The Age Unit of measurement")
@@ -359,6 +358,7 @@ model AgeResolution extends BaseResolution {
 model VolumeResolution extends BaseResolution {
   @doc("Represents the volume entity resolution model.")
   resolutionKind: resolutionKind.VolumeResolution;
+
   ...QuantityResolution;
 
   @doc("The Volume Unit of measurement")
@@ -369,6 +369,7 @@ model VolumeResolution extends BaseResolution {
 model SpeedResolution extends BaseResolution {
   @doc("Represents the speed entity resolution model.")
   resolutionKind: resolutionKind.SpeedResolution;
+
   ...QuantityResolution;
 
   @doc("The speed Unit of measurement")
@@ -379,6 +380,7 @@ model SpeedResolution extends BaseResolution {
 model AreaResolution extends BaseResolution {
   @doc("Represents the area entity resolution model.")
   resolutionKind: resolutionKind.AreaResolution;
+
   ...QuantityResolution;
 
   @doc("The area Unit of measurement")
@@ -388,6 +390,7 @@ model AreaResolution extends BaseResolution {
 model LengthResolution extends BaseResolution {
   @doc("Represents the length entity resolution model.")
   resolutionKind: resolutionKind.LengthResolution;
+
   ...QuantityResolution;
 
   @doc("The length Unit of measurement")
@@ -398,6 +401,7 @@ model LengthResolution extends BaseResolution {
 model InformationResolution extends BaseResolution {
   @doc("Represents the information (data) entity resolution model.")
   resolutionKind: resolutionKind.InformationResolution;
+
   ...QuantityResolution;
 
   @doc("The information (data) Unit of measurement.")
@@ -408,6 +412,7 @@ model InformationResolution extends BaseResolution {
 model TemperatureResolution extends BaseResolution {
   @doc("Represents the temperature entity resolution model.")
   resolutionKind: resolutionKind.TemperatureResolution;
+
   ...QuantityResolution;
 
   @doc("The temperature Unit of measurement.")
@@ -418,6 +423,7 @@ model TemperatureResolution extends BaseResolution {
 model WeightResolution extends BaseResolution {
   @doc("Represents the weight entity resolution model.")
   resolutionKind: resolutionKind.WeightResolution;
+
   ...QuantityResolution;
 
   @doc("The weight Unit of measurement.")
@@ -535,8 +541,9 @@ model LuisTargetIntentResult extends TargetIntentResult {
   @doc("It is a wrap up of LUIS Generally Available response.")
   targetProjectKind: targetProjectKind.Luis;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "LuisTargetIntentResult.result should not use ': Record<unknown>'. Use ': Record<string>' instead."
   @doc("The actual response from a LUIS Generally Available application.")
-  result?: Record<never>;
+  result?: {};
 }
 
 @doc("It is a wrap up a Question Answering KB response.")
