@@ -20,7 +20,6 @@ using OpenAPI;
 })
 @doc("Carbon Report Resource Provider query API.")
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-
 namespace Microsoft.Carbon;
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -29,55 +28,73 @@ interface Operations extends Azure.ResourceManager.Operations {}
 model DateRange {
   @doc("Start date parameter, format is yyyy-MM-dd")
   start: plainDate;
-  
+
   @doc("End date parameter, format is yyyy-MM-dd")
   end: plainDate;
 }
 
 @doc("Supported category types to be used with QueryParameter")
 enum CategoryTypeEnum {
+  @doc("Subscription level aggregation granularity")
   Subscription,
+
+  @doc("ResourceGroup level aggregation granularity")
   ResourceGroup,
+
+  @doc("Location level aggregation granularity")
   Location,
+
+  @doc("ServiceType level aggregation granularity")
   ServiceType,
-  Resource
+
+  @doc("Resource level aggregation granularity")
+  Resource,
 }
 
 @doc("Supported emission scopes to be used with QueryParameter")
 enum EmissionScopeEnum {
+  @doc("Scope1 carbon emission")
   Scope1,
+
+  @doc("Scope2 carbon emission")
   Scope2,
-  Scope3
+
+  @doc("Scope3 carbon emission")
+  Scope3,
 }
 
 @doc("Query filter parameter specified by users")
 @discriminator("reportType")
 model QueryFilter {
   @doc("Report type")
-  reportType:string;
+  reportType: string;
 
   @doc("The start date and end date for carbon emissions data")
   dateRange: DateRange;
 
   @doc("SubscriptionId list for carbon emissions data")
-  @extension("x-ms-identifiers", []) 
+  @extension("x-ms-identifiers", [])
   subscriptionList: string[];
 
+  @doc("resourceGroupUrl list for carbon emissions data")
+  @extension("x-ms-identifiers", [])
+  resourceGroupUrlList?: string[];
+
   @doc("Carbon emission scope for carbon emissions data")
-  @extension("x-ms-identifiers", []) 
-  carbonScopeList:EmissionScopeEnum[];
+  @extension("x-ms-identifiers", [])
+  carbonScopeList: EmissionScopeEnum[];
 }
 
 @doc("Query Parameters for Overall Carbon Emissions Summary")
 model OverallSummaryReportQueryFilter extends QueryFilter {
   @doc("Overall summary report type name")
-  reportType:"OverallSummaryReport";
+  reportType: "OverallSummaryReport";
 }
 
 @doc("Query Parameters for Monthly Carbon Emissions Summary")
 model MonthlySummaryReportQueryFilter extends QueryFilter {
   @doc("Monthly summary report type name")
-  reportType:"MonthlySummaryReport";
+  reportType: "MonthlySummaryReport";
 }
 
 @doc("Query Parameters for Top Items Carbon Emission by Category Type")
@@ -91,7 +108,7 @@ model TopItemsSummaryReportQueryFilter extends QueryFilter {
   @doc("Number of top items to return. The value should be between 5 and 100")
   @maxValue(100)
   @minValue(5)
-  topItems:int32;
+  topItems: int32;
 }
 
 @doc("Query Parameters for Top Items Carbon Emissions by Month")
@@ -105,11 +122,11 @@ model TopItemsMonthlySummaryReportQueryFilter extends QueryFilter {
   @doc("Number of top items to return. The value should be between 5 and 100")
   @maxValue(100)
   @minValue(5)
-  topItems:int32;
+  topItems: int32;
 }
 
 @doc("Query Parameters for Detailed carbon emissions by pageSize")
-model ItemDetailsQueryFilter extends QueryFilter{
+model ItemDetailsQueryFilter extends QueryFilter {
   @doc("Item pagination data report type name")
   reportType: "ItemDetailsReport";
 
@@ -131,24 +148,27 @@ model ItemDetailsQueryFilter extends QueryFilter{
 
 @discriminator("dataType")
 @doc("Response for given query parameters")
-model CarbonEmissionData{
+model CarbonEmissionData {
   @doc("Query result data type name")
   dataType: string;
 
   @doc("Total carbon emissions for given query parameters")
-  totalCarbonEmission: float;
+  totalCarbonEmission: float64;
 
   @doc("Total carbon emission for last month for given query parameters")
-  totalCarbonEmissionLastMonth: float;
+  totalCarbonEmissionLastMonth: float64;
 
   @doc("Change ratio between totalCarbonEmission and totalCarbonEmissionLastMonth")
-  changeRatioForLastMonth: float;
-  
+  changeRatioForLastMonth: float64;
+
   @doc("Total carbon emissions for 12 months ago for given query parameters")
-  totalCarbonEmission12MonthsAgo: float;
+  totalCarbonEmission12MonthsAgo: float64;
 
   @doc("Change ratio between totalCarbonEmission and totalCarbonEmission12MonthsAgo")
-  changeRatioFor12Months: float;
+  changeRatioFor12Months: float64;
+
+  @doc("Change Value between totalCarbonEmission and totalCarbonEmissionLastMonth")
+  changeValueMonthOverMonth?: float64;
 }
 
 @doc("Response for Overall Carbon Emissions Summary")
@@ -166,7 +186,7 @@ model CarbonEmissionMonthlySummaryData extends CarbonEmissionData {
   date: string;
 
   @doc("Carbon Intensity")
-  carbonIntensity: float;
+  carbonIntensity: float64;
 }
 
 @doc("Response for Top Items by Category Type")
@@ -196,11 +216,12 @@ model ResourceCarbonEmissionTopItemsSummaryData extends CarbonEmissionData {
   subscriptionId: string;
 
   @doc("Resource Group")
-  resourceGroup: string
+  resourceGroup: string;
 }
 
 @doc("Response for Top Items For ResourceGroup")
-model ResourceGroupCarbonEmissionTopItemsSummaryData extends CarbonEmissionData {
+model ResourceGroupCarbonEmissionTopItemsSummaryData
+  extends CarbonEmissionData {
   @doc("Top items summary data")
   dataType: "ResourceGroupTopItemsSummaryData";
 
@@ -230,7 +251,8 @@ model CarbonEmissionTopItemMonthlySummaryData extends CarbonEmissionData {
 }
 
 @doc("Response for Top Items Carbon Emissions by Month for ResourceType")
-model ResourceCarbonEmissionTopItemMonthlySummaryData extends CarbonEmissionData {
+model ResourceCarbonEmissionTopItemMonthlySummaryData
+  extends CarbonEmissionData {
   @doc("Top items Monthly summary data")
   dataType: "ResourceTopItemsMonthlySummaryData";
 
@@ -247,11 +269,12 @@ model ResourceCarbonEmissionTopItemMonthlySummaryData extends CarbonEmissionData
   subscriptionId: string;
 
   @doc("Resource Group")
-  resourceGroup: string
+  resourceGroup: string;
 }
 
 @doc("Response for Top Items Carbon Emissions by Month for ResourceGroupType")
-model ResourceGroupCarbonEmissionTopItemMonthlySummaryData extends CarbonEmissionData {
+model ResourceGroupCarbonEmissionTopItemMonthlySummaryData
+  extends CarbonEmissionData {
   @doc("Top items Monthly summary data")
   dataType: "ResourceGroupTopItemsMonthlySummaryData";
 
@@ -301,7 +324,19 @@ model ResourceCarbonEmissionItemDetailData extends CarbonEmissionData {
   subscriptionId: string;
 
   @doc("Resource Group")
-  resourceGroup: string
+  resourceGroup: string;
+
+  @doc("Resource Id Url")
+  resourceId?: string;
+
+  @doc("Resource Location")
+  location?: string;
+
+  @doc("Resource Type")
+  resourceType?: string;
+
+  @doc("Resource Provider")
+  resourceProvider?: string;
 }
 
 @doc("Response for Resource Group detailed carbon emissions")
@@ -324,16 +359,16 @@ model ResourceGroupCarbonEmissionItemDetailData extends CarbonEmissionData {
 
 @doc("List of carbon emission results")
 @Azure.Core.pagedResult
-model CarbonEmissionDataListResult  {
-   @doc("The CarbonEmissionData items on this page")
-   @extension("x-ms-identifiers", [])
-   @items
-   value: CarbonEmissionData[];
+model CarbonEmissionDataListResult {
+  @doc("The CarbonEmissionData items on this page")
+  @extension("x-ms-identifiers", [])
+  @items
+  value: CarbonEmissionData[];
 
-   @doc("The link to the next page of items")
-   @Azure.Core.nextLink
-   @format("uri")
-   nextLink: string;
+  @doc("The link to the next page of items")
+  @Azure.Core.nextLink
+  @format("uri")
+  nextLink?: string;
 }
 
 @doc("Response for available date range of carbon emission data")
@@ -341,23 +376,30 @@ model CarbonEmissionDataAvailableDateRange {
   @doc("Start date parameter, format is yyyy-MM-dd")
   @format("date")
   startDate: string;
-  
+
   @doc("End date parameter, format is yyyy-MM-dd")
   @format("date")
   endDate: string;
 }
 
-#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-operation-missing-decorator" "Resource POST operation must be decorated with @armResourceAction." 
-#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-interface-requires-decorator" "Each resource interface must have an @armResourceOperations decorator"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Each resource interface must have an @armResourceOperations decorator."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-missing-decorator" "Resource POST operation must be decorated with @armResourceAction or @armResourceCollectionAction."
 interface CarbonService {
   @doc("API for Carbon Emissions Reports")
-  @post @route("/providers/Microsoft.Carbon/carbonEmissionReports")
-  listCarbonEmissionReports(...ApiVersionParameter, 
-                                @body
-                                @doc("Query parameters") 
-                                queryParameters:QueryFilter): CarbonEmissionDataListResult | ErrorResponse;
+  @post
+  @route("/providers/Microsoft.Carbon/carbonEmissionReports")
+  listCarbonEmissionReports(
+    ...ApiVersionParameter,
+
+    @body
+    @doc("Query parameters")
+    queryParameters: QueryFilter,
+  ): CarbonEmissionDataListResult | ErrorResponse;
 
   @doc("API for query carbon emission data available date range")
-  @post @route("/providers/Microsoft.Carbon/queryCarbonEmissionDataAvailableDateRange")
-  queryCarbonEmissionDataAvailableDateRange(...ApiVersionParameter): ArmResponse<CarbonEmissionDataAvailableDateRange> | ErrorResponse;
+  @post
+  @route("/providers/Microsoft.Carbon/queryCarbonEmissionDataAvailableDateRange")
+  queryCarbonEmissionDataAvailableDateRange(
+    ...ApiVersionParameter,
+  ): ArmResponse<CarbonEmissionDataAvailableDateRange> | ErrorResponse;
 }
