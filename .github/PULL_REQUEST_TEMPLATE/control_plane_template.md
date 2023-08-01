@@ -6,6 +6,13 @@ Please understand this diagram before proceeding. It explains how to get your PR
 
 ![diagram](https://github.com/Azure/azure-rest-api-specs/assets/4429827/5e91ff2d-1f5c-4e96-87c2-390e7451da37)
 
+Footnotes from the diagram:
+
+[1] TODO - ARM review queue link  
+[2] TODO - Teams spec review channel link  
+[3] TODO - List of SDK approvers link  
+[4] TODO - Merge queue link
+
 ## Purpose of this PR
 
 What's the purpose of this PR? Check all that apply. This is **mandatory**!
