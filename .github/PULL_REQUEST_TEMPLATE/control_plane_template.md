@@ -35,19 +35,21 @@ and followed the instructions by checking all the boxes:
 - [ ] I have reviewed following [Resource Provider guidelines](https://aka.ms/rpguidelines), including
   [ARM resource provider contract](https://github.com/Azure/azure-resource-manager-rpc) and
   [REST guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md) (estimated time: 4 hours).  
-  I understand this is required before I can request review from an ARM API Review board.
+  I understand this is required before I can proceed to Step 2, "ARM Review", for this PR.
 
-### ARM API changes review
+### Breaking changes review (Step 1)
 
-- If this PR is in purview of ARM review then automation will add `ARMReview` label.
+- If the automation determines you have breaking changes, i.e. Step 1 from the diagram applies to you,
+  you must follow the [Breaking changes process].  
+  **IMPORTANT** This applies even if you claim you can skip the breaking change review, for any reason. Such claims must be reviewed too, and the process is the same.
+
+### ARM API changes review (Step 2)
+
+- If this PR is in purview of ARM review then automation will add the `ARMReview` label.
 - If you want to force ARM review, add the label yourself.
 - Proceed according to the diagram at the top of this comment.
 
-### Breaking changes review
 
-- If the automation determines you have breaking changes, i.e. Step 1 from the diagram, you must follow the [Breaking changes process].
-  **IMPORTANT** This applies even if you claim you can skip the breaking change review, for any reason. Such claims must be reviewed too, and the process is the same.
-      
 ## Getting help
 
 - For general PR approval workflow, see the diagram at the top of this comment.
