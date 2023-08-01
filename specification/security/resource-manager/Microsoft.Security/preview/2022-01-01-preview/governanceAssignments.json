@@ -286,6 +286,53 @@
         "disableOwnerEmailNotification": {
           "description": "Exclude  owner from weekly email notification.",
           "type": "boolean"
+        },
+        "emailNotificationDayOfWeek": {
+          "description": "Defined the day for email notifications to be sent",
+          "type": "string",
+          "enum": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "x-ms-enum": {
+            "name": "emailNotificationDayOfWeek",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Monday",
+                "description": "The governance email weekly will be sent on Monday"
+              },
+              {
+                "value": "Tuesday",
+                "description": "The governance email weekly will be sent on Tuesday"
+              },
+              {
+                "value": "Wednesday",
+                "description": "The governance email weekly will be sent on Wednesday"
+              },
+              {
+                "value": "Thursday",
+                "description": "The governance email weekly will be sent on Thursday"
+              },
+              {
+                "value": "Friday",
+                "description": "The governance email weekly will be sent on Friday"
+              },
+              {
+                "value": "Saturday",
+                "description": "The governance email weekly will be sent on Saturday"
+              },
+              {
+                "value": "Sunday",
+                "description": "The governance email weekly will be sent on Sunday"
+              }
+            ]
+          }
         }
       }
     },
