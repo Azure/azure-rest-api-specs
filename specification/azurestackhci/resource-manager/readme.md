@@ -64,7 +64,7 @@ directive:
 
 These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-07'
+``` yaml $(tag) == 'package-preview-2023-07'
 input-file:
   - Microsoft.AzureStackHCI/preview/2023-07-01-preview/galleryImages.json
   - Microsoft.AzureStackHCI/preview/2023-07-01-preview/marketplaceGalleryImages.json
@@ -78,7 +78,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-03` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-03'
+```yaml $(tag) == 'package-2023-03'
 input-file:
   - Microsoft.AzureStackHCI/stable/2023-03-01/arcSettings.json
   - Microsoft.AzureStackHCI/stable/2023-03-01/clusters.json
