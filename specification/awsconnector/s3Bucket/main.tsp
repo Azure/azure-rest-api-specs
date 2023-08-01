@@ -74,5 +74,5 @@ interface S3Buckets {
 //
 // Related information for backend service:
 // AWS Servcie : S3
-// SDK Version : 3.7.106.1
+// SDK Version : 3.7.200.1
 //--------------------------------------------------------------------------------------------
