@@ -5,11 +5,10 @@
     "api-version": "2023-06-02-preview",
     "subscriptionId": "b04775c3-63fa-40f3-9430-139d2e5522d3",
     "parameters": {
+      "location": "NorthEurope",
       "properties": {
-        "mediaServices": {
-          "userAssignedIdentity": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoanalyzer-mi"
-        },
         "storageServices": {
+          "resourceId": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.Storage/storageAccounts/contoso-videoanalyzer-ms",
           "userAssignedIdentity": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoanalyzer-mi"
         }
       },
@@ -33,15 +32,11 @@
           "tenantId": "8c406f87-77ac-4ebb-a401-e8562450630e",
           "accountId": "462af7c5-d1f6-4b91-86e3-8bc5e8a61574",
           "accountName": "contosto-videoanalyzer",
-          "mediaServices": {
-            "resourceId": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.Media/mediaservices/contoso-videoanalyzer-ms",
-            "userAssignedIdentity": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoanalyzer-mi"
-          },
           "storageServices": {
             "resourceId": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.Storage/storageAccounts/contoso-videoanalyzer-ms",
             "userAssignedIdentity": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoanalyzer-mi"
           },
-          "totalSecondsIndexed": 1000,
+          "totalSecondsIndexed": 0,
           "provisioningState": "Succeeded"
         },
         "identity": {
@@ -58,8 +53,8 @@
     "400": {
       "body": {
         "error": {
-          "code": "AMS_AAD_APPLICATION_INSUFFICIENT_PERMISSION",
-          "message": "The AAD application is Unauthorized. Make sure it has at least 'Contributor' permissions"
+          "code": "EVENT_GRID_NOT_REGISTERED",
+          "message": "Microsoft.EventGrid resource provider is not registered in subscription"
         }
       }
     },
@@ -68,6 +63,14 @@
         "error": {
           "code": "ACCOUNT_NOT_FOUND",
           "message": "Account not found"
+        }
+      }
+    },
+    "409": {
+      "body": {
+        "error": {
+          "code": "ALREADY_EXISTS",
+          "message": "Account with '74f866ea-f74f-4103-a916-4742f8bc0009' already exists"
         }
       }
     },
