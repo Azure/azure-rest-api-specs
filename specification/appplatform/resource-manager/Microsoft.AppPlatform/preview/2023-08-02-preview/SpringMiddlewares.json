@@ -21,7 +21,7 @@
           "EurekaServers"
         ],
         "description": "List the eureka server settings.",
-        "operationId": "EurekaServers_List",
+        "operationId": "MiddlewareEurekaServers_List",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -40,7 +40,7 @@
           "200": {
             "description": "Success. The response describes the corresponding eureka server settings.",
             "schema": {
-              "$ref": "#/definitions/EurekaServerResourceCollection"
+              "$ref": "#/definitions/MiddlewareEurekaServerResourceCollection"
             }
           },
           "default": {
@@ -66,7 +66,7 @@
           "ConfigServers"
         ],
         "description": "List the config server settings.",
-        "operationId": "ConfigServers_List",
+        "operationId": "MiddlewareConfigServers_List",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -112,7 +112,7 @@
         ],
         "summary": "Get the config server and its properties.",
         "description": "Operation to get the config server and its properties.",
-        "operationId": "ConfigServers_Get",
+        "operationId": "MiddlewareConfigServers_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -134,7 +134,7 @@
           "200": {
             "description": "Success. The response describes the corresponding Config Server.",
             "schema": {
-              "$ref": "#/definitions/ConfigServer"
+              "$ref": "#/definitions/MiddlewareConfigServer"
             }
           },
           "default": {
@@ -156,7 +156,7 @@
         ],
         "summary": "Create or update the config server middleware.",
         "description": "Operation to create or update the config server.",
-        "operationId": "ConfigServers_CreateOrUpdate",
+        "operationId": "MiddlewareConfigServers_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -181,13 +181,13 @@
           "200": {
             "description": "Success. The response describes the updated Config Server.",
             "schema": {
-              "$ref": "#/definitions/ConfigServer"
+              "$ref": "#/definitions/MiddlewareConfigServer"
             }
           },
           "201": {
             "description": "Created. The response indicates the exiting Config Server is now updating and contains a Location\r\nheader to query the operation result.",
             "schema": {
-              "$ref": "#/definitions/ConfigServer"
+              "$ref": "#/definitions/MiddlewareConfigServer"
             }
           },
           "default": {
@@ -210,7 +210,7 @@
         ],
         "summary": "Update the config server middleware.",
         "description": "Operation to update the config server.",
-        "operationId": "ConfigServers_UpdatePatch",
+        "operationId": "MiddlewareConfigServers_UpdatePatch",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -235,7 +235,7 @@
           "200": {
             "description": "Success. The response describes the updated Config Server.",
             "schema": {
-              "$ref": "#/definitions/ConfigServer"
+              "$ref": "#/definitions/MiddlewareConfigServer"
             }
           },
           "202": {
@@ -268,7 +268,7 @@
         ],
         "summary": "Validate the config server middleware settings.",
         "description": "Check if the config server settings are valid.",
-        "operationId": "ConfigServers_Validate",
+        "operationId": "MiddlewareConfigServers_Validate",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -293,7 +293,7 @@
           "200": {
             "description": "Success. The response describes the validation result of Config Server.",
             "schema": {
-              "$ref": "#/definitions/ConfigServerSettingsValidateResult"
+              "$ref": "#/definitions/MiddlewareConfigServerSettingsValidateResult"
             }
           },
           "202": {
@@ -329,7 +329,7 @@
         ],
         "summary": "Get the eureka server middleware settings.",
         "description": "Get the eureka server settings.",
-        "operationId": "EurekaServers_Get",
+        "operationId": "MiddlewareEurekaServers_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -351,7 +351,7 @@
           "200": {
             "description": "Success. The response describes the corresponding eureka server settings.",
             "schema": {
-              "$ref": "#/definitions/EurekaServer"
+              "$ref": "#/definitions/MiddlewareEurekaServer"
             }
           },
           "default": {
@@ -373,7 +373,7 @@
         ],
         "summary": "Create or update the eureka server settings.",
         "description": "The operation to create or update the eureka server settings.",
-        "operationId": "EurekaServers_CreateOrUpdate",
+        "operationId": "MiddlewareEurekaServers_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -398,13 +398,13 @@
           "200": {
             "description": "Success. The response describes the updated eureka server settings.",
             "schema": {
-              "$ref": "#/definitions/EurekaServer"
+              "$ref": "#/definitions/MiddlewareEurekaServer"
             }
           },
           "201": {
             "description": "Created. The response indicates the exiting eureka server settings are now updating and contain a Azure-AsyncOperation\r\nheader to query the operation result.",
             "schema": {
-              "$ref": "#/definitions/EurekaServer"
+              "$ref": "#/definitions/MiddlewareEurekaServer"
             },
             "headers": {
               "Location": {
@@ -435,7 +435,7 @@
         ],
         "summary": "Update the eureka server settings.",
         "description": "The operation to update the eureka server settings.",
-        "operationId": "EurekaServers_UpdatePatch",
+        "operationId": "MiddlewareEurekaServers_UpdatePatch",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -460,7 +460,7 @@
           "200": {
             "description": "Success. The response describes the updated eureka server settings.",
             "schema": {
-              "$ref": "#/definitions/EurekaServer"
+              "$ref": "#/definitions/MiddlewareEurekaServer"
             }
           },
           "202": {
@@ -491,7 +491,7 @@
     }
   },
   "definitions": {
-    "ConfigServer": {
+    "MiddlewareConfigServer": {
       "description": "Config Server resource",
       "type": "object",
       "allOf": [
@@ -542,7 +542,7 @@
               }
             },
             "configServer": {
-              "$ref": "#/definitions/ConfigServerSettings",
+              "$ref": "#/definitions/MiddlewareConfigServerSettings",
               "description": "Settings of config server."
             }
           },
@@ -550,7 +550,7 @@
         }
       }
     },
-    "EurekaServer": {
+    "MiddlewareEurekaServer": {
       "description": "Eureka server resource",
       "type": "object",
       "allOf": [
@@ -620,7 +620,7 @@
           "description": "Collection of resources.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ConfigServer"
+            "$ref": "#/definitions/MiddlewareConfigServer"
           }
         },
         "nextLink": {
@@ -630,7 +630,7 @@
         }
       }
     },
-    "EurekaServerResourceCollection": {
+    "MiddlewareEurekaServerResourceCollection": {
       "description": "Azure Spring Apps Eureka Server collection ARM resource.",
       "required": [
         "value"
@@ -641,7 +641,7 @@
           "description": "Collection of resources.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/EurekaServer"
+            "$ref": "#/definitions/MiddlewareEurekaServer"
           }
         },
         "nextLink": {
@@ -651,17 +651,17 @@
         }
       }
     },
-    "ConfigServerSettings": {
+    "MiddlewareConfigServerSettings": {
       "description": "The settings of config server.",
       "type": "object",
       "properties": {
         "gitProperty": {
-          "$ref": "#/definitions/ConfigServerGitProperty",
+          "$ref": "#/definitions/MiddlewareConfigServerGitProperty",
           "description": "Property of git environment."
         }
       }
     },
-    "ConfigServerGitProperty": {
+    "MiddlewareConfigServerGitProperty": {
       "description": "Property of git.",
       "required": [
         "uri"
@@ -673,7 +673,7 @@
           "uniqueItems": false,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/GitPatternRepository"
+            "$ref": "#/definitions/MiddlewareGitPatternRepository"
           },
           "x-ms-identifiers": [
             "name"
@@ -731,7 +731,7 @@
         }
       }
     },
-    "GitPatternRepository": {
+    "MiddlewareGitPatternRepository": {
       "description": "Git repository property payload for config server",
       "required": [
         "name",
@@ -803,7 +803,7 @@
         }
       }
     },
-    "ConfigServerSettingsValidateResult": {
+    "MiddlewareConfigServerSettingsValidateResult": {
       "description": "Validation result for config server settings",
       "type": "object",
       "properties": {
@@ -874,7 +874,7 @@
       "description": "Parameters for the update operation",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/ConfigServer"
+        "$ref": "#/definitions/MiddlewareConfigServer"
       }
     },
     "ConfigServerSettingsParameter": {
@@ -883,7 +883,7 @@
       "description": "Config server settings to be validated",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/ConfigServerSettings"
+        "$ref": "#/definitions/MiddlewareConfigServerSettings"
       }
     },
     "EurekaServerNameParameter": {
@@ -900,7 +900,7 @@
       "description": "Parameters for the update operation",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/EurekaServer"
+        "$ref": "#/definitions/MiddlewareEurekaServer"
       }
     }
   },
