@@ -48,10 +48,10 @@
   "paths": {
     "/providers/Microsoft.KX/operations": {
       "get": {
+        "operationId": "Operations_List",
         "tags": [
           "Operations"
         ],
-        "operationId": "Operations_List",
         "description": "List the operations for the provider",
         "parameters": [
           {
@@ -72,22 +72,22 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Operations_List_5": {
             "$ref": "./examples/Operations_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.KX/kdbInsightsEnterprise": {
       "get": {
+        "operationId": "KdbInsightsEnterprise_ListBySubscription",
         "tags": [
           "KdbInsightsEnterprise"
         ],
-        "operationId": "KdbInsightsEnterprise_ListBySubscription",
         "description": "List KdbInsightsEnterpriseResource resources by subscription ID",
         "parameters": [
           {
@@ -111,22 +111,22 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "KdbInsightsEnterprise_ListBySubscription_1": {
             "$ref": "./examples/KdbInsightsEnterprise_ListBySubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KX/kdbInsightsEnterprise": {
       "get": {
+        "operationId": "KdbInsightsEnterprise_ListByResourceGroup",
         "tags": [
           "KdbInsightsEnterprise"
         ],
-        "operationId": "KdbInsightsEnterprise_ListByResourceGroup",
         "description": "List KdbInsightsEnterpriseResource resources by resource group",
         "parameters": [
           {
@@ -153,22 +153,22 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "KdbInsightsEnterprise_ListByResourceGroup_3": {
             "$ref": "./examples/KdbInsightsEnterprise_ListByResourceGroup.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KX/kdbInsightsEnterprise/{kdbInsightsEnterpriseName}": {
       "get": {
+        "operationId": "KdbInsightsEnterprise_Get",
         "tags": [
           "KdbInsightsEnterprise"
         ],
-        "operationId": "KdbInsightsEnterprise_Get",
         "description": "Get a KdbInsightsEnterpriseResource",
         "parameters": [
           {
@@ -183,10 +183,10 @@
           {
             "name": "kdbInsightsEnterpriseName",
             "in": "path",
-            "required": true,
             "description": "The name of the kdbInsightsEnterprise resource",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -210,10 +210,10 @@
         }
       },
       "put": {
+        "operationId": "KdbInsightsEnterprise_CreateOrUpdate",
         "tags": [
           "KdbInsightsEnterprise"
         ],
-        "operationId": "KdbInsightsEnterprise_CreateOrUpdate",
         "description": "Create a KdbInsightsEnterpriseResource",
         "parameters": [
           {
@@ -228,16 +228,16 @@
           {
             "name": "kdbInsightsEnterpriseName",
             "in": "path",
-            "required": true,
             "description": "The name of the kdbInsightsEnterprise resource",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "resource",
             "in": "body",
-            "required": true,
             "description": "Resource create parameters.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/KdbInsightsEnterpriseResource"
             }
@@ -252,15 +252,15 @@
           },
           "201": {
             "description": "ARM create operation completed successfully.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/KdbInsightsEnterpriseResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -281,10 +281,10 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
+        "operationId": "KdbInsightsEnterprise_Update",
         "tags": [
           "KdbInsightsEnterprise"
         ],
-        "operationId": "KdbInsightsEnterprise_Update",
         "description": "Update a KdbInsightsEnterpriseResource",
         "parameters": [
           {
@@ -299,16 +299,16 @@
           {
             "name": "kdbInsightsEnterpriseName",
             "in": "path",
-            "required": true,
             "description": "The name of the kdbInsightsEnterprise resource",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "properties",
             "in": "body",
-            "required": true,
             "description": "The resource properties to be updated.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/KdbInsightsEnterpriseResourceUpdate"
             }
@@ -319,6 +319,20 @@
             "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/KdbInsightsEnterpriseResource"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
             }
           },
           "default": {
@@ -332,13 +346,17 @@
           "KdbInsightsEnterprise_Update_4": {
             "$ref": "./examples/KdbInsightsEnterprise_Update.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
+        "operationId": "KdbInsightsEnterprise_Delete",
         "tags": [
           "KdbInsightsEnterprise"
         ],
-        "operationId": "KdbInsightsEnterprise_Delete",
         "description": "Delete a KdbInsightsEnterpriseResource",
         "parameters": [
           {
@@ -353,15 +371,29 @@
           {
             "name": "kdbInsightsEnterpriseName",
             "in": "path",
-            "required": true,
             "description": "The name of the kdbInsightsEnterprise resource",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
           "200": {
             "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "204": {
             "description": "Resource deleted successfully."
@@ -377,13 +409,18 @@
           "KdbInsightsEnterprise_Delete_6": {
             "$ref": "./examples/KdbInsightsEnterprise_Delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
   "definitions": {
     "KdbInsightsEnterpriseProperties": {
       "type": "object",
+      "description": "Details of the kdbInsightsEnterprise resource.",
       "properties": {
         "keyCloakPassword": {
           "$ref": "#/definitions/PasswordString",
@@ -511,8 +548,8 @@
         "vnetAddressSpace": {
           "type": "string",
           "description": "A custom *.*.0.0/16 Address space for the kdb Insights Enterprise cluster Virtual Network",
-          "pattern": "\\b(?:(?:2(?:[0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9])\\.){3}(?:(?:2([0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9]))\\b/[0-9]+",
           "default": "10.0.0.0/16",
+          "pattern": "\\b(?:(?:2(?:[0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9])\\.){3}(?:(?:2([0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9]))\\b/[0-9]+",
           "x-ms-mutability": [
             "read",
             "create"
@@ -540,9 +577,9 @@
           "type": "integer",
           "format": "int64",
           "description": "AKS Container insights retention period in days",
+          "default": 30,
           "minimum": 30,
           "maximum": 730,
-          "default": 30,
           "x-ms-mutability": [
             "read",
             "create"
@@ -579,7 +616,6 @@
           "readOnly": true
         }
       },
-      "description": "Details of the kdbInsightsEnterprise resource.",
       "required": [
         "keyCloakPassword",
         "uiPassword",
@@ -589,6 +625,7 @@
     },
     "KdbInsightsEnterpriseResource": {
       "type": "object",
+      "description": "A kdbInsightsEnterprise resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/KdbInsightsEnterpriseProperties",
@@ -600,7 +637,6 @@
           ]
         }
       },
-      "description": "A kdbInsightsEnterprise resource",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -609,43 +645,41 @@
     },
     "KdbInsightsEnterpriseResourceListResult": {
       "type": "object",
+      "description": "The response of a KdbInsightsEnterpriseResource list operation.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The KdbInsightsEnterpriseResource items on this page",
           "items": {
             "$ref": "#/definitions/KdbInsightsEnterpriseResource"
-          },
-          "x-typespec-name": "KdbInsightsEnterpriseResource[]",
-          "description": "The KdbInsightsEnterpriseResource items on this page"
+          }
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "Rest.ResourceLocation"
+          "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a KdbInsightsEnterpriseResource list operation.",
       "required": [
         "value"
       ]
     },
     "KdbInsightsEnterpriseResourceUpdate": {
       "type": "object",
+      "description": "The type used for update operations of the KdbInsightsEnterpriseResource.",
       "properties": {
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
-          },
-          "x-typespec-name": "Record<string>",
-          "description": "Resource tags."
+          }
         }
-      },
-      "description": "The type used for update operations of the KdbInsightsEnterpriseResource."
+      }
     },
     "ManagedResourceGroupConfiguration": {
       "type": "object",
+      "description": "Configuration of the managed resource group associated with the resource.",
       "properties": {
         "name": {
           "type": "string",
@@ -656,7 +690,6 @@
           "description": "The resource group location."
         }
       },
-      "description": "Configuration of the managed resource group associated with the resource.",
       "required": [
         "name",
         "location"
@@ -685,15 +718,18 @@
         "values": [
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "Resource has been created."
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "Resource creation failed."
           },
           {
             "name": "Canceled",
-            "value": "Canceled"
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
           },
           {
             "name": "Provisioning",
@@ -727,7 +763,7 @@
       ],
       "x-ms-enum": {
         "name": "ReadWriteManyStorageClass",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "AzureFile",

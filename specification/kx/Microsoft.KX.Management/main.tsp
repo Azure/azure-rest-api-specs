@@ -19,7 +19,8 @@ using Azure.ResourceManager;
 using Azure.Core;
 
 @doc("A kdbInsightsEnterprise resource")
-model KdbInsightsEnterpriseResource is TrackedResource<KdbInsightsEnterpriseProperties> {
+model KdbInsightsEnterpriseResource
+  is TrackedResource<KdbInsightsEnterpriseProperties> {
   @doc("The name of the kdbInsightsEnterprise resource")
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   @key("kdbInsightsEnterpriseName")
@@ -32,6 +33,7 @@ model KdbInsightsEnterpriseResource is TrackedResource<KdbInsightsEnterpriseProp
 @doc("The full set of provisioning states")
 enum ProvisioningState {
   ...Azure.ResourceManager.ResourceProvisioningState,
+
   @doc("Provisioning the resource is in progress")
   Provisioning,
 
@@ -46,7 +48,6 @@ enum ProvisioningState {
 }
 
 @doc("Accepted values for ReadWriteManyStorageClass property")
-@fixed
 enum ReadWriteManyStorageClass {
   @doc("Use Azure Files Premium for ReadWriteMany volumes")
   AzureFile: "azurefile-premium-kxi-nfs",
@@ -87,19 +88,19 @@ model KdbInsightsEnterpriseProperties {
   @visibility("read", "create")
   @doc("The UI user name")
   @pattern("^[A-Za-z0-9]{8,20}$")
-  uiUsername: string;  
-  
+  uiUsername: string;
+
   @visibility("read", "create")
   @doc("AKS System node pool VM size")
-  systemNodePoolVmSize?: string = "Standard_D2d_v4";  
+  systemNodePoolVmSize?: string = "Standard_D2d_v4";
 
   @visibility("read", "create")
   @doc("AKS User node pool VM size")
-  userNodePoolVmSize?: string = "Standard_D8ds_v4";  
+  userNodePoolVmSize?: string = "Standard_D8ds_v4";
 
   @visibility("read", "create")
   @doc("Storage Class for ReadWriteMany volumes")
-  readWriteManyStorageClass?: ReadWriteManyStorageClass;  
+  readWriteManyStorageClass?: ReadWriteManyStorageClass;
 
   @visibility("read", "create")
   @doc("Storage Class for ReadWriteOnce volumes derived from IsPremiumStorageEnabled")
@@ -152,12 +153,12 @@ model KdbInsightsEnterpriseProperties {
 
   @visibility("read", "create")
   @doc("AKS Kubernetes audit log retention period in days. A value of 0 will retain the events indefinitely.")
-  aksLogRetentionDays?: int64 = 30;  
-  
+  aksLogRetentionDays?: int64 = 30;
+
   @visibility("read", "create")
   @doc("AKS Kubernetes metrics retention period in days. A value of 0 will retain the metrics indefinitely.")
   aksMetricsRetentionDays?: int64 = 30;
-  
+
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
@@ -171,8 +172,11 @@ model KdbInsightsEnterpriseProperties {
 interface KdbInsightsEnterprise {
   get is ArmResourceRead<KdbInsightsEnterpriseResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<KdbInsightsEnterpriseResource>;
-  update is ArmResourcePatchSync<KdbInsightsEnterpriseResource, KdbInsightsEnterpriseProperties>;
-  delete is ArmResourceDeleteSync<KdbInsightsEnterpriseResource>;
+  update is ArmResourcePatchAsync<
+    KdbInsightsEnterpriseResource,
+    KdbInsightsEnterpriseProperties
+  >;
+  delete is ArmResourceDeleteAsync<KdbInsightsEnterpriseResource>;
   listByResourceGroup is ArmResourceListByParent<KdbInsightsEnterpriseResource>;
   listBySubscription is ArmListBySubscription<KdbInsightsEnterpriseResource>;
 }
