@@ -589,14 +589,49 @@
           "type": "string",
           "readOnly": true
         },
-        "supportedSkus": {
-          "description": "The list of supported SKUs for the edition.",
+        "supportedServiceLevelObjectives": {
+          "description": "The list of supported SLOs for the edition.",
           "type": "array",
           "items": {
-            "$ref": "../../../common/v1/types.json#/definitions/Sku"
+            "$ref": "#/definitions/JobAgentServiceLevelObjectiveCapability"
           },
           "readOnly": true,
           "x-ms-identifiers": []
+        },
+        "status": {
+          "description": "The status of the capability.",
+          "enum": [
+            "Visible",
+            "Available",
+            "Default",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CapabilityStatus",
+            "modelAsString": false
+          }
+        },
+        "reason": {
+          "description": "The reason for the capability not being available.",
+          "type": "string"
+        }
+      }
+    },
+    "JobAgentServiceLevelObjectiveCapability": {
+      "description": "The job agent service level objective capability.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The service objective name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sku": {
+          "$ref": "../../../common/v1/types.json#/definitions/Sku",
+          "description": "The sku.",
+          "readOnly": true
         },
         "status": {
           "description": "The status of the capability.",
