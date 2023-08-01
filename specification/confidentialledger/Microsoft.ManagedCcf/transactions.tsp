@@ -36,6 +36,7 @@ model NamedTransaction {
   @visibility("query")
   @key
   transactionId: transactionId;
+
   ...Transaction;
 }
 
@@ -49,6 +50,7 @@ model CommittedTransaction {
 
   @doc("Identifier of committed transaction.")
   transactionId: transactionId;
+
   ...Transaction;
 }
 
