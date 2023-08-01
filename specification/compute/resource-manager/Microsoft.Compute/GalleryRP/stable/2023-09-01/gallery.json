@@ -1859,6 +1859,48 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {}
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/serviceArtifacts": {
+      "get": {
+        "tags": [
+          "ListServiceArtifactsInGallery"
+        ],
+        "operationId": "ListServiceArtifactsInGallery_Get",
+        "description": "Retrieves a list of Service Artifacts in a gallery.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Shared Image Gallery."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GalleryServiceArtifact"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {}
+      }
     }
   },
   "definitions": {
