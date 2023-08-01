@@ -5637,6 +5637,8 @@
         "netIpv4TcpkeepaliveIntvl": {
           "type": "integer",
           "format": "int32",
+          "minimum": 10,
+          "maximum": 90,
           "description": "Sysctl setting net.ipv4.tcp_keepalive_intvl."
         },
         "netIpv4TcpTwReuse": {
@@ -5665,11 +5667,15 @@
         "netNetfilterNfConntrackMax": {
           "type": "integer",
           "format": "int32",
+          "minimum": 131072,
+          "maximum": 2097152,
           "description": "Sysctl setting net.netfilter.nf_conntrack_max."
         },
         "netNetfilterNfConntrackBuckets": {
           "type": "integer",
           "format": "int32",
+          "minimum": 65536,
+          "maximum": 524288,
           "description": "Sysctl setting net.netfilter.nf_conntrack_buckets."
         },
         "fsInotifyMaxUserWatches": {
