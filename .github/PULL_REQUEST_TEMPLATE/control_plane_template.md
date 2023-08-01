@@ -31,9 +31,7 @@ What's the purpose of this PR? Check all that apply. This is **mandatory**!
 To merge this PR, you **must** go through the following checklist and confirm you understood 
 and followed the instructions by checking all the boxes:
 
-- [ ] I have reviewed the general guidance on the spec PR review process: https://aka.ms/specprreview.
-- [ ] I confirm this PR is modifying Azure Resource Manager (ARM) related specifications, and not data-plane related specifications.
-- [ ] I commit to follow the [Breaking Change Policy](https://aka.ms/AzBreakingChangesPolicy).
+- [ ] I confirm this PR is modifying Azure Resource Manager (ARM) related specifications, and not data plane related specifications.
 - [ ] I have reviewed following [Resource Provider guidelines](https://aka.ms/rpguidelines), including
   [ARM resource provider contract](https://github.com/Azure/azure-resource-manager-rpc) and
   [REST guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md) (estimated time: 4 hours).  
@@ -41,14 +39,14 @@ and followed the instructions by checking all the boxes:
 
 ### ARM API changes review
 
-- If you want for the ARM team to review this PR, you must add the `ARMReview` label. 
-- The automation may automatically add the `ARMReview` label, if appropriate.  
-  If this happens, proceed according to guidance given in GitHub comments also added by the automation.
+- If this PR is in purview of ARM review then automation will add `ARMReview` label.
+- If you want to force ARM review, add the label yourself.
+- Proceed according to the diagram at the top of this comment.
 
-### Breaking change review
+### Breaking changes review
 
-If you have any breaking changes as defined in the [Breaking Change Policy](https://aka.ms/AzBreakingChangesPolicy/), 
-follow the process outlined in the [High-level Breaking Change Process doc](https://aka.ms/breakingchangesprocess#high-level-breaking-change-process).
+- If the automation determines you have breaking changes, i.e. Step 1 from the diagram, you must follow the [Breaking changes process].
+  **IMPORTANT** This applies even if you claim you can skip the breaking change review, for any reason. Such claims must be reviewed too, and the process is the same.
       
 ## Getting help
 
@@ -62,3 +60,4 @@ follow the process outlined in the [High-level Breaking Change Process doc](http
 [List of SDK breaking changes approvers]: https://teams.microsoft.com/l/message/19:0351f5f9404446e4b4fd4eaf2c27448d@thread.skype/1689115217750?tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47&groupId=3e17dcb0-4257-4a30-b843-77f47f1d4121&parentMessageId=1689115217750&teamName=Azure%20SDK&channelName=API%20Spec%20Review&createdTime=1689115217750
 [public repo merge queue]: https://github.com/Azure/azure-rest-api-specs/pulls?q=is%3Aopen+is%3Apr+label%3AMergeRequested+-label%3AIDCDevDiv+draft%3Afalse+sort%3Acreated-asc
 [private repo merge queue]: https://github.com/Azure/azure-rest-api-specs-pr/pulls?q=is%3Aopen+is%3Apr+label%3AMergeRequested+-label%3AIDCDevDiv+draft%3Afalse+sort%3Acreated-asc
+[Breaking changes process]: https://eng.ms/docs/cloud-ai-platform/azure-core/azure-core-pm-and-design/trusted-platform-pm-karimb/service-lifecycle-and-actions-team/service-lifecycle-actions-team/apex/media/launchingproductbreakingchanges#breaking-change-process-1
