@@ -9,7 +9,6 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using OpenAPI;
 
-//@useAuth(ApiKeyAuth<ApiKeyLocation.header, "SharedAccessKey">)
 @useAuth(AzureAuth)
 @service({
   title: "Azure.SchemaRegistry",
@@ -70,10 +69,9 @@ interface SchemaOperations {
   @doc("Gets a registered schema by its unique ID.  Azure Schema Registry guarantees that ID is unique within a namespace. Operation response type is based on serialization of schema requested.")
   @route("/$schemaGroups/$schemas/{id}")
   @get
-  // TODO: produces has extra "application/json" content type --> how to remove?
   op getSchemaById is Azure.Core.Foundations.Operation<
     Azure.Core.Foundations.ItemKeysOf<SchemaId>,
-    Foundations.ResourceOkResponse<SchemaHeaders & Body<bytes>> & SchemaContentType
+    OkResponse & SchemaHeaders & SchemaContent & SchemaContentType
   >;
 
   //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}/versions/?api-version={apiVersion}
@@ -89,7 +87,7 @@ interface SchemaOperations {
   @get
   op getSchemaByVersion is Azure.Core.Foundations.Operation<
     Azure.Core.Foundations.ItemKeysOf<Version>,
-    Foundations.ResourceOkResponse<SchemaHeaders & Body<bytes>> & SchemaContentType
+    OkResponse & SchemaHeaders & SchemaContent & SchemaContentType
   >;
 
   //  POST https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}:get-id?api-version={apiVersion}
@@ -116,7 +114,7 @@ interface SchemaOperations {
   @route("/$schemaGroups/{groupName}/schemas/{name}")
   @put
   op registerSchema is Azure.Core.Foundations.Operation<
-    Azure.Core.Foundations.ItemKeysOf<Schema> & Body<bytes> & SchemaContentType,
+    Azure.Core.Foundations.ItemKeysOf<Schema> & SchemaContent & SchemaContentType,
     NoContentResponse<SchemaHeaders>
   >;
 }
@@ -130,6 +128,13 @@ model SchemaContentType {
   @doc("The content type for given schema.")
   @header("content-type")
   contentType: "application/json; serialization=Avro" | "application/json; serialization=json" | "text/plain; charset=utf-8";
+}
+
+@doc("Content of the schema.")
+model SchemaContent {
+  @body
+  @doc("String representation (UTF-8) of the schema.")
+  content: bytes;
 }
 
 @doc("No Content.")
