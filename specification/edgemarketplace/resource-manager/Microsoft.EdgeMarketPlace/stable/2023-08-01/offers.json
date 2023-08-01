@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "EdgeMarketPlaceClient",
-    "version": "2023-06-01-preview",
+    "version": "2023-08-01",
     "description": "Edge Market Place Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -98,6 +98,60 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeMarketPlace/offers": {
+      "get": {
+        "tags": [
+          "Offers"
+        ],
+        "operationId": "Offers_List",
+        "x-ms-examples": {
+          "List offers": {
+            "$ref": "./examples/ListOffersinSubscription.json"
+          }
+        },
+        "description": "List Offer resources by subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OfferListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/{resourceUri}/providers/Microsoft.EdgeMarketPlace/offers/{offerId}": {
       "get": {
         "tags": [
@@ -123,9 +177,6 @@
             "required": true,
             "description": "Id of the offer",
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
           }
         ],
         "responses": {
@@ -144,15 +195,15 @@
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.EdgeMarketPlace/offers/{offerId}/getAccessToken": {
+    "/{resourceUri}/providers/Microsoft.EdgeMarketPlace/offers/{offerId}/generateAccessToken": {
       "post": {
         "tags": [
           "Offers"
         ],
-        "operationId": "Offers_GetAccessToken",
+        "operationId": "Offers_GenerateAccessToken",
         "x-ms-examples": {
-          "Get AccessToken": {
-            "$ref": "./examples/GetAccessToken.json"
+          "Generate AccessToken": {
+            "$ref": "./examples/GenerateAccessToken.json"
           }
         },
         "description": "A long-running resource action.",
@@ -214,18 +265,18 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/{resourceUri}/providers/Microsoft.EdgeMarketPlace/offers/search": {
+    "/{resourceUri}/providers/Microsoft.EdgeMarketPlace/offers/{offerId}/getAccessToken": {
       "post": {
         "tags": [
           "Offers"
         ],
-        "operationId": "Offers_Search",
+        "operationId": "Offers_GetAccessToken",
         "x-ms-examples": {
-          "Search offers": {
-            "$ref": "./examples/OffersSearch.json"
+          "Get AccessToken": {
+            "$ref": "./examples/GetAccessToken.json"
           }
         },
-        "description": "A synchronous resource action.",
+        "description": "get access token.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -234,27 +285,19 @@
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.SkipTokenParameter"
+            "name": "offerId",
+            "in": "path",
+            "required": true,
+            "description": "Id of the offer",
+            "type": "string"
           },
           {
             "name": "body",
             "in": "body",
-            "required": false,
+            "required": true,
             "description": "The content of the action request",
             "schema": {
-              "$ref": "#/definitions/OfferSearchRequest"
+              "$ref": "#/definitions/AccessTokenReadRequest"
             }
           }
         ],
@@ -262,7 +305,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/OfferListResult"
+              "$ref": "#/definitions/DiskAccessToken"
             }
           },
           "default": {
@@ -271,14 +314,24 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     }
   },
   "definitions": {
+    "AccessTokenReadRequest": {
+      "type": "object",
+      "properties": {
+        "requestId": {
+          "type": "string",
+          "description": "The name of the publisher."
+        }
+      },
+      "description": "Access token request object",
+      "required": [
+        "requestId"
+      ]
+    },
     "AccessTokenRequest": {
       "type": "object",
       "properties": {
@@ -317,7 +370,6 @@
       },
       "description": "Access token request object",
       "required": [
-        "publisherName",
         "edgeMarketPlaceRegion"
       ]
     },
@@ -369,8 +421,6 @@
       },
       "description": "The disk access token",
       "required": [
-        "diskId",
-        "status",
         "accessToken"
       ]
     },
@@ -394,13 +444,7 @@
           "description": "uri of large icon"
         }
       },
-      "description": "Icon files",
-      "required": [
-        "small",
-        "medium",
-        "wide",
-        "large"
-      ]
+      "description": "Icon files"
     },
     "MarketplaceSku": {
       "type": "object",
@@ -459,10 +503,7 @@
       "description": "The marketplace sku",
       "required": [
         "catalogPlanId",
-        "marketplaceSkuId",
-        "displayName",
-        "operatingSystem",
-        "marketplaceSkuVersions"
+        "marketplaceSkuId"
       ]
     },
     "MarketplaceSkuVersion": {
@@ -612,18 +653,7 @@
       "description": "The offer content",
       "required": [
         "displayName",
-        "summary",
-        "longSummary",
-        "description",
-        "offerId",
-        "offerType",
-        "supportUri",
-        "popularity",
-        "offerPublisher",
-        "availability",
-        "releaseType",
-        "termsAndConditions",
-        "iconFileUris"
+        "offerId"
       ]
     },
     "OfferListResult": {
@@ -680,10 +710,7 @@
       },
       "description": "The offer properties",
       "required": [
-        "contentVersion",
-        "offerContent",
-        "provisioningState",
-        "marketplaceSkus"
+        "offerContent"
       ]
     },
     "OfferPublisher": {
@@ -728,32 +755,6 @@
         ]
       }
     },
-    "OfferSearchRequest": {
-      "type": "object",
-      "properties": {
-        "publisherName": {
-          "type": "string",
-          "description": "The publisher name."
-        },
-        "offerId": {
-          "type": "string",
-          "description": "The offer Id."
-        },
-        "category": {
-          "type": "string",
-          "description": "The category."
-        },
-        "deviceSku": {
-          "type": "string",
-          "description": "The device sku."
-        },
-        "deviceVersion": {
-          "type": "string",
-          "description": "The device sku version."
-        }
-      },
-      "description": "Offer search request"
-    },
     "SkuOperatingSystem": {
       "type": "object",
       "properties": {
@@ -772,8 +773,6 @@
       },
       "description": "The sku operating system",
       "required": [
-        "family",
-        "type",
         "name"
       ]
     },
@@ -793,17 +792,12 @@
           "description": "The privacy policy uri"
         }
       },
-      "description": "Terms and conditions",
-      "required": [
-        "legalTermsUri",
-        "legalTermsType",
-        "privacyPolicyUri"
-      ]
+      "description": "Terms and conditions"
     }
   },
   "parameters": {
     "Azure.Core.FilterQueryParameter": {
-      "name": "filter",
+      "name": "$filter",
       "in": "query",
       "required": false,
       "description": "Filter the result list using the given expression.",
@@ -830,7 +824,7 @@
       "x-ms-parameter-location": "method"
     },
     "Azure.Core.TopQueryParameter": {
-      "name": "top",
+      "name": "$top",
       "in": "query",
       "required": false,
       "description": "The number of result items to return.",
@@ -839,7 +833,7 @@
       "x-ms-parameter-location": "method"
     },
     "Azure.Core.SkipTokenParameter": {
-      "name": "skipToken",
+      "name": "$skipToken",
       "in": "query",
       "required": false,
       "description": "Skip over when retrieving results.",
