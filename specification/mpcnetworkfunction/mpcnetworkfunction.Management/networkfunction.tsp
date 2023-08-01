@@ -9,6 +9,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using OpenAPI;
 
@@ -64,10 +65,43 @@ model NetworkFunctionResourceProperties {
   provisioningState?: ProvisioningState;
 }
 
+/** Compliant create or update template */
+/**
+ * A long-running resource CreateOrUpdate (PUT)
+ * @template TResource the resource being patched
+ * @template TBaseParameters Optional. Allows overriding the operation parameters
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-outside-interface" "This is a valid template"
+@autoRoute
+@doc("Create a {name}", TResource)
+@OpenAPI.extension("x-ms-long-running-operation", true)
+@OpenAPI.extension(
+  "x-ms-long-running-operation-options",
+  {
+    `final-state-via`: "azure-async-operation",
+  }
+)
+@armResourceCreateOrUpdate(TResource)
+@put
+op ArmResourceCreateOrUpdate2Async<
+  TResource extends Azure.ResourceManager.Foundations.ArmResource,
+  TBaseParameters = Azure.ResourceManager.Foundations.BaseParameters<TResource>
+>(
+  ...ResourceInstanceParameters<TResource, TBaseParameters>,
+
+  @doc("Resource create parameters.")
+  @body
+  resource: TResource,
+): ArmUpdatedResponse<TResource> | ArmCreatedResponse<TResource> | ErrorResponse;
+
+@doc("ARM resource update successful")
+model ArmUpdatedResponse<TResource extends Azure.ResourceManager.Foundations.ArmResource>
+  is ArmResponse<TResource>;
+
 @armResourceOperations(NetworkFunctionResource)
 interface NetworkFunctions {
   get is ArmResourceRead<NetworkFunctionResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<NetworkFunctionResource>;
+  createOrUpdate is ArmResourceCreateOrUpdate2Async<NetworkFunctionResource>;
   updateTags is ArmTagsPatchSync<NetworkFunctionResource>;
   delete is ArmResourceDeleteSync<NetworkFunctionResource>;
   listByResourceGroup is ArmResourceListByParent<NetworkFunctionResource>;
