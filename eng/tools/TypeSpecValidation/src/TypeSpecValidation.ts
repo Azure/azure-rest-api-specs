@@ -62,8 +62,6 @@ class CompileRule implements TSVRule {
     if (await checkFileExists(path.join(folder, "main.tsp"))) {
       let [std, err] = await runCmd(`npx --no tsp compile . --warn-as-error`, folder);
       stdOutput += std;
-      console.log("errrr");
-      console.log(err);
       if (err == null) {
         success = false;
         errorOutput += err;
@@ -97,7 +95,7 @@ class FormatRule implements TSVRule {
     // Format parent folder to include shared files
     let [stdOutput, errorOutput] = await runCmd(`npx tsp format ../**/*.tsp`, folder);
 
-    let success = errorOutput ? false : true;
+    let success = errorOutput == null ? false : true;
     return {
       success: success,
       stdOutput: stdOutput,
