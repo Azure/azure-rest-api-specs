@@ -943,6 +943,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Compute resize initiated.",
             "headers": {
@@ -962,6 +965,9 @@
           "List VM Sizes": {
             "$ref": "./examples/Compute/resize.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
