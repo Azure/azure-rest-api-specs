@@ -61,24 +61,14 @@
             }
           },
           "poolType": {
-            "elasticSan": {
-              "resourceGroup": "test-rg3",
-              "skuName": "Premium_LRS",
-              "encryption": {
-                "keyName": "test-key",
-                "keyVaultUri": "https://test-kv.vault.azure.net/",
-                "identity": {
-                  "principalId": "14215384-6980-4e3c-8c58-c7738db7d34e",
-                  "tenantId": "02cd8342-46ab-45d5-8cc4-2a80b9a90af5",
-                  "type": "None",
-                  "userAssignedIdentities": {
-                    "key7678": {
-                      "principalId": "6a6104be-65e4-48a8-919d-a88c1cd2a255",
-                      "clientId": "5286d698-5b3d-4051-a280-2e4f20869426"
-                    }
-                  }
+            "ephemeralDisk": {
+              "replicas": 3,
+              "disks": [
+                {
+                  "id": "eui.e8238fa6bf530001001b448b45263379",
+                  "reference": "/dev/sdk"
                 }
-              }
+              ]
             }
           },
           "reclaimPolicy": "Delete",
@@ -131,24 +121,14 @@
             }
           },
           "poolType": {
-            "elasticSan": {
-              "resourceGroup": "test-rg3",
-              "skuName": "Premium_LRS",
-              "encryption": {
-                "keyName": "test-key",
-                "keyVaultUri": "https://test-kv.vault.azure.net/",
-                "identity": {
-                  "principalId": "14215384-6980-4e3c-8c58-c7738db7d34e",
-                  "tenantId": "02cd8342-46ab-45d5-8cc4-2a80b9a90af5",
-                  "type": "None",
-                  "userAssignedIdentities": {
-                    "key7678": {
-                      "principalId": "6a6104be-65e4-48a8-919d-a88c1cd2a255",
-                      "clientId": "5286d698-5b3d-4051-a280-2e4f20869426"
-                    }
-                  }
+            "ephemeralDisk": {
+              "replicas": 3,
+              "disks": [
+                {
+                  "id": "eui.e8238fa6bf530001001b448b45263379",
+                  "reference": "/dev/sdk"
                 }
-              }
+              ]
             }
           },
           "reclaimPolicy": "Delete",
