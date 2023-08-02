@@ -740,6 +740,11 @@
           "description": "The release version date of the release of the custom image OS.",
           "readOnly": true
         },
+        "vhdFileName": {
+          "type": "string",
+          "description": "The file name of the associated VHD resource.",
+          "readOnly": true
+        },
         "provisioningState": {
           "type": "string",
           "readOnly": true
@@ -1018,7 +1023,8 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "The resource name of the Test Base Custom Image."
+      "description": "The resource name of the Test Base Custom Image.",
+      "pattern": "^[A-Za-z0-9]([A-Za-z0-9_]|([-. ][A-Za-z0-9]))+$"
     },
     "ImageDefinitionNameParameter": {
       "name": "imageDefinitionName",
@@ -1026,7 +1032,8 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "The resource name of the Test Base Image Definition."
+      "description": "The resource name of the Test Base Image Definition.",
+      "pattern": "^[A-Za-z0-9]([A-Za-z0-9_]|([-. ][A-Za-z0-9]))+$"
     },
     "VhdNameParameter": {
       "name": "vhdName",
@@ -1034,7 +1041,8 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "The resource name of the Test Base VHD."
+      "description": "The resource name of the Test Base VHD.",
+      "pattern": "^[a-zA-Z0-9_.-]+$"
     }
   }
 }
