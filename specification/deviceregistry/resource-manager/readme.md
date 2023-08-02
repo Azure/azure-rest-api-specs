@@ -22,27 +22,39 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the Azure Device Registry.
 
-```yaml
+``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-08-01-preview
+tag: package-preview-2023-09
 ```
 
+
+### Tag: package-preview-2023-09
+
+These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-09'
+input-file:
+  - Microsoft.DeviceRegistry/preview/2023-09-01-preview/asset.json
+  - Microsoft.DeviceRegistry/preview/2023-09-01-preview/assetendpointprofile.json
+  - Microsoft.DeviceRegistry/preview/2023-09-01-preview/deviceregistry.json
+```
 ### Tag: package-2023-08-01-preview
 
 These settings apply only when `--tag=package-2023-08-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-08-01-preview'
+``` yaml $(tag) == 'package-2023-08-01-preview'
 input-file:
   - Microsoft.DeviceRegistry/preview/2023-08-01-preview/asset.json
   - Microsoft.DeviceRegistry/preview/2023-08-01-preview/assetendpointprofile.json
   - Microsoft.DeviceRegistry/preview/2023-08-01-preview/deviceregistry.json
 ```
+
 ### Tag: package-2023-06-21-preview
 
 These settings apply only when `--tag=package-2023-06-21-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-06-21-preview'
+``` yaml $(tag) == 'package-2023-06-21-preview'
 input-file:
   - Microsoft.DeviceRegistry/preview/2023-06-21-preview/asset.json
   - Microsoft.DeviceRegistry/preview/2023-06-21-preview/assetendpointprofile.json
@@ -53,7 +65,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-05-21-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-05-21-preview'
+``` yaml $(tag) == 'package-2022-05-21-preview'
 input-file:
   - Microsoft.DeviceRegistry/preview/2022-05-21-preview/deviceregistry.json
 ```
