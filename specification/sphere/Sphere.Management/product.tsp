@@ -1,6 +1,5 @@
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -50,7 +49,7 @@ interface Products extends ProxyResourceOperationsProducts<Product> {
   @armResourceAction(Product)
   @post
   generateDefaultDeviceGroups(
-    ...ResourceInstanceParameters<Product>
+    ...ResourceInstanceParameters<Product>,
   ): ArmResponse<ResourceListResult<DeviceGroup>> | ErrorResponse;
 
   @autoRoute
@@ -58,7 +57,7 @@ interface Products extends ProxyResourceOperationsProducts<Product> {
   @armResourceAction(Product)
   @post
   countDevices(
-    ...ResourceInstanceParameters<Product>
+    ...ResourceInstanceParameters<Product>,
   ): ArmResponse<CountDeviceResponse> | ErrorResponse;
 }
 

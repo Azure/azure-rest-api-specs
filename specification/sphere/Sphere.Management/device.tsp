@@ -1,7 +1,6 @@
 import "@typespec/rest";
 import "@typespec/openapi";
 import "@typespec/versioning";
-import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -63,7 +62,7 @@ interface Devices extends ProxyResourceOperationsDevice<Device> {
 
     @doc("Generate capability image request body.")
     @body
-    generateDeviceCapabilityRequest: GenerateCapabilityImageRequest
+    generateDeviceCapabilityRequest: GenerateCapabilityImageRequest,
   ): ArmResponse<SignedCapabilityImageResponse> | ArmAcceptedResponse | ErrorResponse;
 }
 
