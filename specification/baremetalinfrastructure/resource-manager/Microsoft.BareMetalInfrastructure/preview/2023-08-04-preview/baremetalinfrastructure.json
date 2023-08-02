@@ -40,7 +40,7 @@
     },
     {
       "name": "Bare Metal Storage Instances",
-      "description": "Handle Operations for storage Bare Metal Instances."
+      "description": "Handle Operations for Storage Bare Metal Instances."
     },
     {
       "name": "Common",
@@ -1198,6 +1198,16 @@
       },
       "description": "Tags field of the AzureBareMetal/AzureBareMetaStorage instance."
     },
+    "ForceFlag": {
+      "type": "object",
+      "properties": {
+        "force": {
+          "type": "boolean",
+          "description": "Whether to force restart by shutting all processes."
+        }
+      },
+      "description": "The flag empowers the server with the ability to forcefully terminate and halt any existing processes that may be running on the server"
+    },
     "OperationStatus": {
       "type": "object",
       "properties": {
@@ -1251,10 +1261,12 @@
       "x-ms-parameter-location": "method"
     },
     "ForcePowerManagementOperationParameter": {
-      "name": "force",
-      "in": "query",
+      "name": "ForceParameter",
+      "in": "body",
       "required": false,
-      "type": "boolean",
+      "schema": {
+        "$ref": "#/definitions/ForceFlag"
+      },
       "description": "When set to 'true', this parameter empowers the server with the ability to forcefully terminate and halt any existing processes that may be running on the server",
       "x-ms-parameter-location": "method"
     },
