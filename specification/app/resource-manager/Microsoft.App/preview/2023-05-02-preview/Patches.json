@@ -52,6 +52,13 @@
           },
           {
             "$ref": "./Builders.json#/parameters/BuilderNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -76,49 +83,6 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/builders/{builderName}/patches/{patchName}": {
-      "get": {
-        "tags": [
-          "Patches"
-        ],
-        "operationId": "Patches_Get",
-        "description": "Get the details of a specific patch.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./Builders.json#/parameters/BuilderNameParameter"
-          },
-          {
-            "$ref": "#/parameters/PatchNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Patch details retrieved successfully.",
-            "schema": {
-              "$ref": "#/definitions/PatchResource"
-            }
-          },
-          "default": {
-            "description": "Common error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Patches_Get_0": {
-            "$ref": "./examples/Patches_Get.json"
-          }
-        }
-      },
       "delete": {
         "tags": [
           "Patches"
@@ -238,7 +202,10 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/PatchProperties",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PatchProperties"
+          },
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -306,21 +273,58 @@
       "readOnly": true
     },
     "PatchDetails": {
-      "description": "Individual patch object.",
+      "description": "The details of specific patch item.",
       "type": "object",
       "properties": {
+        "targetContainerName": {
+          "type": "string",
+          "description": "The name of the target container for the patch."
+        },
         "targetImage": {
           "type": "string",
           "description": "The name of the target image for the patch."
         },
-        "newRunImage": {
+        "newImageName": {
           "type": "string",
-          "description": "The name of new run image for the target image.",
+          "description": "The name of the new image created by the patch.",
+          "nullable": true
+        },
+        "newRunImage": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The name of the new run image for the target image."
+            },
+            "frameworkAndVersion": {
+              "type": "string",
+              "description": "The framework and its version in the new run image for the target image."
+            },
+            "osAndVersion": {
+              "type": "string",
+              "description": "The OS name and its version in the new run image for the target image."
+            }
+          },
+          "description": "The details of new run image for the target image.",
           "nullable": true
         },
         "oldRunImage": {
-          "type": "string",
-          "description": "The name of old run image for the target image.",
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The name of the old run image for the target image."
+            },
+            "frameworkAndVersion": {
+              "type": "string",
+              "description": "The framework and its version in the old run image for the target image."
+            },
+            "osAndVersion": {
+              "type": "string",
+              "description": "The OS name and its version in the old run image for the target image."
+            }
+          },
+          "description": "The details of old run image for the target image.",
           "nullable": true
         },
         "patchType": {
@@ -338,7 +342,13 @@
             "name": "PatchType",
             "modelAsString": true
           }
-        },
+        }
+      },
+      "readOnly": true
+    },
+    "PatchProperties": {
+      "type": "object",
+      "properties": {
         "targetEnvironmentId": {
           "type": "string",
           "description": "The id of the target environment for the patch."
@@ -347,16 +357,10 @@
           "type": "string",
           "description": "The id of the target container app for the patch."
         },
-        "targetContainerName": {
+        "targetRevisionId": {
           "type": "string",
-          "description": "The name of the target container for the patch."
-        }
-      },
-      "readOnly": true
-    },
-    "PatchProperties": {
-      "type": "object",
-      "properties": {
+          "description": "The id of the target revision for the patch."
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Patch provisioning state.",
@@ -374,8 +378,13 @@
         },
         "patchDetails": {
           "type": "object",
-          "$ref": "#/definitions/PatchDetails",
-          "description": "Detailed info about the specific patch."
+          "properties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/PatchDetails"
+            },
+            "description": "Detailed info about the specific patch."
+          }
         }
       },
       "readOnly": true
