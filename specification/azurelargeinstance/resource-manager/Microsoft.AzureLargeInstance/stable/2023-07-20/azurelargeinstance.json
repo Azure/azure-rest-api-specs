@@ -443,6 +443,12 @@
               "$ref": "#/definitions/AzureLargeInstance"
             }
           },
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/AzureLargeInstance"
+            }
+          },
           "501": {
             "description": "This action must be performed through our operations team.",
             "x-ms-error-response": true
@@ -501,7 +507,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureLargeInstance/AzureLargeStorageInstance": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureLargeInstance/azureLargeStorageInstance": {
       "get": {
         "tags": ["AzureLargeInstance"],
         "operationId": "AzureLargeStorageInstance_ListBySubscription",
@@ -539,7 +545,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/AzureLargeStorageInstance": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/azureLargeStorageInstance": {
       "get": {
         "operationId": "AzureLargeStorageInstance_ListByResourceGroup",
         "summary": "Gets a list of Azure Large Storage Instances in the specified subscription and resource group.",
@@ -579,7 +585,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/AzureLargeStorageInstance/{azureLargeStorageInstanceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/azureLargeStorageInstance/{azureLargeStorageInstanceName}": {
       "get": {
         "tags": ["AzureLargeInstance"],
         "operationId": "AzureLargeStorageInstance_Get",
