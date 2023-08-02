@@ -12,3 +12,5 @@ using Azure.ClientGenerator.Core;
 @@include(Azure.OpenAI.ImageGenerationOptions);
 @@include(Azure.OpenAI.ImageLocation);
 @@include(Azure.OpenAI.ImageGenerations);
+
+@@internal(Azure.OpenAI.getCompletionsStreaming);

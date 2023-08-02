@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "./completions.common.tsp";
+import "./common.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -143,12 +144,44 @@ model CompletionsOptions {
   `model`?: string;
 }
 
-@doc("""
-Representation of the response data from a completions request.
-Completions support a wide variety of tasks and generate text that continues from or "completes"
-provided prompt data.
-""")
-model Completions {
+@doc("Base model for the representation of a single prompt completion.")
+model ChoiceBase {
+  @doc("The generated text for a given completions prompt.")
+  @projectedName("json", "text")
+  text: string;
+
+  @doc("The ordered index associated with this completions choice.")
+  @projectedName("json", "index")
+  index: int32;
+
+  @doc("""
+  Information about the content filtering category (hate, sexual, violence, self_harm), if it
+  has been detected, as well as the severity level (very_low, low, medium, high-scale that
+  determines the intensity and risk level of harmful content) and if it has been filtered or not.
+  """)
+  @added(ServiceApiVersions.v2023_06_01_Preview)
+  @projectedName("json", "content_filter_results")
+  contentFilterResults?: ContentFilterResults;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
+  @doc("The log probabilities model for tokens associated with this completions choice.")
+  @projectedName("json", "logprobs")
+  @projectedName("csharp", "LogProbabilityModel")
+  logprobs: CompletionsLogProbabilityModel | null;
+}
+
+@doc("Model for the representation of a streaming delta for a single prompt completion.")
+model ChoiceChunk {
+  ...ChoiceBase;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
+  @doc("Reason for finishing")
+  @projectedName("json", "finish_reason")
+  finishReason: Nullable<CompletionsFinishReason>;
+}
+
+@doc("Base model for the representation of the response data from a completions request.")
+model CompletionsBase {
   @doc("A unique identifier associated with this completions response.")
   @projectedName("json", "id")
   id: string;
@@ -162,13 +195,44 @@ model Completions {
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   created: utcDateTime;
 
+  @added(ServiceApiVersions.v2023_06_01_Preview)
   @doc("""
-  Content filtering results for zero or more prompts in the request. In a streaming request, 
+  Content filtering results for zero or more prompts in the request. In a streaming request,
   results for different prompts may arrive at different times or in different orders.
   """)
-  @added(ServiceApiVersions.v2023_06_01_Preview)
   @projectedName("json", "prompt_annotations")
   promptFilterResults?: PromptFilterResult[];
+}
+
+@doc("""
+Representation of the partial response data from a streaming completions request.
+""")
+model CompletionsChunk {
+  ...CompletionsBase;
+
+  @doc("""
+    The collection of completions choices associated with this completions response.
+    Generally, `n` choices are generated per provided prompt with a default value of 1.
+    Token limits and other settings may limit the number of choices generated.
+    """)
+  @projectedName("json", "choices")
+  choices: ChoiceChunk[];
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
+  @doc("""
+    Usage information for tokens processed and generated as part of this completions operation.
+    """)
+  @projectedName("json", "usage")
+  usage: Nullable<CompletionsUsage>;
+}
+
+@doc("""
+Representation of the response data from a completions request.
+Completions support a wide variety of tasks and generate text that continues from or "completes"
+provided prompt data.
+""")
+model Completions {
+  ...CompletionsBase;
 
   @doc("""
     The collection of completions choices associated with this completions response.
@@ -191,37 +255,12 @@ Generally, `n` choices are generated per provided prompt with a default value of
 Token limits and other settings may limit the number of choices generated.
 """)
 model Choice {
-  @doc("The generated text for a given completions prompt.")
-  @projectedName("json", "text")
-  text: string;
+  ...ChoiceBase;
 
-  @doc("The ordered index associated with this completions choice.")
-  @projectedName("json", "index")
-  index: int32;
-
-  @doc("""
-  Information about the content filtering category (hate, sexual, violence, self_harm), if it 
-  has been detected, as well as the severity level (very_low, low, medium, high-scale that 
-  determines the intensity and risk level of harmful content) and if it has been filtered or not.
-  """)
-  @added(ServiceApiVersions.v2023_06_01_Preview)
-  @projectedName("json", "content_filter_results")
-  contentFilterResults?: ContentFilterResults;
-
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
-  @doc("The log probabilities model for tokens associated with this completions choice.")
-  @projectedName("json", "logprobs")
-  @projectedName("csharp", "LogProbabilityModel")
-  logprobs: CompletionsLogProbabilityModel | null;
-
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
-  #suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 support deferred"
   @doc("Reason for finishing")
   @projectedName("json", "finish_reason")
-  finishReason: CompletionsFinishReason | null;
+  finishReason: CompletionsFinishReason;
 }
-
-alias NullableFloat = float32 | null;
 
 @doc("""
 Representation of a log probabilities model for a completions generation.
@@ -235,13 +274,13 @@ model CompletionsLogProbabilityModel {
   @projectedName("json", "token_logprobs")
   @projectedName("csharp", "TokenLogProbabilities")
   @projectedName("java", "tokenLogProbabilities")
-  tokenLogprobs: NullableFloat[];
+  tokenLogprobs: Nullable<float32>[];
 
   @doc("A mapping of tokens to maximum log probability values in this completions data.")
   @projectedName("json", "top_logprobs")
   @projectedName("csharp", "TopLogProbabilities")
   @projectedName("java", "topLogProbabilities")
-  topLogprobs: Record<NullableFloat>[];
+  topLogprobs: Record<Nullable<float32>>[];
 
   @doc("The text offsets associated with tokens in this completions data.")
   @projectedName("json", "text_offset")

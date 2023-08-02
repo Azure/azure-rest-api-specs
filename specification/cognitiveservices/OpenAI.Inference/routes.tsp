@@ -32,11 +32,28 @@ provided prompt data.
 """)
 @actionSeparator("/")
 @action("completions") //@convenientAPI(true)
+@sharedRoute
 op getCompletions is Azure.Core.ResourceAction<
   Deployment,
   CompletionsOptions,
   Completions
 >;
+
+@doc("""
+Gets completions for the provided input prompts.
+Completions support a wide variety of tasks and generate text that continues from or "completes"
+provided prompt data.
+""")
+@actionSeparator("/")
+@action("completions") //@convenientAPI(true)
+@sharedRoute
+op getCompletionsStreaming is Azure.Core.ResourceAction<
+  Deployment,
+  CompletionsOptions,
+  CompletionsChunk
+>;
+
+
 
 @doc("""
 Gets chat completions for the provided chat messages.
