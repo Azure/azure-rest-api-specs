@@ -174,12 +174,27 @@ interface Fleets {
       IfNoneMatchParameters<Fleet>
   >;
 
-  update is ArmCustomPatchAsync<
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Actual breaking change"
+  @sharedRoute
+  @removed(Versions.v2023_06_15_preview)
+  update is ArmCustomPatchSync<
     Fleet,
     FleetPatch,
     BaseParameters<Fleet> & IfMatchParameters<Fleet>
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Use operationId to keep same name as deprecated sync operation"
+  @added(Versions.v2023_06_15_preview)
+  @operationId("Fleets_Update")
+  @sharedRoute
+  updateAsync is ArmCustomPatchAsync<
+    Fleet,
+    FleetPatch,
+    BaseParameters<Fleet> & IfMatchParameters<Fleet>
+  >;
+
+  @sharedRoute // why do we need to set shared route on delete? compiler complains with an error
+  // All shared routes must agree on the value of the shared parameter.TypeSpec(@typespec/http/shared-inconsistency)
   delete is ArmResourceDeleteAsync<
     Fleet,
     BaseParameters<Fleet> & IfMatchParameters<Fleet>
