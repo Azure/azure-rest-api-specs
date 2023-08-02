@@ -7855,6 +7855,9 @@
       "properties": {
         "metrics": {
           "$ref": "#/definitions/ManagedClusterAzureMonitorProfileMetrics"
+        },
+        "logs": {
+          "$ref": "#/definitions/ManagedClusterAzureMonitorProfileLogs"
         }
       }
     },
@@ -7882,6 +7885,9 @@
         },
         "kubeStateMetrics": {
           "$ref": "#/definitions/ManagedClusterAzureMonitorProfileKubeStateMetrics"
+        },
+        "appMonitoringOpenTelemetryMetrics": {
+          "$ref": "#/definitions/ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryMetrics"
         }
       },
       "required": [
@@ -8322,6 +8328,73 @@
             "$ref": "#/definitions/KubernetesVersion"
           },
           "description": "Array of AKS supported Kubernetes versions."
+        }
+      }
+    },
+    "ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryMetrics": {
+      "type": "object",
+      "description": "Application Monitoring Open Telemetry Metrics Profile for Kubernetes Application Container Metrics. Collects OpenTelemetry metrics through auto-instrumentation of the application using Azure Monitor OpenTelemetry based SDKs. See aka.ms/AzureMonitorApplicationMonitoring for an overview.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates if Application Monitoring Open Telemetry Metrics is enabled or not."
+        }
+      }
+    },
+    "ManagedClusterAzureMonitorProfileLogs": {
+      "type": "object",
+      "description": "Logs profile for the Azure Monitor Infrastructure and Application Logs. Collect out-of-the-box Kubernetes infrastructure & application logs to send to Azure Monitor. See aka.ms/AzureMonitorContainerInsights for an overview.",
+      "properties": {
+        "containerInsights": {
+          "$ref": "#/definitions/ManagedClusterAzureMonitorProfileContainerInsights"
+        },
+        "appMonitoring": {
+          "$ref": "#/definitions/ManagedClusterAzureMonitorProfileAppMonitoring"
+        }
+      }
+    },
+    "ManagedClusterAzureMonitorProfileContainerInsights": {
+      "type": "object",
+      "description": "Azure Monitor Container Insights Profile for Kubernetes Events, Inventory and Container stdout & stderr logs etc. See aka.ms/AzureMonitorContainerInsights for an overview.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates if Azure Monitor Container Insights Logs Addon is enabled or not."
+        },
+        "logAnalyticsWorkspaceResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.OperationalInsights/workspaces"
+              }
+            ]
+          },
+          "description": "Fully Qualified ARM Resource Id of Azure Log Analytics Workspace for storing Azure Monitor Container Insights Logs."
+        },
+        "windowsHostLogs": {
+          "$ref": "#/definitions/ManagedClusterAzureMonitorProfileWindowsHostLogs"
+        }
+      }
+    },
+    "ManagedClusterAzureMonitorProfileAppMonitoring": {
+      "type": "object",
+      "description": "Application Monitoring Profile for Kubernetes Application Container. Collects application logs, metrics and traces through auto-instrumentation of the application using Azure Monitor OpenTelemetry based SDKs. See aka.ms/AzureMonitorApplicationMonitoring for an overview.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates if Application Monitoring enabled or not."
+        }
+      }
+    },
+    "ManagedClusterAzureMonitorProfileWindowsHostLogs": {
+      "type": "object",
+      "description": "Windows Host Logs Profile for Kubernetes Windows Nodes Log Collection. Collects ETW, Event Logs and Text logs etc. See aka.ms/AzureMonitorContainerInsights for an overview.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates if Windows Host Log Collection is enabled or not for Azure Monitor Container Insights Logs Addon."
         }
       }
     }
