@@ -38,7 +38,6 @@ These settings apply only when `--tag=package-2022-10` is specified on the comma
 ```yaml $(tag) == 'package-2022-10'
 input-file:
   - Microsoft.ResourceHealth/stable/2022-10-01/ResourceHealth.json
-  - Microsoft.ResourceHealth/stable/2018-07-01/ResourceHealth.json
 ```
 ### Tag: package-preview-2022-10
 
@@ -47,7 +46,6 @@ These settings apply only when `--tag=package-preview-2022-10` is specified on t
 ``` yaml $(tag) == 'package-preview-2022-10'
 input-file:
   - Microsoft.ResourceHealth/preview/2022-10-01-preview/ResourceHealth.json
-  - Microsoft.ResourceHealth/stable/2018-07-01/ResourceHealth.json
 ```
 
 ### Tag: package-2022-05
@@ -57,7 +55,6 @@ These settings apply only when `--tag=package-2022-05` is specified on the comma
 ``` yaml $(tag) == 'package-2022-05'
 input-file:
   - Microsoft.ResourceHealth/stable/2022-05-01/ResourceHealth.json
-  - Microsoft.ResourceHealth/stable/2018-07-01/ResourceHealth.json
 ```
 
 ### Tag: package-preview-2022-05-01
@@ -67,7 +64,6 @@ These settings apply only when `--tag=package-2022-05-01-preview` is specified o
 ``` yaml $(tag) == 'package-preview-2022-05-01'
 input-file:
   - Microsoft.ResourceHealth/preview/2022-05-01-preview/ResourceHealth.json
-  - Microsoft.ResourceHealth/stable/2018-07-01/ResourceHealth.json
 ```
 
 ### Tag: package-2017-07
