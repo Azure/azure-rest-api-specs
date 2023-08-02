@@ -331,7 +331,7 @@
             "$ref": "./examples/AzureBareMetalOperations_List.json"
           }
         },
-        "summary": "Start a Bare Metal Instance.",
+        "summary": "Lists all of the available consumption REST API operations.",
         "description": "Gets a list of AzureBareMetal management operations.",
         "consumes": [
           "application/json"
@@ -348,7 +348,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/OperationList"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -1007,68 +1007,6 @@
         }
       },
       "description": "Specifies the network interfaces of a bare metal resource."
-    },
-    "OperationList": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ],
-          "description": "List of Azure Bare Metal operations"
-        }
-      },
-      "description": "List of Azure Bare Metal operations"
-    },
-    "Operation": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the operation being performed on this particular object. This name should match the action name that appears in RBAC / the event service."
-        },
-        "display": {
-          "$ref": "#/definitions/Display",
-          "description": "Displayed Azure Bare Metal operation information"
-        },
-        "isDataAction": {
-          "readOnly": true,
-          "description": "indicates whether an operation is a data action or not.",
-          "type": "boolean"
-        }
-      },
-      "description": "Azure Bare Metal operation information"
-    },
-    "Display": {
-      "type": "object",
-      "properties": {
-        "provider": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The localized friendly form of the resource provider name."
-        },
-        "resource": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The localized friendly form of the resource type related to this action/operation."
-        },
-        "operation": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The localized friendly name for the operation as shown to the user."
-        },
-        "description": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The localized friendly description for the operation as shown to the user."
-        }
-      },
-      "description": "Detailed Bare Metal operation information"
     },
     "AzureBareMetalStorageInstancesListResult": {
       "type": "object",
