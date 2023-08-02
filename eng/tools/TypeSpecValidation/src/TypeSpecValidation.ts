@@ -62,7 +62,9 @@ class CompileRule implements TSVRule {
     if (await checkFileExists(path.join(folder, "main.tsp"))) {
       let [std, err] = await runCmd(`npx --no tsp compile . --warn-as-error`, folder);
       stdOutput += std;
-      if (err) {
+      console.log("errrr");
+      console.log(err);
+      if (err == null) {
         success = false;
         errorOutput += err;
       }
@@ -73,7 +75,7 @@ class CompileRule implements TSVRule {
         folder
       );
       stdOutput += std;
-      if (err) {
+      if (err == null) {
         success = false;
         errorOutput += err;
       }
@@ -139,7 +141,7 @@ async function runCmd(cmd: string, cwd: string) {
     )
   )) as any;
 
-  return [stdout, stderr + err.message] as string[];
+  return [stdout, stderr + err?.message] as string[];
 }
 
 async function checkFileExists(file: string) {
@@ -164,12 +166,13 @@ export async function main() {
   let success = true;
   for (let i = 0; i < TSVRules.length; i++) {
     const rule = TSVRules[i];
-    console.log("Executing rule: " + rule.name);
+    console.log("\nExecuting rule: " + rule.name);
     const result = await rule.execute(folder);
-    console.log(result.stdOutput);
+    if (result.stdOutput) console.log(result.stdOutput);
     if (!result.success) {
       success = false;
-      console.log(result.errorOutput);
+      console.log("Rule " + rule.name + " failed");
+      if (result.errorOutput) console.log(result.errorOutput);
     }
   }
 
