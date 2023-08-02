@@ -1,4 +1,4 @@
-// no-op
+// no-op 2
 
 import "@typespec/http";
 import "@typespec/rest";
