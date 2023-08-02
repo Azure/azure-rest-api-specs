@@ -154,7 +154,7 @@ interface CustomUpdateOperations {
 
     @doc("The resource properties to be updated.")
     @body
-    properties: TPatchModel
+    properties: TPatchModel,
   ): ArmResponse<TResource> | ArmAcceptedResponse<"Resource update request accepted."> | ErrorResponse;
 }
 
