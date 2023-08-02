@@ -1,0 +1,36 @@
+{
+  "operationId": "ProviderLevelOperations_ValidateEnterpriseSupport",
+  "title": "ValidateEnterpriseSupport",
+  "parameters": {
+    "subscriptionId": "7217946b-e550-4057-a28d-5f9306a11a65",
+    "resourceGroupName": "rp-test-rg",
+    "api-version": "2023-05-01-preview",
+    "items": {
+      "items": [
+        {
+          "productId": "0RDCKN5233K8",
+          "skuId": "0001",
+          "quantity": 1,
+          "billingAccountId": "062d1e54-520f-52e3-88bc-743cbe1886da:5a1db64b-d348-4ead-b1b5-3accb147401c_2019-05-31",
+          "billingGroupId": "LGY3-XKNR-BG7-TGB"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "billingGroupId": "LGY3-XKNR-BG7-TGB",
+          "billingAccountId": "062d1e54-520f-52e3-88bc-743cbe1886da:5a1db64b-d348-4ead-b1b5-3accb147401c_2019-05-31",
+          "productId": "0RDCKN5233K8",
+          "skuId": "0001",
+          "quantity": 1,
+          "isEligible": true,
+          "reason": "reason of validation",
+          "reasonCode": 0
+        }
+      ]
+    }
+  }
+}
