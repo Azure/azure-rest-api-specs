@@ -100,10 +100,16 @@
       "name": "HypervMachinesController"
     },
     {
+      "name": "HypervSoftwareInventoriesController"
+    },
+    {
       "name": "HypervRunAsAccountsController"
     },
     {
       "name": "ServersController"
+    },
+    {
+      "name": "ServerSoftwareInventoriesController"
     },
     {
       "name": "ServerSitesController"
@@ -445,6 +451,51 @@
           },
           "SitesController_ListBySubscription_MinimumSet_Gen": {
             "$ref": "./examples/SitesController_ListBySubscription_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure": {
+      "get": {
+        "tags": [
+          "HypervSoftwareInventoriesController"
+        ],
+        "operationId": "HypervSoftwareInventoriesController_ListByResourceGroup",
+        "description": "List HypervVmSoftwareInventory resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HypervVmSoftwareInventoryListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "HypervSoftwareInventoriesController_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/HypervSoftwareInventoriesController_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "HypervSoftwareInventoriesController_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/HypervSoftwareInventoriesController_ListByResourceGroup_MinimumSet_Gen.json"
           }
         }
       }
@@ -2218,9 +2269,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/machines/{machineName}/softwareInventories/{default}": {
       "get": {
         "tags": [
-          "HypervMachinesController"
+          "HypervSoftwareInventoriesController"
         ],
-        "operationId": "HypervMachinesController_GetMachineSoftwareInventory",
+        "operationId": "HypervSoftwareInventoriesController_GetMachineSoftwareInventory",
         "description": "Method to get a machines software inventory like applications and roles.",
         "parameters": [
           {
@@ -2285,11 +2336,11 @@
           }
         },
         "x-ms-examples": {
-          "HypervMachinesController_GetMachineSoftwareInventory_MaximumSet_Gen": {
-            "$ref": "./examples/HypervMachinesController_GetMachineSoftwareInventory_MaximumSet_Gen.json"
+          "HypervSoftwareInventoriesController_GetMachineSoftwareInventory_MaximumSet_Gen": {
+            "$ref": "./examples/HypervSoftwareInventoriesController_GetMachineSoftwareInventory_MaximumSet_Gen.json"
           },
-          "HypervMachinesController_GetMachineSoftwareInventory_MinimumSet_Gen": {
-            "$ref": "./examples/HypervMachinesController_GetMachineSoftwareInventory_MinimumSet_Gen.json"
+          "HypervSoftwareInventoriesController_GetMachineSoftwareInventory_MinimumSet_Gen": {
+            "$ref": "./examples/HypervSoftwareInventoriesController_GetMachineSoftwareInventory_MinimumSet_Gen.json"
           }
         }
       }
@@ -3111,7 +3162,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DeleteImportMachinesJobCollection"
+              "$ref": "#/definitions/PagedDeleteImportMachinesJobCollection"
             }
           },
           "default": {
@@ -3120,6 +3171,9 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "ImportJobsController_ListDeletejobs_MaximumSet_Gen": {
@@ -3219,7 +3273,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ExportImportedMachinesJobCollection"
+              "$ref": "#/definitions/PagedExportImportedMachinesJobCollection"
             }
           },
           "default": {
@@ -3228,6 +3282,9 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "ImportJobsController_ListExportjobs_MaximumSet_Gen": {
@@ -3356,7 +3413,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importsites/{siteName}/importJobs": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importsites/{siteName}/importjobs": {
       "get": {
         "tags": [
           "ImportJobsController"
@@ -3386,7 +3443,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ImportMachinesJobImportMachinesJobCollection"
+              "$ref": "#/definitions/PagedImportMachinesJobImportMachinesJobCollection"
             }
           },
           "default": {
@@ -3395,6 +3452,9 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "ImportJobsController_ListImportjobs_MaximumSet_Gen": {
@@ -4440,7 +4500,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "body",
+            "name": "resource",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -4451,7 +4511,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM update operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
@@ -4783,7 +4843,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "body",
+            "name": "resource",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -4794,7 +4854,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM update operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SqlSite"
             }
@@ -9976,12 +10036,73 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/machines/{machineName}/softwareinventories": {
+      "get": {
+        "tags": [
+          "ServerSoftwareInventoriesController"
+        ],
+        "operationId": "ServerSoftwareInventoriesController_ListByServer",
+        "description": "List ServerSoftwareInventory resources by Server",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "description": "Site name",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "description": " A server machine name",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerSoftwareInventoryListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ServerSoftwareInventoriesController_ListByServer_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSoftwareInventoriesController_ListByServer_MaximumSet_Gen.json"
+          },
+          "ServerSoftwareInventoriesController_ListByServer_MinimumSet_Gen": {
+            "$ref": "./examples/ServerSoftwareInventoriesController_ListByServer_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/machines/{machineName}/softwareInventories/{default}": {
       "get": {
         "tags": [
-          "ServersController"
+          "ServerSoftwareInventoriesController"
         ],
-        "operationId": "ServersController_GetMachineSoftwareInventory",
+        "operationId": "ServerSoftwareInventoriesController_GetMachineSoftwareInventory",
         "description": "Method to get a machines software inventory like applications and roles.",
         "parameters": [
           {
@@ -10046,11 +10167,11 @@
           }
         },
         "x-ms-examples": {
-          "ServersController_GetMachineSoftwareInventory_MaximumSet_Gen": {
-            "$ref": "./examples/ServersController_GetMachineSoftwareInventory_MaximumSet_Gen.json"
+          "ServerSoftwareInventoriesController_GetMachineSoftwareInventory_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSoftwareInventoriesController_GetMachineSoftwareInventory_MaximumSet_Gen.json"
           },
-          "ServersController_GetMachineSoftwareInventory_MinimumSet_Gen": {
-            "$ref": "./examples/ServersController_GetMachineSoftwareInventory_MinimumSet_Gen.json"
+          "ServerSoftwareInventoriesController_GetMachineSoftwareInventory_MinimumSet_Gen": {
+            "$ref": "./examples/ServerSoftwareInventoriesController_GetMachineSoftwareInventory_MinimumSet_Gen.json"
           }
         }
       }
@@ -13478,8 +13599,7 @@
             "$ref": "#/definitions/DeleteImportMachinesJob"
           },
           "description": "Gets the list of jobs.",
-          "x-typespec-name": "DeleteImportMachinesJob[]",
-          "readOnly": true
+          "x-typespec-name": "DeleteImportMachinesJob[]"
         },
         "nextLink": {
           "type": "string",
@@ -14242,8 +14362,7 @@
             "$ref": "#/definitions/ExportImportedMachinesJob"
           },
           "description": "Gets the list of jobs.",
-          "x-typespec-name": "ExportImportedMachinesJob[]",
-          "readOnly": true
+          "x-typespec-name": "ExportImportedMachinesJob[]"
         },
         "nextLink": {
           "type": "string",
@@ -14272,7 +14391,7 @@
     },
     "ExportMachineErrorsProperties": {
       "type": "string",
-      "description": "ExportMachineErrorsProperties",
+      "description": "Export Machine Errors Properties",
       "enum": [
         "AppsAndRoles",
         "DependencyMap",
@@ -15698,6 +15817,29 @@
       },
       "description": "HyperV VM software inventory REST resource."
     },
+    "HypervVmSoftwareInventoryListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HypervVmSoftwareInventory"
+          },
+          "description": "The HypervVmSoftwareInventory items on this page",
+          "x-typespec-name": "HypervVmSoftwareInventory[]"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a HypervVmSoftwareInventory list operation.",
+      "required": [
+        "value"
+      ]
+    },
     "IisApplicationUnit": {
       "type": "object",
       "properties": {
@@ -16449,8 +16591,7 @@
             "$ref": "#/definitions/ImportMachinesJob"
           },
           "description": "Gets the list of jobs.",
-          "x-typespec-name": "ImportMachinesJob[]",
-          "readOnly": true
+          "x-typespec-name": "ImportMachinesJob[]"
         },
         "nextLink": {
           "type": "string",
@@ -17219,6 +17360,69 @@
         }
       },
       "description": "OtherDatabase in the guest virtual machine."
+    },
+    "PagedDeleteImportMachinesJobCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeleteImportMachinesJobCollection"
+          },
+          "x-ms-identifiers": [],
+          "description": "The DeleteImportMachinesJobCollection items on this page",
+          "x-typespec-name": "DeleteImportMachinesJobCollection[]",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "description": "Paged collection of DeleteImportMachinesJobCollection items"
+    },
+    "PagedExportImportedMachinesJobCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExportImportedMachinesJobCollection"
+          },
+          "x-ms-identifiers": [],
+          "description": "The ExportImportedMachinesJobCollection items on this page",
+          "x-typespec-name": "ExportImportedMachinesJobCollection[]",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "description": "Paged collection of ExportImportedMachinesJobCollection items"
+    },
+    "PagedImportMachinesJobImportMachinesJobCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImportMachinesJobImportMachinesJobCollection"
+          },
+          "x-ms-identifiers": [],
+          "description": "The ImportMachinesJobImportMachinesJobCollection items on this page",
+          "x-typespec-name": "ImportMachinesJobImportMachinesJobCollection[]",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "description": "Paged collection of ImportMachinesJobImportMachinesJobCollection items"
     },
     "PrivateEndpointConnection": {
       "type": "object",
@@ -18223,6 +18427,29 @@
         }
       ]
     },
+    "ServerSoftwareInventoryListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerSoftwareInventory"
+          },
+          "description": "The ServerSoftwareInventory items on this page",
+          "x-typespec-name": "ServerSoftwareInventory[]"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a ServerSoftwareInventory list operation.",
+      "required": [
+        "value"
+      ]
+    },
     "ServerUpdate": {
       "type": "object",
       "properties": {
@@ -18555,8 +18782,7 @@
             "applianceName"
           ],
           "description": "Gets the list of SiteHealthSummary.",
-          "x-typespec-name": "SiteHealthSummary[]",
-          "readOnly": true
+          "x-typespec-name": "SiteHealthSummary[]"
         },
         "nextLink": {
           "type": "string",
@@ -20899,8 +21125,7 @@
             "$ref": "#/definitions/V20180501PreviewVmwareRunAsAccount"
           },
           "description": "Gets the list of run as accounts.",
-          "x-typespec-name": "V20180501PreviewVmwareRunAsAccount[]",
-          "readOnly": true
+          "x-typespec-name": "V20180501PreviewVmwareRunAsAccount[]"
         },
         "nextLink": {
           "type": "string",
@@ -20908,10 +21133,7 @@
           "readOnly": true
         }
       },
-      "description": "Collection of VMware run as accounts.",
-      "required": [
-        "value"
-      ]
+      "description": "Collection of VMware run as accounts."
     },
     "VMwareDatastoreType": {
       "type": "string",
