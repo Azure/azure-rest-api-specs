@@ -57,6 +57,18 @@ directive:
       - updateRuns.json
       - updateSummaries.json
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
+suppressions:
+  - code: OperationsAPIImplementation
+    reason: We are an RPSaaS RP, for which RPSaaS automatically creates the operations API.
+  - code: PathResourceProviderNamePascalCase
+    reason: We had already gone to production with "HCI" in our namespace, so changing it to "Hci" now would be disruptive.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    reason: The linter is mistakenly thinking that paths for a singular resource that is always named default, like "/{resourceUri}/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default," is for a collection of resources.
+    from: virtualMachineInstances.json
+    where:
+      - $.paths["/{resourceUri}/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default"]
+      - $.paths["/{resourceUri}/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default/hybridIdentityMetadata/default"]
+      - $.paths[ "/{resourceUri}/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default/guestAgents/default"]
 ```
 
 
