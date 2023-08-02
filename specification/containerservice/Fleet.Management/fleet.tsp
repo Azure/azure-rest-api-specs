@@ -29,6 +29,7 @@ model Fleet is TrackedResource<FleetProperties> {
   @segment("fleets")
   @visibility("create", "read")
   name: string;
+
   ...EntityTag;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "https://github.com/Azure/typespec-azure/issues/2840"
@@ -95,11 +96,11 @@ model APIServerAccessProfile {
 
   @visibility("read", "create")
   @doc("Whether to enable apiserver vnet integration for the Fleet hub or not.")
-	enableVnetIntegration?: boolean;
+  enableVnetIntegration?: boolean;
 
   @visibility("read", "create")
   @doc("The subnet to be used when apiserver vnet integration is enabled. It is required when creating a new Fleet with BYO vnet.")
-	subnetId?: SubnetResourceId;
+  subnetId?: SubnetResourceId;
 }
 
 @doc("Agent profile for the Fleet hub.")
@@ -113,10 +114,13 @@ model AgentProfile {
 @doc("The provisioning state of the last accepted operation.")
 enum FleetProvisioningState {
   ...ResourceProvisioningState,
+
   @doc("The provisioning state of a fleet being created.")
   Creating,
+
   @doc("The provisioning state of a fleet being updated.")
   Updating,
+
   @doc("The provisioning state of a fleet being deleted.")
   Deleting,
 }
@@ -125,6 +129,7 @@ enum FleetProvisioningState {
 model FleetPatch {
   @doc("Resource tags.")
   tags?: Record<string>;
+
   // adding a response header in the model currently impacts the model used in the List result model.
   // omitting it for now as response headers do not impact SDK generation.
   // ...EtagResponseEnvelope;
@@ -159,8 +164,8 @@ interface Fleets {
   @doc("Gets a Fleet.")
   get is ArmResourceRead<Fleet>;
 
-  @doc("Creates or updates a Fleet.")
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "changing the operation-id on an existing operation is an SDK breaking change"
+  @doc("Creates or updates a Fleet.")
   @operationId("Fleets_CreateOrUpdate")
   create is ArmResourceCreateOrUpdateAsync<
     Fleet,

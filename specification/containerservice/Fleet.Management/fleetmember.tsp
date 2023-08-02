@@ -24,6 +24,7 @@ model FleetMember is ProxyResource<FleetMemberProperties> {
   @segment("members")
   @visibility("create", "read")
   name: string;
+
   ...EntityTag;
 }
 
@@ -60,10 +61,13 @@ model FleetMemberProperties {
 @doc("The provisioning state of the last accepted operation.")
 enum FleetMemberProvisioningState {
   ...ResourceProvisioningState,
+
   @doc("The provisioning state of a member joining a fleet.")
   Joining,
+
   @doc("The provisioning state of a member leaving a fleet.")
   Leaving,
+
   @doc("The provisioning state of a member being updated.")
   Updating,
 }
@@ -80,8 +84,11 @@ interface FleetMembers {
   >;
 
   @added(Versions.v2023_03_15_preview)
-  update is ArmResourcePatchAsync<FleetMember, FleetMemberProperties, BaseParameters<FleetMember> &
-  IfMatchParameters<FleetMember>>;
+  update is ArmResourcePatchAsync<
+    FleetMember,
+    FleetMemberProperties,
+    BaseParameters<FleetMember> & IfMatchParameters<FleetMember>
+  >;
 
   delete is ArmResourceDeleteAsync<
     FleetMember,
