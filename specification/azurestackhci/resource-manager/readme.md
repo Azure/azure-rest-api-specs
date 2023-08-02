@@ -65,13 +65,6 @@ suppressions:
   - code: GetCollectionOnlyHasValueAndNextLink
     reason: The linter is mistakenly thinking that paths for a singular resource that is always named default, like "/{resourceUri}/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default," is for a collection of resources.
     from: virtualMachineInstances.json
-    where:
-      - $.paths["/{resourceUri}/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default"].get
-      - $.paths["/{resourceUri}/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default"].put
-      - $.paths["/{resourceUri}/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default"].patch
-      - $.paths["/{resourceUri}/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default"].delete
-      - $.paths["/{resourceUri}/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default/hybridIdentityMetadata/default"]
-      - $.paths[ "/{resourceUri}/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default/guestAgents/default"]
 ```
 
 
