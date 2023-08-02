@@ -1,48 +1,53 @@
-import "@cadl-lang/rest";
-import "@cadl-lang/versioning";
-import "@azure-tools/cadl-providerhub";
-import "@azure-tools/cadl-providerhub-controller";
-import "@azure-tools/cadl-azure-core";
-import "@azure-tools/cadl-azure-resource-manager";
+import "@azure-tools/typespec-providerhub";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
 
 @armProviderNamespace
-@serviceTitle("SolarWinds.Observability") 
-@serviceVersion("2023-01-01-preview")
-@versionedDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-@versionedDependency(Azure.Core.Versions.v1_0_Preview_1)
-
+@service({
+  title: "SolarWinds.Observability",
+  version: "2023-07-21-preview",
+})
+@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@useDependency(Azure.Core.Versions.v1_0_Preview_1)
 namespace SolarWinds.Observability;
 
 using Azure.ResourceManager;
-using Cadl.Rest;
-using Cadl.Http;
-using Cadl.Versioning;
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using TypeSpec.Versioning;
+using Azure.Core;
 
 @doc("Reusable representation of an email address")
 @pattern("^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$")
-model email is string;
+scalar email extends string;
 
 @doc("A Organization Resource by SolarWinds")
-model SolarWindsOrganizationResource is TrackedResource<OrganizationProperties> {
+model SolarWindsOrganizationResource
+  is TrackedResource<OrganizationProperties> {
   @key("organizationName")
+  @pattern("^[a-zA-Z0-9_-]*$")
   @segment("organizations")
   @doc("Name of the Organizations resource")
   @path
   name: string;
+
   ...ManagedServiceIdentity;
-  
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @armResourceOperations
-interface Organizations extends ResourceOperations<SolarWindsOrganizationResource,OrganizationProperties> {
+interface Organizations
+  extends Azure.ResourceManager.TrackedResourceOperations<
+      SolarWindsOrganizationResource,
+      OrganizationProperties
+    > {
   @post
   @doc("List the resources currently being monitored by the SolarWinds organization resource.")
-  @segment("listMonitoredResources")
+  @action("listMonitoredResources")
   @armResourceAction(SolarWindsOrganizationResource)
-  ListMonitoredResources(
-    ...ResourceInstanceParameters<SolarWindsOrganizationResource>
+  listMonitoredResources(
+    ...ResourceInstanceParameters<SolarWindsOrganizationResource>,
   ): ArmResponse<MonitoredResourceListResponse> | ErrorResponse;
 }
 
@@ -51,30 +56,37 @@ interface Organizations extends ResourceOperations<SolarWindsOrganizationResourc
 model TagRule is ProxyResource<MonitoringTagRulesProperties> {
   @key("ruleSetName")
   @segment("tagRules")
+  @pattern("^[a-zA-Z0-9_-]*$")
   @doc("Name of the TagRule")
   @path
+  @visibility("read")
   name: string;
-  
+}
+
+@doc("Model for patching TagRules")
+model TagsPatchModel {
+  @doc("TagRule name")
+  @visibility("read")
+  name?: string;
+
+  @doc("TagRule properties")
+  properties?: TagRulePropertiesPatchModel;
+}
+
+@doc("Model for patching TagRule properties")
+model TagRulePropertiesPatchModel {
+  @doc("Set of rules for sending logs for the Monitor resource.")
+  logRules?: LogRules;
 }
 
 @armResourceOperations
-interface TagRules extends ProxyResourceOperations<TagRule>,ProxyResourceUpdate<TagRule, MonitoringTagRulesProperties>{
+interface TagRules {
+  listBySolarWindsOrganizationResource is ArmResourceListByParent<TagRule>;
+  get is ArmResourceRead<TagRule>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<TagRule>;
+  delete is ArmResourceDeleteAsync<TagRule>;
+  update is ArmCustomPatchSync<TagRule, TagsPatchModel>;
 }
-
-@doc("Single sign-on configurations for a SolarWinds resource")
-@parentResource(SolarWindsOrganizationResource)
-model SingleSignOn is ProxyResource<SolarWindsSingleSignOnProperties> {
-  @key("configurationName")
-  @segment("singleSignOnConfigurations")
-  @doc("Name of the SSO Configuration")
-  @path
-  name: string; 
-}
-
-@armResourceOperations
-interface SingleSignOnOperations extends ProxyResourceOperations<SingleSignOn>{
-}
-
 
 @doc("Properties specific to the SolarWinds Observability Organization resource")
 model OrganizationProperties {
@@ -85,13 +97,13 @@ model OrganizationProperties {
   @visibility("read")
   @doc("MonitoringStatus of the resource")
   monitoringStatus?: MonitoringStatus;
-  
+
   @doc("SW Organization properties")
   solarWindsOrganizationProperties?: SolarWindsOrganizationProperties;
 
   @doc("Marketplace details")
   marketplaceDetails?: MarketplaceDetails;
-  
+
   @doc("User details")
   userDetails?: UserDetails;
 
@@ -101,16 +113,14 @@ model OrganizationProperties {
   @visibility("read")
   @doc("Liftr resource category")
   liftrResourceCategory?: LiftrResourceCategories;
-  
+
   @visibility("read")
   @doc("Liftr resource preference. The priority of the resource.")
   liftrResourcePreference?: int32;
-
 }
 
 @doc("Marketplace details")
-model MarketplaceDetails
-{
+model MarketplaceDetails {
   @doc("Marketplace Subscription Id")
   marketplaceSubscriptionId: string;
 
@@ -146,8 +156,7 @@ model OfferDetails {
 }
 
 @doc("Properties of the SolarWinds account")
-model SolarWindsOrganizationProperties{
-
+model SolarWindsOrganizationProperties {
   @doc("User id")
   userId?: string;
 
@@ -156,30 +165,10 @@ model SolarWindsOrganizationProperties{
 
   @doc("A tag rule belonging to SolarWinds account")
   tagRule?: TagRule;
-
-  @doc("date when plan was applied")
-  singleSignOnProperties?: SolarWindsSingleSignOnProperties;
-}
-
-@doc("Single sign on Info of the SolarWinds account")
-model SolarWindsSingleSignOnProperties{
-
-  @doc("Single sign-on state")
-  singleSignOnState?: SingleSignOnStates;
-
-  @doc("The Id of the Enterprise App used for Single sign-on.")
-  enterpriseAppId?: string;
-
-  @doc("The login URL specific to this SolarWinds Organization")
-  singleSignOnUrl?: string;
-  
-  @doc("Provisioning state")
-  provisioningState?: ProvisioningState;
 }
 
 @doc("Organization Info of the SolarWinds account")
-model OrganizationInfo{
-
+model OrganizationInfo {
   @doc("Organization id")
   organizationId?: string;
 
@@ -207,75 +196,63 @@ model UserDetails {
   upn?: string;
 
   @doc("Address of user")
-  address?: string;      
+  address?: string;
 
   @maxLength(40)
   @doc("Phone number of the user used by for contacting them if needed")
   phoneNumber?: string;
 
   @doc("Country of the user")
-  country?: string;  
+  country?: string;
 }
 
 @doc("Provisioning State of the Monitor resource")
-enum ProvisioningStateValues {
-  @doc("Monitor resource creation request accepted")
-  "Accepted",
-  @doc("Monitor resource creation started")
-  "Creating",
-  @doc("Monitor resource is being updated")
-  "Updating",
-  @doc("Monitor resource deletion started")
-  "Deleting",
-  @doc("Monitor resource creation successful")
-  "Succeeded",
-  @doc("Monitor resource creation failed")
-  "Failed",
-  @doc("Monitor resource creation canceled")
-  "Canceled",
-  @doc("Monitor resource is deleted")
-  "Deleted",
-  @doc("Monitor resource state is unknown")
-  "NotSpecified"
-}
+@lroStatus
+enum ProvisioningState {
+  ...Azure.ResourceManager.ResourceProvisioningState,
 
-@knownValues(ProvisioningStateValues)
-model ProvisioningState is string {
+  @doc("Monitor resource creation request accepted")
+  Accepted,
+
+  @doc("Monitor resource creation started")
+  Creating,
+
+  @doc("Monitor resource is being updated")
+  Updating,
+
+  @doc("Monitor resource deletion started")
+  Deleting,
+
+  @doc("Monitor resource is deleted")
+  Deleted,
+
+  @doc("Monitor resource state is unknown")
+  NotSpecified,
 }
 
 @doc("Flag specifying if the resource monitoring is enabled or disabled.")
 enum MonitoringStatusValues {
   @doc("monitoring is enabled")
-  "Enabled",
+  Enabled,
+
   @doc("monitoring is disabled")
-  "Disabled"
+  Disabled,
 }
 
 @knownValues(MonitoringStatusValues)
-model MonitoringStatus is string {
-}
+scalar MonitoringStatus extends string;
 
 @doc("Liftr Resource category.")
 enum LiftrResourceCategoriesValues {
-  "Unknown",
-  "MonitorLogs"
+  @doc("Liftr Resource category is unknown")
+  Unknown,
+
+  @doc("Liftr Resource category is monitor logs")
+  MonitorLogs,
 }
 
 @knownValues(LiftrResourceCategoriesValues)
-model LiftrResourceCategories is string {
-}
-
-@doc("Various states of the SSO resource")
-enum SingleSignOnStatesValues {
-  "Initial",
-  "Enable",
-  "Disable",
-  "Existing"
-}
-
-@knownValues(SingleSignOnStatesValues)
-model SingleSignOnStates is string {
-}
+scalar LiftrResourceCategories extends string;
 
 @doc("The resource-specific properties for this resource.")
 model MonitoringTagRulesProperties {
@@ -294,47 +271,53 @@ model LogRules {
 
   @doc("Flag specifying if subscription logs should be sent for the Monitor resource.")
   sendSubscriptionLogs?: SendSubscriptionLogsStatus;
-  
+
   @doc("Flag specifying if activity logs from Azure resources should be sent for the Monitor resource.")
   sendActivityLogs?: SendActivityLogsStatus;
-  
+
   @doc("List of filtering tags to be used for capturing logs. This only takes effect if SendActivityLogs flag is enabled. If empty, all resources will be captured.\nIf only Exclude action is specified, the rules will apply to the list of all available resources. If Include actions are specified, the rules will only include resources with the associated tags.")
+  @OpenAPI.extension("x-ms-identifiers", [])
   filteringTags?: FilteringTag[];
 }
 
 @doc("Indicates whether AAD logs are being sent.")
 enum SendAadLogsStatusValues {
-  "Enabled",
-  "Disabled"
+  @doc("AAD logs are enabled")
+  Enabled,
+
+  @doc("AAD logs are disabled")
+  Disabled,
 }
 
 @knownValues(SendAadLogsStatusValues)
-model SendAadLogsStatus is string {
-}
+scalar SendAadLogsStatus extends string;
 
 @doc("Indicates whether subscription logs are being sent.")
 enum SendSubscriptionLogsStatusValues {
-  "Enabled",
-  "Disabled"
+  @doc("subscription logs are enabled")
+  Enabled,
+
+  @doc("subscription logs are disabled")
+  Disabled,
 }
 
 @knownValues(SendSubscriptionLogsStatusValues)
-model SendSubscriptionLogsStatus is string {
-}
+scalar SendSubscriptionLogsStatus extends string;
 
 @doc("Indicates whether activity logs are being sent.")
 enum SendActivityLogsStatusValues {
-  "Enabled",
-  "Disabled"
+  @doc("Activity logs are enabled")
+  Enabled,
+
+  @doc("Activity logs are disabled")
+  Disabled,
 }
 
 @knownValues(SendActivityLogsStatusValues)
-model SendActivityLogsStatus is string {
-}
+scalar SendActivityLogsStatus extends string;
 
 @doc("The definition of a filtering tag. Filtering tags are used for capturing resources and include/exclude them from being monitored.")
-model FilteringTag{
-
+model FilteringTag {
   @doc("The name (also known as the key) of the tag.")
   name?: string;
 
@@ -347,22 +330,24 @@ model FilteringTag{
 
 @doc("Valid actions for a filtering tag. Exclusion takes priority over inclusion.")
 enum TagActionValues {
-  "Include",
-  "Exclude"
+  @doc("tags are included")
+  Include,
+
+  @doc("tags are excluded")
+  Exclude,
 }
 
 @knownValues(TagActionValues)
-model TagAction is string {
-}
+scalar TagAction extends string;
 
 @doc("Details of resource being monitored by SolarWinds monitor resource")
 model MonitoredResource {
   @doc("The ARM id of the resource.")
   id: string;
-  
+
   @doc("Flag indicating if resource is sending logs to SolarWinds.")
   sendingLogs?: SendingLogsStatus;
-  
+
   @doc("Reason for why the resource is sending logs (or why it is not sending).")
   reasonForLogsStatus?: string;
 }
@@ -371,42 +356,44 @@ model MonitoredResource {
 model CompanyDetails {
   @doc("Name of the company")
   companyName?: string;
-  
+
   @doc("Address of the company")
   officeAddress?: string;
 
   @doc("Name of the country")
   country?: string;
-  
+
   @doc("Domain name")
-  domain: string;
+  domain?: string;
 
   @doc("Business name")
-  business: string;
-  
+  business?: string;
+
   @doc("Number of employees in the company")
-  numberOfEmployees: int32;
+  numberOfEmployees?: int32;
 }
 
 @doc("Indicates whether logs are being sent.")
 enum SendingLogsStatusValues {
-  "Enabled",
-  "Disabled"
+  @doc("logs are enabled")
+  Enabled,
+
+  @doc("logs are disabled")
+  Disabled,
 }
 
 @knownValues(SendingLogsStatusValues)
-model SendingLogsStatus is string {
-}
+scalar SendingLogsStatus extends string;
 
 @doc("List of all the resources being monitored by SolarWinds organization resource")
-model MonitoredResourceListResponse extends Azure.Core.Page<MonitoredResource> {}
+model MonitoredResourceListResponse
+  extends Azure.Core.Page<MonitoredResource> {}
 
 @doc("Billing source")
 enum BillingSourceValues {
   @doc("Billing source is Azure")
-  "AZURE"
+  AZURE,
 }
 
 @knownValues(BillingSourceValues)
-model BillingSource is string {
-}
+scalar BillingSource extends string;
