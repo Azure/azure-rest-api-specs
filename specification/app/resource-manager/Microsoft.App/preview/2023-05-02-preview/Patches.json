@@ -134,6 +134,63 @@
             "$ref": "./examples/Patches_Delete.json"
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "Patches"
+        ],
+        "operationId": "Patches_Skip_Unskip",
+        "description": "Skip or unskip specific patch by patch name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./Builders.json#/parameters/BuilderNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PatchNameParameter"
+          },
+          {
+            "name": "patchSkip",
+            "type": "boolean",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Patch skipping detail updated successfully."
+          },
+          "202": {
+            "description": "Updating patch skipping detail.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Patches_Delete_0": {
+            "$ref": "./examples/Patches_Skip_Unskip.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/builders/{builderName}/patches/{patchName}/apply": {
@@ -263,6 +320,7 @@
         "RebaseFailed",
         "RevisionCreationFailed",
         "ImagePushPullFailed",
+        "ManuallySkipped",
         null
       ],
       "nullable": true,
