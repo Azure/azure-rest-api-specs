@@ -30,6 +30,7 @@ model UpdateRun is ProxyResource<UpdateRunProperties> {
   @path
   @visibility("create", "read")
   name: string;
+
   ...EntityTag;
 }
 
@@ -161,18 +162,23 @@ enum ManagedClusterUpgradeType {
 enum UpdateState {
   @doc("The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has not been started.")
   NotStarted,
+
   @doc("The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that is running.")
   Running,
+
   @doc("The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that is being stopped.")
   Stopping,
+
   @doc("The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has stopped.")
   Stopped,
 
   @added(Versions.v2023_06_15_preview)
   @doc("The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has been skipped.")
   Skipped,
+
   @doc("The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has failed.")
   Failed,
+
   @doc("The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has completed.")
   Completed,
 }
