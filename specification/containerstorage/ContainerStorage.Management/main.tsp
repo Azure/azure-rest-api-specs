@@ -114,7 +114,7 @@ enum ReclaimPolicy {
 
 @doc("Model for disk for that pool is using")
 model Disk {
-  @doc("ID is the disk identifer visible to the OS. It is typically the WWN or disk ID in formats such as eui.e8238fa6bf530001001b448b45263379 or 0x5002cf6cbc5dd460")
+  @doc("ID is the disk identifier visible to the OS. It is typically the WWN or disk ID in formats such as eui.e8238fa6bf530001001b448b45263379 or 0x5002cf6cbc5dd460")
   id: string;
 
   @doc("Reference is the location of the disk in an external system.")
