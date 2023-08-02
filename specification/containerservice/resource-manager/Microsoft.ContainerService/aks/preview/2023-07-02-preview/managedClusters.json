@@ -7094,10 +7094,21 @@
           "type": "boolean",
           "description": "Whether to enable Web App Routing."
         },
-        "dnsZoneResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Resource ID of the DNS Zone to be associated with the web app. Used only when Web App Routing is enabled."
+        "dnsZoneResourceIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Network/dnszones"
+                }
+              ]
+            }
+          },
+          "maxItems": 5,
+          "description": "Resource IDs of the public DNS zones to be associated with the Web App Routing add-on. Used only when Web App Routing is enabled. All public DNS zones must be in the same resource group."
         },
         "identity": {
           "readOnly": true,
