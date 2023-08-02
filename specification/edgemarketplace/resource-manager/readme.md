@@ -29,7 +29,7 @@ title: EdgeMarketPlaceClient
 description: Edge marketplace extensions
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023
+tag: package-2023-08
 ```
 ### Tag: package-2023-08
 
