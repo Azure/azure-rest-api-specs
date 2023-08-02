@@ -2682,11 +2682,16 @@
     "SnapshotProperties": {
       "description": "All snapshot properties.",
       "type": "object",
+      "required": [
+        "filters"
+      ],
       "properties": {
         "provisioningState": {
           "description": "The provisioning state of the snapshot.",
           "enum": [
             "Creating",
+            "Updating",
+            "Deleting",
             "Succeeded",
             "Failed",
             "Canceled"
@@ -2694,7 +2699,7 @@
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "SnapshotProvisioningState",
+            "name": "ProvisioningState",
             "modelAsString": true
           }
         },
@@ -2752,7 +2757,11 @@
           "type": "integer",
           "minimum": 3600,
           "maximum": 7776000,
-          "format": "int64"
+          "format": "int64",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "size": {
           "description": "The size in bytes of the snapshot.",
