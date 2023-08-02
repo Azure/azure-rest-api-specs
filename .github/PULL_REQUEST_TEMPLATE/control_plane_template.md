@@ -4,7 +4,7 @@
 
 Please understand this diagram before proceeding. It explains how to get your PR approved & merged.
 
-![diagram](https://github.com/Azure/azure-rest-api-specs/assets/4429827/8cb0b0e5-55ba-44a4-9848-2faead57fcc0)
+![diagram](https://github.com/Azure/azure-rest-api-specs/assets/4429827/b321e1dc-5e07-4940-9cd6-a65ac6729a8b)
 
 [1] [public repo review queue], [private repo review queue]  
 The PRs are processed by time opened, ascending. Your PR may show up on 2nd or later page. 
