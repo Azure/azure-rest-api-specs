@@ -5175,6 +5175,10 @@
           "readOnly": true,
           "type": "string",
           "description": "The resourceUID uniquely identifies ManagedClusters that reuse ARM ResourceIds (i.e: create, delete, create sequence)"
+        },
+        "metricsProfile": {
+          "$ref": "#/definitions/ManagedClusterMetricsProfile",
+          "description": "Optional cluster metrics configuration."
         }
       },
       "description": "Properties of the managed cluster."
@@ -8395,6 +8399,27 @@
         "enabled": {
           "type": "boolean",
           "description": "Indicates if Windows Host Log Collection is enabled or not for Azure Monitor Container Insights Logs Addon."
+        }
+      }
+    },
+    "ManagedClusterMetricsProfile": {
+      "type": "object",
+      "description": "The metrics profile for the ManagedCluster.",
+      "properties": {
+        "costAnalysis": {
+          "$ref": "#/definitions/ManagedClusterCostAnalysis",
+          "title": "The configuration for detailed per-Kubernetes resource cost analysis."
+        }
+      }
+    },
+    "ManagedClusterCostAnalysis": {
+      "type": "object",
+      "description": "The cost analysis configuration for the cluster",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "title": "Whether to enable cost analysis",
+          "description": "The Managed Cluster sku.tier must be set to 'Standard' to enable this feature. Enabling this will add Kubernetes Namespace and Deployment details to the Cost Analysis views in the Azure portal. If not specified, the default is false. For more information see aka.ms/aks/docs/cost-analysis."
         }
       }
     }
