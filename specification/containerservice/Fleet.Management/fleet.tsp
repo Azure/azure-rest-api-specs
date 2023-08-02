@@ -160,6 +160,7 @@ interface Fleets {
   get is ArmResourceRead<Fleet>;
 
   @doc("Creates or updates a Fleet.")
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "changing the operation-id on an existing operation is an SDK breaking change"
   @operationId("Fleets_CreateOrUpdate")
   create is ArmResourceCreateOrUpdateAsync<
     Fleet,
@@ -182,7 +183,6 @@ interface Fleets {
   @doc("Lists fleets in the specified subscription and resource group.")
   listByResourceGroup is ArmResourceListByParent<Fleet>;
 
-  @operationId("Fleets_ListBySubscription")
   @doc("Lists fleets in the specified subscription.")
   listBySubscription is ArmListBySubscription<Fleet>;
 
