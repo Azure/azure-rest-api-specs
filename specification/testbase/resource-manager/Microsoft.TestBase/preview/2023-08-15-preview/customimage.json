@@ -118,7 +118,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The Test Base Custom Image was successfully created.",
+            "description": "The Test Base Custom Image was successfully created or updated.",
             "schema": {
               "$ref": "#/definitions/CustomImageResource"
             }
@@ -180,7 +180,17 @@
             "description": "The Test Base Custom Image 'delete' operation was completed successfully."
           },
           "202": {
-            "description": "The Test Base Custom Image 'delete' operation was successfully enqueued. Follow the Location header to poll for final outcome."
+            "description": "The Test Base Custom Image 'delete' operation was successfully enqueued. Follow the Location header to poll for final outcome.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The Test Base Custom Image 'delete' operation was completed successfully."
@@ -373,6 +383,12 @@
         ],
         "responses": {
           "200": {
+            "description": "The Test Base Image Definition Resource has been successfully created or updated.",
+            "schema": {
+              "$ref": "#/definitions/ImageDefinitionResource"
+            }
+          },
+          "201": {
             "description": "Create a Test Base Image Definition Resource.",
             "schema": {
               "$ref": "#/definitions/ImageDefinitionResource"
@@ -828,6 +844,7 @@
           "items": {
             "$ref": "#/definitions/VerificationResult"
           },
+          "x-ms-identifiers": [],
           "description": "The validation results of the image."
         }
       }

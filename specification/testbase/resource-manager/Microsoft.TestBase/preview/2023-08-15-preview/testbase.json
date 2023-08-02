@@ -3094,6 +3094,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The Test Base External Test Tool Resource 'create' or 'update' operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/ExternalTestToolResource"
+            }
+          },
           "201": {
             "description": "The Test Base External Test Tool Resource 'create' or 'update' operation was successfully enqueued. Check provisioningState to see detailed status.",
             "headers": {
@@ -5212,6 +5218,7 @@
           "items": {
             "$ref": "#/definitions/TestResultFirstPartyAppDefinition"
           },
+          "x-ms-identifiers": [],
           "description": "The list of first party applications tested along with the package."
         }
       }
@@ -6798,7 +6805,8 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "The resource name of the Test Base Account."
+      "description": "The resource name of the Test Base Account.",
+      "pattern": "^[A-Za-z0-9]([A-Za-z0-9_]|([-. ][A-Za-z0-9]))+$"
     },
     "PackageNameParameter": {
       "name": "packageName",
@@ -6806,7 +6814,8 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "The resource name of the Test Base Package."
+      "description": "The resource name of the Test Base Package.",
+      "pattern": "^[A-Za-z0-9]([A-Za-z0-9_]|([-. ][A-Za-z0-9]))+$"
     },
     "FavoriteProcessResourceNameParameter": {
       "name": "favoriteProcessResourceName",

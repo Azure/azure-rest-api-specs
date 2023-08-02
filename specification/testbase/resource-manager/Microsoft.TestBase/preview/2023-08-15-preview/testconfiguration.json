@@ -120,7 +120,7 @@
             }
           },
           "201": {
-            "description": "The operation is accepted.",
+            "description": "The 'create' or 'update' operation is accepted.",
             "schema": {
               "$ref": "#/definitions/TestConfigurationResource"
             }
@@ -189,6 +189,16 @@
           },
           "202": {
             "description": "The operation is accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/TestConfigurationResource"
             }
@@ -205,7 +215,7 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "TestConfigurationCreate": {
+          "TestConfigurationPatch": {
             "$ref": "./examples/TestConfigurationPatch.json"
           }
         }
@@ -278,6 +288,16 @@
         ],
         "responses": {
           "202": {
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            },
             "description": "The operation is accepted."
           },
           "200": {
@@ -643,7 +663,8 @@
               }
             },
             "weekOfMonth": {
-              "type": "integer"
+              "type": "integer",
+              "format": "int32"
             }
           },
           "required": [
