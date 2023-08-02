@@ -664,6 +664,10 @@
           "description": "The operation mode for Threat Intelligence.",
           "$ref": "#/definitions/AzureFirewallThreatIntelMode"
         },
+        "autoscaleSettings": {
+          "description": "The autoscale settings for Azure Firewall.",
+          "$ref": "#/definitions/AzureFirewallAutoScaleSettings"
+        },
         "virtualHub": {
           "$ref": "./network.json#/definitions/SubResource",
           "description": "The virtualHub to which the firewall belongs."
@@ -747,6 +751,24 @@
         "name": "AzureFirewallThreatIntelMode",
         "modelAsString": true
       }
+    },
+    "AzureFirewallAutoScaleSettings": {
+      "type": "object",
+      "properties": {
+        "minimumInstances": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of instances for autoscale.",
+          "minimum": 2
+        },
+        "maximumInstances": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of instances for autoscale.",
+          "minimum": 2,
+          "maximum": 50
+        }
+      },
     },
     "AzureFirewallAdditionalProperties": {
       "type": "object",
