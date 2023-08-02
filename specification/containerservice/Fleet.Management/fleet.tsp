@@ -174,16 +174,6 @@ interface Fleets {
       IfNoneMatchParameters<Fleet>
   >;
 
-  // #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Actual breaking change"
-  // @sharedRoute
-  // @removed(Versions.v2023_01_01)
-  // delete is ArmResourceDeleteSync<Employee>;
-  // #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Use operationId to get around same name"
-  // @sharedRoute
-  // @OpenAPI.operationId("Employees_Delete")
-  // @added(Versions.v2023_01_01)
-  // deleteAsync is ArmResourceDeleteAsync<Employee>;
-
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Actual breaking change"
   @sharedRoute
   @removed(Versions.v2023_06_15_preview)
