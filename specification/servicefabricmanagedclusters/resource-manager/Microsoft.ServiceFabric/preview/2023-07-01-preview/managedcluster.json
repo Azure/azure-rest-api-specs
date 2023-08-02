@@ -34,7 +34,7 @@
     }
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters": {
       "get": {
         "operationId": "ManagedClusters_ListByResourceGroup",
         "summary": "Gets the list of Service Fabric cluster resources created in the specified resource group.",
@@ -805,7 +805,17 @@
             "description": "OK. The request has succeeded."
           },
           "202": {
-            "description": "Accepted. The request is still running."
+            "description": "Accepted. The request is still running.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The URL to get the status of an ongoing long-running operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "The URL to get the status of a completed long-running operation.",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No Content. For Delete operation results."
