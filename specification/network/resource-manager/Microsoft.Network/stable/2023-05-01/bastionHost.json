@@ -75,6 +75,9 @@
         "x-ms-examples": {
           "Delete Bastion Host": {
             "$ref": "./examples/BastionHostDelete.json"
+          },
+          "Delete Developer Bastion Host": {
+            "$ref": "./examples/BastionHostDeveloperDelete.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -119,6 +122,9 @@
         "x-ms-examples": {
           "Get Bastion Host": {
             "$ref": "./examples/BastionHostGet.json"
+          },
+          "Get Developer Bastion Host": {
+            "$ref": "./examples/BastionHostDeveloperGet.json"
           }
         }
       },
@@ -174,6 +180,9 @@
         "x-ms-examples": {
           "Create Bastion Host": {
             "$ref": "./examples/BastionHostPut.json"
+          },
+          "Create Developer Bastion Host": {
+            "$ref": "./examples/BastionHostDeveloperPut.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -595,6 +604,15 @@
       },
       "type": "object"
     },
+    "IPRule": {
+      "properties": {
+        "addressPrefix": {
+          "type": "string",
+          "description": "Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed."
+        }
+      },
+      "type": "object"
+    },
     "BastionHostIPConfigurationPropertiesFormat": {
       "properties": {
         "subnet": {
@@ -662,6 +680,22 @@
         "dnsName": {
           "type": "string",
           "description": "FQDN for the endpoint on which bastion host is accessible."
+        },
+        "virtualNetwork": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Reference to an existing virtual network required for Developer Bastion Host only."
+        },
+        "networkAcls": {
+          "properties": {
+            "ipRules": {
+              "type": "array",
+              "items": {
+                "description": "IP rule with specific IP or IP range in CIDR format.",
+                "$ref": "#/definitions/IPRule"
+              },
+              "description": "Sets the IP ACL rules for Developer Bastion Host."
+            }
+          }
         },
         "provisioningState": {
           "readOnly": true,
