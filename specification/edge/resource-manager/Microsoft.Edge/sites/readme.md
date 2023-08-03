@@ -40,6 +40,15 @@ input-file:
   - preview/2023-08-01-preview/siteAwareResourceTypes.json
 ```
 
+### Tag: package-2023-07-01-preview
+
+These settings apply only when `--tag=package-2023-07-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-07-01-preview'
+input-file:
+  - preview/2023-07-01-preview/edgesites.json
+```
+
 ### Tag: package-2023-06-01-preview
 
 These settings apply only when `--tag=package-2023-06-01-preview` is specified on the command line.
