@@ -1,0 +1,35 @@
+parameters:
+  "service-dir":
+    default: "sdk/openai"
+  "dependencies":
+    default: ""
+emit:
+ - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{project-root}/../"
+    output-file: "{azure-resource-provider-folder}/AzureOpenAI/inference/{version-status}/{version}/generated.json"
+    azure-resource-provider-folder: "data-plane"
+    examples-directory: examples
+    omit-unreachable-types: true
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.AI.OpenAI"
+    namespace: "Azure.AI.OpenAI"
+    clear-output-folder: true
+    model-namespace: false
+  "@azure-tools/typespec-java":
+    package-dir: "azure-ai-openai"
+    namespace: "com.azure.ai.openai"
+    partial-update: true
+    enable-sync-stack: true
+    generate-tests: false
+    custom-types-subpackage: "implementation.models"
+    custom-types: "FunctionCallModelBase,FunctionCallPreset,FunctionCallPresetFunctionCallModel,FunctionNameFunctionCallModel"
+  # "@azure-tools/typespec-ts":
+  #   package-dir: "azure-ai-openai"
+  #   emitter-output-dir: "{project-root}/generated"
+  #   generateMetadata: false
+  #   generateTest: false
+  #   isModularLibrary: true
+  #   packageDetails:
+  #     name: "@azure/openai"
