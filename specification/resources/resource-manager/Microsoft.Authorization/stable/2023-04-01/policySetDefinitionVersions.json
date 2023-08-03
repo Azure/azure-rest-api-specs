@@ -50,9 +50,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/TopParameter"
           }
         ],
         "responses": {
@@ -89,13 +86,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
             "$ref": "#/parameters/ManagementGroupIdParameter"
           },
           {
-            "$ref": "#/parameters/TopParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -132,13 +126,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/TopParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -175,10 +166,14 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
             "name": "policySetDefinitionName",
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[^<>*%&:\\?.+\/]*[^<>*%&:\\?.+\/ ]+$",
             "description": "The name of the policy set definition."
           },
           {
@@ -199,9 +194,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -239,10 +231,14 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
             "name": "policySetDefinitionName",
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[^<>*%&:\\?.+\/]*[^<>*%&:\\?.+\/ ]+$",
             "description": "The name of the policy set definition."
           },
           {
@@ -254,9 +250,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -285,12 +278,17 @@
           "Retrieve a policy set definition version": {
             "$ref": "./examples/getPolicySetDefinitionVersion.json"
           }
-        },        "parameters": [
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
           {
             "name": "policySetDefinitionName",
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[^<>*%&:\\?.+\/]*[^<>*%&:\\?.+\/ ]+$",
             "description": "The name of the policy set definition."
           },
           {
@@ -302,9 +300,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -342,6 +337,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[^<>*%&:\\?.+\/]*[^<>*%&:\\?.+\/ ]+$",
             "description": "The name of the policy set definition to get."
           },
           {
@@ -386,17 +382,18 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
             "name": "policySetDefinitionName",
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[^<>*%&:\\?.+\/]*[^<>*%&:\\?.+\/ ]+$",
             "description": "The name of the policy set definition."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/TopParameter"
@@ -440,6 +437,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[^<>*%&:\\?.+\/]*[^<>*%&:\\?.+\/ ]+$",
             "description": "The name of the policy set definition."
           },
           {
@@ -483,10 +481,14 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/ManagementGroupIdParameter"
+          },
+          {
             "name": "policySetDefinitionName",
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[^<>*%&:\\?.+\/]*[^<>*%&:\\?.+\/ ]+$",
             "description": "The name of the policy set definition to create."
           },
           {
@@ -507,9 +509,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ManagementGroupIdParameter"
           }
         ],
         "responses": {
@@ -547,10 +546,14 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/ManagementGroupIdParameter"
+          },
+          {
             "name": "policySetDefinitionName",
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[^<>*%&:\\?.+\/]*[^<>*%&:\\?.+\/ ]+$",
             "description": "The name of the policy set definition."
           },
           {
@@ -562,9 +565,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ManagementGroupIdParameter"
           }
         ],
         "responses": {
@@ -593,12 +593,17 @@
           "Retrieve a policy set definition version at management group level": {
             "$ref": "./examples/getPolicySetDefinitionVersionAtManagementGroup.json"
           }
-        },        "parameters": [
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ManagementGroupIdParameter"
+          },
           {
             "name": "policySetDefinitionName",
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[^<>*%&:\\?.+\/]*[^<>*%&:\\?.+\/ ]+$",
             "description": "The name of the policy set definition."
           },
           {
@@ -610,9 +615,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ManagementGroupIdParameter"
           }
         ],
         "responses": {
@@ -646,17 +648,18 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/ManagementGroupIdParameter"
+          },
+          {
             "name": "policySetDefinitionName",
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[^<>*%&:\\?.+\/]*[^<>*%&:\\?.+\/ ]+$",
             "description": "The name of the policy set definition."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ManagementGroupIdParameter"
           },
           {
             "$ref": "#/parameters/TopParameter"

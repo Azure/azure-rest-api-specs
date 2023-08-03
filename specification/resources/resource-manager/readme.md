@@ -111,6 +111,12 @@ suppressions:
   - code: PathForPutOperation
     from: policyAssignments.json
     reason: Policy assignments can be created at management group or subscriptions
+  - code: PathForPutOperation
+    from: policyDefinitionVersions.json
+    reason: Policy definition versions can be created at management group or subscriptions
+  - code: PathForPutOperation
+    from: policySetDefinitionVersions.json
+    reason: Policy set versions can be created at management group or subscriptions
   - code: DeleteResponseBodyEmpty
     from: policyAssignments.json
     reason: Policy assignment body is returned on delete and this must match API
@@ -120,8 +126,26 @@ suppressions:
   - code: RepeatedPathInfo
     from: policyAssignments.json
     reason: Service requires the scope to be in the body
+  - code: RepeatedPathInfo
+    from: policyDefinitionVersions.json
+    reason: Service requires the version to be in the body
+  - code: RepeatedPathInfo
+    from: policySetDefinitionVersions.json
+    reason: Service requires the version to be in the body
   - code: PutResponseSchemaDescription
     from: policyAssignments.json
+    reason: Service only returns 201 on all successful PUTs
+  - code: PutResponseSchemaDescription
+    from: policyDefinitions.json.json
+    reason: Service only returns 201 on all successful PUTs
+  - code: PutResponseSchemaDescription
+    from: policySetDefinitions.json.json
+    reason: Service only returns 201 on all successful PUTs
+  - code: PutResponseSchemaDescription
+    from: policyDefinitionVersions.json.json
+    reason: Service only returns 201 on all successful PUTs
+  - code: PutResponseSchemaDescription
+    from: policySetDefinitionVersions.json.json
     reason: Service only returns 201 on all successful PUTs
   - code: UnSupportedPatchProperties
     from: policyAssignments.json

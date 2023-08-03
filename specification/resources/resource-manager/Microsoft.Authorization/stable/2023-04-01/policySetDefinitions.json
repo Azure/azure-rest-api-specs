@@ -52,10 +52,14 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
             "name": "policySetDefinitionName",
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[^<>*%&:\\?.+\/]*[^<>*%&:\\?.+\/ ]+$",
             "description": "The name of the policy set definition to create."
           },
           {
@@ -69,9 +73,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -109,17 +110,18 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
             "name": "policySetDefinitionName",
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[^<>*%&:\\?.+\/]*[^<>*%&:\\?.+\/ ]+$",
             "description": "The name of the policy set definition to delete."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -151,17 +153,18 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
             "name": "policySetDefinitionName",
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[^<>*%&:\\?.+\/]*[^<>*%&:\\?.+\/ ]+$",
             "description": "The name of the policy set definition to get."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -199,6 +202,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[^<>*%&:\\?.+\/]*[^<>*%&:\\?.+\/ ]+$",
             "description": "The name of the policy set definition to get."
           },
           {
@@ -236,10 +240,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/PolicySetDefinitionsFilterParameter"
@@ -328,10 +332,14 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/ManagementGroupIdParameter"
+          },
+          {
             "name": "policySetDefinitionName",
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[^<>*%&:\\?.+\/]*[^<>*%&:\\?.+\/ ]+$",
             "description": "The name of the policy set definition to create."
           },
           {
@@ -345,9 +353,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ManagementGroupIdParameter"
           }
         ],
         "responses": {
@@ -385,17 +390,18 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/ManagementGroupIdParameter"
+          },
+          {
             "name": "policySetDefinitionName",
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[^<>*%&:\\?.+\/]*[^<>*%&:\\?.+\/ ]+$",
             "description": "The name of the policy set definition to delete."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ManagementGroupIdParameter"
           }
         ],
         "responses": {
@@ -427,17 +433,18 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/ManagementGroupIdParameter"
+          },
+          {
             "name": "policySetDefinitionName",
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[^<>*%&:\\?.+\/]*[^<>*%&:\\?.+\/ ]+$",
             "description": "The name of the policy set definition to get."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ManagementGroupIdParameter"
           }
         ],
         "responses": {
@@ -471,10 +478,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ManagementGroupIdParameter"
           },
           {
-            "$ref": "#/parameters/ManagementGroupIdParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/PolicySetDefinitionsFilterParameter"
@@ -505,6 +512,7 @@
   },
   "definitions": {
     "CloudError": {
+      "type": "object",
       "x-ms-external": true,
       "properties": {
         "error": {
@@ -514,6 +522,7 @@
       "description": "An error response from a policy operation."
     },
     "PolicySetDefinitionProperties": {
+      "type": "object",
       "properties": {
         "policyType": {
           "type": "string",
@@ -583,6 +592,7 @@
       "description": "The policy set definition properties."
     },
     "PolicyDefinitionReference": {
+      "type": "object",
       "properties": {
         "policyDefinitionId": {
           "type": "string",
@@ -610,6 +620,7 @@
       "description": "The policy definition reference."
     },
     "PolicyDefinitionGroup": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -638,6 +649,7 @@
       "description": "The policy definition group."
     },
     "PolicySetDefinition": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -669,6 +681,7 @@
       "x-ms-azure-resource": true
     },
     "PolicySetDefinitionListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
