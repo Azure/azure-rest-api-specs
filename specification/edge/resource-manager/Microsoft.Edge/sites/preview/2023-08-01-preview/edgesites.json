@@ -600,6 +600,11 @@
     "Site": {
       "type": "object",
       "properties": {
+        "identity": {
+          "description": "Identity of Sites resource",
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "x-ms-client-flatten": true
+        },
         "properties": {
           "$ref": "#/definitions/SiteProperties",
           "description": "The resource-specific properties for this resource.",
@@ -672,6 +677,11 @@
     "SiteUpdate": {
       "type": "object",
       "properties": {
+        "identity": {
+          "description": "Identity of Sites resource",
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "x-ms-client-flatten": true
+        },
         "properties": {
           "$ref": "#/definitions/SiteUpdateProperties",
           "x-ms-client-flatten": true
