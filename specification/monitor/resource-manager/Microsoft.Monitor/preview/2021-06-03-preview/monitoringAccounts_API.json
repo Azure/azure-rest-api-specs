@@ -205,7 +205,7 @@
           {
             "in": "body",
             "name": "azureMonitorWorkspaceProperties",
-            "description": "Properties that need to be specified to create a new workspace",
+            "description": "Properties that need to be specified to create a new Azure Monitor Workspace",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AzureMonitorWorkspaceResource"
@@ -387,7 +387,7 @@
       "type": "object",
       "properties": {
         "accountId": {
-          "description": "The immutable ID of the Azure Monitor Workspace. This property is read-only.",
+          "description": "The immutable Id of the Azure Monitor Workspace. This property is read-only.",
           "type": "string",
           "readOnly": true,
           "x-ms-mutability": [
@@ -492,7 +492,7 @@
       }
     },
     "AzureMonitorWorkspaceResourceForUpdate": {
-      "description": "Definition of ARM tracked top level resource properties for update operation",
+      "description": "Definition of ARM tracked top level resource properties for the Update operation",
       "type": "object",
       "properties": {
         "tags": {
@@ -509,7 +509,7 @@
     "AzureMonitorWorkspaceNameParameter": {
       "in": "path",
       "name": "azureMonitorWorkspaceName",
-      "description": "The name of the Azure Monitor Workspace.  The name is case insensitive",
+      "description": "The name of the Azure Monitor Workspace. The name is case insensitive",
       "required": true,
       "type": "string",
       "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$",
