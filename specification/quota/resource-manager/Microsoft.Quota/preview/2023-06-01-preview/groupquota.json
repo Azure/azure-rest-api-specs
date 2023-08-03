@@ -1222,22 +1222,6 @@
         }
       }
     },
-    "ResourceName": {
-      "type": "object",
-      "description": "Name of the resource provided by the resource Provider. This property is already included in the request URI, so it is a readonly property returned in the response.",
-      "properties": {
-        "value": {
-          "description": "Resource name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "localizedValue": {
-          "description": "Resource display name.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "GroupQuotaDetails": {
       "type": "object",
       "description": "Group Quota details.",
@@ -1252,8 +1236,20 @@
           "type": "string"
         },
         "name": {
-          "$ref": "#/definitions/ResourceName",
-          "description": "The resource name, such as SKU name."
+          "type": "object",
+          "description": "Name of the resource provided by the resource Provider. This property is already included in the request URI, so it is a readonly property returned in the response.",
+          "properties": {
+            "value": {
+              "description": "Resource name.",
+              "type": "string",
+              "readOnly": true
+            },
+            "localizedValue": {
+              "description": "Resource display name.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
         },
         "unit": {
           "description": " The usages units, such as Count and Bytes. When requesting quota, use the **unit** value returned in the GET response in the request body of your PUT operation.",
