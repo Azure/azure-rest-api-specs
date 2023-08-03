@@ -19,6 +19,10 @@ directive:
     transform: >
       $.principalId['readOnly'] = true;
       $.clientId['readOnly'] = true;
+  - from: containerregistry_build.json
+    where: $.definitions.ErrorResponse
+    transform: >
+      $['x-ms-client-name'] = 'ErrorResponseForContainerRegistry';
 ```
 
 ``` yaml $(go) && !$(track2)
