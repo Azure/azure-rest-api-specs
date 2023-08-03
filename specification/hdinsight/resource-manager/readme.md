@@ -110,12 +110,6 @@ directive:
     reason: Update the default error response to a new format would be a braking change for service.
 ```
 
-```yaml
-directive:
-  - suppress: MISSING_APIS_IN_DEFAULT_TAG
-    reason: The new added HDInsight On Aks APIs need to be separated.
-```
-
 
 ### Tag: package-2023-04-preview
 

@@ -43,8 +43,6 @@ These settings apply only when `--tag=package-2023-06-preview` is specified on t
 input-file:
   - preview/2023-06-01-preview/hdinsight.json
 suppressions:
-  - code: MISSING_APIS_IN_DEFAULT_TAG
-    reason: Remove deprecated APIs in new API version.
   - code: ResourceNameRestriction
     reason: Keep compatibility with old API version.
   - code: PatchBodyParametersSchema
