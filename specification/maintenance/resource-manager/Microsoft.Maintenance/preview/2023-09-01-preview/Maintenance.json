@@ -350,8 +350,7 @@
           "202": {
             "description": "Accepted",
             "headers": {
-              "operation-location": {
-                "description": "Put api.",
+              "Location": {
                 "type": "string"
               }
             },
@@ -360,12 +359,10 @@
             }
           },
           "404": {
-            "description": "NotFound",
-            "x-ms-error-response": true
+            "description": "NotFound"
           },
           "409": {
-            "description": "Conflict",
-            "x-ms-error-response": true
+            "description": "Conflict"
           },
           "default": {
             "description": "BadRequest",
@@ -2386,6 +2383,10 @@
       "description": "Properties for apply update",
       "type": "object",
       "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets the state of the provisioning."
+        },
         "status": {
           "description": "The status",
           "enum": [
