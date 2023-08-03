@@ -5513,33 +5513,12 @@
       },
       "description": "Auto upgrade profile for a managed cluster."
     },
-    "ControlPlaneUpgradeOverride": {
-      "type": "string",
-      "enum": [
-        "IgnoreKubernetesDeprecations"
-      ],
-      "x-ms-enum": {
-        "name": "ControlPlaneUpgradeOverride",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "IgnoreKubernetesDeprecations",
-            "description": "Upgrade the cluster control plane version without checking for recent Kubernetes deprecations usage."
-          }
-        ]
-      },
-      "description": "The list of control plane upgrade override settings."
-    },
     "UpgradeOverrideSettings": {
       "type": "object",
       "properties": {
-        "controlPlaneOverrides": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ControlPlaneUpgradeOverride"
-          },
-          "x-ms-identifiers": [],
-          "description": "List of upgrade overrides when upgrading a cluster's control plane."
+        "forceUpgrade": {
+          "type": "boolean",
+          "description": "Whether to force upgrade the cluster. Note that this option instructs upgrade operation to bypass upgrade protections such as checking for deprecated API usage. Enable this option only with caution."
         },
         "until": {
           "type": "string",
