@@ -3066,6 +3066,16 @@
         }
       }
     },
+    "AzStackHCIDraModelCustomProperties": {
+      "description": "AzStackHCI DRA model custom properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DraModelCustomProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AzStackHCI"
+    },
     "AzStackHCIFabricModelCustomProperties": {
       "description": "AzStackHCI fabric model custom properties.",
       "required": [
@@ -3262,8 +3272,20 @@
       "properties": {
         "instanceType": {
           "description": "Gets or sets the instance type.",
-          "minLength": 1,
-          "type": "string"
+          "enum": [
+            "None",
+            "VMware",
+            "AVS",
+            "Azure",
+            "AzStackHCI",
+            "HyperVMigrate",
+            "VMwareMigrate"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FabricType",
+            "modelAsString": true
+          }
         }
       },
       "discriminator": "instanceType"
@@ -3546,8 +3568,19 @@
       "properties": {
         "instanceType": {
           "description": "Gets or sets the instance type.",
-          "minLength": 1,
-          "type": "string"
+          "enum": [
+            "None",
+            "VMwareToAvs",
+            "VMwareToAvsFailback",
+            "VMwareToAzureMigrate",
+            "HyperVToAzStackHCI",
+            "VMwareToAzStackHCI"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ReplicationType",
+            "modelAsString": true
+          }
         }
       },
       "discriminator": "instanceType"
@@ -3695,8 +3728,20 @@
       "properties": {
         "instanceType": {
           "description": "Gets or sets the instance type.",
-          "minLength": 1,
-          "type": "string"
+          "enum": [
+            "None",
+            "VMware",
+            "AVS",
+            "Azure",
+            "AzStackHCI",
+            "HyperVMigrate",
+            "VMwareMigrate"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FabricType",
+            "modelAsString": true
+          }
         }
       },
       "discriminator": "instanceType"
@@ -3948,6 +3993,16 @@
           "readOnly": true
         }
       }
+    },
+    "HyperVMigrateDraModelCustomProperties": {
+      "description": "HyperVMigrate DRA model custom properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DraModelCustomProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "HyperVMigrate"
     },
     "HyperVMigrateFabricModelCustomProperties": {
       "description": "HyperV migrate fabric model custom properties.",
@@ -4927,8 +4982,19 @@
       "properties": {
         "instanceType": {
           "description": "Gets or sets the instance type.",
-          "minLength": 1,
-          "type": "string"
+          "enum": [
+            "None",
+            "VMwareToAvs",
+            "VMwareToAvsFailback",
+            "VMwareToAzureMigrate",
+            "HyperVToAzStackHCI",
+            "VMwareToAzStackHCI"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ReplicationType",
+            "modelAsString": true
+          }
         }
       },
       "discriminator": "instanceType"
@@ -5103,8 +5169,19 @@
       "properties": {
         "instanceType": {
           "description": "Gets or sets the instance type.",
-          "minLength": 1,
-          "type": "string"
+          "enum": [
+            "None",
+            "VMwareToAvs",
+            "VMwareToAvsFailback",
+            "VMwareToAzureMigrate",
+            "HyperVToAzStackHCI",
+            "VMwareToAzStackHCI"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ReplicationType",
+            "modelAsString": true
+          }
         }
       },
       "discriminator": "instanceType"
@@ -5460,8 +5537,19 @@
       "properties": {
         "instanceType": {
           "description": "Gets or sets the instance type.",
-          "minLength": 1,
-          "type": "string"
+          "enum": [
+            "None",
+            "VMwareToAvs",
+            "VMwareToAvsFailback",
+            "VMwareToAzureMigrate",
+            "HyperVToAzStackHCI",
+            "VMwareToAzStackHCI"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ReplicationType",
+            "modelAsString": true
+          }
         }
       },
       "discriminator": "instanceType"
@@ -5568,8 +5656,19 @@
       "properties": {
         "instanceType": {
           "description": "Gets or sets the instance type.",
-          "minLength": 1,
-          "type": "string"
+          "enum": [
+            "None",
+            "VMwareToAvs",
+            "VMwareToAvsFailback",
+            "VMwareToAzureMigrate",
+            "HyperVToAzStackHCI",
+            "VMwareToAzStackHCI"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ReplicationType",
+            "modelAsString": true
+          }
         }
       },
       "discriminator": "instanceType"
@@ -6678,8 +6777,17 @@
       "properties": {
         "instanceType": {
           "description": "Gets or sets the instance type.",
-          "minLength": 1,
-          "type": "string"
+          "enum": [
+            "WorkflowDetails",
+            "FailoverWorkflowDetails",
+            "TestFailoverWorkflowDetails",
+            "TestFailoverCleanupWorkflowDetails"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "WorkflowDetailsType",
+            "modelAsString": true
+          }
         },
         "affectedObjectDetails": {
           "description": "Gets or sets any custom properties of the affected object.",
