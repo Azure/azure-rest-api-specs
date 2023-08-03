@@ -79,10 +79,54 @@
           "Patches_ListByBuilderResource_0": {
             "$ref": "./examples/Patches_ListByBuilderResource.json"
           }
-        }
+        },
+        "x-ms-odata": "#/definitions/PatchResource"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/builders/{builderName}/patches/{patchName}": {
+      "get": {
+        "tags": [
+          "Patches"
+        ],
+        "operationId": "Patches_Get",
+        "description": "Get details for specific patch by patch name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./Builders.json#/parameters/BuilderNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PatchNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Patch information retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/PatchResource"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patches_Delete_0": {
+            "$ref": "./examples/Patches_Get.json"
+          }
+        }
+      },
       "delete": {
         "tags": [
           "Patches"
@@ -134,12 +178,14 @@
             "$ref": "./examples/Patches_Delete.json"
           }
         }
-      },
-      "patch": {
+      }
+    },
+    "/subscription/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/builders/{builderName}/patches/{patchName}/skip": {
+      "post": {
         "tags": [
           "Patches"
         ],
-        "operationId": "Patches_Skip_Unskip",
+        "operationId": "Patches_Skip_Configure",
         "description": "Skip or unskip specific patch by patch name.",
         "parameters": [
           {
@@ -188,7 +234,7 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Patches_Delete_0": {
-            "$ref": "./examples/Patches_Skip_Unskip.json"
+            "$ref": "./examples/Patches_Skip_Configure.json"
           }
         }
       }
@@ -199,7 +245,7 @@
           "Patches"
         ],
         "operationId": "Patches_Apply",
-        "description": "Apply a PatchResource with patch id.",
+        "description": "Apply a PatchResource with patch name.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
