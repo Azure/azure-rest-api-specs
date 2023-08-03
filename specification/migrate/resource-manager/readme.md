@@ -15,9 +15,10 @@ batch:
   - tag: package-migrate-2017-11
   - tag: package-migrate-2020-01
   - tag: package-migrate-2020-07
-  - tag: package-hubmigrate-2020-05
-  - tag: package-migrateengine-2022-05
   - tag: package-hubmigrate-2018-09
+  - tag: package-hubmigrate-2020-05
+  - tag: package-hubmigrate-2023-03
+  - tag: package-migrateengine-2022-05
 ```
 
 
@@ -86,6 +87,20 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+### Tag: package-hubmigrate-2018-09 and java
+
+These settings apply only when `--tag=package-hubmigrate-2018-09 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-hubmigrate-2018-09' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.azuremigrate.V2018_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-V2018_09_01
+regenerate-manager: true
+generate-interface: true
+```
+
+
 ### Tag: package-hubmigrate-2020-05 and java
 
 These settings apply only when `--tag=package-hubmigrate-2020-05 --java` is specified on the command line.
@@ -99,18 +114,19 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-### Tag: package-hubmigrate-2018-09 and java
+### Tag: package-hubmigrate-2023-03 and java
 
-These settings apply only when `--tag=package-hubmigrate-2018-09 --java` is specified on the command line.
+These settings apply only when `--tag=package-hubmigrate-2023-03 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-hubmigrate-2018-09' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-hubmigrate-2023-03' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.azuremigrate.V2018_09_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-V2018_09_01
+  namespace: com.microsoft.azure.management.azuremigrate.v2023_03_03
+  output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-v2023_03_03
 regenerate-manager: true
 generate-interface: true
 ```
+
 
 ### Tag: package-migrateengine-2022-05 and java
 
@@ -146,7 +162,7 @@ These are the global settings for the API.
 ``` yaml
 openapi-type: arm
 tag: package-migrate-2019-10
-tag: package-hubmigrate-2020-05
+tag: package-hubmigrate-2023-03
 ```
 
 ### Tag: package-migrate-2018-02
@@ -176,15 +192,6 @@ input-file:
 - Microsoft.Migrate/AssessmentProjects/preview/2017-11-11-preview/migrate.json
 ```
 
-### Tag: package-migrate-2017-11
-
-These settings apply only when `--tag=package-migrate-2017-11` is specified on the command line.
-
-``` yaml $(tag) == 'package-migrate-2017-11'
-input-file:
-- Microsoft.Migrate/preview/2017-11-11-preview/migrate.json
-```
-
 ### Tag: package-migrate-2020-01
 
 These settings apply only when `--tag=package-migrate-2020-01` is specified on the command line.
@@ -203,14 +210,6 @@ input-file:
 - Microsoft.OffAzure/stable/2020-07-07/migrate.json
 ```
 
-### Tag: package-hubmigrate-2020-05
-
-These settings apply only when `--tag=package-hubmigrate-2020-05` is specified on the command line.
-
-``` yaml $(tag) == 'package-hubmigrate-2020-05'
-input-file:
-- Microsoft.Migrate/MigrateProjects/stable/2020-05-01/hubmigrate.json
-```
 
 ### Tag: package-hubmigrate-2018-09
 
@@ -220,6 +219,26 @@ These settings apply only when `--tag=package-hubmigrate-2018-09` is specified o
 input-file:
 - Microsoft.Migrate/MigrateProjects/preview/2018-09-01-preview/hubmigrate.json
 ```
+
+
+### Tag: package-hubmigrate-2020-05
+
+These settings apply only when `--tag=package-hubmigrate-2020-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-hubmigrate-2020-05'
+input-file:
+- Microsoft.Migrate/MigrateProjects/stable/2020-05-01/hubmigrate.json
+```
+
+### Tag: package-hubmigrate-2023-03
+
+These settings apply only when `--tag=package-hubmigrate-2023-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-hubmigrate-2023-03'
+input-file:
+- Microsoft.Migrate/MigrateProjects/stable/2023-03-03/hubmigrate.json
+```
+
 
 ### Tag: package-migrateengine-2022-05
 
@@ -265,6 +284,5 @@ swagger-to-sdk:
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
-
 
 
