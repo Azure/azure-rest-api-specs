@@ -337,22 +337,22 @@
         "responses": {
           "202": {
             "description": "Accepted",
+            "headers": {
+              "operation-location": {
+                "description": "Put api.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ApplyUpdate"
             }
           },
           "404": {
             "description": "NotFound",
-            "schema": {
-              "$ref": "#/definitions/MaintenanceError"
-            },
             "x-ms-error-response": true
           },
           "409": {
             "description": "Conflict",
-            "schema": {
-              "$ref": "#/definitions/MaintenanceError"
-            },
             "x-ms-error-response": true
           },
           "default": {
