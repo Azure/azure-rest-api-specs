@@ -455,51 +455,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure": {
-      "get": {
-        "tags": [
-          "HypervSoftwareInventoriesController"
-        ],
-        "operationId": "HypervSoftwareInventoriesController_ListByResourceGroup",
-        "description": "List HypervVmSoftwareInventory resources by resource group",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/HypervVmSoftwareInventoryListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "HypervSoftwareInventoriesController_ListByResourceGroup_MaximumSet_Gen": {
-            "$ref": "./examples/HypervSoftwareInventoriesController_ListByResourceGroup_MaximumSet_Gen.json"
-          },
-          "HypervSoftwareInventoriesController_ListByResourceGroup_MinimumSet_Gen": {
-            "$ref": "./examples/HypervSoftwareInventoriesController_ListByResourceGroup_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites": {
       "get": {
         "tags": [
@@ -2266,6 +2221,67 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/machines/{machineName}/softwareinventories": {
+      "get": {
+        "tags": [
+          "HypervSoftwareInventoriesController"
+        ],
+        "operationId": "HypervSoftwareInventoriesController_ListByHypervMachine",
+        "description": "List HypervVmSoftwareInventory resources by HypervMachine",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "description": "Site name",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "description": " HypervMachine name",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HypervVmSoftwareInventoryListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "HypervSoftwareInventoriesController_ListByHypervMachine_MaximumSet_Gen": {
+            "$ref": "./examples/HypervSoftwareInventoriesController_ListByHypervMachine_MaximumSet_Gen.json"
+          },
+          "HypervSoftwareInventoriesController_ListByHypervMachine_MinimumSet_Gen": {
+            "$ref": "./examples/HypervSoftwareInventoriesController_ListByHypervMachine_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/machines/{machineName}/softwareInventories/{default}": {
       "get": {
         "tags": [
@@ -3162,7 +3178,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PagedDeleteImportMachinesJobCollection"
+              "$ref": "#/definitions/PagedDeleteImportMachinesJob"
             }
           },
           "default": {
@@ -3466,7 +3482,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importsites/{siteName}/ImportJobs/{jobName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importsites/{siteName}/Importjobs/{jobName}": {
       "get": {
         "tags": [
           "ImportJobsController"
@@ -4500,7 +4516,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -4511,7 +4527,20 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "ARM update operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
@@ -4843,7 +4872,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -4854,7 +4883,20 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "ARM update operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlSite"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/SqlSite"
             }
@@ -6720,6 +6762,19 @@
         "responses": {
           "200": {
             "description": "ARM update operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WebAppSite"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/WebAppSite"
             }
@@ -15795,27 +15850,22 @@
     "HypervVmSoftwareInventory": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Gets the relative URL to get this VMWare machine.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Handled by resource provider.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets the Name of the machine.",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/MachineSoftwareInventoryProperties",
-          "description": "Gets or sets software inventory properties."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
-      "description": "HyperV VM software inventory REST resource."
+      "description": "HyperV VM software inventory REST resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "HypervVmSoftwareInventoryListResult": {
       "type": "object",
@@ -17361,17 +17411,17 @@
       },
       "description": "OtherDatabase in the guest virtual machine."
     },
-    "PagedDeleteImportMachinesJobCollection": {
+    "PagedDeleteImportMachinesJob": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeleteImportMachinesJobCollection"
+            "$ref": "#/definitions/DeleteImportMachinesJob"
           },
+          "description": "The DeleteImportMachinesJob items on this page",
+          "x-typespec-name": "DeleteImportMachinesJob[]",
           "x-ms-identifiers": [],
-          "description": "The DeleteImportMachinesJobCollection items on this page",
-          "x-typespec-name": "DeleteImportMachinesJobCollection[]",
           "readOnly": true
         },
         "nextLink": {
@@ -17380,7 +17430,7 @@
           "readOnly": true
         }
       },
-      "description": "Paged collection of DeleteImportMachinesJobCollection items"
+      "description": "Paged collection of DeleteImportMachinesJob items"
     },
     "PagedExportImportedMachinesJobCollection": {
       "type": "object",
