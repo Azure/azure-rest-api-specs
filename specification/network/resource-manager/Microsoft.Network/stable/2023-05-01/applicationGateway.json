@@ -2144,6 +2144,13 @@
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the listener resource."
+        },
+        "hostNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of SNI (Server Name Indication) values for TLS Listener, The multisite TLS listener uses SNI value in the Client Hello message of the TLS handshake process to determine the domain name and route the traffic to an appropriate backend pool."
         }
       },
       "description": "Properties of listener of an application gateway."
