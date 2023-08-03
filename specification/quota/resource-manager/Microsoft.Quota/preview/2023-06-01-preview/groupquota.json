@@ -521,14 +521,14 @@
     "/providers/Microsoft.Management/managementGroups/{mgId}/{resourceProviderScope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/groupQuotaRequests": {
       "get": {
         "tags": [
-          "GroupQuotaLimits-Requests"
+          "GroupQuotaLimitsRequests"
         ],
         "summary": "List the status of all GroupQuota requests.",
         "description": "List API to check the status of a GroupQuota requests by requestId. The groupQuotaRequest history is maintained for 1 year.",
-        "operationId": "GroupQuotaLimits-Requests_List",
+        "operationId": "GroupQuotaLimitsRequests_List",
         "x-ms-examples": {
-          "GroupQuotaLimits-Requests_List": {
-            "$ref": "./examples/GroupQuotaLimits-Requests/GroupQuotaLimits-Requests_List.json"
+          "GroupQuotaLimitsRequests_List": {
+            "$ref": "./examples/GroupQuotaLimitsRequests/GroupQuotaLimitsRequests_List.json"
           }
         },
         "parameters": [
@@ -564,14 +564,14 @@
     "/providers/Microsoft.Management/managementGroups/{mgId}/{resourceProviderScope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/groupQuotaRequests/{requestId}": {
       "get": {
         "tags": [
-          "GroupQuotaLimits-Requests"
+          "GroupQuotaLimitsRequests"
         ],
         "summary": "Get the status of a single GroupQuota request by requestId.",
         "description": "Get API to check the status of a GroupQuota request by requestId.  Use the polling API - OperationsStatus URI specified in Azure-AsyncOperation header field, with retry-after duration in seconds to check the intermediate status. This API provides the finals status with the request details and status.",
-        "operationId": "GroupQuotaLimits-Requests_Get",
+        "operationId": "GroupQuotaLimitsRequests_Get",
         "x-ms-examples": {
-          "GroupQuotaLimits-Requests_Get": {
-            "$ref": "./examples/GroupQuotaLimits-Requests/GroupQuotaLimits-Requests_Get.json"
+          "GroupQuotaLimitsRequests_Get": {
+            "$ref": "./examples/GroupQuotaLimitsRequests/GroupQuotaLimitsRequests_Get.json"
           }
         },
         "parameters": [
@@ -610,14 +610,14 @@
     "/providers/Microsoft.Management/managementGroups/{mgId}/subscriptions/{subscriptionId}/{resourceProviderScope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/quotaAllocations": {
       "get": {
         "tags": [
-          "SubscriptionQuota-Allocation"
+          "SubscriptionQuotaAllocation"
         ],
         "summary": "Gets all the quota assigned to a subscription for the specific Resource Provider, Location.",
         "description": "Gets all the quota assigned to a subscription for the specific Resource Provider, Location. This will include the GroupQuota and total quota assigned to the subscription. Only the Group quota assigned to the subscription can be assigned back to the MG Group Quota.",
         "operationId": "GroupQuotaSubscriptionQuotaAllocation_List",
         "x-ms-examples": {
-          "SubscriptionQuota-Allocation_List_Request_ForCompute": {
-            "$ref": "./examples/SubscriptionQuota-Allocation/SubscriptionQuota-Allocation_List_Request-Compute.json"
+          "SubscriptionQuotaAllocation_List_Request_ForCompute": {
+            "$ref": "./examples/SubscriptionQuotaAllocation/SubscriptionQuotaAllocation_List_Request-Compute.json"
           }
         },
         "parameters": [
@@ -656,14 +656,14 @@
     "/providers/Microsoft.Management/managementGroups/{mgId}/subscriptions/{subscriptionId}/{resourceProviderScope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/quotaAllocations/{resourceName}": {
       "put": {
         "tags": [
-          "SubscriptionQuota-Allocation"
+          "SubscriptionQuotaAllocation"
         ],
         "summary": "Request to assign quota from group quota to a specific Subscription. This request will use Asynchronous pattern to check the status using Async polling as standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations.",
         "description": "Request to assign a specific resource quota from group quota to a specific Subscription. The subscriptions can also reduce the quota assigned to subscription to give back the group back to MG. The quota assignment back to MG groupQuota is limited by the GroupQuota assigned to subscription, which means the maximum unused quota assigned back to MG groupQuota will be the groupQuota assigned to the subscriptions. So, this API can used to assign Quota to subscriptions and assign back unused quota, which was previously assigned from MG groupQuota to subscription.",
         "operationId": "GroupQuotaSubscriptionQuotaAllocation_CreateOrUpdate",
         "x-ms-examples": {
-          "SubscriptionQuota-Allocation_Put_Request_ForCompute": {
-            "$ref": "./examples/SubscriptionQuota-Allocation/SubscriptionQuota-Allocation_Put_Request-Compute.json"
+          "SubscriptionQuotaAllocation_Put_Request_ForCompute": {
+            "$ref": "./examples/SubscriptionQuotaAllocation/SubscriptionQuotaAllocation_Put_Request-Compute.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -734,14 +734,14 @@
       },
       "patch": {
         "tags": [
-          "SubscriptionQuota-Allocation"
+          "SubscriptionQuotaAllocation"
         ],
         "summary": "Request to assign quota from group quota to a specific Subscription. This request will use Asynchronous pattern with 202 response and status polling API.",
         "description": "Request to assign quota from group quota to a specific Subscription. The subscriptions and reduce the quota assigned to subscription to give back the group back to MG. The quota assignment back to MG groupQuota is limited by the GroupQuota assigned to subscription, using this API. So, this API can used to assign Quota to subscriptions and assign back unused quota, which was previously assigned from MG groupQuota to subscription(s).",
         "operationId": "GroupQuotaSubscriptionQuotaAllocation_Update",
         "x-ms-examples": {
-          "SubscriptionQuota-Allocation_Patch_Request_ForCompute": {
-            "$ref": "./examples/SubscriptionQuota-Allocation/SubscriptionQuota-Allocation_Patch_Request-Compute.json"
+          "SubscriptionQuotaAllocation_Patch_Request_ForCompute": {
+            "$ref": "./examples/SubscriptionQuotaAllocation/SubscriptionQuotaAllocation_Patch_Request-Compute.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -812,14 +812,14 @@
       },
       "get": {
         "tags": [
-          "SubscriptionQuota-Allocation"
+          "SubscriptionQuotaAllocation"
         ],
         "summary": "Gets Quota assigned to a subscription for the specific Resource Provider, Location, ResourceName.",
         "description": "Gets Quota assigned to a subscription for the specific Resource Provider, Location, ResourceName. This will include the GroupQuota and total quota assigned to the subscription. Only the Group quota assigned to the subscription can be assigned back to the MG Group Quota.",
         "operationId": "GroupQuotaSubscriptionQuotaAllocation_Get",
         "x-ms-examples": {
-          "SubscriptionQuota-Allocation_Get_Request_ForCompute": {
-            "$ref": "./examples/SubscriptionQuota-Allocation/SubscriptionQuota-Allocation_Get_Request-Compute.json"
+          "SubscriptionQuotaAllocation_Get_Request_ForCompute": {
+            "$ref": "./examples/SubscriptionQuotaAllocation/SubscriptionQuotaAllocation_Get_Request-Compute.json"
           }
         },
         "parameters": [
@@ -861,14 +861,14 @@
     "/providers/Microsoft.Management/managementGroups/{mgId}/subscriptions/{subscriptionId}/{resourceProviderScope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/quotaAllocationRequests/{allocationId}": {
       "get": {
         "tags": [
-          "SubscriptionQuota-Allocation-Requests"
+          "SubscriptionQuotaAllocationRequests"
         ],
         "operationId": "GroupQuotaSubscriptionQuotaAllocationRequests_Get",
         "summary": "Get the status of the quota allocation request for the subscriptionId.",
         "description": "Get the quota allocation request status for the subscriptionId by allocationId.",
         "x-ms-examples": {
-          "SubscriptionQuota-Allocation-Requests_Get_Request_ForCompute": {
-            "$ref": "./examples/SubscriptionQuota-Allocation-Requests/SubscriptionQuota-Allocation-Requests_Get_Request-Compute.json"
+          "SubscriptionQuotaAllocationRequests_Get_Request_ForCompute": {
+            "$ref": "./examples/SubscriptionQuotaAllocationRequests/SubscriptionQuotaAllocationRequests_Get_Request-Compute.json"
           }
         },
         "parameters": [
@@ -910,14 +910,14 @@
     "/providers/Microsoft.Management/managementGroups/{mgId}/subscriptions/{subscriptionId}/{resourceProviderScope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/quotaAllocationRequests": {
       "get": {
         "tags": [
-          "SubscriptionQuota-Allocation-Requests"
+          "SubscriptionQuotaAllocationRequests"
         ],
         "operationId": "GroupQuotaSubscriptionQuotaAllocationRequests_List",
         "summary": "Lists all the quota allocation requests.to subscriptions",
         "description": "Lists all the allocation requests.",
         "x-ms-examples": {
-          "SubscriptionQuota-Allocation-Requests_List_Request_ForCompute": {
-            "$ref": "./examples/SubscriptionQuota-Allocation-Requests/SubscriptionQuota-Allocation-Requests_List_Request-Compute.json"
+          "SubscriptionQuotaAllocationRequests_List_Request_ForCompute": {
+            "$ref": "./examples/SubscriptionQuotaAllocationRequests/SubscriptionQuotaAllocationRequests_List_Request-Compute.json"
           }
         },
         "parameters": [
