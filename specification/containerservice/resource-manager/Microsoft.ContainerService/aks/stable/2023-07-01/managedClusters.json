@@ -4092,6 +4092,10 @@
           "$ref": "#/definitions/ManagedClusterAutoUpgradeProfile",
           "description": "The auto upgrade configuration."
         },
+        "upgradeSettings": {
+          "$ref": "#/definitions/ClusterUpgradeSettings",
+          "description": "Settings for upgrading a cluster."
+        },
         "autoScalerProfile": {
           "type": "object",
           "properties": {
@@ -4596,6 +4600,31 @@
         }
       },
       "description": "Auto upgrade profile for a managed cluster."
+    },
+    "UpgradeOverrideSettings": {
+      "type": "object",
+      "properties": {
+        "forceUpgrade": {
+          "type": "boolean",
+          "description": "Whether to force upgrade the cluster. Note that this option instructs upgrade operation to bypass upgrade protections such as checking for deprecated API usage. Enable this option only with caution."
+        },
+        "until": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Until when the overrides are effective. Note that this only matches the start time of an upgrade, and the effectiveness won't change once an upgrade starts even if the `until` expires as upgrade proceeds. This field is not set by default. It must be set for the overrides to take effect."
+        }
+      },
+      "description": "Settings for overrides when upgrading a cluster."
+    },
+    "ClusterUpgradeSettings": {
+      "type": "object",
+      "properties": {
+        "overrideSettings": {
+          "$ref": "#/definitions/UpgradeOverrideSettings",
+          "description": "Settings for overrides."
+        }
+      },
+      "description": "Settings for upgrading a cluster."
     },
     "ManagedClusterAADProfile": {
       "type": "object",
