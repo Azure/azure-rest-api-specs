@@ -2675,7 +2675,7 @@
         "tags": [
           "Glossary"
         ],
-        "description": "Get terms belonging to a specific glossary.",
+        "description": "Get terms belonging to a specific glossary with limit/offset pagination.",
         "operationId": "Glossary_ListGlossaryTerms",
         "x-ms-examples": {
           "Glossary_ListGlossaryTerms": {
@@ -2724,7 +2724,7 @@
         "tags": [
           "Glossary"
         ],
-        "description": "Get term headers belonging to a specific glossary.",
+        "description": "Get term headers belonging to a specific glossary with limit/offset pagination.",
         "operationId": "Glossary_ListGlossaryTermHeaders",
         "x-ms-examples": {
           "Glossary_ListGlossaryTermHeaders": {
@@ -2773,7 +2773,7 @@
         "consumes": [
           "multipart/form-data"
         ],
-        "description": "Import Glossary Terms from local csv file",
+        "description": "Import Glossary Terms from local csv file. Note Content-Type header should be multipart/form-data.",
         "operationId": "Glossary_ImportGlossaryTermsViaCsv",
         "x-ms-examples": {
           "Glossary_ImportGlossaryTermsViaCsv": {
@@ -2832,7 +2832,7 @@
         "consumes": [
           "multipart/form-data"
         ],
-        "description": "Import Glossary Terms from local csv file by glossaryName",
+        "description": "Import Glossary Terms from local csv file by glossaryName. Note this API has been deprecated. Please use /catalog/api/glossary/{glossaryGuid}/terms/import",
         "operationId": "Glossary_ImportGlossaryTermsViaCsvByGlossaryName",
         "x-ms-examples": {
           "Glossary_ImportGlossaryTermsViaCsvByGlossaryName": {
@@ -2840,6 +2840,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Content-Type"
+          },
           {
             "$ref": "#/parameters/glossaryName"
           },
@@ -7868,6 +7871,14 @@
       "type": "string",
       "in": "path",
       "x-ms-skip-url-encoding": true
+    },
+    "Content-Type": {
+      "name": "Content-Type",
+      "description": "Content-Type header to specify request content-type. Typically values are 'applicaiton/json' and 'multipart/form-data'.",
+      "x-ms-parameter-location": "header",
+      "required": true,
+      "in": "header",
+      "type": "string"
     },
     "guid": {
       "name": "guid",
