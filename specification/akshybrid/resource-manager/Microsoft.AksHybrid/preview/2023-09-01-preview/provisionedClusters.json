@@ -2481,7 +2481,8 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The Kubernetes cluster resource name - i.e. managedClusters, connectedClusters, provisionedClusters.",
+      "pattern": "^[a-zA-Z]*$",
+      "description": "The Kubernetes cluster resource name - i.e. managedClusters, connectedClusters, provisionedClusters, appliances.",
       "x-ms-parameter-location": "method"
     },
     "ClusterNameParameter": {
@@ -2489,6 +2490,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^.*",
       "description": "The name of the kubernetes cluster.",
       "x-ms-parameter-location": "method"
     },
