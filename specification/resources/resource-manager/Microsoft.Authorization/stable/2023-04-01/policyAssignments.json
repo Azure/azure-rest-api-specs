@@ -303,6 +303,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
@@ -320,9 +323,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -359,6 +359,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
           {
             "name": "resourceGroupName",
             "in": "path",
@@ -397,6 +400,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^.+$",
             "description": "The name of the resource."
           },
           {
@@ -407,9 +411,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {

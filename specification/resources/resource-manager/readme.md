@@ -126,6 +126,9 @@ suppressions:
   - code: UnSupportedPatchProperties
     from: policyAssignments.json
     reason: The location property represents the user-assigned identity location and is changeable for policy assignments
+  - code: PathContainsResourceType
+    from: policyAssignments.json
+    reason: The policy assignment id does contain the resource type
 
 ```
 
