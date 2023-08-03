@@ -270,6 +270,103 @@
             "$ref": "./examples/ApplyUpdates_Get.json"
           }
         }
+      },
+      "put": {
+        "tags": [
+          "ApplyUpdates"
+        ],
+        "summary": "Apply Updates to resource",
+        "description": "Apply maintenance updates to resource",
+        "operationId": "ApplyUpdates_CreateOrUpdate",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "description": "Resource provider name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "Resource type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Resource identifier",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applyUpdateName",
+            "in": "path",
+            "description": "ApplyUpdate name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applyUpdate",
+            "in": "body",
+            "description": "The ApplyUpdate",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplyUpdate"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/ApplyUpdate"
+            }
+          },
+          "404": {
+            "description": "NotFound",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            },
+            "x-ms-error-response": true
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApplyUpdates_CreateOrUpdate": {
+            "$ref": "./examples/ApplyUpdates_CreateOrUpdate_CancelMaintenance.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/applyUpdates/default": {
@@ -2283,7 +2380,10 @@
             "InProgress",
             "Completed",
             "RetryNow",
-            "RetryLater"
+            "RetryLater",
+            "NoUpdatesPending",
+            "Cancel",
+            "Cancelled"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2309,6 +2409,18 @@
               {
                 "value": "RetryLater",
                 "description": "Updates installation failed and should be retried later."
+              },
+              {
+                "value": "NoUpdatesPending",
+                "description": "No updates are pending."
+              },
+              {
+                "value": "Cancel",
+                "description": "Cancel the schedule and stop creating PMR for resources part of it. Applicable to Maintenance Configuration resource type only."
+              },
+              {
+                "value": "Cancelled",
+                "description": "Send the Cancelled response to the user if request came to cancel the schedule. Applicable to Maintenance Configuration resource type only."
               }
             ]
           }
