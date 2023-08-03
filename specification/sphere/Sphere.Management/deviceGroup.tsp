@@ -1,7 +1,6 @@
 import "@typespec/rest";
 import "@typespec/openapi";
 import "@typespec/versioning";
-import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -56,7 +55,7 @@ interface DeviceGroups
   @armResourceAction(DeviceGroup)
   @post
   countDevices(
-    ...ResourceInstanceParameters<DeviceGroup>
+    ...ResourceInstanceParameters<DeviceGroup>,
   ): ArmResponse<CountDeviceResponse> | ErrorResponse;
 
   @autoRoute
@@ -75,7 +74,7 @@ interface DeviceGroups
 
     @doc("Bulk claim devices request body.")
     @body
-    claimDevicesRequest: ClaimDevicesRequest
+    claimDevicesRequest: ClaimDevicesRequest,
   ): ArmAcceptedResponse | ErrorResponse;
 }
 
