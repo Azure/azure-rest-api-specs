@@ -366,7 +366,8 @@
           "ApplyUpdates_CreateOrUpdate": {
             "$ref": "./examples/ApplyUpdates_CreateOrUpdate_CancelMaintenance.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/applyUpdates/default": {
@@ -3056,7 +3057,10 @@
             "InProgress",
             "Completed",
             "RetryNow",
-            "RetryLater"
+            "RetryLater",
+            "NoUpdatesPending",
+            "Cancel",
+            "Cancelled"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -3082,6 +3086,18 @@
               {
                 "value": "RetryLater",
                 "description": "Updates installation failed and should be retried later."
+              },
+              {
+                "value": "NoUpdatesPending",
+                "description": "No updates are pending."
+              },
+              {
+                "value": "Cancel",
+                "description": "Cancel the schedule and stop creating PMR for resources part of it. Applicable to Maintenance Configuration resource type only."
+              },
+              {
+                "value": "Cancelled",
+                "description": "Send the Cancelled response to the user if request came to cancel the schedule. Applicable to Maintenance Configuration resource type only."
               }
             ]
           }
