@@ -65,6 +65,8 @@ suppressions:
   - code: GetCollectionOnlyHasValueAndNextLink
     reason: The linter is mistakenly thinking that paths for a singular resource that is always named default, like "/{resourceUri}/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default," is for a collection of resources.
     from: virtualMachineInstances.json
+  - code: TopLevelResourcesListBySubscription
+    reason: There is a 1:1 relationship between HybridCompute Machines and AzureStackHCI VirtualMachineInstances
 ```
 
 
