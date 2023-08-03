@@ -2,12 +2,11 @@ import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
-
+using Azure.Core.Traits;
 @useAuth(OAuth2Auth<[ImplicitFlow]>)
 @versioned(Easm.Versions)
 @service({
@@ -32,271 +31,295 @@ using Azure.Core;
 )
 @doc("Defender EASM discovers and maps your digital attack surface to provide an \"outside-in\" perspective using probes to discover assets. The assets are provided with detailed metadata associated, including vulnerabilities, configurations and web components, allowing customers to view and prioritize external risk. The EASM REST API enables you to develop clients that integrate with your application.")
 namespace Easm {
-    @doc("The Easm service version.")
+    @doc("The EASM Defender service version.")
     enum Versions {
         @doc("Version 2023-03-01-preview")
         @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-        v2023_03_01_preview: "2023-03-01-preview",
+        `2023-03-01-preview`,
     }
 
+    alias ServiceTraits = NoRepeatableRequests &
+        NoConditionalRequests &
+        NoClientRequestId;
+
+    alias Operations = Azure.Core.ResourceOperations<
+        ServiceTraits,
+        ErrorResponse
+    >;
+    @trait
+    model PageResponseBodyFields<TResponseFields, Context = TraitContext.List> {
+        @traitContext(Context)
+        responseFields: {
+            @traitLocation(TraitLocation.Response)
+            parameters: TResponseFields;
+        };
+    }
     @tag("Assets")
     @doc("Provides access to inventory assets.")
     interface Assets {
-        @route("/assets")
         @doc("Retrieve a list of assets for the provided search parameters.")
-        @get
-        op Assets_List(
-            ...FilterParameter,
-            ...OrderByParameter,
-            ...SkipParameter,
-            ...MaxPageSizeParameter,
-            ...MarkParameter,
-            ...ApiVersionParameter,
-        ): AssetPageResponse | ErrorResponse;
-
-        @route("/assets")
+        listAssetResource is Operations.ResourceList<
+            AssetResource,
+            AssetsListTrait
+        >;
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
         @doc("Update labels on assets matching the provided filter.")
+        @route("/assets")
         @post
-        op Assets_Update(
-            ...RequiredFilterParameter,
-            ...ApiVersionParameter,
-            @body assetUpdateRequest: AssetUpdateRequest,
-        ): TaskResponse | ErrorResponse;
-
-        @route("/assets/{assetId}")
+        updateAssets is Foundations.Operation<
+            {
+                ...AssetsUpdateParameter;
+                ...AssetUpdateData;
+            },
+            Task,
+            {},
+            ErrorResponse
+        >;
         @doc("Retrieve an asset by assetId.")
-        @get
-        op Assets_Get(
-            ...AssetIdParameter,
-            ...ApiVersionParameter,
-        ): AssetResponse | ErrorResponse;
+        getAssetResource is Operations.ResourceRead<AssetResource>;
     }
 
     @tag("Data Connections")
     @doc("Provides access to data connection resources.")
     interface DataConnections {
-        @route("/dataConnections")
         @doc("Retrieve a list of data connections.")
-        @get
-        op DataConnections_List(
-            ...SkipParameter,
-            ...MaxPageSizeParameter,
-            ...ApiVersionParameter,
-        ): DataConnectionPageResponse | ErrorResponse;
-
-        @route("/dataConnections:validate")
+        listDataConnection is Operations.ResourceList<
+            DataConnection,
+            DataConnectionsListTrait
+        >;
         @doc("Validate a data connection with a given dataConnectionName.")
-        @post
-        op DataConnections_Validate(
-            ...ApiVersionParameter,
-            @body dataConnectionRequest: DataConnectionRequest,
-        ): ValidateResponse | ErrorResponse;
-
-        @route("/dataConnections/{dataConnectionName}")
+        @action("validate")
+        validateDataConnection is Operations.ResourceCollectionAction<
+            DataConnection,
+            DataConnectionData,
+            ValidateResponse
+        >;
         @doc("Retrieve a data connection with a given dataConnectionName.")
-        @get
-        op DataConnections_Get(
-            ...DataConnectionNameParameter,
-            ...ApiVersionParameter,
-        ): DataConnectionResponse | ErrorResponse;
-
-        @route("/dataConnections/{dataConnectionName}")
+        getDataConnection is Operations.ResourceRead<DataConnection>;
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
         @doc("Create or update a data connection with a given dataConnectionName.")
         @put
-        op DataConnections_Put(
-            ...DataConnectionNameParameter,
-            ...ApiVersionParameter,
-            @body dataConnectionRequest: DataConnectionRequest,
-        ): DataConnectionResponse | ErrorResponse;
-
-        @route("/dataConnections/{dataConnectionName}")
+        putDataConnection is Foundations.ResourceOperation<
+            DataConnection,
+            DataConnectionData,
+            DataConnection,
+            {},
+            ErrorResponse
+        >;
         @doc("Delete a data connection with a given dataConnectionName.")
-        @delete
-        op DataConnections_Delete(
-            ...DataConnectionNameParameter,
-            ...ApiVersionParameter,
-        ): NoContentResponse | ErrorResponse;
+        deleteDataConnection is Operations.ResourceDelete<DataConnection>;
     }
 
     @tag("Discovery Groups")
     @doc("Provides access to discovery resources.")
     interface DiscoveryGroups {
-        @route("/discoGroups")
         @doc("Retrieve a list of discovery group for the provided search parameters.")
-        @get
-        op DiscoveryGroups_List(
-            ...FilterParameter,
-            ...SkipParameter,
-            ...MaxPageSizeParameter,
-            ...ApiVersionParameter,
-        ): DiscoGroupPageResponse | ErrorResponse;
-
-        @route("/discoGroups:validate")
+        listDiscoGroup is Operations.ResourceList<
+            DiscoGroup,
+            DiscoveryGroupsListTrait
+        >;
         @doc("Validate a discovery group with a given groupName.")
-        @post
-        op DiscoveryGroups_Validate(
-            ...ApiVersionParameter,
-            ...DiscoGroupNameParameter,
-            @body discoGroupRequest: DiscoGroupRequest,
-        ): ValidateResponse | ErrorResponse;
-
-        @route("/discoGroups/{groupName}")
+        @action("validate")
+        validateDiscoGroup is Operations.ResourceCollectionAction<
+            DiscoGroup,
+            DiscoGroupData,
+            ValidateResponse
+        >;
         @doc("Retrieve a discovery group with a given groupName.")
-        @get
-        op DiscoveryGroups_Get(
-            ...DiscoGroupNameParameter,
-            ...ApiVersionParameter,
-        ): DiscoGroupResponse | ErrorResponse;
-
-        @route("/discoGroups/{groupName}")
+        getDiscoGroup is Operations.ResourceRead<DiscoGroup>;
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
         @doc("Create a discovery group with a given groupName.")
         @put
-        op DiscoveryGroups_Put(
-            ...DiscoGroupNameParameter,
-            ...ApiVersionParameter,
-            @body discoGroupRequest: DiscoGroupRequest,
-        ): DiscoGroupResponse | ErrorResponse;
-
-        @route("/discoGroups/{groupName}:run")
+        putDiscoGroup is Foundations.ResourceOperation<
+            DiscoGroup,
+            DiscoGroupData,
+            DiscoGroup,
+            {},
+            ErrorResponse
+        >;
         @doc("Run a discovery group with a given groupName.")
-        @post
-        op DiscoveryGroups_Run(
-            ...DiscoGroupNameParameter,
-            ...ApiVersionParameter,
-        ): NoContentResponse | ErrorResponse;
-
-        @route("/discoGroups/{groupName}/runs")
+        @action("run")
+        runDiscoGroup is Operations.ResourceAction<
+            DiscoGroup,
+            {},
+            NoContentResponse
+        >;
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
         @doc("Retrieve a collection of discovery run results for a discovery group with a given groupName.")
+        @route("/discoGroups/{groupName}/runs")
         @get
-        op DiscoveryGroups_ListRuns(
-            ...DiscoGroupNameParameter,
-            ...FilterParameter,
-            ...SkipParameter,
-            ...MaxPageSizeParameter,
-            ...ApiVersionParameter,
-        ): DiscoRunPageResponse | ErrorResponse;
+        listRuns is Foundations.Operation<
+            DiscoveryGroupsListRunsParameter,
+            DiscoRunPageResponse,
+            {},
+            ErrorResponse
+        >;
     }
 
     @tag("Discovery Templates")
     @doc("Provides access to disco template resources.")
     interface DiscoveryTemplates {
-        @route("/discoTemplates")
         @doc("Retrieve a list of disco templates for the provided search parameters.")
-        @get
-        op DiscoveryTemplates_List(
-            ...FilterParameter,
-            ...SkipParameter,
-            ...MaxPageSizeParameter,
-            ...ApiVersionParameter,
-        ): DiscoTemplatePageResponse | ErrorResponse;
-
-        @route("/discoTemplates/{templateId}")
+        listDiscoTemplate is Operations.ResourceList<
+            DiscoTemplate,
+            DiscoveryTemplatesListTrait
+        >;
         @doc("Retrieve a disco template with a given templateId.")
-        @get
-        op DiscoveryTemplates_Get(
-            ...DiscoTemplateIdParameter,
-            ...ApiVersionParameter,
-        ): DiscoTemplateResponse | ErrorResponse;
+        getDiscoTemplate is Operations.ResourceRead<DiscoTemplate>;
     }
 
     @tag("Reports")
     @doc("Provides access to reporting data.")
     interface Reports {
-        @route("/reports/assets:getBillable")
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
         @doc("Get billable assets summary for the workspace.")
+        @route("/reports/assets:getBillable")
         @post
-        op Reports_Billable(
-            ...ApiVersionParameter,
-        ): ReportBillableAssetSummaryResponse | ErrorResponse;
-
-        @route("/reports/assets:getSnapshot")
+        getBillableReports is Foundations.Operation<
+            {},
+            ReportBillableAssetSummaryResponse,
+            {},
+            ErrorResponse
+        >;
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
         @doc("Get the most recent snapshot of asset summary values for the snapshot request.")
+        @route("/reports/assets:getSnapshot")
         @post
-        op Reports_Snapshot(
-            ...ApiVersionParameter,
-            @body reportAssetSnapshotRequest: ReportAssetSnapshotRequest,
-        ): ReportAssetSnapshotResponse | ErrorResponse;
-
-        @route("/reports/assets:getSummary")
+        getSnapshotReports is Foundations.Operation<
+            ReportAssetSnapshotRequest,
+            ReportAssetSnapshotResponse,
+            {},
+            ErrorResponse
+        >;
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
         @doc("Get asset summary details for the summary request.")
+        @route("/reports/assets:getSummary")
         @post
-        op Reports_Summary(
-            ...ApiVersionParameter,
-            @body reportAssetSummaryRequest: ReportAssetSummaryRequest,
-        ): ReportAssetSummaryResponse | ErrorResponse;
+        getSummaryReports is Foundations.Operation<
+            ReportAssetSummaryRequest,
+            ReportAssetSummaryResponse,
+            {},
+            ErrorResponse
+        >;
     }
 
     @tag("Saved Filters")
     @doc("Provides access to saved filter resources.")
     interface SavedFilters {
-        @route("/savedFilters")
         @doc("Retrieve a list of saved filters for the provided search parameters.")
-        @get
-        op SavedFilters_List(
-            ...FilterParameter,
-            ...SkipParameter,
-            ...MaxPageSizeParameter,
-            ...ApiVersionParameter,
-        ): SavedFilterPageResponse | ErrorResponse;
-
-        @route("/savedFilters/{filterName}")
+        listSavedFilter is Operations.ResourceList<
+            SavedFilter,
+            SavedFiltersListTrait
+        >;
         @doc("Retrieve a saved filter by filterName.")
-        @get
-        op SavedFilters_Get(
-            ...SavedFilterNameParameter,
-            ...ApiVersionParameter,
-        ): SavedFilterResponse | ErrorResponse;
-
-        @route("/savedFilters/{filterName}")
+        getSavedFilter is Operations.ResourceRead<SavedFilter>;
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
         @doc("Create or update a saved filter with a given filterName.")
         @put
-        op SavedFilters_Put(
-            ...SavedFilterNameParameter,
-            ...ApiVersionParameter,
-            @body savedFilterRequest: SavedFilterRequest,
-        ): SavedFilterResponse | ErrorResponse;
-
-        @route("/savedFilters/{filterName}")
+        putSavedFilter is Foundations.ResourceOperation<
+            SavedFilter,
+            SavedFilterData,
+            SavedFilter,
+            {},
+            ErrorResponse
+        >;
         @doc("Delete a saved filter with a given filterName.")
-        @delete
-        op SavedFilters_Delete(
-            ...SavedFilterNameParameter,
-            ...ApiVersionParameter,
-        ): NoContentResponse | ErrorResponse;
+        deleteSavedFilter is Operations.ResourceDelete<SavedFilter>;
     }
 
     @tag("Tasks")
     @doc("Provides access to task resources.")
     interface Tasks {
-        @route("/tasks")
         @doc("Retrieve a list of tasks for the provided search parameters.")
-        @get
-        op Tasks_List(
-            ...FilterParameter,
-            ...OrderByParameter,
-            ...SkipParameter,
-            ...MaxPageSizeParameter,
-            ...ApiVersionParameter,
-        ): TaskPageResponse | ErrorResponse;
-
-        @route("/tasks/{taskId}")
+        listTask is Operations.ResourceList<Task, TasksListTrait>;
         @doc("Retrieve a task by taskId.")
-        @get
-        op Tasks_Get(
-            ...TaskIdParameter,
-            ...ApiVersionParameter,
-        ): TaskResponse | ErrorResponse;
-
-        @route("/tasks/{taskId}:cancel")
+        getTask is Operations.ResourceRead<Task>;
         @doc("Cancel a task by taskId.")
-        @post
-        op Tasks_Cancel(
-            ...TaskIdParameter,
-            ...ApiVersionParameter,
-        ): TaskResponse | ErrorResponse;
+        @action("cancel")
+        cancelTask is Operations.ResourceAction<Task, {}, Task>;
     }
 
-    @doc("AlexaInfo")
+    alias AssetsListTrait = {
+        ...PageResponseBodyFields<{
+            @doc("The total number of items available in the full result set.")
+            totalElements?: int64;
+
+            @doc("The cursor mark to be used on the next request.  Not set if using paging.")
+            mark?: string;
+        }>;
+        ...QueryParametersTrait<{
+            ...FilterQueryParameter;
+            ...OrderByParameter;
+            ...SkipQueryParameter;
+            ...MaxPageSizeQueryParameter;
+            ...MarkParameter;
+        }>;
+    };
+    alias AssetsUpdateParameter = {
+        ...RequiredFilterParameter;
+    };
+    alias DataConnectionsListTrait = {
+        ...PageResponseBodyFields<{
+            @doc("The total number of items available in the full result set.")
+            totalElements?: int64;
+        }>;
+        ...QueryParametersTrait<{
+            ...SkipQueryParameter;
+            ...MaxPageSizeQueryParameter;
+        }>;
+    };
+    alias DiscoveryGroupsListTrait = {
+        ...PageResponseBodyFields<{
+            @doc("The total number of items available in the full result set.")
+            totalElements?: int64;
+        }>;
+        ...QueryParametersTrait<{
+            ...FilterQueryParameter;
+            ...SkipQueryParameter;
+            ...MaxPageSizeQueryParameter;
+        }>;
+    };
+    alias DiscoveryGroupsListRunsParameter = {
+        ...FilterQueryParameter;
+        ...SkipQueryParameter;
+        ...MaxPageSizeQueryParameter;
+        ...DiscoGroupNameParameter;
+    };
+    alias DiscoveryTemplatesListTrait = {
+        ...PageResponseBodyFields<{
+            @doc("The total number of items available in the full result set.")
+            totalElements?: int64;
+        }>;
+        ...QueryParametersTrait<{
+            ...FilterQueryParameter;
+            ...SkipQueryParameter;
+            ...MaxPageSizeQueryParameter;
+        }>;
+    };
+    alias SavedFiltersListTrait = {
+        ...PageResponseBodyFields<{
+            @doc("The total number of items available in the full result set.")
+            totalElements?: int64;
+        }>;
+        ...QueryParametersTrait<{
+            ...FilterQueryParameter;
+            ...SkipQueryParameter;
+            ...MaxPageSizeQueryParameter;
+        }>;
+    };
+    alias TasksListTrait = {
+        ...PageResponseBodyFields<{
+            @doc("The total number of items available in the full result set.")
+            totalElements?: int64;
+        }>;
+        ...QueryParametersTrait<{
+            ...FilterQueryParameter;
+            ...OrderByParameter;
+            ...SkipQueryParameter;
+            ...MaxPageSizeQueryParameter;
+        }>;
+    };
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model AlexaInfo {
         alexaRank?: int64;
         category?: string;
@@ -306,7 +329,7 @@ namespace Easm {
         recent?: boolean;
     }
 
-    @doc("AsAsset")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model AsAsset extends InventoryAsset {
         asn?: int64;
         asNames?: ObservedString[];
@@ -335,10 +358,8 @@ namespace Easm {
         detailedFromWhoisAt?: utcDateTime;
     }
 
-    @doc("AssetPageResponse")
+    @doc("The page of assets that match the provided metric.")
     model AssetPageResponse {
-        @statusCode statusCode: 200;
-
         @doc("The total number of items available in the full result set.")
         totalElements?: int64;
 
@@ -349,16 +370,18 @@ namespace Easm {
         nextLink?: string;
 
         @doc("The items in the current page of results.")
-        value?: AssetResponse[];
+        value?: AssetResource[];
     }
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    @doc("The items in the current page of results.")
     @discriminator("kind")
-    @doc("AssetResponse")
-    model AssetResponse {
-        @statusCode statusCode: 200;
-
+    @resource("assets")
+    model AssetResource {
         @doc("The system generated unique id for the resource.")
-        id?: string;
+        @key("assetId")
+        @visibility("read")
+        id: string;
 
         @doc("The caller provided unique name for the resource.")
         name?: string;
@@ -374,6 +397,7 @@ namespace Easm {
 
         @doc("The date this asset was last updated for this workspace.")
         updatedDate?: utcDateTime;
+
         state?: AssetState;
 
         @doc("An optional customer provided identifier for this asset.")
@@ -390,10 +414,11 @@ namespace Easm {
 
         @doc("The history of how this asset was pulled into the workspace through the discovery process.")
         auditTrail?: AuditTrailItem[];
+
         reason?: string;
     }
 
-    @doc("AssetSecurityPolicy")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model AssetSecurityPolicy {
         policyName?: string;
         isAffected?: boolean;
@@ -405,7 +430,7 @@ namespace Easm {
         sources?: Source[];
     }
 
-    @doc("AssetSummaryResponse")
+    @doc("The collection of asset summaries.")
     model AssetSummaryResponse {
         @doc("The name of the summary response.  Depending on the request time this will either be the asset filter, risk category, or risk metric.")
         displayName?: string;
@@ -438,8 +463,8 @@ namespace Easm {
         children?: AssetSummaryResponse[];
     }
 
-    @doc("AssetUpdateRequest")
-    model AssetUpdateRequest {
+    @doc("A request body used to update an asset.")
+    model AssetUpdateData {
         @doc("The state to update the asset to.")
         state?: AssetUpdateState;
 
@@ -453,7 +478,7 @@ namespace Easm {
         transfers?: AssetUpdateTransfers;
     }
 
-    @doc("Attribute")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model Attribute {
         attributeType?: string;
         attributeValue?: string;
@@ -464,7 +489,7 @@ namespace Easm {
         recent?: boolean;
     }
 
-    @doc("AuditTrailItem")
+    @doc("The history of how this asset was pulled into the workspace through the discovery process.")
     model AuditTrailItem {
         @doc("The system generated unique id for the resource.")
         id?: string;
@@ -482,7 +507,7 @@ namespace Easm {
         reason?: string;
     }
 
-    @doc("AzureDataExplorerDataConnectionProperties")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model AzureDataExplorerDataConnectionProperties
         extends DataConnectionProperties {
         @doc("The azure data explorer cluster name")
@@ -495,12 +520,13 @@ namespace Easm {
         databaseName?: string;
     }
 
-    @doc("Banner")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model Banner {
         port?: int32;
 
-        @projectedName("csharp", "BannerProperty")
+        @projectedName("csharp", "bannerProperty")
         banner?: string;
+
         firstSeen?: utcDateTime;
         lastSeen?: utcDateTime;
         count?: int64;
@@ -511,7 +537,7 @@ namespace Easm {
         sources?: Source[];
     }
 
-    @doc("CVSS3Summary")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model CVSS3Summary {
         version?: string;
         vectorString?: string;
@@ -532,7 +558,7 @@ namespace Easm {
         impactScore?: float32;
     }
 
-    @doc("ContactAsset")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model ContactAsset extends InventoryAsset {
         email?: string;
         names?: ObservedString[];
@@ -543,7 +569,7 @@ namespace Easm {
         count?: int64;
     }
 
-    @doc("Cookie")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model Cookie {
         cookieName?: string;
         cookieDomain?: string;
@@ -554,7 +580,7 @@ namespace Easm {
         cookieExpiryDate?: utcDateTime;
     }
 
-    @doc("Cve")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model Cve {
         name?: string;
         cweId?: string;
@@ -562,10 +588,8 @@ namespace Easm {
         cvss3Summary?: CVSS3Summary;
     }
 
-    @doc("DataConnectionPageResponse")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model DataConnectionPageResponse {
-        @statusCode statusCode: 200;
-
         @doc("The total number of items available in the full result set.")
         totalElements?: int64;
 
@@ -573,15 +597,15 @@ namespace Easm {
         nextLink?: string;
 
         @doc("The items in the current page of results.")
-        value?: DataConnectionResponse[];
+        value?: DataConnection[];
     }
 
-    @doc("DataConnectionProperties")
+    @doc("The properties required to establish connection to a particular service")
     model DataConnectionProperties {}
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     @discriminator("kind")
-    @doc("DataConnectionRequest")
-    model DataConnectionRequest {
+    model DataConnectionData {
         @doc("The name of data connection")
         name?: string;
 
@@ -595,16 +619,17 @@ namespace Easm {
         frequencyOffset?: int32;
     }
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     @discriminator("kind")
-    @doc("DataConnectionResponse")
-    model DataConnectionResponse {
-        @statusCode statusCode: 200;
-
+    @resource("dataConnections")
+    model DataConnection {
         @doc("The system generated unique id for the resource.")
         id?: string;
 
         @doc("The caller provided unique name for the resource.")
-        name?: string;
+        @key("dataConnectionName")
+        @visibility("read")
+        name: string;
 
         @doc("The name that can be used for display purposes.")
         displayName?: string;
@@ -634,7 +659,7 @@ namespace Easm {
         inactiveMessage?: string;
     }
 
-    @doc("DependentResource")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model DependentResource {
         md5?: string;
         responseBodySize?: int64;
@@ -652,7 +677,7 @@ namespace Easm {
         sha256?: string;
         sha384?: string;
         sha512?: string;
-        url?: string;
+        url?: url;
         cached?: boolean;
         sriChecks?: SubResourceIntegrityCheck[];
         host?: string;
@@ -662,10 +687,8 @@ namespace Easm {
         lastObservedExpectedSriHash?: string;
     }
 
-    @doc("DiscoGroupPageResponse")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model DiscoGroupPageResponse {
-        @statusCode statusCode: 200;
-
         @doc("The total number of items available in the full result set.")
         totalElements?: int64;
 
@@ -673,11 +696,11 @@ namespace Easm {
         nextLink?: string;
 
         @doc("The items in the current page of results.")
-        value?: DiscoGroupResponse[];
+        value?: DiscoGroup[];
     }
 
-    @doc("DiscoGroupRequest")
-    model DiscoGroupRequest {
+    @doc("A request body used to create a discovery group.")
+    model DiscoGroupData {
         @doc("The name for a disco group.")
         name?: string;
 
@@ -703,15 +726,16 @@ namespace Easm {
         templateId?: string;
     }
 
-    @doc("DiscoGroupResponse")
-    model DiscoGroupResponse {
-        @statusCode statusCode: 200;
-
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    @resource("discoGroups")
+    model DiscoGroup {
         @doc("The system generated unique id for the resource.")
         id?: string;
 
         @doc("The caller provided unique name for the resource.")
-        name?: string;
+        @key("groupName")
+        @visibility("read")
+        name: string;
 
         @doc("The name that can be used for display purposes.")
         displayName?: string;
@@ -733,6 +757,8 @@ namespace Easm {
 
         @doc("The list of excludes used for the disco group runs, aka assets to exclude from the discovery algorithm.")
         excludes?: DiscoSource[];
+
+        @doc("The latest run of this disco group with some limited information, null if the group has never been run.")
         latestRun?: DiscoRunResponse;
 
         @doc("The date for the disco group was created.")
@@ -742,10 +768,8 @@ namespace Easm {
         templateId?: string;
     }
 
-    @doc("DiscoRunPageResponse")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model DiscoRunPageResponse {
-        @statusCode statusCode: 200;
-
         @doc("The total number of items available in the full result set.")
         totalElements?: int64;
 
@@ -756,7 +780,7 @@ namespace Easm {
         value?: DiscoRunResponse[];
     }
 
-    @doc("DiscoRunResponse")
+    @doc("The latest run of this disco group with some limited information, null if the group has never been run.")
     model DiscoRunResponse {
         @doc("The date for when the disco run was created in the system.")
         submittedDate?: utcDateTime;
@@ -786,7 +810,7 @@ namespace Easm {
         names?: string[];
     }
 
-    @doc("DiscoSource")
+    @doc("Source entity used to drive discovery.")
     model DiscoSource {
         @doc("The kind of disco source.")
         kind?: DiscoSourceKind;
@@ -795,10 +819,8 @@ namespace Easm {
         name?: string;
     }
 
-    @doc("DiscoTemplatePageResponse")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model DiscoTemplatePageResponse {
-        @statusCode statusCode: 200;
-
         @doc("The total number of items available in the full result set.")
         totalElements?: int64;
 
@@ -806,15 +828,16 @@ namespace Easm {
         nextLink?: string;
 
         @doc("The items in the current page of results.")
-        value?: DiscoTemplateResponse[];
+        value?: DiscoTemplate[];
     }
 
-    @doc("DiscoTemplateResponse")
-    model DiscoTemplateResponse {
-        @statusCode statusCode: 200;
-
+    @doc("The items in the current page of results.")
+    @resource("discoTemplates")
+    model DiscoTemplate {
         @doc("The system generated unique id for the resource.")
-        id?: string;
+        @key("templateId")
+        @visibility("read")
+        id: string;
 
         @doc("The caller provided unique name for the resource.")
         name?: string;
@@ -844,7 +867,7 @@ namespace Easm {
         names?: string[];
     }
 
-    @doc("DomainAsset")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model DomainAsset extends InventoryAsset {
         domain?: string;
         whoisId?: int64;
@@ -879,7 +902,7 @@ namespace Easm {
         technicalPhones?: ObservedString[];
     }
 
-    @doc("ErrorDetail")
+    @doc("This is the top-level error object whose code matches the x-ms-error-code response header.")
     model ErrorDetail {
         @doc("This is one of a server-defined set of error codes.")
         code: string;
@@ -892,18 +915,22 @@ namespace Easm {
 
         @doc("This is an array of details about specific errors that led to this reported error.")
         details?: ErrorDetail[];
+
+        @doc("This is an object containing more specific information than the current object about the error.")
         innererror?: InnerError;
     }
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     @error
-    @doc("ErrorResponse")
     model ErrorResponse {
         @header("x-ms-error-code")
         errorCode: string;
+
+        @doc("This is the top-level error object whose code matches the x-ms-error-code response header.")
         error: ErrorDetail;
     }
 
-    @doc("GuidPair")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model GuidPair {
         pageGuid?: string;
         crawlStateGuid?: string;
@@ -911,7 +938,7 @@ namespace Easm {
         recent?: boolean;
     }
 
-    @doc("HostAsset")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model HostAsset extends InventoryAsset {
         host?: string;
         domain?: string;
@@ -948,7 +975,7 @@ namespace Easm {
         ipv6?: ObservedBoolean[];
     }
 
-    @doc("HostCore")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model HostCore {
         host?: string;
         domain?: string;
@@ -990,7 +1017,7 @@ namespace Easm {
         uuid?: string;
     }
 
-    @doc("InnerError")
+    @doc("This is an object containing more specific information than the current object about the error.")
     model InnerError {
         @doc("This is a more specific error code than was provided by the containing error.")
         code?: string;
@@ -999,10 +1026,10 @@ namespace Easm {
         value?: unknown;
     }
 
-    @doc("InventoryAsset")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model InventoryAsset {}
 
-    @doc("IpAddressAsset")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model IpAddressAsset extends InventoryAsset {
         ipAddress?: string;
         asns?: ObservedLong[];
@@ -1031,10 +1058,11 @@ namespace Easm {
         ipv6?: boolean;
     }
 
-    @doc("IpBlock")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model IpBlock {
-        @projectedName("csharp", "IpBlockProperty")
+        @projectedName("csharp", "ipBlockProperty")
         ipBlock?: string;
+
         sources?: Source[];
         firstSeen?: utcDateTime;
         lastSeen?: utcDateTime;
@@ -1042,7 +1070,7 @@ namespace Easm {
         recent?: boolean;
     }
 
-    @doc("IpBlockAsset")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model IpBlockAsset extends InventoryAsset {
         ipBlock?: string;
         asns?: ObservedLong[];
@@ -1077,7 +1105,7 @@ namespace Easm {
         ipv6?: boolean;
     }
 
-    @doc("Location")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model Location {
         countryCode?: string;
         countryName?: string;
@@ -1092,7 +1120,7 @@ namespace Easm {
         metroCodeId?: int32;
     }
 
-    @doc("LogAnalyticsDataConnectionProperties")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model LogAnalyticsDataConnectionProperties
         extends DataConnectionProperties {
         @doc("log analytics api key")
@@ -1102,89 +1130,57 @@ namespace Easm {
         workspaceId?: string;
     }
 
-    @doc("ObservedBoolean")
-    model ObservedBoolean {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    model ObservedBoolean extends ObservedValue {
         value?: boolean;
-        firstSeen?: utcDateTime;
-        lastSeen?: utcDateTime;
-        count?: int64;
         sources?: Source[];
-        recent?: boolean;
     }
 
-    @doc("ObservedHeader")
-    model ObservedHeader {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    model ObservedHeader extends ObservedValue {
         headerName?: string;
         headerValue?: string;
-        firstSeen?: utcDateTime;
-        lastSeen?: utcDateTime;
-        count?: int64;
-        recent?: boolean;
     }
 
-    @doc("ObservedInteger")
-    model ObservedInteger {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    model ObservedInteger extends ObservedValue {
         value?: int32;
-        firstSeen?: utcDateTime;
-        lastSeen?: utcDateTime;
-        count?: int64;
         sources?: Source[];
-        recent?: boolean;
     }
 
-    @doc("ObservedIntegers")
-    model ObservedIntegers {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    model ObservedIntegers extends ObservedValue {
         values?: int32[];
-        firstSeen?: utcDateTime;
-        lastSeen?: utcDateTime;
-        count?: int64;
         sources?: Source[];
-        recent?: boolean;
     }
 
-    @doc("ObservedLocation")
-    model ObservedLocation {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    model ObservedLocation extends ObservedValue {
         value?: Location;
-        firstSeen?: utcDateTime;
-        lastSeen?: utcDateTime;
-        count?: int64;
-        recent?: boolean;
         sources?: Source[];
     }
 
-    @doc("ObservedLong")
-    model ObservedLong {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    model ObservedLong extends ObservedValue {
         value?: int64;
-        firstSeen?: utcDateTime;
-        lastSeen?: utcDateTime;
-        count?: int64;
         sources?: Source[];
-        recent?: boolean;
     }
 
-    @doc("ObservedPortState")
-    model ObservedPortState {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    model ObservedPortState extends ObservedValue {
         value?: ObservedPortStateValue;
         port?: int32;
-        firstSeen?: utcDateTime;
-        lastSeen?: utcDateTime;
-        count?: int64;
-        recent?: boolean;
     }
 
-    @doc("ObservedString")
-    model ObservedString {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    model ObservedString extends ObservedValue {
         value?: string;
-        firstSeen?: utcDateTime;
-        lastSeen?: utcDateTime;
-        count?: int64;
         sources?: Source[];
-        recent?: boolean;
     }
 
-    @doc("PageAsset")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model PageAsset extends InventoryAsset {
-        url?: string;
+        url?: url;
         httpMethod?: string;
         service?: string;
         ipAddresses?: ObservedString[];
@@ -1247,7 +1243,7 @@ namespace Easm {
         ipv6?: ObservedBoolean[];
     }
 
-    @doc("PageCause")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model PageCause {
         cause?: string;
         causeElementXPath?: string;
@@ -1258,16 +1254,17 @@ namespace Easm {
         domChangeIndex?: int32;
     }
 
-    @doc("Port")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model Port {
-        @projectedName("csharp", "PortProperty")
+        @projectedName("csharp", "portProperty")
         port?: int32;
+
         firstSeen?: utcDateTime;
         lastSeen?: utcDateTime;
         count?: int64;
     }
 
-    @doc("ReportAssetSnapshotExportRequest")
+    @doc("A request body used for an asset report snapshot export.")
     model ReportAssetSnapshotExportRequest {
         @doc("The metric to retrieve a snapshot for.")
         metric?: string;
@@ -1279,7 +1276,7 @@ namespace Easm {
         columns?: string[];
     }
 
-    @doc("ReportAssetSnapshotRequest")
+    @doc("A request body used to retrieve an asset report snapshot.")
     model ReportAssetSnapshotRequest {
         @doc("The metric to retrieve a snapshot for.")
         metric?: string;
@@ -1294,10 +1291,8 @@ namespace Easm {
         page?: int32;
     }
 
-    @doc("ReportAssetSnapshotResponse")
+    @doc("A snapshot of assets captured daily for the provided metric.  Asset details only contain primary properties.  Detailed asset data can be retrieved from the asset endpoints.")
     model ReportAssetSnapshotResponse {
-        @statusCode statusCode: 200;
-
         @doc("The name of the metric.")
         displayName?: string;
 
@@ -1312,10 +1307,12 @@ namespace Easm {
 
         @doc("A description of what the metric represents.")
         description?: string;
+
+        @doc("The page of assets that match the provided metric.")
         assets?: AssetPageResponse;
     }
 
-    @doc("ReportAssetSummaryRequest")
+    @doc("A request body used to retrieve summary asset information. One and only one collection of summary identifiers must be provided: filters, metrics, or metricCategories.")
     model ReportAssetSummaryRequest {
         @doc("Categories to retrieve risk reporting data for.")
         metricCategories?: string[];
@@ -1336,15 +1333,13 @@ namespace Easm {
         labelName?: string;
     }
 
-    @doc("ReportAssetSummaryResponse")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model ReportAssetSummaryResponse {
-        @statusCode statusCode: 200;
-
         @doc("The collection of asset summaries.")
         assetSummaries?: AssetSummaryResponse[];
     }
 
-    @doc("ReportBillableAssetBreakdown")
+    @doc("The breakdown of billable asset counts for each asset type.")
     model ReportBillableAssetBreakdown {
         @doc("The kind of billable asset.")
         kind?: ReportBillableAssetBreakdownKind;
@@ -1353,7 +1348,7 @@ namespace Easm {
         count?: int64;
     }
 
-    @doc("ReportBillableAssetSnapshotResponse")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model ReportBillableAssetSnapshotResponse {
         @doc("The date these assets were billed on.")
         date?: plainDate;
@@ -1365,13 +1360,12 @@ namespace Easm {
         assetBreakdown?: ReportBillableAssetBreakdown[];
     }
 
-    @doc("ReportBillableAssetSummaryResponse")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model ReportBillableAssetSummaryResponse {
-        @statusCode statusCode: 200;
         assetSummaries?: ReportBillableAssetSnapshotResponse[];
     }
 
-    @doc("Reputation")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model Reputation {
         listName?: string;
         threatType?: string;
@@ -1383,9 +1377,9 @@ namespace Easm {
         recent?: boolean;
     }
 
-    @doc("ResourceUrl")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model ResourceUrl {
-        url?: string;
+        url?: url;
         resources?: DependentResource[];
         firstSeen?: utcDateTime;
         lastSeen?: utcDateTime;
@@ -1393,10 +1387,8 @@ namespace Easm {
         recent?: boolean;
     }
 
-    @doc("SavedFilterPageResponse")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model SavedFilterPageResponse {
-        @statusCode statusCode: 200;
-
         @doc("The total number of items available in the full result set.")
         totalElements?: int64;
 
@@ -1404,11 +1396,11 @@ namespace Easm {
         nextLink?: string;
 
         @doc("The items in the current page of results.")
-        value?: SavedFilterResponse[];
+        value?: SavedFilter[];
     }
 
-    @doc("SavedFilterRequest")
-    model SavedFilterRequest {
+    @doc("A request body used to create a saved filter.")
+    model SavedFilterData {
         @doc("An expression on the resource type that selects the resources to be returned.")
         filter: string;
 
@@ -1416,23 +1408,25 @@ namespace Easm {
         description: string;
     }
 
-    @doc("SavedFilterResponse")
-    model SavedFilterResponse {
-        @statusCode statusCode: 200;
-
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    @resource("savedFilters")
+    model SavedFilter {
         @doc("The system generated unique id for the resource.")
         id?: string;
 
         @doc("The caller provided unique name for the resource.")
-        name?: string;
+        @key("filterName")
+        @visibility("read")
+        name: string;
 
         @doc("The name that can be used for display purposes.")
         displayName?: string;
+
         filter?: string;
         description?: string;
     }
 
-    @doc("ScanMetadata")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model ScanMetadata {
         port?: int32;
         bannerMetadata?: string;
@@ -1440,7 +1434,7 @@ namespace Easm {
         endScan?: utcDateTime;
     }
 
-    @doc("Service")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model Service {
         scheme?: string;
         port?: int32;
@@ -1455,7 +1449,7 @@ namespace Easm {
         portStates?: ObservedPortState[];
     }
 
-    @doc("SoaRecord")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model SoaRecord {
         nameServer?: string;
         email?: string;
@@ -1466,17 +1460,18 @@ namespace Easm {
         recent?: boolean;
     }
 
-    @doc("Source")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model Source {
-        @projectedName("csharp", "SourceProperty")
+        @projectedName("csharp", "sourceProperty")
         source?: string;
+
         firstSeen?: utcDateTime;
         lastSeen?: utcDateTime;
         count?: int64;
         reason?: string;
     }
 
-    @doc("SslCertAsset")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model SslCertAsset extends InventoryAsset {
         sha1?: string;
         subjectCommonNames?: string[];
@@ -1513,7 +1508,7 @@ namespace Easm {
         validationType?: SslCertAssetValidationType;
     }
 
-    @doc("SslServerConfig")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model SslServerConfig {
         tlsVersions?: string[];
         cipherSuites?: string[];
@@ -1523,7 +1518,7 @@ namespace Easm {
         sources?: Source[];
     }
 
-    @doc("SubResourceIntegrityCheck")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model SubResourceIntegrityCheck {
         violation?: boolean;
         firstSeen?: utcDateTime;
@@ -1536,10 +1531,8 @@ namespace Easm {
         expectedHash?: string;
     }
 
-    @doc("TaskPageResponse")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model TaskPageResponse {
-        @statusCode statusCode: 200;
-
         @doc("The total number of items available in the full result set.")
         totalElements?: int64;
 
@@ -1547,15 +1540,16 @@ namespace Easm {
         nextLink?: string;
 
         @doc("The items in the current page of results.")
-        value?: TaskResponse[];
+        value?: Task[];
     }
 
-    @doc("TaskResponse")
-    model TaskResponse {
-        @statusCode statusCode: 200;
-
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    @resource("tasks")
+    model Task {
         @doc("The unique identifier of the task.")
-        id?: string;
+        @key("taskId")
+        @visibility("read")
+        id: string;
 
         @doc("The time the task started.")
         startedAt?: utcDateTime;
@@ -1579,13 +1573,13 @@ namespace Easm {
         metadata?: unknown;
     }
 
-    @doc("ValidateResponse")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model ValidateResponse {
-        @statusCode statusCode: 200;
+        @doc("This is the top-level error object whose code matches the x-ms-error-code response header.")
         error?: ErrorDetail;
     }
 
-    @doc("WebComponent")
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     model WebComponent {
         name?: string;
         type?: string;
@@ -1602,8 +1596,23 @@ namespace Easm {
         service?: string;
     }
 
-    scalar uuid extends string;
+    @doc("Response with no content")
+    model NoContentResponse {
+        @doc("204 status code")
+        @statusCode
+        statusCode: 204;
+    }
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    @doc("Template model for observed values")
+    model ObservedValue {
+        firstSeen?: utcDateTime;
+        lastSeen?: utcDateTime;
+        count?: int64;
+        recent?: boolean;
+    }
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    @doc("A list of asset types to cascade the updates to.")
     enum AssetUpdateTransfers {
         as,
         contact,
@@ -1615,12 +1624,16 @@ namespace Easm {
         sslCert,
     }
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    @doc("The kind of billable asset.")
     enum ReportBillableAssetBreakdownKind {
         domain,
         host,
         ipAddress,
     }
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    @doc("The state the task is in.")
     enum TaskState {
         pending,
         running,
@@ -1631,23 +1644,31 @@ namespace Easm {
         warning,
     }
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    @doc("The phase the task is in.")
     enum TaskPhase {
         running,
         polling,
         complete,
     }
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    @doc("The kind of data connection.")
     enum DataConnectionKind {
         logAnalytics,
         azureDataExplorer,
     }
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    @doc("The rate at which the data connection will receive updates.")
     enum DataConnectionFrequency {
         daily,
         weekly,
         monthly,
     }
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    @doc("The kind of asset.")
     enum AssetKind {
         as,
         contact,
@@ -1659,6 +1680,8 @@ namespace Easm {
         sslCert,
     }
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    @doc("The State of the disco run.")
     enum DiscoRunState {
         pending,
         running,
@@ -1666,11 +1689,15 @@ namespace Easm {
         failed,
     }
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    @doc("The type of data the data connection will transfer")
     enum DataConnectionContent {
         assets,
         attackSurfaceInsights,
     }
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    @doc("The kind of disco source.")
     enum DiscoSourceKind {
         as,
         attribute,
@@ -1680,12 +1707,15 @@ namespace Easm {
         ipBlock,
     }
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     enum ObservedPortStateValue {
         open,
         closed,
         filtered,
     }
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    @doc("The state to update the asset to.")
     enum AssetUpdateState {
         candidate,
         confirmed,
@@ -1695,6 +1725,7 @@ namespace Easm {
         associatedThirdparty,
     }
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     enum AssetState {
         candidate,
         confirmed,
@@ -1705,6 +1736,8 @@ namespace Easm {
         archived,
     }
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    @doc("The kind of asset.")
     enum AuditTrailItemKind {
         as,
         contact,
@@ -1716,6 +1749,7 @@ namespace Easm {
         sslCert,
     }
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     enum PageAssetRedirectType {
         httpHeader,
         metaRefresh,
@@ -1723,151 +1757,231 @@ namespace Easm {
         final,
     }
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
     enum SslCertAssetValidationType {
         domainValidation,
         organizationValidation,
         extendedValidation,
     }
 
-    model LogAnalyticsDataConnectionRequest extends DataConnectionRequest {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    model LogAnalyticsDataConnectionData extends DataConnectionData {
+        @doc("The kind of DataConnectionData")
         kind: "logAnalytics";
+
+        @doc("properties")
         properties: LogAnalyticsDataConnectionProperties;
     }
 
-    model AzureDataExplorerDataConnectionRequest extends DataConnectionRequest {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    model AzureDataExplorerDataConnectionData extends DataConnectionData {
+        @doc("The kind of DataConnectionData")
         kind: "azureDataExplorer";
+
+        @doc("properties")
         properties: AzureDataExplorerDataConnectionProperties;
     }
 
-    model AsAssetResponse extends AssetResponse {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    model AsAssetResource extends AssetResource {
+        @doc("The kind of AssetResource")
         kind: "as";
+
+        @doc("asset")
         asset: AsAsset;
     }
 
-    model ContactAssetResponse extends AssetResponse {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    model ContactAssetResource extends AssetResource {
+        @doc("The kind of AssetResource")
         kind: "contact";
+
+        @doc("asset")
         asset: ContactAsset;
     }
 
-    model DomainAssetResponse extends AssetResponse {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    model DomainAssetResource extends AssetResource {
+        @doc("The kind of AssetResource")
         kind: "domain";
+
+        @doc("asset")
         asset: DomainAsset;
     }
 
-    model HostAssetResponse extends AssetResponse {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    model HostAssetResource extends AssetResource {
+        @doc("The kind of AssetResource")
         kind: "host";
+
+        @doc("asset")
         asset: HostAsset;
     }
 
-    model IpAddressAssetResponse extends AssetResponse {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    model IpAddressAssetResource extends AssetResource {
+        @doc("The kind of AssetResource")
         kind: "ipAddress";
+
+        @doc("asset")
         asset: IpAddressAsset;
     }
 
-    model IpBlockAssetResponse extends AssetResponse {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    model IpBlockAssetResource extends AssetResource {
+        @doc("The kind of AssetResource")
         kind: "ipBlock";
+
+        @doc("asset")
         asset: IpBlockAsset;
     }
 
-    model PageAssetResponse extends AssetResponse {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    model PageAssetResource extends AssetResource {
+        @doc("The kind of AssetResource")
         kind: "page";
+
+        @doc("asset")
         asset: PageAsset;
     }
 
-    model SslCertAssetResponse extends AssetResponse {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    model SslCertAssetResource extends AssetResource {
+        @doc("The kind of AssetResource")
         kind: "sslCert";
+
+        @doc("asset")
         asset: SslCertAsset;
     }
 
-    model LogAnalyticsDataConnectionResponse extends DataConnectionResponse {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    model LogAnalyticsDataConnection extends DataConnection {
+        @doc("The kind of DataConnection")
         kind: "logAnalytics";
+
+        @doc("properties")
         properties: LogAnalyticsDataConnectionProperties;
     }
 
-    model AzureDataExplorerDataConnectionResponse
-        extends DataConnectionResponse {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    model AzureDataExplorerDataConnection extends DataConnection {
+        @doc("The kind of DataConnection")
         kind: "azureDataExplorer";
+
+        @doc("properties")
         properties: AzureDataExplorerDataConnectionProperties;
     }
 
-    @doc("SubscriptionIdParameter")
+    @doc("The ID of the target subscription.")
     model SubscriptionIdParameter {
-        @path("subscriptionId") subscriptionId: string;
+        @doc("The ID of the target subscription.")
+        @path("subscriptionId")
+        subscriptionId: string;
     }
 
-    @doc("ResourceGroupNameParameter")
+    @doc("The name of the Resource Group.")
     model ResourceGroupNameParameter {
-        @path("resourceGroupName") resourceGroupName: string;
+        @doc("The name of the Resource Group.")
+        @path("resourceGroupName")
+        resourceGroupName: string;
     }
 
-    @doc("WorkspaceNameParameter")
+    @doc("The name of the Workspace.")
     model WorkspaceNameParameter {
-        @path("workspaceName") workspaceName: string;
+        @doc("The name of the Workspace.")
+        @path("workspaceName")
+        workspaceName: string;
     }
 
-    @doc("ApiVersionParameter")
+    @doc("The API version to use for this operation.")
     model ApiVersionParameter {
-        @query("api-version") apiversion: string;
+        @doc("The API version to use for this operation.")
+        @query("api-version")
+        apiversion: string;
     }
 
-    @doc("SavedFilterNameParameter")
+    @doc("The unique identifier for the saved filter.")
     model SavedFilterNameParameter {
-        @path("filterName") filterName: string;
+        @doc("The unique identifier for the saved filter.")
+        @path("filterName")
+        filterName: string;
     }
 
-    @doc("DiscoGroupNameParameter")
+    @doc("The unique identifier for the discovery group.")
     model DiscoGroupNameParameter {
-        @path("groupName") groupName: string;
+        @doc("The unique identifier for the discovery group.")
+        @path("groupName")
+        groupName: string;
     }
 
-    @doc("DataConnectionNameParameter")
+    @doc("The unique identifier for the data connection.")
     model DataConnectionNameParameter {
-        @path("dataConnectionName") dataConnectionName: string;
+        @doc("The unique identifier for the data connection.")
+        @path("dataConnectionName")
+        dataConnectionName: string;
     }
 
-    @doc("TaskIdParameter")
+    @doc("The unique identifier for the task.")
     model TaskIdParameter {
-        @path("taskId") taskId: string;
+        @doc("The unique identifier for the task.")
+        @path("taskId")
+        taskId: string;
     }
 
-    @doc("FilterParameter")
+    @doc("An expression on the resource type that selects the resources to be returned.")
     model FilterParameter {
-        @query("filter") filter?: string;
+        @doc("An expression on the resource type that selects the resources to be returned.")
+        @query("filter")
+        filter?: string;
     }
 
-    @doc("OrderByParameter")
-    model OrderByParameter {
-        @query("orderby") orderby?: string;
-    }
-
-    @doc("SkipParameter")
-    model SkipParameter {
-        @query("skip") skip?: int32;
-    }
-
-    @doc("MaxPageSizeParameter")
-    model MaxPageSizeParameter {
-        @query("maxpagesize") maxpagesize?: int32;
-    }
-
-    @doc("MarkParameter")
-    model MarkParameter {
-        @query("mark") mark?: string;
-    }
-
-    @doc("RequiredFilterParameter")
+    @doc("An expression on the resource type that selects the resources to be returned.")
     model RequiredFilterParameter {
-        @query("filter") filter: string;
+        @doc("An expression on the resource type that selects the resources to be returned.")
+        @query("filter")
+        filter: string;
     }
 
-    @doc("DiscoTemplateIdParameter")
+    @doc("A list of expressions that specify the order of the returned resources.")
+    model OrderByParameter {
+        @doc("A list of expressions that specify the order of the returned resources.")
+        @query("orderby")
+        orderby?: string;
+    }
+
+    @doc("An offset into the collection of the first item to be returned.")
+    model SkipParameter {
+        @doc("An offset into the collection of the first item to be returned.")
+        @query("skip")
+        skip?: int32;
+    }
+
+    @doc("The maximum number of items to include in a single response.")
+    model MaxPageSizeParameter {
+        @doc("The maximum number of items to include in a single response.")
+        @query("maxpagesize")
+        maxpagesize?: int32;
+    }
+
+    @doc("Specify this value instead of 'skip' to use cursor-based searching. Initial value is '*' and subsequent values are returned in the response.")
+    model MarkParameter {
+        @doc("Specify this value instead of 'skip' to use cursor-based searching. Initial value is '*' and subsequent values are returned in the response.")
+        @query("mark")
+        mark?: string;
+    }
+
+    @doc("The unique identifier for the disco template.")
     model DiscoTemplateIdParameter {
-        @path("templateId") templateId: string;
+        @doc("The unique identifier for the disco template.")
+        @path("templateId")
+        templateId: string;
     }
 
-    @doc("AssetIdParameter")
+    @doc("The unique identifier for the asset. Ids are formatted as '<kind>$$<name>' and can optionally be Base64 encoded if they contain special characters.")
     model AssetIdParameter {
-        @path("assetId") assetId: string;
+        @doc("The unique identifier for the asset. Ids are formatted as '<kind>$$<name>' and can optionally be Base64 encoded if they contain special characters.")
+        @path("assetId")
+        assetId: string;
     }
 
     @doc("Implicit Flow")
