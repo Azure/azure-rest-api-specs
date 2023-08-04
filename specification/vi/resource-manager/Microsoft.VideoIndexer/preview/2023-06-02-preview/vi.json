@@ -432,9 +432,6 @@
           },
           "Put example #10": {
             "$ref": "./examples/ViAccountPut/ViAccountPut10.json"
-          },
-          "Put example #11": {
-            "$ref": "./examples/ViAccountPut/ViAccountPut11.json"
           }
         }
       },
@@ -1335,11 +1332,6 @@
           "type": "object",
           "$ref": "#/definitions/MediaServicesForPutRequest"
         },
-        "storageServices": {
-          "description": "The storage services details",
-          "type": "object",
-          "$ref": "#/definitions/StorageServicesForPutRequest"
-        },
         "totalSecondsIndexed": {
           "description": "An integer representing the total seconds that have been indexed on the account",
           "type": "integer",
@@ -1385,11 +1377,6 @@
           "description": "The media services details",
           "type": "object",
           "$ref": "#/definitions/MediaServicesForPatchRequest"
-        },
-        "storageServices": {
-          "description": "The storage services details",
-          "type": "object",
-          "$ref": "#/definitions/StorageServicesForPatchRequest"
         },
         "provisioningState": {
           "readOnly": true,
@@ -1603,57 +1590,6 @@
       "properties": {
         "userAssignedIdentity": {
           "type": "string",
-          "description": "The user assigned identity to be used to grant permissions",
-          "example": "/subscriptions/xxx/resourceGroups/contoso-videoAnalyzer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoAnalyzer-mi"
-        }
-      }
-    },
-    "StorageServicesForPutRequest": {
-      "description": "The storage services details",
-      "type": "object",
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Storage/storageAccounts"
-              }
-            ]
-          },
-          "description": "The storage services resource id",
-          "example": "/subscriptions/xxx/resourceGroups/contoso-videoAnalyzer-rg/providers/Microsoft.Storage/storageAccounts/contoso-videoAnalyzer-ms"
-        },
-        "userAssignedIdentity": {
-          "type": "string",
-          "format": "arm-id",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
-              }
-            ]
-          },
-          "description": "The user assigned identity to be used to grant permissions",
-          "example": "/subscriptions/xxx/resourceGroups/contoso-videoAnalyzer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoAnalyzer-mi"
-        }
-      }
-    },
-    "StorageServicesForPatchRequest": {
-      "description": "The storage services details",
-      "type": "object",
-      "properties": {
-        "userAssignedIdentity": {
-          "type": "string",
-          "format": "arm-id",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
-              }
-            ]
-          },
           "description": "The user assigned identity to be used to grant permissions",
           "example": "/subscriptions/xxx/resourceGroups/contoso-videoAnalyzer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoAnalyzer-mi"
         }
