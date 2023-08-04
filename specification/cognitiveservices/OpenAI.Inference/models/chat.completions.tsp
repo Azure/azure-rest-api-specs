@@ -1,6 +1,7 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
+import "./azure.chat.extensions.tsp";
 import "./completions.common.tsp";
 import "./functions.tsp";
 
@@ -49,6 +50,14 @@ model ChatMessage {
   @added(ServiceApiVersions.v2023_07_01_Preview)
   @projectedName("json", "function_call")
   functionCall?: FunctionCall;
+
+  @doc("""
+    Additional context data associated with a Chat Message when requesting Chat Completions using compatible Azure
+    extensions. This includes information like the intermediate data source retrievals used to service a request.
+    This context information is only populated when using Azure OpenAI with extensions capabilities configured.
+  """)
+  @added(ServiceApiVersions.v2023_08_01_Preview)
+  azureExtensionsContext?: AzureChatExtensionsMessageContext;
 }
 
 @doc("""
@@ -174,6 +183,17 @@ model ChatCompletionsOptions {
   @projectedName("json", "model")
   @projectedName("csharp", "InternalNonAzureModelName")
   `model`?: string;
+
+  @doc("""
+    The data source configuration entries for Azure OpenAI extensions that use them.
+    This configuration information is only compatible with Azure OpenAI.
+  """)
+  // Note: client libraries should wrap this dataSources array in a top-level model for all Azure OpenAI extensions
+  //        configuration. Future versions of the service API may represent this structure directly.
+  @added(ServiceApiVersions.v2023_08_01_Preview)
+  @projectedName("json", "dataSources")
+  @projectedName("csharp", "InternalAzureExtensionsDataSources")
+  dataSources?: AzureChatDataSourceConfiguration[];
 }
 
 @doc("""
