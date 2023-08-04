@@ -869,7 +869,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.AksHybrid/provisionedClusters/{resourceName}/agentPools/{agentPoolName}/upgradeProfiles/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.AksHybrid/provisionedClusters/{resourceName}/agentPools/{agentPoolName}/upgradeProfiles/{upgradeProfileName}": {
       "get": {
         "tags": [
           "AgentPools"
@@ -900,6 +900,9 @@
           },
           {
             "$ref": "#/parameters/AgentPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpgradeProfileNameParameter"
           }
         ],
         "responses": {
@@ -1018,6 +1021,15 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/CredentialResults"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1676,7 +1688,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "Provisioned cluster."
@@ -2463,7 +2475,7 @@
     },
     "ServerFqdnParameter": {
       "name": "server-fqdn",
-      "in": "query",
+      "in": "body",
       "required": false,
       "type": "string",
       "description": "server fqdn type for credentials to be returned",
@@ -2471,7 +2483,7 @@
     },
     "CredentialFormatParameter": {
       "name": "format",
-      "in": "query",
+      "in": "body",
       "required": false,
       "type": "string",
       "enum": [
