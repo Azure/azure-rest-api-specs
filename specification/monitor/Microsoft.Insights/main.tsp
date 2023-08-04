@@ -21,3 +21,18 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_08_04_Preview: "2023-08-04-preview",
 }
+
+alias OperationTemplates = Azure.Core.StandardResourceOperations;
+
+@TypeSpec.Rest.resource("subscriptions")
+@doc("d")
+model Subscription {
+  @key
+  @visibility("read")
+  @doc("s")
+  subscriptionId: string;
+}
+
+@TypeSpec.Rest.actionSeparator("/")
+@TypeSpec.Rest.action("metrics:getBatch")
+op getBatch is OperationTemplates.ResourceAction<Subscription, {}, {}>;
