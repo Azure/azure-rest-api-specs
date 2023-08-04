@@ -2849,6 +2849,34 @@
         },
         "dscpConfiguration": {
           "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
+        },
+        "auxiliaryMode": {
+          "type": "string",
+          "description": "Specifies whether the Auxiliary mode is enabled for the Network Interface resource.",
+          "enum": [
+            "None",
+            "AcceleratedConnections",
+            "Floating"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkInterfaceAuxiliaryMode",
+            "modelAsString": true
+          }
+        },
+        "auxiliarySku": {
+          "type": "string",
+          "description": "Specifies whether the Auxiliary sku is enabled for the Network Interface resource.",
+          "enum": [
+            "None",
+            "A1",
+            "A2",
+            "A4",
+            "A8"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkInterfaceAuxiliarySku",
+            "modelAsString": true
+          }
         }
       },
       "required": [
