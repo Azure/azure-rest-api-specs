@@ -17,19 +17,24 @@ model ContainerServiceNewKubernetesVersionAvailableEventData {
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.ClusterSupportEnded event")
-model ContainerServiceClusterSupportEndedEventData extends ContainerServiceClusterSupportEventData {}
+model ContainerServiceClusterSupportEndedEventData
+  extends ContainerServiceClusterSupportEventData {}
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.ClusterSupportEnding event")
-model ContainerServiceClusterSupportEndingEventData extends ContainerServiceClusterSupportEventData {}
+model ContainerServiceClusterSupportEndingEventData
+  extends ContainerServiceClusterSupportEventData {}
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingStarted event")
-model ContainerServiceNodePoolRollingStartedEventData extends ContainerServiceNodePoolRollingEventData {}
+model ContainerServiceNodePoolRollingStartedEventData
+  extends ContainerServiceNodePoolRollingEventData {}
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingSucceeded event")
-model ContainerServiceNodePoolRollingSucceededEventData extends ContainerServiceNodePoolRollingEventData {}
+model ContainerServiceNodePoolRollingSucceededEventData
+  extends ContainerServiceNodePoolRollingEventData {}
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingFailed event")
-model ContainerServiceNodePoolRollingFailedEventData extends ContainerServiceNodePoolRollingEventData {}
+model ContainerServiceNodePoolRollingFailedEventData
+  extends ContainerServiceNodePoolRollingEventData {}
 
 @doc("Schema of common properties of cluster support events")
 model ContainerServiceClusterSupportEventData {

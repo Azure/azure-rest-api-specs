@@ -16,7 +16,6 @@ namespace EventGrid.ContainerRegistry {
   model ContainerRegistryChartDeletedEventData
     extends ContainerRegistryArtifactEventData {}
 
-  
   alias ContainerRegistryBaseEventData = {
     @doc("The event ID.")
     id?: string;
@@ -33,7 +32,6 @@ namespace EventGrid.ContainerRegistry {
 
   @doc("The content of the event request message.")
   model ContainerRegistryEventData {
-  
     ...ContainerRegistryBaseEventData;
 
     @doc("The target of the event.")

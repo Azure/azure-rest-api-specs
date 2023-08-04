@@ -22,6 +22,4 @@ namespace EventGrid.EventGrid {
     @visibility("read")
     eventSubscriptionId?: string;
   }
-
 }
-

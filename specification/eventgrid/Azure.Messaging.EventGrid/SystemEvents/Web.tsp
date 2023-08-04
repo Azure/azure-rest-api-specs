@@ -1,7 +1,6 @@
 @doc("Describes the schema of the Azure App Service events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
 namespace EventGrid.Web {
-
-// @doc("sku of app service plan.")
+  // @doc("sku of app service plan.")
   @doc("Detail of action on the app.")
   model AppEventTypeDetail {
     @doc("Type of action of the operation.")

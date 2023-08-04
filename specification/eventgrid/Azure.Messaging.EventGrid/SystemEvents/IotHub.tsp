@@ -33,13 +33,14 @@ model DeviceTwinInfo {
 
   @doc("The ISO8601 timestamp of the last activity.")
   lastActivityTime?: string;
+
   //TODO: something here needs to change
 
   @doc("Properties JSON element.")
   properties?: {
     @doc("A portion of the properties that can be written only by the application back-end, and read by the device.")
     desired?: DeviceTwinProperties;
-  
+
     @doc("A portion of the properties that can be written only by the device, and read by the application back-end.")
     reported?: DeviceTwinProperties;
   };
@@ -52,8 +53,8 @@ model DeviceTwinInfo {
 
   @doc("An integer that is incremented by one each time the device twin is updated.")
   version?: int64;
-  //TODO: also here
 
+  //TODO: also here
 
   @doc("The thumbprint is a unique value for the x509 certificate, commonly used to find a particular certificate in a certificate store. The thumbprint is dynamically generated using the SHA1 algorithm, and does not physically exist in the certificate.")
   x509Thumbprint?: ThumbPrintValue;

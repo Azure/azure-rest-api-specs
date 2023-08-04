@@ -1,7 +1,6 @@
 @doc("Describes the schema of the Azure HealthcareApis events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
 namespace EventGrid.HealthCareApis {
-
-// model HealthcareFhirResourceType is string {}
+  // model HealthcareFhirResourceType is string {}
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceCreated event.")
   model HealthcareFhirResourceCreatedEventData {
     ...HealthcareFhirResourceBaseEventData;
@@ -63,7 +62,7 @@ namespace EventGrid.HealthCareApis {
   model HealthcareDicomImageUpdatedEventData {
     @doc("Data partition name")
     partitionName: string;
-    
+
     @doc("Unique identifier for the Study")
     imageStudyInstanceUid?: string;
 

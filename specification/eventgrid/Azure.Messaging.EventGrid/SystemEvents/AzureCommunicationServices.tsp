@@ -244,6 +244,7 @@ model AcsSmsReceivedEventData extends AcsSmsEventBaseProperties {
 enum recordingContentType {
   @doc("AudioVideo content type")
   AudioVideo,
+
   @doc("Audio content type")
   Audio,
 }
@@ -252,6 +253,7 @@ enum recordingContentType {
 enum recordingChannelType {
   @doc("Mixed channel type")
   Mixed,
+
   @doc("Unmixed channel type")
   Unmixed,
 }
@@ -260,8 +262,10 @@ enum recordingChannelType {
 enum recordingFormatType {
   @doc("WAV format")
   Wav,
+
   @doc("MP3 format")
   Mp3,
+
   @doc("MP4 format")
   Mp4,
 }
@@ -317,14 +321,19 @@ model AcsEmailDeliveryReportReceivedEventData {
 enum AcsEmailDeliveryReportStatus {
   @doc("Hard bounce detected while sending the email")
   Bounced,
+
   @doc("The email was delivered")
   Delivered,
+
   @doc("The email failed to be delivered")
   Failed,
+
   @doc("The message was identified as spam and was rejected or blocked (not quarantined).")
   FilteredSpam,
+
   @doc("The message was quarantined (as spam, bulk mail, or phishing). For more information, see Quarantined email messages in EOP (EXCHANGE ONLINE PROTECTION).")
   Quarantined,
+
   @doc("The email was suppressed")
   Suppressed,
 }
@@ -355,19 +364,18 @@ model AcsEmailEngagementTrackingReportReceivedEventData {
 
   @doc("The type of engagement user have with email")
   engagementType?: AcsUserEngagement;
-
 }
 
 @doc("The type of engagement user have with email.")
 enum AcsUserEngagement {
   @doc("View")
-  "view",
+  view,
+
   @doc("Click")
-  "click",
+  click,
 }
 
 // Base Properties
-
 
 @doc("Schema of common properties of all chat thread events")
 model AcsChatThreadEventBaseProperties extends AcsChatEventBaseProperties {
@@ -444,6 +452,7 @@ model AcsChatEventInThreadBaseProperties {
 model AcsChatEventBaseProperties {
   @doc("The communication identifier of the target user")
   recipientCommunicationIdentifier?: CommunicationIdentifierModel;
+
   ...AcsChatEventInThreadBaseProperties;
 }
 

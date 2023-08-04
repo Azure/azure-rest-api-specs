@@ -20,7 +20,6 @@ import "./Storage.tsp";
 import "./Web.tsp";
 import "./EventGrid.tsp";
 
-
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -47,7 +46,6 @@ import "@azure-tools/typespec-azure-core";
     endpoint: url,
   }
 )
-
 @doc("Azure EventGrid Client")
 @versioned(ServiceApiVersions)
 namespace EventGrid {
@@ -107,7 +105,7 @@ namespace EventGrid {
     #suppress "@azure-tools/typespec-azure-core/casing-style" "Using 'data_base64' is intentional. Following CloudEvent spec."
     @doc("Event data specific to the event type, encoded as a base64 string.")
     data_base64?: bytes;
-    
+
     @doc("Type of event related to the originating occurrence.")
     type: string;
 
@@ -130,40 +128,43 @@ namespace EventGrid {
   @doc("Properties of an event published to an Event Grid topic using a custom schema")
   model CustomEventEvent {}
 
-   // USE SHARED ROUTES
+  // USE SHARED ROUTES
 
-   @doc("Publish CloudEvents")
-   @route("/send")
-   @sharedRoute
-   op publishCloudEvent is Azure.Core.RpcOperation<{
-     
-     @doc("content type")
-     @header("content-type")
-     contentType: "application/cloudevents-batch+json; charset=utf-8",
- 
-     @doc("Required only when publishing to partner namespaces with partner topic routing mode ChannelNameHeader.")
-     @header("aeg-channel-name")
-     channelName?: string,
- 
-     #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Events is a valid request body."
-     @doc("Events being published.")
-     @body
-     events: CloudEventEvent[],
-   }, {} >;
- 
-   @doc("Publish EventGridEvents")
-   @route("/send")
-   @sharedRoute
-   op publishEventGridEvent is Azure.Core.RpcOperation<{
-     @doc("content type")
-     @header("content-type")
-     contentType: "application/json",
- 
-     #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Events is a valid request body."
-     @doc("Events being published.")
-     @body
-     events: EventGridEvent[],
-   }, {} >;
+  @doc("Publish CloudEvents")
+  @route("/send")
+  @sharedRoute
+  op publishCloudEvent is Azure.Core.RpcOperation<
+    {
+      @doc("content type")
+      @header("content-type")
+      contentType: "application/cloudevents-batch+json; charset=utf-8";
 
+      @doc("Required only when publishing to partner namespaces with partner topic routing mode ChannelNameHeader.")
+      @header("aeg-channel-name")
+      channelName?: string;
+
+      #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Events is a valid request body."
+      @doc("Events being published.")
+      @body
+      events: CloudEventEvent[];
+    },
+    {}
+  >;
+
+  @doc("Publish EventGridEvents")
+  @route("/send")
+  @sharedRoute
+  op publishEventGridEvent is Azure.Core.RpcOperation<
+    {
+      @doc("content type")
+      @header("content-type")
+      contentType: "application/json";
+
+      #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Events is a valid request body."
+      @doc("Events being published.")
+      @body
+      events: EventGridEvent[];
+    },
+    {}
+  >;
 }
- 
