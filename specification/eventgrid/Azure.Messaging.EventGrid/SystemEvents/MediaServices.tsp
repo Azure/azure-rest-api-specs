@@ -156,8 +156,9 @@ namespace EventGrid.MediaServices {
 
   @doc("The event data for a Job output asset.")
   @discriminator("#Microsoft.Media.JobOutputAsset")
-  model MediaJobOutputAsset{
+  model MediaJobOutputAsset {
     ...MediaJobOutput;
+
     @doc("Gets the Job output asset name.")
     assetName?: string;
   }

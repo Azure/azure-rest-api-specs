@@ -7,11 +7,12 @@ namespace EventGrid.Storage {
 
     @doc("The offset of the blob in bytes.")
     contentOffset?: int64;
+
     ...StorageBaseEventData;
-    @doc(
-      "An opaque string value representing the logical sequence of events for any particular blob name. Users can use standard string comparison to understand the relative sequence of two events on the same blob name."
-    )
+
+    @doc("An opaque string value representing the logical sequence of events for any particular blob name. Users can use standard string comparison to understand the relative sequence of two events on the same blob name.")
     sequencer?: string;
+
     ...StorageUrlBaseEventData;
     ...StorageBaseTypeData;
   }
@@ -20,11 +21,12 @@ namespace EventGrid.Storage {
   model StorageBlobDeletedEventData {
     @doc("The path to the blob.")
     url?: string;
+
     ...StorageBaseEventData;
-    @doc(
-      "An opaque string value representing the logical sequence of events for any particular blob name. Users can use standard string comparison to understand the relative sequence of two events on the same blob name."
-    )
+
+    @doc("An opaque string value representing the logical sequence of events for any particular blob name. Users can use standard string comparison to understand the relative sequence of two events on the same blob name.")
     sequencer?: string;
+
     ...StorageBaseTypeData;
   }
 
@@ -35,10 +37,10 @@ namespace EventGrid.Storage {
 
     @doc("The path to the directory.")
     url?: string;
+
     ...StorageBaseEventData;
-    @doc(
-      "An opaque string value representing the logical sequence of events for any particular directory name. Users can use standard string comparison to understand the relative sequence of two events on the same directory name."
-    )
+
+    @doc("An opaque string value representing the logical sequence of events for any particular directory name. Users can use standard string comparison to understand the relative sequence of two events on the same directory name.")
     sequencer?: string;
   }
 
@@ -49,10 +51,10 @@ namespace EventGrid.Storage {
 
     @doc("Is this event for a recursive delete operation.")
     recursive?: string;
+
     ...StorageBaseEventData;
-    @doc(
-      "An opaque string value representing the logical sequence of events for any particular directory name. Users can use standard string comparison to understand the relative sequence of two events on the same directory name."
-    )
+
+    @doc("An opaque string value representing the logical sequence of events for any particular directory name. Users can use standard string comparison to understand the relative sequence of two events on the same directory name.")
     sequencer?: string;
   }
 
@@ -63,10 +65,10 @@ namespace EventGrid.Storage {
 
     @doc("The new path to the blob after the rename operation.")
     destinationUrl?: string;
+
     ...StorageBaseEventData;
-    @doc(
-      "An opaque string value representing the logical sequence of events for any particular blob name. Users can use standard string comparison to understand the relative sequence of two events on the same blob name."
-    )
+
+    @doc("An opaque string value representing the logical sequence of events for any particular blob name. Users can use standard string comparison to understand the relative sequence of two events on the same blob name.")
     sequencer?: string;
   }
 
@@ -77,10 +79,10 @@ namespace EventGrid.Storage {
 
     @doc("The new path to the directory after the rename operation.")
     destinationUrl?: string;
+
     ...StorageBaseEventData;
-    @doc(
-      "An opaque string value representing the logical sequence of events for any particular directory name. Users can use standard string comparison to understand the relative sequence of two events on the same directory name."
-    )
+
+    @doc("An opaque string value representing the logical sequence of events for any particular directory name. Users can use standard string comparison to understand the relative sequence of two events on the same directory name.")
     sequencer?: string;
   }
 
@@ -89,13 +91,13 @@ namespace EventGrid.Storage {
     @doc("The time the policy task was scheduled.")
     scheduleTime?: string;
 
-    @doc( "Execution statistics of a specific policy action in a Blob Management cycle.")
+    @doc("Execution statistics of a specific policy action in a Blob Management cycle.")
     deleteSummary?: StorageLifecyclePolicyActionSummaryDetail;
 
-    @doc( "Execution statistics of a specific policy action in a Blob Management cycle.")
+    @doc("Execution statistics of a specific policy action in a Blob Management cycle.")
     tierToCoolSummary?: StorageLifecyclePolicyActionSummaryDetail;
 
-    @doc( "Execution statistics of a specific policy action in a Blob Management cycle.")
+    @doc("Execution statistics of a specific policy action in a Blob Management cycle.")
     tierToArchiveSummary?: StorageLifecyclePolicyActionSummaryDetail;
   }
 
@@ -114,10 +116,10 @@ namespace EventGrid.Storage {
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Storage.BlobTierChanged event.")
   model StorageBlobTierChangedEventData {
     ...StorageBaseEventData;
-    @doc(
-      "An opaque string value representing the logical sequence of events for any particular blob name. Users can use standard string comparison to understand the relative sequence of two events on the same blob name."
-    )
+
+    @doc("An opaque string value representing the logical sequence of events for any particular blob name. Users can use standard string comparison to understand the relative sequence of two events on the same blob name.")
     sequencer?: string;
+
     ...StorageUrlBaseEventData;
     ...StorageBaseTypeData;
   }
@@ -125,10 +127,10 @@ namespace EventGrid.Storage {
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Storage.AsyncOperationInitiated event.")
   model StorageAsyncOperationInitiatedEventData {
     ...StorageBaseEventData;
-    @doc(
-      "An opaque string value representing the logical sequence of events for any particular blob name. Users can use standard string comparison to understand the relative sequence of two events on the same blob name."
-    )
+
+    @doc("An opaque string value representing the logical sequence of events for any particular blob name. Users can use standard string comparison to understand the relative sequence of two events on the same blob name.")
     sequencer?: string;
+
     ...StorageUrlBaseEventData;
     ...StorageBaseTypeData;
   }
@@ -158,7 +160,7 @@ namespace EventGrid.Storage {
   }
 
   @doc("Schema of the Data property of an EventGridEvent for an Microsoft.Storage.StorageTaskCompleted event.")
-  model StorageTaskCompletedEventData{
+  model StorageTaskCompletedEventData {
     @doc("The time at which a storage task was completed.")
     completedDateTime: utcDateTime;
 
@@ -176,7 +178,7 @@ namespace EventGrid.Storage {
   }
 
   @doc("Schema of the Data property of an EventGridEvent for an Microsoft.Storage.StorageTaskQueued event.")
-  model StorageTaskQueuedEventData{
+  model StorageTaskQueuedEventData {
     @doc("The time at which a storage task was queued.")
     queuedDateTime: utcDateTime;
 
@@ -185,9 +187,10 @@ namespace EventGrid.Storage {
   }
 
   @doc("The status for a storage task.")
-  enum StorageTaskCompletedStatus{
+  enum StorageTaskCompletedStatus {
     @doc("Succeeded")
     Succeeded,
+
     @doc("Failed")
     Failed,
   }

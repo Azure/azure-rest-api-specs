@@ -11,7 +11,6 @@ namespace EventGrid.RedisCache {
     status?: string;
   };
 
-  
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Cache.PatchingCompleted event.")
   model RedisPatchingCompletedEventData {
     ...RedisBaseEventData;
