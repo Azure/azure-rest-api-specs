@@ -1,16 +1,18 @@
 {
-	"swagger": "2.0",
-	"info": {
-	  "title": "NotificationHubsClient",
-	  "description": "The Notification Hubs client performs operations to register and query devices, and send notifications",
-	  "version": "2020-06-01"
-	},
+  "swagger": "2.0",
+  "info": {
+    "title": "NotificationHubsClient",
+    "description": "The Notification Hubs client performs operations to register and query devices, and send notifications",
+    "version": "2020-06-01"
+  },
   "x-ms-parameterized-host": {
     "hostTemplate": "{namespaceBaseUrl}",
     "useSchemePrefix": false,
     "positionInOperation": "first",
     "parameters": [
-      { "$ref": "#/parameters/NamespaceBaseUrl" }
+      {
+        "$ref": "#/parameters/NamespaceBaseUrl"
+      }
     ]
   },
   "schemes": [
@@ -28,10 +30,18 @@
         "operationId": "DeleteNotificationHub",
         "description": "Deletes a notification hub.",
         "parameters": [
-          { "$ref": "#/parameters/HubNameParameter" },
-          { "$ref": "#/parameters/MSVersionParameter" },
-          { "$ref": "#/parameters/ApiVersionParameter" },
-          { "$ref": "#/parameters/AuthorizationHeaderParameter" }
+          {
+            "$ref": "#/parameters/HubNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AuthorizationHeaderParameter"
+          }
         ],
         "responses": {
           "200": {
@@ -46,17 +56,32 @@
           "404": {
             "description": "Not found. The node does not contain a notification hub."
           }
+        },
+        "x-ms-examples": {
+          "DeleteNotificationHub": {
+            "$ref": "./examples/DeleteNotificationHub.json"
+          }
         }
       },
       "get": {
         "operationId": "GetNotificationHub",
         "description": "Retrieves information about a notification hub.",
-        "produces": [ "application/atom+xml;type=entry;charset=utf-8" ],
+        "produces": [
+          "application/atom+xml;type=entry;charset=utf-8"
+        ],
         "parameters": [
-          { "$ref": "#/parameters/HubNameParameter" },
-          { "$ref": "#/parameters/MSVersionParameter" },
-          { "$ref": "#/parameters/ApiVersionParameter" },
-          { "$ref": "#/parameters/AuthorizationHeaderParameter" }
+          {
+            "$ref": "#/parameters/HubNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AuthorizationHeaderParameter"
+          }
         ],
         "responses": {
           "200": {
@@ -74,19 +99,38 @@
           "404": {
             "description": "Not found. The node does not contain a notification hub."
           }
+        },
+        "x-ms-examples": {
+          "GetNotificationHub": {
+            "$ref": "./examples/GetNotificationHub.json"
+          }
         }
       },
       "put": {
         "operationId": "CreateOrUpdateNotificationHub",
         "description": "Create or update a notification hub.",
-        "consumes": [ "application/atom+xml;type=entry;charset=utf-8" ],
-        "produces": [ "application/atom+xml;type=entry;charset=utf-8" ],
+        "consumes": [
+          "application/atom+xml;type=entry;charset=utf-8"
+        ],
+        "produces": [
+          "application/atom+xml;type=entry;charset=utf-8"
+        ],
         "parameters": [
-          { "$ref": "#/parameters/HubNameParameter" },
-          { "$ref": "#/parameters/MSVersionParameter" },
-          { "$ref": "#/parameters/ApiVersionParameter" },
-          { "$ref": "#/parameters/AuthorizationHeaderParameter" },
-          { "$ref": "#/parameters/IfMatchOptionalParameter" },
+          {
+            "$ref": "#/parameters/HubNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AuthorizationHeaderParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchOptionalParameter"
+          },
           {
             "in": "body",
             "name": "body",
@@ -115,6 +159,11 @@
           "409": {
             "description": "The node already contains another entity."
           }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateNotificationHub": {
+            "$ref": "./examples/CreateOrUpdateNotificationHub.json"
+          }
         }
       }
     },
@@ -122,15 +171,31 @@
       "get": {
         "operationId": "GetRegistrationsByTag",
         "description": "Retrieves all registrations with a specific tag.",
-        "produces": [ "application/atom+xml;type=entry;charset=utf-8" ],
+        "produces": [
+          "application/atom+xml;type=entry;charset=utf-8"
+        ],
         "parameters": [
-          { "$ref": "#/parameters/HubNameParameter" },
-          { "$ref": "#/parameters/MSVersionParameter" },
-          { "$ref": "#/parameters/ApiVersionParameter" },
-          { "$ref": "#/parameters/AuthorizationHeaderParameter" },
-          { "$ref": "#/parameters/TagPathParameter" },
-          { "$ref": "#/parameters/ContinuationTokenQueryParameter" },
-          { "$ref": "#/parameters/TopQueryParameter" }
+          {
+            "$ref": "#/parameters/HubNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AuthorizationHeaderParameter"
+          },
+          {
+            "$ref": "#/parameters/TagPathParameter"
+          },
+          {
+            "$ref": "#/parameters/ContinuationTokenQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/TopQueryParameter"
+          }
         ],
         "responses": {
           "200": {
@@ -155,6 +220,11 @@
             "description": "Not found."
           }
         }
+      },
+      "x-ms-examples": {
+        "GetRegistrationsByTag": {
+          "$ref": "./examples/GetRegistrationsByTag.json"
+        }
       }
     },
     "/{hubName}/registrationIDs": {
@@ -162,12 +232,22 @@
         "operationId": "CreateRegistrationId",
         "description": "Create a registration ID",
         "parameters": [
-          { "$ref": "#/parameters/HubNameParameter" },
-          { "$ref": "#/parameters/MSVersionParameter" },
-          { "$ref": "#/parameters/ApiVersionParameter" },
-          { "$ref": "#/parameters/AuthorizationHeaderParameter" }
+          {
+            "$ref": "#/parameters/HubNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AuthorizationHeaderParameter"
+          }
         ],
-        "produces": [ "application/atom+xml;type=entry;charset=utf-8" ],
+        "produces": [
+          "application/atom+xml;type=entry;charset=utf-8"
+        ],
         "responses": {
           "201": {
             "description": "Registration created successfully.",
@@ -191,6 +271,11 @@
           "403": {
             "description": "Quota exceeded; too many registrations in this namespace. Registration not created."
           }
+        },
+        "x-ms-examples": {
+          "CreateRegistrationId": {
+            "$ref": "./examples/CreateRegistrationId.json"
+          }
         }
       }
     },
@@ -198,15 +283,31 @@
       "get": {
         "operationId": "GetRegistrations",
         "description": "Get registrations by the specified criteria",
-        "produces": [ "application/atom+xml;type=entry;charset=utf-8" ],
+        "produces": [
+          "application/atom+xml;type=entry;charset=utf-8"
+        ],
         "parameters": [
-          { "$ref": "#/parameters/HubNameParameter" },
-          { "$ref": "#/parameters/MSVersionParameter" },
-          { "$ref": "#/parameters/ApiVersionParameter" },
-          { "$ref": "#/parameters/AuthorizationHeaderParameter" },
-          { "$ref": "#/parameters/ContinuationTokenQueryParameter" },
-          { "$ref": "#/parameters/FilterQueryParameter" },
-          { "$ref": "#/parameters/TopQueryParameter" }
+          {
+            "$ref": "#/parameters/HubNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AuthorizationHeaderParameter"
+          },
+          {
+            "$ref": "#/parameters/ContinuationTokenQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/TopQueryParameter"
+          }
         ],
         "responses": {
           "200": {
@@ -230,18 +331,35 @@
           "404": {
             "description": "Not found. The channel hash does not exist."
           }
+        },
+        "x-ms-examples": {
+          "GetRegistrations": {
+            "$ref": "./examples/GetRegistrations.json"
+          }
         }
       },
       "post": {
         "operationId": "CreateRegistration",
         "description": "Creates a registration",
-        "consumes": [ "application/atom+xml;type=entry;charset=utf-8" ],
-        "produces": [ "application/atom+xml;type=entry;charset=utf-8" ],
+        "consumes": [
+          "application/atom+xml;type=entry;charset=utf-8"
+        ],
+        "produces": [
+          "application/atom+xml;type=entry;charset=utf-8"
+        ],
         "parameters": [
-          { "$ref": "#/parameters/HubNameParameter" },
-          { "$ref": "#/parameters/MSVersionParameter" },
-          { "$ref": "#/parameters/ApiVersionParameter" },
-          { "$ref": "#/parameters/AuthorizationHeaderParameter" }
+          {
+            "$ref": "#/parameters/HubNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AuthorizationHeaderParameter"
+          }
         ],
         "responses": {
           "201": {
@@ -268,6 +386,11 @@
           "409": {
             "description": "Request rejected because registration operations rate is too high"
           }
+        },
+        "x-ms-examples": {
+          "CreateRegistration": {
+            "$ref": "./examples/CreateRegistration.json"
+          }
         }
       }
     },
@@ -276,12 +399,24 @@
         "operationId": "DeleteRegistration",
         "description": "Deletes a registration",
         "parameters": [
-          { "$ref": "#/parameters/HubNameParameter" },
-          { "$ref": "#/parameters/MSVersionParameter" },
-          { "$ref": "#/parameters/ApiVersionParameter" },
-          { "$ref": "#/parameters/RegistrationIdParameter" },
-          { "$ref": "#/parameters/IfMatchParameter" },
-          { "$ref": "#/parameters/AuthorizationHeaderParameter" }
+          {
+            "$ref": "#/parameters/HubNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistrationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/AuthorizationHeaderParameter"
+          }
         ],
         "responses": {
           "200": {
@@ -305,18 +440,35 @@
           "412": {
             "description": "Precondition failed. The current version of the registration does not have specified ETag."
           }
+        },
+        "x-ms-examples": {
+          "DeleteRegistration": {
+            "$ref": "./examples/DeleteRegistration.json"
+          }
         }
       },
       "get": {
         "operationId": "GetRegistration",
         "description": "Get a registration by registration ID",
-        "produces": [ "application/atom+xml;type=entry;charset=utf-8" ],
+        "produces": [
+          "application/atom+xml;type=entry;charset=utf-8"
+        ],
         "parameters": [
-          { "$ref": "#/parameters/HubNameParameter" },
-          { "$ref": "#/parameters/MSVersionParameter" },
-          { "$ref": "#/parameters/ApiVersionParameter" },
-          { "$ref": "#/parameters/RegistrationIdParameter" },
-          { "$ref": "#/parameters/AuthorizationHeaderParameter" }
+          {
+            "$ref": "#/parameters/HubNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistrationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AuthorizationHeaderParameter"
+          }
         ],
         "responses": {
           "201": {
@@ -340,19 +492,38 @@
           "404": {
             "description": "Not found. The registration does not exist."
           }
+        },
+        "x-ms-examples": {
+          "GetRegistration": {
+            "$ref": "./examples/GetRegistration.json"
+          }
         }
       },
       "put": {
         "operationId": "CreateOrUpdateRegistration",
         "description": "Create or update a registration",
-        "consumes": [ "application/atom+xml;type=entry;charset=utf-8" ],
-        "produces": [ "application/atom+xml;type=entry;charset=utf-8" ],
+        "consumes": [
+          "application/atom+xml;type=entry;charset=utf-8"
+        ],
+        "produces": [
+          "application/atom+xml;type=entry;charset=utf-8"
+        ],
         "parameters": [
-          { "$ref": "#/parameters/HubNameParameter" },
-          { "$ref": "#/parameters/MSVersionParameter" },
-          { "$ref": "#/parameters/ApiVersionParameter" },
-          { "$ref": "#/parameters/RegistrationIdParameter" },
-          { "$ref": "#/parameters/AuthorizationHeaderParameter" },
+          {
+            "$ref": "#/parameters/HubNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistrationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AuthorizationHeaderParameter"
+          },
           {
             "in": "body",
             "name": "body",
@@ -393,6 +564,11 @@
           "410": {
             "description": "Cannot use specified location. Use a different registration ID."
           }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateRegistration": {
+            "$ref": "./examples/CreateOrUpdateRegistration.json"
+          }
         }
       }
     },
@@ -401,11 +577,25 @@
         "operationId": "DeleteInstallation",
         "description": "Delete an installation by ID",
         "parameters": [
-          { "$ref": "#/parameters/HubNameParameter" },
-          { "$ref": "#/parameters/MSVersionParameter" },
-          { "$ref": "#/parameters/ApiVersionParameter" },
-          { "$ref": "#/parameters/InstallationIdParameter" },
-          { "$ref": "#/parameters/AuthorizationHeaderParameter" }
+          {
+            "$ref": "#/parameters/HubNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/InstallationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AuthorizationHeaderParameter"
+          }
+        ],
+        "summary": "Delete Installation",
+        "tags": [
+          "installations"
         ],
         "responses": {
           "204": {
@@ -421,18 +611,31 @@
             "description": "Quota exceeded. Request rejected because registration operations rate is too high."
           }
         },
-        "summary": "Delete Installation",
-        "tags": [ "installations" ]
+        "x-ms-examples": {
+          "DeleteInstallation": {
+            "$ref": "./examples/DeleteInstallation.json"
+          }
+        }
       },
       "get": {
         "operationId": "GetInstallation",
         "description": "Get an Installation by Installation ID",
         "parameters": [
-          { "$ref": "#/parameters/HubNameParameter" },
-          { "$ref": "#/parameters/MSVersionParameter" },
-          { "$ref": "#/parameters/ApiVersionParameter" },
-          { "$ref": "#/parameters/InstallationIdParameter" },
-          { "$ref": "#/parameters/AuthorizationHeaderParameter" }
+          {
+            "$ref": "#/parameters/HubNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/InstallationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AuthorizationHeaderParameter"
+          }
         ],
         "produces": [
           "application/json"
@@ -462,6 +665,11 @@
           "404": {
             "description": "Installation Not Found."
           }
+        },
+        "x-ms-examples": {
+          "GetInstallation": {
+            "$ref": "./examples/GetInstallation.json"
+          }
         }
       },
       "patch": {
@@ -471,11 +679,21 @@
           "application/json-patch+json"
         ],
         "parameters": [
-          { "$ref": "#/parameters/HubNameParameter" },
-          { "$ref": "#/parameters/MSVersionParameter" },
-          { "$ref": "#/parameters/ApiVersionParameter" },
-          { "$ref": "#/parameters/InstallationIdParameter" },
-          { "$ref": "#/parameters/AuthorizationHeaderParameter" },
+          {
+            "$ref": "#/parameters/HubNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/InstallationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AuthorizationHeaderParameter"
+          },
           {
             "in": "body",
             "name": "body",
@@ -498,6 +716,11 @@
           "403": {
             "description": "Quota exceeded; too many registrations in this namespace."
           }
+        },
+        "x-ms-examples": {
+          "PatchInstallation": {
+            "$ref": "./examples/PatchInstallation.json"
+          }
         }
       },
       "put": {
@@ -507,11 +730,21 @@
           "application/json"
         ],
         "parameters": [
-          { "$ref": "#/parameters/HubNameParameter" },
-          { "$ref": "#/parameters/MSVersionParameter" },
-          { "$ref": "#/parameters/ApiVersionParameter" },
-          { "$ref": "#/parameters/InstallationIdParameter" },
-          { "$ref": "#/parameters/AuthorizationHeaderParameter" },
+          {
+            "$ref": "#/parameters/HubNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/InstallationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AuthorizationHeaderParameter"
+          },
           {
             "in": "body",
             "name": "body",
@@ -534,6 +767,11 @@
           "403": {
             "description": "Too many installations in this namespace - Installations not created."
           }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateInstallation": {
+            "$ref": "./examples/CreateOrUpdateInstallation.json"
+          }
         }
       }
     },
@@ -547,24 +785,60 @@
           "application/octet-stream"
         ],
         "parameters": [
-          { "$ref": "#/parameters/MessageBodyParameter"},
-          { "$ref": "#/parameters/HubNameParameter" },
-          { "$ref": "#/parameters/MSVersionParameter" },
-          { "$ref": "#/parameters/AuthorizationHeaderParameter" },
-          { "$ref": "#/parameters/DeviceHandleParameter" },
-          { "$ref": "#/parameters/FormatParameter" },
-          { "$ref": "#/parameters/TagsParameter" },
-          { "$ref": "#/parameters/ApiVersionParameter" },
-          { "$ref": "#/parameters/DirectSendParameter" },
-          { "$ref": "#/parameters/ApnsTopicHeader" },
-          { "$ref": "#/parameters/ApnsPriority" },
-          { "$ref": "#/parameters/ApnsPushType" },
-          { "$ref": "#/parameters/WnsCachePolicyParameter" },
-          { "$ref": "#/parameters/WnsPriorityParameter" },
-          { "$ref": "#/parameters/WnsRequestForStatusParameter" },
-          { "$ref": "#/parameters/WnsTagParameter" },
-          { "$ref": "#/parameters/WnsTtlParameter" },
-          { "$ref": "#/parameters/WnsTypeParameter" }
+          {
+            "$ref": "#/parameters/MessageBodyParameter"
+          },
+          {
+            "$ref": "#/parameters/HubNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AuthorizationHeaderParameter"
+          },
+          {
+            "$ref": "#/parameters/DeviceHandleParameter"
+          },
+          {
+            "$ref": "#/parameters/FormatParameter"
+          },
+          {
+            "$ref": "#/parameters/TagsParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DirectSendParameter"
+          },
+          {
+            "$ref": "#/parameters/ApnsTopicHeader"
+          },
+          {
+            "$ref": "#/parameters/ApnsPriority"
+          },
+          {
+            "$ref": "#/parameters/ApnsPushType"
+          },
+          {
+            "$ref": "#/parameters/WnsCachePolicyParameter"
+          },
+          {
+            "$ref": "#/parameters/WnsPriorityParameter"
+          },
+          {
+            "$ref": "#/parameters/WnsRequestForStatusParameter"
+          },
+          {
+            "$ref": "#/parameters/WnsTagParameter"
+          },
+          {
+            "$ref": "#/parameters/WnsTtlParameter"
+          },
+          {
+            "$ref": "#/parameters/WnsTypeParameter"
+          }
         ],
         "responses": {
           "201": {
@@ -591,6 +865,11 @@
           "413": {
             "description": "Requested entity too large. The message size cannot be over 64 Kb."
           }
+        },
+        "x-ms-examples": {
+          "SendMessage": {
+            "$ref": "./examples/SendMessage.json"
+          }
         }
       }
     }
@@ -616,7 +895,9 @@
           "xml": {
             "attribute": true
           },
-          "enum": [ "application/xml" ]
+          "enum": [
+            "application/xml"
+          ]
         },
         "NotificationHubDescription": {
           "$ref": "#/definitions/NotificationHubDescriptionModel"
@@ -631,7 +912,9 @@
           "xml": {
             "attribute": true
           },
-          "enum": [ "http://www.w3.org/2001/XMLSchema-instance" ]
+          "enum": [
+            "http://www.w3.org/2001/XMLSchema-instance"
+          ]
         },
         "RegistrationTtl": {
           "type": "string"
@@ -661,11 +944,15 @@
                 "xml": {
                   "attribute": true
                 },
-                "enum": [ "http://www.w3.org/2001/XMLSchema-instance" ]
+                "enum": [
+                  "http://www.w3.org/2001/XMLSchema-instance"
+                ]
               },
               "ClaimType": {
                 "type": "string",
-                "enum": [ "SharedAccessAuthorizationRule" ]
+                "enum": [
+                  "SharedAccessAuthorizationRule"
+                ]
               },
               "ClaimValue": {
                 "type": "string"
@@ -832,7 +1119,9 @@
     },
     "InstallationSecondaryTileModel": {
       "type": "object",
-      "required": [ "pushChannel" ],
+      "required": [
+        "pushChannel"
+      ],
       "properties": {
         "pushChannel": {
           "description": "ChannelUri for the secondary tile. Applies only to the 'wns' platform.",
@@ -916,7 +1205,9 @@
           "xml": {
             "attribute": true
           },
-          "enum": [ "http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" ]
+          "enum": [
+            "http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+          ]
         },
         "m:etag": {
           "type": "string",
@@ -938,7 +1229,9 @@
           "xml": {
             "attribute": true
           },
-          "enum": [ "application/xml" ]
+          "enum": [
+            "application/xml"
+          ]
         },
         "AppleRegistrationDescription": {
           "$ref": "#/definitions/AppleRegistrationContentModel"
@@ -978,7 +1271,9 @@
             "attribute": true
           },
           "type": "string",
-          "enum": [ "http://www.w3.org/2001/XMLSchema-instance" ]
+          "enum": [
+            "http://www.w3.org/2001/XMLSchema-instance"
+          ]
         },
         "Tags": {
           "type": "string"
@@ -987,7 +1282,9 @@
           "type": "string"
         }
       },
-      "required": [ "DeviceToken" ]
+      "required": [
+        "DeviceToken"
+      ]
     },
     "AppleTemplateRegistrationContentModel": {
       "type": "object",
@@ -1001,7 +1298,9 @@
             "attribute": true
           },
           "type": "string",
-          "enum": [ "http://www.w3.org/2001/XMLSchema-instance" ]
+          "enum": [
+            "http://www.w3.org/2001/XMLSchema-instance"
+          ]
         },
         "Tags": {
           "type": "string"
@@ -1016,7 +1315,10 @@
           "type": "string"
         }
       },
-      "required": [ "BodyTemplate", "DeviceToken" ]
+      "required": [
+        "BodyTemplate",
+        "DeviceToken"
+      ]
     },
     "BaiduRegistrationContentModel": {
       "type": "object",
@@ -1030,7 +1332,9 @@
             "attribute": true
           },
           "type": "string",
-          "enum": [ "http://www.w3.org/2001/XMLSchema-instance" ]
+          "enum": [
+            "http://www.w3.org/2001/XMLSchema-instance"
+          ]
         },
         "Tags": {
           "type": "string"
@@ -1042,7 +1346,10 @@
           "type": "string"
         }
       },
-      "required": [ "BaiduUserId", "BaiduChannelId" ]
+      "required": [
+        "BaiduUserId",
+        "BaiduChannelId"
+      ]
     },
     "BaiduTemplateRegistrationContentModel": {
       "type": "object",
@@ -1056,7 +1363,9 @@
             "attribute": true
           },
           "type": "string",
-          "enum": [ "http://www.w3.org/2001/XMLSchema-instance" ]
+          "enum": [
+            "http://www.w3.org/2001/XMLSchema-instance"
+          ]
         },
         "Tags": {
           "type": "string"
@@ -1071,7 +1380,11 @@
           "type": "string"
         }
       },
-      "required": [ "BaiduUserId", "BaiduChannelId", "BodyTemplate" ]
+      "required": [
+        "BaiduUserId",
+        "BaiduChannelId",
+        "BodyTemplate"
+      ]
     },
     "GcmRegistrationContentModel": {
       "type": "object",
@@ -1085,7 +1398,9 @@
             "attribute": true
           },
           "type": "string",
-          "enum": [ "http://www.w3.org/2001/XMLSchema-instance" ]
+          "enum": [
+            "http://www.w3.org/2001/XMLSchema-instance"
+          ]
         },
         "Tags": {
           "type": "string"
@@ -1107,7 +1422,9 @@
             "attribute": true
           },
           "type": "string",
-          "enum": [ "http://www.w3.org/2001/XMLSchema-instance" ]
+          "enum": [
+            "http://www.w3.org/2001/XMLSchema-instance"
+          ]
         },
         "Tags": {
           "type": "string"
@@ -1119,7 +1436,10 @@
           "type": "string"
         }
       },
-      "required": [ "GcmRegistrationId", "BodyTemplate" ]
+      "required": [
+        "GcmRegistrationId",
+        "BodyTemplate"
+      ]
     },
     "WindowsRegistrationContentModel": {
       "type": "object",
@@ -1133,7 +1453,9 @@
             "attribute": true
           },
           "type": "string",
-          "enum": [ "http://www.w3.org/2001/XMLSchema-instance" ]
+          "enum": [
+            "http://www.w3.org/2001/XMLSchema-instance"
+          ]
         },
         "Tags": {
           "type": "string"
@@ -1142,7 +1464,9 @@
           "type": "string"
         }
       },
-      "required": [ "ChannelUri" ]
+      "required": [
+        "ChannelUri"
+      ]
     },
     "WindowsTemplateRegistrationContentModel": {
       "type": "object",
@@ -1156,7 +1480,9 @@
             "attribute": true
           },
           "type": "string",
-          "enum": [ "http://www.w3.org/2001/XMLSchema-instance" ]
+          "enum": [
+            "http://www.w3.org/2001/XMLSchema-instance"
+          ]
         },
         "Tags": {
           "type": "string"
@@ -1188,7 +1514,10 @@
           }
         }
       },
-      "required": [ "ChannelUri", "BodyTemplate" ]
+      "required": [
+        "ChannelUri",
+        "BodyTemplate"
+      ]
     }
   },
   "parameters": {
@@ -1268,7 +1597,12 @@
       "name": "ServiceBusNotification-Format",
       "required": true,
       "type": "string",
-      "enum": [ "apple", "baidu", "gcm", "windows" ],
+      "enum": [
+        "apple",
+        "baidu",
+        "gcm",
+        "windows"
+      ],
       "x-ms-enum": {
         "name": "FormatParameterType",
         "modelAsString": true
