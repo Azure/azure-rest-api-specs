@@ -136,16 +136,16 @@ suppressions:
     from: policyAssignments.json
     reason: Service only returns 201 on all successful PUTs
   - code: PutResponseSchemaDescription
-    from: policyDefinitions.json.json
+    from: policyDefinitions.json
     reason: Service only returns 201 on all successful PUTs
   - code: PutResponseSchemaDescription
-    from: policySetDefinitions.json.json
+    from: policySetDefinitions.json
     reason: Service only returns 201 on all successful PUTs
   - code: PutResponseSchemaDescription
-    from: policyDefinitionVersions.json.json
+    from: policyDefinitionVersions.json
     reason: Service only returns 201 on all successful PUTs
   - code: PutResponseSchemaDescription
-    from: policySetDefinitionVersions.json.json
+    from: policySetDefinitionVersions.json
     reason: Service only returns 201 on all successful PUTs
   - code: UnSupportedPatchProperties
     from: policyAssignments.json
