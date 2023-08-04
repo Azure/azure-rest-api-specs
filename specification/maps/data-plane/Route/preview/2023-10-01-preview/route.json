@@ -908,6 +908,12 @@
           "type": "integer",
           "readOnly": true
         },
+        "durationTrafficInSeconds": {
+          "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance with current traffic conditions. This value is always provided for the complete route and does not depend on the availability of traffic information.",
+          "format": "int64",
+          "type": "integer",
+          "readOnly": true
+        },
         "subLegs": {
           "description": "Information about a segments of the route Leg defined by the route Leg waypoints and any intermediate via-waypoints. For example, if the route Leg has two via-waypoints in addition to start and end waypoints, there would be three (3) route sub-legs.",
           "type": "array",
@@ -937,6 +943,12 @@
         },
         "durationInSeconds": {
           "description": "The time, in seconds, that it takes to travel the corresponding travelDistance by the sub-leg.",
+          "format": "int64",
+          "type": "integer",
+          "readOnly": true
+        },
+        "durationTrafficInSeconds": {
+          "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance with current traffic conditions. This value is always provided for the complete route and does not depend on the availability of traffic information.",
           "format": "int64",
           "type": "integer",
           "readOnly": true
