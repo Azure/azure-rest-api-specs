@@ -109,13 +109,25 @@ Please first review recommended folder structure detailed in [this document](htt
    oav run <scenario-file> --spec <spec-file> --generateExample
    ```
 
+    Note, latest OAV tool should automatically generate the following. However, if you are generating the examples manually, please ensure you have:
+    - include `title` field and make sure it is descriptive and unique for each operation.
+    - include `operationId`. This is used to match with declared operations in TypeSpec and correctly output in swagger.
+
 4. Add/update the `readme.md` file in either the 'resource-manager' or 'data-plane' folder to specify the version and location of the OpenAPI files. The `readme.md` is needed for both management-plane and data-plane services for REST API Docs generation. For management-plane services, the `readme.md` is also needed for SDK generation -- see [generating client with autorest](https://github.com/Azure/autorest/blob/main/docs/generate/readme.md#keeping-your-options-in-one-place-the-preferred-option). The `readme.md` may contain generation options for multiple languages, separated into high-level sections.
 
    Example:[sample-readme](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/samplefiles/samplereadme.md)
 
-5. Ensure all generated files under `resource-manager` or `data-plane` have been added to PR.
+5. Generate swagger files:
+   - sync with the target branch in the azure-rest-api-specs repo
+      ```
+       git pull upstream <target-branch>
+      ```
+   - in the root directory, run `npm install`
+   - in the project directory, `npx tsp compile`. This will generate swagger files under `resource-manager` or `data-plane` folders.
 
-6. Send a pull request .
+6. Ensure all generated files under `resource-manager` or `data-plane` have been added to PR.
+
+7. Send a pull request .
 
    - commit all your changes.
    - push your branch to your fork of the repo.

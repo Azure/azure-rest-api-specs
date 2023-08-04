@@ -1,4 +1,4 @@
-## What is an TypeSpec Specification?
+## What is a TypeSpec Specification?
 
 TypeSpec is a versatile language used for describing cloud service APIs and generating various API description languages, client and service code, documentation, and other related assets. It provides highly extensible core language primitives that can describe API structures common among REST, GraphQL, gRPC, and other protocols.
 
