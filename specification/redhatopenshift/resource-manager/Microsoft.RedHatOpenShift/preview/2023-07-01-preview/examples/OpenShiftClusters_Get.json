@@ -38,7 +38,17 @@
           },
           "networkProfile": {
             "podCidr": "10.128.0.0/14",
-            "serviceCidr": "172.30.0.0/16"
+            "serviceCidr": "172.30.0.0/16",
+            "loadBalancerProfile": {
+              "managedOutboundIps": {
+                "count": 1
+              },
+              "effectiveOutboundIps": [
+                {
+                  "id": "/subscriptions/subscriptionId/resourceGroups/clusterResourceGroup/providers/Microsoft.Network/publicIPAddresses/publicIPAddressName"
+                }
+              ]
+            }
           },
           "masterProfile": {
             "vmSize": "Standard_D8s_v3",

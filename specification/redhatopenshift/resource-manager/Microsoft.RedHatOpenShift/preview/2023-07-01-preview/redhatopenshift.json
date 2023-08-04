@@ -473,7 +473,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Updated",
             "schema": {
               "$ref": "#/definitions/OpenShiftCluster"
             }
@@ -548,7 +548,7 @@
         "tags": [
           "OpenShiftClusters"
         ],
-        "summary": "Creates or updates a OpenShift cluster with the specified subscription, resource group and resource name.",
+        "summary": "Creates or updates an OpenShift cluster with the specified subscription, resource group and resource name.",
         "description": "The operation returns properties of a OpenShift cluster.",
         "operationId": "OpenShiftClusters_Update",
         "parameters": [
@@ -600,7 +600,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Creates or updates a OpenShift cluster with the specified subscription, resource group and resource name.": {
+          "Creates or updates an OpenShift cluster with the specified subscription, resource group and resource name.": {
             "$ref": "./examples/OpenShiftClusters_Update.json"
           }
         }
@@ -1846,6 +1846,17 @@
         }
       }
     },
+    "EffectiveOutboundIP": {
+      "description": "EffectiveOutboundIP represents an effective outbound IP resource of the cluster public load balancer.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The fully qualified Azure resource id of an IP address resource.",
+          "type": "string",
+          "format": "arm-id"
+        }
+      }
+    },
     "EncryptionAtHost": {
       "description": "EncryptionAtHost represents encryption at host state",
       "enum": [
@@ -1885,6 +1896,46 @@
         "ip": {
           "description": "The IP of the ingress.",
           "type": "string"
+        }
+      }
+    },
+    "LoadBalancerProfile": {
+      "description": "LoadBalancerProfile represents the profile of the cluster public load balancer.",
+      "type": "object",
+      "properties": {
+        "managedOutboundIps": {
+          "$ref": "#/definitions/ManagedOutboundIPs",
+          "description": "The desired managed outbound IPs for the cluster public load balancer."
+        },
+        "effectiveOutboundIps": {
+          "description": "The list of effective outbound IP addresses of the public load balancer.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EffectiveOutboundIP"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "outboundIps": {
+          "description": "The desired outbound IP resources for the cluster load balancer.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OutboundIP"
+          },
+          "x-ms-identifiers": []
+        },
+        "outboundIpPrefixes": {
+          "description": "The desired outbound IP Prefix resources for the cluster load balancer.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OutboundIPPrefix"
+          },
+          "x-ms-identifiers": []
+        },
+        "allocatedOutboundPorts": {
+          "format": "int32",
+          "description": "The desired number of allocated SNAT ports per VM. Allowed values are in the range of 0 to 64000 (inclusive). The default value is 1024.",
+          "type": "integer"
         }
       }
     },
@@ -1952,6 +2003,17 @@
         }
       }
     },
+    "ManagedOutboundIPs": {
+      "description": "ManagedOutboundIPs represents the desired managed outbound IPs for the cluster public load balancer.",
+      "type": "object",
+      "properties": {
+        "count": {
+          "format": "int32",
+          "description": "Count represents the desired number of IPv4 outbound IPs created and managed by Azure for the cluster public load balancer.  Allowed values are in the range of 1 - 20.  The default value is 1.",
+          "type": "integer"
+        }
+      }
+    },
     "MasterProfile": {
       "description": "MasterProfile represents a master profile.",
       "type": "object",
@@ -1989,6 +2051,10 @@
         "outboundType": {
           "$ref": "#/definitions/OutboundType",
           "description": "The OutboundType used for egress traffic."
+        },
+        "loadBalancerProfile": {
+          "$ref": "#/definitions/LoadBalancerProfile",
+          "description": "The cluster load balancer profile."
         }
       }
     },
@@ -2209,6 +2275,28 @@
         "nextLink": {
           "description": "The link used to get the next page of operations.",
           "type": "string"
+        }
+      }
+    },
+    "OutboundIP": {
+      "description": "OutboundIP represents a desired outbound IP resource for the cluster load balancer.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The fully qualified Azure resource id of the IP address resource.",
+          "type": "string",
+          "format": "arm-id"
+        }
+      }
+    },
+    "OutboundIPPrefix": {
+      "description": "OutboundIPPrefix represents a desired outbound IP Prefix resource for the cluster load balancer.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The fully qualified Azure resource id of an IP Prefix resource.",
+          "type": "string",
+          "format": "arm-id"
         }
       }
     },
@@ -2481,6 +2569,7 @@
           "description": "The size of the worker VMs."
         },
         "diskSizeGB": {
+          "format": "int32",
           "description": "The disk size of the worker VMs.",
           "type": "integer"
         },
@@ -2489,6 +2578,7 @@
           "type": "string"
         },
         "count": {
+          "format": "int32",
           "description": "The number of worker VMs.",
           "type": "integer"
         },
