@@ -319,6 +319,12 @@ interface UpdateRuns {
       IfNoneMatchParameters<UpdateRun>
   >;
 
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "location",
+    }
+  )
   delete is FleetArmResourceDeleteAsync<
     UpdateRun,
     BaseParameters<UpdateRun> & IfMatchParameters<UpdateRun>
