@@ -277,7 +277,7 @@
         ],
         "summary": "Apply Updates to resource",
         "description": "Apply maintenance updates to resource",
-        "operationId": "ApplyUpdates_CreateOrUpdate",
+        "operationId": "ApplyUpdates_CreateOrUpdateOrCancel",
         "consumes": [],
         "produces": [
           "application/json"
@@ -347,17 +347,6 @@
               "$ref": "#/definitions/ApplyUpdate"
             }
           },
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/ApplyUpdate"
-            }
-          },
           "default": {
             "description": "BadRequest",
             "schema": {
@@ -366,11 +355,10 @@
           }
         },
         "x-ms-examples": {
-          "ApplyUpdates_CreateOrUpdate": {
-            "$ref": "./examples/ApplyUpdates_CreateOrUpdate_CancelMaintenance.json"
+          "ApplyUpdates_CreateOrUpdateOrCancel": {
+            "$ref": "./examples/ApplyUpdates_CreateOrUpdate.json"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/applyUpdates/default": {
@@ -2377,10 +2365,6 @@
       "description": "Properties for apply update",
       "type": "object",
       "properties": {
-        "provisioningState": {
-          "type": "string",
-          "description": "Gets or sets the state of the provisioning."
-        },
         "status": {
           "description": "The status",
           "enum": [
@@ -2866,8 +2850,7 @@
           "$ref": "#/definitions/ErrorDetails",
           "description": "Details of the error"
         }
-      },
-      "x-ms-identifiers": []
+      }
     },
     "ErrorDetails": {
       "description": "An error response details received from the Azure Maintenance service.",
