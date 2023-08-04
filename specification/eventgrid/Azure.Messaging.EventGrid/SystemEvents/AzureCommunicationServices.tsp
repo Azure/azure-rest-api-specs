@@ -97,7 +97,7 @@ alias AcsChatThreadBaseEventData = {
   createdByCommunicationIdentifier?: CommunicationIdentifierModel;
 
   @doc("The thread properties")
-  properties?: Record<unknown>;
+  properties?: Record<string>;
 
   @doc("The list of properties of participants who are part of the thread")
   participants?: AcsChatThreadParticipantProperties[];
@@ -143,7 +143,7 @@ alias AcsChatThredPropertiesBaseEventData = {
   editTime?: utcDateTime;
 
   @doc("The updated thread properties")
-  properties?: Record<unknown>;
+  properties?: Record<string>;
 };
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdatedPerUser event.")
