@@ -1357,7 +1357,8 @@ model Task {
 
     @doc("The reason the task was moved into its current state, if the task wasn't completed.")
     reason?: string;
-    
+
+    #suppress "@azure-tools/typespec-azure-core/bad-record-type" 
     @doc("Attributes unique to the task.  This differs by task type.")
     metadata?: Record<unknown>;
 }
