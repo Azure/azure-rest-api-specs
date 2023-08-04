@@ -1357,9 +1357,9 @@ model Task {
 
     @doc("The reason the task was moved into its current state, if the task wasn't completed.")
     reason?: string;
-    #suppress "@azure-tools/typespec-azure-core/no-unknown"
+    
     @doc("Attributes unique to the task.  This differs by task type.")
-    metadata?: unknown;
+    metadata?: Record<unknown>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
