@@ -1,4 +1,5 @@
 import "@typespec/http";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-providerhub";
@@ -9,6 +10,10 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using Azure.Core;
+using Azure.Core.Traits;
+using OpenAPI;
 
 @armProviderNamespace("Microsoft.ConnectedCredentials")
 @service({
@@ -39,6 +44,7 @@ model Credential is TrackedResource<CredentialProperties> {
 @Azure.Core.lroStatus
 enum ProvisioningState {
   ...ResourceProvisioningState,
+
   @doc("The provisioning resource state.")
   Provisioning,
 
@@ -86,8 +92,9 @@ model CredentialProperties {
   target?: Target;
 
   @visibility("read", "create", "update")
+  @extension("x-ms-identifiers", ["remoteRef"])
   @doc(" Data defines the connection between the Kubernetes Secret keys and the Provider data, Array.")
-  data?: Data;
+  data?: Data[];
 }
 
 @doc("Provider specific settings.")
@@ -151,10 +158,10 @@ model RemoteRef {
 
 @armResourceOperations
 interface Credentials {
-    get is ArmResourceRead<Credential>;
-    createOrUpdate is ArmResourceCreateOrUpdateAsync<Credential>;
-    update is ArmResourcePatchAsync<Credential, CredentialProperties>;
-    delete is ArmResourceDeleteAsync<Credential>;
-    listByResourceGroup is ArmResourceListByParent<Credential>;
-    listBySubscription is ArmListBySubscription<Credential>;
+  get is ArmResourceRead<Credential>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<Credential>;
+  update is ArmResourcePatchAsync<Credential, CredentialProperties>;
+  delete is ArmResourceDeleteAsync<Credential>;
+  listByResourceGroup is ArmResourceListByParent<Credential>;
+  listBySubscription is ArmListBySubscription<Credential>;
 }
