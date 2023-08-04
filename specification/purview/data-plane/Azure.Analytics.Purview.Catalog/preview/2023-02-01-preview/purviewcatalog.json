@@ -70,6 +70,9 @@
             "schema": {
               "$ref": "#/definitions/AtlasEntityWithExtInfo"
             }
+          },
+          {
+            "$ref": "#/parameters/businessAttributeUpdateBehavior"
           }
         ],
         "responses": {
@@ -158,6 +161,9 @@
             "schema": {
               "$ref": "#/definitions/AtlasEntitiesWithExtInfo"
             }
+          },
+          {
+            "$ref": "#/parameters/businessAttributeUpdateBehavior"
           }
         ],
         "responses": {
@@ -8457,6 +8463,24 @@
       "in": "query",
       "required": false,
       "type": "boolean",
+      "default": false,
+      "x-ms-parameter-location": "method"
+    },
+    "businessAttributeUpdateBehavior": {
+      "name": "businessAttributeUpdateBehavior",
+      "description": "Used to define the update behavior for business attributes when updating entities.",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "ignore",
+        "replace",
+        "merge"
+      ],
+      "x-ms-enum": {
+        "name": "type",
+        "modelAsString": true
+      },
       "default": false,
       "x-ms-parameter-location": "method"
     }
