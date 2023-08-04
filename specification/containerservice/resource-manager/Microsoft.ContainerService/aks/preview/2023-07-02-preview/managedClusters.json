@@ -92,16 +92,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/OSOptionProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -996,9 +996,6 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "NoContent"
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -1011,6 +1008,9 @@
                 "type": "string"
               }
             }
+          },
+          "204": {
+            "description": "NoContent"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1652,9 +1652,6 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "NoContent"
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -1667,6 +1664,9 @@
                 "type": "string"
               }
             }
+          },
+          "204": {
+            "description": "NoContent"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2292,6 +2292,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "command finished with async pattern, tracking by location header. !!! this is for autorest only, you never get 200 from this api !!!",
+            "schema": {
+              "$ref": "#/definitions/RunCommandResult"
+            }
+          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -2299,12 +2305,6 @@
                 "description": "URL to query for status of the operation.",
                 "type": "string"
               }
-            }
-          },
-          "200": {
-            "description": "command finished with async pattern, tracking by location header. !!! this is for autorest only, you never get 200 from this api !!!",
-            "schema": {
-              "$ref": "#/definitions/RunCommandResult"
             }
           },
           "default": {
@@ -2354,6 +2354,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "command finished",
+            "schema": {
+              "$ref": "#/definitions/RunCommandResult"
+            }
+          },
           "202": {
             "description": "command running in progress",
             "headers": {
@@ -2361,12 +2367,6 @@
                 "description": "URL to query for status of the operation.",
                 "type": "string"
               }
-            }
-          },
-          "200": {
-            "description": "command finished",
-            "schema": {
-              "$ref": "#/definitions/RunCommandResult"
             }
           },
           "default": {
@@ -8626,10 +8626,10 @@
       "readOnly": true,
       "description": "properties of the machine",
       "properties": {
-          "network": {
-               "$ref": "#/definitions/MachineNetworkProperties"
-           },
-        "resourceId":{
+        "network": {
+          "$ref": "#/definitions/MachineNetworkProperties"
+        },
+        "resourceId": {
           "readOnly": true,
           "type": "string",
           "description": "Arm resource id of the machine. It can be used to GET underlying VM Instance"
@@ -8640,57 +8640,56 @@
       "type": "object",
       "readOnly": true,
       "description": "network properties of the machine",
-       "properties": {
-          "ipAddresses": {
-             "type": "array",
-             "readOnly": true,
-             "description": "IPv4, IPv6 addresses of the machine",
-             "items" : {
-                "$ref": "#/definitions/MachineIpAddress"
-             }
+      "properties": {
+        "ipAddresses": {
+          "type": "array",
+          "readOnly": true,
+          "description": "IPv4, IPv6 addresses of the machine",
+          "items": {
+            "$ref": "#/definitions/MachineIpAddress"
           }
-       }
+        }
+      }
     },
-    "MachineIpAddress" :{
+    "MachineIpAddress": {
       "type": "object",
       "readOnly": true,
-      "description": "The machine IP address details",
+      "description": "The machine IP address details.",
       "properties": {
-          "ip": {
-              "type": "string",
-              "readOnly": true,
-              "description": "IPv4 or IPv6 address of the machine"
-           },
-          "family" :{
-              "type": "string",
-              "readOnly": true,
-              "description": "To determine if address belongs IPv4 or IPv6 family",
-              "enum": [
-                  "IPv4",
-                  "IPv6"
-              ],
-              "x-ms-enum": {
-                  "name": "IPFamily",
-                  "modelAsString": true,
-                  "values": [
-                        {
-                          "value": "IPv4",
-                          "description": "IPv4 family"
-                        },
-                        {
-                          "value": "IPv6",
-                          "description": "IPv6 family"
-                        }
-                  ]
+        "ip": {
+          "type": "string",
+          "readOnly": true,
+          "description": "IPv4 or IPv6 address of the machine"
+        },
+        "family": {
+          "type": "string",
+          "readOnly": true,
+          "description": "To determine if address belongs IPv4 or IPv6 family",
+          "enum": [
+            "IPv4",
+            "IPv6"
+          ],
+          "x-ms-enum": {
+            "name": "IPFamily",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "IPv4",
+                "description": "IPv4 family"
               },
-              "description": "The ip address type of machine"
-         },
-      }   
+              {
+                "value": "IPv6",
+                "description": "IPv6 family"
+              }
+            ]
+          }
+        }
+      }
     },
     "MachineName": {
       "type": "string",
       "readOnly": true,
       "description": "host name of the machine"
-    }  
+    }
   }
 }
