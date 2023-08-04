@@ -1687,7 +1687,7 @@ model WorkspaceNameParameter {
 model ApiVersionParameter {
     @doc("The API version to use for this operation.")
     @query("api-version")
-    apiversion: string;
+    apiVersion: string;
 }
 
 @doc("The unique identifier for the saved filter.")
