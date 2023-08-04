@@ -338,22 +338,6 @@
       },
       "readOnly": true
     },
-    "DetectionStatus": {
-      "type": "string",
-      "description": "The status of the patch detection.",
-      "enum": [
-        "Succeeded",
-        "ImageInspectionFailed",
-        "RunImageNotRecognized",
-        "RegistryLoginFailed",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "DetectionStatus",
-        "modelAsString": true
-      },
-      "readOnly": true
-    },
     "PatchApplyStatus": {
       "type": "string",
       "description": "The status of the patch once it has been provisioned",
@@ -388,17 +372,31 @@
           "type": "string",
           "description": "The name of the target image for the patch."
         },
+        "DetectionStatus": {
+          "type": "string",
+          "description": "The status of the patch detection.",
+          "enum": [
+            "Succeeded",
+            "RegistryLoginFailed",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "DetectionStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
         "newImageName": {
           "type": "string",
           "description": "The name of the new image created by the patch.",
           "nullable": true
         },
-        "newRunImage": {
+        "newLayer": {
           "type": "object",
           "properties": {
             "name": {
               "type": "string",
-              "description": "The name of the new run image for the target image."
+              "description": "The details of the new layer for the target image."
             },
             "frameworkAndVersion": {
               "type": "string",
@@ -412,12 +410,12 @@
           "description": "The details of new run image for the target image.",
           "nullable": true
         },
-        "oldRunImage": {
+        "oldLayer": {
           "type": "object",
           "properties": {
             "name": {
               "type": "string",
-              "description": "The name of the old run image for the target image."
+              "description": "The details of the old layer for the target image."
             },
             "frameworkAndVersion": {
               "type": "string",
