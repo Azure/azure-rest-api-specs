@@ -1,0 +1,34 @@
+@doc("The properties of Hyperv Cluster")
+model HypervClusterProperties {
+  @doc("Gets the timestamp marking Hyper-V cluster creation.")
+  @visibility("read")
+  createdTimestamp?: string;
+
+  @doc("Gets the timestamp marking last updated on the Hyper-V cluster.")
+  @visibility("read")
+  updatedTimestamp?: string;
+
+  @doc("Gets or sets the FQDN/IPAddress of the Hyper-V cluster.")
+  fqdn?: string;
+
+  @doc("Gets the functional level of the Hyper-V cluster.")
+  @visibility("read")
+  functionalLevel?: int32;
+
+  @doc("Gets the status of the Hyper-V cluster.")
+  @visibility("read")
+  status?: string;
+
+  @doc("Gets or sets Run as account ID of the Hyper-V cluster.")
+  runAsAccountId?: string;
+
+  @doc("Gets or sets list of hosts (FQDN) currently being tracked by the cluster.")
+  hostFqdnList?: string[];
+
+  @doc("Gets the errors.")
+  @visibility("read")
+  errors?: HealthErrorDetails[];
+
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState;
+}
