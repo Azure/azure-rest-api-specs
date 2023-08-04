@@ -58,6 +58,11 @@ directive:
 - suppress: EnumInsteadOfBoolean
   from: postgresqlhsc.json
   reason: It's been used as boolean since 2019 by internal teams and also private preview customers like Azure Portal and we have no plans to use any values other than true/false.
+- suppress: PutInOperationName
+  where:
+    - $..paths[($..operationId["Configurations_Update*"])]
+  from: postgresqlhsc.json
+  reason: Configurations have preset default values and customers can only update them, they can't create. So we don't need "Create" in operation id.
 ```
 
 ---
