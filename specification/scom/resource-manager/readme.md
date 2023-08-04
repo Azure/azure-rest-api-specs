@@ -30,42 +30,6 @@ openapi-subtype: rpaas
 tag: package-2023-07-07-preview
 ```
 
-### Tag: package-2021-06-30-preview
-
-These settings apply only when `--tag=package-2021-06-30-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2021-06-30-preview'
-input-file:
-  - Microsoft.SCOM/preview/2021-06-30-preview/scom.json
-```
-
-### Tag: package-2022-04-30-preview
-
-These settings apply only when `--tag=package-2022-04-30-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2022-04-30-preview'
-input-file:
-  - Microsoft.SCOM/preview/2022-04-30-preview/scom.json
-```
-
-### Tag: package-2022-09-13-preview
-
-These settings apply only when `--tag=package-2022-09-13-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2022-09-13-preview'
-input-file:
-  - Microsoft.SCOM/preview/2022-09-13-preview/scom.json
-```
-
-### Tag: package-2023-06-30
-
-These settings apply only when `--tag=package-2023-06-30` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-06-30'
-input-file:
-  - Microsoft.SCOM/stable/2023-06-30/scom.json
-```
-
 ### Tag: package-2023-07-07-preview
 
 These settings apply only when `--tag=package-2023-07-07-preview` is specified on the command line.
