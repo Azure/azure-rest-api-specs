@@ -110,6 +110,19 @@
           "type": "string",
           "readOnly": true
         },
+        "availabilityStatus": {
+          "description": "Distinguishes whether RP is already supported or coming soon.",
+          "type": "string",
+          "enum": [
+            "ComingSoon",
+            "Supported"
+          ],
+          "x-ms-enum": {
+            "name": "availabilityStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
         "supportedCapabilities": {
           "description": "Aggregation Capabilities",
           "type": "array",
