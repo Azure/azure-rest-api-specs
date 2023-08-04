@@ -1512,7 +1512,7 @@
         "tags": [
           "Glossary"
         ],
-        "description": "Get all glossaries registered with Atlas.",
+        "description": "Get all glossaries registered with Atlas. Recommend using limit/offset to get pagination result. Recommended using 'ignoreTermsAndCategories=true' and fetch terms/categories separately using 'GET /catalog/api/atlas/v2/glossary/{glossaryGuid}/terms' and 'GET '/catalog/api/atlas/v2/glossary/{glossaryGuid}/categories'.",
         "operationId": "Glossary_ListGlossaries",
         "x-ms-examples": {
           "Glossary_ListGlossaries": {
@@ -1964,7 +1964,7 @@
         "tags": [
           "Glossary"
         ],
-        "description": "Get a specific glossary term by its GUID.",
+        "description": "Get a specific glossary term by its GUID.  Recommend using 'excludeRelationshipTypes=AtlasGlossarySemanticAssignment' to get term and using 'GET /catalog/api/atlas/v2/glossary/terms/{termGuid}/assignedEntities' to get term assignment separately.",
         "operationId": "Glossary_GetGlossaryTerm",
         "x-ms-examples": {
           "Glossary_GetGlossaryTerm": {
@@ -2182,7 +2182,7 @@
         "tags": [
           "Glossary"
         ],
-        "description": "Get all related objects assigned with the specified term.",
+        "description": "Get all related objects assigned with the specified term. Recommend using limit/offset to get pagination result.",
         "operationId": "Glossary_GetEntitiesAssignedWithTerm",
         "x-ms-examples": {
           "Glossary_GetEntitiesAssignedWithTerm": {
@@ -2226,7 +2226,7 @@
         "tags": [
           "Glossary"
         ],
-        "description": "Assign the given term to the provided list of related objects.",
+        "description": "Assign the given term to the provided list of related objects. Recommend using small batches with multiple API calls.",
         "operationId": "Glossary_AssignTermToEntities",
         "x-ms-examples": {
           "Glossary_AssignTermToEntities": {
@@ -2267,7 +2267,7 @@
         "tags": [
           "Glossary"
         ],
-        "description": "Delete the term assignment for the given list of related objects.",
+        "description": "Delete the term assignment for the given list of related objects. This API is not recommended since duplicated with 'DELETE /catalog/api/atlas/v2/glossary/terms/{termGuid}/assignedEntities'. Please use later one instead.",
         "operationId": "Glossary_RemoveTermAssignmentFromEntities",
         "x-ms-examples": {
           "Glossary_RemoveTermAssignmentFromEntities": {
@@ -2477,7 +2477,7 @@
         "tags": [
           "Glossary"
         ],
-        "description": "Delete a glossary.",
+        "description": "Delete a glossary. Will delete underlying terms/categories together. Recommend separaete delete terms and categories.",
         "operationId": "Glossary_DeleteGlossary",
         "x-ms-examples": {
           "Glossary_DeleteGlossary": {
@@ -2507,7 +2507,7 @@
         "tags": [
           "Glossary"
         ],
-        "description": "Get the categories belonging to a specific glossary.",
+        "description": "Get the categories belonging to a specific glossary. Recommend using limit/offset to get pagination result.",
         "operationId": "Glossary_ListGlossaryCategories",
         "x-ms-examples": {
           "Glossary_ListGlossaryCategories": {
@@ -2553,7 +2553,7 @@
         "tags": [
           "Glossary"
         ],
-        "description": "Get the category headers belonging to a specific glossary.",
+        "description": "Get the category headers belonging to a specific glossary. Recommend using limit/offset to get pagination result.",
         "operationId": "Glossary_ListGlossaryCategoriesHeaders",
         "x-ms-examples": {
           "Glossary_ListGlossaryCategoriesHeaders": {
@@ -2599,7 +2599,7 @@
         "tags": [
           "Glossary"
         ],
-        "description": "Get a specific glossary with detailed information.",
+        "description": "Get a specific glossary with detailed information. This API is not recommend. Recommended fetch terms/categories details separately using 'GET /catalog/api/atlas/v2/glossary/{glossaryGuid}/terms' and 'GET '/catalog/api/atlas/v2/glossary/{glossaryGuid}/categories'.",
         "operationId": "Glossary_GetDetailedGlossary",
         "x-ms-examples": {
           "Glossary_GetDetailedGlossary": {
@@ -2635,7 +2635,7 @@
         "tags": [
           "Glossary"
         ],
-        "description": "Update the glossary partially. Some properties such as qualifiedName are not allowed to be updated. So far we only supports partial updating shortDescription, longDescription, language and usage for glossary.",
+        "description": "Update the glossary partially. Some properties such as qualifiedName are not allowed to be updated. So far we only supports partial updating shortDescription, longDescription, language and usage for glossary. Recommend using 'ignoreTermsAndCategories=true' to reduce response body size.",
         "operationId": "Glossary_PartialUpdateGlossary",
         "x-ms-examples": {
           "Glossary_PartialUpdateGlossary": {
@@ -2681,7 +2681,7 @@
         "tags": [
           "Glossary"
         ],
-        "description": "Get terms belonging to a specific glossary.",
+        "description": "Get terms belonging to a specific glossary. Recommend using limit/offset to get pagination result.",
         "operationId": "Glossary_ListGlossaryTerms",
         "x-ms-examples": {
           "Glossary_ListGlossaryTerms": {
@@ -2730,7 +2730,7 @@
         "tags": [
           "Glossary"
         ],
-        "description": "Get term headers belonging to a specific glossary.",
+        "description": "Get term headers belonging to a specific glossary. Recommend using limit/offset to get pagination result.",
         "operationId": "Glossary_ListGlossaryTermHeaders",
         "x-ms-examples": {
           "Glossary_ListGlossaryTermHeaders": {
@@ -2779,7 +2779,7 @@
         "consumes": [
           "multipart/form-data"
         ],
-        "description": "Import Glossary Terms from local csv file",
+        "description": "Import Glossary Terms from local csv file. Note the csv file should be uploaded in formData with key='file'.",
         "operationId": "Glossary_ImportGlossaryTermsViaCsv",
         "x-ms-examples": {
           "Glossary_ImportGlossaryTermsViaCsv": {
@@ -2787,6 +2787,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Content-Type"
+          },
           {
             "$ref": "#/parameters/glossaryGuid"
           },
@@ -2838,7 +2841,7 @@
         "consumes": [
           "multipart/form-data"
         ],
-        "description": "Import Glossary Terms from local csv file by glossaryName",
+        "description": "Import Glossary Terms from local csv file by glossaryName. Note this API has been deprecated. Please use 'POST /catalog/api/glossary/{glossaryGuid}/terms/import' instead.",
         "operationId": "Glossary_ImportGlossaryTermsViaCsvByGlossaryName",
         "x-ms-examples": {
           "Glossary_ImportGlossaryTermsViaCsvByGlossaryName": {
@@ -2846,6 +2849,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Content-Type"
+          },
           {
             "$ref": "#/parameters/glossaryName"
           },
@@ -2991,7 +2997,7 @@
         "tags": [
           "Glossary"
         ],
-        "description": "Get terms by glossary name.",
+        "description": "Get terms by glossary name. Note this API has been deprecated. Please use 'GET /catalog/api/glossary/{glossaryGuid}/terms' instead.",
         "operationId": "Glossary_ListTermsByGlossaryName",
         "x-ms-examples": {
           "Glossary_ListTermsByGlossaryName": {
@@ -7968,6 +7974,14 @@
       "type": "string",
       "in": "path",
       "x-ms-skip-url-encoding": true
+    },
+    "Content-Type": {
+      "name": "Content-Type",
+      "description": "The name of the HTTP header field used to specify the media type. Typically values are 'applicaiton/json' and 'multipart/form-data'.",
+      "x-ms-parameter-location": "header",
+      "required": true,
+      "in": "header",
+      "type": "string"
     },
     "guid": {
       "name": "guid",
