@@ -9,12 +9,20 @@
     }
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -31,7 +39,9 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureLargeInstance/azureLargeInstance": {
       "get": {
-        "tags": ["AzureLargeInstance"],
+        "tags": [
+          "AzureLargeInstance"
+        ],
         "operationId": "AzureLargeInstance_ListBySubscription",
         "summary": "Gets a list of Azure Large Instances in the specified subscription.",
         "description": "Gets a list of Azure Large Instances in the specified subscription. The operations returns various properties of each Azure Large Instance.",
@@ -121,8 +131,12 @@
             "$ref": "./examples/AzureLargeInstance_Start.json"
           }
         },
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -142,18 +156,20 @@
             "description": "OK",
             "headers": {
               "Location": {
-                "type": "string"
+                "type": "string",
+                "description": "URL to track the operation status of the Microsoft Azure Large Instance in the specified location."
               }
             },
             "schema": {
-              "type": "object"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
             }
           },
           "202": {
-            "description": "Accepted",
+            "description": "Accepted. The response indicates that the existing Azure Large Instance is now turning on and includes a 'Location' header to query the operation result.",
             "headers": {
               "Location": {
-                "type": "string"
+                "type": "string",
+                "description": "URL to track the operation status of the Microsoft Azure Large Instance in the specified location."
               }
             }
           },
@@ -180,8 +196,12 @@
             "$ref": "./examples/AzureLargeInstance_Restart.json"
           }
         },
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -201,18 +221,20 @@
             "description": "OK",
             "headers": {
               "Location": {
-                "type": "string"
+                "type": "string",
+                "description": "URL to track the operation status of the Microsoft Azure Large Instance in the specified location."
               }
             },
             "schema": {
-              "type": "object"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
             }
           },
           "202": {
-            "description": "Accepted",
+            "description": "Accepted. The response indicates that the existing Azure Large Instance is now turning on and includes a 'Location' header to query the operation result.",
             "headers": {
               "Location": {
-                "type": "string"
+                "type": "string",
+                "description": "URL to track the operation status of the Microsoft Azure Large Instance in the specified location."
               }
             }
           },
@@ -239,8 +261,12 @@
             "$ref": "./examples/AzureLargeInstance_Shutdown.json"
           }
         },
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -260,18 +286,20 @@
             "description": "OK",
             "headers": {
               "Location": {
-                "type": "string"
+                "type": "string",
+                "description": "URL to track the operation status of the Microsoft Azure Large Instance in the specified location."
               }
             },
             "schema": {
-              "type": "object"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
             }
           },
           "202": {
-            "description": "Accepted",
+            "description": "Accepted. The response indicates that the existing Azure Large Instance is now turning on and includes a 'Location' header to query the operation result.",
             "headers": {
               "Location": {
-                "type": "string"
+                "type": "string",
+                "description": "URL to track the operation status of the Microsoft Azure Large Instance in the specified location."
               }
             }
           },
@@ -286,7 +314,9 @@
     },
     "/providers/Microsoft.AzureLargeInstance/operations": {
       "get": {
-        "tags": ["AzureLargeInstance"],
+        "tags": [
+          "AzureLargeInstance"
+        ],
         "operationId": "Operations_List",
         "x-ms-examples": {
           "List all management operations supported by the AzureLargeInstance RP": {
@@ -294,8 +324,12 @@
           }
         },
         "description": "Gets a list of AzureLargeInstance management operations.",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -322,7 +356,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/azureLargeInstance/{azureLargeInstanceName}": {
       "get": {
-        "tags": ["AzureLargeInstance"],
+        "tags": [
+          "AzureLargeInstance"
+        ],
         "operationId": "AzureLargeInstance_Get",
         "summary": "Gets an Azure Large Instance.",
         "description": "Gets an Azure Large Instance for the specified subscription, resource group, and instance name.",
@@ -361,7 +397,9 @@
         }
       },
       "delete": {
-        "tags": ["AzureLargeInstance"],
+        "tags": [
+          "AzureLargeInstance"
+        ],
         "operationId": "AzureLargeInstance_Delete",
         "summary": "Deletes an Azure Large Instance.",
         "description": "Deletes an Azure Large Instance for the specified subscription, resource group, and instance name.",
@@ -404,7 +442,9 @@
         }
       },
       "put": {
-        "tags": ["AzureLargeInstance"],
+        "tags": [
+          "AzureLargeInstance"
+        ],
         "operationId": "AzureLargeInstance_Put",
         "summary": "Adds an Azure Large Instance.",
         "description": "Adds an Azure Large Instance for the specified subscription, resource group, and instance name.",
@@ -462,7 +502,9 @@
         }
       },
       "patch": {
-        "tags": ["AzureLargeInstance"],
+        "tags": [
+          "AzureLargeInstance"
+        ],
         "operationId": "AzureLargeInstance_Update",
         "summary": "Patches the Tags field of a Azure Large Instance.",
         "description": "Patches the Tags field of a Azure Large Instance for the specified subscription, resource group, and instance name.",
@@ -509,7 +551,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureLargeInstance/azureLargeStorageInstance": {
       "get": {
-        "tags": ["AzureLargeInstance"],
+        "tags": [
+          "AzureLargeInstance"
+        ],
         "operationId": "AzureLargeStorageInstance_ListBySubscription",
         "summary": "Gets a list of Azure Large Storage Instances in the specified subscription.",
         "description": "Gets a list of AzureLargeStorageInstances in the specified subscription. The operations returns various properties of each Azure LargeStorage instance.",
@@ -587,7 +631,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/azureLargeStorageInstance/{azureLargeStorageInstanceName}": {
       "get": {
-        "tags": ["AzureLargeInstance"],
+        "tags": [
+          "AzureLargeInstance"
+        ],
         "operationId": "AzureLargeStorageInstance_Get",
         "summary": "Gets an Azure Large Storage Instance.",
         "description": "Gets an Azure LargeStorage Storage instance for the specified subscription, resource group, and instance name.",
@@ -626,7 +672,9 @@
         }
       },
       "put": {
-        "tags": ["AzureLargeInstance"],
+        "tags": [
+          "AzureLargeInstance"
+        ],
         "summary": "Creates an Azure Large Storage Instance resource.",
         "operationId": "AzureLargeStorageInstance_Create",
         "x-ms-examples": {
@@ -683,7 +731,9 @@
         }
       },
       "patch": {
-        "tags": ["AzureLargeInstance"],
+        "tags": [
+          "AzureLargeInstance"
+        ],
         "operationId": "AzureLargeStorageInstance_Update",
         "summary": "Patches the Tags field of an Azure Large Storage instance.",
         "description": "Patches the Tags field of a Azure Large Storage Instance for the specified subscription, resource group, and instance name.",
@@ -728,7 +778,9 @@
         }
       },
       "delete": {
-        "tags": ["AzureLargeInstance"],
+        "tags": [
+          "AzureLargeInstance"
+        ],
         "summary": "Delete an Azure Large Storage Instance.",
         "operationId": "AzureLargeStorageInstance_Delete",
         "x-ms-examples": {
@@ -893,7 +945,11 @@
         "hardwareType": {
           "readOnly": true,
           "type": "string",
-          "enum": ["Cisco_UCS", "HPE", "SDFLEX"],
+          "enum": [
+            "Cisco_UCS",
+            "HPE",
+            "SDFLEX"
+          ],
           "x-ms-enum": {
             "name": "AzureLargeInstanceHardwareTypeNamesEnum",
             "modelAsString": true
@@ -993,7 +1049,9 @@
           "items": {
             "$ref": "#/definitions/Disk"
           },
-          "x-ms-identifiers": ["name"],
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "Specifies information about the operating system disk used by Azure Large Instance."
         }
       },
@@ -1031,7 +1089,9 @@
           "items": {
             "$ref": "#/definitions/IpAddress"
           },
-          "x-ms-identifiers": ["ipAddress"],
+          "x-ms-identifiers": [
+            "ipAddress"
+          ],
           "description": "Specifies the network interfaces for the Azure Large Instance."
         },
         "circuitId": {
