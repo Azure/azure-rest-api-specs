@@ -1,0 +1,604 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Network Fabric Management Service API",
+    "description": "Self service experience for Azure Network Fabric API.",
+    "version": "2023-06-15"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/networkFabricControllers/{networkFabricControllerName}": {
+      "put": {
+        "tags": [
+          "NetworkFabricControllers"
+        ],
+        "operationId": "NetworkFabricControllers_Create",
+        "summary": "Create Network fabric controller.",
+        "description": "Creates a Network Fabric Controller.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "NetworkFabricControllers_Create_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkFabricControllers_Create_MaximumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkFabricControllerNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFabricController"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NetworkFabricController"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/NetworkFabricController"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.need to check with the team whether this field needs to be updated or not",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "tags": [
+          "NetworkFabricControllers"
+        ],
+        "operationId": "NetworkFabricControllers_Get",
+        "summary": "Gets a Network Fabric Controller.",
+        "description": "Shows the provisioning status of Network Fabric Controller.",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "NetworkFabricControllers_Get_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkFabricControllers_Get_MaximumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkFabricControllerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NetworkFabricController"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "NetworkFabricControllers"
+        ],
+        "operationId": "NetworkFabricControllers_Update",
+        "summary": "Updates a Network Fabric Controller.",
+        "description": "Updates are currently not supported for the Network Fabric Controller resource.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "NetworkFabricControllers_Update_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkFabricControllers_Update_MaximumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkFabricControllerNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Network Fabric Controller properties to update.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFabricControllerPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NetworkFabricController"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "delete": {
+        "tags": [
+          "NetworkFabricControllers"
+        ],
+        "operationId": "NetworkFabricControllers_Delete",
+        "summary": "Deletes a Network Fabric Controller.",
+        "description": "Deletes the Network Fabric Controller resource.",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "NetworkFabricControllers_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkFabricControllers_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkFabricControllerNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/networkFabricControllers": {
+      "get": {
+        "operationId": "NetworkFabricControllers_ListByResourceGroup",
+        "summary": "List NetworkFabricControllers by resource group.",
+        "description": "Lists all the NetworkFabricControllers thats available in the resource group.",
+        "x-ms-examples": {
+          "NetworkFabricControllers_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkFabricControllers_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all NetworkFabricControllers under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFabricControllersListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedNetworkFabric/networkFabricControllers": {
+      "get": {
+        "operationId": "NetworkFabricControllers_ListBySubscription",
+        "summary": "List NetworkFabricControllers by subscription.",
+        "description": "Lists all the NetworkFabricControllers by subscription.",
+        "x-ms-examples": {
+          "NetworkFabricControllers_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkFabricControllers_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all NetworkFabricControllers under the subscription.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFabricControllersListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "NetworkFabricControllerPatchableProperties": {
+      "title": "Network Fabric Controller updatable properties",
+      "type": "object",
+      "properties": {
+        "infrastructureExpressRouteConnections": {
+          "type": "array",
+          "description": "As part of an update, the Infrastructure ExpressRoute CircuitID should be provided to create and Provision a NFC. This Express route is dedicated for Infrastructure services. (This is a Mandatory attribute)",
+          "x-ms-identifiers": [
+            "expressRouteCircuitId"
+          ],
+          "items": {
+            "$ref": "#/definitions/ExpressRouteConnectionInformation"
+          }
+        },
+        "workloadExpressRouteConnections": {
+          "type": "array",
+          "description": "As part of an update, the workload ExpressRoute CircuitID should be provided to create and Provision a NFC. This Express route is dedicated for Workload services. (This is a Mandatory attribute).",
+          "x-ms-identifiers": [
+            "expressRouteCircuitId"
+          ],
+          "items": {
+            "$ref": "#/definitions/ExpressRouteConnectionInformation"
+          }
+        }
+      }
+    },
+    "NetworkFabricControllerProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/AnnotationResource",
+          "description": "Common properties for annotated type."
+        },
+        {
+          "$ref": "#/definitions/NetworkFabricControllerPatchableProperties",
+          "description": "Common patchable properties for Network Fabric Controller."
+        }
+      ],
+      "properties": {
+        "infrastructureServices": {
+          "description": "InfrastructureServices IP ranges.",
+          "$ref": "#/definitions/ControllerServices"
+        },
+        "workloadServices": {
+          "description": "WorkloadServices IP ranges.",
+          "$ref": "#/definitions/ControllerServices"
+        },
+        "managedResourceGroupConfiguration": {
+          "description": "Managed Resource Group configuration properties.",
+          "$ref": "#/definitions/ManagedResourceGroupConfiguration"
+        },
+        "networkFabricIds": {
+          "type": "array",
+          "description": "The NF-ID will be an input parameter used by the NF to link and get associated with the parent NFC Service.",
+          "items": {
+            "description": "NetworkFabric ID (NF-ID) is a mandatory attribute, which will be consumed by Network Fabric.",
+            "$ref": "./common.json#/definitions/NetworkFabricIdProperty"
+          },
+          "readOnly": true
+        },
+        "workloadManagementNetwork": {
+          "description": "A workload management network is required for all the tenant (workload) traffic. This traffic is only dedicated for Tenant workloads which are required to access internet or any other MSFT/Public endpoints. This is used for the backward compatibility.",
+          "type": "boolean",
+          "default": true,
+          "readOnly": true
+        },
+        "isWorkloadManagementNetworkEnabled": {
+          "description": "A workload management network is required for all the tenant (workload) traffic. This traffic is only dedicated for Tenant workloads which are required to access internet or any other MSFT/Public endpoints.",
+          "type": "string",
+          "default": "True",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "IsWorkloadManagementNetworkEnabled"
+          }
+        },
+        "tenantInternetGatewayIds": {
+          "type": "array",
+          "description": "List of tenant InternetGateway resource IDs",
+          "items": {
+            "description": "ARM resource ID of the Internet Gateway.",
+            "$ref": "./common.json#/definitions/InternetGatewayIdProperty"
+          },
+          "readOnly": true
+        },
+        "ipv4AddressSpace": {
+          "type": "string",
+          "description": "IPv4 Network Fabric Controller Address Space.",
+          "minLength": 1,
+          "default": "10.0.0.0/19",
+          "example": "10.10.10.10/17"
+        },
+        "ipv6AddressSpace": {
+          "type": "string",
+          "description": "IPv6 Network Fabric Controller Address Space.",
+          "minLength": 1,
+          "default": "FC00::/59",
+          "example": "::/60"
+        },
+        "nfcSku": {
+          "description": "Network Fabric Controller SKU.",
+          "type": "string",
+          "default": "Standard",
+          "enum": [
+            "Basic",
+            "Standard",
+            "HighPerformance"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "NfcSku"
+          }
+        },
+        "provisioningState": {
+          "description": "Provides you the latest status of the NFC service, whether it is Accepted, updating, Succeeded or Failed. During this process, the states keep changing based on the status of NFC provisioning.",
+          "$ref": "./common.json#/definitions/ProvisioningState"
+        }
+      },
+      "description": "NetworkFabricControllerProperties defines the resource properties."
+    },
+    "ExpressRouteConnectionInformation": {
+      "type": "object",
+      "properties": {
+        "expressRouteCircuitId": {
+          "type": "string",
+          "description": "The express route circuit Azure resource ID, must be of type Microsoft.Network/expressRouteCircuits/circuitName. The ExpressRoute Circuit is a mandatory attribute.",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/expressRouteCircuits"
+              }
+            ]
+          },
+          "example": "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourcegroups/example-rg/providers/Microsoft.Network/expressRouteCircuits/example-circuit"
+        },
+        "expressRouteAuthorizationKey": {
+          "type": "string",
+          "description": "Authorization key for the circuit, must be of type Microsoft.Network/expressRouteCircuits/authorizations. The Auth Key is a mandatory attribute.",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "expressRouteCircuitId",
+        "expressRouteAuthorizationKey"
+      ],
+      "description": "The ExpressRoute circuit ID and the Auth Key are required for you to successfully deploy NFC service."
+    },
+    "NetworkFabricController": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "required": [
+        "properties"
+      ],
+      "description": "The Network Fabric Controller resource definition.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/NetworkFabricControllerProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "NetworkFabricControllerPatch": {
+      "type": "object",
+      "title": "Network Fabric Controller patch parameters",
+      "description": "The Network Fabric Controller Patch payload definition.",
+      "properties": {
+        "properties": {
+          "description": "Network Fabric Controller patch properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NetworkFabricControllerPatchableProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/TagsUpdate"
+        }
+      ]
+    },
+    "NetworkFabricControllersListResult": {
+      "type": "object",
+      "description": "List of Network Fabric Controllers.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Network Fabric Controller resources.",
+          "items": {
+            "$ref": "#/definitions/NetworkFabricController"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "ControllerServices": {
+      "type": "object",
+      "description": "Network Fabric Controller services.",
+      "properties": {
+        "ipv4AddressSpaces": {
+          "type": "array",
+          "description": "The IPv4 Address space is optional, if the value is not defined at the time of NFC creation, then the default value 10.0.0.0/19 is considered. The IPV4 address subnet is an optional attribute.",
+          "items": {
+            "type": "string",
+            "description": "This will provide the IPv4 Network Fabric Controller Address Space."
+          }
+        },
+        "ipv6AddressSpaces": {
+          "type": "array",
+          "description": "The IPv6 is not supported right now.",
+          "items": {
+            "type": "string",
+            "description": "The IPv6 is not supported right now."
+          }
+        }
+      },
+      "readOnly": true
+    },
+    "ManagedResourceGroupConfiguration": {
+      "type": "object",
+      "description": "Managed Resource Group configuration properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The NFC service will be hosted in a Managed resource group."
+        },
+        "location": {
+          "type": "string",
+          "description": "Managed resource group location."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "NetworkFabricControllerNameParameter": {
+      "type": "string",
+      "description": "Name of the Network Fabric Controller.",
+      "in": "path",
+      "name": "networkFabricControllerName",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

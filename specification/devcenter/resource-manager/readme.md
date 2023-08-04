@@ -27,20 +27,42 @@ These are the global settings for devcenter.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2022-11
+tag: package-2023-04
 ```
 
+
+### Tag: package-2023-04
+
+These settings apply only when `--tag=package-2023-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-04'
+input-file:
+  - Microsoft.DevCenter/stable/2023-04-01/commonDefinitions.json
+  - Microsoft.DevCenter/stable/2023-04-01/devcenter.json
+  - Microsoft.DevCenter/stable/2023-04-01/vdi.json
+```
+### Tag: package-preview-2023-01
+
+These settings apply only when `--tag=package-preview-2023-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-01'
+input-file:
+  - Microsoft.DevCenter/preview/2023-01-01-preview/commonDefinitions.json
+  - Microsoft.DevCenter/preview/2023-01-01-preview/devcenter.json
+  - Microsoft.DevCenter/preview/2023-01-01-preview/vdi.json
+```
 
 ### Tag: package-preview-2022-11
 
 These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-11'
+``` yaml $(tag) == 'package-preview-2022-11'
 input-file:
   - Microsoft.DevCenter/preview/2022-11-11-preview/commonDefinitions.json
   - Microsoft.DevCenter/preview/2022-11-11-preview/devcenter.json
   - Microsoft.DevCenter/preview/2022-11-11-preview/vdi.json
 ```
+
 ### Tag: package-preview-2022-10
 
 These settings apply only when `--tag=package-preview-2022-10` is specified on the command line.
@@ -86,8 +108,8 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
-  - repo: azure-cli-extensions
   - repo: azure-sdk-for-go
+  - repo: azure-cli-extensions
 ```
 
 ## Az
