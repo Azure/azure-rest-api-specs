@@ -18,9 +18,10 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python)
 multiapi: true
-default-api-version: "2023-02-01"
+default-api-version: "2023-04-01"
 clear-output-folder: true
 batch:
+  - tag: package-2023-04
   - tag: package-2023-02
   - tag: package-2021-02
   - tag: package-2021-02-preview-only
@@ -51,6 +52,17 @@ batch:
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/
 perform-load: false
+clear-output-folder: false
+```
+
+### Tag: package-2023-04 and python
+
+These settings apply only when `--tag=package-2023-04 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2023-04'
+namespace: azure.mgmt.network.v2023_04_01
+output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2023_04_01
 ```
 
 ### Tag: package-2023-02 and python

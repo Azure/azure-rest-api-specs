@@ -128,6 +128,7 @@ input-file:
   - Microsoft.HDInsight/preview/2023-04-15-preview/scriptActions.json
   - Microsoft.HDInsight/preview/2023-04-15-preview/virtualMachines.json
 ```
+
 ### Tag: package-2021-06
 
 These settings apply only when `--tag=package-2021-06` is specified on the command line.
