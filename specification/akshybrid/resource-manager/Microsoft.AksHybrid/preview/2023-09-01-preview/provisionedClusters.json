@@ -104,7 +104,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -155,7 +155,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -171,7 +171,7 @@
         "tags": [
           "AgentPools"
         ],
-        "operationId": "AgentPools_GetAvailableAgentPoolVersions",
+        "operationId": "AgentPools_GetAvailableVersions",
         "summary": "Gets a list of supported Kubernetes versions for the specified agent pool.",
         "description": "See [supported Kubernetes versions](https://docs.microsoft.com/azure/aks/supported-kubernetes-versions) for more details about the version lifecycle.",
         "parameters": [
@@ -207,13 +207,13 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "AgentPools_GetAvailableAgentPoolVersions_MaximumSet_Gen": {
-            "$ref": "./examples/AgentPools_GetAvailableAgentPoolVersions_MaximumSet_Gen.json"
+          "AgentPools_GetAvailableVersions_MaximumSet_Gen": {
+            "$ref": "./examples/AgentPools_GetAvailableVersions_MaximumSet_Gen.json"
           }
         }
       }
@@ -261,24 +261,24 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AgentPool"
+            }
           },
           "202": {
             "description": "Accepted",
             "headers": {
-              "Azure-AsyncOperation": {
+              "Location": {
                 "description": "URL to query for status of the operation.",
                 "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/AgentPool"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -327,7 +327,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -378,7 +378,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -432,7 +432,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -482,7 +482,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Updated",
             "schema": {
               "$ref": "#/definitions/ProvisionedCluster"
             }
@@ -496,7 +496,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -552,10 +552,19 @@
               "$ref": "#/definitions/ProvisionedCluster"
             }
           },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -614,7 +623,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -666,7 +675,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -730,7 +739,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -787,7 +796,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Updated",
             "schema": {
               "$ref": "#/definitions/AgentPool"
             }
@@ -801,7 +810,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -867,7 +876,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -929,7 +938,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -983,7 +992,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1040,7 +1049,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1098,7 +1107,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the cluster doesn't exist, 404 (Not found) is returned.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2425,46 +2434,11 @@
             "$ref": "#/definitions/KubernetesVersion"
           },
           "description": "Array of AKS supported Kubernetes versions."
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
-    },
-    "CloudError": {
-      "type": "object",
-      "x-ms-external": true,
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/CloudErrorBody",
-          "description": "Details about the error."
-        }
-      },
-      "description": "An error response from the Container service."
-    },
-    "CloudErrorBody": {
-      "type": "object",
-      "x-ms-external": true,
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
-        },
-        "message": {
-          "type": "string",
-          "description": "A message describing the error, intended to be suitable for display in a user interface."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error. For example, the name of the property in error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CloudErrorBody"
-          },
-          "x-ms-identifiers": [],
-          "description": "A list of additional details about the error."
-        }
-      },
-      "description": "An error response from the Container service."
     }
   },
   "parameters": {
@@ -2490,7 +2464,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^.*",
+      "pattern": "^[a-zA-Z]*$",
       "description": "The name of the kubernetes cluster.",
       "x-ms-parameter-location": "method"
     },
