@@ -36,11 +36,25 @@
       }
     }
   },
+  "tags": [
+    {
+      "name": "Azure Large Instances",
+      "description": "Handle Operations for Compute Azure Large Instances."
+    },
+    {
+      "name": "Azure Large Storage Instances",
+      "description": "Handle Operations for Storage Azure Large Instances."
+    },
+    {
+      "name": "Common",
+      "description": "Handle Common Operations across Azure Large Instances (Compute, and Storage)"
+    }
+  ],
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureLargeInstance/azureLargeInstance": {
       "get": {
         "tags": [
-          "AzureLargeInstance"
+          "Azure Large Instances"
         ],
         "operationId": "AzureLargeInstance_ListBySubscription",
         "summary": "Gets a list of Azure Large Instances in the specified subscription.",
@@ -79,6 +93,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/azureLargeInstance": {
       "get": {
+        "tags": [
+          "Azure Large Instances"
+        ],
         "operationId": "AzureLargeInstance_ListByResourceGroup",
         "summary": "Gets a list of Azure Large Instances in the specified subscription and resource group.",
         "description": "Gets a list of Azure Large Instances in the specified subscription and resource group. The operations returns various properties of each Azure Large Instance.",
@@ -119,8 +136,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/azureLargeInstance/{azureLargeInstanceName}/start": {
       "post": {
+        "tags": [
+          "Azure Large Instances"
+        ],
         "summary": "Start an Azure Large Instance.",
-        "description": "The operation to start an Azure Large Instance",
+        "description": "The operation to start an Azure Large Instance (only for compute instances)",
         "operationId": "AzureLargeInstance_Start",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -179,8 +199,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/azureLargeInstance/{azureLargeInstanceName}/restart": {
       "post": {
+        "tags": [
+          "Azure Large Instances"
+        ],
         "summary": "Restart an Azure Large Instance.",
-        "description": "The operation to restart an Azure Large Instance",
+        "description": "The operation to restart an Azure Large Instance (only for compute instances)",
         "operationId": "AzureLargeInstance_Restart",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -239,8 +262,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/azureLargeInstance/{azureLargeInstanceName}/shutdown": {
       "post": {
+        "tags": [
+          "Azure Large Instances"
+        ],
         "summary": "Shutdown an Azure Large Instance.",
-        "description": "The operation to shutdown an Azure Large Instance",
+        "description": "The operation to shutdown an Azure Large Instance (only for compute instances)",
         "operationId": "AzureLargeInstance_Shutdown",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -300,7 +326,7 @@
     "/providers/Microsoft.AzureLargeInstance/operations": {
       "get": {
         "tags": [
-          "AzureLargeInstance"
+          "Common"
         ],
         "operationId": "Operations_List",
         "x-ms-examples": {
@@ -308,6 +334,7 @@
             "$ref": "./examples/AzureLargeInstanceOperations_List.json"
           }
         },
+        "summary": "Lists all of the available AzureLargeInstance REST API operations.",
         "description": "Gets a list of AzureLargeInstance management operations.",
         "consumes": [
           "application/json"
@@ -342,7 +369,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/azureLargeInstance/{azureLargeInstanceName}": {
       "get": {
         "tags": [
-          "AzureLargeInstance"
+          "Azure Large Instances"
         ],
         "operationId": "AzureLargeInstance_Get",
         "summary": "Gets an Azure Large Instance.",
@@ -383,7 +410,7 @@
       },
       "delete": {
         "tags": [
-          "AzureLargeInstance"
+          "Azure Large Instances"
         ],
         "operationId": "AzureLargeInstance_Delete",
         "summary": "Deletes an Azure Large Instance.",
@@ -428,7 +455,7 @@
       },
       "put": {
         "tags": [
-          "AzureLargeInstance"
+          "Azure Large Instances"
         ],
         "operationId": "AzureLargeInstance_Put",
         "summary": "Adds an Azure Large Instance.",
@@ -488,7 +515,7 @@
       },
       "patch": {
         "tags": [
-          "AzureLargeInstance"
+          "Azure Large Instances"
         ],
         "operationId": "AzureLargeInstance_Update",
         "summary": "Patches the Tags field of an Azure Large Instance.",
@@ -537,7 +564,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureLargeInstance/azureLargeStorageInstance": {
       "get": {
         "tags": [
-          "AzureLargeInstance"
+          "Azure Large Storage Instances"
         ],
         "operationId": "AzureLargeStorageInstance_ListBySubscription",
         "summary": "Gets a list of Azure Large Storage Instances in the specified subscription.",
@@ -576,6 +603,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/azureLargeStorageInstance": {
       "get": {
+        "tags": [
+          "Azure Large Storage Instances"
+        ],
         "operationId": "AzureLargeStorageInstance_ListByResourceGroup",
         "summary": "Gets a list of Azure Large Storage Instances in the specified subscription and resource group.",
         "description": "Gets a list of AzureLargeStorageInstances in the specified subscription and resource group. The operations returns various properties of each Azure LargeStorage instance.",
@@ -617,7 +647,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/azureLargeStorageInstance/{azureLargeStorageInstanceName}": {
       "get": {
         "tags": [
-          "AzureLargeInstance"
+          "Azure Large Storage Instances"
         ],
         "operationId": "AzureLargeStorageInstance_Get",
         "summary": "Gets an Azure Large Storage Instance.",
@@ -658,7 +688,7 @@
       },
       "put": {
         "tags": [
-          "AzureLargeInstance"
+          "Azure Large Storage Instances"
         ],
         "summary": "Creates an Azure Large Storage Instance resource.",
         "operationId": "AzureLargeStorageInstance_Create",
@@ -717,7 +747,7 @@
       },
       "patch": {
         "tags": [
-          "AzureLargeInstance"
+          "Azure Large Storage Instances"
         ],
         "operationId": "AzureLargeStorageInstance_Update",
         "summary": "Patches the Tags field of an Azure Large Storage instance.",
@@ -764,7 +794,7 @@
       },
       "delete": {
         "tags": [
-          "AzureLargeInstance"
+          "Azure Large Storage Instances"
         ],
         "summary": "Delete an Azure Large Storage Instance.",
         "operationId": "AzureLargeStorageInstance_Delete",
