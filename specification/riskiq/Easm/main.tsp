@@ -1,0 +1,43 @@
+import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "./models.tsp";
+import "./routes.tsp";
+
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.Core;
+using Azure.Core.Traits;
+@useAuth(OAuth2Auth<[ImplicitFlow]>)
+@versioned(Easm.Versions)
+@service({
+    title: "Defender EASM",
+})
+@server(
+    "{endpoint}/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}",
+    "",
+    {
+        @doc("The endpoint hosting the requested resource. For example, https://{region}.easm.defender.microsoft.com")
+        endpoint: string,
+
+        @doc("The ID of the target subscription.")
+        subscriptionId: string,
+
+        @doc("The name of the Resource Group.")
+        resourceGroupName: string,
+
+        @doc("The name of the Workspace.")
+        workspaceName: string,
+    }
+)
+@doc("Defender EASM discovers and maps your digital attack surface to provide an \"outside-in\" perspective using probes to discover assets. The assets are provided with detailed metadata associated, including vulnerabilities, configurations and web components, allowing customers to view and prioritize external risk. The EASM REST API enables you to develop clients that integrate with your application.")
+namespace Easm {
+    @doc("The EASM Defender service version.")
+    enum Versions {
+        @doc("Version 2023-03-01-preview")
+        @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+        `2023-03-01-preview`,
+    }
+}
