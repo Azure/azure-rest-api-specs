@@ -325,6 +325,7 @@ model Banner {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model CVSS3Summary {
     version?: string;
     vectorString?: string;
@@ -1030,6 +1031,7 @@ model PageAsset extends InventoryAsset {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model PageCause {
     cause?: string;
     causeElementXPath?: string;
@@ -1330,6 +1332,7 @@ model TaskPageResponse {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 @resource("tasks")
 model Task {
     @doc("The unique identifier of the task.")
@@ -1354,7 +1357,7 @@ model Task {
 
     @doc("The reason the task was moved into its current state, if the task wasn't completed.")
     reason?: string;
-
+    #suppress "@azure-tools/typespec-azure-core/no-unknown"
     @doc("Attributes unique to the task.  This differs by task type.")
     metadata?: unknown;
 }
