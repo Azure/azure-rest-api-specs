@@ -893,7 +893,7 @@
         "hardwareType": {
           "readOnly": true,
           "type": "string",
-          "enum": ["Cisco_UCS", "HPE"],
+          "enum": ["Cisco_UCS", "HPE", "SDFLEX"],
           "x-ms-enum": {
             "name": "AzureLargeInstanceHardwareTypeNamesEnum",
             "modelAsString": true
@@ -920,7 +920,6 @@
             "S224oom",
             "S224ooo",
             "S224se",
-            "S448se",
             "S384",
             "S384m",
             "S384xm",
@@ -931,6 +930,7 @@
             "S448oo",
             "S448oom",
             "S448ooo",
+            "S448se",
             "S576m",
             "S576xm",
             "S672",
@@ -1196,7 +1196,7 @@
           "type": "string",
           "description": "the billing mode for the storage instance"
         },
-        "azureLargeStorageInstanceSize": {
+        "sku": {
           "type": "string",
           "description": "the SKU type that is provisioned"
         }
