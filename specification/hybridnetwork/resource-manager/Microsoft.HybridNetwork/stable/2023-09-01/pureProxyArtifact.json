@@ -3,7 +3,7 @@
   "info": {
     "title": "HybridNetworkManagementClient",
     "description": "The resources in this swagger specification will be used to manage the network function publisher in a Hybrid Network resource provider.",
-    "version": "2023-04-01-preview"
+    "version": "2023-09-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -180,7 +180,13 @@
             }
           },
           "202": {
-            "description": "Request of updating artifact state is accepted."
+            "description": "Request of updating artifact state is accepted.",
+            "headers": {
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
