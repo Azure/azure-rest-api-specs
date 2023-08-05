@@ -1683,7 +1683,7 @@
       "description": "The data plane proxy settings for a configuration store.",
       "properties": {
         "authenticationMode": {
-          "description": "The data plane proxy authentication mode.",
+          "description": "The data plane proxy authentication mode. This property manages the authentication mode of request to the data plane resources.",
           "enum": [
             "Local",
             "Pass-Through"
@@ -1691,11 +1691,21 @@
           "type": "string",
           "x-ms-enum": {
             "name": "AuthenticationMode",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Local",
+                "description": "The local authentication mode. Users are not required to have data plane permissions if local authentication is not disabled."
+              },
+              {
+                "value": "Pass-Through",
+                "description": "The pass-through authentication mode. User identity will be passed through from ARM, requiring user to have data plane action permissions (Available via App Configuration Data Owner/ App Configuration Data Reader)."
+              }
+            ]
           }
         },
         "privateLinkDelegation": {
-          "description": "The data plane proxy private link delegation.",
+          "description": "The data plane proxy private link delegation. This property manages if a request from delegated ARM private link is allowed when the data plane resource requires private link.",
           "enum": [
             "Enabled",
             "Disabled"
@@ -1703,7 +1713,17 @@
           "type": "string",
           "x-ms-enum": {
             "name": "PrivateLinkDelegation",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "ARM private endpoint is required if the resource requires private link."
+              },
+              {
+                "value": "Disabled",
+                "description": "Request is denied if the resource requires private link."
+              }
+            ]
           }
         }
       }
