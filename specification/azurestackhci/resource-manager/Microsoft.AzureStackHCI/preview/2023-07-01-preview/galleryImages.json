@@ -318,14 +318,14 @@
         "operationId": "ListOperations",
         "parameters": [
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/OperationListResult"
+              "$ref": "#/definitions/AvailableOperations"
             }
           },
           "default": {
@@ -606,46 +606,69 @@
         }
       }
     },
-    "Operation": {
-      "description": "REST API operation",
+    "AvailableOperations": {
+      "description": "Available operations of the service",
       "type": "object",
       "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}",
-          "type": "string"
-        },
-        "display": {
-          "description": "The object that represents the operation.",
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft.ResourceProvider",
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
-              "type": "string"
-            },
-            "operation": {
-              "description": "Operation type: Read, write, delete, etc.",
-              "type": "string"
-            }
+        "value": {
+          "description": "Collection of available operation details",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationDetail"
           }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
         }
       }
     },
-    "OperationListResult": {
-      "description": "Result of the request to list Resource Provider operations. It contains a list of operations and a URL link to get the next set of results.",
+    "OperationDetail": {
+      "description": "Operation detail payload",
+      "type": "object",
       "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "description": "List of Resource Provider operations supported by the Resource Provider resource provider."
+        "name": {
+          "description": "Name of the operation",
+          "type": "string"
         },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of operation list results if there are any."
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display of the operation"
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Properties of the operation"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "Operation display payload",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Resource provider of the operation",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource of the operation",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Localized friendly name for the operation",
+          "type": "string"
+        },
+        "description": {
+          "description": "Localized friendly description for the operation",
+          "type": "string"
         }
       }
     }
