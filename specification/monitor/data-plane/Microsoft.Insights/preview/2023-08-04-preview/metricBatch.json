@@ -53,6 +53,60 @@
             "description": "s",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "s",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "Default: PT1M",
+            "required": false,
+            "type": "string",
+            "format": "duration"
+          },
+          {
+            "name": "metricnames",
+            "in": "query",
+            "description": "s",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "s",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "resourceIds": {
+                  "type": "array",
+                  "description": "s",
+                  "items": {
+                    "$ref": "#/definitions/armId"
+                  }
+                }
+              },
+              "required": [
+                "resourceIds"
+              ]
+            }
           }
         ],
         "responses": {
@@ -60,7 +114,26 @@
             "description": "The request has succeeded.",
             "schema": {
               "type": "object",
-              "properties": {}
+              "properties": {
+                "values": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "starttime": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "starttime"
+                    ]
+                  },
+                  "x-ms-identifiers": []
+                }
+              },
+              "required": [
+                "values"
+              ]
             }
           },
           "default": {
@@ -172,6 +245,10 @@
           }
         ]
       }
+    },
+    "armId": {
+      "type": "string",
+      "format": "arm-id"
     }
   },
   "parameters": {

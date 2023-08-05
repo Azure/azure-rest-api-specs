@@ -33,6 +33,34 @@ model Subscription {
   subscriptionId: string;
 }
 
+@format("arm-id")
+scalar armId extends string;
+
 @TypeSpec.Rest.actionSeparator("/")
 @TypeSpec.Rest.action("metrics:getBatch")
-op getBatch is OperationTemplates.ResourceAction<Subscription, {}, {}>;
+op getBatch is OperationTemplates.ResourceAction<
+  Subscription, 
+  {
+    @doc("s")
+    @query()
+    startTime?: string;
+
+    @doc("Default: PT1M")
+    @query()
+    interval?: duration;
+
+    @doc("s")
+    @query({format: "csv"})
+    metricnames: string[];
+
+    @doc("s")
+    @query()
+    top?: int32;
+
+    @doc("s")
+    resourceIds: armId[];
+  },
+  {
+    values: {starttime: string}[]
+  }
+>;
