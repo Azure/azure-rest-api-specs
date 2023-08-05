@@ -39,28 +39,32 @@ scalar armId extends string;
 @TypeSpec.Rest.actionSeparator("/")
 @TypeSpec.Rest.action("metrics:getBatch")
 op getBatch is OperationTemplates.ResourceAction<
-  Subscription, 
+  Subscription,
   {
     @doc("s")
-    @query()
+    @query
     startTime?: string;
 
     @doc("Default: PT1M")
-    @query()
+    @query
     interval?: duration;
 
     @doc("s")
-    @query({format: "csv"})
+    @query({
+      format: "csv",
+    })
     metricnames: string[];
 
     @doc("s")
-    @query()
+    @query
     top?: int32;
 
     @doc("s")
     resourceIds: armId[];
   },
   {
-    values: {starttime: string}[]
+    values: {
+      starttime: string;
+    }[];
   }
 >;
