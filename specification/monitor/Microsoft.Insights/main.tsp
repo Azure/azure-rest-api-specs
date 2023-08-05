@@ -17,9 +17,9 @@ namespace Microsoft.Insights;
 
 @doc("Versions info.")
 enum Versions {
-  @doc("The 2023-08-04-preview version.")
+  @doc("The 2023-05-01-preview version.")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2023_08_04_Preview: "2023-08-04-preview",
+  v2023_05_01_Preview: "2023-05-01-preview",
 }
 
 alias OperationTemplates = Azure.Core.StandardResourceOperations;
