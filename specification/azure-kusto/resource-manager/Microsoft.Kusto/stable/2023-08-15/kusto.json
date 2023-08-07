@@ -2265,6 +2265,291 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/sandboxCustomImages": {
+      "get": {
+        "tags": [
+          "SandboxCustomImages"
+        ],
+        "description": "Returns the list of the existing sandbox custom images of the given Kusto cluster.",
+        "operationId": "SandboxCustomImages_ListByCluster",
+        "x-ms-examples": {
+          "KustoSandboxCustomImagesListByCluster": {
+            "$ref": "./examples/KustoSandboxCustomImagesList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of sandbox custom images.",
+            "schema": {
+              "$ref": "#/definitions/SandboxCustomImagesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/sandboxCustomImages/{sandboxCustomImageName}": {
+      "get": {
+        "tags": [
+          "SandboxCustomImages"
+        ],
+        "operationId": "SandboxCustomImages_Get",
+        "x-ms-examples": {
+          "KustoSandboxCustomImagesGet": {
+            "$ref": "./examples/KustoSandboxCustomImagesGet.json"
+          }
+        },
+        "description": "Returns a sandbox custom image",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SandboxCustomImageNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified sandbox custom image",
+            "schema": {
+              "$ref": "#/definitions/SandboxCustomImage"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SandboxCustomImages"
+        ],
+        "operationId": "SandboxCustomImages_CreateOrUpdate",
+        "x-ms-examples": {
+          "KustoSandboxCustomImagesCreateOrUpdate": {
+            "$ref": "./examples/KustoSandboxCustomImagesCreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Creates or updates a sandbox custom image.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SandboxCustomImageNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SandboxCustomImage"
+            },
+            "description": "The sandbox custom image parameters."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the sandbox custom image.",
+            "schema": {
+              "$ref": "#/definitions/SandboxCustomImage"
+            }
+          },
+          "201": {
+            "description": "Successfully created the sandbox custom image.",
+            "schema": {
+              "$ref": "#/definitions/SandboxCustomImage"
+            }
+          },
+          "202": {
+            "description": "Successfully accepted the sandbox custom image.",
+            "schema": {
+              "$ref": "#/definitions/SandboxCustomImage"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query the status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SandboxCustomImages"
+        ],
+        "operationId": "SandboxCustomImages_Update",
+        "x-ms-examples": {
+          "KustoSandboxCustomImagesUpdate": {
+            "$ref": "./examples/KustoSandboxCustomImageUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Updates a sandbox custom image.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SandboxCustomImageNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SandboxCustomImage"
+            },
+            "description": "The sandbox custom image parameters."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the sandbox custom image.",
+            "schema": {
+              "$ref": "#/definitions/SandboxCustomImage"
+            }
+          },
+          "201": {
+            "description": "Accepted. The sandbox custom image update will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/SandboxCustomImage"
+            }
+          },
+          "202": {
+            "description": "Accepted the update request of the sandbox custom image.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query the status of the operation.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/SandboxCustomImage"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SandboxCustomImages"
+        ],
+        "operationId": "SandboxCustomImages_Delete",
+        "x-ms-examples": {
+          "SandboxCustomImagesDelete": {
+            "$ref": "./examples/KustoSandboxCustomImageDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Deletes a sandbox custom image.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SandboxCustomImageNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- sandbox custom image deleted successfully."
+          },
+          "202": {
+            "description": "Accepted the delete sandbox custom image request.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query the status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "NoContent -- If the sandbox custom image resource is already deleted, this is the expected status code."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/managedPrivateEndpoints": {
       "get": {
         "tags": [
@@ -4492,6 +4777,19 @@
             "create",
             "read"
           ]
+        },
+        "state": {
+          "type": "string",
+          "description": "When enabled, the cluster is deployed into the configured subnet, when disabled it will be removed from the subnet.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "VnetState",
+            "modelAsString": true
+          },
+          "default": "Enabled"
         }
       },
       "description": "A class that contains virtual network definition."
@@ -5487,6 +5785,40 @@
       },
       "description": "A class representing the properties of a managed private endpoint object."
     },
+    "SandboxCustomImageProperties": {
+      "type": "object",
+      "required": [
+        "language",
+        "languageVersion"
+      ],
+      "properties": {
+        "language": {
+          "description": "The language name, for example Python.",
+          "type": "string",
+          "enum": [
+            "Python"
+          ],
+          "x-ms-enum": {
+            "name": "language",
+            "modelAsString": true
+          }
+        },
+        "languageVersion": {
+          "description": "The version of the language.",
+          "type": "string"
+        },
+        "requirementsFileContent": {
+          "description": "The requirements file content.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true,
+          "description": "The provisioned state of the resource."
+        }
+      },
+      "description": "A class representing the properties of a sandbox custom image object."
+    },
     "DatabasePrincipalAssignment": {
       "type": "object",
       "properties": {
@@ -5551,6 +5883,39 @@
         }
       ],
       "description": "Class representing a database script."
+    },
+    "SandboxCustomImagesListResult": {
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "Link to the next page of results",
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SandboxCustomImage"
+          },
+          "description": "The list of Kusto sandbox custom images."
+        }
+      },
+      "description": "The list Kusto sandbox custom images operation response."
+    },
+    "SandboxCustomImage": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SandboxCustomImageProperties",
+          "description": "A sandbox custom image."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Class representing a Kusto sandbox custom image."
     },
     "ManagedPrivateEndpointListResult": {
       "type": "object",
@@ -6569,12 +6934,18 @@
       "enum": [
         "R",
         "Python3_6_5",
-        "Python3_10_8"
+        "Python3_10_8",
+        "Python3_10_8_DL",
+        "PythonCustomImage"
       ],
       "x-ms-enum": {
         "name": "languageExtensionImageName",
         "modelAsString": true
       }
+    },
+    "LanguageExtensionCustomImageName": {
+      "description": "The sandbox custom image name that should be enabled as the active language extension. Sandbox custom image is a cluster sub resource. When this property is set, LanguageExtensionImageName should be set to 'PythonCustomImage'.",
+      "type": "string"
     },
     "LanguageExtension": {
       "type": "object",
@@ -6587,6 +6958,10 @@
         "languageExtensionImageName": {
           "$ref": "#/definitions/LanguageExtensionImageName",
           "description": "The language extension image name."
+        },
+        "languageExtensionCustomImageName": {
+          "$ref": "#/definitions/LanguageExtensionCustomImageName",
+          "description": "The language extension custom image name."
         }
       }
     },
@@ -6897,6 +7272,15 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
+      "pattern": "^.*$"
+    },
+    "SandboxCustomImageNameParameter": {
+      "name": "sandboxCustomImageName",
+      "in": "path",
+      "description": "The name of the sandbox custom image.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string",
       "pattern": "^.*$"
     },
     "PrivateEndpointConnectionNameParameter": {
