@@ -17204,7 +17204,7 @@
         }
       }
     },
-    "PartyOverlapResponse": {
+      "PartyOverlapResponse": {
       "description": "Schema of Party Overlap Response.",
       "type": "object",
       "properties": {
@@ -18554,13 +18554,6 @@
           "description": "Maximum total amount of material applied during the application (inclusive).",
           "type": "number"
         },
-        "ids": {
-          "description": "Ids of the resource.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
         "associatedResourceIds": {
           "description": "Resource Ids of the resource.",
           "type": "array",
@@ -18602,15 +18595,32 @@
           "description": "Maximum modified date-time of the operation data, sample format: yyyy-MM-ddTHH:mm:ssZ (inclusive).",
           "type": "string"
         },
-        "names": {
-          "description": "Names of the resource.",
+        "sources": {
+          "description": "Sources of the operation data.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
-        "sources": {
-          "description": "Sources of the operation data.",
+        "minArea": {
+          "format": "double",
+          "description": "Minimum acreage of the boundary (inclusive).",
+          "type": "number"
+        },
+        "maxArea": {
+          "format": "double",
+          "description": "Maximum acreage of the boundary (inclusive).",
+          "type": "number"
+        },
+        "ids": {
+          "description": "Ids of the resource.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "names": {
+          "description": "Names of the resource.",
           "type": "array",
           "items": {
             "type": "string"
@@ -18622,10 +18632,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "partyId": {
-          "description": "Party ID which belongs to the operation data.",
-          "type": "string"
         },
         "statuses": {
           "description": "Statuses of the resource.",
@@ -18654,18 +18660,12 @@
           "description": "Maximum last modified date of resource (inclusive).",
           "type": "string"
         },
-        "minArea": {
-          "format": "double",
-          "description": "Minimum acreage of the boundary (inclusive).",
-          "type": "number"
-        },
-        "maxArea": {
-          "format": "double",
-          "description": "Maximum acreage of the boundary (inclusive).",
-          "type": "number"
-        },
         "intersectsWithGeometry": {
           "$ref": "#/definitions/GeoJsonObject"
+        },
+        "partyId": {
+          "description": "Party ID which belongs to the operation data.",
+          "type": "string"
         }
       }
     },
@@ -18803,10 +18803,6 @@
       "description": "SearchHarvestDataQuery.",
       "type": "object",
       "properties": {
-        "partyId": {
-          "description": "Party ID which belongs to the operation data.",
-          "type": "string"
-        },
         "minTotalYield": {
           "format": "double",
           "description": "Minimum Yield value(inclusive).",
@@ -18867,13 +18863,6 @@
           "description": "Maximum AvgSpeed value (inclusive).",
           "type": "number"
         },
-        "ids": {
-          "description": "Ids of the resource.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
         "associatedResourceIds": {
           "description": "Resource Ids of the resource.",
           "type": "array",
@@ -18915,15 +18904,32 @@
           "description": "Maximum modified date-time of the operation data, sample format: yyyy-MM-ddTHH:mm:ssZ (inclusive).",
           "type": "string"
         },
-        "names": {
-          "description": "Names of the resource.",
+        "sources": {
+          "description": "Sources of the operation data.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
-        "sources": {
-          "description": "Sources of the operation data.",
+        "minArea": {
+          "format": "double",
+          "description": "Minimum acreage of the boundary (inclusive).",
+          "type": "number"
+        },
+        "maxArea": {
+          "format": "double",
+          "description": "Maximum acreage of the boundary (inclusive).",
+          "type": "number"
+        },
+        "ids": {
+          "description": "Ids of the resource.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "names": {
+          "description": "Names of the resource.",
           "type": "array",
           "items": {
             "type": "string"
@@ -18963,18 +18969,12 @@
           "description": "Maximum last modified date of resource (inclusive).",
           "type": "string"
         },
-        "minArea": {
-          "format": "double",
-          "description": "Minimum acreage of the boundary (inclusive).",
-          "type": "number"
-        },
-        "maxArea": {
-          "format": "double",
-          "description": "Maximum acreage of the boundary (inclusive).",
-          "type": "number"
-        },
         "intersectsWithGeometry": {
           "$ref": "#/definitions/GeoJsonObject"
+        },
+        "partyId": {
+          "description": "Party ID which belongs to the operation data.",
+          "type": "string"
         }
       }
     },
@@ -18982,10 +18982,6 @@
       "description": "Search All PlantTissueAnalysis and Search PlantTissueAnalyses parameters.",
       "type": "object",
       "properties": {
-        "partyId": {
-          "description": "Party ID of the resource.",
-          "type": "string"
-        },
         "fieldIds": {
           "description": "Field Ids of the resource.",
           "type": "array",
@@ -19064,6 +19060,10 @@
         },
         "intersectsWithGeometry": {
           "$ref": "#/definitions/GeoJsonObject"
+        },
+        "partyId": {
+          "description": "Party ID which belongs to the operation data.",
+          "type": "string"
         }
       }
     },
@@ -19071,10 +19071,6 @@
       "description": "SearchPlantingDataQuery.",
       "type": "object",
       "properties": {
-        "partyId": {
-          "description": "Party ID which belongs to the operation data.",
-          "type": "string"
-        },
         "minAvgPlantingRate": {
           "format": "double",
           "description": "Minimum AvgPlantingRate value(inclusive).",
@@ -19104,13 +19100,6 @@
           "format": "double",
           "description": "Maximum AvgMaterial value (inclusive).",
           "type": "number"
-        },
-        "ids": {
-          "description": "Ids of the resource.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         },
         "associatedResourceIds": {
           "description": "Resource Ids of the resource.",
@@ -19153,15 +19142,32 @@
           "description": "Maximum modified date-time of the operation data, sample format: yyyy-MM-ddTHH:mm:ssZ (inclusive).",
           "type": "string"
         },
-        "names": {
-          "description": "Names of the resource.",
+        "sources": {
+          "description": "Sources of the operation data.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
-        "sources": {
-          "description": "Sources of the operation data.",
+        "minArea": {
+          "format": "double",
+          "description": "Minimum acreage of the boundary (inclusive).",
+          "type": "number"
+        },
+        "maxArea": {
+          "format": "double",
+          "description": "Maximum acreage of the boundary (inclusive).",
+          "type": "number"
+        },
+        "ids": {
+          "description": "Ids of the resource.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "names": {
+          "description": "Names of the resource.",
           "type": "array",
           "items": {
             "type": "string"
@@ -19201,18 +19207,12 @@
           "description": "Maximum last modified date of resource (inclusive).",
           "type": "string"
         },
-        "minArea": {
-          "format": "double",
-          "description": "Minimum acreage of the boundary (inclusive).",
-          "type": "number"
-        },
-        "maxArea": {
-          "format": "double",
-          "description": "Maximum acreage of the boundary (inclusive).",
-          "type": "number"
-        },
         "intersectsWithGeometry": {
           "$ref": "#/definitions/GeoJsonObject"
+        },
+        "partyId": {
+          "description": "Party ID which belongs to the operation data.",
+          "type": "string"
         }
       }
     },
@@ -19220,10 +19220,6 @@
       "description": "Get Zones query parameters.",
       "type": "object",
       "properties": {
-        "partyId": {
-          "description": "Party ID of the resource.",
-          "type": "string"
-        },
         "prescriptionMapIds": {
           "description": "Prescription Map Ids of the resource.",
           "type": "array",
@@ -19309,6 +19305,10 @@
         },
         "intersectsWithGeometry": {
           "$ref": "#/definitions/GeoJsonObject"
+        },
+        "partyId": {
+          "description": "Party ID which belongs to the operation data.",
+          "type": "string"
         }
       }
     },
@@ -19316,10 +19316,6 @@
       "description": "SearchAllBoundaries and SearchBoundaries parameters.",
       "type": "object",
       "properties": {
-        "partyId": {
-          "description": "Party ID which belongs to the operation data.",
-          "type": "string"
-        },
         "farmIds": {
           "description": "FarmIds of the resource.",
           "type": "array",
@@ -19405,6 +19401,10 @@
         },
         "intersectsWithGeometry": {
           "$ref": "#/definitions/GeoJsonObject"
+        },
+        "partyId": {
+          "description": "Party ID which belongs to the operation data.",
+          "type": "string"
         }
       }
     },
@@ -19412,10 +19412,6 @@
       "description": "SearchTillageDataQuery.",
       "type": "object",
       "properties": {
-        "partyId": {
-          "description": "Party ID which belongs to the operation data.",
-          "type": "string"
-        },
         "minTillageDepth": {
           "format": "double",
           "description": "Minimum measured tillage depth (inclusive).",
@@ -19435,13 +19431,6 @@
           "format": "double",
           "description": "Maximum pressure applied to a tillage implement (inclusive).",
           "type": "number"
-        },
-        "ids": {
-          "description": "Ids of the resource.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         },
         "associatedResourceIds": {
           "description": "Resource Ids of the resource.",
@@ -19484,15 +19473,32 @@
           "description": "Maximum modified date-time of the operation data, sample format: yyyy-MM-ddTHH:mm:ssZ (inclusive).",
           "type": "string"
         },
-        "names": {
-          "description": "Names of the resource.",
+        "sources": {
+          "description": "Sources of the operation data.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
-        "sources": {
-          "description": "Sources of the operation data.",
+        "minArea": {
+          "format": "double",
+          "description": "Minimum acreage of the boundary (inclusive).",
+          "type": "number"
+        },
+        "maxArea": {
+          "format": "double",
+          "description": "Maximum acreage of the boundary (inclusive).",
+          "type": "number"
+        },
+        "ids": {
+          "description": "Ids of the resource.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "names": {
+          "description": "Names of the resource.",
           "type": "array",
           "items": {
             "type": "string"
@@ -19532,18 +19538,12 @@
           "description": "Maximum last modified date of resource (inclusive).",
           "type": "string"
         },
-        "minArea": {
-          "format": "double",
-          "description": "Minimum acreage of the boundary (inclusive).",
-          "type": "number"
-        },
-        "maxArea": {
-          "format": "double",
-          "description": "Maximum acreage of the boundary (inclusive).",
-          "type": "number"
-        },
         "intersectsWithGeometry": {
           "$ref": "#/definitions/GeoJsonObject"
+        },
+        "partyId": {
+          "description": "Party ID which belongs to the operation data.",
+          "type": "string"
         }
       }
     },
@@ -19551,10 +19551,6 @@
       "description": "Get Zones query parameters.",
       "type": "object",
       "properties": {
-        "partyId": {
-          "description": "Party ID which belongs to the operation data.",
-          "type": "string"
-        },
         "types": {
           "description": "Types of the Zones.",
           "type": "array",
@@ -19626,6 +19622,10 @@
         },
         "intersectsWithGeometry": {
           "$ref": "#/definitions/GeoJsonObject"
+        },
+        "partyId": {
+          "description": "Party ID which belongs to the operation data.",
+          "type": "string"
         }
       }
     },
