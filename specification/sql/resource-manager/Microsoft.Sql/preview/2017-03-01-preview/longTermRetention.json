@@ -1,0 +1,1031 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2017-03-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}": {
+      "get": {
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Gets a long term retention backup.",
+        "operationId": "LongTermRetentionBackups_GetByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the backup.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackup"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidLongTermRetentionBackupId - Invalid long term retention backup identifier.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-examples": {
+          "Get the long term retention backup.": {
+            "$ref": "./examples/ResourceGroupBasedLongTermRetentionBackupGet.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Deletes a long term retention backup.",
+        "operationId": "LongTermRetentionBackups_DeleteByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the backup."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidLongTermRetentionBackupId - Invalid long term retention backup identifier.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found"
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete the long term retention backup.": {
+            "$ref": "./examples/ResourceGroupBasedLongTermRetentionBackupDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups": {
+      "get": {
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Lists all long term retention backups for a database.",
+        "operationId": "LongTermRetentionBackups_ListByResourceGroupDatabase",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onlyLatestPerDatabase",
+            "in": "query",
+            "description": "Whether or not to only get the latest backup for each database.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/LongTermRetentionDatabaseStateParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of backups.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackupListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get all long term retention backups under the database.": {
+            "$ref": "./examples/ResourceGroupBasedLongTermRetentionBackupListByDatabase.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionBackups": {
+      "get": {
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Lists the long term retention backups for a given location.",
+        "operationId": "LongTermRetentionBackups_ListByResourceGroupLocation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onlyLatestPerDatabase",
+            "in": "query",
+            "description": "Whether or not to only get the latest backup for each database.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/LongTermRetentionDatabaseStateParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of backups.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackupListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get all long term retention backups under the location.": {
+            "$ref": "./examples/ResourceGroupBasedLongTermRetentionBackupListByLocation.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionBackups": {
+      "get": {
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Lists the long term retention backups for a given server.",
+        "operationId": "LongTermRetentionBackups_ListByResourceGroupServer",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onlyLatestPerDatabase",
+            "in": "query",
+            "description": "Whether or not to only get the latest backup for each database.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/LongTermRetentionDatabaseStateParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of backups.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackupListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get all long term retention backups under the server.": {
+            "$ref": "./examples/ResourceGroupBasedLongTermRetentionBackupListByServer.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}": {
+      "get": {
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Gets a long term retention backup.",
+        "operationId": "LongTermRetentionBackups_Get",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the backup.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackup"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidLongTermRetentionBackupId - Invalid long term retention backup identifier.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-examples": {
+          "Get the long term retention backup.": {
+            "$ref": "./examples/LongTermRetentionBackupGet.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Deletes a long term retention backup.",
+        "operationId": "LongTermRetentionBackups_Delete",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the backup."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidLongTermRetentionBackupId - Invalid long term retention backup identifier.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found"
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete the long term retention backup.": {
+            "$ref": "./examples/LongTermRetentionBackupDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups": {
+      "get": {
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Lists all long term retention backups for a database.",
+        "operationId": "LongTermRetentionBackups_ListByDatabase",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onlyLatestPerDatabase",
+            "in": "query",
+            "description": "Whether or not to only get the latest backup for each database.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/LongTermRetentionDatabaseStateParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of backups.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackupListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get all long term retention backups under the database.": {
+            "$ref": "./examples/LongTermRetentionBackupListByDatabase.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionBackups": {
+      "get": {
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Lists the long term retention backups for a given location.",
+        "operationId": "LongTermRetentionBackups_ListByLocation",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onlyLatestPerDatabase",
+            "in": "query",
+            "description": "Whether or not to only get the latest backup for each database.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/LongTermRetentionDatabaseStateParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of backups.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackupListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get all long term retention backups under the location.": {
+            "$ref": "./examples/LongTermRetentionBackupListByLocation.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionBackups": {
+      "get": {
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Lists the long term retention backups for a given server.",
+        "operationId": "LongTermRetentionBackups_ListByServer",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onlyLatestPerDatabase",
+            "in": "query",
+            "description": "Whether or not to only get the latest backup for each database.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/LongTermRetentionDatabaseStateParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of backups.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackupListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get all long term retention backups under the server.": {
+            "$ref": "./examples/LongTermRetentionBackupListByServer.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupLongTermRetentionPolicies/{policyName}": {
+      "get": {
+        "tags": [
+          "BackupLongTermRetentionPolicies"
+        ],
+        "description": "Gets a database's long term retention policy.",
+        "operationId": "BackupLongTermRetentionPolicies_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The policy name. Should always be Default.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "LongTermRetentionPolicyName",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully get the policy.",
+            "schema": {
+              "$ref": "#/definitions/BackupLongTermRetentionPolicy"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-examples": {
+          "Get the long term retention policy for the database.": {
+            "$ref": "./examples/LongTermRetentionPolicyGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "BackupLongTermRetentionPolicies"
+        ],
+        "description": "Sets a database's long term retention policy.",
+        "operationId": "BackupLongTermRetentionPolicies_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The policy name. Should always be Default.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "LongTermRetentionPolicyName",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The long term retention policy info.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackupLongTermRetentionPolicy"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully set the policy.",
+            "schema": {
+              "$ref": "#/definitions/BackupLongTermRetentionPolicy"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 LongTermRetentionPolicyNotSupported - Long Term Retention is not supported on this database.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found."
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create or update the long term retention policy for the database.": {
+            "$ref": "./examples/LongTermRetentionPolicyCreateOrUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupLongTermRetentionPolicies": {
+      "get": {
+        "tags": [
+          "BackupLongTermRetentionPolicies"
+        ],
+        "description": "Gets a database's long term retention policy.",
+        "operationId": "BackupLongTermRetentionPolicies_ListByDatabase",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully get the policy.",
+            "schema": {
+              "$ref": "#/definitions/BackupLongTermRetentionPolicy"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-examples": {
+          "Get the long term retention policy for the database.": {
+            "$ref": "./examples/LongTermRetentionPolicyGet.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "LongTermRetentionBackupProperties": {
+      "description": "Properties of a long term retention backup",
+      "type": "object",
+      "properties": {
+        "serverName": {
+          "description": "The server name that the backup database belong to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCreateTime": {
+          "format": "date-time",
+          "description": "The create time of the server.",
+          "type": "string",
+          "readOnly": true
+        },
+        "databaseName": {
+          "description": "The name of the database the backup belong to",
+          "type": "string",
+          "readOnly": true
+        },
+        "databaseDeletionTime": {
+          "format": "date-time",
+          "description": "The delete time of the database",
+          "type": "string",
+          "readOnly": true
+        },
+        "backupTime": {
+          "format": "date-time",
+          "description": "The time the backup was taken",
+          "type": "string",
+          "readOnly": true
+        },
+        "backupExpirationTime": {
+          "format": "date-time",
+          "description": "The time the long term retention backup will expire.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "LongTermRetentionBackup": {
+      "description": "A long term retention backup.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LongTermRetentionBackupProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "LongTermRetentionBackupListResult": {
+      "description": "A list of long term retention backups.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LongTermRetentionBackup"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "LongTermRetentionPolicyProperties": {
+      "description": "Properties of a long term retention policy",
+      "type": "object",
+      "properties": {
+        "weeklyRetention": {
+          "description": "The weekly retention policy for an LTR backup in an ISO 8601 format.",
+          "type": "string"
+        },
+        "monthlyRetention": {
+          "description": "The monthly retention policy for an LTR backup in an ISO 8601 format.",
+          "type": "string"
+        },
+        "yearlyRetention": {
+          "description": "The yearly retention policy for an LTR backup in an ISO 8601 format.",
+          "type": "string"
+        },
+        "weekOfYear": {
+          "format": "int32",
+          "description": "The week of year to take the yearly backup in an ISO 8601 format.",
+          "type": "integer"
+        }
+      }
+    },
+    "BackupLongTermRetentionPolicy": {
+      "description": "A long term retention policy.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LongTermRetentionPolicyProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription ID that identifies an Azure subscription.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for the request.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ManagedInstanceNameParameter": {
+      "name": "managedInstanceName",
+      "in": "path",
+      "description": "The name of the managed instance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "BlobAuditingPolicyNameParameter": {
+      "name": "blobAuditingPolicyName",
+      "in": "path",
+      "description": "The name of the blob auditing policy.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "default"
+      ],
+      "x-ms-parameter-location": "method"
+    },
+    "SqlVirtualMachineInstanceNameParameter": {
+      "name": "sqlVirtualMachineInstanceName",
+      "in": "path",
+      "description": "The name of the SqlVirtualMachineInstance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SqlVirtualMachineContainerNameParameter": {
+      "name": "sqlVirtualMachineContainerName",
+      "in": "path",
+      "description": "The name of the SqlVirtualMachineContainer.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "VirtualClusterNameParameter": {
+      "name": "virtualClusterName",
+      "in": "path",
+      "description": "The name of the virtual cluster.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "LongTermRetentionDatabaseStateParameter": {
+      "name": "databaseState",
+      "in": "query",
+      "description": "Whether to query against just live databases, just deleted databases, or all databases.",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "All",
+        "Live",
+        "Deleted"
+      ],
+      "x-ms-enum": {
+        "name": "longTermRetentionDatabaseState",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

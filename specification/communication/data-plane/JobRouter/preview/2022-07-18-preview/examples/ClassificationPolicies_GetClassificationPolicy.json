@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "endpoint": "https://contoso.westus.communications.azure.com",
+    "api-version": "2022-07-18-preview",
+    "id": "MainClassificationPolicy"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "MainClassificationPolicy",
+        "name": "Main",
+        "fallbackQueueId": "MainQueue",
+        "queueSelectors": [
+          {
+            "kind": "conditional",
+            "condition": {
+              "kind": "expression-rule",
+              "language": "PowerFx",
+              "expression": "1 = 1"
+            },
+            "queueSelectors": [
+              {
+                "key": "foo",
+                "labelOperator": "equal",
+                "value": "bar"
+              }
+            ]
+          }
+        ],
+        "prioritizationRule": {
+          "kind": "static-rule",
+          "value": "2"
+        },
+        "workerSelectors": [
+          {
+            "kind": "pass-through",
+            "key": "language",
+            "labelOperator": "equal"
+          }
+        ]
+      }
+    }
+  }
+}

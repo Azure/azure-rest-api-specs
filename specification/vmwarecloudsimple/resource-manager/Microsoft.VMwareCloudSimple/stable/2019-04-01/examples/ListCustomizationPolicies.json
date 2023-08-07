@@ -1,0 +1,80 @@
+{
+  "parameters": {
+    "api-version": "2019-04-01",
+    "subscriptionId": "{subscription-id}",
+    "regionId": "myResourceGroup",
+    "pcName": "myPrivateCloud"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/b85c4986-56ae-4ebd-b5c5-a1595ca3dab1/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/foobar/customizationpolicies/Linux1",
+            "location": "westus2",
+            "name": "Linux1",
+            "properties": {
+              "privateCloudId": "/subscriptions/b85c4986-56ae-4ebd-b5c5-a1595ca3dab1/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/foobar",
+              "specification": {
+                "identity": {
+                  "hostName": {
+                    "type": "USER_DEFINED"
+                  },
+                  "type": "LINUX",
+                  "userData": {
+                    "isPasswordPredefined": false
+                  }
+                },
+                "nicSettings": [
+                  {
+                    "adapter": {
+                      "gateway": null,
+                      "ip": {
+                        "type": "USER_DEFINED"
+                      }
+                    }
+                  }
+                ]
+              },
+              "type": "LINUX",
+              "version": "1568102823"
+            },
+            "type": "Microsoft.VMwareCloudSimple/customizationPolicies"
+          },
+          {
+            "id": "/subscriptions/b85c4986-56ae-4ebd-b5c5-a1595ca3dab1/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/foobar/customizationpolicies/Linux2",
+            "location": "westus2",
+            "name": "Linux2",
+            "properties": {
+              "privateCloudId": "/subscriptions/b85c4986-56ae-4ebd-b5c5-a1595ca3dab1/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/foobar",
+              "specification": {
+                "identity": {
+                  "hostName": {
+                    "type": "VIRTUAL_MACHINE_NAME"
+                  },
+                  "type": "LINUX",
+                  "userData": {
+                    "isPasswordPredefined": false
+                  }
+                },
+                "nicSettings": [
+                  {
+                    "adapter": {
+                      "gateway": null,
+                      "ip": {
+                        "type": "DHCP_IP"
+                      }
+                    }
+                  }
+                ]
+              },
+              "type": "LINUX",
+              "version": "1568102846"
+            },
+            "type": "Microsoft.VMwareCloudSimple/customizationPolicies"
+          }
+        ]
+      }
+    }
+  }
+}

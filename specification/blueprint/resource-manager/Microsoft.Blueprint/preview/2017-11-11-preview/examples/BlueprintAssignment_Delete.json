@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2017-11-11-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "assignmentName": "assignSimpleBlueprint"
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "identity": {
+          "type": "SystemAssigned",
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "principalId": "00000000-0000-0000-0000-000000000000"
+        },
+        "location": "eastus",
+        "properties": {
+          "description": "enforce pre-defined simpleBlueprint to this XXXXXXXX subscription.",
+          "provisioningState": "deleting",
+          "blueprintId": "/providers/Microsoft.Management/managementGroups/ContosoOnlineGroup/providers/Microsoft.Blueprint/blueprints/simpleBlueprint",
+          "parameters": {
+            "storageAccountType": {
+              "value": "Standard_LRS"
+            },
+            "costCenter": {
+              "value": "Contoso/Online/Shopping/Production"
+            },
+            "owners": {
+              "value": [
+                "johnDoe@contoso.com",
+                "johnsteam@contoso.com"
+              ]
+            }
+          },
+          "resourceGroups": {
+            "storageRG": {
+              "name": "defaultRG",
+              "location": "eastus"
+            }
+          }
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprintAssignments/assignSimpleBlueprint",
+        "type": "Microsoft.Blueprint/Assignment",
+        "name": "assignSimpleBlueprint"
+      }
+    },
+    "204": {}
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Load balancer admin operation endpoints and objects.",
+    "title": "NetworkAdminManagementClient",
+    "version": "2015-06-15"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network.Admin/adminLoadBalancers": {
+      "get": {
+        "x-ms-examples": {
+          "List all load balancers": {
+            "$ref": "./examples/LoadBalancers/List.json"
+          }
+        },
+        "tags": [
+          "LoadBalancers"
+        ],
+        "description": "Get a list of all load balancers.",
+        "operationId": "LoadBalancers_List",
+        "parameters": [
+          {
+            "$ref": "Network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "Network.json#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "Network.json#/parameters/OrderByParameter"
+          },
+          {
+            "$ref": "Network.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "Network.json#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "Network.json#/parameters/InlineCountParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LoadBalancerList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/LoadBalancer"
+      }
+    }
+  },
+  "definitions": {
+    "LoadBalancer": {
+      "description": "Representation of a load balancer.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Properties of a load balancer.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LoadBalancerProperty"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Network.json#/definitions/Resource"
+        }
+      ]
+    },
+    "LoadBalancerProperty": {
+      "description": "Properties of a load balancer.",
+      "type": "object",
+      "properties": {
+        "publicIpAddresses": {
+          "description": "List of public IP addresses.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Network.json#/definitions/ProvisionedResource"
+        },
+        {
+          "$ref": "Network.json#/definitions/TenantResource"
+        }
+      ]
+    },
+    "LoadBalancerList": {
+      "description": "Pageable list of load balancers.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of load balancers for this page.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LoadBalancer"
+          }
+        },
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {},
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

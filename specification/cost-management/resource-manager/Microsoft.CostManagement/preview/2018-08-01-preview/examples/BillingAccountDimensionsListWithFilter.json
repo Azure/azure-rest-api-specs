@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2018-08-01-preview",
+    "billingAccountId": "100",
+    "$expand": "properties/data",
+    "$top": 5,
+    "$filter": "properties/category eq 'instanceId'"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "providers/Microsoft.Billing/billingAccounts/100/providers/microsoft.consumption/dimensions_InstanceId_2018-05-01_2018-05-31_5",
+            "name": "dimensions_InstanceId_2018-05-01_2018-05-31_5",
+            "type": "microsoft.consumption/dimensions",
+            "properties": {
+              "data": [
+                "/subscriptions/39ae8bea-c3fd-4e24-8936-7c34974326ce/resourcegroups/system.orlando/providers/microsoft.storage/storageaccounts/urphealthaccount",
+                "/subscriptions/39ae8bea-c3fd-4e24-8936-7c34974326ce/resourcegroups/system.orlando/providers/microsoft.storage/storageaccounts/srphytenaccount",
+                "/subscriptions/67e24f6b-1ec2-4c90-993a-dc2d25b00b6c/resourcegroups/defaultresourcegroup-eus/providers/microsoft.operationalinsights/workspaces/defaultworkspace-67e24f6b-1ec2-4c90-993a-dc2d25b00b6c-eus",
+                "/subscriptions/39ae8bea-c3fd-4e24-8936-7c34974326ce/resourcegroups/rg-sql-ha/providers/microsoft.compute/virtualmachines/sql-4qqp1",
+                "/subscriptions/a98d6dc5-eb8f-46cf-8938-f1fb08f03706/resourcegroups/databricks-rg-testwsp-xijmsdubneexm/providers/microsoft.compute/disks/488cdb42bf74474a98075415be3f806c-containerrootvolume"
+              ],
+              "total": 1409,
+              "category": "InstanceId",
+              "usageStart": "2018-05-01T00:00:00-07:00",
+              "usageEnd": "2018-05-31T00:00:00-07:00",
+              "nextLink": "http://management.azure.com/ccmapi/providers/Microsoft.Billing/billingAccounts/100/providers/Microsoft.Consumption/Dimensions?$filter=properties/category eq 'instanceId'&$top=5&api-version=2018-05-31&$expand=properties/data&$skiptoken=AQAAAA%3D%3D"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

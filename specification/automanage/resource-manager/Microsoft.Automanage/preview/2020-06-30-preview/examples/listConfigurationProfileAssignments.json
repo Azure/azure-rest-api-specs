@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "subscriptionId": "mySubscriptionId",
+    "resourceGroupName": "myResourceGroupName",
+    "vmName": "myVMName",
+    "api-version": "2020-06-30-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": [
+        {
+          "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myvm/providers/Microsoft.Automanage/configurationProfileAssignments/default",
+          "name": "default",
+          "type": "Microsoft.Automanage/ConfigurationProfileAssignments",
+          "properties": {
+            "targetId": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myvm",
+            "configurationProfile": "Azure virtual machine best practices – Production",
+            "accountId": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automanage/accounts/automanageAccount",
+            "configurationProfilePreferenceId": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Automanage/configurationProfilePreferences/defaultProfilePreference",
+            "compliance": {
+              "updateStatus": "Succeeded"
+            },
+            "provisioningState": "Succeeded"
+          }
+        },
+        {
+          "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myvm2/providers/Microsoft.Automanage/configurationProfileAssignments/default",
+          "name": "default",
+          "type": "Microsoft.Automanage/ConfigurationProfileAssignments",
+          "properties": {
+            "targetId": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myvm2",
+            "configurationProfile": "Azure virtual machine best practices – Production",
+            "accountId": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automanage/accounts/automanageAccount",
+            "configurationProfilePreferenceId": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Automanage/configurationProfilePreferences/defaultProfilePreference",
+            "compliance": {
+              "updateStatus": "Succeeded"
+            },
+            "provisioningState": "Succeeded"
+          }
+        }
+      ]
+    }
+  }
+}

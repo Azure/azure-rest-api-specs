@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "api-version": "2016-06-01",
+    "resourceGroupName": "testResourceGroup",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "integrationAccountName": "testIntegrationAccount",
+    "rosettaNetProcessConfigurationName": "3A4"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "processCode": "3A4",
+          "processVersion": "V02.02.00",
+          "processName": "3A4",
+          "activitySettings": {
+            "activityType": "RequestResponse",
+            "activityBehavior": {
+              "isAuthorizationRequired": true,
+              "persistentConfidentialityScope": "Payload",
+              "isSecuredTransportRequired": true,
+              "actionType": "DoubleAction",
+              "responseType": "Async",
+              "nonRepudiationOfOriginAndContent": false,
+              "retryCount": 4,
+              "timeToPerformInSeconds": 600
+            },
+            "acknowledgmentOfReceiptSettings": {
+              "isNonRepudiationRequired": false,
+              "timeToAcknowledgeInSeconds": 60
+            }
+          },
+          "initiatorRoleSettings": {
+            "action": "Purchase Order Request Action",
+            "role": "Buyer",
+            "description": "An employee or organization that buys products for a partner type in the supply chain.",
+            "roleType": "Functional",
+            "service": "Buyer Service",
+            "serviceClassification": "Business Service",
+            "businessDocument": {
+              "name": "Purchase Order Request",
+              "description": "A request to accept a purchase order for fulfillment.",
+              "version": "V02.02.00"
+            }
+          },
+          "responderRoleSettings": {
+            "action": "Purchase Order Confirmation Action",
+            "role": "Seller",
+            "description": "An organization that sells products to partners in the supply chain.",
+            "roleType": "Organizational",
+            "service": "Seller Service",
+            "serviceClassification": "Business Service",
+            "businessDocument": {
+              "name": "Purchase Order Confirmation",
+              "description": "Formally confirms the status of line item(s) in a Purchase Order. A Purchase Order line item may have one of the following states: accepted, rejected, or pending.",
+              "version": "V02.02.00"
+            }
+          },
+          "createdTime": "2019-05-22T13:46:54.6312192Z",
+          "changedTime": "2019-05-29T20:09:48.5167814Z"
+        },
+        "id": "/integrationAccounts/testIntegrationAccount/rosettaNetProcessConfigurations/3A4",
+        "name": "3A4",
+        "type": "Microsoft.Logic/integrationAccounts/rosettaNetProcessConfigurations"
+      }
+    }
+  }
+}

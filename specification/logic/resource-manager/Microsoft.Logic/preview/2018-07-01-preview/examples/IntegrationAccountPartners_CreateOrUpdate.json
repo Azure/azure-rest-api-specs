@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "api-version": "2018-07-01-preview",
+    "resourceGroupName": "testResourceGroup",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "integrationAccountName": "testIntegrationAccount",
+    "partnerName": "testPartner",
+    "partner": {
+      "properties": {
+        "partnerType": "B2B",
+        "metadata": {},
+        "content": {
+          "b2b": {
+            "businessIdentities": [
+              {
+                "qualifier": "AA",
+                "value": "ZZ"
+              }
+            ]
+          }
+        }
+      },
+      "location": "westus",
+      "tags": {}
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "partnerType": "B2B",
+          "content": {
+            "b2b": {
+              "businessIdentities": [
+                {
+                  "qualifier": "AA",
+                  "value": "ZZ"
+                }
+              ]
+            }
+          },
+          "createdTime": "2017-03-06T20:06:23.5895246Z",
+          "changedTime": "2017-03-06T20:06:23.5904806Z",
+          "metadata": {}
+        },
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/flowrg/providers/Microsoft.Logic/integrationAccounts/testIntegrationAccount/partners/testPartner",
+        "name": "testPartner",
+        "type": "Microsoft.Logic/integrationAccounts/partners"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "partnerType": "B2B",
+          "content": {
+            "b2b": {
+              "businessIdentities": [
+                {
+                  "qualifier": "AA",
+                  "value": "ZZ"
+                }
+              ]
+            }
+          },
+          "createdTime": "2017-03-06T20:06:23.5895246Z",
+          "changedTime": "2017-03-06T20:06:23.5904806Z",
+          "metadata": {}
+        },
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/flowrg/providers/Microsoft.Logic/integrationAccounts/testIntegrationAccount/partners/testPartner",
+        "name": "testPartner",
+        "type": "Microsoft.Logic/integrationAccounts/partners"
+      }
+    }
+  }
+}

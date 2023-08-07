@@ -1,0 +1,1752 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-04-01",
+    "title": "FrontDoorManagementClient",
+    "description": "Use these APIs to manage Azure Front Door resources through the Azure Resource Manager. You must make sure that requests made to these resources are secure."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Network/checkFrontDoorNameAvailability": {
+      "post": {
+        "tags": [
+          "CheckFrontDoorNameAvailability"
+        ],
+        "description": "Check the availability of a Front Door resource name.",
+        "operationId": "CheckFrontDoorNameAvailability",
+        "x-ms-examples": {
+          "CheckNameAvailability": {
+            "$ref": "./examples/CheckFrontdoorNameAvailability.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "checkFrontDoorNameAvailabilityInput",
+            "in": "body",
+            "description": "Input to check.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityInput"
+            }
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityOutput"
+            }
+          },
+          "default": {
+            "description": "Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/checkFrontDoorNameAvailability": {
+      "post": {
+        "tags": [
+          "CheckFrontDoorNameAvailabilityWithSubscription"
+        ],
+        "description": "Check the availability of a Front Door subdomain.",
+        "operationId": "CheckFrontDoorNameAvailabilityWithSubscription",
+        "x-ms-examples": {
+          "CheckNameAvailabilityWithSubscription": {
+            "$ref": "./examples/CheckFrontdoorNameAvailabilityWithSubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "checkFrontDoorNameAvailabilityInput",
+            "in": "body",
+            "description": "Input to check.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityInput"
+            }
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityOutput"
+            }
+          },
+          "default": {
+            "description": "Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/frontDoors": {
+      "get": {
+        "tags": [
+          "FrontDoors"
+        ],
+        "description": "Lists all of the Front Doors within an Azure subscription.",
+        "operationId": "FrontDoors_List",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/FrontDoorListResult"
+            }
+          },
+          "default": {
+            "description": "Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all Front Doors": {
+            "$ref": "./examples/FrontdoorListAll.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/frontDoors": {
+      "get": {
+        "tags": [
+          "FrontDoors"
+        ],
+        "description": "Lists all of the Front Doors within a resource group under a subscription.",
+        "operationId": "FrontDoors_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/FrontDoorListResult"
+            }
+          },
+          "default": {
+            "description": "Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Front Doors in a Resource Group": {
+            "$ref": "./examples/FrontdoorList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/frontDoors/{frontDoorName}": {
+      "get": {
+        "tags": [
+          "FrontDoors"
+        ],
+        "description": "Gets a Front Door with the specified Front Door name under the specified subscription and resource group.",
+        "operationId": "FrontDoors_Get",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/frontDoorNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/FrontDoor"
+            }
+          },
+          "default": {
+            "description": "Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Front Door": {
+            "$ref": "./examples/FrontdoorGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "FrontDoors"
+        ],
+        "description": "Creates a new Front Door with a Front Door name under the specified subscription and resource group.",
+        "operationId": "FrontDoors_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/frontDoorNameParameter"
+          },
+          {
+            "description": "Front Door properties needed to create a new Front Door.",
+            "in": "body",
+            "name": "frontDoorParameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FrontDoor"
+            }
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/FrontDoor"
+            }
+          },
+          "201": {
+            "description": "Created. The request has been fulfilled and a new Front Door has been created.",
+            "schema": {
+              "$ref": "#/definitions/FrontDoor"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/FrontDoor"
+            }
+          },
+          "default": {
+            "description": "Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update specific Front Door": {
+            "$ref": "./examples/FrontdoorCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "FrontDoors"
+        ],
+        "description": "Deletes an existing Front Door with the specified parameters.",
+        "operationId": "FrontDoors_Delete",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/frontDoorNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "No Content. The request has been accepted but the Front Door was not found."
+          },
+          "default": {
+            "description": "Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Front Door": {
+            "$ref": "./examples/FrontdoorDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/frontDoors/{frontDoorName}/frontendEndpoints": {
+      "get": {
+        "tags": [
+          "FrontDoors"
+        ],
+        "description": "Lists all of the frontend endpoints within a Front Door.",
+        "operationId": "FrontendEndpoints_ListByFrontDoor",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/frontDoorNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/FrontendEndpointsListResult"
+            }
+          },
+          "default": {
+            "description": "Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Frontend endpoints in a Front Door": {
+            "$ref": "./examples/FrontdoorFrontendEndpointList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/frontDoors/{frontDoorName}/frontendEndpoints/{frontendEndpointName}": {
+      "get": {
+        "tags": [
+          "FrontDoors"
+        ],
+        "description": "Gets a Frontend endpoint with the specified name within the specified Front Door.",
+        "operationId": "FrontendEndpoints_Get",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/frontDoorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/frontendEndpointNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/FrontendEndpoint"
+            }
+          },
+          "default": {
+            "description": "Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Frontend Endpoint": {
+            "$ref": "./examples/FrontdoorFrontendEndpointGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/frontDoors/{frontDoorName}/purge": {
+      "post": {
+        "tags": [
+          "FrontDoors"
+        ],
+        "description": "Removes a content from Front Door.",
+        "operationId": "Endpoints_PurgeContent",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/frontDoorNameParameter"
+          },
+          {
+            "name": "contentFilePaths",
+            "in": "body",
+            "description": "The path to the content to be purged. Path can be a full URL, e.g. '/pictures/city.png' which removes a single file, or a directory with a wildcard, e.g. '/pictures/*' which removes all folders and files in the directory.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PurgeParameters"
+            }
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Purge content from Front Door": {
+            "$ref": "./examples/FrontdoorPurgeContent.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/frontDoors/{frontDoorName}/frontendEndpoints/{frontendEndpointName}/enableHttps": {
+      "post": {
+        "tags": [
+          "FrontDoors"
+        ],
+        "description": "Enables a frontendEndpoint for HTTPS traffic",
+        "operationId": "FrontendEndpoints_EnableHttps",
+        "x-ms-examples": {
+          "FrontendEndpoints_EnableHttps": {
+            "$ref": "./examples/FrontdoorEnableHttps.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/frontDoorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/frontendEndpointNameParameter"
+          },
+          {
+            "name": "customHttpsConfiguration",
+            "in": "body",
+            "description": "The configuration specifying how to enable HTTPS",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomHttpsConfiguration"
+            }
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/frontDoors/{frontDoorName}/frontendEndpoints/{frontendEndpointName}/disableHttps": {
+      "post": {
+        "tags": [
+          "FrontDoors"
+        ],
+        "description": "Disables a frontendEndpoint for HTTPS traffic",
+        "operationId": "FrontendEndpoints_DisableHttps",
+        "x-ms-examples": {
+          "FrontendEndpoints_DisableHttps": {
+            "$ref": "./examples/FrontdoorDisableHttps.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/frontDoorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/frontendEndpointNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/frontDoors/{frontDoorName}/validateCustomDomain": {
+      "post": {
+        "tags": [
+          "FrontDoors"
+        ],
+        "description": "Validates the custom domain mapping to ensure it maps to the correct Front Door endpoint in DNS.",
+        "operationId": "FrontDoors_ValidateCustomDomain",
+        "x-ms-examples": {
+          "FrontDoor_ValidateCustomDomain": {
+            "$ref": "./examples/FrontdoorValidateCustomDomain.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/frontDoorNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "customDomainProperties",
+            "in": "body",
+            "description": "Custom domain to be validated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidateCustomDomainInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ValidateCustomDomainOutput"
+            }
+          },
+          "default": {
+            "description": "Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "FrontDoor": {
+      "properties": {
+        "properties": {
+          "description": "Properties of the Front Door Load Balancer",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FrontDoorProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "Front Door represents a collection of backend endpoints to route traffic to along with rules that specify how traffic is sent there."
+    },
+    "FrontDoorUpdateParameters": {
+      "description": "The properties needed to update a Front Door",
+      "properties": {
+        "friendlyName": {
+          "description": "A friendly name for the frontDoor",
+          "type": "string"
+        },
+        "routingRules": {
+          "description": "Routing rules associated with this Front Door.",
+          "type": "array",
+          "items": {
+            "description": "A routing rule",
+            "$ref": "#/definitions/RoutingRule"
+          }
+        },
+        "loadBalancingSettings": {
+          "description": "Load balancing settings associated with this Front Door instance.",
+          "type": "array",
+          "items": {
+            "description": "A load balancing settings",
+            "$ref": "#/definitions/LoadBalancingSettingsModel"
+          }
+        },
+        "healthProbeSettings": {
+          "description": "Health probe settings associated with this Front Door instance.",
+          "type": "array",
+          "items": {
+            "description": "A health probe settings",
+            "$ref": "#/definitions/HealthProbeSettingsModel"
+          }
+        },
+        "backendPools": {
+          "description": "Backend pools available to routing rules.",
+          "type": "array",
+          "items": {
+            "description": "A backend pool",
+            "$ref": "#/definitions/BackendPool"
+          }
+        },
+        "frontendEndpoints": {
+          "description": "Frontend endpoints available to routing rules.",
+          "type": "array",
+          "items": {
+            "description": "A frontend endpoint",
+            "$ref": "#/definitions/FrontendEndpoint"
+          }
+        },
+        "backendPoolsSettings": {
+          "description": "Settings for all backendPools",
+          "$ref": "#/definitions/BackendPoolsSettings"
+        },
+        "enabledState": {
+          "description": "Operational status of the Front Door load balancer. Permitted values are 'Enabled' or 'Disabled'",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FrontDoorEnabledState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "FrontDoorProperties": {
+      "description": "The JSON object that contains the properties required to create an endpoint.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FrontDoorUpdateParameters"
+        }
+      ],
+      "properties": {
+        "resourceState": {
+          "description": "Resource status of the Front Door.",
+          "$ref": "#/definitions/ResourceState"
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Provisioning state of the Front Door."
+        },
+        "cname": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The host that each frontendEndpoint must CNAME to."
+        }
+      }
+    },
+    "FrontDoorListResult": {
+      "description": "Result of the request to list Front Doors. It contains a list of Front Door objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/FrontDoor"
+          },
+          "description": "List of Front Doors within a resource group."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of Front Door objects if there are any."
+        }
+      }
+    },
+    "PurgeParameters": {
+      "type": "object",
+      "description": "Parameters required for content purge.",
+      "required": [
+        "contentPaths"
+      ],
+      "properties": {
+        "contentPaths": {
+          "description": "The path to the content to be purged. Can describe a file path or a wild card directory.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RoutingRule": {
+      "properties": {
+        "properties": {
+          "description": "Properties of the Front Door Routing Rule",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RoutingRuleProperties"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "A routing rule represents a specification for traffic to treat and where to send it, along with health probe information."
+    },
+    "RoutingRuleProperties": {
+      "description": "The JSON object that contains the properties required to create a routing rule.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RoutingRuleUpdateParameters"
+        }
+      ],
+      "properties": {
+        "resourceState": {
+          "description": "Resource status.",
+          "$ref": "#/definitions/ResourceState"
+        }
+      }
+    },
+    "RoutingRuleListResult": {
+      "description": "Result of the request to list Routing Rules. It contains a list of Routing Rule objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/RoutingRule"
+          },
+          "description": "List of Routing Rules within a Front Door."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of RoutingRule objects if there are any."
+        }
+      }
+    },
+    "RoutingRuleUpdateParameters": {
+      "description": "Routing rules to apply to an endpoint",
+      "type": "object",
+      "properties": {
+        "frontendEndpoints": {
+          "description": "Frontend endpoints associated with this rule",
+          "type": "array",
+          "items": {
+            "description": "A reference to a frontend endpoint",
+            "$ref": "./network.json#/definitions/SubResource"
+          }
+        },
+        "acceptedProtocols": {
+          "description": "Protocol schemes to match for this rule",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Accepted protocol schemes.",
+            "enum": [
+              "Http",
+              "Https"
+            ],
+            "x-ms-enum": {
+              "name": "FrontDoorProtocol",
+              "modelAsString": true
+            }
+          }
+        },
+        "patternsToMatch": {
+          "description": "The route patterns of the rule.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "A route pattern of the rule. Must not have any * except possibly after the final / at the end of the path."
+          }
+        },
+        "enabledState": {
+          "description": "Whether to enable use of this rule. Permitted values are 'Enabled' or 'Disabled'",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "routingRuleEnabledState",
+            "modelAsString": true
+          }
+        },
+        "routeConfiguration": {
+          "description": "A reference to the routing configuration.",
+          "$ref": "#/definitions/RouteConfiguration"
+        }
+      }
+    },
+    "RouteConfiguration": {
+      "discriminator": "@odata.type",
+      "description": "Base class for all types of Route.",
+      "properties": {
+        "@odata.type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "@odata.type"
+      ]
+    },
+    "ForwardingConfiguration": {
+      "description": "Describes Forwarding Route.",
+      "x-ms-discriminator-value": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration",
+      "properties": {
+        "customForwardingPath": {
+          "description": "A custom path used to rewrite resource paths matched by this rule. Leave empty to use incoming path.",
+          "type": "string"
+        },
+        "forwardingProtocol": {
+          "description": "Protocol this rule will use when forwarding traffic to backends.",
+          "type": "string",
+          "enum": [
+            "HttpOnly",
+            "HttpsOnly",
+            "MatchRequest"
+          ],
+          "x-ms-enum": {
+            "name": "FrontDoorForwardingProtocol",
+            "modelAsString": true
+          }
+        },
+        "cacheConfiguration": {
+          "description": "The caching configuration associated with this rule.",
+          "$ref": "#/definitions/CacheConfiguration"
+        },
+        "backendPool": {
+          "description": "A reference to the BackendPool which this rule routes to.",
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RouteConfiguration"
+        }
+      ]
+    },
+    "RedirectConfiguration": {
+      "description": "Describes Redirect Route.",
+      "x-ms-discriminator-value": "#Microsoft.Azure.FrontDoor.Models.FrontdoorRedirectConfiguration",
+      "properties": {
+        "redirectType": {
+          "description": "The redirect type the rule will use when redirecting traffic.",
+          "type": "string",
+          "enum": [
+            "Moved",
+            "Found",
+            "TemporaryRedirect",
+            "PermanentRedirect"
+          ],
+          "x-ms-enum": {
+            "name": "FrontDoorRedirectType",
+            "modelAsString": true
+          }
+        },
+        "redirectProtocol": {
+          "description": "The protocol of the destination to where the traffic is redirected",
+          "type": "string",
+          "enum": [
+            "HttpOnly",
+            "HttpsOnly",
+            "MatchRequest"
+          ],
+          "x-ms-enum": {
+            "name": "FrontDoorRedirectProtocol",
+            "modelAsString": true
+          }
+        },
+        "customHost": {
+          "type": "string",
+          "description": "Host to redirect. Leave empty to use the incoming host as the destination host."
+        },
+        "customPath": {
+          "type": "string",
+          "description": "The full path to redirect. Path cannot be empty and must start with /. Leave empty to use the incoming path as destination path."
+        },
+        "customFragment": {
+          "type": "string",
+          "description": "Fragment to add to the redirect URL. Fragment is the part of the URL that comes after #. Do not include the #."
+        },
+        "customQueryString": {
+          "description": "The set of query strings to be placed in the redirect URL. Setting this value would replace any existing query string; leave empty to preserve the incoming query string. Query string must be in <key>=<value> format. The first ? and & will be added automatically so do not include them in the front, but do separate multiple query strings with &.",
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RouteConfiguration"
+        }
+      ]
+    },
+    "Backend": {
+      "description": "Backend address of a frontDoor load balancer.",
+      "type": "object",
+      "properties": {
+        "address": {
+          "description": "Location of the backend (IP address or FQDN)",
+          "type": "string"
+        },
+        "httpPort": {
+          "description": "The HTTP TCP port number. Must be between 1 and 65535.",
+          "type": "integer",
+          "maximum": 65535,
+          "exclusiveMaximum": false,
+          "minimum": 1,
+          "exclusiveMinimum": false
+        },
+        "httpsPort": {
+          "description": "The HTTPS TCP port number. Must be between 1 and 65535.",
+          "type": "integer",
+          "maximum": 65535,
+          "exclusiveMaximum": false,
+          "minimum": 1,
+          "exclusiveMinimum": false
+        },
+        "enabledState": {
+          "description": "Whether to enable use of this backend. Permitted values are 'Enabled' or 'Disabled'",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "backendEnabledState",
+            "modelAsString": true
+          }
+        },
+        "priority": {
+          "description": "Priority to use for load balancing. Higher priorities will not be used for load balancing if any lower priority backend is healthy.",
+          "type": "integer",
+          "maximum": 5,
+          "minimum": 1
+        },
+        "weight": {
+          "description": "Weight of this endpoint for load balancing purposes.",
+          "type": "integer",
+          "maximum": 1000,
+          "minimum": 1
+        },
+        "backendHostHeader": {
+          "description": "The value to use as the host header sent to the backend. If blank or unspecified, this defaults to the incoming host.",
+          "type": "string"
+        }
+      }
+    },
+    "LoadBalancingSettingsModel": {
+      "properties": {
+        "properties": {
+          "description": "Properties of the load balancing settings",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LoadBalancingSettingsProperties"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Load balancing settings for a backend pool"
+    },
+    "LoadBalancingSettingsProperties": {
+      "description": "The JSON object that contains the properties required to create load balancing settings",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LoadBalancingSettingsUpdateParameters"
+        }
+      ],
+      "properties": {
+        "resourceState": {
+          "description": "Resource status.",
+          "$ref": "#/definitions/ResourceState"
+        }
+      }
+    },
+    "LoadBalancingSettingsListResult": {
+      "description": "Result of the request to list load balancing settings. It contains a list of load balancing settings objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/LoadBalancingSettingsModel"
+          },
+          "description": "List of Backend Pools within a Front Door."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of LoadBalancingSettings objects if there are any."
+        }
+      }
+    },
+    "LoadBalancingSettingsUpdateParameters": {
+      "description": "Round-Robin load balancing settings for a backend pool",
+      "type": "object",
+      "properties": {
+        "sampleSize": {
+          "description": "The number of samples to consider for load balancing decisions",
+          "type": "integer"
+        },
+        "successfulSamplesRequired": {
+          "description": "The number of samples within the sample period that must succeed",
+          "type": "integer"
+        },
+        "additionalLatencyMilliseconds": {
+          "description": "The additional latency in milliseconds for probes to fall into the lowest latency bucket",
+          "type": "integer"
+        }
+      }
+    },
+    "HealthProbeSettingsModel": {
+      "properties": {
+        "properties": {
+          "description": "Properties of the health probe settings",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/HealthProbeSettingsProperties"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Load balancing settings for a backend pool"
+    },
+    "HealthProbeSettingsProperties": {
+      "description": "The JSON object that contains the properties required to create a health probe settings.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthProbeSettingsUpdateParameters"
+        }
+      ],
+      "properties": {
+        "resourceState": {
+          "description": "Resource status.",
+          "$ref": "#/definitions/ResourceState"
+        }
+      }
+    },
+    "HealthProbeSettingsListResult": {
+      "description": "Result of the request to list HealthProbeSettings. It contains a list of HealthProbeSettings objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/HealthProbeSettingsModel"
+          },
+          "description": "List of HealthProbeSettings within a Front Door."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of HealthProbeSettings objects if there are any."
+        }
+      }
+    },
+    "HealthProbeSettingsUpdateParameters": {
+      "description": "L7 health probe settings for a backend pool",
+      "type": "object",
+      "properties": {
+        "path": {
+          "description": "The path to use for the health probe. Default is /",
+          "type": "string"
+        },
+        "protocol": {
+          "description": "Protocol scheme to use for this probe",
+          "type": "string",
+          "enum": [
+            "Http",
+            "Https"
+          ],
+          "x-ms-enum": {
+            "name": "FrontDoorProtocol",
+            "modelAsString": true
+          }
+        },
+        "intervalInSeconds": {
+          "description": "The number of seconds between health probes.",
+          "type": "integer"
+        }
+      }
+    },
+    "BackendPool": {
+      "properties": {
+        "properties": {
+          "description": "Properties of the Front Door Backend Pool",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BackendPoolProperties"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "A backend pool is a collection of backends that can be routed to."
+    },
+    "BackendPoolUpdateParameters": {
+      "description": "A collection of backends that can be routed to.",
+      "type": "object",
+      "properties": {
+        "backends": {
+          "description": "The set of backends for this pool",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Backend"
+          }
+        },
+        "loadBalancingSettings": {
+          "description": "Load balancing settings for a backend pool",
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "healthProbeSettings": {
+          "description": "L7 health probe settings for a backend pool",
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      }
+    },
+    "BackendPoolProperties": {
+      "description": "The JSON object that contains the properties required to create a routing rule.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackendPoolUpdateParameters"
+        }
+      ],
+      "properties": {
+        "resourceState": {
+          "description": "Resource status.",
+          "$ref": "#/definitions/ResourceState"
+        }
+      }
+    },
+    "BackendPoolListResult": {
+      "description": "Result of the request to list Backend Pools. It contains a list of Backend Pools objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/BackendPool"
+          },
+          "description": "List of Backend Pools within a Front Door."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of BackendPool objects if there are any."
+        }
+      }
+    },
+    "CacheConfiguration": {
+      "description": "Caching settings for a caching-type route. To disable caching, do not provide a cacheConfiguration object.",
+      "type": "object",
+      "properties": {
+        "queryParameterStripDirective": {
+          "description": "Treatment of URL query terms when forming the cache key.",
+          "enum": [
+            "StripNone",
+            "StripAll"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FrontDoorQuery",
+            "modelAsString": true
+          }
+        },
+        "dynamicCompression": {
+          "description": "Whether to use dynamic compression for cached content",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DynamicCompressionEnabled",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "KeyVaultCertificateSourceParameters": {
+      "description": "Parameters required for bring-your-own-certification via Key Vault",
+      "type": "object",
+      "properties": {
+        "vault": {
+          "description": "The Key Vault containing the SSL certificate",
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Resource ID."
+            }
+          }
+        },
+        "secretName": {
+          "type": "string",
+          "description": "The name of the Key Vault secret representing the full certificate PFX"
+        },
+        "secretVersion": {
+          "type": "string",
+          "description": "The version of the Key Vault secret representing the full certificate PFX"
+        }
+      }
+    },
+    "FrontDoorCertificateSourceParameters": {
+      "description": "Parameters required for enabling SSL with Front Door-managed certificates",
+      "type": "object",
+      "properties": {
+        "certificateType": {
+          "description": "Defines the type of the certificate used for secure connections to a frontendEndpoint",
+          "enum": [
+            "Dedicated"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FrontDoorCertificateType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "CustomHttpsConfiguration": {
+      "description": "Https settings for a domain",
+      "type": "object",
+      "properties": {
+        "certificateSource": {
+          "description": "Defines the source of the SSL certificate",
+          "enum": [
+            "AzureKeyVault",
+            "FrontDoor"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FrontDoorCertificateSource",
+            "modelAsString": true
+          }
+        },
+        "protocolType": {
+          "description": "Defines the TLS extension protocol that is used for secure delivery",
+          "enum": [
+            "ServerNameIndication"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FrontDoorTlsProtocolType",
+            "modelAsString": true
+          }
+        },
+        "keyVaultCertificateSourceParameters": {
+          "description": "KeyVault certificate source parameters (if certificateSource=AzureKeyVault)",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/KeyVaultCertificateSourceParameters"
+        },
+        "frontDoorCertificateSourceParameters": {
+          "description": "Parameters required for enabling SSL with Front Door-managed certificates (if certificateSource=FrontDoor)",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FrontDoorCertificateSourceParameters"
+        }
+      }
+    },
+    "FrontendEndpoint": {
+      "properties": {
+        "properties": {
+          "description": "Properties of the Frontend endpoint",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FrontendEndpointProperties"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "A frontend endpoint used for routing."
+    },
+    "FrontendEndpointProperties": {
+      "description": "The JSON object that contains the properties required to create a frontend endpoint.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FrontendEndpointUpdateParameters"
+        }
+      ],
+      "properties": {
+        "resourceState": {
+          "description": "Resource status.",
+          "$ref": "#/definitions/ResourceState"
+        },
+        "customHttpsProvisioningState": {
+          "description": "Provisioning status of Custom Https of the frontendEndpoint.",
+          "readOnly": true,
+          "enum": [
+            "Enabling",
+            "Enabled",
+            "Disabling",
+            "Disabled",
+            "Failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CustomHttpsProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "customHttpsProvisioningSubstate": {
+          "description": "Provisioning substate shows the progress of custom HTTPS enabling/disabling process step by step.",
+          "readOnly": true,
+          "enum": [
+            "SubmittingDomainControlValidationRequest",
+            "PendingDomainControlValidationREquestApproval",
+            "DomainControlValidationRequestApproved",
+            "DomainControlValidationRequestRejected",
+            "DomainControlValidationRequestTimedOut",
+            "IssuingCertificate",
+            "DeployingCertificate",
+            "CertificateDeployed",
+            "DeletingCertificate",
+            "CertificateDeleted"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CustomHttpsProvisioningSubstate",
+            "modelAsString": true
+          }
+        },
+        "customHttpsConfiguration": {
+          "description": "The configuration specifying how to enable HTTPS",
+          "readOnly": true,
+          "$ref": "#/definitions/CustomHttpsConfiguration"
+        }
+      }
+    },
+    "FrontendEndpointUpdateParameters": {
+      "description": "Frontend endpoint used in routing rule",
+      "type": "object",
+      "properties": {
+        "hostName": {
+          "description": "The host name of the frontendEndpoint. Must be a domain name.",
+          "type": "string"
+        },
+        "sessionAffinityEnabledState": {
+          "description": "Whether to allow session affinity on this host. Valid options are 'Enabled' or 'Disabled'",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SessionAffinityEnabledState",
+            "modelAsString": true
+          }
+        },
+        "sessionAffinityTtlSeconds": {
+          "description": "UNUSED. This field will be ignored. The TTL to use in seconds for session affinity, if applicable.",
+          "type": "integer"
+        },
+        "webApplicationFirewallPolicyLink": {
+          "description": "Defines the Web Application Firewall policy for each host (if applicable)",
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Resource ID."
+            }
+          }
+        }
+      }
+    },
+    "FrontendEndpointsListResult": {
+      "description": "Result of the request to list frontend endpoints. It contains a list of Frontend endpoint objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/FrontendEndpoint"
+          },
+          "description": "List of Frontend endpoints within a Front Door."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of frontend endpoints if there are any."
+        }
+      }
+    },
+    "BackendPoolsSettings": {
+      "description": "Settings that apply to all backend pools.",
+      "type": "object",
+      "properties": {
+        "enforceCertificateNameCheck": {
+          "description": "Whether to enforce certificate name check on HTTPS requests to all backend pools. No effect on non-HTTPS requests.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "enforceCertificateNameCheckEnabledState",
+            "modelAsString": true
+          },
+          "default": "Enabled"
+        }
+      }
+    },
+    "ResourceState": {
+      "title": "Resource status of the Front Door or Front Door SubResource.",
+      "readOnly": true,
+      "enum": [
+        "Creating",
+        "Enabling",
+        "Enabled",
+        "Disabling",
+        "Disabled",
+        "Deleting"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "FrontDoorResourceState",
+        "modelAsString": true
+      }
+    },
+    "ValidateCustomDomainInput": {
+      "description": "Input of the custom domain to be validated for DNS mapping.",
+      "type": "object",
+      "required": [
+        "hostName"
+      ],
+      "properties": {
+        "hostName": {
+          "description": "The host name of the custom domain. Must be a domain name.",
+          "type": "string"
+        }
+      }
+    },
+    "ValidateCustomDomainOutput": {
+      "description": "Output of custom domain validation.",
+      "type": "object",
+      "properties": {
+        "customDomainValidated": {
+          "description": "Indicates whether the custom domain is valid or not.",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "reason": {
+          "description": "The reason why the custom domain is not valid.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message describing why the custom domain is not valid.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response indicates Front Door service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "CheckNameAvailabilityInput": {
+      "description": "Input of CheckNameAvailability API.",
+      "type": "object",
+      "required": [
+        "name",
+        "type"
+      ],
+      "properties": {
+        "name": {
+          "description": "The resource name to validate.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the resource whose name is to be validated.",
+          "$ref": "#/definitions/ResourceType"
+        }
+      }
+    },
+    "CheckNameAvailabilityOutput": {
+      "description": "Output of check name availability API.",
+      "type": "object",
+      "properties": {
+        "nameAvailability": {
+          "description": "Indicates whether the name is available.",
+          "readOnly": true,
+          "enum": [
+            "Available",
+            "Unavailable"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Availability",
+            "modelAsString": true
+          }
+        },
+        "reason": {
+          "description": "The reason why the name is not available.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "message": {
+          "description": "The detailed error message describing why the name is not available.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "ResourceType": {
+      "description": "Type of Front Door resource used in CheckNameAvailability.",
+      "enum": [
+        "Microsoft.Network/frontDoors",
+        "Microsoft.Network/frontDoors/frontendEndpoints"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ResourceType",
+        "modelAsString": false
+      }
+    }
+  },
+  "parameters": {
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_\\-\\(\\)\\.]*[^\\.]$",
+      "minLength": 1,
+      "maxLength": 80,
+      "x-ms-parameter-location": "method",
+      "description": "Name of the Resource group within the Azure subscription."
+    },
+    "frontDoorNameParameter": {
+      "name": "frontDoorName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-new-pattern": "^[a-zA-Z0-9]+([-a-zA-Z0-9]?[a-zA-Z0-9])*$",
+      "pattern": "^[a-zA-Z0-9]+([-a-zA-Z0-9]?[a-zA-Z0-9])*$",
+      "minLength": 5,
+      "maxLength": 64,
+      "x-ms-parameter-location": "method",
+      "description": "Name of the Front Door which is globally unique."
+    },
+    "routingRuleNameParameter": {
+      "name": "routingRuleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$",
+      "x-previous-pattern": "^[-\\w\\d\\._]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "Name of the Routing Rule which is unique within the Front Door."
+    },
+    "healthProbeSettingsNameParameter": {
+      "name": "healthProbeSettingsName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$",
+      "x-previous-pattern": "^[-\\w\\d\\._]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "Name of the health probe settings which is unique within the Front Door."
+    },
+    "loadBalancingSettingsNameParameter": {
+      "name": "loadBalancingSettingsName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$",
+      "x-previous-pattern": "^[-\\w\\d\\._]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "Name of the load balancing settings which is unique within the Front Door."
+    },
+    "backendPoolNameParameter": {
+      "name": "backendPoolName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$",
+      "x-previous-pattern": "^[-\\w\\d\\._]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "Name of the Backend Pool which is unique within the Front Door."
+    },
+    "frontendEndpointNameParameter": {
+      "name": "frontendEndpointName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$",
+      "x-previous-pattern": "^[-\\w\\d\\._]+$",
+      "minLength": 1,
+      "maxLength": 255,
+      "x-ms-parameter-location": "method",
+      "description": "Name of the Frontend endpoint which is unique within the Front Door."
+    }
+  }
+}

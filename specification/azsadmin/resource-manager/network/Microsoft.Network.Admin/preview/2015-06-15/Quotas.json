@@ -1,0 +1,305 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Quota admin operation endpoints and objects.",
+    "title": "NetworkAdminManagementClient",
+    "version": "2015-06-15"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network.Admin/locations/{location}/quotas": {
+      "get": {
+        "x-ms-examples": {
+          "List all quotas": {
+            "$ref": "./examples/Quota/List.json"
+          }
+        },
+        "tags": [
+          "Quotas"
+        ],
+        "description": "List all quotas.",
+        "operationId": "Quotas_List",
+        "parameters": [
+          {
+            "$ref": "Network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Network.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "Network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "Network.json#/parameters/FilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/QuotaList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-odata": "#/definitions/Quota"
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network.Admin/locations/{location}/quotas/{resourceName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a quota by name": {
+            "$ref": "./examples/Quota/Get.json"
+          }
+        },
+        "tags": [
+          "Quotas"
+        ],
+        "description": "Get a quota by name.",
+        "operationId": "Quotas_Get",
+        "parameters": [
+          {
+            "$ref": "Network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Network.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "Network.json#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "Network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Quota"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create or update a new quota": {
+            "$ref": "./examples/Quota/Put.json"
+          }
+        },
+        "tags": [
+          "Network"
+        ],
+        "description": "Create or update a quota.",
+        "operationId": "Quotas_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "Network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Network.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "Network.json#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "Network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/QuotaParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Quota"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Quota"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a quota by name.": {
+            "$ref": "./examples/Quota/Delete.json"
+          }
+        },
+        "tags": [
+          "Network"
+        ],
+        "description": "Delete a quota by name.",
+        "operationId": "Quotas_Delete",
+        "parameters": [
+          {
+            "$ref": "Network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Network.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "Network.json#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "Network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Quota": {
+      "description": "Network quota resource.",
+      "properties": {
+        "properties": {
+          "description": "Network quota properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/QuotaProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Network.json#/definitions/Resource"
+        }
+      ]
+    },
+    "QuotaProperties": {
+      "description": "Properties of a quota.",
+      "properties": {
+        "maxPublicIpsPerSubscription": {
+          "description": "Maximum number of public IP addresses a tenant subscription can provision.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "maxVnetsPerSubscription": {
+          "description": "Maximum number of virtual networks a tenant subscription can provision.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "maxVirtualNetworkGatewaysPerSubscription": {
+          "description": "Maximum number of virtual network gateways a tenant subscription can provision.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "maxVirtualNetworkGatewayConnectionsPerSubscription": {
+          "description": "Maximum number of virtual network gateway Connections a tenant subscription can provision.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "maxLoadBalancersPerSubscription": {
+          "description": "Maximum number of load balancers a tenant subscription can provision.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "maxNicsPerSubscription": {
+          "description": "Maximum number of NICs a tenant subscription can provision.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "maxSecurityGroupsPerSubscription": {
+          "description": "Maximum number of security groups a tenant subscription can provision.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "migrationPhase": {
+          "description": "State of migration such as None, Prepare, Commit, and Abort.",
+          "$ref": "#/definitions/MigrationPhase",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Network.json#/definitions/ProvisionedResource"
+        }
+      ]
+    },
+    "QuotaList": {
+      "description": "A pageable list of network quotas.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of quotas on this page.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Quota"
+          }
+        },
+        "nextLink": {
+          "description": "The URI to the next page.",
+          "type": "string"
+        }
+      }
+    },
+    "MigrationPhase": {
+      "description": "State of migration such as None, Prepare, Commit, and Abort.",
+      "enum": [
+        "None",
+        "Prepare",
+        "Commit",
+        "Abort"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "MigrationPhaseType"
+      }
+    }
+  },
+  "parameters": {
+    "QuotaParameter": {
+      "name": "Quota",
+      "description": "New network quota to create.",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Quota"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

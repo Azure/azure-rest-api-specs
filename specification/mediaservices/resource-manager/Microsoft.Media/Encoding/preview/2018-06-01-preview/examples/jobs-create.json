@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contosoresources",
+    "accountName": "contosomedia",
+    "transformName": "ExampleTransform",
+    "jobName": "job1",
+    "parameters": {
+      "properties": {
+        "input": {
+          "@odata.type": "#Microsoft.Media.JobInputAsset",
+          "assetName": "job1-InputAsset"
+        },
+        "outputs": [
+          {
+            "@odata.type": "#Microsoft.Media.JobOutputAsset",
+            "assetName": "job1-OutputAsset"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "job1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/ExampleTransform/jobs/job1",
+        "type": "Microsoft.Media/mediaservices/transforms/jobs",
+        "properties": {
+          "created": "2018-05-31T21:08:32.3513266Z",
+          "state": "Queued",
+          "description": null,
+          "input": {
+            "@odata.type": "#Microsoft.Media.JobInputAsset",
+            "label": null,
+            "files": [],
+            "assetName": "job1-InputAsset"
+          },
+          "lastModified": "2018-05-31T21:08:32.3513266Z",
+          "outputs": [
+            {
+              "@odata.type": "#Microsoft.Media.JobOutputAsset",
+              "error": null,
+              "state": "Queued",
+              "progress": 0,
+              "assetName": "job1-OutputAsset"
+            }
+          ],
+          "priority": "Normal",
+          "correlationData": {}
+        }
+      }
+    }
+  }
+}

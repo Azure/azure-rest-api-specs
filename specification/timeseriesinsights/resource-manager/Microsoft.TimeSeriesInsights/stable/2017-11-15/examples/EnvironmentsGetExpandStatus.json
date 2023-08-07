@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "environmentName": "env1",
+    "resourceGroupName": "rg1",
+    "api-version": "2017-11-15",
+    "$expand": "status"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.TimeSeriesInsights/Environments/env1",
+        "location": "West US",
+        "name": "env1",
+        "type": "Microsoft.TimeSeriesInsights/Environments",
+        "tags": {},
+        "properties": {
+          "dataRetentionTime": "P31D",
+          "provisioningState": "Succeeded",
+          "creationTime": "2017-04-18T19:20:33.2288820Z",
+          "storageLimitExceededBehavior": "PurgeOldData",
+          "partitionKeyProperties": [
+            {
+              "name": "DeviceId1",
+              "type": "String"
+            }
+          ],
+          "dataAccessId": "<dataAccessId>",
+          "dataAccessFqdn": "<dataAccessIdFqdn>",
+          "status": {
+            "ingress": {
+              "state": "Running"
+            }
+          }
+        },
+        "sku": {
+          "name": "S1",
+          "capacity": 1
+        }
+      }
+    }
+  }
+}

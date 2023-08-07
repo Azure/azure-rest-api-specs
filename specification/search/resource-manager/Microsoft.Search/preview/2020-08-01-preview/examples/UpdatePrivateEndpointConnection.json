@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "searchServiceName": "mysearchservice",
+    "resourceGroupName": "rg1",
+    "api-version": "2020-08-01-preview",
+    "subscriptionId": "subid",
+    "privateEndpointConnectionName": "testEndpoint.50bf4fbe-d7c1-4b48-a642-4f5892642546",
+    "privateEndpointConnection": {
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "status": "Rejected",
+          "description": "Rejected for some reason"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice/privateEndpointConnections/testEndpoint.50bf4fbe-d7c1-4b48-a642-4f5892642546",
+        "name": "testEndpoint.50bf4fbe-d7c1-4b48-a642-4f5892642546",
+        "type": "Microsoft.Search/searchServices/privateEndpointConnections",
+        "properties": {
+          "privateEndpoint": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/testEndpoint"
+          },
+          "privateLinkServiceConnectionState": {
+            "status": "Rejected",
+            "description": "Rejected for some reason",
+            "actionsRequired": "None"
+          }
+        }
+      }
+    }
+  }
+}

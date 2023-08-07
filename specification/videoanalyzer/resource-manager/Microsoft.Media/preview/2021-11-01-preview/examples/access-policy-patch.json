@@ -1,0 +1,105 @@
+{
+  "parameters": {
+    "subscriptionId": "591e76c3-3e97-44db-879c-3e2b12961b62",
+    "resourceGroupName": "testrg",
+    "accountName": "testaccount2",
+    "accessPolicyName": "accessPolicyName1",
+    "api-version": "2021-11-01-preview",
+    "parameters": {
+      "properties": {
+        "authentication": {
+          "@type": "#Microsoft.VideoAnalyzer.JwtAuthentication",
+          "issuers": [
+            "issuer1",
+            "issuer2"
+          ],
+          "audiences": [
+            "audience1"
+          ],
+          "claims": [
+            {
+              "name": "claimname1",
+              "value": "claimvalue1"
+            },
+            {
+              "name": "claimname2",
+              "value": "claimvalue2"
+            }
+          ],
+          "keys": [
+            {
+              "@type": "#Microsoft.VideoAnalyzer.RsaTokenKey",
+              "alg": "RS256",
+              "kid": "123",
+              "n": "YmFzZTY0IQ==",
+              "e": "ZLFzZTY0IQ=="
+            },
+            {
+              "@type": "#Microsoft.VideoAnalyzer.EccTokenKey",
+              "alg": "ES256",
+              "kid": "124",
+              "x": "XX==",
+              "y": "YY=="
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "accessPolicyName1",
+        "id": "/subscriptions/591e76c3-3e97-44db-879c-3e2b12961b62/resourceGroups/testrg/providers/Microsoft.Media/videoAnalyzers/testaccount2/accesspolicies/accessPolicyName1",
+        "type": "Microsoft.Media/videoAnalyzers/accesspolicies",
+        "properties": {
+          "role": "Reader",
+          "authentication": {
+            "@type": "#Microsoft.VideoAnalyzer.JwtAuthentication",
+            "issuers": [
+              "issuer1",
+              "issuer2"
+            ],
+            "audiences": [
+              "audience1"
+            ],
+            "claims": [
+              {
+                "name": "claimname1",
+                "value": "claimvalue1"
+              },
+              {
+                "name": "claimname2",
+                "value": "claimvalue2"
+              }
+            ],
+            "keys": [
+              {
+                "@type": "#Microsoft.VideoAnalyzer.RsaTokenKey",
+                "kid": "123",
+                "alg": "RS256",
+                "n": "YmFzZTY0IQ==",
+                "e": "ZLFzZTY0IQ=="
+              },
+              {
+                "@type": "#Microsoft.VideoAnalyzer.EccTokenKey",
+                "kid": "124",
+                "alg": "ES256",
+                "x": "XX==",
+                "y": "YY=="
+              }
+            ]
+          }
+        },
+        "systemData": {
+          "createdBy": "user@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "0001-01-01T00:00:00Z",
+          "lastModifiedBy": "user@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "0001-01-01T00:00:00Z"
+        }
+      }
+    }
+  }
+}

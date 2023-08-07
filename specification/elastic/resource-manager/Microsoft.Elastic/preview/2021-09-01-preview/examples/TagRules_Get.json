@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2021-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "monitorName": "myMonitor",
+    "ruleSetName": "default"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Datadog/monitors/myMonitor/tagRules/default",
+        "type": "Microsoft.Datadog/monitors/tagRules",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "logRules": {
+            "sendAadLogs": false,
+            "sendSubscriptionLogs": true,
+            "sendActivityLogs": true,
+            "filteringTags": [
+              {
+                "name": "Environment",
+                "value": "Prod",
+                "action": "Include"
+              },
+              {
+                "name": "Environment",
+                "value": "Dev",
+                "action": "Exclude"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

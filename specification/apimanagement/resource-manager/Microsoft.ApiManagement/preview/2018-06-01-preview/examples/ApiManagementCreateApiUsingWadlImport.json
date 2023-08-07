@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2018-06-01-preview",
+    "subscriptionId": "subid",
+    "apiId": "petstore",
+    "parameters": {
+      "properties": {
+        "contentFormat": "wadl-link-json",
+        "contentValue": "https://developer.cisco.com/media/wae-release-6-2-api-reference/wae-collector-rest-api/application.wadl",
+        "path": "collector"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/collectorwadl",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "name": "collectorwadl",
+        "properties": {
+          "displayName": "http://localhost:8080/collector-northbound",
+          "apiRevision": "1",
+          "description": "",
+          "serviceUrl": "http://localhost:8080/collector-northbound",
+          "path": "collector",
+          "protocols": [
+            "https"
+          ],
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          },
+          "isCurrent": true
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/tempgroup?api-version=2018-06-01-preview&asyncId=5c730e343244df1b9cb56e85&asyncCode=201"
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/collectorwadl",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "name": "collectorwadl",
+        "properties": {
+          "displayName": "http://localhost:8080/collector-northbound",
+          "apiRevision": "1",
+          "description": "",
+          "serviceUrl": "http://localhost:8080/collector-northbound",
+          "path": "collector",
+          "protocols": [
+            "https"
+          ],
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          },
+          "isCurrent": true
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2018-01-01",
+    "subscriptionId": "subid",
+    "propId": "testprop2",
+    "parameters": {
+      "properties": {
+        "displayName": "prop3name",
+        "value": "propValue",
+        "tags": [
+          "foo",
+          "bar"
+        ],
+        "secret": true
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/properties/testprop2",
+        "type": "Microsoft.ApiManagement/service/properties",
+        "name": "testprop2",
+        "properties": {
+          "displayName": "prop3name",
+          "value": "propValue",
+          "tags": [
+            "foo",
+            "bar"
+          ],
+          "secret": true
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/properties/testprop2",
+        "type": "Microsoft.ApiManagement/service/properties",
+        "name": "testprop2",
+        "properties": {
+          "displayName": "prop3name",
+          "value": "propValue",
+          "tags": [
+            "foo",
+            "bar"
+          ],
+          "secret": true
+        }
+      }
+    }
+  }
+}

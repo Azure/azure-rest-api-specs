@@ -1,0 +1,1904 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApiManagementClient",
+    "description": "Use these REST APIs for performing operations on API entity and their Operations associated with your Azure API Management deployment.",
+    "version": "2017-03-01"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{apimBaseUrl}",
+    "useSchemePrefix": false,
+    "positionInOperation": "first",
+    "parameters": [
+      {
+        "name": "apimBaseUrl",
+        "description": "The management endpoint of the API Management service, for example https://myapimservice.management.azure-api.net.",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "apim_key": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apim_key": []
+    }
+  ],
+  "paths": {
+    "/apis": {
+      "get": {
+        "tags": [
+          "Apis"
+        ],
+        "operationId": "Api_List",
+        "description": "Lists all APIs of the API Management service instance.",
+        "x-ms-examples": {
+          "ApiManagementListApis": {
+            "$ref": "./examples/ApiManagementListApis.json"
+          }
+        },
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-create-apis"
+        },
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n| id          | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |\n| name        | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |\n| description | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |\n| serviceUrl  | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |\n| path        | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paged Result response of Apis.",
+            "schema": {
+              "$ref": "#/definitions/ApiCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/ApiContract"
+      }
+    },
+    "/apis/{apiId}": {
+      "get": {
+        "tags": [
+          "Apis"
+        ],
+        "operationId": "Api_Get",
+        "description": "Gets the details of the API specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementGetApis": {
+            "$ref": "./examples/ApiManagementGetApis.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the specified API entity.",
+            "schema": {
+              "$ref": "#/definitions/ApiContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Apis"
+        ],
+        "operationId": "Api_CreateOrUpdate",
+        "description": "Creates new or updates existing specified API of the API Management service instance.",
+        "x-ms-examples": {
+          "ApiManagementPutApis": {
+            "$ref": "./examples/ApiManagementPutApis.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApiCreateOrUpdateParameter"
+            },
+            "description": "Create or update parameters."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the Api Entity. For Create Api Etag should not be specified. For Update Etag should match the existing Entity or it can be * for unconditional update."
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "API was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/ApiContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "API was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/ApiContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Apis"
+        ],
+        "operationId": "Api_Update",
+        "description": "Updates the specified API of the API Management service instance.",
+        "x-ms-examples": {
+          "ApiManagementPatchApis": {
+            "$ref": "./examples/ApiManagementPatchApis.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApiUpdateContract"
+            },
+            "description": "API Update Contract parameters."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "ETag of the API entity. ETag should match the current entity state in the header response of the GET request or it should be * for unconditional update.",
+            "type": "string"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The API was successfully updated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Apis"
+        ],
+        "operationId": "Api_Delete",
+        "description": "Deletes the specified API of the API Management service instance.",
+        "x-ms-examples": {
+          "ApiManagementDeleteApis": {
+            "$ref": "./examples/ApiManagementDeleteApis.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "ETag of the API Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
+            "type": "string"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The API was successfully deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/apis/{apiId}/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "ApiOperation_ListByApi",
+        "description": "Lists a collection of the operations for the specified API.",
+        "x-ms-examples": {
+          "ApiManagementListApisOperations": {
+            "$ref": "./examples/ApiManagementListApisOperations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n| name        | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |\n| method      | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |\n| description | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |\n| urlTemplate | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A collection of operation summary entities at the API level.",
+            "schema": {
+              "$ref": "#/definitions/OperationCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/OperationContract"
+      }
+    },
+    "/apis/{apiId}/operations/{operationId}": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "ApiOperation_Get",
+        "description": "Gets the details of the API Operation specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementGetApisOperations": {
+            "$ref": "./examples/ApiManagementGetApisOperations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the specified Operation entity.",
+            "schema": {
+              "$ref": "#/definitions/OperationContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "ApiOperation_CreateOrUpdate",
+        "description": "Creates a new operation in the API or updates an existing one.",
+        "x-ms-examples": {
+          "ApiManagementPutApisOperations": {
+            "$ref": "./examples/ApiManagementPutApisOperations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OperationContract"
+            },
+            "description": "Create parameters."
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Operation was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/OperationContract"
+            }
+          },
+          "200": {
+            "description": "Operation was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/OperationContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "ApiOperation_Update",
+        "description": "Updates the details of the operation in the API specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementPatchApisOperations": {
+            "$ref": "./examples/ApiManagementPatchApisOperations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OperationUpdateContract"
+            },
+            "description": "API Operation Update parameters."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "ETag of the API Operation Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
+            "type": "string"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The operation was successfully updated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "ApiOperation_Delete",
+        "description": "Deletes the specified operation in the API.",
+        "x-ms-examples": {
+          "ApiManagementDeleteApisOperations": {
+            "$ref": "./examples/ApiManagementDeleteApisOperations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "ETag of the API Operation Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
+            "type": "string"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The operation was successfully deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/apis/{apiId}/operations/{operationId}/policies": {
+      "get": {
+        "tags": [
+          "ApiOperationPolicies"
+        ],
+        "operationId": "ApiOperationPolicy_ListByOperation",
+        "description": "Get the list of policy configuration at the API Operation level.",
+        "x-ms-examples": {
+          "ApiManagementListApisOperationsPolicies": {
+            "$ref": "./examples/ApiManagementListApisOperationsPolicies.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Api Operations Policy Collection.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/PolicyCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/apis/{apiId}/operations/{operationId}/policies/{policyId}": {
+      "get": {
+        "tags": [
+          "ApiOperationPolicies"
+        ],
+        "operationId": "ApiOperationPolicy_Get",
+        "description": "Get the policy configuration at the API Operation level.",
+        "x-ms-examples": {
+          "ApiManagementGetApisOperationsPolicies": {
+            "$ref": "./examples/ApiManagementGetApisOperationsPolicies.json"
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/vnd.ms-azure-apim.policy+xml",
+          "application/vnd.ms-azure-apim.policy.raw+xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/PolicyIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Api Operation Policy information.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/PolicyContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ApiOperationPolicies"
+        ],
+        "operationId": "ApiOperationPolicy_CreateOrUpdate",
+        "description": "Creates or updates policy configuration for the API Operation level.",
+        "x-ms-examples": {
+          "ApiManagementPutApisOperationsPolicies": {
+            "$ref": "./examples/ApiManagementPutApisOperationsPolicies.json"
+          }
+        },
+        "consumes": [
+          "application/json",
+          "application/vnd.ms-azure-apim.policy+xml",
+          "application/vnd.ms-azure-apim.policy.raw+xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/PolicyIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/PolicyContract"
+            },
+            "required": true,
+            "description": "The policy contents to apply."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "The entity state (Etag) version of the Api Operation policy to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "type": "string"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Api Operation policy configuration was successfully created.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/PolicyContract"
+            }
+          },
+          "200": {
+            "description": "Api Operation policy configuration of the tenant was successfully updated.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/PolicyContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ApiOperationPolicies"
+        ],
+        "operationId": "ApiOperationPolicy_Delete",
+        "description": "Deletes the policy configuration at the Api Operation.",
+        "x-ms-examples": {
+          "ApiManagementDeleteApisOperationsPolicies": {
+            "$ref": "./examples/ApiManagementDeleteApisOperationsPolicies.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "The entity state (Etag) version of the Api Operation Policy to delete. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "type": "string"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/PolicyIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully deleted the policy configuration at the API Operation level."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/apis/{apiId}/products": {
+      "get": {
+        "tags": [
+          "ApiProduct"
+        ],
+        "operationId": "ApiProduct_ListByApis",
+        "description": "Lists all Products, which the API is part of.",
+        "x-ms-examples": {
+          "ApiManagementListApisProducts": {
+            "$ref": "./examples/ApiManagementListApisProducts.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "| Field | Supported operators    | Supported functions                         |\n|-------|------------------------|---------------------------------------------|\n| name  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation returns a collection of products which have the Api entity.",
+            "schema": {
+              "$ref": "./apimproducts.json#/definitions/ProductCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "./apimproducts.json#/definitions/ProductContract"
+      }
+    },
+    "/apis/{apiId}/policies": {
+      "get": {
+        "tags": [
+          "ApiPolicy"
+        ],
+        "operationId": "ApiPolicy_ListByApi",
+        "description": "Get the policy configuration at the API level.",
+        "x-ms-examples": {
+          "ApiManagementListApisPolicies": {
+            "$ref": "./examples/ApiManagementListApisPolicies.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Apis Policy Collection.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/PolicyCollection"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/apis/{apiId}/policies/{policyId}": {
+      "get": {
+        "tags": [
+          "ApiPolicy"
+        ],
+        "operationId": "ApiPolicy_Get",
+        "description": "Get the policy configuration at the API level.",
+        "x-ms-examples": {
+          "ApiManagementGetApisPolicies": {
+            "$ref": "./examples/ApiManagementGetApisPolicies.json"
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/vnd.ms-azure-apim.policy+xml",
+          "application/vnd.ms-azure-apim.policy.raw+xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/PolicyIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Api Policy information.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/PolicyContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ApiPolicy"
+        ],
+        "operationId": "ApiPolicy_CreateOrUpdate",
+        "description": "Creates or updates policy configuration for the API.",
+        "x-ms-examples": {
+          "ApiManagementPutApisPolicies": {
+            "$ref": "./examples/ApiManagementPutApisPolicies.json"
+          }
+        },
+        "consumes": [
+          "application/json",
+          "application/vnd.ms-azure-apim.policy+xml",
+          "application/vnd.ms-azure-apim.policy.raw+xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/PolicyIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/PolicyContract"
+            },
+            "required": true,
+            "description": "The policy contents to apply."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "The entity state (Etag) version of the Api Policy to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "type": "string"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Api policy configuration was successfully created.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/PolicyContract"
+            }
+          },
+          "200": {
+            "description": "Api policy configuration of the tenant was successfully updated.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/PolicyContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ApiPolicy"
+        ],
+        "operationId": "ApiPolicy_Delete",
+        "description": "Deletes the policy configuration at the Api.",
+        "x-ms-examples": {
+          "ApiManagementDeleteApisPolicies": {
+            "$ref": "./examples/ApiManagementDeleteApisPolicies.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/PolicyIdParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "The entity state (Etag) version of the Api policy to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "type": "string"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully deleted the policy configuration at the API level."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/apis/{apiId}/schemas": {
+      "get": {
+        "tags": [
+          "ApiSchema"
+        ],
+        "operationId": "ApiSchema_ListByApi",
+        "description": "Get the schema configuration at the API level.",
+        "x-ms-examples": {
+          "ApiManagementListApisSchemas": {
+            "$ref": "./examples/ApiManagementListApisSchemas.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Apis Schema Collection.",
+            "schema": {
+              "$ref": "#/definitions/SchemaCollection"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/apis/{apiId}/schemas/{schemaId}": {
+      "get": {
+        "tags": [
+          "ApiSchema"
+        ],
+        "operationId": "ApiSchema_Get",
+        "description": "Get the schema configuration at the API level.",
+        "x-ms-examples": {
+          "ApiManagementGetApisSchemas": {
+            "$ref": "./examples/ApiManagementGetApisSchemas.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/SchemaIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Api Schema information.",
+            "schema": {
+              "$ref": "#/definitions/SchemaContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ApiSchema"
+        ],
+        "operationId": "ApiSchema_CreateOrUpdate",
+        "description": "Creates or updates schema configuration for the API.",
+        "x-ms-examples": {
+          "ApiManagementPutApisSchemas": {
+            "$ref": "./examples/ApiManagementPutApisSchemas.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/SchemaIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SchemaContract"
+            },
+            "required": true,
+            "description": "The schema contents to apply."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "description": "The entity state (Etag) version of the Api Schema to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "type": "string"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Api schema configuration was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/SchemaContract"
+            }
+          },
+          "200": {
+            "description": "Api schema configuration of the tenant was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/SchemaContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ApiSchema"
+        ],
+        "operationId": "ApiSchema_Delete",
+        "description": "Deletes the schema configuration at the Api.",
+        "x-ms-examples": {
+          "ApiManagementDeleteApisSchemas": {
+            "$ref": "./examples/ApiManagementDeleteApisSchemas.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/SchemaIdParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "The entity state (Etag) version of the Api schema to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "type": "string"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully deleted the schema configuration at the API level."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/apis/{apiId}?export=true": {
+      "get": {
+        "tags": [
+          "Apis"
+        ],
+        "operationId": "ApiExport_Get",
+        "description": "Gets the details of the API specified by its identifier in the format specified to the Storage Blob with SAS Key valid for 5 minutes.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/vnd.swagger.link+json",
+              "application/vnd.sun.wadl.link+json",
+              "application/vnd.ms.wsdl.link+xml"
+            ],
+            "x-ms-enum": {
+              "name": "ExportFormat",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "application/vnd.swagger.link+json",
+                  "description": "Export the Api Definition in OpenApi Specification 2.0 format to the Storage Blob.",
+                  "name": "OpenApi2"
+                },
+                {
+                  "value": "application/vnd.ms.wsdl.link+xml",
+                  "description": "Export the Api Definition in WSDL Schema to Storage Blob.",
+                  "name": "Wsdl"
+                },
+                {
+                  "value": "application/vnd.sun.wadl.link+json",
+                  "description": "Export the Api Definition in WADL Schema to Storage Blob.",
+                  "name": "Wadl"
+                }
+              ]
+            },
+            "description": "Format in which to export the Api Details to the Storage Blob with Sas Key valid for 5 minutes."
+          },
+          {
+            "name": "export",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "true"
+            ],
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "ExportApi"
+            },
+            "description": "Query parameter required to export the API details."
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response contains a stream with a full set of API metadata and includes API entity with an embedded array of operation entities.",
+            "schema": {
+              "$ref": "#/definitions/ApiExportResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApiExportResult": {
+      "properties": {
+        "link": {
+          "type": "string",
+          "description": "Link to the Storage Blob containing the result of the export operation. The Blob Uri is only valid for 5 minutes."
+        }
+      },
+      "description": "API Export result Blob Uri."
+    },
+    "ApiCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiContract"
+          }
+        },
+        "count": {
+          "type": "integer",
+          "description": "Total number of entities"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Api list representation."
+    },
+    "ApiCreateOrUpdateParameter": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the entity"
+        },
+        "contentValue": {
+          "type": "string",
+          "description": "Content value when Importing an API."
+        },
+        "contentFormat": {
+          "type": "string",
+          "description": "Format of the Content in which the API is getting imported.",
+          "enum": [
+            "wadl-xml",
+            "wadl-link-json",
+            "swagger-json",
+            "swagger-link-json",
+            "wsdl",
+            "wsdl-link"
+          ],
+          "x-ms-enum": {
+            "name": "ContentFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "wadl-xml",
+                "description": "The contents are inline and Content type is a WADL document."
+              },
+              {
+                "value": "wadl-link-json",
+                "description": "The WADL document is hosted on a publicly accessible internet address."
+              },
+              {
+                "value": "swagger-json",
+                "description": "The contents are inline and Content Type if a OpenApi 2.0 Document."
+              },
+              {
+                "value": "swagger-link-json",
+                "description": "The Open Api 2.0 document is hosted on a publicly accessible internet address."
+              },
+              {
+                "value": "wsdl",
+                "description": "The contents are inline and the document is a WSDL/Soap document."
+              },
+              {
+                "value": "wsdl-link",
+                "description": "The WSDL document is hosted on a publicly accessible internet address."
+              }
+            ]
+          }
+        },
+        "wsdlSelector": {
+          "type": "object",
+          "description": "Criteria to limit import of WSDL to a subset of the document.",
+          "properties": {
+            "wsdlServiceName": {
+              "type": "string",
+              "description": "Name of service to import from WSDL"
+            },
+            "wsdlEndpointName": {
+              "type": "string",
+              "description": "Name of endpoint(port) to import from WSDL"
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ApiContractProperties"
+        }
+      ],
+      "description": "Api Create or Update Properties."
+    },
+    "ApiContract": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the Entity"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ApiContractProperties"
+        }
+      ],
+      "description": "Api Contract Details"
+    },
+    "ApiContractProperties": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "API name.",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "serviceUrl": {
+          "type": "string",
+          "description": "Absolute URL of the backend service implementing this API.",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "path": {
+          "type": "string",
+          "description": "Relative URL uniquely identifying this API and all of its resource paths within the API Management service instance. It is appended to the API endpoint base URL specified during the service instance creation to form a public URL for this API.",
+          "minLength": 0,
+          "maxLength": 400
+        },
+        "protocols": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "http",
+              "https"
+            ],
+            "x-ms-enum": {
+              "name": "Protocol",
+              "modelAsString": false
+            }
+          },
+          "description": "Describes on which protocols the operations in this API can be invoked."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ApiEntityBaseContract"
+        }
+      ],
+      "required": [
+        "path"
+      ],
+      "description": "Api Entity Properties"
+    },
+    "ApiUpdateContract": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "API name.",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "serviceUrl": {
+          "type": "string",
+          "description": "Absolute URL of the backend service implementing this API.",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "path": {
+          "type": "string",
+          "description": "Relative URL uniquely identifying this API and all of its resource paths within the API Management service instance. It is appended to the API endpoint base URL specified during the service instance creation to form a public URL for this API.",
+          "minLength": 0,
+          "maxLength": 400
+        },
+        "protocols": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "http",
+              "https"
+            ],
+            "x-ms-enum": {
+              "name": "Protocol",
+              "modelAsString": false
+            }
+          },
+          "description": "Describes on which protocols the operations in this API can be invoked."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ApiEntityBaseContract"
+        }
+      ],
+      "description": "API update contract properties."
+    },
+    "ApiEntityBaseContract": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the API. May include HTML formatting tags."
+        },
+        "authenticationSettings": {
+          "$ref": "#/definitions/AuthenticationSettingsContract",
+          "description": "Collection of authentication settings included into this API."
+        },
+        "subscriptionKeyParameterNames": {
+          "$ref": "#/definitions/SubscriptionKeyParameterNamesContract",
+          "description": "Protocols over which API is made available."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of API.",
+          "enum": [
+            "http",
+            "soap"
+          ],
+          "x-ms-client-name": "ApiType",
+          "x-ms-enum": {
+            "name": "ApiType",
+            "modelAsString": true
+          }
+        },
+        "apiRevision": {
+          "type": "string",
+          "description": "Describes the Revision of the Api. If no value is provided, default revision 1 is created",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "isCurrent": {
+          "type": "boolean",
+          "description": "Indicates if API revision is current api revision."
+        },
+        "isOnline": {
+          "type": "boolean",
+          "description": "Indicates if API revision is accessible via the gateway."
+        }
+      },
+      "description": "API base contract details."
+    },
+    "AuthenticationSettingsContract": {
+      "properties": {
+        "oAuth2": {
+          "$ref": "#/definitions/OAuth2AuthenticationSettingsContract",
+          "description": "OAuth2 Authentication settings"
+        }
+      },
+      "description": "API Authentication Settings."
+    },
+    "OAuth2AuthenticationSettingsContract": {
+      "properties": {
+        "authorizationServerId": {
+          "type": "string",
+          "description": "OAuth authorization server identifier."
+        },
+        "scope": {
+          "type": "string",
+          "description": "operations scope."
+        }
+      },
+      "description": "API OAuth2 Authentication settings details."
+    },
+    "OperationCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationContract"
+          },
+          "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "description": "Total number of entities"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Operation list representation."
+    },
+    "OperationContract": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the Operation."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationContractProperties"
+        }
+      ],
+      "description": "Api Operation details."
+    },
+    "OperationContractProperties": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operation Name.",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "method": {
+          "type": "string",
+          "description": "A Valid HTTP Operation Method. Typical Http Methods like GET, PUT, POST but not limited by only them.",
+          "externalDocs": {
+            "description": "As defined by RFC.",
+            "url": "http://www.rfc-editor.org/rfc/rfc7230.txt"
+          }
+        },
+        "urlTemplate": {
+          "type": "string",
+          "description": "Relative URL template identifying the target resource for this operation. May include parameters. Example: /customers/{cid}/orders/{oid}/?date={date}",
+          "minLength": 1,
+          "maxLength": 1000
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationEntityBaseContract"
+        }
+      ],
+      "required": [
+        "name",
+        "method",
+        "urlTemplate"
+      ],
+      "description": "Operation Contract Properties"
+    },
+    "OperationUpdateContract": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operation Name.",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "method": {
+          "type": "string",
+          "description": "A Valid HTTP Operation Method. Typical Http Methods like GET, PUT, POST but not limited by only them.",
+          "externalDocs": {
+            "description": "As defined by RFC.",
+            "url": "http://www.rfc-editor.org/rfc/rfc7230.txt"
+          }
+        },
+        "urlTemplate": {
+          "type": "string",
+          "description": "Relative URL template identifying the target resource for this operation. May include parameters. Example: /customers/{cid}/orders/{oid}/?date={date}",
+          "minLength": 1,
+          "maxLength": 1000
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationEntityBaseContract"
+        }
+      ],
+      "description": "Operation Update Contract Properties."
+    },
+    "OperationEntityBaseContract": {
+      "properties": {
+        "templateParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ParameterContract"
+          },
+          "description": "Collection of URL template parameters."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the operation. May include HTML formatting tags.",
+          "maxLength": 1000
+        },
+        "request": {
+          "$ref": "#/definitions/RequestContract",
+          "description": "An entity containing request details."
+        },
+        "responses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResponseContract"
+          },
+          "description": "Array of Operation responses."
+        },
+        "policies": {
+          "type": "string",
+          "description": "Operation Policies"
+        }
+      },
+      "description": "Api Operation Entity Base Contract details."
+    },
+    "ParameterContract": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Parameter name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Parameter description."
+        },
+        "type": {
+          "type": "string",
+          "description": "Parameter type."
+        },
+        "defaultValue": {
+          "type": "string",
+          "description": "Default parameter value."
+        },
+        "required": {
+          "type": "boolean",
+          "description": "whether parameter is required or not."
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Parameter values."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "description": "Operation parameters details."
+    },
+    "RepresentationContract": {
+      "properties": {
+        "contentType": {
+          "type": "string",
+          "description": "Specifies a registered or custom content type for this representation, e.g. application/xml."
+        },
+        "sample": {
+          "type": "string",
+          "description": "An example of the representation."
+        },
+        "schemaId": {
+          "type": "string",
+          "description": "Schema identifier. Applicable only if 'contentType' value is neither 'application/x-www-form-urlencoded' nor 'multipart/form-data'."
+        },
+        "typeName": {
+          "type": "string",
+          "description": "Type name defined by the schema. Applicable only if 'contentType' value is neither 'application/x-www-form-urlencoded' nor 'multipart/form-data'."
+        },
+        "formParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ParameterContract"
+          },
+          "description": "Collection of form parameters. Required if 'contentType' value is either 'application/x-www-form-urlencoded' or 'multipart/form-data'.."
+        }
+      },
+      "required": [
+        "contentType"
+      ],
+      "description": "Operation request/response representation details."
+    },
+    "RequestContract": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Operation request description."
+        },
+        "queryParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ParameterContract"
+          },
+          "description": "Collection of operation request query parameters."
+        },
+        "headers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ParameterContract"
+          },
+          "description": "Collection of operation request headers."
+        },
+        "representations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RepresentationContract"
+          },
+          "description": "Collection of operation request representations."
+        }
+      },
+      "description": "Operation request details."
+    },
+    "ResponseContract": {
+      "properties": {
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Operation response HTTP status code."
+        },
+        "description": {
+          "type": "string",
+          "description": "Operation response description."
+        },
+        "representations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RepresentationContract"
+          },
+          "description": "Collection of operation response representations."
+        },
+        "headers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ParameterContract"
+          },
+          "description": "Collection of operation response headers."
+        }
+      },
+      "required": [
+        "statusCode"
+      ],
+      "description": "Operation response details."
+    },
+    "SubscriptionKeyParameterNamesContract": {
+      "properties": {
+        "header": {
+          "type": "string",
+          "description": "Subscription key header name."
+        },
+        "query": {
+          "type": "string",
+          "description": "Subscription key query string parameter name."
+        }
+      },
+      "description": "Subscription key parameter names details.",
+      "example": {
+        "subscriptionKeyParameterNames": {
+          "query": "customQueryParameterName",
+          "header": "customHeaderParameterName"
+        }
+      }
+    },
+    "SchemaCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SchemaContract"
+          },
+          "description": "Api Schema Contract value."
+        },
+        "count": {
+          "type": "integer",
+          "description": "Total number of entities"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "The response of the list schema operation."
+    },
+    "SchemaContract": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the Schema."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SchemaContractProperties"
+        }
+      ],
+      "description": "Schema Contract details."
+    },
+    "SchemaContractProperties": {
+      "properties": {
+        "contentType": {
+          "type": "string",
+          "description": "Must be a valid a media type used in a Content-Type header as defined in the RFC 2616. Media type of the schema document (e.g. application/json, application/xml)."
+        },
+        "document": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SchemaDocumentProperties",
+          "description": "Properties of the Schema Document."
+        }
+      },
+      "required": [
+        "contentType"
+      ],
+      "description": "Schema contract Properties."
+    },
+    "SchemaDocumentProperties": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Json escaped string defining the document representing the Schema."
+        }
+      },
+      "description": "Schema Document Properties."
+    }
+  },
+  "parameters": {
+    "ApiIdParameter": {
+      "name": "apiId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "API identifier. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "OperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Operation identifier within an API. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "SchemaIdParameter": {
+      "name": "schemaId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Schema identifier within an API. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

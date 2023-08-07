@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "subscriptionId": "187f412d-1758-44d9-b052-169e2564721d",
+    "resourceGroupName": "Default-ActivityLogAlerts",
+    "activityLogAlertName": "SampleActivityLogAlert",
+    "api-version": "2017-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-ActivityLogAlerts/providers/microsoft.insights/activityLogAlerts/SampleActivityLogAlert",
+        "type": "Microsoft.Insights/ActivityLogAlerts",
+        "name": "SampleActivityLogAlert",
+        "location": "Global",
+        "tags": {},
+        "properties": {
+          "scopes": [
+            "subscriptions/187f412d-1758-44d9-b052-169e2564721d"
+          ],
+          "enabled": true,
+          "condition": {
+            "allOf": [
+              {
+                "field": "Category",
+                "equals": "Administrative"
+              },
+              {
+                "field": "Level",
+                "equals": "Error"
+              }
+            ]
+          },
+          "actions": {
+            "actionGroups": [
+              {
+                "actionGroupId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-ActionGroups/providers/microsoft.insights/actionGroups/SampleActionGroup",
+                "webhookProperties": {
+                  "sampleWebhookProperty": "samplePropertyValue"
+                }
+              }
+            ]
+          },
+          "description": "Sample activity log alert description"
+        }
+      }
+    }
+  }
+}

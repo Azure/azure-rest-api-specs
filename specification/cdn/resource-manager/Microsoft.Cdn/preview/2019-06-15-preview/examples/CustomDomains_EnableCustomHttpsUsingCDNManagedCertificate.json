@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2019-06-15-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
+    "endpointName": "endpoint1",
+    "customDomainName": "www-someDomain-net",
+    "customHttpsParameters": {
+      "certificateSource": "Cdn",
+      "protocolType": "ServerNameIndication",
+      "certificateSourceParameters": {
+        "OData.type": "#Microsoft.Azure.Cdn.Models.CdnCertificateSourceParameters",
+        "certificateType": "Shared"
+      }
+    }
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "body": {
+        "name": "www-someDomain-net",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/customdomains/www-someDomain-net",
+        "type": "Microsoft.Cdn/profiles/endpoints/customdomains",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceState": "Active",
+          "hostName": "www.someDomain.net",
+          "customHttpsProvisioningState": "Enabling",
+          "customHttpsProvisioningSubstate": "PendingDomainControlValidationREquestApproval",
+          "validationData": "validationdata"
+        }
+      }
+    }
+  }
+}

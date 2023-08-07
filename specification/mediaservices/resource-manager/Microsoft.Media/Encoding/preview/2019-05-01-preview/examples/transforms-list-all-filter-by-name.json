@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "api-version": "2018-07-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contosoresources",
+    "accountName": "contosomedia",
+    "$filter": "(name eq 'sampleEncode') or (name eq 'sampleEncodeAndVideoIndex')",
+    "$orderby": "name desc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "sampleEncodeAndVideoIndex",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/sampleEncodeAndVideoIndex",
+            "type": "Microsoft.Media/mediaservices/transforms",
+            "properties": {
+              "created": "2018-09-27T22:56:07.5846087-07:00",
+              "description": "A sample Transform using the Standard Encoder with a built-in preset, as well as the Video Analyzer.",
+              "lastModified": "2018-09-27T22:56:07.5846087-07:00",
+              "outputs": [
+                {
+                  "onError": "StopProcessingJob",
+                  "relativePriority": "Normal",
+                  "preset": {
+                    "@odata.type": "#Microsoft.Media.VideoAnalyzerPreset",
+                    "insightsToExtract": "AllInsights"
+                  }
+                },
+                {
+                  "onError": "StopProcessingJob",
+                  "relativePriority": "Normal",
+                  "preset": {
+                    "@odata.type": "#Microsoft.Media.BuiltInStandardEncoderPreset",
+                    "presetName": "AdaptiveStreaming"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "sampleEncode",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/sampleEncode",
+            "type": "Microsoft.Media/mediaservices/transforms",
+            "properties": {
+              "created": "2018-09-27T22:56:07.5846087-07:00",
+              "description": "A sample Transform using the Standard Encoder with a built in preset.",
+              "lastModified": "2018-09-27T22:56:07.5846087-07:00",
+              "outputs": [
+                {
+                  "onError": "StopProcessingJob",
+                  "relativePriority": "Normal",
+                  "preset": {
+                    "@odata.type": "#Microsoft.Media.BuiltInStandardEncoderPreset",
+                    "presetName": "AdaptiveStreaming"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

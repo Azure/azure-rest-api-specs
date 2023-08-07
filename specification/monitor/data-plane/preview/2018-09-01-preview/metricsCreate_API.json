@@ -1,0 +1,258 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Metrics",
+    "version": "2018-09-01-preview",
+    "description": "A client for issuing REST requests to the Azure metrics service.",
+    "x-ms-code-generation-settings": {
+      "name": "AzureMetricsClient"
+    }
+  },
+  "host": "monitoring.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json; odata=minimalmetadata"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProvider}/{resourceTypeName}/{resourceName}/metrics": {
+      "post": {
+        "tags": [
+          "Metrics"
+        ],
+        "operationId": "Metrics_Create",
+        "description": "**Post the metric values for a resource**.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Content-Type",
+            "description": "Supports application/json and application/x-ndjson",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "Content-Length",
+            "description": "Content length of the payload",
+            "type": "integer",
+            "required": true,
+            "format": "int32"
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization token issue for issued for audience \"https:\\\\monitoring.azure.com\\\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "The azure subscription id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "The ARM resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceProvider",
+            "description": "The ARM resource provider name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceTypeName",
+            "description": "The ARM resource type name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "The ARM resource name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The Azure metrics document json payload",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureMetricsDocument"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The azure metrics publish succeeded",
+            "schema": {
+              "$ref": "#/definitions/AzureMetricsResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error from the server. See response object for the reason",
+            "schema": {
+              "$ref": "#/definitions/AzureMetricsResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Post azure metrics for cows sold with related metadata as dimensions": {
+            "$ref": "./examples/AzureMetrics_IngestMetrics.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AzureMetricsDocument": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "description": "Gets or sets Time property (in ISO 8601 format)",
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/definitions/AzureMetricsData"
+        }
+      },
+      "required": [
+        "time",
+        "data"
+      ]
+    },
+    "AzureMetricsData": {
+      "type": "object",
+      "properties": {
+        "baseData": {
+          "$ref": "#/definitions/AzureMetricsBaseData"
+        }
+      },
+      "required": [
+        "baseData"
+      ]
+    },
+    "AzureMetricsBaseData": {
+      "type": "object",
+      "properties": {
+        "metric": {
+          "description": "Gets or sets the Metric name",
+          "type": "string"
+        },
+        "namespace": {
+          "description": "Gets or sets the Metric namespace",
+          "type": "string"
+        },
+        "dimNames": {
+          "description": "Gets or sets the list of dimension names (optional)",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "series": {
+          "description": "Gets or sets the list of time series data for the metric (one per unique dimension combination)",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureTimeSeriesData"
+          }
+        }
+      },
+      "required": [
+        "metric",
+        "namespace",
+        "series"
+      ]
+    },
+    "AzureTimeSeriesData": {
+      "type": "object",
+      "properties": {
+        "dimValues": {
+          "description": "Gets or sets dimension values",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "min": {
+          "format": "double",
+          "description": "Gets or sets Min value",
+          "type": "number"
+        },
+        "max": {
+          "format": "double",
+          "description": "Gets or sets Max value",
+          "type": "number"
+        },
+        "sum": {
+          "format": "double",
+          "description": "Gets or sets Sum value",
+          "type": "number"
+        },
+        "count": {
+          "format": "int32",
+          "description": "Gets or sets Count value",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "min",
+        "max",
+        "sum",
+        "count"
+      ]
+    },
+    "AzureMetricsResult": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "format": "int32",
+          "description": "Http status code response ",
+          "type": "integer"
+        },
+        "apiFailureResponse": {
+          "$ref": "#/definitions/ApiFailureResponse"
+        }
+      }
+    },
+    "ApiFailureResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ApiError"
+        }
+      }
+    },
+    "ApiError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Gets or sets the azure metrics error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Gets or sets the azure metrics error message",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

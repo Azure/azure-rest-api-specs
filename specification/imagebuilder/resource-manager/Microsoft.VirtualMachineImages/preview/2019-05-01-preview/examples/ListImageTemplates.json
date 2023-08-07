@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "api-version": "2019-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myImageTemplate",
+            "name": "myImageTemplate",
+            "location": "westus",
+            "type": "Microsoft.VirtualMachineImages/imageTemplate",
+            "properties": {
+              "source": {
+                "type": "ISO",
+                "sourceUri": "http://redhat.com/path/to/installation.iso",
+                "sha256Checksum": "120acbca7b3d55465eb9f8ef53ad7365f2997d42d4f83d7cc285bf5c71e1131f"
+              },
+              "customize": [
+                {
+                  "type": "Shell",
+                  "name": "Shell customization example",
+                  "scriptUri": "https://example.com/path/to/script.sh"
+                }
+              ],
+              "distribute": [
+                {
+                  "type": "ManagedImage",
+                  "location": "1_location",
+                  "runOutputName": "image_it_pir_1",
+                  "imageId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1",
+                  "artifactTags": {
+                    "tagName": "value"
+                  }
+                }
+              ],
+              "vmProfile": {
+                "vmSize": "Standard_D2s_v3"
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myOtherResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/mySecondImageTemplate",
+            "name": "mySecondImageTemplate",
+            "location": "westus",
+            "type": "Microsoft.VirtualMachineImages/imageTemplate",
+            "properties": {
+              "source": {
+                "type": "PlatformImage",
+                "publisher": "Canonical",
+                "offer": "UbuntuServer",
+                "sku": "18.04-LTS",
+                "version": "18.04.201902121"
+              },
+              "customize": [
+                {
+                  "type": "Shell",
+                  "name": "Shell customization example",
+                  "scriptUri": "https://example.com/path/to/script.sh"
+                }
+              ],
+              "distribute": [
+                {
+                  "type": "ManagedImage",
+                  "location": "eastus",
+                  "runOutputName": "eus",
+                  "imageId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/mySecondImage-eus",
+                  "artifactTags": {
+                    "stage": "development"
+                  }
+                }
+              ],
+              "vmProfile": {
+                "vmSize": "Standard_D8s_v3"
+              }
+            }
+          }
+        ],
+        "nextLink": "/subscriptions/{subscription-id}/providers/Microsoft.VirtualMachineImages/imageTemplates?api-version=2018-02-01-preview&skip-token=2"
+      }
+    }
+  }
+}

@@ -1,0 +1,260 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HybridNetworkManagementClient",
+    "description": "The definitions in this swagger specification will be used to manage the Hybrid Network resources.",
+    "version": "2020-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "SubResource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        }
+      },
+      "description": "Reference to another sub resource.",
+      "x-ms-azure-resource": true
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Unknown",
+        "Succeeded",
+        "Accepted",
+        "Deleting",
+        "Failed",
+        "Canceled",
+        "Deleted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "VendorProvisioningState": {
+      "type": "string",
+      "description": "The current vendor provisioning state.",
+      "enum": [
+        "Unknown",
+        "NotProvisioned",
+        "Provisioning",
+        "Provisioned",
+        "Deprovisioned",
+        "UserDataValidationFailed"
+      ],
+      "x-ms-enum": {
+        "name": "VendorProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "TagsObject": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "description": "Tags object for patch operations."
+    },
+    "NetworkInterface": {
+      "description": "Network interface properties.",
+      "properties": {
+        "networkInterfaceName": {
+          "type": "string",
+          "description": "The name of the network interface."
+        },
+        "macAddress": {
+          "type": "string",
+          "description": "The MAC address of the network interface."
+        },
+        "ipConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkInterfaceIPConfiguration"
+          },
+          "description": "A list of IP configurations of the network interface."
+        },
+        "vmSwitchType": {
+          "type": "string",
+          "description": "The type of the VM switch.",
+          "enum": [
+            "Unknown",
+            "Management",
+            "Wan",
+            "Lan"
+          ],
+          "x-ms-enum": {
+            "name": "VMSwitchType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "NetworkInterfaceIPConfiguration": {
+      "description": "Network interface IP configuration properties.",
+      "properties": {
+        "ipAllocationMethod": {
+          "type": "string",
+          "description": "IP address allocation method.",
+          "enum": [
+            "Unknown",
+            "Static",
+            "Dynamic"
+          ],
+          "x-ms-enum": {
+            "name": "IPAllocationMethod",
+            "modelAsString": true
+          }
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "The value of the IP address."
+        },
+        "subnet": {
+          "type": "string",
+          "description": "The value of the subnet."
+        },
+        "gateway": {
+          "type": "string",
+          "description": "The value of the gateway."
+        },
+        "ipVersion": {
+          "type": "string",
+          "description": "IP address version.",
+          "enum": [
+            "Unknown",
+            "IPv4"
+          ],
+          "x-ms-enum": {
+            "name": "IPVersion",
+            "modelAsString": true
+          }
+        },
+        "dnsServers": {
+          "type": "array",
+          "description": "The list of DNS servers IP addresses.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "UserDataTemplate": {
+      "type": "object",
+      "description": "The user data template."
+    },
+    "UserDataParameters": {
+      "type": "object",
+      "description": "The user data parameters."
+    },
+    "ManagedApplicationParameters": {
+      "type": "object",
+      "description": "The parameters for the managed application."
+    },
+    "SkuType": {
+      "type": "string",
+      "description": "Sku type.",
+      "enum": [
+        "Unknown",
+        "EvolvedPacketCore",
+        "SDWAN",
+        "Firewall"
+      ],
+      "x-ms-enum": {
+        "name": "SkuType",
+        "modelAsString": true
+      }
+    },
+    "OsProfile": {
+      "properties": {
+        "adminUsername": {
+          "type": "string",
+          "description": "Specifies the name of the administrator account. <br><br> **Windows-only restriction:** Cannot end in \".\" <br><br> **Disallowed values:** \"administrator\", \"admin\", \"user\", \"user1\", \"test\", \"user2\", \"test1\", \"user3\", \"admin1\", \"1\", \"123\", \"a\", \"actuser\", \"adm\", \"admin2\", \"aspnet\", \"backup\", \"console\", \"david\", \"guest\", \"john\", \"owner\", \"root\", \"server\", \"sql\", \"support\", \"support_388945a0\", \"sys\", \"test2\", \"test3\", \"user4\", \"user5\". <br><br> **Minimum-length (Linux):** 1  character <br><br> **Max-length (Linux):** 64 characters <br><br> **Max-length (Windows):** 20 characters  <br><br><li> For root access to the Linux VM, see [Using root privileges on Linux virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-use-root-privileges?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)<br><li> For a list of built-in system users on Linux that should not be used in this field, see [Selecting User Names for Linux on Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-usernames?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)."
+        },
+        "linuxConfiguration": {
+          "$ref": "#/definitions/LinuxConfiguration",
+          "description": "Specifies the Linux operating system settings on the virtual machine. <br><br>For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-endorsed-distros?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) <br><br> For running non-endorsed distributions, see [Information for Non-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-create-upload-generic?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)."
+        },
+        "customData": {
+          "type": "string",
+          "description": "Specifies a base-64 encoded string of custom data. The base-64 encoded string is decoded to a binary array that is saved as a file on the virtual machine. The maximum length of the binary array is 65535 bytes. <br><br> **Note: Do not pass any secrets or passwords in customData property** <br><br> This property cannot be updated after the VM is created. <br><br> customData is passed to the VM to be saved as a file. For more information see [Custom Data on Azure VMs](https://azure.microsoft.com/en-us/blog/custom-data-and-cloud-init-on-windows-azure/) <br><br> For using cloud-init for your Linux VM, see [Using cloud-init to customize a Linux VM during creation](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-cloud-init?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)"
+        },
+        "customDataRequired": {
+          "type": "boolean",
+          "default": true,
+          "description": "Indicates if custom data is required to deploy this role."
+        }
+      },
+      "description": "Specifies the operating system settings for the role instance."
+    },
+    "LinuxConfiguration": {
+      "properties": {
+        "ssh": {
+          "$ref": "#/definitions/SshConfiguration",
+          "description": "Specifies the ssh key configuration for a Linux OS."
+        }
+      },
+      "description": "Specifies the Linux operating system settings on the virtual machine."
+    },
+    "SshConfiguration": {
+      "properties": {
+        "publicKeys": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SshPublicKey"
+          },
+          "description": "The list of SSH public keys used to authenticate with linux based VMs."
+        }
+      },
+      "description": "SSH configuration for Linux based VMs running on Azure"
+    },
+    "SshPublicKey": {
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Specifies the full path on the created VM where ssh public key is stored. If the file already exists, the specified key is appended to the file. Example: /home/user/.ssh/authorized_keys"
+        },
+        "keyData": {
+          "type": "string",
+          "description": "SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)."
+        }
+      },
+      "description": "Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed."
+    }
+  }
+}

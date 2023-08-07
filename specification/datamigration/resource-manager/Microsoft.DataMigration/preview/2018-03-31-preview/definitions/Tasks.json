@@ -1,0 +1,266 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Data Migration Service Resource Provider",
+    "version": "2018-03-31-preview"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "ProjectTaskProperties": {
+      "type": "object",
+      "description": "Base class for all types of DMS task properties. If task is not supported by current client, this object is returned.",
+      "properties": {
+        "taskType": {
+          "description": "Task type.",
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ODataError"
+          },
+          "description": "Array of errors. This is ignored if submitted.",
+          "readOnly": true
+        },
+        "state": {
+          "type": "string",
+          "description": "The state of the task. This is ignored if submitted.",
+          "enum": [
+            "Unknown",
+            "Queued",
+            "Running",
+            "Canceled",
+            "Succeeded",
+            "Failed",
+            "FailedInputValidation",
+            "Faulted"
+          ],
+          "x-ms-enum": {
+            "name": "TaskState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "taskType"
+      ],
+      "discriminator": "taskType"
+    },
+    "ProjectTask": {
+      "type": "object",
+      "description": "A task resource",
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "HTTP strong entity tag value. This is ignored if submitted."
+        },
+        "properties": {
+          "description": "Custom task properties",
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./Common.json#/definitions/Resource"
+        }
+      ]
+    },
+    "TaskList": {
+      "type": "object",
+      "description": "OData page of tasks",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of tasks",
+          "items": {
+            "$ref": "#/definitions/ProjectTask"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to load the next page of tasks"
+        }
+      }
+    },
+    "ConnectToSourceSqlServerTaskProperties": {
+      "x-ms-discriminator-value": "ConnectToSource.SqlServer",
+      "type": "object",
+      "description": "Properties for the task that validates connection to SQL Server and also validates source server requirements",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./ConnectToSourceSqlServerTask.json#/definitions/ConnectToSourceSqlServerTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./ConnectToSourceSqlServerTask.json#/definitions/ConnectToSourceSqlServerTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
+    "ConnectToTargetSqlMITaskProperties": {
+      "x-ms-discriminator-value": "ConnectToTarget.AzureSqlDbMI",
+      "type": "object",
+      "description": "Properties for the task that validates connection to Azure SQL Database Managed Instance",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./ConnectToTargetSqlMITask.json#/definitions/ConnectToTargetSqlMITaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./ConnectToTargetSqlMITask.json#/definitions/ConnectToTargetSqlMITaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
+    "ConnectToTargetSqlDbTaskProperties": {
+      "x-ms-discriminator-value": "ConnectToTarget.SqlDb",
+      "type": "object",
+      "description": "Properties for the task that validates connection to SQL DB and target server requirements",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./ConnectToTargetSqlDbTask.json#/definitions/ConnectToTargetSqlDbTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./ConnectToTargetSqlDbTask.json#/definitions/ConnectToTargetSqlDbTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
+    "GetUserTablesSqlTaskProperties": {
+      "x-ms-discriminator-value": "GetUserTables.Sql",
+      "type": "object",
+      "description": "Properties for the task that collects user tables for the given list of databases",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./GetUserTablesSqlTask.json#/definitions/GetUserTablesSqlTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./GetUserTablesSqlTask.json#/definitions/GetUserTablesSqlTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
+    "MigrateSqlServerSqlMITaskProperties": {
+      "x-ms-discriminator-value": "Migrate.SqlServer.AzureSqlDbMI",
+      "type": "object",
+      "description": "Properties for task that migrates SQL Server databases to Azure SQL Database Managed Instance",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./MigrateSqlServerSqlMITask.json#/definitions/MigrateSqlServerSqlMITaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./MigrateSqlServerSqlMITask.json#/definitions/MigrateSqlServerSqlMITaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
+    "MigrateSqlServerSqlDbTaskProperties": {
+      "x-ms-discriminator-value": "Migrate.SqlServer.SqlDb",
+      "type": "object",
+      "description": "Properties for the task that migrates on-prem SQL Server databases to Azure SQL Database",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./MigrateSqlServerSqlDbTask.json#/definitions/MigrateSqlServerSqlDbTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./MigrateSqlServerSqlDbTask.json#/definitions/MigrateSqlServerSqlDbTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
+    "ValidateMigrationInputSqlServerSqlMITaskProperties": {
+      "x-ms-discriminator-value": "ValidateMigrationInput.SqlServer.AzureSqlDbMI",
+      "type": "object",
+      "description": "Properties for task that validates migration input for SQL to Azure SQL Database Managed Instance",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./ValidateMigrationInputSqlServerSqlMITask.json#/definitions/ValidateMigrationInputSqlServerSqlMITaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./ValidateMigrationInputSqlServerSqlMITask.json#/definitions/ValidateMigrationInputSqlServerSqlMITaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    }
+  }
+}

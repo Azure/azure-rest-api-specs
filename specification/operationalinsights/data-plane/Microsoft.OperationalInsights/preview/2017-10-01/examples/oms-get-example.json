@@ -1,0 +1,161 @@
+{
+  "title": "Simple Query",
+  "description": "A simple query that returns query results.",
+  "parameters": {
+    "subscriptionId": "c512b59c-4005-40e2-b13d-ac29cfb46af4",
+    "resourceGroupName": "test-rg",
+    "workspaceName": "azure-insights",
+    "apiVersion": "2017-10-01",
+    "query": "Usage | take 10",
+    "timespan": "PT12H"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "x-ms-request-id": "58a37988-2c05-427a-891f-5e0e1266fcc5",
+        "x-ms-correlation-request-id": "58a37988-2c05-427a-891f-5e0e1266fcc5"
+      },
+      "body": {
+        "tables": [
+          {
+            "name": "PrimaryResult",
+            "columns": [
+              {
+                "name": "TenantId",
+                "type": "string"
+              },
+              {
+                "name": "Computer",
+                "type": "string"
+              },
+              {
+                "name": "TimeGenerated",
+                "type": "datetime"
+              },
+              {
+                "name": "SourceSystem",
+                "type": "string"
+              },
+              {
+                "name": "StartTime",
+                "type": "datetime"
+              },
+              {
+                "name": "EndTime",
+                "type": "datetime"
+              },
+              {
+                "name": "ResourceUri",
+                "type": "string"
+              },
+              {
+                "name": "LinkedResourceUri",
+                "type": "string"
+              },
+              {
+                "name": "DataType",
+                "type": "string"
+              },
+              {
+                "name": "Solution",
+                "type": "string"
+              },
+              {
+                "name": "BatchesWithinSla",
+                "type": "long"
+              },
+              {
+                "name": "BatchesOutsideSla",
+                "type": "long"
+              },
+              {
+                "name": "BatchesCapped",
+                "type": "long"
+              },
+              {
+                "name": "TotalBatches",
+                "type": "long"
+              },
+              {
+                "name": "AvgLatencyInSeconds",
+                "type": "real"
+              },
+              {
+                "name": "Quantity",
+                "type": "real"
+              },
+              {
+                "name": "QuantityUnit",
+                "type": "string"
+              },
+              {
+                "name": "IsBillable",
+                "type": "bool"
+              },
+              {
+                "name": "MeterId",
+                "type": "string"
+              },
+              {
+                "name": "LinkedMeterId",
+                "type": "string"
+              },
+              {
+                "name": "Type",
+                "type": "string"
+              }
+            ],
+            "rows": [
+              [
+                "b438b4f6-912a-46d5-9cb1-b44069212abc",
+                "ContosoSQLSrv1",
+                "2017-08-24T06:59:59Z",
+                "OMS",
+                "2017-08-24T06:00:00Z",
+                "2017-08-24T06:59:59Z",
+                "/subscriptions/e4272367-5645-4c4e-9c67-3b74b59a6982/resourcegroups/contosoazurehq/providers/microsoft.operationalinsights/workspaces/contosoretail-it",
+                null,
+                "Perf",
+                "LogManagement",
+                "1",
+                "0",
+                "0",
+                "1",
+                "1.286",
+                "0.076408",
+                "MBytes",
+                "true",
+                "a4e29a95-5b4c-408b-80e3-113f9410566e",
+                "00000000-0000-0000-0000-000000000000",
+                "Usage"
+              ],
+              [
+                "b438b4f6-912a-46d5-9cb1-b44069212abc",
+                "Store010Web3",
+                "2017-08-24T06:59:59Z",
+                "OMS",
+                "2017-08-24T06:00:00Z",
+                "2017-08-24T06:59:59Z",
+                "/subscriptions/e4272367-5645-4c4e-9c67-3b74b59a6982/resourcegroups/contosoazurehq/providers/microsoft.operationalinsights/workspaces/contosoretail-it",
+                null,
+                "Perf",
+                "LogManagement",
+                "1",
+                "0",
+                "0",
+                "1",
+                "1.7",
+                "0.106767",
+                "MBytes",
+                "true",
+                "a4e29a95-5b4c-408b-80e3-113f9410566e",
+                "00000000-0000-0000-0000-000000000000",
+                "Usage"
+              ]
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

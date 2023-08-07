@@ -1,0 +1,426 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutomationManagement",
+    "version": "2017-05-15-preview",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/sourceControls/{sourceControlName}/sourceControlSyncJobs/{sourceControlSyncJobId}": {
+      "put": {
+        "tags": [
+          "SourceControlSyncJob"
+        ],
+        "operationId": "SourceControlSyncJob_Create",
+        "description": "Creates the sync job for a source control.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/sourcecontrolsyncjoboperations"
+        },
+        "x-ms-examples": {
+          "Create or update a source control sync job": {
+            "$ref": "./examples/sourceControlSyncJob/createSourceControlSyncJob.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "sourceControlName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The source control name."
+          },
+          {
+            "name": "sourceControlSyncJobId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "description": "The source control sync job id."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SourceControlSyncJobCreateParameters"
+            },
+            "description": "The parameters supplied to the create source control sync job operation."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SourceControlSyncJob"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "SourceControlSyncJob"
+        ],
+        "operationId": "SourceControlSyncJob_Get",
+        "description": "Retrieve the source control sync job identified by job id.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/sourcecontrolsyncjoboperations"
+        },
+        "x-ms-examples": {
+          "Get a source control sync job by job id": {
+            "$ref": "./examples/sourceControlSyncJob/getSourceControlSyncJob.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "sourceControlName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The source control name."
+          },
+          {
+            "name": "sourceControlSyncJobId",
+            "in": "path",
+            "required": true,
+            "format": "uuid",
+            "type": "string",
+            "description": "The source control sync job id."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SourceControlSyncJobById"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/sourceControls/{sourceControlName}/sourceControlSyncJobs": {
+      "get": {
+        "tags": [
+          "SourceControlSyncJob"
+        ],
+        "operationId": "SourceControlSyncJob_ListByAutomationAccount",
+        "description": "Retrieve a list of source control sync jobs.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/sourcecontrolsyncjoboperations"
+        },
+        "x-ms-examples": {
+          "Get a list of source control sync jobs": {
+            "$ref": "./examples/sourceControlSyncJob/getAllSourceControlSyncJobs.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "sourceControlName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The source control name."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SourceControlSyncJobListResult"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SourceControlSyncJobListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SourceControlSyncJob"
+          },
+          "description": "The list of source control sync jobs."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The next link."
+        }
+      },
+      "description": "The response model for the list source control sync jobs operation."
+    },
+    "SourceControlSyncJobCreateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SourceControlSyncJobCreateProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of the source control sync job."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The parameters supplied to the create source control sync job operation."
+    },
+    "SourceControlSyncJobCreateProperties": {
+      "properties": {
+        "commitId": {
+          "type": "string",
+          "description": "The commit id of the source control sync job. If not syncing to a commitId, enter an empty string.",
+          "minLength": 0
+        }
+      },
+      "required": [
+        "commitId"
+      ],
+      "description": "Definition of create source control sync job properties."
+    },
+    "SourceControlSyncJobById": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of the job."
+        },
+        "properties": {
+          "$ref": "#/definitions/SourceControlSyncJobByIdProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of the source control sync job."
+        }
+      },
+      "description": "Definition of the source control sync job."
+    },
+    "SourceControlSyncJobByIdProperties": {
+      "properties": {
+        "sourceControlSyncJobId": {
+          "type": "string",
+          "description": "The source control sync job id."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": false,
+          "readOnly": true,
+          "description": "The creation time of the job."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the job.",
+          "enum": [
+            "Completed",
+            "Failed",
+            "Running"
+          ],
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true,
+          "readOnly": true,
+          "description": "The start time of the job."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true,
+          "readOnly": true,
+          "description": "The end time of the job."
+        },
+        "syncType": {
+          "type": "string",
+          "description": "The sync type.",
+          "enum": [
+            "PartialSync",
+            "FullSync"
+          ],
+          "x-ms-enum": {
+            "name": "syncType",
+            "modelAsString": true
+          }
+        },
+        "exception": {
+          "type": "string",
+          "description": "The exceptions that occurred while running the sync job."
+        }
+      },
+      "description": "Definition of source control sync job properties."
+    },
+    "SourceControlSyncJob": {
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource id."
+        },
+        "properties": {
+          "$ref": "#/definitions/SourceControlSyncJobProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of the source control sync job."
+        }
+      },
+      "description": "Definition of the source control sync job."
+    },
+    "SourceControlSyncJobProperties": {
+      "properties": {
+        "sourceControlSyncJobId": {
+          "type": "string",
+          "description": "The source control sync job id."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": false,
+          "readOnly": true,
+          "description": "The creation time of the job."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the job.",
+          "enum": [
+            "Completed",
+            "Failed",
+            "Running"
+          ],
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true,
+          "readOnly": true,
+          "description": "The start time of the job."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true,
+          "readOnly": true,
+          "description": "The end time of the job."
+        },
+        "syncType": {
+          "type": "string",
+          "description": "The sync type.",
+          "enum": [
+            "PartialSync",
+            "FullSync"
+          ],
+          "x-ms-enum": {
+            "name": "syncType",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Definition of source control sync job properties."
+    }
+  }
+}

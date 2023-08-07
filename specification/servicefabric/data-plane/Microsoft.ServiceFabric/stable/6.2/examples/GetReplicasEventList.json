@@ -1,0 +1,51 @@
+{
+  "operationId": "GetPartitionReplicasEventList",
+  "description": "This example shows how to get all replicas-related events during a certain time window.",
+  "parameters": {
+    "partitionId": "f2a6a893-39be-4c7d-b07f-72bc2d36de89",
+    "api-version": "6.2-preview",
+    "StartTimeUtc": "2018-04-03T18:00:00Z",
+    "EndTimeUtc": "2018-04-04T18:00:00Z"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": [
+        {
+          "Kind": "StatefulReplicaHealthReportCreated",
+          "ReplicaInstanceId": 131672608994209130,
+          "SourceId": "TestSource",
+          "Property": "",
+          "HealthState": "Error",
+          "TimeToLiveMs": 922337203685477,
+          "SequenceNumber": 131672654189677787,
+          "Description": "",
+          "RemoveWhenExpired": false,
+          "SourceUtcTimestamp": "2018-04-03T21:43:38Z",
+          "PartitionId": "f2a6a893-39be-4c7d-b07f-72bc2d36de89",
+          "ReplicaId": 131672608994209130,
+          "EventInstanceId": "b2684da3-df81-4add-8baa-201f73e9195d",
+          "TimeStamp": "2018-04-03T21:43:38.8904013Z",
+          "HasCorrelatedEvents": false
+        },
+        {
+          "Kind": "StatefulReplicaHealthReportCreated",
+          "ReplicaInstanceId": 177872608994339550,
+          "SourceId": "TestSource",
+          "Property": "",
+          "HealthState": "Error",
+          "TimeToLiveMs": 922337203685477,
+          "SequenceNumber": 131672654189677788,
+          "Description": "",
+          "RemoveWhenExpired": false,
+          "SourceUtcTimestamp": "2018-04-03T21:44:38Z",
+          "PartitionId": "f549f3b3-08c2-4ec4-adb4-415e024cb0ef",
+          "ReplicaId": 177872608994339550,
+          "EventInstanceId": "4a8851d8-35a3-4618-b4ac-03ffa191c350",
+          "TimeStamp": "2018-04-03T21:44:38.8904013Z",
+          "HasCorrelatedEvents": false
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,437 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure SQL Database disaster recovery configurations",
+    "description": "Provides create, read, update, delete, and failover functionality for Azure SQL Database disaster recovery configurations.",
+    "version": "2014-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/disasterRecoveryConfiguration": {
+      "get": {
+        "tags": [
+          "DisasterRecoveryConfigurations"
+        ],
+        "operationId": "DisasterRecoveryConfigurations_List",
+        "description": "Lists a server's disaster recovery configuration.",
+        "x-ms-examples": {
+          "List Replication links": {
+            "$ref": "./examples/DisasterRecoveryConfigurationList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DisasterRecoveryConfigurationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/disasterRecoveryConfiguration/{disasterRecoveryConfigurationName}": {
+      "delete": {
+        "tags": [
+          "DisasterRecoveryConfigurations"
+        ],
+        "operationId": "DisasterRecoveryConfigurations_Delete",
+        "description": "Deletes a disaster recovery configuration.",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a disaster recovery configuration": {
+            "$ref": "./examples/DisasterRecoveryConfigurationDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "disasterRecoveryConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the disaster recovery configuration to be deleted."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DisasterRecoveryConfigurations"
+        ],
+        "operationId": "DisasterRecoveryConfigurations_CreateOrUpdate",
+        "description": "Creates or updates a disaster recovery configuration.",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a disaster recovery configuration": {
+            "$ref": "./examples/DisasterRecoveryConfigurationCreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "disasterRecoveryConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the disaster recovery configuration to be created/updated."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/DisasterRecoveryConfiguration"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/DisasterRecoveryConfiguration"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DisasterRecoveryConfiguration"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DisasterRecoveryConfigurations"
+        ],
+        "operationId": "DisasterRecoveryConfigurations_Get",
+        "description": "Gets a disaster recovery configuration.",
+        "x-ms-examples": {
+          "Get a disaster recovery configuration": {
+            "$ref": "./examples/DisasterRecoveryConfigurationGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "disasterRecoveryConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the disaster recovery configuration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DisasterRecoveryConfiguration"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/disasterRecoveryConfiguration/{disasterRecoveryConfigurationName}/failover": {
+      "post": {
+        "tags": [
+          "DisasterRecoveryConfigurations"
+        ],
+        "operationId": "DisasterRecoveryConfigurations_Failover",
+        "description": "Fails over from the current primary server to this server.",
+        "x-ms-examples": {
+          "Failover a disaster recovery configuration": {
+            "$ref": "./examples/DisasterRecoveryConfigurationFailover.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "disasterRecoveryConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the disaster recovery configuration to failover."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/disasterRecoveryConfiguration/{disasterRecoveryConfigurationName}/forceFailoverAllowDataLoss": {
+      "post": {
+        "tags": [
+          "DisasterRecoveryConfigurations"
+        ],
+        "operationId": "DisasterRecoveryConfigurations_FailoverAllowDataLoss",
+        "description": "Fails over from the current primary server to this server. This operation might result in data loss.",
+        "x-ms-examples": {
+          "Failover a disaster recovery configuration": {
+            "$ref": "./examples/DisasterRecoveryConfigurationFailover.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "disasterRecoveryConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the disaster recovery configuration to failover forcefully."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "DisasterRecoveryConfigurationProperties": {
+      "properties": {
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The status of the disaster recovery configuration.",
+          "enum": [
+            "Creating",
+            "Ready",
+            "FailingOver",
+            "Dropping"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "DisasterRecoveryConfigurationStatus"
+          }
+        },
+        "autoFailover": {
+          "type": "string",
+          "description": "Whether or not failover can be done automatically.",
+          "enum": [
+            "Off",
+            "On"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "DisasterRecoveryConfigurationAutoFailover"
+          }
+        },
+        "failoverPolicy": {
+          "type": "string",
+          "description": "How aggressive the automatic failover should be.",
+          "enum": [
+            "Manual",
+            "Automatic"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "DisasterRecoveryConfigurationFailoverPolicy"
+          }
+        },
+        "partnerServerId": {
+          "type": "string",
+          "description": "Id of the partner server."
+        },
+        "logicalServerName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Logical name of the server."
+        },
+        "partnerLogicalServerName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Logical name of the partner server."
+        },
+        "role": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The role of the current server in the disaster recovery configuration.",
+          "enum": [
+            "None",
+            "Primary",
+            "Secondary"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "DisasterRecoveryConfigurationRole"
+          }
+        }
+      },
+      "required": [
+        "autoFailover",
+        "failoverPolicy",
+        "partnerServerId"
+      ],
+      "description": "Represents the properties of a disaster recovery configuration."
+    },
+    "DisasterRecoveryConfiguration": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DisasterRecoveryConfigurationProperties",
+          "description": "The properties representing the resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of resource this is."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the server that contains this disaster recovery configuration.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Represents a disaster recovery configuration."
+    },
+    "DisasterRecoveryConfigurationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DisasterRecoveryConfiguration"
+          },
+          "description": "The list of disaster recovery configurations housed under the server."
+        }
+      },
+      "description": "Represents the response to a List disaster recovery configuration request."
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the server.",
+      "x-ms-parameter-location": "method"
+    },
+    "DisasterRecoveryConfigurationNameParameter": {
+      "name": "disasterRecoveryConfigName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the disaster recovery configuration.",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

@@ -1,0 +1,295 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2015-11-01",
+    "title": "SubscriptionClient",
+    "description": "The User Subscription Management Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions": {
+      "get": {
+        "x-ms-examples": {
+          "Get the list of subscriptions.": {
+            "$ref": "./examples/Subscriptions/List.json"
+          }
+        },
+        "description": "Get the list of subscriptions.",
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get the specified subscription.": {
+            "$ref": "./examples/Subscriptions/Get.json"
+          }
+        },
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_Get",
+        "description": "Gets details about particular subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create or updates a subscription": {
+            "$ref": "./examples/Subscriptions/Create.json"
+          }
+        },
+        "description": "Create or updates a subscription.",
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionDefinitionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete the specified subscription": {
+            "$ref": "./examples/Subscriptions/Delete.json"
+          }
+        },
+        "description": "Delete the specified subscription.",
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "description": "Base Resource Object",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "description": "URI of the resource.",
+          "type": "string"
+        },
+        "name": {
+          "readOnly": true,
+          "description": "Name of the resource.",
+          "type": "string"
+        },
+        "type": {
+          "readOnly": true,
+          "description": "Type of resource.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location of the resource",
+          "type": "string"
+        },
+        "tags": {
+          "readOnly": true,
+          "description": "List of key-value pairs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "Subscription": {
+      "description": "List of supported operations.",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "Subscription name.",
+          "type": "string"
+        },
+        "id": {
+          "description": "Fully qualified identifier.",
+          "type": "string"
+        },
+        "offerId": {
+          "description": "Identifier of the offer under the scope of a delegated provider.",
+          "type": "string"
+        },
+        "state": {
+          "description": "Subscription state.",
+          "$ref": "#/definitions/SubscriptionState"
+        },
+        "subscriptionId": {
+          "description": "Subscription identifier.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "Directory tenant identifier.",
+          "type": "string"
+        }
+      }
+    },
+    "SubscriptionList": {
+      "description": "List of subscriptions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Subscription definition.",
+          "items": {
+            "$ref": "#/definitions/Subscription"
+          }
+        },
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        }
+      }
+    },
+    "SubscriptionState": {
+      "description": "Subscription notification state.",
+      "type": "string",
+      "enum": [
+        "NotDefined",
+        "Enabled",
+        "Warned",
+        "PastDue",
+        "Disabled",
+        "Deleted"
+      ],
+      "x-ms-enum": {
+        "name": "SubscriptionState",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client Api Version.",
+      "required": true,
+      "type": "string",
+      "default": "2015-11-01"
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Id of the subscription.",
+      "x-ms-parameter-location": "method"
+    },
+    "SubscriptionDefinitionParameter": {
+      "description": "Subscription parameter.",
+      "name": "subscriptionDefinition",
+      "in": "body",
+      "schema": {
+        "$ref": "#/definitions/Subscription"
+      },
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

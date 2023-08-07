@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2019-03-01",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "DefaultRuleSet_1.0",
+            "id": "/subscriptions/subid/providers/Microsoft.Network/FrontDoorWebApplicationFirewallManagedRuleSets",
+            "type": "Microsoft.Network/frontdoorwebapplicationfirewallmanagedrulesets",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "ruleSetId": "8125d145-ddc5-4d90-9bc3-24c5f2de69a2",
+              "ruleSetType": "DefaultRuleSet",
+              "ruleSetVersion": "1.0",
+              "ruleGroups": [
+                {
+                  "ruleGroupName": "Group1",
+                  "description": "Description for rule group 1.",
+                  "rules": [
+                    {
+                      "ruleId": "GROUP1-0001",
+                      "description": "Generic managed web application firewall rule.",
+                      "defaultState": "Enabled",
+                      "defaultAction": "Block"
+                    },
+                    {
+                      "ruleId": "GROUP1-0002",
+                      "description": "Generic managed web application firewall rule.",
+                      "defaultState": "Disabled",
+                      "defaultAction": "Block"
+                    }
+                  ]
+                },
+                {
+                  "ruleGroupName": "Group2",
+                  "description": "Description for rule group 2.",
+                  "rules": [
+                    {
+                      "ruleId": "GROUP2-0001",
+                      "description": "Generic managed web application firewall rule.",
+                      "defaultState": "Enabled",
+                      "defaultAction": "Allow"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
