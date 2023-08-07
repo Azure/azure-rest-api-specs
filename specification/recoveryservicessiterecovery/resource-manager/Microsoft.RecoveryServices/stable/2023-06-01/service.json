@@ -10197,14 +10197,15 @@
           "items": {
             "$ref": "#/definitions/DataStoreUtilizationDetails"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "disksReplicationDetails": {
           "$ref": "#/definitions/ApplianceResourceDetails",
           "description": "The disk replication details.",
           "readOnly": true
         },
-        "esxiNFCBuffer": {
+        "esxiNfcBuffer": {
           "$ref": "#/definitions/ApplianceResourceDetails",
           "description": "The ESXi NFC buffer details.",
           "readOnly": true
@@ -11980,19 +11981,19 @@
         },
         "timeElapsed": {
           "format": "int64",
-          "description": "A value indicating the time elapsed for the operation in seconds.",
+          "description": "A value indicating the time elapsed for the operation in milliseconds.",
           "type": "integer",
           "readOnly": true
         },
         "timeRemaining": {
           "format": "int64",
-          "description": "A value indicating the time remaining for the operation in seconds.",
+          "description": "A value indicating the time remaining for the operation in milliseconds.",
           "type": "integer",
           "readOnly": true
         },
         "uploadSpeed": {
           "format": "int64",
-          "description": "A value indicating the upload speed in Mbps.",
+          "description": "A value indicating the upload speed in bytes per second.",
           "type": "integer",
           "readOnly": true
         },
@@ -12011,7 +12012,7 @@
         },
         "vmwareReadThroughput": {
           "format": "int64",
-          "description": "A value indicating the VMware read throughput in Mbps.",
+          "description": "A value indicating the VMware read throughput in bytes per second.",
           "type": "integer",
           "readOnly": true
         }
@@ -12827,7 +12828,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/HyperVReplicaAzureManagedDiskDetails"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "allAvailableOSUpgradeConfigurations": {
           "description": "A value indicating all available inplace OS Upgrade configurations.",
@@ -14484,7 +14486,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "allAvailableOSUpgradeConfigurations": {
           "description": "A value indicating all available inplace OS Upgrade configurations.",
