@@ -43,6 +43,7 @@ batch:
   - tag: package-2022-09
   - tag: package-2022-10
   - tag: package-2022-12
+  - tag: package-2023-03
 ```
 
 ### Tag: package-2018-01 and go
@@ -151,4 +152,13 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2022-12' && $(go)
 output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2022-12-01/$(namespace)
+```
+
+### Tag: package-2023-03 and go
+
+These settings apply only when `--tag=package-2023-03 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2023-03' && $(go)
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2023-03-01/$(namespace)
 ```

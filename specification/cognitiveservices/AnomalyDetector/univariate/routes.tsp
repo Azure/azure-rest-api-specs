@@ -12,7 +12,7 @@ namespace AnomalyDetector.Univariate;
 @post
 @doc("Operation template for univariate anomaly detection service action.")
 op UnivariateServiceAction<TParams, TResponse>(
-  ...TParams
+  ...TParams,
 ): TResponse | AnomalyDetectorError;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure core RpcOperation does not support custom error response"
@@ -25,14 +25,16 @@ with the same model. With this method, points before and after a certain point
 are used to determine whether it's an anomaly. The entire detection can give the
 user an overall status of the time series.
 """)
-op DetectUnivariateEntireSeries is UnivariateServiceAction<
+op detectUnivariateEntireSeries is UnivariateServiceAction<
   // TParams
   {
     @doc("Method of univariate anomaly detection.")
-    @body options: UnivariateDetectionOptions,
+    @body
+    options: UnivariateDetectionOptions;
   },
   // TResponse
-  UnivariateEntireDetectionResult>;
+  UnivariateEntireDetectionResult
+>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure core RpcOperation does not support custom error response"
 // https://github.com/Azure/typespec-azure/issues/2795
@@ -42,25 +44,29 @@ op DetectUnivariateEntireSeries is UnivariateServiceAction<
 This operation generates a model by using the points that you sent in to the API
 and based on all data to determine whether the last point is anomalous.
 """)
-op DetectUnivariateLastPoint is UnivariateServiceAction<
+op detectUnivariateLastPoint is UnivariateServiceAction<
   // TParams
   {
     @doc("Method of univariate anomaly detection.")
-    @body options: UnivariateDetectionOptions,
+    @body
+    options: UnivariateDetectionOptions;
   },
   // TResponse
-  UnivariateLastDetectionResult>;
+  UnivariateLastDetectionResult
+>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure core RpcOperation does not support custom error response"
 // https://github.com/Azure/typespec-azure/issues/2795
 @route("timeseries/changepoint/detect")
 @summary("Detect change point for the entire series")
 @doc("Evaluate the change point score of every series point.")
-op DetectUnivariateChangePoint is UnivariateServiceAction<
+op detectUnivariateChangePoint is UnivariateServiceAction<
   // TParams
   {
     @doc("Method of univariate anomaly detection.")
-    @body options: UnivariateChangePointDetectionOptions,
+    @body
+    options: UnivariateChangePointDetectionOptions;
   },
   // TResponse
-  UnivariateChangePointDetectionResult>;
+  UnivariateChangePointDetectionResult
+>;

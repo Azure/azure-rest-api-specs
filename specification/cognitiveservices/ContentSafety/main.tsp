@@ -28,6 +28,7 @@ https://<resource-name>.cognitiveservices.azure.com).
 @doc("Analyze harmful content")
 namespace ContentSafety;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_04_30_Preview: "2023-04-30-preview",
