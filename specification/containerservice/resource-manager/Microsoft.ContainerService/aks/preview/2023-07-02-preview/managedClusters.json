@@ -1375,7 +1375,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List Agent Pools by Managed Cluster": {
+          "List Machines in an Agentpool by Managed Cluster": {
             "$ref": "./examples/MachineList.json"
           }
         }
@@ -1422,12 +1422,9 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "List Agent Pools by Managed Cluster": {
-            "$ref": "./examples/MachineList.json"
+          "Get a Machine in an Agent Pools by Managed Cluster": {
+            "$ref": "./examples/MachineGet.json"
           }
         }
       }
@@ -3934,6 +3931,11 @@
     },
     "MachineListResult": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -3967,6 +3969,11 @@
     },
     "MachineProperties": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
       "readOnly": true,
       "description": "properties of the machine",
       "properties": {
@@ -3983,6 +3990,11 @@
     "MachineNetworkProperties": {
       "type": "object",
       "readOnly": true,
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
       "description": "network properties of the machine",
       "properties": {
         "ipAddresses": {
@@ -3998,6 +4010,11 @@
     "MachineIpAddress": {
       "type": "object",
       "readOnly": true,
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
       "description": "The machine IP address details.",
       "properties": {
         "ip": {
