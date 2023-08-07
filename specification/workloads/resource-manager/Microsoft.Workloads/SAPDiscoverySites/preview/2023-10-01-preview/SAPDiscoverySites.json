@@ -1222,13 +1222,13 @@
         "saps": {
           "description": "Provide the SAPS for each server of the SAP system. This should be a non-zero value. For example, 1000.",
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "readOnly": true
         },
         "cpu": {
           "description": "Provide the CPU value of the server. For example, 16, 32 etc.",
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "readOnly": true
         },
         "cpuType": {
@@ -1239,13 +1239,13 @@
         "cpuInMhz": {
           "description": "Provide the CPU clock speed of the server in MHz. This should be a non-zero value. For example, 2100.",
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "readOnly": true
         },
         "ram": {
           "description": "Provide the RAM of the server. This should be a non-zero value. For example, 256.",
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "readOnly": true
         },
         "hardwareManufacturer": {
@@ -1261,13 +1261,13 @@
         "totalDiskSizeGB": {
           "description": "Provide the total disk volume capacity in GB. Add the disk volume for each individual disks and provide the total sum in this field.",
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "readOnly": true
         },
         "totalDiskIops": {
           "description": "Provide the total disk IOPS capacity. Add the disk volume for each individual disk and provide the sum total in this field.",
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "readOnly": true
         },
         "databaseType": {
@@ -1278,7 +1278,7 @@
         "targetHanaRamSizeGB": {
           "description": " Provide the target HANA database size you need. Applicable only if SAP instance type for this server instance is 'DB' and you are migrating an AnyDb database to SAP S/4HANA.",
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "readOnly": true
         }
       }
@@ -1316,7 +1316,7 @@
         "totalSourceDbSizeGB": {
           "description": "Provide the source Database size in GB. Applicable only if SAP instance type for this server instance is 'DB'.",
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "readOnly": true
         }
       }
@@ -1444,12 +1444,12 @@
       "enum": [
         "Adabas",
         "Oracle",
-        "SAP MaxDB",
+        "SAPMaxDB",
         "Db2",
-        "SAP ASE",
-        "SQL Server",
+        "SAPASE",
+        "SQLServer",
         "Informix",
-        "SAP DB",
+        "SAPDB",
         "HANA"
       ],
       "type": "string",
@@ -1462,12 +1462,12 @@
     "OperatingSystem": {
       "description": "This is Operating System on which the host server is running.",
       "enum": [
-        "IBM",
-        "Red Hat",
+        "IBMAIX",
+        "RedHat",
         "SUSE",
         "Solaris",
         "Unix",
-        "Windows Server"
+        "WindowsServer"
       ],
       "type": "string",
       "readOnly": true,
