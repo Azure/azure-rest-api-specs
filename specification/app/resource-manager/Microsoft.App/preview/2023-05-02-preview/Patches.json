@@ -360,6 +360,20 @@
       },
       "readOnly": true
     },
+    "DetectionStatus": {
+      "type": "string",
+      "description": "The status of the patch detection.",
+      "enum": [
+        "Succeeded",
+        "RegistryLoginFailed",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "DetectionStatus",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
     "PatchDetails": {
       "description": "The details of specific patch item.",
       "type": "object",
@@ -372,18 +386,9 @@
           "type": "string",
           "description": "The name of the target image for the patch."
         },
-        "DetectionStatus": {
-          "type": "string",
+        "detectionStatus": {
+          "$ref": "#/definitions/DetectionStatus",
           "description": "The status of the patch detection.",
-          "enum": [
-            "Succeeded",
-            "RegistryLoginFailed",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "DetectionStatus",
-            "modelAsString": true
-          },
           "readOnly": true
         },
         "newImageName": {
@@ -466,11 +471,6 @@
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Patch provisioning state.",
-          "readOnly": true
-        },
-        "detectionStatus": {
-          "$ref": "#/definitions/DetectionStatus",
-          "description": "The status of the patch detection.",
           "readOnly": true
         },
         "patchApplyStatus": {
