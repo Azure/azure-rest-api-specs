@@ -7,20 +7,22 @@ using TypeSpec.Versioning;
 
 @added(ServiceApiVersions.v2023_08_01_Preview)
 @doc("""
-  A representation of configuration data for a single Azure OpenAI data source as used with chat extensions to
-  augment the behavior of a chat completions request. The use of this configuration is compatible only with
-  Azure OpenAI.
+  A representation of configuration data for a single Azure OpenAI chat extension as used by a corresponding chat
+  completions request that should use Azure OpenAI chat extensions to augment its behavior.
+  The use of this configuration is compatible only with Azure OpenAI.
 """)
-model AzureChatDataSourceConfiguration {
+model AzureChatExtensionConfiguration {
   @doc("""
-    The label for the type of an Azure chat extension data source, corresponding to a matching Azure resource.
+    The label for the type of an Azure chat extension. This typically corresponds to a matching Azure resource.
+    Azure chat extensions are only compatible with Azure OpenAI.
   """)
   type: string;
 
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "API explicitly uses arbitrary JSON structure"
   @doc("""
-    The configuration payload used for the data source, with structure and payload details specific to the data source
-    being specified.
+    The configuration payload used for the Azure chat extension. The structure payload details are specific to the
+    extension being configured.
+    Azure chat extensions are only compatible with Azure OpenAI.
   """)
   parameters: unknown;
 }
@@ -33,9 +35,9 @@ model AzureChatDataSourceConfiguration {
 """)
 model AzureChatExtensionsMessageContext {
   @doc("""
-    The contextual message payload associated with the Azure Extensions used for a Chat Completions request.
+    The contextual message payload associated with the Azure chat extensions used for a chat completions request.
     These messages describe the data source retrievals, plugin invocations, and other intermediate steps taken in the
-    course of generating a Chat Completions request augmented by Azure capabilities.
+    course of generating a chat completions response that was augmented by capabilities from Azure chat extensions.
   """)
   messages?: ChatMessage[];
 }

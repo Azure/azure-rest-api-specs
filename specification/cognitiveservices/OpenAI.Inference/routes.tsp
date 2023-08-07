@@ -54,8 +54,8 @@ op getChatCompletions is ResourceAction<
 
 @doc("""
 Gets chat completions for the provided chat messages.
-This is an Azure-specific version of Chat Completions that supports integration with configured data sources and
-other augmentations to the base Chat Completions capability.
+This is an Azure-specific version of chat completions that supports integration with configured data sources and
+other augmentations to the base chat completions capabilities.
 """)
 // Note: client libraries should abstract the existence of this as a distinct REST route and instead perform dynamic
 //        selection of the appropriate request URL structure based on the presence or non-presence of matching

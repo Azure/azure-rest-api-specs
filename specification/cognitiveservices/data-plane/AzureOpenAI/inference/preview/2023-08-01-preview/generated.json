@@ -200,7 +200,7 @@
     "/deployments/{deploymentId}/extensions/chat/completions": {
       "post": {
         "operationId": "GetChatCompletionsWithAzureExtensions",
-        "description": "Gets chat completions for the provided chat messages.\nThis is an Azure-specific version of Chat Completions that supports integration with configured data sources and\nother augmentations to the base Chat Completions capability.",
+        "description": "Gets chat completions for the provided chat messages.\nThis is an Azure-specific version of chat completions that supports integration with configured data sources and\nother augmentations to the base chat completions capabilities.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -390,16 +390,16 @@
         }
       }
     },
-    "AzureChatDataSourceConfiguration": {
+    "AzureChatExtensionConfiguration": {
       "type": "object",
-      "description": "  A representation of configuration data for a single Azure OpenAI data source as used with chat extensions to\n  augment the behavior of a chat completions request. The use of this configuration is compatible only with\n  Azure OpenAI.",
+      "description": "  A representation of configuration data for a single Azure OpenAI chat extension as used by a corresponding chat\n  completions request that should use Azure OpenAI chat extensions to augment its behavior.\n  The use of this configuration is compatible only with Azure OpenAI.",
       "properties": {
         "type": {
           "type": "string",
-          "description": "  The label for the type of an Azure chat extension data source, corresponding to a matching Azure resource."
+          "description": "  The label for the type of an Azure chat extension. This typically corresponds to a matching Azure resource.\n  Azure chat extensions are only compatible with Azure OpenAI."
         },
         "parameters": {
-          "description": "  The configuration payload used for the data source, with structure and payload details specific to the data source\n  being specified."
+          "description": "  The configuration payload used for the Azure chat extension. The structure payload details are specific to the\n  extension being configured.\n  Azure chat extensions are only compatible with Azure OpenAI."
         }
       },
       "required": [
@@ -413,7 +413,7 @@
       "properties": {
         "messages": {
           "type": "array",
-          "description": "  The contextual message payload associated with the Azure Extensions used for a Chat Completions request.\n  These messages describe the data source retrievals, plugin invocations, and other intermediate steps taken in the\n  course of generating a Chat Completions request augmented by Azure capabilities.",
+          "description": "  The contextual message payload associated with the Azure chat extensions used for a chat completions request.\n  These messages describe the data source retrievals, plugin invocations, and other intermediate steps taken in the\n  course of generating a chat completions response that was augmented by capabilities from Azure chat extensions.",
           "items": {
             "$ref": "#/definitions/ChatMessage"
           },
@@ -666,7 +666,7 @@
           "type": "array",
           "description": "  The data source configuration entries for Azure OpenAI extensions that use them.\n  This configuration information is only compatible with Azure OpenAI.",
           "items": {
-            "$ref": "#/definitions/AzureChatDataSourceConfiguration"
+            "$ref": "#/definitions/AzureChatExtensionConfiguration"
           },
           "x-ms-identifiers": []
         }
@@ -699,7 +699,7 @@
         },
         "azureExtensionsContext": {
           "$ref": "#/definitions/AzureChatExtensionsMessageContext",
-          "description": "  Additional context data associated with a Chat Message when requesting Chat Completions using compatible Azure\n  extensions. This includes information like the intermediate data source retrievals used to service a request.\n  This context information is only populated when using Azure OpenAI with extensions capabilities configured."
+          "description": "  Additional context data associated with a chat message when requesting chat completions using compatible Azure\n  OpenAI chat extensions. This includes information like the intermediate data source retrievals used to service a\n  request.\n  This context information is only populated when using Azure OpenAI with chat extensions capabilities configured."
         }
       },
       "required": [

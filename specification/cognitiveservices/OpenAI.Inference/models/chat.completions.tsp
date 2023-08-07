@@ -52,9 +52,10 @@ model ChatMessage {
   functionCall?: FunctionCall;
 
   @doc("""
-    Additional context data associated with a Chat Message when requesting Chat Completions using compatible Azure
-    extensions. This includes information like the intermediate data source retrievals used to service a request.
-    This context information is only populated when using Azure OpenAI with extensions capabilities configured.
+    Additional context data associated with a chat message when requesting chat completions using compatible Azure
+    OpenAI chat extensions. This includes information like the intermediate data source retrievals used to service a
+    request.
+    This context information is only populated when using Azure OpenAI with chat extensions capabilities configured.
   """)
   @added(ServiceApiVersions.v2023_08_01_Preview)
   azureExtensionsContext?: AzureChatExtensionsMessageContext;
@@ -189,11 +190,11 @@ model ChatCompletionsOptions {
     This configuration information is only compatible with Azure OpenAI.
   """)
   // Note: client libraries should wrap this dataSources array in a top-level model for all Azure OpenAI extensions
-  //        configuration. Future versions of the service API may represent this structure directly.
+  //        configuration. Future versions of the service API may represent this structure directly on the wire.
   @added(ServiceApiVersions.v2023_08_01_Preview)
   @projectedName("json", "dataSources")
   @projectedName("csharp", "InternalAzureExtensionsDataSources")
-  dataSources?: AzureChatDataSourceConfiguration[];
+  dataSources?: AzureChatExtensionConfiguration[];
 }
 
 @doc("""
