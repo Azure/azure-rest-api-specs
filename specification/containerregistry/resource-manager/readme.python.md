@@ -23,6 +23,7 @@ clear-output-folder: true
 batch:
   - tag: package-2023-08-preview-only
   - tag: package-2023-07-only
+  - tag: package-2023-06-preview-only
   - tag: package-2023-01-preview-only
   - tag: package-2022-12-only
   - tag: package-2022-02-preview-only
