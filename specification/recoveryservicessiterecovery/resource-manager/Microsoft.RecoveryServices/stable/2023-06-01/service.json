@@ -10179,8 +10179,11 @@
           "readOnly": true
         },
         "datastoreSnapshot": {
-          "$ref": "#/definitions/ApplianceResourceDetails",
           "description": "The appliance datastore snapshot details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataStoreUtilizationDetails"
+          },
           "readOnly": true
         },
         "disksReplicationDetails": {
@@ -10968,6 +10971,29 @@
         "type": {
           "description": "The type of data store.",
           "type": "string"
+        }
+      }
+    },
+    "DataStoreUtilizationDetails": {
+      "description": "Details of the appliance resource.",
+      "type": "object",
+      "properties": {
+        "totalSnapshotsSupported": {
+          "format": "int64",
+          "description": "The total count of snapshots supported by the datastore.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "totalSnapshotsCreated": {
+          "format": "int64",
+          "description": "The total snapshots created for server migration in the datastore.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "dataStoreName": {
+          "description": "The datastore name.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
