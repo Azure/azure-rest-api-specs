@@ -22,16 +22,15 @@
         "parameters": [
           {
             "in": "query",
-            "name": "api-version",
-            "description": "The requested API version",
-            "required": true,
+            "name": "skipToken",
+            "description": "Skip token for getting next set of results.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "maxPageSize",
             "format": "int32",
-            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "description": "Maximum number of items needed (inclusive). Minimum = 10, Maximum = 1000, Default Value = 50.",
             "default": 50,
             "maximum": 1000,
             "minimum": 10,
@@ -39,8 +38,9 @@
           },
           {
             "in": "query",
-            "name": "skipToken",
-            "description": "Skip token for getting next set of results.",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
             "type": "string"
           },
           {
@@ -2998,16 +2998,15 @@
         "parameters": [
           {
             "in": "query",
-            "name": "api-version",
-            "description": "The requested API version",
-            "required": true,
+            "name": "skipToken",
+            "description": "Skip token for getting next set of results.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "maxPageSize",
             "format": "int32",
-            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "description": "Maximum number of items needed (inclusive). Minimum = 10, Maximum = 1000, Default Value = 50.",
             "default": 50,
             "maximum": 1000,
             "minimum": 10,
@@ -3015,8 +3014,9 @@
           },
           {
             "in": "query",
-            "name": "skipToken",
-            "description": "Skip token for getting next set of results.",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
             "type": "string"
           },
           {
@@ -3391,16 +3391,15 @@
         "parameters": [
           {
             "in": "query",
-            "name": "api-version",
-            "description": "The requested API version",
-            "required": true,
+            "name": "skipToken",
+            "description": "Skip token for getting next set of results.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "maxPageSize",
             "format": "int32",
-            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "description": "Maximum number of items needed (inclusive). Minimum = 10, Maximum = 1000, Default Value = 50.",
             "default": 50,
             "maximum": 1000,
             "minimum": 10,
@@ -3408,8 +3407,9 @@
           },
           {
             "in": "query",
-            "name": "skipToken",
-            "description": "Skip token for getting next set of results.",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
             "type": "string"
           },
           {
@@ -7527,6 +7527,65 @@
         }
       }
     },
+    "/parties:overlap": {
+      "post": {
+        "tags": [
+          "Parties"
+        ],
+        "description": "Returns overlapping area between two resources.",
+        "operationId": "Parties_PostOverlap",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "overlapResources",
+            "description": "Overlap Resources.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OverlapResourcesQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PartyOverlapResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Parties_PostOverlap": {
+            "$ref": "./examples/Parties_PostOverlap.json"
+          }
+        }
+      }
+    },
     "/parties/{partyId}": {
       "get": {
         "tags": [
@@ -7817,62 +7876,6 @@
         }
       }
     },
-    "/parties:overlap": {
-      "post": {
-        "tags": [
-          "Parties"
-        ],
-        "description": "Returns overlapping area between two resources.",
-        "operationId": "Parties_PostOverlap",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "resources",
-            "description": "Overlap resources payload with array of resources",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PartyOverlap"
-            }
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "The requested API version",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/PartyOverlapResponse"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "x-ms-client-name": "ErrorCode"
-              }
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "Parties_PostOverlap": {
-            "$ref": "./examples/Parties_PostOverlap.json"
-          }
-        }
-      }
-    },
     "/parties/{partyId}/planting-data/{plantingDataId}": {
       "get": {
         "tags": [
@@ -8083,16 +8086,15 @@
         "parameters": [
           {
             "in": "query",
-            "name": "api-version",
-            "description": "The requested API version",
-            "required": true,
+            "name": "skipToken",
+            "description": "Skip token for getting next set of results.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "maxPageSize",
             "format": "int32",
-            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "description": "Maximum number of items needed (inclusive). Minimum = 10, Maximum = 1000, Default Value = 50.",
             "default": 50,
             "maximum": 1000,
             "minimum": 10,
@@ -8100,8 +8102,9 @@
           },
           {
             "in": "query",
-            "name": "skipToken",
-            "description": "Skip token for getting next set of results.",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
             "type": "string"
           },
           {
@@ -8476,16 +8479,15 @@
         "parameters": [
           {
             "in": "query",
-            "name": "api-version",
-            "description": "The requested API version",
-            "required": true,
+            "name": "skipToken",
+            "description": "Skip token for getting next set of results.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "maxPageSize",
             "format": "int32",
-            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "description": "Maximum number of items needed (inclusive). Minimum = 10, Maximum = 1000, Default Value = 50.",
             "default": 50,
             "maximum": 1000,
             "minimum": 10,
@@ -8493,8 +8495,9 @@
           },
           {
             "in": "query",
-            "name": "skipToken",
-            "description": "Skip token for getting next set of results.",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
             "type": "string"
           },
           {
@@ -9562,16 +9565,15 @@
         "parameters": [
           {
             "in": "query",
-            "name": "api-version",
-            "description": "The requested API version",
-            "required": true,
+            "name": "skipToken",
+            "description": "Skip token for getting next set of results.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "maxPageSize",
             "format": "int32",
-            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "description": "Maximum number of items needed (inclusive). Minimum = 10, Maximum = 1000, Default Value = 50.",
             "default": 50,
             "maximum": 1000,
             "minimum": 10,
@@ -9579,8 +9581,9 @@
           },
           {
             "in": "query",
-            "name": "skipToken",
-            "description": "Skip token for getting next set of results.",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
             "type": "string"
           },
           {
@@ -10390,16 +10393,15 @@
         "parameters": [
           {
             "in": "query",
-            "name": "api-version",
-            "description": "The requested API version",
-            "required": true,
+            "name": "skipToken",
+            "description": "Skip token for getting next set of results.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "maxPageSize",
             "format": "int32",
-            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "description": "Maximum number of items needed (inclusive). Minimum = 10, Maximum = 1000, Default Value = 50.",
             "default": 50,
             "maximum": 1000,
             "minimum": 10,
@@ -10407,8 +10409,9 @@
           },
           {
             "in": "query",
-            "name": "skipToken",
-            "description": "Skip token for getting next set of results.",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
             "type": "string"
           },
           {
@@ -13080,16 +13083,15 @@
         "parameters": [
           {
             "in": "query",
-            "name": "api-version",
-            "description": "The requested API version",
-            "required": true,
+            "name": "skipToken",
+            "description": "Skip token for getting next set of results.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "maxPageSize",
             "format": "int32",
-            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "description": "Maximum number of items needed (inclusive). Minimum = 10, Maximum = 1000, Default Value = 50.",
             "default": 50,
             "maximum": 1000,
             "minimum": 10,
@@ -13097,8 +13099,9 @@
           },
           {
             "in": "query",
-            "name": "skipToken",
-            "description": "Skip token for getting next set of results.",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
             "type": "string"
           },
           {
@@ -13532,16 +13535,15 @@
         "parameters": [
           {
             "in": "query",
-            "name": "api-version",
-            "description": "The requested API version",
-            "required": true,
+            "name": "skipToken",
+            "description": "Skip token for getting next set of results.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "maxPageSize",
             "format": "int32",
-            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "description": "Maximum number of items needed (inclusive). Minimum = 10, Maximum = 1000, Default Value = 50.",
             "default": 50,
             "maximum": 1000,
             "minimum": 10,
@@ -13549,8 +13551,9 @@
           },
           {
             "in": "query",
-            "name": "skipToken",
-            "description": "Skip token for getting next set of results.",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
             "type": "string"
           },
           {
@@ -13987,7 +13990,7 @@
       }
     },
     "ApplicationDataMetaDataListResponse": {
-      "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
+      "description": "Paged response contains list of requested objects and a skipToken to get the next set of results.",
       "required": [
         "value"
       ],
@@ -15465,7 +15468,7 @@
       }
     },
     "FieldMetaDataListResponse": {
-      "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
+      "description": "Paged response contains list of requested objects and a skipToken to get the next set of results.",
       "required": [
         "value"
       ],
@@ -15508,6 +15511,35 @@
       "x-ms-enum": {
         "name": "GeoJsonObjectType",
         "modelAsString": true
+      }
+    },
+    "GeoResource": {
+      "description": "Schema for storing resource type and  resource id.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Resource Type.",
+          "enum": [
+            "Field",
+            "SeasonalField",
+            "Zone",
+            "Prescription",
+            "PlantTissueAnalysis",
+            "PlantingData",
+            "ApplicationData",
+            "HarvestData",
+            "TillageData"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FarmHierarchyGeoResourceType",
+            "modelAsString": true
+          }
+        },
+        "id": {
+          "description": "Resource Id.",
+          "type": "string"
+        }
       }
     },
     "HarvestData": {
@@ -15768,7 +15800,7 @@
       }
     },
     "HarvestDataMetaDataListResponse": {
-      "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
+      "description": "Paged response contains list of requested objects and a skipToken to get the next set of results.",
       "required": [
         "value"
       ],
@@ -17030,30 +17062,48 @@
     },
     "OverlapResource": {
       "description": "Schema of overlap resource.",
-      "type": "object",
       "required": [
         "partyId",
-        "resourceType",
-        "resourceId"
+        "resourceId",
+        "resourceType"
       ],
+      "type": "object",
       "properties": {
         "partyId": {
           "description": "Party Id of the resource.",
+          "minLength": 1,
           "type": "string"
         },
         "resourceType": {
           "description": "Resource type of the resource.",
+          "minLength": 1,
           "type": "string"
         },
         "resourceId": {
           "description": "Id of the resource.",
+          "minLength": 1,
           "type": "string"
         },
         "resourceArea": {
           "format": "double",
-          "description": "Acreage of resource.",
+          "description": "Acreage of the resource.",
           "type": "number",
           "readOnly": true
+        }
+      }
+    },
+    "OverlapResourcesQuery": {
+      "description": "Overlap Resource Query Parameters.",
+      "type": "object",
+      "properties": {
+        "resources": {
+          "description": "List of resources.",
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OverlapResource"
+          }
         }
       }
     },
@@ -17154,40 +17204,22 @@
         }
       }
     },
-    "PartyOverlap": {
-      "description": "Party overlap request contains a list of resources to get the overlapping area.",
-      "required": [
-        "resources"
-      ],
-      "type": "object",
-      "properties": {
-        "resources": {
-          "description": "List of resources.",
-          "type": "array",
-          "minItems": 2,
-          "maxItems": 2,
-          "items": {
-            "$ref": "#/definitions/OverlapResource"
-          }
-        }
-      }
-    },
     "PartyOverlapResponse": {
-      "description": "Schema of resource overlap response.",
+      "description": "Schema of Party Overlap Response.",
       "type": "object",
       "properties": {
         "resources": {
-          "description": "List of resources with area.",
-          "type": "array",
-          "minItems": 2,
+          "description": "Resources with area.",
           "maxItems": 2,
+          "minItems": 2,
+          "type": "array",
           "items": {
             "$ref": "#/definitions/OverlapResource"
           }
         },
         "overlappingArea": {
           "format": "double",
-          "description": "Acreage of overlapping resource.",
+          "description": "Acreage of overlapping area.",
           "type": "number"
         }
       }
@@ -17490,7 +17522,7 @@
       }
     },
     "PlantTissueAnalysisMetaDataListResponse": {
-      "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
+      "description": "Paged response contains list of requested objects and a skipToken to get the next set of results.",
       "required": [
         "value"
       ],
@@ -17749,7 +17781,7 @@
       }
     },
     "PlantingDataMetaDataListResponse": {
-      "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
+      "description": "Paged response contains list of requested objects and a skipToken to get the next set of results.",
       "required": [
         "value"
       ],
@@ -18204,7 +18236,7 @@
       }
     },
     "PrescriptionMetaDataListResponse": {
-      "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
+      "description": "Paged response contains list of requested objects and a skipToken to get the next set of results.",
       "required": [
         "value"
       ],
@@ -18243,35 +18275,6 @@
           "description": "Product of the resource.",
           "maxLength": 100,
           "minLength": 0,
-          "type": "string"
-        }
-      }
-    },
-    "GeoResource": {
-      "description": "Schema for storing resource type and  resource id.",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Resource Type.",
-          "enum": [
-            "Field",
-            "SeasonalField",
-            "Zone",
-            "Prescription",
-            "PlantTissueAnalysis",
-            "PlantingData",
-            "ApplicationData",
-            "HarvestData",
-            "TillageData"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "FarmHierarchyGeoResourceType",
-            "modelAsString": true
-          }
-        },
-        "id": {
-          "description": "Resource Id.",
           "type": "string"
         }
       }
@@ -19954,7 +19957,7 @@
       }
     },
     "SeasonalFieldMetaDataListResponse": {
-      "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
+      "description": "Paged response contains list of requested objects and a skipToken to get the next set of results.",
       "required": [
         "value"
       ],
@@ -21361,7 +21364,7 @@
       }
     },
     "TillageDataMetaDataListResponse": {
-      "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
+      "description": "Paged response contains list of requested objects and a skipToken to get the next set of results.",
       "required": [
         "value"
       ],
@@ -21925,7 +21928,7 @@
       }
     },
     "ZoneMetaDataListResponse": {
-      "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
+      "description": "Paged response contains list of requested objects and a skipToken to get the next set of results.",
       "required": [
         "value"
       ],
