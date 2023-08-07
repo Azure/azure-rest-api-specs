@@ -3,13 +3,13 @@
     "api-version": "2023-05-01",
     "subscriptionId": "subid",
     "resourceGroupName": "rg1",
-    "virtualNetworkGatewayName": "vpngw"
+    "virtualNetworkGatewayName": "ergw"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "vpngw",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw",
+        "name": "ergw",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/ergw",
         "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
         "type": "Microsoft.Network/virtualNetworkGateways",
         "location": "centralus",
@@ -19,7 +19,7 @@
           "ipConfigurations": [
             {
               "name": "gwipconfig1",
-              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw/ipConfigurations/gwipconfig1",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/ergw/ipConfigurations/gwipconfig1",
               "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
               "properties": {
                 "provisioningState": "Succeeded",
@@ -36,7 +36,7 @@
           "natRules": [
             {
               "name": "natRule1",
-              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw/natRules/natRule1",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/ergw/natRules/natRule1",
               "etag": "W/\"00ae2b69-88e7-4b3a-b66a-cfa2244e0801\"",
               "properties": {
                 "provisioningState": "Succeeded",
@@ -56,7 +56,7 @@
             },
             {
               "name": "natRule2",
-              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw/natRules/natRule2",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/ergw/natRules/natRule2",
               "etag": "W/\"00ae2b69-88e7-4b3a-b66a-cfa2244e0801\"",
               "properties": {
                 "provisioningState": "Succeeded",
@@ -77,9 +77,9 @@
           ],
           "enableBgpRouteTranslationForNat": false,
           "sku": {
-            "name": "VpnGw1",
-            "tier": "VpnGw1",
-            "capacity": 0
+            "name": "ErGwScale",
+            "tier": "ErGwScale",
+            "capacity": 2
           },
           "autoScaleConfiguration": {
             "bounds": {
@@ -87,33 +87,21 @@
               "max": 3
             }
           },
-          "gatewayType": "Vpn",
-          "vpnType": "RouteBased",
+          "gatewayType": "ExpressRoute",
+          "vpnType": "PolicyBased",
           "vpnGatewayGeneration": "None",
           "enableBgp": false,
           "enablePrivateIpAddress": false,
           "activeActive": false,
           "disableIPSecReplayProtection": false,
-          "vpnClientConfiguration": {
-            "vpnClientProtocols": [
-              "OpenVPN"
-            ],
-            "vpnClientRootCertificates": [],
-            "vpnClientRevokedCertificates": [],
-            "radiusServers": [
-              {
-                "radiusServerAddress": "10.1.0.0",
-                "radiusServerScore": 20
-              }
-            ]
-          },
+          "vpnClientConfiguration": null,
           "bgpSettings": {
             "asn": 65514,
             "bgpPeeringAddress": "10.0.1.30",
             "peerWeight": 0,
             "bgpPeeringAddresses": [
               {
-                "ipconfigurationId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw/ipConfigurations/gwipconfig1",
+                "ipconfigurationId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/ergw/ipConfigurations/gwipconfig1",
                 "defaultBgpIpAddresses": [
                   "10.3.1.254"
                 ],
