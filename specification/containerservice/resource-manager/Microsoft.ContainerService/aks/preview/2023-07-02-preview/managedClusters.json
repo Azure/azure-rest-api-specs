@@ -3931,11 +3931,6 @@
     },
     "MachineListResult": {
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubResource"
-        }
-      ],
       "properties": {
         "value": {
           "type": "array",
@@ -8668,6 +8663,7 @@
       "name": "machineName",
       "in": "path",
       "required": true,
+      "pattern": "^[a-zA-Z0-9][-_a-zA-Z0-9]{0,39}$",
       "x-ms-parameter-location": "method"
     }
   }
