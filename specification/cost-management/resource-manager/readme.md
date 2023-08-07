@@ -47,6 +47,8 @@ input-file:
   - Microsoft.CostManagement/stable/2023-08-01/costmanagement.json
   - Microsoft.CostManagement/stable/2023-08-01/costmanagement.pricesheets.json
   - Microsoft.CostManagement/stable/2023-08-01/scheduledActions.json
+  - Microsoft.CostManagement/stable/2023-08-01/settings.json
+  - Microsoft.CostManagement/stable/2023-08-01/costallocation.json
 ```
 ### Tag: package-2023-03
 
