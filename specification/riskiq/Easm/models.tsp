@@ -9,103 +9,47 @@ using Azure.Core.Traits;
 
 namespace Easm;
 
-@trait
-model PageResponseBodyFields<TResponseFields, Context = TraitContext.List> {
-    @traitContext(Context)
-    responseFields: {
-        @traitLocation(TraitLocation.Response)
-        parameters: TResponseFields;
-    };
-}
-
-alias ServiceTraits = NoRepeatableRequests &
-    NoConditionalRequests &
-    NoClientRequestId;
-
-alias Operations = Azure.Core.ResourceOperations<ServiceTraits, ErrorResponse>;
-
-alias AssetsListTrait = {
-    ...PageResponseBodyFields<{
-        @doc("The total number of items available in the full result set.")
-        totalElements?: int64;
-
-        @doc("The cursor mark to be used on the next request.  Not set if using paging.")
-        mark?: string;
-    }>;
-    ...QueryParametersTrait<{
-        ...FilterQueryParameter;
-        ...OrderByParameter;
-        ...SkipQueryParameter;
-        ...MaxPageSizeQueryParameter;
-        ...MarkParameter;
-    }>;
-};
-
+alias AssetsListTrait = QueryParametersTrait<{
+    ...FilterQueryParameter;
+    ...OrderByParameter;
+    ...SkipQueryParameter;
+    ...MaxPageSizeQueryParameter;
+    ...MarkParameter;
+}>;
 alias AssetsUpdateParameter = {
     ...RequiredFilterParameter;
 };
-alias DataConnectionsListTrait = {
-    ...PageResponseBodyFields<{
-        @doc("The total number of items available in the full result set.")
-        totalElements?: int64;
-    }>;
-    ...QueryParametersTrait<{
-        ...SkipQueryParameter;
-        ...MaxPageSizeQueryParameter;
-    }>;
-};
-alias DiscoveryGroupsListTrait = {
-    ...PageResponseBodyFields<{
-        @doc("The total number of items available in the full result set.")
-        totalElements?: int64;
-    }>;
-    ...QueryParametersTrait<{
-        ...FilterQueryParameter;
-        ...SkipQueryParameter;
-        ...MaxPageSizeQueryParameter;
-    }>;
-};
+alias DataConnectionsListTrait = QueryParametersTrait<{
+    ...SkipQueryParameter;
+    ...MaxPageSizeQueryParameter;
+}>;
+alias DiscoveryGroupsListTrait = QueryParametersTrait<{
+    ...FilterQueryParameter;
+    ...SkipQueryParameter;
+    ...MaxPageSizeQueryParameter;
+}>;
 alias DiscoveryGroupsListRunsParameter = {
     ...FilterQueryParameter;
     ...SkipQueryParameter;
     ...MaxPageSizeQueryParameter;
     ...DiscoGroupNameParameter;
 };
-alias DiscoveryTemplatesListTrait = {
-    ...PageResponseBodyFields<{
-        @doc("The total number of items available in the full result set.")
-        totalElements?: int64;
-    }>;
-    ...QueryParametersTrait<{
-        ...FilterQueryParameter;
-        ...SkipQueryParameter;
-        ...MaxPageSizeQueryParameter;
-    }>;
-};
-alias SavedFiltersListTrait = {
-    ...PageResponseBodyFields<{
-        @doc("The total number of items available in the full result set.")
-        totalElements?: int64;
-    }>;
-    ...QueryParametersTrait<{
-        ...FilterQueryParameter;
-        ...SkipQueryParameter;
-        ...MaxPageSizeQueryParameter;
-    }>;
-};
-alias TasksListTrait = {
-    ...PageResponseBodyFields<{
-        @doc("The total number of items available in the full result set.")
-        totalElements?: int64;
-    }>;
-    ...QueryParametersTrait<{
-        ...FilterQueryParameter;
-        ...OrderByParameter;
-        ...SkipQueryParameter;
-        ...MaxPageSizeQueryParameter;
-    }>;
-};
-
+alias DiscoveryTemplatesListTrait = QueryParametersTrait<{
+    ...FilterQueryParameter;
+    ...SkipQueryParameter;
+    ...MaxPageSizeQueryParameter;
+}>;
+alias SavedFiltersListTrait = QueryParametersTrait<{
+    ...FilterQueryParameter;
+    ...SkipQueryParameter;
+    ...MaxPageSizeQueryParameter;
+}>;
+alias TasksListTrait = QueryParametersTrait<{
+    ...FilterQueryParameter;
+    ...OrderByParameter;
+    ...SkipQueryParameter;
+    ...MaxPageSizeQueryParameter;
+}>;
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model AlexaInfo {
     alexaRank?: int64;
@@ -810,6 +754,7 @@ model InnerError {
     @doc("This is a more specific error code than was provided by the containing error.")
     code?: string;
 
+    #suppress "@azure-tools/typespec-azure-core/no-unknown"
     @doc("This is an additional field representing the value that caused the error to help with debugging.")
     value?: unknown;
 }
@@ -1031,9 +976,9 @@ model PageAsset extends InventoryAsset {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 model PageCause {
     cause?: string;
+    #suppress "@azure-tools/typespec-azure-core/casing-style"
     causeElementXPath?: string;
     location?: string;
     possibleMatches?: int32;
@@ -1332,7 +1277,6 @@ model TaskPageResponse {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 @resource("tasks")
 model Task {
     @doc("The unique identifier of the task.")
@@ -1358,7 +1302,7 @@ model Task {
     @doc("The reason the task was moved into its current state, if the task wasn't completed.")
     reason?: string;
 
-    #suppress "@azure-tools/typespec-azure-core/bad-record-type" 
+    #suppress "@azure-tools/typespec-azure-core/bad-record-type"
     @doc("Attributes unique to the task.  This differs by task type.")
     metadata?: Record<unknown>;
 }
@@ -1662,74 +1606,11 @@ model AzureDataExplorerDataConnection extends DataConnection {
     properties: AzureDataExplorerDataConnectionProperties;
 }
 
-@doc("The ID of the target subscription.")
-model SubscriptionIdParameter {
-    @doc("The ID of the target subscription.")
-    @path("subscriptionId")
-    subscriptionId: string;
-}
-
-@doc("The name of the Resource Group.")
-model ResourceGroupNameParameter {
-    @doc("The name of the Resource Group.")
-    @path("resourceGroupName")
-    resourceGroupName: string;
-}
-
-@doc("The name of the Workspace.")
-model WorkspaceNameParameter {
-    @doc("The name of the Workspace.")
-    @path("workspaceName")
-    workspaceName: string;
-}
-
-@doc("The API version to use for this operation.")
-model ApiVersionParameter {
-    @doc("The API version to use for this operation.")
-    @query("api-version")
-    apiVersion: string;
-}
-
-@doc("The unique identifier for the saved filter.")
-model SavedFilterNameParameter {
-    @doc("The unique identifier for the saved filter.")
-    @path("filterName")
-    filterName: string;
-}
-
 @doc("The unique identifier for the discovery group.")
 model DiscoGroupNameParameter {
     @doc("The unique identifier for the discovery group.")
     @path("groupName")
     groupName: string;
-}
-
-@doc("The unique identifier for the data connection.")
-model DataConnectionNameParameter {
-    @doc("The unique identifier for the data connection.")
-    @path("dataConnectionName")
-    dataConnectionName: string;
-}
-
-@doc("The unique identifier for the task.")
-model TaskIdParameter {
-    @doc("The unique identifier for the task.")
-    @path("taskId")
-    taskId: string;
-}
-
-@doc("An expression on the resource type that selects the resources to be returned.")
-model FilterParameter {
-    @doc("An expression on the resource type that selects the resources to be returned.")
-    @query("filter")
-    filter?: string;
-}
-
-@doc("An expression on the resource type that selects the resources to be returned.")
-model RequiredFilterParameter {
-    @doc("An expression on the resource type that selects the resources to be returned.")
-    @query("filter")
-    filter: string;
 }
 
 @doc("A list of expressions that specify the order of the returned resources.")
@@ -1739,20 +1620,6 @@ model OrderByParameter {
     orderby?: string;
 }
 
-@doc("An offset into the collection of the first item to be returned.")
-model SkipParameter {
-    @doc("An offset into the collection of the first item to be returned.")
-    @query("skip")
-    skip?: int32;
-}
-
-@doc("The maximum number of items to include in a single response.")
-model MaxPageSizeParameter {
-    @doc("The maximum number of items to include in a single response.")
-    @query("maxpagesize")
-    maxpagesize?: int32;
-}
-
 @doc("Specify this value instead of 'skip' to use cursor-based searching. Initial value is '*' and subsequent values are returned in the response.")
 model MarkParameter {
     @doc("Specify this value instead of 'skip' to use cursor-based searching. Initial value is '*' and subsequent values are returned in the response.")
@@ -1760,18 +1627,11 @@ model MarkParameter {
     mark?: string;
 }
 
-@doc("The unique identifier for the disco template.")
-model DiscoTemplateIdParameter {
-    @doc("The unique identifier for the disco template.")
-    @path("templateId")
-    templateId: string;
-}
-
-@doc("The unique identifier for the asset. Ids are formatted as '<kind>$$<name>' and can optionally be Base64 encoded if they contain special characters.")
-model AssetIdParameter {
-    @doc("The unique identifier for the asset. Ids are formatted as '<kind>$$<name>' and can optionally be Base64 encoded if they contain special characters.")
-    @path("assetId")
-    assetId: string;
+@doc("An expression on the resource type that selects the resources to be returned.")
+model RequiredFilterParameter {
+    @doc("An expression on the resource type that selects the resources to be returned.")
+    @query("filter")
+    filter: string;
 }
 
 @doc("Implicit Flow")

@@ -6,16 +6,26 @@ import "./models.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.Core;
+using Azure.Core.Traits;
 
 namespace Easm;
 
+alias ServiceTraits = NoRepeatableRequests &
+    NoConditionalRequests &
+    NoClientRequestId;
+
+alias Operations = Azure.Core.ResourceOperations<ServiceTraits, ErrorResponse>;
 @tag("Assets")
 @doc("Provides access to inventory assets.")
 interface Assets {
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
     @doc("Retrieve a list of assets for the provided search parameters.")
-    listAssetResource is Operations.ResourceList<
+    listAssetResource is Foundations.ResourceList<
         AssetResource,
-        AssetsListTrait
+        {},
+        AssetPageResponse,
+        AssetsListTrait,
+        ErrorResponse
     >;
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
     @doc("Update labels on assets matching the provided filter.")
@@ -37,10 +47,14 @@ interface Assets {
 @tag("Data Connections")
 @doc("Provides access to data connection resources.")
 interface DataConnections {
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
     @doc("Retrieve a list of data connections.")
-    listDataConnection is Operations.ResourceList<
+    listDataConnection is Foundations.ResourceList<
         DataConnection,
-        DataConnectionsListTrait
+        {},
+        DataConnectionPageResponse,
+        DataConnectionsListTrait,
+        ErrorResponse
     >;
     @doc("Validate a data connection with a given dataConnectionName.")
     @action("validate")
@@ -68,10 +82,14 @@ interface DataConnections {
 @tag("Discovery Groups")
 @doc("Provides access to discovery resources.")
 interface DiscoveryGroups {
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
     @doc("Retrieve a list of discovery group for the provided search parameters.")
-    listDiscoGroup is Operations.ResourceList<
+    listDiscoGroup is Foundations.ResourceList<
         DiscoGroup,
-        DiscoveryGroupsListTrait
+        {},
+        DiscoGroupPageResponse,
+        DiscoveryGroupsListTrait,
+        ErrorResponse
     >;
     @doc("Validate a discovery group with a given groupName.")
     @action("validate")
@@ -114,10 +132,14 @@ interface DiscoveryGroups {
 @tag("Discovery Templates")
 @doc("Provides access to disco template resources.")
 interface DiscoveryTemplates {
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
     @doc("Retrieve a list of disco templates for the provided search parameters.")
-    listDiscoTemplate is Operations.ResourceList<
+    listDiscoTemplate is Foundations.ResourceList<
         DiscoTemplate,
-        DiscoveryTemplatesListTrait
+        {},
+        DiscoTemplatePageResponse,
+        DiscoveryTemplatesListTrait,
+        ErrorResponse
     >;
     @doc("Retrieve a disco template with a given templateId.")
     getDiscoTemplate is Operations.ResourceRead<DiscoTemplate>;
@@ -161,10 +183,14 @@ interface Reports {
 @tag("Saved Filters")
 @doc("Provides access to saved filter resources.")
 interface SavedFilters {
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
     @doc("Retrieve a list of saved filters for the provided search parameters.")
-    listSavedFilter is Operations.ResourceList<
+    listSavedFilter is Foundations.ResourceList<
         SavedFilter,
-        SavedFiltersListTrait
+        {},
+        SavedFilterPageResponse,
+        SavedFiltersListTrait,
+        ErrorResponse
     >;
     @doc("Retrieve a saved filter by filterName.")
     getSavedFilter is Operations.ResourceRead<SavedFilter>;
@@ -185,8 +211,15 @@ interface SavedFilters {
 @tag("Tasks")
 @doc("Provides access to task resources.")
 interface Tasks {
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
     @doc("Retrieve a list of tasks for the provided search parameters.")
-    listTask is Operations.ResourceList<Task, TasksListTrait>;
+    listTask is Foundations.ResourceList<
+        Task,
+        {},
+        TaskPageResponse,
+        TasksListTrait,
+        ErrorResponse
+    >;
     @doc("Retrieve a task by taskId.")
     getTask is Operations.ResourceRead<Task>;
     @doc("Cancel a task by taskId.")

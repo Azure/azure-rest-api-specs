@@ -1,15 +1,15 @@
 import "@typespec/http";
 import "@typespec/rest";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "./models.tsp";
+import "@typespec/versioning";
 import "./routes.tsp";
+import "./models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 using Azure.Core;
-using Azure.Core.Traits;
+using TypeSpec.Versioning;
+
 @useAuth(OAuth2Auth<[ImplicitFlow]>)
 @versioned(Easm.Versions)
 @service({
@@ -33,11 +33,10 @@ using Azure.Core.Traits;
     }
 )
 @doc("Defender EASM discovers and maps your digital attack surface to provide an \"outside-in\" perspective using probes to discover assets. The assets are provided with detailed metadata associated, including vulnerabilities, configurations and web components, allowing customers to view and prioritize external risk. The EASM REST API enables you to develop clients that integrate with your application.")
-namespace Easm {
-    @doc("The EASM Defender service version.")
-    enum Versions {
-        @doc("Version 2023-03-01-preview")
-        @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-        `2023-03-01-preview`,
-    }
+namespace Easm;
+@doc("The EASM Defender service version.")
+enum Versions {
+    @doc("Version 2023-03-01-preview")
+    @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+    `2023-03-01-preview`,
 }
