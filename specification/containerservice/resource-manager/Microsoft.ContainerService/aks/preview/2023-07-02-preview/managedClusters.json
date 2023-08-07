@@ -1427,7 +1427,7 @@
         },
         "x-ms-examples": {
           "List Agent Pools by Managed Cluster": {
-            "$ref": "./examples/MachineGet.json"
+            "$ref": "./examples/MachineList.json"
           }
         }
       }
@@ -3931,6 +3931,104 @@
         }
       },
       "description": "Agent Pool."
+    },
+    "MachineListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Machine"
+          },
+          "description": "The list of Machines in cluster."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of machine results.",
+          "readOnly": true
+        }
+      },
+      "description": "The response from the List Machines operation."
+    },
+    "Machine": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MachineProperties",
+          "description": "The properties of the machine"
+        }
+      },
+      "description": "A machine. Contains details about the underlying virtual machine. A machine may be visible here but not in kubectl get nodes; if so it may be because the machine has not been registered with the Kubernetes API Server yet."
+    },
+    "MachineProperties": {
+      "type": "object",
+      "readOnly": true,
+      "description": "properties of the machine",
+      "properties": {
+        "network": {
+          "$ref": "#/definitions/MachineNetworkProperties"
+        },
+        "resourceId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Arm resource id of the machine. It can be used to GET underlying VM Instance"
+        }
+      }
+    },
+    "MachineNetworkProperties": {
+      "type": "object",
+      "readOnly": true,
+      "description": "network properties of the machine",
+      "properties": {
+        "ipAddresses": {
+          "type": "array",
+          "readOnly": true,
+          "description": "IPv4, IPv6 addresses of the machine",
+          "items": {
+            "$ref": "#/definitions/MachineIpAddress"
+          }
+        }
+      }
+    },
+    "MachineIpAddress": {
+      "type": "object",
+      "readOnly": true,
+      "description": "The machine IP address details.",
+      "properties": {
+        "ip": {
+          "type": "string",
+          "readOnly": true,
+          "description": "IPv4 or IPv6 address of the machine"
+        },
+        "family": {
+          "type": "string",
+          "readOnly": true,
+          "description": "To determine if address belongs IPv4 or IPv6 family",
+          "enum": [
+            "IPv4",
+            "IPv6"
+          ],
+          "x-ms-enum": {
+            "name": "IPFamily",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "IPv4",
+                "description": "IPv4 family"
+              },
+              {
+                "value": "IPv6",
+                "description": "IPv6 family"
+              }
+            ]
+          }
+        }
+      }
     },
     "ManagedClusterWindowsProfile": {
       "type": "object",
@@ -8480,7 +8578,7 @@
       "description": "The name of the managed cluster resource.",
       "x-ms-parameter-location": "method"
     },
-    "AgentPoolNameParameter":{
+    "AgentPoolNameParameter": {
       "name": "agentPoolName",
       "in": "path",
       "required": true,
@@ -8562,108 +8660,14 @@
       "description": "The mode of the mesh.",
       "x-ms-parameter-location": "method"
     },
-    "MachineListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Machine"
-          },
-          "description": "The list of Machines in cluster."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to get the next set of machine results.",
-          "readOnly": true
-        }
-      },
-      "description": "The response from the List Machines operation."
-    },
-    "Machine": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/MachineProperties",
-          "description": "The properties of the machine"
-        }
-      },
-      "description": "A machine. Contains details about the underlying virtual machine. A machine may be visible here but not in kubectl get nodes; if so it may be because the machine has not been registered with the Kubernetes API Server yet."
-    },
-    "MachineProperties": {
-      "type": "object",
-      "readOnly": true,
-      "description": "properties of the machine",
-      "properties": {
-        "network": {
-          "$ref": "#/definitions/MachineNetworkProperties"
-        },
-        "resourceId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Arm resource id of the machine. It can be used to GET underlying VM Instance"
-        }
-      }
-    },
-    "MachineNetworkProperties": {
-      "type": "object",
-      "readOnly": true,
-      "description": "network properties of the machine",
-      "properties": {
-        "ipAddresses": {
-          "type": "array",
-          "readOnly": true,
-          "description": "IPv4, IPv6 addresses of the machine",
-          "items": {
-            "$ref": "#/definitions/MachineIpAddress"
-          }
-        }
-      }
-    },
-    "MachineIpAddress": {
-      "type": "object",
-      "readOnly": true,
-      "description": "The machine IP address details.",
-      "properties": {
-        "ip": {
-          "type": "string",
-          "readOnly": true,
-          "description": "IPv4 or IPv6 address of the machine"
-        },
-        "family": {
-          "type": "string",
-          "readOnly": true,
-          "description": "To determine if address belongs IPv4 or IPv6 family",
-          "enum": [
-            "IPv4",
-            "IPv6"
-          ],
-          "x-ms-enum": {
-            "name": "IPFamily",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "IPv4",
-                "description": "IPv4 family"
-              },
-              {
-                "value": "IPv6",
-                "description": "IPv6 family"
-              }
-            ]
-          }
-        }
-      }
-    },
-    "MachineName": {
+    "MachineNameParameter": {
       "type": "string",
       "readOnly": true,
-      "description": "host name of the machine"
+      "description": "host name of the machine",
+      "name": "machineName",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
     }
   }
 }
