@@ -209,17 +209,13 @@ input-file:
 ## Suppression
 
 ``` yaml
-suppressions:
-  - code: LroPostReturn
-    from: Microsoft.EventHub/preview/2023-01-01-preview/namespaces-preview.json
-    reason: It is not mandatory to have a 200 status code for a post response.
-```
-
-``` yaml
-suppressions:
-  - code: PostOperationAsyncResponseValidation
-    from: Microsoft.EventHub/preview/2023-01-01-preview/namespaces-preview.json
-    reason: It is not mandatory to x-ms-long-running-operation-options for post.
+directive:
+  - suppress: PostOperationAsyncResponseValidation
+    from: namespaces-preview.json
+    reason: Not a mandatory check
+  - suppress: LroPostReturn
+    from: namespaces-preview.json
+    reason: Not a mandatory check
 ```
 
 ### Tag: profile-hybrid-2020-09-01
