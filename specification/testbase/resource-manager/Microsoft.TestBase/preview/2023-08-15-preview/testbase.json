@@ -3472,6 +3472,61 @@
           }
         }
       }
+    },
+    "/subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.TestBase/TestBaseAccounts/{TestBaseAccountName}/TestConfigurations/{testConfigurationId}/run-test": {
+      "post": {
+        "summary": "Schedule On-Demand Run for all Packages",
+        "description": "This endpoint allows initiating an on-demand run for a specific test configuration identified by the testConfigurationId within the specified organizationId. It triggers the execution of multiple packages with the provided payload parameters.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "name": "testConfigurationId",
+            "in": "path",
+            "description": "The unique identifier of the test configuration to be executed.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MultipleOndemandRunRequest"
+            },
+            "description": "Parameters supplied to the run multiple on-demand operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The on-demand run request was successfully queued.",
+            "schema": {
+              "$ref": "#/definitions/MultipleOndemandRunResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestConfigurationsMultipleOndemandRun": {
+            "$ref": "./examples/TestConfigurationsMultipleOndemandRunPost.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -6979,6 +7034,72 @@
         "version": {
           "type": "string",
           "description": "The version of the Windows OS."
+        }
+      }
+    },
+    "MultipleOndemandRunRequest": {
+      "type": "object",
+      "properties": {
+        "organizationId": {
+          "type": "string",
+          "description": "The unique identifier of the organization associated with the test configuration."
+        },
+        "osName": {
+          "type": "string",
+          "description": "The name of the operating system."
+        },
+        "releaseName": {
+          "type": "string",
+          "description": "The name of the release."
+        },
+        "osUpdateType": {
+          "type": "string",
+          "description": "The type of operating system updates (e.g., Feature, security)."
+        },
+        "testType": {
+          "type": "string",
+          "description": "The type of test being performed (e.g., functional, OOB)."
+        },
+        "fligtingRing": {
+          "type": "string",
+          "description": "The specified flighting ring for the OS media."
+        },
+        "buildVersion": {
+          "type": "string",
+          "description": "The version of the build of the OS media."
+        },
+        "customImageResourceId": {
+          "type": "string",
+          "description": "The unique identifier of the custom image resource, if applicable."
+        },
+        "doNotInstallOSUpdates": {
+          "type": "boolean",
+          "description": "A flag indicating whether to skip installing operating system updates during the run."
+        },
+        "testRunTitle": {
+          "type": "string",
+          "description": "A friendly name for the run."
+        }
+      }
+    },
+    "MultipleOndemandRunResponse": {
+      "type": "object",
+      "properties": {
+        "runId": {
+          "type": "string",
+          "description": "The unique identifier for the queued run."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the on-demand run."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message indicating the status of the on-demand run."
+        },
+        "totalPackagesScheduled": {
+          "type": "integer",
+          "description": "The total number of packages scheduled for execution."
         }
       }
     }
