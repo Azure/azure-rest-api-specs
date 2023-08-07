@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-02-01",
+    "version": "2023-06-01",
     "title": "SiteRecoveryManagementClient",
     "x-ms-code-generation-settings": {
       "header": "MICROSOFT_MIT_NO_VERSION"
@@ -9398,6 +9398,19 @@
         "recoveryCapacityReservationGroupId": {
           "description": "The recovery capacity reservation group Id.",
           "type": "string"
+        },
+        "churnOptionSelected" : {
+          "description": "A value indicating the churn option selected by user.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Normal",
+            "High"
+          ],
+          "x-ms-enum": {
+            "name": "ChurnOptionSelected",
+            "modelAsString": true
+          }
         }
       },
       "x-ms-discriminator-value": "A2A"
@@ -11988,8 +12001,8 @@
           "type": "string",
           "readOnly": true
         },
-        "dataStore": {
-          "description": "A value indicating the datastore.",
+        "dataStores": {
+          "description": "A value indicating the datastore collection.",
           "type": "array",
           "items": { "type": "string" },
           "readOnly": true
@@ -12814,28 +12827,12 @@
             "$ref": "#/definitions/HyperVReplicaAzureManagedDiskDetails"
           }
         },
-        "supportedOSVersions": {
-          "description": "A value indicating the inplace OS Upgrade version.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
         "allAvailableOSUpgradeConfigurations": {
           "description": "A value indicating all available inplace OS Upgrade configurations.",
           "type": "array",
           "items": {
               "$ref": "#/definitions/OSUpgradeSupportedVersions"
           }
-        },
-        "osName": {
-          "description": "The name of the OS on the VM.",
-          "type": "string",
-          "readOnly": true
-        },
-        "osUpgradeMonitoringDetails": {
-          "$ref": "#/definitions/OSUpgradeMonitoringDetails",
-          "description": "A value indicating the inplace OS Upgrade monitoring details."
         }
       },
       "x-ms-discriminator-value": "HyperVReplicaAzure"
@@ -14498,10 +14495,6 @@
           "description": "The name of the OS on the VM.",
           "type": "string",
           "readOnly": true
-        },
-        "osUpgradeMonitoringDetails": {
-          "$ref": "#/definitions/OSUpgradeMonitoringDetails",
-          "description": "A value indicating the inplace OS Upgrade monitoring details."
         }
       },
       "x-ms-discriminator-value": "InMageAzureV2"
@@ -19023,34 +19016,6 @@
         "vhdName": {
           "description": "The OS disk VHD name.",
           "type": "string"
-        }
-      }
-    },
-    "OSUpgradeMonitoringDetails": {
-      "description": "OS upgrade details of the migraton item.",
-      "type": "object",
-      "properties": {
-        "currentJobName": {
-          "description": "The job name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "currentJobFriendlyName": {
-          "description": "The friendly job name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "osUpgradeProgressPercentage": {
-          "format": "int32",
-          "description": "The OS upgrade progress percentage.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "osUpgradeRebootCount": {
-          "format": "int32",
-          "description": "The OS upgrade reboot count.",
-          "type": "integer",
-          "readOnly": true
         }
       }
     },
@@ -24318,7 +24283,7 @@
         },
         "isCheckSumResyncCycle": {
           "description": "A value indicating whether checksum resync cycle is in progress.",
-          "type": "boolean",
+          "type": "string",
           "readOnly": true
         },
         "initialSeedingRetryCount": {
@@ -24383,16 +24348,11 @@
           }
         },
         "supportedOSVersions": {
-          "description": "List of supported inplace OS Upgrade versions.",
+          "description": "A value indicating the inplace OS Upgrade version.",
           "type": "array",
           "items": {
             "type": "string"
           }
-        },
-        "osUpgradeMonitoringDetails": {
-          "$ref": "#/definitions/OSUpgradeMonitoringDetails",
-          "description": "A value indicating the inplace OS Upgrade monitoring details.",
-          "readOnly": true
         },
         "applianceMonitoringDetails": {
           "$ref": "#/definitions/ApplianceMonitoringDetails",
