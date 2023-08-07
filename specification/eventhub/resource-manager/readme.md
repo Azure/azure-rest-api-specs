@@ -206,6 +206,22 @@ input-file:
 - Microsoft.EventHub/preview/2023-01-01-preview/ApplicationGroups.json
 ```
 
+## Suppression
+
+``` yaml
+suppressions:
+  - code: LroPostReturn
+    from: Microsoft.EventHub/preview/2023-01-01-preview/namespaces-preview.json
+    reason: It is not mandatory to have a 200 status code for a post response.
+```
+
+``` yaml
+suppressions:
+  - code: PostOperationAsyncResponseValidation
+    from: Microsoft.EventHub/preview/2023-01-01-preview/namespaces-preview.json
+    reason: It is not mandatory to x-ms-long-running-operation-options for post.
+```
+
 ### Tag: profile-hybrid-2020-09-01
 
 These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on the command line.
@@ -246,22 +262,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_event_hub']
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
-```
-
-## Suppression
-
-``` yaml
-suppressions:
-  - code: LroPostReturn
-    from: Microsoft.EventHub/preview/2023-01-01-preview/namespaces-preview.json
-    reason: It is not mandatory to have a 200 status code for a post response.
-```
-
-``` yaml
-suppressions:
-  - code: PostOperationAsyncResponseValidation
-    from: Microsoft.EventHub/preview/2023-01-01-preview/namespaces-preview.json
-    reason: It is not mandatory to x-ms-long-running-operation-options for post.
 ```
 
 
