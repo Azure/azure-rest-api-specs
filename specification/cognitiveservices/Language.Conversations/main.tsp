@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 import "./common.tsp";
 
 using TypeSpec.Http;
@@ -9,6 +10,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
+using Azure.ClientGenerator.Core;
 
 @useAuth(
   TypeSpec.Http.ApiKeyAuth<
@@ -1072,6 +1074,7 @@ enum WeightUnit {
 //   "../../../../data-plane/Language/stable/2022-05-01/examples/conversations/SuccessfulAnalyzeConversationsArbitrationDirectTarget.json",
 //   "Orchestration direct target result"
 // )
+@convenientAPI(false)
 op analyzeConversation is Azure.Core.StandardResourceOperations.ResourceCollectionAction<
   Conversations,
   AnalyzeConversationTask,
