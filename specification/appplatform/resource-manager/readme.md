@@ -53,6 +53,10 @@ directive:
     #where:
     #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/configServers/default"]
     #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/monitoringSettings/default"]
+
+suppressions:
+  - code: LroPostReturn
+    reason: start,stop,flushDNSsetting api do not have return body in async operation
 ```
 
 
