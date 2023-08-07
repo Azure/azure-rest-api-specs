@@ -559,7 +559,7 @@
           "Create FirewallPolicyRuleCollectionGroup With Web Categories": {
             "$ref": "./examples/FirewallPolicyRuleCollectionGroupWithWebCategoriesPut.json"
           },
-          "Create FirewallPolicyRuleCollectionGroup With http header to insert": {
+          "Create FirewallPolicyRuleCollectionGroup With Custom HTTP headers": {
             "$ref": "./examples/FirewallPolicyRuleCollectionGroupWithHttpHeadersToInsert.json"
           }
         },
@@ -1696,6 +1696,10 @@
       "type": "object",
       "description": "Configuration for intrusion detection mode and rules.",
       "properties": {
+        "profile": {
+          "$ref": "#/definitions/FirewallPolicyIntrusionDetectionProfileOptions",
+          "description": "Intrusion detection Profile."
+        },
         "mode": {
           "$ref": "#/definitions/FirewallPolicyIntrusionDetectionStateOptions",
           "description": "Intrusion detection general state."
@@ -1716,6 +1720,19 @@
       ],
       "x-ms-enum": {
         "name": "FirewallPolicyIntrusionDetectionStateType",
+        "modelAsString": true
+      }
+    },
+    "FirewallPolicyIntrusionDetectionProfileOptions": {
+      "type": "string",
+      "description": "Possible profile values.",
+      "enum": [
+        "Low",
+        "Balanced",
+        "High"
+      ],
+      "x-ms-enum": {
+        "name": "FirewallPolicyIntrusionDetectionProfileType",
         "modelAsString": true
       }
     },
