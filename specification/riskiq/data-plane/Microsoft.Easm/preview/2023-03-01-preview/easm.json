@@ -104,55 +104,13 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/OrderByParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/MarkParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Paged collection of AssetResource items",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "The AssetResource items on this page",
-                  "items": {
-                    "$ref": "#/definitions/AssetResource"
-                  }
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "The link to the next page of items"
-                },
-                "totalElements": {
-                  "type": "integer",
-                  "format": "int64",
-                  "description": "The total number of items available in the full result set."
-                },
-                "mark": {
-                  "type": "string",
-                  "description": "The cursor mark to be used on the next request.  Not set if using paging."
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/AssetPageResponse"
             }
           },
           "default": {
@@ -167,11 +125,8 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "Assets_ListAssetResource_MaximumSet_Gen": {
+          "Assets_ListAssetResource": {
             "$ref": "./examples/Assets_ListAssetResource_MaximumSet_Gen.json"
           }
         }
@@ -218,11 +173,8 @@
           }
         },
         "x-ms-examples": {
-          "Assets_UpdateAssets_MaximumSet_Gen": {
+          "Assets_UpdateAssets": {
             "$ref": "./examples/Assets_UpdateAssets_MaximumSet_Gen.json"
-          },
-          "Assets_UpdateAssets_MinimumSet_Gen": {
-            "$ref": "./examples/Assets_UpdateAssets_MinimumSet_Gen.json"
           }
         }
       }
@@ -266,7 +218,7 @@
           }
         },
         "x-ms-examples": {
-          "Assets_GetAssetResource_MaximumSet_Gen": {
+          "Assets_GetAssetResource": {
             "$ref": "./examples/Assets_GetAssetResource_MaximumSet_Gen.json"
           }
         }
@@ -282,42 +234,13 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Paged collection of DataConnection items",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "The DataConnection items on this page",
-                  "items": {
-                    "$ref": "#/definitions/DataConnection"
-                  }
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "The link to the next page of items"
-                },
-                "totalElements": {
-                  "type": "integer",
-                  "format": "int64",
-                  "description": "The total number of items available in the full result set."
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/DataConnectionPageResponse"
             }
           },
           "default": {
@@ -332,15 +255,9 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "DataConnections_ListDataConnection_MaximumSet_Gen": {
+          "DataConnections_ListDataConnection": {
             "$ref": "./examples/DataConnections_ListDataConnection_MaximumSet_Gen.json"
-          },
-          "DataConnections_ListDataConnection_MinimumSet_Gen": {
-            "$ref": "./examples/DataConnections_ListDataConnection_MinimumSet_Gen.json"
           }
         }
       }
@@ -384,11 +301,8 @@
           }
         },
         "x-ms-examples": {
-          "DataConnections_GetDataConnection_MaximumSet_Gen": {
+          "DataConnections_GetDataConnection": {
             "$ref": "./examples/DataConnections_GetDataConnection_MaximumSet_Gen.json"
-          },
-          "DataConnections_GetDataConnection_MinimumSet_Gen": {
-            "$ref": "./examples/DataConnections_GetDataConnection_MinimumSet_Gen.json"
           }
         }
       },
@@ -438,11 +352,8 @@
           }
         },
         "x-ms-examples": {
-          "DataConnections_PutDataConnection_MaximumSet_Gen": {
+          "DataConnections_PutDataConnection": {
             "$ref": "./examples/DataConnections_PutDataConnection_MaximumSet_Gen.json"
-          },
-          "DataConnections_PutDataConnection_MinimumSet_Gen": {
-            "$ref": "./examples/DataConnections_PutDataConnection_MinimumSet_Gen.json"
           }
         }
       },
@@ -481,11 +392,8 @@
           }
         },
         "x-ms-examples": {
-          "DataConnections_DeleteDataConnection_MaximumSet_Gen": {
+          "DataConnections_DeleteDataConnection": {
             "$ref": "./examples/DataConnections_DeleteDataConnection_MaximumSet_Gen.json"
-          },
-          "DataConnections_DeleteDataConnection_MinimumSet_Gen": {
-            "$ref": "./examples/DataConnections_DeleteDataConnection_MinimumSet_Gen.json"
           }
         }
       }
@@ -530,11 +438,8 @@
           }
         },
         "x-ms-examples": {
-          "DataConnections_ValidateDataConnection_MaximumSet_Gen": {
+          "DataConnections_ValidateDataConnection": {
             "$ref": "./examples/DataConnections_ValidateDataConnection_MaximumSet_Gen.json"
-          },
-          "DataConnections_ValidateDataConnection_MinimumSet_Gen": {
-            "$ref": "./examples/DataConnections_ValidateDataConnection_MinimumSet_Gen.json"
           }
         }
       }
@@ -549,45 +454,13 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Paged collection of DiscoGroup items",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "The DiscoGroup items on this page",
-                  "items": {
-                    "$ref": "#/definitions/DiscoGroup"
-                  }
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "The link to the next page of items"
-                },
-                "totalElements": {
-                  "type": "integer",
-                  "format": "int64",
-                  "description": "The total number of items available in the full result set."
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/DiscoGroupPageResponse"
             }
           },
           "default": {
@@ -602,15 +475,9 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "DiscoveryGroups_ListDiscoGroup_MaximumSet_Gen": {
+          "DiscoveryGroups_ListDiscoGroup": {
             "$ref": "./examples/DiscoveryGroups_ListDiscoGroup_MaximumSet_Gen.json"
-          },
-          "DiscoveryGroups_ListDiscoGroup_MinimumSet_Gen": {
-            "$ref": "./examples/DiscoveryGroups_ListDiscoGroup_MinimumSet_Gen.json"
           }
         }
       }
@@ -654,11 +521,8 @@
           }
         },
         "x-ms-examples": {
-          "DiscoveryGroups_GetDiscoGroup_MaximumSet_Gen": {
+          "DiscoveryGroups_GetDiscoGroup": {
             "$ref": "./examples/DiscoveryGroups_GetDiscoGroup_MaximumSet_Gen.json"
-          },
-          "DiscoveryGroups_GetDiscoGroup_MinimumSet_Gen": {
-            "$ref": "./examples/DiscoveryGroups_GetDiscoGroup_MinimumSet_Gen.json"
           }
         }
       },
@@ -708,11 +572,8 @@
           }
         },
         "x-ms-examples": {
-          "DiscoveryGroups_PutDiscoGroup_MaximumSet_Gen": {
+          "DiscoveryGroups_PutDiscoGroup": {
             "$ref": "./examples/DiscoveryGroups_PutDiscoGroup_MaximumSet_Gen.json"
-          },
-          "DiscoveryGroups_PutDiscoGroup_MinimumSet_Gen": {
-            "$ref": "./examples/DiscoveryGroups_PutDiscoGroup_MinimumSet_Gen.json"
           }
         }
       }
@@ -753,11 +614,8 @@
           }
         },
         "x-ms-examples": {
-          "DiscoveryGroups_RunDiscoGroup_MaximumSet_Gen": {
+          "DiscoveryGroups_RunDiscoGroup": {
             "$ref": "./examples/DiscoveryGroups_RunDiscoGroup_MaximumSet_Gen.json"
-          },
-          "DiscoveryGroups_RunDiscoGroup_MinimumSet_Gen": {
-            "$ref": "./examples/DiscoveryGroups_RunDiscoGroup_MinimumSet_Gen.json"
           }
         }
       }
@@ -806,11 +664,8 @@
           }
         },
         "x-ms-examples": {
-          "DiscoveryGroups_ListRuns_MaximumSet_Gen": {
+          "DiscoveryGroups_ListRuns": {
             "$ref": "./examples/DiscoveryGroups_ListRuns_MaximumSet_Gen.json"
-          },
-          "DiscoveryGroups_ListRuns_MinimumSet_Gen": {
-            "$ref": "./examples/DiscoveryGroups_ListRuns_MinimumSet_Gen.json"
           }
         }
       }
@@ -855,11 +710,8 @@
           }
         },
         "x-ms-examples": {
-          "DiscoveryGroups_ValidateDiscoGroup_MaximumSet_Gen": {
+          "DiscoveryGroups_ValidateDiscoGroup": {
             "$ref": "./examples/DiscoveryGroups_ValidateDiscoGroup_MaximumSet_Gen.json"
-          },
-          "DiscoveryGroups_ValidateDiscoGroup_MinimumSet_Gen": {
-            "$ref": "./examples/DiscoveryGroups_ValidateDiscoGroup_MinimumSet_Gen.json"
           }
         }
       }
@@ -874,45 +726,13 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Paged collection of DiscoTemplate items",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "The DiscoTemplate items on this page",
-                  "items": {
-                    "$ref": "#/definitions/DiscoTemplate"
-                  }
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "The link to the next page of items"
-                },
-                "totalElements": {
-                  "type": "integer",
-                  "format": "int64",
-                  "description": "The total number of items available in the full result set."
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/DiscoTemplatePageResponse"
             }
           },
           "default": {
@@ -927,15 +747,9 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "DiscoveryTemplates_ListDiscoTemplate_MaximumSet_Gen": {
+          "DiscoveryTemplates_ListDiscoTemplate": {
             "$ref": "./examples/DiscoveryTemplates_ListDiscoTemplate_MaximumSet_Gen.json"
-          },
-          "DiscoveryTemplates_ListDiscoTemplate_MinimumSet_Gen": {
-            "$ref": "./examples/DiscoveryTemplates_ListDiscoTemplate_MinimumSet_Gen.json"
           }
         }
       }
@@ -979,11 +793,8 @@
           }
         },
         "x-ms-examples": {
-          "DiscoveryTemplates_GetDiscoTemplate_MaximumSet_Gen": {
+          "DiscoveryTemplates_GetDiscoTemplate": {
             "$ref": "./examples/DiscoveryTemplates_GetDiscoTemplate_MaximumSet_Gen.json"
-          },
-          "DiscoveryTemplates_GetDiscoTemplate_MinimumSet_Gen": {
-            "$ref": "./examples/DiscoveryTemplates_GetDiscoTemplate_MinimumSet_Gen.json"
           }
         }
       }
@@ -1020,11 +831,8 @@
           }
         },
         "x-ms-examples": {
-          "Reports_GetBillableReports_MaximumSet_Gen": {
+          "Reports_GetBillableReports": {
             "$ref": "./examples/Reports_GetBillableReports_MaximumSet_Gen.json"
-          },
-          "Reports_GetBillableReports_MinimumSet_Gen": {
-            "$ref": "./examples/Reports_GetBillableReports_MinimumSet_Gen.json"
           }
         }
       }
@@ -1069,7 +877,7 @@
           }
         },
         "x-ms-examples": {
-          "Reports_GetSnapshotReports_MaximumSet_Gen": {
+          "Reports_GetSnapshotReports": {
             "$ref": "./examples/Reports_GetSnapshotReports_MaximumSet_Gen.json"
           }
         }
@@ -1115,11 +923,8 @@
           }
         },
         "x-ms-examples": {
-          "Reports_GetSummaryReports_MaximumSet_Gen": {
+          "Reports_GetSummaryReports": {
             "$ref": "./examples/Reports_GetSummaryReports_MaximumSet_Gen.json"
-          },
-          "Reports_GetSummaryReports_MinimumSet_Gen": {
-            "$ref": "./examples/Reports_GetSummaryReports_MinimumSet_Gen.json"
           }
         }
       }
@@ -1134,45 +939,13 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Paged collection of SavedFilter items",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "The SavedFilter items on this page",
-                  "items": {
-                    "$ref": "#/definitions/SavedFilter"
-                  }
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "The link to the next page of items"
-                },
-                "totalElements": {
-                  "type": "integer",
-                  "format": "int64",
-                  "description": "The total number of items available in the full result set."
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/SavedFilterPageResponse"
             }
           },
           "default": {
@@ -1187,15 +960,9 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "SavedFilters_ListSavedFilter_MaximumSet_Gen": {
+          "SavedFilters_ListSavedFilter": {
             "$ref": "./examples/SavedFilters_ListSavedFilter_MaximumSet_Gen.json"
-          },
-          "SavedFilters_ListSavedFilter_MinimumSet_Gen": {
-            "$ref": "./examples/SavedFilters_ListSavedFilter_MinimumSet_Gen.json"
           }
         }
       }
@@ -1239,11 +1006,8 @@
           }
         },
         "x-ms-examples": {
-          "SavedFilters_GetSavedFilter_MaximumSet_Gen": {
+          "SavedFilters_GetSavedFilter": {
             "$ref": "./examples/SavedFilters_GetSavedFilter_MaximumSet_Gen.json"
-          },
-          "SavedFilters_GetSavedFilter_MinimumSet_Gen": {
-            "$ref": "./examples/SavedFilters_GetSavedFilter_MinimumSet_Gen.json"
           }
         }
       },
@@ -1293,11 +1057,8 @@
           }
         },
         "x-ms-examples": {
-          "SavedFilters_PutSavedFilter_MaximumSet_Gen": {
+          "SavedFilters_PutSavedFilter": {
             "$ref": "./examples/SavedFilters_PutSavedFilter_MaximumSet_Gen.json"
-          },
-          "SavedFilters_PutSavedFilter_MinimumSet_Gen": {
-            "$ref": "./examples/SavedFilters_PutSavedFilter_MinimumSet_Gen.json"
           }
         }
       },
@@ -1336,11 +1097,8 @@
           }
         },
         "x-ms-examples": {
-          "SavedFilters_DeleteSavedFilter_MaximumSet_Gen": {
+          "SavedFilters_DeleteSavedFilter": {
             "$ref": "./examples/SavedFilters_DeleteSavedFilter_MaximumSet_Gen.json"
-          },
-          "SavedFilters_DeleteSavedFilter_MinimumSet_Gen": {
-            "$ref": "./examples/SavedFilters_DeleteSavedFilter_MinimumSet_Gen.json"
           }
         }
       }
@@ -1355,48 +1113,13 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/OrderByParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Paged collection of Task items",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "The Task items on this page",
-                  "items": {
-                    "$ref": "#/definitions/Task"
-                  }
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "The link to the next page of items"
-                },
-                "totalElements": {
-                  "type": "integer",
-                  "format": "int64",
-                  "description": "The total number of items available in the full result set."
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/TaskPageResponse"
             }
           },
           "default": {
@@ -1411,15 +1134,9 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "Tasks_ListTask_MaximumSet_Gen": {
+          "Tasks_ListTask": {
             "$ref": "./examples/Tasks_ListTask_MaximumSet_Gen.json"
-          },
-          "Tasks_ListTask_MinimumSet_Gen": {
-            "$ref": "./examples/Tasks_ListTask_MinimumSet_Gen.json"
           }
         }
       }
@@ -1463,11 +1180,8 @@
           }
         },
         "x-ms-examples": {
-          "Tasks_GetTask_MaximumSet_Gen": {
+          "Tasks_GetTask": {
             "$ref": "./examples/Tasks_GetTask_MaximumSet_Gen.json"
-          },
-          "Tasks_GetTask_MinimumSet_Gen": {
-            "$ref": "./examples/Tasks_GetTask_MinimumSet_Gen.json"
           }
         }
       }
@@ -1511,11 +1225,8 @@
           }
         },
         "x-ms-examples": {
-          "Tasks_CancelTask_MaximumSet_Gen": {
+          "Tasks_CancelTask": {
             "$ref": "./examples/Tasks_CancelTask_MaximumSet_Gen.json"
-          },
-          "Tasks_CancelTask_MinimumSet_Gen": {
-            "$ref": "./examples/Tasks_CancelTask_MinimumSet_Gen.json"
           }
         }
       }
@@ -1548,19 +1259,6 @@
           "type": "boolean"
         }
       }
-    },
-    "ApiVersionParameter": {
-      "type": "object",
-      "description": "The API version to use for this operation.",
-      "properties": {
-        "apiVersion": {
-          "type": "string",
-          "description": "The API version to use for this operation."
-        }
-      },
-      "required": [
-        "apiVersion"
-      ]
     },
     "AsAsset": {
       "type": "object",
@@ -1749,19 +1447,6 @@
         }
       ],
       "x-ms-discriminator-value": "as"
-    },
-    "AssetIdParameter": {
-      "type": "object",
-      "description": "The unique identifier for the asset. Ids are formatted as '<kind>$$<name>' and can optionally be Base64 encoded if they contain special characters.",
-      "properties": {
-        "assetId": {
-          "type": "string",
-          "description": "The unique identifier for the asset. Ids are formatted as '<kind>$$<name>' and can optionally be Base64 encoded if they contain special characters."
-        }
-      },
-      "required": [
-        "assetId"
-      ]
     },
     "AssetKind": {
       "type": "string",
@@ -2528,19 +2213,6 @@
         "modelAsString": true
       }
     },
-    "DataConnectionNameParameter": {
-      "type": "object",
-      "description": "The unique identifier for the data connection.",
-      "properties": {
-        "dataConnectionName": {
-          "type": "string",
-          "description": "The unique identifier for the data connection."
-        }
-      },
-      "required": [
-        "dataConnectionName"
-      ]
-    },
     "DataConnectionPageResponse": {
       "type": "object",
       "properties": {
@@ -2980,19 +2652,6 @@
         "id"
       ]
     },
-    "DiscoTemplateIdParameter": {
-      "type": "object",
-      "description": "The unique identifier for the disco template.",
-      "properties": {
-        "templateId": {
-          "type": "string",
-          "description": "The unique identifier for the disco template."
-        }
-      },
-      "required": [
-        "templateId"
-      ]
-    },
     "DiscoTemplatePageResponse": {
       "type": "object",
       "properties": {
@@ -3285,16 +2944,6 @@
       "required": [
         "error"
       ]
-    },
-    "FilterParameter": {
-      "type": "object",
-      "description": "An expression on the resource type that selects the resources to be returned.",
-      "properties": {
-        "filter": {
-          "type": "string",
-          "description": "An expression on the resource type that selects the resources to be returned."
-        }
-      }
     },
     "GuidPair": {
       "type": "object",
@@ -4274,14 +3923,13 @@
         }
       ]
     },
-    "MaxPageSizeParameter": {
+    "MarkParameter": {
       "type": "object",
-      "description": "The maximum number of items to include in a single response.",
+      "description": "Specify this value instead of 'skip' to use cursor-based searching. Initial value is '*' and subsequent values are returned in the response.",
       "properties": {
-        "maxpagesize": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum number of items to include in a single response."
+        "mark": {
+          "type": "string",
+          "description": "Specify this value instead of 'skip' to use cursor-based searching. Initial value is '*' and subsequent values are returned in the response."
         }
       }
     },
@@ -4479,6 +4127,16 @@
         },
         "recent": {
           "type": "boolean"
+        }
+      }
+    },
+    "OrderByParameter": {
+      "type": "object",
+      "description": "A list of expressions that specify the order of the returned resources.",
+      "properties": {
+        "orderby": {
+          "type": "string",
+          "description": "A list of expressions that specify the order of the returned resources."
         }
       }
     },
@@ -5167,19 +4825,6 @@
         }
       }
     },
-    "ResourceGroupNameParameter": {
-      "type": "object",
-      "description": "The name of the Resource Group.",
-      "properties": {
-        "resourceGroupName": {
-          "type": "string",
-          "description": "The name of the Resource Group."
-        }
-      },
-      "required": [
-        "resourceGroupName"
-      ]
-    },
     "ResourceUrl": {
       "type": "object",
       "properties": {
@@ -5254,19 +4899,6 @@
       "required": [
         "filter",
         "description"
-      ]
-    },
-    "SavedFilterNameParameter": {
-      "type": "object",
-      "description": "The unique identifier for the saved filter.",
-      "properties": {
-        "filterName": {
-          "type": "string",
-          "description": "The unique identifier for the saved filter."
-        }
-      },
-      "required": [
-        "filterName"
       ]
     },
     "SavedFilterPageResponse": {
@@ -5369,17 +5001,6 @@
             "$ref": "#/definitions/ObservedPortState"
           },
           "x-ms-identifiers": []
-        }
-      }
-    },
-    "SkipParameter": {
-      "type": "object",
-      "description": "An offset into the collection of the first item to be returned.",
-      "properties": {
-        "skip": {
-          "type": "integer",
-          "format": "int32",
-          "description": "An offset into the collection of the first item to be returned."
         }
       }
     },
@@ -5705,19 +5326,6 @@
         }
       }
     },
-    "SubscriptionIdParameter": {
-      "type": "object",
-      "description": "The ID of the target subscription.",
-      "properties": {
-        "subscriptionId": {
-          "type": "string",
-          "description": "The ID of the target subscription."
-        }
-      },
-      "required": [
-        "subscriptionId"
-      ]
-    },
     "Task": {
       "type": "object",
       "properties": {
@@ -5761,19 +5369,6 @@
       },
       "required": [
         "id"
-      ]
-    },
-    "TaskIdParameter": {
-      "type": "object",
-      "description": "The unique identifier for the task.",
-      "properties": {
-        "taskId": {
-          "type": "string",
-          "description": "The unique identifier for the task."
-        }
-      },
-      "required": [
-        "taskId"
       ]
     },
     "TaskPageResponse": {
@@ -5916,19 +5511,6 @@
           "type": "string"
         }
       }
-    },
-    "WorkspaceNameParameter": {
-      "type": "object",
-      "description": "The name of the Workspace.",
-      "properties": {
-        "workspaceName": {
-          "type": "string",
-          "description": "The name of the Workspace."
-        }
-      },
-      "required": [
-        "workspaceName"
-      ]
     }
   },
   "parameters": {
@@ -5974,22 +5556,6 @@
       "in": "path",
       "description": "The unique identifier for the discovery group.",
       "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "MarkParameter": {
-      "name": "mark",
-      "in": "query",
-      "description": "Specify this value instead of 'skip' to use cursor-based searching. Initial value is '*' and subsequent values are returned in the response.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "OrderByParameter": {
-      "name": "orderby",
-      "in": "query",
-      "description": "A list of expressions that specify the order of the returned resources.",
-      "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
