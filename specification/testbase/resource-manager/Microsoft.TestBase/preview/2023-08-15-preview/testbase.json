@@ -3473,8 +3473,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/TestBaseAccounts/{testBaseAccountName}/TestConfigurations/{testConfigurationId}/run-test": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/TestBaseAccounts/{testBaseAccountName}/TestConfigurations/{testConfigurationId}/runTest": {
       "post": {
+        "tags": [
+          "Test Base Package"
+        ],
+        "operationId": "TestConfigurationsMultipleOndemandRun_Post",
         "summary": "Schedule On-Demand Run for all Packages",
         "description": "This endpoint allows initiating an on-demand run for a specific test configuration identified by the testConfigurationId within the specified organizationId. It triggers the execution of multiple packages with the provided payload parameters.",
         "parameters": [
@@ -7038,6 +7042,7 @@
       }
     },
     "MultipleOndemandRunRequest": {
+      "description": "The request body of a multiple ondemand run request.",
       "type": "object",
       "properties": {
         "organizationId": {
@@ -7083,6 +7088,7 @@
       }
     },
     "MultipleOndemandRunResponse": {
+      "description": "The response body of a multiple ondemand run request.",
       "type": "object",
       "properties": {
         "runId": {
@@ -7099,6 +7105,7 @@
         },
         "totalPackagesScheduled": {
           "type": "integer",
+          "format": "int32",
           "description": "The total number of packages scheduled for execution."
         }
       }
