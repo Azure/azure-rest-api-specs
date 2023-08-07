@@ -34,6 +34,37 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.AzureTerraform/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available RP operations.",
+        "operationId": "ListOperations",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureTerraform/exportTerraform": {
       "post": {
         "tags": [
@@ -209,7 +240,8 @@
           "items": {
             "type": "object",
             "$ref": "#/definitions/ErrorResponse"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -254,6 +286,53 @@
             "target"
           ],
           "description": "The error details."
+        }
+      }
+    },
+    "Operation": {
+      "description": "REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.AzureTerraform",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Name of the operation for display purposes",
+              "type": "string"
+            },
+            "description": {
+              "description": "Description of the operation for display purposes",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list Resource Provider operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Resource Provider operations supported by the Resource Provider resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
         }
       }
     }
