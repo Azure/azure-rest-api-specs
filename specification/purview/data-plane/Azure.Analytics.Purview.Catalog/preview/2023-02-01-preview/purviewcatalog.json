@@ -5780,6 +5780,20 @@
             "status": {
               "$ref": "#/definitions/TermStatus"
             },
+            "nickName": {
+              "type": "string",
+              "description": "The nick name of the term."
+            },
+            "hierarchyInfo": {
+              "type": "object",
+              "description": "The hierarchy information of the term.",
+              "additionalProperties": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/PurviewObjectId"
+                }
+              }
+            },
             "resources": {
               "type": "array",
               "description": "An array of resource link for term",
@@ -6059,6 +6073,35 @@
       },
       "title": "AtlasObjectId",
       "description": "Reference to an object-instance of an Atlas type - like entity."
+    },
+    "PurviewObjectId": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AtlasObjectId"
+        },
+        {
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "displayText": {
+              "type": "string"
+            },
+            "itemPath": {
+              "type": "string"
+            },
+            "resourceId": {
+              "type": "string"
+            },
+            "properties": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        }
+      ],
+      "title": "PurviewObjectId"
     },
     "AtlasRelatedCategoryHeader": {
       "type": "object",
@@ -8492,7 +8535,7 @@
         "merge"
       ],
       "x-ms-enum": {
-        "name": "type",
+        "name": "businessAttributeUpdateBehavior",
         "modelAsString": true
       },
       "default": false,
