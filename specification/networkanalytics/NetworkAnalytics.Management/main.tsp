@@ -590,6 +590,20 @@ model NetworkAcls {
     defaultActionType: DefaultAction;
 }
 
+@doc("Data Product Network rule set")
+@added(Versions.v2023_11_15)
+model DataProductNetworkAcls {
+    @doc("Virtual Network Rule")
+    virtualNetworkRule: VirtualNetworkRule[];
+    @doc("IP rule with specific IP or IP range in CIDR format.")
+    @extension("x-ms-identifiers", [])
+    ipRules: IPRules[];
+    @doc("The list of query ips in the format of CIDR allowed to connect to query/visualization endpoint.")
+    allowedQueryIpRangeList: string[];
+    @doc("Default Action")    
+    defaultAction: DefaultAction;
+}
+
 @doc("Restore Policy")
 @removed(Versions.v2023_11_15)
 model RestorePolicy {
@@ -685,6 +699,9 @@ model DataProduct is TrackedResource<DataProductProperties>{
 @doc("The data product properties.")
 @added(Versions.v2023_11_15)
 model DataProductProperties{
+    @doc("The resource GUID property of the data product resource.")
+    @visibility("read")
+    resourceGuid?: string;
     @doc("Latest provisioning state  of data product.")
     @visibility("read")
     provisioningState ?: ProvisioningState;
@@ -704,17 +721,26 @@ model DataProductProperties{
     @visibility("create","read")
     redundancy?: boolean;    
     @doc("Purview account url for data product to connect to.")
-    @visibility("create", "update")
+    @visibility("create", "update","read")
     purviewAccount?: string;
+    @doc("Purview collection url for data product to connect to.")
+    @visibility("create", "update","read")
+    purviewCollection?: string;
     @doc("Flag to enable private link for data product resource.")
     @visibility("create", "update","read")
     privateLinksEnabled?: boolean = false;
     @doc("Flag to enable public access of data product resource.")
     @visibility("create","read")
-    publicNetworkAccess?: boolean;
+    publicNetworkAccess?: PublicNetworkAccess;
+    @doc("Flag to enable customer managed key encryption for data product.")
+    @visibility("create","read")
+    customerManagedKeyEncryptionEnabled?: boolean = false;
+    @doc("Customer managed encryption key details for data product.")
+    @visibility("create","read")
+    customerEncryptionKey?: EncryptionKeyDetails;
     @doc("Network rule set for data product.")
     @visibility("create","read")
-    networkacls ?: NetworkAcls;
+    networkacls ?: DataProductNetworkAcls;
     @doc("Managed resource group configuration.")
     @visibility("create")
     managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
@@ -729,24 +755,65 @@ model DataProductProperties{
     documentation?: string;
     @doc("Resource links which exposed to the customer to query the data.")
     @visibility("read")
-    consumptionUrls?: ConsumptionUrlsProperties;
+    consumptionEndpoints?: ConsumptionEndpointsProperties;
     @doc("Key vault url.")
     @visibility("read")
     keyVaultUrl?: string;
 }
 
+@doc("Encryption key details.")
+@added(Versions.v2023_11_15)
+model EncryptionKeyDetails {
+  @doc("The Uri of the key vault.")
+  keyVaultUri : shtring;
+  @doc("The name of the key vault key.")
+  keyName : string;
+  @doc("The version of the key vault key.")
+  keyVersion : string;
+}
+
+@doc("The data type state")
+@added(Versions.v2023_11_15)
+enum PublicNetworkAccess{
+  @doc("Field to enable public access.")
+  Enabled;
+  @doc("Field to disable public accesss.")
+  Disabled;
+}
+
 @doc("Details of Consumption Properties")
 @added(Versions.v2023_11_15)
-model ConsumptionUrlsProperties{
+model ConsumptionEndpointsProperties{
   @doc("Ingestion url to upload the data.")
   @visibility("read")
   ingestionUrl?: string;
+  @doc("Resource Id of ingestion endpoint.")
+  @visibility("read")
+  ingestionResourceId?: ResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/storageAccounts"
+    }
+  ]>;
   @doc("Url to consume file type.")
   @visibility("read")
   fileAccessUrl?: string;
+  @doc("Resource Id of file access endpoint.")
+  @visibility("read")
+  fileAccessResourceId?: ResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/storageAccounts"
+    }
+  ]>;
   @doc("Url to consume the processed data.")
   @visibility("read")  
   queryUrl?: string;
+  @doc("Resource Id of query endpoint.")
+  @visibility("read")  
+  queryResourceId?: ResourceIdentifier<[
+    {
+      type: "Microsoft.Kusto/clusters"
+    }
+  ]>;
 }
 
 @doc("The details for storage account sas creation.")
