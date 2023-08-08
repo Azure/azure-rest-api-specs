@@ -68,6 +68,22 @@ directive:
     - R4018 # The 'OperationsApiResponseSchema' It will be added later, if needed. The current API provides in this format.
 ```
 
+``` yaml
+suppressions:
+  - code: RPC-Put-V1-01
+    from: Microsoft.Quota/preview/2023-06-01-preview/groupquota.json
+    reason: This API is a Management Group level API.
+  - code: RPC-Uri-V1-06
+    from: Microsoft.Quota/preview/2023-06-01-preview/groupquota.json
+    reason: This API is a Management Group level API.
+  - code: RPC-Put-V1-02
+    from: Microsoft.Quota/preview/2023-06-01-preview/groupquota.json
+    reason: This API is a Management Group level API.
+  - code: RPC-Get-V1-05
+    from: Microsoft.Quota/preview/2023-06-01-preview/groupquota.json
+    reason: This API is a Management Group level API.
+```
+
 ---
 
 ---
