@@ -1633,15 +1633,3 @@ model RequiredFilterParameter {
     @query("filter")
     filter: string;
 }
-
-@doc("Implicit Flow")
-model ImplicitFlow {
-    @doc("implicit flow")
-    type: OAuth2FlowType.implicit;
-
-    @doc("the authorization URL")
-    authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
-
-    @doc("list of scopes for the credential")
-    scopes: ["https://easm.defender.microsoft.com/.default"];
-}
