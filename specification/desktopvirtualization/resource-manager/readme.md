@@ -37,6 +37,11 @@ These settings apply only when `--tag=package-preview-2023-07` is specified on t
 ```yaml $(tag) == 'package-preview-2023-07'
 input-file:
   - Microsoft.DesktopVirtualization/preview/2023-07-07-preview/desktopvirtualization.json
+
+suppressions:
+  - code: ResourceNameRestriction
+    reason: ScalingPlan was already implemented in previous versions of the API and
+      we cannot change naming pattern now.
 ```
 ### Tag: package-preview-2022-10
 
