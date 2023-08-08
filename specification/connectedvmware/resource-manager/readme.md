@@ -38,7 +38,27 @@ These settings apply only when `--tag=package-preview-2023-03` is specified on t
 ```yaml $(tag) == 'package-preview-2023-03'
 input-file:
   - Microsoft.ConnectedVMwarevSphere/preview/2023-03-01-preview/connectedvmware.json
+suppressions:    
+  - code: LroPostReturn
+    reason: All POST actions are long running operations and never return 200 in the response.
+    where:
+      - $.paths["/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default/stop"].post
+      - $.paths["/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default/start"].post
+      - $.paths["/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default/restart"].post
+
+  - code: GetCollectionOnlyHasValueAndNextLink
+    reason: GET instance API for ARM extension resources are being flagged as Get Collection APIs.
+    where:
+      - $.paths["/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default"].get
+      - $.paths["/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default/hybridIdentityMetadata/default"].get
+      - $.paths["/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default/guestAgents/default"].get
+    
+  - code:  TopLevelResourcesListBySubscription
+    reason: VirtualMachineInstance resource is an ARM extension resource and does not support List by subscription API.  
+    where:
+      - $.definitions.VirtualMachineInstance
 ```
+
 ### Tag: package-2020-10-01-preview
 
 These settings apply only when `--tag=package-2020-10-01-preview` is specified on the command line.

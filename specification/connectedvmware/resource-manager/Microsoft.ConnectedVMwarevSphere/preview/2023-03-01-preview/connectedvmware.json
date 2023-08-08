@@ -4332,9 +4332,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -4396,6 +4393,9 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -4432,9 +4432,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -4478,9 +4475,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -4524,9 +4518,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -4753,9 +4744,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -4947,7 +4935,7 @@
           "items": {
             "$ref": "#/definitions/ResourceStatus"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": ["type"]
         },
         "provisioningState": {
           "$ref": "#/definitions/ResourceProvisioningState",
@@ -5144,7 +5132,7 @@
           "items": {
             "$ref": "#/definitions/ResourceStatus"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": ["type"]
         },
         "provisioningState": {
           "$ref": "#/definitions/ResourceProvisioningState",
@@ -5576,8 +5564,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NetworkInterfaceUpdate"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -5590,8 +5577,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NetworkInterface"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -5660,8 +5646,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualDisk"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "scsiControllers": {
           "description": "Gets or sets the list of virtual SCSI controllers associated with the virtual machine.",
@@ -5669,7 +5654,6 @@
           "items": {
             "$ref": "#/definitions/VirtualSCSIController"
           },
-          "x-ms-identifiers": [],
           "readOnly": true
         }
       }
@@ -5683,8 +5667,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualDiskUpdate"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -5737,7 +5720,6 @@
           "items": {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail"
           },
-          "x-ms-identifiers": [],
           "description": "Details about the error state."
         }
       }
@@ -5956,7 +5938,7 @@
           "items": {
             "$ref": "#/definitions/ResourceStatus"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": ["type"]
         },
         "provisioningState": {
           "$ref": "#/definitions/ResourceProvisioningState",
@@ -6014,7 +5996,7 @@
           "items": {
             "$ref": "#/definitions/ResourceStatus"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": ["type"]
         },
         "provisioningState": {
           "$ref": "#/definitions/ResourceProvisioningState",
@@ -6301,7 +6283,6 @@
           "items": {
             "$ref": "#/definitions/NetworkInterface"
           },
-          "x-ms-identifiers": [],
           "readOnly": true
         },
         "disks": {
@@ -6310,7 +6291,6 @@
           "items": {
             "$ref": "#/definitions/VirtualDisk"
           },
-          "x-ms-identifiers": [],
           "readOnly": true
         },
         "customResourceName": {
@@ -6340,7 +6320,7 @@
           "items": {
             "$ref": "#/definitions/ResourceStatus"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": ["type"]
         },
         "provisioningState": {
           "$ref": "#/definitions/ResourceProvisioningState",
@@ -6382,7 +6362,7 @@
           "items": {
             "$ref": "#/definitions/ResourceStatus"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": ["type"]
         },
         "customResourceName": {
           "description": "Gets the name of the corresponding resource in Kubernetes.",
@@ -6547,7 +6527,7 @@
           "items": {
             "$ref": "#/definitions/ResourceStatus"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": ["type"]
         },
         "customResourceName": {
           "description": "Gets the name of the corresponding resource in Kubernetes.",
@@ -6712,7 +6692,7 @@
           "items": {
             "$ref": "#/definitions/ResourceStatus"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": ["type"]
         },
         "customResourceName": {
           "description": "Gets the name of the corresponding resource in Kubernetes.",
@@ -6950,7 +6930,7 @@
           "items": {
             "$ref": "#/definitions/ResourceStatus"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": ["type"]
         },
         "provisioningState": {
           "$ref": "#/definitions/ResourceProvisioningState",
@@ -8190,7 +8170,7 @@
           "items": {
             "$ref": "#/definitions/ResourceStatus"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": ["type"]
         },
         "provisioningState": {
           "$ref": "#/definitions/ResourceProvisioningState",
