@@ -72,16 +72,7 @@
           "tier": "ErGwScale"
         },
         "vpnClientConfiguration": null,
-        "bgpSettings": {
-          "asn": 65515,
-          "bgpPeeringAddress": "10.0.1.30",
-          "peerWeight": 0
-        },
-        "customRoutes": {
-          "addressPrefixes": [
-            "101.168.0.6/32"
-          ]
-        },
+        "bgpSettings": null,
         "allowVirtualWanTraffic": false,
         "allowRemoteVnetTraffic": false
       },
@@ -102,7 +93,7 @@
           "ipConfigurations": [
             {
               "name": "gwipconfig1",
-              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/ergw/ipConfigurations/gwipconfig1",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/ergw/ipConfigurations/default",
               "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
               "properties": {
                 "provisioningState": "Succeeded",
@@ -158,8 +149,8 @@
           ],
           "enableBgpRouteTranslationForNat": false,
           "sku": {
-            "name": "ergw1",
-            "tier": "ergw1",
+            "name": "ErGwScale",
+            "tier": "ErGwScale",
             "capacity": 0
           },
           "autoScaleConfiguration": {
@@ -174,33 +165,9 @@
           "enableBgp": false,
           "activeActive": false,
           "disableIPSecReplayProtection": false,
-          "enableDnsForwarding": true,
-          "inboundDnsForwardingEndpoint": "10.0.1.14",
           "vpnClientConfiguration": null,
-          "bgpSettings": {
-            "asn": 65515,
-            "bgpPeeringAddress": "10.0.1.30",
-            "peerWeight": 0,
-            "bgpPeeringAddresses": [
-              {
-                "ipconfigurationId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/ergw/ipConfigurations/gwipconfig1",
-                "defaultBgpIpAddresses": [
-                  "10.3.1.254"
-                ],
-                "customBgpIpAddresses": [
-                  "169.254.21.10"
-                ],
-                "tunnelIpAddresses": [
-                  "52.161.10.135"
-                ]
-              }
-            ]
-          },
-          "customRoutes": {
-            "addressPrefixes": [
-              "101.168.0.6/32"
-            ]
-          },
+          "bgpSettings": null,
+          "customRoutes": null,
           "allowVirtualWanTraffic": false,
           "allowRemoteVnetTraffic": false
         }
@@ -219,7 +186,7 @@
           "ipConfigurations": [
             {
               "name": "gwipconfig1",
-              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/ergw/ipConfigurations/gwipconfig1",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/ergw/ipConfigurations/default",
               "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
               "properties": {
                 "provisioningState": "Succeeded",
@@ -285,51 +252,15 @@
               "max": 3
             }
           },
-          "gatewayType": "Vpn",
-          "vpnType": "RouteBased",
+          "gatewayType": "ExpressRoute",
+          "vpnType": "PolicyBased",
           "enableBgp": false,
           "activeActive": false,
           "disableIPSecReplayProtection": false,
-          "enableDnsForwarding": true,
           "enablePrivateIpAddress": false,
-          "inboundDnsForwardingEndpoint": "10.0.1.14",
-          "vpnClientConfiguration": {
-            "vpnClientProtocols": [
-              "OpenVPN"
-            ],
-            "vpnClientRootCertificates": [],
-            "vpnClientRevokedCertificates": [],
-            "radiusServers": [
-              {
-                "radiusServerAddress": "10.2.0.0",
-                "radiusServerScore": 20
-              }
-            ]
-          },
-          "bgpSettings": {
-            "asn": 65515,
-            "bgpPeeringAddress": "10.0.1.30",
-            "peerWeight": 0,
-            "bgpPeeringAddresses": [
-              {
-                "ipconfigurationId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/ergw/ipConfigurations/gwipconfig1",
-                "defaultBgpIpAddresses": [
-                  "10.3.1.254"
-                ],
-                "customBgpIpAddresses": [
-                  "169.254.21.10"
-                ],
-                "tunnelIpAddresses": [
-                  "52.161.10.135"
-                ]
-              }
-            ]
-          },
-          "customRoutes": {
-            "addressPrefixes": [
-              "101.168.0.6/32"
-            ]
-          },
+          "vpnClientConfiguration": null,
+          "bgpSettings": null,
+          "customRoutes": null,
           "allowVirtualWanTraffic": false,
           "allowRemoteVnetTraffic": false
         }
