@@ -39,7 +39,8 @@ input-file:
   - Microsoft.AksHybrid/preview/2023-09-01-preview/provisionedClusters.json
 suppressions:
   - code: GetCollectionOnlyHasValueAndNextLink
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{clusterName}/providers/Microsoft.AksHybrid/provisionedClusters/{resourceName}/availableAgentPoolVersions"].get.responses["200"]["schema"]
+    from: swagger-document
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{clusterName}/providers/Microsoft.AksHybrid/provisionedClusters/{resourceName}/availableAgentPoolVersions"].get.responses["200"].schema
     reason: To be consistent with AKS. In this object schema, all the available versions share the same id, name, type, and location, thus these properties exist on a higher level than the list of versions.
   - code: ParametersInPost
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{clusterName}/providers/Microsoft.AksHybrid/provisionedClusters/{resourceName}/listClusterAdminCredential"].post.parameters
