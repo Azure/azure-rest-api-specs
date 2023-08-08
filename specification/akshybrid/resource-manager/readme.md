@@ -40,19 +40,14 @@ input-file:
 suppressions:
   - code: GetCollectionOnlyHasValueAndNextLink
     where: $.definitions.AgentPoolAvailableVersions
-    reason: 
   - code: ParametersInPost
     where: $.parameters.ServerFqdnParameter
-    reason: 
   - code: ParametersInPost
     where: $.parameters.CredentialFormatParameter
-    reason: 
   - code: LroPostReturn
-    where: $.paths./subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{clusterName}/providers/Microsoft.AksHybrid/provisionedClusters/{resourceName}/rotateClusterCertificates
-    reason: 
+    where: $.paths./subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{clusterName}/providers/Microsoft.AksHybrid/provisionedClusters/{resourceName}/rotateClusterCertificates 
   - code: TrackedResourcePatchOperation
     where: $.definitions.AgentPool
-    reason: 
 ```
 
 ---
