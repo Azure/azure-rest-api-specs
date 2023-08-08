@@ -10,7 +10,16 @@ using TypeSpec.Rest;
 using Azure.Core;
 using TypeSpec.Versioning;
 
-@useAuth(OAuth2Auth<[ImplicitFlow]>)
+@useAuth(OAuth2Auth<[{
+        @doc("implicit flow")
+        type: OAuth2FlowType.implicit;
+
+        @doc("the authorization URL")
+        authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
+
+        @doc("list of scopes for the credential")
+        scopes: ["https://easm.defender.microsoft.com/.default"];
+    }]>)
 @versioned(Easm.Versions)
 @service({
     title: "Defender EASM",
