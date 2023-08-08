@@ -2197,7 +2197,7 @@
           "Custom Speech models:"
         ],
         "summary": "Copies a model from one subscription to another.",
-        "description": "This method can be used to copy a model from this speech resource to the target resource.\r\nThe authorization is obtained on the target speech resource.\r\nOnly custom models can be copied to another speech resource.",
+        "description": "This method can be used to copy a model from this speech resource to a target one.\r\nThe authorization is obtained on the target speech resource.\r\nOnly custom models can be copied to another speech resource.",
         "operationId": "Models_Copy",
         "consumes": [
           "application/json"
@@ -4002,14 +4002,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DatasetKind"
-          },
-          "readOnly": true
-        },
-        "supportedOutputFormat": {
-          "description": "Supported output formats.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OutputFormatType"
           },
           "readOnly": true
         }
@@ -6390,6 +6382,14 @@
         "supportsTranscriptionsOnSpeechContainers": {
           "description": "A value indicating whether this model can be used for transcription on speech container. This feature can be added on existing models when it becomes usable on speech container.",
           "type": "boolean",
+          "readOnly": true
+        },
+        "supportedOutputFormats": {
+          "description": "Supported output formats.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OutputFormatType"
+          },
           "readOnly": true
         }
       }
