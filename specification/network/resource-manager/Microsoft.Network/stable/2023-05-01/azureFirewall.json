@@ -759,16 +759,19 @@
           "type": "integer",
           "format": "int32",
           "description": "The minimum number of instances for autoscale.",
-          "minimum": 2
+          "minimum": 2,
+          "multipleOf": 2
         },
         "maximumInstances": {
           "type": "integer",
           "format": "int32",
           "description": "The maximum number of instances for autoscale.",
           "minimum": 2,
-          "maximum": 50
+          "maximum": 50,
+          "exclusiveMaximum": true,
+          "multipleOf": 2
         }
-      },
+      }
     },
     "AzureFirewallAdditionalProperties": {
       "type": "object",
