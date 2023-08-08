@@ -40,19 +40,19 @@ input-file:
 suppressions:
   - code: GetCollectionOnlyHasValueAndNextLink
     where: $.definitions.AgentPoolAvailableVersions
-    reason: 
+    reason: TO BE CONSISTENT WITH AKS. In this object, all the available versions share the same id, name, type, and location, thus these properties exist on a higher level than the list of versions.
   - code: ParametersInPost
     where: $.parameters.ServerFqdnParameter
-    reason:
+    reason: TO BE CONSISTENT WITH AKS. Only AKS has implemented this parameter.
   - code: ParametersInPost
     where: $.parameters.CredentialFormatParameter
-    reason:
+    reason: TO BE CONSISTENT WITH AKS. Only AKS has implemented this parameter.
   - code: LroPostReturn
     where: $.paths./subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{clusterName}/providers/Microsoft.AksHybrid/provisionedClusters/{resourceName}/rotateClusterCertificates
-    reason:
+    reason: TO BE CONSISTENT WITH AKS. There is nothing to be returned in Response 200.
   - code: TrackedResourcePatchOperation
     where: $.definitions.AgentPool
-    reason:
+    reason: TO BE CONSISTENT WITH AKS. The Patch operation is not implemented in AKS.
 ```
 
 ---
