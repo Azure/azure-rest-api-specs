@@ -88,7 +88,7 @@ interface DiscoveryGroups {
         DiscoGroup,
         {},
         DiscoGroupPageResponse,
-        DiscoveryGroupsListTrait,
+        CommonListTrait,
         ErrorResponse
     >;
     @doc("Validate a discovery group with a given groupName.")
@@ -138,7 +138,7 @@ interface DiscoveryTemplates {
         DiscoTemplate,
         {},
         DiscoTemplatePageResponse,
-        DiscoveryTemplatesListTrait,
+        CommonListTrait,
         ErrorResponse
     >;
     @doc("Retrieve a disco template with a given templateId.")
@@ -189,7 +189,7 @@ interface SavedFilters {
         SavedFilter,
         {},
         SavedFilterPageResponse,
-        SavedFiltersListTrait,
+        CommonListTrait,
         ErrorResponse
     >;
     @doc("Retrieve a saved filter by filterName.")
