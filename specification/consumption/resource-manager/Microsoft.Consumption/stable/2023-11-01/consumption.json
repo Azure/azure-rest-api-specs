@@ -1622,10 +1622,16 @@
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-examples": {
-          "EventsGetByBillingAccount": {
+          "EventsGetByBillingAccountMultiMACC-Contributor": {
+            "$ref": "./examples/EventsGetByBillingAccountMultiMACC-Contributor.json"
+          },
+          "EventsGetByBillingAccountSingleEntityMACC-MultiEntityMACCPrimary": {
             "$ref": "./examples/EventsGetByBillingAccount.json"
           },
-          "EventsGetByBillingAccountWithFilters": {
+          "EventsGetByBillingAccountWithFiltersMultiMACC-Contributor.json": {
+            "$ref": "./examples/EventsGetByBillingAccountWithFiltersMultiMACC-Contributor.json"
+          },
+          "EventsGetByBillingAccountWithFiltersSingleEntity-MultiEntityMACCPrimary": {
             "$ref": "./examples/EventsGetByBillingAccountWithFilters.json"
           }
         },
@@ -1719,10 +1725,22 @@
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-examples": {
-          "LotsListByBillingAccount": {
+          "LotsListByBillingAccountMultiMACC-Primary": {
+            "$ref": "./examples/LotsListByBillingAccountMultiMACC-Primary.json"
+          },
+          "LotsListByBillingAccountMultiMACC-Contributor": {
+            "$ref": "./examples/LotsListByBillingAccountMultiMACC-Contributor.json"
+          },
+          "LotsListByBillingAccountSingleEntityMACC": {
             "$ref": "./examples/LotsListByBillingAccount.json"
           },
-          "LotsListByBillingAccountWithStatusFilter": {
+          "LotsListByBillingAccountWithStatusFilterMultiMACC-Primary": {
+            "$ref": "./examples/LotsListByBillingAccountWithFiltersMultiMACC-Primary.json"
+          },
+          "LotsListByBillingAccountWithStatusFilterMultiMACC-Contributor": {
+            "$ref": "./examples/LotsListByBillingAccountWithFiltersMultiMACC-Contributor.json"
+          },
+          "LotsListByBillingAccountWithStatusFilterSingleEntityMACC": {
             "$ref": "./examples/LotsListByBillingAccountWithFilters.json"
           }
         },
@@ -5133,7 +5151,7 @@
           "$ref": "#/definitions/amount"
         },
         "closedBalance": {
-          "description": "The balance after the event. ",
+          "description": "The balance after the event, Note: This will not be returned for Contributor Organization Type in Multi-MACC.",
           "readOnly": true,
           "$ref": "#/definitions/amount"
         },
@@ -5372,6 +5390,36 @@
           "readOnly": true,
           "type": "string",
           "description": "The eTag for the resource."
+        },
+        "OrgType": {
+          "description": "The organization type of the lot.",
+          "type": "string",
+          "enum": [
+            "Primary",
+            "Contributor"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "OrgType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Primary",
+                "description": "Primary organization type for MACC",
+                "name": "PrimaryOrgType"
+              },
+              {
+                "value": "Contributor",
+                "description": "Contributor organization type for MACC",
+                "name": "ContributorOrgType"
+              }
+            ]
+          }
+        },
+        "UsedAmount": {
+          "description": "Amount consumed from the commitment.",
+          "readOnly": true,
+          "$ref": "#/definitions/amount"
         }
       }
     },
