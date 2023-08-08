@@ -1076,6 +1076,19 @@
         }
       }
     },
+    "MoveType": {
+      "description": "Defines the MoveType.",
+      "enum": [
+        "RegionToRegion",
+        "RegionToZone"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "MoveType",
+        "modelAsString": true
+      }
+    },
     "MoveState": {
       "description": "Defines the MoveResource states.",
       "enum": [
@@ -1398,10 +1411,6 @@
     "MoveCollectionProperties": {
       "description": "Defines the move collection properties.",
       "type": "object",
-      "required": [
-        "sourceRegion",
-        "targetRegion"
-      ],
       "properties": {
         "sourceRegion": {
           "description": "Gets or sets the source region.",
@@ -1411,12 +1420,19 @@
           "description": "Gets or sets the target region.",
           "type": "string"
         },
+        "resourceRegion": {
+          "description": "Gets or sets the resource region.",
+          "type": "string"
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState"
         },
         "version": {
           "description": "Gets or sets the version of move collection.",
           "type": "string"
+        },
+        "moveType": {
+          "$ref": "#/definitions/MoveType"
         },
         "errors": {
           "description": "Defines the move collection errors.",
@@ -1861,8 +1877,7 @@
       "description": "Gets or sets the resource settings.",
       "type": "object",
       "required": [
-        "resourceType",
-        "targetResourceName"
+        "resourceType"
       ],
       "properties": {
         "resourceType": {
