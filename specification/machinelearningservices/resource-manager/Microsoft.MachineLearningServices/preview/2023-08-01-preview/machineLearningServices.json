@@ -2903,7 +2903,18 @@
       "properties": {
         "patchStatus": {
           "type": "string",
-          "description": "The os patching status."
+          "description": "The os patching status.",
+          "enum": [
+            "CompletedWithWarnings",
+            "Failed",
+            "InProgress",
+            "Succeeded",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "OsPatchingStatus",
+            "modelAsString": true
+          }
         },
         "latestPatchTime": {
           "type": "string",
