@@ -1190,6 +1190,44 @@
         }
       }
     },
+    "SoftDeleteSettings": {
+      "description": "Soft delete Settings of vault",
+      "type": "object",
+      "properties": {
+        "softDeleteState": {
+          "enum": [
+            "Invalid",
+            "Enabled",
+            "Disabled",
+            "AlwaysON"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SoftDeleteState",
+            "modelAsString": true
+          }
+        },
+        "softDeleteRetentionPeriodInDays": {
+          "format": "int32",
+          "description": "Soft delete retention period in days",
+          "type": "integer"
+        }
+      }
+    },
+    "MultiUserAuthorization": {
+      "description": "MUA Settings of vault",
+      "enum": [
+        "Invalid",
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "MultiUserAuthorization",
+        "modelAsString": true
+      }
+    },
     "MonitoringSettings": {
       "description": "Monitoring Settings of the vault",
       "type": "object",
@@ -1237,6 +1275,14 @@
         "immutabilitySettings": {
           "description": "Immutability Settings of a vault",
           "$ref": "#/definitions/ImmutabilitySettings"
+        },
+        "softDeleteSettings": {
+          "description": "Soft delete Settings of a vault",
+          "$ref": "#/definitions/SoftDeleteSettings"
+        },
+        "multiUserAuthorization": {
+          "description": "MUA Settings of a vault",
+          "$ref": "#/definitions/MultiUserAuthorization"
         }
       }
     },
