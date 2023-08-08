@@ -397,7 +397,7 @@ See configuration in [readme.java.md](./readme.java.md)
 suppressions:
   - code: LroPostReturn
     from: Microsoft.MachineLearningServices\preview\2023-08-01-preview\machineLearningServices.json
-     where:
+    where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/resize"].post
     reason: LRO does not return 200.
 ```
