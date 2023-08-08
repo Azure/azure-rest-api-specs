@@ -49,9 +49,9 @@ suppressions:
   - code: GetCollectionOnlyHasValueAndNextLink
     reason: GET instance API for ARM extension resources are being flagged as Get Collection APIs.
     where:
-      - $.paths["/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default"].get.responses["200].schema.properties
-      - $.paths["/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default/hybridIdentityMetadata/default"].get.responses["200].schema.properties
-      - $.paths["/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default/guestAgents/default"].get.responses["200].schema.properties
+      - $.paths["/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default"].get.responses["200"].schema.properties
+      - $.paths["/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default/hybridIdentityMetadata/default"].get.responses["200"].schema.properties
+      - $.paths["/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default/guestAgents/default"].get.responses["200"].schema.properties
     
   - code:  TopLevelResourcesListBySubscription
     reason: VirtualMachineInstance resource is an ARM extension resource and does not support List by subscription API.  
