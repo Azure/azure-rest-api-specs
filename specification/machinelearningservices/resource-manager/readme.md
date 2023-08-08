@@ -41,6 +41,9 @@ input-file:
   - Microsoft.MachineLearningServices/preview/2023-08-01-preview/registries.json
   - Microsoft.MachineLearningServices/preview/2023-08-01-preview/workspaceFeatures.json
   - Microsoft.MachineLearningServices/preview/2023-08-01-preview/workspaceRP.json
+suppressions:
+  - code: LroPostReturn
+    reason: LRO does not return 200.
 ```
 ### Tag: package-preview-2023-06
 
@@ -390,12 +393,3 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-## Suppression
-
-``` yaml
-suppressions:
-  - code: LroPostReturn
-    from: Microsoft.MachineLearningServices/preview/2023-08-01-preview/machineLearningServices.json
-    reason: LRO does not return 200.
-```
