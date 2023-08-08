@@ -56,7 +56,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/billingAccountIdParameter"
@@ -92,7 +92,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/billingAccountIdParameter"
@@ -137,7 +137,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/billingAccountIdParameter"
@@ -177,7 +177,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/billingAccountIdParameter"
@@ -198,6 +198,12 @@
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CostAllocationRuleDefinition"
+            }
+          },
+          "201": {
+            "description": "Created. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/CostAllocationRuleDefinition"
             }
@@ -223,7 +229,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/billingAccountIdParameter"
@@ -252,6 +258,7 @@
   "definitions": {
     "ErrorDetails": {
       "description": "The details of the error.",
+      "type": "object",
       "properties": {
         "code": {
           "description": "Error code.",
@@ -284,7 +291,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CostAllocationRuleDefinition"
-          }
+          },
+          "x-ms-identifiers": ["id"]
         },
         "nextLink": {
           "description": "URL to get the next set of rule list results if there are any.",
@@ -438,14 +446,16 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SourceCostAllocationResource"
-          }
+          },
+          "x-ms-identifiers": ["name"]
         },
         "targetResources": {
           "type": "array",
           "description": "Target resources for cost allocation. At this time, this list can contain no more than one element.",
           "items": {
             "$ref": "#/definitions/TargetCostAllocationResource"
-          }
+          },
+          "x-ms-identifiers": ["name"]
         }
       }
     },
@@ -481,7 +491,8 @@
               "items": {
                 "description": "Source resource for cost allocation",
                 "type": "string"
-              }
+              },
+              "x-ms-identifiers": ["name"]
             }
           },
           "required": [
@@ -505,7 +516,8 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/CostAllocationProportion"
-              }
+              },
+              "x-ms-identifiers": ["name"]
             },
             "policyType": {
               "description": "Method of cost allocation for the rule",
@@ -574,13 +586,6 @@
     }
   },
   "parameters": {
-    "apiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Version of the API to be used with the client request (e.g. '2020-06-01')."
-    },
     "billingAccountIdParameter": {
       "name": "billingAccountId",
       "in": "path",
@@ -595,7 +600,8 @@
       "description": "Cost allocation rule name. The name cannot include spaces or any non alphanumeric characters other than '_' and '-'. The max length is 260 characters.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "[A-Za-z0-9\\-_]+"
     }
   }
 }
