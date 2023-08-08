@@ -96,7 +96,7 @@
   "paths": {
     "/assets": {
       "get": {
-        "operationId": "Assets_ListAssetResource",
+        "operationId": "Assets_List",
         "tags": [
           "Assets"
         ],
@@ -104,6 +104,21 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/OrderByParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/MarkParameter"
           }
         ],
         "responses": {
@@ -126,13 +141,13 @@
           }
         },
         "x-ms-examples": {
-          "Assets_ListAssetResource": {
-            "$ref": "./examples/Assets_ListAssetResource_MaximumSet_Gen.json"
+          "Assets_List_MaximumSet_Gen": {
+            "$ref": "./examples/Assets_List_MaximumSet_Gen.json"
           }
         }
       },
       "post": {
-        "operationId": "Assets_UpdateAssets",
+        "operationId": "Assets_Update",
         "tags": [
           "Assets"
         ],
@@ -173,15 +188,18 @@
           }
         },
         "x-ms-examples": {
-          "Assets_UpdateAssets": {
-            "$ref": "./examples/Assets_UpdateAssets_MaximumSet_Gen.json"
+          "Assets_Update_MaximumSet_Gen": {
+            "$ref": "./examples/Assets_Update_MaximumSet_Gen.json"
+          },
+          "Assets_Update_MinimumSet_Gen": {
+            "$ref": "./examples/Assets_Update_MinimumSet_Gen.json"
           }
         }
       }
     },
     "/assets/{assetId}": {
       "get": {
-        "operationId": "Assets_GetAssetResource",
+        "operationId": "Assets_Get",
         "tags": [
           "Assets"
         ],
@@ -218,15 +236,15 @@
           }
         },
         "x-ms-examples": {
-          "Assets_GetAssetResource": {
-            "$ref": "./examples/Assets_GetAssetResource_MaximumSet_Gen.json"
+          "Assets_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Assets_Get_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/dataConnections": {
       "get": {
-        "operationId": "DataConnections_ListDataConnection",
+        "operationId": "DataConnections_List",
         "tags": [
           "Data Connections"
         ],
@@ -234,6 +252,12 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           }
         ],
         "responses": {
@@ -256,15 +280,18 @@
           }
         },
         "x-ms-examples": {
-          "DataConnections_ListDataConnection": {
-            "$ref": "./examples/DataConnections_ListDataConnection_MaximumSet_Gen.json"
+          "DataConnections_List_MaximumSet_Gen": {
+            "$ref": "./examples/DataConnections_List_MaximumSet_Gen.json"
+          },
+          "DataConnections_List_MinimumSet_Gen": {
+            "$ref": "./examples/DataConnections_List_MinimumSet_Gen.json"
           }
         }
       }
     },
     "/dataConnections/{dataConnectionName}": {
       "get": {
-        "operationId": "DataConnections_GetDataConnection",
+        "operationId": "DataConnections_Get",
         "tags": [
           "Data Connections"
         ],
@@ -301,13 +328,16 @@
           }
         },
         "x-ms-examples": {
-          "DataConnections_GetDataConnection": {
-            "$ref": "./examples/DataConnections_GetDataConnection_MaximumSet_Gen.json"
+          "DataConnections_Get_MaximumSet_Gen": {
+            "$ref": "./examples/DataConnections_Get_MaximumSet_Gen.json"
+          },
+          "DataConnections_Get_MinimumSet_Gen": {
+            "$ref": "./examples/DataConnections_Get_MinimumSet_Gen.json"
           }
         }
       },
       "put": {
-        "operationId": "DataConnections_PutDataConnection",
+        "operationId": "DataConnections_Put",
         "tags": [
           "Data Connections"
         ],
@@ -352,13 +382,16 @@
           }
         },
         "x-ms-examples": {
-          "DataConnections_PutDataConnection": {
-            "$ref": "./examples/DataConnections_PutDataConnection_MaximumSet_Gen.json"
+          "DataConnections_Put_MaximumSet_Gen": {
+            "$ref": "./examples/DataConnections_Put_MaximumSet_Gen.json"
+          },
+          "DataConnections_Put_MinimumSet_Gen": {
+            "$ref": "./examples/DataConnections_Put_MinimumSet_Gen.json"
           }
         }
       },
       "delete": {
-        "operationId": "DataConnections_DeleteDataConnection",
+        "operationId": "DataConnections_Delete",
         "tags": [
           "Data Connections"
         ],
@@ -392,15 +425,18 @@
           }
         },
         "x-ms-examples": {
-          "DataConnections_DeleteDataConnection": {
-            "$ref": "./examples/DataConnections_DeleteDataConnection_MaximumSet_Gen.json"
+          "DataConnections_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/DataConnections_Delete_MaximumSet_Gen.json"
+          },
+          "DataConnections_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/DataConnections_Delete_MinimumSet_Gen.json"
           }
         }
       }
     },
     "/dataConnections:validate": {
       "post": {
-        "operationId": "DataConnections_ValidateDataConnection",
+        "operationId": "DataConnections_Validate",
         "tags": [
           "Data Connections"
         ],
@@ -438,15 +474,18 @@
           }
         },
         "x-ms-examples": {
-          "DataConnections_ValidateDataConnection": {
-            "$ref": "./examples/DataConnections_ValidateDataConnection_MaximumSet_Gen.json"
+          "DataConnections_Validate_MaximumSet_Gen": {
+            "$ref": "./examples/DataConnections_Validate_MaximumSet_Gen.json"
+          },
+          "DataConnections_Validate_MinimumSet_Gen": {
+            "$ref": "./examples/DataConnections_Validate_MinimumSet_Gen.json"
           }
         }
       }
     },
     "/discoGroups": {
       "get": {
-        "operationId": "DiscoveryGroups_ListDiscoGroup",
+        "operationId": "DiscoveryGroups_List",
         "tags": [
           "Discovery Groups"
         ],
@@ -454,6 +493,15 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           }
         ],
         "responses": {
@@ -476,15 +524,18 @@
           }
         },
         "x-ms-examples": {
-          "DiscoveryGroups_ListDiscoGroup": {
-            "$ref": "./examples/DiscoveryGroups_ListDiscoGroup_MaximumSet_Gen.json"
+          "DiscoveryGroups_List_MaximumSet_Gen": {
+            "$ref": "./examples/DiscoveryGroups_List_MaximumSet_Gen.json"
+          },
+          "DiscoveryGroups_List_MinimumSet_Gen": {
+            "$ref": "./examples/DiscoveryGroups_List_MinimumSet_Gen.json"
           }
         }
       }
     },
     "/discoGroups/{groupName}": {
       "get": {
-        "operationId": "DiscoveryGroups_GetDiscoGroup",
+        "operationId": "DiscoveryGroups_Get",
         "tags": [
           "Discovery Groups"
         ],
@@ -521,13 +572,16 @@
           }
         },
         "x-ms-examples": {
-          "DiscoveryGroups_GetDiscoGroup": {
-            "$ref": "./examples/DiscoveryGroups_GetDiscoGroup_MaximumSet_Gen.json"
+          "DiscoveryGroups_Get_MaximumSet_Gen": {
+            "$ref": "./examples/DiscoveryGroups_Get_MaximumSet_Gen.json"
+          },
+          "DiscoveryGroups_Get_MinimumSet_Gen": {
+            "$ref": "./examples/DiscoveryGroups_Get_MinimumSet_Gen.json"
           }
         }
       },
       "put": {
-        "operationId": "DiscoveryGroups_PutDiscoGroup",
+        "operationId": "DiscoveryGroups_Put",
         "tags": [
           "Discovery Groups"
         ],
@@ -572,15 +626,18 @@
           }
         },
         "x-ms-examples": {
-          "DiscoveryGroups_PutDiscoGroup": {
-            "$ref": "./examples/DiscoveryGroups_PutDiscoGroup_MaximumSet_Gen.json"
+          "DiscoveryGroups_Put_MaximumSet_Gen": {
+            "$ref": "./examples/DiscoveryGroups_Put_MaximumSet_Gen.json"
+          },
+          "DiscoveryGroups_Put_MinimumSet_Gen": {
+            "$ref": "./examples/DiscoveryGroups_Put_MinimumSet_Gen.json"
           }
         }
       }
     },
     "/discoGroups/{groupName}:run": {
       "post": {
-        "operationId": "DiscoveryGroups_RunDiscoGroup",
+        "operationId": "DiscoveryGroups_Run",
         "tags": [
           "Discovery Groups"
         ],
@@ -614,8 +671,11 @@
           }
         },
         "x-ms-examples": {
-          "DiscoveryGroups_RunDiscoGroup": {
-            "$ref": "./examples/DiscoveryGroups_RunDiscoGroup_MaximumSet_Gen.json"
+          "DiscoveryGroups_Run_MaximumSet_Gen": {
+            "$ref": "./examples/DiscoveryGroups_Run_MaximumSet_Gen.json"
+          },
+          "DiscoveryGroups_Run_MinimumSet_Gen": {
+            "$ref": "./examples/DiscoveryGroups_Run_MinimumSet_Gen.json"
           }
         }
       }
@@ -664,15 +724,18 @@
           }
         },
         "x-ms-examples": {
-          "DiscoveryGroups_ListRuns": {
+          "DiscoveryGroups_ListRuns_MaximumSet_Gen": {
             "$ref": "./examples/DiscoveryGroups_ListRuns_MaximumSet_Gen.json"
+          },
+          "DiscoveryGroups_ListRuns_MinimumSet_Gen": {
+            "$ref": "./examples/DiscoveryGroups_ListRuns_MinimumSet_Gen.json"
           }
         }
       }
     },
     "/discoGroups:validate": {
       "post": {
-        "operationId": "DiscoveryGroups_ValidateDiscoGroup",
+        "operationId": "DiscoveryGroups_Validate",
         "tags": [
           "Discovery Groups"
         ],
@@ -710,15 +773,18 @@
           }
         },
         "x-ms-examples": {
-          "DiscoveryGroups_ValidateDiscoGroup": {
-            "$ref": "./examples/DiscoveryGroups_ValidateDiscoGroup_MaximumSet_Gen.json"
+          "DiscoveryGroups_Validate_MaximumSet_Gen": {
+            "$ref": "./examples/DiscoveryGroups_Validate_MaximumSet_Gen.json"
+          },
+          "DiscoveryGroups_Validate_MinimumSet_Gen": {
+            "$ref": "./examples/DiscoveryGroups_Validate_MinimumSet_Gen.json"
           }
         }
       }
     },
     "/discoTemplates": {
       "get": {
-        "operationId": "DiscoveryTemplates_ListDiscoTemplate",
+        "operationId": "DiscoveryTemplates_List",
         "tags": [
           "Discovery Templates"
         ],
@@ -726,6 +792,15 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           }
         ],
         "responses": {
@@ -748,15 +823,18 @@
           }
         },
         "x-ms-examples": {
-          "DiscoveryTemplates_ListDiscoTemplate": {
-            "$ref": "./examples/DiscoveryTemplates_ListDiscoTemplate_MaximumSet_Gen.json"
+          "DiscoveryTemplates_List_MaximumSet_Gen": {
+            "$ref": "./examples/DiscoveryTemplates_List_MaximumSet_Gen.json"
+          },
+          "DiscoveryTemplates_List_MinimumSet_Gen": {
+            "$ref": "./examples/DiscoveryTemplates_List_MinimumSet_Gen.json"
           }
         }
       }
     },
     "/discoTemplates/{templateId}": {
       "get": {
-        "operationId": "DiscoveryTemplates_GetDiscoTemplate",
+        "operationId": "DiscoveryTemplates_Get",
         "tags": [
           "Discovery Templates"
         ],
@@ -793,15 +871,18 @@
           }
         },
         "x-ms-examples": {
-          "DiscoveryTemplates_GetDiscoTemplate": {
-            "$ref": "./examples/DiscoveryTemplates_GetDiscoTemplate_MaximumSet_Gen.json"
+          "DiscoveryTemplates_Get_MaximumSet_Gen": {
+            "$ref": "./examples/DiscoveryTemplates_Get_MaximumSet_Gen.json"
+          },
+          "DiscoveryTemplates_Get_MinimumSet_Gen": {
+            "$ref": "./examples/DiscoveryTemplates_Get_MinimumSet_Gen.json"
           }
         }
       }
     },
     "/reports/assets:getBillable": {
       "post": {
-        "operationId": "Reports_GetBillableReports",
+        "operationId": "Reports_Billable",
         "tags": [
           "Reports"
         ],
@@ -831,15 +912,18 @@
           }
         },
         "x-ms-examples": {
-          "Reports_GetBillableReports": {
-            "$ref": "./examples/Reports_GetBillableReports_MaximumSet_Gen.json"
+          "Reports_Billable_MaximumSet_Gen": {
+            "$ref": "./examples/Reports_Billable_MaximumSet_Gen.json"
+          },
+          "Reports_Billable_MinimumSet_Gen": {
+            "$ref": "./examples/Reports_Billable_MinimumSet_Gen.json"
           }
         }
       }
     },
     "/reports/assets:getSnapshot": {
       "post": {
-        "operationId": "Reports_GetSnapshotReports",
+        "operationId": "Reports_Snapshot",
         "tags": [
           "Reports"
         ],
@@ -877,15 +961,15 @@
           }
         },
         "x-ms-examples": {
-          "Reports_GetSnapshotReports": {
-            "$ref": "./examples/Reports_GetSnapshotReports_MaximumSet_Gen.json"
+          "Reports_Snapshot_MaximumSet_Gen": {
+            "$ref": "./examples/Reports_Snapshot_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/reports/assets:getSummary": {
       "post": {
-        "operationId": "Reports_GetSummaryReports",
+        "operationId": "Reports_Summary",
         "tags": [
           "Reports"
         ],
@@ -923,15 +1007,18 @@
           }
         },
         "x-ms-examples": {
-          "Reports_GetSummaryReports": {
-            "$ref": "./examples/Reports_GetSummaryReports_MaximumSet_Gen.json"
+          "Reports_Summary_MaximumSet_Gen": {
+            "$ref": "./examples/Reports_Summary_MaximumSet_Gen.json"
+          },
+          "Reports_Summary_MinimumSet_Gen": {
+            "$ref": "./examples/Reports_Summary_MinimumSet_Gen.json"
           }
         }
       }
     },
     "/savedFilters": {
       "get": {
-        "operationId": "SavedFilters_ListSavedFilter",
+        "operationId": "SavedFilters_List",
         "tags": [
           "Saved Filters"
         ],
@@ -939,6 +1026,15 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           }
         ],
         "responses": {
@@ -961,15 +1057,18 @@
           }
         },
         "x-ms-examples": {
-          "SavedFilters_ListSavedFilter": {
-            "$ref": "./examples/SavedFilters_ListSavedFilter_MaximumSet_Gen.json"
+          "SavedFilters_List_MaximumSet_Gen": {
+            "$ref": "./examples/SavedFilters_List_MaximumSet_Gen.json"
+          },
+          "SavedFilters_List_MinimumSet_Gen": {
+            "$ref": "./examples/SavedFilters_List_MinimumSet_Gen.json"
           }
         }
       }
     },
     "/savedFilters/{filterName}": {
       "get": {
-        "operationId": "SavedFilters_GetSavedFilter",
+        "operationId": "SavedFilters_Get",
         "tags": [
           "Saved Filters"
         ],
@@ -1006,13 +1105,16 @@
           }
         },
         "x-ms-examples": {
-          "SavedFilters_GetSavedFilter": {
-            "$ref": "./examples/SavedFilters_GetSavedFilter_MaximumSet_Gen.json"
+          "SavedFilters_Get_MaximumSet_Gen": {
+            "$ref": "./examples/SavedFilters_Get_MaximumSet_Gen.json"
+          },
+          "SavedFilters_Get_MinimumSet_Gen": {
+            "$ref": "./examples/SavedFilters_Get_MinimumSet_Gen.json"
           }
         }
       },
       "put": {
-        "operationId": "SavedFilters_PutSavedFilter",
+        "operationId": "SavedFilters_Put",
         "tags": [
           "Saved Filters"
         ],
@@ -1057,13 +1159,16 @@
           }
         },
         "x-ms-examples": {
-          "SavedFilters_PutSavedFilter": {
-            "$ref": "./examples/SavedFilters_PutSavedFilter_MaximumSet_Gen.json"
+          "SavedFilters_Put_MaximumSet_Gen": {
+            "$ref": "./examples/SavedFilters_Put_MaximumSet_Gen.json"
+          },
+          "SavedFilters_Put_MinimumSet_Gen": {
+            "$ref": "./examples/SavedFilters_Put_MinimumSet_Gen.json"
           }
         }
       },
       "delete": {
-        "operationId": "SavedFilters_DeleteSavedFilter",
+        "operationId": "SavedFilters_Delete",
         "tags": [
           "Saved Filters"
         ],
@@ -1097,15 +1202,18 @@
           }
         },
         "x-ms-examples": {
-          "SavedFilters_DeleteSavedFilter": {
-            "$ref": "./examples/SavedFilters_DeleteSavedFilter_MaximumSet_Gen.json"
+          "SavedFilters_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/SavedFilters_Delete_MaximumSet_Gen.json"
+          },
+          "SavedFilters_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/SavedFilters_Delete_MinimumSet_Gen.json"
           }
         }
       }
     },
     "/tasks": {
       "get": {
-        "operationId": "Tasks_ListTask",
+        "operationId": "Tasks_List",
         "tags": [
           "Tasks"
         ],
@@ -1113,6 +1221,18 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/OrderByParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           }
         ],
         "responses": {
@@ -1135,15 +1255,18 @@
           }
         },
         "x-ms-examples": {
-          "Tasks_ListTask": {
-            "$ref": "./examples/Tasks_ListTask_MaximumSet_Gen.json"
+          "Tasks_List_MaximumSet_Gen": {
+            "$ref": "./examples/Tasks_List_MaximumSet_Gen.json"
+          },
+          "Tasks_List_MinimumSet_Gen": {
+            "$ref": "./examples/Tasks_List_MinimumSet_Gen.json"
           }
         }
       }
     },
     "/tasks/{taskId}": {
       "get": {
-        "operationId": "Tasks_GetTask",
+        "operationId": "Tasks_Get",
         "tags": [
           "Tasks"
         ],
@@ -1180,15 +1303,18 @@
           }
         },
         "x-ms-examples": {
-          "Tasks_GetTask": {
-            "$ref": "./examples/Tasks_GetTask_MaximumSet_Gen.json"
+          "Tasks_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Tasks_Get_MaximumSet_Gen.json"
+          },
+          "Tasks_Get_MinimumSet_Gen": {
+            "$ref": "./examples/Tasks_Get_MinimumSet_Gen.json"
           }
         }
       }
     },
     "/tasks/{taskId}:cancel": {
       "post": {
-        "operationId": "Tasks_CancelTask",
+        "operationId": "Tasks_Cancel",
         "tags": [
           "Tasks"
         ],
@@ -1225,8 +1351,11 @@
           }
         },
         "x-ms-examples": {
-          "Tasks_CancelTask": {
-            "$ref": "./examples/Tasks_CancelTask_MaximumSet_Gen.json"
+          "Tasks_Cancel_MaximumSet_Gen": {
+            "$ref": "./examples/Tasks_Cancel_MaximumSet_Gen.json"
+          },
+          "Tasks_Cancel_MinimumSet_Gen": {
+            "$ref": "./examples/Tasks_Cancel_MinimumSet_Gen.json"
           }
         }
       }
@@ -3351,39 +3480,6 @@
         }
       }
     },
-    "ImplicitFlow": {
-      "type": "object",
-      "description": "Implicit Flow",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "implicit flow",
-          "enum": [
-            "implicit"
-          ]
-        },
-        "authorizationUrl": {
-          "type": "string",
-          "description": "the authorization URL",
-          "enum": [
-            "https://login.microsoftonline.com/common/oauth2/authorize"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "scopes": {
-          "type": "array",
-          "description": "list of scopes for the credential",
-          "items": {}
-        }
-      },
-      "required": [
-        "type",
-        "authorizationUrl",
-        "scopes"
-      ]
-    },
     "InnerError": {
       "type": "object",
       "description": "This is an object containing more specific information than the current object about the error.",
@@ -3923,16 +4019,6 @@
         }
       ]
     },
-    "MarkParameter": {
-      "type": "object",
-      "description": "Specify this value instead of 'skip' to use cursor-based searching. Initial value is '*' and subsequent values are returned in the response.",
-      "properties": {
-        "mark": {
-          "type": "string",
-          "description": "Specify this value instead of 'skip' to use cursor-based searching. Initial value is '*' and subsequent values are returned in the response."
-        }
-      }
-    },
     "NoContentResponse": {
       "type": "object",
       "description": "Response with no content",
@@ -4127,16 +4213,6 @@
         },
         "recent": {
           "type": "boolean"
-        }
-      }
-    },
-    "OrderByParameter": {
-      "type": "object",
-      "description": "A list of expressions that specify the order of the returned resources.",
-      "properties": {
-        "orderby": {
-          "type": "string",
-          "description": "A list of expressions that specify the order of the returned resources."
         }
       }
     },
@@ -5442,7 +5518,7 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "2023-03-01-preview",
+            "name": "v2023_03_01_preview",
             "value": "2023-03-01-preview",
             "description": "Version 2023-03-01-preview"
           }
@@ -5556,6 +5632,22 @@
       "in": "path",
       "description": "The unique identifier for the discovery group.",
       "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "MarkParameter": {
+      "name": "mark",
+      "in": "query",
+      "description": "Specify this value instead of 'skip' to use cursor-based searching. Initial value is '*' and subsequent values are returned in the response.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "OrderByParameter": {
+      "name": "orderby",
+      "in": "query",
+      "description": "A list of expressions that specify the order of the returned resources.",
+      "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
     },

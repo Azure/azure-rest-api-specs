@@ -9,37 +9,37 @@ using Azure.Core.Traits;
 
 namespace Easm;
 
-alias CommonListTrait = QueryParametersTrait<{
+alias CommonListParameter = {
   ...FilterQueryParameter;
   ...SkipQueryParameter;
   ...MaxPageSizeQueryParameter;
-}>;
-alias AssetsListTrait = QueryParametersTrait<{
+};
+alias AssetsListParameter = {
   ...FilterQueryParameter;
   ...OrderByParameter;
   ...SkipQueryParameter;
   ...MaxPageSizeQueryParameter;
   ...MarkParameter;
-}>;
+};
 alias AssetsUpdateParameter = {
   ...RequiredFilterParameter;
 };
-alias DataConnectionsListTrait = QueryParametersTrait<{
+alias DataConnectionsListParameter = {
   ...SkipQueryParameter;
   ...MaxPageSizeQueryParameter;
-}>;
+};
 alias DiscoveryGroupsListRunsParameter = {
   ...FilterQueryParameter;
   ...SkipQueryParameter;
   ...MaxPageSizeQueryParameter;
   ...DiscoGroupNameParameter;
 };
-alias TasksListTrait = QueryParametersTrait<{
+alias TasksListParameter = {
   ...FilterQueryParameter;
   ...OrderByParameter;
   ...SkipQueryParameter;
   ...MaxPageSizeQueryParameter;
-}>;
+};
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model AlexaInfo {
   alexaRank?: int64;
