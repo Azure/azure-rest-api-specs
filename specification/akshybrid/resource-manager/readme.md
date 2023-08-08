@@ -39,15 +39,20 @@ input-file:
   - Microsoft.AksHybrid/preview/2023-09-01-preview/provisionedClusters.json
 suppressions:
   - code: GetCollectionOnlyHasValueAndNextLink
-    where: $.definitions.AgentPoolAvailableVersions
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{clusterName}/providers/Microsoft.AksHybrid/provisionedClusters/{resourceName}/availableAgentPoolVersions"].get.responses["202"].schema
+    reason: To be consistent with AKS. In this object schema, all the available versions share the same id, name, type, and location, thus these properties exist on a higher level than the list of versions.
   - code: ParametersInPost
-    where: $.parameters.ServerFqdnParameter
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{clusterName}/providers/Microsoft.AksHybrid/provisionedClusters/{resourceName}/listClusterAdminCredential"].post.parameters
+    reason: To be consistent with AKS. ServerFqdnParameter is only defined in AKS for this specific case.
   - code: ParametersInPost
-    where: $.parameters.CredentialFormatParameter
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{clusterName}/providers/Microsoft.AksHybrid/provisionedClusters/{resourceName}/listClusterUserCredential"].post.parameters
+    reason: To be consistent with AKS. ServerFqdnParameter and CredentialFormatParameter are only defined in AKS for this specific case.
   - code: LroPostReturn
-    where: $.paths./subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{clusterName}/providers/Microsoft.AksHybrid/provisionedClusters/{resourceName}/rotateClusterCertificates 
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{clusterName}/providers/Microsoft.AksHybrid/provisionedClusters/{resourceName}/rotateClusterCertificates"].post
+    reason: To be consistent with AKS. There is nothing to be returned in Response 200 for this API.
   - code: TrackedResourcePatchOperation
     where: $.definitions.AgentPool
+    reason: To be consistent with AKS. AKS does not implement the Patch operation for this resource.
 ```
 
 ---
