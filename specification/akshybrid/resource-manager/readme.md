@@ -37,6 +37,22 @@ These settings apply only when `--tag=package-2023-09-01-preview` is specified o
 ```yaml $(tag) == 'package-2023-09-01-preview'
 input-file:
   - Microsoft.AksHybrid/preview/2023-09-01-preview/provisionedClusters.json
+suppressions:
+  - code: GetCollectionOnlyHasValueAndNextLink
+    where: $.definitions.AgentPoolAvailableVersions
+    reason: 
+  - code: ParametersInPost
+    where: $.parameters.ServerFqdnParameter
+    reason:
+  - code: ParametersInPost
+    where: $.parameters.CredentialFormatParameter
+    reason:
+  - code: LroPostReturn
+    where: $.paths./subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{clusterName}/providers/Microsoft.AksHybrid/provisionedClusters/{resourceName}/rotateClusterCertificates
+    reason:
+  - code: TrackedResourcePatchOperation
+    where: $.definitions.AgentPool
+    reason:
 ```
 
 ---
