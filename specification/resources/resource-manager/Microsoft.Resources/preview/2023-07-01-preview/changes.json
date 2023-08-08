@@ -296,6 +296,11 @@
                 "value": "ManagedIdentity",
                 "description": "A ManagedIdentity made the change(s)",
                 "name": "ManagedIdentity"
+              },
+              {
+                "value": "Unknown",
+                "description": "An Unknown entity made the change(s)",
+                "name": "Unknown"
               }
             ]
           }
@@ -303,33 +308,7 @@
         "clientType": {
           "description": "Client used to make the changes",
           "type": "string",
-          "readOnly": true,
-          "enum": [
-            "CLI",
-            "Portal",
-            "SDK"
-          ],
-          "x-ms-enum": {
-            "name": "clientType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "CLI",
-                "description": "The change(s) were made through the Command Line Interface",
-                "name": "CLI"
-              },
-              {
-                "value": "Portal",
-                "description": "The change(s) were made through the Portal",
-                "name": "Portal"
-              },
-              {
-                "value": "SDK",
-                "description": "The change(s) were made through a Software Development Kit",
-                "name": "SDK"
-              }
-            ]
-          }
+          "readOnly": true
         },
         "operation": {
           "description": "The Azure Resource Provider operation that was invoked to make the change(s). See [here](https://learn.microsoft.com/en-us/azure/role-based-access-control/resource-provider-operations) for a full list of possible values",

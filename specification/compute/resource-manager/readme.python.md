@@ -85,6 +85,7 @@ batch:
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/
 perform-load: false
+clear-output-folder: false
 ```
 
 ### Tag: package-2023-03-01-only

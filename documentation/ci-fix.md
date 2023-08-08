@@ -73,17 +73,20 @@ Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/st
 Refer to [Semantic and Model Violations Reference](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/Semantic-and-Model-Violations-Reference.md) for detailed description of validations and how-to-fix guidance.
 
 ## Breaking Change Check
+
 - An API contract is identified by its api-version value. Once published, no changes to this API contract are allowed. This applies regardless of whether the API contract is for private preview, public preview, or GA (stable).
     - The same-version breaking change linter rules check for changes to an existing api-version swagger.
--	When introducing a new API contract (preview or not), the new API contract must be backwards compatible with the previous GA’s API contract.
-   	- However, during a (private or public) preview cycle, a new preview API contract does not have to be backwards compatible with the previous preview API contract although it must still be backwards compatible with the latest GA API contract.
-	- The cross version breaking change linter rules checks for this by comparing the new swagger with the latest GA swagger. If there is no latest GA swagger, then the latest preview if it > 1 year old. If nether a GA or preview > 1 year old exists, then the swagger is considered good.
+        - When introducing a new API contract (preview or not), the new API contract must be backwards compatible with the previous GA’s API contract.
+            - However, during a (private or public) preview cycle, a new preview API contract does not have to be backwards compatible with the previous preview API contract although it must still be backwards compatible with the latest GA API contract.
+            - The cross version breaking change linter rules checks for this by comparing the new swagger with the latest GA swagger. If there is no latest GA swagger, then the latest preview if it > 1 year old. If nether a GA or preview > 1 year old exists, then the swagger is considered good.
 
-### adding label on PR automatically
+### Adding label on PR automatically
+
 The breaking change check has two types of violations: one is breaking change in the same version but not breaking change in a new version, the other is breaking change even in a new version.
-For the former, a label 'NewApiVersionRequired' will be added automatically; For the latter , a label 'BreakingChangeReviewRequired' will be added automatically. Adding each label will trigger a github comment with guildance on how to fix.
+For the former, a label 'NewApiVersionRequired' will be added automatically; For the latter, a label 'BreakingChangeReviewRequired' will be added automatically. Adding each label will trigger a github comment with guildance on how to fix.
 
-### run locally
+### Run locally
+
 run oad locally (the breaking change is reported by oad tool):
 ```
 npm install -g @azure/oad
@@ -129,6 +132,15 @@ To fix this CI check failure, if you haven't got ARM signed off, pls get ARM sig
 
 NOTE: If your RP is RPaaS RP, since RPaaS requires swagger merge first. In this case, you could ignore this CI check.
 
+## API Doc Preview
+
+If you see `Swagger ApiDocPreview ` check fail with a failure [like this one](https://github.com/Azure/azure-rest-api-specs/pull/24841/checks?check_run_id=15056283615):
+
+| Rule | Message |
+|-|-|
+| ❌ RestBuild error | "logUrl":"https://apidrop.visualstudio.com/Content%20CI/_build/results?buildId=373646&view=logs&j=fd490c07-0b22-5182-fac9-6d67fe1e939b",<br/>"detail":"Run.ps1 failed with exit code 1 " |
+
+Then refer to [this TSG](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/79/Generation-of-docs-on-learn.microsoft.com?anchor=%22swagger-apidocpreview%22-build-is-failing).
 
 ## Service API Readiness Test
 
@@ -147,6 +159,7 @@ To fix the check, download the artifact `api_scenario_test_output` from Azure pi
 This validator is to ensure the TypeSpec & swagger files in PR are consistent and passing validation.
 
 ### How to fix
+
 | Error Code |Severity |Solution |
 |---|---|---|
 |MissingTypeSpecFile| Error |Adding the related TypeSpec project into {RP-Name} folder, like [Qumulo.Manaement](https://github.com/Azure/azure-rest-api-specs/tree/main/specification/liftrqumulo/Qumulo.Management)|
@@ -163,6 +176,7 @@ See [typespec-autorest](https://azure.github.io/typespec-azure/docs/emitters/typ
 This validator generates traffic for all operations defined in Swagger files under default tag of readme.md by using [RESTler](https://github.com/microsoft/restler-fuzzer). Then, it validates the request and response pairs from the traffic against the corresponding Swagger definitions. Finally, it provides an html report that reports the Swagger accuracy.
 
 ### How to understand and improve the report
+
 Please refer to [swagger-accuracy-report](./swagger-accuracy-report.md).
 
 ## Suppression Process

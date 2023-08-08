@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "resourceGroupName": "hiloResourcegroup",
+    "subscriptionId": "10e32bab-26da-4cc4-a441-52b318f824e6",
+    "api-version": "2023-06-01-preview",
+    "clusterPoolName": "clusterPool1",
+    "clusterName": "cluster1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/hiloResourcegroup/providers/Microsoft.HDInsight/clusterPools/clusterpool1/clusters/cluster1/jobs/flink-job-1",
+            "properties": {
+              "jobType": "FlinkJob",
+              "jobName": "flink-job-1",
+              "jobJarDirectory": "jobJarDirectory1",
+              "jarName": "job.jar",
+              "entryClass": "com.microsoft.hilo.flink.job.streaming.ExampleJob",
+              "flinkConfiguration": {
+                "parallelism": "1",
+                "savepoint.directory": "savepoint-directory"
+              },
+              "jobId": "362b911137dfefc2e55784666f4d4253",
+              "status": "STOP-FAILED",
+              "jobOutput": "job-output",
+              "actionResult": "SUCCESS"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

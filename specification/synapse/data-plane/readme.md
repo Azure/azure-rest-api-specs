@@ -84,6 +84,16 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
+```
+
+### Tag: package-artifacts-2021-04-01
+
+These settings apply only when `--tag=package-artifacts-2021-04-01` is specified on the command line.
+
+**ATTENTION**: Please DO NOT generate SDK based on this tag. Syms API set is not ready to be included in SDK.
+
+``` yaml $(tag) == 'package-artifacts-2021-04-01'
+input-file:
   - Microsoft.Synapse/stable/2021-04-01/symsAPI.json
 ```
 
