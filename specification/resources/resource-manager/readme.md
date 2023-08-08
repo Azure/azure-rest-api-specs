@@ -141,18 +141,18 @@ suppressions:
   - code: PutResponseSchemaDescription
     from: policySetDefinitions.json
     reason: Service only returns 201 on all successful PUTs
-  - code: PutResponseSchemaDescription
-    from: policyDefinitionVersions.json
-    reason: Service only returns 201 on all successful PUTs
-  - code: PutResponseSchemaDescription
-    from: policySetDefinitionVersions.json
-    reason: Service only returns 201 on all successful PUTs
   - code: UnSupportedPatchProperties
     from: policyAssignments.json
     reason: The location property represents the user-assigned identity location and is changeable for policy assignments
   - code: PathContainsResourceType
     from: policyAssignments.json
     reason: The policy assignment id does contain the resource type
+  - code: ResourceNameRestriction
+    from: policyDefinitionVersions.json
+    reason: Using common types for management group name
+  - code: ResourceNameRestriction
+    from: policySetDefinitionVersions.json
+    reason: Using common types for management group name
 
 ```
 
