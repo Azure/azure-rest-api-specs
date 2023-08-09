@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-06
+tag: package-2023-09
 ```
 
 ## Suppression
@@ -59,11 +59,27 @@ directive:
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
 ```
 
+
+### Tag: package-2023-09
+
+These settings apply only when `--tag=package-2023-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-09'
+input-file:
+  - Microsoft.AzureStackHCI/stable/2023-09-01/common.json
+  - Microsoft.AzureStackHCI/stable/2023-09-01/galleryImages.json
+  - Microsoft.AzureStackHCI/stable/2023-09-01/marketplaceGalleryImages.json
+  - Microsoft.AzureStackHCI/stable/2023-09-01/networkInterfaces.json
+  - Microsoft.AzureStackHCI/stable/2023-09-01/storageContainers.json
+  - Microsoft.AzureStackHCI/stable/2023-09-01/virtualHardDisks.json
+  - Microsoft.AzureStackHCI/stable/2023-09-01/virtualMachineInstances.json
+  - Microsoft.AzureStackHCI/stable/2023-09-01/virtualNetworks.json
+```
 ### Tag: package-preview-2023-07-01
 
 These settings apply only when `--tag=package-preview-2023-07-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-07-01'
+``` yaml $(tag) == 'package-preview-2023-07-01'
 input-file:
   - Microsoft.AzureStackHCI/preview/2023-07-01-preview/galleryImages.json
   - Microsoft.AzureStackHCI/preview/2023-07-01-preview/marketplaceGalleryImages.json
@@ -78,7 +94,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-06'
+``` yaml $(tag) == 'package-2023-06'
 input-file:
   - Microsoft.AzureStackHCI/stable/2023-06-01/arcSettings.json
   - Microsoft.AzureStackHCI/stable/2023-06-01/clusters.json
@@ -91,6 +107,7 @@ input-file:
   - Microsoft.AzureStackHCI/stable/2023-06-01/updateSummaries.json
   - Microsoft.AzureStackHCI/stable/2023-06-01/updates.json
 ```
+
 ### Tag: package-2023-03
 
 These settings apply only when `--tag=package-2023-03` is specified on the command line.
