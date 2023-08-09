@@ -346,6 +346,41 @@
           "type": "string",
           "description": "The display name of the API collection."
         },
+        "discoveredVia": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource Id of the resource from where this API collection was discovered."
+        },
+        "baseUrl": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The base URL for this API collection. All endpoints of this API collection extend this base URL."
+        },
+        "numberOfApiEndpoints": {
+          "readOnly": true,
+          "type": "int",
+          "description": "The number of API endpoints discovered in this API collection."
+        },
+        "numberOfInactiveApiEndpoints": {
+          "readOnly": true,
+          "type": "int",
+          "description": "The number of API endpoints in this API collection that have not received any API traffic in the last 30 days."
+        },
+        "numberOfUnauthenticatedApiEndpoints": {
+          "readOnly": true,
+          "type": "int",
+          "description": "The number of API endpoints in this API collection that are unauthenticated."
+        },
+        "numberOfExternalApiEndpoints": {
+          "readOnly": true,
+          "type": "int",
+          "description": "The number of API endpoints in this API collection for which API traffic from the internet was observed."
+        },
+        "numberOfApiEndpointsWithSensitiveDataExposed": {
+          "readOnly": true,
+          "type": "int",
+          "description": "The number of API endpoints in this API collection which are exposing sensitive data in their requests and/or responses."
+        },
         "additionalData": {
           "type": "object",
           "description": "Additional data regarding the API collection.",
