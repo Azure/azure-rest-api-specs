@@ -92,16 +92,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/OSOptionProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -985,20 +985,10 @@
             "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "name": "agentPoolName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z][a-z0-9]{0,11}$",
-            "minLength": 1,
-            "maxLength": 12,
-            "description": "The name of the agent pool."
+            "$ref": "#/parameters/AgentPoolNameParameter"
           }
         ],
         "responses": {
-          "204": {
-            "description": "NoContent"
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -1011,6 +1001,9 @@
                 "type": "string"
               }
             }
+          },
+          "204": {
+            "description": "NoContent"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1096,14 +1089,7 @@
             "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "name": "agentPoolName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z][a-z0-9]{0,11}$",
-            "minLength": 1,
-            "maxLength": 12,
-            "description": "The name of the agent pool."
+            "$ref": "#/parameters/AgentPoolNameParameter"
           }
         ],
         "responses": {
@@ -1146,11 +1132,7 @@
             "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "name": "agentPoolName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the agent pool."
+            "$ref": "#/parameters/AgentPoolNameParameter"
           },
           {
             "name": "parameters",
@@ -1269,11 +1251,7 @@
             "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "name": "agentPoolName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the agent pool."
+            "$ref": "#/parameters/AgentPoolNameParameter"
           },
           {
             "$ref": "#/parameters/IgnorePodDisruptionBudgetParameter"
@@ -1331,14 +1309,7 @@
             "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "name": "agentPoolName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z][a-z0-9]{0,11}$",
-            "minLength": 1,
-            "maxLength": 12,
-            "description": "The name of the agent pool."
+            "$ref": "#/parameters/AgentPoolNameParameter"
           }
         ],
         "responses": {
@@ -1358,6 +1329,102 @@
         "x-ms-examples": {
           "Get Upgrade Profile for Agent Pool": {
             "$ref": "./examples/AgentPoolsGetUpgradeProfile.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/agentPools/{agentPoolName}/machines": {
+      "get": {
+        "tags": [
+          "Machines"
+        ],
+        "operationId": "Machines_List",
+        "summary": "Gets a list of machines in the specified agent pool.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AgentPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MachineListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Machines in an Agentpool by Managed Cluster": {
+            "$ref": "./examples/MachineList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/agentPools/{agentPoolName}/machines/{machineName}": {
+      "get": {
+        "tags": [
+          "Machines"
+        ],
+        "operationId": "Machines_Get",
+        "summary": "Get a specific machine in the specified agent pool.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AgentPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MachineNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Machine"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a Machine in an Agent Pools by Managed Cluster": {
+            "$ref": "./examples/MachineGet.json"
           }
         }
       }
@@ -1553,9 +1620,6 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "NoContent"
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -1568,6 +1632,9 @@
                 "type": "string"
               }
             }
+          },
+          "204": {
+            "description": "NoContent"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2023,14 +2090,7 @@
             "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "name": "agentPoolName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z][a-z0-9]{0,11}$",
-            "minLength": 1,
-            "maxLength": 12,
-            "description": "The name of the agent pool."
+            "$ref": "#/parameters/AgentPoolNameParameter"
           }
         ],
         "responses": {
@@ -2193,6 +2253,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "command finished with async pattern, tracking by location header. !!! this is for autorest only, you never get 200 from this api !!!",
+            "schema": {
+              "$ref": "#/definitions/RunCommandResult"
+            }
+          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -2200,12 +2266,6 @@
                 "description": "URL to query for status of the operation.",
                 "type": "string"
               }
-            }
-          },
-          "200": {
-            "description": "command finished with async pattern, tracking by location header. !!! this is for autorest only, you never get 200 from this api !!!",
-            "schema": {
-              "$ref": "#/definitions/RunCommandResult"
             }
           },
           "default": {
@@ -2255,6 +2315,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "command finished",
+            "schema": {
+              "$ref": "#/definitions/RunCommandResult"
+            }
+          },
           "202": {
             "description": "command running in progress",
             "headers": {
@@ -2262,12 +2328,6 @@
                 "description": "URL to query for status of the operation.",
                 "type": "string"
               }
-            }
-          },
-          "200": {
-            "description": "command finished",
-            "schema": {
-              "$ref": "#/definitions/RunCommandResult"
             }
           },
           "default": {
@@ -3868,6 +3928,109 @@
         }
       },
       "description": "Agent Pool."
+    },
+    "MachineListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "x-ms-identifiers": [
+            "id"
+          ],
+          "items": {
+            "$ref": "#/definitions/Machine"
+          },
+          "description": "The list of Machines in cluster."
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL to get the next set of machine results.",
+          "readOnly": true
+        }
+      },
+      "description": "The response from the List Machines operation."
+    },
+    "Machine": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MachineProperties",
+          "description": "The properties of the machine"
+        }
+      },
+      "description": "A machine. Contains details about the underlying virtual machine. A machine may be visible here but not in kubectl get nodes; if so it may be because the machine has not been registered with the Kubernetes API Server yet."
+    },
+    "MachineProperties": {
+      "type": "object",
+      "readOnly": true,
+      "description": "The properties of the machine",
+      "properties": {
+        "network": {
+          "$ref": "#/definitions/MachineNetworkProperties"
+        },
+        "resourceId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Arm resource id of the machine. It can be used to GET underlying VM Instance"
+        }
+      }
+    },
+    "MachineNetworkProperties": {
+      "type": "object",
+      "readOnly": true,
+      "description": "network properties of the machine",
+      "properties": {
+        "ipAddresses": {
+          "type": "array",
+          "x-ms-identifiers": [],
+          "readOnly": true,
+          "description": "IPv4, IPv6 addresses of the machine",
+          "items": {
+            "$ref": "#/definitions/MachineIpAddress"
+          }
+        }
+      }
+    },
+    "MachineIpAddress": {
+      "type": "object",
+      "readOnly": true,
+      "description": "The machine IP address details.",
+      "properties": {
+        "ip": {
+          "type": "string",
+          "readOnly": true,
+          "description": "IPv4 or IPv6 address of the machine"
+        },
+        "family": {
+          "type": "string",
+          "readOnly": true,
+          "description": "To determine if address belongs IPv4 or IPv6 family",
+          "enum": [
+            "IPv4",
+            "IPv6"
+          ],
+          "x-ms-enum": {
+            "name": "IPFamily",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "IPv4",
+                "description": "IPv4 family"
+              },
+              {
+                "value": "IPv6",
+                "description": "IPv6 family"
+              }
+            ]
+          }
+        }
+      }
     },
     "ManagedClusterWindowsProfile": {
       "type": "object",
@@ -8417,6 +8580,16 @@
       "description": "The name of the managed cluster resource.",
       "x-ms-parameter-location": "method"
     },
+    "AgentPoolNameParameter": {
+      "name": "agentPoolName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]{0,11}$",
+      "minLength": 1,
+      "maxLength": 12,
+      "description": "The name of the agent pool."
+    },
     "ResourceTypeParameter": {
       "name": "resource-type",
       "in": "query",
@@ -8487,6 +8660,15 @@
       "maxLength": 24,
       "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
       "description": "The mode of the mesh.",
+      "x-ms-parameter-location": "method"
+    },
+    "MachineNameParameter": {
+      "type": "string",
+      "description": "host name of the machine",
+      "name": "machineName",
+      "in": "path",
+      "required": true,
+      "pattern": "^[a-zA-Z0-9][-_a-zA-Z0-9]{0,39}$",
       "x-ms-parameter-location": "method"
     }
   }
