@@ -1,29 +1,6 @@
 import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
-
-import "./ApiManagement.tsp";
-import "./AppConfiguration.tsp";
-import "./AzureCommunicationServices.tsp";
-import "./ContainerRegistry.tsp";
-import "./ContainerService.tsp";
-import "./DataBox.tsp";
-import "./EventHub.tsp";
-import "./Maps.tsp";
-import "./IotHub.tsp";
-import "./HealthcareApis.tsp";
-import "./KeyVault.tsp";
-import "./MachineLearningServices.tsp";
-import "./MediaServices.tsp";
-import "./PolicyInsights.tsp";
-import "./RedisCache.tsp";
-import "./Resources.tsp";
-import "./ServiceBus.tsp";
-import "./SignalRService.tsp";
-import "./Storage.tsp";
-import "./Web.tsp";
-import "./EventGrid.tsp";
-
 using Azure.ClientGenerator.Core;
 
 // @@internal(Azure.Messaging.EventGrid.PublishBatchOfCloudEvents);
