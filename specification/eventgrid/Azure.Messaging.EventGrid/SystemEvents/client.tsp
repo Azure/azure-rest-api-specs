@@ -97,7 +97,6 @@ using Azure.ClientGenerator.Core;
 @@include(EventGrid.SubscriptionValidationResponse)
 @@include(EventGrid.SubscriptionDeletedEventData)
 @@include(EventGrid.EventHubCaptureFileCreatedEventData)
-@@include(EventGrid.HealthcareFhirResourceType)
 @@include(EventGrid.HealthcareFhirResourceCreatedEventData)
 @@include(EventGrid.HealthcareFhirResourceUpdatedEventData)
 @@include(EventGrid.HealthcareFhirResourceDeletedEventData)
