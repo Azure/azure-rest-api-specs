@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "AutomationManagement",
-    "version": "2022-08-08",
+    "version": "2023-05-15-preview",
     "x-ms-code-generation-settings": {
       "useDateTimeOffset": true
     }
@@ -662,6 +662,7 @@
         },
         "summary": {
           "type": "string",
+          "x-nullable": true,
           "description": "Gets or sets the summary."
         },
         "value": {
@@ -761,6 +762,10 @@
           "type": "string",
           "description": "Gets or sets the runOn which specifies the group name where the job is to be executed."
         },
+        "jobRuntimeEnvironment": {
+          "$ref": "#/definitions/JobRuntimeEnvironment",
+          "description": "Runtime Environment Property"
+        },
         "jobId": {
           "type": "string",
           "format": "uuid",
@@ -842,6 +847,16 @@
       },
       "description": "Definition of job properties."
     },
+    "JobRuntimeEnvironment": {
+      "type": "object",
+      "properties": {
+        "runtimeEnvironmentName": {
+          "type": "string",
+          "description": "Name of Runtime Environment."
+        }
+      },
+      "description": "The runbook property associated with the entity."
+    },
     "RunbookAssociationProperty": {
       "properties": {
         "name": {
@@ -878,6 +893,12 @@
           "readOnly": true,
           "description": "The id of the job.",
           "x-nullable": false
+        },
+        "startedBy": {
+          "type": "string",
+          "description": "Gets or sets the job started by.",
+          "readOnly": true,
+          "x-nullable": true
         },
         "creationTime": {
           "type": "string",
@@ -935,6 +956,10 @@
           "type": "string",
           "description": "The provisioning state of a resource.",
           "readOnly": true
+        },
+        "jobRuntimeEnvironment": {
+          "$ref": "#/definitions/JobRuntimeEnvironment",
+          "description": "Runtime Environment Property"
         },
         "runOn": {
           "type": "string",

@@ -4,12 +4,13 @@
     "resourceGroupName": "rg",
     "automationAccountName": "ContoseAutomationAccount",
     "runbookName": "Get-AzureVMTutorial",
-    "api-version": "2022-08-08",
+    "api-version": "2023-05-15-preview",
     "parameters": {
       "properties": {
         "logVerbose": false,
         "logProgress": true,
-        "runbookType": "PowerShellWorkflow",
+        "runbookType": "PowerShell",
+        "runtimeEnvironment": "environmentName",
         "publishContentLink": {
           "uri": "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/101-automation-runbook-getvms/Runbooks/Get-AzureVMTutorial.ps1",
           "contentHash": {
@@ -46,7 +47,8 @@
           "logVerbose": false,
           "logProgress": true,
           "logActivityTrace": 1,
-          "runbookType": "PowerShellWorkflow",
+          "runbookType": "PowerShell",
+          "runtimeEnvironment": "environmentName",
           "parameters": {},
           "state": "Published",
           "jobCount": 0,
@@ -76,6 +78,7 @@
           "logProgress": true,
           "logActivityTrace": 1,
           "runbookType": "PowerShellWorkflow",
+          "runtimeEnvironment": "environmentName",
           "parameters": {},
           "state": "Published",
           "jobCount": 0,

@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "AutomationManagement",
-    "version": "2022-08-08",
+    "version": "2023-05-15-preview",
     "x-ms-code-generation-settings": {
       "useDateTimeOffset": true
     }
@@ -463,6 +463,51 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/listDeletedRunbooks": {
+      "post": {
+        "tags": [
+          "ListDeletedRunbooks"
+        ],
+        "operationId": "AutomationAccount_ListDeletedRunbooks",
+        "description": "Retrieve the deleted runbooks for an automation account.",
+        "x-ms-examples": {
+          "Get lists of deleted runbooks in an automation account": {
+            "$ref": "./examples/listAutomationAccountDeletedRunbooks.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeletedRunbookListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -795,6 +840,29 @@
       },
       "description": "Automation key which is used to register a DSC Node"
     },
+    "DeletedRunbook": {
+      "description": "Definition of deleted runbook.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeletedRunbookProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the runbook properties."
+        },
+        "id": {
+          "description": "The resource id.",
+          "type": "string"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets name of the resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the location of the resource."
+        }
+      }
+    },
     "KeyListResult": {
       "properties": {
         "keys": {
@@ -808,6 +876,23 @@
           "description": "Lists the automation keys."
         }
       }
+    },
+    "DeletedRunbookListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeletedRunbook"
+          },
+          "description": "List of deleted runbooks in automation account."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      },
+      "description": "The response model for the list deleted runbook."
     },
     "AutomationAccountUpdateProperties": {
       "properties": {
@@ -943,6 +1028,41 @@
           "type": "string"
         }
       }
+    },
+    "DeletedRunbookProperties": {
+      "type": "object",
+      "properties": {
+        "runbookId": {
+          "type": "string",
+          "description": "Gets or sets the Runbook Id."
+        },
+        "runbookType": {
+          "type": "string",
+          "description": "Type of the runbook."
+        },
+        "runtime": {
+          "type": "string",
+          "description": "Gets or sets runtime of the runbook."
+        },
+        "runtimeEnvironment": {
+          "type": "string",
+          "description": "Environment of the runbook.",
+          "x-nullable": true
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the creation time.",
+          "x-nullable": false
+        },
+        "deletionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the last modified time.",
+          "x-nullable": false
+        }
+      },
+      "description": "Definition of the deleted runbook property."
     },
     "UserAssignedIdentitiesProperties": {
       "type": "object",

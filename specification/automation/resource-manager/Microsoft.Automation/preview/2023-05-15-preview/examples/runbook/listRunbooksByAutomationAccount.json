@@ -3,7 +3,7 @@
     "subscriptionId": "subid",
     "resourceGroupName": "rg",
     "automationAccountName": "ContoseAutomationAccount",
-    "api-version": "2022-08-08"
+    "api-version": "2023-05-15-preview"
   },
   "responses": {
     "200": {
@@ -16,7 +16,8 @@
             "name": "ASR-AddPublicIp",
             "type": "Microsoft.Automation/AutomationAccounts/Runbooks",
             "properties": {
-              "runbookType": "PowerShell",
+              "runbookType": "PowerShellWorkflow",
+              "runtimeEnvironment": "environmentName",
               "state": "Published",
               "logVerbose": true,
               "logProgress": true,
@@ -31,7 +32,8 @@
             "name": "AutoExport",
             "type": "Microsoft.Automation/AutomationAccounts/Runbooks",
             "properties": {
-              "runbookType": "PowerShell",
+              "runbookType": "PowerShellWorkflow",
+              "runtimeEnvironment": "environmentName",
               "state": "Published",
               "logVerbose": true,
               "logProgress": true,
@@ -47,6 +49,7 @@
             "type": "Microsoft.Automation/AutomationAccounts/Runbooks",
             "properties": {
               "runbookType": "PowerShellWorkflow",
+              "runtimeEnvironment": "environmentName",
               "state": "Published",
               "logVerbose": false,
               "logProgress": true,

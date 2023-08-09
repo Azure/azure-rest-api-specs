@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "AutomationManagement",
-    "version": "2020-01-13-preview"
+    "version": "2023-05-15-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -67,7 +67,7 @@
         },
         "x-ms-examples": {
           "Gets private endpoint connection.": {
-            "$ref": "./examples/PrivateEndpointConnectionListGet.json"
+            "$ref": "./examples/privateEndpointConnection/PrivateEndpointConnectionListGet.json"
           }
         }
       }
@@ -106,7 +106,7 @@
         },
         "x-ms-examples": {
           "Gets private endpoint connection.": {
-            "$ref": "./examples/PrivateEndpointConnectionGet.json"
+            "$ref": "./examples/privateEndpointConnection/PrivateEndpointConnectionGet.json"
           }
         }
       },
@@ -161,7 +161,7 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Approve or reject a private endpoint connection with a given name.": {
-            "$ref": "./examples/PrivateEndpointConnectionUpdate.json"
+            "$ref": "./examples/privateEndpointConnection/PrivateEndpointConnectionUpdate.json"
           }
         }
       },
@@ -189,8 +189,17 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
-            "description": "Accepted. The private endpoint connection delete will complete asynchronously."
+            "description": "Accepted. The private endpoint connection delete will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "204": {
             "description": "Private endpoint connection does not exist."
@@ -205,7 +214,7 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Deletes a private endpoint connection with a given name.": {
-            "$ref": "./examples/PrivateEndpointConnectionDelete.json"
+            "$ref": "./examples/privateEndpointConnection/PrivateEndpointConnectionDelete.json"
           }
         }
       }
