@@ -47,8 +47,8 @@
   "securityDefinitions": {
     "ApiKeyAuth": {
       "type": "apiKey",
-      "in": "header",
-      "name": "aeg-sas-key"
+      "name": "aeg-sas-key",
+      "in": "header"
     },
     "OAuth2Auth": {
       "type": "oauth2",
@@ -64,8 +64,8 @@
   "x-ms-paths": {
     "/send?api-version={apiVersion}": {
       "post": {
-        "operationId": "PublishEventGridEvent",
-        "description": "Publish EventGridEvents",
+        "operationId": "PublishCustomEvent",
+        "description": "Publish custom events",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -78,9 +78,9 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/EventGridEvent"
+                "$ref": "#/definitions/CustomEventEvent"
               },
-              "x-typespec-name": "EventGridEvent[]"
+              "x-ms-identifiers": []
             }
           }
         ],
@@ -89,8 +89,7 @@
             "description": "The request has succeeded.",
             "schema": {
               "type": "object",
-              "properties": {},
-              "x-typespec-name": "{}"
+              "properties": {}
             }
           },
           "default": {
@@ -115,266 +114,267 @@
   "definitions": {
     "ApiManagement.ApiManagementApiCreatedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.APICreated event.",
       "properties": {
         "resourceUri": {
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.APICreated event."
+      }
     },
     "ApiManagement.ApiManagementApiDeletedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.APIDeleted event.",
       "properties": {
         "resourceUri": {
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.APIDeleted event."
+      }
     },
     "ApiManagement.ApiManagementApiReleaseCreatedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.APIReleaseCreated event.",
       "properties": {
         "resourceUri": {
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.APIReleaseCreated event."
+      }
     },
     "ApiManagement.ApiManagementApiReleaseDeletedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.APIReleaseDeleted event.",
       "properties": {
         "resourceUri": {
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.APIReleaseDeleted event."
+      }
     },
     "ApiManagement.ApiManagementApiReleaseUpdatedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.APIReleaseUpdated event.",
       "properties": {
         "resourceUri": {
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.APIReleaseUpdated event."
+      }
     },
     "ApiManagement.ApiManagementApiUpdatedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.APIUpdated event.",
       "properties": {
         "resourceUri": {
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.APIUpdated event."
+      }
     },
     "ApiManagement.ApiManagementGatewayApiAddedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayAPIAdded event.",
       "properties": {
         "resourceUri": {
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/apis/<ResourceName>`"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayAPIAdded event."
+      }
     },
     "ApiManagement.ApiManagementGatewayApiRemovedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayAPIRemoved event.",
       "properties": {
         "resourceUri": {
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/apis/<ResourceName>`"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayAPIRemoved event."
+      }
     },
     "ApiManagement.ApiManagementGatewayCertificateAuthorityCreatedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayCertificateAuthorityCreated event.",
       "properties": {
         "resourceUri": {
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/certificateAuthorities/<ResourceName>`"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayCertificateAuthorityCreated event."
+      }
     },
     "ApiManagement.ApiManagementGatewayCertificateAuthorityDeletedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayCertificateAuthorityDeleted event.",
       "properties": {
         "resourceUri": {
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/certificateAuthorities/<ResourceName>`"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayCertificateAuthorityDeleted event."
+      }
     },
     "ApiManagement.ApiManagementGatewayCertificateAuthorityUpdatedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayCertificateAuthorityUpdated event.",
       "properties": {
         "resourceUri": {
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/certificateAuthorities/<ResourceName>`"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayCertificateAuthorityUpdated event."
+      }
     },
     "ApiManagement.ApiManagementGatewayCreatedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayCreated event.",
       "properties": {
         "resourceUri": {
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<ResourceName>`"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayCreated event."
+      }
     },
     "ApiManagement.ApiManagementGatewayDeletedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayDeleted event.",
       "properties": {
         "resourceUri": {
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<ResourceName>`"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayDeleted event."
+      }
     },
     "ApiManagement.ApiManagementGatewayHostnameConfigurationCreatedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayHostnameConfigurationCreated event.",
       "properties": {
         "resourceUri": {
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/hostnameConfigurations/<ResourceName>`"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayHostnameConfigurationCreated event."
+      }
     },
     "ApiManagement.ApiManagementGatewayHostnameConfigurationDeletedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayHostnameConfigurationDeleted event.",
       "properties": {
         "resourceUri": {
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/hostnameConfigurations/<ResourceName>`"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayHostnameConfigurationDeleted event."
+      }
     },
     "ApiManagement.ApiManagementGatewayHostnameConfigurationUpdatedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayHostnameConfigurationUpdated event.",
       "properties": {
         "resourceUri": {
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/hostnameConfigurations/<ResourceName>`"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayHostnameConfigurationUpdated event."
+      }
     },
     "ApiManagement.ApiManagementGatewayUpdatedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayUpdated event.",
       "properties": {
         "resourceUri": {
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<ResourceName>`"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayUpdated event."
+      }
     },
     "ApiManagement.ApiManagementProductCreatedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.ProductCreated event.",
       "properties": {
         "resourceUri": {
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.ProductCreated event."
+      }
     },
     "ApiManagement.ApiManagementProductDeletedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.ProductDeleted event.",
       "properties": {
         "resourceUri": {
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.ProductDeleted event."
+      }
     },
     "ApiManagement.ApiManagementProductUpdatedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.ProductUpdated event.",
       "properties": {
         "resourceUri": {
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.ProductUpdated event."
+      }
     },
     "ApiManagement.ApiManagementSubscriptionCreatedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.SubscriptionCreated event.",
       "properties": {
         "resourceUri": {
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.SubscriptionCreated event."
+      }
     },
     "ApiManagement.ApiManagementSubscriptionDeletedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.SubscriptionDeleted event.",
       "properties": {
         "resourceUri": {
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.SubscriptionDeleted event."
+      }
     },
     "ApiManagement.ApiManagementSubscriptionUpdatedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.SubscriptionUpdated event.",
       "properties": {
         "resourceUri": {
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.SubscriptionUpdated event."
+      }
     },
     "ApiManagement.ApiManagementUserCreatedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.UserCreated event.",
       "properties": {
         "resourceUri": {
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.UserCreated event."
+      }
     },
     "ApiManagement.ApiManagementUserDeletedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.UserDeleted event.",
       "properties": {
         "resourceUri": {
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.UserDeleted event."
+      }
     },
     "ApiManagement.ApiManagementUserUpdatedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.UserUpdated event.",
       "properties": {
         "resourceUri": {
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.UserUpdated event."
+      }
     },
     "AppConfiguration.AppConfigurationKeyValueDeletedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.KeyValueDeleted event.",
       "properties": {
         "key": {
           "type": "string",
@@ -392,11 +392,11 @@
           "type": "string",
           "description": "The sync token representing the server state after the event."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.KeyValueDeleted event."
+      }
     },
     "AppConfiguration.AppConfigurationKeyValueModifiedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.KeyValueModified event.",
       "properties": {
         "key": {
           "type": "string",
@@ -414,11 +414,11 @@
           "type": "string",
           "description": "The sync token representing the server state after the event."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.KeyValueModified event."
+      }
     },
     "Azure.Core.Foundations.Error": {
       "type": "object",
+      "description": "The error object.",
       "properties": {
         "code": {
           "type": "string",
@@ -434,19 +434,17 @@
         },
         "details": {
           "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
-          "x-ms-identifiers": [],
-          "description": "An array of details about specific errors that led to this reported error.",
-          "x-typespec-name": "Azure.Core.Foundations.Error[]"
+          "x-ms-identifiers": []
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
           "description": "An object containing more specific information than the current object about the error."
         }
       },
-      "description": "The error object.",
       "required": [
         "code",
         "message"
@@ -454,19 +452,20 @@
     },
     "Azure.Core.Foundations.ErrorResponse": {
       "type": "object",
+      "description": "A response containing error details.",
       "properties": {
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
           "description": "The error object."
         }
       },
-      "description": "A response containing error details.",
       "required": [
         "error"
       ]
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
       "properties": {
         "code": {
           "type": "string",
@@ -476,11 +475,11 @@
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
           "description": "Inner error."
         }
-      },
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses."
+      }
     },
     "AzureCommunicationServices.AcsChatEventBaseProperties": {
       "type": "object",
+      "description": "Schema of common properties of all chat events",
       "properties": {
         "recipientCommunicationIdentifier": {
           "$ref": "#/definitions/CommunicationIdentifierModel",
@@ -494,11 +493,11 @@
           "type": "string",
           "description": "The chat thread id"
         }
-      },
-      "description": "Schema of common properties of all chat events"
+      }
     },
     "AzureCommunicationServices.AcsChatEventInThreadBaseProperties": {
       "type": "object",
+      "description": "Schema of common properties of all thread-level chat events",
       "properties": {
         "transactionId": {
           "type": "string",
@@ -508,11 +507,11 @@
           "type": "string",
           "description": "The chat thread id"
         }
-      },
-      "description": "Schema of common properties of all thread-level chat events"
+      }
     },
     "AzureCommunicationServices.AcsChatMessageDeletedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageDeleted event.",
       "properties": {
         "deleteTime": {
           "type": "string",
@@ -520,7 +519,6 @@
           "description": "The time at which the message was deleted"
         }
       },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageDeleted event.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureCommunicationServices.AcsChatMessageEventBaseProperties"
@@ -529,6 +527,7 @@
     },
     "AzureCommunicationServices.AcsChatMessageDeletedInThreadEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageDeletedInThread event.",
       "properties": {
         "deleteTime": {
           "type": "string",
@@ -536,7 +535,6 @@
           "description": "The time at which the message was deleted"
         }
       },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageDeletedInThread event.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureCommunicationServices.AcsChatMessageEventInThreadBaseProperties"
@@ -545,6 +543,7 @@
     },
     "AzureCommunicationServices.AcsChatMessageEditedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageEdited event.",
       "properties": {
         "messageBody": {
           "type": "string",
@@ -552,11 +551,10 @@
         },
         "metadata": {
           "type": "object",
+          "description": "The chat message metadata",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "The chat message metadata",
-          "x-typespec-name": "Record<string>"
+          }
         },
         "editTime": {
           "type": "string",
@@ -564,7 +562,6 @@
           "description": "The time at which the message was edited"
         }
       },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageEdited event.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureCommunicationServices.AcsChatMessageEventBaseProperties"
@@ -573,6 +570,7 @@
     },
     "AzureCommunicationServices.AcsChatMessageEditedInThreadEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageEditedInThread event.",
       "properties": {
         "messageBody": {
           "type": "string",
@@ -580,11 +578,10 @@
         },
         "metadata": {
           "type": "object",
+          "description": "The chat message metadata",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "The chat message metadata",
-          "x-typespec-name": "Record<string>"
+          }
         },
         "editTime": {
           "type": "string",
@@ -592,7 +589,6 @@
           "description": "The time at which the message was edited"
         }
       },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageEditedInThread event.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureCommunicationServices.AcsChatMessageEventInThreadBaseProperties"
@@ -601,6 +597,7 @@
     },
     "AzureCommunicationServices.AcsChatMessageEventBaseProperties": {
       "type": "object",
+      "description": "Schema of common properties of all chat message events",
       "properties": {
         "messageId": {
           "type": "string",
@@ -629,7 +626,6 @@
           "description": "The version of the message"
         }
       },
-      "description": "Schema of common properties of all chat message events",
       "allOf": [
         {
           "$ref": "#/definitions/AzureCommunicationServices.AcsChatEventBaseProperties"
@@ -638,6 +634,7 @@
     },
     "AzureCommunicationServices.AcsChatMessageEventInThreadBaseProperties": {
       "type": "object",
+      "description": "Schema of common properties of all thread-level chat message events",
       "properties": {
         "messageId": {
           "type": "string",
@@ -666,7 +663,6 @@
           "description": "The version of the message"
         }
       },
-      "description": "Schema of common properties of all thread-level chat message events",
       "allOf": [
         {
           "$ref": "#/definitions/AzureCommunicationServices.AcsChatEventInThreadBaseProperties"
@@ -675,6 +671,7 @@
     },
     "AzureCommunicationServices.AcsChatMessageReceivedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event.",
       "properties": {
         "messageBody": {
           "type": "string",
@@ -682,14 +679,12 @@
         },
         "metadata": {
           "type": "object",
+          "description": "The chat message metadata",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "The chat message metadata",
-          "x-typespec-name": "Record<string>"
+          }
         }
       },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureCommunicationServices.AcsChatMessageEventBaseProperties"
@@ -698,6 +693,7 @@
     },
     "AzureCommunicationServices.AcsChatMessageReceivedInThreadEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceivedInThread event.",
       "properties": {
         "messageBody": {
           "type": "string",
@@ -705,14 +701,12 @@
         },
         "metadata": {
           "type": "object",
+          "description": "The chat message metadata",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "The chat message metadata",
-          "x-typespec-name": "Record<string>"
+          }
         }
       },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceivedInThread event.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureCommunicationServices.AcsChatMessageEventInThreadBaseProperties"
@@ -721,6 +715,7 @@
     },
     "AzureCommunicationServices.AcsChatParticipantAddedToThreadEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadParticipantAdded event.",
       "properties": {
         "time": {
           "type": "string",
@@ -741,7 +736,6 @@
           "description": "The version of the thread"
         }
       },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadParticipantAdded event.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureCommunicationServices.AcsChatEventInThreadBaseProperties"
@@ -750,6 +744,7 @@
     },
     "AzureCommunicationServices.AcsChatParticipantAddedToThreadWithUserEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatParticipantAddedToThreadWithUser event.",
       "properties": {
         "time": {
           "type": "string",
@@ -765,7 +760,6 @@
           "description": "The details of the user who was added"
         }
       },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatParticipantAddedToThreadWithUser event.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadEventBaseProperties"
@@ -774,6 +768,7 @@
     },
     "AzureCommunicationServices.AcsChatParticipantRemovedFromThreadEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadParticipantRemoved event.",
       "properties": {
         "time": {
           "type": "string",
@@ -794,7 +789,6 @@
           "description": "The version of the thread"
         }
       },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadParticipantRemoved event.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureCommunicationServices.AcsChatEventInThreadBaseProperties"
@@ -803,6 +797,7 @@
     },
     "AzureCommunicationServices.AcsChatParticipantRemovedFromThreadWithUserEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatParticipantRemovedFromThreadWithUser event.",
       "properties": {
         "time": {
           "type": "string",
@@ -818,7 +813,6 @@
           "description": "The details of the user who was removed"
         }
       },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatParticipantRemovedFromThreadWithUser event.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadEventBaseProperties"
@@ -827,6 +821,7 @@
     },
     "AzureCommunicationServices.AcsChatThreadCreatedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreated event.",
       "properties": {
         "createdByCommunicationIdentifier": {
           "$ref": "#/definitions/CommunicationIdentifierModel",
@@ -834,21 +829,20 @@
         },
         "properties": {
           "type": "object",
-          "additionalProperties": true,
           "description": "The thread properties",
-          "x-typespec-name": "Record<unknown>"
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "participants": {
           "type": "array",
+          "description": "The list of properties of participants who are part of the thread",
           "items": {
             "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadParticipantProperties"
           },
-          "x-ms-identifiers": [],
-          "description": "The list of properties of participants who are part of the thread",
-          "x-typespec-name": "AzureCommunicationServices.AcsChatThreadParticipantProperties[]"
+          "x-ms-identifiers": []
         }
       },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreated event.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadEventInThreadBaseProperties"
@@ -857,6 +851,7 @@
     },
     "AzureCommunicationServices.AcsChatThreadCreatedWithUserEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreatedWithUser event.",
       "properties": {
         "createdByCommunicationIdentifier": {
           "$ref": "#/definitions/CommunicationIdentifierModel",
@@ -864,21 +859,20 @@
         },
         "properties": {
           "type": "object",
-          "additionalProperties": true,
           "description": "The thread properties",
-          "x-typespec-name": "Record<unknown>"
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "participants": {
           "type": "array",
+          "description": "The list of properties of participants who are part of the thread",
           "items": {
             "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadParticipantProperties"
           },
-          "x-ms-identifiers": [],
-          "description": "The list of properties of participants who are part of the thread",
-          "x-typespec-name": "AzureCommunicationServices.AcsChatThreadParticipantProperties[]"
+          "x-ms-identifiers": []
         }
       },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreatedWithUser event.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadEventBaseProperties"
@@ -887,6 +881,7 @@
     },
     "AzureCommunicationServices.AcsChatThreadDeletedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadDeleted event.",
       "properties": {
         "deletedByCommunicationIdentifier": {
           "$ref": "#/definitions/CommunicationIdentifierModel",
@@ -898,7 +893,6 @@
           "description": "The deletion time of the thread"
         }
       },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadDeleted event.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadEventInThreadBaseProperties"
@@ -907,6 +901,7 @@
     },
     "AzureCommunicationServices.AcsChatThreadEventBaseProperties": {
       "type": "object",
+      "description": "Schema of common properties of all chat thread events",
       "properties": {
         "createTime": {
           "type": "string",
@@ -919,7 +914,6 @@
           "description": "The version of the thread"
         }
       },
-      "description": "Schema of common properties of all chat thread events",
       "allOf": [
         {
           "$ref": "#/definitions/AzureCommunicationServices.AcsChatEventBaseProperties"
@@ -928,6 +922,7 @@
     },
     "AzureCommunicationServices.AcsChatThreadEventInThreadBaseProperties": {
       "type": "object",
+      "description": "Schema of common properties of all chat thread events",
       "properties": {
         "createTime": {
           "type": "string",
@@ -940,7 +935,6 @@
           "description": "The version of the thread"
         }
       },
-      "description": "Schema of common properties of all chat thread events",
       "allOf": [
         {
           "$ref": "#/definitions/AzureCommunicationServices.AcsChatEventInThreadBaseProperties"
@@ -949,6 +943,7 @@
     },
     "AzureCommunicationServices.AcsChatThreadParticipantProperties": {
       "type": "object",
+      "description": "Schema of the chat thread participant",
       "properties": {
         "displayName": {
           "type": "string",
@@ -958,11 +953,11 @@
           "$ref": "#/definitions/CommunicationIdentifierModel",
           "description": "The communication identifier of the user"
         }
-      },
-      "description": "Schema of the chat thread participant"
+      }
     },
     "AzureCommunicationServices.AcsChatThreadPropertiesUpdatedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdated event.",
       "properties": {
         "editedByCommunicationIdentifier": {
           "$ref": "#/definitions/CommunicationIdentifierModel",
@@ -975,12 +970,12 @@
         },
         "properties": {
           "type": "object",
-          "additionalProperties": true,
           "description": "The updated thread properties",
-          "x-typespec-name": "Record<unknown>"
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdated event.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadEventInThreadBaseProperties"
@@ -989,6 +984,7 @@
     },
     "AzureCommunicationServices.AcsChatThreadPropertiesUpdatedPerUserEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdatedPerUser event.",
       "properties": {
         "editedByCommunicationIdentifier": {
           "$ref": "#/definitions/CommunicationIdentifierModel",
@@ -1001,12 +997,12 @@
         },
         "properties": {
           "type": "object",
-          "additionalProperties": true,
           "description": "The updated thread properties",
-          "x-typespec-name": "Record<unknown>"
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdatedPerUser event.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadEventBaseProperties"
@@ -1015,6 +1011,7 @@
     },
     "AzureCommunicationServices.AcsChatThreadWithUserDeletedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadWithUserDeleted event.",
       "properties": {
         "deletedByCommunicationIdentifier": {
           "$ref": "#/definitions/CommunicationIdentifierModel",
@@ -1026,7 +1023,6 @@
           "description": "The deletion time of the thread"
         }
       },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadWithUserDeleted event.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadEventBaseProperties"
@@ -1035,6 +1031,7 @@
     },
     "AzureCommunicationServices.AcsEmailDeliveryReportReceivedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailDeliveryReportReceived event.",
       "properties": {
         "sender": {
           "type": "string",
@@ -1061,8 +1058,7 @@
           "format": "date-time",
           "description": "The time at which the email delivery report received timestamp"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailDeliveryReportReceived event."
+      }
     },
     "AzureCommunicationServices.AcsEmailDeliveryReportStatus": {
       "type": "string",
@@ -1114,16 +1110,17 @@
     },
     "AzureCommunicationServices.AcsEmailDeliveryReportStatusDetails": {
       "type": "object",
+      "description": "Detailed information about the status if any",
       "properties": {
         "statusMessage": {
           "type": "string",
           "description": "Detailed status message"
         }
-      },
-      "description": "Detailed information about the status if any"
+      }
     },
     "AzureCommunicationServices.AcsEmailEngagementTrackingReportReceivedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailEngagementTrackingReportReceived event.",
       "properties": {
         "sender": {
           "type": "string",
@@ -1150,33 +1147,31 @@
           "$ref": "#/definitions/AzureCommunicationServices.AcsUserEngagement",
           "description": "The type of engagement user have with email"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailEngagementTrackingReportReceived event."
+      }
     },
     "AzureCommunicationServices.AcsIncomingCallCustomContext": {
       "type": "object",
+      "description": "Custom Context of Incoming Call",
       "properties": {
         "sipHeaders": {
           "type": "object",
+          "description": "Sip Headers for incoming call",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "Sip Headers for incoming call",
-          "x-typespec-name": "Record<string>"
+          }
         },
         "viopHeaders": {
           "type": "object",
+          "description": "Voip Headers for incoming call",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "Voip Headers for incoming call",
-          "x-typespec-name": "Record<string>"
+          }
         }
-      },
-      "description": "Custom Context of Incoming Call"
+      }
     },
     "AzureCommunicationServices.AcsIncomingCallEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.IncomingCall event",
       "properties": {
         "to": {
           "$ref": "#/definitions/CommunicationIdentifierModel",
@@ -1206,11 +1201,11 @@
           "type": "string",
           "description": "CorrelationId (CallId)."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.IncomingCall event"
+      }
     },
     "AzureCommunicationServices.AcsRecordingChunkInfoProperties": {
       "type": "object",
+      "description": "Schema for all properties of  Recording Chunk Information.",
       "properties": {
         "documentId": {
           "type": "string",
@@ -1237,11 +1232,11 @@
           "type": "string",
           "description": "The location to delete all chunk storage"
         }
-      },
-      "description": "Schema for all properties of  Recording Chunk Information."
+      }
     },
     "AzureCommunicationServices.AcsRecordingFileStatusUpdatedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RecordingFileStatusUpdated event.",
       "properties": {
         "recordingStorageInfo": {
           "$ref": "#/definitions/AzureCommunicationServices.AcsRecordingStorageInfoProperties",
@@ -1273,26 +1268,25 @@
           "type": "string",
           "description": "The reason for ending recording session"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RecordingFileStatusUpdated event."
+      }
     },
     "AzureCommunicationServices.AcsRecordingStorageInfoProperties": {
       "type": "object",
+      "description": "Schema for all properties of Recording Storage Information.",
       "properties": {
         "recordingChunks": {
           "type": "array",
+          "description": "List of details of recording chunks information",
           "items": {
             "$ref": "#/definitions/AzureCommunicationServices.AcsRecordingChunkInfoProperties"
           },
-          "x-ms-identifiers": [],
-          "description": "List of details of recording chunks information",
-          "x-typespec-name": "AzureCommunicationServices.AcsRecordingChunkInfoProperties[]"
+          "x-ms-identifiers": []
         }
-      },
-      "description": "Schema for all properties of Recording Storage Information."
+      }
     },
     "AzureCommunicationServices.AcsSmsDeliveryAttemptProperties": {
       "type": "object",
+      "description": "Schema for details of a delivery attempt",
       "properties": {
         "timestamp": {
           "type": "string",
@@ -1309,11 +1303,11 @@
           "format": "int64",
           "description": "Number of segments whose delivery failed"
         }
-      },
-      "description": "Schema for details of a delivery attempt"
+      }
     },
     "AzureCommunicationServices.AcsSmsDeliveryReportReceivedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.SMSDeliveryReportReceived event.",
       "properties": {
         "deliveryStatus": {
           "type": "string",
@@ -1325,12 +1319,11 @@
         },
         "deliveryAttempts": {
           "type": "array",
+          "description": "List of details of delivery attempts made",
           "items": {
             "$ref": "#/definitions/AzureCommunicationServices.AcsSmsDeliveryAttemptProperties"
           },
-          "x-ms-identifiers": [],
-          "description": "List of details of delivery attempts made",
-          "x-typespec-name": "AzureCommunicationServices.AcsSmsDeliveryAttemptProperties[]"
+          "x-ms-identifiers": []
         },
         "receivedTimestamp": {
           "type": "string",
@@ -1342,7 +1335,6 @@
           "description": "Customer Content"
         }
       },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.SMSDeliveryReportReceived event.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureCommunicationServices.AcsSmsEventBaseProperties"
@@ -1351,6 +1343,7 @@
     },
     "AzureCommunicationServices.AcsSmsEventBaseProperties": {
       "type": "object",
+      "description": "Schema of common properties of all SMS events",
       "properties": {
         "messageId": {
           "type": "string",
@@ -1364,11 +1357,11 @@
           "type": "string",
           "description": "The identity of SMS message receiver"
         }
-      },
-      "description": "Schema of common properties of all SMS events"
+      }
     },
     "AzureCommunicationServices.AcsSmsReceivedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.SMSReceived event.",
       "properties": {
         "message": {
           "type": "string",
@@ -1380,7 +1373,6 @@
           "description": "The time at which the SMS was received"
         }
       },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.SMSReceived event.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureCommunicationServices.AcsSmsEventBaseProperties"
@@ -1389,13 +1381,13 @@
     },
     "AzureCommunicationServices.AcsUserDisconnectedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.UserDisconnected event.",
       "properties": {
         "userCommunicationIdentifier": {
           "$ref": "#/definitions/CommunicationIdentifierModel",
           "description": "The communication identifier of the user who was disconnected"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.UserDisconnected event."
+      }
     },
     "AzureCommunicationServices.AcsUserEngagement": {
       "type": "string",
@@ -1501,6 +1493,7 @@
     },
     "CloudEventEvent": {
       "type": "object",
+      "description": "Properties of an event published to an Azure Messaging EventGrid Namespace topic using the CloudEvent 1.0 Schema.",
       "properties": {
         "id": {
           "type": "string",
@@ -1544,7 +1537,6 @@
           "description": "This describes the subject of the event in the context of the event producer (identified by source)."
         }
       },
-      "description": "Properties of an event published to an Azure Messaging EventGrid Namespace topic using the CloudEvent 1.0 Schema.",
       "required": [
         "id",
         "source",
@@ -1584,6 +1576,7 @@
     },
     "CommunicationIdentifierModel": {
       "type": "object",
+      "description": "Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user. This model must be interpreted as a union: Apart from rawId, at most one further property may be set.",
       "properties": {
         "rawId": {
           "type": "string",
@@ -1601,24 +1594,24 @@
           "$ref": "#/definitions/MicrosoftTeamsUserIdentifierModel",
           "description": "The Microsoft Teams user."
         }
-      },
-      "description": "Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user. This model must be interpreted as a union: Apart from rawId, at most one further property may be set."
+      }
     },
     "CommunicationUserIdentifierModel": {
       "type": "object",
+      "description": "A user that got created with an Azure Communication Services resource.",
       "properties": {
         "id": {
           "type": "string",
           "description": "The Id of the communication user."
         }
       },
-      "description": "A user that got created with an Azure Communication Services resource.",
       "required": [
         "id"
       ]
     },
     "ContainerRegistry.ContainerRegistryArtifactEventData": {
       "type": "object",
+      "description": "The content of the event request message.",
       "properties": {
         "id": {
           "type": "string",
@@ -1645,11 +1638,11 @@
           "$ref": "#/definitions/ContainerRegistry.ContainerRegistryEventConnectedRegistry",
           "description": "The connected registry information if the event is generated by a connected registry."
         }
-      },
-      "description": "The content of the event request message."
+      }
     },
     "ContainerRegistry.ContainerRegistryArtifactEventTarget": {
       "type": "object",
+      "description": "The target of the event.",
       "properties": {
         "mediaType": {
           "type": "string",
@@ -1680,13 +1673,12 @@
           "type": "string",
           "description": "The version of the artifact."
         }
-      },
-      "description": "The target of the event."
+      }
     },
     "ContainerRegistry.ContainerRegistryChartDeletedEventData": {
       "type": "object",
-      "properties": {},
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ChartDeleted event.",
+      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/ContainerRegistry.ContainerRegistryArtifactEventData"
@@ -1695,8 +1687,8 @@
     },
     "ContainerRegistry.ContainerRegistryChartPushedEventData": {
       "type": "object",
-      "properties": {},
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ChartPushed event.",
+      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/ContainerRegistry.ContainerRegistryArtifactEventData"
@@ -1705,26 +1697,27 @@
     },
     "ContainerRegistry.ContainerRegistryEventActor": {
       "type": "object",
+      "description": "The agent that initiated the event. For most situations, this could be from the authorization context of the request.",
       "properties": {
         "name": {
           "type": "string",
           "description": "The subject or username associated with the request context that generated the event."
         }
-      },
-      "description": "The agent that initiated the event. For most situations, this could be from the authorization context of the request."
+      }
     },
     "ContainerRegistry.ContainerRegistryEventConnectedRegistry": {
       "type": "object",
+      "description": "The connected registry information if the event is generated by a connected registry.",
       "properties": {
         "name": {
           "type": "string",
           "description": "The name of the connected registry that generated this event."
         }
-      },
-      "description": "The connected registry information if the event is generated by a connected registry."
+      }
     },
     "ContainerRegistry.ContainerRegistryEventData": {
       "type": "object",
+      "description": "The content of the event request message.",
       "properties": {
         "id": {
           "type": "string",
@@ -1763,11 +1756,11 @@
           "$ref": "#/definitions/ContainerRegistry.ContainerRegistryEventConnectedRegistry",
           "description": "The connected registry information if the event is generated by a connected registry."
         }
-      },
-      "description": "The content of the event request message."
+      }
     },
     "ContainerRegistry.ContainerRegistryEventRequest": {
       "type": "object",
+      "description": "The request that generated the event.",
       "properties": {
         "id": {
           "type": "string",
@@ -1789,11 +1782,11 @@
           "type": "string",
           "description": "The user agent header of the request."
         }
-      },
-      "description": "The request that generated the event."
+      }
     },
     "ContainerRegistry.ContainerRegistryEventSource": {
       "type": "object",
+      "description": "The registry node that generated the event. Put differently, while the actor initiates the event, the source generates it.",
       "properties": {
         "addr": {
           "type": "string",
@@ -1803,11 +1796,11 @@
           "type": "string",
           "description": "The running instance of an application. Changes after each restart."
         }
-      },
-      "description": "The registry node that generated the event. Put differently, while the actor initiates the event, the source generates it."
+      }
     },
     "ContainerRegistry.ContainerRegistryEventTarget": {
       "type": "object",
+      "description": "The target of the event.",
       "properties": {
         "mediaType": {
           "type": "string",
@@ -1839,13 +1832,12 @@
           "type": "string",
           "description": "The direct URL to the content."
         }
-      },
-      "description": "The target of the event."
+      }
     },
     "ContainerRegistry.ContainerRegistryImageDeletedEventData": {
       "type": "object",
-      "properties": {},
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ImageDeleted event.",
+      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/ContainerRegistry.ContainerRegistryEventData"
@@ -1854,8 +1846,8 @@
     },
     "ContainerRegistry.ContainerRegistryImagePushedEventData": {
       "type": "object",
-      "properties": {},
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ImagePushed event.",
+      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/ContainerRegistry.ContainerRegistryEventData"
@@ -1864,8 +1856,8 @@
     },
     "ContainerService.ContainerServiceClusterSupportEndedEventData": {
       "type": "object",
-      "properties": {},
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.ClusterSupportEnded event",
+      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/ContainerService.ContainerServiceClusterSupportEventData"
@@ -1874,8 +1866,8 @@
     },
     "ContainerService.ContainerServiceClusterSupportEndingEventData": {
       "type": "object",
-      "properties": {},
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.ClusterSupportEnding event",
+      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/ContainerService.ContainerServiceClusterSupportEventData"
@@ -1884,16 +1876,17 @@
     },
     "ContainerService.ContainerServiceClusterSupportEventData": {
       "type": "object",
+      "description": "Schema of common properties of cluster support events",
       "properties": {
         "kubernetesVersion": {
           "type": "string",
           "description": "The Kubernetes version of the ManagedCluster resource"
         }
-      },
-      "description": "Schema of common properties of cluster support events"
+      }
     },
     "ContainerService.ContainerServiceNewKubernetesVersionAvailableEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NewKubernetesVersionAvailable event",
       "properties": {
         "latestSupportedKubernetesVersion": {
           "type": "string",
@@ -1911,23 +1904,22 @@
           "type": "string",
           "description": "The highest PATCH Kubernetes version considered preview for the ManagedCluster resource. There might not be any version in preview at the time of publishing the event"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NewKubernetesVersionAvailable event"
+      }
     },
     "ContainerService.ContainerServiceNodePoolRollingEventData": {
       "type": "object",
+      "description": "Schema of common properties of node pool rolling events",
       "properties": {
         "nodePoolName": {
           "type": "string",
           "description": "The name of the node pool in the ManagedCluster resource"
         }
-      },
-      "description": "Schema of common properties of node pool rolling events"
+      }
     },
     "ContainerService.ContainerServiceNodePoolRollingFailedEventData": {
       "type": "object",
-      "properties": {},
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingFailed event",
+      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/ContainerService.ContainerServiceNodePoolRollingEventData"
@@ -1936,8 +1928,8 @@
     },
     "ContainerService.ContainerServiceNodePoolRollingStartedEventData": {
       "type": "object",
-      "properties": {},
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingStarted event",
+      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/ContainerService.ContainerServiceNodePoolRollingEventData"
@@ -1946,8 +1938,8 @@
     },
     "ContainerService.ContainerServiceNodePoolRollingSucceededEventData": {
       "type": "object",
-      "properties": {},
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingSucceeded event",
+      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/ContainerService.ContainerServiceNodePoolRollingEventData"
@@ -1956,11 +1948,12 @@
     },
     "CustomEventEvent": {
       "type": "object",
-      "properties": {},
-      "description": "Properties of an event published to an Event Grid topic using a custom schema"
+      "description": "Properties of an event published to an Event Grid topic using a custom schema",
+      "properties": {}
     },
     "DataBox.DataBoxCopyCompletedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.DataBox.CopyCompleted event.",
       "properties": {
         "serialNumber": {
           "type": "string",
@@ -1975,11 +1968,11 @@
           "format": "date-time",
           "description": "The time at which the stage happened."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.DataBox.CopyCompleted event."
+      }
     },
     "DataBox.DataBoxCopyStartedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.DataBox.CopyStarted event.",
       "properties": {
         "serialNumber": {
           "type": "string",
@@ -1994,11 +1987,11 @@
           "format": "date-time",
           "description": "The time at which the stage happened."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.DataBox.CopyStarted event."
+      }
     },
     "DataBox.DataBoxOrderCompletedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.DataBox.OrderCompleted event.",
       "properties": {
         "serialNumber": {
           "type": "string",
@@ -2013,8 +2006,7 @@
           "format": "date-time",
           "description": "The time at which the stage happened."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.DataBox.OrderCompleted event."
+      }
     },
     "DataBox.DataBoxStageName": {
       "type": "string",
@@ -2048,17 +2040,18 @@
     },
     "EventGrid.SubscriptionDeletedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.EventGrid.SubscriptionDeletedEvent event.",
       "properties": {
         "eventSubscriptionId": {
           "type": "string",
           "description": "The Azure resource ID of the deleted event subscription.",
           "readOnly": true
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.EventGrid.SubscriptionDeletedEvent event."
+      }
     },
     "EventGrid.SubscriptionValidationEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.EventGrid.SubscriptionValidationEvent event.",
       "properties": {
         "validationCode": {
           "type": "string",
@@ -2070,21 +2063,21 @@
           "description": "The validation URL sent by Azure Event Grid (available starting version 2018-05-01-preview). To complete the validation handshake, the subscriber must either respond with the validationCode as part of the validation response, or perform a GET request on the validationUrl (available starting version 2018-05-01-preview).",
           "readOnly": true
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.EventGrid.SubscriptionValidationEvent event."
+      }
     },
     "EventGrid.SubscriptionValidationResponse": {
       "type": "object",
+      "description": "To complete an event subscription validation handshake, a subscriber can use either the validationCode or the validationUrl received in a SubscriptionValidationEvent. When the validationCode is used, the SubscriptionValidationResponse can be used to build the response.",
       "properties": {
         "validationResponse": {
           "type": "string",
           "description": "The validation response sent by the subscriber to Azure Event Grid to complete the validation of an event subscription."
         }
-      },
-      "description": "To complete an event subscription validation handshake, a subscriber can use either the validationCode or the validationUrl received in a SubscriptionValidationEvent. When the validationCode is used, the SubscriptionValidationResponse can be used to build the response."
+      }
     },
     "EventGridEvent": {
       "type": "object",
+      "description": "Properties of an event published to an Event Grid topic using the EventGrid Schema.",
       "properties": {
         "id": {
           "type": "string",
@@ -2120,7 +2113,6 @@
           "description": "The schema version of the data object."
         }
       },
-      "description": "Properties of an event published to an Event Grid topic using the EventGrid Schema.",
       "required": [
         "id",
         "subject",
@@ -2132,6 +2124,7 @@
     },
     "EventHub.EventHubCaptureFileCreatedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.EventHub.CaptureFileCreated event.",
       "properties": {
         "fileUrl": {
           "type": "string",
@@ -2175,11 +2168,11 @@
           "format": "date-time",
           "description": "The last time from the queue."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.EventHub.CaptureFileCreated event."
+      }
     },
     "HealthCareApis.HealthcareDicomImageCreatedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageCreated event.",
       "properties": {
         "partitionName": {
           "type": "string",
@@ -2206,11 +2199,11 @@
           "format": "int64",
           "description": "Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation and deletion within the service."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageCreated event."
+      }
     },
     "HealthCareApis.HealthcareDicomImageDeletedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageDeleted event.",
       "properties": {
         "partitionName": {
           "type": "string",
@@ -2237,11 +2230,11 @@
           "format": "int64",
           "description": "Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation and deletion within the service."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageDeleted event."
+      }
     },
     "HealthCareApis.HealthcareDicomImageUpdatedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageUpdated event.",
       "properties": {
         "partitionName": {
           "type": "string",
@@ -2269,13 +2262,13 @@
           "description": "Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation, updation and deletion within the service."
         }
       },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageUpdated event.",
       "required": [
         "partitionName"
       ]
     },
     "HealthCareApis.HealthcareFhirResourceCreatedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceCreated event.",
       "properties": {
         "resourceFhirAccount": {
           "type": "string",
@@ -2294,11 +2287,11 @@
           "$ref": "#/definitions/HealthCareApis.HealthcareFhirResourceType",
           "description": "Type of HL7 FHIR resource."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceCreated event."
+      }
     },
     "HealthCareApis.HealthcareFhirResourceDeletedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceDeleted event.",
       "properties": {
         "resourceFhirAccount": {
           "type": "string",
@@ -2317,8 +2310,7 @@
           "$ref": "#/definitions/HealthCareApis.HealthcareFhirResourceType",
           "description": "Type of HL7 FHIR resource."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceDeleted event."
+      }
     },
     "HealthCareApis.HealthcareFhirResourceType": {
       "type": "string",
@@ -3300,6 +3292,7 @@
     },
     "HealthCareApis.HealthcareFhirResourceUpdatedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceUpdated event.",
       "properties": {
         "resourceFhirAccount": {
           "type": "string",
@@ -3318,21 +3311,21 @@
           "$ref": "#/definitions/HealthCareApis.HealthcareFhirResourceType",
           "description": "Type of HL7 FHIR resource."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceUpdated event."
+      }
     },
     "IoTHub.DeviceConnectionStateEventInfo": {
       "type": "object",
+      "description": "Information about the device connection state event.",
       "properties": {
         "sequenceNumber": {
           "type": "string",
           "description": "Sequence number is string representation of a hexadecimal number. string compare can be used to identify the larger number because both in ASCII and HEX numbers come after alphabets. If you are converting the string to hex, then the number is a 256 bit number."
         }
-      },
-      "description": "Information about the device connection state event."
+      }
     },
     "IoTHub.DeviceConnectionStateEventProperties": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a device connection state event (DeviceConnected, DeviceDisconnected).",
       "properties": {
         "deviceId": {
           "type": "string",
@@ -3350,11 +3343,11 @@
           "$ref": "#/definitions/IoTHub.DeviceConnectionStateEventInfo",
           "description": "Information about the device connection state event."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a device connection state event (DeviceConnected, DeviceDisconnected)."
+      }
     },
     "IoTHub.DeviceLifeCycleEventProperties": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a device life cycle event (DeviceCreated, DeviceDeleted).",
       "properties": {
         "deviceId": {
           "type": "string",
@@ -3368,39 +3361,36 @@
           "$ref": "#/definitions/IoTHub.DeviceTwinInfo",
           "description": "Information about the device twin, which is the cloud representation of application device metadata."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a device life cycle event (DeviceCreated, DeviceDeleted)."
+      }
     },
     "IoTHub.DeviceTelemetryEventProperties": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a device telemetry event (DeviceTelemetry).",
       "properties": {
         "body": {
           "type": "object",
-          "additionalProperties": true,
           "description": "The content of the message from the device.",
-          "x-typespec-name": "Record<unknown>"
+          "additionalProperties": true
         },
         "properties": {
           "type": "object",
+          "description": "Application properties are user-defined strings that can be added to the message. These fields are optional.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "Application properties are user-defined strings that can be added to the message. These fields are optional.",
-          "x-typespec-name": "Record<string>"
+          }
         },
         "systemProperties": {
           "type": "object",
+          "description": "System properties help identify contents and source of the messages.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "System properties help identify contents and source of the messages.",
-          "x-typespec-name": "Record<string>"
+          }
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a device telemetry event (DeviceTelemetry)."
+      }
     },
     "IoTHub.DeviceTwinInfo": {
       "type": "object",
+      "description": "Information about the device twin, which is the cloud representation of application device metadata.",
       "properties": {
         "authenticationType": {
           "type": "string",
@@ -3429,6 +3419,7 @@
         },
         "properties": {
           "type": "object",
+          "description": "Properties JSON element.",
           "properties": {
             "desired": {
               "$ref": "#/definitions/IoTHub.DeviceTwinProperties",
@@ -3438,9 +3429,7 @@
               "$ref": "#/definitions/IoTHub.DeviceTwinProperties",
               "description": "A portion of the properties that can be written only by the device, and read by the application back-end."
             }
-          },
-          "description": "Properties JSON element.",
-          "x-typespec-name": "IoTHub.(anonymous model)"
+          }
         },
         "status": {
           "type": "string",
@@ -3457,6 +3446,7 @@
         },
         "x509Thumbprint": {
           "type": "object",
+          "description": "The thumbprint is a unique value for the x509 certificate, commonly used to find a particular certificate in a certificate store. The thumbprint is dynamically generated using the SHA1 algorithm, and does not physically exist in the certificate.",
           "properties": {
             "primaryThumbprint": {
               "type": "string",
@@ -3466,25 +3456,23 @@
               "type": "string",
               "description": "Secondary thumbprint for the x509 certificate."
             }
-          },
-          "description": "The thumbprint is a unique value for the x509 certificate, commonly used to find a particular certificate in a certificate store. The thumbprint is dynamically generated using the SHA1 algorithm, and does not physically exist in the certificate.",
-          "x-typespec-name": "(anonymous model)"
+          }
         }
-      },
-      "description": "Information about the device twin, which is the cloud representation of application device metadata."
+      }
     },
     "IoTHub.DeviceTwinMetadata": {
       "type": "object",
+      "description": "Metadata information for the properties JSON document.",
       "properties": {
         "lastUpdated": {
           "type": "string",
           "description": "The ISO8601 timestamp of the last time the properties were updated."
         }
-      },
-      "description": "Metadata information for the properties JSON document."
+      }
     },
     "IoTHub.DeviceTwinProperties": {
       "type": "object",
+      "description": "A portion of the properties that can be written only by the application back-end, and read by the device.",
       "properties": {
         "metadata": {
           "$ref": "#/definitions/IoTHub.DeviceTwinMetadata",
@@ -3495,13 +3483,12 @@
           "format": "double",
           "description": "Version of device twin properties."
         }
-      },
-      "description": "A portion of the properties that can be written only by the application back-end, and read by the device."
+      }
     },
     "IoTHub.IotHubDeviceConnectedEventData": {
       "type": "object",
-      "properties": {},
       "description": "Event data for Microsoft.Devices.DeviceConnected event.",
+      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/IoTHub.DeviceConnectionStateEventProperties"
@@ -3510,8 +3497,8 @@
     },
     "IoTHub.IotHubDeviceCreatedEventData": {
       "type": "object",
-      "properties": {},
       "description": "Event data for Microsoft.Devices.DeviceCreated event.",
+      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/IoTHub.DeviceLifeCycleEventProperties"
@@ -3520,8 +3507,8 @@
     },
     "IoTHub.IotHubDeviceDeletedEventData": {
       "type": "object",
-      "properties": {},
       "description": "Event data for Microsoft.Devices.DeviceDeleted event.",
+      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/IoTHub.DeviceLifeCycleEventProperties"
@@ -3530,8 +3517,8 @@
     },
     "IoTHub.IotHubDeviceDisconnectedEventData": {
       "type": "object",
-      "properties": {},
       "description": "Event data for Microsoft.Devices.DeviceDisconnected event.",
+      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/IoTHub.DeviceConnectionStateEventProperties"
@@ -3540,8 +3527,8 @@
     },
     "IoTHub.IotHubDeviceTelemetryEventData": {
       "type": "object",
-      "properties": {},
       "description": "Event data for Microsoft.Devices.DeviceTelemetry event.",
+      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/IoTHub.DeviceTelemetryEventProperties"
@@ -3550,6 +3537,7 @@
     },
     "KeyVault.KeyVaultCertificateExpiredEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.CertificateExpired event.",
       "properties": {
         "Id": {
           "type": "string",
@@ -3581,11 +3569,11 @@
           "format": "double",
           "description": "The expiration date of the object that triggered this event"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.CertificateExpired event."
+      }
     },
     "KeyVault.KeyVaultCertificateNearExpiryEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.CertificateNearExpiry event.",
       "properties": {
         "Id": {
           "type": "string",
@@ -3617,11 +3605,11 @@
           "format": "double",
           "description": "The expiration date of the object that triggered this event"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.CertificateNearExpiry event."
+      }
     },
     "KeyVault.KeyVaultCertificateNewVersionCreatedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.CertificateNewVersionCreated event.",
       "properties": {
         "Id": {
           "type": "string",
@@ -3653,11 +3641,11 @@
           "format": "double",
           "description": "The expiration date of the object that triggered this event"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.CertificateNewVersionCreated event."
+      }
     },
     "KeyVault.KeyVaultKeyExpiredEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.KeyExpired event.",
       "properties": {
         "Id": {
           "type": "string",
@@ -3689,11 +3677,11 @@
           "format": "double",
           "description": "The expiration date of the object that triggered this event"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.KeyExpired event."
+      }
     },
     "KeyVault.KeyVaultKeyNearExpiryEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.KeyNearExpiry event.",
       "properties": {
         "Id": {
           "type": "string",
@@ -3725,11 +3713,11 @@
           "format": "double",
           "description": "The expiration date of the object that triggered this event"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.KeyNearExpiry event."
+      }
     },
     "KeyVault.KeyVaultKeyNewVersionCreatedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.KeyNewVersionCreated event.",
       "properties": {
         "Id": {
           "type": "string",
@@ -3761,11 +3749,11 @@
           "format": "double",
           "description": "The expiration date of the object that triggered this event"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.KeyNewVersionCreated event."
+      }
     },
     "KeyVault.KeyVaultSecretExpiredEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.SecretExpired event.",
       "properties": {
         "Id": {
           "type": "string",
@@ -3797,11 +3785,11 @@
           "format": "double",
           "description": "The expiration date of the object that triggered this event"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.SecretExpired event."
+      }
     },
     "KeyVault.KeyVaultSecretNearExpiryEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.SecretNearExpiry event.",
       "properties": {
         "Id": {
           "type": "string",
@@ -3833,11 +3821,11 @@
           "format": "double",
           "description": "The expiration date of the object that triggered this event"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.SecretNearExpiry event."
+      }
     },
     "KeyVault.KeyVaultSecretNewVersionCreatedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.SecretNewVersionCreated event.",
       "properties": {
         "Id": {
           "type": "string",
@@ -3869,11 +3857,11 @@
           "format": "double",
           "description": "The expiration date of the object that triggered this event"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.SecretNewVersionCreated event."
+      }
     },
     "KeyVault.KeyVaultVaultAccessPolicyChangedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.VaultAccessPolicyChanged event.",
       "properties": {
         "Id": {
           "type": "string",
@@ -3905,11 +3893,11 @@
           "format": "double",
           "description": "The expiration date of the object that triggered this event"
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.VaultAccessPolicyChanged event."
+      }
     },
     "MachineLearningServices.MachineLearningServicesDatasetDriftDetectedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.DatasetDriftDetected event.",
       "properties": {
         "dataDriftId": {
           "type": "string",
@@ -3946,11 +3934,11 @@
           "format": "date-time",
           "description": "The end time of the target dataset time series that resulted in drift detection."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.DatasetDriftDetected event."
+      }
     },
     "MachineLearningServices.MachineLearningServicesModelDeployedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.ModelDeployed event.",
       "properties": {
         "serviceName": {
           "type": "string",
@@ -3966,25 +3954,23 @@
         },
         "serviceTags": {
           "type": "object",
+          "description": "The tags of the deployed service.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "The tags of the deployed service.",
-          "x-typespec-name": "Record<string>"
+          }
         },
         "serviceProperties": {
           "type": "object",
+          "description": "The properties of the deployed service.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "The properties of the deployed service.",
-          "x-typespec-name": "Record<string>"
+          }
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.ModelDeployed event."
+      }
     },
     "MachineLearningServices.MachineLearningServicesModelRegisteredEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.ModelRegistered event.",
       "properties": {
         "modelName": {
           "type": "string",
@@ -3996,25 +3982,23 @@
         },
         "modelTags": {
           "type": "object",
+          "description": "The tags of the model that was registered.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "The tags of the model that was registered.",
-          "x-typespec-name": "Record<string>"
+          }
         },
         "modelProperties": {
           "type": "object",
+          "description": "The properties of the model that was registered.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "The properties of the model that was registered.",
-          "x-typespec-name": "Record<string>"
+          }
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.ModelRegistered event."
+      }
     },
     "MachineLearningServices.MachineLearningServicesRunCompletedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.RunCompleted event.",
       "properties": {
         "experimentId": {
           "type": "string",
@@ -4034,25 +4018,23 @@
         },
         "runTags": {
           "type": "object",
+          "description": "The tags of the completed Run.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "The tags of the completed Run.",
-          "x-typespec-name": "Record<string>"
+          }
         },
         "runProperties": {
           "type": "object",
+          "description": "The properties of the completed Run.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "The properties of the completed Run.",
-          "x-typespec-name": "Record<string>"
+          }
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.RunCompleted event."
+      }
     },
     "MachineLearningServices.MachineLearningServicesRunStatusChangedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.RunStatusChanged event.",
       "properties": {
         "experimentId": {
           "type": "string",
@@ -4072,31 +4054,28 @@
         },
         "runTags": {
           "type": "object",
+          "description": "The tags of the Machine Learning Run.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "The tags of the Machine Learning Run.",
-          "x-typespec-name": "Record<string>"
+          }
         },
         "runProperties": {
           "type": "object",
+          "description": "The properties of the Machine Learning Run.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "The properties of the Machine Learning Run.",
-          "x-typespec-name": "Record<string>"
+          }
         },
         "runStatus": {
           "type": "string",
           "description": "The status of the Machine Learning Run."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.RunStatusChanged event."
+      }
     },
     "Maps.MapsGeofenceEnteredEventData": {
       "type": "object",
-      "properties": {},
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceEntered event.",
+      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/Maps.MapsGeofenceEventProperties"
@@ -4105,43 +4084,40 @@
     },
     "Maps.MapsGeofenceEventProperties": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Geofence event (GeofenceEntered, GeofenceExited, GeofenceResult).",
       "properties": {
         "expiredGeofenceGeometryId": {
           "type": "array",
+          "description": "Lists of the geometry ID of the geofence which is expired relative to the user time in the request.",
           "items": {
             "type": "string"
-          },
-          "description": "Lists of the geometry ID of the geofence which is expired relative to the user time in the request.",
-          "x-typespec-name": "string[]"
+          }
         },
         "geometries": {
           "type": "array",
+          "description": "Lists the fence geometries that either fully contain the coordinate position or have an overlap with the searchBuffer around the fence.",
           "items": {
             "$ref": "#/definitions/Maps.MapsGeofenceGeometry"
           },
-          "x-ms-identifiers": [],
-          "description": "Lists the fence geometries that either fully contain the coordinate position or have an overlap with the searchBuffer around the fence.",
-          "x-typespec-name": "Maps.MapsGeofenceGeometry[]"
+          "x-ms-identifiers": []
         },
         "invalidPeriodGeofenceGeometryId": {
           "type": "array",
+          "description": "Lists of the geometry ID of the geofence which is in invalid period relative to the user time in the request.",
           "items": {
             "type": "string"
-          },
-          "description": "Lists of the geometry ID of the geofence which is in invalid period relative to the user time in the request.",
-          "x-typespec-name": "string[]"
+          }
         },
         "isEventPublished": {
           "type": "boolean",
           "description": "True if at least one event is published to the Azure Maps event subscriber, false if no event is published to the Azure Maps event subscriber."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Geofence event (GeofenceEntered, GeofenceExited, GeofenceResult)."
+      }
     },
     "Maps.MapsGeofenceExitedEventData": {
       "type": "object",
-      "properties": {},
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceExited event.",
+      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/Maps.MapsGeofenceEventProperties"
@@ -4150,6 +4126,7 @@
     },
     "Maps.MapsGeofenceGeometry": {
       "type": "object",
+      "description": "The geofence geometry.",
       "properties": {
         "deviceId": {
           "type": "string",
@@ -4178,13 +4155,12 @@
           "type": "string",
           "description": "The unique id returned from user upload service when uploading a geofence. Will not be included in geofencing post API."
         }
-      },
-      "description": "The geofence geometry."
+      }
     },
     "Maps.MapsGeofenceResultEventData": {
       "type": "object",
-      "properties": {},
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceResult event.",
+      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/Maps.MapsGeofenceEventProperties"
@@ -4193,6 +4169,7 @@
     },
     "MediaServices.MediaJobCanceledEventData": {
       "type": "object",
+      "description": "Job canceled event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobCanceled event.",
       "properties": {
         "#Microsoft.Media.JobCanceled": {
           "type": "string",
@@ -4200,15 +4177,13 @@
         },
         "outputs": {
           "type": "array",
+          "description": "Gets the Job outputs.",
           "items": {
             "$ref": "#/definitions/MediaServices.MediaJobOutput"
           },
-          "x-ms-identifiers": [],
-          "description": "Gets the Job outputs.",
-          "x-typespec-name": "MediaServices.MediaJobOutput[]"
+          "x-ms-identifiers": []
         }
       },
-      "description": "Job canceled event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobCanceled event.",
       "discriminator": "#Microsoft.Media.JobCanceled",
       "required": [
         "#Microsoft.Media.JobCanceled"
@@ -4221,13 +4196,13 @@
     },
     "MediaServices.MediaJobCancelingEventData": {
       "type": "object",
+      "description": "Job canceling event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobCanceling event.",
       "properties": {
         "#Microsoft.Media.JobCanceling": {
           "type": "string",
           "description": "Discriminator property for MediaJobCancelingEventData."
         }
       },
-      "description": "Job canceling event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobCanceling event.",
       "discriminator": "#Microsoft.Media.JobCanceling",
       "required": [
         "#Microsoft.Media.JobCanceling"
@@ -4240,6 +4215,7 @@
     },
     "MediaServices.MediaJobError": {
       "type": "object",
+      "description": "Details of JobOutput errors.",
       "properties": {
         "code": {
           "$ref": "#/definitions/MediaServices.MediaJobErrorCode",
@@ -4263,16 +4239,14 @@
         },
         "details": {
           "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/MediaServices.MediaJobErrorDetail"
           },
-          "x-ms-identifiers": [],
-          "description": "An array of details about specific errors that led to this reported error.",
-          "x-typespec-name": "MediaServices.MediaJobErrorDetail[]",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
-      },
-      "description": "Details of JobOutput errors."
+      }
     },
     "MediaServices.MediaJobErrorCategory": {
       "type": "string",
@@ -4396,6 +4370,7 @@
     },
     "MediaServices.MediaJobErrorDetail": {
       "type": "object",
+      "description": "Details of JobOutput errors.",
       "properties": {
         "code": {
           "type": "string",
@@ -4407,11 +4382,11 @@
           "description": "A human-readable representation of the error.",
           "readOnly": true
         }
-      },
-      "description": "Details of JobOutput errors."
+      }
     },
     "MediaServices.MediaJobErroredEventData": {
       "type": "object",
+      "description": "Job error state event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobErrored event.",
       "properties": {
         "#Microsoft.Media.JobErrored": {
           "type": "string",
@@ -4419,15 +4394,13 @@
         },
         "outputs": {
           "type": "array",
+          "description": "Gets the Job outputs.",
           "items": {
             "$ref": "#/definitions/MediaServices.MediaJobOutput"
           },
-          "x-ms-identifiers": [],
-          "description": "Gets the Job outputs.",
-          "x-typespec-name": "MediaServices.MediaJobOutput[]"
+          "x-ms-identifiers": []
         }
       },
-      "description": "Job error state event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobErrored event.",
       "discriminator": "#Microsoft.Media.JobErrored",
       "required": [
         "#Microsoft.Media.JobErrored"
@@ -4440,6 +4413,7 @@
     },
     "MediaServices.MediaJobFinishedEventData": {
       "type": "object",
+      "description": "Job finished event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobFinished event.",
       "properties": {
         "#Microsoft.Media.JobFinished": {
           "type": "string",
@@ -4447,15 +4421,13 @@
         },
         "outputs": {
           "type": "array",
+          "description": "Gets the Job outputs.",
           "items": {
             "$ref": "#/definitions/MediaServices.MediaJobOutput"
           },
-          "x-ms-identifiers": [],
-          "description": "Gets the Job outputs.",
-          "x-typespec-name": "MediaServices.MediaJobOutput[]"
+          "x-ms-identifiers": []
         }
       },
-      "description": "Job finished event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobFinished event.",
       "discriminator": "#Microsoft.Media.JobFinished",
       "required": [
         "#Microsoft.Media.JobFinished"
@@ -4468,6 +4440,7 @@
     },
     "MediaServices.MediaJobOutput": {
       "type": "object",
+      "description": "The event data for a Job output.",
       "properties": {
         "@odata.type": {
           "type": "string",
@@ -4492,7 +4465,6 @@
           "description": "Gets the Job output state."
         }
       },
-      "description": "The event data for a Job output.",
       "discriminator": "@odata.type",
       "required": [
         "@odata.type",
@@ -4502,6 +4474,7 @@
     },
     "MediaServices.MediaJobOutputAsset": {
       "type": "object",
+      "description": "The event data for a Job output asset.",
       "properties": {
         "#Microsoft.Media.JobOutputAsset": {
           "type": "string",
@@ -4534,7 +4507,6 @@
           "description": "Gets the Job output asset name."
         }
       },
-      "description": "The event data for a Job output asset.",
       "discriminator": "#Microsoft.Media.JobOutputAsset",
       "required": [
         "#Microsoft.Media.JobOutputAsset",
@@ -4544,13 +4516,13 @@
     },
     "MediaServices.MediaJobOutputCanceledEventData": {
       "type": "object",
+      "description": "Job output canceled event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputCanceled event.",
       "properties": {
         "#Microsoft.Media.JobOutputCanceled": {
           "type": "string",
           "description": "Discriminator property for MediaJobOutputCanceledEventData."
         }
       },
-      "description": "Job output canceled event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputCanceled event.",
       "discriminator": "#Microsoft.Media.JobOutputCanceled",
       "required": [
         "#Microsoft.Media.JobOutputCanceled"
@@ -4563,13 +4535,13 @@
     },
     "MediaServices.MediaJobOutputCancelingEventData": {
       "type": "object",
+      "description": "Job output canceling event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputCanceling event.",
       "properties": {
         "#Microsoft.Media.JobOutputCanceling": {
           "type": "string",
           "description": "Discriminator property for MediaJobOutputCancelingEventData."
         }
       },
-      "description": "Job output canceling event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputCanceling event.",
       "discriminator": "#Microsoft.Media.JobOutputCanceling",
       "required": [
         "#Microsoft.Media.JobOutputCanceling"
@@ -4582,13 +4554,13 @@
     },
     "MediaServices.MediaJobOutputErroredEventData": {
       "type": "object",
+      "description": "Job output error event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputErrored event.",
       "properties": {
         "#Microsoft.Media.JobOutputErrored": {
           "type": "string",
           "description": "Discriminator property for MediaJobOutputErroredEventData."
         }
       },
-      "description": "Job output error event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputErrored event.",
       "discriminator": "#Microsoft.Media.JobOutputErrored",
       "required": [
         "#Microsoft.Media.JobOutputErrored"
@@ -4601,13 +4573,13 @@
     },
     "MediaServices.MediaJobOutputFinishedEventData": {
       "type": "object",
+      "description": "Job output finished event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputFinished event.",
       "properties": {
         "#Microsoft.Media.JobOutputFinished": {
           "type": "string",
           "description": "Discriminator property for MediaJobOutputFinishedEventData."
         }
       },
-      "description": "Job output finished event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputFinished event.",
       "discriminator": "#Microsoft.Media.JobOutputFinished",
       "required": [
         "#Microsoft.Media.JobOutputFinished"
@@ -4620,13 +4592,13 @@
     },
     "MediaServices.MediaJobOutputProcessingEventData": {
       "type": "object",
+      "description": "Job output processing event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputProcessing event.",
       "properties": {
         "#Microsoft.Media.JobOutputProcessing": {
           "type": "string",
           "description": "Discriminator property for MediaJobOutputProcessingEventData."
         }
       },
-      "description": "Job output processing event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputProcessing event.",
       "discriminator": "#Microsoft.Media.JobOutputProcessing",
       "required": [
         "#Microsoft.Media.JobOutputProcessing"
@@ -4639,6 +4611,7 @@
     },
     "MediaServices.MediaJobOutputProgressEventData": {
       "type": "object",
+      "description": "Job Output Progress Event Data. Schema of the Data property of an EventGridEvent for a Microsoft.Media.JobOutputProgress event.",
       "properties": {
         "#Microsoft.Media.JobOutputProgress": {
           "type": "string",
@@ -4655,14 +4628,12 @@
         },
         "jobCorrelationData": {
           "type": "object",
+          "description": "Gets the Job correlation data.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "Gets the Job correlation data.",
-          "x-typespec-name": "Record<string>"
+          }
         }
       },
-      "description": "Job Output Progress Event Data. Schema of the Data property of an EventGridEvent for a Microsoft.Media.JobOutputProgress event.",
       "discriminator": "#Microsoft.Media.JobOutputProgress",
       "required": [
         "#Microsoft.Media.JobOutputProgress"
@@ -4670,13 +4641,13 @@
     },
     "MediaServices.MediaJobOutputScheduledEventData": {
       "type": "object",
+      "description": "Job output scheduled event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputScheduled event.",
       "properties": {
         "#Microsoft.Media.JobOutputCanceled": {
           "type": "string",
           "description": "Discriminator property for MediaJobOutputScheduledEventData."
         }
       },
-      "description": "Job output scheduled event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputScheduled event.",
       "discriminator": "#Microsoft.Media.JobOutputCanceled",
       "required": [
         "#Microsoft.Media.JobOutputCanceled"
@@ -4689,6 +4660,7 @@
     },
     "MediaServices.MediaJobOutputStateChangeEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Media.JobOutputStateChange event.",
       "properties": {
         "previousState": {
           "$ref": "#/definitions/MediaServices.MediaJobState",
@@ -4700,24 +4672,22 @@
         },
         "jobCorrelationData": {
           "type": "object",
+          "description": "Gets the Job correlation data.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "Gets the Job correlation data.",
-          "x-typespec-name": "Record<string>"
+          }
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Media.JobOutputStateChange event."
+      }
     },
     "MediaServices.MediaJobProcessingEventData": {
       "type": "object",
+      "description": "Job processing event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobProcessing event.",
       "properties": {
         "#Microsoft.Media.JobProcessing": {
           "type": "string",
           "description": "Discriminator property for MediaJobProcessingEventData."
         }
       },
-      "description": "Job processing event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobProcessing event.",
       "discriminator": "#Microsoft.Media.JobProcessing",
       "required": [
         "#Microsoft.Media.JobProcessing"
@@ -4754,13 +4724,13 @@
     },
     "MediaServices.MediaJobScheduledEventData": {
       "type": "object",
+      "description": "Job scheduled event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobScheduled event.",
       "properties": {
         "#Microsoft.Media.JobScheduled": {
           "type": "string",
           "description": "Discriminator property for MediaJobScheduledEventData."
         }
       },
-      "description": "Job scheduled event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobScheduled event.",
       "discriminator": "#Microsoft.Media.JobScheduled",
       "required": [
         "#Microsoft.Media.JobScheduled"
@@ -4827,6 +4797,7 @@
     },
     "MediaServices.MediaJobStateChangeEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Media.JobStateChange event.",
       "properties": {
         "previousState": {
           "$ref": "#/definitions/MediaServices.MediaJobState",
@@ -4838,17 +4809,16 @@
         },
         "correlationData": {
           "type": "object",
+          "description": "Gets the Job correlation data.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "Gets the Job correlation data.",
-          "x-typespec-name": "Record<string>"
+          }
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Media.JobStateChange event."
+      }
     },
     "MediaServices.MediaLiveEventChannelArchiveHeartbeatEventData": {
       "type": "object",
+      "description": "Channel Archive heartbeat event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventChannelArchiveHeartbeat event.",
       "properties": {
         "channelLatencyMs": {
           "type": "string",
@@ -4861,7 +4831,6 @@
           "readOnly": true
         }
       },
-      "description": "Channel Archive heartbeat event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventChannelArchiveHeartbeat event.",
       "required": [
         "channelLatencyMs",
         "latencyResultCode"
@@ -4869,6 +4838,7 @@
     },
     "MediaServices.MediaLiveEventConnectionRejectedEventData": {
       "type": "object",
+      "description": "Encoder connection rejected event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventConnectionRejected event.",
       "properties": {
         "ingestUrl": {
           "type": "string",
@@ -4894,11 +4864,11 @@
           "type": "string",
           "description": "Gets the result code."
         }
-      },
-      "description": "Encoder connection rejected event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventConnectionRejected event."
+      }
     },
     "MediaServices.MediaLiveEventEncoderConnectedEventData": {
       "type": "object",
+      "description": "Encoder connect event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventEncoderConnected event.",
       "properties": {
         "ingestUrl": {
           "type": "string",
@@ -4920,11 +4890,11 @@
           "description": "Gets the remote port.",
           "readOnly": true
         }
-      },
-      "description": "Encoder connect event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventEncoderConnected event."
+      }
     },
     "MediaServices.MediaLiveEventEncoderDisconnectedEventData": {
       "type": "object",
+      "description": "Encoder disconnected event data. Schema of the Data property of an EventGridEvent for a Microsoft.Media.LiveEventEncoderDisconnected event.",
       "properties": {
         "ingestUrl": {
           "type": "string",
@@ -4950,11 +4920,11 @@
           "type": "string",
           "description": "Gets the result code."
         }
-      },
-      "description": "Encoder disconnected event data. Schema of the Data property of an EventGridEvent for a Microsoft.Media.LiveEventEncoderDisconnected event."
+      }
     },
     "MediaServices.MediaLiveEventIncomingDataChunkDroppedEventData": {
       "type": "object",
+      "description": "Ingest fragment dropped event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIncomingDataChunkDropped event.",
       "properties": {
         "timestamp": {
           "type": "string",
@@ -4986,11 +4956,11 @@
           "description": "Gets the name of the track for which fragment is dropped.",
           "readOnly": true
         }
-      },
-      "description": "Ingest fragment dropped event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIncomingDataChunkDropped event."
+      }
     },
     "MediaServices.MediaLiveEventIncomingStreamReceivedEventData": {
       "type": "object",
+      "description": "Encoder connect event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIncomingStreamReceived event.",
       "properties": {
         "ingestUrl": {
           "type": "string",
@@ -5038,11 +5008,11 @@
           "description": "Gets the timescale in which timestamp is represented.",
           "readOnly": true
         }
-      },
-      "description": "Encoder connect event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIncomingStreamReceived event."
+      }
     },
     "MediaServices.MediaLiveEventIncomingStreamsOutOfSyncEventData": {
       "type": "object",
+      "description": "Incoming streams out of sync event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIncomingStreamsOutOfSync event.",
       "properties": {
         "minLastTimestamp": {
           "type": "string",
@@ -5074,11 +5044,11 @@
           "description": "Gets the timescale in which \"MaxLastTimestamp\" is represented.",
           "readOnly": true
         }
-      },
-      "description": "Incoming streams out of sync event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIncomingStreamsOutOfSync event."
+      }
     },
     "MediaServices.MediaLiveEventIncomingVideoStreamsOutOfSyncEventData": {
       "type": "object",
+      "description": "Incoming video stream out of sync event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIncomingVideoStreamsOutOfSync event.",
       "properties": {
         "firstTimestamp": {
           "type": "string",
@@ -5105,11 +5075,11 @@
           "description": "Gets the timescale in which both the timestamps and durations are represented.",
           "readOnly": true
         }
-      },
-      "description": "Incoming video stream out of sync event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIncomingVideoStreamsOutOfSync event."
+      }
     },
     "MediaServices.MediaLiveEventIngestHeartbeatEventData": {
       "type": "object",
+      "description": "Ingest heartbeat event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIngestHeartbeat event.",
       "properties": {
         "trackType": {
           "type": "string",
@@ -5196,11 +5166,11 @@
           "description": "Gets a value indicating whether preview is healthy or not.",
           "readOnly": true
         }
-      },
-      "description": "Ingest heartbeat event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIngestHeartbeat event."
+      }
     },
     "MediaServices.MediaLiveEventTrackDiscontinuityDetectedEventData": {
       "type": "object",
+      "description": "Ingest track discontinuity detected event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventTrackDiscontinuityDetected event.",
       "properties": {
         "trackType": {
           "type": "string",
@@ -5238,11 +5208,11 @@
           "description": "Gets the discontinuity gap between PreviousTimestamp and NewTimestamp.",
           "readOnly": true
         }
-      },
-      "description": "Ingest track discontinuity detected event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventTrackDiscontinuityDetected event."
+      }
     },
     "MicrosoftTeamsUserIdentifierModel": {
       "type": "object",
+      "description": "A Microsoft Teams user.",
       "properties": {
         "userId": {
           "type": "string",
@@ -5257,26 +5227,26 @@
           "description": "The cloud that the Microsoft Teams user belongs to. By default 'public' if missing."
         }
       },
-      "description": "A Microsoft Teams user.",
       "required": [
         "userId"
       ]
     },
     "PhoneNumberIdentifierModel": {
       "type": "object",
+      "description": "A phone number.",
       "properties": {
         "value": {
           "type": "string",
           "description": "The phone number in E.164 format."
         }
       },
-      "description": "A phone number.",
       "required": [
         "value"
       ]
     },
     "PolicyInsights.PolicyInsightsPolicyStateChangedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.PolicyInsights.PolicyStateChanged event.",
       "properties": {
         "timestamp": {
           "type": "string",
@@ -5307,11 +5277,11 @@
           "type": "string",
           "description": "The compliance reason code. May be empty."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.PolicyInsights.PolicyStateChanged event."
+      }
     },
     "PolicyInsights.PolicyInsightsPolicyStateCreatedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.PolicyInsights.PolicyStateCreated event.",
       "properties": {
         "timestamp": {
           "type": "string",
@@ -5342,11 +5312,11 @@
           "type": "string",
           "description": "The compliance reason code. May be empty."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.PolicyInsights.PolicyStateCreated event."
+      }
     },
     "PolicyInsights.PolicyInsightsPolicyStateDeletedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.PolicyInsights.PolicyStateDeleted event.",
       "properties": {
         "timestamp": {
           "type": "string",
@@ -5377,11 +5347,11 @@
           "type": "string",
           "description": "The compliance reason code. May be empty."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.PolicyInsights.PolicyStateDeleted event."
+      }
     },
     "RedisCache.RedisExportRDBCompletedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Cache.ExportRDBCompleted event.",
       "properties": {
         "timestamp": {
           "type": "string",
@@ -5396,11 +5366,11 @@
           "type": "string",
           "description": "The status of this event. Failed or  succeeded "
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Cache.ExportRDBCompleted event."
+      }
     },
     "RedisCache.RedisImportRDBCompletedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Cache.ImportRDBCompleted event.",
       "properties": {
         "timestamp": {
           "type": "string",
@@ -5415,11 +5385,11 @@
           "type": "string",
           "description": "The status of this event. Failed or  succeeded "
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Cache.ImportRDBCompleted event."
+      }
     },
     "RedisCache.RedisPatchingCompletedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Cache.PatchingCompleted event.",
       "properties": {
         "timestamp": {
           "type": "string",
@@ -5434,11 +5404,11 @@
           "type": "string",
           "description": "The status of this event. Failed or  succeeded "
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Cache.PatchingCompleted event."
+      }
     },
     "RedisCache.RedisScalingCompletedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Cache.ScalingCompleted event.",
       "properties": {
         "timestamp": {
           "type": "string",
@@ -5453,11 +5423,11 @@
           "type": "string",
           "description": "The status of this event. Failed or  succeeded "
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Cache.ScalingCompleted event."
+      }
     },
     "Resources.ResourceActionCancelData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceActionCancel event. This is raised when a resource action operation is canceled.",
       "properties": {
         "tenantId": {
           "type": "string",
@@ -5493,11 +5463,10 @@
         },
         "claims": {
           "type": "object",
+          "description": "The properties of the claims.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "The properties of the claims.",
-          "x-typespec-name": "Record<string>"
+          }
         },
         "correlationId": {
           "type": "string",
@@ -5507,11 +5476,11 @@
           "$ref": "#/definitions/Resources.ResourceHttpRequest",
           "description": "The details of the operation."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceActionCancel event. This is raised when a resource action operation is canceled."
+      }
     },
     "Resources.ResourceActionFailureData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceActionFailure event. This is raised when a resource action operation fails.",
       "properties": {
         "tenantId": {
           "type": "string",
@@ -5547,11 +5516,10 @@
         },
         "claims": {
           "type": "object",
+          "description": "The properties of the claims.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "The properties of the claims.",
-          "x-typespec-name": "Record<string>"
+          }
         },
         "correlationId": {
           "type": "string",
@@ -5561,11 +5529,11 @@
           "$ref": "#/definitions/Resources.ResourceHttpRequest",
           "description": "The details of the operation."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceActionFailure event. This is raised when a resource action operation fails."
+      }
     },
     "Resources.ResourceActionSuccessData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceActionSuccess event. This is raised when a resource action operation succeeds.",
       "properties": {
         "tenantId": {
           "type": "string",
@@ -5601,11 +5569,10 @@
         },
         "claims": {
           "type": "object",
+          "description": "The properties of the claims.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "The properties of the claims.",
-          "x-typespec-name": "Record<string>"
+          }
         },
         "correlationId": {
           "type": "string",
@@ -5615,11 +5582,11 @@
           "$ref": "#/definitions/Resources.ResourceHttpRequest",
           "description": "The details of the operation."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceActionSuccess event. This is raised when a resource action operation succeeds."
+      }
     },
     "Resources.ResourceAuthorization": {
       "type": "object",
+      "description": "The details of the authorization for the resource.",
       "properties": {
         "scope": {
           "type": "string",
@@ -5631,17 +5598,16 @@
         },
         "evidence": {
           "type": "object",
+          "description": "The evidence for the authorization.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "The evidence for the authorization.",
-          "x-typespec-name": "Record<string>"
+          }
         }
-      },
-      "description": "The details of the authorization for the resource."
+      }
     },
     "Resources.ResourceDeleteCancelData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceDeleteCancel event. This is raised when a resource delete operation is canceled.",
       "properties": {
         "tenantId": {
           "type": "string",
@@ -5677,11 +5643,10 @@
         },
         "claims": {
           "type": "object",
+          "description": "The properties of the claims.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "The properties of the claims.",
-          "x-typespec-name": "Record<string>"
+          }
         },
         "correlationId": {
           "type": "string",
@@ -5691,11 +5656,11 @@
           "$ref": "#/definitions/Resources.ResourceHttpRequest",
           "description": "The details of the operation."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceDeleteCancel event. This is raised when a resource delete operation is canceled."
+      }
     },
     "Resources.ResourceDeleteFailureData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceDeleteFailure event. This is raised when a resource delete operation fails.",
       "properties": {
         "tenantId": {
           "type": "string",
@@ -5731,11 +5696,10 @@
         },
         "claims": {
           "type": "object",
+          "description": "The properties of the claims.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "The properties of the claims.",
-          "x-typespec-name": "Record<string>"
+          }
         },
         "correlationId": {
           "type": "string",
@@ -5745,11 +5709,11 @@
           "$ref": "#/definitions/Resources.ResourceHttpRequest",
           "description": "The details of the operation."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceDeleteFailure event. This is raised when a resource delete operation fails."
+      }
     },
     "Resources.ResourceDeleteSuccessData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceDeleteSuccess event. This is raised when a resource delete operation succeeds.",
       "properties": {
         "tenantId": {
           "type": "string",
@@ -5785,11 +5749,10 @@
         },
         "claims": {
           "type": "object",
+          "description": "The properties of the claims.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "The properties of the claims.",
-          "x-typespec-name": "Record<string>"
+          }
         },
         "correlationId": {
           "type": "string",
@@ -5799,11 +5762,11 @@
           "$ref": "#/definitions/Resources.ResourceHttpRequest",
           "description": "The details of the operation."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceDeleteSuccess event. This is raised when a resource delete operation succeeds."
+      }
     },
     "Resources.ResourceHttpRequest": {
       "type": "object",
+      "description": "The details of the HTTP request.",
       "properties": {
         "clientRequestId": {
           "type": "string",
@@ -5821,11 +5784,11 @@
           "type": "string",
           "description": "The url used in the request."
         }
-      },
-      "description": "The details of the HTTP request."
+      }
     },
     "Resources.ResourceWriteCancelData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceWriteCancel event. This is raised when a resource create or update operation is canceled.",
       "properties": {
         "tenantId": {
           "type": "string",
@@ -5861,11 +5824,10 @@
         },
         "claims": {
           "type": "object",
+          "description": "The properties of the claims.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "The properties of the claims.",
-          "x-typespec-name": "Record<string>"
+          }
         },
         "correlationId": {
           "type": "string",
@@ -5875,11 +5837,11 @@
           "$ref": "#/definitions/Resources.ResourceHttpRequest",
           "description": "The details of the operation."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceWriteCancel event. This is raised when a resource create or update operation is canceled."
+      }
     },
     "Resources.ResourceWriteFailureData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceWriteFailure event. This is raised when a resource create or update operation fails.",
       "properties": {
         "tenantId": {
           "type": "string",
@@ -5915,11 +5877,10 @@
         },
         "claims": {
           "type": "object",
+          "description": "The properties of the claims.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "The properties of the claims.",
-          "x-typespec-name": "Record<string>"
+          }
         },
         "correlationId": {
           "type": "string",
@@ -5929,11 +5890,11 @@
           "$ref": "#/definitions/Resources.ResourceHttpRequest",
           "description": "The details of the operation."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceWriteFailure event. This is raised when a resource create or update operation fails."
+      }
     },
     "Resources.ResourceWriteSuccessData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceWriteSuccess event. This is raised when a resource create or update operation succeeds.",
       "properties": {
         "tenantId": {
           "type": "string",
@@ -5969,11 +5930,10 @@
         },
         "claims": {
           "type": "object",
+          "description": "The properties of the claims.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "The properties of the claims.",
-          "x-typespec-name": "Record<string>"
+          }
         },
         "correlationId": {
           "type": "string",
@@ -5983,8 +5943,7 @@
           "$ref": "#/definitions/Resources.ResourceHttpRequest",
           "description": "The details of the operation."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceWriteSuccess event. This is raised when a resource create or update operation succeeds."
+      }
     },
     "ServiceApiVersions": {
       "type": "string",
@@ -6006,6 +5965,7 @@
     },
     "ServiceBus.ServiceBusActiveMessagesAvailablePeriodicNotificationsEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ServiceBus.ActiveMessagesAvailablePeriodicNotifications event.",
       "properties": {
         "namespaceName": {
           "type": "string",
@@ -6031,11 +5991,11 @@
           "type": "string",
           "description": "The name of the Microsoft.ServiceBus topic's subscription. If the entity type is of type 'queue', then this value will be null."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ServiceBus.ActiveMessagesAvailablePeriodicNotifications event."
+      }
     },
     "ServiceBus.ServiceBusActiveMessagesAvailableWithNoListenersEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ServiceBus.ActiveMessagesAvailableWithNoListeners event.",
       "properties": {
         "namespaceName": {
           "type": "string",
@@ -6061,11 +6021,11 @@
           "type": "string",
           "description": "The name of the Microsoft.ServiceBus topic's subscription. If the entity type is of type 'queue', then this value will be null."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ServiceBus.ActiveMessagesAvailableWithNoListeners event."
+      }
     },
     "ServiceBus.ServiceBusDeadletterMessagesAvailablePeriodicNotificationsEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ServiceBus.DeadletterMessagesAvailablePeriodicNotifications event.",
       "properties": {
         "namespaceName": {
           "type": "string",
@@ -6091,11 +6051,11 @@
           "type": "string",
           "description": "The name of the Microsoft.ServiceBus topic's subscription. If the entity type is of type 'queue', then this value will be null."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ServiceBus.DeadletterMessagesAvailablePeriodicNotifications event."
+      }
     },
     "ServiceBus.ServiceBusDeadletterMessagesAvailableWithNoListenersEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ServiceBus.DeadletterMessagesAvailableWithNoListeners event.",
       "properties": {
         "namespaceName": {
           "type": "string",
@@ -6121,11 +6081,11 @@
           "type": "string",
           "description": "The name of the Microsoft.ServiceBus topic's subscription. If the entity type is of type 'queue', then this value will be null."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ServiceBus.DeadletterMessagesAvailableWithNoListeners event."
+      }
     },
     "SignalRService.SignalRServiceClientConnectionConnectedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.SignalRService.ClientConnectionConnected event.",
       "properties": {
         "timestamp": {
           "type": "string",
@@ -6144,11 +6104,11 @@
           "type": "string",
           "description": "The user Id of connected client connection."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.SignalRService.ClientConnectionConnected event."
+      }
     },
     "SignalRService.SignalRServiceClientConnectionDisconnectedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.SignalRService.ClientConnectionDisconnected event.",
       "properties": {
         "timestamp": {
           "type": "string",
@@ -6171,11 +6131,11 @@
           "type": "string",
           "description": "The message of error that cause the client connection disconnected."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.SignalRService.ClientConnectionDisconnected event."
+      }
     },
     "Storage.StorageAsyncOperationInitiatedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Storage.AsyncOperationInitiated event.",
       "properties": {
         "api": {
           "type": "string",
@@ -6195,11 +6155,10 @@
         },
         "storageDiagnostics": {
           "type": "object",
+          "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
-          "x-typespec-name": "Record<string>"
+          }
         },
         "sequencer": {
           "type": "string",
@@ -6222,11 +6181,11 @@
           "type": "string",
           "description": "The type of blob."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Storage.AsyncOperationInitiated event."
+      }
     },
     "Storage.StorageBlobCreatedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Storage.BlobCreated event.",
       "properties": {
         "eTag": {
           "type": "string",
@@ -6255,11 +6214,10 @@
         },
         "storageDiagnostics": {
           "type": "object",
+          "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
-          "x-typespec-name": "Record<string>"
+          }
         },
         "sequencer": {
           "type": "string",
@@ -6282,11 +6240,11 @@
           "type": "string",
           "description": "The type of blob."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Storage.BlobCreated event."
+      }
     },
     "Storage.StorageBlobDeletedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Storage.BlobDeleted event.",
       "properties": {
         "url": {
           "type": "string",
@@ -6310,11 +6268,10 @@
         },
         "storageDiagnostics": {
           "type": "object",
+          "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
-          "x-typespec-name": "Record<string>"
+          }
         },
         "sequencer": {
           "type": "string",
@@ -6328,11 +6285,11 @@
           "type": "string",
           "description": "The type of blob."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Storage.BlobDeleted event."
+      }
     },
     "Storage.StorageBlobInventoryPolicyCompletedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Storage.BlobInventoryPolicyCompleted event.",
       "properties": {
         "scheduleDateTime": {
           "type": "string",
@@ -6363,11 +6320,11 @@
           "type": "string",
           "description": "The blob URL for manifest file for inventory run."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Storage.BlobInventoryPolicyCompleted event."
+      }
     },
     "Storage.StorageBlobRenamedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Storage.BlobRenamed event.",
       "properties": {
         "sourceUrl": {
           "type": "string",
@@ -6395,21 +6352,20 @@
         },
         "storageDiagnostics": {
           "type": "object",
+          "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
-          "x-typespec-name": "Record<string>"
+          }
         },
         "sequencer": {
           "type": "string",
           "description": "An opaque string value representing the logical sequence of events for any particular blob name. Users can use standard string comparison to understand the relative sequence of two events on the same blob name."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Storage.BlobRenamed event."
+      }
     },
     "Storage.StorageBlobTierChangedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Storage.BlobTierChanged event.",
       "properties": {
         "api": {
           "type": "string",
@@ -6429,11 +6385,10 @@
         },
         "storageDiagnostics": {
           "type": "object",
+          "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
-          "x-typespec-name": "Record<string>"
+          }
         },
         "sequencer": {
           "type": "string",
@@ -6456,11 +6411,11 @@
           "type": "string",
           "description": "The type of blob."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Storage.BlobTierChanged event."
+      }
     },
     "Storage.StorageDirectoryCreatedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Storage.DirectoryCreated event.",
       "properties": {
         "eTag": {
           "type": "string",
@@ -6488,21 +6443,20 @@
         },
         "storageDiagnostics": {
           "type": "object",
+          "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
-          "x-typespec-name": "Record<string>"
+          }
         },
         "sequencer": {
           "type": "string",
           "description": "An opaque string value representing the logical sequence of events for any particular directory name. Users can use standard string comparison to understand the relative sequence of two events on the same directory name."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Storage.DirectoryCreated event."
+      }
     },
     "Storage.StorageDirectoryDeletedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Storage.DirectoryDeleted event.",
       "properties": {
         "url": {
           "type": "string",
@@ -6530,21 +6484,20 @@
         },
         "storageDiagnostics": {
           "type": "object",
+          "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
-          "x-typespec-name": "Record<string>"
+          }
         },
         "sequencer": {
           "type": "string",
           "description": "An opaque string value representing the logical sequence of events for any particular directory name. Users can use standard string comparison to understand the relative sequence of two events on the same directory name."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Storage.DirectoryDeleted event."
+      }
     },
     "Storage.StorageDirectoryRenamedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Storage.DirectoryRenamed event.",
       "properties": {
         "sourceUrl": {
           "type": "string",
@@ -6572,21 +6525,20 @@
         },
         "storageDiagnostics": {
           "type": "object",
+          "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
-          "x-typespec-name": "Record<string>"
+          }
         },
         "sequencer": {
           "type": "string",
           "description": "An opaque string value representing the logical sequence of events for any particular directory name. Users can use standard string comparison to understand the relative sequence of two events on the same directory name."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Storage.DirectoryRenamed event."
+      }
     },
     "Storage.StorageLifecyclePolicyActionSummaryDetail": {
       "type": "object",
+      "description": "Execution statistics of a specific policy action in a Blob Management cycle.",
       "properties": {
         "totalObjectsCount": {
           "type": "integer",
@@ -6602,11 +6554,11 @@
           "type": "string",
           "description": "Error messages of this action if any."
         }
-      },
-      "description": "Execution statistics of a specific policy action in a Blob Management cycle."
+      }
     },
     "Storage.StorageLifecyclePolicyCompletedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Storage.LifecyclePolicyCompleted event.",
       "properties": {
         "scheduleTime": {
           "type": "string",
@@ -6624,11 +6576,11 @@
           "$ref": "#/definitions/Storage.StorageLifecyclePolicyActionSummaryDetail",
           "description": "Execution statistics of a specific policy action in a Blob Management cycle."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Storage.LifecyclePolicyCompleted event."
+      }
     },
     "Storage.StorageTaskCompletedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Storage.StorageTaskCompleted event.",
       "properties": {
         "completedDateTime": {
           "type": "string",
@@ -6653,7 +6605,6 @@
           "description": "The task name for a storage task."
         }
       },
-      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Storage.StorageTaskCompleted event.",
       "required": [
         "completedDateTime",
         "status",
@@ -6688,6 +6639,7 @@
     },
     "Storage.StorageTaskQueuedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Storage.StorageTaskQueued event.",
       "properties": {
         "queuedDateTime": {
           "type": "string",
@@ -6699,7 +6651,6 @@
           "description": "The execution id for a storage task."
         }
       },
-      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Storage.StorageTaskQueued event.",
       "required": [
         "queuedDateTime",
         "taskExecutionId"
@@ -6755,13 +6706,13 @@
     },
     "Web.AppEventTypeDetail": {
       "type": "object",
+      "description": "Detail of action on the app.",
       "properties": {
         "action": {
           "$ref": "#/definitions/Web.AppAction",
           "description": "Type of action of the operation."
         }
-      },
-      "description": "Detail of action on the app."
+      }
     },
     "Web.AppServicePlanAction": {
       "type": "string",
@@ -6783,6 +6734,7 @@
     },
     "Web.AppServicePlanEventTypeDetail": {
       "type": "object",
+      "description": "Detail of action on the app service plan.",
       "properties": {
         "stampKind": {
           "$ref": "#/definitions/Web.StampKind",
@@ -6796,8 +6748,7 @@
           "$ref": "#/definitions/Web.AsyncStatus",
           "description": "Asynchronous operation status of the operation on the app service plan."
         }
-      },
-      "description": "Detail of action on the app service plan."
+      }
     },
     "Web.AsyncStatus": {
       "type": "string",
@@ -6861,6 +6812,7 @@
     },
     "Web.WebAppServicePlanUpdatedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.AppServicePlanUpdated event.",
       "properties": {
         "appServicePlanEventTypeDetail": {
           "$ref": "#/definitions/Web.AppServicePlanEventTypeDetail",
@@ -6892,6 +6844,7 @@
         },
         "sku": {
           "type": "object",
+          "description": "sku of app service plan.",
           "properties": {
             "name": {
               "type": "string",
@@ -6913,15 +6866,13 @@
               "type": "string",
               "description": "capacity of app service plan sku."
             }
-          },
-          "description": "sku of app service plan.",
-          "x-typespec-name": "(anonymous model)"
+          }
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.AppServicePlanUpdated event."
+      }
     },
     "Web.WebAppUpdatedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.AppUpdated event.",
       "properties": {
         "appEventTypeDetail": {
           "$ref": "#/definitions/Web.AppEventTypeDetail",
@@ -6951,11 +6902,11 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.AppUpdated event."
+      }
     },
     "Web.WebBackupOperationCompletedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.BackupOperationCompleted event.",
       "properties": {
         "appEventTypeDetail": {
           "$ref": "#/definitions/Web.AppEventTypeDetail",
@@ -6985,11 +6936,11 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.BackupOperationCompleted event."
+      }
     },
     "Web.WebBackupOperationFailedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.BackupOperationFailed event.",
       "properties": {
         "appEventTypeDetail": {
           "$ref": "#/definitions/Web.AppEventTypeDetail",
@@ -7019,11 +6970,11 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.BackupOperationFailed event."
+      }
     },
     "Web.WebBackupOperationStartedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.BackupOperationStarted event.",
       "properties": {
         "appEventTypeDetail": {
           "$ref": "#/definitions/Web.AppEventTypeDetail",
@@ -7053,11 +7004,11 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.BackupOperationStarted event."
+      }
     },
     "Web.WebRestoreOperationCompletedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.RestoreOperationCompleted event.",
       "properties": {
         "appEventTypeDetail": {
           "$ref": "#/definitions/Web.AppEventTypeDetail",
@@ -7087,11 +7038,11 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.RestoreOperationCompleted event."
+      }
     },
     "Web.WebRestoreOperationFailedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.RestoreOperationFailed event.",
       "properties": {
         "appEventTypeDetail": {
           "$ref": "#/definitions/Web.AppEventTypeDetail",
@@ -7121,11 +7072,11 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.RestoreOperationFailed event."
+      }
     },
     "Web.WebRestoreOperationStartedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.RestoreOperationStarted event.",
       "properties": {
         "appEventTypeDetail": {
           "$ref": "#/definitions/Web.AppEventTypeDetail",
@@ -7155,11 +7106,11 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.RestoreOperationStarted event."
+      }
     },
     "Web.WebSlotSwapCompletedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapCompleted event.",
       "properties": {
         "appEventTypeDetail": {
           "$ref": "#/definitions/Web.AppEventTypeDetail",
@@ -7189,11 +7140,11 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapCompleted event."
+      }
     },
     "Web.WebSlotSwapFailedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapFailed event.",
       "properties": {
         "appEventTypeDetail": {
           "$ref": "#/definitions/Web.AppEventTypeDetail",
@@ -7223,11 +7174,11 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapFailed event."
+      }
     },
     "Web.WebSlotSwapStartedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapStarted event.",
       "properties": {
         "appEventTypeDetail": {
           "$ref": "#/definitions/Web.AppEventTypeDetail",
@@ -7257,11 +7208,11 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapStarted event."
+      }
     },
     "Web.WebSlotSwapWithPreviewCancelledEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapWithPreviewCancelled event.",
       "properties": {
         "appEventTypeDetail": {
           "$ref": "#/definitions/Web.AppEventTypeDetail",
@@ -7291,11 +7242,11 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapWithPreviewCancelled event."
+      }
     },
     "Web.WebSlotSwapWithPreviewStartedEventData": {
       "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapWithPreviewStarted event.",
       "properties": {
         "appEventTypeDetail": {
           "$ref": "#/definitions/Web.AppEventTypeDetail",
@@ -7325,20 +7276,19 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapWithPreviewStarted event."
+      }
     }
   },
   "parameters": {
     "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
-      "required": true,
       "description": "The API version to use for this operation.",
-      "x-ms-client-name": "apiVersion",
+      "required": true,
       "type": "string",
       "minLength": 1,
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
     }
   }
 }

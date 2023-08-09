@@ -48,7 +48,7 @@ import "@azure-tools/typespec-azure-core";
 )
 @doc("Azure EventGrid Client")
 @versioned(ServiceApiVersions)
-namespace EventGrid {
+namespace EventGrid;
   using TypeSpec.Http;
   using TypeSpec.Rest;
   using TypeSpec.Versioning;
@@ -167,4 +167,21 @@ namespace EventGrid {
     },
     {}
   >;
-}
+
+  @doc("Publish custom events")
+  @route("/send")
+  @sharedRoute
+  op publishCustomEvent is Azure.Core.RpcOperation<
+    {
+      @doc("content type")
+      @header("content-type")
+      contentType: "application/json";
+
+      #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Events is a valid request body."
+      @doc("Events being published.")
+      @body
+      events: CustomEventEvent[];
+    },
+    {}
+  >;
+  
