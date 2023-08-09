@@ -23,7 +23,6 @@ import "./EventGrid.tsp";
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 
 @useAuth(
