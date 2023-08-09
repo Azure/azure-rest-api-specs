@@ -126,12 +126,6 @@ suppressions:
   - code: RepeatedPathInfo
     from: policyAssignments.json
     reason: Service requires the scope to be in the body
-  - code: RepeatedPathInfo
-    from: policyDefinitionVersions.json
-    reason: Service requires the version to be in the body
-  - code: RepeatedPathInfo
-    from: policySetDefinitionVersions.json
-    reason: Service requires the version to be in the body
   - code: PutResponseSchemaDescription
     from: policyAssignments.json
     reason: Service only returns 201 on all successful PUTs
