@@ -1,5 +1,5 @@
 @doc("Describes the schema of the Azure Kubernetes Service events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent")
-namespace EventGrid.ContainerService;
+namespace EventGrid;
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NewKubernetesVersionAvailable event")
   model ContainerServiceNewKubernetesVersionAvailableEventData {

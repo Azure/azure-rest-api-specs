@@ -1,5 +1,5 @@
 @doc("Describes the schema of the Azure Key Vault events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
-namespace EventGrid.KeyVault {
+namespace EventGrid {
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.CertificateNewVersionCreated event.")
   model KeyVaultCertificateNewVersionCreatedEventData {
     ...KeyVaultCertificateBase;

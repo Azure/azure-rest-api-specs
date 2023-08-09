@@ -1,5 +1,5 @@
 @doc("Describes the schema of the Azure resource events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
-namespace EventGrid.Resources {
+namespace EventGrid {
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceWriteSuccess event. This is raised when a resource create or update operation succeeds.")
   model ResourceWriteSuccessData {
     ...ResourceBaseEventData;
@@ -95,7 +95,7 @@ namespace EventGrid.Resources {
     status?: string;
 
     @doc("The requested authorization for the operation.")
-    authorization?: Resources.ResourceAuthorization;
+    authorization?: ResourceAuthorization;
 
     @doc("The properties of the claims.")
     claims?: Record<string>;
@@ -104,6 +104,6 @@ namespace EventGrid.Resources {
     correlationId?: string;
 
     @doc("The details of the operation.")
-    httpRequest?: Resources.ResourceHttpRequest;
+    httpRequest?: ResourceHttpRequest;
   };
 }

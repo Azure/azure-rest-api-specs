@@ -36,7 +36,7 @@ for file_name in file_names:
         for line in file_lines:
             if "model " in line and not "@doc" in line:
                 name = line.split("model ")[1].split()[0]
-                model_names.append("EventGrid." + file_name + "." + name)
+                model_names.append("EventGrid." + name)
 
 
 

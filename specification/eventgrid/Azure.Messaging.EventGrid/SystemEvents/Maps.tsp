@@ -1,5 +1,5 @@
 @doc("Describes the schema of the Azure Maps events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
-namespace EventGrid.Maps;
+namespace EventGrid;
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceEntered event.")
   model MapsGeofenceEnteredEventData extends MapsGeofenceEventProperties {}

@@ -1,6 +1,6 @@
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
 @doc("Describes the schema of the Azure SignalR Service events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
-namespace EventGrid.SignalRService {
+namespace EventGrid {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.SignalRService.ClientConnectionConnected event.")
   model SignalRServiceClientConnectionConnectedEventData {

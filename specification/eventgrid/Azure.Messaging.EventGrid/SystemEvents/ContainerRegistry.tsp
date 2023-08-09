@@ -1,5 +1,5 @@
 @doc("Describes the schema of the Azure Container Registry events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
-namespace EventGrid.ContainerRegistry;
+namespace EventGrid;
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ImagePushed event.")
   model ContainerRegistryImagePushedEventData
     extends ContainerRegistryEventData {}

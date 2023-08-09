@@ -1,4 +1,4 @@
-namespace EventGrid.EventGrid {
+namespace EventGrid {
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.EventGrid.SubscriptionValidationEvent event.")
   model SubscriptionValidationEventData {
     @doc("The validation code sent by Azure Event Grid to validate an event subscription. To complete the validation handshake, the subscriber must either respond with this validation code as part of the validation response, or perform a GET request on the validationUrl (available starting version 2018-05-01-preview).")

@@ -1,5 +1,5 @@
 @doc("Describes the schema of the Azure ServiceBus Messaging events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
-namespace EventGrid.ServiceBus {
+namespace EventGrid {
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ServiceBus.ActiveMessagesAvailableWithNoListeners event.")
   model ServiceBusActiveMessagesAvailableWithNoListenersEventData {
     ...ServiceBusBaseEventData;

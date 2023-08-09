@@ -1,6 +1,6 @@
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after the existing service swagger."
 @doc("Describes the schema of the Azure IoT Hub events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
-namespace EventGrid.IotHub;
+namespace EventGrid;
 
   @doc("Schema of the Data property of an EventGridEvent for a device life cycle event (DeviceCreated, DeviceDeleted).")
   model DeviceLifeCycleEventProperties {
