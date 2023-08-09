@@ -1,47 +1,47 @@
 @doc("Describes the schema of the Azure Maps events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
 namespace EventGrid.Maps;
 
-@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceEntered event.")
-model MapsGeofenceEnteredEventData extends MapsGeofenceEventProperties {}
+  @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceEntered event.")
+  model MapsGeofenceEnteredEventData extends MapsGeofenceEventProperties {}
 
-@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceExited event.")
-model MapsGeofenceExitedEventData extends MapsGeofenceEventProperties {}
+  @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceExited event.")
+  model MapsGeofenceExitedEventData extends MapsGeofenceEventProperties {}
 
-@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceResult event.")
-model MapsGeofenceResultEventData extends MapsGeofenceEventProperties {}
+  @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceResult event.")
+  model MapsGeofenceResultEventData extends MapsGeofenceEventProperties {}
 
-@doc("Schema of the Data property of an EventGridEvent for a Geofence event (GeofenceEntered, GeofenceExited, GeofenceResult).")
-model MapsGeofenceEventProperties {
-  @doc("Lists of the geometry ID of the geofence which is expired relative to the user time in the request.")
-  expiredGeofenceGeometryId?: string[];
+  @doc("Schema of the Data property of an EventGridEvent for a Geofence event (GeofenceEntered, GeofenceExited, GeofenceResult).")
+  model MapsGeofenceEventProperties {
+    @doc("Lists of the geometry ID of the geofence which is expired relative to the user time in the request.")
+    expiredGeofenceGeometryId?: string[];
 
-  @doc("Lists the fence geometries that either fully contain the coordinate position or have an overlap with the searchBuffer around the fence.")
-  geometries?: MapsGeofenceGeometry[];
+    @doc("Lists the fence geometries that either fully contain the coordinate position or have an overlap with the searchBuffer around the fence.")
+    geometries?: MapsGeofenceGeometry[];
 
-  @doc("Lists of the geometry ID of the geofence which is in invalid period relative to the user time in the request.")
-  invalidPeriodGeofenceGeometryId?: string[];
+    @doc("Lists of the geometry ID of the geofence which is in invalid period relative to the user time in the request.")
+    invalidPeriodGeofenceGeometryId?: string[];
 
-  @doc("True if at least one event is published to the Azure Maps event subscriber, false if no event is published to the Azure Maps event subscriber.")
-  isEventPublished?: boolean;
-}
+    @doc("True if at least one event is published to the Azure Maps event subscriber, false if no event is published to the Azure Maps event subscriber.")
+    isEventPublished?: boolean;
+  }
 
-@doc("The geofence geometry.")
-model MapsGeofenceGeometry {
-  @doc("ID of the device.")
-  deviceId?: string;
+  @doc("The geofence geometry.")
+  model MapsGeofenceGeometry {
+    @doc("ID of the device.")
+    deviceId?: string;
 
-  @doc("Distance from the coordinate to the closest border of the geofence. Positive means the coordinate is outside of the geofence. If the coordinate is outside of the geofence, but more than the value of searchBuffer away from the closest geofence border, then the value is 999. Negative means the coordinate is inside of the geofence. If the coordinate is inside the polygon, but more than the value of searchBuffer away from the closest geofencing border,then the value is -999. A value of 999 means that there is great confidence the coordinate is well outside the geofence. A value of -999 means that there is great confidence the coordinate is well within the geofence.")
-  distance?: float64;
+    @doc("Distance from the coordinate to the closest border of the geofence. Positive means the coordinate is outside of the geofence. If the coordinate is outside of the geofence, but more than the value of searchBuffer away from the closest geofence border, then the value is 999. Negative means the coordinate is inside of the geofence. If the coordinate is inside the polygon, but more than the value of searchBuffer away from the closest geofencing border,then the value is -999. A value of 999 means that there is great confidence the coordinate is well outside the geofence. A value of -999 means that there is great confidence the coordinate is well within the geofence.")
+    distance?: float64;
 
-  @doc("The unique ID for the geofence geometry.")
-  geometryId?: string;
+    @doc("The unique ID for the geofence geometry.")
+    geometryId?: string;
 
-  @doc("Latitude of the nearest point of the geometry.")
-  nearestLat?: float64;
+    @doc("Latitude of the nearest point of the geometry.")
+    nearestLat?: float64;
 
-  @doc("Longitude of the nearest point of the geometry.")
-  nearestLon?: float64;
+    @doc("Longitude of the nearest point of the geometry.")
+    nearestLon?: float64;
 
-  @doc("The unique id returned from user upload service when uploading a geofence. Will not be included in geofencing post API.")
-  udId?: string;
-}
+    @doc("The unique id returned from user upload service when uploading a geofence. Will not be included in geofencing post API.")
+    udId?: string;
+  }

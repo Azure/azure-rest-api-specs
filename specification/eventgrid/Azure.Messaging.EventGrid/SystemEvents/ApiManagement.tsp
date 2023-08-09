@@ -1,5 +1,5 @@
 @doc("Describes the schema of the Azure API Management events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
-namespace EventGrid.ApiManagement {
+namespace EventGrid.ApiManagement;
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.UserCreated event.")
   model ApiManagementUserCreatedEventData {
     ...ApiManagementBase;
@@ -154,4 +154,3 @@ namespace EventGrid.ApiManagement {
     @doc("The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/apis/<ResourceName>`")
     resourceUri?: string;
   };
-}

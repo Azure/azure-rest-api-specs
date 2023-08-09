@@ -2170,7 +2170,7 @@
         }
       }
     },
-    "HealthCareApis.HealthcareDicomImageCreatedEventData": {
+    "HealthcareApis.HealthcareDicomImageCreatedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageCreated event.",
       "properties": {
@@ -2201,7 +2201,7 @@
         }
       }
     },
-    "HealthCareApis.HealthcareDicomImageDeletedEventData": {
+    "HealthcareApis.HealthcareDicomImageDeletedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageDeleted event.",
       "properties": {
@@ -2232,7 +2232,7 @@
         }
       }
     },
-    "HealthCareApis.HealthcareDicomImageUpdatedEventData": {
+    "HealthcareApis.HealthcareDicomImageUpdatedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageUpdated event.",
       "properties": {
@@ -2266,7 +2266,7 @@
         "partitionName"
       ]
     },
-    "HealthCareApis.HealthcareFhirResourceCreatedEventData": {
+    "HealthcareApis.HealthcareFhirResourceCreatedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceCreated event.",
       "properties": {
@@ -2284,12 +2284,12 @@
           "description": "VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion)."
         },
         "resourceType": {
-          "$ref": "#/definitions/HealthCareApis.HealthcareFhirResourceType",
+          "$ref": "#/definitions/HealthcareApis.HealthcareFhirResourceType",
           "description": "Type of HL7 FHIR resource."
         }
       }
     },
-    "HealthCareApis.HealthcareFhirResourceDeletedEventData": {
+    "HealthcareApis.HealthcareFhirResourceDeletedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceDeleted event.",
       "properties": {
@@ -2307,12 +2307,12 @@
           "description": "VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion)."
         },
         "resourceType": {
-          "$ref": "#/definitions/HealthCareApis.HealthcareFhirResourceType",
+          "$ref": "#/definitions/HealthcareApis.HealthcareFhirResourceType",
           "description": "Type of HL7 FHIR resource."
         }
       }
     },
-    "HealthCareApis.HealthcareFhirResourceType": {
+    "HealthcareApis.HealthcareFhirResourceType": {
       "type": "string",
       "description": "Schema of FHIR resource type enumeration.",
       "enum": [
@@ -3290,7 +3290,7 @@
         ]
       }
     },
-    "HealthCareApis.HealthcareFhirResourceUpdatedEventData": {
+    "HealthcareApis.HealthcareFhirResourceUpdatedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceUpdated event.",
       "properties": {
@@ -3308,12 +3308,12 @@
           "description": "VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion)."
         },
         "resourceType": {
-          "$ref": "#/definitions/HealthCareApis.HealthcareFhirResourceType",
+          "$ref": "#/definitions/HealthcareApis.HealthcareFhirResourceType",
           "description": "Type of HL7 FHIR resource."
         }
       }
     },
-    "IoTHub.DeviceConnectionStateEventInfo": {
+    "IotHub.DeviceConnectionStateEventInfo": {
       "type": "object",
       "description": "Information about the device connection state event.",
       "properties": {
@@ -3323,7 +3323,7 @@
         }
       }
     },
-    "IoTHub.DeviceConnectionStateEventProperties": {
+    "IotHub.DeviceConnectionStateEventProperties": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a device connection state event (DeviceConnected, DeviceDisconnected).",
       "properties": {
@@ -3340,12 +3340,12 @@
           "description": "Name of the IoT Hub where the device was created or deleted."
         },
         "deviceConnectionStateEventInfo": {
-          "$ref": "#/definitions/IoTHub.DeviceConnectionStateEventInfo",
+          "$ref": "#/definitions/IotHub.DeviceConnectionStateEventInfo",
           "description": "Information about the device connection state event."
         }
       }
     },
-    "IoTHub.DeviceLifeCycleEventProperties": {
+    "IotHub.DeviceLifeCycleEventProperties": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a device life cycle event (DeviceCreated, DeviceDeleted).",
       "properties": {
@@ -3358,12 +3358,12 @@
           "description": "Name of the IoT Hub where the device was created or deleted."
         },
         "twin": {
-          "$ref": "#/definitions/IoTHub.DeviceTwinInfo",
+          "$ref": "#/definitions/IotHub.DeviceTwinInfo",
           "description": "Information about the device twin, which is the cloud representation of application device metadata."
         }
       }
     },
-    "IoTHub.DeviceTelemetryEventProperties": {
+    "IotHub.DeviceTelemetryEventProperties": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a device telemetry event (DeviceTelemetry).",
       "properties": {
@@ -3388,7 +3388,7 @@
         }
       }
     },
-    "IoTHub.DeviceTwinInfo": {
+    "IotHub.DeviceTwinInfo": {
       "type": "object",
       "description": "Information about the device twin, which is the cloud representation of application device metadata.",
       "properties": {
@@ -3422,11 +3422,11 @@
           "description": "Properties JSON element.",
           "properties": {
             "desired": {
-              "$ref": "#/definitions/IoTHub.DeviceTwinProperties",
+              "$ref": "#/definitions/IotHub.DeviceTwinProperties",
               "description": "A portion of the properties that can be written only by the application back-end, and read by the device."
             },
             "reported": {
-              "$ref": "#/definitions/IoTHub.DeviceTwinProperties",
+              "$ref": "#/definitions/IotHub.DeviceTwinProperties",
               "description": "A portion of the properties that can be written only by the device, and read by the application back-end."
             }
           }
@@ -3460,7 +3460,7 @@
         }
       }
     },
-    "IoTHub.DeviceTwinMetadata": {
+    "IotHub.DeviceTwinMetadata": {
       "type": "object",
       "description": "Metadata information for the properties JSON document.",
       "properties": {
@@ -3470,12 +3470,12 @@
         }
       }
     },
-    "IoTHub.DeviceTwinProperties": {
+    "IotHub.DeviceTwinProperties": {
       "type": "object",
       "description": "A portion of the properties that can be written only by the application back-end, and read by the device.",
       "properties": {
         "metadata": {
-          "$ref": "#/definitions/IoTHub.DeviceTwinMetadata",
+          "$ref": "#/definitions/IotHub.DeviceTwinMetadata",
           "description": "Metadata information for the properties JSON document."
         },
         "version": {
@@ -3485,53 +3485,53 @@
         }
       }
     },
-    "IoTHub.IotHubDeviceConnectedEventData": {
+    "IotHub.IotHubDeviceConnectedEventData": {
       "type": "object",
       "description": "Event data for Microsoft.Devices.DeviceConnected event.",
       "properties": {},
       "allOf": [
         {
-          "$ref": "#/definitions/IoTHub.DeviceConnectionStateEventProperties"
+          "$ref": "#/definitions/IotHub.DeviceConnectionStateEventProperties"
         }
       ]
     },
-    "IoTHub.IotHubDeviceCreatedEventData": {
+    "IotHub.IotHubDeviceCreatedEventData": {
       "type": "object",
       "description": "Event data for Microsoft.Devices.DeviceCreated event.",
       "properties": {},
       "allOf": [
         {
-          "$ref": "#/definitions/IoTHub.DeviceLifeCycleEventProperties"
+          "$ref": "#/definitions/IotHub.DeviceLifeCycleEventProperties"
         }
       ]
     },
-    "IoTHub.IotHubDeviceDeletedEventData": {
+    "IotHub.IotHubDeviceDeletedEventData": {
       "type": "object",
       "description": "Event data for Microsoft.Devices.DeviceDeleted event.",
       "properties": {},
       "allOf": [
         {
-          "$ref": "#/definitions/IoTHub.DeviceLifeCycleEventProperties"
+          "$ref": "#/definitions/IotHub.DeviceLifeCycleEventProperties"
         }
       ]
     },
-    "IoTHub.IotHubDeviceDisconnectedEventData": {
+    "IotHub.IotHubDeviceDisconnectedEventData": {
       "type": "object",
       "description": "Event data for Microsoft.Devices.DeviceDisconnected event.",
       "properties": {},
       "allOf": [
         {
-          "$ref": "#/definitions/IoTHub.DeviceConnectionStateEventProperties"
+          "$ref": "#/definitions/IotHub.DeviceConnectionStateEventProperties"
         }
       ]
     },
-    "IoTHub.IotHubDeviceTelemetryEventData": {
+    "IotHub.IotHubDeviceTelemetryEventData": {
       "type": "object",
       "description": "Event data for Microsoft.Devices.DeviceTelemetry event.",
       "properties": {},
       "allOf": [
         {
-          "$ref": "#/definitions/IoTHub.DeviceTelemetryEventProperties"
+          "$ref": "#/definitions/IotHub.DeviceTelemetryEventProperties"
         }
       ]
     },

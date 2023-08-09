@@ -1,145 +1,145 @@
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after the existing service swagger."
 @doc("Describes the schema of the Azure IoT Hub events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
-namespace EventGrid.IoTHub;
+namespace EventGrid.IotHub;
 
-@doc("Schema of the Data property of an EventGridEvent for a device life cycle event (DeviceCreated, DeviceDeleted).")
-model DeviceLifeCycleEventProperties {
-  @doc("The unique identifier of the device. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = @ ; $ '.")
-  deviceId?: string;
+  @doc("Schema of the Data property of an EventGridEvent for a device life cycle event (DeviceCreated, DeviceDeleted).")
+  model DeviceLifeCycleEventProperties {
+    @doc("The unique identifier of the device. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = @ ; $ '.")
+    deviceId?: string;
 
-  @doc("Name of the IoT Hub where the device was created or deleted.")
-  hubName?: string;
+    @doc("Name of the IoT Hub where the device was created or deleted.")
+    hubName?: string;
+
+    @doc("Information about the device twin, which is the cloud representation of application device metadata.")
+    twin?: DeviceTwinInfo;
+  }
 
   @doc("Information about the device twin, which is the cloud representation of application device metadata.")
-  twin?: DeviceTwinInfo;
-}
+  model DeviceTwinInfo {
+    @doc("Authentication type used for this device: either SAS, SelfSigned, or CertificateAuthority.")
+    authenticationType?: string;
 
-@doc("Information about the device twin, which is the cloud representation of application device metadata.")
-model DeviceTwinInfo {
-  @doc("Authentication type used for this device: either SAS, SelfSigned, or CertificateAuthority.")
-  authenticationType?: string;
+    @doc("Count of cloud to device messages sent to this device.")
+    cloudToDeviceMessageCount?: int64;
 
-  @doc("Count of cloud to device messages sent to this device.")
-  cloudToDeviceMessageCount?: int64;
+    @doc("Whether the device is connected or disconnected.")
+    connectionState?: string;
 
-  @doc("Whether the device is connected or disconnected.")
-  connectionState?: string;
+    @doc("The unique identifier of the device twin.")
+    deviceId?: string;
 
-  @doc("The unique identifier of the device twin.")
-  deviceId?: string;
+    @doc("A piece of information that describes the content of the device twin. Each etag is guaranteed to be unique per device twin.")
+    etag?: string;
 
-  @doc("A piece of information that describes the content of the device twin. Each etag is guaranteed to be unique per device twin.")
-  etag?: string;
+    @doc("The ISO8601 timestamp of the last activity.")
+    lastActivityTime?: string;
 
-  @doc("The ISO8601 timestamp of the last activity.")
-  lastActivityTime?: string;
+    //TODO: something here needs to change
 
-  //TODO: something here needs to change
+    @doc("Properties JSON element.")
+    properties?: {
+      @doc("A portion of the properties that can be written only by the application back-end, and read by the device.")
+      desired?: DeviceTwinProperties;
 
-  @doc("Properties JSON element.")
-  properties?: {
-    @doc("A portion of the properties that can be written only by the application back-end, and read by the device.")
-    desired?: DeviceTwinProperties;
+      @doc("A portion of the properties that can be written only by the device, and read by the application back-end.")
+      reported?: DeviceTwinProperties;
+    };
 
-    @doc("A portion of the properties that can be written only by the device, and read by the application back-end.")
-    reported?: DeviceTwinProperties;
-  };
+    @doc("Whether the device twin is enabled or disabled.")
+    status?: string;
 
-  @doc("Whether the device twin is enabled or disabled.")
-  status?: string;
+    @doc("The ISO8601 timestamp of the last device twin status update.")
+    statusUpdateTime?: string;
 
-  @doc("The ISO8601 timestamp of the last device twin status update.")
-  statusUpdateTime?: string;
+    @doc("An integer that is incremented by one each time the device twin is updated.")
+    version?: int64;
 
-  @doc("An integer that is incremented by one each time the device twin is updated.")
-  version?: int64;
+    //TODO: also here
 
-  //TODO: also here
+    @doc("The thumbprint is a unique value for the x509 certificate, commonly used to find a particular certificate in a certificate store. The thumbprint is dynamically generated using the SHA1 algorithm, and does not physically exist in the certificate.")
+    x509Thumbprint?: ThumbPrintValue;
+  }
 
-  @doc("The thumbprint is a unique value for the x509 certificate, commonly used to find a particular certificate in a certificate store. The thumbprint is dynamically generated using the SHA1 algorithm, and does not physically exist in the certificate.")
-  x509Thumbprint?: ThumbPrintValue;
-}
+  @doc("Schema of the Data property of an EventGridEvent for a device connection state event (DeviceConnected, DeviceDisconnected).")
+  model DeviceConnectionStateEventProperties {
+    @doc("The unique identifier of the device. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = @ ; $ '.")
+    deviceId?: string;
 
-@doc("Schema of the Data property of an EventGridEvent for a device connection state event (DeviceConnected, DeviceDisconnected).")
-model DeviceConnectionStateEventProperties {
-  @doc("The unique identifier of the device. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = @ ; $ '.")
-  deviceId?: string;
+    @doc("The unique identifier of the module. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = @ ; $ '.")
+    moduleId?: string;
 
-  @doc("The unique identifier of the module. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = @ ; $ '.")
-  moduleId?: string;
+    @doc("Name of the IoT Hub where the device was created or deleted.")
+    hubName?: string;
 
-  @doc("Name of the IoT Hub where the device was created or deleted.")
-  hubName?: string;
+    @doc("Information about the device connection state event.")
+    deviceConnectionStateEventInfo?: DeviceConnectionStateEventInfo;
+  }
+
+  @doc("Schema of the Data property of an EventGridEvent for a device telemetry event (DeviceTelemetry).")
+  model DeviceTelemetryEventProperties {
+    #suppress "@azure-tools/typespec-azure-core/bad-record-type" "The type is object."
+    @doc("The content of the message from the device.")
+    body?: Record<unknown>;
+
+    @doc("Application properties are user-defined strings that can be added to the message. These fields are optional.")
+    properties?: Record<string>;
+
+    @doc("System properties help identify contents and source of the messages.")
+    systemProperties?: Record<string>;
+  }
+
+  @doc("A portion of the properties that can be written only by the application back-end, and read by the device.")
+  model DeviceTwinProperties {
+    @doc("Metadata information for the properties JSON document.")
+    metadata?: DeviceTwinMetadata;
+
+    @doc("Version of device twin properties.")
+    version?: float64;
+  }
+
+  @doc("Metadata information for the properties JSON document.")
+  model DeviceTwinMetadata {
+    @doc("The ISO8601 timestamp of the last time the properties were updated.")
+    lastUpdated?: string;
+  }
 
   @doc("Information about the device connection state event.")
-  deviceConnectionStateEventInfo?: DeviceConnectionStateEventInfo;
-}
+  model DeviceConnectionStateEventInfo {
+    @doc("Sequence number is string representation of a hexadecimal number. string compare can be used to identify the larger number because both in ASCII and HEX numbers come after alphabets. If you are converting the string to hex, then the number is a 256 bit number.")
+    sequenceNumber?: string;
+  }
 
-@doc("Schema of the Data property of an EventGridEvent for a device telemetry event (DeviceTelemetry).")
-model DeviceTelemetryEventProperties {
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "The type is object."
-  @doc("The content of the message from the device.")
-  body?: Record<unknown>;
+  @doc("Event data for Microsoft.Devices.DeviceCreated event.")
+  model IotHubDeviceCreatedEventData extends DeviceLifeCycleEventProperties {}
 
-  @doc("Application properties are user-defined strings that can be added to the message. These fields are optional.")
-  properties?: Record<string>;
+  @doc("Event data for Microsoft.Devices.DeviceDeleted event.")
+  model IotHubDeviceDeletedEventData extends DeviceLifeCycleEventProperties {}
 
-  @doc("System properties help identify contents and source of the messages.")
-  systemProperties?: Record<string>;
-}
+  @doc("Event data for Microsoft.Devices.DeviceConnected event.")
+  model IotHubDeviceConnectedEventData
+    extends DeviceConnectionStateEventProperties {}
 
-@doc("A portion of the properties that can be written only by the application back-end, and read by the device.")
-model DeviceTwinProperties {
-  @doc("Metadata information for the properties JSON document.")
-  metadata?: DeviceTwinMetadata;
+  @doc("Event data for Microsoft.Devices.DeviceDisconnected event.")
+  model IotHubDeviceDisconnectedEventData
+    extends DeviceConnectionStateEventProperties {}
 
-  @doc("Version of device twin properties.")
-  version?: float64;
-}
+  @doc("Event data for Microsoft.Devices.DeviceTelemetry event.")
+  model IotHubDeviceTelemetryEventData extends DeviceTelemetryEventProperties {}
 
-@doc("Metadata information for the properties JSON document.")
-model DeviceTwinMetadata {
-  @doc("The ISO8601 timestamp of the last time the properties were updated.")
-  lastUpdated?: string;
-}
+  // @doc("Properties JSON element.")
+  // alias JsonProperties = {
+  //   @doc("A portion of the properties that can be written only by the application back-end, and read by the device.")
+  //   desired?: DeviceTwinProperties;
 
-@doc("Information about the device connection state event.")
-model DeviceConnectionStateEventInfo {
-  @doc("Sequence number is string representation of a hexadecimal number. string compare can be used to identify the larger number because both in ASCII and HEX numbers come after alphabets. If you are converting the string to hex, then the number is a 256 bit number.")
-  sequenceNumber?: string;
-}
+  //   @doc("A portion of the properties that can be written only by the device, and read by the application back-end.")
+  //   reported?: DeviceTwinProperties;
+  // };
 
-@doc("Event data for Microsoft.Devices.DeviceCreated event.")
-model IotHubDeviceCreatedEventData extends DeviceLifeCycleEventProperties {}
+  // @doc("The thumbprint is a unique value for the x509 certificate, commonly used to find a particular certificate in a certificate store. The thumbprint is dynamically generated using the SHA1 algorithm, and does not physically exist in the certificate.")
+  alias ThumbPrintValue = {
+    @doc("Primary thumbprint for the x509 certificate.")
+    primaryThumbprint?: string;
 
-@doc("Event data for Microsoft.Devices.DeviceDeleted event.")
-model IotHubDeviceDeletedEventData extends DeviceLifeCycleEventProperties {}
-
-@doc("Event data for Microsoft.Devices.DeviceConnected event.")
-model IotHubDeviceConnectedEventData
-  extends DeviceConnectionStateEventProperties {}
-
-@doc("Event data for Microsoft.Devices.DeviceDisconnected event.")
-model IotHubDeviceDisconnectedEventData
-  extends DeviceConnectionStateEventProperties {}
-
-@doc("Event data for Microsoft.Devices.DeviceTelemetry event.")
-model IotHubDeviceTelemetryEventData extends DeviceTelemetryEventProperties {}
-
-// @doc("Properties JSON element.")
-// alias JsonProperties = {
-//   @doc("A portion of the properties that can be written only by the application back-end, and read by the device.")
-//   desired?: DeviceTwinProperties;
-
-//   @doc("A portion of the properties that can be written only by the device, and read by the application back-end.")
-//   reported?: DeviceTwinProperties;
-// };
-
-// @doc("The thumbprint is a unique value for the x509 certificate, commonly used to find a particular certificate in a certificate store. The thumbprint is dynamically generated using the SHA1 algorithm, and does not physically exist in the certificate.")
-alias ThumbPrintValue = {
-  @doc("Primary thumbprint for the x509 certificate.")
-  primaryThumbprint?: string;
-
-  @doc("Secondary thumbprint for the x509 certificate.")
-  secondaryThumbprint?: string;
-};
+    @doc("Secondary thumbprint for the x509 certificate.")
+    secondaryThumbprint?: string;
+  };

@@ -1,3 +1,4 @@
+@doc("EG DataBox Data Model")
 namespace EventGrid.DataBox {
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.DataBox.CopyStarted event.")
   model DataBoxCopyStartedEventData {
