@@ -26,18 +26,27 @@ These are the global settings for the Storage Sync API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-06-01
+tag: package-2022-09
 ```
 
 
-### Tag: package-2022-06-01
+### Tag: package-2022-09
 
-These settings apply only when `--tag=package-2022-06-01` is specified on the command line.
+These settings apply only when `--tag=package-2022-09` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-06-01'
+```yaml $(tag) == 'package-2022-09'
+input-file:
+  - Microsoft.StorageSync/stable/2022-09-01/storagesync.json
+```
+### Tag: package-2022-06
+
+These settings apply only when `--tag=package-2022-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-06'
 input-file:
   - Microsoft.StorageSync/stable/2022-06-01/storagesync.json
 ```
+
 ### Tag: package-2020-09-01
 
 These settings apply only when `--tag=package-2020-09-01` is specified on the command line.
@@ -139,10 +148,11 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-cli-extensions
