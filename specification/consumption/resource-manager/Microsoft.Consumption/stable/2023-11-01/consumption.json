@@ -1622,16 +1622,16 @@
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-examples": {
-          "EventsGetByBillingAccountMultiMACC-Contributor": {
-            "$ref": "./examples/EventsGetByBillingAccountMultiMACC-Contributor.json"
+          "EventsGetByBillingAccount-Contributor": {
+            "$ref": "./examples/EventsGetByBillingAccount-Contributor.json"
           },
-          "EventsGetByBillingAccountSingleEntityMACC-MultiEntityMACCPrimary": {
+          "EventsGetByBillingAccount": {
             "$ref": "./examples/EventsGetByBillingAccount.json"
           },
-          "EventsGetByBillingAccountWithFiltersMultiMACC-Contributor.json": {
-            "$ref": "./examples/EventsGetByBillingAccountWithFiltersMultiMACC-Contributor.json"
+          "EventsGetByBillingAccountWithFilters-Contributor.json": {
+            "$ref": "./examples/EventsGetByBillingAccountWithFilters-Contributor.json"
           },
-          "EventsGetByBillingAccountWithFiltersSingleEntity-MultiEntityMACCPrimary": {
+          "EventsGetByBillingAccountWithFilters": {
             "$ref": "./examples/EventsGetByBillingAccountWithFilters.json"
           }
         },
@@ -1725,22 +1725,22 @@
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-examples": {
-          "LotsListByBillingAccountMultiMACC-Primary": {
-            "$ref": "./examples/LotsListByBillingAccountMultiMACC-Primary.json"
+          "LotsListByBillingAccount-Primary": {
+            "$ref": "./examples/LotsListByBillingAccount-Primary.json"
           },
-          "LotsListByBillingAccountMultiMACC-Contributor": {
-            "$ref": "./examples/LotsListByBillingAccountMultiMACC-Contributor.json"
+          "LotsListByBillingAccount-Contributor": {
+            "$ref": "./examples/LotsListByBillingAccount-Contributor.json"
           },
-          "LotsListByBillingAccountSingleEntityMACC": {
+          "LotsListByBillingAccount": {
             "$ref": "./examples/LotsListByBillingAccount.json"
           },
-          "LotsListByBillingAccountWithStatusFilterMultiMACC-Primary": {
-            "$ref": "./examples/LotsListByBillingAccountWithFiltersMultiMACC-Primary.json"
+          "LotsListByBillingAccountWithStatusFilter-Primary": {
+            "$ref": "./examples/LotsListByBillingAccountWithFilters-Primary.json"
           },
-          "LotsListByBillingAccountWithStatusFilterMultiMACC-Contributor": {
-            "$ref": "./examples/LotsListByBillingAccountWithFiltersMultiMACC-Contributor.json"
+          "LotsListByBillingAccountWithStatusFilter-Contributor": {
+            "$ref": "./examples/LotsListByBillingAccountWithFilters-Contributor.json"
           },
-          "LotsListByBillingAccountWithStatusFilterSingleEntityMACC": {
+          "LotsListByBillingAccountWithStatusFilter": {
             "$ref": "./examples/LotsListByBillingAccountWithFilters.json"
           }
         },
@@ -5391,7 +5391,7 @@
           "type": "string",
           "description": "The eTag for the resource."
         },
-        "OrgType": {
+        "orgType": {
           "description": "The organization type of the lot.",
           "type": "string",
           "enum": [
@@ -5405,18 +5405,18 @@
             "values": [
               {
                 "value": "Primary",
-                "description": "Primary organization type for MACC",
+                "description": "Primary organization type for Multi-Entity consumption commitment",
                 "name": "PrimaryOrgType"
               },
               {
                 "value": "Contributor",
-                "description": "Contributor organization type for MACC",
+                "description": "Contributor organization type for Multi-Entity consumption commitment",
                 "name": "ContributorOrgType"
               }
             ]
           }
         },
-        "UsedAmount": {
+        "usedAmount": {
           "description": "Amount consumed from the commitment.",
           "readOnly": true,
           "$ref": "#/definitions/amount"

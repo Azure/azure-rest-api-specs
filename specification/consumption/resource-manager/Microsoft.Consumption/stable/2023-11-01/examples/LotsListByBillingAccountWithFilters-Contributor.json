@@ -1,7 +1,8 @@
 {
   "parameters": {
     "api-version": "2023-11-01",
-    "billingAccountId": "1234:5678"
+    "billingAccountId": "1234:5678",
+    "$filter": "status eq 'active' AND source eq 'consumptioncommitment'"
   },
   "responses": {
     "200": {
@@ -16,11 +17,11 @@
                 "currency": "USD",
                 "value": 5000.00
               },
-              "UsedAmount": {
+              "usedAmount": {
                 "currency": "USD",
                 "value": 550.00
               },
-              "OrgType": "Contributor",
+              "orgType": "Contributor",
               "source": "ConsumptionCommitment",
               "startDate": "2019-10-01T00:00:00Z",
               "expirationDate": "2019-11-01T00:00:00Z",
