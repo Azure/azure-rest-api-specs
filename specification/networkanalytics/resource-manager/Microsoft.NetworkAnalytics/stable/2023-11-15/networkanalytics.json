@@ -88,11 +88,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "MetricsIngestionEndpoints_List_MaximumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_List_MaximumSet_Gen.json"
-          },
           "MetricsIngestionEndpoints_List_MinimumSet_Gen": {
             "$ref": "./examples/MetricsIngestionEndpoints_List_MinimumSet_Gen.json"
+          },
+          "MetricsIngestionEndpoints_List_MaximumSet_Gen": {
+            "$ref": "./examples/MetricsIngestionEndpoints_List_MaximumSet_Gen.json"
           }
         }
       }
@@ -127,11 +127,11 @@
           }
         },
         "x-ms-examples": {
-          "MetricsIngestionEndpoints_Get_MaximumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_Get_MaximumSet_Gen.json"
-          },
           "MetricsIngestionEndpoints_Get_MinimumSet_Gen": {
             "$ref": "./examples/MetricsIngestionEndpoints_Get_MinimumSet_Gen.json"
+          },
+          "MetricsIngestionEndpoints_Get_MaximumSet_Gen": {
+            "$ref": "./examples/MetricsIngestionEndpoints_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -190,11 +190,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MetricsIngestionEndpoints_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_CreateOrUpdate_MaximumSet_Gen.json"
-          },
           "MetricsIngestionEndpoints_CreateOrUpdate_MinimumSet_Gen": {
             "$ref": "./examples/MetricsIngestionEndpoints_CreateOrUpdate_MinimumSet_Gen.json"
+          },
+          "MetricsIngestionEndpoints_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/MetricsIngestionEndpoints_CreateOrUpdate_MaximumSet_Gen.json"
           }
         }
       },
@@ -236,11 +236,11 @@
           }
         },
         "x-ms-examples": {
-          "MetricsIngestionEndpoints_Update_MaximumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_Update_MaximumSet_Gen.json"
-          },
           "MetricsIngestionEndpoints_Update_MinimumSet_Gen": {
             "$ref": "./examples/MetricsIngestionEndpoints_Update_MinimumSet_Gen.json"
+          },
+          "MetricsIngestionEndpoints_Update_MaximumSet_Gen": {
+            "$ref": "./examples/MetricsIngestionEndpoints_Update_MaximumSet_Gen.json"
           }
         }
       },
@@ -291,11 +291,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MetricsIngestionEndpoints_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_Delete_MaximumSet_Gen.json"
-          },
           "MetricsIngestionEndpoints_Delete_MinimumSet_Gen": {
             "$ref": "./examples/MetricsIngestionEndpoints_Delete_MinimumSet_Gen.json"
+          },
+          "MetricsIngestionEndpoints_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/MetricsIngestionEndpoints_Delete_MaximumSet_Gen.json"
           }
         }
       }
@@ -330,11 +330,98 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Operations_List_MaximumSet_Gen": {
-            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
-          },
           "Operations_List_MinimumSet_Gen": {
             "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          },
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkAnalytics/dataProducts": {
+      "get": {
+        "operationId": "DataProducts_ListBySubscription",
+        "tags": [
+          "DataProducts"
+        ],
+        "description": "List data products by subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataProductListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "DataProducts_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/DataProducts_ListBySubscription_MinimumSet_Gen.json"
+          },
+          "DataProducts_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/DataProducts_ListBySubscription_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts": {
+      "get": {
+        "operationId": "DataProducts_ListByResourceGroup",
+        "tags": [
+          "DataProducts"
+        ],
+        "description": "List data products by resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataProductListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "DataProducts_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/DataProducts_ListByResourceGroup_MinimumSet_Gen.json"
+          },
+          "DataProducts_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/DataProducts_ListByResourceGroup_MaximumSet_Gen.json"
           }
         }
       }
@@ -361,7 +448,10 @@
             "in": "path",
             "description": "The data product resource name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
           }
         ],
         "responses": {
@@ -379,6 +469,9 @@
           }
         },
         "x-ms-examples": {
+          "DataProducts_Get_MinimumSet_Gen": {
+            "$ref": "./examples/DataProducts_Get_MinimumSet_Gen.json"
+          },
           "DataProducts_Get_MaximumSet_Gen": {
             "$ref": "./examples/DataProducts_Get_MaximumSet_Gen.json"
           }
@@ -405,7 +498,10 @@
             "in": "path",
             "description": "The data product resource name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
           },
           {
             "name": "resource",
@@ -449,6 +545,9 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
+          "DataProducts_Create_MinimumSet_Gen": {
+            "$ref": "./examples/DataProducts_Create_MinimumSet_Gen.json"
+          },
           "DataProducts_Create_MaximumSet_Gen": {
             "$ref": "./examples/DataProducts_Create_MaximumSet_Gen.json"
           }
@@ -475,7 +574,10 @@
             "in": "path",
             "description": "The data product resource name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
           },
           {
             "name": "properties",
@@ -520,6 +622,9 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
+          "DataProducts_Update_MinimumSet_Gen": {
+            "$ref": "./examples/DataProducts_Update_MinimumSet_Gen.json"
+          },
           "DataProducts_Update_MaximumSet_Gen": {
             "$ref": "./examples/DataProducts_Update_MaximumSet_Gen.json"
           }
@@ -546,7 +651,10 @@
             "in": "path",
             "description": "The data product resource name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
           }
         ],
         "responses": {
@@ -579,11 +687,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "DataProducts_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/DataProducts_Delete_MaximumSet_Gen.json"
-          },
           "DataProducts_Delete_MinimumSet_Gen": {
             "$ref": "./examples/DataProducts_Delete_MinimumSet_Gen.json"
+          },
+          "DataProducts_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/DataProducts_Delete_MaximumSet_Gen.json"
           }
         }
       }
@@ -610,7 +718,10 @@
             "in": "path",
             "description": "The data product resource name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
           },
           {
             "name": "body",
@@ -655,11 +766,66 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "DataProducts_AddUserRole_MaximumSet_Gen": {
-            "$ref": "./examples/DataProducts_AddUserRole_MaximumSet_Gen.json"
-          },
           "DataProducts_AddUserRole_MinimumSet_Gen": {
             "$ref": "./examples/DataProducts_AddUserRole_MinimumSet_Gen.json"
+          },
+          "DataProducts_AddUserRole_MaximumSet_Gen": {
+            "$ref": "./examples/DataProducts_AddUserRole_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}/dataTypes": {
+      "get": {
+        "operationId": "DataTypes_ListByDataProduct",
+        "tags": [
+          "DataTypes"
+        ],
+        "description": "List data type by parent resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dataProductName",
+            "in": "path",
+            "description": "The data product resource name",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataTypeListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "DataTypes_ListByDataProduct_MinimumSet_Gen": {
+            "$ref": "./examples/DataTypes_ListByDataProduct_MinimumSet_Gen.json"
+          },
+          "DataTypes_ListByDataProduct_MaximumSet_Gen": {
+            "$ref": "./examples/DataTypes_ListByDataProduct_MaximumSet_Gen.json"
           }
         }
       }
@@ -686,7 +852,10 @@
             "in": "path",
             "description": "The data product resource name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
           },
           {
             "name": "dataTypeName",
@@ -711,11 +880,11 @@
           }
         },
         "x-ms-examples": {
-          "DataTypes_Get_MaximumSet_Gen": {
-            "$ref": "./examples/DataTypes_Get_MaximumSet_Gen.json"
-          },
           "DataTypes_Get_MinimumSet_Gen": {
             "$ref": "./examples/DataTypes_Get_MinimumSet_Gen.json"
+          },
+          "DataTypes_Get_MaximumSet_Gen": {
+            "$ref": "./examples/DataTypes_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -740,7 +909,10 @@
             "in": "path",
             "description": "The data product resource name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
           },
           {
             "name": "dataTypeName",
@@ -791,11 +963,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "DataTypes_Create_MaximumSet_Gen": {
-            "$ref": "./examples/DataTypes_Create_MaximumSet_Gen.json"
-          },
           "DataTypes_Create_MinimumSet_Gen": {
             "$ref": "./examples/DataTypes_Create_MinimumSet_Gen.json"
+          },
+          "DataTypes_Create_MaximumSet_Gen": {
+            "$ref": "./examples/DataTypes_Create_MaximumSet_Gen.json"
           }
         }
       },
@@ -820,7 +992,10 @@
             "in": "path",
             "description": "The data product resource name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
           },
           {
             "name": "dataTypeName",
@@ -872,11 +1047,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "DataTypes_Update_MaximumSet_Gen": {
-            "$ref": "./examples/DataTypes_Update_MaximumSet_Gen.json"
-          },
           "DataTypes_Update_MinimumSet_Gen": {
             "$ref": "./examples/DataTypes_Update_MinimumSet_Gen.json"
+          },
+          "DataTypes_Update_MaximumSet_Gen": {
+            "$ref": "./examples/DataTypes_Update_MaximumSet_Gen.json"
           }
         }
       }
@@ -903,7 +1078,10 @@
             "in": "path",
             "description": "The data product resource name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
           },
           {
             "name": "dataTypeName",
@@ -943,11 +1121,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "DataTypes_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/DataTypes_Delete_MaximumSet_Gen.json"
-          },
           "DataTypes_Delete_MinimumSet_Gen": {
             "$ref": "./examples/DataTypes_Delete_MinimumSet_Gen.json"
+          },
+          "DataTypes_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/DataTypes_Delete_MaximumSet_Gen.json"
           }
         }
       }
@@ -974,7 +1152,10 @@
             "in": "path",
             "description": "The data product resource name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
           },
           {
             "name": "dataTypeName",
@@ -1026,11 +1207,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "DataTypes_GenerateStorageContainerSasToken_MaximumSet_Gen": {
-            "$ref": "./examples/DataTypes_GenerateStorageContainerSasToken_MaximumSet_Gen.json"
-          },
           "DataTypes_GenerateStorageContainerSasToken_MinimumSet_Gen": {
             "$ref": "./examples/DataTypes_GenerateStorageContainerSasToken_MinimumSet_Gen.json"
+          },
+          "DataTypes_GenerateStorageContainerSasToken_MaximumSet_Gen": {
+            "$ref": "./examples/DataTypes_GenerateStorageContainerSasToken_MaximumSet_Gen.json"
           }
         }
       }
@@ -1057,7 +1238,10 @@
             "in": "path",
             "description": "The data product resource name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
           },
           {
             "name": "body",
@@ -1102,11 +1286,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "DataProducts_GenerateStorageAccountSasToken_MaximumSet_Gen": {
-            "$ref": "./examples/DataProducts_GenerateStorageAccountSasToken_MaximumSet_Gen.json"
-          },
           "DataProducts_GenerateStorageAccountSasToken_MinimumSet_Gen": {
             "$ref": "./examples/DataProducts_GenerateStorageAccountSasToken_MinimumSet_Gen.json"
+          },
+          "DataProducts_GenerateStorageAccountSasToken_MaximumSet_Gen": {
+            "$ref": "./examples/DataProducts_GenerateStorageAccountSasToken_MaximumSet_Gen.json"
           }
         }
       }
@@ -1133,7 +1317,10 @@
             "in": "path",
             "description": "The data product resource name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
           },
           {
             "name": "body",
@@ -1180,11 +1367,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "DataProducts_ListRolesAssignments_MaximumSet_Gen": {
-            "$ref": "./examples/DataProducts_ListRolesAssignments_MaximumSet_Gen.json"
-          },
           "DataProducts_ListRolesAssignments_MinimumSet_Gen": {
             "$ref": "./examples/DataProducts_ListRolesAssignments_MinimumSet_Gen.json"
+          },
+          "DataProducts_ListRolesAssignments_MaximumSet_Gen": {
+            "$ref": "./examples/DataProducts_ListRolesAssignments_MaximumSet_Gen.json"
           }
         }
       }
@@ -1211,7 +1398,10 @@
             "in": "path",
             "description": "The data product resource name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
           },
           {
             "name": "body",
@@ -1253,11 +1443,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "DataProducts_RemoveUserRole_MaximumSet_Gen": {
-            "$ref": "./examples/DataProducts_RemoveUserRole_MaximumSet_Gen.json"
-          },
           "DataProducts_RemoveUserRole_MinimumSet_Gen": {
             "$ref": "./examples/DataProducts_RemoveUserRole_MinimumSet_Gen.json"
+          },
+          "DataProducts_RemoveUserRole_MaximumSet_Gen": {
+            "$ref": "./examples/DataProducts_RemoveUserRole_MaximumSet_Gen.json"
           }
         }
       }
@@ -1284,7 +1474,10 @@
             "in": "path",
             "description": "The data product resource name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
           },
           {
             "name": "body",
@@ -1326,11 +1519,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "DataProducts_RotateKey_MaximumSet_Gen": {
-            "$ref": "./examples/DataProducts_RotateKey_MaximumSet_Gen.json"
-          },
           "DataProducts_RotateKey_MinimumSet_Gen": {
             "$ref": "./examples/DataProducts_RotateKey_MinimumSet_Gen.json"
+          },
+          "DataProducts_RotateKey_MaximumSet_Gen": {
+            "$ref": "./examples/DataProducts_RotateKey_MaximumSet_Gen.json"
           }
         }
       }
@@ -1368,11 +1561,11 @@
           }
         },
         "x-ms-examples": {
-          "DataProductsCatalogs_Get_MaximumSet_Gen": {
-            "$ref": "./examples/DataProductsCatalogs_Get_MaximumSet_Gen.json"
-          },
           "DataProductsCatalogs_Get_MinimumSet_Gen": {
             "$ref": "./examples/DataProductsCatalogs_Get_MinimumSet_Gen.json"
+          },
+          "DataProductsCatalogs_Get_MaximumSet_Gen": {
+            "$ref": "./examples/DataProductsCatalogs_Get_MaximumSet_Gen.json"
           }
         }
       }
@@ -1416,26 +1609,6 @@
       "required": [
         "storageAccountSasToken"
       ]
-    },
-    "Azure.ResourceManager.ManagedServiceIdentity": {
-      "type": "object",
-      "description": "The managed service identities envelope.",
-      "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        }
-      }
-    },
-    "Azure.ResourceManager.ManagedServiceIdentityUpdate": {
-      "type": "object",
-      "description": "The managed service identities envelope.",
-      "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        }
-      }
     },
     "Bypass": {
       "type": "string",
@@ -1521,6 +1694,10 @@
             "read",
             "create"
           ]
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
@@ -1555,6 +1732,29 @@
         "dataProductName",
         "description",
         "dataProductVersions"
+      ]
+    },
+    "DataProductListResult": {
+      "type": "object",
+      "description": "The response of a DataProduct list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DataProduct items on this page",
+          "items": {
+            "$ref": "#/definitions/DataProduct"
+          },
+          "x-typespec-name": "DataProduct[]"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "DataProductProperties": {
@@ -1683,14 +1883,6 @@
           "type": "string",
           "description": "Key vault url.",
           "readOnly": true
-        },
-        "managedIdentity": {
-          "$ref": "#/definitions/Azure.ResourceManager.ManagedServiceIdentity",
-          "description": "Managed Identity field",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ]
         }
       },
       "required": [
@@ -1703,6 +1895,10 @@
       "type": "object",
       "description": "The type used for update operations of the DataProduct.",
       "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
@@ -1758,14 +1954,6 @@
           "x-ms-mutability": [
             "read",
             "update"
-          ]
-        },
-        "managedIdentity": {
-          "$ref": "#/definitions/Azure.ResourceManager.ManagedServiceIdentityUpdate",
-          "description": "Managed Identity field",
-          "x-ms-mutability": [
-            "update",
-            "create"
           ]
         }
       }
@@ -1868,6 +2056,29 @@
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "DataTypeListResult": {
+      "type": "object",
+      "description": "The response of a DataType list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DataType items on this page",
+          "items": {
+            "$ref": "#/definitions/DataType"
+          },
+          "x-typespec-name": "DataType[]"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "DataTypeProperties": {

@@ -56,7 +56,10 @@ interface S3Buckets {
   get is ArmResourceRead<S3Bucket>;
   @doc("Create a S3Bucket. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<S3Bucket>;
-  update is ArmTagsPatchAsync<S3Bucket, S3BucketProperties>;
+  update is ArmCustomPatchAsync<
+    S3Bucket,
+    Azure.ResourceManager.Foundations.TagsUpdateModel<S3Bucket>
+  >;
   delete is ArmResourceDeleteAsync<S3Bucket>;
   listByResourceGroup is ArmResourceListByParent<S3Bucket>;
   listBySubscription is ArmListBySubscription<S3Bucket>;
@@ -71,5 +74,5 @@ interface S3Buckets {
 //
 // Related information for backend service:
 // AWS Servcie : S3
-// SDK Version : 3.7.106.1
+// SDK Version : 3.7.200.1
 //--------------------------------------------------------------------------------------------

@@ -4,8 +4,9 @@
 
 1. Introduction
 2. Repo setup & prerequisites
-3. Setting up
-4. Generate or Refresh SDK code from a TypeSpec project
+3. Creating a new TypeSpec project
+4. Prepare and submit a Pull Request for reviewing
+5. Generate or Refresh SDK code from a TypeSpec project
 
 ### 1. Introduction
 
@@ -86,8 +87,63 @@ Please first review recommended folder structure detailed in [this document](htt
 
 5. Now the project has been set up. You can modify the sample and develop your own APIs with TypeSpec
 
+### 4. Prepare and submit a Pull Request for reviewing
 
-### 4. Generate or Refresh SDK code from a TypeSpec project
+1. Create a branch in your local repository for your changes.
+
+2. Create or update the TypeSpec files for your service.
+
+3. Add or update 'examples' files for each operation of your OpenAPI file.
+
+   The [oav](https://github.com/Azure/oav) provides two ways to generate Swagger examples:
+
+   1. Generating basic examples and then manually modify the values. It will generate two examples for each operation: one contains minimal properties set, the other contains the maximal properties set. Since the auto-generated examples consist of random values for most types, you need replace them with meaningful values.
+
+   ```bash
+   oav generate-examples openapi.json
+   ```
+
+   2. (**Recommended**) Generating high quality examples from API Scenario test. Refer to [API Test section](getstarted/providerhub/step03-api-testing.md). It will validate the API quality and generate Swagger examples from live traffic in API Scenario test.
+
+   ```bash
+   oav run <scenario-file> --spec <spec-file> --generateExample
+   ```
+
+    Note, latest OAV tool should automatically generate the following. However, if you are generating the examples manually, please ensure you have:
+    - include `title` field and make sure it is descriptive and unique for each operation.
+    - include `operationId`. This is used to match with declared operations in TypeSpec and correctly output in swagger.
+
+4. Add/update the `readme.md` file in either the 'resource-manager' or 'data-plane' folder to specify the version and location of the OpenAPI files. The `readme.md` is needed for both management-plane and data-plane services for REST API Docs generation. For management-plane services, the `readme.md` is also needed for SDK generation -- see [generating client with autorest](https://github.com/Azure/autorest/blob/main/docs/generate/readme.md#keeping-your-options-in-one-place-the-preferred-option). The `readme.md` may contain generation options for multiple languages, separated into high-level sections.
+
+   Example:[sample-readme](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/samplefiles/samplereadme.md)
+
+5. Generate swagger files:
+   - sync with the target branch in the azure-rest-api-specs repo
+      ```
+       git pull upstream <target-branch>
+      ```
+   - in the root directory, run `npm install`
+   - in the project directory, `npx tsp compile`. This will generate swagger files under `resource-manager` or `data-plane` folders.
+
+6. Ensure all generated files under `resource-manager` or `data-plane` have been added to PR.
+
+7. Send a pull request .
+
+   - commit all your changes.
+   - push your branch to your fork of the repo.
+   - send a pull request to the original repo from your forked repo.
+
+   See the ARM Wiki for information on the [supported repos and branches for management-plane services](https://armwiki.azurewebsites.net/rpaas/swaggeronboarding.html#supported-github-reposbranches).
+
+#### 4.1 Fix the errors of PR reviewing CI checks
+
+The CI checks result will be commented on the PR. you can refer to the [CI fix Guide](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/ci-fix.md).
+
+Note:
+Since the OpenAPI is generated from TypeSpec, to change the OpenAPI, you must update the TypeSpec file and regenerate the OpenAPI and avoid updating OpenAPI directly to keep the consistency between OpenAPI and TypeSpec.
+For support & help, you can post a message to [TypeSpec parters - teams channel](https://teams.microsoft.com/l/channel/19%3a2d4efc54d99e4d00a568da7cf0643c1b%40thread.skype/TypeSpec%2520Partners?groupId=3e17dcb0-4257-4a30-b843-77f47f1d4121&tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47).
+
+### 5. Generate or Refresh SDK code from a TypeSpec project
 
 The section describe the process for data-plane SDKs. Management-plane SDKs still follow separate existing `autorest` process.
 
