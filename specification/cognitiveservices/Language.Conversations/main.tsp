@@ -85,7 +85,7 @@ model AnalyzeConversationTask {
 @discriminator("kind")
 model AnalyzeConversationTaskResult {
   @doc("The base class of a conversation input task result.")
-  kind: AnalyzeConversationTaskResultsKind.ConversationResult;
+  kind: AnalyzeConversationTaskResultsKind;
 }
 
 @doc("The input for a custom conversation task.")
