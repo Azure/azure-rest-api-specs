@@ -1,0 +1,316 @@
+@doc("Gets or sets the network adapters of the server.")
+model NetworkAdapters {
+  @doc(" Gets or sets the NIC Id.")
+  nicId: string;
+
+  @doc(" Gets or sets the MAC address of the machine.")
+  macAddress: string;
+
+  @doc("Gets the IP addresses of the machine")
+  ipAddressList: string[];
+
+  @doc(" Gets or sets the virtual network name")
+  networkName: string;
+
+  @doc("Gets or sets the type of the IP address.")
+  ipAddressType: string;
+}
+
+@doc("Gets or sets the disk details of server.")
+model Disks {
+  @doc(" Gets or sets Id of the disk.")
+  id: string;
+
+  @doc("Gets or sets generated Id of the disk.")
+  generatedId: string;
+
+  @doc("Gets or sets Bytes allocated for the disk.")
+  maxSizeInBytes: int64;
+
+  @doc("Gets or sets Name of the disk.")
+  name: string;
+
+  @doc("Gets or sets Type of the disk.")
+  diskType: string;
+
+  @doc("Gets or sets LUN of the disk.")
+  lun: int64;
+
+  @doc("Gets or sets Path of the disk.")
+  path: string;
+}
+
+@doc("The properties of a server machine tracked resource")
+model Errors {
+  @doc("Gets the error message.")
+  @visibility("read")
+  message?: string;
+
+  @doc("Gets the message parameters.")
+  @visibility("read")
+  messageParameters?: Record<string>;
+
+  @doc("Gets the appliance name.")
+  @visibility("read")
+  applianceName?: string;
+
+  @doc("Gets the error ID.")
+  @visibility("read")
+  id?: int32;
+
+  @doc("Gets the error name.")
+  @visibility("read")
+  code?: string;
+
+  @doc("Gets the possible causes of error.")
+  @visibility("read")
+  possibleCauses?: string;
+
+  @doc("Gets the recommended action to resolve error.")
+  @visibility("read")
+  recommendedAction?: string;
+
+  @doc("Gets the error severity.")
+  @visibility("read")
+  severity?: string;
+
+  @doc("Gets the error summary message.")
+  @visibility("read")
+  summaryMessage?: string;
+
+  @doc("Gets the error source.")
+  @visibility("read")
+  source?: MicrosoftAzureFDSWebRoleHealthErrorDetailsSource;
+
+  @doc("Gets the time stamp when the error was updated.")
+  @visibility("read")
+  updatedTimeStamp?: utcDateTime;
+
+  @doc("Gets run as account id used while performing discovery             of entity.")
+  @visibility("read")
+  runAsAccountId?: string;
+
+  @doc("Gets discovery scope for which             error is encountered.")
+  @visibility("read")
+  discoveryScope?: HealthErrorDetailsDiscoveryScope;
+}
+
+@doc("Scoped discovery status.")
+model DiscoveryState {
+  @doc("The discovery scope status")
+  discoveryScopeStatus: DiscoveryScopeStatus;
+
+  @doc("The list of errors.")
+  errors: Errors[];
+
+  @doc("The run as account ID associated with the discovery.")
+  hydratedRunAsAccountId: string;
+}
+
+@doc("Application in the guest virtual machine.")
+model Application {
+  @doc("Gets or sets Name of the Application.")
+  @visibility("read")
+  name?: string;
+
+  @doc("Gets or sets Version of the Application.")
+  @visibility("read")
+  version?: string;
+
+  @doc("Gets or sets Provider of the Application.")
+  @visibility("read")
+  provider?: string;
+}
+
+@doc(" WebApplication in the guest virtual machine.")
+model WebApplicationProperties {
+  @doc(" Gets or sets Name of the WebApplication.")
+  name?: string;
+
+  @doc("Gets or sets Status of the WebApplication.")
+  status?: string;
+
+  @doc("Gets or sets Platform of the WebApplication.")
+  platform?: string;
+
+  @doc("Gets or sets GroupName of the WebApplication.")
+  groupName?: string;
+
+  @doc("Gets or sets WebServer of the WebApplication.")
+  webServer?: string;
+
+  @doc("Gets or sets ApplicationPool of the WebApplication.")
+  applicationPool?: string;
+}
+
+@doc("Feature in the guest virtual machine.")
+model Feature {
+  @doc("Gets or sets Name of the Feature.")
+  @visibility("read")
+  name?: string;
+
+  @doc("Gets or sets FeatureType of the Feature.")
+  @visibility("read")
+  featureType?: string;
+
+  @doc("Gets or sets Parent of the Feature.")
+  @visibility("read")
+  parent?: string;
+
+  @doc("Gets or sets Status of the Feature.")
+  @visibility("read")
+  status?: string;
+}
+
+@doc("SQLServer in the guest virtual machine.")
+model SqlServer {
+  @doc("Gets or sets Name of the SQLServer.")
+  @visibility("read")
+  name?: string;
+
+  @doc("Gets or sets Edition of the SQLServer.")
+  @visibility("read")
+  edition?: string;
+
+  @doc("Gets or sets ServicePack of the SQLServer.")
+  @visibility("read")
+  servicePack?: string;
+
+  @doc("Gets or sets Version of the SQLServer.")
+  @visibility("read")
+  version?: string;
+
+  @doc("Gets or sets Clustered of the SQLServer.")
+  @visibility("read")
+  clustered?: string;
+
+  @doc("Gets or sets ClusterName of the SQLServer.")
+  @visibility("read")
+  clusterName?: string;
+
+  @doc("Gets or sets the DNS host name of SQLServer.")
+  @visibility("read")
+  dnsHostName?: string;
+
+  @doc("Gets or sets the port of the SQLServer.")
+  @visibility("read")
+  port?: string;
+
+  @doc("Gets or sets the comma separated IPs of the SQLServer.")
+  @visibility("read")
+  commaSeparatedIps?: string;
+
+  @doc("Gets the status.")
+  @visibility("read")
+  status?: string;
+
+  @doc("Gets or sets the value which reflects if Named Pipe is enabled or not.")
+  @visibility("read")
+  isNamedPipeEnabled?: boolean;
+
+  @doc("Gets or sets the value which reflects if Named Pipe is enabled or not.")
+  @visibility("read")
+  isTcpIpEnabled?: boolean;
+
+  @doc("Gets the status.")
+  @visibility("read")
+  namedPipeName?: string;
+}
+
+@doc(" SharePointServer in the guest virtual machine.")
+model SharePointServers {
+  @doc("Gets or sets ProductName of the SharePointServer.")
+  @visibility("read")
+  productName?: string;
+
+  @doc("Gets or sets a value indicating whether the SharePointServer is Enterprise.")
+  @visibility("read")
+  isEnterprise?: boolean;
+
+  @doc("Gets or sets Status of the SharePointServer.")
+  @visibility("read")
+  status?: string;
+
+  @doc("Gets or sets Version of the SharePointServer.")
+  @visibility("read")
+  version?: string;
+}
+
+@doc(" SystemCenter in the guest virtual machine.")
+model SystemCenters {
+  @doc("Gets or sets ProductName of the SystemCenter.")
+  @visibility("read")
+  productName?: string;
+
+  @doc("Gets or sets Status of the SystemCenter.")
+  @visibility("read")
+  status?: string;
+
+  @doc("Gets or sets Version of the SystemCenter.")
+  @visibility("read")
+  version?: string;
+}
+
+@doc("BizTalkServer in the guest virtual machine.")
+model BizTalkServers {
+  @doc("Gets or sets ProductName of the BizTalkServer.")
+  @visibility("read")
+  productName?: string;
+
+  @doc("Gets or sets Status of the BizTalkServer.")
+  @visibility("read")
+  status?: string;
+}
+
+@doc(" ExchangeServer in the guest virtual machine.")
+model ExchangeServers {
+  @doc("Gets or sets ProductName of the ExchangeServer.")
+  @visibility("read")
+  productName?: string;
+
+  @doc("Gets or sets Edition of the ExchangeServer.")
+  @visibility("read")
+  edition?: string;
+
+  @doc("Gets or sets Roles of the ExchangeServer.")
+  @visibility("read")
+  roles?: string;
+
+  @doc("Gets or sets ServicePack of the ExchangeServer.")
+  @visibility("read")
+  servicePack?: string;
+
+  @doc("Gets or sets Version of the ExchangeServer.")
+  @visibility("read")
+  version?: string;
+}
+
+@doc("OtherDatabase in the guest virtual machine.")
+model OtherDatabases {
+  @doc("Gets or sets DatabaseType of the OtherDatabase.")
+  @visibility("read")
+  databaseType?: string;
+
+  @doc("Gets or sets Instance of the OtherDatabase.")
+  @visibility("read")
+  instance?: string;
+
+  @doc("Gets or sets Version of the OtherDatabase.")
+  @visibility("read")
+  version?: string;
+}
+
+@doc("Data related to a machine's operating system.")
+model OperatingSystemDetails {
+  @doc("Gets or sets the OS Type.")
+  osType: string;
+
+  @doc("Gets or sets the OS Name.")
+  osName: string;
+
+  @doc("Gets or sets the OS Version.")
+  osVersion: string;
+
+  @doc("Gets or sets the OS architecture.")
+  osArchitecture: string;
+}

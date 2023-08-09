@@ -1,0 +1,45 @@
+using Azure.Core;
+
+// @doc("Gets or sets the list of site error summary.")
+// @pagedResult
+// model SiteErrorSummaryCollection {
+//   @extension("x-ms-identifiers", ["applianceName"])
+//   @doc("Gets or sets the list of site error summary.")
+//   siteErrorSummary?: SiteErrorSummary[];
+
+//   @doc("The link to fetch more models.")
+//   @nextLink
+//   nextLink?: string;
+// }
+
+@doc("Discovery scopes")
+enum DiscoveryScopes {
+  "AppsAndRoles",
+  "DependencyMap",
+  "StaticData",
+  "SQLServerConnectionInfo",
+}
+
+@doc("The site error summary model.")
+model DiscoveryScopeErrorSummary {
+  @doc("Gets or sets the affected resource type.")
+  affectedResourceType: string; 
+  @doc("Count of affected objects.")
+  affectedObjectsCount: int64;
+
+  @doc("Gets or sets the count of affected objects.")
+  discoveryScope: DiscoveryScopes;
+}
+
+@doc("The properties of ServerSiteResource.")
+model SiteErrorSummary {
+  @doc("Appliance Name.")
+  applianceName: string;
+
+  @doc("Gets the error message.")
+  discoveryScopeErrorSummaries: DiscoveryScopeErrorSummary;
+
+  @doc("The link to fetch more models.")
+  @nextLink
+  nextLink?: string;
+}
