@@ -3162,6 +3162,92 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/guardrailsVersions/{version}": {
+      "get": {
+        "tags": [
+          "ManagedClusters"
+        ],
+        "operationId": "ManagedClusters_GetGuardrailsVersions",
+        "summary": "Gets supported Guardrails version in the specified subscription and location.",
+        "description": "Contains Guardrails version along with its support info and whether it is a default version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/VersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GuardrailsAvailableVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get guardrails available versions": {
+            "$ref": "./examples/GetGuardrailsVersions.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/guardrailsVersions": {
+      "get": {
+        "tags": [
+          "ManagedClusters"
+        ],
+        "operationId": "ManagedClusters_ListGuardrailsVersions",
+        "summary": "Gets a list of supported Guardrails versions in the specified subscription and location.",
+        "description": "Contains list of Guardrails version along with its support info and whether it is a default version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GuardrailsAvailableVersionsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Guardrails Versions": {
+            "$ref": "./examples/ListGuardrailsVersions.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/meshRevisionProfiles": {
       "get": {
         "tags": [
@@ -7016,6 +7102,74 @@
       ],
       "description": "The OS option profile."
     },
+    "GuardrailsAvailableVersionsProperties": {
+      "type": "object",
+      "description": "Whether the version is default or not and support info.",
+      "properties": {
+        "isDefaultVersion": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "support": {
+          "type": "string",
+          "enum": [
+            "Preview",
+            "Stable"
+          ],
+          "x-ms-enum": {
+            "name": "GuardrailsSupport",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Preview",
+                "description": "The version is preview. It is not recommended to use preview versions on critical production clusters. The preview version may not support all use-cases."
+              },
+              {
+                "value": "Stable",
+                "description": "The version is stable and can be used on critical production clusters."
+              }
+            ]
+          },
+          "description": "Whether the version is preview or stable.",
+          "readOnly": true
+        }
+      }
+    },
+    "GuardrailsAvailableVersion": {
+      "type": "object",
+      "description": "Available Guardrails Version",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GuardrailsAvailableVersionsProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "GuardrailsAvailableVersionsList": {
+      "type": "object",
+      "description": "Hold values properties, which is array of GuardrailsVersions",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GuardrailsAvailableVersion"
+          },
+          "description": "Array of AKS supported Guardrails versions."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next Guardrails available version.",
+          "readOnly": true
+        }
+      }
+    },
     "EndpointDependency": {
       "description": "A domain name that AKS agent nodes are reaching at.",
       "type": "object",
@@ -8669,6 +8823,16 @@
       "in": "path",
       "required": true,
       "pattern": "^[a-zA-Z0-9][-_a-zA-Z0-9]{0,39}$",
+      "x-ms-parameter-location": "method"
+    },
+    "VersionParameter": {
+      "name": "version",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 24,
+      "description": "Guardrails version",
       "x-ms-parameter-location": "method"
     }
   }
