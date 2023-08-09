@@ -1,0 +1,28 @@
+parameters:
+  "service-dir":
+    default: "sdk/eventgrid"
+  "service-directory-name":
+    default: "eventgrid"
+emit: [
+  "@azure-tools/typespec-autorest",
+]
+options:
+  "@azure-tools/typespec-autorest":
+    examples-directory: ../examples
+    omit-unreachable-types: false
+    output-file: TypespecEventGrid.json
+    emitter-output-dir: "{project-root}/../data-plane/Microsoft.EventGrid/stable/2018-01-01"
+  "@azure-tools/typespec-python":
+    package-pprint-name: "\"Azure Event Grid\""
+    package-mode: "dataplane"
+    package-version: 4.12.0b1
+    package-dir: "azure-eventgrid"
+    package-name: "{package-dir}"
+    emitter-output-dir: "{project-root}/{service-dir}/{package-name}"
+  # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
+  # Commenting out until https://github.com/Azure/autorest.csharp/issues/3515 is resolved -- project file not found b/c feature branch
+  # "@azure-tools/typespec-csharp":
+  #   package-dir: Azure.Messaging.EventGridV2
+  #   model-namespace: false
+  #   generate-convenience-methods: false
+  #   namespace: Azure.Messaging.EventGrid.Namespaces
