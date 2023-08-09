@@ -1,0 +1,584 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Microsoft.AmlServerless",
+      "description": "These APIs allow end users to operate on Azure Machine Learning Serverless resources",
+      "version": "2021-10-01-preview"
+    },
+    "schemes": [
+      "https"
+    ],
+    "host": "management.azure.com",
+    "produces": [
+      "application/json"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "security": [
+      {
+        "azure_auth": [
+          "user_impersonation"
+        ]
+      }
+    ],
+    "securityDefinitions": {
+      "azure_auth": {
+        "type": "oauth2",
+        "description": "Azure Active Directory OAuth2 Flow.",
+        "flow": "implicit",
+        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+        "scopes": {
+          "user_impersonation": "impersonate your user account"
+        }
+      }
+    },
+    "tags": [
+      {
+        "name": "Operations"
+      },
+      {
+        "name": "modelPools"
+      }
+    ],
+    "paths": {
+      "/providers/Microsoft.AmlServerless/operations": {
+        "get": {
+          "operationId": "Operations_List",
+          "tags": [
+            "Operations"
+          ],
+          "description": "List the operations for the provider",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "ARM operation completed successfully.",
+              "schema": {
+                "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              }
+            },
+            "default": {
+              "description": "An unexpected error response.",
+              "schema": {
+                "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+          }
+        }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AmlServerless/operation/{operationId}": {
+        "get": {
+          "operationId": "OperationStatus_Get",
+          "tags": [
+            "OperationStatus"
+          ],
+          "description": "Get the status of an async operation",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "name": "operationId",
+              "in": "path",
+              "description": "The ID of the operation",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "ARM operation completed successfully.",
+              "schema": {
+                "$ref": "#/definitions/operationStatus"
+              }
+            },
+            "default": {
+              "description": "An unexpected error response.",
+              "schema": {
+                "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AmlServerless/modelPools/{modelPoolName}": {
+        "get": {
+          "operationId": "ModelPools_Get",
+          "tags": [
+            "ModelPools"
+          ],
+          "description": "Get a modelPool",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "name": "modelPoolName",
+              "in": "path",
+              "description": "The name of the modelPool",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "ARM operation completed successfully.",
+              "schema": {
+                "$ref": "#/definitions/modelPool"
+              }
+            },
+            "default": {
+              "description": "An unexpected error response.",
+              "schema": {
+                "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        },
+        "put": {
+          "operationId": "ModelPools_CreateOrUpdate",
+          "tags": [
+            "ModelPools"
+          ],
+          "description": "Create a modelPool",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "name": "modelPoolName",
+              "in": "path",
+              "description": "The name of the modelPool",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            },
+            {
+              "name": "properties",
+              "in": "body",
+              "description": "Resource create parameters.",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/modelPoolProperties"
+              }
+            }
+          ],
+          "responses": {
+            "202": {
+              "description": "Resource create/update accepted.",
+              "schema": {
+                "$ref": "#/definitions/modelPoolCreateorUpdateOperation"
+              },
+              "headers": {
+                "Azure-AsyncOperation": {
+                  "type": "string",
+                  "description": "The tracking URI of the operation."
+                }
+              }
+            },
+            "default": {
+              "description": "An unexpected error response.",
+              "schema": {
+                "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          },
+          "x-ms-long-running-operation-options": {
+            "final-state-via": "azure-async-operation"
+          },
+          "x-ms-long-running-operation": true
+        },
+        "patch": {
+          "operationId": "ModelPools_Update",
+          "tags": [
+            "ModelPools"
+          ],
+          "description": "Update a modelPool",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "name": "modelPoolName",
+              "in": "path",
+              "description": "The name of the modelPool",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            },
+            {
+              "name": "properties",
+              "in": "body",
+              "description": "The resource properties to be updated.",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/modelPoolUpdateProperties"
+              }
+            }
+          ],
+          "responses": {
+            "202": {
+              "description": "Resource update accepted.",
+              "schema": {
+                "$ref": "#/definitions/modelPoolUpdateOperation"
+              },
+              "headers": {
+                "Azure-AsyncOperation": {
+                  "type": "string",
+                  "description": "The tracking URI of the operation."
+                }
+              }
+            },
+            "default": {
+              "description": "An unexpected error response.",
+              "schema": {
+                "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        },
+        "delete": {
+          "operationId": "ModelPools_Delete",
+          "tags": [
+            "ModelPools"
+          ],
+          "description": "Delete a modelPool",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "name": "modelPoolName",
+              "in": "path",
+              "description": "The name of the modelPool",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            }
+          ],
+          "responses": {
+            "202": {
+              "description": "Resource deletion accepted.",
+              "schema": {
+                "$ref": "#/definitions/modelPoolDeleteOperation"
+              },
+              "headers": {
+                "Azure-AsyncOperation": {
+                  "type": "string",
+                  "description": "The tracking URI of the operation."
+                }
+              }
+            },
+            "default": {
+              "description": "An unexpected error response.",
+              "schema": {
+                "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          },
+          "x-ms-long-running-operation-options": {
+            "final-state-via": "location"
+          },
+          "x-ms-long-running-operation": true
+        }
+      }
+    },
+    "definitions": {
+      "ProvisioningState": {
+        "type": "string",
+        "description": "The status of the current operation.",
+        "enum": [
+          "Succeeded",
+          "Failed",
+          "Canceled",
+          "Provisioning",
+          "Updating",
+          "Deleting",
+          "Accepted"
+        ],
+        "x-ms-enum": {
+          "name": "ProvisioningState",
+          "modelAsString": true,
+          "values": [
+            {
+              "name": "Succeeded",
+              "value": "Succeeded",
+              "description": "Resource has been created."
+            },
+            {
+              "name": "Failed",
+              "value": "Failed",
+              "description": "Resource creation failed."
+            },
+            {
+              "name": "Canceled",
+              "value": "Canceled",
+              "description": "Resource creation was canceled."
+            },
+            {
+              "name": "Provisioning",
+              "value": "Provisioning",
+              "description": "Initial provisioning in progress"
+            },
+            {
+              "name": "Updating",
+              "value": "Updating",
+              "description": "Update in progress"
+            },
+            {
+              "name": "Deleting",
+              "value": "Deleting",
+              "description": "Deletion in progress"
+            },
+            {
+              "name": "Accepted",
+              "value": "Accepted",
+              "description": "Change accepted for processing"
+            }
+          ]
+        }
+      },
+      "operationStatus": {
+        "type": "object",
+        "description": "An object that represents an async operation status message",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "The status of the operation"
+          },
+          "modelPoolName": {
+            "type": "string",
+            "description": "The name of the model pool that the operation is associated with"
+          }
+        }
+      },
+      "modelPoolCreateorUpdateOperation": {
+        "type": "object",
+        "description": "An object that represents an AmlServerless modelPool resource being newly created or updated",
+        "properties": {
+          "method": {
+            "type": "string",
+            "description": ""
+          },
+          "subscriptionId": {
+            "type": "string",
+            "description": "The subscription ID passed as a parameter."
+          },
+          "resourceGroup": {
+            "type": "string",
+            "description": "The resource group passed as a parameter."
+          },
+          "modelPoolName": {
+            "type": "string",
+            "description": "The name of the model pool."
+          },
+          "properties": {
+            "$ref": "#/definitions/modelPoolProperties",
+            "description": "The resource-specific properties for this resource.",
+            "x-ms-client-flatten": true
+          },
+          "operationId": {
+            "type": "string",
+            "description": "The ID of the async operation being performed on the modelPool resource."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          }
+        ]
+      },
+      "modelPoolProperties": {
+        "type": "object",
+        "description": "Details of the AmlServerless modelPool.",
+        "properties": {
+          "partitionKey": {
+            "type": "string",
+            "description": "The name of the model pool."
+          },
+          "rowKey": {
+            "type": "string",
+            "description": "The name of the model pool."
+          },
+          "modelPoolId": {
+            "type": "string",
+            "description": "The name of the model pool."
+          },
+          "modelAssetId": {
+            "type": "string",
+            "description": "The registry asset ID of the deployed model."
+          },
+          "skuSize": {
+            "type": "string",
+            "description": "The size of the VM on which the pool is deployed."
+          },
+          "workspaceAssetId": {
+            "type": "string",
+            "description": "The asset ID of backend AML workspace"
+          },
+          "onlineEndpointName": {
+            "type": "string",
+            "description": "The name of the backend MIR online endpoint."
+          },
+          "poolSize": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The size of the pool."
+          },
+          "instanceCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of deployment instances."
+          },
+          "location": {
+            "type": "string",
+            "description": "The location of the model pool."
+          },
+          "etag": {
+            "type": "string",
+            "description": "The etag of the request."
+          },
+          "timestamp": {
+            "type": "string",
+            "description": "The timestamp of the model pool resource."
+          },
+          "tags": {
+            "type": "object",
+            "description": "Contains resource tags defined as key/value pairs.",
+            "additionalProperties": {
+                "type": "string"
+            }
+          }
+        }
+      },
+      "modelPoolUpdateOperation": {
+        "type": "object",
+        "description": "An object that represents an AmlServerless modelPool resource being updated.",
+        "properties": {
+          "method": {
+            "type": "string",
+            "description": ""
+          },
+          "subscriptionId": {
+            "type": "string",
+            "description": "The subscription ID passed as a parameter."
+          },
+          "resourceGroup": {
+            "type": "string",
+            "description": "The resource group passed as a parameter."
+          },
+          "modelPoolName": {
+            "type": "string",
+            "description": "The name of the model pool."
+          },
+          "properties": {
+            "$ref": "#/definitions/modelPoolUpdateProperties",
+            "description": "The resource-specific properties for this resource.",
+            "x-ms-client-flatten": true
+          },
+          "operationId": {
+            "type": "string",
+            "description": "The ID of the async operation being performed on the modelPool resource."
+          }
+        }
+      },
+      "modelPoolUpdateProperties": {
+        "type": "object",
+        "description": "The updatable properties of the modelPool.",
+        "properties": {
+          "modelAssetId": {
+            "type": "string",
+            "description": "The registry asset ID of the deployed model."
+          },
+          "skuSize": {
+            "type": "string",
+            "description": "The size of the VM on which the pool is deployed."
+          },
+          "poolSize": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The size of the model pool."
+          },
+          "instanceCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of deployment instances."
+          },
+          "tags": {
+            "type": "object",
+            "description": "Contains resource tags defined as key/value pairs.",
+            "additionalProperties": {
+                "type": "string"
+            }
+          }
+        }
+      },
+      "modelPoolDeleteOperation": {
+        "type": "object",
+        "description": "An object that represents an AmlServerless modelPool resource being deleted.",
+        "properties": {
+          "method": {
+            "type": "string",
+            "description": ""
+          },
+          "subscriptionId": {
+            "type": "string",
+            "description": "The subscription ID passed as a parameter."
+          },
+          "resourceGroup": {
+            "type": "string",
+            "description": "The resource group passed as a parameter."
+          },
+          "modelPoolName": {
+            "type": "string",
+            "description": "The name of the model pool."
+          },
+          "operationId": {
+            "type": "string",
+            "description": "The ID of the async operation being performed on the modelPool resource."
+          }
+        }
+      }
+    },
+    "parameters": {}
+  }
+  

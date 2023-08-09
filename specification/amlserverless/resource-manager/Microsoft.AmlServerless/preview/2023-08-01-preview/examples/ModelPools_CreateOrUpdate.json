@@ -1,0 +1,50 @@
+{
+  "title": "ModelPools_CreateOrUpdate",
+  "operationId": "ModelPools_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2021-10-01-preview",
+    "subscriptionId": "subscription-id",
+    "resourceGroupName": "resource-group",
+    "modelPoolName": "new-model-pool",
+    "resource": {
+      "properties": {
+        "ModelAssetId": "azureml://registries/azureml/models/t5-base/versions/8",
+        "SkuSize": "Standard_DS3_v2",
+        "PoolSize": 1,
+        "InstanceCount": 1,
+        "Location": "eastus",
+        "WorkspaceAssetID": "/subscriptions/subscription-id/resourceGroups/resource-group/providers/Microsoft.MachineLearningServices/workspaces/workspace",
+        "OnlineEndpointName": "endpoint-name",
+        "Tags": {
+          "testKey": "testValue"
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subscription-id/resourceGroups/resource-group/providers/Microsoft.AMLServerless/operations/operation-id?api-version=2023-10-01-preview"
+      },
+      "body": {
+        "method": null,
+        "subscriptionID": "subscription-id",
+        "resourceGroupName": "resource-group",
+        "modelPoolName": "new-model-pool",
+        "properties": {
+          "modelAssetId": "azureml://registries/azureml/models/t5-base/versions/8",
+          "skuSize": "Standard_DS3_v2",
+          "poolSize": 1,
+          "instanceCount": 1,
+          "location": "eastus",
+          "workspaceAssetID": "/subscriptions/subscription-id/resourceGroups/resource-group/providers/Microsoft.MachineLearningServices/workspaces/workspace",
+          "onlineEndpointName": "endpoint-name",
+          "tags": {
+              "testKey": "testValue"
+          }
+        },
+        "operationID": "operation-id"
+      }
+    }
+  }
+}

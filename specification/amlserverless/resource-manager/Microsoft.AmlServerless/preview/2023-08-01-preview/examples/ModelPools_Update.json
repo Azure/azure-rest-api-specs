@@ -1,0 +1,44 @@
+{
+  "title": "ModelPools_Update",
+  "operationId": "ModelPools_Update",
+  "parameters": {
+    "api-version": "2021-10-01-preview",
+    "subscriptionId": "subscription-id",
+    "resourceGroupName": "resource-group",
+    "modelPoolName": "existing-model-pool",
+    "resource": {
+      "properties": {
+        "ModelAssetId": "azureml://registries/azureml/models/t5-small/versions/8",
+        "SkuSize": "Standard_DS2_v2",
+        "PoolSize": 2,
+        "InstanceCount": 2,
+        "Tags": {
+          "testKey2": "testValue2"
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subscription-id/resourceGroups/resource-group/providers/Microsoft.AMLServerless/operations/operation-id?api-version=2023-10-01-preview"
+      },
+      "body": {
+        "method": null,
+        "subscriptionID": "subscription-id",
+        "resourceGroupName": "resource-group",
+        "modelPoolName": "existing-model-pool",
+        "properties": {
+          "modelAssetId": "azureml://registries/azureml/models/t5-small/versions/8",
+          "skuSize": "Standard_DS2_v2",
+          "poolSize": 2,
+          "instanceCount": 2,
+          "tags": {
+              "testKey2": "testValue2"
+          }
+        },
+        "operationID": "operation-id"
+      }
+    }
+  }
+}
