@@ -1050,7 +1050,7 @@
     "VirtualMachineVMConfigAgentInstanceView": {
       "type": "object",
       "properties": {
-        "vmVMConfigAgentVersion": {
+        "vmConfigAgentVersion": {
           "type": "string",
           "description": "The VM Config Agent full version."
         },
@@ -1482,9 +1482,26 @@
       "description": "HTTP Proxy configuration for the VM.",
       "type": "object",
       "properties": {
+        "httpProxy": {
+          "type": "string",
+          "x-ms-secret": true,
+          "description": "The HTTP proxy server endpoint to use."
+        },
         "httpsProxy": {
-          "description": "The httpsProxy url.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true,
+          "description": "The HTTPS proxy server endpoint to use."
+        },
+        "noProxy": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The endpoints that should not go through proxy."
+        },
+        "trustedCa": {
+          "type": "string",
+          "description": "Alternative CA cert to use for connecting to proxy servers."
         }
       }
     }

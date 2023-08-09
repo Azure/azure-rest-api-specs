@@ -42,6 +42,7 @@ directive:
       - clusters.json
       - extensions.json
       - galleryImages.json
+      - logicalNetworks.json
       - marketplaceGalleryImages.json
       - networkInterfaces.json
       - operations.json
@@ -68,6 +69,7 @@ These settings apply only when `--tag=package-2023-09` is specified on the comma
 input-file:
   - Microsoft.AzureStackHCI/stable/2023-09-01/common.json
   - Microsoft.AzureStackHCI/stable/2023-09-01/galleryImages.json
+  - Microsoft.AzureStackHCI/stable/2023-09-01/logicalNetworks.json
   - Microsoft.AzureStackHCI/stable/2023-09-01/marketplaceGalleryImages.json
   - Microsoft.AzureStackHCI/stable/2023-09-01/networkInterfaces.json
   - Microsoft.AzureStackHCI/stable/2023-09-01/storageContainers.json
