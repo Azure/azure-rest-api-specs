@@ -28,11 +28,11 @@ These are the global settings for the MySql API.
 title: MySQLManagementClient
 description: The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MySQL resources including servers, databases, firewall rules, VNET rules, log files and configurations with new business model.
 openapi-type: arm
-tag: package-2020-01-01
+tag: package-flexibleserver-2023-06-30-privatelink
 ```
 
 ``` yaml $(package-flexibleservers)
-tag: package-flexibleserver-2021-12-01-preview
+tag: package-flexibleserver-2023-06-30-privatelink
 ```
 
 ``` yaml $(package-singleservers)
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2017-12-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2017-12-01-preview'
 input-file:
-- Microsoft.DBforMySQL/preview/2017-12-01-preview/mysql.json
+- Microsoft.DBforMySQL/legacy/preview/2017-12-01-preview/mysql.json
 ```
 
 ### Tag: package-2017-12-01
@@ -54,8 +54,8 @@ These settings apply only when `--tag=package-2017-12-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2017-12-01'
 input-file:
-- Microsoft.DBforMySQL/stable/2017-12-01/mysql.json
-- Microsoft.DBforMySQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
+- Microsoft.DBforMySQL/legacy/stable/2017-12-01/mysql.json
+- Microsoft.DBforMySQL/legacy/stable/2017-12-01/ServerSecurityAlertPolicies.json
 ```
 
 ### Tag: package-2018-06-01-privatepreview
@@ -64,9 +64,9 @@ These settings apply only when `--tag=package-2018-06-01-privatepreview` is spec
 
 ``` yaml $(tag) == 'package-2018-06-01-privatepreview'
 input-file:
-- Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/mysql.json
-- Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
-- Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/PrivateLinkResources.json
+- Microsoft.DBforMySQL/legacy/preview/2018-06-01-privatepreview/mysql.json
+- Microsoft.DBforMySQL/legacy/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
+- Microsoft.DBforMySQL/legacy/preview/2018-06-01-privatepreview/PrivateLinkResources.json
 ```
 
 ### Tag: package-2018-06-01
@@ -75,12 +75,12 @@ These settings apply only when `--tag=package-2018-06-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2018-06-01'
 input-file:
-- Microsoft.DBforMySQL/stable/2017-12-01/mysql.json
-- Microsoft.DBforMySQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
-- Microsoft.DBforMySQL/stable/2018-06-01/QueryPerformanceInsights.json
-- Microsoft.DBforMySQL/stable/2018-06-01/PerformanceRecommendations.json
-- Microsoft.DBforMySQL/stable/2018-06-01/PrivateEndpointConnections.json
-- Microsoft.DBforMySQL/stable/2018-06-01/PrivateLinkResources.json
+- Microsoft.DBforMySQL/legacy/stable/2017-12-01/mysql.json
+- Microsoft.DBforMySQL/legacy/stable/2017-12-01/ServerSecurityAlertPolicies.json
+- Microsoft.DBforMySQL/legacy/stable/2018-06-01/QueryPerformanceInsights.json
+- Microsoft.DBforMySQL/legacy/stable/2018-06-01/PerformanceRecommendations.json
+- Microsoft.DBforMySQL/legacy/stable/2018-06-01/PrivateEndpointConnections.json
+- Microsoft.DBforMySQL/legacy/stable/2018-06-01/PrivateLinkResources.json
 ```
 
 ### Tag: package-2020-01-01-privatepreview
@@ -89,7 +89,7 @@ These settings apply only when `--tag=package-2020-01-01-privatepreview` is spec
 
 ``` yaml $(tag) == 'package-2020-01-01-privatepreview'
 input-file:
-- Microsoft.DBforMySQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
+- Microsoft.DBforMySQL/legacy/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
 ```
 
 ### Tag: package-2020-01-01
@@ -98,14 +98,14 @@ These settings apply only when `--tag=package-2020-01-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2020-01-01'
 input-file:
-- Microsoft.DBforMySQL/stable/2017-12-01/mysql.json
-- Microsoft.DBforMySQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
-- Microsoft.DBforMySQL/stable/2018-06-01/QueryPerformanceInsights.json
-- Microsoft.DBforMySQL/stable/2018-06-01/PerformanceRecommendations.json
-- Microsoft.DBforMySQL/stable/2018-06-01/PrivateEndpointConnections.json
-- Microsoft.DBforMySQL/stable/2018-06-01/PrivateLinkResources.json
-- Microsoft.DBforMySQL/stable/2020-01-01/DataEncryptionKeys.json
-- Microsoft.DBforMySQL/stable/2020-01-01/Servers.json
+- Microsoft.DBforMySQL/legacy/stable/2017-12-01/mysql.json
+- Microsoft.DBforMySQL/legacy/stable/2017-12-01/ServerSecurityAlertPolicies.json
+- Microsoft.DBforMySQL/legacy/stable/2018-06-01/QueryPerformanceInsights.json
+- Microsoft.DBforMySQL/legacy/stable/2018-06-01/PerformanceRecommendations.json
+- Microsoft.DBforMySQL/legacy/stable/2018-06-01/PrivateEndpointConnections.json
+- Microsoft.DBforMySQL/legacy/stable/2018-06-01/PrivateLinkResources.json
+- Microsoft.DBforMySQL/legacy/stable/2020-01-01/DataEncryptionKeys.json
+- Microsoft.DBforMySQL/legacy/stable/2020-01-01/Servers.json
 ```
 
 ### Tag: package-2020-07-01-privatepreview
@@ -114,7 +114,7 @@ These settings apply only when `--tag=package-2020-07-01-privatepreview` is spec
 
 ``` yaml $(tag) == 'package-2020-07-01-privatepreview'
 input-file:
-- Microsoft.DBforMySQL/preview/2020-07-01-privatepreview/mysql.json
+- Microsoft.DBforMySQL/legacy/preview/2020-07-01-privatepreview/mysql.json
 ```
 
 ### Tag: package-2020-07-01-preview
@@ -123,7 +123,7 @@ These settings apply only when `--tag=package-2020-07-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-07-01-preview'
 input-file:
-- Microsoft.DBforMySQL/preview/2020-07-01-preview/mysql.json
+- Microsoft.DBforMySQL/legacy/preview/2020-07-01-preview/mysql.json
 ```
 
 ### Tag: package-flexibleserver-2021-05-01-preview
@@ -132,7 +132,7 @@ These settings apply only when `--tag=package-flexibleserver-2021-05-01-preview`
 
 ``` yaml $(tag) == 'package-flexibleserver-2021-05-01-preview'
 input-file:
-- Microsoft.DBforMySQL/preview/2021-05-01-preview/mysql.json
+- Microsoft.DBforMySQL/legacy/preview/2021-05-01-preview/mysql.json
 ```
 
 ### Tag: package-flexibleserver-2021-05-01
@@ -141,7 +141,7 @@ These settings apply only when `--tag=package-flexibleserver-2021-05-01` is spec
 
 ``` yaml $(tag) == 'package-flexibleserver-2021-05-01'
 input-file:
-- Microsoft.DBforMySQL/stable/2021-05-01/mysql.json
+- Microsoft.DBforMySQL/legacy/stable/2021-05-01/mysql.json
 ```
 
 ### Tag: package-flexibleserver-2021-12-01-preview
@@ -150,14 +150,77 @@ These settings apply only when `--tag=package-flexibleserver-2021-12-01-preview`
 
 ``` yaml $(tag) == 'package-flexibleserver-2021-12-01-preview'
 input-file:
-- Microsoft.DBforMySQL/preview/2021-12-01-preview/Backups.json
-- Microsoft.DBforMySQL/preview/2021-12-01-preview/Configurations.json
-- Microsoft.DBforMySQL/preview/2021-12-01-preview/Databases.json
-- Microsoft.DBforMySQL/preview/2021-12-01-preview/FirewallRules.json
-- Microsoft.DBforMySQL/preview/2021-12-01-preview/FlexibleServers.json
-- Microsoft.DBforMySQL/preview/2021-12-01-preview/LogFiles.json
-- Microsoft.DBforMySQL/preview/2021-12-01-preview/ServiceOperations.json
-- Microsoft.DBforMySQL/preview/2021-12-01-preview/AzureADAdministrator.json
+- Microsoft.DBforMySQL/Backups/preview/2021-12-01-preview/Backups.json
+- Microsoft.DBforMySQL/Configurations/preview/2021-12-01-preview/Configurations.json
+- Microsoft.DBforMySQL/Databases/preview/2021-12-01-preview/Databases.json
+- Microsoft.DBforMySQL/Firewall/preview/2021-12-01-preview/FirewallRules.json
+- Microsoft.DBforMySQL/FlexibleServers/preview/2021-12-01-preview/FlexibleServers.json
+- Microsoft.DBforMySQL/LogFiles/preview/2021-12-01-preview/LogFiles.json
+- Microsoft.DBforMySQL/ServiceOperations/preview/2021-12-01-preview/ServiceOperations.json
+- Microsoft.DBforMySQL/AAD/preview/2021-12-01-preview/AzureADAdministrator.json
+```
+
+### Tag: package-flexibleserver-2022-09-30-preview
+
+These settings apply only when `--tag=package-flexibleserver-2022-09-30-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2022-09-30-preview'
+input-file:
+- Microsoft.DBforMySQL/AAD/preview/2021-12-01-preview/AzureADAdministrator.json
+- Microsoft.DBforMySQL/Backups/preview/2022-09-30-preview/Backups.json
+- Microsoft.DBforMySQL/Backups/preview/2022-09-30-preview/BackupAndExport.json
+- Microsoft.DBforMySQL/Configurations/preview/2021-12-01-preview/Configurations.json
+- Microsoft.DBforMySQL/Databases/preview/2021-12-01-preview/Databases.json
+- Microsoft.DBforMySQL/Firewall/preview/2021-12-01-preview/FirewallRules.json
+- Microsoft.DBforMySQL/FlexibleServers/preview/2022-09-30-preview/FlexibleServers.json
+- Microsoft.DBforMySQL/LogFiles/preview/2021-12-01-preview/LogFiles.json
+- Microsoft.DBforMySQL/ServiceOperations/preview/2021-12-01-preview/ServiceOperations.json
+- Microsoft.DBforMySQL/common-types/v1/common-types.json
+```
+
+### Tag: package-flexibleserver-2022-01-01
+
+These settings apply only when `--tag=package-flexibleserver-2022-01-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2022-01-01'
+input-file:
+- Microsoft.DBforMySQL/Backups/stable/2022-01-01/Backups.json
+- Microsoft.DBforMySQL/Configurations/stable/2022-01-01/Configurations.json
+- Microsoft.DBforMySQL/Databases/stable/2022-01-01/Databases.json
+- Microsoft.DBforMySQL/Firewall/stable/2022-01-01/FirewallRules.json
+- Microsoft.DBforMySQL/FlexibleServers/stable/2022-01-01/FlexibleServers.json
+- Microsoft.DBforMySQL/LogFiles/stable/2022-01-01/LogFiles.json
+- Microsoft.DBforMySQL/ServiceOperations/stable/2022-01-01/ServiceOperations.json
+- Microsoft.DBforMySQL/AAD/stable/2022-01-01/AzureADAdministrator.json
+```
+
+### Tag: package-flexibleserver-2022-09-30-preview-privatelink
+
+These settings apply only when `--tag=package-flexibleserver-2022-09-30-preview-privatelink` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2022-09-30-preview-privatelink'
+input-file:
+- Microsoft.DBforMySQL/Backups/preview/2021-12-01-preview/Backups.json
+- Microsoft.DBforMySQL/Configurations/preview/2021-12-01-preview/Configurations.json
+- Microsoft.DBforMySQL/Databases/preview/2021-12-01-preview/Databases.json
+- Microsoft.DBforMySQL/Firewall/preview/2021-12-01-preview/FirewallRules.json
+- Microsoft.DBforMySQL/FlexibleServers/preview/2021-12-01-preview/FlexibleServers.json
+- Microsoft.DBforMySQL/LogFiles/preview/2021-12-01-preview/LogFiles.json
+- Microsoft.DBforMySQL/ServiceOperations/preview/2022-09-30-preview/ServiceOperations.json
+- Microsoft.DBforMySQL/AAD/preview/2021-12-01-preview/AzureADAdministrator.json
+- Microsoft.DBforMySQL/PrivateLink/preview/2022-09-30-preview/PrivateEndpointConnections.json
+- Microsoft.DBforMySQL/PrivateLink/preview/2022-09-30-preview/PrivateLinkResources.json
+```
+
+### Tag: package-flexibleserver-2023-06-30-privatelink
+
+These settings apply only when `--tag=package-flexibleserver-2023-06-30-privatelink` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2023-06-30-privatelink'
+input-file:
+- Microsoft.DBforMySQL/common-types/v1/common-types.json
+- Microsoft.DBforMySQL/PrivateLink/stable/2023-06-30/PrivateEndpointConnections.json
+- Microsoft.DBforMySQL/PrivateLink/stable/2023-06-30/PrivateLinkResources.json
 ```
 
 ## Suppression

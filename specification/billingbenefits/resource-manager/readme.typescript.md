@@ -11,4 +11,10 @@ typescript:
   payload-flattening-threshold: 1
   clear-output-folder: true
   generate-metadata: true
+
+directive: 
+- from: swagger-document
+  where: $.parameters.ExpandParameter
+  transform: >
+    $["x-ms-parameter-location"] = "method";
 ```

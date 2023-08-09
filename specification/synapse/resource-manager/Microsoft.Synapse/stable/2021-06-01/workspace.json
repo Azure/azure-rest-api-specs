@@ -890,7 +890,11 @@
       "properties": {
         "tenantId": {
           "description": "Tenant ID of the workspace active directory administrator",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "login": {
           "description": "Login of the workspace active directory administrator",
@@ -945,7 +949,11 @@
         },
         "filesystem": {
           "description": "Filesystem name",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "resourceId": {
           "description": "ARM resource Id of this storage account",
@@ -1259,13 +1267,10 @@
         "connectivityEndpoints": {
           "description": "Connectivity endpoints",
           "additionalProperties": {
-            "type": "string",
-            "x-ms-mutability": [
-              "create",
-              "read"
-            ]
+            "type": "string"
           },
-          "type": "object"
+          "type": "object",
+          "readOnly": true
         },
         "managedVirtualNetwork": {
           "description": "Setting this to 'default' will ensure that all compute for this workspace is in a virtual network managed on behalf of the user.",
@@ -1290,9 +1295,6 @@
         },
         "extraProperties": {
           "description": "Workspace level configs and feature flags",
-          "additionalProperties": {
-            "type": "object"
-          },
           "type": "object",
           "readOnly": true
         },
@@ -1340,7 +1342,11 @@
         },
         "azureADOnlyAuthentication": {
           "description": "Enable or Disable AzureADOnlyAuthentication on All Workspace subresource",
-          "type": "boolean"
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         },
         "trustedServiceBypassEnabled": {
           "description": "Is trustedServiceBypassEnabled for the workspace",

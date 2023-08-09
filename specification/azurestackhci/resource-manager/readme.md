@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2022-12
+tag: package-2023-03
 ```
 
 ## Suppression
@@ -42,6 +42,7 @@ directive:
       - clusters.json
       - extensions.json
       - galleryImages.json
+      - marketplaceGalleryImages.json
       - networkInterfaces.json
       - operations.json
       - storageContainers.json
@@ -58,11 +59,72 @@ directive:
 ```
 
 
+### Tag: package-2023-03
+
+These settings apply only when `--tag=package-2023-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-03'
+input-file:
+  - Microsoft.AzureStackHCI/stable/2023-03-01/arcSettings.json
+  - Microsoft.AzureStackHCI/stable/2023-03-01/clusters.json
+  - Microsoft.AzureStackHCI/stable/2023-03-01/extensions.json
+  - Microsoft.AzureStackHCI/stable/2023-03-01/offers.json
+  - Microsoft.AzureStackHCI/stable/2023-03-01/operations.json
+  - Microsoft.AzureStackHCI/stable/2023-03-01/publishers.json
+  - Microsoft.AzureStackHCI/stable/2023-03-01/skus.json
+  - Microsoft.AzureStackHCI/stable/2023-03-01/updateRuns.json
+  - Microsoft.AzureStackHCI/stable/2023-03-01/updateSummaries.json
+  - Microsoft.AzureStackHCI/stable/2023-03-01/updates.json
+```
+### Tag: package-2023-02
+
+These settings apply only when `--tag=package-2023-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-02'
+input-file:
+  - Microsoft.AzureStackHCI/stable/2023-02-01/arcSettings.json
+  - Microsoft.AzureStackHCI/stable/2023-02-01/clusters.json
+  - Microsoft.AzureStackHCI/stable/2023-02-01/extensions.json
+  - Microsoft.AzureStackHCI/stable/2023-02-01/offers.json
+  - Microsoft.AzureStackHCI/stable/2023-02-01/operations.json
+  - Microsoft.AzureStackHCI/stable/2023-02-01/publishers.json
+  - Microsoft.AzureStackHCI/stable/2023-02-01/skus.json
+  - Microsoft.AzureStackHCI/stable/2023-02-01/updateRuns.json
+  - Microsoft.AzureStackHCI/stable/2023-02-01/updateSummaries.json
+  - Microsoft.AzureStackHCI/stable/2023-02-01/updates.json
+```
+
+### Tag: package-preview-2022-12-15
+
+These settings apply only when `--tag=package-preview-2022-12-15` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-12-15'
+input-file:
+  - Microsoft.AzureStackHCI/preview/2022-12-15-preview/arcSettings.json
+  - Microsoft.AzureStackHCI/preview/2022-12-15-preview/clusters.json
+  - Microsoft.AzureStackHCI/preview/2022-12-15-preview/common.json
+  - Microsoft.AzureStackHCI/preview/2022-12-15-preview/extensions.json
+  - Microsoft.AzureStackHCI/preview/2022-12-15-preview/galleryImages.json
+  - Microsoft.AzureStackHCI/preview/2022-12-15-preview/marketplaceGalleryImages.json
+  - Microsoft.AzureStackHCI/preview/2022-12-15-preview/networkInterfaces.json
+  - Microsoft.AzureStackHCI/preview/2022-12-15-preview/offers.json
+  - Microsoft.AzureStackHCI/preview/2022-12-15-preview/operations.json
+  - Microsoft.AzureStackHCI/preview/2022-12-15-preview/publishers.json
+  - Microsoft.AzureStackHCI/preview/2022-12-15-preview/skus.json
+  - Microsoft.AzureStackHCI/preview/2022-12-15-preview/storageContainers.json
+  - Microsoft.AzureStackHCI/preview/2022-12-15-preview/updateRuns.json
+  - Microsoft.AzureStackHCI/preview/2022-12-15-preview/updateSummaries.json
+  - Microsoft.AzureStackHCI/preview/2022-12-15-preview/updates.json
+  - Microsoft.AzureStackHCI/preview/2022-12-15-preview/virtualHardDisks.json
+  - Microsoft.AzureStackHCI/preview/2022-12-15-preview/virtualMachines.json
+  - Microsoft.AzureStackHCI/preview/2022-12-15-preview/virtualNetworks.json
+```
+
 ### Tag: package-2022-12
 
 These settings apply only when `--tag=package-2022-12` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-12'
+``` yaml $(tag) == 'package-2022-12'
 input-file:
   - Microsoft.AzureStackHCI/stable/2022-12-01/arcSettings.json
   - Microsoft.AzureStackHCI/stable/2022-12-01/clusters.json
@@ -75,7 +137,6 @@ input-file:
   - Microsoft.AzureStackHCI/stable/2022-12-01/updateSummaries.json
   - Microsoft.AzureStackHCI/stable/2022-12-01/updates.json
 ```
-
 
 ### Tag: package-preview-2022-10
 
@@ -130,6 +191,7 @@ input-file:
   - Microsoft.AzureStackHCI/stable/2022-03-01/extensions.json
   - Microsoft.AzureStackHCI/stable/2022-03-01/operations.json
 ```
+
 ### Tag: package-2022-01
 
 These settings apply only when `--tag=package-2022-01` is specified on the command line.
