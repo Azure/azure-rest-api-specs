@@ -179,3 +179,24 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## Powershell
+
+These settings apply only when `--powershell` is specified on the command line.
+
+``` yaml $(powershell)
+directive:
+  - from: swagger-document
+    where: $.definitions.BackupPolicy.properties.differentialBackupHours
+    transform: >-
+      return {
+          "type": "integer",
+          "format": "int32",
+          "enum": [
+            12,
+            24
+          ],
+          "description": "The differential backup interval in hours."
+        }
+```
+
