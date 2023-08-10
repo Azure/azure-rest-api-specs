@@ -2017,6 +2017,10 @@
       "type": "object",
       "description": "Response for Volume Group request.",
       "properties": {
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Properties of VolumeGroup.",
@@ -2028,6 +2032,44 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "Identity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of resource identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID of resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "The identity type.",
+          "enum": [
+            "None",
+            "SystemAssigned",
+            "UserAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": true
+          }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentity"
+          },
+          "description": "Gets or sets a list of key value pairs that describe the set of User Assigned identities that will be used with this volume group. The key is the ARM resource identifier of the identity."
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "description": "Identity for the resource."
     },
     "VolumeGroupList": {
       "type": "object",
@@ -2064,6 +2106,10 @@
           "description": "Type of encryption",
           "$ref": "#/definitions/EncryptionType"
         },
+        "encryptionProperties": {
+          "description": "Encryption Properties describing Key Vault and Identity information",
+          "$ref": "#/definitions/EncryptionProperties"
+        },
         "networkAcls": {
           "$ref": "#/definitions/NetworkRuleSet",
           "description": "A collection of rules governing the accessibility from specific network locations.",
@@ -2081,6 +2127,87 @@
           "description": "The list of Private Endpoint Connections."
         }
       }
+    },
+    "EncryptionProperties": {
+      "properties": {
+        "keyVaultProperties": {
+          "$ref": "#/definitions/KeyVaultProperties",
+          "x-ms-client-name": "KeyVaultProperties",
+          "description": "Properties provided by key vault."
+        },
+        "identity": {
+          "$ref": "#/definitions/EncryptionIdentity",
+          "x-ms-client-name": "EncryptionIdentity",
+          "description": "The identity to be used with service-side encryption at rest."
+        }
+      },
+      "description": "The encryption settings on the volume group."
+    },
+    "EncryptionIdentity": {
+      "properties": {
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "Resource identifier of the UserAssigned identity to be associated with server-side encryption on the volume group.",
+          "x-ms-client-name": "EncryptionUserAssignedIdentity"
+        }
+      },
+      "description": "Encryption identity for the volume group."
+    },
+    "KeyVaultProperties": {
+      "description": "Properties of key vault.",
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "The name of KeyVault key.",
+          "x-ms-client-name": "KeyName"
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "The version of KeyVault key.",
+          "x-ms-client-name": "KeyVersion"
+        },
+        "keyVaultUri": {
+          "type": "string",
+          "description": "The Uri of KeyVault.",
+          "x-ms-client-name": "KeyVaultUri",
+          "format": "uri"
+        },
+        "currentVersionedKeyIdentifier": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The object identifier of the current versioned Key Vault Key in use.",
+          "x-ms-client-name": "CurrentVersionedKeyIdentifier"
+        },
+        "lastKeyRotationTimestamp": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "Timestamp of last rotation of the Key Vault Key.",
+          "x-ms-client-name": "LastKeyRotationTimestamp"
+        },
+        "currentVersionedKeyExpirationTimestamp": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "This is a read only property that represents the expiration time of the current version of the customer managed key used for encryption.",
+          "x-ms-client-name": "CurrentVersionedKeyExpirationTimestamp"
+        }
+      }
+    },
+    "UserAssignedIdentity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of the identity."
+        },
+        "clientId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The client ID of the identity."
+        }
+      },
+      "description": "UserAssignedIdentity for the resource."
     },
     "VolumeGroupUpdate": {
       "type": "object",
@@ -2104,6 +2231,10 @@
         "encryption": {
           "description": "Type of encryption",
           "$ref": "#/definitions/EncryptionType"
+        },
+        "encryptionProperties": {
+          "description": "Encryption Properties describing Key Vault and Identity information",
+          "$ref": "#/definitions/EncryptionProperties"
         },
         "networkAcls": {
           "$ref": "#/definitions/NetworkRuleSet",
@@ -2281,7 +2412,8 @@
       "type": "string",
       "description": "The type of key used to encrypt the data of the disk.",
       "enum": [
-        "EncryptionAtRestWithPlatformKey"
+        "EncryptionAtRestWithPlatformKey",
+        "EncryptionAtRestWithCustomerManagedKey"
       ],
       "x-ms-enum": {
         "name": "EncryptionType",
@@ -2290,6 +2422,10 @@
           {
             "value": "EncryptionAtRestWithPlatformKey",
             "description": "Volume is encrypted at rest with Platform managed key. It is the default encryption type."
+          },
+          {
+            "value": "EncryptionAtRestWithCustomerManagedKey",
+            "description": "Volume is encrypted at rest with Customer managed key that can be changed and revoked by a customer."
           }
         ]
       }

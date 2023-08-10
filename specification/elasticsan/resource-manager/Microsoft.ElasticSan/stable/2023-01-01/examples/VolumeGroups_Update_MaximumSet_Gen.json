@@ -1,19 +1,27 @@
 {
-  "title": "VolumeGroups_Update",
-  "operationId": "VolumeGroups_Update",
   "parameters": {
-    "subscriptionId": "B7699D4B-6230-4C64-990F-5F7EA77D369E",
+    "subscriptionId": "aaaa",
     "resourceGroupName": "rgelasticsan",
-    "elasticSanName": "Hh6b-klD",
-    "volumeGroupName": "8llk_2Pz984M-8x4o_8_c",
+    "elasticSanName": "25v_0_5M1-m-BLx1",
+    "volumeGroupName": "7lh0NpU-CE1dB7_FH8pi_4",
     "parameters": {
       "properties": {
         "protocolType": "Iscsi",
         "encryption": "EncryptionAtRestWithPlatformKey",
+        "encryptionProperties": {
+          "keyVaultProperties": {
+            "keyName": "aaaaaaaaaaaaaaaaaaa",
+            "keyVersion": "a",
+            "keyVaultUri": "https://microsoft.com/a"
+          },
+          "identity": {
+            "userAssignedIdentity": "aaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
         "networkAcls": {
           "virtualNetworkRules": [
             {
-              "id": "oxadrntmswhfmxcqrgwnyldic",
+              "id": "aaaaaaaa",
               "action": "Allow"
             }
           ]
@@ -25,14 +33,38 @@
   "responses": {
     "200": {
       "body": {
+        "identity": {
+          "principalId": "aaaaaaaaaaaaaaaaaaaaaaa",
+          "tenantId": "aaaaaaaaa",
+          "type": "None",
+          "userAssignedIdentities": {
+            "key4939": {
+              "principalId": "aaaaaaaaaaaaaaaaaaaaaaaa",
+              "clientId": "aaaaaaaaaaaaaaaa"
+            }
+          }
+        },
         "properties": {
           "provisioningState": "Invalid",
           "protocolType": "Iscsi",
           "encryption": "EncryptionAtRestWithPlatformKey",
+          "encryptionProperties": {
+            "keyVaultProperties": {
+              "keyName": "aaaaaaaaaaaaaaaaaaa",
+              "keyVersion": "a",
+              "keyVaultUri": "https://microsoft.com/a",
+              "currentVersionedKeyIdentifier": "aaaaaaaaaaaaaa",
+              "lastKeyRotationTimestamp": "2023-08-10T06:42:08.630Z",
+              "currentVersionedKeyExpirationTimestamp": "2023-08-10T06:42:08.630Z"
+            },
+            "identity": {
+              "userAssignedIdentity": "aaaaaaaaaaaaaaaaaaaaa"
+            }
+          },
           "networkAcls": {
             "virtualNetworkRules": [
               {
-                "id": "oxadrntmswhfmxcqrgwnyldic",
+                "id": "aaaaaaaa",
                 "action": "Allow"
               }
             ]
@@ -42,47 +74,47 @@
               "properties": {
                 "provisioningState": "Invalid",
                 "privateEndpoint": {
-                  "id": "uejrplgrpn"
+                  "id": "aaaaaaaaaaaaaaaaaaaaaa"
                 },
                 "privateLinkServiceConnectionState": {
                   "status": "Pending",
-                  "description": "aoszwzvraacanmvttvdu",
-                  "actionsRequired": "xumqyumnuroawvsislahkt"
+                  "description": "aaaaaaaaaaaaaa",
+                  "actionsRequired": "aaaaaaaaaaaaaaaaaaaa"
                 },
                 "groupIds": [
-                  "f"
+                  "aa"
                 ]
               },
-              "id": "kjfemyqaykey",
-              "name": "wwzaupwfk",
-              "type": "ekauadjq",
+              "id": "aaaaaaaaaaaaaa",
+              "name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "type": "aaaaaaaaaaaaaaaaaaaa",
               "systemData": {
-                "createdBy": "ckpopbicuklnbut",
+                "createdBy": "a",
                 "createdByType": "User",
-                "createdAt": "2023-08-08T18:37:36.691Z",
-                "lastModifiedBy": "pbkvncuyveyqxzlnwekksafrb",
+                "createdAt": "2023-08-10T06:42:05.366Z",
+                "lastModifiedBy": "aaaaaaaaaaaaaaaaaaaaaaaaa",
                 "lastModifiedByType": "User",
-                "lastModifiedAt": "2023-08-08T18:37:36.691Z"
+                "lastModifiedAt": "2023-08-10T06:42:05.366Z"
               }
             }
           ]
         },
-        "id": "fsiogrr",
-        "name": "bygpfwtiehsszdzufjrudghjdzi",
-        "type": "eqdj",
+        "id": "aaaaaaaaaaaaaa",
+        "name": "aaaaaaaaaaaaaaaaaaaaaaaaa",
+        "type": "aaaaaaaaaa",
         "systemData": {
-          "createdBy": "ckpopbicuklnbut",
+          "createdBy": "a",
           "createdByType": "User",
-          "createdAt": "2023-08-08T18:37:36.691Z",
-          "lastModifiedBy": "pbkvncuyveyqxzlnwekksafrb",
+          "createdAt": "2023-08-10T06:42:05.366Z",
+          "lastModifiedBy": "aaaaaaaaaaaaaaaaaaaaaaaaa",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2023-08-08T18:37:36.691Z"
+          "lastModifiedAt": "2023-08-10T06:42:05.366Z"
         }
       }
     },
     "202": {
       "headers": {
-        "location": "https://contoso.com/operationstatus"
+        "location": "https://foo.com/operationstatus"
       }
     }
   }
