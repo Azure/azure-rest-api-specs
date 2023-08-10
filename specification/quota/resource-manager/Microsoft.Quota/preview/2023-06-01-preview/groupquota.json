@@ -154,9 +154,6 @@
                 "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                 "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/OperationsStatus"
             }
           },
           "default": {
@@ -246,6 +243,9 @@
     },
     "/providers/Microsoft.Management/managementGroups/{mgId}/providers/Microsoft.Quota/groupQuotas": {
       "get": {
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "tags": [
           "GroupQuotas"
         ],
@@ -284,16 +284,17 @@
     "/providers/Microsoft.Management/managementGroups/{mgId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/subscriptions/{subscriptionId}": {
       "put": {
         "tags": [
-          "GroupQuotas-Subscriptions"
+          "GroupQuotasSubscriptions"
         ],
         "summary": "Adds subscription to the GroupQuotas.",
         "description": "Adds a subscription to GroupQuotas.",
         "operationId": "GroupQuotaSubscriptions_CreateOrUpdate",
         "x-ms-examples": {
           "GroupQuotaSubscriptions_Put_Subscriptions": {
-            "$ref": "./examples/GroupQuotas-Subscriptions/PutGroupQuotasSubscription.json"
+            "$ref": "./examples/GroupQuotasSubscriptions/PutGroupQuotasSubscription.json"
           }
         },
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/MgIdInParameters"
@@ -333,7 +334,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/OperationsStatus"
+              "$ref": "#/definitions/GroupQuotaSubscriptionId"
             }
           },
           "default": {
@@ -346,16 +347,17 @@
       },
       "patch": {
         "tags": [
-          "GroupQuotas-Subscriptions"
+          "GroupQuotasSubscriptions"
         ],
         "summary": "Updates the GroupQuotas with the subscription to add to the subscriptions list.",
         "description": "Updates the GroupQuotas with the subscription to add to the subscriptions list.",
         "operationId": "GroupQuotaSubscriptions_Update",
         "x-ms-examples": {
           "GroupQuotaSubscriptions_Patch_Subscriptions": {
-            "$ref": "./examples/GroupQuotas-Subscriptions/PatchGroupQuotasSubscription.json"
+            "$ref": "./examples/GroupQuotasSubscriptions/PatchGroupQuotasSubscription.json"
           }
         },
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/MgIdInParameters"
@@ -377,6 +379,24 @@
               "$ref": "#/definitions/GroupQuotaSubscriptionId"
             }
           },
+          "202": {
+            "description": "Request Accepted",
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int64"
+              },
+              "Location": {
+                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "Bad Request",
             "schema": {
@@ -387,14 +407,14 @@
       },
       "delete": {
         "tags": [
-          "GroupQuotas-Subscriptions"
+          "GroupQuotasSubscriptions"
         ],
         "summary": "Removes the subscription from GroupQuotas.",
         "description": "Removes the subscription from GroupQuotas.",
         "operationId": "GroupQuotaSubscriptions_Delete",
         "x-ms-examples": {
           "GroupQuotaSubscriptions_Delete_Subscriptions": {
-            "$ref": "./examples/GroupQuotas-Subscriptions/DeleteGroupQuotaSubscriptions.json"
+            "$ref": "./examples/GroupQuotasSubscriptions/DeleteGroupQuotaSubscriptions.json"
           }
         },
         "parameters": [
@@ -428,14 +448,14 @@
       },
       "get": {
         "tags": [
-          "GroupQuotas-Subscriptions"
+          "GroupQuotasSubscriptions"
         ],
         "summary": "Returns the subscriptionId along with its provisioning state for being associated with the GroupQuotasEntity.",
         "description": "Returns the subscriptionId along with its provisioning state for being associated with the GroupQuotasEntity.",
         "operationId": "GroupQuotaSubscriptions_Get",
         "x-ms-examples": {
           "GroupQuotaSubscriptions_Get_Subscriptions": {
-            "$ref": "./examples/GroupQuotas-Subscriptions/GetGroupQuotaSubscriptions.json"
+            "$ref": "./examples/GroupQuotasSubscriptions/GetGroupQuotaSubscriptions.json"
           }
         },
         "parameters": [
@@ -470,15 +490,18 @@
     },
     "/providers/Microsoft.Management/managementGroups/{mgId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/subscriptions": {
       "get": {
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "tags": [
-          "GroupQuotas-Subscriptions"
+          "GroupQuotasSubscriptions"
         ],
         "summary": "Returns a list of the subscriptionIds associated with the GroupQuotasEntity.",
         "description": "Returns a list of the subscriptionIds associated with the GroupQuotasEntity.",
         "operationId": "GroupQuotaSubscriptions_List",
         "x-ms-examples": {
           "GroupQuotaSubscriptions_List_Subscriptions": {
-            "$ref": "./examples/GroupQuotas-Subscriptions/ListGroupQuotaSubscriptions.json"
+            "$ref": "./examples/GroupQuotasSubscriptions/ListGroupQuotaSubscriptions.json"
           }
         },
         "parameters": [
@@ -497,6 +520,92 @@
             "description": "OK.",
             "schema": {
               "$ref": "#/definitions/GroupQuotaSubscriptionIdList"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{mgId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/subscriptionRequests": {
+      "get": {
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          "SubscriptionRequests"
+        ],
+        "summary": "List the status of all requests to add subscriptionIds to the GroupQuotasEntity.",
+        "description": "List API to check the status of a subscriptionId requests by requestId. Request history is maintained for 1 year.",
+        "operationId": "SubscriptionRequests_List",
+        "x-ms-examples": {
+          "SubscriptionRequests_List": {
+            "$ref": "./examples/SubscriptionRequests/SubscriptionRequests_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/MgIdInParameters"
+          },
+          {
+            "$ref": "#/parameters/GroupQuotaNameInParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success, with the details of the subscriptionId request.",
+            "schema": {
+              "$ref": "#/definitions/GroupQuotaSubscriptionIdList"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{mgId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/subscriptionRequests/{requestId}": {
+      "get": {
+        "tags": [
+          "SubscriptionRequests"
+        ],
+        "summary": "Get the status of a single subscriptionId request by requestId.",
+        "description": "Get API to check the status of a subscriptionIds request by requestId.  Use the polling API - OperationsStatus URI specified in Azure-AsyncOperation header field, with retry-after duration in seconds to check the intermediate status. This API provides the finals status with the request details and status.",
+        "operationId": "SubscriptionRequests_Get",
+        "x-ms-examples": {
+          "SubscriptionRequests_Get": {
+            "$ref": "./examples/SubscriptionRequests/SubscriptionRequests_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/MgIdInParameters"
+          },
+          {
+            "$ref": "#/parameters/GroupQuotaNameInParameters"
+          },
+          {
+            "$ref": "#/parameters/RequestIdInParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success, with the details of the subscriptionId request.",
+            "schema": {
+              "$ref": "#/definitions/GroupQuotaSubscriptionId"
             }
           },
           "default": {
@@ -644,9 +753,6 @@
                 "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                 "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/OperationsStatus"
             }
           },
           "default": {
@@ -704,6 +810,9 @@
     },
     "/providers/Microsoft.Management/managementGroups/{mgId}/{resourceProviderScope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/groupQuotaLimits": {
       "get": {
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "tags": [
           "GroupQuotaLimits"
         ],
@@ -747,6 +856,9 @@
     },
     "/providers/Microsoft.Management/managementGroups/{mgId}/{resourceProviderScope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/groupQuotaRequests": {
       "get": {
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "tags": [
           "GroupQuotaLimitsRequests"
         ],
@@ -836,6 +948,9 @@
     },
     "/providers/Microsoft.Management/managementGroups/{mgId}/subscriptions/{subscriptionId}/{resourceProviderScope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/quotaAllocations": {
       "get": {
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "tags": [
           "SubscriptionQuotaAllocation"
         ],
@@ -1024,9 +1139,6 @@
                 "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                 "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/OperationsStatus"
             }
           },
           "default": {
@@ -1136,6 +1248,9 @@
     },
     "/providers/Microsoft.Management/managementGroups/{mgId}/subscriptions/{subscriptionId}/{resourceProviderScope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/quotaAllocationRequests": {
       "get": {
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "tags": [
           "SubscriptionQuotaAllocationRequests"
         ],
@@ -1200,43 +1315,18 @@
         "modelAsString": true
       }
     },
-    "OperationsStatus": {
-      "description": "A long running process operation Status. Based on - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#202-accepted-and-location-headers",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "The operation status identifier. It should match what is used to GET the operation resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "It must match the last segment of the id field, and will typically be a GUID / system generated value."
-        },
-        "type": {
-          "description": "The type.",
-          "type": "string",
-          "readOnly": true
-        },
-        "properties": {
-          "type": "object",
-          "properties": {
-            "provisioningState": {
-              "$ref": "#/definitions/RequestState",
-              "readOnly": true
-            }
-          }
-        }
-      }
-    },
     "AssignedToSubscription": {
       "type": "object",
       "description": "SubscriptionIds and quota allocated to subscriptions from the GroupQuota.",
-      "additionalProperties": {
-        "type": "integer",
-        "format": "int64",
-        "description": "Group Quota assigned to subscription."
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "An Azure subscriptionId."
+        },
+        "quotaAllocated": {
+          "type": "integer",
+          "description": "The amount of quota allocated to this subscriptionId from the GroupQuotasEntity."
+        }
       }
     },
     "AssignedQuotaToSubscriptionList": {
@@ -1414,10 +1504,15 @@
     "SubscriptionGroupQuotaAssignment": {
       "type": "object",
       "description": "MGId the source of groupQuota.",
-      "additionalProperties": {
-        "type": "integer",
-        "format": "int64",
-        "description": "Group Quota assigned to subscription."
+      "properties": {
+        "managementGroupId": {
+          "type": "string",
+          "description": "The management group id of the quota source."
+        },
+        "quotaAllocated": {
+          "type": "integer",
+          "description": "The amount of quota allocated to this subscriptionId from the quota source."
+        }
       }
     },
     "SubscriptionGroupQuotaAssignmentList": {
