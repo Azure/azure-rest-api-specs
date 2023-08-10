@@ -5,18 +5,18 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
 ``` yaml $(python)
-title: HDInsightOnAksMgmtClient
+title: HDinsightContainersMgmtClient
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-namespace: azure.mgmt.hdinsightonaks
-package-name: azure-mgmt-hdinsightonaks
+namespace: azure.mgmt.hdinsight.containers
+package-name: azure-mgmt-hdinsight-containers
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/hdinsight/azure-mgmt-hdinsightonaks/azure/mgmt/hdinsightonaks
+output-folder: $(python-sdks-folder)/hdinsight/azure-mgmt-hdinsight-containers/azure/mgmt/hdinsight/containers
 ```
 
 ``` yaml $(python)
