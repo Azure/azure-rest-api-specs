@@ -574,6 +574,7 @@ enum DefaultAction {
 }
 
 @doc("Network rule set")
+@removed(Versions.v2023_11_15)
 model NetworkAcls {
     @doc("Specifies whether traffic is bypassed for Logging/Metrics/AzureServices")
     bypass: Bypass;
@@ -777,7 +778,7 @@ model EncryptionKeyDetails {
 enum PublicNetworkAccess{
   @doc("Field to enable public access.")
   Enabled;
-  @doc("Field to disable public accesss.")
+  @doc("Field to disable public access.")
   Disabled;
 }
 
