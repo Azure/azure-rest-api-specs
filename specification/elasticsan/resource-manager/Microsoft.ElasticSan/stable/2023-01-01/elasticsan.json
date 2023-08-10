@@ -2034,6 +2034,7 @@
       ]
     },
     "Identity": {
+      "type": "object",
       "properties": {
         "principalId": {
           "readOnly": true,
@@ -2129,6 +2130,7 @@
       }
     },
     "EncryptionProperties": {
+      "type": "object",
       "properties": {
         "keyVaultProperties": {
           "$ref": "#/definitions/KeyVaultProperties",
@@ -2144,6 +2146,7 @@
       "description": "The encryption settings on the volume group."
     },
     "EncryptionIdentity": {
+      "type": "object",
       "properties": {
         "userAssignedIdentity": {
           "type": "string",
@@ -2154,6 +2157,7 @@
       "description": "Encryption identity for the volume group."
     },
     "KeyVaultProperties": {
+      "type": "object",
       "description": "Properties of key vault.",
       "properties": {
         "keyName": {
@@ -2195,6 +2199,7 @@
       }
     },
     "UserAssignedIdentity": {
+      "type": "object",
       "properties": {
         "principalId": {
           "readOnly": true,
@@ -2213,6 +2218,10 @@
       "type": "object",
       "description": "Volume Group request.",
       "properties": {
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Properties of VolumeGroup.",
