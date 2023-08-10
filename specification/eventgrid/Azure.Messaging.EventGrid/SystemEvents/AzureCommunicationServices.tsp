@@ -33,7 +33,7 @@ model AcsIncomingCallCustomContext {
   sipHeaders?: Record<string>;
 
   @doc("Voip Headers for incoming call")
-  viopHeaders?: Record<string>;
+  voipHeaders?: Record<string>;
 }
 
 @doc("Schema of the Data property of an EventGridEvent for an Microsoft.Communication.UserDisconnected event.")
