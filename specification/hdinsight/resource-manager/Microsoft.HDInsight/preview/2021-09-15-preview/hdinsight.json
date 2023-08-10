@@ -1658,10 +1658,7 @@
         "podPrefix": {
           "type": "string",
           "description": "Prefix of the pod names. Pod number will be appended to the prefix. The ingress URLs for the pods will be available at <clusterFqdn>/<sshBasePath>/<prefix>-<number>",
-          "minLength": 1,
-          "maxLength": 58,
-          "pattern": "^[a-z]([-a-z0-9]*[a-z0-9])?$",
-          "default": "pod"
+          "readOnly": true
         }
       }
     },
