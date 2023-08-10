@@ -12885,6 +12885,66 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/vcenters": {
+      "get": {
+        "tags": [
+          "VcenterController"
+        ],
+        "operationId": "VcenterController_ListByVMwareSite",
+        "description": "List Vcenter resources by VMwareSite",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "required": false,
+            "description": "filter query",
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "description": "Site name",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VcenterListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "VcenterController_ListByVMwareSite_MaximumSet_Gen": {
+            "$ref": "./examples/VcenterController_ListByVMwareSite_MaximumSet_Gen.json"
+          },
+          "VcenterController_ListByVMwareSite_MinimumSet_Gen": {
+            "$ref": "./examples/VcenterController_ListByVMwareSite_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/vcenters/{vcenterName}": {
       "get": {
         "tags": [
@@ -21112,6 +21172,29 @@
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "VcenterListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Vcenter"
+          },
+          "description": "The Vcenter items on this page",
+          "x-typespec-name": "Vcenter[]"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a Vcenter list operation.",
+      "required": [
+        "value"
       ]
     },
     "VcenterProperties": {
