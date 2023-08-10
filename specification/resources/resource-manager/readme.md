@@ -89,7 +89,6 @@ These settings apply only when `--tag=package-2023-08` is specified on the comma
 ```yaml $(tag) == 'package-2023-08'
 input-file:
   - Microsoft.Resources/stable/2023-08-01/deploymentScripts.json
-  - Microsoft.Resources/stable/2023-08-01/resources.json
 ```
 ### Tag: package-2022-12
 
