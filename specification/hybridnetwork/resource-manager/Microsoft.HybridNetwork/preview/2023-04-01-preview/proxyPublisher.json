@@ -124,6 +124,66 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/proxyPublishers/{proxyPublisherName}/findConfigurationGroupSchema": {
+      "post": {
+        "tags": [
+          "ProxyPublisher"
+        ],
+        "operationId": "ProxyPublisher_findConfigurationGroupSchema",
+        "description": "Get information about configuration group schema overview.",
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/ProxyPublisherNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FindConfigurationGroupSchemaParameters"
+            },
+            "description": "Payload for execute request post call."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the resulting configuration group schema overview.",
+            "schema": {
+              "$ref": "#/definitions/ProxyPublisherFindConfigurationGroupSchema"
+            }
+          },
+          "202": {
+            "description": "Accepted. The header contains 'Location' header which can be used to monitor the progress of the operation.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a configuration Group Schema overview": {
+            "$ref": "./examples/ProxyPublisher/NetworkFunctionPublisherFindConfigurationGroupSchema.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/proxyPublishers/{proxyPublisherName}/networkFunctionDefinitionGroups": {
       "get": {
         "tags": [
@@ -618,6 +678,31 @@
     }
   },
   "definitions": {
+    "ProxyPublisherFindConfigurationGroupSchema": {
+      "description": "configuration group schemas overview.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "versionState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The configuration group schema version state.",
+          "$ref": "./configurationGroupSchema.json#/definitions/ConfigurationGroupSchemaVersionState"
+        },
+        "schemaDefinition": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "Name and value pairs that define the configuration value. It can be a well formed escaped JSON string."
+        }
+      }
+    },
     "ProxyPublisherOverviewListResult": {
       "type": "object",
       "properties": {
@@ -1078,6 +1163,29 @@
           "description": "Name and value pairs that define the configuration value. It can be a well formed escaped JSON string."
         }
       }
+    },
+    "FindConfigurationGroupSchemaParameters": {
+      "type": "object",
+      "properties": {
+        "publisherScope": {
+          "type": "string",
+          "description": "The name of the publisher scope."
+        },
+        "publisherLocation": {
+          "type": "string",
+          "description": "The name of the publisher location."
+        },
+        "configurationGroupSchemaName": {
+          "type": "string",
+          "description": "The name of the configuration group schema."
+        }
+      },
+      "required": [
+        "publisherScope",
+        "publisherLocation",
+        "configurationGroupSchemaName"
+      ],
+      "description": "Payload for findConfigurationGroupSchema post call."
     }
   }
 }
