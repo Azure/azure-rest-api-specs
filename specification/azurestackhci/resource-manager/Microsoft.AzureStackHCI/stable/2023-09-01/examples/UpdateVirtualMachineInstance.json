@@ -4,10 +4,12 @@
     "api-version": "2023-09-01",
     "virtualMachineInstance": {
       "properties": {
-        "stroageProfile": {
-          "dataDisks": {
-            "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.AzureStackHCI/virtualHardDisks/test-vhd"
-          }
+        "storageProfile": {
+          "dataDisks": [
+            {
+              "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.AzureStackHCI/virtualHardDisks/test-vhd"
+            }
+          ]
         }
       }
     }
@@ -28,9 +30,11 @@
             "imageReference": {
               "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.AzureStackHCI/galleryImages/test-gallery-image"
             },
-            "dataDisks": {
-              "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.AzureStackHCI/virtualHardDisks/test-vhd"
-            }
+            "dataDisks": [
+              {
+                "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.AzureStackHCI/virtualHardDisks/test-vhd"
+              }
+            ]
           },
           "hardwareProfile": {
             "vmSize": "Default"
