@@ -14,6 +14,23 @@ namespace EventGrid;
     twin?: DeviceTwinInfo;
   }
 
+  @doc("Metadata information for the properties JSON document.")
+  model DeviceTwinMetadata {
+    @doc("The ISO8601 timestamp of the last time the properties were updated.")
+    lastUpdated?: string;
+  }
+
+  @doc("A portion of the properties that can be written only by the application back-end, and read by the device.")
+  model DeviceTwinProperties {
+    @doc("Metadata information for the properties JSON document.")
+    metadata?: DeviceTwinMetadata;
+
+    @doc("Version of device twin properties.")
+    version?: float64;
+  }
+
+
+  //THIS IS WHAT IS CAUSING THE ISSUE
   @doc("Information about the device twin, which is the cloud representation of application device metadata.")
   model DeviceTwinInfo {
     @doc("Authentication type used for this device: either SAS, SelfSigned, or CertificateAuthority.")
@@ -37,13 +54,7 @@ namespace EventGrid;
     //TODO: something here needs to change
 
     @doc("Properties JSON element.")
-    properties?: {
-      @doc("A portion of the properties that can be written only by the application back-end, and read by the device.")
-      desired?: DeviceTwinProperties;
-
-      @doc("A portion of the properties that can be written only by the device, and read by the application back-end.")
-      reported?: DeviceTwinProperties;
-    };
+    properties?: JsonProperties;
 
     @doc("Whether the device twin is enabled or disabled.")
     status?: string;
@@ -79,28 +90,13 @@ namespace EventGrid;
   model DeviceTelemetryEventProperties {
     #suppress "@azure-tools/typespec-azure-core/bad-record-type" "The type is object."
     @doc("The content of the message from the device.")
-    body?: Record<unknown>;
+    body?: Record<string>;
 
     @doc("Application properties are user-defined strings that can be added to the message. These fields are optional.")
     properties?: Record<string>;
 
     @doc("System properties help identify contents and source of the messages.")
     systemProperties?: Record<string>;
-  }
-
-  @doc("A portion of the properties that can be written only by the application back-end, and read by the device.")
-  model DeviceTwinProperties {
-    @doc("Metadata information for the properties JSON document.")
-    metadata?: DeviceTwinMetadata;
-
-    @doc("Version of device twin properties.")
-    version?: float64;
-  }
-
-  @doc("Metadata information for the properties JSON document.")
-  model DeviceTwinMetadata {
-    @doc("The ISO8601 timestamp of the last time the properties were updated.")
-    lastUpdated?: string;
   }
 
   @doc("Information about the device connection state event.")
@@ -126,20 +122,22 @@ namespace EventGrid;
   @doc("Event data for Microsoft.Devices.DeviceTelemetry event.")
   model IotHubDeviceTelemetryEventData extends DeviceTelemetryEventProperties {}
 
-  // @doc("Properties JSON element.")
-  // alias JsonProperties = {
-  //   @doc("A portion of the properties that can be written only by the application back-end, and read by the device.")
-  //   desired?: DeviceTwinProperties;
-
-  //   @doc("A portion of the properties that can be written only by the device, and read by the application back-end.")
-  //   reported?: DeviceTwinProperties;
-  // };
-
-  // @doc("The thumbprint is a unique value for the x509 certificate, commonly used to find a particular certificate in a certificate store. The thumbprint is dynamically generated using the SHA1 algorithm, and does not physically exist in the certificate.")
-  alias ThumbPrintValue = {
+  @doc("The thumbprint is a unique value for the x509 certificate, commonly used to find a particular certificate in a certificate store. The thumbprint is dynamically generated using the SHA1 algorithm, and does not physically exist in the certificate.")
+  model ThumbPrintValue {
     @doc("Primary thumbprint for the x509 certificate.")
     primaryThumbprint?: string;
 
     @doc("Secondary thumbprint for the x509 certificate.")
     secondaryThumbprint?: string;
+  };
+
+  @doc("Properties JSON element.")
+  model JsonProperties {
+
+    @doc("A portion of the properties that can be written only by the application back-end, and read by the device.")
+    desired?: DeviceTwinProperties;
+
+    @doc("A portion of the properties that can be written only by the device, and read by the application back-end.")
+    reported?: DeviceTwinProperties;
+
   };
