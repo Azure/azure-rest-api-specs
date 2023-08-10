@@ -153,6 +153,10 @@ model Completions {
   @projectedName("json", "id")
   id: string;
 
+  @doc("The object type, which is always "text_completion".")
+  @projectedName("json", "object")
+  object: string;
+
   @doc("""
     The first timestamp associated with generation activity for this completions response,
     represented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970.
@@ -161,6 +165,10 @@ model Completions {
   @projectedName("java", "createdAt")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   created: utcDateTime;
+
+  @doc("The model used for completion.")
+  @projectedName("json", "model")
+  model: string;
 
   @doc("""
   Content filtering results for zero or more prompts in the request. In a streaming request, 

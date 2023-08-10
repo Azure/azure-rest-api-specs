@@ -221,6 +221,10 @@ model ChatCompletions {
   @projectedName("json", "id")
   id: string;
 
+  @doc("The object type, which is always "chat.completion".")
+  @projectedName("json", "object")
+  object: string;
+
   @doc("""
     The first timestamp associated with generation activity for this completions response,
     represented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970.
@@ -229,6 +233,10 @@ model ChatCompletions {
   @projectedName("java", "createdAt")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   created: utcDateTime;
+
+  @doc("The model used for completion.")
+  @projectedName("json", "model")
+  model: string;
 
   @doc("""
     The collection of completions choices associated with this completions response.
