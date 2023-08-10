@@ -110,7 +110,7 @@ interface SchemaOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Register operation does not use create/replace naming"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard createOrReplace operation does not allow passing in binary body to request."
   @summary("Register new schema")
-  @doc("Register new schema. If schema of specified name does not exist in specified group, schema is created at version 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.\n")
+  @doc("Register new schema. If schema of specified name does not exist in specified group, schema is created at version 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.")
   @route("/$schemaGroups/{groupName}/schemas/{name}")
   @put
   op registerSchema is Azure.Core.Foundations.Operation<
