@@ -1275,7 +1275,10 @@
             "$ref": "./examples/BackupInstanceOperations/TriggerBackup.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/validateForBackup": {
@@ -1348,7 +1351,10 @@
             "$ref": "./examples/BackupInstanceOperations/ValidateForBackup.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}/operationResults/{operationId}": {
@@ -2058,6 +2064,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Trigger Restore": {
             "$ref": "./examples/BackupInstanceOperations/TriggerRestore.json"
@@ -2469,6 +2478,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Validate Restore": {
             "$ref": "./examples/BackupInstanceOperations/ValidateRestore.json"
@@ -4451,6 +4463,11 @@
           "readOnly": true,
           "type": "string"
         },
+        "rehydrationPriority": {
+          "description": "Priority to be used for rehydration",
+          "readOnly": true,
+          "type": "string"
+        },
         "restoreType": {
           "description": "It indicates the sub type of operation i.e. in case of Restore it can be ALR/OLR",
           "readOnly": true,
@@ -4877,46 +4894,54 @@
       ],
       "properties": {
         "snapshotVolumes": {
-          "description": "Gets or sets the volume snapshot property. This property if enabled will take volume snapshots during restore.",
+          "description": "Gets or sets the volume snapshot property. This property if enabled will take volume snapshots during backup.",
           "type": "boolean"
         },
         "includeClusterScopeResources": {
-          "description": "Gets or sets the include cluster resources property. This property if enabled will include cluster scope resources during restore.",
+          "description": "Gets or sets the include cluster resources property. This property if enabled will include cluster scope resources during backup.",
           "type": "boolean"
         },
         "includedNamespaces": {
-          "description": "Gets or sets the include namespaces property. This property sets the namespaces to be included during restore.",
+          "description": "Gets or sets the include namespaces property. This property sets the namespaces to be included during backup.",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "excludedNamespaces": {
-          "description": "Gets or sets the exclude namespaces property. This property sets the namespaces to be excluded during restore.",
+          "description": "Gets or sets the exclude namespaces property. This property sets the namespaces to be excluded during backup.",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "includedResourceTypes": {
-          "description": "Gets or sets the include resource types property. This property sets the resource types to be included during restore.",
+          "description": "Gets or sets the include resource types property. This property sets the resource types to be included during backup.",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "excludedResourceTypes": {
-          "description": "Gets or sets the exclude resource types property. This property sets the resource types to be excluded during restore.",
+          "description": "Gets or sets the exclude resource types property. This property sets the resource types to be excluded during backup.",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "labelSelectors": {
-          "description": "Gets or sets the LabelSelectors property. This property sets the resource with such label selectors to be included during restore.",
+          "description": "Gets or sets the LabelSelectors property. This property sets the resource with such label selectors to be included during backup.",
           "items": {
             "type": "string"
           },
+          "type": "array"
+        },
+        "backupHookReferences": {
+          "description": "Gets or sets the backup hook references. This property sets the hook reference to be executed during backup.",
+          "items": {
+            "$ref": "#/definitions/NamespacedNameResource"
+          },
+          "x-ms-identifiers": [],
           "type": "array"
         }
       },
@@ -5376,6 +5401,21 @@
       "title": "BasePolicyRule",
       "type": "object"
     },
+    "BaseResourceProperties": {
+      "description": "Properties which are specific to datasource/datasourceSets",
+      "required": [
+        "objectType"
+      ],
+      "type": "object",
+      "properties": {
+        "objectType": {
+          "description": "Type of the specific object - used for deserializing",
+          "type": "string",
+          "readOnly": false
+        }
+      },
+      "discriminator": "objectType"
+    },
     "CheckNameAvailabilityRequest": {
       "description": "CheckNameAvailability Request",
       "properties": {
@@ -5663,6 +5703,10 @@
         "resourceUri": {
           "description": "Uri of the resource.",
           "type": "string"
+        },
+        "resourceProperties": {
+          "$ref": "#/definitions/BaseResourceProperties",
+          "description": "Properties specific to data source"
         }
       },
       "required": [
@@ -5701,6 +5745,10 @@
         "resourceUri": {
           "description": "Uri of the resource.",
           "type": "string"
+        },
+        "resourceProperties": {
+          "$ref": "#/definitions/BaseResourceProperties",
+          "description": "Properties specific to data source set"
         }
       },
       "required": [
@@ -5918,7 +5966,7 @@
           "description": "Gets or sets the user assigned identities.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/UserAssignedIdentityDetails"
+            "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/UserAssignedIdentity"
           }
         }
       },
@@ -6849,6 +6897,21 @@
       },
       "x-ms-discriminator-value": "KubernetesStorageClassRestoreCriteria"
     },
+    "NamespacedNameResource": {
+      "description": "Class to refer resources which contains namespace and name",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the resource",
+          "type": "string"
+        },
+        "namespace": {
+          "description": "Namespace in which the resource exists",
+          "type": "string"
+        }
+      },
+      "title": "NamespacedNameResource"
+    },
     "KubernetesPVRestoreCriteria": {
       "description": "Item Level kubernetes persistent volume target info for restore operation",
       "type": "object",
@@ -6950,6 +7013,22 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "restoreHookReferences": {
+          "description": "Gets or sets the restore hook references. This property sets the hook reference to be executed during restore.",
+          "items": {
+            "$ref": "#/definitions/NamespacedNameResource"
+          },
+          "x-ms-identifiers": [],
+          "type": "array"
+        },
+        "stagingResourceGroupId": {
+          "description": "Gets or sets the staging RG Id for creating staging disks and snasphots during restore.",
+          "type": "string"
+        },
+        "stagingStorageAccountId": {
+          "description": "Gets or sets the staging Storage Account Id for creating velero object store data during restore.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "KubernetesClusterRestoreCriteria"
