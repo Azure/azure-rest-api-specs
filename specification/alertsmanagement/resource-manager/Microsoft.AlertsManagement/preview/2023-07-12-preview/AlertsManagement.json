@@ -403,6 +403,9 @@
           "Resolve": {
             "$ref": "./examples/Alerts_ListEnrichments.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -1584,6 +1587,10 @@
           "items": {
             "$ref": "#/definitions/alertEnrichmentResponse"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Request URL that can be used to query next page."
         }
       }
     },
@@ -1625,7 +1632,11 @@
         },
         "status": {
           "type": "string",
-          "description": "The status of the evaluation of the enrichment."
+          "description": "The status of the evaluation of the enrichment.",
+          "enum": [
+            "Succeeded",
+            "Failed"
+          ]
         },
         "errorMessage": {
           "type": "string",
@@ -1717,11 +1728,13 @@
       "properties": {
         "start": {
           "type": "string",
-          "description": "The start evaluation date and time."
+          "description": "The start evaluation date and time in ISO8601 format.",
+          "format": "date-time"
         },
         "end": {
           "type": "string",
-          "description": "The end evaluation date and time."
+          "description": "The end evaluation date and time in ISO8601 format.",
+          "format": "date-time"
         },
         "step": {
           "type": "string",
