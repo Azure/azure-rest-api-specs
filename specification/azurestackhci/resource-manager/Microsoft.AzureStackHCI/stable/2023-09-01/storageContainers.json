@@ -117,7 +117,7 @@
             }
           },
           "200": {
-            "description": "OK",
+            "description": "Updated",
             "schema": {
               "$ref": "#/definitions/StorageContainers"
             }
@@ -167,7 +167,12 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No content"
@@ -222,7 +227,12 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           }
         }
       }
@@ -339,6 +349,7 @@
       "description": "Properties under the storage container resource"
     },
     "StorageContainerStatus": {
+      "type": "object",
       "x-ms-client-flatten": true,
       "readOnly": true,
       "properties": {
@@ -361,6 +372,7 @@
           "description": "Total size of the disk in MB"
         },
         "provisioningStatus": {
+          "type": "object",
           "properties": {
             "operationId": {
               "type": "string",
