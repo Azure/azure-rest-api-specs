@@ -14,6 +14,12 @@ module-name: sdk/resourcemanager/azurestackhci/armazurestackhci
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
+directive:
+# Missing enum value in specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/preview/2022-12-15-preview/updateSummaries.json
+-  from: updateSummaries.json
+   where: $.definitions.PrecheckResult.properties.severity
+   transform: >
+     $['enum'] = ["Critical", "Warning", "Informational", "Hidden"];
 ```
 
 ### Go multi-api
