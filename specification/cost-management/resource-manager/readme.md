@@ -89,6 +89,7 @@ These settings apply only when `--tag=package-preview-2022-10-05` is specified o
 input-file:
   - Microsoft.CostManagement/preview/2022-10-05-preview/costmanagement.json
   - Microsoft.CostManagement/preview/2022-10-05-preview/settings.json
+  - Microsoft.CostManagement/preview/2022-10-05-preview/markup.json
 ```
 
 ### Tag: package-preview-2022-10
