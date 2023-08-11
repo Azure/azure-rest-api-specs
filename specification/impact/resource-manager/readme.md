@@ -16,7 +16,28 @@ To see additional help and options, run:
 
 For other options on installation see [Installing AutoRest](https://aka.ms/autorest/install) on the AutoRest github page.
 
----
+## Suppression
+
+### AutoRest v3 Suppressions
+``` yaml
+suppressions:
+    
+  - code: PathForPutOperation
+    reason: Design forces us to not have resources under resource group but only have under subscription. proxy resources
+    from: impact.json
+    where:
+        - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Impact/workloadImpacts/{workloadImpactName}"]
+        - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Impact/topologyImpacts/{topologyImpactName}"]
+    
+  - code: PutRequestResponseSchemeArm
+    reason: False positive both request and response are same. proxy resources
+    from: impact.json
+    where:
+        - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Impact/workloadImpacts/{workloadImpactName}"].put
+        - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Impact/topologyImpacts/{topologyImpactName}"].put
+  
+```
+
 
 ## Configuration
 
@@ -27,7 +48,16 @@ These are the global settings for the impact.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-02-01-preview
+tag: package-2023-07-01-preview
+```
+
+### Tag: package-2023-07-01-preview
+
+These settings apply only when `--tag=package-2023-07-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-07-01-preview'
+input-file:
+  - Microsoft.Impact/preview/2023-07-01-preview/impact.json
 ```
 
 ### Tag: package-2023-02-01-preview
