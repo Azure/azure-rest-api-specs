@@ -46,11 +46,11 @@ These settings apply only when `--tag=package-2022-10` is specified on the comma
 input-file:
   - Microsoft.EventHub/stable/2022-10/schemaregistry.json
 ```
-### Tag: package-2023-07
+### Tag: package-2023-07-01
 
-These settings apply only when `--tag=package-2023-07` is specified on the command line.
+These settings apply only when `--tag=package-2023-07-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-07'
+```yaml $(tag) == 'package-2023-07-01'
 input-file:
-  - Microsoft.EventHub/stable/2023-07/schemaregistry.json
+  - Microsoft.EventHub/stable/2023-07-01/schemaregistry.json
 ```
