@@ -95,6 +95,9 @@
         "x-ms-examples": {
           "UpdateVirtualNetworkGateway": {
             "$ref": "./examples/VirtualNetworkGatewayUpdate.json"
+          },
+          "UpdateVirtualNetworkScalableGateway": {
+            "$ref": "./examples/VirtualNetworkScalableGatewayUpdate.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -147,6 +150,9 @@
         "x-ms-examples": {
           "GetVirtualNetworkGateway": {
             "$ref": "./examples/VirtualNetworkGatewayGet.json"
+          },
+          "GetVirtualNetworkScalableGateway": {
+            "$ref": "./examples/VirtualNetworkScalableGatewayGet.json"
           }
         }
       },
@@ -2702,6 +2708,10 @@
     },
     "VirtualNetworkGatewayPropertiesFormat": {
       "properties": {
+        "autoScaleConfiguration": {
+          "$ref": "#/definitions/VirtualNetworkGatewayAutoScaleConfiguration",
+          "description": "Autoscale configuration for virutal network gateway"
+        },
         "ipConfigurations": {
           "type": "array",
           "items": {
@@ -2846,6 +2856,27 @@
         }
       },
       "description": "VirtualNetworkGateway properties."
+    },
+    "VirtualNetworkGatewayAutoScaleConfiguration": {
+      "properties": {
+        "bounds": {
+          "$ref": "#/definitions/VirtualNetworkGatewayAutoScaleBounds",
+          "description": "The bounds of the autoscale configuration"
+        }
+      },
+      "description": "Virtual Network Gateway Autoscale Configuration details"
+    },
+    "VirtualNetworkGatewayAutoScaleBounds": {
+      "properties": {
+        "min": {
+          "type": "integer",
+          "description": "Minimum scale Units for Autoscale configuration"
+        },
+        "max": {
+          "type": "integer",
+          "description": "Maximum Scale Units for Autoscale configuration"
+        }
+      }
     },
     "VpnClientRootCertificatePropertiesFormat": {
       "properties": {
