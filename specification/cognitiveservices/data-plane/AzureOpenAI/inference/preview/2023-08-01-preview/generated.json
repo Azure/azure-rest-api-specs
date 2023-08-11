@@ -291,7 +291,8 @@
               }
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/operations/images/{operationId}": {
@@ -719,7 +720,8 @@
         "system",
         "assistant",
         "user",
-        "function"
+        "function",
+        "tool"
       ],
       "x-ms-enum": {
         "name": "ChatRole",
@@ -743,7 +745,12 @@
           {
             "name": "function",
             "value": "function",
-            "description": "The role that provides function results for char completions."
+            "description": "The role that provides function results for chat completions."
+          },
+          {
+            "name": "tool",
+            "value": "tool",
+            "description": "The role that represents extension tool activity within a chat completions operation."
           }
         ]
       }

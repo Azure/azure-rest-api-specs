@@ -22,9 +22,13 @@ enum ChatRole {
   @doc("The role that provides input for chat completions.")
   user: "user",
 
-  @doc("The role that provides function results for char completions.")
+  @doc("The role that provides function results for chat completions.")
   @added(ServiceApiVersions.v2023_07_01_Preview)
   function: "function",
+
+  @doc("The role that represents extension tool activity within a chat completions operation.")
+  @added(ServiceApiVersions.v2023_08_01_Preview)
+  tool: "tool",
 }
 
 @doc("A single, role-attributed message within a chat completion interaction.")
