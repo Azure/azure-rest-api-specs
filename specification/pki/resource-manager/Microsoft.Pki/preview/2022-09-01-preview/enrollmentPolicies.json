@@ -856,10 +856,18 @@
             "readOnly": false
           }
         },
-        "allowAnyExtendedKeyUsage": {
-          "type": "boolean",
+        "extendedKeyUsageMode": {
+          "type": "string",
           "description": "When true the certificate authority (CA) will allow anyExtendedKeyUsage extendedKeyUsage (EKU) in enrolled certificate and not enforce that the issuing CA certificate have a superset of the enrolled certificate EKUs.",
-          "readOnly": false
+          "readOnly": false,
+		  "enum": [
+            "AllowAnyExtendedKeyUsage",
+            "RestrictToIssuingCaExtendedKeyUsage",
+          ],
+          "x-ms-enum": {
+            "name": "Source",
+            "modelAsString": true
+          }
         }
       }
     },
