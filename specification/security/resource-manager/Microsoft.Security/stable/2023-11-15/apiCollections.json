@@ -248,7 +248,7 @@
             }
           },
           "202": {
-            "description": "This indicates a successful response. The Location header contains the URL where the onboarding statuc can be checked."
+            "description": "This indicates a successful response. The Location header contains the URL where the operation status can be checked."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -256,6 +256,10 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       },
       "delete": {
@@ -290,10 +294,10 @@
         ],
         "responses": {
           "200": {
-            "description": "This indicates a successful response. The API collection was successfully offboarded."
+            "description": "This operation completed successfully."
           },
           "204": {
-            "description": "This indicates a successful response. The API collection was successfully offboarded."
+            "description": "This operation completed successfully."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
