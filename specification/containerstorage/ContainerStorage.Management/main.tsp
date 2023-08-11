@@ -14,7 +14,7 @@ using Azure.ResourceManager.Foundations;
 @armProviderNamespace
 @service({
   title: "Azure-ContainerStorageRP",
-  version: "2023-03-01-preview",
+  version: "2023-07-01-preview",
 })
 @doc("Azure Container Storage Resource Provider API.")
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
@@ -27,7 +27,9 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @doc("Pool resource")
 model Pool is TrackedResource<PoolProperties> {
   @doc("Pool Object")
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @minLength(3)
+  @maxLength(253)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$")
   @key("poolName")
   @path
   @segment("pools")
@@ -36,216 +38,174 @@ model Pool is TrackedResource<PoolProperties> {
 
 @doc("Pool Properties")
 model PoolProperties {
-  // @doc("Sku of Pool")
-  // sku: Sku;
-
-  @visibility("read")
   @doc("The status of the last operation.")
+  @visibility("read")
   provisioningState?: ProvisioningState;
 
-  @doc("Type of the Pool: ephemeral, disk, managed, or elasticsan.")
+  @doc("The operational status of the resource")
+  @visibility("read")
+  status?: ResourceOperationalStatus;
+
+  @visibility("read", "create")
+  @maxItems(3)
+  @doc("List of availability zones that resources can be created in.")
+  zones?: Zone[];
+
+  @doc("Resources represent the resources the pool should have.")
+  resources?: Resources;
+
+  @doc("Type of the Pool: ephemeralDisk, azureDisk, or elasticsan.")
   poolType: PoolType;
 
-  @doc("List of availability zones that resources can be created in.")
-  zones: string[];
+  @doc("ReclaimPolicy defines what happens to the backend storage when StoragePool is deleted")
+  @visibility("read", "create")
+  reclaimPolicy?: ReclaimPolicy;
 
-  @doc("Initial capacity of the pool in GiB.")
-  poolCapacityGiB: int64;
+  @doc("List of resources that should have access to the pool. Typically ARM references to AKS clusters or ACI Container Groups. For local and standard this must be a single reference. For ElasticSAN there can be many.")
+  assignments?: Assignment[];
+}
 
-  // @doc("List of boolean feature-flags, e.g. pool/volume auto-expansion, reclaim policy.")
-  // features?: Record<boolean>;
+@doc("Availability Zones")
+enum Zone {
+  @doc("First availability zone.")
+  Zone1: "1",
 
-  @doc("List of resources that should have access to the pool. Typically ARM references to AKS clusters or ACI Container Groups. For local and standard this must be a single reference. For portable there can be many.")
-  assignments: string[];
+  @doc("Second availability zone.")
+  Zone2: "2",
 
-  // Don't include in preview
-  // @doc("Type of encryption. Allowed values: EncryptionAtRestWithPlatformKey.")
-  // encryption: EncryptionType;
+  @doc("Third availability zone.")
+  Zone3: "3",
+}
 
-  @doc("Ephemeral Pool Properties")
-  ephemeralPoolProperties?: EphemeralPoolProperties;
+@doc("Resource Requests for the pool.")
+model Resources {
+  @doc("Requests for capacity for the pool.")
+  requests?: Requests;
+}
 
-  // @doc("Managed Pool Properties")
-  // managedPoolProperties?: ManagedPoolProperties;
+@doc("Requests for capacity for the pool.")
+model Requests {
+  @doc("Requested capacity of the pool in GiB.")
+  @minValue(1024)
+  @maxValue(65536)
+  storage?: int64 = 1024;
+}
 
+@doc("Type of the Pool: ephemeralDisk, azureDisk, or elasticsan")
+model PoolType {
   @doc("Disk Pool Properties")
-  diskPoolProperties?: DiskPoolProperties;
+  azureDisk?: AzureDisk;
 
   @doc("Elastic San Pool Properties")
-  elasticSanPoolProperties: ElasticSanPoolProperties;
+  elasticSan?: ElasticSan;
+
+  @doc("Ephemeral Pool Properties")
+  ephemeralDisk?: EphemeralDisk;
 }
 
-@doc("Ephemeral Pool Properties")
-model EphemeralPoolProperties {
-  // Post preview
-  // @doc("The number of data copies. Default 3.")
-  // replicas?: int64 = 3;
+@doc("Reclaim policy")
+enum ReclaimPolicy {
+  @doc("Delete resource")
+  Delete,
 
-  @doc("Template name or KV pairs containing disk selection criteria, e.g. model=\"Microsoft NVMe Direct Disk\" to match all Lsv2 NVMe disks.")
-  diskSelector: string[];
+  @doc("Retain resource")
+  Retain,
+}
 
+@doc("Model for disk for that pool is using")
+model Disk {
+  @doc("ID is the disk identifier visible to the OS. It is typically the WWN or disk ID in formats such as eui.e8238fa6bf530001001b448b45263379 or 0x5002cf6cbc5dd460")
+  id: string;
+
+  @doc("Reference is the location of the disk in an external system.")
+  reference: string;
+}
+
+@doc("Properties shared between azureDisk and elasticSan")
+model ProvisionedPoolProperties<SkuType> {
+  @visibility("read")
+  @doc("Managed resource group for the pool.")
+  resourceGroup?: string;
+
+  @visibility("read", "create")
+  @doc("Sku name")
+  skuName?: SkuType;
+
+  @doc("Encryption specifies the encryption configuration for the Azure Disk pool")
+  @visibility("read", "create")
+  encryption?: Encryption;
+}
+
+@doc("Properties shared between the azureDisk and ephemeralDisk")
+model DiskPoolProperties {
   @doc("Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying multiple disks (same syntax as tags).")
-  disks: string[];
-
-  @doc("Consent to format the local disks.")
-  diskFormat?: boolean = false;
+  disks?: Disk[];
 }
 
-@doc("Managed Pool Properties")
-model ManagedPoolProperties {}
+@doc("Azure Disk Pool Properties")
+model AzureDisk {
+  ...ProvisionedPoolProperties<AzureDiskSkuName>;
+  ...DiskPoolProperties;
+}
+
+@doc("SKU of the underlying managed disk")
+enum AzureDiskSkuName {
+  @doc("Premium_LRS SKU")
+  Premium_LRS,
+
+  @doc("Standard_LRS SKU")
+  Standard_LRS,
+
+  @doc("StandardSSD_LRS SKU")
+  StandardSSD_LRS,
+
+  @doc("UltraSSD_LRS SKU")
+  UltraSSD_LRS,
+
+  @doc("Premium_ZRS SKU")
+  Premium_ZRS,
+
+  @doc("PremiumV2_LRS SKU")
+  PremiumV2_LRS,
+
+  @doc("StandardSSD_ZRS SKU")
+  StandardSSD_ZRS,
+}
+
+@doc("Encryption key properties for the pool.")
+model Encryption {
+  @doc("The name of the key vault key.")
+  keyName: string;
+
+  @doc("The URI of the key vault.")
+  keyVaultUri: string;
+
+  ...ManagedServiceIdentity;
+}
 
 @doc("Elastic San Pool Properties")
-model ElasticSanPoolProperties {
-  @doc("Name of an existing SAN.")
-  sanName: string;
-
-  @doc("Resource group of an existing SAN.")
-  resourceGroup: string;
-
-  @doc("Volume group of an existing SAN.")
-  volumeGroup: string;
-}
-
-@doc("Disk Pool Properties")
-model DiskPoolProperties {
-  // Don't include in preview
-  // @doc("Name of the CSI provisioner, e.g. disk.csi.azure.com")
-  // csiProvisioner?: string;
-
-  @doc("List of KV pairs to set in StorageClass to configure CSI driver.")
-  csiParams?: Record<string>;
-
-  // @doc("Initial capacity of disks. Application volumes must fit within single disks.")
-  // diskCapacityRequest: int64;
-
-  @doc("Maximum capacity of the volumes in GiB the user intends to create. Default 512.")
-  maxVolumeCapacityGiB?: int64 = 512;
-
-  @doc("Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying multiple disks (same syntax as tags).")
-  disks?: string[];
-}
-
-@doc("Sku definition")
-model Sku {
-  @doc("Sku name")
-  name: SkuName;
-
-  @doc("Sku Account Tier")
-  tier: AccountTier;
+model ElasticSan {
+  ...ProvisionedPoolProperties<ElasticSanSkuName>;
 }
 
 /** Sku Name enum type */
-enum SkuName {
-  /** Invalid Sku */
-  Invalid,
-  /** Premium_LRS Sku */
+@doc("ElasticSAN SKUs")
+enum ElasticSanSkuName {
+  @doc("Premium_LRS SKU")
   Premium_LRS,
-  /** Premium_ZRS Sku */
+
+  @doc("Premium_ZRS SKU")
   Premium_ZRS,
 }
 
-/** Account Tier */
-enum AccountTier {
-  /** Invalid Account Tier */
-  Invalid,
-  /** Standard Tier */
-  Standard,
-  /** Premium Tier */
-  Premium,
-  /** Ultra Tier */
-  Ultra,
-}
+@doc("Ephemeral Disk Pool Properties")
+model EphemeralDisk {
+  @doc("The number of data copies. Default 3.")
+  @minValue(1)
+  @maxValue(3)
+  replicas?: int64 = 3;
 
-@doc("Network Rule Set definition")
-model NetworkRuleSet {
-  @doc("Default action")
-  defaultAction: Action;
-
-  @doc("Virtual network rules")
-  virtualNetworkRules: VirtualNetworkRule[];
-}
-
-@doc("Virtual Network Rule definition")
-model VirtualNetworkRule {
-  @doc("Action of rule")
-  action?: Action = Action.Allow;
-
-  @doc("Id of rule")
-  id: string;
-}
-
-/** Action Enum */
-enum Action {
-  /** Deny Action */
-  Deny,
-  /** Allow Action */
-  Allow,
-}
-
-/** Protocol Type */
-enum ProtocolType {
-  /** No Protocol */
-  None,
-  /** iSCSI protocol */
-  iSCSI,
-}
-
-/** Encryption Type */
-enum EncryptionType {
-  /** Encryption at rest with platform key */
-  EncryptionAtRestWithPlatformKey,
-}
-
-/** Pool Type */
-enum PoolType {
-  /** Ephemeral Pool */
-  Ephemeral: 1,
-  /** Disk Pool */
-  Disk: 2,
-  /** Managed Pool */
-  Managed: 3,
-  /** ElasticSan Pool */
-  ElasticSan: 4,
-}
-
-/** Volume binding mode */
-enum VolumeBindingMode {
-  /** Immediate binding */
-  Immediate,
-  /** Wait for customer to bind */
-  WaitFirstForCustomer,
-}
-
-@doc("Disk Properties Model")
-model DiskProperties {
-  @doc("Reference to Managed Disk")
-  resourceId: string;
-
-  @doc("Manufacturer Disk ID")
-  wwn: string;
-
-  @doc("Capacity of disk in GiB")
-  capacityGiB: int64;
-
-  @doc("Type of disk")
-  diskType: DiskType;
-
-  @doc("SKU or Manufacturer type/name")
-  displayName: string;
-
-  @doc("Name of the node disk is attached on")
-  nodeName: string;
-
-  @doc("Used to import SSD to discover WWN")
-  devicePath: string;
-}
-
-/** Disk Type */
-enum DiskType {
-  /** Local Disk Type */
-  Local,
-  /** Managed Disk Type */
-  Managed,
+  ...DiskPoolProperties;
 }
 
 @doc("Provisioning state of the resource.")
@@ -266,6 +226,27 @@ enum ProvisioningState {
   Accepted,
 }
 
+@doc("Status of the resource")
+model ResourceOperationalStatus {
+  @doc("state of the resource")
+  state: ResourceOperationStatusState;
+
+  @doc("Reason for state.")
+  message?: string;
+}
+
+@doc("State of the resource.")
+enum ResourceOperationStatusState {
+  @doc("The resource is pending.")
+  Pending,
+
+  @doc("The resource is available.")
+  Available,
+
+  @doc("The resource is unavailable.")
+  Unavailable,
+}
+
 // END POOL
 
 // START VOLUME
@@ -273,7 +254,9 @@ enum ProvisioningState {
 @parentResource(Pool)
 model Volume is ProxyResource<VolumeProperties> {
   @doc("Volume Resource")
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @minLength(3)
+  @maxLength(253)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$")
   @key("volumeName")
   @path
   @segment("volumes")
@@ -286,84 +269,40 @@ model VolumeProperties {
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
-  // Will not have features enabled by these flags for preview
-  // @doc("List of boolean feature-flags, e.g. pool/volume auto-expansion, reclaim policy.")
-  // features?: Record<boolean>;
+  @doc("The status of the resource.")
+  @visibility("read")
+  status?: ResourceOperationalStatus;
 
   @doc("String KV pairs indicating labels")
   labels: Record<string>;
 
   @doc("Requested capacity in GiB")
+  @maxValue(65536)
+  @minValue(1)
   capacityGiB: int64;
 
-  @doc("Indicates how the volume should be attached")
-  volumeMode: VolumeMode;
-
-  // Set default to RWO in RP and pass it through
-  // @doc("Indicates how the volume can be accessed")
-  // accessMode: AccessMode;
-
-  // Don't support replication for preview
-  // @doc("Number of replicas")
-  // replicas: int64;
-
-  @doc("Reclaim Policy, Delete or Retain")
-  reclaimPolicy: ReclaimPolicy;
-
-  @doc("List of string mount options")
-  mountOptions: string[];
-
-  // Don't support for preview
-  // @doc("Placement properties")
-  // placementProperties: PlacementProperties;
+  @visibility("read")
+  @doc("Properties of the volume")
+  volumeType?: VolumeType;
 }
 
-/** Storage volume mode */
-enum VolumeMode {
-  /** FileSystem volume mode */
-  Filesystem,
-  /** Raw volume mode */
-  Raw,
+@doc("Properties of the volume")
+model VolumeType {
+  @visibility("read")
+  @doc("Properties of the ElasticSAN iSCSI target")
+  elasticSan?: ElasticSanVolumeProperties;
 }
 
-/** Access mode */
-enum AccessMode {
-  /** Read Write Once */
-  ReadWriteOnce,
-  /** Read Only Many */
-  ReadOnlyMany,
-  /** Read Write Many */
-  ReadWriteMany,
-  /** Shared Read Write Once Pod */
-  ReadWriteOncePod,
-}
+@doc("Properties of the ElasticSAN iSCSI target")
+model ElasticSanVolumeProperties {
+  @doc("iSCSI Target IQN (iSCSI Qualified Name); example: \"iqn.2005-03.org.iscsi:server\"")
+  targetIqn: string;
 
-/** Reclaim Policy */
-enum ReclaimPolicy {
-  /** Delete resource */
-  Delete,
-  /** Retain resource */
-  Retain,
-}
+  @doc("iSCSI Target Portal Host Name")
+  targetPortalHostname: string;
 
-@doc("Placement Properties Model")
-model PlacementProperties {
-  @doc("Affinity label selector")
-  affinityLabelSelector: string;
-
-  @doc("Anti affinity label selector")
-  antiAffinityLabelSelector: string;
-
-  @doc("When unsatisfiable")
-  whenUnsatisfiable: WhenUnsatisfiable;
-}
-
-/** When request unsatisfiable */
-enum WhenUnsatisfiable {
-  /** Do not schedule */
-  DoNotSchedule,
-  /** Schedule anyway */
-  ScheduleAnyway,
+  @doc("iSCSI Target Portal Port")
+  targetPortalPort: int32;
 }
 
 // END VOLUME
@@ -371,45 +310,94 @@ enum WhenUnsatisfiable {
 // START VOLUME SNAPSHOT
 
 @parentResource(Pool)
-model VolumeSnapshot is ProxyResource<VolumeSnapshotProperties> {
+model Snapshot is ProxyResource<SnapshotProperties> {
   @doc("Volume Snapshot Resource")
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
-  @key("volumeSnapshotName")
+  @minLength(3)
+  @maxLength(253)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$")
+  @key("snapshotName")
   @path
-  @segment("volumeSnapshots")
+  @segment("snapshots")
   name: string;
 }
 
 @doc("Volume Snapshot Properties")
-model VolumeSnapshotProperties {
+model SnapshotProperties {
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
-  // Don't include in preview
-  // @doc("List of boolean feature-flags, e.g. pool/volume auto-expansion, reclaim policy.")
-  // features?: Record<boolean>;
+  @doc("The status of the resource.")
+  @visibility("read")
+  status?: ResourceOperationalStatus;
 
   @doc("Reference to the source volume")
+  @minLength(3)
+  @maxLength(253)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$")
+  @visibility("read", "create")
   source: string;
-
-  @doc("Indicates how the volumes created from the snapshot should be attached")
-  volumeMode: VolumeMode;
-
-  @doc("Reclaim Policy, Delete or Retain")
-  reclaimPolicy: ReclaimPolicy;
-
-  @doc("List of string mount options")
-  mountOptions: string[];
 }
 
 // END VOLUME SNAPSHOT
 
+// START ASSIGNMENT
+
+@doc("Status of the assignment resource")
+model AssignmentStatus {
+  @doc("State of the assignment resource")
+  state: AssignmentStatusState;
+
+  @doc("Reason for the status")
+  message?: string;
+}
+
+@doc("Status of the assignment resource")
+enum AssignmentStatusState {
+  @doc("The assignment of the pool to the resource is in progress")
+  Assigning,
+
+  @doc("The assignment to the pool was successful.")
+  Assigned,
+
+  @doc("The pool is being unassigned.")
+  Unassigning,
+
+  @doc("The operation of assigning or unassigning the pool failed.")
+  Failed,
+}
+
+scalar AssignmentId
+  extends Azure.ResourceManager.ResourceIdentifier<[
+    {
+      type: "Microsoft.ContainerService/managedClusters",
+    }
+  ]>;
+
+@doc("Assignment Properties")
+model Assignment {
+  @visibility("read")
+  @doc("Indicates if the assignment is in a usable state")
+  status?: AssignmentStatus;
+
+  @visibility("read", "create")
+  @doc("Resource id for the assigned resource")
+  id: AssignmentId;
+}
+
+// END ASSIGNMENT
+
 @armResourceOperations
 interface Pools {
   get is ArmResourceRead<Pool>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Pool>;
-  delete is ArmResourceDeleteAsync<Pool>;
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "location",
+    }
+  )
+  createOrUpdate is ArmResourceCreateOrUpdate2Async<Pool>;
+  delete is ArmResourceDelete2Async<Pool>;
   update is ArmResourcePatchAsync<Pool, PoolProperties>;
   listByResourceGroup is ArmResourceListByParent<Pool>;
   listBySubscription is ArmListBySubscription<Pool>;
@@ -418,24 +406,78 @@ interface Pools {
 @armResourceOperations
 interface Volumes {
   get is ArmResourceRead<Volume>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Volume>;
-  delete is ArmResourceDeleteAsync<Volume>;
-  update is ArmResourcePatchAsync<Volume, VolumeProperties>;
-  listByResourceGroup is ArmResourceListByParent<Volume>;
-}
-
-@armResourceOperations
-interface VolumeSnapshots {
-  get is ArmResourceRead<VolumeSnapshot>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<VolumeSnapshot>;
-  delete is ArmResourceDeleteAsync<VolumeSnapshot>;
-
   @extension(
     "x-ms-long-running-operation-options",
     {
-      `final-state-via`: "azure-async-operation",
+      `final-state-via`: "location",
     }
   )
-  update is ArmResourcePatchAsync<VolumeSnapshot, VolumeSnapshotProperties>;
-  listByResourceGroup is ArmResourceListByParent<VolumeSnapshot>;
+  createOrUpdate is ArmResourceCreateOrUpdate2Async<Volume>;
+  delete is ArmResourceDelete2Async<Volume>;
+  update is ArmResourcePatchAsync<Volume, VolumeProperties>;
+  listByPool is ArmResourceListByParent<Volume>;
 }
+
+@armResourceOperations
+interface Snapshots {
+  get is ArmResourceRead<Snapshot>;
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "location",
+    }
+  )
+  createOrUpdate is ArmResourceCreateOrUpdate2Async<Snapshot>;
+  delete is ArmResourceDelete2Async<Snapshot>;
+  listByPool is ArmResourceListByParent<Snapshot>;
+}
+
+/** Compliant create or update template */
+/**
+ * A long-running resource CreateOrUpdate (PUT)
+ * @template TResource the resource being patched
+ * @template TBaseParameters Optional. Allows overriding the operation parameters
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-outside-interface" "This is a valid template"
+@autoRoute
+@doc("Create a {name}", TResource)
+@extension("x-ms-long-running-operation", true)
+@extension(
+  "x-ms-long-running-operation-options",
+  {
+    `final-state-via`: "azure-async-operation",
+  }
+)
+@armResourceCreateOrUpdate(TResource)
+@put
+op ArmResourceCreateOrUpdate2Async<
+  TResource extends Azure.ResourceManager.Foundations.ArmResource,
+  TBaseParameters = Azure.ResourceManager.Foundations.BaseParameters<TResource>
+>(
+  ...ResourceInstanceParameters<TResource, TBaseParameters>,
+
+  @doc("Resource create parameters.")
+  @body
+  resource: TResource,
+): ArmUpdatedResponse<TResource> | ArmCreatedResponse<TResource> | ErrorResponse;
+
+@doc("ARM update operation completed successfully")
+model ArmUpdatedResponse<TResource extends Azure.ResourceManager.Foundations.ArmResource>
+  is ArmResponse<TResource>;
+
+/** Compliant create or update template */
+/**
+/**
+ * @dev Delete a resource asynchronously.  DEPRECATED: Use ArmResourceDeleteWithoutOkAsync instead
+ * @template TResource The resource being deleted
+ * @template TBaseParameters Optional. Allows overriding the parameters for the operation
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-outside-interface" "This is a valid template"
+op ArmResourceDelete2Async<
+  TResource extends ArmResource,
+  TBaseParameters = BaseParameters<TResource>
+> is ArmResourceDeleteAsyncBase<
+  TResource,
+  ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+  TBaseParameters
+>;

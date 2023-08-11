@@ -8,9 +8,19 @@ pr: none
 
 jobs:
 - job: Validate_All_Specs
+
+  strategy:
+    matrix:
+      Linux:
+        Pool: azsdk-pool-mms-ubuntu-2204-general
+        OsVmImage: ubuntu-22.04
+      Windows:
+        Pool: azsdk-pool-mms-win-2022-general
+        OsVmImage: windows-2022
+
   pool:
-    name: azsdk-pool-mms-ubuntu-2204-general
-    vmImage: ubuntu-22.04
+    name: $(Pool)
+    vmImage: $(OSVmImage)
 
   steps:
   - script: npm ci

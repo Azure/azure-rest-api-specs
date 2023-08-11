@@ -106,26 +106,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Paged collection of TextBlocklist items",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "The TextBlocklist items on this page",
-                  "items": {
-                    "$ref": "#/definitions/TextBlocklist"
-                  },
-                  "x-ms-identifiers": []
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "The link to the next page of items"
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/PagedTextBlocklist"
             }
           },
           "default": {
@@ -437,26 +418,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Paged collection of TextBlockItem items",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "The TextBlockItem items on this page",
-                  "items": {
-                    "$ref": "#/definitions/TextBlockItem"
-                  },
-                  "x-ms-identifiers": []
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "The link to the next page of items"
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/PagedTextBlockItem"
             }
           },
           "default": {
@@ -828,6 +790,50 @@
           "description": "The blob url of image."
         }
       }
+    },
+    "PagedTextBlockItem": {
+      "type": "object",
+      "description": "Paged collection of TextBlockItem items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TextBlockItem items on this page",
+          "items": {
+            "$ref": "#/definitions/TextBlockItem"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedTextBlocklist": {
+      "type": "object",
+      "description": "Paged collection of TextBlocklist items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TextBlocklist items on this page",
+          "items": {
+            "$ref": "#/definitions/TextBlocklist"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "RemoveBlockItemsOptions": {
       "type": "object",
