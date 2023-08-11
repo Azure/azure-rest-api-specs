@@ -40,7 +40,7 @@ These are the global settings for the ApplicationInsights API.
 title: ApplicationInsightsManagementClient
 description: Composite Swagger for Application Insights Management Client
 openapi-type: arm
-tag: package-2022-12-09-only
+tag: package-2023-06
 ```
 
 ### Suppression
@@ -249,6 +249,15 @@ directive:
     reason: Pre-existing error in another API (i.e. this PR did not introduce this issue).
 ```
 
+
+### Tag: package-2023-06
+
+These settings apply only when `--tag=package-2023-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-06'
+input-file:
+  - Microsoft.Insights/stable/2023-06-01/workbooks_API.json
+```
 ### Tag: package-2022-12-09-only
 
 These settings apply only when `--tag=package-2022-12-09-only` is specified on the command line.
