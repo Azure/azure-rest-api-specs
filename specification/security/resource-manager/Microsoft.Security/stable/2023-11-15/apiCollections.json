@@ -247,12 +247,24 @@
               "$ref": "#/definitions/ApiCollectionResponse"
             }
           },
+          "202": {
+            "description": "This indicates a successful response. The Location header contains the URL where the operation status can be checked.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       },
       "delete": {
