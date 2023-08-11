@@ -13,16 +13,16 @@ namespace EventGrid;
     partitionId?: string;
 
     @doc("The file size.")
-    sizeInBytes?: int64;
+    sizeInBytes?: int32;
 
     @doc("The number of events in the file.")
-    eventCount?: int64;
+    eventCount?: int32;
 
     @doc("The smallest sequence number from the queue.")
-    firstSequenceNumber?: int64;
+    firstSequenceNumber?: int32;
 
     @doc("The last sequence number from the queue.")
-    lastSequenceNumber?: int64;
+    lastSequenceNumber?: int32;
 
     @doc("The first time from the queue.")
     firstEnqueueTime?: utcDateTime;
