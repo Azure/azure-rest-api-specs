@@ -473,7 +473,7 @@
             "type": "string"
           },
           "x-cadl-name": "string[]",
-          "description": "The access mode: [RWO, RWX] or [RWO]",
+          "description": "The access mode: [ReadWriteOnce, ReadWriteMany] or [ReadWriteOnce]",
           "readOnly": true
         },
         "dataResilience": {
@@ -679,7 +679,8 @@
       "enum": [
         "Native",
         "RWX",
-        "S3"
+        "S3",
+        "Blob"
       ],
       "x-ms-enum": {
         "name": "SCType",
@@ -710,6 +711,16 @@
         "region": {
           "type": "string",
           "description": "[S3] S3 Region"
+        },
+        "azureStorageAccountName": {
+          "type": "string",
+          "description": "[Blob] Azure Storage Account Name"
+        },
+        "azureStorageAccountKey": {
+          "type": "string",
+          "description": "[Blob] Azure Storage Account Key",
+          "format": "password",
+          "x-ms-secret": true
         }
       },
       "description": "The properties to create new ManagedStorageClass"

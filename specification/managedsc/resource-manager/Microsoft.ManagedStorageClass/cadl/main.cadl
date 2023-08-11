@@ -50,6 +50,7 @@ enum SCType {
   Native,
   RWX,
   S3,
+  Blob,
 }
 
 @doc("Data resilience tier of a storage class")
@@ -82,6 +83,13 @@ model TemplateParameterProperties {
 
     @doc("[S3] S3 Region")
     region?: string;
+
+    @doc("[Blob] Azure Storage Account Name")
+    azureStorageAccountName?: string;
+
+    @doc("[Blob] Azure Storage Account Key")
+    @secret
+    azureStorageAccountKey?: string;
 }
 
 @doc("The status of the ManagedStorageClass")
@@ -109,7 +117,7 @@ model ManagedStorageClassProperties {
     @visibility("read")
     volumeBindingMode?: string;
 
-    @doc("The access mode: [RWO, RWX] or [RWO]")
+    @doc("The access mode: [ReadWriteOnce, ReadWriteMany] or [ReadWriteOnce]")
     @visibility("read")
     accessMode?: string[];
 
