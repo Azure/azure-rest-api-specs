@@ -57,7 +57,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "This indicates a successful response. The response contains the list of API collections.",
             "schema": {
               "$ref": "#/definitions/ApiCollectionResponseList"
             }
@@ -100,7 +100,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "This indicates a successful response. The response contains the list of API collections.",
             "schema": {
               "$ref": "#/definitions/ApiCollectionResponseList"
             }
@@ -147,7 +147,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "This indicates a successful response. The response contains the list of API collections.",
             "schema": {
               "$ref": "#/definitions/ApiCollectionResponseList"
             }
@@ -197,7 +197,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "This indicates a successful response. The response contains the properties of the API collection.",
             "schema": {
               "$ref": "#/definitions/ApiCollectionResponse"
             }
@@ -242,10 +242,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "This indicates a successful response. The response contains the properties of the API collection.",
             "schema": {
               "$ref": "#/definitions/ApiCollectionResponse"
             }
+          },
+          "202": {
+            "description": "This indicates a successful response. The Location header contains the URL where the onboarding statuc can be checked."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -287,10 +290,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "This indicates a successful response. The API collection was successfully offboarded."
           },
           "204": {
-            "description": "NoContent"
+            "description": "This indicates a successful response. The API collection was successfully offboarded."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
