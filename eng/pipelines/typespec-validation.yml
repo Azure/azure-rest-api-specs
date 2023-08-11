@@ -12,7 +12,7 @@ jobs:
     vmImage: ubuntu-22.04
 
   steps:
-  - script: git merge origin/main
+  - script: git -c user.name="azure-sdk" -c user.email="azuresdk@microsoft.com" merge origin/main
     displayName: git merge origin/main
 
   # Remove lockfile to update all packages to latest "next" version
