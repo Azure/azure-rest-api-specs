@@ -860,6 +860,110 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/getAllowedVmSizesForResize": {
+      "post": {
+        "tags": [
+          "OperationalizationClusters",
+          "MachineLearningComputes"
+        ],
+        "operationId": "Compute_getAllowedResizeSizes",
+        "description": "Returns supported virtual machine sizes for resize",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ComputeNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineSizeListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List VM Sizes": {
+            "$ref": "./examples/Compute/getAllowedVMSizesForResize.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/resize": {
+      "post": {
+        "tags": [
+          "OperationalizationClusters",
+          "MachineLearningComputes"
+        ],
+        "operationId": "Compute_Resize",
+        "description": "Updates the size of a Compute Instance.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ComputeNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "description": "The object for updating VM size setting of specified Compute Instance.",
+            "schema": {
+              "$ref": "#/definitions/ResizeSchema"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Compute resize initiated.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List VM Sizes": {
+            "$ref": "./examples/Compute/resize.json"
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -878,6 +982,7 @@
       "in": "path",
       "type": "string",
       "required": true,
+      "pattern": "^[a-zA-Z](?![a-zA-Z0-9-]*-\\d+$)[a-zA-Z0-9\\-]{2,23}$",
       "x-ms-parameter-location": "method"
     },
     "AsyncOperationIdParameter": {
@@ -2005,6 +2110,20 @@
             "modelAsString": true
           }
         },
+        "enableOSPatching": {
+          "type": "boolean",
+          "default": false,
+          "title": "Enable Auto OS Patching.",
+          "description": "Enable Auto OS Patching. Possible values are: true, false.",
+          "x-nullable": true
+        },
+        "releaseQuotaOnStop": {
+          "type": "boolean",
+          "default": false,
+          "title": "Release quota if compute instance stopped.",
+          "description": "Release quota if compute instance stopped. Possible values are: true - release quota if compute instance stopped. false - don't release quota when compute instance stopped.",
+          "x-nullable": true
+        },
         "personalComputeInstanceSettings": {
           "title": "Personal Compute Instance settings.",
           "description": "Settings for a personal compute instance.",
@@ -2774,6 +2893,44 @@
         "isLatestOsImageVersion": {
           "type": "boolean",
           "description": "Specifies whether this compute instance is running on the latest operating system image."
+        },
+        "osPatchingStatus": {
+          "readOnly": true,
+          "description": "Metadata about the os patching.",
+          "$ref": "#/definitions/OsPatchingStatus"
+        }
+      }
+    },
+    "OsPatchingStatus": {
+      "type": "object",
+      "description": "Returns metadata about the os patching.",
+      "properties": {
+        "patchStatus": {
+          "type": "string",
+          "description": "The os patching status.",
+          "enum": [
+            "CompletedWithWarnings",
+            "Failed",
+            "InProgress",
+            "Succeeded",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "PatchStatus",
+            "modelAsString": true
+          }
+        },
+        "latestPatchTime": {
+          "type": "string",
+          "description": "Time of the latest os patching."
+        },
+        "rebootPending": {
+          "type": "boolean",
+          "description": "Specifies whether this compute instance is pending for reboot to finish os patching."
+        },
+        "scheduledRebootTime": {
+          "type": "string",
+          "description": "Time of scheduled reboot."
         }
       }
     },
@@ -3079,6 +3236,7 @@
         "Deleting",
         "Running",
         "Restarting",
+        "Resizing",
         "JobRunning",
         "SettingUp",
         "SetupFailed",
@@ -3107,6 +3265,7 @@
             "Start",
             "Stop",
             "Restart",
+            "Resize",
             "Reimage",
             "Delete"
           ],
@@ -3130,6 +3289,7 @@
             "StartFailed",
             "StopFailed",
             "RestartFailed",
+            "ResizeFailed",
             "ReimageFailed",
             "DeleteFailed"
           ],
@@ -3749,6 +3909,16 @@
         "idleTimeBeforeShutdown": {
           "type": "string",
           "description": "Time is defined in ISO8601 format. Minimum is 15 min, maximum is 3 days."
+        }
+      }
+    },
+    "ResizeSchema": {
+      "type": "object",
+      "description": "Schema for Compute Instance resize.",
+      "properties": {
+        "targetVMSize": {
+          "type": "string",
+          "description": "The name of the virtual machine size."
         }
       }
     }

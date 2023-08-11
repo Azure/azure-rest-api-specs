@@ -41,6 +41,9 @@ input-file:
   - Microsoft.MachineLearningServices/preview/2023-08-01-preview/registries.json
   - Microsoft.MachineLearningServices/preview/2023-08-01-preview/workspaceFeatures.json
   - Microsoft.MachineLearningServices/preview/2023-08-01-preview/workspaceRP.json
+suppressions:
+  - code: LroPostReturn
+    reason: LRO does not return 200.
 ```
 ### Tag: package-preview-2023-06
 
