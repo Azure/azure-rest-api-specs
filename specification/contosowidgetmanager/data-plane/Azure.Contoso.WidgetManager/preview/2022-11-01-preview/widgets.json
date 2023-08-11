@@ -52,26 +52,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Paged collection of WidgetSuite items",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "The WidgetSuite items on this page",
-                  "items": {
-                    "$ref": "#/definitions/WidgetSuite"
-                  },
-                  "x-ms-identifiers": []
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "The link to the next page of items"
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/PagedWidgetSuite"
             }
           },
           "default": {
@@ -210,7 +191,8 @@
           "Widgets_CreateOrUpdateWidget": {
             "$ref": "./examples/Widgets_CreateOrUpdateWidgetSample.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Widgets_DeleteWidget",
@@ -277,7 +259,8 @@
           "Delete widget by widget name using long-running operation.": {
             "$ref": "./examples/Widgets_DeleteWidgetSample.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/widgets/{widgetName}/operations/{operationId}": {
@@ -485,6 +468,28 @@
           "description": "The created date."
         }
       }
+    },
+    "PagedWidgetSuite": {
+      "type": "object",
+      "description": "Paged collection of WidgetSuite items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The WidgetSuite items on this page",
+          "items": {
+            "$ref": "#/definitions/WidgetSuite"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "Versions": {
       "type": "string",
