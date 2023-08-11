@@ -62,6 +62,6 @@ and followed the instructions by checking all the boxes:
 [public repo review queue]: https://github.com/Azure/azure-rest-api-specs/pulls?q=is%3Aopen+is%3Apr+label%3AWaitForARMFeedback+-label%3AIDCDevDiv+draft%3Afalse+sort%3Acreated-asc
 [private repo review queue]: https://github.com/Azure/azure-rest-api-specs-pr/pulls?q=is%3Aopen+is%3Apr+label%3AWaitForARMFeedback+-label%3AIDCDevDiv+draft%3Afalse+sort%3Acreated-asc
 [List of SDK breaking changes approvers]: https://teams.microsoft.com/l/message/19:0351f5f9404446e4b4fd4eaf2c27448d@thread.skype/1689115217750?tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47&groupId=3e17dcb0-4257-4a30-b843-77f47f1d4121&parentMessageId=1689115217750&teamName=Azure%20SDK&channelName=API%20Spec%20Review&createdTime=1689115217750
-[public repo merge queue]: https://github.com/Azure/azure-rest-api-specs/pulls?q=is%3Aopen+is%3Apr+label%3AMergeRequested+-label%3AIDCDevDiv+draft%3Afalse+sort%3Acreated-asc
-[private repo merge queue]: https://github.com/Azure/azure-rest-api-specs-pr/pulls?q=is%3Aopen+is%3Apr+label%3AMergeRequested+-label%3AIDCDevDiv+draft%3Afalse+sort%3Acreated-asc
+[public repo merge queue]: https://github.com/Azure/azure-rest-api-specs/pulls?q=is%3Aopen+is%3Apr+label%3AMergeRequested+draft%3Afalse+sort%3Acreated-asc
+[private repo merge queue]: https://github.com/Azure/azure-rest-api-specs-pr/pulls?q=is%3Aopen+is%3Apr+label%3AMergeRequested+-label%3AApproved-OkToMerge+draft%3Afalse+sort%3Acreated-asc
 [breaking changes process]: https://eng.ms/docs/cloud-ai-platform/azure-core/azure-core-pm-and-design/trusted-platform-pm-karimb/service-lifecycle-and-actions-team/service-lifecycle-actions-team/apex/media/launchingproductbreakingchanges#breaking-change-process-1
