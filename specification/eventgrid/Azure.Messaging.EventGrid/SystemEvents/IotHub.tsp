@@ -26,7 +26,7 @@ namespace EventGrid;
     metadata?: DeviceTwinMetadata;
 
     @doc("Version of device twin properties.")
-    version?: float64;
+    version?: float32;
   }
 
 
@@ -37,7 +37,7 @@ namespace EventGrid;
     authenticationType?: string;
 
     @doc("Count of cloud to device messages sent to this device.")
-    cloudToDeviceMessageCount?: int64;
+    cloudToDeviceMessageCount?: float32;
 
     @doc("Whether the device is connected or disconnected.")
     connectionState?: string;
@@ -63,7 +63,7 @@ namespace EventGrid;
     statusUpdateTime?: string;
 
     @doc("An integer that is incremented by one each time the device twin is updated.")
-    version?: int64;
+    version?: float32;
 
     //TODO: also here
 
