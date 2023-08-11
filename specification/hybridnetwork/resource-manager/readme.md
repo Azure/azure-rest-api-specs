@@ -47,6 +47,11 @@ input-file:
   - Microsoft.HybridNetwork/stable/2023-09-01/pureProxyArtifact.json
   - Microsoft.HybridNetwork/stable/2023-09-01/site.json
   - Microsoft.HybridNetwork/stable/2023-09-01/siteNetworkService.json
+
+suppressions:
+  - code: PatchSkuProperty
+    from: siteNetworkService.json
+    reason: sku cannot be patched
 ```
 
 ### Tag: package-2023-04-01-preview
