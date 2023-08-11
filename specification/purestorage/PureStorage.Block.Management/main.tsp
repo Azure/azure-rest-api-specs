@@ -32,12 +32,12 @@ enum Versions {
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@doc("VolumePool resource.")
-model VolumePool is TrackedResource<BaseStorageResourceProperties> {
+@doc("StoragePool resource.")
+model StoragePool is TrackedResource<BaseStorageResourceProperties> {
 
-  @doc("Name of the volume pool.")
-  @key("volumePool")
-  @segment("volumePools")
+  @doc("Name of the storage pool.")
+  @key("storagePool")
+  @segment("storagePools")
   @path
   @minLength(4)
   @maxLength(20)
@@ -45,11 +45,11 @@ model VolumePool is TrackedResource<BaseStorageResourceProperties> {
 }
 
 @armResourceOperations
-interface VolumePools {
-  get is ArmResourceRead<VolumePool>;
-  create is ArmResourceCreateOrUpdateAsync<VolumePool>;
-  update is ArmResourcePatchAsync<VolumePool, BaseStorageResourceProperties>;
-  delete is ArmResourceDeleteAsync<VolumePool>;
-  listByResourceGroup is ArmResourceListByParent<VolumePool>;
-  listBySubscription is ArmListBySubscription<VolumePool>;
+interface StoragePools {
+  get is ArmResourceRead<StoragePool>;
+  create is ArmResourceCreateOrUpdateAsync<StoragePool>;
+  update is ArmResourcePatchAsync<StoragePool, BaseStorageResourceProperties>;
+  delete is ArmResourceDeleteAsync<StoragePool>;
+  listByResourceGroup is ArmResourceListByParent<StoragePool>;
+  listBySubscription is ArmListBySubscription<StoragePool>;
 }

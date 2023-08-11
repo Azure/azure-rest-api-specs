@@ -42,16 +42,16 @@
       "name": "Operations"
     },
     {
-      "name": "VolumePools"
+      "name": "StoragePools"
     }
   ],
   "paths": {
     "/providers/PureStorage.Block/operations": {
       "get": {
+        "operationId": "Operations_List",
         "tags": [
           "Operations"
         ],
-        "operationId": "Operations_List",
         "description": "List the operations for the provider",
         "parameters": [
           {
@@ -85,13 +85,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/PureStorage.Block/volumePools": {
+    "/subscriptions/{subscriptionId}/providers/PureStorage.Block/storagePools": {
       "get": {
+        "operationId": "StoragePools_ListBySubscription",
         "tags": [
-          "VolumePools"
+          "StoragePools"
         ],
-        "operationId": "VolumePools_ListBySubscription",
-        "description": "List VolumePool resources by subscription ID",
+        "description": "List StoragePool resources by subscription ID",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -104,7 +104,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/VolumePoolListResult"
+              "$ref": "#/definitions/StoragePoolListResult"
             }
           },
           "default": {
@@ -118,22 +118,22 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "VolumePools_ListBySubscription_MaximumSet_Gen": {
-            "$ref": "./examples/VolumePools_ListBySubscription_MaximumSet_Gen.json"
+          "StoragePools_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/StoragePools_ListBySubscription_MaximumSet_Gen.json"
           },
-          "VolumePools_ListBySubscription_MinimumSet_Gen": {
-            "$ref": "./examples/VolumePools_ListBySubscription_MinimumSet_Gen.json"
+          "StoragePools_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/StoragePools_ListBySubscription_MinimumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/volumePools": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools": {
       "get": {
+        "operationId": "StoragePools_ListByResourceGroup",
         "tags": [
-          "VolumePools"
+          "StoragePools"
         ],
-        "operationId": "VolumePools_ListByResourceGroup",
-        "description": "List VolumePool resources by resource group",
+        "description": "List StoragePool resources by resource group",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -149,7 +149,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/VolumePoolListResult"
+              "$ref": "#/definitions/StoragePoolListResult"
             }
           },
           "default": {
@@ -163,22 +163,22 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "VolumePools_ListByResourceGroup_MaximumSet_Gen": {
-            "$ref": "./examples/VolumePools_ListByResourceGroup_MaximumSet_Gen.json"
+          "StoragePools_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/StoragePools_ListByResourceGroup_MaximumSet_Gen.json"
           },
-          "VolumePools_ListByResourceGroup_MinimumSet_Gen": {
-            "$ref": "./examples/VolumePools_ListByResourceGroup_MinimumSet_Gen.json"
+          "StoragePools_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/StoragePools_ListByResourceGroup_MinimumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/volumePools/{volumePool}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePool}": {
       "get": {
+        "operationId": "StoragePools_Get",
         "tags": [
-          "VolumePools"
+          "StoragePools"
         ],
-        "operationId": "VolumePools_Get",
-        "description": "Get a VolumePool",
+        "description": "Get a StoragePool",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -190,20 +190,20 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "volumePool",
+            "name": "storagePool",
             "in": "path",
+            "description": "Name of the storage pool.",
             "required": true,
-            "description": "Name of the volume pool.",
+            "type": "string",
             "minLength": 4,
-            "maxLength": 20,
-            "type": "string"
+            "maxLength": 20
           }
         ],
         "responses": {
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/VolumePool"
+              "$ref": "#/definitions/StoragePool"
             }
           },
           "default": {
@@ -214,20 +214,20 @@
           }
         },
         "x-ms-examples": {
-          "VolumePools_Get_MaximumSet_Gen": {
-            "$ref": "./examples/VolumePools_Get_MaximumSet_Gen.json"
+          "StoragePools_Get_MaximumSet_Gen": {
+            "$ref": "./examples/StoragePools_Get_MaximumSet_Gen.json"
           },
-          "VolumePools_Get_MinimumSet_Gen": {
-            "$ref": "./examples/VolumePools_Get_MinimumSet_Gen.json"
+          "StoragePools_Get_MinimumSet_Gen": {
+            "$ref": "./examples/StoragePools_Get_MinimumSet_Gen.json"
           }
         }
       },
       "put": {
+        "operationId": "StoragePools_Create",
         "tags": [
-          "VolumePools"
+          "StoragePools"
         ],
-        "operationId": "VolumePools_Create",
-        "description": "Create a VolumePool",
+        "description": "Create a StoragePool",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -239,42 +239,42 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "volumePool",
+            "name": "storagePool",
             "in": "path",
+            "description": "Name of the storage pool.",
             "required": true,
-            "description": "Name of the volume pool.",
+            "type": "string",
             "minLength": 4,
-            "maxLength": 20,
-            "type": "string"
+            "maxLength": 20
           },
           {
             "name": "resource",
             "in": "body",
-            "required": true,
             "description": "Resource create parameters.",
+            "required": true,
             "schema": {
-              "$ref": "#/definitions/VolumePool"
+              "$ref": "#/definitions/StoragePool"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Resource 'StoragePool' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/VolumePool"
+              "$ref": "#/definitions/StoragePool"
             }
           },
           "201": {
-            "description": "ARM create operation completed successfully.",
+            "description": "Resource 'StoragePool' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/StoragePool"
+            },
             "headers": {
               "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/VolumePool"
             }
           },
           "default": {
@@ -289,20 +289,20 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "VolumePools_Create_MaximumSet_Gen": {
-            "$ref": "./examples/VolumePools_Create_MaximumSet_Gen.json"
+          "StoragePools_Create_MaximumSet_Gen": {
+            "$ref": "./examples/StoragePools_Create_MaximumSet_Gen.json"
           },
-          "VolumePools_Create_MinimumSet_Gen": {
-            "$ref": "./examples/VolumePools_Create_MinimumSet_Gen.json"
+          "StoragePools_Create_MinimumSet_Gen": {
+            "$ref": "./examples/StoragePools_Create_MinimumSet_Gen.json"
           }
         }
       },
       "patch": {
+        "operationId": "StoragePools_Update",
         "tags": [
-          "VolumePools"
+          "StoragePools"
         ],
-        "operationId": "VolumePools_Update",
-        "description": "Update a VolumePool",
+        "description": "Update a StoragePool",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -314,21 +314,21 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "volumePool",
+            "name": "storagePool",
             "in": "path",
+            "description": "Name of the storage pool.",
             "required": true,
-            "description": "Name of the volume pool.",
+            "type": "string",
             "minLength": 4,
-            "maxLength": 20,
-            "type": "string"
+            "maxLength": 20
           },
           {
             "name": "properties",
             "in": "body",
-            "required": true,
             "description": "The resource properties to be updated.",
+            "required": true,
             "schema": {
-              "$ref": "#/definitions/VolumePoolUpdate"
+              "$ref": "#/definitions/StoragePoolUpdate"
             }
           }
         ],
@@ -336,20 +336,20 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/VolumePool"
+              "$ref": "#/definitions/StoragePool"
             }
           },
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
               "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
               "Location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -365,20 +365,20 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "VolumePools_Update_MaximumSet_Gen": {
-            "$ref": "./examples/VolumePools_Update_MaximumSet_Gen.json"
+          "StoragePools_Update_MaximumSet_Gen": {
+            "$ref": "./examples/StoragePools_Update_MaximumSet_Gen.json"
           },
-          "VolumePools_Update_MinimumSet_Gen": {
-            "$ref": "./examples/VolumePools_Update_MinimumSet_Gen.json"
+          "StoragePools_Update_MinimumSet_Gen": {
+            "$ref": "./examples/StoragePools_Update_MinimumSet_Gen.json"
           }
         }
       },
       "delete": {
+        "operationId": "StoragePools_Delete",
         "tags": [
-          "VolumePools"
+          "StoragePools"
         ],
-        "operationId": "VolumePools_Delete",
-        "description": "Delete a VolumePool",
+        "description": "Delete a StoragePool",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -390,13 +390,13 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "volumePool",
+            "name": "storagePool",
             "in": "path",
+            "description": "Name of the storage pool.",
             "required": true,
-            "description": "Name of the volume pool.",
+            "type": "string",
             "minLength": 4,
-            "maxLength": 20,
-            "type": "string"
+            "maxLength": 20
           }
         ],
         "responses": {
@@ -407,13 +407,13 @@
             "description": "Resource deletion accepted.",
             "headers": {
               "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
               "Location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -432,11 +432,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "VolumePools_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/VolumePools_Delete_MaximumSet_Gen.json"
+          "StoragePools_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/StoragePools_Delete_MaximumSet_Gen.json"
           },
-          "VolumePools_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/VolumePools_Delete_MinimumSet_Gen.json"
+          "StoragePools_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/StoragePools_Delete_MinimumSet_Gen.json"
           }
         }
       }
@@ -453,11 +453,29 @@
       ],
       "x-ms-enum": {
         "name": "ResourceProvisioningState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
       }
     },
     "LiftrBase.Ip": {
       "type": "object",
+      "description": "IP/port pair.",
       "properties": {
         "address": {
           "type": "string",
@@ -471,13 +489,13 @@
           "maximum": 65535
         }
       },
-      "description": "IP/port pair.",
       "required": [
         "address"
       ]
     },
     "LiftrBase.MarketplaceDetails": {
       "type": "object",
+      "description": "Marketplace details of a resource.",
       "properties": {
         "subscriptionId": {
           "type": "string",
@@ -488,7 +506,6 @@
           "description": "Offer details for the marketplace that is selected by the user"
         }
       },
-      "description": "Marketplace details of a resource.",
       "required": [
         "subscriptionId",
         "offerDetails"
@@ -496,6 +513,7 @@
     },
     "LiftrBase.OfferDetails": {
       "type": "object",
+      "description": "Offer details for the marketplace that is selected by the user",
       "properties": {
         "publisherId": {
           "type": "string",
@@ -522,7 +540,6 @@
           "description": "Plan Display Name for the marketplace offer"
         }
       },
-      "description": "Offer details for the marketplace that is selected by the user",
       "required": [
         "publisherId",
         "offerId",
@@ -531,6 +548,7 @@
     },
     "LiftrBase.Storage.AzureVmwareService": {
       "type": "object",
+      "description": "Azure VmWare Service properties. VASA is vSphere Storage APIs for Storage Awareness.",
       "properties": {
         "vasaProviderUsername": {
           "type": "string",
@@ -539,57 +557,55 @@
         },
         "vasaProviderUrls": {
           "type": "array",
+          "description": "VASA Provider URL.",
           "items": {
             "type": "string"
           },
-          "x-typespec-name": "string[]",
-          "description": "VASA Provider URL.",
           "readOnly": true
         },
         "vasaIscsiEndpoints": {
           "type": "array",
+          "description": "Array of iSCSI endpoint and IQN.",
           "items": {
             "$ref": "#/definitions/LiftrBase.Storage.VasaIscsiEndpoint"
           },
-          "x-ms-identifiers": [],
-          "x-typespec-name": "LiftrBase.Storage.VasaIscsiEndpoint[]",
-          "description": "Array of iSCSI endpoint and IQN.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "vasaProviderPassword": {
           "type": "string",
-          "description": "Password for VASA service login.",
           "format": "password",
-          "x-ms-secret": true,
+          "description": "Password for VASA service login.",
           "x-ms-mutability": [
             "update",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         }
       },
-      "description": "Azure VmWare Service properties. VASA is vSphere Storage APIs for Storage Awareness.",
       "required": [
         "vasaProviderPassword"
       ]
     },
     "LiftrBase.Storage.AzureVmwareServiceUpdate": {
       "type": "object",
+      "description": "Azure VmWare Service properties. VASA is vSphere Storage APIs for Storage Awareness.",
       "properties": {
         "vasaProviderPassword": {
           "type": "string",
-          "description": "Password for VASA service login.",
           "format": "password",
-          "x-ms-secret": true,
+          "description": "Password for VASA service login.",
           "x-ms-mutability": [
             "update",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         }
-      },
-      "description": "Azure VmWare Service properties. VASA is vSphere Storage APIs for Storage Awareness."
+      }
     },
     "LiftrBase.Storage.BaseStorageResourceProperties": {
       "type": "object",
+      "description": "Base storage resource properties that can be extended for storage arm resources.",
       "properties": {
         "marketplace": {
           "$ref": "#/definitions/LiftrBase.MarketplaceDetails",
@@ -649,7 +665,6 @@
           ]
         }
       },
-      "description": "Base storage resource properties that can be extended for storage arm resources.",
       "required": [
         "marketplace",
         "user",
@@ -658,22 +673,22 @@
     },
     "LiftrBase.Storage.Iscsi": {
       "type": "object",
+      "description": "iSCSI is a storage networking standard.",
       "properties": {
         "ips": {
           "type": "array",
+          "description": "iSCSI IP/port pairs used for establishing connections and exchanging data.",
           "items": {
             "$ref": "#/definitions/LiftrBase.Ip"
           },
-          "x-ms-identifiers": [],
-          "x-typespec-name": "LiftrBase.Ip[]",
-          "description": "iSCSI IP/port pairs used for establishing connections and exchanging data.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
-      },
-      "description": "iSCSI is a storage networking standard."
+      }
     },
     "LiftrBase.Storage.VasaIscsiEndpoint": {
       "type": "object",
+      "description": "Describes iSCSI endpoint and IQN.",
       "properties": {
         "address": {
           "type": "string",
@@ -689,7 +704,6 @@
           "description": "iSCSI Qualified Name."
         }
       },
-      "description": "Describes iSCSI endpoint and IQN.",
       "required": [
         "address",
         "port",
@@ -698,6 +712,7 @@
     },
     "LiftrBase.UserDetails": {
       "type": "object",
+      "description": "Details of the User.",
       "properties": {
         "firstName": {
           "type": "string",
@@ -720,7 +735,6 @@
           "description": "User's phone number"
         }
       },
-      "description": "Details of the User.",
       "required": [
         "firstName",
         "lastName",
@@ -729,6 +743,7 @@
     },
     "LiftrBase.UserDetailsUpdate": {
       "type": "object",
+      "description": "Details of the User.",
       "properties": {
         "firstName": {
           "type": "string",
@@ -750,34 +765,16 @@
           "type": "string",
           "description": "User's phone number"
         }
-      },
-      "description": "Details of the User."
+      }
     },
     "LiftrBase.email": {
       "type": "string",
       "description": "Reusable representation of an email address.",
       "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$"
     },
-    "Versions": {
-      "type": "string",
-      "description": "API versions of PureStorage.Block",
-      "enum": [
-        "2023-06-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v1_preview",
-            "value": "2023-06-01-preview",
-            "description": "Version 1 preview."
-          }
-        ]
-      }
-    },
-    "VolumePool": {
+    "StoragePool": {
       "type": "object",
+      "description": "StoragePool resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/LiftrBase.Storage.BaseStorageResourceProperties",
@@ -789,56 +786,53 @@
           ]
         }
       },
-      "description": "VolumePool resource.",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ]
     },
-    "VolumePoolListResult": {
+    "StoragePoolListResult": {
       "type": "object",
+      "description": "The response of a StoragePool list operation.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The StoragePool items on this page",
           "items": {
-            "$ref": "#/definitions/VolumePool"
-          },
-          "x-typespec-name": "VolumePool[]",
-          "description": "The VolumePool items on this page"
+            "$ref": "#/definitions/StoragePool"
+          }
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+          "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a VolumePool list operation.",
       "required": [
         "value"
       ]
     },
-    "VolumePoolUpdate": {
+    "StoragePoolUpdate": {
       "type": "object",
+      "description": "The type used for update operations of the StoragePool.",
       "properties": {
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
-          },
-          "x-typespec-name": "Record<string>",
-          "description": "Resource tags."
+          }
         },
         "properties": {
-          "$ref": "#/definitions/VolumePoolUpdateProperties",
+          "$ref": "#/definitions/StoragePoolUpdateProperties",
           "x-ms-client-flatten": true
         }
-      },
-      "description": "The type used for update operations of the VolumePool."
+      }
     },
-    "VolumePoolUpdateProperties": {
+    "StoragePoolUpdateProperties": {
       "type": "object",
+      "description": "The updatable properties of the StoragePool.",
       "properties": {
         "user": {
           "$ref": "#/definitions/LiftrBase.UserDetailsUpdate",
@@ -863,8 +857,25 @@
             "create"
           ]
         }
-      },
-      "description": "The updatable properties of the VolumePool."
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "API versions of PureStorage.Block",
+      "enum": [
+        "2023-06-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v1_preview",
+            "value": "2023-06-01-preview",
+            "description": "Version 1 preview."
+          }
+        ]
+      }
     }
   },
   "parameters": {}
