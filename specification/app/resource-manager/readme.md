@@ -55,6 +55,7 @@ input-file:
   - Microsoft.App/preview/2023-05-02-preview/Subscriptions.json
   - Microsoft.App/preview/2023-05-02-preview/Usages.json
 ```
+
 ### Tag: package-2023-05
 
 These settings apply only when `--tag=package-2023-05` is specified on the command line.
