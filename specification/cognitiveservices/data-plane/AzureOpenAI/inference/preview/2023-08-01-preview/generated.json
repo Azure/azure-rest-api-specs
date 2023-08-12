@@ -396,23 +396,6 @@
         }
       }
     },
-    "AzureChatExtensionConfiguration": {
-      "type": "object",
-      "description": "  A representation of configuration data for a single Azure OpenAI chat extension. This will be used by a chat\n  completions request that should use Azure OpenAI chat extensions to augment the response behavior.\n  The use of this configuration is compatible only with Azure OpenAI.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "  The label for the type of an Azure chat extension. This typically corresponds to a matching Azure resource.\n  Azure chat extensions are only compatible with Azure OpenAI."
-        },
-        "parameters": {
-          "description": "  The configuration payload used for the Azure chat extension. The structure payload details are specific to the\n  extension being configured.\n  Azure chat extensions are only compatible with Azure OpenAI."
-        }
-      },
-      "required": [
-        "type",
-        "parameters"
-      ]
-    },
     "AzureChatExtensionsMessageContext": {
       "type": "object",
       "description": "  A representation of the additional context information available when Azure OpenAI chat extensions are involved\n  in the generation of a corresponding chat completions response. This context information is only populated when\n  using an Azure OpenAI request configured to use a matching extension.",
@@ -671,10 +654,7 @@
         "dataSources": {
           "type": "array",
           "description": "  The configuration entries for Azure OpenAI chat extensions that use them.\n  This additional specification is only compatible with Azure OpenAI.",
-          "items": {
-            "$ref": "#/definitions/AzureChatExtensionConfiguration"
-          },
-          "x-ms-identifiers": []
+          "items": {}
         }
       },
       "required": [

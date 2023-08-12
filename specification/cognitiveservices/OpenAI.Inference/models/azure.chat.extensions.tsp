@@ -1,5 +1,6 @@
 import "@typespec/versioning";
 import "./chat.completions.tsp";
+import "./azure.cognitive.search.options.tsp";
 
 namespace Azure.OpenAI;
 
@@ -25,12 +26,23 @@ using TypeSpec.Versioning;
   completions request that should use Azure OpenAI chat extensions to augment the response behavior.
   The use of this configuration is compatible only with Azure OpenAI.
 """)
+enum AzureChatExtensionType {
+  @doc("Represents the use of Azure Cognitive Search as an Azure OpenAI chat extension.")
+  azureCognitiveSearch: "AzureCognitiveSearch",
+}
+
+@added(ServiceApiVersions.v2023_08_01_Preview)
+@doc("""
+  A representation of configuration data for a single Azure OpenAI chat extension. This will be used by a chat
+  completions request that should use Azure OpenAI chat extensions to augment the response behavior.
+  The use of this configuration is compatible only with Azure OpenAI.
+""")
 model AzureChatExtensionConfiguration {
   @doc("""
     The label for the type of an Azure chat extension. This typically corresponds to a matching Azure resource.
     Azure chat extensions are only compatible with Azure OpenAI.
   """)
-  type: string;
+  type: AzureChatExtensionType;
 
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "API explicitly uses arbitrary JSON structure"
   @doc("""
@@ -56,3 +68,8 @@ model AzureChatExtensionsMessageContext {
   """)
   messages?: ChatMessage[];
 }
+
+// This alias is defined to assist code generation with including additional extension configuration models
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 not required and union behavior needed"
+alias AnyChatExtensionType = AzureChatExtensionConfiguration
+  | AzureCognitiveSearchChatExtensionConfiguration;
