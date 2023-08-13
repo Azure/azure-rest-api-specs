@@ -45,7 +45,7 @@
           "D4APICollectionList"
         ],
         "description": "Gets a list of API collections within a subscription that have been onboarded to Microsoft Defender for APIs.",
-        "summary": "Gets a list of API collections within a subscription that have been onboarded to Microsoft Defender for APIs",
+        "summary": "Gets a list of API collections within a subscription",
         "operationId": "APICollection_ListBySubscription",
         "parameters": [
           {
@@ -85,7 +85,7 @@
           "D4APICollectionList"
         ],
         "description": "Gets a list of API collections within a resource group that have been onboarded to Microsoft Defender for APIs.",
-        "summary": "Gets a list of API collections within a resource group that have been onboarded to Microsoft Defender for APIs",
+        "summary": "Gets a list of API collections within a resource group",
         "operationId": "APICollection_ListByResourceGroup",
         "parameters": [
           {
@@ -129,7 +129,7 @@
           "APIMConfig"
         ],
         "description": "Gets a list of Azure API Management APIs that have been onboarded to Microsoft Defender for APIs. If an Azure API Management API is onboarded to Microsoft Defender for APIs, the system will monitor the operations within the Azure API Management API for intrusive behaviors and provide alerts for attacks that have been detected.",
-        "summary": "Gets a list of Azure API Management APIs that have been onboarded to Microsoft Defender for APIs",
+        "summary": "Gets a list of onboarded Azure API Management APIs",
         "operationId": "APICollection_ListByAzureApiManagementService",
         "parameters": [
           {
@@ -176,7 +176,7 @@
           "APIMConfig"
         ],
         "description": "Gets an Azure API Management API if it has been onboarded to Microsoft Defender for APIs. If an Azure API Management API is onboarded to Microsoft Defender for APIs, the system will monitor the operations within the Azure API Management API for intrusive behaviors and provide alerts for attacks that have been detected.",
-        "summary": "Gets an Azure API Management API if it has been onboarded to Microsoft Defender for APIs",
+        "summary": "Gets an onboarded Azure API Management API",
         "operationId": "APICollection_GetByAzureApiManagementService",
         "parameters": [
           {
@@ -242,19 +242,19 @@
         ],
         "responses": {
           "200": {
-            "description": "This indicates a successful response. The response contains the properties of the API collection.",
+            "description": "This indicates a successful response for the create or update operation. The response contains the properties of the API collection.",
             "schema": {
               "$ref": "#/definitions/ApiCollectionResponse"
             }
           },
           "201": {
-            "description": "This indicates a successful response. The response contains the properties of the API collection.",
+            "description": "This indicates a successful response for the create or update operation. The response contains the properties of the API collection.",
             "schema": {
               "$ref": "#/definitions/ApiCollectionResponse"
             }
           },
           "202": {
-            "description": "This indicates a successful response. The Location header contains the URL where the operation status can be checked.",
+            "description": "This indicates a successful response for the create or update operation. The Location header contains the URL where the operation status can be checked.",
             "headers": {
               "Location": {
                 "type": "string"
@@ -305,10 +305,10 @@
         ],
         "responses": {
           "200": {
-            "description": "This operation completed successfully."
+            "description": "This indicates a successful response for the delete operation."
           },
           "204": {
-            "description": "This operation completed successfully."
+            "description": "This indicates a successful response for the delete operation."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
