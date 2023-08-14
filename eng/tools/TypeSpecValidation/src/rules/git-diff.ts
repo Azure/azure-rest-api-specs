@@ -1,11 +1,14 @@
+import debug from "debug";
 import { simpleGit } from "simple-git";
-import { TSVRule, TSVRuleResult } from "./TSVRule.js";
+import { Rule } from "../rule.js";
+import { RuleResult } from "../rule-result.js";
 
-export class GitDiffRule implements TSVRule {
+debug.enable("simple-git");
+export class GitDiffRule implements Rule {
   readonly name = "GitDiff";
   readonly description = "Checks if previous rules resulted in a git diff";
 
-  async execute(): Promise<TSVRuleResult> {
+  async execute(): Promise<RuleResult> {
     const git = simpleGit();
     let gitStatusIsClean = await (await git.status(["--porcelain"])).isClean();
 

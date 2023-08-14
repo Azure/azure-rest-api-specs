@@ -1,11 +1,12 @@
-import { runCmd } from "./RunCmd.js";
-import { TSVRule, TSVRuleResult } from "./TSVRule.js";
+import { runCmd } from "../utils.js";
+import { Rule } from "../rule.js";
+import { RuleResult } from "../rule-result.js";
 
-export class NpmPrefixRule implements TSVRule {
+export class NpmPrefixRule implements Rule {
   readonly name = "NpmPrefix";
   readonly description = "Verify spec is using root level package.json";
 
-  async execute(folder: string): Promise<TSVRuleResult> {
+  async execute(folder: string): Promise<RuleResult> {
     let expected_npm_prefix = process.cwd();
     const actual_npm_prefix = (await runCmd(`npm prefix`, folder))[0].trim();
 

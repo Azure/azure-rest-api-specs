@@ -1,13 +1,13 @@
-import { access } from "fs/promises";
 import path from "path";
-import { runCmd } from "./RunCmd.js";
-import { TSVRule, TSVRuleResult } from "./TSVRule.js";
+import { runCmd, checkFileExists } from "../utils.js";
+import { Rule } from "../rule.js";
+import { RuleResult } from "../rule-result.js";
 
-export class CompileRule implements TSVRule {
+export class CompileRule implements Rule {
   readonly name = "Compile";
   readonly description = "Compile TypeSpec";
 
-  async execute(folder: string): Promise<TSVRuleResult> {
+  async execute(folder: string): Promise<RuleResult> {
     let success = true;
     let stdOutput = "";
     let errorOutput: string | undefined;
@@ -38,10 +38,4 @@ export class CompileRule implements TSVRule {
       errorOutput: errorOutput,
     };
   }
-}
-
-async function checkFileExists(file: string) {
-  return access(file)
-    .then(() => true)
-    .catch(() => false);
 }

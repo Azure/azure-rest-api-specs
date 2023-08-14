@@ -1,11 +1,8 @@
-import debug from "debug";
 import { parseArgs, ParseArgsConfig } from "node:util";
-import { CompileRule } from "./TSVRules/CompileRule.js";
-import { FormatRule } from "./TSVRules/FormatRule.js";
-import { GitDiffRule } from "./TSVRules/GitDiffRule.js";
-import { NpmPrefixRule } from "./TSVRules/NpmPrefixRule.js";
-
-debug.enable("simple-git");
+import { CompileRule } from "./rules/compile.js";
+import { FormatRule } from "./rules/format.js";
+import { GitDiffRule } from "./rules/git-diff.js";
+import { NpmPrefixRule } from "./rules/npm-prefix.js";
 
 export async function main() {
   const args = process.argv.slice(2);
@@ -19,10 +16,10 @@ export async function main() {
   const folder = parsedArgs.positionals[0];
   console.log("Running TypeSpecValidation on folder:", folder);
 
-  let TSVRules = [new NpmPrefixRule(), new CompileRule(), new FormatRule(), new GitDiffRule()];
+  let rules = [new NpmPrefixRule(), new CompileRule(), new FormatRule(), new GitDiffRule()];
   let success = true;
-  for (let i = 0; i < TSVRules.length; i++) {
-    const rule = TSVRules[i];
+  for (let i = 0; i < rules.length; i++) {
+    const rule = rules[i];
     console.log("\nExecuting rule: " + rule.name);
     const result = await rule.execute(folder);
     if (result.stdOutput) console.log(result.stdOutput);

@@ -1,3 +1,4 @@
+import { access } from "fs/promises";
 import { exec } from "child_process";
 
 export async function runCmd(cmd: string, cwd: string) {
@@ -12,4 +13,10 @@ export async function runCmd(cmd: string, cwd: string) {
   )) as any;
 
   return [stdout, stderr + err?.message] as string[];
+}
+
+export async function checkFileExists(file: string) {
+  return access(file)
+    .then(() => true)
+    .catch(() => false);
 }
