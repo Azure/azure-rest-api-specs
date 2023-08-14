@@ -54,6 +54,10 @@ These settings apply only when `--tag=package-preview-2023-07` is specified on t
 ```yaml $(tag) == 'package-preview-2023-07'
 input-file:
   - Microsoft.AlertsManagement/preview/2023-07-12-preview/AlertsManagement.json
+
+suppressions:
+ - code: NoDuplicatePathsForScopeParameter
+   reason: The error was there before this new private preview API version. Created a work item to fix: Product Backlog Item 24832853: Fix existing swagger Lint errors
 ```
 ### Tag: package-preview-2023-05
 
