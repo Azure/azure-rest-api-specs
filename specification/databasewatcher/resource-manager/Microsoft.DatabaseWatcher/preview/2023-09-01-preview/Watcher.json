@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.DatabaseWatcher",
-    "version": "2023-03-01-preview",
+    "version": "2023-09-01-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -862,32 +862,105 @@
       "type": "object",
       "description": "The properties of a data store.",
       "properties": {
-        "adxDatabaseResourceId": {
+        "adxClusterResourceId": {
           "type": "string",
-          "description": "The ARM ResourceId of an Azure Data Explorer database."
+          "description": "The ARM ResourceId of an Azure Data Explorer cluster."
         },
-        "adxClusterUri": {
+        "kustoClusterDisplayName": {
+          "type": "string",
+          "description": "The Kusto cluster display name."
+        },
+        "kustoClusterUri": {
           "type": "string",
           "description": "The Kusto cluster URI."
+        },
+        "kustoDataIngestionUri": {
+          "type": "string",
+          "description": "The Kusto data ingestion URI."
+        },
+        "kustoDatabaseName": {
+          "type": "string",
+          "description": "The name of a Kusto database."
+        },
+        "kustoManagementUrl": {
+          "type": "string",
+          "description": "The Kusto management URL."
+        },
+        "kustoOfferingType": {
+          "$ref": "#/definitions/KustoOfferingType",
+          "description": "The type of a Kusto offering."
         }
       },
       "required": [
-        "adxDatabaseResourceId",
-        "adxClusterUri"
+        "kustoClusterUri",
+        "kustoDataIngestionUri",
+        "kustoDatabaseName",
+        "kustoManagementUrl",
+        "kustoOfferingType"
       ]
     },
     "DatastoreUpdate": {
       "type": "object",
       "description": "The properties of a data store.",
       "properties": {
-        "adxDatabaseResourceId": {
+        "adxClusterResourceId": {
           "type": "string",
-          "description": "The ARM ResourceId of an Azure Data Explorer database."
+          "description": "The ARM ResourceId of an Azure Data Explorer cluster."
         },
-        "adxClusterUri": {
+        "kustoClusterDisplayName": {
+          "type": "string",
+          "description": "The Kusto cluster display name."
+        },
+        "kustoClusterUri": {
           "type": "string",
           "description": "The Kusto cluster URI."
+        },
+        "kustoDataIngestionUri": {
+          "type": "string",
+          "description": "The Kusto data ingestion URI."
+        },
+        "kustoDatabaseName": {
+          "type": "string",
+          "description": "The name of a Kusto database."
+        },
+        "kustoManagementUrl": {
+          "type": "string",
+          "description": "The Kusto management URL."
+        },
+        "kustoOfferingType": {
+          "$ref": "#/definitions/KustoOfferingType",
+          "description": "The type of a Kusto offering."
         }
+      }
+    },
+    "KustoOfferingType": {
+      "type": "string",
+      "description": "The type of Kusto offering.",
+      "enum": [
+        "adx",
+        "free",
+        "fabric"
+      ],
+      "x-ms-enum": {
+        "name": "KustoOfferingType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "adx",
+            "value": "adx",
+            "description": "The Azure Data Explorer cluster Kusto offering."
+          },
+          {
+            "name": "free",
+            "value": "free",
+            "description": "The free Azure Data Explorer cluster Kusto offering."
+          },
+          {
+            "name": "fabric",
+            "value": "fabric",
+            "description": "The Fabric Real-Time Analytics Kusto offering."
+          }
+        ]
       }
     },
     "SqlDbElasticPoolTargetProperties": {
@@ -1022,6 +1095,30 @@
         }
       ]
     },
+    "TargetAuthenticationType": {
+      "type": "string",
+      "description": "The type of authentication to use when connecting to a target.",
+      "enum": [
+        "Aad",
+        "Sql"
+      ],
+      "x-ms-enum": {
+        "name": "TargetAuthenticationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Aad",
+            "value": "Aad",
+            "description": "The Azure Active Directory authentication."
+          },
+          {
+            "name": "Sql",
+            "value": "Sql",
+            "description": "The SQL password authentication."
+          }
+        ]
+      }
+    },
     "TargetCollectionStatus": {
       "type": "string",
       "description": "The target states.",
@@ -1075,6 +1172,10 @@
           "type": "string",
           "description": "Discriminator property for TargetProperties."
         },
+        "targetAuthenticationType": {
+          "$ref": "#/definitions/TargetAuthenticationType",
+          "description": "The type of authentication to use when connecting to a target."
+        },
         "targetVault": {
           "$ref": "#/definitions/VaultSecret",
           "description": "To use SQL authentication when connecting to targets, specify the vault where the login name and password secrets are stored."
@@ -1117,6 +1218,7 @@
       "discriminator": "targetType",
       "required": [
         "targetType",
+        "targetAuthenticationType",
         "connectionServerName"
       ]
     },
