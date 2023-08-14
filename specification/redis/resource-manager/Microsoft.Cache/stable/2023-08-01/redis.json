@@ -744,6 +744,53 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{name}/flush": {
+      "post": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_FlushCache",
+        "x-ms-examples": {
+          "RedisCacheFlush": {
+            "$ref": "./examples/RedisCacheFlush.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Deletes all of the keys in a cache.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Redis cache."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Flush operation successfully enqueued; follow the Location header to poll for final outcome."
+          },
+          "200": {
+            "description": "Flush operation succeeded."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{cacheName}/firewallRules": {
       "get": {
         "tags": [
