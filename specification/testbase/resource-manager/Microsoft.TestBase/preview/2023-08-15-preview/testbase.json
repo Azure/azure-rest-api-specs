@@ -683,6 +683,12 @@
           },
           {
             "$ref": "#/parameters/OSNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OffsetParameter"
+          },
+          {
+            "$ref": "#/parameters/TopFilter"
           }
         ],
         "responses": {
@@ -7175,6 +7181,14 @@
       "pattern": "^[A-Za-z0-9]([A-Za-z0-9_]|((-{1,2}|[. ])[A-Za-z0-9]))+$",
       "x-ms-parameter-location": "method",
       "description": "The full available OS update name in this format: osName--release--buildNumber--buildRevision--packageVersion--architecture, Example: Windows 10 22H2--2020.03 D--19043--1237--1.2.3--x64"
+    },
+    "OffsetParameter": {
+      "name": "offset",
+      "in": "query",
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method",
+      "description": "The number of items to skip before starting to collect the result set."
     }
   }
 }
