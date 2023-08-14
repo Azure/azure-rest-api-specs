@@ -62,7 +62,7 @@ tag: package-managedapplications-2018-06
 ```
 
 ``` yaml $(package-deploymentscripts)
-tag: package-deploymentscripts-2020-10
+tag: package-deploymentscripts-2023-08
 ```
 
 ``` yaml $(package-templatespecs)
@@ -78,15 +78,15 @@ tag: package-changes-2022-05
 ```
 
 ``` yaml $(package-snapshots)
-tag: package-2023-08
+tag: package-snapshots-2022-11
 ```
 
 
-### Tag: package-2023-08
+### Tag: package-deploymentscripts-2023-08
 
-These settings apply only when `--tag=package-2023-08` is specified on the command line.
+These settings apply only when `--tag=package-deploymentscripts-2023-08` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-08'
+```yaml $(tag) == 'package-deploymentscripts-2023-08'
 input-file:
   - Microsoft.Resources/stable/2023-08-01/deploymentScripts.json
 ```
