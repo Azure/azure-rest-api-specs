@@ -1,0 +1,279 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2023-08-01-preview",
+    "title": "ContainerApps API Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sessionPools": {
+      "get": {
+        "tags": [
+          "ContainerAppsSessionPools"
+        ],
+        "summary": "Get the SessionPools in a given resource group.",
+        "operationId": "ContainerAppsSessionPools_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SessionPoolCollection"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Session Pools by resource group": {
+            "$ref": "./examples/SessionPools_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sessionPools/{sessionPoolName}": {
+      "get": {
+        "tags": [
+          "ContainerAppsSessionPools"
+        ],
+        "summary": "Get the properties of a Session Pool.",
+        "operationId": "ContainerAppsSessionPools_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sessionPoolName",
+            "in": "path",
+            "description": "Name of the Session Pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/SessionPool"
+            }
+          },
+          "404": {
+            "description": "Not found.",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Session Pool": {
+            "$ref": "./examples/SessionPools_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ContainerAppsSessionPools"
+        ],
+        "summary": "Create or update a Session Pool.",
+        "description": "Create or update a Session Pool.",
+        "operationId": "ContainerAppsSessionPools_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sessionPoolName",
+            "in": "path",
+            "description": "Name of the Session Pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sessionPoolNameEnvelope",
+            "in": "body",
+            "description": "Properties used to create a session pool",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SessionPool"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok.",
+            "schema": {
+              "$ref": "#/definitions/SessionPool"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update Session Pool": {
+            "$ref": "./examples/SessionPools_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ContainerAppsSessionPools"
+        ],
+        "summary": "Delete a Session Pool.",
+        "description": "Delete a Session Pool.",
+        "operationId": "ContainerAppsSessionPools_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sessionPoolName",
+            "in": "path",
+            "description": "Name of the Session Pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Session Pool deleted successfully."
+          },
+          "204": {
+            "description": "Session Pool does not exist."
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Session Pool": {
+            "$ref": "./examples/SessionPools_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SessionPool": {
+      "description": "Container App SessionPool.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "SessionPool resource specific properties",
+          "type": "object",
+          "properties": {
+            "managedEnvironmentId": {
+              "description": "Resource ID of the Session Pool's environment.",
+              "type": "string",
+              "x-ms-mutability": [
+              "create",
+              "read"
+              ]
+            },
+            "maxConcurrentSessions": {
+              "format": "int32",
+              "description": "The max count of sessions at the same time.",
+              "type": "integer"
+            },
+            "name": {
+              "description": "The name of the session pool",
+              "type": "string"
+            },
+            "secrets": {
+              "description": "Collection of secrets used by a Session Pool",
+              "type": "array",
+              "items": {
+                "$ref": "./CommonDefinitions.json#/definitions/Secret"
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SessionPoolCollection": {
+      "description": "SessionPool collection ARM resource.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SessionPool"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  }
+}
+  
