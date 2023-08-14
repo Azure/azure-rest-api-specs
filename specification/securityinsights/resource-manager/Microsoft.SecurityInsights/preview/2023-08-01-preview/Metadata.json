@@ -339,7 +339,7 @@
       }
     },
     "metadataContentId": {
-      "description": "Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Can be optionally set for user created content to define dependencies.  If an active content item is made from a template, both will have the same contentId.",
+      "description": "Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Can be optionally set for user created content to define dependencies.  If an active content item is made from a metadata, both will have the same contentId.",
       "type": "string"
     },
     "metadataParentId": {
@@ -349,10 +349,6 @@
     "metadataVersion": {
       "description": "Version of the content.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM template best practices.  Can also be any string, but then we cannot guarantee any version checks",
       "type": "string"
-    },
-    "metadataKind": {
-      "type": "string",
-      "description": "The kind of content the metadata is for."
     },
     "metadataSource": {
       "description": "The original source of the content item, where it comes from.",
@@ -523,7 +519,7 @@
       "type": "string"
     },
     "metadataIcon": {
-      "description": "the icon identifier. this id can later be fetched from the solution template",
+      "description": "the icon identifier. this id can later be fetched from the content metadata",
       "type": "string"
     },
     "metadataThreatAnalysisTactics": {
@@ -637,7 +633,7 @@
         },
         "icon": {
           "$ref": "#/definitions/metadataIcon",
-          "description": "the icon identifier. this id can later be fetched from the solution template"
+          "description": "the icon identifier. this id can later be fetched from the content metadata"
         },
         "threatAnalysisTactics": {
           "$ref": "#/definitions/metadataThreatAnalysisTactics",
@@ -674,7 +670,7 @@
           "description": "Version of the content.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM template best practices.  Can also be any string, but then we cannot guarantee any version checks"
         },
         "kind": {
-          "$ref": "#/definitions/metadataKind",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataKind",
           "description": "The kind of content the metadata is for."
         },
         "source": {
@@ -719,7 +715,7 @@
         },
         "icon": {
           "$ref": "#/definitions/metadataIcon",
-          "description": "the icon identifier. this id can later be fetched from the solution template"
+          "description": "the icon identifier. this id can later be fetched from the content metadata"
         },
         "threatAnalysisTactics": {
           "$ref": "#/definitions/metadataThreatAnalysisTactics",
