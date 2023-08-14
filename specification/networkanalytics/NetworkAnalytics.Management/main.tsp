@@ -718,24 +718,24 @@ model DataProductProperties{
     @doc("List of name or email associated with data product resource deployment.")
     @visibility("create", "read","update")
     owners?: string[];
-    @doc("Flag for redundancy of data product.")
+    @doc("Flag to enable or disable redundancy for data product.")
     @visibility("create","read")
-    redundancy?: boolean;    
+    redundancy?: ControlState;    
     @doc("Purview account url for data product to connect to.")
     @visibility("create", "update","read")
     purviewAccount?: string;
     @doc("Purview collection url for data product to connect to.")
     @visibility("create", "update","read")
     purviewCollection?: string;
-    @doc("Flag to enable private link for data product resource.")
+    @doc("Flag to enable or disable private link for data product resource.")
     @visibility("create", "update","read")
-    privateLinksEnabled?: boolean = false;
-    @doc("Flag to enable public access of data product resource.")
+    privateLinksEnabled?: ControlState;
+    @doc("Flag to enable or disable public access of data product resource.")
     @visibility("create","read")
-    publicNetworkAccess?: PublicNetworkAccess;
+    publicNetworkAccess?: ControlState;
     @doc("Flag to enable customer managed key encryption for data product.")
     @visibility("create","read")
-    customerManagedKeyEncryptionEnabled?: boolean = false;
+    customerManagedKeyEncryptionEnabled?: ControlState;
     @doc("Customer managed encryption key details for data product.")
     @visibility("create","read")
     customerEncryptionKey?: EncryptionKeyDetails;
@@ -775,10 +775,10 @@ model EncryptionKeyDetails {
 
 @doc("The data type state")
 @added(Versions.v2023_11_15)
-enum PublicNetworkAccess{
-  @doc("Field to enable public access.")
+enum ControlState {
+  @doc("Field to enable a setting.")
   Enabled;
-  @doc("Field to disable public access.")
+  @doc("Field to disable a setting.")
   Disabled;
 }
 
