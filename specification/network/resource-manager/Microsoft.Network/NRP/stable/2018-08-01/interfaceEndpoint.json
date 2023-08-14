@@ -1,0 +1,348 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "NetworkManagementClient",
+    "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
+    "version": "2018-08-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interfaceEndpoints/{interfaceEndpointName}": {
+      "delete": {
+        "tags": [
+          "InterfaceEndpoints"
+        ],
+        "operationId": "InterfaceEndpoints_Delete",
+        "description": "Deletes the specified interface endpoint.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "interfaceEndpointName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the interface endpoint."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Delete successful."
+          },
+          "200": {
+            "description": "Delete successful."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete interface endpoint": {
+            "$ref": "./examples/InterfaceEndpointDelete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "InterfaceEndpoints"
+        ],
+        "operationId": "InterfaceEndpoints_Get",
+        "description": "Gets the specified interface endpoint by resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "interfaceEndpointName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the interface endpoint."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Expands referenced resources."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting InterfaceEndpoint resource.",
+            "schema": {
+              "$ref": "#/definitions/InterfaceEndpoint"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get interface endpoint": {
+            "$ref": "./examples/InterfaceEndpointGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "InterfaceEndpoints"
+        ],
+        "operationId": "InterfaceEndpoints_CreateOrUpdate",
+        "description": "Creates or updates an interface endpoint in the specified resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "interfaceEndpointName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the interface endpoint."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InterfaceEndpoint"
+            },
+            "description": "Parameters supplied to the create or update interface endpoint operation"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting InterfaceEndpoint resource.",
+            "schema": {
+              "$ref": "#/definitions/InterfaceEndpoint"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting InterfaceEndpoint resource.",
+            "schema": {
+              "$ref": "#/definitions/InterfaceEndpoint"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create interface endpoint": {
+            "$ref": "./examples/InterfaceEndpointCreate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interfaceEndpoints": {
+      "get": {
+        "tags": [
+          "InterfaceEndpoints"
+        ],
+        "operationId": "InterfaceEndpoints_List",
+        "description": "Gets all interface endpoints in a resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of InterfaceEndpoint resources.",
+            "schema": {
+              "$ref": "#/definitions/InterfaceEndpointListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List interface endpoints in resource group": {
+            "$ref": "./examples/InterfaceEndpointList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/interfaceEndpoints": {
+      "get": {
+        "tags": [
+          "InterfaceEndpoints"
+        ],
+        "operationId": "InterfaceEndpoints_ListBySubscription",
+        "description": "Gets all interface endpoints in a subscription.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of InterfaceEndpoint resources.",
+            "schema": {
+              "$ref": "#/definitions/InterfaceEndpointListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all interface endpoints": {
+            "$ref": "./examples/InterfaceEndpointListAll.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "InterfaceEndpoint": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/InterfaceEndpointProperties",
+          "description": "Properties of the interface endpoint."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets a unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "Interface endpoint resource."
+    },
+    "InterfaceEndpointProperties": {
+      "properties": {
+        "fqdn": {
+          "type": "string",
+          "description": "A first-party service's FQDN that is mapped to the private IP allocated via this interface endpoint."
+        },
+        "endpointService": {
+          "$ref": "#/definitions/EndpointService",
+          "description": "A reference to the service being brought into the virtual network."
+        },
+        "subnet": {
+          "$ref": "./virtualNetwork.json#/definitions/Subnet",
+          "description": "The ID of the subnet from which the private IP will be allocated."
+        },
+        "networkInterfaces": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "./networkInterface.json#/definitions/NetworkInterface"
+          },
+          "description": "Gets an array of references to the network interfaces created for this interface endpoint."
+        },
+        "owner": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A read-only property that identifies who created this interface endpoint."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state of the interface endpoint. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        }
+      },
+      "description": "Properties of the interface endpoint."
+    },
+    "EndpointService": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique identifier of the service being referenced by the interface endpoint."
+        }
+      },
+      "description": "Identifies the service being brought into the virtual network."
+    },
+    "InterfaceEndpointListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InterfaceEndpoint"
+          },
+          "description": "Gets a list of InterfaceEndpoint resources in a resource group."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results.",
+          "readOnly": true
+        }
+      },
+      "description": "Response for the ListInterfaceEndpoints API service call."
+    }
+  }
+}
