@@ -27,7 +27,25 @@
               "azureDefenderStatusLastUpdated": "2020-01-02T17:18:19.1234567Z",
               "azureDefenderStatus": "Protected",
               "status": "Registered",
-              "hostType": "Physical Server"
+              "hostType": "Physical Server",
+              "alwaysOnRole": "FailoverClusterInstance",
+              "failoverCluster": {
+                "id": "f836af7e-85ed-4ea4-91fb-67709b34e323",
+                "networkName": "networkNameOfSQLFCI",
+                "sqlInstanceIds": [
+                  "/subscriptions/dummySub/resourceGroups/dummyRG/providers/Microsoft.AzureArcData/SqlServerInstances/sqlServer1",
+                  "/subscriptions/dummySub/resourceGroups/dummyRG/providers/Microsoft.AzureArcData/SqlServerInstances/sqlServer2"
+                ]
+              },
+              "backupPolicy": {
+                "retentionPeriodDays": 1,
+                "fullBackupDays": 1,
+                "differentialBackupHours": 12,
+                "transactionLogBackupMinutes": 30
+              },
+              "monitoring": {
+                "enabled": false
+              }
             },
             "location": "northeurope",
             "systemData": {
@@ -63,7 +81,10 @@
               "licenseType": "Free",
               "azureDefenderStatusLastUpdated": "2020-01-02T17:18:19.1234567Z",
               "azureDefenderStatus": "Protected",
-              "status": "Connected"
+              "status": "Connected",
+              "monitoring": {
+                "enabled": false
+              }
             },
             "location": "northeurope",
             "systemData": {
