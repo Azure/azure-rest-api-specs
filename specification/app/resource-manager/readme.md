@@ -55,6 +55,7 @@ input-file:
   - Microsoft.App/preview/2023-08-01-preview/SourceControls.json
   - Microsoft.App/preview/2023-08-01-preview/Subscriptions.json
   - Microsoft.App/preview/2023-08-01-preview/Usages.json
+  - Microsoft.App/preview/2023-08-01-preview/SessionPools.json
 ```
 ### Tag: package-preview-2023-05
 
