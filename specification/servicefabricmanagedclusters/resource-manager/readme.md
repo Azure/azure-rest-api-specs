@@ -212,6 +212,17 @@ input-file:
 - Microsoft.ServiceFabric/preview/2021-01-01-preview/nodetype.json
 ```
 
+### AutoRest v3 Suppressions
+``` yaml
+suppressions:
+    
+  - code: ResourceNameRestriction
+    reason: the service does not have a patter restriction. ARM's default rule should get applied.
+
+  - code: PutResponseSchemaDescription
+    reason: service creted with the 202 patter before this rule was introduced.
+```
+
 ---
 # Code Generation
 
