@@ -9,24 +9,48 @@ using Azure.Core.Traits;
 
 namespace Easm;
 
-alias CommonListParameter = {
+@trait
+model PageResultBodyFields<TResultFields, Context = TraitContext.List> {
+  @traitContext(Context)
+  responseFields: {
+    @traitLocation(TraitLocation.Response)
+    parameters: TResultFields;
+  };
+}
+
+alias CommonListTrait = QueryParametersTrait<{
   ...FilterQueryParameter;
   ...SkipQueryParameter;
   ...MaxPageSizeQueryParameter;
-};
-alias AssetsListParameter = {
-  ...FilterQueryParameter;
-  ...OrderByParameter;
-  ...SkipQueryParameter;
-  ...MaxPageSizeQueryParameter;
-  ...MarkParameter;
+}>;
+alias AssetsListTrait = {
+  ...PageResultBodyFields<{
+    @doc("The total number of items available in the full result set.")
+    totalElements?: int64;
+
+    @doc("The cursor mark to be used on the next request.  Not set if using paging.")
+    mark?: string;
+  }>;
+  ...QueryParametersTrait<{
+    ...FilterQueryParameter;
+    ...OrderByParameter;
+    ...SkipQueryParameter;
+    ...MaxPageSizeQueryParameter;
+    ...MarkParameter;
+  }>;
 };
 alias AssetsUpdateParameter = {
   ...RequiredFilterParameter;
 };
-alias DataConnectionsListParameter = {
-  ...SkipQueryParameter;
-  ...MaxPageSizeQueryParameter;
+alias DataConnectionsListTrait = {
+  ...PageResultBodyFields<{
+    @doc("The total number of items available in the full result set.")
+    totalElements?: int64;
+  }>;
+  ...QueryParametersTrait<{
+    ...SkipQueryParameter;
+    ...MaxPageSizeQueryParameter;
+  }>;
 };
 alias DiscoveryGroupsListRunsParameter = {
   ...FilterQueryParameter;
@@ -34,11 +58,17 @@ alias DiscoveryGroupsListRunsParameter = {
   ...MaxPageSizeQueryParameter;
   ...DiscoGroupNameParameter;
 };
-alias TasksListParameter = {
-  ...FilterQueryParameter;
-  ...OrderByParameter;
-  ...SkipQueryParameter;
-  ...MaxPageSizeQueryParameter;
+alias TasksListTrait = {
+  ...PageResultBodyFields<{
+    @doc("The total number of items available in the full result set.")
+    totalElements?: int64;
+  }>;
+  ...QueryParametersTrait<{
+    ...FilterQueryParameter;
+    ...OrderByParameter;
+    ...SkipQueryParameter;
+    ...MaxPageSizeQueryParameter;
+  }>;
 };
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model AlexaInfo {
@@ -80,7 +110,7 @@ model AsAsset extends InventoryAsset {
 }
 
 @doc("The page of assets that match the provided metric.")
-model AssetPageResponse {
+model AssetPageResult {
   @doc("The total number of items available in the full result set.")
   totalElements?: int64;
 
@@ -118,6 +148,7 @@ model AssetResource {
 
   @doc("The date this asset was last updated for this workspace.")
   updatedDate?: utcDateTime;
+
   state?: AssetState;
 
   @doc("An optional customer provided identifier for this asset.")
@@ -134,6 +165,7 @@ model AssetResource {
 
   @doc("The history of how this asset was pulled into the workspace through the discovery process.")
   auditTrail?: AuditTrailItem[];
+
   reason?: string;
 }
 
@@ -150,7 +182,7 @@ model AssetSecurityPolicy {
 }
 
 @doc("The collection of asset summaries.")
-model AssetSummaryResponse {
+model AssetSummaryResult {
   @doc("The name of the summary response.  Depending on the request time this will either be the asset filter, risk category, or risk metric.")
   displayName?: string;
 
@@ -179,7 +211,7 @@ model AssetSummaryResponse {
   link?: string;
 
   @doc("The corresponding child entities.  For metric categories this will contain metrics.  For filters with groupBy and segmentBy this will contain facets.")
-  children?: AssetSummaryResponse[];
+  children?: AssetSummaryResult[];
 }
 
 @doc("A request body used to update an asset.")
@@ -245,6 +277,7 @@ model Banner {
 
   @projectedName("csharp", "bannerProperty")
   banner?: string;
+
   firstSeen?: utcDateTime;
   lastSeen?: utcDateTime;
   count?: int64;
@@ -308,7 +341,7 @@ model Cve {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model DataConnectionPageResponse {
+model DataConnectionPageResult {
   @doc("The total number of items available in the full result set.")
   totalElements?: int64;
 
@@ -407,7 +440,7 @@ model DependentResource {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model DiscoGroupPageResponse {
+model DiscoGroupPageResult {
   @doc("The total number of items available in the full result set.")
   totalElements?: int64;
 
@@ -478,7 +511,7 @@ model DiscoGroup {
   excludes?: DiscoSource[];
 
   @doc("The latest run of this disco group with some limited information, null if the group has never been run.")
-  latestRun?: DiscoRunResponse;
+  latestRun?: DiscoRunResult;
 
   @doc("The date for the disco group was created.")
   createdDate?: utcDateTime;
@@ -488,7 +521,7 @@ model DiscoGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model DiscoRunPageResponse {
+model DiscoRunPageResult {
   @doc("The total number of items available in the full result set.")
   totalElements?: int64;
 
@@ -496,11 +529,11 @@ model DiscoRunPageResponse {
   nextLink?: string;
 
   @doc("The items in the current page of results.")
-  value?: DiscoRunResponse[];
+  value?: DiscoRunResult[];
 }
 
 @doc("The latest run of this disco group with some limited information, null if the group has never been run.")
-model DiscoRunResponse {
+model DiscoRunResult {
   @doc("The date for when the disco run was created in the system.")
   submittedDate?: utcDateTime;
 
@@ -539,7 +572,7 @@ model DiscoSource {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model DiscoTemplatePageResponse {
+model DiscoTemplatePageResult {
   @doc("The total number of items available in the full result set.")
   totalElements?: int64;
 
@@ -637,16 +670,6 @@ model ErrorDetail {
 
   @doc("This is an object containing more specific information than the current object about the error.")
   innererror?: InnerError;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-@error
-model ErrorResponse {
-  @header("x-ms-error-code")
-  errorCode: string;
-
-  @doc("This is the top-level error object whose code matches the x-ms-error-code response header.")
-  error: ErrorDetail;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -782,6 +805,7 @@ model IpAddressAsset extends InventoryAsset {
 model IpBlock {
   @projectedName("csharp", "ipBlockProperty")
   ipBlock?: string;
+
   sources?: Source[];
   firstSeen?: utcDateTime;
   lastSeen?: utcDateTime;
@@ -977,6 +1001,7 @@ model PageCause {
 model Port {
   @projectedName("csharp", "portProperty")
   port?: int32;
+
   firstSeen?: utcDateTime;
   lastSeen?: utcDateTime;
   count?: int64;
@@ -1010,7 +1035,7 @@ model ReportAssetSnapshotRequest {
 }
 
 @doc("A snapshot of assets captured daily for the provided metric.  Asset details only contain primary properties.  Detailed asset data can be retrieved from the asset endpoints.")
-model ReportAssetSnapshotResponse {
+model ReportAssetSnapshotResult {
   @doc("The name of the metric.")
   displayName?: string;
 
@@ -1027,7 +1052,7 @@ model ReportAssetSnapshotResponse {
   description?: string;
 
   @doc("The page of assets that match the provided metric.")
-  assets?: AssetPageResponse;
+  assets?: AssetPageResult;
 }
 
 @doc("A request body used to retrieve summary asset information. One and only one collection of summary identifiers must be provided: filters, metrics, or metricCategories.")
@@ -1052,9 +1077,9 @@ model ReportAssetSummaryRequest {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model ReportAssetSummaryResponse {
+model ReportAssetSummaryResult {
   @doc("The collection of asset summaries.")
-  assetSummaries?: AssetSummaryResponse[];
+  assetSummaries?: AssetSummaryResult[];
 }
 
 @doc("The breakdown of billable asset counts for each asset type.")
@@ -1067,7 +1092,7 @@ model ReportBillableAssetBreakdown {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model ReportBillableAssetSnapshotResponse {
+model ReportBillableAssetSnapshotResult {
   @doc("The date these assets were billed on.")
   date?: plainDate;
 
@@ -1079,8 +1104,8 @@ model ReportBillableAssetSnapshotResponse {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model ReportBillableAssetSummaryResponse {
-  assetSummaries?: ReportBillableAssetSnapshotResponse[];
+model ReportBillableAssetSummaryResult {
+  assetSummaries?: ReportBillableAssetSnapshotResult[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -1106,7 +1131,7 @@ model ResourceUrl {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model SavedFilterPageResponse {
+model SavedFilterPageResult {
   @doc("The total number of items available in the full result set.")
   totalElements?: int64;
 
@@ -1139,6 +1164,7 @@ model SavedFilter {
 
   @doc("The name that can be used for display purposes.")
   displayName?: string;
+
   filter?: string;
   description?: string;
 }
@@ -1181,6 +1207,7 @@ model SoaRecord {
 model Source {
   @projectedName("csharp", "sourceProperty")
   source?: string;
+
   firstSeen?: utcDateTime;
   lastSeen?: utcDateTime;
   count?: int64;
@@ -1248,7 +1275,7 @@ model SubResourceIntegrityCheck {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model TaskPageResponse {
+model TaskPageResult {
   @doc("The total number of items available in the full result set.")
   totalElements?: int64;
 
@@ -1291,7 +1318,7 @@ model Task {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model ValidateResponse {
+model ValidateResult {
   @doc("This is the top-level error object whose code matches the x-ms-error-code response header.")
   error?: ErrorDetail;
 }
@@ -1313,8 +1340,8 @@ model WebComponent {
   service?: string;
 }
 
-@doc("Response with no content")
-model NoContentResponse {
+@doc("Result with no content")
+model NoContentResult {
   @doc("204 status code")
   @statusCode
   statusCode: 204;

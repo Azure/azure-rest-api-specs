@@ -14,131 +14,104 @@ alias ServiceTraits = NoRepeatableRequests &
     NoConditionalRequests &
     NoClientRequestId;
 
-alias Operations = Azure.Core.ResourceOperations<ServiceTraits, ErrorResponse>;
+alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 @tag("Assets")
 @doc("Provides access to inventory assets.")
 interface Assets {
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
     @doc("Retrieve a list of assets for the provided search parameters.")
-    list is Foundations.ResourceList<
+    listAssetResource is Operations.ResourceList<
         AssetResource,
-        AssetsListParameter,
-        AssetPageResponse,
-        {},
-        ErrorResponse
+        AssetsListTrait
     >;
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
     @doc("Update labels on assets matching the provided filter.")
     @route("/assets")
     @post
-    update is Foundations.Operation<
+    updateAssets is Foundations.Operation<
         {
             ...AssetsUpdateParameter;
             ...AssetUpdateData;
         },
-        Task,
-        {},
-        ErrorResponse
+        Task
     >;
     @doc("Retrieve an asset by assetId.")
-    get is Operations.ResourceRead<AssetResource>;
+    getAssetResource is Operations.ResourceRead<AssetResource>;
 }
 
 @tag("Data Connections")
 @doc("Provides access to data connection resources.")
 interface DataConnections {
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
     @doc("Retrieve a list of data connections.")
-    list is Foundations.ResourceList<
+    listDataConnection is Operations.ResourceList<
         DataConnection,
-        DataConnectionsListParameter,
-        DataConnectionPageResponse,
-        {},
-        ErrorResponse
+        DataConnectionsListTrait
     >;
     @doc("Validate a data connection with a given dataConnectionName.")
     @action("validate")
-    validate is Operations.ResourceCollectionAction<
+    validateDataConnection is Operations.ResourceCollectionAction<
         DataConnection,
         DataConnectionData,
-        ValidateResponse
+        ValidateResult
     >;
     @doc("Retrieve a data connection with a given dataConnectionName.")
-    get is Operations.ResourceRead<DataConnection>;
+    getDataConnection is Operations.ResourceRead<DataConnection>;
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
     @doc("Create or update a data connection with a given dataConnectionName.")
     @put
-    put is Foundations.ResourceOperation<
+    putDataConnection is Foundations.ResourceOperation<
         DataConnection,
         DataConnectionData,
-        DataConnection,
-        {},
-        ErrorResponse
+        DataConnection
     >;
     @doc("Delete a data connection with a given dataConnectionName.")
-    delete is Operations.ResourceDelete<DataConnection>;
+    deleteDataConnection is Operations.ResourceDelete<DataConnection>;
 }
 
 @tag("Discovery Groups")
 @doc("Provides access to discovery resources.")
 interface DiscoveryGroups {
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
     @doc("Retrieve a list of discovery group for the provided search parameters.")
-    list is Foundations.ResourceList<
-        DiscoGroup,
-        CommonListParameter,
-        DiscoGroupPageResponse,
-        {},
-        ErrorResponse
-    >;
+    listDiscoGroup is Operations.ResourceList<DiscoGroup, CommonListTrait>;
     @doc("Validate a discovery group with a given groupName.")
     @action("validate")
-    validate is Operations.ResourceCollectionAction<
+    validateDiscoGroup is Operations.ResourceCollectionAction<
         DiscoGroup,
         DiscoGroupData,
-        ValidateResponse
+        ValidateResult
     >;
     @doc("Retrieve a discovery group with a given groupName.")
-    get is Operations.ResourceRead<DiscoGroup>;
+    getDiscoGroup is Operations.ResourceRead<DiscoGroup>;
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
     @doc("Create a discovery group with a given groupName.")
     @put
-    put is Foundations.ResourceOperation<
+    putDiscoGroup is Foundations.ResourceOperation<
         DiscoGroup,
         DiscoGroupData,
-        DiscoGroup,
-        {},
-        ErrorResponse
+        DiscoGroup
     >;
     @doc("Run a discovery group with a given groupName.")
     @action("run")
-    run is Operations.ResourceAction<DiscoGroup, {}, NoContentResponse>;
+    runDiscoGroup is Operations.ResourceAction<DiscoGroup, {}, NoContentResult>;
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
     @doc("Retrieve a collection of discovery run results for a discovery group with a given groupName.")
     @route("/discoGroups/{groupName}/runs")
     @get
     listRuns is Foundations.Operation<
         DiscoveryGroupsListRunsParameter,
-        DiscoRunPageResponse,
-        {},
-        ErrorResponse
+        DiscoRunPageResult
     >;
 }
 
 @tag("Discovery Templates")
 @doc("Provides access to disco template resources.")
 interface DiscoveryTemplates {
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
     @doc("Retrieve a list of disco templates for the provided search parameters.")
-    list is Foundations.ResourceList<
+    listDiscoTemplate is Operations.ResourceList<
         DiscoTemplate,
-        CommonListParameter,
-        DiscoTemplatePageResponse,
-        {},
-        ErrorResponse
+        CommonListTrait
     >;
     @doc("Retrieve a disco template with a given templateId.")
-    get is Operations.ResourceRead<DiscoTemplate>;
+    getDiscoTemplate is Operations.ResourceRead<DiscoTemplate>;
 }
 
 @tag("Reports")
@@ -148,77 +121,52 @@ interface Reports {
     @doc("Get billable assets summary for the workspace.")
     @route("/reports/assets:getBillable")
     @post
-    billable is Foundations.Operation<
-        {},
-        ReportBillableAssetSummaryResponse,
-        {},
-        ErrorResponse
-    >;
+    getBillable is Foundations.Operation<{}, ReportBillableAssetSummaryResult>;
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
     @doc("Get the most recent snapshot of asset summary values for the snapshot request.")
     @route("/reports/assets:getSnapshot")
     @post
-    snapshot is Foundations.Operation<
+    getSnapshot is Foundations.Operation<
         ReportAssetSnapshotRequest,
-        ReportAssetSnapshotResponse,
-        {},
-        ErrorResponse
+        ReportAssetSnapshotResult
     >;
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
     @doc("Get asset summary details for the summary request.")
     @route("/reports/assets:getSummary")
     @post
-    summary is Foundations.Operation<
+    getSummary is Foundations.Operation<
         ReportAssetSummaryRequest,
-        ReportAssetSummaryResponse,
-        {},
-        ErrorResponse
+        ReportAssetSummaryResult
     >;
 }
 
 @tag("Saved Filters")
 @doc("Provides access to saved filter resources.")
 interface SavedFilters {
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
     @doc("Retrieve a list of saved filters for the provided search parameters.")
-    list is Foundations.ResourceList<
-        SavedFilter,
-        CommonListParameter,
-        SavedFilterPageResponse,
-        {},
-        ErrorResponse
-    >;
+    listSavedFilter is Operations.ResourceList<SavedFilter, CommonListTrait>;
     @doc("Retrieve a saved filter by filterName.")
-    get is Operations.ResourceRead<SavedFilter>;
+    getSavedFilter is Operations.ResourceRead<SavedFilter>;
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
     @doc("Create or update a saved filter with a given filterName.")
     @put
-    put is Foundations.ResourceOperation<
+    putSavedFilter is Foundations.ResourceOperation<
         SavedFilter,
         SavedFilterData,
-        SavedFilter,
-        {},
-        ErrorResponse
+        SavedFilter
     >;
     @doc("Delete a saved filter with a given filterName.")
-    delete is Operations.ResourceDelete<SavedFilter>;
+    deleteSavedFilter is Operations.ResourceDelete<SavedFilter>;
 }
 
 @tag("Tasks")
 @doc("Provides access to task resources.")
 interface Tasks {
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
     @doc("Retrieve a list of tasks for the provided search parameters.")
-    list is Foundations.ResourceList<
-        Task,
-        TasksListParameter,
-        TaskPageResponse,
-        {},
-        ErrorResponse
-    >;
+    listTask is Operations.ResourceList<Task, TasksListTrait>;
     @doc("Retrieve a task by taskId.")
-    get is Operations.ResourceRead<Task>;
+    getTask is Operations.ResourceRead<Task>;
     @doc("Cancel a task by taskId.")
     @action("cancel")
-    cancel is Operations.ResourceAction<Task, {}, Task>;
+    cancelTask is Operations.ResourceAction<Task, {}, Task>;
 }

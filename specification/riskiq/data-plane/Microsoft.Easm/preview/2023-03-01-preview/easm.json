@@ -96,7 +96,7 @@
   "paths": {
     "/assets": {
       "get": {
-        "operationId": "Assets_List",
+        "operationId": "Assets_ListAssetResource",
         "tags": [
           "Assets"
         ],
@@ -125,29 +125,55 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/AssetPageResponse"
+              "type": "object",
+              "description": "Paged collection of AssetResource items",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "description": "The AssetResource items on this page",
+                  "items": {
+                    "$ref": "#/definitions/AssetResource"
+                  }
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items"
+                },
+                "totalElements": {
+                  "type": "integer",
+                  "format": "int64",
+                  "description": "The total number of items available in the full result set."
+                },
+                "mark": {
+                  "type": "string",
+                  "description": "The cursor mark to be used on the next request.  Not set if using paging."
+                }
+              },
+              "required": [
+                "value"
+              ]
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
           }
         },
-        "x-ms-examples": {
-          "Assets_List_MaximumSet_Gen": {
-            "$ref": "./examples/Assets_List_MaximumSet_Gen.json"
-          }
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       },
       "post": {
-        "operationId": "Assets_Update",
+        "operationId": "Assets_UpdateAssets",
         "tags": [
           "Assets"
         ],
@@ -178,28 +204,21 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Assets_Update_MaximumSet_Gen": {
-            "$ref": "./examples/Assets_Update_MaximumSet_Gen.json"
-          },
-          "Assets_Update_MinimumSet_Gen": {
-            "$ref": "./examples/Assets_Update_MinimumSet_Gen.json"
           }
         }
       }
     },
     "/assets/{assetId}": {
       "get": {
-        "operationId": "Assets_Get",
+        "operationId": "Assets_GetAssetResource",
         "tags": [
           "Assets"
         ],
@@ -226,25 +245,21 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Assets_Get_MaximumSet_Gen": {
-            "$ref": "./examples/Assets_Get_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/dataConnections": {
       "get": {
-        "operationId": "DataConnections_List",
+        "operationId": "DataConnections_ListDataConnection",
         "tags": [
           "Data Connections"
         ],
@@ -264,34 +279,53 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DataConnectionPageResponse"
+              "type": "object",
+              "description": "Paged collection of DataConnection items",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "description": "The DataConnection items on this page",
+                  "items": {
+                    "$ref": "#/definitions/DataConnection"
+                  }
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items"
+                },
+                "totalElements": {
+                  "type": "integer",
+                  "format": "int64",
+                  "description": "The total number of items available in the full result set."
+                }
+              },
+              "required": [
+                "value"
+              ]
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
           }
         },
-        "x-ms-examples": {
-          "DataConnections_List_MaximumSet_Gen": {
-            "$ref": "./examples/DataConnections_List_MaximumSet_Gen.json"
-          },
-          "DataConnections_List_MinimumSet_Gen": {
-            "$ref": "./examples/DataConnections_List_MinimumSet_Gen.json"
-          }
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/dataConnections/{dataConnectionName}": {
       "get": {
-        "operationId": "DataConnections_Get",
+        "operationId": "DataConnections_GetDataConnection",
         "tags": [
           "Data Connections"
         ],
@@ -318,26 +352,19 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "DataConnections_Get_MaximumSet_Gen": {
-            "$ref": "./examples/DataConnections_Get_MaximumSet_Gen.json"
-          },
-          "DataConnections_Get_MinimumSet_Gen": {
-            "$ref": "./examples/DataConnections_Get_MinimumSet_Gen.json"
-          }
         }
       },
       "put": {
-        "operationId": "DataConnections_Put",
+        "operationId": "DataConnections_PutDataConnection",
         "tags": [
           "Data Connections"
         ],
@@ -372,26 +399,19 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "DataConnections_Put_MaximumSet_Gen": {
-            "$ref": "./examples/DataConnections_Put_MaximumSet_Gen.json"
-          },
-          "DataConnections_Put_MinimumSet_Gen": {
-            "$ref": "./examples/DataConnections_Put_MinimumSet_Gen.json"
-          }
         }
       },
       "delete": {
-        "operationId": "DataConnections_Delete",
+        "operationId": "DataConnections_DeleteDataConnection",
         "tags": [
           "Data Connections"
         ],
@@ -415,28 +435,21 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "DataConnections_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/DataConnections_Delete_MaximumSet_Gen.json"
-          },
-          "DataConnections_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/DataConnections_Delete_MinimumSet_Gen.json"
           }
         }
       }
     },
     "/dataConnections:validate": {
       "post": {
-        "operationId": "DataConnections_Validate",
+        "operationId": "DataConnections_ValidateDataConnection",
         "tags": [
           "Data Connections"
         ],
@@ -458,34 +471,27 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ValidateResponse"
+              "$ref": "#/definitions/ValidateResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "DataConnections_Validate_MaximumSet_Gen": {
-            "$ref": "./examples/DataConnections_Validate_MaximumSet_Gen.json"
-          },
-          "DataConnections_Validate_MinimumSet_Gen": {
-            "$ref": "./examples/DataConnections_Validate_MinimumSet_Gen.json"
           }
         }
       }
     },
     "/discoGroups": {
       "get": {
-        "operationId": "DiscoveryGroups_List",
+        "operationId": "DiscoveryGroups_ListDiscoGroup",
         "tags": [
           "Discovery Groups"
         ],
@@ -508,34 +514,48 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DiscoGroupPageResponse"
+              "type": "object",
+              "description": "Paged collection of DiscoGroup items",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "description": "The DiscoGroup items on this page",
+                  "items": {
+                    "$ref": "#/definitions/DiscoGroup"
+                  }
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items"
+                }
+              },
+              "required": [
+                "value"
+              ]
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
           }
         },
-        "x-ms-examples": {
-          "DiscoveryGroups_List_MaximumSet_Gen": {
-            "$ref": "./examples/DiscoveryGroups_List_MaximumSet_Gen.json"
-          },
-          "DiscoveryGroups_List_MinimumSet_Gen": {
-            "$ref": "./examples/DiscoveryGroups_List_MinimumSet_Gen.json"
-          }
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/discoGroups/{groupName}": {
       "get": {
-        "operationId": "DiscoveryGroups_Get",
+        "operationId": "DiscoveryGroups_GetDiscoGroup",
         "tags": [
           "Discovery Groups"
         ],
@@ -562,26 +582,19 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "DiscoveryGroups_Get_MaximumSet_Gen": {
-            "$ref": "./examples/DiscoveryGroups_Get_MaximumSet_Gen.json"
-          },
-          "DiscoveryGroups_Get_MinimumSet_Gen": {
-            "$ref": "./examples/DiscoveryGroups_Get_MinimumSet_Gen.json"
-          }
         }
       },
       "put": {
-        "operationId": "DiscoveryGroups_Put",
+        "operationId": "DiscoveryGroups_PutDiscoGroup",
         "tags": [
           "Discovery Groups"
         ],
@@ -616,28 +629,21 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "DiscoveryGroups_Put_MaximumSet_Gen": {
-            "$ref": "./examples/DiscoveryGroups_Put_MaximumSet_Gen.json"
-          },
-          "DiscoveryGroups_Put_MinimumSet_Gen": {
-            "$ref": "./examples/DiscoveryGroups_Put_MinimumSet_Gen.json"
           }
         }
       }
     },
     "/discoGroups/{groupName}:run": {
       "post": {
-        "operationId": "DiscoveryGroups_Run",
+        "operationId": "DiscoveryGroups_RunDiscoGroup",
         "tags": [
           "Discovery Groups"
         ],
@@ -661,21 +667,14 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "DiscoveryGroups_Run_MaximumSet_Gen": {
-            "$ref": "./examples/DiscoveryGroups_Run_MaximumSet_Gen.json"
-          },
-          "DiscoveryGroups_Run_MinimumSet_Gen": {
-            "$ref": "./examples/DiscoveryGroups_Run_MinimumSet_Gen.json"
           }
         }
       }
@@ -708,34 +707,27 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DiscoRunPageResponse"
+              "$ref": "#/definitions/DiscoRunPageResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "DiscoveryGroups_ListRuns_MaximumSet_Gen": {
-            "$ref": "./examples/DiscoveryGroups_ListRuns_MaximumSet_Gen.json"
-          },
-          "DiscoveryGroups_ListRuns_MinimumSet_Gen": {
-            "$ref": "./examples/DiscoveryGroups_ListRuns_MinimumSet_Gen.json"
           }
         }
       }
     },
     "/discoGroups:validate": {
       "post": {
-        "operationId": "DiscoveryGroups_Validate",
+        "operationId": "DiscoveryGroups_ValidateDiscoGroup",
         "tags": [
           "Discovery Groups"
         ],
@@ -757,34 +749,27 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ValidateResponse"
+              "$ref": "#/definitions/ValidateResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "DiscoveryGroups_Validate_MaximumSet_Gen": {
-            "$ref": "./examples/DiscoveryGroups_Validate_MaximumSet_Gen.json"
-          },
-          "DiscoveryGroups_Validate_MinimumSet_Gen": {
-            "$ref": "./examples/DiscoveryGroups_Validate_MinimumSet_Gen.json"
           }
         }
       }
     },
     "/discoTemplates": {
       "get": {
-        "operationId": "DiscoveryTemplates_List",
+        "operationId": "DiscoveryTemplates_ListDiscoTemplate",
         "tags": [
           "Discovery Templates"
         ],
@@ -807,34 +792,48 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DiscoTemplatePageResponse"
+              "type": "object",
+              "description": "Paged collection of DiscoTemplate items",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "description": "The DiscoTemplate items on this page",
+                  "items": {
+                    "$ref": "#/definitions/DiscoTemplate"
+                  }
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items"
+                }
+              },
+              "required": [
+                "value"
+              ]
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
           }
         },
-        "x-ms-examples": {
-          "DiscoveryTemplates_List_MaximumSet_Gen": {
-            "$ref": "./examples/DiscoveryTemplates_List_MaximumSet_Gen.json"
-          },
-          "DiscoveryTemplates_List_MinimumSet_Gen": {
-            "$ref": "./examples/DiscoveryTemplates_List_MinimumSet_Gen.json"
-          }
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/discoTemplates/{templateId}": {
       "get": {
-        "operationId": "DiscoveryTemplates_Get",
+        "operationId": "DiscoveryTemplates_GetDiscoTemplate",
         "tags": [
           "Discovery Templates"
         ],
@@ -861,28 +860,21 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "DiscoveryTemplates_Get_MaximumSet_Gen": {
-            "$ref": "./examples/DiscoveryTemplates_Get_MaximumSet_Gen.json"
-          },
-          "DiscoveryTemplates_Get_MinimumSet_Gen": {
-            "$ref": "./examples/DiscoveryTemplates_Get_MinimumSet_Gen.json"
           }
         }
       }
     },
     "/reports/assets:getBillable": {
       "post": {
-        "operationId": "Reports_Billable",
+        "operationId": "Reports_GetBillable",
         "tags": [
           "Reports"
         ],
@@ -896,34 +888,27 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ReportBillableAssetSummaryResponse"
+              "$ref": "#/definitions/ReportBillableAssetSummaryResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Reports_Billable_MaximumSet_Gen": {
-            "$ref": "./examples/Reports_Billable_MaximumSet_Gen.json"
-          },
-          "Reports_Billable_MinimumSet_Gen": {
-            "$ref": "./examples/Reports_Billable_MinimumSet_Gen.json"
           }
         }
       }
     },
     "/reports/assets:getSnapshot": {
       "post": {
-        "operationId": "Reports_Snapshot",
+        "operationId": "Reports_GetSnapshot",
         "tags": [
           "Reports"
         ],
@@ -945,31 +930,27 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ReportAssetSnapshotResponse"
+              "$ref": "#/definitions/ReportAssetSnapshotResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Reports_Snapshot_MaximumSet_Gen": {
-            "$ref": "./examples/Reports_Snapshot_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/reports/assets:getSummary": {
       "post": {
-        "operationId": "Reports_Summary",
+        "operationId": "Reports_GetSummary",
         "tags": [
           "Reports"
         ],
@@ -991,34 +972,27 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ReportAssetSummaryResponse"
+              "$ref": "#/definitions/ReportAssetSummaryResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Reports_Summary_MaximumSet_Gen": {
-            "$ref": "./examples/Reports_Summary_MaximumSet_Gen.json"
-          },
-          "Reports_Summary_MinimumSet_Gen": {
-            "$ref": "./examples/Reports_Summary_MinimumSet_Gen.json"
           }
         }
       }
     },
     "/savedFilters": {
       "get": {
-        "operationId": "SavedFilters_List",
+        "operationId": "SavedFilters_ListSavedFilter",
         "tags": [
           "Saved Filters"
         ],
@@ -1041,34 +1015,48 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/SavedFilterPageResponse"
+              "type": "object",
+              "description": "Paged collection of SavedFilter items",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "description": "The SavedFilter items on this page",
+                  "items": {
+                    "$ref": "#/definitions/SavedFilter"
+                  }
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items"
+                }
+              },
+              "required": [
+                "value"
+              ]
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
           }
         },
-        "x-ms-examples": {
-          "SavedFilters_List_MaximumSet_Gen": {
-            "$ref": "./examples/SavedFilters_List_MaximumSet_Gen.json"
-          },
-          "SavedFilters_List_MinimumSet_Gen": {
-            "$ref": "./examples/SavedFilters_List_MinimumSet_Gen.json"
-          }
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/savedFilters/{filterName}": {
       "get": {
-        "operationId": "SavedFilters_Get",
+        "operationId": "SavedFilters_GetSavedFilter",
         "tags": [
           "Saved Filters"
         ],
@@ -1095,26 +1083,19 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "SavedFilters_Get_MaximumSet_Gen": {
-            "$ref": "./examples/SavedFilters_Get_MaximumSet_Gen.json"
-          },
-          "SavedFilters_Get_MinimumSet_Gen": {
-            "$ref": "./examples/SavedFilters_Get_MinimumSet_Gen.json"
-          }
         }
       },
       "put": {
-        "operationId": "SavedFilters_Put",
+        "operationId": "SavedFilters_PutSavedFilter",
         "tags": [
           "Saved Filters"
         ],
@@ -1149,26 +1130,19 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "SavedFilters_Put_MaximumSet_Gen": {
-            "$ref": "./examples/SavedFilters_Put_MaximumSet_Gen.json"
-          },
-          "SavedFilters_Put_MinimumSet_Gen": {
-            "$ref": "./examples/SavedFilters_Put_MinimumSet_Gen.json"
-          }
         }
       },
       "delete": {
-        "operationId": "SavedFilters_Delete",
+        "operationId": "SavedFilters_DeleteSavedFilter",
         "tags": [
           "Saved Filters"
         ],
@@ -1192,28 +1166,21 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "SavedFilters_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/SavedFilters_Delete_MaximumSet_Gen.json"
-          },
-          "SavedFilters_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/SavedFilters_Delete_MinimumSet_Gen.json"
           }
         }
       }
     },
     "/tasks": {
       "get": {
-        "operationId": "Tasks_List",
+        "operationId": "Tasks_ListTask",
         "tags": [
           "Tasks"
         ],
@@ -1239,34 +1206,53 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TaskPageResponse"
+              "type": "object",
+              "description": "Paged collection of Task items",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "description": "The Task items on this page",
+                  "items": {
+                    "$ref": "#/definitions/Task"
+                  }
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items"
+                },
+                "totalElements": {
+                  "type": "integer",
+                  "format": "int64",
+                  "description": "The total number of items available in the full result set."
+                }
+              },
+              "required": [
+                "value"
+              ]
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
           }
         },
-        "x-ms-examples": {
-          "Tasks_List_MaximumSet_Gen": {
-            "$ref": "./examples/Tasks_List_MaximumSet_Gen.json"
-          },
-          "Tasks_List_MinimumSet_Gen": {
-            "$ref": "./examples/Tasks_List_MinimumSet_Gen.json"
-          }
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/tasks/{taskId}": {
       "get": {
-        "operationId": "Tasks_Get",
+        "operationId": "Tasks_GetTask",
         "tags": [
           "Tasks"
         ],
@@ -1293,28 +1279,21 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Tasks_Get_MaximumSet_Gen": {
-            "$ref": "./examples/Tasks_Get_MaximumSet_Gen.json"
-          },
-          "Tasks_Get_MinimumSet_Gen": {
-            "$ref": "./examples/Tasks_Get_MinimumSet_Gen.json"
           }
         }
       }
     },
     "/tasks/{taskId}:cancel": {
       "post": {
-        "operationId": "Tasks_Cancel",
+        "operationId": "Tasks_CancelTask",
         "tags": [
           "Tasks"
         ],
@@ -1341,21 +1320,14 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Tasks_Cancel_MaximumSet_Gen": {
-            "$ref": "./examples/Tasks_Cancel_MaximumSet_Gen.json"
-          },
-          "Tasks_Cancel_MinimumSet_Gen": {
-            "$ref": "./examples/Tasks_Cancel_MinimumSet_Gen.json"
           }
         }
       }
@@ -1595,7 +1567,7 @@
         "modelAsString": true
       }
     },
-    "AssetPageResponse": {
+    "AssetPageResult": {
       "type": "object",
       "description": "The page of assets that match the provided metric.",
       "properties": {
@@ -1747,7 +1719,7 @@
         "modelAsString": true
       }
     },
-    "AssetSummaryResponse": {
+    "AssetSummaryResult": {
       "type": "object",
       "description": "The collection of asset summaries.",
       "properties": {
@@ -1793,7 +1765,7 @@
           "type": "array",
           "description": "The corresponding child entities.  For metric categories this will contain metrics.  For filters with groupBy and segmentBy this will contain facets.",
           "items": {
-            "$ref": "#/definitions/AssetSummaryResponse"
+            "$ref": "#/definitions/AssetSummaryResult"
           },
           "x-ms-identifiers": []
         }
@@ -1933,6 +1905,67 @@
       "x-ms-enum": {
         "name": "AuditTrailItemKind",
         "modelAsString": true
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
       }
     },
     "Azure.Core.uuid": {
@@ -2342,7 +2375,7 @@
         "modelAsString": true
       }
     },
-    "DataConnectionPageResponse": {
+    "DataConnectionPageResult": {
       "type": "object",
       "properties": {
         "totalElements": {
@@ -2513,7 +2546,7 @@
           "x-ms-identifiers": []
         },
         "latestRun": {
-          "$ref": "#/definitions/DiscoRunResponse",
+          "$ref": "#/definitions/DiscoRunResult",
           "description": "The latest run of this disco group with some limited information, null if the group has never been run."
         },
         "createdDate": {
@@ -2580,7 +2613,7 @@
         }
       }
     },
-    "DiscoGroupPageResponse": {
+    "DiscoGroupPageResult": {
       "type": "object",
       "properties": {
         "totalElements": {
@@ -2601,7 +2634,7 @@
         }
       }
     },
-    "DiscoRunPageResponse": {
+    "DiscoRunPageResult": {
       "type": "object",
       "properties": {
         "totalElements": {
@@ -2617,13 +2650,13 @@
           "type": "array",
           "description": "The items in the current page of results.",
           "items": {
-            "$ref": "#/definitions/DiscoRunResponse"
+            "$ref": "#/definitions/DiscoRunResult"
           },
           "x-ms-identifiers": []
         }
       }
     },
-    "DiscoRunResponse": {
+    "DiscoRunResult": {
       "type": "object",
       "description": "The latest run of this disco group with some limited information, null if the group has never been run.",
       "properties": {
@@ -2781,7 +2814,7 @@
         "id"
       ]
     },
-    "DiscoTemplatePageResponse": {
+    "DiscoTemplatePageResult": {
       "type": "object",
       "properties": {
         "totalElements": {
@@ -3060,18 +3093,6 @@
       "required": [
         "code",
         "message"
-      ]
-    },
-    "ErrorResponse": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorDetail",
-          "description": "This is the top-level error object whose code matches the x-ms-error-code response header."
-        }
-      },
-      "required": [
-        "error"
       ]
     },
     "GuidPair": {
@@ -4019,9 +4040,9 @@
         }
       ]
     },
-    "NoContentResponse": {
+    "NoContentResult": {
       "type": "object",
-      "description": "Response with no content",
+      "description": "Result with no content",
       "properties": {}
     },
     "ObservedBoolean": {
@@ -4723,7 +4744,7 @@
         }
       }
     },
-    "ReportAssetSnapshotResponse": {
+    "ReportAssetSnapshotResult": {
       "type": "object",
       "description": "A snapshot of assets captured daily for the provided metric.  Asset details only contain primary properties.  Detailed asset data can be retrieved from the asset endpoints.",
       "properties": {
@@ -4749,7 +4770,7 @@
           "description": "A description of what the metric represents."
         },
         "assets": {
-          "$ref": "#/definitions/AssetPageResponse",
+          "$ref": "#/definitions/AssetPageResult",
           "description": "The page of assets that match the provided metric."
         }
       }
@@ -4793,14 +4814,14 @@
         }
       }
     },
-    "ReportAssetSummaryResponse": {
+    "ReportAssetSummaryResult": {
       "type": "object",
       "properties": {
         "assetSummaries": {
           "type": "array",
           "description": "The collection of asset summaries.",
           "items": {
-            "$ref": "#/definitions/AssetSummaryResponse"
+            "$ref": "#/definitions/AssetSummaryResult"
           },
           "x-ms-identifiers": []
         }
@@ -4834,7 +4855,7 @@
         "modelAsString": true
       }
     },
-    "ReportBillableAssetSnapshotResponse": {
+    "ReportBillableAssetSnapshotResult": {
       "type": "object",
       "properties": {
         "date": {
@@ -4857,13 +4878,13 @@
         }
       }
     },
-    "ReportBillableAssetSummaryResponse": {
+    "ReportBillableAssetSummaryResult": {
       "type": "object",
       "properties": {
         "assetSummaries": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ReportBillableAssetSnapshotResponse"
+            "$ref": "#/definitions/ReportBillableAssetSnapshotResult"
           },
           "x-ms-identifiers": []
         }
@@ -4977,7 +4998,7 @@
         "description"
       ]
     },
-    "SavedFilterPageResponse": {
+    "SavedFilterPageResult": {
       "type": "object",
       "properties": {
         "totalElements": {
@@ -5447,7 +5468,7 @@
         "id"
       ]
     },
-    "TaskPageResponse": {
+    "TaskPageResult": {
       "type": "object",
       "properties": {
         "totalElements": {
@@ -5498,7 +5519,7 @@
         "modelAsString": true
       }
     },
-    "ValidateResponse": {
+    "ValidateResult": {
       "type": "object",
       "properties": {
         "error": {
