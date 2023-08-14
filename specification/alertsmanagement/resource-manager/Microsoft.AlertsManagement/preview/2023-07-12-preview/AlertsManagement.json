@@ -855,6 +855,7 @@
     "AlertsManagementErrorResponse": {
       "description": "An error response from the service.",
       "x-ms-external": true,
+      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/errorResponseBody"
@@ -888,6 +889,7 @@
     },
     "ProxyResource": {
       "x-ms-azure-resource": true,
+      "type": "object",
       "description": "An azure resource object",
       "properties": {
         "id": {
@@ -909,6 +911,7 @@
     },
     "alert": {
       "description": "An alert created in alert management service.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
@@ -922,6 +925,7 @@
     },
     "alertsList": {
       "description": "List the alerts.",
+      "type": "object",
       "properties": {
         "nextLink": {
           "description": "URL to fetch the next set of alerts.",
@@ -1137,6 +1141,7 @@
     },
     "alertModification": {
       "description": "Alert Modification details",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
@@ -1168,6 +1173,7 @@
     },
     "alertModificationItem": {
       "description": "Alert modification item.",
+      "type": "object",
       "properties": {
         "modificationEvent": {
           "type": "string",
@@ -1209,6 +1215,7 @@
     },
     "smartGroupModification": {
       "description": "Alert Modification details",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
@@ -1222,6 +1229,7 @@
     },
     "smartGroupModificationProperties": {
       "description": "Properties of the smartGroup modification item.",
+      "type": "object",
       "properties": {
         "smartGroupId": {
           "type": "string",
@@ -1243,6 +1251,7 @@
     },
     "smartGroupModificationItem": {
       "description": "smartGroup modification item.",
+      "type": "object",
       "properties": {
         "modificationEvent": {
           "type": "string",
@@ -1285,6 +1294,7 @@
     },
     "alertsSummary": {
       "description": "Summary of alerts based on the input filters and 'groupby' parameters.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
@@ -1348,6 +1358,7 @@
     },
     "alertsMetaData": {
       "description": "alert meta data information.",
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/alertsMetaDataProperties"
@@ -1356,6 +1367,7 @@
     },
     "alertsMetaDataProperties": {
       "description": "alert meta data property bag",
+      "type": "object",
       "discriminator": "metadataIdentifier",
       "required": [
         "metadataIdentifier"
@@ -1376,6 +1388,7 @@
     },
     "smartGroupsList": {
       "description": "List the alerts.",
+      "type": "object",
       "properties": {
         "nextLink": {
           "description": "URL to fetch the next set of alerts.",
@@ -1392,6 +1405,7 @@
     },
     "smartGroup": {
       "description": "Set of related alerts grouped together smartly by AMS.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
@@ -1530,6 +1544,7 @@
     },
     "MonitorServiceList": {
       "title": "Monitor service details",
+      "type": "object",
       "description": "Monitor service details",
       "required": [
         "data"
@@ -1554,6 +1569,7 @@
     },
     "MonitorServiceDetails": {
       "description": "Details of a monitor service",
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
