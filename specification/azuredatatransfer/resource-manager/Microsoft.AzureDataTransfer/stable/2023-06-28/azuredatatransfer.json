@@ -749,6 +749,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/generatePendingConnections": {
+      "post": {
+        "description": "Lists all pending connections for a connection.",
+        "x-ms-examples": {
+          "Generates a list of pending connections": {
+            "$ref": "examples/generatePendingConnections.json"
+          }
+        },
+        "operationId": "GeneratePendingConnections_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/connectionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Listed all pending connections.",
+            "schema": {
+              "$ref": "#/definitions/pendingConnectionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/generatePendingFlows": {
       "post": {
         "description": "Lists all pending flows for a connection.",
@@ -1201,15 +1243,15 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/pipelines/{pipelineName}/generatePendingConnections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/pipelines/{pipelineName}/generateSchemas": {
       "post": {
-        "description": "Lists all pending connections for a pipeline.",
+        "description": "Generates the schemas for the specified connection in a pipeline.",
         "x-ms-examples": {
-          "Generates a list of pending connections": {
-            "$ref": "examples/generatePendingConnections.json"
+          "Generates schemas for a pipeline": {
+            "$ref": "examples/generateSchemas.json"
           }
         },
-        "operationId": "GeneratePendingConnections_List",
+        "operationId": "GenerateSchemas_List",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1222,13 +1264,23 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "schema",
+            "description": "Schema(s) to retrieve",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/schema"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Listed all connections under the resource group.",
+            "description": "Approves a connection.",
             "schema": {
-              "$ref": "#/definitions/pendingConnectionsListResult"
+              "description": "The schemas for this connection",
+              "$ref": "#/definitions/schemasListResult"
             }
           },
           "default": {
@@ -1237,9 +1289,6 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1435,18 +1484,30 @@
           "type": "string",
           "description": "Storage Account"
         },
+        "storageAccountId": {
+          "type": "string",
+          "description": "Storage Account ID"
+        },
         "storageContainerName": {
           "type": "string",
           "description": "Storage Container"
         },
+        "serviceBusQueue": {
+          "type": "string",
+          "description": "Service Bus Queue"
+        },
         "flowType": {
+          "$ref": "#/definitions/flowType",
+          "description": "The flow type for this flow"
+        },
+        "dataType": {
           "enum": [
             "Blob",
             "Table"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "flowType",
+            "name": "dataType",
             "modelAsString": true
           },
           "description": "Transfer Storage Blobs or Tables"
@@ -1472,11 +1533,12 @@
           "items": {
             "type": "string"
           }
+        },
+        "schema": {
+          "$ref": "#/definitions/schema",
+          "description": "The selected schema for this flow"
         }
       },
-      "required": [
-        "flowType"
-      ],
       "description": "Properties of flow"
     },
     "flow": {
@@ -1618,22 +1680,9 @@
           "description": "Resource ID of the linked connection",
           "readOnly": true
         },
-        "connectionTypes": {
-          "description": "Types of connection being requested",
-          "type": "array",
-          "items": {
-            "enum": [
-              "DevSecOps",
-              "ComplexDocuments",
-              "Messaging",
-              "Streaming"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "connectionTypes",
-              "modelAsString": true
-            }
-          }
+        "flowTypes": {
+          "$ref": "#/definitions/flowTypes",
+          "description": "The flow types being requested for this connection"
         },
         "requirementId": {
           "description": "Requirement ID of the connection",
@@ -1690,6 +1739,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "schemas": {
+          "description": "The schemas for this connection",
+          "$ref": "#/definitions/schemas"
         }
       },
       "required": [
@@ -1951,6 +2004,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "flowTypes": {
+          "$ref": "#/definitions/flowTypes",
+          "description": "The flow types allowed for this pipeline"
         }
       },
       "required": [
@@ -1991,6 +2048,10 @@
               "x-ms-identifiers": [
                 "id"
               ]
+            },
+            "flowTypes": {
+              "$ref": "#/definitions/flowTypes",
+              "description": "The flow types allowed for this pipeline"
             }
           },
           "description": "Properties of pipelines patch body."
@@ -2038,6 +2099,80 @@
           "description": "Number specifying what notifications to receive"
         }
       }
+    },
+    "schemas": {
+      "type": "array",
+      "description": "The schemas for this connection",
+      "items": {
+        "$ref": "#/definitions/schema"
+      }
+    },
+    "schema": {
+      "type": "object",
+      "description": "The schema object.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID associated with this schema"
+        },
+        "connectionId": {
+          "type": "string",
+          "description": "Connection ID associated with this schema"
+        },
+        "status": {
+          "enum": [
+            "New",
+            "Approved"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "schemaStatus",
+            "modelAsString": true
+          },
+          "description": "Status of the schema"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the schema"
+        },
+        "content": {
+          "type": "string",
+          "description": "Content of the schema"
+        }
+      }
+    },
+    "schemasListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Schemas array.",
+          "$ref": "#/definitions/schemas"
+        }
+      },
+      "description": "The schemas list result."
+    },
+    "flowTypes": {
+      "type": "array",
+      "description": "The flow types that are allowed for this resource",
+      "items": {
+        "$ref": "#/definitions/flowType"
+      }
+    },
+    "flowType": {
+      "enum": [
+        "Unknown",
+        "Complex",
+        "DevSecOps",
+        "Messaging",
+        "Mission",
+        "MicrosoftInternal"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "flowType",
+        "modelAsString": true
+      },
+      "description": "Flow type for the specified resource"
     },
     "resourceBody": {
       "type": "object",
