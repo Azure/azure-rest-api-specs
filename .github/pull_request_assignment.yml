@@ -10,6 +10,7 @@
     # OpenAI data-plane PR
     paths:
       - "specification/cognitiveservices/data-plane/AzureOpenAI/**"
+      - "specification/cognitiveservices/OpenAI.Inference/**"
     reviewers:
       - lmazuel
 
@@ -73,22 +74,13 @@
       - tjprescott
 
 - rule:
+    # resource management plane typespec PR's
     paths:
-      - "specification/**/*Management/**/*.cadl"
-      - "specification/**/*Management.Shared/**/*.cadl"
-      - "specification/**/resource-manager/**/*.cadl"
-      - "specification/**/*Management/**/*.tsp"
-      - "specification/**/*Management.Shared/**/*.tsp"
-      - "specification/**/resource-manager/**/*.tsp"
+      - "specification/**/*Management/**"
+      - "specification/**/*Management.Shared/**"
     reviewers:
-      - JackTn
-      - keryul
-      - zedy-wj
-      - v-jiaodi
-      - Wzb123456789
-      - kazrael2119
-      - v-xuto
-
+      - rkmanda
+      
 - rule:
     paths:
         - "specification/**/*.cadl"
@@ -98,120 +90,27 @@
         - jhendrixMSFT
         - tjprescott
         
-
 - rule:
     paths:
       - "specification/network/**"
     reviewers:
-      - JackTn
-      - keryul
+      - rkmanda
     branches:
       - release-network-Microsoft.Network-official
-
-
-- rule:
-    paths: "specification/common-types/**"
-    reviewers:
-      - v-xuto
-      - weshaggard
-
 
 - rule:
     paths: "specification/sql/**"
     reviewers:
-      - v-xuto
+      - rkmanda
     branches:
       - dev-sql-
 
 - rule:
     paths: "specification/@(financialdataservices|standbypool)/**"
     reviewers:
-      - JackTn
-      - keryul
+      - rkmanda
     branches:
       - RPSaaSDev
-
-- rule:
-    paths: "specification/compute/**"
-    reviewers:
-      - JackTn
-      - keryul
-
-- rule:
-    paths:
-      - "specification/machinelearningservices/**"
-    reviewers:
-      - zedy-wj
-      - v-jiaodi
-
-- rule:
-    paths:
-      - "specification/monitor/**"
-    reviewers:
-      - zedy-wj
-      - v-jiaodi
-
-- rule:
-    paths:
-      - "specification/@(azurestackhci|security)/**"
-    reviewers:
-      - Wzb123456789
-      - kazrael2119
-
-- rule:
-    paths:
-      - "specification/@(web|app)/**"
-    reviewers:
-      - Wzb123456789
-      - kazrael2119
-
-- rule:
-    paths: "specification/@(synapse|azurearcdata)/**"
-    reviewers:
-      - zedy-wj
-      - v-jiaodi
-
-- rule:
-    paths: "specification/@(workloads|apimanagement)/**"
-    reviewers:
-      - zedy-wj
-      - v-jiaodi
-
-- rule:
-    paths: "specification/@(securityinsights|impact)/**"
-    reviewers:
-      - JackTn
-      - keryul
-
-- rule:
-    paths: "specification/@(appcomplianceautomation|hybridnetwork)/**"
-    reviewers:
-      - zedy-wj
-      - v-jiaodi
-
-- rule:
-    paths: "specification/@(cost-management|hybridconnectivity)/**"
-    reviewers:
-      - JackTn
-      - keryul
-
-- rule:
-    paths: "specification/@(billing|resources)/**"
-    reviewers:
-      - Wzb123456789
-      - kazrael2119
-
-- rule:
-    paths: "specification/@(testbase|appplatform)/**"
-    reviewers:
-      - JackTn
-      - keryul
-
-- rule:
-    paths: "specification/@(containerservice|paloaltonetworks)/**"
-    reviewers:
-      - zedy-wj
-      - v-jiaodi
 
 - rule:
     paths:
@@ -219,7 +118,6 @@
     reviewers:
       - josefree
       - weshaggard
-
 
 - rule:
     paths:
@@ -230,16 +128,18 @@
     reviewers:
       - weshaggard
       - konrad-jamrozik
-
+      
 - rule:
-    # manager-plane PR
+    # resource management plane swagger PR's
+    paths:
+      - "specification/**/resource-manager/**"
+      - "specification/common-types/resource-management/**"
+    reviewers:
+      - rkmanda
+      
+- rule:
+    # temporary catchall
     paths:
       - "**"
     reviewers:
-      - JackTn
-      - keryul
-      - zedy-wj
-      - v-jiaodi
-      - Wzb123456789
-      - kazrael2119
-      - v-xuto
+      - weshaggard

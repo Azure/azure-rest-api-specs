@@ -110,7 +110,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -182,7 +182,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -234,7 +234,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -285,7 +285,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -341,7 +341,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -390,7 +390,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -447,7 +447,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -512,11 +512,13 @@
               "type": "string"
             }
           },
-          "description": "The display string."
+          "description": "The display string.",
+          "type": "object"
         }
       }
     },
     "DedicatedHsmOperationListResult": {
+      "type": "object",
       "description": "Result of the request to list Dedicated HSM Provider operations. It contains a list of operations.",
       "properties": {
         "value": {
@@ -538,7 +540,8 @@
           "description": "The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/..."
         }
       },
-      "description": "The API entity reference."
+      "description": "The API entity reference.",
+      "type": "object"
     },
     "NetworkInterface": {
       "properties": {
@@ -552,7 +555,8 @@
           "description": "Private Ip address of the interface"
         }
       },
-      "description": "The network interface definition."
+      "description": "The network interface definition.",
+      "type": "object"
     },
     "NetworkProfile": {
       "properties": {
@@ -568,9 +572,11 @@
           "description": "Specifies the list of resource Ids for the network interfaces associated with the dedicated HSM."
         }
       },
-      "description": "The network profile definition."
+      "description": "The network profile definition.",
+      "type": "object"
     },
     "Sku": {
+      "type": "object",
       "description": "SKU of the dedicated HSM",
       "properties": {
         "name": {
@@ -690,7 +696,8 @@
           }
         }
       },
-      "description": "Properties of the dedicated hsm"
+      "description": "Properties of the dedicated hsm",
+      "type": "object"
     },
     "DedicatedHsm": {
       "properties": {
@@ -706,7 +713,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/DedicatedHsmResource"
         }
       ],
       "required": [
@@ -714,7 +721,8 @@
         "sku",
         "properties"
       ],
-      "description": "Resource information with extended details."
+      "description": "Resource information with extended details.",
+      "type": "object"
     },
     "DedicatedHsmPatchParameters": {
       "properties": {
@@ -726,7 +734,8 @@
           "description": "Resource tags"
         }
       },
-      "description": "Patchable properties of the dedicated HSM"
+      "description": "Patchable properties of the dedicated HSM",
+      "type": "object"
     },
     "DedicatedHsmListResult": {
       "properties": {
@@ -742,14 +751,15 @@
           "description": "The URL to get the next set of dedicated hsms."
         }
       },
-      "description": "List of dedicated HSMs"
+      "description": "List of dedicated HSMs",
+      "type": "object"
     },
     "ResourceListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Resource"
+            "$ref": "#/definitions/DedicatedHsmResource"
           },
           "description": "The list of dedicated HSM resources."
         },
@@ -758,7 +768,8 @@
           "description": "The URL to get the next set of dedicated HSM resources."
         }
       },
-      "description": "List of dedicated HSM resources."
+      "description": "List of dedicated HSM resources.",
+      "type": "object"
     },
     "DedicatedHsmError": {
       "properties": {
@@ -768,7 +779,8 @@
           "$ref": "#/definitions/Error"
         }
       },
-      "description": "The error exception."
+      "description": "The error exception.",
+      "type": "object"
     },
     "Error": {
       "properties": {
@@ -789,9 +801,11 @@
           "$ref": "#/definitions/Error"
         }
       },
-      "description": "The key vault server error."
+      "description": "The key vault server error.",
+      "type": "object"
     },
-    "Resource": {
+    "DedicatedHsmResource": {
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -971,13 +985,6 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",

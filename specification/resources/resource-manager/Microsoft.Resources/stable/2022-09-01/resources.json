@@ -4615,6 +4615,9 @@
         },
         "parameters": {
           "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/DeploymentParameter"
+          },
           "description": "Name and value pairs that define the deployment parameters for the template. You use this element when you want to provide the parameter values directly in the request rather than link to an existing parameter file. Use either the parametersLink property or the parameters property, but not both. It can be a JObject or a well formed JSON string."
         },
         "parametersLink": {
@@ -4650,6 +4653,54 @@
         "mode"
       ],
       "description": "Deployment properties."
+    },
+    "DeploymentParameter": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Input value to the parameter ."
+        },
+        "reference": {
+          "$ref": "#/definitions/KeyVaultParameterReference",
+          "description": "Azure Key Vault parameter reference."
+        }
+      },
+      "description": "Deployment parameter for the template."
+    },
+    "KeyVaultParameterReference": {
+      "type": "object",
+      "properties": {
+        "keyVault": {
+          "$ref": "#/definitions/KeyVaultReference",
+          "description": "Azure Key Vault reference."
+        },
+        "secretName": {
+          "type": "string",
+          "description": "Azure Key Vault secret name."
+        },
+        "secretVersion": {
+          "type": "string",
+          "description": "Azure Key Vault secret version."
+        }
+      },
+      "required": [
+        "keyVault",
+        "secretName"
+      ],
+      "description": "Azure Key Vault parameter reference."
+    },
+    "KeyVaultReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Azure Key Vault resource id."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "Azure Key Vault reference."
     },
     "DebugSetting": {
       "properties": {
