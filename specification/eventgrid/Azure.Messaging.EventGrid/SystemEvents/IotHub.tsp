@@ -88,9 +88,8 @@ namespace EventGrid;
 
   @doc("Schema of the Data property of an EventGridEvent for a device telemetry event (DeviceTelemetry).")
   model DeviceTelemetryEventProperties {
-    #suppress "@azure-tools/typespec-azure-core/bad-record-type" "The type is object."
     @doc("The content of the message from the device.")
-    body?: Record<string>;
+    body?: unknown;
 
     @doc("Application properties are user-defined strings that can be added to the message. These fields are optional.")
     properties?: Record<string>;

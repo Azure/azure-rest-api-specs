@@ -96,8 +96,9 @@ alias AcsChatThreadBaseEventData = {
   @doc("The communication identifier of the user who created the thread")
   createdByCommunicationIdentifier?: CommunicationIdentifierModel;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "The type of properties is object with additionalProperties: object"
   @doc("The thread properties")
-  properties?: Record<string>;
+  properties?: Record<unknown>;
 
   @doc("The list of properties of participants who are part of the thread")
   participants?: AcsChatThreadParticipantProperties[];
