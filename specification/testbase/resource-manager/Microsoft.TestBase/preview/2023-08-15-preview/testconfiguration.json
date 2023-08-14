@@ -874,7 +874,16 @@
         },
         "status": {
           "type": "string",
-          "description": "The status of the on-demand run."
+          "description": "The status of the on-demand run.",
+          "default": "Queued",
+          "enum": [
+            "Queued",
+            "Rejected"
+          ],
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
         },
         "totalPackagesScheduled": {
           "type": "integer",
