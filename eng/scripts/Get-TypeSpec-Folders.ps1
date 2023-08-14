@@ -30,8 +30,17 @@ else {
   Write-Host
 
   $engFiles = $changedFiles | Where-Object {if ($_) { $_.StartsWith('eng') }}
-  $repoRootFiles = $changedFiles | Where-Object {$_ -notmatch [Regex]::Escape([IO.Path]::DirectorySeparatorChar)}
-  if ($engFiles -or $repoRootFiles) {
+
+  $rootFilesImpactingTypeSpec = @(
+    ".gitattributes",
+    ".prettierrc.json",
+    "package-lock.json",
+    "package.json",
+    "tsconfig.json"
+  )
+  $repoRootFiles = $changedFiles | Where-Object {$_ -in $rootFilesImpactingTypeSpec}
+
+  if (($Env:BUILD_REPOSITORY_NAME -eq 'azure/azure-rest-api-specs') -and ($engFiles -or $repoRootFiles)) {
     $changedFiles = $allChangedFiles
   }
   else {
