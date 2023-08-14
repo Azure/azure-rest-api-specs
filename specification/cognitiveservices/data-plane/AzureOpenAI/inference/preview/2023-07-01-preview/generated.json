@@ -452,33 +452,60 @@
       "type": "object",
       "description": "The representation of a single prompt completion as part of an overall chat completions request.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
       "properties": {
-        "message": {
-          "$ref": "#/definitions/ChatMessage",
-          "description": "The chat message for a given chat completions prompt."
-        },
         "index": {
           "type": "integer",
           "format": "int32",
           "description": "The ordered index associated with this chat completions choice."
+        },
+        "content_filter_results": {
+          "$ref": "#/definitions/ContentFilterResults",
+          "description": "Information about the content filtering category (hate, sexual, violence, self_harm), if it\nhas been detected, as well as the severity level (very_low, low, medium, high-scale that\ndetermines the intensity and risk level of harmful content) and if it has been filtered or not.",
+          "x-ms-client-name": "contentFilterResults"
+        },
+        "message": {
+          "$ref": "#/definitions/ChatMessage",
+          "description": "The chat message for a given chat completions prompt."
+        },
+        "finish_reason": {
+          "$ref": "#/definitions/CompletionsFinishReason",
+          "description": "The reason that this chat completions choice completed its generated.",
+          "x-ms-client-name": "finishReason"
+        }
+      },
+      "required": [
+        "index",
+        "message",
+        "finish_reason"
+      ]
+    },
+    "ChatChoiceChunk": {
+      "type": "object",
+      "description": "The representation of a single prompt completion as part of an overall streaming chat completions request.",
+      "properties": {
+        "index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The ordered index associated with this chat completions choice."
+        },
+        "content_filter_results": {
+          "$ref": "#/definitions/ContentFilterResults",
+          "description": "Information about the content filtering category (hate, sexual, violence, self_harm), if it\nhas been detected, as well as the severity level (very_low, low, medium, high-scale that\ndetermines the intensity and risk level of harmful content) and if it has been filtered or not.",
+          "x-ms-client-name": "contentFilterResults"
+        },
+        "delta": {
+          "$ref": "#/definitions/ChatMessageDelta",
+          "description": "The delta message content for a streaming response."
         },
         "finish_reason": {
           "$ref": "#/definitions/CompletionsFinishReason",
           "description": "The reason that this chat completions choice completed its generated.",
           "x-nullable": true,
           "x-ms-client-name": "finishReason"
-        },
-        "delta": {
-          "$ref": "#/definitions/ChatMessage",
-          "description": "The delta message content for a streaming response."
-        },
-        "content_filter_results": {
-          "$ref": "#/definitions/ContentFilterResults",
-          "description": "Information about the content filtering category (hate, sexual, violence, self_harm), if it \nhas been detected, as well as the severity level (very_low, low, medium, high-scale that \ndetermines the intensity and risk level of harmful content) and if it has been filtered or not.",
-          "x-ms-client-name": "contentFilterResults"
         }
       },
       "required": [
         "index",
+        "delta",
         "finish_reason"
       ]
     },
@@ -495,6 +522,15 @@
           "format": "unixtime",
           "description": "The first timestamp associated with generation activity for this completions response,\nrepresented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970."
         },
+        "prompt_annotations": {
+          "type": "array",
+          "description": "Content filtering results for zero or more prompts in the request. In a streaming request,\nresults for different prompts may arrive at different times or in different orders.",
+          "items": {
+            "$ref": "#/definitions/PromptFilterResult"
+          },
+          "x-ms-client-name": "promptFilterResults",
+          "x-ms-identifiers": []
+        },
         "choices": {
           "type": "array",
           "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
@@ -503,18 +539,57 @@
           },
           "x-ms-identifiers": []
         },
+        "usage": {
+          "$ref": "#/definitions/CompletionsUsage",
+          "description": "Usage information for tokens processed and generated as part of this completions operation."
+        }
+      },
+      "required": [
+        "id",
+        "created",
+        "choices",
+        "usage"
+      ]
+    },
+    "ChatCompletionsChunk": {
+      "type": "object",
+      "description": "Representation of the response data from a streaming chat completions request.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique identifier associated with this chat completions response."
+        },
+        "created": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The first timestamp associated with generation activity for this completions response,\nrepresented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970."
+        },
         "prompt_annotations": {
           "type": "array",
-          "description": "Content filtering results for zero or more prompts in the request. In a streaming request, \nresults for different prompts may arrive at different times or in different orders.",
+          "description": "Content filtering results for zero or more prompts in the request. In a streaming request,\nresults for different prompts may arrive at different times or in different orders.",
           "items": {
             "$ref": "#/definitions/PromptFilterResult"
           },
           "x-ms-client-name": "promptFilterResults",
           "x-ms-identifiers": []
         },
+        "choices": {
+          "type": "array",
+          "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
+          "items": {
+            "$ref": "#/definitions/ChatChoiceChunk"
+          },
+          "x-ms-identifiers": []
+        },
         "usage": {
-          "$ref": "#/definitions/CompletionsUsage",
-          "description": "Usage information for tokens processed and generated as part of this completions operation."
+          "type": "object",
+          "description": "Usage information for tokens processed and generated as part of this completions operation.",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/CompletionsUsage"
+            }
+          ]
         }
       },
       "required": [
@@ -643,6 +718,30 @@
         "content"
       ]
     },
+    "ChatMessageDelta": {
+      "type": "object",
+      "description": "A single model delta that allows constructing the response in a streaming chat completions request.",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/ChatRole",
+          "description": "The role associated with this message payload."
+        },
+        "content": {
+          "type": "string",
+          "description": "The text associated with this message payload.",
+          "x-nullable": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the author of this message. `name` is required if role is `function`, and it should be the name of the\nfunction whose response is in the `content`. May contain a-z, A-Z, 0-9, and underscores, with a maximum length of\n64 characters."
+        },
+        "function_call": {
+          "$ref": "#/definitions/FunctionCall",
+          "description": "The name and arguments of a function that should be called, as generated by the model.",
+          "x-ms-client-name": "functionCall"
+        }
+      }
+    },
     "ChatRole": {
       "type": "string",
       "description": "A description of the intended purpose of a message within a chat completions interaction.",
@@ -694,7 +793,48 @@
         },
         "content_filter_results": {
           "$ref": "#/definitions/ContentFilterResults",
-          "description": "Information about the content filtering category (hate, sexual, violence, self_harm), if it \nhas been detected, as well as the severity level (very_low, low, medium, high-scale that \ndetermines the intensity and risk level of harmful content) and if it has been filtered or not.",
+          "description": "Information about the content filtering category (hate, sexual, violence, self_harm), if it\nhas been detected, as well as the severity level (very_low, low, medium, high-scale that\ndetermines the intensity and risk level of harmful content) and if it has been filtered or not.",
+          "x-ms-client-name": "contentFilterResults"
+        },
+        "logprobs": {
+          "type": "object",
+          "description": "The log probabilities model for tokens associated with this completions choice.",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/CompletionsLogProbabilityModel"
+            }
+          ]
+        },
+        "finish_reason": {
+          "$ref": "#/definitions/CompletionsFinishReason",
+          "description": "Reason for finishing",
+          "x-ms-client-name": "finishReason"
+        }
+      },
+      "required": [
+        "text",
+        "index",
+        "logprobs",
+        "finish_reason"
+      ]
+    },
+    "ChoiceChunk": {
+      "type": "object",
+      "description": "Model for the representation of a streaming delta for a single prompt completion.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The generated text for a given completions prompt."
+        },
+        "index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The ordered index associated with this completions choice."
+        },
+        "content_filter_results": {
+          "$ref": "#/definitions/ContentFilterResults",
+          "description": "Information about the content filtering category (hate, sexual, violence, self_harm), if it\nhas been detected, as well as the severity level (very_low, low, medium, high-scale that\ndetermines the intensity and risk level of harmful content) and if it has been filtered or not.",
           "x-ms-client-name": "contentFilterResults"
         },
         "logprobs": {
@@ -736,7 +876,7 @@
         },
         "prompt_annotations": {
           "type": "array",
-          "description": "Content filtering results for zero or more prompts in the request. In a streaming request, \nresults for different prompts may arrive at different times or in different orders.",
+          "description": "Content filtering results for zero or more prompts in the request. In a streaming request,\nresults for different prompts may arrive at different times or in different orders.",
           "items": {
             "$ref": "#/definitions/PromptFilterResult"
           },
@@ -754,6 +894,54 @@
         "usage": {
           "$ref": "#/definitions/CompletionsUsage",
           "description": "Usage information for tokens processed and generated as part of this completions operation."
+        }
+      },
+      "required": [
+        "id",
+        "created",
+        "choices",
+        "usage"
+      ]
+    },
+    "CompletionsChunk": {
+      "type": "object",
+      "description": "Representation of the partial response data from a streaming completions request.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique identifier associated with this completions response."
+        },
+        "created": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The first timestamp associated with generation activity for this completions response,\nrepresented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970."
+        },
+        "prompt_annotations": {
+          "type": "array",
+          "description": "Content filtering results for zero or more prompts in the request. In a streaming request,\nresults for different prompts may arrive at different times or in different orders.",
+          "items": {
+            "$ref": "#/definitions/PromptFilterResult"
+          },
+          "x-ms-client-name": "promptFilterResults",
+          "x-ms-identifiers": []
+        },
+        "choices": {
+          "type": "array",
+          "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
+          "items": {
+            "$ref": "#/definitions/ChoiceChunk"
+          },
+          "x-ms-identifiers": []
+        },
+        "usage": {
+          "type": "object",
+          "description": "Usage information for tokens processed and generated as part of this completions operation.",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/CompletionsUsage"
+            }
+          ]
         }
       },
       "required": [

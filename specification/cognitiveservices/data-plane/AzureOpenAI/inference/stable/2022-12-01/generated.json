@@ -250,6 +250,42 @@
         "finish_reason": {
           "$ref": "#/definitions/CompletionsFinishReason",
           "description": "Reason for finishing",
+          "x-ms-client-name": "finishReason"
+        }
+      },
+      "required": [
+        "text",
+        "index",
+        "logprobs",
+        "finish_reason"
+      ]
+    },
+    "ChoiceChunk": {
+      "type": "object",
+      "description": "Model for the representation of a streaming delta for a single prompt completion.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The generated text for a given completions prompt."
+        },
+        "index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The ordered index associated with this completions choice."
+        },
+        "logprobs": {
+          "type": "object",
+          "description": "The log probabilities model for tokens associated with this completions choice.",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/CompletionsLogProbabilityModel"
+            }
+          ]
+        },
+        "finish_reason": {
+          "$ref": "#/definitions/CompletionsFinishReason",
+          "description": "Reason for finishing",
           "x-nullable": true,
           "x-ms-client-name": "finishReason"
         }
@@ -285,6 +321,45 @@
         "usage": {
           "$ref": "#/definitions/CompletionsUsage",
           "description": "Usage information for tokens processed and generated as part of this completions operation."
+        }
+      },
+      "required": [
+        "id",
+        "created",
+        "choices",
+        "usage"
+      ]
+    },
+    "CompletionsChunk": {
+      "type": "object",
+      "description": "Representation of the partial response data from a streaming completions request.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique identifier associated with this completions response."
+        },
+        "created": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The first timestamp associated with generation activity for this completions response,\nrepresented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970."
+        },
+        "choices": {
+          "type": "array",
+          "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
+          "items": {
+            "$ref": "#/definitions/ChoiceChunk"
+          },
+          "x-ms-identifiers": []
+        },
+        "usage": {
+          "type": "object",
+          "description": "Usage information for tokens processed and generated as part of this completions operation.",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/CompletionsUsage"
+            }
+          ]
         }
       },
       "required": [

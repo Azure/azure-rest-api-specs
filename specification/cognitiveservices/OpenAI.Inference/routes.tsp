@@ -18,7 +18,7 @@ namespace Azure.OpenAI;
 
 @doc("Return the embeddings for a given prompt.")
 @actionSeparator("/")
-@action("embeddings") //@convenientAPI(true)
+@action("embeddings")
 op getEmbeddings is Azure.Core.ResourceAction<
   Deployment,
   EmbeddingsOptions,
@@ -31,12 +31,12 @@ Completions support a wide variety of tasks and generate text that continues fro
 provided prompt data.
 """)
 @actionSeparator("/")
-@action("completions") //@convenientAPI(true)
+@action("completions")
 @sharedRoute
-op getCompletions is Azure.Core.ResourceAction<
+op getCompletionsStreaming is Azure.Core.ResourceAction<
   Deployment,
   CompletionsOptions,
-  Completions
+  CompletionsChunk
 >;
 
 @doc("""
@@ -45,14 +45,13 @@ Completions support a wide variety of tasks and generate text that continues fro
 provided prompt data.
 """)
 @actionSeparator("/")
-@action("completions") //@convenientAPI(true)
+@action("completions")
 @sharedRoute
-op getCompletionsStreaming is Azure.Core.ResourceAction<
+op getCompletions is Azure.Core.ResourceAction<
   Deployment,
   CompletionsOptions,
-  CompletionsChunk
+  Completions
 >;
-
 
 
 @doc("""
@@ -62,7 +61,23 @@ provided prompt data.
 """)
 @added(ServiceApiVersions.v2023_05_15)
 @actionSeparator("/")
+@action("chat/completions")
+@sharedRoute
+op getChatCompletionsStreaming is ResourceAction<
+  Deployment,
+  ChatCompletionsOptions,
+  ChatCompletionsChunk
+>;
+
+@doc("""
+Gets chat completions for the provided chat messages.
+Completions support a wide variety of tasks and generate text that continues from or "completes"
+provided prompt data.
+""")
+@added(ServiceApiVersions.v2023_05_15)
+@actionSeparator("/")
 @action("chat/completions") //@convenientAPI(true)
+@sharedRoute
 op getChatCompletions is ResourceAction<
   Deployment,
   ChatCompletionsOptions,

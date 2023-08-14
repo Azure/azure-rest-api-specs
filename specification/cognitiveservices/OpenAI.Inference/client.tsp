@@ -13,4 +13,11 @@ using Azure.ClientGenerator.Core;
 @@include(Azure.OpenAI.ImageLocation);
 @@include(Azure.OpenAI.ImageGenerations);
 
+@@internal(Azure.OpenAI.getChatCompletionsStreaming);
+@@include(Azure.OpenAI.ChatCompletionsChunk);
+@@include(Azure.OpenAI.ChatChoiceChunk);
+@@include(Azure.OpenAI.ChatMessageDelta);
+
 @@internal(Azure.OpenAI.getCompletionsStreaming);
+@@include(Azure.OpenAI.CompletionsChunk);
+@@include(Azure.OpenAI.ChoiceChunk);
