@@ -447,7 +447,13 @@
         ],
         "responses": {
           "202": {
-            "description": "The API was scheduled for deletion."
+            "description": "The API was scheduled for deletion.",
+            "headers": {
+              "location": {
+                "description": "Location header",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The API was successfully deleted."
@@ -455,10 +461,13 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/revisions": {
