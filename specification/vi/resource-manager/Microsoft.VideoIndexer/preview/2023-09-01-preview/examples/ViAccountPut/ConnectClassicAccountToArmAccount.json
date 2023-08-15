@@ -6,8 +6,8 @@
     "subscriptionId": "b04775c3-63fa-40f3-9430-139d2e5522d3",
     "parameters": {
       "location": "NorthEurope",
-      "accountId": "462af7c5-d1f6-4b91-86e3-8bc5e8a61574",
       "properties": {
+        "accountId": "462af7c5-d1f6-4b91-86e3-8bc5e8a61574",
         "storageServices": {
           "resourceId": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.Storage/storageAccounts/contoso-videoanalyzer-ms"
         }
@@ -30,8 +30,7 @@
           "accountId": "462af7c5-d1f6-4b91-86e3-8bc5e8a61574",
           "accountName": "contosto-videoanalyzer",
           "storageServices": {
-            "resourceId": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.Storage/storageAccounts/contoso-videoanalyzer-ms",
-            "userAssignedIdentity": ""
+            "resourceId": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.Storage/storageAccounts/contoso-videoanalyzer-ms"
           },
           "totalSecondsIndexed": 0,
           "provisioningState": "Succeeded"
@@ -55,8 +54,7 @@
           "accountId": "462af7c5-d1f6-4b91-86e3-8bc5e8a61574",
           "accountName": "contosto-videoanalyzer",
           "storageServices": {
-            "resourceId": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.Storage/storageAccounts/contoso-videoanalyzer-ms",
-            "userAssignedIdentity": ""
+            "resourceId": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.Storage/storageAccounts/contoso-videoanalyzer-ms"
           },
           "totalSecondsIndexed": 0,
           "provisioningState": "Succeeded"
@@ -89,6 +87,14 @@
         "error": {
           "code": "ACCOUNT_NOT_FOUND",
           "message": "Account not found - 462af7c5-d1f6-4b91-86e3-8bc5e8a61574."
+        }
+      }
+    },
+    "409": {
+      "body": {
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "Storage Service modification is not authorized, associated Storage for this account: {resourceId}"
         }
       }
     },
