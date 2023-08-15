@@ -125,34 +125,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Paged collection of AssetResource items",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "The AssetResource items on this page",
-                  "items": {
-                    "$ref": "#/definitions/AssetResource"
-                  }
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "The link to the next page of items"
-                },
-                "totalElements": {
-                  "type": "integer",
-                  "format": "int64",
-                  "description": "The total number of items available in the full result set."
-                },
-                "mark": {
-                  "type": "string",
-                  "description": "The cursor mark to be used on the next request.  Not set if using paging."
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/PagedAssetResource"
             }
           },
           "default": {
@@ -294,30 +267,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Paged collection of DataConnection items",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "The DataConnection items on this page",
-                  "items": {
-                    "$ref": "#/definitions/DataConnection"
-                  }
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "The link to the next page of items"
-                },
-                "totalElements": {
-                  "type": "integer",
-                  "format": "int64",
-                  "description": "The total number of items available in the full result set."
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/PagedDataConnection"
             }
           },
           "default": {
@@ -554,25 +504,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Paged collection of DiscoGroup items",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "The DiscoGroup items on this page",
-                  "items": {
-                    "$ref": "#/definitions/DiscoGroup"
-                  }
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "The link to the next page of items"
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/PagedDiscoGroup"
             }
           },
           "default": {
@@ -862,25 +794,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Paged collection of DiscoTemplate items",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "The DiscoTemplate items on this page",
-                  "items": {
-                    "$ref": "#/definitions/DiscoTemplate"
-                  }
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "The link to the next page of items"
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/PagedDiscoTemplate"
             }
           },
           "default": {
@@ -1110,25 +1024,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Paged collection of SavedFilter items",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "The SavedFilter items on this page",
-                  "items": {
-                    "$ref": "#/definitions/SavedFilter"
-                  }
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "The link to the next page of items"
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/PagedSavedFilter"
             }
           },
           "default": {
@@ -1321,30 +1217,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Paged collection of Task items",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "The Task items on this page",
-                  "items": {
-                    "$ref": "#/definitions/Task"
-                  }
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "The link to the next page of items"
-                },
-                "totalElements": {
-                  "type": "integer",
-                  "format": "int64",
-                  "description": "The total number of items available in the full result set."
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/PagedTask"
             }
           },
           "default": {
@@ -4807,6 +4680,151 @@
           "format": "int32"
         }
       }
+    },
+    "PagedAssetResource": {
+      "type": "object",
+      "description": "Paged collection of AssetResource items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AssetResource items on this page",
+          "items": {
+            "$ref": "#/definitions/AssetResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total number of items available in the full result set."
+        },
+        "mark": {
+          "type": "string",
+          "description": "The cursor mark to be used on the next request.  Not set if using paging."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedDataConnection": {
+      "type": "object",
+      "description": "Paged collection of DataConnection items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DataConnection items on this page",
+          "items": {
+            "$ref": "#/definitions/DataConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total number of items available in the full result set."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedDiscoGroup": {
+      "type": "object",
+      "description": "Paged collection of DiscoGroup items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DiscoGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/DiscoGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedDiscoTemplate": {
+      "type": "object",
+      "description": "Paged collection of DiscoTemplate items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DiscoTemplate items on this page",
+          "items": {
+            "$ref": "#/definitions/DiscoTemplate"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedSavedFilter": {
+      "type": "object",
+      "description": "Paged collection of SavedFilter items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SavedFilter items on this page",
+          "items": {
+            "$ref": "#/definitions/SavedFilter"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedTask": {
+      "type": "object",
+      "description": "Paged collection of Task items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Task items on this page",
+          "items": {
+            "$ref": "#/definitions/Task"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total number of items available in the full result set."
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "Port": {
       "type": "object",
