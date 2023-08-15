@@ -17,6 +17,31 @@
     }
   },
   "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/586d4f48-8f08-4a4e-96b7-e1892d6dba9e/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.VideoIndexer/accounts/contosto-videoanalyzer",
+        "name": "contosto-videoanalyzer",
+        "location": "NorthEurope",
+        "type": "Microsoft.VideoIndexer/accounts",
+        "tags": {},
+        "properties": {
+          "tenantId": "8c406f87-77ac-4ebb-a401-e8562450630e",
+          "accountId": "462af7c5-d1f6-4b91-86e3-8bc5e8a61574",
+          "accountName": "contosto-videoanalyzer",
+          "storageServices": {
+            "resourceId": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.Storage/storageAccounts/contoso-videoanalyzer-ms",
+            "userAssignedIdentity": ""
+          },
+          "totalSecondsIndexed": 0,
+          "provisioningState": "Succeeded"
+        },
+        "identity": {
+          "principalId": "43a83441-c17f-4e06-84a3-2eaf86668da7",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+          "type": "SystemAssigned"
+        }
+      }
+    },
     "201": {
       "body": {
         "id": "/subscriptions/586d4f48-8f08-4a4e-96b7-e1892d6dba9e/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.VideoIndexer/accounts/contosto-videoanalyzer",
@@ -47,6 +72,30 @@
         "error": {
           "code": "INVALID_INPUT",
           "message": "ResourceId is not a valid resource uri."
+        }
+      }
+    },
+    "403": {
+      "body": {
+        "error": {
+          "code": "AuthorizationFailed",
+          "message": "The client with object id 'e6eeb28c-91c6-4a3e-aeeb-b6921e21c979' does not have authorization to perform action 'Microsoft.VideoIndexer/accounts/write' over scope or the scope is invalid. If access was recently granted, please refresh your credentials."
+        }
+      }
+    },
+    "404": {
+      "body": {
+        "error": {
+          "code": "ACCOUNT_NOT_FOUND",
+          "message": "Account not found - {resourceUri}"
+        }
+      }
+    },
+    "409": {
+      "body": {
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "Storage Service modification is not authorized, associated Storage for this account: {resourceId}"
         }
       }
     },
