@@ -40,6 +40,7 @@ enum ContentModality {
   Text,
   Image,
   @added(ContentSafetyInternal.Versions.v2023_05_30_Preview)
+  @removed(ContentSafetyInternal.Versions.v2023_10_01)
   ImageWithText
 }
 
@@ -48,6 +49,7 @@ enum ContentSafetyOperation {
   AnalyzeText,
   AnalyzeImage,
   @added(ContentSafetyInternal.Versions.v2023_05_30_Preview)
+  @removed(ContentSafetyInternal.Versions.v2023_10_01)
   AnalyzeImageWithText
 }
 
@@ -55,8 +57,10 @@ enum ContentSafetyOperation {
 enum ContentSafetyVersion {
   `2023-04-30-preview`,
   @added(ContentSafetyInternal.Versions.v2023_05_30_Preview)
-
-  `2023-05-30-preview`
+  @removed(ContentSafetyInternal.Versions.v2023_10_01)
+  `2023-05-30-preview`,
+  @added(ContentSafetyInternal.Versions.v2023_10_01)
+  `2023-10-01`
 }
 
 @doc("Category type.")
