@@ -419,7 +419,7 @@ directive:
     reason: 'Subscripiton and ResourceGroup scope is not supported in cost allocation by desgin'
   - suppress: NoDuplicatePathsForScopeParameter
     from: settings.json
-    reason: 'Settings doesn't use scope for List API'
+    reason: 'Settings does not use scope for List API'
   - suppress: GetCollectionOnlyHasValueAndNextLink
     from: settings.json
     reason: 'Settings List designed to deliver very limited records'
