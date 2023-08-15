@@ -283,8 +283,9 @@
             "name": "sessionPoolNameEnvelope",
             "in": "body",
             "description": "Properties used to create a session pool",
+            "required": true,
             "schema": {
-              "$ref": "#/definitions/SessionPool"
+              "$ref": "#/definitions/PatchProperties"
             }
           },
           {
@@ -335,6 +336,34 @@
                 "read"
               ]
             },
+            "maxConcurrentSessions": {
+              "format": "int32",
+              "description": "The max count of sessions at the same time.",
+              "type": "integer"
+            },
+            "secrets": {
+              "description": "Collection of secrets used by a Session Pool",
+              "type": "array",
+              "items": {
+                "$ref": "./CommonDefinitions.json#/definitions/Secret"
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PatchProperties": {
+      "description": "Container App SessionPool patchable properties.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "SessionPool resource specific patchable properties",
+          "type": "object",
+          "properties": {
             "maxConcurrentSessions": {
               "format": "int32",
               "description": "The max count of sessions at the same time.",
