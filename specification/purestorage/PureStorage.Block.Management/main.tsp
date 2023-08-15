@@ -8,7 +8,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 @armProviderNamespace
 @service({
-    title: "PureStorage.Block"
+  title: "PureStorage.Block",
 })
 @versioned(PureStorage.Block.Versions)
 namespace PureStorage.Block;
@@ -23,18 +23,17 @@ using LiftrBase.Storage;
 
 @doc("API versions of PureStorage.Block")
 enum Versions {
-    @doc("Version 1 preview.")
-    @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-    @useDependency(LiftrBase.Versions.v1_preview)
-    @useDependency(LiftrBase.Storage.Versions.v1_preview)
-    v1_preview: "2023-06-01-preview"
+  @doc("Version 1 preview.")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(LiftrBase.Versions.v1_preview)
+  @useDependency(LiftrBase.Storage.Versions.v1_preview)
+  v1_preview: "2023-06-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("StoragePool resource.")
 model StoragePool is TrackedResource<BaseStorageResourceProperties> {
-
   @doc("Name of the storage pool.")
   @key("storagePool")
   @segment("storagePools")

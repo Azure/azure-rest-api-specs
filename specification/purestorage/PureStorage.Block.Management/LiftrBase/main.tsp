@@ -11,12 +11,11 @@ namespace LiftrBase;
 enum Versions {
   @doc("Version 1 preview.")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  v1_preview: "2023-06-01-preview"
+  v1_preview: "2023-06-01-preview",
 }
 
 @doc("Marketplace subscription status of a resource.")
 enum MarketplaceSubscriptionStatus {
-
   @doc("PendingFulfillmentStart status.")
   PendingFulfillmentStart: "PendingFulfillmentStart",
 
@@ -27,12 +26,11 @@ enum MarketplaceSubscriptionStatus {
   Suspended: "Suspended",
 
   @doc("Unsubscribed status.")
-  Unsubscribed: "Unsubscribed"
+  Unsubscribed: "Unsubscribed",
 }
 
 @doc("Marketplace details of a resource.")
 model MarketplaceDetails {
-
   @doc("Marketplace Subscription Id")
   subscriptionId: string;
 
@@ -85,7 +83,6 @@ model UserDetails {
 
 @doc("Base resource properties that can be extended for arm resources.")
 model BaseResourceProperties {
-
   @doc("Marketplace details of the resource.")
   @visibility("create", "read")
   marketplace: MarketplaceDetails;
@@ -100,7 +97,6 @@ model BaseResourceProperties {
 
 @doc("IP/port pair.")
 model Ip {
-
   @doc("IP address.")
   address: string;
 
