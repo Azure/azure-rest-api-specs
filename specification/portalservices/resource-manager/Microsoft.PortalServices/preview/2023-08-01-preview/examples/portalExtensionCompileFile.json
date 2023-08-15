@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "portalExtensionName": "testPortalExtension",
+    "resourceGroupName": "testRG",
+    "api-version": "2023-01-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "portalExtensionCompileFile": {
+      "path": "Client/Views/MyView.dx.json",
+      "contents": {
+        "$schema": "../../Definitions/dx.schema.json#",
+        "stringSource": "Resources/MyStrings.resjson",
+        "view": {
+          "kind": "Markdown",
+          "export": true,
+          "properties": {
+            "content": {
+              "property": "markdownContent"
+            }
+          }
+        }
+      },
+      "stringSource": {
+        "markdownContent": "# This is an example of a markdown view!"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {}
+    }
+  }
+}
