@@ -502,57 +502,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/flushVirtualNetworkDnsSettings": {
-      "post": {
-        "tags": [
-          "AppPlatform"
-        ],
-        "description": "Flush Virtual Network DNS settings for a VNET injected Service.",
-        "operationId": "Services_FlushVnetDnsSetting",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServiceNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success."
-          },
-          "202": {
-            "description": "Accepted. The response indicates the Flush VNET DNS setting operation is performed in the background.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "Services_FlushVnetDnsSetting": {
-            "$ref": "./examples/Services_FlushVnetDnsSetting.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/supportedApmTypes": {
       "get": {
         "tags": [
@@ -1701,72 +1650,6 @@
         "x-ms-examples": {
           "ConfigurationServices_Validate": {
             "$ref": "./examples/ConfigurationServices_Validate.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/configurationServices/{configurationServiceName}/validateResource": {
-      "post": {
-        "tags": [
-          "AppPlatform"
-        ],
-        "description": "Check if the Application Configuration Service resource is valid.",
-        "operationId": "ConfigurationServices_ValidateResource",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServiceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ConfigurationServiceNameParameter"
-          },
-          {
-            "name": "configurationServiceResource",
-            "in": "body",
-            "description": "Application Configuration Service resource to be validated",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ConfigurationServiceResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success. The response describes the validation result of Application Configuration Service.",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationServiceSettingsValidateResult"
-            }
-          },
-          "202": {
-            "description": "Accepted. The response indicates the ConfigurationServiceSettings is validating.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "ConfigurationServices_ValidateResource": {
-            "$ref": "./examples/ConfigurationServices_ValidateResource.json"
           }
         }
       }
@@ -8838,10 +8721,6 @@
           "$ref": "#/definitions/ServiceVNetAddons",
           "description": "Additional Service settings in vnet injection instance"
         },
-        "maintenanceScheduleConfiguration": {
-          "$ref": "#/definitions/MaintenanceScheduleConfiguration",
-          "description": "Additional Service settings for planned maintenance"
-        },
         "version": {
           "format": "int32",
           "description": "Version of the Service",
@@ -10865,74 +10744,6 @@
         }
       }
     },
-    "MaintenanceScheduleConfiguration": {
-      "description": "Configuration for the planned maintenance",
-      "type": "object",
-      "required": [
-        "frequency"
-      ],
-      "properties": {
-        "frequency": {
-          "description": "The frequency to run the maintenance job",
-          "enum": [
-            "Weekly"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "Frequency",
-            "modelAsString": true
-          }
-        }
-      },
-      "discriminator": "frequency"
-    },
-    "WeeklyMaintenanceScheduleConfiguration": {
-      "description": "Weekly planned maintenance",
-      "required": [
-        "frequency",
-        "hour",
-        "day"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/MaintenanceScheduleConfiguration"
-        }
-      ],
-      "properties": {
-        "hour": {
-          "description": "The hour to run the maintenance job",
-          "format": "int32",
-          "maximum": 23,
-          "minimum": 0,
-          "type": "integer"
-        },
-        "durationHours": {
-          "description": "The duration time to run the maintenance job",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
-        },
-        "day": {
-          "description": "The day to run the maintenance job",
-          "type": "string",
-          "enum": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-            "Sunday"
-          ],
-          "x-ms-enum": {
-            "name": "WeekDay",
-            "modelAsString": true
-          }
-        }
-      },
-      "x-ms-discriminator-value": "Weekly"
-    },
     "ConfigServerSettings": {
       "description": "The settings of config server.",
       "type": "object",
@@ -12415,7 +12226,7 @@
           "description": "Credential of the image registry"
         },
         "languageFramework": {
-          "description": "Language framework of the container image uploaded. Supported values: \"springboot\", \"\", null.",
+          "description": "Language framework of the container image uploaded",
           "type": "string"
         }
       }
@@ -14983,7 +14794,6 @@
       "description": "The name of Application Configuration Service.",
       "required": true,
       "type": "string",
-      "pattern": "^[a-z][a-z0-9]*$",
       "x-ms-parameter-location": "method"
     },
     "ServiceRegistryNameParameter": {
