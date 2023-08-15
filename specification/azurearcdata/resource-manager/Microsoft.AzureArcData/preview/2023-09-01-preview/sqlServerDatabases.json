@@ -408,6 +408,36 @@
             }
           }
         },
+        "createMode": {
+          "description": "Database create mode. PointInTimeRestore: Create a database by restoring a point in time backup of an existing database. SourceDatabaseName, SourceManagedInstanceName and PointInTime must be specified.",
+          "enum": [
+            "PointInTimeRestore"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DatabaseCreateMode",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "sourceDatabaseId": {
+          "description": "The resource identifier of the source database associated with create operation of this database.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "restorePointInTime": {
+          "format": "date-time",
+          "description": "Conditional. If createMode is PointInTimeRestore, this value is required. Specifies the point in time (ISO8601 format) of the source database that will be restored to create the new database.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
         "provisioningState": {
           "type": "string",
           "description": "The provisioning state of the Arc-enabled SQL Server database resource.",
