@@ -5,21 +5,19 @@
     "api-version": "2023-09-01-preview",
     "subscriptionId": "b04775c3-63fa-40f3-9430-139d2e5522d3",
     "parameters": {
+      "location": "NorthEurope",
       "properties": {
         "storageServices": {
-          "userAssignedIdentity": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoanalyzer-mi"
+          "resourceId": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.Storage/storageAccounts/contoso-videoanalyzer-ms"
         }
       },
       "identity": {
-        "type": "UserAssigned",
-        "userAssignedIdentities": {
-          "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoanalyzer-mi": {}
-        }
+        "type": "SystemAssigned"
       }
     }
   },
   "responses": {
-    "200": {
+    "201": {
       "body": {
         "id": "/subscriptions/586d4f48-8f08-4a4e-96b7-e1892d6dba9e/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.VideoIndexer/accounts/contosto-videoanalyzer",
         "name": "contosto-videoanalyzer",
@@ -32,35 +30,23 @@
           "accountName": "contosto-videoanalyzer",
           "storageServices": {
             "resourceId": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.Storage/storageAccounts/contoso-videoanalyzer-ms",
-            "userAssignedIdentity": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoanalyzer-mi"
+            "userAssignedIdentity": ""
           },
-          "totalSecondsIndexed": 1000,
+          "totalSecondsIndexed": 0,
           "provisioningState": "Succeeded"
         },
         "identity": {
-          "type": "UserAssigned",
-          "userAssignedIdentities": {
-            "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoanalyzer-mi": {
-              "principalId": "a661c16c-ee39-46e7-93f6-7fb80d17ef13",
-              "clientId": "92e65ecf-0fae-432e-8272-fedb6edb96c7"
-            }
-          }
+          "principalId": "43a83441-c17f-4e06-84a3-2eaf86668da7",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+          "type": "SystemAssigned"
         }
       }
     },
     "400": {
       "body": {
         "error": {
-          "code": "AMS_IN_ANOTHER_LOCATION",
-          "message": "Can not connect to a Media Services account which is not in the same location as the VideoIndexer account"
-        }
-      }
-    },
-    "404": {
-      "body": {
-        "error": {
-          "code": "ACCOUNT_NOT_FOUND",
-          "message": "Account not found"
+          "code": "INVALID_INPUT",
+          "message": "ResourceId is not a valid resource uri."
         }
       }
     },

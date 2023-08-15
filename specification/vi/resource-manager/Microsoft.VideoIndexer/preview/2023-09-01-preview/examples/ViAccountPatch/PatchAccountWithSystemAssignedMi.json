@@ -8,15 +8,11 @@
       "location": "NorthEurope",
       "properties": {
         "storageServices": {
-          "resourceId": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.Storage/storageAccounts/contoso-videoanalyzer-ms",
-          "userAssignedIdentity": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoanalyzer-mi"
+          "resourceId": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.Storage/storageAccounts/contoso-videoanalyzer-ms"
         }
       },
       "identity": {
-        "type": "UserAssigned",
-        "userAssignedIdentities": {
-          "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoanalyzer-mi": {}
-        }
+        "type": "SystemAssigned"
       }
     }
   },
@@ -34,27 +30,23 @@
           "accountName": "contosto-videoanalyzer",
           "storageServices": {
             "resourceId": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.Storage/storageAccounts/contoso-videoanalyzer-ms",
-            "userAssignedIdentity": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoanalyzer-mi"
+            "userAssignedIdentity": ""
           },
           "totalSecondsIndexed": 0,
           "provisioningState": "Succeeded"
         },
         "identity": {
-          "type": "UserAssigned",
-          "userAssignedIdentities": {
-            "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoanalyzer-mi": {
-              "principalId": "a661c16c-ee39-46e7-93f6-7fb80d17ef13",
-              "clientId": "92e65ecf-0fae-432e-8272-fedb6edb96c7"
-            }
-          }
+          "principalId": "43a83441-c17f-4e06-84a3-2eaf86668da7",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+          "type": "SystemAssigned"
         }
       }
     },
     "400": {
       "body": {
         "error": {
-          "code": "EVENT_GRID_NOT_REGISTERED",
-          "message": "Microsoft.EventGrid resource provider is not registered in subscription"
+          "code": "INVALID_INPUT",
+          "message": "Storage Service modification is not authorized, associated Storage for this account: {resourceId}"
         }
       }
     },
@@ -62,15 +54,7 @@
       "body": {
         "error": {
           "code": "ACCOUNT_NOT_FOUND",
-          "message": "Account not found"
-        }
-      }
-    },
-    "409": {
-      "body": {
-        "error": {
-          "code": "InvalidResourceLocation",
-          "message": "The resource 'xxx' already exists in location 'xxx' in resource group 'xxx'. A resource with the same name cannot be created in location 'xxx'. Please select a new resource name."
+          "message": "Account not found - {resourceUrl}."
         }
       }
     },

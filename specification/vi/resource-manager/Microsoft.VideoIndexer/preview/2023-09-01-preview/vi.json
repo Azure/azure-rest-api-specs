@@ -306,28 +306,10 @@
         },
         "x-ms-examples": {
           "Patch example #1": {
-            "$ref": "./examples/ViAccountPatch/ViAccountPatch1.json"
+            "$ref": "./examples/ViAccountPatch/PatchAccountWithSystemAssignedMi.json"
           },
           "Patch example #2": {
-            "$ref": "./examples/ViAccountPatch/ViAccountPatch2.json"
-          },
-          "Patch example #3": {
-            "$ref": "./examples/ViAccountPatch/ViAccountPatch3.json"
-          },
-          "Patch example #4": {
-            "$ref": "./examples/ViAccountPatch/ViAccountPatch4.json"
-          },
-          "Patch example #5": {
-            "$ref": "./examples/ViAccountPatch/ViAccountPatch5.json"
-          },
-          "Patch example #6": {
-            "$ref": "./examples/ViAccountPatch/ViAccountPatch6.json"
-          },
-          "Patch example #7": {
-            "$ref": "./examples/ViAccountPatch/ViAccountPatch7.json"
-          },
-          "Patch example #8": {
-            "$ref": "./examples/ViAccountPatch/ViAccountPatch8.json"
+            "$ref": "./examples/ViAccountPatch/PatchAccountWithUserAssignedMi.json"
           }
         }
       },
@@ -363,6 +345,12 @@
         "responses": {
           "200": {
             "description": "The resource was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "201": {
+            "description": "The resource was successfully created.",
             "schema": {
               "$ref": "#/definitions/Account"
             }
@@ -404,34 +392,19 @@
         },
         "x-ms-examples": {
           "Put example #1": {
-            "$ref": "./examples/ViAccountPut/ViAccountPut1.json"
+            "$ref": "./examples/ViAccountPut/ConnectClassicAccountToArmAccount.json"
           },
           "Put example #2": {
-            "$ref": "./examples/ViAccountPut/ViAccountPut2.json"
+            "$ref": "./examples/ViAccountPut/CreateAccountWithSystemAssignedMi.json"
           },
           "Put example #3": {
-            "$ref": "./examples/ViAccountPut/ViAccountPut3.json"
+            "$ref": "./examples/ViAccountPut/CreateAccountWithUserAssignedMi.json"
           },
           "Put example #4": {
-            "$ref": "./examples/ViAccountPut/ViAccountPut4.json"
+            "$ref": "./examples/ViAccountPut/UpdateAccountWithSystemAssignedMi.json"
           },
           "Put example #5": {
-            "$ref": "./examples/ViAccountPut/ViAccountPut5.json"
-          },
-          "Put example #6": {
-            "$ref": "./examples/ViAccountPut/ViAccountPut6.json"
-          },
-          "Put example #7": {
-            "$ref": "./examples/ViAccountPut/ViAccountPut7.json"
-          },
-          "Put example #8": {
-            "$ref": "./examples/ViAccountPut/ViAccountPut8.json"
-          },
-          "Put example #9": {
-            "$ref": "./examples/ViAccountPut/ViAccountPut9.json"
-          },
-          "Put example #10": {
-            "$ref": "./examples/ViAccountPut/ViAccountPut10.json"
+            "$ref": "./examples/ViAccountPut/UpdateAccountWithUserAssignedMi.json"
           }
         }
       },
