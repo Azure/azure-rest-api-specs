@@ -521,7 +521,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Post Succeed."
+            "description": "Post Succeed.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkAssociationGetResult"
+            }
           },
           "202": {
             "description": "Accepted - Returns an Azure async operation header with HttpStatusCode 202.",
@@ -537,7 +540,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
