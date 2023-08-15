@@ -191,6 +191,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "Get a private link association for a MG scope.": {
             "$ref": "./examples/ListPrivateLinkAssociation.json"
@@ -437,6 +440,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "Delete a Resource Management Private Link.": {
             "$ref": "./examples/ListSubscriptionResourceManagementPrivateLink.json"
@@ -481,6 +487,9 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Delete a Resource Management Private Link.": {
@@ -629,6 +638,10 @@
             "$ref": "#/definitions/PrivateLinkAssociation"
           },
           "description": "private link association information."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of resource information. Call ListNext() with this to fetch the next page of resource information."
         }
       }
     },
@@ -773,6 +786,10 @@
             "$ref": "#/definitions/ResourceManagementPrivateLink"
           },
           "description": "An array of resource management private links."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of resource information. Call ListNext() with this to fetch the next page of resource information."
         }
       }
     },
