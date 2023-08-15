@@ -12311,6 +12311,22 @@
       },
       "x-ms-discriminator-value": "Jar"
     },
+    "WarUploadedUserSourceInfo": {
+      "description": "Uploaded War binary for a deployment",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JarUploadedUserSourceInfo"
+        }
+      ],
+      "properties": {
+        "serverVersion": {
+          "description": "Server version, currently only Apache Tomcat is supported",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "War"
+    },
     "SourceUploadedUserSourceInfo": {
       "description": "Uploaded Java source code binary for a deployment",
       "type": "object",
