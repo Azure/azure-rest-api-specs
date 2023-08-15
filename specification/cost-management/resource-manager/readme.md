@@ -49,6 +49,7 @@ input-file:
   - Microsoft.CostManagement/stable/2023-08-01/costmanagement.pricesheets.json
   - Microsoft.CostManagement/stable/2023-08-01/scheduledActions.json
   - Microsoft.CostManagement/stable/2023-08-01/costallocation.json
+  - Microsoft.CostManagement/stable/2023-08-01/settings.json
 ```
 ### Tag: package-2023-03
 
@@ -416,6 +417,15 @@ directive:
   - suppress: PathForPutOperation
     from: costallocation.json
     reason: 'Subscripiton and ResourceGroup scope is not supported in cost allocation by desgin'
+   - suppress: NoDuplicatePathsForScopeParameter
+    from: settings.json
+    reason: 'Settings doesn't use scope for List API'
+   - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: settings.json
+    reason: 'Settings List designed to deliver very limited records'
+  - suppress: TopLevelResourcesListBySubscription
+    from: settings.json
+    reason: 'List by subscription is not supported in settings by desgin'
         
 ```
 
