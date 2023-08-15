@@ -26,7 +26,7 @@ interface WhitelistFeature {
   @route("whitelist/features")
   @summary("List Whitelist Features.")
   @doc("Get whitelist features.")
-  op listBlocklistTopTerms is RpcOperation<
+  op listWritelistFeatures is RpcOperation<
     {},
     FeatureList  ,
     ServiceTraits,
