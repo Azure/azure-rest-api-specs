@@ -358,7 +358,7 @@ suppressions:
 
   - code: GetCollectionOnlyHasValueAndNextLink
     reason: The latestBackupStatus GET has been approved by ARM Reviewers
-    from: netapp.json
+    from: swagger-document
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/latestBackupStatus"].get
 ```
