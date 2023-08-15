@@ -48,6 +48,7 @@ input-file:
   - Microsoft.CostManagement/stable/2023-08-01/costmanagement.json
   - Microsoft.CostManagement/stable/2023-08-01/costmanagement.pricesheets.json
   - Microsoft.CostManagement/stable/2023-08-01/scheduledActions.json
+  - Microsoft.CostManagement/stable/2023-08-01/costallocation.json
 ```
 ### Tag: package-2023-03
 
@@ -406,6 +407,15 @@ directive:
   - suppress: GetCollectionResponseSchema
     from: common-types.json
     reason: 'Operations does not contain a path for individual GET'
+  - suppress: TopLevelResourcesListBySubscription
+    from: costallocation.json
+    reason: 'List by subscription is not supported in cost allocation by desgin'
+  - suppress: PathForResourceAction
+    from: costallocation.json
+    reason: 'This is not a valid scenario for the checkNameAvailability API as the name itself represents an action.'
+  - suppress: PathForPutOperation
+    from: costallocation.json
+    reason: 'Subscripiton and ResourceGroup scope is not supported in cost allocation by desgin'
         
 ```
 
