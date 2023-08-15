@@ -177,9 +177,6 @@
           "Get pricings on subscription with plans filter": {
             "$ref": "./examples/Pricings/ListPricingsWithPlanFilter_example.json"
           },
-          "Get pricings on subscription with resource level filter": {
-            "$ref": "./examples/Pricings/ListPricingsWithResourceFilter_example.json"
-          },
           "Get pricings on resource": {
             "$ref": "./examples/Pricings/ListResourcePricings_example.json"
           }
@@ -187,14 +184,11 @@
         "tags": [
           "Pricings"
         ],
-        "description": "Lists Microsoft Defender for Cloud pricing configurations (both subscription and resource level) of the subscription that match the optional given $filter. Valid scopes are: subscription id or a specific resource id (Supported resources are: 'VirtualMachines, VMSS & ARC machines'). Valid $filter is: 'name in ({planName1},{planName2},...)'. If $filter is not provided, the unfiltered list will be returned. If '$filter=name in (planName1,planName2)' is provided, the returned list includes all pricings set for 'planName1' and 'planName2' only.  If 'includeAllDescendants = true' is provided, the returned list will include all pricings configurations for all the descendants of the current scope. By default, 'includeAllDescendants = false', and only pricings configurations on the current scope will be returned. Note: When calling with scope = subscription, only resources that their pricing have been set specifically (using PUT on the specific resource) are relevant fot this operation and will be returned (in case 'includeAllDescendants = true' was provided).",
+        "description": "Lists Microsoft Defender for Cloud pricing configurations of the scopeId, that match the optional given $filter. Valid scopes are: subscription id or a specific resource id (Supported resources are: 'VirtualMachines, VMSS & ARC machines'). Valid $filter is: 'name in ({planName1},{planName2},...)'. If $filter is not provided, the unfiltered list will be returned. If '$filter=name in (planName1,planName2)' is provided, the returned list includes the pricings set for 'planName1' and 'planName2' only.",
         "operationId": "Pricings_List",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/IncludeAllDescendants"
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/ScopeId"
@@ -216,10 +210,6 @@
               "$ref": "../../../common/v1/types.json#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "value"
         }
       }
     }
@@ -237,11 +227,6 @@
           "items": {
             "$ref": "#/definitions/Pricing"
           }
-        },
-        "nextLink": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The URI to fetch the next page."
         }
       }
     },
@@ -352,6 +337,34 @@
           "type": "string",
           "readOnly": true,
           "description": "The id of the scope inherited from. \"Null\" if not inherited. This field is only available for resource-level pricing."
+        },
+        "resourcesCoverageStatus": {
+          "type": "string",
+          "readOnly": true,
+          "description": "????",
+          "enum": [
+            "FullyCovered",
+            "PartiallyCovered",
+            "NotCovered"
+          ],
+          "x-ms-enum": {
+            "name": "resourcesCoverageStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "FullyCovered",
+                "description": "????"
+              },
+              {
+                "value": "PartiallyCovered",
+                "description": "????"
+              },
+              {
+                "value": "NotCovered",
+                "description": "????"
+              }
+            ]
+          }
         },
         "extensions": {
           "type": "array",
