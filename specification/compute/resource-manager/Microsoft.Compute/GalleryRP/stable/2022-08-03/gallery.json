@@ -2429,12 +2429,12 @@
         "safetyProfile": {
           "$ref": "#/definitions/GalleryImageVersionSafetyProfile"
         },
-        "securityProfile": {
-          "$ref": "#/definitions/ImageVersionSecurityProfile"
-        },
         "replicationStatus": {
           "readOnly": true,
           "$ref": "#/definitions/ReplicationStatus"
+        },
+        "securityProfile": {
+          "$ref": "#/definitions/ImageVersionSecurityProfile"
         }
       },
       "required": [
@@ -3165,7 +3165,7 @@
     },
     "GalleryImageVersionUefiSettings": {
       "type": "object",
-      "description": "",
+      "description": "Contains UEFI settings for the image version.",
       "properties": {
         "signatureTemplateNames": {
           "type": "array",
@@ -3193,11 +3193,12 @@
         "modelAsString": true
       }
     },
-    "uefiKeySignatures": {
+    "UefiKeySignatures": {
       "type": "object",
       "description": "Additional UEFI key signatures that will be added to the image in addition to the signature templates",
       "properties": {
         "pk": {
+          "description": "The Platform Key of this image version.",
           "$ref": "#/definitions/uefiKey"
         },
         "kek": {
@@ -3226,7 +3227,7 @@
         }
       }
     },
-    "uefiKey": {
+    "UefiKey": {
       "type": "object",
       "description": "A UEFI key signature.",
       "properties": {
