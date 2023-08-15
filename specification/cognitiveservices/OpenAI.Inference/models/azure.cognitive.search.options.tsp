@@ -40,12 +40,16 @@ The type of Azure Cognitive Search retrieval query that should be executed when 
 enum AzureCognitiveSearchQueryType {
   @doc("Represents the default, simple query parser.")
   simple: "simple",
+
   @doc("Represents the semantic query parser for advanced semantic modeling.")
   semantic: "semantic",
+
   @doc("Represents vector search over computed data.")
   vector: "vector",
+
   @doc("Represents a combination of the simple query strategy with vector data.")
   vectorSimpleHybrid: "vectorSimpleHybrid",
+
   @doc("Represents a combination of semantic search and vector data querying.")
   vectorSemanticHybrid: "vectorSemanticHybrid",
 }
@@ -77,9 +81,9 @@ model AzureCognitiveSearchChatExtensionConfiguration {
   @projectedName("csharp", "FieldMappingOptions")
   fieldsMapping?: AzureCognitiveSearchIndexFieldMappingOptions;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
   @doc("The configured top number of documents to feature for the configured query.")
   @projectedName("csharp", "DocumentCount")
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
   topNDocuments?: int32;
 
   @doc("The query type to use with Azure Cognitive Search.")

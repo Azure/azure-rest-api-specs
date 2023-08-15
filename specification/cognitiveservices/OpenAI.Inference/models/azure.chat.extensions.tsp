@@ -68,8 +68,3 @@ model AzureChatExtensionsMessageContext {
   """)
   messages?: ChatMessage[];
 }
-
-// This alias is defined to assist code generation with including additional extension configuration models
-#suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 not required and union behavior needed"
-alias AnyChatExtensionType = AzureChatExtensionConfiguration
-  | AzureCognitiveSearchChatExtensionConfiguration;

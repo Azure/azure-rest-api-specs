@@ -202,7 +202,7 @@ model ChatCompletionsOptions {
   @added(ServiceApiVersions.v2023_08_01_Preview)
   @projectedName("json", "dataSources")
   @projectedName("csharp", "InternalAzureExtensionsDataSources")
-  dataSources?: AnyChatExtensionType[];
+  dataSources?: AzureChatExtensionConfiguration[];
 }
 
 @doc("""
