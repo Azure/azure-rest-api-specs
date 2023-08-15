@@ -386,7 +386,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/getmaintenancewindowstatus": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/getMaintenanceWindowStatus": {
       "post": {
         "tags": [
           "managedMaintenanceWindowStatus"
@@ -429,14 +429,14 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/applymaintenancewindow": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/applyMaintenanceWindow": {
       "post": {
         "tags": [
           "managedApplyMaintenanceWindow"
         ],
         "summary": "Action to Apply Maintenance window on the Service Fabric Managed Clusters, right now. Any pending update will be applied.",
         "description": "Action to Apply Maintenance window on the Service Fabric Managed Clusters, right now. Any pending update will be applied.",
-        "operationId": "managedApplyMaintenanceWindow_Put",
+        "operationId": "managedApplyMaintenanceWindow_Post",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -453,7 +453,7 @@
         ],
         "x-ms-examples": {
           "Maintenance Window Status": {
-            "$ref": "./examples/ManagedApplyMaintenanceWindowPut_example.json"
+            "$ref": "./examples/ManagedApplyMaintenanceWindowPost_example.json"
           }
         },
         "responses": {

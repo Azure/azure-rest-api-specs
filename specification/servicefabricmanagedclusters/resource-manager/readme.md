@@ -217,10 +217,10 @@ input-file:
 suppressions:
     
   - code: ResourceNameRestriction
-    reason: the service does not have a patter restriction. ARM's default rule should get applied.
+    reason: the service does not have a pattern restriction. ARM's default rule should get applied.
 
   - code: PutResponseSchemaDescription
-    reason: service creted with the 202 patter before this rule was introduced.
+    reason: service created with the 202 pattern before this rule was introduced.
 ```
 
 ---
