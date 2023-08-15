@@ -3,7 +3,17 @@
     "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     "resourceGroupName": "rg",
     "sessionPoolName": "testSessionPool0",
-    "api-version": "2023-08-01-preview"
+    "api-version": "2023-08-01-preview",
+    "sessionPoolNameEnvelope": {
+      "location": "East US",
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      },
+      "properties": {
+        "maxConcurrentSessions": 500
+      }
+    }
   },
   "responses": {
     "200": {
@@ -26,6 +36,9 @@
           ]
         }
       }
+    },
+    "202": {
+      "headers": {}
     }
   }
 }

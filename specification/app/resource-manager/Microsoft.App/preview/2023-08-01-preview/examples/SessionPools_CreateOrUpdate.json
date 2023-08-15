@@ -4,7 +4,7 @@
     "resourceGroupName": "rg",
     "sessionPoolName": "testSessionPool0",
     "api-version": "2023-08-01-preview",
-    "containerAppEnvelope": {
+    "sessionPoolNameEnvelope": {
       "location": "East US",
       "properties": {
         "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
@@ -31,7 +31,27 @@
         "type": "Microsoft.App/sessionpools",
         "location": "East US",
         "properties": {
-          "name": "testSessionPool0",
+          "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+          "maxConcurrentSessions": 500,
+          "secrets": [
+            {
+              "name": "name1"
+            },
+            {
+              "name": "name2"
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/sessionPools/testSessionPool0",
+        "name": "testSessionPool0",
+        "type": "Microsoft.App/sessionpools",
+        "location": "East US",
+        "properties": {
           "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
           "maxConcurrentSessions": 500,
           "secrets": [
