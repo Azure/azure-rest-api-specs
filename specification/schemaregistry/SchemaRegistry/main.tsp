@@ -25,8 +25,7 @@ using OpenAPI;
   "{endpoint}",
   "The Schema Registry service endpoint.",
   {
-    // useSchemePrefix: true --> just specify https:// in the url
-    @doc("The Schema Registry service endpoint, for example https://my-namespace.servicebus.windows.net.")
+    @doc("The Schema Registry service endpoint, for example 'my-namespace.servicebus.windows.net'.")
     @extension("x-ms-parameter-location", "client")
     @extension("x-ms-skip-url-encoding", true)
     endpoint: url,
