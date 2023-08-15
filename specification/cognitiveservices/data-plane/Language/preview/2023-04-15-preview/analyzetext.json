@@ -4303,6 +4303,34 @@
       ],
       "type": "object"
     },
+    "TaskState": {
+      "properties": {
+        "lastUpdateDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "notStarted",
+            "running",
+            "succeeded",
+            "failed",
+            "cancelled",
+            "cancelling"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "State"
+          }
+        }
+      },
+      "required": [
+        "status",
+        "lastUpdateDateTime"
+      ],
+      "type": "object"
+    },
     "AnalyzeTextLROResult": {
       "type": "object",
       "discriminator": "kind",
@@ -4313,7 +4341,7 @@
       },
       "allOf": [
         {
-          "$ref": "common.json#/definitions/TaskState"
+          "$ref": "#/definitions/TaskState"
         },
         {
           "$ref": "common.json#/definitions/TaskIdentifier"
