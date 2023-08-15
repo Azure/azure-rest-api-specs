@@ -30,15 +30,6 @@ openapi-subtype: rpaas
 tag: package-2023-08-01-preview
 ```
 
-
-### Tag: package-preview-2023-08
-
-These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2023-08'
-input-file:
-  - Microsoft.PortalServices/preview/2023-08-01-preview/extensions.json
-```
 ### Tag: package-2022-04-01-preview
 
 These settings apply only when `--tag=package-2022-04-01-preview` is specified on the command line.
