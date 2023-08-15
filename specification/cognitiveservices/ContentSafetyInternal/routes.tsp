@@ -36,7 +36,7 @@ interface WhitelistFeature {
 
 interface Metrics {
   @route("/metrics")
-  @summary("List API request counts at different timestamps given a time range.")
+  @summary("List API Request Counts At Different Timestamps Given A Time Range.")
   @doc("List API request counts at different timestamps given a time range. Default maxpagesize is 1000.")
   listRequestCounts is BlockOps.ResourceList<
     CountPerTimestamp,
@@ -53,7 +53,7 @@ interface Metrics {
   >;
 
   @route("/metrics")
-  @summary("List API Request Latencies At Different Timestamps Given A Time range.")
+  @summary("List API Request Latencies At Different Timestamps Given A Time Range.")
   @doc("List API request latencies at different timestamps given a time range. Default maxpagesize is 1000.")
   listRequestLatencies is BlockOps.ResourceList<
     LatencyPerTimestamp,
@@ -70,8 +70,8 @@ interface Metrics {
     }>
   >;
 
-  @summary("List API Request Count At Different Timestamps Of A Specific Category Given A Time Range")
-  @doc("List API request count at different timestamps of a specific category given a time range")
+  @summary("List API Request Count At Different Timestamps Of A Specific Category Given A Time Range.")
+  @doc("List API request count at different timestamps of a specific category given a time range.")
   @route("/metrics")
   listRequestCountsByCategoryAndSeverity is BlockOps.ResourceList<
     RequestCountsPerTimestamp,
@@ -88,7 +88,7 @@ interface Metrics {
   >;
 
   @route("/metrics/blocklistTopTerms")
-  @summary("List top terms hit in blocklist at different timestamps.")
+  @summary("List Top Terms Hit In Blocklist At Different Timestamps.")
   @doc("List top terms hit in blocklist at different timestamps.")
   op listBlocklistTopTerms is RpcOperation<
     {
