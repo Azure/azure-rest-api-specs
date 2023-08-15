@@ -186,7 +186,7 @@
           {
             "name": "watcherName",
             "in": "path",
-            "description": "Database watcher name.",
+            "description": "The database watcher name.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$"
@@ -231,7 +231,7 @@
           {
             "name": "watcherName",
             "in": "path",
-            "description": "Database watcher name.",
+            "description": "The database watcher name.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$"
@@ -248,13 +248,13 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Resource 'Watcher' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/Watcher"
             }
           },
           "201": {
-            "description": "ARM create operation completed successfully.",
+            "description": "Resource 'Watcher' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Watcher"
             },
@@ -302,7 +302,7 @@
           {
             "name": "watcherName",
             "in": "path",
-            "description": "Database watcher name.",
+            "description": "The database watcher name.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$"
@@ -374,7 +374,7 @@
           {
             "name": "watcherName",
             "in": "path",
-            "description": "Database watcher name.",
+            "description": "The database watcher name.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$"
@@ -425,7 +425,7 @@
         "tags": [
           "Watchers"
         ],
-        "description": "Action to start monitoring all targets configured for a given database watcher.",
+        "description": "The action to start monitoring all targets configured for a database watcher.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -439,7 +439,7 @@
           {
             "name": "watcherName",
             "in": "path",
-            "description": "Database watcher name.",
+            "description": "The database watcher name.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$"
@@ -486,7 +486,7 @@
         "tags": [
           "Watchers"
         ],
-        "description": "Action to stop monitoring all targets configured for a given database watcher.",
+        "description": "The action to stop monitoring all targets configured for a database watcher.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -500,7 +500,7 @@
           {
             "name": "watcherName",
             "in": "path",
-            "description": "Database watcher name.",
+            "description": "The database watcher name.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$"
@@ -561,7 +561,7 @@
           {
             "name": "watcherName",
             "in": "path",
-            "description": "Database watcher name.",
+            "description": "The database watcher name.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$"
@@ -611,7 +611,7 @@
           {
             "name": "watcherName",
             "in": "path",
-            "description": "Database watcher name.",
+            "description": "The database watcher name.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$"
@@ -619,7 +619,7 @@
           {
             "name": "targetName",
             "in": "path",
-            "description": "Target resource name.",
+            "description": "The target resource name.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$"
@@ -664,7 +664,7 @@
           {
             "name": "watcherName",
             "in": "path",
-            "description": "Database watcher name.",
+            "description": "The database watcher name.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$"
@@ -672,7 +672,7 @@
           {
             "name": "targetName",
             "in": "path",
-            "description": "Target resource name.",
+            "description": "The target resource name.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$"
@@ -689,13 +689,13 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Resource 'Target' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/Target"
             }
           },
           "201": {
-            "description": "ARM create operation completed successfully.",
+            "description": "Resource 'Target' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Target"
             },
@@ -743,7 +743,7 @@
           {
             "name": "watcherName",
             "in": "path",
-            "description": "Database watcher name.",
+            "description": "The database watcher name.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$"
@@ -751,7 +751,7 @@
           {
             "name": "targetName",
             "in": "path",
-            "description": "Target resource name.",
+            "description": "The target resource name.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$"
@@ -860,15 +860,15 @@
     },
     "Datastore": {
       "type": "object",
-      "description": "Properties of data store.",
+      "description": "The properties of a data store.",
       "properties": {
         "adxDatabaseResourceId": {
           "type": "string",
-          "description": "ARM ResourceId of an Azure Data Explorer database."
+          "description": "The ARM ResourceId of an Azure Data Explorer database."
         },
         "adxClusterUri": {
           "type": "string",
-          "description": "URI of an Azure Data Explorer Cluster."
+          "description": "The Kusto cluster URI."
         }
       },
       "required": [
@@ -878,29 +878,29 @@
     },
     "DatastoreUpdate": {
       "type": "object",
-      "description": "Properties of data store.",
+      "description": "The properties of a data store.",
       "properties": {
         "adxDatabaseResourceId": {
           "type": "string",
-          "description": "ARM ResourceId of an Azure Data Explorer database."
+          "description": "The ARM ResourceId of an Azure Data Explorer database."
         },
         "adxClusterUri": {
           "type": "string",
-          "description": "URI of an Azure Data Explorer Cluster."
+          "description": "The Kusto cluster URI."
         }
       }
     },
     "SqlDbElasticPoolTargetProperties": {
       "type": "object",
-      "description": "Properties specific to elastic pool in Azure SQL Database.",
+      "description": "The properties specific to elastic pool in Azure SQL Database.",
       "properties": {
         "sqlEpResourceId": {
           "type": "string",
-          "description": "ARM ResourceId of an Azure SQL DB elastic pool target."
+          "description": "The ARM ResourceId of an Azure SQL DB elastic pool target."
         },
         "anchorDatabaseResourceId": {
           "type": "string",
-          "description": "ARM ResourceId of the anchor database used to connect to an elastic pool."
+          "description": "The ARM ResourceId of the anchor database used to connect to an elastic pool."
         },
         "readIntent": {
           "type": "boolean",
@@ -921,11 +921,11 @@
     },
     "SqlDbSingleDatabaseTargetProperties": {
       "type": "object",
-      "description": "Properties specific to single database in Azure SQL Database.",
+      "description": "The properties specific to single database in Azure SQL Database.",
       "properties": {
         "sqlDbResourceId": {
           "type": "string",
-          "description": "ARM ResourceId of an Azure SQL DB single database target."
+          "description": "The ARM ResourceId of an Azure SQL DB single database target."
         },
         "readIntent": {
           "type": "boolean",
@@ -945,11 +945,11 @@
     },
     "SqlMiTargetProperties": {
       "type": "object",
-      "description": "Properties specific to Azure SQL Managed Instance targets.",
+      "description": "The properties specific to Azure SQL Managed Instance targets.",
       "properties": {
         "sqlMiResourceId": {
           "type": "string",
-          "description": "ARM ResourceId of an Azure SQL Managed Instance target."
+          "description": "The ARM ResourceId of an Azure SQL Managed Instance target."
         },
         "connectionTcpPort": {
           "type": "integer",
@@ -975,11 +975,11 @@
     },
     "SqlVmTargetProperties": {
       "type": "object",
-      "description": "Properties specific to Azure SQL VM targets.",
+      "description": "The properties specific to Azure SQL VM targets.",
       "properties": {
         "sqlVmResourceId": {
           "type": "string",
-          "description": "ARM ResourceId of an Azure SQL VM target."
+          "description": "The ARM ResourceId of an Azure SQL VM target."
         },
         "connectionTcpPort": {
           "type": "integer",
@@ -1024,7 +1024,7 @@
     },
     "TargetCollectionStatus": {
       "type": "string",
-      "description": "Target states.",
+      "description": "The target states.",
       "enum": [
         "Enabled",
         "Disabled"
@@ -1069,7 +1069,7 @@
     },
     "TargetProperties": {
       "type": "object",
-      "description": "Generic properties of a target.",
+      "description": "The generic properties of a target.",
       "properties": {
         "targetType": {
           "type": "string",
@@ -1077,7 +1077,7 @@
         },
         "targetVault": {
           "$ref": "#/definitions/VaultSecret",
-          "description": "To use SQL authentication for targets, specify the vault where username and password secrets are stored."
+          "description": "To use SQL authentication when connecting to targets, specify the vault where the login name and password secrets are stored."
         },
         "connectionServerName": {
           "type": "string",
@@ -1086,7 +1086,7 @@
         },
         "targetCollectionStatus": {
           "type": "string",
-          "description": "Target collection status.",
+          "description": "The target collection status.",
           "enum": [
             "Enabled",
             "Disabled"
@@ -1122,11 +1122,11 @@
     },
     "VaultSecret": {
       "type": "object",
-      "description": "Vault specific details required if using SQL authentication to connect to a target.",
+      "description": "The vault specific details required if using SQL authentication to connect to a target.",
       "properties": {
         "akvResourceId": {
           "type": "string",
-          "description": "ARM ResourceId of the Key Vault instance storing database authentication secrets."
+          "description": "The ARM ResourceId of the Key Vault instance storing database authentication secrets."
         },
         "akvTargetUser": {
           "type": "string",
@@ -1138,9 +1138,33 @@
         }
       }
     },
+    "Versions": {
+      "type": "string",
+      "description": "Versions info.",
+      "enum": [
+        "2023-03-01-preview",
+        "2023-09-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2023_03_01_preview",
+            "value": "2023-03-01-preview",
+            "description": "The 2023-03-01-preview version."
+          },
+          {
+            "name": "v2023_09_01_preview",
+            "value": "2023-09-01-preview",
+            "description": "The 2023-09-01-preview version."
+          }
+        ]
+      }
+    },
     "Watcher": {
       "type": "object",
-      "description": "A DatabaseWatcherProviderHub resource.",
+      "description": "The DatabaseWatcherProviderHub resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/WatcherProperties",
@@ -1185,11 +1209,11 @@
     },
     "WatcherProperties": {
       "type": "object",
-      "description": "RP specific properties of the resource.",
+      "description": "The RP specific properties of the resource.",
       "properties": {
         "datastore": {
           "$ref": "#/definitions/Datastore",
-          "description": "A data store for collected monitoring data."
+          "description": "The data store for collected monitoring data."
         },
         "status": {
           "$ref": "#/definitions/WatcherStatus",
@@ -1205,7 +1229,7 @@
     },
     "WatcherStatus": {
       "type": "string",
-      "description": "The monitoring collection status of the watcher.",
+      "description": "The monitoring collection status of a watcher.",
       "enum": [
         "Starting",
         "Running",
@@ -1272,7 +1296,7 @@
       "properties": {
         "datastore": {
           "$ref": "#/definitions/DatastoreUpdate",
-          "description": "A data store for collected monitoring data."
+          "description": "The data store for collected monitoring data."
         }
       }
     }

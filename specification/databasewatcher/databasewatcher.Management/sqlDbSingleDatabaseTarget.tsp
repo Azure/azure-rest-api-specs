@@ -11,12 +11,12 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using OpenAPI;
 
-@doc("Properties specific to single database in Azure SQL Database.")
+@doc("The properties specific to single database in Azure SQL Database.")
 model SqlDbSingleDatabaseTargetProperties extends TargetProperties {
-  @doc("Azure SQL DB single database target.")
+  @doc("The Azure SQL DB single database target.")
   targetType: "SqlDb";
 
-  @doc("ARM ResourceId of an Azure SQL DB single database target.")
+  @doc("The ARM ResourceId of an Azure SQL DB single database target.")
   sqlDbResourceId: string;
 
   @doc("Set to true to monitor a high availability replica of specified target, if any.")
