@@ -1471,14 +1471,6 @@
         "vNetProperties": {
           "description": "VNet properties for managed integration runtime.",
           "$ref": "#/definitions/IntegrationRuntimeVNetProperties"
-        },
-        "copyComputeScaleProperties": {
-          "description": "CopyComputeScale properties for managed integration runtime.",
-          "$ref": "#/definitions/CopyComputeScaleProperties"
-        },
-        "pipelineExternalComputeScaleProperties": {
-          "description": "PipelineExternalComputeScale properties for managed integration runtime.",
-          "$ref": "#/definitions/PipelineExternalComputeScaleProperties"
         }
       },
       "additionalProperties": {
@@ -1541,56 +1533,6 @@
         "subnetId": {
           "description": "The ID of subnet, to which this Azure-SSIS integration runtime will be joined.",
           "type": "string"
-        }
-      },
-      "additionalProperties": {
-        "type": "object"
-      }
-    },
-    "CopyComputeScaleProperties": {
-      "description": "CopyComputeScale properties for managed integration runtime.",
-      "type": "object",
-      "properties": {
-        "dataIntegrationUnit": {
-          "description": "DIU number setting reserved for copy activity execution. Supported values are multiples of 4 in range 4-256.",
-          "type": "integer",
-          "format": "int32",
-          "minimum": 4
-        },
-        "timeToLive": {
-          "description": "Time to live (in minutes) setting of integration runtime which will execute copy activity.",
-          "type": "integer",
-          "format": "int32",
-          "minimum": 5
-        }
-      },
-      "additionalProperties": {
-        "type": "object"
-      }
-    },
-    "PipelineExternalComputeScaleProperties": {
-      "description": "PipelineExternalComputeScale properties for managed integration runtime.",
-      "type": "object",
-      "properties": {
-        "timeToLive": {
-          "description": "Time to live (in minutes) setting of integration runtime which will execute pipeline and external activity.",
-          "type": "integer",
-          "format": "int32",
-          "minimum": 5
-        },
-        "numberOfPipelineNodes": {
-          "description": "Number of the pipeline nodes, which should be greater than 0 and less than 11.",
-          "type": "integer",
-          "format": "int32",
-          "minimum": 1,
-          "maximum": 10
-        },
-        "numberOfExternalNodes": {
-          "description": "Number of the the external nodes, which should be greater than 0 and less than 11.",
-          "type": "integer",
-          "format": "int32",
-          "minimum": 1,
-          "maximum": 10
         }
       },
       "additionalProperties": {
@@ -1937,10 +1879,6 @@
         "linkedInfo": {
           "$ref": "#/definitions/LinkedIntegrationRuntimeType",
           "description": "Linked integration runtime type from data factory"
-        },
-        "selfContainedInteractiveAuthoringEnabled": {
-          "type": "boolean",
-          "description": "An alternative option to ensure interactive authoring function when your self-hosted integration runtime is unable to establish a connection with Azure Relay."
         }
       }
     },
@@ -2349,11 +2287,6 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true
-        },
-        "selfContainedInteractiveAuthoringEnabled": {
-          "type": "boolean",
-          "readOnly": true,
-          "description": "An alternative option to ensure interactive authoring function when your self-hosted integration runtime is unable to establish a connection with Azure Relay."
         }
       }
     },
