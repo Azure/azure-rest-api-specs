@@ -793,7 +793,7 @@
           "default"
         ],
         "summary": "List DevOps Configurations.",
-        "operationId": "Configurations_List",
+        "operationId": "DevOpsConfigurations_List",
         "produces": [
           "application/json"
         ],
@@ -829,8 +829,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Configurations_List": {
-            "$ref": "./examples/SecurityConnectorsDevOps/ConfigurationsList.json"
+          "DevOpsConfigurations_List": {
+            "$ref": "./examples/SecurityConnectorsDevOps/DevOpsConfigurationsList.json"
           }
         }
       }
@@ -841,7 +841,7 @@
           "default"
         ],
         "summary": "Gets a DevOps Configuration.",
-        "operationId": "Configurations_Get",
+        "operationId": "DevOpsConfigurations_Get",
         "produces": [
           "application/json"
         ],
@@ -874,8 +874,8 @@
           }
         },
         "x-ms-examples": {
-          "Configurations_Get": {
-            "$ref": "./examples/SecurityConnectorsDevOps/ConfigurationsGet.json"
+          "DevOpsConfigurations_Get": {
+            "$ref": "./examples/SecurityConnectorsDevOps/DevOpsConfigurationsGet.json"
           }
         }
       },
@@ -884,7 +884,7 @@
           "default"
         ],
         "summary": "Creates or updates a DevOps Configuration.",
-        "operationId": "Configurations_CreateOrUpdate",
+        "operationId": "DevOpsConfigurations_CreateOrUpdate",
         "consumes": [
           "application/json"
         ],
@@ -945,14 +945,14 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Configurations_CreateOrUpdateOnboardCurrentAndFuture": {
-            "$ref": "./examples/SecurityConnectorsDevOps/ConfigurationsCreateOrUpdateOnboardCurrentAndFuture.json"
+          "DevOpsConfigurations_CreateOrUpdateOnboardCurrentAndFuture": {
+            "$ref": "./examples/SecurityConnectorsDevOps/DevOpsConfigurationsCreateOrUpdateOnboardCurrentAndFuture.json"
           },
-          "Configurations_CreateOrUpdateOnboardCurrentOnly": {
-            "$ref": "./examples/SecurityConnectorsDevOps/ConfigurationsCreateOrUpdateOnboardCurrentOnly.json"
+          "DevOpsConfigurations_CreateOrUpdateOnboardCurrentOnly": {
+            "$ref": "./examples/SecurityConnectorsDevOps/DevOpsConfigurationsCreateOrUpdateOnboardCurrentOnly.json"
           },
-          "Configurations_CreateOrUpdateOnboardSelected": {
-            "$ref": "./examples/SecurityConnectorsDevOps/ConfigurationsCreateOrUpdateOnboardSelected.json"
+          "DevOpsConfigurations_CreateOrUpdateOnboardSelected": {
+            "$ref": "./examples/SecurityConnectorsDevOps/DevOpsConfigurationsCreateOrUpdateOnboardSelected.json"
           }
         }
       },
@@ -961,7 +961,7 @@
           "default"
         ],
         "summary": "Updates a DevOps Configuration.",
-        "operationId": "Configurations_Update",
+        "operationId": "DevOpsConfigurations_Update",
         "consumes": [
           "application/json"
         ],
@@ -1016,8 +1016,8 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Configurations_Update": {
-            "$ref": "./examples/SecurityConnectorsDevOps/ConfigurationsUpdate.json"
+          "DevOpsConfigurations_Update": {
+            "$ref": "./examples/SecurityConnectorsDevOps/DevOpsConfigurationsUpdate.json"
           }
         }
       },
@@ -1026,7 +1026,7 @@
           "default"
         ],
         "summary": "Deletes a DevOps Connector.",
-        "operationId": "Configurations_Delete",
+        "operationId": "DevOpsConfigurations_Delete",
         "produces": [
           "application/json"
         ],
@@ -1063,8 +1063,8 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Configurations_Delete": {
-            "$ref": "./examples/SecurityConnectorsDevOps/ConfigurationsDelete.json"
+          "DevOpsConfigurations_Delete": {
+            "$ref": "./examples/SecurityConnectorsDevOps/DevOpsConfigurationsDelete.json"
           }
         }
       }
@@ -1603,13 +1603,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/operationResults/{operationId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/operationResults/{operationResultId}": {
       "get": {
         "tags": [
           "default"
         ],
         "summary": "Get devops long running operation result.",
-        "operationId": "OperationResults_Get",
+        "operationId": "DevOpsOperationResults_Get",
         "produces": [
           "application/json"
         ],
@@ -1624,7 +1624,7 @@
             "$ref": "#/parameters/SecurityConnectorName"
           },
           {
-            "$ref": "#/parameters/OperationId"
+            "$ref": "#/parameters/OperationResultId"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -1645,11 +1645,11 @@
           }
         },
         "x-ms-examples": {
-          "OperationResults_Get_Succeeded": {
-            "$ref": "./examples/SecurityConnectorsDevOps/OperationResultsGetSucceeded.json"
+          "DevOpsOperationResults_Get_Succeeded": {
+            "$ref": "./examples/SecurityConnectorsDevOps/DevOpsOperationResultsGetSucceeded.json"
           },
-          "OperationResults_Get_Failed": {
-            "$ref": "./examples/SecurityConnectorsDevOps/OperationResultsGetFailed.json"
+          "DevOpsOperationResults_Get_Failed": {
+            "$ref": "./examples/SecurityConnectorsDevOps/DevOpsOperationResultsGetFailed.json"
           }
         }
       }
@@ -2537,10 +2537,10 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "OperationId": {
+    "OperationResultId": {
       "in": "path",
-      "name": "operationId",
-      "description": "The operation Id.",
+      "name": "operationResultId",
+      "description": "The operation result Id.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
