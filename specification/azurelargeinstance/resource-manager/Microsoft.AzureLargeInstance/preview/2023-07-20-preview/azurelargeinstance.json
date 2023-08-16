@@ -233,6 +233,9 @@
           },
           {
             "$ref": "#/parameters/AzureLargeInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ForcePowerManagementOperationParameter"
           }
         ],
         "responses": {
@@ -1248,6 +1251,16 @@
         }
       },
       "description": "Tags field of the AzureLargeInstance instance."
+    },
+    "ForceFlag": {
+      "type": "object",
+      "properties": {
+        "force": {
+          "type": "boolean",
+          "description": "Whether to force restart by shutting all processes."
+        }
+      },
+      "description": "The flag empowers the server with the ability to forcefully terminate and halt any existing processes that may be running on the server"
     }
   },
   "parameters": {
@@ -1267,6 +1280,16 @@
       "type": "string",
       "pattern": ".*",
       "description": "Name of the AzureLargeStorageInstance.",
+      "x-ms-parameter-location": "method"
+    },
+    "ForcePowerManagementOperationParameter": {
+      "name": "ForceParameter",
+      "in": "body",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/ForceFlag"
+      },
+      "description": "When set to 'true', this parameter empowers the server with the ability to forcefully terminate and halt any existing processes that may be running on the server",
       "x-ms-parameter-location": "method"
     },
     "TagsParameter": {
