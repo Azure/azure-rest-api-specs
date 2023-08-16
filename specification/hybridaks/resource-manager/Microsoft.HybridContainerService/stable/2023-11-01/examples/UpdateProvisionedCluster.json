@@ -1,0 +1,174 @@
+{
+  "parameters": {
+    "subscriptionId": "a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b",
+    "resourceGroupName": "test-arcappliance-resgrp",
+    "resourceName": "test-hybridakscluster",
+    "api-version": "2023-11-01",
+    "provisionedClusters": {
+      "tags": {
+        "additionalProperties": "sample"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "westus",
+        "extendedLocation": {
+          "type": "CustomLocation",
+          "name": "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourcegroups/test-arcappliance-resgrp/providers/microsoft.extendedlocation/customlocations/testcustomlocation"
+        },
+        "tags": {
+          "additionalProperties": "sample"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "controlPlane": {
+            "count": 1,
+            "vmSize": "Standard_A4_v2",
+            "osType": "Linux",
+            "linuxProfile": {
+              "ssh": {
+                "publicKeys": [
+                  {
+                    "keyData": "ssh-rsa AAAAB1NzaC1yc2EAAAADAQABAAACAQCY......"
+                  }
+                ]
+              }
+            }
+          },
+          "kubernetesVersion": "v1.20.5",
+          "networkProfile": {
+            "networkPolicy": "calico",
+            "podCidr": "10.244.0.0/16"
+          },
+          "agentPoolProfiles": [
+            {
+              "name": "default-nodepool-1",
+              "count": 1,
+              "vmSize": "Standard_A4_v2",
+              "osType": "Linux"
+            }
+          ],
+          "linuxProfile": {
+            "ssh": {
+              "publicKeys": [
+                {
+                  "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCY......."
+                }
+              ]
+            }
+          },
+          "cloudProviderProfile": {
+            "infraNetworkProfile": {
+              "vnetSubnetIds": [
+                "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourceGroups/test-arcappliance-resgrp/providers/Microsoft.AzureStackHCI/logicalNetworks/test-vnet-static"
+              ]
+            }
+          },
+          "aadProfile": {
+            "managed": true,
+            "enableAzureRbac": true,
+            "adminGroupObjectIDs": [
+              "6b98f335-4165-436c-b768-4aac74cf15ee"
+            ],
+            "tenantID": "1f2c727e-732d-4a12-afed-c17c26ef3b6f"
+          },
+          "securityProfile": {
+            "workloadIdentity": {
+              "enabled": true
+            }
+          },
+          "oidcIssuerProfile": {
+            "issuerURL": "oidc.mengzezhu/issuer/profile",
+            "enabled": true
+          },
+          "licenseProfile": {
+            "azureHybridBenefit": "NotApplicable"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.HybridContainerService/locations/westus/operationStatuses/b36529b7-9451-4125-8b71-397bafd1ffb0*3A3D3C747?api-version=2023-11-01"
+      },
+      "body": {
+        "location": "westus",
+        "extendedLocation": {
+          "type": "CustomLocation",
+          "name": "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourcegroups/test-arcappliance-resgrp/providers/microsoft.extendedlocation/customlocations/testcustomlocation"
+        },
+        "tags": {
+          "additionalProperties": "sample"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "controlPlane": {
+            "count": 1,
+            "vmSize": "Standard_A4_v2",
+            "osType": "Linux",
+            "linuxProfile": {
+              "ssh": {
+                "publicKeys": [
+                  {
+                    "keyData": "ssh-rsa AAAAB1NzaC1yc2EAAAADAQABAAACAQCY......"
+                  }
+                ]
+              }
+            }
+          },
+          "kubernetesVersion": "v1.20.5",
+          "networkProfile": {
+            "networkPolicy": "calico",
+            "podCidr": "10.244.0.0/16"
+          },
+          "agentPoolProfiles": [
+            {
+              "name": "default-nodepool-1",
+              "count": 1,
+              "vmSize": "Standard_A4_v2",
+              "osType": "Linux"
+            }
+          ],
+          "linuxProfile": {
+            "ssh": {
+              "publicKeys": [
+                {
+                  "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCY......."
+                }
+              ]
+            }
+          },
+          "cloudProviderProfile": {
+            "infraNetworkProfile": {
+              "vnetSubnetIds": [
+                "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourceGroups/test-arcappliance-resgrp/providers/Microsoft.AzureStackHCI/logicalNetworks/test-vnet-static"
+              ]
+            }
+          },
+          "aadProfile": {
+            "managed": true,
+            "enableAzureRbac": true,
+            "adminGroupObjectIDs": [
+              "6b98f335-4165-436c-b768-4aac74cf15ee"
+            ],
+            "tenantID": "1f2c727e-732d-4a12-afed-c17c26ef3b6f"
+          },
+          "securityProfile": {
+            "workloadIdentity": {
+              "enabled": true
+            }
+          },
+          "oidcIssuerProfile": {
+            "issuerURL": "oidc.mengzezhu/issuer/profile",
+            "enabled": true
+          },
+          "licenseProfile": {
+            "azureHybridBenefit": "NotApplicable"
+          }
+        }
+      }
+    }
+  }
+}
