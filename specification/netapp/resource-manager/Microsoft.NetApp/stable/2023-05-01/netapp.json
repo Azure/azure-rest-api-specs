@@ -329,6 +329,110 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/queryNetworkSiblingSet": {
+      "post": {
+        "tags": [
+          "NetApp Resource"
+        ],
+        "summary": "Describe a network sibling set",
+        "description": "Get details of the specified network sibling set.",
+        "operationId": "NetAppResource_QueryNetworkSiblingSet",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Network sibling set to query.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QueryNetworkSiblingSetRequest"
+            },
+            "x-ms-client-flatten": true
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/networkSiblingSet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "NetworkSiblingSet_Query": {
+            "$ref": "examples/NetworkSiblingSet_Query.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/updateNetworkSiblingSet": {
+      "post": {
+        "tags": [
+          "NetApp Resource"
+        ],
+        "summary": "Update the network features of a network sibling set",
+        "description": "Update the network features of the specified network sibling set.",
+        "operationId": "NetAppResource_UpdateNetworkSiblingSet",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update for the specified network sibling set.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateNetworkSiblingSetRequest"
+            },
+            "x-ms-client-flatten": true
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/networkSiblingSet"
+            }
+          },
+          "202": {
+            "description": "Accepted -- Update request accepted; operation will complete asynchronously"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "NetworkFeatures_Update": {
+            "$ref": "examples/NetworkSiblingSet_Update.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/netAppAccounts": {
       "get": {
         "summary": "Describe all NetApp Accounts in a subscription",
@@ -1172,6 +1276,55 @@
         "x-ms-examples": {
           "Volumes_Delete": {
             "$ref": "examples/Volumes_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/populateAvailabilityZone": {
+      "post": {
+        "tags": [
+          "Volumes"
+        ],
+        "summary": "Populate Availability Zone",
+        "description": "This operation will populate availability zone information for a volume",
+        "operationId": "Volumes_PopulateAvailabilityZone",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/volume"
+            }
+          },
+          "202": {
+            "description": "Accepted -- populate availability zone accepted; operation will complete asynchronously"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Volumes_PopulateAvailabilityZones": {
+            "$ref": "examples/Volumes_PopulateAvailabilityZones.json"
           }
         }
       }
@@ -2673,52 +2826,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/backupStatus": {
-      "get": {
-        "tags": [
-          "Backups"
-        ],
-        "summary": "Get volume's backup status",
-        "description": "Get the status of the backup for a volume",
-        "operationId": "Backups_GetStatus",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/PoolName"
-          },
-          {
-            "$ref": "#/parameters/VolumeName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/backupStatus"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed."
-          }
-        },
-        "x-ms-examples": {
-          "Volumes_BackupStatus": {
-            "$ref": "examples/Volumes_BackupStatus.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/restoreStatus": {
       "get": {
         "tags": [
@@ -2761,426 +2868,6 @@
         "x-ms-examples": {
           "Volumes_RestoreStatus": {
             "$ref": "examples/Volumes_RestoreStatus.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/accountBackups": {
-      "get": {
-        "tags": [
-          "Backups"
-        ],
-        "summary": "List Backups for a Netapp Account",
-        "description": "List all Backups for a Netapp Account",
-        "operationId": "AccountBackups_List",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/backupsList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed."
-          }
-        },
-        "x-ms-examples": {
-          "AccountBackups_List": {
-            "$ref": "examples/Backups_Account_List.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/accountBackups/{backupName}": {
-      "get": {
-        "tags": [
-          "Backups"
-        ],
-        "summary": "Get Backup for a Netapp Account",
-        "description": "Gets the specified backup for a Netapp Account",
-        "operationId": "AccountBackups_Get",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/BackupName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/backup"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed."
-          }
-        },
-        "x-ms-examples": {
-          "AccountBackups_Get": {
-            "$ref": "examples/Backups_Account_Get.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Backups"
-        ],
-        "summary": "Delete Backup for a Netapp Account",
-        "description": "Delete the specified Backup for a Netapp Account",
-        "operationId": "AccountBackups_Delete",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/BackupName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted -- Create or update request accepted; operation will complete asynchronously"
-          },
-          "204": {
-            "description": "NoContent -- Resource does not exist."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed."
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "AccountBackups_Delete": {
-            "$ref": "examples/Backups_Account_Delete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/backups": {
-      "get": {
-        "tags": [
-          "Backups"
-        ],
-        "summary": "List Backups",
-        "description": "List all backups for a volume",
-        "operationId": "Backups_List",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/PoolName"
-          },
-          {
-            "$ref": "#/parameters/VolumeName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/backupsList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed."
-          }
-        },
-        "x-ms-examples": {
-          "Backups_List": {
-            "$ref": "examples/Backups_List.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/backups/{backupName}": {
-      "get": {
-        "tags": [
-          "Backups"
-        ],
-        "summary": "Get a backup",
-        "description": "Gets the specified backup of the volume",
-        "operationId": "Backups_Get",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/PoolName"
-          },
-          {
-            "$ref": "#/parameters/VolumeName"
-          },
-          {
-            "$ref": "#/parameters/BackupName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/backup"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed."
-          }
-        },
-        "x-ms-examples": {
-          "Backups_Get": {
-            "$ref": "examples/Backups_Get.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Backups"
-        ],
-        "summary": "Create a backup",
-        "description": "Create a backup for the volume",
-        "operationId": "Backups_Create",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/PoolName"
-          },
-          {
-            "$ref": "#/parameters/VolumeName"
-          },
-          {
-            "$ref": "#/parameters/BackupName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "description": "Backup object supplied in the body of the operation.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/backup"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK created",
-            "schema": {
-              "$ref": "#/definitions/backup"
-            }
-          },
-          "201": {
-            "description": "Backup created",
-            "schema": {
-              "$ref": "#/definitions/backup"
-            }
-          },
-          "202": {
-            "description": "Accepted -- Create request accepted; operation will complete asynchronously"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed."
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "Backups_Create": {
-            "$ref": "examples/Backups_Create.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "Backups"
-        ],
-        "summary": "Patch a backup",
-        "description": "Patch a backup for the volume",
-        "operationId": "Backups_Update",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/PoolName"
-          },
-          {
-            "$ref": "#/parameters/VolumeName"
-          },
-          {
-            "$ref": "#/parameters/BackupName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "description": "Backup object supplied in the body of the operation.",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/backupPatch"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/backup"
-            }
-          },
-          "202": {
-            "description": "Accepted -- Create or update request accepted; operation will complete asynchronously",
-            "schema": {
-              "$ref": "#/definitions/backup"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed."
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "Backups_Update": {
-            "$ref": "examples/Backups_Update.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Backups"
-        ],
-        "summary": "Delete backup",
-        "description": "Delete a backup of the volume",
-        "operationId": "Backups_Delete",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/PoolName"
-          },
-          {
-            "$ref": "#/parameters/VolumeName"
-          },
-          {
-            "$ref": "#/parameters/BackupName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted -- Create or update request accepted; operation will complete asynchronously"
-          },
-          "204": {
-            "description": "NoContent -- Resource does not exist."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed."
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "Backups_Delete": {
-            "$ref": "examples/Backups_Delete.json"
           }
         }
       }
@@ -3760,8 +3447,11 @@
           }
         },
         "x-ms-examples": {
-          "VolumeGroups_List": {
-            "$ref": "examples/VolumeGroups_List.json"
+          "VolumeGroups_List_SapHana": {
+            "$ref": "examples/VolumeGroups_List_SapHana.json"
+          },
+          "VolumeGroups_List_Oracle": {
+            "$ref": "examples/VolumeGroups_List_Oracle.json"
           }
         }
       }
@@ -3803,8 +3493,11 @@
           }
         },
         "x-ms-examples": {
-          "VolumeGroups_Get": {
-            "$ref": "examples/VolumeGroups_Get.json"
+          "VolumeGroups_Get_SapHana": {
+            "$ref": "examples/VolumeGroups_Get_SapHana.json"
+          },
+          "VolumeGroups_Get_Oracle": {
+            "$ref": "examples/VolumeGroups_Get_Oracle.json"
           }
         }
       },
@@ -3854,8 +3547,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "VolumeGroups_Create": {
-            "$ref": "examples/VolumeGroups_Create.json"
+          "VolumeGroups_Create_SapHana": {
+            "$ref": "examples/VolumeGroups_Create_SapHana.json"
+          },
+          "VolumeGroups_Create_Oracle": {
+            "$ref": "examples/VolumeGroups_Create_Oracle.json"
           }
         }
       },
@@ -4241,73 +3937,6 @@
         "x-ms-examples": {
           "Subvolumes_Metadata": {
             "$ref": "examples/Subvolumes_Metadata.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/backups/{backupName}/restoreFiles": {
-      "post": {
-        "tags": [
-          "Backups"
-        ],
-        "operationId": "Backups_RestoreFiles",
-        "summary": "Create a new Backup Restore Files request",
-        "description": "Restore the specified files from the specified backup to the active filesystem",
-        "parameters": [
-          {
-            "name": "body",
-            "description": "Restore payload supplied in the body of the operation.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/backupRestoreFiles"
-            }
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/PoolName"
-          },
-          {
-            "$ref": "#/parameters/VolumeName"
-          },
-          {
-            "$ref": "#/parameters/BackupName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - terminal state"
-          },
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed."
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "Backups_SingleFileRestore": {
-            "$ref": "examples/Backups_SingleFileRestore.json"
           }
         }
       }
@@ -4890,6 +4519,7 @@
         "password": {
           "type": "string",
           "x-ms-secret": true,
+          "maxLength": 64,
           "description": "Plain text password of Active Directory domain administrator, value is masked in the response"
         },
         "domain": {
@@ -5545,9 +5175,9 @@
           "title": "usageThreshold",
           "type": "integer",
           "format": "int64",
-          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. Minimum size is 100 GiB. Upper limit is 100TiB, 500Tib for LargeVolume. Specified in bytes.",
+          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. Minimum size is 100 GiB. Upper limit is 100TiB, 500Tib for LargeVolume or 2400Tib for LargeVolume on exceptional basis. Specified in bytes.",
           "minimum": 107374182400,
-          "maximum": 549755813888000,
+          "maximum": 2638827906662400,
           "default": 107374182400,
           "example": 107374182400
         },
@@ -5622,29 +5252,7 @@
           "description": "The Azure Resource URI for a delegated subnet. Must have the delegation Microsoft.NetApp/volumes"
         },
         "networkFeatures": {
-          "title": "Network features",
-          "description": "Basic network, or Standard features available to the volume.",
-          "type": "string",
-          "enum": [
-            "Basic",
-            "Standard"
-          ],
-          "x-ms-enum": {
-            "name": "NetworkFeatures",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Basic",
-                "description": "Basic network feature."
-              },
-              {
-                "value": "Standard",
-                "description": "Standard network feature."
-              }
-            ]
-          },
-          "example": "Standard",
-          "default": "Basic"
+          "$ref": "#/definitions/networkFeatures"
         },
         "networkSiblingSetId": {
           "title": "Network Sibling Set ID",
@@ -5712,12 +5320,6 @@
           "title": "DataProtection",
           "description": "DataProtection type volumes include an object containing details of the replication",
           "properties": {
-            "backup": {
-              "title": "Backup",
-              "description": "Backup Properties",
-              "type": "object",
-              "$ref": "#/definitions/volumeBackupProperties"
-            },
             "replication": {
               "title": "Replication",
               "description": "Replication properties",
@@ -5833,7 +5435,7 @@
           "title": "Maximum throughput in MiB/s that can be achieved by this volume and this will be accepted as input only for manual qosType volume",
           "type": "number",
           "x-nullable": true,
-          "example": 128.22
+          "example": 128.223
         },
         "actualThroughputMibps": {
           "type": "number",
@@ -5887,6 +5489,9 @@
           "minimum": 7,
           "maximum": 63,
           "format": "int32"
+        },
+        "coolAccessRetrievalPolicy": {
+          "$ref": "#/definitions/coolAccessRetrievalPolicy"
         },
         "unixPermissions": {
           "type": "string",
@@ -6171,24 +5776,6 @@
         }
       }
     },
-    "volumeBackupProperties": {
-      "description": "Volume Backup Properties",
-      "type": "object",
-      "properties": {
-        "backupPolicyId": {
-          "type": "string",
-          "description": "Backup Policy Resource ID"
-        },
-        "policyEnforced": {
-          "type": "boolean",
-          "description": "Policy Enforced"
-        },
-        "backupEnabled": {
-          "type": "boolean",
-          "description": "Backup Enabled"
-        }
-      }
-    },
     "replicationObject": {
       "description": "Replication properties",
       "type": "object",
@@ -6198,7 +5785,8 @@
       "properties": {
         "replicationId": {
           "type": "string",
-          "description": "Id"
+          "description": "Id",
+          "readOnly": true
         },
         "endpointType": {
           "type": "string",
@@ -6406,9 +5994,9 @@
           "title": "usageThreshold",
           "type": "integer",
           "format": "int64",
-          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. Minimum size is 100 GiB. Upper limit is 100TiB, 500Tib for LargeVolume. Specified in bytes.",
+          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. Minimum size is 100 GiB. Upper limit is 100TiB, 500Tib for LargeVolume or 2400Tib for LargeVolume on exceptional basis. Specified in bytes.",
           "minimum": 107374182400,
-          "maximum": 549755813888000,
+          "maximum": 2638827906662400,
           "default": 107374182400,
           "example": 107374182400
         },
@@ -6438,12 +6026,6 @@
           "title": "DataProtection",
           "description": "DataProtection type volumes include an object containing details of the replication",
           "properties": {
-            "backup": {
-              "title": "Backup",
-              "description": "Backup Properties",
-              "type": "object",
-              "$ref": "#/definitions/volumeBackupProperties"
-            },
             "snapshot": {
               "title": "Snapshot",
               "description": "Snapshot properties.",
@@ -6491,6 +6073,9 @@
           "minimum": 7,
           "maximum": 63,
           "format": "int32"
+        },
+        "coolAccessRetrievalPolicy": {
+          "$ref": "#/definitions/coolAccessRetrievalPolicy"
         },
         "snapshotDirectoryVisible": {
           "type": "boolean",
@@ -7010,142 +6595,6 @@
         }
       }
     },
-    "backupsList": {
-      "description": "List of Backups",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "A list of Backups",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/backup"
-          }
-        }
-      }
-    },
-    "backup": {
-      "description": "Backup of a Volume",
-      "type": "object",
-      "required": [
-        "location",
-        "properties"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "properties": {
-          "description": "Backup Properties",
-          "$ref": "#/definitions/backupProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "backupPatch": {
-      "description": "Backup patch",
-      "type": "object",
-      "properties": {
-        "tags": {
-          "description": "Resource tags",
-          "$ref": "#/definitions/resourceTags"
-        },
-        "properties": {
-          "description": "Backup Properties",
-          "$ref": "#/definitions/backupProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "backupProperties": {
-      "description": "Backup properties",
-      "type": "object",
-      "properties": {
-        "backupId": {
-          "title": "backupId",
-          "type": "string",
-          "readOnly": true,
-          "description": "UUID v4 used to identify the Backup",
-          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-          "maxLength": 36,
-          "minLength": 36,
-          "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
-        },
-        "creationDate": {
-          "title": "creationDate",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "The creation date of the backup",
-          "example": "2017-08-15 13:23:33"
-        },
-        "provisioningState": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure lifecycle management"
-        },
-        "size": {
-          "type": "integer",
-          "readOnly": true,
-          "description": "Size of backup",
-          "format": "int64"
-        },
-        "label": {
-          "type": "string",
-          "description": "Label for backup"
-        },
-        "backupType": {
-          "title": "backupType",
-          "type": "string",
-          "readOnly": true,
-          "description": "Type of backup Manual or Scheduled",
-          "enum": [
-            "Manual",
-            "Scheduled"
-          ],
-          "x-ms-enum": {
-            "name": "backupType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Manual",
-                "description": "Manual backup"
-              },
-              {
-                "value": "Scheduled",
-                "description": "Scheduled backup"
-              }
-            ]
-          },
-          "example": "Manual"
-        },
-        "failureReason": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Failure reason"
-        },
-        "volumeName": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Volume name"
-        },
-        "useExistingSnapshot": {
-          "type": "boolean",
-          "description": "Manual backup an already existing snapshot. This will always be false for scheduled backups and true/false for manual backups",
-          "example": true,
-          "default": false
-        }
-      }
-    },
     "backupPolicyProperties": {
       "description": "Backup policy properties",
       "type": "object",
@@ -7292,71 +6741,6 @@
         "policyEnabled": {
           "type": "boolean",
           "description": "Policy enabled"
-        }
-      }
-    },
-    "backupStatus": {
-      "description": "Backup status",
-      "type": "object",
-      "properties": {
-        "healthy": {
-          "type": "boolean",
-          "readOnly": true,
-          "description": "Backup health status"
-        },
-        "relationshipStatus": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Status of the backup mirror relationship",
-          "enum": [
-            "Idle",
-            "Transferring"
-          ],
-          "x-ms-enum": {
-            "name": "RelationshipStatus",
-            "modelAsString": true
-          }
-        },
-        "mirrorState": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The status of the backup",
-          "enum": [
-            "Uninitialized",
-            "Mirrored",
-            "Broken"
-          ],
-          "x-ms-enum": {
-            "name": "MirrorState",
-            "modelAsString": true
-          }
-        },
-        "unhealthyReason": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Reason for the unhealthy backup relationship"
-        },
-        "errorMessage": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Displays error message if the backup is in an error state"
-        },
-        "lastTransferSize": {
-          "type": "integer",
-          "format": "int64",
-          "readOnly": true,
-          "description": "Displays the last transfer size"
-        },
-        "lastTransferType": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Displays the last transfer type"
-        },
-        "totalTransferBytes": {
-          "type": "integer",
-          "format": "int64",
-          "readOnly": true,
-          "description": "Displays the total bytes transferred"
         }
       }
     },
@@ -7703,7 +7087,8 @@
           "type": "string",
           "description": "Application Type",
           "enum": [
-            "SAP-HANA"
+            "SAP-HANA",
+            "ORACLE"
           ],
           "x-ms-enum": {
             "name": "ApplicationType",
@@ -7810,6 +7195,20 @@
           "description": "Resource tags",
           "$ref": "#/definitions/resourceTags"
         },
+        "zones": {
+          "type": "array",
+          "description": "Availability Zone",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "items": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1,
+            "example": "1"
+          }
+        },
         "properties": {
           "description": "Volume properties",
           "$ref": "#/definitions/volumeProperties",
@@ -7836,6 +7235,175 @@
           "example": "value1"
         }
       }
+    },
+    "networkSiblingSet": {
+      "title": "Network sibling set",
+      "description": "Describes the contents of a network sibling set.",
+      "type": "object",
+      "properties": {
+        "networkSiblingSetId": {
+          "$ref": "#/definitions/networkSiblingSetId"
+        },
+        "subnetId": {
+          "$ref": "#/definitions/subnetId"
+        },
+        "networkSiblingSetStateId": {
+          "$ref": "#/definitions/networkSiblingSetStateId"
+        },
+        "networkFeatures": {
+          "$ref": "#/definitions/networkFeatures"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/networkSiblingSetProvisioningState"
+        },
+        "nicInfoList": {
+          "type": "array",
+          "description": "List of NIC information",
+          "items": {
+            "$ref": "#/definitions/nicInfo"
+          }
+        }
+      }
+    },
+    "QueryNetworkSiblingSetRequest": {
+      "title": "QueryNetworkSiblingSetRequest",
+      "description": "Network sibling set query.",
+      "type": "object",
+      "required": [
+        "networkSiblingSetId",
+        "subnetId"
+      ],
+      "properties": {
+        "networkSiblingSetId": {
+          "$ref": "#/definitions/networkSiblingSetId"
+        },
+        "subnetId": {
+          "$ref": "#/definitions/subnetId"
+        }
+      }
+    },
+    "UpdateNetworkSiblingSetRequest": {
+      "title": "UpdateNetworkSiblingSetRequest",
+      "description": "Network sibling set update.",
+      "type": "object",
+      "required": [
+        "networkSiblingSetId",
+        "subnetId",
+        "networkSiblingSetStateId",
+        "networkFeatures"
+      ],
+      "properties": {
+        "networkSiblingSetId": {
+          "$ref": "#/definitions/networkSiblingSetId"
+        },
+        "subnetId": {
+          "$ref": "#/definitions/subnetId"
+        },
+        "networkSiblingSetStateId": {
+          "$ref": "#/definitions/networkSiblingSetStateId"
+        },
+        "networkFeatures": {
+          "$ref": "#/definitions/networkFeatures",
+          "description": "Network features available to the volume, some such"
+        }
+      }
+    },
+    "networkFeatures": {
+      "title": "Network features",
+      "description": "Network features available to the volume, or current state of update.",
+      "type": "string",
+      "enum": [
+        "Basic",
+        "Standard",
+        "Basic_Standard",
+        "Standard_Basic"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkFeatures",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Basic",
+            "description": "Basic network features."
+          },
+          {
+            "value": "Standard",
+            "description": "Standard network features."
+          },
+          {
+            "value": "Basic_Standard",
+            "description": "Updating from Basic to Standard network features."
+          },
+          {
+            "value": "Standard_Basic",
+            "description": "Updating from Standard to Basic network features."
+          }
+        ]
+      },
+      "example": "Standard",
+      "default": "Basic"
+    },
+    "networkSiblingSetProvisioningState": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Gets the status of the NetworkSiblingSet at the time the operation was called.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkSiblingSetProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "networkSiblingSetId": {
+      "title": "Network Sibling Set ID",
+      "description": "Network Sibling Set ID for a group of volumes sharing networking resources in a subnet.",
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+      "maxLength": 36,
+      "minLength": 36,
+      "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
+    },
+    "networkSiblingSetStateId": {
+      "title": "Network sibling set state Id",
+      "description": "Network sibling set state Id identifying the current state of the sibling set.",
+      "type": "string",
+      "example": "12345_44420.8001578125"
+    },
+    "nicInfo": {
+      "title": "NIC information",
+      "description": "NIC information and list of volumes for which the NIC has the primary mount ip address.",
+      "type": "object",
+      "properties": {
+        "ipAddress": {
+          "$ref": "#/definitions/ipAddress"
+        },
+        "volumeResourceIds": {
+          "$ref": "#/definitions/volumeResourceIds"
+        }
+      }
+    },
+    "ipAddress": {
+      "title": "ipAddress",
+      "type": "string",
+      "readOnly": true,
+      "example": "1.2.3.4"
+    },
+    "volumeResourceIds": {
+      "title": "Volume resource Ids",
+      "type": "array",
+      "items": {
+        "title": "Resource Id of volume",
+        "type": "string"
+      }
+    },
+    "subnetId": {
+      "title": "Subnet resource Id",
+      "description": "The Azure Resource URI for a delegated subnet. Must have the delegation Microsoft.NetApp/volumes. Example /subscriptions/subscriptionId/resourceGroups/resourceGroup/providers/Microsoft.Network/virtualNetworks/testVnet/subnets/{mySubnet}",
+      "type": "string"
     },
     "snapshotRestoreFiles": {
       "description": "Restore payload for Single File Snapshot Restore",
@@ -7864,42 +7432,6 @@
           "description": "Destination folder where the files will be restored",
           "type": "string",
           "example": "/AVSdataStore"
-        }
-      }
-    },
-    "backupRestoreFiles": {
-      "description": "Restore payload for single file backup restore",
-      "type": "object",
-      "required": [
-        "fileList",
-        "destinationVolumeId"
-      ],
-      "properties": {
-        "fileList": {
-          "description": "List of files to be restored",
-          "type": "array",
-          "minItems": 1,
-          "maxItems": 8,
-          "items": {
-            "type": "string",
-            "maxLength": 1024,
-            "minLength": 1
-          },
-          "example": [
-            "/dir1/customer1.db",
-            "/dir1/customer2.db"
-          ]
-        },
-        "restoreFilePath": {
-          "description": "Destination folder where the files will be restored. The path name should start with a forward slash. If it is omitted from request then restore is done at the root folder of the destination volume by default",
-          "type": "string",
-          "pattern": "^\\/.*$",
-          "example": "/AVSdataStore"
-        },
-        "destinationVolumeId": {
-          "description": "Resource Id of the destination volume on which the files need to be restored",
-          "type": "string",
-          "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1/volumes/volume1"
         }
       }
     },
@@ -8119,13 +7651,26 @@
         "name": "ProvisioningState",
         "modelAsString": false
       }
+    },
+    "coolAccessRetrievalPolicy": {
+      "type": "string",
+      "description": "coolAccessRetrievalPolicy determines the data retrieval behavior from the cool tier to standard storage based on the read pattern for cool access enabled volumes. The possible values for this field are: \n Default - Data will be pulled from cool tier to standard storage on random reads. This policy is the default.\n OnRead - All client-driven data read is pulled from cool tier to standard storage on both sequential and random reads.\n Never - No client-driven data is pulled from cool tier to standard storage.",
+      "enum": [
+        "Default",
+        "OnRead",
+        "Never"
+      ],
+      "x-ms-enum": {
+        "name": "coolAccessRetrievalPolicy",
+        "modelAsString": true
+      }
     }
   },
   "parameters": {
     "AccountName": {
       "name": "accountName",
       "type": "string",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,63}$",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,127}$",
       "in": "path",
       "required": true,
       "description": "The name of the NetApp account",
@@ -8175,15 +7720,6 @@
       "in": "path",
       "required": true,
       "description": "The name of the snapshot policy",
-      "x-ms-parameter-location": "method"
-    },
-    "BackupName": {
-      "name": "backupName",
-      "type": "string",
-      "in": "path",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,63}$",
-      "required": true,
-      "description": "The name of the backup",
       "x-ms-parameter-location": "method"
     },
     "BackupPolicyName": {
