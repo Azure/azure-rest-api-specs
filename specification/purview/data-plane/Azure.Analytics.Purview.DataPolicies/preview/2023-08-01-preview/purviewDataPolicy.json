@@ -8,11 +8,11 @@
     "/data-policies": {
       "get": {
         "tags": [
-          "List_DataPolicy"
+          "DataPolicy_List"
         ],
-        "summary": "API to list the purview data policies",
+        "summary": "API to list the purview data policies. Returns policies, both in draft and published states",
         "description": "List all data policies.",
-        "operationId": "List_DataPolicy",
+        "operationId": "DataPolicy_List",
         "produces": [
           "application/json"
         ],
@@ -31,7 +31,7 @@
           "default": {
             "description": "An error response received from the Policy service",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -46,19 +46,20 @@
           "itemName": "value"
         },
         "x-ms-examples": {
-          "DevopsPolicy_List": {
+          "DataPolicy_List": {
             "$ref": "./examples/DataPolicy_List.json"
           }
         }
       }
     },
-    "/data-policies/{policy-name}": {
+    "/data-policies/{policyName}": {
       "put": {
         "tags": [
-          "CreateOrReplace_DataPolicy"
+          "DataPolicy_CreateOrReplace"
         ],
-        "description": "Create/replace data policy",
-        "operationId": "CreateOrReplace_DataPolicy",
+        "description": "Create or replace a data policy in draft state. The policy will go into draft state and will not be active until it is published.",
+        "summary": "API to create or replace a purview data policy in draft state.",
+        "operationId": "DataPolicy_CreateOrReplace",
         "consumes": [
           "application/json"
         ],
@@ -67,7 +68,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/policy-name"
+            "$ref": "#/parameters/policyName"
           },
           {
             "$ref": "#/parameters/if-match"
@@ -78,7 +79,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Data policy object to create or update..",
+            "description": "Data policy object to create or replace..",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DataPolicy"
@@ -113,7 +114,7 @@
           "default": {
             "description": "An error response received from the Policy service",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -124,20 +125,21 @@
           }
         },
         "x-ms-examples": {
-          "CreateOrReplace_DataPolicy": {
+          "DataPolicy_CreateOrReplace": {
             "$ref": "./examples/DataPolicy_CreateOrReplace.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "Delete_DataPolicy"
+          "DataPolicy_Delete"
         ],
-        "description": "Deletes a data policy. The policy is identified by the policy name field.",
-        "operationId": "Delete_DataPolicy",
+        "description": "Deletes a data policy. The policy is identified by the policy name field. The API will only remove the draft policy.",
+        "summary": "API to delete a purview data policy. The API will delete the policy in draft state. The policy is identified by the policy name parameter",
+        "operationId": "DataPolicy_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/policy-name"
+            "$ref": "#/parameters/policyName"
           },
           {
             "$ref": "#/parameters/if-match"
@@ -151,9 +153,9 @@
             "description": "No Content"
           },
           "default": {
-            "description": "An error response received from the Policy Service",
+            "description": "An error response received from the Policy store service",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -171,16 +173,17 @@
       },
       "get": {
         "tags": [
-          "Get_DataPolicy"
+          "DataPolicy_Get"
         ],
         "description": "Get data policy by name",
-        "operationId": "Get_DataPolicy",
+        "summary": "API to fetch a purview data policy. The API will return the policy in draft state identified by policyName.",
+        "operationId": "DataPolicy_Get",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/policy-name"
+            "$ref": "#/parameters/policyName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -202,7 +205,7 @@
           "default": {
             "description": "An error response received from the Policy service",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -219,25 +222,23 @@
         }
       }
     },
-    "/data-policies/{policy-name}:bind": {
-      "post": {
+    "/data-policies/{policyName}/{state}": {
+      "get": {
         "tags": [
-          "Bind_DataPolicy"
+          "DataPolicy_Get"
         ],
-        "description": "Publishes a data policy to the datasource. The policy is identified by the policy name. Datasource is inferred from the policy",
-        "operationId": "Bind_DataPolicy",
-        "consumes": [
-          "application/json"
-        ],
+        "description": "Get data policy by name",
+        "summary": "API to fetch a purview data policy. The API will return the policy based on policyName and state",
+        "operationId": "DataPolicy_Get",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/policy-name"
+            "$ref": "#/parameters/policyName"
           },
           {
-            "$ref": "#/parameters/if-match"
+            "$ref": "#/parameters/state"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -259,7 +260,7 @@
           "default": {
             "description": "An error response received from the Policy service",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -270,19 +271,20 @@
           }
         },
         "x-ms-examples": {
-          "Bind_DataPolicy": {
-            "$ref": "./examples/DataPolicy_Bind.json"
+          "DataPolicy_Get": {
+            "$ref": "./examples/DataPolicy_GetWithState.json"
           }
         }
       }
     },
-    "/data-policies/{policy-name}:unbind": {
+    "/data-policies/{policyName}:publish": {
       "post": {
         "tags": [
-          "Unbind_DataPolicy"
+          "DataPolicy_Publish"
         ],
-        "description": "Unbinds the data policy identified by name from the datasource. Datasource is inferred from the policy. The policy goes into draft mode.",
-        "operationId": "Unbind_DataPolicy",
+        "description": "Publishes a data policy in draft state to the data source. The policy is identified by the policy name. The data source is inferred from the policy.",
+        "summary": "API to publish a purview data policy. The API publishes a policy in draft state to published state",
+        "operationId": "DataPolicy_Publish",
         "consumes": [
           "application/json"
         ],
@@ -291,7 +293,65 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/policy-name"
+            "$ref": "#/parameters/policyName"
+          },
+          {
+            "$ref": "#/parameters/if-match"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataPolicy"
+            },
+            "headers": {
+              "ETag": {
+                "description": "An HTTP entity tag associated with the policy entity",
+                "type": "etag"
+              }
+            }
+          },
+          "default": {
+            "description": "An error response received from the Policy service",
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataPolicy_Publish": {
+            "$ref": "./examples/DataPolicy_Publish.json"
+          }
+        }
+      }
+    },
+    "/data-policies/{policyName}:unpublish": {
+      "post": {
+        "tags": [
+          "DataPolicy_Unpublish"
+        ],
+        "description": "Un-publishes a data policy from the data source. The policy is identified by the policy name. The data source is inferred from the policy.",
+        "summary": "API to unpublish a purview data policy. The API will unbind the policy from the datasource and remove the policy in published state.",
+        "operationId": "DataPolicy_Unpublish",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/policyName"
           },
           {
             "$ref": "#/parameters/if-match"
@@ -314,9 +374,9 @@
             }
           },
           "default": {
-            "description": "An error response received from the Policy Service",
+            "description": "An error response received from the Policy store service",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -327,8 +387,8 @@
           }
         },
         "x-ms-examples": {
-          "Unbind_DataPolicy": {
-            "$ref": "./examples/DataPolicy_UnBind.json"
+          "DataPolicy_Unpublish": {
+            "$ref": "./examples/DataPolicy_UnPublish.json"
           }
         }
       }
@@ -339,7 +399,7 @@
       "required": [
         "value"
       ],
-      "description": "A paginated list of purview data policies",
+      "description": "A paginated list of purview data policies.",
       "type": "object",
       "properties": {
         "value": {
@@ -364,30 +424,15 @@
       "type": "object",
       "description": "Purview data policy",
       "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The policy id"
-        },
         "name": {
           "type": "string",
           "readOnly": true,
           "description": "The policy name"
         },
-        "kind": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The policy kind"
-        },
-        "source": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The policy source"
-        },
         "state": {
           "description": "The state of the policy",
           "enum": [
-            "Enabled",
+            "Published",
             "Draft"
           ],
           "readOnly": true,
@@ -400,11 +445,6 @@
         "description": {
           "type": "string",
           "description": "The policy description"
-        },
-        "schemaVersion": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The schema version of the policy"
         },
         "etag": {
           "type": "string",
@@ -426,7 +466,7 @@
           "$ref": "#/definitions/PolicyMembers"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+          "$ref": "#/definitions/SystemData"
         },
         "decisionRules": {
           "type": "array",
@@ -441,14 +481,6 @@
       "type": "object",
       "description": "Policy member",
       "properties": {
-        "fabricItemMembers": {
-          "type": "array",
-          "description": "Array of azure active directory members",
-          "items": {
-            "$ref": "#/definitions/FabricItemMember"
-          },
-          "x-ms-identifiers": []
-        },
         "aadMembers": {
           "type": "array",
           "description": "Array of azure active directory members",
@@ -512,9 +544,9 @@
       ],
       "properties": {
         "effect": {
-          "description": "The effect for rule",
+          "description": "The effect for rule. `Deny` rules will overrule the `Allow` rules when there are conflicts.",
           "enum": [
-            "Permit",
+            "Allow",
             "Deny"
           ],
           "type": "string",
@@ -549,6 +581,38 @@
           }
         }
       }
+    },
+    "SystemData": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "Created by"
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "Created by type"
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Created at"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "last modified by"
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "last modified by type"
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "type": "string",
+          "description": "last modified at"
+        }
+      }
     }
   },
   "parameters": {
@@ -571,10 +635,17 @@
       "x-ms-parameter-location": "client",
       "x-ms-skip-url-encoding": true
     },
-    "policy-name": {
+    "policyName": {
       "in": "path",
-      "name": "policy-name",
-      "description": "Name of the policy to be deleted.",
+      "name": "policyName",
+      "description": "policy name",
+      "required": true,
+      "type": "string"
+    },
+    "state": {
+      "in": "path",
+      "name": "state",
+      "description": "policy state",
       "required": true,
       "type": "string"
     },
