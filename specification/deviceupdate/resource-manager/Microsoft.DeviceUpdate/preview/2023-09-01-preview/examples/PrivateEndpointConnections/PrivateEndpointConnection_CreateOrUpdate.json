@@ -15,7 +15,7 @@
     }
   },
   "responses": {
-    "201": {
+    "200": {
       "body": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DeviceUpdate/accounts/contoso/privateEndpointConnections/peexample01",
         "name": "peexample01",
@@ -29,10 +29,28 @@
             "status": "Approved",
             "description": "Auto-Approved",
             "actionsRequired": "None"
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Location": "https://management.azure.com/providers/Microsoft.DeviceUpdate/locations/westus2/operationStatuses/00000000-0000-0000-0000-000000000000*427E3E07F4C0A3DCD66951C42FD7BCD794AEAC5E321728AFBDCAA7C02E9CD4D3?api-version=2022-12-01-preview"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DeviceUpdate/accounts/contoso/privateEndpointConnections/peexample01",
+        "name": "peexample01",
+        "type": "Microsoft.DeviceUpdate/accounts/privateEndpointConnections",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "privateEndpoint": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Network/privateEndpoints/peexample01"
           },
-          "groupIds": [
-            "groupId"
-          ]
+          "privateLinkServiceConnectionState": {
+            "status": "Approved",
+            "description": "Auto-Approved",
+            "actionsRequired": "None"
+          }
         }
       }
     }

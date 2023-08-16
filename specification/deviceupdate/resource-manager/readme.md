@@ -27,18 +27,16 @@ These are the global settings for the deviceupdate.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2023-09
+tag: package-2023-09-01-preview
 ```
 
+### Tag: package-2023-09-01-preview
 
-### Tag: package-preview-2023-09
+These settings apply only when `--tag=package-2023-09-01-preview` is specified on the command line.
 
-These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2023-09'
+``` yaml $(tag) == 'package-2023-09-01-preview'
 input-file:
   - Microsoft.DeviceUpdate/preview/2023-09-01-preview/deviceupdate.json
-  - Microsoft.DeviceUpdate/preview/2023-09-01-preview/privatelinks.json
 ```
 ### Tag: package-2022-10-01
 
@@ -77,7 +75,7 @@ directive:
     reason: Managed Identity type can be case in-sensitive
   - suppress: BodyTopLevelProperties
     from: deviceupdate.json
-    where: $.definitions.PrivateEndpointConnectionProxy
+    where: $.definitions.PrivateEndpointConnectionProxy.properties
     reason: Internal NRP resource, all properties are top level properties
 ```
 
