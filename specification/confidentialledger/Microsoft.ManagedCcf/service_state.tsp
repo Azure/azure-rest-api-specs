@@ -210,8 +210,8 @@ model JoinPolicy {
 @doc("Join policy fields specific to nodes running on AMD SEV-SNP hardware.")
 model SnpJoinPolicy {
   ...JoinPolicy;
-  // TODO: Work out what the actual types of these are
 
+  // TODO: Work out what the actual types of these are
 
   @doc("Collection of acceptable host data values.")
   hostData: Record<bytes>;
