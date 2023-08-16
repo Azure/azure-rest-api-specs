@@ -79,9 +79,6 @@
               "$ref": "#/definitions/Pricing"
             }
           },
-          "204": {
-            "description": "No Content - Pricing does not exist"
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -123,7 +120,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully updated",
             "schema": {
               "$ref": "#/definitions/Pricing"
             }
@@ -167,6 +164,9 @@
         "responses": {
           "200": {
             "description": "Successfully deleted the pricing configuration of the resource."
+          },
+          "204": {
+            "description": "No Content - Pricing does not exist"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -488,6 +488,7 @@
       "required": true,
       "type": "string",
       "description": "name of the pricing configuration",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
       "x-ms-parameter-location": "method"
     },
     "Pricing": {
