@@ -63,7 +63,8 @@
         },
         "containerResourceId": {
           "type": "string",
-          "description": "ARM Resource id of the container resource (Azure Arc for Servers)."
+          "description": "ARM Resource id of the container resource (Azure Arc for Servers).",
+          "readOnly": true
         },
         "createTime": {
           "type": "string",
@@ -72,7 +73,8 @@
         },
         "vCore": {
           "type": "string",
-          "description": "The number of logical processors used by the SQL Server instance."
+          "description": "The number of logical processors used by the SQL Server instance.",
+          "readOnly": true
         },
         "cores": {
           "type": "string",
@@ -81,6 +83,7 @@
         "status": {
           "type": "string",
           "description": "The cloud connectivity status.",
+          "readOnly": true,
           "enum": [
             "Connected",
             "Disconnected",
@@ -94,15 +97,18 @@
         },
         "patchLevel": {
           "type": "string",
-          "description": "SQL Server update level."
+          "description": "SQL Server update level.",
+          "readOnly": true
         },
         "collation": {
           "type": "string",
-          "description": "SQL Server collation."
+          "description": "SQL Server collation.",
+          "readOnly": true
         },
         "currentVersion": {
           "type": "string",
-          "description": "SQL Server current version."
+          "description": "SQL Server current version.",
+          "readOnly": true
         },
         "instanceName": {
           "type": "string",
@@ -110,19 +116,23 @@
         },
         "tcpDynamicPorts": {
           "type": "string",
-          "description": "Dynamic TCP ports used by SQL Server."
+          "description": "Dynamic TCP ports used by SQL Server.",
+          "readOnly": true
         },
         "tcpStaticPorts": {
           "type": "string",
-          "description": "Static TCP ports used by SQL Server."
+          "description": "Static TCP ports used by SQL Server.",
+          "readOnly": true
         },
         "productId": {
           "type": "string",
-          "description": "SQL Server product ID."
+          "description": "SQL Server product ID.",
+          "readOnly": true
         },
         "licenseType": {
           "type": "string",
           "description": "SQL Server license type.",
+          "readOnly": true,
           "enum": [
             "Undefined",
             "Free",
@@ -140,11 +150,13 @@
         "azureDefenderStatusLastUpdated": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp of last Azure Defender status update."
+          "description": "Timestamp of last Azure Defender status update.",
+          "readOnly": true
         },
         "azureDefenderStatus": {
           "type": "string",
           "description": "Status of Azure Defender.",
+          "readOnly": true,
           "enum": [
             "Protected",
             "Unprotected",
@@ -186,6 +198,7 @@
         "alwaysOnRole": {
           "type": "string",
           "description": "The role of the SQL Server, based on availability.",
+          "readOnly": true,
           "enum": [
             "None",
             "FailoverClusterInstance",
@@ -209,11 +222,208 @@
           "description": "The monitoring configuration.",
           "$ref": "#/definitions/Monitoring"
         }
-      },
-      "required": [
-        "containerResourceId",
-        "status"
-      ]
+      }
+    },
+    "SqlServerInstanceUpdateProperties": {
+      "description": "Properties of update SqlServerInstance.",
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "SQL Server version.",
+          "enum": [
+            "SQL Server 2012",
+            "SQL Server 2014",
+            "SQL Server 2016",
+            "SQL Server 2017",
+            "SQL Server 2019",
+            "SQL Server 2022",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "sqlVersion",
+            "modelAsString": true
+          }
+        },
+        "edition": {
+          "type": "string",
+          "description": "SQL Server edition.",
+          "enum": [
+            "Evaluation",
+            "Enterprise",
+            "Standard",
+            "Web",
+            "Developer",
+            "Express",
+            "Business Intelligence"
+          ],
+          "x-ms-enum": {
+            "name": "editionType",
+            "modelAsString": true
+          }
+        },
+        "containerResourceId": {
+          "type": "string",
+          "description": "ARM Resource id of the container resource (Azure Arc for Servers).",
+          "readOnly": true
+        },
+        "createTime": {
+          "type": "string",
+          "description": "The time when the resource was created.",
+          "readOnly": true
+        },
+        "vCore": {
+          "type": "string",
+          "description": "The number of logical processors used by the SQL Server instance.",
+          "readOnly": true
+        },
+        "cores": {
+          "type": "string",
+          "description": "The number of total cores of the Operating System Environment (OSE) hosting the SQL Server instance."
+        },
+        "status": {
+          "type": "string",
+          "description": "The cloud connectivity status.",
+          "readOnly": true,
+          "enum": [
+            "Connected",
+            "Disconnected",
+            "Registered",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectionStatus",
+            "modelAsString": true
+          }
+        },
+        "patchLevel": {
+          "type": "string",
+          "description": "SQL Server update level.",
+          "readOnly": true
+        },
+        "collation": {
+          "type": "string",
+          "description": "SQL Server collation.",
+          "readOnly": true
+        },
+        "currentVersion": {
+          "type": "string",
+          "description": "SQL Server current version.",
+          "readOnly": true
+        },
+        "instanceName": {
+          "type": "string",
+          "description": "SQL Server instance name."
+        },
+        "tcpDynamicPorts": {
+          "type": "string",
+          "description": "Dynamic TCP ports used by SQL Server.",
+          "readOnly": true
+        },
+        "tcpStaticPorts": {
+          "type": "string",
+          "description": "Static TCP ports used by SQL Server.",
+          "readOnly": true
+        },
+        "productId": {
+          "type": "string",
+          "description": "SQL Server product ID.",
+          "readOnly": true
+        },
+        "licenseType": {
+          "type": "string",
+          "description": "SQL Server license type.",
+          "readOnly": true,
+          "enum": [
+            "Undefined",
+            "Free",
+            "HADR",
+            "ServerCAL",
+            "LicenseOnly",
+            "PAYG",
+            "Paid"
+          ],
+          "x-ms-enum": {
+            "name": "arcSqlServerLicenseType",
+            "modelAsString": true
+          }
+        },
+        "azureDefenderStatusLastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of last Azure Defender status update.",
+          "readOnly": true
+        },
+        "azureDefenderStatus": {
+          "type": "string",
+          "description": "Status of Azure Defender.",
+          "readOnly": true,
+          "enum": [
+            "Protected",
+            "Unprotected",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "defenderStatus",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the Arc-enabled SQL Server resource.",
+          "readOnly": true
+        },
+        "hostType": {
+          "type": "string",
+          "description": "Type of host for Azure Arc SQL Server",
+          "enum": [
+            "Azure Virtual Machine",
+            "Azure VMWare Virtual Machine",
+            "Azure Kubernetes Service",
+            "AWS VMWare Virtual Machine",
+            "AWS Kubernetes Service",
+            "GCP VMWare Virtual Machine",
+            "GCP Kubernetes Service",
+            "Container",
+            "Virtual Machine",
+            "Physical Server",
+            "AWS Virtual Machine",
+            "GCP Virtual Machine",
+            "Other"
+          ],
+          "x-ms-enum": {
+            "name": "hostType",
+            "modelAsString": true
+          }
+        },
+        "alwaysOnRole": {
+          "type": "string",
+          "description": "The role of the SQL Server, based on availability.",
+          "readOnly": true,
+          "enum": [
+            "None",
+            "FailoverClusterInstance",
+            "FailoverClusterNode",
+            "AvailabilityGroupReplica"
+          ],
+          "x-ms-enum": {
+            "name": "alwaysOnRole",
+            "modelAsString": true
+          }
+        },
+        "failoverCluster": {
+          "description": "Failover Cluster Instance properties.",
+          "$ref": "#/definitions/FailoverCluster"
+        },
+        "backupPolicy": {
+          "description": "The backup profile for the SQL server.",
+          "$ref": "#/definitions/BackupPolicy"
+        },
+        "monitoring": {
+          "description": "The monitoring configuration.",
+          "$ref": "#/definitions/Monitoring"
+        }
+      }
     },
     "FailoverCluster": {
       "type": "object",
@@ -221,15 +431,18 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The GUID of the SQL Server's underlying Failover Cluster."
+          "description": "The GUID of the SQL Server's underlying Failover Cluster.",
+          "readOnly": true
         },
         "networkName": {
           "type": "string",
-          "description": "The network name to connect to the SQL FCI."
+          "description": "The network name to connect to the SQL FCI.",
+          "readOnly": true
         },
         "sqlInstanceIds": {
           "type": "array",
           "description": "The ARM IDs of the Arc SQL Server resources, belonging to the current server's Failover cluster.",
+          "readOnly": true,
           "items": {
             "type": "string"
           }
@@ -237,15 +450,12 @@
         "hostNames": {
           "type": "array",
           "description": "The host names which are part of the SQL FCI resource group.",
+          "readOnly": true,
           "items": {
             "type": "string"
           }
         }
-      },
-      "required": [
-        "id",
-        "networkName"
-      ]
+      }
     },
     "SqlServerInstanceUpdate": {
       "description": "An update to a SQL Server Instance.",
@@ -257,6 +467,11 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "properties": {
+          "$ref": "#/definitions/SqlServerInstanceUpdateProperties",
+          "description": "null",
+          "x-ms-client-flatten": false
         }
       }
     },
