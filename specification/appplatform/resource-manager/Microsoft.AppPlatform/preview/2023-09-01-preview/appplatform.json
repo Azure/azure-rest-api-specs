@@ -5180,6 +5180,98 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/certificates/{certificateName}/enableAutoSync": {
+      "post": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Enable auto synchronization.",
+        "operationId": "Certificates_EnableAutoSync",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CertificateNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "202": {
+            "description": "Accepted. The response indicates the Certificate is now updating to enable auto synchronization and contains a Location header to\r\nquery the operation result."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Certificates_EnableAutoSync": {
+            "$ref": "./examples/Certificates_EnableAutoSync.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/certificates/{certificateName}/disableAutoSync": {
+      "post": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Disable auto synchronization.",
+        "operationId": "Certificates_DisableAutoSync",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CertificateNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "202": {
+            "description": "Accepted. The response indicates the Certificate is now updating auto synchronization and contains a Location header to\r\nquery the operation result."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Certificates_DisableAutoSync": {
+            "$ref": "./examples/Certificates_DisableAutoSync.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/certificates": {
       "get": {
         "tags": [
@@ -11620,6 +11712,11 @@
         },
         "excludePrivateKey": {
           "description": "Optional. If set to true, it will not import private key from key vault.",
+          "type": "boolean",
+          "default": false
+        },
+        "autoSyncEnabled": {
+          "description": "Indicates whether to automatically synchronize certificate from key vault.",
           "type": "boolean",
           "default": false
         }
