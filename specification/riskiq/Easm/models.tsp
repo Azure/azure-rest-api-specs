@@ -52,7 +52,7 @@ alias DataConnectionsListTrait = {
     ...MaxPageSizeQueryParameter;
   }>;
 };
-alias DiscoveryGroupsListRunsParameter = {
+alias DiscoGroupsListRunsParameter = {
   ...FilterQueryParameter;
   ...SkipQueryParameter;
   ...MaxPageSizeQueryParameter;
@@ -70,7 +70,7 @@ alias TasksListTrait = {
     ...MaxPageSizeQueryParameter;
   }>;
 };
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model AlexaInfo {
   alexaRank?: int64;
   category?: string;
@@ -80,7 +80,7 @@ model AlexaInfo {
   recent?: boolean;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model AsAsset extends InventoryAsset {
   asn?: int64;
   asNames?: ObservedString[];
@@ -124,7 +124,7 @@ model AssetPageResult {
   value?: AssetResource[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The items in the current page of results.")
 @discriminator("kind")
 @resource("assets")
@@ -160,7 +160,7 @@ model AssetResource {
   @doc("An indicator of whether this asset represents a wildcard rollup of assets on this domain.")
   wildcard?: boolean;
 
-  @doc("The name of the DiscoveryGroup that brought added this asset to the workspace.")
+  @doc("The name of the DiscoGroup that brought added this asset to the workspace.")
   discoGroupName?: string;
 
   @doc("The history of how this asset was pulled into the workspace through the discovery process.")
@@ -169,7 +169,7 @@ model AssetResource {
   reason?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model AssetSecurityPolicy {
   policyName?: string;
   isAffected?: boolean;
@@ -229,7 +229,7 @@ model AssetUpdateData {
   transfers?: AssetUpdateTransfers;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model Attribute {
   attributeType?: string;
   attributeValue?: string;
@@ -258,7 +258,7 @@ model AuditTrailItem {
   reason?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model AzureDataExplorerDataConnectionProperties
   extends DataConnectionProperties {
   @doc("The azure data explorer cluster name")
@@ -271,7 +271,7 @@ model AzureDataExplorerDataConnectionProperties
   databaseName?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model Banner {
   port?: int32;
 
@@ -288,7 +288,7 @@ model Banner {
   sources?: Source[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 model CVSS3Summary {
   version?: string;
@@ -310,7 +310,7 @@ model CVSS3Summary {
   impactScore?: float32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model ContactAsset extends InventoryAsset {
   email?: string;
   names?: ObservedString[];
@@ -321,7 +321,7 @@ model ContactAsset extends InventoryAsset {
   count?: int64;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model Cookie {
   cookieName?: string;
   cookieDomain?: string;
@@ -332,7 +332,7 @@ model Cookie {
   cookieExpiryDate?: utcDateTime;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model Cve {
   name?: string;
   cweId?: string;
@@ -340,7 +340,7 @@ model Cve {
   cvss3Summary?: CVSS3Summary;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model DataConnectionPageResult {
   @doc("The total number of items available in the full result set.")
   totalElements?: int64;
@@ -355,7 +355,7 @@ model DataConnectionPageResult {
 @doc("The properties required to establish connection to a particular service")
 model DataConnectionProperties {}
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @discriminator("kind")
 model DataConnectionData {
   @doc("The name of data connection")
@@ -371,7 +371,7 @@ model DataConnectionData {
   frequencyOffset?: int32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @discriminator("kind")
 @resource("dataConnections")
 model DataConnection {
@@ -390,6 +390,7 @@ model DataConnection {
   content?: DataConnectionContent;
 
   @doc("The date the data connection was created.")
+  @visibility("read")
   createdDate?: utcDateTime;
 
   @doc("The rate at which the data connection will receive updates.")
@@ -399,19 +400,22 @@ model DataConnection {
   frequencyOffset?: int32;
 
   @doc("The date the data connection was last updated.")
+  @visibility("read")
   updatedDate?: utcDateTime;
 
   @doc("The date the data connection was last updated by user.")
+  @visibility("read")
   userUpdatedAt?: utcDateTime;
 
   @doc("An indicator of whether the data connection is active.")
   active?: boolean;
 
   @doc("A message that specifies details about data connection if inactive.")
+  @visibility("read")
   inactiveMessage?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model DependentResource {
   md5?: string;
   responseBodySize?: int64;
@@ -439,7 +443,7 @@ model DependentResource {
   lastObservedExpectedSriHash?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model DiscoGroupPageResult {
   @doc("The total number of items available in the full result set.")
   totalElements?: int64;
@@ -478,7 +482,7 @@ model DiscoGroupData {
   templateId?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @resource("discoGroups")
 model DiscoGroup {
   @doc("The system generated unique id for the resource.")
@@ -520,7 +524,7 @@ model DiscoGroup {
   templateId?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model DiscoRunPageResult {
   @doc("The total number of items available in the full result set.")
   totalElements?: int64;
@@ -571,7 +575,7 @@ model DiscoSource {
   name?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model DiscoTemplatePageResult {
   @doc("The total number of items available in the full result set.")
   totalElements?: int64;
@@ -619,7 +623,7 @@ model DiscoTemplate {
   names?: string[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model DomainAsset extends InventoryAsset {
   domain?: string;
   whoisId?: int64;
@@ -672,7 +676,7 @@ model ErrorDetail {
   innererror?: InnerError;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model GuidPair {
   pageGuid?: string;
   crawlStateGuid?: string;
@@ -680,7 +684,7 @@ model GuidPair {
   recent?: boolean;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model HostAsset extends InventoryAsset {
   host?: string;
   domain?: string;
@@ -717,7 +721,7 @@ model HostAsset extends InventoryAsset {
   ipv6?: ObservedBoolean[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model HostCore {
   host?: string;
   domain?: string;
@@ -769,10 +773,10 @@ model InnerError {
   value?: unknown;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model InventoryAsset {}
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model IpAddressAsset extends InventoryAsset {
   ipAddress?: string;
   asns?: ObservedLong[];
@@ -801,7 +805,7 @@ model IpAddressAsset extends InventoryAsset {
   ipv6?: boolean;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model IpBlock {
   @projectedName("csharp", "ipBlockProperty")
   ipBlock?: string;
@@ -813,7 +817,7 @@ model IpBlock {
   recent?: boolean;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model IpBlockAsset extends InventoryAsset {
   ipBlock?: string;
   asns?: ObservedLong[];
@@ -848,7 +852,7 @@ model IpBlockAsset extends InventoryAsset {
   ipv6?: boolean;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model Location {
   countryCode?: string;
   countryName?: string;
@@ -863,7 +867,7 @@ model Location {
   metroCodeId?: int32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model LogAnalyticsDataConnectionProperties extends DataConnectionProperties {
   @doc("log analytics api key")
   apiKey?: string;
@@ -872,55 +876,55 @@ model LogAnalyticsDataConnectionProperties extends DataConnectionProperties {
   workspaceId?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model ObservedBoolean extends ObservedValue {
   value?: boolean;
   sources?: Source[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model ObservedHeader extends ObservedValue {
   headerName?: string;
   headerValue?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model ObservedInteger extends ObservedValue {
   value?: int32;
   sources?: Source[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model ObservedIntegers extends ObservedValue {
   values?: int32[];
   sources?: Source[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model ObservedLocation extends ObservedValue {
   value?: Location;
   sources?: Source[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model ObservedLong extends ObservedValue {
   value?: int64;
   sources?: Source[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model ObservedPortState extends ObservedValue {
   value?: ObservedPortStateValue;
   port?: int32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model ObservedString extends ObservedValue {
   value?: string;
   sources?: Source[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model PageAsset extends InventoryAsset {
   url?: url;
   httpMethod?: string;
@@ -985,7 +989,7 @@ model PageAsset extends InventoryAsset {
   ipv6?: ObservedBoolean[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model PageCause {
   cause?: string;
   #suppress "@azure-tools/typespec-azure-core/casing-style"
@@ -997,7 +1001,7 @@ model PageCause {
   domChangeIndex?: int32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model Port {
   @projectedName("csharp", "portProperty")
   port?: int32;
@@ -1076,7 +1080,7 @@ model ReportAssetSummaryRequest {
   labelName?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model ReportAssetSummaryResult {
   @doc("The collection of asset summaries.")
   assetSummaries?: AssetSummaryResult[];
@@ -1091,7 +1095,7 @@ model ReportBillableAssetBreakdown {
   count?: int64;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model ReportBillableAssetSnapshotResult {
   @doc("The date these assets were billed on.")
   date?: plainDate;
@@ -1103,12 +1107,12 @@ model ReportBillableAssetSnapshotResult {
   assetBreakdown?: ReportBillableAssetBreakdown[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model ReportBillableAssetSummaryResult {
   assetSummaries?: ReportBillableAssetSnapshotResult[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model Reputation {
   listName?: string;
   threatType?: string;
@@ -1120,7 +1124,7 @@ model Reputation {
   recent?: boolean;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model ResourceUrl {
   url?: url;
   resources?: DependentResource[];
@@ -1130,7 +1134,7 @@ model ResourceUrl {
   recent?: boolean;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model SavedFilterPageResult {
   @doc("The total number of items available in the full result set.")
   totalElements?: int64;
@@ -1151,7 +1155,7 @@ model SavedFilterData {
   description: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @resource("savedFilters")
 model SavedFilter {
   @doc("The system generated unique id for the resource.")
@@ -1169,7 +1173,7 @@ model SavedFilter {
   description?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model ScanMetadata {
   port?: int32;
   bannerMetadata?: string;
@@ -1177,7 +1181,7 @@ model ScanMetadata {
   endScan?: utcDateTime;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model Service {
   scheme?: string;
   port?: int32;
@@ -1192,7 +1196,7 @@ model Service {
   portStates?: ObservedPortState[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model SoaRecord {
   nameServer?: string;
   email?: string;
@@ -1203,7 +1207,7 @@ model SoaRecord {
   recent?: boolean;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model Source {
   @projectedName("csharp", "sourceProperty")
   source?: string;
@@ -1214,7 +1218,7 @@ model Source {
   reason?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model SslCertAsset extends InventoryAsset {
   sha1?: string;
   subjectCommonNames?: string[];
@@ -1251,7 +1255,7 @@ model SslCertAsset extends InventoryAsset {
   validationType?: SslCertAssetValidationType;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model SslServerConfig {
   tlsVersions?: string[];
   cipherSuites?: string[];
@@ -1261,7 +1265,7 @@ model SslServerConfig {
   sources?: Source[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model SubResourceIntegrityCheck {
   violation?: boolean;
   firstSeen?: utcDateTime;
@@ -1274,7 +1278,7 @@ model SubResourceIntegrityCheck {
   expectedHash?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model TaskPageResult {
   @doc("The total number of items available in the full result set.")
   totalElements?: int64;
@@ -1286,7 +1290,7 @@ model TaskPageResult {
   value?: Task[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @resource("tasks")
 model Task {
   @doc("The unique identifier of the task.")
@@ -1317,13 +1321,13 @@ model Task {
   metadata?: Record<unknown>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model ValidateResult {
   @doc("This is the top-level error object whose code matches the x-ms-error-code response header.")
   error?: ErrorDetail;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model WebComponent {
   name?: string;
   type?: string;
@@ -1347,7 +1351,7 @@ model NoContentResult {
   statusCode: 204;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("Template model for observed values")
 model ObservedValue {
   firstSeen?: utcDateTime;
@@ -1355,7 +1359,7 @@ model ObservedValue {
   count?: int64;
   recent?: boolean;
 }
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("A list of asset types to cascade the updates to.")
 enum AssetUpdateTransfers {
   as,
@@ -1368,7 +1372,7 @@ enum AssetUpdateTransfers {
   sslCert,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The kind of billable asset.")
 enum ReportBillableAssetBreakdownKind {
   domain,
@@ -1376,7 +1380,7 @@ enum ReportBillableAssetBreakdownKind {
   ipAddress,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The state the task is in.")
 enum TaskState {
   pending,
@@ -1388,7 +1392,7 @@ enum TaskState {
   warning,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The phase the task is in.")
 enum TaskPhase {
   running,
@@ -1396,14 +1400,14 @@ enum TaskPhase {
   complete,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The kind of data connection.")
 enum DataConnectionKind {
   logAnalytics,
   azureDataExplorer,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The rate at which the data connection will receive updates.")
 enum DataConnectionFrequency {
   daily,
@@ -1411,7 +1415,7 @@ enum DataConnectionFrequency {
   monthly,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The kind of asset.")
 enum AssetKind {
   as,
@@ -1424,7 +1428,7 @@ enum AssetKind {
   sslCert,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The State of the disco run.")
 enum DiscoRunState {
   pending,
@@ -1433,14 +1437,14 @@ enum DiscoRunState {
   failed,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The type of data the data connection will transfer")
 enum DataConnectionContent {
   assets,
   attackSurfaceInsights,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The kind of disco source.")
 enum DiscoSourceKind {
   as,
@@ -1451,14 +1455,14 @@ enum DiscoSourceKind {
   ipBlock,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 enum ObservedPortStateValue {
   open,
   closed,
   filtered,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The state to update the asset to.")
 enum AssetUpdateState {
   candidate,
@@ -1469,7 +1473,7 @@ enum AssetUpdateState {
   associatedThirdparty,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 enum AssetState {
   candidate,
   confirmed,
@@ -1480,7 +1484,7 @@ enum AssetState {
   archived,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The kind of asset.")
 enum AuditTrailItemKind {
   as,
@@ -1493,7 +1497,7 @@ enum AuditTrailItemKind {
   sslCert,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 enum PageAssetRedirectType {
   httpHeader,
   metaRefresh,
@@ -1501,14 +1505,14 @@ enum PageAssetRedirectType {
   final,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 enum SslCertAssetValidationType {
   domainValidation,
   organizationValidation,
   extendedValidation,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model LogAnalyticsDataConnectionData extends DataConnectionData {
   @doc("The kind of DataConnectionData")
   kind: "logAnalytics";
@@ -1517,7 +1521,7 @@ model LogAnalyticsDataConnectionData extends DataConnectionData {
   properties: LogAnalyticsDataConnectionProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model AzureDataExplorerDataConnectionData extends DataConnectionData {
   @doc("The kind of DataConnectionData")
   kind: "azureDataExplorer";
@@ -1526,7 +1530,7 @@ model AzureDataExplorerDataConnectionData extends DataConnectionData {
   properties: AzureDataExplorerDataConnectionProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model AsAssetResource extends AssetResource {
   @doc("The kind of AssetResource")
   kind: "as";
@@ -1535,7 +1539,7 @@ model AsAssetResource extends AssetResource {
   asset: AsAsset;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model ContactAssetResource extends AssetResource {
   @doc("The kind of AssetResource")
   kind: "contact";
@@ -1544,7 +1548,7 @@ model ContactAssetResource extends AssetResource {
   asset: ContactAsset;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model DomainAssetResource extends AssetResource {
   @doc("The kind of AssetResource")
   kind: "domain";
@@ -1553,7 +1557,7 @@ model DomainAssetResource extends AssetResource {
   asset: DomainAsset;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model HostAssetResource extends AssetResource {
   @doc("The kind of AssetResource")
   kind: "host";
@@ -1562,7 +1566,7 @@ model HostAssetResource extends AssetResource {
   asset: HostAsset;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model IpAddressAssetResource extends AssetResource {
   @doc("The kind of AssetResource")
   kind: "ipAddress";
@@ -1571,7 +1575,7 @@ model IpAddressAssetResource extends AssetResource {
   asset: IpAddressAsset;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model IpBlockAssetResource extends AssetResource {
   @doc("The kind of AssetResource")
   kind: "ipBlock";
@@ -1580,7 +1584,7 @@ model IpBlockAssetResource extends AssetResource {
   asset: IpBlockAsset;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model PageAssetResource extends AssetResource {
   @doc("The kind of AssetResource")
   kind: "page";
@@ -1589,7 +1593,7 @@ model PageAssetResource extends AssetResource {
   asset: PageAsset;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model SslCertAssetResource extends AssetResource {
   @doc("The kind of AssetResource")
   kind: "sslCert";
@@ -1598,7 +1602,7 @@ model SslCertAssetResource extends AssetResource {
   asset: SslCertAsset;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model LogAnalyticsDataConnection extends DataConnection {
   @doc("The kind of DataConnection")
   kind: "logAnalytics";
@@ -1607,7 +1611,7 @@ model LogAnalyticsDataConnection extends DataConnection {
   properties: LogAnalyticsDataConnectionProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model AzureDataExplorerDataConnection extends DataConnection {
   @doc("The kind of DataConnection")
   kind: "azureDataExplorer";

@@ -339,11 +339,11 @@
         }
       },
       "put": {
-        "operationId": "DataConnections_PutDataConnection",
+        "operationId": "DataConnections_CreateOrReplaceDataConnection",
         "tags": [
           "Data Connections"
         ],
-        "description": "Create or update a data connection with a given dataConnectionName.",
+        "description": "Create or replace a data connection with a given dataConnectionName.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -385,8 +385,8 @@
           }
         },
         "x-ms-examples": {
-          "DataConnections_PutDataConnection": {
-            "$ref": "./examples/DataConnections_PutDataConnection_MaximumSet_Gen.json"
+          "DataConnections_CreateOrReplaceDataConnection": {
+            "$ref": "./examples/DataConnections_CreateOrReplaceDataConnection_MaximumSet_Gen.json"
           }
         }
       },
@@ -576,7 +576,7 @@
         }
       },
       "put": {
-        "operationId": "DiscoveryGroups_PutDiscoGroup",
+        "operationId": "DiscoveryGroups_CreateOrReplaceDiscoGroup",
         "tags": [
           "Discovery Groups"
         ],
@@ -622,8 +622,8 @@
           }
         },
         "x-ms-examples": {
-          "DiscoveryGroups_PutDiscoGroup": {
-            "$ref": "./examples/DiscoveryGroups_PutDiscoGroup_MaximumSet_Gen.json"
+          "DiscoveryGroups_CreateOrReplaceDiscoGroup": {
+            "$ref": "./examples/DiscoveryGroups_CreateOrReplaceDiscoGroup_MaximumSet_Gen.json"
           }
         }
       }
@@ -1096,11 +1096,11 @@
         }
       },
       "put": {
-        "operationId": "SavedFilters_PutSavedFilter",
+        "operationId": "SavedFilters_CreateOrReplaceSavedFilter",
         "tags": [
           "Saved Filters"
         ],
-        "description": "Create or update a saved filter with a given filterName.",
+        "description": "Create or replace a saved filter with a given filterName.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1142,8 +1142,8 @@
           }
         },
         "x-ms-examples": {
-          "SavedFilters_PutSavedFilter": {
-            "$ref": "./examples/SavedFilters_PutSavedFilter_MaximumSet_Gen.json"
+          "SavedFilters_CreateOrReplaceSavedFilter": {
+            "$ref": "./examples/SavedFilters_CreateOrReplaceSavedFilter_MaximumSet_Gen.json"
           }
         }
       },
@@ -1651,7 +1651,7 @@
         },
         "discoGroupName": {
           "type": "string",
-          "description": "The name of the DiscoveryGroup that brought added this asset to the workspace."
+          "description": "The name of the DiscoGroup that brought added this asset to the workspace."
         },
         "auditTrail": {
           "type": "array",
@@ -2275,7 +2275,8 @@
         "createdDate": {
           "type": "string",
           "format": "date-time",
-          "description": "The date the data connection was created."
+          "description": "The date the data connection was created.",
+          "readOnly": true
         },
         "frequency": {
           "$ref": "#/definitions/DataConnectionFrequency",
@@ -2289,12 +2290,14 @@
         "updatedDate": {
           "type": "string",
           "format": "date-time",
-          "description": "The date the data connection was last updated."
+          "description": "The date the data connection was last updated.",
+          "readOnly": true
         },
         "userUpdatedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The date the data connection was last updated by user."
+          "description": "The date the data connection was last updated by user.",
+          "readOnly": true
         },
         "active": {
           "type": "boolean",
@@ -2302,7 +2305,8 @@
         },
         "inactiveMessage": {
           "type": "string",
-          "description": "A message that specifies details about data connection if inactive."
+          "description": "A message that specifies details about data connection if inactive.",
+          "readOnly": true
         }
       },
       "discriminator": "kind",

@@ -53,9 +53,9 @@ interface DataConnections {
   @doc("Retrieve a data connection with a given dataConnectionName.")
   getDataConnection is Operations.ResourceRead<DataConnection>;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Create or update a data connection with a given dataConnectionName.")
+  @doc("Create or replace a data connection with a given dataConnectionName.")
   @put
-  putDataConnection is Foundations.ResourceOperation<
+  createOrReplaceDataConnection is Foundations.ResourceOperation<
     DataConnection,
     DataConnectionData,
     DataConnection
@@ -81,7 +81,7 @@ interface DiscoveryGroups {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Create a discovery group with a given groupName.")
   @put
-  putDiscoGroup is Foundations.ResourceOperation<
+  createOrReplaceDiscoGroup is Foundations.ResourceOperation<
     DiscoGroup,
     DiscoGroupData,
     DiscoGroup
@@ -94,7 +94,7 @@ interface DiscoveryGroups {
   @route("/discoGroups/{groupName}/runs")
   @get
   listRuns is Foundations.Operation<
-    DiscoveryGroupsListRunsParameter,
+    DiscoGroupsListRunsParameter,
     DiscoRunPageResult
   >;
 }
@@ -142,9 +142,9 @@ interface SavedFilters {
   @doc("Retrieve a saved filter by filterName.")
   getSavedFilter is Operations.ResourceRead<SavedFilter>;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Create or update a saved filter with a given filterName.")
+  @doc("Create or replace a saved filter with a given filterName.")
   @put
-  putSavedFilter is Foundations.ResourceOperation<
+  createOrReplaceSavedFilter is Foundations.ResourceOperation<
     SavedFilter,
     SavedFilterData,
     SavedFilter
