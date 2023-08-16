@@ -38,7 +38,7 @@
       "get": {
         "x-ms-examples": {
           "Gets a list of API collections within a subscription that have been onboarded to Microsoft Defender for APIs": {
-            "$ref": "./examples/ApiCollections/APICollection_ListBySubscription_example.json"
+            "$ref": "./examples/ApiCollections/APICollections_ListBySubscription_example.json"
           }
         },
         "tags": [
@@ -46,7 +46,7 @@
         ],
         "description": "Gets a list of API collections within a subscription that have been onboarded to Microsoft Defender for APIs.",
         "summary": "Gets a list of API collections within a subscription",
-        "operationId": "APICollection_ListBySubscription",
+        "operationId": "APICollections_ListBySubscription",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -78,7 +78,7 @@
       "get": {
         "x-ms-examples": {
           "Gets a list of API collections within a resource group that have been onboarded to Microsoft Defender for APIs": {
-            "$ref": "./examples/ApiCollections/APICollection_ListByResourceGroup_example.json"
+            "$ref": "./examples/ApiCollections/APICollections_ListByResourceGroup_example.json"
           }
         },
         "tags": [
@@ -86,7 +86,7 @@
         ],
         "description": "Gets a list of API collections within a resource group that have been onboarded to Microsoft Defender for APIs.",
         "summary": "Gets a list of API collections within a resource group",
-        "operationId": "APICollection_ListByResourceGroup",
+        "operationId": "APICollections_ListByResourceGroup",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -121,7 +121,7 @@
       "get": {
         "x-ms-examples": {
           "Gets a list of Azure API Management APIs that have been onboarded to Microsoft Defender for APIs": {
-            "$ref": "./examples/ApiCollections/APICollection_ListByAzureApiManagementService_example.json"
+            "$ref": "./examples/ApiCollections/APICollections_ListByAzureApiManagementService_example.json"
           }
         },
         "tags": [
@@ -130,7 +130,7 @@
         ],
         "description": "Gets a list of Azure API Management APIs that have been onboarded to Microsoft Defender for APIs. If an Azure API Management API is onboarded to Microsoft Defender for APIs, the system will monitor the operations within the Azure API Management API for intrusive behaviors and provide alerts for attacks that have been detected.",
         "summary": "Gets a list of onboarded Azure API Management APIs",
-        "operationId": "APICollection_ListByAzureApiManagementService",
+        "operationId": "APICollections_ListByAzureApiManagementService",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -164,11 +164,11 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/providers/Microsoft.Security/apiCollections/{apiCollectionId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/providers/Microsoft.Security/apiCollections/{apiId}": {
       "get": {
         "x-ms-examples": {
           "Gets an Azure API Management API if it has been onboarded to Microsoft Defender for APIs": {
-            "$ref": "./examples/ApiCollections/APICollection_GetByAzureApiManagementService_example.json"
+            "$ref": "./examples/ApiCollections/APICollections_GetByAzureApiManagementService_example.json"
           }
         },
         "tags": [
@@ -177,7 +177,7 @@
         ],
         "description": "Gets an Azure API Management API if it has been onboarded to Microsoft Defender for APIs. If an Azure API Management API is onboarded to Microsoft Defender for APIs, the system will monitor the operations within the Azure API Management API for intrusive behaviors and provide alerts for attacks that have been detected.",
         "summary": "Gets an onboarded Azure API Management API",
-        "operationId": "APICollection_GetByAzureApiManagementService",
+        "operationId": "APICollections_GetByAzureApiManagementService",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -189,7 +189,7 @@
             "$ref": "#/parameters/ApiManagementServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiCollectionIdParameter"
+            "$ref": "#/parameters/ApiManagementApiIdParameter"
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -213,7 +213,7 @@
       "put": {
         "x-ms-examples": {
           "Onboard an Azure API Management API to Microsoft Defender for APIs": {
-            "$ref": "./examples/ApiCollections/APICollection_OnboardAzureApiManagementApi_example.json"
+            "$ref": "./examples/ApiCollections/APICollections_OnboardAzureApiManagementApi_example.json"
           }
         },
         "tags": [
@@ -222,7 +222,7 @@
         ],
         "description": "Onboard an Azure API Management API to Microsoft Defender for APIs. The system will start monitoring the operations within the Azure Management API for intrusive behaviors and provide alerts for attacks that have been detected.",
         "summary": "Onboard an Azure API Management API to Microsoft Defender for APIs",
-        "operationId": "APICollection_OnboardAzureApiManagementApi",
+        "operationId": "APICollections_OnboardAzureApiManagementApi",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -234,7 +234,7 @@
             "$ref": "#/parameters/ApiManagementServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiCollectionIdParameter"
+            "$ref": "#/parameters/ApiManagementApiIdParameter"
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -276,7 +276,7 @@
       "delete": {
         "x-ms-examples": {
           "Offboard an Azure API Management API from Microsoft Defender for APIs": {
-            "$ref": "./examples/ApiCollections/APICollection_OffboardAzureApiManagementApi_example.json"
+            "$ref": "./examples/ApiCollections/APICollections_OffboardAzureApiManagementApi_example.json"
           }
         },
         "tags": [
@@ -285,7 +285,7 @@
         ],
         "description": "Offboard an Azure API Management API from Microsoft Defender for APIs. The system will stop monitoring the operations within the Azure API Management API for intrusive behaviors.",
         "summary": "Offboard an Azure API Management API from Microsoft Defender for APIs",
-        "operationId": "APICollection_OffboardAzureApiManagementApi",
+        "operationId": "APICollections_OffboardAzureApiManagementApi",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -297,7 +297,7 @@
             "$ref": "#/parameters/ApiManagementServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiCollectionIdParameter"
+            "$ref": "#/parameters/ApiManagementApiIdParameter"
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -409,6 +409,11 @@
           "format": "int64",
           "description": "The number of API endpoints in this API collection which are exposing sensitive data in their requests and/or responses."
         },
+        "sensitivityLabel": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The highest sensitivity label of all API endpoints in this API collection."
+        },
         "additionalData": {
           "type": "object",
           "description": "Additional data regarding the API collection.",
@@ -431,14 +436,15 @@
       "pattern": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$",
       "x-ms-parameter-location": "method"
     },
-    "ApiCollectionIdParameter": {
-      "name": "apiCollectionId",
+    "ApiManagementApiIdParameter": {
+      "name": "apiId",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "A string representing the apiCollections resource within the Microsoft.Security provider namespace. This string matches the Azure API Management API name.",
+      "description": "API revision identifier. Must be unique in the API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.",
       "minLength": 1,
       "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
       "x-ms-parameter-location": "method"
     }
   }
