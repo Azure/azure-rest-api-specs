@@ -290,7 +290,7 @@ model Banner {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-model CVSS3Summary {
+model Cvss3Summary {
   version?: string;
   vectorString?: string;
   attackVector?: string;
@@ -337,7 +337,7 @@ model Cve {
   name?: string;
   cweId?: string;
   cvssScore?: float32;
-  cvss3Summary?: CVSS3Summary;
+  cvss3Summary?: Cvss3Summary;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
