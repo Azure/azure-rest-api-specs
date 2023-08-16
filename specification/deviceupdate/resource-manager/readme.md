@@ -27,7 +27,7 @@ These are the global settings for the deviceupdate.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-09-01-preview
+tag: package-2022-10-01
 ```
 
 ### Tag: package-2023-09-01-preview

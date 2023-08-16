@@ -364,6 +364,12 @@
         "responses": {
           "200": {
             "description": "Account updated successfully.",
+            "headers": {
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Account"
             }
@@ -816,7 +822,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful; the operation completed synchronously."
+            "description": "The request was successful; the operation completed synchronously.",
+            "headers": {
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
           },
           "202": {
             "description": "The request was successful; the operation will complete asynchronously.",
