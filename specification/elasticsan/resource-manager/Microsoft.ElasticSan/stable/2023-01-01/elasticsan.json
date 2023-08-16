@@ -2317,8 +2317,24 @@
         "storageTarget": {
           "description": "Storage target information",
           "$ref": "#/definitions/IscsiTargetInfo"
+        },
+        "managedBy": {
+          "description": "Parent resource information.",
+          "$ref": "#/definitions/ManagedByInfo"
         }
       }
+    },
+    "ManagedByInfo":{
+      "type": "object",
+      "description": "Parent resource information.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "x-ms-client-name": "ResourceId",
+          "description": "Resource ID of the resource managing the volume."
+        }
+      }
+
     },
     "VolumeUpdate": {
       "type": "object",
