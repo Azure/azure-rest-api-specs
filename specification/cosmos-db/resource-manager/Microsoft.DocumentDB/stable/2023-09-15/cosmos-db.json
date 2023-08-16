@@ -7036,7 +7036,8 @@
         },
         "customerManagedKeyStatus": {
           "description": "Indicates the status of the Customer Managed Key feature on the account. In case there are errors, the property provides troubleshooting guidance.",
-          "type": "string"
+          "type": "string",
+          "$ref": "#/definitions/CustomerManagedKeyStatus"
         }
       }
     },
@@ -7194,7 +7195,8 @@
         },
         "customerManagedKeyStatus": {
           "description": "Indicates the status of the Customer Managed Key feature on the account. In case there are errors, the property provides troubleshooting guidance.",
-          "type": "string"
+          "type": "string",
+          "$ref": "#/definitions/CustomerManagedKeyStatus"
         }
       },
       "required": [
@@ -7376,7 +7378,8 @@
         },
         "customerManagedKeyStatus": {
           "description": "Indicates the status of the Customer Managed Key feature on the account. In case there are errors, the property provides troubleshooting guidance.",
-          "type": "string"
+          "type": "string",
+          "$ref": "#/definitions/CustomerManagedKeyStatus"
         }
       }
     },
@@ -9935,6 +9938,26 @@
       ],
       "x-ms-enum": {
         "name": "MinimalTlsVersion",
+        "modelAsString": true
+      }
+    },
+    "CustomerManagedKeyStatus": {
+      "description": "Indicates the status of the Customer Managed Key feature on the account. In case there are errors, the property provides troubleshooting guidance.",
+      "type": "string",
+      "enum": [
+        "Access to your account is currently revoked because the Azure Cosmos DB service is unable to obtain the AAD authentication token for the account's default identity; for more details about this error and how to restore access to your account please visit https://learn.microsoft.com/en-us/azure/cosmos-db/cmk-troubleshooting-guide#azure-active-directory-token-acquisition-error (4000).",
+        "Access to your account is currently revoked because the Azure Cosmos DB account's key vault key URI does not follow the expected format; for more details about this error and how to restore access to your account please visit https://learn.microsoft.com/en-us/azure/cosmos-db/cmk-troubleshooting-guide#improper-syntax-detected-on-the-key-vault-uri-property (4006).",
+        "Access to your account is currently revoked because the current default identity no longer has permission to the associated Key Vault key; for more details about this error and how to restore access to your account please visit https://learn.microsoft.com/en-us/azure/cosmos-db/cmk-troubleshooting-guide#default-identity-is-unauthorized-to-access-the-azure-key-vault-key (4002).",
+        "Access to your account is currently revoked because the Azure Key Vault DNS name specified by the account's keyvaultkeyuri property could not be resolved; for more details about this error and how to restore access to your account please visit https://learn.microsoft.com/en-us/azure/cosmos-db/cmk-troubleshooting-guide#unable-to-resolve-the-key-vaults-dns (4009).",
+        "Access to your account is currently revoked because the correspondent key is not found on the specified Key Vault; for more details about this error and how to restore access to your account please visit https://learn.microsoft.com/en-us/azure/cosmos-db/cmk-troubleshooting-guide#customer-managed-key-does-not-exist (4003).",
+        "Access to your account is currently revoked because the Azure Cosmos DB service is unable to wrap or unwrap the key; for more details about this error and how to restore access to your account please visit https://learn.microsoft.com/en-us/azure/cosmos-db/cmk-troubleshooting-guide#internal-unwrapping-procedure-error (4005).",
+        "Access to your account is currently revoked because the Azure Cosmos DB account has an undefined default identity; for more details about this error and how to restore access to your account please visit https://learn.microsoft.com/en-us/azure/cosmos-db/cmk-troubleshooting-guide#invalid-azure-cosmos-db-default-identity (4015).",
+        "Access to your account is currently revoked because the access rules are blocking outbound requests to the Azure Key Vault service; for more details about this error and how to restore access to your account please visit https://learn.microsoft.com/en-us/azure/cosmos-db/cmk-troubleshooting-guide (4016).",
+        "Access to your account is currently revoked; for more details about this error and how to restore access to your account please visit https://learn.microsoft.com/en-us/azure/cosmos-db/cmk-troubleshooting-guide",
+        "Access to the configured customer managed key confirmed."
+      ],
+      "x-ms-enum": {
+        "name": "CustomerManagedKeyStatus",
         "modelAsString": true
       }
     }
