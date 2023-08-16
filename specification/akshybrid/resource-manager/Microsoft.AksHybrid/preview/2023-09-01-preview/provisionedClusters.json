@@ -1110,11 +1110,6 @@
           "type": "string",
           "description": "The type of the agent pool upgrade profile."
         },
-        "location": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The location of the agent pool upgrade profile."
-        },
         "properties": {
           "$ref": "#/definitions/AgentPoolUpgradeProfileProperties",
           "description": "The properties of the agent pool upgrade profile.",
@@ -1589,63 +1584,26 @@
       ],
       "description": "Provisioned cluster."
     },
-    "ArcAgentProfile": {
-      "description": "Defines the Arc Agent properties for the Provisioned clusters.",
-      "type": "object",
-      "properties": {
-        "agentVersion": {
-          "type": "string",
-          "description": "Version of the Arc agents to be installed on the provisioned Provisioned cluster resource"
-        },
-        "agentAutoUpgrade": {
-          "type": "string",
-          "description": "Indicates whether the Arc agents on the provisioned clusters be upgraded automatically to the latest version. Defaults to Enabled.",
-          "default": "Enabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "AutoUpgradeOptions",
-            "modelAsString": true
-          }
-        }
-      }
-    },
     "ProvisionedClusterProperties": {
       "type": "object",
       "properties": {
-        "arcAgentProfile": {
-          "description": "Arc agentry configuration for the provisioned cluster.",
-          "$ref": "#/definitions/ArcAgentProfile"
-        },
-        "identity": {
-          "$ref": "#/definitions/ManagedClusterIdentity",
-          "description": "The identity of the provisioned cluster, if configured."
-        },
-        "infraResourceId": {
-          "type": "string",
-          "description": "The resource ID of the infrastructure."
-        },
         "provisioningState": {
           "readOnly": true,
           "type": "string",
           "description": "The current provisioning state."
+        },
+        "infraResourceId": {
+          "type": "string",
+          "description": "The infrastructure resource ID of the provisioned cluster."
         },
         "powerState": {
           "$ref": "#/definitions/PowerState",
           "description": "The Power State of the cluster.",
           "readOnly": true
         },
-        "kubernetesVersion": {
+        "vlanId": {
           "type": "string",
-          "title": "The version of Kubernetes the Provisioned Cluster is requested to run.",
-          "description": "When you upgrade a supported AKS cluster, Kubernetes minor versions cannot be skipped. All upgrades must be performed sequentially by major version number. For example, upgrades between 1.14.x -> 1.15.x or 1.15.x -> 1.16.x are allowed, however 1.14.x -> 1.16.x is not allowed. See [upgrading an AKS cluster](https://docs.microsoft.com/azure/aks/upgrade-cluster) for more details."
-        },
-        "currentKubernetesVersion": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The version of Kubernetes the Provisioned Cluster is running."
+          "description": "The cluster's VLAN ID."
         },
         "agentPoolProfiles": {
           "type": "array",
@@ -1655,196 +1613,14 @@
           "x-ms-identifiers": [],
           "description": "The agent pool properties."
         },
-        "linuxProfile": {
-          "$ref": "#/definitions/ContainerServiceLinuxProfile",
-          "description": "The profile for Linux VMs in the Provisioned Cluster."
-        },
-        "windowsProfile": {
-          "$ref": "#/definitions/ProvisionedClusterWindowsProfile",
-          "description": "The profile for Windows VMs in the Provisioned Cluster."
-        },
-        "nodeResourceGroup": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the resource group containing agent pool nodes."
-        },
-        "autoScalerProfile": {
-          "type": "object",
-          "properties": {
-            "balance-similar-node-groups": {
-              "type": "string",
-              "title": "Detects similar node pools and balances the number of nodes between them.",
-              "description": "Valid values are 'true' and 'false'"
-            },
-            "expander": {
-              "type": "string",
-              "enum": [
-                "least-waste",
-                "most-pods",
-                "priority",
-                "random"
-              ],
-              "x-ms-enum": {
-                "name": "expander",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "value": "least-waste",
-                    "description": "Selects the node group that will have the least idle CPU (if tied, unused memory) after scale-up. This is useful when you have different classes of nodes, for example, high CPU or high memory nodes, and only want to expand those when there are pending pods that need a lot of those resources."
-                  },
-                  {
-                    "value": "most-pods",
-                    "description": "Selects the node group that would be able to schedule the most pods when scaling up. This is useful when you are using nodeSelector to make sure certain pods land on certain nodes. Note that this won't cause the autoscaler to select bigger nodes vs. smaller, as it can add multiple smaller nodes at once."
-                  },
-                  {
-                    "value": "priority",
-                    "description": "Selects the node group that has the highest priority assigned by the user. It's configuration is described in more details [here](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/expander/priority/readme.md)."
-                  },
-                  {
-                    "value": "random",
-                    "description": "Used when you don't have a particular need for the node groups to scale differently."
-                  }
-                ]
-              },
-              "title": "The expander to use when scaling up",
-              "description": "If not specified, the default is 'random'. See [expanders](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#what-are-expanders) for more information."
-            },
-            "max-empty-bulk-delete": {
-              "type": "string",
-              "title": "The maximum number of empty nodes that can be deleted at the same time. This must be a positive integer.",
-              "description": "The default is 10."
-            },
-            "max-graceful-termination-sec": {
-              "type": "string",
-              "title": "The maximum number of seconds the cluster autoscaler waits for pod termination when trying to scale down a node.",
-              "description": "The default is 600."
-            },
-            "max-node-provision-time": {
-              "type": "string",
-              "title": "The maximum time the autoscaler waits for a node to be provisioned.",
-              "description": "The default is '15m'. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported."
-            },
-            "max-total-unready-percentage": {
-              "type": "string",
-              "title": "The maximum percentage of unready nodes in the cluster. After this percentage is exceeded, cluster autoscaler halts operations.",
-              "description": "The default is 45. The maximum is 100 and the minimum is 0."
-            },
-            "new-pod-scale-up-delay": {
-              "type": "string",
-              "title": "Ignore unscheduled pods before they're a certain age.",
-              "description": "For scenarios like burst/batch scale where you don't want CA to act before the kubernetes scheduler could schedule all the pods, you can tell CA to ignore unscheduled pods before they're a certain age. The default is '0s'. Values must be an integer followed by a unit ('s' for seconds, 'm' for minutes, 'h' for hours, etc)."
-            },
-            "ok-total-unready-count": {
-              "type": "string",
-              "title": "The number of allowed unready nodes, irrespective of max-total-unready-percentage.",
-              "description": "This must be an integer. The default is 3."
-            },
-            "scan-interval": {
-              "type": "string",
-              "title": "How often cluster is reevaluated for scale up or down.",
-              "description": "The default is '10'. Values must be an integer number of seconds."
-            },
-            "scale-down-delay-after-add": {
-              "type": "string",
-              "title": "How long after scale up that scale down evaluation resumes",
-              "description": "The default is '10m'. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported."
-            },
-            "scale-down-delay-after-delete": {
-              "type": "string",
-              "title": "How long after node deletion that scale down evaluation resumes.",
-              "description": "The default is the scan-interval. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported."
-            },
-            "scale-down-delay-after-failure": {
-              "type": "string",
-              "title": "How long after scale down failure that scale down evaluation resumes.",
-              "description": "The default is '3m'. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported."
-            },
-            "scale-down-unneeded-time": {
-              "type": "string",
-              "title": "How long a node should be unneeded before it is eligible for scale down.",
-              "description": "The default is '10m'. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported."
-            },
-            "scale-down-unready-time": {
-              "type": "string",
-              "title": "How long an unready node should be unneeded before it is eligible for scale down",
-              "description": "The default is '20m'. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported."
-            },
-            "scale-down-utilization-threshold": {
-              "type": "string",
-              "title": "Node utilization level, defined as sum of requested resources divided by capacity, below which a node can be considered for scale down.",
-              "description": "The default is '0.5'."
-            },
-            "skip-nodes-with-local-storage": {
-              "type": "string",
-              "title": "If cluster autoscaler will skip deleting nodes with pods with local storage, for example, EmptyDir or HostPath.",
-              "description": "The default is true."
-            },
-            "skip-nodes-with-system-pods": {
-              "type": "string",
-              "title": "If cluster autoscaler will skip deleting nodes with pods from kube-system (except for DaemonSet or mirror pods)",
-              "description": "The default is true."
-            },
-            "ca-pod-state": {
-              "readOnly": true,
-              "type": "string",
-              "description": "Indicate the CA pod state."
-            }
-          },
-          "description": "Parameters to be applied to the cluster-autoscaler when enabled"
-        },
         "enableRbac": {
           "readOnly": true,
           "type": "boolean",
           "description": "Whether to enable Kubernetes Role-Based Access Control."
         },
-        "networkProfile": {
-          "$ref": "#/definitions/ContainerServiceNetworkProfile",
-          "description": "The network configuration profile."
-        },
-        "aadProfile": {
-          "$ref": "#/definitions/ProvisionedClusterAADProfile",
-          "description": "The Azure Active Directory configuration."
-        },
-        "securityProfile": {
-          "$ref": "#/definitions/ProvisionedClusterSecurityProfile",
-          "description": "Security profile for the provisioned cluster."
-        },
-        "oidcIssuerProfile": {
-          "$ref": "#/definitions/ProvisionedClusterOIDCIssuerProfile",
-          "description": "The OIDC issuer profile of the Provisioned Cluster."
-        },
-        "azureHybridBenefit": {
+        "arcAgentPrivateKey": {
           "type": "string",
-          "description": "Indicates whether Azure Hybrid Benefit is opted in",
-          "enum": [
-            "True",
-            "False",
-            "NotApplicable"
-          ],
-          "default": "NotApplicable",
-          "x-ms-enum": {
-            "name": "AzureHybridBenefit",
-            "modelAsString": true
-          }
-        },
-        "oemLicensing": {
-          "type": "string",
-          "description": "Indicates whether infrastructure which provisioned cluster is running on, is OEM licensing activated",
-          "readOnly": true,
-          "enum": [
-            "True",
-            "False",
-            "NotApplicable"
-          ],
-          "default": "NotApplicable",
-          "x-ms-enum": {
-            "name": "OEMLicensing",
-            "modelAsString": true
-          }
-        },
-        "vlanId": {
-          "type": "string",
-          "description": "The cluster's VLAN ID."
+          "description": "The private key of the cluster's ARC agent."
         }
       },
       "description": "Properties of the provisioned cluster."
@@ -1925,6 +1701,21 @@
         ]
       },
       "description": "Describes how VMs are added to or removed from Agent Pools. See [billing states](https://docs.microsoft.com/azure/virtual-machines/states-billing)."
+    }, 
+    "ProvisiedClusterAgentPoolArmProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProvisionedClusterAgentPoolProfileProperties"
+        }
+      ],
+      "properties": {
+        "infraResourceId": {
+          "type": "string",
+          "description": "The infrastructure resource ID of the agent pool."
+        }
+      },
+      "description": "The properties of the agent pool profile with the infrastructure resource ID."
     },
     "ProvisionedClusterAgentPoolProfileProperties": {
       "type": "object",
@@ -1934,12 +1725,17 @@
           "format": "int32",
           "description": "Number of agents (VMs) to host docker containers. Allowed values must be in the range of 0 to 1000 (inclusive) for user pools and in the range of 1 to 1000 (inclusive) for system pools. The default value is 1."
         },
-        "vmSize": {
-          "type": "string",
-          "title": "The size of the agent pool VMs.",
-          "description": "VM size availability varies by region. If a node contains insufficient compute resources (memory, cpu, etc) pods might fail to run correctly. For more details on restricted VM sizes, see: https://docs.microsoft.com/azure/aks/quotas-skus-regions"
+        "vCPUs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of CPUs."
         },
-        "osDiskSizeGB": {
+        "RAM": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The size of RAM."
+        },
+        "osDiskSize": {
           "$ref": "#/definitions/ContainerServiceOSDisk"
         },
         "osType": {
@@ -1956,40 +1752,29 @@
           "title": "The version of Kubernetes running on the Agent Pool.",
           "description": "If orchestratorVersion was a fully specified version <major.minor.patch>, this field will be exactly equal to it. If orchestratorVersion was <major.minor>, this field will contain the full <major.minor.patch> version being used."
         },
-        "nodeImageVersion": {
+        "nodeImageArcId": {
           "readOnly": true,
           "type": "string",
-          "description": "The version of node image"
+          "description": "The ARC ID of the node image"
         },
         "provisioningState": {
           "readOnly": true,
           "type": "string",
           "description": "The current deployment or provisioning state."
         },
+        "isControlPlane": {
+          "type": "boolean",
+          "description": "Whether the agent pool is the control plane."
+        },
+        "allowUserWorkload": {
+          "type": "boolean",
+          "description": "Whether the agent pool allows adding user workloads."
+        },
         "powerState": {
           "readOnly": true,
           "title": "Whether the Agent Pool is running or stopped.",
           "description": "When an Agent Pool is first created it is initially Running. The Agent Pool can be stopped by setting this field to Stopped. A stopped Agent Pool stops all of its VMs and does not accrue billing charges. An Agent Pool can only be stopped if it is Running and provisioning state is Succeeded",
           "$ref": "#/definitions/PowerState"
-        },
-        "maxCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum number of nodes for auto-scaling"
-        },
-        "minCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The minimum number of nodes for auto-scaling"
-        },
-        "enableAutoScaling": {
-          "type": "boolean",
-          "description": "Whether to enable auto-scaler"
-        },
-        "scaleDownMode": {
-          "$ref": "#/definitions/ScaleDownMode",
-          "title": "The scale down mode to use when scaling the Agent Pool.",
-          "description": "This also effects the cluster autoscaler behavior. If not specified, it defaults to Delete."
         },
         "arcVmIds": {
           "type": "array",
@@ -2045,7 +1830,7 @@
       "properties": {
         "properties": {
           "description": "Properties of an agent pool.",
-          "$ref": "#/definitions/ProvisionedClusterAgentPoolProfileProperties",
+          "$ref": "#/definitions/ProvisiedClusterAgentPoolArmProperties",
           "x-ms-client-flatten": true
         }
       },
@@ -2158,10 +1943,6 @@
               "kubernetesVersion": {
                 "type": "string",
                 "description": "The Kubernetes version (major.minor.patch)."
-              },
-              "isPreview": {
-                "type": "boolean",
-                "description": "Whether the Kubernetes version is currently in preview."
               }
             }
           },
@@ -2214,11 +1995,6 @@
           "readOnly": true,
           "type": "string",
           "description": "The type of the upgrade profile."
-        },
-        "location": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The location of the upgrade profile."
         },
         "properties": {
           "$ref": "#/definitions/ProvisionedClusterUpgradeProfileProperties",
