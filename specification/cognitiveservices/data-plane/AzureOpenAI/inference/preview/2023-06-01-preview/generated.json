@@ -792,7 +792,12 @@
           "type": "array",
           "description": "A mapping of tokens to maximum log probability values in this completions data.",
           "items": {
-            "type": "object"
+            "type": "object",
+            "additionalProperties": {
+              "format": "float",
+              "type": "number",
+              "x-nullable": true
+            }
           },
           "x-ms-client-name": "topLogprobs",
           "x-ms-identifiers": []
