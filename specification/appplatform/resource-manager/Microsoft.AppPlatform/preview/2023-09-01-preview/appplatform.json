@@ -12311,6 +12311,30 @@
       },
       "x-ms-discriminator-value": "Jar"
     },
+    "WarUploadedUserSourceInfo": {
+      "description": "Uploaded War binary for a deployment",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UploadedUserSourceInfo"
+        }
+      ],
+      "properties": {
+        "runtimeVersion": {
+          "description": "Runtime version of the war file",
+          "type": "string"
+        },
+        "jvmOptions": {
+          "description": "JVM parameter",
+          "type": "string"
+        },
+        "serverVersion": {
+          "description": "Server version, currently only Apache Tomcat is supported",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "War"
+    },
     "SourceUploadedUserSourceInfo": {
       "description": "Uploaded Java source code binary for a deployment",
       "type": "object",
