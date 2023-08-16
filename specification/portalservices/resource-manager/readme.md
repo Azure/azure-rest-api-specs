@@ -55,6 +55,7 @@ These settings apply only when `--tag=package-2023-08-01-preview` is specified o
 ``` yaml $(tag) == 'package-2023-08-01-preview'
 input-file:
   - Microsoft.PortalServices/preview/2023-08-01-preview/dashboards.json
+  - Microsoft.PortalServices/preview/2023-08-01-preview/extensions.json
 ```
 
 ---
