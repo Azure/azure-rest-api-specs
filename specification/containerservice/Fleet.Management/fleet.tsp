@@ -29,6 +29,7 @@ model Fleet is TrackedResource<FleetProperties> {
   @segment("fleets")
   @visibility("create", "read")
   name: string;
+
   ...EntityTag;
 }
 

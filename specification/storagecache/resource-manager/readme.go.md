@@ -20,14 +20,10 @@ directive:
     where: $.definitions.CacheIdentity.properties
     transform: >
       $['userAssignedIdentities']['$ref'] = "amlfilesystem.json#/definitions/UserAssignedIdentities";
-  - from: swagger-document
-    where: $.definitions.StorageTargetProperties.properties.provisioningState
-    transform: >
-      $['enum'][2] = "Cancelled";
-  - from: swagger-document
-    where: $.definitions.Cache.properties.properties.properties.provisioningState
-    transform: >
-      $['enum'][2] = "Cancelled";
+  - from:
+      - constants.go
+    where: $
+    transform: return $.replaceAll(/\tProvisioningStateTypeCanceled/g, "\tProvisioningStateTypeCancelled");
 ```
 
 ### Go multi-api

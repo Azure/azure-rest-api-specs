@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "subscriptionId": "1234ABCD-0A1B-1234-5678-123456ABCDEF",
+    "api-version": "2023-06-15"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "networkPacketBrokerId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkPacketBrokers/example-networkPacketBroker",
+              "sourceTapRuleId": "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkTapRules/example-sourceTapRule",
+              "pollingType": "Pull",
+              "destinations": [
+                {
+                  "name": "example-destinaionName",
+                  "destinationType": "IsolationDomain",
+                  "destinationId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/l3IsloationDomains/example-l3Domain/internalNetworks/example-internalNetwork",
+                  "isolationDomainProperties": {
+                    "encapsulation": "None",
+                    "neighborGroupIds": [
+                      "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/neighborGroups/example-neighborGroup"
+                    ]
+                  },
+                  "destinationTapRuleId": "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkTapRules/example-destinationTapRule"
+                }
+              ],
+              "configurationState": "Succeeded",
+              "provisioningState": "Accepted",
+              "administrativeState": "Enabled",
+              "annotation": "annotation"
+            },
+            "tags": {
+              "key6024": "1234"
+            },
+            "location": "eastuseuap",
+            "id": "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkTaps/example-networkTap",
+            "name": "example-networkTap",
+            "type": "microsoft.managednetworkfabric/networkTaps",
+            "systemData": {
+              "createdBy": "email@address.com",
+              "createdByType": "User",
+              "createdAt": "2023-06-08T16:02:57.578Z",
+              "lastModifiedBy": "email@address.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-06-08T16:02:57.579Z"
+            }
+          }
+        ],
+        "nextLink": "nextLink"
+      }
+    }
+  }
+}
