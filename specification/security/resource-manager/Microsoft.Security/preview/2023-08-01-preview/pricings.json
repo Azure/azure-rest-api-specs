@@ -79,6 +79,9 @@
               "$ref": "#/definitions/Pricing"
             }
           },
+          "204": {
+            "description": "No Content - Pricing does not exist"
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -121,6 +124,12 @@
         "responses": {
           "200": {
             "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Pricing"
+            }
+          },
+          "201": {
+            "description": "Successfully created.",
             "schema": {
               "$ref": "#/definitions/Pricing"
             }
