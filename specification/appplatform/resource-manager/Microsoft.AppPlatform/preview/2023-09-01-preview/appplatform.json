@@ -14510,6 +14510,18 @@
             "modelAsString": true
           }
         },
+        "type": {
+          "description": "Type of the customized accelerator.",
+          "enum": [
+            "Accelerator",
+            "Fragment"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CustomizedAcceleratorType",
+            "modelAsString": true
+          }
+        },
         "displayName": {
           "type": "string"
         },
@@ -14521,6 +14533,14 @@
         },
         "acceleratorTags": {
           "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "imports": {
+          "type": "array",
+          "readOnly": true,
+          "description": "Imports references all imports that this accelerator/fragment depends upon.",
           "items": {
             "type": "string"
           }
@@ -14562,6 +14582,10 @@
           "$ref": "#/definitions/AcceleratorAuthSetting",
           "description": "Properties of the auth setting payload.",
           "x-ms-client-flatten": false
+        },
+        "subPath": {
+          "description": "Folder path inside the git repository to consider as the root of the accelerator or fragment.",
+          "type": "string"
         }
       }
     },
