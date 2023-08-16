@@ -1,0 +1,101 @@
+{
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "promResourceGroup",
+    "ruleGroupName": "myPrometheusRuleGroup",
+    "api-version": "2023-09-01-preview",
+    "parameters": {
+      "location": "East US",
+      "properties": {
+        "description": "This is the description of a rule group containing a dynamic threshold alerting rules",
+        "scopes": [
+          "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/microsoft.monitor/accounts/myAzureMonitorWorkspace"
+        ],
+        "rules": [
+          {
+            "alert": "Dynamic_Threshold_Alerting_Rule_Full_Configs",
+            "description": "Note that the expression is not predicate-based, but rather a Prometheus expression.",
+            "expression": "cpu_percentage{service=\"billing-processing\"}[5m]",
+            "conditionType": "DynamicThreshold",
+            "dynamicThresholdConfigurations": {
+              "operator": "GreaterOrLessThan",
+              "sensitivity": "Medium"
+            }
+          },
+          {
+            "alert": "Dynamic_Threshold_Alerting_Rule",
+            "description": "Note that the expression is not predicate-based, but rather a Prometheus expression.",
+            "expression": "jobs_duration_seconds_bucket{service=\"billing-processing\"}[5m]",
+            "conditionType": "DynamicThreshold"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/promResourceGroup/providers/Microsoft.AlertsManagement/prometheusRuleGroups/myPrometheusRuleGroup",
+        "type": "Microsoft.AlertsManagement/prometheusRuleGroups",
+        "location": "East US",
+        "properties": {
+          "description": "This is the description of a rule group containing a dynamic threshold alerting rules",
+          "scopes": [
+            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/microsoft.monitor/accounts/myAzureMonitorWorkspace"
+          ],
+          "rules": [
+            {
+              "alert": "Dynamic_Threshold_Alerting_Rule_Full_Configs",
+              "description": "Note that the expression is not predicate-based, but rather a Prometheus expression.",
+              "expression": "cpu_percentage{service=\"billing-processing\"}[5m]",
+              "conditionType": "DynamicThreshold",
+              "dynamicThresholdConfigurations": {
+                "operator": "GreaterOrLessThan",
+                "sensitivity": "Medium"
+              }
+            },
+            {
+              "alert": "Dynamic_Threshold_Alerting_Rule",
+              "description": "Note that the expression is not predicate-based, but rather a Prometheus expression.",
+              "expression": "jobs_duration_seconds_bucket{service=\"billing-processing\"}[5m]",
+              "conditionType": "DynamicThreshold"
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/promResourceGroup/providers/Microsoft.AlertsManagement/prometheusRuleGroups/myPrometheusRuleGroup",
+        "type": "Microsoft.AlertsManagement/prometheusRuleGroups",
+        "location": "East US",
+        "properties": {
+          "description": "This is the description of a rule group containing a dynamic threshold alerting rules",
+          "scopes": [
+            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/microsoft.monitor/accounts/myAzureMonitorWorkspace"
+          ],
+          "rules": [
+            {
+              "alert": "Dynamic_Threshold_Alerting_Rule_Full_Configs",
+              "description": "Note that the expression is not predicate-based, but rather a Prometheus expression.",
+              "expression": "cpu_percentage{service=\"billing-processing\"}[5m]",
+              "conditionType": "DynamicThreshold",
+              "dynamicThresholdConfigurations": {
+                "operator": "GreaterOrLessThan",
+                "sensitivity": "Medium"
+              }
+            },
+            {
+              "alert": "Dynamic_Threshold_Alerting_Rule",
+              "description": "Note that the expression is not predicate-based, but rather a Prometheus expression.",
+              "expression": "jobs_duration_seconds_bucket{service=\"billing-processing\"}[5m]",
+              "conditionType": "DynamicThreshold"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
