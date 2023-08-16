@@ -711,6 +711,12 @@
         ],
         "responses": {
           "202": {
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            },
             "description": "Success."
           },
           "default": {
@@ -755,6 +761,12 @@
         ],
         "responses": {
           "202": {
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            },
             "description": "Success."
           },
           "default": {
@@ -799,6 +811,12 @@
         ],
         "responses": {
           "202": {
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            },
             "description": "Success."
           },
           "default": {
@@ -2978,6 +2996,10 @@
             "source",
             "target"
           ]
+        },
+        "kernel": {
+          "description": "Describes the jupyter kernel settings for the image if its a custom environment",
+          "$ref": "#/definitions/JupyterKernelConfig"
         }
       },
       "additionalProperties": true
@@ -3173,6 +3195,29 @@
           "description": "Mention the Tmpfs size"
         }
       }
+    },
+    "JupyterKernelConfig": {
+      "type": "object",
+      "description": "Jupyter kernel configuration",
+      "properties": {
+        "argv": {
+          "type": "array",
+          "description": "Argument to the the runtime",
+          "items": {
+            "type": "string",
+            "description": "argument values"
+          }
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the kernel"
+        },
+        "language": {
+          "type": "string",
+          "description": "Language of the kernel"
+        }
+      },
+      "additionalProperties": true
     },
     "ComputeInstanceAutologgerSettings": {
       "type": "object",
