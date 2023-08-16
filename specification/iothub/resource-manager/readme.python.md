@@ -52,8 +52,8 @@ These settings apply only when `--tag=package-preview-2023-06 --python` is speci
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-preview-2023-06' && $(python)
-namespace: azure.mgmt.iothub.v2023-06-30_preview
-output-folder: $(python-sdks-folder)/iothub/azure-mgmt-iothub/azure/mgmt/iothub/v2023-06-30_preview
+namespace: azure.mgmt.iothub.v2023_06_30_preview
+output-folder: $(python-sdks-folder)/iothub/azure-mgmt-iothub/azure/mgmt/iothub/v2023_06_30_preview
 ```
 
 ### Tag: package-preview-2022-11 and python
