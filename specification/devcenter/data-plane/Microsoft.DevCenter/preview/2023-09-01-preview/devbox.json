@@ -821,6 +821,9 @@
         "description": "Attempts automated repair steps to resolve common problems on a Dev Box. The Dev Box may restart during this operation.",
         "operationId": "DevBoxes_RepairDevBox",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
         "responses": {
           "202": {
             "description": "The request was accepted.",
