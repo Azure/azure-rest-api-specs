@@ -27,7 +27,7 @@ These are the global settings for the portal.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-01-01-preview
+tag: package-2023-08-01-preview
 ```
 
 ### Tag: package-2022-04-01-preview
