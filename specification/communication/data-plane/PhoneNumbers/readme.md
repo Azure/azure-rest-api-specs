@@ -73,6 +73,17 @@ title:
   Azure Communication Services
 ```
 
+### Tag: package-phonenumber-2023-05-01-preview
+
+These settings apply only when `--tag=package-phonenumber-2023-05-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-phonenumber-2023-05-01-preview'
+input-file:
+  - preview/2023-05-01-preview/phonenumbers.json
+title:
+  Azure Communication Services
+```
+
 ## Supression
 ``` yaml
 suppressions:

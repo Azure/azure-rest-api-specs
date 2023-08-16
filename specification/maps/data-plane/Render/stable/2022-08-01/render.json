@@ -162,8 +162,6 @@
         "microsoft.imagery",
         "microsoft.weather.radar.main",
         "microsoft.weather.infrared.main",
-        "microsoft.dem",
-        "microsoft.dem.contours",
         "microsoft.traffic.absolute",
         "microsoft.traffic.absolute.main",
         "microsoft.traffic.relative",
@@ -231,14 +229,6 @@
             "description": "Weather infrared tiles. Latest Infrared Satellite images shows clouds by their temperature.  Please see [coverage information](https://aka.ms/AzureMapsWeatherCoverage) for Azure Maps Weather service. To learn more about the returned Satellite data, please see [Weather concepts](https://aka.ms/AzureMapsWeatherConcepts).<br>\n\nSupports zoom levels 0 through 15. Format: raster (png)."
           },
           {
-            "value": "microsoft.dem",
-            "description": "Digital Elevation Model tiles. The tiles are in the GeoTIFF format with a single 32-bit floating point band. The tiles cover the whole landmass of Earth. Some small islands (e.g., atolls) might not be represented accurately.<br>\n* The vertical unit for measurement of elevation height is meters. An elevation value of -32767.0 is used for points that have no data value, most often returned where there isn't landmass (i.e. water).<br>\n* The horizontal reference datum is the World Geodetic System 1984 (WGS84-G1150) and the vertical reference datum is the Earth Gravitational Model 2008 (EGM2008).<br>\n* Tiles are 258x258 pixel squares rather than the standard 256 x 256. This is done to allow for accurate interpolation of values at the tile edges. As such adjacent tiles overlap by 1 pixel along all edges.<br>\n* Tile data comes from the [Airbus WorldDEM4Ortho product](https://www.intelligence-airbusds.com/worlddem-streaming/). Urban areas are approximately leveled down to ground level. All other areas are represented by the object surface level (e.g., trees). <br>\n\nSupports zoom level 13 only. Format: raster (tiff)."
-          },
-          {
-            "value": "microsoft.dem.contours",
-            "description": "Digital elevation contour line tiles. Compared to the microsoft.dem option, these tiles are in vector format and intended for visualization purpose. The tiles cover the whole landmass of Earth. Some small islands (e.g., atolls) might not be represented accurately.<br>\n* The vertical unit for measurement of elevation height is meters.<br>\n* The horizontal reference datum is the World Geodetic System 1984 (WGS84-G1150) and the vertical reference datum is the Earth Gravitational Model 2008 (EGM2008).<br>\n* Tile data comes from the [Airbus WorldDEM4Ortho product](https://www.intelligence-airbusds.com/worlddem-streaming/). Urban areas are approximately leveled down to ground level. All other areas are represented by the object surface level (e.g., trees).<br>\n\nSupports zoom levels 9 through 14. Format: vector (pbf)."
-          },
-          {
             "value": "microsoft.traffic.absolute",
             "description": "absolute traffic tiles in vector"
           },
@@ -282,8 +272,7 @@
   "paths": {
     "/map/tile": {
       "get": {
-        "summary": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Get Map Tiles API allows users to request map tiles in vector or raster formats typically to be integrated  into a map control or SDK. Some example tiles that can be requested are Azure Maps road tiles, real-time  Weather Radar tiles or the map tiles created using [Azure Maps Creator](https://aka.ms/amcreator). By default,  Azure Maps uses vector tiles for its web map control (Web SDK) and Android SDK.",
-        "description": ">[!Important]\n>The Azure Maps Elevation services and Render V2 DEM tiles have been retired and will no longer be available and supported after 5 May 2023. All other Azure Maps APIs, Services and TilesetIDs are unaffected by this retirement. For more details, see [Elevation Services Retirement](https://azure.microsoft.com/en-us/updates/azure-maps-elevation-apis-and-render-v2-dem-tiles-will-be-retired-on-5-may-2023/).\n\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Get Map Tiles API allows users to request map tiles in vector or raster formats typically to be integrated  into a map control or SDK. Some example tiles that can be requested are Azure Maps road tiles, real-time  Weather Radar tiles or the map tiles created using [Azure Maps Creator](https://aka.ms/amcreator). By default,  Azure Maps uses vector tiles for its web map control (Web SDK) and Android SDK.",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Get Map Tiles API allows users to request map tiles in vector or raster formats typically to be integrated  into a map control or SDK. Some example tiles that can be requested are Azure Maps road tiles, real-time  Weather Radar tiles or the map tiles created using [Azure Maps Creator](https://aka.ms/amcreator). By default,  Azure Maps uses vector tiles for its web map control (Web SDK) and Android SDK.",
         "operationId": "Render_GetMapTile",
         "x-ms-client-name": "GetMapTile",
         "x-ms-examples": {
@@ -357,8 +346,7 @@
     },
     "/map/tileset": {
       "get": {
-        "summary": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Get Map Tileset API allows users to request metadata for a tileset.",
-        "description": ">[!Important]\n>The Azure Maps Elevation services and Render V2 DEM tiles have been retired and will no longer be available and supported after 5 May 2023. All other Azure Maps APIs, Services and TilesetIDs are unaffected by this retirement. For more details, see [Elevation Services Retirement](https://azure.microsoft.com/en-us/updates/azure-maps-elevation-apis-and-render-v2-dem-tiles-will-be-retired-on-5-may-2023/).\n\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Get Map Tileset API allows users to request metadata for a tileset.",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Get Map Tileset API allows users to request metadata for a tileset.",
         "operationId": "Render_GetMapTileset",
         "x-ms-examples": {
           "Successful Tileset Request": {

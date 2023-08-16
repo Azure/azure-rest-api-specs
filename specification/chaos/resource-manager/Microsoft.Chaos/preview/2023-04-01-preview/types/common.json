@@ -24,8 +24,8 @@
           }
         },
         "userAssignedIdentities": {
-          "$ref": "#/definitions/userAssignedIdentities",
-          "description": "The list of user identities associated with the experiment. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
+          "$ref": "../../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/UserAssignedIdentities",
+          "description": "The list of user identities associated with the Experiment. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
         },
         "principalId": {
           "type": "string",
@@ -44,26 +44,6 @@
         "type"
       ],
       "additionalProperties": false
-    },
-    "userAssignedIdentities": {
-      "type": "object",
-      "description": "The list of user identities associated with the experiment.",
-      "additionalProperties": {
-        "type": "object",
-        "description": "The list of user identities associated with the experiment.",
-        "properties": {
-          "principalId": {
-            "readOnly": true,
-            "type": "string",
-            "description": "The principal id of user assigned identity."
-          },
-          "clientId": {
-            "readOnly": true,
-            "type": "string",
-            "description": "The client id of user assigned identity."
-          }
-        }
-      }
     },
     "url": {
       "type": "string",

@@ -22,6 +22,7 @@ Generate all API versions currently shipped for this package
 multiapi: true
 clear-output-folder: true
 batch:
+  - tag: package-preview-2023-05
   - tag: package-preview-2023-03
   - tag: package-preview-2023-01
   - tag: package-2022-12
@@ -41,6 +42,16 @@ batch:
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/appplatform/azure-mgmt-appplatform/azure/mgmt/appplatform/
 perform-load: false
+```
+
+### Tag: package-preview-2023-05 and python
+
+These settings apply only when `--tag=package-preview-2023-05 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-preview-2023-05' && $(python)
+namespace: azure.mgmt.appplatform.v2023_05_01_preview
+output-folder: $(python-sdks-folder)/appplatform/azure-mgmt-appplatform/azure/mgmt/appplatform/v2023_05_01_preview
 ```
 
 ### Tag: package-preview-2023-03 and python
