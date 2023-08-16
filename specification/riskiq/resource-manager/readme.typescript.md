@@ -7,7 +7,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 title: EasmMgmtClient
 typescript:
   azure-arm: true
-  package-name: "@azure/defender-easm"
-  output-folder: "$(typescript-sdks-folder)/sdk/defendereasm/defender-easm"
+  package-name: "@azure/arm-defendereasm"
+  output-folder: "$(typescript-sdks-folder)/sdk/defendereasm/arm-defendereasm"
   generate-metadata: true
 ```
