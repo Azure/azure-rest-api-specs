@@ -366,7 +366,10 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -413,7 +416,12 @@
             }
           },
           "202": {
-            "description": "Accepted -- Update request accepted; operation will complete asynchronously"
+            "description": "Accepted -- Update request accepted; operation will complete asynchronously",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1316,11 +1324,23 @@
             }
           },
           "202": {
-            "description": "Accepted -- populate availability zone accepted; operation will complete asynchronously"
+            "description": "Accepted -- populate availability zone accepted; operation will complete asynchronously",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
-            "description": "Error response describing why the operation failed."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Volumes_PopulateAvailabilityZones": {
@@ -7258,6 +7278,7 @@
         },
         "nicInfoList": {
           "type": "array",
+          "x-ms-identifiers": [],
           "description": "List of NIC information",
           "items": {
             "$ref": "#/definitions/nicInfo"
