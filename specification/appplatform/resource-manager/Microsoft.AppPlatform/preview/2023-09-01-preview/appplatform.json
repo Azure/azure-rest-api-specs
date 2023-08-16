@@ -12316,10 +12316,18 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/JarUploadedUserSourceInfo"
+          "$ref": "#/definitions/UploadedUserSourceInfo"
         }
       ],
       "properties": {
+        "runtimeVersion": {
+          "description": "Runtime version of the war file",
+          "type": "string"
+        },
+        "jvmOptions": {
+          "description": "JVM parameter",
+          "type": "string"
+        }
         "serverVersion": {
           "description": "Server version, currently only Apache Tomcat is supported",
           "type": "string"
