@@ -447,6 +447,22 @@
         "resolveConfiguration": {
           "$ref": "#/definitions/PrometheusRuleResolveConfiguration",
           "description": "Defines the configuration for resolving fired alerts. Only relevant for alerts."
+        },
+        "conditionType": {
+          "type": "string",
+          "description": "The type of condition to use. When DynamicThreshold is used, the expression should not be a predicate. Only relevant for alerts.",
+          "enum": [
+            "StaticThreshold",
+            "DynamicThreshold"
+          ]
+        },
+        "dynamicThresholdConfigurations": {
+          "$ref": "#/definitions/DynamicThresholdConfigurations",
+          "description": "Defines the configuration for dynamic thresholds. Only relevant for alerts."
+        },
+        "enrichmentConfiguration": {
+          "$ref": "#/definitions/EnrichmentConfiguration",
+          "description": "Defines the configuration for enriching fired alerts. Only relevant for alerts."
         }
       }
     },
@@ -486,6 +502,141 @@
         "timeToResolve": {
           "type": "string",
           "description": "Alert auto-resolution timeout.",
+          "format": "duration"
+        }
+      }
+    },
+    "DynamicThresholdConfigurations": {
+      "type": "object",
+      "description": "Specifies the dynamic threshold configuration.",
+      "properties": {
+        "operator": {
+          "type": "string",
+          "description": "The operator to use for dynamic threshold calculation.",
+          "enum": [
+            "GreaterOrLessThan",
+            "GreaterThan",
+            "LessThan"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        },
+        "sensitivity": {
+          "type": "string",
+          "description": "The sensitivity to use for dynamic threshold calculation.",
+          "enum": [
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "EnrichmentConfiguration": {
+      "type":"object",
+      "properties": {
+        "enrichment": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Enrichment"
+          },
+          "description": "The array of enrichments."
+        }
+      }
+    },
+    "Enrichment": {
+      "type": "object",
+      "description": "Specifies the enrichment item.",
+      "discriminator": "type",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The title of the enrichment item."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the enrichment item."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the enrichment item.",
+          "enum": [
+            "PrometheusInstantQuery",
+            "PrometheusRangeQuery"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "PrometheusBaseQueryEnrichment": {
+      "type": "object",
+      "description": "Specifies the base query enrichment.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Enrichment"
+        }
+      ],
+      "properties": {
+        "includeResults": {
+          "type": "boolean",
+          "description": "Include the query results in the alert."
+        },
+        "datasources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The array of Prometheus data sources."
+        },
+        "queryTemplate": {
+          "type": "string",
+          "description": "The query template."
+        },
+        "variables": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PrometheusInstantQueryEnrichment": {
+      "x-ms-discriminator-value": "PrometheusInstantQuery",
+      "type": "object",
+      "description": "Specifies Prometheus instant query enrichment.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrometheusBaseQueryEnrichment"
+        }
+      ]
+    },
+    "PrometheusRangeQueryEnrichment": {
+      "x-ms-discriminator-value": "PrometheusRangeQuery",
+      "type": "object",
+      "description": "Specifies Prometheus range query enrichment.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrometheusBaseQueryEnrichment"
+        }
+      ],
+      "properties": {
+        "LookbackPeriod": {
+          "type": "string",
+          "description": "The range of the query.",
+          "format": "duration"
+        },
+        "step": {
+          "type": "string",
+          "description": "The step of the query.",
           "format": "duration"
         }
       }
