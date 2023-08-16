@@ -466,7 +466,7 @@
           "$ref": "#/definitions/DynamicThresholdConfigurations",
           "description": "Defines the configuration for dynamic thresholds. Only relevant for alerts."
         },
-        "enrichmentConfiguration": {
+        "enrichmentConfigurations": {
           "$ref": "#/definitions/EnrichmentConfiguration",
           "description": "Defines the configuration for enriching fired alerts. Only relevant for alerts."
         }
@@ -544,8 +544,9 @@
     },
     "EnrichmentConfiguration": {
       "type":"object",
+      "description": "Specifies the enrichment configuration.",
       "properties": {
-        "enrichment": {
+        "enrichments": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Enrichment"
@@ -603,7 +604,7 @@
           },
           "description": "The array of Prometheus data sources."
         },
-        "queryTemplate": {
+        "query": {
           "type": "string",
           "description": "The query template."
         },
@@ -635,7 +636,7 @@
         }
       ],
       "properties": {
-        "LookbackPeriod": {
+        "lookbackPeriod": {
           "type": "string",
           "description": "The range of the query.",
           "format": "duration"
