@@ -440,4 +440,8 @@ directive:
   - suppress: ImplementPrivateEndpointAPIs
     from: Microsoft.RecoveryServices/stable/2021-06-01/bms.json
     reason: Addition of new API version is specific to MSI support for our service, to ensure sign off we commit we will take a fix for Private endpoint in Ni.
+  - suppress: TrackedResourceBeyondsThirdLevel
+    from: bms.json
+    where: $.definitions.RecoveryPointResource
+    reason: This is an existing resource in our service and is present across API version. Suppressing for API versions 2021-11-15, 2023-01-15 for fixing completeness for CRR Get recoverypoints API.
 ```
