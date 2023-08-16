@@ -115,7 +115,7 @@
             "$ref": "#/parameters/PricingName"
           },
           {
-            "$ref": "#/parameters/Pricing"
+            "$ref": "#/definitions/Pricing"
           }
         ],
         "responses": {
@@ -158,7 +158,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/ScopeResourceId"
           },
           {
-            "$ref": "#/parameters/PricingName"
+            "$ref": "#/definitions/Pricing"
           }
         ],
         "responses": {
@@ -210,7 +210,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PricingList"
+            "$ref": "#/parameters/Pricing"
             }
           },
           "default": {
@@ -236,6 +236,11 @@
           "items": {
             "$ref": "#/definitions/Pricing"
           }
+        },
+        "nextLink": {
+          "description": "The next page link.",
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
