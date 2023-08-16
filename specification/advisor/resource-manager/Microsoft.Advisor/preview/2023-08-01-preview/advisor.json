@@ -917,7 +917,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/trackedRecommendations": {
       "get": {
         "tags": [
-          "TrackedRecommendations",
           "GetTrackedRecommendations"
         ],
         "description": "Obtains tracked recommendations for a subscription.",
@@ -973,7 +972,6 @@
     "/{resourceUri}/providers/Microsoft.Advisor/trackedRecommendations/{trackedRecommendationId}": {
       "get": {
         "tags": [
-          "TrackedRecommendations",
           "GetTrackedRecommendations"
         ],
         "description": "Obtains details of a tracked recommendation.",
@@ -1020,7 +1018,6 @@
       },
       "patch": {
         "tags": [
-          "TrackedRecommendations",
           "PatchTrackedRecommendations"
         ],
         "description": "Update the state of a Tracked Recommendation.",
@@ -1054,8 +1051,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "OK. Successfully updated recommendation status."
+          "200": {
+            "description": "OK. Successfully updated recommendation status.",
+            "schema": {
+              "$ref": "#/definitions/ResourceTrackedRecommendationBase"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
