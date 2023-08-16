@@ -27,7 +27,7 @@ These are the global settings for the devcenter.
 ``` yaml
 openapi-type: data-plane
 azure-arm: false
-tag: package-preview-2023-09
+tag: package-2023-09-01-preview
 ```
 
 
