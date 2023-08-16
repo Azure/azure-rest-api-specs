@@ -1489,7 +1489,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects": {
       "get": {
         "summary": "Get all migrate projects.",
         "description": "Get all the migrate projects in the resource group.",
@@ -1545,7 +1545,7 @@
         "tags": [
           "MigrateProjectsController"
         ],
-        "operationId": "MigrateProjectsController_Get",
+        "operationId": "MigrateProjectsController_GetMigrateProject",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1590,7 +1590,7 @@
         ],
         "summary": "Create or update a new project with specified settings.",
         "description": "Create or update a new project by sending a json object of type 'migrateproject' as given in Models section as part of the Request Body. The project name is unique.\n\nThis operation is Idempotent.\n",
-        "operationId": "MigrateProjectsController_Create",
+        "operationId": "MigrateProjectsController_PutMigrateProject",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1657,7 +1657,7 @@
         ],
         "summary": "Delete the project",
         "description": "Delete the migrate project. It deletes summary of the project.",
-        "operationId": "MigrateProjectsController_Delete",
+        "operationId": "MigrateProjectsController_DeleteMigrateProject",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1702,7 +1702,7 @@
         ],
         "summary": "Update project.",
         "description": "Update a project with specified name. Supports partial updates, for example only tags can be provided.",
-        "operationId": "MigrateProjectsController_Update",
+        "operationId": "MigrateProjectsController_PatchMigrateProject",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1811,7 +1811,7 @@
         ],
         "summary": "Get the private endpoint connections.",
         "description": "Get all the private endpoint connections under a migrate project.",
-        "operationId": "PrivateEndpointConnectionController_ListPrivateEndpointConnections",
+        "operationId": "PrivateEndpointConnectionsController_GetPrivateEndpointConnections",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1987,7 +1987,7 @@
         ],
         "summary": "Delete the endpoint",
         "description": "Delete the private endpoint. Deleting non-existent private endpoint is a no-operation.",
-        "operationId": "PrivateEndpointConnectionController_Delete",
+        "operationId": "PrivateEndpointConnectionController_DeletePrivateEndpointConnection",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -2396,7 +2396,7 @@
         ],
         "summary": "Get the private link resource.",
         "description": "Get the private link resource with the specified name.",
-        "operationId": "PrivateLinkResourceController_Get",
+        "operationId": "PrivateLinkResourceController_GetPrivateLinkResource",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -2450,7 +2450,7 @@
         ],
         "summary": "Get the list of private link resources.",
         "description": "Get the list of private link resources under a resource group and migrate project.",
-        "operationId": "PrivateLinkResourceController_ListPrivateLinkResources",
+        "operationId": "PrivateLinkResourceController_GetPrivateLinkResources",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
