@@ -821,9 +821,6 @@
         "description": "Attempts automated repair steps to resolve common problems on a Dev Box. The Dev Box may restart during this operation.",
         "operationId": "DevBoxes_RepairDevBox",
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "operation-location"
-        },
         "responses": {
           "202": {
             "description": "The request was accepted.",
@@ -1194,7 +1191,7 @@
             "$ref": "#/parameters/DevBoxNameParameter"
           }
         ],
-        "operationId": "DevBoxOperations_List",
+        "operationId": "DevBoxes_ListOperations",
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
@@ -1249,7 +1246,7 @@
             "$ref": "#/parameters/DevBoxOperationIdParameter"
           }
         ],
-        "operationId": "DevBoxOperations_Get",
+        "operationId": "DevBoxes_GetOperation",
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
@@ -1346,6 +1343,10 @@
         "healthStatus": {
           "description": "Overall health status of the Pool. Indicates whether or not the Pool is available to create Dev Boxes.",
           "$ref": "#/definitions/PoolHealthStatus"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the pool."
         }
       },
       "required": [
