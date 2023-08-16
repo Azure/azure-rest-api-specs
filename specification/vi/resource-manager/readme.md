@@ -47,8 +47,6 @@ directive:
     reason: Design forces this behavior (and it's actually the correct behavior that doesn't violate Microsoft API guidelines).
   - code: ReferenceRedirection
     reason: Rename that does not affect api usage. It is solely semantic and does not violate Microsoft API guidelines.
-  - code: MISSING_APIS_IN_DEFAULT_TAG
-    reason: Classic account api's were deprecated.
 
 ```
 ---
