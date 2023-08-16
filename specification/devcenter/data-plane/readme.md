@@ -44,7 +44,10 @@ input-file:
 directive:
   - suppress: HostParametersValidation
     reason: Requires URL format for endpoint params, which violates R2003 and causes problems with codegen
+  - suppress: AddedRequiredProperty
+    reason: Adding required `uri` property on response only models. Previously approved for 2023-07-01-preview. This shows up only on comparison with last stable.
 ```
+
 ### Tag: package-2023-07-01-preview
 
 These settings apply only when `--tag=package-2023-07-01-preview` is specified on the command line.
