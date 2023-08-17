@@ -398,236 +398,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/agents": {
-      "get": {
-        "description": "Returns agents for the given account name.",
-        "operationId": "Agents_ListByAccount",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "List of Agents.",
-            "schema": {
-              "$ref": "#/definitions/AgentList"
-            }
-          },
-          "default": {
-            "description": "Error response describing the reason for operation failure.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Gets list of Agents by Account": {
-            "$ref": "./examples/Agents/Agents_ListByAccount.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/agents/{agentName}": {
-      "get": {
-        "description": "Returns agent details.",
-        "operationId": "AgentDetails_Get",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AgentNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Agent details.",
-            "schema": {
-              "$ref": "#/definitions/Agent"
-            }
-          },
-          "default": {
-            "description": "Error response describing the reason for operation failure.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Gets details for an agent": {
-            "$ref": "./examples/Agents/Agents_Get.json"
-          }
-        }
-      },
-      "put": {
-        "description": "Creates or updates an Agent.",
-        "operationId": "Agents_Create",
-        "x-ms-long-running-operation": false,
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AgentNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "agent",
-            "description": "Agent details.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Agent"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Agent was created or updated successfully.",
-            "schema": {
-              "$ref": "#/definitions/Agent"
-            }
-          },
-          "201": {
-            "description": "Agent was created or updated successfully.",
-            "schema": {
-              "$ref": "#/definitions/Agent"
-            }
-          },
-          "default": {
-            "description": "Error response describing the reason for operation failure.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Creates or updates Agent": {
-            "$ref": "./examples/Agents/Agents_Create.json"
-          }
-        }
-      },
-      "delete": {
-        "description": "Delete Agent.",
-        "operationId": "Agents_Delete",
-        "x-ms-long-running-operation": false,
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AgentNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Agent was deleted."
-          },
-          "204": {
-            "description": "Agent has been already deleted."
-          },
-          "default": {
-            "description": "Error response describing the reason for operation failure.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Deletes Agent": {
-            "$ref": "./examples/Agents/Agents_Delete.json"
-          }
-        }
-      },
-      "patch": {
-        "description": "Updates Agent.",
-        "operationId": "Agents_Update",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AgentNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "tagUpdatePayload",
-            "description": "Updated tags.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TagUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Agent updated successfully.",
-            "schema": {
-              "$ref": "#/definitions/Agent"
-            }
-          },
-          "default": {
-            "description": "Error response describing the reason for operation failure.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Updates Agent": {
-            "$ref": "./examples/Agents/Agents_Update.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/instances": {
       "get": {
         "description": "Returns instances for the given account name.",
@@ -1426,7 +1196,7 @@
         ],
         "responses": {
           "201": {
-            "description": "The create or update request was successful; the operation will complete asynchronously.",
+            "description": "The request was successful; the operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnectionProxy"
             }
@@ -1502,6 +1272,236 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/agents": {
+      "get": {
+        "description": "Returns agents for the given account name.",
+        "operationId": "Agents_ListByAccount",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Agents.",
+            "schema": {
+              "$ref": "#/definitions/AgentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets list of Agents by Account": {
+            "$ref": "./examples/Agents/Agents_ListByAccount.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/agents/{agentName}": {
+      "get": {
+        "description": "Returns agent details.",
+        "operationId": "AgentDetails_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AgentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent details.",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets details for an agent": {
+            "$ref": "./examples/Agents/Agents_Get.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Creates or updates an Agent.",
+        "operationId": "Agents_Create",
+        "x-ms-long-running-operation": false,
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AgentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "agent",
+            "description": "Agent details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent was created or updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "201": {
+            "description": "Agent was created or updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates Agent": {
+            "$ref": "./examples/Agents/Agents_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete Agent.",
+        "operationId": "Agents_Delete",
+        "x-ms-long-running-operation": false,
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AgentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent was deleted."
+          },
+          "204": {
+            "description": "Agent has been already deleted."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes Agent": {
+            "$ref": "./examples/Agents/Agents_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates Agent.",
+        "operationId": "Agents_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AgentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "tagUpdatePayload",
+            "description": "Updated tags.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates Agent": {
+            "$ref": "./examples/Agents/Agents_Update.json"
+          }
         }
       }
     },
@@ -1651,298 +1651,6 @@
           "description": "The type of identity used for the resource."
         }
       }
-    },
-    "ProtocolId": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The protocol Id name",
-          "type": "string"
-        },
-        "version": {
-          "description": "The protocol Id version",
-          "type": "integer",
-          "format": "int64"
-        }
-      },
-      "description": "The protocol identifier representing the version of the device update protocol the agent supports."
-    },
-    "AgentInfo": {
-      "type": "object",
-      "properties": {
-        "protocolId": {
-          "description": "The protocol identifier representing the version of the device update protocol the agent supports",
-          "$ref": "#/definitions/ProtocolId"
-        },
-        "compatibilityProperties": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "The compat properties of the agent. This object can be thought of as a set of key-value pairs where the key is the name of the compatibility property and the value is the value of the compatibility property. There will always be at least 1 compat property and no more than 5"
-        },
-        "version": {
-          "description": "The version of the agent info used to distinguish whether the agent info needs to be updated from the agent",
-          "type": "string"
-        }
-      },
-      "description": "The agent info for the agent that indicates what updates it is compatible with."
-    },
-    "UpdateId": {
-      "type": "object",
-      "properties": {
-        "provider": {
-          "type": "string",
-          "description": "Update provider."
-        },
-        "name": {
-          "type": "string",
-          "description": "Update name."
-        },
-        "version": {
-          "type": "string",
-          "description": "Update version."
-        }
-      },
-      "required": [
-        "provider",
-        "name",
-        "version"
-      ],
-      "description": "Update identifier."
-    },
-    "DeploymentAction": {
-      "type": "string",
-      "enum": [
-        "ApplyDeployment"
-      ],
-      "x-ms-enum": {
-        "name": "DeploymentAction",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "ApplyDeployment",
-            "name": "ApplyDeployment",
-            "description": "Apply the deployment to the agent"
-          }
-        ]
-      },
-      "description": "The deployment action the agent take"
-    },
-    "DeploymentWorkflow": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Deployment identifier."
-        },
-        "action": {
-          "$ref": "#/definitions/DeploymentAction",
-          "description": "Deployment action."
-        },
-        "retryTimestamp": {
-          "type": "string",
-          "description": "Datetime when the call requested the deployment be retried."
-        }
-      },
-      "required": [
-        "id",
-        "action"
-      ],
-      "description": "Deployment workflow metadata."
-    },
-    "StepResult": {
-      "type": "object",
-      "properties": {
-        "update": {
-          "$ref": "#/definitions/UpdateId",
-          "description": "The update that this step installs if it is of reference type."
-        },
-        "description": {
-          "type": "string",
-          "description": "Step description."
-        },
-        "resultCode": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Install result code."
-        },
-        "extendedResultCode": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Install extended result code"
-        },
-        "resultDetails": {
-          "type": "string",
-          "description": "A string containing further details about the install result"
-        }
-      },
-      "required": [
-        "resultCode",
-        "extendedResultCode"
-      ],
-      "description": "The step result under an update."
-    },
-    "InstallResult": {
-      "type": "object",
-      "properties": {
-        "resultCode": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Install result code."
-        },
-        "extendedResultCode": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Install extended result code"
-        },
-        "resultDetails": {
-          "type": "string",
-          "description": "A string containing further details about the install result"
-        },
-        "stepResults": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/StepResult",
-            "description": "Step results"
-          },
-          "x-ms-identifiers": [],
-          "description": "Array of step results"
-        }
-      },
-      "required": [
-        "resultCode",
-        "extendedResultCode"
-      ],
-      "description": "The install result of an update and any step results under it."
-    },
-    "DeviceDeploymentState": {
-      "type": "string",
-      "enum": [
-        "Succeeded",
-        "InProgress",
-        "Canceled",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "DeviceDeploymentState",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Succeeded",
-            "name": "Succeeded",
-            "description": "Deployment has completed with success."
-          },
-          {
-            "value": "InProgress",
-            "name": "InProgress",
-            "description": "Deployment is in progress."
-          },
-          {
-            "value": "Canceled",
-            "name": "Canceled",
-            "description": "Deployment was canceled."
-          },
-          {
-            "value": "Failed",
-            "name": "Failed",
-            "description": "Deployment has completed with failure."
-          }
-        ]
-      },
-      "description": "Deployment state."
-    },
-    "DeploymentInfo": {
-      "type": "object",
-      "properties": {
-        "workflow": {
-          "description": "The deployment workflow metadata",
-          "$ref": "#/definitions/DeploymentWorkflow"
-        },
-        "update": {
-          "description": "The update for the deployment",
-          "$ref": "#/definitions/UpdateId"
-        },
-        "state": {
-          "description": "The state the agent is in this deployment",
-          "$ref": "#/definitions/DeviceDeploymentState"
-        },
-        "installResult": {
-          "description": "The deployment install result",
-          "$ref": "#/definitions/InstallResult"
-        }
-      },
-      "description": "The agent metadata for a deployment."
-    },
-    "Agent": {
-      "description": "Device Update Agent details.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Device Update Agent properties.",
-          "x-ms-client-flatten": true,
-          "type": "object",
-          "properties": {
-            "provisioningState": {
-              "description": "Provisioning state.",
-              "type": "string",
-              "enum": [
-                "Succeeded",
-                "Deleted",
-                "Failed",
-                "Canceled",
-                "Accepted",
-                "Creating"
-              ],
-              "readOnly": false,
-              "x-ms-enum": {
-                "name": "ProvisioningState",
-                "modelAsString": true
-              }
-            },
-            "agentId": {
-              "description": "This is the external device Id of the Microsoft.Devices/Device resource referenced by this agent",
-              "type": "string",
-              "x-ms-mutability": [
-                "create",
-                "read"
-              ]
-            },
-            "deviceClassId": {
-              "description": "This is the ID of the device class of this agent",
-              "type": "string"
-            },
-            "deviceResourceId": {
-              "description": "This is the resource Id of the Microsoft.Devices/Device resource referenced by this agent",
-              "type": "string"
-            },
-            "activeMqttBrokerEndpoint": {
-              "description": "This is the active MQTT broker endpoint for this agent",
-              "type": "string"
-            },
-            "agentInfo": {
-              "description": "This is the compatibility info for the agent that indicates what version of the device update protocol it supports and its compat properties.",
-              "$ref": "#/definitions/AgentInfo"
-            },
-            "latestDeploymentInfo": {
-              "description": "This is the metadata about the latest deployment the agent has attempted",
-              "$ref": "#/definitions/DeploymentInfo"
-            },
-            "installedUpdateId": {
-              "description": "The current installed update Id on this agent",
-              "$ref": "#/definitions/UpdateId"
-            }
-          }
-        }
-      },
-      "required": [
-        "properties"
-      ]
     },
     "Encryption": {
       "type": "object",
@@ -2118,24 +1826,6 @@
       "required": [
         "resourceId"
       ]
-    },
-    "AgentList": {
-      "description": "List of Agents.",
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The link used to get the next page of Agents list.",
-          "type": "string"
-        },
-        "value": {
-          "description": "List of Agents.",
-          "type": "array",
-          "x-ms-identifiers": [],
-          "items": {
-            "$ref": "#/definitions/Agent"
-          }
-        }
-      }
     },
     "AccountUpdate": {
       "description": "Request payload used to update and existing Accounts.",
@@ -2522,6 +2212,316 @@
         "name": "PrivateEndpointConnectionProxyProvisioningState",
         "modelAsString": true
       }
+    },
+    "AgentList": {
+      "description": "List of Agents.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of Agents list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "List of Agents.",
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/Agent"
+          }
+        }
+      }
+    },
+    "ProtocolId": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The protocol Id name",
+          "type": "string"
+        },
+        "version": {
+          "description": "The protocol Id version",
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "description": "The protocol identifier representing the version of the device update protocol the agent supports."
+    },
+    "AgentInfo": {
+      "type": "object",
+      "properties": {
+        "protocolId": {
+          "description": "The protocol identifier representing the version of the device update protocol the agent supports",
+          "$ref": "#/definitions/ProtocolId"
+        },
+        "compatibilityProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The compat properties of the agent. This object can be thought of as a set of key-value pairs where the key is the name of the compatibility property and the value is the value of the compatibility property. There will always be at least 1 compat property and no more than 5"
+        },
+        "version": {
+          "description": "The version of the agent info used to distinguish whether the agent info needs to be updated from the agent",
+          "type": "string"
+        }
+      },
+      "description": "The agent info for the agent that indicates what updates it is compatible with."
+    },
+    "UpdateId": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Update provider."
+        },
+        "name": {
+          "type": "string",
+          "description": "Update name."
+        },
+        "version": {
+          "type": "string",
+          "description": "Update version."
+        }
+      },
+      "required": [
+        "provider",
+        "name",
+        "version"
+      ],
+      "description": "Update identifier."
+    },
+    "DeploymentAction": {
+      "type": "string",
+      "enum": [
+        "ApplyDeployment"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "ApplyDeployment",
+            "name": "ApplyDeployment",
+            "description": "Apply the deployment to the agent"
+          }
+        ]
+      },
+      "description": "The deployment action the agent take"
+    },
+    "DeploymentWorkflow": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Deployment identifier."
+        },
+        "action": {
+          "$ref": "#/definitions/DeploymentAction",
+          "description": "Deployment action."
+        },
+        "retryTimestamp": {
+          "type": "string",
+          "description": "Datetime when the call requested the deployment be retried."
+        }
+      },
+      "required": [
+        "id",
+        "action"
+      ],
+      "description": "Deployment workflow metadata."
+    },
+    "StepResult": {
+      "type": "object",
+      "properties": {
+        "update": {
+          "$ref": "#/definitions/UpdateId",
+          "description": "The update that this step installs if it is of reference type."
+        },
+        "description": {
+          "type": "string",
+          "description": "Step description."
+        },
+        "resultCode": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Install result code."
+        },
+        "extendedResultCode": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Install extended result code"
+        },
+        "resultDetails": {
+          "type": "string",
+          "description": "A string containing further details about the install result"
+        }
+      },
+      "required": [
+        "resultCode",
+        "extendedResultCode"
+      ],
+      "description": "The step result under an update."
+    },
+    "InstallResult": {
+      "type": "object",
+      "properties": {
+        "resultCode": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Install result code."
+        },
+        "extendedResultCode": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Install extended result code"
+        },
+        "resultDetails": {
+          "type": "string",
+          "description": "A string containing further details about the install result"
+        },
+        "stepResults": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StepResult",
+            "description": "Step results"
+          },
+          "x-ms-identifiers": [],
+          "description": "Array of step results"
+        }
+      },
+      "required": [
+        "resultCode",
+        "extendedResultCode"
+      ],
+      "description": "The install result of an update and any step results under it."
+    },
+    "DeviceDeploymentState": {
+      "type": "string",
+      "enum": [
+        "Succeeded",
+        "InProgress",
+        "Canceled",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceDeploymentState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Succeeded",
+            "name": "Succeeded",
+            "description": "Deployment has completed with success."
+          },
+          {
+            "value": "InProgress",
+            "name": "InProgress",
+            "description": "Deployment is in progress."
+          },
+          {
+            "value": "Canceled",
+            "name": "Canceled",
+            "description": "Deployment was canceled."
+          },
+          {
+            "value": "Failed",
+            "name": "Failed",
+            "description": "Deployment has completed with failure."
+          }
+        ]
+      },
+      "description": "Deployment state."
+    },
+    "DeploymentInfo": {
+      "type": "object",
+      "properties": {
+        "workflow": {
+          "description": "The deployment workflow metadata",
+          "$ref": "#/definitions/DeploymentWorkflow"
+        },
+        "update": {
+          "description": "The update for the deployment",
+          "$ref": "#/definitions/UpdateId"
+        },
+        "state": {
+          "description": "The state the agent is in this deployment",
+          "$ref": "#/definitions/DeviceDeploymentState"
+        },
+        "installResult": {
+          "description": "The deployment install result",
+          "$ref": "#/definitions/InstallResult"
+        }
+      },
+      "description": "The agent metadata for a deployment."
+    },
+    "Agent": {
+      "description": "Device Update Agent details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Device Update Agent properties.",
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "description": "Provisioning state.",
+              "type": "string",
+              "enum": [
+                "Succeeded",
+                "Deleted",
+                "Failed",
+                "Canceled",
+                "Accepted",
+                "Creating"
+              ],
+              "readOnly": false,
+              "x-ms-enum": {
+                "name": "ProvisioningState",
+                "modelAsString": true
+              }
+            },
+            "agentId": {
+              "description": "This is the external device Id of the Microsoft.Devices/Device resource referenced by this agent",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "deviceClassId": {
+              "description": "This is the ID of the device class of this agent",
+              "type": "string"
+            },
+            "deviceResourceId": {
+              "description": "This is the resource Id of the Microsoft.Devices/Device resource referenced by this agent",
+              "type": "string"
+            },
+            "activeMqttBrokerEndpoint": {
+              "description": "This is the active MQTT broker endpoint for this agent",
+              "type": "string"
+            },
+            "agentInfo": {
+              "description": "This is the compatibility info for the agent that indicates what version of the device update protocol it supports and its compat properties.",
+              "$ref": "#/definitions/AgentInfo"
+            },
+            "latestDeploymentInfo": {
+              "description": "This is the metadata about the latest deployment the agent has attempted",
+              "$ref": "#/definitions/DeploymentInfo"
+            },
+            "installedUpdateId": {
+              "description": "The current installed update Id on this agent",
+              "$ref": "#/definitions/UpdateId"
+            }
+          }
+        }
+      },
+      "required": [
+        "properties"
+      ]
     }
   },
   "parameters": {
