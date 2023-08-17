@@ -4417,6 +4417,226 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/queryWafLogAnalyticsMetrics": {
+      "post": {
+        "tags": [
+          "WafLogAnalytics"
+        ],
+        "operationId": "LogAnalytics_QueryWafLogAnalyticsMetrics",
+        "x-ms-examples": {
+          "LogAnalytics_GetWafLogAnalyticsMetrics": {
+            "$ref": "./examples/LogAnalytics_QueryWafLogAnalyticsMetrics.json"
+          }
+        },
+        "description": "Get Waf related log analytics report for AFD profile.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group. which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "wafMetricsParameters",
+            "in": "body",
+            "description": "Waf Log metrics query parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WafMetricsParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/WafMetricsResponse"
+            }
+          },
+          "default": {
+            "description": "Azure Front Door Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/queryWafLogAnalyticsRankings": {
+      "post": {
+        "tags": [
+          "WafLogAnalytics"
+        ],
+        "operationId": "LogAnalytics_QueryWafLogAnalyticsRankings",
+        "x-ms-examples": {
+          "LogAnalytics_QueryWafLogAnalyticsRankings": {
+            "$ref": "./examples/LogAnalytics_QueryWafLogAnalyticsRankings.json"
+          }
+        },
+        "description": "Get WAF log analytics charts for AFD profile",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group. which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "wafAnalyticsRankingsParameters",
+            "in": "body",
+            "description": "Waf Log metrics query parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WafAnalyticsRankingsParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/WafRankingsResponse"
+            }
+          },
+          "default": {
+            "description": "Azure Front Door Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/queryLogAnalyticsMetrics": {
+      "post": {
+        "tags": [
+          "LogAnalytics"
+        ],
+        "operationId": "LogAnalytics_QueryLogAnalyticsMetrics",
+        "x-ms-examples": {
+          "LogAnalytics_QueryLogAnalyticsMetrics": {
+            "$ref": "./examples/LogAnalytics_QueryLogAnalyticsMetrics.json"
+          }
+        },
+        "description": "Get log report for AFD profile",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "analyticsMetricsParameters",
+            "in": "body",
+            "description": "Log metrics query parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalyticsMetricsParameters"
+            }
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group. which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/MetricsResponse"
+            }
+          },
+          "default": {
+            "description": "Azure Front Door Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/queryLogAnalyticsRankings": {
+      "post": {
+        "tags": [
+          "LogAnalytics"
+        ],
+        "operationId": "LogAnalytics_QueryLogAnalyticsRankings",
+        "x-ms-examples": {
+          "LogAnalytics_GetLogAnalyticsRankings": {
+            "$ref": "./examples/LogAnalytics_QueryLogAnalyticsRankings.json"
+          }
+        },
+        "description": "Get log analytics ranking report for AFD profile",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group. which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "analyticsRankingsParameters",
+            "in": "body",
+            "description": "Analytics ranking parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalyticsRankingsParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/RankingsResponse"
+            }
+          },
+          "default": {
+            "description": "Azure Front Door Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -6121,6 +6341,364 @@
         "hostName": {
           "description": "The host name to validate.",
           "type": "string"
+        }
+      }
+    },
+    "WafMetricsParameters": {
+      "description": "Input of QueryWafAnalyticsMetrics API.",
+      "type": "object",
+      "required": [
+        "metrics",
+        "dateTimeBegin",
+        "dateTimeEnd",
+        "customDomains",
+        "protocols",
+        "granularity"
+      ],
+      "properties": {
+        "metrics": {
+          "type": "array",
+          "collectionFormat": "multi",
+          "items": {
+            "type": "string",
+            "enum": [
+              "clientRequestCount"
+            ],
+            "x-ms-enum": {
+              "name": "WafMetric",
+              "modelAsString": true
+            }
+          }
+        },
+        "dateTimeBegin": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "dateTimeEnd": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "granularity": {
+          "type": "string",
+          "enum": [
+            "PT5M",
+            "PT1H",
+            "P1D"
+          ],
+          "x-ms-enum": {
+            "name": "WafGranularity",
+            "modelAsString": true
+          }
+        },
+        "actions": {
+          "type": "array",
+          "collectionFormat": "multi",
+          "items": {
+            "type": "string",
+            "enum": [
+              "allow",
+              "block",
+              "log",
+              "redirect"
+            ],
+            "x-ms-enum": {
+              "name": "WafAction",
+              "modelAsString": true
+            }
+          }
+        },
+        "groupBy": {
+          "type": "array",
+          "collectionFormat": "multi",
+          "items": {
+            "type": "string",
+            "enum": [
+              "httpStatusCode",
+              "customDomain"
+            ],
+            "x-ms-enum": {
+              "name": "WafRankingGroupBy",
+              "modelAsString": true
+            }
+          }
+        },
+        "ruleTypes": {
+          "type": "array",
+          "collectionFormat": "multi",
+          "items": {
+            "type": "string",
+            "enum": [
+              "managed",
+              "custom",
+              "bot"
+            ],
+            "x-ms-enum": {
+              "name": "WafRuleType",
+              "modelAsString": true
+            }
+          }
+        }
+      }
+    },
+    "WafAnalyticsRankingsParameters":{
+      "description": "Input of QueryWAFAnalyticsRanking API.",
+      "type": "object",
+      "required": [
+        "metrics",
+        "dateTimeBegin",
+        "dateTimeEnd",
+        "maxRanking",
+        "rankings"
+      ],
+      "properties": {
+        "metrics": {
+          "type": "array",
+          "collectionFormat": "multi",
+          "items": {
+            "type": "string",
+            "enum": [
+              "clientRequestCount"
+            ],
+            "x-ms-enum": {
+              "name": "WafMetric",
+              "modelAsString": true
+            }
+          }
+        },
+        "dateTimeBegin": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "dateTimeEnd": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "maxRanking": {
+          "name": "maxRanking",
+          "type": "integer",
+          "format": "int32"
+        },
+        "rankings": {
+          "type": "array",
+          "collectionFormat": "multi",
+          "items": {
+            "type": "string",
+            "enum": [
+              "action",
+              "ruleGroup",
+              "ruleId",
+              "userAgent",
+              "clientIp",
+              "url",
+              "countryOrRegion",
+              "ruleType"
+            ],
+            "x-ms-enum": {
+              "name": "WafRankingType",
+              "modelAsString": true
+            }
+          }
+        },
+        "actions": {
+          "type": "array",
+          "collectionFormat": "multi",
+          "items": {
+            "type": "string",
+            "enum": [
+              "allow",
+              "block",
+              "log",
+              "redirect"
+            ],
+            "x-ms-enum": {
+              "name": "WafAction",
+              "modelAsString": true
+            }
+          }
+        },
+        "ruleTypes": {
+          "type": "array",
+          "collectionFormat": "multi",
+          "items": {
+            "type": "string",
+            "enum": [
+              "managed",
+              "custom",
+              "bot"
+            ],
+            "x-ms-enum": {
+              "name": "WafRuleType",
+              "modelAsString": true
+            }
+          }
+        }
+      }
+    },
+    "AnalyticsRankingsParameters": {
+      "description": "Input of QueryAnalyticsMetrics API.",
+      "type": "object",
+      "required": [
+        "rankings",
+        "metrics",
+        "dateTimeBegin",
+        "dateTimeEnd",
+        "maxRanking"
+      ],
+      "properties": {
+        "rankings": {
+          "type": "array",
+          "collectionFormat": "multi",
+          "items": {
+            "type": "string",
+            "enum": [
+              "url",
+              "referrer",
+              "browser",
+              "userAgent",
+              "countryOrRegion"
+            ],
+            "x-ms-enum": {
+              "name": "LogRanking",
+              "modelAsString": true
+            }
+          }
+        },
+        "metrics": {
+          "type": "array",
+          "collectionFormat": "multi",
+          "items": {
+            "type": "string",
+            "enum": [
+              "clientRequestCount",
+              "clientRequestTraffic",
+              "hitCount",
+              "missCount",
+              "userErrorCount",
+              "errorCount"
+            ],
+            "x-ms-enum": {
+              "name": "LogRankingMetric",
+              "modelAsString": true
+            }
+          }
+        },
+        "maxRanking": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "dateTimeBegin": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "dateTimeEnd": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "customDomains": {
+          "type": "array",
+          "collectionFormat": "multi",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AnalyticsMetricsParameters": {
+      "description": "Input of QueryAnalyticsMetrics API.",
+      "type": "object",
+      "required": [
+        "metrics",
+        "dateTimeBegin",
+        "dateTimeEnd",
+        "customDomains",
+        "protocols",
+        "granularity"
+      ],
+      "properties": {
+        "metrics": {
+          "type": "array",
+          "collectionFormat": "multi",
+          "items": {
+            "type": "string",
+            "enum": [
+              "clientRequestCount",
+              "clientRequestTraffic",
+              "clientRequestBandwidth",
+              "originRequestTraffic",
+              "originRequestBandwidth",
+              "totalLatency"
+            ],
+            "x-ms-enum": {
+              "name": "LogMetric",
+              "modelAsString": true
+            }
+          }
+        },
+        "dateTimeBegin": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "dateTimeEnd": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "granularity": {
+          "type": "string",
+          "enum": [
+            "PT5M",
+            "PT1H",
+            "P1D"
+          ],
+          "x-ms-enum": {
+            "name": "LogMetricsGranularity",
+            "modelAsString": true
+          }
+        },
+        "groupBy": {
+          "type": "array",
+          "collectionFormat": "multi",
+          "items": {
+            "type": "string",
+            "enum": [
+              "httpStatusCode",
+              "protocol",
+              "cacheStatus",
+              "countryOrRegion",
+              "customDomain"
+            ],
+            "x-ms-enum": {
+              "name": "LogMetricsGroupBy",
+              "modelAsString": true
+            }
+          }
+        },
+        "continents": {
+          "type": "array",
+          "collectionFormat": "multi",
+          "items": {
+            "type": "string"
+          }
+        },
+        "countryOrRegions": {
+          "type": "array",
+          "collectionFormat": "multi",
+          "items": {
+            "type": "string"
+          }
+        },
+        "customDomains": {
+          "type": "array",
+          "collectionFormat": "multi",
+          "items": {
+            "type": "string"
+          }
+        },
+        "protocols": {
+          "type": "array",
+          "collectionFormat": "multi",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
