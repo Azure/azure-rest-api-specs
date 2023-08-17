@@ -16,6 +16,412 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{targetResourceName}/providers/Microsoft.DataMigration/databaseMigrations/{migrationName}": {
+      "get": {
+        "tags": [
+          "DatabaseMigrationsCosmosDbMongo"
+        ],
+        "description": "Get Database Migration resource.",
+        "operationId": "DatabaseMigrationsCosmosDbMongo_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "targetResourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/MigrationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DatabaseMigrationCosmosDbMongo"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was provided for parameter '{0}'.\n\n * 400 EmptyRequiredRequestBody - The request body must not be empty.\n\n * 400 GenericUser - User Failure when calling other Resource Provider.\n\n * 400 OperationIdNotFound - Operation ID '{0}' not found.\n\n * 400 OperationTypeNotFound - Operation Type '{0}' not found.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 InvalidLocation - Invalid Location: '{0}'. Location should match selected Azure target location '{1}'.\n\n * 400 DeleteMigrationServiceTaskNotAllowedInProgress - Migration service task '{0}' is currently in progress. To delete the task, please wait until the migration service task has completed or cancel the task manually, and then retry deleting the migration service task. Alternatively, use the force delete option to cancel ongoing operations and delete.\n\n * 400 RequestFailed - Request to the resource '{0}' failed. Error code : '{1}'. HTTP status code : '{2}'. Error message : '{3}'.\n\n * 400 DeleteMigrationNotAllowedMigrationInProgress - Database migration to the target resource '{0}' is currently in progress. To delete the migration, please wait until the migration has completed or cancel the migration manually, and then retry deleting the migration. Alternatively, use the force delete option to cancel ongoing operations and delete\n\n * 400 DeleteMigrationNotAllowedDeleteInProgress - Database migration to the target resource '{0}' is currently deleting. Please wait until the delete operation is complete\n\n * 400 MigrationRetryNotAllowed - Migration is not in a retriable state. Migration must be in state WaitForRetry. Current state: '{0}', Target server:'{1}', Target database: '{2}'.\n\n * 400 TestConnectionFailed - Failed to test connections using provided Integration Runtime. Error details: '{0}'\n\n * 400 MigrationStillValidating - Migration is still being validated. {0} cannot be performed. Target server:'{1}', Target database: '{2}'.\n\n * 400 IntegrationRuntimeIsNotOnline - Integration Runtime '{0}' is not online for resource group '{1}' subscription '{2}'\n\n * 403 AccessDenied - Access denied.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 405 SubscriptionNotReady - Subscription is not in Ready state.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SubscriptionOperationInProgress - An operation on subscription is already in progress\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out.\n\n * 500 GenericSystem - System Failure when calling other Resource Provider.\n\n * 500 AdfCleanupFailureAfterMigration - Failed to clean up ADF resources after migration has completed successfully. Target server:'{0}', Target database: '{1}', Error details: '{2}'."
+          }
+        },
+        "x-ms-examples": {
+          "Get Mongo to CosmosDb Mongo(RU) database Migration without the expand parameter.": {
+            "$ref": "./examples/SqlDbGetDatabaseMigration.json"
+          },
+          "Get Mongo to CosmosDb Mongo(RU) database Migration with the expand parameter.": {
+            "$ref": "./examples/SqlDbGetDatabaseMigrationExpanded.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DatabaseMigrationsCosmosDbMongo"
+        ],
+        "description": "Create or Update Database Migration resource.",
+        "operationId": "DatabaseMigrationsCosmosDbMongo_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "targetResourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/MigrationNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Details of CosmosDB for Mongo API Migration resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabaseMigrationCosmosDbMongo"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DatabaseMigrationCosmosDbMongo"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was provided for parameter '{0}'.\n\n * 400 EmptyRequiredRequestBody - The request body must not be empty.\n\n * 400 GenericUser - User Failure when calling other Resource Provider.\n\n * 400 OperationIdNotFound - Operation ID '{0}' not found.\n\n * 400 OperationTypeNotFound - Operation Type '{0}' not found.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 InvalidLocation - Invalid Location: '{0}'. Location should match selected Azure target location '{1}'.\n\n * 400 DeleteMigrationServiceTaskNotAllowedInProgress - Migration service task '{0}' is currently in progress. To delete the task, please wait until the migration service task has completed or cancel the task manually, and then retry deleting the migration service task. Alternatively, use the force delete option to cancel ongoing operations and delete.\n\n * 400 RequestFailed - Request to the resource '{0}' failed. Error code : '{1}'. HTTP status code : '{2}'. Error message : '{3}'.\n\n * 400 DeleteMigrationNotAllowedMigrationInProgress - Database migration to the target resource '{0}' is currently in progress. To delete the migration, please wait until the migration has completed or cancel the migration manually, and then retry deleting the migration. Alternatively, use the force delete option to cancel ongoing operations and delete\n\n * 400 DeleteMigrationNotAllowedDeleteInProgress - Database migration to the target resource '{0}' is currently deleting. Please wait until the delete operation is complete\n\n * 400 MigrationRetryNotAllowed - Migration is not in a retriable state. Migration must be in state WaitForRetry. Current state: '{0}', Target server:'{1}', Target database: '{2}'.\n\n * 400 TestConnectionFailed - Failed to test connections using provided Integration Runtime. Error details: '{0}'\n\n * 400 MigrationStillValidating - Migration is still being validated. {0} cannot be performed. Target server:'{1}', Target database: '{2}'.\n\n * 400 IntegrationRuntimeIsNotOnline - Integration Runtime '{0}' is not online for resource group '{1}' subscription '{2}'\n\n * 403 AccessDenied - Access denied.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 405 SubscriptionNotReady - Subscription is not in Ready state.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SubscriptionOperationInProgress - An operation on subscription is already in progress\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out.\n\n * 500 GenericSystem - System Failure when calling other Resource Provider.\n\n * 500 AdfCleanupFailureAfterMigration - Failed to clean up ADF resources after migration has completed successfully. Target server:'{0}', Target database: '{1}', Error details: '{2}'."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create Mongo to CosmosDb Mongo(RU) Database Migration resource with Minimum parameters.": {
+            "$ref": "./examples/SqlDbCreateOrUpdateDatabaseMigrationMIN.json"
+          },
+          "Create Mongo to CosmosDb Mongo(RU) Database Migration resource with Maximum parameters.": {
+            "$ref": "./examples/SqlDbCreateOrUpdateDatabaseMigrationMAX.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DatabaseMigrationsCosmosDbMongo"
+        ],
+        "description": "Delete Database Migration resource.",
+        "operationId": "DatabaseMigrationsCosmosDbMongo_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "targetResourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/MigrationNameParameter"
+          },
+          {
+            "name": "force",
+            "in": "query",
+            "description": "Optional force delete boolean. If this is provided as true, migration will be deleted even if active.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was provided for parameter '{0}'.\n\n * 400 EmptyRequiredRequestBody - The request body must not be empty.\n\n * 400 GenericUser - User Failure when calling other Resource Provider.\n\n * 400 OperationIdNotFound - Operation ID '{0}' not found.\n\n * 400 OperationTypeNotFound - Operation Type '{0}' not found.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 InvalidLocation - Invalid Location: '{0}'. Location should match selected Azure target location '{1}'.\n\n * 400 DeleteMigrationServiceTaskNotAllowedInProgress - Migration service task '{0}' is currently in progress. To delete the task, please wait until the migration service task has completed or cancel the task manually, and then retry deleting the migration service task. Alternatively, use the force delete option to cancel ongoing operations and delete.\n\n * 400 RequestFailed - Request to the resource '{0}' failed. Error code : '{1}'. HTTP status code : '{2}'. Error message : '{3}'.\n\n * 400 DeleteMigrationNotAllowedMigrationInProgress - Database migration to the target resource '{0}' is currently in progress. To delete the migration, please wait until the migration has completed or cancel the migration manually, and then retry deleting the migration. Alternatively, use the force delete option to cancel ongoing operations and delete\n\n * 400 DeleteMigrationNotAllowedDeleteInProgress - Database migration to the target resource '{0}' is currently deleting. Please wait until the delete operation is complete\n\n * 400 MigrationRetryNotAllowed - Migration is not in a retriable state. Migration must be in state WaitForRetry. Current state: '{0}', Target server:'{1}', Target database: '{2}'.\n\n * 400 TestConnectionFailed - Failed to test connections using provided Integration Runtime. Error details: '{0}'\n\n * 400 MigrationStillValidating - Migration is still being validated. {0} cannot be performed. Target server:'{1}', Target database: '{2}'.\n\n * 400 IntegrationRuntimeIsNotOnline - Integration Runtime '{0}' is not online for resource group '{1}' subscription '{2}'\n\n * 403 AccessDenied - Access denied.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 405 SubscriptionNotReady - Subscription is not in Ready state.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SubscriptionOperationInProgress - An operation on subscription is already in progress\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out.\n\n * 500 GenericSystem - System Failure when calling other Resource Provider.\n\n * 500 AdfCleanupFailureAfterMigration - Failed to clean up ADF resources after migration has completed successfully. Target server:'{0}', Target database: '{1}', Error details: '{2}'."
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete Mongo to CosmosDb Mongo(RU) Database Migration resource.": {
+            "$ref": "./examples/SqlDbDeleteDatabaseMigration.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{targetResourceName}/providers/Microsoft.DataMigration/databaseMigrations": {
+      "get": {
+        "tags": [
+          "DatabaseMigrationsCosmosDbMongo"
+        ],
+        "description": "Get Database Migration resources for the scope.",
+        "operationId": "DatabaseMigrationsCosmosDbMongo_GetForScope",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "targetResourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DatabaseMigrationCosmosDbMongoListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was provided for parameter '{0}'.\n\n * 400 EmptyRequiredRequestBody - The request body must not be empty.\n\n * 400 GenericUser - User Failure when calling other Resource Provider.\n\n * 400 OperationIdNotFound - Operation ID '{0}' not found.\n\n * 400 OperationTypeNotFound - Operation Type '{0}' not found.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 InvalidLocation - Invalid Location: '{0}'. Location should match selected Azure target location '{1}'.\n\n * 400 DeleteMigrationServiceTaskNotAllowedInProgress - Migration service task '{0}' is currently in progress. To delete the task, please wait until the migration service task has completed or cancel the task manually, and then retry deleting the migration service task. Alternatively, use the force delete option to cancel ongoing operations and delete.\n\n * 400 RequestFailed - Request to the resource '{0}' failed. Error code : '{1}'. HTTP status code : '{2}'. Error message : '{3}'.\n\n * 400 DeleteMigrationNotAllowedMigrationInProgress - Database migration to the target resource '{0}' is currently in progress. To delete the migration, please wait until the migration has completed or cancel the migration manually, and then retry deleting the migration. Alternatively, use the force delete option to cancel ongoing operations and delete\n\n * 400 DeleteMigrationNotAllowedDeleteInProgress - Database migration to the target resource '{0}' is currently deleting. Please wait until the delete operation is complete\n\n * 400 MigrationRetryNotAllowed - Migration is not in a retriable state. Migration must be in state WaitForRetry. Current state: '{0}', Target server:'{1}', Target database: '{2}'.\n\n * 400 TestConnectionFailed - Failed to test connections using provided Integration Runtime. Error details: '{0}'\n\n * 400 MigrationStillValidating - Migration is still being validated. {0} cannot be performed. Target server:'{1}', Target database: '{2}'.\n\n * 400 IntegrationRuntimeIsNotOnline - Integration Runtime '{0}' is not online for resource group '{1}' subscription '{2}'\n\n * 403 AccessDenied - Access denied.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 405 SubscriptionNotReady - Subscription is not in Ready state.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SubscriptionOperationInProgress - An operation on subscription is already in progress\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out.\n\n * 500 GenericSystem - System Failure when calling other Resource Provider.\n\n * 500 AdfCleanupFailureAfterMigration - Failed to clean up ADF resources after migration has completed successfully. Target server:'{0}', Target database: '{1}', Error details: '{2}'."
+          }
+        },
+        "x-ms-examples": {
+          "Get Mongo to CosmosDb Mongo(RU) database Migration without the expand parameter.": {
+            "$ref": "./examples/SqlDbGetDatabaseMigration.json"
+          },
+          "Get Mongo to CosmosDb Mongo(RU) database Migration with the expand parameter.": {
+            "$ref": "./examples/SqlDbGetDatabaseMigrationExpanded.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/mongoClusters/{targetResourceName}/providers/Microsoft.DataMigration/databaseMigrations/{migrationName}": {
+      "get": {
+        "tags": [
+          "DatabaseMigrationsCosmosDbMongo"
+        ],
+        "description": "Get Database Migration resource.",
+        "operationId": "DatabaseMigrationsCosmosDbMongo_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "targetResourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/MigrationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DatabaseMigrationCosmosDbMongo"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was provided for parameter '{0}'.\n\n * 400 EmptyRequiredRequestBody - The request body must not be empty.\n\n * 400 GenericUser - User Failure when calling other Resource Provider.\n\n * 400 OperationIdNotFound - Operation ID '{0}' not found.\n\n * 400 OperationTypeNotFound - Operation Type '{0}' not found.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 InvalidLocation - Invalid Location: '{0}'. Location should match selected Azure target location '{1}'.\n\n * 400 DeleteMigrationServiceTaskNotAllowedInProgress - Migration service task '{0}' is currently in progress. To delete the task, please wait until the migration service task has completed or cancel the task manually, and then retry deleting the migration service task. Alternatively, use the force delete option to cancel ongoing operations and delete.\n\n * 400 RequestFailed - Request to the resource '{0}' failed. Error code : '{1}'. HTTP status code : '{2}'. Error message : '{3}'.\n\n * 400 DeleteMigrationNotAllowedMigrationInProgress - Database migration to the target resource '{0}' is currently in progress. To delete the migration, please wait until the migration has completed or cancel the migration manually, and then retry deleting the migration. Alternatively, use the force delete option to cancel ongoing operations and delete\n\n * 400 DeleteMigrationNotAllowedDeleteInProgress - Database migration to the target resource '{0}' is currently deleting. Please wait until the delete operation is complete\n\n * 400 MigrationRetryNotAllowed - Migration is not in a retriable state. Migration must be in state WaitForRetry. Current state: '{0}', Target server:'{1}', Target database: '{2}'.\n\n * 400 TestConnectionFailed - Failed to test connections using provided Integration Runtime. Error details: '{0}'\n\n * 400 MigrationStillValidating - Migration is still being validated. {0} cannot be performed. Target server:'{1}', Target database: '{2}'.\n\n * 400 IntegrationRuntimeIsNotOnline - Integration Runtime '{0}' is not online for resource group '{1}' subscription '{2}'\n\n * 403 AccessDenied - Access denied.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 405 SubscriptionNotReady - Subscription is not in Ready state.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SubscriptionOperationInProgress - An operation on subscription is already in progress\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out.\n\n * 500 GenericSystem - System Failure when calling other Resource Provider.\n\n * 500 AdfCleanupFailureAfterMigration - Failed to clean up ADF resources after migration has completed successfully. Target server:'{0}', Target database: '{1}', Error details: '{2}'."
+          }
+        },
+        "x-ms-examples": {
+          "Get Mongo to CosmosDb Mongo(vCore) database Migration without the expand parameter.": {
+            "$ref": "./examples/SqlDbGetDatabaseMigration.json"
+          },
+          "Get Mongo to CosmosDb Mongo(vCore) database Migration with the expand parameter.": {
+            "$ref": "./examples/SqlDbGetDatabaseMigrationExpanded.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DatabaseMigrationsCosmosDbMongo"
+        ],
+        "description": "Create or Update Database Migration resource.",
+        "operationId": "DatabaseMigrationsCosmosDbMongo_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "targetResourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/MigrationNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Details of CosmosDB for Mongo API Migration resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabaseMigrationCosmosDbMongo"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DatabaseMigrationCosmosDbMongo"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was provided for parameter '{0}'.\n\n * 400 EmptyRequiredRequestBody - The request body must not be empty.\n\n * 400 GenericUser - User Failure when calling other Resource Provider.\n\n * 400 OperationIdNotFound - Operation ID '{0}' not found.\n\n * 400 OperationTypeNotFound - Operation Type '{0}' not found.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 InvalidLocation - Invalid Location: '{0}'. Location should match selected Azure target location '{1}'.\n\n * 400 DeleteMigrationServiceTaskNotAllowedInProgress - Migration service task '{0}' is currently in progress. To delete the task, please wait until the migration service task has completed or cancel the task manually, and then retry deleting the migration service task. Alternatively, use the force delete option to cancel ongoing operations and delete.\n\n * 400 RequestFailed - Request to the resource '{0}' failed. Error code : '{1}'. HTTP status code : '{2}'. Error message : '{3}'.\n\n * 400 DeleteMigrationNotAllowedMigrationInProgress - Database migration to the target resource '{0}' is currently in progress. To delete the migration, please wait until the migration has completed or cancel the migration manually, and then retry deleting the migration. Alternatively, use the force delete option to cancel ongoing operations and delete\n\n * 400 DeleteMigrationNotAllowedDeleteInProgress - Database migration to the target resource '{0}' is currently deleting. Please wait until the delete operation is complete\n\n * 400 MigrationRetryNotAllowed - Migration is not in a retriable state. Migration must be in state WaitForRetry. Current state: '{0}', Target server:'{1}', Target database: '{2}'.\n\n * 400 TestConnectionFailed - Failed to test connections using provided Integration Runtime. Error details: '{0}'\n\n * 400 MigrationStillValidating - Migration is still being validated. {0} cannot be performed. Target server:'{1}', Target database: '{2}'.\n\n * 400 IntegrationRuntimeIsNotOnline - Integration Runtime '{0}' is not online for resource group '{1}' subscription '{2}'\n\n * 403 AccessDenied - Access denied.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 405 SubscriptionNotReady - Subscription is not in Ready state.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SubscriptionOperationInProgress - An operation on subscription is already in progress\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out.\n\n * 500 GenericSystem - System Failure when calling other Resource Provider.\n\n * 500 AdfCleanupFailureAfterMigration - Failed to clean up ADF resources after migration has completed successfully. Target server:'{0}', Target database: '{1}', Error details: '{2}'."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create Mongo to CosmosDb Mongo(vCore) Database Migration resource with Minimum parameters.": {
+            "$ref": "./examples/SqlDbCreateOrUpdateDatabaseMigrationMIN.json"
+          },
+          "Create Mongo to CosmosDb Mongo(vCore) Database Migration resource with Maximum parameters.": {
+            "$ref": "./examples/SqlDbCreateOrUpdateDatabaseMigrationMAX.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DatabaseMigrationsCosmosDbMongo"
+        ],
+        "description": "Delete Database Migration resource.",
+        "operationId": "DatabaseMigrationsCosmosDbMongo_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "targetResourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/MigrationNameParameter"
+          },
+          {
+            "name": "force",
+            "in": "query",
+            "description": "Optional force delete boolean. If this is provided as true, migration will be deleted even if active.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was provided for parameter '{0}'.\n\n * 400 EmptyRequiredRequestBody - The request body must not be empty.\n\n * 400 GenericUser - User Failure when calling other Resource Provider.\n\n * 400 OperationIdNotFound - Operation ID '{0}' not found.\n\n * 400 OperationTypeNotFound - Operation Type '{0}' not found.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 InvalidLocation - Invalid Location: '{0}'. Location should match selected Azure target location '{1}'.\n\n * 400 DeleteMigrationServiceTaskNotAllowedInProgress - Migration service task '{0}' is currently in progress. To delete the task, please wait until the migration service task has completed or cancel the task manually, and then retry deleting the migration service task. Alternatively, use the force delete option to cancel ongoing operations and delete.\n\n * 400 RequestFailed - Request to the resource '{0}' failed. Error code : '{1}'. HTTP status code : '{2}'. Error message : '{3}'.\n\n * 400 DeleteMigrationNotAllowedMigrationInProgress - Database migration to the target resource '{0}' is currently in progress. To delete the migration, please wait until the migration has completed or cancel the migration manually, and then retry deleting the migration. Alternatively, use the force delete option to cancel ongoing operations and delete\n\n * 400 DeleteMigrationNotAllowedDeleteInProgress - Database migration to the target resource '{0}' is currently deleting. Please wait until the delete operation is complete\n\n * 400 MigrationRetryNotAllowed - Migration is not in a retriable state. Migration must be in state WaitForRetry. Current state: '{0}', Target server:'{1}', Target database: '{2}'.\n\n * 400 TestConnectionFailed - Failed to test connections using provided Integration Runtime. Error details: '{0}'\n\n * 400 MigrationStillValidating - Migration is still being validated. {0} cannot be performed. Target server:'{1}', Target database: '{2}'.\n\n * 400 IntegrationRuntimeIsNotOnline - Integration Runtime '{0}' is not online for resource group '{1}' subscription '{2}'\n\n * 403 AccessDenied - Access denied.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 405 SubscriptionNotReady - Subscription is not in Ready state.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SubscriptionOperationInProgress - An operation on subscription is already in progress\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out.\n\n * 500 GenericSystem - System Failure when calling other Resource Provider.\n\n * 500 AdfCleanupFailureAfterMigration - Failed to clean up ADF resources after migration has completed successfully. Target server:'{0}', Target database: '{1}', Error details: '{2}'."
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete Mongo to CosmosDb Mongo(vCore) Database Migration resource.": {
+            "$ref": "./examples/SqlDbDeleteDatabaseMigration.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/mongoClusters/{targetResourceName}/providers/Microsoft.DataMigration/databaseMigrations": {
+      "get": {
+        "tags": [
+          "DatabaseMigrationsCosmosDbMongo"
+        ],
+        "description": "Get Database Migration resources for the scope.",
+        "operationId": "DatabaseMigrationsCosmosDbMongo_GetForScope",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "targetResourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DatabaseMigrationCosmosDbMongoListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was provided for parameter '{0}'.\n\n * 400 EmptyRequiredRequestBody - The request body must not be empty.\n\n * 400 GenericUser - User Failure when calling other Resource Provider.\n\n * 400 OperationIdNotFound - Operation ID '{0}' not found.\n\n * 400 OperationTypeNotFound - Operation Type '{0}' not found.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 InvalidLocation - Invalid Location: '{0}'. Location should match selected Azure target location '{1}'.\n\n * 400 DeleteMigrationServiceTaskNotAllowedInProgress - Migration service task '{0}' is currently in progress. To delete the task, please wait until the migration service task has completed or cancel the task manually, and then retry deleting the migration service task. Alternatively, use the force delete option to cancel ongoing operations and delete.\n\n * 400 RequestFailed - Request to the resource '{0}' failed. Error code : '{1}'. HTTP status code : '{2}'. Error message : '{3}'.\n\n * 400 DeleteMigrationNotAllowedMigrationInProgress - Database migration to the target resource '{0}' is currently in progress. To delete the migration, please wait until the migration has completed or cancel the migration manually, and then retry deleting the migration. Alternatively, use the force delete option to cancel ongoing operations and delete\n\n * 400 DeleteMigrationNotAllowedDeleteInProgress - Database migration to the target resource '{0}' is currently deleting. Please wait until the delete operation is complete\n\n * 400 MigrationRetryNotAllowed - Migration is not in a retriable state. Migration must be in state WaitForRetry. Current state: '{0}', Target server:'{1}', Target database: '{2}'.\n\n * 400 TestConnectionFailed - Failed to test connections using provided Integration Runtime. Error details: '{0}'\n\n * 400 MigrationStillValidating - Migration is still being validated. {0} cannot be performed. Target server:'{1}', Target database: '{2}'.\n\n * 400 IntegrationRuntimeIsNotOnline - Integration Runtime '{0}' is not online for resource group '{1}' subscription '{2}'\n\n * 403 AccessDenied - Access denied.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 405 SubscriptionNotReady - Subscription is not in Ready state.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SubscriptionOperationInProgress - An operation on subscription is already in progress\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out.\n\n * 500 GenericSystem - System Failure when calling other Resource Provider.\n\n * 500 AdfCleanupFailureAfterMigration - Failed to clean up ADF resources after migration has completed successfully. Target server:'{0}', Target database: '{1}', Error details: '{2}'."
+          }
+        },
+        "x-ms-examples": {
+          "Get Mongo to CosmosDb Mongo(vCore) database Migration without the expand parameter.": {
+            "$ref": "./examples/SqlDbGetDatabaseMigration.json"
+          },
+          "Get Mongo to CosmosDb Mongo(vCore) database Migration with the expand parameter.": {
+            "$ref": "./examples/SqlDbGetDatabaseMigrationExpanded.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{sqlDbInstanceName}/providers/Microsoft.DataMigration/databaseMigrations/{targetDbName}": {
       "get": {
         "tags": [
@@ -962,7 +1368,7 @@
           "200": {
             "description": "Successfully retrieved the Migration Services in the resource group.",
             "schema": {
-              "$ref": "#/definitions/MigrationListResult"
+              "$ref": "#/definitions/MigrationServiceListResult"
             }
           },
           "default": {
@@ -998,7 +1404,7 @@
           "200": {
             "description": "Successfully retrieved the Migration Services in the Subscription.",
             "schema": {
-              "$ref": "#/definitions/MigrationListResult"
+              "$ref": "#/definitions/MigrationServiceListResult"
             }
           },
           "default": {
@@ -1011,6 +1417,45 @@
         "x-ms-examples": {
           "Get Services in the Subscriptions.": {
             "$ref": "./examples/ListBySubscriptionMigrationService.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataMigration/migrationServices/{migrationServiceName}/listMigrations": {
+      "get": {
+        "tags": [
+          "MigrationServices"
+        ],
+        "description": "Retrieve the List of database migrations attached to the service.",
+        "operationId": "MigrationServices_listMigrations",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/MigrationServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DatabaseMigrationBaseListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was provided for parameter '{0}'.\n\n * 400 EmptyRequiredRequestBody - The request body must not be empty.\n\n * 400 GenericUser - User Failure when calling other Resource Provider.\n\n * 400 OperationIdNotFound - Operation ID '{0}' not found.\n\n * 400 OperationTypeNotFound - Operation Type '{0}' not found.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 DeleteServiceNotAllowed - One or more migrations attached to the migration service '{0}' are currently running. To delete the migration service, please wait until all migrations have completed or cancel the migrations manually and retry deleting the service. Running migrations are: '{1}'\n\n * 400 ServiceNameInvalid - Service name '{0}' is not valid. Please refer https://aka.ms/dmsv2naming for naming rules.\n\n * 403 AccessDenied - Access denied.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 405 SubscriptionNotReady - Subscription is not in Ready state.\n\n * 405 MigrationServiceNotSupported - \n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SubscriptionOperationInProgress - An operation on subscription is already in progress\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out.\n\n * 500 GenericSystem - System Failure when calling other Resource Provider.\n\n * 500 NoAdfInRegion - "
+          }
+        },
+        "x-ms-examples": {
+          "List database migrations attached to the service.": {
+            "$ref": "./examples/ListMigrationsBySqlMigrationService.json"
           }
         }
       }
@@ -1497,18 +1942,20 @@
     }
   },
   "definitions": {
-    "DatabaseMigrationProperties": {
+    "DatabaseMigrationBaseProperties": {
       "required": [
         "kind"
       ],
-      "description": "Database Migration Resource properties.",
+      "description": "Database Migration Base Resource properties.",
       "type": "object",
       "properties": {
         "kind": {
           "enum": [
             "SqlMi",
             "SqlVm",
-            "SqlDb"
+            "SqlDb",
+            "OracleToSqlDb",
+            "MongoToCosmosDbMongo"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1517,7 +1964,7 @@
           }
         },
         "scope": {
-          "description": "Resource Id of the target resource (SQL VM or SQL Managed Instance).",
+          "description": "Resource Id of the target resource.",
           "type": "string",
           "x-ms-mutability": [
             "read",
@@ -1546,19 +1993,6 @@
           "type": "string",
           "readOnly": true
         },
-        "sourceSqlConnection": {
-          "$ref": "#/definitions/SqlConnectionInformation",
-          "description": "Source SQL Server connection details."
-        },
-        "sourceDatabaseName": {
-          "description": "Name of the source database.",
-          "type": "string"
-        },
-        "sourceServerName": {
-          "description": "Name of the source sql server.",
-          "type": "string",
-          "readOnly": true
-        },
         "migrationService": {
           "description": "Resource Id of the Migration Service.",
           "type": "string"
@@ -1572,12 +2006,147 @@
           "description": "Error details in case of migration failure.",
           "readOnly": true
         },
-        "targetDatabaseCollation": {
-          "description": "Database collation to be used for the target database.",
-          "type": "string"
-        },
         "provisioningError": {
           "description": "Error message for migration provisioning failure, if any.",
+          "type": "string"
+        }
+      },
+      "discriminator": "kind"
+    },
+    "DatabaseMigrationPropertiesCosmosDbMongo": {
+      "x-ms-discriminator-value": "MongoToCosmosDbMongo",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatabaseMigrationBaseProperties"
+        }
+      ],
+      "description": "Database Migration Resource properties for CosmosDb for Mongo.",
+      "type": "object",
+      "properties": {
+        "migrationStatusDetails": {
+          "$ref": "#/definitions/MongoMigrationStatusDetails",
+          "description": "Detailed migration status. Not included by default.",
+          "readOnly": true
+        },
+        "sourceMongoConnection": {
+          "$ref": "#/definitions/MongoConnectionInformation",
+          "description": "Source Mongo connection details."
+        },
+        "targetMongoConnection": {
+          "$ref": "#/definitions/MongoConnectionInformation",
+          "description": "Target Cosmos DB Mongo connection details."
+        },
+        "collectionList": {
+          "description": "List of Mongo Collections to be migrated.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MongoMigrationCollection"
+          }
+        }
+      }
+    },
+    "MongoMigrationStatusDetails": {
+      "description": "Detailed status of current migration.",
+      "type": "object",
+      "properties": {
+        "migrationState": {
+          "description": "Current State of Migration.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MongoConnectionInformation": {
+      "description": "Mongo Connection",
+      "type": "object",
+      "properties": {
+        "host": {
+          "description": "Host of mongo connection.",
+          "type": "string"
+        },
+        "port": {
+          "format": "int32",
+          "description": "Port of mongo connection.",
+          "type": "integer"
+        },
+        "userName": {
+          "description": "User name to connect to Mongo.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
+        "password": {
+          "description": "Password to connect to Mongo.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
+        "useSsl": {
+          "description": "Whether to UseSsl or UseTls to connect to Mongo. Default is true.",
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
+        "connectionString": {
+          "description": "ConnectionString to connect to Mongo.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        }
+      }
+    },
+    "MongoMigrationCollection": {
+      "type": "object",
+      "properties": {
+        "sourceDatabase": {
+          "type": "string"
+        },
+        "sourceCollection": {
+          "type": "string"
+        },
+        "targetDatabase": {
+          "type": "string"
+        },
+        "targetCollection": {
+          "type": "string"
+        }
+      }
+    },
+    "DatabaseMigrationProperties": {
+      "required": [
+        "kind"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatabaseMigrationBaseProperties"
+        }
+      ],
+      "description": "Database Migration Resource properties.",
+      "type": "object",
+      "properties": {
+        "sourceSqlConnection": {
+          "$ref": "#/definitions/SqlConnectionInformation",
+          "description": "Source SQL Server connection details."
+        },
+        "sourceDatabaseName": {
+          "description": "Name of the source database.",
+          "type": "string"
+        },
+        "sourceServerName": {
+          "description": "Name of the source sql server.",
+          "type": "string",
+          "readOnly": true
+        },
+        "targetDatabaseCollation": {
+          "description": "Database collation to be used for the target database.",
           "type": "string"
         }
       },
@@ -2147,6 +2716,27 @@
         }
       }
     },
+    "DatabaseMigrationBase": {
+      "description": "Database Migration Resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/DatabaseMigrationBaseProperties",
+          "x-ms-client-flatten": false
+        }
+      },
+      "x-ms-azure-resource": true
+    },
     "DatabaseMigration": {
       "description": "Database Migration Resource.",
       "type": "object",
@@ -2164,6 +2754,22 @@
         "properties": {
           "$ref": "#/definitions/DatabaseMigrationProperties",
           "x-ms-client-flatten": false
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "DatabaseMigrationCosmosDbMongo": {
+      "description": "Database Migration Resource for Mongo to CosmosDb.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DatabaseMigrationPropertiesCosmosDbMongo",
+          "x-ms-client-flatten": true
         }
       },
       "x-ms-azure-resource": true
@@ -2239,6 +2845,40 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DatabaseMigration"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DatabaseMigrationBaseListResult": {
+      "description": "A list of Database Migrations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatabaseMigrationBase"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DatabaseMigrationCosmosDbMongoListResult": {
+      "description": "A list of Database Migrations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatabaseMigrationCosmosDbMongo"
           },
           "readOnly": true
         },
@@ -2428,7 +3068,7 @@
         }
       }
     },
-    "MigrationListResult": {
+    "MigrationServiceListResult": {
       "description": "A list of Migration Service.",
       "type": "object",
       "properties": {
@@ -2748,6 +3388,14 @@
       "name": "targetDbName",
       "in": "path",
       "description": "The name of the target database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "MigrationNameParameter": {
+      "name": "migrationName",
+      "in": "path",
+      "description": "Name of the migration.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
