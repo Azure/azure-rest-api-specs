@@ -20,19 +20,21 @@
   ],
   "security": [
     {
-      "OAuth2Auth": [
-        "https://security.microsoft.com/.default"
+      "AadOauth2Auth": [
+        "https://contoso.azure.com/.default"
       ]
     }
   ],
   "securityDefinitions": {
-    "OAuth2Auth": {
+    "AadOauth2Auth": {
       "type": "oauth2",
-      "flow": "implicit",
+      "description": "The Azure Active Directory OAuth2 Flow",
+      "flow": "accessCode",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
-        "https://security.microsoft.com/.default": ""
-      }
+        "https://contoso.azure.com/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
     }
   },
   "tags": [],
@@ -51,50 +53,47 @@
             "description": "The request has succeeded.",
             "schema": {
               "type": "object",
+              "description": "Paged collection of WidgetSuite items",
               "properties": {
                 "value": {
                   "type": "array",
+                  "description": "The WidgetSuite items on this page",
                   "items": {
                     "$ref": "#/definitions/WidgetSuite"
                   },
-                  "x-ms-identifiers": [],
-                  "description": "The WidgetSuite items on this page",
-                  "x-typespec-name": "WidgetSuite[]"
+                  "x-ms-identifiers": []
                 },
                 "nextLink": {
                   "type": "string",
                   "format": "uri",
-                  "description": "The link to the next page of items",
-                  "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+                  "description": "The link to the next page of items"
                 }
               },
-              "description": "Paged collection of WidgetSuite items",
               "required": [
                 "value"
-              ],
-              "x-typespec-name": "Azure.Core.Foundations.CustomPage<WidgetSuite, Azure.Core.(anonymous model)>"
+              ]
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Widgets_ListWidgets": {
             "$ref": "./examples/Widgets_ListWidgetsSample.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -109,8 +108,8 @@
           {
             "name": "widgetName",
             "in": "path",
-            "required": true,
             "description": "The widget name.",
+            "required": true,
             "type": "string"
           }
         ],
@@ -123,14 +122,14 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
@@ -143,6 +142,9 @@
       "patch": {
         "operationId": "Widgets_CreateOrUpdateWidget",
         "description": "Creates or updates a Widget asynchronously.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -150,15 +152,15 @@
           {
             "name": "widgetName",
             "in": "path",
-            "required": true,
             "description": "The widget name.",
+            "required": true,
             "type": "string"
           },
           {
             "name": "resource",
             "in": "body",
-            "required": true,
             "description": "The resource instance.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/WidgetSuiteUpdate"
             }
@@ -167,46 +169,43 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "headers": {
-              "Operation-Location": {
-                "description": "The location for monitoring the operation state.",
-                "type": "string",
-                "format": "uri"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/WidgetSuite"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
-            "headers": {
-              "Operation-Location": {
-                "description": "The location for monitoring the operation state.",
-                "type": "string",
-                "format": "uri"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/WidgetSuite"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
-        "consumes": [
-          "application/merge-patch+json"
-        ],
         "x-ms-examples": {
           "Widgets_CreateOrUpdateWidget": {
             "$ref": "./examples/Widgets_CreateOrUpdateWidgetSample.json"
@@ -223,23 +222,17 @@
           {
             "name": "widgetName",
             "in": "path",
-            "required": true,
             "description": "The widget name.",
+            "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Operation-Location": {
-                "description": "The location for monitoring the operation state.",
-                "type": "string",
-                "format": "uri"
-              }
-            },
             "schema": {
               "type": "object",
+              "description": "Provides status details for long running operations.",
               "properties": {
                 "id": {
                   "type": "string",
@@ -254,24 +247,29 @@
                   "description": "Error object that describes the error when status is \"Failed\"."
                 }
               },
-              "description": "Provides status details for long running operations.",
               "required": [
                 "id",
                 "status"
-              ],
-              "x-typespec-name": "Azure.Core.Foundations.OperationStatus<never, Azure.Core.Foundations.Error>"
+              ]
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
@@ -293,15 +291,15 @@
           {
             "name": "widgetName",
             "in": "path",
-            "required": true,
             "description": "The widget name.",
+            "required": true,
             "type": "string"
           },
           {
             "name": "operationId",
             "in": "path",
-            "required": true,
             "description": "The unique ID of the operation.",
+            "required": true,
             "type": "string"
           }
         ],
@@ -310,6 +308,7 @@
             "description": "The request has succeeded.",
             "schema": {
               "type": "object",
+              "description": "Provides status details for long running operations.",
               "properties": {
                 "id": {
                   "type": "string",
@@ -328,24 +327,22 @@
                   "description": "The result of the operation."
                 }
               },
-              "description": "Provides status details for long running operations.",
               "required": [
                 "id",
                 "status"
-              ],
-              "x-typespec-name": "Azure.Core.ResourceOperationStatus<WidgetSuite, WidgetSuite, Azure.Core.Foundations.Error>"
+              ]
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
@@ -360,6 +357,7 @@
   "definitions": {
     "Azure.Core.Foundations.Error": {
       "type": "object",
+      "description": "The error object.",
       "properties": {
         "code": {
           "type": "string",
@@ -375,19 +373,17 @@
         },
         "details": {
           "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
-          "x-ms-identifiers": [],
-          "description": "An array of details about specific errors that led to this reported error.",
-          "x-typespec-name": "Azure.Core.Foundations.Error[]"
+          "x-ms-identifiers": []
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
           "description": "An object containing more specific information than the current object about the error."
         }
       },
-      "description": "The error object.",
       "required": [
         "code",
         "message"
@@ -395,19 +391,20 @@
     },
     "Azure.Core.Foundations.ErrorResponse": {
       "type": "object",
+      "description": "A response containing error details.",
       "properties": {
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
           "description": "The error object."
         }
       },
-      "description": "A response containing error details.",
       "required": [
         "error"
       ]
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
       "properties": {
         "code": {
           "type": "string",
@@ -417,8 +414,7 @@
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
           "description": "Inner error."
         }
-      },
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses."
+      }
     },
     "Azure.Core.Foundations.OperationState": {
       "type": "string",
@@ -456,42 +452,9 @@
         ]
       }
     },
-    "ContosoAuthFlow": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "implicit"
-          ],
-          "description": "The auth flow type."
-        },
-        "authorizationUrl": {
-          "type": "string",
-          "enum": [
-            "https://login.microsoftonline.com/common/oauth2/authorize"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "description": "The auth flow authorization URL."
-        },
-        "scopes": {
-          "type": "array",
-          "items": {},
-          "x-typespec-name": "[https://security.microsoft.com/.default]",
-          "description": "The auth flow token URL."
-        }
-      },
-      "description": "A faked auth model.",
-      "required": [
-        "type",
-        "authorizationUrl",
-        "scopes"
-      ]
-    },
     "FakedSharedModel": {
       "type": "object",
+      "description": "Faked shared model",
       "properties": {
         "tag": {
           "type": "string",
@@ -503,7 +466,6 @@
           "description": "The created date."
         }
       },
-      "description": "Faked shared model",
       "required": [
         "tag",
         "createdAt"
@@ -511,6 +473,7 @@
     },
     "FakedSharedModelUpdate": {
       "type": "object",
+      "description": "Faked shared model",
       "properties": {
         "tag": {
           "type": "string",
@@ -521,8 +484,7 @@
           "format": "date-time",
           "description": "The created date."
         }
-      },
-      "description": "Faked shared model"
+      }
     },
     "Versions": {
       "type": "string",
@@ -544,6 +506,7 @@
     },
     "WidgetSuite": {
       "type": "object",
+      "description": "A widget.",
       "properties": {
         "name": {
           "type": "string",
@@ -559,7 +522,6 @@
           "description": "The faked shared model."
         }
       },
-      "description": "A widget.",
       "required": [
         "name",
         "manufacturerId"
@@ -567,6 +529,7 @@
     },
     "WidgetSuiteUpdate": {
       "type": "object",
+      "description": "A widget.",
       "properties": {
         "manufacturerId": {
           "type": "string",
@@ -576,20 +539,19 @@
           "$ref": "#/definitions/FakedSharedModelUpdate",
           "description": "The faked shared model."
         }
-      },
-      "description": "A widget."
+      }
     }
   },
   "parameters": {
     "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
-      "required": true,
       "description": "The API version to use for this operation.",
-      "x-ms-client-name": "apiVersion",
+      "required": true,
       "type": "string",
       "minLength": 1,
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
     }
   }
 }

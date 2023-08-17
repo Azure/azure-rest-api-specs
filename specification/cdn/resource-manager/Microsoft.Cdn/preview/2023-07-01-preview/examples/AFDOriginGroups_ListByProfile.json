@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "RG",
+    "profileName": "profile1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/origingroups/origingroup1",
+            "type": "Microsoft.Cdn/profiles/origingroups",
+            "name": "origingroup1",
+            "properties": {
+              "loadBalancingSettings": {
+                "sampleSize": 3,
+                "successfulSamplesRequired": 3,
+                "additionalLatencyInMilliseconds": 1000
+              },
+              "healthProbeSettings": {
+                "probePath": "/path1",
+                "probeRequestType": "HEAD",
+                "probeProtocol": "Http",
+                "probeIntervalInSeconds": 10
+              },
+              "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": 5,
+              "provisioningState": "Succeeded",
+              "deploymentStatus": "NotStarted"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -190,7 +190,7 @@ model ChatChoice {
   index: int32;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
-  #suppress "@azure-tools/typespec-autorest/union-unsupported" "https://github.com/Azure/typespec-azure/issues/3180"
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 support deferred"
   @doc("The reason that this chat completions choice completed its generated.")
   @projectedName("json", "finish_reason")
   finishReason: CompletionsFinishReason | null;
@@ -199,6 +199,15 @@ model ChatChoice {
   @projectedName("json", "delta")
   @projectedName("csharp", "InternalStreamingDeltaMessage")
   delta?: ChatMessage;
+
+  @doc("""
+    Information about the content filtering category (hate, sexual, violence, self_harm), if it 
+    has been detected, as well as the severity level (very_low, low, medium, high-scale that 
+    determines the intensity and risk level of harmful content) and if it has been filtered or not.
+    """)
+  @added(ServiceApiVersions.v2023_06_01_Preview)
+  @projectedName("json", "content_filter_results")
+  contentFilterResults?: ContentFilterResults;
 }
 
 @doc("""
@@ -217,6 +226,7 @@ model ChatCompletions {
     """)
   @projectedName("json", "created")
   @projectedName("csharp", "InternalCreatedSecondsAfterUnixEpoch")
+  @projectedName("java", "createdAt")
   created: int32;
 
   @doc("""
@@ -226,6 +236,14 @@ model ChatCompletions {
     """)
   @projectedName("json", "choices")
   choices: ChatChoice[];
+
+  @doc("""
+  Content filtering results for zero or more prompts in the request. In a streaming request, 
+  results for different prompts may arrive at different times or in different orders.
+  """)
+  @added(ServiceApiVersions.v2023_06_01_Preview)
+  @projectedName("json", "prompt_annotations")
+  promptFilterResults?: PromptFilterResult[];
 
   @doc("""
     Usage information for tokens processed and generated as part of this completions operation.

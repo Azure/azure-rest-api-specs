@@ -51,22 +51,22 @@ model PoolProperties {
 
   @doc("Initial capacity of the pool in GiB.")
   poolCapacityGiB: int64;
+
   // @doc("List of boolean feature-flags, e.g. pool/volume auto-expansion, reclaim policy.")
   // features?: Record<boolean>;
 
-
   @doc("List of resources that should have access to the pool. Typically ARM references to AKS clusters or ACI Container Groups. For local and standard this must be a single reference. For portable there can be many.")
   assignments: string[];
+
   // Don't include in preview
   // @doc("Type of encryption. Allowed values: EncryptionAtRestWithPlatformKey.")
   // encryption: EncryptionType;
 
-
   @doc("Ephemeral Pool Properties")
   ephemeralPoolProperties?: EphemeralPoolProperties;
+
   // @doc("Managed Pool Properties")
   // managedPoolProperties?: ManagedPoolProperties;
-
 
   @doc("Disk Pool Properties")
   diskPoolProperties?: DiskPoolProperties;
@@ -114,9 +114,9 @@ model DiskPoolProperties {
 
   @doc("List of KV pairs to set in StorageClass to configure CSI driver.")
   csiParams?: Record<string>;
+
   // @doc("Initial capacity of disks. Application volumes must fit within single disks.")
   // diskCapacityRequest: int64;
-
 
   @doc("Maximum capacity of the volumes in GiB the user intends to create. Default 512.")
   maxVolumeCapacityGiB?: int64 = 512;
@@ -212,7 +212,7 @@ enum PoolType {
 enum VolumeBindingMode {
   /** Immediate binding */
   Immediate,
-  /**  Wait for customer to bind */
+  /** Wait for customer to bind */
   WaitFirstForCustomer,
 }
 
@@ -285,10 +285,10 @@ model VolumeProperties {
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
+
   // Will not have features enabled by these flags for preview
   // @doc("List of boolean feature-flags, e.g. pool/volume auto-expansion, reclaim policy.")
   // features?: Record<boolean>;
-
 
   @doc("String KV pairs indicating labels")
   labels: Record<string>;
@@ -298,6 +298,7 @@ model VolumeProperties {
 
   @doc("Indicates how the volume should be attached")
   volumeMode: VolumeMode;
+
   // Set default to RWO in RP and pass it through
   // @doc("Indicates how the volume can be accessed")
   // accessMode: AccessMode;
@@ -305,7 +306,6 @@ model VolumeProperties {
   // Don't support replication for preview
   // @doc("Number of replicas")
   // replicas: int64;
-
 
   @doc("Reclaim Policy, Delete or Retain")
   reclaimPolicy: ReclaimPolicy;
@@ -318,7 +318,7 @@ model VolumeProperties {
   // placementProperties: PlacementProperties;
 }
 
-/** Storage volume mode  */
+/** Storage volume mode */
 enum VolumeMode {
   /** FileSystem volume mode */
   Filesystem,
@@ -385,10 +385,10 @@ model VolumeSnapshotProperties {
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
+
   // Don't include in preview
   // @doc("List of boolean feature-flags, e.g. pool/volume auto-expansion, reclaim policy.")
   // features?: Record<boolean>;
-
 
   @doc("Reference to the source volume")
   source: string;
