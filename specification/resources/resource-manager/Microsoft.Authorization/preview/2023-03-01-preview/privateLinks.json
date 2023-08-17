@@ -658,21 +658,6 @@
         "properties": {
           "$ref": "#/definitions/PrivateLinkAssociationPropertiesExpanded",
           "description": "The private link association properties."
-        },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The plaResourceID."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The operation type."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The pla name."
         }
       }
     },
@@ -701,6 +686,17 @@
           "readOnly": true,
           "type": "string",
           "description": "The operation type."
+        },
+        "location": {
+          "type": "string",
+          "description": "the region of the rmpl"
+        },
+        "tags": {
+          "description": "The resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "x-ms-azure-resource": true
