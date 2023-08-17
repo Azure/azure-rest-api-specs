@@ -78,7 +78,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "policyEntity",
             "description": "Data policy object to create or replace..",
             "required": true,
             "schema": {
@@ -417,6 +417,7 @@
     },
     "DataPolicy": {
       "required": [
+        "name",
         "decisionRules",
         "members",
         "description"
@@ -426,7 +427,6 @@
       "properties": {
         "name": {
           "type": "string",
-          "readOnly": true,
           "description": "The policy name"
         },
         "state": {
