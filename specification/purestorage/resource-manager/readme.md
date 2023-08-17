@@ -41,5 +41,4 @@ input-file:
 suppressions:
  - code: PathContainsResourceType
    reason: The resource provider name 'PureStorage.Block' cannot have 'Microsoft' in it as it is a Azure Native ISV service`.
-   from: PureStorage.Block/preview/2023-06-01-preview/purestorage.json
 ```
