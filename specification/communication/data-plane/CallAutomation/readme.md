@@ -50,6 +50,17 @@ title:
   Azure Communication Services
 ```
 
+### Tag: package-2023-06-15-preview
+
+These settings apply only when `--tag=package-2023-06-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-06-15-preview'
+input-file:
+  - preview/2023-06-15-preview/communicationservicescallautomation.json
+title:
+  Azure Communication Services
+```
+
 ---
 
 # Code Generation

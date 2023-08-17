@@ -55,7 +55,8 @@ enum ServiceApiVersions {
 @TypeSpec.Rest.resource("deployments")
 model Deployment {
   @visibility("read")
-  @doc("deployment id of the deployed model")
+  @doc("Specifies either the model deployment name (when using Azure OpenAI) or model name (when using non-Azure OpenAI) to use for this request.")
+  @projectedName("java", "deploymentOrModelName")
   @key
   deploymentId: string;
 }

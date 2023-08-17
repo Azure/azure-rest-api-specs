@@ -9,7 +9,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 
-@useAuth(OAuth2Auth<[ContosoAuthFlow]>)
+@useAuth(AadOauth2Auth<["https://contoso.azure.com/.default"]>)
 @service({
   title: "Contoso Widget Manager",
 })
@@ -21,18 +21,6 @@ enum Versions {
   @doc("The 2022-11-01-preview version.")
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2022_11_01_Preview: "2022-11-01-preview",
-}
-
-@doc("A faked auth model.")
-model ContosoAuthFlow {
-  @doc("The auth flow type.")
-  type: OAuth2FlowType.implicit;
-
-  @doc("The auth flow authorization URL.")
-  authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
-
-  @doc("The auth flow token URL.")
-  scopes: ["https://security.microsoft.com/.default"];
 }
 
 @doc("A widget.")
