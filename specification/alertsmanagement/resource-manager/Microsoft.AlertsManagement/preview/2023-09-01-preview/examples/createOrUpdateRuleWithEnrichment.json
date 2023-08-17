@@ -16,30 +16,25 @@
             "alert": "Billing_Processing_Very_Slow",
             "expression": "job_type:billing_jobs_duration_seconds:99p5m > 30",
             "for": "PT5M",
-            "enrichmentConfigurations": {
-              "enrichments": [
-                {
-                  "title": "Number of OOM killed events by container",
-                  "type": "PrometheusInstantQuery",
-                  "query": "sum by (cluster,container)(label_replace( kube_pod_container{cluster='$cluster', namespace='namespace1'}'}",
-                  "variables": {
-                    "cluster": "${data.alertContext.labels.cluster}"
-                  }
-                },
-                {
-                  "title": "Number of OOM killed events by container",
-                  "type": "PrometheusRangeQuery",
-                  "includeResults": true,
-                  "datasources": [
-                    "/subscriptions/00000000-0000-aaaa-bbbb-000000000000/resourceGroups/MyRg/providers/microsoft.monitor/accounts/monitorAccount1"
-                  ],
-                  "query": "sum by (cluster,container,replicaset,namespace)(label_replace( kube_pod_container_status_last_terminated_reason{reason='OOMKilled', cluster='cluster1', namespace='namespace1'}'}, 'replicaset', '$1', 'pod', '(.*)(-[a-z0-9]{5})$')) > 0",
-                  "variables": {},
-                  "lookbackPeriod": "PT15M",
-                  "step": "PT15S"
+            "enrichments": [
+              {
+                "title": "Number of OOM killed events by container",
+                "type": "PrometheusInstantQuery",
+                "query": "sum by (cluster,container)(label_replace( kube_pod_container{cluster='$cluster', namespace='namespace1'}'}",
+                "variables": {
+                  "cluster": "${data.alertContext.labels.cluster}"
                 }
-              ]
-            }
+              },
+              {
+                "title": "Number of OOM killed events by container",
+                "type": "PrometheusRangeQuery",
+                "includeResults": true,
+                "query": "sum by (cluster,container,replicaset,namespace)(label_replace( kube_pod_container_status_last_terminated_reason{reason='OOMKilled', cluster='cluster1', namespace='namespace1'}'}, 'replicaset', '$1', 'pod', '(.*)(-[a-z0-9]{5})$')) > 0",
+                "variables": {},
+                "lookbackPeriod": "PT15M",
+                "step": "PT15S"
+              }
+            ]
           }
         ]
       }
@@ -62,30 +57,25 @@
               "alert": "Billing_Processing_Very_Slow",
               "expression": "job_type:billing_jobs_duration_seconds:99p5m > 30",
               "for": "PT5M",
-              "enrichmentConfigurations": {
-                "enrichments": [
-                  {
-                    "title": "Number of OOM killed events by container",
-                    "type": "PrometheusInstantQuery",
-                    "query": "sum by (cluster,container)(label_replace( kube_pod_container{cluster='$cluster', namespace='namespace1'}'}",
-                    "variables": {
-                      "cluster": "${data.alertContext.labels.cluster}"
-                    }
-                  },
-                  {
-                    "title": "Number of OOM killed events by container",
-                    "type": "PrometheusRangeQuery",
-                    "includeResults": true,
-                    "datasources": [
-                      "/subscriptions/00000000-0000-aaaa-bbbb-000000000000/resourceGroups/MyRg/providers/microsoft.monitor/accounts/monitorAccount1"
-                    ],
-                    "query": "sum by (cluster,container,replicaset,namespace)(label_replace( kube_pod_container_status_last_terminated_reason{reason='OOMKilled', cluster='cluster1', namespace='namespace1'}'}, 'replicaset', '$1', 'pod', '(.*)(-[a-z0-9]{5})$')) > 0",
-                    "variables": {},
-                    "lookbackPeriod": "PT15M",
-                    "step": "PT15S"
+              "enrichments": [
+                {
+                  "title": "Number of OOM killed events by container",
+                  "type": "PrometheusInstantQuery",
+                  "query": "sum by (cluster,container)(label_replace( kube_pod_container{cluster='$cluster', namespace='namespace1'}'}",
+                  "variables": {
+                    "cluster": "${data.alertContext.labels.cluster}"
                   }
-                ]
-              }
+                },
+                {
+                  "title": "Number of OOM killed events by container",
+                  "type": "PrometheusRangeQuery",
+                  "includeResults": true,
+                  "query": "sum by (cluster,container,replicaset,namespace)(label_replace( kube_pod_container_status_last_terminated_reason{reason='OOMKilled', cluster='cluster1', namespace='namespace1'}'}, 'replicaset', '$1', 'pod', '(.*)(-[a-z0-9]{5})$')) > 0",
+                  "variables": {},
+                  "lookbackPeriod": "PT15M",
+                  "step": "PT15S"
+                }
+              ]
             }
           ]
         }
@@ -107,30 +97,25 @@
               "alert": "Billing_Processing_Very_Slow",
               "expression": "job_type:billing_jobs_duration_seconds:99p5m > 30",
               "for": "PT5M",
-              "enrichmentConfigurations": {
-                "enrichments": [
-                  {
-                    "title": "Number of OOM killed events by container",
-                    "type": "PrometheusInstantQuery",
-                    "query": "sum by (cluster,container)(label_replace( kube_pod_container{cluster='$cluster', namespace='namespace1'}'}",
-                    "variables": {
-                      "cluster": "${data.alertContext.labels.cluster}"
-                    }
-                  },
-                  {
-                    "title": "Number of OOM killed events by container",
-                    "type": "PrometheusRangeQuery",
-                    "includeResults": true,
-                    "datasources": [
-                      "/subscriptions/00000000-0000-aaaa-bbbb-000000000000/resourceGroups/MyRg/providers/microsoft.monitor/accounts/monitorAccount1"
-                    ],
-                    "query": "sum by (cluster,container,replicaset,namespace)(label_replace( kube_pod_container_status_last_terminated_reason{reason='OOMKilled', cluster='cluster1', namespace='namespace1'}'}, 'replicaset', '$1', 'pod', '(.*)(-[a-z0-9]{5})$')) > 0",
-                    "variables": {},
-                    "lookbackPeriod": "PT15M",
-                    "step": "PT15S"
+              "enrichments": [
+                {
+                  "title": "Number of OOM killed events by container",
+                  "type": "PrometheusInstantQuery",
+                  "query": "sum by (cluster,container)(label_replace( kube_pod_container{cluster='$cluster', namespace='namespace1'}'}",
+                  "variables": {
+                    "cluster": "${data.alertContext.labels.cluster}"
                   }
-                ]
-              }
+                },
+                {
+                  "title": "Number of OOM killed events by container",
+                  "type": "PrometheusRangeQuery",
+                  "includeResults": true,
+                  "query": "sum by (cluster,container,replicaset,namespace)(label_replace( kube_pod_container_status_last_terminated_reason{reason='OOMKilled', cluster='cluster1', namespace='namespace1'}'}, 'replicaset', '$1', 'pod', '(.*)(-[a-z0-9]{5})$')) > 0",
+                  "variables": {},
+                  "lookbackPeriod": "PT15M",
+                  "step": "PT15S"
+                }
+              ]
             }
           ]
         }

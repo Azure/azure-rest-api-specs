@@ -466,13 +466,16 @@
             "DynamicThreshold"
           ]
         },
-        "dynamicThresholdConfigurations": {
-          "$ref": "#/definitions/DynamicThresholdConfigurations",
+        "dynamicThresholdConfiguration": {
+          "$ref": "#/definitions/DynamicThresholdConfiguration",
           "description": "Defines the configuration for dynamic thresholds. Only relevant for alerts."
         },
-        "enrichmentConfigurations": {
-          "$ref": "#/definitions/EnrichmentConfiguration",
-          "description": "Defines the configuration for enriching fired alerts. Only relevant for alerts."
+        "enrichments": {
+          "type": "array",
+          "description": "Defines the configuration for enriching fired alerts. Only relevant for alerts.",
+          "items": {
+            "$ref": "#/definitions/Enrichment"
+          }
         }
       }
     },
@@ -516,7 +519,7 @@
         }
       }
     },
-    "DynamicThresholdConfigurations": {
+    "DynamicThresholdConfiguration": {
       "type": "object",
       "description": "Specifies the dynamic threshold configuration.",
       "properties": {
@@ -543,19 +546,6 @@
           "x-ms-enum": {
             "modelAsString": true
           }
-        }
-      }
-    },
-    "EnrichmentConfiguration": {
-      "type":"object",
-      "description": "Specifies the enrichment configuration.",
-      "properties": {
-        "enrichments": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Enrichment"
-          },
-          "description": "The array of enrichments."
         }
       }
     },
@@ -600,13 +590,6 @@
         "includeResults": {
           "type": "boolean",
           "description": "Include the query results in the alert."
-        },
-        "datasources": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The array of Prometheus data sources."
         },
         "query": {
           "type": "string",
