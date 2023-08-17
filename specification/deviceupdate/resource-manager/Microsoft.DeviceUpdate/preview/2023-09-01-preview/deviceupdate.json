@@ -260,12 +260,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Async operation to create or update Account was created.",
-            "schema": {
-              "$ref": "#/definitions/Account"
-            }
-          },
           "201": {
             "description": "Async operation to create or update Account was created.",
             "schema": {
@@ -375,18 +369,6 @@
             }
           },
           "201": {
-            "description": "Async operation to update accounts was created.",
-            "headers": {
-              "Location": {
-                "description": "URL to query for status of the operation.",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Account"
-            }
-          },
-          "202": {
             "description": "Async operation to update accounts was created.",
             "headers": {
               "Location": {
@@ -1044,12 +1026,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The create or update request was successful; the operation will complete asynchronously.",
-            "schema": {
-              "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnection"
-            }
-          },
           "201": {
             "description": "The create or update request was successful; the operation will complete asynchronously.",
             "schema": {
@@ -1097,15 +1073,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request was successful; the operation completed synchronously.",
-            "headers": {
-              "Location": {
-                "description": "URL to query for status of the operation.",
-                "type": "string"
-              }
-            }
-          },
           "202": {
             "description": "The request was successful; the operation will complete asynchronously.",
             "headers": {
@@ -1458,14 +1425,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request was successful; the operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
-            }
-          },
           "201": {
-            "description": "The request was successful; the operation will complete asynchronously.",
+            "description": "The create or update request was successful; the operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnectionProxy"
             }
@@ -2090,7 +2051,10 @@
             }
           }
         }
-      }
+      },
+      "required": [
+        "properties"
+      ]
     },
     "DiagnosticStorageProperties": {
       "description": "Customer-initiated diagnostic log collection storage properties",
@@ -2240,7 +2204,10 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/GroupInformationProperties"
         }
-      }
+      },
+      "required": [
+        "properties"
+      ]
     },
     "GroupInformationProperties": {
       "description": "The properties for a group information object",
@@ -2304,14 +2271,6 @@
             "provisioningState": {
               "$ref": "#/definitions/PrivateEndpointConnectionProxyProvisioningState",
               "description": "The provisioning state of the private endpoint connection proxy resource."
-            },
-            "remotePrivateEndpoint": {
-              "description": "Remote private endpoint details.",
-              "$ref": "#/definitions/RemotePrivateEndpoint"
-            },
-            "status": {
-              "description": "Operation status.",
-              "type": "string"
             }
           }
         }
@@ -2326,6 +2285,14 @@
           "description": "ETag from NRP.",
           "type": "string",
           "readOnly": true
+        },
+        "remotePrivateEndpoint": {
+          "description": "Remote private endpoint details.",
+          "$ref": "#/definitions/RemotePrivateEndpoint"
+        },
+        "status": {
+          "description": "Operation status.",
+          "type": "string"
         }
       }
     },
