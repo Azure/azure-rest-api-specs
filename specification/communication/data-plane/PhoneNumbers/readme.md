@@ -40,18 +40,6 @@ title:
   Azure Communication Services
 ```
 
-## Supression
-``` yaml
-directive:
-  - from:
-    - phonenumbers.json
-    suppress:
-    - R2005 #Long running operation status code
-    - R1001 #to suppress (OperationIdNounVerb/R1001/SDKViolation)
-    reason:
-      Approval from Azure review board that Long Running Operations can return 202s. Cannot rename operation names without breaking changes.
-```
-
 ### Tag: package-phonenumber-2021-03-07
 
 These settings apply only when `--tag=package-phonenumber-2021-03-07` is specified on the command line.
@@ -85,16 +73,24 @@ title:
   Azure Communication Services
 ```
 
+### Tag: package-phonenumber-2023-05-01-preview
+
+These settings apply only when `--tag=package-phonenumber-2023-05-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-phonenumber-2023-05-01-preview'
+input-file:
+  - preview/2023-05-01-preview/phonenumbers.json
+title:
+  Azure Communication Services
+```
+
 ## Supression
 ``` yaml
-directive:
-  - from:
-    - phonenumbers.json
-    suppress:
-    - R2005 #Long running operation status code
-    - R1001 #to suppress (OperationIdNounVerb/R1001/SDKViolation)
-    reason:
-      Approval from Azure review board that Long Running Operations can return 202s. Cannot rename operation names without breaking changes.
+suppressions:
+ - code: OperationIdNounVerb
+   from: phonenumbers.json
+   reason: Approval from Azure review board that Long Running Operations can return 202s. Cannot rename operation names without breaking changes.
+
 ```
 
 ---

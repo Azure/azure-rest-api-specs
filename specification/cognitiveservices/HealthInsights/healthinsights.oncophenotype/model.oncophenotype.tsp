@@ -9,6 +9,7 @@ namespace AzureHealthInsights;
 @doc("The body of the Onco Phenotype request.")
 model OncoPhenotypeData {
   ...Request;
+
   @doc("Configuration affecting the Onco Phenotype model's inference.")
   configuration?: OncoPhenotypeModelConfiguration;
 }
@@ -45,6 +46,7 @@ model OncoPhenotypePatientResult {
 model OncoPhenotypeInference {
   @doc("The type of the Onco Phenotype inference")
   type: OncoPhenotypeInferenceType;
+
   ...Inference;
 
   @doc("The evidence corresponding to the inference value.")
@@ -59,6 +61,7 @@ An identifier for a clinical case, if there are multiple clinical cases regardin
 @doc("Configuration affecting the Onco Phenotype model's inference.")
 model OncoPhenotypeModelConfiguration {
   ...ModelConfiguration;
+
   @doc("""
 A list of inference types to be inferred for the current request.
 This could be used if only part of the Onco Phenotype inferences are required.
@@ -72,8 +75,7 @@ An indication whether to perform a preliminary step on the patient's documents t
   checkForCancerCase?: boolean = false;
 }
 
-
-
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("The type of the Onco Phenotype inference.")
 enum OncoPhenotypeInferenceType {
   TumorSite: "tumorSite",

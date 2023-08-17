@@ -2,16 +2,16 @@ using Azure.Core;
 using TypeSpec.Http;
 namespace AzureHealthInsights;
 
+#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "This is a template"
 @doc("Long running RPC operation template")
 op LongRunningRpcOperation<
-    TParams extends object,
-    TResponse extends object,
-    Traits extends object = {}
-  > is RpcOperation<
-    TParams & Traits,
-    Foundations.AcceptedResponse<Traits &
-                                 Foundations.LongRunningStatusLocation &
-                                 Foundations.RetryAfterHeader &
-                                 RepeatabilityResponseHeaders> | TResponse,
-    Traits
-  >;
+  TParams,
+  TResponse
+> is Azure.Core.Foundations.Operation<
+  TParams & RepeatabilityRequestHeaders,
+  (Foundations.AcceptedResponse<Foundations.LongRunningStatusLocation &
+    Foundations.RetryAfterHeader> &
+    RepeatabilityResponseHeaders) | TResponse,
+  RepeatabilityRequestHeaders & RepeatabilityResponseHeaders,
+  Azure.Core.Foundations.ErrorResponse
+>;

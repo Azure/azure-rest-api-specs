@@ -729,13 +729,8 @@
       "type": "object",
       "properties": {
         "terminalServerConfiguration": {
-          "type": "object",
           "description": "Network and credentials configuration already applied to terminal server.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/TerminalServerPatchableProperties"
-            }
-          ]
+          "$ref": "#/definitions/TerminalServerPatchableProperties"
         }
       }
     },
@@ -836,17 +831,15 @@
         },
         "ipv4Prefix": {
           "type": "string",
-          "description": "IPv4Prefix for Management Network. Default value : 10.1.0.0/19.",
+          "description": "IPv4Prefix for Management Network. Example: 10.1.0.0/19.",
           "x-ms-mutability": [
             "create",
             "read"
-          ],
-          "default": "10.1.0.0/19"
+          ]
         },
         "ipv6Prefix": {
           "type": "string",
-          "description": "IPv6Prefix for Management Network. Default value 3FFE:FFFF:0:CD40::/59.",
-          "default": "3FFE:FFFF:0:CD40::/59",
+          "description": "IPv6Prefix for Management Network. Example: 3FFE:FFFF:0:CD40::/59.",
           "x-ms-mutability": [
             "create",
             "read"
@@ -873,97 +866,12 @@
           ]
         },
         "terminalServerConfiguration": {
-          "type": "object",
           "description": "Network and credentials configuration currently applied to terminal server.",
-          "required": [
-            "username",
-            "password",
-            "primaryIpv4Prefix",
-            "secondaryIpv4Prefix"
-          ],
-          "properties": {
-            "networkDeviceId": {
-              "type": "string",
-              "description": "ARM Resource ID used for the NetworkDevice.",
-              "readOnly": true
-            }
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/Layer3IpPrefixProperties"
-            },
-            {
-              "$ref": "#/definitions/TerminalServerPatchableProperties"
-            }
-          ]
+          "$ref": "#/definitions/TerminalServerConfiguration"
         },
         "managementNetworkConfiguration": {
-          "type": "object",
           "description": "Configuration to be used to setup the management network.",
-          "required": [
-            "infrastructureVpnConfiguration",
-            "workloadVpnConfiguration"
-          ],
-          "properties": {
-            "infrastructureVpnConfiguration": {
-              "type": "object",
-              "description": "Configuration for infrastructure vpn.",
-              "properties": {
-                "administrativeState": {
-                  "description": "Indicates configuration state. Example: Enabled | Disabled.",
-                  "$ref": "./common.json#/definitions/EnabledDisabledState"
-                },
-                "networkToNetworkInterconnectId": {
-                  "type": "string",
-                  "description": "Gets the networkToNetworkInterconnectId of the resource.",
-                  "readOnly": true
-                },
-                "peeringOption": {
-                  "$ref": "./common.json#/definitions/PeeringOption"
-                },
-                "optionBProperties": {
-                  "description": "option B properties",
-                  "$ref": "#/definitions/OptionBProperties"
-                },
-                "optionAProperties": {
-                  "description": "option A properties",
-                  "$ref": "#/definitions/OptionAProperties"
-                }
-              },
-              "required": [
-                "optionBProperties"
-              ]
-            },
-            "workloadVpnConfiguration": {
-              "type": "object",
-              "description": "Configuration for workload vpn.",
-              "properties": {
-                "administrativeState": {
-                  "description": "Indicates configuration state. Example: enabled | disabled.",
-                  "$ref": "./common.json#/definitions/EnabledDisabledState"
-                },
-                "peeringOption": {
-                  "$ref": "./common.json#/definitions/PeeringOption"
-                },
-                "networkToNetworkInterconnectId": {
-                  "type": "string",
-                  "description": "Gets the networkToNetworkInterconnectId of the resource.",
-                  "readOnly": true
-                },
-                "optionAProperties": {
-                  "description": "option A properties object",
-                  "$ref": "#/definitions/OptionAProperties"
-                },
-                "optionBProperties": {
-                  "description": "option B properties object",
-                  "$ref": "#/definitions/OptionBProperties"
-                }
-              },
-              "required": [
-                "optionBProperties"
-              ]
-            }
-          }
+          "$ref": "#/definitions/ManagementNetworkConfiguration"
         },
         "operationalState": {
           "description": "Gets the operational state of the resource.",
@@ -1098,6 +1006,19 @@
       "type": "object",
       "description": "Configuration used to setup CE-PE connectivity.",
       "properties": {
+        "nniType": {
+          "type": "string",
+          "description": "Type of NNI used. Example: CE | NPB",
+          "default": "CE",
+          "enum": [
+            "CE",
+            "NPB"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "nniType"
+          }
+        },
         "administrativeState": {
           "description": "Gets the administrativeState of the resource. Example -Enabled/Disabled",
           "$ref": "./common.json#/definitions/EnabledDisabledState"
@@ -1111,17 +1032,10 @@
           "$ref": "./common.json#/definitions/BooleanEnumProperty"
         },
         "layer2Configuration": {
-          "type": "object",
           "description": "Common properties for Layer2Configuration.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Layer2Configuration",
-              "description": "Common properties for Layer2Configuration."
-            }
-          ]
+          "$ref": "#/definitions/Layer2Configuration"
         },
         "layer3Configuration": {
-          "type": "object",
           "description": "Common properties for Layer3Configuration.",
           "$ref": "#/definitions/Layer3Configuration"
         },
@@ -1169,7 +1083,7 @@
           "format": "int32",
           "minimum": 501,
           "maximum": 4095,
-          "description": "Vlan Id.Example : 501"
+          "description": "Vlan identifier. Example : 501"
         },
         "peerASN": {
           "type": "integer",
@@ -1179,22 +1093,8 @@
           "description": "Peer ASN number.Example : 28"
         },
         "bfdConfiguration": {
-          "type": "object",
           "description": "BFD Configuration properties.",
-          "properties": {
-            "interval": {
-              "type": "integer",
-              "format": "int32",
-              "description": "interval in seconds. Example: 300.",
-              "readOnly": true
-            },
-            "multiplier": {
-              "type": "integer",
-              "format": "int32",
-              "description": "multiplier. Example: 3.",
-              "readOnly": true
-            }
-          }
+          "$ref": "#/definitions/FabricBfdConfiguration"
         }
       },
       "allOf": [
@@ -1205,7 +1105,7 @@
     },
     "OptionBProperties": {
       "type": "object",
-      "description": "Option B configuration to be used for management vpn.",
+      "description": "Option B configuration.",
       "properties": {
         "importRouteTargets": {
           "type": "array",
@@ -1307,25 +1207,111 @@
       "properties": {
         "primaryIpv4Prefix": {
           "type": "string",
-          "description": "IPv4 Address Prefix of CE-PE interconnect links. Default value is 172.31.0.0/31. The values can be specified at the time of creation or can be updated afterwards. Any update to the values post-provisioning may disrupt traffic. The 1st and 3rd IPs are to be configured on CE1 and CE2 for Option B interfaces. The 2nd and 4th IPs are to be configured on PE1 and PE2 for Option B interfaces.",
-          "default": "172.31.0.0/31"
+          "description": "IPv4 Address Prefix of CE-PE interconnect links. Example: 172.31.0.0/31. The values can be specified at the time of creation or can be updated afterwards. Any update to the values post-provisioning may disrupt traffic. The 1st and 3rd IPs are to be configured on CE1 and CE2 for Option B interfaces. The 2nd and 4th IPs are to be configured on PE1 and PE2 for Option B interfaces."
         },
         "primaryIpv6Prefix": {
           "type": "string",
-          "description": "IPv6 Address Prefix of CE-PE interconnect links. Default value is 3FFE:FFFF:0:CD30::a0/126. The values can be specified at the time of creation or can be updated afterwards. Any update to the values post-provisioning may disrupt traffic. The 1st and 3rd IPs are to be configured on CE1 and CE2 for Option B interfaces. The 2nd and 4th IPs are to be configured on PE1 and PE2 for Option B interfaces.",
-          "default": "3FFE:FFFF:0:CD30::a0/126"
+          "description": "IPv6 Address Prefix of CE-PE interconnect links. Example: 3FFE:FFFF:0:CD30::a0/126. The values can be specified at the time of creation or can be updated afterwards. Any update to the values post-provisioning may disrupt traffic. The 1st and 3rd IPs are to be configured on CE1 and CE2 for Option B interfaces. The 2nd and 4th IPs are to be configured on PE1 and PE2 for Option B interfaces."
         },
         "secondaryIpv4Prefix": {
           "type": "string",
-          "description": "Secondary IPv4 Address Prefix of CE-PE interconnect links. Default value is 172.31.0.20/31. The values can be specified at the time of creation or can be updated afterwards. Any update to the values post-provisioning may disrupt traffic. The 1st and 3rd IPs are to be configured on CE1 and CE2 for Option B interfaces. The 2nd and 4th IPs are to be configured on PE1 and PE2 for Option B interfaces.",
-          "default": "172.31.0.20/31"
+          "description": "Secondary IPv4 Address Prefix of CE-PE interconnect links. Example: 172.31.0.20/31. The values can be specified at the time of creation or can be updated afterwards. Any update to the values post-provisioning may disrupt traffic. The 1st and 3rd IPs are to be configured on CE1 and CE2 for Option B interfaces. The 2nd and 4th IPs are to be configured on PE1 and PE2 for Option B interfaces."
         },
         "secondaryIpv6Prefix": {
           "type": "string",
-          "description": "Secondary IPv6 Address Prefix of CE-PE interconnect links. Default value is 3FFE:FFFF:0:CD30::a4/126. The values can be specified at the time of creation or can be updated afterwards. Any update to the values post-provisioning may disrupt traffic. The 1st and 3rd IPs are to be configured on CE1 and CE2 for Option B interfaces. The 2nd and 4th IPs are to be configured on PE1 and PE2 for Option B interfaces.",
-          "default": "3FFE:FFFF:0:CD30::a4/126"
+          "description": "Secondary IPv6 Address Prefix of CE-PE interconnect links. Example: 3FFE:FFFF:0:CD30::a4/126. The values can be specified at the time of creation or can be updated afterwards. Any update to the values post-provisioning may disrupt traffic. The 1st and 3rd IPs are to be configured on CE1 and CE2 for Option B interfaces. The 2nd and 4th IPs are to be configured on PE1 and PE2 for Option B interfaces."
         }
       }
+    },
+    "ManagementNetworkConfiguration": {
+      "type": "object",
+      "description": "Configuration to be used to setup the management network.",
+      "required": [
+        "infrastructureVpnConfiguration",
+        "workloadVpnConfiguration"
+      ],
+      "properties": {
+        "infrastructureVpnConfiguration": {
+          "description": "Configuration for infrastructure vpn.",
+          "$ref": "#/definitions/VpnConfigurationProperties"
+        },
+        "workloadVpnConfiguration": {
+          "description": "Configuration for workload vpn.",
+          "$ref": "#/definitions/VpnConfigurationProperties"
+        }
+      }
+    },
+    "VpnConfigurationProperties": {
+      "type": "object",
+      "description": "Configuration for infrastructure vpn.",
+      "properties": {
+        "administrativeState": {
+          "description": "Indicates configuration state. Example: Enabled | Disabled.",
+          "$ref": "./common.json#/definitions/EnabledDisabledState"
+        },
+        "networkToNetworkInterconnectId": {
+          "type": "string",
+          "description": "Gets the networkToNetworkInterconnectId of the resource.",
+          "readOnly": true
+        },
+        "peeringOption": {
+          "$ref": "./common.json#/definitions/PeeringOption"
+        },
+        "optionBProperties": {
+          "description": "option B properties",
+          "$ref": "#/definitions/OptionBProperties"
+        },
+        "optionAProperties": {
+          "description": "option A properties",
+          "$ref": "#/definitions/OptionAProperties"
+        }
+      },
+      "required": [
+        "peeringOption"
+      ]
+    },
+    "FabricBfdConfiguration": {
+      "type": "object",
+      "description": "BFD Configuration properties.",
+      "properties": {
+        "interval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "interval in seconds. Example: 300.",
+          "readOnly": true
+        },
+        "multiplier": {
+          "type": "integer",
+          "format": "int32",
+          "description": "multiplier. Example: 3.",
+          "readOnly": true
+        }
+      }
+    },
+    "TerminalServerConfiguration": {
+      "type": "object",
+      "description": "Network and credentials configuration currently applied to terminal server.",
+      "required": [
+        "username",
+        "password",
+        "primaryIpv4Prefix",
+        "secondaryIpv4Prefix"
+      ],
+      "properties": {
+        "networkDeviceId": {
+          "type": "string",
+          "description": "ARM Resource ID used for the NetworkDevice.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Layer3IpPrefixProperties"
+        },
+        {
+          "$ref": "#/definitions/TerminalServerPatchableProperties"
+        }
+      ]
     }
   },
   "parameters": {}

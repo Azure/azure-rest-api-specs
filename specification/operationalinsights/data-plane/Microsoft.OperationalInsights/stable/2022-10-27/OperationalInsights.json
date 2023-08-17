@@ -87,7 +87,7 @@
       "post": {
         "operationId": "Query_Execute",
         "summary": "Execute an Analytics query",
-        "description": "Executes an Analytics query for data. [Here](https://dev.loganalytics.io/documentation/Using-the-API) is an example for using POST with an Analytics query.",
+        "description": "Executes an Analytics query for data. [Here](https://learn.microsoft.com/azure/azure-monitor/logs/api/request-format) is an example for using POST with an Analytics query.",
         "x-ms-examples": {
           "simple-query": {
             "$ref": "examples/la-post-example.json"
@@ -187,7 +187,7 @@
       "get": {
         "operationId": "Query_ResourceGet",
         "summary": "Execute an Analytics query using resource URI",
-        "description": "Executes an Analytics query for data in the context of a resource. [Here](https://docs.microsoft.com/azure/azure-monitor/logs/api/azure-resource-queries) is an example for using POST with an Analytics query.",
+        "description": "Executes an Analytics query for data in the context of a resource. [Here](https://learn.microsoft.com/azure/azure-monitor/logs/api/azure-resource-queries) is an example for using POST with an Analytics query.",
         "x-ms-examples": {
           "simple-query": {
             "$ref": "examples/la-get-resource-centric-example.json"
@@ -222,7 +222,7 @@
       "post": {
         "operationId": "Query_ResourceExecute",
         "summary": "Execute an Analytics query using resource ID",
-        "description": "Executes an Analytics query for data in the context of a resource. [Here](https://docs.microsoft.com/azure/azure-monitor/logs/api/azure-resource-queries) is an example for using POST with an Analytics query.",
+        "description": "Executes an Analytics query for data in the context of a resource. [Here](https://learn.microsoft.com/azure/azure-monitor/logs/api/azure-resource-queries) is an example for using POST with an Analytics query.",
         "x-ms-examples": {
           "simple-query": {
             "$ref": "examples/la-post-resource-centric-example.json"
@@ -259,7 +259,7 @@
       "post": {
         "operationId": "Query_Batch",
         "summary": "Execute a batch of Analytics queries",
-        "description": "Executes a batch of Analytics queries for data. [Here](https://dev.loganalytics.io/documentation/Using-the-API) is an example for using POST with an Analytics query.",
+        "description": "Executes a batch of Analytics queries for data. [Here](https://learn.microsoft.com/azure/azure-monitor/logs/api/batch-queries) is an example for using POST with an Analytics query.",
         "x-ms-examples": {
           "metadataPost": {
             "$ref": "examples/batch-query-example.json"
@@ -299,7 +299,7 @@
       "get": {
         "operationId": "Query_ResourceGetXms",
         "summary": "Execute an Analytics query using resource URI",
-        "description": "Executes an Analytics query for data in the context of a resource. [Here](https://docs.microsoft.com/azure/azure-monitor/logs/api/azure-resource-queries) is an example for using POST with an Analytics query.",
+        "description": "Executes an Analytics query for data in the context of a resource. [Here](https://learn.microsoft.com/azure/azure-monitor/logs/api/azure-resource-queries) is an example for using POST with an Analytics query.",
         "x-ms-examples": {
           "simple-query": {
             "$ref": "examples/la-get-resource-centric-example.json"
@@ -334,7 +334,7 @@
       "post": {
         "operationId": "Query_ResourceExecuteXms",
         "summary": "Execute an Analytics query using resource ID",
-        "description": "Executes an Analytics query for data in the context of a resource. [Here](https://docs.microsoft.com/azure/azure-monitor/logs/api/azure-resource-queries) is an example for using POST with an Analytics query.",
+        "description": "Executes an Analytics query for data in the context of a resource. [Here](https://learn.microsoft.com/azure/azure-monitor/logs/api/azure-resource-queries) is an example for using POST with an Analytics query.",
         "x-ms-examples": {
           "simple-query": {
             "$ref": "examples/la-post-resource-centric-example.json"
@@ -371,7 +371,7 @@
   "parameters": {
     "workspaceId": {
       "name": "workspaceId",
-      "description": "ID of the workspace. This is Workspace ID from the Properties blade in the Azure portal.",
+      "description": "Primary Workspace ID of the query. This is the Workspace ID from the Properties blade in the Azure portal.",
       "in": "path",
       "required": true,
       "type": "string",
@@ -461,7 +461,7 @@
           "$ref": "#/definitions/timespanParam"
         },
         "workspaces": {
-          "description": "A list of workspaces that are included in the query.",
+          "description": "A list of workspaces to query in addition to the primary workspace.",
           "$ref": "#/definitions/workspacesParam"
         }
       },
@@ -475,7 +475,7 @@
       "type": "object",
       "properties": {
         "tables": {
-          "description": "The list of tables, columns and rows.",
+          "description": "The results of the query in tabular format.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/table"
@@ -1492,10 +1492,11 @@
       "description": "An single request in a batch.",
       "properties": {
         "id": {
-          "description": "The error details.",
+          "description": "Unique ID corresponding to each request in the batch.",
           "type": "string"
         },
         "headers": {
+          "description": "Headers of the request. Can use prefer header to set server timeout and to query statistics and visualization information.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -1505,6 +1506,7 @@
           "$ref": "#/definitions/queryBody"
         },
         "path": {
+          "description": "The query path of a single request in a batch, defaults to /query",
           "type": "string",
           "enum": [
             "/query"
@@ -1514,6 +1516,7 @@
           }
         },
         "method": {
+          "description": "The method of a single request in a batch, defaults to POST",
           "type": "string",
           "enum": [
             "POST"
@@ -1523,7 +1526,7 @@
           }
         },
         "workspace": {
-          "description": "Workspace Id to be included in the query",
+          "description": "Primary Workspace ID of the query. This is the Workspace ID from the Properties blade in the Azure portal.",
           "type": "string"
         }
       },
@@ -1547,6 +1550,7 @@
       }
     },
     "batchQueryResponse": {
+      "description": "Contains the batch query response and the headers, id, and status of the request",
       "type": "object",
       "properties": {
         "id": {
@@ -1574,7 +1578,7 @@
       "type": "object",
       "properties": {
         "tables": {
-          "description": "The list of tables, columns and rows.",
+          "description": "The results of the query in tabular format.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/table"

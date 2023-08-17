@@ -1,43 +1,83 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "@typespec/http";
-import "@azure-tools/typespec-client-generator-core";
+import "@typespec/versioning";
 
 import "./models/completions.create.tsp";
 import "./models/chat.completions.tsp";
 import "./models/embeddings.create.tsp";
+import "./models/images.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
+
 using Azure.Core;
-using Azure.ClientGenerator.Core;
 
 namespace Azure.OpenAI;
 
 @doc("Return the embeddings for a given prompt.")
-@TypeSpec.Rest.actionSeparator("/")
-@action("embeddings")
-@convenientAPI(true)
-op getEmbeddings is Azure.Core.ResourceAction<Deployment, EmbeddingsOptions, Embeddings>;
-
+@actionSeparator("/")
+@action("embeddings") //@convenientAPI(true)
+op getEmbeddings is Azure.Core.ResourceAction<
+  Deployment,
+  EmbeddingsOptions,
+  Embeddings
+>;
 
 @doc("""
 Gets completions for the provided input prompts.
 Completions support a wide variety of tasks and generate text that continues from or "completes"
 provided prompt data.
 """)
-@TypeSpec.Rest.actionSeparator("/")
-@action("completions")
-@convenientAPI(true)
-op getCompletions is Azure.Core.ResourceAction<Deployment, CompletionsOptions, Completions>;
-
+@actionSeparator("/")
+@action("completions") //@convenientAPI(true)
+op getCompletions is Azure.Core.ResourceAction<
+  Deployment,
+  CompletionsOptions,
+  Completions
+>;
 
 @doc("""
 Gets chat completions for the provided chat messages.
 Completions support a wide variety of tasks and generate text that continues from or "completes"
 provided prompt data.
 """)
-@TypeSpec.Rest.actionSeparator("/")
-@action("chat/completions")
-@convenientAPI(true)
-op getChatCompletions is Azure.Core.ResourceAction<Deployment, ChatCompletionsOptions, ChatCompletions>;
+@added(ServiceApiVersions.v2023_05_15)
+@actionSeparator("/")
+@action("chat/completions") //@convenientAPI(true)
+op getChatCompletions is ResourceAction<
+  Deployment,
+  ChatCompletionsOptions,
+  ChatCompletions
+>;
+
+// Note: pending resolution of  cross-language code emission behavior for long-running operations, image generation
+//        reuses its final operation response model as its status polling model.
+#suppress "@azure-tools/typespec-azure-core/rpc-operation-request-body" "MUST fix in next update"
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Allowed because this is a non-standard status polling operation."
+@doc("Returns the status of the images operation")
+@added(ServiceApiVersions.v2023_06_01_Preview)
+@route("/operations/images/{operationId}")
+op getAzureBatchImageGenerationOperationStatus is RpcOperation<
+  {
+    @doc(".") @path operationId: string;
+  },
+  BatchImageGenerationOperationResponse
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+@doc("Starts the generation of a batch of images from a text caption")
+@added(ServiceApiVersions.v2023_06_01_Preview)
+@route("/images/generations:submit")
+@pollingOperation(
+  getAzureBatchImageGenerationOperationStatus,
+  {
+    operationId: ResponseProperty<"id">,
+  }
+)
+op beginAzureBatchImageGeneration is OaiLongRunningRpcOperation<
+  ImageGenerationOptions,
+  BatchImageGenerationOperationResponse,
+  BatchImageGenerationOperationResponse
+>;
