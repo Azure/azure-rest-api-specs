@@ -1467,7 +1467,7 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "Name of the SKU.",
+          "description": "Name of the SKU in {PlanId} format. For Terraform, the only allowed value is 'linking'.",
           "type": "string"
         }
       }
@@ -1520,7 +1520,7 @@
       "readOnly": true
     },
     "DatadogOrganizationProperties": {
-      "description": "Datadog organization properties",
+      "description": "Specify the Datadog organization name. In the case of linking to existing organizations, Id, ApiKey, and Applicationkey is required as well.",
       "type": "object",
       "properties": {
         "name": {
@@ -1592,7 +1592,7 @@
       }
     },
     "UserInfo": {
-      "description": "User info",
+      "description": "Includes name, email and optionally, phone number. User Information can't be null.",
       "type": "object",
       "properties": {
         "name": {
@@ -1661,7 +1661,7 @@
         "UserAssigned"
       ],
       "type": "string",
-      "description": "Identity type",
+      "description": "Specifies the identity type of the Datadog Monitor. At this time the only allowed value is 'SystemAssigned'.",
       "x-ms-enum": {
         "modelAsString": true,
         "name": "ManagedIdentityTypes"
