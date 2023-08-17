@@ -652,13 +652,13 @@
         "operationId": "Instances_ListByAccount",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/AccountNameParameter"
@@ -694,13 +694,13 @@
         "operationId": "Instances_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/AccountNameParameter"
@@ -734,13 +734,13 @@
         "operationId": "Instances_Head",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/AccountNameParameter"
@@ -775,13 +775,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/AccountNameParameter"
@@ -828,13 +828,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/AccountNameParameter"
@@ -877,13 +877,13 @@
         "operationId": "Instances_Update",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/AccountNameParameter"
@@ -947,7 +947,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
+              "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
             }
           },
           "default": {
@@ -995,7 +995,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -1039,7 +1039,7 @@
             "description": "The parameters for creating a private endpoint connection.",
             "required": true,
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           }
         ],
@@ -1047,13 +1047,13 @@
           "200": {
             "description": "The create or update request was successful; the operation will complete asynchronously.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "201": {
             "description": "The create or update request was successful; the operation will complete asynchronously.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -1205,12 +1205,7 @@
             "$ref": "#/parameters/AccountNameParameter"
           },
           {
-            "name": "groupId",
-            "in": "path",
-            "description": "The name of the private link resource.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z0-9][-a-z0-9]*(?<!-)$"
+            "$ref": "#/parameters/GroupIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -1220,7 +1215,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateLinkResource"
+              "$ref": "#/definitions/GroupInformation"
             }
           },
           "default": {
@@ -1234,6 +1229,306 @@
           "PrivateLinkResourcesGet": {
             "$ref": "./examples/PrivateLinkResources/PrivateLinkResources_Get.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/privateEndpointConnectionProxies": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnectionProxies"
+        ],
+        "description": "(INTERNAL - DO NOT USE) List all private endpoint connection proxies in a device update account.",
+        "operationId": "PrivateEndpointConnectionProxies_ListByAccount",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxyListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionProxyList": {
+            "$ref": "./examples/PrivateEndpointConnectionProxies/PrivateEndpointConnectionProxy_ListByAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyId}/validate": {
+      "post": {
+        "description": "(INTERNAL - DO NOT USE) Validates a private endpoint connection proxy object.",
+        "operationId": "PrivateEndpointConnectionProxies_Validate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionProxyIdParameter"
+          },
+          {
+            "name": "privateEndpointConnectionProxy",
+            "in": "body",
+            "description": "The parameters for creating a private endpoint connection proxy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Validate private endpoint connection proxy empty response."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionProxyValidate": {
+            "$ref": "./examples/PrivateEndpointConnectionProxies/PrivateEndpointConnectionProxy_Validate.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyId}/updatePrivateEndpointProperties": {
+      "post": {
+        "description": "(INTERNAL - DO NOT USE) Updates a private endpoint inside the private endpoint connection proxy object.",
+        "operationId": "PrivateEndpointConnectionProxies_UpdatePrivateEndpointProperties",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionProxyIdParameter"
+          },
+          {
+            "name": "privateEndpointUpdate",
+            "in": "body",
+            "description": "The parameters for updating a private endpoint connection proxy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update private endpoint in private endpoint connection proxy empty response."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionProxyPrivateEndpointUpdate": {
+            "$ref": "./examples/PrivateEndpointConnectionProxies/PrivateEndpointConnectionProxy_PrivateEndpointUpdate.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyId}": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "(INTERNAL - DO NOT USE) Get the specified private endpoint connection proxy associated with the device update account.",
+        "operationId": "PrivateEndpointConnectionProxies_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionProxyIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionProxyGet": {
+            "$ref": "./examples/PrivateEndpointConnectionProxies/PrivateEndpointConnectionProxy_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PrivateEndpointConnectionProxies"
+        ],
+        "description": "(INTERNAL - DO NOT USE) Creates or updates the specified private endpoint connection proxy resource associated with the device update account.",
+        "operationId": "PrivateEndpointConnectionProxies_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionProxyIdParameter"
+          },
+          {
+            "name": "privateEndpointConnectionProxy",
+            "in": "body",
+            "description": "The parameters for creating a private endpoint connection proxy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionProxyCreateOrUpdate": {
+            "$ref": "./examples/PrivateEndpointConnectionProxies/PrivateEndpointConnectionProxy_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "PrivateEndpointConnectionProxies"
+        ],
+        "description": "(INTERNAL - DO NOT USE) Deletes the specified private endpoint connection proxy associated with the device update account.",
+        "operationId": "PrivateEndpointConnectionProxies_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionProxyIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the operation completed synchronously."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Operation Status Location URI"
+              }
+            }
+          },
+          "204": {
+            "description": "The private endpoint connection does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionProxyDelete": {
+            "$ref": "./examples/PrivateEndpointConnectionProxies/PrivateEndpointConnectionProxy_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -1327,7 +1622,7 @@
               "type": "array",
               "x-ms-identifiers": [],
               "items": {
-                "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
+                "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnection"
               }
             },
             "sku": {
@@ -2266,6 +2561,33 @@
       "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$",
       "minLength": 3,
       "maxLength": 24
+    },
+    "InstanceNameParameter": {
+      "name": "instanceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Instance name.",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$",
+      "minLength": 3,
+      "maxLength": 36
+    },
+    "GroupIdParameter": {
+      "name": "groupId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The group ID of the private link resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "PrivateEndpointConnectionProxyIdParameter": {
+      "name": "privateEndpointConnectionProxyId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the private endpoint connection proxy object.",
+      "x-ms-parameter-location": "method"
     },
     "AgentNameParameter": {
       "name": "agentName",
