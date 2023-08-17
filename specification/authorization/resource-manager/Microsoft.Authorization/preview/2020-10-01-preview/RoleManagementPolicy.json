@@ -350,7 +350,7 @@
       }
     },
     "RoleManagementPolicyApprovalRule": {
-      "description": "The role management policy rule.",
+      "description": "The role management policy approval rule.",
       "allOf": [
         {
           "$ref": "#/definitions/RoleManagementPolicyRule"
@@ -370,15 +370,15 @@
       "properties": {
         "isApprovalRequired": {
           "type": "boolean",
-          "description": "Determine whether approval is required or not."
+          "description": "Determines whether approval is required or not."
         },
         "isApprovalRequiredForExtension": {
           "type": "boolean",
-          "description": "Determine whether approval is required for assignment extension."
+          "description": "Determines whether approval is required for assignment extension."
         },
         "isRequestorJustificationRequired": {
           "type": "boolean",
-          "description": "Determine whether requestor justification required."
+          "description": "Determine whether requestor justification is required."
         },
         "approvalMode": {
           "type": "string",
@@ -399,6 +399,7 @@
           "items": {
             "$ref": "#/definitions/ApprovalStage"
           },
+          "x-ms-identifiers": [],
           "description": "The approval stages of the request."
         }
       }
@@ -410,16 +411,16 @@
         "approvalStageTimeOutInDays": {
           "type": "integer",
           "format": "int32",
-          "description": "The time in days when approval request would be timed out."
+          "description": "The time in days when approval request would be timed out"
         },
         "isApproverJustificationRequired": {
           "type": "boolean",
-          "description": "Determine whether approver need to provide justification for his decision."
+          "description": "Determines whether approver need to provide justification for his decision."
         },
         "escalationTimeInMinutes": {
           "type": "integer",
           "format": "int32",
-          "description": "The time in minutes when the approval request would be escalated if the primary approver does not approves."
+          "description": "The time in minutes when the approval request would be escalated if the primary approver does not approve"
         },
         "primaryApprovers": {
           "type": "array",
@@ -472,7 +473,7 @@
       }
     },
     "RoleManagementPolicyAuthenticationContextRule": {
-      "description": "The role management policy rule.",
+      "description": "The role management policy authentication context rule.",
       "allOf": [
         {
           "$ref": "#/definitions/RoleManagementPolicyRule"
@@ -503,7 +504,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "description": "The type of enable rules",
+            "description": "The type of enablement rule",
             "enum": [
               "MultiFactorAuthentication",
               "Justification",
@@ -519,7 +520,7 @@
       }
     },
     "RoleManagementPolicyExpirationRule": {
-      "description": "The role management policy rule.",
+      "description": "The role management policy expiration rule.",
       "allOf": [
         {
           "$ref": "#/definitions/RoleManagementPolicyRule"
@@ -538,7 +539,7 @@
       }
     },
     "RoleManagementPolicyNotificationRule": {
-      "description": "The role management policy rule.",
+      "description": "The role management policy notification rule.",
       "allOf": [
         {
           "$ref": "#/definitions/RoleManagementPolicyRule"
@@ -588,11 +589,11 @@
           "items": {
             "type": "string"
           },
-          "description": "The list notification recipients."
+          "description": "The list of notification recipients."
         },
         "isDefaultRecipientsEnabled": {
           "type": "boolean",
-          "description": "Its value determine if the notification need to be sent to the recipient type specified in policy rule."
+          "description": "Determines if the notification will be sent to the recipient type specified in the policy rule."
         }
       }
     },
@@ -613,7 +614,7 @@
         },
         "level": {
           "type": "string",
-          "description": "The assignment level to which it is applied."
+          "description": "The assignment level to which rule is applied."
         },
         "targetObjects": {
           "type": "array",

@@ -6,8 +6,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-dataprotectionplatform"
-  output-folder: "$(typescript-sdks-folder)/sdk/dataprotectionplatform/arm-dataprotectionplatform"
-  clear-output-folder: true
+  package-name: "@azure/arm-dataprotection"
+  output-folder: "$(typescript-sdks-folder)/sdk/dataprotection/arm-dataprotection"
   generate-metadata: true
 ```

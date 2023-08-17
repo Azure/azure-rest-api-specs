@@ -88,16 +88,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Default Response.",
-            "schema": {
-              "$ref": "#/definitions/ExtendedErrorInfo"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/UsageAggregatePage"
+            }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "#/definitions/ExtendedErrorInfo"
             }
           }
         },
@@ -127,14 +127,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "default": {
             "description": "Default Response.",
             "schema": {
               "$ref": "#/definitions/ExtendedErrorInfo"
             }
-          },
-          "200": {
-            "description": "OK"
           }
         }
       }
@@ -300,7 +300,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "URI to the next page of operations.",
@@ -338,6 +341,7 @@
           "items": {
             "$ref": "#/definitions/ErrorDefinition"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         }
       }

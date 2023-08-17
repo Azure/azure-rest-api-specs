@@ -43,16 +43,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
           "200": {
             "description": "OK -- The list of disk migration jobs has been returned.",
             "schema": {
               "$ref": "DiskMigrationJobs.json#/definitions/DiskMigrationJobList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -88,16 +88,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
           "200": {
             "description": "OK -- The disk migration job has been returned.",
             "schema": {
               "$ref": "DiskMigrationJobs.json#/definitions/DiskMigrationJob"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -140,16 +140,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
           "200": {
             "description": "OK --  Disk migration job is created successfully.",
             "schema": {
               "$ref": "DiskMigrationJobs.json#/definitions/DiskMigrationJob"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -182,16 +182,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
           "200": {
             "description": "OK --  Disk migration job cancellation is called.",
             "schema": {
               "$ref": "DiskMigrationJobs.json#/definitions/DiskMigrationJob"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -319,7 +319,10 @@
       "type": "array",
       "items": {
         "$ref": "DiskMigrationJobs.json#/definitions/MigrationSubTask"
-      }
+      },
+      "x-ms-identifiers": [
+        "migrationSubTaskId"
+      ]
     },
     "MigrationSubTask": {
       "description": "Disk migration child task.",

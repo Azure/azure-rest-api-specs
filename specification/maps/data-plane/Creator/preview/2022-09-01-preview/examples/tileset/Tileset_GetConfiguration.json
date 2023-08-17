@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "geography": "us",
+    "api-version": "2022-09-01-preview",
+    "datasetId": "[datasetId]"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "version": 1,
+        "layers": {
+          "Indoor unit": {
+            "minZoom": 10,
+            "maxZoom": 18,
+            "features": {
+              "featureClasses": [
+                "unit",
+                "wall"
+              ],
+              "filter": [
+                "any",
+                [
+                  "!=",
+                  [
+                    "get",
+                    "roomType"
+                  ],
+                  "conference"
+                ],
+                [
+                  ">=",
+                  [
+                    "zoom"
+                  ],
+                  12
+                ]
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

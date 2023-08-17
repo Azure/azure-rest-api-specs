@@ -1,25 +1,34 @@
 # Variables in API scenario
 
-## Variable definition and replacement
+## Variable types
+
+Variables could be of different types:
+- `array`
+- `bool`
+- `int`
+- `object`
+- `secureString`
+- `secureObject`
+- `string`
+
+## Variable definition
 
 Variables could be defined in different level of API scenario:
 
-- `runtime`: Variables specified at runtime
-- `global`: API scenario definition level variable definition
-- `scope`: Scope level variable
-- `scenario`: API scenario level variable definition
-- `step`: Step level variable definition
+- `runtime`: Variables specified at runtime. Only `string` or `secureString` type is allowed in runtime level.
+- `global`: API scenario file level variable definition.
+- `scope`: Scope level variable. If the scope of API scenario is `ResourceGroup`, variable `resourceGroupName` will be available in scope level.
+- `scenario`: API scenario level variable definition.
+- `step`: Step level variable definition.
 
-Variable could be referenced by `$(variableName)`. Currently variable type must be string.
-
-For example, in the following API scenario:
+Variable could be referenced by `$(variableName)`. For example, in the following API scenario:
 
 ```yaml
 variables:
   resourceName: level-1
 
 scenarios:
-  - definition: Create some resource
+  - description: Create some resource
     variables:
       resourceName: level-2
     steps:
@@ -29,7 +38,7 @@ scenarios:
         exampleFile: ../examples/ResourceCreate.json
 ```
 
-if in `../examples/ResourceCreate.json` we have `$(resourceName)` in some string, it would be replaced with `level-3`.
+If in `../examples/ResourceCreate.json` there is `$(resourceName)` in some string, it would be replaced with `level-3`.
 
 Variables could also be defined on test running. For example you could set `subscriptionId` or `resourceGroupName` on the global scope. How to set global env is based on the API scenario consumer.
 
@@ -41,9 +50,7 @@ variables:
   resourceId: Microsoft.Contoso/$(resourceName)
 ```
 
-Then `$(resourceId)` would be resolved to `Microsoft.Contoso/abc`.
-
-Variable resolving is limited to at most 100 times for certain string.
+Then `$(resourceId)` would be resolved to `Microsoft.Contoso/abc`. Note that variables referencing `secureString` should be regarded as `secureString` in API Scenario runner.
 
 ## Convention: parameter name in example
 

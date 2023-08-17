@@ -4,16 +4,51 @@
 
 Configuration for generating Form Recognizer SDK.
 
-The current release is `release_2_1`.
+The current release is `2023-07-31`.
 
 ``` yaml
 
-tag: release_2_1
+tag: 2023-07-31
 add-credentials: true
 openapi-type: data-plane
 ```
 
 # Releases
+
+### Release 2023-07-31
+These settings apply only when `--tag=2023-07-31` is specified on the command line.
+``` yaml $(tag) == '2023-07-31'
+input-file:
+  - stable/2023-07-31/FormRecognizer.json
+```  
+
+### Release 2023-02-28-preview
+These settings apply only when `--tag=2023-02-28-preview` is specified on the command line.
+``` yaml $(tag) == '2023-02-28-preview'
+input-file:
+  - preview/2023-02-28-preview/FormRecognizer.json
+```  
+
+### Release 2022-08-31
+These settings apply only when `--tag=2022-08-31` is specified on the command line.
+``` yaml $(tag) == '2022-08-31'
+input-file:
+  - stable/2022-08-31/FormRecognizer.json
+```  
+
+### Release 2022-06-30-preview
+These settings apply only when `--tag=2022-06-30-preview` is specified on the command line.
+``` yaml $(tag) == '2022-06-30-preview'
+input-file:
+  - preview/2022-06-30-preview/FormRecognizer.json
+```
+
+### Release 2022-01-30-preview
+These settings apply only when `--tag=2022-01-30-preview` is specified on the command line.
+``` yaml $(tag) == '2022-01-30-preview'
+input-file:
+  - preview/2022-01-30-preview/FormRecognizer.json
+```
 
 ### Release 2021-09-30-preview
 These settings apply only when `--tag=2021-09-30-preview` is specified on the command line.
@@ -109,13 +144,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-node
-  - repo: azure-sdk-for-ruby
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_cognitiveservices_formrecognizer']
 ```
 
 

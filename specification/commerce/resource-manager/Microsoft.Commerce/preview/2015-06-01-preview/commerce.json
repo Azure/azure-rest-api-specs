@@ -27,6 +27,11 @@
         "externalDocs": {
           "url": "https://docs.microsoft.com/rest/api/commerce/usageaggregates"
         },
+        "x-ms-examples": {
+          "GetUsageAggregatesList": {
+            "$ref": "./examples/GetUsageAggregatesList.json"
+          }
+        },
         "parameters": [
           {
             "name": "reportedStartTime",
@@ -88,10 +93,16 @@
               "$ref": "#/definitions/UsageAggregationListResult"
             }
           },
+          "202": {
+            "description": "Response indicating that a request has been accepted for processing. However, the processing has not been completed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorObjectResponse"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorObjectResponse"
             }
           }
         },
@@ -150,12 +161,6 @@
   },
   "definitions": {
     "InfoField": {
-      "properties": {
-        "project": {
-          "type": "string",
-          "description": "Identifies the name of the instance provisioned by the user."
-        }
-      },
       "description": "Key-value pairs of instance details in the legacy format."
     },
     "UsageSample": {
@@ -301,6 +306,9 @@
           "items": {
             "$ref": "#/definitions/OfferTermInfo"
           },
+          "x-ms-identifiers": [
+            "Name"
+          ],
           "description": "A list of offer terms."
         },
         "Meters": {
@@ -308,6 +316,9 @@
           "items": {
             "$ref": "#/definitions/MeterInfo"
           },
+          "x-ms-identifiers": [
+            "MeterId"
+          ],
           "description": "A list of meters."
         }
       }
@@ -471,6 +482,16 @@
         "message": {
           "description": "Error message indicating why the operation failed.",
           "type": "string"
+        }
+      }
+    },
+    "ErrorObjectResponse": {
+      "description": "Describes the format of Error response with a wrapper object",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Wrapper object for error information",
+          "$ref": "#/definitions/ErrorResponse"
         }
       }
     }

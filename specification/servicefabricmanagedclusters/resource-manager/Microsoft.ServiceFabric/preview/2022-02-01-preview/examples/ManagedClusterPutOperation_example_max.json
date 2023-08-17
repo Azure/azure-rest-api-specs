@@ -1,0 +1,387 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resRg",
+    "clusterName": "myCluster",
+    "api-version": "2022-02-01-preview",
+    "parameters": {
+      "location": "eastus",
+      "tags": {},
+      "sku": {
+        "name": "Basic"
+      },
+      "properties": {
+        "clusterUpgradeMode": "Manual",
+        "clusterCodeVersion": "7.1.168.9494",
+        "dnsName": "myCluster",
+        "adminUserName": "vmadmin",
+        "adminPassword": "{vm-password}",
+        "clientConnectionPort": 19000,
+        "httpGatewayConnectionPort": 19080,
+        "loadBalancingRules": [
+          {
+            "frontendPort": 80,
+            "backendPort": 80,
+            "probePort": 80,
+            "protocol": "http",
+            "probeProtocol": "http"
+          },
+          {
+            "frontendPort": 443,
+            "backendPort": 443,
+            "probePort": 443,
+            "protocol": "http",
+            "probeProtocol": "http"
+          },
+          {
+            "frontendPort": 10000,
+            "backendPort": 10000,
+            "probePort": 10000,
+            "protocol": "tcp",
+            "probeProtocol": "http",
+            "loadDistribution": "Default"
+          }
+        ],
+        "allowRdpAccess": true,
+        "networkSecurityRules": [
+          {
+            "name": "TestName",
+            "protocol": "tcp",
+            "access": "allow",
+            "priority": 1010,
+            "direction": "inbound",
+            "sourcePortRanges": [
+              "*"
+            ],
+            "destinationPortRanges": [
+              "*"
+            ],
+            "sourceAddressPrefixes": [
+              "*"
+            ],
+            "destinationAddressPrefixes": [
+              "*"
+            ],
+            "description": "Test description"
+          },
+          {
+            "name": "AllowARM",
+            "protocol": "*",
+            "sourcePortRange": "*",
+            "sourceAddressPrefix": "AzureResourceManager",
+            "destinationAddressPrefix": "*",
+            "destinationPortRange": "33500-33699",
+            "access": "allow",
+            "priority": 2002,
+            "direction": "inbound"
+          }
+        ],
+        "fabricSettings": [
+          {
+            "name": "ManagedIdentityTokenService",
+            "parameters": [
+              {
+                "name": "IsEnabled",
+                "value": "true"
+              }
+            ]
+          }
+        ],
+        "addonFeatures": [
+          "DnsService",
+          "BackupRestoreService",
+          "ResourceMonitorService"
+        ],
+        "enableAutoOSUpgrade": true,
+        "applicationTypeVersionsCleanupPolicy": {
+          "maxUnusedVersionsToKeep": 3
+        },
+        "zonalResiliency": true,
+        "enableIpv6": true,
+        "ipTags": [
+          {
+            "ipTagType": "FirstPartyUsage",
+            "tag": "SQL"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2022-02-01-preview",
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2022-02-01-preview"
+      },
+      "body": {
+        "type": "Microsoft.ServiceFabric/managedClusters",
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedClusters/myCluster",
+        "name": "myCluster",
+        "tags": {},
+        "etag": "W/\"636462502169240745\"",
+        "sku": {
+          "name": "Basic"
+        },
+        "properties": {
+          "provisioningState": "Updating",
+          "clusterId": "92584666-9889-4ae8-8d02-91902923d37f",
+          "clusterUpgradeMode": "Manual",
+          "clusterCodeVersion": "7.1.168.9494",
+          "clusterState": "WaitingForNodes",
+          "dnsName": "myCluster",
+          "fqdn": "MyCluster.eastus.cloudapp.azure.com",
+          "clusterCertificateThumbprints": [
+            "12599211F8F14C90AFA9532AD79A6F2CA1C00622"
+          ],
+          "clientConnectionPort": 19000,
+          "httpGatewayConnectionPort": 19080,
+          "loadBalancingRules": [
+            {
+              "frontendPort": 80,
+              "backendPort": 80,
+              "probePort": 80,
+              "protocol": "http",
+              "probeProtocol": "http"
+            },
+            {
+              "frontendPort": 443,
+              "backendPort": 443,
+              "probePort": 443,
+              "protocol": "http",
+              "probeProtocol": "http"
+            },
+            {
+              "frontendPort": 10000,
+              "backendPort": 10000,
+              "probePort": 10000,
+              "protocol": "tcp",
+              "probeProtocol": "tcp",
+              "loadDistribution": "Default"
+            }
+          ],
+          "allowRdpAccess": true,
+          "networkSecurityRules": [
+            {
+              "name": "TestName",
+              "protocol": "tcp",
+              "access": "allow",
+              "priority": 1010,
+              "direction": "inbound",
+              "sourcePortRanges": [
+                "*"
+              ],
+              "destinationPortRanges": [
+                "*"
+              ],
+              "sourceAddressPrefixes": [
+                "*"
+              ],
+              "destinationAddressPrefixes": [
+                "*"
+              ],
+              "description": "Test description"
+            },
+            {
+              "name": "AllowARM",
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "sourceAddressPrefix": "AzureResourceManager",
+              "destinationAddressPrefix": "*",
+              "destinationPortRange": "33500-33699",
+              "access": "allow",
+              "priority": 2002,
+              "direction": "inbound"
+            }
+          ],
+          "adminUserName": "vmadmin",
+          "fabricSettings": [
+            {
+              "name": "ManagedIdentityTokenService",
+              "parameters": [
+                {
+                  "name": "IsEnabled",
+                  "value": "true"
+                }
+              ]
+            }
+          ],
+          "addonFeatures": [
+            "DnsService",
+            "BackupRestoreService",
+            "ResourceMonitorService"
+          ],
+          "enableAutoOSUpgrade": true,
+          "applicationTypeVersionsCleanupPolicy": {
+            "maxUnusedVersionsToKeep": 3
+          },
+          "zonalResiliency": true,
+          "enableIpv6": true,
+          "enableServicePublicIP": true,
+          "ipTags": [
+            {
+              "ipTagType": "FirstPartyUsage",
+              "tag": "SQL"
+            }
+          ],
+          "auxiliarySubnets": [
+            {
+              "name": "testSubnet1",
+              "enableIpv6": true,
+              "privateEndpointNetworkPolicies": "enabled",
+              "privateLinkServiceNetworkPolicies": "enabled",
+              "networkSecurityGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/networkSecurityGroups/sn1"
+            }
+          ],
+          "serviceEndpoints": [
+            {
+              "service": "Microsoft.Storage",
+              "locations": [
+                "eastus2",
+                "usnorth"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "200": {
+      "headers": {
+        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2022-02-01-preview",
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2022-02-01-preview"
+      },
+      "body": {
+        "type": "Microsoft.ServiceFabric/managedClusters",
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedClusters/myCluster",
+        "name": "myCluster",
+        "tags": {},
+        "etag": "W/\"636462502169240745\"",
+        "sku": {
+          "name": "Basic"
+        },
+        "properties": {
+          "provisioningState": "Creating",
+          "clusterId": "92584666-9889-4ae8-8d02-91902923d37f",
+          "clusterUpgradeMode": "Manual",
+          "clusterCodeVersion": "7.1.168.9494",
+          "clusterState": "WaitingForNodes",
+          "dnsName": "myCluster",
+          "fqdn": "MyCluster.eastus.cloudapp.azure.com",
+          "clusterCertificateThumbprints": [
+            "12599211F8F14C90AFA9532AD79A6F2CA1C00622"
+          ],
+          "clientConnectionPort": 19000,
+          "httpGatewayConnectionPort": 19080,
+          "loadBalancingRules": [
+            {
+              "frontendPort": 80,
+              "backendPort": 80,
+              "probePort": 80,
+              "protocol": "http",
+              "probeProtocol": "http"
+            },
+            {
+              "frontendPort": 443,
+              "backendPort": 443,
+              "probePort": 443,
+              "protocol": "http",
+              "probeProtocol": "http"
+            },
+            {
+              "frontendPort": 10000,
+              "backendPort": 10000,
+              "probePort": 10000,
+              "protocol": "tcp",
+              "probeProtocol": "tcp",
+              "loadDistribution": "Default"
+            }
+          ],
+          "allowRdpAccess": true,
+          "networkSecurityRules": [
+            {
+              "name": "TestName",
+              "protocol": "tcp",
+              "access": "allow",
+              "priority": 1010,
+              "direction": "inbound",
+              "sourcePortRanges": [
+                "*"
+              ],
+              "destinationPortRanges": [
+                "*"
+              ],
+              "sourceAddressPrefixes": [
+                "*"
+              ],
+              "destinationAddressPrefixes": [
+                "*"
+              ],
+              "description": "Test description"
+            },
+            {
+              "name": "AllowARM",
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "sourceAddressPrefix": "AzureResourceManager",
+              "destinationAddressPrefix": "*",
+              "destinationPortRange": "33500-33699",
+              "access": "allow",
+              "priority": 2002,
+              "direction": "inbound"
+            }
+          ],
+          "adminUserName": "vmadmin",
+          "fabricSettings": [
+            {
+              "name": "ManagedIdentityTokenService",
+              "parameters": [
+                {
+                  "name": "IsEnabled",
+                  "value": "true"
+                }
+              ]
+            }
+          ],
+          "addonFeatures": [
+            "DnsService",
+            "BackupRestoreService",
+            "ResourceMonitorService"
+          ],
+          "enableAutoOSUpgrade": true,
+          "applicationTypeVersionsCleanupPolicy": {
+            "maxUnusedVersionsToKeep": 3
+          },
+          "zonalResiliency": true,
+          "enableIpv6": true,
+          "enableServicePublicIP": true,
+          "ipv6Address": "0000:0000:0000:0000:0000:0000:0000:0000",
+          "ipTags": [
+            {
+              "ipTagType": "FirstPartyUsage",
+              "tag": "SQL"
+            }
+          ],
+          "auxiliarySubnets": [
+            {
+              "name": "testSubnet1",
+              "enableIpv6": true,
+              "privateEndpointNetworkPolicies": "enabled",
+              "privateLinkServiceNetworkPolicies": "enabled",
+              "networkSecurityGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/networkSecurityGroups/sn1"
+            }
+          ],
+          "serviceEndpoints": [
+            {
+              "service": "Microsoft.Storage",
+              "locations": [
+                "eastus2",
+                "usnorth"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

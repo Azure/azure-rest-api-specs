@@ -162,11 +162,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "NO CONTENT."
-          },
           "200": {
             "description": "OK"
+          },
+          "204": {
+            "description": "NO CONTENT."
           }
         }
       }
@@ -307,6 +307,7 @@
           "items": {
             "$ref": "#/definitions/Filter"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         },
         "iconFileUris": {
@@ -342,6 +343,10 @@
           "items": {
             "$ref": "#/definitions/Artifact"
           },
+          "x-ms-identifiers": [
+            "name",
+            "type"
+          ],
           "readOnly": true
         },
         "metadata": {
@@ -363,6 +368,7 @@
           "items": {
             "$ref": "#/definitions/ImageGroup"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         },
         "products": {
@@ -371,6 +377,9 @@
           "items": {
             "$ref": "#/definitions/Product"
           },
+          "x-ms-identifiers": [
+            "displayName"
+          ],
           "readOnly": true
         },
         "resourceGroupName": {
@@ -628,6 +637,9 @@
           "items": {
             "$ref": "#/definitions/Plan"
           },
+          "x-ms-identifiers": [
+            "planId"
+          ],
           "readOnly": true
         }
       }

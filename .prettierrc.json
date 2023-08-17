@@ -11,7 +11,8 @@
           "./scripts/prettier-swagger-plugin"
         ],
         "parser": "json-swagger",
-        "printWidth": 20
+        "printWidth": 20,
+        "endOfLine": "auto"
       }
     },
     {
@@ -20,11 +21,26 @@
       ],
       "options": {
         "parser": "json",
-        "printWidth": 20
+        "printWidth": 20,
+        "endOfLine": "auto"
       },
       "excludeFiles": [
         "specification/**/*.json"
       ]
+    },
+    {
+      "files": [
+        "**/*.ts"
+      ],
+      "options": {
+        "arrowParens": "always",
+        "bracketSpacing": true,
+        "endOfLine": "lf",
+        "printWidth": 100,
+        "semi": true,
+        "singleQuote": false,
+        "tabWidth": 2
+      }
     }
   ]
 }

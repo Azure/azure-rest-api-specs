@@ -7,6 +7,41 @@
   },
   "paths": {},
   "definitions": {
+    "AcsIncomingCallEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.IncomingCall event",
+      "properties": {
+        "to": {
+          "description": "The communication identifier of the target user.",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel",
+          "x-ms-client-name": "toCommunicationIdentifier"
+        },
+        "from": {
+          "description": "The communication identifier of the user who initiated the call.",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel",
+          "x-ms-client-name": "fromCommunicationIdentifier"
+        },
+        "serverCallId": {
+          "description": "The Id of the server call",
+          "type": "string"
+        },
+        "callerDisplayName": {
+          "description": "Display name of caller.",
+          "type": "string"
+        },
+        "customContext": {
+          "description": "Custom Context of Incoming Call",
+          "$ref": "#/definitions/AcsIncomingCallCustomContext"
+        },
+        "incomingCallContext": {
+          "description": "Signed incoming call context.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "CorrelationId (CallId).",
+          "type": "string"
+        }
+      }
+    },
     "AcsUserDisconnectedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.UserDisconnected event.",
       "properties": {
@@ -459,9 +494,157 @@
           "format": "int64",
           "type": "integer"
         },
+        "recordingContentType": {
+          "type": "string",
+          "description": "The recording content type- AudioVideo, or Audio",
+          "enum": [
+            "AudioVideo",
+            "Audio"
+          ],
+          "x-ms-enum": {
+            "name": "recordingContentType",
+            "modelAsString": true
+          }
+        },
+        "recordingChannelType": {
+          "type": "string",
+          "description": "The recording  channel type - Mixed, Unmixed",
+          "enum": [
+            "Mixed",
+            "Unmixed"
+          ],
+          "x-ms-enum": {
+            "name": "recordingChannelType",
+            "modelAsString": true
+          }
+        },
+        "recordingFormatType": {
+          "type": "string",
+          "description": "The recording format type - Mp4, Mp3, Wav",
+          "enum": [
+            "Wav",
+            "Mp3",
+            "Mp4"
+          ],
+          "x-ms-enum": {
+            "name": "recordingFormatType",
+            "modelAsString": true
+          }
+        },
         "sessionEndReason": {
           "description": "The reason for ending recording session",
           "type": "string"
+        }
+      }
+    },
+    "AcsEmailDeliveryReportReceivedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailDeliveryReportReceived event.",
+      "type": "object",
+      "properties": {
+        "sender": {
+          "description": "The Sender Email Address",
+          "type": "string"
+        },
+        "recipient": {
+          "description": "The recipient Email Address",
+          "type": "string"
+        },
+        "messageId": {
+          "description": "The Id of the email been sent",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the email. Any value other than Delivered is considered failed.",
+          "type": "string",
+          "enum": [
+            "Bounced",
+            "Delivered",
+            "Failed",
+            "FilteredSpam",
+            "Quarantined",
+            "Suppressed"
+          ],
+          "x-ms-enum": {
+            "name": "AcsEmailDeliveryReportStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Bounced",
+                "description": "Hard bounce detected while sending the email"
+              },
+              {
+                "value": "Delivered",
+                "description": "The email was delivered"
+              },
+              {
+                "value": "Failed",
+                "description": "The email failed to be delivered"
+              },
+              {
+                "value": "FilteredSpam",
+                "description": "The message was identified spam and was rejected or blocked (not quarantined)."
+              },
+              {
+                "value": "Quarantined",
+                "description": "The message was quarantined (as spam, bulk mail, or phishing). For more information, see Quarantined email messages in EOP (EXCHANGE ONLINE PROTECTION)."
+              },
+              {
+                "value": "Suppressed",
+                "description": "The email was suppressed"
+              }
+            ]
+          }
+        },
+        "deliveryStatusDetails": {
+          "description": "Detailed information about the status if any",
+          "$ref": "#/definitions/AcsEmailDeliveryReportStatusDetails"
+        },
+        "deliveryAttemptTimeStamp": {
+          "description": "The time at which the email delivery report received timestamp",
+          "format": "date-time",
+          "type": "string",
+          "x-ms-client-name": "deliveryAttemptTimestamp"
+        }
+      }
+    },
+    "AcsEmailEngagementTrackingReportReceivedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailEngagementTrackingReportReceived event.",
+      "type": "object",
+      "properties": {
+        "sender": {
+          "description": "The Sender Email Address",
+          "type": "string"
+        },
+        "messageId": {
+          "description": "The Id of the email that has been sent",
+          "type": "string"
+        },
+        "userActionTimeStamp": {
+          "description": "The time at which the user interacted with the email",
+          "format": "date-time",
+          "type": "string",
+          "x-ms-client-name": "userActionTimestamp"
+        },
+        "engagementContext": {
+          "description": "The context of the type of engagement user had with email",
+          "type": "string"
+        },
+        "userAgent": {
+          "description": "The user agent interacting with the email",
+          "type": "string"
+        },
+        "engagementType": {
+          "description": "The type of engagement user have with email",
+          "type": "string",
+          "x-ms-client-name": "engagement",
+          "enum": [
+            "view",
+            "click"
+          ],
+          "x-ms-enum": {
+            "name": "AcsUserEngagement",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -697,6 +880,40 @@
         "contentLocation": {
           "description": "The location of the content for this chunk",
           "type": "string"
+        },
+        "deleteLocation": {
+          "description": "The location to delete all chunk storage",
+          "type": "string"
+        }
+      }
+    },
+    "AcsEmailDeliveryReportStatusDetails": {
+      "description": "Detailed information about the status if any",
+      "type": "object",
+      "properties": {
+        "statusMessage": {
+          "description": "Detailed status message",
+          "type": "string"
+        }
+      }
+    },
+    "AcsIncomingCallCustomContext": {
+      "description": "Custom Context of Incoming Call",
+      "type": "object",
+      "properties": {
+        "sipHeaders": {
+          "type": "object",
+          "description": "Sip Headers for incoming call",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "voipHeaders": {
+          "type": "object",
+          "description": "Voip Headers for incoming call",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     }

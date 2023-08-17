@@ -5,19 +5,35 @@
       - "specification/cognitiveservices/data-plane/TranslatorText/**"
     reviewers:
       - kristapratico
-      - maririos
+      
+- rule:
+    # OpenAI data-plane PR
+    paths:
+      - "specification/cognitiveservices/data-plane/AzureOpenAI/**"
+      - "specification/cognitiveservices/OpenAI.Inference/**"
+    reviewers:
+      - lmazuel
+
+- rule:
+    # Cognitive Services - Language pillar data-plane PR
+    paths:
+      - "specification/cognitiveservices/data-plane/Language/**"
+    reviewers:
+      - kristapratico
+      - heaths
+      
+- rule:
+    # Key Vault data-plane PR
+    paths:
+      - "specification/keyvault/data-plane/**"
+    reviewers:
+      - heaths
 
 - rule:
     paths:
       - "specification/confidentialledger/data-plane/**"
     reviewers:
       - christothes 
-      
-- rule:
-    paths:
-      - "specification/@(applicationinsights|operationalinsights)/**"
-    reviewers:
-      - akning-ms
 
 - rule:
     # eventgrid data-plane PR
@@ -25,6 +41,13 @@
       - "specification/eventgrid/data-plane/**"
     reviewers:
       - lmazuel
+      
+- rule:
+    # storage data-plane PR
+    paths:
+      - "specification/storage/data-plane/**"
+    reviewers:
+      - tg-msft
 
 - rule:
     # synapse data-plane PR
@@ -44,150 +67,79 @@
     # data-plane PR
     paths:
       - "specification/**/data-plane/**"
+      - "dev/**/data-plane/**"
     reviewers:
       - anuchandy
       - jhendrixMSFT
       - tjprescott
 
 - rule:
+    # resource management plane typespec PR's
+    paths:
+      - "specification/**/*Management/**"
+      - "specification/**/*Management.Shared/**"
+    reviewers:
+      - rkmanda
+      
+- rule:
+    paths:
+        - "specification/**/*.cadl"
+        - "specification/**/*.tsp"
+    reviewers:
+        - anuchandy
+        - jhendrixMSFT
+        - tjprescott
+        
+- rule:
     paths:
       - "specification/network/**"
     reviewers:
-      - lirenhe
-      - raych1
+      - rkmanda
+    branches:
+      - release-network-Microsoft.Network-official
 
-
-- rule:
-    paths: "specification/common-types/**"
-    reviewers:
-      - raych1
-      - akning-ms
-      - leni-msft
-      - ruowan
-      - jianyexi
-      - zhenglaizhang
-      
-      
-- rule:
-    paths: "specification/@(resources|powerplatform|appplatform|deviceupdate|servicelinker)/**"
-    reviewers:
-      - raych1
-      
-- rule:
-    paths: "specification/@(security|edgeorder|synapse)/**"
-    reviewers:
-      - ruowan
-      
 - rule:
     paths: "specification/sql/**"
     reviewers:
-      - zhenglaizhang
-      
-- rule:
-    paths: "specification/signalr/**"
-    reviewers:
-      - leni-msft
-      
-- rule:
-    paths: "specification/eventhub/**"
-    reviewers:
-      - ruowan
-- rule:
-    paths: "specification/compute/**"
-    reviewers:
-      - ArcturusZhang
+      - rkmanda
+    branches:
+      - dev-sql-
 
 - rule:
-    paths:
-      - "specification/machinelearningservices/**"
+    paths: "specification/@(financialdataservices|standbypool)/**"
     reviewers:
-      - ArcturusZhang
-
-- rule:
-    paths:
-      - "specification/authorization/**"
-    reviewers:
-      - ruowan
-
-- rule:
-    paths:
-      - "specification/datafactory/**"
-    reviewers:
-      - leni-msft
-
-- rule:
-    paths:
-      - "specification/storage/**"
-    reviewers:
-      - jianyexi
-
-
-- rule:	
-    paths: "specification/mediaservices/**"	
-    reviewers:	
-      - allenjzhang
-      
-- rule:
-    paths:
-      - "specification/containerregistry/**"
-    reviewers:
-      - fengzhou-msft
-
-- rule:
-    paths:
-      - "specification/mixedreality/**"
-      - "specification/hdinsight/**"
-    reviewers:
-      - leni-msft
-
-- rule:
-    paths:
-      - "specification/web/**"
-    reviewers:
-      - weidongxu-microsoft
-      
-- rule:
-    paths:
-      - "specification/keyvault/**"
-    reviewers:
-      - zhenglaizhang
+      - rkmanda
+    branches:
+      - RPSaaSDev
 
 - rule:
     paths:
       - "documentation/**"
     reviewers:
       - josefree
-      - akning-ms
-
+      - weshaggard
 
 - rule:
     paths:
-      - "**/package.json"	
       - ".github/**"	
       - "**/azure-pipelines.yml"	
       - ".azure-pipelines/**"	
       - ".azure-pipelines-preproduction/**"	
     reviewers:
-      - akning-ms
-      - raych1
-      - zhenglaizhang
-
+      - weshaggard
+      - konrad-jamrozik
+      
 - rule:
-    # manager-plane PR
+    # resource management plane swagger PR's
+    paths:
+      - "specification/**/resource-manager/**"
+      - "specification/common-types/resource-management/**"
+    reviewers:
+      - rkmanda
+      
+- rule:
+    # temporary catchall
     paths:
       - "**"
     reviewers:
-      - lirenhe
-      - weidongxu-microsoft
-      - ArcturusZhang
-      - raych1
-      - akning-ms
-      - leni-msft
-      - ruowan
-      - jianyexi
-      - zhenglaizhang
-      - chunyu3
-      - changlong-liu
-      - msyyc
-      - qiaozha
-      - weidong
+      - weshaggard

@@ -316,6 +316,13 @@
           "items": {
             "$ref": "#/definitions/StandardComponentProperties"
           }
+        },
+        "supportedClouds": {
+          "description": "List of all standard supported clouds.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StandardSupportedClouds"
+          }
         }
       }
     },
@@ -327,6 +334,18 @@
           "description": "Component Key matching componentMetadata",
           "type": "string"
         }
+      }
+    },
+    "StandardSupportedClouds": {
+      "type": "string",
+      "description": "The cloud that the standard is supported on.",
+      "enum": [
+        "AWS",
+        "GCP"
+      ],
+      "x-ms-enum": {
+        "name": "StandardSupportedClouds",
+        "modelAsString": false
       }
     }
   },

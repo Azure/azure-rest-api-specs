@@ -26,15 +26,81 @@ These are the global settings for the KeyVault API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-preview-7.3-preview
+tag: package-preview-7.5-preview.1
 ```
 
+
+### Tag: package-preview-7.5-preview.1
+
+These settings apply only when `--tag=package-preview-7.5-preview.1` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-7.5-preview.1'
+input-file:
+  - Microsoft.KeyVault/preview/7.5-preview.1/backuprestore.json
+  - Microsoft.KeyVault/preview/7.5-preview.1/certificates.json
+  - Microsoft.KeyVault/preview/7.5-preview.1/common.json
+  - Microsoft.KeyVault/preview/7.5-preview.1/keys.json
+  - Microsoft.KeyVault/preview/7.5-preview.1/rbac.json
+  - Microsoft.KeyVault/preview/7.5-preview.1/secrets.json
+  - Microsoft.KeyVault/preview/7.5-preview.1/securitydomain.json
+  - Microsoft.KeyVault/preview/7.5-preview.1/settings.json
+  - Microsoft.KeyVault/preview/7.5-preview.1/storage.json
+```
+### Tag: package-7.4
+
+These settings apply only when `--tag=package-7.4` is specified on the command line.
+
+``` yaml $(tag) == 'package-7.4'
+input-file:
+  - Microsoft.KeyVault/stable/7.4/backuprestore.json
+  - Microsoft.KeyVault/stable/7.4/certificates.json
+  - Microsoft.KeyVault/stable/7.4/common.json
+  - Microsoft.KeyVault/stable/7.4/keys.json
+  - Microsoft.KeyVault/stable/7.4/rbac.json
+  - Microsoft.KeyVault/stable/7.4/secrets.json
+  - Microsoft.KeyVault/stable/7.4/securitydomain.json
+  - Microsoft.KeyVault/stable/7.4/settings.json
+  - Microsoft.KeyVault/stable/7.4/storage.json
+```
+
+### Tag: package-preview-7.4-preview.1
+
+These settings apply only when `--tag=package-preview-7.4-preview.1` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-7.4-preview.1'
+input-file:
+  - Microsoft.KeyVault/preview/7.4-preview.1/backuprestore.json
+  - Microsoft.KeyVault/preview/7.4-preview.1/certificates.json
+  - Microsoft.KeyVault/preview/7.4-preview.1/common.json
+  - Microsoft.KeyVault/preview/7.4-preview.1/keys.json
+  - Microsoft.KeyVault/preview/7.4-preview.1/rbac.json
+  - Microsoft.KeyVault/preview/7.4-preview.1/secrets.json
+  - Microsoft.KeyVault/preview/7.4-preview.1/securitydomain.json
+  - Microsoft.KeyVault/preview/7.4-preview.1/settings.json
+  - Microsoft.KeyVault/preview/7.4-preview.1/storage.json
+```
+
+### Tag: package-7.3
+
+These settings apply only when `--tag=package-7.3` is specified on the command line.
+
+``` yaml $(tag) == 'package-7.3'
+input-file:
+  - Microsoft.KeyVault/stable/7.3/backuprestore.json
+  - Microsoft.KeyVault/stable/7.3/certificates.json
+  - Microsoft.KeyVault/stable/7.3/common.json
+  - Microsoft.KeyVault/stable/7.3/keys.json
+  - Microsoft.KeyVault/stable/7.3/rbac.json
+  - Microsoft.KeyVault/stable/7.3/secrets.json
+  - Microsoft.KeyVault/stable/7.3/securitydomain.json
+  - Microsoft.KeyVault/stable/7.3/storage.json
+```
 
 ### Tag: package-preview-7.3-preview
 
 These settings apply only when `--tag=package-preview-7.3-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-7.3-preview'
+``` yaml $(tag) == 'package-preview-7.3-preview'
 input-file:
   - Microsoft.KeyVault/preview/7.3-preview/backuprestore.json
   - Microsoft.KeyVault/preview/7.3-preview/certificates.json
@@ -143,6 +209,22 @@ input-file:
 ---
 
 # Code Generation
+
+## General
+
+These transforms apply to any generator.
+
+``` yaml
+directive:
+# Rename models back to what they were before 7.4 for autorest-based code generators.
+# Generated names were disambiguated for generators not using autorest but still processing x-ms-enum.name.
+- from: certificates.json
+  where: $.definitions.Action
+  transform: $.properties.action_type["x-ms-enum"].name = "ActionType";
+- from: keys.json
+  where: $.definitions.LifetimeActionsType
+  transform: $.properties.type["x-ms-enum"].name = "ActionType";
+```
 
 ## C#
 
@@ -414,4 +496,11 @@ directive:
     from: securitydomain.json
     where: $.definitions.TransferKey.properties.key_format
     reason: Consistency with other properties
+  - suppress: DOUBLE_FORWARD_SLASHES_IN_URL
+    from: rbac.json
+    reason: / is a valid scope in this scenario.
+  - suppress: OBJECT_MISSING_REQUIRED_PROPERTY
+    from: rbac.json
+    where: $..parameters[?(@.name=='scope')]
+    reason: Suppress an invalid error caused by a bug in the linter.
 ```

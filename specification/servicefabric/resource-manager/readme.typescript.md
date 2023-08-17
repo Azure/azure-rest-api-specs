@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-servicefabric"
   output-folder: "$(typescript-sdks-folder)/sdk/servicefabric/arm-servicefabric"
-  clear-output-folder: true
   generate-metadata: true
 ```

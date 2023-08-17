@@ -17,12 +17,24 @@ output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
 modelerfour:
   lenient-model-deduplication: true
+directive:
+  - from: swagger-document
+    where: $.definitions.CorsRule
+    transform: $['properties']['allowedMethods']['items']['x-ms-enum']['name'] = 'CorsRuleAllowedMethodsItem'
+  - from: swagger-document
+    where: $.definitions.ActiveDirectoryProperties
+    transform: $['properties']['accountType']['x-ms-enum']['name'] = 'ActiveDirectoryPropertiesAccountType'
 ```
 
 ### Go multi-api
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2023-01
+  - tag: package-2022-09
+  - tag: package-2022-05
+  - tag: package-2021-09
+  - tag: package-2021-08
   - tag: package-2021-06
   - tag: package-2021-04
   - tag: package-2021-02
@@ -41,6 +53,51 @@ batch:
   - tag: package-2016-01
   - tag: package-2015-06
   - tag: package-2015-05-preview
+```
+
+### Tag: package-2023-01 and go
+
+These settings apply only when `--tag=package-2023-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2023-01' && $(go)
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2023-01-01/$(namespace)
+```
+
+### Tag: package-2022-09 and go
+
+These settings apply only when `--tag=package-2022-09 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2022-09' && $(go)
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2022-09-01/$(namespace)
+```
+
+### Tag: package-2022-05 and go
+
+These settings apply only when `--tag=package-2022-05 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2022-05' && $(go)
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2022-05-01/$(namespace)
+```
+
+### Tag: package-2021-09 and go
+
+These settings apply only when `--tag=package-2021-09 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2021-09' && $(go)
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2021-09-01/$(namespace)
+```
+
+### Tag: package-2021-08 and go
+
+These settings apply only when `--tag=package-2021-08 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2021-08' && $(go)
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2021-08-01/$(namespace)
 ```
 
 ### Tag: package-2021-06 and go
