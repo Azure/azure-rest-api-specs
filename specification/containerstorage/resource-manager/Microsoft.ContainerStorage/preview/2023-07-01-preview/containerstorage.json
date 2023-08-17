@@ -1251,19 +1251,6 @@
         ]
       }
     },
-    "AzureDiskUpdate": {
-      "type": "object",
-      "description": "Azure Disk Pool Properties",
-      "properties": {
-        "disks": {
-          "type": "array",
-          "description": "Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying multiple disks (same syntax as tags).",
-          "items": {
-            "$ref": "#/definitions/Disk"
-          }
-        }
-      }
-    },
     "Disk": {
       "type": "object",
       "description": "Model for disk for that pool is using",
@@ -1345,10 +1332,6 @@
           }
         ]
       }
-    },
-    "ElasticSanUpdate": {
-      "type": "object",
-      "description": "Elastic San Pool Properties"
     },
     "ElasticSanVolumeProperties": {
       "type": "object",
@@ -1530,24 +1513,6 @@
         }
       }
     },
-    "PoolTypeUpdate": {
-      "type": "object",
-      "description": "Type of the Pool: ephemeralDisk, azureDisk, or elasticsan",
-      "properties": {
-        "azureDisk": {
-          "$ref": "#/definitions/AzureDiskUpdate",
-          "description": "Disk Pool Properties"
-        },
-        "elasticSan": {
-          "$ref": "#/definitions/ElasticSanUpdate",
-          "description": "Elastic San Pool Properties"
-        },
-        "ephemeralDisk": {
-          "$ref": "#/definitions/EphemeralDisk",
-          "description": "Ephemeral Pool Properties"
-        }
-      }
-    },
     "PoolUpdate": {
       "type": "object",
       "description": "The type used for update operations of the Pool.",
@@ -1574,7 +1539,7 @@
           "description": "Resources represent the resources the pool should have."
         },
         "poolType": {
-          "$ref": "#/definitions/PoolTypeUpdate",
+          "$ref": "#/definitions/PoolType",
           "description": "Type of the Pool: ephemeralDisk, azureDisk, or elasticsan."
         },
         "assignments": {

@@ -143,7 +143,7 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/WidgetSuiteUpdate"
+              "$ref": "#/definitions/WidgetSuite"
             }
           }
         ],
@@ -454,21 +454,6 @@
         "createdAt"
       ]
     },
-    "FakedSharedModelUpdate": {
-      "type": "object",
-      "description": "Faked shared model",
-      "properties": {
-        "tag": {
-          "type": "string",
-          "description": "The tag."
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The created date."
-        }
-      }
-    },
     "PagedWidgetSuite": {
       "type": "object",
       "description": "Paged collection of WidgetSuite items",
@@ -531,20 +516,6 @@
         "name",
         "manufacturerId"
       ]
-    },
-    "WidgetSuiteUpdate": {
-      "type": "object",
-      "description": "A widget.",
-      "properties": {
-        "manufacturerId": {
-          "type": "string",
-          "description": "The ID of the widget's manufacturer."
-        },
-        "sharedModel": {
-          "$ref": "#/definitions/FakedSharedModelUpdate",
-          "description": "The faked shared model."
-        }
-      }
     }
   },
   "parameters": {
