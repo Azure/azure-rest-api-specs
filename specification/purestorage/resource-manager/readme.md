@@ -37,4 +37,9 @@ These settings apply only when `--tag=package-2023-06-01-preview` is specified o
 ```yaml $(tag) == 'package-2023-06-01-preview'
 input-file:
   - PureStorage.Block/preview/2023-06-01-preview/purestorage.json
+
+suppressions:
+ - code: PathContainsResourceType
+   reason: The resource provider name 'PureStorage.Block' cannot have 'Microsoft' in it as it is a Azure Native ISV service`.
+   from: PureStorage.Block/preview/2023-06-01-preview/purestorage.json
 ```
