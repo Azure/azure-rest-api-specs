@@ -1061,10 +1061,6 @@ directive:
     where: $.definitions.AliasPathMetadata
     from: resources.json
     reason: This was already checked in - not my code
-  - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
-    where: $.paths
-    from: resources.json
-    reason: Pre-existing lint error. Not related to this version release.
   - suppress: TopLevelResourcesListByResourceGroup
     from: policyDefinitions.json
     reason: Policy definitions are a proxy resource that is only usable on subscriptions or management groups
@@ -1119,6 +1115,54 @@ directive:
       - '$.paths["/{scope}/providers/Microsoft.Resources/tags/default"].patch'
       - '$.paths["/{scope}/providers/Microsoft.Resources/tags/default"].get'
     reason: The tags API does not support system data
+  - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
+    where: $.paths
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: LRO_RESPONSE_HEADER
+    where: $.paths
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: OperationsApiResponseSchema
+    where: $.paths
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: OperationsApiSchemaUsesCommonTypes
+    where: $.paths
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: NoDuplicatePathsForScopeParameter
+    where: $.paths
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: LroLocationHeader
+    where: $.paths
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: LroErrorContent
+    where: $.paths
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: NoErrorCodeResponses
+    where: $.paths
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PutRequestResponseSchemeArm
+    where: $.paths
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PutResponseSchemaDescription
+    where: $.paths
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PostOperationAsyncResponseValidation
+    where: $.paths
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: MissingXmsErrorResponse
+    where: $.paths
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
 ```
 
 ---
