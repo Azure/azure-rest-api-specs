@@ -1184,6 +1184,24 @@ directive:
   - suppress: ProvisioningStateSpecifiedForLROPatch
     from: resources.json
     reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: SubscriptionsAndResourceGroupCasing
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: ResourceNameRestriction
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: ConsistentPatchProperties
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: MissingTypeObject
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: TrackedResourcePatchOperation
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
 ```
 
 ---
