@@ -40,7 +40,7 @@ else {
   )
   $repoRootFiles = $changedFiles | Where-Object {$_ -in $rootFilesImpactingTypeSpec}
 
-  if ($engFiles -or $repoRootFiles) {
+  if (($Env:BUILD_REPOSITORY_NAME -eq 'azure/azure-rest-api-specs') -and ($engFiles -or $repoRootFiles)) {
     $changedFiles = $allChangedFiles
   }
   else {
