@@ -276,27 +276,6 @@
               "$ref": "#/definitions/Account"
             }
           },
-          "400": {
-            "description": "Bad Request.",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -305,10 +284,10 @@
           }
         },
         "x-ms-examples": {
-          "Patch example #1": {
+          "Patch account with system assigned Mi": {
             "$ref": "./examples/ViAccountPatch/PatchAccountWithSystemAssignedMi.json"
           },
-          "Patch example #2": {
+          "Patch account with user assigned Mi": {
             "$ref": "./examples/ViAccountPatch/PatchAccountWithUserAssignedMi.json"
           }
         }
@@ -349,40 +328,6 @@
               "$ref": "#/definitions/Account"
             }
           },
-          "201": {
-            "description": "The resource was successfully created.",
-            "schema": {
-              "$ref": "#/definitions/Account"
-            }
-          },
-          "400": {
-            "description": "Bad Request.",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -391,14 +336,17 @@
           }
         },
         "x-ms-examples": {
-          "Put example #1": {
-            "$ref": "./examples/ViAccountPut/ConnectClassicAccountToArmAccount.json"
-          },
-          "Put example #2": {
+          "Create or update account with system assigned Mi": {
             "$ref": "./examples/ViAccountPut/CreateOrUpdateAccountWithSystemAssignedMi.json"
           },
-          "Put example #3": {
+          "Create or update account with user assigned Mi": {
             "$ref": "./examples/ViAccountPut/CreateOrUpdateAccountWithUserAssignedMi.json"
+          },
+          "Connect classic account to arm account using system assigned Mi": {
+            "$ref": "./examples/ViAccountPut/ConnectClassicAccountToArmAccountUsingSystemAssignedMI.json"
+          },
+          "Connect classic account to arm account using user assigned Mi": {
+            "$ref": "./examples/ViAccountPut/ConnectClassicAccountToArmAccountUsingUserAssignedMi.json"
           }
         }
       },
@@ -433,13 +381,6 @@
           "204": {
             "description": "The Azure Video Indexer account does not exist."
           },
-          "500": {
-            "description": "Internal Server Error",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -462,29 +403,17 @@
         "operationId": "Generate_AccessToken",
         "description": "Generate an Azure Video Indexer access token.",
         "x-ms-examples": {
-          "Generate accessToken for video contributor #1": {
-            "$ref": "./examples/ViGenerateAccessToken/ViGenerateVideoContributerAccessToken1.json"
+          "Generate accessToken for video contributor": {
+            "$ref": "./examples/ViGenerateAccessToken/ViGenerateVideoContributerAccessToken.json"
+          },          
+          "Generate accessToken for video reader": {
+            "$ref": "./examples/ViGenerateAccessToken/ViGenerateVideoReaderAccessToken.json"
           },
-          "Generate accessToken for video contributor #2": {
-            "$ref": "./examples/ViGenerateAccessToken/ViGenerateVideoContributerAccessToken2.json"
+          "Generate accessToken for project contributor": {
+            "$ref": "./examples/ViGenerateAccessToken/ViGenerateProjectContributerAccessToken.json"
           },
-          "Generate accessToken for video reader #1": {
-            "$ref": "./examples/ViGenerateAccessToken/ViGenerateVideoReaderAccessToken1.json"
-          },
-          "Generate accessToken for video reader #2": {
-            "$ref": "./examples/ViGenerateAccessToken/ViGenerateVideoReaderAccessToken2.json"
-          },
-          "Generate accessToken for project contributor #1": {
-            "$ref": "./examples/ViGenerateAccessToken/ViGenerateProjectContributerAccessToken1.json"
-          },
-          "Generate accessToken for project contributor #2": {
-            "$ref": "./examples/ViGenerateAccessToken/ViGenerateProjectContributerAccessToken2.json"
-          },
-          "Generate accessToken for project reader #1": {
-            "$ref": "./examples/ViGenerateAccessToken/ViGenerateProjectReaderAccessToken1.json"
-          },
-          "Generate accessToken for project reader #2": {
-            "$ref": "./examples/ViGenerateAccessToken/ViGenerateProjectReaderAccessToken2.json"
+          "Generate accessToken for project reader": {
+            "$ref": "./examples/ViGenerateAccessToken/ViGenerateProjectReaderAccessToken.json"
           },
           "Generate accessToken for account contributor": {
             "$ref": "./examples/ViGenerateAccessToken/ViGenerateAccountContributerAccessToken.json"
@@ -523,34 +452,6 @@
               "$ref": "#/definitions/AccessToken"
             }
           },
-          "400": {
-            "description": "Bad Request.",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -568,17 +469,11 @@
         "operationId": "Generate_RestrictedViewerAccessToken",
         "description": "Generate an Azure Video Indexer restricted viewer access token.",
         "x-ms-examples": {
-          "Generate restricted viewer accessToken for video #1": {
-            "$ref": "./examples/ViGenerateRestrictedViewerAccessToken/ViGenerateVideoRestrictedViewerAccessToken1.json"
+          "Generate restricted viewer accessToken for video": {
+            "$ref": "./examples/ViGenerateRestrictedViewerAccessToken/ViGenerateVideoRestrictedViewerAccessToken.json"
           },
-          "Generate restricted viewer accessToken for video #2": {
-            "$ref": "./examples/ViGenerateRestrictedViewerAccessToken/ViGenerateVideoRestrictedViewerAccessToken2.json"
-          },
-          "Generate restricted viewer accessToken for project #1": {
-            "$ref": "./examples/ViGenerateRestrictedViewerAccessToken/ViGenerateProjectRestrictedViewerAccessToken1.json"
-          },
-          "Generate restricted viewer accessToken for project #2": {
-            "$ref": "./examples/ViGenerateRestrictedViewerAccessToken/ViGenerateProjectRestrictedViewerAccessToken2.json"
+          "Generate restricted viewer accessToken for project": {
+            "$ref": "./examples/ViGenerateRestrictedViewerAccessToken/ViGenerateProjectRestrictedViewerAccessToken.json"
           },
           "Generate restricted viewer accessToken for account": {
             "$ref": "./examples/ViGenerateRestrictedViewerAccessToken/ViGenerateAccountRestrictedViewerAccessToken.json"
@@ -612,27 +507,6 @@
             "description": "The Azure Video Indexer account's access token properties were retrieved successfully.",
             "schema": {
               "$ref": "#/definitions/AccessToken"
-            }
-          },
-          "400": {
-            "description": "Bad Request.",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "default": {
@@ -685,27 +559,6 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request.",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -746,27 +599,6 @@
             "description": "The subscription's Cognitive Services (Speech, Translator, and OCR) instances secret.",
             "schema": {
               "$ref": "#/definitions/CognitiveServicesSecrets"
-            }
-          },
-          "400": {
-            "description": "Bad Request.",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "default": {
@@ -816,27 +648,6 @@
         "responses": {
           "200": {
             "description": "Secrets successfully rotated."
-          },
-          "400": {
-            "description": "Bad Request.",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -895,20 +706,6 @@
               "$ref": "#/definitions/AccessToken"
             }
           },
-          "400": {
-            "description": "Bad Request.",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -926,17 +723,11 @@
         "operationId": "Generate_ExtensionAccessToken",
         "description": "Generate an Azure Video Indexer access token.",
         "x-ms-examples": {
-          "Generate accessToken for video contributor #1": {
-            "$ref": "./examples/ViGenerateExtensionAccessToken/ViGenerateVideoContributerAccessToken1.json"
+          "Generate accessToken for video contributor": {
+            "$ref": "./examples/ViGenerateExtensionAccessToken/ViGenerateVideoContributerAccessToken.json"
           },
-          "Generate accessToken for video contributor #2": {
-            "$ref": "./examples/ViGenerateExtensionAccessToken/ViGenerateVideoContributerAccessToken2.json"
-          },
-          "Generate accessToken for video reader #1": {
-            "$ref": "./examples/ViGenerateExtensionAccessToken/ViGenerateVideoReaderAccessToken1.json"
-          },
-          "Generate accessToken for video reader #2": {
-            "$ref": "./examples/ViGenerateExtensionAccessToken/ViGenerateVideoReaderAccessToken2.json"
+          "Generate accessToken for video reader": {
+            "$ref": "./examples/ViGenerateExtensionAccessToken/ViGenerateVideoReaderAccessToken.json"
           },
           "Generate accessToken for account contributor": {
             "$ref": "./examples/ViGenerateExtensionAccessToken/ViGenerateAccountContributerAccessToken.json"
@@ -973,20 +764,6 @@
             "description": "The Azure Video Indexer account's access token properties were retrieved successfully.",
             "schema": {
               "$ref": "#/definitions/AccessToken"
-            }
-          },
-          "400": {
-            "description": "Bad Request.",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "default": {
@@ -1170,7 +947,7 @@
           "example": "2b9bcf6d-39d5-460a-a6bb-7b40b7ccf139"
         },
         "accountId": {
-          "description": "The account's data-plane ID. This can be set only when connecting an existing classic account",
+          "description": "The account's data-plane ID.",
           "type": "string",
           "default": "00000000-0000-0000-0000-000000000000",
           "example": "3575690b-a569-449c-ab7b-11020f948f76"
