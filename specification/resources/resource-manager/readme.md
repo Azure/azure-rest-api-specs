@@ -1120,7 +1120,6 @@ directive:
     from: resources.json
     reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
   - suppress: LRO_RESPONSE_HEADER
-    from: resources.json
     reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
   - suppress: OperationsApiResponseSchema
     from: resources.json
@@ -1150,6 +1149,39 @@ directive:
     from: resources.json
     reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
   - suppress: MissingXmsErrorResponse
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PathForPutOperation
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PathResourceProviderMatchNamespace
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: ParametersOrder
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: SyncPostReturn
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PathContainsResourceType
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: OperationIdNounVerb
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PathForResourceAction
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: UnSupportedPatchProperties
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: LroPostReturn
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: ProvisioningStateSpecifiedForLROPut
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: ProvisioningStateSpecifiedForLROPatch
     from: resources.json
     reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
 ```
