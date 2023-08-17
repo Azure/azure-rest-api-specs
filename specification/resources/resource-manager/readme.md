@@ -1120,47 +1120,36 @@ directive:
     from: resources.json
     reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
   - suppress: LRO_RESPONSE_HEADER
-    where: $.paths
     from: resources.json
     reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
   - suppress: OperationsApiResponseSchema
-    where: $.paths
     from: resources.json
     reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
   - suppress: OperationsApiSchemaUsesCommonTypes
-    where: $.paths
     from: resources.json
     reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
   - suppress: NoDuplicatePathsForScopeParameter
-    where: $.paths
     from: resources.json
     reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
   - suppress: LroLocationHeader
-    where: $.paths
     from: resources.json
     reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
   - suppress: LroErrorContent
-    where: $.paths
     from: resources.json
     reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
   - suppress: NoErrorCodeResponses
-    where: $.paths
     from: resources.json
     reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
   - suppress: PutRequestResponseSchemeArm
-    where: $.paths
     from: resources.json
     reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
   - suppress: PutResponseSchemaDescription
-    where: $.paths
     from: resources.json
     reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
   - suppress: PostOperationAsyncResponseValidation
-    where: $.paths
     from: resources.json
     reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
   - suppress: MissingXmsErrorResponse
-    where: $.paths
     from: resources.json
     reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
 ```
