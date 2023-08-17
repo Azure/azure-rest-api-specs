@@ -154,7 +154,7 @@
         "tags": [
           "DevOps"
         ],
-        "summary": "Creates or updates monitored Azure DevOps organization details.",
+        "summary": "Creates or updates a monitored Azure DevOps organization details.",
         "operationId": "AzureDevOpsOrgs_CreateOrUpdate",
         "consumes": [
           "application/json"
@@ -190,7 +190,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Creates or updates a monitored Azure DevOps organization details",
             "schema": {
               "$ref": "#/definitions/AzureDevOpsOrg"
             }
@@ -431,7 +431,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Creates or updates a monitored Azure DevOps project resource",
             "schema": {
               "$ref": "#/definitions/AzureDevOpsProject"
             }
@@ -684,7 +684,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Creates or updates a monitored Azure DevOps repository resource",
             "schema": {
               "$ref": "#/definitions/AzureDevOpsRepository"
             }
@@ -928,7 +928,7 @@
             }
           },
           "200": {
-            "description": "OK",
+            "description": "Creates or updates a DevOps Configuration",
             "schema": {
               "$ref": "#/definitions/DevOpsConfiguration"
             }
@@ -1741,6 +1741,9 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
         "properties": {
           "$ref": "#/definitions/AzureDevOpsOrgProperties"
         }
@@ -1817,6 +1820,9 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
         "properties": {
           "$ref": "#/definitions/AzureDevOpsProjectProperties"
         }
@@ -1876,10 +1882,9 @@
         "provisioningState": {
           "$ref": "#/definitions/DevOpsProvisioningState"
         },
-        "orgName": {
-          "description": "Gets or sets Azure DevOps Organization name.",
-          "type": "string",
-          "readOnly": true
+        "parentOrgName": {
+          "description": "Gets or sets parent Azure DevOps Organization name.",
+          "type": "string"
         },
         "projectId": {
           "description": "Gets or sets Azure DevOps Project id.",
@@ -1903,6 +1908,9 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
         "properties": {
           "$ref": "#/definitions/AzureDevOpsRepositoryProperties"
         }
@@ -1945,15 +1953,13 @@
         "provisioningState": {
           "$ref": "#/definitions/DevOpsProvisioningState"
         },
-        "orgName": {
-          "description": "Gets or sets Azure DevOps Organization name.",
-          "type": "string",
-          "readOnly": true
+        "parentOrgName": {
+          "description": "Gets or sets parent Azure DevOps Organization name.",
+          "type": "string"
         },
-        "projectName": {
-          "description": "Gets or sets Azure DevOps Project name.",
-          "type": "string",
-          "readOnly": true
+        "parentProjectName": {
+          "description": "Gets or sets parent Azure DevOps Project name.",
+          "type": "string"
         },
         "repoId": {
           "description": "Gets or sets Azure DevOps Repository id.",
@@ -2022,6 +2028,9 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
         "properties": {
           "$ref": "#/definitions/DevOpsConfigurationProperties"
         }
@@ -2106,6 +2115,9 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
         "properties": {
           "$ref": "#/definitions/GitHubOwnerProperties"
         }
@@ -2189,6 +2201,9 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
         "properties": {
           "$ref": "#/definitions/GitHubRepositoryProperties"
         }
@@ -2254,10 +2269,9 @@
           "type": "string",
           "readOnly": true
         },
-        "ownerName": {
-          "description": "Gets or sets GitHub Owner name.",
-          "type": "string",
-          "readOnly": true
+        "parentOwnerName": {
+          "description": "Gets or sets parent GitHub Owner name.",
+          "type": "string"
         }
       }
     },
@@ -2270,6 +2284,9 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
         "properties": {
           "$ref": "#/definitions/GitLabGroupProperties"
         }
@@ -2358,6 +2375,9 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
         "properties": {
           "$ref": "#/definitions/GitLabProjectProperties"
         }

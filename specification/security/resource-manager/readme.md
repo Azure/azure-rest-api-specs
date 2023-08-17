@@ -68,6 +68,15 @@ directive:
     where: $.paths
     from: applications.json
     reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: securityConnectorsDevOps.json
+    reason: False positive. This check flags the the API which doesn't actually return collection.
+  - suppress: LroLocationHeader
+    from: securityConnectorsDevOps.json
+    reason: False positive. Per ResourceProvider specification SecurityConnectors DevOps uses Azure-AsyncOperation header instead of Location header
+  - suppress: ResourceNameRestriction
+    from: securityConnectorsDevOps.json
+    reason: SecurityConnectors DevOps collects data from thirdparty providers which do not always specify name patterns
 ```
 
 ### Basic Information
