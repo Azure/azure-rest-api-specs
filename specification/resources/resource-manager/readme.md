@@ -82,14 +82,15 @@ tag: package-snapshots-2022-11
 ```
 
 
-### Tag: package-2023-07
+### Tag: package-resources-2023-07
 
-These settings apply only when `--tag=package-2023-07` is specified on the command line.
+These settings apply only when `--tag=package-resources-2023-07` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-07'
+``` yaml $(tag) == 'package-resources-2023-07'
 input-file:
   - Microsoft.Resources/stable/2023-07-01/resources.json
 ```
+
 ### Tag: package-2022-12
 
 These settings apply only when `--tag=package-2022-12` is specified on the command line.
@@ -1060,7 +1061,7 @@ directive:
     where: $.definitions.AliasPathMetadata
     from: resources.json
     reason: This was already checked in - not my code
-  - suppress: XmsExamplesRequired
+  - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
     where: $.paths
     from: resources.json
     reason: Pre-existing lint error. Not related to this version release.
