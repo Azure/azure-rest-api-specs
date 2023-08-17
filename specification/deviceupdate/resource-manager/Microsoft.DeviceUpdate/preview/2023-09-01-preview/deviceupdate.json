@@ -1458,6 +1458,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
+            }
+          },
           "201": {
             "description": "The request was successful; the operation will complete asynchronously.",
             "schema": {
@@ -1683,10 +1689,7 @@
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The type of identity used for the resource."
         }
-      },
-      "required": [
-        "properties"
-      ]
+      }
     },
     "ProtocolId": {
       "type": "object",
@@ -2087,10 +2090,7 @@
             }
           }
         }
-      },
-      "required": [
-        "properties"
-      ]
+      }
     },
     "DiagnosticStorageProperties": {
       "description": "Customer-initiated diagnostic log collection storage properties",
@@ -2240,10 +2240,7 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/GroupInformationProperties"
         }
-      },
-      "required": [
-        "properties"
-      ]
+      }
     },
     "GroupInformationProperties": {
       "description": "The properties for a group information object",
