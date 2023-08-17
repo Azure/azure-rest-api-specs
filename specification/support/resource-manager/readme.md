@@ -50,7 +50,7 @@ suppressions:
   - code: RPC-Patch-V1-03
     from: Microsoft.Support/preview/2022-09-01-preview/support.json
     reason: Rule: "The property '{propertyName}' in the request body either not apppear in the resource model or has the wrong level." Justification: We have similar implementation for previous versions, this would be a breaking change, hence suppressing it.
-	
+
 ```
 ### Tag: package-preview-2021-06
 
