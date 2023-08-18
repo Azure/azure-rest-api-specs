@@ -158,48 +158,13 @@
       }
     }
   },
-  "definitions": {
-    "Resource": {
-      "description": "An Azure resource.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Azure resource Id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Azure resource name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Azure resource type.",
-          "type": "string",
-          "readOnly": true
-        },
-        "location": {
-          "description": "Location of the resource.",
-          "type": "string",
-          "readOnly": false
-        },
-        "tags": {
-          "description": "resource tags.",
-          "type": "object",
-          "readOnly": false,
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "x-ms-azure-resource": true
-    },
+  "definitions": {    
     "NspTestResource": {
       "type": "object",
       "description": "NspTest details",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/Resource"
         }
       ],
       "required": [
