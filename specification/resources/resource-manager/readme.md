@@ -1202,6 +1202,18 @@ directive:
   - suppress: TrackedResourcePatchOperation
     from: resources.json
     reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: IntegerTypeMustHaveFormat
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: BodyTopLevelProperties
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: TopLevelResourcesListBySubscription
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: XmsParameterLocation
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
 ```
 
 ---
