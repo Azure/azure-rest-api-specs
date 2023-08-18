@@ -12329,59 +12329,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/runAsAccounts": {
-      "get": {
-        "tags": [
-          "RunAsAccountsController"
-        ],
-        "operationId": "RunAsAccountsController_ListByVMwareSite",
-        "description": "List VmwareRunAsAccountResource resources by VMwareSite",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/VmwareRunAsAccountResourceListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "RunAsAccountsController_ListByVMwareSite_MaximumSet_Gen": {
-            "$ref": "./examples/RunAsAccountsController_ListByVMwareSite_MaximumSet_Gen.json"
-          },
-          "RunAsAccountsController_ListByVMwareSite_MinimumSet_Gen": {
-            "$ref": "./examples/RunAsAccountsController_ListByVMwareSite_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/runAsAccounts/{accountName}": {
       "get": {
         "tags": [
@@ -21889,29 +21836,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "VmwareRunAsAccountResourceListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VmwareRunAsAccountResource"
-          },
-          "description": "The VmwareRunAsAccountResource items on this page",
-          "x-typespec-name": "VmwareRunAsAccountResource[]"
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
-        }
-      },
-      "description": "The response of a VmwareRunAsAccountResource list operation.",
-      "required": [
-        "value"
       ]
     },
     "VmwareSiteUsage": {
