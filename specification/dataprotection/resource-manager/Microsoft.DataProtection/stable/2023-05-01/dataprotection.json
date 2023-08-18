@@ -4977,9 +4977,17 @@
         "objectType": {
           "description": "Type of the specific object - used for deserializing",
           "type": "string",
-          "readOnly": false
+          "readOnly": false,
+          "enum": [
+            "DefaultResourceProperties"
+          ],
+          "x-ms-enum": {
+            "name": "objectType",
+            "modelAsString": true
+          }
         }
-      }
+      },
+      "discriminator": "objectType"
     },
     "CheckNameAvailabilityRequest": {
       "description": "CheckNameAvailability Request",
@@ -5416,6 +5424,19 @@
           "readOnly": true
         }
       }
+    },
+    "DefaultResourceProperties": {
+      "description": "Default source properties",
+      "required": [
+        "objectType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "DefaultResourceProperties"
     },
     "DeletedBackupInstanceResource": {
       "description": "Deleted Backup Instance",
