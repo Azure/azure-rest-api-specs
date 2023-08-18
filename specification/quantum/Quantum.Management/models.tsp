@@ -5,7 +5,7 @@ import "@azure-tools/typespec-azure-core";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace AzureQuantumManagementClient;
+namespace Microsoft.Quantum;
 
 enum Status {
   Succeeded,

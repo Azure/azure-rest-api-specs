@@ -5,7 +5,7 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace AzureQuantumManagementClient;
+namespace Microsoft.Quantum;
 
 interface WorkspacesOperations {
   @doc("Returns the Workspace resource associated with the given name.")
