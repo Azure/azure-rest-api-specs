@@ -1,12 +1,16 @@
-import "@typespec/rest";
+import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/versioning";
 import "./routes.tsp";
 
-using TypeSpec.Rest;
+using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+
 @service({
   title: "Azure Quantum Management Client",
-  version: "2022-01-10-preview",
 })
 @server(
   "{$host}",
@@ -16,4 +20,12 @@ using TypeSpec.Http;
   }
 )
 @doc("// FIXME: (miissing-service-description) Add service description")
+@versioned(Versions)
 namespace AzureQuantumManagementClient;
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
+enum Versions {
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  v2022_01_10_preview: "2022-01-10-preview",
+}
