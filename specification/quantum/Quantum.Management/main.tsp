@@ -12,13 +12,6 @@ using TypeSpec.Versioning;
 @service({
   title: "Azure Quantum Management Client",
 })
-@server(
-  "{$host}",
-  "// FIXME: (miissing-service-description) Add service description",
-  {
-    $host: string,
-  }
-)
 @doc("// FIXME: (miissing-service-description) Add service description")
 @versioned(Versions)
 @armProviderNamespace
