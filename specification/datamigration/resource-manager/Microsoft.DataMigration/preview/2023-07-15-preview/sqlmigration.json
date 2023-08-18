@@ -1272,14 +1272,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully deleted the migration Service."
-          },
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was provided for parameter '{0}'.\n\n * 400 EmptyRequiredRequestBody - The request body must not be empty.\n\n * 400 GenericUser - User Failure when calling other Resource Provider.\n\n * 400 OperationIdNotFound - Operation ID '{0}' not found.\n\n * 400 OperationTypeNotFound - Operation Type '{0}' not found.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 DeleteServiceNotAllowed - One or more migrations attached to the migration service '{0}' are currently running. To delete the migration service, please wait until all migrations have completed or cancel the migrations manually and retry deleting the service. Running migrations are: '{1}'\n\n * 400 ServiceNameInvalid - Service name '{0}' is not valid. Please refer https://aka.ms/dmsv2naming for naming rules.\n\n * 403 AccessDenied - Access denied.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 405 SubscriptionNotReady - Subscription is not in Ready state.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SubscriptionOperationInProgress - An operation on subscription is already in progress\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out.\n\n * 500 GenericSystem - System Failure when calling other Resource Provider.\n\n * 500 NoAdfInRegion - There is no ADF configured in region '{0}'."
           },
           "202": {
-            "description": "Deleting the migration Service."
+            "description": "Deleting the migration Service.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The specified migration Service does not exist."
@@ -1331,8 +1333,13 @@
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was provided for parameter '{0}'.\n\n * 400 EmptyRequiredRequestBody - The request body must not be empty.\n\n * 400 GenericUser - User Failure when calling other Resource Provider.\n\n * 400 OperationIdNotFound - Operation ID '{0}' not found.\n\n * 400 OperationTypeNotFound - Operation Type '{0}' not found.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 DeleteServiceNotAllowed - One or more migrations attached to the migration service '{0}' are currently running. To delete the migration service, please wait until all migrations have completed or cancel the migrations manually and retry deleting the service. Running migrations are: '{1}'\n\n * 400 ServiceNameInvalid - Service name '{0}' is not valid. Please refer https://aka.ms/dmsv2naming for naming rules.\n\n * 403 AccessDenied - Access denied.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 405 SubscriptionNotReady - Subscription is not in Ready state.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SubscriptionOperationInProgress - An operation on subscription is already in progress\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out.\n\n * 500 GenericSystem - System Failure when calling other Resource Provider.\n\n * 500 NoAdfInRegion - There is no ADF configured in region '{0}'."
           },
-          "201": {
-            "description": "Successfully created the migration Service.",
+          "202": {
+            "description": "Updating the migration Service.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/MigrationService"
             }
@@ -1669,7 +1676,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the Migration Services in the resource group.",
+            "description": "Successfully retrieved the Migration SErvices in the resource group.",
             "schema": {
               "$ref": "#/definitions/SqlMigrationListResult"
             }
@@ -3382,6 +3389,7 @@
       "description": "Name of the Migration Service.",
       "required": true,
       "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_-]*$",
       "x-ms-parameter-location": "method"
     },
     "TargetDbNameParameter": {
