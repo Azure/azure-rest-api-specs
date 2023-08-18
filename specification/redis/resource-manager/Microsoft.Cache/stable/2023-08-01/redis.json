@@ -744,6 +744,76 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{cacheName}/flush": {
+      "post": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_FlushCache",
+        "x-ms-examples": {
+          "RedisCacheFlush": {
+            "$ref": "./examples/RedisCacheFlush.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+        },
+        "description": "Deletes all of the keys in a cache.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Flush operation successfully enqueued; follow the Location header to poll for final outcome.",
+            "headers": {
+              "Location": {
+                "description": "URL to query for the status of the operation.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL to query for the status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "Flush operation succeeded.",
+            "headers": {
+              "Location": {
+                "description": "URL to query for the status of the operation.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL to query for the status of the operation.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{cacheName}/firewallRules": {
       "get": {
         "tags": [
