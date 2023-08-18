@@ -1,10 +1,18 @@
-import "@cadl-lang/rest";
-import "@cadl-lang/versioning";
-import "@azure-tools/cadl-providerhub";
-import "@azure-tools/cadl-azure-core";
-import "@azure-tools/cadl-azure-resource-manager";
+import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-providerhub";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
 
-@armProviderNamespace
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.Core;
+using Azure.ResourceManager;
+
+
+@armProviderNamespace("Microsoft.ManufacturingPlatform")
 @service({
   title: "Microsoft.ManufacturingPlatform",
   version: "2023-02-01-preview",
@@ -12,11 +20,7 @@ import "@azure-tools/cadl-azure-resource-manager";
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.ManufacturingPlatform;
 
-using Cadl.Http;
-using Cadl.Rest;
-using Cadl.Versioning;
-using Azure.Core;
-using Azure.ResourceManager;
+interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("A ManufacturingPlatformProviderHub resource")
 model MdsResource is TrackedResource<MdsResourceProperties> {
@@ -31,17 +35,24 @@ model MdsResource is TrackedResource<MdsResourceProperties> {
   ...ManagedServiceIdentity;
 }
 
+
 @doc("The status of the current operation.")
+@Azure.Core.lroStatus
 enum ProvisioningState {
-  Succeeded,
-  Failed,
-  Canceled,
+  ...ResourceProvisioningState,
+
+  @doc("Initial provisioning in progress")
   Provisioning,
+
+  @doc("Update in progress")
   Updating,
+
+  @doc("Deletion in progress")
   Deleting,
+
+  @doc("Change accepted for processing")
   Accepted,
 }
-
 
 @doc("Details of the ManufacturingPlatform MdsResource.")
 model MdsResourceProperties {
@@ -123,9 +134,14 @@ model MdsResourceProperties {
   @doc("Profile of Function App Resource.")
   functionAppProfile?: FunctionAppProfile;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "AI is a well-known abbreviation"
   @visibility("read")
   @doc("Profile of OpenAI Resource.")
   openAIProfile?: OpenAIProfile;
+
+  @visibility("read")
+  @doc("Configuration of the managed resource group associated with the resource.")
+  managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
 }
 
 @doc("The properties related to Aks Resource")
@@ -253,6 +269,7 @@ model FunctionAppProfile {
     
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "AI is a well-known abbreviation"
 @doc("The properties related to OpenAI Resource")
 model OpenAIProfile {
   
@@ -262,13 +279,23 @@ model OpenAIProfile {
     
 }
 
+@doc("Configuration of the managed resource group associated with the resource.")
+model ManagedResourceGroupConfiguration {
+  @doc("The resource group name.")
+  name: string;
+
+  @doc("The resource group location.")
+  location: string;
+}
+
+
 
 @armResourceOperations(MdsResource)
-interface ManufacturingDataServices extends Azure.ResourceManager.Operations {
+interface ManufacturingDataServices  {
   get is ArmResourceRead<MdsResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<MdsResource>;
   update is ArmResourcePatchAsync<MdsResource, MdsResourceProperties>;
-  delete is ArmResourceDeleteSync<MdsResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<MdsResource>;
   listByResourceGroup is ArmResourceListByParent<MdsResource>;
   listBySubscription is ArmListBySubscription<MdsResource>;
 
@@ -279,13 +306,13 @@ interface ManufacturingDataServices extends Azure.ResourceManager.Operations {
 
 
 // note this is a template for an empty body resource action, which will be added to the library at some point
-#suppress "@azure-tools/cadl-azure-core/documentation-required" "This is a template"
-#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-operation-outside-interface" "This is a template"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "This is a template"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-outside-interface" "This is a template"
 @armResourceAction(TResource)
 @post
 op ArmResourceListActionSync<
   TResource extends Azure.ResourceManager.Foundations.ArmResource,
-  TResponse extends object,
+  TResponse extends {},
   TBaseParameters = Azure.ResourceManager.Foundations.BaseParameters<TResource>
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>

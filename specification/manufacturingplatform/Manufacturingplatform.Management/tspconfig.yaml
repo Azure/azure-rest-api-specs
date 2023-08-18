@@ -1,10 +1,13 @@
 output-dir: "{project-root}/../"
-emitters:
-  "@azure-tools/cadl-autorest":
+emit:
+  - "@azure-tools/typespec-autorest"
+#  - "@azure-tools/typespec-providerhub-controller"
+options:
+  "@azure-tools/typespec-autorest":
     emitter-output-dir: "{output-dir}"
     azure-resource-provider-folder: ./swagger/ManufacturingPlatform/resource-manager
     examples-directory: ./examples
     new-line: lf
-  "@azure-tools/cadl-providerhub-controller":
+  "@azure-tools/typespec-providerhub-controller":
     emitter-output-dir: "{output-dir}/generated"
     code-kind: model
