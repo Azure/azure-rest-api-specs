@@ -2,31 +2,16 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
 
+using Azure.ResourceManager;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
 namespace Microsoft.Quantum;
 
+@armResourceOperations
 interface WorkspacesOperations {
   @doc("Returns the Workspace resource associated with the given name.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}")
-  @get
-  Get is Azure.Core.Foundations.Operation<
-    {
-      @doc("The name of the resource group.")
-      @path
-      resourceGroupName: string;
-
-      @doc("The Azure subscription ID.")
-      @path
-      subscriptionId: string;
-
-      @doc("The name of the quantum workspace resource.")
-      @path
-      workspaceName: string;
-    },
-    QuantumWorkspace
-  >;
+  Get is ArmResourceRead<QuantumWorkspace>;
 
   @doc("Creates or updates a workspace resource.")
   // FIXME: (name-collision-error) There is a potential collision with Operation, Parameter and Response names.

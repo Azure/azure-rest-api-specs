@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 
+using Azure.ResourceManager;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
@@ -70,18 +71,13 @@ enum CreatedByType {
 }
 
 @doc("The resource proxy definition object for quantum workspace.")
-model QuantumWorkspace {
-  ...TrackedResource;
-
-  @doc("Gets or sets the properties. Define quantum workspace's specific properties.")
-  properties?: WorkspaceResourceProperties;
-
-  @doc("Managed Identity information.")
-  identity?: QuantumWorkspaceIdentity;
-
-  @doc("System metadata")
+model QuantumWorkspace is TrackedResource<WorkspaceResourceProperties> {
+  @doc("doc")
+  @key
+  @segment("workspaces")
   @visibility("read")
-  systemData?: SystemData;
+  @path
+  name: string;
 }
 
 @doc("Properties of a Workspace")
@@ -164,20 +160,6 @@ model SystemData {
   @doc("The timestamp of resource last modification (UTC)")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedAt?: utcDateTime;
-}
-
-@doc("""
-The resource model definition for an Azure Resource Manager tracked top level
-resource which has 'tags' and a 'location'
-""")
-model TrackedResource {
-  ...Resource;
-
-  @doc("Resource tags.")
-  tags?: Record<string>;
-
-  @doc("The geo-location where the resource lives")
-  location: string;
 }
 
 @doc("""
