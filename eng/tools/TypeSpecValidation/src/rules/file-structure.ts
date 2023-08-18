@@ -1,5 +1,3 @@
-// import { readdir } from "fs/promises";
-// import path from "path";
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
 import { runCmd } from "../utils.js";
