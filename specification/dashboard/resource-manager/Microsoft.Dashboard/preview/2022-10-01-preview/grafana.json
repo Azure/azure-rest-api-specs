@@ -1238,6 +1238,13 @@
         },
         "grafanaConfigurations": {
           "$ref": "#/definitions/GrafanaConfigurations"
+        },
+        "grafanaPlugins": {
+          "description": "Installed plugin list of the Grafana instance. Key is plugin id.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/GrafanaPlugin"
+          }
         }
       }
     },
@@ -1293,6 +1300,12 @@
         },
         "grafanaConfigurations": {
           "$ref": "#/definitions/GrafanaConfigurations"
+        },
+        "grafanaPlugins": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/GrafanaPlugin"
+          }
         }
       }
     },
@@ -1634,6 +1647,17 @@
         },
         "marketplaceTrialQuota": {
           "$ref": "#/definitions/MarketplaceTrialQuota"
+        }
+      }
+    },
+    "GrafanaPlugin": {
+      "description": "Plugin of Grafana",
+      "type": "object",
+      "properties": {
+        "pluginId": {
+          "description": "Grafana plugin id",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
