@@ -734,6 +734,9 @@
             }
           },
           {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -788,6 +791,9 @@
             "schema": {
               "$ref": "#/definitions/SupportTicketDetails"
             }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1253,6 +1259,9 @@
             "schema": {
               "$ref": "#/definitions/CommunicationDetails"
             }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1757,7 +1766,7 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          }
+    }
         ],
         "responses": {
           "200": {
@@ -1765,7 +1774,7 @@
             "schema": {
               "$ref": "#/definitions/FileDetails"
             }
-          },
+  },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -2450,6 +2459,11 @@
           "type": "string",
           "readOnly": true
         },
+        "productionOutage": {
+          "description": "Indicates if this issue is a production outage.",
+          "type": "boolean",
+          "readOnly": true
+        },
         "require24X7Response": {
           "description": "Indicates if this requires a 24x7 response from Azure.",
           "type": "boolean"
@@ -2571,6 +2585,63 @@
           "readOnly": true
         }
       }
+    },
+    "ExceptionResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ServiceError",
+          "description": "The api error details."
+        }
+      },
+      "description": "The api error."
+    },
+    "ServiceError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceErrorDetail"
+          },
+          "x-ms-identifiers": [],
+          "description": "The list of error details.",
+          "readOnly": true
+        }
+      },
+      "description": "The api error details."
+    },
+    "ServiceErrorDetail": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The error message."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        }
+      },
+      "description": "The error details."
     },
     "ContactProfile": {
       "description": "Contact information associated with the support ticket.",
@@ -3019,19 +3090,19 @@
     }
   },
   "parameters": {
-      "SubscriptionIdParameter": {
-        "name": "subscriptionId",
-        "in": "path",
-        "required": true,
-        "type": "string",
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
         "description": "Azure subscription Id."
-      },
-      "ApiVersionParameter": {
-        "name": "api-version",
-        "in": "query",
-        "required": true,
-        "type": "string",
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
         "description": "API version."
-      }
     }
+  }
 }

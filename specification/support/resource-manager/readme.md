@@ -79,6 +79,14 @@ input-file:
   - Microsoft.Support/preview/2019-05-01-preview/support.json
 ```
 
+### Tag: package-2022-09-preview
+
+These settings apply only when `--tag=package-2022-09-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-09-preview'
+input-file:
+  - Microsoft.Support/preview/2022-09-01-preview/support.json
+```
 ---
 
 # Code Generation
