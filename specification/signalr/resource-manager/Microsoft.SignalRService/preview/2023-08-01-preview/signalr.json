@@ -3,7 +3,7 @@
   "info": {
     "title": "SignalRManagementClient",
     "description": "REST API for Azure SignalR Service",
-    "version": "2023-06-01-preview"
+    "version": "2023-08-01-preview"
   },
   "paths": {
     "/providers/Microsoft.SignalRService/operations": {
@@ -2145,6 +2145,19 @@
         "modelAsString": true
       }
     },
+    "IPRule": {
+      "description": "An IP rule",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "An IP or CIDR or ServiceTag",
+          "type": "string"
+        },
+        "action": {
+          "$ref": "#/definitions/ACLAction"
+        }
+      }
+    },
     "KeyType": {
       "description": "The type of access key.",
       "enum": [
@@ -2686,6 +2699,16 @@
         "provisioningState": {
           "readOnly": true,
           "$ref": "#/definitions/ProvisioningState"
+        },
+        "regionEndpointEnabled": {
+          "description": "Enable or disable the regional endpoint. Default to \"Enabled\".\r\nWhen it's Disabled, new connections will not be routed to this endpoint, however existing connections will not be affected.",
+          "default": "Enabled",
+          "type": "string"
+        },
+        "resourceStopped": {
+          "description": "Stop or start the resource.  Default to \"false\".\r\nWhen it's true, the data plane of the resource is shutdown.\r\nWhen it's false, the data plane of the resource is started.",
+          "default": "false",
+          "type": "string"
         }
       }
     },
@@ -3034,6 +3057,15 @@
           "x-ms-identifiers": [
             "name"
           ]
+        },
+        "ipRules": {
+          "description": "IP rules for filtering public traffic",
+          "maxItems": 30,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPRule"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -3138,6 +3170,16 @@
           "description": "DisableLocalAuth\r\nEnable or disable aad auth\r\nWhen set as true, connection with AuthType=aad won't work.",
           "default": false,
           "type": "boolean"
+        },
+        "regionEndpointEnabled": {
+          "description": "Enable or disable the regional endpoint. Default to \"Enabled\".\r\nWhen it's Disabled, new connections will not be routed to this endpoint, however existing connections will not be affected.\r\nThis property is replica specific. Disable the regional endpoint without replica is not allowed.",
+          "default": "Enabled",
+          "type": "string"
+        },
+        "resourceStopped": {
+          "description": "Stop or start the resource.  Default to \"False\".\r\nWhen it's true, the data plane of the resource is shutdown.\r\nWhen it's false, the data plane of the resource is started.",
+          "default": "false",
+          "type": "string"
         }
       }
     },

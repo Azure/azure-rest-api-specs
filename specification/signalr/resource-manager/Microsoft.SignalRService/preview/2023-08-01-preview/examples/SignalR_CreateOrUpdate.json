@@ -95,7 +95,7 @@
         "key1": "value1"
       }
     },
-    "api-version": "2023-06-01-preview",
+    "api-version": "2023-08-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "resourceName": "mySignalRService"
@@ -213,11 +213,27 @@
                   "ServerConnection"
                 ]
               }
+            ],
+            "ipRules": [
+              {
+                "value": "123.456.789.123/24",
+                "action": "Allow"
+              },
+              {
+                "value": "123.456.789.123",
+                "action": "Allow"
+              },
+              {
+                "value": "AppService",
+                "action": "Allow"
+              }
             ]
           },
           "publicNetworkAccess": "Enabled",
           "disableLocalAuth": false,
-          "disableAadAuth": false
+          "disableAadAuth": false,
+          "regionEndpointEnabled": "Enabled",
+          "resourceStopped": "false"
         },
         "kind": "SignalR",
         "identity": {
@@ -354,11 +370,27 @@
                   "ServerConnection"
                 ]
               }
+            ],
+            "ipRules": [
+              {
+                "value": "123.456.789.123/24",
+                "action": "Allow"
+              },
+              {
+                "value": "123.456.789.123",
+                "action": "Allow"
+              },
+              {
+                "value": "AppService",
+                "action": "Allow"
+              }
             ]
           },
           "publicNetworkAccess": "Enabled",
           "disableLocalAuth": false,
-          "disableAadAuth": false
+          "disableAadAuth": false,
+          "regionEndpointEnabled": "Enabled",
+          "resourceStopped": "false"
         },
         "kind": "SignalR",
         "identity": {
