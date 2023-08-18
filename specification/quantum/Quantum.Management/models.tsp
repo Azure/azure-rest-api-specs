@@ -48,6 +48,8 @@ enum ProvisioningStatus {
   ProviderProvisioning,
   @doc("doc")
   Failed,
+  @doc("doc")
+  Canceled,
 }
 
 @doc("doc")
