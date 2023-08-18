@@ -139,29 +139,6 @@ model QuantumWorkspaceIdentity {
   type?: ResourceIdentityType;
 }
 
-@doc("Metadata pertaining to creation and last modification of the resource.")
-model SystemData {
-  @doc("The identity that created the resource.")
-  createdBy?: string;
-
-  @doc("The type of identity that created the resource.")
-  createdByType?: CreatedByType;
-
-  @doc("The timestamp of resource creation (UTC).")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  createdAt?: utcDateTime;
-
-  @doc("The identity that last modified the resource.")
-  lastModifiedBy?: string;
-
-  @doc("The type of identity that last modified the resource.")
-  lastModifiedByType?: CreatedByType;
-
-  @doc("The timestamp of resource last modification (UTC)")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastModifiedAt?: utcDateTime;
-}
-
 @doc("""
 Common fields that are returned in the response for all Azure Resource Manager
 resources
