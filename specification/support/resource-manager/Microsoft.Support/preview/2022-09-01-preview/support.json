@@ -2586,63 +2586,6 @@
         }
       }
     },
-    "ExceptionResponse": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ServiceError",
-          "description": "The api error details."
-        }
-      },
-      "description": "The api error."
-    },
-    "ServiceError": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServiceErrorDetail"
-          },
-          "x-ms-identifiers": [],
-          "description": "The list of error details.",
-          "readOnly": true
-        }
-      },
-      "description": "The api error details."
-    },
-    "ServiceErrorDetail": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The error code."
-        },
-        "message": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The error message."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the error."
-        }
-      },
-      "description": "The error details."
-    },
     "ContactProfile": {
       "description": "Contact information associated with the support ticket.",
       "required": [
@@ -3093,14 +3036,14 @@
       "in": "path",
       "required": true,
       "type": "string",
-        "description": "Azure subscription Id."
+      "description": "Azure subscription Id."
     },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "required": true,
       "type": "string",
-        "description": "API version."
+      "description": "API version."
     }
   }
 }
