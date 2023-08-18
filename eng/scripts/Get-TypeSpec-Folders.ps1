@@ -48,20 +48,12 @@ else {
   }
 }
 
-$errTspConfig = @()
 $typespecFolders = @()
 foreach ($file in $changedFiles) {
   if ($file -match 'specification\/[^\/]*\/') {
-    $errTspConfig += (Get-ChildItem -path $matches[0] tspconfig.* -Recurse).FullName | Where-Object {(Split-Path $_ -leaf) -ne "tspconfig.yaml"}    
     $typespecFolder = (Get-ChildItem -path $matches[0] tspconfig.yaml -Recurse).Directory.FullName | ForEach-Object {if ($_) { [IO.Path]::GetRelativePath($($pwd.path), $_) }}
     $typespecFolders += $typespecFolder -replace '\\', '/'
   }
-}
-
-if ($errTspConfig) {
-  $errTspConfig =  $errTspConfig | Select-Object -Unique | Sort-Object
-  Write-Host ($errTspConfig -join "`n")
-  throw "Please change the file extensions of the above tspconfig files to .yaml"
 }
 
 $typespecFolders = $typespecFolders | Select-Object -Unique | Sort-Object
