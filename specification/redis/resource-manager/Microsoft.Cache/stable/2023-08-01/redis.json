@@ -756,6 +756,10 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+        },
         "description": "Deletes all of the keys in a cache.",
         "parameters": [
           {
@@ -777,10 +781,32 @@
         ],
         "responses": {
           "202": {
-            "description": "Flush operation successfully enqueued; follow the Location header to poll for final outcome."
+            "description": "Flush operation successfully enqueued; follow the Location header to poll for final outcome.",
+            "headers": {
+              "Location": {
+                "description": "URL to query for the status of the operation.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL to query for the status of the operation.",
+                "type": "string"
+              }
+            },
+            "schema" : {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
+            }
           },
           "200": {
-            "description": "Flush operation succeeded."
+            "description": "Flush operation succeeded.",
+            "headers": {
+              "Location": {
+                "description": "URL to query for the status of the operation.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL to query for the status of the operation.",
+                "type": "string"
+              }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
