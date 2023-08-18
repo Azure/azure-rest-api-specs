@@ -23,6 +23,9 @@ jobs:
     vmImage: $(OSVmImage)
 
   steps:
+  - script: npm --version --loglevel info
+    displayName: npm --version
+
   - script: npm ci
     displayName: npm ci
 
