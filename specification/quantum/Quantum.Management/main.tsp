@@ -21,6 +21,7 @@ using TypeSpec.Versioning;
 )
 @doc("// FIXME: (miissing-service-description) Add service description")
 @versioned(Versions)
+@armProviderNamespace
 namespace Microsoft.Quantum;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
