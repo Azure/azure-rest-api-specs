@@ -7,39 +7,65 @@ using TypeSpec.Http;
 
 namespace Microsoft.Quantum;
 
+@doc("doc")
 enum Status {
+  @doc("doc")
   Succeeded,
+  @doc("doc")
   Launching,
+  @doc("doc")
   Updating,
+  @doc("doc")
   Deleting,
+  @doc("doc")
   Deleted,
+  @doc("doc")
   Failed,
 }
 
+@doc("doc")
 enum UsableStatus {
+  @doc("doc")
   Yes,
+  @doc("doc")
   No,
+  @doc("doc")
   Partial,
 }
 
+@doc("doc")
 enum ProvisioningStatus {
+  @doc("doc")
   Succeeded,
+  @doc("doc")
   ProviderLaunching,
+  @doc("doc")
   ProviderUpdating,
+  @doc("doc")
   ProviderDeleting,
+  @doc("doc")
   ProviderProvisioning,
+  @doc("doc")
   Failed,
 }
 
+@doc("doc")
 enum ResourceIdentityType {
+  @doc("doc")
   SystemAssigned,
+  @doc("doc")
   None,
 }
 
+@doc("doc")
 enum CreatedByType {
+  @doc("doc")
   User,
+  @doc("doc")
   Application,
+  @doc("doc")
   ManagedIdentity,
+  @doc("doc")
   Key,
 }
 
