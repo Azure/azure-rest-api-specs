@@ -23,7 +23,10 @@ interface WorkspacesOperations {
   updateTags is ArmResourcePatchSync<QuantumWorkspace, WorkspaceResourceProperties>;
 
   @doc("Gets the list of Workspaces within a Subscription.")
-  list is ArmResourceListAtScope<QuantumWorkspace>;
+  listByResourceGroup is ArmResourceListByParent<QuantumWorkspace>;
+
+  @doc("Gets the list of Workspaces within a Subscription.")
+  listBySubscription is ArmListBySubscription<QuantumWorkspace>;
 }
 
 interface OfferingsOperations {
