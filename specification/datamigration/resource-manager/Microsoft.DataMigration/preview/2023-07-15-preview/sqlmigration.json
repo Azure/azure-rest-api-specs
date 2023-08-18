@@ -28,10 +28,7 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "targetResourceName",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/TargetResourceNameParameter"
           },
           {
             "$ref": "#/parameters/MigrationNameParameter"
@@ -74,10 +71,7 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "targetResourceName",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/TargetResourceNameParameter"
           },
           {
             "$ref": "#/parameters/MigrationNameParameter"
@@ -130,10 +124,7 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "targetResourceName",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/TargetResourceNameParameter"
           },
           {
             "$ref": "#/parameters/MigrationNameParameter"
@@ -160,7 +151,12 @@
             "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was provided for parameter '{0}'.\n\n * 400 EmptyRequiredRequestBody - The request body must not be empty.\n\n * 400 GenericUser - User Failure when calling other Resource Provider.\n\n * 400 OperationIdNotFound - Operation ID '{0}' not found.\n\n * 400 OperationTypeNotFound - Operation Type '{0}' not found.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 InvalidLocation - Invalid Location: '{0}'. Location should match selected Azure target location '{1}'.\n\n * 400 DeleteMigrationServiceTaskNotAllowedInProgress - Migration service task '{0}' is currently in progress. To delete the task, please wait until the migration service task has completed or cancel the task manually, and then retry deleting the migration service task. Alternatively, use the force delete option to cancel ongoing operations and delete.\n\n * 400 RequestFailed - Request to the resource '{0}' failed. Error code : '{1}'. HTTP status code : '{2}'. Error message : '{3}'.\n\n * 400 DeleteMigrationNotAllowedMigrationInProgress - Database migration to the target resource '{0}' is currently in progress. To delete the migration, please wait until the migration has completed or cancel the migration manually, and then retry deleting the migration. Alternatively, use the force delete option to cancel ongoing operations and delete\n\n * 400 DeleteMigrationNotAllowedDeleteInProgress - Database migration to the target resource '{0}' is currently deleting. Please wait until the delete operation is complete\n\n * 400 MigrationRetryNotAllowed - Migration is not in a retriable state. Migration must be in state WaitForRetry. Current state: '{0}', Target server:'{1}', Target database: '{2}'.\n\n * 400 TestConnectionFailed - Failed to test connections using provided Integration Runtime. Error details: '{0}'\n\n * 400 MigrationStillValidating - Migration is still being validated. {0} cannot be performed. Target server:'{1}', Target database: '{2}'.\n\n * 400 IntegrationRuntimeIsNotOnline - Integration Runtime '{0}' is not online for resource group '{1}' subscription '{2}'\n\n * 403 AccessDenied - Access denied.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 405 SubscriptionNotReady - Subscription is not in Ready state.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SubscriptionOperationInProgress - An operation on subscription is already in progress\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out.\n\n * 500 GenericSystem - System Failure when calling other Resource Provider.\n\n * 500 AdfCleanupFailureAfterMigration - Failed to clean up resources after migration has completed successfully. Target server:'{0}', Target database: '{1}', Error details: '{2}'."
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -186,10 +182,7 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "targetResourceName",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/TargetResourceNameParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -231,10 +224,7 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "targetResourceName",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/TargetResourceNameParameter"
           },
           {
             "$ref": "#/parameters/MigrationNameParameter"
@@ -277,10 +267,7 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "targetResourceName",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/TargetResourceNameParameter"
           },
           {
             "$ref": "#/parameters/MigrationNameParameter"
@@ -333,10 +320,7 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "targetResourceName",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/TargetResourceNameParameter"
           },
           {
             "$ref": "#/parameters/MigrationNameParameter"
@@ -363,7 +347,12 @@
             "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was provided for parameter '{0}'.\n\n * 400 EmptyRequiredRequestBody - The request body must not be empty.\n\n * 400 GenericUser - User Failure when calling other Resource Provider.\n\n * 400 OperationIdNotFound - Operation ID '{0}' not found.\n\n * 400 OperationTypeNotFound - Operation Type '{0}' not found.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 InvalidLocation - Invalid Location: '{0}'. Location should match selected Azure target location '{1}'.\n\n * 400 DeleteMigrationServiceTaskNotAllowedInProgress - Migration service task '{0}' is currently in progress. To delete the task, please wait until the migration service task has completed or cancel the task manually, and then retry deleting the migration service task. Alternatively, use the force delete option to cancel ongoing operations and delete.\n\n * 400 RequestFailed - Request to the resource '{0}' failed. Error code : '{1}'. HTTP status code : '{2}'. Error message : '{3}'.\n\n * 400 DeleteMigrationNotAllowedMigrationInProgress - Database migration to the target resource '{0}' is currently in progress. To delete the migration, please wait until the migration has completed or cancel the migration manually, and then retry deleting the migration. Alternatively, use the force delete option to cancel ongoing operations and delete\n\n * 400 DeleteMigrationNotAllowedDeleteInProgress - Database migration to the target resource '{0}' is currently deleting. Please wait until the delete operation is complete\n\n * 400 MigrationRetryNotAllowed - Migration is not in a retriable state. Migration must be in state WaitForRetry. Current state: '{0}', Target server:'{1}', Target database: '{2}'.\n\n * 400 TestConnectionFailed - Failed to test connections using provided Integration Runtime. Error details: '{0}'\n\n * 400 MigrationStillValidating - Migration is still being validated. {0} cannot be performed. Target server:'{1}', Target database: '{2}'.\n\n * 400 IntegrationRuntimeIsNotOnline - Integration Runtime '{0}' is not online for resource group '{1}' subscription '{2}'\n\n * 403 AccessDenied - Access denied.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 405 SubscriptionNotReady - Subscription is not in Ready state.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SubscriptionOperationInProgress - An operation on subscription is already in progress\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out.\n\n * 500 GenericSystem - System Failure when calling other Resource Provider.\n\n * 500 AdfCleanupFailureAfterMigration - Failed to clean up resources after migration has completed successfully. Target server:'{0}', Target database: '{1}', Error details: '{2}'."
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -389,10 +378,7 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "targetResourceName",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/TargetResourceNameParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2111,18 +2097,23 @@
       }
     },
     "MongoMigrationCollection": {
+      "description": "Mongo source and target database and collection details.",
       "type": "object",
       "properties": {
         "sourceDatabase": {
+          "description": "Source database name.",
           "type": "string"
         },
         "sourceCollection": {
+          "description": "Source collection name.",
           "type": "string"
         },
         "targetDatabase": {
+          "description": "Target database name.",
           "type": "string"
         },
         "targetCollection": {
+          "description": "Target collection name.",
           "type": "string"
         }
       }
@@ -3400,12 +3391,22 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
+    "TargetResourceNameParameter": {
+      "name": "targetResourceName",
+      "in": "path",
+      "description": "The name of the target resource/account.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_-]*$",
+      "x-ms-parameter-location": "method"
+    },
     "MigrationNameParameter": {
       "name": "migrationName",
       "in": "path",
       "description": "Name of the migration.",
       "required": true,
       "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_-]*$",
       "x-ms-parameter-location": "method"
     },
     "LoginNameParameter": {
