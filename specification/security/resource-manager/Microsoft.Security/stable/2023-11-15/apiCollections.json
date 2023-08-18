@@ -49,10 +49,10 @@
         "operationId": "APICollections_ListBySubscription",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersion"
           }
         ],
         "responses": {
@@ -89,13 +89,13 @@
         "operationId": "APICollections_ListByResourceGroup",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersion"
           }
         ],
         "responses": {
@@ -133,16 +133,16 @@
         "operationId": "APICollections_ListByAzureApiManagementService",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiManagementServiceNameParameter"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersion"
           }
         ],
         "responses": {
@@ -180,10 +180,10 @@
         "operationId": "APICollections_GetByAzureApiManagementService",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiManagementServiceNameParameter"
@@ -192,7 +192,7 @@
             "$ref": "#/parameters/ApiManagementApiIdParameter"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersion"
           }
         ],
         "responses": {
@@ -225,10 +225,10 @@
         "operationId": "APICollections_OnboardAzureApiManagementApi",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiManagementServiceNameParameter"
@@ -237,7 +237,7 @@
             "$ref": "#/parameters/ApiManagementApiIdParameter"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersion"
           }
         ],
         "responses": {
@@ -249,16 +249,13 @@
           },
           "201": {
             "description": "This indicates a successful response for the create or update operation. The response contains the properties of the API collection.",
-            "schema": {
-              "$ref": "#/definitions/ApiCollection"
-            }
-          },
-          "202": {
-            "description": "This indicates a successful response for the create or update operation. The Location header contains the URL where the operation status can be checked.",
             "headers": {
               "Location": {
                 "type": "string"
               }
+            },
+            "schema": {
+              "$ref": "#/definitions/ApiCollection"
             }
           },
           "default": {
@@ -288,10 +285,10 @@
         "operationId": "APICollections_OffboardAzureApiManagementApi",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiManagementServiceNameParameter"
@@ -300,7 +297,7 @@
             "$ref": "#/parameters/ApiManagementApiIdParameter"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersion"
           }
         ],
         "responses": {
@@ -362,7 +359,31 @@
         "provisioningState": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the provisioning state of the API collection."
+          "description": "Gets the provisioning state of the API collection.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "InProgress"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Succeeded"
+              },
+              {
+                "value": "Failed"
+              },
+              {
+                "value": "Canceled"
+              },
+              {
+                "value": "InProgress"
+              }
+            ]
+          }
         },
         "displayName": {
           "readOnly": true,
@@ -372,7 +393,15 @@
         "discoveredVia": {
           "readOnly": true,
           "type": "string",
-          "description": "The resource Id of the resource from where this API collection was discovered."
+          "description": "The resource Id of the resource from where this API collection was discovered.",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ApiManagement/service"
+              }
+            ]
+          }
         },
         "baseUrl": {
           "readOnly": true,
@@ -413,13 +442,6 @@
           "readOnly": true,
           "type": "string",
           "description": "The highest priority sensitivity label from Microsoft Purview in this API collection."
-        },
-        "additionalData": {
-          "type": "object",
-          "description": "Additional data regarding the API collection.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     }
