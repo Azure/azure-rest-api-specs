@@ -734,9 +734,6 @@
             }
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -791,9 +788,6 @@
             "schema": {
               "$ref": "#/definitions/SupportTicketDetails"
             }
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1259,9 +1253,6 @@
             "schema": {
               "$ref": "#/definitions/CommunicationDetails"
             }
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1989,10 +1980,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully uploaded file content.",
-            "schema": {
-              "$ref": "#/definitions/FileDetails"
-            }
+            "description": "Successfully uploaded file content."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2953,6 +2941,17 @@
           "type": "string",
           "readOnly": true
         },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FileDetailsProperties",
+          "description": "Properties of the resource"
+        }
+      }
+    },
+    "FileDetailsProperties": {
+      "description": "Describes the properties of a file.",
+      "type": "object",
+      "properties": {
         "createdOn": {
           "format": "date-time",
           "description": "Time in UTC (ISO 8601 format) when file workspace was created.",
