@@ -3259,7 +3259,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importSites/{siteName}/exportjobs": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importSites/{siteName}/exportJobs": {
       "get": {
         "tags": [
           "ImportJobsController"
@@ -3289,7 +3289,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PagedExportImportedMachinesJobCollection"
+              "$ref": "#/definitions/PagedExportImportedMachinesJob"
             }
           },
           "default": {
@@ -3459,7 +3459,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PagedImportMachinesJobImportMachinesJobCollection"
+              "$ref": "#/definitions/PagedImportMachinesJob"
             }
           },
           "default": {
@@ -14408,28 +14408,6 @@
       },
       "description": "Export machines job REST resource."
     },
-    "ExportImportedMachinesJobCollection": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExportImportedMachinesJob"
-          },
-          "description": "Gets the list of jobs.",
-          "x-typespec-name": "ExportImportedMachinesJob[]"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets the value of next link.",
-          "readOnly": true
-        }
-      },
-      "description": "Export imported machines job collection.",
-      "required": [
-        "value"
-      ]
-    },
     "ExportImportedMachinesJobEntityProperties": {
       "type": "object",
       "properties": {
@@ -16632,28 +16610,6 @@
       },
       "description": "Import machines Job REST Resource."
     },
-    "ImportMachinesJobImportMachinesJobCollection": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ImportMachinesJob"
-          },
-          "description": "Gets the list of jobs.",
-          "x-typespec-name": "ImportMachinesJob[]"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets the value of next link.",
-          "readOnly": true
-        }
-      },
-      "description": "Collection of VMware jobs.",
-      "required": [
-        "value"
-      ]
-    },
     "ImportMachinesJobProperties": {
       "type": "object",
       "properties": {
@@ -17432,17 +17388,17 @@
       },
       "description": "Paged collection of DeleteImportMachinesJob items"
     },
-    "PagedExportImportedMachinesJobCollection": {
+    "PagedExportImportedMachinesJob": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ExportImportedMachinesJobCollection"
+            "$ref": "#/definitions/ExportImportedMachinesJob"
           },
+          "description": "The ExportImportedMachinesJob items on this page",
+          "x-typespec-name": "ExportImportedMachinesJob[]",
           "x-ms-identifiers": [],
-          "description": "The ExportImportedMachinesJobCollection items on this page",
-          "x-typespec-name": "ExportImportedMachinesJobCollection[]",
           "readOnly": true
         },
         "nextLink": {
@@ -17451,19 +17407,19 @@
           "readOnly": true
         }
       },
-      "description": "Paged collection of ExportImportedMachinesJobCollection items"
+      "description": "Paged collection of ExportImportedMachinesJob items"
     },
-    "PagedImportMachinesJobImportMachinesJobCollection": {
+    "PagedImportMachinesJob": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ImportMachinesJobImportMachinesJobCollection"
+            "$ref": "#/definitions/ImportMachinesJob"
           },
+          "description": "The ImportMachinesJob items on this page",
+          "x-typespec-name": "ImportMachinesJob[]",
           "x-ms-identifiers": [],
-          "description": "The ImportMachinesJobImportMachinesJobCollection items on this page",
-          "x-typespec-name": "ImportMachinesJobImportMachinesJobCollection[]",
           "readOnly": true
         },
         "nextLink": {
@@ -17472,7 +17428,7 @@
           "readOnly": true
         }
       },
-      "description": "Paged collection of ImportMachinesJobImportMachinesJobCollection items"
+      "description": "Paged collection of ImportMachinesJob items"
     },
     "PrivateEndpointConnection": {
       "type": "object",
