@@ -16,7 +16,7 @@ export class FileStructureRule implements Rule {
     tspConfig.split(/\s+/).forEach((file) => {
       if (file !== "tspconfig.yaml") {
         success = false;
-        errorOutput += `Please ensure the file extension of tspconfig is .yaml, found file ${file} instead.\n`;
+        errorOutput += `Invalid config file '$file'.  Must be named 'tspconfig.yaml'.\n`;
       }
     });
 
