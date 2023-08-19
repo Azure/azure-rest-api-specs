@@ -71,7 +71,7 @@
             "$ref": "#/parameters/policyName"
           },
           {
-            "$ref": "#/parameters/if-match"
+            "$ref": "#/parameters/ifMatch"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -142,7 +142,7 @@
             "$ref": "#/parameters/policyName"
           },
           {
-            "$ref": "#/parameters/if-match"
+            "$ref": "#/parameters/ifMatch"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -222,13 +222,13 @@
         }
       }
     },
-    "/data-policies/{policyName}/{state}": {
+    "/data-policies/{policyName}/{version}": {
       "get": {
         "tags": [
           "DataPolicy_Get"
         ],
-        "description": "Get data policy by name",
-        "summary": "API to fetch a purview data policy. The API will return the policy based on policyName and state",
+        "description": "Get data policy by name and version. The only supported value for version is 'published'.",
+        "summary": "API to fetch a purview data policy. The API will return the policy in based on the version and policyName.",
         "operationId": "DataPolicy_GetByPolicyNameAndState",
         "produces": [
           "application/json"
@@ -272,7 +272,7 @@
         },
         "x-ms-examples": {
           "DataPolicy_GetByPolicyNameAndState": {
-            "$ref": "./examples/DataPolicy_GetWithState.json"
+            "$ref": "./examples/DataPolicy_GetWithVersion.json"
           }
         }
       }
@@ -296,7 +296,7 @@
             "$ref": "#/parameters/policyName"
           },
           {
-            "$ref": "#/parameters/if-match"
+            "$ref": "#/parameters/ifMatch"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -354,7 +354,7 @@
             "$ref": "#/parameters/policyName"
           },
           {
-            "$ref": "#/parameters/if-match"
+            "$ref": "#/parameters/ifMatch"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -454,7 +454,7 @@
         "scopes": {
           "type": "array",
           "readOnly": true,
-          "description": "Array of scopes where the policy is published",
+          "description": "Array of data source scopes (ARM resourceIds) where the policy is published",
           "items": {
             "type": "string"
           },
@@ -481,17 +481,17 @@
       "type": "object",
       "description": "Policy member",
       "properties": {
-        "aadMembers": {
+        "entraMembers": {
           "type": "array",
           "description": "Array of azure active directory members",
           "items": {
-            "$ref": "#/definitions/AADMember"
+            "$ref": "#/definitions/EntraMember"
           },
           "x-ms-identifiers": []
         }
       }
     },
-    "AADMember": {
+    "EntraMember": {
       "type": "object",
       "description": "Azure active directory member",
       "properties": {
@@ -514,24 +514,6 @@
           "x-ms-enum": {
             "name": "objectType",
             "modelAsString": true
-          }
-        }
-      }
-    },
-    "FabricItemMember": {
-      "type": "object",
-      "description": "Microsoft fabric item member",
-      "properties": {
-        "sourcePath": {
-          "type": "string",
-          "description": "Source path of the member"
-        },
-        "itemAccess": {
-          "type": "array",
-          "description": "Array of access items for the member",
-          "items": {
-            "type": "string",
-            "description": "access item"
           }
         }
       }
@@ -584,6 +566,7 @@
     },
     "SystemData": {
       "type": "object",
+      "description": "Metadata pertaining to creation and last modification of the policy.",
       "readOnly": true,
       "properties": {
         "createdBy": {
@@ -649,7 +632,7 @@
       "required": true,
       "type": "string"
     },
-    "if-match": {
+    "ifMatch": {
       "in": "header",
       "name": "If-Match",
       "description": "Http Etag value of a policy to be updated. Required only during the replace operation",
@@ -662,7 +645,7 @@
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
-        "user_impersonation": "impersonate your user account"
+        "https://purview.azure.net/.default": "Default authorization scope."
       },
       "description": "Azure Active Directory OAuth2 Flow."
     }

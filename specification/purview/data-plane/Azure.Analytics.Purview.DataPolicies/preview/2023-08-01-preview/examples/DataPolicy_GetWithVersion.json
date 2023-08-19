@@ -3,7 +3,7 @@
     "Endpoint": "{endpoint}",
     "policyName": "purview-test-policy",
     "api-version": "2023-08-01-preview",
-    "state": "Draft"
+    "version": "Published"
   },
   "responses": {
     "200": {
@@ -15,8 +15,10 @@
         "name": "purview-test-policy",
         "etag": "2",
         "description": "This is a test policy",
-        "scopes": [],
-        "state": "Draft",
+        "scopes": [
+          "/subscriptions/56bb0a7b-861d-44b0-9220-9db0dd88e798/resourceGroups/test-rg/providers/Microsoft.Sql/servers/test-server/**"
+        ],
+        "state": "Published",
         "decisionRules": [
           {
             "effect": "Permit",
@@ -37,7 +39,7 @@
           }
         ],
         "members": {
-          "aadMembers": [
+          "entraMembers": [
             {
               "tenantId": "7972a1e5-4861-43cf-9e1c-1d8669148a2e",
               "objectId": "5b3a30f8-dee3-4a5e-bf48-feddbdf174b1",
