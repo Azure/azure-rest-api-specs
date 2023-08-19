@@ -20,7 +20,10 @@ interface WorkspacesOperations {
   delete is ArmResourceDeleteSync<QuantumWorkspace>;
 
   @doc("Updates an existing workspace's tags.")
-  updateTags is ArmResourcePatchSync<QuantumWorkspace, WorkspaceResourceProperties>;
+  updateTags is ArmResourcePatchSync<
+    QuantumWorkspace,
+    WorkspaceResourceProperties
+  >;
 
   @doc("Gets the list of Workspaces within a Subscription.")
   listByResourceGroup is ArmResourceListByParent<QuantumWorkspace>;
@@ -30,8 +33,7 @@ interface WorkspacesOperations {
 }
 
 @armResourceOperations
-interface OfferingsOperations {
-}
+interface OfferingsOperations {}
 
 @armResourceOperations
 interface WorkspaceOperations {

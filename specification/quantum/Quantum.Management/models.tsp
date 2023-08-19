@@ -12,14 +12,19 @@ namespace Microsoft.Quantum;
 enum Status {
   @doc("doc")
   Succeeded,
+
   @doc("doc")
   Launching,
+
   @doc("doc")
   Updating,
+
   @doc("doc")
   Deleting,
+
   @doc("doc")
   Deleted,
+
   @doc("doc")
   Failed,
 }
@@ -28,8 +33,10 @@ enum Status {
 enum UsableStatus {
   @doc("doc")
   Yes,
+
   @doc("doc")
   No,
+
   @doc("doc")
   Partial,
 }
@@ -38,16 +45,22 @@ enum UsableStatus {
 enum ProvisioningStatus {
   @doc("doc")
   Succeeded,
+
   @doc("doc")
   ProviderLaunching,
+
   @doc("doc")
   ProviderUpdating,
+
   @doc("doc")
   ProviderDeleting,
+
   @doc("doc")
   ProviderProvisioning,
+
   @doc("doc")
   Failed,
+
   @doc("doc")
   Canceled,
 }
@@ -56,6 +69,7 @@ enum ProvisioningStatus {
 enum ResourceIdentityType {
   @doc("doc")
   SystemAssigned,
+
   @doc("doc")
   None,
 }
@@ -64,10 +78,13 @@ enum ResourceIdentityType {
 enum CreatedByType {
   @doc("doc")
   User,
+
   @doc("doc")
   Application,
+
   @doc("doc")
   ManagedIdentity,
+
   @doc("doc")
   Key,
 }
