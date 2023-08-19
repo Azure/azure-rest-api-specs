@@ -1802,12 +1802,12 @@
             "type": "string"
           },
           {
-            "name": "createFile",
+            "name": "createFileParameters",
             "in": "body",
             "description": "Create file object",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateFile"
+              "$ref": "#/definitions/FileDetails"
             }
           },
           {
@@ -1912,7 +1912,7 @@
             "description": "Create file object",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateFile"
+              "$ref": "#/definitions/FileDetails"
             }
           },
           {
@@ -2034,9 +2034,6 @@
         "responses": {
           "200": {
             "description": "Successfully uploaded file content.",
-            "schema": {
-              "$ref": "#/definitions/FileDetails"
-            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3002,27 +2999,6 @@
         },
         "chunkIndex": {
           "description": "Index of the uploaded chunk (Index starts at 0)",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "CreateFile": {
-      "description": "File body associated with a workspace.",
-      "type": "object",
-      "properties": {
-        "chunkSize": {
-          "description": "Size of each chunk",
-          "type": "string",
-          "readOnly": true
-        },
-        "fileSize": {
-          "description": "Size of the file to be uploaded",
-          "type": "string",
-          "readOnly": true
-        },
-        "numberOfChunks": {
-          "description": "Size of the file to be uploaded",
           "type": "string",
           "readOnly": true
         }
