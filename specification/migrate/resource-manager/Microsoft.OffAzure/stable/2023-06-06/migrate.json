@@ -242,7 +242,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.OffAzure/HyperVSites": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OffAzure/hypervSites": {
       "get": {
         "tags": [
           "HypervSites"
@@ -262,7 +262,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HyperVSiteListResult"
+              "$ref": "#/definitions/HypervSiteListResult"
             }
           },
           "default": {
@@ -285,7 +285,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.OffAzure/importSites": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OffAzure/importsites": {
       "get": {
         "tags": [
           "ImportSitesController"
@@ -432,7 +432,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/VMwareSiteListResult"
+              "$ref": "#/definitions/VmwareSiteListResult"
             }
           },
           "default": {
@@ -455,7 +455,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites": {
       "get": {
         "tags": [
           "HypervSites"
@@ -478,7 +478,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HyperVSiteListResult"
+              "$ref": "#/definitions/HypervSiteListResult"
             }
           },
           "default": {
@@ -501,13 +501,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}": {
       "get": {
         "tags": [
           "HypervSitesController"
         ],
         "operationId": "HypervSitesController_Get",
-        "description": "Get a HyperVSite",
+        "description": "Get a HypervSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -531,7 +531,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HyperVSite"
+              "$ref": "#/definitions/HypervSite"
             }
           },
           "default": {
@@ -555,7 +555,7 @@
           "HypervSitesController"
         ],
         "operationId": "HypervSitesController_Create",
-        "description": "Create a HyperVSite",
+        "description": "Create a HypervSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -580,7 +580,7 @@
             "required": true,
             "description": "Resource create parameters.",
             "schema": {
-              "$ref": "#/definitions/HyperVSite"
+              "$ref": "#/definitions/HypervSite"
             }
           }
         ],
@@ -588,7 +588,7 @@
           "200": {
             "description": "ARM update operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HyperVSite"
+              "$ref": "#/definitions/HypervSite"
             }
           },
           "201": {
@@ -601,7 +601,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/HyperVSite"
+              "$ref": "#/definitions/HypervSite"
             }
           },
           "default": {
@@ -625,7 +625,7 @@
           "HypervSitesController"
         ],
         "operationId": "HypervSitesController_Update",
-        "description": "Update a HyperVSite",
+        "description": "Update a HypervSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -650,7 +650,7 @@
             "required": true,
             "description": "The resource properties to be updated.",
             "schema": {
-              "$ref": "#/definitions/HyperVSiteUpdate"
+              "$ref": "#/definitions/HypervSiteUpdate"
             }
           }
         ],
@@ -658,7 +658,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HyperVSite"
+              "$ref": "#/definitions/HypervSite"
             }
           },
           "default": {
@@ -682,7 +682,7 @@
           "HypervSitesController"
         ],
         "operationId": "HypervSitesController_Delete",
-        "description": "Delete a HyperVSite",
+        "description": "Delete a HypervSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -726,7 +726,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/clientGroupMembers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/clientGroupMembers": {
       "post": {
         "tags": [
           "HypervDependencyMapController"
@@ -805,13 +805,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/clusters": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/clusters": {
       "get": {
         "tags": [
           "HypervClusterController"
         ],
-        "operationId": "HypervClusterController_ListByHyperVSite",
-        "description": "List HyperVCluster resources by HyperVSite",
+        "operationId": "HypervClusterController_ListByHypervSite",
+        "description": "List HypervCluster resources by HypervSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -842,7 +842,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HyperVClusterListResult"
+              "$ref": "#/definitions/HypervClusterListResult"
             }
           },
           "default": {
@@ -856,16 +856,16 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "HypervClusterController_ListByHyperVSite_MaximumSet_Gen": {
-            "$ref": "./examples/HypervClusterController_ListByHyperVSite_MaximumSet_Gen.json"
+          "HypervClusterController_ListByHypervSite_MaximumSet_Gen": {
+            "$ref": "./examples/HypervClusterController_ListByHypervSite_MaximumSet_Gen.json"
           },
-          "HypervClusterController_ListByHyperVSite_MinimumSet_Gen": {
-            "$ref": "./examples/HypervClusterController_ListByHyperVSite_MinimumSet_Gen.json"
+          "HypervClusterController_ListByHypervSite_MinimumSet_Gen": {
+            "$ref": "./examples/HypervClusterController_ListByHypervSite_MinimumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/clusters/{clusterName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/clusters/{clusterName}": {
       "get": {
         "tags": [
           "HypervClusterController"
@@ -903,7 +903,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HyperVCluster"
+              "$ref": "#/definitions/HypervCluster"
             }
           },
           "default": {
@@ -960,7 +960,7 @@
             "required": true,
             "description": "Resource create parameters.",
             "schema": {
-              "$ref": "#/definitions/HyperVCluster"
+              "$ref": "#/definitions/HypervCluster"
             }
           }
         ],
@@ -968,7 +968,7 @@
           "200": {
             "description": "ARM update operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HyperVCluster"
+              "$ref": "#/definitions/HypervCluster"
             }
           },
           "201": {
@@ -981,7 +981,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/HyperVCluster"
+              "$ref": "#/definitions/HypervCluster"
             }
           },
           "default": {
@@ -992,7 +992,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -1009,7 +1009,7 @@
           "HypervClusterController"
         ],
         "operationId": "HypervClusterController_Delete",
-        "description": "Delete a HyperVCluster",
+        "description": "Delete a HypervCluster",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1061,7 +1061,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/computeErrorSummary": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/computeErrorSummary": {
       "post": {
         "tags": [
           "HypervSitesController"
@@ -1122,7 +1122,68 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/exportApplications": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/computeusage": {
+      "post": {
+        "tags": [
+          "HypervSitesController"
+        ],
+        "operationId": "HypervSitesController_Computeusage",
+        "description": "Get a hyperv site usage.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "description": "Site name",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The content of the action request",
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "x-typespec-name": "{}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HypervSiteUsage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HypervSitesController_Computeusage_MaximumSet_Gen": {
+            "$ref": "./examples/HypervSitesController_Computeusage_MaximumSet_Gen.json"
+          },
+          "HypervSitesController_Computeusage_MinimumSet_Gen": {
+            "$ref": "./examples/HypervSitesController_Computeusage_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/exportApplications": {
       "post": {
         "tags": [
           "HypervSitesController"
@@ -1203,7 +1264,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/exportDependencies": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/exportDependencies": {
       "post": {
         "tags": [
           "HypervDependencyMapController"
@@ -1282,7 +1343,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/exportMachineErrors": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/exportMachineErrors": {
       "post": {
         "tags": [
           "HypervSitesController"
@@ -1361,7 +1422,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/generateCoarseMap": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/generateCoarseMap": {
       "post": {
         "tags": [
           "HypervDependencyMapController"
@@ -1440,7 +1501,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/generateDetailedMap": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/generateDetailedMap": {
       "post": {
         "tags": [
           "HypervDependencyMapController"
@@ -1519,13 +1580,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/hosts": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/hosts": {
       "get": {
         "tags": [
           "HypervHostController"
         ],
-        "operationId": "HypervHostController_ListByHyperVSite",
-        "description": "List HyperVHost resources by HyperVSite",
+        "operationId": "HypervHostController_ListByHypervSite",
+        "description": "List HypervHost resources by HypervSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1556,7 +1617,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HyperVHostListResult"
+              "$ref": "#/definitions/HypervHostListResult"
             }
           },
           "default": {
@@ -1570,22 +1631,22 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "HypervHostController_ListByHyperVSite_MaximumSet_Gen": {
-            "$ref": "./examples/HypervHostController_ListByHyperVSite_MaximumSet_Gen.json"
+          "HypervHostController_ListByHypervSite_MaximumSet_Gen": {
+            "$ref": "./examples/HypervHostController_ListByHypervSite_MaximumSet_Gen.json"
           },
-          "HypervHostController_ListByHyperVSite_MinimumSet_Gen": {
-            "$ref": "./examples/HypervHostController_ListByHyperVSite_MinimumSet_Gen.json"
+          "HypervHostController_ListByHypervSite_MinimumSet_Gen": {
+            "$ref": "./examples/HypervHostController_ListByHypervSite_MinimumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/hosts/{hostName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/hosts/{hostName}": {
       "get": {
         "tags": [
           "HypervHostController"
         ],
         "operationId": "HypervHostController_Get",
-        "description": "Get a HyperVHost",
+        "description": "Get a HypervHost",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1617,7 +1678,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HyperVHost"
+              "$ref": "#/definitions/HypervHost"
             }
           },
           "default": {
@@ -1641,7 +1702,7 @@
           "HypervHostController"
         ],
         "operationId": "HypervHostController_Create",
-        "description": "Create a HyperVHost",
+        "description": "Create a HypervHost",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1674,7 +1735,7 @@
             "required": true,
             "description": "Resource create parameters.",
             "schema": {
-              "$ref": "#/definitions/HyperVHost"
+              "$ref": "#/definitions/HypervHost"
             }
           }
         ],
@@ -1682,7 +1743,7 @@
           "200": {
             "description": "ARM update operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HyperVHost"
+              "$ref": "#/definitions/HypervHost"
             }
           },
           "201": {
@@ -1695,7 +1756,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/HyperVHost"
+              "$ref": "#/definitions/HypervHost"
             }
           },
           "default": {
@@ -1706,7 +1767,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -1723,7 +1784,7 @@
           "HypervHostController"
         ],
         "operationId": "HypervHostController_Delete",
-        "description": "Delete a HyperVHost",
+        "description": "Delete a HypervHost",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1793,13 +1854,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/jobs": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/jobs": {
       "get": {
         "tags": [
           "HypervJobs"
         ],
-        "operationId": "HypervJobs_ListByHyperVSite",
-        "description": "List HypervJob resources by HyperVSite",
+        "operationId": "HypervJobs_ListByHypervSite",
+        "description": "List HypervJob resources by HypervSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1837,16 +1898,16 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "HypervJobs_ListByHyperVSite_MaximumSet_Gen": {
-            "$ref": "./examples/HypervJobs_ListByHyperVSite_MaximumSet_Gen.json"
+          "HypervJobs_ListByHypervSite_MaximumSet_Gen": {
+            "$ref": "./examples/HypervJobs_ListByHypervSite_MaximumSet_Gen.json"
           },
-          "HypervJobs_ListByHyperVSite_MinimumSet_Gen": {
-            "$ref": "./examples/HypervJobs_ListByHyperVSite_MinimumSet_Gen.json"
+          "HypervJobs_ListByHypervSite_MinimumSet_Gen": {
+            "$ref": "./examples/HypervJobs_ListByHypervSite_MinimumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/jobs/{jobName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/jobs/{jobName}": {
       "get": {
         "tags": [
           "HypervJobs"
@@ -1904,7 +1965,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/listHealthSummary": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/listHealthSummary": {
       "post": {
         "tags": [
           "HypervSitesController"
@@ -1954,13 +2015,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/machines": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/machines": {
       "get": {
         "tags": [
           "HypervMachinesController"
         ],
-        "operationId": "HypervMachinesController_ListByHyperVSite",
-        "description": "List HypervMachine resources by HyperVSite",
+        "operationId": "HypervMachinesController_ListByHypervSite",
+        "description": "List HypervMachine resources by HypervSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -2028,16 +2089,16 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "HypervMachinesController_ListByHyperVSite_MaximumSet_Gen": {
-            "$ref": "./examples/HypervMachinesController_ListByHyperVSite_MaximumSet_Gen.json"
+          "HypervMachinesController_ListByHypervSite_MaximumSet_Gen": {
+            "$ref": "./examples/HypervMachinesController_ListByHypervSite_MaximumSet_Gen.json"
           },
-          "HypervMachinesController_ListByHyperVSite_MinimumSet_Gen": {
-            "$ref": "./examples/HypervMachinesController_ListByHyperVSite_MinimumSet_Gen.json"
+          "HypervMachinesController_ListByHypervSite_MinimumSet_Gen": {
+            "$ref": "./examples/HypervMachinesController_ListByHypervSite_MinimumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/machines/{machineName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/machines/{machineName}": {
       "get": {
         "tags": [
           "HypervMachinesController"
@@ -2160,7 +2221,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/machines/{machineName}/softwareinventories": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/machines/{machineName}/softwareinventories": {
       "get": {
         "tags": [
           "HypervSoftwareInventoriesController"
@@ -2221,7 +2282,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/machines/{machineName}/softwareInventories/{default}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/machines/{machineName}/softwareInventories/{default}": {
       "get": {
         "tags": [
           "HypervSoftwareInventoriesController"
@@ -2300,7 +2361,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/operationsStatus/{operationStatusName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/operationsStatus/{operationStatusName}": {
       "get": {
         "tags": [
           "HypervOperationsStatusController"
@@ -2358,13 +2419,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/runAsAccounts": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/runAsAccounts": {
       "get": {
         "tags": [
           "HypervRunAsAccountsController"
         ],
-        "operationId": "HypervRunAsAccountsController_ListByHyperVSite",
-        "description": "List HypervRunAsAccountResource resources by HyperVSite",
+        "operationId": "HypervRunAsAccountsController_ListByHypervSite",
+        "description": "List HypervRunAsAccountResource resources by HypervSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2402,16 +2463,16 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "HypervRunAsAccountsController_ListByHyperVSite_MaximumSet_Gen": {
-            "$ref": "./examples/HypervRunAsAccountsController_ListByHyperVSite_MaximumSet_Gen.json"
+          "HypervRunAsAccountsController_ListByHypervSite_MaximumSet_Gen": {
+            "$ref": "./examples/HypervRunAsAccountsController_ListByHypervSite_MaximumSet_Gen.json"
           },
-          "HypervRunAsAccountsController_ListByHyperVSite_MinimumSet_Gen": {
-            "$ref": "./examples/HypervRunAsAccountsController_ListByHyperVSite_MinimumSet_Gen.json"
+          "HypervRunAsAccountsController_ListByHypervSite_MinimumSet_Gen": {
+            "$ref": "./examples/HypervRunAsAccountsController_ListByHypervSite_MinimumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/runAsAccounts/{accountName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/runAsAccounts/{accountName}": {
       "get": {
         "tags": [
           "HypervRunAsAccountsController"
@@ -2469,7 +2530,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/serverGroupMembers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/serverGroupMembers": {
       "post": {
         "tags": [
           "HypervDependencyMapController"
@@ -2548,7 +2609,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/summary": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/summary": {
       "post": {
         "tags": [
           "HypervSitesController"
@@ -2598,7 +2659,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/updateDependencyMapStatus": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/updateDependencyMapStatus": {
       "post": {
         "tags": [
           "HypervDependencyMapController"
@@ -2677,7 +2738,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/updateProperties": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/updateProperties": {
       "post": {
         "tags": [
           "HypervMachinesController"
@@ -2756,7 +2817,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importSites": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importsites": {
       "get": {
         "tags": [
           "ImportSitesController"
@@ -2801,7 +2862,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importSites/{siteName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importsites/{siteName}": {
       "get": {
         "tags": [
           "ImportSitesController"
@@ -3026,7 +3087,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importSites/{siteName}/deleteImportedMachines": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importsites/{siteName}/deleteImportedMachines": {
       "post": {
         "tags": [
           "ImportSitesController"
@@ -3087,7 +3148,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importSites/{siteName}/deleteJobs": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importsites/{siteName}/deleteJobs": {
       "get": {
         "tags": [
           "ImportJobsController"
@@ -3140,7 +3201,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importSites/{siteName}/deleteJobs/{jobName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importsites/{siteName}/deleteJobs/{jobName}": {
       "get": {
         "tags": [
           "ImportJobsController"
@@ -3198,7 +3259,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importSites/{siteName}/exportjobs": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importsites/{siteName}/exportjobs": {
       "get": {
         "tags": [
           "ImportJobsController"
@@ -3228,7 +3289,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PagedExportImportedMachinesJob"
+              "$ref": "#/definitions/PagedExportImportedMachinesJobCollection"
             }
           },
           "default": {
@@ -3251,7 +3312,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importSites/{siteName}/exportJobs/{jobName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importsites/{siteName}/exportJobs/{jobName}": {
       "get": {
         "tags": [
           "ImportJobsController"
@@ -3309,7 +3370,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importSites/{siteName}/exportUri": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importsites/{siteName}/exportUri": {
       "post": {
         "tags": [
           "ImportSitesController"
@@ -3368,7 +3429,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importSites/{siteName}/importjobs": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importsites/{siteName}/importJobs": {
       "get": {
         "tags": [
           "ImportJobsController"
@@ -3398,7 +3459,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PagedImportMachinesJob"
+              "$ref": "#/definitions/PagedImportMachinesJobImportMachinesJobCollection"
             }
           },
           "default": {
@@ -3421,7 +3482,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importSites/{siteName}/importjobs/{jobName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importsites/{siteName}/Importjobs/{jobName}": {
       "get": {
         "tags": [
           "ImportJobsController"
@@ -3479,7 +3540,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importSites/{siteName}/importUri": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importsites/{siteName}/importUri": {
       "post": {
         "tags": [
           "ImportSitesController"
@@ -3538,7 +3599,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importSites/{siteName}/jobs": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importsites/{siteName}/jobs": {
       "get": {
         "tags": [
           "ImportJobsController"
@@ -3591,7 +3652,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importSites/{siteName}/jobs/{jobName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importsites/{siteName}/jobs/{jobName}": {
       "get": {
         "tags": [
           "ImportJobsController"
@@ -3649,7 +3710,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importSites/{siteName}/machines": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importsites/{siteName}/machines": {
       "get": {
         "tags": [
           "ImportMachinesController"
@@ -3731,7 +3792,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importSites/{siteName}/machines/{machineName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importsites/{siteName}/machines/{machineName}": {
       "get": {
         "tags": [
           "ImportMachinesController"
@@ -4003,7 +4064,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -4288,6 +4349,12 @@
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnectionListResult"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -4449,7 +4516,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -4460,7 +4527,20 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "ARM update operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
@@ -4513,6 +4593,12 @@
             "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -5119,7 +5205,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -7079,7 +7165,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -8598,7 +8684,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/WebAppsWebApplicationListResult"
+              "$ref": "#/definitions/WebApplicationListResult"
             }
           },
           "default": {
@@ -8867,7 +8953,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -9121,6 +9207,67 @@
           },
           "ServerSitesController_ComputeErrorSummary_MinimumSet_Gen": {
             "$ref": "./examples/ServerSitesController_ComputeErrorSummary_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/computeusage": {
+      "post": {
+        "tags": [
+          "ServerSitesController"
+        ],
+        "operationId": "ServerSitesController_Computeusage",
+        "description": "Get a serve site usage.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "description": "Site name",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The content of the action request",
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "x-typespec-name": "{}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerSiteUsageResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServerSitesController_Computeusage_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSitesController_Computeusage_MaximumSet_Gen.json"
+          },
+          "ServerSitesController_Computeusage_MinimumSet_Gen": {
+            "$ref": "./examples/ServerSitesController_Computeusage_MinimumSet_Gen.json"
           }
         }
       }
@@ -10633,7 +10780,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/VMwareSiteListResult"
+              "$ref": "#/definitions/VmwareSiteListResult"
             }
           },
           "default": {
@@ -10662,7 +10809,7 @@
           "SitesController"
         ],
         "operationId": "SitesController_Get",
-        "description": "Get a VMwareSite",
+        "description": "Get a VmwareSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -10686,7 +10833,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/VMwareSite"
+              "$ref": "#/definitions/VmwareSite"
             }
           },
           "default": {
@@ -10710,7 +10857,7 @@
           "SitesController"
         ],
         "operationId": "SitesController_Delete",
-        "description": "Delete a VMwareSite",
+        "description": "Delete a VmwareSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -10758,7 +10905,7 @@
           "SitesController"
         ],
         "operationId": "SitesController_Create",
-        "description": "Create a VMwareSite",
+        "description": "Create a VmwareSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -10783,7 +10930,7 @@
             "required": true,
             "description": "Resource create parameters.",
             "schema": {
-              "$ref": "#/definitions/VMwareSite"
+              "$ref": "#/definitions/VmwareSite"
             }
           }
         ],
@@ -10791,7 +10938,7 @@
           "200": {
             "description": "ARM update operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/VMwareSite"
+              "$ref": "#/definitions/VmwareSite"
             }
           },
           "201": {
@@ -10804,7 +10951,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/VMwareSite"
+              "$ref": "#/definitions/VmwareSite"
             }
           },
           "default": {
@@ -10828,7 +10975,7 @@
           "SitesController"
         ],
         "operationId": "SitesController_Update",
-        "description": "Update a VMwareSite",
+        "description": "Update a VmwareSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -10853,7 +11000,7 @@
             "required": true,
             "description": "The resource properties to be updated.",
             "schema": {
-              "$ref": "#/definitions/VMwareSiteUpdate"
+              "$ref": "#/definitions/VmwareSiteUpdate"
             }
           }
         ],
@@ -10861,7 +11008,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/VMwareSite"
+              "$ref": "#/definitions/VmwareSite"
             }
           },
           "default": {
@@ -11017,6 +11164,67 @@
           },
           "SitesController_ComputeErrorSummary_MinimumSet_Gen": {
             "$ref": "./examples/SitesController_ComputeErrorSummary_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/computeusage": {
+      "post": {
+        "tags": [
+          "SitesController"
+        ],
+        "operationId": "SitesController_Computeusage",
+        "description": "Method to get site error summary.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "description": "Site name",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The content of the action request",
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "x-typespec-name": "{}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VmwareSiteUsage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SitesController_Computeusage_MaximumSet_Gen": {
+            "$ref": "./examples/SitesController_Computeusage_MaximumSet_Gen.json"
+          },
+          "SitesController_Computeusage_MinimumSet_Gen": {
+            "$ref": "./examples/SitesController_Computeusage_MinimumSet_Gen.json"
           }
         }
       }
@@ -11502,8 +11710,8 @@
         "tags": [
           "VmwareHostController"
         ],
-        "operationId": "VmwareHostController_ListByVMwareSite",
-        "description": "List VmwareHost resources by VMwareSite",
+        "operationId": "VmwareHostController_ListByVmwareSite",
+        "description": "List VmwareHost resources by VmwareSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -11541,11 +11749,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "VmwareHostController_ListByVMwareSite_MaximumSet_Gen": {
-            "$ref": "./examples/VmwareHostController_ListByVMwareSite_MaximumSet_Gen.json"
+          "VmwareHostController_ListByVmwareSite_MaximumSet_Gen": {
+            "$ref": "./examples/VmwareHostController_ListByVmwareSite_MaximumSet_Gen.json"
           },
-          "VmwareHostController_ListByVMwareSite_MinimumSet_Gen": {
-            "$ref": "./examples/VmwareHostController_ListByVMwareSite_MinimumSet_Gen.json"
+          "VmwareHostController_ListByVmwareSite_MinimumSet_Gen": {
+            "$ref": "./examples/VmwareHostController_ListByVmwareSite_MinimumSet_Gen.json"
           }
         }
       }
@@ -11613,8 +11821,8 @@
         "tags": [
           "HypervJobsController"
         ],
-        "operationId": "HypervJobsController_ListByVMwareSite",
-        "description": "List VmwareJob resources by VMwareSite",
+        "operationId": "HypervJobsController_ListByVmwareSite",
+        "description": "List VmwareJob resources by VmwareSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -11652,11 +11860,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "HypervJobsController_ListByVMwareSite_MaximumSet_Gen": {
-            "$ref": "./examples/HypervJobsController_ListByVMwareSite_MaximumSet_Gen.json"
+          "HypervJobsController_ListByVmwareSite_MaximumSet_Gen": {
+            "$ref": "./examples/HypervJobsController_ListByVmwareSite_MaximumSet_Gen.json"
           },
-          "HypervJobsController_ListByVMwareSite_MinimumSet_Gen": {
-            "$ref": "./examples/HypervJobsController_ListByVMwareSite_MinimumSet_Gen.json"
+          "HypervJobsController_ListByVmwareSite_MinimumSet_Gen": {
+            "$ref": "./examples/HypervJobsController_ListByVmwareSite_MinimumSet_Gen.json"
           }
         }
       }
@@ -11774,8 +11982,8 @@
         "tags": [
           "MachinesController"
         ],
-        "operationId": "MachinesController_ListByVMwareSite",
-        "description": "List MachineResource resources by VMwareSite",
+        "operationId": "MachinesController_ListByVmwareSite",
+        "description": "List MachineResource resources by VmwareSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -11843,11 +12051,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "MachinesController_ListByVMwareSite_MaximumSet_Gen": {
-            "$ref": "./examples/MachinesController_ListByVMwareSite_MaximumSet_Gen.json"
+          "MachinesController_ListByVmwareSite_MaximumSet_Gen": {
+            "$ref": "./examples/MachinesController_ListByVmwareSite_MaximumSet_Gen.json"
           },
-          "MachinesController_ListByVMwareSite_MinimumSet_Gen": {
-            "$ref": "./examples/MachinesController_ListByVMwareSite_MinimumSet_Gen.json"
+          "MachinesController_ListByVmwareSite_MinimumSet_Gen": {
+            "$ref": "./examples/MachinesController_ListByVmwareSite_MinimumSet_Gen.json"
           }
         }
       }
@@ -12334,8 +12542,8 @@
         "tags": [
           "RunAsAccountsController"
         ],
-        "operationId": "RunAsAccountsController_ListByVMwareSite",
-        "description": "List VmwareRunAsAccountResource resources by VMwareSite",
+        "operationId": "RunAsAccountsController_ListByVmwareSite",
+        "description": "List VmwareRunAsAccountResource resources by VmwareSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -12373,11 +12581,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "RunAsAccountsController_ListByVMwareSite_MaximumSet_Gen": {
-            "$ref": "./examples/RunAsAccountsController_ListByVMwareSite_MaximumSet_Gen.json"
+          "RunAsAccountsController_ListByVmwareSite_MaximumSet_Gen": {
+            "$ref": "./examples/RunAsAccountsController_ListByVmwareSite_MaximumSet_Gen.json"
           },
-          "RunAsAccountsController_ListByVMwareSite_MinimumSet_Gen": {
-            "$ref": "./examples/RunAsAccountsController_ListByVMwareSite_MinimumSet_Gen.json"
+          "RunAsAccountsController_ListByVmwareSite_MinimumSet_Gen": {
+            "$ref": "./examples/RunAsAccountsController_ListByVmwareSite_MinimumSet_Gen.json"
           }
         }
       }
@@ -12885,6 +13093,66 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/vcenters": {
+      "get": {
+        "tags": [
+          "VcenterController"
+        ],
+        "operationId": "VcenterController_ListByVmwareSite",
+        "description": "List Vcenter resources by VmwareSite",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "required": false,
+            "description": "filter query",
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "description": "Site name",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VcenterListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "VcenterController_ListByVmwareSite_MaximumSet_Gen": {
+            "$ref": "./examples/VcenterController_ListByVmwareSite_MaximumSet_Gen.json"
+          },
+          "VcenterController_ListByVmwareSite_MinimumSet_Gen": {
+            "$ref": "./examples/VcenterController_ListByVmwareSite_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/vcenters/{vcenterName}": {
       "get": {
         "tags": [
@@ -13012,7 +13280,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -13197,9 +13465,7 @@
           "items": {
             "$ref": "#/definitions/Application"
           },
-          "x-ms-identifiers": [
-            "name"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets or sets Applications of the AppsAndRoles.",
           "x-typespec-name": "Application[]",
           "readOnly": true
@@ -13207,13 +13473,11 @@
         "webApplications": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WebApplication"
+            "$ref": "#/definitions/WebApplicationAppsAndRolesModel"
           },
-          "x-ms-identifiers": [
-            "name"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets or sets WebApplications of the AppsAndRoles.",
-          "x-typespec-name": "WebApplication[]",
+          "x-typespec-name": "WebApplicationAppsAndRolesModel[]",
           "readOnly": true
         },
         "features": {
@@ -13221,9 +13485,7 @@
           "items": {
             "$ref": "#/definitions/Feature"
           },
-          "x-ms-identifiers": [
-            "name"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets or sets Features of the AppsAndRoles.",
           "x-typespec-name": "Feature[]",
           "readOnly": true
@@ -13233,9 +13495,7 @@
           "items": {
             "$ref": "#/definitions/SqlServerApplication"
           },
-          "x-ms-identifiers": [
-            "name"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets or sets SQLServers of the AppsAndRoles.",
           "x-typespec-name": "SqlServerApplication[]",
           "readOnly": true
@@ -13245,9 +13505,7 @@
           "items": {
             "$ref": "#/definitions/SharePointServer"
           },
-          "x-ms-identifiers": [
-            "productName"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets or sets SharePointServers of the AppsAndRoles.",
           "x-typespec-name": "SharePointServer[]",
           "readOnly": true
@@ -13257,9 +13515,7 @@
           "items": {
             "$ref": "#/definitions/SystemCenter"
           },
-          "x-ms-identifiers": [
-            "productName"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets or sets SystemCenters of the AppsAndRoles.",
           "x-typespec-name": "SystemCenter[]",
           "readOnly": true
@@ -13269,9 +13525,7 @@
           "items": {
             "$ref": "#/definitions/BizTalkServer"
           },
-          "x-ms-identifiers": [
-            "productName"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets or sets BizTalkServers of the AppsAndRoles.",
           "x-typespec-name": "BizTalkServer[]",
           "readOnly": true
@@ -13281,9 +13535,7 @@
           "items": {
             "$ref": "#/definitions/ExchangeServer"
           },
-          "x-ms-identifiers": [
-            "productName"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets or sets ExchangeServers of the AppsAndRoles.",
           "x-typespec-name": "ExchangeServer[]",
           "readOnly": true
@@ -13293,9 +13545,7 @@
           "items": {
             "$ref": "#/definitions/OtherDatabase"
           },
-          "x-ms-identifiers": [
-            "instance"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets or sets OtherDatabaseServers of the AppsAndRoles.",
           "x-typespec-name": "OtherDatabase[]",
           "readOnly": true
@@ -13332,9 +13582,7 @@
           "items": {
             "$ref": "#/definitions/FrontEndBinding"
           },
-          "x-ms-identifiers": [
-            "hostName"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets or sets the bindings for the connector.",
           "x-typespec-name": "FrontEndBinding[]"
         }
@@ -13470,8 +13718,7 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
+          "description": "The status of the last operation."
         }
       },
       "description": "Delete Imported Machines Job Properties"
@@ -14161,6 +14408,28 @@
       },
       "description": "Export machines job REST resource."
     },
+    "ExportImportedMachinesJobCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExportImportedMachinesJob"
+          },
+          "description": "Gets the list of jobs.",
+          "x-typespec-name": "ExportImportedMachinesJob[]"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the value of next link.",
+          "readOnly": true
+        }
+      },
+      "description": "Export imported machines job collection.",
+      "required": [
+        "value"
+      ]
+    },
     "ExportImportedMachinesJobEntityProperties": {
       "type": "object",
       "properties": {
@@ -14669,11 +14938,11 @@
         ]
       }
     },
-    "HyperVCluster": {
+    "HypervCluster": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/HyperVClusterProperties",
+          "$ref": "#/definitions/HypervClusterProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -14689,16 +14958,16 @@
         }
       ]
     },
-    "HyperVClusterListResult": {
+    "HypervClusterListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/HyperVCluster"
+            "$ref": "#/definitions/HypervCluster"
           },
-          "description": "The HyperVCluster items on this page",
-          "x-typespec-name": "HyperVCluster[]"
+          "description": "The HypervCluster items on this page",
+          "x-typespec-name": "HypervCluster[]"
         },
         "nextLink": {
           "type": "string",
@@ -14707,12 +14976,12 @@
           "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
-      "description": "The response of a HyperVCluster list operation.",
+      "description": "The response of a HypervCluster list operation.",
       "required": [
         "value"
       ]
     },
-    "HyperVClusterProperties": {
+    "HypervClusterProperties": {
       "type": "object",
       "properties": {
         "createdTimestamp": {
@@ -14763,185 +15032,10 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
+          "description": "The status of the last operation."
         }
       },
       "description": "The properties of Hyperv Cluster"
-    },
-    "HyperVHost": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/HyperVHostProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "description": "A host resource belonging to a site resource.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "HyperVHostListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HyperVHost"
-          },
-          "description": "The HyperVHost items on this page",
-          "x-typespec-name": "HyperVHost[]"
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
-        }
-      },
-      "description": "The response of a HyperVHost list operation.",
-      "required": [
-        "value"
-      ]
-    },
-    "HyperVHostProperties": {
-      "type": "object",
-      "properties": {
-        "createdTimestamp": {
-          "type": "string",
-          "description": "Gets the timestamp marking Hyper-V host creation.",
-          "readOnly": true
-        },
-        "updatedTimestamp": {
-          "type": "string",
-          "description": "Gets the timestamp marking last updated on the Hyper-V host.",
-          "readOnly": true
-        },
-        "fqdn": {
-          "type": "string",
-          "description": "Gets or sets the FQDN/IPAddress of the Hyper-V host."
-        },
-        "runAsAccountId": {
-          "type": "string",
-          "description": "Gets or sets the run as account ID of the Hyper-V host."
-        },
-        "version": {
-          "type": "string",
-          "description": "Gets the version of the Hyper-V host.",
-          "readOnly": true
-        },
-        "errors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HealthErrorDetails"
-          },
-          "description": "Gets the errors.",
-          "x-typespec-name": "HealthErrorDetails[]",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
-        }
-      },
-      "description": "The properties of Hyperv Host"
-    },
-    "HyperVSite": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SiteProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "eTag": {
-          "type": "string",
-          "description": "Gets or sets the eTag for concurrency control.",
-          "readOnly": true
-        }
-      },
-      "description": "A HyperV SiteResource",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "HyperVSiteListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HyperVSite"
-          },
-          "description": "The HyperVSite items on this page",
-          "x-typespec-name": "HyperVSite[]"
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
-        }
-      },
-      "description": "The response of a HyperVSite list operation.",
-      "required": [
-        "value"
-      ]
-    },
-    "HyperVSiteUpdate": {
-      "type": "object",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags.",
-          "x-typespec-name": "Record<string>"
-        },
-        "properties": {
-          "$ref": "#/definitions/HyperVSiteUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "description": "The type used for update operations of the HyperVSite."
-    },
-    "HyperVSiteUpdateProperties": {
-      "type": "object",
-      "properties": {
-        "servicePrincipalIdentityDetails": {
-          "$ref": "#/definitions/SiteSpnProperties",
-          "description": "Gets or sets the service principal identity details used by agent for\ncommunication\n            to the service."
-        },
-        "agentDetails": {
-          "$ref": "#/definitions/SiteAgentProperties",
-          "description": "Gets or sets the on-premises agent details."
-        },
-        "applianceName": {
-          "type": "string",
-          "description": "Gets or sets the Appliance Name."
-        },
-        "discoverySolutionId": {
-          "type": "string",
-          "description": "Gets or sets the ARM ID of migration hub solution for SDS."
-        }
-      },
-      "description": "The updatable properties of the HyperVSite."
     },
     "HypervDisk": {
       "type": "object",
@@ -14980,6 +15074,91 @@
         }
       },
       "description": "Second level object returned as part of Machine REST resource."
+    },
+    "HypervHost": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HypervHostProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "A host resource belonging to a site resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "HypervHostListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HypervHost"
+          },
+          "description": "The HypervHost items on this page",
+          "x-typespec-name": "HypervHost[]"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a HypervHost list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "HypervHostProperties": {
+      "type": "object",
+      "properties": {
+        "createdTimestamp": {
+          "type": "string",
+          "description": "Gets the timestamp marking Hyper-V host creation.",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "type": "string",
+          "description": "Gets the timestamp marking last updated on the Hyper-V host.",
+          "readOnly": true
+        },
+        "fqdn": {
+          "type": "string",
+          "description": "Gets or sets the FQDN/IPAddress of the Hyper-V host."
+        },
+        "runAsAccountId": {
+          "type": "string",
+          "description": "Gets or sets the run as account ID of the Hyper-V host."
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets the version of the Hyper-V host.",
+          "readOnly": true
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthErrorDetails"
+          },
+          "description": "Gets the errors.",
+          "x-typespec-name": "HealthErrorDetails[]",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation."
+        }
+      },
+      "description": "The properties of Hyperv Host"
     },
     "HypervJob": {
       "type": "object",
@@ -15127,9 +15306,7 @@
           "items": {
             "$ref": "#/definitions/HypervDisk"
           },
-          "x-ms-identifiers": [
-            "instanceId"
-          ],
+          "x-ms-identifiers": [],
           "description": "Disks attached to the machine.",
           "x-typespec-name": "HypervDisk[]",
           "readOnly": true
@@ -15139,9 +15316,7 @@
           "items": {
             "$ref": "#/definitions/HypervNetworkAdapter"
           },
-          "x-ms-identifiers": [
-            "staticIpAddress"
-          ],
+          "x-ms-identifiers": [],
           "description": "Network adapters attached to the machine.",
           "x-typespec-name": "HypervNetworkAdapter[]",
           "readOnly": true
@@ -15500,7 +15675,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/HyperVClusterProperties",
+          "$ref": "#/definitions/HypervClusterProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -15558,6 +15733,93 @@
       "required": [
         "value"
       ]
+    },
+    "HypervSite": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SiteProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "A HyperV SiteResource",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "HypervSiteListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HypervSite"
+          },
+          "description": "The HypervSite items on this page",
+          "x-typespec-name": "HypervSite[]"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a HypervSite list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "HypervSiteUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags.",
+          "x-typespec-name": "Record<string>"
+        },
+        "properties": {
+          "$ref": "#/definitions/HypervSiteUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "The type used for update operations of the HypervSite."
+    },
+    "HypervSiteUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "servicePrincipalIdentityDetails": {
+          "$ref": "#/definitions/SiteSpnProperties",
+          "description": "Gets or sets the service principal identity details used by agent for\ncommunication\n            to the service."
+        },
+        "agentDetails": {
+          "$ref": "#/definitions/SiteAgentProperties",
+          "description": "Gets or sets the on-premises agent details."
+        },
+        "applianceName": {
+          "type": "string",
+          "description": "Gets or sets the Appliance Name."
+        },
+        "discoverySolutionId": {
+          "type": "string",
+          "description": "Gets or sets the ARM ID of migration hub solution for SDS."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation."
+        }
+      },
+      "description": "The updatable properties of the HypervSite."
     },
     "HypervSiteUsage": {
       "type": "object",
@@ -15656,9 +15918,7 @@
           "items": {
             "$ref": "#/definitions/DirectoryPath"
           },
-          "x-ms-identifiers": [
-            "physical"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets or sets the list of directories.",
           "x-typespec-name": "DirectoryPath[]"
         }
@@ -15682,9 +15942,7 @@
           "items": {
             "$ref": "#/definitions/DirectoryPath"
           },
-          "x-ms-identifiers": [
-            "physical"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets or sets the list of directories.",
           "x-typespec-name": "DirectoryPath[]"
         }
@@ -15699,9 +15957,7 @@
           "items": {
             "$ref": "#/definitions/IisApplicationUnit"
           },
-          "x-ms-identifiers": [
-            "applicationPoolName"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets the list of application units for the web site.",
           "x-typespec-name": "IisApplicationUnit[]",
           "readOnly": true
@@ -15711,10 +15967,7 @@
           "items": {
             "$ref": "#/definitions/IisVirtualApplicationUnit"
           },
-          "x-ms-identifiers": [
-            "path",
-            "directories"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets the list of application units for the web site.",
           "x-typespec-name": "IisVirtualApplicationUnit[]",
           "readOnly": true
@@ -15744,9 +15997,7 @@
           "items": {
             "$ref": "#/definitions/FrontEndBinding"
           },
-          "x-ms-identifiers": [
-            "ipAddress"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets the front end bindings for the application.",
           "x-typespec-name": "FrontEndBinding[]",
           "readOnly": true
@@ -15756,9 +16007,7 @@
           "items": {
             "$ref": "#/definitions/WebApplicationFramework"
           },
-          "x-ms-identifiers": [
-            "name"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets the Error details.",
           "x-typespec-name": "WebApplicationFramework[]",
           "readOnly": true
@@ -15768,9 +16017,7 @@
           "items": {
             "$ref": "#/definitions/WebApplicationConfigurationUnit"
           },
-          "x-ms-identifiers": [
-            "name"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets the configuration.",
           "x-typespec-name": "WebApplicationConfigurationUnit[]",
           "readOnly": true
@@ -15782,9 +16029,7 @@
           },
           "description": "Gets the directories.",
           "x-typespec-name": "WebApplicationDirectoryUnit[]",
-          "x-ms-identifiers": [
-            "name"
-          ],
+          "x-ms-identifiers": [],
           "readOnly": true
         },
         "displayName": {
@@ -16340,8 +16585,7 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
+          "description": "The status of the last operation."
         }
       },
       "description": "Class for machine properties.",
@@ -16387,6 +16631,28 @@
         }
       },
       "description": "Import machines Job REST Resource."
+    },
+    "ImportMachinesJobImportMachinesJobCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImportMachinesJob"
+          },
+          "description": "Gets the list of jobs.",
+          "x-typespec-name": "ImportMachinesJob[]"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the value of next link.",
+          "readOnly": true
+        }
+      },
+      "description": "Collection of VMware jobs.",
+      "required": [
+        "value"
+      ]
     },
     "ImportMachinesJobProperties": {
       "type": "object",
@@ -16482,8 +16748,7 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
+          "description": "The status of the last operation."
         }
       },
       "description": "The properties of ImportSiteResource"
@@ -16512,6 +16777,10 @@
         "discoverySolutionId": {
           "type": "string",
           "description": "Gets or sets the ARM ID of migration hub solution for SDS."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation."
         }
       },
       "description": "The updatable properties of the ImportSite."
@@ -16578,9 +16847,7 @@
           "items": {
             "$ref": "#/definitions/ErrorDetails"
           },
-          "x-ms-identifiers": [
-            "code"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets the errors.",
           "x-typespec-name": "ErrorDetails[]",
           "readOnly": true
@@ -16682,9 +16949,7 @@
           "items": {
             "$ref": "#/definitions/MachineMetadata"
           },
-          "x-ms-identifiers": [
-            "machineArmId"
-          ],
+          "x-ms-identifiers": [],
           "description": "The list of Machine MetaData.",
           "x-typespec-name": "MachineMetadata[]"
         }
@@ -17167,17 +17432,17 @@
       },
       "description": "Paged collection of DeleteImportMachinesJob items"
     },
-    "PagedExportImportedMachinesJob": {
+    "PagedExportImportedMachinesJobCollection": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ExportImportedMachinesJob"
+            "$ref": "#/definitions/ExportImportedMachinesJobCollection"
           },
-          "description": "The ExportImportedMachinesJob items on this page",
-          "x-typespec-name": "ExportImportedMachinesJob[]",
           "x-ms-identifiers": [],
+          "description": "The ExportImportedMachinesJobCollection items on this page",
+          "x-typespec-name": "ExportImportedMachinesJobCollection[]",
           "readOnly": true
         },
         "nextLink": {
@@ -17186,19 +17451,19 @@
           "readOnly": true
         }
       },
-      "description": "Paged collection of ExportImportedMachinesJob items"
+      "description": "Paged collection of ExportImportedMachinesJobCollection items"
     },
-    "PagedImportMachinesJob": {
+    "PagedImportMachinesJobImportMachinesJobCollection": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ImportMachinesJob"
+            "$ref": "#/definitions/ImportMachinesJobImportMachinesJobCollection"
           },
-          "description": "The ImportMachinesJob items on this page",
-          "x-typespec-name": "ImportMachinesJob[]",
           "x-ms-identifiers": [],
+          "description": "The ImportMachinesJobImportMachinesJobCollection items on this page",
+          "x-typespec-name": "ImportMachinesJobImportMachinesJobCollection[]",
           "readOnly": true
         },
         "nextLink": {
@@ -17207,7 +17472,7 @@
           "readOnly": true
         }
       },
-      "description": "Paged collection of ImportMachinesJob items"
+      "description": "Paged collection of ImportMachinesJobImportMachinesJobCollection items"
     },
     "PrivateEndpointConnection": {
       "type": "object",
@@ -17220,11 +17485,6 @@
             "read",
             "create"
           ]
-        },
-        "eTag": {
-          "type": "string",
-          "description": "Gets or sets the eTag for concurrency control.",
-          "readOnly": true
         }
       },
       "description": "REST model used to encapsulate Private Link properties for tracked resources.",
@@ -17243,17 +17503,19 @@
             "$ref": "#/definitions/PrivateEndpointConnection"
           },
           "description": "The PrivateEndpointConnection items on this page",
-          "x-typespec-name": "PrivateEndpointConnection[]",
-          "x-ms-identifiers": [],
-          "readOnly": true
+          "x-typespec-name": "PrivateEndpointConnection[]"
         },
         "nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The link to the next page of items",
-          "readOnly": true
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
-      "description": "The response of a PrivateEndpointConnection list operation."
+      "description": "The response of a PrivateEndpointConnection list operation.",
+      "required": [
+        "value"
+      ]
     },
     "PrivateEndpointConnectionPropertiesV2": {
       "type": "object",
@@ -17313,17 +17575,19 @@
             "$ref": "#/definitions/PrivateLinkResource"
           },
           "description": "The PrivateLinkResource items on this page",
-          "x-typespec-name": "PrivateLinkResource[]",
-          "x-ms-identifiers": [],
-          "readOnly": true
+          "x-typespec-name": "PrivateLinkResource[]"
         },
         "nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The link to the next page of items",
-          "readOnly": true
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
-      "description": "The response of a PrivateLinkResource list operation."
+      "description": "The response of a PrivateLinkResource list operation.",
+      "required": [
+        "value"
+      ]
     },
     "PrivateLinkResourceProperties": {
       "type": "object",
@@ -17467,9 +17731,7 @@
         "Completed",
         "Failed",
         "Succeeded",
-        "Canceled",
-        "Accepted",
-        "InProgress"
+        "Canceled"
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
@@ -17509,16 +17771,6 @@
             "name": "Canceled",
             "value": "Canceled",
             "description": "Canceled value."
-          },
-          {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "Accepted value."
-          },
-          {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "InProgress value."
           }
         ]
       }
@@ -17848,9 +18100,7 @@
           "items": {
             "$ref": "#/definitions/ServerNetworkAdapter"
           },
-          "x-ms-identifiers": [
-            "macAddress"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets or sets the network adapters of the server.",
           "x-typespec-name": "ServerNetworkAdapter[]"
         },
@@ -18040,8 +18290,7 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state of the server resource.",
-          "readOnly": true
+          "description": "Provisioning state of the server resource."
         }
       },
       "description": "Server REST resource."
@@ -18188,6 +18437,26 @@
       },
       "description": "Server site usage."
     },
+    "ServerSiteUsageResponse": {
+      "type": "object",
+      "properties": {
+        "runAsAccounts": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the number of run as accounts in the site."
+        },
+        "serverCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the number of servers part of the site."
+        }
+      },
+      "description": "The properties of ServerSiteUsageResponse.",
+      "required": [
+        "runAsAccounts",
+        "serverCount"
+      ]
+    },
     "ServerSoftwareInventory": {
       "type": "object",
       "properties": {
@@ -18253,9 +18522,7 @@
           "items": {
             "$ref": "#/definitions/ServerNetworkAdapter"
           },
-          "x-ms-identifiers": [
-            "macAddress"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets or sets the network adapters of the server.",
           "x-typespec-name": "ServerNetworkAdapter[]"
         },
@@ -18316,6 +18583,10 @@
           },
           "description": "Gets or sets tags on the Server machine.",
           "x-typespec-name": "Record<Azure.ResourceManager.Object>"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the server resource."
         }
       },
       "description": "The updatable properties of the Server."
@@ -18569,7 +18840,10 @@
           "readOnly": true
         }
       },
-      "description": "Collection of SiteHealthSummary."
+      "description": "Collection of SiteHealthSummary.",
+      "required": [
+        "value"
+      ]
     },
     "SiteHealthSummaryFabricLayoutUpdateSourcesItem": {
       "type": "string",
@@ -18632,8 +18906,7 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
+          "description": "The status of the last operation."
         }
       },
       "description": "The properties of VMwareSiteResource"
@@ -18796,9 +19069,7 @@
           "items": {
             "$ref": "#/definitions/SqlAvailabilityReplicaProperties"
           },
-          "x-ms-identifiers": [
-            "availabilityReplicaId"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets the list of availability replica properties which together forms this availability group.",
           "x-typespec-name": "SqlAvailabilityReplicaProperties[]",
           "readOnly": true
@@ -18808,9 +19079,7 @@
           "items": {
             "$ref": "#/definitions/SqlAvailabilityReplicaOverview"
           },
-          "x-ms-identifiers": [
-            "availabilityReplicaId"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets the parent availability replica overview if any.\n            This would be\nset with details of parent AG and AR for cases where this availability group is\na part of a distributed AG.\n            Currently, we do not populate this\nsince discovery and linking of DAG(Distributed Availability Group) is not\nimplemented.",
           "x-typespec-name": "SqlAvailabilityReplicaOverview[]",
           "readOnly": true
@@ -19187,9 +19456,7 @@
           "items": {
             "$ref": "#/definitions/FileMetaData"
           },
-          "x-ms-identifiers": [
-            "physicalFullName"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets the file metadata list.",
           "x-typespec-name": "FileMetaData[]",
           "readOnly": true
@@ -19246,8 +19513,7 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
+          "description": "The status of the last operation."
         }
       },
       "description": "Class for SQL Server database properties."
@@ -19689,9 +19955,7 @@
           "items": {
             "$ref": "#/definitions/SqlMachineOverview"
           },
-          "x-ms-identifiers": [
-            "machineArmId"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets the Machine Overview properties of all machines on which the SQL server is deployed.",
           "x-typespec-name": "SqlMachineOverview[]",
           "readOnly": true
@@ -19844,8 +20108,7 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
+          "description": "The status of the last operation."
         }
       },
       "description": "Class for SQL Server properties."
@@ -19905,7 +20168,7 @@
           {
             "name": "StopPending",
             "value": "StopPending",
-            "description": "Unknown value."
+            "description": "StopPending value."
           }
         ]
       }
@@ -20093,6 +20356,10 @@
         "status": {
           "$ref": "#/definitions/SqlServerStatus",
           "description": "Gets or sets the powered on status."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation."
         }
       },
       "description": "The updatable properties of the SqlServerV2."
@@ -20148,9 +20415,7 @@
           "items": {
             "$ref": "#/definitions/SiteApplianceProperties"
           },
-          "x-ms-identifiers": [
-            "applianceName"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets or sets the appliance details used by service to communicate\n           \nto the appliance.",
           "x-typespec-name": "SiteApplianceProperties[]"
         },
@@ -20223,9 +20488,7 @@
           "items": {
             "$ref": "#/definitions/SiteApplianceProperties"
           },
-          "x-ms-identifiers": [
-            "applianceName"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets or sets the appliance details used by service to communicate\n           \nto the appliance.",
           "x-typespec-name": "SiteApplianceProperties[]"
         },
@@ -20393,9 +20656,7 @@
           "items": {
             "$ref": "#/definitions/TomcatHostUnit"
           },
-          "x-ms-identifiers": [
-            "name"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets or sets the hosts defined for the engine.",
           "x-typespec-name": "TomcatHostUnit[]"
         }
@@ -20432,9 +20693,7 @@
           "items": {
             "$ref": "#/definitions/ConnectorUnit"
           },
-          "x-ms-identifiers": [
-            "bindings"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets or sets the connectors defined for the service component.",
           "x-typespec-name": "ConnectorUnit[]"
         },
@@ -20483,9 +20742,7 @@
           "items": {
             "$ref": "#/definitions/FrontEndBinding"
           },
-          "x-ms-identifiers": [
-            "hostName"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets the front end bindings for the application.",
           "x-typespec-name": "FrontEndBinding[]",
           "readOnly": true
@@ -20495,9 +20752,7 @@
           "items": {
             "$ref": "#/definitions/WebApplicationFramework"
           },
-          "x-ms-identifiers": [
-            "name"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets the Error details.",
           "x-typespec-name": "WebApplicationFramework[]",
           "readOnly": true
@@ -20507,9 +20762,7 @@
           "items": {
             "$ref": "#/definitions/WebApplicationConfigurationUnit"
           },
-          "x-ms-identifiers": [
-            "name"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets the configuration.",
           "x-typespec-name": "WebApplicationConfigurationUnit[]",
           "readOnly": true
@@ -20658,9 +20911,7 @@
           "items": {
             "$ref": "#/definitions/TomcatServiceUnit"
           },
-          "x-ms-identifiers": [
-            "name"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets or sets the services defined in the server.",
           "x-typespec-name": "TomcatServiceUnit[]"
         },
@@ -20852,9 +21103,7 @@
           "items": {
             "$ref": "#/definitions/DependencyMapMachineInput"
           },
-          "x-ms-identifiers": [
-            "machineId"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets or sets the machine collection.",
           "x-typespec-name": "DependencyMapMachineInput[]"
         }
@@ -20869,9 +21118,7 @@
           "items": {
             "$ref": "#/definitions/RunAsAccountMachineInput"
           },
-          "x-ms-identifiers": [
-            "machineId"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets or sets the machine collection.",
           "x-typespec-name": "RunAsAccountMachineInput[]"
         }
@@ -20886,9 +21133,7 @@
           "items": {
             "$ref": "#/definitions/TagsMachineInput"
           },
-          "x-ms-identifiers": [
-            "machineId"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets or sets the machine collection.",
           "x-typespec-name": "TagsMachineInput[]"
         }
@@ -21006,94 +21251,6 @@
         ]
       }
     },
-    "VMwareSite": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SitesProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "eTag": {
-          "type": "string",
-          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
-          "readOnly": true
-        }
-      },
-      "description": "A VMwareSite",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "VMwareSiteListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VMwareSite"
-          },
-          "description": "The VMwareSite items on this page",
-          "x-typespec-name": "VMwareSite[]"
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
-        }
-      },
-      "description": "The response of a VMwareSite list operation.",
-      "required": [
-        "value"
-      ]
-    },
-    "VMwareSiteUpdate": {
-      "type": "object",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags.",
-          "x-typespec-name": "Record<string>"
-        },
-        "properties": {
-          "$ref": "#/definitions/VMwareSiteUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "description": "The type used for update operations of the VMwareSite."
-    },
-    "VMwareSiteUpdateProperties": {
-      "type": "object",
-      "properties": {
-        "servicePrincipalIdentityDetails": {
-          "$ref": "#/definitions/SiteSpnProperties",
-          "description": "Gets or sets the service principal identity details used by agent for\ncommunication\n            to the service."
-        },
-        "agentDetails": {
-          "$ref": "#/definitions/SiteAgentProperties",
-          "description": "Gets or sets the on-premises agent details."
-        },
-        "applianceName": {
-          "type": "string",
-          "description": "Gets or sets the Appliance Name."
-        },
-        "discoverySolutionId": {
-          "type": "string",
-          "description": "Gets or sets the ARM ID of migration hub solution for SDS."
-        }
-      },
-      "description": "The updatable properties of the VMwareSite."
-    },
     "Vcenter": {
       "type": "object",
       "properties": {
@@ -21112,6 +21269,29 @@
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "VcenterListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Vcenter"
+          },
+          "description": "The Vcenter items on this page",
+          "x-typespec-name": "Vcenter[]"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a Vcenter list operation.",
+      "required": [
+        "value"
       ]
     },
     "VcenterProperties": {
@@ -21169,8 +21349,7 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
+          "description": "The status of the last operation."
         }
       },
       "description": "The properties of VMwareSiteResource"
@@ -21405,9 +21584,7 @@
           "items": {
             "$ref": "#/definitions/VmwareDatastore"
           },
-          "x-ms-identifiers": [
-            "uuid"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets the data stores.",
           "x-typespec-name": "VmwareDatastore[]",
           "readOnly": true
@@ -21515,9 +21692,7 @@
           "items": {
             "$ref": "#/definitions/VmwareDisk"
           },
-          "x-ms-identifiers": [
-            "uuid"
-          ],
+          "x-ms-identifiers": [],
           "description": "Disks attached to the machine.",
           "x-typespec-name": "VmwareDisk[]",
           "readOnly": true
@@ -21547,9 +21722,7 @@
           "items": {
             "$ref": "#/definitions/VmwareNetworkAdapter"
           },
-          "x-ms-identifiers": [
-            "macAddress"
-          ],
+          "x-ms-identifiers": [],
           "description": "Network adapters attached to the machine.",
           "x-typespec-name": "VmwareNetworkAdapter[]",
           "readOnly": true
@@ -21914,6 +22087,98 @@
         "value"
       ]
     },
+    "VmwareSite": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SitesProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "description": "A VmwareSite",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "VmwareSiteListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VmwareSite"
+          },
+          "description": "The VmwareSite items on this page",
+          "x-typespec-name": "VmwareSite[]"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a VmwareSite list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "VmwareSiteUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags.",
+          "x-typespec-name": "Record<string>"
+        },
+        "properties": {
+          "$ref": "#/definitions/VmwareSiteUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "The type used for update operations of the VmwareSite."
+    },
+    "VmwareSiteUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "servicePrincipalIdentityDetails": {
+          "$ref": "#/definitions/SiteSpnProperties",
+          "description": "Gets or sets the service principal identity details used by agent for\ncommunication\n            to the service."
+        },
+        "agentDetails": {
+          "$ref": "#/definitions/SiteAgentProperties",
+          "description": "Gets or sets the on-premises agent details."
+        },
+        "applianceName": {
+          "type": "string",
+          "description": "Gets or sets the Appliance Name."
+        },
+        "discoverySolutionId": {
+          "type": "string",
+          "description": "Gets or sets the ARM ID of migration hub solution for SDS."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation."
+        }
+      },
+      "description": "The updatable properties of the VmwareSite."
+    },
     "VmwareSiteUsage": {
       "type": "object",
       "properties": {
@@ -22084,9 +22349,7 @@
           "items": {
             "$ref": "#/definitions/WebAppProperties"
           },
-          "x-ms-identifiers": [
-            "webAppArmId"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets or sets the list of web app properties.",
           "x-typespec-name": "WebAppProperties[]"
         }
@@ -22187,9 +22450,7 @@
           "items": {
             "$ref": "#/definitions/SiteApplianceProperties"
           },
-          "x-ms-identifiers": [
-            "applianceName"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets or sets the appliance details used by service to communicate\n           \nto the appliance.",
           "x-typespec-name": "SiteApplianceProperties[]"
         },
@@ -22252,9 +22513,7 @@
           "items": {
             "$ref": "#/definitions/SiteApplianceProperties"
           },
-          "x-ms-identifiers": [
-            "applianceName"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets or sets the appliance details used by service to communicate\n           \nto the appliance.",
           "x-typespec-name": "SiteApplianceProperties[]"
         },
@@ -22287,6 +22546,26 @@
       "description": "Web app site usage."
     },
     "WebApplication": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WebApplicationProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "Web application REST Resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "WebApplicationAppsAndRolesModel": {
       "type": "object",
       "properties": {
         "name": {
@@ -22408,6 +22687,29 @@
       },
       "description": "Framework specific data for a web application."
     },
+    "WebApplicationListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebApplication"
+          },
+          "description": "The WebApplication items on this page",
+          "x-typespec-name": "WebApplication[]"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a WebApplication list operation.",
+      "required": [
+        "value"
+      ]
+    },
     "WebApplicationProperties": {
       "type": "object",
       "properties": {
@@ -22436,9 +22738,7 @@
           "items": {
             "$ref": "#/definitions/FrontEndBinding"
           },
-          "x-ms-identifiers": [
-            "hostName"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets the front end bindings for the application.",
           "x-typespec-name": "FrontEndBinding[]",
           "readOnly": true
@@ -22448,9 +22748,7 @@
           "items": {
             "$ref": "#/definitions/WebApplicationFramework"
           },
-          "x-ms-identifiers": [
-            "name"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets the Error details.",
           "x-typespec-name": "WebApplicationFramework[]",
           "readOnly": true
@@ -22460,9 +22758,7 @@
           "items": {
             "$ref": "#/definitions/WebApplicationConfigurationUnit"
           },
-          "x-ms-identifiers": [
-            "name"
-          ],
+          "x-ms-identifiers": [],
           "description": "Gets the configuration.",
           "x-typespec-name": "WebApplicationConfigurationUnit[]",
           "readOnly": true
@@ -22474,9 +22770,7 @@
           },
           "description": "Gets the directories.",
           "x-typespec-name": "WebApplicationDirectoryUnit[]",
-          "x-ms-identifiers": [
-            "id"
-          ],
+          "x-ms-identifiers": [],
           "readOnly": true
         },
         "displayName": {
@@ -22557,49 +22851,6 @@
         }
       },
       "description": "Class for web application properties."
-    },
-    "WebAppsWebApplication": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/WebApplicationProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "description": "Web application REST Resource.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "WebAppsWebApplicationListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/WebAppsWebApplication"
-          },
-          "description": "The WebAppsWebApplication items on this page",
-          "x-typespec-name": "WebAppsWebApplication[]"
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
-        }
-      },
-      "description": "The response of a WebAppsWebApplication list operation.",
-      "required": [
-        "value"
-      ]
     },
     "WebRoleImportDisk": {
       "type": "object",
