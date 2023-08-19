@@ -11,7 +11,6 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
-
 @armProviderNamespace("Microsoft.ManufacturingPlatform")
 @service({
   title: "Microsoft.ManufacturingPlatform",
@@ -34,7 +33,6 @@ model MdsResource is TrackedResource<MdsResourceProperties> {
 
   ...ManagedServiceIdentity;
 }
-
 
 @doc("The status of the current operation.")
 @Azure.Core.lroStatus
@@ -85,7 +83,7 @@ model MdsResourceProperties {
   @visibility("read", "create")
   @doc("Continuous Export Period.")
   continuousExportPeriod: int32;
-      
+
   @visibility("read")
   @doc("Service Url")
   serviceUrl?: string;
@@ -146,7 +144,6 @@ model MdsResourceProperties {
 
 @doc("The properties related to Aks Resource")
 model AksProfile {
-  
   @doc("Resource Id of AKS Resource")
   @visibility("read")
   id?: string;
@@ -154,25 +151,20 @@ model AksProfile {
 
 @doc("The properties related to Storage Resource")
 model StorageProfile {
-  
   @doc("Resource Id of Storage Resource")
   @visibility("read")
   id?: string;
 }
 
-
 @doc("The properties related to Database Resource")
 model DatabaseProfile {
-
   @doc("Resource Id of Cosmos Resource")
   @visibility("read")
   cosmosId?: string;
 }
 
-
 @doc("The properties related to Azure Data Explorer (Adx) Resource")
 model AdxProfile {
-  
   @doc("Resource Id of Adx Resource")
   @visibility("read")
   id?: string;
@@ -184,13 +176,10 @@ model AdxProfile {
   @doc("Data Ingestion Uri of Adx Resource")
   @visibility("read")
   dataIngestionUri?: string;
-
 }
-
 
 @doc("The properties related to Azure Digital Twin (Adt) Resource")
 model AdtProfile {
-  
   @doc("Resource Id of Adt Resource")
   @visibility("read")
   id?: string;
@@ -198,42 +187,31 @@ model AdtProfile {
   @doc("Host Name")
   @visibility("read")
   hostName?: string;
-
 }
-
 
 @doc("The properties related to Azure Key Vault (Akv) Resource")
 model AkvProfile {
-  
   @doc("Resource Id of Akv Resource")
   @visibility("read")
   id?: string;
-    
 }
-
 
 @doc("The properties related to Azure Redis Cache Resource")
 model RedisProfile {
-  
   @doc("Resource Id of Azure Redis Cache Resource")
   @visibility("read")
   id?: string;
-    
 }
-
 
 @doc("The properties related to Monitoring Resource")
 model MonitoringProfile {
-  
   @doc("Resource Id of Application Insights Resource")
   @visibility("read")
   id?: string;
-    
 }
 
 @doc("The properties related to Synapse Resource")
 model SynapseProfile {
-  
   @doc("Resource Id of Synapse Resource")
   @visibility("read")
   id?: string;
@@ -243,10 +221,8 @@ model SynapseProfile {
   devEndpoint?: string;
 }
 
-
 @doc("The properties related to EventHub Resource")
 model EventHubProfile {
-  
   @doc("Resource Id of Ingestion Instance EventHub Resource")
   @visibility("read")
   ingestionInstanceId?: string;
@@ -262,21 +238,17 @@ model EventHubProfile {
 
 @doc("The properties related to Azure Function App Resource")
 model FunctionAppProfile {
-  
   @doc("Resource Id of Azure Function App Resource")
   @visibility("read")
   id?: string;
-    
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AI is a well-known abbreviation"
 @doc("The properties related to OpenAI Resource")
 model OpenAIProfile {
-  
   @doc("Resource Id of OpenAI Resource")
   @visibility("read")
   id?: string;
-    
 }
 
 @doc("Configuration of the managed resource group associated with the resource.")
@@ -288,10 +260,8 @@ model ManagedResourceGroupConfiguration {
   location: string;
 }
 
-
-
 @armResourceOperations(MdsResource)
-interface ManufacturingDataServices  {
+interface ManufacturingDataServices {
   get is ArmResourceRead<MdsResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<MdsResource>;
   update is ArmResourcePatchAsync<MdsResource, MdsResourceProperties>;
@@ -300,10 +270,11 @@ interface ManufacturingDataServices  {
   listBySubscription is ArmListBySubscription<MdsResource>;
 
   @doc("Returns the list of available versions")
-  listAvailableVersions is ArmResourceListActionSync<MdsResource, AvailableVersionListResult>;
+  listAvailableVersions is ArmResourceListActionSync<
+    MdsResource,
+    AvailableVersionListResult
+  >;
 }
-
-
 
 // note this is a template for an empty body resource action, which will be added to the library at some point
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "This is a template"
@@ -315,9 +286,8 @@ op ArmResourceListActionSync<
   TResponse extends {},
   TBaseParameters = Azure.ResourceManager.Foundations.BaseParameters<TResource>
 >(
-  ...ResourceInstanceParameters<TResource, TBaseParameters>
+  ...ResourceInstanceParameters<TResource, TBaseParameters>,
 ): ArmResponse<TResponse> | ErrorResponse;
-
 
 @doc("The list of available versions")
 model AvailableVersionListResult {
@@ -325,7 +295,6 @@ model AvailableVersionListResult {
   @OpenAPI.extension("x-ms-identifiers", [])
   versions: ApplicationVersion[];
 }
-
 
 @doc("Information about application versions")
 model ApplicationVersion {
