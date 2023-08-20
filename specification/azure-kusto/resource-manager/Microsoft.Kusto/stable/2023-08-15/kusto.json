@@ -2465,18 +2465,6 @@
               "$ref": "#/definitions/SandboxCustomImage"
             }
           },
-          "202": {
-            "description": "Successfully accepted the sandbox custom image.",
-            "schema": {
-              "$ref": "#/definitions/SandboxCustomImage"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "URL to query the status of the operation.",
-                "type": "string"
-              }
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -2608,6 +2596,57 @@
           },
           "204": {
             "description": "NoContent -- If the sandbox custom image resource is already deleted, this is the expected status code."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/sandboxCustomImagesCheckNameAvailability": {
+      "post": {
+        "tags": [
+          "SandboxCustomImages"
+        ],
+        "operationId": "SandboxCustomImages_CheckNameAvailability",
+        "x-ms-examples": {
+          "KustoSandboxCustomImagesCheckNameAvailability": {
+            "$ref": "./examples/KustoSandboxCustomImagesCheckNameAvailability.json"
+          }
+        },
+        "description": "Checks that the sandbox custom image resource name is valid and is not already in use.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SandboxCustomImagesCheckNameRequest"
+            },
+            "description": "The name of the resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Operation to check the kusto resource name availability was successful.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameResult"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -6694,6 +6733,31 @@
         "type"
       ],
       "description": "The result returned from a managedPrivateEndpoints check name availability request."
+    },
+    "SandboxCustomImagesCheckNameRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Sandbox custom image resource name."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Kusto/clusters/sandboxCustomImages"
+          ],
+          "x-ms-enum": {
+            "name": "SandboxCustomImageType",
+            "modelAsString": false
+          },
+          "description": "The type of resource, for instance Microsoft.Kusto/clusters/sandboxCustomImages."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "description": "The result returned from a sandboxCustomImage check name availability request."
     },
     "ClusterPrincipalAssignmentCheckNameRequest": {
       "type": "object",
