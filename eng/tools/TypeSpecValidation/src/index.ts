@@ -1,6 +1,6 @@
 import { parseArgs, ParseArgsConfig } from "node:util";
 import { CompileRule } from "./rules/compile.js";
-import { FileStructureRule } from "./rules/file-structure.js";
+import { FolderStructureRule } from "./rules/folder-structure.js";
 import { FormatRule } from "./rules/format.js";
 import { GitDiffRule } from "./rules/git-diff.js";
 import { NpmPrefixRule } from "./rules/npm-prefix.js";
@@ -18,7 +18,7 @@ export async function main() {
   console.log("Running TypeSpecValidation on folder:", folder);
 
   let rules = [
-    new FileStructureRule(),
+    new FolderStructureRule(),
     new NpmPrefixRule(),
     new CompileRule(),
     new FormatRule(),
