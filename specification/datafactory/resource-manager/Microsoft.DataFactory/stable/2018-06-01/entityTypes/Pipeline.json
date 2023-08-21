@@ -7899,7 +7899,7 @@
       "description": "WebHook activity.",
       "allOf": [
         {
-          "$ref": "#/definitions/ExecutionActivity"
+          "$ref": "#/definitions/ControlActivity"
         }
       ],
       "properties": {
@@ -7908,6 +7908,10 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/WebHookActivityTypeProperties"
         }
+      },
+      "policy": {
+        "$ref": "#/definitions/SecureInputOutputPolicy",
+        "description": "Activity policy."
       },
       "required": [
         "typeProperties"
