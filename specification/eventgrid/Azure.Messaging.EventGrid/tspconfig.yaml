@@ -1,6 +1,6 @@
 parameters:
-  "python-sdk-folder":
-    default: "{project-root}/azure-sdk-for-python/"
+  "service-dir":
+    default: "sdk/eventgrid"
   "service-directory-name":
     default: "eventgrid"
 emit: [
@@ -13,13 +13,16 @@ options:
     output-file: EventGrid.json
     emitter-output-dir: "{project-root}/../data-plane/Microsoft.EventGrid/preview/2023-06-01-preview"
   "@azure-tools/typespec-python":
-    "package-pprint-name": "\"Azure Event Grid\""
-    "package-mode": "dataplane"
-    "package-version": 4.12.0b1
-    "package-name": "azure-eventgrid"
-    "emitter-output-dir": "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
+    package-pprint-name: "\"Azure Event Grid\""
+    package-mode: "dataplane"
+    package-version: 4.12.0b1
+    package-dir: "azure-eventgrid"
+    package-name: "{package-dir}"
+    emitter-output-dir: "{project-root}/{service-dir}/{package-name}"
   # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
-  "@azure-tools/typespec-csharp":
-    model-namespace: false
-    generate-convenience-methods: false
-    namespace: Azure.Messaging.EventGrid.Namespaces
+  # Commenting out until https://github.com/Azure/autorest.csharp/issues/3515 is resolved -- project file not found b/c feature branch
+  # "@azure-tools/typespec-csharp":
+  #   package-dir: Azure.Messaging.EventGridV2
+  #   model-namespace: false
+  #   generate-convenience-methods: false
+  #   namespace: Azure.Messaging.EventGrid.Namespaces
