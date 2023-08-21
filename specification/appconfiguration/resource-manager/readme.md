@@ -213,4 +213,22 @@ directive:
     from: appconfiguration.json
     where: $.definitions.KeyValue
     reason: Listing is not supported in ARM templates.
+  - suppress: NestedResourcesMustHaveListOperation
+    from: appconfiguration.json
+    where: $.definitions.Snapshot
+    reason: Following KeyValue, with both being proxies for data plane resources.
+  - suppress: AllProxyResourcesShouldHaveDelete
+    from: appconfiguration.json
+    where: $.definitions.Snapshot
+    reason: This is a proxy for a data plane snapshot which doesn't support delete.
+  - suppress: RequiredReadOnlySystemData
+    from: appconfiguration.json
+    where: 
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/snapshots/{snapshotName}"].get'
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/snapshots/{snapshotName}"].put'
+    reason: This is a proxy for a data plane snapshot which doesn't have the info.
+  - suppress: TrackedResourcePatchOperation
+    from: appconfiguration.json
+    where: $.definitions.Replica
+    reason: Replica is a proxy resource
 ```
