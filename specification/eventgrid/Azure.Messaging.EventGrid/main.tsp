@@ -37,6 +37,9 @@ namespace EventGrid {
   enum ServiceApiVersions {
     @useDependency(Azure.Core.Versions.v1_0_Preview_2)
     v2023_06_01_preview: "2023-06-01-preview",
+
+    @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+    v2023_09_01_preview: "2023-09-01-preview",
   }
 
   alias StandardOperations = Azure.Core.StandardResourceOperations;
@@ -112,6 +115,21 @@ namespace EventGrid {
     errorDescription: string;
   }
 
+  @doc("Supported delays for release opeartion.")
+  enum ReleaseDelay {
+    @doc("Release the event after 10 seconds.")
+    TenSeconds: 10,
+
+    @doc("Release the event after 60 seconds.")
+    SixtySeconds: 60,
+
+    @doc("Release the event after 600 seconds.")
+    SixHundredSeconds: 600,
+
+    @doc("Release the event after 3600 seconds.")
+    ThreeThousandSixHundredSeconds: 3600,
+  }
+
   @doc("The result of the Publish operation.")
   model PublishResult {}
 
@@ -142,10 +160,28 @@ namespace EventGrid {
     succeededLockTokens: string[];
   }
 
+  @doc("The result of the RenewLock operation.")
+  model RenewCloudEventLocksResult {
+    @doc("Array of LockToken values for failed cloud events. Each LockToken includes the lock token value along with the related error information (namely, the error code and description).")
+    failedLockTokens: FailedLockToken[];
+
+    @doc("Array of lock tokens values for the successfully renewed locks.")
+    succeededLockTokens: string[];
+  }
+
   @doc("Array of lock token strings for the corresponding received Cloud Events to be released.")
   model ReleaseOptions {
     @doc("String array of lock tokens.")
     lockTokens: string[];
+  }
+
+  @doc("Storage Sku")
+  enum StorageSku {
+    @doc("Standard Storage Sku")
+    Standard,
+
+    @doc("Performance Storage Sku")
+    Performance,
   }
 
   @doc("Array of lock token strings for the corresponding received Cloud Events to be acknowledged.")
@@ -156,6 +192,12 @@ namespace EventGrid {
 
   @doc("Array of lock token strings for the corresponding received Cloud Events to be rejected.")
   model RejectOptions {
+    @doc("String array of lock tokens.")
+    lockTokens: string[];
+  }
+
+  @doc("Array of lock token strings for the corresponding received Cloud Events to be renewed.")
+  model RenewLockOptions {
     @doc("String array of lock tokens.")
     lockTokens: string[];
   }
@@ -265,7 +307,7 @@ namespace EventGrid {
   // Release Operation:
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release?api-version={apiVersion}
 
-  @doc("Release batch of Cloud Events. The server responds with an HTTP 200 status code if at least one event is successfully released. The response body will include the set of successfully released lockTokens, along with other failed lockTokens with their corresponding error information.")
+  @doc("Release batch of Cloud Events with an optional delay in seconds. The server responds with an HTTP 200 status code if at least one event is successfully released. The response body will include the set of successfully released lockTokens, along with other failed lockTokens with their corresponding error information.")
   @action("release")
   op releaseCloudEvents is StandardOperations.ResourceAction<
     EventSubscription,
@@ -277,6 +319,10 @@ namespace EventGrid {
       @doc("ReleaseOptions")
       @body
       lockTokens: ReleaseOptions;
+
+      @doc("Release cloud events with the specified delay in seconds.")
+      @query
+      delayInSeconds?: ReleaseDelay;
     },
     ReleaseResult
   >;
@@ -298,5 +344,24 @@ namespace EventGrid {
       lockTokens: RejectOptions;
     },
     RejectResult
+  >;
+
+  // RenewLock Operation:
+  // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:renewlock?api-version={apiVersion}
+
+  @doc("Renew lock for batch of Cloud Events.")
+  @action("renewlock")
+  op renewCloudEventLocks is StandardOperations.ResourceAction<
+    EventSubscription,
+    {
+      @doc("content type")
+      @header("content-type")
+      contentType: "application/json";
+
+      @doc("RenewLockOptions")
+      @body
+      lockTokens: RenewLockOptions;
+    },
+    RenewCloudEventLocksResult
   >;
 }
