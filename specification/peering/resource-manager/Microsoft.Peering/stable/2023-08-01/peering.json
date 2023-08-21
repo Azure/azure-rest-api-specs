@@ -2443,6 +2443,110 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/validateMoveResources": {
+      "post": {
+        "tags": [
+          "ResourceMove"
+        ],
+        "description": "ValidateMoveResources will be called by ARM when a resource is moved.",
+        "operationId": "ResourceMove_ValidateMoveResources",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceMoveRequest",
+            "in": "body",
+            "description": "Payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceMoveRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate move resources": {
+            "$ref": "./examples/ValidateMoveResources.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources": {
+      "post": {
+        "tags": [
+          "ResourceMove"
+        ],
+        "description": "MoveResources will be called by ARM when a resource is moved.",
+        "operationId": "ResourceMove_MoveResources",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceMoveRequest",
+            "in": "body",
+            "description": "Request payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceMoveRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Move resources": {
+            "$ref": "./examples/MoveResources.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peerings/{peeringName}/rpUnbilledPrefixes": {
       "get": {
         "tags": [
@@ -2744,8 +2848,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DirectConnection"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "useForPeeringService": {
           "description": "The flag that indicates whether or not the peering is used for peering service.",
@@ -2785,8 +2888,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExchangeConnection"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "peerAsn": {
           "$ref": "#/definitions/SubResource",
@@ -2798,6 +2900,9 @@
       "description": "The properties that define a direct connection.",
       "type": "object",
       "properties": {
+        "ipChangeRequest": {
+          "$ref": "#/definitions/IPChangeRequest"
+        },
         "bandwidthInMbps": {
           "format": "int32",
           "description": "The bandwidth of the connection.",
@@ -2847,7 +2952,8 @@
             "Validating",
             "Active",
             "TypeChangeRequested",
-            "TypeChangeInProgress"
+            "TypeChangeInProgress",
+            "ActiveNoBilling"
           ],
           "type": "string",
           "readOnly": true,
@@ -2885,6 +2991,9 @@
       "description": "The properties that define an exchange connection.",
       "type": "object",
       "properties": {
+        "ipChangeRequest": {
+          "$ref": "#/definitions/IPChangeRequest"
+        },
         "peeringDBFacilityId": {
           "format": "int32",
           "description": "The PeeringDB.com ID of the facility at which the connection has to be set up.",
@@ -2902,7 +3011,8 @@
             "Validating",
             "Active",
             "TypeChangeRequested",
-            "TypeChangeInProgress"
+            "TypeChangeInProgress",
+            "ActiveNoBilling"
           ],
           "type": "string",
           "readOnly": true,
@@ -2923,6 +3033,44 @@
           "description": "The error message related to the connection state, if any.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "IPChangeRequest": {
+      "description": "The IP change request.",
+      "type": "object",
+      "properties": {
+        "sessionPrefixV4": {
+          "description": "The V4 session prefix we are changing to",
+          "type": "string"
+        },
+        "sessionPrefixV6": {
+          "description": "The V6 session prefix we are changing to",
+          "type": "string"
+        },
+        "microsoftSessionIPv4Address": {
+          "description": "The Microsoft V4 address we are changing to",
+          "type": "string"
+        },
+        "microsoftSessionIPv6Address": {
+          "description": "The Microsoft V6 address we are changing to",
+          "type": "string"
+        },
+        "peerSessionIPv4Address": {
+          "description": "The Peer V6 address we are changing to",
+          "type": "string"
+        },
+        "peerSessionIPv6Address": {
+          "description": "The Peer V6 address we are changing to",
+          "type": "string"
+        },
+        "oldPeerV4Address": {
+          "description": "The old Peer V4 address",
+          "type": "string"
+        },
+        "oldPeerV6Address": {
+          "description": "The old Peer V6 address",
+          "type": "string"
         }
       }
     },
@@ -3014,6 +3162,516 @@
         }
       }
     },
+    "NpmOperationDetails": {
+      "description": "Contains information about NPM operations.",
+      "type": "object",
+      "properties": {}
+    },
+    "ConfigDriftResult": {
+      "type": "object",
+      "properties": {
+        "diffResult": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiffResult"
+          }
+        }
+      }
+    },
+    "ConfigDiff": {
+      "description": "The config diff class",
+      "type": "object",
+      "properties": {
+        "missingConfig": {
+          "description": "Config that's missing on the new router.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "extraConfig": {
+          "description": "Config that was added on the new router that's not present on the old router.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "outOfOrderConfig": {
+          "description": "Config on the new router that is out of order.\r\nUsed for ensuring special group policy is applied in order.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "npmErrors": {
+          "$ref": "#/definitions/NPMErrors",
+          "description": "The list of NPM errors."
+        }
+      }
+    },
+    "ConnectionStateChangesEvent": {
+      "description": "The Connection State Changes Event class.",
+      "type": "object",
+      "properties": {
+        "timeCreated": {
+          "format": "date-time",
+          "description": "Gets or sets time that state change took place",
+          "type": "string"
+        },
+        "previousConnectionProvisioningState": {
+          "description": "Gets or sets from connectionProvisioningstate",
+          "enum": [
+            "None",
+            "InterconnectionPendingApproval",
+            "RocPendingApproval",
+            "AllocatePorts",
+            "CheckInterfaces",
+            "EnableInterfaces",
+            "PhysicalConnectionSetup",
+            "LightCheck",
+            "TestPing",
+            "GenerateLoa",
+            "LoaGenerated",
+            "LagSetup",
+            "AwaitLagCompletion",
+            "UpdateAddressesOnDevice",
+            "BgpSessionConfiguration",
+            "Md5AuthKeyConfiguration",
+            "FetchSessionState",
+            "RemoveNomonit",
+            "UpdateApipaPrefixInSitepro",
+            "ProvisioningCompleted",
+            "DeallocatePorts",
+            "PendingMigration",
+            "MigrationRequestPortAllocationRequested",
+            "MigrationRequestPortAllocationCompleted",
+            "MigrationConfigValidation",
+            "PendingWorkWindow",
+            "MigrationWorkWindow",
+            "PendingMigrationCompletion",
+            "MigrationCompletionRequested",
+            "DirectPeeringTypeUpdateApproved",
+            "DirectPeeringTypeUpdateRejected",
+            "DirectPeeringTypeUpdateIfDescription",
+            "DirectPeeringTypeUpdatePrefixPrecheck",
+            "DirectPeeringTypeUpdateApplyDenyAll",
+            "DirectPeeringTypeUpdateDeleteSession",
+            "DirectPeeringTypeUpdateLagAcl",
+            "DirectPeeringTypeUpdateBgpConfig",
+            "DirectPeeringTypeUpdateFetchSessionState",
+            "DirectPeeringTypeUpdateDeleteDenyAll",
+            "DirectPeeringTypeUpdatePrefixPostCheck",
+            "DecomRocPendingApproval",
+            "DecomAddDenyAll",
+            "DecomValidatePrefix",
+            "DecomValidateTraffic",
+            "DecomShutInterfaces",
+            "DecomShutdownBgp",
+            "DecomCabling",
+            "DecomRemoveBgpConfig",
+            "DecomRemoveInterfaceConfig",
+            "DecomGraphCleanup",
+            "DecomCompleted",
+            "DirectPeeringTypeUpdateMd5AuthKeyConfiguration",
+            "BfdConfiguration",
+            "DirectPeeringTypeUpdateBfdConfig",
+            "DirectPeeringTypeUpdateMd5AuthKeyRead",
+            "StaticMacConfiguration",
+            "PrefixListConfiguration",
+            "WorkWindowCompleted",
+            "DirectPeeringTypeUpdateReadMaxPrefixLimit",
+            "DirectPeeringTypeUpdateUpdatePortWithNewIP",
+            "DirectPeeringTypeUpdateConfigureLagWithNewIP",
+            "DirectPeeringTypeUpdateCleanupOldIPsfromLAG",
+            "MapsToMapsVoiceUpdateIfDescription",
+            "MapsToMapsVoicePrefixPrecheck",
+            "MapsToMapsVoiceUpdateLAGAcl",
+            "MapsToMapsVoiceConfigureBFD",
+            "MapsToMapsVoiceFetchSessionState",
+            "MapsToMapsVoicePrefixPostCheck",
+            "PingTestDone",
+            "BgpGroupChangeRocPendingApproval",
+            "BgpGroupChangeWorkWindow",
+            "IPChangeWorkWindow",
+            "PendingASNChangeApplyDenyALL",
+            "PendingASNChangeUpdateNeighborConfig",
+            "PendingASNChangeRemoveDenyALL",
+            "UpdateGraphForASNChange",
+            "UpdatePeeringForASNChange",
+            "AddDenyAllRocPendingApproval",
+            "AwaitApplyDenyAll",
+            "IPChangeValidation",
+            "IPChangeCleanup",
+            "PendingSpecialWorkItem"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "previousConnectionProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "currentConnectionProvisioningState": {
+          "description": "gets or sets 'to' connectionPorvisioningState",
+          "enum": [
+            "None",
+            "InterconnectionPendingApproval",
+            "RocPendingApproval",
+            "AllocatePorts",
+            "CheckInterfaces",
+            "EnableInterfaces",
+            "PhysicalConnectionSetup",
+            "LightCheck",
+            "TestPing",
+            "GenerateLoa",
+            "LoaGenerated",
+            "LagSetup",
+            "AwaitLagCompletion",
+            "UpdateAddressesOnDevice",
+            "BgpSessionConfiguration",
+            "Md5AuthKeyConfiguration",
+            "FetchSessionState",
+            "RemoveNomonit",
+            "UpdateApipaPrefixInSitepro",
+            "ProvisioningCompleted",
+            "DeallocatePorts",
+            "PendingMigration",
+            "MigrationRequestPortAllocationRequested",
+            "MigrationRequestPortAllocationCompleted",
+            "MigrationConfigValidation",
+            "PendingWorkWindow",
+            "MigrationWorkWindow",
+            "PendingMigrationCompletion",
+            "MigrationCompletionRequested",
+            "DirectPeeringTypeUpdateApproved",
+            "DirectPeeringTypeUpdateRejected",
+            "DirectPeeringTypeUpdateIfDescription",
+            "DirectPeeringTypeUpdatePrefixPrecheck",
+            "DirectPeeringTypeUpdateApplyDenyAll",
+            "DirectPeeringTypeUpdateDeleteSession",
+            "DirectPeeringTypeUpdateLagAcl",
+            "DirectPeeringTypeUpdateBgpConfig",
+            "DirectPeeringTypeUpdateFetchSessionState",
+            "DirectPeeringTypeUpdateDeleteDenyAll",
+            "DirectPeeringTypeUpdatePrefixPostCheck",
+            "DecomRocPendingApproval",
+            "DecomAddDenyAll",
+            "DecomValidatePrefix",
+            "DecomValidateTraffic",
+            "DecomShutInterfaces",
+            "DecomShutdownBgp",
+            "DecomCabling",
+            "DecomRemoveBgpConfig",
+            "DecomRemoveInterfaceConfig",
+            "DecomGraphCleanup",
+            "DecomCompleted",
+            "DirectPeeringTypeUpdateMd5AuthKeyConfiguration",
+            "BfdConfiguration",
+            "DirectPeeringTypeUpdateBfdConfig",
+            "DirectPeeringTypeUpdateMd5AuthKeyRead",
+            "StaticMacConfiguration",
+            "PrefixListConfiguration",
+            "WorkWindowCompleted",
+            "DirectPeeringTypeUpdateReadMaxPrefixLimit",
+            "DirectPeeringTypeUpdateUpdatePortWithNewIP",
+            "DirectPeeringTypeUpdateConfigureLagWithNewIP",
+            "DirectPeeringTypeUpdateCleanupOldIPsfromLAG",
+            "MapsToMapsVoiceUpdateIfDescription",
+            "MapsToMapsVoicePrefixPrecheck",
+            "MapsToMapsVoiceUpdateLAGAcl",
+            "MapsToMapsVoiceConfigureBFD",
+            "MapsToMapsVoiceFetchSessionState",
+            "MapsToMapsVoicePrefixPostCheck",
+            "PingTestDone",
+            "BgpGroupChangeRocPendingApproval",
+            "BgpGroupChangeWorkWindow",
+            "IPChangeWorkWindow",
+            "PendingASNChangeApplyDenyALL",
+            "PendingASNChangeUpdateNeighborConfig",
+            "PendingASNChangeRemoveDenyALL",
+            "UpdateGraphForASNChange",
+            "UpdatePeeringForASNChange",
+            "AddDenyAllRocPendingApproval",
+            "AwaitApplyDenyAll",
+            "IPChangeValidation",
+            "IPChangeCleanup",
+            "PendingSpecialWorkItem"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "currentConnectionProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "operationState": {
+          "description": "Gets or sets the operation state",
+          "enum": [
+            "None",
+            "Add",
+            "Update",
+            "Remove",
+            "Migrate",
+            "IPAddressChange"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "operationState",
+            "modelAsString": true
+          }
+        },
+        "connectionState": {
+          "description": "Gets or sets the connection state",
+          "enum": [
+            "None",
+            "PendingApproval",
+            "Approved",
+            "ProvisioningStarted",
+            "ProvisioningFailed",
+            "ProvisioningCompleted",
+            "Validating",
+            "Active",
+            "TypeChangeRequested",
+            "TypeChangeInProgress",
+            "ActiveNoBilling"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "connectionState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "DiffResult": {
+      "type": "object",
+      "properties": {
+        "bgpconfigElementType": {
+          "enum": [
+            "All",
+            "AsPath",
+            "BgpGroup",
+            "Community",
+            "Neighbor",
+            "PrefixSet",
+            "Policy",
+            "RoutingOptions",
+            "NonStdJGroups",
+            "BmpStation",
+            "UseMultiPath",
+            "ReDistributeSets",
+            "RpkiServerConfig",
+            "GlobalBgpConfig",
+            "RoutingInstance",
+            "RoutingInstanceBgpGroup",
+            "RoutingInstanceNeighbor",
+            "RoutingOptionsRibGroup",
+            "AclSet"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "bgpconfigElementType",
+            "modelAsString": true
+          }
+        },
+        "bgpConfigElementName": {
+          "type": "string"
+        },
+        "sideBySideDiffResult": {
+          "$ref": "#/definitions/SideBySideDiffModel"
+        },
+        "readWriteOperationConfig": {
+          "$ref": "#/definitions/ReadWriteOperationConfig"
+        }
+      }
+    },
+    "NPMErrors": {
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "enum": [
+            "Success",
+            "Exception",
+            "NGSException",
+            "HwProxyException",
+            "UnKnown",
+            "RWOperationRequested",
+            "KHIInProgress",
+            "ExistingRWOperationInProgress",
+            "NPMConfigServiceNotReachable",
+            "InvalidDeviceName",
+            "BGPConfigReadFailed",
+            "BGPPeerConfigReadFailed",
+            "CLI2XMLFailure",
+            "NPMStorageAccountRequestFailed",
+            "NPMCosmosDBAccountRequestFailed",
+            "ResourceDoesNotExist",
+            "InvalidPath",
+            "KustoQueryRequestFailed",
+            "InvalidFormData",
+            "InvalidInput",
+            "XML2CLIFailure",
+            "OperationNotImplemented",
+            "TemplateFileNotFound",
+            "InvalidIPAddress",
+            "BGPGroupMapFileNotFound",
+            "InvalidPeerGroupName",
+            "InvalidXMLSemantic",
+            "InvalidNeighborDescription",
+            "InvalidXMLInput",
+            "CleanCLIFailed",
+            "TemplateConfigDiffersFromRunningConfig",
+            "FailedToPushConfigToDevice",
+            "NeighborIPNotFoundInRunningConfig",
+            "FailedToGenerateRollbackConfig",
+            "FailedToPushRollbackConfigToDevice",
+            "SmallDataReadFailure",
+            "InvalidSmallDataVariableReference",
+            "InvalidConditionalOrUnConditionalList",
+            "CCMDataReferenceError",
+            "InvalidExpressionEvaluated",
+            "PeerGroupNotFoundInRunningConfig",
+            "PeerASNNotFoundInRunningConfig",
+            "CosmosDBOperationFailed",
+            "TimedKHIFailed",
+            "CorruptDatabase",
+            "FailedToGenerateGoldConfig",
+            "DifferentPolicyPresentOnNeighbor",
+            "PeerGroupNotFoundInBGPGroup",
+            "PrefixSetDoesNotExist",
+            "RecursivePolicyReference",
+            "PolicyDefinitionDoesNotExist",
+            "AsPathDoesNotExist",
+            "CommunitySetDoesNotExist",
+            "InconsistentGoldConfig",
+            "EmptyResult",
+            "BGPConfigElementNotFound",
+            "FailedToCaptureOrSerializeTraceroute",
+            "FailedToFindDrift",
+            "InvalidConfig",
+            "FailedToFetchInterfaceFromDPG",
+            "CyclicDependencyInConfig",
+            "RoutingInstanceNotFoundInRunningConfig",
+            "RibGroupDoesNotExist",
+            "PeerInformationDoesNotExistInNgs"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "errorCode",
+            "modelAsString": true
+          }
+        },
+        "errorMessages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SideBySideDiffModel": {
+      "type": "object",
+      "properties": {
+        "oldText": {
+          "$ref": "#/definitions/DiffPaneModel"
+        },
+        "newText": {
+          "$ref": "#/definitions/DiffPaneModel"
+        }
+      }
+    },
+    "ReadWriteOperationConfig": {
+      "type": "object",
+      "properties": {
+        "isPushToDeviceInput": {
+          "type": "boolean"
+        },
+        "config": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rollBackConfig": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "validationResult": {
+          "$ref": "#/definitions/XMLValidationResult"
+        }
+      }
+    },
+    "DiffPaneModel": {
+      "type": "object",
+      "properties": {
+        "lines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiffPiece"
+          }
+        },
+        "hasDifferences": {
+          "type": "boolean"
+        }
+      }
+    },
+    "XMLValidationResult": {
+      "type": "object",
+      "properties": {
+        "isValid": {
+          "type": "boolean"
+        },
+        "errorReasons": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorReason"
+          }
+        }
+      }
+    },
+    "DiffPiece": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "Unchanged",
+            "Deleted",
+            "Inserted",
+            "Imaginary",
+            "Modified"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true
+          }
+        },
+        "position": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "text": {
+          "type": "string"
+        },
+        "subPieces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiffPiece"
+          }
+        }
+      }
+    },
+    "ErrorReason": {
+      "type": "object",
+      "properties": {
+        "reason": {
+          "type": "string"
+        },
+        "xmlTrace": {
+          "type": "string"
+        }
+      }
+    },
     "LookingGlassOutput": {
       "description": "Looking glass output model",
       "type": "object",
@@ -3046,8 +3704,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "description": "The link to fetch the next page of peering API operations.",
@@ -3129,7 +3786,6 @@
           "items": {
             "$ref": "#/definitions/MetricSpecification"
           },
-          "x-ms-identifiers": [],
           "readOnly": true
         }
       }
@@ -3177,7 +3833,6 @@
           "items": {
             "$ref": "#/definitions/MetricDimension"
           },
-          "x-ms-identifiers": [],
           "readOnly": true
         }
       }
@@ -3228,8 +3883,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ContactDetail"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "peerName": {
           "description": "The name of the peer.",
@@ -3384,16 +4038,14 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DirectPeeringFacility"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "bandwidthOffers": {
           "description": "The list of bandwidth offers available at the peering location.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeeringBandwidthOffer"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -3406,8 +4058,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExchangePeeringFacility"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -3675,8 +4326,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeeringReceivedRoute"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "description": "The link to fetch the next page of received routes for the peering.",
@@ -3955,12 +4605,15 @@
           "items": {
             "$ref": "#/definitions/PeeringServicePrefixEvent"
           },
-          "x-ms-identifiers": [],
           "readOnly": true
         },
         "peeringServicePrefixKey": {
           "description": "The peering service prefix key",
           "type": "string"
+        },
+        "primaryLocationDecom": {
+          "description": "whether a peeringservice's primary peering location has been decommed",
+          "type": "boolean"
         },
         "provisioningState": {
           "description": "The provisioning state of the resource.",
@@ -4208,6 +4861,27 @@
         }
       }
     },
+    "ResourceMoveRequest": {
+      "description": "Request specifies the resources to be moved and the target Resource Group",
+      "required": [
+        "targetResourceGroup",
+        "resources"
+      ],
+      "type": "object",
+      "properties": {
+        "targetResourceGroup": {
+          "description": "Target resource group",
+          "type": "string"
+        },
+        "resources": {
+          "description": "Resources",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "RpUnbilledPrefixListResult": {
       "description": "The paginated list of RP unbilled prefixes.",
       "type": "object",
@@ -4217,8 +4891,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RpUnbilledPrefix"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "description": "The link to fetch the next page of RP unbilled prefixes.",
