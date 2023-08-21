@@ -2071,6 +2071,24 @@
         "ids"
       ],
       "description": "Parameters for a Redis Enterprise Active Geo Replication Force Unlink operation."
+    },
+    "CheckNameAvailabilityParameters": {
+      "description": "Parameters body to pass for resource name availability check.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type. The only legal value of this property for checking redis enterprise cache name availability is 'Microsoft.Cache/redisenterprise'."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
     }
   },
   "parameters": {
