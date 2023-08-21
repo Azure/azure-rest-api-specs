@@ -2,7 +2,7 @@ import { globby } from "globby";
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
 
-export class FileStructureRule implements Rule {
+export class FolderStructureRule implements Rule {
   readonly name = "FileStructure";
   readonly description = "Verify spec directory's file structure and naming conventions.";
   async execute(folder: string): Promise<RuleResult> {
