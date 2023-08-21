@@ -15895,6 +15895,25 @@
       },
       "x-ms-discriminator-value": "InMageRcm"
     },
+    "InMageRcmContainerMappingInput": {
+      "description": "InMageRcm container mapping input.",
+      "required": [
+        "enableAgentAutoUpgrade"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReplicationProviderSpecificContainerMappingInput"
+        }
+      ],
+      "properties": {
+        "enableAgentAutoUpgrade": {
+          "description": "A value indicating whether agent auto upgrade has to be enabled.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "InMageRcm"
+    },
     "InMageRcmDiscoveredProtectedVmDetails": {
       "description": "InMageRcm discovered protected VM details.",
       "type": "object",
