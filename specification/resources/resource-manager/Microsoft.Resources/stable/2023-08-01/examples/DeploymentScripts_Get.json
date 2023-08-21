@@ -30,7 +30,7 @@
           "azPowerShellVersion": "1.7.0",
           "scriptContent": "Param([string]$Location,[string]$Name) $deploymentScriptOutputs['test'] = 'value' Get-AzResourceGroup -Location $Location -Name $Name",
           "arguments": "-Location 'westus' -Name \"*rg2\"",
-          "retentionInterval": "PT7D",
+          "retentionInterval": "P7D",
           "timeout": "PT1H",
           "cleanupPreference": "Always",
           "status": {
@@ -41,7 +41,9 @@
             "expirationTime": "2018-11-13T15:19:45-08:00"
           },
           "outputs": {
-            "output1": "value1"
+            "additionalProperties": {
+              "output1": "value1"
+            }
           }
         }
       }
