@@ -38,6 +38,11 @@ These settings apply only when `--tag=package-2023-10` is specified on the comma
 ```yaml $(tag) == 'package-2023-10'
 input-file:
   - Microsoft.ConnectedVMwarevSphere/stable/2023-10-01/connectedvmware.json
+suppressions:    
+  - code:  TopLevelResourcesListBySubscription
+    reason: VirtualMachineInstance resource is an ARM extension resource and does not support List by subscription API.  
+    where:
+      - $.definitions.VirtualMachineInstance
 ```
 ### Tag: package-preview-2023-03
 
