@@ -40,19 +40,19 @@ input-file:
 suppressions:
   - code: GetCollectionOnlyHasValueAndNextLink
     from: provisionedClusters.json
-    reason: To be consistent with AKS. In this object schema, all the available versions share the same id, name, type, and location, thus these properties exist on a higher level than the list of versions.
+    reason: To be highly consistent with AKS. In this object schema, all the available versions share the same id, name, type, and location, thus these properties exist on a higher level than the list of versions. Changing it may cause confusion to customers. Link to AKS Swagger (https://github.com/Azure/azure-rest-api-specs-pr/blob/main/specification/containerservice/resource-manager/Microsoft.ContainerService/aks/stable/2023-07-01/managedClusters.json#L1354)
   - code: ParametersInPost
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{clusterName}/providers/Microsoft.AksHybrid/provisionedClusters/{resourceName}/listClusterAdminCredential"].post.parameters
-    reason: To be consistent with AKS. ServerFqdnParameter is only defined in AKS for this specific case.
+    reason: To be highly consistent with AKS. ServerFqdnParameter is only defined in AKS for this specific case. Changing it may cause confusion to customers. Link to AKS Swagger (https://github.com/Azure/azure-rest-api-specs-pr/blob/main/specification/containerservice/resource-manager/Microsoft.ContainerService/aks/stable/2023-07-01/managedClusters.json#L336)
   - code: ParametersInPost
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{clusterName}/providers/Microsoft.AksHybrid/provisionedClusters/{resourceName}/listClusterUserCredential"].post.parameters
-    reason: To be consistent with AKS. ServerFqdnParameter and CredentialFormatParameter are only defined in AKS for this specific case.
+    reason: To be highly consistent with AKS. ServerFqdnParameter and CredentialFormatParameter are only defined in AKS for this specific case. Changing it may cause confusion to customers. Link to AKS Swagger (https://github.com/Azure/azure-rest-api-specs-pr/blob/main/specification/containerservice/resource-manager/Microsoft.ContainerService/aks/stable/2023-07-01/managedClusters.json#L374)
   - code: LroPostReturn
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{clusterName}/providers/Microsoft.AksHybrid/provisionedClusters/{resourceName}/rotateClusterCertificates"].post
-    reason: To be consistent with AKS. There is nothing to be returned in Response 200 for this API.
+    reason: To be highly consistent with AKS. There is nothing to be returned in Response 200 for this API. Changing it may cause confusion to customers. Link to AKS Swagger (https://github.com/Azure/azure-rest-api-specs-pr/blob/main/specification/containerservice/resource-manager/Microsoft.ContainerService/aks/stable/2023-07-01/managedClusters.json#L1498)
   - code: TrackedResourcePatchOperation
     where: $.definitions.AgentPool
-    reason: To be consistent with AKS. AKS does not implement the Patch operation for this resource.
+    reason: To be highly consistent with AKS. AKS does not implement the Patch operation for this resource. Changing it may cause confusion to customers. Link to AKS Swagger (https://github.com/Azure/azure-rest-api-specs-pr/blob/main/specification/containerservice/resource-manager/Microsoft.ContainerService/aks/stable/2023-07-01/managedClusters.json#L3018)
 ```
 
 ---
