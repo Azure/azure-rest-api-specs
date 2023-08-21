@@ -328,11 +328,11 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConfidentialLedger/managedCCFs/{appName}/backup": {
       "post": {
         "tags": [
-          "Confidential Ledger"
+          "Managed CCF"
         ],
-        "summary": "Retrieves information about all Confidential Ledger resources under the given subscription",
-        "description": "Retrieves the properties of all Confidential Ledgers.",
-        "operationId": "Ledger_ListBySubscription",
+        "summary": "Performs the backup operation on a Managed CCF Resource.",
+        "description": "Backs up a Managed CCF Resource.",
+        "operationId": "ManagedCCF_Backup",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -341,28 +341,31 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "type": "string",
-            "description": "The filter to apply on the list operation. eg. $filter=ledgerType eq 'Public'",
-            "name": "$filter",
-            "in": "query"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedCCFNameParameter"
+          },
+          {
+            "name": "ManagedCCF",
+            "in": "body",
+            "description": "Managed CCF Backup Request Body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedCCFBackup"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "The request was successful; response contains the list of Confidential Ledgers",
-            "schema": {
-              "$ref": "#/definitions/ManagedCCFBackup"
-            }
+            "description": "The request was successful; response contains a message stating the instance is successfully being backed up."
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound (Confidential Ledger does not exist.)",
+            "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "ManagedCCFBackup": {
@@ -374,11 +377,11 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConfidentialLedger/managedCCFs/{appName}/restore": {
       "post": {
         "tags": [
-          "Confidential Ledger"
+          "Managed CCF"
         ],
-        "summary": "Retrieves information about all Confidential Ledger resources under the given subscription",
-        "description": "Retrieves the properties of all Confidential Ledgers.",
-        "operationId": "Ledger_ListBySubscription",
+        "summary": "Performs the restore operation to spin up a newly restored Managed CCF instance.",
+        "description": "Restores a Managed CCF instance.",
+        "operationId": "ManagedCCF_Restore",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -387,28 +390,34 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "type": "string",
-            "description": "The filter to apply on the list operation. eg. $filter=ledgerType eq 'Public'",
-            "name": "$filter",
-            "in": "query"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedCCFNameParameter"
+          },
+          {
+            "name": "ManagedCCF",
+            "in": "body",
+            "description": "Managed CCF Restore Request Body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedCCFRestore"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "The request was successful; response contains the list of Confidential Ledgers",
+            "description": "The request was successful; response contains a message stating the instance is successfully being restored.",
             "schema": {
               "$ref": "#/definitions/ManagedCCFRestore"
             }
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound (Confidential Ledger does not exist.)",
+            "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "ManagedCCFRestore": {
@@ -604,36 +613,39 @@
       }
     },
     "ManagedCCFBackup": {
-      "description": "Object that includes an array of Managed CCF and a possible link for next set.",
-      "type": "object",
+      "description": "Object representing Backup properties of Managed CCF Resource.",
+      "type": "string",
       "properties": {
-        "value": {
-          "description": "List of Managed CCF",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ManagedCCF"
-          }
+        "location": {
+          "type": "string",
+          "readOnly": false,
+          "description": "Location where the Managed CCF Resource will be backed up for or restored to."
         },
-        "nextLink": {
-          "description": "The URL the client should use to fetch the next page (per server side paging).",
-          "type": "string"
+        "sasUrl": {
+          "type": "string",
+          "readOnly": false,
+          "description": "SAS URI used to access the backup Fileshare."
         }
       }
     },
     "ManagedCCFRestore": {
-      "description": "Object that includes an array of Managed CCF and a possible link for next set.",
-      "type": "object",
+      "description": "Object representing Restore properties of Managed CCF Resource.",
+      "type": "string",
       "properties": {
-        "value": {
-          "description": "List of Managed CCF",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ManagedCCF"
-          }
+        "fileShareName": {
+          "type": "string",
+          "readOnly": false,
+          "description": "Fileshare Name where the Managed CCF Resource backup is stored."
         },
-        "nextLink": {
-          "description": "The URL the client should use to fetch the next page (per server side paging).",
-          "type": "string"
+        "location": {
+          "type": "string",
+          "readOnly": false,
+          "description": "Location where the Managed CCF Resource will be backed up for or restored to."
+        },
+        "sasUrl": {
+          "type": "string",
+          "readOnly": false,
+          "description": "SAS URI used to access the backup Fileshare."
         }
       }
     }
