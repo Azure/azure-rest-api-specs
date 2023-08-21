@@ -27,7 +27,7 @@ typescript:
   output-folder: "$(typescript-sdks-folder)/sdk/features/arm-features"
 ```
 
-```yaml $(typescript) && $(package-features) && !$(profile-content)
+```yaml $(typescript) && $(package-deploymentstacks) && !$(profile-content)
 typescript:
   package-name: "@azure/arm-resourcesdeploymentstacks"
   output-folder: "$(typescript-sdks-folder)/sdk/resourcesdeploymentstacks/arm-resourcesdeploymentstacks"
