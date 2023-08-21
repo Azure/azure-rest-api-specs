@@ -10,7 +10,7 @@ namespace: com.azure.resourcemanager.carbonoptimization
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-carbonoptimization
-title: VMwareApplicationManagementClient
+title: CarbonOptimizationManagementClient
 description: "Carbon Optimization Client"
 ```
 
