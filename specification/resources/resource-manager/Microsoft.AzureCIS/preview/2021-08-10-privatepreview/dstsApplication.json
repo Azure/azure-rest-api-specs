@@ -1,0 +1,507 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Foundational ARM Client",
+    "description": "DstsApplication Provider",
+    "version": "2021-08-10-privatepreview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCIS/dstsApplications/{dstsApplicationResourceName}": {
+      "put": {
+        "description": "Add Dsms Folder Allowlists",
+        "x-ms-examples": {
+          "Create a Dmsi-Based DstsApplication Account": {
+            "$ref": "./examples/CreateDstsApplicationAccountDmsiBased.json"
+          },
+          "Create a Subject-Name-Based DstsApplication Account": {
+            "$ref": "./examples/CreateDstsApplicationAccountSubjectNameBased.json"
+          },
+          "Create a Certificate-Based DstsApplication Account": {
+            "$ref": "./examples/CreateDstsApplicationAccountCertificateBased.json"
+          },
+          "Create a DstsApplication Group": {
+            "$ref": "./examples/CreateDstsApplicationGroup.json"
+          }
+        },
+        "operationId": "DstsApplication_Create",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DstsApplicationResourceNameParameter"
+          },
+          {
+            "name": "DstsApplication",
+            "description": "DstsApplication details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DstsApplicationModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "DstsApplication Resource updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/DstsApplicationModel"
+            }
+          },
+          "201": {
+            "description": "DstsApplication Resource created successfully.",
+            "schema": {
+              "$ref": "#/definitions/DstsApplicationModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApplicationAccount": {
+      "required": [
+        "dstsInstance",
+        "name",
+        "serviceTreeId"
+      ],
+      "type": "object",
+      "description": "Application account properties",
+      "properties": {
+        "dstsInstance": {
+          "type": "string",
+          "description": "The dSTS instance where the Application resides. E.g. \"asiaeast-dsts.dsts.core.windows.net\""
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the Application."
+        },
+        "serviceTreeId": {
+          "type": "string",
+          "description": "Service Tree GUID of the service who owns the Application."
+        },
+        "realms": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "A realm and optional redirection URL with a \"|\" separator  E.g. \"svc://realmName@foo.core.windows.net | https://redirectUrl.com\" or \"svc://realmName@foo.core.windows.net\""
+          },
+          "description": "Optional. The realms of the application. You must provide at least one realm if you need to authenticate through dSTS classic protocol. Realms are unique within a dSTS instance and are used to get a token for this application. The application will automatically get any and all realms defined on the group corresponding to GroupId",
+          "x-ms-identifiers": []
+        },
+        "servicePrincipalNames": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "A service principal name"
+          },
+          "description": "Optional. The Service Principal Names of the application. You can provide service principal names if you need to authenticate through dSTS modern protocol. Service principal names are unique within a dSTS instance and are used to get a token for this application. By default, dSTS will use application principal id if you don't provide your own Service Principal Name. The application will automatically get any and all service principal names defined in group",
+          "x-ms-identifiers": []
+        },
+        "replyToAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "A reply address. E.g. \"https://replyaddress.core.windows.net\""
+          },
+          "description": "Optional. The Reply Addresses of application. For passive authentication flow, this is the URI dsts will redirect the browser to after authenticated the user. The application will automatically get any and all reply address defined in group",
+          "x-ms-identifiers": []
+        },
+        "groupId": {
+          "type": "string",
+          "description": "Optional. GUID of the dSCM Application group to which the Application belongs. If specified, there is no need to add a group name."
+        },
+        "groupName": {
+          "type": "string",
+          "description": "Optional. Group name of the dSCM Application group to which the Application belongs. If specified, there is no need to add a group ID."
+        },
+        "isMfaEnabled": {
+          "type": "boolean",
+          "description": "Optional. If set to true, authenticating to the application requires multi-factor authentication."
+        },
+        "sawDeviceEnforcement": {
+          "type": "string",
+          "description": "Optional. If it is null, full SAW enforcement will apply to the application. The account will automatically get any and all SAW Device Enforcement defined on the group corresponding to GroupId"
+        },
+        "isElevatedAccess": {
+          "type": "boolean",
+          "description": "Optional. If you application (service) is exclusively limited to System Metadata, Read-Only access levels, set it to false."
+        },
+        "isProduction": {
+          "type": "boolean",
+          "description": "Optional. If your application (service) is exclusively NonProduction, set it to false."
+        },
+        "claimRules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ApplicationClaimRule"
+          },
+          "description": "Optional. The claim rule which apply to this Application. The account will automatically get any and all claim rules defined on the group corresponding to GroupId. Federation claim rules to grant role to users from federated identity provider. ",
+          "x-ms-identifiers": []
+        },
+        "applicationClientIdentity": {
+          "$ref": "#/definitions/ApplicationClientIdentity",
+          "description": "Optional. Client identity when using the application as a client. Adding a client identity enables application to be authenticated to another application on dSTS. Do not create MSIs on prod-dsts. Use a regional dSTS matching the region your service is deployed in. global-dsms is not supported. If you need to create an MSI on global-dsms contact dstsconfigsup@microsoft.com"
+        }
+      }
+    },
+    "ApplicationGroup": {
+      "required": [
+        "cloudId",
+        "name",
+        "serviceTreeId"
+      ],
+      "type": "object",
+      "description": "Application account properties",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Group ID"
+        },
+        "serviceTreeId": {
+          "type": "string",
+          "description": "Service Tree GUID of the service who owns the application group. This is required property. The service tree site is located at aka.ms/servicetree."
+        },
+        "name": {
+          "type": "string",
+          "description": "Group name"
+        },
+        "applicationName": {
+          "type": "string",
+          "description": "Optional. Desired naming pattern of the application in this group."
+        },
+        "servicePrincipalNames": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "A service principal name"
+          },
+          "description": "Optional. The Service Principal Names of the application group. You can provide service principal names if you need to authenticate through dSTS modern protocol. Service principal names are unique within a dSTS instance and are used to get a token for this application. By default, dSTS will use application principal id if you don't provide your own Service Principal Name. The application will automatically get any and all service principal names defined in group",
+          "x-ms-identifiers": []
+        },
+        "realms": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "A realm and optional redirection URL with a \"|\" separator  E.g. \"svc://realmName@foo.core.windows.net | https://redirectUrl.com\" or \"svc://realmName@foo.core.windows.net\""
+          },
+          "description": "Optional. The realms of the application group. You must provide at least one realm if you need to authenticate through dSTS classic protocol. Realms are unique within a dSTS instance and are used to get a token for this application. The application will automatically get any and all realms defined on the group corresponding to GroupId",
+          "x-ms-identifiers": []
+        },
+        "replyToAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "A reply address. E.g. \"https://replyaddress.core.windows.net\""
+          },
+          "description": "Optional. The Reply Addresses of application group. For passive authentication flow, this is the URI dsts will redirect the browser to after authenticated the user. The application will automatically get any and all reply address defined in group",
+          "x-ms-identifiers": []
+        },
+        "isMfaEnabled": {
+          "type": "boolean",
+          "description": "Optional. If set to true, authenticating to the application requires multi-factor authentication."
+        },
+        "isGlobalService": {
+          "type": "boolean",
+          "description": "Optional. Used to determine the service availability strategy. If not set, default is regional service."
+        },
+        "sawDeviceEnforcement": {
+          "type": "string",
+          "description": "Optional. The account will automatically get any and all SAW Device Enforcement defined on the group corresponding to GroupId. If it is null, full SAW enforcement will apply to the application."
+        },
+        "clientTokenIpRangeRestrictions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/IpRange"
+          },
+          "description": "Optional. Client token ip range restrictions.",
+          "x-ms-identifiers": []
+        },
+        "cloudId": {
+          "type": "string",
+          "description": "The cloud identifier for the application group. E.g. PROD, mooncake, fairfax, ex, rx, bleu"
+        },
+        "clientSubscriptions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "A subscription ID"
+          },
+          "description": "Optional. The common client subscriptions to allowlist for all applications in the group that have dmsi client identity.",
+          "x-ms-identifiers": []
+        },
+        "regions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "A dsts region. E.g. \"asiaeast-dsts.dsts.core.windows.net\""
+          },
+          "description": "Optional. Specific dSTS instances to create applications on. If specified, global service will be set to UserSpecifiedRegions.",
+          "x-ms-identifiers": []
+        },
+        "claimRules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ApplicationClaimRule"
+          },
+          "description": "Optional. The claim rules that apply to this Application Group. The account will automatically get any and all claim rules defined on the group corresponding to GroupId. Federation claim rules to grant role to users from federated identity provider. ",
+          "x-ms-identifiers": []
+        },
+        "applicationClientIdentity": {
+          "$ref": "#/definitions/ApplicationClientIdentity",
+          "description": "Optional. Client identity when using the application as a client. Adding a client identity enables application to be authenticated to another application on dSTS."
+        }
+      }
+    },
+    "IpRange": {
+      "type": "object",
+      "description": "Used for defining IP range requirements",
+      "properties": {
+        "toIpAddress": {
+          "type": "string",
+          "description": "To IP address"
+        }
+      }
+    },
+    "ApplicationClaimRule": {
+      "type": "object",
+      "description": "A claim rule that applies to this Application/Group. The account will automatically get any and all claim rules defined on the group corresponding to GroupId. Federation claim rules to grant role to users from federated identity provider.",
+      "properties": {
+        "clientIdentifier": {
+          "$ref": "#/definitions/Claim",
+          "description": "A claim used to identify client. e.g., group claim, application name claim, object id claim."
+        },
+        "claim": {
+          "$ref": "#/definitions/Claim",
+          "description": "The output claim. Client identifier will be mapped to this claim."
+        },
+        "clientIdentityOrigin": {
+          "type": "string",
+          "description": "The name of the original identity provider of the client. e.g., federation for user or dsts instance for applications."
+        },
+        "isRegionalEnforced": {
+          "type": "boolean",
+          "description": "If true, when the claim is scoped to service account group, only SCIs on the same dsts instance where the service accounts exist can get the claim."
+        }
+      }
+    },
+    "ApplicationClientIdentity": {
+      "type": "object",
+      "description": "Client identity when using the application as a client. Adding a client identity enables application to be authenticated to another application on dSTS.",
+      "properties": {
+        "dmsiInfo": {
+          "$ref": "#/definitions/DmsiInfo"
+        },
+        "certificateBasedIdentity": {
+          "$ref": "#/definitions/CertificateBasedIdentity"
+        },
+        "subjectNameBasedIdentity": {
+          "$ref": "#/definitions/SubjectNameBasedIdentity"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of your client identity. E.g. Dmsi, Certificate, SubjectName."
+        },
+        "clientTokenIpRangeRestrictions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/IpRange"
+          },
+          "description": "Optional. Provide a list IP address ranges to restrict where this application's client token can be requested.",
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Claim": {
+      "type": "object",
+      "description": "Type/value pairing used for mapping claims for authentication.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the claim. This is case-insensitive. E.g. \"http://sts.msft.net/user/Group\" or \"http://schemas.microsoft.com/ws/2008/06/identity/claims/role\"."
+        },
+        "value": {
+          "type": "string",
+          "description": "Name or ID of the identity of the claim."
+        }
+      }
+    },
+    "DmsiInfo": {
+      "type": "object",
+      "description": "Details for DMSI-based (dSTS Managed Service Identity) application client identity. This means the application client is authenticated using dMSI configuration. dMSI is an identity that is backed by a credential that is internally stored in the regional dSMS.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "dSMS folder path where the dMSI credential is internally stored in the dSMS specified in the region field."
+        },
+        "region": {
+          "type": "string",
+          "description": "Region where the dMSI credential is stored in dSMS. Do not create MSIs on prod-dsts. Use a regional dSTS matching the region your service is deployed in. global-dsms is not supported. If you need to create an MSI on global-dsms contact dstsconfigsup@microsoft.com"
+        },
+        "subscriptions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "A subscription ID to allowlist"
+          },
+          "description": "Subscription IDs that are allowlisted for the dSMS folder used for the dMSI",
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "CertificateBasedIdentity": {
+      "type": "object",
+      "description": "Details for certificate-based application client identity. This means the application client is authenticated using certificate configuration.",
+      "properties": {
+        "certificates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/CertificateInfo"
+          },
+          "description": "Certificates",
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "CertificateInfo": {
+      "type": "object",
+      "description": "Details for defining a certificate object",
+      "properties": {
+        "thumbprint": {
+          "type": "string",
+          "description": "Certificate thumbprint string used for certificate-based authentication"
+        },
+        "expiryDate": {
+          "type": "string",
+          "description": "Certificate expiry date"
+        }
+      }
+    },
+    "SubjectNameBasedIdentity": {
+      "type": "object",
+      "description": "Details for subject-name-based application client identity. This means the application client is authenticated using subject name configuration.",
+      "properties": {
+        "subjectNames": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "A subject name"
+          },
+          "description": "List of subject names for subject name based authentication",
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "DstsApplicationResource": {
+      "type": "object",
+      "description": "DstsApplication properties",
+      "properties": {
+        "applicationAccount": {
+          "type": "object",
+          "$ref": "#/definitions/ApplicationAccount"
+        },
+        "applicationGroup": {
+          "type": "object",
+          "$ref": "#/definitions/ApplicationGroup"
+        }
+      }
+    },
+    "DstsApplicationModel": {
+      "type": "object",
+      "description": "DstsApplication Response",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "DstsApplication properties with provisioning state",
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "$ref": "#/definitions/ProvisioningState",
+              "description": "The provisioning State of the resource."
+            }
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/DstsApplicationResource"
+            }
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ProvisioningState": {
+      "description": "Provisioning status of the resource.",
+      "readOnly": true,
+      "enum": [
+        "Failed",
+        "Succeeded",
+        "Canceled",
+        "Accepted"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {
+    "DstsApplicationResourceNameParameter": {
+      "name": "dstsApplicationResourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of resource.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

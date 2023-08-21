@@ -272,8 +272,8 @@
           "Insights"
         ],
         "operationId": "Insights_Update",
-        "summary": "Patches tags field of Workload Insights instance.",
-        "description": "Patches the tags field of Workload Insights instance for the specified subscription, resource group, and instance name.",
+        "summary": "Patches tags field and managed identity field of Workload Insights instance.",
+        "description": "Patches the tags field and managed identity field of Workload Insights instance for the specified subscription, resource group, and instance name.",
         "x-ms-examples": {
           "Update Tags field of a Workload Insights instance": {
             "$ref": "./examples/insights/insights_PatchTags.json"
@@ -343,6 +343,9 @@
         }
       ],
       "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
         "properties": {
           "description": "Insight Instance properties",
           "x-ms-client-flatten": true,
@@ -416,7 +419,8 @@
           "description": "Type of the datafeed, ex Log Analytics.",
           "type": "string",
           "enum": [
-            "AzureLogAnalyticsDataFeed"
+            "AzureLogAnalyticsDataFeed",
+            "AzureDataExplorerDataFeed"
           ],
           "x-ms-enum": {
             "name": "dataFeedType",
@@ -442,6 +446,34 @@
         "schema": {
           "description": "Schema for the datafeed.",
           "$ref": "#/definitions/DataFeedSchema"
+        }
+      }
+    },
+    "AzureDataExplorerDataFeed": {
+      "description": "Azure Data Explorer datafeed.",
+      "type": "object",
+      "required": [
+        "details",
+        "trigger"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeed"
+        }
+      ],
+      "properties": {
+        "details": {
+          "description": "Details of Azure Data Explorer datafeed.",
+          "type": "object",
+          "properties": {
+            "query": {
+              "description": "Kusto query to pull data from database.",
+              "type": "string"
+            }
+          }
+        },
+        "dataStore": {
+          "$ref": "#/definitions/AzureDataExplorerDataStore"
         }
       }
     },
@@ -667,7 +699,9 @@
           "type": "string",
           "enum": [
             "AzureLogAnalyticsDataStore",
-            "ImpactResourceProviderDataStore"
+            "ImpactResourceProviderDataStore",
+            "AzureDataExplorerDataStore",
+            "EventHubDataStore"
           ],
           "x-ms-enum": {
             "name": "dataStoreType",
@@ -702,6 +736,29 @@
         }
       }
     },
+    "AzureDataExplorerDataStore": {
+      "description": "Azure Data Explorer in data store.",
+      "type": "object",
+      "required": [
+        "uri",
+        "database"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataStore"
+        }
+      ],
+      "properties": {
+        "uri": {
+          "description": "The cluster URI of the Azure data explorer cluster.",
+          "type": "string"
+        },
+        "database": {
+          "description": "The database name for Azure data explorer cluster.",
+          "type": "string"
+        }
+      }
+    },
     "ImpactResourceProviderDataStore": {
       "description": "Impact Resource Provider in data store.",
       "type": "object",
@@ -711,10 +768,31 @@
         }
       ]
     },
+    "EventHubDataStore": {
+      "description": "Event Hub in data store.",
+      "type": "object",
+      "required": [
+        "eventHubArmId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataStore"
+        }
+      ],
+      "properties": {
+        "eventHubArmId": {
+          "description": "The ARM ID of the Event Hub instance.",
+          "type": "string"
+        }
+      }
+    },
     "InsightInstanceUpdateRequest": {
-      "description": "Workload insight instance update request",
+      "description": "Workload insight instance update request.",
       "type": "object",
       "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
         "tags": {
           "description": "Gets or sets the Resource tags.",
           "type": "object",

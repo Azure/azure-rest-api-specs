@@ -1,0 +1,35 @@
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-providerhub";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
+import "../shared/provisioningstate.tsp";
+import "../shared/resourceid.tsp";
+import "../virtualEnclave/virtualenclave.tsp";
+
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.Core;
+using Azure.ResourceManager;
+
+@doc("Workload Resource properties")
+model WorkloadProperties {
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
+  @removed(Microsoft.Mission.Versions.v2023_08_01_preview)
+  @doc("Workload Description.")
+  description?: string;
+
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
+  @removed(Microsoft.Mission.Versions.v2023_08_01_preview)
+  @doc("Virtual Enclave Resource Id.")
+  enclaveResourceId?: VirtualEnclaveResourceId;
+
+  @doc("Managed Resource Groups.")
+  managedResourceGroups?: string[];
+
+  @doc("Provisioning State.")
+  @visibility("read")
+  provisioningState?: ProvisioningState;
+}

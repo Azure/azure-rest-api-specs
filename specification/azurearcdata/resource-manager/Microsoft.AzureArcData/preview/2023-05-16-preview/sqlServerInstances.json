@@ -1,0 +1,354 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2023-05-16-preview",
+    "title": "AzureArcDataManagementClient",
+    "description": "The AzureArcData management API provides a RESTful set of web APIs to manage Azure Data Services on Azure Arc Resources."
+  },
+  "paths": {},
+  "definitions": {
+    "SqlServerInstance": {
+      "description": "A SqlServerInstance.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlServerInstanceProperties",
+          "description": "null",
+          "x-ms-client-flatten": false
+        }
+      }
+    },
+    "SqlServerInstanceProperties": {
+      "description": "Properties of SqlServerInstance.",
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "SQL Server version.",
+          "enum": [
+            "SQL Server 2012",
+            "SQL Server 2014",
+            "SQL Server 2016",
+            "SQL Server 2017",
+            "SQL Server 2019",
+            "SQL Server 2022",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "sqlVersion",
+            "modelAsString": true
+          }
+        },
+        "edition": {
+          "type": "string",
+          "description": "SQL Server edition.",
+          "enum": [
+            "Evaluation",
+            "Enterprise",
+            "Standard",
+            "Web",
+            "Developer",
+            "Express",
+            "Business Intelligence"
+          ],
+          "x-ms-enum": {
+            "name": "editionType",
+            "modelAsString": true
+          }
+        },
+        "containerResourceId": {
+          "type": "string",
+          "description": "ARM Resource id of the container resource (Azure Arc for Servers)."
+        },
+        "createTime": {
+          "type": "string",
+          "description": "The time when the resource was created.",
+          "readOnly": true
+        },
+        "vCore": {
+          "type": "string",
+          "description": "The number of logical processors used by the SQL Server instance."
+        },
+        "cores": {
+          "type": "string",
+          "description": "The number of total cores of the Operating System Environment (OSE) hosting the SQL Server instance."
+        },
+        "status": {
+          "type": "string",
+          "description": "The cloud connectivity status.",
+          "enum": [
+            "Connected",
+            "Disconnected",
+            "Registered",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectionStatus",
+            "modelAsString": true
+          }
+        },
+        "patchLevel": {
+          "type": "string",
+          "description": "SQL Server update level."
+        },
+        "collation": {
+          "type": "string",
+          "description": "SQL Server collation."
+        },
+        "currentVersion": {
+          "type": "string",
+          "description": "SQL Server current version."
+        },
+        "instanceName": {
+          "type": "string",
+          "description": "SQL Server instance name."
+        },
+        "tcpDynamicPorts": {
+          "type": "string",
+          "description": "Dynamic TCP ports used by SQL Server."
+        },
+        "tcpStaticPorts": {
+          "type": "string",
+          "description": "Static TCP ports used by SQL Server."
+        },
+        "productId": {
+          "type": "string",
+          "description": "SQL Server product ID."
+        },
+        "licenseType": {
+          "type": "string",
+          "description": "SQL Server license type.",
+          "enum": [
+            "Undefined",
+            "Free",
+            "HADR",
+            "ServerCAL",
+            "LicenseOnly",
+            "PAYG",
+            "Paid"
+          ],
+          "x-ms-enum": {
+            "name": "arcSqlServerLicenseType",
+            "modelAsString": true
+          }
+        },
+        "azureDefenderStatusLastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of last Azure Defender status update."
+        },
+        "azureDefenderStatus": {
+          "type": "string",
+          "description": "Status of Azure Defender.",
+          "enum": [
+            "Protected",
+            "Unprotected",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "defenderStatus",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the Arc-enabled SQL Server resource.",
+          "readOnly": true
+        },
+        "hostType": {
+          "type": "string",
+          "description": "Type of host for Azure Arc SQL Server",
+          "enum": [
+            "Azure Virtual Machine",
+            "Azure VMWare Virtual Machine",
+            "Azure Kubernetes Service",
+            "AWS VMWare Virtual Machine",
+            "AWS Kubernetes Service",
+            "GCP VMWare Virtual Machine",
+            "GCP Kubernetes Service",
+            "Container",
+            "Virtual Machine",
+            "Physical Server",
+            "AWS Virtual Machine",
+            "GCP Virtual Machine",
+            "Other"
+          ],
+          "x-ms-enum": {
+            "name": "hostType",
+            "modelAsString": true
+          }
+        },
+        "alwaysOnRole": {
+          "type": "string",
+          "description": "The role of the SQL Server, based on availability.",
+          "enum": [
+            "None",
+            "FailoverClusterInstance",
+            "FailoverClusterNode",
+            "AvailabilityGroupReplica"
+          ],
+          "x-ms-enum": {
+            "name": "alwaysOnRole",
+            "modelAsString": true
+          }
+        },
+        "failoverCluster": {
+          "description": "Failover Cluster Instance properties.",
+          "$ref": "#/definitions/FailoverCluster"
+        },
+        "backupPolicy": {
+          "description": "The backup profile for the SQL server.",
+          "$ref": "#/definitions/BackupPolicy"
+        },
+        "monitoring": {
+          "description": "The monitoring configuration.",
+          "$ref": "#/definitions/Monitoring"
+        }
+      },
+      "required": [
+        "containerResourceId",
+        "status"
+      ]
+    },
+    "FailoverCluster": {
+      "type": "object",
+      "description": "Failover Cluster Instance properties.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The GUID of the SQL Server's underlying Failover Cluster."
+        },
+        "networkName": {
+          "type": "string",
+          "description": "The network name to connect to the SQL FCI."
+        },
+        "sqlInstanceIds": {
+          "type": "array",
+          "description": "The ARM IDs of the Arc SQL Server resources, belonging to the current server's Failover cluster.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hostNames": {
+          "type": "array",
+          "description": "The host names which are part of the SQL FCI resource group.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "networkName"
+      ]
+    },
+    "SqlServerInstanceUpdate": {
+      "description": "An update to a SQL Server Instance.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SqlServerInstanceListResult": {
+      "description": "A list of SqlServerInstance.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlServerInstance"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "BackupPolicy": {
+      "description": "The backup profile for the SQL server.",
+      "type": "object",
+      "properties": {
+        "retentionPeriodDays": {
+          "type": "integer",
+          "description": "The retention period for all the databases in this managed instance.",
+          "minimum": 0,
+          "maximum": 35,
+          "format": "int32"
+        },
+        "fullBackupDays": {
+          "type": "integer",
+          "description": "The value indicating days between full backups.",
+          "minimum": 0,
+          "maximum": 7,
+          "format": "int32"
+        },
+        "differentialBackupHours": {
+          "description": "The differential backup interval in hours.",
+          "enum": [
+            12,
+            24
+          ],
+          "type": "integer",
+          "format": "int32",
+          "x-ms-enum": {
+            "name": "differentialBackupHours",
+            "modelAsString": false
+          }
+        },
+        "transactionLogBackupMinutes": {
+          "type": "integer",
+          "description": "The value indicating minutes between transaction log backups.",
+          "minimum": 0,
+          "maximum": 60,
+          "format": "int32"
+        }
+      }
+    },
+    "Monitoring": {
+      "description": "The monitoring configuration.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates if monitoring is enabled for this SQL Server instance."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "apiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for the request",
+      "x-ms-parameter-location": "client"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

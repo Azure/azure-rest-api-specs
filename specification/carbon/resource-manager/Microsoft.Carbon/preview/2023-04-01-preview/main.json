@@ -4,9 +4,9 @@
     "title": "Carbon",
     "version": "2023-04-01-preview",
     "description": "Carbon Report Resource Provider query API.",
-    "x-cadl-generated": [
+    "x-typespec-generated": [
       {
-        "emitter": "@azure-tools/cadl-autorest"
+        "emitter": "@azure-tools/typespec-autorest"
       }
     ]
   },
@@ -55,8 +55,8 @@
           {
             "name": "queryParameters",
             "in": "body",
-            "required": true,
             "description": "Query parameters",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/QueryFilter"
             }
@@ -76,22 +76,22 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "CarbonService_ListCarbonEmissionReports": {
             "$ref": "./examples/carbonEmissionsReport.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/providers/Microsoft.Carbon/operations": {
       "get": {
+        "operationId": "Operations_List",
         "tags": [
           "Operations"
         ],
-        "operationId": "Operations_List",
         "description": "List the operations for the provider",
         "parameters": [
           {
@@ -112,12 +112,42 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Operations_List": {
             "$ref": "./examples/listOperations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Carbon/queryCarbonEmissionDataAvailableDateRange": {
+      "post": {
+        "operationId": "CarbonService_QueryCarbonEmissionDataAvailableDateRange",
+        "description": "API for query carbon emission data available date range",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CarbonEmissionDataAvailableDateRange"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CarbonService_QueryCarbonEmissionDataAvailableDateRange": {
+            "$ref": "./examples/carbonEmissionsDataAvailableDateRange.json"
           }
         }
       }
@@ -126,28 +156,43 @@
   "definitions": {
     "CarbonEmissionData": {
       "type": "object",
+      "description": "Response for given query parameters",
       "properties": {
         "dataType": {
           "type": "string",
           "description": "Query result data type name"
         },
         "totalCarbonEmission": {
+          "type": "number",
+          "format": "double",
           "description": "Total carbon emissions for given query parameters"
         },
         "totalCarbonEmissionLastMonth": {
+          "type": "number",
+          "format": "double",
           "description": "Total carbon emission for last month for given query parameters"
         },
         "changeRatioForLastMonth": {
+          "type": "number",
+          "format": "double",
           "description": "Change ratio between totalCarbonEmission and totalCarbonEmissionLastMonth"
         },
         "totalCarbonEmission12MonthsAgo": {
+          "type": "number",
+          "format": "double",
           "description": "Total carbon emissions for 12 months ago for given query parameters"
         },
         "changeRatioFor12Months": {
+          "type": "number",
+          "format": "double",
           "description": "Change ratio between totalCarbonEmission and totalCarbonEmission12MonthsAgo"
+        },
+        "changeValueMonthOverMonth": {
+          "type": "number",
+          "format": "double",
+          "description": "Change Value between totalCarbonEmission and totalCarbonEmissionLastMonth"
         }
       },
-      "description": "Response for given query parameters",
       "discriminator": "dataType",
       "required": [
         "dataType",
@@ -158,31 +203,51 @@
         "changeRatioFor12Months"
       ]
     },
+    "CarbonEmissionDataAvailableDateRange": {
+      "type": "object",
+      "description": "Response for available date range of carbon emission data",
+      "properties": {
+        "startDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Start date parameter, format is yyyy-MM-dd"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date",
+          "description": "End date parameter, format is yyyy-MM-dd"
+        }
+      },
+      "required": [
+        "startDate",
+        "endDate"
+      ]
+    },
     "CarbonEmissionDataListResult": {
       "type": "object",
+      "description": "List of carbon emission results",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The CarbonEmissionData items on this page",
           "items": {
             "$ref": "#/definitions/CarbonEmissionData"
           },
-          "x-ms-identifiers": [],
-          "x-cadl-name": "CarbonEmissionData[]",
-          "description": "The CarbonEmissionData items on this page"
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
-          "description": "The link to the next page of items",
-          "format": "uri"
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
       },
-      "description": "List of carbon emission results",
       "required": [
         "value"
       ]
     },
     "CarbonEmissionItemDetailData": {
       "type": "object",
+      "description": "Response for detailed carbon emissions",
       "properties": {
         "itemName": {
           "type": "string",
@@ -197,7 +262,6 @@
           "description": "Item category"
         }
       },
-      "description": "Response for detailed carbon emissions",
       "required": [
         "itemName",
         "groupName",
@@ -212,16 +276,18 @@
     },
     "CarbonEmissionMonthlySummaryData": {
       "type": "object",
+      "description": "Response for Monthly Carbon Emissions Summary",
       "properties": {
         "date": {
           "type": "string",
           "description": "Monthly date string"
         },
         "carbonIntensity": {
+          "type": "number",
+          "format": "double",
           "description": "Carbon Intensity"
         }
       },
-      "description": "Response for Monthly Carbon Emissions Summary",
       "required": [
         "date",
         "carbonIntensity"
@@ -235,16 +301,8 @@
     },
     "CarbonEmissionOverallSummaryData": {
       "type": "object",
-      "properties": {
-        "lastDataRefreshDate": {
-          "type": "string",
-          "description": "Date when the data was refreshed"
-        }
-      },
       "description": "Response for Overall Carbon Emissions Summary",
-      "required": [
-        "lastDataRefreshDate"
-      ],
+      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/CarbonEmissionData"
@@ -254,6 +312,7 @@
     },
     "CarbonEmissionTopItemMonthlySummaryData": {
       "type": "object",
+      "description": "Response for Top Items Carbon Emissions by Month",
       "properties": {
         "itemName": {
           "type": "string",
@@ -268,7 +327,6 @@
           "description": "Month date"
         }
       },
-      "description": "Response for Top Items Carbon Emissions by Month",
       "required": [
         "itemName",
         "categoryType",
@@ -283,6 +341,7 @@
     },
     "CarbonEmissionTopItemsSummaryData": {
       "type": "object",
+      "description": "Response for Top Items by Category Type",
       "properties": {
         "itemName": {
           "type": "string",
@@ -293,7 +352,6 @@
           "description": "Item category"
         }
       },
-      "description": "Response for Top Items by Category Type",
       "required": [
         "itemName",
         "categoryType"
@@ -317,11 +375,39 @@
       ],
       "x-ms-enum": {
         "name": "CategoryTypeEnum",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Subscription",
+            "value": "Subscription",
+            "description": "Subscription level aggregation granularity"
+          },
+          {
+            "name": "ResourceGroup",
+            "value": "ResourceGroup",
+            "description": "ResourceGroup level aggregation granularity"
+          },
+          {
+            "name": "Location",
+            "value": "Location",
+            "description": "Location level aggregation granularity"
+          },
+          {
+            "name": "ServiceType",
+            "value": "ServiceType",
+            "description": "ServiceType level aggregation granularity"
+          },
+          {
+            "name": "Resource",
+            "value": "Resource",
+            "description": "Resource level aggregation granularity"
+          }
+        ]
       }
     },
     "DateRange": {
       "type": "object",
+      "description": "Date range to be used with QueryParameter",
       "properties": {
         "start": {
           "type": "string",
@@ -334,7 +420,6 @@
           "description": "End date parameter, format is yyyy-MM-dd"
         }
       },
-      "description": "Date range to be used with QueryParameter",
       "required": [
         "start",
         "end"
@@ -350,11 +435,29 @@
       ],
       "x-ms-enum": {
         "name": "EmissionScopeEnum",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Scope1",
+            "value": "Scope1",
+            "description": "Scope1 carbon emission"
+          },
+          {
+            "name": "Scope2",
+            "value": "Scope2",
+            "description": "Scope2 carbon emission"
+          },
+          {
+            "name": "Scope3",
+            "value": "Scope3",
+            "description": "Scope3 carbon emission"
+          }
+        ]
       }
     },
     "ItemDetailsQueryFilter": {
       "type": "object",
+      "description": "Query Parameters for Detailed carbon emissions by pageSize",
       "properties": {
         "categoryType": {
           "$ref": "#/definitions/CategoryTypeEnum",
@@ -378,7 +481,6 @@
           "description": "Number of items to return"
         }
       },
-      "description": "Query Parameters for Detailed carbon emissions by pageSize",
       "required": [
         "categoryType",
         "orderBy",
@@ -395,8 +497,8 @@
     },
     "MonthlySummaryReportQueryFilter": {
       "type": "object",
-      "properties": {},
       "description": "Query Parameters for Monthly Carbon Emissions Summary",
+      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/QueryFilter"
@@ -406,8 +508,8 @@
     },
     "OverallSummaryReportQueryFilter": {
       "type": "object",
-      "properties": {},
       "description": "Query Parameters for Overall Carbon Emissions Summary",
+      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/QueryFilter"
@@ -417,6 +519,7 @@
     },
     "QueryFilter": {
       "type": "object",
+      "description": "Query filter parameter specified by users",
       "properties": {
         "reportType": {
           "type": "string",
@@ -428,24 +531,29 @@
         },
         "subscriptionList": {
           "type": "array",
+          "description": "SubscriptionId list for carbon emissions data",
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "SubscriptionId list for carbon emissions data",
+          "x-ms-identifiers": []
+        },
+        "resourceGroupUrlList": {
+          "type": "array",
+          "description": "resourceGroupUrl list for carbon emissions data",
+          "items": {
+            "type": "string"
+          },
           "x-ms-identifiers": []
         },
         "carbonScopeList": {
           "type": "array",
+          "description": "Carbon emission scope for carbon emissions data",
           "items": {
             "$ref": "#/definitions/EmissionScopeEnum"
           },
-          "x-cadl-name": "EmissionScopeEnum[]",
-          "description": "Carbon emission scope for carbon emissions data",
           "x-ms-identifiers": []
         }
       },
-      "description": "Query filter parameter specified by users",
       "discriminator": "reportType",
       "required": [
         "reportType",
@@ -454,8 +562,234 @@
         "carbonScopeList"
       ]
     },
+    "ResourceCarbonEmissionItemDetailData": {
+      "type": "object",
+      "description": "Response for Resource detailed carbon emissions",
+      "properties": {
+        "itemName": {
+          "type": "string",
+          "description": "Item name"
+        },
+        "groupName": {
+          "type": "string",
+          "description": "Item group name"
+        },
+        "categoryType": {
+          "$ref": "#/definitions/CategoryTypeEnum",
+          "description": "Item category"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription Id"
+        },
+        "resourceGroup": {
+          "type": "string",
+          "description": "Resource Group"
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Resource Id Url"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "Resource Type"
+        },
+        "resourceProvider": {
+          "type": "string",
+          "description": "Resource Provider"
+        }
+      },
+      "required": [
+        "itemName",
+        "groupName",
+        "categoryType",
+        "subscriptionId",
+        "resourceGroup"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CarbonEmissionData"
+        }
+      ],
+      "x-ms-discriminator-value": "ResourceItemDetailsData"
+    },
+    "ResourceCarbonEmissionTopItemMonthlySummaryData": {
+      "type": "object",
+      "description": "Response for Top Items Carbon Emissions by Month for ResourceType",
+      "properties": {
+        "itemName": {
+          "type": "string",
+          "description": "Item name"
+        },
+        "categoryType": {
+          "$ref": "#/definitions/CategoryTypeEnum",
+          "description": "Item category"
+        },
+        "date": {
+          "type": "string",
+          "description": "Month date"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription Id"
+        },
+        "resourceGroup": {
+          "type": "string",
+          "description": "Resource Group"
+        }
+      },
+      "required": [
+        "itemName",
+        "categoryType",
+        "date",
+        "subscriptionId",
+        "resourceGroup"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CarbonEmissionData"
+        }
+      ],
+      "x-ms-discriminator-value": "ResourceTopItemsMonthlySummaryData"
+    },
+    "ResourceCarbonEmissionTopItemsSummaryData": {
+      "type": "object",
+      "description": "Response for Top Items For Resource",
+      "properties": {
+        "itemName": {
+          "type": "string",
+          "description": "Item name"
+        },
+        "categoryType": {
+          "$ref": "#/definitions/CategoryTypeEnum",
+          "description": "Item category"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription Id"
+        },
+        "resourceGroup": {
+          "type": "string",
+          "description": "Resource Group"
+        }
+      },
+      "required": [
+        "itemName",
+        "categoryType",
+        "subscriptionId",
+        "resourceGroup"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CarbonEmissionData"
+        }
+      ],
+      "x-ms-discriminator-value": "ResourceTopItemsSummaryData"
+    },
+    "ResourceGroupCarbonEmissionItemDetailData": {
+      "type": "object",
+      "description": "Response for Resource Group detailed carbon emissions",
+      "properties": {
+        "itemName": {
+          "type": "string",
+          "description": "Item name"
+        },
+        "groupName": {
+          "type": "string",
+          "description": "Item group name"
+        },
+        "categoryType": {
+          "$ref": "#/definitions/CategoryTypeEnum",
+          "description": "Item category"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription Id"
+        }
+      },
+      "required": [
+        "itemName",
+        "groupName",
+        "categoryType",
+        "subscriptionId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CarbonEmissionData"
+        }
+      ],
+      "x-ms-discriminator-value": "ResourceGroupItemDetailsData"
+    },
+    "ResourceGroupCarbonEmissionTopItemMonthlySummaryData": {
+      "type": "object",
+      "description": "Response for Top Items Carbon Emissions by Month for ResourceGroupType",
+      "properties": {
+        "itemName": {
+          "type": "string",
+          "description": "Item name"
+        },
+        "categoryType": {
+          "$ref": "#/definitions/CategoryTypeEnum",
+          "description": "Item category"
+        },
+        "date": {
+          "type": "string",
+          "description": "Month date"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription Id"
+        }
+      },
+      "required": [
+        "itemName",
+        "categoryType",
+        "date",
+        "subscriptionId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CarbonEmissionData"
+        }
+      ],
+      "x-ms-discriminator-value": "ResourceGroupTopItemsMonthlySummaryData"
+    },
+    "ResourceGroupCarbonEmissionTopItemsSummaryData": {
+      "type": "object",
+      "description": "Response for Top Items For ResourceGroup",
+      "properties": {
+        "itemName": {
+          "type": "string",
+          "description": "Item name"
+        },
+        "categoryType": {
+          "$ref": "#/definitions/CategoryTypeEnum",
+          "description": "Item category"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription Id"
+        }
+      },
+      "required": [
+        "itemName",
+        "categoryType",
+        "subscriptionId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CarbonEmissionData"
+        }
+      ],
+      "x-ms-discriminator-value": "ResourceGroupTopItemsSummaryData"
+    },
     "TopItemsMonthlySummaryReportQueryFilter": {
       "type": "object",
+      "description": "Query Parameters for Top Items Carbon Emissions by Month",
       "properties": {
         "categoryType": {
           "$ref": "#/definitions/CategoryTypeEnum",
@@ -469,7 +803,6 @@
           "maximum": 100
         }
       },
-      "description": "Query Parameters for Top Items Carbon Emissions by Month",
       "required": [
         "categoryType",
         "topItems"
@@ -483,6 +816,7 @@
     },
     "TopItemsSummaryReportQueryFilter": {
       "type": "object",
+      "description": "Query Parameters for Top Items Carbon Emission by Category Type",
       "properties": {
         "categoryType": {
           "$ref": "#/definitions/CategoryTypeEnum",
@@ -496,7 +830,6 @@
           "maximum": 100
         }
       },
-      "description": "Query Parameters for Top Items Carbon Emission by Category Type",
       "required": [
         "categoryType",
         "topItems"

@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "accountName": "contosto-videoanalyzer",
+    "resourceGroupName": "contosto-videoanalyzer-rg",
+    "api-version": "2023-06-02-preview",
+    "subscriptionId": "b04775c3-63fa-40f3-9430-139d2e5522d3",
+    "parameters": {
+      "permissionType": "Contributor",
+      "scope": "Video",
+      "videoId": "07ec9e38d4",
+      "extensionId": "/subscriptions/39ks012-8546-4da5-g6w0-8c3cb76dd930/resourceGroups/yl-arc/providers/Microsoft.Kubernetes/ConnectedClusters/yl-arc/providers/Microsoft.KubernetesConfiguration/extensions/exampleid"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "accessToken": "<jwt token of 1260 characters length>"
+      }
+    },
+    "400": {
+      "body": {
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "Account '/subscriptions/b04775c3-63fa-40f3-9430-139d2e5522d3/resourceGroups/contosto-videoanalyzer-rg/providers/Microsoft.Contoso/accounts/contosto-videoanalyzer' not found."
+        }
+      }
+    },
+    "500": {
+      "body": {
+        "error": {
+          "code": "GENERAL",
+          "message": "Trace id: '9677927b-ae6b-496g-1df8-9ec3048b4bf2'."
+        }
+      }
+    }
+  }
+}

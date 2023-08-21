@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "api-version": "2023-01-01-preview",
+    "CloudServiceResourceName": "myResourceName",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
+    "parameters": {
+      "properties": {
+        "autoRenew": "Off",
+        "renewalTerm": {
+          "productCode": "000081e7-0000-0080-1728-3d9b92e2305f",
+          "quantity": 9
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "evaluateResult": "Failed",
+        "reasonCode": "InvalidRequestBody",
+        "reason": "AutoRenew request requires AutoRenew.On to set renewalTerm",
+        "updateScenario": "AutoRenew",
+        "additionalInfo": null
+      }
+    }
+  }
+}

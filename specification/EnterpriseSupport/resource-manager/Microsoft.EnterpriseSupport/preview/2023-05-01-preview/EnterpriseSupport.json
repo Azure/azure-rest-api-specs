@@ -1,0 +1,781 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft ESRP",
+    "version": "2023-05-01-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "EnterpriseSupportsResource"
+    },
+    {
+      "name": "ProviderLevelOperations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.EnterpriseSupport/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListOperations": {
+            "$ref": "./examples/Operations_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EnterpriseSupport/enterpriseSupports": {
+      "get": {
+        "tags": [
+          "EnterpriseSupportsResource"
+        ],
+        "operationId": "EnterpriseSupportsResource_ListBySubscription",
+        "description": "List EnterpriseSupports resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EnterpriseSupportsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "EnterpriseSupports_ListBySubscription": {
+            "$ref": "./examples/EnterpriseSupportsResource_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EnterpriseSupport/enterpriseSupports": {
+      "get": {
+        "tags": [
+          "EnterpriseSupportsResource"
+        ],
+        "operationId": "EnterpriseSupportsResource_ListByResourceGroup",
+        "description": "List EnterpriseSupports resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EnterpriseSupportsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "EnterpriseSupports_ListByResourceGroup": {
+            "$ref": "./examples/EnterpriseSupportsResource_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EnterpriseSupport/enterpriseSupports/{enterpriseSupportName}": {
+      "get": {
+        "tags": [
+          "EnterpriseSupportsResource"
+        ],
+        "operationId": "EnterpriseSupportsResource_Get",
+        "description": "Get a EnterpriseSupports",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "enterpriseSupportName",
+            "in": "path",
+            "required": true,
+            "description": "The name of the  Enterprise Support",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EnterpriseSupports"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetEnterpriseSupports": {
+            "$ref": "./examples/EnterpriseSupportsResource_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "EnterpriseSupportsResource"
+        ],
+        "operationId": "EnterpriseSupportsResource_CreateOrUpdate",
+        "description": "Create a EnterpriseSupports",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "enterpriseSupportName",
+            "in": "path",
+            "required": true,
+            "description": "The name of the  Enterprise Support",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/EnterpriseSupports"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation update completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EnterpriseSupports"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/EnterpriseSupports"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateEnterpriseSupports": {
+            "$ref": "./examples/EnterpriseSupportsResource_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "EnterpriseSupportsResource"
+        ],
+        "operationId": "EnterpriseSupportsResource_Update",
+        "description": "Update a EnterpriseSupports",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "enterpriseSupportName",
+            "in": "path",
+            "required": true,
+            "description": "The name of the  Enterprise Support",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/EnterpriseSupportsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EnterpriseSupports"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateEnterpriseSupports": {
+            "$ref": "./examples/EnterpriseSupportsResource_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "EnterpriseSupportsResource"
+        ],
+        "operationId": "EnterpriseSupportsResource_Delete",
+        "description": "Delete a EnterpriseSupports",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "enterpriseSupportName",
+            "in": "path",
+            "required": true,
+            "description": "The name of the  Enterprise Support",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteEnterpriseSupports": {
+            "$ref": "./examples/EnterpriseSupportsResource_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EnterpriseSupport/validateEnterpriseSupport": {
+      "post": {
+        "tags": [
+          "ProviderLevelOperations"
+        ],
+        "operationId": "ProviderLevelOperations_ValidateEnterpriseSupport",
+        "description": "ProviderLevel operation to check eligibility to create EnterpriseSupport instance",
+        "parameters": [
+          {
+            "$ref": "#/parameters/CustomParams.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/CustomParams.resourceGroupName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "items",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidateEnterpriseSupportRequestItem"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ValidateEnterpriseSupportResponseItem"
+              },
+              "x-ms-identifiers": [],
+              "x-typespec-name": "ValidateEnterpriseSupportResponseItem[]"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ValidateEnterpriseSupport": {
+            "$ref": "./examples/ProviderLevelOperations_ValidateEnterpriseSupport.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "EnterpriseSupports": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EnterpriseSupportsResponseProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "A ESRPProviderHub resource",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "EnterpriseSupportsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnterpriseSupports"
+          },
+          "x-typespec-name": "EnterpriseSupports[]",
+          "description": "The EnterpriseSupports items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a EnterpriseSupports list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "EnterpriseSupportsResponseProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning status"
+        },
+        "billingAccountId": {
+          "type": "string",
+          "description": "Billing Account ID"
+        },
+        "billingGroupId": {
+          "type": "string",
+          "description": "Billing Group ID"
+        },
+        "projectId": {
+          "type": "string",
+          "description": "Invoice section for the billing account"
+        },
+        "productId": {
+          "type": "string",
+          "description": "BicCat product ID"
+        },
+        "skuId": {
+          "type": "string",
+          "description": "BigCat SKU ID"
+        },
+        "availabilityId": {
+          "type": "string",
+          "description": "BigCat availability ID"
+        },
+        "termId": {
+          "type": "string",
+          "description": "BigCat Term ID"
+        },
+        "quantity": {
+          "description": "Quantity for the purchase",
+          "type": "integer",
+          "format": "int32"
+        },
+        "serviceStartDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Service start date for  Enterprise Support"
+        },
+        "csam": {
+          "type": "string",
+          "description": "CSAM for the  Enterprise Support"
+        },
+        "upn": {
+          "type": "string",
+          "description": "Product UPN"
+        }
+      },
+      "description": "Details of the ESRP EnterpriseSupport.",
+      "required": [
+        "billingAccountId",
+        "billingGroupId",
+        "projectId",
+        "productId",
+        "skuId",
+        "availabilityId",
+        "termId",
+        "quantity",
+        "serviceStartDate",
+        "csam",
+        "upn"
+      ]
+    },
+    "EnterpriseSupportsUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-typespec-name": "Record<string>",
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/EnterpriseSupportsUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "The type used for update operations of the EnterpriseSupports."
+    },
+    "EnterpriseSupportsUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning status"
+        },
+        "billingAccountId": {
+          "type": "string",
+          "description": "Billing Account ID"
+        },
+        "billingGroupId": {
+          "type": "string",
+          "description": "Billing Group ID"
+        },
+        "projectId": {
+          "type": "string",
+          "description": "Invoice section for the billing account"
+        },
+        "productId": {
+          "type": "string",
+          "description": "BicCat product ID"
+        },
+        "skuId": {
+          "type": "string",
+          "description": "BigCat SKU ID"
+        },
+        "availabilityId": {
+          "type": "string",
+          "description": "BigCat availability ID"
+        },
+        "termId": {
+          "type": "string",
+          "description": "BigCat Term ID"
+        },
+        "quantity": {
+          "description": "Quantity for the purchase",
+          "type": "integer",
+          "format": "int32"
+        },
+        "serviceStartDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Service start date for  Enterprise Support"
+        },
+        "csam": {
+          "type": "string",
+          "description": "CSAM for the  Enterprise Support"
+        },
+        "upn": {
+          "type": "string",
+          "description": "Product UPN"
+        }
+      },
+      "description": "The updatable properties of the EnterpriseSupports."
+    },
+    "ItemToValidate": {
+      "type": "object",
+      "properties": {
+        "billingAccountId": {
+          "type": "string",
+          "description": "The billing account ID"
+        },
+        "billingGroupId": {
+          "type": "string",
+          "description": "The billing group ID"
+        },
+        "productId": {
+          "type": "string",
+          "description": "The product ID."
+        },
+        "skuId": {
+          "type": "string",
+          "description": "The product SKU ID."
+        },
+        "quantity": {
+          "description": "The quantity for this purchase",
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "description": "The item to be validated.",
+      "required": [
+        "billingAccountId",
+        "billingGroupId",
+        "productId",
+        "skuId",
+        "quantity"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The status of the current operation.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted",
+        "Deleted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "ValidateEnterpriseSupportRequestItem": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ItemToValidate"
+          },
+          "x-ms-identifiers": [],
+          "x-typespec-name": "ItemToValidate[]",
+          "description": "The array of items to be validated"
+        }
+      },
+      "description": "The request for an eligibility check.",
+      "required": [
+        "items"
+      ]
+    },
+    "ValidateEnterpriseSupportResponseItem": {
+      "type": "object",
+      "properties": {
+        "billingAccountId": {
+          "type": "string",
+          "description": "The billing account ID"
+        },
+        "billingGroupId": {
+          "type": "string",
+          "description": "The billing group ID"
+        },
+        "productId": {
+          "type": "string",
+          "description": "The product ID."
+        },
+        "skuId": {
+          "type": "string",
+          "description": "The product SKU ID."
+        },
+        "quantity": {
+          "description": "The quantity for this purchase",
+          "type": "integer",
+          "format": "int32"
+        },
+        "isEligible": {
+          "type": "boolean",
+          "description": "Boolean value to determine if purchase is eligible"
+        },
+        "reason": {
+          "type": "string",
+          "description": "String reason for isEligible"
+        },
+        "reasonCode": {
+          "description": "Code reason for isEligible"
+        }
+      },
+      "description": "The response for an eligibility check.",
+      "required": [
+        "billingAccountId",
+        "billingGroupId",
+        "productId",
+        "skuId",
+        "quantity",
+        "isEligible",
+        "reason",
+        "reasonCode"
+      ]
+    }
+  },
+  "parameters": {
+    "CustomParams.resourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "description": "Resource Group Name",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CustomParams.subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "description": "Subscription ID",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

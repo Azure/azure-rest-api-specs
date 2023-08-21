@@ -1,7 +1,7 @@
 {
   "parameters": {
     "api-version": "2023-03-01-preview",
-    "resourceUri": "subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/Microsoft.HybridCompute/machines/DemoVM",
+    "resourceUri": "subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.HybridCompute/machines/DemoVM",
     "body": {
       "properties": {
         "provisioningAction": "install",
@@ -11,16 +11,17 @@
         },
         "httpProxyConfig": {
           "httpsProxy": "http://192.1.2.3:8080"
-        }
+        },
+        "privateLinkScopeResourceId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/privateLinkScopes/privateLinkScopeName"
       }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/Microsoft.HybridCompute/machines/DemoVM/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default/guestAgents/default",
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.HybridCompute/machines/DemoVM/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default/guestAgents/default",
         "name": "default",
-        "type": "Microsoft.ConnectedVMwarevSphere/VitualMachineInstances/guestAgents",
+        "type": "Microsoft.ConnectedVMwarevSphere/VirtualMachineInstances/guestAgents",
         "properties": {
           "provisioningAction": "install",
           "status": "connected",
@@ -30,9 +31,9 @@
     },
     "201": {
       "body": {
-        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/Microsoft.HybridCompute/machines/DemoVM/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default/guestAgents/default",
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.HybridCompute/machines/DemoVM/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default/guestAgents/default",
         "name": "default",
-        "type": "Microsoft.ConnectedVMwarevSphere/VitualMachineInstances/guestAgents",
+        "type": "Microsoft.ConnectedVMwarevSphere/VirtualMachineInstances/guestAgents",
         "properties": {
           "provisioningAction": "install",
           "status": "connected",

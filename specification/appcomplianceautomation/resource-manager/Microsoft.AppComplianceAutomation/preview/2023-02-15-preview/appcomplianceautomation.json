@@ -34,6 +34,138 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.AppComplianceAutomation/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Checks the report name.",
+        "operationId": "Reports_CheckNameAvailability",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "NameAvailabilityRequest object.",
+            "required": true,
+            "schema": {
+              "description": "NameAvailabilityRequest object.",
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reports_CheckNameAvailability": {
+            "$ref": "./examples/Reports_CheckNameAvailability.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AppComplianceAutomation/getCollectionCount": {
+      "post": {
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Get the resource count.",
+        "operationId": "Reports_GetCollectionCount",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Get collection count's request object.",
+            "required": true,
+            "schema": {
+              "description": "Get collection count's request object.",
+              "$ref": "#/definitions/GetCollectionCountRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GetCollectionCountResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reports_GetCollectionCount": {
+            "$ref": "./examples/Reports_GetCollectionCount.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AppComplianceAutomation/getOverviewStatus": {
+      "post": {
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Get the resource overview status.",
+        "operationId": "Reports_GetOverviewStatus",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Get overview status request object.",
+            "required": true,
+            "schema": {
+              "description": "Get overview status request object.",
+              "$ref": "#/definitions/GetOverviewStatusRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GetOverviewStatusResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reports_GetOverviewStatus": {
+            "$ref": "./examples/Reports_GetOverviewStatus.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.AppComplianceAutomation/operations": {
       "get": {
         "tags": [
@@ -177,6 +309,53 @@
         }
       }
     },
+    "/providers/Microsoft.AppComplianceAutomation/listInUseStorageAccounts": {
+      "post": {
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "List the storage accounts which are in use by related reports",
+        "operationId": "Reports_ListInUseStorageAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for listing in use storage accounts operation. If subscription list is null, it will check the user's all subscriptions.",
+            "schema": {
+              "$ref": "#/definitions/ListInUseStorageAccountsRequest"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/ListInUseStorageAccountsResponse"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListInUseStorageAccountsWithSubscriptions": {
+            "$ref": "./examples/ListInUseStorageAccountsWithSubscriptions.json"
+          },
+          "ListInUseStorageAccountsWithoutSubscriptions": {
+            "$ref": "./examples/ListInUseStorageAccountsWithoutSubscriptions.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.AppComplianceAutomation/reports": {
       "get": {
         "tags": [
@@ -196,6 +375,12 @@
           },
           {
             "$ref": "#/parameters/SelectParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/OrderByParameter"
           },
           {
             "$ref": "#/parameters/OfferGuidParameter"
@@ -414,6 +599,58 @@
         }
       }
     },
+    "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/syncCertRecord": {
+      "post": {
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Synchronize attestation record from app compliance.",
+        "operationId": "Reports_SyncCertRecord",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for synchronize certification record operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SyncCertRecordRequest"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ReportNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response indicates the given record has been successfully synchronized."
+          },
+          "202": {
+            "description": "Accepted. The response indicates the synchronize operation is performed in the background."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Reports_SyncCertRecord": {
+            "$ref": "./examples/Reports_SyncCertRecord.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/webhooks": {
       "get": {
         "tags": [
@@ -436,6 +673,12 @@
           },
           {
             "$ref": "#/parameters/SelectParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/OrderByParameter"
           }
         ],
         "responses": {
@@ -660,6 +903,12 @@
             "$ref": "#/parameters/SelectParameter"
           },
           {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/OrderByParameter"
+          },
+          {
             "$ref": "#/parameters/ReportCreatorTenantIdParameter"
           },
           {
@@ -792,9 +1041,373 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/evidences": {
+      "get": {
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Returns a paginated list of evidences for a specified report.",
+        "operationId": "Evidences_ListByReport",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ReportNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          },
+          {
+            "$ref": "#/parameters/SelectParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/OrderByParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/OfferGuidParameter"
+          },
+          {
+            "$ref": "#/parameters/ReportCreatorTenantIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EvidenceResourceList"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Evidences_ListByReport": {
+            "$ref": "./examples/Evidences_ListByReport.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/evidences/{evidenceName}": {
+      "get": {
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Get the evidence metadata",
+        "operationId": "Evidences_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ReportNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EvidenceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OfferGuidParameter"
+          },
+          {
+            "$ref": "#/parameters/ReportCreatorTenantIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EvidenceResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Evidences_Get": {
+            "$ref": "./examples/Evidences_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Create or Update an evidence a specified report",
+        "operationId": "Evidences_CreateOrUpdate",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EvidenceResource"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ReportNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EvidenceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OfferGuidParameter"
+          },
+          {
+            "$ref": "#/parameters/ReportCreatorTenantIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EvidenceResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Evidences_CreateOrUpdate": {
+            "$ref": "./examples/Evidences_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Delete an existent evidence from a specified report",
+        "operationId": "Evidences_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ReportNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EvidenceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response indicates the resource has been deleted."
+          },
+          "204": {
+            "description": "Success. The response indicates the resource is already deleted."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Evidences_Delete": {
+            "$ref": "./examples/Evidences_Delete.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/evidences/{evidenceName}/download": {
+      "post": {
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Download evidence file.",
+        "operationId": "Evidences_Download",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ReportNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EvidenceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the query operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EvidenceFileDownloadRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/EvidenceFileDownloadResponse"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Evidences_Download": {
+            "$ref": "./examples/Evidences_File_Download.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Checks the report's nested resource name availability, e.g: Webhooks, Evidences, Snapshots.",
+        "operationId": "Reports_NestedResourceCheckNameAvailability",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ReportNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "NameAvailabilityRequest object.",
+            "required": true,
+            "schema": {
+              "description": "NameAvailabilityRequest object.",
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reports_WebhookCheckNameAvailability": {
+            "$ref": "./examples/Reports_WebhookCheckNameAvailability.json"
+          },
+          "Reports_SnapshotCheckNameAvailability": {
+            "$ref": "./examples/Reports_SnapshotCheckNameAvailability.json"
+          },
+          "Reports_EvidenceCheckNameAvailability": {
+            "$ref": "./examples/Reports_EvidenceCheckNameAvailability.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "GetOverviewStatusRequest": {
+      "description": "The get overview status request body.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The resource type.",
+          "type": "string"
+        }
+      }
+    },
+    "GetOverviewStatusResponse": {
+      "description": "The get overview status response.",
+      "type": "object",
+      "properties": {
+        "statusList": {
+          "type": "array",
+          "description": "List of different status items.",
+          "items": {
+            "description": "Single status item.",
+            "$ref": "#/definitions/StatusItem"
+          },
+          "x-ms-identifiers": [
+            "statusName"
+          ]
+        }
+      }
+    },
+    "GetCollectionCountRequest": {
+      "description": "The get collection count request body.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The resource type.",
+          "type": "string"
+        }
+      }
+    },
+    "GetCollectionCountResponse": {
+      "description": "The get collection count response.",
+      "type": "object",
+      "properties": {
+        "count": {
+          "description": "The count of the specified resource.",
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
     "OverviewStatus": {
       "description": "The overview of the compliance result for one report.",
       "type": "object",
@@ -802,17 +1415,27 @@
         "passedCount": {
           "format": "int32",
           "type": "integer",
-          "description": "The count of all passed full automation control."
+          "description": "The count of all passed control."
         },
         "failedCount": {
           "format": "int32",
           "type": "integer",
-          "description": "The count of all failed full automation control."
+          "description": "The count of all failed control."
         },
         "manualCount": {
           "format": "int32",
           "type": "integer",
           "description": "The count of all manual control."
+        },
+        "notApplicableCount": {
+          "format": "int32",
+          "type": "integer",
+          "description": "The count of all not applicable control."
+        },
+        "pendingCount": {
+          "format": "int32",
+          "type": "integer",
+          "description": "The count of all pending for approval control."
         }
       }
     },
@@ -824,6 +1447,42 @@
         "m365": {
           "description": "The Microsoft 365 certification name.",
           "$ref": "#/definitions/OverviewStatus"
+        }
+      }
+    },
+    "StorageInfo": {
+      "type": "object",
+      "description": "The information of 'bring your own storage' account binding to the report",
+      "properties": {
+        "subscriptionId": {
+          "description": "The subscription id which 'bring your own storage' account belongs to",
+          "type": "string"
+        },
+        "resourceGroup": {
+          "description": "The resourceGroup which 'bring your own storage' account belongs to",
+          "type": "string"
+        },
+        "accountName": {
+          "description": "'bring your own storage' account name",
+          "type": "string"
+        },
+        "location": {
+          "description": "The region of 'bring your own storage' account",
+          "type": "string"
+        }
+      }
+    },
+    "StatusItem": {
+      "type": "object",
+      "description": "Single status.",
+      "properties": {
+        "statusName": {
+          "description": "Status name - e.g. \"Active\", \"Failed\".",
+          "type": "string"
+        },
+        "statusValue": {
+          "description": "Status value. e.g. \"100\", or \"100%\".",
+          "type": "string"
         }
       }
     },
@@ -862,14 +1521,6 @@
         "accountId": {
           "description": "Account Id. For example - the AWS account id.",
           "type": "string"
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource's tag type.",
-          "additionalProperties": {
-            "description": "Tag properties.",
-            "type": "string"
-          }
         }
       }
     },
@@ -955,6 +1606,22 @@
           "readOnly": true,
           "description": "Report compliance status.",
           "$ref": "#/definitions/ReportComplianceStatus"
+        },
+        "storageInfo": {
+          "description": "The information of 'bring your own storage' binding to the report",
+          "$ref": "#/definitions/StorageInfo"
+        },
+        "certRecords": {
+          "type": "array",
+          "description": "List of synchronized certification records.",
+          "items": {
+            "description": "Single synchronized certification record.",
+            "$ref": "#/definitions/CertSyncRecord"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "offerGuid"
+          ]
         },
         "provisioningState": {
           "readOnly": true,
@@ -1499,7 +2166,7 @@
       "description": "A class represent the control.",
       "properties": {
         "controlId": {
-          "description": "The Id of the control. e.g. \"Operational Security#10\"",
+          "description": "The Id of the control. e.g. \"Operational_Security_10\"",
           "type": "string",
           "readOnly": true
         },
@@ -1621,6 +2288,51 @@
         }
       }
     },
+    "CertSyncRecord": {
+      "type": "object",
+      "description": "A class represent the certification record synchronized from app compliance.",
+      "properties": {
+        "offerGuid": {
+          "type": "string",
+          "description": "The offerGuid which mapping to the reports.",
+          "x-ms-parameter-location": "method",
+          "minLength": 1
+        },
+        "certificationStatus": {
+          "type": "string",
+          "description": "Indicates the status of certification process."
+        },
+        "ingestionStatus": {
+          "type": "string",
+          "description": "Indicates the status of compliance process."
+        },
+        "controls": {
+          "description": "The control records list to be synchronized.",
+          "type": "array",
+          "items": {
+            "description": "Single control record to be synchronized.",
+            "$ref": "#/definitions/ControlSyncRecord"
+          },
+          "x-ms-identifiers": [
+            "controlId"
+          ]
+        }
+      }
+    },
+    "ControlSyncRecord": {
+      "type": "object",
+      "description": "A class represent the control record synchronized from app compliance.",
+      "properties": {
+        "controlId": {
+          "description": "The Id of the control. e.g. \"Operational_Security_10\"",
+          "type": "string"
+        },
+        "controlStatus": {
+          "description": "Control status synchronized from app compliance.",
+          "type": "string"
+        }
+      }
+    },
     "SnapshotDownloadRequest": {
       "type": "object",
       "description": "Snapshot's download request.",
@@ -1646,6 +2358,22 @@
             "name": "DownloadType",
             "modelAsString": true
           }
+        },
+        "offerGuid": {
+          "type": "string",
+          "description": "The offerGuid which mapping to the reports.",
+          "x-ms-parameter-location": "method",
+          "minLength": 1
+        }
+      }
+    },
+    "EvidenceFileDownloadRequest": {
+      "type": "object",
+      "description": "Evidence file's download request.",
+      "properties": {
+        "reportCreatorTenantId": {
+          "description": "Tenant id.",
+          "type": "string"
         },
         "offerGuid": {
           "type": "string",
@@ -1682,6 +2410,47 @@
           "items": {
             "description": "Subscription id for onboard",
             "type": "string"
+          }
+        }
+      }
+    },
+    "SyncCertRecordRequest": {
+      "type": "object",
+      "description": "Synchronize certification record request.",
+      "required": [
+        "certRecord"
+      ],
+      "properties": {
+        "certRecord": {
+          "description": "certification record to be synchronized.",
+          "$ref": "#/definitions/CertSyncRecord"
+        }
+      }
+    },
+    "ListInUseStorageAccountsRequest": {
+      "type": "object",
+      "description": "List in use storage accounts request.",
+      "properties": {
+        "subscriptionIds": {
+          "description": "List of subscription ids to be query. If the list is null or empty, the API will query all the subscriptions of the user.",
+          "type": "array",
+          "items": {
+            "description": "Subscription id for querying.",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ListInUseStorageAccountsResponse": {
+      "type": "object",
+      "description": "List in use storage accounts response.",
+      "properties": {
+        "storageAccountList": {
+          "description": "The storage account list which in use in related reports.",
+          "type": "array",
+          "items": {
+            "description": "Single storage account info.",
+            "$ref": "#/definitions/StorageInfo"
           }
         }
       }
@@ -1823,6 +2592,14 @@
           "readOnly": true,
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
         },
+        "complianceData": {
+          "type": "object",
+          "readOnly": true,
+          "description": "The compliance data.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "complianceResults": {
           "readOnly": true,
           "type": "array",
@@ -1931,12 +2708,30 @@
         }
       }
     },
+    "EvidenceFileDownloadResponse": {
+      "description": "Object that includes all the possible response for the evidence file download operation.",
+      "type": "object",
+      "properties": {
+        "evidenceFile": {
+          "description": "The uri of evidence file",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "url": {
+              "description": "The url of evidence file",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
     "DownloadResponse": {
       "description": "Object that includes all the possible response for the download operation.",
       "type": "object",
       "properties": {
         "resourceList": {
-          "description": "List of the reports",
+          "description": "Resource list of the report",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -2063,6 +2858,90 @@
         "name": "provisioningState",
         "modelAsString": true
       }
+    },
+    "EvidenceProperties": {
+      "type": "object",
+      "description": "Evidence's properties.",
+      "properties": {
+        "evidenceType": {
+          "description": "Evidence type.",
+          "$ref": "#/definitions/EvidenceType"
+        },
+        "evidenceName": {
+          "type": "string",
+          "description": "Evidence name.",
+          "readOnly": true
+        },
+        "filePath": {
+          "type": "string",
+          "description": "The path of the file in storage."
+        },
+        "controlId": {
+          "type": "string",
+          "description": "Control id."
+        },
+        "responsibilityId": {
+          "type": "string",
+          "description": "Responsibility id."
+        },
+        "reportName": {
+          "type": "string",
+          "description": "Report name.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "description": "Azure lifecycle management",
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      }
+    },
+    "EvidenceType": {
+      "type": "string",
+      "description": "Evidence type",
+      "enum": [
+        "File"
+      ],
+      "x-ms-enum": {
+        "name": "EvidenceType",
+        "modelAsString": true
+      }
+    },
+    "EvidenceResource": {
+      "type": "object",
+      "description": "A class represent an AppComplianceAutomation evidence resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Evidence property.",
+          "$ref": "#/definitions/EvidenceProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "EvidenceResourceList": {
+      "description": "Object that includes an array of resources and a possible link for next set.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of the evidence resources.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/EvidenceResource"
+          }
+        },
+        "nextLink": {
+          "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -2090,6 +2969,14 @@
       "required": true,
       "type": "string",
       "pattern": "^[-a-zA-Z0-9_]{1,50}$",
+      "x-ms-parameter-location": "method"
+    },
+    "EvidenceNameParameter": {
+      "name": "evidenceName",
+      "in": "path",
+      "description": "The evidence name.",
+      "required": true,
+      "type": "string",
       "x-ms-parameter-location": "method"
     },
     "SkipTokenParameter": {
@@ -2153,6 +3040,24 @@
       "required": false,
       "type": "string",
       "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. ?$select=reportName,id.",
+      "x-ms-parameter-location": "method",
+      "minLength": 1
+    },
+    "OrderByParameter": {
+      "name": "$orderby",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "OData order by query option.",
+      "x-ms-parameter-location": "method",
+      "minLength": 1
+    },
+    "FilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The filter to apply on the operation.",
       "x-ms-parameter-location": "method",
       "minLength": 1
     }

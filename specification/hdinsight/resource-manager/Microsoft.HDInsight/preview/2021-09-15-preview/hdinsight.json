@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "HDInsight AKS Management Client",
-    "description": "The HDInsight AKS Management Client.",
+    "title": "HDInsight on AKS Management Client",
+    "description": "The HDInsight on AKS Management Client.",
     "version": "2021-09-15-preview"
   },
   "host": "management.azure.com",
@@ -130,7 +130,7 @@
       },
       "patch": {
         "description": "Updates an existing Cluster Pool Tags.",
-        "operationId": "ClusterPool_UpdateTags",
+        "operationId": "ClusterPools_UpdateTags",
         "x-ms-examples": {
           "ClusterPoolsPatchTags": {
             "$ref": "./examples/PatchClusterPool.json"
@@ -178,6 +178,10 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       },
       "delete": {
@@ -385,7 +389,7 @@
         "description": "Creates or updates a cluster.",
         "x-ms-examples": {
           "HDInsightClusterPut": {
-            "$ref": "./examples/CreateCluster.json"
+            "$ref": "./examples/CreateAutoscaleCluster.json"
           },
           "HDInsightSparkClusterPut": {
             "$ref": "./examples/CreateSparkCluster.json"
@@ -444,7 +448,7 @@
       },
       "patch": {
         "description": "Updates an existing Cluster Tags.",
-        "operationId": "Cluster_UpdateTags",
+        "operationId": "Clusters_UpdateTags",
         "x-ms-examples": {
           "HDInsightClustersPatchTags": {
             "$ref": "./examples/PatchCluster.json"
@@ -545,6 +549,115 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/runJob": {
+      "post": {
+        "operationId": "ClusterJobs_RunJob",
+        "description": "Operations on jobs of HDInsight on AKS cluster.",
+        "x-ms-examples": {
+          "RunClusterJob": {
+            "$ref": "./examples/RunClusterJob.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "ClusterJob",
+            "description": "The Cluster job.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterJob"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/ClusterJob"
+            }
+          },
+          "202": {
+            "description": "Run cluster job action request accepted.",
+            "headers": {
+              "location": {
+                "type": "string",
+                "description": "URL to get the status of the run job operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error Response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/jobs": {
+      "get": {
+        "operationId": "ClusterJobs_List",
+        "description": "Get jobs of HDInsight on AKS cluster.",
+        "x-ms-examples": {
+          "ListClusterJobs": {
+            "$ref": "./examples/ListClusterJobs.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cluster job details.",
+            "schema": {
+              "$ref": "#/definitions/ClusterJobList"
+            }
+          },
+          "default": {
+            "description": "Error Response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/serviceConfigs": {
       "get": {
         "operationId": "Clusters_ListServiceConfigs",
@@ -587,314 +700,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/sessionClusters/{sessionClusterName}/serviceConfigs": {
-      "get": {
-        "operationId": "SessionClusters_ListServiceConfigs",
-        "description": "Lists the config dump of all services running in session cluster.",
-        "x-ms-examples": {
-          "HDInsightSessionClusterGetServiceConfigs": {
-            "$ref": "./examples/GetSessionClusterServiceConfigs.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterPoolNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SessionClusterNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ServiceConfigListResult"
-            }
-          },
-          "default": {
-            "description": "Error Response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/sessionClusters": {
-      "get": {
-        "operationId": "SessionClusters_ListByClusterName",
-        "description": "Lists the HDInsight session clusters under a cluster.",
-        "x-ms-examples": {
-          "HDInsightSessionClustersListByClusterName": {
-            "$ref": "./examples/ListSessionClustersByClusterName.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterPoolNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Session clusters successfully returned.",
-            "schema": {
-              "$ref": "#/definitions/SessionClusterListResult"
-            }
-          },
-          "default": {
-            "description": "Error Response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/sessionClusters/{sessionClusterName}": {
-      "get": {
-        "operationId": "SessionClusters_Get",
-        "description": "Gets a HDInsight session cluster.",
-        "x-ms-examples": {
-          "HDInsightSessionClusterGet": {
-            "$ref": "./examples/GetSessionCluster.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterPoolNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SessionClusterNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Session cluster details.",
-            "schema": {
-              "$ref": "#/definitions/SessionCluster"
-            }
-          },
-          "default": {
-            "description": "Error Response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "put": {
-        "operationId": "SessionClusters_CreateOrUpdate",
-        "description": "Creates or updates an HDInsight session cluster.",
-        "x-ms-examples": {
-          "HDInsightSessionClusterPut": {
-            "$ref": "./examples/CreateSessionCluster.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterPoolNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SessionClusterNameParameter"
-          },
-          {
-            "name": "HDInsightSessionCluster",
-            "in": "body",
-            "required": true,
-            "description": "The session cluster to create.",
-            "schema": {
-              "$ref": "#/definitions/SessionCluster"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Session create/update request accepted.",
-            "schema": {
-              "$ref": "#/definitions/SessionCluster"
-            }
-          },
-          "200": {
-            "description": "Successful.",
-            "schema": {
-              "$ref": "#/definitions/SessionCluster"
-            }
-          },
-          "default": {
-            "description": "Error Response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        }
-      },
-      "patch": {
-        "description": "Update tags for an existing HDInsight session cluster.",
-        "operationId": "SessionCluster_UpdateTags",
-        "x-ms-examples": {
-          "HDInsightSessionClustersPatchTags": {
-            "$ref": "./examples/PatchSessionCluster.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterPoolNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SessionClusterNameParameter"
-          },
-          {
-            "name": "sessionClusterTags",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TagsObject"
-            },
-            "description": "Parameters supplied to update tags."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful.",
-            "schema": {
-              "$ref": "#/definitions/SessionCluster"
-            }
-          },
-          "202": {
-            "description": "Accepted.",
-            "schema": {
-              "$ref": "#/definitions/SessionCluster"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "SessionClusters_Delete",
-        "description": "Deletes an HDInsight session cluster.",
-        "x-ms-examples": {
-          "HDInsightSessionClustersDelete": {
-            "$ref": "./examples/DeleteSessionCluster.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterPoolNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SessionClusterNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful."
-          },
-          "202": {
-            "description": "Session cluster delete request accepted."
-          },
-          "204": {
-            "description": "No content - The session cluster doesn't exist."
-          },
-          "default": {
-            "description": "Error Response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -1030,99 +835,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/sessionClusters/{sessionClusterName}/instanceViews": {
-      "get": {
-        "operationId": "SessionClusters_ListInstanceViews",
-        "x-ms-examples": {
-          "HDInsightSessionClusterGetInstanceViews": {
-            "$ref": "./examples/ListSessionClusterInstanceViews.json"
-          }
-        },
-        "description": "Lists the list of instance views",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterPoolNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SessionClusterNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ClusterInstanceViewsResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/sessionClusters/{sessionClusterName}/instanceViews/default": {
-      "get": {
-        "operationId": "SessionClusters_GetInstanceView",
-        "description": "Gets the status of a cluster instance.",
-        "x-ms-examples": {
-          "HDInsightSessionClusterGetInstanceView": {
-            "$ref": "./examples/GetSessionClusterInstanceView.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterPoolNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SessionClusterNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ClusterInstanceViewResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/providers/Microsoft.HDInsight/operations": {
       "get": {
         "description": "Returns list of operations.",
@@ -1200,7 +912,7 @@
         "description": "Returns cluster type versions by type name.",
         "operationId": "clusterOfferingVersions_GetByClusterType",
         "x-ms-examples": {
-          "ClusterTypeVersionListResult": {
+          "ClusterTypeVersionGetResult": {
             "$ref": "./examples/GetClusterOfferingVersions.json"
           }
         },
@@ -1233,6 +945,84 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/availableClusterPoolVersions": {
+      "get": {
+        "description": "Returns a list of available cluster pool versions.",
+        "operationId": "AvailableClusterPoolVersions_ListByLocation",
+        "x-ms-examples": {
+          "ClusterPoolVersionListResult": {
+            "$ref": "./examples/ListAvailableClusterPoolVersions.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Available cluster pool versions successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/ClusterPoolVersionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error Response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/availableClusterVersions": {
+      "get": {
+        "description": "Returns a list of available cluster versions.",
+        "operationId": "AvailableClusterVersions_ListByLocation",
+        "x-ms-examples": {
+          "ClusterPoolVersionListResult": {
+            "$ref": "./examples/ListAvailableClusterVersions.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Available cluster versions successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/ClusterVersionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error Response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -1253,6 +1043,38 @@
         }
       },
       "description": "The list cluster pools operation response."
+    },
+    "ClusterPoolProfile": {
+      "type": "object",
+      "description": "Cluster pool profile.",
+      "required": [
+        "clusterPoolVersion"
+      ],
+      "properties": {
+        "clusterPoolVersion": {
+          "$ref": "#/definitions/ClusterPoolVersionPattern"
+        }
+      }
+    },
+    "ClusterPoolComputeProfile": {
+      "type": "object",
+      "description": "Cluster pool compute profile.",
+      "required": [
+        "vmSize"
+      ],
+      "properties": {
+        "vmSize": {
+          "type": "string",
+          "description": "The virtual machine SKU.",
+          "pattern": "^[a-zA-Z0-9_\\-]{0,256}$"
+        },
+        "count": {
+          "description": "The number of virtual machines.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        }
+      }
     },
     "ClusterPoolNetworkProfile": {
       "type": "object",
@@ -1302,6 +1124,11 @@
               "$ref": "#/definitions/IdentityProfile"
             }
           ]
+        },
+        "aksVersion": {
+          "type": "string",
+          "description": "AKS control plane and default node pool version of this ClusterPool",
+          "readOnly": true
         }
       }
     },
@@ -1341,6 +1168,22 @@
           "description": "A resource group created by AKS, to hold the infrastructure resources created by AKS on-behalf of customers. It is generated by cluster pool name and managed resource group name by pattern: MC_{managedResourceGroupName}_{clusterPoolName}_{region}",
           "readOnly": true,
           "example": "MC_hdi-45cd32aead6e4a91b079a0cdbfac8c36_test-pool_eastus"
+        },
+        "clusterPoolProfile": {
+          "description": "CLuster pool profile.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ClusterPoolProfile"
+            }
+          ]
+        },
+        "computeProfile": {
+          "description": "CLuster pool compute profile.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ClusterPoolComputeProfile"
+            }
+          ]
         },
         "aksClusterProfile": {
           "description": "Properties of underlying AKS cluster.",
@@ -1462,6 +1305,20 @@
         }
       }
     },
+    "ClusterPrometheusProfile": {
+      "type": "object",
+      "description": "Cluster Prometheus profile.",
+      "required": [
+        "enabled"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enable Prometheus for cluster or not.",
+          "default": false
+        }
+      }
+    },
     "IdentityProfile": {
       "type": "object",
       "description": "Identity Profile with details of an MSI.",
@@ -1488,7 +1345,7 @@
         }
       }
     },
-    "ClusterAuthorizationProfile": {
+    "AuthorizationProfile": {
       "type": "object",
       "description": "Authorization profile with details of AAD user Ids and group Ids authorized for data plane access.",
       "properties": {
@@ -1508,7 +1365,7 @@
         }
       }
     },
-    "ClusterSecretReference": {
+    "SecretReference": {
       "type": "object",
       "description": "Secret reference and corresponding properties of a key vault secret.",
       "required": [
@@ -1537,7 +1394,7 @@
         }
       }
     },
-    "ClusterSecretsProfile": {
+    "SecretsProfile": {
       "type": "object",
       "description": "The cluster secret profile.",
       "required": [
@@ -1553,7 +1410,7 @@
           "type": "array",
           "description": "Properties of Key Vault secret.",
           "items": {
-            "$ref": "#/definitions/ClusterSecretReference"
+            "$ref": "#/definitions/SecretReference"
           },
           "x-ms-identifiers": []
         }
@@ -1574,6 +1431,18 @@
         "content": {
           "type": "string",
           "description": "Free form content of the entire configuration file."
+        },
+        "encoding": {
+          "type": "string",
+          "description": "This property indicates if the content is encoded and is case-insensitive. Please set the value to base64 if the content is base64 encoded. Set it to none or skip it if the content is plain text.",
+          "enum": [
+            "Base64",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ContentEncoding",
+            "modelAsString": true
+          }
         },
         "path": {
           "type": "string",
@@ -1668,7 +1537,7 @@
         "fqdn": {
           "type": "string",
           "description": "Web connectivity endpoint.",
-          "example": "clusterName.clusterPoolName.eastus.projecthilo.net"
+          "example": "clusterName11223344.clusterPoolName55667788.eastus.hdinsightaks.net"
         }
       },
       "readOnly": true
@@ -1683,14 +1552,13 @@
         "endpoint": {
           "type": "string",
           "description": "SSH connectivity endpoint.",
-          "example": "clusterName.clusterPoolName.eastus.projecthilo.net/ssh/host/podPrefix-0"
+          "example": "clusterName11223344.clusterPoolName55667788.eastus.hdinsightaks.net/ssh/host/podPrefix-0"
         }
       }
     },
     "ClusterProfile": {
       "type": "object",
       "required": [
-        "stackVersion",
         "identityProfile",
         "authorizationProfile"
       ],
@@ -1700,14 +1568,23 @@
           "description": "The stack version.",
           "pattern": "^(0|[1-9][0-9]{0,18})\\.(0|[1-9][0-9]{0,18})\\.(0|[1-9][0-9]{0,18})-(0|[1-9][0-9]{0,18})\\.(0|[1-9][0-9]{0,18})$"
         },
+        "clusterVersion": {
+          "$ref": "#/definitions/ThreeOrFourPartVersionPattern"
+        },
+        "ossVersion": {
+          "$ref": "#/definitions/ThreePartVersionPattern"
+        },
+        "components": {
+          "$ref": "#/definitions/ClusterComponents"
+        },
         "identityProfile": {
           "$ref": "#/definitions/IdentityProfile"
         },
         "authorizationProfile": {
-          "$ref": "#/definitions/ClusterAuthorizationProfile"
+          "$ref": "#/definitions/AuthorizationProfile"
         },
         "secretsProfile": {
-          "$ref": "#/definitions/ClusterSecretsProfile"
+          "$ref": "#/definitions/SecretsProfile"
         },
         "serviceConfigsProfiles": {
           "type": "array",
@@ -1723,6 +1600,9 @@
         "logAnalyticsProfile": {
           "$ref": "#/definitions/ClusterLogAnalyticsProfile"
         },
+        "prometheusProfile": {
+          "$ref": "#/definitions/ClusterPrometheusProfile"
+        },
         "sshProfile": {
           "$ref": "#/definitions/SshProfile"
         },
@@ -1732,51 +1612,29 @@
         "kafkaProfile": {
           "type": "object",
           "description": "Kafka cluster profile.",
-          "additionalProperties": {
-            "type": "object"
-          }
+          "additionalProperties": true
         },
         "trinoProfile": {
-          "type": "object",
-          "description": "Trino cluster profile.",
-          "additionalProperties": {
-            "type": "object"
-          }
+          "$ref": "#/definitions/TrinoProfile"
         },
         "llapProfile": {
           "type": "object",
           "description": "LLAP cluster profile.",
-          "additionalProperties": {
-            "type": "object"
-          }
+          "additionalProperties": true
         },
         "flinkProfile": {
-          "type": "object",
-          "description": "Flink cluster profile.",
-          "additionalProperties": {
-            "type": "object"
-          }
+          "$ref": "#/definitions/FlinkProfile"
         },
         "sparkProfile": {
-          "type": "object",
-          "description": "Spark cluster profile.",
-          "additionalProperties": {
-            "type": "object"
-          }
+          "$ref": "#/definitions/SparkProfile"
         },
         "stubProfile": {
           "type": "object",
           "description": "Stub cluster profile.",
-          "additionalProperties": {
-            "type": "object"
-          }
+          "additionalProperties": true
         },
-        "sessionStubProfile": {
-          "type": "object",
-          "description": "Session stub cluster profile.",
-          "additionalProperties": {
-            "type": "object"
-          }
+        "scriptActionProfiles": {
+          "$ref": "#/definitions/ScriptActionProfiles"
         }
       },
       "description": "Cluster profile."
@@ -1798,10 +1656,7 @@
         "podPrefix": {
           "type": "string",
           "description": "Prefix of the pod names. Pod number will be appended to the prefix. The ingress URLs for the pods will be available at <clusterFqdn>/<sshBasePath>/<prefix>-<number>",
-          "minLength": 1,
-          "maxLength": 58,
-          "pattern": "^[a-z]([-a-z0-9]*[a-z0-9])?$",
-          "default": "pod"
+          "readOnly": true
         }
       }
     },
@@ -1818,6 +1673,7 @@
         },
         "gracefulDecommissionTimeout": {
           "type": "integer",
+          "format": "int32",
           "description": "This property is for graceful decommission timeout; It has a default setting of 3600 seconds before forced shutdown takes place. This is the maximal time to wait for running containers and applications to complete before transition a DECOMMISSIONING node into DECOMMISSIONED. The default value is 3600 seconds. Negative value (like -1) is handled as infinite timeout."
         },
         "autoscaleType": {
@@ -1826,7 +1682,11 @@
           "enum": [
             "ScheduleBased",
             "LoadBased"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "AutoscaleType",
+            "modelAsString": true
+          }
         },
         "scheduleBasedConfig": {
           "description": "Profiles of schedule based Autoscale.",
@@ -1861,12 +1721,14 @@
           "description": "This specifies the schedules where scheduled based Autoscale to be enabled, the user has a choice to set multiple rules within the schedule across days and times (start/end).",
           "items": {
             "$ref": "#/definitions/Schedule"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
     "Schedule": {
       "type": "object",
+      "description": "Schedule definition.",
       "required": [
         "days",
         "startTime",
@@ -1902,7 +1764,11 @@
               "Thursday",
               "Friday",
               "Saturday"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "ScheduleDay",
+              "modelAsString": true
+            }
           }
         }
       }
@@ -1933,18 +1799,22 @@
         },
         "cooldownPeriod": {
           "type": "integer",
+          "format": "int32",
           "description": "This is a cool down period, this is a time period in seconds, which determines the amount of time that must elapse between a scaling activity started by a rule and the start of the next scaling activity, regardless of the rule that triggers it. The default value is 300 seconds."
         },
         "scalingRules": {
           "type": "array",
+          "description": "The scaling rules.",
           "items": {
             "$ref": "#/definitions/ScalingRule"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
     "ScalingRule": {
       "type": "object",
+      "description": "The scaling rule.",
       "required": [
         "actionType",
         "comparisonRule",
@@ -1954,10 +1824,15 @@
       "properties": {
         "actionType": {
           "type": "string",
+          "description": "The action type.",
           "enum": [
             "scaleup",
             "scaledown"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "ScaleActionType",
+            "modelAsString": true
+          }
         },
         "evaluationCount": {
           "type": "integer",
@@ -1966,7 +1841,7 @@
         },
         "scalingMetric": {
           "type": "string",
-          "description": "Metrics name for individual workloads."
+          "description": "Metrics name for individual workloads. For example: cpu"
         },
         "comparisonRule": {
           "$ref": "#/definitions/ComparisonRule"
@@ -1975,6 +1850,7 @@
     },
     "ComparisonRule": {
       "type": "object",
+      "description": "The comparison rule.",
       "required": [
         "operator",
         "threshold"
@@ -1982,12 +1858,17 @@
       "properties": {
         "operator": {
           "type": "string",
+          "description": "The comparison operator.",
           "enum": [
             "greaterThan",
             "greaterThanOrEqual",
             "lessThan",
             "lessThanOrEqual"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "ComparisonOperator",
+            "modelAsString": true
+          }
         },
         "threshold": {
           "type": "number",
@@ -1995,11 +1876,436 @@
         }
       }
     },
+    "TrinoProfile": {
+      "type": "object",
+      "description": "Trino Cluster profile.",
+      "properties": {
+        "catalogOptions": {
+          "$ref": "#/definitions/CatalogOptions"
+        },
+        "coordinator": {
+          "$ref": "#/definitions/TrinoCoordinator"
+        },
+        "userPluginsSpec": {
+          "$ref": "#/definitions/TrinoUserPlugins"
+        },
+        "userTelemetrySpec": {
+          "$ref": "#/definitions/TrinoUserTelemetry"
+        },
+        "worker": {
+          "$ref": "#/definitions/TrinoWorker"
+        }
+      }
+    },
+    "CatalogOptions": {
+      "type": "object",
+      "description": "Trino cluster catalog options.",
+      "properties": {
+        "hive": {
+          "type": "array",
+          "description": "hive catalog options.",
+          "items": {
+            "$ref": "#/definitions/HiveCatalogOption"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "HiveCatalogOption": {
+      "type": "object",
+      "description": "Hive Catalog Option",
+      "required": [
+        "catalogName",
+        "metastoreDbConnectionURL",
+        "metastoreDbConnectionUserName",
+        "metastoreDbConnectionPassword",
+        "metastoreWarehouseDir"
+      ],
+      "properties": {
+        "catalogName": {
+          "description": "Name of trino catalog which should use specified hive metastore.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "metastoreDbConnectionPassword": {
+          "description": "Password for database connection.",
+          "type": "string"
+        },
+        "metastoreDbConnectionURL": {
+          "description": "Connection string for hive metastore database.",
+          "type": "string"
+        },
+        "metastoreDbConnectionUserName": {
+          "description": "User name for database connection.",
+          "type": "string"
+        },
+        "metastoreWarehouseDir": {
+          "description": "Metastore root directory URI, format: abfs[s]://<container>@<account_name>.dfs.core.windows.net/<path>. More details: https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction-abfs-uri",
+          "type": "string"
+        }
+      }
+    },
+    "FlinkCatalogOptions": {
+      "type": "object",
+      "description": "Flink cluster catalog options.",
+      "properties": {
+        "hive": {
+          "$ref": "#/definitions/FlinkHiveCatalogOption"
+        }
+      }
+    },
+    "FlinkHiveCatalogOption": {
+      "type": "object",
+      "description": "Hive Catalog Option for Flink cluster.",
+      "required": [
+        "metastoreDbConnectionURL",
+        "metastoreDbConnectionUserName",
+        "metastoreDbConnectionPasswordSecret"
+      ],
+      "properties": {
+        "metastoreDbConnectionPasswordSecret": {
+          "description": "The secret whose value is the password for database connection.",
+          "type": "string"
+        },
+        "metastoreDbConnectionURL": {
+          "description": "Connection string for hive metastore database.",
+          "type": "string"
+        },
+        "metastoreDbConnectionUserName": {
+          "description": "User name for database connection.",
+          "type": "string"
+        }
+      }
+    },
+    "TrinoCoordinator": {
+      "type": "object",
+      "description": "Trino Coordinator.",
+      "properties": {
+        "debug": {
+          "$ref": "#/definitions/TrinoDebugConfig",
+          "x-ms-client-flatten": true
+        },
+        "highAvailabilityEnabled": {
+          "type": "boolean",
+          "description": "The flag that if enable coordinator HA, uses multiple coordinator replicas with auto failover, one per each head node. Default: true.",
+          "default": true
+        }
+      }
+    },
+    "TrinoWorker": {
+      "type": "object",
+      "description": "Trino worker.",
+      "properties": {
+        "debug": {
+          "$ref": "#/definitions/TrinoDebugConfig",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "TrinoDebugConfig": {
+      "type": "object",
+      "description": "Trino debug configuration.",
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "description": "The flag that if enable debug or not.",
+          "default": false
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The debug port.",
+          "default": 8008
+        },
+        "suspend": {
+          "type": "boolean",
+          "description": "The flag that if suspend debug or not.",
+          "default": false
+        }
+      }
+    },
+    "TrinoUserTelemetry": {
+      "type": "object",
+      "description": "User telemetry",
+      "properties": {
+        "storage": {
+          "$ref": "#/definitions/TrinoTelemetryConfig"
+        }
+      }
+    },
+    "TrinoTelemetryConfig": {
+      "type": "object",
+      "description": "Trino user telemetry definition.",
+      "properties": {
+        "hivecatalogName": {
+          "type": "string",
+          "description": "Hive Catalog name used to mount external tables on the logs written by trino, if not specified there tables are not created.",
+          "minLength": 1
+        },
+        "hivecatalogSchema": {
+          "type": "string",
+          "description": "Schema of the above catalog to use, to mount query logs as external tables, if not specified tables will be mounted under schema trinologs.",
+          "default": "trinologs"
+        },
+        "partitionRetentionInDays": {
+          "type": "integer",
+          "description": "Retention period for query log table partitions, this doesn't have any affect on actual data.",
+          "format": "int32",
+          "default": 365
+        },
+        "path": {
+          "type": "string",
+          "description": "Azure storage location of the blobs.",
+          "minLength": 1
+        }
+      }
+    },
+    "TrinoUserPlugins": {
+      "type": "object",
+      "description": "Trino user plugins spec",
+      "properties": {
+        "plugins": {
+          "type": "array",
+          "description": "Trino user plugins.",
+          "items": {
+            "$ref": "#/definitions/TrinoUserPlugin"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "TrinoUserPlugin": {
+      "type": "object",
+      "description": "Trino user plugin.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Denotes whether the plugin is active or not."
+        },
+        "name": {
+          "type": "string",
+          "description": "This field maps to the sub-directory in trino plugins location, that will contain all the plugins under path.",
+          "minLength": 1
+        },
+        "path": {
+          "type": "string",
+          "description": "Fully qualified path to the folder containing the plugins.",
+          "minLength": 1,
+          "pattern": "^(https)|(abfss)://.*$"
+        }
+      }
+    },
+    "SparkProfile": {
+      "type": "object",
+      "description": "The spark cluster profile.",
+      "properties": {
+        "defaultStorageUrl": {
+          "type": "string",
+          "description": "The default storage URL."
+        },
+        "metastoreSpec": {
+          "$ref": "#/definitions/SparkMetastoreSpec"
+        },
+        "userPluginsSpec": {
+          "$ref": "#/definitions/SparkUserPlugins"
+        }
+      }
+    },
+    "SparkUserPlugins": {
+      "type": "object",
+      "description": "Spark user plugins spec",
+      "properties": {
+        "plugins": {
+          "type": "array",
+          "description": "Spark user plugins.",
+          "items": {
+            "$ref": "#/definitions/SparkUserPlugin"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SparkUserPlugin": {
+      "type": "object",
+      "description": "Spark user plugin.",
+      "required": [
+        "path"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Fully qualified path to the folder containing the plugins.",
+          "minLength": 1,
+          "pattern": "^(https)|(abfss)://.*$"
+        }
+      }
+    },
+    "ScriptActionProfiles": {
+      "type": "array",
+      "description": "The script action profile list.",
+      "items": {
+        "$ref": "#/definitions/ScriptActionProfile"
+      }
+    },
+    "ScriptActionProfile": {
+      "type": "object",
+      "description": "The script action profile.",
+      "required": [
+        "name",
+        "type",
+        "url",
+        "services"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the script action. Supported type is bash scripts."
+        },
+        "name": {
+          "type": "string",
+          "description": "Script name."
+        },
+        "url": {
+          "type": "string",
+          "description": "Url of the script file.",
+          "pattern": "^(https)|(http)|(abfss)|(abfs)|(wasbs)|(wasb)://.*$"
+        },
+        "parameters": {
+          "type": "string",
+          "description": "Additional parameters for the script action. It should be space-separated list of arguments required for script execution."
+        },
+        "services": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "List of services to apply the script action."
+        },
+        "timeoutInMinutes": {
+          "type": "integer",
+          "description": "Timeout duration for the script action in minutes."
+        },
+        "shouldPersist": {
+          "type": "boolean",
+          "default": true,
+          "description": "Specify if the script should persist on the cluster."
+        }
+      }
+    },
+    "SparkMetastoreSpec": {
+      "type": "object",
+      "description": "The metastore specification for Spark cluster.",
+      "required": [
+        "dbServerHost",
+        "dbUserName",
+        "dbPasswordSecretName",
+        "keyVaultId"
+      ],
+      "properties": {
+        "dbServerHost": {
+          "type": "string",
+          "description": "The database server host."
+        },
+        "dbName": {
+          "type": "string",
+          "description": "The database name."
+        },
+        "dbUserName": {
+          "type": "string",
+          "description": "The database user name."
+        },
+        "dbPasswordSecretName": {
+          "type": "string",
+          "description": "The secret name which contains the database user password."
+        },
+        "keyVaultId": {
+          "type": "string",
+          "description": "The key vault resource id."
+        },
+        "thriftUrl": {
+          "type": "string",
+          "description": "The thrift url."
+        }
+      }
+    },
+    "FlinkProfile": {
+      "type": "object",
+      "description": "The Flink cluster profile.",
+      "required": [
+        "storage",
+        "jobManager",
+        "taskManager"
+      ],
+      "properties": {
+        "storage": {
+          "$ref": "#/definitions/FlinkStorageProfile"
+        },
+        "numReplicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of task managers."
+        },
+        "jobManager": {
+          "description": "Job Manager container/ process CPU and memory requirements",
+          "$ref": "#/definitions/ComputeResourceDefinition"
+        },
+        "historyServer": {
+          "description": "History Server container/ process CPU and memory requirements",
+          "$ref": "#/definitions/ComputeResourceDefinition"
+        },
+        "taskManager": {
+          "description": "Task Manager container/ process CPU and memory requirements",
+          "$ref": "#/definitions/ComputeResourceDefinition"
+        },
+        "catalogOptions": {
+          "$ref": "#/definitions/FlinkCatalogOptions"
+        }
+      }
+    },
+    "FlinkStorageProfile": {
+      "type": "object",
+      "description": "The storage profile",
+      "required": [
+        "storageUri"
+      ],
+      "properties": {
+        "storageUri": {
+          "type": "string",
+          "pattern": "^(\\w{4,5})://(.*)@(.*).\\b(blob|dfs)\\b\\.core\\.windows\\.net$",
+          "description": "Storage account uri which is used for savepoint and checkpoint state."
+        },
+        "storagekey": {
+          "type": "string",
+          "description": "Storage key is only required for wasb(s) storage."
+        }
+      }
+    },
+    "ComputeResourceDefinition": {
+      "type": "object",
+      "description": "The cpu and memory requirement definition.",
+      "required": [
+        "cpu",
+        "memory"
+      ],
+      "properties": {
+        "cpu": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The required CPU."
+        },
+        "memory": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The required memory in MB, Container memory will be 110 percentile"
+        }
+      }
+    },
     "ClusterResourceProperties": {
       "type": "object",
       "required": [
         "clusterType",
-        "computeProfile"
+        "computeProfile",
+        "clusterProfile"
       ],
       "properties": {
         "provisioningState": {
@@ -2051,25 +2357,17 @@
     "ComputeProfile": {
       "type": "object",
       "description": "The compute profile.",
+      "required": [
+        "nodes"
+      ],
       "properties": {
-        "vmSize": {
-          "type": "string",
-          "description": "The virtual machine SKU.",
-          "pattern": "^[a-zA-Z0-9_\\-]{0,256}$"
-        },
-        "count": {
-          "description": "The number of virtual machines.",
-          "type": "integer",
-          "format": "int32",
-          "maximum": 1000.0,
-          "minimum": 1.0
-        },
         "nodes": {
           "type": "array",
           "description": "The nodes definitions.",
           "items": {
             "$ref": "#/definitions/NodeProfile"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -2096,7 +2394,6 @@
           "description": "The number of virtual machines.",
           "type": "integer",
           "format": "int32",
-          "maximum": 1000.0,
           "minimum": 1.0
         }
       }
@@ -2124,11 +2421,11 @@
     },
     "ServiceConfigListResult": {
       "type": "object",
-      "description": "Cluster/SessionCluster instance service configs api response.",
+      "description": "Cluster instance service configs api response.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "Cluster/SessionCluster instance service config array.",
+          "description": "Cluster instance service config array.",
           "items": {
             "$ref": "#/definitions/ServiceConfigResult"
           },
@@ -2143,11 +2440,11 @@
     },
     "ServiceConfigResult": {
       "type": "object",
-      "description": "Cluster/SessionCluster instance service config.",
+      "description": "Cluster instance service config.",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Cluster/SessionCluster instance service config properties.",
+          "description": "Cluster instance service config properties.",
           "allOf": [
             {
               "$ref": "#/definitions/ServiceConfigListResultProperties"
@@ -2185,12 +2482,14 @@
         },
         "customKeys": {
           "type": "object",
+          "description": "The custom keys.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "defaultKeys": {
           "type": "object",
+          "description": "The default keys.",
           "additionalProperties": {
             "$ref": "#/definitions/ServiceConfigListResultValueEntity"
           }
@@ -2280,7 +2579,7 @@
         },
         "serviceStatuses": {
           "type": "array",
-          "description": "List of statuses of relevant services that make up the hilo cluster to surface to the customer.",
+          "description": "List of statuses of relevant services that make up the HDInsight on aks cluster to surface to the customer.",
           "items": {
             "$ref": "#/definitions/ServiceStatus"
           },
@@ -2311,7 +2610,7 @@
     },
     "ServiceStatus": {
       "type": "object",
-      "description": "Describes the status of a service of a Hilo cluster.",
+      "description": "Describes the status of a service of a HDInsight on aks cluster.",
       "required": [
         "kind",
         "ready"
@@ -2330,78 +2629,6 @@
           "description": "A message describing the error if any."
         }
       }
-    },
-    "SessionClusterListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SessionCluster"
-          },
-          "description": "The list of session clusters."
-        },
-        "nextLink": {
-          "description": "The link (url) to the next page of results.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "description": "The list session cluster operation response."
-    },
-    "SessionClusterResourceProperties": {
-      "type": "object",
-      "required": [
-        "clusterProfile"
-      ],
-      "properties": {
-        "provisioningState": {
-          "description": "Provisioning state of the resource.",
-          "type": "string",
-          "enum": [
-            "Accepted",
-            "Succeeded",
-            "Canceled",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningStatus",
-            "modelAsString": true
-          },
-          "readOnly": true
-        },
-        "deploymentId": {
-          "type": "string",
-          "description": "A unique id generated by the RP to identify the resource.",
-          "example": "45cd32aead6e4a91b079a0cdbfac8c36",
-          "readOnly": true
-        },
-        "clusterProfile": {
-          "$ref": "#/definitions/ClusterProfile"
-        }
-      },
-      "description": "Session cluster resource properties."
-    },
-    "SessionCluster": {
-      "type": "object",
-      "description": "The session cluster.",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "Gets or sets the properties. Define sessionCluster specific properties.",
-          "$ref": "#/definitions/SessionClusterResourceProperties"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "System data of a session cluster.",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
-        }
-      ]
     },
     "NameAvailabilityParameters": {
       "description": "Details of check name availability request body.",
@@ -2488,6 +2715,317 @@
           }
         }
       }
+    },
+    "ClusterPoolVersionPattern": {
+      "type": "string",
+      "description": "Cluster pool version is a 2-part version.",
+      "example": "1.2",
+      "pattern": "^(0|[1-9][0-9]{0,18})\\.(0|[1-9][0-9]{0,18})$"
+    },
+    "ClusterPoolVersionsListResult": {
+      "type": "object",
+      "description": "Represents a list of cluster pool versions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of cluster pool versions.",
+          "items": {
+            "$ref": "#/definitions/ClusterPoolVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link (url) to the next page of results.",
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterPoolVersion": {
+      "type": "object",
+      "description": "Available cluster pool version.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Cluster pool version properties.",
+          "$ref": "#/definitions/ClusterPoolVersionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ClusterPoolVersionProperties": {
+      "type": "object",
+      "description": "Cluster pool version properties.",
+      "properties": {
+        "clusterPoolVersion": {
+          "$ref": "#/definitions/ClusterPoolVersionPattern"
+        },
+        "aksVersion": {
+          "type": "string",
+          "description": "AKS version.",
+          "example": "1.24"
+        },
+        "isPreview": {
+          "type": "boolean",
+          "description": "Indicate if this version is in preview or not.",
+          "default": false
+        }
+      }
+    },
+    "ThreePartVersionPattern": {
+      "type": "string",
+      "description": "Version with three part.",
+      "example": "1.0.4",
+      "pattern": "^(0|[1-9][0-9]{0,18})\\.(0|[1-9][0-9]{0,18})\\.(0|[1-9][0-9]{0,18})$"
+    },
+    "ThreeOrFourPartVersionPattern": {
+      "type": "string",
+      "description": "Version with 3/4 part.",
+      "example": "1.0.4",
+      "pattern": "^(0|[1-9][0-9]{0,18})\\.(0|[1-9][0-9]{0,18})\\.(0|[1-9][0-9]{0,18})(?:\\.(0|[1-9][0-9]{0,18}))?$"
+    },
+    "ClusterVersionsListResult": {
+      "type": "object",
+      "description": "Represents a list of cluster versions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of cluster versions.",
+          "items": {
+            "$ref": "#/definitions/ClusterVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link (url) to the next page of results.",
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterVersion": {
+      "type": "object",
+      "description": "Available cluster version.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Cluster version properties.",
+          "$ref": "#/definitions/ClusterVersionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ClusterVersionProperties": {
+      "type": "object",
+      "description": "Cluster version properties.",
+      "properties": {
+        "clusterType": {
+          "type": "string",
+          "description": "The type of cluster.",
+          "pattern": "^[a-zA-Z][a-zA-Z0-9]{0,31}$"
+        },
+        "clusterVersion": {
+          "$ref": "#/definitions/ThreePartVersionPattern"
+        },
+        "ossVersion": {
+          "$ref": "#/definitions/ThreePartVersionPattern"
+        },
+        "clusterPoolVersion": {
+          "type": "string",
+          "description": "The two part cluster pool version. If the cluster version is before cluster pool version on-board, the return value will be empty string",
+          "example": "1.0"
+        },
+        "isPreview": {
+          "type": "boolean",
+          "description": "Indicate if this version is in preview or not.",
+          "default": false
+        },
+        "components": {
+          "$ref": "#/definitions/ClusterComponents"
+        }
+      }
+    },
+    "ClusterComponents": {
+      "type": "array",
+      "description": "Component list of this cluster type and version.",
+      "readOnly": true,
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          }
+        }
+      },
+      "example": [
+        {
+          "name": "HDFS",
+          "version": "1.2.3"
+        },
+        {
+          "name": "HIVE",
+          "version": "1.2.3"
+        }
+      ]
+    },
+    "ClusterJobList": {
+      "description": "Collection of cluster job",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Collection of cluster job.",
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/ClusterJob"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        }
+      }
+    },
+    "ClusterJob": {
+      "description": "Cluster job.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterJobProperties"
+        }
+      }
+    },
+    "ClusterJobProperties": {
+      "description": "Properties of cluster job.",
+      "type": "object",
+      "properties": {
+        "jobType": {
+          "description": "Type of cluster job.",
+          "enum": [
+            "FlinkJob"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "jobType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "jobType",
+      "required": [
+        "jobType"
+      ]
+    },
+    "FlinkJobProperties": {
+      "description": "Properties of flink job.",
+      "type": "object",
+      "required": [
+        "jobName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterJobProperties"
+        }
+      ],
+      "properties": {
+        "jobName": {
+          "description": "Name of job",
+          "type": "string"
+        },
+        "jobJarDirectory": {
+          "description": "A string property that specifies the directory where the job JAR is located.",
+          "type": "string"
+        },
+        "jarName": {
+          "description": "A string property that represents the name of the job JAR.",
+          "type": "string"
+        },
+        "entryClass": {
+          "description": "A string property that specifies the entry class for the Flink job.",
+          "type": "string"
+        },
+        "args": {
+          "description": "A string property representing additional JVM arguments for the Flink job. It should be space separated value.",
+          "type": "string"
+        },
+        "savePointName": {
+          "description": "A string property that represents the name of the savepoint for the Flink job",
+          "type": "string"
+        },
+        "action": {
+          "description": "A string property that indicates the action to be performed on the Flink job. It can have one of the following enum values => NEW, UPDATE, STATELESS_UPDATE, STOP, START, CANCEL, SAVEPOINT, LIST_SAVEPOINT, or DELETE.",
+          "type": "string",
+          "enum": [
+            "NEW",
+            "UPDATE",
+            "STATELESS_UPDATE",
+            "STOP",
+            "START",
+            "CANCEL",
+            "SAVEPOINT",
+            "LIST_SAVEPOINT",
+            "DELETE"
+          ],
+          "x-ms-enum": {
+            "name": "action",
+            "modelAsString": true
+          }
+        },
+        "flinkConfiguration": {
+          "description": "Additional properties used to configure Flink jobs. It allows users to set properties such as parallelism and jobSavePointDirectory. It accepts additional key-value pairs as properties, where the keys are strings and the values are strings as well.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "jobId": {
+          "description": "Unique id for identifying a job",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of job.",
+          "type": "string",
+          "readOnly": true
+        },
+        "jobOutput": {
+          "description": "Output of job.",
+          "type": "string",
+          "readOnly": true
+        },
+        "actionResult": {
+          "description": "Action result of job.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastSavePoint": {
+          "description": "The last savepoint.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "FlinkJob"
     }
   },
   "parameters": {
@@ -2507,20 +3045,12 @@
       "description": "The name of the HDInsight cluster.",
       "x-ms-parameter-location": "method"
     },
-    "SessionClusterNameParameter": {
-      "name": "sessionClusterName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the HDInsight session cluster.",
-      "x-ms-parameter-location": "method"
-    },
     "ClusterTypeNameParameter": {
       "name": "clusterTypeName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the Hilo cluster type.",
+      "description": "The name of the HDInsight on aks cluster type.",
       "x-ms-parameter-location": "method"
     }
   }

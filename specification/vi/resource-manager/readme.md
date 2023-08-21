@@ -1,7 +1,6 @@
 # vi
 
 > see https://aka.ms/autorest
-
 This is the AutoRest configuration file for Azure Video Analyzer for Media.
 
 ## Getting Started
@@ -9,11 +8,9 @@ This is the AutoRest configuration file for Azure Video Analyzer for Media.
 To build the SDKs for My API, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
 
 > `autorest readme.md`
-
 To see additional help and options, run:
 
 > `autorest --help`
-
 For other options on installation see [Installing AutoRest](https://aka.ms/autorest/install) on the AutoRest github page.
 
 ---
@@ -29,10 +26,27 @@ directive:
       - Microsoft.VideoIndexer/preview/2021-09-01-preview/vi.json
       - Microsoft.VideoIndexer/preview/2021-10-01-preview/vi.json
       - Microsoft.VideoIndexer/preview/2021-10-18-preview/vi.json
+      - Microsoft.VideoIndexer/preview/2023-06-02-preview/vi.json
+      - Microsoft.VideoIndexer/preview/2023-08-01-preview/vi.json
 
     where:
       - $.definitions.AccessToken.properties.accessToken
+      - $.definitions.CognitiveServicesSecrets.properties.speechCognitiveServicesPrimaryKey
+      - $.definitions.CognitiveServicesSecrets.properties.speechCognitiveServicesSecondaryKey
+      - $.definitions.CognitiveServicesSecrets.properties.translatorCognitiveServicesPrimaryKey
+      - $.definitions.CognitiveServicesSecrets.properties.translatorCognitiveServicesSecondaryKey
+      - $.definitions.CognitiveServicesSecrets.properties.ocrCognitiveServicesPrimaryKey
+      - $.definitions.CognitiveServicesSecrets.properties.ocrCognitiveServicesSecondaryKey
     reason: Secrets are OK to return in a POST response.
+
+    suppressions:
+  - code: AddedOptionalProperty
+    reason: Design forces this behavior (and it's actually the correct behavior that doesn't violate Microsoft API guidelines).
+  - code: AddedReadOnlyPropertyInResponse
+    reason: Design forces this behavior (and it's actually the correct behavior that doesn't violate Microsoft API guidelines).
+  - code: ReferenceRedirection
+    reason: Rename that does not affect api usage. It is solely semantic and does not violate Microsoft API guidelines.
+
 ```
 ---
 
@@ -46,7 +60,29 @@ These are the global settings for the adp.
 title: ViManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2021-10-18-preview
+tag: package-2023-08-01-preview
+```
+
+### Tag: package-2023-08-01-preview
+
+These settings apply only when `--tag=package-2023-08-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-08-01-preview'
+version: 2023-08-01-preview
+version-with-underscores: 2023_08_01_preview
+input-file:
+  - Microsoft.VideoIndexer/preview/2023-08-01-preview/vi.json
+```
+
+### Tag: package-2023-06-02-preview
+
+These settings apply only when `--tag=package-2023-06-02-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-06-02-preview'
+version: 2023-06-02-preview
+version-with-underscores: 2023_06_02_preview
+input-file:
+  - Microsoft.VideoIndexer/preview/2023-06-02-preview/vi.json
 ```
 
 ### Tag: package-2021-10-18-preview

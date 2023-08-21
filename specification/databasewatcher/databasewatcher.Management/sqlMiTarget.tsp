@@ -2,7 +2,6 @@ import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-providerhub";
-import "@azure-tools/typespec-providerhub-controller";
 import "./baseTarget.tsp";
 
 namespace Microsoft.DatabaseWatcher;
@@ -12,17 +11,17 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using OpenAPI;
 
-@doc("Properties specific to Azure SQL Managed Instance targets")
+@doc("The properties specific to Azure SQL Managed Instance targets.")
 model SqlMiTargetProperties extends TargetProperties {
-  @doc("Azure SQL Managed Instance target")
+  @doc("The Azure SQL Managed Instance target.")
   targetType: "SqlMi";
 
-  @doc("ARM ResourceId of an Azure SQL Managed Instance target")
+  @doc("The ARM ResourceId of an Azure SQL Managed Instance target.")
   sqlMiResourceId: string;
 
-  @doc("The TCP port number to optionally use in the connection string when connecting to an Azure SQL Managed Instance target")
+  @doc("The TCP port number to optionally use in the connection string when connecting to an Azure SQL Managed Instance target.")
   connectionTcpPort?: int32 = 1433;
 
-  @doc("Set to true to monitor a high availability replica of specified target, if any")
+  @doc("Set to true to monitor a high availability replica of specified target, if any.")
   readIntent?: boolean = false;
 }

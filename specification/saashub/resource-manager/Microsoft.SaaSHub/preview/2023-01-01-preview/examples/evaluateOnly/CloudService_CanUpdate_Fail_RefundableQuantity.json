@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2023-01-01-preview",
+    "CloudServiceResourceName": "myResourceName",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
+    "parameters": {
+      "properties": {
+        "quantity": 5
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "evaluateResult": "Failed",
+        "reasonCode": "FailedToSatisfyRefundableQuantityConstraints",
+        "reason": "Failed to satisfy refundable quantity constraints",
+        "updateScenario": "ChangeQuantity",
+        "additionalInfo": {
+          "refundableQuantity": {
+            "totalRefundableQuantity": 4,
+            "refundableQuantities": [
+              {
+                "quantity": 3,
+                "returnWindowEndDateTime": "2023-03-12T00:00:00Z"
+              },
+              {
+                "quantity": 1,
+                "returnWindowEndDateTime": "2023-06-14T00:00:00Z"
+              }
+            ]
+          },
+          "coTermDates": null
+        }
+      }
+    }
+  }
+}

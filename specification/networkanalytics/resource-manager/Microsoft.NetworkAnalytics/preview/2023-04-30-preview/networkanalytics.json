@@ -3,9 +3,9 @@
   "info": {
     "title": "Microsoft.NetworkAnalytics",
     "version": "2023-04-30-preview",
-    "x-cadl-generated": [
+    "x-typespec-generated": [
       {
-        "emitter": "@azure-tools/cadl-autorest"
+        "emitter": "@azure-tools/typespec-autorest"
       }
     ]
   },
@@ -57,10 +57,10 @@
   "paths": {
     "/{resourceUri}/providers/Microsoft.NetworkAnalytics/metricsIngestionEndpoints": {
       "get": {
+        "operationId": "MetricsIngestionEndpoints_List",
         "tags": [
           "MetricsIngestionEndpoints"
         ],
-        "operationId": "MetricsIngestionEndpoints_List",
         "description": "List MetricsIngestionEndpointResources resources by parent",
         "parameters": [
           {
@@ -84,25 +84,25 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "MetricsIngestionEndpoints_List_Max": {
+          "MetricsIngestionEndpoints_List_MaximumSet_Gen": {
             "$ref": "./examples/MetricsIngestionEndpoints_List_MaximumSet_Gen.json"
           },
-          "MetricsIngestionEndpoints_List_Min": {
+          "MetricsIngestionEndpoints_List_MinimumSet_Gen": {
             "$ref": "./examples/MetricsIngestionEndpoints_List_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/{resourceUri}/providers/Microsoft.NetworkAnalytics/metricsIngestionEndpoints/default": {
       "get": {
+        "operationId": "MetricsIngestionEndpoints_Get",
         "tags": [
           "MetricsIngestionEndpoints"
         ],
-        "operationId": "MetricsIngestionEndpoints_Get",
         "description": "Get a MetricsIngestionEndpointResources",
         "parameters": [
           {
@@ -127,19 +127,19 @@
           }
         },
         "x-ms-examples": {
-          "MetricsIngestionEndpoints_Get_Max": {
+          "MetricsIngestionEndpoints_Get_MaximumSet_Gen": {
             "$ref": "./examples/MetricsIngestionEndpoints_Get_MaximumSet_Gen.json"
           },
-          "MetricsIngestionEndpoints_Get_Min": {
+          "MetricsIngestionEndpoints_Get_MinimumSet_Gen": {
             "$ref": "./examples/MetricsIngestionEndpoints_Get_MinimumSet_Gen.json"
           }
         }
       },
       "put": {
+        "operationId": "MetricsIngestionEndpoints_CreateOrUpdate",
         "tags": [
           "MetricsIngestionEndpoints"
         ],
-        "operationId": "MetricsIngestionEndpoints_CreateOrUpdate",
         "description": "Create a MetricsIngestionEndpointResources",
         "parameters": [
           {
@@ -151,8 +151,8 @@
           {
             "name": "resource",
             "in": "body",
-            "required": true,
             "description": "Resource create parameters.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/MetricsIngestionEndpointResources"
             }
@@ -167,15 +167,15 @@
           },
           "201": {
             "description": "ARM create operation completed successfully.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/MetricsIngestionEndpointResources"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -186,10 +186,10 @@
           }
         },
         "x-ms-examples": {
-          "MetricsIngestionEndpoints_CreateOrUpdate_Max": {
+          "MetricsIngestionEndpoints_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/MetricsIngestionEndpoints_CreateOrUpdate_MaximumSet_Gen.json"
           },
-          "MetricsIngestionEndpoints_CreateOrUpdate_Min": {
+          "MetricsIngestionEndpoints_CreateOrUpdate_MinimumSet_Gen": {
             "$ref": "./examples/MetricsIngestionEndpoints_CreateOrUpdate_MinimumSet_Gen.json"
           }
         },
@@ -199,10 +199,10 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
+        "operationId": "MetricsIngestionEndpoints_Update",
         "tags": [
           "MetricsIngestionEndpoints"
         ],
-        "operationId": "MetricsIngestionEndpoints_Update",
         "description": "Update a MetricsIngestionEndpointResources",
         "parameters": [
           {
@@ -214,8 +214,8 @@
           {
             "name": "properties",
             "in": "body",
-            "required": true,
             "description": "The resource properties to be updated.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/MetricsIngestionEndpointResourcesUpdate"
             }
@@ -236,19 +236,19 @@
           }
         },
         "x-ms-examples": {
-          "MetricsIngestionEndpoints_Update_Max": {
+          "MetricsIngestionEndpoints_Update_MaximumSet_Gen": {
             "$ref": "./examples/MetricsIngestionEndpoints_Update_MaximumSet_Gen.json"
           },
-          "MetricsIngestionEndpoints_Update_Min": {
+          "MetricsIngestionEndpoints_Update_MinimumSet_Gen": {
             "$ref": "./examples/MetricsIngestionEndpoints_Update_MinimumSet_Gen.json"
           }
         }
       },
       "delete": {
+        "operationId": "MetricsIngestionEndpoints_Delete",
         "tags": [
           "MetricsIngestionEndpoints"
         ],
-        "operationId": "MetricsIngestionEndpoints_Delete",
         "description": "Delete a MetricsIngestionEndpointResources",
         "parameters": [
           {
@@ -266,9 +266,13 @@
             "description": "Resource deletion accepted.",
             "headers": {
               "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -283,25 +287,25 @@
           }
         },
         "x-ms-examples": {
-          "MetricsIngestionEndpoints_Delete_Max": {
+          "MetricsIngestionEndpoints_Delete_MaximumSet_Gen": {
             "$ref": "./examples/MetricsIngestionEndpoints_Delete_MaximumSet_Gen.json"
           },
-          "MetricsIngestionEndpoints_Delete_Min": {
+          "MetricsIngestionEndpoints_Delete_MinimumSet_Gen": {
             "$ref": "./examples/MetricsIngestionEndpoints_Delete_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
     },
     "/providers/Microsoft.NetworkAnalytics/operations": {
       "get": {
+        "operationId": "Operations_List",
         "tags": [
           "Operations"
         ],
-        "operationId": "Operations_List",
         "description": "List the operations for the provider",
         "parameters": [
           {
@@ -322,25 +326,25 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "Operations_List_Max": {
+          "Operations_List_MaximumSet_Gen": {
             "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
           },
-          "Operations_List_Min": {
+          "Operations_List_MinimumSet_Gen": {
             "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkAnalytics/dataConnectors": {
       "get": {
+        "operationId": "DataConnector_ListBySubscription",
         "tags": [
           "DataConnector"
         ],
-        "operationId": "DataConnector_ListBySubscription",
         "description": "List DataConnectors resources by subscription ID",
         "parameters": [
           {
@@ -364,25 +368,25 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "DataConnector_ListBySubscription_Max": {
+          "DataConnector_ListBySubscription_MaximumSet_Gen": {
             "$ref": "./examples/DataConnector_ListBySubscription_MaximumSet_Gen.json"
           },
-          "DataConnector_ListBySubscription_Min": {
+          "DataConnector_ListBySubscription_MinimumSet_Gen": {
             "$ref": "./examples/DataConnector_ListBySubscription_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkAnalytics/dataLakeHouses": {
       "get": {
+        "operationId": "Storage_ListBySubscription",
         "tags": [
           "Storage"
         ],
-        "operationId": "Storage_ListBySubscription",
         "description": "List DataLakeHouseResources resources by subscription ID",
         "parameters": [
           {
@@ -406,25 +410,25 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "Storage_ListBySubscription_Max": {
+          "Storage_ListBySubscription_MaximumSet_Gen": {
             "$ref": "./examples/Storage_ListBySubscription_MaximumSet_Gen.json"
           },
-          "Storage_ListBySubscription_Min": {
+          "Storage_ListBySubscription_MinimumSet_Gen": {
             "$ref": "./examples/Storage_ListBySubscription_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkAnalytics/networkAnalyticsProducts": {
       "get": {
+        "operationId": "NetworkAnalyticsProduct_ListBySubscription",
         "tags": [
           "NetworkAnalyticsProduct"
         ],
-        "operationId": "NetworkAnalyticsProduct_ListBySubscription",
         "description": "List NetworkAnalyticsProducts resources by subscription ID",
         "parameters": [
           {
@@ -448,25 +452,25 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "NetworkAnalyticsProduct_ListBySubscription_Max": {
+          "NetworkAnalyticsProduct_ListBySubscription_MaximumSet_Gen": {
             "$ref": "./examples/NetworkAnalyticsProduct_ListBySubscription_MaximumSet_Gen.json"
           },
-          "NetworkAnalyticsProduct_ListBySubscription_Min": {
+          "NetworkAnalyticsProduct_ListBySubscription_MinimumSet_Gen": {
             "$ref": "./examples/NetworkAnalyticsProduct_ListBySubscription_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataConnectors": {
       "get": {
+        "operationId": "DataConnector_ListByResourceGroup",
         "tags": [
           "DataConnector"
         ],
-        "operationId": "DataConnector_ListByResourceGroup",
         "description": "List DataConnectors resources by resource group",
         "parameters": [
           {
@@ -493,25 +497,25 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "DataConnector_ListByResourceGroup_Max": {
+          "DataConnector_ListByResourceGroup_MaximumSet_Gen": {
             "$ref": "./examples/DataConnector_ListByResourceGroup_MaximumSet_Gen.json"
           },
-          "DataConnector_ListByResourceGroup_Min": {
+          "DataConnector_ListByResourceGroup_MinimumSet_Gen": {
             "$ref": "./examples/DataConnector_ListByResourceGroup_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataConnectors/{dataConnectorName}": {
       "get": {
+        "operationId": "DataConnector_Get",
         "tags": [
           "DataConnector"
         ],
-        "operationId": "DataConnector_Get",
         "description": "Get a DataConnectors",
         "parameters": [
           {
@@ -526,8 +530,8 @@
           {
             "name": "dataConnectorName",
             "in": "path",
-            "required": true,
             "description": "The data connector name",
+            "required": true,
             "type": "string"
           }
         ],
@@ -546,19 +550,19 @@
           }
         },
         "x-ms-examples": {
-          "DataConnector_Get_Max": {
+          "DataConnector_Get_MaximumSet_Gen": {
             "$ref": "./examples/DataConnector_Get_MaximumSet_Gen.json"
           },
-          "DataConnector_Get_Min": {
+          "DataConnector_Get_MinimumSet_Gen": {
             "$ref": "./examples/DataConnector_Get_MinimumSet_Gen.json"
           }
         }
       },
       "put": {
+        "operationId": "DataConnector_CreateOrUpdate",
         "tags": [
           "DataConnector"
         ],
-        "operationId": "DataConnector_CreateOrUpdate",
         "description": "Create a DataConnectors",
         "parameters": [
           {
@@ -573,15 +577,15 @@
           {
             "name": "dataConnectorName",
             "in": "path",
-            "required": true,
             "description": "The data connector name",
+            "required": true,
             "type": "string"
           },
           {
             "name": "resource",
             "in": "body",
-            "required": true,
             "description": "Resource create parameters.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/DataConnectors"
             }
@@ -596,15 +600,15 @@
           },
           "201": {
             "description": "ARM create operation completed successfully.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/DataConnectors"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -615,10 +619,10 @@
           }
         },
         "x-ms-examples": {
-          "DataConnector_CreateOrUpdate_Max": {
+          "DataConnector_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/DataConnector_CreateOrUpdate_MaximumSet_Gen.json"
           },
-          "DataConnector_CreateOrUpdate_Min": {
+          "DataConnector_CreateOrUpdate_MinimumSet_Gen": {
             "$ref": "./examples/DataConnector_CreateOrUpdate_MinimumSet_Gen.json"
           }
         },
@@ -628,10 +632,10 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
+        "operationId": "DataConnector_Update",
         "tags": [
           "DataConnector"
         ],
-        "operationId": "DataConnector_Update",
         "description": "Update a DataConnectors",
         "parameters": [
           {
@@ -646,15 +650,15 @@
           {
             "name": "dataConnectorName",
             "in": "path",
-            "required": true,
             "description": "The data connector name",
+            "required": true,
             "type": "string"
           },
           {
             "name": "properties",
             "in": "body",
-            "required": true,
             "description": "The resource properties to be updated.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/DataConnectorsUpdate"
             }
@@ -675,19 +679,19 @@
           }
         },
         "x-ms-examples": {
-          "DataConnector_Update_Max": {
+          "DataConnector_Update_MaximumSet_Gen": {
             "$ref": "./examples/DataConnector_Update_MaximumSet_Gen.json"
           },
-          "DataConnector_Update_Min": {
+          "DataConnector_Update_MinimumSet_Gen": {
             "$ref": "./examples/DataConnector_Update_MinimumSet_Gen.json"
           }
         }
       },
       "delete": {
+        "operationId": "DataConnector_Delete",
         "tags": [
           "DataConnector"
         ],
-        "operationId": "DataConnector_Delete",
         "description": "Delete a DataConnectors",
         "parameters": [
           {
@@ -702,8 +706,8 @@
           {
             "name": "dataConnectorName",
             "in": "path",
-            "required": true,
             "description": "The data connector name",
+            "required": true,
             "type": "string"
           }
         ],
@@ -715,9 +719,13 @@
             "description": "Resource deletion accepted.",
             "headers": {
               "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -732,25 +740,25 @@
           }
         },
         "x-ms-examples": {
-          "DataConnector_Delete_Max": {
+          "DataConnector_Delete_MaximumSet_Gen": {
             "$ref": "./examples/DataConnector_Delete_MaximumSet_Gen.json"
           },
-          "DataConnector_Delete_Min": {
+          "DataConnector_Delete_MinimumSet_Gen": {
             "$ref": "./examples/DataConnector_Delete_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataLakeHouses": {
       "get": {
+        "operationId": "Storage_ListByResourceGroup",
         "tags": [
           "Storage"
         ],
-        "operationId": "Storage_ListByResourceGroup",
         "description": "List DataLakeHouseResources resources by resource group",
         "parameters": [
           {
@@ -777,25 +785,25 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "Storage_ListByResourceGroup_Max": {
+          "Storage_ListByResourceGroup_MaximumSet_Gen": {
             "$ref": "./examples/Storage_ListByResourceGroup_MaximumSet_Gen.json"
           },
-          "Storage_ListByResourceGroup_Min": {
+          "Storage_ListByResourceGroup_MinimumSet_Gen": {
             "$ref": "./examples/Storage_ListByResourceGroup_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataLakeHouses/{storageName}": {
       "get": {
+        "operationId": "Storage_Get",
         "tags": [
           "Storage"
         ],
-        "operationId": "Storage_Get",
         "description": "Get a DataLakeHouseResources",
         "parameters": [
           {
@@ -810,8 +818,8 @@
           {
             "name": "storageName",
             "in": "path",
-            "required": true,
             "description": "The data lake house resource name",
+            "required": true,
             "type": "string"
           }
         ],
@@ -830,19 +838,19 @@
           }
         },
         "x-ms-examples": {
-          "Storage_Get_Max": {
+          "Storage_Get_MaximumSet_Gen": {
             "$ref": "./examples/Storage_Get_MaximumSet_Gen.json"
           },
-          "Storage_Get_Min": {
+          "Storage_Get_MinimumSet_Gen": {
             "$ref": "./examples/Storage_Get_MinimumSet_Gen.json"
           }
         }
       },
       "put": {
+        "operationId": "Storage_CreateOrUpdate",
         "tags": [
           "Storage"
         ],
-        "operationId": "Storage_CreateOrUpdate",
         "description": "Create a DataLakeHouseResources",
         "parameters": [
           {
@@ -857,15 +865,15 @@
           {
             "name": "storageName",
             "in": "path",
-            "required": true,
             "description": "The data lake house resource name",
+            "required": true,
             "type": "string"
           },
           {
             "name": "resource",
             "in": "body",
-            "required": true,
             "description": "Resource create parameters.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/DataLakeHouseResources"
             }
@@ -880,15 +888,15 @@
           },
           "201": {
             "description": "ARM create operation completed successfully.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/DataLakeHouseResources"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -899,10 +907,10 @@
           }
         },
         "x-ms-examples": {
-          "Storage_CreateOrUpdate_Max": {
+          "Storage_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/Storage_CreateOrUpdate_MaximumSet_Gen.json"
           },
-          "Storage_CreateOrUpdate_Min": {
+          "Storage_CreateOrUpdate_MinimumSet_Gen": {
             "$ref": "./examples/Storage_CreateOrUpdate_MinimumSet_Gen.json"
           }
         },
@@ -912,10 +920,10 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
+        "operationId": "Storage_Update",
         "tags": [
           "Storage"
         ],
-        "operationId": "Storage_Update",
         "description": "Update a DataLakeHouseResources",
         "parameters": [
           {
@@ -930,15 +938,15 @@
           {
             "name": "storageName",
             "in": "path",
-            "required": true,
             "description": "The data lake house resource name",
+            "required": true,
             "type": "string"
           },
           {
             "name": "properties",
             "in": "body",
-            "required": true,
             "description": "The resource properties to be updated.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/DataLakeHouseResourcesUpdate"
             }
@@ -959,19 +967,19 @@
           }
         },
         "x-ms-examples": {
-          "Storage_Update_Max": {
+          "Storage_Update_MaximumSet_Gen": {
             "$ref": "./examples/Storage_Update_MaximumSet_Gen.json"
           },
-          "Storage_Update_Min": {
+          "Storage_Update_MinimumSet_Gen": {
             "$ref": "./examples/Storage_Update_MinimumSet_Gen.json"
           }
         }
       },
       "delete": {
+        "operationId": "Storage_Delete",
         "tags": [
           "Storage"
         ],
-        "operationId": "Storage_Delete",
         "description": "Delete a DataLakeHouseResources",
         "parameters": [
           {
@@ -986,8 +994,8 @@
           {
             "name": "storageName",
             "in": "path",
-            "required": true,
             "description": "The data lake house resource name",
+            "required": true,
             "type": "string"
           }
         ],
@@ -999,9 +1007,13 @@
             "description": "Resource deletion accepted.",
             "headers": {
               "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1016,25 +1028,25 @@
           }
         },
         "x-ms-examples": {
-          "Storage_Delete_Max": {
+          "Storage_Delete_MaximumSet_Gen": {
             "$ref": "./examples/Storage_Delete_MaximumSet_Gen.json"
           },
-          "Storage_Delete_Min": {
+          "Storage_Delete_MinimumSet_Gen": {
             "$ref": "./examples/Storage_Delete_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/networkAnalyticsProducts": {
       "get": {
+        "operationId": "NetworkAnalyticsProduct_ListByResourceGroup",
         "tags": [
           "NetworkAnalyticsProduct"
         ],
-        "operationId": "NetworkAnalyticsProduct_ListByResourceGroup",
         "description": "List NetworkAnalyticsProducts resources by resource group",
         "parameters": [
           {
@@ -1061,25 +1073,25 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "NetworkAnalyticsProduct_ListByResourceGroup_Max": {
+          "NetworkAnalyticsProduct_ListByResourceGroup_MaximumSet_Gen": {
             "$ref": "./examples/NetworkAnalyticsProduct_ListByResourceGroup_MaximumSet_Gen.json"
           },
-          "NetworkAnalyticsProduct_ListByResourceGroup_Min": {
+          "NetworkAnalyticsProduct_ListByResourceGroup_MinimumSet_Gen": {
             "$ref": "./examples/NetworkAnalyticsProduct_ListByResourceGroup_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/networkAnalyticsProducts/default": {
       "get": {
+        "operationId": "NetworkAnalyticsProduct_Get",
         "tags": [
           "NetworkAnalyticsProduct"
         ],
-        "operationId": "NetworkAnalyticsProduct_Get",
         "description": "Get a NetworkAnalyticsProducts",
         "parameters": [
           {
@@ -1107,19 +1119,19 @@
           }
         },
         "x-ms-examples": {
-          "NetworkAnalyticsProduct_Get_Max": {
+          "NetworkAnalyticsProduct_Get_MaximumSet_Gen": {
             "$ref": "./examples/NetworkAnalyticsProduct_Get_MaximumSet_Gen.json"
           },
-          "NetworkAnalyticsProduct_Get_Min": {
+          "NetworkAnalyticsProduct_Get_MinimumSet_Gen": {
             "$ref": "./examples/NetworkAnalyticsProduct_Get_MinimumSet_Gen.json"
           }
         }
       },
       "put": {
+        "operationId": "NetworkAnalyticsProduct_CreateOrUpdate",
         "tags": [
           "NetworkAnalyticsProduct"
         ],
-        "operationId": "NetworkAnalyticsProduct_CreateOrUpdate",
         "description": "Create a NetworkAnalyticsProducts",
         "parameters": [
           {
@@ -1134,8 +1146,8 @@
           {
             "name": "resource",
             "in": "body",
-            "required": true,
             "description": "Resource create parameters.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/NetworkAnalyticsProducts"
             }
@@ -1150,15 +1162,15 @@
           },
           "201": {
             "description": "ARM create operation completed successfully.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/NetworkAnalyticsProducts"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -1169,10 +1181,10 @@
           }
         },
         "x-ms-examples": {
-          "NetworkAnalyticsProduct_CreateOrUpdate_Max": {
+          "NetworkAnalyticsProduct_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/NetworkAnalyticsProduct_CreateOrUpdate_MaximumSet_Gen.json"
           },
-          "NetworkAnalyticsProduct_CreateOrUpdate_Min": {
+          "NetworkAnalyticsProduct_CreateOrUpdate_MinimumSet_Gen": {
             "$ref": "./examples/NetworkAnalyticsProduct_CreateOrUpdate_MinimumSet_Gen.json"
           }
         },
@@ -1182,10 +1194,10 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
+        "operationId": "NetworkAnalyticsProduct_Update",
         "tags": [
           "NetworkAnalyticsProduct"
         ],
-        "operationId": "NetworkAnalyticsProduct_Update",
         "description": "Update a NetworkAnalyticsProducts",
         "parameters": [
           {
@@ -1200,8 +1212,8 @@
           {
             "name": "properties",
             "in": "body",
-            "required": true,
             "description": "The resource properties to be updated.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/NetworkAnalyticsProductsUpdate"
             }
@@ -1222,19 +1234,19 @@
           }
         },
         "x-ms-examples": {
-          "NetworkAnalyticsProduct_Update_Max": {
+          "NetworkAnalyticsProduct_Update_MaximumSet_Gen": {
             "$ref": "./examples/NetworkAnalyticsProduct_Update_MaximumSet_Gen.json"
           },
-          "NetworkAnalyticsProduct_Update_Min": {
+          "NetworkAnalyticsProduct_Update_MinimumSet_Gen": {
             "$ref": "./examples/NetworkAnalyticsProduct_Update_MinimumSet_Gen.json"
           }
         }
       },
       "delete": {
+        "operationId": "NetworkAnalyticsProduct_Delete",
         "tags": [
           "NetworkAnalyticsProduct"
         ],
-        "operationId": "NetworkAnalyticsProduct_Delete",
         "description": "Delete a NetworkAnalyticsProducts",
         "parameters": [
           {
@@ -1255,9 +1267,13 @@
             "description": "Resource deletion accepted.",
             "headers": {
               "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1272,15 +1288,15 @@
           }
         },
         "x-ms-examples": {
-          "NetworkAnalyticsProduct_Delete_Max": {
+          "NetworkAnalyticsProduct_Delete_MaximumSet_Gen": {
             "$ref": "./examples/NetworkAnalyticsProduct_Delete_MaximumSet_Gen.json"
           },
-          "NetworkAnalyticsProduct_Delete_Min": {
+          "NetworkAnalyticsProduct_Delete_MinimumSet_Gen": {
             "$ref": "./examples/NetworkAnalyticsProduct_Delete_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -1289,6 +1305,7 @@
   "definitions": {
     "AdxSku": {
       "type": "object",
+      "description": "The ADX SKU details",
       "properties": {
         "name": {
           "$ref": "#/definitions/AdxSkuName",
@@ -1304,7 +1321,6 @@
           "description": "The number of instances of the cluster."
         }
       },
-      "description": "The ADX SKU details",
       "required": [
         "name",
         "tier"
@@ -1312,6 +1328,7 @@
     },
     "AdxSkuName": {
       "type": "string",
+      "description": "The ADX SKU name options.",
       "enum": [
         "Dev(No SLA)_Standard_D11_v2",
         "Dev(No SLA)_Standard_E2a_v4",
@@ -1384,265 +1401,330 @@
         "values": [
           {
             "name": "Dev_No_SLA_Standard_D11_v2",
-            "value": "Dev(No SLA)_Standard_D11_v2"
+            "value": "Dev(No SLA)_Standard_D11_v2",
+            "description": "The Dev_No_SLA_Standard_D11_v2 SKU"
           },
           {
             "name": "Dev_No_SLA_Standard_E2a_v4",
-            "value": "Dev(No SLA)_Standard_E2a_v4"
+            "value": "Dev(No SLA)_Standard_E2a_v4",
+            "description": "The Dev_No_SLA_Standard_E2a_v4 SKU"
           },
           {
             "name": "Standard_D11_v2",
-            "value": "Standard_D11_v2"
+            "value": "Standard_D11_v2",
+            "description": "The Standard_D11_v2 SKU"
           },
           {
             "name": "Standard_D12_v2",
-            "value": "Standard_D12_v2"
+            "value": "Standard_D12_v2",
+            "description": "The Standard_D12_v2 SKU"
           },
           {
             "name": "Standard_D13_v2",
-            "value": "Standard_D13_v2"
+            "value": "Standard_D13_v2",
+            "description": "The Standard_D13_v2 SKU"
           },
           {
             "name": "Standard_D14_v2",
-            "value": "Standard_D14_v2"
+            "value": "Standard_D14_v2",
+            "description": "The Standard_D14_v2 SKU"
           },
           {
             "name": "Standard_D32d_v4",
-            "value": "Standard_D32d_v4"
+            "value": "Standard_D32d_v4",
+            "description": "The Standard_D32d_v4 SKU"
           },
           {
             "name": "Standard_D16d_v5",
-            "value": "Standard_D16d_v5"
+            "value": "Standard_D16d_v5",
+            "description": "The Standard_D16d_v5 SKU"
           },
           {
             "name": "Standard_D32d_v5",
-            "value": "Standard_D32d_v5"
+            "value": "Standard_D32d_v5",
+            "description": "The Standard_D32d_v5 SKU"
           },
           {
             "name": "Standard_DS13_v2_1TB_PS",
-            "value": "Standard_DS13_v2+1TB_PS"
+            "value": "Standard_DS13_v2+1TB_PS",
+            "description": "The Standard_DS13_v2_1TB_PS SKU"
           },
           {
             "name": "Standard_DS13_v2_2TB_PS",
-            "value": "Standard_DS13_v2+2TB_PS"
+            "value": "Standard_DS13_v2+2TB_PS",
+            "description": "The Standard_DS13_v2_2TB_PS SKU"
           },
           {
             "name": "Standard_DS14_v2_3TB_PS",
-            "value": "Standard_DS14_v2+3TB_PS"
+            "value": "Standard_DS14_v2+3TB_PS",
+            "description": "The Standard_DS14_v2_3TB_PS SKU"
           },
           {
             "name": "Standard_DS14_v2_4TB_PS",
-            "value": "Standard_DS14_v2+4TB_PS"
+            "value": "Standard_DS14_v2+4TB_PS",
+            "description": "The Standard_DS14_v2_4TB_PS SKU"
           },
           {
             "name": "Standard_L4s",
-            "value": "Standard_L4s"
+            "value": "Standard_L4s",
+            "description": "The Standard_L4s SKU"
           },
           {
             "name": "Standard_L8s",
-            "value": "Standard_L8s"
+            "value": "Standard_L8s",
+            "description": "The Standard_L8s SKU"
           },
           {
             "name": "Standard_L16s",
-            "value": "Standard_L16s"
+            "value": "Standard_L16s",
+            "description": "The Standard_L16s SKU"
           },
           {
             "name": "Standard_L8s_v2",
-            "value": "Standard_L8s_v2"
+            "value": "Standard_L8s_v2",
+            "description": "The Standard_L8s_v2 SKU"
           },
           {
             "name": "Standard_L16s_v2",
-            "value": "Standard_L16s_v2"
+            "value": "Standard_L16s_v2",
+            "description": "The Standard_L16s_v2 SKU"
           },
           {
             "name": "Standard_L8s_v3",
-            "value": "Standard_L8s_v3"
+            "value": "Standard_L8s_v3",
+            "description": "The Standard_L8s_v3 SKU"
           },
           {
             "name": "Standard_L16s_v3",
-            "value": "Standard_L16s_v3"
+            "value": "Standard_L16s_v3",
+            "description": "The Standard_L16s_v3 SKU"
           },
           {
             "name": "Standard_L32s_v3",
-            "value": "Standard_L32s_v3"
+            "value": "Standard_L32s_v3",
+            "description": "The Standard_L32s_v3 SKU"
           },
           {
             "name": "Standard_L8as_v3",
-            "value": "Standard_L8as_v3"
+            "value": "Standard_L8as_v3",
+            "description": "The Standard_L8as_v3 SKU"
           },
           {
             "name": "Standard_L16as_v3",
-            "value": "Standard_L16as_v3"
+            "value": "Standard_L16as_v3",
+            "description": "The Standard_L16as_v3 SKU"
           },
           {
             "name": "Standard_L32as_v3",
-            "value": "Standard_L32as_v3"
+            "value": "Standard_L32as_v3",
+            "description": "The Standard_L32as_v3 SKU"
           },
           {
             "name": "Standard_E64i_v3",
-            "value": "Standard_E64i_v3"
+            "value": "Standard_E64i_v3",
+            "description": "The Standard_E64i_v3 SKU"
           },
           {
             "name": "Standard_E80ids_v4",
-            "value": "Standard_E80ids_v4"
+            "value": "Standard_E80ids_v4",
+            "description": "The Standard_E80ids_v4 SKU"
           },
           {
             "name": "Standard_E2a_v4",
-            "value": "Standard_E2a_v4"
+            "value": "Standard_E2a_v4",
+            "description": "The Standard_E2a_v4 SKU"
           },
           {
             "name": "Standard_E4a_v4",
-            "value": "Standard_E4a_v4"
+            "value": "Standard_E4a_v4",
+            "description": "The Standard_E4a_v4 SKU"
           },
           {
             "name": "Standard_E8a_v4",
-            "value": "Standard_E8a_v4"
+            "value": "Standard_E8a_v4",
+            "description": "The Standard_E8a_v4 SKU"
           },
           {
             "name": "Standard_E16a_v4",
-            "value": "Standard_E16a_v4"
+            "value": "Standard_E16a_v4",
+            "description": "The Standard_E16a_v4 SKU"
           },
           {
             "name": "Standard_E8as_v4_1TB_PS",
-            "value": "Standard_E8as_v4+1TB_PS"
+            "value": "Standard_E8as_v4+1TB_PS",
+            "description": "The Standard_E8as_v4_1TB_PS SKU"
           },
           {
             "name": "Standard_E8as_v4_2TB_PS",
-            "value": "Standard_E8as_v4+2TB_PS"
+            "value": "Standard_E8as_v4+2TB_PS",
+            "description": "The Standard_E8as_v4_2TB_PS SKU"
           },
           {
             "name": "Standard_E16as_v4_3TB_PS",
-            "value": "Standard_E16as_v4+3TB_PS"
+            "value": "Standard_E16as_v4+3TB_PS",
+            "description": "The Standard_E16as_v4_3TB_PS SKU"
           },
           {
             "name": "Standard_E16as_v4_4TB_PS",
-            "value": "Standard_E16as_v4+4TB_PS"
+            "value": "Standard_E16as_v4+4TB_PS",
+            "description": "The Standard_E16as_v4_4TB_PS SKU"
           },
           {
             "name": "Standard_E8as_v5_1TB_PS",
-            "value": "Standard_E8as_v5+1TB_PS"
+            "value": "Standard_E8as_v5+1TB_PS",
+            "description": "The Standard_E8as_v5_1TB_PS SKU"
           },
           {
             "name": "Standard_E8as_v5_2TB_PS",
-            "value": "Standard_E8as_v5+2TB_PS"
+            "value": "Standard_E8as_v5+2TB_PS",
+            "description": "The Standard_E8as_v5_2TB_PS SKU"
           },
           {
             "name": "Standard_E16as_v5_3TB_PS",
-            "value": "Standard_E16as_v5+3TB_PS"
+            "value": "Standard_E16as_v5+3TB_PS",
+            "description": "The Standard_E16as_v5_3TB_PS SKU"
           },
           {
             "name": "Standard_E16as_v5_4TB_PS",
-            "value": "Standard_E16as_v5+4TB_PS"
+            "value": "Standard_E16as_v5+4TB_PS",
+            "description": "The Standard_E16as_v5_4TB_PS SKU"
           },
           {
             "name": "Standard_E2ads_v5",
-            "value": "Standard_E2ads_v5"
+            "value": "Standard_E2ads_v5",
+            "description": "The Standard_E2ads_v5 SKU"
           },
           {
             "name": "Standard_E4ads_v5",
-            "value": "Standard_E4ads_v5"
+            "value": "Standard_E4ads_v5",
+            "description": "The Standard_E4ads_v5 SKU"
           },
           {
             "name": "Standard_E8ads_v5",
-            "value": "Standard_E8ads_v5"
+            "value": "Standard_E8ads_v5",
+            "description": "The Standard_E8ads_v5 SKU"
           },
           {
             "name": "Standard_E16ads_v5",
-            "value": "Standard_E16ads_v5"
+            "value": "Standard_E16ads_v5",
+            "description": "The Standard_E16ads_v5 SKU"
           },
           {
             "name": "Standard_EC8as_v5_1TB_PS",
-            "value": "Standard_EC8as_v5+1TB_PS"
+            "value": "Standard_EC8as_v5+1TB_PS",
+            "description": "The Standard_EC8as_v5_1TB_PS SKU"
           },
           {
             "name": "Standard_EC8as_v5_2TB_PS",
-            "value": "Standard_EC8as_v5+2TB_PS"
+            "value": "Standard_EC8as_v5+2TB_PS",
+            "description": "The Standard_EC8as_v5_2TB_PS SKU"
           },
           {
             "name": "Standard_EC16as_v5_3TB_PS",
-            "value": "Standard_EC16as_v5+3TB_PS"
+            "value": "Standard_EC16as_v5+3TB_PS",
+            "description": "The Standard_EC16as_v5_3TB_PS SKU"
           },
           {
             "name": "Standard_EC16as_v5_4TB_PS",
-            "value": "Standard_EC16as_v5+4TB_PS"
+            "value": "Standard_EC16as_v5+4TB_PS",
+            "description": "The Standard_EC16as_v5_4TB_PS SKU"
           },
           {
             "name": "Standard_EC8ads_v5",
-            "value": "Standard_EC8ads_v5"
+            "value": "Standard_EC8ads_v5",
+            "description": "The Standard_EC8ads_v5 SKU"
           },
           {
             "name": "Standard_EC16ads_v5",
-            "value": "Standard_EC16ads_v5"
+            "value": "Standard_EC16ads_v5",
+            "description": "The Standard_EC16ads_v5 SKU"
           },
           {
             "name": "Standard_E8s_v4_1TB_PS",
-            "value": "Standard_E8s_v4+1TB_PS"
+            "value": "Standard_E8s_v4+1TB_PS",
+            "description": "The Standard_E8s_v4_1TB_PS SKU"
           },
           {
             "name": "Standard_E8s_v4_2TB_PS",
-            "value": "Standard_E8s_v4+2TB_PS"
+            "value": "Standard_E8s_v4+2TB_PS",
+            "description": "The Standard_E8s_v4_2TB_PS SKU"
           },
           {
             "name": "Standard_E16s_v4_3TB_PS",
-            "value": "Standard_E16s_v4+3TB_PS"
+            "value": "Standard_E16s_v4+3TB_PS",
+            "description": "The Standard_E16s_v4_3TB_PS SKU"
           },
           {
             "name": "Standard_E16s_v4_4TB_PS",
-            "value": "Standard_E16s_v4+4TB_PS"
+            "value": "Standard_E16s_v4+4TB_PS",
+            "description": "The Standard_E16s_v4_4TB_PS SKU"
           },
           {
             "name": "Standard_E8s_v5_1TB_PS",
-            "value": "Standard_E8s_v5+1TB_PS"
+            "value": "Standard_E8s_v5+1TB_PS",
+            "description": "The Standard_E8s_v5_1TB_PS SKU"
           },
           {
             "name": "Standard_E8s_v5_2TB_PS",
-            "value": "Standard_E8s_v5+2TB_PS"
+            "value": "Standard_E8s_v5+2TB_PS",
+            "description": "The Standard_E8s_v5_2TB_PS SKU"
           },
           {
             "name": "Standard_E16s_v5_3TB_PS",
-            "value": "Standard_E16s_v5+3TB_PS"
+            "value": "Standard_E16s_v5+3TB_PS",
+            "description": "The Standard_E16s_v5_3TB_PS SKU"
           },
           {
             "name": "Standard_E16s_v5_4TB_PS",
-            "value": "Standard_E16s_v5+4TB_PS"
+            "value": "Standard_E16s_v5+4TB_PS",
+            "description": "The Standard_E16s_v5_4TB_PS SKU"
           },
           {
             "name": "Standard_E2d_v4",
-            "value": "Standard_E2d_v4"
+            "value": "Standard_E2d_v4",
+            "description": "The Standard_E2d_v4 SKU"
           },
           {
             "name": "Standard_E4d_v4",
-            "value": "Standard_E4d_v4"
+            "value": "Standard_E4d_v4",
+            "description": "The Standard_E4d_v4 SKU"
           },
           {
             "name": "Standard_E8d_v4",
-            "value": "Standard_E8d_v4"
+            "value": "Standard_E8d_v4",
+            "description": "The Standard_E8d_v4 SKU"
           },
           {
             "name": "Standard_E16d_v4",
-            "value": "Standard_E16d_v4"
+            "value": "Standard_E16d_v4",
+            "description": "The Standard_E16d_v4 SKU"
           },
           {
             "name": "Standard_E2d_v5",
-            "value": "Standard_E2d_v5"
+            "value": "Standard_E2d_v5",
+            "description": "The Standard_E2d_v5 SKU"
           },
           {
             "name": "Standard_E4d_v5",
-            "value": "Standard_E4d_v5"
+            "value": "Standard_E4d_v5",
+            "description": "The Standard_E4d_v5 SKU"
           },
           {
             "name": "Standard_E8d_v5",
-            "value": "Standard_E8d_v5"
+            "value": "Standard_E8d_v5",
+            "description": "The Standard_E8d_v5 SKU"
           },
           {
             "name": "Standard_E16d_v5",
-            "value": "Standard_E16d_v5"
+            "value": "Standard_E16d_v5",
+            "description": "The Standard_E16d_v5 SKU"
           }
         ]
       }
     },
     "AzureDataExplorerProperties": {
       "type": "object",
+      "description": "ADx Properties",
       "properties": {
         "virtualNetworkConfiguration": {
           "$ref": "#/definitions/VirtualNetworkConfiguration",
@@ -1665,18 +1747,17 @@
         },
         "zones": {
           "type": "array",
+          "description": "An array represents the availability zones of the cluster.",
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "An array represents the availability zones of the cluster.",
           "x-ms-mutability": [
             "read",
             "create"
-          ]
+          ],
+          "x-typespec-name": "string[]"
         }
       },
-      "description": "ADx Properties",
       "required": [
         "kustoClusterPrincipalAssignments",
         "adxSku"
@@ -1684,26 +1765,26 @@
     },
     "BlobServices": {
       "type": "object",
+      "description": "Configuration for creating Blob Service",
       "properties": {
         "restorePolicy": {
           "$ref": "#/definitions/RestorePolicy",
           "description": "Restore Policy"
         }
       },
-      "description": "Configuration for creating Blob Service",
       "required": [
         "restorePolicy"
       ]
     },
     "BronzeStorageAccountProperties": {
       "type": "object",
+      "description": "Configuration for BronzeAccount",
       "properties": {
         "isSftpEnabled": {
           "type": "boolean",
           "description": "Enables Secure File Transfer Protocol, if set to true"
         }
       },
-      "description": "Configuration for BronzeAccount",
       "required": [
         "isSftpEnabled"
       ]
@@ -1723,6 +1804,7 @@
     },
     "CommonStorageAccountProperties": {
       "type": "object",
+      "description": "Common Storage Account Properties.",
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
@@ -1755,26 +1837,26 @@
           "description": "Private End Point"
         }
       },
-      "description": "Common Storage Account Properties.",
       "required": [
         "sku"
       ]
     },
     "ComputeConfiguration": {
       "type": "object",
+      "description": "The compute configuration",
       "properties": {
         "throughput": {
           "$ref": "#/definitions/Throughput",
           "description": "The data connector throughput configuration."
         }
       },
-      "description": "The compute configuration",
       "required": [
         "throughput"
       ]
     },
     "DataConnectorConfiguration": {
       "type": "object",
+      "description": "The data retention, dataset and compute configurations for the connector",
       "properties": {
         "dataRetentionProperties": {
           "$ref": "#/definitions/DataRetentionProperties",
@@ -1789,13 +1871,13 @@
           "description": "The compute configuration"
         }
       },
-      "description": "The data retention, dataset and compute configurations for the connector",
       "required": [
         "compute"
       ]
     },
     "DataConnectors": {
       "type": "object",
+      "description": "The data connector resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/DataConnectorsProperties",
@@ -1807,7 +1889,6 @@
           ]
         }
       },
-      "description": "The data connector resource",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -1816,29 +1897,30 @@
     },
     "DataConnectorsListResult": {
       "type": "object",
+      "description": "The response of a DataConnectors list operation.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The DataConnectors items on this page",
           "items": {
             "$ref": "#/definitions/DataConnectors"
           },
-          "x-cadl-name": "DataConnectors[]",
-          "description": "The DataConnectors items on this page"
+          "x-typespec-name": "DataConnectors[]"
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items",
-          "x-cadl-name": "Rest.ResourceLocation"
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
-      "description": "The response of a DataConnectors list operation.",
       "required": [
         "value"
       ]
     },
     "DataConnectorsProperties": {
       "type": "object",
+      "description": "Details of the Data Connector Properties. The product details are to be added from the supported values which can be fetched by making a GET call on the Network Analytics Product resource.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -1883,15 +1965,15 @@
         },
         "dataLakeHouses": {
           "type": "array",
+          "description": "An array of the ARM IDs for the Data Lake House resources",
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "An array of the ARM IDs for the Data Lake House resources",
           "x-ms-mutability": [
             "read",
             "create"
-          ]
+          ],
+          "x-typespec-name": "string[]"
         },
         "dataIngestionPath": {
           "type": "string",
@@ -1907,7 +1989,6 @@
           ]
         }
       },
-      "description": "Details of the Data Connector Properties. The product details are to be added from the supported values which can be fetched by making a GET call on the Network Analytics Product resource.",
       "required": [
         "productName",
         "productVersion",
@@ -1919,34 +2000,35 @@
     },
     "DataConnectorsUpdate": {
       "type": "object",
+      "description": "The type used for update operations of the DataConnectors.",
       "properties": {
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           },
-          "x-cadl-name": "Record<string>",
-          "description": "Resource tags."
+          "x-typespec-name": "Record<string>"
         },
         "properties": {
           "$ref": "#/definitions/DataConnectorsUpdateProperties",
           "x-ms-client-flatten": true
         }
-      },
-      "description": "The type used for update operations of the DataConnectors."
+      }
     },
     "DataConnectorsUpdateProperties": {
       "type": "object",
+      "description": "The updatable properties of the DataConnectors.",
       "properties": {
         "managedResourceGroupConfiguration": {
           "$ref": "#/definitions/ManagedResourceGroupConfigurationUpdate",
           "description": "Managed resource group configuration."
         }
-      },
-      "description": "The updatable properties of the DataConnectors."
+      }
     },
     "DataLakeHouseResources": {
       "type": "object",
+      "description": "The data lake house resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/StorageProperties",
@@ -1958,7 +2040,6 @@
           ]
         }
       },
-      "description": "The data lake house resource",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -1967,57 +2048,58 @@
     },
     "DataLakeHouseResourcesListResult": {
       "type": "object",
+      "description": "The response of a DataLakeHouseResources list operation.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The DataLakeHouseResources items on this page",
           "items": {
             "$ref": "#/definitions/DataLakeHouseResources"
           },
-          "x-cadl-name": "DataLakeHouseResources[]",
-          "description": "The DataLakeHouseResources items on this page"
+          "x-typespec-name": "DataLakeHouseResources[]"
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items",
-          "x-cadl-name": "Rest.ResourceLocation"
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
-      "description": "The response of a DataLakeHouseResources list operation.",
       "required": [
         "value"
       ]
     },
     "DataLakeHouseResourcesUpdate": {
       "type": "object",
+      "description": "The type used for update operations of the DataLakeHouseResources.",
       "properties": {
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           },
-          "x-cadl-name": "Record<string>",
-          "description": "Resource tags."
+          "x-typespec-name": "Record<string>"
         },
         "properties": {
           "$ref": "#/definitions/DataLakeHouseResourcesUpdateProperties",
           "x-ms-client-flatten": true
         }
-      },
-      "description": "The type used for update operations of the DataLakeHouseResources."
+      }
     },
     "DataLakeHouseResourcesUpdateProperties": {
       "type": "object",
+      "description": "The updatable properties of the DataLakeHouseResources.",
       "properties": {
         "managedResourceGroupConfiguration": {
           "$ref": "#/definitions/ManagedResourceGroupConfigurationUpdate",
           "description": "Managed Resource Group configuration."
         }
-      },
-      "description": "The updatable properties of the DataLakeHouseResources."
+      }
     },
     "DataRetentionProperties": {
       "type": "object",
+      "description": "The data retention properties",
       "properties": {
         "dataExplorer": {
           "$ref": "#/definitions/RetentionProperties",
@@ -2035,11 +2117,11 @@
           "$ref": "#/definitions/RetentionProperties",
           "description": "The gold storage account retention properties"
         }
-      },
-      "description": "The data retention properties"
+      }
     },
     "DatasetConfiguration": {
       "type": "object",
+      "description": "The connector dataset information ",
       "properties": {
         "datasetName": {
           "type": "string",
@@ -2052,14 +2134,13 @@
         },
         "columnsToMask": {
           "type": "array",
+          "description": "Columns to be masked",
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "Columns to be masked"
+          "x-typespec-name": "string[]"
         }
-      },
-      "description": "The connector dataset information "
+      }
     },
     "DefaultAction": {
       "type": "string",
@@ -2074,6 +2155,7 @@
     },
     "IPRules": {
       "type": "object",
+      "description": "IP rule with specific IP or IP range in CIDR format.",
       "properties": {
         "value": {
           "type": "string",
@@ -2084,13 +2166,13 @@
           "description": "The action of virtual network rule."
         }
       },
-      "description": "IP rule with specific IP or IP range in CIDR format.",
       "required": [
         "action"
       ]
     },
     "KustoClusterPrincipalAssignments": {
       "type": "object",
+      "description": "ADx Role assignments",
       "properties": {
         "systemIdentityName": {
           "type": "string",
@@ -2108,7 +2190,6 @@
           "description": "Principal type."
         }
       },
-      "description": "ADx Role assignments",
       "required": [
         "role",
         "principalType"
@@ -2116,21 +2197,31 @@
     },
     "KustoRole": {
       "type": "string",
+      "description": "The KustoRole options.",
       "enum": [
         "AllDatabasesAdmin",
         "AllDatabasesViewer"
       ],
       "x-ms-enum": {
         "name": "KustoRole",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AllDatabasesAdmin",
+            "value": "AllDatabasesAdmin",
+            "description": "The Kusto Cluster Admin role."
+          },
+          {
+            "name": "AllDatabasesViewer",
+            "value": "AllDatabasesViewer",
+            "description": "The Kusto Database Viewer role."
+          }
+        ]
       }
-    },
-    "Location": {
-      "type": "string",
-      "description": "Resource Location"
     },
     "ManagedResourceGroupConfiguration": {
       "type": "object",
+      "description": "ManagedResourceGroup related properties",
       "properties": {
         "name": {
           "type": "string",
@@ -2141,7 +2232,6 @@
           "description": "Managed Resource Group location"
         }
       },
-      "description": "ManagedResourceGroup related properties",
       "required": [
         "name",
         "location"
@@ -2149,6 +2239,7 @@
     },
     "ManagedResourceGroupConfigurationUpdate": {
       "type": "object",
+      "description": "ManagedResourceGroup related properties",
       "properties": {
         "name": {
           "type": "string",
@@ -2158,11 +2249,11 @@
           "type": "string",
           "description": "Managed Resource Group location"
         }
-      },
-      "description": "ManagedResourceGroup related properties"
+      }
     },
     "MetricsIngestionEndpointProperties": {
       "type": "object",
+      "description": "The resource-specific properties of a Metrics Ingestion Endpoint",
       "properties": {
         "ingressRegionName": {
           "type": "string",
@@ -2187,6 +2278,21 @@
           "description": "Key Vault URL where the connection string exists for authentication",
           "readOnly": true
         },
+        "keyVaultResourceId": {
+          "type": "string",
+          "description": "Resource id of KeyVault",
+          "readOnly": true
+        },
+        "userManagedIdentityResourceId": {
+          "type": "string",
+          "description": "Resource id of user assigned managed identity",
+          "readOnly": true
+        },
+        "userManagedIdentityPrincipalId": {
+          "type": "string",
+          "description": "Principal id of user assigned managed identity created under managed resource group",
+          "readOnly": true
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation",
@@ -2201,13 +2307,13 @@
           ]
         }
       },
-      "description": "The resource-specific properties of a Metrics Ingestion Endpoint",
       "required": [
         "ingressRegionName"
       ]
     },
     "MetricsIngestionEndpointResources": {
       "type": "object",
+      "description": "An ingestion endpoint for metrics relating to the parent resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/MetricsIngestionEndpointProperties",
@@ -2219,7 +2325,6 @@
           ]
         }
       },
-      "description": "An ingestion endpoint for metrics relating to the parent resource",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -2228,34 +2333,35 @@
     },
     "MetricsIngestionEndpointResourcesListResult": {
       "type": "object",
+      "description": "The response of a MetricsIngestionEndpointResources list operation.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The MetricsIngestionEndpointResources items on this page",
           "items": {
             "$ref": "#/definitions/MetricsIngestionEndpointResources"
           },
-          "x-cadl-name": "MetricsIngestionEndpointResources[]",
-          "description": "The MetricsIngestionEndpointResources items on this page"
+          "x-typespec-name": "MetricsIngestionEndpointResources[]"
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items",
-          "x-cadl-name": "Rest.ResourceLocation"
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
-      "description": "The response of a MetricsIngestionEndpointResources list operation.",
       "required": [
         "value"
       ]
     },
     "MetricsIngestionEndpointResourcesUpdate": {
       "type": "object",
-      "properties": {},
-      "description": "The type used for update operations of the MetricsIngestionEndpointResources."
+      "description": "The type used for update operations of the MetricsIngestionEndpointResources.",
+      "properties": {}
     },
     "NetworkAcls": {
       "type": "object",
+      "description": "Network rule set",
       "properties": {
         "bypass": {
           "$ref": "#/definitions/Bypass",
@@ -2263,36 +2369,35 @@
         },
         "virtualNetworkRule": {
           "type": "array",
+          "description": "Virtual Network Rule",
           "items": {
             "$ref": "#/definitions/VirtualNetworkRule"
           },
-          "x-cadl-name": "VirtualNetworkRule[]",
-          "description": "Virtual Network Rule"
+          "x-typespec-name": "VirtualNetworkRule[]"
         },
         "ipRules": {
           "type": "array",
+          "description": "IP rule with specific IP or IP range in CIDR format.",
           "items": {
             "$ref": "#/definitions/IPRules"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "IPRules[]",
-          "description": "IP rule with specific IP or IP range in CIDR format."
+          "x-typespec-name": "IPRules[]"
         },
         "resourceAccessRules": {
           "type": "array",
+          "description": "Resource Access Rules.",
           "items": {
             "$ref": "#/definitions/ResourceAccessRules"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "ResourceAccessRules[]",
-          "description": "Resource Access Rules."
+          "x-typespec-name": "ResourceAccessRules[]"
         },
         "defaultActionType": {
           "$ref": "#/definitions/DefaultAction",
           "description": "Default Action"
         }
       },
-      "description": "Network rule set",
       "required": [
         "bypass",
         "virtualNetworkRule",
@@ -2303,6 +2408,7 @@
     },
     "NetworkAnalyticsProductConnectorInformation": {
       "type": "object",
+      "description": "Data Connector Information",
       "properties": {
         "connectorName": {
           "type": "string",
@@ -2312,14 +2418,13 @@
         },
         "datasets": {
           "type": "array",
+          "description": "The datasets supported by the connector",
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "The datasets supported by the connector"
+          "x-typespec-name": "string[]"
         }
       },
-      "description": "Data Connector Information",
       "required": [
         "connectorName",
         "datasets"
@@ -2327,6 +2432,7 @@
     },
     "NetworkAnalyticsProductInformation": {
       "type": "object",
+      "description": "The network analytics product information",
       "properties": {
         "productName": {
           "type": "string",
@@ -2336,25 +2442,24 @@
         },
         "productVersions": {
           "type": "array",
+          "description": "The available versions for the product",
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "The available versions for the product"
+          "x-typespec-name": "string[]"
         },
         "productConnectors": {
           "type": "array",
+          "description": "The connectors supported by the product",
           "items": {
             "$ref": "#/definitions/NetworkAnalyticsProductConnectorInformation"
           },
           "x-ms-identifiers": [
             "connectorName"
           ],
-          "x-cadl-name": "NetworkAnalyticsProductConnectorInformation[]",
-          "description": "The connectors supported by the product"
+          "x-typespec-name": "NetworkAnalyticsProductConnectorInformation[]"
         }
       },
-      "description": "The network analytics product information",
       "required": [
         "productName",
         "productVersions",
@@ -2363,6 +2468,7 @@
     },
     "NetworkAnalyticsProducts": {
       "type": "object",
+      "description": "The network analytics product resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkAnalyticsProductsProperties",
@@ -2374,7 +2480,6 @@
           ]
         }
       },
-      "description": "The network analytics product resource",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -2383,29 +2488,30 @@
     },
     "NetworkAnalyticsProductsListResult": {
       "type": "object",
+      "description": "The response of a NetworkAnalyticsProducts list operation.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The NetworkAnalyticsProducts items on this page",
           "items": {
             "$ref": "#/definitions/NetworkAnalyticsProducts"
           },
-          "x-cadl-name": "NetworkAnalyticsProducts[]",
-          "description": "The NetworkAnalyticsProducts items on this page"
+          "x-typespec-name": "NetworkAnalyticsProducts[]"
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items",
-          "x-cadl-name": "Rest.ResourceLocation"
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
-      "description": "The response of a NetworkAnalyticsProducts list operation.",
       "required": [
         "value"
       ]
     },
     "NetworkAnalyticsProductsProperties": {
       "type": "object",
+      "description": "Details of the network analytics product properties",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -2414,32 +2520,32 @@
         },
         "networkAnalyticsProductInformation": {
           "type": "array",
+          "description": "The network analytics product information",
           "items": {
             "$ref": "#/definitions/NetworkAnalyticsProductInformation"
           },
           "x-ms-identifiers": [
             "productName"
           ],
-          "x-cadl-name": "NetworkAnalyticsProductInformation[]",
-          "description": "The network analytics product information",
           "x-ms-mutability": [
             "read",
             "create"
-          ]
+          ],
+          "x-typespec-name": "NetworkAnalyticsProductInformation[]"
         }
       },
-      "description": "Details of the network analytics product properties",
       "required": [
         "networkAnalyticsProductInformation"
       ]
     },
     "NetworkAnalyticsProductsUpdate": {
       "type": "object",
-      "properties": {},
-      "description": "The type used for update operations of the NetworkAnalyticsProducts."
+      "description": "The type used for update operations of the NetworkAnalyticsProducts.",
+      "properties": {}
     },
     "PrincipalType": {
       "type": "string",
+      "description": "The PrincipalType options.",
       "enum": [
         "App",
         "Group",
@@ -2447,11 +2553,29 @@
       ],
       "x-ms-enum": {
         "name": "PrincipalType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "App",
+            "value": "App",
+            "description": "The principal is an app."
+          },
+          {
+            "name": "Group",
+            "value": "Group",
+            "description": "The principal is a group."
+          },
+          {
+            "name": "User",
+            "value": "User",
+            "description": "The principal is a user."
+          }
+        ]
       }
     },
     "PrivateEndPoint": {
       "type": "object",
+      "description": "Private End Point Resource",
       "properties": {
         "subnetId": {
           "type": "string",
@@ -2463,18 +2587,17 @@
         },
         "groupIds": {
           "type": "array",
+          "description": "The private link resource group id.",
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "The private link resource group id."
+          "x-typespec-name": "string[]"
         },
         "customDnsConfigs": {
           "type": "string",
           "description": "The private link resource customDnsConfigs."
         }
       },
-      "description": "Private End Point Resource",
       "required": [
         "subnetId",
         "privateLinkServiceId",
@@ -2496,11 +2619,49 @@
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Represents a succeeded operation."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Represents a failed operation."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Represents a canceled operation."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Represents a pending operation."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Represents a pending operation."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Represents an operation under deletion."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Represents an accepted operation."
+          }
+        ]
       }
     },
     "ResourceAccessRules": {
       "type": "object",
+      "description": "Resource Access Rules.",
       "properties": {
         "tenantId": {
           "type": "string",
@@ -2511,7 +2672,6 @@
           "description": "Resource ID"
         }
       },
-      "description": "Resource Access Rules.",
       "required": [
         "tenantId",
         "resourceId"
@@ -2519,6 +2679,7 @@
     },
     "RestorePolicy": {
       "type": "object",
+      "description": "Restore Policy",
       "properties": {
         "enabled": {
           "type": "boolean",
@@ -2530,7 +2691,6 @@
           "description": "Restore Policy in days"
         }
       },
-      "description": "Restore Policy",
       "required": [
         "enabled",
         "days"
@@ -2538,6 +2698,7 @@
     },
     "RetentionProperties": {
       "type": "object",
+      "description": "The retention properties model",
       "properties": {
         "retentionDays": {
           "type": "integer",
@@ -2545,26 +2706,26 @@
           "description": "The data retention period in days"
         }
       },
-      "description": "The retention properties model",
       "required": [
         "retentionDays"
       ]
     },
     "Sku": {
       "type": "object",
+      "description": "The SKU of the storage account.",
       "properties": {
         "name": {
           "$ref": "#/definitions/SkuName",
           "description": "The name of the SKU."
         }
       },
-      "description": "The SKU of the storage account.",
       "required": [
         "name"
       ]
     },
     "SkuName": {
       "type": "string",
+      "description": "The storage redundancy options.",
       "enum": [
         "Standard_LRS",
         "Standard_GRS",
@@ -2573,22 +2734,58 @@
       ],
       "x-ms-enum": {
         "name": "SkuName",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard_LRS",
+            "value": "Standard_LRS",
+            "description": "The locally redundant storage."
+          },
+          {
+            "name": "Standard_GRS",
+            "value": "Standard_GRS",
+            "description": "The geo redundant storage."
+          },
+          {
+            "name": "Standard_ZRS",
+            "value": "Standard_ZRS",
+            "description": "The zone redundant storage."
+          },
+          {
+            "name": "Standard_GZRS",
+            "value": "Standard_GZRS",
+            "description": "The geo-zone redundant storage."
+          }
+        ]
       }
     },
     "SkuTier": {
       "type": "string",
+      "description": "The ADX SKU tier options.",
       "enum": [
         "Basic",
         "Premium"
       ],
       "x-ms-enum": {
         "name": "SkuTier",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Basic",
+            "value": "Basic",
+            "description": "The Basic tier."
+          },
+          {
+            "name": "Premium",
+            "value": "Premium",
+            "description": "The Premium tier."
+          }
+        ]
       }
     },
     "StorageProperties": {
       "type": "object",
+      "description": "Details of the NetworkAnalytics Storage.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -2624,30 +2821,31 @@
           ]
         }
       },
-      "description": "Details of the NetworkAnalytics Storage.",
       "required": [
         "azureDataExplorerProperties"
       ]
     },
     "Throughput": {
       "type": "object",
+      "description": "The data connector throughput configuration",
       "properties": {
         "tier": {
           "$ref": "#/definitions/throughputTier",
           "description": "The data connector throughput tier."
         }
       },
-      "description": "The data connector throughput configuration",
       "required": [
         "tier"
       ]
     },
     "Versions": {
       "type": "string",
+      "description": "The available API versions for the Microsoft.NetworkAnalytics RP.",
       "enum": [
         "2022-11-15-preview",
         "2023-03-31-preview",
-        "2023-04-30-preview"
+        "2023-04-30-preview",
+        "2023-11-15"
       ],
       "x-ms-enum": {
         "name": "Versions",
@@ -2655,21 +2853,30 @@
         "values": [
           {
             "name": "v2022_11_15_preview",
-            "value": "2022-11-15-preview"
+            "value": "2022-11-15-preview",
+            "description": "The 2022-11-15-preview version."
           },
           {
             "name": "v2023_03_31_preview",
-            "value": "2023-03-31-preview"
+            "value": "2023-03-31-preview",
+            "description": "The 2023-03-31-preview version."
           },
           {
             "name": "v2023_04_30_preview",
-            "value": "2023-04-30-preview"
+            "value": "2023-04-30-preview",
+            "description": "The 2023-04-30-preview version."
+          },
+          {
+            "name": "v2023_11_15",
+            "value": "2023-11-15",
+            "description": "The 2023-11-15 stable version."
           }
         ]
       }
     },
     "VirtualNetworkConfiguration": {
       "type": "object",
+      "description": "Virtual Network Configuration",
       "properties": {
         "subnetId": {
           "type": "string",
@@ -2684,7 +2891,6 @@
           "description": "Data Management Public Ip ID"
         }
       },
-      "description": "Virtual Network Configuration",
       "required": [
         "subnetId",
         "enginePublicIpId",
@@ -2693,6 +2899,7 @@
     },
     "VirtualNetworkRule": {
       "type": "object",
+      "description": "Virtual Network Rule",
       "properties": {
         "id": {
           "type": "string",
@@ -2707,13 +2914,13 @@
           "description": "Gets the state of virtual network rule."
         }
       },
-      "description": "Virtual Network Rule",
       "required": [
         "id"
       ]
     },
     "throughputTier": {
       "type": "string",
+      "description": "The data connector throughput tier for the ADX cluster.",
       "enum": [
         "Basic",
         "Standard",
@@ -2721,7 +2928,24 @@
       ],
       "x-ms-enum": {
         "name": "throughputTier",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Basic",
+            "value": "Basic",
+            "description": "The Basic throughput tier."
+          },
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "The Standard throughput tier."
+          },
+          {
+            "name": "Premium",
+            "value": "Premium",
+            "description": "The Premium throughput tier."
+          }
+        ]
       }
     }
   },
@@ -2729,11 +2953,11 @@
     "Azure.ResourceManager.ResourceUriParameter": {
       "name": "resourceUri",
       "in": "path",
-      "required": true,
       "description": "The fully qualified Azure Resource manager identifier of the resource.",
-      "x-ms-skip-url-encoding": true,
+      "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
     }
   }
 }

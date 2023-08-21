@@ -3728,6 +3728,89 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances/default/hybridIdentityMetadata/default": {
+      "get": {
+        "tags": [
+          "VmInstanceHybridIdentityMetadata"
+        ],
+        "operationId": "VirtualMachineInstanceHybridIdentityMetadata_Get",
+        "summary": "Gets HybridIdentityMetadata.",
+        "description": "Implements HybridIdentityMetadata GET method.",
+        "x-ms-examples": {
+          "GetHybridIdentityMetadata": {
+            "$ref": "./examples/GetVmInstanceHybridIdentityMetadata.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VmInstanceHybridIdentityMetadata"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances/default/hybridIdentityMetadata": {
+      "get": {
+        "tags": [
+          "VmInstanceHybridIdentityMetadata"
+        ],
+        "operationId": "VirtualMachineInstanceHybridIdentityMetadata_List",
+        "summary": "Implements GET HybridIdentityMetadata in a vm.",
+        "description": "Returns the list of HybridIdentityMetadata of the given vm.",
+        "x-ms-examples": {
+          "HybridIdentityMetadataListByVm": {
+            "$ref": "./examples/HybridIdentityMetadata_ListByVmInstance.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VmInstanceHybridIdentityMetadataList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances/default/createCheckpoint": {
       "post": {
         "tags": [
@@ -4605,6 +4688,11 @@
           "type": "integer",
           "format": "int32",
           "description": "Gets or sets the generation for the vm."
+        },
+        "biosGuid": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Gets or sets the bios guid for the vm."
         }
       },
       "description": "Specifies the vmmServer infrastructure specific settings for the virtual machine instance."
@@ -5914,6 +6002,18 @@
         "cloud": {
           "description": "Cloud inventory resource details where the VM is present.",
           "$ref": "#/definitions/InventoryItemDetails"
+        },
+        "biosGuid": {
+          "description": "Gets or sets the bios guid.",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "managedMachineResourceId": {
+          "description": "Gets the tracked resource id corresponding to the inventory resource.",
+          "type": "string",
+          "format": "arm-id",
+          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "VirtualMachine"
@@ -6024,6 +6124,67 @@
           "$ref": "#/definitions/Identity",
           "description": "The identity of the resource.",
           "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VmInstanceHybridIdentityMetadataList": {
+      "description": "List of HybridIdentityMetadata.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "Url to follow for getting next page of HybridIdentityMetadata.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of HybridIdentityMetadata",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VmInstanceHybridIdentityMetadata"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "VmInstanceHybridIdentityMetadata": {
+      "description": "Defines the HybridIdentityMetadata.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource",
+          "description": "The resource model definition for an Azure Resource Manager proxy resource. It will have everything other than required location and tags."
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/VmInstanceHybridIdentityMetadataProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "VmInstanceHybridIdentityMetadataProperties": {
+      "description": "Describes the properties of Hybrid Identity Metadata for a Virtual Machine.",
+      "type": "object",
+      "properties": {
+        "resourceUid": {
+          "description": "The unique identifier for the resource.",
+          "format": "uuid",
+          "type": "string"
+        },
+        "publicKey": {
+          "description": "Gets or sets the Public Key.",
+          "type": "string"
         },
         "provisioningState": {
           "description": "Gets or sets the provisioning state.",

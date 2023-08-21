@@ -1,0 +1,379 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.MixedReality",
+    "description": "Microsoft.MixedReality provider",
+    "version": "2023-07-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MixedReality/spatialMapsAccounts": {
+      "get": {
+        "operationId": "spatialMapsAccounts_ListBySubscription",
+        "tags": [
+          "spatialMapsAccounts",
+          "MixedReality"
+        ],
+        "description": "List EUCloud Accounts by Subscription",
+        "x-ms-examples": {
+          "List spatialMapsAccounts accounts by subscription": {
+            "$ref": "./examples/spatial-maps/GetBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/spatialMapsAccountsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/spatialMapsAccounts": {
+      "get": {
+        "description": "Returns list of spatialMapsAccounts.",
+        "operationId": "spatialMapsAccounts_ListByResourceGroup",
+        "x-ms-examples": {
+          "List spatialMapsAccounts accounts by resource group": {
+            "$ref": "./examples/spatial-maps/GetByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "spatialMapsAccounts details.",
+            "schema": {
+              "$ref": "#/definitions/spatialMapsAccountsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/spatialMapsAccounts/{resourceName}": {
+      "delete": {
+        "description": "Deletes a spatialMapsAccounts resource for a given name.",
+        "operationId": "spatialMapsAccounts_Delete",
+        "x-ms-examples": {
+          "Delete spatialMapsAccounts accounts by resource group": {
+            "$ref": "./examples/spatial-maps/Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/spatialMapsAccountsNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Returns spatialMapsAccounts resource for a given name.",
+        "operationId": "spatialMapsAccounts_Get",
+        "x-ms-examples": {
+          "Get spatialMapsAccounts accounts by resource name": {
+            "$ref": "./examples/spatial-maps/Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/spatialMapsAccountsNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "spatialMapsAccounts details.",
+            "schema": {
+              "$ref": "#/definitions/spatialMapsAccountsResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Create or replace spatialMapsAccounts resource.",
+        "operationId": "spatialMapsAccounts_CreateAndUpdate",
+        "x-ms-examples": {
+          "Create or Update spatialMapsAccounts accounts by resource group": {
+            "$ref": "./examples/spatial-maps/Put.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/spatialMapsAccountsNameParameter"
+          },
+          {
+            "name": "spatialMapsAccountsAccount",
+            "description": "spatialMapsAccountsAccount parameter.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/spatialMapsAccountsResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update Successful.",
+            "schema": {
+              "$ref": "#/definitions/spatialMapsAccountsResource"
+            }
+          },
+          "201": {
+            "description": "Resource create or update started.",
+            "schema": {
+              "$ref": "#/definitions/spatialMapsAccountsResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "description": "Update spatialMapsAccounts details.",
+        "operationId": "spatialMapsAccounts_Update",
+        "x-ms-examples": {
+          "Update spatialMapsAccounts accounts by resource group": {
+            "$ref": "./examples/spatial-maps/Patch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/spatialMapsAccountsNameParameter"
+          },
+          {
+            "name": "spatialMapsAccountsAccount",
+            "description": "spatialMapsAccountsAccount parameter.",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/spatialMapsAccountsResourcePatchProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/spatialMapsAccountsResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "spatialMapsAccountsResource": {
+      "type": "object",
+      "description": "spatialMapsAccounts details",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/spatialMapsAccountsResourceProperties"
+        },
+        "identity": {
+          "description": "The identity associated with this account",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Identity"
+        }
+      }
+    },
+    "spatialMapsAccountsResourcePatchProperties": {
+      "type": "object",
+      "description": "spatialMapsAccounts patchable details",
+      "properties": {
+        "identity": {
+          "allOf": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Identity"
+            }
+          ]
+        }
+      }
+    },
+    "spatialMapsAccountsResourceProperties": {
+      "type": "object",
+      "description": "spatialMapsAccounts details",
+      "properties": {
+        "accountId": {
+          "description": "unique id of certain account.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "spatialMapsAccountsList": {
+      "description": "The list of spatialMapsAccounts.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of spatialMapsAccounts list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/spatialMapsAccountsResource"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "spatialMapsAccountsNameParameter": {
+      "name": "resourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the spatialMapsAccounts resource.",
+      "maxLength": 64,
+      "minLength": 2,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

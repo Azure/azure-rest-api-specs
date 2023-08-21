@@ -1358,6 +1358,45 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/daprConfigurations": {
+      "get": {
+        "tags": [
+          "Linkers"
+        ],
+        "operationId": "Linkers_ListDaprConfigurations",
+        "description": "List the dapr configuration supported by Service Connector.",
+        "x-ms-examples": {
+          "GetDaprConfigurations": {
+            "$ref": "./examples/GetDaprConfigurations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DaprConfigurationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -2049,7 +2088,7 @@
           "description": "Indicates where the secrets in configuration from. Used when secrets are from Keyvault."
         },
         "daprProperties": {
-          "description": "Indicates some additional properties for dapr client type",
+          "description": "Deprecated, please use #/definitions/DaprConfigurationList instead",
           "$ref": "#/definitions/DaprProperties"
         },
         "names": {
@@ -2401,6 +2440,22 @@
         "secretRef": {
           "description": "The secret name where dapr could get value",
           "type": "string"
+        },
+        "description": {
+          "description": "The description of the metadata, returned from configuration api",
+          "type": "string"
+        },
+        "required": {
+          "description": "The value indicating whether the metadata is required or not",
+          "type": "string",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "DaprMetadataRequired",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -2665,6 +2720,50 @@
       "x-ms-enum": {
         "name": "allowType",
         "modelAsString": true
+      }
+    },
+    "DaprConfigurationList": {
+      "description": "Dapr configuration list supported by Service Connector",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of dapr configurations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DaprConfigurationResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DaprConfigurationResource": {
+      "description": "Represent one resource of the dapr configuration list",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "The properties of the dapr configuration.",
+          "$ref": "#/definitions/DaprConfigurationProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DaprConfigurationProperties": {
+      "properties": {
+        "targetType": {
+          "type": "string",
+          "description": "Supported target resource type, extract from resource id, uppercase"
+        },
+        "authType": {
+          "$ref": "#/definitions/AuthType"
+        },
+        "daprProperties": {
+          "$ref": "#/definitions/DaprProperties"
+        }
       }
     }
   },

@@ -1781,15 +1781,13 @@
             "$ref": "./examples/Template_Update.json"
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Metaverse/metaverses/{metaverseName}/templates/{templateId}/publish": {
-      "post": {
+      },
+      "delete": {
         "tags": [
           "SpaceTemplates"
         ],
-        "description": "Publish a template resource.",
-        "operationId": "Template_Publish",
+        "description": "Deletes a template resource for a given id.",
+        "operationId": "Template_Delete",
         "produces": [
           "application/json"
         ],
@@ -1818,71 +1816,15 @@
             }
           },
           "200": {
-            "description": "Template published."
+            "description": "Deletes the template."
           },
-          "202": {
-            "description": "Publish Accepted"
+          "204": {
+            "description": "The template does not exist."
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Template_Publish": {
-            "$ref": "./examples/Template_Publish.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Metaverse/metaverses/{metaverseName}/templates/{templateId}/unpublish": {
-      "post": {
-        "tags": [
-          "SpaceTemplates"
-        ],
-        "description": "Unpublish a template resource.",
-        "operationId": "Template_Unpublish",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/MetaverseNameParameter"
-          },
-          {
-            "$ref": "#/parameters/TemplateIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Default response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          },
-          "200": {
-            "description": "Template unpublished."
-          },
-          "202": {
-            "description": "Unpublish Accepted"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-examples": {
-          "Template_Unpublish": {
-            "$ref": "./examples/Template_Unpublish.json"
+          "Template_Delete": {
+            "$ref": "./examples/Template_Delete.json"
           }
         }
       }
@@ -2544,6 +2486,10 @@
         "metaverseId": {
           "description": "The id for the metaverse. This is not an Azure Resource Manager id.",
           "type": "string"
+        },
+        "enableMultiRegionStorage": {
+          "description": "The flag to determine if the metaverse storage should be deployed on multiple regions.",
+          "type": "boolean"
         }
       }
     },

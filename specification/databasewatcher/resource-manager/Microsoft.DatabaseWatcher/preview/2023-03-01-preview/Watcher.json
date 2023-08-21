@@ -51,10 +51,10 @@
   "paths": {
     "/providers/Microsoft.DatabaseWatcher/operations": {
       "get": {
+        "operationId": "Operations_List",
         "tags": [
           "Operations"
         ],
-        "operationId": "Operations_List",
         "description": "List the operations for the provider",
         "parameters": [
           {
@@ -75,22 +75,22 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Operations_List": {
             "$ref": "./examples/Operations_List_200.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DatabaseWatcher/watchers": {
       "get": {
+        "operationId": "Watchers_ListBySubscription",
         "tags": [
           "Watchers"
         ],
-        "operationId": "Watchers_ListBySubscription",
         "description": "List Watcher resources by subscription ID",
         "parameters": [
           {
@@ -114,22 +114,22 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Watchers_ListBySubscription": {
             "$ref": "./examples/Watchers_ListBySubscription_200.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DatabaseWatcher/watchers": {
       "get": {
+        "operationId": "Watchers_ListByResourceGroup",
         "tags": [
           "Watchers"
         ],
-        "operationId": "Watchers_ListByResourceGroup",
         "description": "List Watcher resources by resource group",
         "parameters": [
           {
@@ -156,22 +156,22 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Watchers_ListByResourceGroup": {
             "$ref": "./examples/Watchers_ListByResourceGroup_200.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DatabaseWatcher/watchers/{watcherName}": {
       "get": {
+        "operationId": "Watchers_Get",
         "tags": [
           "Watchers"
         ],
-        "operationId": "Watchers_Get",
         "description": "Get a Watcher",
         "parameters": [
           {
@@ -186,10 +186,10 @@
           {
             "name": "watcherName",
             "in": "path",
+            "description": "The database watcher name.",
             "required": true,
-            "description": "Database watcher name.",
-            "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$"
           }
         ],
         "responses": {
@@ -213,10 +213,10 @@
         }
       },
       "put": {
+        "operationId": "Watchers_CreateOrUpdate",
         "tags": [
           "Watchers"
         ],
-        "operationId": "Watchers_CreateOrUpdate",
         "description": "Create a Watcher",
         "parameters": [
           {
@@ -231,16 +231,16 @@
           {
             "name": "watcherName",
             "in": "path",
+            "description": "The database watcher name.",
             "required": true,
-            "description": "Database watcher name.",
-            "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$"
           },
           {
             "name": "resource",
             "in": "body",
-            "required": true,
             "description": "Resource create parameters.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/Watcher"
             }
@@ -248,22 +248,22 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Resource 'Watcher' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/Watcher"
             }
           },
           "201": {
-            "description": "ARM create operation completed successfully.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            },
+            "description": "Resource 'Watcher' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Watcher"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -284,10 +284,10 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
+        "operationId": "Watchers_Update",
         "tags": [
           "Watchers"
         ],
-        "operationId": "Watchers_Update",
         "description": "Update a Watcher",
         "parameters": [
           {
@@ -302,16 +302,16 @@
           {
             "name": "watcherName",
             "in": "path",
+            "description": "The database watcher name.",
             "required": true,
-            "description": "Database watcher name.",
-            "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$"
           },
           {
             "name": "properties",
             "in": "body",
-            "required": true,
             "description": "The resource properties to be updated.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/WatcherUpdate"
             }
@@ -322,6 +322,20 @@
             "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Watcher"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
             }
           },
           "default": {
@@ -335,13 +349,17 @@
           "Watchers_Update": {
             "$ref": "./examples/Watchers_Update_200.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
+        "operationId": "Watchers_Delete",
         "tags": [
           "Watchers"
         ],
-        "operationId": "Watchers_Delete",
         "description": "Delete a Watcher",
         "parameters": [
           {
@@ -356,10 +374,10 @@
           {
             "name": "watcherName",
             "in": "path",
+            "description": "The database watcher name.",
             "required": true,
-            "description": "Database watcher name.",
-            "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$"
           }
         ],
         "responses": {
@@ -370,9 +388,13 @@
             "description": "Resource deletion accepted.",
             "headers": {
               "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -392,18 +414,18 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DatabaseWatcher/watchers/{watcherName}/start": {
       "post": {
+        "operationId": "Watchers_Start",
         "tags": [
           "Watchers"
         ],
-        "operationId": "Watchers_Start",
-        "description": "Action to start monitoring all targets configured for a given database watcher.",
+        "description": "The action to start monitoring all targets configured for a database watcher.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -417,10 +439,10 @@
           {
             "name": "watcherName",
             "in": "path",
+            "description": "The database watcher name.",
             "required": true,
-            "description": "Database watcher name.",
-            "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$"
           }
         ],
         "responses": {
@@ -434,9 +456,9 @@
             "description": "Resource operation accepted.",
             "headers": {
               "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -460,11 +482,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DatabaseWatcher/watchers/{watcherName}/stop": {
       "post": {
+        "operationId": "Watchers_Stop",
         "tags": [
           "Watchers"
         ],
-        "operationId": "Watchers_Stop",
-        "description": "Action to stop monitoring all targets configured for a given database watcher.",
+        "description": "The action to stop monitoring all targets configured for a database watcher.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -478,10 +500,10 @@
           {
             "name": "watcherName",
             "in": "path",
+            "description": "The database watcher name.",
             "required": true,
-            "description": "Database watcher name.",
-            "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$"
           }
         ],
         "responses": {
@@ -495,9 +517,9 @@
             "description": "Resource operation accepted.",
             "headers": {
               "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -521,10 +543,10 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DatabaseWatcher/watchers/{watcherName}/targets": {
       "get": {
+        "operationId": "Targets_ListByWatcher",
         "tags": [
           "Targets"
         ],
-        "operationId": "Targets_ListByWatcher",
         "description": "List Target resources by Watcher",
         "parameters": [
           {
@@ -539,10 +561,10 @@
           {
             "name": "watcherName",
             "in": "path",
+            "description": "The database watcher name.",
             "required": true,
-            "description": "Database watcher name.",
-            "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$"
           }
         ],
         "responses": {
@@ -559,22 +581,22 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Targets_ListByWatcher": {
             "$ref": "./examples/Targets_ListByWatcher_200.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DatabaseWatcher/watchers/{watcherName}/targets/{targetName}": {
       "get": {
+        "operationId": "Targets_Get",
         "tags": [
           "Targets"
         ],
-        "operationId": "Targets_Get",
         "description": "Get a Target",
         "parameters": [
           {
@@ -589,18 +611,18 @@
           {
             "name": "watcherName",
             "in": "path",
+            "description": "The database watcher name.",
             "required": true,
-            "description": "Database watcher name.",
-            "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$"
           },
           {
             "name": "targetName",
             "in": "path",
+            "description": "The target resource name.",
             "required": true,
-            "description": "Target resource name.",
-            "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$"
           }
         ],
         "responses": {
@@ -624,10 +646,10 @@
         }
       },
       "put": {
+        "operationId": "Targets_CreateOrUpdate",
         "tags": [
           "Targets"
         ],
-        "operationId": "Targets_CreateOrUpdate",
         "description": "Create a Target",
         "parameters": [
           {
@@ -642,24 +664,24 @@
           {
             "name": "watcherName",
             "in": "path",
+            "description": "The database watcher name.",
             "required": true,
-            "description": "Database watcher name.",
-            "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$"
           },
           {
             "name": "targetName",
             "in": "path",
+            "description": "The target resource name.",
             "required": true,
-            "description": "Target resource name.",
-            "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$"
           },
           {
             "name": "resource",
             "in": "body",
-            "required": true,
             "description": "Resource create parameters.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/Target"
             }
@@ -667,22 +689,22 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Resource 'Target' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/Target"
             }
           },
           "201": {
-            "description": "ARM create operation completed successfully.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            },
+            "description": "Resource 'Target' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Target"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -703,10 +725,10 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
+        "operationId": "Targets_Delete",
         "tags": [
           "Targets"
         ],
-        "operationId": "Targets_Delete",
         "description": "Delete a Target",
         "parameters": [
           {
@@ -721,18 +743,18 @@
           {
             "name": "watcherName",
             "in": "path",
+            "description": "The database watcher name.",
             "required": true,
-            "description": "Database watcher name.",
-            "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$"
           },
           {
             "name": "targetName",
             "in": "path",
+            "description": "The target resource name.",
             "required": true,
-            "description": "Target resource name.",
-            "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$"
           }
         ],
         "responses": {
@@ -743,9 +765,13 @@
             "description": "Resource deletion accepted.",
             "headers": {
               "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -765,7 +791,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -782,7 +808,24 @@
       ],
       "x-ms-enum": {
         "name": "ResourceProvisioningState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
       }
     },
     "DatabaseWatcherProvisioningState": {
@@ -791,31 +834,43 @@
       "enum": [
         "Succeeded",
         "Failed",
-        "Canceled",
-        "Provisioning",
-        "Starting",
-        "Stopping",
-        "Deleting",
-        "Accepted"
+        "Canceled"
       ],
       "x-ms-enum": {
         "name": "DatabaseWatcherProvisioningState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
       }
     },
     "Datastore": {
       "type": "object",
+      "description": "The properties of a data store.",
       "properties": {
         "adxDatabaseResourceId": {
           "type": "string",
-          "description": "ARM ResourceId of an Azure Data Explorer database."
+          "description": "The ARM ResourceId of an Azure Data Explorer database."
         },
         "adxClusterUri": {
           "type": "string",
-          "description": "URI of an Azure Data Explorer Cluster."
+          "description": "The Kusto cluster URI."
         }
       },
-      "description": "Properties of data store",
       "required": [
         "adxDatabaseResourceId",
         "adxClusterUri"
@@ -823,36 +878,36 @@
     },
     "DatastoreUpdate": {
       "type": "object",
+      "description": "The properties of a data store.",
       "properties": {
         "adxDatabaseResourceId": {
           "type": "string",
-          "description": "ARM ResourceId of an Azure Data Explorer database."
+          "description": "The ARM ResourceId of an Azure Data Explorer database."
         },
         "adxClusterUri": {
           "type": "string",
-          "description": "URI of an Azure Data Explorer Cluster."
+          "description": "The Kusto cluster URI."
         }
-      },
-      "description": "Properties of data store"
+      }
     },
     "SqlDbElasticPoolTargetProperties": {
       "type": "object",
+      "description": "The properties specific to elastic pool in Azure SQL Database.",
       "properties": {
         "sqlEpResourceId": {
           "type": "string",
-          "description": "ARM ResourceId of an Azure SQL DB elastic pool target"
+          "description": "The ARM ResourceId of an Azure SQL DB elastic pool target."
         },
         "anchorDatabaseResourceId": {
           "type": "string",
-          "description": "ARM ResourceId of the anchor database used to connect to an elastic pool"
+          "description": "The ARM ResourceId of the anchor database used to connect to an elastic pool."
         },
         "readIntent": {
           "type": "boolean",
-          "description": "Set to true to monitor a high availability replica of specified target, if any",
+          "description": "Set to true to monitor a high availability replica of specified target, if any.",
           "default": false
         }
       },
-      "description": "Properties specific to elastic pool in Azure SQL Database",
       "required": [
         "sqlEpResourceId",
         "anchorDatabaseResourceId"
@@ -866,18 +921,18 @@
     },
     "SqlDbSingleDatabaseTargetProperties": {
       "type": "object",
+      "description": "The properties specific to single database in Azure SQL Database.",
       "properties": {
         "sqlDbResourceId": {
           "type": "string",
-          "description": "ARM ResourceId of an Azure SQL DB single database target"
+          "description": "The ARM ResourceId of an Azure SQL DB single database target."
         },
         "readIntent": {
           "type": "boolean",
-          "description": "Set to true to monitor a high availability replica of specified target, if any",
+          "description": "Set to true to monitor a high availability replica of specified target, if any.",
           "default": false
         }
       },
-      "description": "Properties specific to single database in Azure SQL Database",
       "required": [
         "sqlDbResourceId"
       ],
@@ -890,24 +945,24 @@
     },
     "SqlMiTargetProperties": {
       "type": "object",
+      "description": "The properties specific to Azure SQL Managed Instance targets.",
       "properties": {
         "sqlMiResourceId": {
           "type": "string",
-          "description": "ARM ResourceId of an Azure SQL Managed Instance target"
+          "description": "The ARM ResourceId of an Azure SQL Managed Instance target."
         },
         "connectionTcpPort": {
           "type": "integer",
           "format": "int32",
-          "description": "The TCP port number to optionally use in the connection string when connecting to an Azure SQL Managed Instance target",
+          "description": "The TCP port number to optionally use in the connection string when connecting to an Azure SQL Managed Instance target.",
           "default": 1433
         },
         "readIntent": {
           "type": "boolean",
-          "description": "Set to true to monitor a high availability replica of specified target, if any",
+          "description": "Set to true to monitor a high availability replica of specified target, if any.",
           "default": false
         }
       },
-      "description": "Properties specific to Azure SQL Managed Instance targets",
       "required": [
         "sqlMiResourceId"
       ],
@@ -920,23 +975,23 @@
     },
     "SqlVmTargetProperties": {
       "type": "object",
+      "description": "The properties specific to Azure SQL VM targets.",
       "properties": {
         "sqlVmResourceId": {
           "type": "string",
-          "description": "ARM ResourceId of an Azure SQL VM target"
+          "description": "The ARM ResourceId of an Azure SQL VM target."
         },
         "connectionTcpPort": {
           "type": "integer",
           "format": "int32",
-          "description": "The TCP port number to optionally use in the connection string when connecting to an Azure SQL VM target",
+          "description": "The TCP port number to optionally use in the connection string when connecting to an Azure SQL VM target.",
           "default": 1433
         },
         "sqlNamedInstanceName": {
           "type": "string",
-          "description": "The SQL instance name to optionally use in the connection string when connecting to an Azure SQL VM target"
+          "description": "The SQL instance name to optionally use in the connection string when connecting to an Azure SQL VM target."
         }
       },
-      "description": "Properties specific to Azure SQL VM targets",
       "required": [
         "sqlVmResourceId"
       ],
@@ -949,6 +1004,7 @@
     },
     "Target": {
       "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/TargetProperties",
@@ -960,7 +1016,6 @@
           ]
         }
       },
-      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -969,41 +1024,52 @@
     },
     "TargetCollectionStatus": {
       "type": "string",
-      "description": "Target states",
+      "description": "The target states.",
       "enum": [
         "Enabled",
         "Disabled"
       ],
       "x-ms-enum": {
         "name": "TargetCollectionStatus",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Denotes a target that is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Denotes a target that is disabled."
+          }
+        ]
       }
     },
     "TargetListResult": {
       "type": "object",
+      "description": "The response of a Target list operation.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The Target items on this page",
           "items": {
             "$ref": "#/definitions/Target"
-          },
-          "x-typespec-name": "Target[]",
-          "description": "The Target items on this page"
+          }
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "Rest.ResourceLocation"
+          "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a Target list operation.",
       "required": [
         "value"
       ]
     },
     "TargetProperties": {
       "type": "object",
+      "description": "The generic properties of a target.",
       "properties": {
         "targetType": {
           "type": "string",
@@ -1011,7 +1077,7 @@
         },
         "targetVault": {
           "$ref": "#/definitions/VaultSecret",
-          "description": "To use SQL authentication for targets, specify the vault where username and password secrets are stored"
+          "description": "To use SQL authentication when connecting to targets, specify the vault where the login name and password secrets are stored."
         },
         "connectionServerName": {
           "type": "string",
@@ -1020,14 +1086,26 @@
         },
         "targetCollectionStatus": {
           "type": "string",
-          "description": "Target collection status",
+          "description": "The target collection status.",
           "enum": [
             "Enabled",
             "Disabled"
           ],
           "x-ms-enum": {
             "name": "string",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Denotes a target that is enabled."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Denotes a target that is disabled."
+              }
+            ]
           }
         },
         "provisioningState": {
@@ -1036,7 +1114,6 @@
           "readOnly": true
         }
       },
-      "description": "Generic properties of a target",
       "discriminator": "targetType",
       "required": [
         "targetType",
@@ -1045,24 +1122,49 @@
     },
     "VaultSecret": {
       "type": "object",
+      "description": "The vault specific details required if using SQL authentication to connect to a target.",
       "properties": {
         "akvResourceId": {
           "type": "string",
-          "description": "ARM ResourceId of the Key Vault instance storing database authentication secrets"
+          "description": "The ARM ResourceId of the Key Vault instance storing database authentication secrets."
         },
         "akvTargetUser": {
           "type": "string",
-          "description": "The path to the Key Vault secret storing the login name (aka user name, aka account name) for authentication to a target"
+          "description": "The path to the Key Vault secret storing the login name (aka user name, aka account name) for authentication to a target."
         },
         "akvTargetPassword": {
           "type": "string",
-          "description": "The path to the Key Vault secret storing the password for authentication to a target"
+          "description": "The path to the Key Vault secret storing the password for authentication to a target."
         }
-      },
-      "description": "Vault specific details required if using SQL authentication to connect to a target"
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "Versions info.",
+      "enum": [
+        "2023-03-01-preview",
+        "2023-09-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2023_03_01_preview",
+            "value": "2023-03-01-preview",
+            "description": "The 2023-03-01-preview version."
+          },
+          {
+            "name": "v2023_09_01_preview",
+            "value": "2023-09-01-preview",
+            "description": "The 2023-09-01-preview version."
+          }
+        ]
+      }
     },
     "Watcher": {
       "type": "object",
+      "description": "The DatabaseWatcherProviderHub resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/WatcherProperties",
@@ -1078,7 +1180,6 @@
           "description": "The managed service identities assigned to this resource."
         }
       },
-      "description": "A DatabaseWatcherProviderHub resource",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -1087,69 +1188,90 @@
     },
     "WatcherListResult": {
       "type": "object",
+      "description": "The response of a Watcher list operation.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The Watcher items on this page",
           "items": {
             "$ref": "#/definitions/Watcher"
-          },
-          "x-typespec-name": "Watcher[]",
-          "description": "The Watcher items on this page"
+          }
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "Rest.ResourceLocation"
+          "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a Watcher list operation.",
       "required": [
         "value"
       ]
     },
     "WatcherProperties": {
       "type": "object",
+      "description": "The RP specific properties of the resource.",
       "properties": {
         "datastore": {
           "$ref": "#/definitions/Datastore",
-          "description": "A data store for collected monitoring data."
+          "description": "The data store for collected monitoring data."
         },
         "status": {
-          "type": "string",
+          "$ref": "#/definitions/WatcherStatus",
           "description": "The monitoring collection status of the watcher.",
-          "enum": [
-            "Running",
-            "Stopped"
-          ],
-          "x-ms-enum": {
-            "name": "string",
-            "modelAsString": true
-          },
           "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/DatabaseWatcherProvisioningState",
-          "description": "The provisioning state of the resource Watcher.",
+          "description": "The provisioning state of the resource watcher.",
           "readOnly": true
         }
-      },
-      "description": "RP specific properties of the resource"
+      }
     },
     "WatcherStatus": {
       "type": "string",
-      "description": "The monitoring collection status of the watcher.",
+      "description": "The monitoring collection status of a watcher.",
       "enum": [
+        "Starting",
         "Running",
-        "Stopped"
+        "Stopping",
+        "Stopped",
+        "Deleting"
       ],
       "x-ms-enum": {
         "name": "WatcherStatus",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Starting",
+            "value": "Starting",
+            "description": "Denotes the watcher is in a starting state."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "Denotes the watcher is in a running state."
+          },
+          {
+            "name": "Stopping",
+            "value": "Stopping",
+            "description": "Denotes the watcher is in a stopping state."
+          },
+          {
+            "name": "Stopped",
+            "value": "Stopped",
+            "description": "Denotes the watcher is in a stopped state."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Denotes the watcher is in a deleting state."
+          }
+        ]
       }
     },
     "WatcherUpdate": {
       "type": "object",
+      "description": "The type used for update operations of the Watcher.",
       "properties": {
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
@@ -1157,28 +1279,26 @@
         },
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
-          },
-          "x-typespec-name": "Record<string>",
-          "description": "Resource tags."
+          }
         },
         "properties": {
           "$ref": "#/definitions/WatcherUpdateProperties",
           "x-ms-client-flatten": true
         }
-      },
-      "description": "The type used for update operations of the Watcher."
+      }
     },
     "WatcherUpdateProperties": {
       "type": "object",
+      "description": "The updatable properties of the Watcher.",
       "properties": {
         "datastore": {
           "$ref": "#/definitions/DatastoreUpdate",
-          "description": "A data store for collected monitoring data."
+          "description": "The data store for collected monitoring data."
         }
-      },
-      "description": "The updatable properties of the Watcher."
+      }
     }
   },
   "parameters": {}

@@ -57,6 +57,10 @@ model MdsResourceProperties {
   @doc("Enable Teams Notification.")
   enableTeamsNotification?: boolean;
 
+  @visibility("read", "create", "update")
+  @doc("Enable Copilot.")
+  enableCopilot?: boolean;
+
   @visibility("read", "create")
   @doc("AAD Application Id.")
   @pattern("^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$")
@@ -118,6 +122,10 @@ model MdsResourceProperties {
   @visibility("read")
   @doc("Profile of Function App Resource.")
   functionAppProfile?: FunctionAppProfile;
+
+  @visibility("read")
+  @doc("Profile of OpenAI Resource.")
+  openAIProfile?: OpenAIProfile;
 }
 
 @doc("The properties related to Aks Resource")
@@ -240,6 +248,15 @@ model EventHubProfile {
 model FunctionAppProfile {
   
   @doc("Resource Id of Azure Function App Resource")
+  @visibility("read")
+  id?: string;
+    
+}
+
+@doc("The properties related to OpenAI Resource")
+model OpenAIProfile {
+  
+  @doc("Resource Id of OpenAI Resource")
   @visibility("read")
   id?: string;
     

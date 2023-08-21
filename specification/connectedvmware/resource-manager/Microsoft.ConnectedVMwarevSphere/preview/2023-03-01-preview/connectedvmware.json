@@ -2045,8 +2045,8 @@
           },
           {
             "in": "query",
-            "name": "retain",
-            "description": "Whether to just disable the VM from azure and retain the VM in the VMM.",
+            "name": "deleteFromHost",
+            "description": "Whether to delete the VM from the vCenter.",
             "required": false,
             "type": "boolean"
           },
@@ -4228,6 +4228,13 @@
           },
           {
             "in": "query",
+            "name": "deleteFromHost",
+            "description": "Whether to delete the VM from the vCenter.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "in": "query",
             "name": "force",
             "description": "Whether force delete was specified.",
             "required": false,
@@ -4428,6 +4435,89 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default/hybridIdentityMetadata/default": {
+      "get": {
+        "tags": [
+          "VmInstanceHybridIdentityMetadata"
+        ],
+        "operationId": "VmInstanceHybridIdentityMetadata_Get",
+        "summary": "Gets HybridIdentityMetadata.",
+        "description": "Implements HybridIdentityMetadata GET method.",
+        "x-ms-examples": {
+          "GetHybridIdentityMetadata": {
+            "$ref": "./examples/GetVmInstanceHybridIdentityMetadata.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VmInstanceHybridIdentityMetadata"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default/hybridIdentityMetadata": {
+      "get": {
+        "tags": [
+          "VmInstanceHybridIdentityMetadata"
+        ],
+        "operationId": "VmInstanceHybridIdentityMetadata_List",
+        "summary": "Implements GET HybridIdentityMetadata in a vm.",
+        "description": "Returns the list of HybridIdentityMetadata of the given vm.",
+        "x-ms-examples": {
+          "HybridIdentityMetadataListByVm": {
+            "$ref": "./examples/HybridIdentityMetadata_ListByVmInstance.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VmInstanceHybridIdentityMetadataList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -4690,13 +4780,37 @@
           "type": "integer",
           "readOnly": true
         },
+        "memOverallUsageGB": {
+          "format": "int64",
+          "description": "Gets the used physical memory on the pool in GB.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "memCapacityGB": {
+          "format": "int64",
+          "description": "Gets the total amount of physical memory on the pool in GB.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "CPUOverallUsageMHz": {
+          "format": "int64",
+          "description": "Gets the used CPU usage across all cores on the pool in MHz.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "CPUCapacityMHz": {
+          "format": "int64",
+          "description": "Gets the max CPU usage across all cores on the pool in MHz.",
+          "type": "integer",
+          "readOnly": true
+        },
         "customResourceName": {
           "description": "Gets the name of the corresponding resource in Kubernetes.",
           "type": "string",
           "readOnly": true
         },
         "datastoreIds": {
-          "description": "Gets or sets the datastore ARM ids.",
+          "description": "Gets the datastore ARM ids.",
           "type": "array",
           "items": {
             "type": "string"
@@ -4704,7 +4818,7 @@
           "readOnly": true
         },
         "networkIds": {
-          "description": "Gets or sets the network ARM ids.",
+          "description": "Gets the network ARM ids.",
           "type": "array",
           "items": {
             "type": "string"
@@ -4720,8 +4834,8 @@
           }
         },
         "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
-          "type": "string",
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Gets the provisioning state.",
           "readOnly": true
         }
       }
@@ -4916,8 +5030,8 @@
           }
         },
         "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
-          "type": "string",
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Gets the provisioning state.",
           "readOnly": true
         }
       }
@@ -5721,8 +5835,8 @@
           }
         },
         "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
-          "type": "string",
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Gets the provisioning state.",
           "readOnly": true
         },
         "vmId": {
@@ -5778,11 +5892,11 @@
           }
         },
         "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
-          "type": "string",
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Gets the provisioning state.",
           "readOnly": true
         },
-        "vmId": {
+        "resourceUid": {
           "description": "Gets or sets a unique identifier for the vm resource.",
           "type": "string",
           "readOnly": true
@@ -6097,8 +6211,8 @@
           }
         },
         "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
-          "type": "string",
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Gets the provisioning state.",
           "readOnly": true
         }
       }
@@ -6142,8 +6256,32 @@
           "type": "string",
           "readOnly": true
         },
+        "usedMemoryGB": {
+          "format": "int64",
+          "description": "Gets the used physical memory on the cluster in GB.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "totalMemoryGB": {
+          "format": "int64",
+          "description": "Gets the total amount of physical memory on the cluster in GB.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "usedCPUMHz": {
+          "format": "int64",
+          "description": "Gets the used CPU usage across all cores on the cluster in MHz.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "totalCPUMHz": {
+          "format": "int64",
+          "description": "Gets the max CPU usage across all cores on the cluster in MHz.",
+          "type": "integer",
+          "readOnly": true
+        },
         "datastoreIds": {
-          "description": "Gets or sets the datastore ARM ids.",
+          "description": "Gets the datastore ARM ids.",
           "type": "array",
           "items": {
             "type": "string"
@@ -6151,7 +6289,7 @@
           "readOnly": true
         },
         "networkIds": {
-          "description": "Gets or sets the network ARM ids.",
+          "description": "Gets the network ARM ids.",
           "type": "array",
           "items": {
             "type": "string"
@@ -6159,8 +6297,8 @@
           "readOnly": true
         },
         "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
-          "type": "string",
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Gets the provisioning state.",
           "readOnly": true
         }
       }
@@ -6282,8 +6420,32 @@
           "type": "string",
           "readOnly": true
         },
+        "overallMemoryUsageGB": {
+          "format": "int64",
+          "description": "Gets the used physical memory on the host in GB.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "memorySizeGB": {
+          "format": "int64",
+          "description": "Gets the total amount of physical memory on the host in GB.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "overallCPUUsageMHz": {
+          "format": "int64",
+          "description": "Gets the used CPU usage across all cores in MHz.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "CPUMhz": {
+          "format": "int64",
+          "description": "Gets the max CPU usage across all cores in MHz.",
+          "type": "integer",
+          "readOnly": true
+        },
         "datastoreIds": {
-          "description": "Gets or sets the datastore ARM ids.",
+          "description": "Gets the datastore ARM ids.",
           "type": "array",
           "items": {
             "type": "string"
@@ -6291,7 +6453,7 @@
           "readOnly": true
         },
         "networkIds": {
-          "description": "Gets or sets the network ARM ids.",
+          "description": "Gets the network ARM ids.",
           "type": "array",
           "items": {
             "type": "string"
@@ -6299,8 +6461,8 @@
           "readOnly": true
         },
         "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
-          "type": "string",
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Gets the provisioning state.",
           "readOnly": true
         }
       }
@@ -6655,8 +6817,8 @@
           }
         },
         "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
-          "type": "string",
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Gets the provisioning state.",
           "readOnly": true
         }
       }
@@ -7109,8 +7271,8 @@
           "type": "string"
         },
         "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
-          "type": "string",
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Gets the provisioning state.",
           "readOnly": true
         }
       }
@@ -7403,8 +7565,68 @@
           "readOnly": true
         },
         "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
-          "type": "string",
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Gets the provisioning state.",
+          "readOnly": true
+        }
+      }
+    },
+    "VmInstanceHybridIdentityMetadataList": {
+      "description": "List of HybridIdentityMetadata.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "Url to follow for getting next page of HybridIdentityMetadata.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of HybridIdentityMetadata",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VmInstanceHybridIdentityMetadata"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "VmInstanceHybridIdentityMetadata": {
+      "description": "Defines the HybridIdentityMetadata.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource",
+          "description": "The resource model definition for an Azure Resource Manager proxy resource. It will have everything other than required location and tags."
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/VmInstanceHybridIdentityMetadataProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "VmInstanceHybridIdentityMetadataProperties": {
+      "description": "Describes the properties of Hybrid Identity Metadata for a Virtual Machine.",
+      "type": "object",
+      "properties": {
+        "resourceUid": {
+          "description": "The unique identifier for the resource.",
+          "type": "string"
+        },
+        "publicKey": {
+          "description": "Gets or sets the Public Key.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Gets the provisioning state.",
           "readOnly": true
         }
       }
@@ -7801,6 +8023,11 @@
           "description": "Username / Password Credentials to provision guest agent.",
           "$ref": "#/definitions/GuestCredential"
         },
+        "privateLinkScopeResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource id of the private link scope this machine is assigned to, if any."
+        },
         "httpProxyConfig": {
           "description": "HTTP Proxy configuration for the VM.",
           "$ref": "#/definitions/HttpProxyConfiguration"
@@ -7829,8 +8056,8 @@
           }
         },
         "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
-          "type": "string",
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Gets the provisioning state.",
           "readOnly": true
         }
       }

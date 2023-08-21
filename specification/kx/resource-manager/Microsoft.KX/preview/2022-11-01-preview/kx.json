@@ -3,9 +3,9 @@
   "info": {
     "title": "KX Resource Provider",
     "version": "2022-11-01-preview",
-    "x-cadl-generated": [
+    "x-typespec-generated": [
       {
-        "emitter": "@azure-tools/cadl-autorest"
+        "emitter": "@azure-tools/typespec-autorest"
       }
     ]
   },
@@ -29,9 +29,9 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
       "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -48,10 +48,10 @@
   "paths": {
     "/providers/Microsoft.KX/operations": {
       "get": {
+        "operationId": "Operations_List",
         "tags": [
           "Operations"
         ],
-        "operationId": "Operations_List",
         "description": "List the operations for the provider",
         "parameters": [
           {
@@ -66,28 +66,28 @@
             }
           },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Operations_List_5": {
             "$ref": "./examples/Operations_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.KX/kdbInsightsEnterprise": {
       "get": {
+        "operationId": "KdbInsightsEnterprise_ListBySubscription",
         "tags": [
           "KdbInsightsEnterprise"
         ],
-        "operationId": "KdbInsightsEnterprise_ListBySubscription",
         "description": "List KdbInsightsEnterpriseResource resources by subscription ID",
         "parameters": [
           {
@@ -105,28 +105,28 @@
             }
           },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "KdbInsightsEnterprise_ListBySubscription_1": {
             "$ref": "./examples/KdbInsightsEnterprise_ListBySubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KX/kdbInsightsEnterprise": {
       "get": {
+        "operationId": "KdbInsightsEnterprise_ListByResourceGroup",
         "tags": [
           "KdbInsightsEnterprise"
         ],
-        "operationId": "KdbInsightsEnterprise_ListByResourceGroup",
         "description": "List KdbInsightsEnterpriseResource resources by resource group",
         "parameters": [
           {
@@ -147,28 +147,28 @@
             }
           },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "KdbInsightsEnterprise_ListByResourceGroup_3": {
             "$ref": "./examples/KdbInsightsEnterprise_ListByResourceGroup.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KX/kdbInsightsEnterprise/{kdbInsightsEnterpriseName}": {
       "get": {
+        "operationId": "KdbInsightsEnterprise_Get",
         "tags": [
           "KdbInsightsEnterprise"
         ],
-        "operationId": "KdbInsightsEnterprise_Get",
         "description": "Get a KdbInsightsEnterpriseResource",
         "parameters": [
           {
@@ -181,7 +181,12 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/KdbInsightsEnterpriseResource.kdbInsightsEnterpriseName"
+            "name": "kdbInsightsEnterpriseName",
+            "in": "path",
+            "description": "The name of the kdbInsightsEnterprise resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -192,7 +197,7 @@
             }
           },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -205,10 +210,10 @@
         }
       },
       "put": {
+        "operationId": "KdbInsightsEnterprise_CreateOrUpdate",
         "tags": [
           "KdbInsightsEnterprise"
         ],
-        "operationId": "KdbInsightsEnterprise_CreateOrUpdate",
         "description": "Create a KdbInsightsEnterpriseResource",
         "parameters": [
           {
@@ -221,13 +226,18 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/KdbInsightsEnterpriseResource.kdbInsightsEnterpriseName"
+            "name": "kdbInsightsEnterpriseName",
+            "in": "path",
+            "description": "The name of the kdbInsightsEnterprise resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "resource",
             "in": "body",
-            "required": true,
             "description": "Resource create parameters.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/KdbInsightsEnterpriseResource"
             }
@@ -242,19 +252,19 @@
           },
           "201": {
             "description": "ARM create operation completed successfully.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/KdbInsightsEnterpriseResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -271,10 +281,10 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
+        "operationId": "KdbInsightsEnterprise_Update",
         "tags": [
           "KdbInsightsEnterprise"
         ],
-        "operationId": "KdbInsightsEnterprise_Update",
         "description": "Update a KdbInsightsEnterpriseResource",
         "parameters": [
           {
@@ -287,13 +297,18 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/KdbInsightsEnterpriseResource.kdbInsightsEnterpriseName"
+            "name": "kdbInsightsEnterpriseName",
+            "in": "path",
+            "description": "The name of the kdbInsightsEnterprise resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "properties",
             "in": "body",
-            "required": true,
             "description": "The resource properties to be updated.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/KdbInsightsEnterpriseResourceUpdate"
             }
@@ -306,8 +321,22 @@
               "$ref": "#/definitions/KdbInsightsEnterpriseResource"
             }
           },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -317,13 +346,17 @@
           "KdbInsightsEnterprise_Update_4": {
             "$ref": "./examples/KdbInsightsEnterprise_Update.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
+        "operationId": "KdbInsightsEnterprise_Delete",
         "tags": [
           "KdbInsightsEnterprise"
         ],
-        "operationId": "KdbInsightsEnterprise_Delete",
         "description": "Delete a KdbInsightsEnterpriseResource",
         "parameters": [
           {
@@ -336,7 +369,12 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/KdbInsightsEnterpriseResource.kdbInsightsEnterpriseName"
+            "name": "kdbInsightsEnterpriseName",
+            "in": "path",
+            "description": "The name of the kdbInsightsEnterprise resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -347,9 +385,13 @@
             "description": "Resource deletion accepted.",
             "headers": {
               "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -357,7 +399,7 @@
             "description": "Resource deleted successfully."
           },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -369,7 +411,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -378,11 +420,190 @@
   "definitions": {
     "KdbInsightsEnterpriseProperties": {
       "type": "object",
+      "description": "Details of the kdbInsightsEnterprise resource.",
       "properties": {
         "keyCloakPassword": {
           "$ref": "#/definitions/PasswordString",
           "description": "The password to use for KeyCloak",
-          "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\\$%\\^&\\*]).{12,320}$"
+          "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\\$%\\^&\\*])[a-zA-Z0-9!@#\\$%\\^&\\*]{14,320}$",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "uiPassword": {
+          "$ref": "#/definitions/PasswordString",
+          "description": "The password to use for the UI",
+          "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\\$%\\^&\\*])[a-zA-Z0-9!@#\\$%\\^&\\*]{14,320}$",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "emailAddress": {
+          "type": "string",
+          "description": "Email address for licensing and certificate registration",
+          "pattern": "^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "uiUsername": {
+          "type": "string",
+          "description": "The UI user name",
+          "pattern": "^[A-Za-z0-9]{8,20}$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "systemNodePoolVmSize": {
+          "type": "string",
+          "description": "AKS System node pool VM size",
+          "default": "Standard_D2d_v4",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "userNodePoolVmSize": {
+          "type": "string",
+          "description": "AKS User node pool VM size",
+          "default": "Standard_D8ds_v4",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "readWriteManyStorageClass": {
+          "$ref": "#/definitions/ReadWriteManyStorageClass",
+          "description": "Storage Class for ReadWriteMany volumes",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "readWriteOnceStorageClass": {
+          "type": "string",
+          "description": "Storage Class for ReadWriteOnce volumes derived from IsPremiumStorageEnabled",
+          "default": "managed-csi",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "rtStorageClass": {
+          "type": "string",
+          "description": "RT storage class value, derived from IsPremiumStorageEnabled",
+          "default": "managed-csi",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "isRookCeph": {
+          "type": "boolean",
+          "description": "Indicate whether to deploy a Ceph cluster into AKS and enable rook-cephfs storage class",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "securityMonitoringEnabled": {
+          "type": "boolean",
+          "description": "Indicate whether to enable Microsoft Defender for Containers",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "isPremiumStorageEnabled": {
+          "type": "boolean",
+          "description": "Indicate whether to use Premium Storage for ReadWriteOnce volumes",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "isNotificationsOn": {
+          "type": "boolean",
+          "description": "Indicate whether to send notification emails to the client",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "clientNotificationAddress": {
+          "type": "string",
+          "description": "Email address for alert notifications",
+          "pattern": "^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "vnetAddressSpace": {
+          "type": "string",
+          "description": "A custom *.*.0.0/16 Address space for the kdb Insights Enterprise cluster Virtual Network",
+          "default": "10.0.0.0/16",
+          "pattern": "\\b(?:(?:2(?:[0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9])\\.){3}(?:(?:2([0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9]))\\b/[0-9]+",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "isAuthorizedIpRanges": {
+          "type": "boolean",
+          "description": "Indicate whether to secure access to the Kubernetes API server using authorized public IP address ranges",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "authorizedIpRanges": {
+          "type": "string",
+          "description": "A comma-separated list of public IP addresses or address ranges",
+          "pattern": "^(?=.{1,320}$)\\b(?!(10\\.|172\\.(1[6-9]|2[0-9]|3[0-1])\\.|192\\.168))(((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\/([1-9]|1[0-9]|2[0-8]|3[0-2])){0,1}){0,1}((\\s*,\\s*)(?=[^,])){0,1})+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "aksContainerInsightsRetentionDays": {
+          "type": "integer",
+          "format": "int64",
+          "description": "AKS Container insights retention period in days",
+          "default": 30,
+          "minimum": 30,
+          "maximum": 730,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "aksLogRetentionDays": {
+          "type": "integer",
+          "format": "int64",
+          "description": "AKS Kubernetes audit log retention period in days. A value of 0 will retain the events indefinitely.",
+          "default": 30,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "aksMetricsRetentionDays": {
+          "type": "integer",
+          "format": "int64",
+          "description": "AKS Kubernetes metrics retention period in days. A value of 0 will retain the metrics indefinitely.",
+          "default": 30,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -395,25 +616,27 @@
           "readOnly": true
         }
       },
-      "description": "Details of the kdbInsightsEnterprise resource."
+      "required": [
+        "keyCloakPassword",
+        "uiPassword",
+        "emailAddress",
+        "uiUsername"
+      ]
     },
     "KdbInsightsEnterpriseResource": {
       "type": "object",
+      "description": "A kdbInsightsEnterprise resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/KdbInsightsEnterpriseProperties",
           "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
           "x-ms-mutability": [
             "read",
             "create"
-          ],
-          "x-ms-client-flatten": true
+          ]
         }
       },
-      "description": "A kdbInsightsEnterprise resource",
-      "required": [
-        "properties"
-      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -422,48 +645,41 @@
     },
     "KdbInsightsEnterpriseResourceListResult": {
       "type": "object",
+      "description": "The response of a KdbInsightsEnterpriseResource list operation.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The KdbInsightsEnterpriseResource items on this page",
           "items": {
             "$ref": "#/definitions/KdbInsightsEnterpriseResource"
-          },
-          "x-cadl-name": "KdbInsightsEnterpriseResource[]",
-          "description": "The KdbInsightsEnterpriseResource items on this page"
+          }
         },
         "nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a KdbInsightsEnterpriseResource list operation.",
       "required": [
         "value"
       ]
     },
     "KdbInsightsEnterpriseResourceUpdate": {
       "type": "object",
+      "description": "The type used for update operations of the KdbInsightsEnterpriseResource.",
       "properties": {
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "Resource tags."
-        },
-        "properties": {
-          "$ref": "#/definitions/KdbInsightsEnterpriseResourceUpdateProperties"
+          }
         }
-      },
-      "description": "The type used for update operations of the KdbInsightsEnterpriseResource."
-    },
-    "KdbInsightsEnterpriseResourceUpdateProperties": {
-      "type": "object",
-      "properties": {},
-      "description": "The updatable properties of the KdbInsightsEnterpriseResource."
+      }
     },
     "ManagedResourceGroupConfiguration": {
       "type": "object",
+      "description": "Configuration of the managed resource group associated with the resource.",
       "properties": {
         "name": {
           "type": "string",
@@ -474,7 +690,6 @@
           "description": "The resource group location."
         }
       },
-      "description": "Configuration of the managed resource group associated with the resource.",
       "required": [
         "name",
         "location"
@@ -487,30 +702,82 @@
     },
     "ProvisioningState": {
       "type": "string",
-      "description": "Provisioning State",
+      "description": "The full set of provisioning states",
       "enum": [
         "Succeeded",
         "Failed",
         "Canceled",
         "Provisioning",
+        "Updating",
         "Deleting",
         "Accepted"
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Provisioning the resource is in progress"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource is being updated"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The change request has been accepted"
+          }
+        ]
+      }
+    },
+    "ReadWriteManyStorageClass": {
+      "type": "string",
+      "description": "Accepted values for ReadWriteManyStorageClass property",
+      "enum": [
+        "azurefile-premium-kxi-nfs",
+        "rook-cephfs"
+      ],
+      "x-ms-enum": {
+        "name": "ReadWriteManyStorageClass",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureFile",
+            "value": "azurefile-premium-kxi-nfs",
+            "description": "Use Azure Files Premium for ReadWriteMany volumes"
+          },
+          {
+            "name": "RookCeph",
+            "value": "rook-cephfs",
+            "description": "Use RookCeph for ReadWriteMany volumes"
+          }
+        ]
       }
     }
   },
-  "parameters": {
-    "KdbInsightsEnterpriseResource.kdbInsightsEnterpriseName": {
-      "name": "kdbInsightsEnterpriseName",
-      "in": "path",
-      "required": true,
-      "description": "The name of the kdbInsightsEnterprise resource",
-      "pattern": "^[a-zA-Z0-9-]{3,24}$",
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }

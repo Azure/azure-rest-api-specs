@@ -44,9 +44,9 @@ model StandbyVirtualMachinePoolResourceProperties {
   @maxValue(2000)
   maxReadyCapacity: int64;
 
-  @doc("Specifies list of VirtualMachineStateMixPolicy.")
+  @doc("Specifies the desired state of Virtual Machines in the pool.")
   @extension("x-ms-identifiers", ["vmState"])
-  virtualMachineStateMixPolicies: VirtualMachineStatePolicy[];
+  virtualMachineState: VirtualMachineState;
 
   @doc("Specifies list of VMScaleSets' fully qualified resource IDs the pool is attached to. When multiple VMScaleSets are specified, standby VMs are created for each VMScaleSet independently.")
   attachedVirtualMachineScaleSetIds?: string[];
@@ -56,29 +56,16 @@ model StandbyVirtualMachinePoolResourceProperties {
   provisioningState?: ProvisioningState;
 }
 
-@doc("Details of VirtualMachineStatePolicy")
-model VirtualMachineStatePolicy {
-  @doc("State of standby virtual machines")
-  vmState: VirtualMachineState;
-
-  @doc("Percentage number of standby VMs in this state.")
-  @minValue(0)
-  @maxValue(100)
-  percentage: int32;
-}
-
 @doc("State of standby virtual machines")
 enum VirtualMachineState {
   Running,
-  Stopped,
+  Deallocated,
 }
 
 @doc("Provisioning state")
 @lroStatus
 enum ProvisioningState {
   ...ResourceProvisioningState,
-  Provisioning,
-  Updating,
   Deleting,
 }
 

@@ -144,6 +144,9 @@
           },
           "Create a Device Without External Device Id": {
             "$ref": "./examples/Create_Device_Without_ExternalDeviceId.json"
+          },
+          "Create a Device With Custom Attributes": {
+            "$ref": "./examples/Create_Device_With_Attributes.json"
           }
         }
       },
@@ -408,6 +411,10 @@
         "enabled": {
           "type": "boolean",
           "description": "Indicates if the resource and identity are enabled or not. A disabled device cannot authenticate with AAD."
+        },
+        "attributes": {
+          "type": "object",
+          "additionalProperties": {}
         }
       }
     },
@@ -496,68 +503,16 @@
             }
           }
         },
+        "attributes": {
+          "type": "object",
+          "additionalProperties": {}
+        },
         "provisioningState": {
-          "description": "The provisioning state of the resource.",
-          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "type": "string",
           "readOnly": true
         }
       }
-    },
-    "ResourceProviderOperationList": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceProviderOperation"
-          }
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      },
-      "description": "Results of the request to list operations."
-    },
-    "ResourceProviderOperation": {
-      "type": "object",
-      "properties": {
-        "isDataAction": {
-          "type": "string",
-          "description": "Indicates whether the operation applies to data-plane."
-        },
-        "name": {
-          "type": "string",
-          "description": "Operation name, in format of {provider}/{resource}/{operation}"
-        },
-        "display": {
-          "type": "object",
-          "properties": {
-            "provider": {
-              "type": "string",
-              "description": "The resource provider."
-            },
-            "resource": {
-              "type": "string",
-              "description": "Resource on which the operation is performed."
-            },
-            "operation": {
-              "type": "string",
-              "description": "Type of operation: get, read, delete, etc."
-            },
-            "description": {
-              "type": "string",
-              "description": "Description of this operation."
-            }
-          },
-          "description": "Display metadata associated with the operation."
-        }
-      },
-      "description": "Results of the request to list operations."
-    },
-    "ProvisioningState": {
-      "type": "string",
-      "description": "Provisioning state of the resource.",
-      "readOnly": true
     }
   }
 }

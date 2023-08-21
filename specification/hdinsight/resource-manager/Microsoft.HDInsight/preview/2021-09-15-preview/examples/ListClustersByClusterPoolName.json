@@ -18,11 +18,24 @@
               "clusterType": "kafka",
               "deploymentId": "45cd32aead6e4a91b079a0cdbfac8c36",
               "computeProfile": {
-                "vmSize": "Standard_D3_v2",
-                "count": 4
+                "nodes": [
+                  {
+                    "type": "worker",
+                    "vmSize": "Standard_D3_v2",
+                    "count": 4
+                  }
+                ]
               },
               "clusterProfile": {
                 "stackVersion": "2.4.1-1.0",
+                "clusterVersion": "1.0.1",
+                "ossVersion": "2.4.1",
+                "components": [
+                  {
+                    "name": "Hive",
+                    "version": "2.4.1"
+                  }
+                ],
                 "identityProfile": {
                   "msiResourceId": "/subscriptions/subid/resourceGroups/hiloResourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-msi",
                   "msiClientId": "de91f1d8-767f-460a-ac11-3cf103f74b34",
@@ -40,17 +53,17 @@
                   },
                   "ssh": [
                     {
-                      "endpoint": "cluster1.clusterpool1.westus2.projecthilo.net/ssh/host/pod-0"
+                      "endpoint": "cluster1.clusterpool1.westus2.projecthilo.net/ssh/host/sshnode-0"
                     },
                     {
-                      "endpoint": "cluster1.clusterpool1.westus2.projecthilo.net/ssh/host/pod-1"
+                      "endpoint": "cluster1.clusterpool1.westus2.projecthilo.net/ssh/host/sshnode-1"
                     }
                   ]
                 },
                 "kafkaProfile": {},
                 "sshProfile": {
                   "count": 2,
-                  "podPrefix": "pod"
+                  "podPrefix": "sshnode"
                 }
               }
             },

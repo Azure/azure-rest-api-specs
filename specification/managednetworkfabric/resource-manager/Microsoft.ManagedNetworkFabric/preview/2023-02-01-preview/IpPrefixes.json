@@ -82,12 +82,28 @@
               "$ref": "#/definitions/IpPrefix"
             }
           },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/IpPrefix"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "IpPrefixes_Create_MaximumSet_Gen": {
@@ -190,12 +206,25 @@
               "$ref": "#/definitions/IpPrefix"
             }
           },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "IpPrefixes_Update_MaximumSet_Gen": {
@@ -235,6 +264,15 @@
           "200": {
             "description": "Success"
           },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
           "204": {
             "description": "No Content"
           },
@@ -244,6 +282,10 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "IpPrefixes_Delete_MaximumSet_Gen": {
@@ -352,7 +394,7 @@
               },
               "sequenceNumber": {
                 "type": "integer",
-                "format": "int32",
+                "format": "int64",
                 "minimum": 1,
                 "maximum": 4294967295,
                 "description": "Sequence to insert to/delete from existing route. Prefix lists are evaluated starting with the lowest sequence number and continue down the list until a match is made. Once a match is made, the permit or deny statement is applied to that network and the rest of the list is ignored."

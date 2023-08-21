@@ -1,0 +1,23 @@
+{
+  "operationId": "IndexOperations_RegenerateKey",
+  "title": "IndexOperations_RegenerateKey",
+  "parameters": {
+    "subscriptionId": "b55eab7e-f8f9-4ea7-83d4-200c69b8e58c",
+    "resourceGroupName": "rgName",
+    "api-version": "2023-05-01-preview",
+    "name": "my-index",
+    "body": {
+      "keyKind": "PrimaryReadWriteKey"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "primaryReadWriteKey": "<primaryReadWriteKey>",
+        "secondaryReadWriteKey": "<secondaryReadWriteKey>",
+        "primaryReadOnlyKey": "<primaryReadOnlyKey>",
+        "secondaryReadOnlyKey": "<secondaryReadPOnlyKey>"
+      }
+    }
+  }
+}

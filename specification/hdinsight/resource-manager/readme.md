@@ -29,7 +29,26 @@ description: HDInsight AKS Management Client
 openapi-type: arm
 openapi-subtype: rpaas
 azure-arm: true
-tag: package-2021-09-preview
+tag: package-2023-06-preview
+```
+
+### Tag: package-2023-06-preview
+
+These settings apply only when `--tag=package-2023-06-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-06-preview'
+input-file:
+- Microsoft.HDInsight/preview/2023-06-01-preview/hdinsight.json
+
+suppressions:
+  - code: MISSING_APIS_IN_DEFAULT_TAG
+    reason: Remove deprecated APIs in new API version.
+  - code: ResourceNameRestriction
+    reason: Keep compatibility with old API version.
+  - code: PatchBodyParametersSchema
+    reason: The "location" property is a must for a tracked resource.
+  - code: TrackedResourcePatchOperation
+    reason: This is a false positive, the "tags" property is defined in TrackedResource.
 ```
 
 ### Tag: package-2021-09-preview
@@ -39,6 +58,12 @@ These settings apply only when `--tag=package-2021-09-preview` is specified on t
 ``` yaml $(tag) == 'package-2021-09-preview'
 input-file:
 - Microsoft.HDInsight/preview/2021-09-15-preview/hdinsight.json
+
+suppressions:
+  - code: MISSING_APIS_IN_DEFAULT_TAG
+    reason: Remove deprecated APIs in new API version.
+  - code: ResourceNameRestriction
+    reason: Suppress it because the resource name in other existing apis doesn't have restriction.
 ```
 
 ---
@@ -79,8 +104,8 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 ``` yaml $(csharp)
 csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.HDInsight.AKS
-  output-folder: $(csharp-sdks-folder)/hdinsight/Microsoft.Azure.Management.HDInsight.AKS/src/Generated
+  namespace: Azure.ResourceManager.HDInsightAks
+  output-folder: $(csharp-sdks-folder)/hdinsight/Azure.ResourceManager.HDInsightAks/src/Generated
   clear-output-folder: true
 ```
 

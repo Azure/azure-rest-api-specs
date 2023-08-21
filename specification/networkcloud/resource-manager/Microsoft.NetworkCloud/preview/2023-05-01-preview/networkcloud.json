@@ -800,7 +800,7 @@
               "$ref": "#/definitions/BareMetalMachine"
             },
             "headers": {
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "The URL to retrieve the status of the asynchronous operation."
               }
@@ -820,7 +820,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -878,6 +878,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
+          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -936,6 +937,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
+          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -986,6 +988,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
+          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -1044,6 +1047,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
+          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -1094,6 +1098,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
+          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -1153,6 +1158,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
+          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -1212,6 +1218,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
+          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -1271,6 +1278,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
+          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -1321,6 +1329,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
+          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -1371,6 +1380,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
+          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -1430,6 +1440,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
+          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -1666,7 +1677,7 @@
               "$ref": "#/definitions/CloudServicesNetwork"
             },
             "headers": {
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "The URL to retrieve the status of the asynchronous operation."
               }
@@ -1686,7 +1697,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -2162,7 +2173,7 @@
               "$ref": "#/definitions/Cluster"
             },
             "headers": {
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "The URL to retrieve the status of the asynchronous operation."
               }
@@ -2185,7 +2196,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -2193,7 +2204,7 @@
       "get": {
         "description": "Get a list of bare metal machine key sets for the provided cluster.",
         "summary": "List bare metal machine key sets of the cluster.",
-        "operationId": "bareMetalMachineKeySets_ListByCluster",
+        "operationId": "BareMetalMachineKeySets_ListByCluster",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2436,7 +2447,7 @@
               "$ref": "#/definitions/BareMetalMachineKeySet"
             },
             "headers": {
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "The URL to retrieve the status of the asynchronous operation."
               }
@@ -2456,7 +2467,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -2464,7 +2475,7 @@
       "get": {
         "description": "Get a list of baseboard management controller key sets for the provided cluster.",
         "summary": "List baseboard management controller key sets of the cluster.",
-        "operationId": "bmcKeySets_ListByCluster",
+        "operationId": "BmcKeySets_ListByCluster",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2707,7 +2718,7 @@
               "$ref": "#/definitions/BmcKeySet"
             },
             "headers": {
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "The URL to retrieve the status of the asynchronous operation."
               }
@@ -2727,7 +2738,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -2788,6 +2799,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
+          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -2796,7 +2808,7 @@
       "get": {
         "description": "Get a list of metrics configurations for the provided cluster.",
         "summary": "List metrics configurations of the cluster.",
-        "operationId": "metricsConfigurations_ListByCluster",
+        "operationId": "MetricsConfigurations_ListByCluster",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2878,8 +2890,8 @@
         }
       },
       "put": {
-        "description": "Update the metrics configuration of the provided cluster.",
-        "summary": "Update the metrics configuration of the cluster.",
+        "description": "Create new or update the existing metrics configuration of the provided cluster.",
+        "summary": "Create or update metrics configuration of the cluster.",
         "operationId": "MetricsConfigurations_CreateOrUpdate",
         "parameters": [
           {
@@ -2934,8 +2946,8 @@
           }
         },
         "x-ms-examples": {
-          "Update metrics configuration of cluster": {
-            "$ref": "./examples/ClusterMetricsConfigurations_Update.json"
+          "Create or update metrics configuration of cluster": {
+            "$ref": "./examples/ClusterMetricsConfigurations_Create.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -3039,7 +3051,7 @@
               "$ref": "#/definitions/ClusterMetricsConfiguration"
             },
             "headers": {
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "The URL to retrieve the status of the asynchronous operation."
               }
@@ -3059,7 +3071,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -3118,6 +3130,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
+          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -3202,8 +3215,8 @@
         }
       },
       "put": {
-        "description": "Create new additional details related to the Kubernetes cluster or update the existing one.",
-        "summary": "Create or update the additional details related to the Kubernetes cluster.",
+        "description": "Create a new Kubernetes cluster or update the properties of the existing one.",
+        "summary": "Create or update the Kubernetes cluster.",
         "operationId": "KubernetesClusters_CreateOrUpdate",
         "parameters": [
           {
@@ -3316,8 +3329,8 @@
         }
       },
       "patch": {
-        "description": "Update tags associated with the additional details related to the Kubernetes cluster.",
-        "summary": "Patch the additional details related to the Kubernetes cluster.",
+        "description": "Patch the properties of the provided Kubernetes cluster, or update the tags associated with the Kubernetes cluster. Properties and tag updates can be done independently.",
+        "summary": "Patch the Kubernetes cluster.",
         "operationId": "KubernetesClusters_Update",
         "parameters": [
           {
@@ -3348,6 +3361,18 @@
               "$ref": "#/definitions/KubernetesCluster"
             }
           },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/KubernetesCluster"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -3359,6 +3384,10 @@
           "Patch Kubernetes cluster": {
             "$ref": "./examples/KubernetesClusters_Patch.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -3366,7 +3395,7 @@
       "get": {
         "description": "Get a list of agent pools for the provided Kubernetes cluster.",
         "summary": "List agent pools of the Kubernetes cluster.",
-        "operationId": "agentPools_ListByKubernetesCluster",
+        "operationId": "AgentPools_ListByKubernetesCluster",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3609,7 +3638,7 @@
               "$ref": "#/definitions/AgentPool"
             },
             "headers": {
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "The URL to retrieve the status of the asynchronous operation."
               }
@@ -3629,7 +3658,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -3688,6 +3717,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
+          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -4404,7 +4434,7 @@
               "$ref": "#/definitions/Rack"
             },
             "headers": {
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "The URL to retrieve the status of the asynchronous operation."
               }
@@ -4424,7 +4454,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -4622,7 +4652,7 @@
         }
       },
       "patch": {
-        "description": "Patch properties of the provided bare metal machine, or update tags associated with the bare metal machine. Properties and tag updates can be done independently.",
+        "description": "Update properties of the provided storage appliance, or update tags associated with the storage appliance Properties and tag updates can be done independently.",
         "summary": "Patch the storage appliance.",
         "operationId": "StorageAppliances_Update",
         "parameters": [
@@ -4660,7 +4690,7 @@
               "$ref": "#/definitions/StorageAppliance"
             },
             "headers": {
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "The URL to retrieve the status of the asynchronous operation."
               }
@@ -4680,7 +4710,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -4730,6 +4760,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
+          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -4788,6 +4819,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
+          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -4847,6 +4879,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
+          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -5323,7 +5356,7 @@
               "$ref": "#/definitions/VirtualMachine"
             },
             "headers": {
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "The URL to retrieve the status of the asynchronous operation."
               }
@@ -5343,7 +5376,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -5402,6 +5435,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
+          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -5410,7 +5444,7 @@
       "get": {
         "description": "Get a list of consoles for the provided virtual machine.",
         "summary": "List consoles of the virtual machine.",
-        "operationId": "consoles_ListByVirtualMachine",
+        "operationId": "Consoles_ListByVirtualMachine",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -5653,7 +5687,7 @@
               "$ref": "#/definitions/Console"
             },
             "headers": {
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "The URL to retrieve the status of the asynchronous operation."
               }
@@ -5673,7 +5707,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -5732,6 +5766,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
+          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -5790,6 +5825,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
+          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -5840,6 +5876,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
+          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -5890,6 +5927,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
+          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -5940,6 +5978,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
+          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -6231,12 +6270,9 @@
     "AdministratorConfiguration": {
       "type": "object",
       "title": "AdministratorConfiguration represents the administrative credentials that will be applied to the control plane and agent pool nodes in Kubernetes clusters.",
-      "required": [
-        "adminUsername"
-      ],
       "properties": {
         "adminUsername": {
-          "description": "The user name for the administrator that will be applied to the operating systems that run Kubernetes nodes.",
+          "description": "The user name for the administrator that will be applied to the operating systems that run Kubernetes nodes. If not supplied, a user name will be chosen by the service.",
           "type": "string",
           "x-ms-mutability": [
             "read",
@@ -6291,7 +6327,6 @@
       "type": "object",
       "title": "AgentPool represents the agent pool of Kubernetes cluster.",
       "required": [
-        "extendedLocation",
         "properties"
       ],
       "properties": {
@@ -6339,7 +6374,7 @@
         },
         "attachedNetworkConfiguration": {
           "$ref": "#/definitions/AttachedNetworkConfiguration",
-          "description": "The configuration of networks being attached to the agent pool for use by the workloads that run on this Kubernetes cluster. These networks are in addition to the networks connected in the Kubernetes cluster attached network configuration.",
+          "description": "The configuration of networks being attached to the agent pool for use by the workloads that run on this Kubernetes cluster.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -6399,6 +6434,10 @@
             "read",
             "create"
           ]
+        },
+        "upgradeSettings": {
+          "$ref": "#/definitions/AgentPoolUpgradeSettings",
+          "description": "The configuration of the agent pool."
         },
         "vmSkuName": {
           "description": "The name of the VM SKU that determines the size of resources allocated for node VMs.",
@@ -6453,6 +6492,10 @@
           "description": "The number of virtual machines that use this configuration.",
           "type": "integer",
           "format": "int64"
+        },
+        "upgradeSettings": {
+          "$ref": "#/definitions/AgentPoolUpgradeSettings",
+          "description": "The configuration of the agent pool."
         }
       }
     },
@@ -6483,7 +6526,7 @@
         },
         "attachedNetworkConfiguration": {
           "$ref": "#/definitions/AttachedNetworkConfiguration",
-          "description": "The configuration of networks being attached to the agent pool for use by the workloads that run on this Kubernetes cluster. These networks are in addition to the networks connected in the Kubernetes cluster attached network configuration.",
+          "description": "The configuration of networks being attached to the agent pool for use by the workloads that run on this Kubernetes cluster.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -6504,6 +6547,25 @@
           "description": "The number of virtual machines that use this configuration.",
           "type": "integer",
           "format": "int64"
+        },
+        "detailedStatus": {
+          "description": "The current status of the agent pool.",
+          "type": "string",
+          "enum": [
+            "Available",
+            "Error",
+            "Provisioning"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "AgentPoolDetailedStatus"
+          },
+          "readOnly": true
+        },
+        "detailedStatusMessage": {
+          "description": "The descriptive message about the current detailed status.",
+          "type": "string",
+          "readOnly": true
         },
         "kubernetesVersion": {
           "description": "The Kubernetes version running in this agent pool.",
@@ -6542,12 +6604,13 @@
           "description": "The provisioning state of the agent pool.",
           "type": "string",
           "enum": [
-            "Succeeded",
-            "Failed",
-            "Canceled",
             "Accepted",
+            "Canceled",
+            "Deleting",
+            "Failed",
             "InProgress",
-            "Deleting"
+            "Succeeded",
+            "Updating"
           ],
           "x-ms-enum": {
             "modelAsString": true,
@@ -6566,6 +6629,10 @@
             "create"
           ]
         },
+        "upgradeSettings": {
+          "$ref": "#/definitions/AgentPoolUpgradeSettings",
+          "description": "The configuration of the agent pool."
+        },
         "vmSkuName": {
           "description": "The name of the VM SKU that determines the size of resources allocated for node VMs.",
           "type": "string",
@@ -6573,6 +6640,17 @@
             "read",
             "create"
           ]
+        }
+      }
+    },
+    "AgentPoolUpgradeSettings": {
+      "type": "object",
+      "title": "AgentPoolUpgradeSettings specifies the upgrade settings for an agent pool.",
+      "properties": {
+        "maxSurge": {
+          "description": "The maximum number or percentage of nodes that are surged during upgrade. This can either be set to an integer (e.g. '5') or a percentage (e.g. '50%'). If a percentage is specified, it is the percentage of the total agent pool size at the time of the upgrade. For percentages, fractional nodes are rounded up. If not specified, the default is 1.",
+          "type": "string",
+          "default": "1"
         }
       }
     },
@@ -9063,7 +9141,7 @@
         },
         "attachedNetworkConfiguration": {
           "$ref": "#/definitions/AttachedNetworkConfiguration",
-          "description": "The configuration of networks being attached to the agent pool for use by the workloads that run on this Kubernetes cluster. These networks are in addition to the networks connected in the Kubernetes cluster attached network configuration.",
+          "description": "The configuration of networks being attached to the agent pool for use by the workloads that run on this Kubernetes cluster.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -9137,6 +9215,10 @@
             "create"
           ]
         },
+        "upgradeSettings": {
+          "$ref": "#/definitions/AgentPoolUpgradeSettings",
+          "description": "The configuration of the agent pool."
+        },
         "vmSkuName": {
           "description": "The name of the VM SKU that determines the size of resources allocated for node VMs.",
           "type": "string",
@@ -9186,7 +9268,7 @@
         "name": {
           "description": "The name used to identify this IP address pool for association with a BGP advertisement.",
           "type": "string",
-          "pattern": "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,28}[a-zA-Z0-9])$",
+          "pattern": "^[a-z0-9]([a-z0-9.-]{0,61}[a-z0-9]){0,1}$",
           "x-ms-mutability": [
             "read",
             "create"
@@ -9220,7 +9302,7 @@
       ],
       "properties": {
         "azureUserName": {
-          "description": "The Azure Active Directory user name (email name).",
+          "description": "The user name that will be used for access.",
           "type": "string"
         },
         "description": {
@@ -9239,7 +9321,7 @@
       "title": "KeySetUserStatus represents the status of the key set user.",
       "properties": {
         "azureUserName": {
-          "description": "The Azure Active Directory user name (email name).",
+          "description": "The user name that will be used for access.",
           "type": "string",
           "readOnly": true
         },
@@ -9499,7 +9581,6 @@
       "type": "object",
       "title": "KubernetesClusterProperties represents the properties of Kubernetes cluster resource.",
       "required": [
-        "administratorConfiguration",
         "initialAgentPoolConfigurations",
         "controlPlaneNodeConfiguration",
         "kubernetesVersion",
@@ -10438,10 +10519,7 @@
       "title": "NetworkConfiguration specifies the Kubernetes cluster network related configuration.",
       "required": [
         "cloudServicesNetworkId",
-        "cniNetworkId",
-        "dnsServiceIp",
-        "podCidrs",
-        "serviceCidrs"
+        "cniNetworkId"
       ],
       "properties": {
         "attachedNetworkConfiguration": {
@@ -11006,7 +11084,7 @@
         "name": {
           "description": "The name used to identify this BGP peer for association with a BGP advertisement.",
           "type": "string",
-          "pattern": "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,28}[a-zA-Z0-9])$",
+          "pattern": "^[a-z0-9]([a-z0-9.-]{0,61}[a-z0-9]){0,1}$",
           "x-ms-mutability": [
             "read",
             "create"
@@ -12437,7 +12515,7 @@
       "required": true
     },
     "VolumeNameParameter": {
-      "pattern": "^([a-zA-Z0-9][a-zA-Z0-9]{0,28}[a-zA-Z0-9])$",
+      "pattern": "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,62}[a-zA-Z0-9])$",
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "The name of the volume.",

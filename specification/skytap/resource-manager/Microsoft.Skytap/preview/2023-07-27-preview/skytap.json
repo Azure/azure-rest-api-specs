@@ -1,0 +1,1227 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.Skytap",
+    "description": "Microsoft Skytap Azure Resource Provider specification",
+    "version": "2023-07-27-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Skytap/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available Microsoft.Skytap Rest API operations.",
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "List Operations": {
+            "$ref": "examples/Operations_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AvailableOperations"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Skytap/billingNodes": {
+      "get": {
+        "tags": [
+          "BillingNodes"
+        ],
+        "description": "List all Skytap billing nodes in the subscription.",
+        "operationId": "BillingNodes_ListSubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NodeList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List subscription nodes": {
+            "$ref": "examples/BillingNodes_ListSubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Skytap/billingNodes": {
+      "get": {
+        "tags": [
+          "BillingNodes"
+        ],
+        "description": "List all Skytap billing nodes in the resource group.",
+        "operationId": "BillingNodes_ListResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NodeList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List resource group nodes": {
+            "$ref": "examples/BillingNodes_ListResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Skytap/billingNodes/{resourceName}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/SubscriptionId"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroup"
+        },
+        {
+          "$ref": "#/parameters/ResourceName"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "description": "Get the Skytap billing node.",
+        "tags": [
+          "BillingNodes"
+        ],
+        "operationId": "BillingNodes_Get",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Node"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get node": {
+            "$ref": "examples/BillingNodes_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "BillingNodes"
+        ],
+        "description": "Create or update the Skytap billing node.",
+        "operationId": "BillingNodes_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "nodeObject",
+            "in": "body",
+            "description": "The Skytap node object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Node"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Node"
+            }
+          },
+          "201": {
+            "description": "Request received successfully. Operation will complete asynchronously, check ProvisioningState for status.",
+            "schema": {
+              "$ref": "#/definitions/Node"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update node": {
+            "$ref": "examples/BillingNodes_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "BillingNodes"
+        ],
+        "description": "Delete the Skytap billing node.",
+        "operationId": "BillingNodesDelete",
+        "responses": {
+          "200": {
+            "description": "The resource was deleted."
+          },
+          "204": {
+            "description": "The resource was not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete node": {
+            "$ref": "examples/BillingNodes_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "BillingNodes"
+        ],
+        "description": "Patch the Skytap billing node.",
+        "operationId": "BillingNodes_Update",
+        "parameters": [
+          {
+            "name": "nodePatchObject",
+            "in": "body",
+            "description": "The Skytap node patch object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NodePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Node"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update node": {
+            "$ref": "examples/BillingNodes_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Skytap/interfaces": {
+      "get": {
+        "tags": [
+          "Interfaces"
+        ],
+        "description": "List all Skytap interfaces in the subscription.",
+        "operationId": "Interfaces_ListSubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/InterfaceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List subscription interfaces": {
+            "$ref": "examples/Interfaces_ListSubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Skytap/interfaces": {
+      "get": {
+        "tags": [
+          "Interfaces"
+        ],
+        "description": "List all Skytap interfaces in the resource group.",
+        "operationId": "Interfaces_ListResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/InterfaceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List resource group interfaces": {
+            "$ref": "examples/Interfaces_ListResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Skytap/interfaces/{resourceName}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/SubscriptionId"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroup"
+        },
+        {
+          "$ref": "#/parameters/ResourceName"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "description": "Get the Skytap interface.",
+        "tags": [
+          "Interfaces"
+        ],
+        "operationId": "Interfaces_Get",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Interface"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get interface": {
+            "$ref": "examples/Interfaces_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Interfaces"
+        ],
+        "description": "Create or update the Skytap interface.",
+        "operationId": "Interfaces_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "name": "interfaceObject",
+            "in": "body",
+            "description": "The Skytap interface object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Interface"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Interface"
+            }
+          },
+          "201": {
+            "description": "Request received successfully. Operation will complete asynchronously, check ProvisioningState for status."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update interface": {
+            "$ref": "examples/Interfaces_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Interfaces"
+        ],
+        "description": "Delete the Skytap interface.",
+        "operationId": "Interfaces_Delete",
+        "responses": {
+          "200": {
+            "description": "The resource was deleted."
+          },
+          "204": {
+            "description": "The resource was not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete interface": {
+            "$ref": "examples/Interfaces_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Interfaces"
+        ],
+        "description": "Patch the Skytap interface.",
+        "operationId": "Interfaces_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "name": "interfacePatchObject",
+            "in": "body",
+            "description": "The Skytap interface patch object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InterfacePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - updated",
+            "schema": {
+              "$ref": "#/definitions/Interface"
+            }
+          },
+          "202": {
+            "description": "Accepted -- Create, update or delete request accepted; operation will complete asynchronously"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update interface": {
+            "$ref": "examples/Interfaces_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Skytap/nodes": {
+      "get": {
+        "tags": [
+          "Nodes"
+        ],
+        "description": "List all Skytap nodes in the subscription.",
+        "operationId": "Nodes_ListSubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NodeList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List subscription nodes": {
+            "$ref": "examples/Nodes_ListSubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Skytap/nodes": {
+      "get": {
+        "tags": [
+          "Nodes"
+        ],
+        "description": "List all Skytap nodes in the resource group.",
+        "operationId": "Nodes_ListResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NodeList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List resource group nodes": {
+            "$ref": "examples/Nodes_ListResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Skytap/nodes/{resourceName}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/SubscriptionId"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroup"
+        },
+        {
+          "$ref": "#/parameters/ResourceName"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "description": "Get the Skytap node.",
+        "tags": [
+          "Nodes"
+        ],
+        "operationId": "Nodes_Get",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Node"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get node": {
+            "$ref": "examples/Nodes_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Nodes"
+        ],
+        "description": "Create or update the Skytap node.",
+        "operationId": "Nodes_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "nodeObject",
+            "in": "body",
+            "description": "The Skytap node object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Node"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Node"
+            }
+          },
+          "201": {
+            "description": "Request received successfully. Operation will complete asynchronously, check ProvisioningState for status.",
+            "schema": {
+              "$ref": "#/definitions/Node"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update node": {
+            "$ref": "examples/Nodes_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "Nodes"
+        ],
+        "description": "Delete the Skytap node.",
+        "operationId": "Nodes_Delete",
+        "responses": {
+          "200": {
+            "description": "The resource was deleted."
+          },
+          "204": {
+            "description": "The resource was not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete node": {
+            "$ref": "examples/Nodes_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Nodes"
+        ],
+        "description": "Patch the Skytap node.",
+        "operationId": "Nodes_Update",
+        "parameters": [
+          {
+            "name": "nodePatchObject",
+            "in": "body",
+            "description": "The Skytap node patch object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NodePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Node"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update node": {
+            "$ref": "examples/Nodes_Update.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AvailableOperations": {
+      "description": "Available operations of the service",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of available operation details",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationDetail"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      }
+    },
+    "OperationDetail": {
+      "description": "Operation detail payload",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the operation",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display of the operation"
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Properties of the operation"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "Operation display payload",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Resource provider of the operation",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource of the operation",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Localized friendly name for the operation",
+          "type": "string"
+        },
+        "description": {
+          "description": "Localized friendly description for the operation",
+          "type": "string"
+        }
+      }
+    },
+    "OperationProperties": {
+      "type": "object",
+      "description": "Properties of operation, include metric specifications.",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "One property of operation, include metric specifications."
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "type": "object",
+      "description": "One property of operation, include metric specifications.",
+      "properties": {
+        "metricSpecifications": {
+          "description": "Metric specifications of operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "MetricSpecification": {
+      "type": "object",
+      "description": "Metric specification of operation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of metric specification."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of metric specification."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Display description of metric specification."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit could be Bytes or Count."
+        },
+        "dimensions": {
+          "description": "Dimensions of blobs, including blob type and access tier.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          },
+          "x-ms-identifiers": []
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "Aggregation type could be Average."
+        },
+        "fillGapWithZero": {
+          "type": "boolean",
+          "description": "The property to decide fill gap with zero or not."
+        },
+        "category": {
+          "type": "string",
+          "description": "The category this metric specification belong to, could be Capacity."
+        },
+        "resourceIdDimensionNameOverride": {
+          "type": "string",
+          "description": "Account Resource Id."
+        }
+      }
+    },
+    "Dimension": {
+      "type": "object",
+      "description": "Dimension of blobs, possibly be blob type or access tier.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name of dimension."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of dimension."
+        }
+      }
+    },
+    "InterfaceList": {
+      "description": "List of Skytap interface resources",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Multiple Skytap interfaces",
+          "items": {
+            "$ref": "#/definitions/Interface"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      }
+    },
+    "InterfaceResourceIdList": {
+      "description": "List of Skytap interface resource IDs",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Multiple Skytap interfaces resource IDs",
+          "items": {
+            "$ref": "#/definitions/InterfaceResourceId"
+          }
+        }
+      }
+    },
+    "NodeList": {
+      "description": "List of Skytap node resources",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Multiple Skytap nodes",
+          "items": {
+            "$ref": "#/definitions/Node"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      }
+    },
+    "Interface": {
+      "description": "Model representing a Skytap Interface object. For this version of the api, interfaces need to be in the same subscription as the nodeId.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "required": [
+        "location",
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResourceProperties"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Skytap interface properties",
+          "$ref": "#/definitions/InterfaceProperties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      }
+    },
+    "Node": {
+      "description": "Model representing a Skytap Node object.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "required": [
+        "location",
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResourceProperties"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Skytap node properties",
+          "$ref": "#/definitions/NodeProperties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      }
+    },
+    "InterfaceProperties": {
+      "description": "Skytap interface properties",
+      "type": "object",
+      "required": [
+        "subnetId",
+        "nodeId"
+      ],
+      "properties": {
+        "subnetId": {
+          "description": "The resource ID of the delegated subnet.",
+          "type": "string"
+        },
+        "ipAddress": {
+          "description": "The interface IP address.",
+          "type": "string"
+        },
+        "nodeId": {
+          "description": "The resource ID of the host node which this interface attaches",
+          "type": "string"
+        },
+        "vlanTagged": {
+          "description": "Boolean representing whether the server traffic is vlan tagged or not.",
+          "type": "boolean"
+        },
+        "vlanId": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Returned vlan id"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      }
+    },
+    "NodeProperties": {
+      "description": "Skytap node properties",
+      "type": "object",
+      "required": [
+        "serverGuid"
+      ],
+      "properties": {
+        "serverGuid": {
+          "description": "The GUID of the Skytap node physical server",
+          "type": "string"
+        },
+        "attachedInterfaces": {
+          "readOnly": true,
+          "description": "List of attached Skytap interface resource ID's",
+          "$ref": "#/definitions/InterfaceResourceIdList"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      }
+    },
+    "InterfacePatch": {
+      "description": "Skytap interface patch resource",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "tags": {
+          "description": "Resource tags",
+          "$ref": "#/definitions/ResourceTags"
+        }
+      }
+    },
+    "NodePatch": {
+      "description": "Skytap node patch resource",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "tags": {
+          "description": "Resource tags",
+          "$ref": "#/definitions/ResourceTags"
+        }
+      }
+    },
+    "BaseResourceProperties": {
+      "type": "object",
+      "description": "The Resource model definition.",
+      "x-ms-mutability": [
+        "read",
+        "create",
+        "update"
+      ],
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "description": "Resource tags",
+          "$ref": "#/definitions/ResourceTags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "ResourceTags": {
+      "description": "Resource tags",
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "x-ms-mutability": [
+        "read",
+        "create",
+        "update"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Creating",
+        "Deleting",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "error": {
+      "description": "Error response describing why the operation failed.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ]
+        }
+      }
+    },
+    "InterfaceResourceId": {
+      "type": "string",
+      "example": "/subscriptions/<subscriptionId>/resourceGroups/<resourceGroupName>/providers/Microsoft.Skytap/interfaces/<InterfaceName>"
+    }
+  },
+  "parameters": {
+    "SubscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ResourceGroup": {
+      "name": "resourceGroup",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "description": "Version of the API to be used with the client request.",
+      "in": "query",
+      "type": "string",
+      "required": true,
+      "default": "2018-09-01-preview"
+    },
+    "ResourceName": {
+      "name": "resourceName",
+      "description": "The name of the resource. The name is case insensitive.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

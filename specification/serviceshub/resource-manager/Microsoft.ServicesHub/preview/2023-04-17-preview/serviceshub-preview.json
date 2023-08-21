@@ -544,7 +544,6 @@
         ],
         "summary": "Triggers the Enable Solution Azure Function for the  Services Hub Workspace and linked Log analytics workspace.",
         "operationId": "Post_ServicesHubEnableSolution",
-        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -569,8 +568,11 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted"
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ServicesHubEnableAMASolutionResult"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1078,11 +1080,11 @@
       "type": "object",
       "description": "Services Hub Enable Solution Payload Properties",
       "properties": {
-        "lASubscriptionId": {
+        "logAnalyticsSubscriptionId": {
           "type": "string",
           "description": "Log Analytics Subscription Id."
         },
-        "lAResourceGroupName": {
+        "logAnalyticsResourceGroupName": {
           "type": "string",
           "description": "Log Analytics Resource Group Name."
         },
@@ -1090,17 +1092,22 @@
           "type": "string",
           "description": "ServicesHub Assessment Name."
         },
-        "lAWorkspaceName": {
+        "logAnalyticsWorkspaceName": {
           "type": "string",
           "description": "Log Analytics Workspace Name."
         },
-        "lAWorkspaceId": {
+        "logAnalyticsWorkspaceId": {
           "type": "string",
           "description": "Log Analytics Workspace Id."
         },
         "location": {
           "type": "string",
           "description": "Log Analytics Location."
+        },
+        "token": {
+          "type": "string",
+          "description": "Log Analytics Workspace AAD token for Orchestration Azure function",
+          "x-ms-secret": true
         },
         "machineType": {
           "type": "integer",
@@ -1216,7 +1223,7 @@
           "type": "string",
           "description": "Services Hub Assessment Name."
         },
-        "lAWorkspaceId": {
+        "logAnalyticsWorkspaceId": {
           "type": "string",
           "description": "Log Analytics Workspace Id."
         },
@@ -1239,7 +1246,7 @@
     },
     "ServicesHubAMASolutionStatusResultProperties": {
       "type": "object",
-      "description": "Defines the content of Assessment recommendations",
+      "description": "Defines the AMA Solution Get Status",
       "properties": {
         "instanceId": {
           "type": "string",
@@ -1256,6 +1263,35 @@
         "errorMessage": {
           "type": "string",
           "description": "Error Message from Get AMA Status API call in Azure Function."
+        }
+      }
+    },
+    "ServicesHubEnableAMASolutionResult": {
+      "type": "object",
+      "description": "Services Hub Enable AMA Solution Result.",
+      "properties": {
+        "properties": {
+          "description": "Services Hub Enable AMA Solution Properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServicesHubEnableAMASolutionResultProperties"
+        }
+      }
+    },
+    "ServicesHubEnableAMASolutionResultProperties": {
+      "type": "object",
+      "description": "Defines the Enable AMA solution properties",
+      "properties": {
+        "logAnalyticsWorkspaceId": {
+          "type": "string",
+          "description": "Log Analytics Workspace Id."
+        },
+        "solutionName": {
+          "type": "string",
+          "description": "Services Hub Assessment Name."
+        },
+        "machineName": {
+          "type": "string",
+          "description": "Azure Connected Machine Name."
         }
       }
     }

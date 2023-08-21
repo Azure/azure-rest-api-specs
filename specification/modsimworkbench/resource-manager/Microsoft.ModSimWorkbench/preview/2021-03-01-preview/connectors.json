@@ -395,10 +395,12 @@
               "$ref": "#/definitions/Connector"
             }
           },
-          "201": {
-            "description": "Create successful. The operation returns the resulting Connector resource.",
-            "schema": {
-              "$ref": "#/definitions/Connector"
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -807,6 +809,10 @@
           "type": "string",
           "readOnly": true,
           "description": "Gets or sets the IpAddress."
+        },
+        "connectorSubnetId": {
+          "type": "string",
+          "description": "Gets or sets the ConnectorSubnetId."
         }
       }
     },

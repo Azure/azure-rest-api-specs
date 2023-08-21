@@ -1954,6 +1954,32 @@
           },
           "description": "The other types of date collected."
         },
+        "instances": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "machineArmId": {
+                "type": "string",
+                "description": "The machine ARM resource Id of this app instance"
+              },
+              "instanceCount": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The instance count of this app instance"
+              },
+              "jvmMemoryInMB": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The jvm heap memory allocated of this app instance"
+              }
+            },
+            "required": [
+              "machineArmId"
+            ]
+          },
+          "description": "The breakdown info for app instances on all the servers"
+        },
         "runtimeJdkVersion": {
           "type": "string",
           "description": "The jdk version installed on server"

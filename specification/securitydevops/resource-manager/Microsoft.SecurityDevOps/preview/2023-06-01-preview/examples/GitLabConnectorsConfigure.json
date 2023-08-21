@@ -5,34 +5,54 @@
     "gitLabConnectorName": "testconnector",
     "api-version": "2023-06-01-preview",
     "gitLabConnectorConfiguration": {
-      "groups": [
-        {
-          "name": "testGroup",
-          "fullQualifiedName": "parentGroup$testGroup",
-          "projects": [
-            "project1",
-            "project2"
-          ],
-          "autoDiscovery": "Disabled"
+      "groups": {
+        "group1Name": {
+          "autoDiscovery": "Disabled",
+          "projectConfigs": {
+            "project1Name": null,
+            "project2Name": {
+              "desiredOnboardingState": "Enabled"
+            },
+            "project3Name": {
+              "desiredOnboardingState": "Disabled"
+            }
+          }
+        },
+        "group2Name": null,
+        "group3Name": {
+          "autoDiscovery": "Enabled"
+        },
+        "group4Name": {
+          "projectConfigs": null
         }
-      ]
+      }
     }
   },
   "responses": {
     "200": {
       "headers": {},
       "body": {
-        "groups": [
-          {
-            "name": "testGroup",
-            "fullQualifiedName": "parentGroup$testGroup",
-            "projects": [
-              "project1",
-              "project2"
-            ],
-            "autoDiscovery": "Disabled"
+        "groups": {
+          "group1Name": {
+            "autoDiscovery": "Disabled",
+            "projectConfigs": {
+              "project1Name": null,
+              "project2Name": {
+                "desiredOnboardingState": "Enabled"
+              },
+              "project3Name": {
+                "desiredOnboardingState": "Disabled"
+              }
+            }
+          },
+          "group2Name": null,
+          "group3Name": {
+            "autoDiscovery": "Enabled"
+          },
+          "group4Name": {
+            "projectConfigs": null
           }
-        ]
+        }
       }
     },
     "202": {

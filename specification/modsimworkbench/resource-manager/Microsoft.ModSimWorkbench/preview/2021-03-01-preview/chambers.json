@@ -85,6 +85,14 @@
               "$ref": "#/definitions/GetUploadUri"
             }
           },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "",
             "schema": {
@@ -580,10 +588,12 @@
               "$ref": "#/definitions/Chamber"
             }
           },
-          "201": {
-            "description": "Create successful. The operation returns the resulting Chamber resource.",
-            "schema": {
-              "$ref": "#/definitions/Chamber"
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1003,6 +1013,11 @@
               "description": "Gets or sets the synopsys properties."
             }
           }
+        },
+        "sku": {
+          "type": "string",
+          "description": "Chamber SKU name to specify, default to Basic SKU which comes without any pre-built workload VMs and storage.",
+          "default": "Basic"
         },
         "provisioningState": {
           "$ref": "./modsimworkbenches.json#/definitions/ProvisioningState",

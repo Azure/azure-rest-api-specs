@@ -2,26 +2,31 @@ import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-providerhub";
-import "@azure-tools/typespec-providerhub-controller";
 
 namespace Microsoft.DatabaseWatcher;
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using OpenAPI;
 
-@doc("Generic properties of a target")
+@doc("The generic properties of a target.")
 @discriminator("targetType")
 model TargetProperties {
-  @doc("To use SQL authentication for targets, specify the vault where username and password secrets are stored")
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning"
+  @added(Versions.v2023_09_01_preview)
+  @doc("The type of authentication to use when connecting to a target.")
+  targetAuthenticationType: TargetAuthenticationType;
+
+  @doc("To use SQL authentication when connecting to targets, specify the vault where the login name and password secrets are stored.")
   targetVault?: VaultSecret;
 
   @doc("The server name to use in the connection string when connecting to a target. Port number and instance name must be specified separately.")
   @maxLength(200)
   connectionServerName: string;
 
-  @doc("Target collection status")
+  @doc("The target collection status.")
   @knownValues(TargetCollectionStatus)
   targetCollectionStatus?: string;
 
@@ -29,22 +34,36 @@ model TargetProperties {
   @doc("The provisioning state of the resource.")
   provisioningState?: ResourceProvisioningState;
 }
-@doc("Vault specific details required if using SQL authentication to connect to a target")
+
+@doc("The vault specific details required if using SQL authentication to connect to a target.")
 model VaultSecret {
-  @doc("ARM ResourceId of the Key Vault instance storing database authentication secrets")
+  @doc("The ARM ResourceId of the Key Vault instance storing database authentication secrets.")
   akvResourceId?: string;
 
-  @doc("The path to the Key Vault secret storing the login name (aka user name, aka account name) for authentication to a target")
+  @doc("The path to the Key Vault secret storing the login name (aka user name, aka account name) for authentication to a target.")
   akvTargetUser?: string;
 
-  @doc("The path to the Key Vault secret storing the password for authentication to a target")
+  @doc("The path to the Key Vault secret storing the password for authentication to a target.")
   akvTargetPassword?: string;
 }
 
-@doc("Target states")
+@doc("The target states.")
 enum TargetCollectionStatus {
+  @doc("Denotes a target that is enabled.")
   Enabled,
+
+  @doc("Denotes a target that is disabled.")
   Disabled,
+}
+
+@added(Versions.v2023_09_01_preview)
+@doc("The type of authentication to use when connecting to a target.")
+enum TargetAuthenticationType {
+  @doc("The Azure Active Directory authentication.")
+  Aad,
+
+  @doc("The SQL password authentication.")
+  Sql,
 }
 
 @armResourceOperations

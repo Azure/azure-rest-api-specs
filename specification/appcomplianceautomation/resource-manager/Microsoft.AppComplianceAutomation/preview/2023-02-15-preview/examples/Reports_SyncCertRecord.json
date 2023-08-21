@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "api-version": "2023-02-15-preview",
+    "reportName": "testReportName",
+    "parameters": {
+      "certRecord": {
+        "offerGuid": "00000000-0000-0000-0000-000000000001",
+        "certificationStatus": "CertIngestion",
+        "ingestionStatus": "EvidenceResubmitted",
+        "controls": [
+          {
+            "controlId": "Operational_Security_10",
+            "controlStatus": "Approved"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/providers/Microsoft.AppComplianceAutomation/operationResults/{operationId}",
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.AppComplianceAutomation/operationStatuses/{operationId}"
+      }
+    }
+  }
+}

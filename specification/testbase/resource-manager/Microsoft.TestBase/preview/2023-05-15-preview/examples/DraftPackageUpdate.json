@@ -1,0 +1,158 @@
+{
+  "parameters": {
+    "subscriptionId": "subscription-id",
+    "resourceGroupName": "contoso-rg",
+    "testBaseAccountName": "contoso-testBaseAccount",
+    "draftPackageName": "61d99543-14ff-47ae-bf03-8a8b8445502e",
+    "api-version": "2023-05-15-preview",
+    "parameters": {
+      "properties": {
+        "targetOSList": [
+          {
+            "osUpdateType": "Security updates",
+            "targetOSs": [
+              "Windows 11 21H2",
+              "Windows 10 21H2",
+              "Windows 10 21H1"
+            ],
+            "baselineOSs": null
+          },
+          {
+            "osUpdateType": "Feature updates",
+            "targetOSs": [
+              "Windows 10 21H2"
+            ],
+            "baselineOSs": null
+          }
+        ],
+        "flightingRing": "Insider Beta Channel"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "61d99543-14ff-47ae-bf03-8a8b8445502e",
+        "id": "/subscriptions/subscription-id/resourceGroups/contoso-rg/providers/Microsoft.TestBase/testBaseAccounts/contoso-testBaseAccount/draftPackages/61d99543-14ff-47ae-bf03-8a8b8445502e",
+        "type": "Microsoft.TestBase/testBaseAccounts/draftpackages",
+        "properties": {
+          "applicationName": "contoso-package",
+          "version": "1.0",
+          "draftPackagePath": "de0418a4-90a2-448f-b009-237803458cca/0c3e17c3-f6ce-4b22-b1be-6363e23a1857/draftPackagePath",
+          "workingPath": "de0418a4-90a2-448f-b009-237803458cca/0c3e17c3-f6ce-4b22-b1be-6363e23a1857/workingPath",
+          "appFileName": "TestBaseM365DigitalClock.msi",
+          "useSample": false,
+          "sourceType": "Native",
+          "testTool": "PowerShell",
+          "testTypes": [
+            "OutOfBoxTest",
+            "FunctionalTest"
+          ],
+          "tests": [
+            {
+              "testType": "OutOfBoxTest",
+              "validationRunStatus": "Unknown",
+              "validationResultId": null,
+              "isActive": true,
+              "commands": [
+                {
+                  "name": "install",
+                  "action": "Install",
+                  "contentType": "Path",
+                  "content": "TestBaseM365DigitalClockApp/scripts/install/job.ps1",
+                  "runElevated": false,
+                  "restartAfter": false,
+                  "maxRunTime": 0,
+                  "runAsInteractive": false,
+                  "alwaysRun": false,
+                  "applyUpdateBefore": false,
+                  "testToolType": "PowerShell"
+                },
+                {
+                  "name": "launch",
+                  "action": "Launch",
+                  "contentType": "Path",
+                  "content": "TestBaseM365DigitalClockApp/scripts/launch/job.ps1",
+                  "runElevated": false,
+                  "restartAfter": false,
+                  "maxRunTime": 0,
+                  "runAsInteractive": false,
+                  "alwaysRun": false,
+                  "applyUpdateBefore": false,
+                  "testToolType": "PowerShell"
+                },
+                {
+                  "name": "close",
+                  "action": "Close",
+                  "contentType": "Path",
+                  "content": "TestBaseM365DigitalClockApp/scripts/close/job.ps1",
+                  "runElevated": false,
+                  "restartAfter": false,
+                  "maxRunTime": 0,
+                  "runAsInteractive": false,
+                  "alwaysRun": false,
+                  "applyUpdateBefore": false,
+                  "testToolType": "PowerShell"
+                },
+                {
+                  "name": "uninstall",
+                  "action": "Uninstall",
+                  "contentType": "Path",
+                  "content": "TestBaseM365DigitalClockApp/scripts/uninstall/job.ps1",
+                  "runElevated": false,
+                  "restartAfter": false,
+                  "maxRunTime": 0,
+                  "runAsInteractive": false,
+                  "alwaysRun": false,
+                  "applyUpdateBefore": false,
+                  "testToolType": "PowerShell"
+                }
+              ]
+            },
+            {
+              "testType": "FunctionalTest",
+              "validationRunStatus": "Unknown",
+              "validationResultId": null,
+              "isActive": true,
+              "commands": [
+                {
+                  "name": "script1",
+                  "action": "Custom",
+                  "contentType": "Path",
+                  "content": "TestBaseM365DigitalClockApp/scripts/script1/job.ps1",
+                  "runElevated": false,
+                  "restartAfter": false,
+                  "maxRunTime": 0,
+                  "runAsInteractive": false,
+                  "alwaysRun": false,
+                  "applyUpdateBefore": true,
+                  "testToolType": "PowerShell"
+                }
+              ]
+            }
+          ],
+          "targetOSList": [
+            {
+              "osUpdateType": "Security updates",
+              "targetOSs": [
+                "Windows 11 21H2",
+                "Windows 10 21H2",
+                "Windows 10 21H1"
+              ],
+              "baselineOSs": null
+            },
+            {
+              "osUpdateType": "Feature updates",
+              "targetOSs": [
+                "Windows 10 21H2"
+              ],
+              "baselineOSs": null
+            }
+          ],
+          "flightingRing": "Insider Beta Channel",
+          "lastModifiedTime": "2022-05-25T10:37:21.9576117Z"
+        }
+      }
+    }
+  }
+}

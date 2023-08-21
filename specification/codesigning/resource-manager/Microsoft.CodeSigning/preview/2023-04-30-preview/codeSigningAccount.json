@@ -375,6 +375,58 @@
           "CertificateProfiles"
         ]
       },
+      "patch": {
+        "operationId": "CertificateProfile_Update",
+        "description": "Update a certificate profile",
+        "x-ms-examples": {
+          "Update Certificate Profile": {
+            "$ref": "./examples/updateCertificateProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "certificateProfilePatch",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CertificateProfilePatch"
+            },
+            "description": "Parameters supplied to update certificate profile"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CertificateProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "CertificateProfiles"
+        ]
+      },
       "delete": {
         "operationId": "CertificateProfile_Delete",
         "description": "Delete a Certificate Profile",
@@ -785,6 +837,14 @@
           "type": "string",
           "readOnly": true
         },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "status": {
+          "readOnly": true,
+          "$ref": "#/definitions/CertificateProfileStatus"
+        },
         "certificates": {
           "readOnly": true,
           "type": "array",
@@ -792,10 +852,6 @@
           "items": {
             "$ref": "#/definitions/Certificate"
           }
-        },
-        "provisioningState": {
-          "readOnly": true,
-          "$ref": "#/definitions/ProvisioningState"
         }
       }
     },
@@ -825,6 +881,60 @@
         },
         "status": {
           "$ref": "#/definitions/CertificateStatus"
+        },
+        "revocations": {
+          "type": "array",
+          "x-ms-client-flatten": true,
+          "items": {
+            "$ref": "#/definitions/Revocation"
+          }
+        }
+      }
+    },
+    "Revocation": {
+      "description": "Revocations history of a certificate",
+      "type": "object",
+      "properties": {
+        "requestedAt": {
+          "description": "The requested timestamp of the revocation",
+          "type": "string"
+        },
+        "revokedAt": {
+          "description": "Revocation timestamp",
+          "type": "string"
+        },
+        "reason": {
+          "description": "Reason for revocation",
+          "type": "string"
+        },
+        "remarks": {
+          "description": "Remarks for the revocation",
+          "type": "string"
+        }
+      }
+    },
+    "CertificateProfilePatch": {
+      "type": "object",
+      "description": "Certificate Profile Patch Properties",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CertificateProfilePatchProperties",
+          "description": "Properties of the certificate profile"
+        }
+      }
+    },
+    "CertificateProfilePatchProperties": {
+      "description": "Properties of the certificate profile",
+      "type": "object",
+      "properties": {
+        "certificates": {
+          "type": "array",
+          "x-ms-client-flatten": true,
+          "items": {
+            "$ref": "#/definitions/Certificate"
+          }
         }
       }
     },
@@ -850,7 +960,10 @@
       "type": "string",
       "enum": [
         "PublicTrust",
-        "PrivateTrust"
+        "PrivateTrust",
+        "PrivateTrustCIPolicy",
+        "VBSEnclave",
+        "PublicTrustTest"
       ],
       "x-ms-enum": {
         "name": "ProfileType",
@@ -875,10 +988,27 @@
       "type": "string",
       "enum": [
         "Active",
-        "Expired"
+        "Expired",
+        "Revoked",
+        "RevocationInitiated",
+        "RevocationInProgress",
+        "RevocationFailed"
       ],
       "x-ms-enum": {
         "name": "CertificateStatus",
+        "modelAsString": true
+      }
+    },
+    "CertificateProfileStatus": {
+      "description": "Status of the certificate profiles",
+      "type": "string",
+      "enum": [
+        "Active",
+        "Disabled",
+        "Suspended"
+      ],
+      "x-ms-enum": {
+        "name": "CertificateProfileStatus",
         "modelAsString": true
       }
     },

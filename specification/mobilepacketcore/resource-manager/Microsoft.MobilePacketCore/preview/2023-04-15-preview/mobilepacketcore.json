@@ -231,6 +231,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobilePacketCore/mobilePacketCores/{mobilePacketCoreName}/safeDeploymentContinue": {
+      "post": {
+        "tags": [
+          "MobilePacketCores"
+        ],
+        "summary": "Continue a safe deployment rollout.  This is used when the 'manual' continuation policy is used for safe deployment rollouts between groups.  If the safe deployment rollout is not waiting for user input, this action has no effect",
+        "operationId": "MobilePacketCores_SafeDeploymentContinue",
+        "x-ms-examples": {
+          "MobilePacketCoreAction_SafeDeploymentContinue": {
+            "$ref": "./examples/MobilePacketCoreAction_SafeDeploymentContinue.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/MobilePacketCoreNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok.",
+            "schema": {
+              "$ref": "#/definitions/MobilePacketCoreSafeDeploymentContinueResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobilePacketCore/mobilePacketCores/{mobilePacketCoreName}/whatIfActivate": {
       "post": {
         "tags": [
@@ -239,7 +281,7 @@
         "summary": "Perform a 'what-if' operation on the specified snapshot to show what operations would be taken if the snapshot were activated.",
         "operationId": "MobilePacketCores_WhatIfActivate",
         "x-ms-examples": {
-          "MobilePacketCoreAction_Activate": {
+          "MobilePacketCoreAction_WhatIfActivate": {
             "$ref": "./examples/MobilePacketCoreAction_WhatIfActivate.json"
           }
         },
@@ -268,10 +310,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Ok."
-          },
-          "202": {
-            "description": "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation."
+            "description": "Ok.",
+            "schema": {
+              "$ref": "#/definitions/MobilePacketCoreWhatIfActivateResponse"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -279,11 +321,7 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobilePacketCore/mobilePacketCores/{mobilePacketCoreName}/whatIfSnapshot": {
@@ -294,7 +332,7 @@
         "summary": "Perform a 'what-if' operation to validate the current set of resources as if a snapshot were to be created",
         "operationId": "MobilePacketCores_WhatIfSnapshot",
         "x-ms-examples": {
-          "MobilePacketCoreAction_Rollback": {
+          "MobilePacketCoreAction_WhatIfSnapshot": {
             "$ref": "./examples/MobilePacketCoreAction_WhatIfSnapshot.json"
           }
         },
@@ -314,10 +352,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Ok."
-          },
-          "202": {
-            "description": "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation."
+            "description": "Ok.",
+            "schema": {
+              "$ref": "#/definitions/MobilePacketCoreWhatIfSnapshotResponse"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -325,11 +363,7 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.MobilePacketCore/mobilePacketCores": {
@@ -1594,19 +1628,33 @@
                 "maximum": 255,
                 "description": "Order of safe deployment group rollout.  Lower values are rolled out prior to larger values"
               },
+              "continuationPolicy": {
+                "type": "string",
+                "enum": [
+                  "Manual",
+                  "Immediate"
+                ],
+                "x-ms-enum": {
+                  "name": "ContinuationPolicy",
+                  "modelAsString": true
+                },
+                "default": "Manual",
+                "description": "Policy to use when continuing a safe deployment rollout from one group to the next.  Manual indicates halt until the user issues the 'safeDeploymentContinue' action.  Immediate indicates no gate - the next group will start the rollout immediately"
+              },
               "status": {
                 "readOnly": true,
                 "type": "string",
                 "enum": [
                   "Completed",
                   "Processing",
+                  "WaitingForUserInput",
                   "Pending"
                 ],
                 "x-ms-enum": {
                   "name": "SafeDeploymentStatus",
                   "modelAsString": true
                 },
-                "description": "During a safe deployment rollout, current status of the SDP group"
+                "description": "During a safe deployment rollout, current status of the SDP group.  Completed indicates the SDP group has completed the rollout.  Processing indicates the SDP group in the process of rolling out the change.  WaitingForUserInput indicates the SDP rollout has completed but cannot continue to the next group until the user issues a 'safeDeploymentContinue' action.  Pending indicates the safe deployment group has not yet started the rollout."
               }
             },
             "required": [
@@ -1796,6 +1844,20 @@
       },
       "description": "Response for Mobile Packet Core API service call."
     },
+    "MobilePacketCoreWhatIfSnapshotResponse": {
+      "type": "object",
+      "description": "Allows the validation and visualization of taking a snapshot without taking the snapshot",
+      "properties": {
+        "summaryOfChanges": {
+          "$ref": "./common.json#/definitions/SummaryOfResources",
+          "description": "List of objects that have changed (added/delete/modified)"
+        },
+        "activeSnapshot": {
+          "$ref": "./common.json#/definitions/ReferencedResource",
+          "description": "Currently active snapshot"
+        }
+      }
+    },
     "MobilePacketCoreWhatIfActivateRequest": {
       "type": "object",
       "properties": {
@@ -1805,6 +1867,82 @@
         }
       },
       "description": "Allows the validation and visualization of activating a specific snapshot without activating it"
+    },
+    "AffectedNetworkFunctions": {
+      "type": "array",
+      "description": "Affected network functions",
+      "items": {
+        "type": "object",
+        "description": "Network function instance",
+        "properties": {
+          "resourceId": {
+            "$ref": "./common.json#/definitions/ReferencedResource",
+            "description": "Identifier of the Network Function instance"
+          },
+          "task": {
+            "type": "array",
+            "description": "List of tasks to be run against the specific network function",
+            "items": {
+              "type": "object",
+              "description": "Task instance",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Task name"
+                },
+                "taskType": {
+                  "$ref": "./common.json#/definitions/OperationalTaskType",
+                  "description": "Task type"
+                },
+                "details": {
+                  "type": "string",
+                  "description": "Additional details about the task"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "MobilePacketCoreWhatIfActivateResponse": {
+      "type": "object",
+      "description": "Allows for the validation of creating a snapshot resource without creating the resource",
+      "properties": {
+        "snapshot": {
+          "$ref": "./common.json#/definitions/ReferencedResource",
+          "description": "Snapshot against which the what-if activate operation was run"
+        },
+        "networkFunctionInstances": {
+          "$ref": "#/definitions/AffectedNetworkFunctions",
+          "description": "List of affected network function instances"
+        }
+      }
+    },
+    "MobilePacketCoreSafeDeploymentContinueResponse": {
+      "type": "object",
+      "description": "Indicates the result of the safe deployment continue action",
+      "properties": {
+        "actionTaken": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Continued"
+          ],
+          "x-ms-enum": {
+            "name": "ActionTaken",
+            "modelAsString": true
+          },
+          "description": "Action taken as a result of the Safe Deployment Continue operation"
+        },
+        "completedSafeDeploymentGroupName": {
+          "type": "string",
+          "description": "Name of safe deployment group that was completed by this action"
+        },
+        "currentSafeDeploymentGroupName": {
+          "type": "string",
+          "description": "Name of safe deployment group that was started by this action"
+        }
+      }
     }
   }
 }

@@ -11,7 +11,10 @@
         "key2": "myvalue2"
       },
       "properties": {
-        "count": 3
+        "count": 3,
+        "upgradeSettings": {
+          "maxSurge": "1"
+        }
       }
     }
   },
@@ -91,9 +94,14 @@
               "value": "true"
             }
           ],
+          "upgradeSettings": {
+            "maxSurge": "1"
+          },
           "vmSkuName": "NC_M16_v1",
           "provisioningState": "Succeeded",
-          "kubernetesVersion": "1.24.3-1"
+          "kubernetesVersion": "1.24.3-1",
+          "detailedStatus": "Available",
+          "detailedStatusMessage": "Agent pool is available"
         }
       }
     },
@@ -172,13 +180,18 @@
               "value": "true"
             }
           ],
+          "upgradeSettings": {
+            "maxSurge": "1"
+          },
           "vmSkuName": "NC_M16_v1",
           "provisioningState": "Accepted",
-          "kubernetesVersion": "1.24.3-1"
+          "kubernetesVersion": "1.24.3-1",
+          "detailedStatus": "Available",
+          "detailedStatusMessage": "Agent pool is available"
         }
       },
       "headers": {
-        "Location": "https://management.azure.com/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/locations/location/operationStatuses/operationId?api-version=2023-05-01-preview"
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/locations/location/operationStatuses/operationId?api-version=2023-05-01-preview"
       }
     }
   }

@@ -1,0 +1,439 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Instance",
+    "description": "The Microsoft.Symphony Rest API spec.",
+    "version": "2023-05-22-preview",
+    "x-ms-code-generation-settings": {
+      "name": "SymphonyClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Symphony/instances/{instancesName}": {
+      "get": {
+        "operationId": "instances_Get",
+        "description": "Gets the properties of the specified instance.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/instancesNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the instances resource.",
+            "schema": {
+              "$ref": "#/definitions/instance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "instances_Get": {
+            "$ref": "./examples/instances_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "instances_CreateOrUpdate",
+        "description": "Creates or updates the instances resource.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/instancesNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "instances",
+            "in": "body",
+            "required": true,
+            "description": "The instance resource definition",
+            "schema": {
+              "$ref": "#/definitions/instance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updates the instances resource.",
+            "schema": {
+              "$ref": "#/definitions/instance"
+            }
+          },
+          "201": {
+            "description": "Creates the instances resource.",
+            "schema": {
+              "$ref": "#/definitions/instance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "instances_CreateOrUpdate": {
+            "$ref": "./examples/instances_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "instances_Delete",
+        "description": "Deletes the instances resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/instancesNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deletes the instances resource."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "instances_Delete": {
+            "$ref": "./examples/instances_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "instances_Update",
+        "description": "Updates the instances resource.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/instancesNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "instances",
+            "in": "body",
+            "required": true,
+            "description": "The instance properties to update",
+            "schema": {
+              "$ref": "#/definitions/instancePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updates the instances resource.",
+            "schema": {
+              "$ref": "#/definitions/instance"
+            }
+          },
+          "201": {
+            "description": "Updates the instances resource.",
+            "schema": {
+              "$ref": "#/definitions/instance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "instances_Update": {
+            "$ref": "./examples/instances_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Symphony/instances": {
+      "get": {
+        "operationId": "instances_ListByResourceGroup",
+        "description": "Lists all the instances under the resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all instances under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/instanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "instances_ListByResourceGroup": {
+            "$ref": "./examples/instances_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Symphony/instances": {
+      "get": {
+        "operationId": "instances_ListBySubscription",
+        "description": "Lists all the instances under the subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all instances under the subscription.",
+            "schema": {
+              "$ref": "#/definitions/instanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "instances_ListBySubscription": {
+            "$ref": "./examples/instances_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Symphony/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "description": "Lists all of the available Instance REST API operations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "instanceProperties": {
+      "description": "Properties of an instance resource.",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "string"
+        },
+        "solution": {
+          "type": "string"
+        },
+        "target": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "description": "Defines the target the Instance will deploy to",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "selector": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            }
+          }
+        },
+        "version": {
+          "type": "string",
+          "description": "Defines the version of a particular resource"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Succeeded",
+            "Canceled",
+            "Failed",
+            "Reconciling"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "instance": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/instanceProperties"
+        },
+        "extendedLocation": {
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The extended location type."
+            },
+            "name": {
+              "type": "string",
+              "description": "The extended location name."
+            }
+          }
+        }
+      },
+      "description": "The instances resource definition."
+    },
+    "instancePatch": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "The instances resource patch definition."
+    },
+    "instanceListResult": {
+      "type": "object",
+      "description": "List of instance resources returned.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/instance"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "instancesNameParameter": {
+      "name": "instancesName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the instance.",
+      "maxLength": 64,
+      "minLength": 3,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
