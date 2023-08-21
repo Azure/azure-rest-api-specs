@@ -749,15 +749,15 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/generatePendingConnections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/listPendingConnections": {
       "post": {
         "description": "Lists all pending connections for a connection.",
         "x-ms-examples": {
-          "Generates a list of pending connections": {
-            "$ref": "examples/generatePendingConnections.json"
+          "Lists a list of pending connections": {
+            "$ref": "examples/listPendingConnections.json"
           }
         },
-        "operationId": "GeneratePendingConnections_List",
+        "operationId": "ListPendingConnections_List",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -791,15 +791,15 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/generatePendingFlows": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/listPendingFlows": {
       "post": {
         "description": "Lists all pending flows for a connection.",
         "x-ms-examples": {
-          "Generates a list of pending flows": {
-            "$ref": "examples/generatePendingFlows.json"
+          "Lists a list of pending flows": {
+            "$ref": "examples/listPendingFlows.json"
           }
         },
-        "operationId": "GeneratePendingFlows_List",
+        "operationId": "ListPendingFlows_List",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1243,15 +1243,15 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/pipelines/{pipelineName}/generateSchemas": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/pipelines/{pipelineName}/listSchemas": {
       "post": {
-        "description": "Generates the schemas for the specified connection in a pipeline.",
+        "description": "Lists the schemas for the specified connection in a pipeline.",
         "x-ms-examples": {
-          "Generates schemas for a pipeline": {
-            "$ref": "examples/generateSchemas.json"
+          "Lists schemas for a pipeline": {
+            "$ref": "examples/listSchemas.json"
           }
         },
-        "operationId": "GenerateSchemas_List",
+        "operationId": "ListSchemas_List",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1486,15 +1486,37 @@
         },
         "storageAccountId": {
           "type": "string",
-          "description": "Storage Account ID"
+          "format": "arm-id",
+          "description": "Storage Account ID",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "scopes": [
+                  "*"
+                ],
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          }
         },
         "storageContainerName": {
           "type": "string",
-          "description": "Storage Container"
+          "description": "Storage Container Name"
         },
-        "serviceBusQueue": {
+        "serviceBusQueueId": {
           "type": "string",
-          "description": "Service Bus Queue"
+          "format": "arm-id",
+          "description": "Service Bus Queue ID",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "scopes": [
+                  "*"
+                ],
+                "type": "Microsoft.Storage/namespaces/queues"
+              }
+            ]
+          }
         },
         "flowType": {
           "$ref": "#/definitions/flowType",
@@ -2103,6 +2125,10 @@
     "schemas": {
       "type": "array",
       "description": "The schemas for this connection",
+      "x-ms-identifiers": [
+        "connectionId",
+        "name"
+      ],
       "items": {
         "$ref": "#/definitions/schema"
       }
