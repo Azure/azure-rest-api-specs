@@ -14,7 +14,7 @@ namespace AnomalyDetector.Multivariate;
 @post
 @doc("Operation template for multivariate anomaly detection service action.")
 op MultivariateServiceAction<TParams, TResponse>(
-  ...TParams,
+  ...TParams
 ): TResponse | ResponseError;
 
 // Operations
@@ -35,7 +35,7 @@ op getMultivariateBatchDetectionResult(
   @format("uuid")
   @doc("ID of a batch detection result.")
   @path
-  resultId: string,
+  resultId: string
 ): MultivariateDetectionResult | ResponseError;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure core RpcOperation does not support custom error response"
@@ -68,7 +68,6 @@ op trainMultivariateModel is MultivariateServiceAction<
     @doc("Location and ID of the model.")
     @header
     location: string;
-
     @body result: AnomalyDetectionModel;
   }
 >;
@@ -85,7 +84,7 @@ op trainMultivariateModel is MultivariateServiceAction<
 @doc("List models of a resource.")
 op listMultivariateModels(
   ...SkipQueryParameter,
-  ...TopQueryParameter,
+  ...TopQueryParameter
 ): ModelList | ResponseError;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
@@ -99,7 +98,7 @@ op listMultivariateModels(
 op deleteMultivariateModel(
   @doc("Model identifier.")
   @path
-  modelId: string,
+  modelId: string
 ): {
   @doc("Delete model successfully.")
   @statusCode
@@ -120,7 +119,7 @@ and variables used in the model.
 op getMultivariateModel(
   @doc("Model identifier.")
   @path
-  modelId: string,
+  modelId: string
 ): AnomalyDetectionModel | ResponseError;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
@@ -145,7 +144,7 @@ op detectMultivariateBatchAnomaly(
 
   @doc("Request of multivariate anomaly detection.")
   @body
-  options: MultivariateBatchDetectionOptions,
+  options: MultivariateBatchDetectionOptions
 ): {
   @statusCode statusCode: 202;
 
@@ -156,7 +155,6 @@ op detectMultivariateBatchAnomaly(
   @doc("Location of the detection result.")
   @header("Operation-Location")
   operationLocation: string;
-
   @body result: MultivariateDetectionResult;
 } | ResponseError;
 
@@ -179,5 +177,5 @@ op detectMultivariateLastAnomaly(
 
   @doc("Request of the last detection.")
   @body
-  options: MultivariateLastDetectionOptions,
+  options: MultivariateLastDetectionOptions
 ): MultivariateLastDetectionResult | ResponseError;

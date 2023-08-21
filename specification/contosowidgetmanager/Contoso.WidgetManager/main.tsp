@@ -9,23 +9,21 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 
-@useAuth(AadOauth2Auth<["https://contoso.azure.com/.default"]>)
 @service({
   title: "Contoso Widget Manager",
 })
 @versioned(Contoso.WidgetManager.Versions)
 namespace Azure.Contoso.WidgetManager;
 
-@doc("Versions info.")
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
 enum Versions {
-  @doc("The 2022-11-01-preview version.")
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2022_11_01_Preview: "2022-11-01-preview",
 }
 
 @doc("A widget.")
 @resource("widgets")
-model WidgetSuite {
+model Widget {
   @key("widgetName")
   @doc("The widget name.")
   @visibility("read")
@@ -40,22 +38,22 @@ model WidgetSuite {
 
 interface Widgets {
   @doc("Fetch a Widget by name.")
-  getWidget is ResourceRead<WidgetSuite>;
+  getWidget is ResourceRead<Widget>;
 
   @doc("Gets status of a Widget operation.")
-  getWidgetOperationStatus is GetResourceOperationStatus<WidgetSuite>;
+  getWidgetOperationStatus is GetResourceOperationStatus<Widget>;
 
   @doc("Creates or updates a Widget asynchronously.")
   @pollingOperation(Widgets.getWidgetOperationStatus)
-  createOrUpdateWidget is LongRunningResourceCreateOrUpdate<WidgetSuite>;
+  createOrUpdateWidget is LongRunningResourceCreateOrUpdate<Widget>;
 
   @doc("Delete a Widget asynchronously.")
   @pollingOperation(Widgets.getWidgetOperationStatus)
-  deleteWidget is LongRunningResourceDelete<WidgetSuite>;
+  deleteWidget is LongRunningResourceDelete<Widget>;
 
   @doc("List Widget resources")
   listWidgets is ResourceList<
-    WidgetSuite,
+    Widget,
     {
       parameters: StandardListQueryParameters;
     }

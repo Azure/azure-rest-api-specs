@@ -30,7 +30,6 @@ model UpdateRun is ProxyResource<UpdateRunProperties> {
   @path
   @visibility("create", "read")
   name: string;
-
   ...EntityTag;
 }
 

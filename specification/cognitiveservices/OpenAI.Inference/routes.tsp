@@ -52,18 +52,15 @@ op getChatCompletions is ResourceAction<
   ChatCompletions
 >;
 
-// Note: pending resolution of  cross-language code emission behavior for long-running operations, image generation
-//        reuses its final operation response model as its status polling model.
-#suppress "@azure-tools/typespec-azure-core/rpc-operation-request-body" "MUST fix in next update"
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Allowed because this is a non-standard status polling operation."
 @doc("Returns the status of the images operation")
 @added(ServiceApiVersions.v2023_06_01_Preview)
 @route("/operations/images/{operationId}")
-op getAzureBatchImageGenerationOperationStatus is RpcOperation<
+op getImageOperationStatus is RpcOperation<
   {
     @doc(".") @path operationId: string;
   },
-  BatchImageGenerationOperationResponse
+  ImageOperationResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
@@ -71,13 +68,13 @@ op getAzureBatchImageGenerationOperationStatus is RpcOperation<
 @added(ServiceApiVersions.v2023_06_01_Preview)
 @route("/images/generations:submit")
 @pollingOperation(
-  getAzureBatchImageGenerationOperationStatus,
+  getImageOperationStatus,
   {
     operationId: ResponseProperty<"id">,
   }
 )
-op beginAzureBatchImageGeneration is OaiLongRunningRpcOperation<
+op startGenerateImage is OaiLongRunningRpcOperation<
   ImageGenerationOptions,
-  BatchImageGenerationOperationResponse,
-  BatchImageGenerationOperationResponse
+  ImageOperationResponse,
+  ImageOperationStatus
 >;

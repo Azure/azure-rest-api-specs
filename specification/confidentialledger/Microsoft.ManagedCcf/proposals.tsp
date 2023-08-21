@@ -132,7 +132,6 @@ interface Proposals {
     TxIdReadHeader
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/verb-conflict" "MUST fix in next update"
   @doc("Returns actions contained in a proposal.")
   @TypeSpec.Rest.action("actions")
   @TypeSpec.Rest.actionSeparator("/")

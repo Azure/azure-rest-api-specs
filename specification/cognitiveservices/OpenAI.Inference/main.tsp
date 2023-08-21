@@ -46,17 +46,13 @@ enum ServiceApiVersions {
 
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2023_06_01_Preview: "2023-06-01-preview",
-
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2023_07_01_Preview: "2023-07-01-preview",
 }
 
 @doc("A specific deployment")
 @TypeSpec.Rest.resource("deployments")
 model Deployment {
   @visibility("read")
-  @doc("Specifies either the model deployment name (when using Azure OpenAI) or model name (when using non-Azure OpenAI) to use for this request.")
-  @projectedName("java", "deploymentOrModelName")
+  @doc("deployment id of the deployed model")
   @key
   deploymentId: string;
 }

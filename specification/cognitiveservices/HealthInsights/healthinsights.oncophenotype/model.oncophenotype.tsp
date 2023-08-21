@@ -46,7 +46,6 @@ model OncoPhenotypePatientResult {
 model OncoPhenotypeInference {
   @doc("The type of the Onco Phenotype inference")
   type: OncoPhenotypeInferenceType;
-
   ...Inference;
 
   @doc("The evidence corresponding to the inference value.")

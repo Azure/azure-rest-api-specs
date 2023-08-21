@@ -907,8 +907,7 @@ These settings apply only when `--tag=package-2023-05` is specified on the comma
 
 ```yaml $(tag) == 'package-2023-05'
 input-file:
-  - Microsoft.Security/stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
-```
+  - Microsoft.Security/stable/2023-05-01/serverVulnerabilityAssessmentsSettings.json
 
 ---
 

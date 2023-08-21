@@ -205,3 +205,11 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
 ```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: MISSING_APIS_IN_DEFAULT_TAG
+    reason: Not every service will ship new versions within the Language pillar.
+```
