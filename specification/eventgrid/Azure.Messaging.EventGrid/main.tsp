@@ -175,15 +175,6 @@ namespace EventGrid {
     lockTokens: string[];
   }
 
-  @doc("Storage Sku")
-  enum StorageSku {
-    @doc("Standard Storage Sku")
-    Standard,
-
-    @doc("Performance Storage Sku")
-    Performance,
-  }
-
   @doc("Array of lock token strings for the corresponding received Cloud Events to be acknowledged.")
   model AcknowledgeOptions {
     @doc("String array of lock tokens.")
