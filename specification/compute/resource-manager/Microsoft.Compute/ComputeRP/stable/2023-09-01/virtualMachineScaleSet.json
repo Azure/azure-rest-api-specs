@@ -3641,6 +3641,42 @@
       },
       "description": "Describes an upgrade policy - automatic, manual, or rolling."
     },
+	"ScheduledEventsPolicy": {
+      "properties": {
+        "userRedeploy": {
+		"enabled": {
+          "type": "boolean",
+          "description": "Specifies Redeply Scheduled Event related configurations."
+          }
+		},
+		"userReboot": {
+		"enabled": {
+          "type": "boolean",
+          "description": "Specifies Reboot Scheduled Event related configurations."
+          }
+		},
+        "scheduledEventsPublishingTarget": {
+          "$ref": "#/definitions/ScheduledEventsPublishingTarget",
+          "description": "The configuration parameters used while publishing scheduled Event targets."
+        }
+      }
+    },
+	"ScheduledEventsPublishingTarget": {
+      "properties": {
+        "eventGrid": {
+		"enabled": {
+          "type": "boolean",
+          "description": "Specifies if event grid is enabled for scheduled event related configurations."
+          }
+		},
+        "resourceGraph": {
+		"enabled": {
+          "type": "boolean",
+          "description": "Specifies if resource graph is enabled for scheduled event related configurations."
+          }
+		}
+      }
+    },
     "RollingUpgradePolicy": {
       "properties": {
         "maxBatchInstancePercent": {
@@ -4859,6 +4895,10 @@
         "upgradePolicy": {
           "$ref": "#/definitions/UpgradePolicy",
           "description": "The upgrade policy."
+        },
+		"scheduledEventsPolicy": {
+          "$ref": "#/definitions/ScheduledEventsPolicy",
+          "description": "The scheduled Events policy."
         },
         "automaticRepairsPolicy": {
           "$ref": "#/definitions/AutomaticRepairsPolicy",
