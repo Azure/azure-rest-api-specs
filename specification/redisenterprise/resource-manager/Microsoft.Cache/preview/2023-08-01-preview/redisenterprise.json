@@ -1309,6 +1309,48 @@
           "nextLinkName": null
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "RedisEnterprise"
+        ],
+        "operationId": "RedisEnterprise_CheckNameAvailability",
+        "x-ms-examples": {
+          "RedisCacheList": {
+            "$ref": "./examples/RedisEnterpriseCheckNameAvailability.json"
+          }
+        },
+        "description": "Checks that the Redis Enterprise cache name is valid and is not already in use.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityParameters"
+            },
+            "description": "Parameters supplied to the CheckNameAvailability Redis operation. The only supported resource type is 'Microsoft.Cache/redisenterprise'"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Name is available"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1363,7 +1405,9 @@
         "EnableFailed",
         "Disabling",
         "DisableFailed",
-        "Disabled"
+        "Disabled",
+        "Scaling",
+        "ScalingFailed"
       ],
       "x-ms-enum": {
         "name": "ResourceState",
