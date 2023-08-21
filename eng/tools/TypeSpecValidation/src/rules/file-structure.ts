@@ -1,6 +1,6 @@
+import { globby } from "globby";
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
-import { runCmd } from "../utils.js";
 
 export class FileStructureRule implements Rule {
   readonly name = "FileStructure";
@@ -9,19 +9,18 @@ export class FileStructureRule implements Rule {
     let success = true;
     let errorOutput = "";
 
-    const tspConfig = (
-      await runCmd(`(Get-ChildItem -path ${folder} tspconfig.* -Recurse).Name`, process.cwd())
-    )[0].trim();
-
-    tspConfig.split(/\s+/).forEach((file) => {
-      if (file !== "tspconfig.yaml") {
+    let stdOutput = "Verify tspconfig file extension";
+    const tspConfig = await globby([`${folder}/**tspconfig.*`]);
+    tspConfig.forEach((file: string) => {
+      if (!file.endsWith("tspconfig.yaml")) {
         success = false;
-        errorOutput += `Invalid config file '$file'.  Must be named 'tspconfig.yaml'.\n`;
+        errorOutput += `Invalid config file '${file}'.  Must be named 'tspconfig.yaml'.\n`;
       }
     });
 
     return {
       success: success,
+      stdOutput: stdOutput,
       errorOutput: errorOutput,
     };
   }
