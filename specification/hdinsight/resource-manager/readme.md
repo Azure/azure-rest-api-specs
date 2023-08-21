@@ -29,7 +29,7 @@ title: HDInsightManagementClient
 description: HDInsight Management Client
 openapi-type: arm
 azure-arm: true
-tag: package-2023-04-preview
+tag: package-preview-2023-08
 ```
 
 ### Suppression
@@ -111,11 +111,28 @@ directive:
 ```
 
 
+### Tag: package-preview-2023-08
+
+These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-08'
+input-file:
+  - Microsoft.HDInsight/preview/2023-08-15/applications.json
+  - Microsoft.HDInsight/preview/2023-08-15/cluster.json
+  - Microsoft.HDInsight/preview/2023-08-15/configurations.json
+  - Microsoft.HDInsight/preview/2023-08-15/extensions.json
+  - Microsoft.HDInsight/preview/2023-08-15/locations.json
+  - Microsoft.HDInsight/preview/2023-08-15/operations.json
+  - Microsoft.HDInsight/preview/2023-08-15/privateEndpointConnections.json
+  - Microsoft.HDInsight/preview/2023-08-15/privateLinkResources.json
+  - Microsoft.HDInsight/preview/2023-08-15/scriptActions.json
+  - Microsoft.HDInsight/preview/2023-08-15/virtualMachines.json
+```
 ### Tag: package-2023-04-preview
 
 These settings apply only when `--tag=package-2023-04-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-04-preview'
+``` yaml $(tag) == 'package-2023-04-preview'
 input-file:
   - Microsoft.HDInsight/preview/2023-04-15-preview/applications.json
   - Microsoft.HDInsight/preview/2023-04-15-preview/cluster.json
