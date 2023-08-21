@@ -911,6 +911,14 @@
             },
             "vmConfigStoragePathId": {
               "type": "string",
+              "format": "arm-id",
+              "x-ms-arm-id-details": {
+                "allowedResources": [
+                  {
+                    "type": "Microsoft.AzureStackHCI/storageContainers"
+                  }
+                ]
+              },
               "description": "Id of the storage container that hosts the VM configuration file"
             }
           },
