@@ -143,7 +143,7 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/WidgetSuiteUpdate"
+              "$ref": "#/definitions/WidgetSuiteCreateOrUpdate"
             }
           }
         ],
@@ -454,7 +454,7 @@
         "createdAt"
       ]
     },
-    "FakedSharedModelUpdate": {
+    "FakedSharedModelCreateOrUpdate": {
       "type": "object",
       "description": "Faked shared model",
       "properties": {
@@ -532,7 +532,7 @@
         "manufacturerId"
       ]
     },
-    "WidgetSuiteUpdate": {
+    "WidgetSuiteCreateOrUpdate": {
       "type": "object",
       "description": "A widget.",
       "properties": {
@@ -541,7 +541,7 @@
           "description": "The ID of the widget's manufacturer."
         },
         "sharedModel": {
-          "$ref": "#/definitions/FakedSharedModelUpdate",
+          "$ref": "#/definitions/FakedSharedModelCreateOrUpdate",
           "description": "The faked shared model."
         }
       }
