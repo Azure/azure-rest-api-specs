@@ -348,7 +348,8 @@
             "name": "tail",
             "in": "query",
             "description": "The number of lines to show from the tail of the deployment script log. Valid value is a positive number up to 1000. If 'tail' is not provided, all available logs are shown up to container instance log capacity of 4mb.",
-            "type": "integer"
+            "type": "integer",
+            "format": "int64"
           }
         ],
         "responses": {
@@ -843,6 +844,7 @@
     },
     "DeploymentScriptListResult": {
       "description": "List of deployment scripts.",
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -860,6 +862,7 @@
     },
     "ScriptLogsList": {
       "description": "Deployment script execution logs.",
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -919,6 +922,7 @@
       }
     },
     "DeploymentScriptsError": {
+      "type": "object",
       "properties": {
         "error": {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
