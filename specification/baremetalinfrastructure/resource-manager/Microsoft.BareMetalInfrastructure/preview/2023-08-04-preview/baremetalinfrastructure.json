@@ -158,7 +158,7 @@
             }
           },
           "202": {
-            "description": "Accepted. The response indicates that the existing Bare Metal Instance is now turning off and includes a 'Location' header to query the operation result.",
+            "description": "Accepted. The response indicates that the existing Bare Metal Instance is now restarting and includes a 'Location' header to query the operation result.",
             "headers": {
               "location": {
                 "type": "string",
@@ -922,6 +922,12 @@
           "type": "integer",
           "format": "int32",
           "description": "Specifies the size of an empty data disk in gigabytes."
+        },
+        "lun": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM."
         }
       },
       "description": "Specifies the disk information fo the Azure Bare Metal Instance"
