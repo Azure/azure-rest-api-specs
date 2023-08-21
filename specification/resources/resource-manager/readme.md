@@ -1001,8 +1001,8 @@ directive:
     suppress: TrackedResourcePatchOperation
     where: $.definitions.AzurePowerShellScript
     reason: Tooling issue
-  - from: deploymentScripts.json
-    suppress: OperationsAPIImplementation
+  - suppress: OperationsAPIImplementation
+    from: deploymentScripts.json
     where: $.paths
     reason: OperationsAPI will come from Resources
   - from: deploymentScripts.json
