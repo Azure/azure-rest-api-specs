@@ -239,6 +239,7 @@ input-file:
   - Microsoft.TestBase/preview/2023-08-01-preview/actionrequest.json
   - Microsoft.TestBase/preview/2023-08-01-preview/draftpackage.json
   - Microsoft.TestBase/preview/2023-08-01-preview/testbase.json
+  - Microsoft.TestBase/preview/2023-08-01-preview/customimage.json
 ```
 
 ## Suppression
