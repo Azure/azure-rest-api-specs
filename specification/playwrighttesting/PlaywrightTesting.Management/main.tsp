@@ -15,12 +15,12 @@ using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.AzurePlaywrightService")
 @service({
-  title: "Microsoft PlaywrightTesting Management API",
+  title: "Microsoft AzurePlaywrightService Management API",
   version: "2023-10-01-preview",
 })
 @doc("Microsoft.AzurePlaywrightService Resource Provider management API.")
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-namespace Microsoft.PlaywrightTesting;
+namespace Microsoft.AzurePlaywrightService;
 
 @doc("An account resource")
 model Account is TrackedResource<AccountProperties> {
