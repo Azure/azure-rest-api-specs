@@ -9,7 +9,8 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 
-@useAuth(AadOauth2Auth<["https://contoso.azure.com/.default"]>)
+// Add linter violation
+// @useAuth(AadOauth2Auth<["https://contoso.azure.com/.default"]>)
 @service({
   title: "Contoso Widget Manager",
 })
@@ -23,8 +24,7 @@ enum Versions {
   v2022_11_01_Preview: "2022-11-01-preview",
 }
 
-// Add linter violation
-// @doc("A widget.")
+@doc("A widget.")
 @resource("widgets")
 model WidgetSuite {
   @key("widgetName")
