@@ -55,7 +55,7 @@ input-file:
 
 suppressions:
  - code: NoDuplicatePathsForScopeParameter
-   reason: The error was there before this new private preview API version. Created a work item to fix: Product Backlog Item 24832853: Fix existing swagger Lint errors
+   reason: The error was there before this new private preview API version. Created a work item to fix Product Backlog Item 24832853 Fix existing swagger Lint errors
 ```
 ### Tag: package-preview-2023-05
 
