@@ -4801,6 +4801,12 @@
         "securityPostureReference": {
           "$ref": "#/definitions/SecurityPostureReference",
           "description": "Specifies the security posture to be used for all virtual machines in the scale set. Minimum api-version: 2023-03-01"
+        },
+        "timeCreated": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Specifies the time in which this VM profile for the Virtual Machine Scale Set was created. This value will be added to VMSS Flex VM tags when creating/updating the VMSS VM Profile with minimum api-version: 2023-09-01"
         }
       },
       "description": "Describes a virtual machine scale set virtual machine profile."
