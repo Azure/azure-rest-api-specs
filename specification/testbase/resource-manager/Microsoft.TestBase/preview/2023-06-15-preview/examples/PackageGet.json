@@ -1,0 +1,129 @@
+{
+  "parameters": {
+    "subscriptionId": "subscription-id",
+    "resourceGroupName": "contoso-rg1",
+    "testBaseAccountName": "contoso-testBaseAccount1",
+    "packageName": "contoso-package2",
+    "api-version": "2023-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subscription-id/resourceGroups/contoso-rg1/providers/Microsoft.TestBase/testBaseAccounts/contoso-testBaseAccount1/packages/contoso-package2",
+        "name": "contoso-package2",
+        "type": "Microsoft.TestBase/testBaseAccounts/packages",
+        "location": "westus",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "applicationName": "contoso-package2",
+          "version": "1.0.0",
+          "testTypes": [
+            "OutOfBoxTest"
+          ],
+          "targetOSList": [
+            {
+              "osUpdateType": "Security updates",
+              "targetOSs": [
+                "Windows 10 2004",
+                "Windows 10 1903"
+              ]
+            }
+          ],
+          "packageStatus": "Ready",
+          "lastModifiedTime": "2020-12-28T17:30:00Z",
+          "flightingRing": "Insider Beta Channel",
+          "isEnabled": true,
+          "blobPath": "storageAccountPath/package.zip",
+          "firstPartyApps": [
+            {
+              "name": "Office",
+              "architecture": "x64",
+              "channel": "Current Channel",
+              "ring": "Insider",
+              "interopExecutionMode": "firstPartyAppWithTests"
+            }
+          ],
+          "galleryApps": [
+            {
+              "skuId": "/subscriptions/subscription-id/resourceGroups/contoso-rg1/providers/Microsoft.TestBase/testBaseAccounts/contoso-testBaseAccount1/galleryApps/fe51c56c-5dc0-499b-a807-a9d7746b34ae/galleryAppSkus/docker-4.14.1",
+              "isConsented": true
+            }
+          ],
+          "validationResults": [
+            {
+              "validationName": "Syntax Validation",
+              "isValid": true
+            },
+            {
+              "validationName": "Package Run Validation",
+              "isValid": true
+            }
+          ],
+          "tests": [
+            {
+              "testType": "OutOfBoxTest",
+              "validationRunStatus": "Passed",
+              "validationResultId": "/subscriptions/subscription-id/resourceGroups/contoso-rg1/providers/Microsoft.TestBase/testBaseAccounts/contoso-testBaseAccount1/packages/contoso-package2/testResults/TestResult-51d71a5f-e012-4192-88f7-bd12e0bac2b0",
+              "isActive": true,
+              "commands": [
+                {
+                  "name": "Install",
+                  "action": "Install",
+                  "contentType": "Path",
+                  "content": "app/scripts/install/job.ps1",
+                  "runElevated": true,
+                  "restartAfter": true,
+                  "maxRunTime": 1800,
+                  "runAsInteractive": true,
+                  "alwaysRun": true,
+                  "applyUpdateBefore": false,
+                  "install1PAppBefore": true
+                },
+                {
+                  "name": "Launch",
+                  "action": "Launch",
+                  "contentType": "Path",
+                  "content": "app/scripts/launch/job.ps1",
+                  "runElevated": true,
+                  "restartAfter": false,
+                  "maxRunTime": 1800,
+                  "runAsInteractive": true,
+                  "alwaysRun": false,
+                  "applyUpdateBefore": true,
+                  "install1PAppBefore": false
+                },
+                {
+                  "name": "Close",
+                  "action": "Close",
+                  "contentType": "Path",
+                  "content": "app/scripts/close/job.ps1",
+                  "runElevated": true,
+                  "restartAfter": false,
+                  "maxRunTime": 1800,
+                  "runAsInteractive": true,
+                  "alwaysRun": false,
+                  "applyUpdateBefore": false,
+                  "install1PAppBefore": false
+                },
+                {
+                  "name": "Uninstall",
+                  "action": "Uninstall",
+                  "contentType": "Path",
+                  "content": "app/scripts/uninstall/job.ps1",
+                  "runElevated": true,
+                  "restartAfter": false,
+                  "maxRunTime": 1800,
+                  "runAsInteractive": true,
+                  "alwaysRun": true,
+                  "applyUpdateBefore": false,
+                  "install1PAppBefore": false
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}
