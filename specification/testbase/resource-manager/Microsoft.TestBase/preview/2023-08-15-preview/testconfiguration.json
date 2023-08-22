@@ -413,6 +413,57 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/testConfigurations/{testConfigurationName}/testResults": {
+      "get": {
+        "tags": [
+          "Test Result"
+        ],
+        "operationId": "TestConfiguration_TestResults_List",
+        "description": "Lists all the Test Results of packages associated with a test configuration. Can be filtered by testPassId (specific test configuration run).",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TestConfigurationName"
+          },
+          {
+            "$ref": "#/parameters/TestPassId"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "./testbase.json#/definitions/TestResultListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TestResultsList": {
+            "$ref": "./examples/TestConfigurationTestResultsList.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -804,6 +855,13 @@
       "description": "available VM Configuration Type Name.",
       "x-ms-parameter-location": "method",
       "pattern": "^[A-Za-z0-9]([A-Za-z0-9_]|([-. ][A-Za-z0-9]))+$"
+    },
+    "TestPassId": {
+      "name": "testPassId",
+      "in": "query",
+      "type": "string",
+      "description": "the test pass id of a specific test configuration run.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
