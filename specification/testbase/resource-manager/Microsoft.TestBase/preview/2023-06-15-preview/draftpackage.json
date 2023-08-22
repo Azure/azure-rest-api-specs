@@ -597,6 +597,11 @@
           "type": "boolean",
           "description": "Specifies whether a sample package should be used instead of the one uploaded by the user."
         },
+        "testTool": {
+          "$ref": "./testbase.json#/definitions/TestToolType",
+          "description": "Test Framework",
+          "default": "PowerShell"
+        },
         "comments": {
           "type": "string",
           "description": "Comments added by user."
@@ -690,7 +695,8 @@
           "type": "array",
           "items": {
             "$ref": "./testbase.json#/definitions/GalleryAppDefinition"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "tests": {
           "type": "array",
@@ -737,6 +743,11 @@
         "useSample": {
           "type": "boolean",
           "description": "Specifies whether a sample package should be used instead of the one uploaded by the user."
+        },
+        "testTool": {
+          "$ref": "./testbase.json#/definitions/TestToolType",
+          "description": "Test Tool",
+          "default": "PowerShell"
         },
         "comments": {
           "type": "string",
@@ -816,7 +827,8 @@
           "type": "array",
           "items": {
             "$ref": "./testbase.json#/definitions/GalleryAppDefinition"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "tests": {
           "type": "array",
