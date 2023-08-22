@@ -9,12 +9,14 @@ using TypeSpec.Http;
 
 namespace AzureLoadTesting;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@tag("Test")
 interface LoadTestAdministration {
   @summary("Create a new test or update an existing test.")
   @doc("Create a new test or update an existing test.")
   @route("/tests/{testId}")
   @patch
-  CreateOrUpdateTest is Azure.Core.Foundations.Operation<
+  createOrUpdateTest is Azure.Core.Foundations.Operation<
     {
       @header contentType: "application/merge-patch+json",
       @doc("""
@@ -28,14 +30,14 @@ numeric, underscore or hyphen characters.
       @body
       body: Test;
     },
-    ResourceCreatedOrOkResponse<Test>
+    ResourceCreatedOrOkResponse<Test>, {}, ErrorResponseBody
   >;
 
   @summary("Delete a test by its name.")
   @doc("Delete a test by its name.")
   @route("/tests/{testId}")
   @delete
-  DeleteTest is Azure.Core.Foundations.Operation<
+  deleteTest is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Unique name for the load test, must contain only lower-case alphabetic,
@@ -44,14 +46,14 @@ numeric, underscore or hyphen characters.
       @path
       testId: string;
     },
-    void
+    void, {}, ErrorResponseBody
   >;
 
   @summary("Get load test details by test name")
   @doc("Get load test details by test name")
   @route("/tests/{testId}")
   @get
-  GetTest is Azure.Core.Foundations.Operation<
+  getTest is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Unique name for the load test, must contain only lower-case alphabetic,
@@ -60,7 +62,7 @@ numeric, underscore or hyphen characters.
       @path
       testId: string;
     },
-    Test
+    Test, {}, ErrorResponseBody
   >;
 
   @summary("""
@@ -73,7 +75,7 @@ subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/lo
 """)
   @route("/tests")
   @get
-  ListTests is Azure.Core.Foundations.Operation<
+  listTests is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Sort on the supported fields in (field asc/desc) format. eg:
@@ -95,20 +97,20 @@ Start DateTime(ISO 8601 literal format) of the last updated time range to
 filter tests.
 """)
       @query
-      lastModifiedStartTime?: offsetDateTime;
+      lastModifiedStartTime?: utcDateTime;
 
       @doc("""
 End DateTime(ISO 8601 literal format) of the last updated time range to filter
 tests.
 """)
       @query
-      lastModifiedEndTime?: offsetDateTime;
+      lastModifiedEndTime?: utcDateTime;
 
       @doc("Number of results in response.")
       @query
       maxpagesize?: int32;
     },
-    TestsList
+    TestsList, {}, ErrorResponseBody
   >;
 
   @summary("""
@@ -123,7 +125,7 @@ should be provided in the request body as application/octet-stream.
 """)
   @route("/tests/{testId}/files/{fileName}")
   @put
-  UploadTestFile is Azure.Core.Foundations.Operation<
+  uploadTestFile is Azure.Core.Foundations.Operation<
     {
       @header contentType: "application/octet-stream",
       @doc("""
@@ -145,14 +147,14 @@ numeric, underscore or hyphen characters.
       @body
       body: bytes;
     },
-    ResourceCreatedResponse<FileInfo>
+    ResourceCreatedResponse<FileInfo>, {}, ErrorResponseBody
   >;
 
   @summary("Get test file by the file name.")
   @doc("Get test file by the file name.")
   @route("/tests/{testId}/files/{fileName}")
   @get
-  GetTestFile is Azure.Core.Foundations.Operation<
+  getTestFile is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Unique name for the load test, must contain only lower-case alphabetic,
@@ -165,14 +167,14 @@ numeric, underscore or hyphen characters.
       @path
       fileName: string;
     },
-    FileInfo
+    FileInfo, {}, ErrorResponseBody
   >;
 
   @summary("Delete file by the file name for a test")
   @doc("Delete file by the file name for a test")
   @route("/tests/{testId}/files/{fileName}")
   @delete
-  DeleteTestFile is Azure.Core.Foundations.Operation<
+  deleteTestFile is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Unique name for the load test, must contain only lower-case alphabetic,
@@ -185,14 +187,14 @@ numeric, underscore or hyphen characters.
       @path
       fileName: string;
     },
-    void
+    void, {}, ErrorResponseBody
   >;
 
   @summary("Get all test files.")
   @doc("Get all test files.")
   @route("/tests/{testId}/files")
   @get
-  ListTestFiles is Azure.Core.Foundations.Operation<
+  listTestFiles is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Unique name for the load test, must contain only lower-case alphabetic,
@@ -201,14 +203,14 @@ numeric, underscore or hyphen characters.
       @path
       testId: string;
     },
-    FileInfoList
+    FileInfoList, {}, ErrorResponseBody
   >;
 
   @summary("Associate an app component (collection of azure resources) to a test")
   @doc("Associate an app component (collection of azure resources) to a test")
   @route("/tests/{testId}/app-components")
   @patch
-  CreateOrUpdateAppComponents is Azure.Core.Foundations.Operation<
+  createOrUpdateAppComponents is Azure.Core.Foundations.Operation<
     {
       @header contentType: "application/merge-patch+json",
       @doc("""
@@ -222,14 +224,14 @@ numeric, underscore or hyphen characters.
       @body
       body: TestAppComponents;
     },
-    ResourceCreatedOrOkResponse<TestAppComponents>
+    ResourceCreatedOrOkResponse<TestAppComponents>, {}, ErrorResponseBody
   >;
 
   @summary("Get associated app component (collection of azure resources) for the given test.")
   @doc("Get associated app component (collection of azure resources) for the given test.")
   @route("/tests/{testId}/app-components")
   @get
-  GetAppComponents is Azure.Core.Foundations.Operation<
+  getAppComponents is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Unique name for the load test, must contain only lower-case alphabetic,
@@ -238,14 +240,14 @@ numeric, underscore or hyphen characters.
       @path
       testId: string;
     },
-    TestAppComponents
+    TestAppComponents, {}, ErrorResponseBody
   >;
 
   @summary("Configure server metrics for a test")
   @doc("Configure server metrics for a test")
   @route("/tests/{testId}/server-metrics-config")
   @patch
-  CreateOrUpdateServerMetricsConfig is Azure.Core.Foundations.Operation<
+  createOrUpdateServerMetricsConfig is Azure.Core.Foundations.Operation<
     {
       @header contentType: "application/merge-patch+json",
       @doc("""
@@ -259,14 +261,14 @@ numeric, underscore or hyphen characters.
       @body
       body: TestServerMetricConfig;
     },
-    ResourceCreatedOrOkResponse<TestServerMetricConfig>
+    ResourceCreatedOrOkResponse<TestServerMetricConfig>, {}, ErrorResponseBody
   >;
 
   @summary("List server metrics configuration for the given test.")
   @doc("List server metrics configuration for the given test.")
   @route("/tests/{testId}/server-metrics-config")
   @get
-  GetServerMetricsConfig is Azure.Core.Foundations.Operation<
+  getServerMetricsConfig is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Unique name for the load test, must contain only lower-case alphabetic,
@@ -275,16 +277,18 @@ numeric, underscore or hyphen characters.
       @path
       testId: string;
     },
-    TestServerMetricConfig
+    TestServerMetricConfig, {}, ErrorResponseBody
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@tag("TestRun")
 interface LoadTestRun {
   @summary("Get test run details by name.")
   @doc("Get test run details by name.")
   @route("/test-runs/{testRunId}")
   @get
-  GetTestRun is Azure.Core.Foundations.Operation<
+  getTestRun is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Unique name for the load test run, must contain only lower-case alphabetic,
@@ -293,13 +297,14 @@ numeric, underscore or hyphen characters.
       @path
       testRunId: string;
     },
-    TestRun
+    TestRun, {}, ErrorResponseBody
   >;
+
   @summary("Create and start a new test run with the given name.")
   @doc("Create and start a new test run with the given name.")
   @route("/test-runs/{testRunId}")
   @patch
-  CreateOrUpdateTestRun is Azure.Core.Foundations.Operation<
+  createOrUpdateTestRun is Azure.Core.Foundations.Operation<
     {
       @header contentType: "application/merge-patch+json",
       @doc("""
@@ -322,14 +327,14 @@ in the request body.
       @body
       body: TestRun;
     },
-    ResourceCreatedOrOkResponse<TestRun>
+    ResourceCreatedOrOkResponse<TestRun>, {}, ErrorResponseBody
   >;
 
   @summary("Delete a test run by its name.")
   @doc("Delete a test run by its name.")
   @route("/test-runs/{testRunId}")
   @delete
-  DeleteTestRun is Azure.Core.Foundations.Operation<
+  deleteTestRun is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Unique name for the load test run, must contain only lower-case alphabetic,
@@ -338,14 +343,14 @@ numeric, underscore or hyphen characters.
       @path
       testRunId: string;
     },
-    void
+    void, {}, ErrorResponseBody
   >;
 
   @summary("Get test run file by file name.")
   @doc("Get test run file by file name.")
   @route("/test-runs/{testRunId}/files/{fileName}")
   @get
-  GetTestRunFile is Azure.Core.Foundations.Operation<
+  getTestRunFile is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Unique name for the load test run, must contain only lower-case alphabetic,
@@ -358,14 +363,14 @@ numeric, underscore or hyphen characters.
       @path
       fileName: string;
     },
-    FileInfo
+    FileInfo, {}, ErrorResponseBody
   >;
 
   @summary("Get all test runs with given filters")
   @doc("Get all test runs with given filters")
   @route("/test-runs")
   @get
-  ListTestRuns is Azure.Core.Foundations.Operation<
+  listTestRuns is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Sort on the supported fields in (field asc/desc) format. eg: executedDateTime
@@ -388,11 +393,11 @@ the search parameter can be 500.
 
       @doc("Start DateTime(ISO 8601 literal format) of test-run execution time filter range.")
       @query
-      executionFrom?: offsetDateTime;
+      executionFrom?: utcDateTime;
 
       @doc("End DateTime(ISO 8601 literal format) of test-run execution time filter range.")
       @query
-      executionTo?: offsetDateTime;
+      executionTo?: utcDateTime;
 
       @doc("Comma separated list of test run status.")
       @query
@@ -402,14 +407,14 @@ the search parameter can be 500.
       @query
       maxpagesize?: int32;
     },
-    TestRunsList
+    TestRunsList, {}, ErrorResponseBody
   >;
 
   @summary("Stop test run by name.")
   @doc("Stop test run by name.")
   @route("/test-runs/{testRunId}:stop")
   @post
-  StopTestRun is Azure.Core.Foundations.Operation<
+  stopTestRun is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Unique name for the load test run, must contain only lower-case alphabetic,
@@ -418,14 +423,14 @@ numeric, underscore or hyphen characters.
       @path
       testRunId: string;
     },
-    TestRun
+    TestRun, {}, ErrorResponseBody
   >;
 
   @summary("List the metric namespaces for a load test run.")
   @doc("List the metric namespaces for a load test run.")
   @route("/test-runs/{testRunId}/metric-namespaces")
   @get
-  ListMetricNamespaces is Azure.Core.Foundations.Operation<
+  listMetricNamespaces is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Unique name for the load test run, must contain only lower-case alphabetic,
@@ -434,14 +439,14 @@ numeric, underscore or hyphen characters.
       @path
       testRunId: string;
     },
-    MetricNamespaceCollection
+    MetricNamespaceCollection, {}, ErrorResponseBody
   >;
 
   @summary("List the metric definitions for a load test run.")
   @doc("List the metric definitions for a load test run.")
   @route("/test-runs/{testRunId}/metric-definitions")
   @get
-  ListMetricDefinitions is Azure.Core.Foundations.Operation<
+  listMetricDefinitions is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Unique name for the load test run, must contain only lower-case alphabetic,
@@ -454,14 +459,14 @@ numeric, underscore or hyphen characters.
       @query
       metricNamespace: string;
     },
-    MetricDefinitionCollection
+    MetricDefinitionCollection, {}, ErrorResponseBody
   >;
 
   @summary("List the metric values for a load test run.")
   @doc("List the metric values for a load test run.")
   @route("/test-runs/{testRunId}/metrics")
   @post
-  ListMetrics is Azure.Core.Foundations.Operation<
+  listMetrics is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Unique name for the load test run, must contain only lower-case alphabetic,
@@ -499,12 +504,12 @@ The timespan of the query. It is a string with the following format
       @body
       body?: MetricRequestPayload;
     },
-    Metrics
+    Metrics, {}, ErrorResponseBody
   >;
 
   @summary("List the dimension values for the given metric dimension name.")
   @doc("List the dimension values for the given metric dimension name.")
-  ListMetricDimensionValues is Azure.Core.ResourceList<
+  listMetricDimensionValues is Azure.Core.ResourceList<
     DimensionValueList, QueryParametersTrait<MetricDimensions>
   >;
 
@@ -512,7 +517,7 @@ The timespan of the query. It is a string with the following format
   @doc("Associate an app component (collection of azure resources) to a test run")
   @route("/test-runs/{testRunId}/app-components")
   @patch
-  CreateOrUpdateAppComponents is Azure.Core.Foundations.Operation<
+  createOrUpdateAppComponents is Azure.Core.Foundations.Operation<
     {
       @header contentType: "application/merge-patch+json",
       @doc("""
@@ -526,7 +531,7 @@ numeric, underscore or hyphen characters.
       @body
       body: TestRunAppComponents;
     },
-    ResourceCreatedOrOkResponse<TestRunAppComponents>
+    ResourceCreatedOrOkResponse<TestRunAppComponents>, {}, ErrorResponseBody
   >;
 
   @summary("""
@@ -539,7 +544,7 @@ run.
 """)
   @route("/test-runs/{testRunId}/app-components")
   @get
-  GetAppComponents is Azure.Core.Foundations.Operation<
+  getAppComponents is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Unique name for the load test run, must contain only lower-case alphabetic,
@@ -548,14 +553,14 @@ numeric, underscore or hyphen characters.
       @path
       testRunId: string;
     },
-    TestRunAppComponents
+    TestRunAppComponents, {}, ErrorResponseBody
   >;
 
   @summary("Configure server metrics for a test run")
   @doc("Configure server metrics for a test run")
   @route("/test-runs/{testRunId}/server-metrics-config")
   @patch
-  CreateOrUpdateServerMetricsConfig is Azure.Core.Foundations.Operation<
+  createOrUpdateServerMetricsConfig is Azure.Core.Foundations.Operation<
     {
       @header contentType: "application/merge-patch+json",
       @doc("""
@@ -569,22 +574,38 @@ numeric, underscore or hyphen characters.
       @body
       body: TestRunServerMetricConfig;
     },
-    ResourceCreatedOrOkResponse<TestRunServerMetricConfig>
+    ResourceCreatedOrOkResponse<TestRunServerMetricConfig>, {}, ErrorResponseBody
   >;
 
   @summary("List server metrics configuration for the given test run.")
   @doc("List server metrics configuration for the given test run.")
   @route("/test-runs/{testRunId}/server-metrics-config")
   @get
-  GetServerMetricsConfig is Azure.Core.Foundations.Operation<
-    {
+  op getServerMetricsConfig(
+      @doc("API version")
+      @header
+      apiVersion: string,
       @doc("""
 Unique name for the load test run, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
       @path
       testRunId: string;
-    },
-    TestRunServerMetricConfig
-  >;
+  ) : TestRunServerMetricConfig | ErrorResponseBody;
+
+//   @summary("List server metrics configuration for the given test run.")
+//   @doc("List server metrics configuration for the given test run.")
+//   @route("/test-runs/{testRunId}/server-metrics-config")
+//   @get
+//   getServerMetricsConfig is Azure.Core.Foundations.Operation<
+//     {
+//       @doc("""
+// Unique name for the load test run, must contain only lower-case alphabetic,
+// numeric, underscore or hyphen characters.
+// """)
+//       @path
+//       testRunId: string;
+//     },
+//     TestRunServerMetricConfig, {}, ErrorResponseBody
+//   >;
 };
