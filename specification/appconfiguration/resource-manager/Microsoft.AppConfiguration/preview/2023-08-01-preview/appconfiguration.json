@@ -1399,15 +1399,10 @@
             "$ref": "#/parameters/ConfigStoreNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/SnapshotNameParameter"
           },
           {
-            "name": "snapshotName",
-            "in": "path",
-            "description": "The name of the snapshot.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[^\\x00-\\x1F\\x7F]+$"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1447,15 +1442,10 @@
             "$ref": "#/parameters/ConfigStoreNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/SnapshotNameParameter"
           },
           {
-            "name": "snapshotName",
-            "in": "path",
-            "description": "The name of the snapshot.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[^\\x00-\\x1F\\x7F]+$"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "snapshotParameters",
@@ -2867,6 +2857,15 @@
       "description": "The location in which uniqueness will be verified.",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SnapshotNameParameter": {
+      "name": "snapshotName",
+      "in": "path",
+      "description": "The name of the snapshot.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[^\\x00-\\x1F\\x7F]+$",
       "x-ms-parameter-location": "method"
     }
   },
