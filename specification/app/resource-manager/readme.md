@@ -54,6 +54,7 @@ input-file:
   - Microsoft.App/preview/2023-08-01-preview/ManagedEnvironments.json
   - Microsoft.App/preview/2023-08-01-preview/ManagedEnvironmentsDaprComponents.json
   - Microsoft.App/preview/2023-08-01-preview/ManagedEnvironmentsStorages.json
+  - Microsoft.App/preview/2023-08-01-preview/Patches.json
   - Microsoft.App/preview/2023-08-01-preview/SourceControls.json
   - Microsoft.App/preview/2023-08-01-preview/Subscriptions.json
   - Microsoft.App/preview/2023-08-01-preview/Usages.json
