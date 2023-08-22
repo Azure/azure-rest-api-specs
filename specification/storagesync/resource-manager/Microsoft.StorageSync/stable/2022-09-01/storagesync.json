@@ -4756,6 +4756,10 @@
           "type": "string",
           "description": "Server name",
           "readOnly": true
+        },
+        "serverEndpointProvisioningStatus": {
+          "$ref": "#/definitions/ServerEndpointProvisioningStatus",
+          "description": "Server Endpoint provisioning status"
         }
       }
     },
@@ -5599,6 +5603,118 @@
       "x-ms-enum": {
         "name": "RegisteredServerAgentVersionStatus",
         "modelAsString": true
+      }
+    },
+    "ServerEndpointProvisioningStatus": {
+      "type": "object",
+      "description": "Server endpoint provisioning status information",
+      "properties": {
+        "serverProvisioningStatus": {
+          "$ref": "#/definitions/ServerProvisioningStatus",
+          "description": "Server Endpoint provisioning status",
+          "readOnly": true
+        },
+        "serverEndpointProvisioningType": {
+          "type": "string",
+          "description": "Server Endpoint provisioning type",
+          "readOnly": true
+        },
+        "serverEndpointProvisioningStepStatuses": {
+          "type": "array",
+          "description": "Provisioning Step status information for each step in the provisioning process",
+          "items": {
+            "$ref": "#/definitions/ServerEndpointProvisioningStepStatus"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ServerProvisioningStatus": {
+      "type": "string",
+      "description": "Server provisioning status",
+      "enum": [
+        "NotStarted",
+        "InProgress",
+        "Ready_SyncNotFunctional",
+        "Ready_SyncFunctional",
+        "Error"
+      ],
+      "x-ms-enum": {
+        "name": "ServerProvisioningStatus",
+        "modelAsString": true
+      }
+    },
+    "ServerEndpointProvisioningStepStatus": {
+      "type": "object",
+      "description": "Server endpoint provisioning step status object.",
+      "properties": {
+        "stepName": {
+          "type": "string",
+          "description": "Name of the provisioning step",
+          "readOnly": true
+        },
+        "stepDisplayName": {
+          "type": "string",
+          "description": "Display name of the provisioning step",
+          "readOnly": true
+        },
+        "stepStatus": {
+          "type": "string",
+          "description": "Status of the provisioning step",
+          "readOnly": true
+        },
+        "stepStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the provisioning step",
+          "readOnly": true
+        },
+        "stepMinutesLeft": {
+          "type": "integer",
+          "description": "Estimated completion time of the provisioning step in minutes",
+          "readOnly": true
+        },
+        "stepProgressPercentage": {
+          "type": "integer",
+          "description": "Estimated progress percentage",
+          "readOnly": true
+        },
+        "stepEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of the provisioning step",
+          "readOnly": true
+        },
+        "stepErrorDetails": {
+          "$ref": "#/definitions/ServerEndpointProvisioningError",
+          "description": "Error details for the provisioning step",
+          "readOnly": true
+        },
+        "additionalInformation": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Additional information for the provisioning step",
+          "readOnly": true
+        }
+      }
+    },
+    "ServerEndpointProvisioningError": {
+      "type": "object",
+      "description": "Server endpoint provisioning error object",
+      "properties": {
+        "errorCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Error code (HResult)",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message",
+          "readOnly": true
+        }
       }
     },
     "CloudEndpointChangeEnumerationStatus": {
