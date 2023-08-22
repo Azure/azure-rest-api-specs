@@ -48,7 +48,7 @@ model AzureAuth
       type: OAuth2FlowType.implicit;
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
       // add description to below: "impersonate your user account"
-      scopes: ["user_impersonation"];
+      scopes: ["https://eventhubs.azure.net/.default"];
     }
   ]>;
 
