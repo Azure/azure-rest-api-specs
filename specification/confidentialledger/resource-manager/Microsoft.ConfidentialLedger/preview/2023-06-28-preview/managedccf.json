@@ -358,7 +358,16 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful; response contains a message stating the instance is successfully being backed up."
+            "description": "The request was successful; response contains a message stating the Managed CCF Resource is successfully being backed up.",
+            "schema": {
+              "$ref": "#/definitions/ManagedCCFBackupRestoreResponse"
+            }
+          },
+          "201": {
+            "description": "The Managed CCF Resource will be backed up asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/ManagedCCFBackupRestoreResponse"
+            }
           },
           "default": {
             "description": "Error response describing the reason for operation failure.",
@@ -379,8 +388,8 @@
         "tags": [
           "Managed CCF"
         ],
-        "summary": "Performs the restore operation to spin up a newly restored Managed CCF instance.",
-        "description": "Restores a Managed CCF instance.",
+        "summary": "Performs the restore operation to spin up a newly restored Managed CCF Resource.",
+        "description": "Restores a Managed CCF Resource.",
         "operationId": "ManagedCCF_Restore",
         "parameters": [
           {
@@ -407,9 +416,15 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful; response contains a message stating the instance is successfully being restored.",
+            "description": "The request was successful; response contains a message stating the Managed CCF Resource is successfully being restored.",
             "schema": {
-              "$ref": "#/definitions/ManagedCCFRestore"
+              "$ref": "#/definitions/ManagedCCFBackupRestoreResponse"
+            }
+          },
+          "201": {
+            "description": "The Managed CCF Resource will be restored asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/ManagedCCFBackupRestoreResponse"
             }
           },
           "default": {
@@ -646,6 +661,17 @@
           "type": "string",
           "readOnly": false,
           "description": "SAS URI used to access the backup Fileshare."
+        }
+      }
+    },
+    "ManagedCCFBackupRestoreResponse": {
+      "description": "Object representing Backup and Restore responses of Managed CCF Resource.",
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Response body stating if the Managed CCF Resource is being backed up or restored."
         }
       }
     }

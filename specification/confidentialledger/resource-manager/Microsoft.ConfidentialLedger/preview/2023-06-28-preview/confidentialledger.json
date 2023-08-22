@@ -446,7 +446,16 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful; response contains a message stating the instance is successfully being backed up."
+            "description": "The request was successful; response contains a message stating the Confidential Ledger Resource is successfully being backed up.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerBackupRestoreResponse"
+            }
+          },
+          "201": {
+            "description": "The Confidential Ledger Resource will be backed up asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerBackupRestoreResponse"
+            }
           },
           "default": {
             "description": "Error response describing the reason for operation failure. 404 - NotFound (Confidential Ledger does not exist.)",
@@ -495,7 +504,16 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful; response contains a message stating the instance is successfully being restored."
+            "description": "The request was successful; response contains a message stating the Confidential Ledger Resource is successfully being restored.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerBackupRestoreResponse"
+            }
+          },
+          "201": {
+            "description": "The Confidential Ledger Resource will be restored asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerBackupRestoreResponse"
+            }
           },
           "default": {
             "description": "Error response describing the reason for operation failure.",
@@ -755,6 +773,17 @@
           "type": "string",
           "readOnly": false,
           "description": "SAS URI used to access the backup Fileshare."
+        }
+      }
+    },
+    "ConfidentialLedgerBackupRestoreResponse": {
+      "description": "Object representing Backup and Restore responses of Confidential Ledger Resource.",
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Response body stating if the Confidential Ledger Resource is being backed up or restored."
         }
       }
     },
