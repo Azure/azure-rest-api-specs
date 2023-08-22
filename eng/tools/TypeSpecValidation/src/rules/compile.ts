@@ -13,22 +13,22 @@ export class CompileRule implements Rule {
     let errorOutput: string | undefined;
 
     if (await checkFileExists(path.join(folder, "main.tsp"))) {
-      let [std, err] = await runCmd(`npx --no tsp compile . --warn-as-error`, folder);
-      stdOutput += std;
-      if (err == null) {
+      let [err, stdout, stderr] = await runCmd(`npx --no tsp compile . --warn-as-error`, folder);
+      stdOutput += stdout;
+      if (err) {
         success = false;
-        errorOutput += err;
+        errorOutput += stderr;
       }
     }
     if (await checkFileExists(path.join(folder, "client.tsp"))) {
-      let [std, err] = await runCmd(
+      let [err, stdout, stderr] = await runCmd(
         `npx --no tsp compile client.tsp --no-emit --warn-as-error`,
         folder
       );
-      stdOutput += std;
-      if (err == null) {
+      stdOutput += stdout;
+      if (err) {
         success = false;
-        errorOutput += err;
+        errorOutput += stderr;
       }
     }
 

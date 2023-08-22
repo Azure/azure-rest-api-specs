@@ -8,9 +8,9 @@ export class FormatRule implements Rule {
 
   async execute(folder: string): Promise<RuleResult> {
     // Format parent folder to include shared files
-    let [stdOutput, errorOutput] = await runCmd(`npx tsp format ../**/*.tsp`, folder);
+    let [err, stdOutput, errorOutput] = await runCmd(`npx tsp format ../**/*.tsp`, folder);
 
-    let success = errorOutput == null ? false : true;
+    let success = err ? false : true;
     return {
       success: success,
       stdOutput: stdOutput,

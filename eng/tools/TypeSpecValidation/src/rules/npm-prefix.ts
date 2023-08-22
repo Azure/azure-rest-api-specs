@@ -8,7 +8,7 @@ export class NpmPrefixRule implements Rule {
 
   async execute(folder: string): Promise<RuleResult> {
     let expected_npm_prefix = process.cwd();
-    const actual_npm_prefix = (await runCmd(`npm prefix`, folder))[0].trim();
+    const actual_npm_prefix = (await runCmd(`npm prefix`, folder))[1].trim();
 
     let success = true;
     let stdOutput =
