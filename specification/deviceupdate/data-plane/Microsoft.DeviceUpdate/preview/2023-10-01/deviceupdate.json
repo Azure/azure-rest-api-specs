@@ -629,6 +629,42 @@
         }
       }
     },
+    "/deviceUpdate/{instanceId}/management/deviceClassesCount": {
+      "get": {
+        "tags": [
+          "Device and deployment management"
+        ],
+        "description": "Gets a count of all device classes (sets of devices compatible with the same updates based on the model Id and compat properties reported in the Device Update PnP interface in IoT Hub) for all devices connected to Device Update for IoT Hub.",
+        "operationId": "DeviceManagement_GetDeviceClassesCount",
+        "x-ms-examples": {
+          "DeviceManagement_GetDeviceClassesCount": {
+            "$ref": "./examples/DeviceManagement_GetDeviceClassesCount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/InstanceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Count of all device classes.",
+            "schema": {
+              "$ref": "#/definitions/CountResponse"
+            }
+          },
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/deviceUpdate/{instanceId}/management/deviceClasses/{deviceClassId}": {
       "get": {
         "tags": [
@@ -840,6 +876,42 @@
         }
       }
     },
+    "/deviceUpdate/{instanceId}/management/devicesCount": {
+      "get": {
+        "tags": [
+          "Device and deployment management"
+        ],
+        "description": "Gets a count of all devices.",
+        "operationId": "DeviceManagement_GetDevicesCount",
+        "x-ms-examples": {
+          "DeviceManagement_GetDevicesCount": {
+            "$ref": "./examples/DeviceManagement_GetDevicesCount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/InstanceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The count of all devices.",
+            "schema": {
+              "$ref": "#/definitions/CountResponse"
+            }
+          },
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/deviceUpdate/{instanceId}/management/devices:import": {
       "post": {
         "tags": [
@@ -1006,6 +1078,114 @@
         }
       }
     },
+    "/deviceUpdate/{instanceId}/management/deploymentsCount": {
+      "get": {
+        "tags": [
+          "Device and deployment management"
+        ],
+        "description": "Gets a count of all deployments for all device groups.",
+        "operationId": "DeviceManagement_GetDeploymentsCount",
+        "x-ms-examples": {
+          "DeviceManagement_GetDeploymentsCount": {
+            "$ref": "./examples/DeviceManagement_GetDeploymentsCount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/InstanceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Count of all deployments for all device groups.",
+            "schema": {
+              "$ref": "#/definitions/CountResponse"
+            }
+          },
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/management/activeDeploymentsCount": {
+      "get": {
+        "tags": [
+          "Device and deployment management"
+        ],
+        "description": "Gets a count of all active deployments for all device groups.",
+        "operationId": "DeviceManagement_GetActiveDeploymentsCount",
+        "x-ms-examples": {
+          "DeviceManagement_GetActiveDeploymentsCount": {
+            "$ref": "./examples/DeviceManagement_GetActiveDeploymentsCount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/InstanceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Count of all active deployments for all device groups.",
+            "schema": {
+              "$ref": "#/definitions/CountResponse"
+            }
+          },
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/limits": {
+      "get": {
+        "tags": [
+          "Instance management"
+        ],
+        "description": "Gets the instance limits for active deployments, devices, device classes, and groups.",
+        "operationId": "InstanceManagement_GetLimits",
+        "x-ms-examples": {
+          "InstanceManagement_GetLimits": {
+            "$ref": "./examples/InstanceManagement_GetLimits.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/InstanceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The instance limits for active deployments, devices, device classes, and groups.",
+            "schema": {
+              "$ref": "#/definitions/LimitsResponse"
+            }
+          },
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/deviceUpdate/{instanceId}/management/groups": {
       "get": {
         "tags": [
@@ -1051,6 +1231,42 @@
         "x-ms-odata": "#/definitions/GroupOrderBy",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/management/groupsCount": {
+      "get": {
+        "tags": [
+          "Device and deployment management"
+        ],
+        "description": "Gets a count of all device groups.",
+        "operationId": "DeviceManagement_GetGroupsCount",
+        "x-ms-examples": {
+          "DeviceManagement_GetGroupsCount": {
+            "$ref": "./examples/DeviceManagement_GetGroupsCount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/InstanceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The count of all device groups.",
+            "schema": {
+              "$ref": "#/definitions/CountResponse"
+            }
+          },
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
         }
       }
     },
@@ -2926,6 +3142,19 @@
         "error"
       ]
     },
+    "CountResponse": {
+      "description": "Count response.",
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "description": "The count."
+        }
+      },
+      "required": [
+        "count"
+      ]
+    },
     "Error": {
       "type": "object",
       "properties": {
@@ -2988,6 +3217,33 @@
         "code"
       ],
       "description": "An object containing more specific information than the current object about the error."
+    },
+    "LimitsResponse": {
+      "type": "object",
+      "description": "The list of instance limits on how many of each resource are permitted",
+      "properties": {
+        "limits": {
+          "type": "array",
+          "description": "The instance limits on how many of each resource are permitted",
+          "items": {
+            "$ref": "#/definitions/Limit"
+          }
+        }
+      }
+    },
+    "Limit": {
+      "type": "object",
+      "description": "An instance limit with a name and value",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The instance limit name"
+        },
+        "value": {
+          "type": "integer",
+          "description": "The instance limit value"
+        }
+      }
     },
     "UpdateOperationsList": {
       "description": "The list of operations with server paging support.",
@@ -4307,7 +4563,6 @@
       "name": "endpoint",
       "in": "path",
       "required": true,
-      "format": "url",
       "type": "string",
       "x-ms-skip-url-encoding": true,
       "description": "The Device Update for IoT Hub account endpoint (hostname only, no protocol).",
