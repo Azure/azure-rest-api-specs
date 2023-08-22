@@ -24,15 +24,15 @@
               "patchDetails": [
                 {
                   "targetContainerName": "test-container",
-                  "targetImageName": "testregistry.azurecr.io/test-image:latest",
+                  "targetImage": "testregistry.azurecr.io/test-image:latest",
                   "detectionStatus": "Succeeded",
                   "newImageName": "testregistry.azurecr.io/test-image:latest-patched-202210101206185241",
-                  "newRunImage": {
+                  "newLayer": {
                     "name": "mcr.microsoft.com/dotnet/aspnet:7.0.7-cbl-mariner2.0",
                     "frameworkAndVersion": "dotnet:7.0.7",
                     "osAndVersion": "cbl-mariner2.0"
                   },
-                  "oldRunImage": {
+                  "oldLayer": {
                     "name": "mcr.microsoft.com/dotnet/aspnet:7.0.5-cbl-mariner2.0",
                     "frameworkAndVersion": "dotnet:7.0.5",
                     "osAndVersion": "cbl-mariner2.0"
@@ -55,15 +55,15 @@
               "patchDetails": [
                 {
                   "targetContainerName": "test-container",
-                  "targetImageName": "testregistry.azurecr.io/test-image:release-1",
+                  "targetImage": "testregistry.azurecr.io/test-image:release-1",
                   "detectionStatus": "Succeeded",
                   "newImageName": "testregistry.azurecr.io/test-image:release-1-patched-202210101206203421",
-                  "newRunImage": {
+                  "newLayer": {
                     "name": "mcr.microsoft.com/dotnet/aspnet:7.0.7-cbl-mariner2.0",
                     "frameworkAndVersion": "dotnet:7.0.7",
                     "osAndVersion": "cbl-mariner2.0"
                   },
-                  "oldRunImage": {
+                  "oldLayer": {
                     "name": "mcr.microsoft.com/dotnet/aspnet:7.0.5-cbl-mariner2.0",
                     "frameworkAndVersion": "dotnet:7.0.5",
                     "osAndVersion": "cbl-mariner2.0"
@@ -72,15 +72,15 @@
                 },
                 {
                   "targetContainerName": "test-container-2",
-                  "targetImageName": "testregistry.azurecr.io/test-image:release-2",
+                  "targetImage": "testregistry.azurecr.io/test-image:release-2",
                   "detectionStatus": "Succeeded",
                   "newImageName": "testregistry.azurecr.io/test-image:release-2-patched-202210101206203421",
-                  "newRunImage": {
+                  "newLayer": {
                     "name": "mcr.microsoft.com/dotnet/aspnet:7.0.7-cbl-mariner2.0",
                     "frameworkAndVersion": "dotnet:7.0.7",
                     "osAndVersion": "cbl-mariner2.0"
                   },
-                  "oldRunImage": {
+                  "oldLayer": {
                     "name": "mcr.microsoft.com/dotnet/aspnet:7.0.0-cbl-mariner2.0",
                     "frameworkAndVersion": "dotnet:7.0.0",
                     "osAndVersion": "cbl-mariner2.0"
@@ -99,14 +99,16 @@
               "targetContainerAppId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/containerApps/test-app3",
               "provisioningState": "Succeeded",
               "patchApplyStatus": null,
-              "patchDetails": {
-                "targetContainerName": "test-container",
-                "targetImageName": "private-repository-k8s.k8se-system/test-image:failed-test",
-                "detectionStatus": "RegistryLoginFailed",
-                "newRunImage": null,
-                "oldRunImage": null,
-                "patchType": null
-              }
+              "patchDetails": [
+                {
+                  "targetContainerName": "test-container",
+                  "targetImage": "private-repository-k8s.k8se-system/test-image:failed-test",
+                  "detectionStatus": "RegistryLoginFailed",
+                  "newLayer": null,
+                  "oldLayer": null,
+                  "patchType": null
+                }
+              ]
             }
           }
         ],

@@ -180,7 +180,7 @@
         }
       }
     },
-    "/subscription/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/builders/{builderName}/patches/{patchName}/skip": {
+    "/subscription/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/builders/{builderName}/patches/{patchName}/skip/{patchSkipConfig}": {
       "post": {
         "tags": [
           "Patches"
@@ -204,7 +204,7 @@
             "$ref": "#/parameters/PatchNameParameter"
           },
           {
-            "name": "patchSkip",
+            "name": "patchSkipConfig",
             "in": "path",
             "description": "Set the patch to be skipped or not.",
             "type": "boolean",
