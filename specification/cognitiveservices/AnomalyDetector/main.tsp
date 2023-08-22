@@ -7,6 +7,7 @@ import "./multivariate/routes.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+asdf
 
 @versioned(APIVersion)
 @service({
