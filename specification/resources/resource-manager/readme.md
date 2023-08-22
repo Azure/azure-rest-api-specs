@@ -89,6 +89,10 @@ These settings apply only when `--tag=package-deploymentscripts-2023-08` is spec
 ```yaml $(tag) == 'package-deploymentscripts-2023-08'
 input-file:
   - Microsoft.Resources/stable/2023-08-01/deploymentScripts.json
+
+suppressions:
+  - code: OperationsAPIImplementation
+    reason: OperationsAPI will come from Resources
 ```
 ### Tag: package-2022-12
 
