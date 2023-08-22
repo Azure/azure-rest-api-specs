@@ -26,8 +26,6 @@ using OpenAPI;
   "The Schema Registry service endpoint.",
   {
     @doc("The Schema Registry service endpoint, for example 'my-namespace.servicebus.windows.net'.")
-    @extension("x-ms-parameter-location", "client")
-    @extension("x-ms-skip-url-encoding", true)
     endpoint: url,
   }
 )
@@ -125,7 +123,7 @@ alias NoContentResponse<T> = TypeSpec.Http.Response<204> & T;
 @doc("The content type for given schema. Each schema type has an associated content-type.")
 model SchemaContentType {
   @doc("The content type for given schema.")
-  @header("content-type")
+  @header("Content-Type")
   contentType: "application/json; serialization=Avro" | "application/json; serialization=json" | "text/plain; charset=utf-8";
 }
 
@@ -139,27 +137,27 @@ model SchemaContent {
 @doc("No Content.")
 model SchemaHeaders {
   @doc("URL location of schema, identified by schema group, schema name, and version.")
-  @header
+  @header("Location")
   location: string;
 
   @doc("References specific schema in registry namespace.")
-  @header
+  @header("Schema-Id")
   schemaId: string;
 
   @doc("URL location of schema, identified by schema ID.")
-  @header
+  @header("Schema-Id-Location")
   schemaIdLocation: string;
 
   @doc("References schema group.")
-  @header
+  @header("Schema-Group-Name")
   schemaGroupName: string;
 
   @doc("References schema name.")
-  @header
+  @header("Schema-Name")
   schemaName: string;
 
   @doc("Version of the returned schema.")
-  @header
+  @header("Schema-Version")
   schemaVersion: int32;
 }
 
@@ -190,7 +188,6 @@ model Schema {
   @visibility("read")
   @maxLength(50)
   @pattern("^[A-Za-z0-9][^\\\\/$:]*$")
-  @extension("x-ms-parameter-location", "method")
   name: string;
 
   @doc("String representation (UTF-8) of the registered schema.")
@@ -204,6 +201,5 @@ model Version {
   @key("schemaVersion")
   @doc("Version number of specific schema.")
   @visibility("read")
-  @extension("x-ms-parameter-location", "method")
   schemaVersion: int32;
 }
