@@ -8,8 +8,8 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 title: HDInsightContainersMgmtClient
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-namespace: azure.mgmt.hdinsight.containers
-package-name: azure-mgmt-hdinsight-containers
+namespace: azure.mgmt.hdinsightcontainers
+package-name: azure-mgmt-hdinsightcontainers
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
