@@ -1009,6 +1009,9 @@ directive:
     from: deploymentScripts.json
     where: $.paths
     reason: OperationsAPI will come from Resources
+  - suppress: IntegerTypeMustHaveFormat
+    from: deploymentScripts.json
+    reason: Tooling issue, default is int32, explictly mentioning the format as per doc, it still flags breaking change.
   - from: deploymentScripts.json
     suppress: R3006
     where:
