@@ -429,62 +429,54 @@
     "AseV3NetworkingConfiguration": {
       "description": "Full view of networking configuration for an ASE.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyOnlyResource"
-        }
-      ],
       "properties": {
         "properties": {
           "description": "AseV3NetworkingConfiguration resource specific properties",
           "type": "object",
-          "properties": {
-            "windowsOutboundIpAddresses": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "readOnly": true
-            },
-            "linuxOutboundIpAddresses": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "readOnly": true
-            },
-            "externalInboundIpAddresses": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "readOnly": true
-            },
-            "internalInboundIpAddresses": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "readOnly": true
-            },
-            "allowNewPrivateEndpointConnections": {
-              "description": "Property to enable and disable new private endpoint connection creation on ASE",
-              "type": "boolean"
-            },
-            "ftpEnabled": {
-              "description": "Property to enable and disable FTP on ASEV3",
-              "type": "boolean"
-            },
-            "remoteDebugEnabled": {
-              "description": "Property to enable and disable Remote Debug on ASEV3",
-              "type": "boolean"
-            },
-            "inboundIpAddressOverride": {
-              "description": "Customer provided Inbound IP Address. Only able to be set on Ase create.",
+          "windowsOutboundIpAddresses": {
+            "type": "array",
+            "items": {
               "type": "string"
-            }
+            },
+            "readOnly": true
           },
-          "x-ms-client-flatten": true
+          "linuxOutboundIpAddresses": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "readOnly": true
+          },
+          "externalInboundIpAddresses": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "readOnly": true
+          },
+          "internalInboundIpAddresses": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "readOnly": true
+          },
+          "allowNewPrivateEndpointConnections": {
+            "description": "Property to enable and disable new private endpoint connection creation on ASE",
+            "type": "boolean"
+          },
+          "ftpEnabled": {
+            "description": "Property to enable and disable FTP on ASEV3",
+            "type": "boolean"
+          },
+          "remoteDebugEnabled": {
+            "description": "Property to enable and disable Remote Debug on ASEV3",
+            "type": "boolean"
+          },
+          "inboundIpAddressOverride": {
+            "description": "Customer provided Inbound IP Address. Only able to be set on Ase create.",
+            "type": "string"
+          }
         }
       }
     },
@@ -954,17 +946,8 @@
     },
     "CustomDnsSuffixConfiguration": {
       "description": "Full view of the custom domain suffix configuration for ASEv3.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyOnlyResource"
-        }
-      ],
       "properties": {
         "properties": {
-          "description": "CustomDnsSuffixConfiguration resource specific properties",
-          "type": "object",
-          "properties": {
             "provisioningState": {
               "enum": [
                 "Succeeded",
@@ -995,9 +978,7 @@
               "description": "The user-assigned identity to use for resolving the key vault certificate reference. If not specified, the system-assigned ASE identity will be used if available.",
               "type": "string"
             }
-          },
-          "x-ms-client-flatten": true
-        }
+          }
       }
     },
     "CustomScaleRule": {
