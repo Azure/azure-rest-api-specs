@@ -52,6 +52,17 @@ and followed the instructions by checking all the boxes:
 - If you want to force ARM review, add the label yourself.
 - Proceed according to the diagram at the top of this comment.
 
+## Viewing API changes
+
+For convenient view of the API changes made by this PR, refer to the URLs provided in the table 
+in the `Generated ApiView` comment added to this PR. You can use ApiView to show API versions diff. 
+
+## Suppressing failures
+
+If one or multiple validation error/warning suppression(s) is detected in your PR, please follow the 
+[Swagger-Suppression-Process](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/85/Swagger-Suppression-Process) 
+to get approval.
+
 ## Getting help
 
 - For general PR approval workflow, see the diagram at the top of this comment.
