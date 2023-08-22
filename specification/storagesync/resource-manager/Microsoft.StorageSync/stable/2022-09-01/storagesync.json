@@ -4565,7 +4565,12 @@
         },
         "ApplicationId": {
           "type": "string",
-          "description": "Server ServicePrincipal Id"
+          "description": "Server Application Id"
+        },
+        "ActiveAuthType": {
+          "$ref": "#/definitions/ServerAuthType",
+          "description": "Server auth type.",
+          "readOnly": true
         }
       }
     },
@@ -5038,6 +5043,18 @@
       ],
       "x-ms-enum": {
         "name": "FeatureStatus",
+        "modelAsString": true
+      }
+    },
+    "ServerAuthType": {
+      "type": "string",
+      "description": "Type of the Server Auth type",
+      "enum": [
+        "certificate",
+        "managedidentity"
+      ],
+      "x-ms-enum": {
+        "name": "ServerAuthType",
         "modelAsString": true
       }
     },
