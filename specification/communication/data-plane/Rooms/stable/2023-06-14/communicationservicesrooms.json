@@ -406,6 +406,10 @@
           "type": "string",
           "example": "2021-09-08T15:55:41Z"
         },
+        "enablePstnDialout": {
+          "description": "The flag which signifies if at time of the call, dialout to a PSTN number is enabled in a particular Room or not.",
+          "type": "boolean"
+        },
         "participants": {
           "description": "(Optional) Participants to be invited to the room.",
           "type": "object",
@@ -475,7 +479,8 @@
         "createdAt",
         "id",
         "validFrom",
-        "validUntil"
+        "validUntil",
+        "enablePstnDialout"
       ],
       "properties": {
         "id": {
@@ -500,6 +505,10 @@
           "description": "The timestamp from when the room can no longer be joined. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
           "type": "string",
           "example": "2021-09-08T15:55:41Z"
+        },
+        "enablePstnDialout": {
+          "description": "The flag which signifies if at time of the call, dialout to a PSTN number is enabled in a particular Room or not.",
+          "type": "boolean"
         }
       }
     },
@@ -581,6 +590,10 @@
           "description": "(Optional) The timestamp from when the room can no longer be joined. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
           "type": "string",
           "example": "2021-09-08T15:55:41Z"
+        },
+        "enablePstnDialout": {
+          "description": "The flag which signifies if at time of the call, dialout to a PSTN number is enabled in a particular Room or not.",
+          "type": "boolean"
         }
       }
     }
