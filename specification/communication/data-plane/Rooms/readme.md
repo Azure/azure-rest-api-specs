@@ -31,7 +31,7 @@ input-file:
   - stable/2023-06-14/communicationservicesrooms.json
 ```
 
-### Tag: package-rooms-2023-03-31-preview
+### Tag: package-rooms-2023-10-30-preview
 
 These settings apply only when `--tag=package-rooms-2023-10-30-preview` is specified on the command line.
 
