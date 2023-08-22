@@ -134,7 +134,6 @@ input-file:
   - Microsoft.AzureStackHCI/stable/2023-09-01/storageContainers.json
   - Microsoft.AzureStackHCI/stable/2023-09-01/virtualHardDisks.json
   - Microsoft.AzureStackHCI/stable/2023-09-01/virtualMachineInstances.json
-  - Microsoft.AzureStackHCI/stable/2023-09-01/virtualNetworks.json
 ```
 
 ### Tag: package-preview-2023-08-01
