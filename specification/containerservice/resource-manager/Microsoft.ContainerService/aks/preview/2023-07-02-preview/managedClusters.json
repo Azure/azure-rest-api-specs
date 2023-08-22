@@ -4061,6 +4061,14 @@
         "resourceId": {
           "readOnly": true,
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/virtualMachines"
+              }
+            ]
+          },
           "description": "Arm resource id of the machine. It can be used to GET underlying VM Instance"
         }
       }
@@ -4092,28 +4100,32 @@
           "description": "IPv4 or IPv6 address of the machine"
         },
         "family": {
-          "type": "string",
+          "$ref": "#/definitions/ipFamily",
           "readOnly": true,
-          "description": "To determine if address belongs IPv4 or IPv6 family",
-          "enum": [
-            "IPv4",
-            "IPv6"
-          ],
-          "x-ms-enum": {
-            "name": "IPFamily",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "IPv4",
-                "description": "IPv4 family"
-              },
-              {
-                "value": "IPv6",
-                "description": "IPv6 family"
-              }
-            ]
-          }
+          "description": "To determine if address belongs IPv4 or IPv6 family."
         }
+      }
+    },
+    "ipFamily": {
+      "type": "string",
+      "description": "To determine if address belongs IPv4 or IPv6 family.",
+      "enum": [
+        "IPv4",
+        "IPv6"
+      ],
+      "x-ms-enum": {
+        "name": "ipFamily",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "IPv4",
+            "description": "IPv4 family"
+          },
+          {
+            "value": "IPv6",
+            "description": "IPv6 family"
+          }
+        ]
       }
     },
     "ManagedClusterWindowsProfile": {
@@ -4338,16 +4350,8 @@
         "ipFamilies": {
           "type": "array",
           "items": {
-            "type": "string",
-            "description": "The IP version to use for cluster networking and IP assignment.",
-            "enum": [
-              "IPv4",
-              "IPv6"
-            ],
-            "x-ms-enum": {
-              "name": "ipFamily",
-              "modelAsString": true
-            }
+            "$ref": "#/definitions/ipFamily",
+            "description": "The IP version to use for cluster networking and IP assignment."
           },
           "title": "The IP families used to specify IP versions available to the cluster.",
           "description": "IP families are used to determine single-stack or dual-stack clusters. For single-stack, the expected value is IPv4. For dual-stack, the expected values are IPv4 and IPv6."
