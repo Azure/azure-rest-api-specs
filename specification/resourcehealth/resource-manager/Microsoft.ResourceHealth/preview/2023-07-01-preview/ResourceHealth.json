@@ -1148,6 +1148,17 @@
                 "modelAsString": true
               }
             },
+            "eventSubType": {
+              "type": "string",
+              "description": "Sub type of the event. Currently used to determine retirement communications for health advisory events",
+              "enum": [
+                "Retirement"
+              ],
+              "x-ms-enum": {
+                "name": "EventSubTypeValues",
+                "modelAsString": true
+              }
+            },
             "eventSource": {
               "type": "string",
               "description": "Source of event.",
@@ -1356,6 +1367,18 @@
             "impactType": {
               "type": "string",
               "description": "The type of the impact"
+            },
+            "maintenanceId": {
+              "type": "string",
+              "description": "Unique identifier for planned maintenance event."
+            },
+            "maintenanceType": {
+              "type": "string",
+              "description": "The type of planned maintenance event."
+            },
+            "argQuery": {
+              "type": "string",
+              "description": "Azure Resource Graph query to fetch the affected resources from their existing Azure Resource Graph locations."
             }
           }
         }
@@ -2047,6 +2070,31 @@
               "readOnly": true,
               "type": "string",
               "description": "Impacted resource region name."
+            },
+            "resourceName": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Resource name."
+            },
+            "resourceGroup": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Resource group name."
+            },
+            "maintenanceStatus": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Status of maintenance for the impacted resource."
+            },
+            "maintenanceStartTime": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Start time of maintenance for the impacted resource."
+            },
+            "maintenanceEndTime": {
+              "readOnly": true,
+              "type": "string",
+              "description": "End time of maintenance for the impacted resource."
             },
             "info": {
               "type": "array",
