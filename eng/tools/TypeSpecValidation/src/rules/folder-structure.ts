@@ -4,7 +4,7 @@ import { RuleResult } from "../rule-result.js";
 
 export class FolderStructureRule implements Rule {
   readonly name = "FolderStructure";
-  readonly description = "Verify spec directory's file structure and naming conventions.";
+  readonly description = "Verify spec directory's folder structure and naming conventions.";
   async execute(folder: string): Promise<RuleResult> {
     let success = true;
     let errorOutput = "";
