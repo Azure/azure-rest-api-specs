@@ -211,9 +211,12 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful and ledger was recovered; response contains the Managed CCF"
+            "description": "The request was successful and Managed CCF was recovered; response contains the Managed CCF",
+            "schema": {
+              "$ref": "#/definitions/ManagedCCF"
+            }
           },
-          "202": {
+          "201": {
             "description": "The Managed CCF resource will be updated asynchronously"
           },
           "default": {
@@ -445,7 +448,7 @@
   "definitions": {
     "ProvisioningState": {
       "type": "string",
-      "description": "Object representing ProvisioningState for Confidential Ledger.",
+      "description": "Object representing ProvisioningState for Managed CCF.",
       "enum": [
         "Unknown",
         "Succeeded",
@@ -462,7 +465,7 @@
     },
     "RunningState": {
       "type": "string",
-      "description": "Object representing RunningState for Confidential Ledger.",
+      "description": "Object representing RunningState for Managed CCF.",
       "enum": [
         "Active",
         "Paused",
@@ -579,11 +582,11 @@
           "$ref": "#/definitions/DeploymentType"
         },
         "runningState": {
-          "description": "Object representing RunningState for Ledger.",
+          "description": "Object representing RunningState for Managed CCF.",
           "$ref": "#/definitions/RunningState"
         },
         "provisioningState": {
-          "description": "Provisioning state of Ledger Resource",
+          "description": "Provisioning state of Managed CCF Resource",
           "readOnly": true,
           "$ref": "#/definitions/ProvisioningState"
         },
