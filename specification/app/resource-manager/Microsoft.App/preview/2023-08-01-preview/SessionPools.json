@@ -331,6 +331,14 @@
             "managedEnvironmentId": {
               "description": "Resource ID of the Session Pool's environment.",
               "type": "string",
+              "format": "arm-id",
+              "x-ms-arm-id-details": {
+                "allowedResources": [
+                  {
+                    "type": "Microsoft.App/managedEnvironments"
+                  }
+                ]
+              },
               "x-ms-mutability": [
                 "create",
                 "read"
