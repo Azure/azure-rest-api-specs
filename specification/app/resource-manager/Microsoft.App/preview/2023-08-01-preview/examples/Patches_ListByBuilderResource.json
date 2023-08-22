@@ -1,0 +1,118 @@
+{
+    "operationId": "Patches_ListByBuilderResource",
+    "title": "Patches_ListByBuilderResource_0",
+    "parameters": {
+      "api-version": "2023-08-01-preview",
+      "subscriptionId": "00000000-0000-0000-0000-000000000000",
+      "resourceGroupName": "rg",
+      "builderName": "testBuilder"
+    },
+    "responses": {
+      "200": {
+        "body": {
+          "value": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/builders/testBuilder/patches/testPatch-25fe4b",
+              "name": "testPatch-25fe4b",
+              "type": "Microsoft.App/builders/patches",
+              "properties": {
+                "targetEnvironmentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/test-env",
+                "targetContainerAppId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/containerApps/test-app",
+                "targetRevisionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/apps/test-app/revisions/test-app--jm3vvry",
+                "provisioningState": "Succeeded",
+                "patchApplyStatus": "NotStarted",
+                "patchDetails": [
+                  {
+                    "targetContainerName": "test-container",
+                    "targetImageName": "testregistry.azurecr.io/test-image:latest",
+                    "detectionStatus": "Succeeded",
+                    "newImageName": "testregistry.azurecr.io/test-image:latest-patched-202210101206185241",
+                    "newRunImage": {
+                      "name": "mcr.microsoft.com/dotnet/aspnet:7.0.7-cbl-mariner2.0",
+                      "frameworkAndVersion": "dotnet:7.0.7",
+                      "osAndVersion": "cbl-mariner2.0"
+                    },
+                    "oldRunImage": {
+                      "name": "mcr.microsoft.com/dotnet/aspnet:7.0.5-cbl-mariner2.0",
+                      "frameworkAndVersion": "dotnet:7.0.5",
+                      "osAndVersion": "cbl-mariner2.0"
+                    },
+                    "patchType": "FrameworkSecurity"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/builders/testBuilder/patches/testPatch-27c3d5",
+              "name": "testPatch-27c3d5",
+              "type": "Microsoft.App/builders/patches",
+              "properties": {
+                "targetEnvironmentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/test-env",
+                "targetContainerAppId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/containerApps/test-app2",
+                "targetRevisionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/containerApps/test-app2/revisions/test-app2--z79h4oc",
+                "provisioningState": "Succeeded",
+                "patchApplyStatus": "NotStarted",
+                "patchDetails": [
+                  {
+                    "targetContainerName": "test-container",
+                    "targetImageName": "testregistry.azurecr.io/test-image:release-1",
+                    "detectionStatus": "Succeeded",
+                    "newImageName": "testregistry.azurecr.io/test-image:release-1-patched-202210101206203421",
+                    "newRunImage": {
+                      "name": "mcr.microsoft.com/dotnet/aspnet:7.0.7-cbl-mariner2.0",
+                      "frameworkAndVersion": "dotnet:7.0.7",
+                      "osAndVersion": "cbl-mariner2.0"
+                    },
+                    "oldRunImage": {
+                      "name": "mcr.microsoft.com/dotnet/aspnet:7.0.5-cbl-mariner2.0",
+                      "frameworkAndVersion": "dotnet:7.0.5",
+                      "osAndVersion": "cbl-mariner2.0"
+                    },
+                    "patchType": "FrameworkSecurity"
+                  },
+                  {
+                    "targetContainerName": "test-container-2",
+                    "targetImageName": "testregistry.azurecr.io/test-image:release-2",
+                    "detectionStatus": "Succeeded",
+                    "newImageName": "testregistry.azurecr.io/test-image:release-2-patched-202210101206203421",
+                    "newRunImage": {
+                      "name": "mcr.microsoft.com/dotnet/aspnet:7.0.7-cbl-mariner2.0",
+                      "frameworkAndVersion": "dotnet:7.0.7",
+                      "osAndVersion": "cbl-mariner2.0"
+                    },
+                    "oldRunImage": {
+                      "name": "mcr.microsoft.com/dotnet/aspnet:7.0.0-cbl-mariner2.0",
+                      "frameworkAndVersion": "dotnet:7.0.0",
+                      "osAndVersion": "cbl-mariner2.0"
+                    },
+                    "patchType": "FrameworkSecurity"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/builders/testBuilder/patches/testPatch-29e7a",
+              "name": "testPatch-29e7a",
+              "type": "Microsoft.App/builders/patches",
+              "properties": {
+                "targetEnvironmentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/test-env",
+                "targetContainerAppId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/containerApps/test-app3",
+                "provisioningState": "Succeeded",
+                "patchApplyStatus": null,
+                "patchDetails": {
+                  "targetContainerName": "test-container",
+                  "targetImageName": "private-repository-k8s.k8se-system/test-image:failed-test",
+                  "detectionStatus": "RegistryLoginFailed",
+                  "newRunImage": null,
+                  "oldRunImage": null,
+                  "patchType": null
+                }
+              }
+            }
+          ],
+          "nextLink": null
+        }
+      }
+    }
+  }
+  
