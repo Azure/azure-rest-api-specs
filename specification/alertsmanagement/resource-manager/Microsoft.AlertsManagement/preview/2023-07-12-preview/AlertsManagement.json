@@ -549,6 +549,14 @@
       "required": false,
       "x-ms-parameter-location": "method"
     },
+    "smartGroupId": {
+      "description": "Smart group unique id. ",
+      "name": "smartGroupId",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
     "newState": {
       "description": "New state of the alert.",
       "name": "newState",
@@ -579,6 +587,23 @@
     "alertState": {
       "description": "Filter by state of the alert instance. Default value is to select all.",
       "name": "alertState",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "New",
+        "Acknowledged",
+        "Closed"
+      ],
+      "x-ms-enum": {
+        "name": "AlertState",
+        "modelAsString": true
+      }
+    },
+    "smartGroupState": {
+      "description": "Filter by state of the smart group. Default value is to select all.",
+      "name": "smartGroupState",
       "type": "string",
       "in": "query",
       "required": false,
@@ -717,6 +742,25 @@
       ],
       "x-ms-enum": {
         "name": "AlertsSummaryGroupByFields",
+        "modelAsString": true
+      }
+    },
+    "smartGroupsSortBy": {
+      "description": "Sort the query results by input field. Default value is sort by 'lastModifiedDateTime'.",
+      "name": "sortBy",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "alertsCount",
+        "state",
+        "severity",
+        "startDateTime",
+        "lastModifiedDateTime"
+      ],
+      "x-ms-enum": {
+        "name": "SmartGroupsSortByFields",
         "modelAsString": true
       }
     },
