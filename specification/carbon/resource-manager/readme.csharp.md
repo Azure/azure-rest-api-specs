@@ -9,6 +9,6 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 1
   namespace: Azure.ResourceManager.CarbonOptimization
-  output-folder: $(csharp-sdks-folder)/carbonoptimization/management/Azure.ResourceManager.CarbonOptimization/src/Generated
+  output-folder: $(csharp-sdks-folder)/carbonoptimization/Azure.ResourceManager.CarbonOptimization/src/Generated
   clear-output-folder: true
 ```

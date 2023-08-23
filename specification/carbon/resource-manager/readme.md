@@ -21,10 +21,10 @@ To see additional help and options, run:
 
 
 ### Basic Information
-These are the global settings for the Azure Sphere API.
+These are the global settings for the Carbon Optimization API.
 
 ``` yaml
-title: Carbon
+title: CarbonOptimizationClient
 openapi-type: arm
 openapi-subtype: rpaas
 tag: package-2023-04-01-preview

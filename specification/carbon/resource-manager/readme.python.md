@@ -8,12 +8,12 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-carbonoptimization
-no-namespace-folders: true
+namespace: azure.mgmt.carbonoptimization
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
-``` yaml $(python-mode)
+``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/~~carbonoptimization/azure-mgmt-carbonoptimization/azure/mgmt/carbon
+output-folder: $(python-sdks-folder)/carbonoptimization/azure-mgmt-carbonoptimization/azure/mgmt/carbonoptimization
 ```
