@@ -40,16 +40,16 @@ input-file:
 suppressions:
   - code: RPC-Put-V1-01
     from: Microsoft.Support/preview/2022-09-01-preview/support.json
-    reason: Rule: "The path for 'put' operation must be under a subscription and resource group." Justification: Suppressing this rule since path for support ticket resource doesn't contain resource group
+    reason: "Rule: The path for put operation must be under a subscription and resource group. Justification: Suppressing this rule since path for support ticket resource doesn't contain resource group"
   - code: RPC-Uri-V1-05
     from: Microsoft.Support/preview/2022-09-01-preview/support.json
-    reason: Rule: "The resource name parameter 'supportTicketName' should be defined with a 'pattern' restriction." Justification: We have similar implementation for previous versions, this would be a breaking change, hence suppressing it.
+    reason: "Rule: The resource name parameter supportTicketName should be defined with a pattern restriction. Justification: We have similar implementation for previous versions, this would be a breaking change, hence suppressing it"
   - code: RPC-Put-V1-11
     from: Microsoft.Support/preview/2022-09-01-preview/support.json
-    reason: Rule: "Any Put MUST contain 200 and 201 return codes." Justification: We have similar implementation for previous versions, this would be a breaking change, hence suppressing it.
+    reason: "Rule: Any Put MUST contain 200 and 201 return codes. Justification: We have similar implementation for previous versions, this would be a breaking change, hence suppressing it"
   - code: RPC-Patch-V1-03
     from: Microsoft.Support/preview/2022-09-01-preview/support.json
-    reason: Rule: "The property '{propertyName}' in the request body either not apppear in the resource model or has the wrong level." Justification: We have similar implementation for previous versions, this would be a breaking change, hence suppressing it.
+    reason: "Rule: The property {propertyName} in the request body either not apppear in the resource model or has the wrong level. Justification: We have similar implementation for previous versions, this would be a breaking change, hence suppressing it"
 
 ```
 ### Tag: package-preview-2021-06
