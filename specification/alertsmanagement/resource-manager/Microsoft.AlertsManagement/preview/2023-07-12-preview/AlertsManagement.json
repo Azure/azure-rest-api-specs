@@ -33,7 +33,7 @@
         "description": "List all operations available through Azure Alerts Management Resource Provider.",
         "parameters": [
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "produces": [
@@ -69,7 +69,7 @@
         "description": "List alerts meta data information based on value of identifier parameter.",
         "parameters": [
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/identifier"
@@ -159,7 +159,7 @@
             "$ref": "#/parameters/customTimeRange"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "produces": [
@@ -205,7 +205,7 @@
             "$ref": "#/parameters/alertId"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -241,7 +241,7 @@
             "$ref": "#/parameters/alertId"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/newState"
@@ -283,7 +283,7 @@
             "$ref": "#/parameters/alertId"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -352,7 +352,7 @@
             "$ref": "#/parameters/customTimeRange"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -375,6 +375,81 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alerts/{alertId}/enrichments": {
+      "get": {
+        "operationId": "Alerts_ListEnrichments",
+        "description": "List the enrichments of an alert. It returns a collection of one object named default.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/scope"
+          },
+          {
+            "$ref": "#/parameters/alertId"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Returns the enrichments of the specified alert.",
+            "schema": {
+              "$ref": "#/definitions/alertEnrichmentsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Resolve": {
+            "$ref": "./examples/Alerts_ListEnrichments.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alerts/{alertId}/enrichments/default": {
+      "get": {
+        "operationId": "Alerts_GetEnrichments",
+        "description": "Get the enrichments of an alert.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/scope"
+          },
+          {
+            "$ref": "#/parameters/alertId"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Returns the enrichments of the specified alert.",
+            "schema": {
+              "$ref": "#/definitions/alertEnrichmentResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Resolve": {
+            "$ref": "./examples/Alerts_GetEnrichments.json"
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -385,21 +460,7 @@
       "type": "string",
       "description": "The ID of the target subscription.",
       "minLength": 1
-    },
-    "api-version": {
-      "name": "api-version",
-      "description": "client API version",
-      "type": "string",
-      "in": "query",
-      "required": true,
-      "enum": [
-        "2023-07-12-preview"
-      ],
-      "x-ms-enum": {
-        "name": "api-version",
-        "modelAsString": true
-      }
-    },
+    },    
     "alertId": {
       "name": "alertId",
       "description": "Unique ID of an alert instance.",
@@ -1248,6 +1309,189 @@
         "displayName": {
           "type": "string",
           "description": "Monitor service display name"
+        }
+      }
+    },
+   "alertEnrichmentResponse": {
+      "description": "The alert's enrichments.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/alertEnrichmentProperties"
+        }
+      }
+    },
+    "alertEnrichmentsList": {
+      "description": "List the alert's enrichments.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List the alert's enrichments",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/alertEnrichmentResponse"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Request URL that can be used to query next page."
+        }
+      }
+    },
+    "alertEnrichmentProperties": {
+      "type": "object",
+      "description": "Properties of the alert enrichment item.",
+      "properties": {
+        "alertId": {
+          "type": "string",
+          "description": "Unique Id of the alert for which the enrichments are being retrieved.",
+          "readOnly": true
+        },
+        "enrichments": {
+          "type": "array",
+          "description": "Enrichment details",
+          "items": {
+            "$ref": "#/definitions/alertEnrichmentItem"
+          }
+        }
+      }
+    },
+    "alertEnrichmentItem": {
+      "description": "Alert enrichment item.",
+      "discriminator": "type",
+      "required": [
+        "title",
+        "description",
+        "status",
+        "type"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The enrichment title."
+        },
+        "description": {
+          "type": "string",
+          "description": "The enrichment description."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the evaluation of the enrichment.",
+          "enum": [
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "The error message. Will be present only if the status is 'Failed'."
+        },
+        "type": {
+          "type": "string",
+          "description": "The enrichment type.",
+          "enum": [
+            "PrometheusInstantQuery",
+            "PrometheusRangeQuery"
+          ],
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PrometheusEnrichmentItem": {
+      "description": "Prometheus enrichment object.",
+      "required": [
+        "linkToApi",
+        "datasources",
+        "grafanaExplorePath",
+        "query"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/alertEnrichmentItem"
+        }
+      ],
+      "properties": {
+        "linkToApi": {
+          "type": "string",
+          "description": "Link to Prometheus query API."
+        },
+        "datasources": {
+          "type": "array",
+          "description": "An array of the azure monitor workspace resource ids.",
+          "items": {
+            "type": "string",
+            "description": "The azure monitor workspace resource id."
+          },
+          "x-ms-identifiers": []
+        },
+        "grafanaExplorePath": {
+          "type": "string",
+          "description": "Partial link to the Grafana explore API."
+        },
+        "query": {
+          "type": "string",
+          "description": "The Prometheus expression query."
+        }
+      }
+    },
+    "PrometheusInstantQuery": {
+      "x-ms-discriminator-value": "PrometheusInstantQuery",
+      "type": "object",
+      "description": "Prometheus instant query enrichment object.",
+      "required": [
+        "time"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrometheusEnrichmentItem"
+        }
+      ],
+      "properties": {
+        "time": {
+          "type": "string",
+          "description": "The date and the time of the evaluation."
+        }
+      }
+    },
+    "PrometheusRangeQuery": {
+      "x-ms-discriminator-value": "PrometheusRangeQuery",
+      "description": "Prometheus instant query enrichment object.",
+      "required": [
+        "start",
+        "end",
+        "step"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrometheusEnrichmentItem"
+        }
+      ],
+      "properties": {
+        "start": {
+          "type": "string",
+          "description": "The start evaluation date and time in ISO8601 format.",
+          "format": "date-time"
+        },
+        "end": {
+          "type": "string",
+          "description": "The end evaluation date and time in ISO8601 format.",
+          "format": "date-time"
+        },
+        "step": {
+          "type": "string",
+          "description": "Query resolution step width in ISO8601 format."
         }
       }
     }
