@@ -99,13 +99,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alerts": {
+    "/{scope}/providers/Microsoft.AlertsManagement/alerts": {
       "get": {
         "operationId": "Alerts_GetAll",
         "description": "List all existing alerts, where the results can be filtered on the basis of multiple parameters (e.g. time range). The results can then be sorted on the basis specific fields, with the default being lastModifiedDateTime. ",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "#/parameters/scope"
           },
           {
             "$ref": "#/parameters/targetResource"
@@ -189,7 +189,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alerts/{alertId}": {
+    "/{scope}/providers/Microsoft.AlertsManagement/alerts/{alertId}": {
       "get": {
         "operationId": "Alerts_GetById",
         "summary": "Get a specific alert.",
@@ -199,7 +199,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "#/parameters/scope"
           },
           {
             "$ref": "#/parameters/alertId"
@@ -229,13 +229,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alerts/{alertId}/changestate": {
+    "/{scope}/providers/Microsoft.AlertsManagement/alerts/{alertId}/changestate": {
       "post": {
         "operationId": "Alerts_ChangeState",
         "description": "Change the state of an alert.",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "#/parameters/scope"
           },
           {
             "$ref": "#/parameters/alertId"
@@ -271,13 +271,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alerts/{alertId}/history": {
+    "/{scope}/providers/Microsoft.AlertsManagement/alerts/{alertId}/history": {
       "get": {
         "operationId": "Alerts_GetHistory",
         "description": "Get the history of an alert, which captures any monitor condition changes (Fired/Resolved) and alert state changes (New/Acknowledged/Closed).",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "#/parameters/scope"
           },
           {
             "$ref": "#/parameters/alertId"
@@ -307,13 +307,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alertsSummary": {
+    "/{scope}/providers/Microsoft.AlertsManagement/alertsSummary": {
       "get": {
         "operationId": "Alerts_GetSummary",
         "description": "Get a summarized count of your alerts grouped by various parameters (e.g. grouping by 'Severity' returns the count of alerts for each severity).",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "#/parameters/scope"
           },
           {
             "$ref": "#/parameters/alertsSummaryGroupBy"
@@ -376,13 +376,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alerts/{alertId}/enrichments": {
+    "/{scope}/providers/Microsoft.AlertsManagement/alerts/{alertId}/enrichments": {
       "get": {
         "operationId": "Alerts_ListEnrichments",
         "description": "List the enrichments of an alert. It returns a collection of one object named default.",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "#/parameters/scope"
           },
           {
             "$ref": "#/parameters/alertId"
@@ -415,13 +415,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alerts/{alertId}/enrichments/default": {
+    "/{scope}/providers/Microsoft.AlertsManagement/alerts/{alertId}/enrichments/default": {
       "get": {
         "operationId": "Alerts_GetEnrichments",
         "description": "Get the enrichments of an alert.",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "#/parameters/scope"
           },
           {
             "$ref": "#/parameters/alertId"
@@ -453,6 +453,15 @@
     }
   },
   "parameters": {
+    "scope": {
+      "name": "scope",
+      "description": "scope here is resourceId for which alert is created.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
     "subscriptionId": {
       "name": "subscriptionId",
       "in": "path",
