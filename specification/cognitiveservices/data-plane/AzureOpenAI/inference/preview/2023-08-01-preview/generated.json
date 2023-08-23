@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure OpenAI API",
-    "version": "2023-07-01-preview",
+    "version": "2023-08-01-preview",
     "description": "Azure OpenAI APIs for completions and search",
     "x-typespec-generated": [
       {
@@ -212,6 +212,57 @@
         }
       }
     },
+    "/deployments/{deploymentId}/extensions/chat/completions": {
+      "post": {
+        "operationId": "GetChatCompletionsWithAzureExtensions",
+        "description": "Gets chat completions for the provided chat messages.\nThis is an Azure-specific version of chat completions that supports integration with configured data sources and\nother augmentations to the base chat completions capabilities.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "description": "Specifies either the model deployment name (when using Azure OpenAI) or model name (when using non-Azure OpenAI) to use for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChatCompletionsOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ChatCompletions"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates a completion for the provided prompt, parameters and chosen model. Uses Azure OpenAI chat extensions.": {
+            "$ref": "./examples/extensions_chat_completions.json"
+          }
+        }
+      }
+    },
     "/images/generations:submit": {
       "post": {
         "operationId": "BeginAzureBatchImageGeneration",
@@ -367,6 +418,55 @@
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
           "description": "Inner error."
+        }
+      }
+    },
+    "AzureChatExtensionConfiguration": {
+      "type": "object",
+      "description": "  A representation of configuration data for a single Azure OpenAI chat extension. This will be used by a chat\n  completions request that should use Azure OpenAI chat extensions to augment the response behavior.\n  The use of this configuration is compatible only with Azure OpenAI.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/AzureChatExtensionType",
+          "description": "  The label for the type of an Azure chat extension. This typically corresponds to a matching Azure resource.\n  Azure chat extensions are only compatible with Azure OpenAI."
+        },
+        "parameters": {
+          "description": "  The configuration payload used for the Azure chat extension. The structure payload details are specific to the\n  extension being configured.\n  Azure chat extensions are only compatible with Azure OpenAI."
+        }
+      },
+      "required": [
+        "type",
+        "parameters"
+      ]
+    },
+    "AzureChatExtensionType": {
+      "type": "string",
+      "description": "  A representation of configuration data for a single Azure OpenAI chat extension. This will be used by a chat\n  completions request that should use Azure OpenAI chat extensions to augment the response behavior.\n  The use of this configuration is compatible only with Azure OpenAI.",
+      "enum": [
+        "AzureCognitiveSearch"
+      ],
+      "x-ms-enum": {
+        "name": "AzureChatExtensionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "azureCognitiveSearch",
+            "value": "AzureCognitiveSearch",
+            "description": "Represents the use of Azure Cognitive Search as an Azure OpenAI chat extension."
+          }
+        ]
+      }
+    },
+    "AzureChatExtensionsMessageContext": {
+      "type": "object",
+      "description": "  A representation of the additional context information available when Azure OpenAI chat extensions are involved\n  in the generation of a corresponding chat completions response. This context information is only populated when\n  using an Azure OpenAI request configured to use a matching extension.",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "description": "  The contextual message payload associated with the Azure chat extensions used for a chat completions request.\n  These messages describe the data source retrievals, plugin invocations, and other intermediate steps taken in the\n  course of generating a chat completions response that was augmented by capabilities from Azure OpenAI chat\n  extensions.",
+          "items": {
+            "$ref": "#/definitions/ChatMessage"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -610,6 +710,14 @@
         "model": {
           "type": "string",
           "description": "The model name to provide as part of this completions request.\nNot applicable to Azure OpenAI, where deployment information should be included in the Azure\nresource URI that's connected to."
+        },
+        "dataSources": {
+          "type": "array",
+          "description": "  The configuration entries for Azure OpenAI chat extensions that use them.\n  This additional specification is only compatible with Azure OpenAI.",
+          "items": {
+            "$ref": "#/definitions/AzureChatExtensionConfiguration"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -637,6 +745,10 @@
           "$ref": "#/definitions/FunctionCall",
           "description": "The name and arguments of a function that should be called, as generated by the model.",
           "x-ms-client-name": "functionCall"
+        },
+        "context": {
+          "$ref": "#/definitions/AzureChatExtensionsMessageContext",
+          "description": "  Additional context data associated with a chat message when requesting chat completions using compatible Azure\n  OpenAI chat extensions. This includes information like the intermediate data source retrievals used to service a\n  request.\n  This context information is only populated when using Azure OpenAI with chat extensions capabilities configured."
         }
       },
       "required": [
@@ -651,7 +763,8 @@
         "system",
         "assistant",
         "user",
-        "function"
+        "function",
+        "tool"
       ],
       "x-ms-enum": {
         "name": "ChatRole",
@@ -676,6 +789,11 @@
             "name": "function",
             "value": "function",
             "description": "The role that provides function results for chat completions."
+          },
+          {
+            "name": "tool",
+            "value": "tool",
+            "description": "The role that represents extension tool activity within a chat completions operation."
           }
         ]
       }

@@ -1,6 +1,7 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
+import "./azure.chat.extensions.tsp";
 import "./completions.common.tsp";
 import "./functions.tsp";
 
@@ -21,9 +22,13 @@ enum ChatRole {
   @doc("The role that provides input for chat completions.")
   user: "user",
 
-  @doc("The role that provides function results for char completions.")
+  @doc("The role that provides function results for chat completions.")
   @added(ServiceApiVersions.v2023_07_01_Preview)
   function: "function",
+
+  @doc("The role that represents extension tool activity within a chat completions operation.")
+  @added(ServiceApiVersions.v2023_08_01_Preview)
+  tool: "tool",
 }
 
 @doc("A single, role-attributed message within a chat completion interaction.")
@@ -49,6 +54,16 @@ model ChatMessage {
   @added(ServiceApiVersions.v2023_07_01_Preview)
   @projectedName("json", "function_call")
   functionCall?: FunctionCall;
+
+  @doc("""
+    Additional context data associated with a chat message when requesting chat completions using compatible Azure
+    OpenAI chat extensions. This includes information like the intermediate data source retrievals used to service a
+    request.
+    This context information is only populated when using Azure OpenAI with chat extensions capabilities configured.
+  """)
+  @added(ServiceApiVersions.v2023_08_01_Preview)
+  @projectedName("csharp", "AzureExtensionsContext")
+  context?: AzureChatExtensionsMessageContext;
 }
 
 @doc("""
@@ -174,6 +189,20 @@ model ChatCompletionsOptions {
   @projectedName("json", "model")
   @projectedName("csharp", "InternalNonAzureModelName")
   `model`?: string;
+
+  @doc("""
+    The configuration entries for Azure OpenAI chat extensions that use them.
+    This additional specification is only compatible with Azure OpenAI.
+  """)
+  // Note: client libraries should represent the `dataSources` information for Azure OpenAI chat extensions in a way
+  //        that differs from the wire format. To wit: the array should appear on a custom sub-options type (as if
+  //        the array were in an appropriate parent JSON object on the wire) and type/field names should converge on
+  //        "extensions" instead of "data sources" for representing the additional configuration information. A future
+  //        service API version will absorb these proposed changes and allow us to retire the extra complexity.
+  @added(ServiceApiVersions.v2023_08_01_Preview)
+  @projectedName("json", "dataSources")
+  @projectedName("csharp", "InternalAzureExtensionsDataSources")
+  dataSources?: AzureChatExtensionConfiguration[];
 }
 
 @doc("""
