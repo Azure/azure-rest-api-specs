@@ -41,5 +41,7 @@ export async function main() {
     }
   }
 
-  return success ? 0 : 1;
+  if (!success) {
+    process.exitCode = 1;
+  }
 }
