@@ -15,11 +15,11 @@ export class CompileRule implements Rule {
     if (await checkFileExists(path.join(folder, "main.tsp"))) {
       let [err, stdout, stderr] = await runCmd(`npx --no tsp compile . --warn-as-error`, folder);
       stdOutput += stdout;
-      errorOutput += stderr;
       if (err) {
         success = false;
         errorOutput += err.message;
       }
+      errorOutput += stderr;
     }
     if (await checkFileExists(path.join(folder, "client.tsp"))) {
       let [err, stdout, stderr] = await runCmd(
@@ -27,11 +27,11 @@ export class CompileRule implements Rule {
         folder
       );
       stdOutput += stdout;
-      errorOutput += stderr;
       if (err) {
         success = false;
         errorOutput += err.message;
       }
+      errorOutput += stderr;
     }
 
     return {
