@@ -27,7 +27,7 @@ export class CompileRule implements Rule {
         folder
       );
       stdOutput += stdout;
-      if (err || stderr) {
+      if (err ) {
         success = false;
         errorOutput += err.message;
         errorOutput += stderr;
