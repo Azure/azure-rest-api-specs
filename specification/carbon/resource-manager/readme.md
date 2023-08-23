@@ -59,7 +59,6 @@ swagger-to-sdk:
 ```
 
 ## C#
-~~~~
 See configuration in [readme.csharp.md](./readme.csharp.md)
 
 ## Go
