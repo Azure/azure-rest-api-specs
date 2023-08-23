@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-06
+tag: package-2023-08
 ```
 
 ## Suppression
@@ -124,6 +124,25 @@ suppressions:
 
 ```
 
+
+### Tag: package-2023-08
+
+These settings apply only when `--tag=package-2023-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-08'
+input-file:
+  - Microsoft.AzureStackHCI/stable/2023-08-01/arcSettings.json
+  - Microsoft.AzureStackHCI/stable/2023-08-01/clusters.json
+  - Microsoft.AzureStackHCI/stable/2023-08-01/extensions.json
+  - Microsoft.AzureStackHCI/stable/2023-08-01/offers.json
+  - Microsoft.AzureStackHCI/stable/2023-08-01/operations.json
+  - Microsoft.AzureStackHCI/stable/2023-08-01/publishers.json
+  - Microsoft.AzureStackHCI/stable/2023-08-01/skus.json
+  - Microsoft.AzureStackHCI/stable/2023-08-01/updateRuns.json
+  - Microsoft.AzureStackHCI/stable/2023-08-01/updateSummaries.json
+  - Microsoft.AzureStackHCI/stable/2023-08-01/updates.json
+```
+
 ### Tag: package-preview-2023-08-01
 
 These settings apply only when `--tag=package-preview-2023-08-01` is specified on the command line.
@@ -143,12 +162,11 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2023-08-01-preview/deploymentSettings.json
   - Microsoft.AzureStackHCI/preview/2023-08-01-preview/edgeDevices.json
 ```
-
 ### Tag: package-preview-2023-07-01
 
 These settings apply only when `--tag=package-preview-2023-07-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-07-01'
+``` yaml $(tag) == 'package-preview-2023-07-01'
 input-file:
   - Microsoft.AzureStackHCI/preview/2023-07-01-preview/galleryImages.json
   - Microsoft.AzureStackHCI/preview/2023-07-01-preview/marketplaceGalleryImages.json
@@ -163,7 +181,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-06'
+``` yaml $(tag) == 'package-2023-06'
 input-file:
   - Microsoft.AzureStackHCI/stable/2023-06-01/arcSettings.json
   - Microsoft.AzureStackHCI/stable/2023-06-01/clusters.json
