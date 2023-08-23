@@ -69,7 +69,22 @@ directive:
     from: applications.json
     reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
 ```
+``` yaml
+suppressions:
+  - code: ResourceNameRestriction
+    from: Microsoft.Security\preview\2023-08-01-preview\pricings.json
+    reason: Old versions do not have pattern as well, and if I add a pattern to this version, I get another error about breaking the last version's pattern.
+  - code: PutRequestResponseSchemeArm
+    from: Microsoft.Security\preview\2023-08-01-preview\pricings.json
+    reason: The models are the same, but one is a parameter and the other is a definition! old versions of this API have the same configrations.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: Microsoft.Security\preview\2023-08-01-preview\pricings.json
+    reason: The collections is limited to 13 items maximum. No need for paging. Also old versions did not have these fields as well.
+  - code: TopLevelResourcesListBySubscription
+    from: Microsoft.Security\preview\2023-08-01-preview\pricings.json
+    reason: It does have a LIST API, but it is wrapped with PricingList object.
 
+```
 ### Basic Information
 
 These are the global settings for the Security API.
