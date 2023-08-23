@@ -29,8 +29,8 @@ export class CompileRule implements Rule {
       stdOutput += stdout;
       if (err) {
         success = false;
-        errorOutput += err.message;
         errorOutput += stderr;
+        errorOutput += err.message;
       }
     }
 
