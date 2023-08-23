@@ -85,7 +85,7 @@ model AnalyzeConversationTask {
 @discriminator("kind")
 model AnalyzeConversationTaskResult {
   @doc("The base class of a conversation input task result.")
-  kind: AnalyzeConversationTaskResultsKind.ConversationResult;
+  kind: AnalyzeConversationTaskResultsKind;
 }
 
 @doc("The input for a custom conversation task.")
@@ -545,7 +545,7 @@ model LuisTargetIntentResult extends TargetIntentResult {
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "LuisTargetIntentResult.result should not use ': Record<unknown>'. Use ': Record<string>' instead."
   @doc("The actual response from a LUIS Generally Available application.")
-  result?: {};
+  result?: Record<unknown>;
 }
 
 @doc("It is a wrap up a Question Answering KB response.")
