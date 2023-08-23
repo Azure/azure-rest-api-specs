@@ -20,6 +20,7 @@ default-api-version: "2023-07-01"
 multiapi: true
 batch:
   - tag: package-2023-07
+  - tag: package-preview-2023-07
   - tag: package-2023-06
   - tag: package-preview-2023-06
   - tag: package-2023-05
@@ -99,6 +100,16 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2023-07' && $(python)
 namespace: azure.mgmt.containerservice.v2023_07_01
 output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2023_07_01
+```
+
+### Tag: package-preview-2023-07 and python
+
+These settings apply only when `--tag=package-preview-2023-07 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-preview-2023-07' && $(python)
+namespace: azure.mgmt.containerservice.v2023_07_02_preview
+output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2023_07_02_preview
 ```
 
 ### Tag: package-2023-06 and python
