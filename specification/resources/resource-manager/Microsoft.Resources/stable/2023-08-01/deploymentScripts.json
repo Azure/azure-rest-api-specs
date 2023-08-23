@@ -686,8 +686,16 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Resource ID of virtual network and subnet.",
-          "type": "string"
+          "description": "Resource ID of subnet.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
         },
         "name": {
           "description": "Friendly name for the subnet.",
