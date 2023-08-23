@@ -83,7 +83,6 @@ suppressions:
   - code: TopLevelResourcesListBySubscription
     from: Microsoft.Security\preview\2023-08-01-preview\pricings.json
     reason: It does have a LIST API, but it is wrapped with PricingList object.
-
 ```
 ### Basic Information
 
