@@ -94,7 +94,11 @@
                 "Available",
                 "Unavailable"
               ],
-              "type": "string"
+              "type": "string",
+              "x-ms-enum": {
+                "name": "availability",
+                "modelAsString": true
+              }
             }
           },
           "default": {
@@ -2848,7 +2852,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DirectConnection"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "useForPeeringService": {
           "description": "The flag that indicates whether or not the peering is used for peering service.",
@@ -2888,7 +2893,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExchangeConnection"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "peerAsn": {
           "$ref": "#/definitions/SubResource",
@@ -3174,7 +3180,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DiffResult"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -3217,190 +3224,6 @@
           "format": "date-time",
           "description": "Gets or sets time that state change took place",
           "type": "string"
-        },
-        "previousConnectionProvisioningState": {
-          "description": "Gets or sets from connectionProvisioningstate",
-          "enum": [
-            "None",
-            "InterconnectionPendingApproval",
-            "RocPendingApproval",
-            "AllocatePorts",
-            "CheckInterfaces",
-            "EnableInterfaces",
-            "PhysicalConnectionSetup",
-            "LightCheck",
-            "TestPing",
-            "GenerateLoa",
-            "LoaGenerated",
-            "LagSetup",
-            "AwaitLagCompletion",
-            "UpdateAddressesOnDevice",
-            "BgpSessionConfiguration",
-            "Md5AuthKeyConfiguration",
-            "FetchSessionState",
-            "RemoveNomonit",
-            "UpdateApipaPrefixInSitepro",
-            "ProvisioningCompleted",
-            "DeallocatePorts",
-            "PendingMigration",
-            "MigrationRequestPortAllocationRequested",
-            "MigrationRequestPortAllocationCompleted",
-            "MigrationConfigValidation",
-            "PendingWorkWindow",
-            "MigrationWorkWindow",
-            "PendingMigrationCompletion",
-            "MigrationCompletionRequested",
-            "DirectPeeringTypeUpdateApproved",
-            "DirectPeeringTypeUpdateRejected",
-            "DirectPeeringTypeUpdateIfDescription",
-            "DirectPeeringTypeUpdatePrefixPrecheck",
-            "DirectPeeringTypeUpdateApplyDenyAll",
-            "DirectPeeringTypeUpdateDeleteSession",
-            "DirectPeeringTypeUpdateLagAcl",
-            "DirectPeeringTypeUpdateBgpConfig",
-            "DirectPeeringTypeUpdateFetchSessionState",
-            "DirectPeeringTypeUpdateDeleteDenyAll",
-            "DirectPeeringTypeUpdatePrefixPostCheck",
-            "DecomRocPendingApproval",
-            "DecomAddDenyAll",
-            "DecomValidatePrefix",
-            "DecomValidateTraffic",
-            "DecomShutInterfaces",
-            "DecomShutdownBgp",
-            "DecomCabling",
-            "DecomRemoveBgpConfig",
-            "DecomRemoveInterfaceConfig",
-            "DecomGraphCleanup",
-            "DecomCompleted",
-            "DirectPeeringTypeUpdateMd5AuthKeyConfiguration",
-            "BfdConfiguration",
-            "DirectPeeringTypeUpdateBfdConfig",
-            "DirectPeeringTypeUpdateMd5AuthKeyRead",
-            "StaticMacConfiguration",
-            "PrefixListConfiguration",
-            "WorkWindowCompleted",
-            "DirectPeeringTypeUpdateReadMaxPrefixLimit",
-            "DirectPeeringTypeUpdateUpdatePortWithNewIP",
-            "DirectPeeringTypeUpdateConfigureLagWithNewIP",
-            "DirectPeeringTypeUpdateCleanupOldIPsfromLAG",
-            "MapsToMapsVoiceUpdateIfDescription",
-            "MapsToMapsVoicePrefixPrecheck",
-            "MapsToMapsVoiceUpdateLAGAcl",
-            "MapsToMapsVoiceConfigureBFD",
-            "MapsToMapsVoiceFetchSessionState",
-            "MapsToMapsVoicePrefixPostCheck",
-            "PingTestDone",
-            "BgpGroupChangeRocPendingApproval",
-            "BgpGroupChangeWorkWindow",
-            "IPChangeWorkWindow",
-            "PendingASNChangeApplyDenyALL",
-            "PendingASNChangeUpdateNeighborConfig",
-            "PendingASNChangeRemoveDenyALL",
-            "UpdateGraphForASNChange",
-            "UpdatePeeringForASNChange",
-            "AddDenyAllRocPendingApproval",
-            "AwaitApplyDenyAll",
-            "IPChangeValidation",
-            "IPChangeCleanup",
-            "PendingSpecialWorkItem"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "previousConnectionProvisioningState",
-            "modelAsString": true
-          }
-        },
-        "currentConnectionProvisioningState": {
-          "description": "gets or sets 'to' connectionPorvisioningState",
-          "enum": [
-            "None",
-            "InterconnectionPendingApproval",
-            "RocPendingApproval",
-            "AllocatePorts",
-            "CheckInterfaces",
-            "EnableInterfaces",
-            "PhysicalConnectionSetup",
-            "LightCheck",
-            "TestPing",
-            "GenerateLoa",
-            "LoaGenerated",
-            "LagSetup",
-            "AwaitLagCompletion",
-            "UpdateAddressesOnDevice",
-            "BgpSessionConfiguration",
-            "Md5AuthKeyConfiguration",
-            "FetchSessionState",
-            "RemoveNomonit",
-            "UpdateApipaPrefixInSitepro",
-            "ProvisioningCompleted",
-            "DeallocatePorts",
-            "PendingMigration",
-            "MigrationRequestPortAllocationRequested",
-            "MigrationRequestPortAllocationCompleted",
-            "MigrationConfigValidation",
-            "PendingWorkWindow",
-            "MigrationWorkWindow",
-            "PendingMigrationCompletion",
-            "MigrationCompletionRequested",
-            "DirectPeeringTypeUpdateApproved",
-            "DirectPeeringTypeUpdateRejected",
-            "DirectPeeringTypeUpdateIfDescription",
-            "DirectPeeringTypeUpdatePrefixPrecheck",
-            "DirectPeeringTypeUpdateApplyDenyAll",
-            "DirectPeeringTypeUpdateDeleteSession",
-            "DirectPeeringTypeUpdateLagAcl",
-            "DirectPeeringTypeUpdateBgpConfig",
-            "DirectPeeringTypeUpdateFetchSessionState",
-            "DirectPeeringTypeUpdateDeleteDenyAll",
-            "DirectPeeringTypeUpdatePrefixPostCheck",
-            "DecomRocPendingApproval",
-            "DecomAddDenyAll",
-            "DecomValidatePrefix",
-            "DecomValidateTraffic",
-            "DecomShutInterfaces",
-            "DecomShutdownBgp",
-            "DecomCabling",
-            "DecomRemoveBgpConfig",
-            "DecomRemoveInterfaceConfig",
-            "DecomGraphCleanup",
-            "DecomCompleted",
-            "DirectPeeringTypeUpdateMd5AuthKeyConfiguration",
-            "BfdConfiguration",
-            "DirectPeeringTypeUpdateBfdConfig",
-            "DirectPeeringTypeUpdateMd5AuthKeyRead",
-            "StaticMacConfiguration",
-            "PrefixListConfiguration",
-            "WorkWindowCompleted",
-            "DirectPeeringTypeUpdateReadMaxPrefixLimit",
-            "DirectPeeringTypeUpdateUpdatePortWithNewIP",
-            "DirectPeeringTypeUpdateConfigureLagWithNewIP",
-            "DirectPeeringTypeUpdateCleanupOldIPsfromLAG",
-            "MapsToMapsVoiceUpdateIfDescription",
-            "MapsToMapsVoicePrefixPrecheck",
-            "MapsToMapsVoiceUpdateLAGAcl",
-            "MapsToMapsVoiceConfigureBFD",
-            "MapsToMapsVoiceFetchSessionState",
-            "MapsToMapsVoicePrefixPostCheck",
-            "PingTestDone",
-            "BgpGroupChangeRocPendingApproval",
-            "BgpGroupChangeWorkWindow",
-            "IPChangeWorkWindow",
-            "PendingASNChangeApplyDenyALL",
-            "PendingASNChangeUpdateNeighborConfig",
-            "PendingASNChangeRemoveDenyALL",
-            "UpdateGraphForASNChange",
-            "UpdatePeeringForASNChange",
-            "AddDenyAllRocPendingApproval",
-            "AwaitApplyDenyAll",
-            "IPChangeValidation",
-            "IPChangeCleanup",
-            "PendingSpecialWorkItem"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "currentConnectionProvisioningState",
-            "modelAsString": true
-          }
         },
         "operationState": {
           "description": "Gets or sets the operation state",
@@ -3608,7 +3431,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DiffPiece"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "hasDifferences": {
           "type": "boolean"
@@ -3625,7 +3449,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ErrorReason"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -3641,6 +3466,7 @@
             "Modified"
           ],
           "type": "string",
+          "x-ms-client-name": "operationType",
           "x-ms-enum": {
             "name": "type",
             "modelAsString": true
@@ -3657,7 +3483,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DiffPiece"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -3704,7 +3531,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": []          
         },
         "nextLink": {
           "description": "The link to fetch the next page of peering API operations.",
@@ -3786,6 +3614,7 @@
           "items": {
             "$ref": "#/definitions/MetricSpecification"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         }
       }
@@ -3833,6 +3662,7 @@
           "items": {
             "$ref": "#/definitions/MetricDimension"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         }
       }
@@ -3883,7 +3713,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ContactDetail"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "peerName": {
           "description": "The name of the peer.",
@@ -3950,7 +3781,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeerAsn"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of peer ASNs.",
@@ -3967,7 +3799,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeeringLocation"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of peering locations.",
@@ -4038,14 +3871,16 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DirectPeeringFacility"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "bandwidthOffers": {
           "description": "The list of bandwidth offers available at the peering location.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeeringBandwidthOffer"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -4058,7 +3893,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExchangePeeringFacility"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -4210,7 +4046,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeeringRegisteredAsn"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of peering registered ASNs.",
@@ -4296,7 +4133,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeeringRegisteredPrefix"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of peering registered prefixes.",
@@ -4326,7 +4164,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeeringReceivedRoute"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of received routes for the peering.",
@@ -4452,7 +4291,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConnectionMonitorTest"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of Connection Monitor Tests.",
@@ -4469,7 +4309,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeeringServiceCountry"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of peering service countries.",
@@ -4496,7 +4337,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeeringServiceLocation"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of peering service locations.",
@@ -4605,15 +4447,12 @@
           "items": {
             "$ref": "#/definitions/PeeringServicePrefixEvent"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         },
         "peeringServicePrefixKey": {
           "description": "The peering service prefix key",
           "type": "string"
-        },
-        "primaryLocationDecom": {
-          "description": "whether a peeringservice's primary peering location has been decommed",
-          "type": "boolean"
         },
         "provisioningState": {
           "description": "The provisioning state of the resource.",
@@ -4673,7 +4512,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeeringServicePrefix"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of peering service prefixes.",
@@ -4690,7 +4530,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeeringServiceProvider"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of peering service providers.",
@@ -4853,7 +4694,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeeringService"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of peering services.",
@@ -4874,7 +4716,7 @@
           "type": "string"
         },
         "resources": {
-          "description": "Resources",
+          "description": "Resources to be moved",
           "type": "array",
           "items": {
             "type": "string"
@@ -4891,7 +4733,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RpUnbilledPrefix"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of RP unbilled prefixes.",
