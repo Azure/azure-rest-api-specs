@@ -168,11 +168,12 @@ SECRET_VALUE.
   @visibility("read")
   inputArtifacts?: TestInputArtifacts;
 
+  @key
   @doc("Unique test name as identifier.")
   @maxLength(50)
   @minLength(2)
   @visibility("read")
-  testId?: string;
+  testId: string;
 
   @maxLength(100)
   @doc("The test description.")
@@ -548,11 +549,12 @@ model ResourceMetric {
 
 @doc("Load test run model")
 model TestRun {
+  @key
   @doc("Unique test run name as identifier")
   @visibility("read")
   @maxLength(50)
   @minLength(2)
-  testRunId?: string;
+  testRunId: string;
 
   @doc("Pass fail criteria for a test.")
   passFailCriteria?: PassFailCriteria;
@@ -858,17 +860,6 @@ model DimensionFilter {
 @friendlyName("Metrics")
 model Metrics is Azure.Core.Page<TimeSeriesElement>;
 
-// @pagedResult
-// model Metrics {
-//   @doc("The {name} items on this page", TimeSeriesElement)
-//   @items
-//   value: TimeSeriesElement[];
-
-//   @doc("The link to the next page of items")
-//   @nextLink
-//   nextLink?: ResourceLocation<TimeSeriesElement>;
-// }
-
 @doc("The time series returned when a data query is performed.")
 model TimeSeriesElement {
   @doc("An array of data points representing the metric values.")
@@ -896,22 +887,19 @@ model DimensionValue {
   value?: string;
 }
 
-@resource("values")
-//@parentResource(Dimension)
 model DimensionValueList {
   @key
   value: string[];
 }
 
-// @resource("metric-dimensions")
-// @parentResource(TestRuns)
-// model Dimension {
-//   @key
-//   @doc("Dimension name")
-//   @path("name")
-//   @visibility("query")
-//   name: string;
-// }
+@resource("metric-dimensions")
+model Dimension {
+  @key
+  @doc("Dimension name")
+  @path("name")
+  @visibility("query")
+  name: string;
+}
 
 model MetricDimensions {
   @doc("The interval (i.e. timegrain) of the query.")

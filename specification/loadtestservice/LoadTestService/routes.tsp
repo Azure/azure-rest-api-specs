@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@typespec/http";
 import "./models.tsp";
 
 using Azure.Core;
@@ -507,11 +508,63 @@ The timespan of the query. It is a string with the following format
     Metrics, {}, ErrorResponseBody
   >;
 
+  // @summary("List the dimension values for the given metric dimension name.")
+  // @doc("List the dimension values for the given metric dimension name.")
+  // //@route("/test-runs/{testRunId}/metrics/dimensions/{metricDimensionName}/values")
+  // listMetricDimensionValues is Azure.Core.ResourceList<
+  //   DimensionValueList, QueryParametersTrait<MetricDimensions>
+  // >;
+
+  // ResourceOperations
+  // @summary("List the dimension values for the given metric dimension name.")
+  // @doc("List the dimension values for the given metric dimension name.")
+  // //@route("/test-runs/{testRunId}/metrics/dimensions/{metricDimensionName}/values")
+  // listMetricDimensionValue is ResourceOperations.ResourceList<
+  //   DimensionValueList, QueryParametersTrait<MetricDimensions>
+
+//   @summary("List the dimension values for the given metric dimension name.")
+//   @doc("List the dimension values for the given metric dimension name.")
+//   @route("/test-runs/{testRunId}/metrics/dimensions/{name}/values")
+//   listMetricDimensionValues is Azure.Core.Foundations.Operation<
+//   {
+//     @doc("""
+// Unique name for the load test run, must contain only lower-case alphabetic,
+// numeric, underscore or hyphen characters.
+// """)
+//     @path
+//     testRunId: string;
+
+//     @doc("Dimension name")
+//     @path
+//     name: string;
+//   },
+//   DimensionValueList, QueryParametersTrait<MetricDimensions>, ErrorResponseBody
+// >;
+
   @summary("List the dimension values for the given metric dimension name.")
   @doc("List the dimension values for the given metric dimension name.")
-  listMetricDimensionValues is Azure.Core.ResourceList<
-    DimensionValueList, QueryParametersTrait<MetricDimensions>
-  >;
+  @route("/test-runs/{testRunId}/metrics/dimensions/{name}/values")
+  @get
+  listMetricDimensionValues(
+    @query apiVersion: string,
+
+    @doc("""
+    Unique name for the load test run, must contain only lower-case alphabetic,
+    numeric, underscore or hyphen characters.
+    """)
+    @path
+    testRunId: string;
+
+    @doc("Dimension name")
+    @path
+    name: string;
+
+    ...MetricDimensions;
+
+  ): DimensionValueList | ErrorResponseBody;
+  
+  // listMetricDimensionValue is ResourceOperations.ResourceList<
+  //   DimensionValueList, QueryParametersTrait<MetricDimensions>>;
 
   @summary("Associate an app component (collection of azure resources) to a test run")
   @doc("Associate an app component (collection of azure resources) to a test run")
