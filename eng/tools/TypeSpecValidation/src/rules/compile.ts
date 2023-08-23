@@ -10,7 +10,7 @@ export class CompileRule implements Rule {
   async execute(folder: string): Promise<RuleResult> {
     let success = true;
     let stdOutput = "";
-    let errorOutput: string | undefined;
+    let errorOutput = "";
 
     if (await checkFileExists(path.join(folder, "main.tsp"))) {
       let [err, stdout, stderr] = await runCmd(`npx --no tsp compile . --warn-as-error`, folder);
