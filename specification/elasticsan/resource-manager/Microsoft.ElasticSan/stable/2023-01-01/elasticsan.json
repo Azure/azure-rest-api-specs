@@ -901,6 +901,20 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "x-ms-delete-snapshots",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "Optional, used to delete snapshots under volume."
+          },
+          {
+            "name": "x-ms-force-delete",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "Optional, used to delete volume if active sessions present."
           }
         ],
         "responses": {
@@ -1430,64 +1444,6 @@
           }
         }
       },
-      "patch": {
-        "tags": [
-          "Snapshots"
-        ],
-        "description": "Update a Volume Snapshot.",
-        "operationId": "Snapshots_Update",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ElasticSanNameParameter"
-          },
-          {
-            "$ref": "#/parameters/VolumeGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SnapshotNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SnapshotUpdate"
-            },
-            "description": "Snapshot object."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK -- Returned when the update operation is successfully completed.",
-            "schema": {
-              "$ref": "#/definitions/Snapshot"
-            }
-          },
-          "default": {
-            "description": "Error from the ElasticSan Resource Provider.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Snapshots_Update_MaximumSet_Gen": {
-            "$ref": "./examples/Snapshots_Update_MaximumSet_Gen.json"
-          },
-          "Snapshots_Update_MinimumSet_Gen": {
-            "$ref": "./examples/Snapshots_Update_MinimumSet_Gen.json"
-          }
-        }
-      },
       "delete": {
         "tags": [
           "Snapshots"
@@ -1774,6 +1730,18 @@
             "$ref": "#/definitions/PrivateEndpointConnection"
           },
           "description": "The list of Private Endpoint Connections."
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          },
+          "description": "Allow or disallow public network access to Storage Account. Value is optional but if passed in, must be 'Enabled' or 'Disabled'."
         }
       }
     },
@@ -1816,6 +1784,18 @@
             "read",
             "create"
           ]
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          },
+          "description": "Allow or disallow public network access to Storage Account. Value is optional but if passed in, must be 'Enabled' or 'Disabled'."
         }
       }
     },
@@ -2097,7 +2077,8 @@
       "properties": {
         "provisioningState": {
           "description": "State of the operation on the resource.",
-          "$ref": "#/definitions/ProvisioningState"
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
         },
         "protocolType": {
           "description": "Type of storage target",
@@ -2321,10 +2302,15 @@
         "managedBy": {
           "description": "Parent resource information.",
           "$ref": "#/definitions/ManagedByInfo"
+        },
+        "provisioningState": {
+          "description": "State of the operation on the resource.",
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
         }
       }
     },
-    "ManagedByInfo":{
+    "ManagedByInfo": {
       "type": "object",
       "description": "Parent resource information.",
       "properties": {
@@ -2334,7 +2320,6 @@
           "description": "Resource ID of the resource managing the volume."
         }
       }
-
     },
     "VolumeUpdate": {
       "type": "object",
@@ -2714,7 +2699,8 @@
         },
         "provisioningState": {
           "description": "State of the operation on the resource.",
-          "$ref": "#/definitions/ProvisioningState"
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
         },
         "sourceVolumeSizeGiB": {
           "description": "Size of Source Volume",
@@ -2739,19 +2725,6 @@
         "sourceId": {
           "type": "string",
           "description": "If createOption is Copy, this is the ARM id of the source snapshot or disk. If createOption is Restore, this is the ARM-like id of the source disk restore point."
-        }
-      }
-    },
-    "SnapshotUpdate": {
-      "type": "object",
-      "description": "Snapshot request.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
         }
       }
     }
