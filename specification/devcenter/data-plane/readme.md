@@ -105,14 +105,3 @@ directive:
   - suppress: HostParametersValidation
     reason: Requires URL format for endpoint params, which violates R2003 and causes problems with codegen
 ```
-
-### Tag: package-2022-03-01-preview
-
-These settings apply only when `--tag=package-2022-03-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2022-03-01-preview'
-input-file:
-  - Microsoft.DevCenter/preview/2022-03-01-preview/devcenter.json
-  - Microsoft.DevCenter/preview/2022-03-01-preview/devbox.json
-  - Microsoft.DevCenter/preview/2022-03-01-preview/environments.json
-```
