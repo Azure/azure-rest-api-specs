@@ -1,0 +1,111 @@
+{
+  "parameters": {
+    "resourceGroupName": "rg1",
+    "serviceManagementContainerName": "testServiceManagementContainer",
+    "updateSpecificationName": "testUpdateSpecification",
+    "rolloutName": "testRollout",
+    "api-version": "2023-04-01-preview",
+    "subscriptionId": "b7173c9f-853f-45b5-8b75-3fb7d1e78388"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "user1",
+        "id": "/subscriptions/b7173c9f-853f-45b5-8b75-3fb7d1e78388/resourceGroups/rg1/providers/Microsoft.HybridNetwork/serviceManagementContainer/testServiceManagementContainer/updateSpecification/testUpdateSpecification/rollout/testRollout/statuses/default ",
+        "type": "Microsoft.HybridNetwork/GCA/rollout",
+        "properties": {
+          "rolloutInfo": {
+            "status": "Completed",
+            "startTime": "2023-06-07T18:01:41.334+00:00",
+            "endTime": "2023-06-07T18:01:43.334+00:00",
+            "lastUpdatedTime": "2023-06-07T18:01:43.334+00:00",
+            "errorInfo": ""
+          },
+          "configurationGroupValueChanges": {
+            "CGV1": {
+              "existingConfigurationGroupValueReference": {
+                "id": "/subscriptions/b7173c9f-853f-45b5-8b75-3fb7d1e78388/providers/Microsoft.HybridNetwork/configurationGroupValues/testExistingConfigurationGroupValue"
+              },
+              "newConfigurationGroupValueReference": {
+                "id": "/subscriptions/b7173c9f-853f-45b5-8b75-3fb7d1e78388/providers/Microsoft.HybridNetwork/configurationGroupValues/testNewConfigurationGroupValue"
+              }
+            },
+            "CGV2": {
+              "newConfigurationGroupValueReference": {
+                "id": "/subscriptions/b7173c9f-853f-45b5-8b75-3fb7d1e78388/providers/Microsoft.HybridNetwork/configurationGroupValues/test2ConfigurationGroupValue"
+              }
+            },
+            "CGV3": {
+              "newConfigurationGroupValueReference": {
+                "id": "/subscriptions/b7173c9f-853f-45b5-8b75-3fb7d1e78388/providers/Microsoft.HybridNetwork/configurationGroupValues/test3ConfigurationGroupValue"
+              }
+            }
+          },
+          "networkServiceDesignVersionChange": {
+            "publisherName": "TestPublisher",
+            "publisherScope": "Public",
+            "existingNetworkServiceDesignGroupName": "TestNetworkServiceDesignGroupName",
+            "newNetworkServiceDesignGroupName": "TestNetworkServiceDesignGroupName",
+            "existingNetworkServiceDesignVersionName": "1.0.0",
+            "newNetworkServiceDesignVersionName": "1.0.1",
+            "networkServiceDesignVersionOfferingLocation": "eastus"
+          },
+          "rolloutTiers": [
+            {
+              "rolloutInfo": {
+                "status": "Completed",
+                "startTime": "2023-06-07T18:01:41.334+00:00",
+                "endTime": "2023-06-07T18:01:43.334+00:00",
+                "lastUpdatedTime": "2023-06-07T18:01:43.334+00:00",
+                "errorInfo": ""
+              },
+              "excludedSiteNetworkServices": [
+                {
+                  "id": "/subscriptions/b7173c9f-853f-45b5-8b75-3fb7d1e78388/resourceGroups/rg1/providers/Microsoft.HybridNetwork/siteNetworkServices/testExcludedSiteNetworkService1"
+                }
+              ],
+              "siteNetworkServices": [
+                {
+                  "siteNetworkServiceReference": {
+                    "id": "/subscriptions/b7173c9f-853f-45b5-8b75-3fb7d1e78388/resourceGroups/rg1/providers/Microsoft.HybridNetwork/siteNetworkServices/testSiteNetworkService1"
+                  },
+                  "rolloutInfo": {
+                    "status": "Completed",
+                    "startTime": "2023-06-07T18:01:41.334+00:00",
+                    "endTime": "2023-06-07T18:01:43.334+00:00",
+                    "lastUpdatedTime": "2023-06-07T18:01:43.334+00:00",
+                    "errorInfo": ""
+                  },
+                  "preCheck": {
+                    "action": "ProceedOnUnexpected",
+                    "rolloutInfo": {
+                      "status": "Completed",
+                      "startTime": "2023-06-07T18:01:44.334+00:00",
+                      "endTime": "2023-06-07T18:01:49.334+00:00",
+                      "lastUpdatedTime": "2023-06-07T18:01:49.334+00:00",
+                      "errorInfo": ""
+                    }
+                  },
+                  "gates": [
+                    {
+                      "action": {
+                        "actionType": "ManualGate"
+                      },
+                      "rolloutInfo": {
+                        "status": "Completed",
+                        "startTime": "2023-06-07T18:01:44.334+00:00",
+                        "endTime": "2023-06-07T18:01:49.334+00:00",
+                        "lastUpdatedTime": "2023-06-07T18:01:49.334+00:00",
+                        "errorInfo": ""
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

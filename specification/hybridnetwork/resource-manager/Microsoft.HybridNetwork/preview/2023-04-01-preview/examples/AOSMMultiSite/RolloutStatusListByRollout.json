@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "resourceGroupName": "rg1",
+    "serviceManagementContainerName": "testServiceManagementContainer",
+    "updateSpecificationName": "testUpdateSpecification",
+    "rolloutName": "testRollout",
+    "api-version": "2023-04-01-preview",
+    "subscriptionId": "b7173c9f-853f-45b5-8b75-3fb7d1e78388"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "user1",
+            "id": "/subscriptions/b7173c9f-853f-45b5-8b75-3fb7d1e78388/resourceGroups/rg1/providers/Microsoft.HybridNetwork/serviceManagementContainer/testServiceManagementContainer/updateSpecification/testUpdateSpecification/rollout/testRollout/statuses/default",
+            "type": "Microsoft.HybridNetwork/GCA/rollout",
+            "properties": {
+              "rolloutInfo": {
+                "status": "Completed",
+                "startTime": "2023-06-07T18:01:41.334+00:00",
+                "endTime": "2023-06-07T18:01:43.334+00:00",
+                "lastUpdatedTime": "2023-06-07T18:01:43.334+00:00",
+                "errorInfo": ""
+              },
+              "rolloutTiers": [
+                {
+                  "rolloutInfo": {
+                    "status": "Completed",
+                    "startTime": "2023-06-07T18:01:41.334+00:00",
+                    "endTime": "2023-06-07T18:01:43.334+00:00",
+                    "lastUpdatedTime": "2023-06-07T18:01:43.334+00:00",
+                    "errorInfo": ""
+                  },
+                  "excludedSiteNetworkServices": [
+                    {
+                      "id": "/subscriptions/b7173c9f-853f-45b5-8b75-3fb7d1e78388/resourceGroups/rg1/providers/Microsoft.HybridNetwork/siteNetworkServices/testExcludedSiteNetworkService1"
+                    }
+                  ],
+                  "siteNetworkServices": [
+                    {
+                      "rolloutInfo": {
+                        "status": "Completed",
+                        "startTime": "2023-06-07T18:01:41.334+00:00",
+                        "endTime": "2023-06-07T18:01:43.334+00:00",
+                        "lastUpdatedTime": "2023-06-07T18:01:43.334+00:00",
+                        "errorInfo": ""
+                      },
+                      "siteNetworkServiceReference": {
+                        "id": "/subscriptions/b7173c9f-853f-45b5-8b75-3fb7d1e78388/resourceGroups/rg1/providers/Microsoft.HybridNetwork/siteNetworkServices/testSiteNetworkService1"
+                      },
+                      "preCheck": {
+                        "action": "ProceedOnUnexpected"
+                      },
+                      "gates": [
+                        {
+                          "action": {
+                            "actionType": "ManualGate"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "nextLink": "nextLink"
+      }
+    }
+  }
+}
