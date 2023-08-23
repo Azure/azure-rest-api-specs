@@ -45,6 +45,7 @@
             "x-ms-error-response": true
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Send a notification message": {
             "$ref": "./examples/SendMessage.json"
@@ -563,7 +564,8 @@
       "name": "api-version",
       "description": "Version of API to invoke.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {
