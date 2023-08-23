@@ -1,4 +1,3 @@
-import debug from "debug";
 import { simpleGit } from "simple-git";
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
