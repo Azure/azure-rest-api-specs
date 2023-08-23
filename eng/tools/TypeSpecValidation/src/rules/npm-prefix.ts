@@ -9,7 +9,16 @@ export class NpmPrefixRule implements Rule {
 
   async execute(folder: string): Promise<RuleResult> {
     const git = simpleGit();
-    let expected_npm_prefix = await git.revparse("--show-toplevel");
+
+    let expected_npm_prefix: string | undefined;
+    try {
+      expected_npm_prefix = await git.revparse("--show-toplevel");
+    } catch (err) {
+      return {
+        success: false,
+        errorOutput: err instanceof Error ? err.message : undefined,
+      };
+    }
 
     const actual_npm_prefix = (await runCmd(`npm prefix`, folder))[1].trim();
 
