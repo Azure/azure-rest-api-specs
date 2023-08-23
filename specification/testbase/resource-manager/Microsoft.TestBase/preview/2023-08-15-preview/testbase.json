@@ -4594,6 +4594,10 @@
           },
           "x-ms-identifiers": [],
           "description": "The detailed test information."
+        },
+        "intuneEnrollmentMetadata": {
+          "description": "The metadata of Intune enrollment.",
+          "$ref": "#/definitions/IntuneEnrollmentMetadata"
         }
       },
       "required": [
@@ -4818,6 +4822,10 @@
         "postUpgrade": {
           "type": "boolean",
           "description": "Specifies whether the command is assigned to be executed after in-place upgrade."
+        },
+        "enrollIntuneBefore": {
+          "type": "boolean",
+          "description": "Specifies whether to enroll Intune before the command."
         }
       },
       "required": [
@@ -4896,6 +4904,10 @@
           },
           "x-ms-identifiers": [],
           "description": "The detailed test information."
+        },
+        "intuneEnrollmentMetadata": {
+          "description": "The metadata of Intune enrollment.",
+          "$ref": "#/definitions/IntuneEnrollmentMetadata"
         }
       }
     },
@@ -6987,6 +6999,50 @@
           "description": "The version of the Windows OS."
         }
       }
+    },
+    "IntuneEnrollmentMetadata": {
+      "description": "The metadata of Intune enrollment.",
+      "type": "object",
+      "properties": {
+        "appList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnrolledIntuneApp"
+          },
+          "x-ms-identifiers": [],
+          "description": "The enrolled Intune apps."
+        },
+        "credentialId": {
+          "description": "The id of the Intune enrollment credential.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "credentialId"
+      ]
+    },
+    "EnrolledIntuneApp": {
+      "description": "Metadata of the enrolled Intune app.",
+      "type": "object",
+      "properties": {
+        "appName": {
+          "type": "string",
+          "description": "Intune app name."
+        },
+        "appId": {
+          "type": "string",
+          "description": "Intune app id."
+        },
+        "expectedInstallationPath": {
+          "type": "string",
+          "description": "Intune app expected installation path."
+        }
+      },
+      "required": [
+        "appName",
+        "appId",
+        "expectedInstallationPath"
+      ]
     }
   },
   "parameters": {
