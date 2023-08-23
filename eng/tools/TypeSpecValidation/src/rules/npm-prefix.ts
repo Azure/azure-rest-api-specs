@@ -8,7 +8,7 @@ export class NpmPrefixRule implements Rule {
   readonly description = "Verify spec is using root level package.json";
 
   async execute(folder: string): Promise<RuleResult> {
-    const git = simpleGit();
+    const git = simpleGit(folder);
 
     let expected_npm_prefix: string | undefined;
     try {

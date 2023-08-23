@@ -8,8 +8,8 @@ export class GitDiffRule implements Rule {
   readonly name = "GitDiff";
   readonly description = "Checks if previous rules resulted in a git diff";
 
-  async execute(): Promise<RuleResult> {
-    const git = simpleGit();
+  async execute(folder: string): Promise<RuleResult> {
+    const git = simpleGit(folder);
     let gitStatusIsClean = await (await git.status(["--porcelain"])).isClean();
 
     let success = true;
