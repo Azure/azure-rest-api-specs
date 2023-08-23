@@ -10,7 +10,7 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.hdinsightcontainers
 package-name: azure-mgmt-hdinsightcontainers
-package-version: 1.0.0.dev.1
+package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
