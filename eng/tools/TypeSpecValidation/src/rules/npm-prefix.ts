@@ -12,11 +12,10 @@ export class NpmPrefixRule implements Rule {
 
     let expected_npm_prefix: string | undefined;
     try {
+      // If spec folder is inside a git repo, returns repo root
       expected_npm_prefix = await git.revparse("--show-toplevel");
     } catch (err) {
-      // Should only fail in rare cases:
-      // - Target folder is not in a git repo
-      // - Error running git tool
+      // If spec folder is outside git repo, or if problem running git, throws error
       return {
         success: false,
         errorOutput: err instanceof Error ? err.message : undefined,
