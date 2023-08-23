@@ -9391,6 +9391,9 @@
       "type": "object",
       "allOf": [
         {
+          "$ref": "#/definitions/AzureDatastore"
+        },
+        {
           "$ref": "#/definitions/Datastore"
         }
       ],
@@ -9454,6 +9457,9 @@
       "type": "object",
       "allOf": [
         {
+          "$ref": "#/definitions/AzureDatastore"
+        },
+        {
           "$ref": "#/definitions/Datastore"
         }
       ],
@@ -9489,6 +9495,9 @@
       ],
       "type": "object",
       "allOf": [
+        {
+          "$ref": "#/definitions/AzureDatastore"
+        },
         {
           "$ref": "#/definitions/Datastore"
         }
@@ -9547,6 +9556,23 @@
       "x-ms-discriminator-value": "AzureDataLakeGen2",
       "additionalProperties": false
     },
+    "AzureDatastore": {
+      "description": "Base definition for Azure datastore contents configuration.",
+      "type": "object",
+      "properties": {
+        "resourceGroup": {
+          "description": "Azure Resource Group name",
+          "type": "string",
+          "x-nullable": true
+        },
+        "subscriptionId": {
+          "description": "Azure Subscription Id",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
     "AzureFileDatastore": {
       "description": "Azure File datastore configuration.",
       "required": [
@@ -9555,6 +9581,9 @@
       ],
       "type": "object",
       "allOf": [
+        {
+          "$ref": "#/definitions/AzureDatastore"
+        },
         {
           "$ref": "#/definitions/Datastore"
         }
