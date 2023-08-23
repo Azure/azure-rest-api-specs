@@ -761,6 +761,7 @@
   },
   "definitions": {
     "operation": {
+      "type": "object",
       "description": "Operation provided by provider",
       "properties": {
         "name": {
@@ -796,6 +797,7 @@
       }
     },
     "operationsList": {
+      "type": "object",
       "description": "Lists the operations available in the AlertsManagement RP.",
       "properties": {
         "nextLink": {
@@ -807,7 +809,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/operation"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -815,6 +818,7 @@
       ]
     },
     "errorResponse": {
+      "type": "object",
       "description": "An error response from the service.",
       "properties": {
         "error": {
@@ -823,6 +827,7 @@
       }
     },
     "errorResponseBody": {
+      "type": "object",
       "description": "Details of error response.",
       "properties": {
         "code": {
@@ -847,6 +852,7 @@
       }
     },
     "Resource": {
+      "type": "object",
       "x-ms-azure-resource": true,
       "description": "An azure resource object",
       "properties": {
@@ -1124,7 +1130,8 @@
           "description": "Modification details",
           "items": {
             "$ref": "#/definitions/alertModificationItem"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1213,7 +1220,8 @@
           "description": "List of the items",
           "items": {
             "$ref": "#/definitions/alertsSummaryGroupItem"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1239,7 +1247,8 @@
           "description": "List of the items",
           "items": {
             "$ref": "#/definitions/alertsSummaryGroupItem"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1294,7 +1303,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MonitorServiceDetails"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1357,11 +1367,13 @@
           "description": "Enrichment details",
           "items": {
             "$ref": "#/definitions/alertEnrichmentItem"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
     "alertEnrichmentItem": {
+      "type": "object",
       "description": "Alert enrichment item.",
       "discriminator": "type",
       "required": [
@@ -1410,6 +1422,7 @@
       }
     },
     "PrometheusEnrichmentItem": {
+      "type": "object",
       "description": "Prometheus enrichment object.",
       "required": [
         "linkToApi",
@@ -1466,6 +1479,7 @@
       }
     },
     "PrometheusRangeQuery": {
+      "type": "object",
       "x-ms-discriminator-value": "PrometheusRangeQuery",
       "description": "Prometheus instant query enrichment object.",
       "required": [
