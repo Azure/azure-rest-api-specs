@@ -10,7 +10,7 @@ export class GitDiffRule implements Rule {
 
   async execute(): Promise<RuleResult> {
     const git = simpleGit();
-    let gitStatusIsClean = await (await git.status(["--porcelain"])).isClean();
+    let gitStatusIsClean = (await git.status(["--porcelain"])).isClean();
 
     let success = true;
     let errorOutput: string | undefined;
