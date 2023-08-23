@@ -671,6 +671,7 @@
       "description": "Determines number of alerts returned per page in response. Permissible value is between 1 to 250. When the \"includeContent\"  filter is selected, maximum value allowed is 25. Default value is 25.",
       "name": "pageCount",
       "type": "integer",
+      "format": "int64",
       "in": "query",
       "required": false,
       "x-ms-parameter-location": "method"
@@ -729,7 +730,11 @@
       "enum": [
         "asc",
         "desc"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "SortOrder",
+        "modelAsString": true
+      }
     },
     "select": {
       "description": "This filter allows to selection of the fields(comma separated) which would  be part of the essential section. This would allow to project only the  required fields rather than getting entire content.  Default is to fetch all the fields in the essentials section.",
@@ -1200,10 +1205,12 @@
       "properties": {
         "total": {
           "type": "integer",
+          "format": "int64",
           "description": "Total count of the result set."
         },
         "smartGroupsCount": {
           "type": "integer",
+          "format": "int64",
           "description": "Total count of the smart groups."
         },
         "groupedby": {
@@ -1230,6 +1237,7 @@
         },
         "count": {
           "type": "integer",
+          "format": "int64",
           "description": "Count of the aggregated field"
         },
         "groupedby": {
