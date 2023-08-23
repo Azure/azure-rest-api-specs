@@ -1,0 +1,2428 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AppSecurity",
+    "version": "2023-02-06-preview",
+    "description": "APIs to manage AppSecurity resources",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Policies"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.AppSecurity/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperationsList": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AppSecurity/policies": {
+      "get": {
+        "operationId": "Policies_ListBySubscription",
+        "tags": [
+          "Policies"
+        ],
+        "description": "List Policy resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Policies_ListBySubscription1": {
+            "$ref": "./examples/Policies_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppSecurity/policies": {
+      "get": {
+        "operationId": "Policies_ListByResourceGroup",
+        "tags": [
+          "Policies"
+        ],
+        "description": "List Policy resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Policies_ListByResourceGroup1": {
+            "$ref": "./examples/Policies_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppSecurity/policies/{policyName}": {
+      "get": {
+        "operationId": "Policies_Get",
+        "tags": [
+          "Policies"
+        ],
+        "description": "Get a Policy",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the policy",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Policies_Get1": {
+            "$ref": "./examples/Policies_Get_200.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Policies_CreateOrUpdate",
+        "tags": [
+          "Policies"
+        ],
+        "description": "Create a Policy",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the policy",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Policy' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            }
+          },
+          "201": {
+            "description": "Resource 'Policy' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Policies_CreateOrUpdate1": {
+            "$ref": "./examples/Policies_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Policies_Update",
+        "tags": [
+          "Policies"
+        ],
+        "description": "Update a Policy",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the policy",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Policies_Update1": {
+            "$ref": "./examples/Policies_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Policies_Delete",
+        "tags": [
+          "Policies"
+        ],
+        "description": "Delete a Policy",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the policy",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Policies_Delete1": {
+            "$ref": "./examples/Policies_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ApplicationGatewayProtectedEndpoint": {
+      "type": "object",
+      "description": "Defines a custom rule condition of type Ip",
+      "properties": {},
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProtectedEndpoint"
+        }
+      ],
+      "x-ms-discriminator-value": "ApplicationGateway"
+    },
+    "BotProtection": {
+      "type": "object",
+      "description": "Bot protection policy definition",
+      "properties": {
+        "managedRules": {
+          "type": "array",
+          "description": "Describes the managedRules structure",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "$ref": "#/definitions/ManagedRuleSet"
+          },
+          "x-ms-identifiers": [
+            "ruleSetType",
+            "ruleSetVersion"
+          ]
+        }
+      },
+      "required": [
+        "managedRules"
+      ]
+    },
+    "BotProtectionUpdate": {
+      "type": "object",
+      "description": "Bot protection policy definition",
+      "properties": {
+        "managedRules": {
+          "type": "array",
+          "description": "Describes the managedRules structure",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "$ref": "#/definitions/ManagedRuleSet"
+          },
+          "x-ms-identifiers": [
+            "ruleSetType",
+            "ruleSetVersion"
+          ]
+        }
+      }
+    },
+    "CustomBlockResponse": {
+      "type": "object",
+      "description": "Custom block response configuration, if action type is block",
+      "properties": {
+        "statusCode": {
+          "$ref": "#/definitions/HttpStatusCodeType",
+          "description": "Response status code"
+        },
+        "body": {
+          "type": "string",
+          "description": "Response body. The body must be specified in base64 encoding",
+          "maxLength": 32768,
+          "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})$"
+        }
+      },
+      "required": [
+        "statusCode",
+        "body"
+      ]
+    },
+    "CustomBlockResponseUpdate": {
+      "type": "object",
+      "description": "Custom block response configuration, if action type is block",
+      "properties": {
+        "statusCode": {
+          "$ref": "#/definitions/HttpStatusCodeType",
+          "description": "Response status code"
+        },
+        "body": {
+          "type": "string",
+          "description": "Response body. The body must be specified in base64 encoding",
+          "maxLength": 32768,
+          "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})$"
+        }
+      }
+    },
+    "CustomRule": {
+      "type": "object",
+      "description": "Defines a custom rule",
+      "properties": {
+        "ruleType": {
+          "type": "string",
+          "description": "Discriminator property for CustomRule."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the rule",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z][a-zA-Z0-9]*$"
+        },
+        "state": {
+          "$ref": "#/definitions/EnabledState",
+          "description": "The state of the custom rule. Default is Enabled",
+          "default": "Enabled"
+        },
+        "action": {
+          "$ref": "#/definitions/CustomRuleActionType",
+          "description": "Describes what action to be applied when rule matches"
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Describes priority of the rule. Rules with a lower value will be evaluated before rules with a higher value",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "matchConditions": {
+          "type": "array",
+          "description": "A list of conditions that must be met for the actions to be executed",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "$ref": "#/definitions/CustomRuleCondition"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "discriminator": "ruleType",
+      "required": [
+        "ruleType",
+        "name",
+        "action",
+        "priority",
+        "matchConditions"
+      ]
+    },
+    "CustomRuleActionType": {
+      "type": "string",
+      "description": "Describes the override action to be applied when custom rule matches",
+      "enum": [
+        "Allow",
+        "Block",
+        "Log",
+        "Redirect"
+      ],
+      "x-ms-enum": {
+        "name": "CustomRuleActionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allow",
+            "value": "Allow",
+            "description": "Allow the request"
+          },
+          {
+            "name": "Block",
+            "value": "Block",
+            "description": "Block the request"
+          },
+          {
+            "name": "Log",
+            "value": "Log",
+            "description": "Allow the request and log it"
+          },
+          {
+            "name": "Redirect",
+            "value": "Redirect",
+            "description": "Redirect the request"
+          }
+        ]
+      }
+    },
+    "CustomRuleCondition": {
+      "type": "object",
+      "description": "Defines a custom rule condition",
+      "properties": {
+        "conditionType": {
+          "type": "string",
+          "description": "Discriminator property for CustomRuleCondition."
+        },
+        "negateCondition": {
+          "type": "boolean",
+          "description": "Whether this is negate the condition. Default is false",
+          "default": false
+        }
+      },
+      "discriminator": "conditionType",
+      "required": [
+        "conditionType"
+      ]
+    },
+    "DurationInMinutes": {
+      "type": "number",
+      "description": "Duration in minutes",
+      "enum": [
+        1,
+        5
+      ],
+      "x-ms-enum": {
+        "name": "DurationInMinutes",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "One",
+            "value": 1,
+            "description": "One minute"
+          },
+          {
+            "name": "Five",
+            "value": 5,
+            "description": "Five minutes"
+          }
+        ]
+      }
+    },
+    "EnabledState": {
+      "type": "string",
+      "description": "Describes whether an object (a policy, a custom rule, a managed rule set or other objects) is enabled or disabled",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "EnabledState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The object is enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The object is disabled"
+          }
+        ]
+      }
+    },
+    "EndpointType": {
+      "type": "string",
+      "description": "The type of the endpoint",
+      "enum": [
+        "ApplicationGateway",
+        "FrontDoor"
+      ],
+      "x-ms-enum": {
+        "name": "EndpointType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ApplicationGateway",
+            "value": "ApplicationGateway",
+            "description": "application gateway endpoints, which are under Microsoft.Network/applicationGateways"
+          },
+          {
+            "name": "FrontDoor",
+            "value": "FrontDoor",
+            "description": "FrontDoor endpoints, which are under Microsoft.Cdn/profiles"
+          }
+        ]
+      }
+    },
+    "ExclusionCondition": {
+      "type": "object",
+      "description": "Defines a condition for the exclusion",
+      "properties": {
+        "matchVariable": {
+          "$ref": "#/definitions/ExclusionMatchVariable",
+          "description": "The variable to be excluded"
+        },
+        "selectorMatchOperator": {
+          "$ref": "#/definitions/ExclusionSelectorMatchOperator",
+          "description": "When matchVariable is a collection, operate on the selector to specify which elements in the collection this exclusion applies to"
+        },
+        "selector": {
+          "type": "string",
+          "description": "When matchVariable is a collection, operator used to specify which elements in the collection this exclusion applies to"
+        }
+      },
+      "required": [
+        "matchVariable",
+        "selectorMatchOperator"
+      ]
+    },
+    "ExclusionMatchVariable": {
+      "type": "string",
+      "description": "Variable variants that can be excluded when defining an Exclusion",
+      "enum": [
+        "RequestHeaderNames",
+        "RequestCookieNames",
+        "RequestArgNames",
+        "RequestHeaderKeys",
+        "RequestHeaderValues",
+        "RequestCookieKeys",
+        "RequestCookieValues",
+        "RequestArgKeys",
+        "RequestArgValues"
+      ],
+      "x-ms-enum": {
+        "name": "ExclusionMatchVariable",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RequestHeaderNames",
+            "value": "RequestHeaderNames",
+            "description": "The request header"
+          },
+          {
+            "name": "RequestCookieNames",
+            "value": "RequestCookieNames",
+            "description": "The request cookie"
+          },
+          {
+            "name": "RequestArgNames",
+            "value": "RequestArgNames",
+            "description": "The request argument"
+          },
+          {
+            "name": "RequestHeaderKeys",
+            "value": "RequestHeaderKeys",
+            "description": "The request header keys"
+          },
+          {
+            "name": "RequestHeaderValues",
+            "value": "RequestHeaderValues",
+            "description": "The request header value"
+          },
+          {
+            "name": "RequestCookieKeys",
+            "value": "RequestCookieKeys",
+            "description": "The request cookie keys"
+          },
+          {
+            "name": "RequestCookieValues",
+            "value": "RequestCookieValues",
+            "description": "The request cookie values"
+          },
+          {
+            "name": "RequestArgKeys",
+            "value": "RequestArgKeys",
+            "description": "The request argument keys"
+          },
+          {
+            "name": "RequestArgValues",
+            "value": "RequestArgValues",
+            "description": "The request argument values"
+          }
+        ]
+      }
+    },
+    "ExclusionSelectorMatchOperator": {
+      "type": "string",
+      "description": "Comparison operators variants that can be used with Exclusion variables when defining an Exclusion",
+      "enum": [
+        "Equals",
+        "Contains",
+        "StartsWith",
+        "EndsWith",
+        "EqualsAny"
+      ],
+      "x-ms-enum": {
+        "name": "ExclusionSelectorMatchOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Equals_",
+            "value": "Equals",
+            "description": "Performs an ordinal (case-sensitive and culture-insensitive) comparison"
+          },
+          {
+            "name": "Contains",
+            "value": "Contains",
+            "description": "Checks whether a string contains a sequence of characters"
+          },
+          {
+            "name": "StartsWith",
+            "value": "StartsWith",
+            "description": "Checks whether a string starts with a specified string"
+          },
+          {
+            "name": "EndsWith",
+            "value": "EndsWith",
+            "description": "Checks whether a string ends with a specified string"
+          },
+          {
+            "name": "EqualsAny",
+            "value": "EqualsAny",
+            "description": "Equals any"
+          }
+        ]
+      }
+    },
+    "ExistsMatchCondition": {
+      "type": "object",
+      "description": "Defines a custom rule condition of type Exists",
+      "properties": {
+        "matchVariable": {
+          "$ref": "#/definitions/ExistsOperatorVariable",
+          "description": "Variable to match against"
+        },
+        "matchValue": {
+          "type": "string",
+          "description": "This condition is met if the matchValue is one of the matchVariable's keys",
+          "minLength": 0,
+          "maxLength": 1024
+        }
+      },
+      "required": [
+        "matchVariable",
+        "matchValue"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomRuleCondition"
+        }
+      ],
+      "x-ms-discriminator-value": "Exists"
+    },
+    "ExistsOperatorVariable": {
+      "type": "string",
+      "description": "Defines the supported operator variables for an operation of type Exists",
+      "enum": [
+        "RequestHeader",
+        "PostArgs",
+        "RequestCookies"
+      ],
+      "x-ms-enum": {
+        "name": "ExistsOperatorVariable",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RequestHeader",
+            "value": "RequestHeader",
+            "description": "Request header"
+          },
+          {
+            "name": "PostArgs",
+            "value": "PostArgs",
+            "description": "Post arguments"
+          },
+          {
+            "name": "RequestCookies",
+            "value": "RequestCookies",
+            "description": "Request cookies"
+          }
+        ]
+      }
+    },
+    "FileUploadSizeLimitation": {
+      "type": "object",
+      "description": "Used to limit the file upload size",
+      "properties": {
+        "endpointType": {
+          "$ref": "#/definitions/EndpointType",
+          "description": "If specified, this will be applied only to endpoints of the specified types. Otherwise, all endpoint types are inspected"
+        },
+        "state": {
+          "$ref": "#/definitions/EnabledState",
+          "description": "Whether the size limitation is enabled or disabled. Default value is Enabled",
+          "default": "Enabled"
+        },
+        "maxSizeInMb": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum allowed upload size in MB"
+        }
+      }
+    },
+    "FrontDoorProtectedEndpoint": {
+      "type": "object",
+      "description": "Defines a custom rule condition of type Ip",
+      "properties": {},
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProtectedEndpoint"
+        }
+      ],
+      "x-ms-discriminator-value": "FrontDoor"
+    },
+    "GeoMatchCondition": {
+      "type": "object",
+      "description": "Defines a custom rule condition of type Geo",
+      "properties": {
+        "matchVariable": {
+          "$ref": "#/definitions/GeoOperatorVariable",
+          "description": "Variable to match against"
+        },
+        "matchValue": {
+          "type": "array",
+          "description": "List of countries or regions",
+          "minItems": 1,
+          "maxItems": 100,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "matchVariable",
+        "matchValue"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomRuleCondition"
+        }
+      ],
+      "x-ms-discriminator-value": "Geo"
+    },
+    "GeoOperatorVariable": {
+      "type": "string",
+      "description": "Defines the operator variables for the Geo match operation",
+      "enum": [
+        "ClientAddr"
+      ],
+      "x-ms-enum": {
+        "name": "GeoOperatorVariable",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ClientAddr",
+            "value": "ClientAddr",
+            "description": "The client IP address"
+          }
+        ]
+      }
+    },
+    "HttpStatusCodeType": {
+      "type": "number",
+      "description": "HTTP response status codes",
+      "enum": [
+        200,
+        403,
+        405,
+        406,
+        429
+      ],
+      "x-ms-enum": {
+        "name": "HttpStatusCodeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Ok",
+            "value": 200,
+            "description": "The request has succeeded"
+          },
+          {
+            "name": "Forbidden",
+            "value": 403,
+            "description": "The client does not have access rights to the content"
+          },
+          {
+            "name": "MethodNotAllowed",
+            "value": 405,
+            "description": "The request method is known by the server but is not supported by the target resource"
+          },
+          {
+            "name": "NotAcceptable",
+            "value": 406,
+            "description": "This response is sent when the web server, after performing server-driven content negotiation, doesn't find any content that conforms to the criteria given by the user agent"
+          },
+          {
+            "name": "TooManyRequests",
+            "value": 429,
+            "description": "The user has sent too many requests in a given amount of time"
+          }
+        ]
+      }
+    },
+    "IpMatchCondition": {
+      "type": "object",
+      "description": "Defines a custom rule condition of type Ip",
+      "properties": {
+        "matchVariable": {
+          "$ref": "#/definitions/IpOperatorVariable",
+          "description": "Variable to match against"
+        },
+        "matchValue": {
+          "type": "array",
+          "description": "A list of mutually disjoint IP addresses or CIDR ranges (IPv4 or IPv6)",
+          "minItems": 1,
+          "maxItems": 600,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "matchVariable",
+        "matchValue"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomRuleCondition"
+        }
+      ],
+      "x-ms-discriminator-value": "Ip"
+    },
+    "IpOperatorVariable": {
+      "type": "string",
+      "description": "Defines the operator variables for the Ip match operation",
+      "enum": [
+        "ClientAddr"
+      ],
+      "x-ms-enum": {
+        "name": "IpOperatorVariable",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ClientAddr",
+            "value": "ClientAddr",
+            "description": "The client IP address"
+          }
+        ]
+      }
+    },
+    "LogScrubbing": {
+      "type": "object",
+      "description": "Log scrubbing configuration, to allow certain variables to be scrubbed on WAF logs",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/EnabledState",
+          "description": "The state of the log scrubbing config. Default value is Enabled",
+          "default": "Enabled"
+        },
+        "scrubbingRules": {
+          "type": "array",
+          "description": "The rules that are applied to the logs for scrubbing",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/definitions/ScrubbingRule"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "scrubbingRules"
+      ]
+    },
+    "LogScrubbingUpdate": {
+      "type": "object",
+      "description": "Log scrubbing configuration, to allow certain variables to be scrubbed on WAF logs",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/EnabledState",
+          "description": "The state of the log scrubbing config. Default value is Enabled",
+          "default": "Enabled"
+        },
+        "scrubbingRules": {
+          "type": "array",
+          "description": "The rules that are applied to the logs for scrubbing",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/definitions/ScrubbingRule"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ManagedRuleActionType": {
+      "type": "string",
+      "description": "Supported action that can be applied if a rule matches",
+      "enum": [
+        "AnomalyScoring",
+        "Allow",
+        "Block",
+        "Log",
+        "Redirect"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedRuleActionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AnomalyScoring",
+            "value": "AnomalyScoring",
+            "description": "Anomaly scoring action"
+          },
+          {
+            "name": "Allow",
+            "value": "Allow",
+            "description": "Allow the request"
+          },
+          {
+            "name": "Block",
+            "value": "Block",
+            "description": "Block the request"
+          },
+          {
+            "name": "Log",
+            "value": "Log",
+            "description": "Log the request and allow it"
+          },
+          {
+            "name": "Redirect",
+            "value": "Redirect",
+            "description": "Redirect the request"
+          }
+        ]
+      }
+    },
+    "ManagedRuleSet": {
+      "type": "object",
+      "description": "Managed rule set definition",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/EnabledState",
+          "description": "The state of the rule set. Default is Enabled",
+          "default": "Enabled"
+        },
+        "ruleSetType": {
+          "type": "string",
+          "description": "Defines the type of the rule set",
+          "minLength": 1,
+          "maxLength": 30
+        },
+        "ruleSetVersion": {
+          "type": "string",
+          "description": "Defines the version of the rule set",
+          "minLength": 1,
+          "maxLength": 20
+        }
+      },
+      "required": [
+        "ruleSetType",
+        "ruleSetVersion"
+      ]
+    },
+    "ManagedRuleSetId": {
+      "type": "object",
+      "description": "Defines a managed rule set identifier",
+      "properties": {
+        "ruleSetType": {
+          "type": "string",
+          "description": "Defines the type of the rule set",
+          "minLength": 1,
+          "maxLength": 30
+        },
+        "ruleSetVersion": {
+          "type": "string",
+          "description": "Defines the version of the rule set",
+          "minLength": 1,
+          "maxLength": 20
+        }
+      },
+      "required": [
+        "ruleSetType",
+        "ruleSetVersion"
+      ]
+    },
+    "ManagedRuleSetOverride": {
+      "type": "object",
+      "description": "Defines a managed rule set override",
+      "properties": {
+        "ruleSetType": {
+          "type": "string",
+          "description": "Defines the type of the rule set",
+          "minLength": 1,
+          "maxLength": 30
+        },
+        "ruleSetVersion": {
+          "type": "string",
+          "description": "Defines the version of the rule set",
+          "minLength": 1,
+          "maxLength": 20
+        },
+        "ruleGroupOverrides": {
+          "type": "array",
+          "description": "Rule group level overrides",
+          "items": {
+            "$ref": "#/definitions/RuleGroupOverride"
+          },
+          "x-ms-identifiers": [
+            "ruleGroupName"
+          ]
+        }
+      },
+      "required": [
+        "ruleSetType",
+        "ruleSetVersion"
+      ]
+    },
+    "ManagedRuleSetScope": {
+      "type": "object",
+      "description": "Defines a managed rule set scope, which can be the entire rule set or a subset of rules within it",
+      "properties": {
+        "ruleSetType": {
+          "type": "string",
+          "description": "Defines the type of the rule set",
+          "minLength": 1,
+          "maxLength": 30
+        },
+        "ruleSetVersion": {
+          "type": "string",
+          "description": "Defines the version of the rule set",
+          "minLength": 1,
+          "maxLength": 20
+        },
+        "ruleGroups": {
+          "type": "array",
+          "description": "Exclusion scope. If not specified, then the exclusion is applied to the entire rule set",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/definitions/RuleGroupScope"
+          },
+          "x-ms-identifiers": [
+            "ruleGroupName"
+          ]
+        }
+      },
+      "required": [
+        "ruleSetType",
+        "ruleSetVersion"
+      ]
+    },
+    "ManagedRulesCustomization": {
+      "type": "object",
+      "description": "Defines managed rules customization (including exclusions and overrides)",
+      "properties": {
+        "exclusions": {
+          "type": "array",
+          "description": "List of exclusions to be applied to the managed rules inspection. If not specified, then no exclusions are applied",
+          "items": {
+            "$ref": "#/definitions/ManagedRulesExclusion"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "overrides": {
+          "type": "array",
+          "description": "List of managed rule set overrides. If not specified, then no overrides are applied",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleSetOverride"
+          },
+          "x-ms-identifiers": [
+            "ruleSetType",
+            "ruleSetVersion"
+          ]
+        }
+      },
+      "required": [
+        "exclusions",
+        "overrides"
+      ]
+    },
+    "ManagedRulesCustomizationUpdate": {
+      "type": "object",
+      "description": "Defines managed rules customization (including exclusions and overrides)",
+      "properties": {
+        "exclusions": {
+          "type": "array",
+          "description": "List of exclusions to be applied to the managed rules inspection. If not specified, then no exclusions are applied",
+          "items": {
+            "$ref": "#/definitions/ManagedRulesExclusion"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "overrides": {
+          "type": "array",
+          "description": "List of managed rule set overrides. If not specified, then no overrides are applied",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleSetOverride"
+          },
+          "x-ms-identifiers": [
+            "ruleSetType",
+            "ruleSetVersion"
+          ]
+        }
+      }
+    },
+    "ManagedRulesExclusion": {
+      "type": "object",
+      "description": "Enable exclusion of variables based on conditions from managed rules inspection",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the exclusion"
+        },
+        "conditions": {
+          "type": "array",
+          "description": "The exclusion conditions",
+          "items": {
+            "$ref": "#/definitions/ExclusionCondition"
+          },
+          "x-ms-identifiers": []
+        },
+        "scope": {
+          "type": "array",
+          "description": "The scope of the exclusion. If not specified, then the exclusion is applied to all managed rules",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleSetScope"
+          },
+          "x-ms-identifiers": [
+            "ruleSetType",
+            "ruleSetVersion"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "conditions"
+      ]
+    },
+    "MatchCustomRule": {
+      "type": "object",
+      "description": "User defined rule to execute an action if conditions are met on an incoming request",
+      "properties": {},
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomRule"
+        }
+      ],
+      "x-ms-discriminator-value": "MatchBased"
+    },
+    "Policy": {
+      "type": "object",
+      "description": "Policy resource definition",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PolicyProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "PolicyListResult": {
+      "type": "object",
+      "description": "The response of a Policy list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Policy items on this page",
+          "items": {
+            "$ref": "#/definitions/Policy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PolicyMode": {
+      "type": "string",
+      "description": "Supported policy modes",
+      "enum": [
+        "Prevention",
+        "Detection"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Prevention",
+            "value": "Prevention",
+            "description": "The policy is in prevention mode. Requests are inspected and blocked accordingly"
+          },
+          {
+            "name": "Detection",
+            "value": "Detection",
+            "description": "The policy is in detection mode. Requests are inspected but not blocked"
+          }
+        ]
+      }
+    },
+    "PolicyProperties": {
+      "type": "object",
+      "description": "The policy properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation",
+          "readOnly": true
+        },
+        "policySettings": {
+          "$ref": "#/definitions/PolicySettings",
+          "description": "Global settings for the policy"
+        },
+        "protectedEndpoints": {
+          "type": "array",
+          "description": "The list of endpoints this policy protects",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/definitions/ProtectedEndpoint"
+          },
+          "x-ms-identifiers": [
+            "endpointId"
+          ]
+        },
+        "logScrubbing": {
+          "$ref": "#/definitions/LogScrubbing",
+          "description": "Rules for scrubbing sensitive log fields"
+        },
+        "customRules": {
+          "type": "array",
+          "description": "User defined rules",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/definitions/CustomRule"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "webProtection": {
+          "$ref": "#/definitions/WebProtection",
+          "description": "Describes the web protection policy"
+        },
+        "botProtection": {
+          "$ref": "#/definitions/BotProtection",
+          "description": "Describes the bot protection policy"
+        },
+        "managedRulesCustomization": {
+          "$ref": "#/definitions/ManagedRulesCustomization",
+          "description": "Customization for managed rules (including exclusions and overrides)"
+        }
+      },
+      "required": [
+        "policySettings"
+      ]
+    },
+    "PolicySettings": {
+      "type": "object",
+      "description": "Defines top-level policy settings",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/EnabledState",
+          "description": "The state of the policy. Default value is Enabled",
+          "default": "Enabled"
+        },
+        "mode": {
+          "$ref": "#/definitions/PolicyMode",
+          "description": "The mode of the policy. Default value is Detection",
+          "default": "Detection"
+        },
+        "redirectUrl": {
+          "type": "string",
+          "description": "If action type is redirect, this field represents redirect URL for the client",
+          "default": "",
+          "minLength": 3,
+          "maxLength": 2048
+        },
+        "customBlockResponse": {
+          "$ref": "#/definitions/CustomBlockResponse",
+          "description": "Custom block response configuration, if action type is block"
+        },
+        "requestBodyInspections": {
+          "type": "array",
+          "description": "Request body inspection settings overrides for endpoint types",
+          "items": {
+            "$ref": "#/definitions/RequestBodyInspection"
+          },
+          "x-ms-identifiers": [
+            "endpointType"
+          ]
+        },
+        "requestBodySizeLimitations": {
+          "type": "array",
+          "description": "Request body size limitation settings overrides for endpoint types",
+          "items": {
+            "$ref": "#/definitions/RequestBodySizeLimitation"
+          },
+          "x-ms-identifiers": [
+            "endpointType"
+          ]
+        },
+        "fileUploadSizeLimitations": {
+          "type": "array",
+          "description": "File upload size limitation settings overrides for endpoint types",
+          "items": {
+            "$ref": "#/definitions/FileUploadSizeLimitation"
+          },
+          "x-ms-identifiers": [
+            "endpointType"
+          ]
+        }
+      },
+      "required": [
+        "fileUploadSizeLimitations"
+      ]
+    },
+    "PolicySettingsUpdate": {
+      "type": "object",
+      "description": "Defines top-level policy settings",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/EnabledState",
+          "description": "The state of the policy. Default value is Enabled",
+          "default": "Enabled"
+        },
+        "mode": {
+          "$ref": "#/definitions/PolicyMode",
+          "description": "The mode of the policy. Default value is Detection",
+          "default": "Detection"
+        },
+        "redirectUrl": {
+          "type": "string",
+          "description": "If action type is redirect, this field represents redirect URL for the client",
+          "default": "",
+          "minLength": 3,
+          "maxLength": 2048
+        },
+        "customBlockResponse": {
+          "$ref": "#/definitions/CustomBlockResponseUpdate",
+          "description": "Custom block response configuration, if action type is block"
+        },
+        "requestBodyInspections": {
+          "type": "array",
+          "description": "Request body inspection settings overrides for endpoint types",
+          "items": {
+            "$ref": "#/definitions/RequestBodyInspection"
+          },
+          "x-ms-identifiers": [
+            "endpointType"
+          ]
+        },
+        "requestBodySizeLimitations": {
+          "type": "array",
+          "description": "Request body size limitation settings overrides for endpoint types",
+          "items": {
+            "$ref": "#/definitions/RequestBodySizeLimitation"
+          },
+          "x-ms-identifiers": [
+            "endpointType"
+          ]
+        },
+        "fileUploadSizeLimitations": {
+          "type": "array",
+          "description": "File upload size limitation settings overrides for endpoint types",
+          "items": {
+            "$ref": "#/definitions/FileUploadSizeLimitation"
+          },
+          "x-ms-identifiers": [
+            "endpointType"
+          ]
+        }
+      }
+    },
+    "PolicyUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the Policy.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/PolicyUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PolicyUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Policy.",
+      "properties": {
+        "policySettings": {
+          "$ref": "#/definitions/PolicySettingsUpdate",
+          "description": "Global settings for the policy"
+        },
+        "protectedEndpoints": {
+          "type": "array",
+          "description": "The list of endpoints this policy protects",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/definitions/ProtectedEndpoint"
+          },
+          "x-ms-identifiers": [
+            "endpointId"
+          ]
+        },
+        "logScrubbing": {
+          "$ref": "#/definitions/LogScrubbingUpdate",
+          "description": "Rules for scrubbing sensitive log fields"
+        },
+        "customRules": {
+          "type": "array",
+          "description": "User defined rules",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/definitions/CustomRule"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "webProtection": {
+          "$ref": "#/definitions/WebProtectionUpdate",
+          "description": "Describes the web protection policy"
+        },
+        "botProtection": {
+          "$ref": "#/definitions/BotProtectionUpdate",
+          "description": "Describes the bot protection policy"
+        },
+        "managedRulesCustomization": {
+          "$ref": "#/definitions/ManagedRulesCustomizationUpdate",
+          "description": "Customization for managed rules (including exclusions and overrides)"
+        }
+      }
+    },
+    "ProtectedEndpoint": {
+      "type": "object",
+      "description": "Protected endpoint definition",
+      "properties": {
+        "endpointType": {
+          "type": "string",
+          "description": "Discriminator property for ProtectedEndpoint."
+        },
+        "endpointId": {
+          "$ref": "#/definitions/ProtectedEndpointId",
+          "description": "Fully qualified ARM ID of the endpoint to protect"
+        },
+        "attachmentState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last attachment operation between the policy and the endpoint",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information",
+          "readOnly": true
+        }
+      },
+      "discriminator": "endpointType",
+      "required": [
+        "endpointType",
+        "endpointId"
+      ]
+    },
+    "ProtectedEndpointId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an ARM resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Network/applicationGateways"
+          },
+          {
+            "type": "Microsoft.Network/applicationGateways/httpListeners"
+          },
+          {
+            "type": "Microsoft.Network/applicationGateways/requestRoutingRules"
+          },
+          {
+            "type": "Microsoft.Cdn/profiles"
+          },
+          {
+            "type": "Microsoft.Cdn/profiles/afdEndpoints"
+          },
+          {
+            "type": "Microsoft.Cdn/profiles/afdEndpoints/customDomains"
+          },
+          {
+            "type": "Microsoft.Cdn/profiles/afdEndpoints/routes"
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Provisioning the resource is in progress"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource is being updated"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The change request has been accepted"
+          }
+        ]
+      }
+    },
+    "RateBasedCustomRule": {
+      "type": "object",
+      "description": "User defined rule that is triggered by the rate of incoming requests",
+      "properties": {
+        "rateLimit": {
+          "$ref": "#/definitions/RateLimit",
+          "description": "Configures a rate limit mechanism for the rule"
+        }
+      },
+      "required": [
+        "rateLimit"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomRule"
+        }
+      ],
+      "x-ms-discriminator-value": "RateBased"
+    },
+    "RateLimit": {
+      "type": "object",
+      "description": "Describes the rate limit configuration of a rate limit custom rule",
+      "properties": {
+        "durationInMinutes": {
+          "$ref": "#/definitions/DurationInMinutes",
+          "description": "The time duration for which the rate limit threshold is enforced. Default value is 1 minute",
+          "default": 1
+        },
+        "threshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If the total number of requests exceeds this threshold during a rate limit duration, the rate limit action will be invoked",
+          "minimum": 1
+        },
+        "groupBy": {
+          "$ref": "#/definitions/RateLimitGroupByType",
+          "description": "Group requests based on their type and apply rate limits to each group independently. Default is ClientAddr based grouping",
+          "default": "ClientAddr"
+        }
+      },
+      "required": [
+        "durationInMinutes",
+        "threshold",
+        "groupBy"
+      ]
+    },
+    "RateLimitGroupByType": {
+      "type": "string",
+      "description": "Defines the available grouping options for rate limiting",
+      "enum": [
+        "ClientAddr",
+        "GeoLocation",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "RateLimitGroupByType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ClientAddr",
+            "value": "ClientAddr",
+            "description": "Grouping based on client address"
+          },
+          {
+            "name": "GeoLocation",
+            "value": "GeoLocation",
+            "description": "Grouping is based on the geographic location of the request"
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No grouping is being done. Rate limit is global"
+          }
+        ]
+      }
+    },
+    "RequestBodyInspection": {
+      "type": "object",
+      "description": "Describes whether policy rules will inspect the request body content and maximum request body size to inspect in KB",
+      "properties": {
+        "endpointType": {
+          "$ref": "#/definitions/EndpointType",
+          "description": "If specified, this will be applied only to endpoints of the specified types. Otherwise, all endpoint types are inspected"
+        },
+        "state": {
+          "$ref": "#/definitions/EnabledState",
+          "description": "Describes whether inspection is enabled for managed rules. Default value is Enabled",
+          "default": "Enabled"
+        },
+        "maxSizeInKb": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum request body size to inspect in KB"
+        }
+      }
+    },
+    "RequestBodySizeLimitation": {
+      "type": "object",
+      "description": "Used to limit the size of the incoming request body",
+      "properties": {
+        "endpointType": {
+          "$ref": "#/definitions/EndpointType",
+          "description": "If specified, this will be applied only to endpoints of the specified types. Otherwise, all endpoint types are inspected"
+        },
+        "state": {
+          "$ref": "#/definitions/EnabledState",
+          "description": "Whether the size limitation is enabled or disabled. Default value is Enabled",
+          "default": "Enabled"
+        },
+        "maxSizeInKb": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum allowed request body size in KB"
+        }
+      }
+    },
+    "RuleGroupOverride": {
+      "type": "object",
+      "description": "Defines a managed rule group override setting",
+      "properties": {
+        "ruleGroupName": {
+          "type": "string",
+          "description": "The managed rule group to override",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "groupOverride": {
+          "$ref": "#/definitions/StateAndActionOverride",
+          "description": "Rule group level override"
+        },
+        "rules": {
+          "type": "array",
+          "description": "List of rule level overrides",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/definitions/RuleOverride"
+          },
+          "x-ms-identifiers": [
+            "ruleId"
+          ]
+        }
+      },
+      "required": [
+        "ruleGroupName"
+      ]
+    },
+    "RuleGroupScope": {
+      "type": "object",
+      "description": "Defines a rule group scope, which can be the entire rule group or a subset of rule within it",
+      "properties": {
+        "ruleGroupName": {
+          "type": "string",
+          "description": "Relevant rule group name"
+        },
+        "rules": {
+          "type": "array",
+          "description": "Relevant rules within the specified rule group. If not specified, the scope is the entire rule group",
+          "maxItems": 100,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "ruleGroupName"
+      ]
+    },
+    "RuleOverride": {
+      "type": "object",
+      "description": "Defines a managed rule group override setting",
+      "properties": {
+        "ruleId": {
+          "type": "string",
+          "description": "Identifier for the managed rule"
+        },
+        "state": {
+          "$ref": "#/definitions/EnabledState",
+          "description": "The state of the managed rule or rule group"
+        },
+        "action": {
+          "$ref": "#/definitions/ManagedRuleActionType",
+          "description": "Overrides the action to be applied when a rule matches"
+        }
+      },
+      "required": [
+        "ruleId",
+        "state"
+      ]
+    },
+    "ScrubbingRule": {
+      "type": "object",
+      "description": "Allow certain variables to be scrubbed on WAF logs",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/EnabledState",
+          "description": "Defines the state of log scrubbing rule. Default value is Enabled",
+          "default": "Enabled"
+        },
+        "matchVariable": {
+          "$ref": "#/definitions/ScrubbingRuleMatchVariable",
+          "description": "The variable to be scrubbed from the logs"
+        },
+        "selectorMatchOperator": {
+          "$ref": "#/definitions/ScrubbingRuleSelectorMatchOperator",
+          "description": "When matchVariable is a collection, operate on the selector to specify which elements in the collection this rule applies to"
+        },
+        "selector": {
+          "type": "string",
+          "description": "When matchVariable is a collection, operator used to specify which elements in the collection this rule applies to",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "matchVariable",
+        "selectorMatchOperator",
+        "selector"
+      ]
+    },
+    "ScrubbingRuleMatchVariable": {
+      "type": "string",
+      "description": "Supported variable types for scrubbing rules",
+      "enum": [
+        "RequestHeaderNames",
+        "RequestCookieNames",
+        "RequestArgNames",
+        "RequestPostArgNames",
+        "RequestJSONArgNames",
+        "RequestIPAddress"
+      ],
+      "x-ms-enum": {
+        "name": "ScrubbingRuleMatchVariable",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RequestHeaderNames",
+            "value": "RequestHeaderNames",
+            "description": "The request headers to be scrubbed"
+          },
+          {
+            "name": "RequestCookieNames",
+            "value": "RequestCookieNames",
+            "description": "The request cookies to be scrubbed"
+          },
+          {
+            "name": "RequestArgNames",
+            "value": "RequestArgNames",
+            "description": "The request arguments to be scrubbed"
+          },
+          {
+            "name": "RequestPostArgNames",
+            "value": "RequestPostArgNames",
+            "description": "The request post arguments to be scrubbed"
+          },
+          {
+            "name": "RequestJSONArgNames",
+            "value": "RequestJSONArgNames",
+            "description": "The request JSON arguments to be scrubbed"
+          },
+          {
+            "name": "RequestIPAddress",
+            "value": "RequestIPAddress",
+            "description": "The request IP address"
+          }
+        ]
+      }
+    },
+    "ScrubbingRuleSelectorMatchOperator": {
+      "type": "string",
+      "description": "Supported operators for scrubbing rules",
+      "enum": [
+        "Equals",
+        "EqualsAny"
+      ],
+      "x-ms-enum": {
+        "name": "ScrubbingRuleSelectorMatchOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Equals_",
+            "value": "Equals",
+            "description": "Equals operator"
+          },
+          {
+            "name": "EqualsAny",
+            "value": "EqualsAny",
+            "description": "Equals any operator"
+          }
+        ]
+      }
+    },
+    "StateAndActionOverride": {
+      "type": "object",
+      "description": "Defines a managed rule or rule group override",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/EnabledState",
+          "description": "The state of the managed rule or rule group"
+        },
+        "action": {
+          "$ref": "#/definitions/ManagedRuleActionType",
+          "description": "Overrides the action to be applied when a rule matches"
+        }
+      },
+      "required": [
+        "state"
+      ]
+    },
+    "StringMatchCondition": {
+      "type": "object",
+      "description": "Defines a custom rule condition of type String",
+      "properties": {
+        "operator": {
+          "$ref": "#/definitions/StringOperator",
+          "description": "String operator to use when matching with the match values"
+        },
+        "matchVariable": {
+          "$ref": "#/definitions/StringOperatorVariable",
+          "description": "Variable to match against"
+        },
+        "matchVariableSelector": {
+          "type": "string",
+          "description": "Match against a specific key from RequestHeader, PostArgs and RequestCookies. Default is Null",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "matchValue": {
+          "type": "array",
+          "description": "The condition is met if any of the values match the variable with the given operator",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "type": "string"
+          }
+        },
+        "transformations": {
+          "type": "array",
+          "description": "Describes what transforms applied before matching",
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/definitions/TransformType"
+          }
+        }
+      },
+      "required": [
+        "operator",
+        "matchVariable",
+        "matchValue"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomRuleCondition"
+        }
+      ],
+      "x-ms-discriminator-value": "String"
+    },
+    "StringOperator": {
+      "type": "string",
+      "description": "Operators that can be applied in conditions of type String",
+      "enum": [
+        "Equals",
+        "Contains",
+        "StartsWith",
+        "EndsWith",
+        "Regex",
+        "GeoMatch"
+      ],
+      "x-ms-enum": {
+        "name": "StringOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Equals_",
+            "value": "Equals",
+            "description": "Performs an ordinal (case-sensitive and culture-insensitive) comparison"
+          },
+          {
+            "name": "Contains",
+            "value": "Contains",
+            "description": "checks whether a string contains a sequence of characters"
+          },
+          {
+            "name": "StartsWith",
+            "value": "StartsWith",
+            "description": "Checks whether a string starts with a specified string"
+          },
+          {
+            "name": "EndsWith",
+            "value": "EndsWith",
+            "description": "Checks whether a string ends with a specified string"
+          },
+          {
+            "name": "Regex",
+            "value": "Regex",
+            "description": "Regex match"
+          },
+          {
+            "name": "GeoMatch",
+            "value": "GeoMatch",
+            "description": "Geographic match"
+          }
+        ]
+      }
+    },
+    "StringOperatorVariable": {
+      "type": "string",
+      "description": "Defines the supported operator variables for string operations",
+      "enum": [
+        "QueryString",
+        "RequestMethod",
+        "RequestUri",
+        "RequestBody",
+        "RequestHeader",
+        "PostArgs",
+        "RequestCookies"
+      ],
+      "x-ms-enum": {
+        "name": "StringOperatorVariable",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "QueryString",
+            "value": "QueryString",
+            "description": "Query string"
+          },
+          {
+            "name": "RequestMethod",
+            "value": "RequestMethod",
+            "description": "Request method"
+          },
+          {
+            "name": "RequestUri",
+            "value": "RequestUri",
+            "description": "Request URI"
+          },
+          {
+            "name": "RequestBody",
+            "value": "RequestBody",
+            "description": "Request body"
+          },
+          {
+            "name": "RequestHeader",
+            "value": "RequestHeader",
+            "description": "Request header"
+          },
+          {
+            "name": "PostArgs",
+            "value": "PostArgs",
+            "description": "Post arguments"
+          },
+          {
+            "name": "RequestCookies",
+            "value": "RequestCookies",
+            "description": "Request cookies"
+          }
+        ]
+      }
+    },
+    "StringSizeNumberOperatorVariable": {
+      "type": "string",
+      "description": "Defines the supported operator variables for string, size and number operations",
+      "enum": [
+        "QueryString",
+        "RequestMethod",
+        "RequestUri",
+        "RequestBody",
+        "RequestHeader",
+        "PostArgs",
+        "RequestCookies"
+      ],
+      "x-ms-enum": {
+        "name": "StringSizeNumberOperatorVariable",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "QueryString",
+            "value": "QueryString",
+            "description": "Query string"
+          },
+          {
+            "name": "RequestMethod",
+            "value": "RequestMethod",
+            "description": "Request method"
+          },
+          {
+            "name": "RequestUri",
+            "value": "RequestUri",
+            "description": "Request URI"
+          },
+          {
+            "name": "RequestBody",
+            "value": "RequestBody",
+            "description": "Request body"
+          },
+          {
+            "name": "RequestHeader",
+            "value": "RequestHeader",
+            "description": "Request header"
+          },
+          {
+            "name": "PostArgs",
+            "value": "PostArgs",
+            "description": "Post arguments"
+          },
+          {
+            "name": "RequestCookies",
+            "value": "RequestCookies",
+            "description": "Request cookies"
+          }
+        ]
+      }
+    },
+    "TransformType": {
+      "type": "string",
+      "description": "Transforms that can be applied before matching",
+      "enum": [
+        "Uppercase",
+        "Lowercase",
+        "Trim",
+        "UrlDecode",
+        "UrlEncode",
+        "RemoveNulls",
+        "HtmlEntityDecode"
+      ],
+      "x-ms-enum": {
+        "name": "TransformType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Uppercase",
+            "value": "Uppercase",
+            "description": "Converts the string to uppercase"
+          },
+          {
+            "name": "Lowercase",
+            "value": "Lowercase",
+            "description": "Converts the string to lowercase"
+          },
+          {
+            "name": "Trim",
+            "value": "Trim",
+            "description": "Trims the string"
+          },
+          {
+            "name": "UrlDecode",
+            "value": "UrlDecode",
+            "description": "Performs URL decoding"
+          },
+          {
+            "name": "UrlEncode",
+            "value": "UrlEncode",
+            "description": "Performs URL encoding"
+          },
+          {
+            "name": "RemoveNulls",
+            "value": "RemoveNulls",
+            "description": "Removes nulls"
+          },
+          {
+            "name": "HtmlEntityDecode",
+            "value": "HtmlEntityDecode",
+            "description": "Performs HTML entity decoding"
+          }
+        ]
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "AppSecurity versions",
+      "enum": [
+        "2023-02-06-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2023_02_06_preview",
+            "value": "2023-02-06-preview",
+            "description": "Version 2023-02-06-preview"
+          }
+        ]
+      }
+    },
+    "WebProtection": {
+      "type": "object",
+      "description": "Web protection policy definition",
+      "properties": {
+        "managedRules": {
+          "type": "array",
+          "description": "Describes the managedRules structure",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "$ref": "#/definitions/ManagedRuleSet"
+          },
+          "x-ms-identifiers": [
+            "ruleSetType",
+            "ruleSetVersion"
+          ]
+        }
+      },
+      "required": [
+        "managedRules"
+      ]
+    },
+    "WebProtectionUpdate": {
+      "type": "object",
+      "description": "Web protection policy definition",
+      "properties": {
+        "managedRules": {
+          "type": "array",
+          "description": "Describes the managedRules structure",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "$ref": "#/definitions/ManagedRuleSet"
+          },
+          "x-ms-identifiers": [
+            "ruleSetType",
+            "ruleSetVersion"
+          ]
+        }
+      }
+    },
+    "WithSelectorOperatorVariable": {
+      "type": "string",
+      "description": "Defines the operator variable that requires a selector",
+      "enum": [
+        "RequestHeader",
+        "PostArgs",
+        "RequestCookies"
+      ],
+      "x-ms-enum": {
+        "name": "WithSelectorOperatorVariable",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RequestHeader",
+            "value": "RequestHeader",
+            "description": "Request header"
+          },
+          {
+            "name": "PostArgs",
+            "value": "PostArgs",
+            "description": "Post arguments"
+          },
+          {
+            "name": "RequestCookies",
+            "value": "RequestCookies",
+            "description": "Request cookies"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

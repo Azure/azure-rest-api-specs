@@ -11,6 +11,6 @@ clear-output-folder: true
 output-folder: $(terraform-output-folder)/vi
 ```
 
-``` yaml $(tag) == 'package-2023-06-02-preview' && $(terraform)
+``` yaml $(tag) == 'package-2023-08-01-preview' && $(terraform)
 gosdk-folder: services/preview/vi/mgmt/2021-10-18-preview/vi
 ```
