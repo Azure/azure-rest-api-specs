@@ -183,7 +183,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/defenderSettings/default/packageDownloads": {
+     "/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/defenderSettings/default/packageDownloads": {
       "post": {
         "x-ms-examples": {
           "Package downloads": {
@@ -362,7 +362,7 @@
       "description": "Download link",
       "readOnly": true
     },
-    "PackageDownloadInfo": {
+    "PackageBaseDownloadInfo": {
       "type": "object",
       "description": "Information on a specific package download",
       "properties": {
@@ -374,6 +374,38 @@
         "link": {
           "description": "Download link",
           "$ref": "#/definitions/DownloadLink"
+        }
+      }
+    },
+    "EnterprisePackageDownloadInfo": {
+      "type": "object",
+      "description": "Information on enterprise package download",
+      "properties": {
+        "checksum": {
+          "type": "string",
+          "description": "package checksum",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PackageBaseDownloadInfo"
+        }
+      ]
+    },
+    "PackageDownloadInfo": {
+      "type": "object",
+      "description": "Information on a specific package download",
+      "properties": {
+        "releaseDate": {
+          "type": "string",
+          "description": "Package release date",
+          "readOnly": true
+        },
+        "supportedUntil": {
+          "type": "string",
+          "description": "Package supported until date",
+          "readOnly": true
         },
         "versionKind": {
           "type": "string",
@@ -399,8 +431,38 @@
               }
             ]
           }
+        },
+        "scope": {
+          "type": "string",
+          "description": "scope of the version",
+          "readOnly": true,
+          "enum": [
+            "Major",
+            "Minor",
+            "Patch"
+          ],
+          "x-ms-enum": {
+            "name": "scope",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Major"
+              },
+              {
+                "value": "Minor"
+              },
+              {
+                "value": "Patch"
+              }
+            ]
+          }
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PackageBaseDownloadInfo"
+        }
+      ]
     },
     "UpgradePackageDownloadInfo": {
       "type": "object",
@@ -418,6 +480,22 @@
         }
       ]
     },
+    "FullPackageDownloadInfo": {
+      "type": "object",
+      "description": "Information on full package downloads",
+      "readOnly": true,
+      "properties": {
+        "iso": {
+          "type": "array",
+          "description": "Contains all ISO full versions for the sensor",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PackageDownloadInfo"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "PackageDownloads": {
       "type": "object",
       "description": "Information about package downloads",
@@ -431,51 +509,7 @@
             "full": {
               "type": "object",
               "description": "Contains full package downloads",
-              "readOnly": true,
-              "properties": {
-                "iso": {
-                  "type": "array",
-                  "description": "Contains all ISO full versions for the sensor",
-                  "readOnly": true,
-                  "items": {
-                    "$ref": "#/definitions/PackageDownloadInfo"
-                  },
-                  "x-ms-identifiers": []
-                },
-                "ovf": {
-                  "type": "object",
-                  "description": "Contains all OVF (virtual machine) full versions for the sensor",
-                  "properties": {
-                    "enterprise": {
-                      "type": "array",
-                      "description": "Enterprise package type",
-                      "readOnly": true,
-                      "items": {
-                        "$ref": "#/definitions/PackageDownloadInfo"
-                      },
-                      "x-ms-identifiers": []
-                    },
-                    "medium": {
-                      "type": "array",
-                      "description": "Medium package type",
-                      "readOnly": true,
-                      "items": {
-                        "$ref": "#/definitions/PackageDownloadInfo"
-                      },
-                      "x-ms-identifiers": []
-                    },
-                    "line": {
-                      "type": "array",
-                      "description": "Line package type",
-                      "readOnly": true,
-                      "items": {
-                        "$ref": "#/definitions/PackageDownloadInfo"
-                      },
-                      "x-ms-identifiers": []
-                    }
-                  }
-                }
-              }
+              "$ref": "#/definitions/FullPackageDownloadInfo"
             },
             "upgrade": {
               "type": "array",
@@ -505,49 +539,6 @@
                     "$ref": "#/definitions/PackageDownloadInfo"
                   },
                   "x-ms-identifiers": []
-                },
-                "ovf": {
-                  "type": "object",
-                  "description": "Contains all OVF (virtual machine) full versions of the Central Manager",
-                  "readOnly": true,
-                  "properties": {
-                    "enterprise": {
-                      "type": "array",
-                      "description": "The Enterprise package type",
-                      "readOnly": true,
-                      "items": {
-                        "$ref": "#/definitions/PackageDownloadInfo"
-                      },
-                      "x-ms-identifiers": []
-                    },
-                    "enterpriseHighAvailability": {
-                      "type": "array",
-                      "description": "The EnterpriseHighAvailability package type",
-                      "readOnly": true,
-                      "items": {
-                        "$ref": "#/definitions/PackageDownloadInfo"
-                      },
-                      "x-ms-identifiers": []
-                    },
-                    "medium": {
-                      "type": "array",
-                      "description": "The Medium package type",
-                      "readOnly": true,
-                      "items": {
-                        "$ref": "#/definitions/PackageDownloadInfo"
-                      },
-                      "x-ms-identifiers": []
-                    },
-                    "mediumHighAvailability": {
-                      "type": "array",
-                      "description": "The MediumHighAvailability package type",
-                      "readOnly": true,
-                      "items": {
-                        "$ref": "#/definitions/PackageDownloadInfo"
-                      },
-                      "x-ms-identifiers": []
-                    }
-                  }
                 }
               }
             },
@@ -557,16 +548,26 @@
               "readOnly": true,
               "items": {
                 "$ref": "#/definitions/UpgradePackageDownloadInfo"
-              }
+              },
+              "x-ms-identifiers": []
             }
           }
+        },
+        "enterprise": {
+          "type": "array",
+          "description": "All downloads for enterprise",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/EnterprisePackageDownloadInfo"
+          },
+          "x-ms-identifiers": []
         },
         "threatIntelligence": {
           "type": "array",
           "description": "All downloads for threat intelligence",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/PackageDownloadInfo"
+            "$ref": "#/definitions/PackageBaseDownloadInfo"
           },
           "x-ms-identifiers": []
         },
@@ -575,34 +576,7 @@
           "description": "SNMP Server file",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/PackageDownloadInfo"
-          },
-          "x-ms-identifiers": []
-        },
-        "wmiTool": {
-          "type": "array",
-          "description": "Used for local configuration export",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/PackageDownloadInfo"
-          },
-          "x-ms-identifiers": []
-        },
-        "authorizedDevicesImportTemplate": {
-          "type": "array",
-          "description": "Authorized devices import template",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/PackageDownloadInfo"
-          },
-          "x-ms-identifiers": []
-        },
-        "deviceInformationUpdateImportTemplate": {
-          "type": "array",
-          "description": "Authorized devices import template",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/PackageDownloadInfo"
+            "$ref": "#/definitions/PackageBaseDownloadInfo"
           },
           "x-ms-identifiers": []
         }
