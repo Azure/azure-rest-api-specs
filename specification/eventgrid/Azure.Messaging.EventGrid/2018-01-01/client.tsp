@@ -1,5 +1,30 @@
 import "@azure-tools/typespec-client-generator-core";
+
+import "../SystemEvents/ApiManagement.tsp";
+import "../SystemEvents/AppConfiguration.tsp";
+import "../SystemEvents/AzureCommunicationServices.tsp";
+import "../SystemEvents/ContainerRegistry.tsp";
+import "../SystemEvents/ContainerService.tsp";
+import "../SystemEvents/DataBox.tsp";
+import "../SystemEvents/EventHub.tsp";
+import "../SystemEvents/Maps.tsp";
+import "../SystemEvents/IotHub.tsp";
+import "../SystemEvents/HealthcareApis.tsp";
+import "../SystemEvents/KeyVault.tsp";
+import "../SystemEvents/MachineLearningServices.tsp";
+import "../SystemEvents/MediaServices.tsp";
+import "../SystemEvents/PolicyInsights.tsp";
+import "../SystemEvents/RedisCache.tsp";
+import "../SystemEvents/Resources.tsp";
+import "../SystemEvents/ServiceBus.tsp";
+import "../SystemEvents/SignalRService.tsp";
+import "../SystemEvents/Storage.tsp";
+import "../SystemEvents/Web.tsp";
+import "../SystemEvents/EventGrid.tsp";
+
+// Which EventGrid Version 
 import "./main.tsp";
+
 
 using Azure.ClientGenerator.Core;
 
@@ -96,10 +121,6 @@ using Azure.ClientGenerator.Core;
 @@include(EventGrid.SubscriptionValidationEventData)
 @@include(EventGrid.SubscriptionValidationResponse)
 @@include(EventGrid.SubscriptionDeletedEventData)
-@@include(EventGrid.MQTTClientSessionDisconnectedEventProperties)
-@@include(EventGrid.MQTTClientSessionConnectedEventProperties)
-@@include(EventGrid.MQTTClientDeletedEventProperties)
-@@include(EventGrid.MQTTClientCreatedOrUpdatedEventProperties)
 @@include(EventGrid.EventGridNamespaceMQTTClientSessionDisconnectedEventData)
 @@include(EventGrid.EventGridNamespaceMQTTClientSessionConnectedEventData)
 @@include(EventGrid.EventGridNamespaceMQTTClientDeletedEventData)

@@ -4,6 +4,8 @@ import json
 import pathlib
 import os
 
+PATH = os.environ["PATH_TO_AZURE_SPEC_REPO"]
+
 file_names = [
     "ApiManagement",
     "AppConfiguration",
@@ -30,7 +32,7 @@ file_names = [
 
 model_names = []
 for file_name in file_names:
-    name = "C:/Users/llawrence/Repositories/azure-rest-api-specs/specification/eventgrid/Azure.Messaging.EventGrid/SystemEvents/"+file_name+".tsp"
+    name =f"{PATH}/azure-rest-api-specs/specification/eventgrid/Azure.Messaging.EventGrid/SystemEvents/"+file_name+".tsp"
     with open(name, "r") as user_file:
         file_lines = user_file.readlines()
         for line in file_lines:
