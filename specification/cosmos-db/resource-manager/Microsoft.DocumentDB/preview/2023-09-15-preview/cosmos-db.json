@@ -8586,6 +8586,15 @@
           "description": "Indicates the status of the Customer Managed Key feature on the account. In case there are errors, the property provides troubleshooting guidance.",
           "type": "string",
           "$ref": "#/definitions/CustomerManagedKeyStatus"
+        },
+        "enablePriorityBasedExecution": {
+          "description": "Flag to indicate enabling/disabling of Priority Based Execution Preview feature on the account",
+          "type": "boolean"
+        },
+        "defaultPriorityLevel": {
+          "description": "Enum to indicate default Priority Level of request for Priority Based Execution.",
+          "type": "string",
+          "$ref": "#/definitions/DefaultPriorityLevel"
         }
       }
     },
@@ -8754,6 +8763,15 @@
           "description": "Indicates the status of the Customer Managed Key feature on the account. In case there are errors, the property provides troubleshooting guidance.",
           "type": "string",
           "$ref": "#/definitions/CustomerManagedKeyStatus"
+        },
+        "enablePriorityBasedExecution": {
+          "description": "Flag to indicate enabling/disabling of Priority Based Execution Preview feature on the account",
+          "type": "boolean"
+        },
+        "defaultPriorityLevel": {
+          "description": "Enum to indicate default Priority Level of request for Priority Based Execution.",
+          "type": "string",
+          "$ref": "#/definitions/DefaultPriorityLevel"
         }
       },
       "required": [
@@ -8946,6 +8964,15 @@
           "description": "Indicates the status of the Customer Managed Key feature on the account. In case there are errors, the property provides troubleshooting guidance.",
           "type": "string",
           "$ref": "#/definitions/CustomerManagedKeyStatus"
+        },
+        "enablePriorityBasedExecution": {
+          "description": "Flag to indicate enabling/disabling of Priority Based Execution Preview feature on the account",
+          "type": "boolean"
+        },
+        "defaultPriorityLevel": {
+          "description": "Enum to indicate default Priority Level of request for Priority Based Execution.",
+          "type": "string",
+          "$ref": "#/definitions/DefaultPriorityLevel"
         }
       }
     },
@@ -11992,6 +12019,18 @@
       ],
       "x-ms-enum": {
         "name": "CustomerManagedKeyStatus",
+        "modelAsString": true
+      }
+    },
+    "DefaultPriorityLevel": {
+      "description": "Enum to indicate default priorityLevel of requests",
+      "type": "string",
+      "enum": [
+        "High",
+        "Low"
+      ],
+      "x-ms-enum": {
+        "name": "DefaultPriorityLevel",
         "modelAsString": true
       }
     }
