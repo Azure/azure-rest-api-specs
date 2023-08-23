@@ -175,6 +175,29 @@
         "encryptedCredential": {
           "type": "string",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        },
+        "credential": {
+          "$ref": "../artifacts.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
+        },
+        "authenticationType": {
+          "x-ms-enum": {
+            "name": "AzureStorageAuthenticationType",
+            "modelAsString": true
+          },
+          "enum": [
+            "Anonymous",
+            "AccountKey",
+            "SasUri",
+            "ServicePrincipal",
+            "Msi"
+          ],
+          "type": "string",
+          "description": "The type used for authentication. Type: string."
+        },
+        "containerUri": {
+          "type": "object",
+          "description": "Container uri of the Azure Blob Storage resource only support for anonymous access. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -229,6 +252,10 @@
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        },
+        "credential": {
+          "$ref": "../artifacts.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       },
       "required": [
@@ -274,6 +301,10 @@
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        },
+        "alwaysEncryptedSettings": {
+          "$ref": "#/definitions/SqlAlwaysEncryptedProperties",
+          "description": "Sql always encrypted properties."
         }
       },
       "required": [
@@ -319,6 +350,10 @@
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        },
+        "alwaysEncryptedSettings": {
+          "$ref": "#/definitions/SqlAlwaysEncryptedProperties",
+          "description": "Sql always encrypted properties."
         }
       },
       "required": [
@@ -373,9 +408,17 @@
           "type": "object",
           "description": "Indicates the azure cloud type of the service principle auth. Allowed values are AzurePublic, AzureChina, AzureUsGovernment, AzureGermany. Default value is the data factory regions’ cloud type. Type: string (or Expression with resultType string)."
         },
+        "alwaysEncryptedSettings": {
+          "$ref": "#/definitions/SqlAlwaysEncryptedProperties",
+          "description": "Sql always encrypted properties."
+        },
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        },
+        "credential": {
+          "$ref": "../artifacts.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       },
       "required": [
@@ -430,13 +473,55 @@
           "type": "object",
           "description": "Indicates the azure cloud type of the service principle auth. Allowed values are AzurePublic, AzureChina, AzureUsGovernment, AzureGermany. Default value is the data factory regions’ cloud type. Type: string (or Expression with resultType string)."
         },
+        "alwaysEncryptedSettings": {
+          "$ref": "#/definitions/SqlAlwaysEncryptedProperties",
+          "description": "Sql always encrypted properties."
+        },
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        },
+        "credential": {
+          "$ref": "../artifacts.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       },
       "required": [
         "connectionString"
+      ]
+    },
+    "SqlAlwaysEncryptedProperties": {
+      "description": "Sql always encrypted properties.",
+      "type": "object",
+      "properties": {
+        "alwaysEncryptedAkvAuthType": {
+          "x-ms-enum": {
+            "name": "SqlAlwaysEncryptedAkvAuthType",
+            "modelAsString": true
+          },
+          "enum": [
+            "ServicePrincipal",
+            "ManagedIdentity",
+            "UserAssignedManagedIdentity"
+          ],
+          "type": "string",
+          "description": "Sql always encrypted AKV authentication type. Type: string."
+        },
+        "servicePrincipalId": {
+          "type": "object",
+          "description": "The client ID of the application in Azure Active Directory used for Azure Key Vault authentication. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalKey": {
+          "$ref": "../artifacts.json#/definitions/SecretBase",
+          "description": "The key of the service principal used to authenticate against Azure Key Vault."
+        },
+        "credential": {
+          "$ref": "../artifacts.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
+        }
+      },
+      "required": [
+        "alwaysEncryptedAkvAuthType"
       ]
     },
     "AzureBatchLinkedService": {
@@ -486,6 +571,10 @@
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        },
+        "credential": {
+          "$ref": "../artifacts.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       },
       "required": [
@@ -522,6 +611,10 @@
         "baseUrl": {
           "type": "object",
           "description": "The base URL of the Azure Key Vault. e.g. https://myakv.vault.azure.net Type: string (or Expression with resultType string)."
+        },
+        "credential": {
+          "$ref": "../artifacts.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       },
       "required": [
@@ -571,6 +664,10 @@
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        },
+        "credential": {
+          "$ref": "../artifacts.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       }
     },
@@ -645,6 +742,10 @@
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        },
+        "credential": {
+          "$ref": "../artifacts.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       },
       "required": [
@@ -1515,6 +1616,10 @@
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        },
+        "authentication": {
+          "type": "object",
+          "description": "Type of authentication (Required to specify MSI) used to connect to AzureML. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
@@ -1557,6 +1662,10 @@
         "mlWorkspaceName": {
           "type": "object",
           "description": "Azure ML Service workspace name. Type: string (or Expression with resultType string)."
+        },
+        "authentication": {
+          "type": "object",
+          "description": "Type of authentication (Required to specify MSI) used to connect to AzureML. Type: string (or Expression with resultType string)."
         },
         "servicePrincipalId": {
           "type": "object",
@@ -2156,6 +2265,10 @@
         "database": {
           "type": "object",
           "description": "The name of the MongoDB Atlas database that you want to access. Type: string (or Expression with resultType string)."
+        },
+        "driverVersion": {
+          "type": "object",
+          "description": "The driver version that you want to choose. Allowed value are v1 and v2. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
@@ -2298,6 +2411,10 @@
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        },
+        "credential": {
+          "$ref": "../artifacts.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       },
       "required": [
@@ -2363,11 +2480,20 @@
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        },
+        "sasUri": {
+          "description": "SAS URI of the Azure Data Lake Storage Gen2 service. Type: string, SecureString or AzureKeyVaultSecretReference.",
+          "type": "object"
+        },
+        "sasToken": {
+          "$ref": "../artifacts.json#/definitions/SecretBase",
+          "description": "The Azure key vault secret reference of sasToken in sas uri."
+        },
+        "credential": {
+          "$ref": "../artifacts.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
-      },
-      "required": [
-        "url"
-      ]
+      }
     },
     "Office365LinkedService": {
       "x-ms-discriminator-value": "Office365",
@@ -2843,6 +2969,10 @@
           "description": "The password used in Basic authentication type.",
           "$ref": "../artifacts.json#/definitions/SecretBase"
         },
+        "authHeaders": {
+          "type": "object",
+          "description": "The additional HTTP headers in the request to RESTful API used for authorization. Type: object (or Expression with resultType object)."
+        },
         "servicePrincipalId": {
           "description": "The application's client ID used in AadServicePrincipal authentication type.",
           "type": "object"
@@ -2866,6 +2996,10 @@
         "encryptedCredential": {
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
+        },
+        "credential": {
+          "$ref": "../artifacts.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         },
         "clientId": {
           "type": "object",
@@ -5858,6 +5992,10 @@
         "subnetName": {
           "type": "object",
           "description": "The ARM resource ID for the subnet in the vNet. If virtualNetworkId was specified, then this property is required. Type: string (or Expression with resultType string)."
+        },
+        "credential": {
+          "$ref": "../artifacts.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       },
       "required": [
@@ -6079,6 +6217,10 @@
         "policyId": {
           "type": "object",
           "description": "The policy id for limiting the ability to configure clusters based on a user defined set of rules. Type: string (or Expression with resultType string)."
+        },
+        "credential": {
+          "$ref": "../artifacts.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       },
       "required": [
@@ -6124,6 +6266,10 @@
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        },
+        "credential": {
+          "$ref": "../artifacts.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       },
       "required": [
@@ -6520,6 +6666,10 @@
         "tenant": {
           "type": "object",
           "description": "The name or ID of the tenant to which the service principal belongs. Type: string (or Expression with resultType string)."
+        },
+        "credential": {
+          "$ref": "../artifacts.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       },
       "required": [
@@ -6562,6 +6712,18 @@
         "encryptedCredential": {
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
+        },
+        "credential": {
+          "$ref": "../artifacts.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
+        },
+        "resourceId": {
+          "description": "Allowed token audiences for azure function.",
+          "type": "object"
+        },
+        "authentication": {
+          "type": "object",
+          "description": "Type of authentication (Required to specify MSI) used to connect to AzureFunction. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
@@ -6692,10 +6854,52 @@
         "authentication": {
           "type": "object",
           "description": "Required to specify MSI, if using system assigned managed identity as authentication method. Type: string (or Expression with resultType string)."
+        },
+        "workspaceResourceId": {
+          "type": "object",
+          "description": "The resource ID of the Synapse workspace. The format should be: /subscriptions/{subscriptionID}/resourceGroups/{resourceGroup}/providers/Microsoft.Synapse/workspaces/{workspaceName}. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
         "endpoint"
+      ]
+    },
+    "PowerBIWorkspaceLinkedService": {
+      "x-ms-discriminator-value": "PowerBIWorkspace",
+      "description": "Power BI Workspace linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Power BI Workspace linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PowerBIWorkspaceLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "PowerBIWorkspaceLinkedServiceTypeProperties": {
+      "description": "Power BI Workspace linked service properties.",
+      "type": "object",
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "description": "The Power BI workspace id."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant id to which the Power BI workspace belongs."
+        }
+      },
+      "required": [
+        "workspaceId",
+        "tenantId"
       ]
     }
   }

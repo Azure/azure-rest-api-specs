@@ -892,7 +892,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **Description**: Long running operation must return location header or azure-AsyncOperation header in response when this operation is annotated with x-ms-long-running-operation:true.
 
-**How to fix the violation**: Adding one of these headers to the response in example or in traffic payload.
+**How to fix the violation**: Adding one of these headers to the response in example or in traffic payload. Refer to this [example](https://github.com/Azure/azure-rest-api-specs/blob/5e638554b6/specification/appplatform/resource-manager/Microsoft.AppPlatform/stable/2020-07-01/examples/Apps_Update.json#L64) for the fix.
 
 ### <a name="MISSING_RESOURCE_ID" />MISSING_RESOURCE_ID
 

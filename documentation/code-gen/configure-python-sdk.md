@@ -106,13 +106,6 @@ A typical readme.python.md is like this:
 
 These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(python)
 azure-arm: true
@@ -127,15 +120,17 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/[[ServiceName]]/azure-mgmt-[[ServiceName]]/azure/mgmt/[[ServiceName]]
 ```
+~~~
 
-## Multi-API
-Multi-API SDK is a package that support multiple REST api-versions. With Python multi-api SDK, the end user can assign api-version for REST calls explicitly; nevertheless, they can also use the default api-version which is choosed as the latest stable api-version.
+## Multi-API (not necessary)
+Multi-API SDK is a package that support multiple REST api-versions. With Python multi-api SDK, the end user can assign api-version for REST calls explicitly; nevertheless, they can also use the default api-version which is chose as the latest stable api-version.
 
 If a multi-api package is need to be released, 'batch' should be used in the readme.python.md.
-Typical multi-api RPs are azure-mgmt-compute, azure-mgmt-network, azure-mgmt-storage, you cam find their readme files to have a reference for multi-api.
+Typical multi-api RPs are azure-mgmt-compute, azure-mgmt-network, azure-mgmt-storage, you can find their readme files to have a reference for multi-api.
 
 ### batch
 The batch is a tag list which are used in the multi-api package. For example:
+
 ~~~
 // file: readme.python.md
 
@@ -178,11 +173,6 @@ output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compu
 ## Run codegen
 After configure all the readme files, autorest can be used to generate SDK.
 
-
-### Track2 (for latest Autorest)
-Track 2 is based on the latest AutoRest code generator
-
-~~~
-> autorest --reset
-> autorest --python --track2 --use=@autorest/python@5.4.1 --python-sdks-folder=..\azure-sdk-for-python\sdk --multiapi --python-mode=update  ..\azure-rest-api-specs\specification\appconfiguration\resource-manager\readme.md
-~~~
+```
+autorest --use=@autorest/python@latest --python --python-sdk-folder=/path/to/azure-sdk-for-python /path/to/azure-rest-api-specs/specification/agrifood/resource-manager/readme.md --version-tolerant=false
+```

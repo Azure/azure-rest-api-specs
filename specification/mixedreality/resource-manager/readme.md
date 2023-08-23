@@ -161,7 +161,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
@@ -187,7 +187,7 @@ csharp:
 
 ## Python
 
-See configuration in [readme.pyhton.md](./readme.python.md)
+See configuration in [readme.Python.md](./readme.python.md)
 
 ## Go
 

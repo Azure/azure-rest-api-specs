@@ -6,6 +6,7 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 
 ``` yaml $(python)
 azure-arm: true
+title: QuotaMgmtClient
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.quota
 package-name: azure-mgmt-quota

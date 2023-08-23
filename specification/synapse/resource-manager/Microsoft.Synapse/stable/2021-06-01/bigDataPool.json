@@ -253,13 +253,13 @@
         "responses": {
           "200": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/BigDataPoolResourceInfo"
             },
             "description": "OK"
           },
           "202": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/BigDataPoolResourceInfo"
             },
             "description": ""
           },
@@ -420,7 +420,11 @@
         "isAutotuneEnabled": {
           "type": "boolean",
           "title": "Enable Autotune",
-          "description": "Whether autotune is required or not."
+          "description": "Whether autotune is required or not.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "sessionLevelPackagesEnabled": {
           "type": "boolean",
@@ -429,7 +433,8 @@
         "cacheSize": {
           "type": "integer",
           "format": "int32",
-          "description": "The cache size"
+          "description": "The cache size",
+          "readOnly": true
         },
         "dynamicExecutorAllocation": {
           "$ref": "#/definitions/DynamicExecutorAllocation",
@@ -437,12 +442,21 @@
         },
         "sparkEventsFolder": {
           "type": "string",
-          "description": "The Spark events folder"
+          "description": "The Spark events folder",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
         },
         "nodeCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of nodes in the Big Data pool."
+          "description": "The number of nodes in the Big Data pool.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "libraryRequirements": {
           "$ref": "#/definitions/LibraryRequirements",
@@ -453,7 +467,8 @@
           "type": "array",
           "items": {
             "$ref": "../../../../common/v1/types.json#/definitions/LibraryInfo"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "sparkConfigProperties": {
           "$ref": "#/definitions/SparkConfigProperties",
@@ -514,7 +529,11 @@
         "minNodeCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The minimum number of nodes the Big Data pool can support."
+          "description": "The minimum number of nodes the Big Data pool can support.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "enabled": {
           "type": "boolean",
@@ -523,7 +542,11 @@
         "maxNodeCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of nodes the Big Data pool can support."
+          "description": "The maximum number of nodes the Big Data pool can support.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
     },
@@ -613,7 +636,11 @@
           "x-ms-enum": {
             "name": "ConfigurationType",
             "modelAsString": true
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
     }

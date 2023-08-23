@@ -1,0 +1,80 @@
+{
+  "parameters": {
+    "moveCollectionName": "movecollection1",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "moveResourceName": "moveresourcename1",
+    "api-version": "2022-08-01",
+    "body": {
+      "properties": {
+        "sourceId": "/subscriptions/subid/resourceGroups/eastusRG/providers/Microsoft.Compute/virtualMachines/eastusvm1",
+        "dependsOnOverrides": [
+          {
+            "id": "/subscriptions/c4488a3f-a7f7-4ad4-aa72-0e1f4d9c0756/resourceGroups/eastusRG/providers/Microsoft.Network/networkInterfaces/eastusvm140",
+            "targetId": "/subscriptions/c4488a3f-a7f7-4ad4-aa72-0e1f4d9c0756/resourceGroups/westusRG/providers/Microsoft.Network/networkInterfaces/eastusvm140"
+          }
+        ],
+        "resourceSettings": {
+          "resourceType": "Microsoft.Compute/virtualMachines",
+          "targetResourceName": "westusvm1",
+          "targetAvailabilityZone": "2",
+          "targetVmSize": null,
+          "targetAvailabilitySetId": "/subscriptions/subid/resourceGroups/eastusRG/providers/Microsoft.Compute/availabilitySets/avset1",
+          "userManagedIdentities": [
+            "/subscriptions/subid/resourceGroups/eastusRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/umi1"
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "moveresourcename1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Migrate/MoveCollections/movecollection1/MoveResources/moveresource1",
+        "type": "Microsoft.Migrate/MoveCollections/MoveResources",
+        "properties": {
+          "sourceId": "/subscriptions/subid/resourceGroups/eastusRG/providers/Microsoft.Compute/virtualMachines/eastusvm1",
+          "dependsOn": [
+            {
+              "id": "/subscriptions/c4488a3f-a7f7-4ad4-aa72-0e1f4d9c0756/resourceGroups/eastusRG/providers/Microsoft.Network/networkInterfaces/eastusvm140",
+              "resolutionType": "Automatic",
+              "resolutionStatus": "Unresolved"
+            }
+          ],
+          "dependsOnOverrides": [
+            {
+              "id": "/subscriptions/c4488a3f-a7f7-4ad4-aa72-0e1f4d9c0756/resourceGroups/eastusRG/providers/Microsoft.Network/networkInterfaces/eastusvm140",
+              "targetId": "/subscriptions/c4488a3f-a7f7-4ad4-aa72-0e1f4d9c0756/resourceGroups/westusRG/providers/Microsoft.Network/networkInterfaces/eastusvm140"
+            }
+          ],
+          "resourceSettings": {
+            "resourceType": "Microsoft.Compute/virtualMachines",
+            "targetResourceName": "westusvm1",
+            "targetResourceGroupName": "rg1",
+            "targetAvailabilityZone": "2",
+            "targetVmSize": null,
+            "targetAvailabilitySetId": "/subscriptions/subid/resourceGroups/eastusRG/providers/Microsoft.Compute/availabilitySets/avset1",
+            "userManagedIdentities": [
+              "/subscriptions/subid/resourceGroups/eastusRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/umi1"
+            ]
+          },
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "user@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2021-08-01T15:06:54.2757906Z",
+          "lastModifiedBy": "user@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-27T17:16:24.3644126Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://some.endpoint.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Migrate/MoveCollections/movecollection1/MoveResources/moveresource1?api-version=2022-11-01"
+      }
+    }
+  }
+}

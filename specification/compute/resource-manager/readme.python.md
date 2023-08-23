@@ -8,6 +8,8 @@ license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-compute
 no-namespace-folders: true
 package-version: 1.0.0b1
+combine-operation-files: true
+only-path-and-body-params-positional: true
 modelerfour:
   lenient-model-deduplication: true
 
@@ -35,9 +37,18 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python)
 multiapi: true
+default-api-version: "2023-07-01"
 clear-output-folder: true
 batch:
+  - tag: package-2023-07-01-only
+  - tag: package-2023-03-01-only
+  - tag: package-2023-01-02-only
+  - tag: package-2022-11-01-only
+  - tag: package-2022-09-04-only
+  - tag: package-2022-08-01-only
+  - tag: package-2022-07-02-only
   - tag: package-2022-04-04-only
+  - tag: package-2022-03-03-only
   - tag: package-2022-03-02-only
   - tag: package-2022-03-01-only
   - tag: package-2022-01-03-only
@@ -75,6 +86,77 @@ batch:
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/
 perform-load: false
+clear-output-folder: false
+```
+
+### Tag: package-2023-07-01-only
+
+These settings apply only when `--tag=package-2023-07-01-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2023-07-01-only'
+namespace: azure.mgmt.compute.v2023_07_01
+output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/v2023_07_01
+```
+
+### Tag: package-2023-03-01-only
+
+These settings apply only when `--tag=package-2023-03-01-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2023-03-01-only'
+namespace: azure.mgmt.compute.v2023_03_01
+output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/v2023_03_01
+```
+
+### Tag: package-2023-01-02-only
+
+These settings apply only when `--tag=package-2023-01-02-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2023-01-02-only'
+namespace: azure.mgmt.compute.v2023_01_02
+output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/v2023_01_02
+```
+
+### Tag: package-2022-11-01-only
+
+These settings apply only when `--tag=package-2022-11-01-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2022-11-01-only'
+namespace: azure.mgmt.compute.v2022_11_01
+output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/v2022_11_01
+```
+
+### Tag: package-2022-09-04-only
+
+These settings apply only when `--tag=package-2022-09-04-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2022-09-04-only'
+namespace: azure.mgmt.compute.v2022_09_04
+output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/v2022_09_04
+```
+
+### Tag: package-2022-08-01-only
+
+These settings apply only when `--tag=package-2022-08-01-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2022-08-01-only'
+namespace: azure.mgmt.compute.v2022_08_01
+output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/v2022_08_01
+```
+
+### Tag: package-2022-07-02-only
+
+These settings apply only when `--tag=package-2022-07-02-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2022-07-02-only'
+namespace: azure.mgmt.compute.v2022_07_02
+output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/v2022_07_02
 ```
 
 ### Tag: package-2022-04-04-only
@@ -85,6 +167,16 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2022-04-04-only'
 namespace: azure.mgmt.compute.v2022_04_04
 output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/v2022_04_04
+```
+
+### Tag: package-2022-03-03-only
+
+These settings apply only when `--tag=package-2022-03-03-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2022-03-03-only'
+namespace: azure.mgmt.compute.v2022_03_03
+output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/v2022_03_03
 ```
 
 ### Tag: package-2022-03-02-only

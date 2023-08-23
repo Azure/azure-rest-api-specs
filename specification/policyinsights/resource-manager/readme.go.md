@@ -23,6 +23,8 @@ modelerfour:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2022-09
+  - tag: package-2022-04
   - tag: package-2022-03
   - tag: package-2021-10
   - tag: package-2021-01
@@ -30,6 +32,24 @@ batch:
   - tag: package-2019-10
   - tag: package-2018-07
   - tag: package-2018-04
+```
+
+### Tag: package-2022-09 and go
+
+These settings apply only when `--tag=package-2022-09 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2022-09' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2022-09-01/$(namespace)
+```
+
+### Tag: package-2022-04 and go
+
+These settings apply only when `--tag=package-2022-04 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2022-04' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2022-04-01/$(namespace)
 ```
 
 ### Tag: package-2022-03 and go

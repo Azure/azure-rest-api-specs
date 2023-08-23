@@ -8,4 +8,9 @@ module-name: sdk/resourcemanager/iotsecurity/armiotsecurity
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
+directive: 
+- from: swagger-document
+  where: $.parameters.IotDefenderLocation
+  transform: >
+    $["x-ms-parameter-location"] = "method"; 
 ```

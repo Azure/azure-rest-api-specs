@@ -26,11 +26,109 @@ These are the global settings for the Cost Management API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-05
+tag: package-2023-08
 azure-validator: false
 ```
 
 ---
+
+
+### Tag: package-2023-08
+
+These settings apply only when `--tag=package-2023-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-08'
+input-file:
+  - Microsoft.CostManagement/stable/2023-08-01/common-types.json
+  - Microsoft.CostManagement/stable/2023-08-01/costmanagement.benefits.json
+  - Microsoft.CostManagement/stable/2023-08-01/costmanagement.budgets.json
+  - Microsoft.CostManagement/stable/2023-08-01/costmanagement.exports.json
+  - Microsoft.CostManagement/stable/2023-08-01/costmanagement.generatecostdetailsreport.json
+  - Microsoft.CostManagement/stable/2023-08-01/costmanagement.generatedetailedcostreport.json
+  - Microsoft.CostManagement/stable/2023-08-01/costmanagement.json
+  - Microsoft.CostManagement/stable/2023-08-01/costmanagement.pricesheets.json
+  - Microsoft.CostManagement/stable/2023-08-01/scheduledActions.json
+  - Microsoft.CostManagement/stable/2023-08-01/costallocation.json
+  - Microsoft.CostManagement/stable/2023-08-01/settings.json
+```
+### Tag: package-2023-03
+
+These settings apply only when `--tag=package-2023-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-03'
+input-file:
+  - Microsoft.CostManagement/stable/2023-03-01/common-types.json
+  - Microsoft.CostManagement/stable/2023-03-01/costmanagement.benefits.json
+  - Microsoft.CostManagement/stable/2023-03-01/costmanagement.exports.json
+  - Microsoft.CostManagement/stable/2023-03-01/costmanagement.generatecostdetailsreport.json
+  - Microsoft.CostManagement/stable/2023-03-01/costmanagement.generatedetailedcostreport.json
+  - Microsoft.CostManagement/stable/2023-03-01/costmanagement.json
+  - Microsoft.CostManagement/stable/2023-03-01/costmanagement.pricesheets.json
+  - Microsoft.CostManagement/stable/2023-03-01/scheduledActions.json
+```
+
+### Tag: package-preview-2023-04
+
+These settings apply only when `--tag=package-preview-2023-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-04'
+input-file:
+  - Microsoft.CostManagement/preview/2023-04-01-preview/common-types.json
+  - Microsoft.CostManagement/preview/2023-04-01-preview/costmanagement.benefits.json
+  - Microsoft.CostManagement/preview/2023-04-01-preview/costmanagement.budgets.json
+  - Microsoft.CostManagement/preview/2023-04-01-preview/costmanagement.exports.json
+  - Microsoft.CostManagement/preview/2023-04-01-preview/costmanagement.generatecostdetailsreport.json
+  - Microsoft.CostManagement/preview/2023-04-01-preview/costmanagement.generatedetailedcostreport.json
+  - Microsoft.CostManagement/preview/2023-04-01-preview/costmanagement.json
+  - Microsoft.CostManagement/preview/2023-04-01-preview/costmanagement.pricesheets.json
+  - Microsoft.CostManagement/preview/2023-04-01-preview/scheduledActions.json
+```
+
+### Tag: package-2022-10
+
+These settings apply only when `--tag=package-2022-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-10'
+input-file:
+  - Microsoft.CostManagement/stable/2022-10-01/common-types.json
+  - Microsoft.CostManagement/stable/2022-10-01/costmanagement.json
+  - Microsoft.CostManagement/stable/2022-10-01/costmanagement.exports.json
+  - Microsoft.CostManagement/stable/2022-10-01/costmanagement.generatecostdetailsreport.json
+  - Microsoft.CostManagement/stable/2022-10-01/costmanagement.generatedetailedcostreport.json
+  - Microsoft.CostManagement/stable/2022-10-01/costmanagement.pricesheets.json
+  - Microsoft.CostManagement/stable/2022-10-01/scheduledActions.json
+  - Microsoft.CostManagement/stable/2022-10-01/costmanagement.benefits.json
+```
+
+### Tag: package-preview-2022-10-05
+
+These settings apply only when `--tag=package-preview-2022-10-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-10-05'
+input-file:
+  - Microsoft.CostManagement/preview/2022-10-05-preview/costmanagement.json
+  - Microsoft.CostManagement/preview/2022-10-05-preview/settings.json
+  - Microsoft.CostManagement/preview/2022-10-05-preview/markup.json
+```
+
+### Tag: package-preview-2022-10
+
+These settings apply only when `--tag=package-preview-2022-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-10'
+input-file:
+  - Microsoft.CostManagement/preview/2022-10-01-preview/costmanagement.json
+  - Microsoft.CostManagement/preview/2022-10-01-preview/settings.json
+```
+
+### Tag: package-preview-2022-08
+
+These settings apply only when `--tag=package-preview-2022-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-08'
+input-file:
+  - Microsoft.CostManagement/preview/2022-08-01-preview/costmanagement.json
+```
 
 ### Tag: package-2022-05
 
@@ -59,7 +157,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2022-06` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-06'
+``` yaml $(tag) == 'package-preview-2022-06'
 input-file:
   - Microsoft.CostManagement/preview/2022-06-01-preview/scheduledActions.json
   - Microsoft.CostManagement/stable/2021-10-01/costmanagement.json
@@ -81,7 +179,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2022-02` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-02'
+``` yaml $(tag) == 'package-preview-2022-02'
 input-file:
   - Microsoft.CostManagement/preview/2022-02-01-preview/costmanagement.pricesheets.json
 ```
@@ -209,7 +307,13 @@ input-file:
 directive:
   - suppress: R4011
     from: costmanagement.exports.json
-    reason: 'API change needed, The delete operation is defined without a 200 or 204 error response implementation,please add it'  
+    reason: 'API change needed, The delete operation is defined without a 200 or 204 error response implementation,please add it'
+  - suppress: TrackedResourcePatchOperation
+    from: costmanagement.exports.json
+    reason: False alarm, Export is a proxy resource
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    from: costmanagement.exports.json
+    reason: False alarm, Export is a proxy resource  
   - suppress: R3023
     from: costmanagement.generatedetailedcostreport.json    
     reason: 'API change needed, Operations API must be implemented for operations'
@@ -289,6 +393,58 @@ directive:
     from: costmanagement.json
     where: $.definitions.ViewProperties.properties.accumulated
     reason: 'false alarm ' 
+  - suppress: DeleteOperationResponses
+    from: costmanagement.budgets.json
+    reason: 'Consistent with delete api from other versions, modifying it will be a breaking change'
+  - suppress: TopLevelResourcesListBySubscription
+    from: costmanagement.budgets.json
+    reason: 'List by subscription is included in the Budgets_List operation with the scope path parameter'
+  - suppress: NoDuplicatePathsForScopeParameter
+    from: costmanagement.budgets.json
+    reason: 'Budgets_Get does not use an explicitly defined scope'
+  - suppress: ResourceMustReferenceCommonTypes
+    from: costmanagement.budgets.json
+    reason: 'Budget references CostManagementProxyResource, which references the common type ProxyResource'
+  - suppress: GetCollectionResponseSchema
+    from: common-types.json
+    reason: 'Operations does not contain a path for individual GET'
+  - suppress: TopLevelResourcesListBySubscription
+    from: costallocation.json
+    reason: 'List by subscription is not supported in cost allocation by desgin'
+  - suppress: PathForResourceAction
+    from: costallocation.json
+    reason: 'This is not a valid scenario for the checkNameAvailability API as the name itself represents an action.'
+  - suppress: PathForPutOperation
+    from: costallocation.json
+    reason: 'Subscripiton and ResourceGroup scope is not supported in cost allocation by desgin'
+  - suppress: RequiredReadOnlySystemData
+    from: costallocation.json
+    reason: 'cost allocation does not return system data and will consider adding it in the future or upcoming api version'
+  - suppress: EnumInsteadOfBoolean
+    from: costallocation.json
+    reason: 'Keeping it as boolean property as per the design'
+  - suppress: NoDuplicatePathsForScopeParameter
+    from: settings.json
+    reason: 'Settings does not use scope for List API'
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: settings.json
+    reason: 'Settings List designed to deliver very limited records'
+  - suppress: PageableOperation
+    from: settings.json
+    reason: 'Settings List designed to deliver very limited records'
+  - suppress: TopLevelResourcesListBySubscription
+    from: settings.json
+    reason: 'List by subscription is not supported in settings by desgin'
+  - suppress: EnumInsteadOfBoolean
+    from: settings.json
+    reason: 'Keeping it as boolean property as per the design'
+  - suppress: ParameterNotUsingCommonTypes
+    from: settings.json
+    reason: 'Settings does not support all the scopes to use it from common types, hence we have defined exclusively with custom description.'
+  - suppress: RequiredReadOnlySystemData
+    from: settings.json
+    reason: 'Settings does not return system data and will consider adding it in the future or upcoming api version'
+        
 ```
 
 ### Tag: package-2018-08-preview
@@ -329,7 +485,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-node

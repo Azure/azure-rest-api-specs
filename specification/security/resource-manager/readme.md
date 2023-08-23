@@ -85,11 +85,120 @@ tag: package-composite-v3
 
 The following packages may be composed from multiple api-versions.
 
+
+### Tag: package-preview-2023-09
+
+These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-09'
+input-file:
+  - Microsoft.Security/preview/2023-09-01-preview/securityConnectorsDevOps.json
+suppressions:
+  - code: LroLocationHeader
+    from: securityConnectorsDevOps.json
+    reason: False positive. Per ResourceProvider specification SecurityConnectors DevOps uses Azure-AsyncOperation header instead of Location header
+  - code: ResourceNameRestriction
+    from: securityConnectorsDevOps.json
+    reason: SecurityConnectors DevOps collects data from thirdparty providers which do not always specify name patterns
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: securityConnectorsDevOps.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default"].get.responses["200"].schema.properties
+    reason: False positive. This check flags the the API which doesn't actually return collection but a singleton.
+```
+
+### Tag: package-preview-2023-05
+
+These settings apply only when `--tag=package-preview-2023-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-05'
+input-file:
+  - Microsoft.Security/preview/2023-05-01-preview/healthReports.json
+```
+### Tag: package-preview-2023-03-only
+
+These settings apply only when `--tag=package-preview-2023-03-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-03-only'
+input-file:
+  - Microsoft.Security/preview/2023-03-01-preview/securityConnectors.json
+```
+
+### Tag: package-preview-2023-01-only
+
+These settings apply only when `--tag=package-preview-2023-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-01-only'
+input-file:
+  - Microsoft.Security/preview/2023-01-01-preview/securityOperators.json
+```
+
+### Tag: package-preview-2023-03
+
+These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-03'
+input-file:
+  - Microsoft.Security/preview/2023-03-01-preview/securityConnectors.json
+  - Microsoft.Security/preview/2023-01-01-preview/securityOperators.json
+```
+
+### Tag: package-preview-2023-02-only
+
+These settings apply only when `--tag=package-preview-2023-02-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-02-only'
+input-file:
+  - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
+  - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
+  - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
+```
+
+### Tag: package-preview-2023-02
+
+These settings apply only when `--tag=package-preview-2023-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-02'
+input-file:
+  - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
+  - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
+  - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
+  - Microsoft.Security/preview/2023-02-01-preview/healthReports.json
+  - Microsoft.Security/preview/2023-02-15-preview/sensitivitySettings.json
+```
+### Tag: package-preview-2022-12
+
+These settings apply only when `--tag=package-preview-2022-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-12'
+input-file:
+  - Microsoft.Security/preview/2022-12-01-preview/defenderForStorageSettings.json
+```
+
+
+### Tag: package-preview-2022-11
+
+These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-11'
+input-file:
+  - Microsoft.Security/preview/2022-11-20-preview/apiCollections.json
+```
+
+### Tag: package-preview-2022-08
+
+These settings apply only when `--tag=package-preview-2022-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-08'
+input-file:
+  - Microsoft.Security/preview/2022-08-01-preview/securityConnectors.json
+```
+
 ### Tag: package-preview-2022-07
 
 These settings apply only when `--tag=package-preview-2022-07` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-07'
+``` yaml $(tag) == 'package-preview-2022-07'
 input-file:
   - Microsoft.Security/preview/2022-07-01-preview/applications.json
 ```
@@ -107,7 +216,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2022-05-only` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-05'
+``` yaml $(tag) == 'package-preview-2022-05'
 input-file:
   - Microsoft.Security/preview/2022-05-01-preview/securityConnectors.json
 ```
@@ -128,6 +237,15 @@ These settings apply only when `--tag=package-2022-03` is specified on the comma
 ``` yaml $(tag) == 'package-2022-03'
 input-file:
   - Microsoft.Security/stable/2022-03-01/pricings.json
+```
+
+### Tag: package-2023-01
+
+These settings apply only when `--tag=package-2023-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-01'
+input-file:
+  - Microsoft.Security/stable/2023-01-01/pricings.json
 ```
 
 ### Tag: package-preview-2021-12
@@ -159,7 +277,7 @@ These settings apply only when `--tag=package-composite-v1` is specified on the 
 
 ``` yaml $(tag) == 'package-composite-v1'
 input-file:
-- Microsoft.Security/preview/2022-05-01-preview/securityConnectors.json
+- Microsoft.Security/preview/2022-08-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2021-10-01-preview/mdeOnboardings.json
 - Microsoft.Security/preview/2021-07-01-preview/customAssessmentAutomation.json
 - Microsoft.Security/preview/2021-07-01-preview/customEntityStoreAssignment.json
@@ -169,11 +287,11 @@ input-file:
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
 - Microsoft.Security/preview/2020-01-01-preview/secureScore.json
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
+- Microsoft.Security/preview/2020-01-01-preview/securityContacts.json
 - Microsoft.Security/preview/2019-01-01-preview/automations.json
 - Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
 - Microsoft.Security/preview/2017-08-01-preview/pricings.json
-- Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
 - Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
 - Microsoft.Security/preview/2017-08-01-preview/autoProvisioningSettings.json
 - Microsoft.Security/preview/2017-08-01-preview/compliances.json
@@ -206,7 +324,7 @@ These settings apply only when `--tag=package-composite-v2` is specified on the 
 
 ``` yaml $(tag) == 'package-composite-v2'
 input-file:
-- Microsoft.Security/preview/2022-05-01-preview/securityConnectors.json
+- Microsoft.Security/preview/2022-08-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2021-10-01-preview/mdeOnboardings.json
 - Microsoft.Security/preview/2021-07-01-preview/customAssessmentAutomation.json
 - Microsoft.Security/preview/2021-07-01-preview/customEntityStoreAssignment.json
@@ -216,11 +334,11 @@ input-file:
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
 - Microsoft.Security/preview/2020-01-01-preview/secureScore.json
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
+- Microsoft.Security/preview/2020-01-01-preview/securityContacts.json
 - Microsoft.Security/preview/2019-01-01-preview/automations.json
 - Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
 - Microsoft.Security/stable/2018-06-01/pricings.json
-- Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
 - Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
 - Microsoft.Security/preview/2017-08-01-preview/autoProvisioningSettings.json
 - Microsoft.Security/preview/2017-08-01-preview/compliances.json
@@ -259,7 +377,7 @@ input-file:
 - Microsoft.Security/preview/2021-07-01-preview/customAssessmentAutomation.json
 - Microsoft.Security/preview/2021-07-01-preview/customEntityStoreAssignment.json
 - Microsoft.Security/stable/2017-08-01/complianceResults.json
-- Microsoft.Security/stable/2022-03-01/pricings.json
+- Microsoft.Security/stable/2023-01-01/pricings.json
 - Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
 - Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
@@ -270,7 +388,7 @@ input-file:
 - Microsoft.Security/preview/2017-08-01-preview/autoProvisioningSettings.json
 - Microsoft.Security/preview/2017-08-01-preview/compliances.json
 - Microsoft.Security/preview/2017-08-01-preview/informationProtectionPolicies.json
-- Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
+- Microsoft.Security/preview/2020-01-01-preview/securityContacts.json
 - Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
 - Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
@@ -290,17 +408,96 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/secureScore.json
 - Microsoft.Security/stable/2020-01-01/SecuritySolutions.json
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
-- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
-- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
-- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
+- Microsoft.Security/preview/2023-02-15-preview/sensitivitySettings.json
 - Microsoft.Security/stable/2022-01-01/alerts.json
 - Microsoft.Security/stable/2022-05-01/settings.json
 - Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
-- Microsoft.Security/preview/2022-05-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2022-01-01-preview/governanceRules.json
 - Microsoft.Security/preview/2022-01-01-preview/governanceAssignments.json
 - Microsoft.Security/preview/2022-07-01-preview/applications.json
+- Microsoft.Security/preview/2022-11-20-preview/apiCollections.json
+- Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
+- Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
+- Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
+- Microsoft.Security/preview/2023-03-01-preview/securityConnectors.json
+- Microsoft.Security/preview/2023-01-01-preview/securityOperators.json
+- Microsoft.Security/stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
+- Microsoft.Security/preview/2023-05-01-preview/healthReports.json
+- Microsoft.Security/preview/2022-12-01-preview/defenderForStorageSettings.json
+- Microsoft.Security/preview/2023-09-01-preview/securityConnectorsDevOps.json
+
+# Autorest suppressions
+suppressions:
+  - code: LroLocationHeader
+    from: securityConnectorsDevOps.json
+    reason: False positive. Per ResourceProvider specification SecurityConnectors DevOps uses Azure-AsyncOperation header instead of Location header
+  - code: ResourceNameRestriction
+    from: securityConnectorsDevOps.json
+    reason: SecurityConnectors DevOps collects data from thirdparty providers which do not always specify name patterns
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: securityConnectorsDevOps.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default"].get.responses["200"].schema.properties
+    reason: False positive. This check flags the the API which doesn't actually return collection but a singleton.
+
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
+### Tag: package-dotnet-sdk
+
+These settings apply only when `--tag=package-dotnet-sdk` is specified on the command line.
+
+``` yaml $(tag) == 'package-dotnet-sdk'
+input-file:
+- Microsoft.Security/preview/2021-10-01-preview/mdeOnboardings.json
+- Microsoft.Security/preview/2021-07-01-preview/customAssessmentAutomation.json
+- Microsoft.Security/preview/2021-07-01-preview/customEntityStoreAssignment.json
+- Microsoft.Security/stable/2017-08-01/complianceResults.json
+- Microsoft.Security/stable/2022-03-01/pricings.json
+- Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
+- Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
+- Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
+- Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
+- Microsoft.Security/preview/2015-06-01-preview/locations.json
+- Microsoft.Security/preview/2015-06-01-preview/operations.json
+- Microsoft.Security/preview/2015-06-01-preview/tasks.json
+- Microsoft.Security/preview/2017-08-01-preview/autoProvisioningSettings.json
+- Microsoft.Security/preview/2017-08-01-preview/compliances.json
+- Microsoft.Security/preview/2017-08-01-preview/informationProtectionPolicies.json
+- Microsoft.Security/preview/2020-01-01-preview/securityContacts.json
+- Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
+- Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
+- Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
+- Microsoft.Security/preview/2019-01-01-preview/automations.json
+- Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
+- Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json
+- Microsoft.Security/stable/2021-06-01/assessmentMetadata.json
+- Microsoft.Security/stable/2021-06-01/assessments.json
+- Microsoft.Security/stable/2020-01-01/applicationWhitelistings.json
+- Microsoft.Security/stable/2020-01-01/adaptiveNetworkHardenings.json
+- Microsoft.Security/stable/2020-01-01/allowedConnections.json
+- Microsoft.Security/stable/2020-01-01/topologies.json
+- Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
+- Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
+- Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
+- Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
+- Microsoft.Security/stable/2020-01-01/secureScore.json
+- Microsoft.Security/stable/2020-01-01/SecuritySolutions.json
+- Microsoft.Security/preview/2020-01-01-preview/connectors.json
+- Microsoft.Security/stable/2022-01-01/alerts.json
+- Microsoft.Security/stable/2022-05-01/settings.json
+- Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
+- Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
+- Microsoft.Security/preview/2022-08-01-preview/securityConnectors.json
+- Microsoft.Security/preview/2022-01-01-preview/governanceRules.json
+- Microsoft.Security/preview/2022-01-01-preview/governanceAssignments.json
+- Microsoft.Security/preview/2022-07-01-preview/applications.json
+- Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
+- Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
+- Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
 
 # Needed when there is more than one input file
 override-info:
@@ -497,7 +694,6 @@ override-info:
   title: SecurityCenter
 ```
 
-
 ### Tag: package-2019-08-python-only
 
 These settings apply only when `--tag=package-2019-08-python-only` is specified on the command line. This tag is used for Ruby SDK.
@@ -538,6 +734,7 @@ These settings apply only when `--tag=package-2020-01-preview-only` is specified
 ``` yaml $(tag) == 'package-2020-01-preview-only'
 input-file:
 - Microsoft.Security/preview/2020-01-01-preview/secureScore.json
+- Microsoft.Security/preview/2020-01-01-preview/securityContacts.json
 
 # Needed when there is more than one input file
 override-info:
@@ -671,7 +868,7 @@ input-file:
 override-info:
   title: SecurityCenter
 
-``` 
+```
 
 ### Tag: package-2021-06-only
 
@@ -713,16 +910,18 @@ override-info:
 ```
 
 ### Tag: package-preview-2022-01
+
 These settings apply only when `--tag=package-2022-01-preview-only` is specified on the command line.
-```yaml $(tag) == 'package-2022-01-preview-only'
+
+``` yaml $(tag) == 'package-2022-01-preview-only'
 input-file:
   - Microsoft.Security/preview/2022-01-01-preview/governanceRules.json
-  - Microsoft.Security/preview/2022-01-01-preview/governanceAssignments.json  
+  - Microsoft.Security/preview/2022-01-01-preview/governanceAssignments.json
 
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
-``` 
+```
 
 ### Tag: package-2022-01-only
 
@@ -737,6 +936,15 @@ override-info:
   title: SecurityCenter
 ```
 
+### Tag: package-2023-05
+
+These settings apply only when `--tag=package-2023-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-05'
+input-file:
+  - Microsoft.Security/stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
+```
+
 ---
 
 # Code Generation
@@ -748,7 +956,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js

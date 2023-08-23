@@ -1676,6 +1676,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK -- Update the private endpoint connection properties successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
           "201": {
             "description": "OK -- Update the private endpoint connection properties successfully.",
             "schema": {
@@ -1898,7 +1904,7 @@
             },
             "rdb-backup-frequency": {
               "type": "string",
-              "description": "Specifies the frequency for creating rdb backup"
+              "description": "Specifies the frequency for creating rdb backup in minutes. Valid values: (15, 30, 60, 360, 720, 1440)"
             },
             "rdb-backup-max-snapshot-count": {
               "type": "string",
@@ -2808,8 +2814,7 @@
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
         }
-      ],
-      "x-ms-external": true
+      ]
     }
   },
   "parameters": {

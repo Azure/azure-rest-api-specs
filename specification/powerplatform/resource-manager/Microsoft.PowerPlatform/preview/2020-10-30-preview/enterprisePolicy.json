@@ -496,6 +496,10 @@
               "description": "Network injection configuration"
             }
           }
+        },
+        "healthStatus": {
+          "description": "The health status of the resource.",
+          "$ref": "#/definitions/HealthStatus"
         }
       }
     },
@@ -551,7 +555,8 @@
         "Lockbox",
         "PrivateEndpoint",
         "Encryption",
-        "NetworkInjection"
+        "NetworkInjection",
+        "Identity"
       ]
     },
     "KeyVaultProperties": {
@@ -638,6 +643,20 @@
         }
       },
       "description": "The response of the list EnterprisePolicy operation."
+    },
+    "HealthStatus": {
+      "type": "string",
+      "description": "The health status of the resource.",
+      "x-ms-enum": {
+        "name": "HealthStatus",
+        "modelAsString": true
+      },
+      "enum": [
+        "Undetermined",
+        "Healthy",
+        "Warning",
+        "Unhealthy"
+      ]
     }
   },
   "parameters": {}
