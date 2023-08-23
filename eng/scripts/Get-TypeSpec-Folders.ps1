@@ -9,7 +9,7 @@ param (
 )
 
 $changedFiles = @()
-$allChangedFiles = (Get-ChildItem -path ./specification tspconfig.yaml -Recurse).Directory.FullName | ForEach-Object {[IO.Path]::GetRelativePath($($pwd.path), $_)}
+$allChangedFiles = (Get-ChildItem -path ./specification tspconfig.* -Recurse).Directory.FullName | ForEach-Object {[IO.Path]::GetRelativePath($($pwd.path), $_)}
 $allChangedFiles = $allChangedFiles -replace '\\', '/'
 
 if ([string]::IsNullOrEmpty($TargetBranch) -or [string]::IsNullOrEmpty($SourceBranch)) {
@@ -30,8 +30,17 @@ else {
   Write-Host
 
   $engFiles = $changedFiles | Where-Object {if ($_) { $_.StartsWith('eng') }}
-  $repoRootFiles = $changedFiles | Where-Object {$_ -notmatch [Regex]::Escape([IO.Path]::DirectorySeparatorChar)}
-  if ($engFiles -or $repoRootFiles) {
+
+  $rootFilesImpactingTypeSpec = @(
+    ".gitattributes",
+    ".prettierrc.json",
+    "package-lock.json",
+    "package.json",
+    "tsconfig.json"
+  )
+  $repoRootFiles = $changedFiles | Where-Object {$_ -in $rootFilesImpactingTypeSpec}
+
+  if (($Env:BUILD_REPOSITORY_NAME -eq 'azure/azure-rest-api-specs') -and ($engFiles -or $repoRootFiles)) {
     $changedFiles = $allChangedFiles
   }
   else {
@@ -42,10 +51,11 @@ else {
 $typespecFolders = @()
 foreach ($file in $changedFiles) {
   if ($file -match 'specification\/[^\/]*\/') {
-    $typespecFolder = (Get-ChildItem -path $matches[0] tspconfig.yaml -Recurse).Directory.FullName | ForEach-Object {if ($_) { [IO.Path]::GetRelativePath($($pwd.path), $_) }}
+    $typespecFolder = (Get-ChildItem -path $matches[0] tspconfig.* -Recurse).Directory.FullName | ForEach-Object {if ($_) { [IO.Path]::GetRelativePath($($pwd.path), $_) }}
     $typespecFolders += $typespecFolder -replace '\\', '/'
   }
 }
+
 $typespecFolders = $typespecFolders | Select-Object -Unique | Sort-Object
 
 return $typespecFolders
