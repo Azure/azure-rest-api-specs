@@ -1,3 +1,4 @@
+import { simpleGit } from "simple-git";
 import { runCmd } from "../utils.js";
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
@@ -7,7 +8,9 @@ export class NpmPrefixRule implements Rule {
   readonly description = "Verify spec is using root level package.json";
 
   async execute(folder: string): Promise<RuleResult> {
-    let expected_npm_prefix = process.cwd();
+    const git = simpleGit();
+    let expected_npm_prefix = git.revparse("--show-toplevel");
+
     const actual_npm_prefix = (await runCmd(`npm prefix`, folder))[1].trim();
 
     let success = true;
