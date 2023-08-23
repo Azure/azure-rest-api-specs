@@ -3578,6 +3578,17 @@
           "description": "The database name of delta table. Type: string (or Expression with resultType string)."
         }
       }
+    },
+    "AzureTrinoObjectDataset": {
+      "x-ms-discriminator-value": "AzureTrinoObject",
+      "description": "AzureTrino dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {}
     }
   }
 }
