@@ -2,6 +2,7 @@ import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-providerhub-controller";
 import "../Contoso.WidgetManager.Shared";
 
 using TypeSpec.Http;
