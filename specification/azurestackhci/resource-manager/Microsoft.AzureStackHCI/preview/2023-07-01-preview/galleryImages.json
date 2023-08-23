@@ -117,7 +117,7 @@
             }
           },
           "200": {
-            "description": "OK",
+            "description": "Updated",
             "schema": {
               "$ref": "#/definitions/GalleryImages"
             }
@@ -167,7 +167,12 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No content"
@@ -182,6 +187,7 @@
             "$ref": "./examples/UpdateGalleryImage.json"
           }
         },
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -218,7 +224,12 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           }
         }
       }
@@ -295,6 +306,48 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.AzureStackHCI/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "List all the supported operations.",
+        "operationId": "Operations_List",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The supported operations list.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListOperations": {
+            "$ref": "./examples/ListOperations.json"
+          }
         }
       }
     }
@@ -382,6 +435,7 @@
       "description": "Properties under the gallery image resource"
     },
     "GalleryImageStatus": {
+      "type": "object",
       "x-ms-client-flatten": true,
       "readOnly": true,
       "properties": {
@@ -394,6 +448,7 @@
           "description": "Descriptive error message"
         },
         "provisioningStatus": {
+          "type": "object",
           "properties": {
             "operationId": {
               "type": "string",
@@ -415,6 +470,7 @@
           }
         },
         "downloadStatus": {
+          "type": "object",
           "properties": {
             "downloadSizeInMB": {
               "type": "integer",
@@ -433,6 +489,7 @@
       "description": "The observed state of gallery images"
     },
     "GalleryImageIdentifier": {
+      "type": "object",
       "properties": {
         "publisher": {
           "type": "string",
@@ -455,6 +512,7 @@
       "description": "This is the gallery image definition identifier."
     },
     "GalleryImageVersion": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -468,6 +526,7 @@
       "description": "Specifies information about the gallery image version that you want to create or update."
     },
     "GalleryImageVersionProperties": {
+      "type": "object",
       "properties": {
         "storageProfile": {
           "$ref": "#/definitions/GalleryImageVersionStorageProfile"
@@ -479,6 +538,7 @@
       "description": "Describes the properties of a gallery image version."
     },
     "GalleryImageVersionStorageProfile": {
+      "type": "object",
       "properties": {
         "osDiskImage": {
           "$ref": "#/definitions/GalleryOSDiskImage"
@@ -495,6 +555,7 @@
       "description": "This is the OS disk image."
     },
     "GalleryDiskImage": {
+      "type": "object",
       "properties": {
         "sizeInMB": {
           "type": "integer",
