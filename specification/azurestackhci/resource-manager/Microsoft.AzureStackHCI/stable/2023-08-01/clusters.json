@@ -571,6 +571,22 @@
           },
           "readOnly": true
         },
+        "connectivityStatus": {
+          "description": "Overall connectivity status for the cluster resource.",
+          "type": "string",
+          "enum": [
+            "NotYetRegistered",
+            "Connected",
+            "NotConnectedRecently",
+            "PartiallyConnected",
+            "Disconnected"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectivityStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
         "cloudId": {
           "description": "Unique, immutable resource id.",
           "type": "string",
