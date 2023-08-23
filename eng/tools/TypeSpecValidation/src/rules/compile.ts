@@ -17,8 +17,8 @@ export class CompileRule implements Rule {
       stdOutput += stdout;
       if (err) {
         success = false;
-        errorOutput += err.message;
         errorOutput += stderr;
+        errorOutput += err.message;
       }
     }
     if (await checkFileExists(path.join(folder, "client.tsp"))) {
