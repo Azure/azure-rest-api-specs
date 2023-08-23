@@ -5220,38 +5220,34 @@
               "title": "Detects similar node pools and balances the number of nodes between them.",
               "description": "Valid values are 'true' and 'false'"
             },
+            "daemonset-eviction-for-empty-nodes": {
+              "type": "boolean",
+              "title": "DaemonSet pods will be gracefully terminated from empty nodes",
+              "description": "If set to true, all daemonset pods on empty nodes will be evicted before deletion of the node. If the daemonset pod cannot be evicted another node will be chosen for scaling. If set to false, the node will be deleted without ensuring that daemonset pods are deleted or evicted."
+            },
+            "daemonset-eviction-for-occupied-nodes": {
+              "type": "boolean",
+              "title": "DaemonSet pods will be gracefully terminated from non-empty nodes",
+              "description": "If set to true, all daemonset pods on occupied nodes will be evicted before deletion of the node. If the daemonset pod cannot be evicted another node will be chosen for scaling. If set to false, the node will be deleted without ensuring that daemonset pods are deleted or evicted."
+            },
+            "ignore-daemonsets-utilization": {
+              "type": "boolean",
+              "title": "Should CA ignore DaemonSet pods when calculating resource utilization for scaling down",
+              "description": "If set to true, the resources used by daemonset will be taken into account when making scaling down decisions."
+            },
             "expander": {
               "type": "string",
-              "enum": [
-                "least-waste",
-                "most-pods",
-                "priority",
-                "random"
-              ],
-              "x-ms-enum": {
-                "name": "expander",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "value": "least-waste",
-                    "description": "Selects the node group that will have the least idle CPU (if tied, unused memory) after scale-up. This is useful when you have different classes of nodes, for example, high CPU or high memory nodes, and only want to expand those when there are pending pods that need a lot of those resources."
-                  },
-                  {
-                    "value": "most-pods",
-                    "description": "Selects the node group that would be able to schedule the most pods when scaling up. This is useful when you are using nodeSelector to make sure certain pods land on certain nodes. Note that this won't cause the autoscaler to select bigger nodes vs. smaller, as it can add multiple smaller nodes at once."
-                  },
-                  {
-                    "value": "priority",
-                    "description": "Selects the node group that has the highest priority assigned by the user. It's configuration is described in more details [here](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/expander/priority/readme.md)."
-                  },
-                  {
-                    "value": "random",
-                    "description": "Used when you don't have a particular need for the node groups to scale differently."
-                  }
-                ]
-              },
-              "title": "The expander to use when scaling up",
-              "description": "If not specified, the default is 'random'. See [expanders](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#what-are-expanders) for more information."
+              "title": "Type of node group expander to be used in scale up. Set to be deprecated, please use 'expanders' flag in the future.",
+              "description": "Available values are: 'least-waste', 'most-pods', 'priority', 'random'.",
+              "$ref": "#/definitions/Expander"
+            },
+            "expanders": {
+              "type": "array",
+              "title": "Type of node group expander to be used in scale up.",
+              "description": "Available values are: 'least-waste', 'most-pods', 'priority', 'random'. If multiple expanders are configured, they will be considered in the order in which they are listed, with the first one being considered first.",
+              "items": {
+                "$ref": "#/definitions/Expander"
+              }
             },
             "max-empty-bulk-delete": {
               "type": "string",
@@ -5463,6 +5459,39 @@
           }
         }
       }
+    },
+    "Expander": {
+      "type": "string",
+      "enum": [
+        "least-waste",
+        "most-pods",
+        "priority",
+        "random"
+      ],
+      "x-ms-enum": {
+        "name": "Expander",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "least-waste",
+            "description": "Selects the node group that will have the least idle CPU (if tied, unused memory) after scale-up. This is useful when you have different classes of nodes, for example, high CPU or high memory nodes, and only want to expand those when there are pending pods that need a lot of those resources."
+          },
+          {
+            "value": "most-pods",
+            "description": "Selects the node group that would be able to schedule the most pods when scaling up. This is useful when you are using nodeSelector to make sure certain pods land on certain nodes. Note that this won't cause the autoscaler to select bigger nodes vs. smaller, as it can add multiple smaller nodes at once."
+          },
+          {
+            "value": "priority",
+            "description": "Selects the node group that has the highest priority assigned by the user. It's configuration is described in more details [here](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/expander/priority/readme.md)."
+          },
+          {
+            "value": "random",
+            "description": "Used when you don't have a particular need for the node groups to scale differently."
+          }
+        ]
+      },
+      "title": "The expander to use when scaling up",
+      "description": "If not specified, the default is 'random'. See [expanders](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#what-are-expanders) for more information."
     },
     "ManagedClusterAPIServerAccessProfile": {
       "type": "object",
