@@ -500,14 +500,6 @@ directive:
     from: keys.json
     where: $.definitions.LifetimeActionsType.properties.type
     reason: SDK, docs workaround for current service behavior.
-  - suppress: EnumUniqueValue
-    from: keys.json
-    where: $.definitions.Action.properties.type
-    reason: SDK, docs workaround for current service behavior.
-  - suppress: EnumUniqueValue
-    from: keysManagedHsm.json
-    where: $.definitions.ManagedHsmAction.properties.type
-    reason: SDK, docs workaround for current service behavior.
   - suppress: DOUBLE_FORWARD_SLASHES_IN_URL
     from: rbac.json
     reason: / is a valid scope in this scenario.
