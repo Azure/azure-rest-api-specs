@@ -661,6 +661,105 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/availableOSUpdates": {
+      "get": {
+        "tags": [
+          "Supported OSes"
+        ],
+        "operationId": "AvailableOSUpdates_List",
+        "description": "Lists and confirms availability of OS products.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/OSNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OffsetParameter"
+          },
+          {
+            "$ref": "#/parameters/TopFilter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/AvailableOSUpdateListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "AvailableOSUpdatesList": {
+            "$ref": "./examples/AvailableOSUpdatesList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/availableOSUpdates/{availableOSUpdateName}": {
+      "get": {
+        "tags": [
+          "Supported OSes"
+        ],
+        "description": "Finds and confirms availability of supported OS product.",
+        "operationId": "AvailableOSUpdates_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AvailableOSUpdateNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AvailableOSUpdateResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AvailableOSUpdateGet": {
+            "$ref": "./examples/AvailableOSUpdateGet.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/featureUpdateSupportedOses": {
       "get": {
         "tags": [
@@ -6804,6 +6903,98 @@
         }
       },
       "description": "Properties for in-place upgrade test result."
+    },
+    "AvailableOSUpdateListResult": {
+      "description": "A list of available OS update resource.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AvailableOSUpdateResource"
+          },
+          "description": "The list of LCU."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if value contains incomplete list of results."
+        }
+      }
+    },
+    "AvailableOSUpdateResource": {
+      "description": "The available OS update resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AvailableOSUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of available OS update."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AvailableOSUpdateProperties": {
+      "description": "Properties for AvailableOSUpdateResource.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "buildString": {
+          "type": "string",
+          "description": "The build string of the Windows update."
+        },
+        "release": {
+          "type": "string",
+          "description": "The release of the Windows update."
+        },
+        "kbNumber": {
+          "type": "string",
+          "description": "The KB number of the Windows update."
+        },
+        "osName": {
+          "type": "string",
+          "description": "The product related to the Windows update."
+        },
+        "updateType": {
+          "type": "string",
+          "description": "The type of the Windows update."
+        },
+        "packageVersion": {
+          "type": "string",
+          "description": "The package version of the Windows update."
+        },
+        "osVersion": {
+          "type": "string",
+          "description": "The version number of the Windows OS."
+        },
+        "buildNumber": {
+          "type": "string",
+          "description": "The build number of the Windows update."
+        },
+        "buildRevision": {
+          "type": "string",
+          "description": "The build revision of the Windows update."
+        },
+        "architecture": {
+          "$ref": "#/definitions/Architecture",
+          "description": "The architecture of the OS."
+        },
+        "releaseWeek": {
+          "type": "string",
+          "description": "The release week of the OS."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the Windows OS."
+        }
+      }
     }
   },
   "parameters": {
@@ -6979,6 +7170,30 @@
       "format": "int32",
       "x-ms-parameter-location": "method",
       "description": "According to the reverse order of time, how many first ones are taken."
+    },
+    "OSNameParameter": {
+      "name": "osName",
+      "in": "query",
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The OS name."
+    },
+    "AvailableOSUpdateNameParameter": {
+      "name": "availableOSUpdateName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9]([A-Za-z0-9_]|((-{1,2}|[. ])[A-Za-z0-9]))+$",
+      "x-ms-parameter-location": "method",
+      "description": "The full available OS update name in this format: osName--release--buildNumber--buildRevision--packageVersion--architecture, Example: Windows 10 22H2--2020.03 D--19043--1237--1.2.3--x64"
+    },
+    "OffsetParameter": {
+      "name": "offset",
+      "in": "query",
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method",
+      "description": "The number of items to skip before starting to collect the result set."
     }
   }
 }
