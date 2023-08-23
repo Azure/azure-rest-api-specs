@@ -1,3 +1,4 @@
+import path from "path";
 import { simpleGit } from "simple-git";
 import { runCmd } from "../utils.js";
 import { Rule } from "../rule.js";
@@ -13,7 +14,7 @@ export class NpmPrefixRule implements Rule {
     let expected_npm_prefix: string | undefined;
     try {
       // If spec folder is inside a git repo, returns repo root
-      expected_npm_prefix = await git.revparse("--show-toplevel");
+      expected_npm_prefix = path.normalize(await git.revparse("--show-toplevel"));
     } catch (err) {
       // If spec folder is outside git repo, or if problem running git, throws error
       return {
@@ -22,7 +23,7 @@ export class NpmPrefixRule implements Rule {
       };
     }
 
-    const actual_npm_prefix = (await runCmd(`npm prefix`, folder))[1].trim();
+    const actual_npm_prefix = path.normalize((await runCmd(`npm prefix`, folder))[1].trim());
 
     let success = true;
     let stdOutput =
