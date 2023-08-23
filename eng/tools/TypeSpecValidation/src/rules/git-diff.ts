@@ -3,7 +3,6 @@ import { simpleGit } from "simple-git";
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
 
-debug.enable("simple-git");
 export class GitDiffRule implements Rule {
   readonly name = "GitDiff";
   readonly description = "Checks if previous rules resulted in a git diff";
