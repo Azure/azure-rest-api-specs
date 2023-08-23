@@ -14,6 +14,9 @@ export class NpmPrefixRule implements Rule {
     try {
       expected_npm_prefix = await git.revparse("--show-toplevel");
     } catch (err) {
+      // Should only fail in rare cases:
+      // - Target folder is not in a git repo
+      // - Error running git tool
       return {
         success: false,
         errorOutput: err instanceof Error ? err.message : undefined,
