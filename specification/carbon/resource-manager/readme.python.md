@@ -16,4 +16,4 @@ clear-output-folder: true
 ``` yaml $(python-mode)
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/~~carbonoptimization/azure-mgmt-carbonoptimization/azure/mgmt/carbon
-```~~
+```
