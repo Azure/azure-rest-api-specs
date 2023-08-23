@@ -221,10 +221,7 @@
       "type": "object",
       "properties": {
         "kind": {
-          "type": "string",
-          "enum": [
-            "ConversationResult"
-          ],
+          "$ref": "#/definitions/AnalyzeConversationTaskResultsKind",
           "description": "The base class of a conversation input task result."
         }
       },
@@ -1349,9 +1346,9 @@
       "properties": {
         "result": {
           "type": "object",
-          "properties": {},
+          "additionalProperties": true,
           "description": "The actual response from a LUIS Generally Available application.",
-          "x-typespec-name": "{}"
+          "x-typespec-name": "Record<unknown>"
         }
       },
       "description": "It is a wrap up of LUIS Generally Available response.",
