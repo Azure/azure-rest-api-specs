@@ -1069,7 +1069,10 @@
         "EnterRoundabout",
         "ExitRoundabout",
         "EnterThenExitRoundabout",
+        "ExitRoundaboutRight",
+        "ExitRoundaboutLeft",
         "Follow",
+        "GoAroundRoundabout",
         "KeepLeft",
         "KeepOnRampLeft",
         "KeepOnRampRight",
@@ -1079,7 +1082,9 @@
         "KeepToStayLeft",
         "KeepToStayRight",
         "KeepToStayStraight",
-        "Merge",
+        "MergeFreeway",
+        "MergeHighway",
+        "MergeMotorway",
         "None",
         "RampThenHighwayLeft",
         "RampThenHighwayRight",
@@ -1088,6 +1093,7 @@
         "SwitchToParallelRoad",
         "SwitchToMainRoad",
         "Take",
+        "TakeFerry",
         "TakeExit",
         "TakeRamp",
         "TakeRampLeft",
@@ -1224,9 +1230,24 @@
             "description": "Enter and exit a roundabout."
           },
           {
+            "value": "ExitRoundaboutRight",
+            "name": "ExitRoundaboutRight",
+            "description": "At the roundabout take the exit on the right."
+          },
+          {
+            "value": "ExitRoundaboutLeft",
+            "name": "ExitRoundaboutLeft",
+            "description": "At the roundabout take the exit on the left."
+          },
+          {
             "value": "Follow",
             "name": "Follow",
             "description": "Follow."
+          },
+          {
+            "value": "GoAroundRoundabout",
+            "name": "GoAroundRoundabout",
+            "description": "Go around the roundabout."
           },
           {
             "value": "KeepLeft",
@@ -1274,9 +1295,19 @@
             "description": "Keep straight to stay on the same road."
           },
           {
-            "value": "Merge",
-            "name": "Merge",
+            "value": "MergeFreeway",
+            "name": "MergeFreeway",
+            "description": "Merge onto a freeway."
+          },
+          {
+            "value": "MergeHighway",
+            "name": "MergeHighway",
             "description": "Merge onto a highway."
+          },
+          {
+            "value": "MergeMotorway",
+            "name": "MergeMotorway",
+            "description": "Merge onto a motorway."
           },
           {
             "value": "None",
@@ -1317,6 +1348,11 @@
             "value": "Take",
             "name": "Take",
             "description": "Take the road. This instruction is used when you are entering or exiting a ferry."
+          },
+          {
+            "value": "TakeFerry",
+            "name": "TakeFerry",
+            "description": "Take the ferry."
           },
           {
             "value": "TakeExit",
