@@ -15,9 +15,9 @@ export class CompileRule implements Rule {
     if (await checkFileExists(path.join(folder, "main.tsp"))) {
       let [err, stdout, stderr] = await runCmd(`npx --no tsp compile . --warn-as-error`, folder);
       stdOutput += stdout;
+      errorOutput += stderr;
       if (err) {
         success = false;
-        errorOutput += stderr;
         errorOutput += err.message;
       }
     }
@@ -27,9 +27,9 @@ export class CompileRule implements Rule {
         folder
       );
       stdOutput += stdout;
+      errorOutput += stderr;
       if (err) {
         success = false;
-        errorOutput += stderr;
         errorOutput += err.message;
       }
     }
