@@ -52,7 +52,7 @@ perform-load: false
 These settings apply only when `--tag=package-2023-06 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-preview-06' && $(python)
+``` yaml $(tag) == 'package-2023-06' && $(python)
 namespace: azure.mgmt.iothub.v2023_06_30
 output-folder: $(python-sdks-folder)/iothub/azure-mgmt-iothub/azure/mgmt/iothub/v2023_06_30
 ```
