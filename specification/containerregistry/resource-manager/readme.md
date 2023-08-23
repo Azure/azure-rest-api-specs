@@ -26,9 +26,27 @@ These are the global settings for the ContainerRegistry API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-06-preview
+tag: package-2023-07
 ```
 
+### Tag: package-2023-07-only
+
+These settings apply only when `--tag=package-2023-07-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-07-only'
+input-file:
+  - Microsoft.ContainerRegistry/stable/2023-07-01/containerregistry.json
+```
+
+### Tag: package-2023-07
+
+These settings apply only when `--tag=package-2023-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-07'
+input-file:
+  - Microsoft.ContainerRegistry/stable/2023-07-01/containerregistry.json
+  - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
+```
 
 ### Tag: package-2023-06-preview-only
 
@@ -426,11 +444,3 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-### Suppress rules that might be fixed
-
-``` yaml
-suppressions:
-  - code: LroErrorContent
-    reason: The Error object is shared between all controllers. Changing the Error object will require refactoring all the controllers. This is planned for 2023-07-01-preview
-```
