@@ -12,7 +12,7 @@ export async function runCmd(cmd: string, cwd: string) {
     )
   )) as any;
 
-  return [stdout, stderr + err?.message] as string[];
+  return [err, stdout, stderr];
 }
 
 export async function checkFileExists(file: string) {
