@@ -6067,29 +6067,27 @@
     },
     "PurviewObjectId": {
       "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayText": {
+          "type": "string"
+        },
+        "itemPath": {
+          "type": "string"
+        },
+        "resourceId": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/AtlasObjectId"
-        },
-        {
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "displayText": {
-              "type": "string"
-            },
-            "itemPath": {
-              "type": "string"
-            },
-            "resourceId": {
-              "type": "string"
-            },
-            "properties": {
-              "type": "object",
-              "additionalProperties": {}
-            }
-          }
         }
       ],
       "title": "PurviewObjectId"
