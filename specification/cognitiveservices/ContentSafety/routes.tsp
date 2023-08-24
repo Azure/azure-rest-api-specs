@@ -80,7 +80,7 @@ interface TextBlocklists {
   >;
 
   @summary("Get BlocklistItem By blocklistName And blocklistItemId")
-  @doc("Get blocklistItem by blocklsitName and blocklistItemId from a text blocklist.")
+  @doc("Get blocklistItem by blocklistName and blocklistItemId from a text blocklist.")
   getTextBlocklistItem is BlockOps.ResourceRead<TextBlocklistItem>;
 
   @summary("Get All BlocklistItems By blocklistName")
