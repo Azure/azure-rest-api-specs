@@ -46,6 +46,7 @@ model DataLakeHouseResources is TrackedResource < StorageProperties > {
     name: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/empty-updateable-properties" "Suppressing updateable property warning for network analytics products for now"
 @doc("The network analytics product resource")
 @singleton
 @added(Versions.v2023_03_31_preview)
@@ -545,6 +546,7 @@ model VirtualNetworkRule {
     state ?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Suppressing casing style warning for iprules for now."
 @doc("IP rule with specific IP or IP range in CIDR format.")
 model IPRules {
     @doc("IP Rules Value")
@@ -561,6 +563,7 @@ model ResourceAccessRules {
     resourceId: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Suppressing documentation required warning nfor bypass for now."
 enum Bypass {
    None,
    Logging,
@@ -568,6 +571,7 @@ enum Bypass {
    AzureServices
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Suppressing documentation required warning for default action for now."
 enum DefaultAction {
   Allow,
   Deny
@@ -632,6 +636,7 @@ model VirtualNetworkConfiguration {
     dataManagementPublicIpId: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/empty-updateable-properties" "Suppressing updateable property warning for metrics ingestion endpoint for now."
 @doc("An ingestion endpoint for metrics relating to the parent resource")
 @added(Versions.v2023_04_30_preview)
 @singleton
