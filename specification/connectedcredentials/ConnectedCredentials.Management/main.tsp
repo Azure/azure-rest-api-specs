@@ -95,6 +95,11 @@ model CredentialProperties {
   @extension("x-ms-identifiers", ["remoteRef"])
   @doc(" Data defines the connection between the Kubernetes Secret keys and the Provider data, Array.")
   data?: Data[];
+
+  @visibility("read")
+  @extension("x-ms-identifiers", ["type"])
+  @doc("The resource status information.")
+  statuses?: ResourceStatus[];
 }
 
 @doc("Provider specific settings.")
@@ -154,6 +159,33 @@ model RemoteRef {
   @visibility("read", "create")
   @doc("The key of the secret identifier.")
   key?: string;
+}
+
+@doc("The resource status information")
+model ResourceStatus {
+  @visibility("read")
+  @doc("The type of the condition.")
+  type?: string;
+
+  @visibility("read")
+  @doc("Status of the condition.")
+  status?: string;
+
+  @visibility("read")
+  @doc("The reason for the condition's status.")
+  reason?: string;
+
+  @visibility("read")
+  @doc("A human readable message indicating details about the status.")
+  message?: string;
+
+  @visibility("read")
+  @doc("Severity with which to treat failures of this type of condition.")
+  severity?: string;
+
+  @visibility("read")
+  @doc("The last update time for this condition")
+  lastUpdatedAt?: utcDateTime;
 }
 
 @armResourceOperations
