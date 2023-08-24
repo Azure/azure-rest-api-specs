@@ -68,12 +68,13 @@ directive:
     where: $.paths
     from: applications.json
     reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
+  suppress: TopLevelResourcesListBySubscription
+    where: $.definitions.Pricing
+    from: Microsoft.Security\preview\2023-08-01-preview\pricings.json
+    reason: It does have a LIST API, but it is wrapped with PricingList object.
 ```
 ``` yaml
 suppressions:
-  - code: TopLevelResourcesListBySubscription
-    from: Microsoft.Security\preview\2023-08-01-preview\pricings.json
-    reason: It does have a LIST API, but it is wrapped with PricingList object.
   - code: ResourceNameRestriction
     from: Microsoft.Security\preview\2023-08-01-preview\pricings.json
     reason: Old versions do not have pattern as well, and if I add a pattern to this version, I get another error about breaking the last version's pattern.
