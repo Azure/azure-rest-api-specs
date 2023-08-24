@@ -1,6 +1,6 @@
 # Content Safety
 
-> see https://aka.ms/autorest
+> see <https://aka.ms/autorest>
 
 This is the AutoRest configuration file for Content Safety.
 
@@ -26,7 +26,7 @@ These are the global settings for the Content Safety.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2023-04-30-preview
+tag: package-2023-10-01
 ```
 
 ### Tag: package-2023-04-30-preview
@@ -36,6 +36,15 @@ These settings apply only when `--tag=package-2023-04-30-preview` is specified o
 ```yaml $(tag) == 'package-2023-04-30-preview'
 input-file:
   - preview/2023-04-30-preview/contentsafety.json
+```
+
+### Tag: package-2023-10-01
+
+These settings apply only when `--tag=package-2023-10-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-10-01'
+input-file:
+  - preview/2023-10-01/contentsafety.json
 ```
 
 ---
@@ -57,6 +66,7 @@ swagger-to-sdk:
   - repo: azure-cli-extensions
   - repo: azure-powershell
 ```
+
 ## Az
 
 See configuration in [readme.az.md](./readme.az.md)
