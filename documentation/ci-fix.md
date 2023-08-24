@@ -161,8 +161,9 @@ In case there are validation errors reported against your service that you belie
 
 Following tools have been removed from the validation toolchain as of August 2023.
 
-- Traffic validation
 - API Readiness Check
+- Service API Readiness Test
+- Traffic validation
 
 [automated validation tooling]: https://eng.ms/docs/products/azure-developer-experience/design/api-specs/api-tooling
 [Azure REST API specs PR]: https://eng.ms/docs/products/azure-developer-experience/design/api-specs-pr/api-specs-pr
