@@ -1,10 +1,9 @@
-import "@cadl-lang/rest";
-import "@cadl-lang/versioning";
-import "@azure-tools/cadl-providerhub";
-import "@azure-tools/cadl-providerhub-controller";
-import "@azure-tools/cadl-azure-core";
-import "@azure-tools/cadl-apiview";
-import "@azure-tools/cadl-azure-resource-manager";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-providerhub";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-apiview";
+import "@azure-tools/typespec-azure-resource-manager";
 
 @armProviderNamespace
 @service({
@@ -14,27 +13,25 @@ import "@azure-tools/cadl-azure-resource-manager";
 })
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-
 namespace Informatica.DataManagement;
 
 using Azure.ResourceManager;
-using Cadl.Rest;
-using Cadl.Http;
-using Cadl.Versioning;
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 @doc("Reusable representation of an email address")
 @pattern("^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$")
 scalar email extends string;
 
 @doc("A Organization Resource by Informatica")
-model InformaticaOrganizationResource is TrackedResource<OrganizationProperties> {
+model InformaticaOrganizationResource
+  is TrackedResource<OrganizationProperties> {
   @key("organizationName")
   @segment("organizations")
   @doc("Name of the Organizations resource")
   @path
   name: string;
-  ...ManagedServiceIdentity;
-  
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -46,11 +43,26 @@ model SingleSignOn is ProxyResource<InformaticaSingleSignOnProperties> {
   @segment("singleSignOnConfigurations")
   @doc("Name of the SSO Configuration")
   @path
-  name: string; 
+  name: string;
 }
 
 @armResourceOperations
-interface SingleSignOnOperations extends ProxyResourceOperations<SingleSignOn>{
+interface SingleSignOnOperations
+  extends ProxyResourceOperations<SingleSignOn> {}
+
+@armResourceOperations
+interface Organizations
+  extends Azure.ResourceManager.TrackedResourceOperations<
+      InformaticaOrganizationResource,
+      OrganizationProperties
+    > {
+  get is ArmResourceRead<InformaticaOrganizationResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<InformaticaOrganizationResource>;
+  delete is ArmResourceDeleteAsync<InformaticaOrganizationResource>;
+  update is ArmCustomPatchSync<
+    InformaticaOrganizationResource,
+    OrganizationProperties
+  >;
 }
 
 @doc("Properties specific to the Informatica DataManagement Organization resource")
@@ -58,20 +70,43 @@ model OrganizationProperties {
   @visibility("read")
   @doc("Provisioning State of the resource")
   provisioningState?: ProvisioningState;
-  
+
   @doc("Informatica Organization properties")
   informaticaProperties?: InformaticaProperties;
 
   @doc("Marketplace details")
   marketplaceDetails?: MarketplaceDetails;
-  
+
   @doc("User details")
   userDetails?: UserDetails;
+
+  @doc("Company details")
+  companyDetails?: CompanyDetails;
+}
+
+@doc("Company Details")
+model CompanyDetails {
+  @doc("company Name")
+  companyName?: string;
+
+  @doc("Office Address")
+  officeAddress?: string;
+
+  @doc("Country name")
+  country?: string;
+
+  @doc("Domain name")
+  domain?: string;
+
+  @doc("Business phone number")
+  business?: string;
+
+  @doc("Number Of Employees")
+  numberOfEmployees?: string;
 }
 
 @doc("Marketplace details")
-model MarketplaceDetails
-{
+model MarketplaceDetails {
   @doc("Marketplace Subscription Id")
   marketplaceSubscriptionId: string;
 
@@ -107,18 +142,16 @@ model OfferDetails {
 }
 
 @doc("Properties of the Informatica organization")
-model InformaticaProperties{
-
+model InformaticaProperties {
   @doc("Organization id")
   organizationId?: string;
-  
+
   @doc("The login URL specific to this Informatica Organization")
   singleSignOnProperties?: InformaticaSingleSignOnProperties;
 }
 
 @doc("Single sign on Info of the SolarWinds account")
-model InformaticaSingleSignOnProperties{
-
+model InformaticaSingleSignOnProperties {
   @doc("Single sign-on state")
   singleSignOnState?: SingleSignOnStates;
 
@@ -127,7 +160,7 @@ model InformaticaSingleSignOnProperties{
 
   @doc("The login URL specific to this SolarWinds Organization")
   singleSignOnUrl?: string;
-  
+
   @doc("Provisioning state")
   provisioningState?: ProvisioningState;
 }
@@ -136,14 +169,14 @@ model InformaticaSingleSignOnProperties{
 model UserDetails {
   @maxLength(50)
   @doc("User first name.")
-  firstName: string;
+  firstName?: string;
 
   @maxLength(50)
   @doc("User last name.")
-  lastName: string;
+  lastName?: string;
 
   @doc("User email address.")
-  emailAddress: email;
+  emailAddress?: email;
 
   @doc("UPN of user")
   upn?: string;
@@ -156,29 +189,44 @@ model UserDetails {
 @doc("Provisioning State of the Organization resource")
 enum ProvisioningState {
   @doc("Organization resource creation request accepted")
-  "Accepted",
+  Accepted,
+
   @doc("Organization resource creation started")
-  "Creating",
+  Creating,
+
   @doc("Organization resource is being updated")
-  "Updating",
+  Updating,
+
   @doc("Organization resource deletion started")
-  "Deleting",
+  Deleting,
+
   @doc("Organization resource creation successful")
-  "Succeeded",
+  Succeeded,
+
   @doc("Organization resource creation failed")
-  "Failed",
+  Failed,
+
   @doc("Organization resource creation canceled")
-  "Canceled",
+  Canceled,
+
   @doc("Organization resource is deleted")
-  "Deleted",
+  Deleted,
+
   @doc("Organization resource state is unknown")
-  "NotSpecified"
+  NotSpecified,
 }
 
 @doc("Various states of the SSO resource")
 enum SingleSignOnStates {
-  "Initial",
-  "Enable",
-  "Disable",
-  "Existing"
+  @doc("SSO state Initial")
+  Initial,
+
+  @doc("SSO state Enable")
+  Enable,
+
+  @doc("SSO state Disable")
+  Disable,
+
+  @doc("SSO state Existing")
+  Existing,
 }

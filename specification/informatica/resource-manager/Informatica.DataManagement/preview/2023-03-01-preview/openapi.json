@@ -1,18 +1,18 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-03-01-preview",
     "title": "Informatica.DataManagement",
-    "x-cadl-generated": [
+    "version": "2023-03-01-preview",
+    "x-typespec-generated": [
       {
-        "emitter": "@azure-tools/cadl-autorest"
+        "emitter": "@azure-tools/typespec-autorest"
       }
     ]
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
+  "host": "management.azure.com",
   "produces": [
     "application/json"
   ],
@@ -29,9 +29,9 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
       "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -42,19 +42,19 @@
       "name": "Operations"
     },
     {
-      "name": "Organizations"
+      "name": "SingleSignOnOperations"
     },
     {
-      "name": "SingleSignOnOperations"
+      "name": "Organizations"
     }
   ],
   "paths": {
     "/providers/Informatica.DataManagement/operations": {
       "get": {
+        "operationId": "Operations_List",
         "tags": [
           "Operations"
         ],
-        "operationId": "Operations_List",
         "description": "List the operations for the provider",
         "parameters": [
           {
@@ -75,22 +75,25 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "Operations_List": {
+          "Operations_List1": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List2": {
             "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Informatica.DataManagement/organizations": {
       "get": {
+        "operationId": "Organizations_ListBySubscription",
         "tags": [
           "Organizations"
         ],
-        "operationId": "Organizations_ListBySubscription",
         "description": "List InformaticaOrganizationResource resources by subscription ID",
         "parameters": [
           {
@@ -114,23 +117,26 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Organizations_ListBySubscription1": {
+            "$ref": "./examples/Organizations_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "Organizations_ListBySubscription": {
+            "$ref": "./examples/Organizations_ListBySubscription_MinimumSet_Gen.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Organizations_ListBySubscription": {
-            "$ref": "./examples/Organizations_ListBySubscription_MaximumSet_Gen.json"
-          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Informatica.DataManagement/organizations": {
       "get": {
+        "operationId": "Organizations_ListByResourceGroup",
         "tags": [
           "Organizations"
         ],
-        "operationId": "Organizations_ListByResourceGroup",
-        "description": "List Informatica OrganizationResource resources by resource group",
+        "description": "List InformaticaOrganizationResource resources by resource group",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -146,35 +152,35 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/InformaticaOrganizationResourceListResponse"
+              "$ref": "#/definitions/InformaticaOrganizationResourceListResult"
             }
           },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "Organizations_ListByResourceGroup_MaximumSet_Gen": {
+          "Organizations_ListByResourceGroup1": {
             "$ref": "./examples/Organizations_ListByResourceGroup_MaximumSet_Gen.json"
           },
-          "Organizations_ListByResourceGroup_MinimumSet_Gen": {
+          "Organizations_ListByResourceGroup": {
             "$ref": "./examples/Organizations_ListByResourceGroup_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Informatica.DataManagement/organizations/{organizationName}": {
       "get": {
+        "operationId": "Organizations_Get",
         "tags": [
           "Organizations"
         ],
-        "operationId": "Organizations_Get",
         "description": "Get a InformaticaOrganizationResource",
         "parameters": [
           {
@@ -189,8 +195,8 @@
           {
             "name": "organizationName",
             "in": "path",
-            "required": true,
             "description": "Name of the Organizations resource",
+            "required": true,
             "type": "string"
           }
         ],
@@ -202,23 +208,26 @@
             }
           },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Organizations_Get_MaximumSet_Gen": {
+          "Organizations_Get1": {
             "$ref": "./examples/Organizations_Get_MaximumSet_Gen.json"
+          },
+          "Organizations_Get": {
+            "$ref": "./examples/Organizations_Get_MinimumSet_Gen.json"
           }
         }
       },
       "put": {
+        "operationId": "Organizations_CreateOrUpdate",
         "tags": [
           "Organizations"
         ],
-        "operationId": "Organizations_CreateOrUpdate",
         "description": "Create a InformaticaOrganizationResource",
         "parameters": [
           {
@@ -233,15 +242,15 @@
           {
             "name": "organizationName",
             "in": "path",
-            "required": true,
             "description": "Name of the Organizations resource",
+            "required": true,
             "type": "string"
           },
           {
             "name": "resource",
             "in": "body",
-            "required": true,
             "description": "Resource create parameters.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/InformaticaOrganizationResource"
             }
@@ -249,39 +258,49 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Resource 'InformaticaOrganizationResource' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/InformaticaOrganizationResource"
             }
           },
           "201": {
-            "description": "ARM create operation completed successfully.",
+            "description": "Resource 'InformaticaOrganizationResource' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/InformaticaOrganizationResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
+        "x-ms-examples": {
+          "Organizations_CreateOrUpdate1": {
+            "$ref": "./examples/Organizations_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "Organizations_CreateOrUpdate": {
+            "$ref": "./examples/Organizations_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Organizations_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/Organizations_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "patch": {
+        "operationId": "Organizations_Update",
         "tags": [
           "Organizations"
         ],
-        "operationId": "Organization_Update",
         "description": "Update a InformaticaOrganizationResource",
         "parameters": [
           {
@@ -296,17 +315,17 @@
           {
             "name": "organizationName",
             "in": "path",
-            "required": true,
             "description": "Name of the Organizations resource",
+            "required": true,
             "type": "string"
           },
           {
             "name": "properties",
             "in": "body",
-            "required": true,
             "description": "The resource properties to be updated.",
+            "required": true,
             "schema": {
-              "$ref": "#/definitions/InformaticaOrganizationResourceUpdate"
+              "$ref": "#/definitions/OrganizationPropertiesUpdate"
             }
           }
         ],
@@ -318,23 +337,26 @@
             }
           },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Organizations_Update_MaximumSet_Gen": {
+          "Organizations_Update1": {
             "$ref": "./examples/Organizations_Update_MaximumSet_Gen.json"
+          },
+          "Organizations_Update": {
+            "$ref": "./examples/Organizations_Update_MinimumSet_Gen.json"
           }
         }
       },
       "delete": {
+        "operationId": "Organizations_Delete",
         "tags": [
           "Organizations"
         ],
-        "operationId": "Organizations_Delete",
         "description": "Delete a InformaticaOrganizationResource",
         "parameters": [
           {
@@ -349,8 +371,8 @@
           {
             "name": "organizationName",
             "in": "path",
-            "required": true,
             "description": "Name of the Organizations resource",
+            "required": true,
             "type": "string"
           }
         ],
@@ -359,35 +381,49 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "Resource deletion accepted."
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "204": {
             "description": "Resource deleted successfully."
           },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Organizations_Delete_MaximumSet_Gen": {
+          "Organizations_Delete1": {
             "$ref": "./examples/Organizations_Delete_MaximumSet_Gen.json"
           },
-          "Organizations_Delete_MinimumSet_Gen": {
+          "Organizations_Delete": {
             "$ref": "./examples/Organizations_Delete_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Informatica.DataManagement/organizations/{organizationName}/singleSignOnConfigurations": {
       "get": {
+        "operationId": "SingleSignOnOperations_ListByInformaticaOrganizationResource",
         "tags": [
           "SingleSignOnOperations"
         ],
-        "operationId": "SingleSignOnOperations_ListByInformaticaOrganizationResource",
         "description": "List SingleSignOn resources by InformaticaOrganizationResource",
         "parameters": [
           {
@@ -402,8 +438,8 @@
           {
             "name": "organizationName",
             "in": "path",
-            "required": true,
             "description": "Name of the Organizations resource",
+            "required": true,
             "type": "string"
           }
         ],
@@ -421,22 +457,25 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
+          "SingleSignOnOperations_ListByInformaticaOrganizationResource1": {
+            "$ref": "./examples/SingleSignOnOperations_ListByInformaticaOrganizationResource_MaximumSet_Gen.json"
+          },
           "SingleSignOnOperations_ListByInformaticaOrganizationResource": {
             "$ref": "./examples/SingleSignOnOperations_ListByInformaticaOrganizationResource_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Informatica.DataManagement/organizations/{organizationName}/singleSignOnConfigurations/{configurationName}": {
       "get": {
+        "operationId": "SingleSignOnOperations_Get",
         "tags": [
           "SingleSignOnOperations"
         ],
-        "operationId": "SingleSignOnOperations_Get",
         "description": "Get a SingleSignOn",
         "parameters": [
           {
@@ -451,15 +490,15 @@
           {
             "name": "organizationName",
             "in": "path",
-            "required": true,
             "description": "Name of the Organizations resource",
+            "required": true,
             "type": "string"
           },
           {
             "name": "configurationName",
             "in": "path",
-            "required": true,
             "description": "Name of the SSO Configuration",
+            "required": true,
             "type": "string"
           }
         ],
@@ -478,16 +517,19 @@
           }
         },
         "x-ms-examples": {
+          "SingleSignOnOperations_Get1": {
+            "$ref": "./examples/SingleSignOnOperations_Get_MaximumSet_Gen.json"
+          },
           "SingleSignOnOperations_Get": {
             "$ref": "./examples/SingleSignOnOperations_Get_MinimumSet_Gen.json"
           }
         }
       },
       "put": {
+        "operationId": "SingleSignOnOperations_CreateOrUpdate",
         "tags": [
           "SingleSignOnOperations"
         ],
-        "operationId": "SingleSignOnOperations_CreateOrUpdate",
         "description": "Create a SingleSignOn",
         "parameters": [
           {
@@ -502,22 +544,22 @@
           {
             "name": "organizationName",
             "in": "path",
-            "required": true,
             "description": "Name of the Organizations resource",
+            "required": true,
             "type": "string"
           },
           {
             "name": "configurationName",
             "in": "path",
-            "required": true,
             "description": "Name of the SSO Configuration",
+            "required": true,
             "type": "string"
           },
           {
             "name": "resource",
             "in": "body",
-            "required": true,
             "description": "Resource create parameters.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/SingleSignOn"
             }
@@ -525,22 +567,22 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Resource 'SingleSignOn' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/SingleSignOn"
             }
           },
           "201": {
-            "description": "ARM create operation completed successfully.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            },
+            "description": "Resource 'SingleSignOn' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/SingleSignOn"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -551,6 +593,9 @@
           }
         },
         "x-ms-examples": {
+          "SingleSignOnOperations_CreateOrUpdate1": {
+            "$ref": "./examples/SingleSignOnOperations_CreateOrUpdate_MaximumSet_Gen.json"
+          },
           "SingleSignOnOperations_CreateOrUpdate": {
             "$ref": "./examples/SingleSignOnOperations_CreateOrUpdate_MinimumSet_Gen.json"
           }
@@ -561,10 +606,10 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
+        "operationId": "SingleSignOnOperations_Delete",
         "tags": [
           "SingleSignOnOperations"
         ],
-        "operationId": "SingleSignOnOperations_Delete",
         "description": "Delete a SingleSignOn",
         "parameters": [
           {
@@ -579,15 +624,15 @@
           {
             "name": "organizationName",
             "in": "path",
-            "required": true,
             "description": "Name of the Organizations resource",
+            "required": true,
             "type": "string"
           },
           {
             "name": "configurationName",
             "in": "path",
-            "required": true,
             "description": "Name of the SSO Configuration",
+            "required": true,
             "type": "string"
           }
         ],
@@ -599,9 +644,13 @@
             "description": "Resource deletion accepted.",
             "headers": {
               "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -616,66 +665,36 @@
           }
         },
         "x-ms-examples": {
+          "SingleSignOnOperations_Delete1": {
+            "$ref": "./examples/SingleSignOnOperations_Delete_MaximumSet_Gen.json"
+          },
           "SingleSignOnOperations_Delete": {
             "$ref": "./examples/SingleSignOnOperations_Delete_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
     }
   },
   "definitions": {
-    "ProvisioningState": {
-      "description": "Provisioning State of the Organization resource",
-      "enum": [
-        "Accepted",
-        "Creating",
-        "Updating",
-        "Deleting",
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "Deleted",
-        "NotSpecified"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "ProvisioningState"
-      }
-    },
-    "MarketplaceSubscriptionStatus": {
-      "description": "Flag specifying the Marketplace Subscription Status of the resource. If payment is not made in time, the resource will go in Suspended state.",
-      "enum": [
-        "Provisioning",
-        "Active",
-        "Suspended",
-        "Unsubscribed"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "MarketplaceSubscriptionStatus"
-      },
-      "readOnly": true
-    },
     "CompanyDetails": {
       "type": "object",
+      "description": "Company Details",
       "properties": {
         "companyName": {
           "type": "string",
-          "description": "Name of the company"
+          "description": "company Name"
         },
         "officeAddress": {
           "type": "string",
-          "description": "Address of the company"
+          "description": "Office Address"
         },
         "country": {
           "type": "string",
-          "description": "Name of the country"
+          "description": "Country name"
         },
         "domain": {
           "type": "string",
@@ -683,50 +702,94 @@
         },
         "business": {
           "type": "string",
-          "description": "Business name"
+          "description": "Business phone number"
         },
         "numberOfEmployees": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of employees in the company"
+          "type": "string",
+          "description": "Number Of Employees"
+        }
+      }
+    },
+    "InformaticaOrganizationResource": {
+      "type": "object",
+      "description": "A Organization Resource by Informatica",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OrganizationProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
-      "description": "Details of the company",
-      "required": [
-        "domain",
-        "business",
-        "numberOfEmployees"
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
       ]
     },
-    "OrganizationProperties": {
-      "description": "Informatica Organization properties",
+    "InformaticaOrganizationResourceListResult": {
       "type": "object",
+      "description": "The response of a InformaticaOrganizationResource list operation.",
       "properties": {
+        "value": {
+          "type": "array",
+          "description": "The InformaticaOrganizationResource items on this page",
+          "items": {
+            "$ref": "#/definitions/InformaticaOrganizationResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "InformaticaProperties": {
+      "type": "object",
+      "description": "Properties of the Informatica organization",
+      "properties": {
+        "organizationId": {
+          "type": "string",
+          "description": "Organization id"
+        },
+        "singleSignOnProperties": {
+          "$ref": "#/definitions/InformaticaSingleSignOnProperties",
+          "description": "The login URL specific to this Informatica Organization"
+        }
+      }
+    },
+    "InformaticaSingleSignOnProperties": {
+      "type": "object",
+      "description": "Single sign on Info of the SolarWinds account",
+      "properties": {
+        "singleSignOnState": {
+          "$ref": "#/definitions/SingleSignOnStates",
+          "description": "Single sign-on state"
+        },
+        "enterpriseAppId": {
+          "type": "string",
+          "description": "The Id of the Enterprise App used for Single sign-on."
+        },
+        "singleSignOnUrl": {
+          "type": "string",
+          "description": "The login URL specific to this SolarWinds Organization"
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning State of the resource",
-          "readOnly": true
-        },
-        "informaticaProperties": {
-          "$ref": "#/definitions/InformaticaProperties",
-          "description": "Informatica Organization properties"
-        },
-        "marketplaceDetails": {
-          "$ref": "#/definitions/MarketplaceDetails",
-          "description": "Marketplace details"
-        },
-        "userDetails": {
-          "$ref": "#/definitions/UserDetails",
-          "description": "User details"
-        },
-        "companyDetails": {
-          "$ref": "#/definitions/CompanyDetails",
-          "description": "Company Details"
+          "description": "Provisioning state"
         }
       }
     },
     "MarketplaceDetails": {
       "type": "object",
+      "description": "Marketplace details",
       "properties": {
         "marketplaceSubscriptionId": {
           "type": "string",
@@ -737,62 +800,28 @@
           "description": "Marketplace offer details."
         }
       },
-      "description": "Marketplace details",
       "required": [
         "marketplaceSubscriptionId",
         "offerDetails"
       ]
     },
-    "InformaticaProperties": {
+    "MarketplaceDetailsUpdate": {
       "type": "object",
+      "description": "Marketplace details",
       "properties": {
-        "organizationId": {
+        "marketplaceSubscriptionId": {
           "type": "string",
-          "description": "organization id"
+          "description": "Marketplace Subscription Id"
         },
-        "singleSignOnProperties": {
-          "$ref": "#/definitions/InformaticaSingleSignOnProperties",
-          "description": "The login URL specific to this Informatica Organization"
+        "offerDetails": {
+          "$ref": "#/definitions/OfferDetailsUpdate",
+          "description": "Marketplace offer details."
         }
-      },
-      "description": "Properties of the Informatica organization"
-    },
-    "UserDetails": {
-      "type": "object",
-      "properties": {
-        "firstName": {
-          "type": "string",
-          "description": "User first name.",
-          "maxLength": 50
-        },
-        "lastName": {
-          "type": "string",
-          "description": "User last name.",
-          "maxLength": 50
-        },
-        "emailAddress": {
-          "$ref": "#/definitions/email",
-          "description": "User email address."
-        },
-        "upn": {
-          "type": "string",
-          "description": "UPN of user"
-        },
-        "phoneNumber": {
-          "type": "string",
-          "description": "Phone number of the user used by for contacting them if needed",
-          "maxLength": 40
-        }
-      },
-      "description": "User Info of Informatica Organization resource",
-      "required": [
-        "firstName",
-        "lastName",
-        "emailAddress"
-      ]
+      }
     },
     "OfferDetails": {
       "type": "object",
+      "description": "Details of the product offering.",
       "properties": {
         "publisherId": {
           "type": "string",
@@ -825,7 +854,6 @@
           "maxLength": 50
         }
       },
-      "description": "Details of the product offering.",
       "required": [
         "publisherId",
         "offerId",
@@ -834,8 +862,160 @@
         "termId"
       ]
     },
+    "OfferDetailsUpdate": {
+      "type": "object",
+      "description": "Details of the product offering.",
+      "properties": {
+        "publisherId": {
+          "type": "string",
+          "description": "Id of the product publisher.",
+          "maxLength": 50
+        },
+        "offerId": {
+          "type": "string",
+          "description": "Id of the product offering.",
+          "maxLength": 50
+        },
+        "planId": {
+          "type": "string",
+          "description": "Id of the product offer plan.",
+          "maxLength": 50
+        },
+        "planName": {
+          "type": "string",
+          "description": "Name of the product offer plan.",
+          "maxLength": 50
+        },
+        "termUnit": {
+          "type": "string",
+          "description": "Offer plan term unit.",
+          "maxLength": 25
+        },
+        "termId": {
+          "type": "string",
+          "description": "Offer plan term id.",
+          "maxLength": 50
+        }
+      }
+    },
+    "OrganizationProperties": {
+      "type": "object",
+      "description": "Properties specific to the Informatica DataManagement Organization resource",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State of the resource",
+          "readOnly": true
+        },
+        "informaticaProperties": {
+          "$ref": "#/definitions/InformaticaProperties",
+          "description": "Informatica Organization properties"
+        },
+        "marketplaceDetails": {
+          "$ref": "#/definitions/MarketplaceDetails",
+          "description": "Marketplace details"
+        },
+        "userDetails": {
+          "$ref": "#/definitions/UserDetails",
+          "description": "User details"
+        },
+        "companyDetails": {
+          "$ref": "#/definitions/CompanyDetails",
+          "description": "Company details"
+        }
+      }
+    },
+    "OrganizationPropertiesUpdate": {
+      "type": "object",
+      "description": "Properties specific to the Informatica DataManagement Organization resource",
+      "properties": {
+        "informaticaProperties": {
+          "$ref": "#/definitions/InformaticaProperties",
+          "description": "Informatica Organization properties"
+        },
+        "marketplaceDetails": {
+          "$ref": "#/definitions/MarketplaceDetailsUpdate",
+          "description": "Marketplace details"
+        },
+        "userDetails": {
+          "$ref": "#/definitions/UserDetails",
+          "description": "User details"
+        },
+        "companyDetails": {
+          "$ref": "#/definitions/CompanyDetails",
+          "description": "Company details"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning State of the Organization resource",
+      "enum": [
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleted",
+        "NotSpecified"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Organization resource creation request accepted"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Organization resource creation started"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Organization resource is being updated"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Organization resource deletion started"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Organization resource creation successful"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Organization resource creation failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Organization resource creation canceled"
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "Organization resource is deleted"
+          },
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "Organization resource state is unknown"
+          }
+        ]
+      }
+    },
     "SingleSignOn": {
       "type": "object",
+      "description": "Single sign-on configurations for a Informatica resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/InformaticaSingleSignOnProperties",
@@ -847,7 +1027,6 @@
           ]
         }
       },
-      "description": "Single sign-on configurations for a Informatica resource",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -856,23 +1035,21 @@
     },
     "SingleSignOnListResult": {
       "type": "object",
+      "description": "The response of a SingleSignOn list operation.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The SingleSignOn items on this page",
           "items": {
             "$ref": "#/definitions/SingleSignOn"
-          },
-          "x-cadl-name": "SingleSignOn[]",
-          "description": "The SingleSignOn items on this page"
+          }
         },
         "nextLink": {
           "type": "string",
-          "description": "The link to the next page of items",
           "format": "uri",
-          "x-cadl-name": "Rest.ResourceLocation<SingleSignOn>"
+          "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a SingleSignOn list operation.",
       "required": [
         "value"
       ]
@@ -888,158 +1065,59 @@
       ],
       "x-ms-enum": {
         "name": "SingleSignOnStates",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Initial",
+            "value": "Initial",
+            "description": "SSO state Initial"
+          },
+          {
+            "name": "Enable",
+            "value": "Enable",
+            "description": "SSO state Enable"
+          },
+          {
+            "name": "Disable",
+            "value": "Disable",
+            "description": "SSO state Disable"
+          },
+          {
+            "name": "Existing",
+            "value": "Existing",
+            "description": "SSO state Existing"
+          }
+        ]
       }
     },
-    "SingleSignOnStatesValues": {
-      "type": "string",
-      "description": "Various states of the SSO resource",
-      "enum": [
-        "Initial",
-        "Enable",
-        "Disable",
-        "Existing"
-      ],
-      "x-ms-enum": {
-        "name": "SingleSignOnStatesValues",
-        "modelAsString": false
+    "UserDetails": {
+      "type": "object",
+      "description": "User Info of Informatica Organization resource",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "description": "User first name.",
+          "maxLength": 50
+        },
+        "lastName": {
+          "type": "string",
+          "description": "User last name.",
+          "maxLength": 50
+        },
+        "emailAddress": {
+          "$ref": "#/definitions/email",
+          "description": "User email address."
+        },
+        "upn": {
+          "type": "string",
+          "description": "UPN of user"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "Phone number of the user used by for contacting them if needed",
+          "maxLength": 40
+        }
       }
-    },
-    "InformaticaSingleSignOnProperties": {
-      "type": "object",
-      "properties": {
-        "singleSignOnState": {
-          "$ref": "#/definitions/SingleSignOnStates",
-          "description": "Single sign-on state"
-        },
-        "enterpriseAppId": {
-          "type": "string",
-          "description": "The Id of the Enterprise App used for Single sign-on."
-        },
-        "singleSignOnUrl": {
-          "type": "string",
-          "description": "The login URL specific to this Informatica Organization"
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state"
-        }
-      },
-      "description": "Single sign on Info of the Informatica account"
-    },
-    "InformaticaOrganizationResource": {
-      "type": "object",
-      "x-ms-azure-resource": true,
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/OrganizationProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        }
-      },
-      "description": "A Organization Resource by Informatica",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "InformaticaOrganizationResourceUpdate": {
-      "type": "object",
-      "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-cadl-name": "Record<string>",
-          "description": "Resource tags."
-        },
-        "properties": {
-          "$ref": "#/definitions/InformaticaOrganizationResourceUpdateProperties"
-        }
-      },
-      "description": "The type used for update operations of the InformaticaOrganizationResource."
-    },
-    "InformaticaOrganizationResourceUpdateProperties": {
-      "type": "object",
-      "properties": {
-        "informaticaProperties": {
-          "$ref": "#/definitions/InformaticaProperties",
-          "description": "Informatica Organization properties"
-        },
-        "marketplaceDetails": {
-          "$ref": "#/definitions/MarketplaceDetails",
-          "description": "Marketplace details"
-        },
-        "userDetails": {
-          "$ref": "#/definitions/UserDetails",
-          "description": "User details"
-        },
-        "companyDetails": {
-          "$ref": "#/definitions/CompanyDetails",
-          "description": "Company Details"
-        }
-      },
-      "description": "The updatable properties of the InformaticaOrganizationResource."
-    },
-    "InformaticaOrganizationResourceListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InformaticaOrganizationResource"
-          },
-          "x-cadl-name": "InformaticaOrganizationResource[]",
-          "description": "The InformaticaOrganizationResource items on this page"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The link to the next page of items",
-          "format": "uri",
-          "x-cadl-name": "Rest.ResourceLocation<InformaticaOrganizationResource>"
-        }
-      },
-      "description": "The response of a InformaticaOrganizationResource list operation.",
-      "required": [
-        "value"
-      ]
-    },
-    "InformaticaOrganizationResourceListResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InformaticaOrganizationResource"
-          },
-          "x-cadl-name": "InformaticaOrganizationResource[]",
-          "description": "The InformaticaOrganizationResource items on this page"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The link to the next page of items",
-          "format": "uri",
-          "x-cadl-name": "Rest.ResourceLocation<InformaticaOrganizationResource>"
-        }
-      },
-      "description": "List of all the resources being monitored by Informatica organization resource",
-      "required": [
-        "value"
-      ]
     },
     "email": {
       "type": "string",
