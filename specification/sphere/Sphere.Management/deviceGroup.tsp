@@ -55,7 +55,7 @@ interface DeviceGroups
   @armResourceAction(DeviceGroup)
   @post
   countDevices(
-    ...ResourceInstanceParameters<DeviceGroup>
+    ...ResourceInstanceParameters<DeviceGroup>,
   ): ArmResponse<CountDeviceResponse> | ErrorResponse;
 
   @autoRoute
@@ -74,7 +74,7 @@ interface DeviceGroups
 
     @doc("Bulk claim devices request body.")
     @body
-    claimDevicesRequest: ClaimDevicesRequest
+    claimDevicesRequest: ClaimDevicesRequest,
   ): ArmAcceptedResponse | ErrorResponse;
 }
 

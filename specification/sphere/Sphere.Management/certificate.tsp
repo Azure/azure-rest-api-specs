@@ -31,7 +31,7 @@ interface Certificates
   @armResourceAction(Certificate)
   @post
   retrieveCertChain(
-    ...ResourceInstanceParameters<Certificate>
+    ...ResourceInstanceParameters<Certificate>,
   ): ArmResponse<CertificateChainResponse> | ErrorResponse;
 
   @autoRoute
@@ -43,7 +43,7 @@ interface Certificates
 
     @doc("Proof of possession nonce request body ")
     @body
-    proofOfPossessionNonceRequest: ProofOfPossessionNonceRequest
+    proofOfPossessionNonceRequest: ProofOfPossessionNonceRequest,
   ): ArmResponse<ProofOfPossessionNonceResponse> | ErrorResponse;
 }
 
