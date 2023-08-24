@@ -92,8 +92,9 @@ namespace EventGrid {
     @doc("Time the client resource is last updated based on the provider's UTC time. If the client resource was never updated, this value is identical to the value of the `createdOn` property.")
     updatedOn ?: string;
 
+    #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Type is object"
     @doc("The key-value attributes that are assigned to the client resource.")
-    attributes ?: Record<string>;
+    attributes ?: Record<unknown>;
   }
 
 }
