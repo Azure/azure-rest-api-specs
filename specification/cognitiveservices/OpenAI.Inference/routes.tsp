@@ -7,6 +7,8 @@ import "./models/completions.create.tsp";
 import "./models/chat.completions.tsp";
 import "./models/embeddings.create.tsp";
 import "./models/images.tsp";
+import "./models/transcription.create.tsp";
+import "./models/translation.create.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -98,4 +100,24 @@ op beginAzureBatchImageGeneration is OaiLongRunningRpcOperation<
   ImageGenerationOptions,
   BatchImageGenerationOperationResponse,
   BatchImageGenerationOperationResponse
+>;
+
+@doc("Transcribes audio into the input language.")
+@added(ServiceApiVersions.v2023_09_01_Preview)
+@actionSeparator("/")
+@action("/deployments/{deployment-id}/audio/transcriptions") //@convenientAPI(true)
+op getTranscriptions is Azure.Core.ResourceAction<
+  Deployment,
+  TranscriptionsOptions,
+  Transcription
+>;
+
+@doc("Transcribes audio into the input language.")
+@added(ServiceApiVersions.v2023_09_01_Preview)
+@actionSeparator("/")
+@action("/deployments/{deployment-id}/audio/translations") //@convenientAPI(true)
+op getTranslation is Azure.Core.ResourceAction<
+  Deployment,
+  TranslationOptions,
+  Translation
 >;
