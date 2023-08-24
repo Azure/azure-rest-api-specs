@@ -27,10 +27,18 @@ These are the global settings for the solarwinds.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2023-07
+tag: package-2023-08-23-preview
 ```
 
 
+### Tag: package-2023-08-23-preview
+
+These settings apply only when `--tag=package-2023-08-23-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-08-23-preview'
+input-file:
+  - SolarWinds.Observability/preview/2023-08-23-preview/openapi.json
+```
 ### Tag: package-preview-2023-07
 
 These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.

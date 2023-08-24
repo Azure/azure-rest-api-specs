@@ -854,6 +854,28 @@
         }
       }
     },
+    "DiskExclusionProperties": {
+      "description": "Defines the disk exclusion properties for virtual machine backup.",
+      "type": "object",
+      "required": [
+        "diskLunList",
+        "isInclusionList"
+      ],
+      "properties": {
+        "diskLunList": {
+          "description": "List of Disks' Logical Unit Numbers (LUN) to be used for VM Protection.",
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "isInclusionList": {
+          "description": "Flag to indicate whether DiskLunList is to be included/ excluded from backup.",
+          "type": "boolean"
+        }
+      }
+    },
     "VMBackupData": {
       "description": "Defines the VM Backup data for a virtual instance for SAP.",
       "x-ms-discriminator-value": "VM",
@@ -866,6 +888,9 @@
       "properties": {
         "backupPolicy": {
           "$ref": "#/definitions/VMBackupPolicyProperties"
+        },
+        "diskExclusionProperties": {
+          "$ref": "#/definitions/DiskExclusionProperties"
         }
       },
       "required": [

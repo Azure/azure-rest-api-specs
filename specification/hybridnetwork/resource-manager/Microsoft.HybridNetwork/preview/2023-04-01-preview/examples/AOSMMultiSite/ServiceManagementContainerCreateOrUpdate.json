@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "resourceGroupName": "rg1",
+    "serviceManagementContainerName": "testServiceManagementContainer",
+    "api-version": "2023-04-01-preview",
+    "subscriptionId": "b7173c9f-853f-45b5-8b75-3fb7d1e78388",
+    "parameters": {
+      "location": "westus",
+      "properties": {},
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/b7173c9f-853f-45b5-8b75-3fb7d1e78388/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {}
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "westus",
+        "id": "/subscriptions/b7173c9f-853f-45b5-8b75-3fb7d1e78388/resourceGroups/rg1/providers/Microsoft.HybridNetwork/serviceManagementContainer/testServiceManagementContainer",
+        "name": "user1",
+        "type": "Microsoft.HybridNetwork/GCA/serviceManagementContainer",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2023-01-01T14:56:15.101Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-01-01T14:56:15.101Z"
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/b7173c9f-853f-45b5-8b75-3fb7d1e78388/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+              "principalId": "ae0a5400-e617-4096-a65f-6e3cd6e94979",
+              "clientId": "5be0683b-c392-49f7-8fe3-fdf859f49a92"
+            }
+          }
+        },
+        "tags": {
+          "rolloutType": "main"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "location": "westus",
+        "id": "/subscriptions/b7173c9f-853f-45b5-8b75-3fb7d1e78388/resourceGroups/rg1/providers/Microsoft.HybridNetwork/serviceManagementContainer/testServiceManagementContainer",
+        "name": "user1",
+        "type": "Microsoft.HybridNetwork/GCA/serviceManagementContainer",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2023-01-01T14:56:15.101Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-01-01T14:56:15.101Z"
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/b7173c9f-853f-45b5-8b75-3fb7d1e78388/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+              "principalId": "ae0a5400-e617-4096-a65f-6e3cd6e94979",
+              "clientId": "5be0683b-c392-49f7-8fe3-fdf859f49a92"
+            }
+          }
+        },
+        "tags": {
+          "rolloutType": "main"
+        }
+      }
+    }
+  }
+}

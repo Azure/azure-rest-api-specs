@@ -1,0 +1,2605 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Definitions for Service Management Container and sub-resources used by Azure Operator Service Manager (AOSM) Multi-Site. AOSM is a service enabling network operators to perform lifecycle management of telecom infrastructure.",
+    "title": "HybridNetworkManagementClient",
+    "version": "2023-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "tags": [
+    {
+      "description": "Actions on Service Management Container",
+      "name": "ServiceManagementContainer"
+    },
+    {
+      "description": "Actions on RolloutTier",
+      "name": "RolloutTier"
+    },
+    {
+      "description": "Everything about RolloutSequence",
+      "name": "RolloutSequence"
+    },
+    {
+      "description": "Actions on UpdateSpecification",
+      "name": "UpdateSpecification"
+    },
+    {
+      "description": "Everything about Rollout",
+      "name": "Rollout"
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "type": "oauth2"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/serviceManagementContainers/{serviceManagementContainerName}/rolloutSequences/{rolloutSequenceName}": {
+      "delete": {
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutSequenceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "RolloutSequence"
+        ],
+        "operationId": "RolloutSequences_Delete",
+        "summary": "Delete Rollout Script",
+        "x-ms-examples": {
+          "RolloutSequenceDelete": {
+            "$ref": "./examples/AOSMMultiSite/RolloutSequenceDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutSequenceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RolloutSequence"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "RolloutSequence"
+        ],
+        "operationId": "RolloutSequences_Get",
+        "summary": "Get Rollout Script",
+        "x-ms-examples": {
+          "RolloutSequenceGet": {
+            "$ref": "./examples/AOSMMultiSite/RolloutSequenceGet.json"
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutSequenceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RolloutSequence"
+            },
+            "description": "Parameters supplied to create a rollout sequence."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "update successful",
+            "schema": {
+              "$ref": "#/definitions/RolloutSequence"
+            }
+          },
+          "201": {
+            "description": "create successful",
+            "schema": {
+              "$ref": "#/definitions/RolloutSequence"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "RolloutSequence"
+        ],
+        "operationId": "RolloutSequences_CreateOrUpdate",
+        "summary": "Create a Rollout Script object",
+        "x-ms-examples": {
+          "RolloutSequenceCreateOrUpdate": {
+            "$ref": "./examples/AOSMMultiSite/RolloutSequenceCreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutSequenceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update rollout script tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting rollout script resource.",
+            "schema": {
+              "$ref": "#/definitions/RolloutSequence"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "RolloutSequence"
+        ],
+        "operationId": "RolloutSequences_UpdateTags",
+        "summary": "Updates a rollout script tags.",
+        "x-ms-examples": {
+          "RolloutSequenceUpdateTags": {
+            "$ref": "./examples/AOSMMultiSite/RolloutSequenceUpdateTags.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/serviceManagementContainers/{serviceManagementContainerName}/rolloutSequences": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns a list of Rollout Script resources.",
+            "schema": {
+              "$ref": "#/definitions/RolloutSequenceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "RolloutSequence"
+        ],
+        "operationId": "RolloutSequences_ListByServiceManagementContainer",
+        "summary": "Lists all the RolloutSequences in a Service Management Container.",
+        "x-ms-examples": {
+          "RolloutSequenceListByServiceManagementContainer": {
+            "$ref": "./examples/AOSMMultiSite/RolloutSequenceListByServiceManagementContainer.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/serviceManagementContainers/{serviceManagementContainerName}/updateSpecifications": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns a list of UpdateSpecification resources.",
+            "schema": {
+              "$ref": "#/definitions/UpdateSpecificationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "UpdateSpecification"
+        ],
+        "operationId": "UpdateSpecifications_ListByServiceManagementContainer",
+        "summary": "Lists all the UpdateSpecifications in a Service Management Container.",
+        "x-ms-examples": {
+          "UpdateSpecificationListByServiceManagementContainer": {
+            "$ref": "./examples/AOSMMultiSite/UpdateSpecificationListByServiceManagementContainer.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/serviceManagementContainers/{serviceManagementContainerName}/rolloutTiers": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns a list of rollout tier resources.",
+            "schema": {
+              "$ref": "#/definitions/RolloutTierListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "RolloutTier"
+        ],
+        "operationId": "RolloutTiers_ListByServiceManagementContainer",
+        "summary": "Lists all the Rollout Tiers in a Service Management Container.",
+        "x-ms-examples": {
+          "RolloutTierListByServiceManagementContainer": {
+            "$ref": "./examples/AOSMMultiSite/RolloutTierListByServiceManagementContainer.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/serviceManagementContainers/{serviceManagementContainerName}/rolloutTiers/{rolloutTierName}": {
+      "delete": {
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutTierNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "RolloutTier"
+        ],
+        "operationId": "RolloutTiers_Delete",
+        "summary": "Delete Rollout Tier",
+        "x-ms-examples": {
+          "RolloutTierDelete": {
+            "$ref": "./examples/AOSMMultiSite/RolloutTierDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutTierNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RolloutTier"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "RolloutTier"
+        ],
+        "operationId": "RolloutTiers_Get",
+        "summary": "Get Rollout Tier",
+        "x-ms-examples": {
+          "RolloutTierGet": {
+            "$ref": "./examples/AOSMMultiSite/RolloutTierGet.json"
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutTierNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RolloutTier"
+            },
+            "description": "Parameters supplied to create a rollout tier."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "update successful",
+            "schema": {
+              "$ref": "#/definitions/RolloutTier"
+            }
+          },
+          "201": {
+            "description": "create successful",
+            "schema": {
+              "$ref": "#/definitions/RolloutTier"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "RolloutTier"
+        ],
+        "operationId": "RolloutTiers_CreateOrUpdate",
+        "summary": "Create a rollout tier object",
+        "x-ms-examples": {
+          "RolloutTierCreateOrUpdate": {
+            "$ref": "./examples/AOSMMultiSite/RolloutTierCreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutTierNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update rollout tier tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting rollout script resource.",
+            "schema": {
+              "$ref": "#/definitions/RolloutTier"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "RolloutTier"
+        ],
+        "operationId": "RolloutTiers_UpdateTags",
+        "summary": "Updates a rollout tier tags.",
+        "x-ms-examples": {
+          "RolloutTierUpdateTags": {
+            "$ref": "./examples/AOSMMultiSite/RolloutTierUpdateTags.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/serviceManagementContainers/{serviceManagementContainerName}/updateSpecifications/{updateSpecificationName}/rollouts/{rolloutName}": {
+      "delete": {
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Rollout"
+        ],
+        "operationId": "Rollouts_Delete",
+        "summary": "Delete a rollout",
+        "x-ms-examples": {
+          "RolloutDelete": {
+            "$ref": "./examples/AOSMMultiSite/RolloutDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "put": {
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Rollout"
+            },
+            "description": "Parameters supplied to create or update a rollout."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "update successful",
+            "schema": {
+              "$ref": "#/definitions/Rollout"
+            }
+          },
+          "201": {
+            "description": "create successful",
+            "schema": {
+              "$ref": "#/definitions/Rollout"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Rollout"
+        ],
+        "operationId": "Rollouts_CreateOrUpdate",
+        "summary": "Create a new rollout",
+        "x-ms-examples": {
+          "RolloutCreate": {
+            "$ref": "./examples/AOSMMultiSite/RolloutCreate.json"
+          },
+          "RolloutUpdate": {
+            "$ref": "./examples/AOSMMultiSite/RolloutUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Rollout"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Rollout"
+        ],
+        "operationId": "Rollouts_Get",
+        "summary": "Get rollout",
+        "x-ms-examples": {
+          "RolloutGet": {
+            "$ref": "./examples/AOSMMultiSite/RolloutGet.json"
+          }
+        }
+      },
+      "patch": {
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update rollout tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting rollout resource.",
+            "schema": {
+              "$ref": "#/definitions/Rollout"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Rollout"
+        ],
+        "operationId": "Rollouts_UpdateTags",
+        "summary": "Updates a rollout tags.",
+        "x-ms-examples": {
+          "RolloutUpdateTags": {
+            "$ref": "./examples/AOSMMultiSite/RolloutUpdateTags.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/serviceManagementContainers/{serviceManagementContainerName}/updateSpecifications/{updateSpecificationName}/rollouts/{rolloutName}/start": {
+      "post": {
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Rollout"
+        ],
+        "operationId": "Rollouts_Start",
+        "summary": "Starts the specified rollout",
+        "x-ms-examples": {
+          "RolloutStart": {
+            "$ref": "./examples/AOSMMultiSite/RolloutStart.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/serviceManagementContainers/{serviceManagementContainerName}/updateSpecifications/{updateSpecificationName}/rollouts/{rolloutName}/cancel": {
+      "post": {
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Rollout"
+        ],
+        "operationId": "Rollouts_Cancel",
+        "summary": "Cancels the specified rollout",
+        "x-ms-examples": {
+          "RolloutCancel": {
+            "$ref": "./examples/AOSMMultiSite/RolloutCancel.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/serviceManagementContainers/{serviceManagementContainerName}/updateSpecifications/{updateSpecificationName}/rollouts/{rolloutName}/continue": {
+      "post": {
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Rollout"
+        ],
+        "operationId": "Rollouts_Continue",
+        "summary": "Continue a rollout which is waiting for operator intervention at a manual gate.",
+        "x-ms-examples": {
+          "RolloutContinue": {
+            "$ref": "./examples/AOSMMultiSite/RolloutContinue.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/serviceManagementContainers/{serviceManagementContainerName}/updateSpecifications/{updateSpecificationName}/rollouts/{rolloutName}/suspend": {
+      "post": {
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Rollout"
+        ],
+        "operationId": "Rollouts_Suspend",
+        "summary": "Suspends the specified rollout",
+        "x-ms-examples": {
+          "RolloutContinue": {
+            "$ref": "./examples/AOSMMultiSite/RolloutSuspend.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/serviceManagementContainers/{serviceManagementContainerName}/updateSpecifications/{updateSpecificationName}/rollouts/{rolloutName}/resume": {
+      "post": {
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Rollout"
+        ],
+        "operationId": "Rollouts_Resume",
+        "summary": "Resumes the specified rollout if it has been previously suspended",
+        "x-ms-examples": {
+          "RolloutContinue": {
+            "$ref": "./examples/AOSMMultiSite/RolloutResume.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/serviceManagementContainers/{serviceManagementContainerName}/updateSpecifications/{updateSpecificationName}/rollouts/{rolloutName}/statuses": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RolloutStatusListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "RolloutStatus"
+        ],
+        "operationId": "RolloutStatuses_ListByRollout",
+        "summary": "Lists all the Rollouts in an UpdateSpecification",
+        "x-ms-examples": {
+          "RolloutListByUpdateSpecification": {
+            "$ref": "./examples/AOSMMultiSite/RolloutStatusListByRollout.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/serviceManagementContainers/{serviceManagementContainerName}/updateSpecifications/{updateSpecificationName}/rollouts/{rolloutName}/statuses/default": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RolloutStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "RolloutStatus"
+        ],
+        "operationId": "RolloutStatuses_Get",
+        "summary": "Get the Rollout object with status",
+        "x-ms-examples": {
+          "RolloutStatusGet": {
+            "$ref": "./examples/AOSMMultiSite/RolloutStatusGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/serviceManagementContainers/{serviceManagementContainerName}/updateSpecifications/{updateSpecificationName}/rollouts": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RolloutListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Rollout"
+        ],
+        "operationId": "Rollouts_ListByUpdateSpecification",
+        "summary": "Lists all the Rollouts in an UpdateSpecification",
+        "x-ms-examples": {
+          "RolloutListByUpdateSpecification": {
+            "$ref": "./examples/AOSMMultiSite/RolloutListByUpdateSpecification.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/serviceManagementContainers/{serviceManagementContainerName}": {
+      "put": {
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceManagementContainer"
+            },
+            "description": "Parameters supplied to create a service management container."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "update successful",
+            "schema": {
+              "$ref": "#/definitions/ServiceManagementContainer"
+            }
+          },
+          "201": {
+            "description": "create successful",
+            "schema": {
+              "$ref": "#/definitions/ServiceManagementContainer"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "ServiceManagementContainer"
+        ],
+        "description": "Create a new service management container, which is the parent container for all other AOSM Multi-Site ARM resources.",
+        "operationId": "ServiceManagementContainers_CreateOrUpdate",
+        "summary": "Create a new service management container",
+        "x-ms-examples": {
+          "ServiceManagementContainerCreateOrUpdate": {
+            "$ref": "./examples/AOSMMultiSite/ServiceManagementContainerCreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsAndIdentityObject"
+            },
+            "description": "Parameters supplied to update service management container tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting service management container resource.",
+            "schema": {
+              "$ref": "#/definitions/ServiceManagementContainer"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "ServiceManagementContainer"
+        ],
+        "operationId": "ServiceManagementContainers_UpdateTags",
+        "summary": "Updates a service management container tags.",
+        "x-ms-examples": {
+          "ServiceManagementContainerUpdateTags": {
+            "$ref": "./examples/AOSMMultiSite/ServiceManagementContainerUpdateTags.json"
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "ServiceManagementContainer"
+        ],
+        "operationId": "ServiceManagementContainers_Delete",
+        "summary": "Delete the management container",
+        "x-ms-examples": {
+          "ServiceManagementContainerDelete": {
+            "$ref": "./examples/AOSMMultiSite/ServiceManagementContainerDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/ServiceManagementContainer"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "ServiceManagementContainer"
+        ],
+        "operationId": "ServiceManagementContainers_Get",
+        "summary": "Get service management container",
+        "x-ms-examples": {
+          "ServiceManagementContainerGet": {
+            "$ref": "./examples/AOSMMultiSite/ServiceManagementContainerGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/serviceManagementContainers": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ServiceManagementContainerListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "ServiceManagementContainer"
+        ],
+        "operationId": "ServiceManagementContainers_ListByResourceGroup",
+        "summary": "Lists all the Service Management Container in a resource group",
+        "x-ms-examples": {
+          "ServiceManagementContainerListByResourceGroup": {
+            "$ref": "./examples/AOSMMultiSite/ServiceManagementContainerListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/serviceManagementContainers": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ServiceManagementContainerListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "ServiceManagementContainer"
+        ],
+        "operationId": "ServiceManagementContainers_ListBySubscription",
+        "summary": "Lists all the Service Management Containers in a subscription.",
+        "x-ms-examples": {
+          "ServiceManagementContainerListBySubscription": {
+            "$ref": "./examples/AOSMMultiSite/ServiceManagementContainerListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/serviceManagementContainers/{serviceManagementContainerName}/updateSpecifications/{updateSpecificationName}": {
+      "put": {
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateSpecification"
+            },
+            "description": "Parameters supplied to create an update specification."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "update successful",
+            "schema": {
+              "$ref": "#/definitions/UpdateSpecification"
+            }
+          },
+          "201": {
+            "description": "create successful",
+            "schema": {
+              "$ref": "#/definitions/UpdateSpecification"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "UpdateSpecification"
+        ],
+        "description": "UpdateSpecification represents how the network infrastructure should be changed and comprises of initial and desired Config Group Values (CGV) and Network Service Design Versions (NSDV).",
+        "operationId": "UpdateSpecifications_CreateOrUpdate",
+        "summary": "Create an Update Spec object script",
+        "x-ms-examples": {
+          "UpdateSpecificationCreateOrUpdate": {
+            "$ref": "./examples/AOSMMultiSite/UpdateSpecificationCreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update update spec tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting update spec resource.",
+            "schema": {
+              "$ref": "#/definitions/UpdateSpecification"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "UpdateSpecification"
+        ],
+        "operationId": "UpdateSpecifications_UpdateTags",
+        "summary": "Updates an update spec tags.",
+        "x-ms-examples": {
+          "UpdateSpecificationUpdateTags": {
+            "$ref": "./examples/AOSMMultiSite/UpdateSpecificationUpdateTags.json"
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "UpdateSpecification"
+        ],
+        "operationId": "UpdateSpecifications_Delete",
+        "summary": "Delete Update Spec",
+        "x-ms-examples": {
+          "UpdateSpecificationDelete": {
+            "$ref": "./examples/AOSMMultiSite/UpdateSpecificationDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/UpdateSpecification"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "UpdateSpecification"
+        ],
+        "operationId": "UpdateSpecifications_Get",
+        "summary": "Get UpdateSpecification",
+        "x-ms-examples": {
+          "UpdateSpecificationGet": {
+            "$ref": "./examples/AOSMMultiSite/UpdateSpecificationGet.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "GateAction": {
+      "type": "object",
+      "properties": {
+        "preCheck": {
+          "$ref": "#/definitions/PreCheck",
+          "description": "Pre-action to be applied to rollout tiers.",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
+        },
+        "gates": {
+          "type": "array",
+          "description": "Post-actions to be applied to rollout tiers.",
+          "items": {
+            "$ref": "#/definitions/Gate"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
+        }
+      },
+      "description": "Actions to be associated with an individual rollout site."
+    },
+    "RolloutListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Rollout"
+          },
+          "description": "A list of Rollouts."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "A list of Rollouts."
+    },
+    "Rollout": {
+      "description": "A rollout object.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RolloutProperties",
+          "description": "Rollout properties."
+        },
+        "systemData": {
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "RolloutStatusListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RolloutStatus"
+          },
+          "description": "A list of Rollout statuses."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "A list of Rollout statuses."
+    },
+    "RolloutStatus": {
+      "description": "Status of a rollout.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RolloutStatusProperties",
+          "description": "Rollout progress status properties."
+        }
+      },
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RolloutProperties": {
+      "description": "Rollout properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the rollout resource."
+        },
+        "rolloutSequenceReference": {
+          "$ref": "./common.json#/definitions/ReferencedResource",
+          "description": "Reference to the RolloutSequence to be used when creating the Rollout.  This is valid only at creation: changes to the created Rollout can be made through `rolloutTiers`.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "rolloutTiers": {
+          "items": {
+            "$ref": "#/definitions/RolloutTierSnapshot"
+          },
+          "description": "Rollout tier snapshots.",
+          "type": "array",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "configurationGroupValueChanges": {
+          "additionalProperties": {
+            "$ref": "#/definitions/ConfigurationGroupValueChange"
+          },
+          "description": "Configuration group value changes.",
+          "type": "object",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "networkServiceDesignVersionChange": {
+          "$ref": "#/definitions/NetworkServiceDesignVersionChange",
+          "description": "Network service design version change.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "restrictions": {
+          "description": "List of Tiers/SiteNetworkServices that should be excluded from this UpdateSpecification",
+          "items": {
+            "$ref": "./common.json#/definitions/ReferencedResource"
+          },
+          "type": "array",
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "RolloutStatusProperties": {
+      "description": "Rollout properties.",
+      "type": "object",
+      "properties": {
+        "rolloutTiers": {
+          "items": {
+            "$ref": "#/definitions/RolloutTierStatus"
+          },
+          "type": "array",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "configurationGroupValueChanges": {
+          "additionalProperties": {
+            "$ref": "#/definitions/ConfigurationGroupValueChange"
+          },
+          "type": "object",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
+        },
+        "networkServiceDesignVersionChange": {
+          "$ref": "#/definitions/NetworkServiceDesignVersionChange",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
+        },
+        "restrictions": {
+          "description": "List of Tiers/SiteNetworkServices that should be excluded from this UpdateSpecification",
+          "items": {
+            "$ref": "./common.json#/definitions/ReferencedResource"
+          },
+          "type": "array",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "rolloutInfo": {
+          "$ref": "#/definitions/rolloutInfo",
+          "description": "Overall state and metadata of the rollout.",
+          "readOnly": true
+        }
+      }
+    },
+    "RolloutSequenceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RolloutSequence"
+          },
+          "description": "A list of Rollout Scripts."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "A list of Rollout Scripts."
+    },
+    "RolloutSequence": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RolloutSequenceProperties",
+          "description": "RolloutSequence properties."
+        },
+        "systemData": {
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "An object describing the sequence of operations in a rollout."
+    },
+    "RolloutSequenceProperties": {
+      "description": "RolloutSequence properties.",
+      "type": "object",
+      "required": [
+        "rolloutTierActions"
+      ],
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the rollout script resource."
+        },
+        "rolloutTierActions": {
+          "items": {
+            "$ref": "#/definitions/RolloutTierActionProperties"
+          },
+          "type": "array",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "The rollout tier action list."
+        }
+      }
+    },
+    "RolloutTierListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RolloutTier"
+          },
+          "description": "A list of RolloutTiers."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "A list of RolloutTiers."
+    },
+    "RolloutTier": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RolloutTierProperties",
+          "description": "Rollout Tier properties."
+        },
+        "systemData": {
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "An individual rollout tier."
+    },
+    "RolloutTierProperties": {
+      "description": "Rollout Tier properties.",
+      "type": "object",
+      "required": [
+        "orderedSiteNetworkServices"
+      ],
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the rollout tier resource."
+        },
+        "excludedSiteNetworkServices": {
+          "items": {
+            "$ref": "./common.json#/definitions/ReferencedResource"
+          },
+          "type": "array",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
+        },
+        "orderedSiteNetworkServices": {
+          "description": "An ordered list of SiteNetworkServices",
+          "items": {
+            "$ref": "./common.json#/definitions/ReferencedResource"
+          },
+          "type": "array",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
+        }
+      }
+    },
+    "RolloutTierActionProperties": {
+      "description": "Properties of a rollout tier action.",
+      "type": "object",
+      "required": [
+        "rolloutTierReference"
+      ],
+      "properties": {
+        "rolloutTierReference": {
+          "$ref": "./common.json#/definitions/ReferencedResource",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
+        },
+        "inTierActions": {
+          "description": "Actions to perform between SiteNetworkServices within a RolloutTier.",
+          "$ref": "#/definitions/GateAction",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
+        },
+        "betweenTierActions": {
+          "description": "Actions to perform between tiers.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Gate"
+          }
+        }
+      }
+    },
+    "TagsAndIdentityObject": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "identity": {
+          "description": "Identity of ServiceManagementContainer resource",
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "Tags and identity object."
+    },
+    "ServiceManagementContainerListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceManagementContainer"
+          },
+          "description": "A list of ServiceManagementContainers."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "A list of ServiceManagementContainers."
+    },
+    "ServiceManagementContainer": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServiceManagementContainerProperties",
+          "description": "ServiceManagementContainer properties."
+        },
+        "systemData": {
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "identity": {
+          "description": "Identity of ServiceManagementContainer resource",
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "A service management container."
+    },
+    "ServiceManagementContainerProperties": {
+      "description": "ServiceManagementContainer properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the ServiceManagementContainer."
+        }
+      }
+    },
+    "UpdateSpecificationListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdateSpecification"
+          },
+          "description": "A list of UpdateSpecifications."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "A list of UpdateSpecifications."
+    },
+    "UpdateSpecification": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UpdateSpecificationProperties",
+          "description": "UpdateSpecification properties."
+        },
+        "systemData": {
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "An object describing changes to be applied to every site in the rollout."
+    },
+    "UpdateSpecificationProperties": {
+      "description": "UpdateSpecification properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the UpdateSpecification."
+        },
+        "configurationGroupValueChanges": {
+          "additionalProperties": {
+            "$ref": "#/definitions/ConfigurationGroupValueChange"
+          },
+          "type": "object",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
+        },
+        "networkServiceDesignVersionChange": {
+          "$ref": "#/definitions/NetworkServiceDesignVersionChange",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
+        },
+        "restrictions": {
+          "description": "List of Tiers/SiteNetworkServices that should be excluded from this UpdateSpecification",
+          "items": {
+            "$ref": "./common.json#/definitions/ReferencedResource"
+          },
+          "type": "array",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
+        }
+      }
+    },
+    "NetworkServiceDesignVersionChange": {
+      "type": "object",
+      "required": [
+        "publisherName",
+        "publisherScope",
+        "newNetworkServiceDesignGroupName",
+        "newNetworkServiceDesignVersionName",
+        "networkServiceDesignVersionOfferingLocation"
+      ],
+      "properties": {
+        "publisherName": {
+          "type": "string",
+          "description": "The publisher name for the site network service."
+        },
+        "publisherScope": {
+          "$ref": "./common.json#/definitions/PublisherScope",
+          "description": "The scope of the publisher."
+        },
+        "existingNetworkServiceDesignGroupName": {
+          "type": "string",
+          "description": "The current network service design group name for the site network service."
+        },
+        "newNetworkServiceDesignGroupName": {
+          "type": "string",
+          "description": "The desired network service design group name for the site network service."
+        },
+        "existingNetworkServiceDesignVersionName": {
+          "type": "string",
+          "description": "The current network service design version for the site network service.",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "newNetworkServiceDesignVersionName": {
+          "type": "string",
+          "description": "The desired network service design version for the site network service.",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "networkServiceDesignVersionOfferingLocation": {
+          "type": "string",
+          "description": "The location of the network service design offering."
+        }
+      },
+      "description": "Change to network service design version."
+    },
+    "ConfigurationGroupValueChange": {
+      "type": "object",
+      "required": [
+        "newConfigurationGroupValueReference"
+      ],
+      "properties": {
+        "existingConfigurationGroupValueReference": {
+          "$ref": "./common.json#/definitions/ReferencedResource",
+          "description": "ConfigurationGroupValue to be replaced",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
+        },
+        "newConfigurationGroupValueReference": {
+          "$ref": "./common.json#/definitions/ReferencedResource",
+          "description": "Target ConfigurationGroupValue.",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
+        }
+      },
+      "description": "Change to config group values."
+    },
+    "Gate": {
+      "description": "Action to be performed after a SiteNetworkService is converged.",
+      "type": "object",
+      "required": [
+        "actionType"
+      ],
+      "properties": {
+        "actionType": {
+          "description": "Type of the Gate; one of WaitingGate or ManualGate.",
+          "enum": [
+            "WaitingGate",
+            "ManualGate"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Gate",
+            "modelAsString": true
+          }
+        },
+        "durationInMinutes": {
+          "description": "Time in minutes AOSM should wait before proceeding to the next SiteNetworkService, only applicable when Gate is a WaitingGate.",
+          "type": "integer",
+          "example": "10"
+        }
+      }
+    },
+    "PreCheck": {
+      "description": "Behavior modifiers or pre-actions executed before convergence on the SiteNetworkService begins.",
+      "enum": [
+        "FailOnUnexpected",
+        "ProceedOnUnexpected"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "PreCheck",
+        "modelAsString": true
+      }
+    },
+    "RolloutTierSnapshot": {
+      "type": "object",
+      "required": [
+        "siteNetworkServices"
+      ],
+      "description": "Representation of a rollout tier progress.",
+      "properties": {
+        "siteNetworkServices": {
+          "items": {
+            "$ref": "#/definitions/SiteNetworkServiceSnapshot"
+          },
+          "type": "array",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
+        },
+        "excludedSiteNetworkServices": {
+          "items": {
+            "$ref": "./common.json#/definitions/ReferencedResource"
+          },
+          "type": "array",
+          "description": "List of excluded SiteNetworkServices from the tier.",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
+        }
+      }
+    },
+    "RolloutTierStatus": {
+      "type": "object",
+      "description": "Representation of a rollout tier's status.",
+      "properties": {
+        "siteNetworkServices": {
+          "items": {
+            "$ref": "#/definitions/SiteNetworkServiceStatus"
+          },
+          "type": "array",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "excludedSiteNetworkServices": {
+          "items": {
+            "$ref": "./common.json#/definitions/ReferencedResource"
+          },
+          "type": "array",
+          "description": "List of excluded SiteNetworkServices from the tier.",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "rolloutInfo": {
+          "$ref": "#/definitions/rolloutInfo",
+          "description": "State and metadata of the tier.",
+          "readOnly": true
+        }
+      }
+    },
+    "SiteNetworkServiceSnapshot": {
+      "type": "object",
+      "description": "Representation of an individual site's rollout progress, including its SNS, pre-action and post-action",
+      "properties": {
+        "siteNetworkServiceReference": {
+          "$ref": "./common.json#/definitions/ReferencedResource",
+          "description": "Reference to an individual SiteNetworkService."
+        },
+        "preCheck": {
+          "$ref": "#/definitions/PreCheckSnapshot",
+          "description": "The pre-action associated with the site."
+        },
+        "gates": {
+          "items": {
+            "$ref": "#/definitions/GateSnapshot"
+          },
+          "type": "array",
+          "description": "The post-actions associated with the site."
+        }
+      }
+    },
+    "SiteNetworkServiceStatus": {
+      "type": "object",
+      "description": "Representation of an individual site's rollout status, including its SNS, pre-action and post-action and their statuses",
+      "properties": {
+        "siteNetworkServiceReference": {
+          "$ref": "./common.json#/definitions/ReferencedResource",
+          "description": "Reference to an individual SiteNetworkService.",
+          "readOnly": true
+        },
+        "rolloutInfo": {
+          "$ref": "#/definitions/rolloutInfo",
+          "description": "State and metadata of the Rollout action.",
+          "readOnly": true
+        },
+        "preCheck": {
+          "$ref": "#/definitions/PreCheckRolloutState",
+          "description": "Status of the pre-action associated with the site."
+        },
+        "gates": {
+          "items": {
+            "$ref": "#/definitions/GateRolloutState"
+          },
+          "type": "array",
+          "description": "Statuses of the post-actions associated with the site."
+        }
+      }
+    },
+    "PreCheckSnapshot": {
+      "type": "object",
+      "description": "State of an PreCheck.",
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/PreCheck",
+          "readOnly": true
+        }
+      }
+    },
+    "PreCheckRolloutState": {
+      "type": "object",
+      "description": "State of an PreCheck.",
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/PreCheck",
+          "readOnly": true
+        },
+        "rolloutInfo": {
+          "$ref": "#/definitions/rolloutInfo",
+          "readOnly": true
+        }
+      }
+    },
+    "GateSnapshot": {
+      "type": "object",
+      "description": "State of an Gate.",
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/Gate",
+          "readOnly": true
+        }
+      }
+    },
+    "GateRolloutState": {
+      "type": "object",
+      "description": "State of an Gate.",
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/Gate",
+          "readOnly": true
+        },
+        "rolloutInfo": {
+          "$ref": "#/definitions/rolloutInfo",
+          "readOnly": true
+        }
+      }
+    },
+    "rolloutInfo": {
+      "description": "An object containing status and metadata of a rollout.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "Ready",
+            "Queued",
+            "Running",
+            "Canceling",
+            "Canceled",
+            "Suspending",
+            "Suspended",
+            "Completed",
+            "Failed",
+            "WaitingForUserInput"
+          ],
+          "description": "Status of an individual rollout action.",
+          "type": "string",
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "type": "string",
+          "description": "Start time of the rollout action.",
+          "format": "date-time"
+        },
+        "endTime": {
+          "type": "string",
+          "description": "End time of the rollout action.",
+          "format": "date-time"
+        },
+        "lastUpdatedTime": {
+          "type": "string",
+          "description": "Last updated time of the rollout action.",
+          "format": "date-time"
+        },
+        "errorInfo": {
+          "type": "string",
+          "description": "Error message."
+        }
+      },
+      "readOnly": true
+    }
+  }
+}
