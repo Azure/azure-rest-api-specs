@@ -34,11 +34,14 @@ export async function main() {
       success = false;
       console.log("Rule " + rule.name + " failed");
       if (result.errorOutput) console.log(result.errorOutput);
+
+      // Stop executing more rules, since the results are more likely to be confusing than helpful
+      // Can add property like "RuleResult.ContinueOnError" if some rules want to continue
+      break;
     }
   }
 
   if (!success) {
-    return process.exit(1);
+    process.exitCode = 1;
   }
-  return;
 }
