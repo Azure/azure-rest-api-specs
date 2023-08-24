@@ -2,6 +2,7 @@ import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+import "./eventgrid_events.tsp";
 
 @useAuth(ApiKeyAuth<ApiKeyLocation.header, "SharedAccessKey">)
 @service({
