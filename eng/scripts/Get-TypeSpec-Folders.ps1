@@ -9,7 +9,7 @@ param (
 )
 
 $changedFiles = @()
-$allChangedFiles = (Get-ChildItem -path ./specification tspconfig.yaml -Recurse).Directory.FullName | ForEach-Object {[IO.Path]::GetRelativePath($($pwd.path), $_)}
+$allChangedFiles = (Get-ChildItem -path ./specification tspconfig.* -Recurse).Directory.FullName | ForEach-Object {[IO.Path]::GetRelativePath($($pwd.path), $_)}
 $allChangedFiles = $allChangedFiles -replace '\\', '/'
 
 if ([string]::IsNullOrEmpty($TargetBranch) -or [string]::IsNullOrEmpty($SourceBranch)) {
@@ -40,7 +40,7 @@ else {
   )
   $repoRootFiles = $changedFiles | Where-Object {$_ -in $rootFilesImpactingTypeSpec}
 
-  if ($engFiles -or $repoRootFiles) {
+  if (($Env:BUILD_REPOSITORY_NAME -eq 'azure/azure-rest-api-specs') -and ($engFiles -or $repoRootFiles)) {
     $changedFiles = $allChangedFiles
   }
   else {
@@ -51,10 +51,11 @@ else {
 $typespecFolders = @()
 foreach ($file in $changedFiles) {
   if ($file -match 'specification\/[^\/]*\/') {
-    $typespecFolder = (Get-ChildItem -path $matches[0] tspconfig.yaml -Recurse).Directory.FullName | ForEach-Object {if ($_) { [IO.Path]::GetRelativePath($($pwd.path), $_) }}
+    $typespecFolder = (Get-ChildItem -path $matches[0] tspconfig.* -Recurse).Directory.FullName | ForEach-Object {if ($_) { [IO.Path]::GetRelativePath($($pwd.path), $_) }}
     $typespecFolders += $typespecFolder -replace '\\', '/'
   }
 }
+
 $typespecFolders = $typespecFolders | Select-Object -Unique | Sort-Object
 
 return $typespecFolders
