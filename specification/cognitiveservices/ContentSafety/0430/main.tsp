@@ -13,16 +13,7 @@ using Azure.Core;
   title: "ContentSafety Service",
 })
 @versioned(ContentSafety.Versions)
-@useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[
-    {
-      type: OAuth2FlowType.clientCredentials,
-      tokenUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/token",
-      refreshUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/token",
-      scopes: ["https://cognitiveservices.azure.com/.default"],
-    }
-  ]>
-)
+@useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
 @server(
   "{endpoint}/contentsafety",
   "Analyze harmful content",
@@ -40,5 +31,5 @@ namespace ContentSafety;
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2023_10_01: "2023-10-01",
+  v2023_04_30_Preview: "2023-04-30-preview",
 }
