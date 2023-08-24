@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.AzurePlaywrightService
-  output-folder: $(csharp-sdks-folder)/azureplaywrightservice/management/Microsoft.AzurePlaywrightService/GeneratedProtocol
+  namespace: Azure.ResourceManager.PlaywrightTesting
+  output-folder: $(csharp-sdks-folder)/playwrighttesting/Azure.ResourceManager.PlaywrightTesting/src/Generated
 ```
