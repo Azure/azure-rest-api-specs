@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-2023-10-01` is specified on the co
 
 ```yaml $(tag) == 'package-2023-10-01'
 input-file:
-  - preview/2023-10-01/contentsafety.json
+  - stable/2023-10-01/contentsafety.json
 ```
 
 ---
