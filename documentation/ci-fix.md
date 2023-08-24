@@ -155,7 +155,7 @@ See [typespec-autorest](https://azure.github.io/typespec-azure/docs/emitters/typ
 
 ## Suppression Process
 
-In case there are validation errors reported against your service that you believe do not apply, we have a suppression process you can follow to permanently remove these reported errors for your specs. Refer to the [suppression guide]([https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/85/Swagger-Suppression-Process](https://aka.ms/pr-suppressions) for detailed guidance.
+In case there are validation errors reported against your service that you believe do not apply, we have a suppression process you can follow to permanently remove these reported errors for your specs. Refer to the [suppression guide](https://aka.ms/pr-suppressions) for detailed guidance.
 
 ## Obsolete tools
 
