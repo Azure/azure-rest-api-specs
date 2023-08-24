@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace AzureLoadTesting;
 
@@ -135,11 +136,34 @@ enum Interval {
   PT1H,
 }
 
+@added(APIVersions.v2023_04_01_preview)
+@doc("Test type")
+enum TestType{
+  @doc("Quick Test")
+  QuickTest,
+  @doc("URL based Test")
+  UrlBasedTest,
+}
+
+@added(APIVersions.v2023_04_01_preview)
+@doc("Load Type")
+enum LoadType{
+  @doc("Constant Load")
+  Constant,
+  @doc("Linear Load")
+  Linear,
+  @doc("StepUp Load")
+  StepUp,
+  @doc("Spike Load")
+  Spike,
+}
+
 @doc("Load test model")
 model Test {
   @doc("Pass fail criteria for a test.")
   passFailCriteria?: PassFailCriteria;
 
+  @added(APIVersions.v2023_04_01_preview)
   @doc("Auto stop criteria for a test.")
   autoStopEnabled?: AutoStopCriteria;
 
@@ -161,6 +185,7 @@ SECRET_VALUE.
   @doc("The load test configuration.")
   loadTestConfiguration?: LoadTestConfiguration;
 
+  @added(APIVersions.v2023_04_01_preview)
   @doc("The Test Run Id of the Test Run set as the Baseline.")
   baselineTestRunId?: string;
 
@@ -168,12 +193,11 @@ SECRET_VALUE.
   @visibility("read")
   inputArtifacts?: TestInputArtifacts;
 
-  @key
   @doc("Unique test name as identifier.")
   @maxLength(50)
   @minLength(2)
   @visibility("read")
-  testId: string;
+  testId?: string;
 
   @maxLength(100)
   @doc("The test description.")
@@ -274,6 +298,7 @@ model CertificateMetadata {
   name?: string;
 }
 
+@added(APIVersions.v2023_04_01_preview)
 @doc("Auto stop criteria for a test.")
 model AutoStopCriteria {
   @doc("Auto stop is enabled or not")
@@ -324,18 +349,42 @@ http://contoso-app.azurewebsites.net/login
   @doc("No of concurrent virtual users")
   virtualUsers?: int32;
 
+  @added(APIVersions.v2023_04_01_preview)
   @doc("Throughput required (requests per second)")
   rps?: int32;
 
+  @added(APIVersions.v2023_04_01_preview)
   @doc("Maximum response time of the API/endpoint")
   maxResponseTime?: int32;
 
   @doc("Ramp up time")
   rampUpTime?: int32;
 
+  @added(APIVersions.v2023_04_01_preview)
+  @doc("Number of steps in the ramp - up phase")
+  rampUpSteps?: int32;
+
+  @added(APIVersions.v2023_04_01_preview)
+  @doc("Time to maintain a higher load after a spike in traffic")
+  spikeHoldLoad?: int32;
+
+  @added(APIVersions.v2023_04_01_preview)
+  @doc("Multiplier applied to the base load during a spike in traffic")
+  spikeMultiplier?: float32;
+
+  @added(APIVersions.v2023_04_01_preview)
+  @doc("Type of load. e.g. Linear, Constant, StepUp, Spike")
+  loadType?: LoadType;
+
+  @added(APIVersions.v2023_04_01_preview)
+  @doc("Type of load. e.g. Linear, Constant, StepUp, Spike")
+  testType?: TestType;
+
   @doc("Test run duration")
   duration?: int32;
 }
+
+
 
 @doc("The input artifacts for the test.")
 model TestInputArtifacts {
@@ -350,6 +399,10 @@ model TestInputArtifacts {
 
   @doc("File info")
   inputArtifactsZipFileInfo?: FileInfo;
+
+  @added(APIVersions.v2023_04_01_preview)
+  @doc("The config json file for url based test")
+  urlTestsConfigFileInfo?: FileInfo;
 
   @doc("Additional supported files for the test run")
   @visibility("read")
@@ -549,17 +602,17 @@ model ResourceMetric {
 
 @doc("Load test run model")
 model TestRun {
-  @key
   @doc("Unique test run name as identifier")
   @visibility("read")
   @maxLength(50)
   @minLength(2)
-  testRunId: string;
+  testRunId?: string;
 
   @doc("Pass fail criteria for a test.")
   passFailCriteria?: PassFailCriteria;
 
   @doc("Auto stop criteria for a test.")
+  @added(APIVersions.v2023_04_01_preview)
   autoStopEnabled?: AutoStopCriteria;
 
   @doc("""
@@ -748,6 +801,10 @@ model TestRunInputArtifacts {
 
   @doc("File info")
   inputArtifactsZipFileInfo?: FileInfo;
+
+  @added(APIVersions.v2023_04_01_preview)
+  @doc("The config json file for url based test")
+  urlTestsConfigFileInfo?: FileInfo;
 
   @doc("Additional supported files for the test run")
   @visibility("read")

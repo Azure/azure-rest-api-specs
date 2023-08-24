@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Load Testing",
-    "version": "2023-04-01-preview",
+    "version": "2022-11-01",
     "description": "These APIs allow end users to create, view and run load tests using Azure Load\nTest Service.",
     "x-typespec-generated": [
       {
@@ -1628,26 +1628,6 @@
         }
       }
     },
-    "AutoStopCriteria": {
-      "type": "object",
-      "description": "Auto stop criteria for a test.",
-      "properties": {
-        "autoStopEnabled": {
-          "type": "boolean",
-          "description": "Auto stop is enabled or not"
-        },
-        "errorRate": {
-          "type": "number",
-          "format": "float",
-          "description": "Value of auto stop criteria metric"
-        },
-        "errorRateTimeWindow": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Time window in seconds for auto stop metric"
-        }
-      }
-    },
     "CertificateMetadata": {
       "type": "object",
       "description": "Certificates metadata",
@@ -1975,42 +1955,6 @@
         }
       }
     },
-    "LoadType": {
-      "type": "string",
-      "description": "Load Type",
-      "enum": [
-        "Constant",
-        "Linear",
-        "StepUp",
-        "Spike"
-      ],
-      "x-ms-enum": {
-        "name": "LoadType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Constant",
-            "value": "Constant",
-            "description": "Constant Load"
-          },
-          {
-            "name": "Linear",
-            "value": "Linear",
-            "description": "Linear Load"
-          },
-          {
-            "name": "StepUp",
-            "value": "StepUp",
-            "description": "StepUp Load"
-          },
-          {
-            "name": "Spike",
-            "value": "Spike",
-            "description": "Spike Load"
-          }
-        ]
-      }
-    },
     "MetricAvailability": {
       "type": "object",
       "description": "Metric availability specifies the time grain (aggregation interval or frequency)",
@@ -2277,43 +2221,10 @@
           "format": "int32",
           "description": "No of concurrent virtual users"
         },
-        "rps": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Throughput required (requests per second)"
-        },
-        "maxResponseTime": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Maximum response time of the API/endpoint"
-        },
         "rampUpTime": {
           "type": "integer",
           "format": "int32",
           "description": "Ramp up time"
-        },
-        "rampUpSteps": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of steps in the ramp - up phase"
-        },
-        "spikeHoldLoad": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Time to maintain a higher load after a spike in traffic"
-        },
-        "spikeMultiplier": {
-          "type": "number",
-          "format": "float",
-          "description": "Multiplier applied to the base load during a spike in traffic"
-        },
-        "loadType": {
-          "$ref": "#/definitions/LoadType",
-          "description": "Type of load. e.g. Linear, Constant, StepUp, Spike"
-        },
-        "testType": {
-          "$ref": "#/definitions/TestType",
-          "description": "Type of load. e.g. Linear, Constant, StepUp, Spike"
         },
         "duration": {
           "type": "integer",
@@ -2763,10 +2674,6 @@
           "$ref": "#/definitions/PassFailCriteria",
           "description": "Pass fail criteria for a test."
         },
-        "autoStopEnabled": {
-          "$ref": "#/definitions/AutoStopCriteria",
-          "description": "Auto stop criteria for a test."
-        },
         "secrets": {
           "type": "object",
           "description": "Secrets can be stored in an Azure Key Vault or any other secret store. If the\nsecret is stored in an Azure Key Vault, the value should be the secret\nidentifier and the type should be AKV_SECRET_URI. If the secret is stored\nelsewhere, the secret value should be provided directly and the type should be\nSECRET_VALUE.",
@@ -2788,10 +2695,6 @@
         "loadTestConfiguration": {
           "$ref": "#/definitions/LoadTestConfiguration",
           "description": "The load test configuration."
-        },
-        "baselineTestRunId": {
-          "type": "string",
-          "description": "The Test Run Id of the Test Run set as the Baseline."
         },
         "inputArtifacts": {
           "$ref": "#/definitions/TestInputArtifacts",
@@ -2928,10 +2831,6 @@
           "$ref": "#/definitions/FileInfo",
           "description": "File info"
         },
-        "urlTestsConfigFileInfo": {
-          "$ref": "#/definitions/FileInfo",
-          "description": "The config json file for url based test"
-        },
         "additionalFileInfo": {
           "type": "array",
           "description": "Additional supported files for the test run",
@@ -2957,10 +2856,6 @@
         "passFailCriteria": {
           "$ref": "#/definitions/PassFailCriteria",
           "description": "Pass fail criteria for a test."
-        },
-        "autoStopEnabled": {
-          "$ref": "#/definitions/AutoStopCriteria",
-          "description": "Auto stop criteria for a test."
         },
         "secrets": {
           "type": "object",
@@ -3188,10 +3083,6 @@
           "$ref": "#/definitions/FileInfo",
           "description": "File info"
         },
-        "urlTestsConfigFileInfo": {
-          "$ref": "#/definitions/FileInfo",
-          "description": "The config json file for url based test"
-        },
         "additionalFileInfo": {
           "type": "array",
           "description": "Additional supported files for the test run",
@@ -3406,30 +3297,6 @@
           "description": "The user that last modified.",
           "readOnly": true
         }
-      }
-    },
-    "TestType": {
-      "type": "string",
-      "description": "Test type",
-      "enum": [
-        "QuickTest",
-        "UrlBasedTest"
-      ],
-      "x-ms-enum": {
-        "name": "TestType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "QuickTest",
-            "value": "QuickTest",
-            "description": "Quick Test"
-          },
-          {
-            "name": "UrlBasedTest",
-            "value": "UrlBasedTest",
-            "description": "URL based Test"
-          }
-        ]
       }
     },
     "TestsList": {

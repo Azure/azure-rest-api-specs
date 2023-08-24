@@ -5,6 +5,7 @@ using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 using AzureLoadTesting;
 
+@useDependency(APIVersions.v2022_11_01)
 @useDependency(APIVersions.v2023_04_01_preview)
 namespace Customizations;
 
