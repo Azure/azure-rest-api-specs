@@ -1,20 +1,20 @@
 {
-  "title": "Organizations_CreateOrUpdate_MaximumSet_Gen",
-  "operationId": "Organizations_CreateOrUpdate",
+  "title": "Organizations_Create_MaximumSet_Gen",
+  "operationId": "Organizations_Create",
   "parameters": {
-    "api-version": "2023-07-21-preview",
+    "api-version": "2023-08-23-preview",
     "subscriptionId": "6288F427-E8F5-4722-AD46-9F02462780AB",
     "resourceGroupName": "rgopenapi",
-    "organizationName": "xtyivhxobarzilmvqftjwqexfcznt",
+    "organizationName": "testResource",
     "resource": {
       "properties": {
         "provisioningState": "Accepted",
         "monitoringStatus": "Enabled",
         "solarWindsOrganizationProperties": {
-          "userId": "ucybjqiqvrih",
+          "userId": "testUser",
           "organizationInfo": {
-            "organizationId": "nfnqnbhengk",
-            "regionId": "dniynfkjiycpgdmottrcyzxwmr"
+            "organizationId": "/subscriptions/6288F427-E8F5-4722-AD46-9F02462780AB/resourceGroups/rgopenapi/providers/SolarWinds.Observability/Organizations/testResource",
+            "regionId": "region"
           },
           "tagRule": {
             "properties": {
@@ -25,8 +25,18 @@
                 "sendActivityLogs": "Enabled",
                 "filteringTags": [
                   {
-                    "name": "lzztxqeuyvfnznnl",
-                    "value": "htzigxazlzlkosubblwehkqexdtgvo",
+                    "name": "tagName",
+                    "value": "tagValue",
+                    "action": "Include"
+                  }
+                ]
+              },
+              "metricRules": {
+                "sendMetrics": "Enabled",
+                "filteringTags": [
+                  {
+                    "name": "tagName",
+                    "value": "tagValue",
                     "action": "Include"
                   }
                 ]
@@ -37,30 +47,30 @@
         "marketplaceDetails": {
           "marketplaceSubscriptionId": "a",
           "offerDetails": {
-            "publisherId": "zthaczhwvlgomeuapesxnqixlbkpgmwozaexzoharo",
-            "offerId": "jtqkljtpsnglzgivasfyka",
-            "planId": "lemps",
-            "planName": "hl",
-            "termUnit": "hwyj",
-            "termId": "gnmxshwywcqaqtjdighaoudeg"
+            "publisherId": "solarwinds",
+            "offerId": "solarwinds-observability-liftr-dev",
+            "planId": "swo-log-01",
+            "planName": "Log Observability",
+            "termUnit": "P1M",
+            "termId": "gmz7xq9ge3py"
           }
         },
         "userDetails": {
-          "firstName": "ovppxowczzpyobjzttvc",
-          "lastName": "hfgfitwvphlpy",
-          "emailAddress": "%4@2.JGfWple",
-          "alternateEmail": "cgatpcwohfyfixbmmna",
-          "upn": "vweseauyaaqk",
+          "firstName": "TestUser_FirstName",
+          "lastName": "TestUser_LastName",
+          "emailAddress": "testUser+39e0861f@microsoft.com",
+          "alternateEmail": "testUser+39e08k61f@microsoft.com",
+          "upn": "testUser@microsoft.com",
           "address": "fy",
-          "phoneNumber": "bqelnjbbyozfkihwdf",
-          "country": "yvsuqvnrw"
+          "phoneNumber": "123456789",
+          "country": "India"
         },
         "companyDetails": {
-          "companyName": "cbjlbbotvodfhhntxomxirk",
-          "officeAddress": "iozdjcvccvzvmefsujcgghmu",
-          "country": "opevvaqdgouzlpgahkwxjcay",
-          "domain": "kjrmrwegljpsgdlidjkohjoroiway",
-          "business": "ohqbnnxbcfarheixftrlx",
+          "companyName": "Company",
+          "officeAddress": "India",
+          "country": "India",
+          "domain": "testDomainName",
+          "business": "testBusinessName",
           "numberOfEmployees": 7
         },
         "liftrResourceCategory": "Unknown"
@@ -74,7 +84,7 @@
       "tags": {
         "key1543": "idm"
       },
-      "location": "fajtydbimqvhusug"
+      "location": "centraluseuap"
     }
   },
   "responses": {
@@ -84,10 +94,10 @@
           "provisioningState": "Accepted",
           "monitoringStatus": "Enabled",
           "solarWindsOrganizationProperties": {
-            "userId": "ucybjqiqvrih",
+            "userId": "testUser",
             "organizationInfo": {
-              "organizationId": "nfnqnbhengk",
-              "regionId": "dniynfkjiycpgdmottrcyzxwmr"
+              "organizationId": "/subscriptions/6288F427-E8F5-4722-AD46-9F02462780AB/resourceGroups/rgopenapi/providers/SolarWinds.Observability/Organizations/testResource",
+              "regionId": "region"
             },
             "tagRule": {
               "properties": {
@@ -98,14 +108,24 @@
                   "sendActivityLogs": "Enabled",
                   "filteringTags": [
                     {
-                      "name": "lzztxqeuyvfnznnl",
-                      "value": "htzigxazlzlkosubblwehkqexdtgvo",
+                      "name": "tagName",
+                      "value": "tagValue",
+                      "action": "Include"
+                    }
+                  ]
+                },
+                "metricRules": {
+                  "sendMetrics": "Enabled",
+                  "filteringTags": [
+                    {
+                      "name": "tagName",
+                      "value": "tagValue",
                       "action": "Include"
                     }
                   ]
                 }
               },
-              "id": "jwtnlqe",
+              "id": "/subscriptions/6288F427-E8F5-4722-AD46-9F02462780AB/resourceGroups/rgopenapi/providers/SolarWinds.Observability/Organizations/testResource",
               "name": "xdqmkb",
               "type": "zphmbypzsapn",
               "systemData": {
@@ -121,32 +141,33 @@
           "marketplaceDetails": {
             "marketplaceSubscriptionId": "a",
             "offerDetails": {
-              "publisherId": "zthaczhwvlgomeuapesxnqixlbkpgmwozaexzoharo",
-              "offerId": "jtqkljtpsnglzgivasfyka",
-              "planId": "lemps",
-              "planName": "hl",
-              "termUnit": "hwyj",
-              "termId": "gnmxshwywcqaqtjdighaoudeg"
+              "publisherId": "solarwinds",
+              "offerId": "solarwinds-observability-liftr-dev",
+              "planId": "swo-log-01",
+              "planName": "Log Observability",
+              "termUnit": "P1M",
+              "termId": "gmz7xq9ge3py"
             }
           },
           "userDetails": {
-            "firstName": "ovppxowczzpyobjzttvc",
-            "lastName": "hfgfitwvphlpy",
-            "emailAddress": "%4@2.JGfWple",
-            "alternateEmail": "cgatpcwohfyfixbmmna",
-            "upn": "vweseauyaaqk",
+            "firstName": "TestUser_FirstName",
+            "lastName": "TestUser_LastName",
+            "emailAddress": "testUser+39e0861f@microsoft.com",
+            "alternateEmail": "testUser+39e08k61f@microsoft.com",
+            "upn": "testUser@microsoft.com",
             "address": "fy",
-            "phoneNumber": "bqelnjbbyozfkihwdf",
-            "country": "yvsuqvnrw"
+            "phoneNumber": "123456789",
+            "country": "India"
           },
           "companyDetails": {
-            "companyName": "cbjlbbotvodfhhntxomxirk",
-            "officeAddress": "iozdjcvccvzvmefsujcgghmu",
-            "country": "opevvaqdgouzlpgahkwxjcay",
-            "domain": "kjrmrwegljpsgdlidjkohjoroiway",
-            "business": "ohqbnnxbcfarheixftrlx",
+            "companyName": "Company",
+            "officeAddress": "India",
+            "country": "India",
+            "domain": "testDomainName",
+            "business": "testBusinessName",
             "numberOfEmployees": 7
           },
+          "existingResourceId": "sdhjjxetd",
           "liftrResourceCategory": "Unknown",
           "liftrResourcePreference": 3
         },
@@ -164,8 +185,8 @@
         "tags": {
           "key1543": "idm"
         },
-        "location": "fajtydbimqvhusug",
-        "id": "tybwcukvioxslaethhxnofubihso",
+        "location": "centraluseuap",
+        "id": "/subscriptions/6288F427-E8F5-4722-AD46-9F02462780AB/resourceGroups/rgopenapi/providers/SolarWinds.Observability/Organizations/testResource",
         "name": "hhgrt",
         "type": "hfudyfqjv",
         "systemData": {
@@ -187,10 +208,10 @@
           "provisioningState": "Accepted",
           "monitoringStatus": "Enabled",
           "solarWindsOrganizationProperties": {
-            "userId": "ucybjqiqvrih",
+            "userId": "testUser",
             "organizationInfo": {
-              "organizationId": "nfnqnbhengk",
-              "regionId": "dniynfkjiycpgdmottrcyzxwmr"
+              "organizationId": "/subscriptions/6288F427-E8F5-4722-AD46-9F02462780AB/resourceGroups/rgopenapi/providers/SolarWinds.Observability/Organizations/testResource",
+              "regionId": "region"
             },
             "tagRule": {
               "properties": {
@@ -201,14 +222,24 @@
                   "sendActivityLogs": "Enabled",
                   "filteringTags": [
                     {
-                      "name": "lzztxqeuyvfnznnl",
-                      "value": "htzigxazlzlkosubblwehkqexdtgvo",
+                      "name": "tagName",
+                      "value": "tagValue",
+                      "action": "Include"
+                    }
+                  ]
+                },
+                "metricRules": {
+                  "sendMetrics": "Enabled",
+                  "filteringTags": [
+                    {
+                      "name": "tagName",
+                      "value": "tagValue",
                       "action": "Include"
                     }
                   ]
                 }
               },
-              "id": "jwtnlqe",
+              "id": "/subscriptions/6288F427-E8F5-4722-AD46-9F02462780AB/resourceGroups/rgopenapi/providers/SolarWinds.Observability/Organizations/testResource",
               "name": "xdqmkb",
               "type": "zphmbypzsapn",
               "systemData": {
@@ -224,32 +255,33 @@
           "marketplaceDetails": {
             "marketplaceSubscriptionId": "a",
             "offerDetails": {
-              "publisherId": "zthaczhwvlgomeuapesxnqixlbkpgmwozaexzoharo",
-              "offerId": "jtqkljtpsnglzgivasfyka",
-              "planId": "lemps",
-              "planName": "hl",
-              "termUnit": "hwyj",
-              "termId": "gnmxshwywcqaqtjdighaoudeg"
+              "publisherId": "solarwinds",
+              "offerId": "solarwinds-observability-liftr-dev",
+              "planId": "swo-log-01",
+              "planName": "Log Observability",
+              "termUnit": "P1M",
+              "termId": "gmz7xq9ge3py"
             }
           },
           "userDetails": {
-            "firstName": "ovppxowczzpyobjzttvc",
-            "lastName": "hfgfitwvphlpy",
-            "emailAddress": "%4@2.JGfWple",
-            "alternateEmail": "cgatpcwohfyfixbmmna",
-            "upn": "vweseauyaaqk",
+            "firstName": "TestUser_FirstName",
+            "lastName": "TestUser_LastName",
+            "emailAddress": "testUser+39e0861f@microsoft.com",
+            "alternateEmail": "testUser+39e08k61f@microsoft.com",
+            "upn": "testUser@microsoft.com",
             "address": "fy",
-            "phoneNumber": "bqelnjbbyozfkihwdf",
-            "country": "yvsuqvnrw"
+            "phoneNumber": "123456789",
+            "country": "India"
           },
           "companyDetails": {
-            "companyName": "cbjlbbotvodfhhntxomxirk",
-            "officeAddress": "iozdjcvccvzvmefsujcgghmu",
-            "country": "opevvaqdgouzlpgahkwxjcay",
-            "domain": "kjrmrwegljpsgdlidjkohjoroiway",
-            "business": "ohqbnnxbcfarheixftrlx",
+            "companyName": "Company",
+            "officeAddress": "India",
+            "country": "India",
+            "domain": "testDomainName",
+            "business": "testBusinessName",
             "numberOfEmployees": 7
           },
+          "existingResourceId": "sdhjjxetd",
           "liftrResourceCategory": "Unknown",
           "liftrResourcePreference": 3
         },
@@ -267,8 +299,8 @@
         "tags": {
           "key1543": "idm"
         },
-        "location": "fajtydbimqvhusug",
-        "id": "tybwcukvioxslaethhxnofubihso",
+        "location": "centraluseuap",
+        "id": "/subscriptions/6288F427-E8F5-4722-AD46-9F02462780AB/resourceGroups/rgopenapi/providers/SolarWinds.Observability/Organizations/testResource",
         "name": "hhgrt",
         "type": "hfudyfqjv",
         "systemData": {
