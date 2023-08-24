@@ -1132,8 +1132,27 @@
             "name": "ExternalGovernanceStatus",
             "modelAsString": true
           }
+        },
+        "retentionDays": {
+          "x-ms-client-name": "retentionDays",
+          "format": "int32",
+          "description": "Number of days that a server will stay soft-deleted when dropped.",
+          "minimum": 0,
+          "maximum": 7,
+          "type": "integer"
+        },
+        "createMode": {
+          "description": "Create mode for the server. Value is optional but if passed in, must be 'Normal' or 'Restore'",
+          "enum": [
+            "Normal",
+            "Restore"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ServerCreateMode",
+            "modelAsString": true
+          }
         }
-      }
     },
     "ServerUpdate": {
       "description": "An update request for an Azure SQL Database server.",
