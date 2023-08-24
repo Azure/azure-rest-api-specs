@@ -28,7 +28,7 @@ If you are developing within your own ADO repo first and then submitting into `a
 - Run following command in the **repository root folder**. This will install required packages such as TypeSpec compilers and Azure Library packages.
 
 ```
-   npm install
+   npm ci
 ```
 
 - Ensure you can run TypeSpec command within the repo folders.
