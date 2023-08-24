@@ -3,7 +3,7 @@
   "info": {
     "title": "MySQLManagementClient",
     "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MySQL resources including servers, databases, firewall rules and configurations.",
-    "version": "2022-09-30-preview"
+    "version": "2023-06-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -57,13 +57,13 @@
         "description": "Creates a new server or updates an existing server. The update action will overwrite the existing server.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
@@ -102,7 +102,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -127,13 +127,13 @@
         "description": "Updates an existing server. The request body can contain one to many of the properties present in the normal server definition.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
@@ -166,7 +166,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -185,13 +185,13 @@
         "description": "Deletes a server.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
@@ -215,7 +215,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -240,13 +240,13 @@
         "description": "Gets information about a server.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
@@ -262,7 +262,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -282,13 +282,13 @@
         "description": "List all the servers in a given resource group.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -301,7 +301,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -324,10 +324,10 @@
         "description": "List all the servers in a given subscription.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -340,7 +340,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -363,13 +363,13 @@
         "description": "Manual failover a server.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
@@ -390,7 +390,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -411,13 +411,13 @@
         "description": "Restarts a server.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
@@ -447,7 +447,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -468,13 +468,13 @@
         "description": "Starts a server.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
@@ -495,7 +495,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -516,13 +516,13 @@
         "description": "Stops a server.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
@@ -543,7 +543,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -564,13 +564,13 @@
         "description": "Resets GTID on a server.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
@@ -600,7 +600,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -624,13 +624,13 @@
         "description": "List all the replicas for a given server.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
@@ -646,12 +646,71 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/cutoverMigration": {
+      "post": {
+        "tags": [
+          "ServerMigration"
+        ],
+        "operationId": "ServersMigration_CutoverMigration",
+        "x-ms-examples": {
+          "Cutover migration for MySQL import": {
+            "$ref": "./examples/CutoverMigration.json"
+          }
+        },
+        "description": "Cutover migration for MySQL import, it will switch source elastic server DNS to flexible server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URL to retrieve the final result after operation completes.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       }
     }
@@ -811,7 +870,7 @@
       },
       "description": "Storage Profile properties of a server"
     },
-    "Sku": {
+    "MySQLServerSku": {
       "type": "object",
       "properties": {
         "name": {
@@ -827,7 +886,7 @@
             "MemoryOptimized"
           ],
           "x-ms-enum": {
-            "name": "SkuTier",
+            "name": "ServerSkuTier",
             "modelAsString": true
           }
         }
@@ -894,6 +953,51 @@
         }
       },
       "description": "Network related properties of a server"
+    },
+    "ImportSourceProperties": {
+      "type": "object",
+      "properties": {
+        "storageType": {
+          "type": "string",
+          "enum": [
+            "AzureBlob"
+          ],
+          "x-ms-enum": {
+            "name": "ImportSourceStorageType",
+            "modelAsString": true
+          },
+          "description": "Storage type of import source.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "storageUrl": {
+          "type": "string",
+          "description": "Uri of the import source storage.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "sasToken": {
+          "type": "string",
+          "x-ms-secret": true,
+          "description": "Sas token for accessing source storage. Read and list permissions are required for sas token.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "dataDirPath": {
+          "type": "string",
+          "description": "Relative path of data directory in storage.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "description": "Import source related properties."
     },
     "ServerProperties": {
       "type": "object",
@@ -1019,6 +1123,18 @@
             "read"
           ]
         },
+        "privateEndpointConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
+          },
+          "description": "PrivateEndpointConnections related properties of a server.",
+          "x-ms-mutability": [
+            "create",
+            "update",
+            "read"
+          ]
+        },
         "maintenanceWindow": {
           "$ref": "#/definitions/MaintenanceWindow",
           "description": "Maintenance window of a server.",
@@ -1026,6 +1142,10 @@
             "update",
             "read"
           ]
+        },
+        "importSourceProperties": {
+          "$ref": "#/definitions/ImportSourceProperties",
+          "description": "Source properties for import from storage."
         }
       },
       "description": "The properties of a server."
@@ -1034,27 +1154,22 @@
       "type": "object",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/Identity",
+          "$ref": "#/definitions/MySQLServerIdentity",
           "description": "The cmk identity for the server."
         },
         "sku": {
-          "$ref": "#/definitions/Sku",
+          "$ref": "#/definitions/MySQLServerSku",
           "description": "The SKU (pricing tier) of the server."
         },
         "properties": {
           "$ref": "#/definitions/ServerProperties",
           "x-ms-client-flatten": true,
           "description": "Properties of the server."
-        },
-        "systemData": {
-          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true,
-          "description": "The system metadata relating to this resource."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "Represents a server."
@@ -1107,11 +1222,11 @@
       "type": "object",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/Identity",
+          "$ref": "#/definitions/MySQLServerIdentity",
           "description": "The cmk identity for the server."
         },
         "sku": {
-          "$ref": "#/definitions/Sku",
+          "$ref": "#/definitions/MySQLServerSku",
           "description": "The SKU (pricing tier) of the server."
         },
         "properties": {
@@ -1171,7 +1286,7 @@
       },
       "description": "Server Gtid set parameters."
     },
-    "Identity": {
+    "MySQLServerIdentity": {
       "x-ms-client-flatten": true,
       "type": "object",
       "properties": {
@@ -1227,17 +1342,6 @@
         }
       },
       "description": "Metadata of user assigned identity."
-    },
-    "CloudError": {
-      "type": "object",
-      "x-ms-external": true,
-      "properties": {
-        "error": {
-          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
-          "description": "The resource management error response."
-        }
-      },
-      "description": "An error response from the Batch service."
     }
   }
 }
