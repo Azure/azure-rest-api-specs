@@ -149,7 +149,7 @@ model ManagedStorageClassProperties {
   performance?: PerformanceTier;
 
   @doc("Selection priority when multiple storage classes meet the criteria. 0: Highest, -1: Never use")
-  priority?: integer;
+  priority?: int64;
 
   @doc("Type of the ManagedStorageClass")
   storageClassType: SCType;
@@ -209,8 +209,7 @@ model NativeManagedStorageClassProperties
 }
 
 @doc("The properties of RWX ManagedStorageClass")
-model RwxManagedStorageClassProperties
-  extends ManagedStorageClassProperties {
+model RwxManagedStorageClassProperties extends ManagedStorageClassProperties {
   @doc("RWX ManagedStorageClass")
   storageClassType: SCType.RWX;
 
@@ -219,8 +218,7 @@ model RwxManagedStorageClassProperties
 }
 
 @doc("The properties of S3 ManagedStorageClass")
-model S3ManagedStorageClassProperties
-  extends ManagedStorageClassProperties {
+model S3ManagedStorageClassProperties extends ManagedStorageClassProperties {
   @doc("S3 ManagedStorageClass")
   storageClassType: SCType.S3;
 
@@ -229,8 +227,7 @@ model S3ManagedStorageClassProperties
 }
 
 @doc("The properties of Blob ManagedStorageClass")
-model BlobManagedStorageClassProperties
-  extends ManagedStorageClassProperties {
+model BlobManagedStorageClassProperties extends ManagedStorageClassProperties {
   @doc("Blob ManagedStorageClass")
   storageClassType: SCType.Blob;
 
@@ -258,6 +255,7 @@ model ManagedStorageClassResource
   @maxLength(64)
   name: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Azure Arc property, not supported in tsp yet"
   // Extended location is not included in TrackedResource yet
   @doc("Custom location of ManagedStorageClass")
   extendedLocation: ExtendedLocation;
