@@ -2,9 +2,9 @@
   "title": "VolumeGroups_ListByElasticSan",
   "operationId": "VolumeGroups_ListByElasticSan",
   "parameters": {
-    "subscriptionId": "335348B7-6545-4C32-82FE-E83522D8053E",
-    "resourceGroupName": "rgelasticsan",
-    "elasticSanName": "Rwa7UGK-1u78",
+    "subscriptionId": "subscriptionid",
+    "resourceGroupName": "resourcegroupname",
+    "elasticSanName": "elasticsanname",
     "api-version": "2023-01-01"
   },
   "responses": {
@@ -24,7 +24,7 @@
               }
             },
             "properties": {
-              "provisioningState": "Invalid",
+              "provisioningState": "Succeeded",
               "protocolType": "Iscsi",
               "encryption": "EncryptionAtRestWithPlatformKey",
               "encryptionProperties": {
@@ -43,7 +43,7 @@
               "networkAcls": {
                 "virtualNetworkRules": [
                   {
-                    "id": "kfbayhssdcsbsxthg",
+                    "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}",
                     "action": "Allow"
                   }
                 ]
@@ -51,36 +51,36 @@
               "privateEndpointConnections": [
                 {
                   "properties": {
-                    "provisioningState": "Invalid",
+                    "provisioningState": "Succeeded",
                     "privateEndpoint": {
-                      "id": "ehxmltubeltzmgcqxocakaansat"
+                      "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateEndpoints/{privateEndpointName}"
                     },
                     "privateLinkServiceConnectionState": {
                       "status": "Pending",
-                      "description": "nahklgxicbqjbbvcdrkljqdhprruys",
-                      "actionsRequired": "sairafcqpvucoy"
+                      "description": "Auto-Approved",
+                      "actionsRequired": "None"
                     },
                     "groupIds": [
-                      "bolviufgqnyid"
+                      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}"
                     ]
                   },
-                  "id": "opcjchensdf",
-                  "name": "gewxykc",
-                  "type": "ailymcedgvxbqklmqtlty",
+                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/privateEndpointConnections/{privateEndpointConnectionName}",
+                  "name": "{privateEndpointConnectionName}",
+                  "type": "Microsoft.ElasticSan/elasticSans/privateEndpointConnections",
                   "systemData": {
-                    "createdBy": "kakcyehdrphqkilgkhpbdtvpupak",
+                    "createdBy": "otfifnrahdshqombvtg",
                     "createdByType": "User",
-                    "createdAt": "2023-08-23T12:16:10.057Z",
-                    "lastModifiedBy": "bcclmbseed",
+                    "createdAt": "2023-07-03T09:59:45.919Z",
+                    "lastModifiedBy": "jnaxavnlhrboshtidtib",
                     "lastModifiedByType": "User",
-                    "lastModifiedAt": "2023-08-23T12:16:10.057Z"
+                    "lastModifiedAt": "2023-07-03T09:59:45.919Z"
                   }
                 }
               ]
             },
-            "id": "dqjmna",
-            "name": "nroihjpz",
-            "type": "pjfczknjmyemcftxwhbw",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}",
+            "name": "cr",
+            "type": "Microsoft.ElasticSan/elasticSans/volumeGroups",
             "systemData": {
               "createdBy": "kakcyehdrphqkilgkhpbdtvpupak",
               "createdByType": "User",

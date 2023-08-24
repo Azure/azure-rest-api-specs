@@ -2,10 +2,10 @@
   "title": "VolumeGroups_Create",
   "operationId": "VolumeGroups_Create",
   "parameters": {
-    "subscriptionId": "335348B7-6545-4C32-82FE-E83522D8053E",
-    "resourceGroupName": "rgelasticsan",
-    "elasticSanName": "Rwa7UGK-1u78",
-    "volumeGroupName": "17-5_3-2U_0c-207_T8",
+    "subscriptionId": "subscriptionid",
+    "resourceGroupName": "resourcegroupname",
+    "elasticSanName": "elasticsanname",
+    "volumeGroupName": "volumegroupname",
     "parameters": {
       "identity": {
         "type": "None",
@@ -29,7 +29,7 @@
         "networkAcls": {
           "virtualNetworkRules": [
             {
-              "id": "kfbayhssdcsbsxthg",
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}",
               "action": "Allow"
             }
           ]
@@ -53,7 +53,7 @@
           }
         },
         "properties": {
-          "provisioningState": "Invalid",
+          "provisioningState": "Succeeded",
           "protocolType": "Iscsi",
           "encryption": "EncryptionAtRestWithPlatformKey",
           "encryptionProperties": {
@@ -72,44 +72,15 @@
           "networkAcls": {
             "virtualNetworkRules": [
               {
-                "id": "kfbayhssdcsbsxthg",
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}",
                 "action": "Allow"
               }
             ]
-          },
-          "privateEndpointConnections": [
-            {
-              "properties": {
-                "provisioningState": "Invalid",
-                "privateEndpoint": {
-                  "id": "ehxmltubeltzmgcqxocakaansat"
-                },
-                "privateLinkServiceConnectionState": {
-                  "status": "Pending",
-                  "description": "nahklgxicbqjbbvcdrkljqdhprruys",
-                  "actionsRequired": "sairafcqpvucoy"
-                },
-                "groupIds": [
-                  "bolviufgqnyid"
-                ]
-              },
-              "id": "opcjchensdf",
-              "name": "gewxykc",
-              "type": "ailymcedgvxbqklmqtlty",
-              "systemData": {
-                "createdBy": "kakcyehdrphqkilgkhpbdtvpupak",
-                "createdByType": "User",
-                "createdAt": "2023-08-23T12:16:10.057Z",
-                "lastModifiedBy": "bcclmbseed",
-                "lastModifiedByType": "User",
-                "lastModifiedAt": "2023-08-23T12:16:10.057Z"
-              }
-            }
-          ]
+          }
         },
-        "id": "dqjmna",
-        "name": "nroihjpz",
-        "type": "pjfczknjmyemcftxwhbw",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}",
+        "name": "cr",
+        "type": "Microsoft.ElasticSan/elasticSans/volumeGroups",
         "systemData": {
           "createdBy": "kakcyehdrphqkilgkhpbdtvpupak",
           "createdByType": "User",
@@ -137,7 +108,7 @@
           }
         },
         "properties": {
-          "provisioningState": "Invalid",
+          "provisioningState": "Succeeded",
           "protocolType": "Iscsi",
           "encryption": "EncryptionAtRestWithPlatformKey",
           "encryptionProperties": {
@@ -156,7 +127,7 @@
           "networkAcls": {
             "virtualNetworkRules": [
               {
-                "id": "kfbayhssdcsbsxthg",
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}",
                 "action": "Allow"
               }
             ]
@@ -191,9 +162,9 @@
             }
           ]
         },
-        "id": "dqjmna",
-        "name": "nroihjpz",
-        "type": "pjfczknjmyemcftxwhbw",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}",
+        "name": "cr",
+        "type": "Microsoft.ElasticSan/elasticSans/volumeGroups",
         "systemData": {
           "createdBy": "kakcyehdrphqkilgkhpbdtvpupak",
           "createdByType": "User",
