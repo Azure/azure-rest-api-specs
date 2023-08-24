@@ -10,6 +10,12 @@ typescript:
   azure-arm: true
   generate-metadata: true
   payload-flattening-threshold: 1
+
+directive: 
+  from: CommonDefinitions.json
+  where: "$.definitions.DaprConfig.properties.logLevel.x-ms-enum"
+  transform: >
+    $["name"] = "DaprConfigLogLevel ";  
 ```
 
 ``` yaml $(typescript) && !$(profile-content)
