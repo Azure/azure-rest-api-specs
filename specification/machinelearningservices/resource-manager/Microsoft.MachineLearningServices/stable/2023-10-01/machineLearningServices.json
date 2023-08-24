@@ -55,7 +55,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/AmlOperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definition/OperationListResult"
             }
           },
           "default": {
@@ -154,7 +154,20 @@
             }
           },
           "202": {
-            "description": "The request was successful; the request was well-formed and received properly."
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed",
@@ -251,7 +264,20 @@
             }
           },
           "202": {
-            "description": "The request was successful; the request was well-formed and received properly."
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed",
@@ -457,7 +483,20 @@
             "description": "The request was successful; the request was well-formed and received properly."
           },
           "202": {
-            "description": "The request was accepted; the request was well-formed and received properly."
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed",
@@ -1538,7 +1577,20 @@
             }
           },
           "202": {
-            "description": "The request was successful; the request was well-formed and received properly."
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed",
@@ -1956,7 +2008,8 @@
       "required": true,
       "type": "string",
       "description": "Friendly name of the workspace connection",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
     },
     "TargetParameter": {
       "in": "query",
