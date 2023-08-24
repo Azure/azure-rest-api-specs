@@ -132,8 +132,25 @@
                   },
                   "disconnectionReason": {
                     "type": "string",
-                    "description": "Reason for the disconnection of the MQTT client's session. The value could be one of the values in the disconnection reasons table."
-                  }
+                    "description": "Reason for the disconnection of the MQTT client's session. The value could be one of the values in the disconnection reasons table.",
+                    "enum": [
+                        "ClientAuthenticationError",
+                        "ClientAuthorizationError",
+                        "ClientError",
+                        "ClientInitiatedDisconnect",
+                        "ConnectionLost",
+                        "IpForbidden",
+                        "QuotaExceeded",
+                        "ServerError",
+                        "ServerInitiatedDisconnect",
+                        "SessionOverflow",
+                        "SessionTakenOver"
+                    ],
+                    "x-ms-enum": {
+                        "name": "mqttClientDisconnectionReason",
+                        "modelAsString": true
+                    }  
+                }
             }
           },
           "EventGridNamespaceMQTTClientEventData": {
