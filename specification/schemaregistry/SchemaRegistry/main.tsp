@@ -49,6 +49,7 @@ model AzureAuth
     {
       type: OAuth2FlowType.implicit;
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
+
       // add description to below: "impersonate your user account"
       scopes: ["https://eventhubs.azure.net/.default"];
     }
@@ -62,7 +63,7 @@ interface SchemaOperations {
   @summary("Get list of schema groups.")
   @doc("Gets the list of schema groups user is authorized to access.")
   @sharedRoute
-  op listSchemaGroups is resourceOperations.ResourceList<SchemaGroup>;
+  listSchemaGroups is resourceOperations.ResourceList<SchemaGroup>;
 
   //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/$schemas/{id}?api-version={apiVersion}
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard read operation w/ SchemaId resource doesn't allow returning binary schema and headers."
@@ -70,7 +71,7 @@ interface SchemaOperations {
   @doc("Gets a registered schema by its unique ID.  Azure Schema Registry guarantees that ID is unique within a namespace. Operation response type is based on serialization of schema requested.")
   @route("/$schemaGroups/$schemas/{id}")
   @get
-  op getSchemaById is Azure.Core.Foundations.Operation<
+  getSchemaById is Azure.Core.Foundations.Operation<
     Azure.Core.Foundations.ItemKeysOf<SchemaId>,
     OkResponse & SchemaHeaders & SchemaContent & SchemaContentType
   >;
@@ -78,7 +79,7 @@ interface SchemaOperations {
   //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}/versions/?api-version={apiVersion}
   @summary("List schema versions.")
   @doc("Gets the list of all versions of one schema.")
-  op listSchemaVersions is resourceOperations.ResourceList<Version>;
+  listSchemaVersions is resourceOperations.ResourceList<Version>;
 
   //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}/versions/{schemaVersion}?api-version={apiVersion}
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard read operation w/ Version resource doesn't allow returning non-version response."
@@ -86,7 +87,7 @@ interface SchemaOperations {
   @doc("Gets one specific version of one schema.")
   @route("/$schemaGroups/{groupName}/schemas/{name}/versions/{schemaVersion}")
   @get
-  op getSchemaByVersion is Azure.Core.Foundations.Operation<
+  getSchemaByVersion is Azure.Core.Foundations.Operation<
     Azure.Core.Foundations.ItemKeysOf<Version>,
     OkResponse & SchemaHeaders & SchemaContent & SchemaContentType
   >;
@@ -95,7 +96,7 @@ interface SchemaOperations {
   @summary("Get ID for existing schema.")
   @doc("Gets the ID referencing an existing schema within the specified schema group, as matched by schema content comparison.")
   @action("get-id")
-  op getSchemaIdByContent is resourceOperations.ResourceAction<
+  getSchemaIdByContent is resourceOperations.ResourceAction<
     Schema,
     {
       ...SchemaContentType;
@@ -114,8 +115,10 @@ interface SchemaOperations {
   @doc("Register new schema. If schema of specified name does not exist in specified group, schema is created at version 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.")
   @route("/$schemaGroups/{groupName}/schemas/{name}")
   @put
-  op registerSchema is Azure.Core.Foundations.Operation<
-    Azure.Core.Foundations.ItemKeysOf<Schema> & SchemaContent & SchemaContentType,
+  registerSchema is Azure.Core.Foundations.Operation<
+    Azure.Core.Foundations.ItemKeysOf<Schema> &
+      SchemaContent &
+      SchemaContentType,
     NoContentResponse<SchemaHeaders>
   >;
 }
@@ -136,7 +139,7 @@ union SchemaContentTypeValues {
 model SchemaContentType {
   @doc("The content type for given schema.")
   @header("Content-Type")
-  contentType: SchemaContentTypeValues
+  contentType: SchemaContentTypeValues;
 }
 
 @doc("Content of the schema.")
