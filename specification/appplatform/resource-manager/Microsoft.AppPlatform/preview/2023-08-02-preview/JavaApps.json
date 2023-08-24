@@ -445,48 +445,6 @@
           "final-state-via": "location"
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/javaApps/{appName}/getResourceUploadUrl": {
-      "post": {
-        "tags": [
-          "JavaApps"
-        ],
-        "description": "Get an resource upload URL for an App, which may be artifacts or source archive.",
-        "operationId": "JavaApps_GetResourceUploadUrl",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AppNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success. The response describes the resource upload URL.",
-            "schema": {
-              "$ref": "#/definitions/ResourceUploadDefinition"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "BuildService_GetResourceUploadUrl": {
-            "$ref": "./examples/v2/JavaApps/JavaApps_GetResourceUploadUrl.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -590,20 +548,6 @@
           "description": "Azure Key Vault URL pointing to the secret referenced by the app.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "ResourceUploadDefinition": {
-      "description": "Resource upload definition payload",
-      "type": "object",
-      "properties": {
-        "relativePath": {
-          "description": "Source relative path",
-          "type": "string"
-        },
-        "uploadUrl": {
-          "description": "Upload URL",
-          "type": "string"
         }
       }
     }

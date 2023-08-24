@@ -292,6 +292,48 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/javaEnvironments/{javaEnvironmentName}/getResourceUploadUrl": {
+      "post": {
+        "tags": [
+          "JavaEnvironments"
+        ],
+        "description": "Get an resource upload URL for the env, which may be artifacts or source archive.",
+        "operationId": "JavaEnvironments_GetResourceUploadUrl",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JavaEnvironmentEnvelopePatchParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the resource upload URL.",
+            "schema": {
+              "$ref": "#/definitions/ResourceUploadDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BuildService_GetResourceUploadUrl": {
+            "$ref": "./examples/v2/JavaEnvironments/JavaEnvironments_GetResourceUploadUrl.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/javaEnvironments/{javaEnvironmentName}/checkNameAvailability": {
       "post": {
         "tags": [
@@ -457,6 +499,20 @@
           "type": "object",
           "properties": {},
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ResourceUploadDefinition": {
+      "description": "Resource upload definition payload",
+      "type": "object",
+      "properties": {
+        "relativePath": {
+          "description": "Source relative path",
+          "type": "string"
+        },
+        "uploadUrl": {
+          "description": "Upload URL",
+          "type": "string"
         }
       }
     }
