@@ -2042,18 +2042,26 @@
       }
     },
     "FlushParameters": {
-      "title": "Flush all the keys from the current and all its linked databases",
+      "title": "Flush all the keys from the current and all its linked databases.",
       "type": "object",
       "properties": {
         "ids": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Cache/redisEnterprise/databases"
+                }
+              ]
+            }
           },
-          "description": "The resource identifiers of all the other database resources in the georeplication group to be flushed"
+          "description": "The identifiers of all the other database resources in the georeplication group to be flushed."
         }
       },
-      "description": "Parameters for a Redis Enterprise active geo-replication flush operation."
+      "description": "Parameters for a Redis Enterprise active geo-replication flush operation"
     },
     "ForceUnlinkParameters": {
       "title": "Forcibly unlink another database from this database.",
