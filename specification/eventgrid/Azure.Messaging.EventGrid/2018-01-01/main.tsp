@@ -3,15 +3,6 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
-// @useAuth(
-//   ApiKeyAuth<ApiKeyLocation.header, "aeg-sas-key"> | OAuth2Auth<[
-//     {
-//       type: OAuth2FlowType.implicit,
-//       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-//       scopes: ["https://eventgrid.azure.net/.default"],
-//     }
-//   ]>
-// )
 @useAuth({
   type: AuthType.http,
   scheme: "SharedAccessKey",
