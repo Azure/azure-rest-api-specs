@@ -37,6 +37,10 @@ enum ServiceApiVersions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   @doc("Azure Schema Registry 2022-10 Version")
   v2022_10: "2022-10",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @doc("Azure Schema Registry 2023-07-01 Version")
+  v2023_07_01: "2023-07-01",
 }
 
 @doc("Azure Active Directory OAuth2 Flow")
@@ -120,11 +124,19 @@ interface SchemaOperations {
 
 alias NoContentResponse<T> = TypeSpec.Http.Response<204> & T;
 
+union SchemaContentTypeValues {
+  avro: "application/json; serialization=Avro",
+  json: "application/json; serialization=json",
+  custom: "text/plain; charset=utf-8",
+  @added(ServiceApiVersions.v2023_07_01)
+  protobuf: "text/vnd.ms.protobuf",
+}
+
 @doc("The content type for given schema. Each schema type has an associated content-type.")
 model SchemaContentType {
   @doc("The content type for given schema.")
   @header("Content-Type")
-  contentType: "application/json; serialization=Avro" | "application/json; serialization=json" | "text/plain; charset=utf-8";
+  contentType: SchemaContentTypeValues
 }
 
 @doc("Content of the schema.")
