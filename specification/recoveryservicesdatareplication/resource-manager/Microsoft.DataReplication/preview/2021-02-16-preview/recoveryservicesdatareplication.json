@@ -10,12 +10,12 @@
     "https"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationFabrics/{fabricName}/fabricAgents/{draName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationFabrics/{fabricName}/fabricAgents/{fabricAgentName}": {
       "get": {
         "tags": [
           "Dra"
         ],
-        "summary": "Gets the Dra.",
+        "summary": "Gets the fabric agent (Dra).",
         "description": "Gets the details of the fabric agent.",
         "operationId": "Dra_Get",
         "produces": [
@@ -29,20 +29,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "fabricName",
-            "description": "Fabric name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/FabricNameParameter"
           },
           {
-            "in": "path",
-            "name": "draName",
-            "description": "Dra name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/FabricAgentNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -72,7 +62,7 @@
         "tags": [
           "Dra"
         ],
-        "summary": "Puts the Dra.",
+        "summary": "Puts the fabric agent (Dra).",
         "description": "Creates the fabric agent.",
         "operationId": "Dra_Create",
         "consumes": [
@@ -89,20 +79,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "fabricName",
-            "description": "Fabric name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/FabricNameParameter"
           },
           {
-            "in": "path",
-            "name": "draName",
-            "description": "Dra name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/FabricAgentNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -150,7 +130,7 @@
         "tags": [
           "Dra"
         ],
-        "summary": "Deletes the Dra.",
+        "summary": "Deletes the fabric agent (Dra).",
         "description": "Deletes the fabric agent.",
         "operationId": "Dra_Delete",
         "produces": [
@@ -164,20 +144,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "fabricName",
-            "description": "Fabric Name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/FabricNameParameter"
           },
           {
-            "in": "path",
-            "name": "draName",
-            "description": "Dra Name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/FabricAgentNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -222,7 +192,7 @@
         "tags": [
           "Dra"
         ],
-        "summary": "Lists the Dras.",
+        "summary": "Lists the fabric agents (Dras).",
         "description": "Gets the list of fabric agents in the given fabric.",
         "operationId": "Dra_List",
         "produces": [
@@ -236,12 +206,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "fabricName",
-            "description": "Fabric name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/FabricNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -271,12 +236,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationFabrics/{fabricName}/fabricAgents/{draName}/operations/{operationId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationFabrics/{fabricName}/fabricAgents/{fabricAgentName}/operations/{operationId}": {
       "get": {
         "tags": [
           "Dra"
         ],
-        "summary": "Gets the Dra operation status.",
+        "summary": "Gets the fabric agent (Dra) operation status.",
         "description": "Tracks the results of an asynchronous operation on the fabric agent.",
         "operationId": "DraOperationStatus_Get",
         "produces": [
@@ -290,23 +255,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "fabricName",
-            "description": "Fabric name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/FabricNameParameter"
           },
           {
-            "in": "path",
-            "name": "draName",
-            "description": "Dra name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/FabricAgentNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
+            "$ref": "#/parameters/OperationIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -352,20 +307,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "vaultName",
-            "description": "Vault name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/VaultNameParameter"
           },
           {
-            "in": "path",
-            "name": "emailConfigurationName",
-            "description": "Email configuration name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/EmailConfigurationNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -412,20 +357,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "vaultName",
-            "description": "Vault name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/VaultNameParameter"
           },
           {
-            "in": "path",
-            "name": "emailConfigurationName",
-            "description": "Email configuration name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/EmailConfigurationNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -485,12 +420,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "vaultName",
-            "description": "Vault name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/VaultNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -539,20 +469,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "vaultName",
-            "description": "Vault name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/VaultNameParameter"
           },
           {
-            "in": "path",
-            "name": "eventName",
-            "description": "Event name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/EventNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -598,12 +518,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "vaultName",
-            "description": "Vault name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/VaultNameParameter"
           },
           {
             "in": "query",
@@ -664,12 +579,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "fabricName",
-            "description": "Fabric name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/FabricNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -716,12 +626,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "fabricName",
-            "description": "Fabric Name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/FabricNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -786,12 +691,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "fabricName",
-            "description": "Fabric Name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/FabricNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -859,12 +759,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "fabricName",
-            "description": "Fabric Name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/FabricNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1024,15 +919,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "fabricName",
-            "description": "Fabric name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/FabricNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
+            "$ref": "#/parameters/OperationIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1078,20 +968,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "vaultName",
-            "description": "Vault name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/VaultNameParameter"
           },
           {
-            "in": "path",
-            "name": "policyName",
-            "description": "Policy name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/PolicyNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1138,20 +1018,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "vaultName",
-            "description": "Vault name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/VaultNameParameter"
           },
           {
-            "in": "path",
-            "name": "policyName",
-            "description": "Policy name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/PolicyNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1213,20 +1083,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "vaultName",
-            "description": "Vault Name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/VaultNameParameter"
           },
           {
-            "in": "path",
-            "name": "policyName",
-            "description": "Policy Name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/PolicyNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1285,12 +1145,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "vaultName",
-            "description": "Vault name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/VaultNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1339,23 +1194,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "vaultName",
-            "description": "Vault name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/VaultNameParameter"
           },
           {
-            "in": "path",
-            "name": "policyName",
-            "description": "Policy name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/PolicyNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
+            "$ref": "#/parameters/OperationIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1401,20 +1246,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "vaultName",
-            "description": "Vault name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/VaultNameParameter"
           },
           {
-            "in": "path",
-            "name": "protectedItemName",
-            "description": "Protected item name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/ProtectedItemNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1461,20 +1296,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "vaultName",
-            "description": "Vault name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/VaultNameParameter"
           },
           {
-            "in": "path",
-            "name": "protectedItemName",
-            "description": "Protected item name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/ProtectedItemNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1536,20 +1361,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "vaultName",
-            "description": "Vault name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/VaultNameParameter"
           },
           {
-            "in": "path",
-            "name": "protectedItemName",
-            "description": "Protected item name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/ProtectedItemNameParameter"
           },
           {
             "in": "query",
@@ -1614,12 +1429,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "vaultName",
-            "description": "Vault name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/VaultNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1671,20 +1481,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "vaultName",
-            "description": "Vault name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/VaultNameParameter"
           },
           {
-            "in": "path",
-            "name": "protectedItemName",
-            "description": "Protected item name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/ProtectedItemNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1754,23 +1554,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "vaultName",
-            "description": "Vault name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/VaultNameParameter"
           },
           {
-            "in": "path",
-            "name": "protectedItemName",
-            "description": "Protected Item name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/ProtectedItemNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
+            "$ref": "#/parameters/OperationIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1816,28 +1606,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "vaultName",
-            "description": "Vault name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/VaultNameParameter"
           },
           {
-            "in": "path",
-            "name": "protectedItemName",
-            "description": "Protected item name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/ProtectedItemNameParameter"
           },
           {
-            "in": "path",
-            "name": "recoveryPointName",
-            "description": "Recovery point name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/RecoveryPointNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1883,20 +1658,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "vaultName",
-            "description": "Vault name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/VaultNameParameter"
           },
           {
-            "in": "path",
-            "name": "protectedItemName",
-            "description": "Protected item name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/ProtectedItemNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1945,20 +1710,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "vaultName",
-            "description": "Vault name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/VaultNameParameter"
           },
           {
-            "in": "path",
-            "name": "replicationExtensionName",
-            "description": "Replication extension name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/ReplicationExtensionNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2005,20 +1760,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "vaultName",
-            "description": "Vault name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/VaultNameParameter"
           },
           {
-            "in": "path",
-            "name": "replicationExtensionName",
-            "description": "Replication extension name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/ReplicationExtensionNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2080,20 +1825,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "vaultName",
-            "description": "Vault Name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/VaultNameParameter"
           },
           {
-            "in": "path",
-            "name": "replicationExtensionName",
-            "description": "Replication extension name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/ReplicationExtensionNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2152,12 +1887,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "vaultName",
-            "description": "Vault name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/VaultNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2206,23 +1936,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "vaultName",
-            "description": "Vault name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/VaultNameParameter"
           },
           {
-            "in": "path",
-            "name": "replicationExtensionName",
-            "description": "Replication extension name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/ReplicationExtensionNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
+            "$ref": "#/parameters/OperationIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2422,12 +2142,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "vaultName",
-            "description": "Vault name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/VaultNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2474,12 +2189,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "vaultName",
-            "description": "Vault Name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/VaultNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2544,12 +2254,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "vaultName",
-            "description": "Vault Name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/VaultNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2617,12 +2322,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "vaultName",
-            "description": "Vault Name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/VaultNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2782,15 +2482,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "vaultName",
-            "description": "Vault name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/VaultNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
+            "$ref": "#/parameters/OperationIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2817,12 +2512,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/jobs/{workflowName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/jobs/{jobName}": {
       "get": {
         "tags": [
           "Workflow"
         ],
-        "summary": "Gets the workflow.",
+        "summary": "Gets the job (workflow).",
         "description": "Gets the details of the job.",
         "operationId": "Workflow_Get",
         "produces": [
@@ -2836,20 +2531,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "vaultName",
-            "description": "Vault name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/VaultNameParameter"
           },
           {
-            "in": "path",
-            "name": "workflowName",
-            "description": "Workflow name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/JobNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2881,7 +2566,7 @@
         "tags": [
           "Workflow"
         ],
-        "summary": "Lists the workflows.",
+        "summary": "Lists the jobs (workflows).",
         "description": "Gets the list of jobs in the given vault.",
         "operationId": "Workflow_List",
         "produces": [
@@ -2895,12 +2580,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "vaultName",
-            "description": "Vault name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/VaultNameParameter"
           },
           {
             "in": "query",
@@ -2942,12 +2622,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/jobs/{workflowName}/operations/{operationId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/jobs/{jobName}/operations/{operationId}": {
       "get": {
         "tags": [
           "Workflow"
         ],
-        "summary": "Gets the workflow operation status.",
+        "summary": "Gets the job (workflow) operation status.",
         "description": "Tracks the results of an asynchronous operation on the job.",
         "operationId": "WorkflowOperationStatus_Get",
         "produces": [
@@ -2961,23 +2641,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "vaultName",
-            "description": "Vault name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/VaultNameParameter"
           },
           {
-            "in": "path",
-            "name": "workflowName",
-            "description": "Workflow name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "$ref": "#/parameters/JobNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
+            "$ref": "#/parameters/OperationIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3065,16 +2735,6 @@
           "x-ms-identifiers": []
         }
       }
-    },
-    "AzStackHCIDraModelCustomProperties": {
-      "description": "AzStackHCI DRA model custom properties.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DraModelCustomProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "AzStackHCI"
     },
     "AzStackHCIFabricModelCustomProperties": {
       "description": "AzStackHCI fabric model custom properties.",
@@ -3272,20 +2932,8 @@
       "properties": {
         "instanceType": {
           "description": "Gets or sets the instance type.",
-          "enum": [
-            "None",
-            "VMware",
-            "AVS",
-            "Azure",
-            "AzStackHCI",
-            "HyperVMigrate",
-            "VMwareMigrate"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "FabricType",
-            "modelAsString": true
-          }
+          "minLength": 1,
+          "type": "string"
         }
       },
       "discriminator": "instanceType"
@@ -3568,19 +3216,8 @@
       "properties": {
         "instanceType": {
           "description": "Gets or sets the instance type.",
-          "enum": [
-            "None",
-            "VMwareToAvs",
-            "VMwareToAvsFailback",
-            "VMwareToAzureMigrate",
-            "HyperVToAzStackHCI",
-            "VMwareToAzStackHCI"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ReplicationType",
-            "modelAsString": true
-          }
+          "minLength": 1,
+          "type": "string"
         }
       },
       "discriminator": "instanceType"
@@ -3728,20 +3365,8 @@
       "properties": {
         "instanceType": {
           "description": "Gets or sets the instance type.",
-          "enum": [
-            "None",
-            "VMware",
-            "AVS",
-            "Azure",
-            "AzStackHCI",
-            "HyperVMigrate",
-            "VMwareMigrate"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "FabricType",
-            "modelAsString": true
-          }
+          "minLength": 1,
+          "type": "string"
         }
       },
       "discriminator": "instanceType"
@@ -3993,16 +3618,6 @@
           "readOnly": true
         }
       }
-    },
-    "HyperVMigrateDraModelCustomProperties": {
-      "description": "HyperVMigrate DRA model custom properties.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DraModelCustomProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "HyperVMigrate"
     },
     "HyperVMigrateFabricModelCustomProperties": {
       "description": "HyperV migrate fabric model custom properties.",
@@ -4982,19 +4597,8 @@
       "properties": {
         "instanceType": {
           "description": "Gets or sets the instance type.",
-          "enum": [
-            "None",
-            "VMwareToAvs",
-            "VMwareToAvsFailback",
-            "VMwareToAzureMigrate",
-            "HyperVToAzStackHCI",
-            "VMwareToAzStackHCI"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ReplicationType",
-            "modelAsString": true
-          }
+          "minLength": 1,
+          "type": "string"
         }
       },
       "discriminator": "instanceType"
@@ -5169,19 +4773,8 @@
       "properties": {
         "instanceType": {
           "description": "Gets or sets the instance type.",
-          "enum": [
-            "None",
-            "VMwareToAvs",
-            "VMwareToAvsFailback",
-            "VMwareToAzureMigrate",
-            "HyperVToAzStackHCI",
-            "VMwareToAzStackHCI"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ReplicationType",
-            "modelAsString": true
-          }
+          "minLength": 1,
+          "type": "string"
         }
       },
       "discriminator": "instanceType"
@@ -5537,19 +5130,8 @@
       "properties": {
         "instanceType": {
           "description": "Gets or sets the instance type.",
-          "enum": [
-            "None",
-            "VMwareToAvs",
-            "VMwareToAvsFailback",
-            "VMwareToAzureMigrate",
-            "HyperVToAzStackHCI",
-            "VMwareToAzStackHCI"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ReplicationType",
-            "modelAsString": true
-          }
+          "minLength": 1,
+          "type": "string"
         }
       },
       "discriminator": "instanceType"
@@ -5656,19 +5238,8 @@
       "properties": {
         "instanceType": {
           "description": "Gets or sets the instance type.",
-          "enum": [
-            "None",
-            "VMwareToAvs",
-            "VMwareToAvsFailback",
-            "VMwareToAzureMigrate",
-            "HyperVToAzStackHCI",
-            "VMwareToAzStackHCI"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ReplicationType",
-            "modelAsString": true
-          }
+          "minLength": 1,
+          "type": "string"
         }
       },
       "discriminator": "instanceType"
@@ -6777,17 +6348,8 @@
       "properties": {
         "instanceType": {
           "description": "Gets or sets the instance type.",
-          "enum": [
-            "WorkflowDetails",
-            "FailoverWorkflowDetails",
-            "TestFailoverWorkflowDetails",
-            "TestFailoverCleanupWorkflowDetails"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "WorkflowDetailsType",
-            "modelAsString": true
-          }
+          "minLength": 1,
+          "type": "string"
         },
         "affectedObjectDetails": {
           "description": "Gets or sets any custom properties of the affected object.",
@@ -6933,6 +6495,123 @@
           "$ref": "#/definitions/WorkflowModelCustomProperties"
         }
       }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "in": "path",
+      "name": "subscriptionId",
+      "description": "The subscription Id.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceGroupNameParameter": {
+      "in": "path",
+      "name": "resourceGroupName",
+      "description": "The resource group name.",
+      "required": true,
+      "type": "string",
+      "maxLength": 90,
+      "minLength": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "in": "query",
+      "name": "api-version",
+      "description": "The client API version.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "FabricNameParameter": {
+      "in": "path",
+      "name": "fabricName",
+      "description": "The fabric name.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]*$"
+    },
+    "FabricAgentNameParameter": {
+      "in": "path",
+      "name": "fabricAgentName",
+      "description": "The fabric agent (Dra) name.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]*$"
+    },
+    "VaultNameParameter": {
+      "in": "path",
+      "name": "vaultName",
+      "description": "The vault name.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]*$"
+    },
+    "PolicyNameParameter": {
+      "in": "path",
+      "name": "policyName",
+      "description": "The policy name.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]*$"
+    },
+    "ProtectedItemNameParameter": {
+      "in": "path",
+      "name": "protectedItemName",
+      "description": "The protected item name.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]*$"
+    },
+    "OperationIdParameter": {
+      "in": "path",
+      "name": "operationId",
+      "description": "The operation Id.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]*$"
+    },
+    "ReplicationExtensionNameParameter": {
+      "in": "path",
+      "name": "replicationExtensionName",
+      "description": "The replication extension name.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]*$"
+    },
+    "JobNameParameter": {
+      "in": "path",
+      "name": "jobName",
+      "description": "The job (workflow) name.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]*$"
+    },
+    "EmailConfigurationNameParameter": {
+      "in": "path",
+      "name": "emailConfigurationName",
+      "description": "The email configuration name.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]*$"
+    },
+    "EventNameParameter": {
+      "in": "path",
+      "name": "eventName",
+      "description": "The event name.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]*$"
+    },
+    "RecoveryPointNameParameter": {
+      "in": "path",
+      "name": "recoveryPointName",
+      "description": "The recovery point name.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]*$"
     }
   },
   "securityDefinitions": {
