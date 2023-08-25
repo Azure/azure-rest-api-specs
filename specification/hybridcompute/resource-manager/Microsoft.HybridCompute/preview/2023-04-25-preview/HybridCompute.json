@@ -1311,12 +1311,7 @@
             "$ref": "#/parameters/machineNameParameter"
           },
           {
-            "name": "runCommandName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]",
-            "description": "The name of the run command."
+            "$ref": "#/parameters/runCommandNameParameter"
           },
           {
             "name": "runCommandProperties",
@@ -1393,12 +1388,7 @@
             "$ref": "#/parameters/machineNameParameter"
           },
           {
-            "name": "runCommandName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]",
-            "description": "The name of the run command."
+            "$ref": "#/parameters/runCommandNameParameter"
           },
           {
             "name": "runCommandProperties",
@@ -1469,12 +1459,7 @@
             "$ref": "#/parameters/machineNameParameter"
           },
           {
-            "name": "runCommandName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]",
-            "description": "The name of the run command."
+            "$ref": "#/parameters/runCommandNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1539,12 +1524,7 @@
             "$ref": "#/parameters/machineNameParameter"
           },
           {
-            "name": "runCommandName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]",
-            "description": "The name of the run command."
+            "$ref": "#/parameters/runCommandNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -3359,6 +3339,14 @@
       "pattern": "[a-zA-Z0-9-_\\.]+",
       "description": "The name of the hybrid machine.",
       "x-ms-parameter-location": "method"
+    },
+    "runCommandNameParameter": {
+      "name": "runCommandName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "[a-zA-Z0-9-_\\.]+",
+      "description": "The name of the run command."
     }
   }
 }
