@@ -117,6 +117,9 @@ namespace EventGrid {
 
   @doc("Supported delays for release opeartion.")
   enum ReleaseDelay {
+    @doc("Release the event after 0 seconds.")
+    ZeroSeconds: 0,
+
     @doc("Release the event after 10 seconds.")
     TenSeconds: 10,
 
@@ -127,7 +130,7 @@ namespace EventGrid {
     SixHundredSeconds: 600,
 
     @doc("Release the event after 3600 seconds.")
-    ThreeThousandSixHundredSeconds: 3600,
+    ThirtyThousandSixHundredSeconds: 3600,
   }
 
   @doc("The result of the Publish operation.")
