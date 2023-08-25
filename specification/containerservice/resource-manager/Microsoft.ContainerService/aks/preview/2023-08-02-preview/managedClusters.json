@@ -3106,7 +3106,7 @@
           "default": {
             "description": "Error details",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3114,7 +3114,8 @@
           "Create or update a trusted access role binding": {
             "$ref": "./examples/TrustedAccessRoleBindings_CreateOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -3140,8 +3141,14 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "NoContent"
@@ -3149,7 +3156,7 @@
           "default": {
             "description": "Error details",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3157,7 +3164,8 @@
           "Delete a trusted access role binding": {
             "$ref": "./examples/TrustedAccessRoleBindings_Delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/guardrailsVersions/{version}": {
