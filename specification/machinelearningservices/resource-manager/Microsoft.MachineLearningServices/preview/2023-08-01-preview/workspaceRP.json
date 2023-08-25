@@ -752,6 +752,19 @@
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "type": "string"
+            },
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
             }
           },
           "default": {
@@ -760,6 +773,15 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "TestWorkspaceConnection": {
+            "$ref": "./examples/WorkspaceConnection/testConnection.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
