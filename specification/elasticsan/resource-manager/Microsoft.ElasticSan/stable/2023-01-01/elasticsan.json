@@ -907,14 +907,30 @@
             "in": "header",
             "required": false,
             "type": "string",
-            "description": "Optional, used to delete snapshots under volume."
+            "enum": [
+              "true",
+              "false"
+            ],
+            "x-ms-enum": {
+              "name": "x-ms-delete-snapshots",
+              "modelAsString": true
+            },
+            "description": "Optional, used to delete snapshots under volume. Allowed value are only true or false."
           },
           {
             "name": "x-ms-force-delete",
             "in": "header",
             "required": false,
             "type": "string",
-            "description": "Optional, used to delete volume if active sessions present."
+            "enum": [
+              "true",
+              "false"
+            ],
+            "x-ms-enum": {
+              "name": "x-ms-force-delete",
+              "modelAsString": true
+            },
+            "description": "Optional, used to delete volume if active sessions present. Allowed value are only true or false."
           }
         ],
         "responses": {
@@ -1741,7 +1757,7 @@
             "name": "PublicNetworkAccess",
             "modelAsString": true
           },
-          "description": "Allow or disallow public network access to Storage Account. Value is optional but if passed in, must be 'Enabled' or 'Disabled'."
+          "description": "Allow or disallow public network access to ElasticSan Account. Value is optional but if passed in, must be 'Enabled' or 'Disabled'."
         }
       }
     },
@@ -1795,7 +1811,7 @@
             "name": "PublicNetworkAccess",
             "modelAsString": true
           },
-          "description": "Allow or disallow public network access to Storage Account. Value is optional but if passed in, must be 'Enabled' or 'Disabled'."
+          "description": "Allow or disallow public network access to ElasticSan Account. Value is optional but if passed in, must be 'Enabled' or 'Disabled'."
         }
       }
     },
@@ -2354,8 +2370,7 @@
             "VolumeSnapshot",
             "DiskSnapshot",
             "Disk",
-            "DiskRestorePoint",
-            "Export"
+            "DiskRestorePoint"
           ],
           "x-ms-enum": {
             "name": "VolumeCreateOption",
