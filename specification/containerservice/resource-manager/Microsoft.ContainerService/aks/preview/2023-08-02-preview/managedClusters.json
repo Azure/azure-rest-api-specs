@@ -8091,8 +8091,31 @@
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "Whether to enable VPA. Default value is false.",
+          "description": "Whether to enable VPA add-on in cluster. Default value is false.",
           "default": false
+        },
+        "addonAutoscaling": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "AddonAutoscaling",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "Feature to autoscale AKS-managed add-ons is enabled. The default VPA update mode is Initial mode."
+              },
+              {
+                "value": "Disabled",
+                "description": "Feature to autoscale AKS-managed add-ons is disabled."
+              }
+            ]
+          },
+          "description": "Whether VPA add-on is enabled and configured to scale AKS-managed add-ons.",
+          "default": "Disabled"
         }
       },
       "required": [
