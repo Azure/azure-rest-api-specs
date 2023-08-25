@@ -28,10 +28,10 @@ model SubscriptionDeletedEventData {
 @doc("Configured state of the client.")
 enum mqttClientState {
   @doc("Enabled")
-  Enabled: 0,
+  Enabled,
 
   @doc("Disabled")
-  Disabled: 1,
+  Disabled,
 }
 
 @doc("Reason for the disconnection of the MQTT client's session.")
