@@ -2029,58 +2029,6 @@
     }
   },
   "definitions": {
-    "AmlOperation": {
-      "description": "Azure Machine Learning workspace REST API operation",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}",
-          "type": "string"
-        },
-        "display": {
-          "description": "Display name of operation",
-          "type": "object",
-          "properties": {
-            "provider": {
-              "description": "The resource provider name: Microsoft.MachineLearningExperimentation",
-              "type": "string"
-            },
-            "resource": {
-              "description": "The resource on which the operation is performed.",
-              "type": "string"
-            },
-            "operation": {
-              "description": "The operation that users can perform.",
-              "type": "string"
-            },
-            "description": {
-              "description": "The description for the operation.",
-              "type": "string"
-            }
-          }
-        },
-        "isDataAction": {
-          "description": "Indicates whether the operation applies to data-plane",
-          "type": "boolean"
-        }
-      }
-    },
-    "AmlOperationListResult": {
-      "type": "object",
-      "description": "An array of operations supported by the resource provider.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AmlOperation"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ],
-          "description": "List of AML workspace operations supported by the AML workspace resource provider."
-        }
-      }
-    },
     "Workspace": {
       "type": "object",
       "description": "An object that represents a machine learning workspace.",
