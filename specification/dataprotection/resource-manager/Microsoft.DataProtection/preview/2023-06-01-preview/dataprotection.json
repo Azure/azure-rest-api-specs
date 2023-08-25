@@ -2644,6 +2644,70 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupJobs/{jobId}/triggerCancel": {
+      "post": {
+        "tags": [
+          "AzureBackupJob"
+        ],
+        "description": "Triggers cancellation of Job and returns an OperationID to track.",
+        "operationId": "Jobs_TriggerCancel",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "name": "jobId",
+            "description": "The Job ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that represents the seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Trigger Cancel": {
+            "$ref": "./examples/JobCRUD/TriggerCancel.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/exportBackupJobs": {
       "post": {
         "tags": [
@@ -4470,6 +4534,11 @@
         },
         "restoreType": {
           "description": "It indicates the sub type of operation i.e. in case of Restore it can be ALR/OLR",
+          "readOnly": true,
+          "type": "string"
+        },
+        "sourceDataStoreType": {
+          "description": "The type of the source data store.",
           "readOnly": true,
           "type": "string"
         },
