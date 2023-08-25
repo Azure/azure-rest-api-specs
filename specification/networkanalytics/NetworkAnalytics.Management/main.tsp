@@ -682,17 +682,27 @@ model ResourceAccessRules {
   resourceId: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Suppressing documentation required warning nfor bypass for now."
+@doc("Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging|Metrics|AzureServices (For example, \"Logging, Metrics\"), or None to bypass none of those traffics.")
 enum Bypass {
+  @doc("Represents no bypassing of traffic.")
   None,
+
+  @doc("Represents bypassing logging traffic.")
   Logging,
+
+  @doc("Represents bypassing metrics traffic.")
   Metrics,
+
+  @doc("Represents bypassing azure services traffic.")
   AzureServices,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Suppressing documentation required warning for default action for now."
+@doc("Specifies the default action of allow or deny when no other rules match.")
 enum DefaultAction {
+  @doc("Represents allow action.")
   Allow,
+
+  @doc("Represents deny action.")
   Deny,
 }
 

@@ -1790,6 +1790,7 @@
     },
     "Bypass": {
       "type": "string",
+      "description": "Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging|Metrics|AzureServices (For example, \"Logging, Metrics\"), or None to bypass none of those traffics.",
       "enum": [
         "None",
         "Logging",
@@ -1798,7 +1799,29 @@
       ],
       "x-ms-enum": {
         "name": "Bypass",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Represents no bypassing of traffic."
+          },
+          {
+            "name": "Logging",
+            "value": "Logging",
+            "description": "Represents bypassing logging traffic."
+          },
+          {
+            "name": "Metrics",
+            "value": "Metrics",
+            "description": "Represents bypassing metrics traffic."
+          },
+          {
+            "name": "AzureServices",
+            "value": "AzureServices",
+            "description": "Represents bypassing azure services traffic."
+          }
+        ]
       }
     },
     "CommonStorageAccountProperties": {
@@ -2135,13 +2158,26 @@
     },
     "DefaultAction": {
       "type": "string",
+      "description": "Specifies the default action of allow or deny when no other rules match.",
       "enum": [
         "Allow",
         "Deny"
       ],
       "x-ms-enum": {
         "name": "DefaultAction",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allow",
+            "value": "Allow",
+            "description": "Represents allow action."
+          },
+          {
+            "name": "Deny",
+            "value": "Deny",
+            "description": "Represents deny action."
+          }
+        ]
       }
     },
     "IPRules": {
