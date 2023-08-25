@@ -5239,14 +5239,14 @@
               "type": "string",
               "title": "Type of node group expander to be used in scale up. Set to be deprecated, please use 'expanders' flag in the future.",
               "description": "Available values are: 'least-waste', 'most-pods', 'priority', 'random'.",
-              "$ref": "#/definitions/Expander"
+              "$ref": "#/definitions/expander"
             },
             "expanders": {
               "type": "array",
               "title": "Type of node group expander to be used in scale up.",
               "description": "Available values are: 'least-waste', 'most-pods', 'priority', 'random'. If multiple expanders are configured, they will be considered in the order in which they are listed, with the first one being considered first.",
               "items": {
-                "$ref": "#/definitions/Expander"
+                "$ref": "#/definitions/expander"
               }
             },
             "max-empty-bulk-delete": {
@@ -5460,7 +5460,7 @@
         }
       }
     },
-    "Expander": {
+    "expander": {
       "type": "string",
       "enum": [
         "least-waste",
@@ -5469,7 +5469,7 @@
         "random"
       ],
       "x-ms-enum": {
-        "name": "Expander",
+        "name": "expander",
         "modelAsString": true,
         "values": [
           {
