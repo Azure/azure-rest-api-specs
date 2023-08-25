@@ -1755,6 +1755,69 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/approverollingupgrade": {
+      "post": {
+        "tags": [
+          "VirtualMachineScaleSets"
+        ],
+        "operationId": "VirtualMachineScaleSets_ApproveRollingUpgrade",
+        "description": "Approve upgrade on deferred rolling upgrades for OS disks in the virtual machines in a VM scale set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "name": "vmInstanceIDs",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceIDs"
+            },
+            "description": "A list of virtual machine instance IDs from the VM scale set."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "VirtualMachineScaleSet_ApproveRollingUpgrade_MaximumSet_Gen": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_ApproveRollingUpgrade_MaximumSet_Gen.json"
+          },
+          "VirtualMachineScaleSet_ApproveRollingUpgrade_MinimumSet_Gen": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_ApproveRollingUpgrade_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/rollingUpgrades/cancel": {
       "post": {
         "tags": [
@@ -2641,6 +2704,67 @@
           },
           "VirtualMachineScaleSetVM_ReimageAll_MinimumSet_Gen": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetVM_ReimageAll_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/approverollingupgrade": {
+      "post": {
+        "tags": [
+          "VirtualMachineScaleSetVMs"
+        ],
+        "operationId": "VirtualMachineScaleSetVMs_ApproveRollingUpgrade",
+        "description": "Approve upgrade on deferred rolling upgrade for OS disk on a VM scale set instance.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The instance ID of the virtual machine."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "VirtualMachineScaleSetVM_ApproveRollingUpgrade_MaximumSet_Gen": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetVM_ApproveRollingUpgrade_MaximumSet_Gen.json"
+          },
+          "VirtualMachineScaleSetVM_ApproveRollingUpgrade_MinimumSet_Gen": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetVM_ApproveRollingUpgrade_MinimumSet_Gen.json"
           }
         }
       }
@@ -3611,6 +3735,10 @@
         "useRollingUpgradePolicy": {
           "type": "boolean",
           "description": "Indicates whether rolling upgrade policy should be used during Auto OS Upgrade. Default value is false. Auto OS Upgrade will fallback to the default policy if no policy is defined on the VMSS."
+        },
+        "osRollingUpgradeDeferral": {
+          "type": "boolean",
+          "description": "Indicates whether Auto OS Upgrade should undergo deferral. Deferred OS upgrades will send advanced notifications on a per-VM basis that an OS upgrade from rolling upgrades is incoming, via IMDS. The upgrade then defers until the upgrade is approved via an ApproveRollingUpgrade call."
         }
       },
       "description": "The configuration parameters used for performing automatic OS upgrade."
