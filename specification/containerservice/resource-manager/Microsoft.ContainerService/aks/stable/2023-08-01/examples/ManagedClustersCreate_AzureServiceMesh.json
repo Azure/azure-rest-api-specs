@@ -60,7 +60,17 @@
           "secret": "secret"
         },
         "serviceMeshProfile": {
-          "mode": "Istio"
+          "mode": "Istio",
+          "istio": {
+            "components": {
+              "ingressGateways": [
+                {
+                  "enabled": true,
+                  "mode": "Internal"
+                }
+              ]
+            }
+          }
         },
         "addonProfiles": {},
         "enableRBAC": true,
@@ -152,7 +162,14 @@
           "serviceMeshProfile": {
             "mode": "Istio",
             "istio": {
-              "components": {},
+              "components": {
+                "ingressGateways": [
+                  {
+                    "enabled": true,
+                    "mode": "Internal"
+                  }
+                ]
+              },
               "revisions": [
                 "asm-1-17"
               ]
@@ -241,7 +258,14 @@
           "serviceMeshProfile": {
             "mode": "Istio",
             "istio": {
-              "components": {},
+              "components": {
+                "ingressGateways": [
+                  {
+                    "enabled": true,
+                    "mode": "Internal"
+                  }
+                ]
+              },
               "revisions": [
                 "asm-1-17"
               ]
