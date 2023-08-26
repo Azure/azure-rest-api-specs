@@ -7633,7 +7633,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/FeaturesetJob"
+              "$ref": "#/definitions/FeaturesetVersionBackfillResponse"
             }
           },
           "202": {
@@ -12985,38 +12985,6 @@
       },
       "additionalProperties": false
     },
-    "BatchEndpointTrackedResource": {
-      "required": [
-        "location",
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ],
-      "properties": {
-        "identity": {
-          "description": "Managed service identity (system assigned and/or user assigned identities)",
-          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
-        },
-        "kind": {
-          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.",
-          "type": "string"
-        },
-        "properties": {
-          "description": "[Required] Additional attributes of the entity.",
-          "$ref": "#/definitions/BatchEndpoint"
-        },
-        "sku": {
-          "description": "Sku details required for ARM contract for Autoscaling.",
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku"
-        }
-      },
-      "x-ms-client-name": "BatchEndpoint",
-      "additionalProperties": false
-    },
     "BatchEndpointTrackedResourceArmPaginatedResult": {
       "description": "A paginated list of BatchEndpoint entities.",
       "type": "object",
@@ -13419,60 +13387,6 @@
         }
       },
       "x-ms-discriminator-value": "Categorical",
-      "additionalProperties": false
-    },
-    "CertificateDatastoreCredentials": {
-      "description": "Certificate datastore credentials configuration.",
-      "required": [
-        "clientId",
-        "secrets",
-        "tenantId",
-        "thumbprint"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatastoreCredentials"
-        }
-      ],
-      "properties": {
-        "authorityUrl": {
-          "description": "Authority URL used for authentication.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "clientId": {
-          "format": "uuid",
-          "description": "[Required] Service principal client ID.",
-          "type": "string"
-        },
-        "resourceUrl": {
-          "description": "Resource the service principal has access to.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "secrets": {
-          "description": "[Required] Service principal secrets.",
-          "$ref": "#/definitions/CertificateDatastoreSecrets",
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ],
-          "x-ms-secret": true
-        },
-        "tenantId": {
-          "format": "uuid",
-          "description": "[Required] ID of the tenant to which the service principal belongs.",
-          "type": "string"
-        },
-        "thumbprint": {
-          "description": "[Required] Thumbprint of the certificate used for authentication.",
-          "minLength": 1,
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "Certificate",
       "additionalProperties": false
     },
     "CertificateDatastoreSecrets": {
@@ -15338,44 +15252,6 @@
       },
       "discriminator": "credentialsType"
     },
-    "DatastoreResource": {
-      "description": "Azure Resource Manager resource envelope.",
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "[Required] Additional attributes of the entity.",
-          "$ref": "#/definitions/Datastore"
-        }
-      },
-      "x-ms-client-name": "Datastore",
-      "additionalProperties": false
-    },
-    "DatastoreResourceArmPaginatedResult": {
-      "description": "A paginated list of Datastore entities.",
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The link to the next page of Datastore objects. If null, there are no additional pages.",
-          "type": "string"
-        },
-        "value": {
-          "description": "An array of objects of type Datastore.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DatastoreResource"
-          }
-        }
-      },
-      "additionalProperties": false
-    },
     "DatastoreSecrets": {
       "description": "Base definition for datastore secrets.",
       "required": [
@@ -16420,44 +16296,6 @@
       },
       "additionalProperties": false
     },
-    "FeatureResource": {
-      "description": "Azure Resource Manager resource envelope.",
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "[Required] Additional attributes of the entity.",
-          "$ref": "#/definitions/Feature"
-        }
-      },
-      "x-ms-client-name": "Feature",
-      "additionalProperties": false
-    },
-    "FeatureResourceArmPaginatedResult": {
-      "description": "A paginated list of Feature entities.",
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The link to the next page of Feature objects. If null, there are no additional pages.",
-          "type": "string"
-        },
-        "value": {
-          "description": "An array of objects of type Feature.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FeatureResource"
-          }
-        }
-      },
-      "additionalProperties": false
-    },
     "FeatureSubset": {
       "required": [
         "features",
@@ -16485,25 +16323,6 @@
       "x-ms-discriminator-value": "FeatureSubset",
       "additionalProperties": false
     },
-    "FeatureWindow": {
-      "description": "Specifies the feature window",
-      "type": "object",
-      "properties": {
-        "featureWindowEnd": {
-          "format": "date-time",
-          "description": "Specifies the feature window end time",
-          "type": "string",
-          "x-nullable": true
-        },
-        "featureWindowStart": {
-          "format": "date-time",
-          "description": "Specifies the feature window start time",
-          "type": "string",
-          "x-nullable": true
-        }
-      },
-      "additionalProperties": false
-    },
     "FeaturesetContainer": {
       "description": "Dto object representing feature set",
       "type": "object",
@@ -16523,102 +16342,6 @@
         }
       },
       "x-ms-client-name": "FeaturesetContainerProperties",
-      "additionalProperties": false
-    },
-    "FeaturesetContainerResource": {
-      "description": "Azure Resource Manager resource envelope.",
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "[Required] Additional attributes of the entity.",
-          "$ref": "#/definitions/FeaturesetContainer"
-        }
-      },
-      "x-ms-client-name": "FeaturesetContainer",
-      "additionalProperties": false
-    },
-    "FeaturesetContainerResourceArmPaginatedResult": {
-      "description": "A paginated list of FeaturesetContainer entities.",
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The link to the next page of FeaturesetContainer objects. If null, there are no additional pages.",
-          "type": "string"
-        },
-        "value": {
-          "description": "An array of objects of type FeaturesetContainer.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FeaturesetContainerResource"
-          }
-        }
-      },
-      "additionalProperties": false
-    },
-    "FeaturesetJob": {
-      "description": "Dto object representing the feature set job",
-      "type": "object",
-      "properties": {
-        "createdDate": {
-          "format": "date-time",
-          "description": "Specifies the created date",
-          "type": "string",
-          "x-nullable": true
-        },
-        "displayName": {
-          "description": "Specifies the display name",
-          "type": "string",
-          "x-nullable": true
-        },
-        "duration": {
-          "format": "duration",
-          "description": "Specifies the duration",
-          "type": "string",
-          "x-nullable": true
-        },
-        "experimentId": {
-          "description": "Specifies the experiment id",
-          "type": "string",
-          "x-nullable": true
-        },
-        "featureWindow": {
-          "description": "Specifies the backfill feature window to be materialized",
-          "$ref": "#/definitions/FeatureWindow",
-          "x-nullable": true
-        },
-        "jobId": {
-          "description": "Specifies the job id",
-          "type": "string",
-          "x-nullable": true
-        },
-        "status": {
-          "description": "Specifies the job status",
-          "default": "Unknown",
-          "$ref": "#/definitions/JobStatus"
-        },
-        "tags": {
-          "description": "Specifies the tags if any",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "x-nullable": true
-        },
-        "type": {
-          "description": "Specifies the feature store job type",
-          "default": "RecurrentMaterialization",
-          "$ref": "#/definitions/FeaturestoreJobType"
-        }
-      },
       "additionalProperties": false
     },
     "FeaturesetSpecification": {
@@ -16677,84 +16400,6 @@
       "x-ms-client-name": "FeaturesetVersionProperties",
       "additionalProperties": false
     },
-    "FeaturesetVersionBackfillRequest": {
-      "description": "Request payload for creating a backfill request for a given feature set version",
-      "type": "object",
-      "properties": {
-        "description": {
-          "description": "Specifies description",
-          "type": "string"
-        },
-        "displayName": {
-          "description": "Specifies description",
-          "type": "string"
-        },
-        "featureWindow": {
-          "description": "Specifies the backfill feature window to be materialized",
-          "$ref": "#/definitions/FeatureWindow",
-          "x-nullable": true
-        },
-        "resource": {
-          "description": "Specifies the compute resource settings",
-          "$ref": "#/definitions/MaterializationComputeResource"
-        },
-        "sparkConfiguration": {
-          "description": "Specifies the spark compute settings",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          }
-        },
-        "tags": {
-          "description": "Specifies the tags",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          }
-        }
-      },
-      "additionalProperties": false
-    },
-    "FeaturesetVersionResource": {
-      "description": "Azure Resource Manager resource envelope.",
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "[Required] Additional attributes of the entity.",
-          "$ref": "#/definitions/FeaturesetVersion"
-        }
-      },
-      "x-ms-client-name": "FeaturesetVersion",
-      "additionalProperties": false
-    },
-    "FeaturesetVersionResourceArmPaginatedResult": {
-      "description": "A paginated list of FeaturesetVersion entities.",
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The link to the next page of FeaturesetVersion objects. If null, there are no additional pages.",
-          "type": "string"
-        },
-        "value": {
-          "description": "An array of objects of type FeaturesetVersion.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FeaturesetVersionResource"
-          }
-        }
-      },
-      "additionalProperties": false
-    },
     "FeaturestoreEntityContainer": {
       "description": "Dto object representing feature entity",
       "type": "object",
@@ -16774,44 +16419,6 @@
         }
       },
       "x-ms-client-name": "FeaturestoreEntityContainerProperties",
-      "additionalProperties": false
-    },
-    "FeaturestoreEntityContainerResource": {
-      "description": "Azure Resource Manager resource envelope.",
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "[Required] Additional attributes of the entity.",
-          "$ref": "#/definitions/FeaturestoreEntityContainer"
-        }
-      },
-      "x-ms-client-name": "FeaturestoreEntityContainer",
-      "additionalProperties": false
-    },
-    "FeaturestoreEntityContainerResourceArmPaginatedResult": {
-      "description": "A paginated list of FeaturestoreEntityContainer entities.",
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The link to the next page of FeaturestoreEntityContainer objects. If null, there are no additional pages.",
-          "type": "string"
-        },
-        "value": {
-          "description": "An array of objects of type FeaturestoreEntityContainer.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FeaturestoreEntityContainerResource"
-          }
-        }
-      },
       "additionalProperties": false
     },
     "FeaturestoreEntityVersion": {
@@ -16847,64 +16454,6 @@
         }
       },
       "x-ms-client-name": "FeaturestoreEntityVersionProperties",
-      "additionalProperties": false
-    },
-    "FeaturestoreEntityVersionResource": {
-      "description": "Azure Resource Manager resource envelope.",
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "[Required] Additional attributes of the entity.",
-          "$ref": "#/definitions/FeaturestoreEntityVersion"
-        }
-      },
-      "x-ms-client-name": "FeaturestoreEntityVersion",
-      "additionalProperties": false
-    },
-    "FeaturestoreEntityVersionResourceArmPaginatedResult": {
-      "description": "A paginated list of FeaturestoreEntityVersion entities.",
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The link to the next page of FeaturestoreEntityVersion objects. If null, there are no additional pages.",
-          "type": "string"
-        },
-        "value": {
-          "description": "An array of objects of type FeaturestoreEntityVersion.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FeaturestoreEntityVersionResource"
-          }
-        }
-      },
-      "additionalProperties": false
-    },
-    "FeaturestoreJobType": {
-      "enum": [
-        "RecurrentMaterialization",
-        "BackfillMaterialization"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "FeaturestoreJobType",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "RecurrentMaterialization"
-          },
-          {
-            "value": "BackfillMaterialization"
-          }
-        ]
-      },
       "additionalProperties": false
     },
     "FeaturizationMode": {
@@ -17549,27 +17098,6 @@
         }
       },
       "x-ms-discriminator-value": "GenerationTokenStatistics",
-      "additionalProperties": false
-    },
-    "Goal": {
-      "description": "Defines supported metric goals for hyperparameter tuning",
-      "enum": [
-        "Minimize",
-        "Maximize"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "Goal",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Minimize"
-          },
-          {
-            "value": "Maximize"
-          }
-        ]
-      },
       "additionalProperties": false
     },
     "GridSamplingAlgorithm": {
@@ -18891,44 +18419,6 @@
       "discriminator": "jobType",
       "x-ms-client-name": "JobBaseProperties"
     },
-    "JobBaseResource": {
-      "description": "Azure Resource Manager resource envelope.",
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "[Required] Additional attributes of the entity.",
-          "$ref": "#/definitions/JobBase"
-        }
-      },
-      "x-ms-client-name": "JobBase",
-      "additionalProperties": false
-    },
-    "JobBaseResourceArmPaginatedResult": {
-      "description": "A paginated list of JobBase entities.",
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The link to the next page of JobBase objects. If null, there are no additional pages.",
-          "type": "string"
-        },
-        "value": {
-          "description": "An array of objects of type JobBase.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JobBaseResource"
-          }
-        }
-      },
-      "additionalProperties": false
-    },
     "JobInput": {
       "description": "Command job definition.",
       "required": [
@@ -19334,39 +18824,6 @@
           {
             "value": "Scheduled",
             "description": "The job is in a scheduled state. Job is not in any active state."
-          }
-        ]
-      },
-      "additionalProperties": false
-    },
-    "JobTier": {
-      "description": "Enum to determine the job tier.",
-      "enum": [
-        "Null",
-        "Spot",
-        "Basic",
-        "Standard",
-        "Premium"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "JobTier",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Null"
-          },
-          {
-            "value": "Spot"
-          },
-          {
-            "value": "Basic"
-          },
-          {
-            "value": "Standard"
-          },
-          {
-            "value": "Premium"
           }
         ]
       },
@@ -19842,44 +19299,6 @@
         }
       },
       "discriminator": "mediaType"
-    },
-    "LabelingJobResource": {
-      "description": "Azure Resource Manager resource envelope.",
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "[Required] Additional attributes of the entity.",
-          "$ref": "#/definitions/LabelingJob"
-        }
-      },
-      "x-ms-client-name": "LabelingJob",
-      "additionalProperties": false
-    },
-    "LabelingJobResourceArmPaginatedResult": {
-      "description": "A paginated list of LabelingJob entities.",
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The link to the next page of LabelingJob objects. If null, there are no additional pages.",
-          "type": "string"
-        },
-        "value": {
-          "description": "An array of objects of type LabelingJob.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LabelingJobResource"
-          }
-        }
-      },
-      "additionalProperties": false
     },
     "LabelingJobTextProperties": {
       "description": "Properties of a labeling job for text data",
@@ -20760,44 +20179,6 @@
         }
       },
       "x-ms-client-name": "ModelVersionProperties",
-      "additionalProperties": false
-    },
-    "ModelVersionResource": {
-      "description": "Azure Resource Manager resource envelope.",
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "[Required] Additional attributes of the entity.",
-          "$ref": "#/definitions/ModelVersion"
-        }
-      },
-      "x-ms-client-name": "ModelVersion",
-      "additionalProperties": false
-    },
-    "ModelVersionResourceArmPaginatedResult": {
-      "description": "A paginated list of ModelVersion entities.",
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The link to the next page of ModelVersion objects. If null, there are no additional pages.",
-          "type": "string"
-        },
-        "value": {
-          "description": "An array of objects of type ModelVersion.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ModelVersionResource"
-          }
-        }
-      },
       "additionalProperties": false
     },
     "MonitorComputeConfigurationBase": {
@@ -22697,226 +22078,6 @@
       },
       "additionalProperties": false
     },
-    "PackageRequest": {
-      "description": "Model package operation request properties.",
-      "required": [
-        "inferencingServer",
-        "targetEnvironmentId"
-      ],
-      "type": "object",
-      "properties": {
-        "baseEnvironmentSource": {
-          "description": "Base environment to start with.",
-          "$ref": "#/definitions/BaseEnvironmentSource",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "environmentVariables": {
-          "description": "Collection of environment variables.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "inferencingServer": {
-          "description": "[Required] Inferencing server configurations.",
-          "$ref": "#/definitions/InferencingServer",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "inputs": {
-          "description": "Collection of inputs.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ModelPackageInput"
-          },
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ],
-          "x-nullable": true,
-          "x-ms-identifiers": []
-        },
-        "modelConfiguration": {
-          "description": "Model configuration including the mount mode.",
-          "$ref": "#/definitions/ModelConfiguration",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "properties": {
-          "description": "Property dictionary. Properties can be added, removed, and updated.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "tags": {
-          "description": "Tag dictionary. Tags can be added, removed, and updated.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "targetEnvironmentId": {
-          "description": "[Required] Arm ID of the target environment to be created by package operation.",
-          "minLength": 1,
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      },
-      "additionalProperties": false
-    },
-    "PackageResponse": {
-      "description": "Package response returned after async package operation completes successfully.",
-      "type": "object",
-      "properties": {
-        "baseEnvironmentSource": {
-          "description": "Base environment to start with.",
-          "$ref": "#/definitions/BaseEnvironmentSource",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "buildId": {
-          "description": "Build id of the image build operation.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "buildState": {
-          "description": "Build state of the image build operation.",
-          "$ref": "#/definitions/PackageBuildState",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "environmentVariables": {
-          "description": "Collection of environment variables.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "inferencingServer": {
-          "description": "Inferencing server configurations.",
-          "$ref": "#/definitions/InferencingServer",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "inputs": {
-          "description": "Collection of inputs.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ModelPackageInput"
-          },
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ],
-          "x-nullable": true,
-          "x-ms-identifiers": []
-        },
-        "logUrl": {
-          "description": "Log url of the image build operation.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "modelConfiguration": {
-          "description": "Model configuration including the mount mode.",
-          "$ref": "#/definitions/ModelConfiguration",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "properties": {
-          "description": "Property dictionary. Tags can be added, removed, and updated.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "tags": {
-          "description": "Tag dictionary. Tags can be added, removed, and updated.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "targetEnvironmentId": {
-          "description": "Asset ID of the target environment created by package operation.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ],
-          "x-nullable": true
-        }
-      },
-      "additionalProperties": false
-    },
     "PartialBatchDeployment": {
       "description": "Mutable batch inference settings per deployment.",
       "type": "object",
@@ -22944,29 +22105,6 @@
             "type": "string",
             "x-nullable": true
           }
-        }
-      },
-      "additionalProperties": false
-    },
-    "PartialJobBase": {
-      "description": "Mutable base definition for a job.",
-      "type": "object",
-      "properties": {
-        "notificationSetting": {
-          "description": "Mutable notification setting for the job",
-          "$ref": "#/definitions/PartialNotificationSetting",
-          "x-nullable": true
-        }
-      },
-      "additionalProperties": false
-    },
-    "PartialJobBasePartialResource": {
-      "description": "Azure Resource Manager resource envelope strictly used in update requests.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "description": "Additional attributes of the entity.",
-          "$ref": "#/definitions/PartialJobBase"
         }
       },
       "additionalProperties": false
@@ -23052,23 +22190,6 @@
         "sku": {
           "description": "Sku details required for ARM contract for Autoscaling.",
           "$ref": "#/definitions/PartialSku"
-        }
-      },
-      "additionalProperties": false
-    },
-    "PartialNotificationSetting": {
-      "description": "Mutable configuration for notification.",
-      "type": "object",
-      "properties": {
-        "webhooks": {
-          "description": "Send webhook callback to a service. Key is a user-provided name for the webhook.",
-          "type": "object",
-          "additionalProperties": {
-            "description": "Webhook base",
-            "$ref": "#/definitions/Webhook",
-            "x-nullable": true
-          },
-          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -23169,27 +22290,6 @@
           "default": "TemporaryBlobReference",
           "$ref": "#/definitions/PendingUploadType"
         }
-      },
-      "additionalProperties": false
-    },
-    "PendingUploadType": {
-      "description": "Type of storage to use for the pending upload location",
-      "enum": [
-        "None",
-        "TemporaryBlobReference"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "PendingUploadType",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "None"
-          },
-          {
-            "value": "TemporaryBlobReference"
-          }
-        ]
       },
       "additionalProperties": false
     },
@@ -23490,31 +22590,6 @@
         }
       },
       "x-ms-discriminator-value": "PyTorch",
-      "additionalProperties": false
-    },
-    "QueueSettings": {
-      "type": "object",
-      "properties": {
-        "jobTier": {
-          "description": "Controls the compute job tier",
-          "default": "Null",
-          "$ref": "#/definitions/JobTier",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "priority": {
-          "format": "int32",
-          "description": "Controls the priority of the job on a compute.",
-          "type": "integer",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ],
-          "x-nullable": true
-        }
-      },
       "additionalProperties": false
     },
     "RandomSamplingAlgorithm": {
