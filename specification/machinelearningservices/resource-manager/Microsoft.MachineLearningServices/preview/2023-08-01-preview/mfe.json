@@ -16653,7 +16653,10 @@
       "properties": {
         "dataAvailabilityStatus": {
           "description": "Specified the data availability status that you want to backfill",
-          "$ref": "#/definitions/DataAvailabilityStatus"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataAvailabilityStatus"
+          }
         },
         "description": {
           "description": "Specifies description",
@@ -16671,6 +16674,14 @@
         "jobId": {
           "description": "Specify the jobId to retry the failed materialization",
           "type": "string"
+        },
+        "properties": {
+          "description": "Specifies the properties",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          }
         },
         "resource": {
           "description": "Specifies the compute resource settings",
