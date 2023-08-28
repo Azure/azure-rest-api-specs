@@ -60,7 +60,7 @@ in the `Generated ApiView` comment added to this PR. You can use ApiView to show
 ## Suppressing failures
 
 If one or multiple validation error/warning suppression(s) is detected in your PR, please follow the 
-[Swagger-Suppression-Process](https://aka.ms/pr-suppressions) 
+[Swagger-Suppression-Process](https://aka.ms/azsdk/pr-suppressions) 
 to get approval.
 
 ## Getting help
