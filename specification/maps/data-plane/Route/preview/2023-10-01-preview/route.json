@@ -914,6 +914,16 @@
           "type": "integer",
           "readOnly": true
         },
+        "departureTime": {
+          "description": "The estimated departure time for the leg formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either departAt or arrivalAt. If not, then the UTC time will be used.",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "arrivalTime": {
+          "description": "The estimated arrival time for the leg formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either departAt or arrivalAt. If not, then the UTC time will be used.",
+          "format": "date-time",
+          "readOnly": true
+        },
         "subLegs": {
           "description": "Information about a segments of the route Leg defined by the route Leg waypoints and any intermediate via-waypoints. For example, if the route Leg has two via-waypoints in addition to start and end waypoints, there would be three (3) route sub-legs.",
           "type": "array",
