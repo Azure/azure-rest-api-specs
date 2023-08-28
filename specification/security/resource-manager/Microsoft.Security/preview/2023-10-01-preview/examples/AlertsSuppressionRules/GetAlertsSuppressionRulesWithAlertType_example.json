@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2019-01-01-preview",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "alertType": "IpAnomaly"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/alertsSuppressionRules/dismissIpAnomalyAlerts",
+            "name": "dismissIpAnomalyAlerts",
+            "type": "Microsoft.Security/alertsSuppressionRules",
+            "properties": {
+              "alertType": "IpAnomaly",
+              "lastModifiedUtc": "2019-07-31T19:50:47.083633Z",
+              "expirationDateUtc": "2019-12-01T19:50:47.083633Z",
+              "state": "Enabled",
+              "reason": "FalsePositive",
+              "comment": "Test VM",
+              "suppressionAlertsScope": {
+                "allOf": [
+                  {
+                    "field": "entities.ip.address",
+                    "in": [
+                      "104.215.95.187",
+                      "52.164.206.56"
+                    ]
+                  },
+                  {
+                    "field": "entities.process.commandline",
+                    "contains": "POWERSHELL.EXE"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
