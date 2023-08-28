@@ -7639,7 +7639,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/FeaturesetJob"
+              "$ref": "#/definitions/FeaturesetVersionBackfillResponse"
             }
           },
           "202": {
@@ -7667,89 +7667,6 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}/versions/{version}/listMaterializationJobs": {
-      "post": {
-        "tags": [
-          "FeaturesetVersion"
-        ],
-        "summary": "List materialization Jobs.",
-        "operationId": "FeaturesetVersions_ListMaterializationJobs",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "in": "path",
-            "name": "name",
-            "description": "Container name. This is case-sensitive.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "version",
-            "description": "Version identifier. This is case-sensitive.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
-          },
-          {
-            "in": "query",
-            "name": "filters",
-            "description": "Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "featureWindowStart",
-            "description": "Start time of the feature window to filter materialization jobs.",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "featureWindowEnd",
-            "description": "End time of the feature window to filter materialization jobs.",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          },
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/FeaturesetJobArmPaginatedResult"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListMaterializationJobs Workspace Featureset Version.": {
-            "$ref": "./examples/Workspace/FeaturesetVersion/listMaterializationJobs.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -8516,6 +8433,12 @@
             "in": "query",
             "name": "scheduleId",
             "description": "The scheduled id for listing the job triggered from",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "properties",
+            "description": "Comma-separated list of property names (and optionally values). Example: prop1,prop2=value2",
             "type": "string"
           }
         ],
@@ -14819,6 +14742,34 @@
       "x-ms-discriminator-value": "Custom",
       "additionalProperties": false
     },
+    "DataAvailabilityStatus": {
+      "enum": [
+        "None",
+        "Pending",
+        "Incomplete",
+        "Complete"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DataAvailabilityStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "None"
+          },
+          {
+            "value": "Pending"
+          },
+          {
+            "value": "Incomplete"
+          },
+          {
+            "value": "Complete"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
     "DataCollectionMode": {
       "enum": [
         "Enabled",
@@ -16662,83 +16613,6 @@
       },
       "additionalProperties": false
     },
-    "FeaturesetJob": {
-      "description": "Dto object representing the feature set job",
-      "type": "object",
-      "properties": {
-        "createdDate": {
-          "format": "date-time",
-          "description": "Specifies the created date",
-          "type": "string",
-          "x-nullable": true
-        },
-        "displayName": {
-          "description": "Specifies the display name",
-          "type": "string",
-          "x-nullable": true
-        },
-        "duration": {
-          "format": "duration",
-          "description": "Specifies the duration",
-          "type": "string",
-          "x-nullable": true
-        },
-        "experimentId": {
-          "description": "Specifies the experiment id",
-          "type": "string",
-          "x-nullable": true
-        },
-        "featureWindow": {
-          "description": "Specifies the backfill feature window to be materialized",
-          "$ref": "#/definitions/FeatureWindow",
-          "x-nullable": true
-        },
-        "jobId": {
-          "description": "Specifies the job id",
-          "type": "string",
-          "x-nullable": true
-        },
-        "status": {
-          "description": "Specifies the job status",
-          "default": "Unknown",
-          "$ref": "#/definitions/JobStatus"
-        },
-        "tags": {
-          "description": "Specifies the tags if any",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "x-nullable": true
-        },
-        "type": {
-          "description": "Specifies the feature store job type",
-          "default": "RecurrentMaterialization",
-          "$ref": "#/definitions/FeaturestoreJobType"
-        }
-      },
-      "additionalProperties": false
-    },
-    "FeaturesetJobArmPaginatedResult": {
-      "description": "A paginated list of FeaturesetJob entities.",
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The link to the next page of FeaturesetJob objects. If null, there are no additional pages.",
-          "type": "string"
-        },
-        "value": {
-          "description": "An array of objects of type FeaturesetJob.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FeaturesetJob"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "additionalProperties": false
-    },
     "FeaturesetSpecification": {
       "description": "Dto object representing specification",
       "type": "object",
@@ -16799,6 +16673,13 @@
       "description": "Request payload for creating a backfill request for a given feature set version",
       "type": "object",
       "properties": {
+        "dataAvailabilityStatus": {
+          "description": "Specified the data availability status that you want to backfill",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataAvailabilityStatus"
+          }
+        },
         "description": {
           "description": "Specifies description",
           "type": "string"
@@ -16811,6 +16692,18 @@
           "description": "Specifies the backfill feature window to be materialized",
           "$ref": "#/definitions/FeatureWindow",
           "x-nullable": true
+        },
+        "jobId": {
+          "description": "Specify the jobId to retry the failed materialization",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Specifies the properties",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          }
         },
         "resource": {
           "description": "Specifies the compute resource settings",
@@ -16831,6 +16724,21 @@
             "type": "string",
             "x-nullable": true
           }
+        }
+      },
+      "additionalProperties": false
+    },
+    "FeaturesetVersionBackfillResponse": {
+      "description": "Response payload for creating a backfill request for a given feature set version",
+      "type": "object",
+      "properties": {
+        "jobIds": {
+          "description": "List of jobs submitted as part of the backfill request.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -17002,26 +16910,6 @@
             "$ref": "#/definitions/FeaturestoreEntityVersionResource"
           }
         }
-      },
-      "additionalProperties": false
-    },
-    "FeaturestoreJobType": {
-      "enum": [
-        "RecurrentMaterialization",
-        "BackfillMaterialization"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "FeaturestoreJobType",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "RecurrentMaterialization"
-          },
-          {
-            "value": "BackfillMaterialization"
-          }
-        ]
       },
       "additionalProperties": false
     },
