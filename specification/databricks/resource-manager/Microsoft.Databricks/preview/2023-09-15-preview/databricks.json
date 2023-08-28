@@ -870,21 +870,9 @@
             "name": "RequiredNsgRules"
           }
         },
-        "initialCatalogType": {
-          "type": "string",
-          "description": "Indicates the type of catalog assigned to the workspace during resource creation.",
-          "enum": [
-            "HiveMetastore",
-            "UnityCatalog"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "InitialCatalogType"
-          }
-        },
-        "initialDefaultCatalog": {
-          "type": "string",
-          "description": "Name of the existing catalog that is assigned to the workspace."
+        "defaultCatalog": {
+          "description": "Information regarding the catalog associated with the workspace.",
+          "$ref": "#/definitions/DefaultCatalogDefinition"
         }
       },
       "required": [
@@ -1085,6 +1073,24 @@
       "x-ms-enum": {
         "modelAsString": true,
         "name": "ComplianceStandard"
+      }
+    },
+    "DefaultCatalogDefinition": {
+      "type": "object",
+      "description": "Information regarding the catalog associated with the workspace.",
+      "properties": {
+        "initialType": {
+          "type": "string",
+          "description": "Type of the catalog",
+          "enum": [
+            "HiveMetastore",
+            "UnityCatalog"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "InitialType"
+          }
+        }
       }
     },
     "WorkspaceCustomParameterType": {
