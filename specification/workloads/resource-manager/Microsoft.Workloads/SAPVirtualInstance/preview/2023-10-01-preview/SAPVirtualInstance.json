@@ -1499,7 +1499,7 @@
           "SAPVirtualInstances_Stop": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Stop.json"
           },
-          "SAPVirtualInstances_Stop_WithInfraOperations": {
+          "Start the virtual machine(s) and the SAP system on it.": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Stop_WithInfraOperations.json"
           }
         },
@@ -1568,7 +1568,7 @@
           "Start the SAP Central Services Instance": {
             "$ref": "./examples/sapcentralinstances/SAPCentralInstances_StartInstance.json"
           },
-          "Start the SAP Central Services Instance With Infra Operations": {
+          "Start the virtual machine(s) and the SAP central services instance on it.": {
             "$ref": "./examples/sapcentralinstances/SAPCentralInstances_StartInstance_WithInfraOperations.json"
           }
         },
@@ -1640,7 +1640,7 @@
           "Stop the SAP Central Services Instance.": {
             "$ref": "./examples/sapcentralinstances/SAPCentralInstances_StopInstance.json"
           },
-          "Stop the SAP Central Services Instance and it's infrastructure.": {
+          "Stop the SAP Central Services Instance and its underlying Virtual Machine(s)": {
             "$ref": "./examples/sapcentralinstances/SAPCentralInstances_StopInstance_WithInfraOperations.json"
           }
         },
@@ -1712,7 +1712,7 @@
           "Start the SAP Application Server Instance.": {
             "$ref": "./examples/sapapplicationinstances/SAPApplicationServerInstances_StartInstance.json"
           },
-          "Start the SAP Application Server Instance and it's infrastructure.": {
+          "Start Virtual Machine and the SAP Application Server Instance on it.": {
             "$ref": "./examples/sapapplicationinstances/SAPApplicationServerInstances_StartInstance_WithInfraOperations.json"
           }
         },
@@ -1856,7 +1856,7 @@
           "Start the database instance of the SAP system.": {
             "$ref": "./examples/sapdatabaseinstances/SAPDatabaseInstances_StartInstance.json"
           },
-          "Start the database instance of the SAP system and it's infrastructure.": {
+          "Start Virtual Machine and the database instance of the SAP system on it.": {
             "$ref": "./examples/sapdatabaseinstances/SAPDatabaseInstances_StartInstance_WithInfraOperations.json"
           }
         },
@@ -1928,7 +1928,7 @@
           "Stop the database instance of the SAP system.": {
             "$ref": "./examples/sapdatabaseinstances/SAPDatabaseInstances_StopInstance.json"
           },
-          "Stop the database instance of the SAP system and it's infrastructure.": {
+          "Stop the database instance of the SAP system and the underlying Virtual Machine(s).": {
             "$ref": "./examples/sapdatabaseinstances/SAPDatabaseInstances_StopInstance_WithInfraOperations.json"
           }
         },
@@ -3529,7 +3529,7 @@
         "infrastructureOperation": {
           "type": "boolean",
           "default": false,
-          "description": "The boolean value indicates whether to perform infrastructure operations, i.e., stop/deallocate the virtual machines after the stop operation on the SAP resource."
+          "description": "The boolean value indicates whether to Stop and deallocate the virtual machines along with the SAP instances."
         }
       }
     },
@@ -3540,7 +3540,7 @@
         "infrastructureOperation": {
           "type": "boolean",
           "default": false,
-          "description": "The boolean value indicates whether to perform infrastructure operations, i.e., start the virtual machines before starting the SAP resource."
+          "description": "The boolean value indicates whether to start the virtual machines before starting the SAP instances."
         }
       }
     },
