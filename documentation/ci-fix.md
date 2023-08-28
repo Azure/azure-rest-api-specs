@@ -1,6 +1,8 @@
 # CI Fix Guide
 
-Here are guides to fix some of the CI failure.
+Short link: https://aka.ms/ci-fix
+
+This page provides detailed instructions on how to diagnose, reproduce, fix and get help on various [automated validation tooling] failures on your [Azure REST API specs PR].
 
 ## Prerequisites
 
@@ -124,14 +126,6 @@ Note: When running in Swagger PR pipeline, Avocado only report errors with file 
 
 Refer to [Avocado Readme](https://github.com/Azure/avocado/blob/master/README.md) for detailed description of validations and how-to-fix guidance.
 
-## API Readiness Check
-
-This CI check is to make sure service is ready before PR merge. Technically, the CI check send operationsList HTTP request to Azure Resource Provider.
-
-To fix this CI check failure, if you haven't got ARM signed off, pls get ARM signed off first then deploy ARM manifest. After deploying ARM manifest, this operationsList HTTP request will succeed and CI pass.
-
-NOTE: If your RP is RPaaS RP, since RPaaS requires swagger merge first. In this case, you could ignore this CI check.
-
 ## API Doc Preview
 
 If you see `Swagger ApiDocPreview ` check fail with a failure [like this one](https://github.com/Azure/azure-rest-api-specs/pull/24841/checks?check_run_id=15056283615):
@@ -142,43 +136,35 @@ If you see `Swagger ApiDocPreview ` check fail with a failure [like this one](ht
 
 Then refer to [this TSG](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/79/Generation-of-docs-on-learn.microsoft.com?anchor=%22swagger-apidocpreview%22-build-is-failing).
 
-## Service API Readiness Test
-
-This CI check is to test service API readiness, by running API Scenario test to verify:
-- Service APIs are deployed to Azure
-- API behavior is consistent with Swagger definition
-- [InProgress] API behavior is compliant with Azure API guidelines, including [ARM RPC](https://github.com/Azure/azure-resource-manager-rpc) and [Microsoft Azure REST API Guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md).
-
-Note: Currently only applicable to management plane APIs, and target ARM region is `US West Central` - the SDP pilot region.
-
-To fix the check, download the artifact `api_scenario_test_output` from Azure pipeline where you can find the report.html and auto generated API Scenario file as baseline, then refer to [API Scenario documentation](./api-scenario/readme.md) to run and debug it locally. After local debug, commit the API Scenario file and `readme.test.md` file into your working branch and then the CI check will use the committed API Scenario file to re-run the test.
-
-
 ## TypeSpec Validation
 
 This validator is to ensure the TypeSpec & swagger files in PR are consistent and passing validation.
 
 ### How to fix
 
-| Error Code |Severity |Solution |
-|---|---|---|
-|MissingTypeSpecFile| Error |Adding the related TypeSpec project into {RP-Name} folder, like [Qumulo.Manaement](https://github.com/Azure/azure-rest-api-specs/tree/main/specification/liftrqumulo/Qumulo.Management)|
-|MissingExamplesDirectory| Error |The example files should be kept in the 'examples' folder under the TypeSpec project,the typespec-autorest emitter will copy them into the output folder and create corresponding 'x-ms-examples' in the swagger automatically when geneates the swagger, you should also check in it in PR. 
-|InConsistentSwagger| Error |The generated swagger is inconsistent with the swagger in PR, so you need to re-generate swagger from TypeSpec project and check in it. |
-|SwaggerNotExistInPR| Error |It occurs when there is a TypeSpec file in the PR but the generated swagger is not present in the PR, so you need to add the swagger to the PR. |
-|GeneratedSwaggerNotFound| Error | It occurs when there is a TypeSpec file in the PR but there is no swagger produced by the typespec-autorest emitter, so you need to check the tspconfig.yaml to see if it has the wrong configuration, like 'output-dir' or 'azure-resource-provider-folder'. |
-|MissingTypeSpecProjectConfig| Warning |The configuration of '@azure-tools/typespec-autorest' including 'output-file','azure-resource-provider-folder' are used to customize the generated swagger file name and folder structure, it's recommended to use them in the 'tspconfig.yaml', here is a [sample tspconfig.yaml ](https://github.com/Azure/azure-rest-api-specs/blob/main/specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml#L11). |
+| Error Code                   | Severity | Solution                                                                                                                                                                                                                                                                                     |
+|------------------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| MissingTypeSpecFile          | Error    | Adding the related TypeSpec project into {RP-Name} folder, like [Qumulo.Management](https://github.com/Azure/azure-rest-api-specs/tree/main/specification/liftrqumulo/Qumulo.Management)                                                                                                     |
+| MissingExamplesDirectory     | Error    | The example files should be kept in the 'examples' folder under the TypeSpec project,the typespec-autorest emitter will copy them into the output folder and create corresponding 'x-ms-examples' in the swagger automatically when geneates the swagger, you should also check in it in PR. |
+| InConsistentSwagger          | Error    | The generated swagger is inconsistent with the swagger in PR, so you need to re-generate swagger from TypeSpec project and check in it.                                                                                                                                                      |
+| SwaggerNotExistInPR          | Error    | It occurs when there is a TypeSpec file in the PR but the generated swagger is not present in the PR, so you need to add the swagger to the PR.                                                                                                                                              |
+| GeneratedSwaggerNotFound     | Error    | It occurs when there is a TypeSpec file in the PR but there is no swagger produced by the typespec-autorest emitter, so you need to check the tspconfig.yaml to see if it has the wrong configuration, like 'output-dir' or 'azure-resource-provider-folder'.                                |
+| MissingTypeSpecProjectConfig | Warning  | The configuration of '@azure-tools/typespec-autorest' including 'output-file','azure-resource-provider-folder' are used to customize the generated swagger file name and folder structure, it's recommended to use them in the 'tspconfig.yaml', here is a [sample tspconfig.yaml].          |
 
 See [typespec-autorest](https://azure.github.io/typespec-azure/docs/emitters/typespec-autorest) for more information about how the swagger is generated from the TypeSpec project.
 
-## Traffic Validation
-
-This validator generates traffic for all operations defined in Swagger files under default tag of readme.md by using [RESTler](https://github.com/microsoft/restler-fuzzer). Then, it validates the request and response pairs from the traffic against the corresponding Swagger definitions. Finally, it provides an html report that reports the Swagger accuracy.
-
-### How to understand and improve the report
-
-Please refer to [swagger-accuracy-report](./swagger-accuracy-report.md).
-
 ## Suppression Process
 
-In case there are validation errors reported against your service that you believe do not apply, we have a suppression process you can follow to permanently remove these reported errors for your specs.  Refer to [Swagger Suppression Process](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/85/Swagger-Suppression-Process) for detailed guidance.
+In case there are validation errors reported against your service that you believe do not apply, we have a suppression process you can follow to permanently remove these reported errors for your specs. Refer to the [suppression guide](https://aka.ms/pr-suppressions) for detailed guidance.
+
+## Obsolete tools
+
+Following tools have been removed from the validation toolchain as of August 2023.
+
+- API Readiness Check
+- Service API Readiness Test
+- Traffic validation
+
+[automated validation tooling]: https://eng.ms/docs/products/azure-developer-experience/design/api-specs/api-tooling
+[Azure REST API specs PR]: https://eng.ms/docs/products/azure-developer-experience/design/api-specs-pr/api-specs-pr
+[sample tspconfig.yaml]: https://github.com/Azure/azure-rest-api-specs/blob/main/specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml#L11
