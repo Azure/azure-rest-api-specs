@@ -64,7 +64,26 @@ suppressions:
     reason: The linter is mistakenly thinking that paths for a singular resource that is always named default, like "/{resourceUri}/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default," is for a collection of resources.
     from: virtualMachineInstances.json
   - code: TopLevelResourcesListBySubscription
-    reason: There is a 1:1 relationship between HybridCompute Machines and AzureStackHCI VirtualMachineInstances
+    reason: It is reporting issue for proxy extension resource which doesn't have use case to ListBySubscription as this resource will always tied to one parent resource only. Additionally, there is a 1:1 relationship between HybridCompute Machines and AzureStackHCI VirtualMachineInstances.
+  - code: ResourceNameRestriction
+    reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
+    from: clusters.json
+    where: 
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/addNodes"]
+  - code: ResourceNameRestriction
+    reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
+    from: deploymentSettings.json
+    where: 
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings/{deploymentSettingsName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings/{deploymentSettingsName}/deploy"]
+  - code: DefinitionsPropertiesNamesCamelCase
+    reason: We have a dependency on other team which is already using these values, changing it will break backward compatibility 
+    from: deploymentSettings.json
+    where: 
+    - $.definitions.QosPolicyOverrides.properties.priorityValue8021Action_Cluster
+    - $.definitions.QosPolicyOverrides.properties.priorityValue8021Action_SMB
+    - $.definitions.QosPolicyOverrides.properties.bandwidthPercentage_SMB
 ```
 
 
@@ -76,12 +95,12 @@ These settings apply only when `--tag=package-2023-09` is specified on the comma
 input-file:
   - Microsoft.AzureStackHCI/stable/2023-09-01/common.json
   - Microsoft.AzureStackHCI/stable/2023-09-01/galleryImages.json
+  - Microsoft.AzureStackHCI/stable/2023-09-01/logicalNetworks.json
   - Microsoft.AzureStackHCI/stable/2023-09-01/marketplaceGalleryImages.json
   - Microsoft.AzureStackHCI/stable/2023-09-01/networkInterfaces.json
   - Microsoft.AzureStackHCI/stable/2023-09-01/storageContainers.json
   - Microsoft.AzureStackHCI/stable/2023-09-01/virtualHardDisks.json
   - Microsoft.AzureStackHCI/stable/2023-09-01/virtualMachineInstances.json
-  - Microsoft.AzureStackHCI/stable/2023-09-01/virtualNetworks.json
 ```
 ### Tag: package-preview-2023-07
 
