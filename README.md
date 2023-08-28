@@ -29,10 +29,10 @@ The structure of the directory should strictly follow these rules:
 3. **{RP-Name} Folders** - each resource provider should have at least one separate folder.
     > If multiple folders are required? It depends on the following considerations:
     >
-    >   -   An RP folder leads to a separate SDK package. Is it expected to have separate SDK packages for different service/component entities?
-    >   -   Service/component entities in one folder share the same versioning cycle. Can service/component entities in one folder share the same version label, and upgrade together in the future?
-    >   -   Specification files and AutoRest configuration files in one RP folder are better to refer to files in the same RP folder. Note: Entity type definition that needs to be referred cross RP folders should be placed and maintained under the folder [**common-types**](https://github.com/Azure/azure-rest-api-specs#common-types).
-    >   -   For more considerations, you may consult the reviewer in API design review. To initiate the review, Please submit an [Azure SDK intake questionnaire](https://aka.ms/sdk-apex).
+    > - An RP folder leads to a separate SDK package. Is it expected to have separate SDK packages for different service/component entities?
+    > - Service/component entities in one folder share the same versioning cycle. Can service/component entities in one folder share the same version label, and upgrade together in the future?
+    > - Specification files and AutoRest configuration files in one RP folder are better to refer to files in the same RP folder. Note: Entity type definition that needs to be referred cross RP folders should be placed and maintained under the folder [**common-types**](https://github.com/Azure/azure-rest-api-specs#common-types).
+    > - For more considerations, you may consult the reviewer in API design review. To initiate the review, Please submit an [Azure SDK intake questionnaire](https://aka.ms/sdk-apex).
 
     RP folders may contain resource manager or data plane TypeSpec "specs". TypeSpec is a language for describing cloud service APIs and generating other API description languages, client and service code, documentation, and other assets. Explore more by visiting the tutorial in the TypeSpec repo: [TypeSpec tutorial](http://aka.ms/cadlTutorial). You can also ask questions for providing feedback in the internal Teams channel [TypeSpec Discussion](https://teams.microsoft.com/l/channel/19%3a906c1efbbec54dc8949ac736633e6bdf%40thread.skype/Cadl%2520Discussion%2520%25F0%259F%2590%25AE?groupId=3e17dcb0-4257-4a30-b843-77f47f1d4121&tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47).
 
@@ -107,7 +107,9 @@ The structure should appear like so:
 |            |           \---examples
 |            \---readme.md
 ```
+
 ### Folder Structure for Service Group
+
 If you are working on API specification of a service group, then you may choose to build a folder structure as below. This folder structure brings more flexibility in multiple service teams collaboration, especially supporting:
 
 - To collect API definition of multiple components/services with different versioning cycle in one rp folder
