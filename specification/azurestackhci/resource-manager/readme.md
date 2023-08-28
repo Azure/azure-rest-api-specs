@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-08
+tag: package-2023-09
 ```
 
 ## Suppression
@@ -42,6 +42,7 @@ directive:
       - clusters.json
       - extensions.json
       - galleryImages.json
+      - logicalNetworks.json
       - marketplaceGalleryImages.json
       - networkInterfaces.json
       - operations.json
@@ -79,6 +80,7 @@ suppressions:
       - clusters.json
       - extensions.json
       - galleryImages.json
+      - logicalNetworks.json
       - marketplaceGalleryImages.json
       - networkInterfaces.json
       - operations.json
@@ -119,9 +121,27 @@ suppressions:
     - $.definitions.QosPolicyOverrides.properties.bandwidthPercentage_SMB
 
   - code: TopLevelResourcesListBySubscription
-    reason: It is reporting issue for proxy extension resource which doesn't have use case to ListBySubscription as this resource will always tied to one parent resource only.
-    from: edgeDevices.json
+    reason: It is reporting issue for proxy extension resource which doesn't have use case to ListBySubscription as this resource will always tied to one parent resource only. Additionally, there is a 1:1 relationship between HybridCompute Machines and AzureStackHCI VirtualMachineInstances.
+  
+  - code: GetCollectionOnlyHasValueAndNextLink
+    reason: The linter is mistakenly thinking that paths for a singular resource that is always named default, like "/{resourceUri}/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default," is for a collection of resources.
+    from: virtualMachineInstances.json
 
+```
+### Tag: package-2023-09
+
+These settings apply only when `--tag=package-2023-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-09'
+input-file:
+  - Microsoft.AzureStackHCI/stable/2023-09-01/common.json
+  - Microsoft.AzureStackHCI/stable/2023-09-01/galleryImages.json
+  - Microsoft.AzureStackHCI/stable/2023-09-01/logicalNetworks.json
+  - Microsoft.AzureStackHCI/stable/2023-09-01/marketplaceGalleryImages.json
+  - Microsoft.AzureStackHCI/stable/2023-09-01/networkInterfaces.json
+  - Microsoft.AzureStackHCI/stable/2023-09-01/storageContainers.json
+  - Microsoft.AzureStackHCI/stable/2023-09-01/virtualHardDisks.json
+  - Microsoft.AzureStackHCI/stable/2023-09-01/virtualMachineInstances.json
 ```
 
 
