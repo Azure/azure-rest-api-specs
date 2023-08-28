@@ -2644,6 +2644,122 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupJobs/{jobId}/triggerCancel": {
+      "post": {
+        "tags": [
+          "AzureBackupJob"
+        ],
+        "description": "Triggers cancellation of Job and returns an OperationID to track.",
+        "operationId": "Jobs_TriggerCancel",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "name": "jobId",
+            "description": "The Job ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that represents the seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Trigger Cancel": {
+            "$ref": "./examples/JobCRUD/TriggerCancel.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupJobs/{jobId}/generateProgressUrl": {
+      "post": {
+        "tags": [
+          "AzureBackupJob"
+        ],
+        "description": "Generates read SAS URL for a blob from which current job progress can be read.",
+        "operationId": "Jobs_GenerateProgressUrl",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "name": "jobId",
+            "description": "The Job ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AzureBackupJobProgressUrl"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Generate Progress URL": {
+            "$ref": "./examples/JobCRUD/GenerateProgressURL.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/exportBackupJobs": {
       "post": {
         "tags": [
@@ -4473,6 +4589,11 @@
           "readOnly": true,
           "type": "string"
         },
+        "sourceDataStoreType": {
+          "description": "The type of the source data store.",
+          "readOnly": true,
+          "type": "string"
+        },
         "sourceResourceGroup": {
           "description": "Resource Group Name of the Datasource",
           "type": "string"
@@ -4569,6 +4690,16 @@
           "type": "string"
         }
       }
+    },
+    "AzureBackupJobProgressUrl": {
+      "description": "Job Progess URL class.",
+      "properties": {
+        "progressUrl": {
+          "description": "Read SAS URI for a blob from which current job progress can be read.",
+          "type": "string"
+        }
+      },
+      "type": "object"
     },
     "AzureBackupJobResource": {
       "allOf": [
@@ -5411,7 +5542,14 @@
         "objectType": {
           "description": "Type of the specific object - used for deserializing",
           "type": "string",
-          "readOnly": false
+          "readOnly": false,
+          "enum": [
+            "DefaultResourceProperties"
+          ],
+          "x-ms-enum": {
+            "name": "ResourcePropertiesObjectType",
+            "modelAsString": true
+          }
         }
       },
       "discriminator": "objectType"
@@ -5845,6 +5983,19 @@
       },
       "title": "Day",
       "type": "object"
+    },
+    "DefaultResourceProperties": {
+      "description": "Default source properties",
+      "required": [
+        "objectType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "DefaultResourceProperties"
     },
     "DeletedBackupInstance": {
       "description": "Deleted Backup Instance",
@@ -6560,6 +6711,15 @@
           "$ref": "#/definitions/RestoreJobRecoveryPointDetails",
           "description": "Details of the Target Recovery Point",
           "readOnly": true
+        },
+        "warningDetails": {
+          "description": "A List, detailing the warnings related to the job",
+          "items": {
+            "$ref": "#/definitions/UserFacingWarningDetail"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true,
+          "type": "array"
         }
       },
       "type": "object"
@@ -7771,6 +7931,23 @@
           "type": "string"
         }
       },
+      "type": "object"
+    },
+    "UserFacingWarningDetail": {
+      "description": "Warning object used by layers that have access to localized content, and propagate that to user",
+      "properties": {
+        "resourceName": {
+          "description": "Name of resource for which warning is raised.",
+          "type": "string"
+        },
+        "warning": {
+          "$ref": "#/definitions/UserFacingError",
+          "description": "Error details for the warning."
+        }
+      },
+      "required": [
+        "warning"
+      ],
       "type": "object"
     },
     "ValidateForBackupRequest": {
