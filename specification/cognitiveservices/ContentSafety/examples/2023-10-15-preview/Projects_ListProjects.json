@@ -1,0 +1,41 @@
+{
+  "title": "List Projects.",
+  "operationId": "Projects_ListProjects",
+  "parameters": {
+    "api-version": "2023-10-15-preview",
+    "top": 18,
+    "skip": 4,
+    "maxpagesize": 18
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "projectName": "sample-project",
+            "displayName": "sample-project",
+            "description": "Sample project",
+            "modality": "Text",
+            "createdAt": "2023-07-24T11:42:01.517Z",
+            "lastModifiedAt": "2023-07-24T11:42:01.517Z",
+            "textPolicy": {
+              "categoryPolicies": [
+                {
+                  "category": "Hate",
+                  "acceptLessThan": 0
+                }
+              ],
+              "blocklistPolicy":{
+                "blocklistNames": [
+                  "blocklist-name"
+                ],
+                "haltOnBlocklistHit": true
+              }
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/aigwjyl"
+      }
+    }
+  }
+}

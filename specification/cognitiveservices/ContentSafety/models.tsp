@@ -177,3 +177,106 @@ model RemoveTextBlocklistItemsOptions {
   @doc("Array of blocklistItemIds to remove.")
   blocklistItemIds: string[];
 }
+
+@added(ContentSafety.Versions.v2023_10_15_Preview)
+@doc("Project is an entity to manage deployment with specified policy.")
+@resource("projects")
+model Project {
+  @doc("Project name.")
+  @pattern("^[a-zA-Z][0-9A-Za-z-]*[a-zA-Z]$")
+  @key("projectName")
+  @visibility("read", "query")
+  @maxLength(255)
+  @minLength(2)
+  projectName: string;
+
+  @doc("Project description.")
+  @maxLength(1024)
+  description?: string;
+
+  @doc("Project modality.")
+  @visibility("read", "query", "create")
+  modality: ContentModality;
+
+  @doc("Project display name.")
+  @maxLength(255)
+  @minLength(2)
+  displayName?: string;
+
+  @doc("Project created time.")
+  @visibility("read", "query")
+  createdAt?: utcDateTime;
+
+  @doc("Project last modified time.")
+  @visibility("read", "query")
+  lastModifiedAt?: utcDateTime;
+
+  @doc("Deployed text policy.")
+  textPolicy?: TextPolicy;
+
+  @doc("Deployed image policy.")
+  imagePolicy?: ImagePolicy;
+}
+
+@added(ContentSafety.Versions.v2023_10_15_Preview)
+@doc("Modality type.")
+enum ContentModality {
+  @doc("Text modality.")
+  Text,
+  @doc("Image modality.")
+  Image,
+}
+
+@added(ContentSafety.Versions.v2023_10_15_Preview)
+@doc("TextCategoryPolicy. Content which severity less than the acceptLessThan will be accepted.")
+model TextCategoryPolicy {
+  @doc("Text category.")
+  category: TextCategory;
+
+  @doc("Severity less than or equal to the threshold will be treated as accepted for the category. The range is the severity value. Current the value could be: 0,2,4,6.")
+  acceptLessThan?: int32;
+}
+
+@added(ContentSafety.Versions.v2023_10_15_Preview)
+@doc("ImageCategoryPolicy. Content which severity less than the acceptLessThan will be accepted.")
+model ImageCategoryPolicy {
+  @doc("Image category.")
+  category: ImageCategory;
+
+  @doc("Severity less than or equal to the threshold will be treated as accepted for the category. The range is the severity value. Current the value could be: 0,2,4,6.")
+  acceptLessThan?: int32;
+}
+
+@added(ContentSafety.Versions.v2023_10_15_Preview)
+@doc("Policy for the text.")
+model TextPolicy {
+  @doc("The category policy. If the list length is 0, it means all categories will be analyzed without threshold.")
+  categoryPolicies: TextCategoryPolicy[];
+
+  @doc("The policy of blocklist.")
+  blocklistPolicy: BlocklistPolicy;
+
+  @doc("The type of text analysis output. If not assigned, the default value is \"FourSeverityLevels\".")
+  outputType?: AnalyzeTextOutputType = AnalyzeTextOutputType.FourSeverityLevels;
+}
+
+@added(ContentSafety.Versions.v2023_10_15_Preview)
+@doc("Policy for the image.")
+model ImagePolicy {
+  @doc("The category policy. If the list length is 0, it means all categories will be analyzed without threshold.")
+  categoryPolicies: ImageCategoryPolicy[];
+  
+  @doc("The type of text analysis output. If not assigned, the default value is \"FourSeverityLevels\".")
+  outputType?: AnalyzeTextOutputType = AnalyzeTextOutputType.FourSeverityLevels;
+}
+
+@added(ContentSafety.Versions.v2023_10_15_Preview)
+@doc("Policy for blocklist.")
+model BlocklistPolicy {
+  @doc("The names of blocklists.")
+  blocklistNames?: string[];
+
+  @doc("When set to true, further analyses of harmful content will not be performed in cases where blocklists are hit. When set to false, all analyses of harmful content will be performed, whether or not blocklists are hit.")
+  haltOnBlocklistHit?: boolean;
+}
+

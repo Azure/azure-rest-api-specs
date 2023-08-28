@@ -90,3 +90,34 @@ interface TextBlocklists {
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 }
+
+interface ProjectOps
+  extends Azure.Core.ResourceOperations<NoRepeatableRequests &
+      NoConditionalRequests &
+      NoClientRequestId> {}
+
+@added(ContentSafety.Versions.v2023_10_15_Preview)
+interface Projects {
+  @summary("Create Or Update A Project.")
+  @doc("Update a project if project does exist, create a new project if not. Note that modality cannot be updated.")
+  createOrUpdateProject is ProjectOps.ResourceCreateOrUpdate<Project>;
+
+  @summary("Get Project Detailed Information By Project Name.")
+  @doc("Returns project details.")
+  getProject is ProjectOps.ResourceRead<Project>;
+
+  @summary("Delete A Project By Project Name.")
+  @doc("Delete a project by name.")
+  deleteProject is ProjectOps.ResourceDelete<Project>;
+
+  @summary("List Projects.")
+  @doc("List projects.")
+  listProjects is ProjectOps.ResourceList<
+    Project,
+    ListQueryParametersTrait<{
+      ...TopQueryParameter;
+      ...SkipQueryParameter;
+      ...MaxPageSizeQueryParameter;
+    }>
+  >;
+}
