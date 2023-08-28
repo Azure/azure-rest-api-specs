@@ -44,12 +44,12 @@
                 }
             }
         },
-        "EventGridNamespaceMQTTClientCreatedOrUpdatedEventData": {
+        "EventGridMQTTClientCreatedOrUpdatedEventData": {
             "type": "object",
             "description": "Event data for Microsoft.EventGrid.MQTTClientCreatedOrUpdated event.",
             "allOf": [
               {
-                "$ref": "#/definitions/EventGridNamespaceMQTTClientEventData"
+                "$ref": "#/definitions/EventGridMQTTClientEventData"
               }
             ],
             "properties": {
@@ -61,7 +61,7 @@
                         "Disabled"
                     ],
                     "x-ms-enum": {
-                        "name": "mqttClientState",
+                        "name": "EventGridMqttClientState",
                         "modelAsString": true
                     }
                 },
@@ -84,7 +84,7 @@
                   }
             }
           },
-          "EventGridNamespaceMQTTClientDeletedEventData": {
+          "EventGridMQTTClientDeletedEventData": {
             "type": "object",
             "description": "Event data for Microsoft.EventGrid.MQTTClientDeleted event.",
             "allOf": [
@@ -94,7 +94,7 @@
             ],
             "properties": {}
           },
-          "EventGridNamespaceMQTTClientSessionConnectedEventData": {
+          "EventGridMQTTClientSessionConnectedEventData": {
             "type": "object",
             "description": "Event data for Microsoft.EventGrid.MQTTClientSessionConnected event.",
             "allOf": [
@@ -114,12 +114,12 @@
                   }
             }
           },
-          "EventGridNamespaceMQTTClientSessionDisconnectedEventData": {
+          "EventGridMQTTClientSessionDisconnectedEventData": {
             "type": "object",
             "description": "Event data for Microsoft.EventGrid.MQTTClientSessionDisconnected event.",
             "allOf": [
               {
-                "$ref": "#/definitions/EventGridNamespaceMQTTClientEventData"
+                "$ref": "#/definitions/EventGridMQTTClientEventData"
               }
             ],
             "properties": {
@@ -128,7 +128,7 @@
                     "description": "Unique identifier for the MQTT client's session. This case-sensitive string can be up to 128 characters long, and supports UTF-8 characters."
                   },
                 "sequenceNumber": {
-                    "type": "number",
+                    "type": "integer",
                     "format": "int64",
                     "description": "A number that helps indicate order of MQTT client session connected or disconnected events. Latest event will have a sequence number that is higher than the previous event."
                   },
@@ -141,7 +141,7 @@
                         "ClientError",
                         "ClientInitiatedDisconnect",
                         "ConnectionLost",
-                        "IpForbidden",
+                        "IPForbidden",
                         "QuotaExceeded",
                         "ServerError",
                         "ServerInitiatedDisconnect",
@@ -149,13 +149,58 @@
                         "SessionTakenOver"
                     ],
                     "x-ms-enum": {
-                        "name": "mqttClientDisconnectionReason",
-                        "modelAsString": true
-                    }  
-                }
-            }
+                        "name": "EventGridMqttClientDisconnectionReason",
+                        "modelAsString": true,
+                        "values": [
+                          {
+                            "value": "ClientAuthenticationError",
+                            "description": "The client got disconnected for any authentication reasons (for example, certificate expired, client got disabled, or client configuration changed)."
+                          },
+                          {
+                            "value": "ClientAuthorizationError",
+                            "description": "The client got disconnected for any authorization reasons (for example, because of a change in the configuration of topic spaces, permission bindings, or client groups)."
+                          },
+                          {
+                            "value": "ClientError",
+                            "description": "The client sent a bad request or used one of the unsupported features that resulted in a connection termination by the service."
+                          },
+                          {
+                            "value": "ClientInitiatedDisconnect",
+                            "description": "The client initiates a graceful disconnect through a DISCONNECT packet for MQTT or a close frame for MQTT over WebSocket."
+                          },
+                          {
+                            "value": "ConnectionLost",
+                            "description": "The client-server connection is lost. (EXCHANGE ONLINE PROTECTION)."
+                          },
+                          {
+                            "value": "IpForbidden",
+                            "description": "The client's IP address is blocked by IP filter or Private links configuration."
+                          },
+                          {
+                            "value": "QuotaExceeded",
+                            "description": "The client exceeded one or more of the throttling limits that resulted in a connection termination by the service."
+                          },
+                          {
+                            "value": "ServerError",
+                            "description": "The connection got terminated due to an unexpected server error."
+                          },
+                          {
+                            "value": "ServerInitiatedDisconnect",
+                            "description": "The server initiates a graceful disconnect for any operational reason."
+                          },
+                          {
+                            "value": "SessionOverflow",
+                            "description": "The client's queue for unacknowledged QoS1 messages reached its limit, which resulted in a connection termination by the server."
+                          },
+                          {
+                            "value": "SessionTakenOver",
+                            "description": "The client reconnected with the same authentication name, which resulted in the termination of the previous connection."
+                          }
+                        ]
+                    }
+                  }
           },
-          "EventGridNamespaceMQTTClientEventData": {
+          "EventGridMQTTClientEventData": {
             "type": "object",
             "description": "Schema of the Data property of an EventGridEvent for MQTT Client Created Or Updated event.",
             "properties": {
