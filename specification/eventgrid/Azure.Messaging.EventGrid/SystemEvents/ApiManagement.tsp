@@ -1,8 +1,3 @@
-import "@azure-tools/typespec-client-generator-core";
-
-
-using Azure.ClientGenerator.Core;
-
 @doc("Describes the schema of the Azure API Management events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
 namespace EventGrid;
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.UserCreated event.")
