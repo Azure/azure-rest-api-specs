@@ -23,7 +23,7 @@
         "instances": null
       }
     },
-    "api-version": "2023-12-01",
+    "api-version": "2023-07-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "serviceName": "myservice",
@@ -52,7 +52,12 @@
             },
             "environmentVariables": {
               "env": "test"
-            }
+            },
+            "apms": [
+              {
+                "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/apms/myappinsights"
+              }
+            ]
           },
           "provisioningState": "Succeeded",
           "status": "Running",
@@ -86,8 +91,8 @@
     },
     "202": {
       "headers": {
-        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/locations/eastus/operationStatus/default/operationId/00000000-0000-0000-0000-000000000000?api-version=2023-12-01",
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000/Spring/default?api-version=2023-12-01"
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/locations/eastus/operationStatus/default/operationId/00000000-0000-0000-0000-000000000000?api-version=2023-07-01-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000/Spring/default?api-version=2023-07-01-preview"
       },
       "body": {
         "properties": {
@@ -109,7 +114,12 @@
             },
             "environmentVariables": {
               "env": "test"
-            }
+            },
+            "apms": [
+              {
+                "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/apms/myappinsights"
+              }
+            ]
           },
           "provisioningState": "Updating",
           "status": "Running",

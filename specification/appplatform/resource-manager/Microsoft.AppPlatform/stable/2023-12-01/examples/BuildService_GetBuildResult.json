@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2023-12-01",
+    "api-version": "2023-07-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "serviceName": "myservice",
@@ -13,34 +13,50 @@
       "body": {
         "properties": {
           "name": "123",
-          "provisioningState": "Succeeded",
+          "provisioningState": "Failed",
+          "error": {
+            "code": "51",
+            "message": "Build failed in stage build with reason OOMKilled, please refer to https://aka.ms/buildexitcode"
+          },
           "buildPodName": "mybuild-default-1",
           "buildStages": [
             {
               "name": "prepare",
-              "status": "Running"
+              "status": "Succeeded",
+              "exitCode": "0",
+              "reason": "Completed"
             },
             {
               "name": "detect",
-              "status": "NotStarted"
+              "status": "Succeeded",
+              "exitCode": "0",
+              "reason": "Completed"
             },
             {
               "name": "analyze",
-              "status": "NotStarted"
+              "status": "Succeeded",
+              "exitCode": "0",
+              "reason": "Completed"
             },
             {
               "name": "restore",
-              "status": "NotStarted"
+              "status": "Succeeded",
+              "exitCode": "0",
+              "reason": "Completed"
             },
             {
               "name": "build",
-              "status": "NotStarted"
+              "status": "Failed",
+              "exitCode": "51",
+              "reason": "Error"
             },
             {
               "name": "export",
-              "status": "NotStarted"
+              "status": "NotStarted",
+              "exitCode": "-1"
             }
-          ]
+          ],
+          "image": "myacr.azurecr.io/build-result-image:latest"
         },
         "systemData": {
           "createdBy": "sample-user",

@@ -1,7 +1,13 @@
 {
   "parameters": {
     "resource": {
-      "properties": {},
+      "properties": {
+        "maintenanceScheduleConfiguration": {
+          "frequency": "Weekly",
+          "hour": 10,
+          "day": "Sunday"
+        }
+      },
       "sku": {
         "name": "S0",
         "tier": "Standard"
@@ -11,7 +17,7 @@
         "key1": "value1"
       }
     },
-    "api-version": "2023-12-01",
+    "api-version": "2023-07-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "serviceName": "myservice"
@@ -22,6 +28,12 @@
         "properties": {
           "provisioningState": "Creating",
           "serviceId": "12345678abcd1234abcd12345678abcd",
+          "maintenanceScheduleConfiguration": {
+            "frequency": "Weekly",
+            "hour": 10,
+            "day": "Sunday",
+            "duration": "PT8H"
+          },
           "networkProfile": {
             "outboundIPs": {
               "publicIPs": [
@@ -89,6 +101,12 @@
         "properties": {
           "provisioningState": "Succeeded",
           "serviceId": "12345678abcd1234abcd12345678abcd",
+          "maintenanceScheduleConfiguration": {
+            "frequency": "Weekly",
+            "hour": 10,
+            "day": "Sunday",
+            "duration": "PT8H"
+          },
           "networkProfile": {
             "outboundIPs": {
               "publicIPs": [
