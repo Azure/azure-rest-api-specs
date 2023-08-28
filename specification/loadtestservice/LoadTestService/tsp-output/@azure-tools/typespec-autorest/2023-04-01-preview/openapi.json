@@ -712,10 +712,7 @@
         "description": "List the dimension values for the given metric dimension name.",
         "parameters": [
           {
-            "name": "apiVersion",
-            "in": "query",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
             "name": "testRunId",
@@ -1540,6 +1537,7 @@
     },
     "AggregationType": {
       "type": "string",
+      "description": "Aggregation type",
       "enum": [
         "Average",
         "Count",
@@ -1684,10 +1682,6 @@
         ]
       }
     },
-    "Dimension": {
-      "type": "object",
-      "properties": {}
-    },
     "DimensionFilter": {
       "type": "object",
       "description": "Dimension name and values to filter",
@@ -1721,17 +1715,21 @@
     },
     "DimensionValueList": {
       "type": "object",
+      "description": "Metrics dimension values.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The dimension value",
           "items": {
             "type": "string"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "Link for the next set of values in case of paginated results, if applicable"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "Error": {
       "type": "object",
@@ -1842,6 +1840,7 @@
     },
     "FileStatus": {
       "type": "string",
+      "description": "File status",
       "enum": [
         "NOT_VALIDATED",
         "VALIDATION_SUCCESS",
@@ -1913,6 +1912,7 @@
     },
     "Interval": {
       "type": "string",
+      "description": "Intervals",
       "enum": [
         "PT5S",
         "PT10S",
@@ -1972,6 +1972,10 @@
         "optionalLoadTestConfig": {
           "$ref": "#/definitions/OptionalLoadTestConfig",
           "description": "Optional load test config"
+        },
+        "testType": {
+          "$ref": "#/definitions/TestType",
+          "description": "Type of test. e.g. QuickTest, UrlBasedTest"
         }
       }
     },
@@ -2134,6 +2138,7 @@
     },
     "MetricUnit": {
       "type": "string",
+      "description": "Metric unit",
       "enum": [
         "NotSpecified",
         "Percent",
@@ -2201,7 +2206,7 @@
         },
         "value": {
           "type": "number",
-          "format": "float",
+          "format": "double",
           "description": "The metric value."
         }
       }
@@ -2268,30 +2273,6 @@
       "type": "object",
       "description": "Optional load test config",
       "properties": {
-        "endpointUrl": {
-          "type": "string",
-          "description": "Test URL. Provide the complete HTTP URL. For example,\nhttp://contoso-app.azurewebsites.net/login"
-        },
-        "virtualUsers": {
-          "type": "integer",
-          "format": "int32",
-          "description": "No of concurrent virtual users"
-        },
-        "rps": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Throughput required (requests per second)"
-        },
-        "maxResponseTime": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Maximum response time of the API/endpoint"
-        },
-        "rampUpTime": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Ramp up time"
-        },
         "rampUpSteps": {
           "type": "integer",
           "format": "int32",
@@ -2311,9 +2292,29 @@
           "$ref": "#/definitions/LoadType",
           "description": "Type of load. e.g. Linear, Constant, StepUp, Spike"
         },
-        "testType": {
-          "$ref": "#/definitions/TestType",
-          "description": "Type of load. e.g. Linear, Constant, StepUp, Spike"
+        "endpointUrl": {
+          "type": "string",
+          "description": "Test URL. Provide the complete HTTP URL. For example, http://contoso-app.azurewebsites.net/login"
+        },
+        "rps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Throughput required (requests per second)"
+        },
+        "maxResponseTime": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum response time of the API/endpoint"
+        },
+        "virtualUsers": {
+          "type": "integer",
+          "format": "int32",
+          "description": "No of concurrent virtual users"
+        },
+        "rampUpTime": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Ramp up time"
         },
         "duration": {
           "type": "integer",
@@ -2324,6 +2325,7 @@
     },
     "PFAction": {
       "type": "string",
+      "description": "Action to take on failure of pass/fail criteria.",
       "enum": [
         "continue",
         "stop"
@@ -2347,6 +2349,7 @@
     },
     "PFAgFunc": {
       "type": "string",
+      "description": "Aggregation functions for pass/fail criteria.",
       "enum": [
         "count",
         "percentage",
@@ -2412,6 +2415,7 @@
     },
     "PFMetrics": {
       "type": "string",
+      "description": "Metrics for pass/fail criteria.",
       "enum": [
         "response_time_ms",
         "latency",
@@ -2453,6 +2457,7 @@
     },
     "PFResult": {
       "type": "string",
+      "description": "Pass/fail criteria result.",
       "enum": [
         "passed",
         "undetermined",
@@ -2482,6 +2487,7 @@
     },
     "PFTestResult": {
       "type": "string",
+      "description": "Test result based on pass/fail criteria.",
       "enum": [
         "PASSED",
         "NOT_APPLICABLE",
@@ -2561,6 +2567,26 @@
           "$ref": "#/definitions/PFResult",
           "description": "Outcome of the test run.",
           "readOnly": true
+        }
+      }
+    },
+    "QuickTestConfig": {
+      "type": "object",
+      "description": "Quick test config",
+      "properties": {
+        "endpointUrl": {
+          "type": "string",
+          "description": "Test URL. Provide the complete HTTP URL. For example, http://contoso-app.azurewebsites.net/login"
+        },
+        "rps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Throughput required (requests per second)"
+        },
+        "maxResponseTime": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum response time of the API/endpoint"
         }
       }
     },
@@ -2650,6 +2676,7 @@
     },
     "Status": {
       "type": "string",
+      "description": "Test run status",
       "enum": [
         "ACCEPTED",
         "NOTSTARTED",
@@ -3456,6 +3483,7 @@
     },
     "TimeGrain": {
       "type": "string",
+      "description": "Time Grain",
       "enum": [
         "PT5S",
         "PT10S",
@@ -3514,6 +3542,31 @@
             "$ref": "#/definitions/DimensionValue"
           },
           "x-ms-identifiers": []
+        }
+      }
+    },
+    "UrlTestConfig": {
+      "type": "object",
+      "description": "Url test config",
+      "properties": {
+        "rampUpSteps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of steps in the ramp - up phase"
+        },
+        "spikeHoldLoad": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Time to maintain a higher load after a spike in traffic"
+        },
+        "spikeMultiplier": {
+          "type": "number",
+          "format": "float",
+          "description": "Multiplier applied to the base load during a spike in traffic"
+        },
+        "loadType": {
+          "$ref": "#/definitions/LoadType",
+          "description": "Type of load. e.g. Linear, Constant, StepUp, Spike"
         }
       }
     }

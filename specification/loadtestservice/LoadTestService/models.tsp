@@ -8,6 +8,7 @@ using TypeSpec.Versioning;
 
 namespace AzureLoadTesting;
 
+@doc("Metrics for pass/fail criteria.")
 enum PFMetrics {
   @doc("Pass fail criteria for response time metric") response_time_ms,
   @doc("Pass fail criteria for response time metric") latency,
@@ -16,6 +17,7 @@ enum PFMetrics {
   @doc("Pass fail criteria for request rate.") requests_per_sec,
 }
 
+@doc("Aggregation functions for pass/fail criteria.")
 enum PFAgFunc {
   @doc("Criteria applies for count value") count,
   @doc("Criteria applies for given percentage value") percentage,
@@ -28,12 +30,14 @@ enum PFAgFunc {
   @doc("Criteria applies for maximum value") max,
 }
 
+@doc("Action to take on failure of pass/fail criteria.")
 enum PFAction {
   @doc("Test will continue to run even if pass fail metric criteria metric gets failed")
   continue,
   @doc("Test run will stop if pass fail criteria metric is not passed.") stop,
 }
 
+@doc("Pass/fail criteria result.")
 enum PFResult {
   @doc("Given pass fail criteria metric has passed.") passed,
   @doc("Given pass fail criteria metric couldn't determine.") undetermined,
@@ -58,6 +62,7 @@ enum FileType {
   @doc("If file is not any of other supported type") ADDITIONAL_ARTIFACTS,
 }
 
+@doc("File status")
 enum FileStatus {
   @doc("File is not validated.") NOT_VALIDATED,
   @doc("File is validated.") VALIDATION_SUCCESS,
@@ -66,12 +71,14 @@ enum FileStatus {
   @doc("Validation is not required.") VALIDATION_NOT_REQUIRED,
 }
 
+@doc("Test result based on pass/fail criteria.")
 enum PFTestResult {
   @doc("Pass/fail criteria has passed.") PASSED,
   @doc("Pass/fail criteria is not applicable.") NOT_APPLICABLE,
   @doc("Pass/fail criteria has failed.") FAILED,
 }
 
+@doc("Test run status")
 enum Status {
   @doc("Test run request is accepted") ACCEPTED,
   @doc("Test run is not yet started.") NOTSTARTED,
@@ -91,6 +98,7 @@ enum Status {
   @doc("Test run JMX file validation is failed") VALIDATION_FAILURE,
 }
 
+@doc("Aggregation type")
 enum AggregationType {
   @doc("Average value") Average,
   @doc("Total count") Count,
@@ -101,6 +109,7 @@ enum AggregationType {
   @doc("99th percentile") Percentile99,
 }
 
+@doc("Metric unit")
 enum MetricUnit {
   @doc("No unit specified") NotSpecified,
   @doc("Percentage") Percent,
@@ -112,6 +121,7 @@ enum MetricUnit {
   @doc("Count per second") CountPerSecond,
 }
 
+@doc("Time Grain")
 enum TimeGrain {
   @doc("5 seconds, available only if test run duration is less than 10 minutes")
   PT5S,
@@ -124,6 +134,7 @@ enum TimeGrain {
   PT1H,
 }
 
+@doc("Intervals")
 enum Interval {
   @doc("5 seconds, available only if test run duration is less than 10 minutes")
   PT5S,
@@ -164,7 +175,7 @@ model Test {
   passFailCriteria?: PassFailCriteria;
 
   @added(APIVersions.v2023_04_01_preview)
-  @doc("Auto stop criteria for a test.")
+  @doc("Enable or disable automatic stop of your load test when the error rate surpasses a given threshold.")
   autoStopEnabled?: AutoStopCriteria;
 
   @doc("""
@@ -186,7 +197,7 @@ SECRET_VALUE.
   loadTestConfiguration?: LoadTestConfiguration;
 
   @added(APIVersions.v2023_04_01_preview)
-  @doc("The Test Run Id of the Test Run set as the Baseline.")
+  @doc("Id of the Test Run to be used as the baseline reference for results trends.")
   baselineTestRunId?: string;
 
   @doc("The input artifacts for the test.")
@@ -336,33 +347,31 @@ not required to upload.
 
   @doc("Optional load test config")
   optionalLoadTestConfig?: OptionalLoadTestConfig;
+
+  @added(APIVersions.v2023_04_01_preview)
+  @doc("Type of test. e.g. QuickTest, UrlBasedTest")
+  testType?: TestType;
 }
 
-@doc("Optional load test config")
-model OptionalLoadTestConfig {
-  @doc("""
-Test URL. Provide the complete HTTP URL. For example,
-http://contoso-app.azurewebsites.net/login
-""")
+@doc("Quick test config")
+model QuickTestConfig {
+  @doc("Test URL. Provide the complete HTTP URL. For example, http://contoso-app.azurewebsites.net/login")
   endpointUrl?: string;
-
-  @doc("No of concurrent virtual users")
-  virtualUsers?: int32;
 
   @added(APIVersions.v2023_04_01_preview)
   @doc("Throughput required (requests per second)")
-  rps?: int32;
+  rps?: int32;        
 
   @added(APIVersions.v2023_04_01_preview)
   @doc("Maximum response time of the API/endpoint")
   maxResponseTime?: int32;
+}
 
-  @doc("Ramp up time")
-  rampUpTime?: int32;
-
+@doc("Url test config")
+model UrlTestConfig {
   @added(APIVersions.v2023_04_01_preview)
   @doc("Number of steps in the ramp - up phase")
-  rampUpSteps?: int32;
+  rampUpSteps?: int32;  
 
   @added(APIVersions.v2023_04_01_preview)
   @doc("Time to maintain a higher load after a spike in traffic")
@@ -374,15 +383,70 @@ http://contoso-app.azurewebsites.net/login
 
   @added(APIVersions.v2023_04_01_preview)
   @doc("Type of load. e.g. Linear, Constant, StepUp, Spike")
-  loadType?: LoadType;
+  loadType?: LoadType;    
+}
 
-  @added(APIVersions.v2023_04_01_preview)
-  @doc("Type of load. e.g. Linear, Constant, StepUp, Spike")
-  testType?: TestType;
+@doc("Optional load test config")
+model OptionalLoadTestConfig {
+  ...UrlTestConfig;
+
+  ...QuickTestConfig;
+
+  @doc("No of concurrent virtual users")
+  virtualUsers?: int32;
+
+  @doc("Ramp up time")
+  rampUpTime?: int32;   
 
   @doc("Test run duration")
-  duration?: int32;
+  duration?: int32;     
 }
+
+// @doc("Optional load test config")
+// model OptionalLoadTestConfig {
+//   @doc("""
+// Test URL. Provide the complete HTTP URL. For example,
+// http://contoso-app.azurewebsites.net/login
+// """)
+//   endpointUrl?: string;
+
+//   @doc("No of concurrent virtual users")
+//   virtualUsers?: int32;
+
+//   @added(APIVersions.v2023_04_01_preview)
+//   @doc("Throughput required (requests per second)")
+//   rps?: int32;
+
+//   @added(APIVersions.v2023_04_01_preview)
+//   @doc("Maximum response time of the API/endpoint")
+//   maxResponseTime?: int32;
+
+//   @doc("Ramp up time")
+//   rampUpTime?: int32;
+
+//   @added(APIVersions.v2023_04_01_preview)
+//   @doc("Number of steps in the ramp - up phase")
+//   rampUpSteps?: int32;
+
+//   @added(APIVersions.v2023_04_01_preview)
+//   @doc("Time to maintain a higher load after a spike in traffic")
+//   spikeHoldLoad?: int32;
+
+//   @added(APIVersions.v2023_04_01_preview)
+//   @doc("Multiplier applied to the base load during a spike in traffic")
+//   spikeMultiplier?: float32;
+
+//   @added(APIVersions.v2023_04_01_preview)
+//   @doc("Type of load. e.g. Linear, Constant, StepUp, Spike")
+//   loadType?: LoadType;
+
+//   @added(APIVersions.v2023_04_01_preview)
+//   @doc("Type of load. e.g. Linear, Constant, StepUp, Spike")
+//   testType?: TestType;
+
+//   @doc("Test run duration")
+//   duration?: int32;
+// }
 
 
 
@@ -393,7 +457,7 @@ model TestInputArtifacts {
 
   @doc("File info")
   testScriptFileInfo?: FileInfo;
-
+ 
   @doc("File info")
   userPropFileInfo?: FileInfo;
 
@@ -769,10 +833,12 @@ model TestRunStatistics {
   @visibility("read")
   throughput?: float32;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style"     //KBytes is expected
   @doc("Received network bytes.")
   @visibility("read")
   receivedKBytesPerSec?: float32;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style"     //KBytes is expected
   @doc("Send network bytes.")
   @visibility("read")
   sentKBytesPerSec?: float32;
@@ -932,7 +998,7 @@ model MetricValue {
   timestamp?: string;
 
   @doc("The metric value.")
-  value?: float32;
+  value?: float64;
 }
 
 @doc("Represents a metric dimension value.")
@@ -944,20 +1010,16 @@ model DimensionValue {
   value?: string;
 }
 
-model DimensionValueList {
-  @key
-  value: string[];
+@doc("Metrics dimension values.")
+model DimensionValueList{
+  @doc("The dimension value")
+  value?: string[];
+
+  @doc("Link for the next set of values in case of paginated results, if applicable")
+  nextLink?: ResourceLocation<DimensionValueList>
 }
 
-@resource("metric-dimensions")
-model Dimension {
-  @key
-  @doc("Dimension name")
-  @path("name")
-  @visibility("query")
-  name: string;
-}
-
+@doc("Metric Dimensions")
 model MetricDimensions {
   @doc("The interval (i.e. timegrain) of the query.")
   @query

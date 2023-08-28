@@ -20,7 +20,10 @@ interface LoadTestAdministration {
   @patch
   createOrUpdateTest is Azure.Core.Foundations.Operation<
     {
-      @header contentType: "application/merge-patch+json",
+      @header 
+      @doc("Content type.")
+      contentType: "application/merge-patch+json",
+      
       @doc("""
 Unique name for the load test, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
@@ -129,7 +132,10 @@ should be provided in the request body as application/octet-stream.
   @put
   uploadTestFile is Azure.Core.Foundations.Operation<
     {
-      @header contentType: "application/octet-stream",
+      @header 
+      @doc("Content type.")
+      contentType: "application/octet-stream",
+      
       @doc("""
 Unique name for the load test, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
@@ -214,7 +220,10 @@ numeric, underscore or hyphen characters.
   @patch
   createOrUpdateAppComponents is Azure.Core.Foundations.Operation<
     {
-      @header contentType: "application/merge-patch+json",
+      @header 
+      @doc("Content type.")
+      contentType: "application/merge-patch+json",
+
       @doc("""
 Unique name for the load test, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
@@ -251,7 +260,10 @@ numeric, underscore or hyphen characters.
   @patch
   createOrUpdateServerMetricsConfig is Azure.Core.Foundations.Operation<
     {
-      @header contentType: "application/merge-patch+json",
+      @header 
+      @doc("Content type.")
+      contentType: "application/merge-patch+json",
+      
       @doc("""
 Unique name for the load test, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
@@ -308,7 +320,10 @@ numeric, underscore or hyphen characters.
   @patch
   createOrUpdateTestRun is Azure.Core.Foundations.Operation<
     {
-      @header contentType: "application/merge-patch+json",
+      @header 
+      @doc("Content type.")
+      contentType: "application/merge-patch+json",
+      
       @doc("""
 Unique name for the load test run, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
@@ -516,43 +531,15 @@ The timespan of the query. It is a string with the following format
   //   DimensionValueList, QueryParametersTrait<MetricDimensions>
   // >;
 
-  // ResourceOperations
-  // @summary("List the dimension values for the given metric dimension name.")
-  // @doc("List the dimension values for the given metric dimension name.")
-  // //@route("/test-runs/{testRunId}/metrics/dimensions/{metricDimensionName}/values")
-  // listMetricDimensionValue is ResourceOperations.ResourceList<
-  //   DimensionValueList, QueryParametersTrait<MetricDimensions>
-
-//   @summary("List the dimension values for the given metric dimension name.")
-//   @doc("List the dimension values for the given metric dimension name.")
-//   @route("/test-runs/{testRunId}/metrics/dimensions/{name}/values")
-//   listMetricDimensionValues is Azure.Core.Foundations.Operation<
-//   {
-//     @doc("""
-// Unique name for the load test run, must contain only lower-case alphabetic,
-// numeric, underscore or hyphen characters.
-// """)
-//     @path
-//     testRunId: string;
-
-//     @doc("Dimension name")
-//     @path
-//     name: string;
-//   },
-//   DimensionValueList, QueryParametersTrait<MetricDimensions>, ErrorResponseBody
-// >;
-
   @summary("List the dimension values for the given metric dimension name.")
   @doc("List the dimension values for the given metric dimension name.")
   @route("/test-runs/{testRunId}/metrics/dimensions/{name}/values")
-  @get
-  listMetricDimensionValues(
-    @query apiVersion: string,
-
+  listMetricDimensionValues is Azure.Core.Foundations.Operation<
+  {
     @doc("""
-    Unique name for the load test run, must contain only lower-case alphabetic,
-    numeric, underscore or hyphen characters.
-    """)
+Unique name for the load test run, must contain only lower-case alphabetic,
+numeric, underscore or hyphen characters.
+""")
     @path
     testRunId: string;
 
@@ -561,8 +548,31 @@ The timespan of the query. It is a string with the following format
     name: string;
 
     ...MetricDimensions;
+  },
+  DimensionValueList, {}, ErrorResponseBody
+>;
 
-  ): DimensionValueList | ErrorResponseBody;
+  // @summary("List the dimension values for the given metric dimension name.")
+  // @doc("List the dimension values for the given metric dimension name.")
+  // @route("/test-runs/{testRunId}/metrics/dimensions/{name}/values")
+  // @get
+  // listMetricDimensionValues(
+  //   @query apiVersion: string,
+
+  //   @doc("""
+  //   Unique name for the load test run, must contain only lower-case alphabetic,
+  //   numeric, underscore or hyphen characters.
+  //   """)
+  //   @path
+  //   testRunId: string;
+
+  //   @doc("Dimension name")
+  //   @path
+  //   name: string;
+
+  //   ...MetricDimensions;
+
+  // ): Record<string> | ErrorResponseBody;
   
   // listMetricDimensionValue is ResourceOperations.ResourceList<
   //   DimensionValueList, QueryParametersTrait<MetricDimensions>>;
@@ -573,7 +583,10 @@ The timespan of the query. It is a string with the following format
   @patch
   createOrUpdateAppComponents is Azure.Core.Foundations.Operation<
     {
-      @header contentType: "application/merge-patch+json",
+      @header 
+      @doc("Content type.")
+      contentType: "application/merge-patch+json",
+      
       @doc("""
 Unique name for the load test run, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
@@ -616,7 +629,10 @@ numeric, underscore or hyphen characters.
   @patch
   createOrUpdateServerMetricsConfig is Azure.Core.Foundations.Operation<
     {
-      @header contentType: "application/merge-patch+json",
+      @header 
+      @doc("Content type.")
+      contentType: "application/merge-patch+json",
+      
       @doc("""
 Unique name for the load test run, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
@@ -646,20 +662,4 @@ numeric, underscore or hyphen characters.
       @path
       testRunId: string;
   ) : TestRunServerMetricConfig | ErrorResponseBody;
-
-//   @summary("List server metrics configuration for the given test run.")
-//   @doc("List server metrics configuration for the given test run.")
-//   @route("/test-runs/{testRunId}/server-metrics-config")
-//   @get
-//   getServerMetricsConfig is Azure.Core.Foundations.Operation<
-//     {
-//       @doc("""
-// Unique name for the load test run, must contain only lower-case alphabetic,
-// numeric, underscore or hyphen characters.
-// """)
-//       @path
-//       testRunId: string;
-//     },
-//     TestRunServerMetricConfig, {}, ErrorResponseBody
-//   >;
 };
