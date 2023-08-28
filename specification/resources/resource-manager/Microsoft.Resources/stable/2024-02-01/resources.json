@@ -4526,6 +4526,115 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.Resources/dataBoundaries": {
+      "put": {
+        "tags": [
+          "DataBoundaries"
+        ],
+        "operationId": "PutDataBoundary",
+        "description": "Opt-in tenant to data boundary.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "dataBoundaryDefinition",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object"
+            },
+            "description": "The data boundary definition."
+          }
+        ],
+        "x-ms-examples": {
+          "Opt-in to data boundary": {
+            "$ref": "./examples/PutDataBoundary.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK - Returns the data boundary definition.",
+            "schema": {
+              "$ref": "#/definitions/DataBoundary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DataBoundaries"
+        ],
+        "operationId": "GetTenantDataBoundary",
+        "description": "Get data boundary of tenant.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Opt-in to data boundary": {
+            "$ref": "./examples/GetTenantDataBoundary.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK - Returns the data boundary definition.",
+            "schema": {
+              "$ref": "#/definitions/DataBoundary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Resources/dataBoundaries": {
+      "get": {
+        "tags": [
+          "DataBoundaries"
+        ],
+        "operationId": "GetDataBoundaryAtScope",
+        "description": "Get data boundary at specified scope",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Opt-in to data boundary": {
+            "$ref": "./examples/GetScopedDataBoundary.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK - Returns the data boundary definition.",
+            "schema": {
+              "$ref": "#/definitions/DataBoundary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
