@@ -8517,12 +8517,6 @@
             "name": "scheduleId",
             "description": "The scheduled id for listing the job triggered from",
             "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "properties",
-            "description": "Comma-separated list of user property names (and optionally values). Example: prop1,prop2=value2",
-            "type": "string"
           }
         ],
         "responses": {
@@ -14230,6 +14224,22 @@
         }
       ],
       "x-ms-discriminator-value": "Command",
+      "additionalProperties": false
+    },
+    "ComponentConfiguration": {
+      "description": "Used for sweep over component",
+      "type": "object",
+      "properties": {
+        "settings": {
+          "description": "Pipeline settings, for things like ContinueRunOnStepFailure etc.",
+          "type": "object",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        }
+      },
       "additionalProperties": false
     },
     "ComponentContainer": {
@@ -25486,8 +25496,7 @@
       "required": [
         "objective",
         "samplingAlgorithm",
-        "searchSpace",
-        "trial"
+        "searchSpace"
       ],
       "type": "object",
       "allOf": [
@@ -25496,6 +25505,15 @@
         }
       ],
       "properties": {
+        "componentConfiguration": {
+          "description": "Component Configuration for sweep over component",
+          "$ref": "#/definitions/ComponentConfiguration",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
         "earlyTermination": {
           "description": "Early termination policies enable canceling poor-performing runs before they complete",
           "$ref": "#/definitions/EarlyTerminationPolicy",
@@ -25569,8 +25587,9 @@
           "type": "object"
         },
         "trial": {
-          "description": "[Required] Trial component definition.",
-          "$ref": "#/definitions/TrialComponent"
+          "description": "Trial component definition.",
+          "$ref": "#/definitions/TrialComponent",
+          "x-nullable": true
         }
       },
       "x-ms-discriminator-value": "Sweep",
