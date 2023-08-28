@@ -2708,6 +2708,58 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupJobs/{jobId}/generateProgressUrl": {
+      "post": {
+        "tags": [
+          "AzureBackupJob"
+        ],
+        "description": "Generates read SAS URL for a blob from which current job progress can be read.",
+        "operationId": "Jobs_GenerateProgressUrl",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "name": "jobId",
+            "description": "The Job ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AzureBackupJobProgressUrl"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Generate Progress URL": {
+            "$ref": "./examples/JobCRUD/GenerateProgressURL.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/exportBackupJobs": {
       "post": {
         "tags": [
@@ -4638,6 +4690,16 @@
           "type": "string"
         }
       }
+    },
+    "AzureBackupJobProgressUrl": {
+      "description": "Job Progess URL class.",
+      "properties": {
+        "progressUrl": {
+          "description": "Read SAS URI for a blob from which current job progress can be read.",
+          "type": "string"
+        }
+      },
+      "type": "object"
     },
     "AzureBackupJobResource": {
       "allOf": [
@@ -6649,6 +6711,15 @@
           "$ref": "#/definitions/RestoreJobRecoveryPointDetails",
           "description": "Details of the Target Recovery Point",
           "readOnly": true
+        },
+        "warningDetails": {
+          "description": "A List, detailing the warnings related to the job",
+          "items": {
+            "$ref": "#/definitions/UserFacingWarningDetail"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true,
+          "type": "array"
         }
       },
       "type": "object"
@@ -7860,6 +7931,23 @@
           "type": "string"
         }
       },
+      "type": "object"
+    },
+    "UserFacingWarningDetail": {
+      "description": "Warning object used by layers that have access to localized content, and propagate that to user",
+      "properties": {
+        "resourceName": {
+          "description": "Name of resource for which warning is raised.",
+          "type": "string"
+        },
+        "warning": {
+          "$ref": "#/definitions/UserFacingError",
+          "description": "Error details for the warning."
+        }
+      },
+      "required": [
+        "warning"
+      ],
       "type": "object"
     },
     "ValidateForBackupRequest": {
