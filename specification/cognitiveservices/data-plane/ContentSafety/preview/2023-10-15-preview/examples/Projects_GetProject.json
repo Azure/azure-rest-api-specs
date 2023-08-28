@@ -1,0 +1,34 @@
+{
+  "title": "Get Project Detailed Information By Project Name.",
+  "operationId": "Projects_GetProject",
+  "parameters": {
+    "api-version": "2023-10-15-preview",
+    "projectName": "sample-project"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "projectName": "sample-project",
+        "displayName": "sample-project",
+        "description": "Sample description",
+        "modality": "Text",
+        "createdAt": "2023-07-24T11:42:01.517Z",
+        "lastModifiedAt": "2023-07-24T11:42:01.517Z",
+        "textPolicy": {
+          "categoryPolicies": [
+            {
+              "category": "Hate",
+              "acceptLessThan": 0
+            }
+          ],
+          "blocklistPolicy":{
+            "blocklistNames": [
+              "blocklist-name"
+            ],
+            "haltOnBlocklistHit": true
+          }
+        }
+      }
+    }
+  }
+}
