@@ -180,8 +180,8 @@ These settings apply only when `--tag=package-2023-09-15-preview` is specified o
 
 ``` yaml $(tag) == 'package-2023-09-15-preview'
 input-file:
-- Microsoft.Databricks/stable/2023-09-15-preview/databricks.json
-- Microsoft.Databricks/stable/2023-09-15-preview/vnetpeering.json
+- Microsoft.Databricks/preview/2023-09-15-preview/databricks.json
+- Microsoft.Databricks/preview/2023-09-15-preview/vnetpeering.json
 - Microsoft.Databricks/stable/2023-05-01/accessconnector.json
 ```
 
