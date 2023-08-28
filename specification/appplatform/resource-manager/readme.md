@@ -68,6 +68,15 @@ These settings apply only when `--tag=package-2023-12` is specified on the comma
 input-file:
   - Microsoft.AppPlatform/stable/2023-12-01/appplatform.json
 ```
+### Tag: package-2023-12
+
+These settings apply only when `--tag=package-2023-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-12'
+input-file:
+  - Microsoft.AppPlatform/stable/2023-12-01/appplatform.json
+```
+
 ### Tag: package-preview-2023-07
 
 These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
