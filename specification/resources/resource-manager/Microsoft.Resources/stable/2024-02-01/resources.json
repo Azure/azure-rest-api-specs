@@ -6829,6 +6829,35 @@
           }
         }
       }
+    },
+    "DataBoundary": {
+      "type": "object",
+      "properties": {
+        "dataBoundary": {
+          "type": "string",
+          "description": "The data boundary definition.",
+          "enum": [
+            "NotDefined",
+            "Global",
+            "EU"
+          ]
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Denotes the state of provisioning.",
+          "enum": [
+            "NotSpecified",
+            "Creating",
+            "Created",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
     }
   },
   "parameters": {
