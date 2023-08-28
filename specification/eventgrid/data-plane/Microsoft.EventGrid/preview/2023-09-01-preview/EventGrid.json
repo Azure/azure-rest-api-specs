@@ -237,7 +237,7 @@
     "/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release": {
       "post": {
         "operationId": "ReleaseCloudEvents",
-        "description": "Release batch of Cloud Events. The server responds with an HTTP 200 status code if at least one event is successfully released. The response body will include the set of successfully released lockTokens, along with other failed lockTokens with their corresponding error information.",
+        "description": "Release batch of Cloud Events with an optional delay in seconds. The server responds with an HTTP 200 status code if at least one event is successfully released. The response body will include the set of successfully released lockTokens, along with other failed lockTokens with their corresponding error information.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -259,16 +259,47 @@
           {
             "name": "delayInSeconds",
             "in": "query",
-            "description": "Release cloud events with the specified delay in seconds. If not specified, events will be released immediately.",
+            "description": "Release cloud events with the specified delay in seconds.",
             "required": false,
-            "type": "integer",
+            "type": "number",
             "enum": [
               0,
               10,
               60,
               600,
               3600
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "ReleaseDelay",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "ZeroSeconds",
+                  "value": 0,
+                  "description": "Release the event after 0 seconds."
+                },
+                {
+                  "name": "TenSeconds",
+                  "value": 10,
+                  "description": "Release the event after 10 seconds."
+                },
+                {
+                  "name": "SixtySeconds",
+                  "value": 60,
+                  "description": "Release the event after 60 seconds."
+                },
+                {
+                  "name": "SixHundredSeconds",
+                  "value": 600,
+                  "description": "Release the event after 600 seconds."
+                },
+                {
+                  "name": "ThirtyThousandSixHundredSeconds",
+                  "value": 3600,
+                  "description": "Release the event after 3600 seconds."
+                }
+              ]
+            }
           },
           {
             "name": "lockTokens",
@@ -301,7 +332,7 @@
           }
         },
         "x-ms-examples": {
-          "Release Cloud Event": {
+          "Release Cloud Event with an optional delay.": {
             "$ref": "./examples/release.json"
           }
         }
@@ -391,7 +422,7 @@
           {
             "name": "lockTokens",
             "in": "body",
-            "description": "RejectOptions",
+            "description": "RenewLockOptions",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RenewLockOptions"
@@ -402,7 +433,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RenewLockResult"
+              "$ref": "#/definitions/RenewCloudEventLocksResult"
             }
           },
           "default": {
@@ -419,8 +450,8 @@
           }
         },
         "x-ms-examples": {
-          "Reject Cloud Event": {
-            "$ref": "./examples/reject.json"
+          "Renew lock for batch of Cloud Events": {
+            "$ref": "./examples/renewlock.json"
           }
         }
       }
@@ -746,23 +777,7 @@
         "succeededLockTokens"
       ]
     },
-    "RenewLockOptions": {
-      "type": "object",
-      "description": "Array of lock token strings for the corresponding received Cloud Events's lock to be renewed.",
-      "properties": {
-        "lockTokens": {
-          "type": "array",
-          "description": "String array of lock tokens.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "lockTokens"
-      ]
-    },
-    "RenewLockResult": {
+    "RenewCloudEventLocksResult": {
       "type": "object",
       "description": "The result of the RenewLock operation.",
       "properties": {
@@ -776,7 +791,7 @@
         },
         "succeededLockTokens": {
           "type": "array",
-          "description": "Array of lock tokens values for the successfully renewed lock cloud events.",
+          "description": "Array of lock tokens values for the successfully renewed locks.",
           "items": {
             "type": "string"
           }
@@ -785,6 +800,22 @@
       "required": [
         "failedLockTokens",
         "succeededLockTokens"
+      ]
+    },
+    "RenewLockOptions": {
+      "type": "object",
+      "description": "Array of lock token strings for the corresponding received Cloud Events to be renewed.",
+      "properties": {
+        "lockTokens": {
+          "type": "array",
+          "description": "String array of lock tokens.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "lockTokens"
       ]
     }
   },
