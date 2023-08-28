@@ -1957,6 +1957,24 @@
         "circuitBreaker": {
           "$ref": "#/definitions/BackendCircuitBreaker",
           "description": "Backend Circuit Breaker Configuration"
+        },
+        "pool": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/BackendPool"
+            },
+            {
+              "description": "Backend Pool Properties"
+            }
+          ]
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "single",
+            "pool"
+          ],
+          "description": "Type of the backend. A backend can be either Single or Pool."
         }
       },
       "description": "Backend entity base Parameter set."
@@ -2355,6 +2373,33 @@
           "description": "The maximum http status code.",
           "minimum": 200,
           "maximum": 599
+        }
+      }
+    },
+    "BackendPool": {
+      "type": "object",
+      "description": "Backend pool information",
+      "properties": {
+        "services": {
+          "type": "array",
+          "description": "The list of backend entities belonging to a pool.",
+          "items": {
+            "$ref": "#/definitions/BackendPoolItem"
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "BackendPoolItem": {
+      "type": "object",
+      "description": "Pool service information",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ARM id of the backend entity. The ARM id should refer to an already existing backend entity.",
+          "example": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/proxybackend"
+          }
         }
       }
     },
