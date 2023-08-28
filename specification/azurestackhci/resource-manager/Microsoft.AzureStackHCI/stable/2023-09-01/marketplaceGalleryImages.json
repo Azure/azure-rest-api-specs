@@ -221,7 +221,7 @@
             }
           },
           "200": {
-            "description": "Updates the marketplace gallery image resource.",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/MarketplaceGalleryImages"
             }
@@ -320,6 +320,14 @@
       "properties": {
         "containerId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureStackHCI/storageContainers"
+              }
+            ]
+          },
           "description": "Storage ContainerID of the storage container to be used for marketplace gallery image"
         },
         "osType": {
