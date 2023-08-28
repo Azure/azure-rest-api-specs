@@ -42,28 +42,6 @@ input-file:
   - Microsoft.EdgeMarketPlace/stable/2023-08-01/offers.json
 ```
 
-### Tag: package-2023-06
-
-These settings apply only when `--tag=package-2023-06` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-06'
-input-file:
-  - Microsoft.EdgeMarketPlace/preview/2023-06-01-preview/publishers.json
-  - Microsoft.EdgeMarketPlace/preview/2023-06-01-preview/operations.json
-  - Microsoft.EdgeMarketPlace/preview/2023-06-01-preview/offers.json
-```
-
-### Tag: package-2023-04
-
-These settings apply only when `--tag=package-2023-04` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-04'
-input-file:
-  - Microsoft.EdgeMarketPlace/preview/2023-04-01-preview/publishers.json
-  - Microsoft.EdgeMarketPlace/preview/2023-04-01-preview/operations.json
-  - Microsoft.EdgeMarketPlace/preview/2023-04-01-preview/offers.json
-```
-
 ---
 
 # Code Generation
