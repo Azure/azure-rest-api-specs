@@ -70,7 +70,7 @@ directive:
     reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
   - suppress: TopLevelResourcesListBySubscription
     where: $.definitions.Pricing
-    from: Microsoft.Security\preview\2023-08-01-preview\pricings.json
+    from: pricings.json
     reason: It does have a LIST API, but it is wrapped with PricingList object.
 ```
 ``` yaml
