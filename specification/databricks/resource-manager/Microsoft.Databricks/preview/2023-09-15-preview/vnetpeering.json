@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "DatabricksClient",
-    "version": "2023-02-01",
+    "version": "2023-09-15-preview",
     "description": "ARM Databricks"
   },
   "host": "management.azure.com",
@@ -301,6 +301,7 @@
       ]
     },
     "VirtualNetworkPeeringList": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -317,6 +318,7 @@
       "description": "Gets all virtual network peerings under a workspace."
     },
     "VirtualNetworkPeering": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -346,6 +348,7 @@
       "x-ms-azure-resource": true
     },
     "VirtualNetworkPeeringPropertiesFormat": {
+      "type": "object",
       "properties": {
         "allowVirtualNetworkAccess": {
           "type": "boolean",
@@ -364,6 +367,7 @@
           "description": "If remote gateways can be used on this virtual network. If the flag is set to true, and allowGatewayTransit on remote peering is also true, virtual network will use gateways of remote virtual network for transit. Only one peering can have this flag set to true. This flag cannot be set if virtual network already has a gateway."
         },
         "databricksVirtualNetwork": {
+          "type": "object",
           "properties": {
             "id": {
               "type": "string",
@@ -377,6 +381,7 @@
           "description": "The reference to the databricks virtual network address space."
         },
         "remoteVirtualNetwork": {
+          "type": "object",
           "properties": {
             "id": {
               "type": "string",
@@ -430,6 +435,7 @@
       }
     },
     "AddressSpace": {
+      "type": "object",
       "properties": {
         "addressPrefixes": {
           "type": "array",

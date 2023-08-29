@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "AzureDatabricksManagementClient",
-    "version": "2023-02-01",
+    "version": "2023-09-15-preview",
     "description": "These APIs allow end users to operate on Azure Databricks Workspace resources."
   },
   "host": "management.azure.com",
@@ -50,6 +50,9 @@
           },
           "Get a workspace with Customer-Managed Key (CMK) encryption for Managed Disks": {
             "$ref": "./examples/WorkspaceManagedDiskEncryptionGet.json"
+          },
+          "Get a workspace with Enhanced Security & Compliance Add-On": {
+            "$ref": "./examples/WorkspaceEnhancedSecurityComplianceGet.json"
           }
         },
         "parameters": [
@@ -90,6 +93,9 @@
         "x-ms-examples": {
           "Delete a workspace": {
             "$ref": "./examples/WorkspaceDelete.json"
+          },
+          "Delete a workspace while retaining Unity Catalog data": {
+            "$ref": "./examples/WorkspaceDelete_RetainUcData.json"
           }
         },
         "parameters": [
@@ -104,6 +110,13 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "retainUcData",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Optional parameter to retain default unity catalog data."
           }
         ],
         "responses": {
@@ -152,6 +165,12 @@
           },
           "Update a workspace with Customer-Managed Key (CMK) encryption for Managed Disks": {
             "$ref": "./examples/WorkspaceManagedDiskEncryptionUpdate.json"
+          },
+          "Create or update a workspace with Enhanced Security & Compliance Add-On": {
+            "$ref": "./examples/WorkspaceEnhancedSecurityComplianceCreateOrUpdate.json"
+          },
+          "Create a workspace with a custom catalog": {
+            "$ref": "./examples/WorkspaceCreateWithCatalog.json"
           }
         },
         "parameters": [
@@ -261,7 +280,7 @@
         "operationId": "Workspaces_ListByResourceGroup",
         "description": "Gets all the workspaces within a resource group.",
         "x-ms-examples": {
-          "Lists workspaces": {
+          "Lists workspaces within resource group": {
             "$ref": "./examples/WorkspacesListByResourceGroup.json"
           }
         },
@@ -303,7 +322,7 @@
         "operationId": "Workspaces_ListBySubscription",
         "description": "Gets all the workspaces within a subscription.",
         "x-ms-examples": {
-          "Lists workspaces": {
+          "Lists workspaces within subscription": {
             "$ref": "./examples/WorkspacesListBySubscription.json"
           }
         },
@@ -710,6 +729,7 @@
   },
   "definitions": {
     "Workspace": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -738,6 +758,7 @@
       "description": "Information about workspace."
     },
     "WorkspaceProperties": {
+      "type": "object",
       "properties": {
         "managedResourceGroupId": {
           "type": "string",
@@ -812,6 +833,10 @@
             "entities"
           ]
         },
+        "enhancedSecurityCompliance": {
+          "description": "Contains settings related to the Enhanced Security and Compliance Add-On.",
+          "$ref": "#/definitions/EnhancedSecurityComplianceDefinition"
+        },
         "privateEndpointConnections": {
           "readOnly": true,
           "description": "Private endpoint connections created on the workspace",
@@ -844,6 +869,10 @@
             "modelAsString": true,
             "name": "RequiredNsgRules"
           }
+        },
+        "defaultCatalog": {
+          "description": "Information regarding the initial default catalog associated with the workspace.",
+          "$ref": "#/definitions/DefaultCatalogDefinition"
         }
       },
       "required": [
@@ -852,6 +881,7 @@
       "description": "The workspace properties."
     },
     "TrackedResource": {
+      "type": "object",
       "description": "The resource model definition for a ARM tracked top level resource",
       "properties": {
         "tags": {
@@ -885,6 +915,7 @@
       ]
     },
     "Resource": {
+      "type": "object",
       "description": "The core properties of ARM resources",
       "properties": {
         "id": {
@@ -906,6 +937,7 @@
       "x-ms-azure-resource": true
     },
     "Sku": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -959,6 +991,7 @@
       }
     },
     "ManagedIdentityConfiguration": {
+      "type": "object",
       "description": "The Managed Identity details for storage account.",
       "properties": {
         "principalId": {
@@ -980,6 +1013,90 @@
         }
       }
     },
+    "EnhancedSecurityComplianceDefinition": {
+      "type": "object",
+      "description": "Status of settings related to the Enhanced Security and Compliance Add-On.",
+      "properties": {
+        "automaticClusterUpdate": {
+          "type": "string",
+          "description": "Status of automated cluster updates feature.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "AutomaticClusterUpdate"
+          }
+        },
+        "complianceSecurityProfile": {
+          "type": "string",
+          "description": "Status of Compliance Security Profile feature.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ComplianceSecurityProfile"
+          }
+        },
+        "complianceStandards": {
+          "description": "Compliance standards associated with the workspace.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComplianceStandardDefinition"
+          }
+        },
+        "enhancedSecurityMonitoring": {
+          "type": "string",
+          "description": "Status of Enhanced Security Monitoring feature.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "EnhancedSecurityMonitoring"
+          }
+        }
+      }
+    },
+    "ComplianceStandardDefinition": {
+      "description": "Compliance standard that can be associated with a workspace.",
+      "type": "string",
+      "enum": [
+        "HIPAA",
+        "PCI",
+        "FEDRAMP_MODERATE"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ComplianceStandard"
+      }
+    },
+    "DefaultCatalogDefinition": {
+      "type": "object",
+      "description": "Information regarding the initial default catalog associated with the workspace.",
+      "properties": {
+        "initialName": {
+          "type": "string",
+          "description": "Name of the initial default catalog of the workspace"
+        },
+        "initialType": {
+          "type": "string",
+          "description": "Type of the initial default catalog of the workspace",
+          "enum": [
+            "HiveMetastore",
+            "UnityCatalog"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "InitialType"
+          }
+        }
+      }
+    },
     "WorkspaceCustomParameterType": {
       "description": "Provisioning status of the workspace.",
       "readOnly": true,
@@ -995,6 +1112,7 @@
       }
     },
     "WorkspaceCustomBooleanParameter": {
+      "type": "object",
       "properties": {
         "type": {
           "$ref": "#/definitions/WorkspaceCustomParameterType",
@@ -1011,6 +1129,7 @@
       "description": "The value which should be used for this field."
     },
     "WorkspaceCustomObjectParameter": {
+      "type": "object",
       "properties": {
         "type": {
           "$ref": "#/definitions/WorkspaceCustomParameterType",
@@ -1027,6 +1146,7 @@
       "description": "The value which should be used for this field."
     },
     "WorkspaceCustomStringParameter": {
+      "type": "object",
       "properties": {
         "type": {
           "$ref": "#/definitions/WorkspaceCustomParameterType",
@@ -1043,6 +1163,7 @@
       "description": "The Value."
     },
     "WorkspaceCustomParameters": {
+      "type": "object",
       "properties": {
         "amlWorkspaceId": {
           "$ref": "#/definitions/WorkspaceCustomStringParameter",
@@ -1119,6 +1240,7 @@
       "readOnly": true
     },
     "CreatedBy": {
+      "type": "object",
       "properties": {
         "oid": {
           "type": "string",
@@ -1141,6 +1263,7 @@
       "description": "Provides details of the entity that created/updated the workspace."
     },
     "WorkspaceEncryptionParameter": {
+      "type": "object",
       "properties": {
         "type": {
           "$ref": "#/definitions/WorkspaceCustomParameterType",
@@ -1154,6 +1277,7 @@
       "description": "The object that contains details of encryption used on the workspace."
     },
     "Encryption": {
+      "type": "object",
       "properties": {
         "keySource": {
           "type": "string",
@@ -1186,6 +1310,7 @@
       "description": "The object that contains details of encryption used on the workspace."
     },
     "EncryptionEntitiesDefinition": {
+      "type": "object",
       "properties": {
         "managedServices": {
           "type": "object",
@@ -1201,6 +1326,7 @@
       "description": "Encryption entities for databricks workspace resource."
     },
     "EncryptionV2": {
+      "type": "object",
       "properties": {
         "keySource": {
           "type": "string",
@@ -1214,6 +1340,7 @@
           }
         },
         "keyVaultProperties": {
+          "type": "object",
           "properties": {
             "keyVaultUri": {
               "type": "string",
@@ -1290,6 +1417,7 @@
       "description": "The object that contains details of encryption used on the workspace."
     },
     "WorkspaceProviderAuthorization": {
+      "type": "object",
       "properties": {
         "principalId": {
           "type": "string",
@@ -1387,6 +1515,7 @@
       ]
     },
     "WorkspaceListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1411,6 +1540,7 @@
           "type": "string"
         },
         "display": {
+          "type": "object",
           "description": "The object that represents the operation.",
           "properties": {
             "provider": {
