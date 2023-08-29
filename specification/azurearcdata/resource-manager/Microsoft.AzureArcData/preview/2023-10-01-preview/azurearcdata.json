@@ -821,12 +821,12 @@
             "$ref": "#/parameters/sqlServerInstanceName"
           },
           {
-            "name": "sqlServerInstanceMetricsRequestProperties",
+            "name": "sqlServerInstanceMetricsRequest",
             "in": "body",
-            "description": "The SQL Server Instance to be created or updated.",
+            "description": "Contains the parameters to fetch SQL Server instance metrics.",
             "required": true,
             "schema": {
-              "$ref": "./sqlServerInstances.json#/definitions/sqlServerInstanceMetricsRequest"
+              "$ref": "./sqlServerInstances.json#/definitions/SqlServerInstanceMetricsRequest"
             }
           },
           {
@@ -852,10 +852,7 @@
         },
         "x-ms-examples": {
           "Retrieves Arc SQL Server cpu utilization metrics": {
-            "$ref": "./examples/FetchSqlServerInstanceMetricsCPU.json"
-          },
-          "Retrieves Arc SQL Server storage IO metrics": {
-            "$ref": "./examples/FetchSqlServerInstanceMetricsStorageIO.json"
+            "$ref": "./examples/FetchSqlServerInstanceMetrics.json"
           }
         },
         "x-ms-long-running-operation": true,

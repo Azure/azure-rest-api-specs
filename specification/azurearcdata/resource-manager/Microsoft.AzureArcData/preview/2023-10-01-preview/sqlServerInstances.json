@@ -543,6 +543,150 @@
           "description": "Indicates if monitoring is enabled for this SQL Server instance."
         }
       }
+    },
+    "SqlServerInstanceMetricsRequest": {
+      "description": "The Arc SQL Server instance metrics retrieval request.",
+      "type": "object",
+      "properties": {
+        "metricsDatasetNames": {
+          "type": "array",
+          "description": "The names of the metrics datasets to retrieve."
+        },
+        "sqlDatabaseName": {
+          "type": "string",
+          "description": "The name of the SQL database to retrieve metrics for. If not specified, metrics for all databases are retrieved."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time for the time range to fetch metrics for. If not specified, the current time minus the interval is used."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time for the time range to fetch metrics for. If not specified, the current time is used."
+        },
+        "interval": {
+          "type": "string",
+          "format": "duration",
+          "description": "The time granularity to fetch the metrics for. This is an ISO8601 duration. Examples: PT15M, PT1H, P1D",
+          "default": "PT1H"
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "The aggregation type to use on the given metrics dataset.",
+          "enum": [
+            "Average",
+            "Minimum",
+            "Maximum",
+            "Sum",
+            "Count"
+          ],
+          "x-ms-enum": {
+            "name": "aggregationType",
+            "modelAsString": true
+          },
+          "default": "Average"
+        }
+      },
+      "required": [
+        "metricsDatasetNames"
+      ]
+    },
+    "SqlServerInstanceMetricsResponse": {
+      "description": "The Arc SQL Server instance metrics retrieval response.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of metrics for the SQL Server instance.",
+          "items": {
+            "$ref": "#/definitions/SqlServerInstanceMetric"
+          }
+        }
+      }
+    },
+    "SqlServerInstanceMetric": {
+      "description": "The Arc SQL Server instance metric object.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the metric."
+        },
+        "sqlDatabaseName": {
+          "type": "string",
+          "description": "The name of the SQL database the metric is for."
+        },
+        "unit": {
+          "type": "string",
+          "description": "The unit of the metric.",
+          "enum": [
+            "Count",
+            "Bytes",
+            "Seconds",
+            "Milliseconds",
+            "CountPerSecond",
+            "BytesPerSecond",
+            "Percent",
+            "ByteSeconds",
+            "Unspecified",
+            "Cores",
+            "MilliCores",
+            "NanoCores",
+            "BitsPerSecond"
+          ],
+          "x-ms-enum": {
+            "name": "unit",
+            "modelAsString": true
+          }
+        },
+        "timeseries": {
+          "type": "array",
+          "description": "The list of timeseries for the metric.",
+          "items": {
+            "$ref": "#/definitions/SqlServerInstanceMetricTimeseries"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "sqlDatabaseName",
+        "unit",
+        "timeseries"
+      ]
+    },
+    "SqlServerInstanceMetricTimeseries": {
+      "description": "Represents a Arc SQL Server instance metric timeseries.",
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "description": "The list of data points for the metric timeseries.",
+          "items": {
+            "$ref": "#/definitions/SqlServerInstanceMetricData"
+          }
+        }
+      }
+    },
+    "SqlServerInstanceMetricData": {
+      "description": "Represents an instance metric data point.",
+      "type": "object",
+      "properties": {
+        "timeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of the metric data point."
+        },
+        "value": {
+          "type": "number",
+          "description": "The value of the metric data point."
+        }
+      },
+      "required": [
+        "timeStamp",
+        "value"
+      ]
     }
   },
   "parameters": {
