@@ -38,8 +38,8 @@ These settings apply only when `--tag=package-preview-2023-04` is specified on t
 ```yaml $(tag) == 'package-preview-2023-04'
 input-file:
   - Microsoft.ScVmm/preview/2023-04-01-preview/scvmm.json
-suppressions:    
-  - code: LroPostReturn
+suppressions:
+  - code: RESPONSE_STATUS_CODE_NOT_IN_SPEC
     reason: All POST actions are long running operations and never return 200 in the response.
     where:
       - $.paths["/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances/default/stop"].post
