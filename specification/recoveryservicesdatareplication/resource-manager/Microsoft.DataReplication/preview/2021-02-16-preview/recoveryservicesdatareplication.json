@@ -261,7 +261,7 @@
             "$ref": "#/parameters/FabricAgentNameParameter"
           },
           {
-            "$ref": "#/parameters/OperationIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -922,7 +922,7 @@
             "$ref": "#/parameters/FabricNameParameter"
           },
           {
-            "$ref": "#/parameters/OperationIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1200,7 +1200,7 @@
             "$ref": "#/parameters/PolicyNameParameter"
           },
           {
-            "$ref": "#/parameters/OperationIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1560,7 +1560,7 @@
             "$ref": "#/parameters/ProtectedItemNameParameter"
           },
           {
-            "$ref": "#/parameters/OperationIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1942,7 +1942,7 @@
             "$ref": "#/parameters/ReplicationExtensionNameParameter"
           },
           {
-            "$ref": "#/parameters/OperationIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2485,7 +2485,7 @@
             "$ref": "#/parameters/VaultNameParameter"
           },
           {
-            "$ref": "#/parameters/OperationIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2647,7 +2647,7 @@
             "$ref": "#/parameters/JobNameParameter"
           },
           {
-            "$ref": "#/parameters/OperationIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -6473,40 +6473,14 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "in": "path",
-      "name": "subscriptionId",
-      "description": "The subscription Id.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ResourceGroupNameParameter": {
-      "in": "path",
-      "name": "resourceGroupName",
-      "description": "The resource group name.",
-      "required": true,
-      "type": "string",
-      "maxLength": 90,
-      "minLength": 1,
-      "x-ms-parameter-location": "method"
-    },
-    "ApiVersionParameter": {
-      "in": "query",
-      "name": "api-version",
-      "description": "The client API version.",
-      "required": true,
-      "type": "string",
-      "minLength": 1,
-      "x-ms-parameter-location": "method"
-    },
     "FabricNameParameter": {
       "in": "path",
       "name": "fabricName",
       "description": "The fabric name.",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9]*$"
+      "pattern": "^[a-zA-Z0-9]*$",
+      "x-ms-parameter-location": "method"
     },
     "FabricAgentNameParameter": {
       "in": "path",
@@ -6514,7 +6488,8 @@
       "description": "The fabric agent (Dra) name.",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9]*$"
+      "pattern": "^[a-zA-Z0-9]*$",
+      "x-ms-parameter-location": "method"
     },
     "VaultNameParameter": {
       "in": "path",
@@ -6522,7 +6497,8 @@
       "description": "The vault name.",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9]*$"
+      "pattern": "^[a-zA-Z0-9]*$",
+      "x-ms-parameter-location": "method"
     },
     "PolicyNameParameter": {
       "in": "path",
@@ -6530,7 +6506,8 @@
       "description": "The policy name.",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9]*$"
+      "pattern": "^[a-zA-Z0-9]*$",
+      "x-ms-parameter-location": "method"
     },
     "ProtectedItemNameParameter": {
       "in": "path",
@@ -6538,15 +6515,8 @@
       "description": "The protected item name.",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9]*$"
-    },
-    "OperationIdParameter": {
-      "in": "path",
-      "name": "operationId",
-      "description": "The operation Id.",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9]*$"
+      "pattern": "^[a-zA-Z0-9]*$",
+      "x-ms-parameter-location": "method"
     },
     "ReplicationExtensionNameParameter": {
       "in": "path",
@@ -6554,7 +6524,8 @@
       "description": "The replication extension name.",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9]*$"
+      "pattern": "^[a-zA-Z0-9]*$",
+      "x-ms-parameter-location": "method"
     },
     "JobNameParameter": {
       "in": "path",
@@ -6562,7 +6533,8 @@
       "description": "The job (workflow) name.",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9]*$"
+      "pattern": "^[a-zA-Z0-9]*$",
+      "x-ms-parameter-location": "method"
     },
     "EmailConfigurationNameParameter": {
       "in": "path",
@@ -6570,7 +6542,8 @@
       "description": "The email configuration name.",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9]*$"
+      "pattern": "^[a-zA-Z0-9]*$",
+      "x-ms-parameter-location": "method"
     },
     "EventNameParameter": {
       "in": "path",
@@ -6578,7 +6551,8 @@
       "description": "The event name.",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9]*$"
+      "pattern": "^[a-zA-Z0-9]*$",
+      "x-ms-parameter-location": "method"
     },
     "RecoveryPointNameParameter": {
       "in": "path",
@@ -6586,7 +6560,8 @@
       "description": "The recovery point name.",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9]*$"
+      "pattern": "^[a-zA-Z0-9]*$",
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {
