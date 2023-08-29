@@ -1913,6 +1913,59 @@
         }
       },
       "description": "Specifies additional settings to be applied when patch mode AutomaticByPlatform is selected in Linux patch settings."
+    },
+    "AttachDetachDataDisksRequest": {
+      "properties": {
+        "attachDataDisks": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/AttachDataDisk"
+          },
+          "description": "The list of managed data disks to be attached."
+        },
+        "detachDataDisks": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/DetachDataDisk"
+          },
+          "description": "The list of managed data disks to be detached."
+        }
+      },
+      "description": "Specifies the input for attaching and detaching a list of managed data disks."
+    },
+    "AttachDataDisk": {
+      "properties": {
+        "diskId": {
+          "type": "string",
+          "description": "ID of the managed data disk."
+        },
+        "lun": {
+          "type": "integer",
+          "description": "The logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM. If not specified, lun would be auto assigned."
+        }
+      },
+      "required": [
+        "diskId"
+      ],
+      "description": "Describes the data disk to be attached."
+    },
+    "DetachDataDisk": {
+      "properties": {
+        "diskId": {
+          "type": "string",
+          "description": "ID of the managed data disk."
+        },
+        "detachOption": {
+          "$ref": "#/definitions/DetachOption",
+          "description": "Supported options available for Detach of a disk from a VM. Refer to DetachOption object reference for more details."
+        }
+      },
+      "required": [
+        "diskId"
+      ],
+      "description": "Describes the data disk to be detached."
     }
   }
 }
