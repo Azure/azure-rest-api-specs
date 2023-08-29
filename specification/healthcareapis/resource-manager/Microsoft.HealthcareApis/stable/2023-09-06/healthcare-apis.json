@@ -3767,10 +3767,6 @@
           "description": "The provisioning state.",
           "$ref": "#/definitions/ProvisioningState"
         },
-        "accessPolicies": {
-          "description": "Fhir Service access policies.",
-          "$ref": "#/definitions/FhirServiceAccessPolicies"
-        },
         "acrConfiguration": {
           "description": "Fhir Service Azure container registry configuration.",
           "$ref": "#/definitions/FhirServiceAcrConfiguration"
@@ -3857,30 +3853,6 @@
         "name": "FhirResourceVersionPolicy",
         "modelAsString": true
       }
-    },
-    "FhirServiceAccessPolicies": {
-      "description": "The access policies of the service instance.",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/FhirServiceAccessPolicyEntry"
-      },
-      "x-ms-identifiers": [
-        "objectId"
-      ]
-    },
-    "FhirServiceAccessPolicyEntry": {
-      "type": "object",
-      "description": "An access policy entry.",
-      "properties": {
-        "objectId": {
-          "description": "An Azure AD object ID (User or Apps) that is allowed access to the FHIR service.",
-          "type": "string",
-          "pattern": "^(([0-9A-Fa-f]{8}[-]?(?:[0-9A-Fa-f]{4}[-]?){3}[0-9A-Fa-f]{12}){1})+$"
-        }
-      },
-      "required": [
-        "objectId"
-      ]
     },
     "FhirServiceAcrConfiguration": {
       "description": "Azure container registry configuration information",
