@@ -1,0 +1,395 @@
+import "@azure-tools/typespec-azure-core";
+import "../../../operationsTemp.tsp";
+import "@typespec/rest";
+import "@typespec/openapi";
+import "@typespec/versioning";
+import "@azure-tools/typespec-providerhub";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "../common/machinePropertiesInternal.tsp";
+
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using Azure.Core;
+using Azure.Core.Traits;
+using OpenAPI;
+
+@versioned(Versions)
+@doc("Azure OffAzure Resource Provider management API.")
+namespace Microsoft.OffAzure;
+
+@doc("Second level object represented in responses as part of Machine REST resource.")
+model VmwareNetworkAdapter {
+  @doc("Label of the NIC.")
+  @visibility("read")
+  label?: string;
+
+  @doc("Gets or sets the adapter type.")
+  @visibility("read")
+  adapterType?: string;
+
+  @doc("Gets or sets the NIC Id.")
+  nicId?: string;
+
+  @doc("Gets or sets Mac address of the NIC.")
+  macAddress?: string;
+
+  @doc("Gets IP addresses for the machine.")
+  @visibility("read")
+  ipAddressList?: string[];
+
+  @doc("Gets or sets Network Name.")
+  networkName?: string;
+
+  @doc("Gets or sets Type of the IP address.")
+  ipAddressType?: string;
+}
+
+@doc("Run as account REST Resource.")
+model V20180501PreviewVmwareRunAsAccount {
+  @doc("Relative URL to get this run as account.")
+  @visibility("read")
+  id?: string;
+
+  @doc("Gets the Name of the Run as account.")
+  @visibility("read")
+  name?: string;
+
+  @doc("""
+Handled by resource provider. Type =
+Microsoft.OffAzure/VMWareSites/RunAsAccounts.
+""")
+  @visibility("read")
+  type?: string;
+
+  @doc("Gets nested properties.")
+  @visibility("read")
+  //@extension("x-ms-client-flatten", true)
+  properties?: RunAsAccountRunAsAccountProperties;
+}
+
+@doc("Collection of VMware run as accounts.")
+model V20180501PreviewVmwareRunAsAccountVmwareRunAsAccountCollection {
+  @doc("Gets the list of run as accounts.")
+  @visibility("read")
+  value?: V20180501PreviewVmwareRunAsAccount[];
+
+  @doc("Gets the value of next link.")
+  @visibility("read")
+  nextLink?: string;
+}
+
+@doc("Processor Information.")
+model ProcessorInfo {
+  @doc("Gets or sets the name\\model of a processor.")
+  name?: string;
+
+  @doc("Gets or sets the number of sockets.")
+  numberOfSockets?: int32;
+
+  @doc("Gets or sets the total number of cores in a socket.")
+  numberOfCoresPerSocket?: int32;
+}
+
+@doc("Second level object returned as part of Machine REST resource.")
+model VmwareDisk {
+  @doc("Disk UUID.")
+  @visibility("read")
+  uuid?: string;
+
+  @doc("Label of the disk.")
+  @visibility("read")
+  label?: string;
+
+  @doc("""
+The provisioning policy of the disk.
+            It is Thin or Thick or
+Unknown for the VMWare VMDK.
+""")
+  @visibility("read")
+  diskProvisioningPolicy?: string;
+
+  @doc("""
+The scrubbing policy of disks which can be
+            eagerly zeroed or
+lazily zeroed.
+""")
+  @visibility("read")
+  diskScrubbingPolicy?: string;
+
+  @doc("Disk mode property used for identifying independent disks.")
+  @visibility("read")
+  diskMode?: string;
+
+  @doc("Gets or sets a value indicating the type of the disk controller type.")
+  @visibility("read")
+  controllerType?: string;
+
+  @doc("Gets or sets Bytes allocated for the disk.")
+  maxSizeInBytes?: int64;
+
+  @doc("Gets or sets Name of the disk.")
+  name?: string;
+
+  @doc("Gets or sets Type of the disk.")
+  diskType?: string;
+
+  @doc("Gets or sets LUN of the disk.")
+  lun?: int32;
+
+  @doc("Gets or sets Path of the disk.")
+  path?: string;
+}
+
+@doc("Class for machine properties.")
+model VmwareMachineProperties {
+  @doc("Gets the Information about Host Processor.")
+  @visibility("read")
+  @added(Versions.v2020_07_10)
+  hostProcessorInfo?: ProcessorInfo;
+
+  @doc("Gets or sets tags on the VMware machine.")
+  tags?: Record<Object>;
+
+  @doc("VCenter FQDN/IPAddress.")
+  @visibility("read")
+  vCenterFqdn?: string;
+
+  @doc("VCenter ARM ID.")
+  @visibility("read")
+  vCenterId?: string;
+
+  @doc("On-premise Instance UUID of the machine.")
+  @visibility("read")
+  instanceUuid?: string;
+
+  @doc("Scope of the data center.")
+  @visibility("read")
+  dataCenterScope?: string;
+
+  @doc("User description of the machine.")
+  @visibility("read")
+  description?: string;
+
+  @doc("Disks attached to the machine.")
+  @visibility("read")
+  @extension("x-ms-identifiers", [])
+  disks?: VmwareDisk[];
+
+  @doc("Indicates whether the host is in maintenance mode.")
+  @visibility("read")
+  hostInMaintenanceMode?: boolean;
+
+  @doc("The host name.")
+  @visibility("read")
+  hostName?: string;
+
+  @doc("The host power state.")
+  @visibility("read")
+  hostPowerState?: string;
+
+  @doc("The host version.")
+  @visibility("read")
+  hostVersion?: string;
+
+  @doc("Network adapters attached to the machine.")
+  @visibility("read")
+  @extension("x-ms-identifiers", [])
+  networkAdapters?: VmwareNetworkAdapter[];
+
+  @doc("VMware tools status.")
+  @visibility("read")
+  vMwareToolsStatus?: string;
+
+  @doc("VMware tools version.")
+  @visibility("read")
+  vMwareToolsVersion?: string;
+
+  @doc("Value indicating whether change tracking is supported.")
+  @visibility("read")
+  changeTrackingSupported?: boolean;
+
+  @doc("Value indicating whether change tracking is enabled.")
+  @visibility("read")
+  changeTrackingEnabled?: boolean;
+
+  @doc("Maximum number of snapshots for the VM.            Default value is -1.")
+  @visibility("read")
+  maxSnapshots?: int32;
+
+  @doc("Gets or sets whether Disk Enabled UUID is set or not.")
+  @visibility("read")
+  diskEnabledUuid?: string;
+
+  @doc("Number of snapshots for the VM.             Default value is -1.")
+  @visibility("read")
+  numberOfSnapshots?: int32;
+
+  @doc("Gets or sets the machine alt guest name.")
+  @visibility("read")
+  altGuestName?: string;
+
+  @doc("Gets the Machine power status.")
+  @visibility("read")
+  powerStatus?: string;
+
+  @doc("Gets the VM FQDN.")
+  @visibility("read")
+  vmFqdn?: string;
+
+  @doc("Gets the Root location of the VM configuration file.")
+  @visibility("read")
+  vmConfigurationFileLocation?: string;
+
+  @doc("Gets or sets the firmware.")
+  firmware?: string;
+
+  @doc("""
+Operating System Details extracted from the guest
+            bu executing
+script inside the guest VM.
+""")
+  @visibility("read")
+  guestOsDetails?: GuestOsDetails;
+
+  @doc("Number of applications installed in the guest VM.")
+  @visibility("read")
+  numberOfApplications?: int32;
+
+  @doc("""
+The last time at which the Guest Details was discovered
+            or the
+error while discovering guest details based discovery
+            of the
+machine.
+""")
+  @visibility("read")
+  guestDetailsDiscoveryTimestamp?: utcDateTime;
+
+  @doc("""
+Whether Refresh Fabric Layout Guest Details has been completed once.
+         
+  Portal will show discovery in progress, if this value is true.
+""")
+  @visibility("read")
+  isGuestDetailsDiscoveryInProgress?: boolean;
+
+  @doc("""
+Gets or sets if dependency mapping feature is enabled or not
+            for
+the VM.
+""")
+  @visibility("read")
+  dependencyMapping?: string;
+
+  @doc("Gets or sets when dependency mapping collection is last started.")
+  @visibility("read")
+  dependencyMappingStartTime?: utcDateTime;
+
+  @doc("Gets or sets when dependency mapping collection was last disabled.")
+  @visibility("read")
+  dependencyMappingEndTime?: string;
+
+  @doc("Gets or sets the run as account ID of the machine.")
+  runAsAccountId?: string;
+
+  @doc("Gets the appliance names.")
+  @visibility("read")
+  applianceNames?: string[];
+
+  @doc("Errors for machine.")
+  @visibility("read")
+  errors?: HealthErrorDetails[];
+
+  @doc("Gets the data related to application discovery.")
+  @visibility("read")
+  applicationDiscovery?: ApplicationDiscovery;
+
+  @doc("Gets the data related to dependency map discovery.")
+  @visibility("read")
+  dependencyMapDiscovery?: DependencyMapDiscovery;
+
+  @doc("Gets the data related to static discovery.")
+  @visibility("read")
+  staticDiscovery?: StaticDiscovery;
+
+  @doc("Gets the data related to SQL discovery.")
+  @visibility("read")
+  sqlDiscovery?: SqlDiscovery;
+
+  @doc("Gets the data related to Web application discovery.")
+  @visibility("read")
+  webAppDiscovery?: WebAppDiscovery;
+
+  @doc("Gets the data related to Oracle discovery.")
+  @visibility("read")
+  oracleDiscovery?: OracleDiscovery;
+
+  @doc("Gets the data related to SpringBoot discovery.")
+  @visibility("read")
+  springBootDiscovery?: SpringBootDiscovery;
+
+  @doc("Apps And Roles of the Server.")
+  @visibility("read")
+  appsAndRoles?: AppsAndRoles;
+
+  @doc("""
+Gets or sets the Number of Processor Cores 
+            allocated for the
+machine.
+""")
+  numberOfProcessorCore?: int32;
+
+  @doc("Gets or sets the allocated Memory in MB.")
+  allocatedMemoryInMb?: float64;
+
+  @doc("Gets or sets the Operating System Details installed on the machine.")
+  operatingSystemDetails?: OperatingSystem;
+
+  @doc("Gets or sets the Machine BIOS serial number.")
+  biosSerialNumber?: string;
+
+  @doc("Gets or sets the BIOS GUID.")
+  biosGuid?: string;
+
+  @doc("Gets the Display name of the machine.")
+  @visibility("read")
+  displayName?: string;
+
+  @doc("Value indicating whether VM is deleted.")
+  @visibility("read")
+  isDeleted?: boolean;
+
+  @doc("Gets the marking machine creation.")
+  @visibility("read")
+  createdTimestamp?: string;
+
+  @doc("Gets the timestamp marking last updated on the machine.")
+  @visibility("read")
+  updatedTimestamp?: string;
+
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState;
+}
+
+@doc("VMware Machine software inventory REST resource.")
+model VmwareMachineSoftwareInventory {
+  @doc("Gets the relative URL to get this VMWare machine.")
+  @visibility("read")
+  id?: string;
+
+  @doc("Handled by resource provider.")
+  @visibility("read")
+  type?: string;
+
+  @doc("Gets the Name of the machine.")
+  @visibility("read")
+  name?: string;
+
+  @doc("Gets or sets software inventory properties.")
+  //@extension("x-ms-client-flatten", true)
+  properties?: MachineSoftwareInventoryProperties;
+}

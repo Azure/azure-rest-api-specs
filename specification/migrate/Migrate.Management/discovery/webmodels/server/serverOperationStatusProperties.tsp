@@ -1,0 +1,37 @@
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using Azure.Core;
+using Azure.Core.Traits;
+using OpenAPI;
+
+@doc("ServerOperationStatus Properties.")
+model ServerOperationStatusProperties {
+
+  @doc("Gets operation status.")
+  status: string;
+
+  @doc("Gets operation start time.")
+  startTime: string;
+  
+  @doc("Gets operation end time.")
+  endTime: string;
+
+  @doc("Gets or sets the display name of the Job.")
+  displayName: string;
+
+  @doc("Gets the client request Id used in the operation execution context.")
+  clientRequestId: string;
+
+  @doc("Gets the activity Id used in the operation execution context.")
+  activityId: string;
+  
+  @extension("x-ms-identifiers", [])
+  @doc("Gets the errors.")
+  errors: ErrorDetails[];
+
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState; 
+}
