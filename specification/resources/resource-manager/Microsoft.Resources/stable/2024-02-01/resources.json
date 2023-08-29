@@ -6833,6 +6833,16 @@
     "DataBoundaryDefinition": {
       "type": "object",
       "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource ID for the data boundary. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/dataBoundaries/{resourceName}"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
         "dataBoundary": {
           "type": "string",
           "description": "The data boundary definition.",
@@ -6850,6 +6860,11 @@
           "type": "string",
           "readOnly": true,
           "description": "Denotes the state of provisioning."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. Microsoft.Resources/dataBoundaries"
         }
       }
     }
