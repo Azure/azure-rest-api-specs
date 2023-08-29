@@ -3406,14 +3406,11 @@
         "creatorRoleAssignment": {
           "description": "The role definition assigned to the environment creator on backing resources.",
           "type": "object",
-          "properties": {
-            "roles": {
-              "type": "object",
-              "description": "A map of roles to assign to the environment creator.",
-              "additionalProperties": {
-                "$ref": "#/definitions/EnvironmentRole"
+          "allOf": [
+              {
+                "$ref": "#/definitions/RoleAssignment"
               }
-            }
+            ]
           }
         },
         "userRoleAssignments": {
@@ -3674,10 +3671,9 @@
         }
       }
     },
-    "UserRoleAssignment": {
+    "RoleAssignment": {
       "type": "object",
-      "description": "Mapping of user object ID to role assignments.",
-      "x-ms-client-name": "userRoleAssignmentValue",
+      "description": "A set of role assignments.",
       "properties": {
         "roles": {
           "type": "object",
@@ -3687,6 +3683,16 @@
           }
         }
       }
+    },
+    "UserRoleAssignment": {
+      "type": "object",
+      "description": "Mapping of user object ID to role assignments.",
+      "x-ms-client-name": "userRoleAssignmentValue",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RoleAssignment"
+        }
+      ]
     },
     "OperationStatus": {
       "description": "The current status of an async operation",
