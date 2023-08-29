@@ -789,7 +789,7 @@
               "$ref": "./sqlServerInstances.json#/definitions/SqlServerInstance"
             }
           },
-          "default": {
+                    "default": {
             "description": "*** Error Responses: ***",
             "schema": {
               "$ref": "./common.json#/definitions/ErrorResponse"
@@ -800,6 +800,68 @@
           "Updates a SQL Server Instance tags.": {
             "$ref": "./examples/UpdateSqlServerInstance.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}/fetchInstanceMetrics": {
+      "post": {
+        "tags": [
+          "SqlServerInstances"
+        ],
+        "operationId": "SqlServerInstances_PostInstanceMetrics",
+        "description": "Retrieves SQL Server instance metrics",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/sqlServerInstanceName"
+          },
+          {
+            "name": "sqlServerInstanceMetricsRequestProperties",
+            "in": "body",
+            "description": "The SQL Server Instance to be created or updated.",
+            "required": true,
+            "schema": {
+              "$ref": "./sqlServerInstances.json#/definitions/sqlServerInstanceMetricsRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./sqlServerInstances.json#/definitions/SqlServerInstanceMetricsResponse"
+            }
+          },
+          "202": {
+            "description": "Arc SQL Server metrics retrieval is in progress."
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieves Arc SQL Server cpu utilization metrics": {
+            "$ref": "./examples/FetchSqlServerInstanceMetricsCPU.json"
+          },
+          "Retrieves Arc SQL Server storage IO metrics": {
+            "$ref": "./examples/FetchSqlServerInstanceMetricsStorageIO.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "./sqlServerInstances.json#/definitions/SqlServerInstanceMetricsResponse"
         }
       }
     },
