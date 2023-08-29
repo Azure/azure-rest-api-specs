@@ -4557,7 +4557,7 @@
           "200": {
             "description": "OK - Returns the data boundary definition.",
             "schema": {
-              "$ref": "#/definitions/DataBoundary"
+              "$ref": "#/definitions/DataBoundaryDefinition"
             }
           },
           "default": {
@@ -4588,7 +4588,7 @@
           "200": {
             "description": "OK - Returns the data boundary definition.",
             "schema": {
-              "$ref": "#/definitions/DataBoundary"
+              "$ref": "#/definitions/DataBoundaryDefinition"
             }
           },
           "default": {
@@ -4624,7 +4624,7 @@
           "200": {
             "description": "OK - Returns the data boundary definition.",
             "schema": {
-              "$ref": "#/definitions/DataBoundary"
+              "$ref": "#/definitions/DataBoundaryDefinition"
             }
           },
           "default": {
@@ -6830,7 +6830,7 @@
         }
       }
     },
-    "DataBoundary": {
+    "DataBoundaryDefinition": {
       "type": "object",
       "properties": {
         "dataBoundary": {
@@ -6849,13 +6849,7 @@
         "provisioningState": {
           "type": "string",
           "readOnly": true,
-          "description": "Denotes the state of provisioning.",
-          "enum": [
-            "NotSpecified",
-            "Creating",
-            "Created",
-            "Failed"
-          ]
+          "description": "Denotes the state of provisioning."
         }
       }
     }
