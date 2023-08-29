@@ -15,15 +15,12 @@ no-namespace-folders: true
 Generate all API versions currently shipped for this package
 
 ```yaml $(python)
-multiapi: true
+clear-output-folder: true
 batch:
   - tag: package-passivestamp-2021-11-15
   - tag: package-2023-04
 ```
 
-``` yaml $(multiapiscript)
-clear-output-folder: false
-```
 ### Tag: package-passivestamp-2021-11-15 and python
 
 These settings apply only when `--tag=package-passivestamp-2021-11-15 --python` is specified on the command line.
