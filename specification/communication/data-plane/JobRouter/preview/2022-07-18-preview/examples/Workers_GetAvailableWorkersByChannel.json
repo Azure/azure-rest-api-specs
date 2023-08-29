@@ -2,7 +2,7 @@
   "parameters": {
     "endpoint": "https://contoso.westus.communications.azure.com",
     "api-version": "2022-07-18-preview",
-    "status": "active",
+    "state": "active",
     "channelId": "CustomChatChannel",
     "hasCapacity": true
   },
@@ -11,7 +11,7 @@
       "body": {
         "value": [
           {
-            "routerWorker": {
+            "worker": {
               "id": "DefaultWorker",
               "state": "active",
               "queueAssignments": {
@@ -23,10 +23,12 @@
               "tags": {},
               "channelConfigurations": {
                 "CustomChatChannel": {
-                  "capacityCostPerJob": 10
+                  "capacityCostPerJob": 10,
+                  "maxNumberOfJobs": 4
                 },
                 "CustomVoiceChannel": {
-                  "capacityCostPerJob": 100
+                  "capacityCostPerJob": 100,
+                  "maxNumberOfJobs": 1
                 }
               },
               "offers": [],
@@ -37,7 +39,7 @@
             "etag": "etag"
           },
           {
-            "routerWorker": {
+            "worker": {
               "id": "SecondWorker",
               "state": "active",
               "queueAssignments": {
@@ -49,10 +51,12 @@
               "tags": {},
               "channelConfigurations": {
                 "CustomChatChannel": {
-                  "capacityCostPerJob": 10
+                  "capacityCostPerJob": 10,
+                  "maxNumberOfJobs": 4
                 },
                 "CustomVoiceChannel": {
-                  "capacityCostPerJob": 100
+                  "capacityCostPerJob": 100,
+                  "maxNumberOfJobs": 1
                 }
               },
               "offers": [],
