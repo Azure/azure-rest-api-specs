@@ -111,7 +111,6 @@ model ManagedStorageClassStatus {
   scProvisioningState?: SCProvisioningState;
 }
 
-@discriminator("storageClassType")
 @doc("The properties of ManagedStorageClass")
 model ManagedStorageClassProperties {
   @doc("[Native] Volume can be expanded or not")
@@ -151,8 +150,10 @@ model ManagedStorageClassProperties {
   @doc("Selection priority when multiple storage classes meet the criteria. 0: Highest, -1: Never use")
   priority?: int64;
 
-  @doc("Type of the ManagedStorageClass")
-  storageClassType: SCType;
+  @doc("Properties of the ManagedStorageClass")
+  // prevent generation of buggy StorageClassPropertiesUpdate model
+  @visibility("read", "create")
+  storageClassProperties: StorageClassProperties;
 
   @doc("Actual Status of the ManagedStorageClass")
   @visibility("read")
@@ -163,17 +164,33 @@ model ManagedStorageClassProperties {
   provisioningState?: ProvisioningState;
 }
 
+@discriminator("type")
+@doc("The properties of storage class of the ManagedStorageClass")
+model StorageClassProperties {
+  @doc("Type of the storage class.")
+  type: SCType;
+}
+
 @doc("The properties of Native ManagedStorageClass")
-model NativeTemplateParameters {}
+model NativeStorageClassProperties extends StorageClassProperties {
+  @doc("Native ManagedStorageClass")
+  type: SCType.Native;
+}
 
 @doc("The properties of RWX ManagedStorageClass")
-model RwxTemplateParameters {
+model RwxStorageClassProperties extends StorageClassProperties {
+  @doc("RWX ManagedStorageClass")
+  type: SCType.RWX;
+
   @doc("The backing storageclass used to create new storageclass")
   backingStorageClassName?: string;
 }
 
 @doc("The properties of S3 ManagedStorageClass")
-model S3TemplateParameters {
+model S3StorageClassProperties extends StorageClassProperties {
+  @doc("S3 ManagedStorageClass")
+  type: SCType.S3;
+
   @doc("[S3] accessKeyId")
   accessKeyId?: string;
 
@@ -188,51 +205,17 @@ model S3TemplateParameters {
   region?: string;
 }
 
-@doc("The properties of S3 ManagedStorageClass")
-model BlobTemplateParameters {
+@doc("The properties of Blob ManagedStorageClass")
+model BlobStorageClassProperties extends StorageClassProperties {
+  @doc("Blob ManagedStorageClass")
+  type: SCType.Blob;
+
   @doc("[Blob] Azure Storage Account Name")
   azureStorageAccountName?: string;
 
   @doc("[Blob] Azure Storage Account Key")
   @secret
   azureStorageAccountKey?: string;
-}
-
-@doc("The properties of Native ManagedStorageClass")
-model NativeManagedStorageClassProperties
-  extends ManagedStorageClassProperties {
-  @doc("Native ManagedStorageClass")
-  storageClassType: SCType.Native;
-
-  @doc("Native ManagedStorageClass template parameters")
-  templateParameters?: NativeTemplateParameters;
-}
-
-@doc("The properties of RWX ManagedStorageClass")
-model RwxManagedStorageClassProperties extends ManagedStorageClassProperties {
-  @doc("RWX ManagedStorageClass")
-  storageClassType: SCType.RWX;
-
-  @doc("RWX ManagedStorageClass template parameters")
-  templateParameters?: RwxTemplateParameters;
-}
-
-@doc("The properties of S3 ManagedStorageClass")
-model S3ManagedStorageClassProperties extends ManagedStorageClassProperties {
-  @doc("S3 ManagedStorageClass")
-  storageClassType: SCType.S3;
-
-  @doc("S3 ManagedStorageClass template parameters")
-  templateParameters?: S3TemplateParameters;
-}
-
-@doc("The properties of Blob ManagedStorageClass")
-model BlobManagedStorageClassProperties extends ManagedStorageClassProperties {
-  @doc("Blob ManagedStorageClass")
-  storageClassType: SCType.Blob;
-
-  @doc("Blob ManagedStorageClass template parameters")
-  templateParameters?: BlobTemplateParameters;
 }
 
 @doc("extended location")
@@ -261,9 +244,43 @@ model ManagedStorageClassResource
   extendedLocation: ExtendedLocation;
 }
 
+alias StorageClassPropertiesUpdate = StorageClassProperties &
+  OmitProperties<NativeStorageClassProperties, "type"> &
+  OmitProperties<RwxStorageClassProperties, "type"> &
+  OmitProperties<S3StorageClassProperties, "type"> &
+  OmitProperties<BlobStorageClassProperties, "type">;
+
+@doc("The model for updating managedStorageClass properties")
+model ManagedStorageClassPropertiesUpdate
+  extends OmitProperties<
+    Azure.ResourceManager.Foundations.ResourceUpdateModelProperties<
+      ManagedStorageClassResource,
+      ManagedStorageClassProperties
+    >,
+    "storageClassProperties"
+  > {
+  @doc("New storage class properties of ManagedStorageClass")
+  storageClassProperties?: StorageClassPropertiesUpdate;
+}
+
+@doc("The model for updating a managedStorageClass")
+model ManagedStorageClassResourceUpdate
+  extends OptionalProperties<UpdateableProperties<OmitProperties<
+    ManagedStorageClassResource,
+    "name" | "properties"
+  >>> {
+  @doc("The properties of ManagedStorageClass")
+  properties?: ManagedStorageClassPropertiesUpdate;
+}
+
 @armResourceOperations
 interface ManagedStorageClass
   extends TrackedResourceOperations<
       ManagedStorageClassResource,
       ManagedStorageClassProperties
-    > {}
+    > {
+  update is ArmCustomPatchSync<
+    ManagedStorageClassResource,
+    ManagedStorageClassResourceUpdate
+  >;
+}
