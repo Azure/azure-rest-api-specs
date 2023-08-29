@@ -5300,9 +5300,6 @@
         }
       ],
       "properties": {
-        "originGroupLayer": {
-          "$ref": "#/definitions/LayerType"
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AFDOriginGroupProperties"
@@ -5325,9 +5322,6 @@
       "type": "object",
       "description": "AFDOrigin group properties needed for origin group creation or update.",
       "properties": {
-        "originGroupLayer":{
-          "$ref": "#/definitions/LayerType"
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AFDOriginGroupUpdatePropertiesParameters"
@@ -5338,6 +5332,10 @@
     "AFDOriginGroupUpdatePropertiesParameters": {
       "description": "The JSON object that contains the properties of the origin group.",
       "properties": {
+        "originGroupLayer": {
+          "description": "The layer of the origin group. Must be between Layer 4 or Layer 7.",
+          "$ref": "#/definitions/LayerType"
+        },
         "profileName": {
           "description": "The name of the profile which holds the origin group.",
           "type": "string",
@@ -5480,9 +5478,6 @@
         }
       ],
       "properties": {
-        "routeLayer": {
-          "$ref": "#/definitions/LayerType"
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/RouteProperties"
@@ -5507,9 +5502,6 @@
       "description": "The domain JSON object required for domain creation or update.",
       "type": "object",
       "properties": {
-        "routeLayer":{
-          "$ref": "#/definitions/LayerType"
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/RouteUpdatePropertiesParameters"
@@ -5523,6 +5515,10 @@
           "description": "The name of the endpoint which holds the route.",
           "type": "string",
           "readOnly": true
+        },
+        "routeLayer":{
+          "description": "The layer of the route. Must be between Layer 4 or Layer 7.",
+          "$ref": "#/definitions/LayerType"
         },
         "customDomains": {
           "description": "Domains referenced by this endpoint.",
