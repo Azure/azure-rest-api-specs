@@ -463,3 +463,12 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
+### Suppress rules to be fixed
+
+``` yaml
+suppressions:
+  - code: TrackedResourcePatchOperation
+    from: swagger-document
+    reason: The following workitems will be implemented to improve the swagger for the next API verison. Workitems 24979281, 24778096, 24802955, 24802955. This is planned for 2023-11-01-preview
+```
