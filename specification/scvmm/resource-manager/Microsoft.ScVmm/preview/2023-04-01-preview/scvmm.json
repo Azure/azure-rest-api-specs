@@ -3355,6 +3355,799 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances/default": {
+      "get": {
+        "tags": [
+          "VirtualMachineInstances"
+        ],
+        "operationId": "VirtualMachineInstances_Get",
+        "summary": "Gets a virtual machine.",
+        "description": "Retrieves information about a virtual machine instance.",
+        "x-ms-examples": {
+          "GetVirtualMachine": {
+            "$ref": "./examples/GetVirtualMachineInstance.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "VirtualMachineInstances"
+        ],
+        "operationId": "VirtualMachineInstances_CreateOrUpdate",
+        "description": "The operation to create or update a virtual machine instance. Please note some properties can be set only during virtual machine instance creation.",
+        "summary": "Implements virtual machine PUT method.",
+        "x-ms-examples": {
+          "CreateVirtualMachine": {
+            "$ref": "./examples/CreateVirtualMachineInstance.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineInstance"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "VirtualMachineInstances"
+        ],
+        "operationId": "VirtualMachineInstances_Update",
+        "summary": "Updates a virtual machine.",
+        "description": "The operation to update a virtual machine instance.",
+        "x-ms-examples": {
+          "UpdateVirtualMachine": {
+            "$ref": "./examples/UpdateVirtualMachineInstance.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Resource properties to update.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineInstanceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineInstance"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "VirtualMachineInstances"
+        ],
+        "operationId": "VirtualMachineInstances_Delete",
+        "summary": "Deletes an virtual machine.",
+        "description": "The operation to delete a virtual machine instance.",
+        "x-ms-examples": {
+          "DeleteVirtualMachine": {
+            "$ref": "./examples/DeleteVirtualMachineInstance.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "force",
+            "description": "Whether force delete was specified.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "deleteFromHost",
+            "description": "Whether to disable the VM from azure and also delete it from VMM.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances": {
+      "get": {
+        "tags": [
+          "VirtualMachineInstances"
+        ],
+        "operationId": "VirtualMachineInstances_List",
+        "summary": "Implements List virtual machine instances.",
+        "description": "Lists all of the virtual machine instances within the specified parent resource.",
+        "x-ms-examples": {
+          "GetVirtualMachine": {
+            "$ref": "./examples/ListVirtualMachineInstances.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances/default/stop": {
+      "post": {
+        "tags": [
+          "VirtualMachineInstances"
+        ],
+        "operationId": "VirtualMachineInstances_Stop",
+        "description": "The operation to power off (stop) a virtual machine instance.",
+        "summary": "Implements the operation to stop a virtual machine.",
+        "x-ms-examples": {
+          "StopVirtualMachine": {
+            "$ref": "./examples/StopVirtualMachineInstance.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Virtualmachine stop action payload.",
+            "schema": {
+              "$ref": "#/definitions/StopVirtualMachineOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances/default/start": {
+      "post": {
+        "tags": [
+          "VirtualMachineInstances"
+        ],
+        "operationId": "VirtualMachineInstances_Start",
+        "description": "The operation to start a virtual machine instance.",
+        "summary": "Implements the operation to start a virtual machine.",
+        "x-ms-examples": {
+          "StartVirtualMachine": {
+            "$ref": "./examples/StartVirtualMachineInstance.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances/default/restart": {
+      "post": {
+        "tags": [
+          "VirtualMachineInstances"
+        ],
+        "operationId": "VirtualMachineInstances_Restart",
+        "description": "The operation to restart a virtual machine instance.",
+        "summary": "Implements the operation to restart a virtual machine.",
+        "x-ms-examples": {
+          "RestartVirtualMachine": {
+            "$ref": "./examples/RestartVirtualMachineInstance.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances/default/hybridIdentityMetadata/default": {
+      "get": {
+        "tags": [
+          "VmInstanceHybridIdentityMetadata"
+        ],
+        "operationId": "VirtualMachineInstanceHybridIdentityMetadata_Get",
+        "summary": "Gets HybridIdentityMetadata.",
+        "description": "Implements HybridIdentityMetadata GET method.",
+        "x-ms-examples": {
+          "GetHybridIdentityMetadata": {
+            "$ref": "./examples/GetVmInstanceHybridIdentityMetadata.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VmInstanceHybridIdentityMetadata"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances/default/hybridIdentityMetadata": {
+      "get": {
+        "tags": [
+          "VmInstanceHybridIdentityMetadata"
+        ],
+        "operationId": "VirtualMachineInstanceHybridIdentityMetadata_List",
+        "summary": "Implements GET HybridIdentityMetadata in a vm.",
+        "description": "Returns the list of HybridIdentityMetadata of the given vm.",
+        "x-ms-examples": {
+          "HybridIdentityMetadataListByVm": {
+            "$ref": "./examples/HybridIdentityMetadata_ListByVmInstance.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VmInstanceHybridIdentityMetadataList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances/default/createCheckpoint": {
+      "post": {
+        "tags": [
+          "VirtualMachineInstances"
+        ],
+        "operationId": "VirtualMachineInstances_CreateCheckpoint",
+        "description": "Creates a checkpoint in virtual machine instance.",
+        "summary": "Implements the operation to creates a checkpoint in a virtual machine instance.",
+        "x-ms-examples": {
+          "CreateCheckpointVirtualMachine": {
+            "$ref": "./examples/CreateCheckpointVirtualMachineInstance.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Virtualmachine create checkpoint action payload.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineCreateCheckpoint"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances/default/deleteCheckpoint": {
+      "post": {
+        "tags": [
+          "VirtualMachineInstances"
+        ],
+        "operationId": "VirtualMachineInstances_DeleteCheckpoint",
+        "description": "Deletes a checkpoint in virtual machine instance.",
+        "summary": "Implements the operation to delete a checkpoint in a virtual machine instance.",
+        "x-ms-examples": {
+          "DeleteCheckpointVirtualMachine": {
+            "$ref": "./examples/DeleteCheckpointVirtualMachineInstance.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Virtualmachine delete checkpoint action payload.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineDeleteCheckpoint"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances/default/restoreCheckpoint": {
+      "post": {
+        "tags": [
+          "VirtualMachineInstances"
+        ],
+        "operationId": "VirtualMachineInstances_RestoreCheckpoint",
+        "description": "Restores to a checkpoint in virtual machine instance.",
+        "summary": "Implements the operation to restores to a checkpoint in a virtual machine instance.",
+        "x-ms-examples": {
+          "RestoreCheckpointVirtualMachine": {
+            "$ref": "./examples/RestoreCheckpointVirtualMachineInstance.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Virtualmachine restore checkpoint action payload.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineRestoreCheckpoint"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances/default/guestAgents/default": {
+      "put": {
+        "tags": [
+          "VMInstanceGuestAgents"
+        ],
+        "operationId": "VMInstanceGuestAgents_Create",
+        "description": "Create Or Update GuestAgent.",
+        "summary": "Implements GuestAgent PUT method.",
+        "x-ms-examples": {
+          "CreateGuestAgent": {
+            "$ref": "./examples/CreateVMInstanceGuestAgent.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/GuestAgent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GuestAgent"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/GuestAgent"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "tags": [
+          "VMInstanceGuestAgents"
+        ],
+        "operationId": "VMInstanceGuestAgents_Get",
+        "summary": "Gets GuestAgent.",
+        "description": "Implements GuestAgent GET method.",
+        "x-ms-examples": {
+          "GetGuestAgent": {
+            "$ref": "./examples/GetVMInstanceGuestAgent.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GuestAgent"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "VMInstanceGuestAgents"
+        ],
+        "operationId": "VMInstanceGuestAgents_Delete",
+        "summary": "Deletes an GuestAgent.",
+        "description": "Implements GuestAgent DELETE method.",
+        "x-ms-examples": {
+          "DeleteGuestAgent": {
+            "$ref": "./examples/DeleteVMInstanceGuestAgent.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances/default/guestAgents": {
+      "get": {
+        "tags": [
+          "VMInstanceGuestAgents"
+        ],
+        "operationId": "VMInstanceGuestAgents_List",
+        "summary": "Implements GET GuestAgent in a vm.",
+        "description": "Returns the list of GuestAgent of the given vm.",
+        "x-ms-examples": {
+          "GuestAgentListByVm": {
+            "$ref": "./examples/VMInstanceGuestAgent_ListByVm.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GuestAgentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -3849,6 +4642,68 @@
         }
       }
     },
+    "InfrastructureProfile": {
+      "type": "object",
+      "properties": {
+        "inventoryItemId": {
+          "description": "Gets or sets the inventory Item ID for the resource.",
+          "type": "string"
+        },
+        "vmmServerId": {
+          "type": "string",
+          "description": "ARM Id of the vmmServer resource in which this resource resides."
+        },
+        "cloudId": {
+          "type": "string",
+          "description": "ARM Id of the cloud resource to use for deploying the vm."
+        },
+        "templateId": {
+          "type": "string",
+          "description": "ARM Id of the template resource to use for deploying the vm."
+        },
+        "vmName": {
+          "type": "string",
+          "description": "VMName is the name of VM on the SCVMM server.",
+          "minLength": 1
+        },
+        "uuid": {
+          "type": "string",
+          "description": "Unique ID of the virtual machine."
+        },
+        "lastRestoredVMCheckpoint": {
+          "description": "Last restored checkpoint in the vm.",
+          "$ref": "#/definitions/Checkpoint",
+          "readOnly": true
+        },
+        "checkpoints": {
+          "description": "Checkpoints in the vm.",
+          "type": "array",
+          "items": {
+            "description": "Checkpoint properties",
+            "$ref": "#/definitions/Checkpoint",
+            "readOnly": true
+          },
+          "x-ms-identifiers": [
+            "checkpointID"
+          ]
+        },
+        "checkpointType": {
+          "type": "string",
+          "description": "Type of checkpoint supported for the vm."
+        },
+        "generation": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the generation for the vm."
+        },
+        "biosGuid": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Gets or sets the bios guid for the vm."
+        }
+      },
+      "description": "Specifies the vmmServer infrastructure specific settings for the virtual machine instance."
+    },
     "VirtualMachineProperties": {
       "description": "Defines the resource properties.",
       "type": "object",
@@ -3939,6 +4794,45 @@
         }
       }
     },
+    "VirtualMachineInstanceProperties": {
+      "description": "Defines the resource properties.",
+      "type": "object",
+      "properties": {
+        "availabilitySets": {
+          "$ref": "#/definitions/AvailabilitySetList"
+        },
+        "osProfile": {
+          "description": "OS properties.",
+          "$ref": "#/definitions/OsProfileForVMInstance"
+        },
+        "hardwareProfile": {
+          "description": "Hardware properties.",
+          "$ref": "#/definitions/HardwareProfile"
+        },
+        "networkProfile": {
+          "description": "Network properties.",
+          "$ref": "#/definitions/NetworkProfile"
+        },
+        "storageProfile": {
+          "description": "Storage properties.",
+          "$ref": "#/definitions/StorageProfile"
+        },
+        "infrastructureProfile": {
+          "$ref": "#/definitions/InfrastructureProfile",
+          "description": "Gets the infrastructure profile."
+        },
+        "powerState": {
+          "description": "Gets the power state of the virtual machine.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "OsType": {
       "description": "Defines the different types of VM guest operating systems.",
       "enum": [
@@ -3977,6 +4871,40 @@
         },
         "osName": {
           "description": "Gets or sets os name.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OsProfileForVMInstance": {
+      "description": "Defines the resource properties.",
+      "type": "object",
+      "properties": {
+        "adminPassword": {
+          "description": "Admin password of the virtual machine.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "x-ms-secret": true
+        },
+        "computerName": {
+          "description": "Gets or sets computer name.",
+          "type": "string"
+        },
+        "osType": {
+          "description": "Gets or sets the type of the os.",
+          "$ref": "#/definitions/OsType",
+          "readOnly": true
+        },
+        "osSku": {
+          "description": "Gets or sets os sku.",
+          "type": "string",
+          "readOnly": true
+        },
+        "osVersion": {
+          "description": "Gets os version.",
           "type": "string",
           "readOnly": true
         }
@@ -4541,6 +5469,32 @@
       ],
       "description": "The VirtualMachines resource definition."
     },
+    "VirtualMachineInstance": {
+      "description": "Define the virtualMachineInstance.",
+      "required": [
+        "properties",
+        "extendedLocation"
+      ],
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource",
+          "description": "The resource model definition for an Azure Resource Manager proxy resource. It will have everything other than location and tags."
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/VirtualMachineInstanceProperties"
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "Gets or sets the extended location."
+        }
+      }
+    },
     "VirtualMachineListResult": {
       "type": "object",
       "description": "List of VirtualMachines.",
@@ -4557,6 +5511,29 @@
           "description": "Url to follow for getting next page of resources."
         }
       }
+    },
+    "VirtualMachineInstanceListResult": {
+      "type": "object",
+      "description": "List of VirtualMachineInstances.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of VirtualMachineInstances.",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineInstance"
+          }
+        }
+      }
+    },
+    "InfrastructureProfileUpdate": {
+      "type": "object",
+      "properties": {
+        "checkpointType": {
+          "type": "string",
+          "description": "Type of checkpoint supported for the vm."
+        }
+      },
+      "description": "Specifies the vmmServer infrastructure specific settings for the virtual machine instance for update."
     },
     "VirtualMachineUpdateProperties": {
       "description": "Defines the resource properties.",
@@ -4580,6 +5557,28 @@
         }
       }
     },
+    "VirtualMachineInstanceUpdateProperties": {
+      "description": "Defines the resource properties.",
+      "type": "object",
+      "properties": {
+        "hardwareProfile": {
+          "$ref": "#/definitions/HardwareProfileUpdate"
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfileUpdate"
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/NetworkProfileUpdate"
+        },
+        "availabilitySets": {
+          "$ref": "#/definitions/AvailabilitySetList"
+        },
+        "infrastructureProfile": {
+          "$ref": "#/definitions/InfrastructureProfileUpdate",
+          "description": "Gets the infrastructure profile."
+        }
+      }
+    },
     "VirtualMachineUpdate": {
       "description": "Defines the virtualMachineUpdate.",
       "type": "object",
@@ -4597,6 +5596,17 @@
         "identity": {
           "$ref": "#/definitions/Identity",
           "description": "The identity of the resource."
+        }
+      }
+    },
+    "VirtualMachineInstanceUpdate": {
+      "description": "Defines the virtualMachineInstanceUpdate.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/VirtualMachineInstanceUpdateProperties"
         }
       }
     },
@@ -4989,6 +5999,11 @@
           "type": "string",
           "readOnly": true
         },
+        "osVersion": {
+          "description": "Gets os version.",
+          "type": "string",
+          "readOnly": true
+        },
         "powerState": {
           "description": "Gets the power state of the virtual machine.",
           "type": "string",
@@ -5004,6 +6019,18 @@
         "cloud": {
           "description": "Cloud inventory resource details where the VM is present.",
           "$ref": "#/definitions/InventoryItemDetails"
+        },
+        "biosGuid": {
+          "description": "Gets or sets the bios guid.",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "managedMachineResourceId": {
+          "description": "Gets the tracked resource id corresponding to the inventory resource.",
+          "type": "string",
+          "format": "arm-id",
+          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "VirtualMachine"
@@ -5114,6 +6141,67 @@
           "$ref": "#/definitions/Identity",
           "description": "The identity of the resource.",
           "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VmInstanceHybridIdentityMetadataList": {
+      "description": "List of HybridIdentityMetadata.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "Url to follow for getting next page of HybridIdentityMetadata.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of HybridIdentityMetadata",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VmInstanceHybridIdentityMetadata"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "VmInstanceHybridIdentityMetadata": {
+      "description": "Defines the HybridIdentityMetadata.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource",
+          "description": "The resource model definition for an Azure Resource Manager proxy resource. It will have everything other than required location and tags."
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/VmInstanceHybridIdentityMetadataProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "VmInstanceHybridIdentityMetadataProperties": {
+      "description": "Describes the properties of Hybrid Identity Metadata for a Virtual Machine.",
+      "type": "object",
+      "properties": {
+        "resourceUid": {
+          "description": "The unique identifier for the resource.",
+          "format": "uuid",
+          "type": "string"
+        },
+        "publicKey": {
+          "description": "Gets or sets the Public Key.",
+          "type": "string"
         },
         "provisioningState": {
           "description": "Gets or sets the provisioning state.",
@@ -5386,7 +6474,11 @@
           ],
           "x-ms-secret": true
         }
-      }
+      },
+      "required": [
+        "username",
+        "password"
+      ]
     },
     "HttpProxyConfiguration": {
       "description": "HTTP Proxy configuration for the VM.",
@@ -5618,6 +6710,15 @@
       "required": true,
       "type": "string",
       "description": "The API version to be used with the HTTP request (e.g. YYYY-MM-DD)."
+    },
+    "resourceUriParameter": {
+      "in": "path",
+      "name": "resourceUri",
+      "description": "The fully qualified Azure Resource manager identifier of the Hybrid Compute machine resource to be extended.",
+      "required": true,
+      "type": "string",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
     }
   }
 }
