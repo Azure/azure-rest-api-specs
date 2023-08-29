@@ -1108,6 +1108,7 @@
         },
         "summary": {
           "type": "string",
+          "x-nullable": true,
           "description": "Gets or sets the summary."
         },
         "value": {
@@ -1161,7 +1162,7 @@
       "properties": {
         "uri": {
           "type": "string",
-          "description": "Gets or sets the uri of the runbook content."
+          "description":  "Gets or sets the uri of content."
         },
         "contentHash": {
           "$ref": "#/definitions/ContentHash",
@@ -1302,7 +1303,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../common/v1/definitions.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "Definition of the runbook type."

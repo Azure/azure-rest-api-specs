@@ -399,7 +399,6 @@ These settings apply only when `--tag=package-2023-05-15-preview` is specified o
 
 ``` yaml $(tag) == 'package-2023-05-15-preview'
 input-file:
-- Microsoft.Automation/preview/2020-01-13-preview/privateEndpointConnection.json
 - Microsoft.Automation/preview/2020-01-13-preview/privateLinkResources.json
 - Microsoft.Automation/preview/2020-01-13-preview/dscNode.json
 - Microsoft.Automation/preview/2020-01-13-preview/dscCompilationJob.json
@@ -423,6 +422,7 @@ input-file:
 - Microsoft.Automation/preview/2023-05-15-preview/module.json
 - Microsoft.Automation/preview/2023-05-15-preview/operations.json
 - Microsoft.Automation/preview/2023-05-15-preview/package.json
+- Microsoft.Automation/preview/2023-05-15-preview/privateEndpointConnection.json
 - Microsoft.Automation/preview/2023-05-15-preview/python2package.json
 - Microsoft.Automation/preview/2023-05-15-preview/python3package.json
 - Microsoft.Automation/preview/2023-05-15-preview/runbook.json
