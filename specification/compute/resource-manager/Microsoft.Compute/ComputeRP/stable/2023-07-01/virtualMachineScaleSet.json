@@ -3492,77 +3492,77 @@
           }
         }
       }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/attachDetachDataDisks": {
-    "post": {
-      "tags": [
-        "VirtualMachineScaleSetVMs"
-      ],
-      "operationId": "VirtualMachineScaleSetVMs_AttachDetachDataDisks",
-      "description": "Attach and detach data disks to/from a virtual machine in a VM scale set.",
-      "parameters": [
-        {
-          "name": "resourceGroupName",
-          "in": "path",
-          "required": true,
-          "type": "string",
-          "description": "The name of the resource group."
-        },
-        {
-          "name": "vmScaleSetName",
-          "in": "path",
-          "required": true,
-          "type": "string",
-          "description": "The name of the VM scale set."
-        },
-        {
-          "name": "instanceId",
-          "in": "path",
-          "required": true,
-          "type": "string",
-          "description": "The instance ID of the virtual machine."
-        },
-        {
-          "name": "parameters",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "./computeRPCommon.json#/definitions/AttachDetachDataDisksRequest"
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/attachDetachDataDisks": {
+      "post": {
+        "tags": [
+          "VirtualMachineScaleSetVMs"
+        ],
+        "operationId": "VirtualMachineScaleSetVMs_AttachDetachDataDisks",
+        "description": "Attach and detach data disks to/from a virtual machine in a VM scale set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
           },
-          "description": "Parameters supplied to the attach and detach data disks operation on a Virtual Machine Scale Sets VM."
-        },
-        {
-          "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "OK"
-        },
-        "202": {
-          "description": "Accepted"
-        },
-        "default": {
-          "description": "Error response describing why the operation failed.",
-          "schema": {
-            "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The instance ID of the virtual machine."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./computeRPCommon.json#/definitions/AttachDetachDataDisksRequest"
+            },
+            "description": "Parameters supplied to the attach and detach data disks operation on a Virtual Machine Scale Sets VM."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
           }
-        }
-      },
-      "x-ms-long-running-operation": true,
-      "x-ms-long-running-operation-options": {
-        "final-state-via": "location"
-      },
-      "x-ms-examples": {
-        "VirtualMachineScaleSetVM_AttachDetachDataDisks_MaximumSet_Gen": {
-          "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetVM_AttachDetachDataDisks_MaximumSet_Gen.json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
         },
-        "VirtualMachineScaleSetVM_AttachDetachDataDisks_MinimumSet_Gen": {
-          "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetVM_AttachDetachDataDisks_MinimumSet_Gen.json"
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "VirtualMachineScaleSetVM_AttachDetachDataDisks_MaximumSet_Gen": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetVM_AttachDetachDataDisks_MaximumSet_Gen.json"
+          },
+          "VirtualMachineScaleSetVM_AttachDetachDataDisks_MinimumSet_Gen": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetVM_AttachDetachDataDisks_MinimumSet_Gen.json"
+          }
         }
       }
     }
