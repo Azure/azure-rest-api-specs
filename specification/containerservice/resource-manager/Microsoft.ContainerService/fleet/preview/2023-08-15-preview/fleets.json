@@ -50,6 +50,9 @@
     },
     {
       "name": "UpdateRuns"
+    },
+    {
+      "name": "FleetUpdateStrategies"
     }
   ],
   "paths": {
@@ -77,11 +80,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List the operations for the provider.": {
-            "$ref": "./examples/Operations_List.json"
           }
         },
         "x-ms-pageable": {
@@ -116,11 +114,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Lists the Fleet resources in a subscription.": {
-            "$ref": "./examples/Fleets_ListBySub.json"
           }
         },
         "x-ms-pageable": {
@@ -158,11 +151,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Lists the Fleet resources in a resource group.": {
-            "$ref": "./examples/Fleets_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -210,11 +198,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Gets a Fleet resource.": {
-            "$ref": "./examples/Fleets_Get.json"
           }
         }
       },
@@ -297,11 +280,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Creates a Fleet resource with a long running operation.": {
-            "$ref": "./examples/Fleets_CreateOrUpdate.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -379,11 +357,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Update a Fleet.": {
-            "$ref": "./examples/Fleets_PatchTags.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -452,11 +425,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Deletes a Fleet resource asynchronously with a long running operation.": {
-            "$ref": "./examples/Fleets_Delete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -504,11 +472,6 @@
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Lists the user credentials of a Fleet.": {
-            "$ref": "./examples/Fleets_ListCredentialsResult.json"
-          }
         }
       }
     },
@@ -552,11 +515,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Lists the members of a Fleet.": {
-            "$ref": "./examples/FleetMembers_ListByFleet.json"
           }
         },
         "x-ms-pageable": {
@@ -614,11 +572,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Gets a FleetMember resource.": {
-            "$ref": "./examples/FleetMembers_Get.json"
           }
         }
       },
@@ -711,11 +664,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Creates a FleetMember resource with a long running operation.": {
-            "$ref": "./examples/FleetMembers_Create.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -803,11 +751,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Updates a FleetMember resource synchronously.": {
-            "$ref": "./examples/FleetMembers_Update.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -886,11 +829,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Deletes a FleetMember resource asynchronously with a long running operation.": {
-            "$ref": "./examples/FleetMembers_Delete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -937,11 +875,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Lists the UpdateRun resources by fleet.": {
-            "$ref": "./examples/UpdateRuns_ListByFleet.json"
           }
         },
         "x-ms-pageable": {
@@ -999,11 +932,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Gets an UpdateRun resource.": {
-            "$ref": "./examples/UpdateRuns_Get.json"
           }
         }
       },
@@ -1096,11 +1024,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create an UpdateRun.": {
-            "$ref": "./examples/UpdateRuns_CreateOrUpdate.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -1177,11 +1100,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Delete an updateRun resource.": {
-            "$ref": "./examples/UpdateRuns_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1264,11 +1182,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Starts an UpdateRun.": {
-            "$ref": "./examples/UpdateRuns_Start.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1349,13 +1262,281 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Stops an UpdateRun.": {
-            "$ref": "./examples/UpdateRuns_Stop.json"
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/updateStrategies": {
+      "get": {
+        "operationId": "FleetUpdateStrategies_ListByFleet",
+        "tags": [
+          "FleetUpdateStrategies"
+        ],
+        "description": "List FleetUpdateStrategy resources by Fleet",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FleetUpdateStrategyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/updateStrategies/{updateStrategyName}": {
+      "get": {
+        "operationId": "FleetUpdateStrategies_Get",
+        "tags": [
+          "FleetUpdateStrategies"
+        ],
+        "description": "Get a FleetUpdateStrategy",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "updateStrategyName",
+            "in": "path",
+            "description": "The name of the UpdateStrategy resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FleetUpdateStrategy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "FleetUpdateStrategies_CreateOrUpdate",
+        "tags": [
+          "FleetUpdateStrategies"
+        ],
+        "description": "Create a FleetUpdateStrategy",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "The request should only proceed if no entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "updateStrategyName",
+            "in": "path",
+            "description": "The name of the UpdateStrategy resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FleetUpdateStrategy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'FleetUpdateStrategy' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FleetUpdateStrategy"
+            }
+          },
+          "201": {
+            "description": "Resource 'FleetUpdateStrategy' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FleetUpdateStrategy"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "FleetUpdateStrategies_Delete",
+        "tags": [
+          "FleetUpdateStrategies"
+        ],
+        "description": "Delete a FleetUpdateStrategy",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "updateStrategyName",
+            "in": "path",
+            "description": "The name of the UpdateStrategy resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
@@ -1771,6 +1952,117 @@
         ]
       }
     },
+    "FleetUpdateStrategy": {
+      "type": "object",
+      "description": "Defines a multi-stage process to perform update operations across members of a Fleet.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FleetUpdateStrategyProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "FleetUpdateStrategyListResult": {
+      "type": "object",
+      "description": "The response of a FleetUpdateStrategy list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FleetUpdateStrategy items on this page",
+          "items": {
+            "$ref": "#/definitions/FleetUpdateStrategy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "FleetUpdateStrategyProperties": {
+      "type": "object",
+      "description": "The properties of the UpdateStrategy.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/FleetUpdateStrategyProvisioningState",
+          "description": "The provisioning state of the UpdateStrategy resource.",
+          "readOnly": true
+        },
+        "strategy": {
+          "$ref": "#/definitions/UpdateRunStrategy",
+          "description": "Defines the update sequence of the clusters.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "strategy"
+      ]
+    },
+    "FleetUpdateStrategyProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the UpdateStrategy resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "FleetUpdateStrategyProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      }
+    },
+    "FleetUpdateStrategyResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an ARM resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ContainerService/fleets/updateStrategies"
+          }
+        ]
+      }
+    },
     "KubernetesVersion": {
       "type": "string"
     },
@@ -1954,7 +2246,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the Fleet member group to update. \nIt should match the name of an existing FleetMember group.\nA group can only appear once across all UpdateStages in the UpdateRun.",
+          "description": "Name of the group.\nIt must match a group name of an existing fleet member. ",
           "minLength": 1,
           "maxLength": 50,
           "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
@@ -1993,7 +2285,7 @@
     },
     "UpdateRun": {
       "type": "object",
-      "description": "An UpdateRun is a multi-stage process to perform update operations across members of a Fleet.",
+      "description": "A multi-stage process to perform update operations across members of a Fleet.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/UpdateRunProperties",
@@ -2045,6 +2337,14 @@
           "$ref": "#/definitions/UpdateRunProvisioningState",
           "description": "The provisioning state of the UpdateRun resource.",
           "readOnly": true
+        },
+        "updateStrategyId": {
+          "$ref": "#/definitions/FleetUpdateStrategyResourceId",
+          "description": "The resource id of the UpdateStrategy resource to reference.\n\nWhen creating a new run, there are three ways to define a strategy for the run:\n1. Define a new strategy in place: Set the \"strategy\" field.\n2. Use an existing strategy: Set the \"updateStrategyId\" field. (since v2023_07_15_preview)\n3. Use the default strategy to update all the members one by one: Leave both \"updateStrategyId\" and \"strategy\" unset. (since v2023_07_15_preview)\n\nSetting both \"updateStrategyId\" and \"strategy\" is invalid.\n\nUpdateRuns created by \"updateStrategyId\" snapshot the referenced UpdateStrategy at the time of creation and store it in the \"strategy\" field. \nSubsequent changes to the referenced UpdateStrategy resource do not propagate. \nUpdateRunStrategy changes can be made directly on the \"strategy\" field before launching the UpdateRun.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "strategy": {
           "$ref": "#/definitions/UpdateRunStrategy",
@@ -2123,11 +2423,11 @@
     },
     "UpdateRunStrategy": {
       "type": "object",
-      "description": "The UpdateRunStrategy configures the sequence of Stages and Groups in which the clusters will be updated.",
+      "description": "Defines the update sequence of the clusters via stages and groups.\n\nStages within a run are executed sequentially one after another.\nGroups within a stage are executed in parallel.\nMember clusters within a group are updated sequentially one after another.\n\nA valid strategy contains no duplicate groups within or across stages.",
       "properties": {
         "stages": {
           "type": "array",
-          "description": "The list of stages that compose this update run.",
+          "description": "The list of stages that compose this update run. Min size: 1.",
           "items": {
             "$ref": "#/definitions/UpdateStage"
           },
@@ -2142,7 +2442,7 @@
     },
     "UpdateStage": {
       "type": "object",
-      "description": "Contains the groups to be updated by an UpdateRun.\nUpdate order:\n- Sequential between stages: Stages run sequentially. The previous stage must complete before the next one starts.\n- Parallel within a stage: Groups within a stage run in parallel.\n- Sequential within a group: Clusters within a group are updated sequentially.",
+      "description": "Defines a stage which contains the groups to update and the steps to take (e.g., wait for a time period) before starting the next stage.",
       "properties": {
         "name": {
           "type": "string",
@@ -2153,7 +2453,7 @@
         },
         "groups": {
           "type": "array",
-          "description": "A list of group names that compose the stage.\nThe groups will be updated in parallel. Each group name can only appear once in the UpdateRun.",
+          "description": "Defines the groups to be executed in parallel in this stage. Duplicate groups are not allowed. Min size: 1.",
           "items": {
             "$ref": "#/definitions/UpdateGroup"
           },
