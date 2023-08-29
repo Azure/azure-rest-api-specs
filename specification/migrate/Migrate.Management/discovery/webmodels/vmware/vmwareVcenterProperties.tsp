@@ -1,0 +1,41 @@
+@doc("The properties of VMwareSiteResource")
+model VcenterProperties {
+  @doc("Gets or sets the run as account ID of the vCenter.")
+  runAsAccountId?: string;
+
+  @doc("Gets the errors.")
+  @visibility("read")
+  errors?: HealthErrorDetails[];
+
+  @doc("Gets the timestamp marking vCenter creation.")
+  @visibility("read")
+  createdTimestamp?: string;
+
+  @doc("Gets the timestamp marking last updated on the vCenter.")
+  @visibility("read")
+  updatedTimestamp?: string;
+
+  @doc("Gets or sets the FQDN/IPAddress of the vCenter.")
+  fqdn?: string;
+
+  @doc("Gets or sets the port of the vCenter.")
+  port?: string;
+
+  @doc("Gets the version of the vCenter.")
+  @visibility("read")
+  version?: string;
+
+  @doc("Gets the performance statistics enabled on the vCenter.")
+  @visibility("read")
+  perfStatisticsLevel?: string;
+
+  @doc("Gets the instance UUID of the vCenter.")
+  @visibility("read")
+  instanceUuid?: string;
+
+  @doc("Gets or sets the friendly name of the vCenter.")
+  friendlyName?: string;
+
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState;
+}

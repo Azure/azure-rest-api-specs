@@ -1,0 +1,328 @@
+using TypeSpec.Versioning;
+using OpenAPI;
+
+@versioned(Versions)
+@doc("Azure OffAzure Resource Provider management API.")
+namespace Microsoft.OffAzure;
+
+@doc("Value indicating whether the VM is highly available")
+@knownValues(HighAvailabilityValues)
+scalar HighAvailability extends string;
+
+@doc("Value indicating whether the VM is highly available")
+enum HighAvailabilityValues {
+  Unknown,
+  No,
+  Yes,}
+
+
+@doc("The properties of AddressResource")
+model HypervMachineProperties {
+  @added(Versions.v2022_10_27)
+  @doc("Gets the Information about Host Processor.")
+  @visibility("read")
+  hostProcessorInfo?: ProcessorInfo;
+  
+  @doc("On-premise Instance UUID of the machine.")
+  @visibility("read")
+  instanceUuid?: string;
+
+  @doc("Host FQDN/IPAddress.")
+  @visibility("read")
+  hostFqdn?: string;
+
+  @doc("Host ARM ID.")
+  @visibility("read") 
+  hostId?: string;
+
+  @doc("Generation of the virtual machine.")
+  @visibility("read")
+  generation?: int32;
+
+  @doc("VM version.")
+  @visibility("read")
+  version?: string;
+
+  @doc("Value indicating whether the VM is highly available.")
+  @visibility("read")
+  highAvailability?: HighAvailability;
+
+  @doc("Cluster FQDN/IPAddress.")
+  @visibility("read")
+  clusterFqdn?: string;
+
+  @doc("Cluster ARM ID.")
+  @visibility("read")
+  clusterId?: string;
+
+  @doc("Max memory of the virtual machine in MB.")
+  @visibility("read")
+  maxMemoryMb?: int32;
+
+  @doc("Value indicating whether dynamic memory is enabled for the VM.")
+  @visibility("read")
+  isDynamicMemoryEnabled?: boolean;
+
+  @extension("x-ms-identifiers", [])
+  @doc("Disks attached to the machine.")
+  @visibility("read")
+  disks?: HypervDisk[];
+
+  @extension("x-ms-identifiers", [])
+  @doc("Network adapters attached to the machine.")
+  @visibility("read")
+  networkAdapters?: HypervNetworkAdapter[];
+
+  @doc("""
+Management server type captured as a string representation of the
+           
+{Microsoft.Azure.FDS.WebRole.HyperVMachineBase.HyperVMachineBaseProperties.ManagementServerType}
+enumeration.
+""")
+  @visibility("read")
+  managementServerType?: string;
+
+  @doc("Gets or sets the SecureBootTemplateId setting of the VM.")
+  @visibility("read")
+  secureBootTemplateId?: string;
+
+  @doc("Gets or sets a value indicating whether Secure boot is enabled for the VM.")
+  @visibility("read")
+  secureBootEnabled?: boolean;
+
+  @doc("Gets or sets the SecureBootTemplateId setting of the VM.")
+  @visibility("read")
+  secureBootTemplate?: string;
+
+  @doc("""
+Gets or sets a value indicating whether trusted platform module is enabled on
+the VM.
+""")
+  @visibility("read")
+  tpmEnabled?: boolean;
+
+  @doc("Gets or sets a value indicating whether key storage device is enabled on the VM.")
+  @visibility("read")
+  ksdEnabled?: boolean;
+
+  @doc("Gets or sets a value indicating whether shielding is enabled for the VM.")
+  @visibility("read")
+  shieldingRequested?: boolean;
+
+  @doc("Gets or sets a value indicating whether data protection is requested for a VM.")
+  @visibility("read")
+  dataProtectionRequested?: boolean;
+
+  @doc("""
+Gets or sets a value indicating whether encryption of state and migration
+traffic is enabled for the VM.
+""")
+  @visibility("read")
+  encryptStateAndVmMigrationTraffic?: boolean;
+
+  @doc("""
+Gets or sets a value indicating whether VM virtualization based security is
+enabled for the VM.
+""")
+  @visibility("read")
+  virtualizationBasedSecurityOptOut?: boolean;
+
+  @doc("Gets the Machine power status.")
+  @visibility("read")
+  powerStatus?: string;
+
+  @doc("Gets the VM FQDN.")
+  @visibility("read")
+  vmFqdn?: string;
+
+  @doc("Gets the Root location of the VM configuration file.")
+  @visibility("read")
+  vmConfigurationFileLocation?: string;
+
+  @doc("Gets or sets the firmware.")
+  firmware?: string;
+
+  @doc("Operating System Details extracted from the guest             bu executing script inside the guest VM. ")
+  @visibility("read")
+  guestOsDetails?: GuestOsDetails;
+
+  @doc("Number of applications installed in the guest VM.")
+  @visibility("read")
+  numberOfApplications?: int32;
+
+  @doc("""
+The last time at which the Guest Details was discovered
+            or the
+error while discovering guest details based discovery
+            of the
+machine.
+""")
+  @visibility("read")
+  guestDetailsDiscoveryTimestamp?: utcDateTime;
+
+  @doc("""
+Whether Refresh Fabric Layout Guest Details has been completed once.
+         
+  Portal will show discovery in progress, if this value is true.
+""")
+  @visibility("read")
+  isGuestDetailsDiscoveryInProgress?: boolean;
+
+  @doc("""
+Gets or sets if dependency mapping feature is enabled or not
+            for
+the VM.
+""")
+  @visibility("read")
+  dependencyMapping?: string;
+
+  @doc("Gets or sets when dependency mapping collection is last started.")
+  @visibility("read")
+  dependencyMappingStartTime?: utcDateTime;
+
+  @doc("Gets or sets when dependency mapping collection was last disabled.")
+  @visibility("read")
+  dependencyMappingEndTime?: string;
+
+  @doc("Gets or sets the run as account ID of the machine.")
+  runAsAccountId?: string;
+
+  @doc("Gets the appliance names.")
+  @visibility("read")
+  applianceNames?: string[];
+
+  @doc("Errors for machine.")
+  @visibility("read")
+  errors?: HealthErrorDetails[];
+
+  @doc("Gets the data related to application discovery.")
+  @visibility("read")
+  applicationDiscovery?: ApplicationDiscovery;
+
+  @doc("Gets the data related to dependency map discovery.")
+  @visibility("read")
+  dependencyMapDiscovery?: DependencyMapDiscovery;
+
+  @doc("Gets the data related to static discovery.")
+  @visibility("read")
+  staticDiscovery?: StaticDiscovery;
+
+  @doc("Gets the data related to SQL discovery.")
+  @visibility("read")
+  sqlDiscovery?: SqlDiscovery;
+
+  @doc("Gets the data related to Web application discovery.")
+  @visibility("read")
+  webAppDiscovery?: WebAppDiscovery;
+
+  @doc("Gets the data related to Oracle discovery.")
+  @visibility("read")
+  oracleDiscovery?: OracleDiscovery;
+
+  @doc("Gets the data related to SpringBoot discovery.")
+  @visibility("read")
+  springBootDiscovery?: SpringBootDiscovery;
+
+  @doc("Apps And Roles of the Server.")
+  @visibility("read")
+  appsAndRoles?: AppsAndRoles;
+
+  @doc("""
+Gets or sets the Number of Processor Cores 
+            allocated for the
+machine.
+""")
+  numberOfProcessorCore?: int32;
+
+  @doc("Gets or sets the allocated Memory in MB.")
+  allocatedMemoryInMb?: float64;
+
+  @doc("Gets or sets the Operating System Details installed on the machine.")
+  operatingSystemDetails?: OperatingSystem;
+
+  @doc("Gets or sets the Machine BIOS serial number.")
+  biosSerialNumber?: string;
+
+  @doc("Gets or sets the BIOS GUID.")
+  biosGuid?: string;
+
+  @doc("Gets the Display name of the machine.")
+  @visibility("read")
+  displayName?: string;
+
+  @doc("Value indicating whether VM is deleted.")
+  @visibility("read")
+  isDeleted?: boolean;
+
+  @doc("Gets the marking machine creation.")
+  @visibility("read")
+  createdTimestamp?: string;
+
+  @doc("Gets the timestamp marking last updated on the machine.")
+  @visibility("read")
+  updatedTimestamp?: string;
+
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState;
+}
+
+@doc("Second level object represented in responses as part of Machine REST resource.")
+model HypervNetworkAdapter {
+  @doc("Network Id.")
+  @visibility("read")
+  networkId?: string;
+
+  @doc("Name of the VM subnet within the virtual network the NIC is attached to.")
+  @visibility("read")
+  subnetName?: string;
+
+  @doc("Static IP address.")
+  @visibility("read")
+  staticIpAddress?: string;
+
+  @doc("Mac address of the NIC.")
+  @visibility("read")
+  nicType?: string;
+
+  @doc("Gets or sets the NIC Id.")
+  nicId?: string;
+
+  @doc("Gets or sets Mac address of the NIC.")
+  macAddress?: string;
+
+  @doc("Gets IP addresses for the machine.")
+  @visibility("read")
+  ipAddressList?: string[];
+
+  @doc("Gets or sets Network Name.")
+  networkName?: string;
+
+  @doc("Gets or sets Type of the IP address.")
+  ipAddressType?: string;
+}
+
+@doc("Second level object returned as part of Machine REST resource.")
+model HypervDisk {
+  @doc("Id of the disk.")
+  @visibility("read")
+  instanceId?: string;
+
+  @doc("VHD Id of the disk.")
+  @visibility("read")
+  vhdId?: string;
+
+  @doc("Gets or sets Bytes allocated for the disk.")
+  maxSizeInBytes?: int64;
+
+  @doc("Gets or sets Name of the disk.")
+  name?: string;
+
+  @doc("Gets or sets Type of the disk.")
+  diskType?: string;
+
+  @doc("Gets or sets LUN of the disk.")
+  lun?: int32;
+
+  @doc("Gets or sets Path of the disk.")
+  path?: string;
+}
