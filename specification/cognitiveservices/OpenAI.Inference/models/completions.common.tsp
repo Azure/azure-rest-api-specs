@@ -121,6 +121,12 @@ model ContentFilterResults {
   """)
   @projectedName("json", "self_harm")
   selfHarm?: ContentFilterResult;
+
+  @doc("""
+  Describes an error returned if the content filtering system is
+  down or otherwise unable to complete the operation in time.
+  """)
+  error?: Foundations.Error;
 }
 
 @added(ServiceApiVersions.v2023_06_01_Preview)
