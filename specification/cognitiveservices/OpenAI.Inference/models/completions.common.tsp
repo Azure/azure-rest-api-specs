@@ -1,4 +1,5 @@
 import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Versioning;
 
