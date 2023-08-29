@@ -1,6 +1,6 @@
 # CI Fix Guide
 
-Short link: https://aka.ms/ci-fix
+Short link: https://aka.ms/azsdk/ci-fix
 
 This page provides detailed instructions on how to diagnose, reproduce, fix and get help on various [automated validation tooling] failures on your [Azure REST API specs PR].
 
@@ -109,7 +109,11 @@ To reproduce LintDiff failures locally, see [CONTRIBUTING.md / How to locally re
 
 ## Avocado
 
-Run avocado locally:
+### Get help fixing Avocado validation failures
+
+Refer to [Avocado README](https://github.com/Azure/avocado/blob/master/README.md) for detailed description of validations and how-to-fix guidance.
+
+### Run avocado locally
 
 ```
 npm install -g @azure/avocado
@@ -123,8 +127,6 @@ Note: When running in Swagger PR pipeline, Avocado only report errors with file 
 
 - Run all specs: Clone the repo `azure/azure-rest-api-specs` and run "avocado" in folder `azure/azure-rest-api-specs`.
 - Run single service specs: create a folder `specification`. and move your service specs folder in `specification`. run "avocado"
-
-Refer to [Avocado Readme](https://github.com/Azure/avocado/blob/master/README.md) for detailed description of validations and how-to-fix guidance.
 
 ## API Doc Preview
 
