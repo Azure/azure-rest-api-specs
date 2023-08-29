@@ -57,8 +57,8 @@ model UpdateRunProperties {
 
     When creating a new run, there are three ways to define a strategy for the run:
     1. Define a new strategy in place: Set the "strategy" field.
-    2. Use an existing strategy: Set the "updateStrategyId" field. (since v2023_07_15_preview)
-    3. Use the default strategy to update all the members one by one: Leave both "updateStrategyId" and "strategy" unset. (since v2023_07_15_preview)
+    2. Use an existing strategy: Set the "updateStrategyId" field. (since v2023_08_15_preview)
+    3. Use the default strategy to update all the members one by one: Leave both "updateStrategyId" and "strategy" unset. (since v2023_08_15_preview)
 
     Setting both "updateStrategyId" and "strategy" is invalid.
 
