@@ -399,19 +399,18 @@ These settings apply only when `--tag=package-2023-05-15-preview` is specified o
 
 ``` yaml $(tag) == 'package-2023-05-15-preview'
 input-file:
-- Microsoft.Automation/preview/2020-01-13-preview/privateLinkResources.json
-- Microsoft.Automation/preview/2020-01-13-preview/dscNode.json
-- Microsoft.Automation/preview/2020-01-13-preview/dscCompilationJob.json
 - Microsoft.Automation/preview/2020-01-13-preview/dscNodeCounts.json
 - Microsoft.Automation/preview/2020-01-13-preview/watcher.json
 - Microsoft.Automation/stable/2019-06-01/softwareUpdateConfiguration.json
-- Microsoft.Automation/stable/2015-10-31/webhook.json
 - Microsoft.Automation/stable/2022-01-31/deletedAutomationAccount.json
+- Microsoft.Automation/preview/2023-05-15-preview/privateLinkResources.json
+- Microsoft.Automation/preview/2023-05-15-preview/dscNode.json
 - Microsoft.Automation/preview/2023-05-15-preview/account.json
 - Microsoft.Automation/preview/2023-05-15-preview/certificate.json
 - Microsoft.Automation/preview/2023-05-15-preview/connection.json
 - Microsoft.Automation/preview/2023-05-15-preview/connectionType.json
 - Microsoft.Automation/preview/2023-05-15-preview/credential.json
+- Microsoft.Automation/preview/2023-05-15-preview/dscCompilationJob.json
 - Microsoft.Automation/preview/2023-05-15-preview/dscConfiguration.json
 - Microsoft.Automation/preview/2023-05-15-preview/dscNodeConfiguration.json
 - Microsoft.Automation/preview/2023-05-15-preview/hybridRunbookWorker.json
@@ -434,6 +433,7 @@ input-file:
 - Microsoft.Automation/preview/2023-05-15-preview/sourceControlSyncJob.json
 - Microsoft.Automation/preview/2023-05-15-preview/sourceControlSyncJobStreams.json
 - Microsoft.Automation/preview/2023-05-15-preview/variable.json
+- Microsoft.Automation/stable/2023-05-15-preview/webhook.json
 ```
 
 ---
