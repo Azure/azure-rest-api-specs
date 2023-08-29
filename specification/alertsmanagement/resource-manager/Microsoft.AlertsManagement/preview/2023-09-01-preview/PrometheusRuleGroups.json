@@ -464,7 +464,10 @@
           "enum": [
             "StaticThreshold",
             "DynamicThreshold"
-          ]
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
         },
         "dynamicThresholdConfiguration": {
           "$ref": "#/definitions/DynamicThresholdConfiguration",
@@ -509,8 +512,15 @@
       "description": "Specifies the Prometheus alert rule configuration.",
       "properties": {
         "autoResolved": {
-          "type": "boolean",
-          "description": "Enable alert auto-resolution."
+          "type": "string",
+          "description": "Enable alert auto-resolution.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
         },
         "timeToResolve": {
           "type": "string",
