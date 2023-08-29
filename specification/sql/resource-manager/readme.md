@@ -81,6 +81,7 @@ input-file:
   - Microsoft.Sql/preview/2023-05-01-preview/JobAgents.json
   - Microsoft.Sql/preview/2023-05-01-preview/JobCredentials.json
   - Microsoft.Sql/preview/2023-05-01-preview/JobExecutions.json
+  - Microsoft.Sql/preview/2023-05-01-preview/JobPrivateEndpoints.json
   - Microsoft.Sql/preview/2023-05-01-preview/JobStepExecutions.json
   - Microsoft.Sql/preview/2023-05-01-preview/JobSteps.json
   - Microsoft.Sql/preview/2023-05-01-preview/JobTargetExecutions.json
@@ -1177,6 +1178,7 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/JobAgents.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/JobCredentials.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/JobExecutions.json
+- ./Microsoft.Sql/preview/2023-05-01-preview/JobPrivateEndpoints.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/Jobs.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/JobStepExecutions.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/JobSteps.json
