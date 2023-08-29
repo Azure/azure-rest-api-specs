@@ -423,8 +423,8 @@ input-file:
 - Microsoft.Automation/preview/2023-05-15-preview/module.json
 - Microsoft.Automation/preview/2023-05-15-preview/operations.json
 - Microsoft.Automation/preview/2023-05-15-preview/package.json
-- Microsoft.Automation/stable/2023-05-15-preview/python2package.json
-- Microsoft.Automation/stable/2023-05-15-preview/python3package.json
+- Microsoft.Automation/preview/2023-05-15-preview/python2package.json
+- Microsoft.Automation/preview/2023-05-15-preview/python3package.json
 - Microsoft.Automation/preview/2023-05-15-preview/runbook.json
 - Microsoft.Automation/preview/2023-05-15-preview/runtimeEnvironment.json
 - Microsoft.Automation/preview/2023-05-15-preview/schedule.json
