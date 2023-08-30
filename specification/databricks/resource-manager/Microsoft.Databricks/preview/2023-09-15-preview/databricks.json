@@ -1018,35 +1018,14 @@
       "description": "Status of settings related to the Enhanced Security and Compliance Add-On.",
       "properties": {
         "automaticClusterUpdate": {
-          "type": "string",
-          "description": "Status of automated cluster updates feature.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "AutomaticClusterUpdate"
-          }
+          "type": "object",
+          "description": "Feature that allows for automatic restart of compute resources",
+          "$ref": "#/definitions/AutomaticClusterUpdateDefinition"
         },
         "complianceSecurityProfile": {
-          "type": "string",
-          "description": "Status of Compliance Security Profile feature.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "ComplianceSecurityProfile"
-          }
-        },
-        "complianceStandards": {
-          "description": "Compliance standards associated with the workspace.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ComplianceStandardDefinition"
-          }
+          "type": "object",
+          "description": "Feature that helps customers meet the applicable security requirements of some compliance standards.",
+          "$ref": "#/definitions/ComplianceSecurityProfileDefinition"
         },
         "enhancedSecurityMonitoring": {
           "type": "string",
@@ -1058,6 +1037,114 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "EnhancedSecurityMonitoring"
+          }
+        }
+      }
+    },
+    "AutomaticClusterUpdateDefinition": {
+      "type": "object",
+      "description": "Feature that allows for automatic restart of compute resources",
+      "properties": {
+        "maintenanceWindow": {
+          "type": "object",
+          "description": "Schedule for automatic restart of compute resources",
+          "$ref": "#/definitions/MaintenanceWindowDefinition"
+        },
+        "value": {
+          "type": "string",
+          "description": "Status of automatic cluster updates",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "AutomaticClusterUpdateValue"
+          }
+        }
+      }
+    },
+    "MaintenanceWindowDefinition": {
+      "type": "object",
+      "description": "Schedule for automatic restart of compute resources",
+      "properties": {
+        "weekDayFrequency": {
+          "type": "string",
+          "description": "Frequency of execution of cluster updates",
+          "enum": [
+            "None",
+            "FirstOfMonth",
+            "SecondOfMonth",
+            "ThirdOfMonth",
+            "FourthOfMonth",
+            "FirstAndThirdOfMonth",
+            "SecondAndFourthOfMonth"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "WeekDayFrequency"
+          }
+        },
+        "weekDay": {
+          "type": "string",
+          "description": "Day of the week for automatic cluster updates to occur",
+          "enum": [
+            "None",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "WeekDay"
+          }
+        },
+        "windowStartTime": {
+          "type": "object",
+          "description": "Configuration of time of day when automatic cluster updates should occur",
+          "$ref": "#/definitions/WindowStartTimeDefinition"
+        }
+      }
+    },
+    "WindowStartTimeDefinition": {
+      "type": "object",
+      "description": "Configuration of time of day when automatic cluster updates should occur",
+      "properties": {
+        "hours": {
+          "type": "integer",
+          "description": "Hour of the day when automatic cluster updates should occur"
+        },
+        "minutes": {
+          "type": "integer",
+          "description": "The minute when automatic cluster updates should occur"
+        }
+      }
+    },
+    "ComplianceSecurityProfileDefinition": {
+      "type": "object",
+      "description": "Feature that helps customers meet the applicable security requirements of some compliance standards.",
+      "properties": {
+        "complianceStandards": {
+          "description": "Compliance standards associated with the workspace.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComplianceStandardDefinition"
+          }
+        },
+        "value": {
+          "type": "string",
+          "description": "Status of Compliance Security Profile feature",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ComplianceSecurityProfileValue"
           }
         }
       }

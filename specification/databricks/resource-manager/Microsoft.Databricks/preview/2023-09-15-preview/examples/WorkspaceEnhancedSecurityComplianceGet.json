@@ -18,12 +18,24 @@
         "properties": {
           "managedResourceGroupId": "/subscriptions/subid/resourceGroups/myManagedRG",
           "enhancedSecurityCompliance": {
-            "automaticClusterUpdate": "Enabled",
-            "complianceSecurityProfile": "Enabled",
-            "complianceStandards": [
-              "PCI",
-              "HIPAA"
-            ],
+            "automaticClusterUpdate": {
+              "value": "Enabled",
+              "maintenanceWindow": {
+                "weekDayFrequency": "FirstOfMonth",
+                "weekDay": "Wednesday",
+                "startTimeWindow": {
+                  "hours": 2,
+                  "minutes": 0
+                }
+              }
+            },
+            "complianceSecurityProfile": {
+              "value": "Enabled",
+              "complianceStandards": [
+                "PCI",
+                "HIPAA"
+              ]
+            },
             "enhancedSecurityMonitoring": "Enabled"
           },
           "parameters": null,
