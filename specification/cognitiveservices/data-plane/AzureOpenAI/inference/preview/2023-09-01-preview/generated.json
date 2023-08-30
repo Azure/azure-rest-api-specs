@@ -61,7 +61,7 @@
   "paths": {
     "/deployments/{deploymentId}//deployments/{deployment-id}/audio/transcriptions": {
       "post": {
-        "operationId": "GetTranscriptions",
+        "operationId": "GetAudioTranscriptions",
         "description": "Transcribes audio into the input language.",
         "parameters": [
           {
@@ -79,7 +79,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TranscriptionsOptions"
+              "$ref": "#/definitions/AudioTranscriptionsOptions"
             }
           }
         ],
@@ -87,7 +87,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Transcription"
+              "$ref": "#/definitions/AudioTranscription"
             }
           },
           "default": {
@@ -107,8 +107,8 @@
     },
     "/deployments/{deploymentId}//deployments/{deployment-id}/audio/translations": {
       "post": {
-        "operationId": "GetTranslation",
-        "description": "Transcribes audio into the input language.",
+        "operationId": "GetAudioTranslations",
+        "description": "Transcribes and translates input audio into English text.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -125,7 +125,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TranslationOptions"
+              "$ref": "#/definitions/AudioTranslationOptions"
             }
           }
         ],
@@ -133,7 +133,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Translation"
+              "$ref": "#/definitions/AudioTranslation"
             }
           },
           "default": {
@@ -422,6 +422,223 @@
     }
   },
   "definitions": {
+    "AudioTranscription": {
+      "type": "object",
+      "description": "Transcription response.",
+      "properties": {
+        "task": {
+          "type": "string",
+          "description": "Transcription task."
+        },
+        "text": {
+          "type": "string",
+          "description": "Transcribed text."
+        },
+        "language": {
+          "type": "string",
+          "description": "Language."
+        },
+        "duration": {
+          "type": "string",
+          "format": "duration",
+          "description": "Duration."
+        },
+        "segments": {
+          "type": "array",
+          "description": "Segments.",
+          "items": {
+            "$ref": "#/definitions/AudioTranscriptionSegment"
+          }
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "AudioTranscriptionFormat": {
+      "type": "string",
+      "description": "Defines the format of the output.",
+      "enum": [
+        "json",
+        "text",
+        "srt",
+        "verbose_json",
+        "vtt"
+      ],
+      "x-ms-enum": {
+        "name": "AudioTranscriptionFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "json",
+            "value": "json",
+            "description": "JSON format."
+          },
+          {
+            "name": "text",
+            "value": "text",
+            "description": "Text format."
+          },
+          {
+            "name": "srt",
+            "value": "srt",
+            "description": "SRT format."
+          },
+          {
+            "name": "verbose_json",
+            "value": "verbose_json",
+            "description": "Verbose JSON format."
+          },
+          {
+            "name": "vtt",
+            "value": "vtt",
+            "description": "VTT format."
+          }
+        ]
+      }
+    },
+    "AudioTranscriptionSegment": {
+      "type": "object",
+      "description": "Transcription segment.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Segment identifier."
+        },
+        "start": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Segment start offset."
+        },
+        "end": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Segment end offset."
+        },
+        "text": {
+          "type": "string",
+          "description": "Segment text."
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "Temperature."
+        },
+        "avg_logprob": {
+          "type": "number",
+          "format": "float",
+          "description": "Average log probability.",
+          "x-ms-client-name": "averageLogProb"
+        },
+        "compression_ratio": {
+          "type": "number",
+          "format": "float",
+          "description": "Compression ratio.",
+          "x-ms-client-name": "compressionRatio"
+        },
+        "no_speech_prob": {
+          "type": "number",
+          "format": "float",
+          "description": "Probability of 'no speech'.",
+          "x-ms-client-name": "noSpeechProb"
+        }
+      }
+    },
+    "AudioTranscriptionsOptions": {
+      "type": "object",
+      "description": "Transcription request.",
+      "properties": {
+        "file": {
+          "type": "string",
+          "description": "The audio file object to transcribe."
+        },
+        "prompt": {
+          "type": "string",
+          "description": "An optional text to guide the model's style or continue a previous audio segment. The prompt should match the audio language."
+        },
+        "response_format": {
+          "$ref": "#/definitions/AudioTranscriptionFormat",
+          "description": "The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.",
+          "default": "json",
+          "x-ms-client-name": "responseFormat"
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
+          "default": 0
+        },
+        "language": {
+          "type": "string",
+          "description": "The language of the input audio. Supplying the input language in ISO-639-1 format will improve accuracy and latency."
+        }
+      },
+      "required": [
+        "file"
+      ]
+    },
+    "AudioTranslation": {
+      "type": "object",
+      "description": "Translation response.",
+      "properties": {
+        "task": {
+          "type": "string",
+          "description": "Translation task."
+        },
+        "text": {
+          "type": "string",
+          "description": "Translated text."
+        },
+        "language": {
+          "type": "string",
+          "description": "Language."
+        },
+        "duration": {
+          "type": "string",
+          "format": "duration",
+          "description": "Duration."
+        },
+        "segments": {
+          "type": "array",
+          "description": "Transcription segments.",
+          "items": {
+            "$ref": "#/definitions/AudioTranscriptionSegment"
+          }
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "AudioTranslationOptions": {
+      "type": "object",
+      "description": "Translation request.",
+      "properties": {
+        "file": {
+          "type": "string",
+          "description": "The audio file to translate."
+        },
+        "prompt": {
+          "type": "string",
+          "description": "An optional text to guide the model's style or continue a previous audio segment. The prompt should be in English."
+        },
+        "response_format": {
+          "$ref": "#/definitions/AudioTranscriptionFormat",
+          "description": "The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.",
+          "default": "json",
+          "x-ms-client-name": "responseFormat"
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
+          "default": 0
+        }
+      },
+      "required": [
+        "file"
+      ]
+    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -1478,241 +1695,6 @@
       },
       "required": [
         "prompt_index"
-      ]
-    },
-    "Transcription": {
-      "type": "object",
-      "description": "Transcription response.",
-      "properties": {
-        "task": {
-          "type": "string",
-          "description": "Transcription task."
-        },
-        "text": {
-          "type": "string",
-          "description": "Transcribed text."
-        },
-        "language": {
-          "type": "string",
-          "description": "Language."
-        },
-        "duration": {
-          "type": "integer",
-          "format": "uint32",
-          "description": "Duration."
-        },
-        "segments": {
-          "type": "array",
-          "description": "Segments.",
-          "items": {
-            "$ref": "#/definitions/TranscriptionSegment"
-          }
-        }
-      },
-      "required": [
-        "task",
-        "text",
-        "language",
-        "duration",
-        "segments"
-      ]
-    },
-    "TranscriptionFormat": {
-      "type": "string",
-      "description": "Transcription format.",
-      "enum": [
-        "json",
-        "text",
-        "srt",
-        "verbose_json",
-        "vtt"
-      ],
-      "x-ms-enum": {
-        "name": "TranscriptionFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "json",
-            "value": "json",
-            "description": "JSON format."
-          },
-          {
-            "name": "text",
-            "value": "text",
-            "description": "Text format."
-          },
-          {
-            "name": "srt",
-            "value": "srt",
-            "description": "SRT format."
-          },
-          {
-            "name": "verbose_json",
-            "value": "verbose_json",
-            "description": "Verbose JSON format."
-          },
-          {
-            "name": "vtt",
-            "value": "vtt",
-            "description": "VTT format."
-          }
-        ]
-      }
-    },
-    "TranscriptionSegment": {
-      "type": "object",
-      "description": "Transcription segment.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Segment identifier."
-        },
-        "start": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Segment start offset."
-        },
-        "end": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Segment end offset."
-        },
-        "text": {
-          "type": "string",
-          "description": "Segment text."
-        },
-        "temperature": {
-          "type": "number",
-          "format": "float",
-          "description": "Temperature."
-        },
-        "avg_logprob": {
-          "type": "number",
-          "format": "float",
-          "description": "Average log probability.",
-          "x-ms-client-name": "averageLogProb"
-        },
-        "compression_ratio": {
-          "type": "number",
-          "format": "float",
-          "description": "Compression ratio.",
-          "x-ms-client-name": "compressionRatio"
-        },
-        "no_speech_prob": {
-          "type": "number",
-          "format": "float",
-          "description": "Probability of 'no speech'.",
-          "x-ms-client-name": "noSpeechProb"
-        }
-      },
-      "required": [
-        "id",
-        "start",
-        "end",
-        "text",
-        "temperature",
-        "avg_logprob",
-        "compression_ratio",
-        "no_speech_prob"
-      ]
-    },
-    "TranscriptionsOptions": {
-      "type": "object",
-      "description": "Transcription request.",
-      "properties": {
-        "file": {
-          "type": "string",
-          "description": "The audio file object to transcribe. Binary data."
-        },
-        "prompt": {
-          "type": "string",
-          "description": "An optional text to guide the model's style or continue a previous audio segment. The prompt should match the audio language."
-        },
-        "response_format": {
-          "$ref": "#/definitions/TranscriptionFormat",
-          "description": "The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.",
-          "default": "json",
-          "x-ms-client-name": "responseFormat"
-        },
-        "temperature": {
-          "type": "number",
-          "format": "float",
-          "description": "The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. If set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
-          "default": 0
-        },
-        "language": {
-          "type": "string",
-          "description": "The language of the input audio. Supplying the input language in ISO-639-1 format will improve accuracy and latency."
-        }
-      },
-      "required": [
-        "file"
-      ]
-    },
-    "Translation": {
-      "type": "object",
-      "description": "Translation response.",
-      "properties": {
-        "task": {
-          "type": "string",
-          "description": "Translation task."
-        },
-        "text": {
-          "type": "string",
-          "description": "Translated text."
-        },
-        "language": {
-          "type": "string",
-          "description": "Language."
-        },
-        "duration": {
-          "type": "integer",
-          "format": "uint32",
-          "description": "Duration."
-        },
-        "segments": {
-          "type": "array",
-          "description": "Transcription segments.",
-          "items": {
-            "$ref": "#/definitions/TranscriptionSegment"
-          }
-        }
-      },
-      "required": [
-        "task",
-        "text",
-        "language",
-        "duration",
-        "segments"
-      ]
-    },
-    "TranslationOptions": {
-      "type": "object",
-      "description": "Translation request.",
-      "properties": {
-        "file": {
-          "type": "string",
-          "description": "The audio file to translate. Binary data."
-        },
-        "prompt": {
-          "type": "string",
-          "description": "An optional text to guide the model's style or continue a previous audio segment. The prompt should be in English."
-        },
-        "response_format": {
-          "$ref": "#/definitions/TranscriptionFormat",
-          "description": "The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.",
-          "default": "json",
-          "x-ms-client-name": "responseFormat"
-        },
-        "temperature": {
-          "type": "number",
-          "format": "float",
-          "description": "The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. If set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
-          "default": 0
-        }
-      },
-      "required": [
-        "file"
       ]
     }
   },
