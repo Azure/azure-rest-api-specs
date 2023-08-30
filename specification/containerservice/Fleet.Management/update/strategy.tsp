@@ -22,32 +22,33 @@ namespace Microsoft.ContainerService;
 @added(Versions.v2023_08_15_preview)
 @doc("Defines a multi-stage process to perform update operations across members of a Fleet.")
 model FleetUpdateStrategy is ProxyResource<FleetUpdateStrategyProperties> {
-    @doc("The name of the UpdateStrategy resource.")
-    @key("updateStrategyName")
-    @segment("updateStrategies")
-    @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
-    @minLength(1)
-    @maxLength(50)
-    @path
-    @visibility("create", "read")
-    name: string;
-    ...EntityTag;
+  @doc("The name of the UpdateStrategy resource.")
+  @key("updateStrategyName")
+  @segment("updateStrategies")
+  @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
+  @minLength(1)
+  @maxLength(50)
+  @path
+  @visibility("create", "read")
+  name: string;
+
+  ...EntityTag;
 }
 
 @doc("The provisioning state of the UpdateStrategy resource.")
 enum FleetUpdateStrategyProvisioningState {
-    ...ResourceProvisioningState
+  ...ResourceProvisioningState,
 }
 
 @doc("The properties of the UpdateStrategy.")
 model FleetUpdateStrategyProperties {
-    @visibility("read")
-    @doc("The provisioning state of the UpdateStrategy resource.")
-    provisioningState?: FleetUpdateStrategyProvisioningState;
+  @visibility("read")
+  @doc("The provisioning state of the UpdateStrategy resource.")
+  provisioningState?: FleetUpdateStrategyProvisioningState;
 
-    @visibility("create", "read", "update")
-    @doc("Defines the update sequence of the clusters.")
-    strategy: UpdateRunStrategy;
+  @visibility("create", "read", "update")
+  @doc("Defines the update sequence of the clusters.")
+  strategy: UpdateRunStrategy;
 }
 
 @added(Versions.v2023_08_15_preview)
@@ -56,14 +57,14 @@ interface FleetUpdateStrategies {
   get is ArmResourceRead<FleetUpdateStrategy>;
 
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
-  FleetUpdateStrategy,
+    FleetUpdateStrategy,
     BaseParameters<FleetUpdateStrategy> &
       IfMatchParameters<FleetUpdateStrategy> &
       IfNoneMatchParameters<FleetUpdateStrategy>
   >;
 
   delete is FleetArmResourceDeleteAsync<
-  FleetUpdateStrategy,
+    FleetUpdateStrategy,
     BaseParameters<FleetUpdateStrategy> & IfMatchParameters<FleetUpdateStrategy>
   >;
 
