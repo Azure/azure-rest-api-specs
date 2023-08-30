@@ -4560,6 +4560,12 @@
               "$ref": "#/definitions/DataBoundaryDefinition"
             }
           },
+          "201": {
+            "description": "Accepted - Returns the data boundary definition with provisioningState == 'Accepted'.",
+            "schema": {
+              "$ref": "#/definitions/DataBoundaryDefinition"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -6881,6 +6887,7 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "Denotes the state of provisioning."
         }
       }
