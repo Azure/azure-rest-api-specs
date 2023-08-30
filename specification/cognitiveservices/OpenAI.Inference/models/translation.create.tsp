@@ -1,7 +1,7 @@
 import "@typespec/rest";
 import "@typespec/http";
 
-import "./transcription.create.tsp";
+import "./whisper.common.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
