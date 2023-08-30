@@ -50,13 +50,13 @@
           "200": {
             "description": "Operation details.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -74,10 +74,10 @@
     "/{scope}/providers/Microsoft.Help/checkNameAvailability": {
       "post": {
         "tags": [
-          "diagnostics"
+          "checkNameAvailability"
         ],
-        "description": "This API is used to check the uniqueness of a resource name used for a diagnostic check.",
-        "operationId": "Diagnostics_CheckNameAvailability",
+        "description": "This API is used to check the uniqueness of a resource name used for a diagnostic or solutions",
+        "operationId": "CheckNameAvailability_Post",
         "parameters": [
           {
             "$ref": "#/parameters/ScopeParameter"
@@ -90,7 +90,7 @@
             "name": "CheckNameAvailabilityRequest",
             "description": "The required parameters for availability check.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityRequest"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/CheckNameAvailabilityRequest"
             }
           }
         ],
@@ -104,7 +104,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -164,7 +164,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -201,7 +201,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -217,7 +217,7 @@
         "tags": [
           "discoverySolutions"
         ],
-        "description": "Solutions Discovery is the initial point of entry within Help API, which helps you identify the relevant solutions for your Azure issue.<br/><br/> You can discover solutions using resourceUri OR resourceUri + problemClassificationId.<br/><br/>We will do our best in returning relevant diagnostics for your Azure issue.<br/><br/> Get the problemClassificationId(s) using this [reference](https://learn.microsoft.com/rest/api/support/problem-classifications/list?tabs=HTTP).<br/><br/> <b>Note: </b> ‘requiredParameterSets’ from Solutions Discovery API response must be passed via ‘additionalParameters’ as an input to Diagnostics API.",
+        "description": "Solutions Discovery is the initial point of entry within Help API, which helps you identify the relevant solutions for your Azure issue.<br/><br/> You can discover solutions using resourceUri + ProblemClassificationId (Note: ProblemClassificationId is mandatory filter.).<br/><br/>We will do our best in returning relevant diagnostics and solutions for your Azure issue.<br/><br/> Get the problemClassificationId(s) using this [reference](https://learn.microsoft.com/rest/api/support/problem-classifications/list?tabs=HTTP).<br/><br/> <b>Note: </b> ‘requiredParameterSets’ from Solutions Discovery API response must be passed via ‘additionalParameters’ as an input to Diagnostics API.",
         "operationId": "DiscoverySolution_List",
         "parameters": [
           {
@@ -243,7 +243,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -251,8 +251,394 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List DiscoverySolutions for a KeyVault resource": {
-            "$ref": "./examples/ListDiscoverySolutionsForKeyVaultResource.json"
+          "List DiscoverySolutions at resource scope": {
+            "$ref": "./examples/ListDiscoverySolutionsAtResourceScope.json"
+          },
+          "List DiscoverySolutions at subscription scope": {
+            "$ref": "./examples/ListDiscoverySolutionsAtSubscriptionScope.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Help/solutions/{solutionResourceName}": {
+      "put": {
+        "tags": [
+          "solutions"
+        ],
+        "description": "Create solution API",
+        "operationId": "Solution_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/SolutionResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "solutionRequestBody",
+            "description": "The required request body for this solution resource creation.",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SolutionResource"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful Create solution invocation (may contain errors).",
+            "schema": {
+              "$ref": "#/definitions/SolutionResource"
+            }
+          },
+          "200": {
+            "description": "Successful Update solution invocation (may contain errors).",
+            "schema": {
+              "$ref": "#/definitions/SolutionResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Solution_Create": {
+            "$ref": "./examples/Solution_Create.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "solutions"
+        ],
+        "description": "Get solution execution result API.",
+        "operationId": "Solution_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/SolutionResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful fetched solution result.",
+            "schema": {
+              "$ref": "#/definitions/SolutionResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Solution_Get": {
+            "$ref": "./examples/Solution_Get.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "solutions"
+        ],
+        "description": "Update solution API",
+        "operationId": "Solution_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/SolutionResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "solutionPatchRequestBody",
+            "description": "The required request body for updating a solution resource.",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SolutionPatchRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Successful updated solution resource.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/SolutionResource"
+            }
+          },
+          "200": {
+            "description": "Successful updated solution resource.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/SolutionResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Solution_Update": {
+            "$ref": "./examples/Solution_Update.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Help/troubleshooters/{troubleshooterName}": {
+      "put": {
+        "tags": [
+          "troubleshooter"
+        ],
+        "description": "Create Troubleshooter API",
+        "operationId": "Troubleshooters_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/TroubleshooterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "createTroubleshooterRequestBody",
+            "description": "The required request body for this Troubleshooter resource creation.",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TroubleshooterResource"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful Troubleshooter create invocation (may contain errors).",
+            "schema": {
+              "$ref": "#/definitions/TroubleshooterResource"
+            }
+          },
+          "200": {
+            "description": "Successful Troubleshooter update invocation (may contain errors).",
+            "schema": {
+              "$ref": "#/definitions/TroubleshooterResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Troubleshooters_Create": {
+            "$ref": "./examples/Troubleshooter_Create.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "troubleshooter"
+        ],
+        "description": "Get Troubleshooter result API.",
+        "operationId": "Troubleshooters_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/TroubleshooterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful fetched Troubleshooter instance.",
+            "schema": {
+              "$ref": "#/definitions/TroubleshooterResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Troubleshooters_Get": {
+            "$ref": "./examples/Troubleshooter_Get.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Help/troubleshooters/{troubleshooterName}/continue": {
+      "post": {
+        "tags": [
+          "troubleshooter"
+        ],
+        "description": "Continue Troubleshooter API",
+        "operationId": "Troubleshooters_Continue",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/TroubleshooterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "continueRequestBody",
+            "description": "The required request body for going to next step in Troubleshooter resource.",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ContinueRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully Continued to next step",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Troubleshooter_Continue": {
+            "$ref": "./examples/Troubleshooter_Continue.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Help/troubleshooters/{troubleshooterName}/end": {
+      "post": {
+        "tags": [
+          "troubleshooter"
+        ],
+        "description": "End Troubleshooter API",
+        "operationId": "Troubleshooters_End",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/TroubleshooterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully ended the Troubleshooter instance",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Troubleshooters_End": {
+            "$ref": "./examples/Troubleshooter_End.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Help/troubleshooters/{troubleshooterName}/restart": {
+      "post": {
+        "tags": [
+          "troubleshooter"
+        ],
+        "description": "Restart Troubleshooter Instance",
+        "operationId": "Troubleshooters_Restart",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/TroubleshooterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully restarted troubleshooter instance.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/RestartTroubleshooterResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Troubleshooters_Restart": {
+            "$ref": "./examples/Troubleshooter_Restart.json"
           }
         }
       }
@@ -307,7 +693,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -348,7 +734,7 @@
             "Canceled"
           ],
           "x-ms-enum": {
-            "name": "provisioningState",
+            "name": "DiagnosticProvisioningState",
             "modelAsString": true,
             "values": [
               {
@@ -444,8 +830,901 @@
         ]
       }
     },
+    "Error": {
+      "description": "Error definition.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Service specific error type which serves as additional context for the error herein.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "An array of additional nested error response info objects, as described by this contract.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": [
+            "type",
+            "message"
+          ]
+        }
+      }
+    },
+    "DiscoveryResponse": {
+      "description": "Discovery response.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of metadata.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SolutionMetadataResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of solution metadata.",
+          "type": "string"
+        }
+      }
+    },
+    "SolutionMetadataResource": {
+      "description": "Metadata resource",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/Solutions",
+          "description": "Solution metadata Resource properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "Solutions": {
+      "description": "List of solutions",
+      "type": "object",
+      "properties": {
+        "solutions": {
+          "description": "List of metadata.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SolutionMetadataProperties"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SolutionMetadataProperties": {
+      "description": "Metadata Properties",
+      "type": "object",
+      "properties": {
+        "solutionId": {
+          "description": "Solution Id.",
+          "type": "string"
+        },
+        "solutionType": {
+          "$ref": "#/definitions/SolutionType"
+        },
+        "description": {
+          "description": "A detailed description of solution.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredInputs": {
+          "description": "Required parameters for invoking this particular solution.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SolutionType": {
+      "description": "Solution Type.",
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "Diagnostics",
+        "Solutions"
+      ],
+      "x-ms-enum": {
+        "name": "SolutionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Diagnostics",
+            "description": "Diagnostics resource type."
+          },
+          {
+            "value": "Solutions",
+            "description": "Solutions resource type."
+          }
+        ]
+      }
+    },
+    "TriggerCriterion": {
+      "description": "Solution request trigger criterion. SolutionId/ProblemClassificationId is the only supported trigger type for Solution PUT request. ReplacementKey is the only supported trigger type for Solution PATCH request.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Trigger criterion name.",
+          "type": "string",
+          "enum": [
+            "SolutionId",
+            "ProblemClassificationId",
+            "ReplacementKey"
+          ],
+          "x-ms-enum": {
+            "name": "name",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "description": "Trigger criterion value.",
+          "type": "string"
+        }
+      }
+    },
+    "SolutionPatchRequestBody": {
+      "description": "Solution response.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SolutionResourceProperties"
+        }
+      }
+    },
+    "SolutionResource": {
+      "description": "Solution response.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "description": "Full resource uri of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Type of resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/SolutionResourceProperties"
+        }
+      }
+    },
+    "SolutionResourceProperties": {
+      "description": "Solution result",
+      "type": "object",
+      "properties": {
+        "triggerCriteria": {
+          "description": "Solution request trigger criteria",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TriggerCriterion"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "parameters": {
+          "description": "Client input parameters to run Solution",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "solutionId": {
+          "description": "Solution Id to identify single solution.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Status of solution provisioning.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "SolutionProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "title": {
+          "description": "The title.",
+          "type": "string"
+        },
+        "content": {
+          "description": "The HTML content that needs to be rendered and shown to customer.",
+          "type": "string"
+        },
+        "replacementMaps": {
+          "$ref": "#/definitions/ReplacementMaps"
+        },
+        "sections": {
+          "description": "List of section object.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Section"
+          },
+          "x-ms-identifiers": [
+            "title"
+          ]
+        }
+      }
+    },
+    "Section": {
+      "description": "Part of the solution and are dividers in the solution rendering.",
+      "type": "object",
+      "properties": {
+        "title": {
+          "description": "Solution sections title.",
+          "type": "string"
+        },
+        "content": {
+          "description": "Solution sections content.",
+          "type": "string"
+        },
+        "replacementMaps": {
+          "$ref": "#/definitions/ReplacementMaps"
+        }
+      }
+    },
+    "ReplacementMaps": {
+      "description": "Solution replacement maps.",
+      "type": "object",
+      "properties": {
+        "webResults": {
+          "description": "Solution AzureKB results",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebResult"
+          },
+          "x-ms-identifiers": []
+        },
+        "diagnostics": {
+          "description": "Solution diagnostics results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SolutionsDiagnostic"
+          },
+          "x-ms-identifiers": [
+            "solutionId"
+          ]
+        },
+        "troubleshooters": {
+          "description": "Solutions Troubleshooters",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SolutionsTroubleshooters"
+          },
+          "x-ms-identifiers": [
+            "solutionId"
+          ]
+        },
+        "metricsBasedCharts": {
+          "description": "Solution metrics based charts",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricsBasedChart"
+          },
+          "x-ms-identifiers": []
+        },
+        "videos": {
+          "description": "Video solutions, which have the power to engage the customer by stimulating their senses",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Video"
+          },
+          "x-ms-identifiers": []
+        },
+        "videoGroups": {
+          "description": "Group of Videos",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VideoGroup"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "WebResult": {
+      "description": "AzureKB web result",
+      "type": "object",
+      "properties": {
+        "replacementKey": {
+          "description": "Place holder used in HTML Content replace control with the content",
+          "type": "string"
+        },
+        "searchResults": {
+          "description": "AzureKB search results",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchResult"
+          },
+          "x-ms-identifiers": [
+            "solutionId"
+          ]
+        }
+      }
+    },
+    "SearchResult": {
+      "description": "Details of an AzureKB search result.",
+      "type": "object",
+      "properties": {
+        "solutionId": {
+          "description": "Unique id of the result.",
+          "type": "string"
+        },
+        "content": {
+          "description": "Content of the search result.",
+          "type": "string"
+        },
+        "title": {
+          "description": "Title of the search result.",
+          "type": "string"
+        },
+        "confidence": {
+          "description": "Confidence of the search result.",
+          "type": "string",
+          "enum": [
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "x-ms-enum": {
+            "name": "confidence",
+            "modelAsString": true
+          }
+        },
+        "source": {
+          "description": "Source of the search result.",
+          "type": "string"
+        },
+        "resultType": {
+          "description": "Result type of the search result.",
+          "type": "string",
+          "enum": [
+            "Community",
+            "Documentation"
+          ],
+          "x-ms-enum": {
+            "name": "resultType",
+            "modelAsString": true
+          }
+        },
+        "rank": {
+          "description": "rank of the search result",
+          "type": "integer",
+          "format": "int32"
+        },
+        "link": {
+          "description": "Link to the document.",
+          "type": "string"
+        }
+      }
+    },
+    "SolutionsDiagnostic": {
+      "description": "Solutions Diagnostic",
+      "type": "object",
+      "properties": {
+        "solutionId": {
+          "description": "Solution Id to identify single Solutions Diagnostic",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "statusDetails": {
+          "description": "Details of the status",
+          "type": "string"
+        },
+        "replacementKey": {
+          "description": "Place holder used in HTML Content replace control with the content",
+          "type": "string"
+        },
+        "requiredParameters": {
+          "description": "Required parameters of this item",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "insights": {
+          "description": "Diagnostic insights",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Insight"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SolutionsTroubleshooters": {
+      "description": "Troubleshooters in Solutions",
+      "type": "object",
+      "properties": {
+        "solutionId": {
+          "description": "Solution Id to identify single Solutions Troubleshooter",
+          "type": "string"
+        },
+        "title": {
+          "description": "Troubleshooter title",
+          "type": "string"
+        },
+        "summary": {
+          "description": "Troubleshooter summary",
+          "type": "string"
+        }
+      }
+    },
+    "Status": {
+      "description": "The status of the resource.",
+      "type": "string",
+      "enum": [
+        "Failed",
+        "MissingInputs",
+        "Running",
+        "Succeeded",
+        "Timeout"
+      ],
+      "x-ms-enum": {
+        "name": "status",
+        "modelAsString": true
+      }
+    },
+    "MetricsBasedChart": {
+      "description": "Solutions metrics based chart",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Chart name",
+          "type": "string"
+        },
+        "aggregationType": {
+          "description": "Allowed values are Sum, Avg, Count, Min, Max. Default is Sum",
+          "type": "string",
+          "enum": [
+            "Sum",
+            "Avg",
+            "Count",
+            "Min",
+            "Max"
+          ],
+          "x-ms-enum": {
+            "name": "aggregationType",
+            "modelAsString": true
+          }
+        },
+        "timeSpanDuration": {
+          "description": "Time span duration",
+          "type": "string"
+        },
+        "title": {
+          "description": "Chart title",
+          "type": "string"
+        },
+        "filterGroup": {
+          "$ref": "#/definitions/FilterGroup"
+        },
+        "replacementKey": {
+          "description": "Place holder used in HTML Content replace control with the content",
+          "type": "string"
+        }
+      }
+    },
+    "FilterGroup": {
+      "description": "Filter group",
+      "type": "object",
+      "properties": {
+        "filter": {
+          "description": "List of filters",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Filter"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Filter": {
+      "description": "Filter criterion",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Filter name",
+          "type": "string"
+        },
+        "values": {
+          "description": "Filter values",
+          "type": "string"
+        },
+        "operator": {
+          "description": "Filter operator",
+          "type": "string"
+        }
+      }
+    },
+    "Video": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/VideoGroupVideo"
+        }
+      ],
+      "description": "Video detail",
+      "type": "object",
+      "properties": {
+        "replacementKey": {
+          "description": "Place holder used in HTML Content replace control with the insight content",
+          "type": "string"
+        }
+      }
+    },
+    "VideoGroup": {
+      "description": "Video group detail",
+      "type": "object",
+      "properties": {
+        "videos": {
+          "description": "List of videos will be shown to customers",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VideoGroupVideo"
+          },
+          "x-ms-identifiers": []
+        },
+        "replacementKey": {
+          "description": "Place holder used in HTML Content replace control with the insight content",
+          "type": "string"
+        }
+      }
+    },
+    "VideoGroupVideo": {
+      "description": "VideoGroup video detail",
+      "type": "object",
+      "properties": {
+        "src": {
+          "description": "Link to the video",
+          "type": "string"
+        },
+        "title": {
+          "description": "Title of the video",
+          "type": "string"
+        }
+      }
+    },
+    "ContinueRequestBody": {
+      "description": "Troubleshooter ContinueRequest body.",
+      "type": "object",
+      "properties": {
+        "stepId": {
+          "description": "Unique id of the result.",
+          "type": "string"
+        },
+        "responses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TroubleshooterResponse"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "RestartTroubleshooterResponse": {
+      "description": "Troubleshooter restart response",
+      "type": "object",
+      "properties": {
+        "troubleshooterResourceName": {
+          "description": "Updated TroubleshooterResource Name .",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TroubleshooterResource": {
+      "description": "Troubleshooter response.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TroubleshooterInstanceProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "TroubleshooterInstanceProperties": {
+      "description": "Troubleshooter Instance properties.",
+      "type": "object",
+      "properties": {
+        "solutionId": {
+          "description": "Solution Id to identify single troubleshooter.",
+          "type": "string"
+        },
+        "parameters": {
+          "description": "Client input parameters to run Troubleshooter Resource",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "description": "Status of troubleshooter provisioning.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Running",
+            "AutoContinue"
+          ],
+          "x-ms-enum": {
+            "name": "TroubleshooterProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "required": [
+            "solutionId",
+            "parameters"
+          ]
+        },
+        "steps": {
+          "description": "List of step object.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Step"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      }
+    },
+    "Step": {
+      "description": "Troubleshooter step",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique step id.",
+          "type": "string"
+        },
+        "title": {
+          "description": "Step title.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Step description.",
+          "type": "string"
+        },
+        "executionStatus": {
+          "description": "Status of Troubleshooter Step execution.",
+          "type": "string",
+          "enum": [
+            "Success",
+            "Running",
+            "Failed",
+            "Warning"
+          ],
+          "x-ms-enum": {
+            "name": "executionStatus",
+            "modelAsString": true
+          }
+        },
+        "executionStatusDescription": {
+          "description": "This field has more detailed status description of the execution status.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of Troubleshooting step.",
+          "type": "string",
+          "enum": [
+            "Decision",
+            "Solution",
+            "Insight",
+            "AutomatedCheck"
+          ],
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true
+          }
+        },
+        "isLastStep": {
+          "description": "is this last step of the workflow.",
+          "type": "boolean"
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StepInput"
+          },
+          "x-ms-identifiers": [
+            "questionId"
+          ]
+        },
+        "automatedCheckResults": {
+          "$ref": "#/definitions/AutomatedCheckResult"
+        },
+        "insights": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Insight"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail"
+        }
+      }
+    },
+    "AutomatedCheckResult": {
+      "description": "Only for AutomatedStep type",
+      "type": "object",
+      "properties": {
+        "result": {
+          "description": "Insight Article Content",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of Result.",
+          "type": "string",
+          "enum": [
+            "Success",
+            "Warning",
+            "Error",
+            "Information"
+          ],
+          "x-ms-enum": {
+            "name": "automatedCheckResultType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "StepInput": {
+      "description": "Details of step input.",
+      "type": "object",
+      "properties": {
+        "questionId": {
+          "description": "Use Index as QuestionId.",
+          "type": "string"
+        },
+        "questionType": {
+          "description": "Text Input. Will be a single line input.",
+          "type": "string"
+        },
+        "questionContent": {
+          "description": "User question content.",
+          "type": "string"
+        },
+        "questionContentType": {
+          "description": "Default is Text.",
+          "type": "string",
+          "enum": [
+            "Text",
+            "Html",
+            "Markdown"
+          ],
+          "x-ms-enum": {
+            "name": "questionContentType,",
+            "modelAsString": true
+          }
+        },
+        "responseHint": {
+          "description": "Place holder text for response hints.",
+          "type": "string"
+        },
+        "recommendedOption": {
+          "description": "Result of Automate step.",
+          "type": "string"
+        },
+        "selectedOptionValue": {
+          "description": "Text of response that was selected.",
+          "type": "string"
+        },
+        "responseValidationProperties": {
+          "$ref": "#/definitions/ResponseValidationProperties"
+        },
+        "responseOptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResponseOption"
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
+        }
+      }
+    },
+    "ResponseValidationProperties": {
+      "description": "Troubleshooter step input response validation properties",
+      "type": "object",
+      "properties": {
+        "regex": {
+          "description": "Regex used for the input validation.",
+          "type": "string"
+        },
+        "isRequired": {
+          "description": "Default True",
+          "type": "boolean"
+        },
+        "validationErrorMessage": {
+          "description": "Validation Error Message.",
+          "type": "string"
+        },
+        "maxLength": {
+          "description": "Max text input (open Ended Text).",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "ResponseOption": {
+      "description": "The status of the resource.",
+      "type": "object",
+      "properties": {
+        "key": {
+          "description": "Unique string.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Option description",
+          "type": "string"
+        }
+      }
+    },
+    "TroubleshooterResponse": {
+      "description": "User Response for Troubleshooter continue request",
+      "type": "object",
+      "properties": {
+        "questionId": {
+          "description": "id of the question.",
+          "type": "string"
+        },
+        "questionType": {
+          "description": "Text Input. Will be a single line input.",
+          "type": "string"
+        },
+        "responseOption": {
+          "description": "Response key for SingleInput. For Multi-line test/open ended question it is free form text",
+          "type": "string"
+        }
+      }
+    },
     "Insight": {
-      "description": "Detailed insights(s) obtained via the invocation of an insight diagnostic troubleshooter.",
+      "description": "Detailed insights(s) obtained via the invocation of an insight diagnostic",
       "type": "object",
       "properties": {
         "id": {
@@ -488,105 +1767,20 @@
           }
         }
       }
-    },
-    "Error": {
-      "description": "Error definition.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Service specific error type which serves as additional context for the error herein.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "Description of the error.",
-          "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "An array of additional nested error response info objects, as described by this contract.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": [
-            "type",
-            "message"
-          ]
-        }
-      }
-    },
-    "DiscoveryResponse": {
-      "description": "Discovery response.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of solution metadata.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SolutionMetadataResource"
-          }
-        },
-        "nextLink": {
-          "description": "The link used to get the next page of solution metadata.",
-          "type": "string"
-        }
-      }
-    },
-    "SolutionMetadataResource": {
-      "description": "Solution Metadata resource",
-      "type": "object",
-      "x-ms-azure-resource": true,
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SolutionMetadataProperties",
-          "description": "Solution metadata Resource properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "SolutionMetadataProperties": {
-      "description": "Diagnostic solution metadata.",
-      "type": "object",
-      "properties": {
-        "solutionId": {
-          "description": "Solution Id.",
-          "type": "string"
-        },
-        "solutionType": {
-          "description": "Solution Type.",
-          "type": "string"
-        },
-        "description": {
-          "description": "A detailed description of solution.",
-          "type": "string"
-        },
-        "requiredParameterSets": {
-          "description": "Required parameters for invoking this particular solution.",
-          "type": "array",
-          "items": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "x-ms-identifiers": []
-          },
-          "x-ms-identifiers": []
-        }
-      }
     }
   },
   "parameters": {
+    "SolutionResourceNameParameter": {
+      "name": "solutionResourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Solution resource Name.",
+      "x-ms-parameter-location": "method",
+      "minLength": 1,
+      "maxLength": 100,
+      "pattern": "^[A-Za-z0-9-+@()_]+$"
+    },
     "ScopeParameter": {
       "name": "scope",
       "in": "path",
@@ -617,7 +1811,7 @@
     },
     "FilterParameter": {
       "name": "$filter",
-      "description": "Can be used to filter solutionIds by 'ProblemClassificationId'. The filter supports only 'and' and 'eq' operators. Example: $filter=ProblemClassificationId eq '1ddda5b4-cf6c-4d4f-91ad-bc38ab0e811e' and ProblemClassificationId eq '0a9673c2-7af6-4e19-90d3-4ee2461076d9'.",
+      "description": "'ProblemClassificationId' or 'Id' is a mandatory filter to get solutions ids. It also supports optional 'ResourceType' and 'SolutionType' filters. The filter supports only 'and', 'or' and 'eq' operators. Example: $filter=ProblemClassificationId eq '1ddda5b4-cf6c-4d4f-91ad-bc38ab0e811e'",
       "in": "query",
       "required": false,
       "type": "string",
@@ -626,11 +1820,31 @@
     },
     "SkipTokenParameter": {
       "name": "$skiptoken",
-      "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+      "description": "Skiptoken is only used if a previous operation returned a partial result.",
       "in": "query",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "TroubleshooterNameParameter": {
+      "name": "troubleshooterName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Troubleshooter resource Name.",
+      "x-ms-parameter-location": "method",
+      "minLength": 1,
+      "maxLength": 100,
+      "pattern": "([A-Za-z0-9]+(-[A-Za-z0-9]+)+)"
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The Azure subscription ID.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
     }
   }
 }
