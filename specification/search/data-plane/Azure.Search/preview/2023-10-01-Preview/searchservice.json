@@ -8950,6 +8950,18 @@
           "format": "int32",
           "x-nullable": true,
           "description": "The desired maximum page length. Default is 10000."
+        },
+        "pageOverlapLength": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true,
+          "description": "Only applicable when textSplitMode is set to 'pages'. If specified, n+1th chunk will start with this number of characters/tokens from the end of the nth chunk."
+        },
+        "maximumPagesToTake": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true,
+          "description": "Only applicable when textSplitMode is set to 'pages'. If specified, the SplitSkill will discontinue splitting after processing the first 'maximumPagesToTake' pages, in order to improve performance when only a few initial pages are needed from each document."
         }
       },
       "externalDocs": {
