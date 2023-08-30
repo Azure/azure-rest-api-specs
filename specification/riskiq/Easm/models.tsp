@@ -18,11 +18,6 @@ model PageResultBodyFields<TResultFields, Context = TraitContext.List> {
   };
 }
 
-alias CommonListTrait = QueryParametersTrait<{
-  ...FilterQueryParameter;
-  ...SkipQueryParameter;
-  ...MaxPageSizeQueryParameter;
-}>;
 alias AssetsListTrait = {
   ...PageResultBodyFields<{
     @doc("The total number of items available in the full result set.")
@@ -68,6 +63,39 @@ alias TasksListTrait = {
     ...OrderByParameter;
     ...SkipQueryParameter;
     ...MaxPageSizeQueryParameter;
+  }>;
+};
+alias DiscoGroupsListTrait = {
+  ...PageResultBodyFields<{
+    @doc("The total number of items available in the full result set.")
+    totalElements?: int64;
+  }>;
+  ...QueryParametersTrait<{
+    ...FilterQueryParameter;
+    ...SkipQueryParameter;
+    ...MaxPageSizeQueryParameter;
+  }>;
+};
+alias DiscoTemplatesListTrait = {
+  ...PageResultBodyFields<{
+    @doc("The total number of items available in the full result set.")
+    totalElements?: int64;
+  }>;
+  ...QueryParametersTrait<{
+    ...FilterQueryParameter;
+    ...SkipQueryParameter;
+    ...MaxPageSizeQueryParameter
+  }>;
+};
+alias SavedFiltersListTrait = {
+  ...PageResultBodyFields<{
+    @doc("The total number of items available in the full result set.")
+    totalElements?: int64;
+  }>;
+  ...QueryParametersTrait<{
+    ...FilterQueryParameter;
+    ...SkipQueryParameter;
+    ...MaxPageSizeQueryParameter
   }>;
 };
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"

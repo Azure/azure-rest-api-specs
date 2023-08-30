@@ -68,7 +68,7 @@ interface DataConnections {
 @doc("Provides access to discovery resources.")
 interface DiscoveryGroups {
   @doc("Retrieve a list of discovery group for the provided search parameters.")
-  listDiscoGroup is Operations.ResourceList<DiscoGroup, CommonListTrait>;
+  listDiscoGroup is Operations.ResourceList<DiscoGroup, DiscoGroupsListTrait>;
   @doc("Validate a discovery group with a given groupName.")
   @action("validate")
   validateDiscoGroup is Operations.ResourceCollectionAction<
@@ -103,7 +103,7 @@ interface DiscoveryGroups {
 @doc("Provides access to disco template resources.")
 interface DiscoveryTemplates {
   @doc("Retrieve a list of disco templates for the provided search parameters.")
-  listDiscoTemplate is Operations.ResourceList<DiscoTemplate, CommonListTrait>;
+  listDiscoTemplate is Operations.ResourceList<DiscoTemplate, DiscoTemplatesListTrait>;
   @doc("Retrieve a disco template with a given templateId.")
   getDiscoTemplate is Operations.ResourceRead<DiscoTemplate>;
 }
@@ -138,7 +138,7 @@ interface Reports {
 @doc("Provides access to saved filter resources.")
 interface SavedFilters {
   @doc("Retrieve a list of saved filters for the provided search parameters.")
-  listSavedFilter is Operations.ResourceList<SavedFilter, CommonListTrait>;
+  listSavedFilter is Operations.ResourceList<SavedFilter, SavedFiltersListTrait>;
   @doc("Retrieve a saved filter by filterName.")
   getSavedFilter is Operations.ResourceRead<SavedFilter>;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
