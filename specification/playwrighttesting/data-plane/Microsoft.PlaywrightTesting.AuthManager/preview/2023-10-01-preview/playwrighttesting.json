@@ -1,0 +1,615 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft PlaywrightTesting AuthManager Service API",
+    "version": "2023-10-01-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "api.playwright-int.io",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://preview.playwright-int.io/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://preview.playwright-int.io/.default": ""
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/accounts/{accountId}": {
+      "get": {
+        "operationId": "Accounts_GetAccount",
+        "description": "Get details of the ARM resource mapped to an account for the given accountId.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "The account id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_GetAccount": {
+            "$ref": "./examples/Accounts_GetAccount.json"
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/access-keys": {
+      "get": {
+        "operationId": "AccessKeys_ListAccessKeys",
+        "description": "List access-keys for a given accountId.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "The account id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedAccessKey"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccessKeys_ListAccessKeys": {
+            "$ref": "./examples/AccessKeys_ListAccessKeys.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/accounts/{accountId}/access-keys/{accessKeyId}": {
+      "get": {
+        "operationId": "AccessKeys_GetAccessKey",
+        "description": "Get an access-key for given access-key id in guid format.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "The account id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "accessKeyId",
+            "in": "path",
+            "description": "The access-key id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AccessKey"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccessKeys_GetAccessKey": {
+            "$ref": "./examples/AccessKeys_GetAccessKey.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AccessKeys_CreateAccessKey",
+        "description": "Creates an access-key with given access-key id in guid format.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "The account id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "accessKeyId",
+            "in": "path",
+            "description": "The access-key id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccessKey"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AccessKey"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/AccessKey"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccessKeys_CreateAccessKey": {
+            "$ref": "./examples/AccessKeys_CreateAccessKey.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "AccessKeys_DeleteAccessKey",
+        "description": "Revoke an access-key with given access-key id in guid format.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "The account id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "accessKeyId",
+            "in": "path",
+            "description": "The access-key id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccessKeys_DeleteAccessKey": {
+            "$ref": "./examples/AccessKeys_DeleteAccessKey.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AccessKey": {
+      "type": "object",
+      "description": "Model of an access-key linked to an account.",
+      "properties": {
+        "accessKeyId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The access-key id.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The access-key name.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "jwtToken": {
+          "type": "string",
+          "description": "The access-key JWT token.",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The access-key createdAt utcDateTime.",
+          "readOnly": true
+        },
+        "expiryAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The access-key expiryAt utcDateTime.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "state": {
+          "$ref": "#/definitions/AccessKeyState",
+          "description": "The access-key state.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "accessKeyId",
+        "name",
+        "createdAt",
+        "expiryAt",
+        "state"
+      ]
+    },
+    "AccessKeyState": {
+      "type": "string",
+      "description": "The access-key state.",
+      "enum": [
+        "Active",
+        "Expired"
+      ],
+      "x-ms-enum": {
+        "name": "AccessKeyState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "The access-key is Active."
+          },
+          {
+            "name": "Expired",
+            "value": "Expired",
+            "description": "The access-key is Expired."
+          }
+        ]
+      }
+    },
+    "Account": {
+      "type": "object",
+      "description": "An account is a parent resource for most of the other service resources. It's directly mapped to an ARM resource and helps to create a link between control-plane and data-plane resources.",
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "description": "The account id.",
+          "readOnly": true
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The ARM fully-qualified resource id for the account.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The account name.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The Azure tenant id of the account.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The account resource ARM location, for eg. eastus, southeastasia.",
+          "readOnly": true
+        },
+        "regionalAffinity": {
+          "$ref": "#/definitions/EnablementStatus",
+          "description": "The regionalAffinity feature enablement status for the account.",
+          "default": "Enabled",
+          "readOnly": true
+        },
+        "scalableExecution": {
+          "$ref": "#/definitions/EnablementStatus",
+          "description": "The scalableExecution feature enablement status for the account.",
+          "default": "Enabled",
+          "readOnly": true
+        },
+        "reporting": {
+          "$ref": "#/definitions/EnablementStatus",
+          "description": "The reporting feature enablement status for the account.",
+          "default": "Disabled",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "accountId",
+        "resourceId",
+        "name",
+        "location"
+      ]
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
+    "EnablementStatus": {
+      "type": "string",
+      "description": "The enablement status of a feature.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "EnablementStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The feature is Enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The feature is Disabled."
+          }
+        ]
+      }
+    },
+    "PagedAccessKey": {
+      "type": "object",
+      "description": "Paged collection of AccessKey items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AccessKey items on this page",
+          "items": {
+            "$ref": "#/definitions/AccessKey"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.Core.ClientRequestIdHeader": {
+      "name": "x-ms-client-request-id",
+      "in": "header",
+      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+      "required": false,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "clientRequestId"
+    },
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}
