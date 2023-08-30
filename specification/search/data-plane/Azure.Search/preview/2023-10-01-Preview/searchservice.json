@@ -8069,6 +8069,10 @@
           "$ref": "#/definitions/SearchIndexerKnowledgeStore",
           "description": "Definition of additional projections to azure blob, table, or files, of enriched data."
         },
+        "indexProjections": {
+          "$ref": "#/definitions/SearchIndexerIndexProjections",
+          "description": "Definition of additional projections to secondary search index(es)."
+        },
         "@odata.etag": {
           "x-ms-client-name": "ETag",
           "type": "string",
@@ -8245,6 +8249,91 @@
         }
       ],
       "description": "Projection definition for what data to store in Azure Files."
+    },
+    "SearchIndexerIndexProjections": {
+      "type": "object",
+      "properties": {
+        "selectors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchIndexerIndexProjectionSelector"
+          },
+          "description": "A list of projections to be performed to secondary search indexes."
+        },
+        "parameters": {
+          "$ref": "#/definitions/SearchIndexerIndexProjectionsParameters"
+        }
+      },
+      "required": [
+        "selectors"
+      ],
+      "description": "Definition of additional projections to secondary search indexes."
+    },
+    "SearchIndexerIndexProjectionSelector": {
+      "type": "object",
+      "properties": {
+        "targetIndexName": {
+          "type": "string",
+          "description": "Name of the search index to project to. Must have a key field with the 'keyword' analyzer set."
+        },
+        "parentKeyFieldName": {
+          "type": "string",
+          "description": "Name of the field in the search index to map the parent document's key value to. Must be a string field that is filterable and not the key field."
+        },
+        "sourceContext": {
+          "type": "string",
+          "description": "Source context for the projections. Represents the cardinality at which the document will be split into multiple sub documents."
+        },
+        "mappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InputFieldMappingEntry"
+          },
+          "description": "Mappings for the projection, or which source should be mapped to which field in the target index."
+        }
+      },
+      "required": [
+        "targetIndexName",
+        "parentKeyFieldName",
+        "sourceContext",
+        "mappings"
+      ],
+      "description": "Description for what data to store in the designated search index."
+    },
+    "SearchIndexerIndexProjectionsParameters": {
+      "type": "object",
+      "properties": {
+        "projectionMode": {
+          "$ref": "#/definitions/IndexProjectionMode",
+          "description": "Defines behavior of the index projections in relation to the rest of the indexer."
+        }
+      },
+      "additionalProperties": true,
+      "description": "A dictionary of index projection-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type."
+    },
+    "IndexProjectionMode": {
+      "type": "string",
+      "enum": [
+        "skipIndexingParentDocuments",
+        "includeIndexingParentDocuments"
+      ],
+      "x-ms-enum": {
+        "name": "IndexProjectionMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "skipIndexingParentDocuments",
+            "name": "SkipIndexingParentDocuments",
+            "description": "The source document will be skipped from writing into the indexer's target index."
+          },
+          {
+            "value": "includeIndexingParentDocuments",
+            "name": "IncludeIndexingParentDocuments",
+            "description": "The source document will be written into the indexer's target index. This is the default pattern."
+          }
+        ]
+      },
+      "description": "Defines behavior of the index projections in relation to the rest of the indexer."
     },
     "DefaultCognitiveServicesAccount": {
       "description": "An empty object that represents the default cognitive service resource for a skillset.",
