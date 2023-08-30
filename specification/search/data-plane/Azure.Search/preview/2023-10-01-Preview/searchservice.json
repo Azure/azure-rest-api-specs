@@ -6387,6 +6387,15 @@
         }
       }
     },
+    "NativeBlobSoftDeleteDeletionDetectionPolicy": {
+      "description": "Defines a data deletion detection policy utilizing Azure Blob Storage's native soft delete feature for deletion detection.",
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.NativeBlobSoftDeleteDeletionDetectionPolicy",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataDeletionDetectionPolicy"
+        }
+      ]
+    },
     "SearchIndexerDataSourceType": {
       "type": "string",
       "enum": [
@@ -8131,6 +8140,9 @@
           "$ref": "#/definitions/SearchIndexerDataIdentity",
           "x-nullable": true,
           "description": "The user-assigned managed identity used for connections to Azure Storage when writing knowledge store projections. If the connection string indicates an identity (ResourceId) and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared."
+        },
+        "parameters": {
+          "$ref": "#/definitions/SearchIndexerKnowledgeStoreParameters"
         }
       },
       "required": [
@@ -8249,6 +8261,18 @@
         }
       ],
       "description": "Projection definition for what data to store in Azure Files."
+    },
+    "SearchIndexerKnowledgeStoreParameters": {
+      "type": "object",
+      "properties": {
+        "synthesizeGeneratedKeyName": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether or not projections should synthesize a generated key name if one isn't already present."
+        }
+      },
+      "additionalProperties": true,
+      "description": "A dictionary of knowledge store-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type."
     },
     "SearchIndexerIndexProjections": {
       "type": "object",
