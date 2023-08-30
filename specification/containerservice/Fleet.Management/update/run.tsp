@@ -53,7 +53,7 @@ model UpdateRunProperties {
   provisioningState?: UpdateRunProvisioningState;
 
   @doc("""
-    The resource id of the UpdateStrategy resource to reference.
+    The resource id of the FleetUpdateStrategy resource to reference.
 
     When creating a new run, there are three ways to define a strategy for the run:
     1. Define a new strategy in place: Set the "strategy" field.
@@ -63,7 +63,7 @@ model UpdateRunProperties {
     Setting both "updateStrategyId" and "strategy" is invalid.
 
     UpdateRuns created by "updateStrategyId" snapshot the referenced UpdateStrategy at the time of creation and store it in the "strategy" field. 
-    Subsequent changes to the referenced UpdateStrategy resource do not propagate. 
+    Subsequent changes to the referenced FleetUpdateStrategy resource do not propagate. 
     UpdateRunStrategy changes can be made directly on the "strategy" field before launching the UpdateRun.
     """)
   @visibility("create", "read")
