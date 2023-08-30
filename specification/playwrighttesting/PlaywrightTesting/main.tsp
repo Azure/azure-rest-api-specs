@@ -94,10 +94,6 @@ model AccessKey {
   @visibility("read", "create")
   name: string;
 
-  @doc("The access-key description.")
-  @visibility("read", "create")
-  description?: string;
-
   @doc("The access-key JWT token.")
   @visibility("read")
   jwtToken?: string;
