@@ -36,11 +36,8 @@ model Account is TrackedResource<AccountProperties> {
 
 @doc("Account properties")
 model AccountProperties {
-  @doc("The description for the account resource.")
-  description?: string;
-
-  @doc("The Playwright testing dashboard URI for the account resource.")
   @visibility("read")
+  @doc("The Playwright testing dashboard URI for the account resource.")
   dashboardUri: url;
 
   @doc("The regionalAffinity feature enablement status for the account.")
