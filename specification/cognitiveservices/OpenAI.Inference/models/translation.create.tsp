@@ -8,7 +8,11 @@ using TypeSpec.Http;
 
 namespace Azure.OpenAI;
 
-@doc("Translation request.")
+@doc("""
+Translation request.
+Requesting format 'json' will result on only the 'text' field being set.
+For more output data use 'verbose_json.
+""")
 model AudioTranslationOptions {
     @doc("The audio file to translate.")
     // how do we handle binary format for a member?

@@ -10,19 +10,19 @@ namespace Azure.OpenAI;
 
 @doc("Defines the format of the output.")
 enum AudioTranscriptionFormat {
-    @doc("JSON format.")
+    @doc("JSON format. The translation/transcription response will only contain 'text'.")
     json: "json",
 
-    @doc("Text format.")
+    @doc("Text format. The translation/transcription response will be of type text/plain.")
     text: "text",
 
-    @doc("SRT format.")
+    @doc("SRT format. The translation/transcription response will be of type text/plain.")
     srt: "srt",
 
-    @doc("Verbose JSON format.")
+    @doc("Verbose JSON format.The translation/transcription response will only contain additional information.")
     verbose_json: "verbose_json",
 
-    @doc("VTT format.")
+    @doc("VTT format. The translation/transcription response will be of type text/plain.")
     vtt: "vtt",
 }
 

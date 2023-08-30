@@ -472,27 +472,27 @@
           {
             "name": "json",
             "value": "json",
-            "description": "JSON format."
+            "description": "JSON format. The translation/transcription response will only contain 'text'."
           },
           {
             "name": "text",
             "value": "text",
-            "description": "Text format."
+            "description": "Text format. The translation/transcription response will be of type text/plain."
           },
           {
             "name": "srt",
             "value": "srt",
-            "description": "SRT format."
+            "description": "SRT format. The translation/transcription response will be of type text/plain."
           },
           {
             "name": "verbose_json",
             "value": "verbose_json",
-            "description": "Verbose JSON format."
+            "description": "Verbose JSON format.The translation/transcription response will only contain additional information."
           },
           {
             "name": "vtt",
             "value": "vtt",
-            "description": "VTT format."
+            "description": "VTT format. The translation/transcription response will be of type text/plain."
           }
         ]
       }
@@ -546,7 +546,7 @@
     },
     "AudioTranscriptionsOptions": {
       "type": "object",
-      "description": "Transcription request.",
+      "description": "Transcription request.\nRequesting format 'json' will result on only the 'text' field being set.\nFor more output data use 'verbose_json.",
       "properties": {
         "file": {
           "type": "string",
@@ -612,7 +612,7 @@
     },
     "AudioTranslationOptions": {
       "type": "object",
-      "description": "Translation request.",
+      "description": "Translation request.\nRequesting format 'json' will result on only the 'text' field being set.\nFor more output data use 'verbose_json.",
       "properties": {
         "file": {
           "type": "string",
