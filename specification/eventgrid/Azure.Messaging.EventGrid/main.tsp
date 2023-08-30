@@ -115,7 +115,7 @@ namespace EventGrid {
     errorDescription: string;
   }
 
-  @doc("Supported delays for release opeartion.")
+  @doc("Supported delays for release operation.")
   enum ReleaseDelay {
     @doc("Release the event after 0 seconds.")
     ZeroSeconds: 0,
