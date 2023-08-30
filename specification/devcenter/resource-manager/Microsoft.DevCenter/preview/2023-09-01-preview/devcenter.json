@@ -3321,6 +3321,10 @@
         "encryption": {
           "$ref": "#/definitions/Encryption",
           "description": "Encryption settings to be used for server-side encryption for proprietary content (such as catalogs, logs, customizations)."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the devcenter."
         }
       }
     },
@@ -3409,6 +3413,10 @@
           "format": "int32",
           "minimum": 0,
           "description": "When specified, limits the maximum number of Dev Boxes a single user can create across all pools in the project. This will have no effect on existing Dev Boxes when reduced."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the project."
         }
       }
     },
@@ -3566,43 +3574,37 @@
           "description": "Count of catalog items added during synchronization.",
           "type": "integer",
           "format": "int32",
-          "readOnly": true,
-          "minimum": 0
+          "readOnly": true
         },
         "updated": {
           "description": "Count of catalog items updated during synchronization.",
           "type": "integer",
           "format": "int32",
-          "readOnly": true,
-          "minimum": 0
+          "readOnly": true
         },
         "unchanged": {
           "description": "Count of catalog items that were unchanged during synchronization.",
           "type": "integer",
           "format": "int32",
-          "readOnly": true,
-          "minimum": 0
+          "readOnly": true
         },
         "removed": {
           "description": "Count of catalog items removed during synchronization.",
           "type": "integer",
           "format": "int32",
-          "readOnly": true,
-          "minimum": 0
+          "readOnly": true
         },
         "validationErrors": {
           "description": "Count of catalog items that had validation errors during synchronization.",
           "type": "integer",
           "format": "int32",
-          "readOnly": true,
-          "minimum": 0
+          "readOnly": true
         },
         "synchronizationErrors": {
           "description": "Count of synchronization errors that occured during synchronization.",
           "type": "integer",
           "format": "int32",
-          "readOnly": true,
-          "minimum": 0
+          "readOnly": true
         }
       }
     },
@@ -3994,6 +3996,11 @@
           "description": "The provisioning state of the resource.",
           "$ref": "commonDefinitions.json#/definitions/ProvisioningState",
           "readOnly": true
+        },
+        "displayName": {
+          "description": "The display name of the allowed environment type.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -4039,6 +4046,11 @@
     "EnvironmentTypeProperties": {
       "description": "Properties of an environment type.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnvironmentTypeUpdateProperties"
+        }
+      ],
       "properties": {
         "provisioningState": {
           "description": "The provisioning state of the resource.",
@@ -4051,9 +4063,24 @@
       "description": "The environment type for partial update. Properties not provided in the update request will not be changed.",
       "type": "object",
       "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/EnvironmentTypeUpdateProperties",
+          "description": "Properties of an environment type to be updated."
+        },
         "tags": {
           "$ref": "commonDefinitions.json#/definitions/Tags",
           "description": "Resource tags."
+        }
+      }
+    },
+    "EnvironmentTypeUpdateProperties": {
+      "description": "Properties of an environment type. These properties can be updated after the resource has been created.",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the environment type."
         }
       }
     },
@@ -4150,6 +4177,17 @@
         "provisioningState": {
           "description": "The provisioning state of the resource.",
           "$ref": "commonDefinitions.json#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "The display name of the project environment type.",
+          "type": "string"
+        },
+        "environmentCount": {
+          "description": "The number of environments of this type.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
           "readOnly": true
         }
       }
@@ -4499,6 +4537,10 @@
         "name": {
           "description": "The name.",
           "$ref": "#/definitions/UsageName"
+        },
+        "id": {
+          "description": "The fully qualified arm resource id.",
+          "type": "string"
         }
       }
     },
