@@ -1,0 +1,92 @@
+@doc("The properties of VMwareSiteResource")
+model SiteProperties {
+  @doc("Gets the Master Site this site is linked to.")
+  @visibility("read")
+  masterSiteId?: string;
+
+  @doc("""
+  Gets or sets the service principal identity details used by agent for
+  communication
+              to the service.
+  """)
+  servicePrincipalIdentityDetails?: SiteSpnProperties;
+
+  @doc("Gets or sets the on-premises agent details.")
+  agentDetails?: SiteAgentProperties;
+
+  @doc("Gets or sets the Appliance Name.")
+  applianceName?: string;
+
+  @doc("Gets or sets the ARM ID of migration hub solution for SDS.")
+  discoverySolutionId?: string;
+
+  @doc("Gets the service endpoint.")
+  @visibility("read")
+  serviceEndpoint?: string;
+
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState;
+}
+
+@doc("Site REST Resource.")
+model HypervSite {
+  @doc("Gets the relative URL to get this Site.")
+  @visibility("read")
+  id?: string;
+
+  @doc("Handled by resource provider. Type = Microsoft.OffAzure/hypervSites.")
+  @visibility("read")
+  type?: string;
+
+  @doc("Gets or sets the nested properties.")
+  properties?: HypervSiteHypervSiteProperties;
+
+  @doc("Gets or sets the name of the site.")
+  name?: string;
+
+  @doc("Gets or sets the eTag for concurrency control.")
+  eTag?: string;
+
+  @doc("Gets or sets the Azure location in which Sites is created.")
+  @visibility("read", "create")
+  location?: string;
+}
+
+@doc("Class for Server site properties.")
+model HypervSiteHypervSiteProperties {
+  @doc("Gets the Master Site this site is linked to.")
+  @visibility("read")
+  masterSiteId?: string;
+
+  @doc("""
+Gets or sets the service principal identity details used by agent for
+communication
+            to the service.
+""")
+  servicePrincipalIdentityDetails?: SiteSpnProperties;
+
+  @doc("Gets or sets the on-premises agent details.")
+  agentDetails?: SiteAgentProperties;
+
+  @doc("Gets or sets the Appliance Name.")
+  applianceName?: string;
+
+  @doc("Gets or sets the ARM ID of migration hub solution for SDS.")
+  discoverySolutionId?: string;
+
+  @doc("Gets the service endpoint.")
+  @visibility("read")
+  serviceEndpoint?: string;
+}
+
+@doc("Hyper-V site usage.")
+model HypervSiteUsage {
+@doc("Gets or sets the number of machines discovered in the site.")
+"machineCount"?: int32;
+@doc("Gets or sets the number of run as accounts in the site.")
+"runAsAccountCount"?: int32;
+@doc("Gets or sets the number of hosts part of the site.")
+"hostCount"?: int32;
+@doc("Gets or sets the number of clusters part of the site.")
+"clusterCount"?: int32;
+}
