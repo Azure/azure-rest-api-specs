@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure OpenAI API",
-    "version": "2023-06-01-preview",
+    "version": "2023-09-01-preview",
     "description": "Azure OpenAI APIs for completions and search",
     "x-typespec-generated": [
       {
@@ -59,6 +59,98 @@
   },
   "tags": [],
   "paths": {
+    "/deployments/{deploymentId}//deployments/{deployment-id}/audio/transcriptions": {
+      "post": {
+        "operationId": "GetTranscriptions",
+        "description": "Transcribes audio into the input language.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "description": "Specifies either the model deployment name (when using Azure OpenAI) or model name (when using non-Azure OpenAI) to use for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TranscriptionsOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Transcription"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deployments/{deploymentId}//deployments/{deployment-id}/audio/translations": {
+      "post": {
+        "operationId": "GetTranslation",
+        "description": "Transcribes audio into the input language.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "description": "Specifies either the model deployment name (when using Azure OpenAI) or model name (when using non-Azure OpenAI) to use for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TranslationOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Translation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
     "/deployments/{deploymentId}/chat/completions": {
       "post": {
         "operationId": "GetChatCompletions",
@@ -180,6 +272,52 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Embeddings"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deployments/{deploymentId}/extensions/chat/completions": {
+      "post": {
+        "operationId": "GetChatCompletionsWithAzureExtensions",
+        "description": "Gets chat completions for the provided chat messages.\nThis is an Azure-specific version of chat completions that supports integration with configured data sources and\nother augmentations to the base chat completions capabilities.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "description": "Specifies either the model deployment name (when using Azure OpenAI) or model name (when using non-Azure OpenAI) to use for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChatCompletionsOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ChatCompletions"
             }
           },
           "default": {
@@ -342,6 +480,55 @@
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
           "description": "Inner error."
+        }
+      }
+    },
+    "AzureChatExtensionConfiguration": {
+      "type": "object",
+      "description": "  A representation of configuration data for a single Azure OpenAI chat extension. This will be used by a chat\n  completions request that should use Azure OpenAI chat extensions to augment the response behavior.\n  The use of this configuration is compatible only with Azure OpenAI.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/AzureChatExtensionType",
+          "description": "  The label for the type of an Azure chat extension. This typically corresponds to a matching Azure resource.\n  Azure chat extensions are only compatible with Azure OpenAI."
+        },
+        "parameters": {
+          "description": "  The configuration payload used for the Azure chat extension. The structure payload details are specific to the\n  extension being configured.\n  Azure chat extensions are only compatible with Azure OpenAI."
+        }
+      },
+      "required": [
+        "type",
+        "parameters"
+      ]
+    },
+    "AzureChatExtensionType": {
+      "type": "string",
+      "description": "  A representation of configuration data for a single Azure OpenAI chat extension. This will be used by a chat\n  completions request that should use Azure OpenAI chat extensions to augment the response behavior.\n  The use of this configuration is compatible only with Azure OpenAI.",
+      "enum": [
+        "AzureCognitiveSearch"
+      ],
+      "x-ms-enum": {
+        "name": "AzureChatExtensionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "azureCognitiveSearch",
+            "value": "AzureCognitiveSearch",
+            "description": "Represents the use of Azure Cognitive Search as an Azure OpenAI chat extension."
+          }
+        ]
+      }
+    },
+    "AzureChatExtensionsMessageContext": {
+      "type": "object",
+      "description": "  A representation of the additional context information available when Azure OpenAI chat extensions are involved\n  in the generation of a corresponding chat completions response. This context information is only populated when\n  using an Azure OpenAI request configured to use a matching extension.",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "description": "  The contextual message payload associated with the Azure chat extensions used for a chat completions request.\n  These messages describe the data source retrievals, plugin invocations, and other intermediate steps taken in the\n  course of generating a chat completions response that was augmented by capabilities from Azure OpenAI chat\n  extensions.",
+          "items": {
+            "$ref": "#/definitions/ChatMessage"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -512,6 +699,18 @@
           },
           "x-ms-identifiers": []
         },
+        "functions": {
+          "type": "array",
+          "description": "A list of functions the model may generate JSON inputs for.",
+          "items": {
+            "$ref": "#/definitions/FunctionDefinition"
+          },
+          "x-ms-identifiers": []
+        },
+        "function_call": {
+          "description": "Controls how the model responds to function calls. \"none\" means the model does not call a function,\nand responds to the end-user. \"auto\" means the model can pick between an end-user or calling a function.\n Specifying a particular function via `{\"name\": \"my_function\"}` forces the model to call that function.\n \"none\" is the default when no functions are present. \"auto\" is the default if functions are present.",
+          "x-ms-client-name": "functionCall"
+        },
         "max_tokens": {
           "type": "integer",
           "format": "int32",
@@ -573,6 +772,14 @@
         "model": {
           "type": "string",
           "description": "The model name to provide as part of this completions request.\nNot applicable to Azure OpenAI, where deployment information should be included in the Azure\nresource URI that's connected to."
+        },
+        "dataSources": {
+          "type": "array",
+          "description": "  The configuration entries for Azure OpenAI chat extensions that use them.\n  This additional specification is only compatible with Azure OpenAI.",
+          "items": {
+            "$ref": "#/definitions/AzureChatExtensionConfiguration"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -591,6 +798,19 @@
           "type": "string",
           "description": "The text associated with this message payload.",
           "x-nullable": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the author of this message. `name` is required if role is `function`, and it should be the name of the\nfunction whose response is in the `content`. May contain a-z, A-Z, 0-9, and underscores, with a maximum length of\n64 characters."
+        },
+        "function_call": {
+          "$ref": "#/definitions/FunctionCall",
+          "description": "The name and arguments of a function that should be called, as generated by the model.",
+          "x-ms-client-name": "functionCall"
+        },
+        "context": {
+          "$ref": "#/definitions/AzureChatExtensionsMessageContext",
+          "description": "  Additional context data associated with a chat message when requesting chat completions using compatible Azure\n  OpenAI chat extensions. This includes information like the intermediate data source retrievals used to service a\n  request.\n  This context information is only populated when using Azure OpenAI with chat extensions capabilities configured."
         }
       },
       "required": [
@@ -604,7 +824,9 @@
       "enum": [
         "system",
         "assistant",
-        "user"
+        "user",
+        "function",
+        "tool"
       ],
       "x-ms-enum": {
         "name": "ChatRole",
@@ -624,6 +846,16 @@
             "name": "user",
             "value": "user",
             "description": "The role that provides input for chat completions."
+          },
+          {
+            "name": "function",
+            "value": "function",
+            "description": "The role that provides function results for chat completions."
+          },
+          {
+            "name": "tool",
+            "value": "tool",
+            "description": "The role that represents extension tool activity within a chat completions operation."
           }
         ]
       }
@@ -718,7 +950,8 @@
       "enum": [
         "stop",
         "length",
-        "content_filter"
+        "content_filter",
+        "function_call"
       ],
       "x-ms-enum": {
         "name": "CompletionsFinishReason",
@@ -738,6 +971,11 @@
             "name": "contentFiltered",
             "value": "content_filter",
             "description": "Completions generated a response that was identified as potentially sensitive per content\nmoderation policies."
+          },
+          {
+            "name": "functionCall",
+            "value": "function_call",
+            "description": "Completion ended normally, with the model requesting a function to be called."
           }
         ]
       }
@@ -1079,6 +1317,44 @@
         "total_tokens"
       ]
     },
+    "FunctionCall": {
+      "type": "object",
+      "description": "The name and arguments of a function that should be called, as generated by the model.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the function to call."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "The arguments to call the function with, as generated by the model in JSON format.\nNote that the model does not always generate valid JSON, and may hallucinate parameters\nnot defined by your function schema. Validate the arguments in your code before calling\nyour function."
+        }
+      },
+      "required": [
+        "name",
+        "arguments"
+      ]
+    },
+    "FunctionDefinition": {
+      "type": "object",
+      "description": "The definition of a caller-specified function that chat completions may invoke in response to matching user input.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the function to be called."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of what the function does. The model will use this description when selecting the function and\ninterpreting its parameters."
+        },
+        "parameters": {
+          "description": "The parameters the functions accepts, described as a JSON Schema object."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
     "ImageGenerationOptions": {
       "type": "object",
       "description": "Represents the request data used to generate images.",
@@ -1202,6 +1478,241 @@
       },
       "required": [
         "prompt_index"
+      ]
+    },
+    "Transcription": {
+      "type": "object",
+      "description": "Transcription response.",
+      "properties": {
+        "task": {
+          "type": "string",
+          "description": "Transcription task."
+        },
+        "text": {
+          "type": "string",
+          "description": "Transcribed text."
+        },
+        "language": {
+          "type": "string",
+          "description": "Language."
+        },
+        "duration": {
+          "type": "integer",
+          "format": "uint32",
+          "description": "Duration."
+        },
+        "segments": {
+          "type": "array",
+          "description": "Segments.",
+          "items": {
+            "$ref": "#/definitions/TranscriptionSegment"
+          }
+        }
+      },
+      "required": [
+        "task",
+        "text",
+        "language",
+        "duration",
+        "segments"
+      ]
+    },
+    "TranscriptionFormat": {
+      "type": "string",
+      "description": "Transcription format.",
+      "enum": [
+        "json",
+        "text",
+        "srt",
+        "verbose_json",
+        "vtt"
+      ],
+      "x-ms-enum": {
+        "name": "TranscriptionFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "json",
+            "value": "json",
+            "description": "JSON format."
+          },
+          {
+            "name": "text",
+            "value": "text",
+            "description": "Text format."
+          },
+          {
+            "name": "srt",
+            "value": "srt",
+            "description": "SRT format."
+          },
+          {
+            "name": "verbose_json",
+            "value": "verbose_json",
+            "description": "Verbose JSON format."
+          },
+          {
+            "name": "vtt",
+            "value": "vtt",
+            "description": "VTT format."
+          }
+        ]
+      }
+    },
+    "TranscriptionSegment": {
+      "type": "object",
+      "description": "Transcription segment.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Segment identifier."
+        },
+        "start": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Segment start offset."
+        },
+        "end": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Segment end offset."
+        },
+        "text": {
+          "type": "string",
+          "description": "Segment text."
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "Temperature."
+        },
+        "avg_logprob": {
+          "type": "number",
+          "format": "float",
+          "description": "Average log probability.",
+          "x-ms-client-name": "averageLogProb"
+        },
+        "compression_ratio": {
+          "type": "number",
+          "format": "float",
+          "description": "Compression ratio.",
+          "x-ms-client-name": "compressionRatio"
+        },
+        "no_speech_prob": {
+          "type": "number",
+          "format": "float",
+          "description": "Probability of 'no speech'.",
+          "x-ms-client-name": "noSpeechProb"
+        }
+      },
+      "required": [
+        "id",
+        "start",
+        "end",
+        "text",
+        "temperature",
+        "avg_logprob",
+        "compression_ratio",
+        "no_speech_prob"
+      ]
+    },
+    "TranscriptionsOptions": {
+      "type": "object",
+      "description": "Transcription request.",
+      "properties": {
+        "file": {
+          "type": "string",
+          "description": "The audio file object to transcribe. Binary data."
+        },
+        "prompt": {
+          "type": "string",
+          "description": "An optional text to guide the model's style or continue a previous audio segment. The prompt should match the audio language."
+        },
+        "response_format": {
+          "$ref": "#/definitions/TranscriptionFormat",
+          "description": "The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.",
+          "default": "json",
+          "x-ms-client-name": "responseFormat"
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. If set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
+          "default": 0
+        },
+        "language": {
+          "type": "string",
+          "description": "The language of the input audio. Supplying the input language in ISO-639-1 format will improve accuracy and latency."
+        }
+      },
+      "required": [
+        "file"
+      ]
+    },
+    "Translation": {
+      "type": "object",
+      "description": "Translation response.",
+      "properties": {
+        "task": {
+          "type": "string",
+          "description": "Translation task."
+        },
+        "text": {
+          "type": "string",
+          "description": "Translated text."
+        },
+        "language": {
+          "type": "string",
+          "description": "Language."
+        },
+        "duration": {
+          "type": "integer",
+          "format": "uint32",
+          "description": "Duration."
+        },
+        "segments": {
+          "type": "array",
+          "description": "Transcription segments.",
+          "items": {
+            "$ref": "#/definitions/TranscriptionSegment"
+          }
+        }
+      },
+      "required": [
+        "task",
+        "text",
+        "language",
+        "duration",
+        "segments"
+      ]
+    },
+    "TranslationOptions": {
+      "type": "object",
+      "description": "Translation request.",
+      "properties": {
+        "file": {
+          "type": "string",
+          "description": "The audio file to translate. Binary data."
+        },
+        "prompt": {
+          "type": "string",
+          "description": "An optional text to guide the model's style or continue a previous audio segment. The prompt should be in English."
+        },
+        "response_format": {
+          "$ref": "#/definitions/TranscriptionFormat",
+          "description": "The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.",
+          "default": "json",
+          "x-ms-client-name": "responseFormat"
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. If set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
+          "default": 0
+        }
+      },
+      "required": [
+        "file"
       ]
     }
   },
