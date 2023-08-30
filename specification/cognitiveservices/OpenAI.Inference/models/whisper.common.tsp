@@ -19,7 +19,7 @@ enum AudioTranscriptionFormat {
     @doc("SRT format. The translation/transcription response will be of type text/plain.")
     srt: "srt",
 
-    @doc("Verbose JSON format.The translation/transcription response will only contain additional information.")
+    @doc("Verbose JSON format.The translation/transcription response will contain additional information.")
     verbose_json: "verbose_json",
 
     @doc("VTT format. The translation/transcription response will be of type text/plain.")
