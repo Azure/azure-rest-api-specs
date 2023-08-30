@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "ManagedResourceGroupsClient",
+    "title": "MoboBrokersClient",
     "version": "2023-06-01-preview",
-    "description": "Provides operations for working with managed resource groups."
+    "description": "Provides operations for working with mobo brokers."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -70,16 +70,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/managedResourceGroups/{managedResourceGroupName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/moboBrokers/{moboBrokerName}": {
       "get": {
         "tags": [
-          "ManagedResourceGroups"
+          "MoboBrokers"
         ],
-        "operationId": "ManagedResourceGroups_Get",
-        "description": "Gets the managed resource group.",
+        "operationId": "MoboBrokers_Get",
+        "description": "Gets the mobo broker.",
         "x-ms-examples": {
-          "Get a managed resource group": {
-            "$ref": "./examples/getManagedResourceGroup.json"
+          "Get a mobo broker": {
+            "$ref": "./examples/getMoboBroker.json"
           }
         },
         "parameters": [
@@ -93,18 +93,14 @@
             "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ManagedResourceGroupNameParameter"
+            "$ref": "#/parameters/MoboBrokerNameParameter"
           }
         ],
         "responses": {
-          "404": {
-            "description": "NotFound.",
-            "x-ms-error-response": false
-          },
           "200": {
-            "description": "OK - Returns the managed resource group.",
+            "description": "OK - Returns the mobo broker.",
             "schema": {
-              "$ref": "#/definitions/ManagedResourceGroup"
+              "$ref": "#/definitions/MoboBroker"
             }
           },
           "default": {
@@ -117,13 +113,13 @@
       },
       "delete": {
         "tags": [
-          "ManagedResourceGroups"
+          "MoboBrokers"
         ],
-        "operationId": "ManagedResourceGroups_Delete",
-        "description": "Deletes the managed resource group.",
+        "operationId": "MoboBrokers_Delete",
+        "description": "Deletes the mobo broker.",
         "x-ms-examples": {
           "Delete managed resource group": {
-            "$ref": "./examples/deleteManagedResourceGroup.json"
+            "$ref": "./examples/deleteMoboBroker.json"
           }
         },
         "parameters": [
@@ -137,7 +133,7 @@
             "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ManagedResourceGroupNameParameter"
+            "$ref": "#/parameters/MoboBrokerNameParameter"
           }
         ],
         "responses": {
@@ -148,7 +144,13 @@
             "description": "NoContent"
           },
           "202": {
-            "description": "Accepted - Returns this status until the asynchronous operation has completed."
+            "description": "Accepted - Returns this status until the asynchronous operation has completed.",
+            "headers": {
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -164,13 +166,13 @@
       },
       "put": {
         "tags": [
-          "ManagedResourceGroups"
+          "MoboBrokers"
         ],
-        "operationId": "ManagedResourceGroups_CreateOrUpdate",
-        "description": "Creates or updates a managed resource group.",
+        "operationId": "MoboBrokers_CreateOrUpdate",
+        "description": "Creates or updates a mobo broker.",
         "x-ms-examples": {
           "Create or update managed application": {
-            "$ref": "./examples/createOrUpdateManagedResourceGroup.json"
+            "$ref": "./examples/createOrUpdateMoboBroker.json"
           }
         },
         "parameters": [
@@ -184,29 +186,29 @@
             "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ManagedResourceGroupNameParameter"
+            "$ref": "#/parameters/MoboBrokerNameParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ManagedResourceGroup"
+              "$ref": "#/definitions/MoboBroker"
             },
             "description": "Parameters supplied to the create or update a managed resource group."
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the managed resource group, including provisioning status.",
+            "description": "OK - Updates information about the managed resource group, including provisioning status.",
             "schema": {
-              "$ref": "#/definitions/ManagedResourceGroup"
+              "$ref": "#/definitions/MoboBroker"
             }
           },
           "201": {
             "description": "Created - Returns information about the managed resource group, including provisioning status.",
             "schema": {
-              "$ref": "#/definitions/ManagedResourceGroup"
+              "$ref": "#/definitions/MoboBroker"
             }
           },
           "default": {
@@ -223,13 +225,13 @@
       },
       "patch": {
         "tags": [
-          "ManagedResourceGroups"
+          "MoboBrokers"
         ],
-        "operationId": "ManagedResourceGroups_Update",
+        "operationId": "MoboBrokers_Update",
         "description": "Updates an existing managed resource group.",
         "x-ms-examples": {
           "Updates managed resource group": {
-            "$ref": "./examples/updateManagedResourceGroup.json"
+            "$ref": "./examples/updateMoboBroker.json"
           }
         },
         "parameters": [
@@ -243,13 +245,13 @@
             "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ManagedResourceGroupNameParameter"
+            "$ref": "#/parameters/MoboBrokerNameParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/ManagedResourceGroup"
+              "$ref": "#/definitions/MoboBroker"
             },
             "description": "Parameters supplied to update an existing managed resource group."
           }
@@ -258,13 +260,19 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/ManagedResourceGroup"
+              "$ref": "#/definitions/MoboBroker"
             }
           },
           "202": {
             "description": "Accepted - Returns this status until the asynchronous operation has completed.",
             "schema": {
-              "$ref": "#/definitions/ManagedResourceGroup"
+              "$ref": "#/definitions/MoboBroker"
+            },
+            "headers": {
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -280,16 +288,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/managedResourceGroups": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/moboBrokers": {
       "get": {
         "tags": [
-          "ManagedResourceGroups"
+          "MoboBrokers"
         ],
-        "operationId": "ManagedResourceGroups_ListByResourceGroup",
-        "description": "Lists all the managed resource groups resources within a resource group.",
+        "operationId": "MoboBrokers_ListByResourceGroup",
+        "description": "Lists all the mobo broker resources within a resource group.",
         "x-ms-examples": {
-          "Lists all the managed resource groups resources within a resource group": {
-            "$ref": "./examples/listManagedResourceGroupsByResourceGroup.json"
+          "Lists all the mobo brokers resources within a resource group": {
+            "$ref": "./examples/listMoboBrokersByResourceGroup.json"
           }
         },
         "parameters": [
@@ -301,13 +309,16 @@
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/MoboResourceOwnerProviderNamespaceParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK - Returns an array of managed resource groups resources.",
             "schema": {
-              "$ref": "#/definitions/ManagedResourceGroupListResult"
+              "$ref": "#/definitions/MoboBrokerListResult"
             }
           },
           "default": {
@@ -322,16 +333,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/managedResourceGroups": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/moboBrokers": {
       "get": {
         "tags": [
-          "ManagedResourceGroups"
+          "MoboBrokers"
         ],
-        "operationId": "ManagedResourceGroup_ListBySubscription",
+        "operationId": "MoboBroker_ListBySubscription",
         "description": "Lists all the managed resource groups resources within a subscription.",
         "x-ms-examples": {
-          "Lists all the managed resource groups resources within a subscription": {
-            "$ref": "./examples/listManagedResourceGroupsBySubscription.json"
+          "Lists all the mobo broker resources within a subscription": {
+            "$ref": "./examples/listMoboBrokersBySubscription.json"
           }
         },
         "parameters": [
@@ -340,13 +351,16 @@
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/MoboResourceOwnerProviderNamespaceParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK - Returns an array of managed resource groups.",
             "schema": {
-              "$ref": "#/definitions/ManagedResourceGroupListResult"
+              "$ref": "#/definitions/MoboBrokerListResult"
             }
           },
           "default": {
@@ -363,12 +377,12 @@
     }
   },
   "definitions": {
-    "ManagedResourceGroup": {
+    "MoboBroker": {
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ManagedResourceGroupProperties",
+          "$ref": "#/definitions/MoboBrokerProperties",
           "description": "The managed resource group properties."
         }
       },
@@ -382,17 +396,13 @@
       ],
       "description": "Information about the managed resource group resource."
     },
-    "ManagedResourceGroupProperties": {
+    "MoboBrokerProperties": {
       "type": "object",
       "description": "Managed resource group properties.",
       "properties": {
         "managedResourceGroupId": {
           "type": "string",
           "description": "The managed resource group ID."
-        },
-        "location": {
-          "type": "string",
-          "description": "The managed resource group location."
         },
         "managedByResourceIds": {
           "type": "array",
@@ -410,6 +420,14 @@
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioned state of the resource."
+        },
+        "hydrateResource": {
+          "$ref": "#/definitions/BooleanEnum",
+          "description": "The flag to indicate resource hydration in case of mrg already exists."
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
         }
       }
     },
@@ -482,25 +500,25 @@
         }
       }
     },
-    "ManagedResourceGroupListResult": {
+    "MoboBrokerListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ManagedResourceGroup"
+            "$ref": "#/definitions/MoboBroker"
           },
-          "description": "The array of managed resource groups."
+          "description": "The array of mobo brokers."
         },
         "nextLink": {
           "type": "string",
           "description": "The URL to use for getting the next set of results."
         }
       },
-      "description": "List of managed resource groups."
+      "description": "List of mobo brokers."
     },
     "ProvisioningState": {
-      "description": "Provisioning status of the managed application.",
+      "description": "Provisioning status of the mobo broker.",
       "readOnly": true,
       "enum": [
         "NotSpecified",
@@ -518,17 +536,37 @@
         "name": "ProvisioningState",
         "modelAsString": true
       }
+    },
+    "BooleanEnum": {
+      "type": "string",
+      "description": "Boolean Enum",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "x-ms-enum": {
+        "name": "BooleanEnum",
+        "modelAsString": true
+      }
     }
   },
   "parameters": {
-    "ManagedResourceGroupNameParameter": {
-      "name": "managedResourceGroupName",
+    "MoboBrokerNameParameter": {
+      "name": "moboBrokerName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the managed resource group resource.",
+      "description": "The name of the mobo broker resource.",
       "minLength": 3,
       "maxLength": 64
+    },
+    "MoboResourceOwnerProviderNamespaceParameter": {
+      "name": "moboResourceOwnerProviderNamespace",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Resource Provider namespace to get mobo resources belonging to the resource provider.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
