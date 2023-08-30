@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Purview Catalog Service REST API Document",
-    "description": "Purview Catalog Service is a fully managed cloud service whose users can discover the data sources they need and understand the data sources they find. At the same time, Data Catalog helps organizations get more value from their existing investments. This spec defines REST API of Purview Catalog Service.",
+    "title": "Purview Data Map Service REST API Document",
+    "description": "Purview Data Map Service is a fully managed cloud service whose users can discover the data sources they need and understand the data sources they find. At the same time, Data Map helps organizations get more value from their existing investments. This spec defines REST API of Purview Data Map Service.",
     "version": "2023-09-01"
   },
   "x-ms-parameterized-host": {
@@ -14,7 +14,7 @@
       }
     ]
   },
-  "basePath": "/catalog/api",
+  "basePath": "/datamap/api",
   "schemes": [
     "https"
   ],
@@ -72,6 +72,9 @@
             }
           },
           {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
+          {
             "$ref": "#/parameters/businessAttributeUpdateBehavior"
           }
         ],
@@ -123,7 +126,13 @@
             "$ref": "#/parameters/ignoreRelationships"
           },
           {
-            "$ref": "#/parameters/excludeRelationshipTypes"
+            "$ref": "#/parameters/collection"
+          },
+          {
+            "$ref": "#/parameters/ignoredRelationshipTypes"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
           }
         ],
         "responses": {
@@ -161,6 +170,9 @@
             "schema": {
               "$ref": "#/definitions/AtlasEntitiesWithExtInfo"
             }
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
           },
           {
             "$ref": "#/parameters/businessAttributeUpdateBehavior"
@@ -1507,19 +1519,67 @@
         }
       }
     },
+    "/collection/{collection}/entity/moveHere": {
+      "post": {
+        "tags": [
+          "Entity"
+        ],
+        "description": "Move existing entities to the target collection.",
+        "operationId": "Entity_MoveEntitiesToCollection",
+        "x-ms-examples": {
+          "Collection_MoveEntitiesToCollection": {
+            "$ref": "./examples/Collection_MoveEntitiesToCollection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/collection"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
+          {
+            "in": "body",
+            "name": "moveEntitiesRequest",
+            "description": "Entity guids to be moved to target collection.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MoveEntitiesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created with EntityMutationResponse.",
+            "schema": {
+              "$ref": "#/definitions/EntityMutationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/atlas/v2/glossary": {
       "get": {
         "tags": [
           "Glossary"
         ],
-        "description": "Get all glossaries registered with Atlas. Recommend using limit/offset to get pagination result. Recommended using 'ignoreTermsAndCategories=true' and fetch terms/categories separately using 'GET /catalog/api/atlas/v2/glossary/{glossaryGuid}/terms' and 'GET '/catalog/api/atlas/v2/glossary/{glossaryGuid}/categories'.",
+        "description": "Get all glossaries registered with Atlas. Recommend using limit/offset to get pagination result. Recommended using 'ignoreTermsAndCategories=true' and fetch terms/categories separately using 'GET /datamap/api/atlas/v2/glossary/{glossaryGuid}/terms' and 'GET '/datamap/api/atlas/v2/glossary/{glossaryGuid}/categories'.",
         "operationId": "Glossary_ListGlossaries",
         "x-ms-examples": {
           "Glossary_ListGlossaries": {
             "$ref": "./examples/Glossary_ListGlossaries.json"
           }
         },
-        "parameters": [
+        "parameters": [         
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
           {
             "$ref": "#/parameters/limit"
           },
@@ -1964,7 +2024,7 @@
         "tags": [
           "Glossary"
         ],
-        "description": "Get a specific glossary term by its GUID.  Recommend using 'excludeRelationshipTypes=AtlasGlossarySemanticAssignment' to get term and using 'GET /catalog/api/atlas/v2/glossary/terms/{termGuid}/assignedEntities' to get term assignment separately.",
+        "description": "Get a specific glossary term by its GUID.  Recommend using 'ignoredRelationshipTypes=AtlasGlossarySemanticAssignment' to get term and using 'GET /datamap/api/atlas/v2/glossary/terms/{termGuid}/assignedEntities' to get term assignment separately.",
         "operationId": "Glossary_GetGlossaryTerm",
         "x-ms-examples": {
           "Glossary_GetGlossaryTerm": {
@@ -1976,22 +2036,16 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
+          {
             "$ref": "#/parameters/termGuid"
           },
           {
             "$ref": "#/parameters/includeTermHierarchy"
           },
           {
-            "name": "excludeRelationshipTypes",
-            "in": "query",
-            "description": "An array of relationship types which need to be excluded.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi",
-            "x-ms-client-name": "excludeRelationshipTypeList"
+            "$ref": "#/parameters/ignoredRelationshipTypes"
           }
         ],
         "responses": {
@@ -2021,6 +2075,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
           {
             "$ref": "#/parameters/termGuid"
           },
@@ -2095,6 +2152,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
+          {
             "$ref": "#/parameters/termGuid"
           },
           {
@@ -2140,6 +2200,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
           {
             "in": "body",
             "name": "glossaryTerm",
@@ -2267,7 +2330,7 @@
         "tags": [
           "Glossary"
         ],
-        "description": "Delete the term assignment for the given list of related objects. This API is not recommended since duplicated with 'DELETE /catalog/api/atlas/v2/glossary/terms/{termGuid}/assignedEntities'. Please use later one instead.",
+        "description": "Delete the term assignment for the given list of related objects. This API is not recommended since duplicated with 'DELETE /datamap/api/atlas/v2/glossary/terms/{termGuid}/assignedEntities'. Please use later one instead.",
         "operationId": "Glossary_RemoveTermAssignmentFromEntities",
         "x-ms-examples": {
           "Glossary_RemoveTermAssignmentFromEntities": {
@@ -2360,6 +2423,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
+          {
             "$ref": "#/parameters/termGuid"
           },
           {
@@ -2442,6 +2508,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
           {
             "$ref": "#/parameters/glossaryGuid"
           },
@@ -2599,7 +2668,7 @@
         "tags": [
           "Glossary"
         ],
-        "description": "Get a specific glossary with detailed information. This API is not recommend. Recommended fetch terms/categories details separately using 'GET /catalog/api/atlas/v2/glossary/{glossaryGuid}/terms' and 'GET '/catalog/api/atlas/v2/glossary/{glossaryGuid}/categories'.",
+        "description": "Get a specific glossary with detailed information. This API is not recommend. Recommended fetch terms/categories details separately using 'GET /datamap/api/atlas/v2/glossary/{glossaryGuid}/terms' and 'GET '/datamap/api/atlas/v2/glossary/{glossaryGuid}/categories'.",
         "operationId": "Glossary_GetDetailedGlossary",
         "x-ms-examples": {
           "Glossary_GetDetailedGlossary": {
@@ -2607,6 +2676,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
           {
             "$ref": "#/parameters/glossaryGuid"
           },
@@ -2643,6 +2715,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
           {
             "$ref": "#/parameters/glossaryGuid"
           },
@@ -2689,6 +2764,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
           {
             "$ref": "#/parameters/glossaryGuid"
           },
@@ -2830,72 +2908,13 @@
         }
       }
     },
-    "/glossary/name/{glossaryName}/terms/import": {
-      "post": {
-        "tags": [
-          "Glossary"
-        ],
-        "consumes": [
-          "multipart/form-data"
-        ],
-        "description": "Import Glossary Terms from local csv file by glossaryName. Note this API has been deprecated. Please use 'POST /catalog/api/glossary/{glossaryGuid}/terms/import' instead.",
-        "operationId": "Glossary_ImportGlossaryTermsViaCsvByGlossaryName",
-        "x-ms-examples": {
-          "Glossary_ImportGlossaryTermsViaCsvByGlossaryName": {
-            "$ref": "./examples/Glossary_GetImportCSVOperationStatusByGloassaryName.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/glossaryName"
-          },
-          {
-            "$ref": "#/parameters/includeTermHierarchy"
-          },
-          {
-            "$ref": "#/parameters/includeMultiTemplates"
-          },
-          {
-            "in": "formData",
-            "name": "file",
-            "description": "The csv file to import glossary terms from.",
-            "required": true,
-            "type": "file"
-          },
-          {
-            "$ref": "#/parameters/purviewAPIVersion"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted. A job to import glossary terms via csv has been accepted.",
-            "headers": {
-              "Operation-Location": {
-                "description": "Response header for long running operation",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        }
-      }
-    },
-    "/glossary/terms/import/{operationGuid}": {
+    "/glossary/operation/{operationGuid}": {
       "get": {
         "tags": [
           "Glossary"
         ],
-        "description": "Get the status of import csv operation",
-        "operationId": "Glossary_GetImportCsvOperationStatus",
+        "description": "Get the status of glossary async operation",
+        "operationId": "Glossary_GetAsyncOperationStatus",
         "x-ms-examples": {
           "Glossary_GetImportCsvOperationStatus": {
             "$ref": "./examples/Glossary_GetImportCSVOperationStatusByOperationguid.json"
@@ -2911,9 +2930,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Return the status of import csv operation.",
+            "description": "OK. Return the status of glossary async operation.",
             "schema": {
-              "$ref": "#/definitions/ImportCSVOperation"
+              "$ref": "#/definitions/AsyncOperation"
             }
           },
           "default": {
@@ -2925,156 +2944,7 @@
         }
       }
     },
-    "/glossary/{glossaryGuid}/terms/export": {
-      "post": {
-        "tags": [
-          "Glossary"
-        ],
-        "description": "Export Glossary Terms as csv file",
-        "operationId": "Glossary_ExportGlossaryTermsAsCsv",
-        "x-ms-examples": {
-          "Glossary_ExportGlossaryTermsAsCsv": {
-            "$ref": "./examples/Glossary_ExportGlossaryTermsAsCsv.json"
-          }
-        },
-        "produces": [
-          "text/csv"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/glossaryGuid"
-          },
-          {
-            "$ref": "#/parameters/includeTermHierarchy"
-          },
-          {
-            "$ref": "#/parameters/includeMultiTemplates"
-          },
-          {
-            "$ref": "#/parameters/includeRichTextFlag"
-          },
-          {
-            "in": "body",
-            "name": "termGuids",
-            "description": "An array of term guids.",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "description": "An array of term guids.",
-              "items": {
-                "$ref": "#/definitions/TermGuid"
-              }
-            }
-          },
-          {
-            "$ref": "#/parameters/purviewAPIVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. A csv file contains terms with given term guids will be generated.",
-            "schema": {
-              "type": "file"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/glossary/name/{glossaryName}/terms": {
-      "get": {
-        "tags": [
-          "Glossary"
-        ],
-        "description": "Get terms by glossary name. Note this API has been deprecated. Please use 'GET /catalog/api/glossary/{glossaryGuid}/terms' instead.",
-        "operationId": "Glossary_ListTermsByGlossaryName",
-        "x-ms-examples": {
-          "Glossary_ListTermsByGlossaryName": {
-            "$ref": "./examples/Glossary_ListTermsByGlossaryName.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/glossaryName"
-          },
-          {
-            "$ref": "#/parameters/limit"
-          },
-          {
-            "$ref": "#/parameters/offset"
-          },
-          {
-            "$ref": "#/parameters/includeTermHierarchy"
-          },
-          {
-            "$ref": "#/parameters/extInfo"
-          },
-          {
-            "$ref": "#/parameters/purviewAPIVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. An array of glossary terms for the given glossary or an empty list.",
-            "schema": {
-              "type": "array",
-              "description": "An array of glossary terms for the given glossary or an empty list.",
-              "items": {
-                "$ref": "#/definitions/AtlasGlossaryTerm"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/glossary/terms/bulkDeletion/{operationGuid}": {
-      "get": {
-        "tags": [
-          "Glossary"
-        ],
-        "description": "Get the status of bulk delete operation",
-        "operationId": "Glossary_GetBulkDeleteOperationStatus",
-        "x-ms-examples": {
-          "Glossary_GetBulkDeleteOperationStatus": {
-            "$ref": "./examples/Glossary_GetBulkDeleteOperationStatusByOperationguid.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/operationGuid"
-          },
-          {
-            "$ref": "#/parameters/purviewAPIVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. Return the status of bulk delete operation.",
-            "schema": {
-              "$ref": "#/definitions/BulkDeleteOperation"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/glossary/terms:delete": {
+    "/glossary/{glossaryGuid}/terms/delete": {
       "post": {
         "tags": [
           "Glossary"
@@ -3130,100 +3000,6 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
-        }
-      }
-    },
-    "/glossary/terms": {
-      "put": {
-        "tags": [
-          "Glossary"
-        ],
-        "description": "Update terms in bulk.",
-        "operationId": "Glossary_BulkUpdateTerms",
-        "x-ms-examples": {
-          "Glossary_BulkUpdateGlossaryTerms": {
-            "$ref": "./examples/Glossary_BulkUpdateGlossaryTerms.json"
-          }
-        },
-        "parameters": [
-          {
-            "in": "body",
-            "name": "terms",
-            "description": "An array of terms to update.",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "description": "An array of glossary terms.",
-              "items": {
-                "$ref": "#/definitions/AtlasGlossaryTerm"
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. An array of glossary terms.",
-            "schema": {
-              "type": "array",
-              "description": "An array of glossary terms.",
-              "items": {
-                "$ref": "#/definitions/AtlasGlossaryTerm"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Glossary"
-        ],
-        "description": "Get terms by guids.",
-        "operationId": "Glossary_ListTermsByGuids",
-        "x-ms-examples": {
-          "Glossary_ListGlossaryTermsByGuids": {
-            "$ref": "./examples/Glossary_ListGlossaryTermsByGuids.json"
-          }
-        },
-        "parameters": [
-          {
-            "name": "guid",
-            "in": "query",
-            "description": "An array of GUIDs of terms to list.",
-            "required": true,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi",
-            "x-ms-client-name": "guids"
-          },
-          {
-            "$ref": "#/parameters/excludeRelationshipTypes"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. An array of glossary terms or an empty list.",
-            "schema": {
-              "type": "array",
-              "description": "An array of glossary terms or an empty list.",
-              "items": {
-                "$ref": "#/definitions/AtlasGlossaryTerm"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
         }
       }
     },
@@ -3479,6 +3255,9 @@
           },
           {
             "$ref": "#/parameters/getDerivedLineage"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
           }
         ],
         "responses": {
@@ -3585,6 +3364,9 @@
             "description": "The qualified name of the entity. (This is only an example. qualifiedName can be changed to other unique attributes)",
             "required": false,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
           }
         ],
         "responses": {
@@ -3592,181 +3374,6 @@
             "schema": {
               "$ref": "#/definitions/AtlasLineageInfo",
               "description": "If Lineage exists for the given entity"
-            },
-            "examples": {
-              "application/json": {
-                "baseEntityGuid": "...",
-                "guidEntityMap": {
-                  "property1": {
-                    "classificationNames": [
-                      "...",
-                      "..."
-                    ],
-                    "classifications": [
-                      {
-                        "entityGuid": "...",
-                        "entityStatus": "DELETED",
-                        "validityPeriods": [
-                          {},
-                          {}
-                        ],
-                        "attributes": {
-                          "property1": {},
-                          "property2": {}
-                        },
-                        "typeName": "..."
-                      },
-                      {
-                        "entityGuid": "...",
-                        "entityStatus": "PURGED",
-                        "validityPeriods": [
-                          {},
-                          {}
-                        ],
-                        "attributes": {
-                          "property1": {},
-                          "property2": {}
-                        },
-                        "typeName": "..."
-                      }
-                    ],
-                    "displayText": "...",
-                    "guid": "...",
-                    "isIncomplete": true,
-                    "labels": [
-                      "...",
-                      "..."
-                    ],
-                    "meaningNames": [
-                      "...",
-                      "..."
-                    ],
-                    "meanings": [
-                      {
-                        "confidence": 12345,
-                        "createdBy": "...",
-                        "description": "...",
-                        "displayText": "...",
-                        "expression": "...",
-                        "relationGuid": "...",
-                        "source": "...",
-                        "status": "DISCOVERED",
-                        "steward": "...",
-                        "termGuid": "..."
-                      },
-                      {
-                        "confidence": 12345,
-                        "createdBy": "...",
-                        "description": "...",
-                        "displayText": "...",
-                        "expression": "...",
-                        "relationGuid": "...",
-                        "source": "...",
-                        "status": "DISCOVERED",
-                        "steward": "...",
-                        "termGuid": "..."
-                      }
-                    ],
-                    "status": "PURGED",
-                    "attributes": {
-                      "property1": {},
-                      "property2": {}
-                    },
-                    "typeName": "..."
-                  },
-                  "property2": {
-                    "classificationNames": [
-                      "...",
-                      "..."
-                    ],
-                    "classifications": [
-                      {
-                        "entityGuid": "...",
-                        "entityStatus": "ACTIVE",
-                        "validityPeriods": [
-                          {},
-                          {}
-                        ],
-                        "attributes": {
-                          "property1": {},
-                          "property2": {}
-                        },
-                        "typeName": "..."
-                      },
-                      {
-                        "entityGuid": "...",
-                        "entityStatus": "ACTIVE",
-                        "validityPeriods": [
-                          {},
-                          {}
-                        ],
-                        "attributes": {
-                          "property1": {},
-                          "property2": {}
-                        },
-                        "typeName": "..."
-                      }
-                    ],
-                    "displayText": "...",
-                    "guid": "...",
-                    "isIncomplete": true,
-                    "labels": [
-                      "...",
-                      "..."
-                    ],
-                    "meaningNames": [
-                      "...",
-                      "..."
-                    ],
-                    "meanings": [
-                      {
-                        "confidence": 12345,
-                        "createdBy": "...",
-                        "description": "...",
-                        "displayText": "...",
-                        "expression": "...",
-                        "relationGuid": "...",
-                        "source": "...",
-                        "status": "DEPRECATED",
-                        "steward": "...",
-                        "termGuid": "..."
-                      },
-                      {
-                        "confidence": 12345,
-                        "createdBy": "...",
-                        "description": "...",
-                        "displayText": "...",
-                        "expression": "...",
-                        "relationGuid": "...",
-                        "source": "...",
-                        "status": "OBSOLETE",
-                        "steward": "...",
-                        "termGuid": "..."
-                      }
-                    ],
-                    "status": "ACTIVE",
-                    "attributes": {
-                      "property1": {},
-                      "property2": {}
-                    },
-                    "typeName": "..."
-                  }
-                },
-                "lineageDepth": 12345,
-                "lineageDirection": "BOTH",
-                "relations": [
-                  {
-                    "fromEntityId": "...",
-                    "relationshipId": "...",
-                    "toEntityId": "..."
-                  },
-                  {
-                    "fromEntityId": "...",
-                    "relationshipId": "...",
-                    "toEntityId": "..."
-                  }
-                ]
-              }
             },
             "description": "If Lineage exists for the given entity"
           },
@@ -4449,6 +4056,9 @@
           },
           {
             "$ref": "#/parameters/type"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
           }
         ],
         "responses": {
@@ -4596,6 +4206,9 @@
           },
           {
             "$ref": "#/parameters/type"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
           }
         ],
         "responses": {
@@ -4679,141 +4292,6 @@
             "description": "OK. On successful lookup of the the term template definition by its name.",
             "schema": {
               "$ref": "#/definitions/TermTemplateDef"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/collections/{collection}/entity": {
-      "post": {
-        "tags": [
-          "Collection"
-        ],
-        "description": "Creates or updates an entity to a collection.\nExisting entity is matched using its unique guid if supplied or by its unique attributes eg: qualifiedName.\nMap and array of collections are not well supported. E.g., array<array<int>>, array<map<string, int>>.",
-        "operationId": "Collection_CreateOrUpdate",
-        "x-ms-examples": {
-          "Collection_CreateOrUpdate": {
-            "$ref": "./examples/Collection_CreateOrUpdate.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/collection"
-          },
-          {
-            "$ref": "#/parameters/purviewAPIVersion"
-          },
-          {
-            "in": "body",
-            "name": "entity",
-            "description": "Atlas entity with extended information.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AtlasEntityWithExtInfo"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Created with EntityMutationResponse.",
-            "schema": {
-              "$ref": "#/definitions/EntityMutationResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/collections/{collection}/entity/bulk": {
-      "post": {
-        "tags": [
-          "Collection"
-        ],
-        "description": "Creates or updates entities in bulk to a collection.\nExisting entity is matched using its unique guid if supplied or by its unique attributes eg: qualifiedName.\nMap and array of collections are not well supported. E.g., array<array<int>>, array<map<string, int>>.",
-        "operationId": "Collection_CreateOrUpdateBulk",
-        "x-ms-examples": {
-          "Collection_CreateOrUpdateBulk": {
-            "$ref": "./examples/Collection_CreateOrUpdateBulk.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/collection"
-          },
-          {
-            "$ref": "#/parameters/purviewAPIVersion"
-          },
-          {
-            "in": "body",
-            "name": "entities",
-            "description": "Atlas entities with extended information.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AtlasEntitiesWithExtInfo"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Created with EntityMutationResponse.",
-            "schema": {
-              "$ref": "#/definitions/EntityMutationResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/collections/{collection}/entity/moveHere": {
-      "post": {
-        "tags": [
-          "Collection"
-        ],
-        "description": "Move existing entities to the target collection.",
-        "operationId": "Collection_MoveEntitiesToCollection",
-        "x-ms-examples": {
-          "Collection_MoveEntitiesToCollection": {
-            "$ref": "./examples/Collection_MoveEntitiesToCollection.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/collection"
-          },
-          {
-            "$ref": "#/parameters/purviewAPIVersion"
-          },
-          {
-            "in": "body",
-            "name": "moveEntitiesRequest",
-            "description": "Entity guids to be moved to target collection.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MoveEntitiesRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Created with EntityMutationResponse.",
-            "schema": {
-              "$ref": "#/definitions/EntityMutationResponse"
             }
           },
           "default": {
@@ -7838,9 +7316,9 @@
       "title": "SuggestRequest",
       "description": "The query of suggest request."
     },
-    "ImportCSVOperation": {
+    "AsyncOperation": {
       "type": "object",
-      "title": "Status of import csv operation",
+      "title": "Status of glossary async operation",
       "description": "The status of import csv operation",
       "required": [
         "id",
@@ -7851,7 +7329,7 @@
           "type": "string"
         },
         "status": {
-          "$ref": "#/definitions/ImportCSVOperationStatus"
+          "$ref": "#/definitions/AsyncOperationStatus"
         },
         "createTime": {
           "type": "string",
@@ -7862,8 +7340,11 @@
           "description": "The last updated time of the record."
         },
         "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ImportCSVOperationProperties"
+          "type": "object",
+          "description": "Detailed properties for different scenarioes. Glossary import operation properties: importedTerms, totalTermsDetected; Glossary bulk delete operation properties: deletedTerms, totalTermsDetected.",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "error": {
           "x-ms-client-flatten": true,
@@ -7871,20 +7352,7 @@
         }
       }
     },
-    "ImportCSVOperationProperties": {
-      "type": "object",
-      "properties": {
-        "importedTerms": {
-          "type": "string",
-          "description": "Term numbers that already imported successfully"
-        },
-        "totalTermsDetected": {
-          "type": "string",
-          "description": "Total term numbers that detected in csv"
-        }
-      }
-    },
-    "ImportCSVOperationStatus": {
+    "AsyncOperationStatus": {
       "type": "string",
       "enum": [
         "NotStarted",
@@ -7893,57 +7361,11 @@
         "Running"
       ],
       "x-ms-enum": {
-        "name": "ImportCSVOperationStatus",
+        "name": "AsyncOperationStatus",
         "modelAsString": true
       },
-      "title": "ImportCSVOperationStatus",
-      "description": "Enum of the status of import csv operation."
-    },
-    "BulkDeleteOperation": {
-      "type": "object",
-      "title": "Status of bulk delete operation",
-      "description": "The status of bulk delete operation",
-      "required": [
-        "id",
-        "status"
-      ],
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "status": {
-          "$ref": "#/definitions/BulkDeleteOperationStatus"
-        },
-        "createTime": {
-          "type": "string",
-          "description": "The created time of the record."
-        },
-        "lastUpdateTime": {
-          "type": "string",
-          "description": "The last updated time of the record."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/BulkDeleteOperationProperties"
-        },
-        "error": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AsyncOperationError"
-        }
-      }
-    },
-    "BulkDeleteOperationProperties": {
-      "type": "object",
-      "properties": {
-        "deletedTerms": {
-          "type": "string",
-          "description": "Term numbers that already deleted successfully"
-        },
-        "totalTermsDetected": {
-          "type": "string",
-          "description": "Total term numbers that detected in a bulk delete job"
-        }
-      }
+      "title": "AsyncOperationStatus",
+      "description": "Enum of the status of async operation."
     },
     "AsyncOperationError": {
       "type": "object",
@@ -8000,7 +7422,7 @@
   "parameters": {
     "Endpoint": {
       "name": "Endpoint",
-      "description": "The catalog endpoint of your Purview account. Example: https://{accountName}.purview.azure.com",
+      "description": "The datamap endpoint of your Purview account. Example: https://{accountName}.purview.azure.com",
       "x-ms-parameter-location": "client",
       "required": true,
       "type": "string",
@@ -8376,8 +7798,8 @@
       "default": false,
       "x-ms-parameter-location": "method"
     },
-    "excludeRelationshipTypes": {
-      "name": "excludeRelationshipTypes",
+    "ignoredRelationshipTypes": {
+      "name": "ignoredRelationshipTypes",
       "description": "An array of the relationship types need to be excluded from the response.",
       "in": "query",
       "required": false,
@@ -8480,7 +7902,15 @@
     },
     "collection": {
       "name": "collection",
-      "description": "the collection unique name",
+      "description": "The collection unique name",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "collectionId": {
+      "name": "collectionId",
+      "description": "The collection ID.",
       "in": "path",
       "required": true,
       "type": "string",
