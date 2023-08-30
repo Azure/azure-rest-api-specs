@@ -84,7 +84,7 @@ alias DiscoTemplatesListTrait = {
   ...QueryParametersTrait<{
     ...FilterQueryParameter;
     ...SkipQueryParameter;
-    ...MaxPageSizeQueryParameter
+    ...MaxPageSizeQueryParameter;
   }>;
 };
 alias SavedFiltersListTrait = {
@@ -95,7 +95,7 @@ alias SavedFiltersListTrait = {
   ...QueryParametersTrait<{
     ...FilterQueryParameter;
     ...SkipQueryParameter;
-    ...MaxPageSizeQueryParameter
+    ...MaxPageSizeQueryParameter;
   }>;
 };
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"

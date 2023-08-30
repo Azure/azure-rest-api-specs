@@ -103,7 +103,10 @@ interface DiscoveryGroups {
 @doc("Provides access to disco template resources.")
 interface DiscoveryTemplates {
   @doc("Retrieve a list of disco templates for the provided search parameters.")
-  listDiscoTemplate is Operations.ResourceList<DiscoTemplate, DiscoTemplatesListTrait>;
+  listDiscoTemplate is Operations.ResourceList<
+    DiscoTemplate,
+    DiscoTemplatesListTrait
+  >;
   @doc("Retrieve a disco template with a given templateId.")
   getDiscoTemplate is Operations.ResourceRead<DiscoTemplate>;
 }
@@ -138,7 +141,10 @@ interface Reports {
 @doc("Provides access to saved filter resources.")
 interface SavedFilters {
   @doc("Retrieve a list of saved filters for the provided search parameters.")
-  listSavedFilter is Operations.ResourceList<SavedFilter, SavedFiltersListTrait>;
+  listSavedFilter is Operations.ResourceList<
+    SavedFilter,
+    SavedFiltersListTrait
+  >;
   @doc("Retrieve a saved filter by filterName.")
   getSavedFilter is Operations.ResourceRead<SavedFilter>;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
