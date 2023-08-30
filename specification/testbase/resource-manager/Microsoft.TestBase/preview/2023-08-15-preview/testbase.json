@@ -683,6 +683,12 @@
           },
           {
             "$ref": "#/parameters/OSNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OffsetParameter"
+          },
+          {
+            "$ref": "#/parameters/TopFilter"
           }
         ],
         "responses": {
@@ -4388,6 +4394,19 @@
     "PackageRunTestParameters": {
       "description": "The parameters supplied to the Test Base Package to start a Test Run.",
       "type": "object",
+      "properties": {},
+      "required": [
+        "testType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TestRunParameters"
+        }
+      ]
+    },
+    "TestRunParameters": {
+      "type": "object",
+      "description": "Base parameters for Package and TestConfiguration Test Run.",
       "properties": {
         "testType": {
           "$ref": "#/definitions/TestType",
@@ -4423,18 +4442,15 @@
           "type": "string",
           "description": "The build version of the operating system."
         },
-        "mediaPackageVersion": {
-          "type": "string",
-          "description": "The package version of the operating system. It can be empty."
-        },
         "customImageId": {
           "type": "string",
           "description": "The tested custom image id. 'osName', 'release', 'buildVersion' and 'mediaPackageVersion' would be ignored when it's eligible.'"
+        },
+        "mediaPackageVersion": {
+          "type": "string",
+          "description": "The package version of the operating system. It can be empty."
         }
-      },
-      "required": [
-        "testType"
-      ]
+      }
     },
     "PackageListResult": {
       "description": "A list of Test Base Packages.",
@@ -4588,6 +4604,10 @@
           },
           "x-ms-identifiers": [],
           "description": "The detailed test information."
+        },
+        "intuneEnrollmentMetadata": {
+          "description": "The metadata of Intune enrollment.",
+          "$ref": "#/definitions/IntuneEnrollmentMetadata"
         }
       },
       "required": [
@@ -4812,6 +4832,10 @@
         "postUpgrade": {
           "type": "boolean",
           "description": "Specifies whether the command is assigned to be executed after in-place upgrade."
+        },
+        "enrollIntuneBefore": {
+          "type": "boolean",
+          "description": "Specifies whether to enroll Intune before the command."
         }
       },
       "required": [
@@ -4890,6 +4914,10 @@
           },
           "x-ms-identifiers": [],
           "description": "The detailed test information."
+        },
+        "intuneEnrollmentMetadata": {
+          "description": "The metadata of Intune enrollment.",
+          "$ref": "#/definitions/IntuneEnrollmentMetadata"
         }
       }
     },
@@ -6989,6 +7017,50 @@
           "description": "The version of the Windows OS."
         }
       }
+    },
+    "IntuneEnrollmentMetadata": {
+      "description": "The metadata of Intune enrollment.",
+      "type": "object",
+      "properties": {
+        "appList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnrolledIntuneApp"
+          },
+          "x-ms-identifiers": [],
+          "description": "The enrolled Intune apps."
+        },
+        "credentialId": {
+          "description": "The id of the Intune enrollment credential.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "credentialId"
+      ]
+    },
+    "EnrolledIntuneApp": {
+      "description": "Metadata of the enrolled Intune app.",
+      "type": "object",
+      "properties": {
+        "appName": {
+          "type": "string",
+          "description": "Intune app name."
+        },
+        "appId": {
+          "type": "string",
+          "description": "Intune app id."
+        },
+        "expectedInstallationPath": {
+          "type": "string",
+          "description": "Intune app expected installation path."
+        }
+      },
+      "required": [
+        "appName",
+        "appId",
+        "expectedInstallationPath"
+      ]
     }
   },
   "parameters": {
@@ -7183,6 +7255,14 @@
       "pattern": "^[A-Za-z0-9]([A-Za-z0-9_]|((-{1,2}|[. ])[A-Za-z0-9]))+$",
       "x-ms-parameter-location": "method",
       "description": "The full available OS update name in this format: osName--release--buildNumber--buildRevision--packageVersion--architecture, Example: Windows 10 22H2--2020.03 D--19043--1237--1.2.3--x64"
+    },
+    "OffsetParameter": {
+      "name": "offset",
+      "in": "query",
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method",
+      "description": "The number of items to skip before starting to collect the result set."
     }
   }
 }

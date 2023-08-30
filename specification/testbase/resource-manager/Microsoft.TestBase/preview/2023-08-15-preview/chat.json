@@ -240,6 +240,20 @@
       "type": "object",
       "description": "The chat response payload.",
       "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ChatResponseProperties",
+          "description": "The properties of chat response."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "ChatResponseProperties": {
+      "type": "object",
+      "description": "The chat response properties.",
+      "properties": {
         "question": {
           "type": "string",
           "description": "The question from the request"

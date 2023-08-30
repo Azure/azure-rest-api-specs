@@ -414,6 +414,61 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/testConfigurations/{testConfigurationName}/runTest": {
+      "post": {
+        "tags": [
+          "Test Configuration"
+        ],
+        "operationId": "TestConfigurations_RunTest",
+        "summary": "Schedule On-Demand Run for all Packages",
+        "description": "This endpoint allows initiating an on-demand run for a specific test configuration identified by the testConfigurationId within the specified organizationId. It triggers the execution of multiple packages with the provided payload parameters.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./testbase.json#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TestConfigurationName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestConfigurationRunTestParameters"
+            },
+            "description": "Parameters supplied to the run multiple on-demand operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The on-demand run request was successfully queued.",
+            "schema": {
+              "$ref": "#/definitions/TestConfigurationRunTestResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestConfigurationsRunTest": {
+            "$ref": "./examples/TestConfigurationsRunTest.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/testConfigurations/{testConfigurationName}/testResults": {
       "get": {
         "tags": [
@@ -833,6 +888,59 @@
           "type": "string",
           "readOnly": true,
           "description": "Link to the next set of results. Not empty if value contains incomplete list of results."
+        }
+      }
+    },
+    "TestConfigurationRunTestParameters": {
+      "description": "The request body of a multiple ondemand run request.",
+      "type": "object",
+      "properties": {
+        "testRunTitle": {
+          "type": "string",
+          "description": "A friendly name for the run."
+        },
+        "doNotInstallOSUpdates": {
+          "type": "boolean",
+          "description": "A flag indicating whether to skip installing operating system updates during the run."
+        }
+      },
+      "required": [
+        "testType",
+        "osUpdateType",
+        "osName"
+      ],
+      "allOf": [
+        {
+          "$ref": "./testbase.json#/definitions/TestRunParameters"
+        }
+      ]
+    },
+    "TestConfigurationRunTestResponse": {
+      "description": "The response body of a multiple ondemand run request.",
+      "type": "object",
+      "properties": {
+        "testPassId": {
+          "type": "string",
+          "description": "The unique identifier for the queued run."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the on-demand run.",
+          "default": "Queued",
+          "enum": [
+            "Queued",
+            "Rejected",
+            "NoPackagesFound"
+          ],
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
+        },
+        "totalPackagesScheduled": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of packages scheduled for execution."
         }
       }
     }

@@ -704,6 +704,10 @@
           },
           "x-ms-identifiers": [],
           "description": "The detailed test information."
+        },
+        "intuneEnrollmentMetadata": {
+          "description": "The metadata of Intune enrollment.",
+          "$ref": "./testbase.json#/definitions/IntuneEnrollmentMetadata"
         }
       }
     },
@@ -835,6 +839,10 @@
           },
           "x-ms-identifiers": [],
           "description": "The detailed test information."
+        },
+        "intuneEnrollmentMetadata": {
+          "description": "The metadata of Intune enrollment.",
+          "$ref": "./testbase.json#/definitions/IntuneEnrollmentMetadata"
         }
       }
     },
@@ -845,7 +853,8 @@
         "Native",
         "IntuneWin",
         "TestBasePackage",
-        "GalleryApp"
+        "GalleryApp",
+        "IntuneEnrollment"
       ],
       "x-ms-enum": {
         "name": "draftPackageSourceType",
@@ -853,11 +862,11 @@
       }
     },
     "DraftPackageIntuneAppMetadata": {
-      "description": "The metadata of Intune app used for generation.",
+      "description": "The metadata of Intune app(s) used for generation.",
       "type": "object",
       "properties": {
         "intuneApp": {
-          "description": "The Metadata of the Intune App.",
+          "description": "The Metadata of the Intune App through intunewin file uploading.",
           "$ref": "#/definitions/DraftPackageIntuneAppMetadataItem"
         },
         "intuneAppDependencies": {
@@ -866,7 +875,7 @@
             "$ref": "#/definitions/DraftPackageIntuneAppMetadataItem"
           },
           "x-ms-identifiers": [],
-          "description": "The Metadata of dependencies of the Intune App."
+          "description": "The Metadata of dependencies of the Intune App through intunewin file uploading."
         }
       }
     },

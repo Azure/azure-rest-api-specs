@@ -241,6 +241,7 @@ input-file:
   - Microsoft.TestBase/preview/2023-08-15-preview/draftpackage.json
   - Microsoft.TestBase/preview/2023-08-15-preview/testbase.json
   - Microsoft.TestBase/preview/2023-08-15-preview/testconfiguration.json
+  - Microsoft.TestBase/preview/2023-08-15-preview/credential.json
 ```
 
 ## Suppression
