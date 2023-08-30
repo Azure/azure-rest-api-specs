@@ -780,7 +780,7 @@
             "$ref": "#/parameters/AccountNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1989,7 +1989,8 @@
       "properties": {
         "id": {
           "description": "Remote endpoint resource ID.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id"
         },
         "location": {
           "description": "ARM location of the remote private endpoint.",
@@ -2047,7 +2048,8 @@
       "properties": {
         "id": {
           "description": "Remote endpoint resource ID.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id"
         },
         "location": {
           "description": "ARM location of the remote private endpoint.",
