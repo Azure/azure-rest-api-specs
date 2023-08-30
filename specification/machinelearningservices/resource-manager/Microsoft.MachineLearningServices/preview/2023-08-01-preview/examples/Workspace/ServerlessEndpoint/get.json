@@ -14,17 +14,28 @@
         "name": "string",
         "type": "string",
         "properties": {
-          "modelProfile": {
-            "modelUri": "string"
+          "offer": {
+            "publisher": "string",
+            "offerName": "string"
           },
-          "inferenceUri": "https://www.contoso.com/example",
-          "provisioningState": "Updating"
+          "capacityReservation": {
+            "capacityReservationGroupId": "string",
+            "endpointReservedCapacity": 1
+          },
+          "authMode": "Key",
+          "inferenceEndpoint": {
+            "inferenceUri": "https://www.contoso.com/example",
+            "headers": {
+              "string": "string"
+            }
+          },
+          "provisioningState": "Failed"
         },
         "systemData": {
-          "createdAt": "2020-01-01T12:34:56.999+00:12",
+          "createdAt": "2020-01-01T12:34:56.999+00:46",
           "createdBy": "string",
-          "createdByType": "Key",
-          "lastModifiedAt": "2020-01-01T12:34:56.999+00:12",
+          "createdByType": "Application",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:46",
           "lastModifiedBy": "string",
           "lastModifiedByType": "Application"
         },
@@ -32,7 +43,7 @@
         "location": "string",
         "kind": "string",
         "identity": {
-          "type": "SystemAssigned,UserAssigned",
+          "type": "UserAssigned",
           "principalId": "00000000-1111-2222-3333-444444444444",
           "tenantId": "00000000-1111-2222-3333-444444444444",
           "userAssignedIdentities": {

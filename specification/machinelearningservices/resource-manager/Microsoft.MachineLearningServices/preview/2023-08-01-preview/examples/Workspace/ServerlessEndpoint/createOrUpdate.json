@@ -7,15 +7,21 @@
     "api-version": "2023-08-01-preview",
     "body": {
       "properties": {
-        "modelProfile": {
-          "modelUri": "string"
-        }
+        "offer": {
+          "publisher": "string",
+          "offerName": "string"
+        },
+        "capacityReservation": {
+          "capacityReservationGroupId": "string",
+          "endpointReservedCapacity": 1
+        },
+        "authMode": "AAD"
       },
       "tags": {},
       "location": "string",
       "kind": "string",
       "identity": {
-        "type": "SystemAssigned",
+        "type": "UserAssigned",
         "userAssignedIdentities": {
           "string": {}
         }
@@ -37,19 +43,30 @@
         "name": "string",
         "type": "string",
         "properties": {
-          "modelProfile": {
-            "modelUri": "string"
+          "offer": {
+            "publisher": "string",
+            "offerName": "string"
           },
-          "inferenceUri": "https://www.contoso.com/example",
-          "provisioningState": "Deleting"
+          "capacityReservation": {
+            "capacityReservationGroupId": "string",
+            "endpointReservedCapacity": 1
+          },
+          "authMode": "Key",
+          "inferenceEndpoint": {
+            "inferenceUri": "https://www.contoso.com/example",
+            "headers": {
+              "string": "string"
+            }
+          },
+          "provisioningState": "Canceled"
         },
         "systemData": {
-          "createdAt": "2020-01-01T12:34:56.999+00:11",
+          "createdAt": "2020-01-01T12:34:56.999+00:46",
           "createdBy": "string",
-          "createdByType": "Application",
-          "lastModifiedAt": "2020-01-01T12:34:56.999+00:11",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:46",
           "lastModifiedBy": "string",
-          "lastModifiedByType": "User"
+          "lastModifiedByType": "Application"
         },
         "tags": {},
         "location": "string",
@@ -81,25 +98,36 @@
         "name": "string",
         "type": "string",
         "properties": {
-          "modelProfile": {
-            "modelUri": "string"
+          "offer": {
+            "publisher": "string",
+            "offerName": "string"
           },
-          "inferenceUri": "https://www.contoso.com/example",
-          "provisioningState": "Updating"
+          "capacityReservation": {
+            "capacityReservationGroupId": "string",
+            "endpointReservedCapacity": 1
+          },
+          "authMode": "AAD",
+          "inferenceEndpoint": {
+            "inferenceUri": "https://www.contoso.com/example",
+            "headers": {
+              "string": "string"
+            }
+          },
+          "provisioningState": "Deleting"
         },
         "systemData": {
-          "createdAt": "2020-01-01T12:34:56.999+00:11",
+          "createdAt": "2020-01-01T12:34:56.999+00:46",
           "createdBy": "string",
-          "createdByType": "Key",
-          "lastModifiedAt": "2020-01-01T12:34:56.999+00:11",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:46",
           "lastModifiedBy": "string",
-          "lastModifiedByType": "ManagedIdentity"
+          "lastModifiedByType": "User"
         },
         "tags": {},
         "location": "string",
         "kind": "string",
         "identity": {
-          "type": "UserAssigned",
+          "type": "None",
           "principalId": "00000000-1111-2222-3333-444444444444",
           "tenantId": "00000000-1111-2222-3333-444444444444",
           "userAssignedIdentities": {
@@ -111,7 +139,7 @@
         },
         "sku": {
           "name": "string",
-          "tier": "Standard",
+          "tier": "Basic",
           "size": "string",
           "family": "string",
           "capacity": 1

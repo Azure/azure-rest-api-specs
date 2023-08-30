@@ -6,7 +6,20 @@
     "name": "string",
     "api-version": "2023-08-01-preview",
     "body": {
-      "tags": {}
+      "tags": {},
+      "sku": {
+        "name": "string",
+        "tier": "Basic",
+        "size": "string",
+        "family": "string",
+        "capacity": 1
+      },
+      "identity": {
+        "type": "None",
+        "userAssignedIdentities": {
+          "string": {}
+        }
+      }
     }
   },
   "responses": {
@@ -17,17 +30,28 @@
         "name": "string",
         "type": "string",
         "properties": {
-          "modelProfile": {
-            "modelUri": "string"
+          "offer": {
+            "publisher": "string",
+            "offerName": "string"
           },
-          "inferenceUri": "https://www.contoso.com/example",
-          "provisioningState": "Canceled"
+          "capacityReservation": {
+            "capacityReservationGroupId": "string",
+            "endpointReservedCapacity": 1
+          },
+          "authMode": "AAD",
+          "inferenceEndpoint": {
+            "inferenceUri": "https://www.contoso.com/example",
+            "headers": {
+              "string": "string"
+            }
+          },
+          "provisioningState": "Deleting"
         },
         "systemData": {
-          "createdAt": "2020-01-01T12:34:56.999+00:12",
+          "createdAt": "2020-01-01T12:34:56.999+00:47",
           "createdBy": "string",
-          "createdByType": "User",
-          "lastModifiedAt": "2020-01-01T12:34:56.999+00:12",
+          "createdByType": "Application",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:47",
           "lastModifiedBy": "string",
           "lastModifiedByType": "Application"
         },
@@ -35,7 +59,7 @@
         "location": "string",
         "kind": "string",
         "identity": {
-          "type": "SystemAssigned",
+          "type": "SystemAssigned,UserAssigned",
           "principalId": "00000000-1111-2222-3333-444444444444",
           "tenantId": "00000000-1111-2222-3333-444444444444",
           "userAssignedIdentities": {
@@ -47,17 +71,13 @@
         },
         "sku": {
           "name": "string",
-          "tier": "Free",
+          "tier": "Premium",
           "size": "string",
           "family": "string",
           "capacity": 1
         }
       }
     },
-    "202": {
-      "headers": {
-        "location": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/locations/centraluseuap/mfeOperationResults/prefix:F0C6B8EC-0D53-432C-913B-1CD9E8CDE3A0"
-      }
-    }
+    "202": {}
   }
 }
