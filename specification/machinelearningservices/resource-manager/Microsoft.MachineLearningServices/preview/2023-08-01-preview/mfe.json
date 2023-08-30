@@ -11866,6 +11866,59 @@
           "final-state-via": "location"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}/status": {
+      "post": {
+        "tags": [
+          "ServerlessEndpoint"
+        ],
+        "summary": "Temporary status API until integration completes.",
+        "operationId": "ServerlessEndpoints_GetStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Serverless Endpoint name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ServerlessEndpointStatus"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetStatus Workspace Serverless Endpoint.": {
+            "$ref": "./examples/Workspace/ServerlessEndpoint/getStatus.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -13273,6 +13326,27 @@
             "create",
             "read"
           ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "CapacityReservation": {
+      "required": [
+        "capacityReservationGroupId"
+      ],
+      "type": "object",
+      "properties": {
+        "capacityReservationGroupId": {
+          "description": "[Required] Specifies a capacity reservation group ID to allocate capacity from.",
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string"
+        },
+        "endpointReservedCapacity": {
+          "format": "int32",
+          "description": "Specifies a capacity amount to reserve for this endpoint within the parent capacity reservation group.",
+          "type": "integer",
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -20615,21 +20689,6 @@
       "x-ms-discriminator-value": "ModelPerformance",
       "additionalProperties": false
     },
-    "ModelProfile": {
-      "required": [
-        "modelUri"
-      ],
-      "type": "object",
-      "properties": {
-        "modelUri": {
-          "description": "[Required] The model to create a serverless endpoint of",
-          "minLength": 1,
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string"
-        }
-      },
-      "additionalProperties": false
-    },
     "ModelSize": {
       "description": "Image model size.",
       "enum": [
@@ -24544,23 +24603,31 @@
     },
     "ServerlessEndpoint": {
       "required": [
-        "modelProfile"
+        "offer"
       ],
       "type": "object",
       "properties": {
-        "inferenceUri": {
-          "format": "uri",
+        "authMode": {
+          "description": "Specifies the authentication mode for the Serverless endpoint.",
+          "$ref": "#/definitions/ServerlessInferenceEndpointAuthMode"
+        },
+        "capacityReservation": {
+          "description": "Optional capacity reservation information for the endpoint. When specified, the Serverless Endpoint\r\nwill be allocated capacity from the specified capacity reservation group.",
+          "$ref": "#/definitions/CapacityReservation",
+          "x-nullable": true
+        },
+        "inferenceEndpoint": {
           "description": "The inference uri to target when making requests against the serverless endpoint",
-          "type": "string",
+          "$ref": "#/definitions/ServerlessInferenceEndpoint",
           "readOnly": true,
           "x-ms-mutability": [
             "read"
           ],
           "x-nullable": true
         },
-        "modelProfile": {
-          "description": "[Required] The model profile to configure the serverless endpoint with",
-          "$ref": "#/definitions/ModelProfile"
+        "offer": {
+          "description": "[Required] The publisher-defined Serverless Offer to provision the endpoint with.",
+          "$ref": "#/definitions/ServerlessOffer"
         },
         "provisioningState": {
           "description": "Provisioning state for the endpoint.",
@@ -24572,6 +24639,20 @@
         }
       },
       "x-ms-client-name": "ServerlessEndpointProperties",
+      "additionalProperties": false
+    },
+    "ServerlessEndpointStatus": {
+      "type": "object",
+      "properties": {
+        "metrics": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
+        }
+      },
       "additionalProperties": false
     },
     "ServerlessEndpointTrackedResource": {
@@ -24620,6 +24701,78 @@
           "items": {
             "$ref": "#/definitions/ServerlessEndpointTrackedResource"
           }
+        }
+      },
+      "additionalProperties": false
+    },
+    "ServerlessInferenceEndpoint": {
+      "required": [
+        "inferenceUri"
+      ],
+      "type": "object",
+      "properties": {
+        "headers": {
+          "description": "Specifies any required headers to target this serverless endpoint.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "inferenceUri": {
+          "format": "uri",
+          "description": "[Required] The inference uri to target when making requests against the Serverless Endpoint.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "ServerlessInferenceEndpointAuthMode": {
+      "enum": [
+        "Key",
+        "AAD"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ServerlessInferenceEndpointAuthMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Key"
+          },
+          {
+            "value": "AAD"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "ServerlessOffer": {
+      "required": [
+        "offerName",
+        "publisher"
+      ],
+      "type": "object",
+      "properties": {
+        "offerName": {
+          "description": "[Required] The name of the Serverless Offer",
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string"
+        },
+        "publisher": {
+          "description": "[Required] Publisher name of the Serverless Offer",
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string"
         }
       },
       "additionalProperties": false
