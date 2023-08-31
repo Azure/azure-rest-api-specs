@@ -1564,6 +1564,140 @@
         }
       }
     },
+    "/entity/import": {
+      "post": {
+        "tags": [
+          "Entity"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "description": "Import Entity from local csv file",
+        "operationId": "Entity_ImportViaCsv",
+        "x-ms-examples": {
+          "Entity_ImportViaCsv": {
+            "$ref": "./examples/Entity_GetImportCSVOperationStatus.json"
+          }
+        },
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "file",
+            "description": "The csv file to import entities from csv.",
+            "required": true,
+            "type": "file"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. A job to import entities via csv has been accepted.",
+            "headers": {
+              "Operation-Location": {
+                "description": "Response header for long running operation",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/entity/operation/{operationGuid}": {
+      "get": {
+        "tags": [
+          "Entity"
+        ],
+        "description": "Get the status of entity import or export job",
+        "operationId": "Entity_GetOperationStatus",
+        "x-ms-examples": {
+          "Entity_GetOperationStatus": {
+            "$ref": "./examples/Entity_GetOperationStatusByOperationguid.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/operationGuid"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Return the status of import csv operation.",
+            "schema": {
+              "$ref": "#/definitions/EntityImportCSVOperation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/entity/export": {
+      "post": {
+        "tags": [
+          "Entity"
+        ],
+        "description": "Export Entity as csv file",
+        "operationId": "Entity_ExportAsCsv",
+        "x-ms-examples": {
+          "Entity_ExportAsCsvWithGuid": {
+            "$ref": "./examples/Entity_ExportAsCsvWithGuid.json"
+          },
+          "Entity_ExportAsCsvWithFilter": {
+            "$ref": "./examples/Entity_ExportAsCsvWithFilter.json"
+          }
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "exportRequest",
+            "description": "Export request defining the entity guids and other values to be exported. If no fields are provided, all attributes/relationship attributes/business attributes including the contacts Expert/Owner/Steward will be exported.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EntityExportRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. A job to export entities via csv has been accepted.",
+            "headers": {
+              "Operation-Location": {
+                "description": "Response header for long running operation",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/atlas/v2/glossary": {
       "get": {
         "tags": [
@@ -1576,7 +1710,7 @@
             "$ref": "./examples/Glossary_ListGlossaries.json"
           }
         },
-        "parameters": [         
+        "parameters": [
           {
             "$ref": "#/parameters/purviewAPIVersion"
           },
@@ -2905,7 +3039,62 @@
         }
       }
     },
-    "/glossary/operation/{operationGuid}": {
+    "/glossary/{glossaryGuid}/terms/export": {
+      "post": {
+        "tags": [
+          "Glossary"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "description": "Export Glossary Terms as a csv file.",
+        "operationId": "Glossary_ExportGlossaryTermsAsCsv",
+        "x-ms-examples": {
+          "Glossary_ExportGlossaryTermsAsCsv": {
+            "$ref": "./examples/Glossary_ExportGlossaryTermsAsCsv.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/glossaryGuid"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
+          {
+            "in": "body",
+            "name": "termExportRequest",
+            "description": "Term export request defining the term guids and other values to be exported.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TermsExportRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. A job to export glossary terms as csv has been accepted.",
+            "headers": {
+              "Operation-Location": {
+                "description": "Response header for long running operation",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/glossary/operations/{operationGuid}": {
       "get": {
         "tags": [
           "Glossary"
@@ -4223,6 +4412,89 @@
             "description": "OK. On successful lookup of the the term template definition by its name.",
             "schema": {
               "$ref": "#/definitions/TermTemplateDef"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/files": {
+      "post": {
+        "tags": [
+          "Files"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "description": "Upload a single file should be uploaded in formData with key='file'.",
+        "operationId": "Files_UploadFile",
+        "x-ms-examples": {
+          "Files_UploadFile": {
+            "$ref": "./examples/Files_UploadFile.json"
+          }
+        },
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "file",
+            "description": "The file to be uploaded.",
+            "required": true,
+            "type": "file"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. On successful upload the file",
+            "schema": {
+              "$ref": "#/definitions/FileUploadResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/files/{fileId}": {
+      "get": {
+        "tags": [
+          "Files"
+        ],
+        "produces": [
+          "text/csv"
+        ],
+        "description": "Download a single file.",
+        "operationId": "Files_DownloadFile",
+        "x-ms-examples": {
+          "Files_UploadFile": {
+            "$ref": "./examples/Files_UploadFile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/fileId"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. On successful download the file",
+            "schema": {
+              "format": "binary",
+              "type": "file"
             }
           },
           "default": {
@@ -7247,6 +7519,124 @@
           "description": "The error message."
         }
       }
+    },
+    "FileUploadResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "String",
+          "description": "The unique id of the file."
+        }
+      },
+      "title": "FileUploadResponse",
+      "description": "The response of file upload."
+    },
+    "EntityImportCSVOperation": {
+      "type": "object",
+      "title": "Status of import csv operation",
+      "description": "The status of import csv operation",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "guid string"
+        },
+        "status": {
+          "$ref": "#/definitions/EntityImportCSVOperationStatus"
+        },
+        "createTime": {
+          "type": "string",
+          "description": "The created time of the record."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "The creator for this import job."
+        },
+        "lastUpdateTime": {
+          "type": "string",
+          "description": "The last updated time of the record."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/EntityImportCSVOperationProperties"
+        },
+        "error": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AsyncOperationError"
+        }
+      }
+    },
+    "EntityImportCSVOperationStatus": {
+      "type": "string",
+      "enum": [
+        "NotStarted",
+        "Succeeded",
+        "Failed",
+        "Running",
+        "PartialSucceeded"
+      ],
+      "x-ms-enum": {
+        "name": "EntityImportCSVOperationStatus",
+        "modelAsString": true
+      },
+      "title": "EntityImportCSVOperationStatus",
+      "description": "Enum of the status of import entity csv operation."
+    },
+    "EntityImportCSVOperationProperties": {
+      "type": "object",
+      "properties": {
+        "processing": {
+          "type": "string",
+          "description": "Entity numbers being imported"
+        },
+        "failed": {
+          "type": "string",
+          "description": "Entity numbers failed"
+        },
+        "succeeded": {
+          "type": "string",
+          "description": "Entity numbers that already imported successfully"
+        }
+      }
+    },
+    "TermsExportRequest": {
+      "description": "Export request payload for terms",
+      "type": "object",
+      "properties": {
+        "guids": {
+          "description": "guids for exported terms",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EntityExportRequest": {
+      "description": "Export request payload for entities",
+      "type": "object",
+      "properties": {
+        "guids": {
+          "description": "guids for exported entities",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fields": {
+          "description": "fields for exported entities, e.g. attribute name, relationship attribute name, etc",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "filters": {
+          "description": "filters for exported entities",
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -7330,6 +7720,16 @@
       "name": "termGuid",
       "in": "path",
       "description": "The globally unique identifier for glossary term.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "x-ms-parameter-location": "method"
+    },
+    "fileId": {
+      "name": "fileId",
+      "in": "path",
+      "description": "The globally unique identifier for file.",
       "required": true,
       "type": "string",
       "minLength": 1,
