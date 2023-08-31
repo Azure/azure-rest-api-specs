@@ -66,7 +66,6 @@ model UpdateRunProperties {
     Subsequent changes to the referenced FleetUpdateStrategy resource do not propagate. 
     UpdateRunStrategy changes can be made directly on the "strategy" field before launching the UpdateRun.
     """)
-  @visibility("create", "read")
   @added(Versions.v2023_08_15_preview)
   updateStrategyId?: FleetUpdateStrategyResourceId;
 
