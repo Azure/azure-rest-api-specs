@@ -8,7 +8,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 @armProviderNamespace
 @service({
   title: "Informatica.DataManagement",
-  version: "2023-03-01-preview",
+  version: "2023-08-20-preview",
   description: "Azure Native Services Informatica DataManagement",
 })
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
@@ -150,7 +150,7 @@ model InformaticaProperties {
   singleSignOnProperties?: InformaticaSingleSignOnProperties;
 }
 
-@doc("Single sign on Info of the SolarWinds account")
+@doc("Single sign on Info of the Informatica organization")
 model InformaticaSingleSignOnProperties {
   @doc("Single sign-on state")
   singleSignOnState?: SingleSignOnStates;
@@ -158,7 +158,7 @@ model InformaticaSingleSignOnProperties {
   @doc("The Id of the Enterprise App used for Single sign-on.")
   enterpriseAppId?: string;
 
-  @doc("The login URL specific to this SolarWinds Organization")
+  @doc("The login URL specific to this Informatica Organization")
   singleSignOnUrl?: string;
 
   @doc("Provisioning state")
@@ -184,6 +184,97 @@ model UserDetails {
   @maxLength(40)
   @doc("Phone number of the user used by for contacting them if needed")
   phoneNumber?: string;
+}
+
+@doc("Serverless Runtime properties.")
+model InformaticaServerlessRuntimeProperties{
+  @visibility("read")
+  @doc("Provisioning State of the resource")
+  provisioningState?: ProvisioningState;
+  
+  @doc("description of the serverless runtime")
+  description?: string;
+
+  @doc("Platform type of the Serverless Runtime")
+  platform: string;
+
+  @doc("Application type of the Serverless Runtime")
+  applicationType: string;
+
+  @doc("Compute units of the serverless runtime")
+  computeUnits: string;
+
+  @doc("Informatica Serverless Network profile properties")
+  serverlessRuntimeNetworkProfile: ServerlessRuntimeNetworkProfile;
+
+  @doc("Advanced custom properties")
+  advancedCustomProperties: ;
+
+  @doc("Supplementary file location")
+  supplementaryFileLocation: string;
+
+  @doc("Serverless config properties")
+  serverlessRuntimeConfig : ServerlessRuntimeConfigProperties
+}
+
+@doc("Serverless Runtime config properties")
+model ServerlessRuntimeConfigProperties{
+
+  cdiConfigProps?: Array<CdiConfigProps>;
+
+  cdiConfigProps?: Array<CdiConfigProps>;
+}
+
+@doc("Informatica CDI Configuration Properties")
+model CdiConfigProps{
+  @doc("EngineName of the application config")
+  engineName: string;
+
+  @doc("EngineVersion of the application config")
+  name: string;
+
+  doc("ApplicationConfigs of the CDI")
+  applicationConfigs : Array<ApplicationConfigs>;
+}
+
+@doc("Application configs")
+model ApplicationConfigs{
+
+  @doc("Type of the application config")
+  type: string;
+
+  @doc("Name of the application config")
+  name: string;
+
+  @doc("Value of the application config")
+  value: string;
+  
+  @doc("Platform type of the application config")
+  platform: string;
+
+  @doc("Customized value of the application config")
+  customized: string;
+
+  @doc("Default value of the application config")
+  defaultValue: string;
+}
+
+
+@doc("Informatica Serverless Runtime Network Interface configurations")
+model NetworkInterfaceConfiguration {
+  @doc("virtual network resource id")
+  vnetId : string;
+
+  @doc("virtual network subnet resource id")
+  subnetId : string;
+
+  @doc("network security group name")
+  nsg : string;
+}
+
+@doc("Informatica Serverless Runtime Network Profile")
+model ServerlessRuntimeNetworkProfile{
+  networkInterfaceConfiguration : NetworkInterfaceConfiguration
 }
 
 @doc("Provisioning State of the Organization resource")
