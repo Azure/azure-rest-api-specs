@@ -1577,6 +1577,9 @@
         "x-ms-examples": {
           "Entity_ImportViaCsv": {
             "$ref": "./examples/Entity_GetImportCSVOperationStatus.json"
+          },
+          "Entity_ImportViaCsvWithUploadFiles": {
+            "$ref": "./examples/Entity_GetImportWithUploadedFiles.json"
           }
         },
         "parameters": [
@@ -1584,8 +1587,20 @@
             "in": "formData",
             "name": "file",
             "description": "The csv file to import entities from csv.",
-            "required": true,
+            "required": false,
             "type": "file"
+          },
+          {
+            "name": "fileId",
+            "in": "query",
+            "description": "An array of ids of the uploaded file for import.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "x-ms-client-name": "fileIds"
           },
           {
             "$ref": "#/parameters/purviewAPIVersion"
@@ -1676,6 +1691,13 @@
             }
           },
           {
+            "name": "supportRecursiveExport",
+            "in": "query",
+            "description": "Whether to support recursively exporting assets",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "$ref": "#/parameters/purviewAPIVersion"
           }
         ],
@@ -1694,11 +1716,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
-          },
-          "x-ms-long-running-operation": true,
-          "x-ms-long-running-operation-options": {
-            "final-state-via": "azure-async-operation"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -4439,7 +4461,7 @@
         "operationId": "Files_Upload",
         "x-ms-examples": {
           "Files_Upload": {
-            "$ref": "./examples/Files_Uploadd.json"
+            "$ref": "./examples/Files_Upload.json"
           }
         },
         "parameters": [
