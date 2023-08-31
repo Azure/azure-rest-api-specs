@@ -13,6 +13,20 @@
             "attributeName": "qualifiedName",
             "operator": "contains",
             "attributeValue": ".csv"
+          },
+          {
+            "or": [
+              {
+                "attributeName": "name",
+                "operator": "eq",
+                "attributeValue": "exampledata.csv"
+              },
+              {
+                "attributeName": "name",
+                "operator": "startswith",
+                "attributeValue": "AllTypes"
+              }
+            ]
           }
         ]
       }
@@ -22,7 +36,8 @@
   "responses": {
     "200": {
       "body": {
-        "@search.count": 5,
+        "@search.count": 2,
+        "@search.count.approximate": false,
         "value": [
           {
             "@search.score": 1.0,
@@ -52,6 +67,9 @@
             "@search.highlights": {
               "qualifiedName": [
                 "https://exampleaccount.blob.core.windows.net/examplepath/<em>csv</em>/AllTypes.csv"
+              ],
+              "name": [
+                "<em>AllTypes.csv</em>"
               ]
             },
             "id": "2605db54-086d-4d6c-adb6-f0bbed6c6eab",

@@ -72,10 +72,13 @@
             }
           },
           {
-            "$ref": "#/parameters/purviewAPIVersion"
+            "$ref": "#/parameters/businessAttributeUpdateBehavior"
           },
           {
-            "$ref": "#/parameters/businessAttributeUpdateBehavior"
+            "$ref": "#/parameters/collectionId"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
           }
         ],
         "responses": {
@@ -126,12 +129,6 @@
             "$ref": "#/parameters/ignoreRelationships"
           },
           {
-            "$ref": "#/parameters/collection"
-          },
-          {
-            "$ref": "#/parameters/ignoredRelationshipTypes"
-          },
-          {
             "$ref": "#/parameters/purviewAPIVersion"
           }
         ],
@@ -170,6 +167,9 @@
             "schema": {
               "$ref": "#/definitions/AtlasEntitiesWithExtInfo"
             }
+          },
+          {
+            "$ref": "#/parameters/collectionId"
           },
           {
             "$ref": "#/parameters/purviewAPIVersion"
@@ -1519,7 +1519,7 @@
         }
       }
     },
-    "/collection/{collection}/entity/moveHere": {
+    "/entity/moveTo": {
       "post": {
         "tags": [
           "Entity"
@@ -2024,7 +2024,7 @@
         "tags": [
           "Glossary"
         ],
-        "description": "Get a specific glossary term by its GUID.  Recommend using 'ignoredRelationshipTypes=AtlasGlossarySemanticAssignment' to get term and using 'GET /datamap/api/atlas/v2/glossary/terms/{termGuid}/assignedEntities' to get term assignment separately.",
+        "description": "Get a specific glossary term by its GUID. ",
         "operationId": "Glossary_GetGlossaryTerm",
         "x-ms-examples": {
           "Glossary_GetGlossaryTerm": {
@@ -2043,9 +2043,6 @@
           },
           {
             "$ref": "#/parameters/includeTermHierarchy"
-          },
-          {
-            "$ref": "#/parameters/ignoredRelationshipTypes"
           }
         ],
         "responses": {
@@ -3138,51 +3135,6 @@
         }
       }
     },
-    "/browse": {
-      "post": {
-        "tags": [
-          "Discovery"
-        ],
-        "description": "Browse entities by path or entity type.",
-        "operationId": "Discovery_Browse",
-        "x-ms-examples": {
-          "Discovery_Browse_Path": {
-            "$ref": "./examples/Discovery_Browse_Path.json"
-          },
-          "Discovery_Browse_EntityType": {
-            "$ref": "./examples/Discovery_Browse_EntityType.json"
-          }
-        },
-        "parameters": [
-          {
-            "in": "body",
-            "name": "browseRequest",
-            "description": "An object specifying the browse criteria.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BrowseRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/purviewAPIVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. On successful get the entities to browse.",
-            "schema": {
-              "$ref": "#/definitions/BrowseResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/search/autocomplete": {
       "post": {
         "tags": [
@@ -3245,16 +3197,7 @@
             "$ref": "#/parameters/depth"
           },
           {
-            "$ref": "#/parameters/width"
-          },
-          {
             "$ref": "#/parameters/direction"
-          },
-          {
-            "$ref": "#/parameters/includeParent"
-          },
-          {
-            "$ref": "#/parameters/getDerivedLineage"
           },
           {
             "$ref": "#/parameters/purviewAPIVersion"
@@ -3294,9 +3237,6 @@
           },
           {
             "$ref": "#/parameters/direction"
-          },
-          {
-            "$ref": "#/parameters/getDerivedLineage"
           },
           {
             "$ref": "#/parameters/offset"
@@ -3347,16 +3287,7 @@
             "$ref": "#/parameters/depth"
           },
           {
-            "$ref": "#/parameters/width"
-          },
-          {
             "$ref": "#/parameters/direction"
-          },
-          {
-            "$ref": "#/parameters/includeParent"
-          },
-          {
-            "$ref": "#/parameters/getDerivedLineage"
           },
           {
             "name": "attr:qualifiedName",
@@ -5486,10 +5417,6 @@
           "format": "int32",
           "description": "The width of lineage."
         },
-        "includeParent": {
-          "type": "boolean",
-          "description": "True to return the parent of the base entity."
-        },
         "childrenCount": {
           "type": "integer",
           "format": "int32",
@@ -6659,24 +6586,6 @@
       "title": "SuggestResult",
       "description": "The result item of the search suggest."
     },
-    "BrowseResult": {
-      "type": "object",
-      "properties": {
-        "@search.count": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The total number of browse results."
-        },
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BrowseResultValue"
-          }
-        }
-      },
-      "title": "BrowseResult",
-      "description": "The result item of the browse request."
-    },
     "SuggestResultValue": {
       "type": "object",
       "properties": {
@@ -6793,67 +6702,6 @@
       "title": "SuggestResultValue",
       "description": "The value item of the search suggest."
     },
-    "BrowseResultValue": {
-      "type": "object",
-      "properties": {
-        "entityType": {
-          "type": "string",
-          "description": "The type name of the record."
-        },
-        "id": {
-          "type": "string",
-          "description": "The GUID of the record."
-        },
-        "isLeaf": {
-          "type": "boolean",
-          "description": "If the record is a leaf entity."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the record."
-        },
-        "owner": {
-          "type": "array",
-          "description": "The owners of the record.",
-          "items": {
-            "$ref": "#/definitions/BrowseResultOwner"
-          }
-        },
-        "path": {
-          "type": "string",
-          "description": "The path of the record."
-        },
-        "qualifiedName": {
-          "type": "string",
-          "description": "The qualified name of the record."
-        }
-      },
-      "title": "BrowseResultValue",
-      "description": "The value item of the browse result."
-    },
-    "BrowseResultOwner": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The GUID of the owner."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name of the owner."
-        },
-        "mail": {
-          "type": "string",
-          "description": "The mail of the owner."
-        },
-        "contactType": {
-          "type": "string",
-          "description": "The contact type of the owner. The value will be Owner."
-        }
-      },
-      "title": "BrowseResultOwner",
-      "description": "The value item of the browse owner."
-    },
     "SearchResult": {
       "type": "object",
       "properties": {
@@ -6861,6 +6709,14 @@
           "type": "integer",
           "format": "int32",
           "description": "The total number of search results (not the number of documents in a single page)."
+        },
+        "@search.count.approximate":{
+          "type": "boolean",
+          "description":"'True' if the '@search.count' is an approximate value and vise versa."
+        },
+        "continuousToken":{
+          "type": "string",
+          "description": "The token used to get next batch of data. Absent if there's no more data."
         },
         "@search.facets": {
           "$ref": "#/definitions/SearchFacetResultValue"
@@ -7226,15 +7082,14 @@
           "type": "string",
           "description": "The keywords applied to all searchable fields."
         },
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The offset. The default value is 0. The maximum value is 100000."
-        },
         "limit": {
           "type": "integer",
           "format": "int32",
           "description": "The limit of the number of the search result. default value is 50; maximum value is 1000."
+        },
+        "continuousToken":{
+          "type": "string",
+          "description": "The token used to get next batch of data. Default 'Null' to get the first batch, and will return new token in each response unless there's no more data."
         },
         "orderby": {
           "type": "array",
@@ -7270,31 +7125,6 @@
       },
       "title": "SearchRequest",
       "description": "The search query of advanced search request."
-    },
-    "BrowseRequest": {
-      "type": "object",
-      "properties": {
-        "entityType": {
-          "type": "string",
-          "description": "The entity type to browse as the root level entry point."
-        },
-        "path": {
-          "type": "string",
-          "description": "The path to browse the next level child entities."
-        },
-        "limit": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of browse items we hope to return. The maximum value is 10000."
-        },
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The offset. The default value is 0. The maximum value is 100000."
-        }
-      },
-      "title": "BrowseRequest",
-      "description": "The criteria of browse request."
     },
     "SuggestRequest": {
       "type": "object",
@@ -7563,16 +7393,6 @@
       "format": "int32",
       "x-ms-parameter-location": "method"
     },
-    "width": {
-      "name": "width",
-      "description": "The number of max expanding width in lineage.",
-      "in": "query",
-      "required": false,
-      "type": "integer",
-      "default": 10,
-      "format": "int32",
-      "x-ms-parameter-location": "method"
-    },
     "direction": {
       "name": "direction",
       "description": "The direction of the lineage, which could be INPUT, OUTPUT or BOTH.",
@@ -7588,22 +7408,6 @@
         "name": "direction",
         "modelAsString": true
       },
-      "x-ms-parameter-location": "method"
-    },
-    "includeParent": {
-      "name": "includeParent",
-      "description": "True to include the parent chain in the response.",
-      "in": "query",
-      "required": false,
-      "type": "boolean",
-      "x-ms-parameter-location": "method"
-    },
-    "getDerivedLineage": {
-      "name": "getDerivedLineage",
-      "description": "True to include derived lineage in the response",
-      "in": "query",
-      "required": false,
-      "type": "boolean",
       "x-ms-parameter-location": "method"
     },
     "extendedInfo": {
@@ -7798,18 +7602,6 @@
       "default": false,
       "x-ms-parameter-location": "method"
     },
-    "ignoredRelationshipTypes": {
-      "name": "ignoredRelationshipTypes",
-      "description": "An array of the relationship types need to be excluded from the response.",
-      "in": "query",
-      "required": false,
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "collectionFormat": "multi",
-      "x-ms-parameter-location": "method"
-    },
     "includeTermTemplate": {
       "name": "includeTermTemplate",
       "description": "Whether include termtemplatedef when return all typedefs.\nThis is always true when search filter type=term_template",
@@ -7900,10 +7692,10 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "collection": {
-      "name": "collection",
-      "description": "The collection unique name",
-      "in": "path",
+    "destinationCollectionId": {
+      "name": "destinationCollectionId",
+      "description": "The destination collection ID.",
+      "in": "query",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -7911,8 +7703,8 @@
     "collectionId": {
       "name": "collectionId",
       "description": "The collection ID.",
-      "in": "path",
-      "required": true,
+      "in": "query",
+      "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
