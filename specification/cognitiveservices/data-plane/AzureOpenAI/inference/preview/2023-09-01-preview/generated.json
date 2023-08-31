@@ -79,7 +79,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AudioTranscriptionsOptions"
+              "$ref": "#/definitions/AudioTranscriptionOptions"
             }
           }
         ],
@@ -133,7 +133,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/AudioTranslation"
+              "$ref": "#/definitions/AudioTranscription"
             }
           },
           "default": {
@@ -427,8 +427,8 @@
       "description": "Transcription response.",
       "properties": {
         "task": {
-          "type": "string",
-          "description": "Transcription task."
+          "$ref": "#/definitions/AudioTranscriptionTask",
+          "description": "Audio transcription task."
         },
         "text": {
           "type": "string",
@@ -436,11 +436,11 @@
         },
         "language": {
           "type": "string",
-          "description": "Language."
+          "description": "Language detected in the source audio file."
         },
         "duration": {
-          "type": "string",
-          "format": "duration",
+          "type": "number",
+          "format": "float",
           "description": "Duration."
         },
         "segments": {
@@ -497,22 +497,57 @@
         ]
       }
     },
+    "AudioTranscriptionOptions": {
+      "type": "object",
+      "description": "Transcription request.\nRequesting format 'json' will result on only the 'text' field being set.\nFor more output data use 'verbose_json.",
+      "properties": {
+        "file": {
+          "type": "string",
+          "format": "byte",
+          "description": "The audio file object to transcribe."
+        },
+        "prompt": {
+          "type": "string",
+          "description": "An optional text to guide the model's style or continue a previous audio segment. The prompt should match the audio language."
+        },
+        "response_format": {
+          "$ref": "#/definitions/AudioTranscriptionFormat",
+          "description": "The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.",
+          "default": "json",
+          "x-ms-client-name": "responseFormat"
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
+          "default": 0
+        },
+        "language": {
+          "type": "string",
+          "description": "The language of the input audio. Supplying the input language in ISO-639-1 format will improve accuracy and latency."
+        }
+      },
+      "required": [
+        "file"
+      ]
+    },
     "AudioTranscriptionSegment": {
       "type": "object",
       "description": "Transcription segment.",
       "properties": {
         "id": {
-          "type": "string",
+          "type": "integer",
+          "format": "int32",
           "description": "Segment identifier."
         },
         "start": {
-          "type": "integer",
-          "format": "int32",
+          "type": "number",
+          "format": "float",
           "description": "Segment start offset."
         },
         "end": {
-          "type": "integer",
-          "format": "int32",
+          "type": "number",
+          "format": "float",
           "description": "Segment end offset."
         },
         "text": {
@@ -541,74 +576,49 @@
           "format": "float",
           "description": "Probability of 'no speech'.",
           "x-ms-client-name": "noSpeechProb"
-        }
-      }
-    },
-    "AudioTranscriptionsOptions": {
-      "type": "object",
-      "description": "Transcription request.\nRequesting format 'json' will result on only the 'text' field being set.\nFor more output data use 'verbose_json.",
-      "properties": {
-        "file": {
-          "type": "string",
-          "description": "The audio file object to transcribe."
         },
-        "prompt": {
-          "type": "string",
-          "description": "An optional text to guide the model's style or continue a previous audio segment. The prompt should match the audio language."
-        },
-        "response_format": {
-          "$ref": "#/definitions/AudioTranscriptionFormat",
-          "description": "The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.",
-          "default": "json",
-          "x-ms-client-name": "responseFormat"
-        },
-        "temperature": {
-          "type": "number",
-          "format": "float",
-          "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
-          "default": 0
-        },
-        "language": {
-          "type": "string",
-          "description": "The language of the input audio. Supplying the input language in ISO-639-1 format will improve accuracy and latency."
-        }
-      },
-      "required": [
-        "file"
-      ]
-    },
-    "AudioTranslation": {
-      "type": "object",
-      "description": "Translation response.",
-      "properties": {
-        "task": {
-          "type": "string",
-          "description": "Translation task."
-        },
-        "text": {
-          "type": "string",
-          "description": "Translated text."
-        },
-        "language": {
-          "type": "string",
-          "description": "Language."
-        },
-        "duration": {
-          "type": "string",
-          "format": "duration",
-          "description": "Duration."
-        },
-        "segments": {
+        "tokens": {
           "type": "array",
-          "description": "Transcription segments.",
+          "description": "Tokens in this segment",
           "items": {
-            "$ref": "#/definitions/AudioTranscriptionSegment"
+            "type": "integer",
+            "format": "int32"
           }
+        },
+        "seek": {
+          "type": "integer",
+          "format": "int32",
+          "description": "TODO"
         }
       },
       "required": [
-        "text"
+        "tokens",
+        "seek"
       ]
+    },
+    "AudioTranscriptionTask": {
+      "type": "string",
+      "description": "Audio transcription task type",
+      "enum": [
+        "transcribe",
+        "translate"
+      ],
+      "x-ms-enum": {
+        "name": "AudioTranscriptionTask",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "transcribe",
+            "value": "transcribe",
+            "description": "Value for a transcription task"
+          },
+          {
+            "name": "translate",
+            "value": "translate",
+            "description": "Value for a translation task"
+          }
+        ]
+      }
     },
     "AudioTranslationOptions": {
       "type": "object",
@@ -616,6 +626,7 @@
       "properties": {
         "file": {
           "type": "string",
+          "format": "byte",
           "description": "The audio file to translate."
         },
         "prompt": {

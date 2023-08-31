@@ -8,6 +8,34 @@ using TypeSpec.Http;
 
 namespace Azure.OpenAI;
 
+@doc("Audio transcription task type")
+enum AudioTranscriptionTask {
+    @doc("Value for a transcription task")
+    transcribe: "transcribe",
+
+    @doc("Value for a translation task")
+    translate: "translate",
+}
+
+@doc("Transcription response.")
+model AudioTranscription {
+    @doc("Audio transcription task.")
+    task?: AudioTranscriptionTask;
+
+    @doc("Transcribed text.")
+    text: string;
+
+    @doc("Language detected in the source audio file.")
+    language?: string;
+
+    @doc("Duration.")
+    @encode("seconds", float32)
+    duration?: duration;
+
+    @doc("Segments.")
+    segments?: AudioTranscriptionSegment[];
+}
+
 @doc("Defines the format of the output.")
 enum AudioTranscriptionFormat {
     @doc("JSON format. The translation/transcription response will only contain 'text'.")
@@ -29,13 +57,13 @@ enum AudioTranscriptionFormat {
 @doc("Transcription segment.")
 model AudioTranscriptionSegment {
     @doc("Segment identifier.")
-    id?: string;
+    id?: int32;
 
     @doc("Segment start offset.")
-    start?: int32;
+    start?: float32;
 
     @doc("Segment end offset.")
-    end?: int32;
+    end?: float32;
 
     @doc("Segment text.")
     text?: string;
@@ -54,4 +82,10 @@ model AudioTranscriptionSegment {
     @doc("Probability of 'no speech'.")
     @projectedName("json", "no_speech_prob")
     noSpeechProb?: float32;
+
+    @doc("Tokens in this segment")
+    tokens: int32[];
+
+    @doc("TODO")
+    seek: int32;
 }

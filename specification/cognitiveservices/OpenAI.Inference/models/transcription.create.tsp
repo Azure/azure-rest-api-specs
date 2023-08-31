@@ -11,10 +11,9 @@ Transcription request.
 Requesting format 'json' will result on only the 'text' field being set.
 For more output data use 'verbose_json.
 """)
-model AudioTranscriptionsOptions {
+model AudioTranscriptionOptions {
     @doc("The audio file object to transcribe.")
-    // how do we handle binary format for a member?
-    file: string;
+    file: bytes;
 
     @doc("An optional text to guide the model's style or continue a previous audio segment. The prompt should match the audio language.")
     prompt?: string;
@@ -32,22 +31,4 @@ model AudioTranscriptionsOptions {
 
     @doc("The language of the input audio. Supplying the input language in ISO-639-1 format will improve accuracy and latency.")
     language?: string;
-}
-
-@doc("Transcription response.")
-model AudioTranscription {
-    @doc("Transcription task.")
-    task?: string;
-
-    @doc("Transcribed text.")
-    text: string;
-
-    @doc("Language.")
-    language?: string;
-
-    @doc("Duration.")
-    duration?: duration;
-
-    @doc("Segments.")
-    segments?: AudioTranscriptionSegment[];
 }

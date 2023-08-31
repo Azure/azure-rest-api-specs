@@ -108,7 +108,7 @@ op beginAzureBatchImageGeneration is OaiLongRunningRpcOperation<
 @action("/deployments/{deployment-id}/audio/transcriptions") //@convenientAPI(true)
 op getAudioTranscriptions is Azure.Core.ResourceAction<
   Deployment,
-  AudioTranscriptionsOptions,
+  AudioTranscriptionOptions,
   AudioTranscription
 >;
 
@@ -119,5 +119,5 @@ op getAudioTranscriptions is Azure.Core.ResourceAction<
 op getAudioTranslations is Azure.Core.ResourceAction<
   Deployment,
   AudioTranslationOptions,
-  AudioTranslation
+  AudioTranscription
 >;

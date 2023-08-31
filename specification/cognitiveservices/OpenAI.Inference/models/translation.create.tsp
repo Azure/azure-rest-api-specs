@@ -15,8 +15,7 @@ For more output data use 'verbose_json.
 """)
 model AudioTranslationOptions {
     @doc("The audio file to translate.")
-    // how do we handle binary format for a member?
-    file: string;
+    file: bytes;
 
     @doc("An optional text to guide the model's style or continue a previous audio segment. The prompt should be in English.")
     prompt?: string;
@@ -31,22 +30,4 @@ model AudioTranslationOptions {
     If set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.
     """)
     temperature?: float32 = 0;
-}
-
-@doc("Translation response.")
-model AudioTranslation {
-    @doc("Translation task.")
-    task?: string;
-
-    @doc("Translated text.")
-    text: string;
-
-    @doc("Language.")
-    language?: string;
-
-    @doc("Duration.")
-    duration?: duration;
-
-    @doc("Transcription segments.")
-    segments?: AudioTranscriptionSegment[];
 }
