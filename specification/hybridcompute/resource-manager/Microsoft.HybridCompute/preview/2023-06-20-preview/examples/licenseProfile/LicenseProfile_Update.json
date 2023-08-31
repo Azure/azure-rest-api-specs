@@ -8,7 +8,7 @@
     "parameters": {
       "properties": {
         "esuProfile": {
-          "arcEsuEnrollmentState": "NotEnrolled"
+          "assignedLicense": "{LicenseResourceId}"
         }
       }
     }
@@ -20,26 +20,21 @@
         "name": "default",
         "type": "Microsoft.HybridCompute/machines/licenseProfiles",
         "location": "eastus2euap",
-        "tags": null,
         "properties": {
           "esuProfile": {
-            "arcEsuEnrollmentState": "NotEnrolled",
+            "assignedLicense": "{LicenseResourceId}",
+            "assignedLicenseImmutableId": "{Guid}",
+            "esuEligibility": "Eligible",
+            "serverType": "Standard",
             "esuKeyState": "Inactive",
             "esuKeys": [
               {
-                "esuSku": "skuNumber1",
+                "sku": "skuNumber1",
                 "licenseStatus": "licenseStatus1"
               },
               {
-                "esuSku": "skuNumber2",
+                "sku": "skuNumber2",
                 "licenseStatus": "licenseStatus2"
-              }
-            ],
-            "esuEnrollmentHistory": [
-              {
-                "arcEsuEnrollmentState": "NotEnrolled",
-                "esuKeyState": "Inactive",
-                "time": "2020-08-08T20:42:10.999Z"
               }
             ]
           }
