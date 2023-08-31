@@ -1028,16 +1028,9 @@
           "$ref": "#/definitions/ComplianceSecurityProfileDefinition"
         },
         "enhancedSecurityMonitoring": {
-          "type": "string",
-          "description": "Status of Enhanced Security Monitoring feature.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "EnhancedSecurityMonitoring"
-          }
+          "type": "object",
+          "description": "Feature that provides an enhanced disk image and additional security monitoring agents",
+          "$ref": "#/definitions/EnhancedSecurityMonitoringDefinition"
         }
       }
     },
@@ -1162,6 +1155,24 @@
       "x-ms-enum": {
         "modelAsString": true,
         "name": "ComplianceStandard"
+      }
+    },
+    "EnhancedSecurityMonitoringDefinition": {
+      "type": "object",
+      "description": "Feature that provides an enhanced disk image and additional security monitoring agents",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Status of Enhanced Security Monitoring feature.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "EnhancedSecurityMonitoringValue"
+          }
+        }
       }
     },
     "DefaultCatalogDefinition": {
