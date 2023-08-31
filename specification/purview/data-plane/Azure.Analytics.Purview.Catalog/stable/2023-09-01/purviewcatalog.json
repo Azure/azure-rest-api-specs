@@ -3042,7 +3042,62 @@
         }
       }
     },
-    "/glossary/operation/{operationGuid}": {
+    "/glossary/{glossaryGuid}/terms/export": {
+      "post": {
+        "tags": [
+          "Glossary"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "description": "Export Glossary Terms as a csv file.",
+        "operationId": "Glossary_ExportGlossaryTermsAsCsv",
+        "x-ms-examples": {
+          "Glossary_ExportGlossaryTermsAsCsv": {
+            "$ref": "./examples/Glossary_ExportGlossaryTermsAsCsv.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/glossaryGuid"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
+          {
+            "in": "body",
+            "name": "termExportRequest",
+            "description": "Term export request defining the term guids and other values to be exported.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TermsExportRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. A job to export glossary terms as csv has been accepted.",
+            "headers": {
+              "Operation-Location": {
+                "description": "Response header for long running operation",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/glossary/operations/{operationGuid}": {
       "get": {
         "tags": [
           "Glossary"
@@ -7710,6 +7765,19 @@
         "succeeded": {
           "type": "string",
           "description": "Entity numbers that already imported successfully"
+        }
+      }
+    },
+    "TermsExportRequest": {
+      "description": "Export request payload for terms",
+      "type": "object",
+      "properties": {
+        "guids": {
+          "description": "guids for exported terms",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
