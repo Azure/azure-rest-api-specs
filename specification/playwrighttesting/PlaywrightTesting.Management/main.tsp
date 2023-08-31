@@ -116,7 +116,7 @@ model FreeTrialProperties {
   @visibility("read")
   usedValue: int32;
 
-  @doc("The free-trial precentage used.")
+  @doc("The free-trial percentage used.")
   @visibility("read")
   @minValue(0)
   @maxValue(100)
