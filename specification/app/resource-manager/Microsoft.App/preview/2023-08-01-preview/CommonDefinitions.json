@@ -857,6 +857,110 @@
         }
       }
     },
+    "DaprSubscriptionsCollection": {
+      "type": "object",
+      "properties": {
+          "value": {
+              "type": "array",
+              "items": {
+                  "$ref": "#/definitions/DaprSubscription"
+              },
+              "nullable": true
+          },
+          "nextLink": {
+              "type": "string",
+              "nullable": true
+          }
+      },
+      "additionalProperties": false
+    },
+    "DaprSubscription": {
+      "type": "object",
+      "properties": {
+          "pubsubName": {
+              "type": "string",
+              "nullable": true
+          },
+          "topic": {
+              "type": "string",
+              "nullable": true
+          },
+          "deadLetterTopic": {
+              "type": "string",
+              "nullable": true
+          },
+          "routes": {
+              "$ref": "#/definitions/DaprSubscriptionRoutes"
+          },
+          "scopes": {
+              "type": "array",
+              "items": {
+                  "type": "string"
+              },
+              "nullable": true
+          },
+          "metadata": {
+              "type": "object",
+              "additionalProperties": {
+                  "type": "string",
+                  "nullable": true
+              },
+              "nullable": true
+          },
+          "bulkSubscribe": {
+              "$ref": "#/definitions/DaprSubscriptionBulkSubscribeOptions"
+          }
+      },
+      "additionalProperties": false
+    },
+    "DaprSubscriptionBulkSubscribeOptions": {
+      "type": "object",
+      "properties": {
+          "enabled": {
+              "type": "boolean"
+          },
+          "maxMessagesCount": {
+              "type": "integer",
+              "format": "int32"
+          },
+          "maxAwaitDurationMs": {
+              "type": "integer",
+              "format": "int32"
+          }
+      },
+      "additionalProperties": false
+    },
+    "DaprSubscriptionRoutes": {
+      "type": "object",
+      "properties": {
+          "rules": {
+              "type": "array",
+              "items": {
+                  "$ref": "#/definitions/DaprSubscriptionRouteRule"
+              },
+              "nullable": true
+          },
+          "default": {
+              "type": "string",
+              "nullable": true
+          }
+      },
+      "additionalProperties": false
+    },
+    "DaprSubscriptionRouteRule": {
+      "type": "object",
+      "properties": {
+          "match": {
+              "type": "string",
+              "nullable": true
+          },
+          "path": {
+              "type": "string",
+              "nullable": true
+          }
+      },
+      "additionalProperties": false
+    },
     "ExtendedLocationType": {
       "type": "string",
       "description": "The type of extendedLocation.",
