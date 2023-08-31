@@ -1614,7 +1614,7 @@
         }
       }
     },
-    "/entity/operation/{operationGuid}": {
+    "/entity/operations/{operationGuid}": {
       "get": {
         "tags": [
           "Entity"
@@ -1658,11 +1658,11 @@
         "description": "Export Entity as csv file",
         "operationId": "Entity_ExportAsCsv",
         "x-ms-examples": {
-          "Entity_ExportAsCsvWithGuid": {
-            "$ref": "./examples/Entity_ExportAsCsvWithGuid.json"
+          "Entity_ExportEntitiesWithGuid": {
+            "$ref": "./examples/Entity_ExportEntitiesWithGuid.json"
           },
-          "Entity_ExportAsCsvWithFilter": {
-            "$ref": "./examples/Entity_ExportAsCsvWithFilter.json"
+          "Entity_ExportEntitiesWithFilter": {
+            "$ref": "./examples/Entity_ExportEntitiesWithFilter.json"
           }
         },
         "parameters": [
@@ -1694,6 +1694,10 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "x-ms-long-running-operation": true,
+          "x-ms-long-running-operation-options": {
+            "final-state-via": "azure-async-operation"
           }
         }
       }
@@ -4501,10 +4505,10 @@
           "multipart/form-data"
         ],
         "description": "Upload a single file should be uploaded in formData with key='file'.",
-        "operationId": "Files_UploadFile",
+        "operationId": "Files_Upload",
         "x-ms-examples": {
-          "Files_UploadFile": {
-            "$ref": "./examples/Files_UploadFile.json"
+          "Files_Upload": {
+            "$ref": "./examples/Files_Uploadd.json"
           }
         },
         "parameters": [
@@ -4544,10 +4548,10 @@
           "text/csv"
         ],
         "description": "Download a single file.",
-        "operationId": "Files_DownloadFile",
+        "operationId": "Files_Download",
         "x-ms-examples": {
-          "Files_UploadFile": {
-            "$ref": "./examples/Files_UploadFile.json"
+          "Files_Download": {
+            "$ref": "./examples/Files_Download.json"
           }
         },
         "parameters": [
