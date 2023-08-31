@@ -102,6 +102,7 @@ op beginAzureBatchImageGeneration is OaiLongRunningRpcOperation<
   BatchImageGenerationOperationResponse
 >;
 
+#suppress "@azure-tools/typespec-azure-core/byos"
 @doc("Transcribes audio into the input language.")
 @added(ServiceApiVersions.v2023_09_01_Preview)
 @actionSeparator("/")
@@ -109,9 +110,15 @@ op beginAzureBatchImageGeneration is OaiLongRunningRpcOperation<
 op getAudioTranscriptions is Azure.Core.ResourceAction<
   Deployment,
   AudioTranscriptionOptions,
-  AudioTranscription
+  AudioTranscription,
+  Azure.Core.Traits.RequestHeadersTrait<{
+    @doc("The content type for the operation. Always multipart/form-data for this operation.")
+    @header("content-type")
+    contentType: "multipart/form-data";
+  }>
 >;
 
+#suppress "@azure-tools/typespec-azure-core/byos"
 @doc("Transcribes and translates input audio into English text.")
 @added(ServiceApiVersions.v2023_09_01_Preview)
 @actionSeparator("/")
@@ -119,5 +126,10 @@ op getAudioTranscriptions is Azure.Core.ResourceAction<
 op getAudioTranslations is Azure.Core.ResourceAction<
   Deployment,
   AudioTranslationOptions,
-  AudioTranscription
+  AudioTranscription,
+  Azure.Core.Traits.RequestHeadersTrait<{
+    @doc("The content type for the operation. Always multipart/form-data for this operation.")
+    @header("content-type")
+    contentType: "multipart/form-data";
+  }>
 >;
