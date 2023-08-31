@@ -1533,7 +1533,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/collection"
+            "$ref": "#/parameters/collectionId"
           },
           {
             "$ref": "#/parameters/purviewAPIVersion"
@@ -2984,7 +2984,7 @@
         }
       }
     },
-    "/glossary/{glossaryGuid}/terms/import": {
+    "/glossary/terms/import": {
       "post": {
         "tags": [
           "Glossary"
@@ -3001,7 +3001,14 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/glossaryGuid"
+            "name": "glossaryGuid",
+            "in": "query",
+            "description": "The globally unique identifier for glossary.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096,
+            "x-ms-parameter-location": "method"
           },
           {
             "$ref": "#/parameters/includeTermHierarchy"
@@ -3043,7 +3050,7 @@
         }
       }
     },
-    "/glossary/{glossaryGuid}/terms/export": {
+    "/glossary/terms/export": {
       "post": {
         "tags": [
           "Glossary"
@@ -3058,9 +3065,16 @@
             "$ref": "./examples/Glossary_ExportGlossaryTermsAsCsv.json"
           }
         },
-        "parameters": [
+        "parameters": [          
           {
-            "$ref": "#/parameters/glossaryGuid"
+            "name": "glossaryGuid",
+            "in": "query",
+            "description": "The globally unique identifier for glossary.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096,
+            "x-ms-parameter-location": "method"
           },
           {
             "$ref": "#/parameters/purviewAPIVersion"
@@ -4664,135 +4678,6 @@
         },
         {}
       ],
-      "example": {
-        "attributeDefs": [
-          {
-            "cardinality": "SINGLE",
-            "constraints": [
-              {
-                "params": {
-                  "property1": {},
-                  "property2": {}
-                },
-                "type": "..."
-              },
-              {
-                "params": {
-                  "property1": {},
-                  "property2": {}
-                },
-                "type": "..."
-              }
-            ],
-            "defaultValue": "...",
-            "description": "...",
-            "displayName": "...",
-            "includeInNotification": true,
-            "isIndexable": true,
-            "isOptional": true,
-            "isUnique": true,
-            "name": "...",
-            "options": {
-              "property1": "...",
-              "property2": "..."
-            },
-            "typeName": "...",
-            "valuesMaxCount": 12345,
-            "valuesMinCount": 12345
-          },
-          {
-            "cardinality": "SINGLE",
-            "constraints": [
-              {
-                "params": {
-                  "property1": {},
-                  "property2": {}
-                },
-                "type": "..."
-              },
-              {
-                "params": {
-                  "property1": {},
-                  "property2": {}
-                },
-                "type": "..."
-              }
-            ],
-            "defaultValue": "...",
-            "description": "...",
-            "displayName": "...",
-            "includeInNotification": true,
-            "isIndexable": true,
-            "isOptional": true,
-            "isUnique": true,
-            "name": "...",
-            "options": {
-              "property1": "...",
-              "property2": "..."
-            },
-            "typeName": "...",
-            "valuesMaxCount": 12345,
-            "valuesMinCount": 12345
-          }
-        ],
-        "category": "ARRAY",
-        "createTime": 12345,
-        "createdBy": "...",
-        "dateFormatter": {
-          "availableLocales": [
-            "...",
-            "..."
-          ],
-          "calendar": 12345,
-          "dateInstance": {},
-          "dateTimeInstance": {},
-          "instance": {},
-          "lenient": true,
-          "numberFormat": {
-            "availableLocales": [
-              "...",
-              "..."
-            ],
-            "currency": "...",
-            "currencyInstance": {},
-            "groupingUsed": true,
-            "instance": {},
-            "integerInstance": {},
-            "maximumFractionDigits": 12345,
-            "maximumIntegerDigits": 12345,
-            "minimumFractionDigits": 12345,
-            "minimumIntegerDigits": 12345,
-            "numberInstance": {},
-            "parseIntegerOnly": true,
-            "percentInstance": {},
-            "roundingMode": "DOWN"
-          },
-          "timeInstance": {},
-          "timeZone": {
-            "DSTSavings": 12345,
-            "ID": "...",
-            "availableIDs": [
-              "...",
-              "..."
-            ],
-            "default": {},
-            "displayName": "...",
-            "rawOffset": 12345
-          }
-        },
-        "description": "...",
-        "guid": "...",
-        "name": "...",
-        "options": {
-          "property1": "...",
-          "property2": "..."
-        },
-        "serviceType": "...",
-        "typeVersion": "...",
-        "updateTime": 12345,
-        "updatedBy": "...",
-        "version": 12345
-      },
       "description": "class that captures details of a struct-type."
     },
     "AtlasClassification": {
