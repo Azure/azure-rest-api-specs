@@ -18,6 +18,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-netapp
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-netapp-2022-11-01-preview
   - tag: package-netapp-2022-11-01
   - tag: package-netapp-2022-09-01
   - tag: package-netapp-2022-05-01
@@ -56,6 +57,19 @@ Please also specify the `--azure-libraries-for-java-folder=<path to the root dir
 java:
   namespace: com.microsoft.azure.management.netapp.v2022_11_01
   output-folder: $(azure-libraries-for-java-folder)/sdk/netapp/mgmt-v2022_11_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-netapp-2022-11-01-preview and java
+
+These settings apply only when `--tag=package-netapp-2022-11-01-preview --java` is specified on the command line.
+Please also specify the `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-netapp-2022-11-01-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.netapp.v2022_11_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/netapp/mgmt-v2022_11_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
