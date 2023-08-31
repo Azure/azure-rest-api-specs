@@ -89,7 +89,15 @@
             }
           }
         },
-        "addonProfiles": {},
+        "addonProfiles": {
+          "azureKeyvaultSecretsProvider": {
+            "enabled": true,
+            "config": {
+              "enableSecretRotation": "true",
+              "rotationPollInterval": "2m"
+            }
+          }
+        },
         "enableRBAC": true,
         "diskEncryptionSetID": "/subscriptions/subid1/resourceGroups/rg1/providers/Microsoft.Compute/diskEncryptionSets/des",
         "enablePodSecurityPolicy": true
@@ -143,6 +151,15 @@
           },
           "servicePrincipalProfile": {
             "clientId": "clientid"
+          },
+          "addonProfiles": {
+            "azureKeyvaultSecretsProvider": {
+              "enabled": true,
+              "config": {
+                "enableSecretRotation": "true",
+                "rotationPollInterval": "2m"
+              }
+            }
           },
           "nodeResourceGroup": "MC_rg1_clustername1_location1",
           "enableRBAC": true,
@@ -257,6 +274,15 @@
           },
           "servicePrincipalProfile": {
             "clientId": "clientid"
+          },
+          "addonProfiles": {
+            "azureKeyvaultSecretsProvider": {
+              "enabled": true,
+              "config": {
+                "enableSecretRotation": "true",
+                "rotationPollInterval": "2m"
+              }
+            }
           },
           "nodeResourceGroup": "MC_rg1_clustername1_location1",
           "enableRBAC": true,
