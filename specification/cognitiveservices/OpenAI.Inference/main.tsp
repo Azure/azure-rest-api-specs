@@ -66,3 +66,9 @@ model Deployment {
   @key
   deploymentId: string;
 }
+
+alias RequestHeaders = Azure.Core.Traits.RequestHeadersTrait<{
+  @doc("The content type for the operation. Always multipart/form-data for this operation.")
+  @header("content-type")
+  contentType: "multipart/form-data";
+}>;

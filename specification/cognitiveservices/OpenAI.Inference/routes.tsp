@@ -111,11 +111,7 @@ op getAudioTranscription is Azure.Core.ResourceAction<
   Deployment,
   AudioTranscriptionOptions,
   AudioTranscription,
-  Azure.Core.Traits.RequestHeadersTrait<{
-    @doc("The content type for the operation. Always multipart/form-data for this operation.")
-    @header("content-type")
-    contentType: "multipart/form-data";
-  }>
+  RequestHeaders
 >;
 
 #suppress "@azure-tools/typespec-azure-core/byos"
@@ -126,10 +122,6 @@ op getAudioTranscription is Azure.Core.ResourceAction<
 op getAudioTranslation is Azure.Core.ResourceAction<
   Deployment,
   AudioTranslationOptions,
-  AudioTranscription,
-  Azure.Core.Traits.RequestHeadersTrait<{
-    @doc("The content type for the operation. Always multipart/form-data for this operation.")
-    @header("content-type")
-    contentType: "multipart/form-data";
-  }>
+  AudioTranscription,  // AudioTranscriptionJson for sharedRoute where content-type is app/json
+  RequestHeaders
 >;
