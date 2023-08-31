@@ -3272,51 +3272,6 @@
         }
       }
     },
-    "/browse": {
-      "post": {
-        "tags": [
-          "Discovery"
-        ],
-        "description": "Browse entities by path or entity type.",
-        "operationId": "Discovery_Browse",
-        "x-ms-examples": {
-          "Discovery_Browse_Path": {
-            "$ref": "./examples/Discovery_Browse_Path.json"
-          },
-          "Discovery_Browse_EntityType": {
-            "$ref": "./examples/Discovery_Browse_EntityType.json"
-          }
-        },
-        "parameters": [
-          {
-            "in": "body",
-            "name": "browseRequest",
-            "description": "An object specifying the browse criteria.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BrowseRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/purviewAPIVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. On successful get the entities to browse.",
-            "schema": {
-              "$ref": "#/definitions/BrowseResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/search/autocomplete": {
       "post": {
         "tags": [
@@ -6876,24 +6831,6 @@
       "title": "SuggestResult",
       "description": "The result item of the search suggest."
     },
-    "BrowseResult": {
-      "type": "object",
-      "properties": {
-        "@search.count": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The total number of browse results."
-        },
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BrowseResultValue"
-          }
-        }
-      },
-      "title": "BrowseResult",
-      "description": "The result item of the browse request."
-    },
     "SuggestResultValue": {
       "type": "object",
       "properties": {
@@ -7010,67 +6947,6 @@
       "title": "SuggestResultValue",
       "description": "The value item of the search suggest."
     },
-    "BrowseResultValue": {
-      "type": "object",
-      "properties": {
-        "entityType": {
-          "type": "string",
-          "description": "The type name of the record."
-        },
-        "id": {
-          "type": "string",
-          "description": "The GUID of the record."
-        },
-        "isLeaf": {
-          "type": "boolean",
-          "description": "If the record is a leaf entity."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the record."
-        },
-        "owner": {
-          "type": "array",
-          "description": "The owners of the record.",
-          "items": {
-            "$ref": "#/definitions/BrowseResultOwner"
-          }
-        },
-        "path": {
-          "type": "string",
-          "description": "The path of the record."
-        },
-        "qualifiedName": {
-          "type": "string",
-          "description": "The qualified name of the record."
-        }
-      },
-      "title": "BrowseResultValue",
-      "description": "The value item of the browse result."
-    },
-    "BrowseResultOwner": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The GUID of the owner."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name of the owner."
-        },
-        "mail": {
-          "type": "string",
-          "description": "The mail of the owner."
-        },
-        "contactType": {
-          "type": "string",
-          "description": "The contact type of the owner. The value will be Owner."
-        }
-      },
-      "title": "BrowseResultOwner",
-      "description": "The value item of the browse owner."
-    },
     "SearchResult": {
       "type": "object",
       "properties": {
@@ -7078,6 +6954,14 @@
           "type": "integer",
           "format": "int32",
           "description": "The total number of search results (not the number of documents in a single page)."
+        },
+        "@search.count.approximate":{
+          "type": "boolean",
+          "description":"'True' if the '@search.count' is an approximate value and vise versa."
+        },
+        "continuousToken":{
+          "type": "string",
+          "description": "The token used to get next batch of data. Absent if there's no more data."
         },
         "@search.facets": {
           "$ref": "#/definitions/SearchFacetResultValue"
@@ -7443,15 +7327,14 @@
           "type": "string",
           "description": "The keywords applied to all searchable fields."
         },
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The offset. The default value is 0. The maximum value is 100000."
-        },
         "limit": {
           "type": "integer",
           "format": "int32",
           "description": "The limit of the number of the search result. default value is 50; maximum value is 1000."
+        },
+        "continuousToken":{
+          "type": "string",
+          "description": "The token used to get next batch of data. Default 'Null' to get the first batch, and will return new token in each response unless there's no more data."
         },
         "orderby": {
           "type": "array",
@@ -7487,31 +7370,6 @@
       },
       "title": "SearchRequest",
       "description": "The search query of advanced search request."
-    },
-    "BrowseRequest": {
-      "type": "object",
-      "properties": {
-        "entityType": {
-          "type": "string",
-          "description": "The entity type to browse as the root level entry point."
-        },
-        "path": {
-          "type": "string",
-          "description": "The path to browse the next level child entities."
-        },
-        "limit": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of browse items we hope to return. The maximum value is 10000."
-        },
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The offset. The default value is 0. The maximum value is 100000."
-        }
-      },
-      "title": "BrowseRequest",
-      "description": "The criteria of browse request."
     },
     "SuggestRequest": {
       "type": "object",
