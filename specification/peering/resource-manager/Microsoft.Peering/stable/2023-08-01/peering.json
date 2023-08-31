@@ -2618,7 +2618,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CdnPeeringPrefix"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of CDN peering prefixes.",
@@ -2696,7 +2697,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Peering"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of peerings.",
@@ -2902,9 +2904,6 @@
       "description": "The properties that define a direct connection.",
       "type": "object",
       "properties": {
-        "ipChangeRequest": {
-          "$ref": "#/definitions/IPChangeRequest"
-        },
         "bandwidthInMbps": {
           "format": "int32",
           "description": "The bandwidth of the connection.",
@@ -2993,9 +2992,6 @@
       "description": "The properties that define an exchange connection.",
       "type": "object",
       "properties": {
-        "ipChangeRequest": {
-          "$ref": "#/definitions/IPChangeRequest"
-        },
         "peeringDBFacilityId": {
           "format": "int32",
           "description": "The PeeringDB.com ID of the facility at which the connection has to be set up.",
@@ -3035,44 +3031,6 @@
           "description": "The error message related to the connection state, if any.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "IPChangeRequest": {
-      "description": "The IP change request.",
-      "type": "object",
-      "properties": {
-        "sessionPrefixV4": {
-          "description": "The V4 session prefix we are changing to",
-          "type": "string"
-        },
-        "sessionPrefixV6": {
-          "description": "The V6 session prefix we are changing to",
-          "type": "string"
-        },
-        "microsoftSessionIPv4Address": {
-          "description": "The Microsoft V4 address we are changing to",
-          "type": "string"
-        },
-        "microsoftSessionIPv6Address": {
-          "description": "The Microsoft V6 address we are changing to",
-          "type": "string"
-        },
-        "peerSessionIPv4Address": {
-          "description": "The Peer V6 address we are changing to",
-          "type": "string"
-        },
-        "peerSessionIPv6Address": {
-          "description": "The Peer V6 address we are changing to",
-          "type": "string"
-        },
-        "oldPeerV4Address": {
-          "description": "The old Peer V4 address",
-          "type": "string"
-        },
-        "oldPeerV6Address": {
-          "description": "The old Peer V6 address",
-          "type": "string"
         }
       }
     },
@@ -3160,336 +3118,6 @@
         },
         "md5AuthenticationKey": {
           "description": "The MD5 authentication key of the session.",
-          "type": "string"
-        }
-      }
-    },
-    "NpmOperationDetails": {
-      "description": "Contains information about NPM operations.",
-      "type": "object",
-      "properties": {}
-    },
-    "ConfigDriftResult": {
-      "type": "object",
-      "properties": {
-        "diffResult": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DiffResult"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "ConfigDiff": {
-      "description": "The config diff class",
-      "type": "object",
-      "properties": {
-        "missingConfig": {
-          "description": "Config that's missing on the new router.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "extraConfig": {
-          "description": "Config that was added on the new router that's not present on the old router.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "outOfOrderConfig": {
-          "description": "Config on the new router that is out of order.\r\nUsed for ensuring special group policy is applied in order.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "npmErrors": {
-          "$ref": "#/definitions/NPMErrors",
-          "description": "The list of NPM errors."
-        }
-      }
-    },
-    "ConnectionStateChangesEvent": {
-      "description": "The Connection State Changes Event class.",
-      "type": "object",
-      "properties": {
-        "timeCreated": {
-          "format": "date-time",
-          "description": "Gets or sets time that state change took place",
-          "type": "string"
-        },
-        "operationState": {
-          "description": "Gets or sets the operation state",
-          "enum": [
-            "None",
-            "Add",
-            "Update",
-            "Remove",
-            "Migrate",
-            "IPAddressChange"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "operationState",
-            "modelAsString": true
-          }
-        },
-        "connectionState": {
-          "description": "Gets or sets the connection state",
-          "enum": [
-            "None",
-            "PendingApproval",
-            "Approved",
-            "ProvisioningStarted",
-            "ProvisioningFailed",
-            "ProvisioningCompleted",
-            "Validating",
-            "Active",
-            "TypeChangeRequested",
-            "TypeChangeInProgress",
-            "ActiveNoBilling"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "connectionState",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "DiffResult": {
-      "type": "object",
-      "properties": {
-        "bgpconfigElementType": {
-          "enum": [
-            "All",
-            "AsPath",
-            "BgpGroup",
-            "Community",
-            "Neighbor",
-            "PrefixSet",
-            "Policy",
-            "RoutingOptions",
-            "NonStdJGroups",
-            "BmpStation",
-            "UseMultiPath",
-            "ReDistributeSets",
-            "RpkiServerConfig",
-            "GlobalBgpConfig",
-            "RoutingInstance",
-            "RoutingInstanceBgpGroup",
-            "RoutingInstanceNeighbor",
-            "RoutingOptionsRibGroup",
-            "AclSet"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "bgpconfigElementType",
-            "modelAsString": true
-          }
-        },
-        "bgpConfigElementName": {
-          "type": "string"
-        },
-        "sideBySideDiffResult": {
-          "$ref": "#/definitions/SideBySideDiffModel"
-        },
-        "readWriteOperationConfig": {
-          "$ref": "#/definitions/ReadWriteOperationConfig"
-        }
-      }
-    },
-    "NPMErrors": {
-      "type": "object",
-      "properties": {
-        "errorCode": {
-          "enum": [
-            "Success",
-            "Exception",
-            "NGSException",
-            "HwProxyException",
-            "UnKnown",
-            "RWOperationRequested",
-            "KHIInProgress",
-            "ExistingRWOperationInProgress",
-            "NPMConfigServiceNotReachable",
-            "InvalidDeviceName",
-            "BGPConfigReadFailed",
-            "BGPPeerConfigReadFailed",
-            "CLI2XMLFailure",
-            "NPMStorageAccountRequestFailed",
-            "NPMCosmosDBAccountRequestFailed",
-            "ResourceDoesNotExist",
-            "InvalidPath",
-            "KustoQueryRequestFailed",
-            "InvalidFormData",
-            "InvalidInput",
-            "XML2CLIFailure",
-            "OperationNotImplemented",
-            "TemplateFileNotFound",
-            "InvalidIPAddress",
-            "BGPGroupMapFileNotFound",
-            "InvalidPeerGroupName",
-            "InvalidXMLSemantic",
-            "InvalidNeighborDescription",
-            "InvalidXMLInput",
-            "CleanCLIFailed",
-            "TemplateConfigDiffersFromRunningConfig",
-            "FailedToPushConfigToDevice",
-            "NeighborIPNotFoundInRunningConfig",
-            "FailedToGenerateRollbackConfig",
-            "FailedToPushRollbackConfigToDevice",
-            "SmallDataReadFailure",
-            "InvalidSmallDataVariableReference",
-            "InvalidConditionalOrUnConditionalList",
-            "CCMDataReferenceError",
-            "InvalidExpressionEvaluated",
-            "PeerGroupNotFoundInRunningConfig",
-            "PeerASNNotFoundInRunningConfig",
-            "CosmosDBOperationFailed",
-            "TimedKHIFailed",
-            "CorruptDatabase",
-            "FailedToGenerateGoldConfig",
-            "DifferentPolicyPresentOnNeighbor",
-            "PeerGroupNotFoundInBGPGroup",
-            "PrefixSetDoesNotExist",
-            "RecursivePolicyReference",
-            "PolicyDefinitionDoesNotExist",
-            "AsPathDoesNotExist",
-            "CommunitySetDoesNotExist",
-            "InconsistentGoldConfig",
-            "EmptyResult",
-            "BGPConfigElementNotFound",
-            "FailedToCaptureOrSerializeTraceroute",
-            "FailedToFindDrift",
-            "InvalidConfig",
-            "FailedToFetchInterfaceFromDPG",
-            "CyclicDependencyInConfig",
-            "RoutingInstanceNotFoundInRunningConfig",
-            "RibGroupDoesNotExist",
-            "PeerInformationDoesNotExistInNgs"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "errorCode",
-            "modelAsString": true
-          }
-        },
-        "errorMessages": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "SideBySideDiffModel": {
-      "type": "object",
-      "properties": {
-        "oldText": {
-          "$ref": "#/definitions/DiffPaneModel"
-        },
-        "newText": {
-          "$ref": "#/definitions/DiffPaneModel"
-        }
-      }
-    },
-    "ReadWriteOperationConfig": {
-      "type": "object",
-      "properties": {
-        "isPushToDeviceInput": {
-          "type": "boolean"
-        },
-        "config": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "rollBackConfig": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "validationResult": {
-          "$ref": "#/definitions/XMLValidationResult"
-        }
-      }
-    },
-    "DiffPaneModel": {
-      "type": "object",
-      "properties": {
-        "lines": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DiffPiece"
-          },
-          "x-ms-identifiers": []
-        },
-        "hasDifferences": {
-          "type": "boolean"
-        }
-      }
-    },
-    "XMLValidationResult": {
-      "type": "object",
-      "properties": {
-        "isValid": {
-          "type": "boolean"
-        },
-        "errorReasons": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorReason"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "DiffPiece": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "Unchanged",
-            "Deleted",
-            "Inserted",
-            "Imaginary",
-            "Modified"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "type",
-            "modelAsString": true
-          }
-        },
-        "position": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "text": {
-          "type": "string"
-        },
-        "subPieces": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DiffPiece"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "ErrorReason": {
-      "type": "object",
-      "properties": {
-        "reason": {
-          "type": "string"
-        },
-        "xmlTrace": {
           "type": "string"
         }
       }
@@ -3609,8 +3237,8 @@
           "items": {
             "$ref": "#/definitions/MetricSpecification"
           },
-          "x-ms-identifiers": [],
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       }
     },
@@ -3649,7 +3277,8 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "dimensions": {
           "description": "Dimensions of the metric.",
@@ -3657,8 +3286,8 @@
           "items": {
             "$ref": "#/definitions/MetricDimension"
           },
-          "x-ms-identifiers": [],
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       }
     },
@@ -3776,7 +3405,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeerAsn"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of peer ASNs.",
@@ -3793,7 +3423,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeeringLocation"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of peering locations.",
@@ -4039,7 +3670,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeeringRegisteredAsn"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of peering registered ASNs.",
@@ -4125,7 +3757,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeeringRegisteredPrefix"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of peering registered prefixes.",
@@ -4254,7 +3887,8 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "provisioningState": {
           "description": "The provisioning state of the resource.",
@@ -4282,7 +3916,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConnectionMonitorTest"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of Connection Monitor Tests.",
@@ -4299,7 +3934,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeeringServiceCountry"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of peering service countries.",
@@ -4326,7 +3962,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeeringServiceLocation"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of peering service locations.",
@@ -4435,8 +4072,8 @@
           "items": {
             "$ref": "#/definitions/PeeringServicePrefixEvent"
           },
-          "x-ms-identifiers": [],
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "peeringServicePrefixKey": {
           "description": "The peering service prefix key",
@@ -4500,7 +4137,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeeringServicePrefix"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of peering service prefixes.",
@@ -4517,7 +4155,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeeringServiceProvider"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of peering service providers.",
@@ -4554,7 +4193,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -4667,7 +4307,8 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       }
     },
@@ -4680,7 +4321,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeeringService"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The link to fetch the next page of peering services.",
@@ -4705,7 +4347,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
