@@ -1838,14 +1838,12 @@
     },
     "Vector": {
       "type": "object",
+      "discriminator": "kind",
       "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "type": "number",
-            "format": "float"
-          },
-          "description": "The vector representation of a search query."
+        "kind": {
+          "type": "string",
+          "description": "The name of the kind of vector query being performed.",
+          "x-nullable": false
         },
         "k": {
           "type": "integer",
@@ -1858,6 +1856,42 @@
         }
       },
       "description": "The query parameters for vector and hybrid search queries."
+    },
+    "RawVector": {
+      "type": "object",
+      "x-ms-discriminator-value": "vector",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Vector"
+        }
+      ],
+      "properties": {
+        "vector": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "float"
+          },
+          "description": "The vector representation of a search query."
+        }
+      },
+      "description": "The query parameters to use for vector search when a raw vector value is provided."
+    },
+    "TextVector": {
+      "type": "object",
+      "x-ms-discriminator-value": "text",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Vector"
+        }
+      ],
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text to be vectorized to perform a vector search query."
+        }
+      },
+      "description": "The query parameters to use for vector search when a text value that needs to be vectorized is provided."
     },
     "QueryLanguage": {
       "type": "string",
