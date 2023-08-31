@@ -102,7 +102,7 @@ model CompanyDetails {
   business?: string;
 
   @doc("Number Of Employees")
-  numberOfEmployees?: string;
+  numberOfEmployees?: int32;
 }
 
 @doc("Marketplace details")
