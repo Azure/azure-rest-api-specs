@@ -106,8 +106,8 @@ op beginAzureBatchImageGeneration is OaiLongRunningRpcOperation<
 @doc("Transcribes audio into the input language.")
 @added(ServiceApiVersions.v2023_09_01_Preview)
 @actionSeparator("/")
-@action("/deployments/{deployment-id}/audio/transcriptions") //@convenientAPI(true)
-op getAudioTranscriptions is Azure.Core.ResourceAction<
+@action("audio/transcriptions") //@convenientAPI(true)
+op getAudioTranscription is Azure.Core.ResourceAction<
   Deployment,
   AudioTranscriptionOptions,
   AudioTranscription,
@@ -122,8 +122,8 @@ op getAudioTranscriptions is Azure.Core.ResourceAction<
 @doc("Transcribes and translates input audio into English text.")
 @added(ServiceApiVersions.v2023_09_01_Preview)
 @actionSeparator("/")
-@action("/deployments/{deployment-id}/audio/translations") //@convenientAPI(true)
-op getAudioTranslations is Azure.Core.ResourceAction<
+@action("audio/translations") //@convenientAPI(true)
+op getAudioTranslation is Azure.Core.ResourceAction<
   Deployment,
   AudioTranslationOptions,
   AudioTranscription,
