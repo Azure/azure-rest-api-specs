@@ -142,7 +142,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CreateResourceSupportedResponse"
+              "$ref": "#/definitions/CreateResourceSupportedResponseList"
             }
           },
           "default": {
@@ -1234,7 +1234,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/MonitoredSubscriptionProperties"
+              "$ref": "#/definitions/MonitoredSubscriptionPropertiesList"
             }
           },
           "default": {
@@ -1567,7 +1567,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DatadogAgreementResource"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link to the next set of results, if any.",
@@ -1598,6 +1599,17 @@
         "properties": {
           "$ref": "#/definitions/CreateResourceSupportedProperties",
           "description": "Represents the properties of the resource."
+        }
+      }
+    },
+    "CreateResourceSupportedResponseList": {
+      "type": "object", 
+      "properties": { 
+        "value": { 
+            "type": "array", 
+            "items": { 
+                "$ref": "#/definitions/CreateResourceSupportedResponse" 
+            } 
         }
       }
     },
@@ -1634,7 +1646,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DatadogApiKey"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link to the next set of results, if any.",
@@ -1718,7 +1731,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DatadogHost"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link to the next set of results, if any.",
@@ -1858,7 +1872,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MonitoredSubscription"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1884,6 +1899,17 @@
         "properties": {
           "$ref": "#/definitions/SubscriptionList"
         }
+      }
+    },
+    "MonitoredSubscriptionPropertiesList": {
+      "type": "object", 
+     "properties": { 
+       "value": { 
+           "type": "array", 
+           "items": { 
+               "$ref": "#/definitions/MonitoredSubscriptionProperties" 
+           } 
+       }
       }
     },
     "OperationDisplay": {
@@ -1934,7 +1960,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationResult"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "URL to get the next set of operation list results if there are any.",
@@ -2320,7 +2347,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/FilteringTag"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -2333,7 +2361,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/FilteringTag"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
