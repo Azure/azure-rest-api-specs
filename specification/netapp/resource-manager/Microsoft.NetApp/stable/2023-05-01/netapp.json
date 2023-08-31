@@ -5398,52 +5398,10 @@
           "default": false
         },
         "smbAccessBasedEnumeration": {
-          "title": "smbAccessBasedEnumeration",
-          "type": "string",
-          "description": "Enables access based enumeration share property for SMB Shares. Only applicable for SMB/DualProtocol volume",
-          "enum": [
-            "Disabled",
-            "Enabled"
-          ],
-          "x-ms-enum": {
-            "name": "smbAccessBasedEnumeration",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Disabled",
-                "description": "smbAccessBasedEnumeration share setting is disabled"
-              },
-              {
-                "value": "Enabled",
-                "description": "smbAccessBasedEnumeration share setting is enabled"
-              }
-            ]
-          },
-          "example": "Enabled"
+          "$ref": "#/definitions/smbAccessBasedEnumeration"
         },
         "smbNonBrowsable": {
-          "title": "smbNonBrowsable",
-          "type": "string",
-          "description": "Enables non browsable property for SMB Shares. Only applicable for SMB/DualProtocol volume",
-          "enum": [
-            "Disabled",
-            "Enabled"
-          ],
-          "x-ms-enum": {
-            "name": "smbNonBrowsable",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Disabled",
-                "description": "smbNonBrowsable share setting is disabled"
-              },
-              {
-                "value": "Enabled",
-                "description": "smbNonBrowsable share setting is enabled"
-              }
-            ]
-          },
-          "example": "Enabled"
+          "$ref": "#/definitions/smbNonBrowsable"
         },
         "smbContinuouslyAvailable": {
           "type": "boolean",
@@ -6100,6 +6058,12 @@
         "snapshotDirectoryVisible": {
           "type": "boolean",
           "description": "If enabled (true) the volume will contain a read-only snapshot directory which provides access to each of the volume's snapshots."
+        },
+        "smbAccessBasedEnumeration": {
+          "$ref": "#/definitions/smbAccessBasedEnumeration"
+        },
+        "smbNonBrowsable": {
+          "$ref": "#/definitions/smbNonBrowsable"
         }
       }
     },
@@ -7685,6 +7649,55 @@
         "name": "coolAccessRetrievalPolicy",
         "modelAsString": true
       }
+    },
+    "smbAccessBasedEnumeration": {
+      "title": "smbAccessBasedEnumeration",
+      "type": "string",
+      "description": "Enables access-based enumeration share property for SMB Shares. Only applicable for SMB/DualProtocol volume",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "smbAccessBasedEnumeration",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Disabled",
+            "description": "smbAccessBasedEnumeration share setting is disabled"
+          },
+          {
+            "value": "Enabled",
+            "description": "smbAccessBasedEnumeration share setting is enabled"
+          }
+        ]
+      },
+      "x-nullable": true,
+      "example": "Enabled"
+    },
+    "smbNonBrowsable": {
+      "title": "smbNonBrowsable",
+      "type": "string",
+      "description": "Enables non-browsable property for SMB Shares. Only applicable for SMB/DualProtocol volume",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "smbNonBrowsable",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Disabled",
+            "description": "smbNonBrowsable share setting is disabled"
+          },
+          {
+            "value": "Enabled",
+            "description": "smbNonBrowsable share setting is enabled"
+          }
+        ]
+      },
+      "example": "Enabled"
     }
   },
   "parameters": {
