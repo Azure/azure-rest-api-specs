@@ -26,7 +26,7 @@ These are the global settings for the Content Safety.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2023-04-30-preview
+tag: package-2023-10-15-preview
 ```
 
 ### Tag: package-2023-04-30-preview
@@ -53,7 +53,7 @@ These settings apply only when `--tag=package-2023-10-15-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-10-15-preview'
 input-file:
-  - stable/2023-10-15-preview/contentsafety.json
+  - preview/2023-10-15-preview/contentsafety.json
 ```
 
 ---
