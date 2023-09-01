@@ -1,8 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
 
-import "./transcription_create.tsp";
-
 using TypeSpec.Rest;
 using TypeSpec.Http;
 

@@ -1,7 +1,7 @@
 import "@typespec/rest";
 import "@typespec/http";
 
-import "./translation_commons.tsp";
+import "./commons.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
