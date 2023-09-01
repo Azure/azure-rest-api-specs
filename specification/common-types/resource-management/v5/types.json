@@ -720,69 +720,38 @@
       "description": "The If-None-Match header that makes a request conditional.",
       "x-ms-parameter-location": "method"
     },
-    "HelmChartNameParameter": {
-      "name": "helmChartName",
+    "ArtifactBodyParameters": {
+      "name": "artifactParameters",
       "in": "formData",
       "required": true,
-      "type": "string",
-      "description": "The name of the helm chart.",
-      "minLength": 1
-    },
-    "NFAppNameParameter": {
-      "name": "nfAppName",
-      "in": "formData",
-      "required": true,
-      "type": "string",
-      "description": "The name of the network function application.",
-      "minLength": 1
-    },
-    "DeploymentValuesParameter": {
-      "name": "deploymentValues",
-      "in": "formData",
-      "required": false,
-      "type": "string",
-      "description": "The deployment values for Network Function Definition Version.",
-      "minLength": 1
-    },
-    "HelmChartUserValuesParameter": {
-      "name": "helmChartUserValues",
-      "in": "formData",
-      "required": false,
-      "type": "string",
-      "description": "The helm chart user values for Network Function Definition Version.",
-      "minLength": 1
-    },
-    "TokenNameParameter": {
-      "name": "tokenName",
-      "in": "formData",
-      "required": true,
-      "type": "string",
-      "description": "The name of the token.",
-      "minLength": 1
-    },
-    "ResourceNameParameter": {
-      "name": "resourceNameParameter",
-      "in": "formData",
-      "required": true,
-      "type": "string",
-      "description": "The resource name under network service design version.",
-      "minLength": 1
-    },
-    "RoleOverrideParameter": {
-      "name": "roleOverrideValues",
-      "in": "formData",
-      "required": false,
-      "type": "string",
-      "description": "The role override values for Network Function Definition Version.",
-      "minLength": 1
-    },
-    "ApiVersionFormParameter": {
-      "name": "api-version",
-      "in": "formData",
-      "required": false,
-      "type": "string",
-      "description": "The api version values for Network Function Definition Version.",
-      "minLength": 1
+      "schema":{
+        "type": "object",
+        "required": [
+            "ApiVersionFormParameter"
+        ],
+        "properties": {
+          "ApiVersionFormParameter":{
+            "name": "api-version",
+            "type": "string"
+          },
+          "HelmChartNameParameter":{
+            "name": "helmChartName",
+            "type": "string"
+          },
+          "NFAppNameParameter":{
+            "name": "nfAppName",
+            "type": "string"
+          },
+          "DeploymentValuesParameter":{
+            "name": "deploymentValues",
+            "type": "string"
+          },
+          "RoleOverrideParameter":{
+            "name": "roleOverrideValues",
+            "type": "string"
+          }
+        }
+      }
     }
   }
 }
