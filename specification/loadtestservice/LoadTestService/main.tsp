@@ -24,11 +24,13 @@ Test Service.
 """)
 namespace AzureLoadTesting;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Azure Load Testing API versions.")
 enum APIVersions {
+  @doc("The 2022-11-01 version of the Azure Load Testing API.")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2022_11_01: "2022-11-01",
   
+  @doc("The 2023-04-01-preview version of the Azure Load Testing API.")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_04_01_preview: "2023-04-01-preview",
 }
