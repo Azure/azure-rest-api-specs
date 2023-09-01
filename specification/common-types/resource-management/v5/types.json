@@ -627,6 +627,31 @@
           "type": "string"
         }
       }
+    },
+    "ArtifactBodyParametersParameters": {
+      "type": "object",
+      "properties": {
+        "ApiVersionFormParameter": {
+          "name": "api-version",
+          "type": "string"
+        },
+        "HelmChartNameParameter": {
+          "name": "helmChartName",
+          "type": "string"
+        },
+        "NFAppNameParameter": {
+          "name": "nfAppName",
+          "type": "string"
+        },
+        "DeploymentValuesParameter": {
+          "name": "deploymentValues",
+          "type": "string"
+        },
+        "RoleOverrideParameter": {
+          "name": "roleOverrideValues",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -724,33 +749,9 @@
       "name": "artifactParameters",
       "in": "formData",
       "required": true,
-      "schema":{
-        "type": "object",
-        "required": [
-            "ApiVersionFormParameter"
-        ],
-        "properties": {
-          "ApiVersionFormParameter":{
-            "name": "api-version",
-            "type": "string"
-          },
-          "HelmChartNameParameter":{
-            "name": "helmChartName",
-            "type": "string"
-          },
-          "NFAppNameParameter":{
-            "name": "nfAppName",
-            "type": "string"
-          },
-          "DeploymentValuesParameter":{
-            "name": "deploymentValues",
-            "type": "string"
-          },
-          "RoleOverrideParameter":{
-            "name": "roleOverrideValues",
-            "type": "string"
-          }
-        }
+      "type": "object",
+      "schema": {
+        "$ref": "#/definitions/ArtifactBodyParametersParameters"
       }
     }
   }
