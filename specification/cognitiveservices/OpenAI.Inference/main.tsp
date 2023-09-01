@@ -1,11 +1,14 @@
-import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 
-import "./routes.tsp";
+import "./routes/audio_transcription.tsp";
+import "./routes/completions.tsp";
+import "./routes/embeddings.tsp";
+import "./routes/image_generation.tsp";
+import "./routes/commons.tsp";
+import "./service_versions.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI is a case-sensitive name"
@@ -35,40 +38,3 @@ https://westus.api.cognitive.microsoft.com).
 @versioned(ServiceApiVersions)
 @doc("Azure OpenAI APIs for completions and search")
 namespace Azure.OpenAI;
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
-enum ServiceApiVersions {
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2022_12_01: "2022-12-01",
-
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2023_05_15: "2023-05-15",
-
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2023_06_01_Preview: "2023-06-01-preview",
-
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2023_07_01_Preview: "2023-07-01-preview",
-
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2023_08_01_Preview: "2023-08-01-preview",
-
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2023_09_01_Preview: "2023-09-01-preview",
-}
-
-@doc("A specific deployment")
-@TypeSpec.Rest.resource("deployments")
-model Deployment {
-  @visibility("read")
-  @doc("Specifies either the model deployment name (when using Azure OpenAI) or model name (when using non-Azure OpenAI) to use for this request.")
-  @projectedName("java", "deploymentOrModelName")
-  @key
-  deploymentId: string;
-}
-
-alias RequestHeaders = Azure.Core.Traits.RequestHeadersTrait<{
-  @doc("The content type for the operation. Always multipart/form-data for this operation.")
-  @header("content-type")
-  contentType: "multipart/form-data";
-}>;
