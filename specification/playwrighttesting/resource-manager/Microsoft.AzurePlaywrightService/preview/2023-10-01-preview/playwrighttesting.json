@@ -46,7 +46,7 @@
       "name": "Accounts"
     },
     {
-      "name": "FreeTrials"
+      "name": "Quotas"
     }
   ],
   "paths": {
@@ -83,6 +83,66 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/locations/{location}/providers/Microsoft.AzurePlaywrightService/quotas/{name}": {
+      "get": {
+        "operationId": "Quotas_Get",
+        "tags": [
+          "Quotas"
+        ],
+        "description": "Get quota by bucket name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The quota bucket name.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "TestExecution"
+            ],
+            "x-ms-enum": {
+              "name": "QuotaBucketNames",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "TestExecution",
+                  "value": "TestExecution",
+                  "description": "The test execution quota."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Quota"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Quotas_Get": {
+            "$ref": "./examples/Quotas_Get.json"
+          }
         }
       }
     },
@@ -125,13 +185,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzurePlaywrightService/freeTrials": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzurePlaywrightService/quotas": {
       "get": {
-        "operationId": "FreeTrials_ListBySubscription",
+        "operationId": "Quotas_ListBySubscription",
         "tags": [
-          "FreeTrials"
+          "Quotas"
         ],
-        "description": "List free-trial for a given subscription Id.",
+        "description": "List quotas for a given subscription Id.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -144,7 +204,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/FreeTrialListResult"
+              "$ref": "#/definitions/QuotaListResult"
             }
           },
           "default": {
@@ -155,69 +215,12 @@
           }
         },
         "x-ms-examples": {
-          "FreeTrials_ListBySubscription": {
-            "$ref": "./examples/FreeTrials_ListBySubscription.json"
+          "Quotas_ListBySubscription": {
+            "$ref": "./examples/Quotas_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzurePlaywrightService/freeTrials/{name}": {
-      "get": {
-        "operationId": "FreeTrials_Get",
-        "tags": [
-          "FreeTrials"
-        ],
-        "description": "Get free-trial by resource name.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The free-trial resource name.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "TestRunMinutes"
-            ],
-            "x-ms-enum": {
-              "name": "FreeTrialResourceNames",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "TestRunMinutes",
-                  "value": "TestRunMinutes",
-                  "description": "The free-trial resource for test run minutes."
-                }
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/FreeTrial"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "FreeTrials_Get": {
-            "$ref": "./examples/FreeTrials_Get.json"
-          }
         }
       }
     },
@@ -263,7 +266,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts/{accountName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts/{name}": {
       "get": {
         "operationId": "Accounts_Get",
         "tags": [
@@ -281,7 +284,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "accountName",
+            "name": "name",
             "in": "path",
             "description": "Name of account",
             "required": true,
@@ -328,7 +331,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "accountName",
+            "name": "name",
             "in": "path",
             "description": "Name of account",
             "required": true,
@@ -401,7 +404,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "accountName",
+            "name": "name",
             "in": "path",
             "description": "Name of account",
             "required": true,
@@ -457,7 +460,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "accountName",
+            "name": "name",
             "in": "path",
             "description": "Name of account",
             "required": true,
@@ -651,50 +654,9 @@
         ]
       }
     },
-    "FreeTrial": {
-      "type": "object",
-      "description": "A free-trial resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/FreeTrialProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "FreeTrialListResult": {
-      "type": "object",
-      "description": "The response of a FreeTrial list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The FreeTrial items on this page",
-          "items": {
-            "$ref": "#/definitions/FreeTrial"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "FreeTrialProperties": {
       "type": "object",
-      "description": "Free-Trial properties",
+      "description": "The free-trial properties",
       "properties": {
         "accountId": {
           "$ref": "#/definitions/Azure.Core.uuid",
@@ -736,11 +698,6 @@
         "state": {
           "$ref": "#/definitions/FreeTrialState",
           "description": "The free-trial state.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
           "readOnly": true
         }
       },
@@ -818,6 +775,62 @@
             "description": "Change accepted for processing"
           }
         ]
+      }
+    },
+    "Quota": {
+      "type": "object",
+      "description": "A quota resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/QuotaProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "QuotaListResult": {
+      "type": "object",
+      "description": "The response of a Quota list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Quota items on this page",
+          "items": {
+            "$ref": "#/definitions/Quota"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "QuotaProperties": {
+      "type": "object",
+      "description": "Quota properties",
+      "properties": {
+        "freeTrial": {
+          "$ref": "#/definitions/FreeTrialProperties",
+          "description": "The free-trial quota."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
       }
     }
   },

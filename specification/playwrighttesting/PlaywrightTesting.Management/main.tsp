@@ -31,7 +31,7 @@ model Account is TrackedResource<AccountProperties> {
   @minLength(3)
   @maxLength(253)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$")
-  @key("accountName")
+  @key("name")
   @path
   @segment("accounts")
   name: string;
@@ -84,17 +84,33 @@ interface Accounts
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-path-segment-invalid-chars" "Existing Template"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-key-invalid-chars" "Existing template"
-@doc("A free-trial resource")
-@subscriptionResource
-model FreeTrial is ProxyResource<FreeTrialProperties> {
-  @doc("The free-trial resource name.")
+@doc("A quota resource")
+@locationResource
+model Quota is ProxyResource<QuotaProperties> {
+  @doc("The quota bucket name.")
   @key("name")
   @path
-  @segment("freeTrials")
-  name: FreeTrialResourceNames;
+  @segment("quotas")
+  name: QuotaBucketNames;
 }
 
-@doc("Free-Trial properties")
+@doc("The quota bucket name.")
+enum QuotaBucketNames {
+  @doc("The test execution quota.")
+  TestExecution,
+}
+
+@doc("Quota properties")
+model QuotaProperties {
+  @doc("The free-trial quota.")
+  freeTrial?: FreeTrialProperties;
+
+  @visibility("read")
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState;
+}
+
+@doc("The free-trial properties")
 model FreeTrialProperties {
   @doc("The playwright account resource id.")
   @visibility("read")
@@ -125,10 +141,6 @@ model FreeTrialProperties {
   @doc("The free-trial state.")
   @visibility("read")
   state: FreeTrialState;
-
-  @visibility("read")
-  @doc("The status of the last operation.")
-  provisioningState?: ProvisioningState;
 }
 
 @doc("The free-trial state.")
@@ -140,17 +152,11 @@ enum FreeTrialState {
   Expired,
 }
 
-@doc("The free-trial resource name.")
-enum FreeTrialResourceNames {
-  @doc("The free-trial resource for test run minutes.")
-  TestRunMinutes,
-}
-
 @armResourceOperations
-interface FreeTrials {
-  @doc("Get free-trial by resource name.")
-  get is ArmResourceRead<FreeTrial>;
+interface Quotas {
+  @doc("Get quota by bucket name.")
+  get is ArmResourceRead<Quota>;
 
-  @doc("List free-trial for a given subscription Id.")
-  listBySubscription is ArmListBySubscription<FreeTrial>;
+  @doc("List quotas for a given subscription Id.")
+  listBySubscription is ArmListBySubscription<Quota>;
 }
