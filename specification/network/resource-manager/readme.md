@@ -39,7 +39,7 @@ These settings apply only when `--tag=package-2023-08-preview` is specified on t
 input-file:
   - Microsoft.Network/preview/2023-08-01-preview/network.json
   - Microsoft.Network/preview/2023-08-01-preview/networkSecurityPerimeter.json
-
+```
 
 ### Tag: package-2023-05
 
