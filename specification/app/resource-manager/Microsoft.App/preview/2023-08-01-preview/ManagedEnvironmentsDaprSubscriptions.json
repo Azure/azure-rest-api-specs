@@ -15,7 +15,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/DaprSubscriptions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprSubscriptions": {
       "get": {
         "tags": [
           "DaprSubscriptions"
@@ -64,7 +64,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/DaprSubscriptions/{subscriptionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprSubscriptions/{name}": {
       "get": {
         "tags": [
           "DaprSubscriptions"
@@ -86,7 +86,7 @@
             "type": "string"
           },
           {
-            "name": "subscriptionName",
+            "name": "name",
             "in": "path",
             "description": "Name of the Dapr subscription.",
             "required": true,
@@ -144,14 +144,14 @@
             "type": "string"
           },
           {
-            "name": "subscriptionName",
+            "name": "name",
             "in": "path",
             "description": "Name of the Dapr subscription.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "DaprSubscriptionEnvelope",
+            "name": "daprSubscriptionEnvelope",
             "in": "body",
             "description": "Configuration details of the Dapr subscription.",
             "required": true,
@@ -212,7 +212,7 @@
             "type": "string"
           },
           {
-            "name": "subscriptionName",
+            "name": "name",
             "in": "path",
             "description": "Name of the Dapr subscription.",
             "required": true,
