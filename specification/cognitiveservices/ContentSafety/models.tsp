@@ -233,7 +233,7 @@ model TextCategoryPolicy {
   @doc("Text category.")
   category: TextCategory;
 
-  @doc("Severity less than or equal to the threshold will be treated as accepted for the category. The range is the severity value. Current the value could be: 0, 2, 4, 6.")
+  @doc("Severity less than the threshold will be treated as accepted for the category. The range is the severity value. Current the value could be: 0, 2, 4, 6.")
   acceptLessThan?: int32;
 }
 
@@ -243,7 +243,7 @@ model ImageCategoryPolicy {
   @doc("Image category.")
   category: ImageCategory;
 
-  @doc("Severity less than or equal to the threshold will be treated as accepted for the category. The range is the severity value. Current the value could be: 0, 2, 4, 6.")
+  @doc("Severity less than the threshold will be treated as accepted for the category. The range is the severity value. Current the value could be: 0, 2, 4, 6.")
   acceptLessThan?: int32;
 }
 
