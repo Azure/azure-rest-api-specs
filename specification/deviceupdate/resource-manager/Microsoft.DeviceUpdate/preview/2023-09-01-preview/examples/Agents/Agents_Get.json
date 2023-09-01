@@ -1,0 +1,81 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "test-rg",
+    "accountName": "contoso",
+    "agentName": "myagent",
+    "api-version": "2023-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myagent",
+        "location": "westus2",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DeviceUpdate/accounts/contoso/managedagents/myagent",
+        "type": "Microsoft.DeviceUpdate/accounts/agent",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "agentId": "myagent",
+          "deviceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Devices/devices/myagent",
+          "activeMqttBrokerEndpoint": "mybroker-egmqtt-namespace.westus2-1.ts.eventgrid.azure.net",
+          "deviceClassId": "deviceClassId",
+          "agentInfo": {
+            "protocolId": {
+              "name": "DeviceUpdateGen2PrivatePreview",
+              "version": 1
+            },
+            "compatibilityProperties": {
+              "manufacturer": "manufacturer1",
+              "model": "model1"
+            },
+            "version": "2023-04-22T12:12:12.0000000+00:00"
+          },
+          "latestDeploymentInfo": {
+            "workflow": {
+              "id": "mydeploymentfoo",
+              "action": "ApplyDeployment"
+            },
+            "update": {
+              "provider": "myprovider",
+              "name": "updatename",
+              "version": "1.0"
+            },
+            "state": "Succeeded",
+            "installResult": {
+              "resultCode": 200,
+              "extendedResultCode": 0,
+              "resultDetails": "",
+              "stepResults": [
+                {
+                  "update": {
+                    "provider": "microsoft",
+                    "name": "peripheralcamera",
+                    "version": "1.0"
+                  },
+                  "resultCode": 200,
+                  "extendedResultCode": 0,
+                  "resultDetails": ""
+                },
+                {
+                  "update": {
+                    "provider": "microsoft",
+                    "name": "peripheralspeaker",
+                    "version": "1.0"
+                  },
+                  "resultCode": 200,
+                  "extendedResultCode": 0,
+                  "resultDetails": ""
+                }
+              ]
+            }
+          },
+          "installedUpdateId": {
+            "provider": "myprovider",
+            "name": "updatename",
+            "version": "1.0"
+          }
+        }
+      }
+    }
+  }
+}

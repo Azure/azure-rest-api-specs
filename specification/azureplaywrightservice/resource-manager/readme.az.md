@@ -6,11 +6,11 @@ For new Resource Provider. It is highly recommended to onboard Azure CLI extensi
 
 ``` yaml $(az) && $(target-mode) != 'core'
 az:
-    extensions: azureplaywrightservice
-    namespace: azure.mgmt.azureplaywrightservice
-    package-name: azure-mgmt-azureplaywrightservice
-az-output-folder: $(azure-cli-extension-folder)/src/azureplaywrightservice
-python-sdk-output-folder: "$(az-output-folder)/azext_azureplaywrightservice/vendored_sdks/azureplaywrightservice"
+    extensions: playwrighttesting
+    namespace: azure.mgmt.playwrighttesting
+    package-name: azure-mgmt-playwrighttesting
+az-output-folder: $(azure-cli-extension-folder)/src/playwrighttesting
+python-sdk-output-folder: "$(az-output-folder)/azext_playwrighttesting/vendored_sdks/playwrighttesting"
 # add additional configuration here specific for Azure CLI
 # refer to the faq.md for more details
 ```
@@ -20,9 +20,9 @@ python-sdk-output-folder: "$(az-output-folder)/azext_azureplaywrightservice/vend
 This is for command modules that already in azure cli main repo. 
 ``` yaml $(az) && $(target-mode) == 'core'
 az:
-  extensions: azureplaywrightservice
-  namespace: azure.mgmt.azureplaywrightservice
-  package-name: azure-mgmt-azureplaywrightservice
-az-output-folder: $(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/azureplaywrightservice
-python-sdk-output-folder: "$(az-output-folder)/vendored_sdks/azureplaywrightservice"
+  extensions: playwrighttesting
+  namespace: azure.mgmt.playwrighttesting
+  package-name: azure-mgmt-playwrighttesting
+az-output-folder: $(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/playwrighttesting
+python-sdk-output-folder: "$(az-output-folder)/vendored_sdks/playwrighttesting"
 ``` 

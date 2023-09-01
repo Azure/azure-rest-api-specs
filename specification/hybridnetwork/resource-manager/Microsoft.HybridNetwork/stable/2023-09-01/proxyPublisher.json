@@ -1,0 +1,935 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HybridNetworkManagementClient",
+    "description": "The resources in this swagger specification will be used to manage the network function publisher in a Hybrid Network resource provider.",
+    "version": "2023-09-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/proxyPublishers": {
+      "get": {
+        "tags": [
+          "ProxyPublisher"
+        ],
+        "operationId": "ProxyPublisher_ListByLocation",
+        "description": "Lists all the available network function definition and network service design publishers.",
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/PublisherScopeNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherLocationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns a list of available publishers.",
+            "schema": {
+              "$ref": "#/definitions/ProxyPublisherOverviewListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List publishers under a subscription": {
+            "$ref": "./examples/ProxyPublisher/NetworkFunctionPublisherListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/proxyPublishers/{proxyPublisherName}": {
+      "get": {
+        "tags": [
+          "ProxyPublisher"
+        ],
+        "operationId": "ProxyPublisher_Get",
+        "description": "Get a publisher overview information.",
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/PublisherScopeNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherLocationNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ProxyPublisherNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns a publisher overview.",
+            "schema": {
+              "$ref": "#/definitions/ProxyPublisherOverview"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a publisher overview": {
+            "$ref": "./examples/ProxyPublisher/NetworkFunctionPublisherOverviewGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/proxyPublishers/{proxyPublisherName}/networkFunctionDefinitionGroups": {
+      "get": {
+        "tags": [
+          "ProxyPublisher"
+        ],
+        "operationId": "ProxyNetworkFunctionDefinitionGroups_ListByPublisher",
+        "description": "Lists all available network function definition group under a publisher.",
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/PublisherScopeNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherLocationNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ProxyPublisherNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns a list of network function publisher networkFunctionDefinitions.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionDefinitionGroupOverviewListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List network function definition groups under a publisher": {
+            "$ref": "./examples/ProxyPublisher/NetworkFunctionDefinitionGroupListByPublisher.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/proxyPublishers/{proxyPublisherName}/networkFunctionDefinitionGroups/{networkFunctionDefinitionGroupName}": {
+      "get": {
+        "tags": [
+          "ProxyPublisher"
+        ],
+        "operationId": "ProxyNetworkFunctionDefinitionGroups_Get",
+        "description": "Get information about network function definition overview.",
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/PublisherScopeNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherLocationNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ProxyPublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionDefinitionGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the resulting network function publisher network function definition group overview.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionDefinitionGroupOverview"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get network function definition group overview": {
+            "$ref": "./examples/ProxyPublisher/NetworkFunctionDefinitionGroupOverviewGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/proxyPublishers/{proxyPublisherName}/networkFunctionDefinitionGroups/{networkFunctionDefinitionGroupName}/networkFunctionDefinitionVersions": {
+      "get": {
+        "tags": [
+          "ProxyPublisher"
+        ],
+        "operationId": "ProxyNetworkFunctionDefinitionVersions_ListByNetworkFunctionDefinitionGroup",
+        "description": "Lists available network function versions under a network function definition group.",
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/PublisherScopeNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherLocationNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ProxyPublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionDefinitionGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the resulting available network function publisher network function definition versions of a network function definition group.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionDefinitionVersionOverviewListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists available network function versions under a network function definition group": {
+            "$ref": "./examples/ProxyPublisher/NetworkFunctionDefinitionVersionsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/proxyPublishers/{proxyPublisherName}/networkFunctionDefinitionGroups/{networkFunctionDefinitionGroupName}/networkFunctionDefinitionVersions/{networkFunctionDefinitionVersionName}": {
+      "get": {
+        "tags": [
+          "ProxyPublisher"
+        ],
+        "operationId": "ProxyNetworkFunctionDefinitionVersions_Get",
+        "description": "Get information about network function definition version overview.",
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/PublisherScopeNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherLocationNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ProxyPublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionDefinitionGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionDefinitionVersionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the resulting network function publisher network function definition version overview.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionDefinitionVersionOverview"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get network function definition version overview": {
+            "$ref": "./examples/ProxyPublisher/NetworkFunctionDefinitionVersionOverviewGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/proxyPublishers/{proxyPublisherName}/networkServiceDesignGroups": {
+      "get": {
+        "tags": [
+          "ProxyPublisher"
+        ],
+        "operationId": "ProxyNetworkServiceDesignGroups_ListByPublisher",
+        "description": "Lists all available network service design group under a publisher.",
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/PublisherScopeNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherLocationNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ProxyPublisherNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns a list of network service design groups.",
+            "schema": {
+              "$ref": "#/definitions/NetworkServiceDesignGroupOverviewListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List network function definition groups under a publisher": {
+            "$ref": "./examples/ProxyPublisher/NetworkServiceDesignGroupListByPublisher.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/proxyPublishers/{proxyPublisherName}/networkServiceDesignGroups/{networkServiceDesignGroupName}": {
+      "get": {
+        "tags": [
+          "ProxyPublisher"
+        ],
+        "operationId": "ProxyNetworkServiceDesignGroups_Get",
+        "description": "Get information about network service design overview.",
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/PublisherScopeNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherLocationNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ProxyPublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkServiceDesignGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the resulting publisher network service design group overview.",
+            "schema": {
+              "$ref": "#/definitions/NetworkServiceDesignGroupOverview"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get network service design group overview": {
+            "$ref": "./examples/ProxyPublisher/NetworkServiceDesignGroupOverviewGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/proxyPublishers/{proxyPublisherName}/networkServiceDesignGroups/{networkServiceDesignGroupName}/networkServiceDesignVersions": {
+      "get": {
+        "tags": [
+          "ProxyPublisher"
+        ],
+        "operationId": "ProxyNetworkServiceDesignVersions_ListByNetworkServiceDesignGroup",
+        "description": "Lists available network service design versions under a network service design group.",
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/PublisherScopeNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherLocationNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ProxyPublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkServiceDesignGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the resulting available network service design versions of a network service design group.",
+            "schema": {
+              "$ref": "#/definitions/NetworkServiceDesignVersionOverviewListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists available network function versions under a network function definition group": {
+            "$ref": "./examples/ProxyPublisher/NetworkServiceDesignVersionsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/proxyPublishers/{proxyPublisherName}/networkServiceDesignGroups/{networkServiceDesignGroupName}/networkServiceDesignVersions/{networkServiceDesignVersionName}": {
+      "get": {
+        "tags": [
+          "ProxyPublisher"
+        ],
+        "operationId": "ProxyNetworkServiceDesignVersions_Get",
+        "description": "Get information about network service design version overview.",
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/PublisherScopeNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherLocationNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ProxyPublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkServiceDesignGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkServiceDesignVersionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the resulting network service publisher network service design version overview.",
+            "schema": {
+              "$ref": "#/definitions/NetworkServiceDesignVersionOverview"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get network function definition version overview": {
+            "$ref": "./examples/ProxyPublisher/NetworkServiceDesignVersionOverviewGet.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ProxyPublisherOverviewListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProxyPublisherOverview"
+          },
+          "description": "A list of available proxy publishers."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "The proxy publisher list result."
+    },
+    "ProxyPublisherOverview": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "readOnly": true,
+      "description": "The proxy publisher overview."
+    },
+    "NetworkFunctionDefinitionGroupOverviewListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkFunctionDefinitionGroupOverview"
+          },
+          "description": "The network function group list properties."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "A list of available network function definition groups."
+    },
+    "NetworkFunctionDefinitionGroupOverview": {
+      "description": "Network function definition group overview.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "readOnly": true,
+          "$ref": "#/definitions/NetworkFunctionDefinitionGroupOverviewPropertiesFormat",
+          "description": "Network function definition group overview."
+        }
+      }
+    },
+    "NetworkFunctionDefinitionGroupOverviewPropertiesFormat": {
+      "description": "Network function definition group overview properties.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "description": "Network function definition group description."
+        }
+      }
+    },
+    "NetworkFunctionDefinitionVersionOverviewListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkFunctionDefinitionVersionOverview"
+          },
+          "description": "The network function definition overview properties."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "A list of available network function definition groups."
+    },
+    "NetworkFunctionDefinitionVersionOverview": {
+      "description": "Network function definition version overview.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NetworkFunctionDefinitionVersionOverviewPropertiesFormat",
+          "description": "Network function definition version overview properties."
+        }
+      }
+    },
+    "NetworkFunctionDefinitionVersionOverviewPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "description": "The network function definition version description properties."
+        },
+        "versionState": {
+          "type": "string",
+          "description": "The network function definition version state.",
+          "$ref": "./networkFunctionDefinition.json#/definitions/VersionState"
+        },
+        "networkFunctionType": {
+          "$ref": "./common.json#/definitions/NetworkFunctionType",
+          "description": "The network function type."
+        },
+        "nfviType": {
+          "$ref": "./common.json#/definitions/NFVIType",
+          "description": "The nfvi type for the network function."
+        },
+        "deployParameters": {
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "description": "The deployment parameters."
+        },
+        "networkFunctionApplications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkFunctionDefinitionApplicationOverview"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "The network function definition application overview."
+        }
+      },
+      "description": "The network function network function definition overview."
+    },
+    "NetworkFunctionDefinitionApplicationOverview": {
+      "type": "object",
+      "discriminator": "artifactType",
+      "required": [
+        "artifactType"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "description": "The name of the application."
+        },
+        "artifactType": {
+          "type": "string",
+          "description": "The application overview artifact type.",
+          "$ref": "#/definitions/NetworkFunctionPublisherArtifactType"
+        }
+      },
+      "description": "The network function definition application overview."
+    },
+    "HelmPackageApplicationOverview": {
+      "description": "Helm Package Application overview.",
+      "x-ms-discriminator-value": "HelmPackage",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkFunctionDefinitionApplicationOverview"
+        }
+      ],
+      "properties": {
+        "deployParametersMappingRuleProfile": {
+          "type": "object",
+          "readOnly": true,
+          "description": "The deployment parameters mapping rule profile.",
+          "$ref": "./networkFunctionDefinition.json#/definitions/AzureArcKubernetesDeployMappingRuleProfile"
+        }
+      }
+    },
+    "VhdImageFileApplicationOverview": {
+      "description": "Vhd image file Application overview.",
+      "x-ms-discriminator-value": "VhdImageFile",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkFunctionDefinitionApplicationOverview"
+        }
+      ],
+      "properties": {
+        "deployParametersMappingRuleProfile": {
+          "type": "object",
+          "readOnly": true,
+          "description": "The deployment parameters mapping rule profile.",
+          "$ref": "./networkFunctionDefinition.json#/definitions/AzureCoreVhdImageDeployMappingRuleProfile"
+        }
+      }
+    },
+    "ArmTemplateApplicationOverview": {
+      "description": "Arm template Application overview.",
+      "x-ms-discriminator-value": "ArmTemplate",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkFunctionDefinitionApplicationOverview"
+        }
+      ],
+      "properties": {
+        "deployParametersMappingRuleProfile": {
+          "type": "object",
+          "readOnly": true,
+          "description": "The deployment parameters mapping rule profile.",
+          "$ref": "./networkFunctionDefinition.json#/definitions/AzureCoreArmTemplateDeployMappingRuleProfile"
+        }
+      }
+    },
+    "NetworkFunctionPublisherArtifactType": {
+      "type": "string",
+      "description": "Network Function publisher artifact type.",
+      "enum": [
+        "Unknown",
+        "HelmPackage",
+        "VhdImageFile",
+        "ArmTemplate",
+        "ImageFile"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkFunctionPublisherArtifactType",
+        "modelAsString": true
+      }
+    },
+    "NetworkServiceDesignGroupOverviewListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkServiceDesignGroupOverview"
+          },
+          "description": "The network service design group list properties."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "A list of available network service design groups."
+    },
+    "NetworkServiceDesignGroupOverview": {
+      "description": "Network service design group overview.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "readOnly": true,
+          "$ref": "#/definitions/NetworkServiceDesignGroupOverviewPropertiesFormat",
+          "description": "Network service design group overview."
+        }
+      }
+    },
+    "NetworkServiceDesignGroupOverviewPropertiesFormat": {
+      "description": "Network service design group overview properties.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "description": "Network service design group properties."
+        }
+      }
+    },
+    "NetworkServiceDesignVersionOverviewListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkServiceDesignVersionOverview"
+          },
+          "description": "The network service design version list properties."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "A list of available network service design version."
+    },
+    "NetworkServiceDesignVersionOverview": {
+      "description": "Network service design version overview.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NetworkServiceDesignVersionOverviewPropertiesFormat",
+          "description": "Network service design version overview properties."
+        }
+      }
+    },
+    "NetworkServiceDesignVersionOverviewPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "description": "The network service design version description properties."
+        },
+        "versionState": {
+          "type": "string",
+          "description": "The network service design version state.",
+          "$ref": "./networkServiceDesign.json#/definitions/NSDVersionState"
+        },
+        "configurationGroupSchemaReferences": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ConfigurationGroupSchemaReferences"
+          },
+          "description": "Configuration Group Schema References."
+        },
+        "nfvisFromSite": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "./networkServiceDesign.json#/definitions/NfviDetails"
+          },
+          "description": "The nfvis from the site."
+        }
+      },
+      "description": "The network service design overview."
+    },
+    "ConfigurationGroupSchemaReferences": {
+      "type": "object",
+      "properties": {
+        "publisherName": {
+          "type": "string",
+          "description": "The publisher name for the configuration group schema."
+        },
+        "publisherScope": {
+          "$ref": "./common.json#/definitions/PublisherScope",
+          "description": "The scope of the publisher."
+        },
+        "configurationGroupSchemaName": {
+          "type": "string",
+          "description": "The configuration group schema name."
+        },
+        "configurationGroupSchemaOfferingLocation": {
+          "type": "string",
+          "description": "The location of the configuration group schema offering."
+        }
+      },
+      "description": "The configuration schemas to used to define the values."
+    },
+    "ConfigurationGroupSchemaOverviewPropertiesFormat": {
+      "description": "Configuration group schema properties.",
+      "type": "object",
+      "required": [
+        "schemaDefinition"
+      ],
+      "properties": {
+        "versionState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The configuration group schema version state.",
+          "$ref": "./configurationGroupSchema.json#/definitions/ConfigurationGroupSchemaVersionState"
+        },
+        "schemaDefinition": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "Name and value pairs that define the configuration value. It can be a well formed escaped JSON string."
+        }
+      }
+    }
+  }
+}

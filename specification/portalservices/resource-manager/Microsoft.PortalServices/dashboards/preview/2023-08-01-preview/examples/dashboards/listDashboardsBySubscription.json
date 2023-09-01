@@ -1,0 +1,108 @@
+{
+  "parameters": {
+    "api-version": "2023-08-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "title": "testdashboard",
+              "pages": [
+                {
+                  "title": "ARG tiles with different visuals",
+                  "tiles": [
+                    {
+                      "title": "ARG: Virtual machines. Table.",
+                      "type": "QueryTile",
+                      "layout": {
+                        "x": 0,
+                        "y": 0,
+                        "width": 5,
+                        "height": 5
+                      },
+                      "visualization": {
+                        "type": "table"
+                      },
+                      "data": {
+                        "kind": "arg",
+                        "query": "resources | where type == 'microsoft.compute/virtualmachines'"
+                      }
+                    },
+                    {
+                      "title": "ARG: Virtual machines by location. Pie chart.",
+                      "type": "QueryTile",
+                      "layout": {
+                        "x": 0,
+                        "y": 5,
+                        "width": 5,
+                        "height": 5
+                      },
+                      "visualization": {
+                        "type": "pie",
+                        "options": [
+                          "HideLegend"
+                        ]
+                      },
+                      "data": {
+                        "kind": "arg",
+                        "query": "resources | where type == 'microsoft.compute/virtualmachines' | summarize count() by location"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/dashboards/testDashboard",
+            "name": "testdashboard",
+            "type": "Microsoft.PortalServices/dashboards",
+            "location": "eastus",
+            "tags": {
+              "aKey": "aValue",
+              "anotherKey": "anotherValue"
+            }
+          },
+          {
+            "properties": {
+              "title": "testdashboard",
+              "pages": [
+                {
+                  "title": "ARG tiles with different visuals",
+                  "tiles": [
+                    {
+                      "title": "ARG: Virtual machines. Table.",
+                      "type": "QueryTile",
+                      "layout": {
+                        "x": 0,
+                        "y": 0,
+                        "width": 5,
+                        "height": 5
+                      },
+                      "visualization": {
+                        "type": "table"
+                      },
+                      "data": {
+                        "kind": "arg",
+                        "query": "resources | where type == 'microsoft.compute/virtualmachines'"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/dashboards/testDashboard2",
+            "name": "testdashboard2",
+            "type": "Microsoft.PortalServices/dashboards",
+            "location": "eastus",
+            "tags": {
+              "aKey": "aValue",
+              "anotherKey": "anotherValue"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

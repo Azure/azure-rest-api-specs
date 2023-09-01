@@ -1,0 +1,107 @@
+{
+  "operationId": "KdbInsightsEnterprise_CreateOrUpdate",
+  "title": "KdbInsightsEnterprise_CreateOrUpdate_0",
+  "parameters": {
+    "api-version": "2022-11-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "apiTest-uukzdc",
+    "kdbInsightsEnterpriseName": "kdblufscy",
+    "resource": {
+      "properties": {
+        "keyCloakPassword": "testPassword",
+        "uiUsername": "kdbuser01",
+        "uiPassword": "testPassword",
+        "emailAddress": "kdbuser01@email.com",
+        "systemNodePoolVmSize": "Standard_D2d_v4",
+        "userNodePoolVmSize": "Standard_D8ds_v4",
+        "isRookCeph": true,
+        "securityMonitoringEnabled": true,
+        "isPremiumStorageEnabled": false,
+        "vnetAddressSpace": "10.0.0.6/16",
+        "isAuthorizedIpRanges": true,
+        "authorizedIpRanges": "255.255.255.255",
+        "readWriteManyStorageClass": "azurefile-premium-kxi-nfs",
+        "isNotificationsOn": true,
+        "clientNotificationAddress": "kdbuser01@email.com",
+        "aksContainerInsightsRetentionDays": 50,
+        "aksLogRetentionDays": 50,
+        "aksMetricsRetentionDays": 50
+      },
+      "location": "west us"
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/apiTest-uukzdc/providers/Microsoft.KX/kdbInsightsEnterprise/kdblufscy",
+        "name": "kdblufscy",
+        "type": "Microsoft.KX/kdbInsightsEnterprise",
+        "location": "west us",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "uiUsername": "kdbuser01",
+          "emailAddress": "kdbuser01@email.com",
+          "systemNodePoolVmSize": "Standard_D2d_v4",
+          "userNodePoolVmSize": "Standard_D8ds_v4",
+          "isRookCeph": true,
+          "securityMonitoringEnabled": true,
+          "isPremiumStorageEnabled": false,
+          "readWriteManyStorageClass": "azurefile-premium-kxi-nfs",
+          "rtStorageClass": "managed-csi",
+          "readWriteOnceStorageClass": "managed-csi",
+          "isNotificationsOn": true,
+          "clientNotificationAddress": "kdbuser01@email.com",
+          "vnetAddressSpace": "10.0.0.6/16",
+          "isAuthorizedIpRanges": true,
+          "authorizedIpRanges": "255.255.255.255",
+          "aksContainerInsightsRetentionDays": 50,
+          "aksLogRetentionDays": 50,
+          "aksMetricsRetentionDays": 50,
+          "managedResourceGroupConfiguration": {
+            "name": "managedRG",
+            "location": "eastus"
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Retry-After": 60
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/apiTest-uukzdc/providers/Microsoft.KX/kdbInsightsEnterprise/kdblufscy",
+        "name": "kdblufscy",
+        "type": "Microsoft.KX/kdbInsightsEnterprise",
+        "location": "west us",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Accepted",
+          "uiUsername": "kdbuser01",
+          "emailAddress": "kdbuser01@email.com",
+          "systemNodePoolVmSize": "Standard_D2d_v4",
+          "userNodePoolVmSize": "Standard_D8ds_v4",
+          "isRookCeph": true,
+          "securityMonitoringEnabled": true,
+          "isPremiumStorageEnabled": false,
+          "readWriteManyStorageClass": "azurefile-premium-kxi-nfs",
+          "rtStorageClass": "managed-csi",
+          "readWriteOnceStorageClass": "managed-csi",
+          "isNotificationsOn": true,
+          "clientNotificationAddress": "kdbuser01@email.com",
+          "vnetAddressSpace": "10.0.0.6/16",
+          "isAuthorizedIpRanges": true,
+          "authorizedIpRanges": "255.255.255.255",
+          "aksContainerInsightsRetentionDays": 50,
+          "aksLogRetentionDays": 50,
+          "aksMetricsRetentionDays": 50,
+          "managedResourceGroupConfiguration": {
+            "name": "managedRG",
+            "location": "eastus"
+          }
+        }
+      }
+    }
+  }
+}

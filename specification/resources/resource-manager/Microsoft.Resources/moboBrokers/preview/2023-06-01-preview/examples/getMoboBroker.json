@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "moboBrokerName": "myManagedResourceGroup",
+    "api-version": "2023-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "name": "myManagedResourceGroup",
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Resources/moboBrokers/myManagedResourceGroup",
+        "type": "Microsoft.Resources/moboBrokers",
+        "location": "eastus",
+        "properties": {
+          "managedResourceGroupId": "/subscriptions/subid/resourceGroups/myManagedRG",
+          "managedByResourceIds": [
+            "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Contoso/employees/myemployee"
+          ],
+          "denyAssignmentConfiguration": {
+            "notActions": [
+              "Microsoft.Storage/storageAccounts/read",
+              "Microsoft.Storage/storageAccounts/write"
+            ],
+            "notDataActions": [
+              "Microsoft.Storage/storageAccounts/blobServices/blobs/read",
+              "Microsoft.Storage/storageAccounts/blobServices/blobs/write"
+            ],
+            "excludedPrincipals": [
+              {
+                "id": "0000-99999-8888-5555-4444",
+                "type": "ServicePrincipal"
+              }
+            ]
+          },
+          "provisioningState": "Created",
+          "systemData": {
+            "createdBy": "vayada",
+            "createdByType": "User",
+            "createdAt": "2023-08-15T21:43:02.352Z",
+            "lastModifiedBy": "vayada",
+            "lastModifiedByType": "User",
+            "lastModifiedAt": "2023-08-15T21:43:02.352Z"
+          }
+        }
+      }
+    }
+  }
+}
