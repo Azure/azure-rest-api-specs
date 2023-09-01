@@ -858,108 +858,130 @@
       }
     },
     "DaprSubscriptionsCollection": {
+      "description": "Dapr Subscriptions ARM resource.",
+      "required": [
+        "value"
+      ],
       "type": "object",
       "properties": {
-          "value": {
-              "type": "array",
-              "items": {
-                  "$ref": "#/definitions/DaprSubscription"
-              },
-              "nullable": true
-          },
-          "nextLink": {
-              "type": "string",
-              "nullable": true
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DaprSubscription"
           }
-      },
-      "additionalProperties": false
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     },
     "DaprSubscription": {
+      "description": "Dapr PubSub Event Subscription.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
-          "pubsubName": {
-              "type": "string",
-              "nullable": true
-          },
-          "topic": {
-              "type": "string",
-              "nullable": true
-          },
-          "deadLetterTopic": {
-              "type": "string",
-              "nullable": true
-          },
-          "routes": {
+        "properties": {
+          "description": "Dapr PubSub Event Subscription resource specific properties",
+          "type": "object",
+          "properties": {
+            "pubsubName": {
+              "description": "Dapr PubSub component name",
+              "type": "string"
+            },
+            "topic": {
+              "description": "Topic name",
+              "type": "string"
+            },
+            "deadLetterTopic": {
+              "description": "Deadletter topic name",
+              "type": "string"
+            },
+            "routes": {
+              "description": "Subscription routes",
               "$ref": "#/definitions/DaprSubscriptionRoutes"
-          },
-          "scopes": {
+            },
+            "scopes": {
+              "description": "Application scopes to restrict the subscription to specific apps.",
               "type": "array",
               "items": {
-                  "type": "string"
-              },
-              "nullable": true
-          },
-          "metadata": {
+                "type": "string"
+              }
+            },
+            "metadata": {
+              "description": "Subscription metadata",
               "type": "object",
               "additionalProperties": {
-                  "type": "string",
-                  "nullable": true
-              },
-              "nullable": true
-          },
-          "bulkSubscribe": {
+                "type": "string"
+              }
+            },
+            "bulkSubscribe": {
+              "description": "Bulk subscription options",
               "$ref": "#/definitions/DaprSubscriptionBulkSubscribeOptions"
-          }
-      },
-      "additionalProperties": false
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
     },
     "DaprSubscriptionBulkSubscribeOptions": {
+      "description": "Dapr PubSub Bulk Subscription Options.",
       "type": "object",
       "properties": {
-          "enabled": {
-              "type": "boolean"
-          },
-          "maxMessagesCount": {
-              "type": "integer",
-              "format": "int32"
-          },
-          "maxAwaitDurationMs": {
-              "type": "integer",
-              "format": "int32"
-          }
-      },
-      "additionalProperties": false
+        "enabled": {
+          "description": "Enable bulk subscription",
+          "type": "boolean",
+          "default": false
+        },
+        "maxMessagesCount": {
+          "description": "Maximum number of messages to deliver in a bulk message.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxAwaitDurationMs": {
+          "description": "Maximum duration in milliseconds to wait before a bulk message is sent to the app.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
     },
     "DaprSubscriptionRoutes": {
+      "description": "Dapr PubSub Event Subscription Routes configuration.",
       "type": "object",
       "properties": {
-          "rules": {
-              "type": "array",
-              "items": {
-                  "$ref": "#/definitions/DaprSubscriptionRouteRule"
-              },
-              "nullable": true
-          },
-          "default": {
-              "type": "string",
-              "nullable": true
-          }
+        "rules": {
+          "description": "The list of Dapr PubSub Event Subscription Route Rules.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/DaprSubscriptionRouteRule"
+            }
+        },
+        "default": {
+          "description": "The default path to deliver events that do not match any of the rules.",
+          "type": "string"
+        }
       },
       "additionalProperties": false
     },
     "DaprSubscriptionRouteRule": {
+      "description": "Dapr Pubsub Event Subscription Route Rule is used to specify the condition for sending a message to a specific path.",
       "type": "object",
       "properties": {
-          "match": {
-              "type": "string",
-              "nullable": true
-          },
-          "path": {
-              "type": "string",
-              "nullable": true
-          }
-      },
-      "additionalProperties": false
+        "match": {
+          "description": "The optional CEL expression used to match the event. If the match is not specified, then the route is considered the default. The rules are tested in the order specified, so they should be define from most-to-least specific. The default route should appear last in the list.",
+          "type": "string"
+        },
+        "path": {
+          "description": "The path for events that match this rule",
+          "type": "string"
+        }
+      }
     },
     "ExtendedLocationType": {
       "type": "string",
