@@ -21,7 +21,7 @@
         "tags": [
           "DeletedServers"
         ],
-        "description": "Gets a list of all deleted servers in a subscription.",
+        "description": "Gets a list of all deleted servers in a subscription that can be restored. Deleted servers that cannot be restored will not show up in this list.",
         "operationId": "DeletedServers_List",
         "parameters": [
           {
@@ -47,28 +47,24 @@
         },
         "x-ms-examples": {
           "List deleted servers in a subscription": {
-            "$ref": "./examples/DeletedServerListBySubscription.json"
+            "$ref": "./examples/DeletedServers_ListBySubscription.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/deletedServers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/deletedServers": {
       "get": {
         "tags": [
           "DeletedServers"
         ],
-        "description": "Gets a list of deleted servers for a location.",
-        "operationId": "DeletedServers_ListByLocation",
+        "description": "Gets a list of all deleted servers in the specified resource group that can be restored. Deleted servers that cannot be restored will not show up in this list.",
+        "operationId": "DeletedServers_ListByResourceGroup",
         "parameters": [
           {
-            "name": "locationName",
-            "in": "path",
-            "description": "The name of the region where the resource is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+		  {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
@@ -82,7 +78,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidLocation - An invalid location was specified.\n\n * 404 SubscriptionNotFound - The requested subscription was not found."
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionNotFound - The requested subscription was not found."
           }
         },
         "x-ms-pageable": {
@@ -90,26 +86,19 @@
         },
         "x-ms-examples": {
           "List deleted servers": {
-            "$ref": "./examples/DeletedServerList.json"
+            "$ref": "./examples/DeletedServers_ListByResourceGroup.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/deletedServers/{deletedServerName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/deletedServers/{deletedServerName}": {
       "get": {
         "tags": [
           "DeletedServers"
         ],
-        "description": "Gets a deleted server.",
+        "description": "Gets information about an Azure SQL server that has been deleted and can be restored.",
         "operationId": "DeletedServers_Get",
         "parameters": [
-          {
-            "name": "locationName",
-            "in": "path",
-            "description": "The name of the region where the resource is located.",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "deletedServerName",
             "in": "path",
@@ -119,6 +108,9 @@
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+		  {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
@@ -132,7 +124,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidLocation - An invalid location was specified.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 ResourceNotFound - The requested resource was not found."
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 ResourceNotFound - The requested resource was not found."
           }
         },
         "x-ms-examples": {
@@ -142,61 +134,10 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/deletedServers/{deletedServerName}/recover": {
-      "post": {
-        "tags": [
-          "DeletedServers"
-        ],
-        "description": "Recovers a deleted server.",
-        "operationId": "DeletedServers_Recover",
-        "parameters": [
-          {
-            "name": "locationName",
-            "in": "path",
-            "description": "The name of the region where the resource is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "deletedServerName",
-            "in": "path",
-            "description": "The name of the deleted server.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully recover the deleted server.",
-            "schema": {
-              "$ref": "#/definitions/DeletedServer"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidLocation - An invalid location was specified.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources."
-          },
-          "202": {
-            "description": "Accepted"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Recover deleted server.": {
-            "$ref": "./examples/DeletedServerRecover.json"
-          }
-        }
-      }
-    }
   },
   "definitions": {
     "DeletedServer": {
-      "description": "A deleted server.",
+      "description": "An Azure SQL server that has been deleted and can be restored.",
       "type": "object",
       "allOf": [
         {
@@ -251,7 +192,12 @@
           "readOnly": true
         },
         "fullyQualifiedDomainName": {
-          "description": "The fully qualified domain name of the server.",
+          "description": "The fully qualified domain name of the server before deletion.",
+          "type": "string",
+          "readOnly": true
+        }
+		"scheduledPurgeDate": {
+          "description": "Time at which the server data will be purged, after which server restore will no longer be possible. If this is `null`, then default behavior will be used.",
           "type": "string",
           "readOnly": true
         }
