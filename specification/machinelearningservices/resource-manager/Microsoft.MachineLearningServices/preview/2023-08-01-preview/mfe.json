@@ -13608,7 +13608,7 @@
     },
     "CapacityReservationGroup": {
       "required": [
-        "reserverdCapacity"
+        "reservedCapacity"
       ],
       "type": "object",
       "properties": {
@@ -13627,7 +13627,7 @@
           "type": "string",
           "x-nullable": true
         },
-        "reserverdCapacity": {
+        "reservedCapacity": {
           "format": "int32",
           "description": "[Required] Specifies the amount of capacity to reserve.",
           "type": "integer"
@@ -16603,22 +16603,6 @@
       },
       "additionalProperties": false
     },
-    "ExccessCapacityReservationPolicyType": {
-      "enum": [
-        "Weighted"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ExccessCapacityReservationPolicyType",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Weighted"
-          }
-        ]
-      },
-      "additionalProperties": false
-    },
     "ExcessCapacityReservation": {
       "required": [
         "policyType",
@@ -16628,7 +16612,7 @@
       "properties": {
         "policyType": {
           "description": "[Required] The Policy Type for a Capacity Reservation Group",
-          "$ref": "#/definitions/ExccessCapacityReservationPolicyType"
+          "$ref": "#/definitions/ExcessCapacityReservationPolicyType"
         },
         "weights": {
           "description": "[Required] Distribution weights of excess capacity.",
@@ -16638,6 +16622,22 @@
             "type": "integer"
           }
         }
+      },
+      "additionalProperties": false
+    },
+    "ExcessCapacityReservationPolicyType": {
+      "enum": [
+        "Weighted"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ExcessCapacityReservationPolicyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Weighted"
+          }
+        ]
       },
       "additionalProperties": false
     },
