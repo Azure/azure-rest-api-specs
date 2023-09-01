@@ -507,7 +507,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/quotaType/{quotaType}/usages": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/usages": {
       "get": {
         "summary": "Lists subscription core usages for all skus used in a location, for a given type of quota.",
         "description": "List usages in cores for all skus used by a subscription in a given location, for a specific quota type.",
@@ -515,13 +515,6 @@
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-          },
-          {
-            "name": "quotaType",
-            "description": "The type of quota to get usages for",
-            "in": "path",
-            "required": true,
-            "type": "string"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
