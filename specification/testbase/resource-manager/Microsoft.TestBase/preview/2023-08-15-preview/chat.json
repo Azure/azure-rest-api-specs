@@ -268,11 +268,25 @@
             "$ref": "#/definitions/AnswerCitation"
           },
           "x-ms-identifiers": []
+        },
+        "usage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The usage of questions within the chat session",
+          "readOnly": true
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The limit of questions within the chat session",
+          "readOnly": true
         }
       },
       "required": [
         "question",
-        "answer"
+        "answer",
+        "usage",
+        "limit"
       ]
     },
     "AnswerCitation": {
