@@ -254,7 +254,7 @@ model TextPolicy {
   categoryPolicies: TextCategoryPolicy[];
 
   @doc("The policy of blocklist.")
-  blocklistPolicy: BlocklistPolicy;
+  blocklistPolicy?: BlocklistPolicy;
 
   @doc("The type of text analysis output. If not assigned, the default value is \"FourSeverityLevels\".")
   outputType?: AnalyzeTextOutputType = AnalyzeTextOutputType.FourSeverityLevels;
