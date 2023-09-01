@@ -640,7 +640,7 @@
             "$ref": "./common.json#/parameters/NetworkFunctionDefinitionVersionNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionFormParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -650,10 +650,16 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/NFAppNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/DeploymentValuesParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/RoleOverrideParameter"
           }
         ],
         "responses": {
-          "200": {
+          "202": {
             "description": "Request is successful. The operation returns the resulting network function publisher network function definition version overview.",
             "schema": {
               "$ref": "#/definitions/ProxyArtifactOverviewList"
@@ -697,7 +703,7 @@
             "$ref": "./common.json#/parameters/NetworkFunctionDefinitionVersionNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionFormParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -707,10 +713,16 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/NFAppNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/DeploymentValuesParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/RoleOverrideParameter"
           }
         ],
         "responses": {
-          "200": {
+          "202": {
             "description": "Request is successful. The operation returns the resulting network function publisher network function definition version overview.",
             "schema": {
               "$ref": "#/definitions/ProxyArtifactOverviewList"
@@ -754,7 +766,7 @@
             "$ref": "./common.json#/parameters/NetworkFunctionDefinitionVersionNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionFormParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -770,7 +782,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "202": {
             "description": "Request is successful. The operations returns the credential for getting artifacts.",
             "schema": {
               "$ref": "#/definitions/ArtifactCredentialList"
@@ -814,17 +826,17 @@
             "$ref": "./common.json#/parameters/NetworkServiceDesignVersionNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionFormParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceElementNameParameter"
           }
         ],
         "responses": {
-          "200": {
+          "202": {
             "description": "Request is successful. The operations returns the credential for getting artifacts.",
             "schema": {
               "$ref": "#/definitions/ArtifactCredentialList"
@@ -845,7 +857,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/proxyPublishers/{proxyPublisherName}/existingCredentials": {
-      "get": {
+      "post": {
         "tags": [
           "ProxyPublisher"
         ],
@@ -862,14 +874,14 @@
             "$ref": "./common.json#/parameters/ProxyPublisherNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionFormParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
-          "200": {
+          "20": {
             "description": "Request is successful. The operations returns the credential for getting artifacts.",
             "schema": {
               "$ref": "#/definitions/ArtifactCredentialList"
@@ -907,7 +919,7 @@
             "$ref": "./common.json#/parameters/ProxyPublisherNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionFormParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1478,6 +1490,71 @@
           "type": "string",
           "readOnly": true,
           "description": "The URL to get the next set of results."
+        }
+      }
+    },
+    "PublisherCredentialList": {
+      "description": "Proxy publisher credential list.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/PublisherCredential"
+          },
+          "description": "The credential list."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      }
+    },
+    "PublisherCredential": {
+      "description": "The artifact manifest credential definition.",
+      "type": "object",
+      "discriminator": "credentialType",
+      "required": [
+        "tokenName"
+      ],
+      "properties": {
+        "TokenName": {
+          "type": "string",
+          "description": "The token name.",
+          "x-ms-enum": {
+            "name": "TokenName",
+            "modelAsString": true
+          }
+        },
+        "publisherName":{
+          "type": "string",
+          "description": "The publisher name."
+          },
+        "NetworkFunctionDefinitionGroupName":{
+          "type": "string",
+          "description": "The NetworkFunctionDefinitionGroup name."
+          },
+        "NetworkServiceDesignGroupName":{
+          "type": "string",
+          "description": "The NetworkServiceDesignGroup name."
+        },
+        "NetworkFunctionDefinitionVersionName":{
+          "type": "string",
+          "description": "The NetworkFunctionDefinitionVersion name."
+        },
+        "NetworkServiceDesignVersionName":{
+          "type": "string",
+          "description": "The NetworkServiceDesignVersion name."
+        },
+        "repositories": {
+          "type": "array",
+          "description": "The repositories that could be accessed using the current credential.",
+          "items": {
+            "type": "string",
+            "description": "The repository that could be accessed using the current credential."
+          },
+          "x-ms-identifiers": []
         }
       }
     }

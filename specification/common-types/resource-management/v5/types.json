@@ -722,7 +722,7 @@
     },
     "HelmChartNameParameter": {
       "name": "helmChartName",
-      "in": "query",
+      "in": "formData",
       "required": true,
       "type": "string",
       "description": "The name of the helm chart.",
@@ -730,7 +730,7 @@
     },
     "NFAppNameParameter": {
       "name": "nfAppName",
-      "in": "query",
+      "in": "formData",
       "required": true,
       "type": "string",
       "description": "The name of the network function application.",
@@ -754,7 +754,7 @@
     },
     "TokenNameParameter": {
       "name": "tokenName",
-      "in": "query",
+      "in": "formData",
       "required": true,
       "type": "string",
       "description": "The name of the token.",
@@ -762,10 +762,26 @@
     },
     "ResourceNameParameter": {
       "name": "resourceNameParameter",
-      "in": "query",
+      "in": "formData",
       "required": true,
       "type": "string",
       "description": "The resource name under network service design version.",
+      "minLength": 1
+    },
+    "RoleOverrideParameter": {
+      "name": "roleOverrideValues",
+      "in": "formData",
+      "required": false,
+      "type": "string",
+      "description": "The role override values for Network Function Definition Version.",
+      "minLength": 1
+    },
+    "ApiVersionFormParameter": {
+      "name": "api-version",
+      "in": "formData",
+      "required": false,
+      "type": "string",
+      "description": "The api version values for Network Function Definition Version.",
       "minLength": 1
     }
   }
