@@ -1035,8 +1035,7 @@ model MetricDimensions {
   metricNamespace: string;
 
   @doc("""
-  The timespan of the query. It is a string with the following format
-  'startDateTime_ISO/endDateTime_ISO'.
+  The timespan of the query. It is a string with the following format 'startDateTime_ISO/endDateTime_ISO'.
   """)
   @query
   @projectedName("python", "time_interval")
