@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/http";
 import "@typespec/versioning";
 
-import "../models/images.tsp";
+import "../models/images/images.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;

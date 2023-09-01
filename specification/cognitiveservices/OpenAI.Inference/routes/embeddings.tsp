@@ -1,6 +1,6 @@
 import "@typespec/rest";
 
-import "../models/embeddings.create.tsp";
+import "../models/embeddings_create.tsp";
 
 using TypeSpec.Rest;
 using Azure.Core;

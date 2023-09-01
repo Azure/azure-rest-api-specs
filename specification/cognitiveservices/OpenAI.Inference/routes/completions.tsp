@@ -2,8 +2,8 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "@typespec/versioning";
 
-import "../models/completions.create.tsp";
-import "../models/chat.completions.tsp";
+import "../models/completions/completions_create.tsp";
+import "../models/completions/chat_completions.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;

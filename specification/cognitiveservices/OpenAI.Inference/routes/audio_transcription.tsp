@@ -2,8 +2,9 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "@typespec/versioning";
 
-import "../models/transcription.create.tsp";
-import "../models/translation.create.tsp";
+import "../models/audio/transcription_create.tsp";
+import "../models/audio/translation_create.tsp";
+import "./commons.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
