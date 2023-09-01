@@ -6,7 +6,6 @@ import "./routes/completions.tsp";
 import "./routes/embeddings.tsp";
 import "./routes/image_generation.tsp";
 import "./routes/commons.tsp";
-// import "./service_versions.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
