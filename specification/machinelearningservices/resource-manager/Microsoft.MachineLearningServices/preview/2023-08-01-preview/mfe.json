@@ -9,6 +9,261 @@
     "https"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/capacityReserverationGroups": {
+      "get": {
+        "tags": [
+          "CapacityReservationGroup"
+        ],
+        "operationId": "CapacityReservationGroups_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "query",
+            "name": "groupId",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CapacityReservationGroupTrackedResourceArmPaginatedResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Capacity Reservation Group.": {
+            "$ref": "./examples/CapacityReservationGroup/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/capacityReserverationGroups/{groupId}": {
+      "delete": {
+        "tags": [
+          "CapacityReservationGroup"
+        ],
+        "operationId": "CapacityReservationGroups_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "groupId",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Capacity Reservation Group.": {
+            "$ref": "./examples/CapacityReservationGroup/delete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "CapacityReservationGroup"
+        ],
+        "operationId": "CapacityReservationGroups_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "groupId",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CapacityReservationGroupTrackedResourceArmPaginatedResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Capacity Reservation Group.": {
+            "$ref": "./examples/CapacityReservationGroup/get.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "patch": {
+        "tags": [
+          "CapacityReservationGroup"
+        ],
+        "operationId": "CapacityReservationGroups_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "groupId",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PartialMinimalTrackedResourceWithSkuAndIdentity"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Capacity Reservation Group.": {
+            "$ref": "./examples/CapacityReservationGroup/update.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CapacityReservationGroup"
+        ],
+        "operationId": "CapacityReservationGroups_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "groupId",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CapacityReservationGroupTrackedResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create or update request is successful.",
+            "schema": {
+              "$ref": "#/definitions/CapacityReservationGroupTrackedResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/CapacityReservationGroupTrackedResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Capacity Reservation Group.": {
+            "$ref": "./examples/CapacityReservationGroup/createOrUpdate.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/codes": {
       "get": {
         "tags": [
@@ -8438,7 +8693,7 @@
           {
             "in": "query",
             "name": "properties",
-            "description": "Comma-separated list of user property names (and optionally values). Example: prop1,prop2=value2",
+            "description": "Comma-separated list of property names (and optionally values). Example: prop1,prop2=value2",
             "type": "string"
           }
         ],
@@ -13351,6 +13606,86 @@
       },
       "additionalProperties": false
     },
+    "CapacityReservationGroup": {
+      "required": [
+        "reserverdCapacity"
+      ],
+      "type": "object",
+      "properties": {
+        "excessCapacityReservation": {
+          "description": "Specifies the policy for distributing excess capacity\r\nbetween children within this group.",
+          "$ref": "#/definitions/ExcessCapacityReservation",
+          "x-nullable": true
+        },
+        "offer": {
+          "description": "Offer used by this capacity reservation group.",
+          "$ref": "#/definitions/ServerlessOffer",
+          "x-nullable": true
+        },
+        "parentGroupId": {
+          "description": "Specifies the parent capacity reservation group Id.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "reserverdCapacity": {
+          "format": "int32",
+          "description": "[Required] Specifies the amount of capacity to reserve.",
+          "type": "integer"
+        }
+      },
+      "x-ms-client-name": "CapacityReservationGroupProperties",
+      "additionalProperties": false
+    },
+    "CapacityReservationGroupTrackedResource": {
+      "required": [
+        "location",
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "description": "Managed service identity (system assigned and/or user assigned identities)",
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
+        "kind": {
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "[Required] Additional attributes of the entity.",
+          "$ref": "#/definitions/CapacityReservationGroup"
+        },
+        "sku": {
+          "description": "Sku details required for ARM contract for Autoscaling.",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku"
+        }
+      },
+      "x-ms-client-name": "CapacityReservationGroup",
+      "additionalProperties": false
+    },
+    "CapacityReservationGroupTrackedResourceArmPaginatedResult": {
+      "description": "A paginated list of CapacityReservationGroup entities.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page of CapacityReservationGroup objects. If null, there are no additional pages.",
+          "type": "string"
+        },
+        "value": {
+          "description": "An array of objects of type CapacityReservationGroup.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CapacityReservationGroupTrackedResource"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
     "CategoricalDataDriftMetric": {
       "enum": [
         "JensenShannonDistance",
@@ -16263,6 +16598,44 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/EnvironmentVersionResource"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "ExccessCapacityReservationPolicyType": {
+      "enum": [
+        "Weighted"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ExccessCapacityReservationPolicyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Weighted"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "ExcessCapacityReservation": {
+      "required": [
+        "policyType",
+        "weights"
+      ],
+      "type": "object",
+      "properties": {
+        "policyType": {
+          "description": "[Required] The Policy Type for a Capacity Reservation Group",
+          "$ref": "#/definitions/ExccessCapacityReservationPolicyType"
+        },
+        "weights": {
+          "description": "[Required] Distribution weights of excess capacity.",
+          "type": "object",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
           }
         }
       },
