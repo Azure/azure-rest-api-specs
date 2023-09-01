@@ -1240,7 +1240,7 @@
           "$ref": "#/definitions/GrafanaConfigurations"
         },
         "grafanaPlugins": {
-          "description": "Installed plugin list of the Grafana instance. Key is plugin id.",
+          "description": "Installed plugin list of the Grafana instance. Key is plugin id, value is plugin definition.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/GrafanaPlugin"
@@ -1303,6 +1303,7 @@
         },
         "grafanaPlugins": {
           "type": "object",
+          "description": "Update of Grafana plugin. Key is plugin id, value is plugin definition. If plugin definition is null, plugin with given plugin id will be removed. Otherwise, given plugin will be installed.",
           "additionalProperties": {
             "$ref": "#/definitions/GrafanaPlugin"
           }
