@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "@typespec/http";
 import "./models.tsp";
+import "@azure-tools/typespec-autorest";
 
 using Azure.Core;
 using Azure.Core.Traits;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Autorest;
 
 namespace AzureLoadTesting;
 
@@ -18,6 +20,7 @@ interface LoadTestAdministration {
   @doc("Create a new test or update an existing test.")
   @route("/tests/{testId}")
   @patch
+  @example("./examples/CreateOrUpdateTest.json", "CreateOrUpdateTest")
   createOrUpdateTest is Azure.Core.Foundations.Operation<
     {
       @header 
@@ -42,6 +45,7 @@ numeric, underscore or hyphen characters.
   @doc("Delete a test by its name.")
   @route("/tests/{testId}")
   @delete
+  @example("./examples/DeleteTest.json", "DeleteTest")
   deleteTest is Azure.Core.Foundations.Operation<
     {
       @doc("""
@@ -58,6 +62,7 @@ numeric, underscore or hyphen characters.
   @doc("Get load test details by test name")
   @route("/tests/{testId}")
   @get
+  @example("./examples/GetTest.json", "GetTest")
   getTest is Azure.Core.Foundations.Operation<
     {
       @doc("""
@@ -80,6 +85,7 @@ subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/lo
 """)
   @route("/tests")
   @get
+  @example("./examples/ListTests.json", "ListTests")
   listTests is Azure.Core.Foundations.Operation<
     {
       @doc("""
@@ -129,6 +135,7 @@ Existing file with same name for the given test will be overwritten. File
 should be provided in the request body as application/octet-stream.
 """)
   @route("/tests/{testId}/files/{fileName}")
+  @example("./examples/UploadTestFile.json", "UploadTestFile")
   @put
   uploadTestFile is Azure.Core.Foundations.Operation<
     {
@@ -162,6 +169,7 @@ numeric, underscore or hyphen characters.
   @doc("Get test file by the file name.")
   @route("/tests/{testId}/files/{fileName}")
   @get
+  @example("./examples/GetTestFile.json", "GetTestFile")
   getTestFile is Azure.Core.Foundations.Operation<
     {
       @doc("""
@@ -182,6 +190,7 @@ numeric, underscore or hyphen characters.
   @doc("Delete file by the file name for a test")
   @route("/tests/{testId}/files/{fileName}")
   @delete
+  @example("./examples/DeleteTestFile.json", "DeleteTestFile")
   deleteTestFile is Azure.Core.Foundations.Operation<
     {
       @doc("""
@@ -202,6 +211,7 @@ numeric, underscore or hyphen characters.
   @doc("Get all test files.")
   @route("/tests/{testId}/files")
   @get
+  @example("./examples/ListTestFiles.json", "ListTestFiles")
   listTestFiles is Azure.Core.Foundations.Operation<
     {
       @doc("""
@@ -218,6 +228,7 @@ numeric, underscore or hyphen characters.
   @doc("Associate an app component (collection of azure resources) to a test")
   @route("/tests/{testId}/app-components")
   @patch
+  @example("./examples/CreateOrUpdateTestAppComponents.json", "CreateOrUpdateTestAppComponents")
   createOrUpdateAppComponents is Azure.Core.Foundations.Operation<
     {
       @header 
@@ -242,6 +253,7 @@ numeric, underscore or hyphen characters.
   @doc("Get associated app component (collection of azure resources) for the given test.")
   @route("/tests/{testId}/app-components")
   @get
+  @example("./examples/ListTestAppComponents.json", "ListTestAppComponents")
   getAppComponents is Azure.Core.Foundations.Operation<
     {
       @doc("""
@@ -258,6 +270,7 @@ numeric, underscore or hyphen characters.
   @doc("Configure server metrics for a test")
   @route("/tests/{testId}/server-metrics-config")
   @patch
+  @example("./examples/CreateOrUpdateTestServerMetricsConfig.json", "CreateOrUpdateTestServerMetricsConfig")
   createOrUpdateServerMetricsConfig is Azure.Core.Foundations.Operation<
     {
       @header 
@@ -282,6 +295,7 @@ numeric, underscore or hyphen characters.
   @doc("List server metrics configuration for the given test.")
   @route("/tests/{testId}/server-metrics-config")
   @get
+  @example("./examples/ListTestServerMetricsConfig.json", "ListTestServerMetricsConfig")
   getServerMetricsConfig is Azure.Core.Foundations.Operation<
     {
       @doc("""
@@ -302,6 +316,7 @@ interface LoadTestRun {
   @doc("Get test run details by name.")
   @route("/test-runs/{testRunId}")
   @get
+  @example("./examples/GetTestRun.json", "GetTestRun")
   getTestRun is Azure.Core.Foundations.Operation<
     {
       @doc("""
@@ -318,6 +333,7 @@ numeric, underscore or hyphen characters.
   @doc("Create and start a new test run with the given name.")
   @route("/test-runs/{testRunId}")
   @patch
+  @example("./examples/CreateOrUpdateTestRun.json", "CreateOrUpdateTestRun")
   createOrUpdateTestRun is Azure.Core.Foundations.Operation<
     {
       @header 
@@ -351,6 +367,7 @@ in the request body.
   @doc("Delete a test run by its name.")
   @route("/test-runs/{testRunId}")
   @delete
+  @example("./examples/DeleteTestRun.json", "DeleteTestRun")
   deleteTestRun is Azure.Core.Foundations.Operation<
     {
       @doc("""
@@ -367,6 +384,7 @@ numeric, underscore or hyphen characters.
   @doc("Get test run file by file name.")
   @route("/test-runs/{testRunId}/files/{fileName}")
   @get
+  @example("./examples/GetTestRunFile.json", "GetTestRunFile")
   getTestRunFile is Azure.Core.Foundations.Operation<
     {
       @doc("""
@@ -387,6 +405,7 @@ numeric, underscore or hyphen characters.
   @doc("Get all test runs with given filters")
   @route("/test-runs")
   @get
+  @example("./examples/ListTestRuns.json", "ListTestRuns")
   listTestRuns is Azure.Core.Foundations.Operation<
     {
       @doc("""
@@ -431,6 +450,7 @@ the search parameter can be 500.
   @doc("Stop test run by name.")
   @route("/test-runs/{testRunId}:stop")
   @post
+  @example("./examples/StopTestRun.json", "StopTestRun")
   stopTestRun is Azure.Core.Foundations.Operation<
     {
       @doc("""
@@ -447,6 +467,7 @@ numeric, underscore or hyphen characters.
   @doc("List the metric namespaces for a load test run.")
   @route("/test-runs/{testRunId}/metric-namespaces")
   @get
+  @example("./examples/ListTestRunMetricsNamespaces.json", "ListTestRunMetricsNamespaces")
   listMetricNamespaces is Azure.Core.Foundations.Operation<
     {
       @doc("""
@@ -463,6 +484,7 @@ numeric, underscore or hyphen characters.
   @doc("List the metric definitions for a load test run.")
   @route("/test-runs/{testRunId}/metric-definitions")
   @get
+  @example("./examples/ListTestRunMetricsDefinitions.json", "ListTestRunMetricsDefinitions")
   listMetricDefinitions is Azure.Core.Foundations.Operation<
     {
       @doc("""
@@ -483,6 +505,7 @@ numeric, underscore or hyphen characters.
   @doc("List the metric values for a load test run.")
   @route("/test-runs/{testRunId}/metrics")
   @post
+  @example("./examples/ListTestRunMetrics.json", "ListTestRunMetrics")
   listMetrics is Azure.Core.Foundations.Operation<
     {
       @doc("""
@@ -534,6 +557,7 @@ The timespan of the query. It is a string with the following format
   @summary("List the dimension values for the given metric dimension name.")
   @doc("List the dimension values for the given metric dimension name.")
   @route("/test-runs/{testRunId}/metrics/dimensions/{name}/values")
+  @example("./examples/ListMetricDimensionValues.json", "ListMetricDimensionValues")
   listMetricDimensionValues is Azure.Core.Foundations.Operation<
   {
     @doc("""
@@ -581,6 +605,7 @@ numeric, underscore or hyphen characters.
   @doc("Associate an app component (collection of azure resources) to a test run")
   @route("/test-runs/{testRunId}/app-components")
   @patch
+  @example("./examples/CreateOrUpdateTestRunAppComponents.json", "CreateOrUpdateTestRunAppComponents")
   createOrUpdateAppComponents is Azure.Core.Foundations.Operation<
     {
       @header 
@@ -611,6 +636,7 @@ run.
 """)
   @route("/test-runs/{testRunId}/app-components")
   @get
+  @example("./examples/ListTestRunAppComponents.json", "ListTestRunAppComponents")
   getAppComponents is Azure.Core.Foundations.Operation<
     {
       @doc("""
@@ -627,6 +653,7 @@ numeric, underscore or hyphen characters.
   @doc("Configure server metrics for a test run")
   @route("/test-runs/{testRunId}/server-metrics-config")
   @patch
+  @example("./examples/CreateOrUpdateTestRunServerMetricsConfig.json", "CreateOrUpdateTestRunServerMetricsConfig")
   createOrUpdateServerMetricsConfig is Azure.Core.Foundations.Operation<
     {
       @header 
@@ -651,6 +678,7 @@ numeric, underscore or hyphen characters.
   @doc("List server metrics configuration for the given test run.")
   @route("/test-runs/{testRunId}/server-metrics-config")
   @get
+  @example("./examples/ListTestRunServerMetricsConfig.json", "ListTestRunServerMetricsConfig")
   op getServerMetricsConfig(
       @doc("API version")
       @header

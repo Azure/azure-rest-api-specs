@@ -143,6 +143,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListTestRuns": {
+            "$ref": "./examples/ListTestRuns.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -186,6 +191,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetTestRun": {
+            "$ref": "./examples/GetTestRun.json"
           }
         }
       },
@@ -252,6 +262,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateTestRun": {
+            "$ref": "./examples/CreateOrUpdateTestRun.json"
+          }
         }
       },
       "delete": {
@@ -288,6 +303,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteTestRun": {
+            "$ref": "./examples/DeleteTestRun.json"
           }
         }
       }
@@ -331,6 +351,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "StopTestRun": {
+            "$ref": "./examples/StopTestRun.json"
+          }
         }
       }
     },
@@ -372,6 +397,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListTestRunAppComponents": {
+            "$ref": "./examples/ListTestRunAppComponents.json"
           }
         }
       },
@@ -431,6 +461,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateTestRunAppComponents": {
+            "$ref": "./examples/CreateOrUpdateTestRunAppComponents.json"
+          }
         }
       }
     },
@@ -479,6 +514,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetTestRunFile": {
+            "$ref": "./examples/GetTestRunFile.json"
           }
         }
       }
@@ -529,6 +569,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "ListTestRunMetricsDefinitions": {
+            "$ref": "./examples/ListTestRunMetricsDefinitions.json"
+          }
         }
       }
     },
@@ -570,6 +615,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListTestRunMetricsNamespaces": {
+            "$ref": "./examples/ListTestRunMetricsNamespaces.json"
           }
         }
       }
@@ -697,6 +747,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListTestRunMetrics": {
+            "$ref": "./examples/ListTestRunMetrics.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -760,6 +815,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "ListMetricDimensionValues": {
+            "$ref": "./examples/ListMetricDimensionValues.json"
+          }
         }
       }
     },
@@ -806,6 +866,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListTestRunServerMetricsConfig": {
+            "$ref": "./examples/ListTestRunServerMetricsConfig.json"
           }
         }
       },
@@ -864,6 +929,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateTestRunServerMetricsConfig": {
+            "$ref": "./examples/CreateOrUpdateTestRunServerMetricsConfig.json"
           }
         }
       }
@@ -939,6 +1009,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListTests": {
+            "$ref": "./examples/ListTests.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -982,6 +1057,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetTest": {
+            "$ref": "./examples/GetTest.json"
           }
         }
       },
@@ -1041,6 +1121,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateTest": {
+            "$ref": "./examples/CreateOrUpdateTest.json"
+          }
         }
       },
       "delete": {
@@ -1077,6 +1162,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteTest": {
+            "$ref": "./examples/DeleteTest.json"
           }
         }
       }
@@ -1119,6 +1209,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListTestAppComponents": {
+            "$ref": "./examples/ListTestAppComponents.json"
           }
         }
       },
@@ -1178,6 +1273,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateTestAppComponents": {
+            "$ref": "./examples/CreateOrUpdateTestAppComponents.json"
+          }
         }
       }
     },
@@ -1219,6 +1319,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListTestFiles": {
+            "$ref": "./examples/ListTestFiles.json"
           }
         },
         "x-ms-pageable": {
@@ -1272,6 +1377,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "GetTestFile": {
+            "$ref": "./examples/GetTestFile.json"
+          }
         }
       },
       "put": {
@@ -1311,7 +1421,8 @@
             "enum": [
               "JMX_FILE",
               "USER_PROPERTIES",
-              "ADDITIONAL_ARTIFACTS"
+              "ADDITIONAL_ARTIFACTS",
+              "ZIPPED_ARTIFACTS"
             ],
             "x-ms-enum": {
               "name": "FileType",
@@ -1320,17 +1431,22 @@
                 {
                   "name": "JMX_FILE",
                   "value": "JMX_FILE",
-                  "description": "If file is jmx script"
+                  "description": "If file is jmx script."
                 },
                 {
                   "name": "USER_PROPERTIES",
                   "value": "USER_PROPERTIES",
-                  "description": "If file is user properties"
+                  "description": "If file is user properties."
                 },
                 {
                   "name": "ADDITIONAL_ARTIFACTS",
                   "value": "ADDITIONAL_ARTIFACTS",
-                  "description": "If file is not any of other supported type"
+                  "description": "If file is not any of other supported type."
+                },
+                {
+                  "name": "ZIPPED_ARTIFACTS",
+                  "value": "ZIPPED_ARTIFACTS",
+                  "description": "If the file is a compressed archive containing a collection of various artifacts or resources."
                 }
               ]
             }
@@ -1364,6 +1480,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "UploadTestFile": {
+            "$ref": "./examples/UploadTestFile.json"
           }
         }
       },
@@ -1409,6 +1530,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "DeleteTestFile": {
+            "$ref": "./examples/DeleteTestFile.json"
+          }
         }
       }
     },
@@ -1450,6 +1576,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListTestServerMetricsConfig": {
+            "$ref": "./examples/ListTestServerMetricsConfig.json"
           }
         }
       },
@@ -1508,6 +1639,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateTestServerMetricsConfig": {
+            "$ref": "./examples/CreateOrUpdateTestServerMetricsConfig.json"
           }
         }
       }
@@ -1886,7 +2022,8 @@
       "enum": [
         "JMX_FILE",
         "USER_PROPERTIES",
-        "ADDITIONAL_ARTIFACTS"
+        "ADDITIONAL_ARTIFACTS",
+        "ZIPPED_ARTIFACTS"
       ],
       "x-ms-enum": {
         "name": "FileType",
@@ -1895,17 +2032,22 @@
           {
             "name": "JMX_FILE",
             "value": "JMX_FILE",
-            "description": "If file is jmx script"
+            "description": "If file is jmx script."
           },
           {
             "name": "USER_PROPERTIES",
             "value": "USER_PROPERTIES",
-            "description": "If file is user properties"
+            "description": "If file is user properties."
           },
           {
             "name": "ADDITIONAL_ARTIFACTS",
             "value": "ADDITIONAL_ARTIFACTS",
-            "description": "If file is not any of other supported type"
+            "description": "If file is not any of other supported type."
+          },
+          {
+            "name": "ZIPPED_ARTIFACTS",
+            "value": "ZIPPED_ARTIFACTS",
+            "description": "If the file is a compressed archive containing a collection of various artifacts or resources."
           }
         ]
       }
@@ -2790,7 +2932,7 @@
           "$ref": "#/definitions/PassFailCriteria",
           "description": "Pass fail criteria for a test."
         },
-        "autoStopEnabled": {
+        "autoStopCriteria": {
           "$ref": "#/definitions/AutoStopCriteria",
           "description": "Enable or disable automatic stop of your load test when the error rate surpasses a given threshold."
         },

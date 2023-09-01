@@ -57,9 +57,10 @@ enum CertificateType {
 
 @doc("Types of file supported.")
 enum FileType {
-  @doc("If file is jmx script") JMX_FILE,
-  @doc("If file is user properties") USER_PROPERTIES,
-  @doc("If file is not any of other supported type") ADDITIONAL_ARTIFACTS,
+  @doc("If file is jmx script.") JMX_FILE,
+  @doc("If file is user properties.") USER_PROPERTIES,
+  @doc("If file is not any of other supported type.") ADDITIONAL_ARTIFACTS,
+  @doc("If the file is a compressed archive containing a collection of various artifacts or resources.") ZIPPED_ARTIFACTS,
 }
 
 @doc("File status")
@@ -176,7 +177,7 @@ model Test {
 
   @added(APIVersions.v2023_04_01_preview)
   @doc("Enable or disable automatic stop of your load test when the error rate surpasses a given threshold.")
-  autoStopEnabled?: AutoStopCriteria;
+  autoStopCriteria?: AutoStopCriteria;
 
   @doc("""
 Secrets can be stored in an Azure Key Vault or any other secret store. If the

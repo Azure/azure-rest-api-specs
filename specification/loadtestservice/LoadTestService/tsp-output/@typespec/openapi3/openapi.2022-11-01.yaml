@@ -1,0 +1,2806 @@
+openapi: 3.0.0
+info:
+  title: Azure Load Testing
+  version: '2022-11-01'
+  description: >-
+    These APIs allow end users to create, view and run load tests using Azure
+    Load
+
+    Test Service.
+tags:
+  - name: Test
+  - name: TestRun
+paths:
+  /test-runs:
+    get:
+      tags:
+        - TestRun
+      operationId: LoadTestRun_listTestRuns
+      summary: Get all test runs with given filters
+      description: Get all test runs with given filters
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: orderby
+          in: query
+          required: false
+          description: >-
+            Sort on the supported fields in (field asc/desc) format. eg:
+            executedDateTime
+
+            asc. Supported fields - executedDateTime
+          schema:
+            type: string
+        - name: search
+          in: query
+          required: false
+          description: >-
+            Prefix based, case sensitive search on searchable fields -
+            description,
+
+            executedUser. For example, to search for a test run, with
+            description 500 VUs,
+
+            the search parameter can be 500.
+          schema:
+            type: string
+        - name: testId
+          in: query
+          required: false
+          description: Unique name of an existing load test.
+          schema:
+            type: string
+        - name: executionFrom
+          in: query
+          required: false
+          description: >-
+            Start DateTime(ISO 8601 literal format) of test-run execution time
+            filter range.
+          schema:
+            type: string
+            format: date-time
+        - name: executionTo
+          in: query
+          required: false
+          description: >-
+            End DateTime(ISO 8601 literal format) of test-run execution time
+            filter range.
+          schema:
+            type: string
+            format: date-time
+        - name: status
+          in: query
+          required: false
+          description: Comma separated list of test run status.
+          schema:
+            type: string
+        - name: maxpagesize
+          in: query
+          required: false
+          description: Number of results in response.
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestRunsList'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: The error code for specific error that occurred.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+  /test-runs/{testRunId}:
+    get:
+      tags:
+        - TestRun
+      operationId: LoadTestRun_getTestRun
+      summary: Get test run details by name.
+      description: Get test run details by name.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: testRunId
+          in: path
+          required: true
+          description: >-
+            Unique name for the load test run, must contain only lower-case
+            alphabetic,
+
+            numeric, underscore or hyphen characters.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestRun'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: The error code for specific error that occurred.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+    patch:
+      tags:
+        - TestRun
+      operationId: LoadTestRun_createOrUpdateTestRun
+      summary: Create and start a new test run with the given name.
+      description: Create and start a new test run with the given name.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: testRunId
+          in: path
+          required: true
+          description: >-
+            Unique name for the load test run, must contain only lower-case
+            alphabetic,
+
+            numeric, underscore or hyphen characters.
+          schema:
+            type: string
+        - name: oldTestRunId
+          in: query
+          required: false
+          description: >-
+            Existing test run identifier that should be rerun, if this is
+            provided, the
+
+            test will run with the JMX file, configuration and app components
+            from the
+
+            existing test run. You can override the configuration values for new
+            test run
+
+            in the request body.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestRun'
+        '201':
+          description: >-
+            The request has succeeded and a new resource has been created as a
+            result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestRun'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: The error code for specific error that occurred.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+      requestBody:
+        description: Load test run model
+        required: true
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/TestRunUpdate'
+    delete:
+      tags:
+        - TestRun
+      operationId: LoadTestRun_deleteTestRun
+      summary: Delete a test run by its name.
+      description: Delete a test run by its name.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: testRunId
+          in: path
+          required: true
+          description: >-
+            Unique name for the load test run, must contain only lower-case
+            alphabetic,
+
+            numeric, underscore or hyphen characters.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: >-
+            There is no content to send for this request, but the headers may be
+            useful. 
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: The error code for specific error that occurred.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+  /test-runs/{testRunId}/app-components:
+    patch:
+      tags:
+        - TestRun
+      operationId: LoadTestRun_createOrUpdateAppComponents
+      summary: Associate an app component (collection of azure resources) to a test run
+      description: Associate an app component (collection of azure resources) to a test run
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: testRunId
+          in: path
+          required: true
+          description: >-
+            Unique name for the load test run, must contain only lower-case
+            alphabetic,
+
+            numeric, underscore or hyphen characters.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestRunAppComponents'
+        '201':
+          description: >-
+            The request has succeeded and a new resource has been created as a
+            result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestRunAppComponents'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: The error code for specific error that occurred.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+      requestBody:
+        description: App Component model.
+        required: true
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/TestRunAppComponentsUpdate'
+    get:
+      tags:
+        - TestRun
+      operationId: LoadTestRun_getAppComponents
+      summary: >-
+        Get associated app component (collection of azure resources) for the
+        given test
+
+        run.
+      description: >-
+        Get associated app component (collection of azure resources) for the
+        given test
+
+        run.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: testRunId
+          in: path
+          required: true
+          description: >-
+            Unique name for the load test run, must contain only lower-case
+            alphabetic,
+
+            numeric, underscore or hyphen characters.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestRunAppComponents'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: The error code for specific error that occurred.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+  /test-runs/{testRunId}/files/{fileName}:
+    get:
+      tags:
+        - TestRun
+      operationId: LoadTestRun_getTestRunFile
+      summary: Get test run file by file name.
+      description: Get test run file by file name.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: testRunId
+          in: path
+          required: true
+          description: >-
+            Unique name for the load test run, must contain only lower-case
+            alphabetic,
+
+            numeric, underscore or hyphen characters.
+          schema:
+            type: string
+        - name: fileName
+          in: path
+          required: true
+          description: Test run file name with file extension
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileInfo'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: The error code for specific error that occurred.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+  /test-runs/{testRunId}/metric-definitions:
+    get:
+      tags:
+        - TestRun
+      operationId: LoadTestRun_listMetricDefinitions
+      summary: List the metric definitions for a load test run.
+      description: List the metric definitions for a load test run.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: testRunId
+          in: path
+          required: true
+          description: >-
+            Unique name for the load test run, must contain only lower-case
+            alphabetic,
+
+            numeric, underscore or hyphen characters.
+          schema:
+            type: string
+        - name: metricNamespace
+          in: query
+          required: true
+          description: Metric namespace to query metric definitions for.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricDefinitionCollection'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: The error code for specific error that occurred.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+  /test-runs/{testRunId}/metric-namespaces:
+    get:
+      tags:
+        - TestRun
+      operationId: LoadTestRun_listMetricNamespaces
+      summary: List the metric namespaces for a load test run.
+      description: List the metric namespaces for a load test run.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: testRunId
+          in: path
+          required: true
+          description: >-
+            Unique name for the load test run, must contain only lower-case
+            alphabetic,
+
+            numeric, underscore or hyphen characters.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricNamespaceCollection'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: The error code for specific error that occurred.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+  /test-runs/{testRunId}/metrics:
+    post:
+      tags:
+        - TestRun
+      operationId: LoadTestRun_listMetrics
+      summary: List the metric values for a load test run.
+      description: List the metric values for a load test run.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: testRunId
+          in: path
+          required: true
+          description: >-
+            Unique name for the load test run, must contain only lower-case
+            alphabetic,
+
+            numeric, underscore or hyphen characters.
+          schema:
+            type: string
+        - name: aggregation
+          in: query
+          required: false
+          description: The aggregation
+          schema:
+            type: string
+        - name: interval
+          in: query
+          required: false
+          description: The interval (i.e. timegrain) of the query.
+          schema:
+            type: string
+            enum:
+              - PT5S
+              - PT10S
+              - PT1M
+              - PT5M
+              - PT1H
+            default: PT1M
+        - name: metricName
+          in: query
+          required: true
+          description: Metric name
+          schema:
+            type: string
+        - name: metricNamespace
+          in: query
+          required: true
+          description: Metric namespace to query metric definitions for.
+          schema:
+            type: string
+        - name: timespan
+          in: query
+          required: true
+          description: |-
+            The timespan of the query. It is a string with the following format
+            'startDateTime_ISO/endDateTime_ISO'.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Metrics'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: The error code for specific error that occurred.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+      requestBody:
+        description: 'Metric dimension filter '
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetricRequestPayload'
+  /test-runs/{testRunId}/metrics/dimensions/{name}/values:
+    get:
+      tags:
+        - TestRun
+      operationId: LoadTestRun_listMetricDimensionValues
+      summary: List the dimension values for the given metric dimension name.
+      description: List the dimension values for the given metric dimension name.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: testRunId
+          in: path
+          required: true
+          description: >-
+            Unique name for the load test run, must contain only lower-case
+            alphabetic,
+
+            numeric, underscore or hyphen characters.
+          schema:
+            type: string
+        - name: name
+          in: path
+          required: true
+          description: Dimension name
+          schema:
+            type: string
+        - $ref: '#/components/parameters/MetricDimensions.interval'
+        - $ref: '#/components/parameters/MetricDimensions.metricName'
+        - $ref: '#/components/parameters/MetricDimensions.metricNamespace'
+        - $ref: '#/components/parameters/MetricDimensions.timespan'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DimensionValueList'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: The error code for specific error that occurred.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+  /test-runs/{testRunId}/server-metrics-config:
+    patch:
+      tags:
+        - TestRun
+      operationId: LoadTestRun_createOrUpdateServerMetricsConfig
+      summary: Configure server metrics for a test run
+      description: Configure server metrics for a test run
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: testRunId
+          in: path
+          required: true
+          description: >-
+            Unique name for the load test run, must contain only lower-case
+            alphabetic,
+
+            numeric, underscore or hyphen characters.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestRunServerMetricConfig'
+        '201':
+          description: >-
+            The request has succeeded and a new resource has been created as a
+            result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestRunServerMetricConfig'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: The error code for specific error that occurred.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+      requestBody:
+        description: Server metric configuration model.
+        required: true
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/TestRunServerMetricConfig'
+    get:
+      tags:
+        - TestRun
+      operationId: LoadTestRun_getServerMetricsConfig
+      summary: List server metrics configuration for the given test run.
+      description: List server metrics configuration for the given test run.
+      parameters:
+        - name: api-version
+          in: header
+          required: true
+          description: API version
+          schema:
+            type: string
+        - name: testRunId
+          in: path
+          required: true
+          description: >-
+            Unique name for the load test run, must contain only lower-case
+            alphabetic,
+
+            numeric, underscore or hyphen characters.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestRunServerMetricConfig'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: The error code for specific error that occurred.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+  /test-runs/{testRunId}:stop:
+    post:
+      tags:
+        - TestRun
+      operationId: LoadTestRun_stopTestRun
+      summary: Stop test run by name.
+      description: Stop test run by name.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: testRunId
+          in: path
+          required: true
+          description: >-
+            Unique name for the load test run, must contain only lower-case
+            alphabetic,
+
+            numeric, underscore or hyphen characters.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestRun'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: The error code for specific error that occurred.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+  /tests:
+    get:
+      tags:
+        - Test
+      operationId: LoadTestAdministration_listTests
+      summary: >-
+        Get all load tests by the fully qualified resource Id e.g
+
+        subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
+      description: >-
+        Get all load tests by the fully qualified resource Id e.g
+
+        subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: orderby
+          in: query
+          required: false
+          description: |-
+            Sort on the supported fields in (field asc/desc) format. eg:
+            lastModifiedDateTime asc. Supported fields - lastModifiedDateTime
+          schema:
+            type: string
+        - name: search
+          in: query
+          required: false
+          description: >-
+            Prefix based, case sensitive search on searchable fields -
+            displayName,
+
+            createdBy. For example, to search for a test, with display name is
+            Login Test,
+
+            the search parameter can be Login.
+          schema:
+            type: string
+        - name: lastModifiedStartTime
+          in: query
+          required: false
+          description: >-
+            Start DateTime(ISO 8601 literal format) of the last updated time
+            range to
+
+            filter tests.
+          schema:
+            type: string
+            format: date-time
+        - name: lastModifiedEndTime
+          in: query
+          required: false
+          description: >-
+            End DateTime(ISO 8601 literal format) of the last updated time range
+            to filter
+
+            tests.
+          schema:
+            type: string
+            format: date-time
+        - name: maxpagesize
+          in: query
+          required: false
+          description: Number of results in response.
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestsList'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: The error code for specific error that occurred.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+  /tests/{testId}:
+    patch:
+      tags:
+        - Test
+      operationId: LoadTestAdministration_createOrUpdateTest
+      summary: Create a new test or update an existing test.
+      description: Create a new test or update an existing test.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: testId
+          in: path
+          required: true
+          description: >-
+            Unique name for the load test, must contain only lower-case
+            alphabetic,
+
+            numeric, underscore or hyphen characters.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Test'
+        '201':
+          description: >-
+            The request has succeeded and a new resource has been created as a
+            result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Test'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: The error code for specific error that occurred.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+      requestBody:
+        description: Load test model
+        required: true
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/TestUpdate'
+    delete:
+      tags:
+        - Test
+      operationId: LoadTestAdministration_deleteTest
+      summary: Delete a test by its name.
+      description: Delete a test by its name.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: testId
+          in: path
+          required: true
+          description: >-
+            Unique name for the load test, must contain only lower-case
+            alphabetic,
+
+            numeric, underscore or hyphen characters.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: >-
+            There is no content to send for this request, but the headers may be
+            useful. 
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: The error code for specific error that occurred.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+    get:
+      tags:
+        - Test
+      operationId: LoadTestAdministration_getTest
+      summary: Get load test details by test name
+      description: Get load test details by test name
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: testId
+          in: path
+          required: true
+          description: >-
+            Unique name for the load test, must contain only lower-case
+            alphabetic,
+
+            numeric, underscore or hyphen characters.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Test'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: The error code for specific error that occurred.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+  /tests/{testId}/app-components:
+    patch:
+      tags:
+        - Test
+      operationId: LoadTestAdministration_createOrUpdateAppComponents
+      summary: Associate an app component (collection of azure resources) to a test
+      description: Associate an app component (collection of azure resources) to a test
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: testId
+          in: path
+          required: true
+          description: >-
+            Unique name for the load test, must contain only lower-case
+            alphabetic,
+
+            numeric, underscore or hyphen characters.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestAppComponents'
+        '201':
+          description: >-
+            The request has succeeded and a new resource has been created as a
+            result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestAppComponents'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: The error code for specific error that occurred.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+      requestBody:
+        description: App Component model.
+        required: true
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/TestAppComponentsUpdate'
+    get:
+      tags:
+        - Test
+      operationId: LoadTestAdministration_getAppComponents
+      summary: >-
+        Get associated app component (collection of azure resources) for the
+        given test.
+      description: >-
+        Get associated app component (collection of azure resources) for the
+        given test.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: testId
+          in: path
+          required: true
+          description: >-
+            Unique name for the load test, must contain only lower-case
+            alphabetic,
+
+            numeric, underscore or hyphen characters.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestAppComponents'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: The error code for specific error that occurred.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+  /tests/{testId}/files:
+    get:
+      tags:
+        - Test
+      operationId: LoadTestAdministration_listTestFiles
+      summary: Get all test files.
+      description: Get all test files.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: testId
+          in: path
+          required: true
+          description: >-
+            Unique name for the load test, must contain only lower-case
+            alphabetic,
+
+            numeric, underscore or hyphen characters.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileInfoList'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: The error code for specific error that occurred.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+  /tests/{testId}/files/{fileName}:
+    put:
+      tags:
+        - Test
+      operationId: LoadTestAdministration_uploadTestFile
+      summary: >-
+        Upload input file for a given test name. File size can't be more than 50
+        MB.
+
+        Existing file with same name for the given test will be overwritten.
+        File
+
+        should be provided in the request body as application/octet-stream.
+      description: >-
+        Upload input file for a given test name. File size can't be more than 50
+        MB.
+
+        Existing file with same name for the given test will be overwritten.
+        File
+
+        should be provided in the request body as application/octet-stream.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: testId
+          in: path
+          required: true
+          description: >-
+            Unique name for the load test, must contain only lower-case
+            alphabetic,
+
+            numeric, underscore or hyphen characters.
+          schema:
+            type: string
+        - name: fileName
+          in: path
+          required: true
+          description: 'Unique name for test file with file extension like : App.jmx'
+          schema:
+            type: string
+        - name: fileType
+          in: query
+          required: false
+          description: File type
+          schema:
+            type: string
+            enum:
+              - JMX_FILE
+              - USER_PROPERTIES
+              - ADDITIONAL_ARTIFACTS
+      responses:
+        '201':
+          description: >-
+            The request has succeeded and a new resource has been created as a
+            result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileInfo'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: The error code for specific error that occurred.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+      requestBody:
+        description: The file content as application/octet-stream.
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+    get:
+      tags:
+        - Test
+      operationId: LoadTestAdministration_getTestFile
+      summary: Get test file by the file name.
+      description: Get test file by the file name.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: testId
+          in: path
+          required: true
+          description: >-
+            Unique name for the load test, must contain only lower-case
+            alphabetic,
+
+            numeric, underscore or hyphen characters.
+          schema:
+            type: string
+        - name: fileName
+          in: path
+          required: true
+          description: File name with file extension like app.jmx
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileInfo'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: The error code for specific error that occurred.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+    delete:
+      tags:
+        - Test
+      operationId: LoadTestAdministration_deleteTestFile
+      summary: Delete file by the file name for a test
+      description: Delete file by the file name for a test
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: testId
+          in: path
+          required: true
+          description: >-
+            Unique name for the load test, must contain only lower-case
+            alphabetic,
+
+            numeric, underscore or hyphen characters.
+          schema:
+            type: string
+        - name: fileName
+          in: path
+          required: true
+          description: File name with file extension like app.jmx
+          schema:
+            type: string
+      responses:
+        '204':
+          description: >-
+            There is no content to send for this request, but the headers may be
+            useful. 
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: The error code for specific error that occurred.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+  /tests/{testId}/server-metrics-config:
+    patch:
+      tags:
+        - Test
+      operationId: LoadTestAdministration_createOrUpdateServerMetricsConfig
+      summary: Configure server metrics for a test
+      description: Configure server metrics for a test
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: testId
+          in: path
+          required: true
+          description: >-
+            Unique name for the load test, must contain only lower-case
+            alphabetic,
+
+            numeric, underscore or hyphen characters.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestServerMetricConfig'
+        '201':
+          description: >-
+            The request has succeeded and a new resource has been created as a
+            result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestServerMetricConfig'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: The error code for specific error that occurred.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+      requestBody:
+        description: Server metric configuration model.
+        required: true
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/TestServerMetricConfig'
+    get:
+      tags:
+        - Test
+      operationId: LoadTestAdministration_getServerMetricsConfig
+      summary: List server metrics configuration for the given test.
+      description: List server metrics configuration for the given test.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: testId
+          in: path
+          required: true
+          description: >-
+            Unique name for the load test, must contain only lower-case
+            alphabetic,
+
+            numeric, underscore or hyphen characters.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestServerMetricConfig'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: The error code for specific error that occurred.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+security:
+  - Oauth2:
+      - https://cnt-prod.loadtesting.azure.com/.default
+components:
+  parameters:
+    Azure.Core.Foundations.ApiVersionParameter:
+      name: api-version
+      in: query
+      required: true
+      description: The API version to use for this operation.
+      schema:
+        type: string
+        minLength: 1
+    MetricDimensions.interval:
+      name: interval
+      in: query
+      required: false
+      description: The interval (i.e. timegrain) of the query.
+      schema:
+        type: string
+        enum:
+          - PT5S
+          - PT10S
+          - PT1M
+          - PT5M
+          - PT1H
+    MetricDimensions.metricName:
+      name: metricName
+      in: query
+      required: true
+      description: Metric name
+      schema:
+        type: string
+    MetricDimensions.metricNamespace:
+      name: metricNamespace
+      in: query
+      required: true
+      description: Metric namespace to query metric definitions for.
+      schema:
+        type: string
+    MetricDimensions.timespan:
+      name: timespan
+      in: query
+      required: true
+      description: |-
+        The timespan of the query. It is a string with the following format
+        'startDateTime_ISO/endDateTime_ISO'.
+      schema:
+        type: string
+  schemas:
+    APIVersions:
+      type: string
+      enum:
+        - '2022-11-01'
+        - 2023-04-01-preview
+    AggregationType:
+      type: string
+      description: Aggregation type
+      enum:
+        - Average
+        - Count
+        - None
+        - Total
+        - Percentile90
+        - Percentile95
+        - Percentile99
+    AppComponent:
+      type: object
+      properties:
+        resourceId:
+          type: string
+          description: >-
+            fully qualified resource Id e.g
+
+            subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}
+          readOnly: true
+        resourceName:
+          type: string
+          description: Azure resource name, required while creating the app component.
+        resourceType:
+          type: string
+          description: Azure resource type, required while creating the app component.
+        displayName:
+          type: string
+          description: Azure resource display name
+        resourceGroup:
+          type: string
+          description: Resource group name of the Azure resource
+          readOnly: true
+        subscriptionId:
+          type: string
+          description: Subscription Id of the Azure resource
+          readOnly: true
+        kind:
+          type: string
+          description: Kind of Azure resource type
+      description: >-
+        An Azure resource object (Refer azure generic resource model :
+
+        https://docs.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)
+    CertificateMetadata:
+      type: object
+      properties:
+        value:
+          type: string
+          description: The value of the certificate for respective type
+        type:
+          allOf:
+            - $ref: '#/components/schemas/CertificateType'
+          description: Type of certificate
+        name:
+          type: string
+          description: Name of the certificate.
+      description: Certificates metadata
+    CertificateType:
+      type: string
+      description: Types of certificates supported.
+      enum:
+        - AKV_CERT_URI
+    DimensionFilter:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The dimension name
+        values:
+          type: array
+          items:
+            type: string
+          description: The dimension values. Maximum values can be 20.
+      description: Dimension name and values to filter
+    DimensionValue:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the dimension.
+        value:
+          type: string
+          description: The value of the dimension.
+      description: Represents a metric dimension value.
+    DimensionValueList:
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            type: string
+          description: The dimension value
+        nextLink:
+          type: string
+          format: uri
+          description: >-
+            Link for the next set of values in case of paginated results, if
+            applicable
+      description: Metrics dimension values.
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: The error code.
+        message:
+          type: string
+          description: The error message.
+        target:
+          type: string
+          description: The error target.
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+          description: Additional details and inner errors.
+      description: Error from a REST request.
+      required:
+        - code
+        - message
+    ErrorDetails:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error details in case test run was not successfully run.
+          readOnly: true
+      description: Error details if there is any failure in load test run
+    ErrorResponseBody:
+      type: object
+      properties:
+        error:
+          allOf:
+            - $ref: '#/components/schemas/Error'
+          description: Error from a REST request.
+      description: The definition of an error object.
+      required:
+        - error
+    FileInfo:
+      type: object
+      properties:
+        url:
+          type: string
+          description: File URL.
+        fileName:
+          type: string
+          description: Name of the file.
+        fileType:
+          allOf:
+            - $ref: '#/components/schemas/FileType'
+          description: File type
+        expireDateTime:
+          type: string
+          format: date-time
+          description: Expiry time of the file (ISO 8601 literal format)
+        validationStatus:
+          allOf:
+            - $ref: '#/components/schemas/FileStatus'
+          description: Validation status of the file
+        validationFailureDetails:
+          type: string
+          description: Validation failure error details
+      description: File info
+    FileInfoList:
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/FileInfo'
+          description: The FileInfo items on this page
+        nextLink:
+          type: string
+          format: uri
+          description: The link to the next page of items
+      description: Collection of files.
+      required:
+        - value
+    FileStatus:
+      type: string
+      description: File status
+      enum:
+        - NOT_VALIDATED
+        - VALIDATION_SUCCESS
+        - VALIDATION_FAILURE
+        - VALIDATION_INITIATED
+        - VALIDATION_NOT_REQUIRED
+    FileType:
+      type: string
+      description: Types of file supported.
+      enum:
+        - JMX_FILE
+        - USER_PROPERTIES
+        - ADDITIONAL_ARTIFACTS
+    Interval:
+      type: string
+      description: Intervals
+      enum:
+        - PT5S
+        - PT10S
+        - PT1M
+        - PT5M
+        - PT1H
+    LoadTestConfiguration:
+      type: object
+      properties:
+        engineInstances:
+          type: integer
+          format: int32
+          description: >-
+            The number of engine instances to execute load test. Supported
+            values are in
+
+            range of 1-45. Required for creating a new test.
+        splitAllCSVs:
+          type: boolean
+          description: >-
+            If false, Azure Load Testing copies and processes your input files
+            unmodified
+
+            across all test engine instances. If true, Azure Load Testing splits
+            the CSV
+
+            input data evenly across all engine instances. If you provide
+            multiple CSV
+
+            files, each file will be split evenly.
+        quickStartTest:
+          type: boolean
+          description: >-
+            If true, optionalLoadTestConfig is required and JMX script for the
+            load test is
+
+            not required to upload.
+        optionalLoadTestConfig:
+          allOf:
+            - $ref: '#/components/schemas/OptionalLoadTestConfig'
+          description: Optional load test config
+      description: The load test configuration.
+      required:
+        - optionalLoadTestConfig
+    LoadTestConfigurationUpdate:
+      type: object
+      properties:
+        engineInstances:
+          type: integer
+          format: int32
+          description: >-
+            The number of engine instances to execute load test. Supported
+            values are in
+
+            range of 1-45. Required for creating a new test.
+        splitAllCSVs:
+          type: boolean
+          description: >-
+            If false, Azure Load Testing copies and processes your input files
+            unmodified
+
+            across all test engine instances. If true, Azure Load Testing splits
+            the CSV
+
+            input data evenly across all engine instances. If you provide
+            multiple CSV
+
+            files, each file will be split evenly.
+        quickStartTest:
+          type: boolean
+          description: >-
+            If true, optionalLoadTestConfig is required and JMX script for the
+            load test is
+
+            not required to upload.
+        optionalLoadTestConfig:
+          allOf:
+            - $ref: '#/components/schemas/OptionalLoadTestConfig'
+          description: Optional load test config
+      description: The load test configuration.
+    MetricAvailability:
+      type: object
+      properties:
+        timeGrain:
+          allOf:
+            - $ref: '#/components/schemas/TimeGrain'
+          description: >-
+            The time grain specifies the aggregation interval for the metric.
+            Expressed as
+
+            a duration 'PT1M', 'PT1H', etc.
+      description: >-
+        Metric availability specifies the time grain (aggregation interval or
+        frequency)
+    MetricDefinition:
+      type: object
+      properties:
+        dimensions:
+          type: array
+          items:
+            $ref: '#/components/schemas/NameAndDesc'
+          description: List of dimensions
+        description:
+          type: string
+          description: The metric description
+        name:
+          type: string
+          description: The metric name
+        namespace:
+          type: string
+          description: The namespace the metric belongs to.
+        primaryAggregationType:
+          allOf:
+            - $ref: '#/components/schemas/AggregationType'
+          description: >-
+            The primary aggregation type value defining how to use the values
+            for display.
+        supportedAggregationTypes:
+          type: array
+          items:
+            type: string
+          description: The collection of what all aggregation types are supported.
+        unit:
+          allOf:
+            - $ref: '#/components/schemas/MetricUnit'
+          description: The unit of the metric.
+        metricAvailabilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricAvailability'
+          description: >-
+            Metric availability specifies the time grain (aggregation interval
+            or
+
+            frequency).
+      description: Metric definition
+    MetricDefinitionCollection:
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricDefinition'
+          description: the values for the metric definitions.
+      description: Represents collection of metric definitions.
+      required:
+        - value
+    MetricNamespace:
+      type: object
+      properties:
+        description:
+          type: string
+          description: The namespace description.
+        name:
+          type: string
+          description: The metric namespace name.
+      description: Metric namespace class specifies the metadata for a metric namespace.
+    MetricNamespaceCollection:
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricNamespace'
+          description: The values for the metric namespaces.
+      description: Represents collection of metric namespaces.
+      required:
+        - value
+    MetricRequestPayload:
+      type: object
+      properties:
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/DimensionFilter'
+          description: >-
+            Get metrics for specific dimension values. Example: Metric contains
+            dimension
+
+            like SamplerName, Error. To retrieve all the time series data where
+            SamplerName
+
+            is equals to HTTPRequest1 or HTTPRequest2, the DimensionFilter value
+            will be
+
+            {"SamplerName", ["HTTPRequest1", "HTTPRequest2"}
+      description: Filters to fetch the set of metric
+    MetricUnit:
+      type: string
+      description: Metric unit
+      enum:
+        - NotSpecified
+        - Percent
+        - Count
+        - Seconds
+        - Milliseconds
+        - Bytes
+        - BytesPerSecond
+        - CountPerSecond
+    MetricValue:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          description: The timestamp for the metric value in ISO 8601 format.
+        value:
+          type: number
+          format: double
+          description: The metric value.
+      description: Represents a metric value.
+    Metrics:
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/TimeSeriesElement'
+          description: The TimeSeriesElement items on this page
+        nextLink:
+          type: string
+          format: uri
+          description: The link to the next page of items
+      description: The response to a metrics query.
+      required:
+        - value
+    NameAndDesc:
+      type: object
+      properties:
+        description:
+          type: string
+          description: The description
+        name:
+          type: string
+          description: The name
+      description: The name and description
+    Oauth2:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - oauth2
+          description: OAuth2 authentication
+        flows:
+          type: array
+          items: {}
+          description: Supported OAuth2 flows
+      description: The Azure Active Directory OAuth2 Flow
+      required:
+        - type
+        - flows
+    OptionalLoadTestConfig:
+      type: object
+      properties:
+        testType:
+          type: string
+          description: Discriminator property for OptionalLoadTestConfig.
+        virtualUsers:
+          type: integer
+          format: int32
+          description: No of concurrent virtual users
+        rampUpTime:
+          type: integer
+          format: int32
+          description: Ramp up time
+        duration:
+          type: integer
+          format: int32
+          description: Test run duration
+      discriminator:
+        propertyName: testType
+        mapping:
+          QuickTest: '#/components/schemas/QuickTestConfig'
+          URLTest: '#/components/schemas/UrlTestConfig'
+    PFAction:
+      type: string
+      description: Action to take on failure of pass/fail criteria.
+      enum:
+        - continue
+        - stop
+    PFAgFunc:
+      type: string
+      description: Aggregation functions for pass/fail criteria.
+      enum:
+        - count
+        - percentage
+        - avg
+        - p50
+        - p90
+        - p95
+        - p99
+        - min
+        - max
+    PFMetrics:
+      type: string
+      description: Metrics for pass/fail criteria.
+      enum:
+        - response_time_ms
+        - latency
+        - error
+        - requests
+        - requests_per_sec
+    PFResult:
+      type: string
+      description: Pass/fail criteria result.
+      enum:
+        - passed
+        - undetermined
+        - failed
+    PFTestResult:
+      type: string
+      description: Test result based on pass/fail criteria.
+      enum:
+        - PASSED
+        - NOT_APPLICABLE
+        - FAILED
+    PassFailCriteria:
+      type: object
+      properties:
+        passFailMetrics:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/PassFailMetric'
+          description: 'Map of id and pass fail metrics { id  : pass fail metrics }.'
+      description: Pass fail criteria for a test.
+    PassFailMetric:
+      type: object
+      properties:
+        clientMetric:
+          allOf:
+            - $ref: '#/components/schemas/PFMetrics'
+          description: The client metric on which the criteria should be applied.
+        aggregate:
+          allOf:
+            - $ref: '#/components/schemas/PFAgFunc'
+          description: >-
+            The aggregation function to be applied on the client metric. Allowed
+            functions
+
+            - ‘percentage’ - for error metric , ‘avg’, ‘p50’, ‘p90’, ‘p95’,
+            ‘p99’, ‘min’,
+
+            ‘max’ - for response_time_ms and latency metric, ‘avg’ - for
+            requests_per_sec,
+
+            ‘count’ - for requests
+        condition:
+          type: string
+          description: 'The comparison operator. Supported types ‘>’, ‘<’ '
+        requestName:
+          type: string
+          description: 'Request name for which the Pass fail criteria has to be applied '
+        value:
+          type: number
+          format: float
+          description: >-
+            The value to compare with the client metric. Allowed values - ‘error
+            : [0.0 ,
+
+            100.0] unit- % ’, response_time_ms and latency : any integer value
+            unit- ms.
+        action:
+          allOf:
+            - $ref: '#/components/schemas/PFAction'
+          description: Action taken after the threshold is met. Default is ‘continue’.
+        actualValue:
+          type: number
+          format: float
+          description: The actual value of the client metric for the test run.
+          readOnly: true
+        result:
+          allOf:
+            - $ref: '#/components/schemas/PFResult'
+          description: Outcome of the test run.
+          readOnly: true
+      description: Pass fail metric
+    QuickTestConfig:
+      type: object
+      properties:
+        testType:
+          type: string
+          enum:
+            - QuickTest
+        endpointUrl:
+          type: string
+          description: >-
+            Test URL. Provide the complete HTTP URL. For example,
+            http://contoso-app.azurewebsites.net/login
+      description: Quick test config
+      required:
+        - testType
+      allOf:
+        - $ref: '#/components/schemas/OptionalLoadTestConfig'
+    ResourceMetric:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique name for metric.
+          readOnly: true
+        resourceId:
+          type: string
+          description: Azure resource id.
+        metricNamespace:
+          type: string
+          description: Metric name space.
+        displayDescription:
+          type: string
+          description: Metric description.
+        name:
+          type: string
+          description: The invariant value of metric name
+        aggregation:
+          type: string
+          description: Metric aggregation.
+        unit:
+          type: string
+          description: Metric unit.
+        resourceType:
+          type: string
+          description: Azure resource type.
+      description: >-
+        Associated metric definition for particular metrics of the azure
+        resource (
+
+        Refer :
+
+        https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition).
+      required:
+        - resourceId
+        - metricNamespace
+        - name
+        - aggregation
+        - resourceType
+    Secret:
+      type: object
+      properties:
+        value:
+          type: string
+          description: The value of the secret for the respective type
+        type:
+          allOf:
+            - $ref: '#/components/schemas/SecretType'
+          description: Type of secret
+      description: Secret
+    SecretType:
+      type: string
+      description: Types of secrets supported.
+      enum:
+        - AKV_SECRET_URI
+        - SECRET_VALUE
+    Status:
+      type: string
+      description: Test run status
+      enum:
+        - ACCEPTED
+        - NOTSTARTED
+        - PROVISIONING
+        - PROVISIONED
+        - CONFIGURING
+        - CONFIGURED
+        - EXECUTING
+        - EXECUTED
+        - DEPROVISIONING
+        - DEPROVISIONED
+        - DONE
+        - CANCELLING
+        - CANCELLED
+        - FAILED
+        - VALIDATION_SUCCESS
+        - VALIDATION_FAILURE
+    Test:
+      type: object
+      properties:
+        passFailCriteria:
+          allOf:
+            - $ref: '#/components/schemas/PassFailCriteria'
+          description: Pass fail criteria for a test.
+        secrets:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Secret'
+          description: >-
+            Secrets can be stored in an Azure Key Vault or any other secret
+            store. If the
+
+            secret is stored in an Azure Key Vault, the value should be the
+            secret
+
+            identifier and the type should be AKV_SECRET_URI. If the secret is
+            stored
+
+            elsewhere, the secret value should be provided directly and the type
+            should be
+
+            SECRET_VALUE.
+        certificate:
+          allOf:
+            - $ref: '#/components/schemas/CertificateMetadata'
+          description: Certificates metadata
+        environmentVariables:
+          type: object
+          additionalProperties:
+            type: string
+          description: >-
+            Environment variables which are defined as a set of <name,value>
+            pairs.
+        loadTestConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/LoadTestConfiguration'
+          description: The load test configuration.
+        inputArtifacts:
+          allOf:
+            - $ref: '#/components/schemas/TestInputArtifacts'
+          description: The input artifacts for the test.
+          readOnly: true
+        testId:
+          type: string
+          description: Unique test name as identifier.
+          minLength: 2
+          maxLength: 50
+          readOnly: true
+        description:
+          type: string
+          description: The test description.
+          maxLength: 100
+        displayName:
+          type: string
+          description: Display name of a test.
+          minLength: 2
+          maxLength: 50
+        subnetId:
+          type: string
+          description: Subnet ID on which the load test instances should run.
+        keyvaultReferenceIdentityType:
+          type: string
+          description: Type of the managed identity referencing the Key vault.
+        keyvaultReferenceIdentityId:
+          type: string
+          description: Resource Id of the managed identity referencing the Key vault.
+        createdDateTime:
+          type: string
+          format: date-time
+          description: The creation datetime(ISO 8601 literal format).
+          readOnly: true
+        createdBy:
+          type: string
+          description: The user that created.
+          readOnly: true
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          description: The last Modified datetime(ISO 8601 literal format).
+          readOnly: true
+        lastModifiedBy:
+          type: string
+          description: The user that last modified.
+          readOnly: true
+      description: Load test model
+      required:
+        - testId
+    TestAppComponents:
+      type: object
+      properties:
+        components:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AppComponent'
+          description: >-
+            Azure resource collection { resource id (fully qualified resource Id
+            e.g
+
+            subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName})
+
+            : resource object } 
+        testId:
+          type: string
+          description: Test identifier
+          readOnly: true
+        createdDateTime:
+          type: string
+          format: date-time
+          description: The creation datetime(ISO 8601 literal format).
+          readOnly: true
+        createdBy:
+          type: string
+          description: The user that created.
+          readOnly: true
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          description: The last Modified datetime(ISO 8601 literal format).
+          readOnly: true
+        lastModifiedBy:
+          type: string
+          description: The user that last modified.
+          readOnly: true
+      description: Test app component
+      required:
+        - components
+    TestAppComponentsUpdate:
+      type: object
+      properties:
+        components:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AppComponent'
+          description: >-
+            Azure resource collection { resource id (fully qualified resource Id
+            e.g
+
+            subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName})
+
+            : resource object } 
+      description: Test app component
+    TestInputArtifacts:
+      type: object
+      properties:
+        configFileInfo:
+          allOf:
+            - $ref: '#/components/schemas/FileInfo'
+          description: File info
+        testScriptFileInfo:
+          allOf:
+            - $ref: '#/components/schemas/FileInfo'
+          description: File info
+        userPropFileInfo:
+          allOf:
+            - $ref: '#/components/schemas/FileInfo'
+          description: File info
+        inputArtifactsZipFileInfo:
+          allOf:
+            - $ref: '#/components/schemas/FileInfo'
+          description: File info
+        additionalFileInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/FileInfo'
+          description: Additional supported files for the test run
+          readOnly: true
+      description: The input artifacts for the test.
+    TestRun:
+      type: object
+      properties:
+        testRunId:
+          type: string
+          description: Unique test run name as identifier
+          minLength: 2
+          maxLength: 50
+          readOnly: true
+        passFailCriteria:
+          allOf:
+            - $ref: '#/components/schemas/PassFailCriteria'
+          description: Pass fail criteria for a test.
+        secrets:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Secret'
+          description: >-
+            Secrets can be stored in an Azure Key Vault or any other secret
+            store. If the
+
+            secret is stored in an Azure Key Vault, the value should be the
+            secret
+
+            identifier and the type should be AKV_SECRET_URI. If the secret is
+            stored
+
+            elsewhere, the secret value should be provided directly and the type
+            should be
+
+            SECRET_VALUE.
+        certificate:
+          allOf:
+            - $ref: '#/components/schemas/CertificateMetadata'
+          description: Certificates metadata
+        environmentVariables:
+          type: object
+          additionalProperties:
+            type: string
+          description: >-
+            Environment variables which are defined as a set of <name,value>
+            pairs.
+        errorDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorDetails'
+          description: Error details if there is any failure in load test run
+          readOnly: true
+        testRunStatistics:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/TestRunStatistics'
+          description: Test run statistics.
+          readOnly: true
+        loadTestConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/LoadTestConfiguration'
+          description: The load test configuration.
+        testArtifacts:
+          allOf:
+            - $ref: '#/components/schemas/TestRunArtifacts'
+          description: Collection of test run artifacts
+          readOnly: true
+        testResult:
+          allOf:
+            - $ref: '#/components/schemas/PFTestResult'
+          description: Test result for pass/Fail criteria used during the test run.
+          readOnly: true
+        virtualUsers:
+          type: integer
+          format: int32
+          description: Number of virtual users, for which test has been run.
+          readOnly: true
+        displayName:
+          type: string
+          description: Display name of a testRun.
+          minLength: 2
+          maxLength: 50
+        testId:
+          type: string
+          description: Associated test Id.
+          minLength: 2
+          maxLength: 50
+        description:
+          type: string
+          description: The test run description.
+          maxLength: 100
+        status:
+          allOf:
+            - $ref: '#/components/schemas/Status'
+          description: The test run status.
+          readOnly: true
+        startDateTime:
+          type: string
+          format: date-time
+          description: The test run start DateTime(ISO 8601 literal format).
+          readOnly: true
+        endDateTime:
+          type: string
+          format: date-time
+          description: The test run end DateTime(ISO 8601 literal format).
+          readOnly: true
+        executedDateTime:
+          type: string
+          format: date-time
+          description: Test run initiated time.
+          readOnly: true
+        portalUrl:
+          type: string
+          description: Portal url.
+          readOnly: true
+        duration:
+          type: integer
+          format: int32
+          description: Test run duration in milliseconds.
+          readOnly: true
+        subnetId:
+          type: string
+          description: Subnet ID on which the load test instances should run.
+          readOnly: true
+        createdDateTime:
+          type: string
+          format: date-time
+          description: The creation datetime(ISO 8601 literal format).
+          readOnly: true
+        createdBy:
+          type: string
+          description: The user that created.
+          readOnly: true
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          description: The last Modified datetime(ISO 8601 literal format).
+          readOnly: true
+        lastModifiedBy:
+          type: string
+          description: The user that last modified.
+          readOnly: true
+      description: Load test run model
+    TestRunAppComponents:
+      type: object
+      properties:
+        components:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AppComponent'
+          description: >-
+            Azure resource collection { resource id (fully qualified resource Id
+            e.g
+
+            subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName})
+
+            : resource object } 
+        testRunId:
+          type: string
+          description: Test run identifier
+          readOnly: true
+        createdDateTime:
+          type: string
+          format: date-time
+          description: The creation datetime(ISO 8601 literal format).
+          readOnly: true
+        createdBy:
+          type: string
+          description: The user that created.
+          readOnly: true
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          description: The last Modified datetime(ISO 8601 literal format).
+          readOnly: true
+        lastModifiedBy:
+          type: string
+          description: The user that last modified.
+          readOnly: true
+      description: Test run app component
+      required:
+        - components
+    TestRunAppComponentsUpdate:
+      type: object
+      properties:
+        components:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AppComponent'
+          description: >-
+            Azure resource collection { resource id (fully qualified resource Id
+            e.g
+
+            subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName})
+
+            : resource object } 
+      description: Test run app component
+    TestRunArtifacts:
+      type: object
+      properties:
+        inputArtifacts:
+          allOf:
+            - $ref: '#/components/schemas/TestRunInputArtifacts'
+          description: The input artifacts for the test run.
+          readOnly: true
+        outputArtifacts:
+          allOf:
+            - $ref: '#/components/schemas/TestRunOutputArtifacts'
+          description: The output artifacts for the test run.
+      description: Collection of test run artifacts
+    TestRunInputArtifacts:
+      type: object
+      properties:
+        configFileInfo:
+          allOf:
+            - $ref: '#/components/schemas/FileInfo'
+          description: File info
+        testScriptFileInfo:
+          allOf:
+            - $ref: '#/components/schemas/FileInfo'
+          description: File info
+        userPropFileInfo:
+          allOf:
+            - $ref: '#/components/schemas/FileInfo'
+          description: File info
+        inputArtifactsZipFileInfo:
+          allOf:
+            - $ref: '#/components/schemas/FileInfo'
+          description: File info
+        additionalFileInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/FileInfo'
+          description: Additional supported files for the test run
+          readOnly: true
+      description: The input artifacts for the test run.
+    TestRunOutputArtifacts:
+      type: object
+      properties:
+        resultFileInfo:
+          allOf:
+            - $ref: '#/components/schemas/FileInfo'
+          description: File info
+        logsFileInfo:
+          allOf:
+            - $ref: '#/components/schemas/FileInfo'
+          description: File info
+      description: The output artifacts for the test run.
+    TestRunServerMetricConfig:
+      type: object
+      properties:
+        testRunId:
+          type: string
+          description: Test run identifier
+          readOnly: true
+        metrics:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ResourceMetric'
+          description: >-
+            Azure resource metrics collection {metric id : metrics object}
+            (Refer :
+
+            https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition
+
+            for metric id).
+        createdDateTime:
+          type: string
+          format: date-time
+          description: The creation datetime(ISO 8601 literal format).
+          readOnly: true
+        createdBy:
+          type: string
+          description: The user that created.
+          readOnly: true
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          description: The last Modified datetime(ISO 8601 literal format).
+          readOnly: true
+        lastModifiedBy:
+          type: string
+          description: The user that last modified.
+          readOnly: true
+      description: Test run server metrics configuration
+    TestRunStatistics:
+      type: object
+      properties:
+        transaction:
+          type: string
+          description: Transaction name.
+          readOnly: true
+        sampleCount:
+          type: number
+          format: float
+          description: Sampler count.
+          readOnly: true
+        errorCount:
+          type: number
+          format: float
+          description: Error count.
+          readOnly: true
+        errorPct:
+          type: number
+          format: float
+          description: Error percentage.
+          readOnly: true
+        meanResTime:
+          type: number
+          format: float
+          description: Mean response time.
+          readOnly: true
+        medianResTime:
+          type: number
+          format: float
+          description: Median response time.
+          readOnly: true
+        maxResTime:
+          type: number
+          format: float
+          description: Max response time.
+          readOnly: true
+        minResTime:
+          type: number
+          format: float
+          description: Minimum response time.
+          readOnly: true
+        pct1ResTime:
+          type: number
+          format: float
+          description: 90 percentile response time.
+          readOnly: true
+        pct2ResTime:
+          type: number
+          format: float
+          description: 95 percentile response time.
+          readOnly: true
+        pct3ResTime:
+          type: number
+          format: float
+          description: 99 percentile response time.
+          readOnly: true
+        throughput:
+          type: number
+          format: float
+          description: Throughput.
+          readOnly: true
+        receivedKBytesPerSec:
+          type: number
+          format: float
+          description: Received network bytes.
+          readOnly: true
+        sentKBytesPerSec:
+          type: number
+          format: float
+          description: Send network bytes.
+          readOnly: true
+      description: Test run statistics.
+    TestRunUpdate:
+      type: object
+      properties:
+        passFailCriteria:
+          allOf:
+            - $ref: '#/components/schemas/PassFailCriteria'
+          description: Pass fail criteria for a test.
+        secrets:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Secret'
+          description: >-
+            Secrets can be stored in an Azure Key Vault or any other secret
+            store. If the
+
+            secret is stored in an Azure Key Vault, the value should be the
+            secret
+
+            identifier and the type should be AKV_SECRET_URI. If the secret is
+            stored
+
+            elsewhere, the secret value should be provided directly and the type
+            should be
+
+            SECRET_VALUE.
+        certificate:
+          allOf:
+            - $ref: '#/components/schemas/CertificateMetadata'
+          description: Certificates metadata
+        environmentVariables:
+          type: object
+          additionalProperties:
+            type: string
+          description: >-
+            Environment variables which are defined as a set of <name,value>
+            pairs.
+        loadTestConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/LoadTestConfigurationUpdate'
+          description: The load test configuration.
+        displayName:
+          type: string
+          description: Display name of a testRun.
+          minLength: 2
+          maxLength: 50
+        testId:
+          type: string
+          description: Associated test Id.
+          minLength: 2
+          maxLength: 50
+        description:
+          type: string
+          description: The test run description.
+          maxLength: 100
+      description: Load test run model
+    TestRunsList:
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/TestRun'
+          description: The TestRun items on this page
+        nextLink:
+          type: string
+          format: uri
+          description: The link to the next page of items
+      description: Collection of test runs
+      required:
+        - value
+    TestServerMetricConfig:
+      type: object
+      properties:
+        testId:
+          type: string
+          description: Test identifier
+          readOnly: true
+        metrics:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ResourceMetric'
+          description: >-
+            Azure resource metrics collection {metric id : metrics object}
+            (Refer :
+
+            https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition
+
+            for metric id).
+        createdDateTime:
+          type: string
+          format: date-time
+          description: The creation datetime(ISO 8601 literal format).
+          readOnly: true
+        createdBy:
+          type: string
+          description: The user that created.
+          readOnly: true
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          description: The last Modified datetime(ISO 8601 literal format).
+          readOnly: true
+        lastModifiedBy:
+          type: string
+          description: The user that last modified.
+          readOnly: true
+      description: Test server metrics configuration
+    TestUpdate:
+      type: object
+      properties:
+        passFailCriteria:
+          allOf:
+            - $ref: '#/components/schemas/PassFailCriteria'
+          description: Pass fail criteria for a test.
+        secrets:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Secret'
+          description: >-
+            Secrets can be stored in an Azure Key Vault or any other secret
+            store. If the
+
+            secret is stored in an Azure Key Vault, the value should be the
+            secret
+
+            identifier and the type should be AKV_SECRET_URI. If the secret is
+            stored
+
+            elsewhere, the secret value should be provided directly and the type
+            should be
+
+            SECRET_VALUE.
+        certificate:
+          allOf:
+            - $ref: '#/components/schemas/CertificateMetadata'
+          description: Certificates metadata
+        environmentVariables:
+          type: object
+          additionalProperties:
+            type: string
+          description: >-
+            Environment variables which are defined as a set of <name,value>
+            pairs.
+        loadTestConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/LoadTestConfigurationUpdate'
+          description: The load test configuration.
+        description:
+          type: string
+          description: The test description.
+          maxLength: 100
+        displayName:
+          type: string
+          description: Display name of a test.
+          minLength: 2
+          maxLength: 50
+        subnetId:
+          type: string
+          description: Subnet ID on which the load test instances should run.
+        keyvaultReferenceIdentityType:
+          type: string
+          description: Type of the managed identity referencing the Key vault.
+        keyvaultReferenceIdentityId:
+          type: string
+          description: Resource Id of the managed identity referencing the Key vault.
+      description: Load test model
+    TestsList:
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Test'
+          description: The Test items on this page
+        nextLink:
+          type: string
+          format: uri
+          description: The link to the next page of items
+      description: Collection of tests
+      required:
+        - value
+    TimeGrain:
+      type: string
+      description: Time Grain
+      enum:
+        - PT5S
+        - PT10S
+        - PT1M
+        - PT5M
+        - PT1H
+    TimeSeriesElement:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricValue'
+          description: An array of data points representing the metric values.
+        dimensionValues:
+          type: array
+          items:
+            $ref: '#/components/schemas/DimensionValue'
+          description: 'The dimension values '
+      description: The time series returned when a data query is performed.
+    UrlTestConfig:
+      type: object
+      properties:
+        testType:
+          type: string
+          enum:
+            - URLTest
+      description: Url test config
+      required:
+        - testType
+      allOf:
+        - $ref: '#/components/schemas/OptionalLoadTestConfig'
+  securitySchemes:
+    Oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+          scopes:
+            https://cnt-prod.loadtesting.azure.com/.default: ''
+      description: The Azure Active Directory OAuth2 Flow
+servers:
+  - url: https://{endpoint}
+    description: >-
+      These APIs allow end users to create, view and run load tests using Azure
+      Load Test Service.
+    variables:
+      endpoint:
+        default: ''
