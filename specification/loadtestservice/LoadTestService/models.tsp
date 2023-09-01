@@ -678,7 +678,7 @@ model TestRun {
 
   @doc("Auto stop criteria for a test.")
   @added(APIVersions.v2023_04_01_preview)
-  autoStopEnabled?: AutoStopCriteria;
+  autoStopCriteria?: AutoStopCriteria;
 
   @doc("""
 Secrets can be stored in an Azure Key Vault or any other secret store. If the
