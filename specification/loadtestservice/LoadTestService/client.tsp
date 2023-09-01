@@ -9,6 +9,8 @@ using AzureLoadTesting;
 @useDependency(APIVersions.v2023_04_01_preview)
 namespace Customizations;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 @client({
     name: "LoadTestAdministrationClient",
     service: AzureLoadTesting,
