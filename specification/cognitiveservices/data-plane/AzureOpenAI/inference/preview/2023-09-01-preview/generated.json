@@ -97,7 +97,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/AudioTranscription"
+              "$ref": "#/definitions/AudioTranscriptionJsonVerbose"
             }
           },
           "default": {
@@ -117,7 +117,7 @@
     },
     "/deployments/{deploymentId}/audio/translations": {
       "post": {
-        "operationId": "GetAudioTranslation",
+        "operationId": "GetAudioTranslationJsonVerbose",
         "description": "Transcribes and translates input audio into English text.",
         "consumes": [
           "multipart/form-data"
@@ -134,13 +134,13 @@
             "type": "string"
           },
           {
+            "$ref": "#/parameters/AudioTranslationOptionsJsonVerbose"
+          },
+          {
             "$ref": "#/parameters/AudioTranslationOptions.file"
           },
           {
             "$ref": "#/parameters/AudioTranslationOptions.prompt"
-          },
-          {
-            "$ref": "#/parameters/AudioTranslationOptions.responseFormat"
           },
           {
             "$ref": "#/parameters/AudioTranslationOptions.temperature"
@@ -150,7 +150,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/AudioTranscription"
+              "$ref": "#/definitions/AudioTranscriptionJsonVerbose"
             }
           },
           "default": {
@@ -439,7 +439,20 @@
     }
   },
   "definitions": {
-    "AudioTranscription": {
+    "AudioTranscriptionJsonSimple": {
+      "type": "object",
+      "description": "Transcription response.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Transcribed text."
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "AudioTranscriptionJsonVerbose": {
       "type": "object",
       "description": "Transcription response.",
       "properties": {
@@ -472,48 +485,6 @@
         "text"
       ]
     },
-    "AudioTranscriptionFormat": {
-      "type": "string",
-      "description": "Defines the format of the output.",
-      "enum": [
-        "json",
-        "text",
-        "srt",
-        "verbose_json",
-        "vtt"
-      ],
-      "x-ms-enum": {
-        "name": "AudioTranscriptionFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "json",
-            "value": "json",
-            "description": "JSON format. The translation/transcription response will only contain 'text'."
-          },
-          {
-            "name": "text",
-            "value": "text",
-            "description": "Text format. The translation/transcription response will be of type text/plain."
-          },
-          {
-            "name": "srt",
-            "value": "srt",
-            "description": "SRT format. The translation/transcription response will be of type text/plain."
-          },
-          {
-            "name": "verbose_json",
-            "value": "verbose_json",
-            "description": "Verbose JSON format.The translation/transcription response will contain additional information."
-          },
-          {
-            "name": "vtt",
-            "value": "vtt",
-            "description": "VTT format. The translation/transcription response will be of type text/plain."
-          }
-        ]
-      }
-    },
     "AudioTranscriptionOptions": {
       "type": "object",
       "description": "Transcription request.\nRequesting format 'json' will result on only the 'text' field being set.\nFor more output data use 'verbose_json.",
@@ -528,9 +499,16 @@
           "description": "An optional text to guide the model's style or continue a previous audio segment. The prompt should match the audio language."
         },
         "response_format": {
-          "$ref": "#/definitions/AudioTranscriptionFormat",
+          "type": "string",
           "description": "The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.",
           "default": "json",
+          "enum": [
+            "json",
+            "verbose_json",
+            "text",
+            "srt",
+            "vtt"
+          ],
           "x-ms-client-name": "responseFormat"
         },
         "temperature": {
@@ -651,9 +629,16 @@
           "description": "An optional text to guide the model's style or continue a previous audio segment. The prompt should be in English."
         },
         "response_format": {
-          "$ref": "#/definitions/AudioTranscriptionFormat",
+          "type": "string",
           "description": "The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.",
           "default": "json",
+          "enum": [
+            "json",
+            "verbose_json",
+            "text",
+            "srt",
+            "vtt"
+          ],
           "x-ms-client-name": "responseFormat"
         },
         "temperature": {
@@ -665,6 +650,54 @@
       },
       "required": [
         "file"
+      ]
+    },
+    "AudioTranslationOptionsJsonSimple": {
+      "type": "object",
+      "description": "TODO",
+      "properties": {
+        "responseFormat": {
+          "type": "string",
+          "description": "TODO",
+          "enum": [
+            "json"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "responseFormat"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AudioTranslationOptions"
+        }
+      ]
+    },
+    "AudioTranslationOptionsJsonVerbose": {
+      "type": "object",
+      "description": "TODO",
+      "properties": {
+        "responseFormat": {
+          "type": "string",
+          "description": "TODO",
+          "enum": [
+            "verbose_json"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "responseFormat"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AudioTranslationOptions"
+        }
       ]
     },
     "Azure.Core.Foundations.Error": {
@@ -1765,42 +1798,11 @@
       "default": "json",
       "enum": [
         "json",
+        "verbose_json",
         "text",
         "srt",
-        "verbose_json",
         "vtt"
       ],
-      "x-ms-enum": {
-        "name": "AudioTranscriptionFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "json",
-            "value": "json",
-            "description": "JSON format. The translation/transcription response will only contain 'text'."
-          },
-          {
-            "name": "text",
-            "value": "text",
-            "description": "Text format. The translation/transcription response will be of type text/plain."
-          },
-          {
-            "name": "srt",
-            "value": "srt",
-            "description": "SRT format. The translation/transcription response will be of type text/plain."
-          },
-          {
-            "name": "verbose_json",
-            "value": "verbose_json",
-            "description": "Verbose JSON format.The translation/transcription response will contain additional information."
-          },
-          {
-            "name": "vtt",
-            "value": "vtt",
-            "description": "VTT format. The translation/transcription response will be of type text/plain."
-          }
-        ]
-      },
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "responseFormat"
     },
@@ -1831,54 +1833,6 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "AudioTranslationOptions.responseFormat": {
-      "name": "response_format",
-      "in": "formData",
-      "description": "The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.",
-      "required": false,
-      "type": "string",
-      "default": "json",
-      "enum": [
-        "json",
-        "text",
-        "srt",
-        "verbose_json",
-        "vtt"
-      ],
-      "x-ms-enum": {
-        "name": "AudioTranscriptionFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "json",
-            "value": "json",
-            "description": "JSON format. The translation/transcription response will only contain 'text'."
-          },
-          {
-            "name": "text",
-            "value": "text",
-            "description": "Text format. The translation/transcription response will be of type text/plain."
-          },
-          {
-            "name": "srt",
-            "value": "srt",
-            "description": "SRT format. The translation/transcription response will be of type text/plain."
-          },
-          {
-            "name": "verbose_json",
-            "value": "verbose_json",
-            "description": "Verbose JSON format.The translation/transcription response will contain additional information."
-          },
-          {
-            "name": "vtt",
-            "value": "vtt",
-            "description": "VTT format. The translation/transcription response will be of type text/plain."
-          }
-        ]
-      },
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "responseFormat"
-    },
     "AudioTranslationOptions.temperature": {
       "name": "temperature",
       "in": "formData",
@@ -1887,6 +1841,34 @@
       "type": "number",
       "format": "float",
       "default": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "AudioTranslationOptionsJsonSimple": {
+      "name": "responseFormat",
+      "in": "formData",
+      "description": "TODO",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "json"
+      ],
+      "x-ms-enum": {
+        "modelAsString": false
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "AudioTranslationOptionsJsonVerbose": {
+      "name": "responseFormat",
+      "in": "formData",
+      "description": "TODO",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "verbose_json"
+      ],
+      "x-ms-enum": {
+        "modelAsString": false
+      },
       "x-ms-parameter-location": "method"
     },
     "Azure.Core.Foundations.ApiVersionParameter": {

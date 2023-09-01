@@ -22,7 +22,7 @@ model AudioTranscriptionOptions {
 
     @doc("The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.")
     @projectedName("json", "response_format")
-    responseFormat?: AudioTranscriptionFormat = AudioTranscriptionFormat.json;
+    responseFormat?: "json" | "verbose_json" | "text" | "srt" | "vtt" = "json"; //AudioTranscriptionFormat = AudioTranscriptionFormat.json;
 
     @doc("""
     The sampling temperature, between 0 and 1.

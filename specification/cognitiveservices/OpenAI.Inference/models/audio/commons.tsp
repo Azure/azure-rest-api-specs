@@ -6,17 +6,11 @@ using TypeSpec.Http;
 
 namespace Azure.OpenAI;
 
-@doc("Audio transcription task type")
-enum AudioTranscriptionTask {
-    @doc("Value for a transcription task")
-    transcribe: "transcribe",
-
-    @doc("Value for a translation task")
-    translate: "translate",
-}
+//TODO remove-me: this is so that I can focus on a single route for now
+alias AudioTranscription = AudioTranscriptionJsonVerbose;
 
 @doc("Transcription response.")
-model AudioTranscription {
+model AudioTranscriptionJsonVerbose {
     @doc("Audio transcription task.")
     task?: AudioTranscriptionTask;
 
@@ -34,23 +28,39 @@ model AudioTranscription {
     segments?: AudioTranscriptionSegment[];
 }
 
-@doc("Defines the format of the output.")
-enum AudioTranscriptionFormat {
-    @doc("JSON format. The translation/transcription response will only contain 'text'.")
-    json: "json",
-
-    @doc("Text format. The translation/transcription response will be of type text/plain.")
-    text: "text",
-
-    @doc("SRT format. The translation/transcription response will be of type text/plain.")
-    srt: "srt",
-
-    @doc("Verbose JSON format.The translation/transcription response will contain additional information.")
-    verbose_json: "verbose_json",
-
-    @doc("VTT format. The translation/transcription response will be of type text/plain.")
-    vtt: "vtt",
+@doc("Transcription response.")
+model AudioTranscriptionJsonSimple {
+    @doc("Transcribed text.")
+    text: string;
 }
+
+@doc("Audio transcription task type")
+enum AudioTranscriptionTask {
+    @doc("Value for a transcription task")
+    transcribe: "transcribe",
+
+    @doc("Value for a translation task")
+    translate: "translate",
+}
+
+// models extending with hardcoded values do not seem to accept an enum, just a string
+// @doc("Defines the format of the output.")
+// enum AudioTranscriptionFormat {
+//     @doc("JSON format. The translation/transcription response will only contain 'text'.")
+//     json: "json",
+
+//     @doc("Text format. The translation/transcription response will be of type text/plain.")
+//     text: "text",
+
+//     @doc("SRT format. The translation/transcription response will be of type text/plain.")
+//     srt: "srt",
+
+//     @doc("Verbose JSON format.The translation/transcription response will contain additional information.")
+//     verbose_json: "verbose_json",
+
+//     @doc("VTT format. The translation/transcription response will be of type text/plain.")
+//     vtt: "vtt",
+// }
 
 @doc("Transcription segment.")
 model AudioTranscriptionSegment {

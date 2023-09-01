@@ -22,7 +22,7 @@ model AudioTranslationOptions {
 
     @doc("The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.")
     @projectedName("json", "response_format")
-    responseFormat?: AudioTranscriptionFormat = AudioTranscriptionFormat.json;
+    responseFormat?: "json" | "verbose_json" | "text" | "srt" | "vtt" = "json"; //AudioTranscriptionFormat = AudioTranscriptionFormat.json;
 
     @doc("""
     The sampling temperature, between 0 and 1.
@@ -30,4 +30,16 @@ model AudioTranslationOptions {
     If set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.
     """)
     temperature?: float32 = 0;
+}
+
+@doc("TODO")
+model AudioTranslationOptionsJsonSimple extends AudioTranslationOptions {
+    @doc("TODO")
+    responseFormat: "json";
+}
+
+@doc("TODO")
+model AudioTranslationOptionsJsonVerbose extends AudioTranslationOptions {
+    @doc("TODO")
+    responseFormat: "verbose_json";
 }
