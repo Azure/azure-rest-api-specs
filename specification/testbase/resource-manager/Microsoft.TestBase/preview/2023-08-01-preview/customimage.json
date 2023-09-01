@@ -689,7 +689,17 @@
           ],
           "x-ms-enum": {
             "name": "ImageSource",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Unknown",
+                "description": "Unknown image source type."
+              },
+              {
+                "value": "VHD",
+                "description": "Specify image onboarding through VHD."
+              }
+            ]
           }
         },
         "product": {
@@ -714,7 +724,25 @@
           ],
           "x-ms-enum": {
             "name": "ImageStatus",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Unknown",
+                "description": "Unknown image status."
+              },
+              {
+                "value": "Ready",
+                "description": "Completed validation and is ready for use."
+              },
+              {
+                "value": "Failed",
+                "description": "Failed to onboard or pass validation."
+              },
+              {
+                "value": "Validating",
+                "description": "Succeed to onboard but is in validation process."
+              }
+            ]
           }
         },
         "creationTime": {
@@ -802,7 +830,13 @@
           ],
           "x-ms-enum": {
             "name": "ImageArchitecture",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "x64",
+                "description": "64-bit architecture."
+              }
+            ]
           }
         },
         "osState": {
@@ -814,7 +848,17 @@
           ],
           "x-ms-enum": {
             "name": "ImageOSState",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Generalized",
+                "description": "Sysprep generalization processed." 
+              },
+              {
+                "value": "Specialized",
+                "description": "Fully kept with user specified settings."
+              }
+            ]
           }
         },
         "securityType": {
@@ -826,7 +870,17 @@
           ],
           "x-ms-enum": {
             "name": "ImageSecurityType",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Standard",
+                "description": "Standard security type."
+              },
+              {
+                "value": "TrustedLaunch",
+                "description": "Specify higher security level compared to Standard."
+              }
+            ]
           }
         },
         "provisioningState": {
@@ -871,7 +925,17 @@
           "description": "Indicates if the validation or rule checking is passed.",
           "x-ms-enum": {
             "name": "VerificationStatus",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Passed",
+                "description": "Validation or rule checking passed."
+              },
+              {
+                "value": "Failed",
+                "description": "Validation or rule checking failed."
+              }
+            ]
           }
         },
         "message": {
@@ -1000,7 +1064,29 @@
           ],
           "x-ms-enum": {
             "name": "VHDStatus",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Unknown",
+                "description": "Unknown VHD status."
+              },
+              {
+                "value": "Ready",
+                "description": "Succeed to be upload and pass VHD verfication."
+              },
+              {
+                "value": "Failed",
+                "description": "Failed to pass VHD verification."
+              },
+              {
+                "value": "Verifying",
+                "description": "Processing VHD file checking and malware scanning."
+              },
+              {
+                "value": "Occupied",
+                "description": "An image is onboarding with this VHD."
+              }
+            ]
           }
         },
         "creationTime": {
