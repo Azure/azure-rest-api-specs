@@ -1,13 +1,11 @@
 {
     "operationId": "GetAudioTranscription",
-    "title": "Creates a completion for the provided prompt, parameters and chosen model.",
+    "title": "Transcribes provided audio data in its source language.",
     "parameters": {
       "endpoint": "{endpoint}",
       "api-version": "2023-09-01-preview",
       "deploymentId": "<deployment-id>",
-      "body": {
-        // TODO: how do I represent here a multipart request
-      }
+      "body": "---multipart-boundary\nContent-Disposition: form-data; name=\"file\"; filename=\"file.wav\"\nContent-Type: application/octet-stream\n\nRIFF..audio.data.omitted\n---multipart-boundary--"
     },
     "responses": {
       "200": {
