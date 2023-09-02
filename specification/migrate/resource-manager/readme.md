@@ -139,6 +139,7 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
+tag: package-migrate-2019-10
 ```
 
 ### Tag: package-migrate-2018-02
