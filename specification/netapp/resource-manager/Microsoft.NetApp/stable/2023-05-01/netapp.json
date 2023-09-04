@@ -7387,7 +7387,15 @@
     "subnetId": {
       "title": "Subnet resource Id",
       "description": "The Azure Resource URI for a delegated subnet. Must have the delegation Microsoft.NetApp/volumes. Example /subscriptions/subscriptionId/resourceGroups/resourceGroup/providers/Microsoft.Network/virtualNetworks/testVnet/subnets/{mySubnet}",
-      "type": "string"
+      "type": "string",
+      "format": "arm-id",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Network/virtualNetworks/subnets"
+          }
+        ]
+      }
     },
     "snapshotRestoreFiles": {
       "description": "Restore payload for Single File Snapshot Restore",
