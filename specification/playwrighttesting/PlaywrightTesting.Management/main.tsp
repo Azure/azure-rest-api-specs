@@ -84,8 +84,21 @@ interface Accounts
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-path-segment-invalid-chars" "Existing Template"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-key-invalid-chars" "Existing template"
+@doc("The location of quota resource")
+@subscriptionResource
+model Location {
+  @doc("The location of quota in ARM Normalized format like eastus, southeastasia etc.")
+  @key("location")
+  @path
+  @segment("locations")
+  @visibility("query", "read", "update")
+  locationName: string;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-path-segment-invalid-chars" "Existing Template"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-key-invalid-chars" "Existing template"
 @doc("A quota resource")
-@locationResource
+@parentResource(Location)
 model Quota is ProxyResource<QuotaProperties> {
   @doc("The quota bucket name.")
   @key("name")
@@ -136,7 +149,7 @@ model FreeTrialProperties {
   @visibility("read")
   @minValue(0)
   @maxValue(100)
-  percentageUsed: int32;
+  percentageUsed: decimal;
 
   @doc("The free-trial state.")
   @visibility("read")
