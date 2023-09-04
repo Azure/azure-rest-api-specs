@@ -86,10 +86,5 @@ See configuration in [readme.azureresourceschema.md](./readme.azureresourceschem
 
 ### Suppress lint rules
 
-These errors need to be suppressed since they do not apply to the SCOM spec.
-
 ``` yaml
-suppressions:
-  - code: PathResourceProviderMatchNamespace
-  - reason: The spec folder name is Microsoft.Scom, but in spec files we have defined Microsoft.Scom in previous versions. This error is coming up because we want to use Microsoft.Scom in latest API versions. If we use Microsoft.Scom in the latest version, we get PathResourceProviderNamePascalCase error, and also we get Swagger MISSING_APIS_IN_DEFAULT_TAG Avocado error, since in the previous version we used Microsoft.Scom. To avoid all this, we are suppressing this one alert to solve all these issues.
 ```
