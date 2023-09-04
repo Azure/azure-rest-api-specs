@@ -19,11 +19,7 @@ provided prompt data.
 """)
 @actionSeparator("/")
 @action("completions") //@convenientAPI(true)
-op getCompletions is Azure.Core.ResourceAction<
-    Deployment,
-    CompletionsOptions,
-    Completions
->;
+op getCompletions is AOAIDeploymentAction<CompletionsOptions, Completions>;
 
 @doc("""
 Gets chat completions for the provided chat messages.
@@ -33,11 +29,7 @@ provided prompt data.
 @added(ServiceApiVersions.v2023_05_15)
 @actionSeparator("/")
 @action("chat/completions") //@convenientAPI(true)
-op getChatCompletions is ResourceAction<
-    Deployment,
-    ChatCompletionsOptions,
-    ChatCompletions
->;
+op getChatCompletions is AOAIDeploymentAction<ChatCompletionsOptions, ChatCompletions>;
 
 @doc("""
 Gets chat completions for the provided chat messages.
@@ -51,8 +43,4 @@ other augmentations to the base chat completions capabilities.
 @added(ServiceApiVersions.v2023_08_01_Preview)
 @actionSeparator("/")
 @action("extensions/chat/completions")
-op getChatCompletionsWithAzureExtensions is ResourceAction<
-    Deployment,
-    ChatCompletionsOptions,
-    ChatCompletions
->;
+op getChatCompletionsWithAzureExtensions is AOAIDeploymentAction<ChatCompletionsOptions, ChatCompletions>;

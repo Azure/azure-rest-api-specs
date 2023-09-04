@@ -20,11 +20,9 @@ namespace Azure.OpenAI;
 @added(ServiceApiVersions.v2023_09_01_Preview)
 @actionSeparator("/")
 @action("audio/transcriptions") //@convenientAPI(true)
-op getAudioTranscription is Azure.Core.ResourceAction<
-    Deployment,
+op getAudioTranscription is AOAIMultipartRequestDeploymentAction<
     AudioTranscriptionOptions,
-    AudioTranscription,
-    RequestHeaders
+    AudioTranscription
 >;
 
 #suppress "@azure-tools/typespec-azure-core/byos"
@@ -33,11 +31,9 @@ op getAudioTranscription is Azure.Core.ResourceAction<
 @actionSeparator("/")
 @action("audio/translations") //@convenientAPI(true)
 @sharedRoute
-op getAudioTranslationJsonSimple is Azure.Core.ResourceAction<
-    Deployment,
+op getAudioTranslationJsonSimple is AOAIMultipartRequestDeploymentAction<
     AudioTranslationOptionsJsonSimple,
-    AudioTranscriptionJsonSimple,
-    RequestHeaders
+    AudioTranscriptionJsonSimple
 >;
 
 #suppress "@azure-tools/typespec-azure-core/byos"
@@ -46,9 +42,7 @@ op getAudioTranslationJsonSimple is Azure.Core.ResourceAction<
 @actionSeparator("/")
 @sharedRoute
 @action("audio/translations") //@convenientAPI(true)
-op getAudioTranslationJsonVerbose is Azure.Core.ResourceAction<
-    Deployment,
+op getAudioTranslationJsonVerbose is AOAIMultipartRequestDeploymentAction<
     AudioTranslationOptionsJsonVerbose,
-    AudioTranscriptionJsonVerbose,
-    RequestHeaders
+    AudioTranscriptionJsonVerbose
 >;

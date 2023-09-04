@@ -16,8 +16,13 @@ model Deployment {
     deploymentId: string;
 }
 
-alias RequestHeaders = Azure.Core.Traits.RequestHeadersTrait<{
-    @doc("The content type for the operation. Always multipart/form-data for this operation.")
-    @header("content-type")
-    contentType: "multipart/form-data";
-}>;
+alias AOAIDeploymentAction<T extends {}, U extends {}> = Azure.Core.ResourceAction<Deployment, T, U>;
+alias AOAIMultipartRequestDeploymentAction<T extends {}, U extends {}> = Azure.Core.ResourceAction<
+    Deployment,
+    T,
+    U,
+    Azure.Core.Traits.RequestHeadersTrait<{
+        @doc("The content type for the operation. Always multipart/form-data for this operation.")
+        @header("content-type")
+        contentType: "multipart/form-data";
+    }>>;
