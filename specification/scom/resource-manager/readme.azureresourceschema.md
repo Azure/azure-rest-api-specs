@@ -19,6 +19,6 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.SCOM/preview/2023-07-07-preview/scom.json
+  - Microsoft.Scom/preview/2023-07-07-preview/scom.json
   
 ```
