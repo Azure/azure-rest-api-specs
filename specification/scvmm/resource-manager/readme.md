@@ -39,16 +39,6 @@ These settings apply only when `--tag=package-preview-2023-04` is specified on t
 input-file:
   - Microsoft.ScVmm/preview/2023-04-01-preview/scvmm.json
 suppressions:
-  - code: RESPONSE_STATUS_CODE_NOT_IN_SPEC
-    reason: All POST actions are long running operations and never return 200 in the response.
-    where:
-      - $.paths["/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances/default/stop"].post
-      - $.paths["/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances/default/start"].post
-      - $.paths["/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances/default/restart"].post
-      - $.paths["/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances/default/createCheckpoint"].post
-      - $.paths["/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances/default/deleteCheckpoint"].post
-      - $.paths["/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances/default/restoreCheckpoint"].post
-
   - code: ArmResourcePropertiesBag
     reason: MachineExtensionProperties is not patched our RP, it is patched by the Hybrid Compute RP. This is on a depreciation path anyways. VirtualMachines/* RTs will be removed from the next API version, we would be using VirtualMachineInstances/* instead.
     where:
