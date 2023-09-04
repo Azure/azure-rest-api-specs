@@ -182,7 +182,7 @@ model InformaticaProperties {
 }
 
 @doc("Link Organization")
-model LinkOrganization{
+model LinkOrganization {
   @doc("Link organization token")
   token?: string;
 }
@@ -224,7 +224,7 @@ model UserDetails {
 }
 
 @doc("Serverless Runtime properties.")
-model InformaticaServerlessRuntimeProperties{
+model InformaticaServerlessRuntimeProperties {
   @visibility("read")
   @doc("Provisioning State of the resource.")
   provisioningState?: ProvisioningState;
@@ -255,7 +255,7 @@ model InformaticaServerlessRuntimeProperties{
 }
 
 @doc("Serverless Runtime config properties.")
-model ServerlessRuntimeConfigProperties{
+model ServerlessRuntimeConfigProperties {
   @doc("The List of Informatica Serverless Runtime CDI Config Properties.")
   @extension("x-ms-identifiers", [])
   cdiConfigProps?: CdiConfigProps[];
@@ -266,7 +266,7 @@ model ServerlessRuntimeConfigProperties{
 }
 
 @doc("Informatica CDI Configuration Properties.")
-model CdiConfigProps{
+model CdiConfigProps {
   @doc("EngineName of the application config.")
   engineName: string;
 
@@ -279,7 +279,7 @@ model CdiConfigProps{
 }
 
 @doc("Application configs")
-model ApplicationConfigs{
+model ApplicationConfigs {
   @doc("Type of the application config.")
   type: string;
 
@@ -288,7 +288,7 @@ model ApplicationConfigs{
 
   @doc("Value of the application config.")
   value: string;
-  
+
   @doc("Platform type of the application config.")
   platform: string;
 
@@ -302,19 +302,19 @@ model ApplicationConfigs{
 @doc("Informatica Serverless Runtime Network Interface configurations.")
 model NetworkInterfaceConfiguration {
   @doc("Virtual network resource id")
-  vnetId : string;
+  vnetId: string;
 
   @doc("Virtual network subnet resource id")
-  subnetId : string;
+  subnetId: string;
 
   @doc("Network security group name")
-  nsg : string;
+  nsg: string;
 }
 
 @doc("Informatica Serverless Runtime Network Profile.")
-model ServerlessRuntimeNetworkProfile{
+model ServerlessRuntimeNetworkProfile {
   @doc("Network Interface Configuration Profile")
-  networkInterfaceConfiguration : NetworkInterfaceConfiguration;
+  networkInterfaceConfiguration: NetworkInterfaceConfiguration;
 }
 
 @doc("Provisioning State of the Organization resource.")
