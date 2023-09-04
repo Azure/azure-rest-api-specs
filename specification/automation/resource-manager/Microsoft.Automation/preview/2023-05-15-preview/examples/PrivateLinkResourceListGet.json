@@ -1,8 +1,8 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "subscriptionId": "subid",
     "resourceGroupName": "rg1",
-    "automationAccountName": "ddb1",
+    "automationAccountName": "testaccount",
     "api-version": "2023-05-15-preview"
   },
   "responses": {
@@ -10,13 +10,13 @@
       "body": {
         "value": [
           {
-            "id": "subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Automation/automationAccounts/ddb1/privateLinkResources/sql",
+            "id": "subscriptions/subid/resourceGroups/Default/providers/Microsoft.Automation/automationAccounts/testaccount/privateLinkResources/sql",
             "name": "sql",
             "type": "Microsoft.Automation/automationAccounts/privateLinkResources",
             "properties": {
               "groupId": "sql",
               "requiredMembers": [
-                "ddb1",
+                "testaccount",
                 "ddb1-westus"
               ]
             }
