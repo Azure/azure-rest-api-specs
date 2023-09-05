@@ -339,23 +339,14 @@
       "type": "object",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/BuilderProvisioningState",
           "description": "Provisioning state of a builder resource.",
           "readOnly": true
         },
         "environmentId": {
           "type": "string",
-          "description": "Resource ID of the container apps environment that the builder is associated with."
-        },
-        "buildComputeId": {
-          "type": "string",
-          "description": "Resource ID of the compute that the builds will be performed on.",
-          "readOnly": true
-        },
-        "patchComputeId": {
-          "type": "string",
-          "description": "Resource ID of the compute that the patching will be performed on.",
-          "readOnly": true
+          "description": "Resource ID of the container apps environment that the builder is associated with.",
+          "format": "arm-id"
         },
         "containerRegistries": {
           "type": "array",
@@ -444,7 +435,8 @@
       "properties": {
         "environmentId": {
           "type": "string",
-          "description": "Resource ID of the container apps environment that the builder is associated with."
+          "description": "Resource ID of the container apps environment that the builder is associated with.",
+          "format": "arm-id"
         }
       },
       "description": "The updatable properties of the BuilderResource."
@@ -458,7 +450,8 @@
         },
         "identityResourceId": {
           "type": "string",
-          "description": "Resource ID of the managed identity."
+          "description": "Resource ID of the managed identity.",
+          "format": "arm-id"
         }
       },
       "description": "Model representing a mapping from a container registry to the identity used to connect to it.",
@@ -467,7 +460,7 @@
         "identityResourceId"
       ]
     },
-    "ProvisioningState": {
+    "BuilderProvisioningState": {
       "type": "string",
       "description": "Resource instance provisioning state.",
       "enum": [
@@ -479,7 +472,7 @@
         "Deleting"
       ],
       "x-ms-enum": {
-        "name": "ProvisioningState",
+        "name": "BuilderProvisioningState",
         "modelAsString": true
       },
       "readOnly": true
