@@ -2275,6 +2275,30 @@
         "databaseName": {
           "type": "string",
           "description": "The database name of the cluster. Only one database per cluster is supported."
+        },
+        "authConfig": {
+          "$ref": "#/definitions/AuthConfig",
+          "description": "Authentication configuration of a cluster."
+        }
+      }
+    },
+    "AuthConfig": {
+      "type": "object",
+      "description": "Authentication configuration of a cluster.",
+      "properties": {
+        "activeDirectoryAuth": {
+          "type": "string",
+          "enum": [
+            "enabled",
+            "disabled"
+          ]
+        },
+        "passwordAuth": {
+          "type": "string",
+          "enum": [
+            "enabled",
+            "disabled"
+          ]
         }
       }
     },
@@ -2568,6 +2592,10 @@
     },
     "RoleProperties": {
       "properties": {
+        "isAdmin": {
+          "type": "boolean",
+          "default": false
+        },
         "password": {
           "type": "string",
           "x-ms-secret": true,
@@ -2578,15 +2606,60 @@
           ],
           "description": "The password of the cluster role."
         },
+        "externalPrincipal": {
+          "type": "object",
+          "required": [
+            "principalId",
+            "principalType"
+          ],
+          "properties": {
+            "principalId": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "principalType": {
+              "type": "string",
+              "enum": [
+                "user",
+                "servicePrincipal"
+              ]
+            },
+            "tenantId": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        },
+        "entraIdPrincipal": {
+          "type": "object",
+          "required": [
+            "objectId",
+            "principalType"
+          ],
+          "properties": {
+            "objectId": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "principalType": {
+              "type": "string",
+              "enum": [
+                "user",
+                "servicePrincipal"
+              ]
+            },
+            "tenantId": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the role",
           "readOnly": true
         }
       },
-      "required": [
-        "password"
-      ],
       "description": "The properties of a cluster role.",
       "type": "object"
     },
