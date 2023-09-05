@@ -63,6 +63,10 @@ model AnalyzeTextResult {
 
   @doc("Analysis result for categories.")
   categoriesAnalysis: TextCategoriesAnalysis[];
+
+  @added(ContentSafety.Versions.v2023_10_15_Preview)
+  @doc("The accept decision made by service.")
+  accepted?: boolean;
 }
 
 @doc("The result of blocklist match.")
@@ -87,6 +91,10 @@ model TextCategoriesAnalysis {
 
   @doc("The value of this field is determined by the outputType specified in the request. If 'FourSeverityLevels' is chosen, this field will be included in the output. The value can be 0, 2, 4, or 6, and it increases with the severity of the input content.")
   severity?: int32;
+
+  @added(ContentSafety.Versions.v2023_10_15_Preview)
+  @doc("The decision made by service.")
+  accepted?: boolean;
 }
 
 @doc("The image analysis request.")
@@ -115,6 +123,10 @@ model ImageData {
 model AnalyzeImageResult {
   @doc("Analysis result for categories.")
   categoriesAnalysis: ImageCategoriesAnalysis[];
+
+  @added(ContentSafety.Versions.v2023_10_15_Preview)
+  @doc("The decision made by service.")
+  accepted?: boolean;
 }
 
 @doc("Image analysis result.")
@@ -124,6 +136,10 @@ model ImageCategoriesAnalysis {
 
   @doc("The value of this field is determined by the outputType specified in the request. If 'FourSeverityLevels' is chosen, this field will be included in the output. The value can be 0, 2, 4, or 6, and it increases with the severity of the input content.")
   severity?: int32;
+
+  @added(ContentSafety.Versions.v2023_10_15_Preview)
+  @doc("The decision made by service.")
+  accepted?: boolean;
 }
 
 @doc("Text Blocklist.")
@@ -183,11 +199,11 @@ model RemoveTextBlocklistItemsOptions {
 @resource("projects")
 model Project {
   @doc("Project name.")
-  @pattern("^[a-zA-Z][0-9A-Za-z-]*[a-zA-Z]$")
+  @pattern("^[a-zA-Z][0-9A-Za-z-]*[0-9a-zA-Z]$")
   @key("projectName")
   @visibility("read", "query")
   @maxLength(255)
-  @minLength(2)
+  @minLength(3)
   projectName: string;
 
   @doc("Project description.")
@@ -200,7 +216,7 @@ model Project {
 
   @doc("Project display name.")
   @maxLength(255)
-  @minLength(2)
+  @minLength(3)
   displayName?: string;
 
   @doc("Project created time.")
@@ -228,13 +244,28 @@ enum ContentModality {
 }
 
 @added(ContentSafety.Versions.v2023_10_15_Preview)
+@doc("Modality type.")
+enum SeverityThreshold {
+  @doc("The threshold value is 0.")
+  Zero：0,
+  @doc("The threshold value is 2.")
+  Two：2,
+  @doc("The threshold value is 4.")
+  Four：4,
+  @doc("The threshold value is 6.")
+  Six：6,
+  @doc("The threshold value is a maximum value.")
+  Maximum: -1
+}
+
+@added(ContentSafety.Versions.v2023_10_15_Preview)
 @doc("TextCategoryPolicy. Content which severity less than the acceptLessThan will be accepted.")
 model TextCategoryPolicy {
   @doc("Text category.")
   category: TextCategory;
 
-  @doc("Severity less than the threshold will be treated as accepted for the category. The range is the severity value. Current the value could be: 0, 2, 4, 6.")
-  acceptLessThan?: int32;
+  @doc("Severity less than the threshold will be treated as accepted for the category.")
+  acceptLessThan: SeverityThreshold;
 }
 
 @added(ContentSafety.Versions.v2023_10_15_Preview)
@@ -243,14 +274,15 @@ model ImageCategoryPolicy {
   @doc("Image category.")
   category: ImageCategory;
 
-  @doc("Severity less than the threshold will be treated as accepted for the category. The range is the severity value. Current the value could be: 0, 2, 4, 6.")
-  acceptLessThan?: int32;
+  @doc("Severity less than the threshold will be treated as accepted for the category.")
+  acceptLessThan: SeverityThreshold;
 }
 
 @added(ContentSafety.Versions.v2023_10_15_Preview)
 @doc("Policy for the text.")
 model TextPolicy {
-  @doc("The category policy. If the list length is 0, it means all categories will be analyzed without threshold.")
+  @doc("The category policy. The length must be larger than 0.")
+  @minItems(1)
   categoryPolicies: TextCategoryPolicy[];
 
   @doc("The policy of blocklist.")
@@ -263,7 +295,8 @@ model TextPolicy {
 @added(ContentSafety.Versions.v2023_10_15_Preview)
 @doc("Policy for the image.")
 model ImagePolicy {
-  @doc("The category policy. If the list length is 0, it means all categories will be analyzed without threshold.")
+  @doc("The category policy. The length must be larger than 0.")
+  @minItems(1)
   categoryPolicies: ImageCategoryPolicy[];
   
   @doc("The type of text analysis output. If not assigned, the default value is \"FourSeverityLevels\".")

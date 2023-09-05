@@ -188,9 +188,9 @@
             "description": "Project name.",
             "required": true,
             "type": "string",
-            "minLength": 2,
+            "minLength": 3,
             "maxLength": 255,
-            "pattern": "^[a-zA-Z][0-9A-Za-z-]*[a-zA-Z]$"
+            "pattern": "^[a-zA-Z][0-9A-Za-z-]*[0-9a-zA-Z]$"
           }
         ],
         "responses": {
@@ -236,9 +236,9 @@
             "description": "Project name.",
             "required": true,
             "type": "string",
-            "minLength": 2,
+            "minLength": 3,
             "maxLength": 255,
-            "pattern": "^[a-zA-Z][0-9A-Za-z-]*[a-zA-Z]$"
+            "pattern": "^[a-zA-Z][0-9A-Za-z-]*[0-9a-zA-Z]$"
           },
           {
             "name": "resource",
@@ -296,9 +296,9 @@
             "description": "Project name.",
             "required": true,
             "type": "string",
-            "minLength": 2,
+            "minLength": 3,
             "maxLength": 255,
-            "pattern": "^[a-zA-Z][0-9A-Za-z-]*[a-zA-Z]$"
+            "pattern": "^[a-zA-Z][0-9A-Za-z-]*[0-9a-zA-Z]$"
           }
         ],
         "responses": {
@@ -902,6 +902,10 @@
             "$ref": "#/definitions/ImageCategoriesAnalysis"
           },
           "x-ms-identifiers": []
+        },
+        "accepted": {
+          "type": "boolean",
+          "description": "The decision made by service."
         }
       },
       "required": [
@@ -982,6 +986,10 @@
             "$ref": "#/definitions/TextCategoriesAnalysis"
           },
           "x-ms-identifiers": []
+        },
+        "accepted": {
+          "type": "boolean",
+          "description": "The accept decision made by service."
         }
       },
       "required": [
@@ -1102,6 +1110,10 @@
           "type": "integer",
           "format": "int32",
           "description": "The value of this field is determined by the outputType specified in the request. If 'FourSeverityLevels' is chosen, this field will be included in the output. The value can be 0, 2, 4, or 6, and it increases with the severity of the input content."
+        },
+        "accepted": {
+          "type": "boolean",
+          "description": "The decision made by service."
         }
       },
       "required": [
@@ -1131,13 +1143,13 @@
           "description": "Image category."
         },
         "acceptLessThan": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Severity less than the threshold will be treated as accepted for the category. The range is the severity value. Current the value could be: 0, 2, 4, 6."
+          "$ref": "#/definitions/SeverityThreshold",
+          "description": "Severity less than the threshold will be treated as accepted for the category."
         }
       },
       "required": [
-        "category"
+        "category",
+        "acceptLessThan"
       ]
     },
     "ImageData": {
@@ -1162,7 +1174,8 @@
       "properties": {
         "categoryPolicies": {
           "type": "array",
-          "description": "The category policy. If the list length is 0, it means all categories will be analyzed without threshold.",
+          "description": "The category policy. The length must be larger than 0.",
+          "minItems": 1,
           "items": {
             "$ref": "#/definitions/ImageCategoryPolicy"
           },
@@ -1184,7 +1197,8 @@
       "properties": {
         "categoryPolicies": {
           "type": "array",
-          "description": "The category policy. If the list length is 0, it means all categories will be analyzed without threshold.",
+          "description": "The category policy. The length must be larger than 0.",
+          "minItems": 1,
           "items": {
             "$ref": "#/definitions/ImageCategoryPolicy"
           },
@@ -1204,9 +1218,9 @@
         "projectName": {
           "type": "string",
           "description": "Project name.",
-          "minLength": 2,
+          "minLength": 3,
           "maxLength": 255,
-          "pattern": "^[a-zA-Z][0-9A-Za-z-]*[a-zA-Z]$",
+          "pattern": "^[a-zA-Z][0-9A-Za-z-]*[0-9a-zA-Z]$",
           "x-ms-mutability": [
             "read"
           ]
@@ -1227,7 +1241,7 @@
         "displayName": {
           "type": "string",
           "description": "Project display name.",
-          "minLength": 2,
+          "minLength": 3,
           "maxLength": 255
         },
         "createdAt": {
@@ -1272,7 +1286,7 @@
         "displayName": {
           "type": "string",
           "description": "Project display name.",
-          "minLength": 2,
+          "minLength": 3,
           "maxLength": 255
         },
         "textPolicy": {
@@ -1300,6 +1314,47 @@
       "required": [
         "blocklistItemIds"
       ]
+    },
+    "SeverityThreshold": {
+      "type": "string",
+      "description": "Modality type.",
+      "enum": [
+        "Zero：0",
+        "Two：2",
+        "Four：4",
+        "Six：6"
+      ],
+      "x-ms-enum": {
+        "name": "SeverityThreshold",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Zero：0",
+            "value": "Zero：0",
+            "description": "The threshold value is 0."
+          },
+          {
+            "name": "Two：2",
+            "value": "Two：2",
+            "description": "The threshold value is 2."
+          },
+          {
+            "name": "Four：4",
+            "value": "Four：4",
+            "description": "The threshold value is 4."
+          },
+          {
+            "name": "Six：6",
+            "value": "Six：6",
+            "description": "The threshold value is 6."
+          },
+          {
+            "name": "Maximum",
+            "value": -1,
+            "description": "The threshold value is a maximum value."
+          }
+        ]
+      }
     },
     "TextBlocklist": {
       "type": "object",
@@ -1400,6 +1455,10 @@
           "type": "integer",
           "format": "int32",
           "description": "The value of this field is determined by the outputType specified in the request. If 'FourSeverityLevels' is chosen, this field will be included in the output. The value can be 0, 2, 4, or 6, and it increases with the severity of the input content."
+        },
+        "accepted": {
+          "type": "boolean",
+          "description": "The decision made by service."
         }
       },
       "required": [
@@ -1429,13 +1488,13 @@
           "description": "Text category."
         },
         "acceptLessThan": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Severity less than the threshold will be treated as accepted for the category. The range is the severity value. Current the value could be: 0, 2, 4, 6."
+          "$ref": "#/definitions/SeverityThreshold",
+          "description": "Severity less than the threshold will be treated as accepted for the category."
         }
       },
       "required": [
-        "category"
+        "category",
+        "acceptLessThan"
       ]
     },
     "TextPolicy": {
@@ -1444,7 +1503,8 @@
       "properties": {
         "categoryPolicies": {
           "type": "array",
-          "description": "The category policy. If the list length is 0, it means all categories will be analyzed without threshold.",
+          "description": "The category policy. The length must be larger than 0.",
+          "minItems": 1,
           "items": {
             "$ref": "#/definitions/TextCategoryPolicy"
           },
@@ -1470,7 +1530,8 @@
       "properties": {
         "categoryPolicies": {
           "type": "array",
-          "description": "The category policy. If the list length is 0, it means all categories will be analyzed without threshold.",
+          "description": "The category policy. The length must be larger than 0.",
+          "minItems": 1,
           "items": {
             "$ref": "#/definitions/TextCategoryPolicy"
           },
