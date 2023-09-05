@@ -37,7 +37,7 @@ enum ProvisioningState {
   Accepted,
 }
 
-@doc("Defines a desired runetime component.")
+@doc("Defines a desired runtime component.")
 model ComponentProperties {
   @doc("dependencies description")
   dependencies?: string[];

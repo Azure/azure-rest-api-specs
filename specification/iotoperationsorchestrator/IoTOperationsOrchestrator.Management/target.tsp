@@ -54,7 +54,7 @@ model TargetPropeties {
   provisioningState?: ProvisioningState;
 }
 
-@doc("Defines a desired runetime component.")
+@doc("Defines a desired runtime component.")
 model TopologiesProperties {
   @doc("bindings description")
   @OpenAPI.extension("x-ms-identifiers", [])
@@ -67,7 +67,7 @@ model TopologiesProperties {
   selector?: {};
 }
 
-@doc("Defines a desired runetime component.")
+@doc("Defines a desired runtime component.")
 model BindingProperties {
   @doc("config description")
   config?: {};
