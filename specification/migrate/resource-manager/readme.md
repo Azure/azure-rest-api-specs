@@ -16,7 +16,6 @@ batch:
   - tag: package-migrate-2020-01
   - tag: package-migrate-2020-07
   - tag: package-hubmigrate-2020-05
-  - tag: package-hubmigrate-2023-01
   - tag: package-migrateengine-2022-05
 ```
 
@@ -98,20 +97,6 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-### Tag: package-hubmigrate-2023-01 and java
-
-These settings apply only when `--tag=package-hubmigrate-2023-01 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-hubmigrate-2023-01' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.azuremigrate.v2023_01_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-v2023_01_01
-regenerate-manager: true
-generate-interface: true
-```
-
 
 ### Tag: package-migrateengine-2022-05 and java
 
