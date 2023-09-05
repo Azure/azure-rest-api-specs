@@ -41,10 +41,8 @@ input-file:
   - Microsoft.Network/preview/2023-08-01-preview/networkSecurityPerimeter.json
 
 directive:
-  - suppress:
-    - R3026 
-    reason: Patch operations not defined for this API.
-    from: networkSecurityPerimeter.json
+- suppress:
+    - R3026 # Resources don't define PATCH as per Network Team's specification.
 ```
 
 ### Tag: package-2023-05
