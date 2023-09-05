@@ -435,6 +435,7 @@ input-file:
 - Microsoft.Security/preview/2023-05-01-preview/healthReports.json
 - Microsoft.Security/preview/2022-12-01-preview/defenderForStorageSettings.json
 - Microsoft.Security/preview/2023-09-01-preview/securityConnectorsDevOps.json
+- Microsoft.Security/preview/2023-10-01-preview/securityConnectors.json
 
 # Autorest suppressions
 suppressions:
