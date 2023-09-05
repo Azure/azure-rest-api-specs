@@ -2667,107 +2667,6 @@
         }
       }
     },
-    "Annotation": {
-      "description": "Describes an annotation.",
-      "required": [
-        "category_id",
-        "id",
-        "image_id"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "format": "int32",
-          "description": "Annotation Id.",
-          "maximum": 1000000,
-          "minimum": 1,
-          "type": "integer"
-        },
-        "category_id": {
-          "format": "int32",
-          "description": "Category Id.",
-          "maximum": 100,
-          "minimum": 1,
-          "type": "integer"
-        },
-        "image_id": {
-          "format": "int32",
-          "description": "Image Id.",
-          "maximum": 1000,
-          "minimum": 1,
-          "type": "integer"
-        },
-        "bbox": {
-          "description": "Bounding box, represented by four numbers (left, top, width height) in relative to the image width and height.",
-          "maxItems": 4,
-          "minItems": 4,
-          "type": "array",
-          "items": {
-            "format": "double",
-            "type": "number"
-          }
-        }
-      }
-    },
-    "AnnotationData": {
-      "description": "Describes in body registration annotation.",
-      "required": [
-        "categories"
-      ],
-      "type": "object",
-      "properties": {
-        "categories": {
-          "description": "List of categories. Maximun length is 100.",
-          "maxItems": 100,
-          "minItems": 1,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Category"
-          }
-        },
-        "images": {
-          "description": "List of images. Maximun length is 1000.",
-          "maxItems": 1000,
-          "minItems": 1,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Image"
-          }
-        },
-        "annotations": {
-          "description": "List of annotations. Maximun length is 100000.",
-          "maxItems": 1000000,
-          "minItems": 1,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Annotation"
-          }
-        }
-      }
-    },
-    "Category": {
-      "description": "Describes a category.",
-      "required": [
-        "id",
-        "name"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "format": "int32",
-          "description": "Category Id.",
-          "maximum": 100,
-          "minimum": 1,
-          "type": "integer"
-        },
-        "name": {
-          "description": "Category name.",
-          "maxLength": 255,
-          "minLength": 1,
-          "type": "string"
-        }
-      }
-    },
     "Dataset": {
       "description": "Describes a dataset, which represents a set of images and annotations that can be used for training or testing a model.",
       "type": "object",
@@ -2821,9 +2720,6 @@
           "description": "Read only. The latest ETag for the dataset. May be used with the 'If-Match' header when updating or deleting a dataset.",
           "type": "string"
         },
-        "annotationData": {
-          "$ref": "#/definitions/AnnotationData"
-        },
         "authentication": {
           "$ref": "#/definitions/StorageAuthenticationSettingsApiModel"
         }
@@ -2845,50 +2741,6 @@
         },
         "nextLink": {
           "description": "A link to the next set of paginated results, if there are more results available; not present otherwise.",
-          "type": "string"
-        }
-      }
-    },
-    "Image": {
-      "description": "Describes an image.",
-      "required": [
-        "file_name",
-        "height",
-        "id",
-        "width"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "format": "int32",
-          "description": "Image Id.",
-          "maximum": 1000,
-          "minimum": 1,
-          "type": "integer"
-        },
-        "width": {
-          "format": "double",
-          "description": "Image width in pixels.",
-          "maximum": 16000,
-          "minimum": 1,
-          "type": "number"
-        },
-        "height": {
-          "format": "double",
-          "description": "Image height in pixels.",
-          "maximum": 16000,
-          "minimum": 1,
-          "type": "number"
-        },
-        "file_name": {
-          "description": "Image file name.",
-          "maxLength": 512,
-          "minLength": 1,
-          "type": "string"
-        },
-        "coco_url": {
-          "format": "uri",
-          "description": "Url to the image in the Azure Blob Storage.",
           "type": "string"
         }
       }
