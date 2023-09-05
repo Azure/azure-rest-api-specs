@@ -547,19 +547,19 @@
           }
         },
         "x-ms-examples": {
-          "Create FirewallPolicyRuleCollectionGroup": {
+          "Create Firewall Policy Rule Collection Group": {
             "$ref": "./examples/FirewallPolicyRuleCollectionGroupPut.json"
           },
-          "Create FirewallPolicyRuleCollectionGroup With IpGroups": {
+          "Create Firewall Policy Rule Collection Group With IP Groups": {
             "$ref": "./examples/FirewallPolicyRuleCollectionGroupWithIpGroupsPut.json"
           },
-          "Create FirewallPolicyNatRuleCollectionGroup": {
+          "Create Firewall Policy Nat Rule Collection Group": {
             "$ref": "./examples/FirewallPolicyNatRuleCollectionGroupPut.json"
           },
-          "Create FirewallPolicyRuleCollectionGroup With Web Categories": {
+          "Create Firewall Policy Rule Collection Group With Web Categories": {
             "$ref": "./examples/FirewallPolicyRuleCollectionGroupWithWebCategoriesPut.json"
           },
-          "Create FirewallPolicyRuleCollectionGroup With http header to insert": {
+          "Create Firewall Policy Rule Collection Group With http header to insert": {
             "$ref": "./examples/FirewallPolicyRuleCollectionGroupWithHttpHeadersToInsert.json"
           }
         },
@@ -1710,6 +1710,10 @@
           "$ref": "#/definitions/FirewallPolicyIntrusionDetectionStateOptions",
           "description": "Intrusion detection general state."
         },
+        "profile": {
+          "$ref": "#/definitions/FirewallPolicyIntrusionDetectionProfileOptions",
+          "description": "Intrusion detection profile."
+        },
         "configuration": {
           "$ref": "#/definitions/FirewallPolicyIntrusionDetectionConfiguration",
           "description": "Intrusion detection configuration properties."
@@ -1726,6 +1730,20 @@
       ],
       "x-ms-enum": {
         "name": "FirewallPolicyIntrusionDetectionStateType",
+        "modelAsString": true
+      }
+    },
+    "FirewallPolicyIntrusionDetectionProfileOptions": {
+      "type": "string",
+      "description": "Possible Intrusion Detection profile values.",
+      "enum": [
+        "Basic",
+        "Standard",
+        "Advanced",
+        "Extended"
+      ],
+      "x-ms-enum": {
+        "name": "FirewallPolicyIntrusionDetectionProfileType",
         "modelAsString": true
       }
     },
