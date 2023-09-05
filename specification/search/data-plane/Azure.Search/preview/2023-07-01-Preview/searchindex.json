@@ -217,6 +217,32 @@
             }
           },
           {
+            "name": "filterType",
+            "in": "query",
+            "enum": [
+              "postFilter",
+              "preFilter"
+            ],
+            "x-ms-enum": {
+              "name": "filterType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "postFilter",
+                  "name": "PostFilter",
+                  "description": "When using vector queries, apply the filter criteria after finding the nearest neighbors."
+                },
+                {
+                  "value": "preFilter",
+                  "name": "PreFilter",
+                  "description": "When using vector queries, apply the filter criteria before finding the nearest neighbors."
+                }
+              ]
+            },
+            "x-nullable": false,
+            "description": "A value that specifies how filter criteria is applied when using vector queries. The default is 'postFilter', which applies filter criteria after finding nearest neighbors. Use 'preFilter' to apply filter criteria before finding nearest neighbors."
+          },
+          {
             "name": "scoringParameter",
             "in": "query",
             "type": "array",
@@ -1855,6 +1881,10 @@
         "fields": {
           "type": "string",
           "description": "Vector Fields of type Collection(Edm.Single) to be included in the vector searched."
+        },
+        "exhaustive": {
+          "type": "boolean",
+          "description": "Find the globally nearest neighbors by comparing the vector searched to all vectors in the index."
         }
       },
       "description": "The query parameters for vector and hybrid search queries."
@@ -2380,6 +2410,10 @@
           },
           "type": "string",
           "description": "The OData $filter expression to apply to the search query."
+        },
+        "filterType": {
+          "$ref": "#/definitions/FilterType",
+          "description": "A value that specifies how filter criteria is applied when using vector queries. The default is 'postFilter', which applies filter criteria after finding nearest neighbors. Use 'preFilter' to apply filter criteria before finding nearest neighbors."
         },
         "highlight": {
           "type": "string",
