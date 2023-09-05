@@ -475,7 +475,7 @@
             "name": "select",
             "in": "query",
             "required": true,
-            "description": "Array of fields to return. Such as select=pricingTypes. \n- `All`: All fields.\n- `SupportedProducts`: Supported Products.\n- `PublisherId`: Publisher Id.\n- `DisplayName`: Display Name.\n- `AzureBenefit`: Azure Benefit.\n- `Badges`: Badges.\n- `SmallIconUri`: Small Icon Uri.\n- `PublisherType`: Publisher Type.\n- `PublishingState`: Publishing State.\n- `UniqueProductId`: Unique Product Id.\n- `ProductType`: Product Type.\n- `Plans`: Plans.\n- `OperatingSystems`: Operating Systems.\n- `PricingTypes`: Pricing Types.\n- `PublisherDisplayName`: Publisher Display Name.\n- `Summary`: Summary.\n- `Description`: Description.\n- `RatingBuckets`: Rating Buckets.\n- `RatingAverage`: Rating Average.\n- `LastModifiedDateTime`: Last Modified time.\n- `RatingCount`: Rating Count.\n- `LongSummary`: Long Summary.",
+            "description": "Array of fields to return. Such as select=pricingTypes. \n- `All`: All fields.\n- `SupportedProducts`: Supported Products.\n- `PublisherId`: Publisher Id.\n- `DisplayName`: Display Name.\n- `AzureBenefit`: Azure Benefit.\n- `Badges`: Badges.\n- `SmallIconUri`: Small Icon Uri.\n- `PublisherType`: Publisher Type.\n- `PublishingState`: Publishing State.\n- `UniqueProductId`: Unique Product Id.\n- `ProductType`: Product Type.\n- `Plans`: Plans.\n- `OperatingSystems`: Operating Systems.\n- `PricingTypes`: Pricing Types.\n- `PublisherDisplayName`: Publisher Display Name.\n- `Summary`: Summary.\n- `Description`: Description.\n- `RatingBuckets`: Rating Buckets.\n- `RatingAverage`: Rating Average.\n- `LastModifiedDateTime`: Last Modified time.\n- `RatingCount`: Rating Count.\n- `LongSummary`: Long Summary.\n- `IsCoreVm`: IsCoreVm",
             "collectionFormat": "csv",
             "items": {
               "type": "string",
@@ -501,7 +501,8 @@
                 "RatingAverage",
                 "LastModifiedDateTime",
                 "RatingCount",
-                "LongSummary"
+                "LongSummary",
+                "IsCoreVm"
               ],
               "x-ms-enum": {
                 "name": "SearchFieldName",
@@ -1518,7 +1519,8 @@
         "Description",
         "RatingBuckets",
         "RatingAverage",
-        "RatingCount"
+        "RatingCount",
+        "IsCoreVm"
       ],
       "x-ms-enum": {
         "name": "SearchFieldName",
@@ -1714,6 +1716,10 @@
           "type": "string",
           "description": "Latest update date of the product",
           "format": "date-time"
+        },
+        "isCoreVm": {
+          "type": "boolean",
+          "description": "Set to True for Azure Virtual Machine products that are supplied with VM images featuring one of the officially supported Linux, Windows, or SQL distributions. It also set to True for third-party VM products built on VM images that utilize one of the officially supported Linux, Windows, or SQL distributions. If neither of these conditions is met, isCoreVM is set to False."
         }
       }
     },
