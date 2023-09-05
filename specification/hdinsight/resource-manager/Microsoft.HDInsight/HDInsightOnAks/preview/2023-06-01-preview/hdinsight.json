@@ -2485,7 +2485,37 @@
           "description": "Define cluster patch specific properties.",
           "$ref": "#/definitions/ClusterPatchProperties"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "tags": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "x-ms-mutability": [
+                "read",
+                "create",
+                "update"
+              ],
+              "description": "Resource tags."
+            },
+            "location": {
+              "type": "string",
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ],
+              "description": "The geo-location where the resource lives"
+            }
+          }
+        }
+      ]
     },
     "ClusterPatchProperties": {
       "type": "object",
@@ -2537,7 +2567,12 @@
           "description": "Sets the properties. Define cluster resize specific properties.",
           "$ref": "#/definitions/ClusterResizeProperties"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
     },
     "ClusterResizeProperties": {
       "type": "object",
