@@ -2484,38 +2484,28 @@
           "x-ms-client-flatten": true,
           "description": "Define cluster patch specific properties.",
           "$ref": "#/definitions/ClusterPatchProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         },
-        {
+        "tags": {
           "type": "object",
-          "properties": {
-            "tags": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              },
-              "x-ms-mutability": [
-                "read",
-                "create",
-                "update"
-              ],
-              "description": "Resource tags."
-            },
-            "location": {
-              "type": "string",
-              "x-ms-mutability": [
-                "read",
-                "create"
-              ],
-              "description": "The geo-location where the resource lives"
-            }
-          }
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
         }
-      ]
+      }
     },
     "ClusterPatchProperties": {
       "type": "object",
