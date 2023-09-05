@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "PaloAltoNetworks.Cloudngfw",
-    "version": "2022-08-29-preview"
+    "version": "2023-09-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -6088,6 +6088,14 @@
           "x-ms-identifiers": [],
           "x-cadl-name": "IPAddress[]",
           "description": "Egress nat IP to use"
+        },
+        "trustedRanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Non-RFC 1918 address"
         }
       },
       "description": "Network settings for Firewall",
