@@ -15,7 +15,7 @@ using Azure.ResourceManager;
 namespace Microsoft.IoTOperationsOrchestrator;
 
 @doc("A Target resource belonging to an Instance resource.")
-model Target is TrackedResource<TargetPropeties> {
+model Target is TrackedResource<TargetProperties> {
   @doc("Name of target.")
   @key("targetName")
   @segment("targets")
@@ -31,8 +31,8 @@ model Target is TrackedResource<TargetPropeties> {
 }
 
 @doc("The properties of a Target resource.")
-model TargetPropeties {
-  @doc("components desccription")
+model TargetProperties {
+  @doc("components description")
   @OpenAPI.extension("x-ms-identifiers", [])  
   components?: ComponentProperties[];
   

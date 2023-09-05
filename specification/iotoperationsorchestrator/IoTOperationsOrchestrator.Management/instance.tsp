@@ -15,7 +15,7 @@ using Azure.ResourceManager;
 namespace Microsoft.IoTOperationsOrchestrator;
 
 @doc("A Instance resource belonging to an Instance resource.")
-model Instance is TrackedResource<InstancePropeties> {
+model Instance is TrackedResource<InstanceProperties> {
   @doc("Name of Instance.")
   @key("instanceName")
   @segment("instances")
@@ -31,7 +31,7 @@ model Instance is TrackedResource<InstancePropeties> {
 }
 
 @doc("The properties of a Instance resource.")
-model InstancePropeties {
+model InstanceProperties {
   @doc("User-friendly name for the Instance.")
   displayName?: string;
   
@@ -52,7 +52,7 @@ model InstancePropeties {
   provisioningState?: ProvisioningState;
 }
 
-@doc("targetselectorproperties description.")
+@doc("The selected target description.")
 model TargetSelectorProperties {
   @doc("Name of the target")
   name?:	string;

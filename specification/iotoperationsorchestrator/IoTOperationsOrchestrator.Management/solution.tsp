@@ -15,7 +15,7 @@ using Azure.ResourceManager;
 namespace Microsoft.IoTOperationsOrchestrator;
 
 @doc("A Solution resource belonging to an Instance resource.")
-model Solution is TrackedResource<SolutionPropeties> {
+model Solution is TrackedResource<SolutionProperties> {
   @doc("Name of solution.")
   @key("solutionName")
   @segment("solutions")
@@ -31,7 +31,7 @@ model Solution is TrackedResource<SolutionPropeties> {
 }
 
 @doc("The properties of a Solution resource.")
-model SolutionPropeties {
+model SolutionProperties {
   @doc("components description")
   @OpenAPI.extension("x-ms-identifiers", [])
   components?: ComponentProperties[];
