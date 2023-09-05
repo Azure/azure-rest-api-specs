@@ -35,7 +35,10 @@ tag: package-2023-05
 ``` yaml
 directive:
   - suppress: R3026
-    reason: Resources don't define PATCH as per Network Team's specification.
+    from: networkSecurityPerimeter.json
+    reason: The rule applied incorrectly to base class.
+    where:
+      - $.definitions.NetworkSecurityPerimeter
 ```
 
 ### Tag: package-2023-08-preview
