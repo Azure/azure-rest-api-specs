@@ -27,16 +27,16 @@ These are the global settings for the IoTOperationsOrchestrator.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-05-22-preview
+tag: package-2023-10-04-preview
 ```
 
-### Tag: package-2023-05-22-preview
+### Tag: package-2023-10-04-preview
 
-These settings apply only when `--tag=package-2023-05-22-preview` is specified on the command line.
+These settings apply only when `--tag=package-2023-10-04-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-05-22-preview'
+```yaml $(tag) == 'package-2023-10-04-preview'
 input-file:
-  - Microsoft.IoTOperationsOrchestrator/preview/2023-05-22-preview/solution.json
-  - Microsoft.IoTOperationsOrchestrator/preview/2023-05-22-preview/instance.json
-  - Microsoft.IoTOperationsOrchestrator/preview/2023-05-22-preview/target.json
+  - Microsoft.IoTOperationsOrchestrator/preview/2023-10-04-preview/solution.json
+  - Microsoft.IoTOperationsOrchestrator/preview/2023-10-04-preview/instance.json
+  - Microsoft.IoTOperationsOrchestrator/preview/2023-10-04-preview/target.json
 ```
