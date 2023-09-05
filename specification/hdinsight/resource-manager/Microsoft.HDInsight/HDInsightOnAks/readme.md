@@ -25,8 +25,8 @@ To see additional help and options, run:
 These are the global settings for the HDInsight On Aks API.
 
 ``` yaml
-title: HDInsightOnAksManagementClient
-description: HDInsight On Aks Management Client
+title: HDInsightContainersManagementClient
+description: HDInsight Containers Management Client
 openapi-type: arm
 openapi-subtype: rpaas
 azure-arm: true
@@ -92,22 +92,8 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 ``` yaml $(csharp)
 csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Azure.ResourceManager.HDInsightOnAks
-  output-folder: $(csharp-sdks-folder)/hdinsight/Azure.ResourceManager.HDInsightOnAks/src/Generated
+  namespace: Azure.ResourceManager.HDInsight.Containers
+  output-folder: $(csharp-sdks-folder)/hdinsight/Azure.ResourceManager.HDInsight.Containers/src/Generated
   clear-output-folder: true
 ```
 
-
-## Java
-
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.hdinsightonaks
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-hdinsightonaks
-```
