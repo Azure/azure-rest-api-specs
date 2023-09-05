@@ -6,7 +6,7 @@ The current release is `2023-07-01-preview`
 
 ``` yaml
 
-tag: 2023-04-01-preview
+tag: 2023-07-01-preview
 openapi-type: data-plane
 add-credentials: true
 ```
