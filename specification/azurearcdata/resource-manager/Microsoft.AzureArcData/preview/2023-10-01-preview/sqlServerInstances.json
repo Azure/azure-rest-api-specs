@@ -544,144 +544,91 @@
         }
       }
     },
-    "SqlServerInstanceMetricsRequest": {
-      "description": "The Arc SQL Server instance metrics retrieval request.",
+    "SqlServerInstanceTelemetryRequest": {
+      "description": "The Arc SQL Server instance telemetry retrieval request.",
       "type": "object",
       "properties": {
-        "metricsDatasetNames": {
-          "type": "array",
-          "description": "The names of the metrics datasets to retrieve."
+        "datasetName": {
+          "type": "string",
+          "description": "The name of the telemetry dataset to retrieve."
         },
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The start time for the time range to fetch metrics for. If not specified, the current time minus the interval is used."
+          "description": "The start time for the time range to fetch telemetry for. If not specified, the current time minus 1 hour is used."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The end time for the time range to fetch metrics for. If not specified, the current time is used."
-        },
-        "interval": {
-          "type": "string",
-          "format": "duration",
-          "description": "The time granularity to fetch the metrics for. This is an ISO8601 duration. Examples: PT15M, PT1H, P1D",
-          "default": "PT1H"
-        },
-        "aggregationType": {
-          "type": "string",
-          "description": "The aggregation type to use on the given metrics dataset.",
-          "enum": [
-            "Average",
-            "Minimum",
-            "Maximum",
-            "Sum",
-            "Count"
-          ],
-          "x-ms-enum": {
-            "name": "aggregationType",
-            "modelAsString": true
-          },
-          "default": "Average"
+          "description": "The end time for the time range to fetch telemetry for. If not specified, the current time is used."
         }
       },
       "required": [
-        "metricsDatasetNames"
+        "datasetName"
       ]
     },
-    "SqlServerInstanceMetricsResponse": {
-      "description": "The Arc SQL Server instance metrics retrieval response.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The list of metrics for the SQL Server instance.",
-          "items": {
-            "$ref": "#/definitions/SqlServerInstanceMetric"
-          }
-        }
-      }
-    },
-    "SqlServerInstanceMetric": {
-      "description": "The Arc SQL Server instance metric object.",
+    "SqlServerInstanceTelemetryColumn": {
+      "description": "The telemetry column for the SQL Server instance.",
       "type": "object",
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the metric."
+          "description": "The name of the telemetry column."
         },
-        "sqlDatabaseName": {
+        "type": {
           "type": "string",
-          "description": "The name of the SQL database the metric is for."
-        },
-        "unit": {
-          "type": "string",
-          "description": "The unit of the metric.",
+          "description": "The type of the telemetry column.",
           "enum": [
-            "Count",
-            "Bytes",
-            "Seconds",
-            "Milliseconds",
-            "CountPerSecond",
-            "BytesPerSecond",
-            "Percent",
-            "ByteSeconds",
-            "Unspecified",
-            "Cores",
-            "MilliCores",
-            "NanoCores",
-            "BitsPerSecond"
+            "bool",
+            "datetime",
+            "int",
+            "long",
+            "double",
+            "string",
+            "guid",
+            "timespan"
           ],
           "x-ms-enum": {
-            "name": "unit",
+            "name": "SqlServerInstanceTelemetryColumnType",
             "modelAsString": true
-          }
-        },
-        "timeseries": {
-          "type": "array",
-          "description": "The list of timeseries for the metric.",
-          "items": {
-            "$ref": "#/definitions/SqlServerInstanceMetricTimeseries"
-          }
-        }
-      },
-      "required": [
-        "name",
-        "sqlDatabaseName",
-        "unit",
-        "timeseries"
-      ]
-    },
-    "SqlServerInstanceMetricTimeseries": {
-      "description": "Represents a Arc SQL Server instance metric timeseries.",
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "array",
-          "description": "The list of data points for the metric timeseries.",
-          "items": {
-            "$ref": "#/definitions/SqlServerInstanceMetricData"
           }
         }
       }
     },
-    "SqlServerInstanceMetricData": {
-      "description": "Represents an instance metric data point.",
+    "SqlServerInstanceTelemetryRow": {
+      "description": "An array of values representing a telemetry row for the SQL Server instance.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "SqlServerInstanceTelemetryResponse": {
+      "description": "A section of the telemetry response for the SQL Server instance.",
       "type": "object",
       "properties": {
-        "timeStamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of the metric data point."
+        "columns": {
+          "description": "The columns of the result telemetry table for the SQL Server instance.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlServerInstanceTelemetryColumn"
+          }
         },
-        "value": {
-          "type": "number",
-          "description": "The value of the metric data point."
+        "rows": {
+          "description": "A list of rows from the result telemetry table for the SQL Server instance.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlServerInstanceTelemetryRow"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next section of rows of the telemetry response for the SQL Server instance. Null if no more sections are available.",
+          "readOnly": true
         }
       },
       "required": [
-        "timeStamp",
-        "value"
+        "columns",
+        "rows"
       ]
     }
   },
