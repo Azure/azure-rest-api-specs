@@ -41,10 +41,10 @@ input-file:
   - Microsoft.Network/preview/2023-08-01-preview/networkSecurityPerimeter.json
 ```
 
-``` yaml
+``` yaml $(tag) == 'package-2023-08-preview'
 directive:
-- suppress:
-    - R3026 # Resources don't define PATCH as per Network Team's specification.
+    - suppress:
+        - R3026 # Resources don't define PATCH as per Network Team's specification.
 ```
 
 ### Tag: package-2023-05
