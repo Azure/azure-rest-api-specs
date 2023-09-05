@@ -39,7 +39,9 @@ These settings apply only when `--tag=package-2023-08-preview` is specified on t
 input-file:
   - Microsoft.Network/preview/2023-08-01-preview/network.json
   - Microsoft.Network/preview/2023-08-01-preview/networkSecurityPerimeter.json
+```
 
+``` yaml
 directive:
 - suppress:
     - R3026 # Resources don't define PATCH as per Network Team's specification.
