@@ -6197,7 +6197,7 @@
         },
         "kind": {
           "type": "string",
-          "description": "The name of the kind of algorithm being configured for use with vector search. Only `hnsw` is supported in the current preview.",
+          "description": "The name of the kind of algorithm being configured for use with vector search.",
           "x-nullable": false
         }
       },
@@ -6261,6 +6261,34 @@
         }
       },
       "description": "Contains the parameters specific to hnsw algorithm."
+    },
+    "ExhaustiveKnnVectorSearchAlgorithmConfiguration": {
+      "type": "object",
+      "x-ms-discriminator-value": "exhaustiveKnn",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VectorSearchAlgorithmConfiguration"
+        }
+      ],
+      "properties": {
+        "exhaustiveKnnParameters": {
+          "x-ms-client-name": "Parameters",
+          "$ref": "#/definitions/ExhaustiveKnnParameters",
+          "description": "Contains the parameters specific to exhaustive KNN algorithm."
+        }
+      },
+      "description": "Contains configuration options specific to the exhaustive KNN algorithm used during indexing time."
+    },
+    "ExhaustiveKnnParameters": {
+      "type": "object",
+      "properties": {
+        "metric": {
+          "$ref": "#/definitions/VectorSearchAlgorithmMetric",
+          "x-nullable": true,
+          "description": "The similarity metric to use for vector comparisons."
+        }
+      },
+      "description": "Contains the parameters specific to exhaustive KNN algorithm."
     },
     "VectorSearchAlgorithmMetric": {
       "type": "string",
