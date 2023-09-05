@@ -18,11 +18,7 @@ These are the global settings for the M365CustomerKey API.
 title: M365CustomerKeyClient
 description: M365CustomerKey Client
 openapi-type: arm
-tag: 2021-08-01-preview
 ```
-### Tag: 2021-08-01-preview
-These settings apply only when `--tag=2021-08-01-preview` is specified on the command line.
-``` yaml $(tag) == '2021-08-01-preview'
 input-file:
     - Microsoft.M365CustomerKey\preview\2021-08-01-preview/openapi.json
 ```
