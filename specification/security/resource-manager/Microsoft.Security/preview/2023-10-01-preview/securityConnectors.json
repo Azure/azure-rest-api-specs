@@ -1412,6 +1412,36 @@
               "description": "The cloud role ARN in AWS for this feature"
             }
           }
+        },
+        "ciem": {
+          "type": "object",
+          "description": "Defenders CSPM ciem offering configurations",
+          "properties": {
+            "ciemDiscovery": {
+              "type": "object",
+              "description": "Defender CSPM CIEM discovery configuration",
+              "properties": {
+                "cloudRoleArn": {
+                  "type": "string",
+                  "description": "The cloud role ARN in AWS for ciem discovery"
+                }
+              }
+            },
+            "ciemOidc": {
+              "type": "object",
+              "description": "Defender CSPM CIEM AWS OIDC (open id connect) configuration",
+              "properties": {
+                "cloudRoleArn": {
+                  "type": "string",
+                  "description": "The cloud role ARN in AWS for ciem oidc connection"
+                },
+                "azureActiveDirectoryAppName": {
+                  "type": "string",
+                  "description": "the azure active directory app name used of authenticating against AWS"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -1424,7 +1454,26 @@
           "$ref": "#/definitions/cloudOffering"
         }
       ],
-      "properties": {}
+      "properties": {
+        "ciemDiscovery": {
+          "type": "object",
+          "description": "GCP Defenders CSPM ciem discovery offering configurations",
+          "properties": {
+            "workloadIdentityProviderId": {
+              "type": "string",
+              "description": "The GCP workload identity provider id for CIEM discovery offering"
+            },
+            "serviceAccountEmailAddress": {
+              "type": "string",
+              "description": "The service account email address in GCP for CIEM discovery offering"
+            },
+            "azureActiveDirectoryAppName": {
+              "type": "string",
+              "description": "the azure active directory app name used of authenticating against GCP workload identity federation"
+            }
+          }
+        }
+      }
     },
     "defenderForDevOpsGithubOffering": {
       "type": "object",
