@@ -29,7 +29,10 @@ provided prompt data.
 @added(ServiceApiVersions.v2023_05_15)
 @actionSeparator("/")
 @action("chat/completions") //@convenientAPI(true)
-op getChatCompletions is AOAIDeploymentAction<ChatCompletionsOptions, ChatCompletions>;
+op getChatCompletions is AOAIDeploymentAction<
+  ChatCompletionsOptions,
+  ChatCompletions
+>;
 
 @doc("""
 Gets chat completions for the provided chat messages.
@@ -43,4 +46,7 @@ other augmentations to the base chat completions capabilities.
 @added(ServiceApiVersions.v2023_08_01_Preview)
 @actionSeparator("/")
 @action("extensions/chat/completions")
-op getChatCompletionsWithAzureExtensions is AOAIDeploymentAction<ChatCompletionsOptions, ChatCompletions>;
+op getChatCompletionsWithAzureExtensions is AOAIDeploymentAction<
+  ChatCompletionsOptions,
+  ChatCompletions
+>;

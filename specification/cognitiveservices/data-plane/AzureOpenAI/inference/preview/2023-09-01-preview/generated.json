@@ -61,8 +61,12 @@
   "paths": {
     "/deployments/{deploymentId}/audio/transcriptions": {
       "post": {
-        "operationId": "GetAudioTranscription",
+        "operationId": "GetAudioTranscriptionVtt",
         "description": "Transcribes audio into the input language.",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
         "consumes": [
           "multipart/form-data"
         ],
@@ -78,26 +82,26 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.file"
+            "$ref": "#/parameters/AudioTranscriptionOptionsCommon.file"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.prompt"
+            "$ref": "#/parameters/AudioTranscriptionOptionsCommon.prompt"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.responseFormat"
-          },
-          {
-            "$ref": "#/parameters/AudioTranscriptionOptions.temperature"
+            "$ref": "#/parameters/AudioTranscriptionOptionsCommon.temperature"
           },
           {
             "$ref": "#/parameters/AudioTranscriptionOptions.language"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptionsVtt.responseFormat"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/AudioTranscriptionJsonVerbose"
+              "type": "string"
             }
           },
           "default": {
@@ -117,8 +121,12 @@
     },
     "/deployments/{deploymentId}/audio/translations": {
       "post": {
-        "operationId": "GetAudioTranslationJsonVerbose",
+        "operationId": "GetAudioTranslationVtt",
         "description": "Transcribes and translates input audio into English text.",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
         "consumes": [
           "multipart/form-data"
         ],
@@ -134,23 +142,23 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranslationOptionsJsonVerbose"
+            "$ref": "#/parameters/AudioTranscriptionOptionsCommon.file"
           },
           {
-            "$ref": "#/parameters/AudioTranslationOptions.file"
+            "$ref": "#/parameters/AudioTranscriptionOptionsCommon.prompt"
           },
           {
-            "$ref": "#/parameters/AudioTranslationOptions.prompt"
+            "$ref": "#/parameters/AudioTranscriptionOptionsCommon.temperature"
           },
           {
-            "$ref": "#/parameters/AudioTranslationOptions.temperature"
+            "$ref": "#/parameters/AudioTranslationOptionsVerboseJson.responseFormat"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/AudioTranscriptionJsonVerbose"
+              "type": "string"
             }
           },
           "default": {
@@ -211,6 +219,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Creates a completion for the provided prompt, parameters and chosen model.": {
+            "$ref": "./examples/chat_completions.json"
+          }
         }
       }
     },
@@ -256,6 +269,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Creates a completion for the provided prompt, parameters and chosen model.": {
+            "$ref": "./examples/completions.json"
           }
         }
       }
@@ -303,6 +321,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Return the embeddings for a given prompt.": {
+            "$ref": "./examples/embeddings.json"
+          }
         }
       }
     },
@@ -348,6 +371,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Creates a completion for the provided prompt, parameters and chosen model. Uses Azure OpenAI chat extensions.": {
+            "$ref": "./examples/extensions_chat_completions.json"
           }
         }
       }
@@ -396,6 +424,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Starts the generation of a batch of images from a text caption": {
+            "$ref": "./examples/start_generate_image.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -434,60 +467,61 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Returns the status of the images operation": {
+            "$ref": "./examples/get_image_operation_status.json"
+          }
         }
       }
     }
   },
   "definitions": {
-    "AudioTranscriptionJsonSimple": {
-      "type": "object",
-      "description": "Transcription response.",
-      "properties": {
-        "text": {
-          "type": "string",
-          "description": "Transcribed text."
-        }
-      },
-      "required": [
-        "text"
-      ]
-    },
-    "AudioTranscriptionJsonVerbose": {
-      "type": "object",
-      "description": "Transcription response.",
-      "properties": {
-        "task": {
-          "$ref": "#/definitions/AudioTranscriptionTask",
-          "description": "Audio transcription task."
-        },
-        "text": {
-          "type": "string",
-          "description": "Transcribed text."
-        },
-        "language": {
-          "type": "string",
-          "description": "Language detected in the source audio file."
-        },
-        "duration": {
-          "type": "number",
-          "format": "float",
-          "description": "Duration."
-        },
-        "segments": {
-          "type": "array",
-          "description": "Segments.",
-          "items": {
-            "$ref": "#/definitions/AudioTranscriptionSegment"
+    "AudioTranscriptionFormat": {
+      "type": "string",
+      "description": "Defines the format of the output.",
+      "enum": [
+        "json",
+        "text",
+        "srt",
+        "verbose_json",
+        "vtt"
+      ],
+      "x-ms-enum": {
+        "name": "AudioTranscriptionFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "simpleJson",
+            "value": "json",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "text",
+            "value": "text",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "srt",
+            "value": "srt",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "verboseJson",
+            "value": "verbose_json",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "vtt",
+            "value": "vtt",
+            "description": "Lorem ipsum"
           }
-        }
-      },
-      "required": [
-        "text"
-      ]
+        ]
+      }
     },
-    "AudioTranscriptionOptions": {
+    "AudioTranscriptionOptionsPlainText": {
       "type": "object",
-      "description": "Transcription request.\nRequesting format 'json' will result on only the 'text' field being set.\nFor more output data use 'verbose_json.",
+      "description": "Lorem ipsum",
       "properties": {
         "file": {
           "type": "string",
@@ -498,18 +532,39 @@
           "type": "string",
           "description": "An optional text to guide the model's style or continue a previous audio segment. The prompt should match the audio language."
         },
-        "response_format": {
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
+          "default": 0
+        },
+        "language": {
           "type": "string",
+          "description": "The language of the input audio. Supplying the input language in ISO-639-1 format will improve accuracy and latency."
+        },
+        "response_format": {
+          "$ref": "#/definitions/AudioTranscriptionFormat",
           "description": "The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.",
-          "default": "json",
-          "enum": [
-            "json",
-            "verbose_json",
-            "text",
-            "srt",
-            "vtt"
-          ],
+          "default": "text",
           "x-ms-client-name": "responseFormat"
+        }
+      },
+      "required": [
+        "file"
+      ]
+    },
+    "AudioTranscriptionOptionsSimpleJson": {
+      "type": "object",
+      "description": "Lorem ipsum",
+      "properties": {
+        "file": {
+          "type": "string",
+          "format": "byte",
+          "description": "The audio file object to transcribe."
+        },
+        "prompt": {
+          "type": "string",
+          "description": "An optional text to guide the model's style or continue a previous audio segment. The prompt should match the audio language."
         },
         "temperature": {
           "type": "number",
@@ -520,6 +575,114 @@
         "language": {
           "type": "string",
           "description": "The language of the input audio. Supplying the input language in ISO-639-1 format will improve accuracy and latency."
+        },
+        "response_format": {
+          "$ref": "#/definitions/AudioTranscriptionFormat",
+          "description": "The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.",
+          "default": "json",
+          "x-ms-client-name": "responseFormat"
+        }
+      },
+      "required": [
+        "file"
+      ]
+    },
+    "AudioTranscriptionOptionsSrt": {
+      "type": "object",
+      "description": "Lorem ipsum",
+      "properties": {
+        "file": {
+          "type": "string",
+          "format": "byte",
+          "description": "The audio file object to transcribe."
+        },
+        "prompt": {
+          "type": "string",
+          "description": "An optional text to guide the model's style or continue a previous audio segment. The prompt should match the audio language."
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
+          "default": 0
+        },
+        "language": {
+          "type": "string",
+          "description": "The language of the input audio. Supplying the input language in ISO-639-1 format will improve accuracy and latency."
+        },
+        "response_format": {
+          "$ref": "#/definitions/AudioTranscriptionFormat",
+          "description": "The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.",
+          "default": "srt",
+          "x-ms-client-name": "responseFormat"
+        }
+      },
+      "required": [
+        "file"
+      ]
+    },
+    "AudioTranscriptionOptionsVerboseJson": {
+      "type": "object",
+      "description": "Lorem ipsum",
+      "properties": {
+        "file": {
+          "type": "string",
+          "format": "byte",
+          "description": "The audio file object to transcribe."
+        },
+        "prompt": {
+          "type": "string",
+          "description": "An optional text to guide the model's style or continue a previous audio segment. The prompt should match the audio language."
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
+          "default": 0
+        },
+        "language": {
+          "type": "string",
+          "description": "The language of the input audio. Supplying the input language in ISO-639-1 format will improve accuracy and latency."
+        },
+        "response_format": {
+          "$ref": "#/definitions/AudioTranscriptionFormat",
+          "description": "The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.",
+          "default": "verbose_json",
+          "x-ms-client-name": "responseFormat"
+        }
+      },
+      "required": [
+        "file"
+      ]
+    },
+    "AudioTranscriptionOptionsVtt": {
+      "type": "object",
+      "description": "Lorem ipsum",
+      "properties": {
+        "file": {
+          "type": "string",
+          "format": "byte",
+          "description": "The audio file object to transcribe."
+        },
+        "prompt": {
+          "type": "string",
+          "description": "An optional text to guide the model's style or continue a previous audio segment. The prompt should match the audio language."
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
+          "default": 0
+        },
+        "language": {
+          "type": "string",
+          "description": "The language of the input audio. Supplying the input language in ISO-639-1 format will improve accuracy and latency."
+        },
+        "response_format": {
+          "$ref": "#/definitions/AudioTranscriptionFormat",
+          "description": "The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.",
+          "default": "vtt",
+          "x-ms-client-name": "responseFormat"
         }
       },
       "required": [
@@ -587,8 +750,29 @@
         }
       },
       "required": [
+        "id",
+        "start",
+        "end",
+        "text",
+        "temperature",
+        "avg_logprob",
+        "compression_ratio",
+        "no_speech_prob",
         "tokens",
         "seek"
+      ]
+    },
+    "AudioTranscriptionSimpleJson": {
+      "type": "object",
+      "description": "Lorem ipsum",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Transcribed text."
+        }
+      },
+      "required": [
+        "text"
       ]
     },
     "AudioTranscriptionTask": {
@@ -615,89 +799,161 @@
         ]
       }
     },
-    "AudioTranslationOptions": {
+    "AudioTranscriptionVerboseJson": {
       "type": "object",
-      "description": "Translation request.\nRequesting format 'json' will result on only the 'text' field being set.\nFor more output data use 'verbose_json.",
+      "description": "Transcription response.",
+      "properties": {
+        "task": {
+          "$ref": "#/definitions/AudioTranscriptionTask",
+          "description": "Audio transcription task."
+        },
+        "language": {
+          "type": "string",
+          "description": "Language detected in the source audio file."
+        },
+        "duration": {
+          "type": "number",
+          "format": "float",
+          "description": "Duration."
+        },
+        "segments": {
+          "type": "array",
+          "description": "Segments.",
+          "items": {
+            "$ref": "#/definitions/AudioTranscriptionSegment"
+          }
+        }
+      },
+      "required": [
+        "task",
+        "language",
+        "duration",
+        "segments"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AudioTranscriptionSimpleJson"
+        }
+      ]
+    },
+    "AudioTranslationOptionsPlainText": {
+      "type": "object",
+      "description": "Lorem ipsum",
       "properties": {
         "file": {
           "type": "string",
           "format": "byte",
-          "description": "The audio file to translate."
+          "description": "The audio file object to transcribe."
         },
         "prompt": {
           "type": "string",
-          "description": "An optional text to guide the model's style or continue a previous audio segment. The prompt should be in English."
-        },
-        "response_format": {
-          "type": "string",
-          "description": "The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.",
-          "default": "json",
-          "enum": [
-            "json",
-            "verbose_json",
-            "text",
-            "srt",
-            "vtt"
-          ],
-          "x-ms-client-name": "responseFormat"
+          "description": "An optional text to guide the model's style or continue a previous audio segment. The prompt should match the audio language."
         },
         "temperature": {
           "type": "number",
           "format": "float",
           "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
           "default": 0
+        },
+        "response_format": {
+          "$ref": "#/definitions/AudioTranscriptionFormat",
+          "description": "The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.",
+          "default": "text",
+          "x-ms-client-name": "responseFormat"
         }
       },
       "required": [
         "file"
       ]
     },
-    "AudioTranslationOptionsJsonSimple": {
+    "AudioTranslationOptionsSimpleJson": {
       "type": "object",
-      "description": "TODO",
+      "description": "Lorem ipsum",
       "properties": {
-        "responseFormat": {
+        "file": {
           "type": "string",
-          "description": "TODO",
-          "enum": [
-            "json"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "format": "byte",
+          "description": "The audio file object to transcribe."
+        },
+        "prompt": {
+          "type": "string",
+          "description": "An optional text to guide the model's style or continue a previous audio segment. The prompt should match the audio language."
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
+          "default": 0
+        },
+        "response_format": {
+          "$ref": "#/definitions/AudioTranscriptionFormat",
+          "description": "The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.",
+          "default": "json",
+          "x-ms-client-name": "responseFormat"
         }
       },
       "required": [
-        "responseFormat"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AudioTranslationOptions"
-        }
+        "file"
       ]
     },
-    "AudioTranslationOptionsJsonVerbose": {
+    "AudioTranslationOptionsSrt": {
       "type": "object",
-      "description": "TODO",
+      "description": "Lorem ipsum",
       "properties": {
-        "responseFormat": {
+        "file": {
           "type": "string",
-          "description": "TODO",
-          "enum": [
-            "verbose_json"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "format": "byte",
+          "description": "The audio file object to transcribe."
+        },
+        "prompt": {
+          "type": "string",
+          "description": "An optional text to guide the model's style or continue a previous audio segment. The prompt should match the audio language."
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
+          "default": 0
+        },
+        "response_format": {
+          "$ref": "#/definitions/AudioTranscriptionFormat",
+          "description": "The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.",
+          "default": "srt",
+          "x-ms-client-name": "responseFormat"
         }
       },
       "required": [
-        "responseFormat"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AudioTranslationOptions"
+        "file"
+      ]
+    },
+    "AudioTranslationOptionsVerboseJson": {
+      "type": "object",
+      "description": "Lorem ipsum",
+      "properties": {
+        "file": {
+          "type": "string",
+          "format": "byte",
+          "description": "The audio file object to transcribe."
+        },
+        "prompt": {
+          "type": "string",
+          "description": "An optional text to guide the model's style or continue a previous audio segment. The prompt should match the audio language."
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
+          "default": 0
+        },
+        "response_format": {
+          "$ref": "#/definitions/AudioTranscriptionFormat",
+          "description": "The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.",
+          "default": "verbose_json",
+          "x-ms-client-name": "responseFormat"
         }
+      },
+      "required": [
+        "file"
       ]
     },
     "Azure.Core.Foundations.Error": {
@@ -1764,15 +2020,6 @@
     }
   },
   "parameters": {
-    "AudioTranscriptionOptions.file": {
-      "name": "file",
-      "in": "formData",
-      "description": "The audio file object to transcribe.",
-      "required": true,
-      "type": "string",
-      "format": "byte",
-      "x-ms-parameter-location": "method"
-    },
     "AudioTranscriptionOptions.language": {
       "name": "language",
       "in": "formData",
@@ -1781,7 +2028,16 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "AudioTranscriptionOptions.prompt": {
+    "AudioTranscriptionOptionsCommon.file": {
+      "name": "file",
+      "in": "formData",
+      "description": "The audio file object to transcribe.",
+      "required": true,
+      "type": "string",
+      "format": "byte",
+      "x-ms-parameter-location": "method"
+    },
+    "AudioTranscriptionOptionsCommon.prompt": {
       "name": "prompt",
       "in": "formData",
       "description": "An optional text to guide the model's style or continue a previous audio segment. The prompt should match the audio language.",
@@ -1789,7 +2045,65 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "AudioTranscriptionOptions.responseFormat": {
+    "AudioTranscriptionOptionsCommon.temperature": {
+      "name": "temperature",
+      "in": "formData",
+      "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
+      "required": false,
+      "type": "number",
+      "format": "float",
+      "default": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "AudioTranscriptionOptionsPlainText.responseFormat": {
+      "name": "response_format",
+      "in": "formData",
+      "description": "The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.",
+      "required": false,
+      "type": "string",
+      "default": "text",
+      "enum": [
+        "json",
+        "text",
+        "srt",
+        "verbose_json",
+        "vtt"
+      ],
+      "x-ms-enum": {
+        "name": "AudioTranscriptionFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "simpleJson",
+            "value": "json",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "text",
+            "value": "text",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "srt",
+            "value": "srt",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "verboseJson",
+            "value": "verbose_json",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "vtt",
+            "value": "vtt",
+            "description": "Lorem ipsum"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "responseFormat"
+    },
+    "AudioTranscriptionOptionsSimpleJson.responseFormat": {
       "name": "response_format",
       "in": "formData",
       "description": "The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.",
@@ -1798,78 +2112,380 @@
       "default": "json",
       "enum": [
         "json",
-        "verbose_json",
         "text",
         "srt",
+        "verbose_json",
         "vtt"
       ],
+      "x-ms-enum": {
+        "name": "AudioTranscriptionFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "simpleJson",
+            "value": "json",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "text",
+            "value": "text",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "srt",
+            "value": "srt",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "verboseJson",
+            "value": "verbose_json",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "vtt",
+            "value": "vtt",
+            "description": "Lorem ipsum"
+          }
+        ]
+      },
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "responseFormat"
     },
-    "AudioTranscriptionOptions.temperature": {
-      "name": "temperature",
+    "AudioTranscriptionOptionsSrt.responseFormat": {
+      "name": "response_format",
       "in": "formData",
-      "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
-      "required": false,
-      "type": "number",
-      "format": "float",
-      "default": 0,
-      "x-ms-parameter-location": "method"
-    },
-    "AudioTranslationOptions.file": {
-      "name": "file",
-      "in": "formData",
-      "description": "The audio file to translate.",
-      "required": true,
-      "type": "string",
-      "format": "byte",
-      "x-ms-parameter-location": "method"
-    },
-    "AudioTranslationOptions.prompt": {
-      "name": "prompt",
-      "in": "formData",
-      "description": "An optional text to guide the model's style or continue a previous audio segment. The prompt should be in English.",
+      "description": "The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.",
       "required": false,
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "AudioTranslationOptions.temperature": {
-      "name": "temperature",
-      "in": "formData",
-      "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
-      "required": false,
-      "type": "number",
-      "format": "float",
-      "default": 0,
-      "x-ms-parameter-location": "method"
-    },
-    "AudioTranslationOptionsJsonSimple": {
-      "name": "responseFormat",
-      "in": "formData",
-      "description": "TODO",
-      "required": true,
-      "type": "string",
+      "default": "srt",
       "enum": [
-        "json"
+        "json",
+        "text",
+        "srt",
+        "verbose_json",
+        "vtt"
       ],
       "x-ms-enum": {
-        "modelAsString": false
+        "name": "AudioTranscriptionFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "simpleJson",
+            "value": "json",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "text",
+            "value": "text",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "srt",
+            "value": "srt",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "verboseJson",
+            "value": "verbose_json",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "vtt",
+            "value": "vtt",
+            "description": "Lorem ipsum"
+          }
+        ]
       },
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "responseFormat"
     },
-    "AudioTranslationOptionsJsonVerbose": {
-      "name": "responseFormat",
+    "AudioTranscriptionOptionsVerboseJson.responseFormat": {
+      "name": "response_format",
       "in": "formData",
-      "description": "TODO",
-      "required": true,
+      "description": "The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.",
+      "required": false,
       "type": "string",
+      "default": "verbose_json",
       "enum": [
-        "verbose_json"
+        "json",
+        "text",
+        "srt",
+        "verbose_json",
+        "vtt"
       ],
       "x-ms-enum": {
-        "modelAsString": false
+        "name": "AudioTranscriptionFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "simpleJson",
+            "value": "json",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "text",
+            "value": "text",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "srt",
+            "value": "srt",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "verboseJson",
+            "value": "verbose_json",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "vtt",
+            "value": "vtt",
+            "description": "Lorem ipsum"
+          }
+        ]
       },
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "responseFormat"
+    },
+    "AudioTranscriptionOptionsVtt.responseFormat": {
+      "name": "response_format",
+      "in": "formData",
+      "description": "The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.",
+      "required": false,
+      "type": "string",
+      "default": "vtt",
+      "enum": [
+        "json",
+        "text",
+        "srt",
+        "verbose_json",
+        "vtt"
+      ],
+      "x-ms-enum": {
+        "name": "AudioTranscriptionFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "simpleJson",
+            "value": "json",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "text",
+            "value": "text",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "srt",
+            "value": "srt",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "verboseJson",
+            "value": "verbose_json",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "vtt",
+            "value": "vtt",
+            "description": "Lorem ipsum"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "responseFormat"
+    },
+    "AudioTranslationOptionsPlainText.responseFormat": {
+      "name": "response_format",
+      "in": "formData",
+      "description": "The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.",
+      "required": false,
+      "type": "string",
+      "default": "text",
+      "enum": [
+        "json",
+        "text",
+        "srt",
+        "verbose_json",
+        "vtt"
+      ],
+      "x-ms-enum": {
+        "name": "AudioTranscriptionFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "simpleJson",
+            "value": "json",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "text",
+            "value": "text",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "srt",
+            "value": "srt",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "verboseJson",
+            "value": "verbose_json",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "vtt",
+            "value": "vtt",
+            "description": "Lorem ipsum"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "responseFormat"
+    },
+    "AudioTranslationOptionsSimpleJson.responseFormat": {
+      "name": "response_format",
+      "in": "formData",
+      "description": "The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.",
+      "required": false,
+      "type": "string",
+      "default": "json",
+      "enum": [
+        "json",
+        "text",
+        "srt",
+        "verbose_json",
+        "vtt"
+      ],
+      "x-ms-enum": {
+        "name": "AudioTranscriptionFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "simpleJson",
+            "value": "json",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "text",
+            "value": "text",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "srt",
+            "value": "srt",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "verboseJson",
+            "value": "verbose_json",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "vtt",
+            "value": "vtt",
+            "description": "Lorem ipsum"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "responseFormat"
+    },
+    "AudioTranslationOptionsSrt.responseFormat": {
+      "name": "response_format",
+      "in": "formData",
+      "description": "The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.",
+      "required": false,
+      "type": "string",
+      "default": "srt",
+      "enum": [
+        "json",
+        "text",
+        "srt",
+        "verbose_json",
+        "vtt"
+      ],
+      "x-ms-enum": {
+        "name": "AudioTranscriptionFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "simpleJson",
+            "value": "json",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "text",
+            "value": "text",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "srt",
+            "value": "srt",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "verboseJson",
+            "value": "verbose_json",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "vtt",
+            "value": "vtt",
+            "description": "Lorem ipsum"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "responseFormat"
+    },
+    "AudioTranslationOptionsVerboseJson.responseFormat": {
+      "name": "response_format",
+      "in": "formData",
+      "description": "The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.",
+      "required": false,
+      "type": "string",
+      "default": "verbose_json",
+      "enum": [
+        "json",
+        "text",
+        "srt",
+        "verbose_json",
+        "vtt"
+      ],
+      "x-ms-enum": {
+        "name": "AudioTranscriptionFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "simpleJson",
+            "value": "json",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "text",
+            "value": "text",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "srt",
+            "value": "srt",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "verboseJson",
+            "value": "verbose_json",
+            "description": "Lorem ipsum"
+          },
+          {
+            "name": "vtt",
+            "value": "vtt",
+            "description": "Lorem ipsum"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "responseFormat"
     },
     "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
