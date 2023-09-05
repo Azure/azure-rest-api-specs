@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-The current release is `2023-04-01-preview`
+The current release is `2023-07-01-preview`
 
 ``` yaml
 
