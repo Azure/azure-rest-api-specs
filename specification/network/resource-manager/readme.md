@@ -43,6 +43,7 @@ input-file:
 directive:
   - suppress: RPC-Patch-V1-03
     reason: Patch operations not defined for this API.
+    from: networkSecurityPerimeter.json
 ```
 
 ### Tag: package-2023-05
