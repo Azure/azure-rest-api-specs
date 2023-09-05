@@ -82,6 +82,14 @@
                         "type": "string"
                     }
                   }
+            },
+            "x-ms-examples": {
+              "EventGridMQTTClientCreatedOrUpdatedCloudEventsSchema": {
+                "$ref": "./examples/cloud-events-schema/client_created_or_updated.json"
+              },
+              "EventGridMQTTClientCreatedOrUpdatedEventGridSchema": {
+                "$ref": "./examples/event-grid-schema/client_created_or_updated.json"
+              }
             }
           },
           "EventGridMQTTClientDeletedEventData": {
@@ -92,7 +100,15 @@
                 "$ref": "#/definitions/EventGridMQTTClientEventData"
               }
             ],
-            "properties": {}
+            "properties": {},
+            "x-ms-examples": {
+              "EventGridMQTTClientDeletedCloudEventsSchema": {
+                "$ref": "./examples/cloud-events-schema/client_deleted.json"
+              },
+              "EventGridMQTTClientDeletedEventGridSchema": {
+                "$ref": "./examples/event-grid-schema/client_deleted.json"
+              }
+            }
           },
           "EventGridMQTTClientSessionConnectedEventData": {
             "type": "object",
@@ -112,6 +128,14 @@
                     "format": "int64",
                     "description": "A number that helps indicate order of MQTT client session connected or disconnected events. Latest event will have a sequence number that is higher than the previous event."
                   }
+            },
+            "x-ms-examples": {
+              "EventGridMQTTClientSessionConnectedCloudEventsSchema": {
+                "$ref": "./examples/cloud-events-schema/clientsession_connected.json"
+              },
+              "EventGridMQTTClientSessionConnectedEventGridSchema": {
+                "$ref": "./examples/event-grid-schema/clientsession_connected.json"
+              }
             }
           },
           "EventGridMQTTClientSessionDisconnectedEventData": {
@@ -199,6 +223,14 @@
                         ]
                     }
                   }
+            },
+            "x-ms-examples": {
+              "EventGridMQTTClientSessionDisconnectedCloudEventsSchema": {
+                "$ref": "./examples/cloud-events-schema/clientsession_disconnected.json"
+              },
+              "EventGridMQTTClientSessionDisconnectedEventGridSchema": {
+                "$ref": "./examples/event-grid-schema/clientsession_disconnected.json"
+              }
             }
           },
           "EventGridMQTTClientEventData": {
