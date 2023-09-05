@@ -450,13 +450,6 @@
             "description": "The name of the hybrid machine."
           },
           {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Expands referenced resources."
-          },
-          {
             "name": "parameters",
             "in": "body",
             "required": true,
@@ -464,6 +457,13 @@
               "$ref": "#/definitions/Machine"
             },
             "description": "Parameters supplied to the Create hybrid machine operation."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Expands referenced resources."
           }
         ],
         "responses": {
@@ -2682,7 +2682,7 @@
         },
         "tenantId": {
           "type": "string",
-          "description": "TODO"
+          "description": "Describes the tenant id."
         },
         "licenseType": {
           "$ref": "#/definitions/LicenseType",
@@ -2737,7 +2737,7 @@
             "processors": {
               "type": "integer",
               "format": "int32",
-              "description": "TODO"
+              "description": "Describes the number of processors."
             }
           }
         }
@@ -2762,18 +2762,18 @@
         "processors": {
           "type": "integer",
           "format": "int32",
-          "description": "TODO"
+          "description": "Describes the number of processors."
         },
         "assignedLicenses": {
           "readOnly": true,
           "type": "integer",
           "format": "int32",
-          "description": "TODO"
+          "description": "Describes the number of assigned licenses."
         },
         "immutableId": {
           "readOnly": true,
           "type": "string",
-          "description": "TODO"
+          "description": "Describes the immutable id."
         }
       },
       "description": "Describes the properties of a License."
@@ -2799,7 +2799,7 @@
         "name": "LicenseState",
         "modelAsString": true
       },
-      "description": "TODO"
+      "description": "Describes the state of the license."
     },
     "LicenseEdition": {
       "type": "string",
@@ -2811,7 +2811,7 @@
         "name": "LicenseEdition",
         "modelAsString": true
       },
-      "description": "TODO"
+      "description": "Describes the edition of the license. The values are either Standard or Datacenter."
     },
     "LicenseTarget": {
       "type": "string",
@@ -2823,7 +2823,7 @@
         "name": "LicenseTarget",
         "modelAsString": true
       },
-      "description": "TODO"
+      "description": "Describes the license target server."
     },
     "LicenseCoreType": {
       "type": "string",
@@ -2835,7 +2835,7 @@
         "name": "LicenseCoreType",
         "modelAsString": true
       },
-      "description": "TODO"
+      "description": "Describes the license core type (pCore or vCore)."
     },
     "LicensesListResult": {
       "type": "object",
@@ -3058,11 +3058,11 @@
         },
         "licenseAssignmentState": {
           "type": "string",
-          "description": "TODO",
           "enum": [
             "Assigned",
             "NotAssigned"
           ],
+          "description": "Describes the license assignment state (Assigned or NotAssigned).",
           "x-ms-enum": {
             "name": "licenseAssignmentState",
             "modelAsString": true
