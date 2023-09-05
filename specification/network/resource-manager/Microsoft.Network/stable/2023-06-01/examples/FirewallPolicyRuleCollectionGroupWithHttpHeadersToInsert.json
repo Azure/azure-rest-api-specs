@@ -19,7 +19,7 @@
               {
                 "ruleType": "ApplicationRule",
                 "name": "rule1",
-                "description": "Insert HTTP header rule",
+                "description": "Insert trusted tenants header",
                 "protocols": [
                   {
                     "protocolType": "Http",
@@ -60,26 +60,32 @@
               "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
               "name": "Example-Filter-Rule-Collection",
               "action": {
-                "type": "Deny"
+                "type": "Allow"
               },
               "rules": [
                 {
                   "ruleType": "ApplicationRule",
                   "name": "rule1",
-                  "description": "Deny inbound rule",
-                  "protocols": [
-                    {
-                      "protocolType": "Https",
-                      "port": 443
-                    }
-                  ],
-                  "sourceAddresses": [
-                    "216.58.216.164",
-                    "10.0.0.0/24"
-                  ],
-                  "webCategories": [
-                    "Hacking"
-                  ]
+                  "description": "Insert trusted tenants header",
+                "protocols": [
+                  {
+                    "protocolType": "Http",
+                    "port": 80
+                  }
+                ],
+                "sourceAddresses": [
+                  "216.58.216.164",
+                  "10.0.0.0/24"
+                ],
+                "fqdnTags": [
+                  "WindowsVirtualDesktop"
+                ],
+                "httpHeadersToInsert": [
+                  {
+                    "headerName": "Restrict-Access-To-Tenants",
+                    "headerValue": "contoso.com,fabrikam.onmicrosoft.com"
+                  }
+                ]
                 }
               ]
             }
@@ -89,7 +95,7 @@
     },
     "201": {
       "body": {
-        "name": "firewallPolicy",
+        "name": "ruleCollectionGroup1",
         "id": "/subscriptions/e747cc13-97d4-4a79-b463-42d7f4e558f2/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleCollectionGroups/ruleCollectionGroup1",
         "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
         "properties": {
@@ -106,20 +112,26 @@
                 {
                   "ruleType": "ApplicationRule",
                   "name": "rule1",
-                  "description": "Deny inbound rule",
-                  "protocols": [
-                    {
-                      "protocolType": "Https",
-                      "port": 443
-                    }
-                  ],
-                  "sourceAddresses": [
-                    "216.58.216.164",
-                    "10.0.0.0/24"
-                  ],
-                  "webCategories": [
-                    "Hacking"
-                  ]
+                  "description": "Insert trusted tenants header",
+                "protocols": [
+                  {
+                    "protocolType": "Http",
+                    "port": 80
+                  }
+                ],
+                "sourceAddresses": [
+                  "216.58.216.164",
+                  "10.0.0.0/24"
+                ],
+                "fqdnTags": [
+                  "WindowsVirtualDesktop"
+                ],
+                "httpHeadersToInsert": [
+                  {
+                    "headerName": "Restrict-Access-To-Tenants",
+                    "headerValue": "contoso.com,fabrikam.onmicrosoft.com"
+                  }
+                ]
                 }
               ]
             }
