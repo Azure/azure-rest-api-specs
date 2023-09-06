@@ -105,7 +105,7 @@ op FleetArmResourceCreateOrUpdateAsync<
 ): ArmResponse<TResource> | ArmCreatedResponse<TResource> | ErrorResponse;
 
 // this is a copy of ArmResourceDeleteAsync that adds the location header to comply with arm linter.
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-outside-interface" "this is a template"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "this is a template"
 #suppress "@azure-tools/typespec-providerhub/no-inline-model" "inlining the response with a header does not present a risk"
 @autoRoute
 @doc("Delete a {name}", TResource)
