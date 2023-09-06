@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "endpoint": "https://contoso.westus.communications.azure.com",
+    "api-version": "2023-12-01-preview",
+    "chatThreadId": "19:34adfa4f-cedf-4dc0-ba29-b6d1a69ab345@thread.v2",
+    "UploadImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAAAAAA6fptVAAAACklEQVQYV2P4DwABAQEAWk1v8QAAAABJRU5ErkJggg==",
+    "content-type": "application/octet-stream",
+    "x-content-length": "76",
+    "x-post-filename": "sample.png",
+    "x-post-sharing-mode": "teamsInlineImage"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "0-image-w4y58hfdu82374832",
+        "attachmentType": "teamsInlineImage",
+        "contentType": "png",
+        "name": "sample.png",
+        "url": "https://contoso.westus.communications.azure.com/threads/19:34adfa4f-cedf-4dc0-ba29-b6d1a69ab345@thread.v2/images/0-image-w4y58hfdu82374832/views/original",
+        "previewUrl": "https://contoso.westus.communications.azure.com/threads/19:34adfa4f-cedf-4dc0-ba29-b6d1a69ab345@thread.v2/images/0-image-w4y58hfdu82374832/views/preview"
+      }
+    },
+    "401": {
+      "body": {
+        "error": {
+          "code": "Unauthorized",
+          "message": "Request is not authorized."
+        }
+      }
+    },
+    "403": {
+      "body": {
+        "error": {
+          "code": "Forbidden",
+          "message": "User is not allowed to perform specified action."
+        }
+      }
+    },
+    "429": {
+      "body": {
+        "error": {
+          "code": "TooManyRequests",
+          "message": "Rate limit exceeded."
+        }
+      }
+    },
+    "503": {
+      "body": {
+        "error": {
+          "code": "ServiceUnavailable",
+          "message": "The server is currently unable to handle the request."
+        }
+      }
+    }
+  }
+}

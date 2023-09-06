@@ -6,6 +6,111 @@
     "version": "2023-12-01-preview"
   },
   "paths": {
+    "/chat/threads/{chatThreadId}/image": {
+      "post": {
+        "tags": [
+          "Threads"
+        ],
+        "summary": "upload an image in a thread, on behalf of a user.",
+        "operationId": "ChatThread_UploadChatImage",
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "content-type",
+            "description": "The content type of the request. currently we only support application/octet-stream",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "x-content-length",
+            "description": "The content length of the image body.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "x-post-filename",
+            "description": "The file name of the image.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "x-post-sharing-mode",
+            "description": "The share mode, options of teamsImage or teamsInlineImage",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "chatThreadId",
+            "description": "Thread id where the uploaded image belongs to.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "uploadChatImage",
+            "description": "Read receipt details.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UploadChatImage"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Uploaded successfully.",
+            "schema": {
+              "$ref": "#/definitions/UploadChatImageResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "Forbidden.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "Too many requests.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        }
+      },
+      "x-ms-examples": {
+        "Upload Image": {
+          "$ref": "./examples/Images_UploadImage.json"
+        }
+      }
+    },
     "/chat/threads/{chatThreadId}/readReceipts": {
       "get": {
         "tags": [
@@ -1210,6 +1315,50 @@
     "CommunicationIdentifierModel": {
       "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationIdentifierModel"
     },
+    "UploadChatImage": {
+      "description": "The image binary data.",
+      "type": "string",
+      "format": "binary",
+      "x-ms-media-kind": "image"
+    },
+    "UploadChatImageResponse": {
+      "description": "Response payload for uploading an image.",
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "A server-generated image id.",
+          "type": "string",
+          "example": "0-image-w4y58hfdu82374832"
+        },
+        "attachmentType": {
+          "description": "this field would be teamsImage",
+          "example": "teamsInlineImage"
+        },
+        "contentType": {
+          "$ref": "#/definitions/contentType"
+        },
+        "name": {
+          "description": "The name of the image",
+          "type": "string",
+          "example": "sample.png"
+        },
+        "url": {
+          "description": "The URL where the image can be downloaded",
+          "type": "string",
+          "format": "uri",
+          "example": "https://{geoChatGW}/threads/{chatThreadId}/images/{imageId}/views/original"
+        },
+        "previewUrl": {
+          "description": "The URL where the preview of the image can be downloaded",
+          "type": "string",
+          "format": "uri",
+          "example": "https://{geoChatGW}/threads/{chatThreadId}/images/{imageId}/views/preview"
+        }
+      }
+    },
     "ChatMessageReadReceipt": {
       "description": "A chat message read receipt indicates the time a chat message was read by a recipient.",
       "required": [
@@ -1318,6 +1467,13 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "attachments": {
+          "description": "The array of attachments",
+          "type":"array",
+          "items": {
+            "$ref": "#/definitions/ChatAttachment"
+          }
         }
       }
     },
@@ -1365,6 +1521,11 @@
         }
       }
     },
+    "contentType": {
+      "description": "The type of content",
+      "type": "string",
+      "example": "png"
+    },
     "AttachmentType": {
       "description": "The type of attachment.",
       "enum": [
@@ -1396,9 +1557,7 @@
           "$ref": "#/definitions/AttachmentType"
         },
         "contentType": {
-          "description": "The type of content of the attachment, if available",
-          "type": "string",
-          "example": "png"
+          "$ref": "#/definitions/contentType"
         },
         "name": {
           "description": "The name of the attachment content.",
@@ -1552,6 +1711,13 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
+          }
+        },
+        "attachments": {
+          "description": "The array of attachments",
+          "type":"array",
+          "items": {
+            "$ref": "#/definitions/ChatAttachment"
           }
         }
       }
