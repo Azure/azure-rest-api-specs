@@ -16,11 +16,11 @@ using Azure.ResourceManager;
 
 @armProviderNamespace
 @service({
-  title: "Microsoft.IoTOperationsOrchestrator management service.",
+  title: "Microsoft.IotOperationsOrchestrator management service.",
   version: "2023-10-04-preview",
 })
-@doc("Microsoft.IoTOperationsOrchestrator Resource Provider management API.")
+@doc("Microsoft.IotOperationsOrchestrator Resource Provider management API.")
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-namespace Microsoft.IoTOperationsOrchestrator;
+namespace Microsoft.IotOperationsOrchestrator;
 
 interface Operations extends Azure.ResourceManager.Operations {}
