@@ -1044,15 +1044,23 @@
       },
       "description": "Tags field of the AzureLargeInstance instance."
     },
-    "ForceFlag": {
+    "ForceState": {
       "type": "object",
       "properties": {
-        "force": {
-          "type": "boolean",
+        "forceState": {
+          "type": "string",
+          "enum": [
+            "active",
+            "inactive"
+          ],
+          "x-ms-enum": {
+            "name": "AzureLargeInstanceForcePowerState",
+            "modelAsString": true
+          },
           "description": "Whether to force restart by shutting all processes."
         }
       },
-      "description": "The flag empowers the server with the ability to forcefully terminate and halt any existing processes that may be running on the server"
+      "description": "The active state empowers the server with the ability to forcefully terminate and halt any existing processes that may be running on the server"
     }
   },
   "parameters": {
@@ -1075,13 +1083,13 @@
       "x-ms-parameter-location": "method"
     },
     "ForcePowerManagementOperationParameter": {
-      "name": "ForceParameter",
+      "name": "forceParameter",
       "in": "body",
       "required": false,
       "schema": {
-        "$ref": "#/definitions/ForceFlag"
+        "$ref": "#/definitions/ForceState"
       },
-      "description": "When set to 'true', this parameter empowers the server with the ability to forcefully terminate and halt any existing processes that may be running on the server",
+      "description": "When set to 'active', this parameter empowers the server with the ability to forcefully terminate and halt any existing processes that may be running on the server",
       "x-ms-parameter-location": "method"
     },
     "TagsParameter": {
