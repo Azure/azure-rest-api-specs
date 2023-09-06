@@ -17,7 +17,7 @@ namespace Microsoft.IotOperationsOrchestrator;
 @doc("A Target resource belonging to an Instance resource.")
 model Target is TrackedResource<TargetProperties> {
   @doc("Name of target.")
-  @key("targetName")
+  @key()
   @segment("targets")
   @pattern("^[a-z0-9][a-z0-9-]{1,62}[a-z0-9]$") 
   @path
@@ -59,18 +59,12 @@ model TopologiesProperties {
   @doc("bindings description.")
   @OpenAPI.extension("x-ms-identifiers", [])
   bindings?: BindingProperties[];
-
-  @doc("Name of the component.")
-  device?:	string;
-  
-  @doc("Unique selector for the target such as a label.")
-  selector?: {};
 }
 
 @doc("Defines a component binding for a provider.")
 model BindingProperties {
   @doc("Configuration values for the binding.")
-  config?: {};
+  config: {};
 
   @doc("Name of the provider.")
   provider:	string;

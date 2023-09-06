@@ -17,7 +17,7 @@ namespace Microsoft.IotOperationsOrchestrator;
 @doc("A Solution resource belonging to an Instance resource.")
 model Solution is TrackedResource<SolutionProperties> {
   @doc("Name of solution.")
-  @key("solutionName")
+  @key()
   @segment("solutions")
   @pattern("^[a-z0-9][a-z0-9-]{1,62}[a-z0-9]$") 
   @path
