@@ -45,6 +45,7 @@ batch:
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/
+clear-output-folder: false
 perform-load: false
 ```
 
