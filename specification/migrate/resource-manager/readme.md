@@ -20,6 +20,14 @@ batch:
 ```
 
 
+### Tag: package-2023-06
+
+These settings apply only when `--tag=package-2023-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-06'
+input-file:
+  - Microsoft.OffAzure/stable/2023-06-06/migrate.json
+```
 ### Tag: package-migrate-2018-02 and java
 
 These settings apply only when `--tag=package-migrate-2018-02 --java` is specified on the command line.
@@ -242,5 +250,3 @@ swagger-to-sdk:
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
-
-

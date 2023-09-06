@@ -260,7 +260,8 @@
           "Starts the generation of a batch of images from a text caption": {
             "$ref": "./examples/start_generate_image.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/operations/images/{operationId}": {
@@ -674,7 +675,7 @@
           {
             "name": "function",
             "value": "function",
-            "description": "The role that provides function results for char completions."
+            "description": "The role that provides function results for chat completions."
           }
         ]
       }
@@ -1006,6 +1007,10 @@
           "$ref": "#/definitions/ContentFilterResult",
           "description": "Describes language related to physical actions intended to purposely hurt, injure,\nor damage one’s body, or kill oneself.",
           "x-ms-client-name": "selfHarm"
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Describes an error returned if the content filtering system is\ndown or otherwise unable to complete the operation in time."
         }
       }
     },
