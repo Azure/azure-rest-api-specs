@@ -43,13 +43,13 @@ model AccountProperties {
   @doc("The Playwright testing dashboard URI for the account resource.")
   dashboardUri: url;
 
-  @doc("The regionalAffinity feature enablement status for the account.")
+  @doc("This property sets the connection region for Playwright client workers to cloud-hosted browsers. If enabled, workers connect to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure region in which the workspace was initially created.")
   regionalAffinity?: EnablementStatus = EnablementStatus.Enabled;
 
-  @doc("The scalableExecution feature enablement status for the account.")
+  @doc("When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations.")
   scalableExecution?: EnablementStatus = EnablementStatus.Enabled;
 
-  @doc("The reporting feature enablement status for the account.")
+  @doc("When enabled, this feature allows the workspace to upload and display test results, including artifacts like traces and screenshots, in the Playwright portal. This enables faster and more efficient troubleshooting.")
   reporting?: EnablementStatus = EnablementStatus.Disabled;
 
   @visibility("read")
@@ -92,7 +92,7 @@ model Location {
   @path
   @segment("locations")
   @visibility("query", "read", "update")
-  locationName: string;
+  name: string;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-path-segment-invalid-chars" "Existing Template"
@@ -100,17 +100,17 @@ model Location {
 @doc("A quota resource")
 @parentResource(Location)
 model Quota is ProxyResource<QuotaProperties> {
-  @doc("The quota bucket name.")
+  @doc("The quota name.")
   @key("name")
   @path
   @segment("quotas")
-  name: QuotaBucketNames;
+  name: QuotaNames;
 }
 
-@doc("The quota bucket name.")
-enum QuotaBucketNames {
-  @doc("The test execution quota.")
-  TestExecution,
+@doc("The quota name.")
+enum QuotaNames {
+  @doc("The quota details for scalable execution feature. When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations.")
+  ScalableExecution,
 }
 
 @doc("Quota properties")
@@ -125,7 +125,7 @@ model QuotaProperties {
 
 @doc("The free-trial properties")
 model FreeTrialProperties {
-  @doc("The playwright account resource id.")
+  @doc("The playwright account id.")
   @visibility("read")
   accountId: uuid;
 
@@ -167,7 +167,7 @@ enum FreeTrialState {
 
 @armResourceOperations
 interface Quotas {
-  @doc("Get quota by bucket name.")
+  @doc("Get quota by name.")
   get is ArmResourceRead<Quota>;
 
   @doc("List quotas for a given subscription Id.")

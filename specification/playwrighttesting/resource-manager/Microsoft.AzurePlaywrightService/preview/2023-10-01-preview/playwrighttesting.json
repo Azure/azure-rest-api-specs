@@ -177,7 +177,7 @@
         "tags": [
           "Quotas"
         ],
-        "description": "Get quota by bucket name.",
+        "description": "Get quota by name.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -195,20 +195,20 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The quota bucket name.",
+            "description": "The quota name.",
             "required": true,
             "type": "string",
             "enum": [
-              "TestExecution"
+              "ScalableExecution"
             ],
             "x-ms-enum": {
-              "name": "QuotaBucketNames",
+              "name": "QuotaNames",
               "modelAsString": true,
               "values": [
                 {
-                  "name": "TestExecution",
-                  "value": "TestExecution",
-                  "description": "The test execution quota."
+                  "name": "ScalableExecution",
+                  "value": "ScalableExecution",
+                  "description": "The quota details for scalable execution feature. When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations."
                 }
               ]
             }
@@ -575,17 +575,17 @@
         },
         "regionalAffinity": {
           "$ref": "#/definitions/EnablementStatus",
-          "description": "The regionalAffinity feature enablement status for the account.",
+          "description": "This property sets the connection region for Playwright client workers to cloud-hosted browsers. If enabled, workers connect to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure region in which the workspace was initially created.",
           "default": "Enabled"
         },
         "scalableExecution": {
           "$ref": "#/definitions/EnablementStatus",
-          "description": "The scalableExecution feature enablement status for the account.",
+          "description": "When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations.",
           "default": "Enabled"
         },
         "reporting": {
           "$ref": "#/definitions/EnablementStatus",
-          "description": "The reporting feature enablement status for the account.",
+          "description": "When enabled, this feature allows the workspace to upload and display test results, including artifacts like traces and screenshots, in the Playwright portal. This enables faster and more efficient troubleshooting.",
           "default": "Disabled"
         },
         "provisioningState": {
@@ -621,17 +621,17 @@
       "properties": {
         "regionalAffinity": {
           "$ref": "#/definitions/EnablementStatus",
-          "description": "The regionalAffinity feature enablement status for the account.",
+          "description": "This property sets the connection region for Playwright client workers to cloud-hosted browsers. If enabled, workers connect to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure region in which the workspace was initially created.",
           "default": "Enabled"
         },
         "scalableExecution": {
           "$ref": "#/definitions/EnablementStatus",
-          "description": "The scalableExecution feature enablement status for the account.",
+          "description": "When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations.",
           "default": "Enabled"
         },
         "reporting": {
           "$ref": "#/definitions/EnablementStatus",
-          "description": "The reporting feature enablement status for the account.",
+          "description": "When enabled, this feature allows the workspace to upload and display test results, including artifacts like traces and screenshots, in the Playwright portal. This enables faster and more efficient troubleshooting.",
           "default": "Disabled"
         }
       }
@@ -671,7 +671,7 @@
       "properties": {
         "accountId": {
           "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The playwright account resource id.",
+          "description": "The playwright account id.",
           "readOnly": true
         },
         "createdAt": {
