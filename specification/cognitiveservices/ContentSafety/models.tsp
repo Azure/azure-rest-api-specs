@@ -54,6 +54,10 @@ model AnalyzeTextOptions {
 
   @doc("This refers to the type of text analysis output. If no value is assigned, the default value will be \"FourSeverityLevels\".")
   outputType?: AnalyzeTextOutputType = AnalyzeTextOutputType.FourSeverityLevels;
+
+  @added(ContentSafety.Versions.v2023_10_15_Preview)
+  @doc("Name of the project. When this field is provided, it means service will analyze the text with specified policy based on the given project name. If project name occurs with other configuration like categories, a bad request error will be returned.")
+  projectName?: string;
 }
 
 @doc("The text analysis response.")
@@ -107,6 +111,10 @@ model AnalyzeImageOptions {
 
   @doc("This refers to the type of image analysis output. If no value is assigned, the default value will be \"FourSeverityLevels\".")
   outputType?: AnalyzeImageOutputType = AnalyzeImageOutputType.FourSeverityLevels;
+
+  @added(ContentSafety.Versions.v2023_10_15_Preview)
+  @doc("Name of the project. When this field is provided, it means service will analyze the text with specified policy based on the given project name. If project name occurs with other configuration like categories, a bad request error will be returned.")
+  projectName?: string;
 }
 
 @doc("The image can be either base64 encoded bytes or a blob URL. You can choose only one of these options. If both are provided, the request will be refused. The maximum image size is 2048 x 2048 pixels and should not exceed 4 MB, while the minimum image size is 50 x 50 pixels.")

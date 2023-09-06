@@ -867,6 +867,10 @@
           "$ref": "#/definitions/AnalyzeImageOutputType",
           "description": "This refers to the type of image analysis output. If no value is assigned, the default value will be \"FourSeverityLevels\".",
           "default": "FourSeverityLevels"
+        },
+        "projectName": {
+          "type": "string",
+          "description": "Name of the project. When this field is provided, it means service will analyze the text with specified policy based on the given project name. If project name occurs with other configuration like categories, a bad request error will be returned."
         }
       },
       "required": [
@@ -943,6 +947,10 @@
           "$ref": "#/definitions/AnalyzeTextOutputType",
           "description": "This refers to the type of text analysis output. If no value is assigned, the default value will be \"FourSeverityLevels\".",
           "default": "FourSeverityLevels"
+        },
+        "projectName": {
+          "type": "string",
+          "description": "Name of the project. When this field is provided, it means service will analyze the text with specified policy based on the given project name. If project name occurs with other configuration like categories, a bad request error will be returned."
         }
       },
       "required": [
