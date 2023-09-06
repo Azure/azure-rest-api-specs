@@ -441,6 +441,16 @@
           "description": "The account name.",
           "readOnly": true
         },
+        "subscriptionId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The ARM-based subscription id for the account.",
+          "readOnly": true
+        },
+        "subscriptionState": {
+          "$ref": "#/definitions/SubscriptionState",
+          "description": "The ARM-based subscription state - Registered | Unregistered | Warned | Suspended | Deleted",
+          "readOnly": true
+        },
         "tenantId": {
           "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The Azure tenant id of the account.",
@@ -474,6 +484,8 @@
         "id",
         "resourceId",
         "name",
+        "subscriptionId",
+        "subscriptionState",
         "location"
       ]
     },
@@ -587,6 +599,48 @@
       "required": [
         "value"
       ]
+    },
+    "SubscriptionState": {
+      "type": "string",
+      "description": "The ARM-based subscription state.",
+      "enum": [
+        "Registered",
+        "Warned",
+        "Suspended",
+        "Deleted",
+        "Unregistered"
+      ],
+      "x-ms-enum": {
+        "name": "SubscriptionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Registered",
+            "value": "Registered",
+            "description": "The subscription state is Registered."
+          },
+          {
+            "name": "Warned",
+            "value": "Warned",
+            "description": "The subscription state is Warned."
+          },
+          {
+            "name": "Suspended",
+            "value": "Suspended",
+            "description": "The subscription state is Suspended."
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "The subscription state is Deleted."
+          },
+          {
+            "name": "Unregistered",
+            "value": "Unregistered",
+            "description": "The subscription state is Unregistered."
+          }
+        ]
+      }
     }
   },
   "parameters": {

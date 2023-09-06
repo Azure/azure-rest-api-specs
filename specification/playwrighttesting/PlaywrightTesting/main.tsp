@@ -60,6 +60,14 @@ model Account {
   @visibility("read")
   name: string;
 
+  @doc("The ARM-based subscription id for the account.")
+  @visibility("read")
+  subscriptionId: uuid;
+
+  @doc("The ARM-based subscription state - Registered | Unregistered | Warned | Suspended | Deleted")
+  @visibility("read")
+  subscriptionState: SubscriptionState;
+
   @doc("The Azure tenant id of the account.")
   @visibility("read")
   tenantId?: uuid;
@@ -79,6 +87,24 @@ model Account {
   @doc("When enabled, this feature allows the workspace to upload and display test results, including artifacts like traces and screenshots, in the Playwright portal. This enables faster and more efficient troubleshooting.")
   @visibility("read")
   reporting?: EnablementStatus = EnablementStatus.Disabled;
+}
+
+@doc("The ARM-based subscription state.")
+enum SubscriptionState {
+  @doc("The subscription state is Registered.")
+  Registered,
+
+  @doc("The subscription state is Warned.")
+  Warned,
+
+  @doc("The subscription state is Suspended.")
+  Suspended,
+
+  @doc("The subscription state is Deleted.")
+  Deleted,
+
+  @doc("The subscription state is Unregistered.")
+  Unregistered,
 }
 
 @doc("Model of an access-token linked to an account.")
