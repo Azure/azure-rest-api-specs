@@ -176,6 +176,9 @@ input-file:
 - Microsoft.DBforMySQL/LogFiles/preview/2021-12-01-preview/LogFiles.json
 - Microsoft.DBforMySQL/ServiceOperations/preview/2022-09-30-preview/ServiceOperations.json
 - Microsoft.DBforMySQL/common-types/v1/common-types.json
+suppressions:
+  - code: PropertiesTypeObjectNoDefinition
+    reason: This will be fixed in new versions.
 ```
 
 ### Tag: package-flexibleserver-2023-06-01-preview
@@ -211,6 +214,9 @@ input-file:
 - Microsoft.DBforMySQL/common-types/v1/common-types.json
 - Microsoft.DBforMySQL/PrivateLink/stable/2023-06-30/PrivateEndpointConnections.json
 - Microsoft.DBforMySQL/PrivateLink/stable/2023-06-30/PrivateLinkResources.json
+suppressions:
+  - code: PropertiesTypeObjectNoDefinition
+    reason: This will be fixed in new versions.
 ```
 
 ### Tag: package-flexibleserver-2022-01-01
