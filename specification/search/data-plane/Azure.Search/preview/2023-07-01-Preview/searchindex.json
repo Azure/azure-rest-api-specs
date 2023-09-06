@@ -1855,37 +1855,9 @@
         "fields": {
           "type": "string",
           "description": "Vector Fields of type Collection(Edm.Single) to be included in the vector searched."
-        },
-        "exhaustive": {
-          "type": "boolean",
-          "description": "If set to true, will compute a set of ground truth KNN vectors for evaluating recall."
         }
       },
       "description": "The query parameters for vector and hybrid search queries."
-    },
-    "VectorQueryFilterType": {
-      "type": "string",
-      "enum": [
-        "postFilter",
-        "preFilter"
-      ],
-      "x-ms-enum": {
-        "name": "VectorQueryFilterType",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "postFilter",
-            "name": "PostFilter",
-            "description": "The search data will be filtered after the vector search query is performed."
-          },
-          {
-            "value": "preFilter",
-            "name": "PreFilter",
-            "description": "The search data will be filtered before the vector search query is performed."
-          }
-        ]
-      },
-      "description": "Determines whether or not filters are applied before or after the vector search is performed."
     },
     "QueryLanguage": {
       "type": "string",
@@ -2531,10 +2503,6 @@
             "$ref": "#/definitions/Vector"
           },
           "description": "The query parameters for multi-vector search queries."
-        },
-        "filterType": {
-          "$ref": "#/definitions/VectorQueryFilterType",
-          "description": "Determines whether or not filters are applied before or after the vector search is performed."
         }
       },
       "description": "Parameters for filtering, sorting, faceting, paging, and other search query behaviors."
