@@ -30,6 +30,7 @@ batch:
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservicefleet/azure/mgmt/containerservicefleet/
+clear-output-folder: false
 perform-load: false
 ```
 
