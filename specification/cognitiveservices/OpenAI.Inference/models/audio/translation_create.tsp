@@ -8,38 +8,48 @@ using TypeSpec.Http;
 
 namespace Azure.OpenAI;
 
-@doc("""
-Translation request.
-Requesting format 'json' will result on only the 'text' field being set.
-For more output data use 'verbose_json.
-""")
-model AudioTranslationOptions {
-    @doc("The audio file to translate.")
-    file: bytes;
-
-    @doc("An optional text to guide the model's style or continue a previous audio segment. The prompt should be in English.")
-    prompt?: string;
+@doc("Lorem ipsum")
+model AudioTranslationOptionsSimpleJson {
+    ...AudioTranscriptionOptionsCommon;
 
     @doc("The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.")
     @projectedName("json", "response_format")
-    responseFormat?: "json" | "verbose_json" | "text" | "srt" | "vtt" = "json"; //AudioTranscriptionFormat = AudioTranscriptionFormat.json;
-
-    @doc("""
-    The sampling temperature, between 0 and 1.
-    Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
-    If set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.
-    """)
-    temperature?: float32 = 0;
+    responseFormat?: AudioTranscriptionFormat = AudioTranscriptionFormat.simpleJson;
 }
 
-@doc("TODO")
-model AudioTranslationOptionsJsonSimple extends AudioTranslationOptions {
-    @doc("TODO")
-    responseFormat: "json";
+@doc("Lorem ipsum")
+model AudioTranslationOptionsVerboseJson {
+    ...AudioTranscriptionOptionsCommon;
+
+    @doc("The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.")
+    @projectedName("json", "response_format")
+    responseFormat?: AudioTranscriptionFormat = AudioTranscriptionFormat.verboseJson;
 }
 
-@doc("TODO")
-model AudioTranslationOptionsJsonVerbose extends AudioTranslationOptions {
-    @doc("TODO")
-    responseFormat: "verbose_json";
+@doc("Lorem ipsum")
+model AudioTranslationOptionsPlainText {
+    ...AudioTranscriptionOptionsCommon;
+
+    @doc("The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.")
+    @projectedName("json", "response_format")
+    responseFormat?: AudioTranscriptionFormat = AudioTranscriptionFormat.text;
+}
+
+@doc("Lorem ipsum")
+model AudioTranslationOptionsSrt {
+    ...AudioTranscriptionOptionsCommon;
+
+    @doc("The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.")
+    @projectedName("json", "response_format")
+    responseFormat?: AudioTranscriptionFormat = AudioTranscriptionFormat.srt;
+}
+
+
+@doc("Lorem ipsum")
+model AudioTranslationOptionsVtt {
+    ...AudioTranscriptionOptionsCommon;
+
+    @doc("The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.")
+    @projectedName("json", "response_format")
+    responseFormat?: AudioTranscriptionFormat = AudioTranscriptionFormat.vtt;
 }
