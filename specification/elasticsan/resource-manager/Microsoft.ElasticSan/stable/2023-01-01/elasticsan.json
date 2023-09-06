@@ -915,7 +915,7 @@
               "name": "x-ms-delete-snapshots",
               "modelAsString": true
             },
-            "description": "Optional, used to delete snapshots under volume. Allowed value are only true or false."
+            "description": "Optional, used to delete snapshots under volume. Allowed value are only true or false. Default value is false."
           },
           {
             "name": "x-ms-force-delete",
@@ -930,7 +930,7 @@
               "name": "x-ms-force-delete",
               "modelAsString": true
             },
-            "description": "Optional, used to delete volume if active sessions present. Allowed value are only true or false."
+            "description": "Optional, used to delete volume if active sessions present. Allowed value are only true or false. Default value is false."
           }
         ],
         "responses": {
@@ -1339,7 +1339,7 @@
           "Snapshots"
         ],
         "description": "List Snapshots in a VolumeGroup or List Snapshots by Volume (name) in a VolumeGroup using filter",
-        "operationId": "Snapshots_ListByVolumeGroup",
+        "operationId": "VolumeSnapshots_ListByVolumeGroup",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1382,11 +1382,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Snapshots_ListByVolumeGroup_MaximumSet_Gen": {
-            "$ref": "./examples/Snapshots_ListByVolumeGroup_MaximumSet_Gen.json"
+          "VolumeSnapshots_ListByVolumeGroup_MaximumSet_Gen": {
+            "$ref": "./examples/VolumeSnapshots_ListByVolumeGroup_MaximumSet_Gen.json"
           },
-          "Snapshots_ListByVolumeGroup_MinimumSet_Gen": {
-            "$ref": "./examples/Snapshots_ListByVolumeGroup_MinimumSet_Gen.json"
+          "VolumeSnapshots_ListByVolumeGroup_MinimumSet_Gen": {
+            "$ref": "./examples/VolumeSnapshots_ListByVolumeGroup_MinimumSet_Gen.json"
           }
         }
       }
@@ -1397,7 +1397,7 @@
           "Snapshots"
         ],
         "description": "Create a Volume Snapshot.",
-        "operationId": "Snapshots_Create",
+        "operationId": "VolumeSnapshots_Create",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1452,11 +1452,11 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Snapshots_Create_MaximumSet_Gen": {
-            "$ref": "./examples/Snapshots_Create_MaximumSet_Gen.json"
+          "VolumeSnapshots_Create_MaximumSet_Gen": {
+            "$ref": "./examples/VolumeSnapshots_Create_MaximumSet_Gen.json"
           },
-          "Snapshots_Create_MinimumSet_Gen": {
-            "$ref": "./examples/Snapshots_Create_MinimumSet_Gen.json"
+          "VolumeSnapshots_Create_MinimumSet_Gen": {
+            "$ref": "./examples/VolumeSnapshots_Create_MinimumSet_Gen.json"
           }
         }
       },
@@ -1465,7 +1465,7 @@
           "Snapshots"
         ],
         "description": "Delete a Volume Snapshot.",
-        "operationId": "Snapshots_Delete",
+        "operationId": "VolumeSnapshots_Delete",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1513,11 +1513,11 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Snapshots_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/Snapshots_Delete_MaximumSet_Gen.json"
+          "VolumeSnapshots_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/VolumeSnapshots_Delete_MaximumSet_Gen.json"
           },
-          "Snapshots_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/Snapshots_Delete_MinimumSet_Gen.json"
+          "VolumeSnapshots_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/VolumeSnapshots_Delete_MinimumSet_Gen.json"
           }
         }
       },
@@ -1526,7 +1526,7 @@
           "Snapshots"
         ],
         "description": "Get a Volume Snapshot.",
-        "operationId": "Snapshots_Get",
+        "operationId": "VolumeSnapshots_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1562,11 +1562,11 @@
           }
         },
         "x-ms-examples": {
-          "Snapshots_Get_MaximumSet_Gen": {
-            "$ref": "./examples/Snapshots_Get_MaximumSet_Gen.json"
+          "VolumeSnapshots_Get_MaximumSet_Gen": {
+            "$ref": "./examples/VolumeSnapshots_Get_MaximumSet_Gen.json"
           },
-          "Snapshots_Get_MinimumSet_Gen": {
-            "$ref": "./examples/Snapshots_Get_MinimumSet_Gen.json"
+          "VolumeSnapshots_Get_MinimumSet_Gen": {
+            "$ref": "./examples/VolumeSnapshots_Get_MinimumSet_Gen.json"
           }
         }
       }
@@ -1757,7 +1757,7 @@
             "name": "PublicNetworkAccess",
             "modelAsString": true
           },
-          "description": "Allow or disallow public network access to ElasticSan Account. Value is optional but if passed in, must be 'Enabled' or 'Disabled'."
+          "description": "Allow or disallow public network access to ElasticSan. Value is optional but if passed in, must be 'Enabled' or 'Disabled'."
         }
       }
     },
@@ -2739,7 +2739,7 @@
       "properties": {
         "sourceId": {
           "type": "string",
-          "description": "If createOption is Copy, this is the ARM id of the source snapshot or disk. If createOption is Restore, this is the ARM-like id of the source disk restore point."
+          "description": "Fully qualified resource ID of the volume. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/volumes/{volumeName}\""
         }
       }
     }
