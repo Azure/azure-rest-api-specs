@@ -18,14 +18,13 @@ options:
     namespace: "{package-dir}"
     clear-output-folder: true
     model-namespace: false
-  # "@azure-tools/typespec-ts":
-  #   package-dir: "contentsafety-rest"
-  #   generateMetadata: true
-  #   generateTest: true
-  #   azureSdkForJs: true
-  #   packageDetails:
-  #     name: "@azure-rest/contentsafety-rest"
-  #     description: "ContentSafety Service"
-  # "@azure-tools/typespec-java":
-  #   package-dir: "contentsafety"
-  #   namespace: com.contentsafety
+  "@azure-tools/typespec-ts":
+      package-dir: "azure-ai-content-safety-rest"
+      packageDetails:
+        name: "@azure-rest/ai-content-safety"
+        version: "1.0.0-beta.1"
+        description: "ContentSafety Service"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-ai-contentsafety"
+    namespace: com.azure.ai.contentsafety
+    examples-directory: examples
