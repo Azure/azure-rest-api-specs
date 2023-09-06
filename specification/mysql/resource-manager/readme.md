@@ -199,7 +199,7 @@ suppressions:
     from: FlexibleServers.json
     reason: This check is optional.
   - code: PropertiesTypeObjectNoDefinition
-    from: common-types.json
+    from: Microsoft.DBforMySQL/common-types/v1/common-types.json
     reason: This will be fixed in new versions.
 ```
 
