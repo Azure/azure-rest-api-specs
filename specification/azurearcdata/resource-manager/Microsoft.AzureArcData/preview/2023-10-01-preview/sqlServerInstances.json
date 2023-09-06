@@ -554,6 +554,98 @@
           "description": "Indicates if monitoring is enabled for this SQL Server instance."
         }
       }
+    },
+    "SqlServerInstanceTelemetryRequest": {
+      "description": "The Arc SQL Server instance telemetry retrieval request.",
+      "type": "object",
+      "properties": {
+        "datasetName": {
+          "type": "string",
+          "description": "The name of the telemetry dataset to retrieve."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time for the time range to fetch telemetry for. If not specified, the current time minus 1 hour is used."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time for the time range to fetch telemetry for. If not specified, the current time is used."
+        }
+      },
+      "required": [
+        "datasetName"
+      ]
+    },
+    "SqlServerInstanceTelemetryColumn": {
+      "description": "The telemetry column for the SQL Server instance.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the telemetry column."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the telemetry column.",
+          "enum": [
+            "bool",
+            "datetime",
+            "int",
+            "long",
+            "double",
+            "string",
+            "guid",
+            "timespan"
+          ],
+          "x-ms-enum": {
+            "name": "SqlServerInstanceTelemetryColumnType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SqlServerInstanceTelemetryRow": {
+      "description": "An array of values representing a telemetry row for the SQL Server instance.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "x-ms-identifiers": []
+    },
+    "SqlServerInstanceTelemetryResponse": {
+      "description": "A section of the telemetry response for the SQL Server instance.",
+      "type": "object",
+      "properties": {
+        "columns": {
+          "description": "The columns of the result telemetry table for the SQL Server instance.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlServerInstanceTelemetryColumn"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "rows": {
+          "description": "A list of rows from the result telemetry table for the SQL Server instance.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlServerInstanceTelemetryRow"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next section of rows of the telemetry response for the SQL Server instance. Null if no more sections are available.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "columns",
+        "rows"
+      ]
     }
   },
   "parameters": {
