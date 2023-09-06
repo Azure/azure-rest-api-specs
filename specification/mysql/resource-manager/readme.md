@@ -198,6 +198,9 @@ suppressions:
   - code: PostOperationAsyncResponseValidation
     from: FlexibleServers.json
     reason: This check is optional.
+  - code: PropertiesTypeObjectNoDefinition
+    from: common-types.json
+    reason: This will be fixed in new versions.
 ```
 
 ### Tag: package-flexibleserver-2023-06-30-privatelink
