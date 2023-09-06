@@ -1,8 +1,8 @@
-# IoTOperationsOrchestrator
+# IotOperationsOrchestrator
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for IoTOperationsOrchestrator.
+This is the AutoRest configuration file for IotOperationsOrchestrator.
 
 ## Getting Started
 
@@ -22,7 +22,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the IoTOperationsOrchestrator.
+These are the global settings for the IotOperationsOrchestrator.
 
 ```yaml
 openapi-type: arm
@@ -36,5 +36,5 @@ These settings apply only when `--tag=package-2023-10-04-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-10-04-preview'
 input-file:
-  - Microsoft.IoTOperationsOrchestrator/preview/2023-10-04-preview/openapi.json
+  - Microsoft.IotOperationsOrchestrator/preview/2023-10-04-preview/openapi.json
 ```
