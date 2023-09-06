@@ -178,6 +178,7 @@ input-file:
 - Microsoft.DBforMySQL/common-types/v1/common-types.json
 suppressions:
   - code: PropertiesTypeObjectNoDefinition
+    from: Microsoft.DBforMySQL/common-types/v1/common-types.json
     reason: This will be fixed in new versions.
 ```
 
@@ -202,6 +203,7 @@ suppressions:
     from: FlexibleServers.json
     reason: This check is optional.
   - code: PropertiesTypeObjectNoDefinition
+    from: Microsoft.DBforMySQL/common-types/v1/common-types.json
     reason: This will be fixed in new versions.
 ```
 
@@ -216,6 +218,7 @@ input-file:
 - Microsoft.DBforMySQL/PrivateLink/stable/2023-06-30/PrivateLinkResources.json
 suppressions:
   - code: PropertiesTypeObjectNoDefinition
+    from: Microsoft.DBforMySQL/common-types/v1/common-types.json
     reason: This will be fixed in new versions.
 ```
 
