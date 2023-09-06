@@ -517,6 +517,11 @@
     }
   },
   "definitions": {
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "Multivariate.AlignMode": {
       "type": "string",
       "enum": [
@@ -552,8 +557,7 @@
       "description": "Response of getting a model.",
       "properties": {
         "modelId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Model identifier."
         },
         "createdTime": {
@@ -1018,8 +1022,7 @@
       "description": "Detection results for the resultId value.",
       "properties": {
         "resultId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Result identifier that's used to fetch the results of an inference call."
         },
         "summary": {
