@@ -1,11 +1,9 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "@typespec/http";
-import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.Versioning;
 
 namespace Azure.OpenAI;
 
@@ -13,12 +11,16 @@ namespace Azure.OpenAI;
 enum AudioTranscriptionFormat {
     @doc("Lorem ipsum")
     simpleJson: "json",
+
     @doc("Lorem ipsum")
     text: "text",
+
     @doc("Lorem ipsum")
     srt: "srt",
+
     @doc("Lorem ipsum")
     verboseJson: "verbose_json",
+
     @doc("Lorem ipsum")
     vtt: "vtt",
 }
@@ -45,10 +47,13 @@ model AudioTranscriptionOptionsCommon {
 
 @doc("Lorem ipsum")
 model AudioTranscriptionPlainText {
-  @doc("Lorem ipsum")
-  @header contentType: "text/plain";
-  @doc("Lorem ipsum")
-  @body text: string;
+    @doc("Lorem ipsum")
+    @header
+    contentType: "text/plain";
+
+    @doc("Lorem ipsum")
+    @body
+    text: string;
 }
 
 @doc("Lorem ipsum")

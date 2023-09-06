@@ -44,7 +44,6 @@ model AudioTranslationOptionsSrt {
     responseFormat?: AudioTranscriptionFormat = AudioTranscriptionFormat.srt;
 }
 
-
 @doc("Lorem ipsum")
 model AudioTranslationOptionsVtt {
     ...AudioTranscriptionOptionsCommon;
