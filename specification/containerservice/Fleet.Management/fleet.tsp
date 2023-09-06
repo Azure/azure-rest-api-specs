@@ -31,6 +31,11 @@ model Fleet is TrackedResource<FleetProperties> {
   name: string;
 
   ...EntityTag;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "https://github.com/Azure/typespec-azure/issues/2840"
+  @added(Versions.v2023_06_15_preview)
+  @doc("Managed identity.")
+  identity?: Azure.ResourceManager.Foundations.ManagedIdentityProperties;
 }
 
 @doc("Fleet properties.")
@@ -56,6 +61,16 @@ model FleetHubProfile {
   @maxLength(54)
   dnsPrefix?: string;
 
+  @added(Versions.v2023_06_15_preview)
+  @doc("The access profile for the Fleet hub API server.")
+  @visibility("read", "create")
+  apiServerAccessProfile?: APIServerAccessProfile;
+
+  @added(Versions.v2023_06_15_preview)
+  @doc("The agent profile for the Fleet hub.")
+  @visibility("read", "create")
+  agentProfile?: AgentProfile;
+
   @visibility("read")
   @doc("The FQDN of the Fleet hub.")
   fqdn?: string;
@@ -65,13 +80,48 @@ model FleetHubProfile {
   kubernetesVersion?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
+scalar SubnetResourceId
+  extends Azure.ResourceManager.ResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworks/subnets",
+    }
+  ]>;
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "match existing AKS APIServerAccessProfile"
+@doc("Access profile for the Fleet hub API server.")
+model APIServerAccessProfile {
+  @visibility("read", "create")
+  @doc("Whether to create the Fleet hub as a private cluster or not.")
+  enablePrivateCluster?: boolean;
+
+  @visibility("read", "create")
+  @doc("Whether to enable apiserver vnet integration for the Fleet hub or not.")
+  enableVnetIntegration?: boolean;
+
+  @visibility("read", "create")
+  @doc("The subnet to be used when apiserver vnet integration is enabled. It is required when creating a new Fleet with BYO vnet.")
+  subnetId?: SubnetResourceId;
+}
+
+@doc("Agent profile for the Fleet hub.")
+model AgentProfile {
+  @visibility("read", "create")
+  @doc("The ID of the subnet which the Fleet hub node will join on startup. If this is not specified, a vnet and subnet will be generated and used.")
+  subnetId?: SubnetResourceId;
+}
+
 @lroStatus
 @doc("The provisioning state of the last accepted operation.")
 enum FleetProvisioningState {
   ...ResourceProvisioningState,
+
+  @doc("The provisioning state of a fleet being created.")
   Creating,
+
+  @doc("The provisioning state of a fleet being updated.")
   Updating,
+
+  @doc("The provisioning state of a fleet being deleted.")
   Deleting,
 }
 
@@ -79,9 +129,15 @@ enum FleetProvisioningState {
 model FleetPatch {
   @doc("Resource tags.")
   tags?: Record<string>;
+
   // adding a response header in the model currently impacts the model used in the List result model.
   // omitting it for now as response headers do not impact SDK generation.
   // ...EtagResponseEnvelope;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "https://github.com/Azure/typespec-azure/issues/2840"
+  @added(Versions.v2023_06_15_preview)
+  @doc("Managed identity.")
+  identity?: Azure.ResourceManager.Foundations.ManagedIdentityProperties;
 }
 
 @doc("One credential result item.")
@@ -108,20 +164,37 @@ interface Fleets {
   @doc("Gets a Fleet.")
   get is ArmResourceRead<Fleet>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "changing the operation-id on an existing operation is an SDK breaking change"
   @doc("Creates or updates a Fleet.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  @operationId("Fleets_CreateOrUpdate")
+  create is ArmResourceCreateOrUpdateAsync<
     Fleet,
     BaseParameters<Fleet> &
       IfMatchParameters<Fleet> &
       IfNoneMatchParameters<Fleet>
   >;
 
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Actual breaking change"
+  @sharedRoute
+  @removed(Versions.v2023_06_15_preview)
   update is ArmCustomPatchSync<
     Fleet,
     FleetPatch,
     BaseParameters<Fleet> & IfMatchParameters<Fleet>
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Use operationId to keep same name as deprecated sync operation"
+  @added(Versions.v2023_06_15_preview)
+  @operationId("Fleets_Update")
+  @sharedRoute
+  updateAsync is ArmCustomPatchAsync<
+    Fleet,
+    FleetPatch,
+    BaseParameters<Fleet> & IfMatchParameters<Fleet>
+  >;
+
+  @sharedRoute // why do we need to set shared route on delete? compiler complains with an error
+  // All shared routes must agree on the value of the shared parameter.TypeSpec(@typespec/http/shared-inconsistency)
   delete is ArmResourceDeleteAsync<
     Fleet,
     BaseParameters<Fleet> & IfMatchParameters<Fleet>
