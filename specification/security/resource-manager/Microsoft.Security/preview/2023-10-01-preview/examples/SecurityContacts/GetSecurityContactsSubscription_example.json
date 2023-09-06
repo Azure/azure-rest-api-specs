@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2023-10-01-preview",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        [
+          {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/securityContact/default",
+            "name": "default",
+            "type": "Microsoft.Security/securityContact",
+            "properties": {
+              "notificationsByRole": {
+                "state": "On",
+                "roles": [
+                  "Owner",
+                  "Admin"
+                ]
+              },
+              "emails": "john@contoso.com;Jane@contoso.com",
+              "phone": "(214)275-4038",
+              "notificationsSources": [
+                {
+                  "type": "AttachPath",
+                  "state": "On",
+                  "minimalRiskLevel": "Critical"
+                },
+                {
+                  "type": "Alert",
+                  "state": "Off",
+                  "minimalRiskLevel": "Medium"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
