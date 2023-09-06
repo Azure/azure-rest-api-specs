@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2023-10-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-10-01-preview'
 input-file:
-  - Microsoft.DocumentDB/preview/2023-10-01-preview/cosmosdbmongocluster.json
+  - Microsoft.DocumentDB/preview/2023-10-01-preview/mongocluster.json
 ```
 
 ---
@@ -50,6 +50,7 @@ This is not used by Autorest itself.
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
