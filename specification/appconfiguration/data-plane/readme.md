@@ -26,7 +26,7 @@ These are the global settings for the AppConfiguration API.
 ``` yaml
 # common
 openapi-type: data-plane
-tag: package-1-0
+tag: package-2023-03-01
 ```
 
 ### Tag: package-2023-10-01
