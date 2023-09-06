@@ -32,21 +32,21 @@ model Target is TrackedResource<TargetProperties> {
 
 @doc("The properties of a Target resource.")
 model TargetProperties {
-  @doc("components description")
+  @doc("A list of components.")
   @OpenAPI.extension("x-ms-identifiers", [])  
   components?: ComponentProperties[];
   
   @doc("User-friendly name for the Target.")
   displayName?: string;
   
-  @doc("scope description")
+  @doc("Deployment scope (such as Kubernetes namespace).")
   scope?: string;
 
-  @doc("Defines the device topology for a target or instance")
+  @doc("Defines the device topology for a target or instance.")
   @OpenAPI.extension("x-ms-identifiers", [])  
   topologies?: TopologiesProperties[];
 
-  @doc("version description")
+  @doc("Version of the particular resource.")
   version?: string;
 
   @doc("The status of the last operation.")
@@ -56,26 +56,26 @@ model TargetProperties {
 
 @doc("Defines a desired runtime component.")
 model TopologiesProperties {
-  @doc("bindings description")
+  @doc("bindings description.")
   @OpenAPI.extension("x-ms-identifiers", [])
   bindings?: BindingProperties[];
 
-  @doc("Name of the component")
+  @doc("Name of the component.")
   device?:	string;
   
-  @doc("selector description")
+  @doc("Unique selector for the target such as a label.")
   selector?: {};
 }
 
-@doc("Defines a desired runtime component.")
+@doc("Defines a component binding for a provider.")
 model BindingProperties {
-  @doc("config description")
+  @doc("Configuration values for the binding.")
   config?: {};
 
-  @doc("Name of the component")
+  @doc("Name of the provider.")
   provider:	string;
   
-  @doc("role description")
+  @doc("Role that the provider binds to with the component.")
   role: {};
 }
 

@@ -30,21 +30,21 @@ model Instance is TrackedResource<InstanceProperties> {
   extendedLocation?: ExtendedLocation;
 }
 
-@doc("The properties of a Instance resource.")
+@doc("The properties of an Instance resource.")
 model InstanceProperties {
   @doc("User-friendly name for the Instance.")
   displayName?: string;
   
-  @doc("scope description")
+  @doc("Deployment scope (such as Kubernetes namespace).")
   scope?: string;
   
-  @doc("solution description")
+  @doc("Name of the solution")
   solution?: string;
 
-  @doc("target description")
+  @doc("Defines the Target the Instance will deploy to.")
   target?: TargetSelectorProperties;
 
-  @doc("version description")
+  @doc("Version of the particular resource.")
   version?: string;
 
   @doc("The status of the last operation.")
@@ -52,12 +52,12 @@ model InstanceProperties {
   provisioningState?: ProvisioningState;
 }
 
-@doc("The selected target description.")
+@doc("Properties of the reference target.")
 model TargetSelectorProperties {
-  @doc("Name of the target")
+  @doc("Name of the target.")
   name?:	string;
   
-  @doc("selector description")
+  @doc("Unique selector for the target such as a label.")
   selector?: {};
 }
 

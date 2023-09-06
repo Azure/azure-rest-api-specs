@@ -1071,20 +1071,20 @@
     },
     "BindingProperties": {
       "type": "object",
-      "description": "Defines a desired runtime component.",
+      "description": "Defines a component binding for a provider.",
       "properties": {
         "config": {
           "type": "object",
-          "description": "config description",
+          "description": "Configuration values for the binding.",
           "properties": {}
         },
         "provider": {
           "type": "string",
-          "description": "Name of the component"
+          "description": "Name of the provider."
         },
         "role": {
           "type": "object",
-          "description": "role description",
+          "description": "Role that the provider binds to with the component.",
           "properties": {}
         }
       },
@@ -1099,23 +1099,23 @@
       "properties": {
         "dependencies": {
           "type": "array",
-          "description": "dependencies description",
+          "description": "Component dependencies.",
           "items": {
             "type": "string"
           }
         },
         "name": {
           "type": "string",
-          "description": "Name of the component"
+          "description": "Name of the component."
         },
         "properties": {
           "type": "object",
-          "description": "properties description",
+          "description": "Properties of the component.",
           "properties": {}
         },
         "type": {
           "type": "string",
-          "description": "type description"
+          "description": "Component type."
         }
       },
       "required": [
@@ -1188,7 +1188,7 @@
     },
     "InstanceProperties": {
       "type": "object",
-      "description": "The properties of a Instance resource.",
+      "description": "The properties of an Instance resource.",
       "properties": {
         "displayName": {
           "type": "string",
@@ -1196,19 +1196,19 @@
         },
         "scope": {
           "type": "string",
-          "description": "scope description"
+          "description": "Deployment scope (such as Kubernetes namespace)."
         },
         "solution": {
           "type": "string",
-          "description": "solution description"
+          "description": "Name of the solution"
         },
         "target": {
           "$ref": "#/definitions/TargetSelectorProperties",
-          "description": "target description"
+          "description": "Defines the Target the Instance will deploy to."
         },
         "version": {
           "type": "string",
-          "description": "version description"
+          "description": "Version of the particular resource."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -1273,7 +1273,7 @@
           {
             "name": "Accepted",
             "value": "Accepted",
-            "description": "The resource is was accepted by the server."
+            "description": "The resource was accepted by the server."
           }
         ]
       }
@@ -1333,7 +1333,7 @@
       "properties": {
         "components": {
           "type": "array",
-          "description": "components description",
+          "description": "A list of components",
           "items": {
             "$ref": "#/definitions/ComponentProperties"
           },
@@ -1345,7 +1345,7 @@
         },
         "version": {
           "type": "string",
-          "description": "version description"
+          "description": "Version of the particular resource."
         },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
@@ -1422,7 +1422,7 @@
       "properties": {
         "components": {
           "type": "array",
-          "description": "components description",
+          "description": "A list of components.",
           "items": {
             "$ref": "#/definitions/ComponentProperties"
           },
@@ -1434,11 +1434,11 @@
         },
         "scope": {
           "type": "string",
-          "description": "scope description"
+          "description": "Deployment scope (such as Kubernetes namespace)."
         },
         "topologies": {
           "type": "array",
-          "description": "Defines the device topology for a target or instance",
+          "description": "Defines the device topology for a target or instance.",
           "items": {
             "$ref": "#/definitions/TopologiesProperties"
           },
@@ -1446,7 +1446,7 @@
         },
         "version": {
           "type": "string",
-          "description": "version description"
+          "description": "Version of the particular resource."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -1457,15 +1457,15 @@
     },
     "TargetSelectorProperties": {
       "type": "object",
-      "description": "The selected target description.",
+      "description": "Properties of the reference target.",
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the target"
+          "description": "Name of the target."
         },
         "selector": {
           "type": "object",
-          "description": "selector description",
+          "description": "Unique selector for the target such as a label.",
           "properties": {}
         }
       }
@@ -1489,7 +1489,7 @@
       "properties": {
         "bindings": {
           "type": "array",
-          "description": "bindings description",
+          "description": "bindings description.",
           "items": {
             "$ref": "#/definitions/BindingProperties"
           },
@@ -1497,11 +1497,11 @@
         },
         "device": {
           "type": "string",
-          "description": "Name of the component"
+          "description": "Name of the component."
         },
         "selector": {
           "type": "object",
-          "description": "selector description",
+          "description": "Unique selector for the target such as a label.",
           "properties": {}
         }
       }

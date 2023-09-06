@@ -32,14 +32,14 @@ model Solution is TrackedResource<SolutionProperties> {
 
 @doc("The properties of a Solution resource.")
 model SolutionProperties {
-  @doc("components description")
+  @doc("A list of components")
   @OpenAPI.extension("x-ms-identifiers", [])
   components?: ComponentProperties[];
   
   @doc("User-friendly name for the Solution.")
   displayName?: string;
 
-  @doc("version description")
+  @doc("Version of the particular resource.")
   version?: string;
 
   @doc("The status of the last operation.")

@@ -33,21 +33,21 @@ enum ProvisioningState {
   @doc("The resource is being deleted.")
   Deleting,
 
-  @doc("The resource is was accepted by the server.")
+  @doc("The resource was accepted by the server.")
   Accepted,
 }
 
 @doc("Defines a desired runtime component.")
 model ComponentProperties {
-  @doc("dependencies description")
+  @doc("Component dependencies.")
   dependencies?: string[];
 
-  @doc("Name of the component")
+  @doc("Name of the component.")
   name:	string;
   
-  @doc("properties description")
+  @doc("Properties of the component.")
   properties?: {};
   
-  @doc("type description")
+  @doc("Component type.")
   type: string;
 }
