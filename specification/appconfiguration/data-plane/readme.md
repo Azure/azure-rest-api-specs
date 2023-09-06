@@ -123,6 +123,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.AppConfiguration/stable/2023-10-01/appconfiguration.json
   - $(this-folder)/Microsoft.AppConfiguration/stable/1.0/appconfiguration.json
 
 ```
