@@ -944,6 +944,110 @@
           "final-state-via": "location"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/networkFunctionDefinitionGroups/{networkFunctionDefinitionGroupName}/networkFunctionDefinitionVersions/{networkFunctionDefinitionVersionName}/listHelmChartVersions": {
+      "post": {
+        "tags": [
+          "NetworkFunctionDefinitionVersions"
+        ],
+        "operationId": "HelmChartVersionsList_Post",
+        "description": "Get information about network function definition version overview.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionDefinitionGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionDefinitionVersionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ArtifactBodyParameters"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Request of getting list of helm chart versions is accepted.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactOverviewList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get network function definition version overview": {
+            "$ref": "./examples/ProxyPublisher/NetworkFunctionDefinitionVersionListHelmChartVersions.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/networkFunctionDefinitionGroups/{networkFunctionDefinitionGroupName}/networkFunctionDefinitionVersions/{networkFunctionDefinitionVersionName}/listImages": {
+      "post": {
+        "tags": [
+          "NetworkFunctionDefinitionVersions"
+        ],
+        "operationId": "ImageList_Post",
+        "description": "Get information about images in a helm chart in network function definition version overview.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionDefinitionGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionDefinitionVersionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ArtifactBodyParameters"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Request of getting list of images is accepted.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactOverviewList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get network function definition version overview": {
+            "$ref": "./examples/ProxyPublisher/NetworkFunctionDefinitionVersionListImages.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -1266,6 +1370,72 @@
       ],
       "x-ms-enum": {
         "name": "ArtifactType",
+        "modelAsString": true
+      }
+    },
+    "ArtifactOverviewList": {
+      "description": "Proxy Artifact list.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArtifactOverviewPropertiesValue"
+          },
+          "description": "The artifact list properties."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      }
+    },
+    "ArtifactOverviewPropertiesValue": {
+      "type": "object",
+      "properties": {
+        "artifactName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "artifactType": {
+          "$ref": "#/definitions/ArtifactType",
+          "description": "The artifact type."
+        },
+        "artifactVersion": {
+          "type": "string",
+          "description": "The artifact version."
+        },
+        "artifactState": {
+          "$ref": "#/definitions/ArtifactState",
+          "description": "The artifact state"
+        },
+        "shaHash": {
+          "type": "string",
+          "description": "The artifact sha hash."
+        },
+        "artifactSize": {
+          "type": "string",
+          "description": "The artifact size."
+        },
+        "mediaType": {
+          "type": "string",
+          "description": "The media type for artifact."
+        }
+      }
+    },
+    "ArtifactState": {
+      "type": "string",
+      "description": "The artifact state.",
+      "enum": [
+        "Unknown",
+        "Preview",
+        "Active",
+        "Deprecated"
+      ],
+      "x-ms-enum": {
+        "name": "ArtifactState",
         "modelAsString": true
       }
     }
