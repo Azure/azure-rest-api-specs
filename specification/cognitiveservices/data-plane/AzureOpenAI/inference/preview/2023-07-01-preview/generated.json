@@ -260,7 +260,8 @@
           "Starts the generation of a batch of images from a text caption": {
             "$ref": "./examples/start_generate_image.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/operations/images/{operationId}": {
@@ -421,7 +422,7 @@
         },
         "created": {
           "type": "integer",
-          "format": "int64",
+          "format": "unixtime",
           "description": "A timestamp when this job or item was created (in unix epochs)."
         },
         "expires": {
@@ -492,7 +493,7 @@
         },
         "created": {
           "type": "integer",
-          "format": "int32",
+          "format": "unixtime",
           "description": "The first timestamp associated with generation activity for this completions response,\nrepresented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970."
         },
         "choices": {
@@ -625,7 +626,8 @@
         },
         "content": {
           "type": "string",
-          "description": "The text associated with this message payload."
+          "description": "The text associated with this message payload.",
+          "x-nullable": true
         },
         "name": {
           "type": "string",
@@ -638,7 +640,8 @@
         }
       },
       "required": [
-        "role"
+        "role",
+        "content"
       ]
     },
     "ChatRole": {
@@ -672,7 +675,7 @@
           {
             "name": "function",
             "value": "function",
-            "description": "The role that provides function results for char completions."
+            "description": "The role that provides function results for chat completions."
           }
         ]
       }
@@ -729,7 +732,7 @@
         },
         "created": {
           "type": "integer",
-          "format": "int32",
+          "format": "unixtime",
           "description": "The first timestamp associated with generation activity for this completions response,\nrepresented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970."
         },
         "prompt_annotations": {
@@ -1004,6 +1007,10 @@
           "$ref": "#/definitions/ContentFilterResult",
           "description": "Describes language related to physical actions intended to purposely hurt, injure,\nor damage one’s body, or kill oneself.",
           "x-ms-client-name": "selfHarm"
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Describes an error returned if the content filtering system is\ndown or otherwise unable to complete the operation in time."
         }
       }
     },
@@ -1235,7 +1242,7 @@
       "properties": {
         "created": {
           "type": "integer",
-          "format": "int64",
+          "format": "unixtime",
           "description": "A timestamp when this job or item was created (in unix epochs)."
         },
         "data": {

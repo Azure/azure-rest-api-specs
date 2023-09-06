@@ -158,8 +158,9 @@ model Completions {
     represented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970.
     """)
   @projectedName("json", "created")
-  @projectedName("csharp", "InternalCreatedSecondsAfterUnixEpoch")
-  created: int32;
+  @projectedName("java", "createdAt")
+  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
+  created: utcDateTime;
 
   @doc("""
   Content filtering results for zero or more prompts in the request. In a streaming request, 
