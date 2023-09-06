@@ -25,5 +25,5 @@ description: M365CustomerKey Client
 openapi-type: arm
 
 input-file:
-    - Microsoft.M365CustomerKey\preview\2021-08-01-preview/M365CustomerKey.json
+    - Microsoft.M365CustomerKey/preview/2021-08-01-preview/M365CustomerKey.json
 ```
