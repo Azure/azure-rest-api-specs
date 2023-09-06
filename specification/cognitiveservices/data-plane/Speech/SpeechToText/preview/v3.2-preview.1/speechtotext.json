@@ -2136,7 +2136,7 @@
           "Custom Speech models:"
         ],
         "summary": "Copies a model from one subscription to another.",
-        "description": "This method is obsolete and will be removed in future API version. Please use models/{id}:copy instead.\r\nThis method can be used to copy a model from one speech resource to another one.\r\nOnly custom models can be copied to another speech resource.",
+        "description": "This method can be used to copy a model from one speech resource to another one.\r\nOnly custom models can be copied to another speech resource.",
         "operationId": "Models_CopyTo",
         "consumes": [
           "application/json"
@@ -2187,119 +2187,6 @@
         "x-ms-examples": {
           "Copy a model": {
             "$ref": "./examples/copy_model.json"
-          }
-        }
-      }
-    },
-    "/models/{id}:copy": {
-      "post": {
-        "tags": [
-          "Custom Speech models:"
-        ],
-        "summary": "Copies a model from one subscription to another.",
-        "description": "This method can be used to copy a model from this speech resource to a target one.\r\nThe authorization is obtained on the target speech resource.\r\nOnly custom models can be copied to another speech resource.",
-        "operationId": "Models_Copy",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "The identifier of the model that will be copied.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "in": "body",
-            "name": "modelCopyAuthorization",
-            "description": "The body contains the authorization to copy to the target speech resource.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ModelCopyAuthorization"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The response contains information about the entity as payload and its location as header.",
-            "schema": {
-              "$ref": "#/definitions/Operation"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before accessing the resource created in this operation.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "Operation-Location": {
-                "description": "The location of the operation to track progress.",
-                "type": "string",
-                "format": "uri"
-              }
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Copy a model from source resource to target resource": {
-            "$ref": "./examples/copy_model_with_authorization.json"
-          }
-        }
-      }
-    },
-    "/models:authorizecopy": {
-      "post": {
-        "tags": [
-          "Custom Speech models:"
-        ],
-        "summary": "Allows another speech resource (source) to copy a model to this speech resource (target).",
-        "description": "This method can be used to allow copying a model from another speech resource.\r\nOnly custom models can be copied from another speech resource.",
-        "operationId": "Models_AuthorizeCopy",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "modelCopyAuthorizationDefinition",
-            "description": "The body contains the Azure Resource ID of the source speech resource.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ModelCopyAuthorizationDefinition"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The response contains information about the entity as payload and its location as header.",
-            "schema": {
-              "$ref": "#/definitions/ModelCopyAuthorization"
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create a copy model authorization on target resource": {
-            "$ref": "./examples/create_copy_model_authorization.json"
           }
         }
       }
@@ -2507,57 +2394,6 @@
         "x-ms-examples": {
           "Get a file": {
             "$ref": "./examples/get_model_file.json"
-          }
-        }
-      }
-    },
-    "/operations/models/copy/{id}": {
-      "get": {
-        "tags": [
-          "Custom Speech operations:"
-        ],
-        "summary": "Gets the operation identified by the given ID.",
-        "operationId": "Operations_GetModelCopy",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "The identifier of the operation.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Operation"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get model copy operation pending": {
-            "$ref": "./examples/get_operation_copy_model_pending.json"
-          },
-          "Get model copy operation": {
-            "$ref": "./examples/get_operation_copy_model.json"
           }
         }
       }
@@ -5701,64 +5537,6 @@
         }
       }
     },
-    "ModelCopyAuthorization": {
-      "title": "ModelCopyAuthorization",
-      "required": [
-        "expirationDateTime",
-        "id",
-        "sourceResourceId",
-        "targetResourceEndpoint",
-        "targetResourceId",
-        "targetResourceRegion"
-      ],
-      "type": "object",
-      "properties": {
-        "targetResourceRegion": {
-          "description": "The region (aka location) of the target speech resource (e.g., westus2).",
-          "minLength": 1,
-          "type": "string"
-        },
-        "targetResourceId": {
-          "description": "The Azure Resource ID of the target speech resource.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "targetResourceEndpoint": {
-          "description": "The endpoint (base url) of the target resource (with custom domain name when it is used).",
-          "minLength": 1,
-          "type": "string"
-        },
-        "sourceResourceId": {
-          "description": "The Azure Resource ID of the source speech resource.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "expirationDateTime": {
-          "format": "date-time",
-          "description": "The expiration date of this copy authorization.",
-          "type": "string"
-        },
-        "id": {
-          "description": "The ID of this copy authorization.",
-          "minLength": 1,
-          "type": "string"
-        }
-      }
-    },
-    "ModelCopyAuthorizationDefinition": {
-      "title": "ModelCopyAuthorizationDefinition",
-      "required": [
-        "sourceResourceId"
-      ],
-      "type": "object",
-      "properties": {
-        "sourceResourceId": {
-          "description": "The Azure Resource ID of the source speech resource.",
-          "minLength": 1,
-          "type": "string"
-        }
-      }
-    },
     "ModelFile": {
       "title": "ModelFile",
       "type": "object",
@@ -5825,60 +5603,6 @@
           "$ref": "#/definitions/EntityReference"
         }
       }
-    },
-    "Operation": {
-      "title": "Operation",
-      "required": [
-        "id"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "format": "uuid",
-          "description": "The identifier of this Operation.",
-          "type": "string"
-        },
-        "result": {
-          "$ref": "#/definitions/OperationResult"
-        },
-        "error": {
-          "$ref": "#/definitions/EntityError"
-        },
-        "self": {
-          "format": "uri",
-          "description": "The location of this entity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastActionDateTime": {
-          "format": "date-time",
-          "description": "The time-stamp when the current status was entered.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
-          "type": "string",
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/Status"
-        },
-        "createdDateTime": {
-          "format": "date-time",
-          "description": "The time-stamp when the object was created.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "OperationResult": {
-      "title": "OperationResult",
-      "type": "object",
-      "properties": {
-        "link": {
-          "format": "uri",
-          "description": "The link to the result of the operation.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "readOnly": true
     },
     "OutputFormatType": {
       "title": "OutputFormatType",
