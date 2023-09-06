@@ -1854,10 +1854,6 @@
           "type": "string",
           "description": "Vector Fields of type Collection(Edm.Single) to be included in the vector searched."
         },
-        "filterType": {
-          "$ref": "#/definitions/VectorQueryFilterType",
-          "description": "Determines whether or not filters are applied before or after the vector search is performed."
-        },
         "exhaustive": {
           "type": "boolean",
           "description": "If set to true, will compute a set of ground truth KNN vectors for evaluating recall."
@@ -2562,16 +2558,16 @@
           "type": "string",
           "description": "The comma-separated list of field names used for semantic search."
         },
-        "vector": {
-          "$ref": "#/definitions/Vector",
-          "description": "The query parameters for vector and hybrid search queries."
-        },
         "vectors": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Vector"
           },
-          "description": "The query parameters for multi-vector search queries."
+          "description": "The query parameters for vector and hybrid search queries."
+        },
+        "filterType": {
+          "$ref": "#/definitions/VectorQueryFilterType",
+          "description": "Determines whether or not filters are applied before or after the vector search is performed."
         }
       },
       "description": "Parameters for filtering, sorting, faceting, paging, and other search query behaviors."
