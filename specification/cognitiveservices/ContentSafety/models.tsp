@@ -255,15 +255,15 @@ enum ContentModality {
 @doc("Modality type.")
 enum SeverityThreshold {
   @doc("The threshold value is 0.")
-  Zero：0,
+  Zero: 0,
   @doc("The threshold value is 2.")
-  Two：2,
+  Two: 2,
   @doc("The threshold value is 4.")
-  Four：4,
+  Four: 4,
   @doc("The threshold value is 6.")
-  Six：6,
+  Six: 6,
   @doc("The threshold value is a maximum value.")
-  Maximum: -1
+  Maximum: -1,
 }
 
 @added(ContentSafety.Versions.v2023_10_15_Preview)
