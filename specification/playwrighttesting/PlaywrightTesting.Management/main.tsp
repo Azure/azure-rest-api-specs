@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-//import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -23,8 +22,6 @@ namespace Microsoft.AzurePlaywrightService;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-path-segment-invalid-chars" "Existing Template"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-key-invalid-chars" "Existing template"
 @doc("An account resource")
 model Account is TrackedResource<AccountProperties> {
   @doc("Name of account")
@@ -82,8 +79,6 @@ enum ProvisioningState {
 interface Accounts
   extends TrackedResourceOperations<Account, AccountProperties> {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-path-segment-invalid-chars" "Existing Template"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-key-invalid-chars" "Existing template"
 @doc("The location of quota resource")
 @subscriptionResource
 model Location {
@@ -95,8 +90,6 @@ model Location {
   name: string;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-path-segment-invalid-chars" "Existing Template"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-key-invalid-chars" "Existing template"
 @doc("A quota resource")
 @parentResource(Location)
 model Quota is ProxyResource<QuotaProperties> {
@@ -137,11 +130,11 @@ model FreeTrialProperties {
   @visibility("read")
   expiryAt: utcDateTime;
 
-  @doc("The free-trial allocated limit value.")
+  @doc("The free-trial allocated limit value eg. allocated free minutes.")
   @visibility("read")
   allocatedValue: int32;
 
-  @doc("The free-trial used value.")
+  @doc("The free-trial used value eg. used free minutes.")
   @visibility("read")
   usedValue: int32;
 
