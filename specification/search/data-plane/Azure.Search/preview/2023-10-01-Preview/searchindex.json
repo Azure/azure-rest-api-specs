@@ -1856,7 +1856,7 @@
         },
         "exhaustive": {
           "type": "boolean",
-          "description": "If set to true, will compute a set of ground truth KNN vectors for evaluating recall."
+          "description": "If set to true, will compute the exact nearest neighbors by searching through all the training points returning the true k nearest neighbors."
         }
       },
       "required": [
@@ -1900,14 +1900,14 @@
       },
       "description": "The query parameters to use for vector search when a text value that needs to be vectorized is provided."
     },
-    "VectorQueryFilterType": {
+    "VectorFilterMode": {
       "type": "string",
       "enum": [
         "postFilter",
         "preFilter"
       ],
       "x-ms-enum": {
-        "name": "VectorQueryFilterType",
+        "name": "VectorFilterMode",
         "modelAsString": true,
         "values": [
           {
@@ -2565,9 +2565,9 @@
           },
           "description": "The query parameters for vector and hybrid search queries."
         },
-        "filterType": {
-          "$ref": "#/definitions/VectorQueryFilterType",
-          "description": "Determines whether or not filters are applied before or after the vector search is performed."
+        "vectorFilterMode": {
+          "$ref": "#/definitions/VectorFilterMode",
+          "description": "Determines whether or not filters are applied before or after the vector search is performed. Default is 'preFilter'."
         }
       },
       "description": "Parameters for filtering, sorting, faceting, paging, and other search query behaviors."
