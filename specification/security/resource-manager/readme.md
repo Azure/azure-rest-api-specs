@@ -92,12 +92,8 @@ These settings apply only when `--tag=package-preview-2023-10` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-10'
 input-file:
-  - Microsoft.Security/preview/2023-10-01-preview/alertsSuppressionRules.json
-  - Microsoft.Security/preview/2023-10-01-preview/assessmentMetadata.json
-  - Microsoft.Security/preview/2023-10-01-preview/assessments.json
   - Microsoft.Security/preview/2023-10-01-preview/automations.json
-  - Microsoft.Security/preview/2023-10-01-preview/regulatoryCompliance.json
-  - Microsoft.Security/preview/2023-10-01-preview/subAssessments.json
+  - Microsoft.Security/preview/2023-10-01-preview/securityContact.json
 ```
 ### Tag: package-preview-2023-09
 
