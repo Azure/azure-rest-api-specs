@@ -593,14 +593,29 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "The type of action.",
+          "description": "The type of the action.",
           "enum": [
+            "Rotate",
             "rotate",
-            "notify"
+            "Notify"
           ],
           "x-ms-enum": {
             "name": "KeyRotationPolicyActionType",
-            "modelAsString": false
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Rotate",
+                "description": "Rotate the key based on the key policy. Key Vault only. Managed HSM uses camelCase 'rotate' instead."
+              },
+              {
+                "value": "rotate",
+                "description": "Rotate the key based on the key policy. Managed HSM only. Key Vault uses PascalCase 'Rotate' instead."
+              },
+              {
+                "value": "Notify",
+                "description": "Trigger Event Grid events. Defaults to 30 days before expiry. Key Vault only."
+              }
+            ]
           }
         }
       }
