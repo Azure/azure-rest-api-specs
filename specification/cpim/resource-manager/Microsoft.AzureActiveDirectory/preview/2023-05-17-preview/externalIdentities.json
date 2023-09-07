@@ -1012,7 +1012,10 @@
           "description": "Origin of the operation",
           "type": "string"
         }
-      }
+      },
+      "x-ms-identifiers": [
+        "name"
+      ]
     },
     "OperationDisplay": {
       "description": "Operation display payload",
@@ -1428,6 +1431,12 @@
           "items": {
             "$ref": "#/definitions/GuestUsagesResource"
           }
+        },
+        "nextLink": {
+          "description": "The URL to get the next set of Guest Usages resources.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true
         }
       }
     },
