@@ -1,0 +1,104 @@
+{
+  "title": "Pipelines_ListByInstance",
+  "operationId": "Pipelines_ListByInstance",
+  "parameters": {
+    "api-version": "2023-06-26-preview",
+    "subscriptionId": "e0aaa3df-e9a4-456a-9824-3c3b5c438110",
+    "resourceGroupName": "IotOperationsDataProcessor-rg",
+    "instanceName": "IotOperationsDataProcessor-instance-name"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "displayName": "Sample Pipeline",
+              "description": "This is a sample pipeline.",
+              "enabled": true,
+              "input": {
+                "displayName": "MQTT Input Example",
+                "description": "Sample MQTT input stage",
+                "type": "input/mqtt@v1",
+                "broker": "mqtt://azedge-dmqtt-frontend:1883",
+                "qos": 1,
+                "topics": [
+                  "assets/a/#",
+                  "assets/b/#"
+                ],
+                "authentication": {
+                  "type": "usernamePassword",
+                  "username": "client1",
+                  "password": "<redacted>"
+                },
+                "format": {
+                  "type": "json"
+                },
+                "partitionCount": 4,
+                "partitionStrategy": {
+                  "type": "key",
+                  "expression": ".topic | split(\"/\") | .[2]"
+                },
+                "next": [
+                  "sample-transform"
+                ]
+              },
+              "stages": {
+                "sample-transform": {
+                  "displayName": "Transform Example",
+                  "description": "Sample transform stage",
+                  "type": "processor/transform@v1",
+                  "expression": ".payload.temperature |= ((.-32) * (5/9))",
+                  "next": [
+                    "sample-output"
+                  ]
+                },
+                "sample-output": {
+                  "displayName": "MQTT Output Example",
+                  "description": "Sample MQTT output stage",
+                  "type": "output/mqtt@v1",
+                  "broker": "mqtt://azedge-dmqtt-frontend:1883",
+                  "qos": 1,
+                  "topic": {
+                    "type": "static",
+                    "value": "assets/normalized"
+                  },
+                  "authentication": {
+                    "type": "usernamePassword",
+                    "username": "client1",
+                    "password": "<redacted>"
+                  },
+                  "format": {
+                    "type": "json",
+                    "path": ".payload"
+                  }
+                }
+              },
+              "provisioningState": "Succeeded"
+            },
+            "extendedLocation": {
+              "name": "/subscriptions/e0aaa3df-e9a4-456a-9824-3c3b5c438110/resourceGroups/IotOperationsDataProcessor-rg/providers/Microsoft.ExtendedLocation/customLocations/dev-space",
+              "type": "CustomLocation"
+            },
+            "tags": {
+              "tag1": "value1"
+            },
+            "location": "westus",
+            "id": "/subscriptions/e0aaa3df-e9a4-456a-9824-3c3b5c438110/resourceGroups/IotOperationsDataProcessor-rg/providers/Microsoft.IotOperationsDataProcessor/instances/IotOperationsDataProcessor-instance-name/pipelines/IotOperationsDataProcessor-pipeline-name",
+            "name": "IotOperationsDataProcessor-pipeline-name",
+            "type": "Microsoft.IotOperationsDataProcessor/instances/pipelines",
+            "systemData": {
+              "createdBy": "IotOperationsDataProcessor@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2023-07-14T23:18:33.262Z",
+              "lastModifiedBy": "IotOperationsDataProcessor@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-07-14T23:18:33.262Z"
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/a"
+      }
+    }
+  }
+}
