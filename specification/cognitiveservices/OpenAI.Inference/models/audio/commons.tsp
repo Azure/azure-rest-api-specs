@@ -1,13 +1,16 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Azure.OpenAI;
 
 @doc("Defines the format of the output.")
+@added(ServiceApiVersions.v2023_09_01_Preview)
 enum AudioTranscriptionFormat {
     @doc("Lorem ipsum")
     simpleJson: "json",
@@ -30,6 +33,7 @@ Transcription request.
 Requesting format 'json' will result on only the 'text' field being set.
 For more output data use 'verbose_json.
 """)
+@added(ServiceApiVersions.v2023_09_01_Preview)
 model AudioTranscriptionOptionsCommon {
     @doc("""
     The content type for the operation. Always multipart/form-data for this operation.
@@ -54,15 +58,26 @@ model AudioTranscriptionOptionsCommon {
     If set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.
     """)
     temperature?: float32 = 0;
+
+    @doc("""
+    The model name to provide as part of this transcription request.
+    Not applicable to Azure OpenAI, where deployment information should be included in the Azure
+    resource URI that's connected to.
+    """)
+    @projectedName("json", "model")
+    @projectedName("csharp", "InternalNonAzureModelName")
+    `model`?: string;
 }
 
 @doc("Lorem ipsum")
+@added(ServiceApiVersions.v2023_09_01_Preview)
 model AudioTranscriptionSimpleJson {
     @doc("Transcribed text.")
     text: string;
 }
 
 @doc("Audio transcription task type")
+@added(ServiceApiVersions.v2023_09_01_Preview)
 enum AudioTranscriptionTask {
     @doc("Value for a transcription task")
     transcribe: "transcribe",
@@ -72,6 +87,7 @@ enum AudioTranscriptionTask {
 }
 
 @doc("Transcription segment.")
+@added(ServiceApiVersions.v2023_09_01_Preview)
 model AudioTranscriptionSegment {
     @doc("Segment identifier.")
     id: int32;
@@ -108,6 +124,7 @@ model AudioTranscriptionSegment {
 }
 
 @doc("Transcription response.")
+@added(ServiceApiVersions.v2023_09_01_Preview)
 model AudioTranscriptionVerboseJson extends AudioTranscriptionSimpleJson {
     @doc("Audio transcription task.")
     task: AudioTranscriptionTask;

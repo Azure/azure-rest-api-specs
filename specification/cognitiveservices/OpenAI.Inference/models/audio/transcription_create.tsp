@@ -1,14 +1,17 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 
 import "./commons.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Azure.OpenAI;
 
 @doc("Lorem ipsum")
+@added(ServiceApiVersions.v2023_09_01_Preview)
 model AudioTranscriptionOptions {
     ...AudioTranscriptionOptionsCommon;
 
@@ -17,6 +20,7 @@ model AudioTranscriptionOptions {
 }
 
 @doc("Lorem ipsum")
+@added(ServiceApiVersions.v2023_09_01_Preview)
 model AudioTranscriptionOptionsSimpleJson {
     ...AudioTranscriptionOptions;
 
@@ -26,6 +30,7 @@ model AudioTranscriptionOptionsSimpleJson {
 }
 
 @doc("Lorem ipsum")
+@added(ServiceApiVersions.v2023_09_01_Preview)
 model AudioTranscriptionOptionsVerboseJson {
     ...AudioTranscriptionOptions;
 
@@ -35,6 +40,7 @@ model AudioTranscriptionOptionsVerboseJson {
 }
 
 @doc("Lorem ipsum")
+@added(ServiceApiVersions.v2023_09_01_Preview)
 model AudioTranscriptionOptionsPlainText {
     ...AudioTranscriptionOptions;
 
@@ -44,6 +50,7 @@ model AudioTranscriptionOptionsPlainText {
 }
 
 @doc("Lorem ipsum")
+@added(ServiceApiVersions.v2023_09_01_Preview)
 model AudioTranscriptionOptionsSrt {
     ...AudioTranscriptionOptions;
 
@@ -53,6 +60,7 @@ model AudioTranscriptionOptionsSrt {
 }
 
 @doc("Lorem ipsum")
+@added(ServiceApiVersions.v2023_09_01_Preview)
 model AudioTranscriptionOptionsVtt {
     ...AudioTranscriptionOptions;
 
