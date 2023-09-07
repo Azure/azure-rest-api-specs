@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2023-10-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-10-01-preview'
 input-file:
-  - Microsoft.DocumentDB/preview/2023-10-01-preview/mongocluster.json
+  - Microsoft.DocumentDB/preview/2023-10-01-preview/mongoCluster.json
 ```
 
 ---
