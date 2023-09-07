@@ -20,27 +20,17 @@ typescript:
 
 directive:
   - from: containerregistry_build.json
-    where: $.definitions.TaskRun.properties
+    where: $.definitions.IdentityProperties.properties
     transform: >
-      $['identity']['$ref'] = "../2023-06-01-preview/containerregistry.json#/definitions/IdentityProperties";
+      $.principalId['readOnly'] = true;
+      $.tenantId['readOnly'] = true;
   - from: containerregistry_build.json
-    where: $.definitions.Task.properties
+    where: $.definitions.UserIdentityProperties.properties
     transform: >
-      $['identity']['$ref'] = "../2023-06-01-preview/containerregistry.json#/definitions/IdentityProperties";
+      $.principalId['readOnly'] = true;
+      $.clientId['readOnly'] = true;
   - from: containerregistry_build.json
-    where: $.definitions.TaskRunUpdateParameters.properties
+    where: $.definitions.ErrorResponse
     transform: >
-      $['identity']['$ref'] = "../2023-06-01-preview/containerregistry.json#/definitions/IdentityProperties";
-  - from: containerregistry_build.json
-    where: $.definitions.TaskUpdateParameters.properties
-    transform: >
-      $['identity']['$ref'] = "../2023-06-01-preview/containerregistry.json#/definitions/IdentityProperties";
-  - from: containerregistry_build.json
-    where: $.definitions
-    transform: >
-      delete $.IdentityProperties;
-  - from: containerregistry_build.json
-    where: $.definitions
-    transform: >
-      delete $.UserIdentityProperties;
+      $['x-ms-client-name'] = 'ErrorResponseForContainerRegistry';
 ```
