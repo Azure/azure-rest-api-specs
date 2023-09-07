@@ -50,6 +50,8 @@ These settings apply only when `--tag=package-preview-2023-09` is specified on t
 input-file:
   - Microsoft.ResourceGraph/preview/2023-09-01-preview/resourcecopilot.json
   - Microsoft.ResourceGraph/preview/2023-09-01-preview/resourcegraph.json
+  - Microsoft.ResourceGraph/preview/2021-06-01-preview/resourceshistory.json
+  - Microsoft.ResourceGraph/preview/2020-09-01-preview/resourcechanges.json
 ```
 ### Tag: package-2022-10
 
