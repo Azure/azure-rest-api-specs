@@ -31,6 +31,17 @@ Requesting format 'json' will result on only the 'text' field being set.
 For more output data use 'verbose_json.
 """)
 model AudioTranscriptionOptionsCommon {
+    @doc("""
+    The content type for the operation. Always multipart/form-data for this operation.
+    You need to set your content separtor with the boundary value hardcode here: "azure_openai"
+    """)
+    @header("content-type")
+    contentType: "multipart/form-data; boundary=azure_openai";
+
+    @doc("The content length of the operation. This needs to be provided by the caller.")
+    @header("content-length")
+    contentLength: int64;
+
     @doc("The audio file object to transcribe.")
     file: bytes;
 

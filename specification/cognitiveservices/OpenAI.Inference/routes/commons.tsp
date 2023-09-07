@@ -22,27 +22,13 @@ alias AOAIDeploymentAction<
   U extends {}
 > = Azure.Core.ResourceAction<Deployment, T, U>;
 
-alias AOAIMultipartHeaders = Azure.Core.Traits.RequestHeadersTrait<{
-  @doc("""
-  The content type for the operation. Always multipart/form-data for this operation.
-  You need to set your content separtor with the boundary value hardcode here: "azure_openai"
-  """)
-  @header("content-type")
-  contentType: "multipart/form-data; boundary=azure_openai";
-
-  @doc("The content length of the operation. This needs to be provided by the caller.")
-  @header("content-length")
-  contentLength: int64;
-}>;
-
 alias AOAIMultipartRequestDeploymentAction<
   T extends {},
   U extends {}
-> = Azure.Core.StandardResourceOperations.ResourceAction<Deployment, T, U, AOAIMultipartHeaders>;
+> = Azure.Core.StandardResourceOperations.ResourceAction<Deployment, T, U>;
 
 alias AOAIMultipartTextPlainAction<T extends {}> = Azure.Core.Foundations.ResourceOperation<
   Deployment,
   T,
-  string,
-  AOAIMultipartHeaders
+  string
 >;
