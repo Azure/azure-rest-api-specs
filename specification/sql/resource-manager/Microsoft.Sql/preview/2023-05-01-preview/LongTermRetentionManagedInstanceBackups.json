@@ -55,6 +55,29 @@
             }
           },
           {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of elements in the collection to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of elements to return from the collection.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that filters elements in the collection.",
+            "required": false,
+            "type": "string"
+          },
+          {
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -72,12 +95,16 @@
             "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
           }
         },
+        "x-ms-odata": "#/definitions/ManagedInstanceLongTermRetentionBackup",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Get all long term retention backups under the location.": {
             "$ref": "./examples/ManagedInstanceLongTermRetentionBackupListByLocation.json"
+          },
+          "Get all long term retention backups under the location with maximal paramethers.": {
+            "$ref": "./examples/ManagedInstanceLongTermRetentionBackupListByLocationMax.json"
           }
         }
       }
@@ -269,7 +296,7 @@
             "description": "Successfully deleted the backup."
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 InvalidLongTermRetentionManagedInstanceBackupId - Invalid long term retention backup identifier for Managed Instances.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources."
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 InvalidLongTermRetentionManagedInstanceBackupId - Invalid long term retention backup identifier for Managed Instances.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources."
           },
           "202": {
             "description": "Accepted"
@@ -398,6 +425,29 @@
             }
           },
           {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of elements in the collection to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of elements to return from the collection.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that filters elements in the collection.",
+            "required": false,
+            "type": "string"
+          },
+          {
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -415,12 +465,16 @@
             "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
           }
         },
+        "x-ms-odata": "#/definitions/ManagedInstanceLongTermRetentionBackup",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Get all long term retention backups under the location.": {
             "$ref": "./examples/ResourceGroupBasedManagedInstanceLongTermRetentionBackupListByLocation.json"
+          },
+          "Get all long term retention backups under the location with maximal paramethers.": {
+            "$ref": "./examples/ResourceGroupBasedManagedInstanceLongTermRetentionBackupListByLocationMax.json"
           }
         }
       }
@@ -621,7 +675,7 @@
             "description": "Successfully deleted the backup."
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 InvalidLongTermRetentionManagedInstanceBackupId - Invalid long term retention backup identifier for Managed Instances.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources."
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 InvalidLongTermRetentionManagedInstanceBackupId - Invalid long term retention backup identifier for Managed Instances.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources."
           },
           "202": {
             "description": "Accepted"
@@ -798,6 +852,19 @@
           "readOnly": true,
           "x-ms-enum": {
             "name": "BackupStorageRedundancy",
+            "modelAsString": true
+          }
+        },
+        "backupStorageAccessTier": {
+          "description": "The BackupStorageAccessTier for the LTR backup",
+          "enum": [
+            "Hot",
+            "Archive"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "BackupStorageAccessTier",
             "modelAsString": true
           }
         }
