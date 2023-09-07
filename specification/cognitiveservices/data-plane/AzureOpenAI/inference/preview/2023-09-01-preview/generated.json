@@ -82,6 +82,15 @@
             "type": "string"
           },
           {
+            "name": "content-length",
+            "in": "header",
+            "description": "The content length of the operation. This needs to be provided by the caller.",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "x-ms-client-name": "contentLenght"
+          },
+          {
             "$ref": "#/parameters/AudioTranscriptionOptionsCommon.file"
           },
           {
@@ -140,6 +149,15 @@
             "description": "Specifies either the model deployment name (when using Azure OpenAI) or model name (when using non-Azure OpenAI) to use for this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "content-length",
+            "in": "header",
+            "description": "The content length of the operation. This needs to be provided by the caller.",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "x-ms-client-name": "contentLenght"
           },
           {
             "$ref": "#/parameters/AudioTranscriptionOptionsCommon.file"
