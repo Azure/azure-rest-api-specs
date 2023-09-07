@@ -26,7 +26,7 @@ These are the global settings for the AppPlatform API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-05
+tag: package-preview-2023-07
 ```
 
 ### Suppression
@@ -44,11 +44,30 @@ directive:
   - suppress: R3021
     from: appplatform.json
     reason:  The resource type name 'Spring' is a trademark so cannot be changed to be camel-case
+  - suppress: PathResourceTypeNameCamelCase
+    from: appplatform.json
+    reason:  The resource type name 'Spring' is a trademark so cannot be changed to be camel-case
+  - suppress: LroErrorContent
+    from: appplatform.json
+    reason:  Keeping it for legacy tooling. Will fix the error in next version
     #where:
     #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/configServers/default"]
     #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/monitoringSettings/default"]
+
+suppressions:
+  - code: LroPostReturn
+    reason: start,stop,flushDNSsetting api do not have return body in async operation
 ```
 
+
+### Tag: package-preview-2023-07
+
+These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-07'
+input-file:
+  - Microsoft.AppPlatform/preview/2023-07-01-preview/appplatform.json
+```
 
 ### Tag: package-preview-2023-05
 

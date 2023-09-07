@@ -40,6 +40,16 @@ input-file:
 - Microsoft.NetApp/stable/2022-11-01/netapp.json
 ```
 
+### Tag: package-netapp-2022-11-01-preview
+
+These settings apply only when `--tag=package-netapp-2022-11-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-netapp-2022-11-01-preview'
+input-file:
+- Microsoft.NetApp/preview/2022-11-01-preview/netapp.json
+```
+
+
 ### Tag: package-netapp-2022-09-01
 
 These settings apply only when `--tag=package-netapp-2022-09-01` is specified on the command line.
@@ -334,3 +344,15 @@ terraform:
     clear-output-folder: false
 ```
 
+# Suppressions
+
+``` yaml
+suppressions:
+  - code: LroPostReturn
+    reason: The linter incorrectly flags LRO POST operations with no payload response, should allow to be a 202/204 NoContent for the LRO empty response case
+    from: netapp.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/backupVaults/{backupVaultName}/backups/{backupName}/restoreFiles"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/migrateBackups"].post      
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/migrateBackups"].post
+```
