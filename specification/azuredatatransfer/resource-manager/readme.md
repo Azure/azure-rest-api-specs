@@ -28,15 +28,23 @@ These are the global settings for the azuredatatransfer.
 title: azuredatatransferrpClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2022-12-13
+tag: package-2023-06
 ```
 
 
+### Tag: package-2023-06
+
+These settings apply only when `--tag=package-2023-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-06'
+input-file:
+  - Microsoft.AzureDataTransfer/stable/2023-06-28/azuredatatransfer.json
+```
 ### Tag: package-preview-2022-12-13
 
 These settings apply only when `--tag=package-preview-2022-12-13` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-12-13'
+``` yaml $(tag) == 'package-preview-2022-12-13'
 input-file:
   - Microsoft.AzureDataTransfer/preview/2022-12-13-preview/azuredatatransfer.json
 ```

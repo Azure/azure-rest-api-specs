@@ -1,0 +1,108 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "packetCoreControlPlaneName": "testPacketCoreControlPlane",
+    "packetCoreDataPlaneName": "testPacketCoreDataPlane",
+    "attachedWifiSsidName": "testAttachedWifiSsid",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "accessInterface": {
+          "deviceInterface": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet"
+          }
+        },
+        "wifiUserEquipmentAddressPoolSubnet": [
+          {
+            "subnet": {
+              "edgeVirtualNetwork": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/testPacketCoreControlPlane/packetCoreDataPlanes/testPacketCoreDataPlane/edgevirtualnetworks/testEdgeVirtualNetwork"
+              },
+              "edgeSubnetName": "testEdgeSubnet"
+            },
+            "type": "Unmanaged"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testAttachedWifiSsidCreate",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/testPacketCoreControlPlane/packetCoreDataPlanes/testPacketCoreDataPlane/attachedWifiSsids/testAttachedWifiSsid",
+        "type": "Microsoft.MobileNetwork/attachedWifiSsid",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "location": "eastus",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "accessInterface": {
+            "deviceInterface": {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet"
+            }
+          },
+          "wifiUserEquipmentAddressPoolSubnet": [
+            {
+              "subnet": {
+                "edgeVirtualNetwork": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/testPacketCoreControlPlane/packetCoreDataPlanes/testPacketCoreDataPlane/edgevirtualnetworks/testEdgeVirtualNetwork"
+                },
+                "edgeSubnetName": "testEdgeSubnet"
+              },
+              "type": "Unmanaged"
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.MobileNetwork/locations/testLocation/operationStatuses/testOperation?api-version=2023-07-01-preview"
+      },
+      "body": {
+        "name": "testAttachedWifiSsidCreate",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/testPacketCoreControlPlane/packetCoreDataPlanes/testPacketCoreDataPlane/attachedWifiSsids/testAttachedWifiSsid",
+        "type": "Microsoft.MobileNetwork/attachedWifiSsid",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "location": "eastus",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "accessInterface": {
+            "deviceInterface": {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet"
+            }
+          },
+          "wifiUserEquipmentAddressPoolSubnet": [
+            {
+              "subnet": {
+                "edgeVirtualNetwork": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/testPacketCoreControlPlane/packetCoreDataPlanes/testPacketCoreDataPlane/edgevirtualnetworks/testEdgeVirtualNetwork"
+                },
+                "edgeSubnetName": "testEdgeSubnet"
+              },
+              "type": "Unmanaged"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

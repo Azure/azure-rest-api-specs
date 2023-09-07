@@ -3,10 +3,18 @@
     "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
     "resourceGroupName": "test-rg",
     "virtualmachinesName": "test-vm",
-    "api-version": "2020-11-01-preview"
+    "api-version": "2021-07-01-preview"
   },
   "responses": {
-    "200": {},
-    "202": {}
+    "200": {
+      "headers": {
+        "azure-asyncoperation": "http://azure.async.operation/status"
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "http://azure.async.operation/status"
+      }
+    }
   }
 }

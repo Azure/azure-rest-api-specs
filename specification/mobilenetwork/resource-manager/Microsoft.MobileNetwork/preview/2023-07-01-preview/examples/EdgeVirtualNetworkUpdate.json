@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "packetCoreControlPlaneName": "testPacketCoreControlPlane",
+    "packetCoreDataPlaneName": "testPacketCoreDataPlane",
+    "edgeVirtualNetworkName": "testEdgeVirtualNetwork",
+    "parameters": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testEdgeVirtualNetworkPatch - TODO: EXAMPLE NOT FINISHED",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/testPacketCoreControlPlane/packetCoreDataPlanes/testPacketCoreDataPlane/edgevirtualnetwork/testEdgeVirtualNetwork",
+        "type": "Microsoft.MobileNetwork/edgevirtualnetworks",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "location": "eastus",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "subnets": [
+            {
+              "name": "testEdgeSubnet",
+              "addressPrefixes": [
+                {
+                  "ipv4Prefix": "10.1.1.0/24"
+                }
+              ]
+            }
+          ],
+          "defaultRouteInterface": {
+            "deviceInterface": {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet"
+            }
+          }
+        }
+      }
+    }
+  }
+}

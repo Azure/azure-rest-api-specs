@@ -25,6 +25,7 @@ batch:
   - tag: schema-testbase-2023-01-16-preview
   - tag: schema-testbase-2023-05-15-preview
   - tag: schema-testbase-2023-06-01-preview
+  - tag: schema-testbase-2023-06-15-preview
   - tag: schema-testbase-2023-08-15-preview
 ```
 
@@ -216,6 +217,19 @@ input-file:
   - Microsoft.TestBase/preview/2023-06-01-preview/testbase.json
   - Microsoft.TestBase/preview/2023-06-01-preview/draftpackage.json
   - Microsoft.TestBase/preview/2023-06-01-preview/actionrequest.json
+```
+
+### Tag: schema-testbase-2023-06-15-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-testbase-2023-06-15-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.TestBase/preview/2023-06-15-preview/testbase.json
+  - Microsoft.TestBase/preview/2023-06-15-preview/draftpackage.json
+  - Microsoft.TestBase/preview/2023-06-15-preview/testconfiguration.json
+  - Microsoft.TestBase/preview/2023-06-15-preview/actionrequest.json
+  - Microsoft.TestBase/preview/2023-06-15-preview/customimage.json
 ```
 
 ### Tag: schema-testbase-2023-08-15-preview and azureresourceschema

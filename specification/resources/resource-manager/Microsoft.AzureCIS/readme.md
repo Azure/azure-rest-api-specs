@@ -23,3 +23,8 @@ input-file:
   - stable/2021-02-01/environment.json
   - stable/2021-02-01/dstsServiceAccount.json
 ```
+
+``` yaml
+suppressions:
+  - code: PathResourceProviderNamePascalCase
+```

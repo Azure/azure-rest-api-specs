@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "resourceGroupName": "rg1",
+    "serviceManagementContainerName": "testServiceManagementContainer",
+    "rolloutSequenceName": "testRolloutSequence",
+    "api-version": "2023-04-01-preview",
+    "subscriptionId": "b7173c9f-853f-45b5-8b75-3fb7d1e78388",
+    "parameters": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "user1",
+        "id": "/subscriptions/b7173c9f-853f-45b5-8b75-3fb7d1e78388/resourceGroups/rg1/providers/Microsoft.HybridNetwork/serviceManagementContainer/testServiceManagementContainer/rolloutSequence/testRolloutSequence",
+        "location": "westus",
+        "type": "Microsoft.HybridNetwork/GCA/rolloutSequence",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2023-01-03T11:30:15.101Z",
+          "lastModifiedBy": "user1",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-01-03T11:30:15.101Z"
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "rolloutTierActions": [
+            {
+              "rolloutTierReference": {
+                "id": "/subscriptions/b7173c9f-853f-45b5-8b75-3fb7d1e78388/resourceGroups/rg1/providers/Microsoft.HybridNetwork/serviceManagementContainer/testServiceManagementContainer/rolloutTier/testRolloutTier"
+              },
+              "inTierActions": {
+                "preCheck": "SkipOnUnexpected",
+                "gates": [
+                  {
+                    "actionType": "WaitingGate",
+                    "durationInMinutes": 20
+                  }
+                ]
+              },
+              "betweenTierActions": [
+                {
+                  "actionType": "WaitingGate",
+                  "durationInMinutes": 20
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

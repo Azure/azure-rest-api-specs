@@ -1,0 +1,348 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.RiskReputation",
+    "version": "2015-02-28-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "PaymentTrustScores"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.RiskReputation/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Operations": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RiskReputation/paymentTrustScores": {
+      "get": {
+        "operationId": "PaymentTrustScores_ListBySubscription",
+        "tags": [
+          "PaymentTrustScores"
+        ],
+        "description": "List PaymentTrustScore resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PaymentTrustScoreListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Payment Trust Scores by Subscription": {
+            "$ref": "./examples/PaymentTrustScores_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RiskReputation/paymentTrustScores/default": {
+      "get": {
+        "operationId": "PaymentTrustScores_Get",
+        "tags": [
+          "PaymentTrustScores"
+        ],
+        "description": "Get the Payment Trust Score for the subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PaymentTrustScore"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Payment Trust Score": {
+            "$ref": "./examples/PaymentTrustScores_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      }
+    },
+    "PaymentTrustScore": {
+      "type": "object",
+      "description": "The payment trust level of the subscription's billing account, delivered by the Risk Reputation System. This is a singleton - each active Azure Subscription has one score.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PaymentTrustScoreProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PaymentTrustScoreListResult": {
+      "type": "object",
+      "description": "The response of a PaymentTrustScore list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PaymentTrustScore items on this page",
+          "items": {
+            "$ref": "#/definitions/PaymentTrustScore"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PaymentTrustScoreProperties": {
+      "type": "object",
+      "description": "The rp-specific properties for a PaymentTrustScore",
+      "properties": {
+        "billingAccountId": {
+          "type": "string",
+          "description": "The billing account ID where the subscription asset is assigned. This is a Modern Commerce API Customer Root:Organization composite identifier. RRS scores are generated at the billing account level and all subscriptions under a billing account have the same score.",
+          "pattern": "^[a-zA-Z0-9_:-]{36,84}$"
+        },
+        "scoreSegment": {
+          "$ref": "#/definitions/ScoreSegment",
+          "description": "Segment of the payment trust score. The score range is divided into ten segments where Highly_Untrusted_1 has the greatest probability of fraud and High_Trust_10 has the lowest."
+        },
+        "updatedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the payment trust score was calculated."
+        },
+        "previousScoreSegment": {
+          "$ref": "#/definitions/ScoreSegment",
+          "description": "Segment of the payment trust score when it was previously calculated."
+        },
+        "previousUpdatedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the payment trust score was previously calculated."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Resource provisioning state. Will always be Succeeded for payment trust score."
+        }
+      },
+      "required": [
+        "billingAccountId",
+        "scoreSegment",
+        "updatedTimestamp",
+        "previousScoreSegment",
+        "previousUpdatedTimestamp",
+        "provisioningState"
+      ]
+    },
+    "ScoreSegment": {
+      "type": "string",
+      "description": "Trust segment of a Risk Reputation System payment score applied to a Subscription's Billing account.",
+      "enum": [
+        "Highly_Untrusted_1",
+        "Highly_Untrusted_2",
+        "Untrusted_3",
+        "Untrusted_4",
+        "Low_Trust_5",
+        "Low_Trust_6",
+        "Medium_Trust_7",
+        "Medium_Trust_8",
+        "High_Trust_9",
+        "High_Trust_10"
+      ],
+      "x-ms-enum": {
+        "name": "ScoreSegment",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "HighlyUntrusted1",
+            "value": "Highly_Untrusted_1",
+            "description": "Subscription's Billing account is highly untrusted. Segment 1 of 10."
+          },
+          {
+            "name": "HighlyUntrusted2",
+            "value": "Highly_Untrusted_2",
+            "description": "Subscription's Billing account is highly untrusted. Segment 2 of 10."
+          },
+          {
+            "name": "Untrusted3",
+            "value": "Untrusted_3",
+            "description": "Subscription's Billing account is untrusted. Segment 3 of 10."
+          },
+          {
+            "name": "Untrusted4",
+            "value": "Untrusted_4",
+            "description": "Subscription's Billing account is untrusted. Segment 4 of 10."
+          },
+          {
+            "name": "LowTrust5",
+            "value": "Low_Trust_5",
+            "description": "Subscription's Billing account has low trust. Segment 5 of 10."
+          },
+          {
+            "name": "LowTrust6",
+            "value": "Low_Trust_6",
+            "description": "Subscription's Billing account has low trust. Segment 6 of 10."
+          },
+          {
+            "name": "MediumTrust7",
+            "value": "Medium_Trust_7",
+            "description": "Subscription's Billing account has medium trust. Segment 7 of 10."
+          },
+          {
+            "name": "MediumTrust8",
+            "value": "Medium_Trust_8",
+            "description": "Subscription's Billing account has medium trust. Segment 8 of 10."
+          },
+          {
+            "name": "HighTrust9",
+            "value": "High_Trust_9",
+            "description": "Subscription's Billing account has high trust. Segment 9 of 10."
+          },
+          {
+            "name": "HighTrust10",
+            "value": "High_Trust_10",
+            "description": "Subscription's Billing account has high trust. Segment 10 of 10."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}
