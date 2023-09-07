@@ -548,7 +548,7 @@
         "tags": [
           "OpenShiftClusters"
         ],
-        "summary": "Creates or updates a OpenShift cluster with the specified subscription, resource group and resource name.",
+        "summary": "Updates a OpenShift cluster with the specified subscription, resource group and resource name.",
         "description": "The operation returns properties of a OpenShift cluster.",
         "operationId": "OpenShiftClusters_Update",
         "parameters": [
@@ -600,7 +600,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Creates or updates a OpenShift cluster with the specified subscription, resource group and resource name.": {
+          "Updates a OpenShift cluster with the specified subscription, resource group and resource name.": {
             "$ref": "./examples/OpenShiftClusters_Update.json"
           }
         }
@@ -2243,7 +2243,11 @@
         "Disabled",
         "Enabled"
       ],
-      "type": "string"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "PreconfiguredNSG",
+        "modelAsString": true
+      }
     },
     "ProvisioningState": {
       "description": "ProvisioningState represents a provisioning state.",
@@ -2255,7 +2259,11 @@
         "Succeeded",
         "Updating"
       ],
-      "type": "string"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
     },
     "Secret": {
       "description": "Secret represents a secret.",
@@ -2503,7 +2511,8 @@
         },
         "diskSizeGB": {
           "description": "The disk size of the worker VMs.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "subnetId": {
           "description": "The Azure resource ID of the worker subnet.",
@@ -2511,7 +2520,8 @@
         },
         "count": {
           "description": "The number of worker VMs.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "encryptionAtHost": {
           "$ref": "#/definitions/EncryptionAtHost",
