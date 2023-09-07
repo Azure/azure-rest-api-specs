@@ -989,6 +989,18 @@
               "description": "Public key hash.",
               "type": "string",
               "readOnly": true
+            },
+            "type": {
+              "description": "The type of the certificate. Allowed values are `ServerSSLCertificate` and `ImagePullTrustedCA`",
+              "type": "string",
+              "enum": [
+                "ServerSSLCertificate",
+                "ImagePullTrustedCA"
+              ],
+              "x-ms-enum": {
+                "name": "CertificateType",
+                "modelAsString": true
+              }
             }
           }
         }
