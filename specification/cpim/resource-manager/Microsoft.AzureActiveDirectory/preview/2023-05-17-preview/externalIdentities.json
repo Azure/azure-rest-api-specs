@@ -37,7 +37,8 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureActiveDirectory/checkNameAvailability": {
       "post": {
         "tags": [
-          "B2CTenants"
+          "B2CTenants",
+          "CIAMTenants"
         ],
         "operationId": "B2CTenants_CheckNameAvailability",
         "description": "Checks the availability and validity of a domain name for the tenant.",
@@ -668,7 +669,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -710,7 +711,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -914,7 +915,7 @@
       },
       "delete": {
         "operationId": "CIAMTenants_Delete",
-        "description": "Initiates an async operation to delete the Azure AD for customers tenant and Azure resource. The resource deletion can only happen as the last step in [the tenant deletion process](https://learn.microsoft.com/azure/active-directory/enterprise-users/directory-delete-howto). ",
+        "description": "Initiates an async operation to delete the Azure AD for customers tenant and Azure resource. The resource deletion can only happen as the last step in [the tenant deletion process](https://aka.ms/delete-ciam-tenant). ",
         "x-ms-examples": {
           "Delete_CIAM_tenant": {
             "$ref": "./examples/CIAM/deleteCIAMTenant.json"
@@ -938,9 +939,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Response of the URL in Azure-AsyncOperation header if the asynchronous operation is successful. Resource will no longer exist."
-          },
           "202": {
             "description": "Resource deletion request accepted. The Azure-AsyncOperation header indicates the URL/location in which to poll for a result of the asynchronous operation. ",
             "headers": {
@@ -1572,7 +1570,11 @@
         },
         "tenantId": {
           "type": "string",
-          "description": "An identifier of the Azure AD for customers tenant."
+          "description": "An identifier of the Azure AD for customers tenant.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
     },
@@ -1610,14 +1612,6 @@
         "status": {
           "description": "Operation status.",
           "type": "string"
-        },
-        "properties": {
-          "type": "object",
-          "properties": {
-            "provisioningState": {
-              "$ref": "#/definitions/ProvisioningState"
-            }
-          }
         },
         "startTime": {
           "description": "Start time of the async operation.",
