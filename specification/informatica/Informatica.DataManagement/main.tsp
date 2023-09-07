@@ -16,11 +16,14 @@ import "@azure-tools/typespec-azure-resource-manager";
 @useDependency(Azure.Core.Versions.v1_0_Preview_1)
 namespace Informatica.DataManagement;
 
+using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using OpenAPI;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using OpenAPI;
+
 
 @doc("Reusable representation of an email address.")
 @pattern("^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$")
@@ -65,9 +68,16 @@ interface Organizations
     InformaticaOrganizationResource,
     OrganizationProperties
   >;
+  
+  @doc("Gets Metadata of the serverless runtime environment.")
+  @armResourceAction(InformaticaOrganizationResource)
+  @post
+  getServerlessMetadata(
+    ...ResourceInstanceParameters<InformaticaOrganizationResource>,
+  ): ArmResponse<ServerlessMetadataResponse> | ErrorResponse;
 }
 
-@doc("An Organization Resource by Informatica.")
+@doc("A Serverless Runtime environment  resource by Informatica.")
 @parentResource(InformaticaOrganizationResource)
 model InformaticaServerlessRuntimeResource
   is TrackedResource<InformaticaServerlessRuntimeProperties> {
@@ -91,6 +101,13 @@ interface ServerlessRuntimes
     InformaticaServerlessRuntimeResource,
     InformaticaServerlessRuntimeProperties
   >;
+
+  @doc("Gets List of the serverless runtime environments for this organization.")
+  @armResourceAction(InformaticaServerlessRuntimeResource)
+  @post
+  getAllServerlessRuntimeEnvironments(
+    ...ResourceInstanceParameters<InformaticaServerlessRuntimeResource>,
+  ): ArmResponse<ServerlessRuntimeListResponse> | ErrorResponse;
 }
 
 @doc("Properties specific to the Informatica DataManagement Organization resource.")
@@ -223,6 +240,22 @@ model UserDetails {
   phoneNumber?: string;
 }
 
+@doc("Serverless Runtime environment Metadata response.")
+model ServerlessMetadataResponse {
+  
+  @doc("type of the runtime environment.")
+  type?: RuntimeTypes;
+
+  @doc("serverless config properties")
+  serverlessConfigProperties?: ServerlessConfigProperties;
+
+  @doc("serverless runtime config properties")
+  serverlessRuntimeConfigProperties?: ServerlessRuntimeConfigProperties;
+}
+
+@doc("Serverless Runtime environment list response.")
+model ServerlessRuntimeListResponse extends Azure.Core.Page<InformaticaServerlessRuntimeResource> {}
+
 @doc("Serverless Runtime properties.")
 model InformaticaServerlessRuntimeProperties {
   @visibility("read")
@@ -233,10 +266,10 @@ model InformaticaServerlessRuntimeProperties {
   description?: string;
 
   @doc("Platform type of the Serverless Runtime.")
-  platform?: string;
+  platform?: PlatformTypes;
 
-  @doc("Application type of the Serverless Runtime.")
-  applicationType?: string;
+  @doc("Application type of the Serverless Runtime environment.")
+  applicationType?: ApplicationTypes;
 
   @doc("Compute units of the serverless runtime.")
   computeUnits?: string;
@@ -263,6 +296,26 @@ model ServerlessRuntimeConfigProperties {
   @doc("The List of Informatica Serverless Runtime CDIE Config Properties.")
   @extension("x-ms-identifiers", [])
   cdieConfigProps?: CdiConfigProps[];
+}
+
+@doc("Metadata Serverless Config Properties")
+model ServerlessConfigProperties {
+
+  @doc("Platform types")
+  platform?: PlatformTypes;
+  
+  @doc("Map of application types of supported by informatica")
+  applicationType?: Record<string>;
+
+  @doc("different compute units with possible list of values")
+  computeUnits?: Record<string[]>;
+
+  @doc("Execution timeout")
+  executionTimeout?: string;
+
+  @doc("supported region")
+  @extension("x-ms-identifiers", [])
+  region?: Record<string>[];
 }
 
 @doc("Informatica CDI Configuration Properties.")
@@ -360,4 +413,25 @@ enum SingleSignOnStates {
 
   @doc("SSO state Existing")
   Existing,
+}
+
+@doc("Various types of the Serverless Runtime environments")
+enum ApplicationTypes {
+  @doc("Data Integration")
+  CDI,
+
+  @doc("Advanced Data Integration")
+  CDIE,
+}
+
+@doc("Various types of the Platform types.")
+enum PlatformTypes {
+  @doc("Azure platform type")
+  AZURE,
+}
+
+@doc("Various types of the runtime types.")
+enum RuntimeTypes {
+  @doc("Serverless Runtime type")
+  SERVERLESS,
 }
