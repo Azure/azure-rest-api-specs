@@ -323,7 +323,7 @@
         }
       ]
     },
-    "ProvisioningState": {
+    "PatchProvisioningState": {
       "type": "string",
       "description": "Resource instance provisioning state.",
       "enum": [
@@ -332,7 +332,7 @@
         "Canceled"
       ],
       "x-ms-enum": {
-        "name": "ProvisioningState",
+        "name": "PatchProvisioningState",
         "modelAsString": true
       },
       "readOnly": true
@@ -385,8 +385,9 @@
           "description": "The name of the target image for the patch."
         },
         "lastDetectionTime": {
-          "type": "date-time",
-          "description": "The UTC timestamp that decribes the latest detection was done."
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC timestamp that describes the latest detection was done."
         },
         "detectionStatus": {
           "$ref": "#/definitions/DetectionStatus",
@@ -470,7 +471,7 @@
           "description": "The id of the target revision for the patch."
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/PatchProvisioningState",
           "description": "Patch provisioning state.",
           "readOnly": true
         },
@@ -480,11 +481,13 @@
           "readOnly": true
         },
         "createdTime": {
-          "type": "date-time",
+          "type": "string",
+          "format": "date-time",
           "description": "The UTC timestamp that describes when the patch object was created."
         },
         "updatedTime": {
-          "type": "date-time",
+          "type": "string",
+          "format": "date-time",
           "description": "The UTC timestamp that describes when the patch object was last updated."
         },
         "patchDetails": {
