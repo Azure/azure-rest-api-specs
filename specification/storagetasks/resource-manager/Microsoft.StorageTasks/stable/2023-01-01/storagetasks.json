@@ -460,7 +460,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageTasks/previewActions": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageTasks/locations/{location}/previewActions": {
       "post": {
         "tags": [
           "StorageTasks"
@@ -478,6 +478,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location of the deleted storage account."
           },
           {
             "name": "parameters",
