@@ -1131,7 +1131,6 @@ input-file:
 - ./Microsoft.Sql/preview/2022-08-01-preview/Servers.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/StartStopManagedInstanceSchedules.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/TransparentDataEncryptions.json
-- ./Microsoft.Sql/preview/2022-11-01-preview/FailoverGroups.json
 - ./Microsoft.Sql/preview/2022-11-01-preview/IPv6FirewallRules.json
 - ./Microsoft.Sql/preview/2022-11-01-preview/SqlVulnerabilityAssessmentBaseline.json
 - ./Microsoft.Sql/preview/2022-11-01-preview/SqlVulnerabilityAssessmentExecuteScan.json
@@ -1145,6 +1144,7 @@ input-file:
 - ./Microsoft.Sql/preview/2022-11-01-preview/DatabaseSqlVulnerabilityAssessmentScanResult.json
 - ./Microsoft.Sql/preview/2022-11-01-preview/DatabaseSqlVulnerabilityAssessmentScans.json
 - ./Microsoft.Sql/preview/2022-11-01-preview/DatabaseSqlVulnerabilityAssessmentsSettings.json
+- ./Microsoft.Sql/preview/2023-02-01-preview/FailoverGroups.json
 
 
 # Needed when there is more than one input file
