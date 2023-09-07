@@ -7,32 +7,38 @@ using TypeSpec.Versioning;
 @versioned(LiftrBase.Versions)
 namespace LiftrBase;
 
-@doc("Namespace version enum.")
+@doc("Supported versions for LiftrBase resource model")
 enum Versions {
-  @doc("Version 1 preview.")
+  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v1_preview: "2023-06-01-preview",
 }
 
 @doc("Marketplace subscription status of a resource.")
 enum MarketplaceSubscriptionStatus {
-  @doc("PendingFulfillmentStart status.")
+  @doc("Purchased but not yet activated")
   PendingFulfillmentStart: "PendingFulfillmentStart",
 
-  @doc("Subscribed status.")
+  @doc("Marketplace subscription is activated")
   Subscribed: "Subscribed",
 
-  @doc("Suspended status.")
+  @doc("This state indicates that a customer's payment for the Marketplace service was not received")
   Suspended: "Suspended",
 
-  @doc("Unsubscribed status.")
+  @doc("Customer has cancelled the subscription")
   Unsubscribed: "Unsubscribed",
 }
 
+@doc("A string that represents a URI.")
+scalar Uri extends string;
+
 @doc("Marketplace details of a resource.")
 model MarketplaceDetails {
-  @doc("Marketplace Subscription Id")
+  @doc("Azure subscription id for the the marketplace offer is purchased from")
   subscriptionId: string;
+
+  @doc("Marketplace subscription status")
+  subscriptionStatus?: MarketplaceSubscriptionStatus;
 
   @doc("Offer details for the marketplace that is selected by the user")
   offerDetails: OfferDetails;
@@ -41,9 +47,11 @@ model MarketplaceDetails {
 @doc("Offer details for the marketplace that is selected by the user")
 model OfferDetails {
   @doc("Publisher Id for the marketplace offer")
+  @visibility("read", "create")
   publisherId: string;
 
   @doc("Offer Id for the marketplace offer")
+  @visibility("read", "create")
   offerId: string;
 
   @doc("Plan Id for the marketplace offer")
@@ -52,10 +60,10 @@ model OfferDetails {
   @doc("Plan Name for the marketplace offer")
   planName?: string;
 
-  @doc("Plan Display Name for the marketplace offer")
+  @doc("Term Unit for the marketplace offer")
   termUnit?: string;
 
-  @doc("Plan Display Name for the marketplace offer")
+  @doc("Term ID for the marketplace offer")
   termId?: string;
 }
 
@@ -65,26 +73,57 @@ scalar email extends string;
 
 @doc("Details of the User.")
 model UserDetails {
-  @doc("User first name.")
+  @doc("First name of the user")
   firstName: string;
 
-  @doc("User last name.")
+  @doc("Last name of the user")
   lastName: string;
 
-  @doc("User email address.")
-  emailAddress: email;
+  @doc("Email address of the user")
+  emailAddress?: email;
 
   @doc("User's principal name")
   upn?: string;
 
   @doc("User's phone number")
   phoneNumber?: string;
+
+  @doc("User's company details")
+  companyDetails?: CompanyDetails;
+}
+
+@doc("Company details.")
+model CompanyDetails {
+
+  @doc("Company address.")
+  address?: Address;
+}
+
+@doc("Address details.")
+model Address {
+  @doc("Address line 1.")
+  addressLine1: string;
+
+  @doc("Address line 2.")
+  addressLine2?: string;
+
+  @doc("City.")
+  city: string;
+
+  @doc("State.")
+  state: string;
+
+  @doc("Country.")
+  country: string;
+
+  @doc("Zip code.")
+  zipCode: string;
 }
 
 @doc("Base resource properties that can be extended for arm resources.")
 model BaseResourceProperties {
   @doc("Marketplace details of the resource.")
-  @visibility("create", "read")
+  @visibility("create", "read", "update")
   marketplace: MarketplaceDetails;
 
   @doc("Details of the user.")
@@ -95,13 +134,33 @@ model BaseResourceProperties {
   provisioningState?: ResourceProvisioningState;
 }
 
-@doc("IP/port pair.")
-model Ip {
-  @doc("IP address.")
-  address: string;
+@doc("Properties specific to Single Sign On Resource")
+model SingleSignOnProperties {
+  @doc("State of the Single Sign On for the organization")
+  singleSignOnState?: SingleSignOnStates;
 
-  @doc("Port number.")
-  @minValue(1)
-  @maxValue(65535)
-  port?: int32;
+  @doc("AAD enterprise application Id used to setup SSO")
+  enterpriseAppId?: string;
+
+  @doc("URL for SSO to be used by the partner to redirect the user to their system")
+  singleSignOnUrl?: Uri;
+
+  @doc("List of AAD domains fetched from Microsoft Graph for user.")
+  aadDomains?: string[];
+
+  @visibility("read")
+  @doc("Provisioning State of the resource")
+  provisioningState?: ResourceProvisioningState;
+}
+
+@doc("Various states of the SSO resource")
+enum SingleSignOnStates {
+  @doc("Initial state of the SSO resource")
+  Initial,
+
+  @doc("State of the SSO resource when it is enabled")
+  Enable,
+
+  @doc("State of the SSO resource when it is disabled")
+  Disable,
 }
