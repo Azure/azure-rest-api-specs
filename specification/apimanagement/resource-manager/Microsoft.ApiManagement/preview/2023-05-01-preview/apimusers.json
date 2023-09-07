@@ -385,8 +385,14 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The user details were successfully deleted."
+          "202": {
+            "description": "Request to delete user details was accepted.",
+            "headers": {
+              "location": {
+                "description": "Location header",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The user details were successfully deleted."
@@ -397,6 +403,10 @@
               "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
