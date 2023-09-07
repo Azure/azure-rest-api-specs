@@ -199,6 +199,10 @@ directive:
     where: $.definitions.ResourceChangesRequestParameters.properties.fetchPropertyChanges
     from: resourcegraph.json
     reason: This is a clear scenario for a boolean and will not have more than 2 values in the future.
+  - suppress: XmsIdentifierValidation
+    from: resourcecopilot.json
+    where: $.definitions.Error.properties.details
+    reason: Adding x-ms-identifiers to Error details array results in SDK breaking changes.
 ```
 
 ## cli
