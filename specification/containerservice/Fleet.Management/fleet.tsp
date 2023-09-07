@@ -174,7 +174,7 @@ interface Fleets {
   @operationId("Fleets_CreateOrUpdate")
   create is ArmResourceCreateOrUpdateAsync<
     Fleet,
-    BaseParameters<Fleet> & 
+    BaseParameters<Fleet> &
       IfMatchParameters<Fleet> &
       IfNoneMatchParameters<Fleet>
   >;
