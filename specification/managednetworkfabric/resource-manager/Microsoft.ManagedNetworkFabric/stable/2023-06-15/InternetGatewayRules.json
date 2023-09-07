@@ -537,7 +537,7 @@
             "$ref": "#/definitions/AddressListV1Properties"
           },
           "x-ms-identifiers": [
-            "source"
+            "address"
           ]
         }
       }
@@ -546,11 +546,6 @@
       "type": "object",
       "description": "",
       "properties": {
-        "source": {
-          "type": "string",
-          "description": "",
-          "minLength": 1
-        },
         "address": {
           "type": "array",
           "description": "List of Address to be allowed or denied.",
@@ -599,7 +594,10 @@
           "items": {
             "type": "object",
             "$ref": "#/definitions/AddressListV1Properties"
-          }
+          },
+          "x-ms-identifiers": [
+            "address"
+          ]
         }
       }
     }
