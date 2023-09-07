@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "subscriptionId": "1234ABCD-0A1B-1234-5678-123456ABCDEF",
+    "resourceGroupName": "example-rg",
+    "api-version": "2023-06-15",
+    "internetGatewayRuleName": "example-internetGatewayRule",
+    "body": {
+      "ruleProperties": {
+        "operation": "Add",
+        "addressListV1": [
+          {
+            "source": "",
+            "address": [
+              "10.10.10.10"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "configurationState": "Succeeded",
+        "error": {
+          "code": "",
+          "message": "",
+          "target": "",
+          "details": [],
+          "additionalInfo": [
+            {
+              "type": "",
+              "info": {}
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "configurationState": "Succeeded",
+        "error": {
+          "code": "",
+          "message": "",
+          "target": "",
+          "details": [],
+          "additionalInfo": [
+            {
+              "type": "",
+              "info": {}
+            }
+          ]
+        }
+      }
+    }
+  }
+}

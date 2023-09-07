@@ -348,6 +348,74 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/internetGatewayRules/{internetGatewayRuleName}/modifyRules": {
+      "post": {
+        "tags": [
+          "InternetGatewayRules"
+        ],
+        "operationId": "InternetGatewayRules_modifyRules",
+        "description": "Modifies the rules of the given InternetGateway rules instance.",
+        "summary": "Implements the operation to the underlying resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/InternetGatewayRuleNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Network Fabric properties to update.",
+            "schema": {
+              "$ref": "#/definitions/ModifyRules"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "./common.json#/definitions/CommonPostActionResponseForStateUpdate"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "./common.json#/definitions/CommonPostActionResponseForStateUpdate"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "InternetGatewayRules_modifyRules_MaximumSet_Gen": {
+            "$ref": "./examples/InternetGatewayRules_modifyRules_MaximumSet_Gen.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -464,6 +532,76 @@
             "type": "string",
             "minLength": 1,
             "example": "10.10.10.10:22 | www.foo.com"
+          }
+        },
+        "addressListV1": {
+          "type": "array",
+          "description": "List of Addresses to be allowed or denied.",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/AddressListV1Properties"
+          }
+        }
+      }
+    },
+    "AddressListV1Properties": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "",
+          "minLength": 1
+        },
+        "address": {
+          "type": "array",
+          "description": "List of Address to be allowed or denied.",
+          "minItems": 1,
+          "items": {
+            "description": "Address to be allowed or denied.",
+            "type": "string",
+            "minLength": 1,
+            "example": "10.10.10.10:22 | www.foo.com"
+          }
+        }
+      }
+    },
+    "ModifyRules": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "ruleProperties": {
+          "type": "object",
+          "$ref": "#/definitions/ModifyRulesProperties"
+        }
+      }
+    },
+    "ModifyRulesProperties": {
+      "type": "object",
+      "description": "The rule properties that can be updated.",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "description": "Specify action.",
+          "minLength": 1,
+          "enum": [
+            "Add",
+            "Delete"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ModifyRulesOperation"
+          },
+          "example": "Add"
+        },
+        "addressListV1": {
+          "type": "array",
+          "description": "List of Addresses to be allowed or denied.",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/AddressListV1Properties"
           }
         }
       }
