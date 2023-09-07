@@ -42,7 +42,6 @@ input-file:
   - Microsoft.HybridNetwork/stable/2023-09-01/networkFunctionDefinition.json
   - Microsoft.HybridNetwork/stable/2023-09-01/networkServiceDesign.json
   - Microsoft.HybridNetwork/stable/2023-09-01/operation.json
-  - Microsoft.HybridNetwork/stable/2023-09-01/proxyPublisher.json
   - Microsoft.HybridNetwork/stable/2023-09-01/publisher.json
   - Microsoft.HybridNetwork/stable/2023-09-01/pureProxyArtifact.json
   - Microsoft.HybridNetwork/stable/2023-09-01/site.json
