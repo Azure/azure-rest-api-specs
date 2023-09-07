@@ -139,7 +139,7 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-migrate-2019-10
+tag: package-hubmigrate-2023-01
 ```
 
 ### Tag: package-migrate-2018-02
@@ -197,6 +197,16 @@ input-file:
 ```
 
 ### Tag: package-hubmigrate-2023-01
+
+These settings apply only when `--tag=package-hubmigrate-2023-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-hubmigrate-2023-01'
+input-file:
+- Microsoft.Migrate/MigrateProjects/stable/2023-01-01/hubmigrate.json
+- Microsoft.Migrate/AssessmentProjects/stable/2019-10-01/migrate.json
+```
+
+### Tag: package-hubmigrate-2023-01-only
 
 These settings apply only when `--tag=package-hubmigrate-2023-01` is specified on the command line.
 
