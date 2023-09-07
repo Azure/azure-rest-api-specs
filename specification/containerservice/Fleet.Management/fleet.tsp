@@ -80,7 +80,7 @@ model FleetHubProfile {
   kubernetesVersion?: string;
 
   @added(Versions.v2023_08_15_preview)
-  @doc("The VM size of the Fleet hub.")
+  @doc("The virtual machine size of the Fleet hub.")
   @visibility("read", "create")
   vmSize?: string;
 }
@@ -174,7 +174,7 @@ interface Fleets {
   @operationId("Fleets_CreateOrUpdate")
   create is ArmResourceCreateOrUpdateAsync<
     Fleet,
-    BaseParameters<Fleet> &
+    BaseParameters<Fleet> & 
       IfMatchParameters<Fleet> &
       IfNoneMatchParameters<Fleet>
   >;
