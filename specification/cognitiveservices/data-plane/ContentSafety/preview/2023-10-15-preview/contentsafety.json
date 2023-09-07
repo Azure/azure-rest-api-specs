@@ -1151,8 +1151,9 @@
           "description": "Image category."
         },
         "acceptLessThan": {
-          "$ref": "#/definitions/SeverityThreshold",
-          "description": "Severity less than the threshold will be treated as accepted for the category."
+          "type": "integer",
+          "format": "int32",
+          "description": "Severity less than the threshold will be treated as accepted for the category. The value can only be -1, 0, 2, 4, 6. -1 means a maximum value, so that all severity can be treated as accepted."
         }
       },
       "required": [
@@ -1323,48 +1324,6 @@
         "blocklistItemIds"
       ]
     },
-    "SeverityThreshold": {
-      "type": "number",
-      "description": "Modality type.",
-      "enum": [
-        0,
-        2,
-        4,
-        6,
-        -1
-      ],
-      "x-ms-enum": {
-        "name": "SeverityThreshold",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Zero",
-            "value": 0,
-            "description": "The threshold value is 0."
-          },
-          {
-            "name": "Two",
-            "value": 2,
-            "description": "The threshold value is 2."
-          },
-          {
-            "name": "Four",
-            "value": 4,
-            "description": "The threshold value is 4."
-          },
-          {
-            "name": "Six",
-            "value": 6,
-            "description": "The threshold value is 6."
-          },
-          {
-            "name": "Maximum",
-            "value": -1,
-            "description": "The threshold value is a maximum value."
-          }
-        ]
-      }
-    },
     "TextBlocklist": {
       "type": "object",
       "description": "Text Blocklist.",
@@ -1497,8 +1456,9 @@
           "description": "Text category."
         },
         "acceptLessThan": {
-          "$ref": "#/definitions/SeverityThreshold",
-          "description": "Severity less than the threshold will be treated as accepted for the category."
+          "type": "integer",
+          "format": "int32",
+          "description": "Severity less than the threshold will be treated as accepted for the category. The value can only be -1, 0, 2, 4, 6. -1 means a maximum value, so that all severity can be treated as accepted."
         }
       },
       "required": [

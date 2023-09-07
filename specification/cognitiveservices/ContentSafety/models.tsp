@@ -252,28 +252,13 @@ enum ContentModality {
 }
 
 @added(ContentSafety.Versions.v2023_10_15_Preview)
-@doc("Modality type.")
-enum SeverityThreshold {
-  @doc("The threshold value is 0.")
-  Zero: 0,
-  @doc("The threshold value is 2.")
-  Two: 2,
-  @doc("The threshold value is 4.")
-  Four: 4,
-  @doc("The threshold value is 6.")
-  Six: 6,
-  @doc("The threshold value is a maximum value.")
-  Maximum: -1,
-}
-
-@added(ContentSafety.Versions.v2023_10_15_Preview)
 @doc("TextCategoryPolicy. Content which severity less than the acceptLessThan will be accepted.")
 model TextCategoryPolicy {
   @doc("Text category.")
   category: TextCategory;
 
-  @doc("Severity less than the threshold will be treated as accepted for the category.")
-  acceptLessThan: SeverityThreshold;
+  @doc("Severity less than the threshold will be treated as accepted for the category. The value can only be -1, 0, 2, 4, 6. -1 means a maximum value, so that all severity can be treated as accepted.")
+  acceptLessThan: int32;
 }
 
 @added(ContentSafety.Versions.v2023_10_15_Preview)
@@ -281,9 +266,9 @@ model TextCategoryPolicy {
 model ImageCategoryPolicy {
   @doc("Image category.")
   category: ImageCategory;
-
-  @doc("Severity less than the threshold will be treated as accepted for the category.")
-  acceptLessThan: SeverityThreshold;
+  
+  @doc("Severity less than the threshold will be treated as accepted for the category. The value can only be -1, 0, 2, 4, 6. -1 means a maximum value, so that all severity can be treated as accepted.")
+  acceptLessThan: int32;
 }
 
 @added(ContentSafety.Versions.v2023_10_15_Preview)
