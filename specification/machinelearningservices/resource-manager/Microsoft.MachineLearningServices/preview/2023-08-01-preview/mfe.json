@@ -13600,27 +13600,6 @@
       },
       "additionalProperties": false
     },
-    "CapacityReservation": {
-      "required": [
-        "capacityReservationGroupId"
-      ],
-      "type": "object",
-      "properties": {
-        "capacityReservationGroupId": {
-          "description": "[Required] Specifies a capacity reservation group ID to allocate capacity from.",
-          "minLength": 1,
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string"
-        },
-        "endpointReservedCapacity": {
-          "format": "int32",
-          "description": "Specifies a capacity amount to reserve for this endpoint within the parent capacity reservation group.",
-          "type": "integer",
-          "x-nullable": true
-        }
-      },
-      "additionalProperties": false
-    },
     "CapacityReservationGroup": {
       "required": [
         "reservedCapacity"
@@ -25001,7 +24980,7 @@
         },
         "capacityReservation": {
           "description": "Optional capacity reservation information for the endpoint. When specified, the Serverless Endpoint\r\nwill be allocated capacity from the specified capacity reservation group.",
-          "$ref": "#/definitions/CapacityReservation",
+          "$ref": "#/definitions/ServerlessEndpointCapacityReservation",
           "x-nullable": true
         },
         "inferenceEndpoint": {
@@ -25027,6 +25006,27 @@
         }
       },
       "x-ms-client-name": "ServerlessEndpointProperties",
+      "additionalProperties": false
+    },
+    "ServerlessEndpointCapacityReservation": {
+      "required": [
+        "capacityReservationGroupId"
+      ],
+      "type": "object",
+      "properties": {
+        "capacityReservationGroupId": {
+          "description": "[Required] Specifies a capacity reservation group ID to allocate capacity from.",
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string"
+        },
+        "endpointReservedCapacity": {
+          "format": "int32",
+          "description": "Specifies a capacity amount to reserve for this endpoint within the parent capacity reservation group.",
+          "type": "integer",
+          "x-nullable": true
+        }
+      },
       "additionalProperties": false
     },
     "ServerlessEndpointStatus": {
