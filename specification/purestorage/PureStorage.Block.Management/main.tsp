@@ -89,7 +89,7 @@ model AzureVmwareService {
 }
 
 @armResourceOperations
-interface StoragePoolOperations {
+interface StoragePools {
   get is ArmResourceRead<StoragePool>;
   create is ArmResourceCreateOrUpdateAsync<StoragePool>;
   update is ArmResourcePatchAsync<StoragePool, StoragePoolProperties>;
