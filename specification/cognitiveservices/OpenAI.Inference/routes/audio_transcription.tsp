@@ -38,36 +38,36 @@ op getAudioTranscriptionVerboseJson is AOAIMultipartRequestDeploymentAction<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/byos"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Transcribes audio into the input language.")
 @added(ServiceApiVersions.v2023_09_01_Preview)
 @actionSeparator("/")
 @action("audio/transcriptions")
 @sharedRoute
-op getAudioTranscriptionPlainText is AOAIMultipartRequestDeploymentAction<
-  AudioTranscriptionOptionsPlainText,
-  AudioTranscriptionPlainText
+op getAudioTranscriptionPlainText is AOAIMultipartTextPlainAction<
+  AudioTranscriptionOptionsPlainText
 >;
 
 #suppress "@azure-tools/typespec-azure-core/byos"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Transcribes audio into the input language.")
 @added(ServiceApiVersions.v2023_09_01_Preview)
 @actionSeparator("/")
 @action("audio/transcriptions")
 @sharedRoute
-op getAudioTranscriptionSrt is AOAIMultipartRequestDeploymentAction<
-  AudioTranscriptionOptionsSrt,
-  AudioTranscriptionPlainText
+op getAudioTranscriptionSrt is AOAIMultipartTextPlainAction<
+  AudioTranscriptionOptionsSrt
 >;
 
 #suppress "@azure-tools/typespec-azure-core/byos"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Transcribes audio into the input language.")
 @added(ServiceApiVersions.v2023_09_01_Preview)
 @actionSeparator("/")
 @action("audio/transcriptions")
 @sharedRoute
-op getAudioTranscriptionVtt is AOAIMultipartRequestDeploymentAction<
-  AudioTranscriptionOptionsVtt,
-  AudioTranscriptionPlainText
+op getAudioTranscriptionVtt is AOAIMultipartTextPlainAction<
+  AudioTranscriptionOptionsVtt
 >;
 
 #suppress "@azure-tools/typespec-azure-core/byos"
@@ -93,34 +93,34 @@ op getAudioTranslationVerboseJson is AOAIMultipartRequestDeploymentAction<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/byos"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Transcribes and translates input audio into English text.")
 @added(ServiceApiVersions.v2023_09_01_Preview)
 @actionSeparator("/")
 @sharedRoute
 @action("audio/translations") //@convenientAPI(true)
-op getAudioTranslationPlainText is AOAIMultipartRequestDeploymentAction<
-  AudioTranslationOptionsPlainText,
-  AudioTranscriptionPlainText
+op getAudioTranslationPlainText is AOAIMultipartTextPlainAction<
+  AudioTranslationOptionsPlainText
 >;
 
 #suppress "@azure-tools/typespec-azure-core/byos"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Transcribes and translates input audio into English text.")
 @added(ServiceApiVersions.v2023_09_01_Preview)
 @actionSeparator("/")
 @sharedRoute
 @action("audio/translations") //@convenientAPI(true)
-op getAudioTranslationSrt is AOAIMultipartRequestDeploymentAction<
-  AudioTranslationOptionsSrt,
-  AudioTranscriptionPlainText
+op getAudioTranslationSrt is AOAIMultipartTextPlainAction<
+  AudioTranslationOptionsSrt
 >;
 
 #suppress "@azure-tools/typespec-azure-core/byos"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Transcribes and translates input audio into English text.")
 @added(ServiceApiVersions.v2023_09_01_Preview)
 @actionSeparator("/")
 @sharedRoute
 @action("audio/translations") //@convenientAPI(true)
-op getAudioTranslationVtt is AOAIMultipartRequestDeploymentAction<
-  AudioTranslationOptionsVerboseJson,
-  AudioTranscriptionPlainText
+op getAudioTranslationVtt is AOAIMultipartTextPlainAction<
+  AudioTranslationOptionsVtt
 >;

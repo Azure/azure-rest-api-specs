@@ -46,17 +46,6 @@ model AudioTranscriptionOptionsCommon {
 }
 
 @doc("Lorem ipsum")
-model AudioTranscriptionPlainText {
-    @doc("Lorem ipsum")
-    @header
-    contentType: "text/plain";
-
-    @doc("Lorem ipsum")
-    @body
-    text: string;
-}
-
-@doc("Lorem ipsum")
 model AudioTranscriptionSimpleJson {
     @doc("Transcribed text.")
     text: string;
