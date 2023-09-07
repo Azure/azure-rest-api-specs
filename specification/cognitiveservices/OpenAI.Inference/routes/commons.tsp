@@ -34,6 +34,6 @@ alias AOAIMultipartRequestDeploymentAction<
 
     @doc("The content length of the operation. This needs to be provided by the caller.")
     @header("content-length")
-    contentLenght: int64;
+    contentLength: int64;
   }>
 >;
