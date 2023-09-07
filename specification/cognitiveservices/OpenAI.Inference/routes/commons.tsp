@@ -38,7 +38,7 @@ alias AOAIMultipartHeaders = Azure.Core.Traits.RequestHeadersTrait<{
 alias AOAIMultipartRequestDeploymentAction<
   T extends {},
   U extends {}
-> = Azure.Core.ResourceAction<Deployment, T, U, AOAIMultipartHeaders>;
+> = Azure.Core.StandardResourceOperations.ResourceAction<Deployment, T, U, AOAIMultipartHeaders>;
 
 alias AOAIMultipartTextPlainAction<T extends {}> = Azure.Core.Foundations.ResourceOperation<
   Deployment,
