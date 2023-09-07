@@ -180,7 +180,7 @@
         }
       }
     },
-    "/subscription/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/builders/{builderName}/patches/{patchName}/skip/{patchSkipConfig}": {
+    "/subscription/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/builders/{builderName}/patches/{patchName}/skipConfig/{patchSkipConfig}": {
       "post": {
         "tags": [
           "Patches"
@@ -384,6 +384,10 @@
           "type": "string",
           "description": "The name of the target image for the patch."
         },
+        "lastDetectionTime": {
+          "type": "date-time",
+          "description": "The UTC timestamp that decribes the latest detection was done."
+        },
         "detectionStatus": {
           "$ref": "#/definitions/DetectionStatus",
           "description": "The status of the patch detection.",
@@ -454,15 +458,15 @@
       "type": "object",
       "properties": {
         "targetEnvironmentId": {
-          "type": "string",
+          "format": "arm-id",
           "description": "The id of the target environment for the patch."
         },
         "targetContainerAppId": {
-          "type": "string",
+          "format": "arm-id",
           "description": "The id of the target container app for the patch."
         },
         "targetRevisionId": {
-          "type": "string",
+          "format": "arm-id",
           "description": "The id of the target revision for the patch."
         },
         "provisioningState": {
@@ -474,6 +478,14 @@
           "$ref": "#/definitions/PatchApplyStatus",
           "description": "The status of the patch once it has been provisioned",
           "readOnly": true
+        },
+        "createdTime": {
+          "type": "date-time",
+          "description": "The UTC timestamp that describes when the patch object was created."
+        },
+        "updatedTime": {
+          "type": "date-time",
+          "description": "The UTC timestamp that describes when the patch object was last updated."
         },
         "patchDetails": {
           "type": "array",
