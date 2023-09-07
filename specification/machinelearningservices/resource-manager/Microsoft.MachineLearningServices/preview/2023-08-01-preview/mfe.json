@@ -9,7 +9,7 @@
     "https"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/capacityReserverationGroups": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/capacityReserverationGroups": {
       "get": {
         "tags": [
           "CapacityReservationGroup"
@@ -21,6 +21,9 @@
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "in": "query",
@@ -59,7 +62,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/capacityReserverationGroups/{groupId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/capacityReserverationGroups/{groupId}": {
       "delete": {
         "tags": [
           "CapacityReservationGroup"
@@ -71,6 +74,9 @@
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "in": "path",
@@ -117,6 +123,9 @@
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "in": "path",
@@ -168,6 +177,9 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
             "in": "path",
             "name": "groupId",
             "required": true,
@@ -217,6 +229,9 @@
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "in": "path",
