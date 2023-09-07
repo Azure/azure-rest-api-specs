@@ -26,6 +26,7 @@ These are the global settings for the cosmosdbmongocluster.
 
 ```yaml
 openapi-type: arm
+title: CosmosDBMongoClusterManagementClient
 tag: package-2023-10-01-preview
 ```
 
