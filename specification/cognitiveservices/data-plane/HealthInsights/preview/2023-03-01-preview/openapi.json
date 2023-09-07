@@ -489,6 +489,11 @@
         }
       }
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "ClinicalCodedElement": {
       "type": "object",
       "description": "A piece of clinical information, expressed as a code in a clinical coding system.",
@@ -1526,8 +1531,7 @@
       "description": "The response for the Onco Phenotype request.",
       "properties": {
         "jobId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "A processing job identifier.",
           "readOnly": true
         },
@@ -1875,8 +1879,7 @@
       "description": "The response for the Trial Matcher request.",
       "properties": {
         "jobId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "A processing job identifier.",
           "readOnly": true
         },
