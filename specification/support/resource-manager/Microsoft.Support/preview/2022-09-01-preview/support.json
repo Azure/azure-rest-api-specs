@@ -2204,6 +2204,27 @@
         "displayName": {
           "description": "Localized name of problem classification.",
           "type": "string"
+        },
+        "secondaryConsentEnabled": {
+          "description": "This property indicates whether secondary consent is present for problem classification",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecondaryConsentEnabled"
+          }
+        }
+      }
+    },
+    "SecondaryConsentEnabled": {
+      "description": "This property indicates whether secondary consent is present for problem classification.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Description of Secondary consent.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of Secondary consent.",
+          "type": "string"
         }
       }
     },
@@ -2444,11 +2465,6 @@
           "type": "string",
           "readOnly": true
         },
-        "productionOutage": {
-          "description": "Indicates if this issue is a production outage.",
-          "type": "boolean",
-          "readOnly": true
-        },
         "require24X7Response": {
           "description": "Indicates if this requires a 24x7 response from Azure.",
           "type": "boolean"
@@ -2464,6 +2480,16 @@
             "name": "Consent",
             "modelAsString": true
           }
+        },
+        "ProblemScopingQuestions": {
+          "description": "Problem scoping questions associated with the support ticket.",
+          "type": "string",
+          "readOnly": true
+        },
+        "SupportPlanId": {
+          "description": "Support plan id associated with the support ticket.",
+          "type": "string",
+          "readOnly": true
         },
         "contactDetails": {
           "$ref": "#/definitions/ContactProfile",
@@ -2533,6 +2559,13 @@
         "quotaTicketDetails": {
           "$ref": "#/definitions/QuotaTicketDetails",
           "description": "Additional ticket details associated with a quota support ticket request."
+        },
+        "secondaryConsent": {
+          "description": "This property indicates secondary consents for the support ticket",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecondaryConsent"
+          }
         }
       }
     },
@@ -2734,6 +2767,20 @@
         }
       }
     },
+    "SecondaryConsent": {
+      "description": "This property indicates secondary consent for the support ticket.",
+      "type": "object",
+      "properties": {
+        "userConsent": {
+          "description": "User consent value provided",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of user consent.",
+          "type": "string"
+        }
+      }
+    },
     "UpdateSupportTicket": {
       "description": "Updates severity, ticket status, and contact details in the support ticket.",
       "type": "object",
@@ -2779,6 +2826,13 @@
             "name": "Consent",
             "modelAsString": true
           }
+        },
+        "secondaryConsent": {
+          "description": "This property indicates secondary consents for the support ticket",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecondaryConsent"
+          }
         }
       }
     },
@@ -2806,13 +2860,19 @@
       "properties": {
         "properties": {
           "properties": {
-            "communications": {
+            "messages": {
               "description": "List of chat transcript communication resources.",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/ChatTranscriptDetailsProperties"
               },
               "x-ms-identifiers": []
+            },
+            "startTime": {
+              "format": "date-time",
+              "description": "Time in UTC (ISO 8601 format) when the chat began.",
+              "type": "string",
+              "readOnly": true
             }
           },
           "type": "object",
@@ -2832,14 +2892,11 @@
       ],
       "type": "object",
       "properties": {
-        "communicationType": {
-          "description": "Communication type.",
-          "enum": [
-            "web"
-          ],
+        "contentType": {
+          "description": "Content type.",
           "type": "string",
           "x-ms-enum": {
-            "name": "TranscriptCommunicationType",
+            "name": "TranscriptContentType",
             "modelAsString": true
           },
           "readOnly": true
@@ -2918,6 +2975,23 @@
         }
       }
     },
+    "FilesListResult": {
+      "description": "Object that represents a collection of File resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of File resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FileDetails"
+          }
+        },
+        "nextLink": {
+          "description": "The URI to fetch the next page of File resources.",
+          "type": "string"
+        }
+      }
+    },
     "FileDetails": {
       "x-ms-azure-resource": true,
       "description": "Object that represents File Details resource",
@@ -2965,23 +3039,6 @@
         },
         "numberOfChunks": {
           "description": "Size of the file to be uploaded",
-          "type": "string"
-        }
-      }
-    },
-    "FilesListResult": {
-      "description": "Object that represents a collection of File resources.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "List of File resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FileDetails"
-          }
-        },
-        "nextLink": {
-          "description": "The URI to fetch the next page of File resources.",
           "type": "string"
         }
       }
