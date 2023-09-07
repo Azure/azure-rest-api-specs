@@ -20,6 +20,15 @@ batch:
 ```
 
 
+### Tag: package-2023-06
+
+These settings apply only when `--tag=package-2023-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-06'
+input-file:
+  - Microsoft.OffAzure/stable/2023-06-06/migrate.json
+```
+
 ### Tag: package-2023-03
 
 These settings apply only when `--tag=package-2023-03` is specified on the command line.
