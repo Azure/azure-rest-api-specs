@@ -26,15 +26,65 @@ These are the global settings for the app.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-04
+tag: package-2023-05
 ```
 
+### Tag: package-preview-2023-05
 
+These settings apply only when `--tag=package-preview-2023-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-05'
+input-file:
+  - Microsoft.App/preview/2023-05-02-preview/AuthConfigs.json
+  - Microsoft.App/preview/2023-05-02-preview/AvailableWorkloadProfiles.json
+  - Microsoft.App/preview/2023-05-02-preview/BillingMeters.json
+  - Microsoft.App/preview/2023-05-02-preview/CommonDefinitions.json
+  - Microsoft.App/preview/2023-05-02-preview/ConnectedEnvironments.json
+  - Microsoft.App/preview/2023-05-02-preview/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/preview/2023-05-02-preview/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2023-05-02-preview/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/preview/2023-05-02-preview/ContainerApps.json
+  - Microsoft.App/preview/2023-05-02-preview/ContainerAppsRevisions.json
+  - Microsoft.App/preview/2023-05-02-preview/Diagnostics.json
+  - Microsoft.App/preview/2023-05-02-preview/Global.json
+  - Microsoft.App/preview/2023-05-02-preview/Jobs.json
+  - Microsoft.App/preview/2023-05-02-preview/ManagedEnvironments.json
+  - Microsoft.App/preview/2023-05-02-preview/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2023-05-02-preview/ManagedEnvironmentsStorages.json
+  - Microsoft.App/preview/2023-05-02-preview/SourceControls.json
+  - Microsoft.App/preview/2023-05-02-preview/Subscriptions.json
+  - Microsoft.App/preview/2023-05-02-preview/Usages.json
+```
+
+### Tag: package-2023-05
+
+These settings apply only when `--tag=package-2023-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-05'
+input-file:
+  - Microsoft.App/stable/2023-05-01/AuthConfigs.json
+  - Microsoft.App/stable/2023-05-01/AvailableWorkloadProfiles.json
+  - Microsoft.App/stable/2023-05-01/BillingMeters.json
+  - Microsoft.App/stable/2023-05-01/CommonDefinitions.json
+  - Microsoft.App/stable/2023-05-01/ConnectedEnvironments.json
+  - Microsoft.App/stable/2023-05-01/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/stable/2023-05-01/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/stable/2023-05-01/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/stable/2023-05-01/ContainerApps.json
+  - Microsoft.App/stable/2023-05-01/ContainerAppsRevisions.json
+  - Microsoft.App/stable/2023-05-01/Diagnostics.json
+  - Microsoft.App/stable/2023-05-01/Global.json
+  - Microsoft.App/stable/2023-05-01/Jobs.json
+  - Microsoft.App/stable/2023-05-01/ManagedEnvironments.json
+  - Microsoft.App/stable/2023-05-01/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/stable/2023-05-01/ManagedEnvironmentsStorages.json
+  - Microsoft.App/stable/2023-05-01/SourceControls.json
+```
 ### Tag: package-preview-2023-04
 
 These settings apply only when `--tag=package-preview-2023-04` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-04'
+``` yaml $(tag) == 'package-preview-2023-04'
 input-file:
   - Microsoft.App/preview/2023-04-01-preview/AuthConfigs.json
   - Microsoft.App/preview/2023-04-01-preview/AvailableWorkloadProfiles.json
@@ -54,6 +104,7 @@ input-file:
   - Microsoft.App/preview/2023-04-01-preview/ManagedEnvironmentsStorages.json
   - Microsoft.App/preview/2023-04-01-preview/SourceControls.json
 ```
+
 ### Tag: package-preview-2022-11
 
 These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.

@@ -42,7 +42,7 @@ op ArmResourceNoRequestBodyActionSync<
   TResponse extends TypeSpec.Reflection.Model,
   TBaseParameters = Azure.ResourceManager.Foundations.BaseParameters<TResource>
 >(
-  ...ResourceInstanceParameters<TResource, TBaseParameters>
+  ...ResourceInstanceParameters<TResource, TBaseParameters>,
 ): ArmResponse<TResponse> | ErrorResponse;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "this is a template"
@@ -61,7 +61,7 @@ op ArmResourceNoRequestBodyActionAsync<
   TResponse extends TypeSpec.Reflection.Model,
   TBaseParameters = Azure.ResourceManager.Foundations.BaseParameters<TResource>
 >(
-  ...ResourceInstanceParameters<TResource, TBaseParameters>
+  ...ResourceInstanceParameters<TResource, TBaseParameters>,
 ): ArmResponse<TResponse> | ArmAcceptedResponseWithLocationHeader | ErrorResponse;
 
 #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-operation-outside-interface" "this is a template"
@@ -78,7 +78,7 @@ op FleetCustomPatchSync<
 
   @doc("The resource properties to be updated.")
   @body
-  parameters?: TPatchModel //prevents api breaking change. properties -> parameters
+  parameters?: TPatchModel, //prevents api breaking change. properties -> parameters
 ): ArmResponse<TResource> | ErrorResponse;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-outside-interface" "this is a template"
@@ -101,7 +101,7 @@ op FleetArmResourceCreateOrUpdateAsync<
 
   @doc("Resource create parameters.")
   @body
-  parameters: TResource //prevent api breaking change. resource -> parameters
+  parameters: TResource, //prevent api breaking change. resource -> parameters
 ): ArmResponse<TResource> | ArmCreatedResponse<TResource> | ErrorResponse;
 
 // this is a copy of ArmResourceDeleteAsync that adds the location header to comply with arm linter.
