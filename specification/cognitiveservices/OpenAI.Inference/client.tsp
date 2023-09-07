@@ -15,16 +15,17 @@ using Azure.ClientGenerator.Core;
 
 // The disparate possible formats for transcription and translation should be unified into a common surface by the
 // client.
-@@internal(Azure.OpenAI.getAudioTranscriptionSimpleJson)
-@@internal(Azure.OpenAI.getAudioTranscriptionVerboseJson)
-@@internal(Azure.OpenAI.getAudioTranscriptionPlainText)
-@@internal(Azure.OpenAI.getAudioTranscriptionSrt)
-@@internal(Azure.OpenAI.getAudioTranscriptionVtt)
-@@internal(Azure.OpenAI.getAudioTranslationSimpleJson)
-@@internal(Azure.OpenAI.getAudioTranslationVerboseJson)
-@@internal(Azure.OpenAI.getAudioTranslationPlainText)
-@@internal(Azure.OpenAI.getAudioTranslationSrt)
-@@internal(Azure.OpenAI.getAudioTranslationVtt)
+// We are alternatively emitting this in as custom types in a package that is private from the perspective of the user
+// @@internal(Azure.OpenAI.getAudioTranscriptionSimpleJson)
+// @@internal(Azure.OpenAI.getAudioTranscriptionVerboseJson)
+// @@internal(Azure.OpenAI.getAudioTranscriptionPlainText)
+// @@internal(Azure.OpenAI.getAudioTranscriptionSrt)
+// @@internal(Azure.OpenAI.getAudioTranscriptionVtt)
+// @@internal(Azure.OpenAI.getAudioTranslationSimpleJson)
+// @@internal(Azure.OpenAI.getAudioTranslationVerboseJson)
+// @@internal(Azure.OpenAI.getAudioTranslationPlainText)
+// @@internal(Azure.OpenAI.getAudioTranslationSrt)
+// @@internal(Azure.OpenAI.getAudioTranslationVtt)
 
 // Some models from routes with suppressed visibility are still desired for custom public surface.
 @@include(Azure.OpenAI.ImageGenerationOptions);
