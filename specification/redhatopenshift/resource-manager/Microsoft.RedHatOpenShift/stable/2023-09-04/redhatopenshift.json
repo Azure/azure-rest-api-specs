@@ -1989,6 +1989,10 @@
         "outboundType": {
           "$ref": "#/definitions/OutboundType",
           "description": "The OutboundType used for egress traffic."
+        },
+        "preconfiguredNSG": {
+          "$ref": "#/definitions/PreconfiguredNSG",
+          "description": "Specifies whether subnets are pre-attached with an NSG"
         }
       }
     },
@@ -2091,6 +2095,15 @@
           "items": {
             "$ref": "#/definitions/WorkerProfile"
           },
+          "x-ms-identifiers": []
+        },
+        "workerProfilesStatus": {
+          "description": "The cluster worker profiles status.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkerProfile"
+          },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "apiserverProfile": {
@@ -2223,6 +2236,14 @@
         "name": "OutboundType",
         "modelAsString": true
       }
+    },
+    "PreconfiguredNSG": {
+      "description": "PreconfiguredNSG represents whether customers want to use their own NSG attached to the subnets",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "type": "string"
     },
     "ProvisioningState": {
       "description": "ProvisioningState represents a provisioning state.",

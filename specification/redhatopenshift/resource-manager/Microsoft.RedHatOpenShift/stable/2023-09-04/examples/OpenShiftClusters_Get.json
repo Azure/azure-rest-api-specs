@@ -38,7 +38,8 @@
           },
           "networkProfile": {
             "podCidr": "10.128.0.0/14",
-            "serviceCidr": "172.30.0.0/16"
+            "serviceCidr": "172.30.0.0/16",
+            "preconfiguredNSG": "Disabled"
           },
           "masterProfile": {
             "vmSize": "Standard_D8s_v3",
@@ -51,6 +52,29 @@
               "diskSizeGB": 128,
               "subnetId": "/subscriptions/subscriptionId/resourceGroups/vnetResourceGroup/providers/Microsoft.Network/virtualNetworks/vnet/subnets/worker",
               "count": 3
+            }
+          ],
+          "workerProfilesStatus": [
+            {
+              "name": "worker1",
+              "vmSize": "Standard_D2s_v3",
+              "diskSizeGB": 128,
+              "subnetId": "/subscriptions/subscriptionId/resourceGroups/vnetResourceGroup/providers/Microsoft.Network/virtualNetworks/vnet/subnets/worker",
+              "count": 1
+            },
+            {
+              "name": "worker2",
+              "vmSize": "Standard_D2s_v3",
+              "diskSizeGB": 128,
+              "subnetId": "/subscriptions/subscriptionId/resourceGroups/vnetResourceGroup/providers/Microsoft.Network/virtualNetworks/vnet/subnets/worker",
+              "count": 1
+            },
+            {
+              "name": "worker3",
+              "vmSize": "Standard_D2s_v3",
+              "diskSizeGB": 128,
+              "subnetId": "/subscriptions/subscriptionId/resourceGroups/vnetResourceGroup/providers/Microsoft.Network/virtualNetworks/vnet/subnets/worker",
+              "count": 1
             }
           ],
           "apiserverProfile": {
