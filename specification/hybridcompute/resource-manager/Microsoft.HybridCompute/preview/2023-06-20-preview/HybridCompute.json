@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/validateLicense": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridCompute/validateLicense": {
       "post": {
         "tags": [
           "licenses"
@@ -66,27 +66,6 @@
             "description": "Updated Resource",
             "schema": {
               "$ref": "#/definitions/License"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/License"
-            },
-            "headers": {
-              "Location": {
-                "description": "The URL of the resource used to check the status of the asynchronous operation.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "Azure-AsyncOperation": {
-                "description": "The URI to poll for completion status.",
-                "type": "string"
-              }
             }
           },
           "default": {
@@ -141,27 +120,6 @@
               "$ref": "#/definitions/License"
             }
           },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/License"
-            },
-            "headers": {
-              "Location": {
-                "description": "The URL of the resource used to check the status of the asynchronous operation.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "Azure-AsyncOperation": {
-                "description": "The URI to poll for completion status.",
-                "type": "string"
-              }
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -210,24 +168,6 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/License"
-            }
-          },
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "description": "The URL of the resource used to check the status of the asynchronous operation.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "Azure-AsyncOperation": {
-                "description": "The URI to poll for completion status.",
-                "type": "string"
-              }
             }
           },
           "default": {
@@ -304,25 +244,10 @@
             "$ref": "#/parameters/licenseNameParameter"
           }
         ],
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "description": "The URL of the resource used to check the status of the asynchronous operation.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "Azure-AsyncOperation": {
-                "description": "The URI to poll for completion status.",
-                "type": "string"
-              }
-            }
-          },
+        "responses": {          
+          "200": {
+          "description": "OK"
+        },
           "204": {
             "description": "No Content"
           },
