@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-06
+tag: package-2023-09
 ```
 
 ## Suppression
@@ -42,6 +42,7 @@ directive:
       - clusters.json
       - extensions.json
       - galleryImages.json
+      - logicalNetworks.json
       - marketplaceGalleryImages.json
       - networkInterfaces.json
       - operations.json
@@ -59,6 +60,14 @@ directive:
       - deploymentSettings.json
       - edgeDevices.json
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
+suppressions:
+  - code: PathResourceProviderNamePascalCase
+    reason: We had already gone to production with "HCI" in our namespace, so changing it to "Hci" now would be disruptive.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    reason: The linter is mistakenly thinking that paths for a singular resource that is always named default, like "/{resourceUri}/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default," is for a collection of resources.
+    from: virtualMachineInstances.json
+  - code: TopLevelResourcesListBySubscription
+    reason: There is a 1:1 relationship between HybridCompute Machines and AzureStackHCI VirtualMachineInstances
 ```
 
 ```yaml
@@ -71,6 +80,7 @@ suppressions:
       - clusters.json
       - extensions.json
       - galleryImages.json
+      - logicalNetworks.json
       - marketplaceGalleryImages.json
       - networkInterfaces.json
       - operations.json
@@ -111,9 +121,46 @@ suppressions:
     - $.definitions.QosPolicyOverrides.properties.bandwidthPercentage_SMB
 
   - code: TopLevelResourcesListBySubscription
-    reason: It is reporting issue for proxy extension resource which doesn't have use case to ListBySubscription as this resource will always tied to one parent resource only.
-    from: edgeDevices.json
+    reason: It is reporting issue for proxy extension resource which doesn't have use case to ListBySubscription as this resource will always tied to one parent resource only. Additionally, there is a 1:1 relationship between HybridCompute Machines and AzureStackHCI VirtualMachineInstances.
+  
+  - code: GetCollectionOnlyHasValueAndNextLink
+    reason: The linter is mistakenly thinking that paths for a singular resource that is always named default, like "/{resourceUri}/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default," is for a collection of resources.
+    from: virtualMachineInstances.json
 
+```
+### Tag: package-2023-09
+
+These settings apply only when `--tag=package-2023-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-09'
+input-file:
+  - Microsoft.AzureStackHCI/stable/2023-09-01/common.json
+  - Microsoft.AzureStackHCI/stable/2023-09-01/galleryImages.json
+  - Microsoft.AzureStackHCI/stable/2023-09-01/logicalNetworks.json
+  - Microsoft.AzureStackHCI/stable/2023-09-01/marketplaceGalleryImages.json
+  - Microsoft.AzureStackHCI/stable/2023-09-01/networkInterfaces.json
+  - Microsoft.AzureStackHCI/stable/2023-09-01/storageContainers.json
+  - Microsoft.AzureStackHCI/stable/2023-09-01/virtualHardDisks.json
+  - Microsoft.AzureStackHCI/stable/2023-09-01/virtualMachineInstances.json
+```
+
+
+### Tag: package-2023-08
+
+These settings apply only when `--tag=package-2023-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-08'
+input-file:
+  - Microsoft.AzureStackHCI/stable/2023-08-01/arcSettings.json
+  - Microsoft.AzureStackHCI/stable/2023-08-01/clusters.json
+  - Microsoft.AzureStackHCI/stable/2023-08-01/extensions.json
+  - Microsoft.AzureStackHCI/stable/2023-08-01/offers.json
+  - Microsoft.AzureStackHCI/stable/2023-08-01/operations.json
+  - Microsoft.AzureStackHCI/stable/2023-08-01/publishers.json
+  - Microsoft.AzureStackHCI/stable/2023-08-01/skus.json
+  - Microsoft.AzureStackHCI/stable/2023-08-01/updateRuns.json
+  - Microsoft.AzureStackHCI/stable/2023-08-01/updateSummaries.json
+  - Microsoft.AzureStackHCI/stable/2023-08-01/updates.json
 ```
 
 ### Tag: package-preview-2023-08-01
@@ -135,12 +182,11 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2023-08-01-preview/deploymentSettings.json
   - Microsoft.AzureStackHCI/preview/2023-08-01-preview/edgeDevices.json
 ```
-
 ### Tag: package-preview-2023-07-01
 
 These settings apply only when `--tag=package-preview-2023-07-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-07-01'
+``` yaml $(tag) == 'package-preview-2023-07-01'
 input-file:
   - Microsoft.AzureStackHCI/preview/2023-07-01-preview/galleryImages.json
   - Microsoft.AzureStackHCI/preview/2023-07-01-preview/marketplaceGalleryImages.json
@@ -155,7 +201,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-06'
+``` yaml $(tag) == 'package-2023-06'
 input-file:
   - Microsoft.AzureStackHCI/stable/2023-06-01/arcSettings.json
   - Microsoft.AzureStackHCI/stable/2023-06-01/clusters.json

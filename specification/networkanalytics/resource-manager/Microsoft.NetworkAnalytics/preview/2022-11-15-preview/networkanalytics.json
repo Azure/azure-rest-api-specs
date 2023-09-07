@@ -255,13 +255,13 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Resource 'DataLakeHouseResources' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/DataLakeHouseResources"
             }
           },
           "201": {
-            "description": "ARM create operation completed successfully.",
+            "description": "Resource 'DataLakeHouseResources' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/DataLakeHouseResources"
             },
@@ -465,6 +465,7 @@
     },
     "Bypass": {
       "type": "string",
+      "description": "Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging|Metrics|AzureServices (For example, \"Logging, Metrics\"), or None to bypass none of those traffics.",
       "enum": [
         "None",
         "Logging",
@@ -473,7 +474,29 @@
       ],
       "x-ms-enum": {
         "name": "Bypass",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Represents no bypassing of traffic."
+          },
+          {
+            "name": "Logging",
+            "value": "Logging",
+            "description": "Represents bypassing logging traffic."
+          },
+          {
+            "name": "Metrics",
+            "value": "Metrics",
+            "description": "Represents bypassing metrics traffic."
+          },
+          {
+            "name": "AzureServices",
+            "value": "AzureServices",
+            "description": "Represents bypassing azure services traffic."
+          }
+        ]
       }
     },
     "CommonStorageAccountProperties": {
@@ -533,14 +556,12 @@
           "description": "The DataLakeHouseResources items on this page",
           "items": {
             "$ref": "#/definitions/DataLakeHouseResources"
-          },
-          "x-typespec-name": "DataLakeHouseResources[]"
+          }
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -556,8 +577,7 @@
           "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
-          },
-          "x-typespec-name": "Record<string>"
+          }
         },
         "properties": {
           "$ref": "#/definitions/DataLakeHouseResourcesUpdateProperties",
@@ -577,13 +597,26 @@
     },
     "DefaultAction": {
       "type": "string",
+      "description": "Specifies the default action of allow or deny when no other rules match.",
       "enum": [
         "Allow",
         "Deny"
       ],
       "x-ms-enum": {
         "name": "DefaultAction",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allow",
+            "value": "Allow",
+            "description": "Represents allow action."
+          },
+          {
+            "name": "Deny",
+            "value": "Deny",
+            "description": "Represents deny action."
+          }
+        ]
       }
     },
     "IPRules": {
@@ -697,8 +730,7 @@
           "description": "Virtual Network Rule",
           "items": {
             "$ref": "#/definitions/VirtualNetworkRule"
-          },
-          "x-typespec-name": "VirtualNetworkRule[]"
+          }
         },
         "ipRules": {
           "type": "array",
@@ -706,8 +738,7 @@
           "items": {
             "$ref": "#/definitions/IPRules"
           },
-          "x-ms-identifiers": [],
-          "x-typespec-name": "IPRules[]"
+          "x-ms-identifiers": []
         },
         "resourceAccessRules": {
           "type": "array",
@@ -715,8 +746,7 @@
           "items": {
             "$ref": "#/definitions/ResourceAccessRules"
           },
-          "x-ms-identifiers": [],
-          "x-typespec-name": "ResourceAccessRules[]"
+          "x-ms-identifiers": []
         },
         "defaultAction": {
           "$ref": "#/definitions/DefaultAction",
@@ -778,8 +808,7 @@
           "description": "The private link resource group id.",
           "items": {
             "type": "string"
-          },
-          "x-typespec-name": "string[]"
+          }
         },
         "customDnsConfigs": {
           "type": "string",
