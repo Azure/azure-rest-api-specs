@@ -446,8 +446,14 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The API was successfully deleted."
+          "202": {
+            "description": "The API was scheduled for deletion.",
+            "headers": {
+              "location": {
+                "description": "Location header",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The API was successfully deleted."
@@ -458,6 +464,10 @@
               "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
