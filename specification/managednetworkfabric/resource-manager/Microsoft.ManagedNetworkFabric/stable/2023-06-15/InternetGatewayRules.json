@@ -382,10 +382,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "./common.json#/definitions/CommonPostActionResponseForStateUpdate"
-            }
+            "description": "Success"
           },
           "202": {
             "description": "Accepted",
@@ -394,9 +391,6 @@
                 "description": "The URL to retrieve the status of the asynchronous operation.",
                 "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "./common.json#/definitions/CommonPostActionResponseForStateUpdate"
             }
           },
           "default": {
@@ -541,7 +535,10 @@
           "items": {
             "type": "object",
             "$ref": "#/definitions/AddressListV1Properties"
-          }
+          },
+          "x-ms-identifiers": [
+            "source"
+          ]
         }
       }
     },
