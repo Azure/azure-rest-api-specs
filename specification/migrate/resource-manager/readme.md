@@ -203,6 +203,16 @@ These settings apply only when `--tag=package-hubmigrate-2023-01` is specified o
 ``` yaml $(tag) == 'package-hubmigrate-2023-01'
 input-file:
 - Microsoft.Migrate/MigrateProjects/stable/2023-01-01/hubmigrate.json
+- Microsoft.Migrate/AssessmentProjects/stable/2019-10-01/migrate.json
+```
+
+### Tag: package-hubmigrate-2023-01-only
+
+These settings apply only when `--tag=package-hubmigrate-2023-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-hubmigrate-2023-01-only'
+input-file:
+- Microsoft.Migrate/MigrateProjects/stable/2023-01-01/hubmigrate.json
 ```
 
 ### Tag: package-migrateengine-2022-05
