@@ -1,0 +1,83 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"version": "2018-01-01",
+		"title": "Schema of Azure Resource Management events published to Azure Event Grid via Azure Resource Notifications",
+		"description": "Describes the schema of the Azure Resource Management events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."
+	},
+	"paths": {},
+	"definitions": {
+		"CreatedOrUpdatedEventData": {
+			"description": "Schema of the Data property of an EventGridEvent for a Microsoft.ResourceNotifications.Resources.CreatedOrUpdated event.",
+			"type": "object",
+			"properties": {
+				"resourceInfo": {
+					"description": "Data specific to the resource",
+					"type": "object",
+					"id": {
+						"description": "id of the base resource which is being created or updated",
+						"type": "string"
+					},
+					"name": {
+						"description": "name of the resource being created or updated",
+						"type": "string"
+					},
+					"type": {
+						"description": "the type of the resource being created or updated",
+						"type": "string"
+					},
+					"location": {
+						"description": "the location of the resource being created or updated",
+						"type": "string"
+					},
+					"tags": {
+						"description": "tags on the resource being created or updated",
+						"type": "string"
+					},
+					"properties": {
+						"description": "properties in the resource payload",
+						"type": "object"
+					}
+				}
+			},
+			"apiVersion": {
+				"description": "api version of the resource payload",
+				"type": "string"
+			}
+		},
+		"DeletedEventData": {
+			"description": "Schema of the Data property of an EventGridEvent for a Microsoft.ResourceNotifications.Resources.Deleted event.",
+			"type": "object",
+			"properties": {
+				"resourceInfo": {
+					"description": "Data specific to the resource",
+					"type": "object",
+					"id": {
+						"description": "id of the base resource which is being deleted",
+						"type": "string"
+					},
+					"name": {
+						"description": "name of the resource being deleted",
+						"type": "string"
+					},
+					"type": {
+						"description": "the type of the resource being deleted",
+						"type": "string"
+					},
+					"location": {
+						"description": "the location of the resource being deleted",
+						"type": "string"
+					},
+					"tags": {
+						"description": "tags on the resource being deleted",
+						"type": "string"
+					}
+				}
+			},
+			"apiVersion": {
+				"description": "api version of the resource payload",
+				"type": "string"
+			}
+		}
+	}
+}
