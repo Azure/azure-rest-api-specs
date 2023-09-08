@@ -2978,24 +2978,28 @@
       "type": "object",
       "properties": {
         "esuProfile": {
-          "type": "object",
-          "properties": {
-            "assignedLicense": {
-              "$ref": "#/definitions/License",
-              "description": "The assigned license resource."
-            },
-            "licenseAssignmentState": {
-              "type": "string",
-              "enum": [
-                "Assigned",
-                "NotAssigned"
-              ],
-              "description": "Describes the license assignment state (Assigned or NotAssigned).",
-              "x-ms-enum": {
-                "name": "licenseAssignmentState",
-                "modelAsString": true
-              }
-            }
+          "$ref": "#/definitions/LicenseProfileMachineInstanceViewEsuProperties"
+        }
+      },
+      "description": "License Profile Instance View in Machine Properties."
+    },
+    "LicenseProfileMachineInstanceViewEsuProperties": {
+      "type": "object",
+      "properties": {
+        "assignedLicense": {
+          "$ref": "#/definitions/License",
+          "description": "The assigned license resource."
+        },
+        "licenseAssignmentState": {
+          "type": "string",
+          "enum": [
+            "Assigned",
+            "NotAssigned"
+          ],
+          "description": "Describes the license assignment state (Assigned or NotAssigned).",
+          "x-ms-enum": {
+            "name": "licenseAssignmentState",
+            "modelAsString": true
           }
         }
       },
