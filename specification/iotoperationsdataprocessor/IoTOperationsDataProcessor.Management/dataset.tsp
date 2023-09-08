@@ -13,7 +13,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
-namespace Microsoft.IotOperationsDataProcessor;
+namespace Microsoft.IoTOperationsDataProcessor;
 
 @doc("A Dataset resource belonging to an Instance resource.")
 @parentResource(Instance)
