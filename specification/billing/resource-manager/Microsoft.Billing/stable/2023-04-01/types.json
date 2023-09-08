@@ -95,7 +95,7 @@
           "readOnly": true
         },
         "type": {
-          "description": "Resource type.",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\".",
           "type": "string",
           "readOnly": true
         },
@@ -247,6 +247,15 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
+    "associatedTenantName": {
+      "in": "path",
+      "name": "associatedTenantName",
+      "description": "The ID that uniquely identifies a tenant.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
+      "x-ms-parameter-location": "method"
+    },
     "filter": {
       "in": "query",
       "name": "filter",
@@ -289,15 +298,6 @@
       "name": "search",
       "description": "The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.",
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "associatedTenantName": {
-      "in": "path",
-      "name": "associatedTenantName",
-      "description": "The ID that uniquely identifies a tenant.",
-      "required": true,
-      "type": "string",
-      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
       "x-ms-parameter-location": "method"
     },
     "billingProfileName": {
@@ -357,7 +357,16 @@
     "enrollmentAccountName": {
       "in": "path",
       "name": "enrollmentAccountName",
-      "description": "The ID that uniquely identifies an enrollment account",
+      "description": "The ID that uniquely identifies an enrollment account.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[1-9][0-9]*$",
+      "x-ms-parameter-location": "method"
+    },
+    "departmentName": {
+      "in": "path",
+      "name": "departmentName",
+      "description": "The ID that uniquely identifies the department.",
       "required": true,
       "type": "string",
       "pattern": "^[1-9][0-9]*$",

@@ -80,69 +80,6 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingRequests": {
-      "get": {
-        "tags": [
-          "BillingRequest"
-        ],
-        "description": "The list of billing requests submitted by a user.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "BillingRequests_ListByUser",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "./types.json#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "./types.json#/parameters/filter"
-          },
-          {
-            "$ref": "./types.json#/parameters/orderBy"
-          },
-          {
-            "$ref": "./types.json#/parameters/top"
-          },
-          {
-            "$ref": "./types.json#/parameters/skip"
-          },
-          {
-            "$ref": "./types.json#/parameters/count"
-          },
-          {
-            "$ref": "./types.json#/parameters/search"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The list of billing requests.",
-            "schema": {
-              "$ref": "#/definitions/BillingRequestListResult"
-            }
-          },
-          "default": {
-            "description": "Default response",
-            "schema": {
-              "$ref": "./types.json#/definitions/ArmErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "BillingRequestsListByUser": {
-            "$ref": "./examples/billingRequestsListByUser.json"
-          },
-          "BillingRequestsListByUserWithFilter": {
-            "$ref": "./examples/billingRequestsListByUserWithFilter.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/providers/Microsoft.Billing/billingRequests/{billingRequestName}": {
       "get": {
         "tags": [
@@ -251,6 +188,69 @@
           "BillingRequestsCreateOrUpdate": {
             "$ref": "./examples/billingRequestsCreateOrUpdate.json"
           }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingRequests": {
+      "get": {
+        "tags": [
+          "BillingRequest"
+        ],
+        "description": "The list of billing requests submitted by a user.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRequests_ListByUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "$ref": "./types.json#/parameters/orderBy"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          },
+          {
+            "$ref": "./types.json#/parameters/count"
+          },
+          {
+            "$ref": "./types.json#/parameters/search"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of billing requests.",
+            "schema": {
+              "$ref": "#/definitions/BillingRequestListResult"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingRequestsListByUser": {
+            "$ref": "./examples/billingRequestsListByUser.json"
+          },
+          "BillingRequestsListByUserWithFilter": {
+            "$ref": "./examples/billingRequestsListByUserWithFilter.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
