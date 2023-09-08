@@ -1,55 +1,53 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "Billing client provides access to billing resources for Azure subscriptions.",
     "title": "BillingManagementClient",
+    "description": "Documentation for Microsoft.Billing.",
+    "contact": {
+      "name": "Microsoft.Billing",
+      "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
+      "email": "cabbpt@microsoft.com"
+    },
     "version": "2023-04-01"
   },
-  "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
   "paths": {
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingPermissions": {
       "get": {
+        "tags": [
+          "BillingPermission"
+        ],
         "description": "Lists the billing permissions the caller has on a billing account.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
         "operationId": "BillingPermissions_ListByBillingAccount",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "$ref": "./types.json#/parameters/apiVersionParameter"
+            "$ref": "./types.json#/parameters/billingAccountName"
           },
           {
-            "$ref": "./types.json#/parameters/billingAccountName"
+            "$ref": "./types.json#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK. The request has succeeded.",
+            "description": "The list of billingPermissions a caller has on a billing account.",
             "schema": {
-              "$ref": "#/definitions/BillingPermissionsListResult"
+              "$ref": "#/definitions/BillingPermissionListResult"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Default response",
             "schema": {
-              "$ref": "./types.json#/definitions/ArmError"
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
           }
         },
-        "tags": [
-          "BillingPermissions"
-        ],
         "x-ms-examples": {
-          "billingPermissionsListByBillingAccount": {
+          "BillingPermissionsListByBillingAccount": {
             "$ref": "./examples/billingPermissionsListByBillingAccount.json"
           }
         },
@@ -60,42 +58,96 @@
     },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/billingPermissions": {
       "get": {
+        "tags": [
+          "BillingPermission"
+        ],
         "description": "Lists the billing permissions the caller has on a billing profile.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
         "operationId": "BillingPermissions_ListByBillingProfile",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
-          {
-            "$ref": "./types.json#/parameters/apiVersionParameter"
-          },
           {
             "$ref": "./types.json#/parameters/billingAccountName"
           },
           {
             "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK. The request has succeeded.",
+            "description": "The list of billingPermissions a caller has on a billing profile.",
             "schema": {
-              "$ref": "#/definitions/BillingPermissionsListResult"
+              "$ref": "#/definitions/BillingPermissionListResult"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Default response",
             "schema": {
-              "$ref": "./types.json#/definitions/ArmError"
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
           }
         },
-        "tags": [
-          "BillingPermissions"
-        ],
         "x-ms-examples": {
-          "billingPermissionsListByBillingProfile": {
+          "BillingPermissionsListByBillingProfile": {
             "$ref": "./examples/billingPermissionsListByBillingProfile.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/billingPermissions": {
+      "get": {
+        "tags": [
+          "BillingPermission"
+        ],
+        "description": "Lists the billing permissions the caller has for a customer.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingPermissions_ListByCustomer",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/customerName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of billingPermissions a caller has on a customer.",
+            "schema": {
+              "$ref": "#/definitions/BillingPermissionListResult"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingPermissionsListByCustomer": {
+            "$ref": "./examples/billingPermissionsListByCustomer.json"
           }
         },
         "x-ms-pageable": {
@@ -105,15 +157,18 @@
     },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/billingPermissions": {
       "get": {
-        "description": "Lists the billing permissions the caller has on an invoice section.",
+        "tags": [
+          "BillingPermission"
+        ],
+        "description": "Lists the billing permissions the caller has for an invoice section.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
-        "operationId": "BillingPermissions_ListByInvoiceSections",
+        "operationId": "BillingPermissions_ListByInvoiceSection",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
-          {
-            "$ref": "./types.json#/parameters/apiVersionParameter"
-          },
           {
             "$ref": "./types.json#/parameters/billingAccountName"
           },
@@ -122,73 +177,28 @@
           },
           {
             "$ref": "./types.json#/parameters/invoiceSectionName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/BillingPermissionsListResult"
-            }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./types.json#/definitions/ArmError"
-            }
-          }
-        },
-        "tags": [
-          "BillingPermissions"
-        ],
-        "x-ms-examples": {
-          "billingPermissionsListByInvoiceSection": {
-            "$ref": "./examples/billingPermissionsListByInvoiceSection.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}/billingPermissions": {
-      "get": {
-        "description": "Lists the billing permissions the caller has for a customer.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "BillingPermissions_ListByCustomer",
-        "parameters": [
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "./types.json#/parameters/billingAccountName"
-          },
-          {
-            "$ref": "./types.json#/parameters/customerName"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK. The request has succeeded.",
+            "description": "The list of billingPermissions a caller has on an invoice section.",
             "schema": {
-              "$ref": "#/definitions/BillingPermissionsListResult"
+              "$ref": "#/definitions/BillingPermissionListResult"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Default response",
             "schema": {
-              "$ref": "./types.json#/definitions/ArmError"
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
           }
         },
-        "tags": [
-          "BillingPermissions"
-        ],
         "x-ms-examples": {
-          "billingPermissionsListByCustomer": {
-            "$ref": "./examples/billingPermissionsListByCustomer.json"
+          "BillingPermissionsListByInvoiceSection": {
+            "$ref": "./examples/billingPermissionsListByInvoiceSection.json"
           }
         },
         "x-ms-pageable": {
@@ -198,66 +208,70 @@
     }
   },
   "definitions": {
-    "Action": {
-      "description": "The action the caller is allowed to perform.",
-      "readOnly": true,
-      "type": "string"
-    },
-    "BillingPermissionsListResult": {
-      "description": "Result of list billingPermissions a caller has on a billing account.",
-      "properties": {
-        "nextLink": {
-          "description": "The link (url) to the next page of results.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "value": {
-          "description": "The list of billingPermissions a caller has on a billing account.",
-          "items": {
-            "$ref": "#/definitions/BillingPermissionsProperties"
-          },
-          "readOnly": true,
-          "type": "array"
-        }
-      }
-    },
-    "BillingPermissionsProperties": {
-      "description": "The set of allowed action and not allowed actions a caller has on a billing account",
+    "BillingPermission": {
+      "description": "The set of allowed action and not allowed actions a caller has on a resource.",
+      "type": "object",
       "properties": {
         "actions": {
           "description": "The set of actions that the caller is allowed to perform.",
+          "type": "array",
           "items": {
-            "$ref": "#/definitions/Action"
+            "type": "string"
           },
           "readOnly": true,
-          "type": "array"
+          "x-ms-identifiers": [ ]
         },
         "notActions": {
           "description": "The set of actions that the caller is not allowed to perform.",
+          "type": "array",
           "items": {
-            "$ref": "#/definitions/NotAction"
+            "type": "string"
           },
           "readOnly": true,
-          "type": "array"
+          "x-ms-identifiers": [ ]
         }
-      },
-      "type": "object"
+      }
     },
-    "NotAction": {
-      "description": "The set of actions that the caller is not allowed to perform.",
-      "readOnly": true,
-      "type": "string"
+    "BillingPermissionListResult": {
+      "description": "A container for a list of resources",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "The list of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BillingPermission"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [ ]
+        }
+      }
     }
   },
   "securityDefinitions": {
     "azure_auth": {
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "description": "Azure Active Directory OAuth2 Flow.",
+      "type": "oauth2",
       "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       },
-      "type": "oauth2"
+      "description": "Azure Active Directory OAuth2 Flow."
     }
-  }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ]
 }

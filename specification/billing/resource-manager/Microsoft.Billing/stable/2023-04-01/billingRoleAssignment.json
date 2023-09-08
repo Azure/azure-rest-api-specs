@@ -1,9 +1,1703 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "Billing client provides access to billing resources for Azure subscriptions.",
     "title": "BillingManagementClient",
+    "description": "Documentation for Microsoft.Billing.",
+    "contact": {
+      "name": "Microsoft.Billing",
+      "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
+      "email": "cabbpt@microsoft.com"
+    },
     "version": "2023-04-01"
+  },
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/billingRoleAssignments/{billingRoleAssignmentName}": {
+      "delete": {
+        "tags": [
+          "BillingRoleAssignment"
+        ],
+        "description": "Deletes a role assignment for the caller on a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRoleAssignments_DeleteByBillingProfile",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "in": "path",
+            "name": "billingRoleAssignmentName",
+            "description": "The ID that uniquely identifies a role assignment.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The properties of the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignment"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingRoleAssignmentDeleteByBillingProfile": {
+            "$ref": "./examples/billingRoleAssignmentDeleteByBillingProfile.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "BillingRoleAssignment"
+        ],
+        "description": "Gets a role assignment for the caller on a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRoleAssignments_GetByBillingProfile",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "in": "path",
+            "name": "billingRoleAssignmentName",
+            "description": "The ID that uniquely identifies a role assignment.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The properties of the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignment"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingRoleAssignmentGetByBillingAccount": {
+            "$ref": "./examples/billingRoleAssignmentGetByBillingAccount.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/billingRoleAssignments": {
+      "get": {
+        "tags": [
+          "BillingRoleAssignment"
+        ],
+        "description": "Lists the role assignments for the caller on a billing profile. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRoleAssignments_ListByBillingProfile",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "in": "query",
+            "name": "expand",
+            "description": "May be used to expand the participants.",
+            "type": "string"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of role assignments.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingRoleAssignmentListByBillingProfile": {
+            "$ref": "./examples/billingRoleAssignmentListByBillingProfile.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/createBillingRoleAssignment": {
+      "post": {
+        "tags": [
+          "BillingRoleAssignment"
+        ],
+        "description": "Adds a role assignment on a billing profile. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRoleAssignments_CreateByBillingProfile",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The properties of the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignmentProperties"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The properties of the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignment"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "202": {
+            "description": "The properties of the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignment"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "BillingRoleAssignmentCreateByBillingProfile": {
+            "$ref": "./examples/billingRoleAssignmentCreateByBillingProfile.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/billingRoleAssignments/{billingRoleAssignmentName}": {
+      "delete": {
+        "tags": [
+          "BillingRoleAssignment"
+        ],
+        "description": "Deletes a role assignment for the caller on a customer. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRoleAssignments_DeleteByCustomer",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/customerName"
+          },
+          {
+            "in": "path",
+            "name": "billingRoleAssignmentName",
+            "description": "The ID that uniquely identifies a role assignment.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The properties of the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignment"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingRoleAssignmentDeleteByCustomer": {
+            "$ref": "./examples/billingRoleAssignmentDeleteByCustomer.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "BillingRoleAssignment"
+        ],
+        "description": "Gets a role assignment for the caller on a customer. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRoleAssignments_GetByCustomer",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/customerName"
+          },
+          {
+            "in": "path",
+            "name": "billingRoleAssignmentName",
+            "description": "The ID that uniquely identifies a role assignment.",
+            "required": true,
+            "type": "string",
+            "pattern": "^([0-9]+|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The properties of the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignment"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingRoleAssignmentGetByCustomer": {
+            "$ref": "./examples/billingRoleAssignmentGetByCustomer.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/billingRoleAssignments": {
+      "get": {
+        "tags": [
+          "BillingRoleAssignment"
+        ],
+        "description": "Lists the role assignments for the caller on customer. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRoleAssignments_ListByCustomer",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/customerName"
+          },
+          {
+            "in": "query",
+            "name": "enablePagination",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "in": "query",
+            "name": "expand",
+            "description": "May be used to expand the participants.",
+            "type": "string"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of role assignments.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingRoleAssignmentListByCustomer": {
+            "$ref": "./examples/billingRoleAssignmentListByCustomer.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/createBillingRoleAssignment": {
+      "post": {
+        "tags": [
+          "BillingRoleAssignment"
+        ],
+        "description": "Adds a role assignment on a customer. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRoleAssignments_CreateByCustomer",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/customerName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignmentProperties"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The properties of the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignment"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "202": {
+            "description": "The properties of the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignment"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "BillingRoleAssignmentCreateByCustomer": {
+            "$ref": "./examples/billingRoleAssignmentCreateByCustomer.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/resolveBillingRoleAssignments": {
+      "post": {
+        "tags": [
+          "BillingRoleAssignment"
+        ],
+        "description": "Lists the role assignments for the caller on a customer while fetching user info for each role assignment. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRoleAssignments_ResolveByCustomer",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "in": "path",
+            "name": "customerName",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "resolveScopeDisplayNames",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "description": "May be used to filter the list of role assignments.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The list of role assignments.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignmentListResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ResolveBillingRoleAssignmentByCustomer": {
+            "$ref": "./examples/resolveBillingRoleAssignmentByCustomer.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/billingRoleAssignments/{billingRoleAssignmentName}": {
+      "delete": {
+        "tags": [
+          "BillingRoleAssignment"
+        ],
+        "description": "Deletes a role assignment for the caller on an invoice section. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRoleAssignments_DeleteByInvoiceSection",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceSectionName"
+          },
+          {
+            "in": "path",
+            "name": "billingRoleAssignmentName",
+            "description": "The ID that uniquely identifies a role assignment.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The properties of the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignment"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingRoleAssignmentDeleteByInvoiceSection": {
+            "$ref": "./examples/billingRoleAssignmentDeleteByInvoiceSection.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "BillingRoleAssignment"
+        ],
+        "description": "Gets a role assignment for the caller on an invoice section. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRoleAssignments_GetByInvoiceSection",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceSectionName"
+          },
+          {
+            "in": "path",
+            "name": "billingRoleAssignmentName",
+            "description": "The ID that uniquely identifies a role assignment.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The properties of the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignment"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingRoleAssignmentGetByInvoiceSection": {
+            "$ref": "./examples/billingRoleAssignmentGetByInvoiceSection.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/billingRoleAssignments": {
+      "get": {
+        "tags": [
+          "BillingRoleAssignment"
+        ],
+        "description": "Lists the role assignments for the caller on an invoice section. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRoleAssignments_ListByInvoiceSection",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceSectionName"
+          },
+          {
+            "in": "query",
+            "name": "enablePagination",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "in": "query",
+            "name": "expand",
+            "description": "May be used to expand the participants.",
+            "type": "string"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of role assignments.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingRoleAssignmentListByInvoiceSection": {
+            "$ref": "./examples/billingRoleAssignmentListByInvoiceSection.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/createBillingRoleAssignment": {
+      "post": {
+        "tags": [
+          "BillingRoleAssignment"
+        ],
+        "description": "Adds a role assignment on an invoice section. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRoleAssignments_CreateByInvoiceSection",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceSectionName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The properties of the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignmentProperties"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The properties of the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignment"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "202": {
+            "description": "The properties of the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignment"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "BillingRoleAssignmentCreateByInvoiceSection": {
+            "$ref": "./examples/billingRoleAssignmentCreateByInvoiceSection.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/resolveBillingRoleAssignments": {
+      "post": {
+        "tags": [
+          "BillingRoleAssignment"
+        ],
+        "description": "Lists the role assignments for the caller on an invoice section while fetching user info for each role assignment. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRoleAssignments_ResolveByInvoiceSection",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceSectionName"
+          },
+          {
+            "in": "query",
+            "name": "resolveScopeDisplayNames",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "description": "May be used to filter the list of role assignments.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The list of role assignments.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignmentListResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ResolveBillingRoleAssignmentByInvoiceSection": {
+            "$ref": "./examples/resolveBillingRoleAssignmentByInvoiceSection.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/resolveBillingRoleAssignments": {
+      "post": {
+        "tags": [
+          "BillingRoleAssignment"
+        ],
+        "description": "Lists the role assignments for the caller on an billing profile while fetching user info for each role assignment. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRoleAssignments_ResolveByBillingProfile",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "in": "query",
+            "name": "resolveScopeDisplayNames",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "description": "May be used to filter the list of role assignments.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The list of role assignments.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignmentListResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ResolveBillingRoleAssignmentByBillingProfile": {
+            "$ref": "./examples/resolveBillingRoleAssignmentByBillingProfile.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingRoleAssignments/{billingRoleAssignmentName}": {
+      "delete": {
+        "tags": [
+          "BillingRoleAssignment"
+        ],
+        "description": "Deletes a role assignment for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRoleAssignments_DeleteByBillingAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "in": "path",
+            "name": "billingRoleAssignmentName",
+            "description": "The ID that uniquely identifies a role assignment.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The properties of the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignment"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingRoleAssignmentDeleteByBillingAccount": {
+            "$ref": "./examples/billingRoleAssignmentDeleteByBillingAccount.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "BillingRoleAssignment"
+        ],
+        "description": "Gets a role assignment for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRoleAssignments_GetByBillingAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "in": "path",
+            "name": "billingRoleAssignmentName",
+            "description": "The ID that uniquely identifies a role assignment.",
+            "required": true,
+            "type": "string",
+            "pattern": "^([0-9]+|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The properties of the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignment"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingRoleAssignmentGetByBillingAccount": {
+            "$ref": "./examples/billingRoleAssignmentGetByBillingAccount.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "BillingRoleAssignment"
+        ],
+        "description": "Create or update a billing role assignment.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRoleAssignments_CreateOrUpdateByBillingAccount",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "in": "path",
+            "name": "billingRoleAssignmentName",
+            "description": "The ID that uniquely identifies a role assignment.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The properties of the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The properties of the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignment"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingRoleAssignmentCreateOrUpdateByBillingAccount": {
+            "$ref": "./examples/billingRoleAssignmentCreateOrUpdateByBillingAccount.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingRoleAssignments": {
+      "get": {
+        "tags": [
+          "BillingRoleAssignment"
+        ],
+        "description": "Lists the role assignments for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRoleAssignments_ListByBillingAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "in": "query",
+            "name": "expand",
+            "description": "May be used to expand the participants.",
+            "type": "string"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of role assignments.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingRoleAssignmentListByBillingAccount": {
+            "$ref": "./examples/billingRoleAssignmentListByBillingAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/createBillingRoleAssignment": {
+      "post": {
+        "tags": [
+          "BillingRoleAssignment"
+        ],
+        "description": "Adds a role assignment on a billing account. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRoleAssignments_AddByBillingAccount",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The properties of the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignmentProperties"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The properties of the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignment"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "202": {
+            "description": "The properties of the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignment"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "BillingRoleAssignmentCreateByBillingAccount": {
+            "$ref": "./examples/billingRoleAssignmentCreateByBillingAccount.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/enrollmentAccounts/{enrollmentAccountName}/billingRoleAssignments/{billingRoleAssignmentName}": {
+      "delete": {
+        "tags": [
+          "BillingRoleAssignment"
+        ],
+        "description": "Deletes a role assignment for the caller on a enrollment Account. The operation is supported only for billing accounts with agreement type Enterprise Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRoleAssignments_DeleteByEnrollmentAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/enrollmentAccountName"
+          },
+          {
+            "in": "path",
+            "name": "billingRoleAssignmentName",
+            "description": "The ID that uniquely identifies a role assignment.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The properties of the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignment"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingRoleAssignmentDeleteByEnrollmentAccount": {
+            "$ref": "./examples/billingRoleAssignmentDeleteByEnrollmentAccount.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "BillingRoleAssignment"
+        ],
+        "description": "Gets a role assignment for the caller on a enrollment Account. The operation is supported only for billing accounts with agreement type Enterprise Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRoleAssignments_GetByEnrollmentAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/enrollmentAccountName"
+          },
+          {
+            "in": "path",
+            "name": "billingRoleAssignmentName",
+            "description": "The ID that uniquely identifies a role assignment.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The properties of the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignment"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingRoleAssignmentGetByEnrollmentAccount": {
+            "$ref": "./examples/billingRoleAssignmentGetByEnrollmentAccount.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "BillingRoleAssignment"
+        ],
+        "description": "Create or update a billing role assignment.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRoleAssignments_CreateOrUpdateByEnrollmentAccount",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/enrollmentAccountName"
+          },
+          {
+            "in": "path",
+            "name": "billingRoleAssignmentName",
+            "description": "The ID that uniquely identifies a role assignment.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The properties of the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignment"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The properties of the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignment"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "BillingRoleAssignmentCreateOrUpdateByEnrollmentAccount": {
+            "$ref": "./examples/billingRoleAssignmentCreateOrUpdateByEnrollmentAccount.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/enrollmentAccounts/{enrollmentAccountName}/billingRoleAssignments": {
+      "get": {
+        "tags": [
+          "BillingRoleAssignment"
+        ],
+        "description": "Lists the role assignments for the caller on a enrollment account. The operation is supported for billing accounts of type Enterprise Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRoleAssignments_ListByEnrollmentAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/enrollmentAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of role assignments.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingRoleAssignmentListByEnrollmentAccount": {
+            "$ref": "./examples/billingRoleAssignmentListByEnrollmentAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/resolveBillingRoleAssignments": {
+      "post": {
+        "tags": [
+          "BillingRoleAssignment"
+        ],
+        "description": "Lists the role assignments for the caller on a billing account while fetching user info for each role assignment. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRoleAssignments_ResolveByBillingAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "in": "query",
+            "name": "resolveScopeDisplayNames",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "description": "May be used to filter the list of role assignments.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The list of role assignments.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignmentListResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ResolveBillingRoleAssignmentByBillingAccount": {
+            "$ref": "./examples/resolveBillingRoleAssignmentByBillingAccount.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BillingRoleAssignment": {
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ArmResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties of a(n) BillingRoleAssignment",
+          "allOf": [
+            {
+              "$ref": "#/definitions/BillingRoleAssignmentProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "BillingRoleAssignmentListResult": {
+      "description": "A container for a list of resources",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "The list of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BillingRoleAssignment"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      }
+    },
+    "BillingRoleAssignmentProperties": {
+      "required": [
+        "roleDefinitionId"
+      ],
+      "type": "object",
+      "properties": {
+        "createdOn": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "createdByPrincipalTenantId": {
+          "type": "string"
+        },
+        "createdByPrincipalId": {
+          "type": "string"
+        },
+        "createdByPrincipalPuid": {
+          "type": "string"
+        },
+        "createdByUserEmailAddress": {
+          "type": "string"
+        },
+        "modifiedOn": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "modifiedByPrincipalPuid": {
+          "type": "string"
+        },
+        "modifiedByUserEmailAddress": {
+          "type": "string"
+        },
+        "modifiedByPrincipalId": {
+          "type": "string"
+        },
+        "modifiedByPrincipalTenantId": {
+          "type": "string"
+        },
+        "notificationContact": {
+          "type": "string"
+        },
+        "notificationFrequency": {
+          "enum": [
+            "None",
+            "Daily",
+            "Monthly",
+            "Weekly"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NotificationFrequency",
+            "modelAsString": true
+          }
+        },
+        "principalPuid": {
+          "type": "string"
+        },
+        "principalId": {
+          "type": "string"
+        },
+        "principalTenantId": {
+          "type": "string"
+        },
+        "roleDefinitionId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "scope": {
+          "type": "string"
+        },
+        "userAuthenticationType": {
+          "type": "string"
+        },
+        "userEmailAddress": {
+          "type": "string"
+        },
+        "waeP_UserRoleId": {
+          "type": "string"
+        },
+        "principalTenantName": {
+          "type": "string"
+        },
+        "principalDisplayName": {
+          "type": "string"
+        },
+        "principalType": {
+          "enum": [
+            "Unknown",
+            "None",
+            "User",
+            "Group",
+            "DirectoryRole",
+            "ServicePrincipal",
+            "Everyone"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PrincipalType",
+            "modelAsString": true
+          }
+        },
+        "permissionRequestId": {
+          "type": "string"
+        },
+        "billingAccountId": {
+          "type": "string"
+        },
+        "billingAccountDisplayName": {
+          "type": "string"
+        },
+        "billingProfileId": {
+          "type": "string"
+        },
+        "billingProfileDisplayName": {
+          "type": "string"
+        },
+        "invoiceSectionId": {
+          "type": "string"
+        },
+        "invoiceSectionDisplayName": {
+          "type": "string"
+        },
+        "customerId": {
+          "type": "string"
+        },
+        "customerDisplayName": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
   },
   "host": "management.azure.com",
   "schemes": [
@@ -14,504 +1708,5 @@
   ],
   "produces": [
     "application/json"
-  ],
-  "paths": {
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/billingRoleAssignments": {
-      "get": {
-        "description": "Lists the role assignments for the caller on a billing profile. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "BillingRoleAssignments_ListByBillingProfile",
-        "parameters": [
-          {
-            "$ref": "./types.json#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "./types.json#/parameters/billingAccountName"
-          },
-          {
-            "$ref": "./types.json#/parameters/billingProfileName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignmentListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./types.json#/definitions/ArmError"
-            }
-          }
-        },
-        "tags": [
-          "BillingRoleAssignments"
-        ],
-        "x-ms-examples": {
-          "billingRoleAssignmentsListByBillingProfile": {
-            "$ref": "./examples/billingRoleAssignmentsListByBillingProfile.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/billingRoleAssignments/{billingRoleAssignmentName}": {
-      "delete": {
-        "description": "Deletes a role assignment for the caller on a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
-        "operationId": "BillingRoleAssignments_DeleteByBillingProfile",
-        "parameters": [
-          {
-            "$ref": "./types.json#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "./types.json#/parameters/billingAccountName"
-          },
-          {
-            "$ref": "./types.json#/parameters/billingProfileName"
-          },
-          {
-            "$ref": "#/parameters/billingRoleAssignmentName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignment"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./types.json#/definitions/ArmError"
-            }
-          }
-        },
-        "tags": [
-          "BillingRoleAssignments"
-        ],
-        "x-ms-examples": {
-          "billingRoleAssignmentsDeleteByBillingProfile": {
-            "$ref": "./examples/billingRoleAssignmentsDeleteByBillingProfile.json"
-          }
-        }
-      },
-      "get": {
-        "description": "Gets a role assignment for the caller on a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "BillingRoleAssignments_GetByBillingProfile",
-        "parameters": [
-          {
-            "$ref": "./types.json#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "./types.json#/parameters/billingAccountName"
-          },
-          {
-            "$ref": "./types.json#/parameters/billingProfileName"
-          },
-          {
-            "$ref": "#/parameters/billingRoleAssignmentName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignment"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./types.json#/definitions/ArmError"
-            }
-          }
-        },
-        "tags": [
-          "BillingRoleAssignments"
-        ],
-        "x-ms-examples": {
-          "billingRoleAssignmentsGetByBillingProfile": {
-            "$ref": "./examples/billingRoleAssignmentsGetByBillingProfile.json"
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/billingRoleAssignments": {
-      "get": {
-        "description": "Lists the role assignments for the caller on an invoice section. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "BillingRoleAssignments_ListByInvoiceSection",
-        "parameters": [
-          {
-            "$ref": "./types.json#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "./types.json#/parameters/billingAccountName"
-          },
-          {
-            "$ref": "./types.json#/parameters/billingProfileName"
-          },
-          {
-            "$ref": "./types.json#/parameters/invoiceSectionName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignmentListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./types.json#/definitions/ArmError"
-            }
-          }
-        },
-        "tags": [
-          "BillingRoleAssignments"
-        ],
-        "x-ms-examples": {
-          "billingRoleAssignmentsListByInvoiceSection": {
-            "$ref": "./examples/billingRoleAssignmentsListByInvoiceSection.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/billingRoleAssignments/{billingRoleAssignmentName}": {
-      "delete": {
-        "description": "Deletes a role assignment for the caller on an invoice section. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
-        "operationId": "BillingRoleAssignments_DeleteByInvoiceSection",
-        "parameters": [
-          {
-            "$ref": "./types.json#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "./types.json#/parameters/billingAccountName"
-          },
-          {
-            "$ref": "./types.json#/parameters/billingProfileName"
-          },
-          {
-            "$ref": "./types.json#/parameters/invoiceSectionName"
-          },
-          {
-            "$ref": "#/parameters/billingRoleAssignmentName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignment"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./types.json#/definitions/ArmError"
-            }
-          }
-        },
-        "tags": [
-          "BillingRoleAssignments"
-        ],
-        "x-ms-examples": {
-          "billingRoleAssignmentsDeleteByInvoiceSection": {
-            "$ref": "./examples/billingRoleAssignmentsDeleteByInvoiceSection.json"
-          }
-        }
-      },
-      "get": {
-        "description": "Gets a role assignment for the caller on an invoice section. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "BillingRoleAssignments_GetByInvoiceSection",
-        "parameters": [
-          {
-            "$ref": "./types.json#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "./types.json#/parameters/billingAccountName"
-          },
-          {
-            "$ref": "./types.json#/parameters/billingProfileName"
-          },
-          {
-            "$ref": "./types.json#/parameters/invoiceSectionName"
-          },
-          {
-            "$ref": "#/parameters/billingRoleAssignmentName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignment"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./types.json#/definitions/ArmError"
-            }
-          }
-        },
-        "tags": [
-          "BillingRoleAssignments"
-        ],
-        "x-ms-examples": {
-          "billingRoleAssignmentsGetByInvoiceSection": {
-            "$ref": "./examples/billingRoleAssignmentsGetByInvoiceSection.json"
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingRoleAssignments": {
-      "get": {
-        "description": "Lists the role assignments for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "BillingRoleAssignments_ListByBillingAccount",
-        "parameters": [
-          {
-            "$ref": "./types.json#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "./types.json#/parameters/billingAccountName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignmentListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./types.json#/definitions/ArmError"
-            }
-          }
-        },
-        "tags": [
-          "BillingRoleAssignments"
-        ],
-        "x-ms-examples": {
-          "billingRoleAssignmentsListByBillingAccount": {
-            "$ref": "./examples/billingRoleAssignmentsListByBillingAccount.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingRoleAssignments/{billingRoleAssignmentName}": {
-      "delete": {
-        "description": "Deletes a role assignment for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
-        "operationId": "BillingRoleAssignments_DeleteByBillingAccount",
-        "parameters": [
-          {
-            "$ref": "./types.json#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "./types.json#/parameters/billingAccountName"
-          },
-          {
-            "$ref": "#/parameters/billingRoleAssignmentName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignment"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./types.json#/definitions/ArmError"
-            }
-          }
-        },
-        "tags": [
-          "BillingRoleAssignments"
-        ],
-        "x-ms-examples": {
-          "billingRoleAssignmentsDeleteByBillingAccount": {
-            "$ref": "./examples/billingRoleAssignmentsDeleteByBillingAccount.json"
-          }
-        }
-      },
-      "get": {
-        "description": "Gets a role assignment for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "BillingRoleAssignments_GetByBillingAccount",
-        "parameters": [
-          {
-            "$ref": "./types.json#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "./types.json#/parameters/billingAccountName"
-          },
-          {
-            "$ref": "#/parameters/billingRoleAssignmentName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignment"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./types.json#/definitions/ArmError"
-            }
-          }
-        },
-        "tags": [
-          "BillingRoleAssignments"
-        ],
-        "x-ms-examples": {
-          "billingRoleAssignmentsGetByBillingAccount": {
-            "$ref": "./examples/billingRoleAssignmentsGetByBillingAccount.json"
-          }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "BillingRoleAssignment": {
-      "allOf": [
-        {
-          "$ref": "./types.json#/definitions/ArmResource"
-        }
-      ],
-      "description": "The role assignment",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/BillingRoleAssignmentProperties",
-          "description": "The properties of the role assignment.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object"
-    },
-    "BillingRoleAssignmentListResult": {
-      "description": "The list of role assignments.",
-      "properties": {
-        "nextLink": {
-          "description": "The link (url) to the next page of results.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "value": {
-          "description": "The list of role assignments.",
-          "items": {
-            "$ref": "#/definitions/BillingRoleAssignment"
-          },
-          "readOnly": true,
-          "type": "array"
-        }
-      }
-    },
-    "BillingRoleAssignmentProperties": {
-      "description": "The properties of the role assignment.",
-      "properties": {
-        "createdByPrincipalId": {
-          "description": "The principal Id of the user who created the role assignment.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "createdByPrincipalTenantId": {
-          "description": "The tenant Id of the user who created the role assignment.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "createdByUserEmailAddress": {
-          "description": "The email address of the user who created the role assignment.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "createdOn": {
-          "description": "The date the role assignment was created.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "principalId": {
-          "description": "The principal id of the user to whom the role was assigned.",
-          "type": "string"
-        },
-        "principalTenantId": {
-          "description": "The principal tenant id of the user to whom the role was assigned.",
-          "type": "string"
-        },
-        "roleDefinitionId": {
-          "description": "The ID of the role definition.",
-          "type": "string"
-        },
-        "scope": {
-          "description": "The scope at which the role was assigned.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "userAuthenticationType": {
-          "description": "The authentication type.",
-          "type": "string"
-        },
-        "userEmailAddress": {
-          "description": "The email address of the user.",
-          "type": "string"
-        }
-      }
-    }
-  },
-  "parameters": {
-    "billingRoleAssignmentName": {
-      "description": "The ID that uniquely identifies a role assignment.",
-      "in": "path",
-      "name": "billingRoleAssignmentName",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    }
-  },
-  "securityDefinitions": {
-    "azure_auth": {
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "description": "Azure Active Directory OAuth2 Flow.",
-      "flow": "implicit",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      },
-      "type": "oauth2"
-    }
-  }
+  ]
 }
