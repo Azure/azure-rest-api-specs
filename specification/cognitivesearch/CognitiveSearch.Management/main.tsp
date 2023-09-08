@@ -1,9 +1,4 @@
-import "@typespec/http";
-import "@typespec/rest";
-import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
+import "./index.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -11,96 +6,128 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
-@armProviderNamespace
-@service({
-    title: "IndexManagementClient",
-    version: "2023-05-01-preview",
-})
-@doc("CognitiveSearch Resource Provider management API.")
+@doc("CognitiveSearch Indexer Resource Provider management API.")
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.CognitiveSearch;
 
-interface Operations extends Azure.ResourceManager.Operations {}
+@parentResource(Index)
 
-@armResourceOperations
-interface IndexOperations {
-    listByResourceGroup is ArmResourceListByParent<Index>;
-
-    listBySubscription is ArmListBySubscription<Index>;
-  
-    get is ArmResourceRead<Index>;
-  
-    createOrUpdate is ArmResourceCreateOrUpdateAsync<Index>;
-  
-    update is ArmResourcePatchAsync<Index, IndexProperties>;
-  
-    delete is ArmResourceDeleteAsync<Index>;
+@doc("An indexer resource is a child tracked resource of index")
+model Indexer is TrackedResource<IndexerProperties>{
+    @path
+    @key("indexerName")
+    @segment("indexers")
+    @visibility("read")
+    @doc("The name of the indexer resource.")
+    name: string;
 }
 
-@doc("An index resource")
-model Index is TrackedResource<IndexProperties> {
-    @path
-    @key("name")
-    @segment("indexes")
-    @visibility("read")
-    @doc("The name of the index resource.")
-    name: string;
-  }
+@armResourceOperations
+interface IndexerOperations{
+    get is ArmResourceRead<Indexer>;
+    createOrUpdate is ArmResourceCreateOrUpdateAsync<Indexer>;
+    update is ArmResourcePatchAsync<Indexer, IndexerProperties>;
+    delete is ArmResourceDeleteAsync<Indexer>;
+}
 
-  @doc("The properties of the index.")
-  model IndexProperties {
+  @doc("The properties of the indexer.")
+  model IndexerProperties {
+    @doc("The description of the indexer resource.")
+    description?: string;
+
     @visibility("read")
-    @doc("The current provisioning state of the index.")
+    @doc("The current provisioning state of the indexer.")
     provisioningState?: ProvisioningState;
-    
-    @visibility("read")
-    @doc("The endpoint at which the index can be accessed.")
-    endpoint?: string;
-  
-    @doc("The capacity allocated to the index for querying.")
-    queryCapacity: Capacity;
-  
-    @doc("The capacity allocated to the index for indexing documents.")
-    indexingCapacity: Capacity;
-  }
-  
-  @doc("The capacity will autoscale between the minimum and maximum number of vCores based on the usage of your index.")
-  model Capacity {
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Name is in camel case."
-    @doc("The minimum number of vCores that the index will consume. Represented with discrete values: 1, 2, 3, … to 16.")
-    minVCores: float32;
-  
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Name is in camel case."
-    @doc("The maximum number of vCores that the index can consume. Represented with discrete values: 1, 2, 3, … to 16.")
-    maxVCores: float32;
-  
-    @doc("Pausing strategy for the index")
-    autoPause: Pause;
-  }
-  
-  @discriminator("type")
-  @doc("Pausing strategy for the index")
-  model Pause {}
-  
-  @doc("When the pause strategy is set to 'Delay', the index will enter a paused state after not being used for a fixed amount of time.")
-  model DelayPause extends Pause {
-    @doc("Specifies the type of pausing strategy as 'Delay'.")
-    type: "Delay";
-  
-    @doc("The interval after which an index is paused if not in use.")
-    duration: duration;
-  }
-  
-  @doc("When the pause strategy is set to 'None', the index will remain always active.")
-  model NonePause extends Pause {
-    @doc("Specifies the type of pausing strategy as 'None'.")
-    type: "None";
+
+    @doc("The failure policy.")
+    failurePolicy: FailurePolicy;
+
+    @doc("Connection and container information for DataSource")
+    dataSource: DataSource;
   }
 
-@lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
-  Provisioning,
-  Deleting,
-  Accepted,
+  @doc("datasource object")
+  model DataSource {
+    @doc("Data source Connection definition")
+    connection: Connection;
+    
+    @doc("other datasource Properties")
+    properties: DataSourceProperties;
+  }
+
+  @discriminator("authenticationType")
+  @doc("Parent connection")
+  model Connection {}
+
+  @doc("Credentials definition")
+  model Credentials extends Connection {
+    @doc("Connection type")
+    authenticationType: "Credentials";
+  
+    @doc("Connection string")
+    @secret
+    connectionString: string;
+  }
+
+  @discriminator("kind")
+  @doc("Datasource properties types")
+  model DataSourceProperties {}
+
+  @doc("CosmosDb/NoSql Datasource")
+  model CosmosDbNoSql extends DataSourceProperties {
+    @doc("CosmosDb datasource type")
+    kind: "CosmosDb/NoSql";
+
+    @doc("CosmosDB/NoSql Database name")
+    collectionName: string;
+
+    @doc("Query information")
+    query: string;
+  }
+
+  @doc("Sql/AzureSql Datasource")
+  model AzureSql extends DataSourceProperties {
+    @doc("Sql/AzureSql datasource type")
+    kind: "Sql/AzureSql";
+
+    @doc("Sql/AzureSql Database name")
+    tableOrViewName: string;
+  }
+
+  @doc("Storage Blob Datasource")
+  model AzureStorageBlob extends DataSourceProperties {
+    @doc("AzureStorage Blob datasource type")
+    kind: "Storage/AzureBlob";
+
+    @doc("Azure Blob container name")
+    containerName: string;
+    
+    @doc("Query information")
+    query: string;
+  }
+
+  @doc("AzureStorage Table Datasource")
+  model AzureStorageTable extends DataSourceProperties {
+    @doc("AzureStorage Table datasource type")
+    kind: "Storage/AzureTable";
+
+    @doc("Azure Table container name")
+    containerName: string;
+    
+    @doc("Query information")
+    query: string;
+  }
+
+@doc("Failure policy parent")
+model FailurePolicy {
+  @doc("Failure policy type")
+  type: FailurePolicyType;
+}
+
+@doc("Supported Failure policy")
+enum FailurePolicyType {
+  @doc("Indexer will stop after the first failure.")
+  FailOnFirstFailure,
+  @doc("Indexer will not stop for the specified number of failures")
+  TolerateFailures
 }

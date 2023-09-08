@@ -2045,8 +2045,8 @@
           },
           {
             "in": "query",
-            "name": "retain",
-            "description": "Whether to just disable the VM from azure and retain the VM in the VMM.",
+            "name": "deleteFromHost",
+            "description": "Whether to delete the VM from the vCenter.",
             "required": false,
             "type": "boolean"
           },
@@ -4228,6 +4228,13 @@
           },
           {
             "in": "query",
+            "name": "deleteFromHost",
+            "description": "Whether to delete the VM from the vCenter.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "in": "query",
             "name": "force",
             "description": "Whether force delete was specified.",
             "required": false,
@@ -4827,8 +4834,8 @@
           }
         },
         "provisioningState": {
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Gets the provisioning state.",
-          "type": "string",
           "readOnly": true
         }
       }
@@ -5023,8 +5030,8 @@
           }
         },
         "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
-          "type": "string",
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Gets the provisioning state.",
           "readOnly": true
         }
       }
@@ -5828,8 +5835,8 @@
           }
         },
         "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
-          "type": "string",
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Gets the provisioning state.",
           "readOnly": true
         },
         "vmId": {
@@ -5885,11 +5892,11 @@
           }
         },
         "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
-          "type": "string",
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Gets the provisioning state.",
           "readOnly": true
         },
-        "vmId": {
+        "resourceUid": {
           "description": "Gets or sets a unique identifier for the vm resource.",
           "type": "string",
           "readOnly": true
@@ -6204,8 +6211,8 @@
           }
         },
         "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
-          "type": "string",
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Gets the provisioning state.",
           "readOnly": true
         }
       }
@@ -6252,25 +6259,25 @@
         "usedMemoryGB": {
           "format": "int64",
           "description": "Gets the used physical memory on the cluster in GB.",
-          "type": "string",
+          "type": "integer",
           "readOnly": true
         },
         "totalMemoryGB": {
           "format": "int64",
           "description": "Gets the total amount of physical memory on the cluster in GB.",
-          "type": "string",
+          "type": "integer",
           "readOnly": true
         },
         "usedCPUMHz": {
           "format": "int64",
           "description": "Gets the used CPU usage across all cores on the cluster in MHz.",
-          "type": "string",
+          "type": "integer",
           "readOnly": true
         },
         "totalCPUMHz": {
           "format": "int64",
           "description": "Gets the max CPU usage across all cores on the cluster in MHz.",
-          "type": "string",
+          "type": "integer",
           "readOnly": true
         },
         "datastoreIds": {
@@ -6290,8 +6297,8 @@
           "readOnly": true
         },
         "provisioningState": {
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Gets the provisioning state.",
-          "type": "string",
           "readOnly": true
         }
       }
@@ -6416,25 +6423,25 @@
         "overallMemoryUsageGB": {
           "format": "int64",
           "description": "Gets the used physical memory on the host in GB.",
-          "type": "string",
+          "type": "integer",
           "readOnly": true
         },
         "memorySizeGB": {
           "format": "int64",
           "description": "Gets the total amount of physical memory on the host in GB.",
-          "type": "string",
+          "type": "integer",
           "readOnly": true
         },
         "overallCPUUsageMHz": {
           "format": "int64",
           "description": "Gets the used CPU usage across all cores in MHz.",
-          "type": "string",
+          "type": "integer",
           "readOnly": true
         },
         "CPUMhz": {
           "format": "int64",
           "description": "Gets the max CPU usage across all cores in MHz.",
-          "type": "string",
+          "type": "integer",
           "readOnly": true
         },
         "datastoreIds": {
@@ -6454,8 +6461,8 @@
           "readOnly": true
         },
         "provisioningState": {
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Gets the provisioning state.",
-          "type": "string",
           "readOnly": true
         }
       }
@@ -6810,8 +6817,8 @@
           }
         },
         "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
-          "type": "string",
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Gets the provisioning state.",
           "readOnly": true
         }
       }
@@ -7264,8 +7271,8 @@
           "type": "string"
         },
         "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
-          "type": "string",
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Gets the provisioning state.",
           "readOnly": true
         }
       }
@@ -7558,8 +7565,8 @@
           "readOnly": true
         },
         "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
-          "type": "string",
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Gets the provisioning state.",
           "readOnly": true
         }
       }
@@ -7618,8 +7625,8 @@
           "type": "string"
         },
         "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
-          "type": "string",
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Gets the provisioning state.",
           "readOnly": true
         }
       }
@@ -8016,6 +8023,11 @@
           "description": "Username / Password Credentials to provision guest agent.",
           "$ref": "#/definitions/GuestCredential"
         },
+        "privateLinkScopeResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource id of the private link scope this machine is assigned to, if any."
+        },
         "httpProxyConfig": {
           "description": "HTTP Proxy configuration for the VM.",
           "$ref": "#/definitions/HttpProxyConfiguration"
@@ -8044,8 +8056,8 @@
           }
         },
         "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
-          "type": "string",
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Gets the provisioning state.",
           "readOnly": true
         }
       }

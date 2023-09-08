@@ -7,6 +7,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "../shared/provisioningstate.tsp";
 import "../community/community.tsp";
 import "../shared/resourceid.tsp";
+import "../shared/managedresourcegroupconfiguration.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -37,6 +38,8 @@ model EnclaveDefaultSettings {
 
 @doc("Virtual Enclave Resource properties")
 model VirtualEnclaveProperties {
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
+  @removed(Microsoft.Mission.Versions.v2023_08_01_preview)
   @doc("Virtual Enclave Description.")
   description?: string;
 
@@ -55,4 +58,10 @@ model VirtualEnclaveProperties {
 
   @doc("List of resource ids created by Virtual Enclave.")
   resourceCollection?: string[];
+
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
+  @added(Microsoft.Mission.Versions.v2023_08_01_preview)
+  @madeOptional(Microsoft.Mission.Versions.v2023_08_01_preview)
+  @doc("Managed resource group configuration.")
+  managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
 }

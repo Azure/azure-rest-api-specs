@@ -81,6 +81,9 @@
           },
           "PutVirtualMachineInstanceWithOsDisk": {
             "$ref": "./examples/PutVirtualMachineInstanceWithOsDisk.json"
+          },
+          "PutVirtualMachineInstanceWithVMConfigAgent": {
+            "$ref": "./examples/PutVirtualMachineInstanceWithVMConfigAgent.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -111,7 +114,7 @@
             }
           },
           "200": {
-            "description": "OK",
+            "description": "Updated",
             "schema": {
               "$ref": "#/definitions/VirtualMachineInstance"
             }
@@ -151,11 +154,13 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
-          "200": {
-            "description": "OK"
-          },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No content"
@@ -204,7 +209,12 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           }
         }
       }
@@ -215,7 +225,7 @@
         "description": "The operation to start a virtual machine instance.",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "StartVirtualMachine": {
@@ -238,10 +248,18 @@
             }
           },
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineInstance"
+            }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           }
         }
       }
@@ -252,7 +270,7 @@
         "description": "The operation to stop a virtual machine instance.",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "StopVirtualMachine": {
@@ -275,10 +293,18 @@
             }
           },
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineInstance"
+            }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           }
         }
       }
@@ -289,7 +315,7 @@
         "description": "The operation to restart a virtual machine instance.",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "RestartVirtualMachine": {
@@ -312,10 +338,18 @@
             }
           },
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineInstance"
+            }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           }
         }
       }
@@ -357,55 +391,6 @@
       }
     },
     "/{resourceUri}/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default/hybridIdentityMetadata/default": {
-      "put": {
-        "tags": [
-          "HybridIdentityMetadata"
-        ],
-        "operationId": "HybridIdentityMetadata_Create",
-        "description": "Create Or Update HybridIdentityMetadata.",
-        "summary": "Implements HybridIdentityMetadata PUT method.",
-        "x-ms-examples": {
-          "CreateHybridIdentityMetadata": {
-            "$ref": "./examples/CreateHybridIdentityMetadata.json"
-          }
-        },
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceUriParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Request payload.",
-            "schema": {
-              "$ref": "#/definitions/HybridIdentityMetadata"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/HybridIdentityMetadata"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
       "get": {
         "tags": [
           "HybridIdentityMetadata"
@@ -435,44 +420,6 @@
             "schema": {
               "$ref": "#/definitions/HybridIdentityMetadata"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "HybridIdentityMetadata"
-        ],
-        "operationId": "HybridIdentityMetadata_Delete",
-        "summary": "Deleted an HybridIdentityMetadata.",
-        "description": "Implements HybridIdentityMetadata DELETE method.",
-        "x-ms-examples": {
-          "DeleteHybridIdentityMetadata": {
-            "$ref": "./examples/DeleteHybridIdentityMetadata.json"
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceUriParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "204": {
-            "description": "No Content"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -563,7 +510,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Updated",
             "schema": {
               "$ref": "#/definitions/GuestAgent"
             }
@@ -648,11 +595,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -835,12 +784,12 @@
                 "provisionVMAgent": {
                   "type": "boolean",
                   "default": true,
-                  "description": "Used to indicate whether the VM agent should be installed during the virtual machine creation process."
-                },
-                "provisionAzureConnectedMachineAgent": {
-                  "type": "boolean",
-                  "default": false,
                   "description": "Used to indicate whether Arc for Servers agent onboarding should be triggered during the virtual machine instance creation process."
+                },
+                "provisionVMConfigAgent": {
+                  "type": "boolean",
+                  "default": true,
+                  "description": "Used to indicate whether the VM Config Agent should be installed during the virtual machine creation process."
                 }
               },
               "description": "LinuxConfiguration - linux specific configuration values for the virtual machine instance"
@@ -863,12 +812,12 @@
                 "provisionVMAgent": {
                   "type": "boolean",
                   "default": true,
-                  "description": "Used to indicate whether the VM agent should be installed during the virtual machine creation process."
-                },
-                "provisionAzureConnectedMachineAgent": {
-                  "type": "boolean",
-                  "default": false,
                   "description": "Used to indicate whether Arc for Servers agent onboarding should be triggered during the virtual machine instance creation process."
+                },
+                "provisionVMConfigAgent": {
+                  "type": "boolean",
+                  "default": true,
+                  "description": "Used to indicate whether the VM Config Agent should be installed during the virtual machine creation process."
                 }
               },
               "description": "Windows Configuration for the virtual machine instance "
@@ -1009,6 +958,7 @@
       "description": "Properties under the virtual machine instance resource"
     },
     "SshPublicKey": {
+      "type": "object",
       "properties": {
         "path": {
           "type": "string",
@@ -1022,6 +972,7 @@
       "description": "Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed."
     },
     "SshConfiguration": {
+      "type": "object",
       "properties": {
         "publicKeys": {
           "type": "array",
@@ -1037,6 +988,7 @@
       "description": "SSH configuration for Linux based VMs running on Azure"
     },
     "VirtualMachineInstanceStatus": {
+      "type": "object",
       "x-ms-client-flatten": true,
       "readOnly": true,
       "properties": {
@@ -1066,6 +1018,7 @@
           }
         },
         "provisioningStatus": {
+          "type": "object",
           "properties": {
             "operationId": {
               "type": "string",
@@ -1108,25 +1061,27 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "The virtual machine instance resource definition."
     },
     "VirtualMachineInstanceView": {
+      "type": "object",
       "properties": {
         "vmAgent": {
-          "$ref": "#/definitions/VirtualMachineAgentInstanceView",
-          "description": "The VM Agent running on the virtual machine."
+          "$ref": "#/definitions/VirtualMachineVMConfigAgentInstanceView",
+          "description": "The VM Config Agent running on the virtual machine."
         }
       },
       "description": "The instance view of a virtual machine."
     },
-    "VirtualMachineAgentInstanceView": {
+    "VirtualMachineVMConfigAgentInstanceView": {
+      "type": "object",
       "properties": {
-        "vmAgentVersion": {
+        "vmVMConfigAgentVersion": {
           "type": "string",
-          "description": "The VM Agent full version."
+          "description": "The VM Config Agent full version."
         },
         "statuses": {
           "type": "array",
@@ -1137,9 +1092,10 @@
           "description": "The resource status information."
         }
       },
-      "description": "The instance view of the VM agent running on the virtual machine."
+      "description": "The instance view of the VM Config Agent running on the virtual machine."
     },
     "InstanceViewStatus": {
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -1155,7 +1111,7 @@
           ],
           "x-ms-enum": {
             "name": "StatusLevelTypes",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "displayStatus": {
@@ -1267,26 +1223,28 @@
           "description": "ComputerName - name of the computer"
         },
         "linuxConfiguration": {
+          "type": "object",
           "properties": {
             "provisionVMAgent": {
               "type": "boolean",
-              "description": "Used to indicate whether the VM agent should be installed during the virtual machine creation process."
+              "description": "Used to indicate whether Arc for Servers agent onboarding should be triggered during the virtual machine instance creation process."
             },
-            "provisionAzureConnectedMachineAgent": {
+            "provisionVMConfigAgent": {
               "type": "boolean",
-              "description": "Used to indicate whether Arc for Servers agent onboarding should be triggered during the virtual machine creation process."
+              "description": "Used to indicate whether the VM Config Agent should be installed during the virtual machine creation process."
             }
           }
         },
         "windowsConfiguration": {
+          "type": "object",
           "properties": {
             "provisionVMAgent": {
               "type": "boolean",
-              "description": "Used to indicate whether the VM agent should be installed during the virtual machine creation process."
+              "description": "Used to indicate whether Arc for Servers agent onboarding should be triggered during the virtual machine instance creation process."
             },
-            "provisionAzureConnectedMachineAgent": {
+            "provisionVMConfigAgent": {
               "type": "boolean",
-              "description": "Used to indicate whether Arc for Servers agent onboarding should be triggered during the virtual machine creation process."
+              "description": "Used to indicate whether the VM Config Agent should be installed during the virtual machine creation process."
             }
           }
         }
@@ -1317,12 +1275,8 @@
         "properties": {
           "$ref": "#/definitions/VirtualMachineInstanceUpdateProperties"
         },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Identity"
         }
       },
       "description": "The virtual machine instance resource patch definition."
@@ -1381,6 +1335,7 @@
           "items": {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail"
           },
+          "x-ms-identifiers": [],
           "description": "Details about the error state."
         }
       }
@@ -1452,226 +1407,6 @@
           "readOnly": true
         }
       }
-    },
-    "ResourcePatch": {
-      "type": "object",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
-        }
-      },
-      "description": "Object containing updates for patch operations."
-    },
-    "MachineExtension": {
-      "x-ms-azure-resource": true,
-      "type": "object",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/MachineExtensionProperties",
-          "description": "Describes Machine Extension Properties."
-        },
-        "location": {
-          "description": "The location.",
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "The system data."
-        },
-        "tags": {
-          "description": "The Resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "name": {
-          "description": "The name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "id": {
-          "description": "The Id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The type of the resource.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "description": "Describes a Machine Extension."
-    },
-    "MachineExtensionUpdate": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/MachineExtensionUpdateProperties",
-          "description": "Describes Machine Extension Update Properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourcePatch"
-        }
-      ],
-      "description": "Describes a Machine Extension Update."
-    },
-    "MachineExtensionProperties": {
-      "type": "object",
-      "properties": {
-        "forceUpdateTag": {
-          "type": "string",
-          "description": "How the extension handler should be forced to update even if the extension configuration has not changed."
-        },
-        "publisher": {
-          "type": "string",
-          "description": "The name of the extension handler publisher."
-        },
-        "type": {
-          "type": "string",
-          "description": "Specifies the type of the extension; an example is \"CustomScriptExtension\"."
-        },
-        "typeHandlerVersion": {
-          "type": "string",
-          "description": "Specifies the version of the script handler."
-        },
-        "autoUpgradeMinorVersion": {
-          "type": "boolean",
-          "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true."
-        },
-        "settings": {
-          "type": "object",
-          "description": "Json formatted public settings for the extension."
-        },
-        "protectedSettings": {
-          "type": "object",
-          "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.",
-          "x-ms-secret": true
-        },
-        "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The provisioning state, which only appears in the response."
-        },
-        "instanceView": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/MachineExtensionInstanceView"
-            }
-          ],
-          "description": "The machine extension instance view."
-        }
-      },
-      "description": "Describes the properties of a Machine Extension."
-    },
-    "MachineExtensionUpdateProperties": {
-      "type": "object",
-      "properties": {
-        "forceUpdateTag": {
-          "type": "string",
-          "description": "How the extension handler should be forced to update even if the extension configuration has not changed."
-        },
-        "publisher": {
-          "type": "string",
-          "description": "The name of the extension handler publisher."
-        },
-        "type": {
-          "type": "string",
-          "description": "Specifies the type of the extension; an example is \"CustomScriptExtension\"."
-        },
-        "typeHandlerVersion": {
-          "type": "string",
-          "description": "Specifies the version of the script handler."
-        },
-        "autoUpgradeMinorVersion": {
-          "type": "boolean",
-          "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true."
-        },
-        "settings": {
-          "type": "object",
-          "description": "Json formatted public settings for the extension."
-        },
-        "protectedSettings": {
-          "type": "object",
-          "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.",
-          "x-ms-secret": true
-        }
-      },
-      "description": "Describes the properties of a Machine Extension."
-    },
-    "MachineExtensionInstanceView": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The machine extension name."
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Specifies the type of the extension; an example is \"CustomScriptExtension\"."
-        },
-        "typeHandlerVersion": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Specifies the version of the script handler."
-        },
-        "status": {
-          "type": "object",
-          "properties": {
-            "code": {
-              "type": "string",
-              "readOnly": true,
-              "description": "The status code."
-            },
-            "level": {
-              "type": "string",
-              "readOnly": true,
-              "description": "The level code.",
-              "enum": [
-                "Info",
-                "Warning",
-                "Error"
-              ],
-              "x-ms-enum": {
-                "name": "StatusLevelTypes",
-                "modelAsString": true
-              }
-            },
-            "displayStatus": {
-              "type": "string",
-              "readOnly": true,
-              "description": "The short localizable label for the status."
-            },
-            "message": {
-              "type": "string",
-              "readOnly": true,
-              "description": "The detailed status message, including for alerts and error messages."
-            },
-            "time": {
-              "type": "string",
-              "readOnly": true,
-              "format": "date-time",
-              "description": "The time of the status."
-            }
-          },
-          "description": "Instance view status."
-        }
-      },
-      "description": "Describes the Machine Extension Instance View."
     },
     "GuestAgentList": {
       "type": "object",

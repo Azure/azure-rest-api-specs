@@ -1,4 +1,4 @@
-// Definitions for the TeamsCallingResource
+
 
 import "@cadl-lang/openapi";
 import "@cadl-lang/rest";
@@ -28,58 +28,7 @@ model WorkloadImpact is ProxyResource<WorkloadImpactProperties> {
   name: string;
 }
 
-@doc("Details about impacted performance metrics. Applicable for performance related impact")
-model Performance {
-  @doc("Name of the Metric examples:  Disk, IOPs, CPU, GPU, Memory, details can be found from /impactCategories API" )
-	metricName?: string;
-	@doc("Threshold value for the metric")
-	expected?: float64;
-	@doc("Observed value for the metric")
-	actual?: float64;
-  @doc("Max and Min Threshold values for the metric")
-  expectedValueRange?:ExpectedValueRange;
-  @doc("Unit of the metric ex: Bytes, Percentage, Count, Seconds, Milliseconds, Bytes/Second, Count/Second, etc.., Other")
-  unit?:MetricUnit;
 
-}
-
-@doc("Max and Min Threshold values for the metric")
-model ExpectedValueRange {
-	@doc("Min threshold value for the metric")
-	min: float64;
-	@doc("Max threshold value for the metric")
-	max: float64;  
-}
-
-
-
-@doc("Details about the connectivity issue. Applicable only for connectivity type of impacts.")
-model Connectivity {
-  @doc("Protocol used for the connection")
-	protocol?: Protocol;
-	@doc("Port number for the connection")
-	port?: int32;
-	@doc("Source of the connection")
-	source?: SourceOrDestination;
-  @doc("Destination of the connection")
-  destination?: SourceOrDestination;
-}
-
-@doc("ARM error code and error message associated with the impact")
-model ErrorDetailProperties {
-  @doc("ARM Error code associated with the impact.")
-	errorCode?: string;
-	@doc("ARM Error Message associated with the impact")
-	errorMessage?: string;
-}
-
-@doc("Information about the impacted workload")
-model Workload {
-	@doc("the scenario for the workload")
-	context?: string;
-	@doc("Tool used to interact with Azure. SDK, AzPortal, etc.., Other")
-	toolset?: Toolset;
-}
 
 
 @doc("Workload impact properties")
@@ -90,6 +39,9 @@ model WorkloadImpactProperties is ResourceProperties{
 
   @doc("Time at which impact has ended ")
   endDateTime?: zonedDateTime;
+
+  @doc("Azure resource id of the impacted resource")
+  impactedResourceId: string;
 
   @doc("Unique ID of the impact (UUID)")
   @visibility("read")
@@ -110,8 +62,12 @@ model WorkloadImpactProperties is ResourceProperties{
   @extension("x-ms-identifiers", [])
   armCorrelationIds?: string[];
 
-  @doc("Azure resource id of the impacted resource")
-  impactedResourceId: string;
+  @doc("Details about performance issue. Applicable for performance impacts.")
+  @extension("x-ms-identifiers", [])
+  performance?: Performance[];
+
+  @doc("Details about connectivity issue. Applicable when root resource causing the issue is not identified. For example, when a VM is impacted due to a network issue, the impacted resource is identified as the VM, but the root cause is the network. In such cases, the connectivity field will have the details about the network issue")
+  connectivity?: Connectivity;
 
   @doc("Additional fields related to impact, applicable fields per resource type are list under /impactCategories API")
   additionalProperties?: {};
@@ -119,21 +75,11 @@ model WorkloadImpactProperties is ResourceProperties{
   @doc("ARM error code and error message associated with the impact")
   errorDetails?:ErrorDetailProperties;
 
-  @doc("Details about the connectivity issue. Applicable only for connectivity type of impacts.")
-  connectivity?: Connectivity;
-
-  @doc("Details about performance issue. Applicable for performance impacts.")
-  @extension("x-ms-identifiers", [])
-  performance?: Performance[];
-
   @doc("Information about the impacted workload")
   workload?: Workload;
 
   @doc("Use this field to group impacts")
   impactGroupId?: string;
-
-  @doc("System that is reporting the impact")
-  reportingSource?: ReportingSource;
 
   @doc("Degree of confidence on the impact being a platform issue")
   confidenceLevel?: ConfidenceLevel;
@@ -142,118 +88,10 @@ model WorkloadImpactProperties is ResourceProperties{
   clientIncidentDetails?: ClientIncidentDetails;
 }
 
-@doc("Client incident details ex: incidentId , incident source")
-model ClientIncidentDetails {
-  
-  @doc("Client incident id. ex : id of the incident created to investigate and address the impact if any.")
-  clientIncidentId? : string;
-
-  @doc("Client incident source. ex : source system name where the incident is created")
-  clientIncidentSource? : IncidentSource
-
-}
-
-@doc("List of incident interfaces.")
-enum IncidentSource {
-  AzureDevops,
-  ICM,
-  Jira,
-  ServiceNow,
-  Other
-}
-
-@doc("List of azure interfaces.")
-enum Toolset {
-  Terraform,
-  Puppet,
-  Chef,
-  SDK,
-  Ansible,
-  ARM,
-  Portal,
-  Shell,
-  Other
-}
-
-
-@doc("System that is reporting the impact")
-enum ReportingSource {
-  Other ,
-  Manual,
-  Automated,
-  Azure_Monitor
-}
-
-@doc("Degree of confidence on the impact being a platform issue.")
-enum ConfidenceLevel {
-  Low,
-  Medium,
-  High
-}
-
-
-@doc("List of protocols")
-enum Protocol {
-  TCP,
-  UDP,
-  HTTP,
-  HTTPS,
-  RDP,
-  FTP,
-  SSH,
-  Other
-}
-
-@doc("List of unit of the metric.")
-enum MetricUnit {
-  ByteSeconds,
-  Bytes,
-  BytesPerSecond,
-  Cores,
-  Count,
-  CountPerSecond,
-  MilliCores,
-  MilliSeconds,
-  NanoCores,
-  Percent,
-  Seconds,
-  Other
-}
-
-
-@doc("Resource details")
-model SourceOrDestination {
-  @doc("URI of the target, use this if it is not an azure resource ")
-  @pattern("https?:\\/\\/(?:www\\.)?([-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b)*(\\/[\\/\\d\\w\\.-]*)*(?:[\\?])*(.+)*")
-  uri?: string;
-
-  @doc("Azure resource id, example /subscription/{subscription}/resourceGroup/{rg}/Microsoft.compute/virtualMachine/{vmName}")
-  @pattern("(\\/[0-9a-zA-Z]+)*")
-  azureResourceId?: string,
-
-  @doc("IP address of server/host")
-  ipAddress?: IPAddress,
-}
-
-@doc("IP address details")
-model IPAddress {
-  @doc("IP address family")
-  @extension("x-ms-client-name", "AddressType")
-  type?: AddressFamily,
-
-  @doc("IP address of server/host")
-  @pattern("((^\\s*((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))\\s*$)|(^\\s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3}))|:)))(%.+)?\\s*$))")
-   value: string,
-}
-
-@doc("IP address family")
-enum AddressFamily {
- IPv4,
- IPv6
-}
-
 interface Operations extends Azure.ResourceManager.Operations {}
 
+
+#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-interface-uses-templates" "Using subscription scope building blocks"
 @armResourceOperations
 interface WorkloadImpacts {
   create is SubscriptionResourceCreateOrUpdateSync<WorkloadImpact>;

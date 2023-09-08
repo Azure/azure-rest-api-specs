@@ -1,0 +1,78 @@
+{
+  "operationId": "ArcNwLoadBalancer_CreateOrUpdate",
+  "title": "ArcNwLoadBalancer_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "example",
+    "arcNwLoadBalancerName": "testanlb",
+    "api-version": "2023-07-01-preview",
+    "resource": {
+      "location": "westus",
+      "extendedLocation": {
+        "type": "CustomLocation",
+        "name": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/example/providers/Microsoft.ExtendedLocation/customLocations/example"
+      },
+      "properties": {
+        "addresses": [
+          "192.168.50.51"
+        ],
+        "serviceSelector": {
+          "app": "frontend"
+        },
+        "advertiseMode": "ARP"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/example/providers/Microsoft.ArcNetworking/arcNwLoadBalancers/testanlb",
+        "name": "testanlb",
+        "type": "Microsoft.ArcNetworking/arcNwLoadBalancers",
+        "location": "westus",
+        "extendedLocation": {
+          "name": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/example/providers/Microsoft.ExtendedLocation/customLocations/example",
+          "type": "CustomLocation"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "addresses": [
+            "192.168.50.51"
+          ],
+          "serviceSelector": {
+            "app": "frontend"
+          },
+          "advertiseMode": "ARP",
+          "status": {
+            "state": "OK"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/example/providers/Microsoft.ArcNetworking/arcNwLoadBalancers/testanlb",
+        "name": "testanlb",
+        "type": "Microsoft.ArcNetworking/arcNwLoadBalancers",
+        "location": "westus",
+        "extendedLocation": {
+          "name": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/example/providers/Microsoft.ArcNetworking/arcNwLoadBalancers/testanlb",
+          "type": "CustomLocation"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "addresses": [
+            "192.168.50.51"
+          ],
+          "serviceSelector": {
+            "app": "frontend"
+          },
+          "advertiseMode": "ARP",
+          "status": {
+            "state": "OK"
+          }
+        }
+      }
+    }
+  }
+}

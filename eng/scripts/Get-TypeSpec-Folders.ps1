@@ -9,16 +9,19 @@ param (
 )
 
 $changedFiles = @()
-$allChangedFiles = (Get-ChildItem -path ./specification tspconfig.yaml -Recurse).Directory.FullName | ForEach-Object {[IO.Path]::GetRelativePath($($pwd.path), $_)}
+$allChangedFiles = (Get-ChildItem -path ./specification tspconfig.* -Recurse).Directory.FullName | ForEach-Object {[IO.Path]::GetRelativePath($($pwd.path), $_)}
 $allChangedFiles = $allChangedFiles -replace '\\', '/'
 
 if ([string]::IsNullOrEmpty($TargetBranch) -or [string]::IsNullOrEmpty($SourceBranch)) {
+  if ($TargetBranch -or $SourceBranch) {
+    throw "Please provide both target branch and source branch."
+  }
   $changedFiles = $allChangedFiles
 }
 else {
   Write-Host "git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff --name-only `"$TargetBranch...$SourceBranch`" --"
   $changedFiles = git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff --name-only `"$TargetBranch...$SourceBranch`" --
-  $changedFiles = $changedFiles -replace '\\', '/'
+  $changedFiles = $changedFiles -replace '\\', '/' | Sort-Object
 
   Write-Host "changedFiles:"
   foreach ($changedFile in $changedFiles) {
@@ -27,8 +30,17 @@ else {
   Write-Host
 
   $engFiles = $changedFiles | Where-Object {if ($_) { $_.StartsWith('eng') }}
-  $repoRootFiles = $changedFiles | Where-Object {$_ -notmatch [Regex]::Escape([IO.Path]::DirectorySeparatorChar)}
-  if ($engFiles -or $repoRootFiles) {
+
+  $rootFilesImpactingTypeSpec = @(
+    ".gitattributes",
+    ".prettierrc.json",
+    "package-lock.json",
+    "package.json",
+    "tsconfig.json"
+  )
+  $repoRootFiles = $changedFiles | Where-Object {$_ -in $rootFilesImpactingTypeSpec}
+
+  if (($Env:BUILD_REPOSITORY_NAME -eq 'azure/azure-rest-api-specs') -and ($engFiles -or $repoRootFiles)) {
     $changedFiles = $allChangedFiles
   }
   else {
@@ -39,10 +51,11 @@ else {
 $typespecFolders = @()
 foreach ($file in $changedFiles) {
   if ($file -match 'specification\/[^\/]*\/') {
-    $typespecFolder = (Get-ChildItem -path $matches[0] tspconfig.yaml -Recurse).Directory.FullName | ForEach-Object {if ($_) { [IO.Path]::GetRelativePath($($pwd.path), $_) }}
+    $typespecFolder = (Get-ChildItem -path $matches[0] tspconfig.* -Recurse).Directory.FullName | ForEach-Object {if ($_) { [IO.Path]::GetRelativePath($($pwd.path), $_) }}
     $typespecFolders += $typespecFolder -replace '\\', '/'
   }
 }
-$typespecFolders = $typespecFolders | Select-Object -Unique
+
+$typespecFolders = $typespecFolders | Select-Object -Unique | Sort-Object
 
 return $typespecFolders

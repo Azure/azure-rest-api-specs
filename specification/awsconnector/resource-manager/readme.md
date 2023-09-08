@@ -38,6 +38,8 @@ These settings apply only when `--tag=package-2023-12-01-preview` is specified o
 input-file:
   - Microsoft.AwsConnector/preview/2023-12-01-preview/s3Bucket.json
   - Microsoft.AwsConnector/preview/2023-12-01-preview/operations.json
+  - Microsoft.AwsConnector/preview/2023-12-01-preview/ec2Instance.json
+  - Microsoft.AwsConnector/preview/2023-12-01-preview/lambdaFunctionConfiguration.json
 ```
 
 ## Suppression

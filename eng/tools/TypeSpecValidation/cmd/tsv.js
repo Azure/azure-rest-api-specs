@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
-import { main } from "../dist/TypeSpecValidation.js"
+import { main } from "../dist/index.js"
 
 await main();

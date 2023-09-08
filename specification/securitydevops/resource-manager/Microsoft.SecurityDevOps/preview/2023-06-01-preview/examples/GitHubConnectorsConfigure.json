@@ -5,32 +5,54 @@
     "gitHubConnectorName": "testconnector",
     "api-version": "2023-06-01-preview",
     "gitHubConnectorConfiguration": {
-      "installations": [
-        {
-          "name": "contoso",
+      "owners": {
+        "owner1Name": {
           "autoDiscovery": "Disabled",
-          "repositories": [
-            "testRepo1",
-            "testRepo2"
-          ]
+          "repositoryConfigs": {
+            "repo1Name": null,
+            "repo2Name": {
+              "desiredOnboardingState": "Enabled"
+            },
+            "repo3Name": {
+              "desiredOnboardingState": "Disabled"
+            }
+          }
+        },
+        "owner2Name": null,
+        "owner3Name": {
+          "autoDiscovery": "Enabled"
+        },
+        "owner4Name": {
+          "repositoryConfigs": null
         }
-      ]
+      }
     }
   },
   "responses": {
     "200": {
       "headers": {},
       "body": {
-        "installations": [
-          {
-            "name": "contoso",
+        "owners": {
+          "owner1Name": {
             "autoDiscovery": "Disabled",
-            "repositories": [
-              "testRepo1",
-              "testRepo2"
-            ]
+            "repositoryConfigs": {
+              "repo1Name": null,
+              "repo2Name": {
+                "desiredOnboardingState": "Enabled"
+              },
+              "repo3Name": {
+                "desiredOnboardingState": "Disabled"
+              }
+            }
+          },
+          "owner2Name": null,
+          "owner3Name": {
+            "autoDiscovery": "Enabled"
+          },
+          "owner4Name": {
+            "repositoryConfigs": null
           }
-        ]
+        }
       }
     },
     "202": {

@@ -16,9 +16,13 @@ using Azure.ResourceManager;
 
 @doc("Workload Resource properties")
 model WorkloadProperties {
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
+  @removed(Microsoft.Mission.Versions.v2023_08_01_preview)
   @doc("Workload Description.")
   description?: string;
 
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
+  @removed(Microsoft.Mission.Versions.v2023_08_01_preview)
   @doc("Virtual Enclave Resource Id.")
   enclaveResourceId?: VirtualEnclaveResourceId;
 

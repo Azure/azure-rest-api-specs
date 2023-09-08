@@ -1,0 +1,481 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MobileNetworkManagementClient",
+    "description": "The resources in this API specification will be used to manage Edge Network Security Group resources in a mobile network.",
+    "version": "2023-07-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}/edgeNetworkSecurityGroups/{edgeNetworkSecurityGroupName}": {
+      "delete": {
+        "tags": [
+          "EdgeNetworkSecurityGroup"
+        ],
+        "operationId": "EdgeNetworkSecurityGroups_Delete",
+        "description": "Deletes the specified Edge Network Security Group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/MobileNetworkNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/EdgeNetworkSecurityGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation.",
+            "headers": {
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Edge Network Security Group": {
+            "$ref": "./examples/EdgeNetworkSecurityGroupsDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "EdgeNetworkSecurityGroup"
+        ],
+        "operationId": "EdgeNetworkSecurityGroups_Get",
+        "description": "Gets information about the specified Edge Network Security Group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/MobileNetworkNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/EdgeNetworkSecurityGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting Edge Network Security Group resource.",
+            "schema": {
+              "$ref": "#/definitions/EdgeNetworkSecurityGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Edge Network Security Group": {
+            "$ref": "./examples/EdgeNetworkSecurityGroupsGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "EdgeNetworkSecurityGroup"
+        ],
+        "operationId": "EdgeNetworkSecurityGroups_CreateOrUpdate",
+        "description": "Creates or updates a Edge Network Security Group. Must be created in the same location as its parent mobile network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/MobileNetworkNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/EdgeNetworkSecurityGroupNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EdgeNetworkSecurityGroup"
+            },
+            "description": "Parameters supplied to the create or update Edge Network Security Group operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting Edge Network Security Group resource.",
+            "schema": {
+              "$ref": "#/definitions/EdgeNetworkSecurityGroup"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting Edge Network Security Group resource.",
+            "schema": {
+              "$ref": "#/definitions/EdgeNetworkSecurityGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Edge Network Security Group": {
+            "$ref": "./examples/EdgeNetworkSecurityGroupCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "EdgeNetworkSecurityGroup"
+        ],
+        "operationId": "EdgeNetworkSecurityGroups_Update",
+        "description": "Updates Edge Network Security Group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/MobileNetworkNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/EdgeNetworkSecurityGroupNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update Edge Network Security Group tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting Edge Network Security Group resource.",
+            "schema": {
+              "$ref": "#/definitions/EdgeNetworkSecurityGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Edge Network Security Group": {
+            "$ref": "./examples/EdgeNetworkSecurityGroupUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}/edgeNetworkSecurityGroups": {
+      "get": {
+        "tags": [
+          "EdgeNetworkSecurityGroups"
+        ],
+        "operationId": "EdgeNetworkSecurityGroups_ListByMobileNetwork",
+        "description": "Lists all Edge Network Security Groups in the mobile network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/MobileNetworkNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of Edge Network Security Group resources.",
+            "schema": {
+              "$ref": "#/definitions/EdgeNetworkSecurityGroupListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Edge Network Security Groups in a mobile network": {
+            "$ref": "./examples/EdgeNetworkSecurityGroupListByMobileNetwork.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "EdgeSecurityRule": {
+      "properties": {
+        "ruleName": {
+          "type": "string",
+          "description": "The name of the rule."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description for this rule. Restricted to 140 chars."
+        },
+        "protocol": {
+          "type": "string",
+          "description": "Network protocol this rule applies to.",
+          "enum": [
+            "TCP",
+            "UDP",
+            "ICMP",
+            "ESP",
+            "*",
+            "AH"
+          ],
+          "x-ms-enum": {
+            "name": "SecurityRuleProtocol",
+            "modelAsString": true
+          }
+        },
+        "sourceAddressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "description": "The list of source address prefixes. Matches to the source IP address of the packet being processed. Can be an IPv4 address prefix, using CIDR notation (e.g. 10.1.1.0/24) or a single IPv4 address."
+        },
+        "destinationAddressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "description": "The list of destination address prefixes. Matches to the destination IP address of the packet being processed. Can be an IPv4 address prefix, using CIDR notation (e.g. 10.1.1.0/24) or a single IPv4 address."
+        },
+        "sourcePortRanges": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The source port range."
+          },
+          "minItems": 1,
+          "description": "The list of source port ranges. Matches to the source port in the packet being processed. Integer or range between 0 and 65535. When specifying a range, both the lower and upper bounds must be specified. Asterisk '*' can also be used to match all ports."
+        },
+        "destinationPortRanges": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The destination port range."
+          },
+          "minItems": 1,
+          "description": "The list of destination port ranges. Matches to the destination port in the packet being processed. Integer or range between 0 and 65535. When specifying a range, both the lower and upper bounds must be specified. Asterisk '*' can also be used to match all ports."
+        },
+        "access": {
+          "$ref": "#/definitions/EdgeSecurityRuleAccess",
+          "description": "The network traffic is allowed or denied."
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 100,
+          "maximum": 65500,
+          "description": "The priority of the rule. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule."
+        },
+        "direction": {
+          "$ref": "#/definitions/EdgeSecurityRuleDirection",
+          "description": "The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic."
+        }
+      },
+      "required": [
+        "ruleName",
+        "protocol",
+        "access",
+        "priority",
+        "direction"
+      ],
+      "description": "Security rule resource."
+    },
+    "EdgeNetworkSecurityGroup": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/EdgeNetworkSecurityGroupPropertiesFormat",
+          "description": "Edge Network Security Group properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "description": "Edge Network Security Group resource. Must be created in the same location as its parent mobile network."
+    },
+    "EdgeNetworkSecurityGroupPropertiesFormat": {
+      "description": "Edge Network Security Group properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the Edge Network Security Group resource."
+        },
+        "description": {
+          "type": "string",
+          "description": "An optional description for this Edge Network Security Group."
+        },
+        "securityRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EdgeSecurityRule"
+          },
+          "uniqueItems": true,
+          "x-ms-identifiers": [
+            "ruleName"
+          ],
+          "description": "A collection of security rules of the network security group."
+        },
+        "defaultSecurityRules": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EdgeSecurityRule"
+          },
+          "uniqueItems": true,
+          "x-ms-identifiers": [
+            "ruleName"
+          ],
+          "description": "The default security rules of network security group."
+        }
+      }
+    },
+    "EdgeNetworkSecurityGroupListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EdgeNetworkSecurityGroup"
+          },
+          "description": "A list of Edge Network Security Groups."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for Edge Network Security Group API service call."
+    },
+    "EdgeSecurityRuleAccess": {
+      "type": "string",
+      "description": "Whether network traffic is allowed or denied.",
+      "enum": [
+        "Allow",
+        "Deny"
+      ],
+      "x-ms-enum": {
+        "name": "EdgeSecurityRuleAccess",
+        "modelAsString": true
+      }
+    },
+    "EdgeSecurityRuleDirection": {
+      "type": "string",
+      "description": "The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic. Direction is based on device attached to the edge network, Inbound means towards the device attached, and outbound means away from the device attached.",
+      "enum": [
+        "Inbound",
+        "Outbound"
+      ],
+      "x-ms-enum": {
+        "name": "EdgeSecurityRuleDirection",
+        "modelAsString": true
+      }
+    }
+  }
+}

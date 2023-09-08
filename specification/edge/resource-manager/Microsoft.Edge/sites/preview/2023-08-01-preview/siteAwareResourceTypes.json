@@ -1,0 +1,138 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Edge Sites",
+    "version": "2023-08-01-preview",
+    "description": "Azure Edge Sites Resource Provider management API."
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Edge/siteAwareResourceTypes": {
+      "get": {
+        "tags": [
+          "SiteAwareResourceTypes"
+        ],
+        "operationId": "SiteAwareResourceTypes_List",
+        "description": "Get Site Aware Resource Types",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SiteAwareResourceTypesList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Site Aware Resource Types": {
+            "$ref": "./examples/GetSiteAwareResourceTypesList.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SiteAwareResourceTypesList": {
+      "description": "The list of Resource Types which support Sites operations and can be displayed under this view.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The value.",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SiteAwareResourceType"
+          },
+          "x-ms-identifiers": [
+            "displayName"
+          ]
+        },
+        "nextLink": {
+          "description": "Link to the next set of results.",
+          "type": "string"
+        }
+      }
+    },
+    "SiteAwareResourceType": {
+      "description": "Name of Resource Type which recognizes Sites and displays capabilities.",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "Portal Display Name",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceType": {
+          "description": "Name of the operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "availabilityStatus": {
+          "description": "Distinguishes whether RP is already supported or coming soon.",
+          "type": "string",
+          "enum": [
+            "ComingSoon",
+            "Supported"
+          ],
+          "x-ms-enum": {
+            "name": "availabilityStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "supportedCapabilities": {
+          "description": "Aggregation Capabilities",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "readOnly": true
+          },
+          "readOnly": true
+        }
+      }
+    }
+  }
+}
