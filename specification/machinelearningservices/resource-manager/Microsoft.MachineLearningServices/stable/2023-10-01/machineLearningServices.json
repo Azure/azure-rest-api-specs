@@ -6054,6 +6054,24 @@
       },
       "x-ms-discriminator-value": "PrivateEndpoint"
     },
+    "PrivateEndpointDestination": {
+      "type": "object",
+      "description": "Private Endpoint destination for a Private Endpoint Outbound Rule for the managed network of a machine learning workspace.",
+      "properties": {
+        "serviceResourceId": {
+          "type": "string"
+        },
+        "sparkEnabled": {
+          "type": "boolean"
+        },
+        "sparkStatus": {
+          "$ref": "#/definitions/RuleStatus"
+        },
+        "subresourceTarget": {
+          "type": "string"
+        }
+      }
+    },
     "ServiceTagOutboundRule": {
       "type": "object",
       "description": "Service Tag Outbound Rule for the managed network of a machine learning workspace.",
