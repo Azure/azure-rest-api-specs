@@ -130,8 +130,8 @@ model AccessToken {
   id: uuid;
 
   @minLength(3)
-  @maxLength(63)
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$")
+  @maxLength(64)
+  @pattern("^[a-zA-Z]{1}[a-zA-Z0-9]{2,63}$")
   @doc("The access-token name.")
   @visibility("read", "create")
   name: string;
