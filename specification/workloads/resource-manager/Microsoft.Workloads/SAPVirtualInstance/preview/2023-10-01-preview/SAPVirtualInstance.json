@@ -1429,6 +1429,9 @@
         "x-ms-examples": {
           "SAPVirtualInstances_Start": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Start.json"
+          },
+          "SAPVirtualInstances_Start_WithInfraOperations": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Start_WithInfraOperations.json"
           }
         },
         "description": "Starts the SAP application, that is the Central Services instance and Application server instances.",
@@ -1444,6 +1447,14 @@
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The Virtual Instance for SAP solutions resource start request body.",
+            "schema": {
+              "$ref": "#/definitions/StartRequest"
+            }
           }
         ],
         "responses": {
@@ -1487,6 +1498,9 @@
         "x-ms-examples": {
           "SAPVirtualInstances_Stop": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Stop.json"
+          },
+          "Stop the virtual machine(s) and the SAP system on it.": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Stop_WithInfraOperations.json"
           }
         },
         "description": "Stops the SAP Application, that is the Application server instances and Central Services instance.",
@@ -1553,6 +1567,9 @@
         "x-ms-examples": {
           "Start the SAP Central Services Instance": {
             "$ref": "./examples/sapcentralinstances/SAPCentralInstances_StartInstance.json"
+          },
+          "Start the virtual machine(s) and the SAP central services instance on it.": {
+            "$ref": "./examples/sapcentralinstances/SAPCentralInstances_StartInstance_WithInfraOperations.json"
           }
         },
         "description": "Starts the SAP Central Services Instance.",
@@ -1571,6 +1588,14 @@
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "SAP Central Services instance start request body.",
+            "schema": {
+              "$ref": "#/definitions/StartRequest"
+            }
           }
         ],
         "responses": {
@@ -1614,6 +1639,9 @@
         "x-ms-examples": {
           "Stop the SAP Central Services Instance.": {
             "$ref": "./examples/sapcentralinstances/SAPCentralInstances_StopInstance.json"
+          },
+          "Stop the SAP Central Services Instance and its underlying Virtual Machine(s)": {
+            "$ref": "./examples/sapcentralinstances/SAPCentralInstances_StopInstance_WithInfraOperations.json"
           }
         },
         "description": "Stops the SAP Central Services Instance.",
@@ -1683,6 +1711,9 @@
         "x-ms-examples": {
           "Start the SAP Application Server Instance.": {
             "$ref": "./examples/sapapplicationinstances/SAPApplicationServerInstances_StartInstance.json"
+          },
+          "Start Virtual Machine and the SAP Application Server Instance on it.": {
+            "$ref": "./examples/sapapplicationinstances/SAPApplicationServerInstances_StartInstance_WithInfraOperations.json"
           }
         },
         "description": "Starts the SAP Application Server Instance.",
@@ -1701,6 +1732,14 @@
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "SAP Application server instance start request body.",
+            "schema": {
+              "$ref": "#/definitions/StartRequest"
+            }
           }
         ],
         "responses": {
@@ -1744,6 +1783,9 @@
         "x-ms-examples": {
           "Stop the SAP Application Server Instance": {
             "$ref": "./examples/sapapplicationinstances/SAPApplicationServerInstances_StopInstance.json"
+          },
+          "Stop the SAP Application Server Instance and it's infrastructure.": {
+            "$ref": "./examples/sapapplicationinstances/SAPApplicationServerInstances_StopInstance_WithInfraOperations.json"
           }
         },
         "description": "Stops the SAP Application Server Instance.",
@@ -1813,6 +1855,9 @@
         "x-ms-examples": {
           "Start the database instance of the SAP system.": {
             "$ref": "./examples/sapdatabaseinstances/SAPDatabaseInstances_StartInstance.json"
+          },
+          "Start Virtual Machine and the database instance of the SAP system on it.": {
+            "$ref": "./examples/sapdatabaseinstances/SAPDatabaseInstances_StartInstance_WithInfraOperations.json"
           }
         },
         "description": "Starts the database instance of the SAP system.",
@@ -1831,6 +1876,14 @@
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "SAP Database server instance start request body.",
+            "schema": {
+              "$ref": "#/definitions/StartRequest"
+            }
           }
         ],
         "responses": {
@@ -1874,6 +1927,9 @@
         "x-ms-examples": {
           "Stop the database instance of the SAP system.": {
             "$ref": "./examples/sapdatabaseinstances/SAPDatabaseInstances_StopInstance.json"
+          },
+          "Stop the database instance of the SAP system and the underlying Virtual Machine(s).": {
+            "$ref": "./examples/sapdatabaseinstances/SAPDatabaseInstances_StopInstance_WithInfraOperations.json"
           }
         },
         "description": "Stops the database instance of the SAP system.",
@@ -3469,6 +3525,22 @@
           "format": "int64",
           "default": 0,
           "description": "This parameter defines how long (in seconds) the soft shutdown waits until the RFC/HTTP clients no longer consider the server for calls with load balancing. Value 0 means that the kernel does not wait, but goes directly into the next shutdown state, i.e. hard stop."
+        },
+        "deallocateVm": {
+          "type": "boolean",
+          "default": false,
+          "description": "The boolean value indicates whether to Stop and deallocate the virtual machines along with the SAP instances."
+        }
+      }
+    },
+    "StartRequest": {
+      "description": "Start SAP instance(s) request body.",
+      "type": "object",
+      "properties": {
+        "startVm": {
+          "type": "boolean",
+          "default": false,
+          "description": "The boolean value indicates whether to start the virtual machines before starting the SAP instances."
         }
       }
     },
