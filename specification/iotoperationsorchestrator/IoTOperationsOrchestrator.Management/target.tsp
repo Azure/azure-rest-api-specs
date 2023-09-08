@@ -17,9 +17,9 @@ namespace Microsoft.IoTOperationsOrchestrator;
 @doc("A Target resource belonging to an Instance resource.")
 model Target is TrackedResource<TargetProperties> {
   @doc("Name of target.")
-  @key()
+  @key
   @segment("targets")
-  @pattern("^[a-z0-9][a-z0-9-]{1,62}[a-z0-9]$") 
+  @pattern("^[a-z0-9][a-z0-9-]{1,62}[a-z0-9]$")
   @path
   name: string;
 
@@ -33,17 +33,17 @@ model Target is TrackedResource<TargetProperties> {
 @doc("The properties of a Target resource.")
 model TargetProperties {
   @doc("A list of components.")
-  @OpenAPI.extension("x-ms-identifiers", [])  
+  @OpenAPI.extension("x-ms-identifiers", [])
   components?: ComponentProperties[];
-  
+
   @doc("User-friendly name for the Target.")
   displayName?: string;
-  
+
   @doc("Deployment scope (such as Kubernetes namespace).")
   scope?: string;
 
   @doc("Defines the device topology for a target or instance.")
-  @OpenAPI.extension("x-ms-identifiers", [])  
+  @OpenAPI.extension("x-ms-identifiers", [])
   topologies?: TopologiesProperties[];
 
   @doc("Version of the particular resource.")
@@ -67,8 +67,8 @@ model BindingProperties {
   config: {};
 
   @doc("Name of the provider.")
-  provider:	string;
-  
+  provider: string;
+
   @doc("Role that the provider binds to with the component.")
   role: {};
 }

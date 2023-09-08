@@ -17,9 +17,9 @@ namespace Microsoft.IoTOperationsOrchestrator;
 @doc("A Instance resource belonging to an Instance resource.")
 model Instance is TrackedResource<InstanceProperties> {
   @doc("Name of Instance.")
-  @key()
+  @key
   @segment("instances")
-  @pattern("^[a-z0-9][a-z0-9-]{1,62}[a-z0-9]$") 
+  @pattern("^[a-z0-9][a-z0-9-]{1,62}[a-z0-9]$")
   @path
   name: string;
 
@@ -34,10 +34,10 @@ model Instance is TrackedResource<InstanceProperties> {
 model InstanceProperties {
   @doc("User-friendly name for the Instance.")
   displayName?: string;
-  
+
   @doc("Deployment scope (such as Kubernetes namespace).")
   scope?: string;
-  
+
   @doc("Name of the solution")
   solution?: string;
 
@@ -55,8 +55,8 @@ model InstanceProperties {
 @doc("Properties of the reference target.")
 model TargetSelectorProperties {
   @doc("Name of the target.")
-  name?:	string;
-  
+  name?: string;
+
   @doc("Unique selector for the target such as a label.")
   selector?: {};
 }

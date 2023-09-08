@@ -17,9 +17,9 @@ namespace Microsoft.IoTOperationsOrchestrator;
 @doc("A Solution resource belonging to an Instance resource.")
 model Solution is TrackedResource<SolutionProperties> {
   @doc("Name of solution.")
-  @key()
+  @key
   @segment("solutions")
-  @pattern("^[a-z0-9][a-z0-9-]{1,62}[a-z0-9]$") 
+  @pattern("^[a-z0-9][a-z0-9-]{1,62}[a-z0-9]$")
   @path
   name: string;
 
@@ -35,7 +35,7 @@ model SolutionProperties {
   @doc("A list of components")
   @OpenAPI.extension("x-ms-identifiers", [])
   components?: ComponentProperties[];
-  
+
   @doc("User-friendly name for the Solution.")
   displayName?: string;
 

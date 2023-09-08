@@ -43,11 +43,11 @@ model ComponentProperties {
   dependencies?: string[];
 
   @doc("Name of the component.")
-  name:	string;
-  
+  name: string;
+
   @doc("Properties of the component.")
   properties?: {};
-  
+
   @doc("Component type.")
   type: string;
 }
