@@ -101,22 +101,22 @@ model CompanyDetails {
 
 @doc("Address details.")
 model Address {
-  @doc("Address line 1.")
+  @doc("Address line 1")
   addressLine1: string;
 
-  @doc("Address line 2.")
+  @doc("Address line 2")
   addressLine2?: string;
 
-  @doc("City.")
+  @doc("Name of the city")
   city: string;
 
-  @doc("State.")
+  @doc("Name of the state")
   state: string;
 
-  @doc("Country.")
+  @doc("Name of the country")
   country: string;
 
-  @doc("Zip code.")
+  @doc("Zip code")
   zipCode: string;
 }
 
