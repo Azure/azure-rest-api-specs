@@ -1779,9 +1779,9 @@
         ]
       }
     },
-    "RegionMetadata": {
+    "RegionsMetadata": {
       "type": "object",
-      "description": "Informatica Serverless Runtime Region Metadata",
+      "description": "Informatica Serverless Runtime Regions Metadata",
       "properties": {
         "id": {
           "type": "string",
@@ -1821,25 +1821,29 @@
         },
         "applicationType": {
           "type": "array",
-          "description": "Map of application types of supported by informatica",
+          "description": "List of application types supported by informatica",
           "items": {
             "$ref": "#/definitions/ApplicationTypeMetadata"
           },
           "x-ms-identifiers": []
         },
         "computeUnits": {
-          "$ref": "#/definitions/ComputeUnitsMetadata",
-          "description": "different compute units with possible list of values"
+          "type": "array",
+          "description": "The list of compute units with possible array of values",
+          "items": {
+            "$ref": "#/definitions/ComputeUnitsMetadata"
+          },
+          "x-ms-identifiers": []
         },
         "executionTimeout": {
           "type": "string",
-          "description": "Execution timeout"
+          "description": "Serverless Runtime execution timeout"
         },
         "region": {
           "type": "array",
           "description": "supported region",
           "items": {
-            "$ref": "#/definitions/RegionMetadata"
+            "$ref": "#/definitions/RegionsMetadata"
           },
           "x-ms-identifiers": []
         }
