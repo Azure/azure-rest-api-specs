@@ -231,7 +231,6 @@
       "description": "Publisher Scope.",
       "enum": [
         "Unknown",
-        "Public",
         "Private"
       ],
       "x-ms-enum": {
@@ -342,6 +341,67 @@
           "type": "string",
           "description": "The storage account container sas uri"
         }
+      }
+    },
+    "DeploymentResourceIdReference": {
+      "description": "The azure resource reference which is used for deployment.",
+      "type": "object",
+      "discriminator": "idType",
+      "required": [
+        "idType"
+      ],
+      "properties": {
+        "idType": {
+          "type": "string",
+          "description": "The resource reference arm id type.",
+          "$ref": "#/definitions/IdType"
+        }
+      }
+    },
+    "SecretDeploymentResourceReference": {
+      "description": "Secret deployment resource id reference.",
+      "x-ms-discriminator-value": "Secret",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentResourceIdReference"
+        }
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "x-ms-secret": true,
+          "description": "Resource ID."
+        }
+      }
+    },
+    "OpenDeploymentResourceReference": {
+      "description": "Non secret deployment resource id reference.",
+      "x-ms-discriminator-value": "Open",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentResourceIdReference"
+        }
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        }
+      }
+    },
+    "IdType": {
+      "type": "string",
+      "description": "The resource reference arm id type.",
+      "enum": [
+        "Unknown",
+        "Secret",
+        "Open"
+      ],
+      "x-ms-enum": {
+        "name": "idType",
+        "modelAsString": true
       }
     }
   },
