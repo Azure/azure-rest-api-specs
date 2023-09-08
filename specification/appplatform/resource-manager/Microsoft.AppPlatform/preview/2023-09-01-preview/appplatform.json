@@ -11637,9 +11637,17 @@
           "default": false
         },
         "autoSync": {
-          "description": "Indicates whether to automatically synchronize certificate from key vault.",
-          "type": "boolean",
-          "default": false
+          "description": "Indicates whether to automatically synchronize certificate from key vault or not.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "default": "Disabled",
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AutoSyncCertificate",
+            "modelAsString": true
+          }
         }
       },
       "x-ms-discriminator-value": "KeyVaultCertificate"
