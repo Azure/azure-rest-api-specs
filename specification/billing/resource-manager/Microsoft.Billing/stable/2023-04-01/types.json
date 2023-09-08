@@ -84,6 +84,11 @@
       "description": "Common fields that are returned in the response for all Azure Resource Manager resources.",
       "type": "object",
       "properties": {
+        "type": {
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\".",
+          "type": "string",
+          "readOnly": true
+        },
         "id": {
           "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.",
           "type": "string",
@@ -91,11 +96,6 @@
         },
         "name": {
           "description": "The name of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\".",
           "type": "string",
           "readOnly": true
         },
