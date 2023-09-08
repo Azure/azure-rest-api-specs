@@ -584,9 +584,6 @@ input-file:
 
 ``` yaml
 directive:
-  - suppress: MISSING_APIS_IN_DEFAULT_TAG
-    from: cosmos-db.json
-    reason: APIs in the format /apis/<api-type> had been renamed to /<api-type> format.
   - suppress: TrackedResourceGetOperation
     from: cosmos-db.json
     where: $.definitions.DatabaseAccountCreateUpdateParameters
