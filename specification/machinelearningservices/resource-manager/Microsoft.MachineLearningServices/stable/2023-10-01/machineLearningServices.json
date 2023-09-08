@@ -6087,6 +6087,44 @@
       },
       "x-ms-discriminator-value": "ServiceTag"
     },
+    "ServiceTagDestination": {
+      "type": "object",
+      "description": "Service Tag destination for a Service Tag Outbound Rule for the managed network of a machine learning workspace.",
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/RuleAction"
+        },
+        "addressPrefixes": {
+          "description": "Optional, if provided, the ServiceTag property will be ignored.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "portRanges": {
+          "type": "string"
+        },
+        "protocol": {
+          "type": "string"
+        },
+        "serviceTag": {
+          "type": "string"
+        }
+      }
+    },
+    "RuleAction": {
+      "description": "The action enum for networking rule.",
+      "enum": [
+        "Allow",
+        "Deny"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RuleAction",
+        "modelAsString": true
+      }
+    },
     "FqdnOutboundRule": {
       "type": "object",
       "description": "FQDN Outbound Rule for the managed network of a machine learning workspace.",
