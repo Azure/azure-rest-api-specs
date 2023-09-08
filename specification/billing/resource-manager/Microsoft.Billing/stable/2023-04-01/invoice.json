@@ -160,128 +160,6 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices": {
-      "get": {
-        "tags": [
-          "Invoice"
-        ],
-        "description": "Lists the invoices for a billing account for a given start date and end date. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "Invoices_ListByBillingAccount",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "./types.json#/parameters/billingAccountName"
-          },
-          {
-            "in": "query",
-            "name": "periodStartDate",
-            "description": "The start date of the billing period for which the invoice is generated. The date is in MM-DD-YYYY format.",
-            "type": "string",
-            "format": "date"
-          },
-          {
-            "in": "query",
-            "name": "periodEndDate",
-            "description": "The end date of the billing period for which the invoice is generated. The date is in MM-DD-YYYY format.",
-            "type": "string",
-            "format": "date"
-          },
-          {
-            "$ref": "./types.json#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "./types.json#/parameters/filter"
-          },
-          {
-            "$ref": "./types.json#/parameters/orderBy"
-          },
-          {
-            "$ref": "./types.json#/parameters/top"
-          },
-          {
-            "$ref": "./types.json#/parameters/skip"
-          },
-          {
-            "$ref": "./types.json#/parameters/count"
-          },
-          {
-            "$ref": "./types.json#/parameters/search"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The list of invoices.",
-            "schema": {
-              "$ref": "#/definitions/InvoiceListResult"
-            }
-          },
-          "default": {
-            "description": "Default response",
-            "schema": {
-              "$ref": "./types.json#/definitions/ArmErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "InvoicesListByBillingAccount": {
-            "$ref": "./examples/invoicesListByBillingAccount.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}": {
-      "get": {
-        "tags": [
-          "Invoice"
-        ],
-        "description": "Gets an invoice by billing account name and ID. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "Invoices_GetByBillingAccount",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "./types.json#/parameters/billingAccountName"
-          },
-          {
-            "$ref": "./types.json#/parameters/invoiceName"
-          },
-          {
-            "$ref": "./types.json#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The list of invoices.",
-            "schema": {
-              "$ref": "#/definitions/Invoice"
-            }
-          },
-          "default": {
-            "description": "Default response",
-            "schema": {
-              "$ref": "./types.json#/definitions/ArmErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "InvoicesGetByBillingAccount": {
-            "$ref": "./examples/invoicesGetByBillingAccount.json"
-          }
-        }
-      }
-    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/amend": {
       "post": {
         "tags": [
@@ -456,6 +334,128 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}": {
+      "get": {
+        "tags": [
+          "Invoice"
+        ],
+        "description": "Gets an invoice by billing account name and ID. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Invoices_GetByBillingAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of invoices.",
+            "schema": {
+              "$ref": "#/definitions/Invoice"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InvoicesGetByBillingAccount": {
+            "$ref": "./examples/invoicesGetByBillingAccount.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices": {
+      "get": {
+        "tags": [
+          "Invoice"
+        ],
+        "description": "Lists the invoices for a billing account for a given start date and end date. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Invoices_ListByBillingAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "in": "query",
+            "name": "periodStartDate",
+            "description": "The start date of the billing period for which the invoice is generated. The date is in MM-DD-YYYY format.",
+            "type": "string",
+            "format": "date"
+          },
+          {
+            "in": "query",
+            "name": "periodEndDate",
+            "description": "The end date of the billing period for which the invoice is generated. The date is in MM-DD-YYYY format.",
+            "type": "string",
+            "format": "date"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "$ref": "./types.json#/parameters/orderBy"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          },
+          {
+            "$ref": "./types.json#/parameters/count"
+          },
+          {
+            "$ref": "./types.json#/parameters/search"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of invoices.",
+            "schema": {
+              "$ref": "#/definitions/InvoiceListResult"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InvoicesListByBillingAccount": {
+            "$ref": "./examples/invoicesListByBillingAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/{subscriptionId}/downloadDocuments": {
       "post": {
         "tags": [
@@ -521,6 +521,114 @@
         "x-ms-examples": {
           "InvoicesDownloadMultipleByBillingSubscription": {
             "$ref": "./examples/invoicesDownloadMultipleByBillingSubscription.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/{subscriptionId}/invoices/{invoiceName}/download": {
+      "post": {
+        "tags": [
+          "Invoice"
+        ],
+        "description": "ets a URL to download an invoice by billing subscription.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Invoices_DownloadByBillingSubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceName"
+          },
+          {
+            "in": "query",
+            "name": "documentName",
+            "description": "The ID that uniquely identifies an invoice document. This ID may be an identifier for an invoice PDF, a credit note, or a tax receipt.",
+            "type": "string"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A secure URL that can be used to download a an entity until the URL expires.",
+            "schema": {
+              "$ref": "#/definitions/DocumentDownloadResult"
+            }
+          },
+          "202": {
+            "description": "An operation accepted result that returns a 'Location' header that the client can poll to view the result of the operation.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "InvoicesDownloadByBillingSubscription": {
+            "$ref": "./examples/invoicesDownloadByBillingSubscription.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/{subscriptionId}/invoices/{invoiceName}": {
+      "get": {
+        "tags": [
+          "Invoice"
+        ],
+        "description": "Gets an invoice by subscription ID and invoice ID.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Invoices_GetByBillingSubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An invoice.",
+            "schema": {
+              "$ref": "#/definitions/Invoice"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InvoicesGetByBillingSubscription": {
+            "$ref": "./examples/invoicesGetByBillingSubscription.json"
           }
         }
       }
@@ -599,114 +707,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/{subscriptionId}/invoices/{invoiceName}": {
-      "get": {
-        "tags": [
-          "Invoice"
-        ],
-        "description": "Gets an invoice by subscription ID and invoice ID.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "Invoices_GetByBillingSubscription",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "./types.json#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "./types.json#/parameters/invoiceName"
-          },
-          {
-            "$ref": "./types.json#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "An invoice.",
-            "schema": {
-              "$ref": "#/definitions/Invoice"
-            }
-          },
-          "default": {
-            "description": "Default response",
-            "schema": {
-              "$ref": "./types.json#/definitions/ArmErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "InvoicesGetByBillingSubscription": {
-            "$ref": "./examples/invoicesGetByBillingSubscription.json"
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/{subscriptionId}/invoices/{invoiceName}/download": {
-      "post": {
-        "tags": [
-          "Invoice"
-        ],
-        "description": "ets a URL to download an invoice by billing subscription.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "Invoices_DownloadByBillingSubscription",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "./types.json#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "./types.json#/parameters/invoiceName"
-          },
-          {
-            "in": "query",
-            "name": "documentName",
-            "description": "The ID that uniquely identifies an invoice document. This ID may be an identifier for an invoice PDF, a credit note, or a tax receipt.",
-            "type": "string"
-          },
-          {
-            "$ref": "./types.json#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A secure URL that can be used to download a an entity until the URL expires.",
-            "schema": {
-              "$ref": "#/definitions/DocumentDownloadResult"
-            }
-          },
-          "202": {
-            "description": "An operation accepted result that returns a 'Location' header that the client can poll to view the result of the operation.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Default response",
-            "schema": {
-              "$ref": "./types.json#/definitions/ArmErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "InvoicesDownloadByBillingSubscription": {
-            "$ref": "./examples/invoicesDownloadByBillingSubscription.json"
-          }
         }
       }
     },
@@ -1238,7 +1238,7 @@
           ]
         },
         "rebillInvoiceId": {
-          "description": "The invoice ID of the rebill inovice for a refund.",
+          "description": "The invoice ID of the rebill invoice for a refund.",
           "type": "string",
           "readOnly": true
         },

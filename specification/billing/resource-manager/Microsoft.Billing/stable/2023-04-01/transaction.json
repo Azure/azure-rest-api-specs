@@ -293,6 +293,63 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/transactions/download": {
+      "post": {
+        "tags": [
+          "Transaction"
+        ],
+        "description": "Gets a URL to download the transactions document for an invoice. The operation is supported for billing accounts with agreement type Enterprise Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Transactions_DownloadByInvoice",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A secure URL that can be used to download a an entity until the URL expires.",
+            "schema": {
+              "$ref": "#/definitions/DocumentDownloadResult"
+            }
+          },
+          "202": {
+            "description": "An operation accepted result that returns a 'Location' header that the client can poll to view the result of the operation.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "TransactionsDownloadByInvoice": {
+            "$ref": "./examples/transactionsDownloadByInvoice.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/transactions": {
       "get": {
         "tags": [
@@ -359,63 +416,6 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/transactions/download": {
-      "post": {
-        "tags": [
-          "Transaction"
-        ],
-        "description": "Gets a URL to download the transactions document for an invoice. The operation is supported for billing accounts with agreement type Enterprise Agreement.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "Transactions_DownloadByInvoice",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "./types.json#/parameters/billingAccountName"
-          },
-          {
-            "$ref": "./types.json#/parameters/invoiceName"
-          },
-          {
-            "$ref": "./types.json#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A secure URL that can be used to download a an entity until the URL expires.",
-            "schema": {
-              "$ref": "#/definitions/DocumentDownloadResult"
-            }
-          },
-          "202": {
-            "description": "An operation accepted result that returns a 'Location' header that the client can poll to view the result of the operation.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Default response",
-            "schema": {
-              "$ref": "./types.json#/definitions/ArmErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "TransactionsDownloadByInvoice": {
-            "$ref": "./examples/transactionsDownloadByInvoice.json"
-          }
-        }
-      }
-    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/transactionSummary": {
       "get": {
         "tags": [
@@ -476,6 +476,83 @@
           "TransactionSummaryGetByInvoice": {
             "$ref": "./examples/transactionSummaryGetByInvoice.json"
           }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/transactions": {
+      "get": {
+        "tags": [
+          "Transaction"
+        ],
+        "description": "Lists the billed or unbilled transactions by billing account name for given start and end date. Transactions include purchases, refunds and Azure usage charges. Unbilled transactions are listed under pending invoice Id and do not include tax. Tax is added to the amount once an invoice is generated.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Transactions_ListByBillingAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "in": "query",
+            "name": "periodStartDate",
+            "description": "The start date to fetch the transactions. The date should be specified in MM-DD-YYYY format.",
+            "required": true,
+            "type": "string",
+            "format": "date"
+          },
+          {
+            "in": "query",
+            "name": "periodEndDate",
+            "description": "The end date to fetch the transactions. The date should be specified in MM-DD-YYYY format.",
+            "required": true,
+            "type": "string",
+            "format": "date"
+          },
+          {
+            "in": "query",
+            "name": "type",
+            "description": "The type of transaction.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Unknown",
+              "Billed",
+              "Unbilled"
+            ],
+            "x-ms-enum": {
+              "name": "TransactionType",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of transactions.",
+            "schema": {
+              "$ref": "#/definitions/TransactionListResult"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TransactionsListByBillingAccount": {
+            "$ref": "./examples/transactionsListByBillingAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
