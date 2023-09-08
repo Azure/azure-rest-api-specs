@@ -139,7 +139,17 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-migrate-2019-10
+tag: package-migrate-default
+```
+
+### Tag: package-migrate-default
+
+These settings apply only when `--tag=package-migrate-default` is specified on the command line.
+
+``` yaml $(tag) == 'package-migrate-default'
+input-file:
+- Microsoft.Migrate/MigrateProjects/stable/2023-01-01/hubmigrate.json
+- Microsoft.Migrate/AssessmentProjects/stable/2019-10-01/migrate.json
 ```
 
 ### Tag: package-migrate-2018-02
