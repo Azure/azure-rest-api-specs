@@ -30,6 +30,9 @@ cd specification/contosowidgetmanager
 # Install the dependencies to the local 'node_modules' folder.
 npm install
 
+# Generate the prettier swagger library from type script (the command will return an error which is expected)
+npx tsc
+
 # Run 'prettier --check' to verify the problems can be reproduced locally
 npx prettier --check **/*.json
 
