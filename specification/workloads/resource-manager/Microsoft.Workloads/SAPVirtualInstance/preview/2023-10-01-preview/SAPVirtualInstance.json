@@ -340,6 +340,9 @@
           },
           "Create Infrastructure (with OS configuration) with custom resource names for HA system with Availability Zone": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_CustomFullResourceNames_HA_AvZone.json"
+          },
+          "Create Infrastructure (with OS configuration) with Azure Compute Gallery Image": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_BYOI.json"
           }
         },
         "description": "Creates a Virtual Instance for SAP solutions (VIS) resource",
@@ -2359,7 +2362,7 @@
         "id": {
           "type": "string",
           "description": "Specifies the ARM resource ID of the Azure Compute Gallery image version used for creating ACSS VMs."
-        },
+        }
       },
       "description": "Specifies information about the image to use. You can specify information about platform images, marketplace images, or virtual machine images. This element is required when you want to use a platform image, marketplace image, or virtual machine image, but is not used in other creation operations. NOTE: Image reference publisher and offer can only be set when you create the scale set."
     },
