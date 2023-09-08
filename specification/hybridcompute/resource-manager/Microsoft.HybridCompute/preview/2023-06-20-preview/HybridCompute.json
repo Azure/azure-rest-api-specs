@@ -569,6 +569,9 @@
         "x-ms-examples": {
           "Get Machine": {
             "$ref": "./examples/machine/Machines_Get.json"
+          },
+          "Get Machine with License Profile Instance View": {
+            "$ref": "./examples/machine/Machines_Get_LicenseProfileInstanceView.json"
           }
         }
       }
@@ -2974,20 +2977,25 @@
     "LicenseProfileMachineInstanceView": {
       "type": "object",
       "properties": {
-        "assignedLicense": {
-          "$ref": "#/definitions/LicenseProperties",
-          "description": "The assigned license resource."
-        },
-        "licenseAssignmentState": {
-          "type": "string",
-          "enum": [
-            "Assigned",
-            "NotAssigned"
-          ],
-          "description": "Describes the license assignment state (Assigned or NotAssigned).",
-          "x-ms-enum": {
-            "name": "licenseAssignmentState",
-            "modelAsString": true
+        "esuProfile": {
+          "type": "object",
+          "properties": {
+            "assignedLicense": {
+              "$ref": "#/definitions/License",
+              "description": "The assigned license resource."
+            },
+            "licenseAssignmentState": {
+              "type": "string",
+              "enum": [
+                "Assigned",
+                "NotAssigned"
+              ],
+              "description": "Describes the license assignment state (Assigned or NotAssigned).",
+              "x-ms-enum": {
+                "name": "licenseAssignmentState",
+                "modelAsString": true
+              }
+            }
           }
         }
       },

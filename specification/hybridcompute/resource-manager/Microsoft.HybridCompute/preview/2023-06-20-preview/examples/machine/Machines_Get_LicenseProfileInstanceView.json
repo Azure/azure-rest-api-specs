@@ -51,7 +51,40 @@
           },
           "licenseProfile": {
             "esuProfile": {
-              "licenseAssignmentState": "Assigned"
+              "assignedLicense": {
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Licenses/{licenseName}",
+                "name": "{licenseName}",
+                "type": "Microsoft.HybridCompute/licenses",
+                "location": "eastus2euap",
+                "tags": null,
+                "properties": {
+                  "tenantId": "{tenandId}",
+                  "licenseType": "ESU",
+                  "licenseDetails": {
+                    "state": "Activated",
+                    "target": "Windows Server 2012",
+                    "edition": "Datacenter",
+                    "type": "pCore",
+                    "processors": 6,
+                    "assignedLicenses": 8,
+                    "immutableId": "<generated Guid>"
+                  }
+                }
+              },
+              "licenseAssignmentState": "Assigned",
+              "esuEligibility": "Ineligible",
+              "serverType": "Standard",
+              "esuKeyState": "Inactive",
+              "esuKeys": [
+                {
+                  "sku": "skuNumber1",
+                  "licenseStatus": "licenseStatus1"
+                },
+                {
+                  "sku": "skuNumber2",
+                  "licenseStatus": "licenseStatus2"
+                }
+              ]
             }
           },
           "vmId": "b7a098cc-b0b8-46e8-a205-62f301a62a8f",
