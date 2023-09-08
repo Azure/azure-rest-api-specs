@@ -19,7 +19,7 @@ model AudioTranscriptionOptions {
     language?: string;
 }
 
-@doc("Lorem ipsum")
+@doc("This format will return an JSON structure containing a single \"text\" with the transcription.")
 @added(ServiceApiVersions.v2023_09_01_Preview)
 model AudioTranscriptionOptionsSimpleJson {
     ...AudioTranscriptionOptions;
@@ -29,7 +29,7 @@ model AudioTranscriptionOptionsSimpleJson {
     responseFormat?: AudioTranscriptionFormat = AudioTranscriptionFormat.simpleJson;
 }
 
-@doc("Lorem ipsum")
+@doc("This format will return an JSON structure containing an enriched structure with the transcription.")
 @added(ServiceApiVersions.v2023_09_01_Preview)
 model AudioTranscriptionOptionsVerboseJson {
     ...AudioTranscriptionOptions;
@@ -39,7 +39,7 @@ model AudioTranscriptionOptionsVerboseJson {
     responseFormat?: AudioTranscriptionFormat = AudioTranscriptionFormat.verboseJson;
 }
 
-@doc("Lorem ipsum")
+@doc("This will make the response return the transcription as plain/text.")
 @added(ServiceApiVersions.v2023_09_01_Preview)
 model AudioTranscriptionOptionsPlainText {
     ...AudioTranscriptionOptions;
@@ -49,7 +49,7 @@ model AudioTranscriptionOptionsPlainText {
     responseFormat?: AudioTranscriptionFormat = AudioTranscriptionFormat.text;
 }
 
-@doc("Lorem ipsum")
+@doc("The transcription will be provided in SRT format (SubRip Text) in the form of plain/text.")
 @added(ServiceApiVersions.v2023_09_01_Preview)
 model AudioTranscriptionOptionsSrt {
     ...AudioTranscriptionOptions;
@@ -59,7 +59,7 @@ model AudioTranscriptionOptionsSrt {
     responseFormat?: AudioTranscriptionFormat = AudioTranscriptionFormat.srt;
 }
 
-@doc("Lorem ipsum")
+@doc("The transcription will be provided in VTT format (Web Video Text Tracks) in the form of plain/text.")
 @added(ServiceApiVersions.v2023_09_01_Preview)
 model AudioTranscriptionOptionsVtt {
     ...AudioTranscriptionOptions;

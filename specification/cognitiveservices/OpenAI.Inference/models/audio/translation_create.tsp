@@ -10,7 +10,7 @@ using TypeSpec.Versioning;
 
 namespace Azure.OpenAI;
 
-@doc("Lorem ipsum")
+@doc("This format will return an JSON structure containing a single \"text\" with the translation.")
 @added(ServiceApiVersions.v2023_09_01_Preview)
 model AudioTranslationOptionsSimpleJson {
     ...AudioTranscriptionOptionsCommon;
@@ -20,7 +20,7 @@ model AudioTranslationOptionsSimpleJson {
     responseFormat?: AudioTranscriptionFormat = AudioTranscriptionFormat.simpleJson;
 }
 
-@doc("Lorem ipsum")
+@doc("This format will return an JSON structure containing an enriched structure with the translation.")
 @added(ServiceApiVersions.v2023_09_01_Preview)
 model AudioTranslationOptionsVerboseJson {
     ...AudioTranscriptionOptionsCommon;
@@ -30,7 +30,7 @@ model AudioTranslationOptionsVerboseJson {
     responseFormat?: AudioTranscriptionFormat = AudioTranscriptionFormat.verboseJson;
 }
 
-@doc("Lorem ipsum")
+@doc("This will make the response return the translation as plain/text.")
 @added(ServiceApiVersions.v2023_09_01_Preview)
 model AudioTranslationOptionsPlainText {
     ...AudioTranscriptionOptionsCommon;
@@ -40,7 +40,7 @@ model AudioTranslationOptionsPlainText {
     responseFormat?: AudioTranscriptionFormat = AudioTranscriptionFormat.text;
 }
 
-@doc("Lorem ipsum")
+@doc("The translation will be provided in SRT format (SubRip Text) in the form of plain/text.")
 @added(ServiceApiVersions.v2023_09_01_Preview)
 model AudioTranslationOptionsSrt {
     ...AudioTranscriptionOptionsCommon;
@@ -50,7 +50,7 @@ model AudioTranslationOptionsSrt {
     responseFormat?: AudioTranscriptionFormat = AudioTranscriptionFormat.srt;
 }
 
-@doc("Lorem ipsum")
+@doc("The translation will be provided in VTT format (Web Video Text Tracks) in the form of plain/text.")
 @added(ServiceApiVersions.v2023_09_01_Preview)
 model AudioTranslationOptionsVtt {
     ...AudioTranscriptionOptionsCommon;

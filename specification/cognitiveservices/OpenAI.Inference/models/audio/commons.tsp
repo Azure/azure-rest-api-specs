@@ -12,19 +12,19 @@ namespace Azure.OpenAI;
 @doc("Defines the format of the output.")
 @added(ServiceApiVersions.v2023_09_01_Preview)
 enum AudioTranscriptionFormat {
-    @doc("Lorem ipsum")
+    @doc("This format will return an JSON structure containing a single \"text\" with the transcription.")
     simpleJson: "json",
 
-    @doc("Lorem ipsum")
-    text: "text",
-
-    @doc("Lorem ipsum")
-    srt: "srt",
-
-    @doc("Lorem ipsum")
+    @doc("This format will return an JSON structure containing an enriched structure with the transcription.")
     verboseJson: "verbose_json",
 
-    @doc("Lorem ipsum")
+    @doc("This will make the response return the transcription as plain/text.")
+    text: "text",
+
+    @doc("The transcription will be provided in SRT format (SubRip Text) in the form of plain/text.")
+    srt: "srt",
+
+    @doc("The transcription will be provided in VTT format (Web Video Text Tracks) in the form of plain/text.")
     vtt: "vtt",
 }
 
@@ -69,7 +69,7 @@ model AudioTranscriptionOptionsCommon {
     `model`?: string;
 }
 
-@doc("Lorem ipsum")
+@doc("Transcription response containing only the transcribed text.")
 @added(ServiceApiVersions.v2023_09_01_Preview)
 model AudioTranscriptionSimpleJson {
     @doc("Transcribed text.")
@@ -84,6 +84,22 @@ enum AudioTranscriptionTask {
 
     @doc("Value for a translation task")
     translate: "translate",
+}
+@doc("Transcription response.")
+@added(ServiceApiVersions.v2023_09_01_Preview)
+model AudioTranscriptionVerboseJson extends AudioTranscriptionSimpleJson {
+    @doc("Audio transcription task.")
+    task: AudioTranscriptionTask;
+
+    @doc("Language detected in the source audio file.")
+    language: string;
+
+    @doc("Duration.")
+    @encode("seconds", float32)
+    duration: duration;
+
+    @doc("Segments.")
+    segments: AudioTranscriptionSegment[];
 }
 
 @doc("Transcription segment.")
@@ -121,21 +137,4 @@ model AudioTranscriptionSegment {
 
     @doc("TODO")
     seek: int32;
-}
-
-@doc("Transcription response.")
-@added(ServiceApiVersions.v2023_09_01_Preview)
-model AudioTranscriptionVerboseJson extends AudioTranscriptionSimpleJson {
-    @doc("Audio transcription task.")
-    task: AudioTranscriptionTask;
-
-    @doc("Language detected in the source audio file.")
-    language: string;
-
-    @doc("Duration.")
-    @encode("seconds", float32)
-    duration: duration;
-
-    @doc("Segments.")
-    segments: AudioTranscriptionSegment[];
 }

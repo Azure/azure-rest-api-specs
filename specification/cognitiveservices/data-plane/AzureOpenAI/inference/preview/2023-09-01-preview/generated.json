@@ -78,6 +78,9 @@
             "type": "string"
           },
           {
+            "$ref": "#/parameters/AudioTranscriptionOptionsCommon.contentLength"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -125,6 +128,9 @@
             "description": "Specifies either the model deployment name (when using Azure OpenAI) or model name (when using non-Azure OpenAI) to use for this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptionsCommon.contentLength"
           },
           {
             "name": "body",
@@ -433,9 +439,9 @@
       "description": "Defines the format of the output.",
       "enum": [
         "json",
+        "verbose_json",
         "text",
         "srt",
-        "verbose_json",
         "vtt"
       ],
       "x-ms-enum": {
@@ -445,34 +451,34 @@
           {
             "name": "simpleJson",
             "value": "json",
-            "description": "Lorem ipsum"
-          },
-          {
-            "name": "text",
-            "value": "text",
-            "description": "Lorem ipsum"
-          },
-          {
-            "name": "srt",
-            "value": "srt",
-            "description": "Lorem ipsum"
+            "description": "This format will return an JSON structure containing a single \"text\" with the transcription."
           },
           {
             "name": "verboseJson",
             "value": "verbose_json",
-            "description": "Lorem ipsum"
+            "description": "This format will return an JSON structure containing an enriched structure with the transcription."
+          },
+          {
+            "name": "text",
+            "value": "text",
+            "description": "This will make the response return the transcription as plain/text."
+          },
+          {
+            "name": "srt",
+            "value": "srt",
+            "description": "The transcription will be provided in SRT format (SubRip Text) in the form of plain/text."
           },
           {
             "name": "vtt",
             "value": "vtt",
-            "description": "Lorem ipsum"
+            "description": "The transcription will be provided in VTT format (Web Video Text Tracks) in the form of plain/text."
           }
         ]
       }
     },
     "AudioTranscriptionOptionsPlainText": {
       "type": "object",
-      "description": "Lorem ipsum",
+      "description": "This will make the response return the transcription as plain/text.",
       "properties": {
         "file": {
           "type": "string",
@@ -506,7 +512,7 @@
     },
     "AudioTranscriptionOptionsSimpleJson": {
       "type": "object",
-      "description": "Lorem ipsum",
+      "description": "This format will return an JSON structure containing a single \"text\" with the transcription.",
       "properties": {
         "file": {
           "type": "string",
@@ -540,7 +546,7 @@
     },
     "AudioTranscriptionOptionsSrt": {
       "type": "object",
-      "description": "Lorem ipsum",
+      "description": "The transcription will be provided in SRT format (SubRip Text) in the form of plain/text.",
       "properties": {
         "file": {
           "type": "string",
@@ -574,7 +580,7 @@
     },
     "AudioTranscriptionOptionsVerboseJson": {
       "type": "object",
-      "description": "Lorem ipsum",
+      "description": "This format will return an JSON structure containing an enriched structure with the transcription.",
       "properties": {
         "file": {
           "type": "string",
@@ -608,7 +614,7 @@
     },
     "AudioTranscriptionOptionsVtt": {
       "type": "object",
-      "description": "Lorem ipsum",
+      "description": "The transcription will be provided in VTT format (Web Video Text Tracks) in the form of plain/text.",
       "properties": {
         "file": {
           "type": "string",
@@ -715,7 +721,7 @@
     },
     "AudioTranscriptionSimpleJson": {
       "type": "object",
-      "description": "Lorem ipsum",
+      "description": "Transcription response containing only the transcribed text.",
       "properties": {
         "text": {
           "type": "string",
@@ -752,7 +758,7 @@
     },
     "AudioTranscriptionVerboseJson": {
       "type": "object",
-      "description": "Transcription response.",
+      "description": "Transcription response with additional metadata.",
       "properties": {
         "task": {
           "$ref": "#/definitions/AudioTranscriptionTask",
@@ -765,11 +771,11 @@
         "duration": {
           "type": "number",
           "format": "float",
-          "description": "Duration."
+          "description": "Duration in seconds."
         },
         "segments": {
           "type": "array",
-          "description": "Segments.",
+          "description": "Audio segments.",
           "items": {
             "$ref": "#/definitions/AudioTranscriptionSegment"
           }
@@ -789,7 +795,7 @@
     },
     "AudioTranslationOptionsPlainText": {
       "type": "object",
-      "description": "Lorem ipsum",
+      "description": "This will make the response return the translation as plain/text.",
       "properties": {
         "file": {
           "type": "string",
@@ -819,7 +825,7 @@
     },
     "AudioTranslationOptionsSimpleJson": {
       "type": "object",
-      "description": "Lorem ipsum",
+      "description": "This format will return an JSON structure containing a single \"text\" with the translation.",
       "properties": {
         "file": {
           "type": "string",
@@ -849,7 +855,7 @@
     },
     "AudioTranslationOptionsSrt": {
       "type": "object",
-      "description": "Lorem ipsum",
+      "description": "The translation will be provided in SRT format (SubRip Text) in the form of plain/text.",
       "properties": {
         "file": {
           "type": "string",
@@ -879,7 +885,7 @@
     },
     "AudioTranslationOptionsVerboseJson": {
       "type": "object",
-      "description": "Lorem ipsum",
+      "description": "This format will return an JSON structure containing an enriched structure with the translation.",
       "properties": {
         "file": {
           "type": "string",
@@ -909,7 +915,7 @@
     },
     "AudioTranslationOptionsVtt": {
       "type": "object",
-      "description": "Lorem ipsum",
+      "description": "The translation will be provided in VTT format (Web Video Text Tracks) in the form of plain/text.",
       "properties": {
         "file": {
           "type": "string",
@@ -2001,6 +2007,16 @@
     }
   },
   "parameters": {
+    "AudioTranscriptionOptionsCommon.contentLength": {
+      "name": "content-length",
+      "in": "header",
+      "description": "The content length of the operation. This needs to be provided by the caller.",
+      "required": true,
+      "type": "integer",
+      "format": "int64",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "contentLength"
+    },
     "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
