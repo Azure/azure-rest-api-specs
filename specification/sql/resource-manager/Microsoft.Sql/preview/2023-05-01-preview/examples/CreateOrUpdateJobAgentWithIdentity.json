@@ -7,6 +7,12 @@
     "api-version": "2023-05-01-preview",
     "parameters": {
       "location": "southeastasia",
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-umi": {}
+        }
+      },
       "properties": {
         "databaseId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/databases/db1"
       }
@@ -19,9 +25,14 @@
         "name": "agent1",
         "type": "Microsoft.Sql/servers/jobAgents",
         "location": "southeastasia",
-        "sku": {
-          "name": "JA100",
-          "capacity": 100
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-umi": {
+              "clientId": "0c29d9b7-0ae2-4014-96ea-faf8e0cf2bc7",
+              "principalId": "0c29d9b7-0ae2-4014-96ea-faf8e0cf2bc7"
+            }
+          }
         },
         "properties": {
           "databaseId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/databases/db1"
@@ -34,9 +45,14 @@
         "name": "agent1",
         "type": "Microsoft.Sql/servers/jobAgents",
         "location": "southeastasia",
-        "sku": {
-          "name": "JA100",
-          "capacity": 100
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-umi": {
+              "clientId": "0c29d9b7-0ae2-4014-96ea-faf8e0cf2bc7",
+              "principalId": "0c29d9b7-0ae2-4014-96ea-faf8e0cf2bc7"
+            }
+          }
         },
         "properties": {
           "databaseId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/databases/db1"
