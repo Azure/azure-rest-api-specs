@@ -1150,15 +1150,19 @@
           "$ref": "#/definitions/ImageCategory",
           "description": "Image category."
         },
-        "acceptLessThan": {
+        "severityThreshold": {
           "type": "integer",
           "format": "int32",
-          "description": "Severity less than the threshold will be treated as accepted for the category. The value can only be -1, 0, 2, 4, 6. -1 means a maximum value, so that all severity can be treated as accepted."
+          "description": "Severity less than the threshold will be treated as accepted for the category. The value can only be 2, 4, 6 for FourLevelSeverities."
+        },
+        "judgementKind": {
+          "$ref": "#/definitions/JudgmentKind",
+          "description": "The judgement kind to help server make judgement."
         }
       },
       "required": [
         "category",
-        "acceptLessThan"
+        "judgementKind"
       ]
     },
     "ImageData": {
@@ -1218,6 +1222,30 @@
           "description": "The type of text analysis output. If not assigned, the default value is \"FourSeverityLevels\".",
           "default": "FourSeverityLevels"
         }
+      }
+    },
+    "JudgmentKind": {
+      "type": "string",
+      "description": "Judgement kind.",
+      "enum": [
+        "AcceptAll",
+        "AcceptLessThan"
+      ],
+      "x-ms-enum": {
+        "name": "JudgmentKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AcceptAll",
+            "value": "AcceptAll",
+            "description": "Treat all content as accepted no matter what the predicted value is."
+          },
+          {
+            "name": "AcceptLessThan",
+            "value": "AcceptLessThan",
+            "description": "Accept only when the predicted severity is less than the severity threshold."
+          }
+        ]
       }
     },
     "Project": {
@@ -1455,15 +1483,19 @@
           "$ref": "#/definitions/TextCategory",
           "description": "Text category."
         },
-        "acceptLessThan": {
+        "severityThreshold": {
           "type": "integer",
           "format": "int32",
-          "description": "Severity less than the threshold will be treated as accepted for the category. The value can only be -1, 0, 2, 4, 6. -1 means a maximum value, so that all severity can be treated as accepted."
+          "description": "Severity less than the threshold will be treated as accepted for the category. The value can only be 2, 4, 6 for FourLevelSeverities."
+        },
+        "judgementKind": {
+          "$ref": "#/definitions/JudgmentKind",
+          "description": "The judgement kind to help server make judgement."
         }
       },
       "required": [
         "category",
-        "acceptLessThan"
+        "judgementKind"
       ]
     },
     "TextPolicy": {
