@@ -60,6 +60,10 @@ model Account {
   @visibility("read")
   name: string;
 
+  @doc("The state of account - Active | Inactive")
+  @visibility("read")
+  state: AccountState;
+
   @doc("The ARM-based subscription id for the account.")
   @visibility("read")
   subscriptionId: uuid;
@@ -70,7 +74,7 @@ model Account {
 
   @doc("The Azure tenant id of the account.")
   @visibility("read")
-  tenantId?: uuid;
+  tenantId: uuid;
 
   @doc("The account resource ARM location, for eg. eastus, southeastasia.")
   @visibility("read")
@@ -87,6 +91,15 @@ model Account {
   @doc("When enabled, this feature allows the workspace to upload and display test results, including artifacts like traces and screenshots, in the Playwright portal. This enables faster and more efficient troubleshooting.")
   @visibility("read")
   reporting?: EnablementStatus = EnablementStatus.Disabled;
+}
+
+@doc("The account state.")
+enum AccountState {
+  @doc("The account is Active.")
+  Active,
+
+  @doc("The account is Inactive.")
+  Inactive,
 }
 
 @doc("The ARM-based subscription state.")
@@ -116,6 +129,9 @@ model AccessToken {
   @visibility("read")
   id: uuid;
 
+  @minLength(3)
+  @maxLength(63)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$")
   @doc("The access-token name.")
   @visibility("read", "create")
   name: string;
@@ -132,7 +148,7 @@ model AccessToken {
   @visibility("read", "create")
   expiryAt: utcDateTime;
 
-  @doc("The access-token state.")
+  @doc("The access-token state - Active | Expired.")
   @visibility("read")
   state: AccessTokenState;
 }

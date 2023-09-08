@@ -26,7 +26,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 model Account is TrackedResource<AccountProperties> {
   @doc("Name of account")
   @minLength(3)
-  @maxLength(253)
+  @maxLength(63)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$")
   @key("name")
   @path

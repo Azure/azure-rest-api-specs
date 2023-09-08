@@ -359,6 +359,9 @@
         "name": {
           "type": "string",
           "description": "The access-token name.",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$",
           "x-ms-mutability": [
             "read",
             "create"
@@ -386,7 +389,7 @@
         },
         "state": {
           "$ref": "#/definitions/AccessTokenState",
-          "description": "The access-token state.",
+          "description": "The access-token state - Active | Expired.",
           "readOnly": true
         }
       },
@@ -441,6 +444,11 @@
           "description": "The account name.",
           "readOnly": true
         },
+        "state": {
+          "$ref": "#/definitions/AccountState",
+          "description": "The state of account - Active | Inactive",
+          "readOnly": true
+        },
         "subscriptionId": {
           "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The ARM-based subscription id for the account.",
@@ -484,10 +492,36 @@
         "id",
         "resourceId",
         "name",
+        "state",
         "subscriptionId",
         "subscriptionState",
+        "tenantId",
         "location"
       ]
+    },
+    "AccountState": {
+      "type": "string",
+      "description": "The account state.",
+      "enum": [
+        "Active",
+        "Inactive"
+      ],
+      "x-ms-enum": {
+        "name": "AccountState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "The account is Active."
+          },
+          {
+            "name": "Inactive",
+            "value": "Inactive",
+            "description": "The account is Inactive."
+          }
+        ]
+      }
     },
     "Azure.Core.Foundations.Error": {
       "type": "object",
