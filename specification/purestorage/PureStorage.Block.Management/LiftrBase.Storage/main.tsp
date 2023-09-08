@@ -33,7 +33,7 @@ model Reservation is TrackedResource<ReservationProperties> {
 }
 
 @armResourceOperations
-interface ReservationOperations {
+interface Reservations {
   get is ArmResourceRead<Reservation>;
   create is ArmResourceCreateOrUpdateAsync<Reservation>;
   update is ArmResourcePatchAsync<Reservation, ReservationProperties>;

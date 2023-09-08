@@ -331,6 +331,9 @@
         "x-ms-examples": {
           "Reservations_Create": {
             "$ref": "./examples/Reservations_Create_MaximumSet_Gen.json"
+          },
+          "Reservations_Create_MinSet": {
+            "$ref": "./examples/Reservations_Create_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -844,6 +847,63 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/avsStorageContainers/{storageContainerName}": {
+      "get": {
+        "operationId": "AvsStorageContainers_Get",
+        "tags": [
+          "AvsStorageContainers"
+        ],
+        "description": "Get a AvsStorageContainer",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storagePoolName",
+            "in": "path",
+            "description": "Name of the Storage Pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 20
+          },
+          {
+            "name": "storageContainerName",
+            "in": "path",
+            "description": "The name of the storage container.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z\\-_]{1,32}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AvsStorageContainer"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AvsStorageContainers_Get": {
+            "$ref": "./examples/AvsStorageContainers_Get_MaximumSet_Gen.json"
+          },
+          "AvsStorageContainers_Get_MinSet": {
+            "$ref": "./examples/AvsStorageContainers_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
       "put": {
         "operationId": "AvsStorageContainers_Create",
         "tags": [

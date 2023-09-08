@@ -27,7 +27,7 @@ enum Versions {
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @armResourceOperations
-interface Reservations extends ReservationOperations {}
+interface Reservations extends LiftrBase.Storage.Reservations {}
 
 @doc("Storage Pool resource type.")
 model StoragePool is TrackedResource<StoragePoolProperties> {
@@ -120,6 +120,7 @@ model AvsStorageContainerProperties {
 @armResourceOperations
 interface AvsStorageContainers {
   create is ArmResourceCreateOrUpdateSync<AvsStorageContainer>;
+  get is ArmResourceRead<AvsStorageContainer>;
   delete is ArmResourceDeleteAsync<AvsStorageContainer>;
   listByParent is ArmResourceListByParent<AvsStorageContainer>;
 }
