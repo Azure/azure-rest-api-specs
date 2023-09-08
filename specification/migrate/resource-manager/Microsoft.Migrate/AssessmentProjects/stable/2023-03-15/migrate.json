@@ -3118,6 +3118,72 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/sqlAssessments/{assessmentName}/summaries": {
+      "get": {
+        "tags": [
+          "SqlAssessmentV2SummaryOperations"
+        ],
+        "operationId": "SqlAssessmentV2SummaryOperations_ListBySqlAssessmentV2",
+        "description": "List SqlAssessmentV2Summary resources by SqlAssessmentV2",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "description": "Assessment Project Name",
+            "type": "string"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "required": true,
+            "description": "Group ARM name",
+            "type": "string"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "required": true,
+            "description": "SQL Assessment arm name.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlAssessmentV2SummaryListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SqlAssessmentV2SummaryOperations_ListBySqlAssessmentV2_MaximumSet_Gen": {
+            "$ref": "./examples/SqlAssessmentV2SummaryOperations_ListBySqlAssessmentV2_MaximumSet_Gen.json"
+          },
+          "SqlAssessmentV2SummaryOperations_ListBySqlAssessmentV2_MinimumSet_Gen": {
+            "$ref": "./examples/SqlAssessmentV2SummaryOperations_ListBySqlAssessmentV2_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/sqlAssessments/{assessmentName}/summaries/{summaryName}": {
       "get": {
         "tags": [
@@ -3903,8 +3969,7 @@
             "in": "path",
             "required": true,
             "description": "Assessible Machine ARM name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -5851,7 +5916,6 @@
         "machineName": {
           "type": "string",
           "description": "Machine display name.",
-          "pattern": "^[a-zA-Z0-9-]{3,24}$",
           "readOnly": true
         },
         "instanceName": {
@@ -6212,7 +6276,6 @@
         "machineName": {
           "type": "string",
           "description": "Machine display name.",
-          "pattern": "^[a-zA-Z0-9-]{3,24}$",
           "readOnly": true
         },
         "instanceName": {
@@ -6616,7 +6679,6 @@
         "machineName": {
           "type": "string",
           "description": "Gets or sets machine name.",
-          "pattern": "^[a-zA-Z0-9-]{3,24}$",
           "readOnly": true
         },
         "instanceName": {
@@ -11669,22 +11731,22 @@
           {
             "name": "NotSuitable",
             "value": "NotSuitable",
-            "description": "Not Suitable."
+            "description": "Not Suitable for Azure."
           },
           {
             "name": "Suitable",
             "value": "Suitable",
-            "description": "Suitable."
+            "description": "Suitable for Azure."
           },
           {
             "name": "ConditionallySuitable",
             "value": "ConditionallySuitable",
-            "description": "Conditionally Suitable."
+            "description": "Conditionally Suitable for Azure."
           },
           {
             "name": "ReadinessUnknown",
             "value": "ReadinessUnknown",
-            "description": "Unknown Readiness."
+            "description": "Unknown Readiness for Azure."
           }
         ]
       }
@@ -12871,8 +12933,7 @@
             "type": "string"
           },
           "description": "The private link resource required member names.",
-          "x-typespec-name": "string[]",
-          "readOnly": true
+          "x-typespec-name": "string[]"
         },
         "requiredZoneNames": {
           "type": "array",
@@ -12880,13 +12941,11 @@
             "type": "string"
           },
           "description": "Required DNS zone names of the the private link resource.",
-          "x-typespec-name": "string[]",
-          "readOnly": true
+          "x-typespec-name": "string[]"
         },
         "groupId": {
           "type": "string",
-          "description": "The private link resource group id.",
-          "readOnly": true
+          "description": "The private link resource group id."
         }
       },
       "description": "Properties of a private link resource.",
@@ -14009,6 +14068,29 @@
         }
       },
       "description": "SQL Assessment V2 summary data."
+    },
+    "SqlAssessmentV2SummaryListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlAssessmentV2Summary"
+          },
+          "description": "The SqlAssessmentV2Summary items on this page",
+          "x-typespec-name": "SqlAssessmentV2Summary[]"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a SqlAssessmentV2Summary list operation.",
+      "required": [
+        "value"
+      ]
     },
     "SqlAssessmentV2SummaryProperties": {
       "type": "object",
