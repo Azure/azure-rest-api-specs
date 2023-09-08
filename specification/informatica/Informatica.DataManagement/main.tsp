@@ -294,7 +294,7 @@ model ServerlessConfigProperties {
 
   @doc("List of application types supported by informatica")
   @extension("x-ms-identifiers", [])
-  applicationType?: ApplicationTypeMetadata[];
+  applicationTypes?: ApplicationTypeMetadata[];
 
   @doc("The list of compute units with possible array of values")
   @extension("x-ms-identifiers", [])
@@ -303,9 +303,9 @@ model ServerlessConfigProperties {
   @doc("Serverless Runtime execution timeout")
   executionTimeout?: string;
 
-  @doc("supported region")
+  @doc("List of supported serverless informatica regions")
   @extension("x-ms-identifiers", [])
-  region?: RegionsMetadata[];
+  regions?: RegionsMetadata[];
 }
 
 @doc("Informatica Serverless advanced custom properties")
@@ -313,7 +313,7 @@ model AdvancedCustomProperties {
   @doc("advanced custom properties key")
   key?: string;
 
-  @doc("advanced custom properties key")
+  @doc("advanced custom properties value")
   value?: string;
 }
 
