@@ -48,9 +48,6 @@
           }
         },
         "x-ms-examples": {
-          "Get SIP configuration for resource": {
-            "$ref": "./examples/GetSipConfiguration.json"
-          },
           "Get SIP configuration for resource with Trunk Health expand": {
             "$ref": "./examples/GetSipConfigurationWithExpand.json"
           }
@@ -452,7 +449,7 @@
       }
     },
     "DomainPatch": {
-      "description": "Represents Domain that will be validated and used.\r\nMap key is domain.",
+      "description": "Represents Domain that will be used.\r\nMap key is domain.",
       "type": "object",
       "properties": {
         "enabled": {
@@ -466,7 +463,7 @@
       "type": "object",
       "properties": {
         "domains": {
-          "description": "Domains that will be validated and used.\r\nMap key is domain.",
+          "description": "Domains that will be used.\r\nMap key is domain.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/DomainPatch"
