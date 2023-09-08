@@ -12,7 +12,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
-namespace Microsoft.IotOperationsOrchestrator;
+namespace Microsoft.IoTOperationsOrchestrator;
 
 @doc("A Solution resource belonging to an Instance resource.")
 model Solution is TrackedResource<SolutionProperties> {
