@@ -47,11 +47,9 @@ model MarketplaceDetails {
 @doc("Offer details for the marketplace that is selected by the user")
 model OfferDetails {
   @doc("Publisher Id for the marketplace offer")
-  @visibility("read", "create")
   publisherId: string;
 
   @doc("Offer Id for the marketplace offer")
-  @visibility("read", "create")
   offerId: string;
 
   @doc("Plan Id for the marketplace offer")
@@ -80,7 +78,7 @@ model UserDetails {
   lastName: string;
 
   @doc("Email address of the user")
-  emailAddress?: email;
+  emailAddress: email;
 
   @doc("User's principal name")
   upn?: string;
@@ -123,7 +121,7 @@ model Address {
 @doc("Base resource properties that can be extended for arm resources.")
 model BaseResourceProperties {
   @doc("Marketplace details of the resource.")
-  @visibility("create", "read", "update")
+  @visibility("create", "read")
   marketplace: MarketplaceDetails;
 
   @doc("Details of the user.")
