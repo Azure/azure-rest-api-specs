@@ -258,7 +258,7 @@ model TextCategoryPolicy {
   category: TextCategory;
 
   @doc("Severity less than the threshold will be treated as accepted for the category. The value can only be 2, 4, 6 for FourSeverityLevels.")
-  severityThreshold?: int32;
+  acceptSeverityThreshold?: int32;
 
   @doc("The judgement kind to help server make judgement.")
   judgementKind: JudgmentKind;
@@ -271,7 +271,7 @@ model ImageCategoryPolicy {
   category: ImageCategory;
   
   @doc("Severity less than the threshold will be treated as accepted for the category. The value can only be 2, 4, 6 for FourSeverityLevels.")
-  severityThreshold?: int32;
+  acceptSeverityThreshold?: int32;
   
   @doc("The judgement kind to help server make judgement.")
   judgementKind: JudgmentKind;
