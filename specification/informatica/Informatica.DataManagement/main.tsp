@@ -100,13 +100,6 @@ interface ServerlessRuntimes
     InformaticaServerlessRuntimeResource,
     InformaticaServerlessRuntimeProperties
   >;
-
-  @doc("Gets List of the serverless runtime environments for this organization.")
-  @armResourceAction(InformaticaServerlessRuntimeResource)
-  @post
-  getAllServerlessRuntimeEnvironments(
-    ...ResourceInstanceParameters<InformaticaServerlessRuntimeResource>,
-  ): ArmResponse<ServerlessRuntimeListResponse> | ErrorResponse;
 }
 
 @doc("Properties specific to the Informatica DataManagement Organization resource.")
@@ -242,7 +235,7 @@ model UserDetails {
 @doc("Serverless Runtime environment Metadata response.")
 model ServerlessMetadataResponse {
   @doc("type of the runtime environment.")
-  type?: RuntimeTypes;
+  type?: RuntimeType;
 
   @doc("serverless config properties")
   serverlessConfigProperties?: ServerlessConfigProperties;
@@ -250,10 +243,6 @@ model ServerlessMetadataResponse {
   @doc("serverless runtime config properties")
   serverlessRuntimeConfigProperties?: ServerlessRuntimeConfigProperties;
 }
-
-@doc("Serverless Runtime environment list response.")
-model ServerlessRuntimeListResponse
-  extends Azure.Core.Page<InformaticaServerlessRuntimeResource> {}
 
 @doc("Serverless Runtime properties.")
 model InformaticaServerlessRuntimeProperties {
@@ -265,10 +254,10 @@ model InformaticaServerlessRuntimeProperties {
   description?: string;
 
   @doc("Platform type of the Serverless Runtime.")
-  platform?: PlatformTypes;
+  platform?: PlatformType;
 
   @doc("Application type of the Serverless Runtime environment.")
-  applicationType?: ApplicationTypes;
+  applicationType?: ApplicationType;
 
   @doc("Compute units of the serverless runtime.")
   computeUnits?: string;
@@ -277,7 +266,8 @@ model InformaticaServerlessRuntimeProperties {
   serverlessRuntimeNetworkProfile?: ServerlessRuntimeNetworkProfile;
 
   @doc("String KV pairs indicating Advanced custom properties.")
-  advancedCustomProperties?: Record<string>;
+  @extension("x-ms-identifiers", [])
+  advancedCustomProperties?: AdvancedCustomProperties[];
 
   @doc("Supplementary file location.")
   supplementaryFileLocation?: string;
@@ -300,20 +290,57 @@ model ServerlessRuntimeConfigProperties {
 @doc("Metadata Serverless Config Properties")
 model ServerlessConfigProperties {
   @doc("Platform types")
-  platform?: PlatformTypes;
+  platform?: PlatformType;
 
   @doc("Map of application types of supported by informatica")
-  applicationType?: Record<string>;
+  @extension("x-ms-identifiers", [])
+  applicationType?: ApplicationTypeMetadata[];
 
   @doc("different compute units with possible list of values")
-  computeUnits?: Record<string[]>;
+  computeUnits?: ComputeUnitsMetadata;
 
   @doc("Execution timeout")
   executionTimeout?: string;
 
   @doc("supported region")
   @extension("x-ms-identifiers", [])
-  region?: Record<string>[];
+  region?: RegionMetadata[];
+}
+
+@doc("Informatica Serverless advanced custom properties")
+model AdvancedCustomProperties {
+  @doc("advanced custom properties key")
+  key?: string;
+
+  @doc("advanced custom properties key")
+  value?: string;
+}
+
+@doc("Informatica Serverless Runtime Application type Metadata")
+model ApplicationTypeMetadata {
+  @doc("Application type name")
+  name?: string;
+
+  @doc("Application type value")
+  value?: string;
+}
+
+@doc("Informatica Serverless Runtime Application type Metadata")
+model ComputeUnitsMetadata {
+  @doc("ComputeUnit name")
+  name?: string;
+
+  @doc("ComputeUnit value")
+  value?: string[];
+}
+
+@doc("Informatica Serverless Runtime Region Metadata")
+model RegionMetadata {
+  @doc("Region Id")
+  id?: string;
+
+  @doc("Region name")
+  name?: string;
 }
 
 @doc("Informatica CDI Configuration Properties.")
@@ -413,8 +440,8 @@ enum SingleSignOnStates {
   Existing,
 }
 
-@doc("Various types of the Serverless Runtime environments")
-enum ApplicationTypes {
+@doc("Various application types of the Serverless Runtime environments")
+enum ApplicationType {
   @doc("Data Integration")
   CDI,
 
@@ -423,13 +450,13 @@ enum ApplicationTypes {
 }
 
 @doc("Various types of the Platform types.")
-enum PlatformTypes {
+enum PlatformType {
   @doc("Azure platform type")
   AZURE,
 }
 
 @doc("Various types of the runtime types.")
-enum RuntimeTypes {
+enum RuntimeType {
   @doc("Serverless Runtime type")
   SERVERLESS,
 }
