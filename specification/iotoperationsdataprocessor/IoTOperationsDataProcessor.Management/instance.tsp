@@ -32,8 +32,8 @@ model Instance is TrackedResource<InstanceProperties> {
 
 @doc("The properties of a Instance resource.")
 model InstanceProperties {
-  @doc("User-friendly name for the Instance.")
-  displayName?: string;
+  @doc("Detailed description of the Instance.")
+  description?: string;
 
   @doc("The status of the last operation.")
   @visibility("read")

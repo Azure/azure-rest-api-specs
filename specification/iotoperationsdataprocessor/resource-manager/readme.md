@@ -1,8 +1,8 @@
-# IotOperationsDataProcessor
+# IoTOperationsDataProcessor
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for IotOperationsDataProcessor.
+This is the AutoRest configuration file for IoTOperationsDataProcessor.
 
 ## Getting Started
 
@@ -25,25 +25,25 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 ``` yaml
 directive:
   - suppress: PutRequestResponseSchemeArm
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IotOperationsDataProcessor/instances/{instanceName}/datasets/{datasetName}"].put
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperationsDataProcessor/instances/{instanceName}/datasets/{datasetName}"].put
     reason: This is a false positive, Datasets GET & PUT responses return '#/definitions/Dataset'
   - suppress: PutRequestResponseSchemeArm
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IotOperationsDataProcessor/instances/{instanceName}/pipelines/{pipelineName}"].put
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperationsDataProcessor/instances/{instanceName}/pipelines/{pipelineName}"].put
     reason: This is a false positive, Pipelines GET & PUT responses return '#/definitions/Pipeline'
   - suppress: PutResponseSchemaDescription
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IotOperationsDataProcessor/instances/{instanceName}"].put.responses
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperationsDataProcessor/instances/{instanceName}"].put.responses
     reason: Typespec does not allow you to update description of common ARM responses.
   - suppress: PutResponseSchemaDescription
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IotOperationsDataProcessor/instances/{instanceName}/datasets/{datasetName}"].put.responses
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperationsDataProcessor/instances/{instanceName}/datasets/{datasetName}"].put.responses
     reason: Typespec does not allow you to update description of common ARM responses.
   - suppress: PutResponseSchemaDescription
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IotOperationsDataProcessor/instances/{instanceName}/pipelines/{pipelineName}"].put.responses
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperationsDataProcessor/instances/{instanceName}/pipelines/{pipelineName}"].put.responses
     reason: Typespec does not allow you to update description of common ARM responses.
 ```
 
 ### Basic Information
 
-These are the global settings for the IotOperationsDataProcessor.
+These are the global settings for the IoTOperationsDataProcessor.
 
 ```yaml
 openapi-type: arm
@@ -57,5 +57,5 @@ These settings apply only when `--tag=package-2023-10-04-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-10-04-preview'
 input-file:
-  - Microsoft.IotOperationsDataProcessor/preview/2023-10-04-preview/openapi.json
+  - Microsoft.IoTOperationsDataProcessor/preview/2023-10-04-preview/openapi.json
 ```

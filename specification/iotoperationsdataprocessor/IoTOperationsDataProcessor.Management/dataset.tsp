@@ -34,8 +34,8 @@ model Dataset is TrackedResource<DatasetProperties> {
 
 @doc("The properties of a Dataset resource.")
 model DatasetProperties {
-  @doc("User-friendly name for the Dataset.")
-  displayName?: string;
+  @doc("Detailed description of the Dataset.")
+  description?: string;
 
   @doc("Path to the payload in the message. Enrich will add only the payload to the enriched message, other fields will not be kept except for in the indexes.")
   payload?: string;

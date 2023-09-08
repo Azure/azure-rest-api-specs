@@ -34,9 +34,6 @@ model Pipeline is TrackedResource<PipelineProperties> {
 
 @doc("The properties of a Pipeline resource.")
 model PipelineProperties {
-  @doc("User-friendly name for the pipeline.")
-  displayName?: string;
-
   @doc("Detailed description of the pipeline for customer consumption.")
   description?: string;
 
