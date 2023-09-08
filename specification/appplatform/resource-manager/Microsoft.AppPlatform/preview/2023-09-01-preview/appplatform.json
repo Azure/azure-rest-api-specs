@@ -6751,6 +6751,39 @@
         }
       }
     },
+    "/providers/Microsoft.AppPlatform/serverVersions": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Lists all of the available server versions supported by Microsoft.AppPlatform provider.",
+        "operationId": "ServerVersions_ListServerVersions",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the details of all supported server versions.",
+            "schema": {
+              "$ref": "#/definitions/AvailableServerVersions"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServerVersions_ListServerVersions": {
+            "$ref": "./examples/ServerVersions_ListServerVersions.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/gateways/{gatewayName}": {
       "get": {
         "tags": [
@@ -13313,6 +13346,47 @@
         },
         "version": {
           "description": "The detailed version (major.minor) of the platform.",
+          "type": "string"
+        }
+      },
+      "readOnly": true
+    },
+    "AvailableServerVersions": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A list of all supported server versions.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SupportedServerVersion"
+          },
+          "readOnly": true
+        }
+      },
+      "readOnly": true
+    },
+    "SupportedServerVersion": {
+      "description": "Supported server version.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The raw server version value which could be passed to deployment CRUD operations.",
+          "type": "string"
+        },
+        "server": {
+          "description": "The server name.",
+          "enum": [
+            "Tomcat"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SupportedServer",
+            "modelAsString": true
+          }
+        },
+        "version": {
+          "description": "The Server version.",
           "type": "string"
         }
       },
