@@ -3,6 +3,7 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
+
 // Azure-specific long-running operations should be treated as implementation details that are wrapped into
 // appropriately merged public surface.
 @@internal(Azure.OpenAI.beginAzureBatchImageGeneration);
@@ -17,3 +18,13 @@ using Azure.ClientGenerator.Core;
 @@include(Azure.OpenAI.ImageGenerationOptions);
 @@include(Azure.OpenAI.ImageLocation);
 @@include(Azure.OpenAI.ImageGenerations);
+
+// Audio operations define individual operations for specific content types; these should not be directly exposed
+// and should instead be combined into a single merged operation when possible.
+@@internal(Azure.OpenAI.getAudioTranscriptionAsResponseObject);
+@@internal(Azure.OpenAI.getAudioTranscriptionAsPlainText);
+@@internal(Azure.OpenAI.getAudioTranslationAsResponseObject);
+@@internal(Azure.OpenAI.getAudioTranslationAsPlainText);
+
+@@include(Azure.OpenAI.AudioTranscription);
+@@include(Azure.OpenAI.AudioTranscriptionSegment);

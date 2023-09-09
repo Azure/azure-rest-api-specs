@@ -7,6 +7,7 @@ import "./models/completions.create.tsp";
 import "./models/chat.completions.tsp";
 import "./models/embeddings.create.tsp";
 import "./models/images.tsp";
+import "./models/audio.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -98,4 +99,67 @@ op beginAzureBatchImageGeneration is OaiLongRunningRpcOperation<
   ImageGenerationOptions,
   BatchImageGenerationOperationResponse,
   BatchImageGenerationOperationResponse
+>;
+
+// Audio implementation note: depending on the response_format provided in operation request bodies, these operations
+// may respond with a response body that's either a JSON object or a text/plain string. Pending more precise
+// specification of the relationship between the input format selection and resulting output response format, the two
+// content-type-specific options are provided for each operation with no delineation between the matching request body
+// requirements. These content-type-specific operations should be hidden by clients and combined into single operations
+// that share common characteristics whenever possible.
+
+@doc("""
+Gets transcribed text and associated metadata from provided spoken audio data. Audio will be transcribed in the
+written language corresponding to the language it was spoken in.
+""")
+@added(ServiceApiVersions.v2023_09_01_Preview)
+@actionSeparator("/")
+@action("audio/transcriptions")
+@sharedRoute
+op getAudioTranscriptionAsResponseObject is ResourceAction<
+  Deployment,
+  AudioTranscriptionOptions, // response_format must be unspecified (json) or one of: json, verbose_json
+  AudioTranscription
+>;
+
+@doc("""
+Gets transcribed text and associated metadata from provided spoken audio data. Audio will be transcribed in the
+written language corresponding to the language it was spoken in.
+""")
+@added(ServiceApiVersions.v2023_09_01_Preview)
+@actionSeparator("/")
+@action("audio/transcriptions")
+@sharedRoute
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "non-model response value needed"
+op getAudioTranscriptionAsPlainText is Azure.Core.Foundations.ResourceOperation<
+  Deployment,
+  AudioTranscriptionOptions, // response_format must be one of: text, srt, vtt
+  string
+>;
+
+@doc("""
+Gets English language transcribed text and associated metadata from provided spoken audio data.
+""")
+@added(ServiceApiVersions.v2023_09_01_Preview)
+@actionSeparator("/")
+@action("audio/translations")
+@sharedRoute
+op getAudioTranslationAsResponseObject is ResourceAction<
+  Deployment,
+  AudioTranslationOptions, // response_format must be unspecified (json) or one of: json, verbose_json
+  AudioTranscription
+>;
+
+@doc("""
+Gets English language transcribed text and associated metadata from provided spoken audio data.
+""")
+@added(ServiceApiVersions.v2023_09_01_Preview)
+@actionSeparator("/")
+@action("audio/translations")
+@sharedRoute
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "non-model response value needed"
+op getAudioTranslationAsPlainText is Azure.Core.Foundations.ResourceOperation<
+  Deployment,
+  AudioTranslationOptions, // response_format must be one of: text, srt, vtt
+  string
 >;
