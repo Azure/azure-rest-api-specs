@@ -1,20 +1,20 @@
 {
-    "title": "Disassociate a Resource from the Pool",
+  "title": "Disassociate a Resource from the Pool",
+  "parameters": {
+    "api-version": "2023-07-01-preview",
+    "subscriptionId": "subscriptionC",
+    "resourceGroupName": "rg1",
+    "networkManagerName": "TestNetworkManager",
+    "poolName": "TestPool",
     "parameters": {
-        "api-version": "2023-07-01-preview",
-        "subscriptionId": "subscriptionC",
-        "resourceGroupName": "rg1",
-        "networkManagerName": "TestNetworkManager",
-        "poolName": "TestPool",
-        "parameters": {
-            "resourceId": "/subscriptions/subscriptionC/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/testVnet"
-        }
-    },
-    "responses": {
-        "202": {
-            "headers": {
-                "Location": "https://management.azure.com/subscriptions/subscriptionC/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/TestNetworkManager/ipamPools/TestPool/operationResults/00000000-0000-0000-0000-000000000000?api-version=2022-04-01-preview"
-            }
-        }
+      "resourceId": "/subscriptions/subscriptionC/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/testVnet"
     }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/subscriptionC/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/TestNetworkManager/ipamPools/TestPool/operationResults/00000000-0000-0000-0000-000000000000?api-version=2022-04-01-preview"
+      }
+    }
+  }
 }

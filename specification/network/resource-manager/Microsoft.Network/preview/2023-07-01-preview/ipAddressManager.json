@@ -394,7 +394,10 @@
         ],
         "responses": {
           "202": {
-            "description": "Pool associate request accepted and will complete asynchronously"
+            "description": "Pool associate request accepted and will complete asynchronously",
+            "schema": {
+              "$ref": "#/definitions/PoolAssociation"
+            }
           },
           "default": {
             "description": "Default error response.",
@@ -735,7 +738,12 @@
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
     },
     "IpamPoolList": {
       "type": "object",
@@ -811,7 +819,7 @@
           },
           "readOnly": true
         },
-        "numberOfIPAddresesToAllocate": {
+        "numberOfIPAddressesToAllocate": {
           "type": "string"
         },
         "isStaticCidr": {
@@ -910,7 +918,7 @@
             "$ref": "#/definitions/ResourceBasics"
           },
           "readOnly": true,
-          "x-ms-identifiers": [ ]
+          "x-ms-identifiers": []
         },
         "allocatedAddressPrefixes": {
           "type": "array",

@@ -1,40 +1,40 @@
 {
-    "title": "Associate a Resource to the Pool",
+  "title": "Associate a Resource to the Pool",
+  "parameters": {
+    "api-version": "2023-07-01-preview",
+    "subscriptionId": "subscriptionC",
+    "resourceGroupName": "rg1",
+    "networkManagerName": "TestNetworkManager",
+    "poolName": "TestPool",
     "parameters": {
-        "api-version": "2023-07-01-preview",
-        "subscriptionId": "subscriptionC",
-        "resourceGroupName": "rg1",
-        "networkManagerName": "TestNetworkManager",
-        "poolName": "TestPool",
-        "parameters": {
-            "resourceId": "/subscriptions/subscriptionC/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/testVnet",
-            "description": "test description"
-        }
-    },
-    "responses": {
-        "202": {
-            "headers": {
-                "Location": "https://management.azure.com/subscriptions/subscriptionC/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/TestNetworkManager/ipamPools/TestPool/operationResults/00000000-0000-0000-0000-000000000000?api-version=2022-04-01-preview"
-            },
-            "body": {
-                "resourceId": "/subscriptions/subscriptionC/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/testVnet",
-                "poolId": "/subscriptions/subscriptionC/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/TestNetworkManager/ipamPools/TestPool",
-                "description": "test description",
-                "addressPrefixes": [
-                    "10.2.0.0/24"
-                ],
-                "allocatedPrefixes": [],
-                "totalIps": 256,
-                "allocatedIps": 0,
-                "usedIps": 0,
-                "allocationStatus": "Allocated",
-                "createdAt": "2020-09-09T20:00:00.0000000Z",
-                "ttl": "",
-                "compliancy": {
-                    "inScope": "Compliant",
-                    "overlapping": "Compliant"
-                }
-            }
-        }
+      "resourceId": "/subscriptions/subscriptionC/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/testVnet",
+      "description": "test description"
     }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/subscriptionC/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/TestNetworkManager/ipamPools/TestPool/operationResults/00000000-0000-0000-0000-000000000000?api-version=2022-04-01-preview"
+      },
+      "body": {
+        "resourceId": "/subscriptions/subscriptionC/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/testVnet",
+        "poolId": "/subscriptions/subscriptionC/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/TestNetworkManager/ipamPools/TestPool",
+        "description": "test description",
+        "addressPrefixes": [
+          "10.2.0.0/24"
+        ],
+        "allocatedPrefixes": [],
+        "totalIps": "256",
+        "allocatedIps": "0",
+        "usedIps": "0",
+        "associationStatus": "Allocated",
+        "createdAt": "2020-09-09T20:00:00.0000000Z",
+        "reservationTTL": "",
+        "compliancy": {
+          "inScope": "Compliant",
+          "overlapping": "Compliant"
+        }
+      }
+    }
+  }
 }
