@@ -1,0 +1,44 @@
+{
+    "title": "Get the Pool Usage Summary",
+    "parameters": {
+        "api-version": "2023-07-01-preview",
+        "subscriptionId": "subscriptionC",
+        "resourceGroupName": "rg1",
+        "networkManagerName": "TestNetworkManager",
+        "poolName": "TestPool"
+    },
+    "responses": {
+        "200": {
+            "body": {
+                "addressPrefixes": [
+                    "10.0.0.0/8",
+                    "192.0.0.0/8"
+                ],
+                "allocatedAddressPrefixes": [
+                    "172.0.1.0/26"
+                ],
+                "reservedAddressPrefixes": [
+                    "10.2.1.0/24"
+                ],
+                "childPools": [
+                    {
+                        "name": "testPool1",
+                        "addressPrefixes": [
+                            "172.0.2.0/26"
+                        ]
+                    },
+                    {
+                        "name": "testPool2",
+                        "addressPrefixes": [
+                            "172.0.3.0/26"
+                        ]
+                    }
+                ],
+                "totalIps": 65792,
+                "totalAllocatedIps": 64,
+                "totalReservedIps": 256,
+                "totalUsedIps": 32
+            }
+        }
+    }
+}

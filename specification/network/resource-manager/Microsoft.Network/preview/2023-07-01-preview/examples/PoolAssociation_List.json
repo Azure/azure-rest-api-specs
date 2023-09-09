@@ -1,0 +1,38 @@
+{
+    "title": "List Associated Resource in the Pool",
+    "parameters": {
+        "api-version": "2023-07-01-preview",
+        "subscriptionId": "subscriptionC",
+        "resourceGroupName": "rg1",
+        "networkManagerName": "TestNetworkManager",
+        "poolName": "TestPool"
+    },
+    "responses": {
+        "200": {
+            "body": {
+                "value": [
+                    {
+                        "resourceId": "/subscriptions/subscriptionC/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/testVnet",
+                        "poolId": "/subscriptions/subscriptionC/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/TestNetworkManager/ipamPools/TestPool",
+                        "description": "test description",
+                        "addressPrefixes": [
+                            "10.2.0.0/24"
+                        ],
+                        "allocatedPrefixes": [],
+                        "totalIps": 256,
+                        "allocatedIps": 0,
+                        "usedIps": 0,
+                        "allocationStatus": "Allocated",
+                        "createdAt": "2020-09-09T20:00:00.0000000Z",
+                        "ttl": "",
+                        "compliancy": {
+                            "inScope": "Compliant",
+                            "overlapping": "Compliant"
+                        }
+                    }
+                ],
+                "nextLink": "{baseurl}/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/networkManagers/TestNetworkManager/ipamPools/associatedResources?api-version=2023-07-01-preview&$skipToken=10"
+            }
+        }
+    }
+}
