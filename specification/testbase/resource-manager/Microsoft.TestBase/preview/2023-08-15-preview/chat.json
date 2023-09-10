@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.TestBase/chatSessions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/chatSessions": {
       "get": {
         "tags": [
           "Chat"
@@ -45,6 +45,15 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./testbase.json#/parameters/TestBaseAccountNameParameter"
+          },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
@@ -73,7 +82,7 @@
         }
       }
     },
-    "/providers/Microsoft.TestBase/chatSessions/{chatSessionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/chatSessions/{chatSessionName}": {
       "get": {
         "tags": [
           "Chat"
@@ -84,6 +93,15 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./testbase.json#/parameters/TestBaseAccountNameParameter"
+          },
           {
             "$ref": "#/parameters/ChatSessionNameParameter"
           },
@@ -112,7 +130,7 @@
         }
       }
     },
-    "/providers/Microsoft.TestBase/chatSessions/{chatSessionName}/chat": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/chatSessions/{chatSessionName}/chat": {
       "post": {
         "tags": [
           "Chat"
@@ -127,6 +145,15 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./testbase.json#/parameters/TestBaseAccountNameParameter"
+          },
           {
             "$ref": "#/parameters/ChatSessionNameParameter"
           },
