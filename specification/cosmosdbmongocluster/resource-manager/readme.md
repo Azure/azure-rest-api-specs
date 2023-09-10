@@ -26,7 +26,7 @@ These are the global settings for the cosmosdbmongocluster.
 
 ```yaml
 openapi-type: arm
-title: CosmosDBMongoClusterManagementClient
+title: CosmosDB Mongo Cluster
 tag: package-2023-10-01-preview
 ```
 
@@ -37,6 +37,15 @@ These settings apply only when `--tag=package-2023-10-01-preview` is specified o
 ```yaml $(tag) == 'package-2023-10-01-preview'
 input-file:
   - Microsoft.DocumentDB/preview/2023-10-01-preview/mongoCluster.json
+```
+
+### Tag: package-2023-03-01-preview
+
+These settings apply only when `--tag=package-2023-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-03-01-preview'
+input-file:
+  - Microsoft.DocumentDB/preview/2023-03-01-preview/mongoCluster.json
 ```
 
 ---

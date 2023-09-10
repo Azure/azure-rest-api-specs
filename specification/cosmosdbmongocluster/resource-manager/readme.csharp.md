@@ -11,5 +11,5 @@ csharp:
   clear-output-folder: true
   client-side-validation: false
   namespace: Microsoft.Azure.Management.CosmosDB.MongoCluster
-  output-folder: $(csharp-sdks-folder)/cosmosdb/management/Microsoft.Azure.Management.CosmosDB.MongoCluster/Generated
+  output-folder: $(csharp-sdks-folder)/cosmosdbmongocluster/management/Microsoft.Azure.Management.CosmosDB.MongoCluster/Generated
 ```
