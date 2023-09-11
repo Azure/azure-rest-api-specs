@@ -1,0 +1,1126 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Hardware Resource Provider",
+    "version": "2023-07-12-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Orders"
+    },
+    {
+      "name": "OrderPreviewInterface"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Hardware/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Hardware/orderPreview": {
+      "post": {
+        "operationId": "OrderPreviewInterface_OrderPreview",
+        "tags": [
+          "OrderPreviewInterface"
+        ],
+        "description": "Implements orderPreview operations",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The orderPreview request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Hardware/orders": {
+      "get": {
+        "operationId": "Orders_ListBySubscription",
+        "tags": [
+          "Orders"
+        ],
+        "description": "List Order resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OrderListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetBySubscription": {
+            "$ref": "./examples/Orders_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Hardware/orders": {
+      "get": {
+        "operationId": "Orders_ListByResourceGroup",
+        "tags": [
+          "Orders"
+        ],
+        "description": "List Order resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OrderListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetByResourceGroup": {
+            "$ref": "./examples/Orders_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Hardware/orders/{orderId}": {
+      "get": {
+        "operationId": "Orders_Get",
+        "tags": [
+          "Orders"
+        ],
+        "description": "Get a Order",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "orderId",
+            "in": "path",
+            "description": "Order Name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OrderById": {
+            "$ref": "./examples/Orders_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Orders_Create",
+        "tags": [
+          "Orders"
+        ],
+        "description": "Create a Order",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "orderId",
+            "in": "path",
+            "description": "Order Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrder": {
+            "$ref": "./examples/Orders_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Orders_Update",
+        "tags": [
+          "Orders"
+        ],
+        "description": "Update a Order",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "orderId",
+            "in": "path",
+            "description": "Order Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OrderUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateOrder": {
+            "$ref": "./examples/Orders_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Orders_Delete",
+        "tags": [
+          "Orders"
+        ],
+        "description": "Delete a Order",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "orderId",
+            "in": "path",
+            "description": "Order Name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteOrder": {
+            "$ref": "./examples/Orders_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BillingInformation": {
+      "type": "object",
+      "description": "Billing Details for Order",
+      "properties": {
+        "authorizationToken": {
+          "type": "string",
+          "description": "Credit Card Auth Token - if blank defaults to Invoicing"
+        },
+        "riskToken": {
+          "type": "string",
+          "description": "base64 Risk Token"
+        }
+      },
+      "required": [
+        "authorizationToken",
+        "riskToken"
+      ]
+    },
+    "BillingInformationUpdate": {
+      "type": "object",
+      "description": "Billing Details for Order",
+      "properties": {
+        "authorizationToken": {
+          "type": "string",
+          "description": "Credit Card Auth Token - if blank defaults to Invoicing"
+        },
+        "riskToken": {
+          "type": "string",
+          "description": "base64 Risk Token"
+        }
+      }
+    },
+    "CustomerOrder": {
+      "type": "object",
+      "description": "Customer PurchaseOrder",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Customer PurchaseOrder Id"
+        },
+        "createdDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Customer PurchaseOrder Date"
+        }
+      },
+      "required": [
+        "id",
+        "createdDate"
+      ]
+    },
+    "CustomerOrderUpdate": {
+      "type": "object",
+      "description": "Customer PurchaseOrder",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Customer PurchaseOrder Id"
+        },
+        "createdDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Customer PurchaseOrder Date"
+        }
+      }
+    },
+    "Fee": {
+      "type": "object",
+      "description": "Fee model",
+      "properties": {
+        "amount": {
+          "type": "number",
+          "format": "double",
+          "description": "Fee charged"
+        },
+        "type": {
+          "$ref": "#/definitions/FeeType",
+          "description": "Fee Type"
+        }
+      },
+      "required": [
+        "amount",
+        "type"
+      ]
+    },
+    "FeeType": {
+      "type": "string",
+      "description": "Fee Type",
+      "enum": [
+        "Recycling"
+      ],
+      "x-ms-enum": {
+        "name": "FeeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Recycling",
+            "value": "Recycling",
+            "description": "Recycling Fee"
+          }
+        ]
+      }
+    },
+    "Order": {
+      "type": "object",
+      "description": "A Hardware Resource Provider Order resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OrderProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "OrderLine": {
+      "type": "object",
+      "description": "Order Line",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Order lineId"
+        },
+        "status": {
+          "$ref": "#/definitions/OrderLineStatus",
+          "description": "Order line status",
+          "readOnly": true
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Order line date",
+          "readOnly": true
+        },
+        "quantity": {
+          "$ref": "#/definitions/OrderLineQty",
+          "description": "Order line qty"
+        },
+        "product": {
+          "$ref": "#/definitions/Product",
+          "description": "order line Product"
+        },
+        "price": {
+          "$ref": "#/definitions/Price",
+          "description": "line level Price"
+        },
+        "shipTo": {
+          "$ref": "#/definitions/ShipTo",
+          "description": "shipTo Address"
+        },
+        "shippingMethod": {
+          "$ref": "#/definitions/ShippingMethod",
+          "description": "Shipping Method"
+        },
+        "requestedDeliveryDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Requested Delivery Date"
+        },
+        "cancellationReason": {
+          "type": "string",
+          "description": "Cancellation Reason"
+        },
+        "cancelledBy": {
+          "type": "string",
+          "description": "Cancelled By User details"
+        },
+        "estimatedDeliveryDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Estimated Deliver Date",
+          "readOnly": true
+        },
+        "estimatedShippedDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Estimated Shipped Date",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "quantity",
+        "product",
+        "price",
+        "shipTo"
+      ]
+    },
+    "OrderLineQty": {
+      "type": "object",
+      "description": "Order Line Qty",
+      "properties": {
+        "ordered": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Order lineId Ordered Quantity"
+        },
+        "confirmed": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Order lineId Confirmed Quantity",
+          "readOnly": true
+        },
+        "shipped": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Order lineId Shipped Quantity",
+          "readOnly": true
+        },
+        "returned": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Order lineId Returned Quantity",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "ordered"
+      ]
+    },
+    "OrderLineStatus": {
+      "type": "string",
+      "description": "Order Line Status",
+      "enum": [
+        "Pending",
+        "Created",
+        "Confirmed",
+        "PartiallyConfirmed",
+        "PendingCancel",
+        "PendingShipment",
+        "PartiallyShipped",
+        "Shipped"
+      ],
+      "x-ms-enum": {
+        "name": "OrderLineStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "Order is pending"
+          },
+          {
+            "name": "Created",
+            "value": "Created",
+            "description": "Order is Created"
+          },
+          {
+            "name": "Confirmed",
+            "value": "Confirmed",
+            "description": "Order is Confirmed"
+          },
+          {
+            "name": "PartiallyConfirmed",
+            "value": "PartiallyConfirmed",
+            "description": "Order is PartiallyConfirmed"
+          },
+          {
+            "name": "PendingCancel",
+            "value": "PendingCancel",
+            "description": "Order is pending cancellation"
+          },
+          {
+            "name": "PendingShipment",
+            "value": "PendingShipment",
+            "description": "Order is Ready to Ship cannot be cancelled"
+          },
+          {
+            "name": "PartiallyShipped",
+            "value": "PartiallyShipped",
+            "description": "Order is PartiallyShipped"
+          },
+          {
+            "name": "Shipped",
+            "value": "Shipped",
+            "description": "Order is Shipped"
+          }
+        ]
+      }
+    },
+    "OrderListResult": {
+      "type": "object",
+      "description": "The response of a Order list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Order items on this page",
+          "items": {
+            "$ref": "#/definitions/Order"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OrderProperties": {
+      "type": "object",
+      "description": "Forward Order",
+      "properties": {
+        "customerOrder": {
+          "$ref": "#/definitions/CustomerOrder",
+          "description": "Customer PurchaseOrder"
+        },
+        "action": {
+          "type": "string",
+          "description": "Type of action Pre-Fulfill/Fulfill",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/OrderStatus",
+          "description": "Order status",
+          "readOnly": true
+        },
+        "orderLines": {
+          "type": "array",
+          "description": "Order line details",
+          "items": {
+            "$ref": "#/definitions/OrderLine"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
+        },
+        "billingInformation": {
+          "$ref": "#/definitions/BillingInformation",
+          "description": "Billing Information"
+        },
+        "currency": {
+          "type": "string",
+          "description": "Currency",
+          "readOnly": true
+        },
+        "market": {
+          "type": "string",
+          "description": "Market - country code for Order",
+          "readOnly": true
+        },
+        "language": {
+          "type": "string",
+          "description": "Language - language code for Order",
+          "readOnly": true
+        },
+        "reservationId": {
+          "type": "string",
+          "description": "Reservation for order if applicable",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "orderLines"
+      ]
+    },
+    "OrderStatus": {
+      "type": "string",
+      "description": "Order Status",
+      "enum": [
+        "Pending",
+        "Created",
+        "Confirmed",
+        "PartiallyConfirmed",
+        "PendingCancel",
+        "PendingShipment",
+        "PartiallyShipped",
+        "Shipped"
+      ],
+      "x-ms-enum": {
+        "name": "OrderStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "Order is pending"
+          },
+          {
+            "name": "Created",
+            "value": "Created",
+            "description": "Order is Created"
+          },
+          {
+            "name": "Confirmed",
+            "value": "Confirmed",
+            "description": "Order is Confirmed"
+          },
+          {
+            "name": "PartiallyConfirmed",
+            "value": "PartiallyConfirmed",
+            "description": "Order is PartiallyConfirmed"
+          },
+          {
+            "name": "PendingCancel",
+            "value": "PendingCancel",
+            "description": "Order is pending cancellation"
+          },
+          {
+            "name": "PendingShipment",
+            "value": "PendingShipment",
+            "description": "Order is Ready to Ship cannot be cancelled"
+          },
+          {
+            "name": "PartiallyShipped",
+            "value": "PartiallyShipped",
+            "description": "Order is PartiallyShipped"
+          },
+          {
+            "name": "Shipped",
+            "value": "Shipped",
+            "description": "Order is Shipped"
+          }
+        ]
+      }
+    },
+    "OrderUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the Order.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/OrderUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OrderUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Order.",
+      "properties": {
+        "customerOrder": {
+          "$ref": "#/definitions/CustomerOrderUpdate",
+          "description": "Customer PurchaseOrder"
+        },
+        "orderLines": {
+          "type": "array",
+          "description": "Order line details",
+          "items": {
+            "$ref": "#/definitions/OrderLine"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
+        },
+        "billingInformation": {
+          "$ref": "#/definitions/BillingInformationUpdate",
+          "description": "Billing Information"
+        }
+      }
+    },
+    "Price": {
+      "type": "object",
+      "description": "Order line Price",
+      "properties": {
+        "unitAmount": {
+          "type": "number",
+          "format": "double",
+          "description": "Price per Unit"
+        },
+        "shippingCost": {
+          "type": "number",
+          "format": "double",
+          "description": "Shipping Cost for the line"
+        },
+        "taxes": {
+          "type": "array",
+          "description": "Tax for this line",
+          "items": {
+            "$ref": "#/definitions/Tax"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "fees": {
+          "type": "array",
+          "description": "Fees for this line",
+          "items": {
+            "$ref": "#/definitions/Fee"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "type"
+          ]
+        }
+      },
+      "required": [
+        "unitAmount"
+      ]
+    },
+    "Product": {
+      "type": "object",
+      "description": "Order line Product",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ProductId"
+        },
+        "type": {
+          "$ref": "#/definitions/ProductIdType",
+          "description": "ProductId Type"
+        }
+      },
+      "required": [
+        "id",
+        "type"
+      ]
+    },
+    "ProductIdType": {
+      "type": "string",
+      "description": "ProductId Type",
+      "enum": [
+        "UPN",
+        "PSA",
+        "FulfillmentProductId"
+      ],
+      "x-ms-enum": {
+        "name": "ProductIdType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UPN",
+            "value": "UPN",
+            "description": "UPN in Big-Catalog"
+          },
+          {
+            "name": "PSA",
+            "value": "PSA",
+            "description": "Product, SKU, Availability in Big-Catalog"
+          },
+          {
+            "name": "FulfillmentProductId",
+            "value": "FulfillmentProductId",
+            "description": "MS Product Identitier (3x5 SKU)"
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning State",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Pending"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "Order is pending"
+          }
+        ]
+      }
+    },
+    "ShipTo": {
+      "type": "object",
+      "description": "ShipTo Id",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ShipTo Id"
+        },
+        "type": {
+          "$ref": "#/definitions/ShipToIdType",
+          "description": "ShipTo Type"
+        }
+      },
+      "required": [
+        "id",
+        "type"
+      ]
+    },
+    "ShipToIdType": {
+      "type": "string",
+      "description": "shipToId Type",
+      "enum": [
+        "BusinessLocation",
+        "ExternalId"
+      ],
+      "x-ms-enum": {
+        "name": "ShipToIdType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BusinessLocation",
+            "value": "BusinessLocation",
+            "description": "MCAPI Business Location"
+          },
+          {
+            "name": "ExternalId",
+            "value": "ExternalId",
+            "description": "Parnter ExternalId"
+          }
+        ]
+      }
+    },
+    "ShippingMethod": {
+      "type": "string",
+      "description": "Shipping Method",
+      "enum": [
+        "Ground",
+        "OverNight"
+      ],
+      "x-ms-enum": {
+        "name": "ShippingMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Ground",
+            "value": "Ground",
+            "description": "Ground shipping"
+          },
+          {
+            "name": "OverNight",
+            "value": "OverNight",
+            "description": "OverNight shipping"
+          }
+        ]
+      }
+    },
+    "Tax": {
+      "type": "object",
+      "description": "Tax model",
+      "properties": {
+        "amount": {
+          "type": "number",
+          "format": "double",
+          "description": "Tax charged"
+        },
+        "type": {
+          "$ref": "#/definitions/TaxType",
+          "description": "Tax Type"
+        }
+      },
+      "required": [
+        "amount",
+        "type"
+      ]
+    },
+    "TaxType": {
+      "type": "string",
+      "description": "Tax Type",
+      "enum": [
+        "Unit",
+        "Shipping"
+      ],
+      "x-ms-enum": {
+        "name": "TaxType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unit",
+            "value": "Unit",
+            "description": "Tax on Unit amount for Product cost"
+          },
+          {
+            "name": "Shipping",
+            "value": "Shipping",
+            "description": "Tax on Shipping cost"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}
