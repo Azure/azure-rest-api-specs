@@ -57,10 +57,10 @@
                           }
                       }
                   },
-                  "400": {
+                  "default": {
                     "x-nullable": false,
                     "x-ms-error-response": true,
-                    "description": "In case request is malformed or maximum number of API keys is reached",
+                    "description": "400 - In case request is malformed or maximum number of API keys is reached",
                     "schema": {
                       "type": "string"
                     }
@@ -114,9 +114,10 @@
                           "type": "string"
                         }
                     },
-                    "404": {
+                    "default": {
                       "x-nullable": false,
-                      "description": "Indicates that the API key to revoke was not found",
+                      "x-ms-error-response": true,
+                      "description": "404 - Indicates that the API key to revoke was not found",
                       "schema": {
                           "type": "string"
                         }
@@ -170,9 +171,10 @@
                           }
                       }
                   },
-                  "404": {
+                  "default": {
                     "x-nullable": false,
-                    "description": "Indicates that the API key to revoke was not found",
+                    "x-ms-error-response": true,
+                    "description": "404 - Indicates that the API key to revoke was not found",
                     "schema": {
                         "type": "string"
                       }
