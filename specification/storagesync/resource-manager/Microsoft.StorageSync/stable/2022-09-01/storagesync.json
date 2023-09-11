@@ -5592,17 +5592,17 @@
       "type": "object",
       "description": "Server endpoint provisioning status information",
       "properties": {
-        "serverProvisioningStatus": {
+        "provisioningStatus": {
           "$ref": "#/definitions/ServerProvisioningStatus",
           "description": "Server Endpoint provisioning status",
           "readOnly": true
         },
-        "serverEndpointProvisioningType": {
+        "provisioningType": {
           "type": "string",
           "description": "Server Endpoint provisioning type",
           "readOnly": true
         },
-        "serverEndpointProvisioningStepStatuses": {
+        "provisioningStepStatuses": {
           "type": "array",
           "description": "Provisioning Step status information for each step in the provisioning process",
           "items": {
@@ -5631,46 +5631,41 @@
       "type": "object",
       "description": "Server endpoint provisioning step status object.",
       "properties": {
-        "stepName": {
+        "name": {
           "type": "string",
           "description": "Name of the provisioning step",
           "readOnly": true
         },
-        "stepDisplayName": {
-          "type": "string",
-          "description": "Display name of the provisioning step",
-          "readOnly": true
-        },
-        "stepStatus": {
+        "status": {
           "type": "string",
           "description": "Status of the provisioning step",
           "readOnly": true
         },
-        "stepStartTime": {
+        "startTime": {
           "type": "string",
           "format": "date-time",
           "description": "Start time of the provisioning step",
           "readOnly": true
         },
-        "stepMinutesLeft": {
+        "minutesLeft": {
           "type": "integer",
           "description": "Estimated completion time of the provisioning step in minutes",
           "readOnly": true
         },
-        "stepProgressPercentage": {
+        "progressPercentage": {
           "type": "integer",
           "description": "Estimated progress percentage",
           "readOnly": true
         },
-        "stepEndTime": {
+        "endTime": {
           "type": "string",
           "format": "date-time",
           "description": "End time of the provisioning step",
           "readOnly": true
         },
-        "stepErrorDetails": {
-          "$ref": "#/definitions/ServerEndpointProvisioningError",
-          "description": "Error details for the provisioning step",
+        "errorCode": {
+          "type": "integer",
+          "description": "Error code (HResult) for the provisioning step",
           "readOnly": true
         },
         "additionalInformation": {
@@ -5679,23 +5674,6 @@
               "type": "string"
             },
             "description": "Additional information for the provisioning step",
-          "readOnly": true
-        }
-      }
-    },
-    "ServerEndpointProvisioningError": {
-      "type": "object",
-      "description": "Server endpoint provisioning error object",
-      "properties": {
-        "errorCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Error code (HResult)",
-          "readOnly": true
-        },
-        "errorMessage": {
-          "type": "string",
-          "description": "Error message",
           "readOnly": true
         }
       }
