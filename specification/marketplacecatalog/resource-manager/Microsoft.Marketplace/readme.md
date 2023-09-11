@@ -29,11 +29,6 @@ openapi-type: arm
 tag: package-2022-07-31
 ```
 
-```yaml
-openapi-type: arm
-tag: package-2023-01-01-preview
-```
-
 ### Tag: package-2022-07-31
 
 These settings apply only when `--tag=package-2022-07-31` is specified on the command line.
