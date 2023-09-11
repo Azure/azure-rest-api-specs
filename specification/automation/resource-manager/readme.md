@@ -400,7 +400,7 @@ These settings apply only when `--tag=package-2023-05-15-preview` is specified o
 ``` yaml $(tag) == 'package-2023-05-15-preview'
 input-file:
 - Microsoft.Automation/preview/2020-01-13-preview/dscNodeCounts.json
-- Microsoft.Automation/preview/2020-01-13-preview/watcher.json
+- Microsoft.Automation/preview/2023-05-15-preview/watcher.json
 - Microsoft.Automation/stable/2019-06-01/softwareUpdateConfiguration.json
 - Microsoft.Automation/stable/2022-01-31/deletedAutomationAccount.json
 - Microsoft.Automation/preview/2023-05-15-preview/privateLinkResources.json
@@ -433,7 +433,7 @@ input-file:
 - Microsoft.Automation/preview/2023-05-15-preview/sourceControlSyncJob.json
 - Microsoft.Automation/preview/2023-05-15-preview/sourceControlSyncJobStreams.json
 - Microsoft.Automation/preview/2023-05-15-preview/variable.json
-- Microsoft.Automation/stable/2023-05-15-preview/webhook.json
+- Microsoft.Automation/preview/2023-05-15-preview/webhook.json
 ```
 
 ---
