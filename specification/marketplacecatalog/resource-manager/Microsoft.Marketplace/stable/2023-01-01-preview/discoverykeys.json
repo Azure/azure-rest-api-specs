@@ -48,13 +48,7 @@
             "x-nullable": false,
             "description": "Returns the newly created API key",
             "schema": {
-              "type": "object",
-              "properties": {
-                "key": {
-                  "type": "string",
-                  "description": "The newly created API key"
-                }
-              }
+              "$ref": "#/definitions/key"
             }
           },
           "default": {
@@ -161,14 +155,7 @@
             "x-nullable": false,
             "description": "List of the keys that belong to the subscription",
             "schema": {
-              "type": "object",
-              "properties": {
-                "type": "array",
-                "description": "The API keys",
-                "items": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/keyList"
             }
           },
           "default": {
@@ -213,6 +200,17 @@
             "$ref": "./examples/Operations_Get.json"
           }
         }
+      }
+    }
+  },
+  "definitions": {
+    "key": {
+      "type": "string"
+    },
+    "keyList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/key"
       }
     }
   },
