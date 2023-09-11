@@ -4366,13 +4366,6 @@
       "description": "settings for security policy patterns to match",
       "type": "object",
       "properties": {
-        "IsProfileLevel": {
-          "description": "Flag to signal whether the WAF policy association is at the default Profile level.",
-          "enum": [
-            "True",
-            "False"
-          ]
-        },
         "domains": {
           "description": "List of domains.",
           "type": "array",
@@ -4384,7 +4377,7 @@
           "description": "List of routes.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ActivatedResourceReference"
+            "$ref": "./cdn.json#/definitions/ResourceReference"
           }
         },
         "patternsToMatch": {
