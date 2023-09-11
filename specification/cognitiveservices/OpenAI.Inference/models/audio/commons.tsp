@@ -40,7 +40,7 @@ model AudioTranscriptionOptionsCommon {
     You need to set your content separtor with the boundary value hardcode here: "azure_openai"
     """)
     @header("content-type")
-    contentType: "multipart/form-data; boundary=azure_openai";
+    contentType: "multipart/form-data;";
 
     @doc("The content length of the operation. This needs to be provided by the caller.")
     @header("content-length")

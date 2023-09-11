@@ -64,7 +64,7 @@
         "operationId": "GetAudioTranscriptionVtt",
         "description": "Transcribes audio into the input language.",
         "consumes": [
-          "multipart/form-data; boundary=azure_openai"
+          "multipart/form-data;"
         ],
         "parameters": [
           {
@@ -116,7 +116,7 @@
         "operationId": "GetAudioTranslationVtt",
         "description": "Transcribes and translates input audio into English text.",
         "consumes": [
-          "multipart/form-data; boundary=azure_openai"
+          "multipart/form-data;"
         ],
         "parameters": [
           {
@@ -495,6 +495,10 @@
           "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
           "default": 0
         },
+        "model": {
+          "type": "string",
+          "description": "The model name to provide as part of this transcription request.\nNot applicable to Azure OpenAI, where deployment information should be included in the Azure\nresource URI that's connected to."
+        },
         "language": {
           "type": "string",
           "description": "The language of the input audio. Supplying the input language in ISO-639-1 format will improve accuracy and latency."
@@ -528,6 +532,10 @@
           "format": "float",
           "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
           "default": 0
+        },
+        "model": {
+          "type": "string",
+          "description": "The model name to provide as part of this transcription request.\nNot applicable to Azure OpenAI, where deployment information should be included in the Azure\nresource URI that's connected to."
         },
         "language": {
           "type": "string",
@@ -563,6 +571,10 @@
           "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
           "default": 0
         },
+        "model": {
+          "type": "string",
+          "description": "The model name to provide as part of this transcription request.\nNot applicable to Azure OpenAI, where deployment information should be included in the Azure\nresource URI that's connected to."
+        },
         "language": {
           "type": "string",
           "description": "The language of the input audio. Supplying the input language in ISO-639-1 format will improve accuracy and latency."
@@ -597,6 +609,10 @@
           "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
           "default": 0
         },
+        "model": {
+          "type": "string",
+          "description": "The model name to provide as part of this transcription request.\nNot applicable to Azure OpenAI, where deployment information should be included in the Azure\nresource URI that's connected to."
+        },
         "language": {
           "type": "string",
           "description": "The language of the input audio. Supplying the input language in ISO-639-1 format will improve accuracy and latency."
@@ -630,6 +646,10 @@
           "format": "float",
           "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
           "default": 0
+        },
+        "model": {
+          "type": "string",
+          "description": "The model name to provide as part of this transcription request.\nNot applicable to Azure OpenAI, where deployment information should be included in the Azure\nresource URI that's connected to."
         },
         "language": {
           "type": "string",
@@ -758,7 +778,7 @@
     },
     "AudioTranscriptionVerboseJson": {
       "type": "object",
-      "description": "Transcription response with additional metadata.",
+      "description": "Transcription response.",
       "properties": {
         "task": {
           "$ref": "#/definitions/AudioTranscriptionTask",
@@ -771,11 +791,11 @@
         "duration": {
           "type": "number",
           "format": "float",
-          "description": "Duration in seconds."
+          "description": "Duration."
         },
         "segments": {
           "type": "array",
-          "description": "Audio segments.",
+          "description": "Segments.",
           "items": {
             "$ref": "#/definitions/AudioTranscriptionSegment"
           }
@@ -812,6 +832,10 @@
           "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
           "default": 0
         },
+        "model": {
+          "type": "string",
+          "description": "The model name to provide as part of this transcription request.\nNot applicable to Azure OpenAI, where deployment information should be included in the Azure\nresource URI that's connected to."
+        },
         "response_format": {
           "$ref": "#/definitions/AudioTranscriptionFormat",
           "description": "The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.",
@@ -841,6 +865,10 @@
           "format": "float",
           "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
           "default": 0
+        },
+        "model": {
+          "type": "string",
+          "description": "The model name to provide as part of this transcription request.\nNot applicable to Azure OpenAI, where deployment information should be included in the Azure\nresource URI that's connected to."
         },
         "response_format": {
           "$ref": "#/definitions/AudioTranscriptionFormat",
@@ -872,6 +900,10 @@
           "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
           "default": 0
         },
+        "model": {
+          "type": "string",
+          "description": "The model name to provide as part of this transcription request.\nNot applicable to Azure OpenAI, where deployment information should be included in the Azure\nresource URI that's connected to."
+        },
         "response_format": {
           "$ref": "#/definitions/AudioTranscriptionFormat",
           "description": "The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.",
@@ -902,6 +934,10 @@
           "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
           "default": 0
         },
+        "model": {
+          "type": "string",
+          "description": "The model name to provide as part of this transcription request.\nNot applicable to Azure OpenAI, where deployment information should be included in the Azure\nresource URI that's connected to."
+        },
         "response_format": {
           "$ref": "#/definitions/AudioTranscriptionFormat",
           "description": "The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.",
@@ -931,6 +967,10 @@
           "format": "float",
           "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
           "default": 0
+        },
+        "model": {
+          "type": "string",
+          "description": "The model name to provide as part of this transcription request.\nNot applicable to Azure OpenAI, where deployment information should be included in the Azure\nresource URI that's connected to."
         },
         "response_format": {
           "$ref": "#/definitions/AudioTranscriptionFormat",
