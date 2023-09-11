@@ -352,7 +352,7 @@
           "IpamPool"
         ],
         "summary": "Associate a Resource to the Pool.",
-        "operationId": "IpamPool_AssociateResource",
+        "operationId": "IpamPool_AssociateResources",
         "consumes": [
           "application/json"
         ],
@@ -386,9 +386,12 @@
           {
             "in": "body",
             "name": "body",
-            "description": "PoolAssociation request object.",
+            "description": "List of strings that represent resource ids to associate.",
             "schema": {
-              "$ref": "#/definitions/PoolAssociation"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           }
         ],
@@ -408,7 +411,7 @@
         },
         "x-ms-examples": {
           "IpamPool_AssociateResource": {
-            "$ref": "./examples/IpamPool_AssociateResource.json"
+            "$ref": "./examples/IpamPool_AssociateResources.json"
           }
         }
       }
@@ -419,7 +422,7 @@
           "IpamPool"
         ],
         "summary": "Disassociate a Resource from the Pool.",
-        "operationId": "IpamPool_DisassociateResource",
+        "operationId": "IpamPool_DisassociateResources",
         "consumes": [
           "application/json"
         ],
@@ -453,9 +456,12 @@
           {
             "in": "body",
             "name": "body",
-            "description": "PoolAssociation request object.",
+            "description": "List of strings that represents resource ids to disassociate.",
             "schema": {
-              "$ref": "#/definitions/PoolAssociation"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           }
         ],
@@ -472,7 +478,7 @@
         },
         "x-ms-examples": {
           "IpamPool_DisassociateResource": {
-            "$ref": "./examples/IpamPool_DisassociateResource.json"
+            "$ref": "./examples/IpamPool_DisassociateResources.json"
           }
         }
       }
