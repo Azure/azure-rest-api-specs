@@ -1681,6 +1681,69 @@
           "final-state-via": "location"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/maas/{proxyResourceType}/{proxyResourceName}": {
+      "post": {
+        "tags": [
+          "ProxyOperations"
+        ],
+        "summary": "Resync all the keys associated with this workspace.This includes keys for the storage account, app insights and password for container registry",
+        "operationId": "TestProxy",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
     }
   },
   "definitions": {
@@ -3584,6 +3647,24 @@
     "WorkspaceNameParameter": {
       "in": "path",
       "name": "workspaceName",
+      "description": "Name of Azure Machine Learning workspace.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+    },
+    "ProxyResourceTypeParameter": {
+      "in": "path",
+      "name": "proxyResourceType",
+      "description": "Name of Azure Machine Learning workspace.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+    },
+    "ProxyResourceNameParameter": {
+      "in": "path",
+      "name": "proxyResourceName",
       "description": "Name of Azure Machine Learning workspace.",
       "required": true,
       "type": "string",
