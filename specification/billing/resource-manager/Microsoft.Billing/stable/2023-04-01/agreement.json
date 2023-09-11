@@ -11,57 +11,6 @@
     "version": "2023-04-01"
   },
   "paths": {
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements": {
-      "get": {
-        "tags": [
-          "Agreement"
-        ],
-        "description": "Lists the agreements for a billing account.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "Agreements_ListByBillingAccount",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "./types.json#/parameters/billingAccountName"
-          },
-          {
-            "$ref": "./types.json#/parameters/apiVersionParameter"
-          },
-          {
-            "in": "query",
-            "name": "expand",
-            "description": "May be used to expand the participants.",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Result of listing agreements.",
-            "schema": {
-              "$ref": "#/definitions/AgreementListResult"
-            }
-          },
-          "default": {
-            "description": "Default response",
-            "schema": {
-              "$ref": "./types.json#/definitions/ArmErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "AgreementsListByBillingAccount": {
-            "$ref": "./examples/agreementsListByBillingAccount.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}": {
       "get": {
         "tags": [
@@ -115,6 +64,57 @@
           "AgreementByName": {
             "$ref": "./examples/agreementByName.json"
           }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements": {
+      "get": {
+        "tags": [
+          "Agreement"
+        ],
+        "description": "Lists the agreements for a billing account.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Agreements_ListByBillingAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "expand",
+            "description": "May be used to expand the participants.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result of listing agreements.",
+            "schema": {
+              "$ref": "#/definitions/AgreementListResult"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AgreementsListByBillingAccount": {
+            "$ref": "./examples/agreementsListByBillingAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -190,7 +190,7 @@
           "type": "string",
           "readOnly": true
         },
-        "billingProfilesInfo": {
+        "billingProfiles": {
           "description": "The list of billing profiles associated with agreement and present only for specific agreements.",
           "type": "array",
           "items": {
