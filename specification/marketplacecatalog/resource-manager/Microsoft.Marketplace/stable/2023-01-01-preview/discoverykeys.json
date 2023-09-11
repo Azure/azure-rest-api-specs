@@ -1,0 +1,195 @@
+{
+  "swagger": "2.0",
+  "info": {
+      "title": "Microsoft Marketplace Discovery API Keys Management",
+      "version": "2023-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+      "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+      "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/discovery/keys/create": {
+          "post": {
+              "tags": [
+                  "CreateApiKey"
+              ],
+              "operationId": "CreateApiKey_Create",
+              "x-ms-examples": {
+                "Create_Key": {
+                  "$ref": "./examples/CreateKey.json"
+                }
+              },
+              "parameters": [
+                  {
+                      "type": "string",
+                      "name": "subscriptionId",
+                      "in": "path",
+                      "required": true,
+                      "x-nullable": true
+                  },
+                  {
+                      "type": "string",
+                      "name": "x-ms-client-tenant-id",
+                      "x-originalName": "tenantId",
+                      "in": "header",
+                      "required": true,
+                      "x-nullable": true
+                  },
+                  {
+                    "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "x-nullable": false,
+                      "description": "Returns the newly created API key",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "key": {
+                                  "type": "string",
+                                  "description": "The newly created API key"
+                              }
+                          }
+                      }
+                  },
+                  "400": {
+                    "x-nullable": false,
+                    "x-ms-error-response": true,
+                    "description": "In case request is malformed or maximum number of API keys is reached",
+                    "schema": {
+                      "type": "string"
+                    }
+                  }
+              }
+          }
+      },
+      "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/discovery/keys/revoke/{key}": {
+          "post": {
+              "tags": [
+                  "RevokeApiKey"
+              ],
+              "operationId": "RevokeApiKey_Revoke",
+              "x-ms-examples": {
+                "Create_Key": {
+                  "$ref": "./examples/RevokeKey.json"
+                }
+              },
+              "parameters": [
+                  {
+                      "type": "string",
+                      "name": "subscriptionId",
+                      "in": "path",
+                      "required": true,
+                      "x-nullable": true
+                  },
+                  {
+                      "type": "string",
+                      "name": "key",
+                      "in": "path",
+                      "required": true,
+                      "x-nullable": true
+                  },
+                  {
+                      "type": "string",
+                      "name": "x-ms-client-tenant-id",
+                      "x-originalName": "tenantId",
+                      "in": "header",
+                      "required": true,
+                      "x-nullable": true
+                  },
+                  {
+                    "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "x-nullable": false,
+                      "description": "Indicates that the API key was successfully revoked",
+                      "schema": {
+                          "type": "string"
+                        }
+                    },
+                    "404": {
+                      "x-nullable": false,
+                      "description": "Indicates that the API key to revoke was not found",
+                      "schema": {
+                          "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+      "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/discovery/keys": {
+          "get": {
+              "tags": [
+                  "GetApiKeys"
+              ],
+              "operationId": "GetApiKeys_Get",
+              "x-ms-examples": {
+                "Create_Key": {
+                  "$ref": "./examples/GetKey.json"
+                }
+              },
+              "parameters": [
+                  {
+                      "type": "string",
+                      "name": "subscriptionId",
+                      "in": "path",
+                      "required": true,
+                      "x-nullable": true
+                  },
+                  {
+                      "type": "string",
+                      "name": "x-ms-client-tenant-id",
+                      "x-originalName": "tenantId",
+                      "in": "header",
+                      "required": true,
+                      "x-nullable": true
+                  },
+                  {
+                    "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "x-nullable": false,
+                      "description": "List of the keys that belong to the subscription",
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                            "type": "array",
+                            "description": "The API keys",
+                            "items": {
+                                "type": "string"
+                            }
+                          }
+                      }
+                  },
+                  "404": {
+                    "x-nullable": false,
+                    "description": "Indicates that the API key to revoke was not found",
+                    "schema": {
+                        "type": "string"
+                      }
+                  }
+              }
+          }
+      }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}
