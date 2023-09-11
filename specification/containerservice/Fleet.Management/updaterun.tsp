@@ -109,6 +109,29 @@ A group can only appear once across all UpdateStages in the UpdateRun.
 model ManagedClusterUpdate {
   @doc("The upgrade to apply to the ManagedClusters.")
   upgrade: ManagedClusterUpgradeSpec;
+
+  @visibility("create", "read")
+  @doc("The node image upgrade to be applied to the target nodes in update run.")
+  @added(Versions.v2023_06_15_preview)
+  nodeImageSelection?: NodeImageSelection;
+}
+
+@doc("The node image upgrade to be applied to the target nodes in update run.")
+@added(Versions.v2023_06_15_preview)
+model NodeImageSelection {
+  @visibility("create", "read")
+  @doc("The node image upgrade type.")
+  type: NodeImageSelectionType;
+}
+
+@doc("The node image upgrade type.")
+@added(Versions.v2023_06_15_preview)
+enum NodeImageSelectionType {
+  @doc("Use the latest image version when upgrading nodes. Clusters may use different image versions (e.g., 'AKSUbuntu-1804gen2containerd-2021.10.12' and 'AKSUbuntu-1804gen2containerd-2021.10.19') because, for example, the latest available version is different in different regions.")
+  Latest,
+
+  @doc("The image versions to upgrade nodes to are selected as described below: for each node pool in managed clusters affected by the update run, the system selects the latest image version such that it is available across all other node pools (in all other clusters) of the same image type. As a result, all node pools of the same image type will be upgraded to the same image version. For example, if the latest image version for image type 'AKSUbuntu-1804gen2containerd' is 'AKSUbuntu-1804gen2containerd-2021.10.12' for a node pool in cluster A in region X, and is 'AKSUbuntu-1804gen2containerd-2021.10.17' for a node pool in cluster B in region Y, the system will upgrade both node pools to image version 'AKSUbuntu-1804gen2containerd-2021.10.12'.")
+  Consistent,
 }
 
 scalar KubernetesVersion extends string;
@@ -135,14 +158,28 @@ enum ManagedClusterUpgradeType {
   NodeImageOnly,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("The state of the UpdateRun, UpdateStage, UpdateGroup, or MemberUpdate.")
 enum UpdateState {
+  @doc("The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has not been started.")
   NotStarted,
+
+  @doc("The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that is running.")
   Running,
+
+  @doc("The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that is being stopped.")
   Stopping,
+
+  @doc("The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has stopped.")
   Stopped,
+
+  @added(Versions.v2023_06_15_preview)
+  @doc("The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has been skipped.")
+  Skipped,
+
+  @doc("The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has failed.")
   Failed,
+
+  @doc("The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has completed.")
   Completed,
 }
 
@@ -175,6 +212,28 @@ model UpdateRunStatus {
   @extension("x-ms-identifiers", ["name"])
   @doc("The stages composing an update run. Stages are run sequentially withing an UpdateRun.")
   stages?: UpdateStageStatus[];
+
+  @visibility("read")
+  @doc("The node image upgrade specs for the update run. It is only set in update run when `NodeImageSelection.type` is `Consistent`.")
+  @added(Versions.v2023_06_15_preview)
+  nodeImageSelection?: NodeImageSelectionStatus;
+}
+
+@doc("The node image upgrade specs for the update run.")
+@added(Versions.v2023_06_15_preview)
+model NodeImageSelectionStatus {
+  @extension("x-ms-identifiers", ["version"])
+  @visibility("read")
+  @doc("The image versions to upgrade the nodes to.")
+  selectedNodeImageVersions?: NodeImageVersion[];
+}
+
+@doc("The node upgrade image version.")
+@added(Versions.v2023_06_15_preview)
+model NodeImageVersion {
+  @visibility("read")
+  @doc("The image version to upgrade the nodes to (e.g., 'AKSUbuntu-1804gen2containerd-2022.12.13').")
+  version?: string;
 }
 
 @doc("The status of a UpdateStage.")
@@ -241,6 +300,11 @@ model MemberUpdateStatus {
   @visibility("read")
   @doc("The operation resource id of the latest attempt to perform the operation.")
   operationId?: string;
+
+  @visibility("read")
+  @doc("The status message after processing the member update operation.")
+  @added(Versions.v2023_06_15_preview)
+  message?: string;
 }
 
 @added(Versions.v2023_03_15_preview)
