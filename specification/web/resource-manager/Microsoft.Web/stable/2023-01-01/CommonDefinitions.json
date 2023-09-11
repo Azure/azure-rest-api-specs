@@ -2923,6 +2923,14 @@
               "$ref": "#/definitions/DaprConfig",
               "description": "Dapr configuration of the app."
             },
+           "workloadProfileName": {
+             "$ref": "#/definitions/WorkloadProfileName",
+             "description": "Workload profile name to pin for function app execution."
+            },
+            "resourceConfig": {
+              "$ref": "#/definitions/ResourceConfig",
+              "description": "Function app resource requirements."
+            },
             "trafficManagerHostNames": {
               "description": "Azure Traffic Manager hostnames associated with the app. Read-only.",
               "type": "array",
@@ -3619,6 +3627,25 @@
         "enableApiLogging": {
           "description": "Enables API logging for the Dapr sidecar",
           "type": "boolean"
+        }
+      }
+    },
+    "WorkloadProfileName": {
+      "description": "Workload profile name for function app to execute on.",
+      "type": "string"
+    },
+    "ResourceConfig": {
+      "description": "Function app resource requirements.",
+      "type": "object",
+      "properties": {
+        "cpu": {
+          "format": "double",
+          "description": "Required CPU in cores, e.g. 0.5",
+          "type": "number"
+        },
+        "memory": {
+          "description": "Required memory, e.g. \"1Gi\"",
+          "type": "string"
         }
       }
     },
