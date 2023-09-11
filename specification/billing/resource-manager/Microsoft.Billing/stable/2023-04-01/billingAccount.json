@@ -11,59 +11,68 @@
     "version": "2023-04-01"
   },
   "paths": {
-    "/providers/Microsoft.Billing/billingAccounts": {
-      "get": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/confirmTransition": {
+      "post": {
         "tags": [
           "BillingAccount"
         ],
-        "description": "Lists the billing accounts that a user has access to.",
+        "description": "Gets the transition details for a billing account that has transitioned from agreement type Microsoft Online Services Program to agreement type Microsoft Customer Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
-        "operationId": "BillingAccounts_List",
+        "operationId": "BillingAccounts_ConfirmTransition",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "query",
-            "name": "includeAllBillingAccounts",
-            "description": "When true, results will include Billing Accounts that the user does not have a direct role assignment on if the user has one of the following AAD roles: Global Administrator, Global Reader, Billing Administrator.",
-            "type": "boolean",
-            "default": false
-          },
-          {
-            "in": "query",
-            "name": "excludeAccountsWithoutBillingProfiles",
-            "description": "When true, results will exclude Billing Accounts that are not fully created if the user has one of the following AAD roles: Global Administrator, Global Reader, Billing Administrator.",
-            "type": "boolean",
-            "default": true
-          },
-          {
-            "in": "query",
-            "name": "includeDeletedBillingAccounts",
-            "description": "When true, results will include Billing Accounts that have been deleted.",
-            "type": "boolean",
-            "default": false
-          },
-          {
-            "in": "query",
-            "name": "legalOwnerTID",
-            "description": "Must be combined with legalOwnerOID, results will only include Billing Accounts for whom is legally responsible for the Billing Accounts. Optional.",
+            "in": "path",
+            "name": "billingAccountName",
+            "description": "",
+            "required": true,
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "legalOwnerOID",
-            "description": "Must be combined with legalOwnerTID, results will only include Billing Accounts for whom is legally responsible for the Billing Accounts. Optional.",
-            "type": "string"
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The details for a billing account transitioned from agreement type Microsoft Online Services Program to agreement type Microsoft Customer Agreement.",
+            "schema": {
+              "$ref": "#/definitions/TransitionDetails"
+            }
           },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingAccountsConfirmTransition": {
+            "$ref": "./examples/billingAccountsConfirmTransition.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/listInvoiceSectionsWithCreateSubscriptionPermission": {
+      "post": {
+        "tags": [
+          "BillingAccount"
+        ],
+        "description": "Lists the invoice sections for which the user has permission to create Azure subscriptions. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingAccounts_ListInvoiceSectionsByCreateSubscriptionPermission",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
           {
-            "in": "query",
-            "name": "includeTenantAccount",
-            "description": "When true, results will include the tenant's Microsoft Online Services Program Billing Account if the user has one of the following AAD roles: Global Administrator, Global Reader, Billing Administrator.",
-            "type": "boolean",
-            "default": false
+            "$ref": "./types.json#/parameters/billingAccountName"
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
@@ -89,9 +98,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The list of billing accounts.",
+            "description": "The list of invoice section properties with create subscription permission.",
             "schema": {
-              "$ref": "#/definitions/BillingAccountListResult"
+              "$ref": "#/definitions/InvoiceSectionWithCreateSubscriptionPermissionListResult"
             }
           },
           "default": {
@@ -102,14 +111,8 @@
           }
         },
         "x-ms-examples": {
-          "BillingAccountsList": {
-            "$ref": "./examples/billingAccountsList.json"
-          },
-          "BillingAccountForLegacyAccountDetails": {
-            "$ref": "./examples/billingAccountForLegacyAccountDetails.json"
-          },
-          "BillingAccountsListWithExpandForPONumber": {
-            "$ref": "./examples/billingAccountsListWithExpandForPONumber.json"
+          "InvoiceSectionsListWithCreateSubPermission": {
+            "$ref": "./examples/invoiceSectionsListWithCreateSubPermission.json"
           }
         },
         "x-ms-pageable": {
@@ -136,7 +139,7 @@
           },
           {
             "in": "query",
-            "name": "includeDeletedBillingAccounts",
+            "name": "includeDeleted",
             "description": "When true, results will include Billing Accounts that have been deleted.",
             "type": "boolean",
             "default": false
@@ -247,74 +250,65 @@
           "BillingAccountsUpdate": {
             "$ref": "./examples/billingAccountsUpdate.json"
           },
-          "UpdateBillingAccountWithPONumber": {
-            "$ref": "./examples/updateBillingAccountWithPONumber.json"
+          "BillingAccountUpdateWithPONumber": {
+            "$ref": "./examples/billingAccountUpdateWithPONumber.json"
           }
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/confirmTransition": {
-      "post": {
+    "/providers/Microsoft.Billing/billingAccounts": {
+      "get": {
         "tags": [
           "BillingAccount"
         ],
-        "description": "Gets the transition details for a billing account that has transitioned from agreement type Microsoft Online Services Program to agreement type Microsoft Customer Agreement.",
+        "description": "Lists the billing accounts that a user has access to.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
-        "operationId": "BillingAccounts_ConfirmTransition",
+        "operationId": "BillingAccounts_List",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "billingAccountName",
-            "description": "",
-            "required": true,
+            "in": "query",
+            "name": "includeAllBillingAccounts",
+            "description": "When true, results will include Billing Accounts that the user does not have a direct role assignment on if the user has one of the following AAD roles: Global Administrator, Global Reader, Billing Administrator.",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "in": "query",
+            "name": "excludeAccountsWithoutBillingProfiles",
+            "description": "When true, results will exclude Billing Accounts that are not fully created if the user has one of the following AAD roles: Global Administrator, Global Reader, Billing Administrator.",
+            "type": "boolean",
+            "default": true
+          },
+          {
+            "in": "query",
+            "name": "includeDeleted",
+            "description": "When true, results will include Billing Accounts that have been deleted.",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "in": "query",
+            "name": "legalOwnerTID",
+            "description": "Must be combined with legalOwnerOID, results will only include Billing Accounts for whom is legally responsible for the Billing Accounts. Optional.",
             "type": "string"
           },
           {
-            "$ref": "./types.json#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The details for a billing account transitioned from agreement type Microsoft Online Services Program to agreement type Microsoft Customer Agreement.",
-            "schema": {
-              "$ref": "#/definitions/TransitionDetails"
-            }
+            "in": "query",
+            "name": "legalOwnerOID",
+            "description": "Must be combined with legalOwnerTID, results will only include Billing Accounts for whom is legally responsible for the Billing Accounts. Optional.",
+            "type": "string"
           },
-          "default": {
-            "description": "Default response",
-            "schema": {
-              "$ref": "./types.json#/definitions/ArmErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "BillingAccountsConfirmTransition": {
-            "$ref": "./examples/billingAccountsConfirmTransition.json"
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/listInvoiceSectionsWithCreateSubscriptionPermission": {
-      "post": {
-        "tags": [
-          "BillingAccount"
-        ],
-        "description": "Lists the invoice sections for which the user has permission to create Azure subscriptions. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "BillingAccounts_ListInvoiceSectionsByCreateSubscriptionPermission",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
           {
-            "$ref": "./types.json#/parameters/billingAccountName"
+            "in": "query",
+            "name": "includeTenantAccount",
+            "description": "When true, results will include the tenant's Microsoft Online Services Program Billing Account if the user has one of the following AAD roles: Global Administrator, Global Reader, Billing Administrator.",
+            "type": "boolean",
+            "default": false
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
@@ -340,9 +334,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The list of invoice section properties with create subscription permission.",
+            "description": "The list of billing accounts.",
             "schema": {
-              "$ref": "#/definitions/InvoiceSectionWithCreateSubscriptionPermissionListResult"
+              "$ref": "#/definitions/BillingAccountListResult"
             }
           },
           "default": {
@@ -353,8 +347,14 @@
           }
         },
         "x-ms-examples": {
-          "InvoiceSectionsListWithCreateSubPermission": {
-            "$ref": "./examples/invoiceSectionsListWithCreateSubPermission.json"
+          "BillingAccountsList": {
+            "$ref": "./examples/billingAccountsList.json"
+          },
+          "BillingAccountForLegacyAccountDetails": {
+            "$ref": "./examples/billingAccountForLegacyAccountDetails.json"
+          },
+          "BillingAccountsListWithExpandForPONumber": {
+            "$ref": "./examples/billingAccountsListWithExpandForPONumber.json"
           }
         },
         "x-ms-pageable": {

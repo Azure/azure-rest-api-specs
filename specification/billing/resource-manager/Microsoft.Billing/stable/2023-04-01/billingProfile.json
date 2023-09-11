@@ -11,16 +11,16 @@
     "version": "2023-04-01"
   },
   "paths": {
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles": {
-      "get": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/validateDeleteEligibility": {
+      "post": {
         "tags": [
           "BillingProfile"
         ],
-        "description": "Lists the billing profiles that a user has access to. The operation is supported for billing accounts with agreement of type Microsoft Customer Agreement, Microsoft Partner Agreement, and Enterprise Agreement.",
+        "description": "Validates if the billing profile can be deleted. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement, Microsoft Partner Agreement, and Enterprise Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
-        "operationId": "BillingProfiles_ListByBillingAccount",
+        "operationId": "BillingProfiles_ValidateDeleteEligibility",
         "produces": [
           "application/json"
         ],
@@ -29,39 +29,17 @@
             "$ref": "./types.json#/parameters/billingAccountName"
           },
           {
-            "in": "query",
-            "name": "includeDeleted",
-            "description": "Can be used to get deleted billing profiles.",
-            "type": "boolean",
-            "default": false
+            "$ref": "./types.json#/parameters/billingProfileName"
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "./types.json#/parameters/filter"
-          },
-          {
-            "$ref": "./types.json#/parameters/orderBy"
-          },
-          {
-            "$ref": "./types.json#/parameters/top"
-          },
-          {
-            "$ref": "./types.json#/parameters/skip"
-          },
-          {
-            "$ref": "./types.json#/parameters/count"
-          },
-          {
-            "$ref": "./types.json#/parameters/search"
           }
         ],
         "responses": {
           "200": {
-            "description": "The list of billing profiles.",
+            "description": "Eligibility to delete a billing profile result.",
             "schema": {
-              "$ref": "#/definitions/BillingProfileListResult"
+              "$ref": "#/definitions/DeleteBillingProfileEligibilityResult"
             }
           },
           "default": {
@@ -72,12 +50,12 @@
           }
         },
         "x-ms-examples": {
-          "BillingProfilesListByBillingAccount": {
-            "$ref": "./examples/billingProfilesListByBillingAccount.json"
+          "BillingProfilesValidateDeleteEligibilitySuccess": {
+            "$ref": "./examples/billingProfilesValidateDeleteEligibilitySuccess.json"
+          },
+          "BillingProfilesValidateDeleteEligibilityFailure": {
+            "$ref": "./examples/billingProfilesValidateDeleteEligibilityFailure.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -115,7 +93,7 @@
             }
           },
           "204": {
-            "description": "No Content"
+            "description": "The request has succeeded with no response body."
           },
           "default": {
             "description": "Default response",
@@ -269,16 +247,16 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/validateDeleteEligibility": {
-      "post": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles": {
+      "get": {
         "tags": [
           "BillingProfile"
         ],
-        "description": "Validates if the billing profile can be deleted. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement, Microsoft Partner Agreement, and Enterprise Agreement.",
+        "description": "Lists the billing profiles that a user has access to. The operation is supported for billing accounts with agreement of type Microsoft Customer Agreement, Microsoft Partner Agreement, and Enterprise Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
-        "operationId": "BillingProfiles_ValidateDeleteEligibility",
+        "operationId": "BillingProfiles_ListByBillingAccount",
         "produces": [
           "application/json"
         ],
@@ -287,17 +265,39 @@
             "$ref": "./types.json#/parameters/billingAccountName"
           },
           {
-            "$ref": "./types.json#/parameters/billingProfileName"
+            "in": "query",
+            "name": "includeDeleted",
+            "description": "Can be used to get deleted billing profiles.",
+            "type": "boolean",
+            "default": false
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "$ref": "./types.json#/parameters/orderBy"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          },
+          {
+            "$ref": "./types.json#/parameters/count"
+          },
+          {
+            "$ref": "./types.json#/parameters/search"
           }
         ],
         "responses": {
           "200": {
-            "description": "Eligibility to delete a billing profile result.",
+            "description": "The list of billing profiles.",
             "schema": {
-              "$ref": "#/definitions/DeleteBillingProfileEligibilityResult"
+              "$ref": "#/definitions/BillingProfileListResult"
             }
           },
           "default": {
@@ -308,12 +308,12 @@
           }
         },
         "x-ms-examples": {
-          "BillingProfilesValidateDeleteEligibilitySuccess": {
-            "$ref": "./examples/billingProfilesValidateDeleteEligibilitySuccess.json"
-          },
-          "BillingProfilesValidateDeleteEligibilityFailure": {
-            "$ref": "./examples/billingProfilesValidateDeleteEligibilityFailure.json"
+          "BillingProfilesListByBillingAccount": {
+            "$ref": "./examples/billingProfilesListByBillingAccount.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -441,7 +441,7 @@
           "x-ms-identifiers": []
         },
         "poNumber": {
-          "description": "The purchase order name that will appear on the invoices generated for the billing profile.",
+          "description": "The default purchase order number that will appear on the invoices generated for the billing profile.",
           "type": "string"
         },
         "shipTo": {
