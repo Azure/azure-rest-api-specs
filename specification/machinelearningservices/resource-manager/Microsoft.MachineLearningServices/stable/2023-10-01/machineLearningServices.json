@@ -201,6 +201,9 @@
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceForceToPurgeParameter"
           }
         ],
         "responses": {
@@ -2341,6 +2344,14 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+    },
+    "WorkspaceForceToPurgeParameter": {
+      "in": "query",
+      "name": "forceToPurge",
+      "description": "Flag to indicate delete is a purge request.",
+      "type": "boolean",
+      "default": false,
+      "x-ms-parameter-location": "method"
     }
   },
   "definitions": {
