@@ -527,44 +527,16 @@
             "minLength": 1,
             "example": "10.10.10.10:22 | www.foo.com"
           }
-        },
-        "addressListV1": {
-          "type": "array",
-          "description": "List of Addresses to be allowed or denied.",
-          "minItems": 1,
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/AddressListV1Properties"
-          },
-          "x-ms-identifiers": [
-            "address"
-          ]
-        }
-      }
-    },
-    "AddressListV1Properties": {
-      "type": "object",
-      "description": "",
-      "properties": {
-        "address": {
-          "type": "array",
-          "description": "List of Address to be allowed or denied.",
-          "minItems": 1,
-          "items": {
-            "description": "Address to be allowed or denied.",
-            "type": "string",
-            "minLength": 1,
-            "example": "10.10.10.10:22 | www.foo.com"
-          }
         }
       }
     },
     "ModifyRules": {
       "type": "object",
-      "description": "",
+      "description": "The rules of the given Internet Gateway Rules that can be modified using the post action.",
       "properties": {
         "ruleProperties": {
           "type": "object",
+          "description": "Rules for the InternetGateways that can be modified.",
           "$ref": "#/definitions/ModifyRulesProperties"
         }
       }
@@ -587,17 +559,16 @@
           },
           "example": "Add"
         },
-        "addressListV1": {
+        "addressList": {
           "type": "array",
-          "description": "List of Addresses to be allowed or denied.",
+          "description": "List of Address to be allowed or denied.",
           "minItems": 1,
           "items": {
-            "type": "object",
-            "$ref": "#/definitions/AddressListV1Properties"
-          },
-          "x-ms-identifiers": [
-            "address"
-          ]
+            "description": "Address to be allowed or denied.",
+            "type": "string",
+            "minLength": 1,
+            "example": "10.10.10.10:22 | www.foo.com"
+          }
         }
       }
     }
