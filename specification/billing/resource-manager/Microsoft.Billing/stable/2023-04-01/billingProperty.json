@@ -186,7 +186,7 @@
           "readOnly": true
         },
         "billingAccountSoldToCountry": {
-          "description": "The address of the individual or organization that is responsible for the billing account.",
+          "description": "The country of the individual or organization that is responsible for the billing account.",
           "type": "string",
           "readOnly": true
         },
@@ -335,8 +335,8 @@
           "enum": [
             "Unknown",
             "Credits",
-            "Creditcard",
-            "Checkwire"
+            "CreditCard",
+            "WireTransfer"
           ],
           "type": "string",
           "readOnly": true,
@@ -406,7 +406,7 @@
           }
         },
         "isTransitionedBillingAccount": {
-          "description": "Specifies if the billing account for the subscription is transitioned from a Microsoft Online Service Program (MOSP) to a Microsoft Customer Agreement (MCA) account. Will be present and value will be true if its a transitioned billing account.",
+          "description": "Specifies if the billing account for the subscription is transitioned from a Microsoft Online Service Program to a Microsoft Customer Agreement (MCA) account. Will be present and value will be true if its a transitioned billing account.",
           "type": "boolean",
           "readOnly": true
         },
@@ -605,7 +605,7 @@
           "type": "string"
         },
         "departmentId": {
-          "description": "The fully qualified ID that uniquely identifies a department.",
+          "description": "The ID that uniquely identifies the department.",
           "type": "string"
         },
         "enrollmentAccountStatus": {
@@ -613,11 +613,11 @@
           "type": "string"
         },
         "enrollmentAccountDisplayName": {
-          "description": "The ID that uniquely identifies an enrollment account",
+          "description": "The name of the enrollment account.",
           "type": "string"
         },
         "enrollmentAccountId": {
-          "description": "The fully qualified ID that uniquely identifies an enrollment account",
+          "description": "The ID that uniquely identifies an enrollment account.",
           "type": "string"
         }
       }
