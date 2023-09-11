@@ -9,6 +9,7 @@ namespace AzureHealthInsights;
 @doc("The body of the Trial Matcher request.")
 model TrialMatcherData {
   ...Request;
+
   @doc("Configuration affecting the Trial Matcher model's inference.")
   configuration?: TrialMatcherModelConfiguration;
 }
@@ -16,6 +17,7 @@ model TrialMatcherData {
 @doc("Configuration affecting the Trial Matcher model's inference.")
 model TrialMatcherModelConfiguration {
   ...ModelConfiguration;
+
   @doc("""
 The clinical trials that the patient(s) should be matched to. <br />The trial
 selection can be given as a list of custom clinical trials and/or a list of
@@ -81,11 +83,11 @@ The bio-medical category related to the coded concept, e.g. Diagnosis, Symptom, 
   category?: string;
 }
 
-
 @doc("An inference made by the Trial Matcher model regarding a patient.")
 model TrialMatcherInference {
   @doc("The type of the Trial Matcher inference.")
   type: TrialMatcherInferenceType;
+
   ...Inference;
 
   @doc("The evidence corresponding to the inference value.")
@@ -327,6 +329,7 @@ model ContactDetails {
 model ClinicalTrialResearchFacility {
   @doc("The facility's name.")
   name: string;
+
   ...GeographicLocation;
 }
 
@@ -335,7 +338,7 @@ model ClinicalTrialResearchFacility {
 enum ClinicalTrialAcceptedSex {
   All: "all",
   Female: "female",
-  Male: "male"
+  Male: "male",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"

@@ -55,6 +55,14 @@ These settings apply only when `--tag=package-preview-2023-06` is specified on t
 input-file:
   - Microsoft.DataProtection/preview/2023-06-01-preview/dataprotection.json
 ```
+### Tag: package-2023-05
+
+These settings apply only when `--tag=package-2023-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-05'
+input-file:
+- Microsoft.DataProtection/stable/2023-05-01/dataprotection.json
+```
 ### Tag: package-preview-2023-04
 
 These settings apply only when `--tag=package-preview-2023-04` is specified on the command line.

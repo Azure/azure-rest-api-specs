@@ -548,7 +548,7 @@
     },
     "/reverseGeocode": {
       "get": {
-        "description": "**Reverse Geocode a point.**\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nTranslate a coordinate (example: 37.786505, -122.3862) into a human understandable street address. Most often this is needed in tracking applications where you receive a GPS feed from the device or asset and wish to know what address where the coordinate is located. This endpoint will return address information for a given coordinate.\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n",
+        "description": "**Reverse Geocoding**\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nTranslate a coordinate (example: 37.786505, -122.3862) into a human understandable street address. Most often this is needed in tracking applications where you receive a GPS feed from the device or asset and wish to know what address where the coordinate is located. This endpoint will return address information for a given coordinate.\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n",
         "operationId": "Search_GetReverseGeocoding",
         "produces": [
           "application/geo+json"
@@ -585,6 +585,9 @@
           },
           {
             "$ref": "#/parameters/ReverseGeocodingResultTypes"
+          },
+          {
+            "$ref": "#/parameters/View"
           }
         ],
         "responses": {
@@ -900,6 +903,10 @@
               ]
             }
           }
+        },
+        "view": {
+          "description": "A string that specifies an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter Geopolitical disputed borders and labels to align with the specified user region.",
+          "type": "string"
         }
       }
     },
@@ -1074,10 +1081,6 @@
               "shortName": {
                 "type": "string",
                 "description": "The short name for the corresponding adminDistrict field, \nFor adminDistrict[0], this could be short name of state such as WA, \nFor adminDistrict[1], this could be the short name of the county"
-              },
-              "type": {
-                "type": "string",
-                "description": "The type of the adminDistrict. For example: adminDistrict, adminDistrict2"
               }
             }
           }

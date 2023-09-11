@@ -10,16 +10,17 @@ using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI is a case-sensitive name"
 @useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "api-key"> |
-    OAuth2Auth<[{
+  ApiKeyAuth<ApiKeyLocation.header, "api-key"> | OAuth2Auth<[
+    {
       type: OAuth2FlowType.implicit,
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-      scopes: ["https://cognitiveservices.azure.com/.default"]
-    }]>)
-@service(
-  {
-    title: "Azure OpenAI API"
-  })
+      scopes: ["https://cognitiveservices.azure.com/.default"],
+    }
+  ]>
+)
+@service({
+  title: "Azure OpenAI API",
+})
 @server(
   "{endpoint}/openai",
   "Azure OpenAI APIs for completions and search",
@@ -39,15 +40,26 @@ namespace Azure.OpenAI;
 enum ServiceApiVersions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2022_12_01: "2022-12-01",
+
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2023_03_15_Preview: "2023-03-15-preview",
+  v2023_05_15: "2023-05-15",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2023_06_01_Preview: "2023-06-01-preview",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2023_07_01_Preview: "2023-07-01-preview",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2023_08_01_Preview: "2023-08-01-preview",
 }
 
 @doc("A specific deployment")
 @TypeSpec.Rest.resource("deployments")
 model Deployment {
   @visibility("read")
-  @doc("deployment id of the deployed model")
+  @doc("Specifies either the model deployment name (when using Azure OpenAI) or model name (when using non-Azure OpenAI) to use for this request.")
+  @projectedName("java", "deploymentOrModelName")
   @key
   deploymentId: string;
 }
