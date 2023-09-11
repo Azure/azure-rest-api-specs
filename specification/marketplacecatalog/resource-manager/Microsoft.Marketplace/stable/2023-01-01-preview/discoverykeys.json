@@ -75,7 +75,7 @@
               ],
               "operationId": "RevokeApiKey_Revoke",
               "x-ms-examples": {
-                "Create_Key": {
+                "Revoke_Key": {
                   "$ref": "./examples/RevokeKey.json"
                 }
               },
@@ -131,7 +131,7 @@
               ],
               "operationId": "GetApiKeys_Get",
               "x-ms-examples": {
-                "Create_Key": {
+                "Get_Key": {
                   "$ref": "./examples/GetKey.json"
                 }
               },
@@ -179,6 +179,39 @@
                   }
               }
           }
+      },
+      "/providers/Microsoft.Marketplace/operations": {
+        "get": {
+          "tags": [
+            "Operations"
+          ],
+          "description": "Lists all of the available Microsoft.Marketplace REST API operations.",
+          "operationId": "Operations_List",
+          "parameters": [
+            {
+              "$ref": "#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK. The request has succeeded.",
+              "schema": {
+                "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              }
+            },
+            "default": {
+              "description": "Microsoft.Marketplace error response describing why the operation failed.",
+              "schema": {
+                "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          },
+          "x-ms-examples": {
+            "Operations_Get": {
+              "$ref": "./examples/Operations_Get.json"
+            }
+          }
+        }
       }
   },
   "securityDefinitions": {
