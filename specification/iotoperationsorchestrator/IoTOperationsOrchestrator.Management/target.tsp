@@ -27,7 +27,7 @@ model Target is TrackedResource<TargetProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
   @visibility("read", "create")
-  extendedLocation?: ExtendedLocation;
+  extendedLocation: ExtendedLocation;
 }
 
 @doc("The properties of a Target resource.")

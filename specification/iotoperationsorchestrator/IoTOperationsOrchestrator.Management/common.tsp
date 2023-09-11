@@ -16,10 +16,10 @@ namespace Microsoft.IoTOperationsOrchestrator;
 @doc("Extended location is an extension of Azure locations. They provide a way to use their Azure ARC enabled Kubernetes clusters as target locations for deploying Azure services instances.")
 model ExtendedLocation {
   @doc("The name of the extended location.")
-  name?: string;
+  name: string;
 
   @doc("The type of the extended location.")
-  type?: string;
+  type: string;
 }
 
 @lroStatus
