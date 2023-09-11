@@ -1,6 +1,12 @@
 parameters:
   "python-sdk-folder":
     default: "{project-root}/azure-sdk-for-python/"
+  "java-sdk-folder":
+    default: "{project-root}/azure-sdk-for-java/"
+  "js-sdk-folder":
+    default: "{project-root}/azure-sdk-for-js/"
+  "csharp-sdk-folder":
+    default: "{project-root}/azure-sdk-for-net/"
   "service-directory-name":
     default: "anomalydetector"
 emit: [
@@ -8,10 +14,11 @@ emit: [
 ]
 options:
   "@azure-tools/typespec-autorest":
-    examples-directory: ./examples
+    azure-resource-provider-folder: "data-plane"
+    examples-directory: examples
     omit-unreachable-types: true
-    output-file: openapi.json
-    emitter-output-dir: "{project-root}/../data-plane/AnomalyDetector/stable"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
+    emitter-output-dir: "{project-root}/../"
   "@azure-tools/typespec-python":
     "package-pprint-name": "\"Cognitive Services Anomaly Detector\""
     "package-mode": "dataplane"
@@ -22,9 +29,16 @@ options:
   "@azure-tools/typespec-java":
     namespace: com.azure.ai.anomalydetector
     partial-update: true
+    emitter-output-dir: "{java-sdk-folder}/sdk/{service-directory-name}/azure-ai-anomalydetector"
   # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
   "@azure-tools/typespec-csharp":
     save-inputs: false
     clear-output-folder: true
     namespace: Azure.AI.AnomalyDetector
     model-namespace: false
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{js-sdk-folder}/sdk/{service-directory-name}/ai-anomaly-detector-rest"
+    generateMetadata: true
+    generateTest: true
+    packageDetails:
+      name: "@azure-rest/ai-anomaly-detector"

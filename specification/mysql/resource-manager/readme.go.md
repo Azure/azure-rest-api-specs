@@ -35,6 +35,18 @@ batch:
   - tag: package-2020-01-01
   - tag: package-2017-12-01-preview
   - tag: package-2017-12-01
+  - tag: package-flexibleserver-2022-09-30-preview
+```
+
+### Tag: package-flexibleserver-2022-09-30-preview and go
+
+These settings apply only when `--tag=package-flexibleserver-2022-09-30-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-flexibleserver-2022-09-30-preview' && $(go)
+rpname: mysql
+namespace: mysqlflexibleservers
+output-folder: $(go-sdk-folder)/services/preview/$(rpname)/mgmt/2022-09-30-preview/$(namespace)
 ```
 
 ### Tag: package-flexibleserver-2021-12-01-preview and go

@@ -1289,7 +1289,8 @@
       "x-ms-enum": {
         "name": "ChatMessageType",
         "modelAsString": true
-      }
+      },
+      "example": "html"
     },
     "SendChatMessageRequest": {
       "description": "Details of the message to send.",
@@ -1301,7 +1302,7 @@
         "content": {
           "description": "Chat message content.",
           "type": "string",
-          "example": "Come one guys, lets go for lunch together."
+          "example": "<p>Come one guys, lets go for lunch together.</p>"
         },
         "senderDisplayName": {
           "description": "The display name of the chat message sender. This property is used to populate sender name for push notifications.",
@@ -1354,13 +1355,22 @@
           "description": "Time from which the chat history is shared with the participant. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
           "type": "string",
           "example": "2020-10-30T10:50:50Z"
+        },
+        "metadata": {
+          "description": "Contextual metadata for the chat participant. The metadata consists of name/value pairs. The total size of all metadata pairs can be up to 1KB in size.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
     "AttachmentType": {
       "description": "The type of attachment.",
       "enum": [
-        "teamsInlineImage"
+        "teamsInlineImage",
+        "teamsImage",
+        "file"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -1380,7 +1390,7 @@
         "id": {
           "description": "Id of the attachment",
           "type": "string",
-          "example": "A27C7079-626F-4D23-8BEE-582F2C376B5A"
+          "example": "f508ce15-e878-431f-b871-f530cac5331d"
         },
         "attachmentType": {
           "$ref": "#/definitions/AttachmentType"
@@ -1416,7 +1426,7 @@
         "message": {
           "description": "Chat message content for messages of types text or html.",
           "type": "string",
-          "example": "Come one guys, lets go for lunch together."
+          "example": "<p>Come one guys, lets go for lunch together.</p><img id=\"f508ce15-e878-431f-b871-f530cac5331d\">"
         },
         "topic": {
           "description": "Chat message content for messages of type topicUpdated.",
@@ -1616,8 +1626,12 @@
             "$ref": "#/definitions/ChatParticipant"
           }
         },
-        "retentionPolicy": {
-          "$ref": "#/definitions/RetentionPolicy"
+        "metadata": {
+          "description": "Contextual metadata for the thread. The metadata consists of name/value pairs. The total size of all metadata pairs can be up to 1KB in size.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1656,8 +1670,12 @@
           "type": "string",
           "example": "2020-10-30T10:50:50Z"
         },
-        "retentionPolicy": {
-          "$ref": "#/definitions/RetentionPolicy"
+        "metadata": {
+          "description": "Contextual metadata for the thread. The metadata consists of name/value pairs. The total size of all metadata pairs can be up to 1KB in size.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1708,9 +1726,6 @@
           "type": "string",
           "readOnly": true,
           "example": "2020-10-30T10:50:50Z"
-        },
-        "retentionPolicy": {
-          "$ref": "#/definitions/RetentionPolicy"
         }
       }
     },
@@ -1743,6 +1758,13 @@
           "description": "Chat thread topic.",
           "type": "string",
           "example": "Lunch Thread"
+        },
+        "metadata": {
+          "description": "Contextual metadata for the thread. The metadata consists of name/value pairs. The total size of all metadata pairs can be up to 1KB in size.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1756,53 +1778,6 @@
           "example": "Bob Admin"
         }
       }
-    },
-    "RetentionPolicy": {
-      "description": "Data retention policy for auto deletion. It's not updatable after creation.",
-      "type": "object",
-      "discriminator": "policyType",
-      "properties": {
-        "policyType": {
-          "description": "Retention Policy Type",
-          "enum": [
-            "threadCreationDate"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "policyType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "threadCreationDate",
-                "description": "Thread retention policy based on thread creation date."
-              }
-            ]
-          }
-        }
-      },
-      "required": [
-        "policyType"
-      ]
-    },
-    "ThreadCreationDateRetentionPolicy": {
-      "description": "Thread retention policy based on thread creation date.",
-      "type": "object",
-      "x-ms-discriminator-value": "threadCreationDate",
-      "allOf": [
-        {
-          "$ref": "#/definitions/RetentionPolicy"
-        }
-      ],
-      "properties": {
-        "daysAfterCreation": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Indicates how many days after the thread creation the thread will be deleted. Only 90 is accepted for now."
-        }
-      },
-      "required": [
-        "daysAfterCreation"
-      ]
     }
   },
   "parameters": {

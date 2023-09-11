@@ -5,6 +5,7 @@ using TypeSpec.Rest;
 namespace AzureHealthInsights;
 
 alias Response = {
+  #suppress "@azure-tools/typespec-azure-core/no-format" "This is an old spec"
   @doc("A processing job identifier.")
   @visibility("read")
   @key
@@ -13,15 +14,15 @@ alias Response = {
 
   @doc("The date and time when the processing job was created.")
   @visibility("read")
-  createdDateTime: zonedDateTime;
+  createdDateTime: utcDateTime;
 
   @doc("The date and time when the processing job is set to expire.")
   @visibility("read")
-  expirationDateTime: zonedDateTime;
+  expirationDateTime: utcDateTime;
 
   @doc("The date and time when the processing job was last updated.")
   @visibility("read")
-  lastUpdateDateTime: zonedDateTime;
+  lastUpdateDateTime: utcDateTime;
 
   @doc("The status of the processing job.")
   @visibility("read")
@@ -31,7 +32,6 @@ alias Response = {
   @visibility("read")
   errors?: Azure.Core.Foundations.Error[];
 };
-
 
 @doc("An inference made by the model regarding a patient.")
 model Inference {
@@ -85,9 +85,11 @@ system.
 model TrialMatcherInferenceEvidence {
   @doc("A piece of evidence from the eligibility criteria text of a clinical trial.")
   eligibilityCriteriaEvidence?: string;
+
   ...InferenceEvidence;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next version"
 @doc("The status of the processing job.")
 enum JobStatus {
   NotStarted: "notStarted",

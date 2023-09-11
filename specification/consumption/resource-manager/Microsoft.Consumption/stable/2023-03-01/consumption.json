@@ -40,7 +40,7 @@
           "UsageDetails"
         ],
         "operationId": "UsageDetails_List",
-        "description": "Lists the usage details for the defined scope. Usage details are available via this API only for May 1, 2014 or later. \n\n!Note : \n\nMicrosoft will be retiring the Consumption Usage Details API at some point in the future. We do not recommend that you take a new dependency on this API. Please use the Cost Details API instead. We will notify customers once a date for retirement has been determined.For Cost Details API see,\n https://learn.microsoft.com/en-us/rest/api/cost-management/generate-cost-details-report/create-operation?tabs=HTTP ",
+        "description": "Lists the usage details for the defined scope. Usage details are available via this API only for May 1, 2014 or later.\n\n**Note:Microsoft will be retiring the Consumption Usage Details API at some point in the future. We do not recommend that you take a new dependency on this API. Please use the Cost Details API instead. We will notify customers once a date for retirement has been determined.For Learn more,see [Generate Cost Details Report - Create Operation](https://learn.microsoft.com/en-us/rest/api/cost-management/generate-cost-details-report/create-operation?tabs=HTTP)**",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -1907,6 +1907,29 @@
         "serviceTier": {
           "description": "The service tier.",
           "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SavingsPlan": {
+      "description": "The properties of the SavingsPlan.",
+      "type": "object",
+      "properties": {
+        "term": {
+          "description": "SavingsPlan term",
+          "type": "string",
+          "readOnly": true
+        },
+        "marketPrice": {
+          "description": "SavingsPlan Market Price",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "effectivePrice": {
+          "description": "SavingsPlan Effective Price",
+          "type": "number",
+          "format": "decimal",
           "readOnly": true
         }
       }
@@ -4617,6 +4640,11 @@
         "offerId": {
           "description": "Offer Id",
           "type": "string",
+          "readOnly": true
+        },
+        "savingsPlan": {
+          "description": "SavingsPlan Details",
+          "$ref": "#/definitions/SavingsPlan",
           "readOnly": true
         }
       }

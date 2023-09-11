@@ -78,6 +78,31 @@
           "description": "Activity description.",
           "type": "string"
         },
+        "state": {
+          "description": "Activity state. This is an optional property and if not provided, the state will be Active by default.",
+          "type": "string",
+          "enum": [
+            "Active",
+            "Inactive"
+          ],
+          "x-ms-enum": {
+            "name": "ActivityState",
+            "modelAsString": true
+          }
+        },
+        "onInactiveMarkAs": {
+          "description": "Status result of the activity when the state is set to Inactive. This is an optional property and if not provided when the activity is inactive, the status will be Succeeded by default.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Skipped"
+          ],
+          "x-ms-enum": {
+            "name": "ActivityOnInactiveMarkAs",
+            "modelAsString": true
+          }
+        },
         "dependsOn": {
           "type": "array",
           "description": "Activity depends on condition.",
@@ -266,8 +291,8 @@
           "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
         },
         "enablePartitionDiscovery": {
-          "type": "boolean",
-          "description": "Indicates whether to enable partition discovery."
+          "type": "object",
+          "description": "Indicates whether to enable partition discovery. Type: boolean (or Expression with resultType boolean)."
         },
         "partitionRootPath": {
           "type": "object",
@@ -419,8 +444,8 @@
           "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
         },
         "enablePartitionDiscovery": {
-          "type": "boolean",
-          "description": "Indicates whether to enable partition discovery."
+          "type": "object",
+          "description": "Indicates whether to enable partition discovery. Type: boolean (or Expression with resultType boolean)."
         },
         "partitionRootPath": {
           "type": "object",
@@ -466,8 +491,8 @@
           "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
         },
         "enablePartitionDiscovery": {
-          "type": "boolean",
-          "description": "Indicates whether to enable partition discovery."
+          "type": "object",
+          "description": "Indicates whether to enable partition discovery. Type: boolean (or Expression with resultType boolean)."
         },
         "partitionRootPath": {
           "type": "object",
@@ -521,8 +546,8 @@
           "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
         },
         "enablePartitionDiscovery": {
-          "type": "boolean",
-          "description": "Indicates whether to enable partition discovery."
+          "type": "object",
+          "description": "Indicates whether to enable partition discovery. Type: boolean (or Expression with resultType boolean)."
         },
         "partitionRootPath": {
           "type": "object",
@@ -591,8 +616,8 @@
           "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
         },
         "enablePartitionDiscovery": {
-          "type": "boolean",
-          "description": "Indicates whether to enable partition discovery."
+          "type": "object",
+          "description": "Indicates whether to enable partition discovery. Type: boolean (or Expression with resultType boolean)."
         },
         "partitionRootPath": {
           "type": "object",
@@ -634,8 +659,8 @@
           "description": "Ftp wildcardFileName. Type: string (or Expression with resultType string)."
         },
         "enablePartitionDiscovery": {
-          "type": "boolean",
-          "description": "Indicates whether to enable partition discovery."
+          "type": "object",
+          "description": "Indicates whether to enable partition discovery. Type: boolean (or Expression with resultType boolean)."
         },
         "partitionRootPath": {
           "type": "object",
@@ -650,8 +675,8 @@
           "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
         },
         "useBinaryTransfer": {
-          "type": "boolean",
-          "description": "Specify whether to use binary transfer mode for FTP stores."
+          "type": "object",
+          "description": "Specify whether to use binary transfer mode for FTP stores. Type: boolean (or Expression with resultType boolean)."
         },
         "disableChunking": {
           "type": "object",
@@ -681,8 +706,8 @@
           "description": "Sftp wildcardFileName. Type: string (or Expression with resultType string)."
         },
         "enablePartitionDiscovery": {
-          "type": "boolean",
-          "description": "Indicates whether to enable partition discovery."
+          "type": "object",
+          "description": "Indicates whether to enable partition discovery. Type: boolean (or Expression with resultType boolean)."
         },
         "partitionRootPath": {
           "type": "object",
@@ -711,7 +736,7 @@
       }
     },
     "HttpReadSettings": {
-      "description": "Sftp read settings.",
+      "description": "Http read settings.",
       "type": "object",
       "allOf": [
         {
@@ -736,12 +761,16 @@
           "description": "Specifies the timeout for a HTTP client to get HTTP response from HTTP server."
         },
         "enablePartitionDiscovery": {
-          "type": "boolean",
-          "description": "Indicates whether to enable partition discovery."
+          "type": "object",
+          "description": "Indicates whether to enable partition discovery. Type: boolean (or Expression with resultType boolean)."
         },
         "partitionRootPath": {
           "type": "object",
           "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
+        },
+        "additionalColumns": {
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
       }
     },
@@ -771,8 +800,8 @@
           "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
         },
         "enablePartitionDiscovery": {
-          "type": "boolean",
-          "description": "Indicates whether to enable partition discovery."
+          "type": "object",
+          "description": "Indicates whether to enable partition discovery. Type: boolean (or Expression with resultType boolean)."
         },
         "partitionRootPath": {
           "type": "object",
@@ -1900,16 +1929,8 @@
           "description": "Database query. Type: string (or Expression with resultType string)."
         },
         "readBehavior": {
-          "description": "The read behavior for the operation. Default is Query.",
-          "type": "string",
-          "enum": [
-            "Query",
-            "QueryAll"
-          ],
-          "x-ms-enum": {
-            "name": "SalesforceSourceReadBehavior",
-            "modelAsString": true
-          }
+          "description": "The read behavior for the operation. Default is Query. Allowed values: Query/QueryAll. Type: string (or Expression with resultType string).",
+          "type": "object"
         }
       }
     },
@@ -1927,21 +1948,25 @@
           "description": "Database query. Type: string (or Expression with resultType string)."
         },
         "readBehavior": {
-          "description": "The read behavior for the operation. Default is Query.",
-          "type": "string",
-          "enum": [
-            "Query",
-            "QueryAll"
-          ],
-          "x-ms-enum": {
-            "name": "SalesforceSourceReadBehavior",
-            "modelAsString": true
-          }
+          "description": "The read behavior for the operation. Default is Query. Allowed values: Query/QueryAll. Type: string (or Expression with resultType string).",
+          "type": "object"
         },
         "additionalColumns": {
           "type": "object",
           "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
+      }
+    },
+    "SalesforceSourceReadBehavior": {
+      "description": "The Salesforce read behavior for the operation",
+      "type": "string",
+      "enum": [
+        "Query",
+        "QueryAll"
+      ],
+      "x-ms-enum": {
+        "name": "SalesforceSourceReadBehavior",
+        "modelAsString": true
       }
     },
     "SapCloudForCustomerSource": {
@@ -2000,17 +2025,8 @@
           "description": "The packet size of data read from SAP HANA. Type: integer(or Expression with resultType integer)."
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for SAP HANA read in parallel.",
-          "type": "string",
-          "enum": [
-            "None",
-            "PhysicalPartitionsOfTable",
-            "SapHanaDynamicRange"
-          ],
-          "x-ms-enum": {
-            "name": "SapHanaPartitionOption",
-            "modelAsString": true
-          }
+          "description": "The partition mechanism that will be used for SAP HANA read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"SapHanaDynamicRange\". ",
+          "type": "object"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for SAP HANA source partitioning.",
@@ -2120,20 +2136,8 @@
           "description": "The single character that will be used as delimiter passed to SAP RFC as well as splitting the output data retrieved. Type: string (or Expression with resultType string)."
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for SAP table read in parallel.",
-          "type": "string",
-          "enum": [
-            "None",
-            "PartitionOnInt",
-            "PartitionOnCalendarYear",
-            "PartitionOnCalendarMonth",
-            "PartitionOnCalendarDate",
-            "PartitionOnTime"
-          ],
-          "x-ms-enum": {
-            "name": "SapTablePartitionOption",
-            "modelAsString": true
-          }
+          "description": "The partition mechanism that will be used for SAP table read in parallel. Possible values include: \"None\", \"PartitionOnInt\", \"PartitionOnCalendarYear\", \"PartitionOnCalendarMonth\", \"PartitionOnCalendarDate\", \"PartitionOnTime\".",
+          "type": "object"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for SAP table source partitioning.",
@@ -2295,6 +2299,10 @@
             "$ref": "#/definitions/StoredProcedureParameter"
           }
         },
+        "isolationLevel": {
+          "description": "Specifies the transaction locking behavior for the SQL source. Allowed values: ReadCommitted/ReadUncommitted/RepeatableRead/Serializable/Snapshot. The default value is ReadCommitted. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
         "produceAdditionalTypes": {
           "description": "Which additional types to produce.",
           "type": "object"
@@ -2332,6 +2340,10 @@
           "additionalProperties": {
             "$ref": "#/definitions/StoredProcedureParameter"
           }
+        },
+        "isolationLevel": {
+          "description": "Specifies the transaction locking behavior for the SQL source. Allowed values: ReadCommitted/ReadUncommitted/RepeatableRead/Serializable/Snapshot. The default value is ReadCommitted. Type: string (or Expression with resultType string).",
+          "type": "object"
         },
         "produceAdditionalTypes": {
           "description": "Which additional types to produce.",
@@ -2371,6 +2383,10 @@
             "$ref": "#/definitions/StoredProcedureParameter"
           }
         },
+        "isolationLevel": {
+          "description": "Specifies the transaction locking behavior for the SQL source. Allowed values: ReadCommitted/ReadUncommitted/RepeatableRead/Serializable/Snapshot. The default value is ReadCommitted. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
         "produceAdditionalTypes": {
           "description": "Which additional types to produce.",
           "type": "object"
@@ -2409,6 +2425,10 @@
             "$ref": "#/definitions/StoredProcedureParameter"
           }
         },
+        "isolationLevel": {
+          "description": "Specifies the transaction locking behavior for the SQL source. Allowed values: ReadCommitted/ReadUncommitted/RepeatableRead/Serializable/Snapshot. The default value is ReadCommitted. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
         "produceAdditionalTypes": {
           "description": "Which additional types to produce.",
           "type": "object"
@@ -2443,6 +2463,10 @@
         "storedProcedureParameters": {
           "type": "object",
           "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\". Type: object (or Expression with resultType object), itemType: StoredProcedureParameter."
+        },
+        "isolationLevel": {
+          "description": "Specifies the transaction locking behavior for the SQL source. Allowed values: ReadCommitted/ReadUncommitted/RepeatableRead/Serializable/Snapshot. The default value is ReadCommitted. Type: string (or Expression with resultType string).",
+          "type": "object"
         },
         "partitionOption": {
           "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
@@ -2980,7 +3004,17 @@
         },
         "outputColumns": {
           "type": "object",
-          "description": "The columns to be read out from the Office 365 table. Type: array of objects (or Expression with resultType array of objects). Example: [ { \"name\": \"Id\" }, { \"name\": \"CreatedDateTime\" } ]"
+          "description": "The columns to be read out from the Office 365 table. Type: array of objects (or Expression with resultType array of objects). itemType: OutputColumn.  Example: [ { \"name\": \"Id\" }, { \"name\": \"CreatedDateTime\" } ]"
+        }
+      }
+    },
+    "OutputColumn": {
+      "description": "The columns to be read out from the Office 365 table.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the table column. Type: string."
         }
       }
     },
@@ -6007,16 +6041,24 @@
           "$ref": "../artifacts.json#/definitions/SecretBase"
         },
         "username": {
-          "description": "Web activity authentication user name for basic authentication.",
-          "type": "string"
+          "description": "Web activity authentication user name for basic authentication. Type: string (or Expression with resultType string).",
+          "type": "object"
         },
         "password": {
           "description": "Password for the PFX file or basic authentication.",
           "$ref": "../artifacts.json#/definitions/SecretBase"
         },
         "resource": {
-          "description": "Resource for which Azure Auth token will be requested when using MSI Authentication.",
-          "type": "string"
+          "description": "Resource for which Azure Auth token will be requested when using MSI Authentication. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "userTenant": {
+          "description": "TenantId for which Azure Auth token will be requested when using ServicePrincipal Authentication. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "credential": {
+          "$ref": "../artifacts.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       },
       "required": [
@@ -6883,6 +6925,10 @@
           "description": "Set Variable activity properties.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SetVariableActivityTypeProperties"
+        },
+        "policy": {
+          "$ref": "#/definitions/SecureInputOutputPolicy",
+          "description": "Activity policy."
         }
       },
       "required": [
@@ -6898,8 +6944,26 @@
           "type": "string"
         },
         "value": {
-          "description": "Value to be set. Could be a static value or Expression",
+          "description": "Value to be set. Could be a static value or Expression.",
           "type": "object"
+        },
+        "setSystemVariable": {
+          "description": "If set to true, it sets the pipeline run return value.",
+          "type": "boolean"
+        }
+      }
+    },
+    "SecureInputOutputPolicy": {
+      "description": "Execution policy for an activity that supports secure input and output.",
+      "type": "object",
+      "properties": {
+        "secureInput": {
+          "type": "boolean",
+          "description": "When set to true, Input from activity is considered as secure and will not be logged to monitoring."
+        },
+        "secureOutput": {
+          "type": "boolean",
+          "description": "When set to true, Output from activity is considered as secure and will not be logged to monitoring."
         }
       }
     },
@@ -7174,6 +7238,10 @@
       "description": "Script activity properties.",
       "type": "object",
       "properties": {
+        "scriptBlockExecutionTimeout": {
+          "type": "object",
+          "description": "ScriptBlock execution timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
         "scripts": {
           "type": "array",
           "description": "Array of script blocks. Type: array.",
@@ -7447,9 +7515,34 @@
           "description": "Number of core and memory to be used for driver allocated in the specified Spark pool for the session, which will be used for overriding 'driverCores' and 'driverMemory' of the notebook you provide. Type: string (or Expression with resultType string)."
         },
         "numExecutors": {
-          "description": "Number of executors to launch for this session, which will override the 'numExecutors' of the notebook you provide.",
-          "type": "integer",
-          "format": "int32"
+          "type": "object",
+          "description": "Number of executors to launch for this session, which will override the 'numExecutors' of the notebook you provide. Type: integer (or Expression with resultType integer)."
+        },
+        "configurationType": {
+          "enum": [
+            "Default",
+            "Customized",
+            "Artifact"
+          ],
+          "type": "string",
+          "description": "The type of the spark config.",
+          "x-ms-enum": {
+            "name": "ConfigurationType",
+            "modelAsString": true
+          }
+        },
+        "targetSparkConfiguration": {
+          "description": "The spark configuration of the spark job.",
+          "$ref": "#/definitions/SparkConfigurationParametrizationReference"
+        },
+        "sparkConfig": {
+          "description": "Spark configuration property.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "x-ms-format": "dfe-string",
+            "description": "Type: string (or Expression with resultType string)."
+          }
         }
       },
       "required": [

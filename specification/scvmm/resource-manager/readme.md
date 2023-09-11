@@ -27,7 +27,7 @@ These are the global settings for the scvmm.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2020-06-05-preview
+tag: package-2022-05-21-preview
 ```
 
 ### Tag: package-2020-06-05-preview
@@ -37,6 +37,15 @@ These settings apply only when `--tag=package-2020-06-05-preview` is specified o
 ```yaml $(tag) == 'package-2020-06-05-preview'
 input-file:
   - Microsoft.ScVmm/preview/2020-06-05-preview/scvmm.json
+```
+
+### Tag: package-2022-05-21-preview
+
+These settings apply only when `--tag=package-2022-05-21-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-05-21-preview'
+input-file:
+  - Microsoft.ScVmm/preview/2022-05-21-preview/scvmm.json
 ```
 
 ---
@@ -55,7 +64,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_scvmm']
   - repo: azure-resource-manager-schemas
@@ -70,10 +78,6 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
-
-## Ruby
-
-See configuration in [readme.ruby.md](./readme.ruby.md)
 
 ## TypeScript
 

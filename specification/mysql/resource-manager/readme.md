@@ -28,11 +28,11 @@ These are the global settings for the MySql API.
 title: MySQLManagementClient
 description: The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MySQL resources including servers, databases, firewall rules, VNET rules, log files and configurations with new business model.
 openapi-type: arm
-tag: package-2020-01-01
+tag: package-flexibleserver-2023-06-30-privatelink
 ```
 
 ``` yaml $(package-flexibleservers)
-tag: package-flexibleserver-2022-01-01
+tag: package-flexibleserver-2023-06-30-privatelink
 ```
 
 ``` yaml $(package-singleservers)
@@ -160,6 +160,24 @@ input-file:
 - Microsoft.DBforMySQL/AAD/preview/2021-12-01-preview/AzureADAdministrator.json
 ```
 
+### Tag: package-flexibleserver-2022-09-30-preview
+
+These settings apply only when `--tag=package-flexibleserver-2022-09-30-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2022-09-30-preview'
+input-file:
+- Microsoft.DBforMySQL/AAD/preview/2021-12-01-preview/AzureADAdministrator.json
+- Microsoft.DBforMySQL/Backups/preview/2022-09-30-preview/Backups.json
+- Microsoft.DBforMySQL/Backups/preview/2022-09-30-preview/BackupAndExport.json
+- Microsoft.DBforMySQL/Configurations/preview/2021-12-01-preview/Configurations.json
+- Microsoft.DBforMySQL/Databases/preview/2021-12-01-preview/Databases.json
+- Microsoft.DBforMySQL/Firewall/preview/2021-12-01-preview/FirewallRules.json
+- Microsoft.DBforMySQL/FlexibleServers/preview/2022-09-30-preview/FlexibleServers.json
+- Microsoft.DBforMySQL/LogFiles/preview/2021-12-01-preview/LogFiles.json
+- Microsoft.DBforMySQL/ServiceOperations/preview/2021-12-01-preview/ServiceOperations.json
+- Microsoft.DBforMySQL/common-types/v1/common-types.json
+```
+
 ### Tag: package-flexibleserver-2022-01-01
 
 These settings apply only when `--tag=package-flexibleserver-2022-01-01` is specified on the command line.
@@ -174,6 +192,35 @@ input-file:
 - Microsoft.DBforMySQL/LogFiles/stable/2022-01-01/LogFiles.json
 - Microsoft.DBforMySQL/ServiceOperations/stable/2022-01-01/ServiceOperations.json
 - Microsoft.DBforMySQL/AAD/stable/2022-01-01/AzureADAdministrator.json
+```
+
+### Tag: package-flexibleserver-2022-09-30-preview-privatelink
+
+These settings apply only when `--tag=package-flexibleserver-2022-09-30-preview-privatelink` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2022-09-30-preview-privatelink'
+input-file:
+- Microsoft.DBforMySQL/Backups/preview/2021-12-01-preview/Backups.json
+- Microsoft.DBforMySQL/Configurations/preview/2021-12-01-preview/Configurations.json
+- Microsoft.DBforMySQL/Databases/preview/2021-12-01-preview/Databases.json
+- Microsoft.DBforMySQL/Firewall/preview/2021-12-01-preview/FirewallRules.json
+- Microsoft.DBforMySQL/FlexibleServers/preview/2021-12-01-preview/FlexibleServers.json
+- Microsoft.DBforMySQL/LogFiles/preview/2021-12-01-preview/LogFiles.json
+- Microsoft.DBforMySQL/ServiceOperations/preview/2022-09-30-preview/ServiceOperations.json
+- Microsoft.DBforMySQL/AAD/preview/2021-12-01-preview/AzureADAdministrator.json
+- Microsoft.DBforMySQL/PrivateLink/preview/2022-09-30-preview/PrivateEndpointConnections.json
+- Microsoft.DBforMySQL/PrivateLink/preview/2022-09-30-preview/PrivateLinkResources.json
+```
+
+### Tag: package-flexibleserver-2023-06-30-privatelink
+
+These settings apply only when `--tag=package-flexibleserver-2023-06-30-privatelink` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2023-06-30-privatelink'
+input-file:
+- Microsoft.DBforMySQL/common-types/v1/common-types.json
+- Microsoft.DBforMySQL/PrivateLink/stable/2023-06-30/PrivateEndpointConnections.json
+- Microsoft.DBforMySQL/PrivateLink/stable/2023-06-30/PrivateLinkResources.json
 ```
 
 ## Suppression

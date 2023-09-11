@@ -7,6 +7,14 @@
       - kristapratico
       
 - rule:
+    # OpenAI data-plane PR
+    paths:
+      - "specification/cognitiveservices/data-plane/AzureOpenAI/**"
+      - "specification/cognitiveservices/OpenAI.Inference/**"
+    reviewers:
+      - lmazuel
+
+- rule:
     # Cognitive Services - Language pillar data-plane PR
     paths:
       - "specification/cognitiveservices/data-plane/Language/**"
@@ -32,7 +40,7 @@
     paths:
       - "specification/eventgrid/data-plane/**"
     reviewers:
-      - lmazuel
+      - JoshLove-msft
       
 - rule:
     # storage data-plane PR
@@ -66,26 +74,13 @@
       - tjprescott
 
 - rule:
+    # resource management plane typespec PR's
     paths:
-      - "specification/**/*Management/**/*.cadl"
-      - "specification/**/*Management.Shared/**/*.cadl"
-      - "specification/**/resource-management/**/*.cadl"
-      - "specification/**/*Management/**/*.tsp"
-      - "specification/**/*Management.Shared/**/*.tsp"
-      - "specification/**/resource-management/**/*.tsp"
+      - "specification/**/*Management/**"
+      - "specification/**/*Management.Shared/**"
     reviewers:
-      - raych1
-      - lirenhe
-      - weidongxu-microsoft
-      - ArcturusZhang
-      - chunyu3
-      - msyyc
-      - live1206
-      - tadelesh
-      - haolingdong-msft
-      - XiaofeiCao
-      - MaryGao
-
+      - rkmanda
+      
 - rule:
     paths:
         - "specification/**/*.cadl"
@@ -95,107 +90,27 @@
         - jhendrixMSFT
         - tjprescott
         
-
 - rule:
     paths:
       - "specification/network/**"
     reviewers:
-      - lirenhe
-      - raych1
+      - rkmanda
     branches:
-      - network-
-
-
-- rule:
-    paths: "specification/common-types/**"
-    reviewers:
-      - raych1
-      - weidongxu-microsoft
-      - lirenhe
-   
-      
-- rule:
-    paths: "specification/providerhub/**"
-    reviewers:
-      - raych1
+      - release-network-Microsoft.Network-official
 
 - rule:
     paths: "specification/sql/**"
     reviewers:
-      - raych1
+      - rkmanda
     branches:
       - dev-sql-
 
 - rule:
     paths: "specification/@(financialdataservices|standbypool)/**"
     reviewers:
-      - live1206
+      - rkmanda
     branches:
       - RPSaaSDev
-
-- rule:
-    paths: "specification/compute/**"
-    reviewers:
-      - ArcturusZhang
-
-- rule:
-    paths:
-      - "specification/machinelearningservices/**"
-    reviewers:
-      - ArcturusZhang
-
-- rule:
-    paths:
-      - "specification/monitor/**"
-    reviewers:
-      - ArcturusZhang
-
-- rule:
-    paths:
-      - "specification/@(azurestackhci|security)/**"
-    reviewers:
-      - chunyu3
-
-- rule:
-    paths:
-      - "specification/@(web|app)/**"
-    reviewers:
-      - weidongxu-microsoft
-
-- rule:
-    paths: "specification/@(synapse|azurearcdata)/**"
-    reviewers:
-      - msyyc
-
-- rule:
-    paths: "specification/@(workloads|apimanagement)/**"
-    reviewers:
-      - live1206
-
-- rule:
-    paths: "specification/@(securityinsights|impact)/**"
-    reviewers:
-      - tadelesh
-
-- rule:
-    paths: "specification/@(appcomplianceautomation|hybridnetwork)/**"
-    reviewers:
-      - haolingdong-msft
-
-#- rule:
- #   paths: "specification/@(cost-management|hybridconnectivity)/**"
- #   reviewers:
- #     - archerzz
-
-- rule:
-    paths: "specification/@(billing|resources)/**"
-    reviewers:
-      - XiaofeiCao
-
-- rule:
-    paths: "specification/@(testbase|appplatform)/**"
-    reviewers:
-      - MaryGao
 
 - rule:
     paths:
@@ -203,7 +118,6 @@
     reviewers:
       - josefree
       - weshaggard
-
 
 - rule:
     paths:
@@ -214,19 +128,18 @@
     reviewers:
       - weshaggard
       - konrad-jamrozik
-
+      
 - rule:
-    # manager-plane PR
+    # resource management plane swagger PR's
+    paths:
+      - "specification/**/resource-manager/**"
+      - "specification/common-types/resource-management/**"
+    reviewers:
+      - rkmanda
+      
+- rule:
+    # temporary catchall
     paths:
       - "**"
     reviewers:
-      - lirenhe
-      - weidongxu-microsoft
-      - ArcturusZhang
-      - chunyu3
-      - msyyc
-      - live1206
-      - tadelesh
-      - haolingdong-msft
-      - XiaofeiCao
-      - MaryGao
+      - weshaggard

@@ -57,7 +57,7 @@
             "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
           },
           {
             "$ref": "#/parameters/AdministratorNameParameter"
@@ -96,7 +96,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -124,7 +124,7 @@
             "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
           },
           {
             "$ref": "#/parameters/AdministratorNameParameter"
@@ -148,7 +148,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -179,7 +179,7 @@
             "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
           },
           {
             "$ref": "#/parameters/AdministratorNameParameter"
@@ -195,7 +195,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -224,7 +224,7 @@
             "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
           }
         ],
         "responses": {
@@ -237,7 +237,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -318,18 +318,20 @@
         }
       },
       "description": "A List of azure ad administrators."
+    },
+    "CloudError": {
+      "type": "object",
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
+          "description": "The resource management error response."
+        }
+      },
+      "description": "An error response from the Batch service."
     }
   },
   "parameters": {
-    "ServerNameParameter": {
-      "name": "serverName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the server.",
-      "x-ms-parameter-location": "method",
-      "pattern": "^[a-z0-9][-a-z0-9]*(?<!-)$"
-    },
     "AdministratorNameParameter": {
       "name": "administratorName",
       "in": "path",
