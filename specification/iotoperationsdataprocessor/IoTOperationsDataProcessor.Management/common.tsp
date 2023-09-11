@@ -19,7 +19,7 @@ model ExtendedLocation {
   name: string;
 
   @doc("The type of the extended location.")
-  type?: string;
+  type: string;
 }
 
 @lroStatus
