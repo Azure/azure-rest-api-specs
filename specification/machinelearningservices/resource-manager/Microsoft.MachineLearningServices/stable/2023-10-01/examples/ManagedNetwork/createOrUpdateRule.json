@@ -3,12 +3,12 @@
     "subscriptionId": "00000000-1111-2222-3333-444444444444",
     "resourceGroupName": "test-rg",
     "workspaceName": "aml-workspace-name",
-    "ruleName": "some_string",
+    "ruleName": "rule-name",
     "api-version": "2023-10-01",
     "body": {
       "properties": {
         "type": "FQDN",
-        "destination": "some_string",
+        "destination": "destination_endpoint",
         "status": "Active",
         "category": "UserDefined"
       }
@@ -23,12 +23,12 @@
     "200": {
       "headers": {},
       "body": {
-        "id": "some_string",
-        "name": "some_string",
-        "type": "some_string",
+        "id": "fqdn_rule_id",
+        "name": "rule-name",
+        "type": "workspace/outboundRules",
         "properties": {
           "type": "FQDN",
-          "destination": "some_string",
+          "destination": "destination_endpoint",
           "status": "Active",
           "category": "UserDefined"
         }
