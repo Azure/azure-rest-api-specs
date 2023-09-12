@@ -19,7 +19,7 @@ model Target is TrackedResource<TargetProperties> {
   @doc("Name of target.")
   @key
   @segment("targets")
-  @pattern("^[a-z0-9][a-z0-9-]{1,62}[a-z0-9]$")
+  @pattern("^[a-z0-9][a-z0-9-]{1,60}[a-z0-9]$")
   @path
   name: string;
 

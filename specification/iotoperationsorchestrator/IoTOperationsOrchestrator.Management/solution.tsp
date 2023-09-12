@@ -19,7 +19,7 @@ model Solution is TrackedResource<SolutionProperties> {
   @doc("Name of solution.")
   @key
   @segment("solutions")
-  @pattern("^[a-z0-9][a-z0-9-]{1,62}[a-z0-9]$")
+  @pattern("^[a-z0-9][a-z0-9-]{1,60}[a-z0-9]$")
   @path
   name: string;
 
