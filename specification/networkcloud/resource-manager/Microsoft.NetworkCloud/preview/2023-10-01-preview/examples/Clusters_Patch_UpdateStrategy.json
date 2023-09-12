@@ -10,7 +10,13 @@
         "key2": "myvalue2"
       },
       "properties": {
-        "clusterLocation": "Foo Street, 3rd Floor, row 9"
+        "updateStrategy": {
+          "strategy": "Rack",
+          "waitTimeMinutes": 10,
+          "thresholdType": "CountSuccess",
+          "thresholdValue": 4,
+          "maxUnavailable": 4
+        }
       }
     }
   },

@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2023-07-01",
+    "api-version": "2023-10-01-preview",
     "subscriptionId": "123e4567-e89b-12d3-a456-426655440000"
   },
   "responses": {
@@ -133,6 +133,20 @@
                 "type": "PercentSuccess",
                 "grouping": "PerCluster",
                 "value": 90
+              },
+              "secretArchive": {
+                "enabled": "True",
+                "keyVaultId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.KeyVault/vaults/keyVaultName"
+              },
+              "updateStrategy": {
+                "strategy": "Rack",
+                "waitTimeMinutes": 10,
+                "thresholdType": "CountSuccess",
+                "thresholdValue": 4,
+                "maxUnavailable": 4
+              },
+              "runtimeProtectionConfiguration": {
+                "enforcementLevel": "OnDemand"
               },
               "provisioningState": "Succeeded",
               "clusterExtendedLocation": {

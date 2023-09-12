@@ -12,7 +12,7 @@
   "info": {
     "description": "The Network Cloud APIs provide management of the on-premises clusters and their resources, such as, racks, bare metal hosts, virtual machines, workload networks and more.",
     "title": "NetworkCloud",
-    "version": "2023-07-01"
+    "version": "2023-10-01-preview"
   },
   "host": "management.azure.com",
   "paths": {
@@ -2132,6 +2132,15 @@
           },
           "Patch cluster location": {
             "$ref": "./examples/Clusters_Patch_Location.json"
+          },
+          "Patch runtime protection configuration": {
+            "$ref": "./examples/Clusters_Patch_RuntimeProtectionConfiguration.json"
+          },
+          "Patch secret archive": {
+            "$ref": "./examples/Clusters_Patch_SecretArchive.json"
+          },
+          "Patch update strategy": {
+            "$ref": "./examples/Clusters_Patch_UpdateStrategy.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -2684,8 +2693,8 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}/deploy": {
       "post": {
-        "description": "Deploy the cluster to the provided rack.",
-        "summary": "Deploy the cluster to the rack.",
+        "description": "Deploy the cluster using the rack configuration provided during creation.",
+        "summary": "Deploy the cluster.",
         "operationId": "Clusters_Deploy",
         "parameters": [
           {
@@ -3012,6 +3021,65 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}/scanRuntime": {
+      "post": {
+        "description": "Triggers the execution of a runtime protection scan to detect and remediate detected issues, in accordance with the cluster configuration.",
+        "summary": "Execute a runtime protection scan on the cluster.",
+        "operationId": "Clusters_ScanRuntime",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "ClusterScanRuntimeParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ClusterScanRuntimeParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Execute a runtime protection scan on the cluster": {
+            "$ref": "./examples/Clusters_ScanRuntime.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
+          "final-state-via": "location"
         }
       }
     },
@@ -7062,6 +7130,11 @@
           },
           "readOnly": true
         },
+        "runtimeProtectionStatus": {
+          "$ref": "#/definitions/RuntimeProtectionStatus",
+          "description": "The runtime protection status of the bare metal machine.",
+          "readOnly": true
+        },
         "serialNumber": {
           "description": "The serial number of the bare metal machine.",
           "type": "string",
@@ -8205,6 +8278,18 @@
           "x-ms-identifiers": [
             "networkRackId"
           ]
+        },
+        "runtimeProtectionConfiguration": {
+          "$ref": "#/definitions/RuntimeProtectionConfiguration",
+          "description": "The settings for cluster runtime protection."
+        },
+        "secretArchive": {
+          "$ref": "#/definitions/ClusterSecretArchive",
+          "description": "The configuration for use of a key vault to store secrets for later retrieval by the operator."
+        },
+        "updateStrategy": {
+          "$ref": "#/definitions/ClusterUpdateStrategy",
+          "description": "The strategy for updating the cluster."
         }
       }
     },
@@ -8251,6 +8336,7 @@
           "type": "string",
           "enum": [
             "Connected",
+            "Disconnected",
             "Timeout",
             "Undefined"
           ],
@@ -8394,10 +8480,22 @@
           },
           "readOnly": true
         },
+        "runtimeProtectionConfiguration": {
+          "$ref": "#/definitions/RuntimeProtectionConfiguration",
+          "description": "The settings for cluster runtime protection."
+        },
+        "secretArchive": {
+          "$ref": "#/definitions/ClusterSecretArchive",
+          "description": "The configuration for use of a key vault to store secrets for later retrieval by the operator."
+        },
         "supportExpiryDate": {
           "description": "The support end date of the runtime version of the cluster.",
           "type": "string",
           "readOnly": true
+        },
+        "updateStrategy": {
+          "$ref": "#/definitions/ClusterUpdateStrategy",
+          "description": "The strategy for updating the cluster."
         },
         "workloadResourceIds": {
           "description": "The list of workload resource IDs that are hosted within this cluster.",
@@ -8406,6 +8504,105 @@
             "type": "string"
           },
           "readOnly": true
+        }
+      }
+    },
+    "ClusterScanRuntimeParameters": {
+      "type": "object",
+      "title": "ClusterScanRuntimeParameters defines the parameters for the cluster scan runtime operation.",
+      "properties": {
+        "scanActivity": {
+          "description": "The choice of if the scan operation should run the scan.",
+          "type": "string",
+          "default": "Scan",
+          "enum": [
+            "Scan",
+            "Skip"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ClusterScanRuntimeParametersScanActivity"
+          }
+        }
+      }
+    },
+    "ClusterSecretArchive": {
+      "type": "object",
+      "title": "ClusterSecretArchive configures the key vault to archive the secrets of the cluster for later retrieval.",
+      "required": [
+        "keyVaultId"
+      ],
+      "properties": {
+        "enabled": {
+          "description": "The indicator if the specified key vault should be used to archive the secrets of the cluster.",
+          "type": "string",
+          "default": "False",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ClusterSecretArchiveEnabled"
+          }
+        },
+        "keyVaultId": {
+          "description": "The resource ID of the key vault to archive the secrets of the cluster.",
+          "type": "string"
+        }
+      }
+    },
+    "ClusterUpdateStrategy": {
+      "type": "object",
+      "title": "ClusterUpdateStrategy represents the strategy for updating the cluster.",
+      "required": [
+        "strategy",
+        "thresholdType",
+        "thresholdValue"
+      ],
+      "properties": {
+        "maxUnavailable": {
+          "description": "The maximum number of worker nodes that can be offline within the increment of update, e.g., rack-by-rack.\nLimited by the maximum number of machines in the increment. Defaults to the whole increment size.",
+          "type": "integer",
+          "format": "int64",
+          "minimum": 1
+        },
+        "strategy": {
+          "description": "The mode of operation for runtime protection.",
+          "type": "string",
+          "enum": [
+            "Rack"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ClusterUpdateStrategyType"
+          }
+        },
+        "thresholdType": {
+          "description": "Selection of how the threshold should be evaluated.",
+          "type": "string",
+          "enum": [
+            "CountSuccess",
+            "PercentSuccess"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ValidationThresholdType"
+          }
+        },
+        "thresholdValue": {
+          "description": "The numeric threshold value.",
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0
+        },
+        "waitTimeMinutes": {
+          "description": "The time to wait between the increments of update defined by the strategy.",
+          "type": "integer",
+          "format": "int64",
+          "default": 15,
+          "maximum": 60,
+          "minimum": 0
         }
       }
     },
@@ -8487,7 +8684,7 @@
       "title": "ConsolePatchProperties represents the properties of the virtual machine console that can be patched.",
       "properties": {
         "enabled": {
-          "description": "The credentials used to login to the image repository that has access to the specified image.",
+          "description": "The indicator of whether the console access is enabled.",
           "type": "string",
           "enum": [
             "True",
@@ -9038,7 +9235,8 @@
       "title": "KeySetUser represents the properties of the user in the key set.",
       "required": [
         "azureUserName",
-        "sshPublicKey"
+        "sshPublicKey",
+        "userPrincipalName"
       ],
       "properties": {
         "azureUserName": {
@@ -9053,6 +9251,10 @@
         "sshPublicKey": {
           "$ref": "#/definitions/SshPublicKey",
           "description": "The SSH public key that will be provisioned for user access. The user is expected to have the corresponding SSH private key for logging in."
+        },
+        "userPrincipalName": {
+          "description": "The user principal name (email format) used to validate this user's group membership.",
+          "type": "string"
         }
       }
     },
@@ -10748,6 +10950,63 @@
           "type": "string",
           "maxLength": 64,
           "minLength": 1
+        }
+      }
+    },
+    "RuntimeProtectionConfiguration": {
+      "type": "object",
+      "title": "RuntimeProtectionConfiguration represents the runtime protection configuration for the cluster.",
+      "properties": {
+        "enforcementLevel": {
+          "description": "The mode of operation for runtime protection.",
+          "type": "string",
+          "default": "Disabled",
+          "enum": [
+            "Audit",
+            "Disabled",
+            "OnDemand",
+            "Passive",
+            "RealTime"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "RuntimeProtectionEnforcementLevel"
+          }
+        }
+      }
+    },
+    "RuntimeProtectionStatus": {
+      "type": "object",
+      "title": "RuntimeProtectionStatus represents the runtime protection status of the bare metal machine.",
+      "properties": {
+        "definitionsLastUpdated": {
+          "description": "The timestamp when the malware definitions were last updated.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "definitionsVersion": {
+          "description": "The version of the malware definitions.",
+          "type": "string",
+          "readOnly": true
+        },
+        "scanCompletedTime": {
+          "description": "The timestamp of the most recently completed scan, or empty if there has never been a scan.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "scanScheduledTime": {
+          "description": "The timetamp of the most recently scheduled scan, or empty if no scan has been scheduled.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "scanStartedTime": {
+          "description": "The timestamp of the most recently started scan, or empty if there has never been a scan.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
         }
       }
     },

@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2023-07-01",
+    "api-version": "2023-10-01-preview",
     "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
     "resourceGroupName": "resourceGroupName",
     "clusterName": "clusterName",
@@ -190,6 +190,20 @@
             "grouping": "PerCluster",
             "value": 90
           },
+          "secretArchive": {
+            "enabled": "True",
+            "keyVaultId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.KeyVault/vaults/keyVaultName"
+          },
+          "updateStrategy": {
+            "strategy": "Rack",
+            "waitTimeMinutes": 10,
+            "thresholdType": "CountSuccess",
+            "thresholdValue": 4,
+            "maxUnavailable": 4
+          },
+          "runtimeProtectionConfiguration": {
+            "enforcementLevel": "OnDemand"
+          },
           "provisioningState": "Accepted",
           "clusterExtendedLocation": {
             "type": "CustomLocation",
@@ -356,6 +370,20 @@
             "grouping": "PerCluster",
             "value": 90
           },
+          "secretArchive": {
+            "enabled": "True",
+            "keyVaultId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.KeyVault/vaults/keyVaultName"
+          },
+          "updateStrategy": {
+            "strategy": "Rack",
+            "waitTimeMinutes": 10,
+            "thresholdType": "CountSuccess",
+            "thresholdValue": 4,
+            "maxUnavailable": 4
+          },
+          "runtimeProtectionConfiguration": {
+            "enforcementLevel": "OnDemand"
+          },
           "provisioningState": "Accepted",
           "clusterExtendedLocation": {
             "type": "CustomLocation",
@@ -394,7 +422,7 @@
         }
       },
       "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/locations/location/operationStatuses/operationId?api-version=2023-07-01"
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/locations/location/operationStatuses/operationId?api-version=2023-10-01-preview"
       }
     }
   }
