@@ -5,6 +5,7 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Autorest;
+using Azure.Core.Traits;
 
 namespace AzureCommunicationRoutingService;
 
@@ -17,10 +18,14 @@ interface JobRouterAdministrationOperations {
   @patch
   upsertClassificationPolicy is Azure.Core.Foundations.Operation<
     {
+      @doc("content type")
+      @header("content-type")
+      contentType: "application/merge-patch+json";
+
       @doc("Id of the classification policy.")
       @path
       id: string;
-
+      
       @doc("""
 Model of classification policy properties to be patched. See also:
 https://datatracker.ietf.org/doc/html/rfc7386.
@@ -84,6 +89,10 @@ https://datatracker.ietf.org/doc/html/rfc7386.
   @patch
   upsertDistributionPolicy is Azure.Core.Foundations.Operation<
     {
+      @doc("content type")
+      @header("content-type")
+      contentType: "application/merge-patch+json";
+
       @doc("Id of the distribution policy.")
       @path
       id: string;
@@ -151,6 +160,10 @@ https://datatracker.ietf.org/doc/html/rfc7386.
   @patch
   upsertExceptionPolicy is Azure.Core.Foundations.Operation<
     {
+      @doc("content type")
+      @header("content-type")
+      contentType: "application/merge-patch+json";
+
       @doc("Id of the exception policy.")
       @path
       id: string;
@@ -218,6 +231,10 @@ https://datatracker.ietf.org/doc/html/rfc7386
   @patch
   upsertQueue is Azure.Core.Foundations.Operation<
     {
+      @doc("content type")
+      @header("content-type")
+      contentType: "application/merge-patch+json";
+
       @doc("Id of the queue.")
       @path
       id: string;
@@ -287,6 +304,10 @@ interface JobRouterOperations {
   @patch
   upsertJob is Azure.Core.Foundations.Operation<
     {
+      @doc("content type")
+      @header("content-type")
+      contentType: "application/merge-patch+json";
+
       @doc("Id of the job.")
       @path
       id: string;
@@ -558,6 +579,10 @@ accepted the job already.
   @patch
   upsertWorker is Azure.Core.Foundations.Operation<
     {
+      @doc("content type")
+      @header("content-type")
+      contentType: "application/merge-patch+json";
+      
       @doc("Id of the worker.")
       @path
       workerId: string;
