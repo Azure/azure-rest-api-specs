@@ -1,0 +1,1373 @@
+import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-autorest";
+import "@azure-tools/typespec-azure-core";
+
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.Core;
+using Azure.Core.Traits;
+
+@versioned(AzureCommunicationRoutingService.Versions)
+namespace AzureCommunicationRoutingService;
+
+@doc("The status of the Job.")
+enum RouterJobStatus {
+  @doc("Job is waiting to be classified.")
+  pendingClassification,
+  
+  @doc("Job has been queued.")
+  queued,
+  
+  @doc("Job has been assigned to a worker.")
+  assigned,
+  
+  @doc("Job has been completed by a worker.")
+  completed,
+  
+  @doc("Job has been closed by a worker.")
+  closed,
+  
+  @doc("Job has been cancelled.")
+  cancelled,
+  
+  @doc("Classification process failed for the job.")
+  classificationFailed,
+  
+  @doc("Job has been created.")
+  created,
+  
+  @doc("Job has been created but not been scheduled yet.")
+  pendingSchedule,
+  
+  @doc("Job has been scheduled successfully.")
+  scheduled,
+  
+  @doc("Job scheduling failed.")
+  scheduleFailed,
+  
+  @doc("Job is in a suspended state and waiting for an update.")
+  waitingForActivation,
+}
+
+@doc("Describes supported operations on label values.")
+enum LabelOperator {
+  @doc("Equal")
+  equal,
+  
+  @doc("Not Equal")
+  notEqual,
+  
+  @doc("Less than")
+  lessThan,
+  
+  @doc("Less than or equal")
+  lessThanEqual,
+  
+  @doc("Greater than")
+  greaterThan,
+  
+  @doc("Greater than or equal")
+  greaterThanEqual,
+}
+
+@doc("The status of the worker selector.")
+enum RouterWorkerSelectorStatus {
+  @doc("Active")
+  active,
+  
+  @doc("Expired")
+  expired,
+}
+
+@doc("Discriminator values for supported matching mode types.")
+enum JobMatchModeType {
+  @doc("Discriminator used when matching worker to a job is required to be done right after job is queued.")
+  queueAndMatchMode,
+  
+  @doc("Discriminator used for scheduling jobs to be queued at a future time.")
+  scheduleAndSuspendMode,
+  
+  @doc("Discriminator used when matching workers to a job needs to be suspended.")
+  suspendMode,
+}
+
+@doc("Enums used to filters jobs by state")
+enum RouterJobStatusSelector {
+  @doc("Default")
+  all,
+  
+  @doc("Job is waiting to be classified.")
+  pendingClassification,
+  
+  @doc("Job has been queued.")
+  queued,
+  
+  @doc("Job has been assigned to a worker.")
+  assigned,
+  
+  @doc("Job has been completed by a worker.")
+  completed,
+  
+  @doc("Job has been closed by a worker.")
+  closed,
+  
+  @doc("Job has been cancelled.")
+  cancelled,
+  
+  @doc("Classification process failed for the job.")
+  classificationFailed,
+  
+  @doc("Job has been created.")
+  created,
+  
+  @doc("Job has been created but not been scheduled yet.")
+  pendingSchedule,
+  
+  @doc("Job has been scheduled successfully.")
+  scheduled,
+  
+  @doc("Job scheduling failed.")
+  scheduleFailed,
+  
+  @doc("Job is in a suspended state and waiting for an update.")
+  waitingForActivation,
+  
+  @doc("Job is in a state of PendingClassification or Queued or Assigned or ClassificationFailed or Completed or PendingSchedule or Scheduled or ScheduleFailed or WaitingForActivation.")
+  active,
+}
+
+@doc("Enums for worker status")
+enum RouterWorkerState {
+  @doc("Worker is active and available to take offers.")
+  active,
+  
+  @doc("Worker is not active, if there are existing offers they are being revoked. No new offers are sent.")
+  draining,
+  
+  @doc("Worker is not active. No new offers are sent.")
+  inactive,
+}
+
+@doc("Enums used to filters workers by state")
+enum RouterWorkerStateSelector {
+  @doc("Worker is active and available to take offers.")
+  active,
+  
+  @doc("Worker is not active, if there are existing offers they are being revoked. No new offers are sent.")
+  draining,
+  
+  @doc("Worker is not active. No new offers are sent.")
+  inactive,
+  
+  @doc("Worker is active or draining or inactive.")
+  all,
+}
+
+@doc("Supported parameters for scoring workers")
+enum ScoringRuleParameterSelector {
+  @doc("Parameter to add job labels to scoring payload.  Property is sent as `job`.")
+  jobLabels,
+  
+  @doc("Parameter to add worker selectors from the job to scoring payload.  Property is sent as `selectors`.")
+  workerSelectors,
+}
+
+@doc("The available expression languages that can be configured")
+enum ExpressionRouterRuleLanguage {
+  @doc("PowerFx")
+  powerFx,
+}
+
+@doc("A container for the rules that govern how jobs are classified.")
+model ClassificationPolicy {
+  @doc("Unique identifier of this policy.")
+  @visibility("read")
+  id?: string;
+
+  @doc("Friendly name of this policy.")
+  name?: string;
+
+  @doc("The fallback queue to select if the queue selector doesn't find a match.")
+  fallbackQueueId?: string;
+
+  @doc("The queue selectors to resolve a queue for a given job.")
+  queueSelectors?: QueueSelectorAttachment[];
+
+  @doc("""
+A rule of one of the following types:
+            
+StaticRule:  A rule
+providing static rules that always return the same result, regardless of
+input.
+DirectMapRule:  A rule that return the same labels as the input
+labels.
+ExpressionRule: A rule providing inline expression
+rules.
+AzureFunctionRule: A rule providing a binding to an HTTP Triggered Azure
+Function.
+WebhookRule: A rule providing a binding to a webserver following
+OAuth2.0 authentication protocol.
+""")
+  prioritizationRule?: RouterRule;
+
+  @doc("The worker label selectors to attach to a given job.")
+  workerSelectors?: WorkerSelectorAttachment[];
+}
+
+@doc("""
+A rule of one of the following types:
+            
+StaticRule:  A rule
+providing static rules that always return the same result, regardless of
+input.
+DirectMapRule:  A rule that return the same labels as the input
+labels.
+ExpressionRule: A rule providing inline expression
+rules.
+AzureFunctionRule: A rule providing a binding to an HTTP Triggered Azure
+Function.
+WebhookRule: A rule providing a binding to a webserver following
+OAuth2.0 authentication protocol.
+""")
+@discriminator("kind")
+model RouterRule {}
+
+@doc("The Communication Services error.")
+@error
+model CommunicationErrorResponse {
+  @doc("The Communication Services error.")
+  error: CommunicationError;
+}
+
+@doc("The Communication Services error.")
+model CommunicationError {
+  @doc("The error code.")
+  code: string;
+
+  @doc("The error message.")
+  message: string;
+
+  @doc("The error target.")
+  @visibility("read")
+  target?: string;
+
+  @doc("Further details about specific errors that led to this error.")
+  @visibility("read")
+  details?: CommunicationError[];
+
+  @doc("The inner error if any.")
+  @visibility("read")
+  @projectedName("json", "innererror")
+  innerError?: CommunicationError;
+}
+
+@doc("A paged collection of classification policies.")
+model ClassificationPolicyCollection
+  is Azure.Core.Page<ClassificationPolicyItem>;
+
+@doc("Paged instance of ClassificationPolicy")
+model ClassificationPolicyItem {
+  @doc("A container for the rules that govern how jobs are classified.")
+  classificationPolicy?: ClassificationPolicy;
+
+  @doc("(Optional) The Concurrency Token.")
+  etag?: string;
+}
+
+@doc("Policy governing how jobs are distributed to workers")
+model DistributionPolicy {
+  @doc("The unique identifier of the policy.")
+  @visibility("read")
+  id?: string;
+
+  @doc("The human readable name of the policy.")
+  name?: string;
+
+  @doc("""
+The number of seconds after which any offers created under this policy will be
+expired.
+""")
+  offerExpiresAfterSeconds?: float32;
+
+  @doc("Abstract base class for defining a distribution mode")
+  mode?: DistributionMode;
+}
+
+@doc("Abstract base class for defining a distribution mode")
+@discriminator("kind")
+model DistributionMode {
+  @doc("Governs the minimum desired number of active concurrent offers a job can have.")
+  minConcurrentOffers?: int32;
+
+  @doc("Governs the maximum number of active concurrent offers a job can have.")
+  maxConcurrentOffers?: int32;
+
+  @doc("""
+(Optional)
+If set to true, then router will match workers to jobs even if they
+don't match label selectors.
+Warning: You may get workers that are not
+qualified for the job they are matched with if you set this
+variable to true.
+This flag is intended more for temporary usage.
+By default, set to false.
+""")
+  bypassSelectors?: boolean;
+}
+
+@doc("A paged collection of distribution policies.")
+model DistributionPolicyCollection is Azure.Core.Page<DistributionPolicyItem>;
+
+@doc("Paged instance of DistributionPolicy")
+model DistributionPolicyItem {
+  @doc("Policy governing how jobs are distributed to workers")
+  distributionPolicy?: DistributionPolicy;
+
+  @doc("(Optional) The Concurrency Token.")
+  etag?: string;
+}
+
+@doc("A policy that defines actions to execute when exception are triggered.")
+model ExceptionPolicy {
+  @doc("The Id of the exception policy")
+  @visibility("read")
+  id?: string;
+
+  @doc("(Optional) The name of the exception policy.")
+  name?: string;
+
+  @doc("""
+(Optional) A dictionary collection of exception rules on the exception policy.
+Key is the Id of each exception rule.
+""")
+  exceptionRules?: Record<ExceptionRule>;
+}
+
+@doc("A rule that defines actions to execute upon a specific trigger.")
+model ExceptionRule {
+  @doc("The trigger for this exception rule")
+  trigger: ExceptionTrigger;
+
+  @doc("""
+A dictionary collection of actions to perform once the exception is triggered.
+Key is the Id of each exception action.
+""")
+  actions: Record<ExceptionAction>;
+}
+
+@doc("The trigger for this exception rule")
+@discriminator("kind")
+model ExceptionTrigger {}
+
+@doc("A paged collection of exception policies.")
+model ExceptionPolicyCollection is Azure.Core.Page<ExceptionPolicyItem>;
+
+@doc("Paged instance of ExceptionPolicy")
+model ExceptionPolicyItem {
+  @doc("A policy that defines actions to execute when exception are triggered.")
+  exceptionPolicy?: ExceptionPolicy;
+
+  @doc("(Optional) The Concurrency Token.")
+  etag?: string;
+}
+
+@doc("A unit of work to be routed")
+model RouterJob {
+  @doc("The id of the job.")
+  @visibility("read")
+  id?: string;
+
+  @doc("Reference to an external parent context, eg. call ID.")
+  channelReference?: string;
+
+  @doc("The status of the Job.")
+  @visibility("read")
+  status?: RouterJobStatus;
+
+  @doc("The time a job was queued in UTC.")
+  @visibility("read")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  enqueuedAt?: utcDateTime;
+
+  @doc("The channel identifier. eg. voice, chat, etc.")
+  channelId?: string;
+
+  @doc("The Id of the Classification policy used for classifying a job.")
+  classificationPolicyId?: string;
+
+  @doc("The Id of the Queue that this job is queued to.")
+  queueId?: string;
+
+  @doc("The priority of this job.")
+  priority?: int32;
+
+  @doc("Reason code for cancelled or closed jobs.")
+  dispositionCode?: string;
+
+  @doc("""
+A collection of manually specified label selectors, which a worker must satisfy
+in order to process this job.
+""")
+  requestedWorkerSelectors?: RouterWorkerSelector[];
+
+  @doc("""
+A collection of label selectors attached by a classification policy, which a
+worker must satisfy in order to process this job.
+""")
+  @visibility("read")
+  attachedWorkerSelectors?: RouterWorkerSelector[];
+
+  @doc("""
+A set of key/value pairs that are identifying attributes used by the rules
+engines to make decisions.
+""")
+  labels?: Record<unknown>;
+
+  @doc("""
+A collection of the assignments of the job.
+Key is AssignmentId.
+""")
+  @visibility("read")
+  assignments?: Record<RouterJobAssignment>;
+
+  @doc("A set of non-identifying attributes attached to this job")
+  tags?: Record<unknown>;
+
+  @doc("Notes attached to a job, sorted by timestamp")
+  notes?: Record<string>;
+
+  @doc("If set, job will be scheduled to be enqueued at a given time")
+  @visibility("read")
+  scheduledAt?: utcDateTime;
+
+  @doc("""
+The matching mode to be applied to this job.
+            
+Supported types:
+    
+       
+QueueAndMatchMode: Used when matching worker to a job is required to be
+done right after job is queued.
+ScheduleAndSuspendMode: Used for scheduling
+jobs to be queued at a future time. At specified time, matching of a worker to
+the job will not start automatically.
+SuspendMode: Used when matching workers
+to a job needs to be suspended.
+""")
+  matchingMode?: JobMatchingMode;
+}
+
+@doc("""
+Describes a condition that must be met against a set of labels for worker
+selection
+""")
+model RouterWorkerSelector {
+  @doc("The label key to query against")
+  key: string;
+
+  @doc("""
+Describes how the value of the label is compared to the value defined on the
+label selector
+""")
+  labelOperator: LabelOperator;
+
+  @doc("The value to compare against the actual label value with the given operator")
+  value?: unknown;
+
+  @doc("Describes how long this label selector is valid in seconds.")
+  expiresAfterSeconds?: float32;
+
+  @doc("Pushes the job to the front of the queue as long as this selector is active.")
+  expedite?: boolean;
+
+  @doc("The status of the worker selector.")
+  @visibility("read")
+  status?: RouterWorkerSelectorStatus;
+
+  @doc("The time at which this worker selector expires in UTC")
+  @visibility("read")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  expiresAt?: utcDateTime;
+}
+
+@doc("Assignment details of a job to a worker")
+model RouterJobAssignment {
+  @doc("The Id of the job assignment.")
+  assignmentId: string;
+
+  @doc("The Id of the Worker assigned to the job.")
+  workerId?: string;
+
+  @doc("The assignment time of the job in UTC.")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  assignedAt: utcDateTime;
+
+  @doc("The time the job was marked as completed after being assigned in UTC.")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  completedAt?: utcDateTime;
+
+  @doc("The time the job was marked as closed after being completed in UTC.")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  closedAt?: utcDateTime;
+}
+
+@doc("""
+The matching mode to be applied to this job.
+            
+Supported types:
+    
+       
+QueueAndMatchMode: Used when matching worker to a job is required to be
+done right after job is queued.
+ScheduleAndSuspendMode: Used for scheduling
+jobs to be queued at a future time. At specified time, matching of a worker to
+the job will not start automatically.
+SuspendMode: Used when matching workers
+to a job needs to be suspended.
+""")
+model JobMatchingMode {
+  @doc("Discriminator value used to differentiate between supported matching mode types.")
+  modeType?: JobMatchModeType;
+
+  @doc("""
+Describes a matching mode where matching worker to a job is automatically
+started after job is queued successfully.
+""")
+  queueAndMatchMode?: {};
+
+  @doc("""
+Describes a matching mode used for scheduling jobs to be queued at a future
+time.
+At the specified time, matching worker to a job will not start
+automatically.
+""")
+  scheduleAndSuspendMode?: ScheduleAndSuspendMode;
+
+  @doc("Describes a matching mode where matching worker to a job is suspended.")
+  suspendMode?: {};
+}
+
+@doc("""
+Describes a matching mode used for scheduling jobs to be queued at a future
+time.
+At the specified time, matching worker to a job will not start
+automatically.
+""")
+model ScheduleAndSuspendMode {
+  @doc("Scheduled time.")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  scheduleAt?: utcDateTime;
+}
+
+@doc("Request payload for deleting a job")
+model CancelJobRequest {
+  @doc("""
+(Optional) A note that will be appended to the jobs' Notes collection with the
+current timestamp.
+""")
+  note?: string;
+
+  @doc("""
+Indicates the outcome of the job, populate this field with your own custom
+values.
+If not provided, default value of \"Cancelled\" is set.
+""")
+  dispositionCode?: string;
+}
+
+@doc("Request payload for completing jobs")
+model CompleteJobRequest {
+  @doc("The assignment within the job to complete.")
+  assignmentId: string;
+
+  @doc("""
+(Optional) A note that will be appended to the jobs' Notes collection with the
+current timestamp.
+""")
+  note?: string;
+}
+
+@doc("Request payload for closing jobs")
+model CloseJobRequest {
+  @doc("The assignment within which the job is to be closed.")
+  assignmentId: string;
+
+  @doc("""
+Indicates the outcome of the job, populate this field with your own custom
+values.
+""")
+  dispositionCode?: string;
+
+  @doc("""
+If not provided, worker capacity is released immediately along with a
+JobClosedEvent notification.
+If provided, worker capacity is released along
+with a JobClosedEvent notification at a future time in UTC.
+""")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  closeAt?: utcDateTime;
+
+  @doc("""
+(Optional) A note that will be appended to the jobs' Notes collection with the
+current timestamp.
+""")
+  note?: string;
+}
+
+@doc("A paged collection of jobs.")
+model RouterJobCollection is Azure.Core.Page<RouterJobItem>;
+
+@doc("Paged instance of RouterJob")
+model RouterJobItem {
+  @doc("A unit of work to be routed")
+  job?: RouterJob;
+
+  @doc("(Optional) The Concurrency Token.")
+  etag?: string;
+}
+
+@doc("Position and estimated wait time for a job.")
+model RouterJobPositionDetails {
+  @doc("Id of the job these details are about.")
+  jobId: string;
+
+  @doc("Position of the job in question within that queue.")
+  position: int32;
+
+  @doc("Id of the queue this job is enqueued in.")
+  queueId: string;
+
+  @doc("Length of the queue: total number of enqueued jobs.")
+  queueLength: int32;
+
+  @doc("Estimated wait time of the job rounded up to the nearest minute")
+  estimatedWaitTimeMinutes: float32;
+}
+
+@doc("Request payload for unassigning a job.")
+model UnassignJobRequest {
+  @doc("""
+If SuspendMatching is true, then the job is not queued for re-matching with a
+worker.
+""")
+  suspendMatching?: boolean;
+}
+
+@doc("Response payload after a job has been successfully unassigned.")
+model UnassignJobResult {
+  @doc("The Id of the job unassigned.")
+  jobId: string;
+
+  @doc("The number of times a job is unassigned. At a maximum 3.")
+  unassignmentCount: int32;
+}
+
+@doc("""
+Response containing Id's for the worker, job, and assignment from an accepted
+offer
+""")
+model AcceptJobOfferResult {
+  @doc("The assignment Id that assigns a worker that has accepted an offer to a job.")
+  assignmentId: string;
+
+  @doc("The Id of the job assigned.")
+  jobId: string;
+
+  @doc("The Id of the worker that has been assigned this job.")
+  workerId: string;
+}
+
+@doc("Request payload for declining offers")
+model DeclineJobOfferRequest {
+  @doc("""
+If the RetryOfferAt is not provided, then this job will not be offered again to
+the worker who declined this job unless
+the worker is de-registered and
+re-registered.  If a RetryOfferAt time is provided, then the job will be
+re-matched to
+eligible workers at the retry time in UTC.  The worker that
+declined the job will also be eligible for the job at that time.
+""")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  retryOfferAt?: utcDateTime;
+}
+
+@doc("A queue that can contain jobs to be routed.")
+model RouterQueue {
+  @doc("The Id of this queue")
+  @visibility("read")
+  id?: string;
+
+  @doc("The name of this queue.")
+  name?: string;
+
+  @doc("""
+The ID of the distribution policy that will determine how a job is distributed
+to workers.
+""")
+  distributionPolicyId?: string;
+
+  @doc("""
+A set of key/value pairs that are identifying attributes used by the rules
+engines to make decisions.
+""")
+  labels?: Record<unknown>;
+
+  @doc("""
+(Optional) The ID of the exception policy that determines various job
+escalation rules.
+""")
+  exceptionPolicyId?: string;
+}
+
+@doc("A paged collection of queues.")
+model RouterQueueCollection is Azure.Core.Page<RouterQueueItem>;
+
+@doc("Paged instance of RouterQueue")
+model RouterQueueItem {
+  @doc("A queue that can contain jobs to be routed.")
+  queue?: RouterQueue;
+
+  @doc("(Optional) The Concurrency Token.")
+  etag?: string;
+}
+
+@doc("Statistics for the queue")
+model RouterQueueStatistics {
+  @doc("Id of the queue these details are about.")
+  queueId: string;
+
+  @doc("Length of the queue: total number of enqueued jobs.")
+  length: int32;
+
+  @doc("""
+The estimated wait time of this queue rounded up to the nearest minute, grouped
+by job priority
+""")
+  estimatedWaitTimeMinutes?: Record<float32>;
+
+  @doc("The wait time of the job that has been enqueued in this queue for the longest.")
+  longestJobWaitTimeMinutes?: float32;
+}
+
+@doc("An entity for jobs to be routed to")
+model RouterWorker {
+  @doc("Id of the worker.")
+  @visibility("read")
+  id?: string;
+
+  @doc("The current state of the worker.")
+  @visibility("read")
+  state?: RouterWorkerState;
+
+  @doc("The queue(s) that this worker can receive work from.")
+  queueAssignments?: Record<unknown>;
+
+  @doc("The total capacity score this worker has to manage multiple concurrent jobs.")
+  totalCapacity?: int32;
+
+  @doc("""
+A set of key/value pairs that are identifying attributes used by the rules
+engines to make decisions.
+""")
+  labels?: Record<unknown>;
+
+  @doc("A set of non-identifying attributes attached to this worker.")
+  tags?: Record<unknown>;
+
+  @doc("The channel(s) this worker can handle and their impact on the workers capacity.")
+  channelConfigurations?: Record<ChannelConfiguration>;
+
+  @doc("A list of active offers issued to this worker.")
+  @visibility("read")
+  offers?: RouterJobOffer[];
+
+  @doc("A list of assigned jobs attached to this worker.")
+  @visibility("read")
+  assignedJobs?: RouterWorkerAssignment[];
+
+  @doc("""
+A value indicating the workers capacity. A value of '1' means all capacity is
+consumed. A value of '0' means no capacity is currently consumed.
+""")
+  @visibility("read")
+  loadRatio?: float32;
+
+  @doc("A flag indicating this worker is open to receive offers or not.")
+  availableForOffers?: boolean;
+}
+
+@doc("Represents the capacity a job in this channel will consume from a worker")
+model ChannelConfiguration {
+  @doc("""
+The amount of capacity that an instance of a job of this channel will consume
+of the total worker capacity.
+""")
+  capacityCostPerJob: int32;
+
+  @doc("The maximum number of jobs that can be supported concurrently for this channel.")
+  maxNumberOfJobs?: int32;
+}
+
+@doc("An offer of a job to a worker")
+model RouterJobOffer {
+  @doc("The Id of the offer.")
+  offerId: string;
+
+  @doc("The Id of the job.")
+  jobId: string;
+
+  @doc("The capacity cost consumed by the job offer.")
+  capacityCost: int32;
+
+  @doc("The time the offer was created in UTC.")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  offeredAt?: utcDateTime;
+
+  @doc("The time that the offer will expire in UTC.")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  expiresAt?: utcDateTime;
+}
+
+@doc("The assignment for a worker to a job")
+model RouterWorkerAssignment {
+  @doc("The Id of the assignment.")
+  assignmentId: string;
+
+  @doc("The Id of the Job assigned.")
+  jobId: string;
+
+  @doc("The amount of capacity this assignment has consumed on the worker.")
+  capacityCost: int32;
+
+  @doc("The assignment time of the job in UTC.")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  assignedAt: utcDateTime;
+}
+
+@doc("A paged collection of workers.")
+model RouterWorkerCollection is Azure.Core.Page<RouterWorkerItem>;
+
+@doc("Paged instance of RouterWorker")
+model RouterWorkerItem {
+  @doc("An entity for jobs to be routed to")
+  worker?: RouterWorker;
+
+  @doc("(Optional) The Concurrency Token.")
+  etag?: string;
+}
+
+@doc("Jobs are distributed to the worker with the strongest abilities available.")
+model BestWorkerMode extends DistributionMode {
+  @doc("""
+A rule of one of the following types:
+            
+StaticRule:  A rule
+providing static rules that always return the same result, regardless of
+input.
+DirectMapRule:  A rule that return the same labels as the input
+labels.
+ExpressionRule: A rule providing inline expression
+rules.
+AzureFunctionRule: A rule providing a binding to an HTTP Triggered Azure
+Function.
+WebhookRule: A rule providing a binding to a webserver following
+OAuth2.0 authentication protocol.
+""")
+  scoringRule?: RouterRule;
+
+  @doc("""
+Encapsulates all options that can be passed as parameters for scoring rule with
+BestWorkerMode
+""")
+  scoringRuleOptions?: ScoringRuleOptions;
+
+  @doc("The type discriminator describing a sub-type of Mode")
+  kind: "best-worker";
+}
+
+@doc("""
+Encapsulates all options that can be passed as parameters for scoring rule with
+BestWorkerMode
+""")
+model ScoringRuleOptions {
+  @doc("""
+(Optional) Set batch size when AllowScoringBatchOfWorkers is set to true.
+Defaults to 20 if not configured.
+""")
+  batchSize?: int32;
+
+  @doc("""
+(Optional) List of extra parameters from the job that will be sent as part of
+the payload to scoring rule.
+If not set, the job's labels (sent in the payload
+as `job`) and the job's worker selectors (sent in the payload as
+`selectors`)
+are added to the payload of the scoring rule by default.
+Note:
+Worker labels are always sent with scoring payload.
+""")
+  scoringParameters?: ScoringRuleParameterSelector[];
+
+  @doc("""
+(Optional)
+If set to true, will score workers in batches, and the parameter
+name of the worker labels will be sent as `workers`.
+By default, set to false
+and the parameter name for the worker labels will be sent as `worker`.
+Note: If
+enabled, use BatchSize to set batch size.
+""")
+  allowScoringBatchOfWorkers?: boolean;
+
+  @doc("""
+(Optional)
+If false, will sort scores by ascending order. By default, set to
+true.
+""")
+  descendingOrder?: boolean;
+}
+
+@doc("An action that marks a job as cancelled")
+model CancelExceptionAction extends ExceptionAction {
+  @doc("""
+(Optional) A note that will be appended to the jobs' Notes collection with the
+current timestamp.
+""")
+  note?: string;
+
+  @doc("""
+(Optional) Indicates the outcome of the job, populate this field with your own
+custom values.
+""")
+  dispositionCode?: string;
+
+  @doc("The type discriminator describing a sub-type of ExceptionAction")
+  kind: "cancel";
+}
+
+@doc("The action to take when the exception is triggered")
+@discriminator("kind")
+model ExceptionAction {}
+
+@doc("""
+Describes a set of queue selectors that will be attached if the given condition
+resolves to true
+""")
+model ConditionalQueueSelectorAttachment extends QueueSelectorAttachment {
+  @doc("""
+A rule of one of the following types:
+            
+StaticRule:  A rule
+providing static rules that always return the same result, regardless of
+input.
+DirectMapRule:  A rule that return the same labels as the input
+labels.
+ExpressionRule: A rule providing inline expression
+rules.
+AzureFunctionRule: A rule providing a binding to an HTTP Triggered Azure
+Function.
+WebhookRule: A rule providing a binding to a webserver following
+OAuth2.0 authentication protocol.
+""")
+  condition: RouterRule;
+
+  @doc("The queue selectors to attach")
+  queueSelectors: RouterQueueSelector[];
+
+  @doc("The type discriminator describing the type of queue selector attachment")
+  kind: "conditional";
+}
+
+@doc("""
+Describes a condition that must be met against a set of labels for queue
+selection
+""")
+model RouterQueueSelector {
+  @doc("The label key to query against")
+  key: string;
+
+  @doc("""
+Describes how the value of the label is compared to the value defined on the
+label selector
+""")
+  labelOperator: LabelOperator;
+
+  @doc("The value to compare against the actual label value with the given operator")
+  value?: unknown;
+}
+
+@doc("""
+An attachment of queue selectors to resolve a queue to a job from a
+classification policy
+""")
+@discriminator("kind")
+model QueueSelectorAttachment {}
+
+@doc("""
+Describes a set of worker selectors that will be attached if the given
+condition resolves to true
+""")
+model ConditionalWorkerSelectorAttachment extends WorkerSelectorAttachment {
+  @doc("""
+A rule of one of the following types:
+            
+StaticRule:  A rule
+providing static rules that always return the same result, regardless of
+input.
+DirectMapRule:  A rule that return the same labels as the input
+labels.
+ExpressionRule: A rule providing inline expression
+rules.
+AzureFunctionRule: A rule providing a binding to an HTTP Triggered Azure
+Function.
+WebhookRule: A rule providing a binding to a webserver following
+OAuth2.0 authentication protocol.
+""")
+  condition: RouterRule;
+
+  @doc("The worker selectors to attach")
+  workerSelectors: RouterWorkerSelector[];
+
+  @doc("The type discriminator describing the type of worker selector attachment")
+  kind: "conditional";
+}
+
+@doc("An attachment which attaches worker selectors to a job")
+@discriminator("kind")
+model WorkerSelectorAttachment {}
+
+@doc("A rule that return the same labels as the input labels.")
+model DirectMapRouterRule extends RouterRule {
+  @doc("The type discriminator describing a sub-type of Rule")
+  kind: "direct-map-rule";
+}
+
+@doc("A rule providing inline expression rules.")
+model ExpressionRouterRule extends RouterRule {
+  @doc("The expression language to compile to and execute")
+  language?: ExpressionRouterRuleLanguage;
+
+  @doc("""
+The string containing the expression to evaluate. Should contain return
+statement with calculated values.
+""")
+  expression: string;
+
+  @doc("The type discriminator describing a sub-type of Rule")
+  kind: "expression-rule";
+}
+
+@doc("A rule providing a binding to an HTTP Triggered Azure Function.")
+model FunctionRouterRule extends RouterRule {
+  @doc("URL for Azure Function")
+  functionUri: string;
+
+  @doc("Credentials used to access Azure function rule")
+  credential?: FunctionRouterRuleCredential;
+
+  @doc("The type discriminator describing a sub-type of Rule")
+  kind: "azure-function-rule";
+}
+
+@doc("Credentials used to access Azure function rule")
+model FunctionRouterRuleCredential {
+  @doc("(Optional) Access key scoped to a particular function")
+  functionKey?: string;
+
+  @doc("""
+(Optional) Access key scoped to a Azure Function app.
+This key grants access to
+all functions under the app.
+""")
+  appKey?: string;
+
+  @doc("""
+(Optional) Client id, when AppKey is provided
+In context of Azure function,
+this is usually the name of the key
+""")
+  clientId?: string;
+}
+
+@doc("Jobs are directed to the worker who has been idle longest.")
+model LongestIdleMode extends DistributionMode {
+  @doc("The type discriminator describing a sub-type of Mode")
+  kind: "longest-idle";
+}
+
+@doc("""
+An action that manually reclassifies a job by providing the queue, priority and
+worker selectors.
+""")
+model ManualReclassifyExceptionAction extends ExceptionAction {
+  @doc("Updated QueueId.")
+  queueId?: string;
+
+  @doc("Updated Priority.")
+  priority?: int32;
+
+  @doc("Updated WorkerSelectors.")
+  workerSelectors?: RouterWorkerSelector[];
+
+  @doc("The type discriminator describing a sub-type of ExceptionAction")
+  kind: "manual-reclassify";
+}
+
+@doc("""
+OAuth2.0 Credentials used to Contoso's Authorization server.
+Reference:
+https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/
+""")
+model Oauth2ClientCredential {
+  @doc("ClientId for Contoso Authorization server.")
+  clientId?: string;
+
+  @doc("Client secret for Contoso Authorization server.")
+  clientSecret?: string;
+}
+
+@doc("""
+Attaches a queue selector where the value is passed through from the job label
+with the same key
+""")
+model PassThroughQueueSelectorAttachment extends QueueSelectorAttachment {
+  @doc("The label key to query against")
+  key: string;
+
+  @doc("Describes how the value of the label is compared to the value pass through")
+  labelOperator: LabelOperator;
+
+  @doc("The type discriminator describing the type of queue selector attachment")
+  kind: "pass-through";
+}
+
+@doc("""
+Attaches a worker selector where the value is passed through from the job label
+with the same key
+""")
+model PassThroughWorkerSelectorAttachment extends WorkerSelectorAttachment {
+  @doc("The label key to query against")
+  key: string;
+
+  @doc("Describes how the value of the label is compared to the value pass through")
+  labelOperator: LabelOperator;
+
+  @doc("Describes how long the attached label selector is valid in seconds.")
+  expiresAfterSeconds?: float32;
+
+  @doc("The type discriminator describing the type of worker selector attachment")
+  kind: "pass-through";
+}
+
+@doc("Trigger for an exception action on exceeding queue length")
+model QueueLengthExceptionTrigger extends ExceptionTrigger {
+  @doc("Threshold of number of jobs ahead in the queue to for this trigger to fire.")
+  threshold: int32;
+
+  @doc("The type discriminator describing a sub-type of ExceptionTrigger")
+  kind: "queue-length";
+}
+
+@doc("""
+Contains the weight percentage and queue selectors to be applied if selected
+for weighted distributions.
+""")
+model QueueWeightedAllocation {
+  @doc("The percentage of this weight, expressed as a fraction of 1.")
+  weight: float32;
+
+  @doc("""
+A collection of queue selectors that will be applied if this allocation is
+selected.
+""")
+  queueSelectors: RouterQueueSelector[];
+}
+
+@doc("An action that modifies labels on a job and then reclassifies it")
+model ReclassifyExceptionAction extends ExceptionAction {
+  @doc("""
+(optional) The new classification policy that will determine queue, priority
+and worker selectors.
+""")
+  classificationPolicyId?: string;
+
+  @doc("""
+(optional) Dictionary containing the labels to update (or add if not existing)
+in key-value pairs
+""")
+  labelsToUpsert?: Record<unknown>;
+
+  @doc("The type discriminator describing a sub-type of ExceptionAction")
+  kind: "reclassify";
+}
+
+@doc("""
+Jobs are distributed in order to workers, starting with the worker that is
+after the last worker to receive a job.
+""")
+model RoundRobinMode extends DistributionMode {
+  @doc("The type discriminator describing a sub-type of Mode")
+  kind: "round-robin";
+}
+
+@doc("Attaches queue selectors to a job when the RouterRule is resolved")
+model RuleEngineQueueSelectorAttachment extends QueueSelectorAttachment {
+  @doc("""
+A rule of one of the following types:
+            
+StaticRule:  A rule
+providing static rules that always return the same result, regardless of
+input.
+DirectMapRule:  A rule that return the same labels as the input
+labels.
+ExpressionRule: A rule providing inline expression
+rules.
+AzureFunctionRule: A rule providing a binding to an HTTP Triggered Azure
+Function.
+WebhookRule: A rule providing a binding to a webserver following
+OAuth2.0 authentication protocol.
+""")
+  rule: RouterRule;
+
+  @doc("The type discriminator describing the type of queue selector attachment")
+  kind: "rule-engine";
+}
+
+@doc("Attaches worker selectors to a job when a RouterRule is resolved")
+model RuleEngineWorkerSelectorAttachment extends WorkerSelectorAttachment {
+  @doc("""
+A rule of one of the following types:
+            
+StaticRule:  A rule
+providing static rules that always return the same result, regardless of
+input.
+DirectMapRule:  A rule that return the same labels as the input
+labels.
+ExpressionRule: A rule providing inline expression
+rules.
+AzureFunctionRule: A rule providing a binding to an HTTP Triggered Azure
+Function.
+WebhookRule: A rule providing a binding to a webserver following
+OAuth2.0 authentication protocol.
+""")
+  rule: RouterRule;
+
+  @doc("The type discriminator describing the type of worker selector attachment")
+  kind: "rule-engine";
+}
+
+@doc("Describes a queue selector that will be attached to the job")
+model StaticQueueSelectorAttachment extends QueueSelectorAttachment {
+  @doc("""
+Describes a condition that must be met against a set of labels for queue
+selection
+""")
+  queueSelector: RouterQueueSelector;
+
+  @doc("The type discriminator describing the type of queue selector attachment")
+  kind: "static";
+}
+
+@doc("""
+A rule providing static rules that always return the same result, regardless of
+input.
+""")
+model StaticRouterRule extends RouterRule {
+  @doc("The static value this rule always returns.")
+  value?: unknown;
+
+  @doc("The type discriminator describing a sub-type of Rule")
+  kind: "static-rule";
+}
+
+@doc("Describes a worker selector that will be attached to the job")
+model StaticWorkerSelectorAttachment extends WorkerSelectorAttachment {
+  @doc("""
+Describes a condition that must be met against a set of labels for worker
+selection
+""")
+  workerSelector: RouterWorkerSelector;
+
+  @doc("The type discriminator describing the type of worker selector attachment")
+  kind: "static";
+}
+
+@doc("Trigger for an exception action on exceeding wait time")
+model WaitTimeExceptionTrigger extends ExceptionTrigger {
+  @doc("Threshold for wait time for this trigger.")
+  thresholdSeconds: float32;
+
+  @doc("The type discriminator describing a sub-type of ExceptionTrigger")
+  kind: "wait-time";
+}
+
+@doc("A rule providing a binding to an external web server.")
+model WebhookRouterRule extends RouterRule {
+  @doc("Uri for Authorization Server.")
+  authorizationServerUri?: string;
+
+  @doc("""
+OAuth2.0 Credentials used to Contoso's Authorization server.
+Reference:
+https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/
+""")
+  clientCredential?: Oauth2ClientCredential;
+
+  @doc("Uri for Contoso's Web Server.")
+  webhookUri?: string;
+
+  @doc("The type discriminator describing a sub-type of Rule")
+  kind: "webhook-rule";
+}
+
+@doc("""
+Describes multiple sets of queue selectors, of which one will be selected and
+attached according to a weighting
+""")
+model WeightedAllocationQueueSelectorAttachment
+  extends QueueSelectorAttachment {
+  @doc("A collection of percentage based weighted allocations.")
+  allocations: QueueWeightedAllocation[];
+
+  @doc("The type discriminator describing the type of queue selector attachment")
+  kind: "weighted-allocation-queue-selector";
+}
+
+@doc("""
+Describes multiple sets of worker selectors, of which one will be selected and
+attached according to a weighting
+""")
+model WeightedAllocationWorkerSelectorAttachment
+  extends WorkerSelectorAttachment {
+  @doc("A collection of percentage based weighted allocations.")
+  allocations: WorkerWeightedAllocation[];
+
+  @doc("The type discriminator describing the type of worker selector attachment")
+  kind: "weighted-allocation-worker-selector";
+}
+
+@doc("""
+Contains the weight percentage and worker selectors to be applied if selected
+for weighted distributions.
+""")
+model WorkerWeightedAllocation {
+  @doc("The percentage of this weight, expressed as a fraction of 1.")
+  weight: float32;
+
+  @doc("""
+A collection of worker selectors that will be applied if this allocation is
+selected.
+""")
+  workerSelectors: RouterWorkerSelector[];
+}
+
+@doc("JobRouter Versions")
+enum Versions {
+    @doc("JobRouter 2023-11-01 api version")
+    @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+    c2023_11_01: "2023-11-01",
+}
