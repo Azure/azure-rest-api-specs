@@ -240,6 +240,15 @@
             }
           },
           {
+            "name": "semanticQuery",
+            "in": "query",
+            "type": "string",
+            "description": "Allows setting a separate search query that will be solely used for semantic reranking, semantic captions and semantic answers. Is useful for scenarios where there is a need to use different queries between the base retrieval and ranking phase, and the L2 semantic phase.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
             "name": "semanticConfiguration",
             "in": "query",
             "type": "string",
@@ -2491,6 +2500,10 @@
         "scoringProfile": {
           "type": "string",
           "description": "The name of a scoring profile to evaluate match scores for matching documents in order to sort the results."
+        },
+        "semanticQuery": {
+          "type": "string",
+          "description": "Allows setting a separate search query that will be solely used for semantic reranking, semantic captions and semantic answers. Is useful for scenarios where there is a need to use different queries between the base retrieval and ranking phase, and the L2 semantic phase."
         },
         "semanticConfiguration": {
           "type": "string",
