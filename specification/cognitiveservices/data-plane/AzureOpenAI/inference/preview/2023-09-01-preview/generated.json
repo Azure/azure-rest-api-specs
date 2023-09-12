@@ -570,14 +570,14 @@
           "format": "byte",
           "description": "The audio data to transcribe. This must be the binary content of a file in one of the supported media formats:\nflac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm."
         },
+        "response_format": {
+          "$ref": "#/definitions/AudioTranscriptionFormat",
+          "description": "The requested format of the transcription response data, which will influence the content and detail of the result.",
+          "x-ms-client-name": "responseFormat"
+        },
         "language": {
           "type": "string",
           "description": "The primary spoken language of the audio data to be transcribed, supplied as a two-letter ISO-639-1 language code\nsuch as 'en' or 'fr'.\nProviding this known input language is optional but may improve the accuracy and/or latency of transcription."
-        },
-        "response_format": {
-          "$ref": "#/definitions/AudioTranscriptionFormat",
-          "description": "The format of the transcription output, in one of these options: json, text, srt, verbose_json, or vtt.",
-          "x-ms-client-name": "responseFormat"
         },
         "prompt": {
           "type": "string",

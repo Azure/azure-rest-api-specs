@@ -118,10 +118,11 @@ written language corresponding to the language it was spoken in.
 @sharedRoute
 op getAudioTranscriptionAsResponseObject is ResourceAction<
   Deployment,
-  AudioTranscriptionOptions, // response_format must be unspecified (json) or one of: json, verbose_json
+  AudioTranscriptionOptions,  // response_format must be unspecified (json) or one of: json, verbose_json
   AudioTranscription
 >;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "non-model response value needed"
 @doc("""
 Gets transcribed text and associated metadata from provided spoken audio data. Audio will be transcribed in the
 written language corresponding to the language it was spoken in.
@@ -130,10 +131,9 @@ written language corresponding to the language it was spoken in.
 @actionSeparator("/")
 @action("audio/transcriptions")
 @sharedRoute
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "non-model response value needed"
 op getAudioTranscriptionAsPlainText is Azure.Core.Foundations.ResourceOperation<
   Deployment,
-  AudioTranscriptionOptions, // response_format must be one of: text, srt, vtt
+  AudioTranscriptionOptions,  // response_format must be one of: text, srt, vtt
   string
 >;
 
@@ -146,10 +146,11 @@ Gets English language transcribed text and associated metadata from provided spo
 @sharedRoute
 op getAudioTranslationAsResponseObject is ResourceAction<
   Deployment,
-  AudioTranslationOptions, // response_format must be unspecified (json) or one of: json, verbose_json
+  AudioTranslationOptions,  // response_format must be unspecified (json) or one of: json, verbose_json
   AudioTranscription
 >;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "non-model response value needed"
 @doc("""
 Gets English language transcribed text and associated metadata from provided spoken audio data.
 """)
@@ -157,9 +158,8 @@ Gets English language transcribed text and associated metadata from provided spo
 @actionSeparator("/")
 @action("audio/translations")
 @sharedRoute
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "non-model response value needed"
 op getAudioTranslationAsPlainText is Azure.Core.Foundations.ResourceOperation<
   Deployment,
-  AudioTranslationOptions, // response_format must be one of: text, srt, vtt
+  AudioTranslationOptions,  // response_format must be one of: text, srt, vtt
   string
 >;
