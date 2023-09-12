@@ -6,34 +6,36 @@
     "applicationName": "myApp",
     "api-version": "2023-09-01-preview",
     "parameters": {
-      "UpgradeKind": "Rolling",
-      "Name": "fabric:/Voting",
-      "UpdateDescription": {
-        "RollingUpgradeMode": "Monitored",
-        "ForceRestart": true,
-        "FailureAction": "Manual",
-        "HealthCheckWaitDurationInMilliseconds": "PT0H0M10S",
-        "HealthCheckStableDurationInMIlliseconds": "PT1H0M0S",
-        "HealthCheckRetryTimeoutInMilliseconds": "PT0H15M0S",
-        "UpgradeTimeoutInMilliseconds": "PT2H0M0S",
-        "UpgradeDomainTimeoutInMilliseconds": "PT2H0M0S"
+      "upgradeKind": "Rolling",
+      "name": "fabric:/Voting",
+      "updateDescription": {
+        "rollingUpgradeMode": "Monitored",
+        "forceRestart": true,
+        "failureAction": "Manual",
+        "healthCheckWaitDurationInMilliseconds": "PT0H0M10S",
+        "healthCheckStableDurationInMIlliseconds": "PT1H0M0S",
+        "healthCheckRetryTimeoutInMilliseconds": "PT0H15M0S",
+        "upgradeTimeoutInMilliseconds": "PT2H0M0S",
+        "upgradeDomainTimeoutInMilliseconds": "PT2H0M0S"
       },
-      "ApplicationHealthPolicy": {
-        "ConsiderWarningAsError": true,
-        "MaxPercentUnhealthyDeployedApplications": 10,
-        "DefaultServiceTypeHealthPolicy": {
-          "MaxPercentUnhealthyPartitionsPerService": 10,
-          "MaxPercentUnhealthyReplicasPerPartition": 11,
-          "MaxPercentUnhealthyServices": 12
+      "applicationHealthPolicy": {
+        "considerWarningAsError": true,
+        "maxPercentUnhealthyDeployedApplications": 10,
+        "defaultServiceTypeHealthPolicy": {
+          "maxPercentUnhealthyPartitionsPerService": 10,
+          "maxPercentUnhealthyReplicasPerPartition": 11,
+          "maxPercentUnhealthyServices": 12
         },
-        "ServiceTypeHealthPolicyMap": {
-          "VotingWeb": {
-            "MaxPercentUnhealthyPartitionsPerService": 13,
-            "MaxPercentUnhealthyReplicasPerPartition": 14,
-            "MaxPercentUnhealthyServices": 15
+        "serviceTypeHealthPolicyMap": [
+          {
+            "key": "VotingWeb",
+            "value": {
+              "maxPercentUnhealthyPartitionsPerService": 13,
+              "maxPercentUnhealthyReplicasPerPartition": 14,
+              "maxPercentUnhealthyServices": 15
+            }
           }
-
-        }
+        ]
       }
     }
   },

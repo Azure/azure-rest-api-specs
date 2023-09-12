@@ -595,7 +595,10 @@
         "ipConfigurations": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/IpConfiguration"
+            "$ref": "#/definitions/IpConfiguration",
+            "x-ms-identifiers": [
+              "name"
+            ]
           },
           "description": "Specifies the IP configurations of the network interface."
         }
@@ -776,7 +779,10 @@
             "ipTags": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/IpTag"
+                "$ref": "#/definitions/IpTag",
+                "x-ms-identifiers": [
+                  "ipTag"
+                ]
               },
               "description": "Specifies the list of IP tags associated with the public IP address."
             },
@@ -809,14 +815,14 @@
       "type": "object",
       "required": [
         "ipTagType",
-        "tag"
+        "ipTag"
       ],
       "properties": {
         "ipTagType": {
           "type": "string",
           "description": "IP tag type. Example: FirstPartyUsage."
         },
-        "tag": {
+        "ipTag": {
           "type": "string",
           "description": "IP tag associated with the public IP. Example: SQL, Storage etc."
         }
@@ -1233,7 +1239,10 @@
         "additionalNetworkInterfaceConfigurations": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AdditionalNetworkInterfaceConfiguration"
+            "$ref": "#/definitions/AdditionalNetworkInterfaceConfiguration",
+            "x-ms-identifiers": [
+              "name"
+            ]
           },
           "description": "Specifies the settings for any additional secondary network interfaces to attach to the node type."
         }
@@ -1646,7 +1655,7 @@
         "values": [
           {
             "value": "BeforeSFRuntime",
-            "description": "Indicates that the vm extenison should run before the service fabric runtime starts."
+            "description": "Indicates that the vm extension should run before the service fabric runtime starts."
           }
         ]
       }

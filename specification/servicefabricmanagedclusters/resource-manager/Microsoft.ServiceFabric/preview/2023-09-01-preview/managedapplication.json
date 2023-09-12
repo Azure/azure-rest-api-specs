@@ -584,7 +584,7 @@
         "tags": [
           "Application"
         ],
-        "operationId": "Applications_GetUpgrade",
+        "operationId": "Applications_ReadUpgrade",
         "summary": "Get the status of the latest application upgrade.",
         "description": "Get the status of the latest application upgrade. It will query the cluster to find the status of the latest application upgrade.",
         "parameters": [
@@ -804,7 +804,7 @@
         "tags": [
           "Application"
         ],
-        "operationId": "Applications_GetHealth",
+        "operationId": "Applications_ReadHealth",
         "summary": "Send a request to query the current application health.",
         "description": "Send a request to query the current application health based on the query parameters passed in.",
         "parameters": [
@@ -1152,7 +1152,7 @@
         "tags": [
           "Service"
         ],
-        "operationId": "Services_GetPartitionInfoList",
+        "operationId": "Services_ReadListPartitionInfo",
         "summary": "Gets the information about partitions of a Service Fabric service.",
         "description": "Get Partition Info List returns information about the partitions of the specified service. The response includes the ID, status, health, and other details about the partition.",
         "parameters": [
@@ -1211,7 +1211,7 @@
         "tags": [
           "Service"
         ],
-        "operationId": "Services_GetReplicaInfoList",
+        "operationId": "Services_ReadListReplicaInfo",
         "summary": "Gets the information about replicas of a Service Fabric service partition.",
         "description": "Get Replica Info List returns information about the replicas of the specified partition. The response includes the ID, role, status, health, node name, uptime, and other details about the replica.",
         "parameters": [
@@ -1572,28 +1572,29 @@
       "type": "object",
       "description": "Defines a health policy used to evaluate the health of an application or one of its children entities.\n",
       "properties": {
-        "ConsiderWarningAsError": {
+        "considerWarningAsError": {
           "type": "boolean",
           "description": "Indicates whether warnings are treated with the same severity as errors.",
           "default": false
         },
-        "MaxPercentUnhealthyDeployedApplications": {
+        "maxPercentUnhealthyDeployedApplications": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum allowed percentage of unhealthy deployed applications. Allowed values are Byte values from zero to 100.\nThe percentage represents the maximum tolerated percentage of deployed applications that can be unhealthy before the application is considered in error.\nThis is calculated by dividing the number of unhealthy deployed applications over the number of nodes where the application is currently deployed on in the cluster.\nThe computation rounds up to tolerate one failure on small numbers of nodes. Default percentage is zero.\n",
           "default": 0
         },
-        "DefaultServiceTypeHealthPolicy": {
+        "defaultServiceTypeHealthPolicy": {
           "$ref": "#/definitions/RuntimeServiceTypeHealthPolicy"
         },
-        "ServiceTypeHealthPolicyMap": {
+        "serviceTypeHealthPolicyMap": {
           "$ref": "#/definitions/RuntimeServiceTypeHealthPolicyMap"
         }
       },
       "x-sf-documentation": {
-        "DefaultServiceTypeHealthPolicy": {
+        "defaultServiceTypeHealthPolicy": {
           "description": "The health policy used by default to evaluate the health of a service type."
         },
-        "ServiceTypeHealthPolicyMap": {
+        "serviceTypeHealthPolicyMap": {
           "description": "The map with service type health policy per service type name. The map is empty by default."
         }
       }
@@ -1603,24 +1604,25 @@
       "description": "The name of the application, including the 'fabric:' URI scheme."
     },
     "RuntimeApplicationUpgradeUpdateDescription": {
+      "type": "object",
       "description": "Describes the parameters for updating an ongoing application upgrade.",
       "properties": {
-        "Name": {
+        "name": {
           "$ref": "#/definitions/RuntimeApplicationName"
         },
-        "UpgradeKind": {
+        "upgradeKind": {
           "$ref": "#/definitions/RuntimeUpgradeKind"
         },
-        "ApplicationHealthPolicy": {
+        "applicationHealthPolicy": {
           "$ref": "#/definitions/RuntimeApplicationHealthPolicy"
         },
-        "UpdateDescription": {
+        "updateDescription": {
           "$ref": "#/definitions/RuntimeRollingUpgradeUpdateDescription"
         }
       },
       "required": [
-        "Name",
-        "UpgradeKind"
+        "name",
+        "upgradeKind"
       ]
     },
     "RuntimeFailureAction": {
@@ -1673,36 +1675,37 @@
       "description": "Parameters for Resume Upgrade action. The upgrade domain name must be specified."
     },
     "RuntimeRollingUpgradeUpdateDescription": {
+      "type": "object",
       "description": "Describes the parameters for updating a rolling upgrade of application or cluster.",
       "properties": {
-        "RollingUpgradeMode": {
+        "rollingUpgradeMode": {
           "$ref": "#/definitions/RuntimeUpgradeMode"
         },
-        "ForceRestart": {
+        "forceRestart": {
           "$ref": "#/definitions/RuntimeForceRestart"
         },
-        "ReplicaSetCheckTimeoutInMilliseconds": {
+        "replicaSetCheckTimeoutInMilliseconds": {
           "$ref": "#/definitions/RuntimeUpgradeReplicaSetCheckTimeout"
         },
-        "FailureAction": {
+        "failureAction": {
           "$ref": "#/definitions/RuntimeFailureAction"
         },
-        "HealthCheckWaitDurationInMilliseconds": {
+        "healthCheckWaitDurationInMilliseconds": {
           "$ref": "#/definitions/RuntimeHealthCheckWaitDuration"
         },
-        "HealthCheckStableDurationInMilliseconds": {
+        "healthCheckStableDurationInMilliseconds": {
           "$ref": "#/definitions/RuntimeHealthCheckStableDuration"
         },
-        "HealthCheckRetryTimeoutInMilliseconds": {
+        "healthCheckRetryTimeoutInMilliseconds": {
           "$ref": "#/definitions/RuntimeHealthCheckRetryTimeout"
         },
-        "UpgradeTimeoutInMilliseconds": {
+        "upgradeTimeoutInMilliseconds": {
           "$ref": "#/definitions/RuntimeUpgradeTimeout"
         },
-        "UpgradeDomainTimeoutInMilliseconds": {
+        "upgradeDomainTimeoutInMilliseconds": {
           "$ref": "#/definitions/RuntimeUpgradeDomainTimeout"
         },
-        "InstanceCloseDelayDurationInSeconds": {
+        "instanceCloseDelayDurationInSeconds": {
           "type": "integer",
           "format": "int64",
           "description": "Duration in seconds, to wait before a stateless instance is closed, to allow the active requests to drain gracefully. This would be effective when the instance is closing during the application/cluster\nupgrade, only for those instances which have a non-zero delay duration configured in the service description.\nNote, the default value of InstanceCloseDelayDurationInSeconds is 4294967295, which indicates that the behavior will entirely depend on the delay configured in the stateless service description.\n",
@@ -1710,25 +1713,28 @@
         }
       },
       "required": [
-        "RollingUpgradeMode"
+        "rollingUpgradeMode"
       ]
     },
     "RuntimeServiceTypeHealthPolicy": {
       "type": "object",
       "description": "Represents the health policy used to evaluate the health of services belonging to a service type.\n",
       "properties": {
-        "MaxPercentUnhealthyPartitionsPerService": {
+        "maxPercentUnhealthyPartitionsPerService": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum allowed percentage of unhealthy partitions per service. Allowed values are Byte values from zero to 100\n\nThe percentage represents the maximum tolerated percentage of partitions that can be unhealthy before the service is considered in error.\nIf the percentage is respected but there is at least one unhealthy partition, the health is evaluated as Warning.\nThe percentage is calculated by dividing the number of unhealthy partitions over the total number of partitions in the service.\nThe computation rounds up to tolerate one failure on small numbers of partitions. Default percentage is zero.\n",
           "default": 0
         },
-        "MaxPercentUnhealthyReplicasPerPartition": {
+        "maxPercentUnhealthyReplicasPerPartition": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum allowed percentage of unhealthy replicas per partition. Allowed values are Byte values from zero to 100.\n\nThe percentage represents the maximum tolerated percentage of replicas that can be unhealthy before the partition is considered in error.\nIf the percentage is respected but there is at least one unhealthy replica, the health is evaluated as Warning.\nThe percentage is calculated by dividing the number of unhealthy replicas over the total number of replicas in the partition.\nThe computation rounds up to tolerate one failure on small numbers of replicas. Default percentage is zero.\n",
           "default": 0
         },
-        "MaxPercentUnhealthyServices": {
+        "maxPercentUnhealthyServices": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum maximum allowed percentage of unhealthy services. Allowed values are Byte values from zero to 100.\n\nThe percentage represents the maximum tolerated percentage of services that can be unhealthy before the application is considered in error.\nIf the percentage is respected but there is at least one unhealthy service, the health is evaluated as Warning.\nThis is calculated by dividing the number of unhealthy services of the specific service type over the total number of services of the specific service type.\nThe computation rounds up to tolerate one failure on small numbers of services. Default percentage is zero.\n",
           "default": 0
         }
@@ -1737,28 +1743,31 @@
     "RuntimeServiceTypeHealthPolicyMap": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/RuntimeServiceTypeHealthPolicyMapItem"
+        "$ref": "#/definitions/RuntimeServiceTypeHealthPolicyMapItem",
+        "x-ms-identifiers": [
+          "key"
+        ]
       },
-      "description": "Defines a ServiceTypeHealthPolicy per service type name.\n\nThe entries in the map replace the default service type health policy for each specified service type. For example, in an application that contains both a stateless gateway service type and a stateful engine service type, the health policies for the stateless and stateful services can be configured differently. With policy per service type, there's more granular control of the health of the service.\n\nIf no policy is specified for a service type name, the DefaultServiceTypeHealthPolicy is used for evaluation.\n"
+      "description": "Defines a ServiceTypeHealthPolicy per service type name.\nThe entries in the map replace the default service type health policy for each specified service type. For example, in an application that contains both a stateless gateway service type and a stateful engine service type, the health policies for the stateless and stateful services can be configured differently. With policy per service type, there's more granular control of the health of the service.\nIf no policy is specified for a service type name, the DefaultServiceTypeHealthPolicy is used for evaluation.\n"
     },
     "RuntimeServiceTypeHealthPolicyMapItem": {
       "type": "object",
       "description": "Defines an item in ServiceTypeHealthPolicyMap.\n",
       "required": [
-        "Key",
-        "Value"
+        "key",
+        "value"
       ],
       "properties": {
-        "Key": {
+        "key": {
           "type": "string",
           "description": "The key of the service type health policy map item. This is the name of the service type."
         },
-        "Value": {
+        "value": {
           "$ref": "#/definitions/RuntimeServiceTypeHealthPolicy"
         }
       },
       "x-sf-documentation": {
-        "Value": {
+        "value": {
           "description": "The value of the service type health policy map item. This is the ServiceTypeHealthPolicy for this service type."
         }
       }
