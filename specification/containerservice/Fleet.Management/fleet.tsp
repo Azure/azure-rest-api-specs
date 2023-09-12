@@ -49,6 +49,7 @@ model FleetProperties {
   provisioningState?: FleetProvisioningState;
 
   @doc("The FleetHubProfile configures the Fleet's hub.")
+  @removed(Versions.v2023_10_15)
   hubProfile?: FleetHubProfile;
 }
 
