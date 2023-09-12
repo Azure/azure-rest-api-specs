@@ -78,6 +78,11 @@ model FleetHubProfile {
   @visibility("read")
   @doc("The Kubernetes version of the Fleet hub.")
   kubernetesVersion?: string;
+
+  @added(Versions.v2023_08_15_preview)
+  @doc("The virtual machine size of the Fleet hub.")
+  @visibility("read", "create")
+  vmSize?: string;
 }
 
 scalar SubnetResourceId
