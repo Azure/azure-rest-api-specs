@@ -1,0 +1,46 @@
+{
+  "title": "Retrieves existing distribution policies.",
+  "operationId": "listDistributionPolicies",
+  "parameters": {
+    "endpoint": "https://contoso.westus.communications.azure.com",
+    "api-version": "2023-11-01",
+    "maxpagesize": 2
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "distributionPolicy": {
+              "id": "SecondaryDistributionPolicy",
+              "name": "Secondary",
+              "offerExpiresAfterSeconds": 300,
+              "mode": {
+                "kind": "round-robin",
+                "minConcurrentOffers": 1,
+                "maxConcurrentOffers": 2,
+                "bypassSelectors": false
+              }
+            },
+            "etag": "etag"
+          },
+          {
+            "distributionPolicy": {
+              "id": "MainDistributionPolicy",
+              "name": "Main",
+              "offerExpiresAfterSeconds": 300,
+              "mode": {
+                "kind": "longest-idle",
+                "minConcurrentOffers": 1,
+                "maxConcurrentOffers": 5,
+                "bypassSelectors": false
+              }
+            },
+            "etag": "etag"
+          }
+        ],
+        "nextLink": "null"
+      }
+    }
+  }
+}
