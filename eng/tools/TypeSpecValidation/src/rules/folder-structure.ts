@@ -54,15 +54,21 @@ export class FolderStructureRule implements Rule {
 
     // Verify tspconfig, main.tsp, examples/
     let containsMinStruct =
-      (await checkFileExists(path.join(folder, "main.tsp"))) &&
-      (await checkFileExists(path.join(folder, "examples")));
+      (await checkFileExists(path.join(folder, "main.tsp"))) ||
+      (await checkFileExists(path.join(folder, "client.tsp")));
+
+    if (await checkFileExists(path.join(folder, "main.tsp"))) {
+      containsMinStruct =
+        containsMinStruct && (await checkFileExists(path.join(folder, "examples")));
+    }
+
     if (!packageFolder.includes("Shared")) {
       containsMinStruct =
         containsMinStruct && (await checkFileExists(path.join(folder, "tspconfig.yaml")));
     }
     if (!containsMinStruct) {
       success = false;
-      errorOutput += `Invalid folder structure. Package must contain tspconfig.yaml, main.tsp, and examples folder.`;
+      errorOutput += `Invalid folder structure. Package must contain main.tsp or client.tsp, tspconfig.yaml, and examples folder if there's main.tsp.`;
     }
 
     return {
