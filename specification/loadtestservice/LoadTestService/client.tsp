@@ -3,7 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
-using AzureLoadTesting;
+using Microsoft.LoadTestService;
 
 @useDependency(APIVersions.v2022_11_01)
 @useDependency(APIVersions.v2023_04_01_preview)
@@ -13,7 +13,7 @@ namespace Customizations;
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @client({
     name: "LoadTestAdministrationClient",
-    service: AzureLoadTesting,
+    service: Microsoft.LoadTestService,
 })
 interface AdministrationOperations {
     CreateOrUpdateTest is LoadTestAdministration.createOrUpdateTest;

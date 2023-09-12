@@ -6,7 +6,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-namespace AzureLoadTesting;
+namespace Microsoft.LoadTestService;
 
 @doc("Metrics for pass/fail criteria.")
 enum PFMetrics {
@@ -153,8 +153,10 @@ enum Interval {
 enum TestType{
   @doc("Quick Test")
   QuickTest,
-  @doc("URL based Test")
-  UrlBasedTest,
+  @doc("URL Test")
+  URLTest,
+  @doc("JMX Test")
+  JMXTest
 }
 
 @added(APIVersions.v2023_04_01_preview)
@@ -176,7 +178,7 @@ model Test {
   passFailCriteria?: PassFailCriteria;
 
   @added(APIVersions.v2023_04_01_preview)
-  @doc("Enable or disable automatic stop of your load test when the error rate surpasses a given threshold.")
+  @doc("Auto stop criteria for a test.")
   autoStopCriteria?: AutoStopCriteria;
 
   @doc("""
@@ -207,7 +209,7 @@ SECRET_VALUE.
 
   @doc("Unique test name as identifier.")
   @maxLength(50)
-  @minLength(2)
+    @minLength(2)
   @visibility("read")
   testId?: string;
 
@@ -323,8 +325,7 @@ model AutoStopCriteria {
   errorRateTimeWindow?: int64;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"     //CSV is an abbervation and should be all caps
-@doc("The load test configuration.")
+@doc("Configurations for the load test.")
 model LoadTestConfiguration {
   @doc("""
 The number of engine instances to execute load test. Supported values are in
@@ -332,6 +333,7 @@ range of 1-45. Required for creating a new test.
 """)
   engineInstances?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style"     //CSV is an abbervation and should be all caps
   @doc("""
 If false, Azure Load Testing copies and processes your input files unmodified
 across all test engine instances. If true, Azure Load Testing splits the CSV
@@ -346,53 +348,85 @@ not required to upload.
 """)
   quickStartTest?: boolean;
 
-  @doc("Optional load test config")
+  @doc("Configuration for quick load test")
   optionalLoadTestConfig?: OptionalLoadTestConfig;
 
+  @doc("Configurations for the URL based load test.")
   @added(APIVersions.v2023_04_01_preview)
-  @doc("Type of test. e.g. QuickTest, UrlBasedTest")
+  baseUrlLoadTestConfig?: BaseUrlLoadTestConfig;
+
+  @added(APIVersions.v2023_04_01_preview)
+  @doc("Type of test. e.g. QuickTest, UrlTest or JMXTest")
   testType?: TestType;
 }
 
-@doc("Quick test config")
-model QuickTestConfig {
-  @doc("Test URL. Provide the complete HTTP URL. For example, http://contoso-app.azurewebsites.net/login")
-  endpointUrl?: string;
+@doc("Configurations for the URL based load test.")
+@added(APIVersions.v2023_04_01_preview)
+model BaseUrlLoadTestConfig {
+  @doc("Type of load. e.g. Linear, Constant, StepUp, Spike")
+  loadType: LoadType;
 
-  @added(APIVersions.v2023_04_01_preview)
-  @doc("Throughput required (requests per second)")
-  rps?: int32;        
+  @doc("No of concurrent virtual users")
+  virtualUsersPerEngine?: int32; 
 
-  @added(APIVersions.v2023_04_01_preview)
-  @doc("Maximum response time of the API/endpoint")
-  maxResponseTime?: int32;
+  @doc("Test run duration in seconds")
+  durationInSeconds?: int32;     
 }
 
-@doc("Url test config")
-model UrlTestConfig {
-  @added(APIVersions.v2023_04_01_preview)
+@doc("Configurations for the URL based load test with spike load pattern.")
+@added(APIVersions.v2023_04_01_preview)
+model SpikeUrlLoadTestConfig extends BaseUrlLoadTestConfig{
+  @doc("Type of load. e.g. Linear, Constant, StepUp, Spike")
+  loadType: LoadType.Spike;
+
+  @doc("Time to maintain a higher load after a spike in traffic in seconds")
+  spikeHoldLoadInSeconds?: int32;
+
+  @doc("Multiplier applied to the base load during a spike in traffic")
+  spikeMultiplier?: float32;  
+}
+
+@doc("Configurations for the URL based load test with step up load pattern.")
+@added(APIVersions.v2023_04_01_preview)
+model StepUpUrlLoadTestConfig extends BaseUrlLoadTestConfig{
+  @doc("Type of load. e.g. Linear, Constant, StepUp, Spike")
+  loadType: LoadType.StepUp;
+
   @doc("Number of steps in the ramp - up phase")
   rampUpSteps?: int32;  
 
-  @added(APIVersions.v2023_04_01_preview)
-  @doc("Time to maintain a higher load after a spike in traffic")
-  spikeHoldLoad?: int32;
-
-  @added(APIVersions.v2023_04_01_preview)
-  @doc("Multiplier applied to the base load during a spike in traffic")
-  spikeMultiplier?: float32;
-
-  @added(APIVersions.v2023_04_01_preview)
-  @doc("Type of load. e.g. Linear, Constant, StepUp, Spike")
-  loadType?: LoadType;    
+  @doc("Ramp up time in seconds")
+  rampUpTimeInSeconds?: int32;   
 }
 
-@doc("Optional load test config")
+@doc("Configurations for the URL based load test with linear load pattern.")
+@added(APIVersions.v2023_04_01_preview)
+model LinearUrlLoadTestConfig extends BaseUrlLoadTestConfig {
+  @doc("Type of load. e.g. Linear, Constant, StepUp, Spike")
+  loadType: LoadType.Linear; 
+
+  @doc("Ramp up time seconds")
+  rampUpTimeInSeconds?: int32;   
+}
+
+@doc("Configurations for the URL based load test with constant load pattern.")
+@added(APIVersions.v2023_04_01_preview)
+model ConstantUrlLoadTestConfig extends BaseUrlLoadTestConfig {
+  @doc("Type of load. e.g. Linear, Constant, StepUp, Spike")
+  loadType: LoadType.Constant;  
+}
+
+@doc("Configuration for quick load test")
 model OptionalLoadTestConfig {
-  ...UrlTestConfig;
+  @doc("Test URL. Provide the complete HTTP URL. For example, http://contoso-app.azurewebsites.net/login")
+  endpointUrl?: string;
 
-  ...QuickTestConfig;
+  @doc("Throughput required (requests per second)")
+  rps?: int32;        
 
+  @doc("Maximum response time of the API/endpoint")
+  maxResponseTime?: int32;
+  
   @doc("No of concurrent virtual users")
   virtualUsers?: int32;
 
@@ -402,54 +436,6 @@ model OptionalLoadTestConfig {
   @doc("Test run duration")
   duration?: int32;     
 }
-
-// @doc("Optional load test config")
-// model OptionalLoadTestConfig {
-//   @doc("""
-// Test URL. Provide the complete HTTP URL. For example,
-// http://contoso-app.azurewebsites.net/login
-// """)
-//   endpointUrl?: string;
-
-//   @doc("No of concurrent virtual users")
-//   virtualUsers?: int32;
-
-//   @added(APIVersions.v2023_04_01_preview)
-//   @doc("Throughput required (requests per second)")
-//   rps?: int32;
-
-//   @added(APIVersions.v2023_04_01_preview)
-//   @doc("Maximum response time of the API/endpoint")
-//   maxResponseTime?: int32;
-
-//   @doc("Ramp up time")
-//   rampUpTime?: int32;
-
-//   @added(APIVersions.v2023_04_01_preview)
-//   @doc("Number of steps in the ramp - up phase")
-//   rampUpSteps?: int32;
-
-//   @added(APIVersions.v2023_04_01_preview)
-//   @doc("Time to maintain a higher load after a spike in traffic")
-//   spikeHoldLoad?: int32;
-
-//   @added(APIVersions.v2023_04_01_preview)
-//   @doc("Multiplier applied to the base load during a spike in traffic")
-//   spikeMultiplier?: float32;
-
-//   @added(APIVersions.v2023_04_01_preview)
-//   @doc("Type of load. e.g. Linear, Constant, StepUp, Spike")
-//   loadType?: LoadType;
-
-//   @added(APIVersions.v2023_04_01_preview)
-//   @doc("Type of load. e.g. Linear, Constant, StepUp, Spike")
-//   testType?: TestType;
-
-//   @doc("Test run duration")
-//   duration?: int32;
-// }
-
-
 
 @doc("The input artifacts for the test.")
 model TestInputArtifacts {

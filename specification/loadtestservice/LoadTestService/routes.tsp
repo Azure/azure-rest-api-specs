@@ -11,7 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Autorest;
 
-namespace AzureLoadTesting;
+namespace Microsoft.LoadTestService;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @tag("Test")
@@ -124,6 +124,7 @@ tests.
     TestsList, {}, ErrorResponseBody
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/byos"  //It is limiting for users to have storage first before creating a load test also it will be breaking change for us.
   @summary("""
 Upload input file for a given test name. File size can't be more than 50 MB.
 Existing file with same name for the given test will be overwritten. File
