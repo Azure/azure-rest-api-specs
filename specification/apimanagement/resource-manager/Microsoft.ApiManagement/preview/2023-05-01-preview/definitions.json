@@ -4715,6 +4715,153 @@
       ],
       "description": "Policy fragment contract properties."
     },
+    "PolicyRestrictionCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyRestrictionContract"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "The response of the get policy restrictions operation."
+    },
+    "PolicyRestrictionUpdateContract": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PolicyRestrictionContractProperties",
+          "description": "Properties of the Policy Restriction."
+        }
+      },
+      "description": "Policy restriction contract details."
+    },
+    "PolicyRestrictionContract": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PolicyRestrictionContractProperties",
+          "description": "Properties of the Policy Restriction."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Policy restriction contract details."
+    },
+    "PolicyRestrictionContractProperties": {
+      "type": "object",
+      "properties": {
+        "scope": {
+          "type": "string",
+          "description": "Path to the policy document."
+        },
+        "requireBase": {
+          "type": "string",
+          "description": "Indicates if base policy should be enforced for the policy document.",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "PolicyRestrictionRequireBase",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "true",
+                "description": "The policy is required to have base policy"
+              },
+              {
+                "value": "false",
+                "description": "The policy does not require to have base policy"
+              }
+            ]
+          },
+          "default": "false"
+        }
+      },
+      "description": "Policy restrictions contract properties."
+    },
+    "PolicyStatusCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyStatusContract"
+          },
+          "description": "Policy Status Contract value."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "The response of the list policy status."
+    },
+    "PolicyStatusContract": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PolicyStatusContractProperties",
+          "description": "Properties of the Policy Status."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Policy Status Contract details."
+    },
+    "PolicyStatusContractProperties": {
+      "type": "object",
+      "properties": {
+        "referencePolicyId": {
+          "type": "string",
+          "description": "Policy Identifier"
+        },
+        "complianceState": {
+          "type": "string",
+          "description": "Policy Restriction Compliance State",
+          "enum": [
+            "Pending",
+            "NonCompliant",
+            "Compliant"
+          ],
+          "x-ms-enum": {
+            "name": "PolicyComplianceState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Pending",
+                "description": "The policy restriction compliance state has not yet been determined."
+              },
+              {
+                "value": "NonCompliant",
+                "description": "The scope in restriction is out of compliance."
+              },
+              {
+                "value": "Compliant",
+                "description": "The scope in restriction is in compliance."
+              }
+            ]
+          },
+          "default": "Pending"
+        }
+      },
+      "description": "Policy status Properties."
+    },
     "ResourceCollection": {
       "type": "object",
       "properties": {
