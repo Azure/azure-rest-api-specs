@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2023-04-01-preview",
+    "resourceUri": "subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.HybridCompute/machines/DemoVM",
+    "body": {
+      "properties": {
+        "hardwareProfile": {
+          "memoryMB": 4196,
+          "cpuCount": 4
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.HybridCompute/machines/DemoVM/providers/Microsoft.ScVmm/virtualMachineInstances/default",
+        "name": "default",
+        "type": "Microsoft.ScVmm/VirtualMachineInstances",
+        "extendedLocation": {
+          "type": "customLocation",
+          "name": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourceGroups/demoRG/providers/Microsoft.ExtendedLocation/customLocations/contoso"
+        },
+        "properties": {
+          "infrastructureProfile": {
+            "cloudId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.SCVMM/Clouds/HRCloud",
+            "templateId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.SCVMM/VirtualMachineTemplates/HRVirtualMachineTemplate",
+            "vmmServerId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.SCVMM/VMMServers/ContosoVMMServer",
+            "uuid": "aaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+            "biosGuid": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+          },
+          "osProfile": {
+            "computerName": "DemoVM",
+            "osType": "Windows"
+          },
+          "hardwareProfile": {
+            "memoryMB": 4196,
+            "cpuCount": 4
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.ScVmm/locations/WESTEUROPE/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2023-04-01-preview"
+      }
+    }
+  }
+}
