@@ -318,7 +318,7 @@
         "component"
       ]
     },
-    "CosmosDBDataTransferDataSourceSink": {
+    "BaseCosmosDataTransferDataSourceSink": {
       "type": "object",
       "description": "A base CosmosDB data source/sink",
       "properties": {
@@ -327,7 +327,7 @@
         }
       }
     },
-    "CosmosDBCassandraDataTransferDataSourceSink": {
+    "CosmosCassandraDataTransferDataSourceSink": {
       "type": "object",
       "description": "A CosmosDB Cassandra API data source/sink",
       "properties": {
@@ -343,7 +343,7 @@
           "$ref": "#/definitions/DataTransferDataSourceSink"
         },
         {
-          "$ref": "#/definitions/CosmosDBDataTransferDataSourceSink"
+          "$ref": "#/definitions/BaseCosmosDataTransferDataSourceSink"
         }
       ],
       "required": [
@@ -352,7 +352,7 @@
       ],
       "x-ms-discriminator-value": "CosmosDBCassandra"
     },
-    "CosmosDBMongoDataTransferDataSourceSink": {
+    "CosmosMongoDataTransferDataSourceSink": {
       "type": "object",
       "description": "A CosmosDB Mongo API data source/sink",
       "properties": {
@@ -368,7 +368,7 @@
           "$ref": "#/definitions/DataTransferDataSourceSink"
         },
         {
-          "$ref": "#/definitions/CosmosDBDataTransferDataSourceSink"
+          "$ref": "#/definitions/BaseCosmosDataTransferDataSourceSink"
         }
       ],
       "required": [
@@ -377,7 +377,7 @@
       ],
       "x-ms-discriminator-value": "CosmosDBMongo"
     },
-    "CosmosDBSqlDataTransferDataSourceSink": {
+    "CosmosSqlDataTransferDataSourceSink": {
       "type": "object",
       "description": "A CosmosDB No Sql API data source/sink",
       "properties": {
@@ -393,7 +393,7 @@
           "$ref": "#/definitions/DataTransferDataSourceSink"
         },
         {
-          "$ref": "#/definitions/CosmosDBDataTransferDataSourceSink"
+          "$ref": "#/definitions/BaseCosmosDataTransferDataSourceSink"
         }
       ],
       "required": [
