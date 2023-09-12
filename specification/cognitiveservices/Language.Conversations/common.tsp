@@ -97,6 +97,11 @@ model PreBuiltTaskParameters extends TaskParameters {
     modelVersion: string = "latest";
 }
 
+alias ShowStatsQueryParameter = QueryParametersTrait<{
+    @doc("(Optional) if set to true, response will contain request and document level statistics.")
+    @query showStats?: boolean
+}>;
+
 @doc("job state")
 @added(Versions.v2023_04_01)
 model JobState {
@@ -110,6 +115,8 @@ model JobState {
     expirationDateTime?: utcDateTime;
 
     @doc("job ID")
+    @key
+    @visibility("read")
     jobId: string;
 
     @doc("last updated date and time")

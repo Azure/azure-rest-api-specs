@@ -198,7 +198,11 @@
           "enum": [
             "Conversation"
           ],
-          "description": "The base class of a conversation input task."
+          "description": "The base class of a conversation input task.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "description": "The base class of a conversation input task.",
@@ -825,22 +829,6 @@
         {
           "$ref": "#/definitions/AnalyzeConversationTaskResult"
         }
-      ]
-    },
-    "Conversations": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "id",
-          "x-ms-mutability": [
-            "create"
-          ]
-        }
-      },
-      "description": "Resource model",
-      "required": [
-        "id"
       ]
     },
     "CurrencyResolution": {
