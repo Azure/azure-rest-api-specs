@@ -1,20 +1,23 @@
 {
-  "title": "AccessKeys_CreateAccessKey",
-  "operationId": "AccessKeys_CreateAccessKey",
+  "title": "AccessTokens_CreateAccessToken",
+  "operationId": "AccessTokens_CreateAccessToken",
   "parameters": {
     "api-version": "2023-10-01-preview",
     "accountId": "sampleAccountId",
-    "accessKeyId": "00000000-0000-0000-0000-000000000000",
+    "accessTokenId": "00000000-0000-0000-0000-000000000000",
     "resource": {
-      "name": "sampleAccessKey",
-      "expiryAt": "2021-09-28T12:32:33Z"
+      "id": "00000000-0000-0000-0000-000000000000",
+      "name": "sampleAccessToken",
+      "createdAt": "2021-09-28T12:32:33Z",
+      "expiryAt": "2022-09-28T12:32:33Z",
+      "state": "Active"
     }
   },
   "responses": {
     "200": {
       "body": {
-        "accessKeyId": "00000000-0000-0000-0000-000000000000",
-        "name": "sampleAccessKey",
+        "id": "00000000-0000-0000-0000-000000000000",
+        "name": "sampleAccessToken",
         "jwtToken": "sampleJwtToken",
         "createdAt": "2021-09-28T12:32:33Z",
         "expiryAt": "2022-09-28T12:32:33Z",
@@ -23,8 +26,8 @@
     },
     "201": {
       "body": {
-        "accessKeyId": "00000000-0000-0000-0000-000000000000",
-        "name": "sampleAccessKey",
+        "id": "00000000-0000-0000-0000-000000000000",
+        "name": "sampleAccessToken",
         "jwtToken": "sampleJwtToken",
         "createdAt": "2021-09-28T12:32:33Z",
         "expiryAt": "2022-09-28T12:32:33Z",
