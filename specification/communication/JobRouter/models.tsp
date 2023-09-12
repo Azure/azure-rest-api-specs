@@ -235,35 +235,6 @@ OAuth2.0 authentication protocol.
 @discriminator("kind")
 model RouterRule {}
 
-@doc("The Communication Services error.")
-@error
-model CommunicationErrorResponse {
-  @doc("The Communication Services error.")
-  error: CommunicationError;
-}
-
-@doc("The Communication Services error.")
-model CommunicationError {
-  @doc("The error code.")
-  code: string;
-
-  @doc("The error message.")
-  message: string;
-
-  @doc("The error target.")
-  @visibility("read")
-  target?: string;
-
-  @doc("Further details about specific errors that led to this error.")
-  @visibility("read")
-  details?: CommunicationError[];
-
-  @doc("The inner error if any.")
-  @visibility("read")
-  @projectedName("json", "innererror")
-  innerError?: CommunicationError;
-}
-
 @doc("A paged collection of classification policies.")
 model ClassificationPolicyCollection
   is Azure.Core.Page<ClassificationPolicyItem>;

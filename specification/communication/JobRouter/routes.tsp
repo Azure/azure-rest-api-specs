@@ -4,6 +4,7 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Autorest;
 
 namespace AzureCommunicationRoutingService;
 
@@ -11,6 +12,7 @@ interface JobRouterAdministrationOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("Creates or updates a classification policy.")
   @doc("Creates or updates a classification policy.")
+  @example("./ClassificationPolicies_CreateClassificationPolicy.json", "upsertClassificationPolicy")
   @route("/routing/classificationPolicies/{id}")
   @patch
   upsertClassificationPolicy is Azure.Core.Foundations.Operation<

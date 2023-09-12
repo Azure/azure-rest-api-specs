@@ -15,10 +15,11 @@ emit: [
 
 options:
   "@azure-tools/typespec-autorest":
-    examples-directory: examples
+    azure-resource-provider-folder: "data-plane"
+    output-file: "{azure-resource-provider-folder}/JobRouter/{version-status}/{version}/communicationservicejobrouter.json"
+    emitter-output-dir: "{project-root}/.."
     omit-unreachable-types: true
-    output-file: communicationservicejobrouter.json
-    emitter-output-dir: "{project-root}/../data-plane/JobRouter/stable/2023-11-01"
+    examples-directory: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
     clear-output-folder: true
     model-namespace: false
