@@ -29,9 +29,6 @@ enum MarketplaceSubscriptionStatus {
   Unsubscribed: "Unsubscribed",
 }
 
-@doc("A string that represents a URI.")
-scalar Uri extends string;
-
 @doc("Marketplace details of a resource.")
 model MarketplaceDetails {
   @doc("Azure subscription id for the the marketplace offer is purchased from")
@@ -141,7 +138,7 @@ model SingleSignOnProperties {
   enterpriseAppId?: string;
 
   @doc("URL for SSO to be used by the partner to redirect the user to their system")
-  singleSignOnUrl?: Uri;
+  singleSignOnUrl?: url;
 
   @doc("List of AAD domains fetched from Microsoft Graph for user.")
   aadDomains?: string[];
