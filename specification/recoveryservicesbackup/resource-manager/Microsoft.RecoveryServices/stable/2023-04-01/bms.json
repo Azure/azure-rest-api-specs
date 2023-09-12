@@ -10614,6 +10614,23 @@
         "registrationStatus": {
           "description": "Container registration status",
           "type": "string"
+        },
+        "protectedItemsCount": {
+          "format": "int32",
+          "description": "Number of protected items",
+          "type": "integer"
+        },
+        "acquireStorageAccountLock": {
+          "description": "Specifies whether the storage account lock has been acquired or not",
+          "enum": [
+            "Acquire",
+            "NotAcquire"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AcquireStorageAccountLock",
+            "modelAsString": true
+          }
         }
       }
     },
