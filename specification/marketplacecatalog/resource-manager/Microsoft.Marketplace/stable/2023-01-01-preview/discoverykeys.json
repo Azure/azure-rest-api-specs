@@ -51,14 +51,6 @@
               "$ref": "#/definitions/key"
             }
           },
-          "400": {
-            "x-nullable": false,
-            "x-ms-error-response": true,
-            "description": "400 - In case request is malformed or maximum number of API keys is reached",
-            "schema": {
-              "type": "string"
-            }
-          },
           "default": {
             "description": "Microsoft.Marketplace error response describing why the operation failed.",
             "schema": {
@@ -114,14 +106,6 @@
               "type": "string"
             }
           },
-          "404": {
-            "x-nullable": false,
-            "x-ms-error-response": true,
-            "description": "404 - Indicates that the API key to revoke was not found",
-            "schema": {
-              "type": "string"
-            }
-          },
           "default": {
             "description": "Microsoft.Marketplace error response describing why the operation failed.",
             "schema": {
@@ -168,14 +152,6 @@
             "description": "List of the keys that belong to the subscription",
             "schema": {
               "$ref": "#/definitions/keyList"
-            }
-          },
-          "404": {
-            "x-nullable": false,
-            "x-ms-error-response": true,
-            "description": "404 - Indicates that the API key to revoke was not found",
-            "schema": {
-              "type": "string"
             }
           },
           "default": {
