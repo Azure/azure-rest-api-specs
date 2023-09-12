@@ -26,14 +26,14 @@ These are the global settings for the AppConfiguration API.
 ``` yaml
 # common
 openapi-type: data-plane
-tag: package-2023-03-01
+tag: package-2023-10-01
 ```
 
 ### Tag: package-2023-10-01
 
 These settings apply only when `--tag=package-2023-10-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-05-01-preview'
+``` yaml $(tag) == 'package-2023-10-01'
 input-file:
 - Microsoft.AppConfiguration/stable/2023-10-01/appconfiguration.json
 ```
