@@ -550,12 +550,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/ipamPools/{poolName}/poolUsageSummary": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/ipamPools/{poolName}/poolUsage": {
       "post": {
         "tags": [
           "IpamPool"
         ],
-        "summary": "Get the Pool Usage Summary.",
+        "summary": "Get the Pool Usage.",
         "operationId": "IpamPool_Usage",
         "produces": [
           "application/json"
@@ -587,7 +587,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Show the summary of address usage info of address pool",
+            "description": "Show the summary of usage info of ipamPool",
             "schema": {
               "$ref": "#/definitions/PoolUsage"
             }
@@ -923,7 +923,7 @@
             "$ref": "#/definitions/ResourceBasics"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
         },
         "allocatedAddressPrefixes": {
           "type": "array",
