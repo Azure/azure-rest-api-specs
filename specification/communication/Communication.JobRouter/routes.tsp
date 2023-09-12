@@ -1,3 +1,4 @@
+import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
