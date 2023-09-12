@@ -26,7 +26,7 @@ These are the global settings for the marketplacecatalog.
 
 ```yaml
 openapi-type: arm
-tag: package-2023-01-01-preview
+tag: package-2022-07-31
 ```
 
 ### Tag: package-2022-07-31
@@ -36,13 +36,4 @@ These settings apply only when `--tag=package-2022-07-31` is specified on the co
 ```yaml $(tag) == 'package-2022-07-31'
 input-file:
   - stable/2022-07-31/marketplacecatalog.json
-```
-
-### Tag: package-2023-01-01-preview
-
-These settings apply only when `--tag=package-2023-01-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-01-01-preview'
-input-file:
-  - stable/2023-01-01-preview/discoverykeys.json
 ```
