@@ -522,6 +522,158 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}/getResourceSummary": {
+      "post": {
+        "operationId": "Resource_Summary",
+        "description": "Getting the summary of monitored resources and manage gateway attached to a SCOM managed instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GetResourceSummaryResponseProperties"
+            }
+          },
+          "default": {
+            "description": "An error response providing a description of the reason for the operation's failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Instances_Get": {
+            "$ref": "./examples/Resource_Summary.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}/getResourcesList": {
+      "post": {
+        "operationId": "Resource_List",
+        "description": "Getting the List of specified type of resource attached to a SCOM managed instance based on filter and sorting conditions.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetResourceListProperties"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GetResourcesListResponseProperties"
+            }
+          },
+          "default": {
+            "description": "An error response providing a description of the reason for the operation's failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Instances_Get": {
+            "$ref": "./examples/Resource_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}/onboardGateway": {
+      "post": {
+        "operationId": "Onboard_Gateway",
+        "description": "Gateway approval for onboarding gateway.",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GatewayOnboardingProperties"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The gateway approval for onboarding has completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/onboardGatewayResponseProperties"
+            }
+          },
+          "202": {
+            "description": "Accepted. The approval for onboarding will complete asyncronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "An error response providing a description of the reason for the operation's failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Instances_Scale": {
+            "$ref": "./examples/Gateway_Onboard.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}/patchServers": {
       "post": {
         "operationId": "Instances_PatchServers",
@@ -1134,6 +1286,270 @@
         }
       }
     },
+    "GetResourceListProperties": {
+      "type": "object",
+      "description": "Properties for filtering resource list.",
+      "properties": {
+        "filterProperties": {
+          "description": "Filter properties for resource list.",
+          "$ref": "#/definitions/FilterProperties"
+        }
+      }
+    },
+    "FilterProperties": {
+      "description": "List of filter properties to be applied while fetching the resource list.",
+      "type": "object",
+      "properties": {
+        "skip": {
+          "description": "skip count.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "take": {
+          "description": "number of resources to be displayed.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "resourceType": {
+          "description": "Resource Type of various types to be used for filtering",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to be used for filtering",
+          "type": "string"
+        },
+        "subscription": {
+          "description": "Subscription List to be used for filtering",
+          "type": "array",
+          "items": {
+            "description": "subscription Id.",
+            "type": "string"
+          }
+        },
+        "resourcegroup": {
+          "description": "ResourceGroupName List to be used for filtering",
+          "type": "array",
+          "items": {
+            "description": "Resource Group Name.",
+            "type": "string"
+          }
+        },
+        "location": {
+          "description": "Location list to be used for filtering",
+          "type": "array",
+          "items": {
+            "description": "Location.",
+            "type": "string"
+          }
+        },
+        "healthStatus": {
+          "description": "Health status list to be used for filtering",
+          "type": "array",
+          "items": {
+            "description": "Health status.",
+            "type": "string"
+          }
+        },
+        "autoUpgrade": {
+          "description": "AutoUpgrade list to be used for filtering",
+          "type": "array",
+          "items": {
+            "description": "AutoUpgrade values.",
+            "type": "string"
+          }
+        },
+        "machineType": {
+          "description": "machine types list to be used for filtering",
+          "type": "array",
+          "items": {
+            "description": "machine type.",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GetResourceSummaryResponseProperties": {
+      "type": "object",
+      "description": "Properties for get resources summary operation",
+      "properties": {
+        "monitoredResources": {
+          "description": "Monitored resource summary",
+          "$ref": "#/definitions/getResourceSummary"
+        },
+        "gateways": {
+          "description": "gateway summary",
+          "$ref": "#/definitions/getResourceSummary"
+        }
+      }
+    },
+    "getResourceSummary": {
+      "type": "object",
+      "description": "Properties for get resources count operation",
+      "properties": {
+        "count": {
+          "description": "resource total count summary.",
+          "$ref": "#/definitions/getResourceCountProperties"
+        }
+      }
+    },
+    "getResourceCountProperties": {
+      "type": "object",
+      "description": "Properties for resource count.",
+      "properties": {
+        "total": {
+          "description": "resource total count",
+          "type": "integer",
+          "format": "int64"
+        },
+        "healthy": {
+          "description": "total healthy resource count",
+          "type": "integer",
+          "format": "int64"
+        },
+        "unhealthy": {
+          "description": "azure Virtual Machine count",
+          "type": "integer",
+          "format": "int64"
+        },
+        "arcMachines": {
+          "description": "Arc Machine count",
+          "type": "integer",
+          "format": "int64"
+        },
+        "azureMachines": {
+          "description": "azure Machine count",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "GetResourcesListResponseProperties": {
+      "type": "object",
+      "description": "ResourceList based on filters.",
+      "properties": {
+        "value": {
+          "description": "The list of the resources based on the selected filters.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/NexusResourcesProperties"
+          }
+        }
+      }
+    },
+    "NexusResourcesProperties": {
+      "type": "object",
+      "description": "Resource properties.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties of a filtered resource.",
+          "$ref": "#/definitions/FilteredResourcesResponseProperties"
+        }
+      }
+    },
+    "FilteredResourcesResponseProperties": {
+      "type": "object",
+      "description": "The properties of a filtered resource.",
+      "properties": {
+        "resourceId": {
+          "description": "ArmId of the filtered resource.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/virtualMachines"
+              },
+              {
+                "type": "Microsoft.SCVMM/VirtualMachines"
+              },
+              {
+                "type": "microsoft.scvmm/vmmservers"
+              },
+              {
+                "type": "Microsoft.HybridCompute/machines"
+              }
+            ]
+          }
+        },
+        "resourceLocation": {
+          "description": "Location of the filtered resource.",
+          "type": "string"
+        },
+        "computerName": {
+          "description": "ComputerName of the filtered resource.",
+          "type": "string"
+        },
+        "domainName": {
+          "description": "The domain name associated with the filtered resource.",
+          "type": "string"
+        },
+        "managementServerEndpoint": {
+          "description": "The management server endpoint to which the filtered resource is directed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "healthStatus": {
+          "description": "The health status of the filtered resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "connectionStatus": {
+          "description": "The connection status of the filtered resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "installType": {
+          "description": "Install type of filtered resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "autoUpgrade": {
+          "description": "Update type of filtered resource.",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "autoUpgrade",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "operatingSystem": {
+          "description": "operatingSystem of filtered resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "machineType": {
+          "description": "machineType of filtered resource.",
+          "type": "string",
+          "enum": [
+            "Azure",
+            "Azure Arc",
+            "On-Prem"
+          ],
+          "x-ms-enum": {
+            "name": "machineType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "resourceAdditionalProperties": {
+          "description": "The additional properties of filtered resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "setServerCountResponseProperties": {
       "type": "object",
       "description": "Properties for set server count operation",
@@ -1142,6 +1558,56 @@
           "description": "Management server count",
           "type": "integer",
           "format": "int64"
+        }
+      }
+    },
+    "GatewayOnboardingProperties": {
+      "type": "object",
+      "description": "Properties for approval of gateway",
+      "properties": {
+        "scomGateway": {
+          "description": "computer name or fqdn of the machine which is onboarded as gateway.",
+          "type": "string"
+        },
+        "resourceId": {
+          "description": "ArmId of the gateway resource.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/virtualMachines"
+              },
+              {
+                "type": "Microsoft.SCVMM/VirtualMachines"
+              },
+              {
+                "type": "microsoft.scvmm/vmmservers"
+              },
+              {
+                "type": "Microsoft.HybridCompute/machines"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "onboardGatewayResponseProperties": {
+      "type": "object",
+      "description": "Properties for gateway onboarding operation.",
+      "properties": {
+        "status": {
+          "description": "Status of the gateway onboard operation.",
+          "type": "string",
+          "enum": [
+            "Started",
+            "Progress",
+            "Completed"
+          ],
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
         }
       }
     },

@@ -503,6 +503,31 @@
         "adouPath"
       ]
     },
+    "DeploymentMode": {
+      "type": "string",
+      "description": "The deployment mode for cluster deployment.",
+      "enum": [
+        "Deploy",
+        "Validate"
+      ],
+      "default": "Deploy",
+      "x-ms-enum": {
+        "name": "DeploymentMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Validate",
+            "value": "Validate",
+            "description": "Validate deployment settings for cluster."
+          },
+          {
+            "name": "Deploy",
+            "value": "Deploy",
+            "description": "Deploy cluster using deployment settings."
+          }
+        ]
+      }
+    },
     "DeploymentRequest": {
       "type": "object",
       "description": "The deployment request for Azure Stack HCI Cluster.",
@@ -571,6 +596,18 @@
           "description": "DeploymentSetting provisioning state",
           "readOnly": true
         },
+        "arcNodeResourceIds": {
+          "type": "array",
+          "description": "Azure resource ids of Arc machines to be part of cluster.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "deploymentMode": {
+          "$ref": "#/definitions/DeploymentMode",
+          "description": "The deployment mode for cluster deployment."
+        },
         "deploymentConfiguration": {
           "$ref": "#/definitions/DeploymentConfiguration",
           "description": "Scale units will contains list of deployment data",
@@ -583,6 +620,8 @@
         }
       },
       "required": [
+        "arcNodeResourceIds",
+        "deploymentMode",
         "deploymentConfiguration"
       ]
     },

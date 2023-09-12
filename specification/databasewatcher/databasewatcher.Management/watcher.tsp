@@ -7,6 +7,7 @@ import "./sqlDbSingleDatabaseTarget.tsp";
 import "./sqlDbElasticPoolTarget.tsp";
 import "./sqlMiTarget.tsp";
 import "./sqlVmTarget.tsp";
+import "./privateConnection.tsp";
 
 @service({
   title: "Microsoft.DatabaseWatcher",
@@ -168,6 +169,17 @@ model Target is ProxyResource<TargetProperties> {
   @key("targetName")
   @pattern("^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$")
   @segment("targets")
+  @path
+  name: string;
+}
+
+@added(Versions.v2023_09_01_preview)
+@parentResource(Watcher)
+model PrivateConnection is ProxyResource<PrivateConnectionProperties> {
+  @doc("The private connection resource name.")
+  @key("privateConnectionName")
+  @pattern("^[a-zA-Z0-9]{1}[a-zA-Z0-9-_.]{0,62}[a-zA-Z0-9_]{1}$")
+  @segment("privateConnections")
   @path
   name: string;
 }
