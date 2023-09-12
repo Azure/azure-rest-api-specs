@@ -4,7 +4,7 @@
     "resourceGroupName": "resRg",
     "clusterName": "myCluster",
     "nodeTypeName": "BE",
-    "api-version": "2023-07-01-preview",
+    "api-version": "2023-09-01-preview",
     "parameters": {
       "properties": {
         "isPrimary": false,
@@ -36,6 +36,7 @@
         "securityType": "TrustedLaunch",
         "secureBootEnabled": true,
         "enableNodePublicIP": true,
+        "enableNodePublicIPv6": true,
         "natGatewayId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/natGateways/myNatGateway",
         "serviceArtifactReferenceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Compute/galleries/myGallery/serviceArtifacts/myServiceArtifact/vmArtifactsProfiles/myVmArtifactProfile",
         "dscpConfigurationId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/dscpConfigurations/myDscpConfig",
@@ -62,7 +63,8 @@
               "publisher": "Microsoft.Azure.Geneva",
               "type": "GenevaMonitoring",
               "typeHandlerVersion": "2.0",
-              "settings": {}
+              "settings": {},
+              "setupOrder": [ "BeforeSFRuntime" ]
             }
           }
         ],
@@ -99,6 +101,49 @@
         "vmSetupActions": [
           "EnableContainers",
           "EnableHyperV"
+        ],
+        "additionalNetworkInterfaceConfigurations": [
+          {
+            "name": "nic-1",
+            "enableAcceleratedNetworking": true,
+            "dscpConfiguration": {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/dscpConfigurations/myDscpConfig"
+            },
+            "ipConfigurations": [
+              {
+                "name": "ipconfig-1",
+                "applicationGatewayBackendAddressPools": [
+                  {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/applicationGateways/appgw-test/backendAddressPools/appgwBepoolTest"
+                  }
+                ],
+                "loadBalancerBackendAddressPools": [
+                  {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/loadBalancers/test-LB/backendAddressPools/LoadBalancerBEAddressPool"
+                  }
+                ],
+                "loadBalancerInboundNatPools": [
+                  {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/loadBalancers/test-LB/inboundNatPools/LoadBalancerNATPool"
+                  }
+                ],
+                "subnet": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"
+                },
+                "privateIPAddressVersion": "IPv4",
+                "publicIPAddressConfiguration": {
+                  "name": "publicip-1",
+                  "ipTags": [
+                    {
+                      "ipTagType": "RoutingPreference",
+                      "ipTag": "Internet"
+                    }
+                  ],
+                  "publicIPAddressVersion": "IPv4"
+                }
+              }
+            ]
+          }
         ]
       }
     }
@@ -106,8 +151,8 @@
   "responses": {
     "202": {
       "headers": {
-        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2023-07-01-preview",
-        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2023-07-01-preview"
+        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2023-09-01-preview",
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2023-09-01-preview"
       },
       "body": {
         "type": "Microsoft.ServiceFabric/managedClusters/nodeTypes",
@@ -145,6 +190,7 @@
           "securityType": "TrustedLaunch",
           "secureBootEnabled": true,
           "enableNodePublicIP": true,
+          "enableNodePublicIPv6": true,
           "natGatewayId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/natGateways/myNatGateway",
           "serviceArtifactReferenceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Compute/galleries/myGallery/serviceArtifacts/myServiceArtifact/vmArtifactsProfiles/myVmArtifactProfile",
           "dscpConfigurationId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/dscpConfigurations/myDscpConfig",
@@ -171,7 +217,8 @@
                 "publisher": "Microsoft.Azure.Geneva",
                 "type": "GenevaMonitoring",
                 "typeHandlerVersion": "2.0",
-                "settings": {}
+                "settings": {},
+                "setupOrder": [ "BeforeSFRuntime" ]
               }
             }
           ],
@@ -213,14 +260,57 @@
           "vmSetupActions": [
             "EnableContainers",
             "EnableHyperV"
+          ],
+          "additionalNetworkInterfaceConfigurations": [
+            {
+              "name": "nic-1",
+              "enableAcceleratedNetworking": true,
+              "dscpConfiguration": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/dscpConfigurations/myDscpConfig"
+              },
+              "ipConfigurations": [
+                {
+                  "name": "ipconfig-1",
+                  "applicationGatewayBackendAddressPools": [
+                    {
+                      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/applicationGateways/appgw-test/backendAddressPools/appgwBepoolTest"
+                    }
+                  ],
+                  "loadBalancerBackendAddressPools": [
+                    {
+                      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/loadBalancers/test-LB/backendAddressPools/LoadBalancerBEAddressPool"
+                    }
+                  ],
+                  "loadBalancerInboundNatPools": [
+                    {
+                      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/loadBalancers/test-LB/inboundNatPools/LoadBalancerNATPool"
+                    }
+                  ],
+                  "subnet": {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"
+                  },
+                  "privateIPAddressVersion": "IPv4",
+                  "publicIPAddressConfiguration": {
+                    "name": "publicip-1",
+                    "ipTags": [
+                      {
+                        "ipTagType": "RoutingPreference",
+                        "ipTag": "Internet"
+                      }
+                    ],
+                    "publicIPAddressVersion": "IPv4"
+                  }
+                }
+              ]
+            }
           ]
         }
       }
     },
     "200": {
       "headers": {
-        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2023-07-01-preview",
-        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2023-07-01-preview"
+        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2023-09-01-preview",
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2023-09-01-preview"
       },
       "body": {
         "type": "Microsoft.ServiceFabric/managedClusters/nodeTypes",
@@ -258,6 +348,7 @@
           "securityType": "TrustedLaunch",
           "secureBootEnabled": true,
           "enableNodePublicIP": true,
+          "enableNodePublicIPv6": true,
           "natGatewayId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/natGateways/myNatGateway",
           "serviceArtifactReferenceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Compute/galleries/myGallery/serviceArtifacts/myServiceArtifact/vmArtifactsProfiles/myVmArtifactProfile",
           "dscpConfigurationId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/dscpConfigurations/myDscpConfig",
@@ -284,7 +375,8 @@
                 "publisher": "Microsoft.Azure.Geneva",
                 "type": "GenevaMonitoring",
                 "typeHandlerVersion": "2.0",
-                "settings": {}
+                "settings": {},
+                "setupOrder": [ "BeforeSFRuntime" ]
               }
             }
           ],
@@ -326,6 +418,49 @@
           "vmSetupActions": [
             "EnableContainers",
             "EnableHyperV"
+          ],
+          "additionalNetworkInterfaceConfigurations": [
+            {
+              "name": "nic-1",
+              "enableAcceleratedNetworking": true,
+              "dscpConfiguration": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/dscpConfigurations/myDscpConfig"
+              },
+              "ipConfigurations": [
+                {
+                  "name": "ipconfig-1",
+                  "applicationGatewayBackendAddressPools": [
+                    {
+                      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/applicationGateways/appgw-test/backendAddressPools/appgwBepoolTest"
+                    }
+                  ],
+                  "loadBalancerBackendAddressPools": [
+                    {
+                      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/loadBalancers/test-LB/backendAddressPools/LoadBalancerBEAddressPool"
+                    }
+                  ],
+                  "loadBalancerInboundNatPools": [
+                    {
+                      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/loadBalancers/test-LB/inboundNatPools/LoadBalancerNATPool"
+                    }
+                  ],
+                  "subnet": {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"
+                  },
+                  "privateIPAddressVersion": "IPv4",
+                  "publicIPAddressConfiguration": {
+                    "name": "publicip-1",
+                    "ipTags": [
+                      {
+                        "ipTagType": "RoutingPreference",
+                        "ipTag": "Internet"
+                      }
+                    ],
+                    "publicIPAddressVersion": "IPv4"
+                  }
+                }
+              ]
+            }
           ]
         }
       }

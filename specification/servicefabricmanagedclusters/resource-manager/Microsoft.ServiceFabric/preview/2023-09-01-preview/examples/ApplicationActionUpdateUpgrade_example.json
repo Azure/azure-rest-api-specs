@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resRg",
+    "clusterName": "myCluster",
+    "applicationName": "myApp",
+    "api-version": "2023-09-01-preview",
+    "parameters": {
+      "UpgradeKind": "Rolling",
+      "Name": "fabric:/Voting",
+      "UpdateDescription": {
+        "RollingUpgradeMode": "Monitored",
+        "ForceRestart": true,
+        "FailureAction": "Manual",
+        "HealthCheckWaitDurationInMilliseconds": "PT0H0M10S",
+        "HealthCheckStableDurationInMIlliseconds": "PT1H0M0S",
+        "HealthCheckRetryTimeoutInMilliseconds": "PT0H15M0S",
+        "UpgradeTimeoutInMilliseconds": "PT2H0M0S",
+        "UpgradeDomainTimeoutInMilliseconds": "PT2H0M0S"
+      },
+      "ApplicationHealthPolicy": {
+        "ConsiderWarningAsError": true,
+        "MaxPercentUnhealthyDeployedApplications": 10,
+        "DefaultServiceTypeHealthPolicy": {
+          "MaxPercentUnhealthyPartitionsPerService": 10,
+          "MaxPercentUnhealthyReplicasPerPartition": 11,
+          "MaxPercentUnhealthyServices": 12
+        },
+        "ServiceTypeHealthPolicyMap": {
+          "VotingWeb": {
+            "MaxPercentUnhealthyPartitionsPerService": 13,
+            "MaxPercentUnhealthyReplicasPerPartition": 14,
+            "MaxPercentUnhealthyServices": 15
+          }
+
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2023-09-01-preview",
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2023-09-01-preview"
+      }
+    },
+    "200": {}
+  }
+}
