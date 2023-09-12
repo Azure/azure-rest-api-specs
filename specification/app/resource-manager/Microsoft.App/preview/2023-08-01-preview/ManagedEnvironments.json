@@ -1058,6 +1058,103 @@
         }
       }
     },
+    "AppInsightsConfiguration": {
+      "description": "Configuration of Application Insights ",
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "Application Insights connection string",
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "OpenTelemetryConfiguration": {
+      "description": "Configuration of Open Telemetry",
+      "type": "object",
+      "properties": {
+        "destinationsConfiguration": {
+          "description": "Open telemetry destinations configuration",
+          "$ref": "#/definitions/DestinationsConfiguration"
+        },
+        "tracesConfiguration": {
+          "description": "Open telemetry trace configuration",
+          "$ref": "#/definitions/TracesConfiguration"
+        },
+        "logsConfiguration": {
+          "description": "Open telemetry logs configuration",
+          "$ref": "#/definitions/LogsConfiguration"
+        },
+        "metricsConfiguration": {
+          "description": "Open telemetry metrics configuration",
+          "$ref": "#/definitions/MetricsConfiguration"
+        }
+      }
+    },
+    "DestinationsConfiguration": {
+      "description": "Configuration of Open Telemetry destinations",
+      "type": "object",
+      "properties": {
+        "dataDogConfiguration": {
+          "description": "Open telemetry datadog destination configuration",
+          "$ref": "#/definitions/DataDogConfiguration"
+        }
+      }
+    },
+    "DataDogConfiguration": {
+      "description": "Configuration of datadog ",
+      "type": "object",
+      "properties": {
+        "site": {
+          "description": "The data dog site",
+          "type": "string"
+        },
+        "key": {
+          "description": "The data dog api key",
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "TracesConfiguration": {
+      "description": "Configuration of Open Telemetry traces",
+      "type": "object",
+      "properties": {
+        "destinations": {
+          "description": "Open telemetry traces destinations",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "LogsConfiguration": {
+      "description": "Configuration of Open Telemetry logs",
+      "type": "object",
+      "properties": {
+        "destinations": {
+          "description": "Open telemetry logs destinations",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MetricsConfiguration": {
+      "description": "Configuration of Open Telemetry metrics",
+      "type": "object",
+      "properties": {
+        "destinations": {
+          "description": "Open telemetry metrics destinations",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "KedaConfiguration": {
       "type": "object",
       "description": "Configuration properties Keda component",
@@ -1206,6 +1303,14 @@
             "appLogsConfiguration": {
               "$ref": "#/definitions/AppLogsConfiguration",
               "description": "Cluster configuration which enables the log daemon to export\napp logs to a destination. Currently only \"log-analytics\" is\nsupported"
+            },
+            "appInsightsConfiguration": {
+              "$ref": "#/definitions/AppInsightsConfiguration",
+              "description": "Environment level Application Insights configuration"
+            },
+            "openTelemetryConfiguration": {
+              "$ref": "#/definitions/OpenTelemetryConfiguration",
+              "description": "Environment Open Telemetry configuration"
             },
             "zoneRedundant": {
               "description": "Whether or not this Managed Environment is zone-redundant.",
