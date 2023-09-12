@@ -117,6 +117,11 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "OrderPreview": {
+            "$ref": "./examples/Orders_Preview.json"
+          }
         }
       }
     },
@@ -765,18 +770,15 @@
         },
         "market": {
           "type": "string",
-          "description": "Market - country code for Order",
-          "readOnly": true
+          "description": "Market - country code for Order"
         },
         "language": {
           "type": "string",
-          "description": "Language - language code for Order",
-          "readOnly": true
+          "description": "Language - language code for Order"
         },
         "reservationId": {
           "type": "string",
-          "description": "Reservation for order if applicable",
-          "readOnly": true
+          "description": "Reservation for order if applicable"
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -886,6 +888,18 @@
         "billingInformation": {
           "$ref": "#/definitions/BillingInformationUpdate",
           "description": "Billing Information"
+        },
+        "market": {
+          "type": "string",
+          "description": "Market - country code for Order"
+        },
+        "language": {
+          "type": "string",
+          "description": "Language - language code for Order"
+        },
+        "reservationId": {
+          "type": "string",
+          "description": "Reservation for order if applicable"
         }
       }
     },
@@ -909,7 +923,6 @@
           "items": {
             "$ref": "#/definitions/Tax"
           },
-          "readOnly": true,
           "x-ms-identifiers": []
         },
         "fees": {
@@ -971,7 +984,7 @@
           {
             "name": "FulfillmentProductId",
             "value": "FulfillmentProductId",
-            "description": "MS Product Identitier (3x5 SKU)"
+            "description": "MS Product Identifier (3x5 SKU)"
           }
         ]
       }
@@ -1044,12 +1057,12 @@
           {
             "name": "BusinessLocation",
             "value": "BusinessLocation",
-            "description": "MCAPI Business Location"
+            "description": "Modern Commerce API Business Location"
           },
           {
             "name": "ExternalId",
             "value": "ExternalId",
-            "description": "Parnter ExternalId"
+            "description": "Partner External-Id"
           }
         ]
       }

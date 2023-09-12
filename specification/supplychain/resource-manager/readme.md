@@ -26,16 +26,16 @@ These are the global settings for the supplychain.
 
 ```yaml
 openapi-type: arm
-tag: package-2023-02-22
+tag: package-2023-07-12
 ```
 
 ### Tag: package-2023-02-22
 
-These settings apply only when `--tag=package-2023-02-22` is specified on the command line.
+These settings apply only when `--tag=package-2023-07-12` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-02-22'
+```yaml $(tag) == 'package-2023-07-12'
 input-file:
-  - Microsoft.Hardware/preview/2023-02-22/supplychain.json
+  - Microsoft.Hardware/preview/2023-07-12/schemas.json
 ```
 
 ---

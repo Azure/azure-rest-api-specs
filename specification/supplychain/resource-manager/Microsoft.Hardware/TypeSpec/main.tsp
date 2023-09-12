@@ -55,15 +55,12 @@ model OrderProperties {
   currency?:string;
 
   @doc("Market - country code for Order")
-  @visibility("read")
   market?:string;
 
   @doc("Language - language code for Order")
-  @visibility("read")
   language?:string;
 
   @doc("Reservation for order if applicable")
-  @visibility("read")
   reservationId?:string;
 
   @visibility("read")
@@ -171,7 +168,6 @@ model Price {
   shippingCost?: float64;
 
   @doc("Tax for this line")
-  @visibility("read")
   taxes?: Tax[];
 
   @doc("Fees for this line")
@@ -235,7 +231,7 @@ enum ProductIdType{
   UPN,
   @doc("Product, SKU, Availability in Big-Catalog")
   PSA,
-  @doc("MS Product Identitier (3x5 SKU)")
+  @doc("MS Product Identifier (3x5 SKU)")
   FulfillmentProductId
 }
 
@@ -249,9 +245,9 @@ enum ShippingMethod{
 
 @doc("shipToId Type")
 enum ShipToIdType{
-  @doc("MCAPI Business Location")
+  @doc("Modern Commerce API Business Location")
   BusinessLocation,
-  @doc("Parnter ExternalId")
+  @doc("Partner External-Id")
   ExternalId
 }
 
@@ -330,6 +326,7 @@ interface OrderPreviewInterface {
 @armResourceCollectionAction
   @armProviderNameValue
   @doc("Implements orderPreview operations")
+  @Autorest.example("./examples/Orders_Preview.json","OrderPreview")
   @TypeSpec.Rest.action("orderPreview")
   @post
   op orderPreview(

@@ -66,9 +66,9 @@
 		"200": {
 			"description": "",
 			"body": {
-				"id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Hardware/orders/order1",
-				"name": "order1",
-				"location": "eus2",
+				"id": null,
+				"location": "westeurope",
+				"name": null,
 				"properties": {
 					"billingInformation": {
 						"authorizationToken": "authToken",
@@ -77,23 +77,33 @@
 					"currency": "USD",
 					"customerOrder": {
 						"createdDate": "2023-08-09",
-						"id": "Customer_ORDER_Number"
+						"id": "VsbTest17Aug23"
 					},
-					"language": null,
+					"language": "en",
 					"market": "US",
 					"orderLines": [
 						{
-							"createdDateTime": null,
-							"estimatedShippedDate": null,
+							"createdDateTime": "2023-08-09T18:45:52.4857651Z",
+							"estimatedShippedDate": "2023-08-09",
 							"id": 1,
 							"price": {
-								"fees": null,
+								"fees": [
+									{
+										"amount": 6.0,
+										"type": "Recycling"
+									}
+								],
 								"shippingCost": 0,
-								"taxes": null,
+								"taxes": [
+									{
+										"amount": 63.699,
+										"type": "Unit"
+									}
+								],
 								"unitAmount": 77777.77
 							},
 							"product": {
-								"id": "8MZBMMCK15ZT/0F35/8WFDZ2MKGD2R",
+								"id": "8MZBMMCK15WW/7KM4/8W0KD9HC39VZ",
 								"type": "PSA"
 							},
 							"quantity": {
@@ -111,64 +121,13 @@
 							"status": "Pending"
 						}
 					],
-					"provisioningState": "Succeeded",
-					"reservationId": null,
+					"provisioningState": "Pending",
+					"reservationId": "reId",
 					"status": "Pending"
-				}
-			}
-		},
-		"201": {
-			"description": "",
-			"body": {
-				"id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Hardware/orders/order1",
-				"name": "order1",
-				"location": "eus2",
-				"properties": {
-					"billingInformation": {
-						"authorizationToken": "authToken",
-						"riskToken": "riskToken"
-					},
-					"currency": "USD",
-					"customerOrder": {
-						"createdDate": "2023-08-09",
-						"id": "Customer_ORDER_Number"
-					},
-					"language": null,
-					"market": "US",
-					"orderLines": [
-						{
-							"createdDateTime": null,
-							"estimatedShippedDate": null,
-							"id": 1,
-							"price": {
-								"fees": null,
-								"shippingCost": 0,
-								"taxes": null,
-								"unitAmount": 77777.77
-							},
-							"product": {
-								"id": "8MZBMMCK15ZT/0F35/8WFDZ2MKGD2R",
-								"type": "PSA"
-							},
-							"quantity": {
-								"confirmed": null,
-								"ordered": 1,
-								"returned": null,
-								"shipped": null
-							},
-							"requestedDeliveryDate": "2023-08-09",
-							"shipTo": {
-								"id": "DIS3-W55D-BG7-TGB",
-								"type": "BusinessLocation"
-							},
-							"shippingMethod": "Ground",
-							"status": "Pending"
-						}
-					],
-					"provisioningState": "Succeeded",
-					"reservationId": null,
-					"status": "Pending"
-				}
+				},
+				"systemData": null,
+				"tags": null,
+				"type": null
 			}
 		}
 	}
