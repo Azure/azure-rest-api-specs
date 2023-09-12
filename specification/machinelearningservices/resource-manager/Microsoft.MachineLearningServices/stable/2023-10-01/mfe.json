@@ -9279,6 +9279,15 @@
           ],
           "x-nullable": true
         },
+        "queueSettings": {
+          "description": "Queue settings for the job",
+          "$ref": "#/definitions/QueueSettings",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
         "resources": {
           "description": "Compute Resource configuration for the job.",
           "default": "{}",
@@ -10646,6 +10655,15 @@
           "type": "object",
           "readOnly": true,
           "x-ms-mutability": [
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "queueSettings": {
+          "description": "Queue settings for the job",
+          "$ref": "#/definitions/QueueSettings",
+          "x-ms-mutability": [
+            "create",
             "read"
           ],
           "x-nullable": true
@@ -13937,6 +13955,39 @@
       },
       "additionalProperties": false
     },
+    "JobTier": {
+      "description": "Enum to determine the job tier.",
+      "enum": [
+        "Null",
+        "Spot",
+        "Basic",
+        "Standard",
+        "Premium"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "JobTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Null"
+          },
+          {
+            "value": "Spot"
+          },
+          {
+            "value": "Basic"
+          },
+          {
+            "value": "Standard"
+          },
+          {
+            "value": "Premium"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
     "JobType": {
       "description": "Enum to determine the type of job.",
       "enum": [
@@ -15373,6 +15424,31 @@
       "x-ms-discriminator-value": "PyTorch",
       "additionalProperties": false
     },
+    "QueueSettings": {
+      "type": "object",
+      "properties": {
+        "jobTier": {
+          "description": "Controls the compute job tier",
+          "default": "Null",
+          "$ref": "#/definitions/JobTier",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "priority": {
+          "format": "int32",
+          "description": "Controls the priority of the job on a compute.",
+          "type": "integer",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
     "RandomSamplingAlgorithm": {
       "description": "Defines a Sampling Algorithm that generates values randomly",
       "type": "object",
@@ -16608,6 +16684,15 @@
             "$ref": "#/definitions/JobOutput",
             "x-nullable": true
           },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "queueSettings": {
+          "description": "Queue settings for the job",
+          "$ref": "#/definitions/QueueSettings",
           "x-ms-mutability": [
             "create",
             "read"
