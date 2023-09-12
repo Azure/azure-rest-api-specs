@@ -2629,7 +2629,10 @@
         "labelsToUpsert": {
           "type": "object",
           "description": "(optional) Dictionary containing the labels to update (or add if not existing)\nin key-value pairs",
-          "additionalProperties": true
+          "additionalProperties": {
+            "properties": {},
+            "type": "object"
+          }
         }
       },
       "allOf": [
@@ -2715,7 +2718,10 @@
         "labels": {
           "type": "object",
           "description": "A set of key/value pairs that are identifying attributes used by the rules\nengines to make decisions.",
-          "additionalProperties": true
+          "additionalProperties": {
+            "properties": {},
+            "type": "object"
+          }
         },
         "assignments": {
           "type": "object",
@@ -2728,7 +2734,10 @@
         "tags": {
           "type": "object",
           "description": "A set of non-identifying attributes attached to this job",
-          "additionalProperties": true
+          "additionalProperties": {
+            "properties": {},
+            "type": "object"
+          }
         },
         "notes": {
           "type": "object",
@@ -2970,7 +2979,10 @@
         "labels": {
           "type": "object",
           "description": "A set of key/value pairs that are identifying attributes used by the rules\nengines to make decisions.",
-          "additionalProperties": true
+          "additionalProperties": {
+            "properties": {},
+            "type": "object"
+          }
         },
         "exceptionPolicyId": {
           "type": "string",
@@ -3005,7 +3017,9 @@
           "description": "Describes how the value of the label is compared to the value defined on the\nlabel selector"
         },
         "value": {
-          "description": "The value to compare against the actual label value with the given operator"
+          "type": "object",
+          "description": "The value to compare against the actual label value with the given operator",
+          "properties": {}
         }
       },
       "required": [
@@ -3076,7 +3090,10 @@
         "queueAssignments": {
           "type": "object",
           "description": "The queue(s) that this worker can receive work from.",
-          "additionalProperties": true
+          "additionalProperties": {
+            "properties": {},
+            "type": "object"
+          }
         },
         "totalCapacity": {
           "type": "integer",
@@ -3086,12 +3103,18 @@
         "labels": {
           "type": "object",
           "description": "A set of key/value pairs that are identifying attributes used by the rules\nengines to make decisions.",
-          "additionalProperties": true
+          "additionalProperties": {
+            "properties": {},
+            "type": "object"
+          }
         },
         "tags": {
           "type": "object",
           "description": "A set of non-identifying attributes attached to this worker.",
-          "additionalProperties": true
+          "additionalProperties": {
+            "properties": {},
+            "type": "object"
+          }
         },
         "channelConfigurations": {
           "type": "object",
@@ -3187,7 +3210,9 @@
           "description": "Describes how the value of the label is compared to the value defined on the\nlabel selector"
         },
         "value": {
-          "description": "The value to compare against the actual label value with the given operator"
+          "type": "object",
+          "description": "The value to compare against the actual label value with the given operator",
+          "properties": {}
         },
         "expiresAfterSeconds": {
           "type": "number",
@@ -3392,7 +3417,9 @@
       "description": "A rule providing static rules that always return the same result, regardless of\ninput.",
       "properties": {
         "value": {
-          "description": "The static value this rule always returns."
+          "type": "object",
+          "description": "The static value this rule always returns.",
+          "properties": {}
         }
       },
       "allOf": [

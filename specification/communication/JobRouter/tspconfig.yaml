@@ -6,11 +6,13 @@ parameters:
   "js-sdk-folder":
     default: "{project-root}/azure-sdk-for-js/"
   "csharp-sdk-folder":
-    default: "{project-root}/azure-sdk-for-csharp/"
+    default: "{project-root}/azure-sdk-for-net/"
   "service-directory-name":
     default: "communication"
+  "service-dir":
+    default: "sdk/communication"
 emit: [
-  "@azure-tools/typespec-autorest",
+  "@azure-tools/typespec-autorest"
 ]
 
 options:
@@ -25,6 +27,8 @@ options:
     model-namespace: false
     emitter-output-dir: "{csharp-sdk-folder}/sdk/{service-directory-name}/{namespace}/src"
     namespace: Azure.Communication.JobRouter
+    package-dir: "Azure.Communication.JobRouter"
+    save-inputs: true
   "@azure-tools/typespec-python":
     emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
     package-name: "azure-communication-jobrouter"

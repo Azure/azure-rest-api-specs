@@ -395,7 +395,7 @@ worker must satisfy in order to process this job.
 A set of key/value pairs that are identifying attributes used by the rules
 engines to make decisions.
 """)
-  labels?: Record<unknown>;
+  labels?: Record<{}>;
 
   @doc("""
 A collection of the assignments of the job.
@@ -405,7 +405,7 @@ Key is AssignmentId.
   assignments?: Record<RouterJobAssignment>;
 
   @doc("A set of non-identifying attributes attached to this job")
-  tags?: Record<unknown>;
+  tags?: Record<{}>;
 
   @doc("Notes attached to a job, sorted by timestamp")
   notes?: Record<string>;
@@ -446,7 +446,7 @@ label selector
   labelOperator: LabelOperator;
 
   @doc("The value to compare against the actual label value with the given operator")
-  value?: unknown;
+  value?: {};
 
   @doc("Describes how long this label selector is valid in seconds.")
   expiresAfterSeconds?: float32;
@@ -685,7 +685,7 @@ to workers.
 A set of key/value pairs that are identifying attributes used by the rules
 engines to make decisions.
 """)
-  labels?: Record<unknown>;
+  labels?: Record<{}>;
 
   @doc("""
 (Optional) The ID of the exception policy that determines various job
@@ -733,9 +733,9 @@ model RouterWorker {
   @doc("The current state of the worker.")
   @visibility("read")
   state?: RouterWorkerState;
-
+  
   @doc("The queue(s) that this worker can receive work from.")
-  queueAssignments?: Record<unknown>;
+  queueAssignments?: Record<{}>;
 
   @doc("The total capacity score this worker has to manage multiple concurrent jobs.")
   totalCapacity?: int32;
@@ -744,10 +744,10 @@ model RouterWorker {
 A set of key/value pairs that are identifying attributes used by the rules
 engines to make decisions.
 """)
-  labels?: Record<unknown>;
+  labels?: Record<{}>;
 
   @doc("A set of non-identifying attributes attached to this worker.")
-  tags?: Record<unknown>;
+  tags?: Record<{}>;
 
   @doc("The channel(s) this worker can handle and their impact on the workers capacity.")
   channelConfigurations?: Record<ChannelConfiguration>;
@@ -968,7 +968,7 @@ label selector
   labelOperator: LabelOperator;
 
   @doc("The value to compare against the actual label value with the given operator")
-  value?: unknown;
+  value?: {};
 }
 
 @doc("""
@@ -1170,7 +1170,7 @@ and worker selectors.
 (optional) Dictionary containing the labels to update (or add if not existing)
 in key-value pairs
 """)
-  labelsToUpsert?: Record<unknown>;
+  labelsToUpsert?: Record<{}>;
 
   @doc("The type discriminator describing a sub-type of ExceptionAction")
   kind: "reclassify";
@@ -1249,7 +1249,7 @@ input.
 """)
 model StaticRouterRule extends RouterRule {
   @doc("The static value this rule always returns.")
-  value?: unknown;
+  value?: {};
 
   @doc("The type discriminator describing a sub-type of Rule")
   kind: "static-rule";
