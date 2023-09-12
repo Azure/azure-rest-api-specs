@@ -13,36 +13,42 @@
 			"properties": {
 				"resourceInfo": {
 					"description": "Data specific to the resource",
-					"type": "object",
-					"id": {
-						"description": "id of the base resource which is being created or updated",
-						"type": "string"
-					},
-					"name": {
-						"description": "name of the resource being created or updated",
-						"type": "string"
-					},
-					"type": {
-						"description": "the type of the resource being created or updated",
-						"type": "string"
-					},
-					"location": {
-						"description": "the location of the resource being created or updated",
-						"type": "string"
-					},
-					"tags": {
-						"description": "tags on the resource being created or updated",
-						"type": "string"
-					},
-					"properties": {
-						"description": "properties in the resource payload",
-						"type": "object"
-					}
+					"$ref": "#/definitions/ResourceInfoAboutCreatedorUpdatedEvent"
 				}
 			},
 			"apiVersion": {
 				"description": "api version of the resource payload",
 				"type": "string"
+			}
+		},
+		"ResourceInfoAboutCreatedorUpdatedEvent": {
+			"description": "details of resourceInfo",
+			"type": "object",
+			"properties": {
+				"id": {
+					"description": "id of the base resource which is being created or updated",
+					"type": "string"
+				},
+				"name": {
+					"description": "name of the resource being created or updated",
+					"type": "string"
+				},
+				"type": {
+					"description": "the type of the resource being created or updated",
+					"type": "string"
+				},
+				"location": {
+					"description": "the location of the resource being created or updated",
+					"type": "string"
+				},
+				"tags": {
+					"description": "tags on the resource being created or updated",
+					"type": "string"
+				},
+				"properties": {
+					"description": "properties in the resource payload",
+					"type": "object"
+				}
 			}
 		},
 		"DeletedEventData": {
@@ -51,32 +57,38 @@
 			"properties": {
 				"resourceInfo": {
 					"description": "Data specific to the resource",
-					"type": "object",
-					"id": {
-						"description": "id of the base resource which is being deleted",
-						"type": "string"
-					},
-					"name": {
-						"description": "name of the resource being deleted",
-						"type": "string"
-					},
-					"type": {
-						"description": "the type of the resource being deleted",
-						"type": "string"
-					},
-					"location": {
-						"description": "the location of the resource being deleted",
-						"type": "string"
-					},
-					"tags": {
-						"description": "tags on the resource being deleted",
-						"type": "string"
-					}
+					"$ref": "#/definitions/ResourceInfoAboutDeletedEvent"
+				},
+				"apiVersion": {
+					"description": "api version of the resource payload",
+					"type": "string"
 				}
-			},
-			"apiVersion": {
-				"description": "api version of the resource payload",
-				"type": "string"
+			}
+		},
+		"ResourceInfoAboutDeletedEvent": {
+			"description": "Resource information related to resource being deleted. Resource properties bag not present",
+			"type": "object",
+			"properties": {
+				"id": {
+					"description": "id of the base resource which is being deleted",
+					"type": "string"
+				},
+				"name": {
+					"description": "name of the resource being deleted",
+					"type": "string"
+				},
+				"type": {
+					"description": "the type of the resource being deleted",
+					"type": "string"
+				},
+				"location": {
+					"description": "the location of the resource being deleted",
+					"type": "string"
+				},
+				"tags": {
+					"description": "tags on the resource being deleted",
+					"type": "string"
+				}
 			}
 		}
 	}
