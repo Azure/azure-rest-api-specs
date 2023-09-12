@@ -111,8 +111,8 @@ model Address {
   @doc("Name of the country")
   country: string;
 
-  @doc("Zip code")
-  zipCode: string;
+  @doc("Postal code")
+  postalCode: string;
 }
 
 @doc("Base resource properties that can be extended for arm resources.")
