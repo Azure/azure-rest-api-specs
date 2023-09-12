@@ -100,11 +100,7 @@
         ],
         "responses": {
           "200": {
-            "x-nullable": false,
-            "description": "Indicates that the API key was successfully revoked",
-            "schema": {
-              "type": "string"
-            }
+            "description": "Indicates that the API key was successfully revoked"
           },
           "default": {
             "description": "Microsoft.Marketplace error response describing why the operation failed.",
@@ -208,9 +204,14 @@
       }
     },
     "keyList": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/key"
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/key"
+          }
+        }
       }
     },
     "ErrorResponse": {
