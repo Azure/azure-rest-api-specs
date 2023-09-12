@@ -80,6 +80,11 @@ model FleetHubProfile {
   kubernetesVersion?: string;
 
   @added(Versions.v2023_08_15_preview)
+  @visibility("read")
+  @doc("The Azure Portal FQDN of the Fleet hub.")
+  portalFqdn?: string;
+
+  @added(Versions.v2023_08_15_preview)
   @doc("The virtual machine size of the Fleet hub.")
   @visibility("read", "create")
   vmSize?: string;
