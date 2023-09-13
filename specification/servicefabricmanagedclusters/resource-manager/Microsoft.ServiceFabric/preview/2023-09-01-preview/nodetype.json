@@ -780,9 +780,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/IpTag",
-                "x-ms-identifiers": [
-                  "ipTag"
-                ]
+                "x-ms-identifiers": []
               },
               "description": "Specifies the list of IP tags associated with the public IP address."
             },
@@ -815,14 +813,14 @@
       "type": "object",
       "required": [
         "ipTagType",
-        "ipTag"
+        "tag"
       ],
       "properties": {
         "ipTagType": {
           "type": "string",
           "description": "IP tag type. Example: FirstPartyUsage."
         },
-        "ipTag": {
+        "tag": {
           "type": "string",
           "description": "IP tag associated with the public IP. Example: SQL, Storage etc."
         }

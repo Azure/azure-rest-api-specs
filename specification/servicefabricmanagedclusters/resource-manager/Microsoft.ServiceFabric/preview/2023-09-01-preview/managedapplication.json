@@ -799,71 +799,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/applications/{applicationName}/health/read": {
-      "post": {
-        "tags": [
-          "Application"
-        ],
-        "operationId": "Applications_ReadHealth",
-        "summary": "Send a request to query the current application health.",
-        "description": "Send a request to query the current application health based on the query parameters passed in.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/clusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/applicationName"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/EventsHealthStateFilterOptionalQueryParam"
-          },
-          {
-            "$ref": "#/parameters/DeployedApplicationsHealthStateFilterOptionalQueryParam"
-          },
-          {
-            "$ref": "#/parameters/ServicesHealthStateFilterOptionalQueryParam"
-          },
-          {
-            "$ref": "#/parameters/ExcludeHealthStatisticsOptionalQueryParam"
-          },
-          {
-            "$ref": "#/parameters/TimeoutOptionalQueryParam"
-          }
-        ],
-        "x-ms-examples": {
-          "Get Application Health": {
-            "$ref": "./examples/ApplicationActionGetHealth_example.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "responses": {
-          "202": {
-            "description": "The operation was accepted."
-          },
-          "200": {
-            "description": "The operation completed successfully."
-          },
-          "default": {
-            "description": "The detailed error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedclusters/{clusterName}/applications/{applicationName}": {
       "get": {
         "tags": [
@@ -1599,16 +1534,13 @@
         }
       }
     },
-    "RuntimeApplicationName": {
-      "type": "string",
-      "description": "The name of the application, including the 'fabric:' URI scheme."
-    },
     "RuntimeApplicationUpgradeUpdateDescription": {
       "type": "object",
       "description": "Describes the parameters for updating an ongoing application upgrade.",
       "properties": {
         "name": {
-          "$ref": "#/definitions/RuntimeApplicationName"
+          "type": "string",
+          "description": "The name of the application, including the 'fabric:' URI scheme."
         },
         "upgradeKind": {
           "$ref": "#/definitions/RuntimeUpgradeKind"
@@ -1647,23 +1579,6 @@
         ]
       }
     },
-    "RuntimeForceRestart": {
-      "type": "boolean",
-      "description": "If true, then processes are forcefully restarted during upgrade even when the code version has not changed (the upgrade only changes configuration or data).",
-      "default": false
-    },
-    "RuntimeHealthCheckRetryTimeout": {
-      "type": "string",
-      "description": "The amount of time to retry health evaluation when the application or cluster is unhealthy before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds."
-    },
-    "RuntimeHealthCheckStableDuration": {
-      "type": "string",
-      "description": "The amount of time that the application or cluster must remain healthy before the upgrade proceeds to the next upgrade domain. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds."
-    },
-    "RuntimeHealthCheckWaitDuration": {
-      "type": "string",
-      "description": "The amount of time to wait after completing an upgrade domain before applying health policies. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds."
-    },
     "RuntimeResumeApplicationUpgradeParameters": {
       "type": "object",
       "properties": {
@@ -1682,28 +1597,38 @@
           "$ref": "#/definitions/RuntimeUpgradeMode"
         },
         "forceRestart": {
-          "$ref": "#/definitions/RuntimeForceRestart"
+          "type": "boolean",
+          "description": "If true, then processes are forcefully restarted during upgrade even when the code version has not changed (the upgrade only changes configuration or data).",
+          "default": false
         },
         "replicaSetCheckTimeoutInMilliseconds": {
-          "$ref": "#/definitions/RuntimeUpgradeReplicaSetCheckTimeout"
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum amount of time to block processing of an upgrade domain and prevent loss of availability when there are unexpected issues. When this timeout expires, processing of the upgrade domain will proceed regardless of availability loss issues. The timeout is reset at the start of each upgrade domain. Valid values are between 0 and 42949672925 inclusive. (unsigned 32-bit integer).",
+          "default": 42949672925
         },
         "failureAction": {
           "$ref": "#/definitions/RuntimeFailureAction"
         },
         "healthCheckWaitDurationInMilliseconds": {
-          "$ref": "#/definitions/RuntimeHealthCheckWaitDuration"
+          "type": "string",
+          "description": "The amount of time to wait after completing an upgrade domain before applying health policies. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds."
         },
         "healthCheckStableDurationInMilliseconds": {
-          "$ref": "#/definitions/RuntimeHealthCheckStableDuration"
+          "type": "string",
+          "description": "The amount of time that the application or cluster must remain healthy before the upgrade proceeds to the next upgrade domain. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds."
         },
         "healthCheckRetryTimeoutInMilliseconds": {
-          "$ref": "#/definitions/RuntimeHealthCheckRetryTimeout"
+          "type": "string",
+          "description": "The amount of time to retry health evaluation when the application or cluster is unhealthy before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds."
         },
         "upgradeTimeoutInMilliseconds": {
-          "$ref": "#/definitions/RuntimeUpgradeTimeout"
+          "type": "string",
+          "description": "The amount of time the overall upgrade has to complete before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds."
         },
         "upgradeDomainTimeoutInMilliseconds": {
-          "$ref": "#/definitions/RuntimeUpgradeDomainTimeout"
+          "type": "string",
+          "description": "The amount of time each upgrade domain has to complete before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds."
         },
         "instanceCloseDelayDurationInSeconds": {
           "type": "integer",
@@ -1772,10 +1697,6 @@
         }
       }
     },
-    "RuntimeUpgradeDomainTimeout": {
-      "type": "string",
-      "description": "The amount of time each upgrade domain has to complete before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds."
-    },
     "RuntimeUpgradeKind": {
       "type": "string",
       "description": "The kind of upgrade out of the following possible values.",
@@ -1821,16 +1742,6 @@
           }
         ]
       }
-    },
-    "RuntimeUpgradeReplicaSetCheckTimeout": {
-      "type": "integer",
-      "format": "int64",
-      "description": "The maximum amount of time to block processing of an upgrade domain and prevent loss of availability when there are unexpected issues. When this timeout expires, processing of the upgrade domain will proceed regardless of availability loss issues. The timeout is reset at the start of each upgrade domain. Valid values are between 0 and 42949672925 inclusive. (unsigned 32-bit integer).",
-      "default": 42949672925
-    },
-    "RuntimeUpgradeTimeout": {
-      "type": "string",
-      "description": "The amount of time the overall upgrade has to complete before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds."
     },
     "AddRemoveIncrementalNamedPartitionScalingMechanism": {
       "type": "object",
@@ -3414,42 +3325,6 @@
           "ConverterMethodToSwaggerType": "ToString"
         }
       }
-    },
-    "DeployedApplicationsHealthStateFilterOptionalQueryParam": {
-      "name": "DeployedApplicationsHealthStateFilter",
-      "description": "Allows filtering of the deployed applications health state objects returned in the result of application health query based on their health state.\nThe possible values for this parameter include integer value of one of the following health states. Only deployed applications that match the filter will be returned.\nAll deployed applications are used to evaluate the aggregated health state. If not specified, all entries are returned.\nThe state values are flag-based enumeration, so the value could be a combination of these values, obtained using bitwise 'OR' operator.\nFor example, if the provided value is 6 then health state of deployed applications with HealthState value of OK (2) and Warning (4) are returned.\n\n- Default - Default value. Matches any HealthState. The value is zero.\n- None - Filter that doesn't match any HealthState value. Used in order to return no results on a given collection of states. The value is 1.\n- Ok - Filter that matches input with HealthState value Ok. The value is 2.\n- Warning - Filter that matches input with HealthState value Warning. The value is 4.\n- Error - Filter that matches input with HealthState value Error. The value is 8.\n- All - Filter that matches input with any HealthState value. The value is 65535.\n",
-      "in": "query",
-      "x-ms-parameter-location": "method",
-      "type": "integer",
-      "required": false,
-      "default": 0
-    },
-    "EventsHealthStateFilterOptionalQueryParam": {
-      "name": "EventsHealthStateFilter",
-      "description": "Allows filtering the collection of HealthEvent objects returned based on health state.\nThe possible values for this parameter include integer value of one of the following health states.\nOnly events that match the filter are returned. All events are used to evaluate the aggregated health state.\nIf not specified, all entries are returned. The state values are flag-based enumeration, so the value could be a combination of these values, obtained using the bitwise 'OR' operator. For example, If the provided value is 6 then all of the events with HealthState value of OK (2) and Warning (4) are returned.\n\n- Default - Default value. Matches any HealthState. The value is zero.\n- None - Filter that doesn't match any HealthState value. Used in order to return no results on a given collection of states. The value is 1.\n- Ok - Filter that matches input with HealthState value Ok. The value is 2.\n- Warning - Filter that matches input with HealthState value Warning. The value is 4.\n- Error - Filter that matches input with HealthState value Error. The value is 8.\n- All - Filter that matches input with any HealthState value. The value is 65535.\n",
-      "in": "query",
-      "x-ms-parameter-location": "method",
-      "type": "integer",
-      "required": false,
-      "default": 0
-    },
-    "ExcludeHealthStatisticsOptionalQueryParam": {
-      "name": "ExcludeHealthStatistics",
-      "description": "Indicates whether the health statistics should be returned as part of the query result. False by default.\nThe statistics show the number of children entities in health state Ok, Warning, and Error.\n",
-      "in": "query",
-      "x-ms-parameter-location": "method",
-      "type": "boolean",
-      "required": false,
-      "default": false
-    },
-    "ServicesHealthStateFilterOptionalQueryParam": {
-      "name": "ServicesHealthStateFilter",
-      "description": "Allows filtering of the services health state objects returned in the result of services health query based on their health state.\nThe possible values for this parameter include integer value of one of the following health states.\nOnly services that match the filter are returned. All services are used to evaluate the aggregated health state.\nIf not specified, all entries are returned. The state values are flag-based enumeration, so the value could be a combination of these values,\nobtained using bitwise 'OR' operator. For example, if the provided value is 6 then health state of services with HealthState value of OK (2) and Warning (4) will be returned.\n\n- Default - Default value. Matches any HealthState. The value is zero.\n- None - Filter that doesn't match any HealthState value. Used in order to return no results on a given collection of states. The value is 1.\n- Ok - Filter that matches input with HealthState value Ok. The value is 2.\n- Warning - Filter that matches input with HealthState value Warning. The value is 4.\n- Error - Filter that matches input with HealthState value Error. The value is 8.\n- All - Filter that matches input with any HealthState value. The value is 65535.\n",
-      "in": "query",
-      "x-ms-parameter-location": "method",
-      "type": "integer",
-      "required": false,
-      "default": 0
     },
     "TimeoutOptionalQueryParam": {
       "name": "timeout",
