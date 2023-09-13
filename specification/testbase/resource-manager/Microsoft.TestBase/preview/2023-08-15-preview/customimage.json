@@ -40,7 +40,7 @@
           "Test Base Custom Image"
         ],
         "operationId": "CustomImages_ListByTestBaseAccount",
-        "description": "Lists all the Custom Images under a Test Base Account.",
+        "description": "Lists all the custom images under a test base account.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -85,7 +85,7 @@
           "Test Base Custom Image"
         ],
         "operationId": "CustomImages_Create",
-        "description": "Creates a Test Base Custom Image.",
+        "description": "Creates a test base custom image.",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -98,7 +98,7 @@
             "schema": {
               "$ref": "#/definitions/CustomImageResource"
             },
-            "description": "Parameters supplied to create a Test Base Custom Image."
+            "description": "Parameters supplied to create a test base custom image."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -118,13 +118,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The Test Base Custom Image was successfully created or updated.",
+            "description": "The test Base custom image was successfully created or updated.",
             "schema": {
               "$ref": "#/definitions/CustomImageResource"
             }
           },
           "201": {
-            "description": "The Test Base Custom Image 'create' operation was successfully enqueued. Check provisioningState to track execution status.",
+            "description": "The test base custom image create operation was successfully enqueued. Check provisioningState to track execution status.",
             "headers": {
               "Azure-AsyncOperation": {
                 "description": "URL to query for status of the operation.",
@@ -153,7 +153,7 @@
           "Test Base Custom Image"
         ],
         "operationId": "CustomImages_Delete",
-        "description": "Deletes a Test Base Custom Image.",
+        "description": "Deletes a test base custom image.",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -177,10 +177,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The Test Base Custom Image 'delete' operation was completed successfully."
+            "description": "The test base custom image was successfully deleted."
           },
           "202": {
-            "description": "The Test Base Custom Image 'delete' operation was successfully enqueued. Follow the Location header to poll for final outcome.",
+            "description": "The test base custom image delete operation was successfully enqueued. Follow the Location header to poll for final outcome.",
             "headers": {
               "Azure-AsyncOperation": {
                 "description": "URL to query for status of the operation.",
@@ -193,7 +193,7 @@
             }
           },
           "204": {
-            "description": "The Test Base Custom Image 'delete' operation was completed successfully."
+            "description": "The test base custom image was successfully deleted."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -233,7 +233,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The Test Base Custom Image was successfully found.",
+            "description": "The test base custom image was successfully found.",
             "schema": {
               "$ref": "#/definitions/CustomImageResource"
             }
@@ -258,7 +258,7 @@
           "Test Base Custom Image"
         ],
         "operationId": "CustomImages_CheckImageNameAvailability",
-        "description": "Checks that the Test Base Custom Image generated from VHD resource has valid and unique definition and version, return architecture and OS state of potential existing image definition.",
+        "description": "Checks that the test base custom image generated from VHD resource has valid and unique definition and version, return architecture and OS state of potential existing image definition.",
         "parameters": [
           {
             "name": "parameters",
@@ -267,7 +267,7 @@
             "schema": {
               "$ref": "#/definitions/ImageNameCheckAvailabilityParameters"
             },
-            "description": "Parameters supplied to the Test Base Custom Image CheckAvailability operation."
+            "description": "Parameters supplied to the test base custom image CheckAvailability operation."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -306,10 +306,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/imageDefinitions": {
       "get": {
         "tags": [
-          "Test Base Image Definition // Reminder: Need renaming."
+          "Test Base Image Definition"
         ],
         "operationId": "ImageDefinitions_ListByTestBaseAccount",
-        "description": "List all Image Definition properties created by Test Base Custom Images which are derived from 'VHD' source.",
+        "description": "List all image definition properties created by test base custom images which are derived from 'VHD' source.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -354,7 +354,7 @@
           "Test Base Image Definition"
         ],
         "operationId": "ImageDefinitions_Create",
-        "description": "Create Image Definition for Test Base Custom Images which are derived from 'VHD' source.",
+        "description": "Create image definition for test base custom images which are derived from 'VHD' source.",
         "parameters": [
           {
             "name": "parameters",
@@ -363,7 +363,7 @@
             "schema": {
               "$ref": "#/definitions/ImageDefinitionResource"
             },
-            "description": "Parameters supplied to create a Test Base Image Definition."
+            "description": "Parameters supplied to create a test base image definition."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -383,13 +383,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The Test Base Image Definition Resource has been successfully created or updated.",
+            "description": "The test base image definition resource has been successfully created or updated.",
             "schema": {
               "$ref": "#/definitions/ImageDefinitionResource"
             }
           },
           "201": {
-            "description": "Create a Test Base Image Definition Resource.",
+            "description": "Create a test base image definition resource.",
             "schema": {
               "$ref": "#/definitions/ImageDefinitionResource"
             }
@@ -412,7 +412,7 @@
           "Test Base ImageDefinition"
         ],
         "operationId": "ImageDefinitions_Get",
-        "description": "Get image properties under the Image Definition name created by Test Base Custom Image which derived from 'VHD' source.",
+        "description": "Get image properties under the image definition name created by test base custom image which derived from 'VHD' source.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -432,7 +432,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Get the detailed properties of  the Image Definition if applicable.",
+            "description": "Get the detailed properties of  the image definition if applicable.",
             "schema": {
               "$ref": "#/definitions/ImageDefinitionResource"
             }
@@ -455,7 +455,7 @@
           "Test Base Image Definition"
         ],
         "operationId": "ImageDefinitions_Delete",
-        "description": "Delete a Test Base Image Definition Resource.",
+        "description": "Delete a test base image definition resource.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -475,10 +475,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The Test Base Image Definition 'delete' operation was completed successfully."
+            "description": "The test base image definition was deleted successfully."
           },
           "204": {
-            "description": "The Test Base Image Definition 'delete' operation was completed successfully."
+            "description": "The Test Base Image Definition was deleted successfully."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -565,10 +565,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The Test Base VHD 'delete' operation was completed successfully."
+            "description": "The Test Base VHD was deleted successfully."
           },
           "204": {
-            "description": "The Test Base VHD 'delete' operation was completed successfully."
+            "description": "The Test Base VHD was deleted successfully."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -630,7 +630,7 @@
   },
   "definitions": {
     "CustomImageListResult": {
-      "description": "A list of Test Base Custom Images.",
+      "description": "A list of Test Base custom images.",
       "type": "object",
       "properties": {
         "value": {
@@ -638,7 +638,7 @@
           "items": {
             "$ref": "#/definitions/CustomImageResource"
           },
-          "description": "The list of Test Base Custom Images."
+          "description": "The list of Test Base custom images."
         },
         "nextLink": {
           "type": "string",
@@ -648,13 +648,13 @@
       }
     },
     "CustomImageResource": {
-      "description": "The Test Base Custom Image resource.",
+      "description": "The Test Base custom image resource.",
       "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/CustomImageProperties",
           "x-ms-client-flatten": true,
-          "description": "Test Base Custom Image properties."
+          "description": "Test Base custom image properties."
         }
       },
       "allOf": [
@@ -664,7 +664,7 @@
       ]
     },
     "CustomImageProperties": {
-      "description": "The properties of the Test Base Custom Image.",
+      "description": "The properties of the Test Base custom image.",
       "type": "object",
       "properties": {
         "vhdId": {
@@ -774,8 +774,8 @@
           "readOnly": true
         },
         "provisioningState": {
-          "type": "string",
-          "readOnly": true
+          "description": "The provisioning state of the resource.",
+          "$ref": "./testbase.json#/definitions/ProvisioningState"
         }
       },
       "required": [
@@ -785,7 +785,7 @@
       ]
     },
     "ImageDefinitionListResult": {
-      "description": "A list of Test Base Image Definitions.",
+      "description": "A list of test base image definitions.",
       "type": "object",
       "properties": {
         "value": {
@@ -793,7 +793,7 @@
           "items": {
             "$ref": "#/definitions/ImageDefinitionResource"
           },
-          "description": "The list of Test Base Image Definitions."
+          "description": "The list of test base image definitions."
         },
         "nextLink": {
           "type": "string",
@@ -803,13 +803,13 @@
       }
     },
     "ImageDefinitionResource": {
-      "description": "The Test Base Image Definition resource.",
+      "description": "The test base image definition resource.",
       "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ImageDefinitionProperties",
           "x-ms-client-flatten": true,
-          "description": "Test Base Custom Image properties."
+          "description": "test base custom image properties."
         }
       },
       "allOf": [
@@ -948,7 +948,7 @@
       ]
     },
     "ImageNameCheckAvailabilityParameters": {
-      "description": "Parameter body to request Test Base Custom Image availability.",
+      "description": "Parameter body to request test base custom image availability.",
       "type": "object",
       "properties": {
         "definitionName": {
@@ -970,7 +970,7 @@
       "description": "The image availability result."
     },
     "GetImageDefinitionParameters": {
-      "description": "Parameters supplied to get the Test Base Custom Image Definition operation.",
+      "description": "Parameters supplied to get the test base custom image definition operation.",
       "type": "object",
       "properties": {
         "definitionName": {
@@ -1109,7 +1109,7 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "The resource name of the Test Base Custom Image.",
+      "description": "The resource name of the test base custom image.",
       "pattern": "^[A-Za-z0-9]([A-Za-z0-9_]|([-. ][A-Za-z0-9]))+$"
     },
     "ImageDefinitionNameParameter": {
@@ -1118,7 +1118,7 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "The resource name of the Test Base Image Definition.",
+      "description": "The resource name of the test base image definition.",
       "pattern": "^[A-Za-z0-9]([A-Za-z0-9_]|([-. ][A-Za-z0-9]))+$"
     },
     "VhdNameParameter": {

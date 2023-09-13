@@ -2958,7 +2958,7 @@
           "200": {
             "description": "Success. The response describes the list of operations.",
             "schema": {
-              "$ref": "#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -3189,18 +3189,18 @@
             "schema": {
               "$ref": "#/definitions/ExternalTestToolResource"
             },
-            "description": "Parameters supplied to create a External Test Tool."
+            "description": "Parameters supplied to create a external test tool."
           }
         ],
         "responses": {
           "200": {
-            "description": "The Test Base External Test Tool Resource 'create' or 'update' operation was successful.",
+            "description": "The Test Base external test tool Resource was created or updated successfully.",
             "schema": {
               "$ref": "#/definitions/ExternalTestToolResource"
             }
           },
           "201": {
-            "description": "The Test Base External Test Tool Resource 'create' or 'update' operation was successfully enqueued. Check provisioningState to see detailed status.",
+            "description": "The Test Base external test tool create or update operation was successfully enqueued. Check provisioningState to see detailed status.",
             "headers": {
               "Azure-AsyncOperation": {
                 "description": "URL to query for status of the operation.",
@@ -4146,7 +4146,7 @@
         },
         "isConsented": {
           "type": "boolean",
-          "description": "Whether the statement of the gallery application is accepted.",
+          "description": "Whether the disclaimer of the gallery application is accepted.",
           "default": false
         }
       },
@@ -4286,7 +4286,7 @@
       ]
     },
     "WingetAppSkuProperties": {
-      "description": "The detailed properties of a winget Gallery application SKU.",
+      "description": "The detailed properties of a winget gallery application SKU.",
       "type": "object",
       "x-ms-discriminator-value": "Winget",
       "properties": {
@@ -4611,7 +4611,10 @@
           "items": {
             "$ref": "#/definitions/GalleryAppDefinition"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "skuId"
+          ]
         },
         "tests": {
           "type": "array",
@@ -6110,82 +6113,6 @@
         }
       }
     },
-    "OperationListResult": {
-      "description": "A list of operations supported by the resource provider.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "x-ms-identifiers": [],
-          "description": "List of operations supported by the Test Base resource provider."
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "URL to get the next set of operation list results if there are any."
-        }
-      }
-    },
-    "Operation": {
-      "description": "REST API operation",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "isDataAction": {
-          "description": "Indicates whether the operation is a data action",
-          "readOnly": true,
-          "type": "boolean"
-        },
-        "origin": {
-          "description": "Origin of the operation",
-          "readOnly": true,
-          "type": "string"
-        },
-        "display": {
-          "description": "The object that describes the operation.",
-          "type": "object",
-          "properties": {
-            "provider": {
-              "description": "The resource provider name: Microsoft.TestBase.",
-              "readOnly": true,
-              "type": "string"
-            },
-            "operation": {
-              "description": "Operation type: read, write, delete, listPackages, etc.",
-              "readOnly": true,
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource type on which the operation is performed.",
-              "readOnly": true,
-              "type": "string"
-            },
-            "description": {
-              "description": "Friendly name of the operation.",
-              "readOnly": true,
-              "type": "string"
-            }
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/OperationProperties",
-          "description": "Extra properties of the operation.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "OperationProperties": {
-      "description": "Operation properties.",
-      "type": "object",
-      "properties": {}
-    },
     "EmailEventListResult": {
       "description": "A list of email events.",
       "type": "object",
@@ -7277,7 +7204,7 @@
       "type": "integer",
       "format": "int32",
       "x-ms-parameter-location": "method",
-      "description": "According to the reverse order of time, how many first ones are taken."
+      "description": "How many of the sorted items to consider including in the result set."
     },
     "OSNameParameter": {
       "name": "osName",
