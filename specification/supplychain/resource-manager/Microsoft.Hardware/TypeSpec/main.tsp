@@ -50,7 +50,7 @@ model OrderProperties {
   @doc("Billing Information")
   billingInformation?:BillingInformation;
 
-  @doc("Currency")
+  @doc("Currency for the order")
   @visibility("read")
   currency?:string;
 
