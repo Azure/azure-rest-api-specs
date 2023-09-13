@@ -32,9 +32,6 @@ model Instance is TrackedResource<InstanceProperties> {
 
 @doc("The properties of an Instance resource.")
 model InstanceProperties {
-  @doc("User-friendly name for the Instance.")
-  displayName?: string;
-
   @doc("Deployment scope (such as Kubernetes namespace).")
   scope?: string;
 
@@ -43,6 +40,9 @@ model InstanceProperties {
 
   @doc("Defines the Target the Instance will deploy to.")
   target?: TargetSelectorProperties;
+
+  @doc("Reconciliation Policy")
+  reconciliationPolicy?: ReconciliationPolicy;
 
   @doc("Version of the particular resource.")
   version?: string;

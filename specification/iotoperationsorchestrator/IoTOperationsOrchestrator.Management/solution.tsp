@@ -36,9 +36,6 @@ model SolutionProperties {
   @OpenAPI.extension("x-ms-identifiers", [])
   components?: ComponentProperties[];
 
-  @doc("User-friendly name for the Solution.")
-  displayName?: string;
-
   @doc("Version of the particular resource.")
   version?: string;
 

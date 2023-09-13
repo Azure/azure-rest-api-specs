@@ -36,15 +36,15 @@ model TargetProperties {
   @OpenAPI.extension("x-ms-identifiers", [])
   components?: ComponentProperties[];
 
-  @doc("User-friendly name for the Target.")
-  displayName?: string;
-
   @doc("Deployment scope (such as Kubernetes namespace).")
   scope?: string;
 
   @doc("Defines the device topology for a target or instance.")
   @OpenAPI.extension("x-ms-identifiers", [])
   topologies?: TopologiesProperties[];
+
+  @doc("Reconciliation Policy")
+  reconciliationPolicy?: ReconciliationPolicy;
 
   @doc("Version of the particular resource.")
   version?: string;
