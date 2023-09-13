@@ -640,17 +640,6 @@ model ResourceMetric {
   resourceType: string;
 }
 
-// @doc("Load test run model")
-// @resource("test-runs")
-// model TestRuns {
-//   // FIXME: is testRunId optional or required in the response? Resource key and path params cannot be optional
-//   @key
-//   @path
-//   @doc("Unique test run name as identifier")
-//   @visibility("read")
-//   testRunId: string;
-// }
-
 @doc("Load test run model")
 model TestRun {
   @doc("Unique test run name as identifier")

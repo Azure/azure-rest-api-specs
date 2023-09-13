@@ -33,7 +33,7 @@ interface AdministrationOperations {
 
 @client({
     name: "LoadTestRunClient",
-    service: AzureLoadTesting,
+    service: Microsoft.LoadTestService,
 })
 interface TestRunOperations {
     // TODO check with service team why is Python different here?
