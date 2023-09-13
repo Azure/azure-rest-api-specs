@@ -61,7 +61,7 @@
   "paths": {
     "/deployments/{deploymentId}/audio/transcriptions": {
       "post": {
-        "operationId": "GetAudioTranscriptionAsPlainText",
+        "operationId": "GetAudioTranscriptionAsResponseObject",
         "description": "Gets transcribed text and associated metadata from provided spoken audio data. Audio will be transcribed in the\nwritten language corresponding to the language it was spoken in.",
         "consumes": [
           "multipart/form-data"
@@ -78,19 +78,29 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AudioTranscriptionOptions"
-            }
+            "$ref": "#/parameters/AudioTranscriptionOptions.file"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.responseFormat"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.language"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.prompt"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.temperature"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.model"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/AudioTranscription"
             }
           },
           "default": {
@@ -108,14 +118,14 @@
         },
         "x-ms-examples": {
           "Gets transcribed text and associated metadata from provided spoken audio data.": {
-            "$ref": "./examples/audio_transcription_text.json"
+            "$ref": "./examples/audio_transcription_object.json"
           }
         }
       }
     },
     "/deployments/{deploymentId}/audio/translations": {
       "post": {
-        "operationId": "GetAudioTranslationAsPlainText",
+        "operationId": "GetAudioTranslationAsResponseObject",
         "description": "Gets English language transcribed text and associated metadata from provided spoken audio data.",
         "consumes": [
           "multipart/form-data"
@@ -132,19 +142,26 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AudioTranslationOptions"
-            }
+            "$ref": "#/parameters/AudioTranslationOptions.file"
+          },
+          {
+            "$ref": "#/parameters/AudioTranslationOptions.responseFormat"
+          },
+          {
+            "$ref": "#/parameters/AudioTranslationOptions.prompt"
+          },
+          {
+            "$ref": "#/parameters/AudioTranslationOptions.temperature"
+          },
+          {
+            "$ref": "#/parameters/AudioTranslationOptions.model"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/AudioTranscription"
             }
           },
           "default": {
@@ -162,7 +179,7 @@
         },
         "x-ms-examples": {
           "Gets English language transcribed text and associated metadata from provided spoken audio data.": {
-            "$ref": "./examples/audio_translation_text.json"
+            "$ref": "./examples/audio_translation_object.json"
           }
         }
       }
@@ -515,7 +532,7 @@
         },
         "segments": {
           "type": "array",
-          "description": "A collection of detailed information about .",
+          "description": "A collection of information about the timing, probabilities, and other detail of each processed audio segment.",
           "items": {
             "$ref": "#/definitions/AudioTranscriptionSegment"
           }
@@ -562,7 +579,7 @@
           {
             "name": "vtt",
             "value": "vtt",
-            "description": "Use a response body is plain text in Web Video Text Tracks (VTT) format that also includes timing information."
+            "description": "Use a response body that is plain text in Web Video Text Tracks (VTT) format that also includes timing information."
           }
         ]
       }
@@ -592,12 +609,11 @@
         "temperature": {
           "type": "number",
           "format": "float",
-          "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
-          "default": 0
+          "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit."
         },
         "model": {
           "type": "string",
-          "description": "The model name to provide as part of this transcription request.\nNot applicable to Azure OpenAI, where deployment information should be included in the Azure\nresource URI that's connected to."
+          "description": "The model to use for this transcription request."
         }
       },
       "required": [
@@ -698,12 +714,11 @@
         "temperature": {
           "type": "number",
           "format": "float",
-          "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
-          "default": 0
+          "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit."
         },
         "model": {
           "type": "string",
-          "description": "The model name to provide as part of this transcription request.\nNot applicable to Azure OpenAI, where deployment information should be included in the Azure\nresource URI that's connected to."
+          "description": "The model to use for this transcription request."
         }
       },
       "required": [
@@ -1794,7 +1809,7 @@
     "AudioTranscriptionOptions.model": {
       "name": "model",
       "in": "formData",
-      "description": "The model name to provide as part of this transcription request.\nNot applicable to Azure OpenAI, where deployment information should be included in the Azure\nresource URI that's connected to.",
+      "description": "The model to use for this transcription request.",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -1847,7 +1862,7 @@
           {
             "name": "vtt",
             "value": "vtt",
-            "description": "Use a response body is plain text in Web Video Text Tracks (VTT) format that also includes timing information."
+            "description": "Use a response body that is plain text in Web Video Text Tracks (VTT) format that also includes timing information."
           }
         ]
       },
@@ -1861,7 +1876,6 @@
       "required": false,
       "type": "number",
       "format": "float",
-      "default": 0,
       "x-ms-parameter-location": "method"
     },
     "AudioTranslationOptions.file": {
@@ -1876,7 +1890,7 @@
     "AudioTranslationOptions.model": {
       "name": "model",
       "in": "formData",
-      "description": "The model name to provide as part of this transcription request.\nNot applicable to Azure OpenAI, where deployment information should be included in the Azure\nresource URI that's connected to.",
+      "description": "The model to use for this transcription request.",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -1929,7 +1943,7 @@
           {
             "name": "vtt",
             "value": "vtt",
-            "description": "Use a response body is plain text in Web Video Text Tracks (VTT) format that also includes timing information."
+            "description": "Use a response body that is plain text in Web Video Text Tracks (VTT) format that also includes timing information."
           }
         ]
       },
@@ -1943,7 +1957,6 @@
       "required": false,
       "type": "number",
       "format": "float",
-      "default": 0,
       "x-ms-parameter-location": "method"
     },
     "Azure.Core.Foundations.ApiVersionParameter": {

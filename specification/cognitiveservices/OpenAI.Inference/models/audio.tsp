@@ -25,7 +25,7 @@ enum AudioTranscriptionFormat {
   srt: "srt",
 
   @doc("""
-    Use a response body is plain text in Web Video Text Tracks (VTT) format that also includes timing information.
+    Use a response body that is plain text in Web Video Text Tracks (VTT) format that also includes timing information.
     """)
   vtt: "vtt",
 }
@@ -66,12 +66,10 @@ model AudioTranscriptionOptions {
   Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
   If set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.
   """)
-  temperature?: float32 = 0;
+  temperature?: float32;
 
   @doc("""
-  The model name to provide as part of this transcription request.
-  Not applicable to Azure OpenAI, where deployment information should be included in the Azure
-  resource URI that's connected to.
+  The model to use for this transcription request.
   """)
   // Implementation note: developer-facing specification of deployment or model by clients should be controlled either
   // via an operation parameter or by this request body field -- but only one of those. This field should be hidden by
@@ -109,12 +107,10 @@ model AudioTranslationOptions {
   Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
   If set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.
   """)
-  temperature?: float32 = 0;
+  temperature?: float32;
 
   @doc("""
-  The model name to provide as part of this transcription request.
-  Not applicable to Azure OpenAI, where deployment information should be included in the Azure
-  resource URI that's connected to.
+  The model to use for this transcription request.
   """)
   // Implementation note: developer-facing specification of deployment or model by clients should be controlled either
   // via an operation parameter or by this request body field -- but only one of those. This field should be hidden by
@@ -154,9 +150,7 @@ model AudioTranscriptionSegment {
   @doc("The transcribed text that was part of this audio segment.")
   text: string;
 
-  @doc("""
-    The temperature score associated with this audio segment.
-    """)
+  @doc("The temperature score associated with this audio segment.")
   temperature: float32;
 
   @doc("The average log probability associated with this audio segment.")
@@ -177,12 +171,12 @@ model AudioTranscriptionSegment {
   tokens: int32[];
 
   @doc("""
-    The seek position associated with the processing of this audio segment.
-    Seek positions are expressed as hundredths of seconds.
-    The model may process several segments from a single seek position, so while the seek position will never represent
-    a later time than the segment's start, the segment's start may represent a significantly later time than the
-    segment's associated seek position.
-    """)
+  The seek position associated with the processing of this audio segment.
+  Seek positions are expressed as hundredths of seconds.
+  The model may process several segments from a single seek position, so while the seek position will never represent
+  a later time than the segment's start, the segment's start may represent a significantly later time than the
+  segment's associated seek position.
+  """)
   seek: int32;
 }
 
@@ -196,15 +190,17 @@ model AudioTranscription {
   task?: AudioTaskLabel;
 
   @doc("""
-    The spoken language that was detected in the transcribed audio data.
-    This is expressed as a two-letter ISO-639-1 language code like 'en' or 'fr'.
-    """)
+  The spoken language that was detected in the transcribed audio data.
+  This is expressed as a two-letter ISO-639-1 language code like 'en' or 'fr'.
+  """)
   language?: string;
 
   @doc("The total duration of the audio processed to produce accompanying transcription information.")
   @encode("seconds", float32)
   duration?: duration;
 
-  @doc("A collection of detailed information about .")
+  @doc("""
+  A collection of information about the timing, probabilities, and other detail of each processed audio segment.
+  """)
   segments?: AudioTranscriptionSegment[];
 }
