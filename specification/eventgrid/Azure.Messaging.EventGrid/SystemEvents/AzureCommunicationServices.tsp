@@ -350,6 +350,9 @@ model AcsEmailEngagementTrackingReportReceivedEventData {
   @doc("The Sender Email Address")
   sender?: string;
 
+  @doc("The Recipient Email Address")
+  recipient?: string;
+
   @doc("The Id of the email that has been sent")
   messageId?: string;
 
