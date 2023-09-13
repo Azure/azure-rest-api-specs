@@ -63,6 +63,9 @@
       "post": {
         "operationId": "GetAudioTranscriptionAsPlainText",
         "description": "Gets transcribed text and associated metadata from provided spoken audio data. Audio will be transcribed in the\nwritten language corresponding to the language it was spoken in.",
+        "consumes": [
+          "multipart/form-data"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -114,6 +117,9 @@
       "post": {
         "operationId": "GetAudioTranslationAsPlainText",
         "description": "Gets English language transcribed text and associated metadata from provided spoken audio data.",
+        "consumes": [
+          "multipart/form-data"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1768,6 +1774,178 @@
     }
   },
   "parameters": {
+    "AudioTranscriptionOptions.file": {
+      "name": "file",
+      "in": "formData",
+      "description": "The audio data to transcribe. This must be the binary content of a file in one of the supported media formats:\nflac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.",
+      "required": true,
+      "type": "string",
+      "format": "byte",
+      "x-ms-parameter-location": "method"
+    },
+    "AudioTranscriptionOptions.language": {
+      "name": "language",
+      "in": "formData",
+      "description": "The primary spoken language of the audio data to be transcribed, supplied as a two-letter ISO-639-1 language code\nsuch as 'en' or 'fr'.\nProviding this known input language is optional but may improve the accuracy and/or latency of transcription.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AudioTranscriptionOptions.model": {
+      "name": "model",
+      "in": "formData",
+      "description": "The model name to provide as part of this transcription request.\nNot applicable to Azure OpenAI, where deployment information should be included in the Azure\nresource URI that's connected to.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AudioTranscriptionOptions.prompt": {
+      "name": "prompt",
+      "in": "formData",
+      "description": "An optional hint to guide the model's style or continue from a prior audio segment. The written language of the\nprompt should match the primary spoken language of the audio data.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AudioTranscriptionOptions.responseFormat": {
+      "name": "response_format",
+      "in": "formData",
+      "description": "The requested format of the transcription response data, which will influence the content and detail of the result.",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "json",
+        "verbose_json",
+        "text",
+        "srt",
+        "vtt"
+      ],
+      "x-ms-enum": {
+        "name": "AudioTranscriptionFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "json",
+            "value": "json",
+            "description": "Use a response body that is a JSON object containing a single 'text' field for the transcription."
+          },
+          {
+            "name": "verbose_json",
+            "value": "verbose_json",
+            "description": "Use a response body that is a JSON object containing transcription text along with timing, segments, and other\nmetadata."
+          },
+          {
+            "name": "text",
+            "value": "text",
+            "description": "Use a response body that is plain text containing the raw, unannotated transcription."
+          },
+          {
+            "name": "srt",
+            "value": "srt",
+            "description": "Use a response body that is plain text in SubRip (SRT) format that also includes timing information."
+          },
+          {
+            "name": "vtt",
+            "value": "vtt",
+            "description": "Use a response body is plain text in Web Video Text Tracks (VTT) format that also includes timing information."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "responseFormat"
+    },
+    "AudioTranscriptionOptions.temperature": {
+      "name": "temperature",
+      "in": "formData",
+      "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
+      "required": false,
+      "type": "number",
+      "format": "float",
+      "default": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "AudioTranslationOptions.file": {
+      "name": "file",
+      "in": "formData",
+      "description": "The audio data to transcribe. This must be the binary content of a file in one of the supported media formats:\nflac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.",
+      "required": true,
+      "type": "string",
+      "format": "byte",
+      "x-ms-parameter-location": "method"
+    },
+    "AudioTranslationOptions.model": {
+      "name": "model",
+      "in": "formData",
+      "description": "The model name to provide as part of this transcription request.\nNot applicable to Azure OpenAI, where deployment information should be included in the Azure\nresource URI that's connected to.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AudioTranslationOptions.prompt": {
+      "name": "prompt",
+      "in": "formData",
+      "description": "An optional hint to guide the model's style or continue from a prior audio segment. The written language of the\nprompt should match the primary spoken language of the audio data.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AudioTranslationOptions.responseFormat": {
+      "name": "response_format",
+      "in": "formData",
+      "description": "The requested format of the transcription response data, which will influence the content and detail of the result.",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "json",
+        "verbose_json",
+        "text",
+        "srt",
+        "vtt"
+      ],
+      "x-ms-enum": {
+        "name": "AudioTranscriptionFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "json",
+            "value": "json",
+            "description": "Use a response body that is a JSON object containing a single 'text' field for the transcription."
+          },
+          {
+            "name": "verbose_json",
+            "value": "verbose_json",
+            "description": "Use a response body that is a JSON object containing transcription text along with timing, segments, and other\nmetadata."
+          },
+          {
+            "name": "text",
+            "value": "text",
+            "description": "Use a response body that is plain text containing the raw, unannotated transcription."
+          },
+          {
+            "name": "srt",
+            "value": "srt",
+            "description": "Use a response body that is plain text in SubRip (SRT) format that also includes timing information."
+          },
+          {
+            "name": "vtt",
+            "value": "vtt",
+            "description": "Use a response body is plain text in Web Video Text Tracks (VTT) format that also includes timing information."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "responseFormat"
+    },
+    "AudioTranslationOptions.temperature": {
+      "name": "temperature",
+      "in": "formData",
+      "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
+      "required": false,
+      "type": "number",
+      "format": "float",
+      "default": 0,
+      "x-ms-parameter-location": "method"
+    },
     "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
       "in": "query",

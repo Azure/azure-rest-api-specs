@@ -108,6 +108,13 @@ op beginAzureBatchImageGeneration is OaiLongRunningRpcOperation<
 // requirements. These content-type-specific operations should be hidden by clients and combined into single operations
 // that share common characteristics whenever possible.
 
+alias MultipartFromDataRequestHeadersTraits = Azure.Core.Traits.RequestHeadersTrait<{
+  @doc("The content type for the operation. Always multipart/form-data for this operation.")
+  @header("content-type")
+  contentType: "multipart/form-data";
+}>;
+
+#suppress "@azure-tools/typespec-azure-core/byos" "representation of existing multipart/form-data operation"
 @doc("""
 Gets transcribed text and associated metadata from provided spoken audio data. Audio will be transcribed in the
 written language corresponding to the language it was spoken in.
@@ -116,12 +123,14 @@ written language corresponding to the language it was spoken in.
 @actionSeparator("/")
 @action("audio/transcriptions")
 @sharedRoute
-op getAudioTranscriptionAsResponseObject is ResourceAction<
+op getAudioTranscriptionAsResponseObject is Azure.Core.ResourceAction<
   Deployment,
   AudioTranscriptionOptions,  // response_format must be unspecified (json) or one of: json, verbose_json
-  AudioTranscription
+  AudioTranscription,
+  MultipartFromDataRequestHeadersTraits
 >;
 
+#suppress "@azure-tools/typespec-azure-core/byos" "representation of existing multipart/form-data operation"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "non-model response value needed"
 @doc("""
 Gets transcribed text and associated metadata from provided spoken audio data. Audio will be transcribed in the
@@ -134,9 +143,11 @@ written language corresponding to the language it was spoken in.
 op getAudioTranscriptionAsPlainText is Azure.Core.Foundations.ResourceOperation<
   Deployment,
   AudioTranscriptionOptions,  // response_format must be one of: text, srt, vtt
-  string
+  string,
+  MultipartFromDataRequestHeadersTraits
 >;
 
+#suppress "@azure-tools/typespec-azure-core/byos" "representation of existing multipart/form-data operation"
 @doc("""
 Gets English language transcribed text and associated metadata from provided spoken audio data.
 """)
@@ -147,9 +158,11 @@ Gets English language transcribed text and associated metadata from provided spo
 op getAudioTranslationAsResponseObject is ResourceAction<
   Deployment,
   AudioTranslationOptions,  // response_format must be unspecified (json) or one of: json, verbose_json
-  AudioTranscription
+  AudioTranscription,
+  MultipartFromDataRequestHeadersTraits
 >;
 
+#suppress "@azure-tools/typespec-azure-core/byos" "representation of existing multipart/form-data operation"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "non-model response value needed"
 @doc("""
 Gets English language transcribed text and associated metadata from provided spoken audio data.
@@ -161,5 +174,6 @@ Gets English language transcribed text and associated metadata from provided spo
 op getAudioTranslationAsPlainText is Azure.Core.Foundations.ResourceOperation<
   Deployment,
   AudioTranslationOptions,  // response_format must be one of: text, srt, vtt
-  string
+  string,
+  MultipartFromDataRequestHeadersTraits
 >;
