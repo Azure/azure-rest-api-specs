@@ -12,11 +12,11 @@ using TypeSpec.Versioning;
 namespace ClientForAcsJobRouter;
 
 // Your customizations here
-@@client(AzureCommunicationRoutingService,{
-    name: "JobRouterAdministrationClient",
+@client({
+    name: "JobRouterAdministrationRestClient",
     service: AzureCommunicationRoutingService
 })
-interface JobRouterAdministrationClient {
+interface JobRouterAdministrationRestClient {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
     upsertDistributionPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.upsertDistributionPolicy;
     
@@ -66,11 +66,11 @@ interface JobRouterAdministrationClient {
     deleteQueue is AzureCommunicationRoutingService.JobRouterAdministrationOperations.deleteQueue;
 }
 
-@@client(AzureCommunicationRoutingService, {
-    name: "JobRouterClient",
+@client({
+    name: "JobRouterRestClient",
     service: AzureCommunicationRoutingService
 })
-interface JobRouterClient {
+interface JobRouterRestClient {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
     upsertJob is AzureCommunicationRoutingService.JobRouterOperations.upsertJob;
     
