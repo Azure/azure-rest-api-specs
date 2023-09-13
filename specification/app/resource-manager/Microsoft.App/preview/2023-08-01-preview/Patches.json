@@ -180,7 +180,7 @@
         }
       }
     },
-    "/subscription/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/builders/{builderName}/patches/{patchName}/skipConfig/{patchSkipConfig}": {
+    "/subscription/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/builders/{builderName}/patches/{patchName}/skipConfig": {
       "post": {
         "tags": [
           "Patches"
@@ -205,10 +205,10 @@
           },
           {
             "name": "patchSkipConfig",
-            "in": "path",
-            "description": "Set the patch to be skipped or not.",
-            "type": "boolean",
-            "required": true
+            "in": "body",
+            "required": true,
+            "description": "Configure patcher to skip a patch or not.",
+            "type": "boolean"
           }
         ],
         "responses": {
