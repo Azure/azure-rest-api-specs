@@ -6,11 +6,80 @@
     "contact": {
       "name": "Microsoft.Billing",
       "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
-      "email": "cabbpt@microsoft.com"
+      "email": "pacebpexphot@microsoft.com"
     },
     "version": "2023-04-01"
   },
   "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "description": "Gets a customer by its ID. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Customers_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/customerName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "$ref": "./types.json#/parameters/orderBy"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          },
+          {
+            "$ref": "./types.json#/parameters/count"
+          },
+          {
+            "$ref": "./types.json#/parameters/search"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A partner's customer.",
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CustomersGet": {
+            "$ref": "./examples/customersGet.json"
+          },
+          "CustomersGetWithExpand": {
+            "$ref": "./examples/customersGetWithExpand.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers": {
       "get": {
         "tags": [
@@ -80,75 +149,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}": {
-      "get": {
-        "tags": [
-          "Customer"
-        ],
-        "description": "Gets a customer by its ID. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "Customers_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "./types.json#/parameters/billingAccountName"
-          },
-          {
-            "$ref": "./types.json#/parameters/billingProfileName"
-          },
-          {
-            "$ref": "./types.json#/parameters/customerName"
-          },
-          {
-            "$ref": "./types.json#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "./types.json#/parameters/filter"
-          },
-          {
-            "$ref": "./types.json#/parameters/orderBy"
-          },
-          {
-            "$ref": "./types.json#/parameters/top"
-          },
-          {
-            "$ref": "./types.json#/parameters/skip"
-          },
-          {
-            "$ref": "./types.json#/parameters/count"
-          },
-          {
-            "$ref": "./types.json#/parameters/search"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A partner's customer.",
-            "schema": {
-              "$ref": "#/definitions/Customer"
-            }
-          },
-          "default": {
-            "description": "Default response",
-            "schema": {
-              "$ref": "./types.json#/definitions/ArmErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CustomersGet": {
-            "$ref": "./examples/customersGet.json"
-          },
-          "CustomersGetWithExpand": {
-            "$ref": "./examples/customersGetWithExpand.json"
-          }
         }
       }
     },

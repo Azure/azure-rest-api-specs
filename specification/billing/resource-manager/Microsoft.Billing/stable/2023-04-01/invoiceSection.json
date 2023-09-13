@@ -6,21 +6,21 @@
     "contact": {
       "name": "Microsoft.Billing",
       "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
-      "email": "cabbpt@microsoft.com"
+      "email": "pacebpexphot@microsoft.com"
     },
     "version": "2023-04-01"
   },
   "paths": {
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections": {
-      "get": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/validateDeleteEligibility": {
+      "post": {
         "tags": [
           "InvoiceSection"
         ],
-        "description": "Lists the invoice sections that a user has access to. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+        "description": "Validates if the invoice section can be deleted. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
-        "operationId": "InvoiceSections_ListByBillingProfile",
+        "operationId": "InvoiceSections_ValidateDeleteEligibility",
         "produces": [
           "application/json"
         ],
@@ -32,39 +32,17 @@
             "$ref": "./types.json#/parameters/billingProfileName"
           },
           {
-            "in": "query",
-            "name": "includeDeleted",
-            "description": "Can be used to get deleted invoice sections.",
-            "type": "boolean",
-            "default": false
+            "$ref": "./types.json#/parameters/invoiceSectionName"
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "./types.json#/parameters/filter"
-          },
-          {
-            "$ref": "./types.json#/parameters/orderBy"
-          },
-          {
-            "$ref": "./types.json#/parameters/top"
-          },
-          {
-            "$ref": "./types.json#/parameters/skip"
-          },
-          {
-            "$ref": "./types.json#/parameters/count"
-          },
-          {
-            "$ref": "./types.json#/parameters/search"
           }
         ],
         "responses": {
           "200": {
-            "description": "A list of invoice sections.",
+            "description": "Eligibility to delete an invoice section result.",
             "schema": {
-              "$ref": "#/definitions/InvoiceSectionListResult"
+              "$ref": "#/definitions/DeleteInvoiceSectionEligibilityResult"
             }
           },
           "default": {
@@ -75,12 +53,12 @@
           }
         },
         "x-ms-examples": {
-          "InvoiceSectionsListByBillingProfile": {
-            "$ref": "./examples/invoiceSectionsListByBillingProfile.json"
+          "InvoiceSectionsValidateDeleteEligibilitySuccess": {
+            "$ref": "./examples/invoiceSectionsValidateDeleteEligibilitySuccess.json"
+          },
+          "InvoiceSectionsValidateDeleteEligibilityFailure": {
+            "$ref": "./examples/invoiceSectionsValidateDeleteEligibilityFailure.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -263,16 +241,16 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/validateDeleteEligibility": {
-      "post": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections": {
+      "get": {
         "tags": [
           "InvoiceSection"
         ],
-        "description": "Validates if the invoice section can be deleted. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
+        "description": "Lists the invoice sections that a user has access to. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
-        "operationId": "InvoiceSections_ValidateDeleteEligibility",
+        "operationId": "InvoiceSections_ListByBillingProfile",
         "produces": [
           "application/json"
         ],
@@ -284,17 +262,39 @@
             "$ref": "./types.json#/parameters/billingProfileName"
           },
           {
-            "$ref": "./types.json#/parameters/invoiceSectionName"
+            "in": "query",
+            "name": "includeDeleted",
+            "description": "Can be used to get deleted invoice sections.",
+            "type": "boolean",
+            "default": false
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "$ref": "./types.json#/parameters/orderBy"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          },
+          {
+            "$ref": "./types.json#/parameters/count"
+          },
+          {
+            "$ref": "./types.json#/parameters/search"
           }
         ],
         "responses": {
           "200": {
-            "description": "Eligibility to delete an invoice section result.",
+            "description": "A list of invoice sections.",
             "schema": {
-              "$ref": "#/definitions/DeleteInvoiceSectionEligibilityResult"
+              "$ref": "#/definitions/InvoiceSectionListResult"
             }
           },
           "default": {
@@ -305,12 +305,12 @@
           }
         },
         "x-ms-examples": {
-          "InvoiceSectionsValidateDeleteEligibilitySuccess": {
-            "$ref": "./examples/invoiceSectionsValidateDeleteEligibilitySuccess.json"
-          },
-          "InvoiceSectionsValidateDeleteEligibilityFailure": {
-            "$ref": "./examples/invoiceSectionsValidateDeleteEligibilityFailure.json"
+          "InvoiceSectionsListByBillingProfile": {
+            "$ref": "./examples/invoiceSectionsListByBillingProfile.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }

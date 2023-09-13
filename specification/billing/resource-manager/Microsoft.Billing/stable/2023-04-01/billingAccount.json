@@ -6,7 +6,7 @@
     "contact": {
       "name": "Microsoft.Billing",
       "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
-      "email": "cabbpt@microsoft.com"
+      "email": "pacebpexphot@microsoft.com"
     },
     "version": "2023-04-01"
   },
@@ -26,11 +26,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "billingAccountName",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "./types.json#/parameters/billingAccountName"
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
@@ -57,69 +53,6 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/listInvoiceSectionsWithCreateSubscriptionPermission": {
-      "post": {
-        "tags": [
-          "BillingAccount"
-        ],
-        "description": "Lists the invoice sections for which the user has permission to create Azure subscriptions. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "BillingAccounts_ListInvoiceSectionsByCreateSubscriptionPermission",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "./types.json#/parameters/billingAccountName"
-          },
-          {
-            "$ref": "./types.json#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "./types.json#/parameters/filter"
-          },
-          {
-            "$ref": "./types.json#/parameters/orderBy"
-          },
-          {
-            "$ref": "./types.json#/parameters/top"
-          },
-          {
-            "$ref": "./types.json#/parameters/skip"
-          },
-          {
-            "$ref": "./types.json#/parameters/count"
-          },
-          {
-            "$ref": "./types.json#/parameters/search"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The list of invoice section properties with create subscription permission.",
-            "schema": {
-              "$ref": "#/definitions/InvoiceSectionWithCreateSubscriptionPermissionListResult"
-            }
-          },
-          "default": {
-            "description": "Default response",
-            "schema": {
-              "$ref": "./types.json#/definitions/ArmErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "InvoiceSectionsListWithCreateSubPermission": {
-            "$ref": "./examples/invoiceSectionsListWithCreateSubPermission.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}": {
       "get": {
         "tags": [
@@ -140,7 +73,7 @@
           {
             "in": "query",
             "name": "includeDeleted",
-            "description": "When true, results will include Billing Accounts that have been deleted.",
+            "description": "When true, the result will return the billing account even if it is in a deleted state.",
             "type": "boolean",
             "default": false
           },
@@ -287,7 +220,7 @@
           {
             "in": "query",
             "name": "includeDeleted",
-            "description": "When true, results will include Billing Accounts that have been deleted.",
+            "description": "When true, results will include any billing accounts in a deleted state.",
             "type": "boolean",
             "default": false
           },
@@ -304,29 +237,22 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "includeTenantAccount",
-            "description": "When true, results will include the tenant's Microsoft Online Services Program Billing Account if the user has one of the following AAD roles: Global Administrator, Global Reader, Billing Administrator.",
-            "type": "boolean",
-            "default": false
-          },
-          {
             "$ref": "./types.json#/parameters/apiVersionParameter"
           },
           {
             "$ref": "./types.json#/parameters/filter"
           },
           {
-            "$ref": "./types.json#/parameters/orderBy"
+            "in": "query",
+            "name": "expand",
+            "description": "Expand is allowed for SoldTo and EnrollmentDetails/PONumber.",
+            "type": "string"
           },
           {
             "$ref": "./types.json#/parameters/top"
           },
           {
             "$ref": "./types.json#/parameters/skip"
-          },
-          {
-            "$ref": "./types.json#/parameters/count"
           },
           {
             "$ref": "./types.json#/parameters/search"
@@ -687,117 +613,6 @@
         "displayName": {
           "description": "The display name of the partner or customer for an indirect motion.",
           "type": "string"
-        }
-      }
-    },
-    "InvoiceSectionWithCreateSubscriptionPermission": {
-      "description": "Invoice section properties with create subscription permission.",
-      "type": "object",
-      "properties": {
-        "billingProfileDisplayName": {
-          "description": "The name of the billing profile for the invoice section or customer.",
-          "type": "string",
-          "readOnly": true
-        },
-        "billingProfileId": {
-          "description": "The fully qualified ID that uniquely identifies a billing profile.",
-          "type": "string",
-          "readOnly": true
-        },
-        "billingProfileSystemId": {
-          "description": "The system generated unique identifier for a billing profile.",
-          "type": "string",
-          "readOnly": true
-        },
-        "billingProfileStatus": {
-          "description": "The status of the billing profile.",
-          "enum": [
-            "Unknown",
-            "Active",
-            "Disabled",
-            "Warned",
-            "Deleted",
-            "UnderReview"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "BillingProfileStatus",
-            "modelAsString": true
-          }
-        },
-        "billingProfileStatusReasonCode": {
-          "description": "Reason for the specified billing profile status.",
-          "enum": [
-            "PastDue",
-            "UnusualActivity",
-            "SpendingLimitReached",
-            "SpendingLimitExpired"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "BillingProfileStatusReasonCode",
-            "modelAsString": true
-          }
-        },
-        "billingProfileSpendingLimit": {
-          "description": "The billing profile spending limit.",
-          "enum": [
-            "Off",
-            "On"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "SpendingLimit",
-            "modelAsString": true
-          }
-        },
-        "enabledAzurePlans": {
-          "description": "Information about the enabled azure plans.",
-          "type": "array",
-          "items": {
-            "$ref": "./types.json#/definitions/AzurePlan"
-          },
-          "x-ms-identifiers": []
-        },
-        "invoiceSectionDisplayName": {
-          "description": "The name of the invoice section.",
-          "type": "string",
-          "readOnly": true
-        },
-        "invoiceSectionId": {
-          "description": "The fully qualified ID that uniquely identifies an invoice section.",
-          "type": "string",
-          "readOnly": true
-        },
-        "invoiceSectionSystemId": {
-          "description": "The system generated unique identifier for an invoice section.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "InvoiceSectionWithCreateSubscriptionPermissionListResult": {
-      "description": "A container for a list of resources",
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The link (url) to the next page of results.",
-          "type": "string",
-          "readOnly": true
-        },
-        "value": {
-          "description": "The list of resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InvoiceSectionWithCreateSubscriptionPermission"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "invoiceSectionId"
-          ]
         }
       }
     },
