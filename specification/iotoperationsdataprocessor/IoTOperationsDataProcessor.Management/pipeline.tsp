@@ -53,19 +53,20 @@ model PipelineProperties {
   provisioningState?: ProvisioningState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type"
-@doc("Information about where to pull input data from.")
-model PipelineInput is Record<unknown>{
-  @doc("Programmatic name of the pipeline.")
-  name: string;
+// #suppress "@azure-tools/typespec-azure-core/bad-record-type"
+// @doc("Information about where to pull input data from.")
+// model PipelineInput is Record<unknown>{
+//   @doc("Programmatic name of the pipeline.")
+//   name: string;
 
-  @doc("ARM resource type.")
-  type: string;
+//   @doc("ARM resource type.")
+//   type: string;
 
-  @doc("Next stage in the pipeline.")
-  next: string[];
-}
-
+//   @doc("Next stage in the pipeline.")
+//   next: string[];
+// }
+@doc("Stage configurations for all Pipeline processing and output stages.")
+model PipelineInput {}
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("Stage configurations for all Pipeline processing and output stages.")
 model PipelineStages is Record<unknown> {
