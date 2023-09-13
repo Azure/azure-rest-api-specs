@@ -35,16 +35,13 @@
                 "maxPercentUnhealthyPartitionsPerService": 0,
                 "maxPercentUnhealthyReplicasPerPartition": 0
               },
-              "serviceTypeHealthPolicyMap": [
-                {
-                  "key": "service1",
-                  "value": {
-                    "maxPercentUnhealthyReplicasPerPartition": 30,
-                    "maxPercentUnhealthyPartitionsPerService": 30,
-                    "maxPercentUnhealthyServices": 30
-                  }
+              "serviceTypeHealthPolicyMap": {
+                "service1": {
+                  "maxPercentUnhealthyReplicasPerPartition": 30,
+                  "maxPercentUnhealthyPartitionsPerService": 30,
+                  "maxPercentUnhealthyServices": 30
                 }
-              ]
+              }
             },
             "rollingUpgradeMonitoringPolicy": {
               "failureAction": "Rollback",
