@@ -1127,7 +1127,12 @@
     "DatasetPropertyKeys": {
       "type": "object",
       "description": "List of keys that can be used for joining on enrich.",
-      "properties": {}
+      "properties": {},
+      "allOf": [
+        {
+          "$ref": "#/definitions/SomeUnknownProperties"
+        }
+      ]
     },
     "DatasetTagsUpdate": {
       "type": "object",
@@ -1400,6 +1405,24 @@
           }
         ]
       }
+    },
+    "SomeUnknownProperties": {
+      "type": "object",
+      "description": "Some unknown props.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "List of keys that can be used for joining on enrich."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the key."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
     }
   },
   "parameters": {}

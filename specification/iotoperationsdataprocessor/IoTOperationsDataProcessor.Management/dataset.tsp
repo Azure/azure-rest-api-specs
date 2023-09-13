@@ -55,7 +55,16 @@ model DatasetProperties {
 }
 
 @doc("List of keys that can be used for joining on enrich.")
-model DatasetPropertyKeys {}
+model DatasetPropertyKeys extends SomeUnknownProperties {}
+
+@doc("Some unknown props.")
+model SomeUnknownProperties {
+  @doc("List of keys that can be used for joining on enrich.")
+  name: string;
+  
+  @doc("Type of the key.")
+  type: string;
+}
 
 @armResourceOperations
 interface Datasets {
