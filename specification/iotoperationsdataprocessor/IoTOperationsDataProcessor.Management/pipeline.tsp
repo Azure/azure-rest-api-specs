@@ -40,9 +40,11 @@ model PipelineProperties {
   @doc("Flag indicating whether the pipeline should be running or not.")
   enabled: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("Information about where to pull input data from.")
   input: PipelineInput;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("Map of stage ids to stage configurations for all pipeline processing and output stages.")
   stages: PipelineStages;
 
@@ -51,11 +53,31 @@ model PipelineProperties {
   provisioningState?: ProvisioningState;
 }
 
+#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("Information about where to pull input data from.")
-model PipelineInput {}
+model PipelineInput is Record<unknown>{
+  @doc("Programmatic name of the pipeline.")
+  name: string;
 
+  @doc("ARM resource type.")
+  type: string;
+
+  @doc("Next stage in the pipeline.")
+  next: string[];
+}
+
+#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("Stage configurations for all Pipeline processing and output stages.")
-model PipelineStages {}
+model PipelineStages is Record<unknown> {
+  @doc("Programmatic name of the pipeline.")
+  name: string;
+
+  @doc("ARM resource type.")
+  type: string;
+
+  @doc("Next stage in the pipeline.")
+  next: string[];
+}
 
 @armResourceOperations
 interface Pipelines {
@@ -65,3 +87,5 @@ interface Pipelines {
   delete is ArmResourceDeleteAsync<Pipeline>;
   listByInstance is ArmResourceListByParent<Pipeline>;
 }
+
+// PipelineStages should not use 'is Record<unknown>'. Use 'is Record<string>' instead.TypeSpec(@azure-tools/typespec-azure-core/bad-record-type)
