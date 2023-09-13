@@ -866,37 +866,6 @@
         }
       }
     },
-    "PreviewSubscription": {
-      "x-ms-azure-resource": true,
-      "description": "Customer subscription which can use a preview network function definition version.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ],
-      "type": "object",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PreviewSubscriptionPropertiesFormat",
-          "description": "PreviewSubscription properties."
-        }
-      }
-    },
-    "PreviewSubscriptionPropertiesFormat": {
-      "description": "PreviewSubscription properties.",
-      "type": "object",
-      "properties": {
-        "provisioningState": {
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ],
-          "$ref": "./common.json#/definitions/ProvisioningState",
-          "description": "The provisioning state of the preview subscription resource."
-        }
-      }
-    },
     "AzureArcKubernetesNetworkFunctionTemplate": {
       "description": "Azure Arc kubernetes network function template.",
       "x-ms-discriminator-value": "AzureArcKubernetes",
