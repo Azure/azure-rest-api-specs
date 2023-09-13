@@ -2,18 +2,15 @@
   "parameters": {
     "serverName": "mysqltestserver",
     "resourceGroupName": "testrg",
-    "api-version": "2022-09-30-preview",
+    "api-version": "2023-06-01-preview",
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "parameters": {
       "properties": {
-        "storage": {
-          "storageSizeGB": 30,
-          "iops": 200,
-          "autoGrow": "Disabled",
-          "autoIoScaling": "Disabled"
-        },
-        "network": {
-          "publicNetworkAccess": "Disabled"
+        "maintenanceWindow": {
+          "customWindow": "Enabled",
+          "dayOfWeek": 1,
+          "startHour": 8,
+          "startMinute": 0
         }
       }
     }
@@ -28,11 +25,10 @@
         "properties": {
           "administratorLogin": "cloudsa",
           "storage": {
-            "storageSizeGB": 30,
-            "iops": 200,
-            "autoGrow": "Disabled",
-            "storageSku": "Premium_LRS",
-            "autoIoScaling": "Disabled"
+            "storageSizeGB": 100,
+            "iops": 600,
+            "autoGrow": "Enabled",
+            "storageSku": "Premium_LRS"
           },
           "version": "5.7",
           "state": "Ready",
@@ -41,13 +37,13 @@
           "maintenanceWindow": {
             "customWindow": "Enabled",
             "dayOfWeek": 1,
-            "startHour": 1,
+            "startHour": 8,
             "startMinute": 0
           },
           "replicationRole": "None",
           "replicaCapacity": 10,
           "network": {
-            "publicNetworkAccess": "Disabled"
+            "publicNetworkAccess": "Enabled"
           },
           "backup": {
             "backupRetentionDays": 7,
@@ -70,8 +66,8 @@
     },
     "202": {
       "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforMySQL/locations/southeastasia/azureAsyncOperation/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2022-09-30-preview",
-        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforMySQL/locations/southeastasia/operationResults/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2022-09-30-preview"
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforMySQL/locations/southeastasia/azureAsyncOperation/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2023-06-01-preview",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforMySQL/locations/southeastasia/operationResults/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2023-06-01-preview"
       }
     }
   }
