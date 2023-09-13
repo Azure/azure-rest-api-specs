@@ -394,7 +394,7 @@ worker must satisfy in order to process this job.
 A set of key/value pairs that are identifying attributes used by the rules
 engines to make decisions.
 """)
-  labels?: Record<{}>;
+  labels?: Record<unknown>;
 
   @doc("""
 A collection of the assignments of the job.
@@ -404,7 +404,7 @@ Key is AssignmentId.
   assignments?: Record<RouterJobAssignment>;
 
   @doc("A set of non-identifying attributes attached to this job")
-  tags?: Record<{}>;
+  tags?: Record<unknown>;
 
   @doc("Notes attached to a job, sorted by timestamp")
   notes?: Record<string>;
@@ -445,7 +445,7 @@ label selector
   labelOperator: LabelOperator;
 
   @doc("The value to compare against the actual label value with the given operator")
-  value?: {};
+  value?: unknown;
 
   @doc("Describes how long this label selector is valid in seconds.")
   expiresAfterSeconds?: float32;
@@ -506,7 +506,7 @@ model JobMatchingMode {
 Describes a matching mode where matching worker to a job is automatically
 started after job is queued successfully.
 """)
-  queueAndMatchMode?: {};
+  queueAndMatchMode?: unknown;
 
   @doc("""
 Describes a matching mode used for scheduling jobs to be queued at a future
@@ -517,7 +517,7 @@ automatically.
   scheduleAndSuspendMode?: ScheduleAndSuspendMode;
 
   @doc("Describes a matching mode where matching worker to a job is suspended.")
-  suspendMode?: {};
+  suspendMode?: unknown;
 }
 
 @doc("""
@@ -684,7 +684,7 @@ to workers.
 A set of key/value pairs that are identifying attributes used by the rules
 engines to make decisions.
 """)
-  labels?: Record<{}>;
+  labels?: Record<unknown>;
 
   @doc("""
 (Optional) The ID of the exception policy that determines various job
@@ -734,7 +734,7 @@ model RouterWorker {
   state?: RouterWorkerState;
   
   @doc("The queue(s) that this worker can receive work from.")
-  queueAssignments?: Record<{}>;
+  queueAssignments?: Record<unknown>;
 
   @doc("The total capacity score this worker has to manage multiple concurrent jobs.")
   totalCapacity?: int32;
@@ -743,10 +743,10 @@ model RouterWorker {
 A set of key/value pairs that are identifying attributes used by the rules
 engines to make decisions.
 """)
-  labels?: Record<{}>;
+  labels?: Record<unknown>;
 
   @doc("A set of non-identifying attributes attached to this worker.")
-  tags?: Record<{}>;
+  tags?: Record<unknown>;
 
   @doc("The channel(s) this worker can handle and their impact on the workers capacity.")
   channelConfigurations?: Record<ChannelConfiguration>;
@@ -967,7 +967,7 @@ label selector
   labelOperator: LabelOperator;
 
   @doc("The value to compare against the actual label value with the given operator")
-  value?: {};
+  value?: unknown;
 }
 
 @doc("""
@@ -1169,7 +1169,7 @@ and worker selectors.
 (optional) Dictionary containing the labels to update (or add if not existing)
 in key-value pairs
 """)
-  labelsToUpsert?: Record<{}>;
+  labelsToUpsert?: Record<unknown>;
 
   @doc("The type discriminator describing a sub-type of ExceptionAction")
   kind: "reclassify";
@@ -1248,7 +1248,7 @@ input.
 """)
 model StaticRouterRule extends RouterRule {
   @doc("The static value this rule always returns.")
-  value?: {};
+  value?: unknown;
 
   @doc("The type discriminator describing a sub-type of Rule")
   kind: "static-rule";
