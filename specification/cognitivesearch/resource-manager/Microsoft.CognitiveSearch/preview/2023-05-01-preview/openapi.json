@@ -797,6 +797,7 @@
   },
   "definitions": {
     "AuthOption": {
+      "description": "Authentication options for accessing the dataplane",
       "type": "string",
       "enum": [
         "AadOnly",
@@ -1116,19 +1117,27 @@
       "properties": {
         "primaryReadWriteKey": {
           "type": "string",
-          "description": "Primary read-write ApiKey."
+          "description": "Primary read-write ApiKey.",
+          "format": "password",
+          "x-ms-secret": true
         },
         "secondaryReadWriteKey": {
           "type": "string",
-          "description": "Secondary read-write ApiKey."
+          "description": "Secondary read-write ApiKey.",
+          "format": "password",
+          "x-ms-secret": true
         },
         "primaryReadOnlyKey": {
           "type": "string",
-          "description": "Primary read-only ApiKey."
+          "description": "Primary read-only ApiKey.",
+          "format": "password",
+          "x-ms-secret": true
         },
         "secondaryReadOnlyKey": {
           "type": "string",
-          "description": "Secondary read-only ApiKey."
+          "description": "Secondary read-only ApiKey.",
+          "format": "password",
+          "x-ms-secret": true
         }
       },
       "description": "The list of all ApiKeys used to access the dataplane.",
@@ -1314,6 +1323,7 @@
       "description": "The updatable properties of the Indexer."
     },
     "KeyKind": {
+      "description": "ApiKeys used to access the dataplane",
       "type": "string",
       "enum": [
         "PrimaryReadWriteKey",
