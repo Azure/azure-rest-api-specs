@@ -775,6 +775,10 @@
           "type": "string",
           "description": "The deployment parameters of the network function definition version."
         },
+        "secretDeployParameters": {
+          "type": "string",
+          "description": "The secret deployment parameters of the network function definition version."
+        },
         "networkFunctionType": {
           "description": "The network function type.",
           "$ref": "./common.json#/definitions/NetworkFunctionType"
@@ -1051,6 +1055,11 @@
             "read",
             "create"
           ]
+        },
+        "secretValues": {
+          "description": "Helm secret release values.",
+          "type": "string",
+          "x-ms-secret": true
         }
       }
     },
@@ -1375,6 +1384,11 @@
         "userConfiguration": {
           "description": "List of values.",
           "type": "string"
+        },
+        "secretValues": {
+          "description": "vhd mapping rule secret values.",
+          "type": "string",
+          "x-ms-secret": true
         }
       }
     },
@@ -1399,6 +1413,11 @@
         "templateParameters": {
           "description": "List of template parameters.",
           "type": "string"
+        },
+        "secretValues": {
+          "description": "arm template mapping rule secret values.",
+          "type": "string",
+          "x-ms-secret": true
         }
       }
     },
@@ -1423,6 +1442,11 @@
         "userConfiguration": {
           "description": "List of values.",
           "type": "string"
+        },
+        "secretValues": {
+          "description": "Image mapping rule secret values.",
+          "type": "string",
+          "x-ms-secret": true
         }
       }
     },
