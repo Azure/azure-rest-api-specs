@@ -2272,18 +2272,14 @@
           "description": "Discriminator value used to differentiate between supported matching mode types."
         },
         "queueAndMatchMode": {
-          "type": "object",
-          "description": "Describes a matching mode where matching worker to a job is automatically\nstarted after job is queued successfully.",
-          "properties": {}
+          "description": "Describes a matching mode where matching worker to a job is automatically\nstarted after job is queued successfully."
         },
         "scheduleAndSuspendMode": {
           "$ref": "#/definitions/ScheduleAndSuspendMode",
           "description": "Describes a matching mode used for scheduling jobs to be queued at a future\ntime.\nAt the specified time, matching worker to a job will not start\nautomatically."
         },
         "suspendMode": {
-          "type": "object",
-          "description": "Describes a matching mode where matching worker to a job is suspended.",
-          "properties": {}
+          "description": "Describes a matching mode where matching worker to a job is suspended."
         }
       }
     },
@@ -2642,10 +2638,7 @@
         "labelsToUpsert": {
           "type": "object",
           "description": "(optional) Dictionary containing the labels to update (or add if not existing)\nin key-value pairs",
-          "additionalProperties": {
-            "properties": {},
-            "type": "object"
-          }
+          "additionalProperties": true
         }
       },
       "allOf": [
@@ -2731,10 +2724,7 @@
         "labels": {
           "type": "object",
           "description": "A set of key/value pairs that are identifying attributes used by the rules\nengines to make decisions.",
-          "additionalProperties": {
-            "properties": {},
-            "type": "object"
-          }
+          "additionalProperties": true
         },
         "assignments": {
           "type": "object",
@@ -2747,10 +2737,7 @@
         "tags": {
           "type": "object",
           "description": "A set of non-identifying attributes attached to this job",
-          "additionalProperties": {
-            "properties": {},
-            "type": "object"
-          }
+          "additionalProperties": true
         },
         "notes": {
           "type": "object",
@@ -2992,10 +2979,7 @@
         "labels": {
           "type": "object",
           "description": "A set of key/value pairs that are identifying attributes used by the rules\nengines to make decisions.",
-          "additionalProperties": {
-            "properties": {},
-            "type": "object"
-          }
+          "additionalProperties": true
         },
         "exceptionPolicyId": {
           "type": "string",
@@ -3030,9 +3014,7 @@
           "description": "Describes how the value of the label is compared to the value defined on the\nlabel selector"
         },
         "value": {
-          "type": "object",
-          "description": "The value to compare against the actual label value with the given operator",
-          "properties": {}
+          "description": "The value to compare against the actual label value with the given operator"
         }
       },
       "required": [
@@ -3103,10 +3085,7 @@
         "queueAssignments": {
           "type": "object",
           "description": "The queue(s) that this worker can receive work from.",
-          "additionalProperties": {
-            "properties": {},
-            "type": "object"
-          }
+          "additionalProperties": true
         },
         "totalCapacity": {
           "type": "integer",
@@ -3116,18 +3095,12 @@
         "labels": {
           "type": "object",
           "description": "A set of key/value pairs that are identifying attributes used by the rules\nengines to make decisions.",
-          "additionalProperties": {
-            "properties": {},
-            "type": "object"
-          }
+          "additionalProperties": true
         },
         "tags": {
           "type": "object",
           "description": "A set of non-identifying attributes attached to this worker.",
-          "additionalProperties": {
-            "properties": {},
-            "type": "object"
-          }
+          "additionalProperties": true
         },
         "channelConfigurations": {
           "type": "object",
@@ -3223,9 +3196,7 @@
           "description": "Describes how the value of the label is compared to the value defined on the\nlabel selector"
         },
         "value": {
-          "type": "object",
-          "description": "The value to compare against the actual label value with the given operator",
-          "properties": {}
+          "description": "The value to compare against the actual label value with the given operator"
         },
         "expiresAfterSeconds": {
           "type": "number",
@@ -3430,9 +3401,7 @@
       "description": "A rule providing static rules that always return the same result, regardless of\ninput.",
       "properties": {
         "value": {
-          "type": "object",
-          "description": "The static value this rule always returns.",
-          "properties": {}
+          "description": "The static value this rule always returns."
         }
       },
       "allOf": [
