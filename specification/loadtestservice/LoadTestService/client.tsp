@@ -31,6 +31,8 @@ interface AdministrationOperations {
     DeleteTest is LoadTestAdministration.deleteTest;
 };
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 @client({
     name: "LoadTestRunClient",
     service: Microsoft.LoadTestService,
