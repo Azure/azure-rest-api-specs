@@ -681,7 +681,7 @@ numeric, underscore or hyphen characters.
   @example("./examples/ListTestRunServerMetricsConfig.json", "ListTestRunServerMetricsConfig")
   op getServerMetricsConfig(
       @doc("API version")
-      @header
+      @query("api-version")
       apiVersion: string,
       @doc("""
 Unique name for the load test run, must contain only lower-case alphabetic,
