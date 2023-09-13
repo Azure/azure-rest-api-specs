@@ -254,7 +254,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/enrollmentAccounts/{accountName}/billingPermissions": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/enrollmentAccounts/{enrollmentAccountName}/billingPermissions": {
       "get": {
         "tags": [
           "BillingPermission"
@@ -272,12 +272,7 @@
             "$ref": "./types.json#/parameters/billingAccountName"
           },
           {
-            "in": "path",
-            "name": "accountName",
-            "description": "The name of the enrollment account.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[1-9][0-9]*$"
+            "$ref": "./types.json#/parameters/enrollmentAccountName"
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"

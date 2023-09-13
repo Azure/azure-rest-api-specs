@@ -20,7 +20,7 @@
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
-        "operationId": "BillingRoleDefinition_GetByBillingAccount",
+        "operationId": "BillingRoleDefinition_GetByBillingProfile",
         "produces": [
           "application/json"
         ],
@@ -233,7 +233,7 @@
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
-        "operationId": "BillingRoleDefinition_GetByBillingAccount",
+        "operationId": "BillingRoleDefinition_GetByInvoiceSection",
         "produces": [
           "application/json"
         ],
@@ -336,7 +336,7 @@
         "tags": [
           "BillingRoleDefinition"
         ],
-        "description": "Gets the definition for a role on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterpise Agreement",
+        "description": "Gets the definition for a role on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -386,7 +386,7 @@
         "tags": [
           "BillingRoleDefinition"
         ],
-        "description": "Lists the role definitions for a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterpise Agreement.",
+        "description": "Lists the role definitions for a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -431,7 +431,7 @@
         "tags": [
           "BillingRoleDefinition"
         ],
-        "description": "Gets the definition for a role on a department. The operation is supported for billing accounts with agreement type Enterpise Agreement.",
+        "description": "Gets the definition for a role on a department. The operation is supported for billing accounts with agreement type Enterprise Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -473,8 +473,8 @@
           }
         },
         "x-ms-examples": {
-          "BillingRoleDefinitionGetByEnrollmentAccount": {
-            "$ref": "./examples/billingRoleDefinitionGetByEnrollmentAccount.json"
+          "BillingRoleDefinitionGetByDepartment": {
+            "$ref": "./examples/billingRoleDefinitionGetByDepartment.json"
           }
         }
       }
@@ -484,7 +484,7 @@
         "tags": [
           "BillingRoleDefinition"
         ],
-        "description": "Gets the definition for a department. The operation is supported for billing accounts with agreement type Enterpise Agreement.",
+        "description": "Gets the definition for a department. The operation is supported for billing accounts with agreement type Enterprise Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -527,65 +527,12 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/enrollmentAccounts/{accountName}/billingRoleDefinitions": {
-      "get": {
-        "tags": [
-          "BillingRoleDefinition"
-        ],
-        "description": "List the definition for an enrollment account. The operation is supported for billing accounts with agreement type Enterpise Agreement.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "BillingRoleDefinition_ListByEnrollmentAccount",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "./types.json#/parameters/billingAccountName"
-          },
-          {
-            "in": "path",
-            "name": "accountName",
-            "description": "The name of the enrollment account.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[1-9][0-9]*$"
-          },
-          {
-            "$ref": "./types.json#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The list of role definitions.",
-            "schema": {
-              "$ref": "#/definitions/BillingRoleDefinitionListResult"
-            }
-          },
-          "default": {
-            "description": "Default response",
-            "schema": {
-              "$ref": "./types.json#/definitions/ArmErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "BillingRoleDefinitionListByEnrollmentAccount": {
-            "$ref": "./examples/billingRoleDefinitionListByEnrollmentAccount.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/enrollmentAccounts/{enrollmentAccountName}/billingRoleDefinitions/{roleDefinitionName}": {
       "get": {
         "tags": [
           "BillingRoleDefinition"
         ],
-        "description": "Gets the definition for a role on an enrollment account. The operation is supported for billing accounts with agreement type Enterpise Agreement.",
+        "description": "Gets the definition for a role on an enrollment account. The operation is supported for billing accounts with agreement type Enterprise Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -630,6 +577,65 @@
           "BillingRoleDefinitionGetByEnrollmentAccount": {
             "$ref": "./examples/billingRoleDefinitionGetByEnrollmentAccount.json"
           }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/enrollmentAccounts/{enrollmentAccountName}/billingRoleDefinitions": {
+      "get": {
+        "tags": [
+          "BillingRoleDefinition"
+        ],
+        "description": "List the definition for an enrollment account. The operation is supported for billing accounts with agreement type Enterprise Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRoleDefinition_ListByEnrollmentAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "in": "query",
+            "name": "accountName",
+            "description": "The name of the enrollment account.",
+            "type": "string",
+            "pattern": "^[1-9][0-9]*$"
+          },
+          {
+            "in": "path",
+            "name": "enrollmentAccountName",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of role definitions.",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingRoleDefinitionListByEnrollmentAccount": {
+            "$ref": "./examples/billingRoleDefinitionListByEnrollmentAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
