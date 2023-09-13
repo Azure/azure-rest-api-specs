@@ -4932,6 +4932,19 @@
           "description": "Content Filters policy type.",
           "readOnly": true
         },
+        "mode":{
+          "type":"string",
+          "enum": [
+            "Default",
+            "Deferred",
+            "Blocking"
+          ],
+          "x-ms-enum": {
+            "name": "RaiPolicyMode",
+            "modelAsString": true
+          },
+          "description": "Content Filters mode."
+        },
         "basePolicyName": {
           "type": "string",
           "description": "Name of the base Content Filters."
