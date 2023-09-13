@@ -1533,7 +1533,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/collectionId"
+            "$ref": "#/parameters/requiredCollectionId"
           },
           {
             "$ref": "#/parameters/purviewAPIVersion"
@@ -3081,7 +3081,7 @@
             "$ref": "./examples/Glossary_ExportGlossaryTermsAsCsv.json"
           }
         },
-        "parameters": [          
+        "parameters": [
           {
             "name": "glossaryGuid",
             "in": "query",
@@ -7991,9 +7991,9 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "destinationCollectionId": {
-      "name": "destinationCollectionId",
-      "description": "The destination collection ID.",
+    "requiredCollectionId": {
+      "name": "collectionId",
+      "description": "The collection where entities will be moved to.",
       "in": "query",
       "required": true,
       "type": "string",
@@ -8001,7 +8001,7 @@
     },
     "collectionId": {
       "name": "collectionId",
-      "description": "The collection ID.",
+      "description": "The collection where entities will be moved to. Only specify a value if you need to move an entity to another collection.",
       "in": "query",
       "required": false,
       "type": "string",
