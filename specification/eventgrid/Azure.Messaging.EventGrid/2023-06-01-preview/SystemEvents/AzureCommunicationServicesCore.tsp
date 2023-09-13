@@ -1,0 +1,50 @@
+@doc("Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user. This model must be interpreted as a union: Apart from rawId, at most one further property may be set.")
+model CommunicationIdentifierModel {
+  @doc("Raw Id of the identifier. Optional in requests, required in responses.")
+  rawId?: string;
+
+  @doc("The communication user.")
+  communicationUser?: CommunicationUserIdentifierModel;
+
+  @doc("The phone number.")
+  phoneNumber?: PhoneNumberIdentifierModel;
+
+  @doc("The Microsoft Teams user.")
+  microsoftTeamsUser?: MicrosoftTeamsUserIdentifierModel;
+}
+
+@doc("A Microsoft Teams user.")
+model MicrosoftTeamsUserIdentifierModel {
+  @doc("The Id of the Microsoft Teams user. If not anonymous, this is the AAD object Id of the user.")
+  userId: string;
+
+  @doc("True if the Microsoft Teams user is anonymous. By default false if missing.")
+  isAnonymous?: boolean;
+
+  @doc("The cloud that the Microsoft Teams user belongs to. By default 'public' if missing.")
+  cloud?: CommunicationCloudEnvironmentModel;
+}
+
+@doc("A phone number.")
+model PhoneNumberIdentifierModel {
+  @doc("The phone number in E.164 format.")
+  value: string;
+}
+
+@doc("A user that got created with an Azure Communication Services resource.")
+model CommunicationUserIdentifierModel {
+  @doc("The Id of the communication user.")
+  id: string;
+}
+
+@doc("Communication cloud environment model.")
+enum CommunicationCloudEnvironmentModel {
+  @doc("Public")
+  public,
+
+  @doc("Dod")
+  dod,
+
+  @doc("Gcch")
+  gcch,
+}
