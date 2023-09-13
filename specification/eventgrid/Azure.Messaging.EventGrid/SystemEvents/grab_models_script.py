@@ -43,8 +43,8 @@ for file_name in file_names:
 
 
 # For each model_name add @@include to it
-include_statement = "@@include("
-model_names_with_include = [include_statement + model_name + ")" for model_name in model_names]    
+include_statement = "@@usage("
+model_names_with_include = [include_statement + model_name + ", Usage.input | Usage.output);" for model_name in model_names]    
 
 for model in model_names_with_include:
     print(model)

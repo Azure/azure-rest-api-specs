@@ -28,217 +28,225 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@@include(EventGrid.ApiManagementUserCreatedEventData)
-@@include(EventGrid.ApiManagementUserUpdatedEventData)
-@@include(EventGrid.ApiManagementUserDeletedEventData)
-@@include(EventGrid.ApiManagementSubscriptionCreatedEventData)
-@@include(EventGrid.ApiManagementSubscriptionUpdatedEventData)
-@@include(EventGrid.ApiManagementSubscriptionDeletedEventData)
-@@include(EventGrid.ApiManagementProductCreatedEventData)
-@@include(EventGrid.ApiManagementProductUpdatedEventData)
-@@include(EventGrid.ApiManagementProductDeletedEventData)
-@@include(EventGrid.ApiManagementApiCreatedEventData)
-@@include(EventGrid.ApiManagementApiUpdatedEventData)
-@@include(EventGrid.ApiManagementApiDeletedEventData)
-@@include(EventGrid.ApiManagementApiReleaseCreatedEventData)
-@@include(EventGrid.ApiManagementApiReleaseUpdatedEventData)
-@@include(EventGrid.ApiManagementApiReleaseDeletedEventData)
-@@include(EventGrid.ApiManagementGatewayCreatedEventData)
-@@include(EventGrid.ApiManagementGatewayUpdatedEventData)
-@@include(EventGrid.ApiManagementGatewayDeletedEventData)
-@@include(EventGrid.ApiManagementGatewayHostnameConfigurationCreatedEventData)
-@@include(EventGrid.ApiManagementGatewayHostnameConfigurationUpdatedEventData)
-@@include(EventGrid.ApiManagementGatewayHostnameConfigurationDeletedEventData)
-@@include(EventGrid.ApiManagementGatewayCertificateAuthorityCreatedEventData)
-@@include(EventGrid.ApiManagementGatewayCertificateAuthorityUpdatedEventData)
-@@include(EventGrid.ApiManagementGatewayCertificateAuthorityDeletedEventData)
-@@include(EventGrid.ApiManagementGatewayApiAddedEventData)
-@@include(EventGrid.ApiManagementGatewayApiRemovedEventData)
-@@include(EventGrid.AppConfigurationKeyValueModifiedEventData)
-@@include(EventGrid.AppConfigurationKeyValueDeletedEventData)
-@@include(EventGrid.AcsIncomingCallEventData)
-@@include(EventGrid.AcsIncomingCallCustomContext)
-@@include(EventGrid.AcsUserDisconnectedEventData)
-@@include(EventGrid.AcsChatMessageReceivedEventData)
-@@include(EventGrid.AcsChatMessageReceivedInThreadEventData)
-@@include(EventGrid.AcsChatMessageEditedEventData)
-@@include(EventGrid.AcsChatMessageEditedInThreadEventData)
-@@include(EventGrid.AcsChatMessageDeletedEventData)
-@@include(EventGrid.AcsChatMessageDeletedInThreadEventData)
-@@include(EventGrid.AcsChatThreadCreatedWithUserEventData)
-@@include(EventGrid.AcsChatThreadCreatedEventData)
-@@include(EventGrid.AcsChatThreadWithUserDeletedEventData)
-@@include(EventGrid.AcsChatThreadDeletedEventData)
-@@include(EventGrid.AcsChatThreadPropertiesUpdatedPerUserEventData)
-@@include(EventGrid.AcsChatThreadPropertiesUpdatedEventData)
-@@include(EventGrid.AcsChatParticipantAddedToThreadWithUserEventData)
-@@include(EventGrid.AcsChatParticipantRemovedFromThreadWithUserEventData)
-@@include(EventGrid.AcsChatParticipantAddedToThreadEventData)
-@@include(EventGrid.AcsChatParticipantRemovedFromThreadEventData)
-@@include(EventGrid.AcsSmsDeliveryReportReceivedEventData)
-@@include(EventGrid.AcsSmsReceivedEventData)
-@@include(EventGrid.AcsRecordingFileStatusUpdatedEventData)
-@@include(EventGrid.AcsEmailDeliveryReportReceivedEventData)
-@@include(EventGrid.AcsEmailDeliveryReportStatusDetails)
-@@include(EventGrid.AcsEmailEngagementTrackingReportReceivedEventData)
-@@include(EventGrid.AcsChatThreadEventBaseProperties)
-@@include(EventGrid.AcsChatThreadEventInThreadBaseProperties)
-@@include(EventGrid.AcsChatMessageEventBaseProperties)
-@@include(EventGrid.AcsChatMessageEventInThreadBaseProperties)
-@@include(EventGrid.AcsChatEventInThreadBaseProperties)
-@@include(EventGrid.AcsChatEventBaseProperties)
-@@include(EventGrid.AcsChatThreadParticipantProperties)
-@@include(EventGrid.AcsSmsEventBaseProperties)
-@@include(EventGrid.AcsSmsDeliveryAttemptProperties)
-@@include(EventGrid.AcsRecordingStorageInfoProperties)
-@@include(EventGrid.AcsRecordingChunkInfoProperties)
-@@include(EventGrid.ContainerRegistryImagePushedEventData)
-@@include(EventGrid.ContainerRegistryImageDeletedEventData)
-@@include(EventGrid.ContainerRegistryChartPushedEventData)
-@@include(EventGrid.ContainerRegistryChartDeletedEventData)
-@@include(EventGrid.ContainerRegistryEventData)
-@@include(EventGrid.ContainerRegistryArtifactEventData)
-@@include(EventGrid.ContainerRegistryEventTarget)
-@@include(EventGrid.ContainerRegistryArtifactEventTarget)
-@@include(EventGrid.ContainerRegistryEventRequest)
-@@include(EventGrid.ContainerRegistryEventActor)
-@@include(EventGrid.ContainerRegistryEventSource)
-@@include(EventGrid.ContainerRegistryEventConnectedRegistry)
-@@include(EventGrid.ContainerServiceNewKubernetesVersionAvailableEventData)
-@@include(EventGrid.ContainerServiceClusterSupportEndedEventData)
-@@include(EventGrid.ContainerServiceClusterSupportEndingEventData)
-@@include(EventGrid.ContainerServiceNodePoolRollingStartedEventData)
-@@include(EventGrid.ContainerServiceNodePoolRollingSucceededEventData)
-@@include(EventGrid.ContainerServiceNodePoolRollingFailedEventData)
-@@include(EventGrid.ContainerServiceClusterSupportEventData)
-@@include(EventGrid.ContainerServiceNodePoolRollingEventData)
-@@include(EventGrid.DataBoxCopyStartedEventData)
-@@include(EventGrid.DataBoxCopyCompletedEventData)
-@@include(EventGrid.DataBoxOrderCompletedEventData)
-@@include(EventGrid.SubscriptionValidationEventData)
-@@include(EventGrid.SubscriptionValidationResponse)
-@@include(EventGrid.SubscriptionDeletedEventData)
-@@include(EventGrid.EventGridNamespaceMQTTClientSessionDisconnectedEventData)
-@@include(EventGrid.EventGridNamespaceMQTTClientSessionConnectedEventData)
-@@include(EventGrid.EventGridNamespaceMQTTClientDeletedEventData)
-@@include(EventGrid.EventGridNamespaceMQTTClientCreatedOrUpdatedEventData)
-@@include(EventGrid.EventHubCaptureFileCreatedEventData)
-@@include(EventGrid.HealthcareFhirResourceCreatedEventData)
-@@include(EventGrid.HealthcareFhirResourceUpdatedEventData)
-@@include(EventGrid.HealthcareFhirResourceDeletedEventData)
-@@include(EventGrid.HealthcareDicomImageCreatedEventData)
-@@include(EventGrid.HealthcareDicomImageDeletedEventData)
-@@include(EventGrid.HealthcareDicomImageUpdatedEventData)
-@@include(EventGrid.DeviceLifeCycleEventProperties)
-@@include(EventGrid.DeviceTwinInfo)
-@@include(EventGrid.DeviceConnectionStateEventProperties)
-@@include(EventGrid.DeviceTelemetryEventProperties)
-@@include(EventGrid.DeviceTwinProperties)
-@@include(EventGrid.DeviceTwinMetadata)
-@@include(EventGrid.DeviceConnectionStateEventInfo)
-@@include(EventGrid.IotHubDeviceCreatedEventData)
-@@include(EventGrid.IotHubDeviceDeletedEventData)
-@@include(EventGrid.IotHubDeviceConnectedEventData)
-@@include(EventGrid.IotHubDeviceDisconnectedEventData)
-@@include(EventGrid.IotHubDeviceTelemetryEventData)
-@@include(EventGrid.KeyVaultCertificateNewVersionCreatedEventData)
-@@include(EventGrid.KeyVaultCertificateNearExpiryEventData)
-@@include(EventGrid.KeyVaultCertificateExpiredEventData)
-@@include(EventGrid.KeyVaultKeyNewVersionCreatedEventData)
-@@include(EventGrid.KeyVaultKeyNearExpiryEventData)
-@@include(EventGrid.KeyVaultKeyExpiredEventData)
-@@include(EventGrid.KeyVaultSecretNewVersionCreatedEventData)
-@@include(EventGrid.KeyVaultSecretNearExpiryEventData)
-@@include(EventGrid.KeyVaultSecretExpiredEventData)
-@@include(EventGrid.KeyVaultVaultAccessPolicyChangedEventData)
-@@include(EventGrid.MachineLearningServicesModelRegisteredEventData)
-@@include(EventGrid.MachineLearningServicesModelDeployedEventData)
-@@include(EventGrid.MachineLearningServicesRunCompletedEventData)
-@@include(EventGrid.MachineLearningServicesDatasetDriftDetectedEventData)
-@@include(EventGrid.MachineLearningServicesRunStatusChangedEventData)
-@@include(EventGrid.MapsGeofenceEnteredEventData)
-@@include(EventGrid.MapsGeofenceExitedEventData)
-@@include(EventGrid.MapsGeofenceResultEventData)
-@@include(EventGrid.MapsGeofenceEventProperties)
-@@include(EventGrid.MapsGeofenceGeometry)
-@@include(EventGrid.MediaJobStateChangeEventData)
-@@include(EventGrid.MediaJobError)
-@@include(EventGrid.MediaJobErrorDetail)
-@@include(EventGrid.MediaJobOutput)
-@@include(EventGrid.MediaJobOutputAsset)
-@@include(EventGrid.MediaJobOutputProgressEventData)
-@@include(EventGrid.MediaJobOutputStateChangeEventData)
-@@include(EventGrid.MediaJobScheduledEventData)
-@@include(EventGrid.MediaJobProcessingEventData)
-@@include(EventGrid.MediaJobCancelingEventData)
-@@include(EventGrid.MediaJobFinishedEventData)
-@@include(EventGrid.MediaJobCanceledEventData)
-@@include(EventGrid.MediaJobErroredEventData)
-@@include(EventGrid.MediaJobOutputCanceledEventData)
-@@include(EventGrid.MediaJobOutputCancelingEventData)
-@@include(EventGrid.MediaJobOutputErroredEventData)
-@@include(EventGrid.MediaJobOutputFinishedEventData)
-@@include(EventGrid.MediaJobOutputProcessingEventData)
-@@include(EventGrid.MediaJobOutputScheduledEventData)
-@@include(EventGrid.MediaLiveEventEncoderConnectedEventData)
-@@include(EventGrid.MediaLiveEventConnectionRejectedEventData)
-@@include(EventGrid.MediaLiveEventEncoderDisconnectedEventData)
-@@include(EventGrid.MediaLiveEventIncomingStreamReceivedEventData)
-@@include(EventGrid.MediaLiveEventIncomingStreamsOutOfSyncEventData)
-@@include(EventGrid.MediaLiveEventIncomingVideoStreamsOutOfSyncEventData)
-@@include(EventGrid.MediaLiveEventIncomingDataChunkDroppedEventData)
-@@include(EventGrid.MediaLiveEventIngestHeartbeatEventData)
-@@include(EventGrid.MediaLiveEventTrackDiscontinuityDetectedEventData)
-@@include(EventGrid.MediaLiveEventChannelArchiveHeartbeatEventData)
-@@include(EventGrid.PolicyInsightsPolicyStateCreatedEventData)
-@@include(EventGrid.PolicyInsightsPolicyStateChangedEventData)
-@@include(EventGrid.PolicyInsightsPolicyStateDeletedEventData)
-@@include(EventGrid.RedisPatchingCompletedEventData)
-@@include(EventGrid.RedisScalingCompletedEventData)
-@@include(EventGrid.RedisExportRDBCompletedEventData)
-@@include(EventGrid.RedisImportRDBCompletedEventData)
-@@include(EventGrid.ResourceWriteSuccessData)
-@@include(EventGrid.ResourceWriteFailureData)
-@@include(EventGrid.ResourceWriteCancelData)
-@@include(EventGrid.ResourceDeleteSuccessData)
-@@include(EventGrid.ResourceDeleteFailureData)
-@@include(EventGrid.ResourceDeleteCancelData)
-@@include(EventGrid.ResourceActionSuccessData)
-@@include(EventGrid.ResourceActionFailureData)
-@@include(EventGrid.ResourceActionCancelData)
-@@include(EventGrid.ResourceHttpRequest)
-@@include(EventGrid.ResourceAuthorization)
-@@include(EventGrid.ServiceBusActiveMessagesAvailableWithNoListenersEventData)
-@@include(EventGrid.ServiceBusDeadletterMessagesAvailableWithNoListenersEventData)
-@@include(EventGrid.ServiceBusActiveMessagesAvailablePeriodicNotificationsEventData)
-@@include(EventGrid.ServiceBusDeadletterMessagesAvailablePeriodicNotificationsEventData)
-@@include(EventGrid.SignalRServiceClientConnectionConnectedEventData)
-@@include(EventGrid.SignalRServiceClientConnectionDisconnectedEventData)
-@@include(EventGrid.StorageBlobCreatedEventData)
-@@include(EventGrid.StorageBlobDeletedEventData)
-@@include(EventGrid.StorageDirectoryCreatedEventData)
-@@include(EventGrid.StorageDirectoryDeletedEventData)
-@@include(EventGrid.StorageBlobRenamedEventData)
-@@include(EventGrid.StorageDirectoryRenamedEventData)
-@@include(EventGrid.StorageLifecyclePolicyCompletedEventData)
-@@include(EventGrid.StorageLifecyclePolicyActionSummaryDetail)
-@@include(EventGrid.StorageBlobTierChangedEventData)
-@@include(EventGrid.StorageAsyncOperationInitiatedEventData)
-@@include(EventGrid.StorageBlobInventoryPolicyCompletedEventData)
-@@include(EventGrid.StorageTaskCompletedEventData)
-@@include(EventGrid.StorageTaskQueuedEventData)
-@@include(EventGrid.AppEventTypeDetail)
-@@include(EventGrid.WebAppUpdatedEventData)
-@@include(EventGrid.WebBackupOperationStartedEventData)
-@@include(EventGrid.WebBackupOperationCompletedEventData)
-@@include(EventGrid.WebBackupOperationFailedEventData)
-@@include(EventGrid.WebRestoreOperationStartedEventData)
-@@include(EventGrid.WebRestoreOperationCompletedEventData)
-@@include(EventGrid.WebRestoreOperationFailedEventData)
-@@include(EventGrid.WebSlotSwapStartedEventData)
-@@include(EventGrid.WebSlotSwapCompletedEventData)
-@@include(EventGrid.WebSlotSwapFailedEventData)
-@@include(EventGrid.WebSlotSwapWithPreviewStartedEventData)
-@@include(EventGrid.WebSlotSwapWithPreviewCancelledEventData)
-@@include(EventGrid.WebAppServicePlanUpdatedEventData)
-@@include(EventGrid.AppServicePlanEventTypeDetail)
+
+@@usage(EventGrid.ApiManagementUserCreatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ApiManagementUserUpdatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ApiManagementUserDeletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ApiManagementSubscriptionCreatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ApiManagementSubscriptionUpdatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ApiManagementSubscriptionDeletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ApiManagementProductCreatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ApiManagementProductUpdatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ApiManagementProductDeletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ApiManagementApiCreatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ApiManagementApiUpdatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ApiManagementApiDeletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ApiManagementApiReleaseCreatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ApiManagementApiReleaseUpdatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ApiManagementApiReleaseDeletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ApiManagementGatewayCreatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ApiManagementGatewayUpdatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ApiManagementGatewayDeletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ApiManagementGatewayHostnameConfigurationCreatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ApiManagementGatewayHostnameConfigurationUpdatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ApiManagementGatewayHostnameConfigurationDeletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ApiManagementGatewayCertificateAuthorityCreatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ApiManagementGatewayCertificateAuthorityUpdatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ApiManagementGatewayCertificateAuthorityDeletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ApiManagementGatewayApiAddedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ApiManagementGatewayApiRemovedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.AppConfigurationKeyValueModifiedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.AppConfigurationKeyValueDeletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.AppConfigurationSnapshotEventData, Usage.input | Usage.output);
+@@usage(EventGrid.AppConfigurationSnapshotCreatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.AppConfigurationSnapshotModifiedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.AcsIncomingCallEventData, Usage.input | Usage.output);
+@@usage(EventGrid.AcsIncomingCallCustomContext, Usage.input | Usage.output);
+@@usage(EventGrid.AcsUserDisconnectedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.AcsChatMessageReceivedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.AcsChatMessageReceivedInThreadEventData, Usage.input | Usage.output);
+@@usage(EventGrid.AcsChatMessageEditedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.AcsChatMessageEditedInThreadEventData, Usage.input | Usage.output);
+@@usage(EventGrid.AcsChatMessageDeletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.AcsChatMessageDeletedInThreadEventData, Usage.input | Usage.output);
+@@usage(EventGrid.AcsChatThreadCreatedWithUserEventData, Usage.input | Usage.output);
+@@usage(EventGrid.AcsChatThreadCreatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.AcsChatThreadWithUserDeletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.AcsChatThreadDeletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.AcsChatThreadPropertiesUpdatedPerUserEventData, Usage.input | Usage.output);
+@@usage(EventGrid.AcsChatThreadPropertiesUpdatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.AcsChatParticipantAddedToThreadWithUserEventData, Usage.input | Usage.output);
+@@usage(EventGrid.AcsChatParticipantRemovedFromThreadWithUserEventData, Usage.input | Usage.output);
+@@usage(EventGrid.AcsChatParticipantAddedToThreadEventData, Usage.input | Usage.output);
+@@usage(EventGrid.AcsChatParticipantRemovedFromThreadEventData, Usage.input | Usage.output);
+@@usage(EventGrid.AcsSmsDeliveryReportReceivedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.AcsSmsReceivedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.AcsRecordingFileStatusUpdatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.AcsEmailDeliveryReportReceivedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.AcsEmailDeliveryReportStatusDetails, Usage.input | Usage.output);
+@@usage(EventGrid.AcsEmailEngagementTrackingReportReceivedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.AcsChatThreadEventBaseProperties, Usage.input | Usage.output);
+@@usage(EventGrid.AcsChatThreadEventInThreadBaseProperties, Usage.input | Usage.output);
+@@usage(EventGrid.AcsChatMessageEventBaseProperties, Usage.input | Usage.output);
+@@usage(EventGrid.AcsChatMessageEventInThreadBaseProperties, Usage.input | Usage.output);
+@@usage(EventGrid.AcsChatEventInThreadBaseProperties, Usage.input | Usage.output);
+@@usage(EventGrid.AcsChatEventBaseProperties, Usage.input | Usage.output);
+@@usage(EventGrid.AcsChatThreadParticipantProperties, Usage.input | Usage.output);
+@@usage(EventGrid.AcsSmsEventBaseProperties, Usage.input | Usage.output);
+@@usage(EventGrid.AcsSmsDeliveryAttemptProperties, Usage.input | Usage.output);
+@@usage(EventGrid.AcsRecordingStorageInfoProperties, Usage.input | Usage.output);
+@@usage(EventGrid.AcsRecordingChunkInfoProperties, Usage.input | Usage.output);
+@@usage(EventGrid.ContainerRegistryImagePushedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ContainerRegistryImageDeletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ContainerRegistryChartPushedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ContainerRegistryChartDeletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ContainerRegistryEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ContainerRegistryArtifactEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ContainerRegistryEventTarget, Usage.input | Usage.output);
+@@usage(EventGrid.ContainerRegistryArtifactEventTarget, Usage.input | Usage.output);
+@@usage(EventGrid.ContainerRegistryEventRequest, Usage.input | Usage.output);
+@@usage(EventGrid.ContainerRegistryEventActor, Usage.input | Usage.output);
+@@usage(EventGrid.ContainerRegistryEventSource, Usage.input | Usage.output);
+@@usage(EventGrid.ContainerRegistryEventConnectedRegistry, Usage.input | Usage.output);
+@@usage(EventGrid.ContainerServiceNewKubernetesVersionAvailableEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ContainerServiceClusterSupportEndedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ContainerServiceClusterSupportEndingEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ContainerServiceNodePoolRollingStartedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ContainerServiceNodePoolRollingSucceededEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ContainerServiceNodePoolRollingFailedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ContainerServiceClusterSupportEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ContainerServiceNodePoolRollingEventData, Usage.input | Usage.output);
+@@usage(EventGrid.DataBoxCopyStartedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.DataBoxCopyCompletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.DataBoxOrderCompletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.SubscriptionValidationEventData, Usage.input | Usage.output);
+@@usage(EventGrid.SubscriptionValidationResponse, Usage.input | Usage.output);
+@@usage(EventGrid.SubscriptionDeletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.EventGridMQTTClientCreatedOrUpdatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.EventGridMQTTClientEventData, Usage.input | Usage.output);
+@@usage(EventGrid.EventGridMQTTClientDeletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.EventGridMQTTClientSessionConnectedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.EventGridMQTTClientSessionDisconnectedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.EventHubCaptureFileCreatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.HealthcareFhirResourceType, Usage.input | Usage.output);
+@@usage(EventGrid.HealthcareFhirResourceCreatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.HealthcareFhirResourceUpdatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.HealthcareFhirResourceDeletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.HealthcareDicomImageCreatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.HealthcareDicomImageDeletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.HealthcareDicomImageUpdatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.DeviceLifeCycleEventProperties, Usage.input | Usage.output);
+@@usage(EventGrid.DeviceTwinMetadata, Usage.input | Usage.output);
+@@usage(EventGrid.DeviceTwinProperties, Usage.input | Usage.output);
+@@usage(EventGrid.DeviceTwinInfo, Usage.input | Usage.output);
+@@usage(EventGrid.DeviceConnectionStateEventProperties, Usage.input | Usage.output);
+@@usage(EventGrid.DeviceTelemetryEventProperties, Usage.input | Usage.output);
+@@usage(EventGrid.DeviceConnectionStateEventInfo, Usage.input | Usage.output);
+@@usage(EventGrid.IotHubDeviceCreatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.IotHubDeviceDeletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.IotHubDeviceConnectedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.IotHubDeviceDisconnectedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.IotHubDeviceTelemetryEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ThumbPrintValue, Usage.input | Usage.output);
+@@usage(EventGrid.JsonProperties, Usage.input | Usage.output);
+@@usage(EventGrid.KeyVaultCertificateNewVersionCreatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.KeyVaultCertificateNearExpiryEventData, Usage.input | Usage.output);
+@@usage(EventGrid.KeyVaultCertificateExpiredEventData, Usage.input | Usage.output);
+@@usage(EventGrid.KeyVaultKeyNewVersionCreatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.KeyVaultKeyNearExpiryEventData, Usage.input | Usage.output);
+@@usage(EventGrid.KeyVaultKeyExpiredEventData, Usage.input | Usage.output);
+@@usage(EventGrid.KeyVaultSecretNewVersionCreatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.KeyVaultSecretNearExpiryEventData, Usage.input | Usage.output);
+@@usage(EventGrid.KeyVaultSecretExpiredEventData, Usage.input | Usage.output);
+@@usage(EventGrid.KeyVaultVaultAccessPolicyChangedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.MachineLearningServicesModelRegisteredEventData, Usage.input | Usage.output);
+@@usage(EventGrid.MachineLearningServicesModelDeployedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.MachineLearningServicesRunCompletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.MachineLearningServicesDatasetDriftDetectedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.MachineLearningServicesRunStatusChangedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.MapsGeofenceEnteredEventData, Usage.input | Usage.output);
+@@usage(EventGrid.MapsGeofenceExitedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.MapsGeofenceResultEventData, Usage.input | Usage.output);
+@@usage(EventGrid.MapsGeofenceEventProperties, Usage.input | Usage.output);
+@@usage(EventGrid.MapsGeofenceGeometry, Usage.input | Usage.output);
+@@usage(EventGrid.MediaJobStateChangeEventData, Usage.input | Usage.output);
+@@usage(EventGrid.MediaJobError, Usage.input | Usage.output);
+@@usage(EventGrid.MediaJobErrorDetail, Usage.input | Usage.output);
+@@usage(EventGrid.MediaJobOutput, Usage.input | Usage.output);
+@@usage(EventGrid.MediaJobOutputAsset, Usage.input | Usage.output);
+@@usage(EventGrid.MediaJobOutputProgressEventData, Usage.input | Usage.output);
+@@usage(EventGrid.MediaJobOutputStateChangeEventData, Usage.input | Usage.output);
+@@usage(EventGrid.MediaJobScheduledEventData, Usage.input | Usage.output);
+@@usage(EventGrid.MediaJobProcessingEventData, Usage.input | Usage.output);
+@@usage(EventGrid.MediaJobCancelingEventData, Usage.input | Usage.output);
+@@usage(EventGrid.MediaJobFinishedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.MediaJobCanceledEventData, Usage.input | Usage.output);
+@@usage(EventGrid.MediaJobErroredEventData, Usage.input | Usage.output);
+@@usage(EventGrid.MediaJobOutputCanceledEventData, Usage.input | Usage.output);
+@@usage(EventGrid.MediaJobOutputCancelingEventData, Usage.input | Usage.output);
+@@usage(EventGrid.MediaJobOutputErroredEventData, Usage.input | Usage.output);
+@@usage(EventGrid.MediaJobOutputFinishedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.MediaJobOutputProcessingEventData, Usage.input | Usage.output);
+@@usage(EventGrid.MediaJobOutputScheduledEventData, Usage.input | Usage.output);
+@@usage(EventGrid.MediaLiveEventEncoderConnectedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.MediaLiveEventConnectionRejectedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.MediaLiveEventEncoderDisconnectedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.MediaLiveEventIncomingStreamReceivedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.MediaLiveEventIncomingStreamsOutOfSyncEventData, Usage.input | Usage.output);
+@@usage(EventGrid.MediaLiveEventIncomingVideoStreamsOutOfSyncEventData, Usage.input | Usage.output);
+@@usage(EventGrid.MediaLiveEventIncomingDataChunkDroppedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.MediaLiveEventIngestHeartbeatEventData, Usage.input | Usage.output);
+@@usage(EventGrid.MediaLiveEventTrackDiscontinuityDetectedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.MediaLiveEventChannelArchiveHeartbeatEventData, Usage.input | Usage.output);
+@@usage(EventGrid.PolicyInsightsPolicyStateCreatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.PolicyInsightsPolicyStateChangedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.PolicyInsightsPolicyStateDeletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.RedisPatchingCompletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.RedisScalingCompletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.RedisExportRDBCompletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.RedisImportRDBCompletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ResourceWriteSuccessData, Usage.input | Usage.output);
+@@usage(EventGrid.ResourceWriteFailureData, Usage.input | Usage.output);
+@@usage(EventGrid.ResourceWriteCancelData, Usage.input | Usage.output);
+@@usage(EventGrid.ResourceDeleteSuccessData, Usage.input | Usage.output);
+@@usage(EventGrid.ResourceDeleteFailureData, Usage.input | Usage.output);
+@@usage(EventGrid.ResourceDeleteCancelData, Usage.input | Usage.output);
+@@usage(EventGrid.ResourceActionSuccessData, Usage.input | Usage.output);
+@@usage(EventGrid.ResourceActionFailureData, Usage.input | Usage.output);
+@@usage(EventGrid.ResourceActionCancelData, Usage.input | Usage.output);
+@@usage(EventGrid.ResourceHttpRequest, Usage.input | Usage.output);
+@@usage(EventGrid.ResourceAuthorization, Usage.input | Usage.output);
+@@usage(EventGrid.ServiceBusActiveMessagesAvailableWithNoListenersEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ServiceBusDeadletterMessagesAvailableWithNoListenersEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ServiceBusActiveMessagesAvailablePeriodicNotificationsEventData, Usage.input | Usage.output);
+@@usage(EventGrid.ServiceBusDeadletterMessagesAvailablePeriodicNotificationsEventData, Usage.input | Usage.output);
+@@usage(EventGrid.SignalRServiceClientConnectionConnectedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.SignalRServiceClientConnectionDisconnectedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.StorageBlobCreatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.StorageBlobDeletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.StorageDirectoryCreatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.StorageDirectoryDeletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.StorageBlobRenamedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.StorageDirectoryRenamedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.StorageLifecyclePolicyCompletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.StorageLifecyclePolicyActionSummaryDetail, Usage.input | Usage.output);
+@@usage(EventGrid.StorageBlobTierChangedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.StorageAsyncOperationInitiatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.StorageBlobInventoryPolicyCompletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.StorageTaskCompletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.StorageTaskQueuedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.AppEventTypeDetail, Usage.input | Usage.output);
+@@usage(EventGrid.WebAppUpdatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.WebBackupOperationStartedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.WebBackupOperationCompletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.WebBackupOperationFailedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.WebRestoreOperationStartedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.WebRestoreOperationCompletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.WebRestoreOperationFailedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.WebSlotSwapStartedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.WebSlotSwapCompletedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.WebSlotSwapFailedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.WebSlotSwapWithPreviewStartedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.WebSlotSwapWithPreviewCancelledEventData, Usage.input | Usage.output);
+@@usage(EventGrid.WebAppServicePlanUpdatedEventData, Usage.input | Usage.output);
+@@usage(EventGrid.AppServicePlanEventTypeDetail, Usage.input | Usage.output);

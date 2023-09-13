@@ -32,7 +32,7 @@ model AppConfigurationKeyValueDeletedEventData {
 }
 
 @doc("Schema of common properties of snapshot events")
-model AppConfigurationSnapshotEventData{
+model AppConfigurationSnapshotEventData {
   @doc("The name of the snapshot.")
   name: string;
 
@@ -44,11 +44,11 @@ model AppConfigurationSnapshotEventData{
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.SnapshotCreated event.")
-model AppConfigurationSnapshotCreatedEventData{
+model AppConfigurationSnapshotCreatedEventData {
   ...AppConfigurationSnapshotEventData;
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.SnapshotModified event.")
-model AppConfigurationSnapshotModifiedEventData{
+model AppConfigurationSnapshotModifiedEventData {
   ...AppConfigurationSnapshotEventData;
 }

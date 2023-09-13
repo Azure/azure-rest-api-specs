@@ -1,4 +1,4 @@
-@doc(""Describes the schema of the Azure EventGrid events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
+@doc("Describes the schema of the Azure EventGrid events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
 namespace EventGrid;
 
 @doc("EventGrid MQTT Client State")
