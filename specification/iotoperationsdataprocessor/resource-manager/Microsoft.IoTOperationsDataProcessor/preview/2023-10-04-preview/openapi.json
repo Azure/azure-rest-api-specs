@@ -1274,23 +1274,7 @@
     "PipelineInput": {
       "type": "object",
       "description": "Information about where to pull input data from.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Programmatic name of the pipeline."
-        },
-        "type": {
-          "type": "string",
-          "description": "ARM resource type."
-        },
-        "next": {
-          "type": "array",
-          "description": "Next stage in the pipeline.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
+      "additionalProperties": true
     },
     "PipelineListResult": {
       "type": "object",
