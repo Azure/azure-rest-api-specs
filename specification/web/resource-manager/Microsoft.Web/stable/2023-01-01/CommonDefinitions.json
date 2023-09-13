@@ -430,49 +430,51 @@
       "description": "Full view of networking configuration for an ASEv3.",
       "type": "object",
       "properties": {
-        "windowsOutboundIpAddresses": {
-          "type": "array",
-          "items": {
-            "type": "string"
+        "properties": {
+          "windowsOutboundIpAddresses": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "readOnly": true
           },
-          "readOnly": true
-        },
-        "linuxOutboundIpAddresses": {
-          "type": "array",
-          "items": {
-            "type": "string"
+          "linuxOutboundIpAddresses": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "readOnly": true
           },
-          "readOnly": true
-        },
-        "externalInboundIpAddresses": {
-          "type": "array",
-          "items": {
-            "type": "string"
+          "externalInboundIpAddresses": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "readOnly": true
           },
-          "readOnly": true
-        },
-        "internalInboundIpAddresses": {
-          "type": "array",
-          "items": {
-            "type": "string"
+          "internalInboundIpAddresses": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "readOnly": true
           },
-          "readOnly": true
-        },
-        "allowNewPrivateEndpointConnections": {
-          "description": "Property to enable and disable new private endpoint connection creation on ASE",
-          "type": "boolean"
-        },
-        "ftpEnabled": {
-          "description": "Property to enable and disable FTP on ASEV3",
-          "type": "boolean"
-        },
-        "remoteDebugEnabled": {
-          "description": "Property to enable and disable Remote Debug on ASEV3",
-          "type": "boolean"
-        },
-        "inboundIpAddressOverride": {
-          "description": "Customer provided Inbound IP Address. Only able to be set on Ase create.",
-          "type": "string"
+          "allowNewPrivateEndpointConnections": {
+            "description": "Property to enable and disable new private endpoint connection creation on ASE",
+            "type": "boolean"
+          },
+          "ftpEnabled": {
+            "description": "Property to enable and disable FTP on ASEV3",
+            "type": "boolean"
+          },
+          "remoteDebugEnabled": {
+            "description": "Property to enable and disable Remote Debug on ASEV3",
+            "type": "boolean"
+          },
+          "inboundIpAddressOverride": {
+            "description": "Customer provided Inbound IP Address. Only able to be set on Ase create.",
+            "type": "string"
+          }
         }
       }
     },
@@ -961,35 +963,37 @@
       "description": "Full view of the custom domain suffix configuration for ASEv3.",
       "type": "object",
       "properties": {
-        "provisioningState": {
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "Degraded",
-            "InProgress"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "CustomDnsSuffixProvisioningState",
-            "modelAsString": false
+        "properties": {
+          "provisioningState": {
+            "enum": [
+              "Succeeded",
+              "Failed",
+              "Degraded",
+              "InProgress"
+            ],
+            "type": "string",
+            "readOnly": true,
+            "x-ms-enum": {
+              "name": "CustomDnsSuffixProvisioningState",
+              "modelAsString": false
+            }
+          },
+          "provisioningDetails": {
+            "type": "string",
+            "readOnly": true
+          },
+          "dnsSuffix": {
+            "description": "The default custom domain suffix to use for all sites deployed on the ASE.",
+            "type": "string"
+          },
+          "certificateUrl": {
+            "description": "The URL referencing the Azure Key Vault certificate secret that should be used as the default SSL/TLS certificate for sites with the custom domain suffix.",
+            "type": "string"
+          },
+          "keyVaultReferenceIdentity": {
+            "description": "The user-assigned identity to use for resolving the key vault certificate reference. If not specified, the system-assigned ASE identity will be used if available.",
+            "type": "string"
           }
-        },
-        "provisioningDetails": {
-          "type": "string",
-          "readOnly": true
-        },
-        "dnsSuffix": {
-          "description": "The default custom domain suffix to use for all sites deployed on the ASE.",
-          "type": "string"
-        },
-        "certificateUrl": {
-          "description": "The URL referencing the Azure Key Vault certificate secret that should be used as the default SSL/TLS certificate for sites with the custom domain suffix.",
-          "type": "string"
-        },
-        "keyVaultReferenceIdentity": {
-          "description": "The user-assigned identity to use for resolving the key vault certificate reference. If not specified, the system-assigned ASE identity will be used if available.",
-          "type": "string"
         }
       }
     },
