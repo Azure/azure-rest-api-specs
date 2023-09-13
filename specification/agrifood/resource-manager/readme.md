@@ -26,7 +26,16 @@ These are the global settings for the agrifood.
 
 ```yaml
 openapi-type: arm
-tag: package-preview-2021-09
+tag: package-preview-2023-06
+```
+
+### Tag: package-preview-2023-06
+
+These settings apply only when `--tag=package-preview-2023-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-06'
+input-file:
+  - Microsoft.AgFoodPlatform/preview/2023-06-01-preview/agfood.json
 ```
 
 ### Tag: package-preview-2021-09
