@@ -1286,23 +1286,6 @@
         ]
       }
     },
-    "ReconciliationPolicy": {
-      "type": "object",
-      "description": "Reconciliation Policy",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/ReconciliationPolicies",
-          "description": "Policy type"
-        },
-        "interval": {
-          "type": "string",
-          "description": "Policy interval"
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
     "ReconciliationPolicies": {
       "type": "string",
       "description": "Policies to control how the resource should reconcile.",
@@ -1320,6 +1303,23 @@
           }
         ]
       }
+    },
+    "ReconciliationPolicy": {
+      "type": "object",
+      "description": "Reconciliation Policy",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ReconciliationPolicies",
+          "description": "Policy type"
+        },
+        "interval": {
+          "type": "string",
+          "description": "Policy interval"
+        }
+      },
+      "required": [
+        "type"
+      ]
     },
     "Solution": {
       "type": "object",

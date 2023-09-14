@@ -51,6 +51,7 @@ model ComponentProperties {
   @doc("Component type.")
   type: string;
 }
+
 @doc("Reconciliation Policy")
 model ReconciliationPolicy {
   @doc("Policy type")
