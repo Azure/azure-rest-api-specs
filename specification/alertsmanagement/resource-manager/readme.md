@@ -36,9 +36,8 @@ directive:
     where:
       - $.definitions.ManagedResource
   - suppress: TopLevelResourcesListBySubscription
-    reason: The list by scope includes also list by subscription.
-    where:
-      - $.definitions.ManagedResource
+    reason: The list by scope includes also list by subscription, this is an extension resource.
+    from: AlertsManagement.json    
 ```
 
 ``` yaml
