@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "accountName": "contoso",
+    "phoneNumber": "+4412345123001"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "_etag": "00000000123",
+        "account": "contoso",
+        "details": {
+          "configuration": {
+            "custom_header": "7mfrSWqMR88ZK8W0zdEDhycGG0GfyItxTfjm6Hv0VMCKsiq4"
+          },
+          "services": {
+            "teams_dr_enabled": true,
+            "teams_oc_enabled": false,
+            "zoom_enabled": false
+          }
+        },
+        "phone_number": "+441234432234"
+      }
+    },
+    "400": {
+      "body": {
+        "detail": "request failed validation",
+        "instance": "detail",
+        "status": 400,
+        "title": "title",
+        "type": "type",
+        "additionalProp1": "problem with field 1",
+        "additionalProp2": "problem with field 2",
+        "additionalProp3": "problem with field 3"
+      }
+    },
+    "409": {
+      "body": {
+        "detail": "conflict",
+        "instance": "detail",
+        "status": 409,
+        "title": "title",
+        "type": "type",
+        "additionalProp1": "item conflicts",
+        "additionalProp2": "problem with field 2",
+        "additionalProp3": "problem with field 3"
+      }
+    },
+    "412": {
+      "body": {
+        "detail": "precondition failed",
+        "instance": "detail",
+        "status": 400,
+        "title": "title",
+        "type": "type",
+        "additionalProp1": "failed to match etag",
+        "additionalProp2": "problem with field 2",
+        "additionalProp3": "problem with field 3"
+      }
+    },
+    "404": {
+      "body": {
+        "detail": "number not found",
+        "instance": "detail",
+        "status": 404
+      }
+    },
+    "500": {}
+  }
+}

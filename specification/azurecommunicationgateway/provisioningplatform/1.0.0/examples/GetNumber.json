@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "accountName": "contoso",
+    "phoneNumber": "+4412345123000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "_etag": "00000000001",
+        "account": "contoso",
+        "details": {
+          "configuration": {
+            "custom_header": "g9nKebUNYbu_P3b3hHyScVWVFBqNnDO3x2bnvW0eTNt5tsQ835iUqMtvHoZP7jog7g"
+          },
+          "services": {
+            "teams_dr_enabled": true,
+            "teams_oc_enabled": false,
+            "zoom_enabled": false
+          }
+        },
+        "phone_number": "+4412345123000"
+      }
+    },
+    "400": {
+      "body": {
+        "detail": "bad request",
+        "instance": "detail",
+        "status": 400,
+        "title": "title",
+        "type": "type",
+        "additionalProp1": "problem with field 1",
+        "additionalProp2": "problem with field 2",
+        "additionalProp3": "problem with field 3"
+      }
+    },
+    "404": {
+      "body": {
+        "detail": "number not found",
+        "instance": "detail",
+        "status": 404
+      }
+    },
+    "500": {}
+  }
+}

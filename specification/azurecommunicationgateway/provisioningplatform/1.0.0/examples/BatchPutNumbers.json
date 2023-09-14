@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "accountName": "contoso"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "numbers": [
+          {
+            "_etag": "000000001",
+            "account": "contoso",
+            "details": {
+              "configuration": {
+                "custom_header": "YhdVlLzhM1WdwX0d5-mXl6jihKglThsKWE3SmW"
+              },
+              "services": {
+                "teams_dr_enabled": true,
+                "teams_oc_enabled": false,
+                "zoom_enabled": false
+              }
+            },
+            "phone_number": "012345123001"
+          },
+          {
+            "account": "contoso",
+            "details": {
+              "configuration": {
+                "custom_header": "YhdVlLzhM1WdwX0d5-mXl6jihKglThsKWE3SmW"
+              },
+              "services": {
+                "teams_dr_enabled": false,
+                "teams_oc_enabled": false,
+                "zoom_enabled": true
+              }
+            },
+            "phone_number": "+44123451230012"
+          }
+        ]
+      }
+    },
+    "400": {
+      "body": {
+        "detail": "request failed validation",
+        "instance": "detail",
+        "status": 400,
+        "title": "title",
+        "type": "type",
+        "additionalProp1": "problem with field 1",
+        "additionalProp2": "problem with field 2",
+        "additionalProp3": "problem with field 3"
+      }
+    },
+    "404": {
+      "body": {
+        "detail": "account not found",
+        "instance": "detail",
+        "status": 404
+      }
+    },
+    "500": {}
+  }
+}

@@ -1,0 +1,1044 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.VoiceServices.ACG.ProvisioningPlatform.API",
+    "version": "1.0"
+  },
+  "securityDefinitions": {
+    "OAuth2": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "provisioning_api:admin": "Ability to invoke any operation across the API.",
+        "provisioning_api:delete": "Ability to delete any endpoint across the API.",
+        "provisioning_api:read": "Ability to read any endpoint across the API.",
+        "provisioning_api:write": "Ability to create or update any endpoint across the API."
+      }
+    }
+  },
+  "paths": {
+    "/api/v1.0/account/{accountName}/numbers": {
+      "get": {
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountName",
+            "pattern": "^([A-Za-z0-9_-]{1,100})$",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "format": "int32",
+            "in": "query",
+            "name": "per_page",
+            "type": "integer"
+          },
+          {
+            "format": "int32",
+            "in": "query",
+            "name": "page",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NumberResponseDtoPaginatedListDto"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        },
+        "x-ms-examples": {
+          "Get account numbers.": {
+            "$ref": "./examples/GetAccountNumbers.json"
+          }
+        },
+        "security": [
+          {
+            "OAuth2": [
+              "provisioning_api:admin",
+              "provisioning_api:read"
+            ]
+          }
+        ],
+        "tags": [
+          "Number"
+        ]
+      }
+    },
+    "/api/v1.0/account/{accountName}/numbers/batch": {
+      "patch": {
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountName",
+            "pattern": "^([A-Za-z0-9_-]{1,100})$",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/BatchNumbersPutDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchNumbersResponseDto"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        },
+        "x-ms-examples": {
+          "Batch put numbers.": {
+            "$ref": "./examples/BatchPutNumbers.json"
+          }
+        },
+        "security": [
+          {
+            "OAuth2": [
+              "provisioning_api:admin",
+              "provisioning_api:write"
+            ]
+          }
+        ],
+        "tags": [
+          "BatchNumbers"
+        ]
+      }
+    },
+    "/api/v1.0/account/{accountName}/numbers/{phoneNumber}": {
+      "delete": {
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountName",
+            "pattern": "^([A-Za-z0-9_-]{1,100})$",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "phoneNumber",
+            "pattern": "^\\+[1-9]\\d{1,14}$",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        },
+        "x-ms-examples": {
+          "Delete a number.": {
+            "$ref": "./examples/DeleteNumber.json"
+          }
+        },
+        "security": [
+          {
+            "OAuth2": [
+              "provisioning_api:admin",
+              "provisioning_api:delete"
+            ]
+          }
+        ],
+        "tags": [
+          "Number"
+        ]
+      },
+      "get": {
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountName",
+            "pattern": "^([A-Za-z0-9_-]{1,100})$",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "phoneNumber",
+            "pattern": "^\\+[1-9]\\d{1,14}$",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NumberResponseDto"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        },
+        "x-ms-examples": {
+          "Get a number.": {
+            "$ref": "./examples/GetNumber.json"
+          }
+        },
+        "security": [
+          {
+            "OAuth2": [
+              "provisioning_api:admin",
+              "provisioning_api:read"
+            ]
+          }
+        ],
+        "tags": [
+          "Number"
+        ]
+      },
+      "put": {
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountName",
+            "pattern": "^([A-Za-z0-9_-]{1,100})$",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "phoneNumber",
+            "pattern": "^\\+[1-9]\\d{1,14}$",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "If-Match",
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "If-None-Match",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/NumberDetailsDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NumberResponseDto"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "412": {
+            "description": "Precondition Failed",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        },
+        "x-ms-examples": {
+          "Put a number.": {
+            "$ref": "./examples/PutNumber.json"
+          }
+        },
+        "security": [
+          {
+            "OAuth2": [
+              "provisioning_api:admin",
+              "provisioning_api:write"
+            ]
+          }
+        ],
+        "tags": [
+          "Number"
+        ]
+      }
+    },
+    "/api/v1.0/accounts": {
+      "get": {
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "format": "int32",
+            "in": "query",
+            "name": "per_page",
+            "type": "integer"
+          },
+          {
+            "format": "int32",
+            "in": "query",
+            "name": "page",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AccountResponseDtoPaginatedListDto"
+            }
+          },
+          "204": {
+            "description": "No Content",
+            "schema": {}
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {}
+          }
+        },
+        "security": [
+          {
+            "OAuth2": [
+              "provisioning_api:admin",
+              "provisioning_api:read"
+            ]
+          }
+        ],
+        "tags": [
+          "Account"
+        ],
+        "description": "Gets a list of account records.",
+        "x-ms-examples": {
+          "Get a list of account records.": {
+            "$ref": "./examples/GetAccounts.json"
+          }
+        }
+      }
+    },
+    "/api/v1.0/accounts/{accountName}": {
+      "delete": {
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountName",
+            "pattern": "^([A-Za-z0-9_-]{1,100})$",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        },
+        "x-ms-examples": {
+          "Delete an account": {
+            "$ref": "./examples/DeleteAccount.json"
+          }
+        },
+        "security": [
+          {
+            "OAuth2": [
+              "provisioning_api:admin",
+              "provisioning_api:delete"
+            ]
+          }
+        ],
+        "tags": [
+          "Account"
+        ]
+      },
+      "get": {
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountName",
+            "pattern": "^([A-Za-z0-9_-]{1,100})$",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AccountWithDnsStateResponseDto"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        },
+        "x-ms-examples": {
+          "Get information about an account": {
+            "$ref": "./examples/GetAccount.json"
+          }
+        },
+        "security": [
+          {
+            "OAuth2": [
+              "provisioning_api:admin",
+              "provisioning_api:read"
+            ]
+          }
+        ],
+        "tags": [
+          "Account"
+        ]
+      },
+      "put": {
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountName",
+            "pattern": "^([A-Za-z0-9_-]{1,100})$",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "If-Match",
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "If-None-Match",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AccountDetailsDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AccountResponseDto"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "412": {
+            "description": "Client Error",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        },
+        "x-ms-examples": {
+          "Put new information about an account": {
+            "$ref": "./examples/PutAccount.json"
+          }
+        },
+        "security": [
+          {
+            "OAuth2": [
+              "provisioning_api:admin",
+              "provisioning_api:write"
+            ]
+          }
+        ],
+        "tags": [
+          "Account"
+        ]
+      }
+    },
+    "/api/v1.0/numbers": {
+      "get": {
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "number",
+            "pattern": "^\\+[1-9]\\d{1,14}$",
+            "type": "string"
+          },
+          {
+            "format": "int32",
+            "in": "query",
+            "name": "per_page",
+            "type": "integer"
+          },
+          {
+            "format": "int32",
+            "in": "query",
+            "name": "page",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NumberResponseDtoPaginatedListDto"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        },
+        "x-ms-examples": {
+          "Get all numbers configured on the provisioning platform.": {
+            "$ref": "./examples/GetNumbers.json"
+          }
+        },
+        "security": [
+          {
+            "OAuth2": [
+              "provisioning_api:admin",
+              "provisioning_api:read"
+            ]
+          }
+        ],
+        "tags": [
+          "Numbers"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "AccountDetailsDto": {
+      "additionalProperties": false,
+      "properties": {
+        "direct_routing": {
+          "$ref": "#/definitions/TeamsDrConfigDto"
+        },
+        "operator_connect": {
+          "$ref": "#/definitions/TeamsOcConfigDto"
+        },
+        "zoom": {
+          "$ref": "#/definitions/ZoomConfigDto"
+        }
+      },
+      "type": "object"
+    },
+    "AccountResponseDto": {
+      "additionalProperties": false,
+      "properties": {
+        "_etag": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "details": {
+          "$ref": "#/definitions/AccountDetailsDto"
+        },
+        "name": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "type": "object"
+    },
+    "AccountResponseDtoPaginatedListDto": {
+      "additionalProperties": false,
+      "properties": {
+        "number_of_records": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "page_number": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "page_size": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "records": {
+          "items": {
+            "$ref": "#/definitions/AccountResponseDto"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "number_of_records",
+        "page_number",
+        "page_size",
+        "records"
+      ],
+      "type": "object"
+    },
+    "AccountWithDnsStateResponseDto": {
+      "additionalProperties": false,
+      "properties": {
+        "_etag": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "details": {
+          "$ref": "#/definitions/AccountDetailsDto"
+        },
+        "name": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "subdomain_provisioning_state": {
+          "$ref": "#/definitions/SubdomainProvisioningStateDto"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "type": "object"
+    },
+    "BatchNumbersPutDto": {
+      "additionalProperties": false,
+      "properties": {
+        "numbers": {
+          "items": {
+            "$ref": "#/definitions/BatchNumbersPutItemDto"
+          },
+          "maxItems": 100,
+          "type": "array"
+        }
+      },
+      "required": [
+        "numbers"
+      ],
+      "type": "object"
+    },
+    "BatchNumbersPutItemDto": {
+      "additionalProperties": false,
+      "properties": {
+        "details": {
+          "$ref": "#/definitions/NumberDetailsDto"
+        },
+        "phone_number": {
+          "minLength": 1,
+          "pattern": "^\\+[1-9]\\d{1,14}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "details",
+        "phone_number"
+      ],
+      "type": "object"
+    },
+    "BatchNumbersResponseDto": {
+      "additionalProperties": false,
+      "properties": {
+        "numbers": {
+          "items": {
+            "$ref": "#/definitions/NumberResponseDto"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "numbers"
+      ],
+      "type": "object"
+    },
+    "NumberConfigurationDto": {
+      "additionalProperties": false,
+      "properties": {
+        "custom_header": {
+          "pattern": "^([A-Za-z0-9_-]{1,100})$",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "type": "object"
+    },
+    "NumberDetailsDto": {
+      "additionalProperties": false,
+      "properties": {
+        "configuration": {
+          "$ref": "#/definitions/NumberConfigurationDto"
+        },
+        "services": {
+          "$ref": "#/definitions/NumberServicesDto"
+        }
+      },
+      "required": [
+        "services"
+      ],
+      "type": "object"
+    },
+    "NumberResponseDto": {
+      "additionalProperties": false,
+      "properties": {
+        "_etag": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "account": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "details": {
+          "$ref": "#/definitions/NumberDetailsDto"
+        },
+        "phone_number": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "account",
+        "details",
+        "phone_number"
+      ],
+      "type": "object"
+    },
+    "NumberResponseDtoPaginatedListDto": {
+      "additionalProperties": false,
+      "properties": {
+        "number_of_records": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "page_number": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "page_size": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "records": {
+          "items": {
+            "$ref": "#/definitions/NumberResponseDto"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "number_of_records",
+        "page_number",
+        "page_size",
+        "records"
+      ],
+      "type": "object"
+    },
+    "NumberServicesDto": {
+      "additionalProperties": false,
+      "properties": {
+        "teams_dr_enabled": {
+          "type": "boolean"
+        },
+        "teams_oc_enabled": {
+          "type": "boolean"
+        },
+        "zoom_enabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "teams_dr_enabled",
+        "teams_oc_enabled",
+        "zoom_enabled"
+      ],
+      "type": "object"
+    },
+    "ProblemDetails": {
+      "additionalProperties": {},
+      "properties": {
+        "detail": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "instance": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "status": {
+          "format": "int32",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "title": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "type": {
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "type": "object"
+    },
+    "SubdomainProvisioningStateDto": {
+      "additionalProperties": false,
+      "properties": {
+        "provisioned_subdomain_tokens": {
+          "$ref": "#/definitions/TeamsDrSubdomainTokensDto"
+        },
+        "status": {
+          "$ref": "#/definitions/SubdomainProvisioningStatus"
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "type": "object"
+    },
+    "SubdomainProvisioningStatus": {
+      "enum": [
+        0,
+        1,
+        2
+      ],
+      "format": "int32",
+      "type": "integer"
+    },
+    "TeamsDrConfigDto": {
+      "additionalProperties": false,
+      "properties": {
+        "call_screening": {
+          "type": "boolean"
+        },
+        "subdomain": {
+          "minLength": 1,
+          "pattern": "^([A-Za-z0-9_-]{1,63})$",
+          "type": "string"
+        },
+        "subdomain_tokens": {
+          "$ref": "#/definitions/TeamsDrSubdomainTokensDto"
+        }
+      },
+      "required": [
+        "call_screening",
+        "subdomain",
+        "subdomain_tokens"
+      ],
+      "type": "object"
+    },
+    "TeamsDrSubdomainTokensDto": {
+      "additionalProperties": false,
+      "properties": {
+        "region_1_token": {
+          "minLength": 1,
+          "pattern": "^([A-Za-z0-9_-]{1,100})$",
+          "type": "string"
+        },
+        "region_2_token": {
+          "minLength": 1,
+          "pattern": "^([A-Za-z0-9_-]{1,100})$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "region_1_token",
+        "region_2_token"
+      ],
+      "type": "object"
+    },
+    "TeamsOcConfigDto": {
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "ZoomConfigDto": {
+      "additionalProperties": false,
+      "type": "object"
+    }
+  },
+  "x-components": {}
+}

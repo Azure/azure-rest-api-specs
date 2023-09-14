@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "accountName": "contoso"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "number_of_records": 1,
+        "page_number": 1,
+        "page_size": 20,
+        "records": [
+          {
+            "_etag": "0000000001",
+            "account": "contoso",
+            "details": {
+              "configuration": {
+                "custom_header": "Oh3eu_1N6Wo4LQlN4YhwxB3oogVezZALls3CQveJc6nGjAH43fGNPmve2QXIQj5XwP4Y7rgpQ2qrzWNig"
+              },
+              "services": {
+                "teams_dr_enabled": true,
+                "teams_oc_enabled": false,
+                "zoom_enabled": false
+              }
+            },
+            "phone_number": "+4412345123000"
+          }
+        ]
+      }
+    },
+    "204": {},
+    "400": {
+      "body": {
+        "detail": "request failed validation",
+        "instance": "detail",
+        "status": 400,
+        "title": "title",
+        "type": "type",
+        "additionalProp1": "problem with field 1",
+        "additionalProp2": "problem with field 2",
+        "additionalProp3": "problem with field 3"
+      }
+    },
+    "500": {}
+  }
+}
