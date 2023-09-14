@@ -572,6 +572,28 @@
           "type": "string",
           "format": "date-time",
           "description": "The end time for the time range to fetch telemetry for. If not specified, the current time is used."
+        },
+        "interval": {
+          "type": "string",
+          "format": "duration",
+          "description": "The time granularity to fetch telemetry for. This is an ISO8601 duration. Examples: PT15M, PT1H, P1D",
+          "default": "PT1H"
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "The aggregation type to use for the numerical columns in the dataset.",
+          "enum": [
+            "Average",
+            "Minimum",
+            "Maximum",
+            "Sum",
+            "Count"
+          ],
+          "x-ms-enum": {
+            "name": "aggregationType",
+            "modelAsString": true
+          },
+          "default": "Average"
         }
       },
       "required": [
