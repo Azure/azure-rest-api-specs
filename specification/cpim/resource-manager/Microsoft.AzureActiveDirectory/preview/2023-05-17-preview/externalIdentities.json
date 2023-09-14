@@ -1541,6 +1541,9 @@
     "CIAMTenantResourceProperties": {
       "description": "Properties of the Azure AD for customers tenant Azure resource.",
       "type": "object",
+      "required": [
+        "createTenantProperties"
+      ],
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState"
@@ -1766,7 +1769,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9]{1,26}(?:\\.[a-zA-Z]{2,})",
+      "pattern": "^[a-zA-Z0-9]{1,26}(?:\\.[a-zA-Z]{2,}){2,}$",
       "maxLength": 43,
       "description": "The initial domain name of the tenant.",
       "x-ms-parameter-location": "method"
