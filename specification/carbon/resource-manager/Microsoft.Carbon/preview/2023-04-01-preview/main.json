@@ -41,10 +41,47 @@
   "tags": [
     {
       "name": "Operations"
+    },
+    {
+      "name": "CarbonEmissionReports"
     }
   ],
   "paths": {
     "/providers/Microsoft.Carbon/carbonEmissionReports": {
+      "get": {
+        "operationId": "CarbonEmissionReports_ListByTenant",
+        "tags": [
+          "CarbonEmissionReports"
+        ],
+        "description": "List CarbonEmissionReport resources by tenant",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CarbonEmissionReportListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CarbonEmissionReports_ListByTenant": {
+            "$ref": "./examples/listReportsByTenant.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
       "post": {
         "operationId": "CarbonService_ListCarbonEmissionReports",
         "description": "API for Carbon Emissions Reports",
@@ -83,6 +120,46 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Carbon/carbonEmissionReports/{carbonEmissionReportName}": {
+      "get": {
+        "operationId": "CarbonEmissionReports_Get",
+        "tags": [
+          "CarbonEmissionReports"
+        ],
+        "description": "Get a CarbonEmissionReport",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "carbonEmissionReportName",
+            "in": "path",
+            "description": "Name of Report",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CarbonEmissionReport"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CarbonEmissionReports_Get": {
+            "$ref": "./examples/getReportByName.json"
+          }
         }
       }
     },
@@ -310,6 +387,103 @@
       ],
       "x-ms-discriminator-value": "OverallSummaryData"
     },
+    "CarbonEmissionReport": {
+      "type": "object",
+      "description": "Carbon Emission Report resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CarbonEmissionReportProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CarbonEmissionReportListResult": {
+      "type": "object",
+      "description": "The response of a CarbonEmissionReport list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CarbonEmissionReport items on this page",
+          "items": {
+            "$ref": "#/definitions/CarbonEmissionReport"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CarbonEmissionReportProperties": {
+      "type": "object",
+      "description": "CarbonEmissionReport properties",
+      "properties": {
+        "dimensions": {
+          "type": "array",
+          "description": "Report dimension properties",
+          "items": {
+            "$ref": "#/definitions/CarbonEmissionReportProperty"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "filters": {
+          "type": "array",
+          "description": "Report filters properties",
+          "items": {
+            "$ref": "#/definitions/CarbonEmissionReportProperty"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "dimensions",
+        "filters"
+      ]
+    },
+    "CarbonEmissionReportProperty": {
+      "type": "object",
+      "description": "CarbonEmissionReport property",
+      "properties": {
+        "propertyName": {
+          "type": "string",
+          "description": "Report property name"
+        },
+        "valueType": {
+          "type": "string",
+          "description": "Report property value type"
+        },
+        "description": {
+          "type": "string",
+          "description": "Report property description information"
+        }
+      },
+      "required": [
+        "propertyName",
+        "valueType",
+        "description"
+      ]
+    },
     "CarbonEmissionTopItemMonthlySummaryData": {
       "type": "object",
       "description": "Response for Top Items Carbon Emissions by Month",
@@ -516,6 +690,60 @@
         }
       ],
       "x-ms-discriminator-value": "OverallSummaryReport"
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      }
     },
     "QueryFilter": {
       "type": "object",

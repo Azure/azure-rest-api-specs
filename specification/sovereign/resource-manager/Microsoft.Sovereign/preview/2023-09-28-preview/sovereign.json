@@ -1,0 +1,1630 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Cloud for Sovereignty Resource Provider.",
+    "version": "2023-09-28-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "LandingZonesConfigurations"
+    },
+    {
+      "name": "LandingZoneRegistrations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Sovereign/landingZoneConfigurations": {
+      "get": {
+        "operationId": "LandingZonesConfigurations_ListByTenant",
+        "tags": [
+          "LandingZonesConfigurations"
+        ],
+        "description": "List LandingZoneConfiguration resources by tenant",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LandingZoneConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LandingZonesConfigurations_ListByTenant_0": {
+            "$ref": "./examples/LandingZoneConfigurations_ListByTenant.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Sovereign/landingZoneConfigurations/{name}": {
+      "get": {
+        "operationId": "LandingZonesConfigurations_Get",
+        "tags": [
+          "LandingZonesConfigurations"
+        ],
+        "description": "Get a LandingZoneConfiguration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the landing zone configuration resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LandingZoneConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LandingZonesConfigurations_Get_0": {
+            "$ref": "./examples/LandingZoneConfiguration_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "LandingZonesConfigurations_CreateOrUpdate",
+        "tags": [
+          "LandingZonesConfigurations"
+        ],
+        "description": "Create a LandingZoneConfiguration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the landing zone configuration resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LandingZoneConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'LandingZoneConfiguration' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LandingZoneConfiguration"
+            }
+          },
+          "201": {
+            "description": "Resource 'LandingZoneConfiguration' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LandingZoneConfiguration"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LandingZonesConfigurations_CreateOrUpdate_0": {
+            "$ref": "./examples/LandingZoneConfiguration_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "LandingZonesConfigurations_Update",
+        "tags": [
+          "LandingZonesConfigurations"
+        ],
+        "description": "Update a LandingZoneConfiguration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the landing zone configuration resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LandingZoneConfigurationUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LandingZoneConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LandingZonesConfigurations_Update_0": {
+            "$ref": "./examples/LandingZoneConfiguration_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "LandingZonesConfigurations_Delete",
+        "tags": [
+          "LandingZonesConfigurations"
+        ],
+        "description": "Delete a LandingZoneConfiguration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the landing zone configuration resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LandingZonesConfigurations_Delete_0": {
+            "$ref": "./examples/LandingZoneConfiguration_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.Sovereign/landingZoneConfigurations/{name}/generateLandingZone": {
+      "post": {
+        "operationId": "LandingZonesConfigurations_GenerateLandingZone",
+        "tags": [
+          "LandingZonesConfigurations"
+        ],
+        "description": "Generate the landing zone.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the landing zone configuration resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenerateLandingZoneRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GenerateLandingZoneResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LandingZonesConfigurations_GenerateLandingZone_0": {
+            "$ref": "./examples/LandingZoneConfiguration_GenerateLandingZone.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.Sovereign/landingZoneConfigurations/{name}/updateAuthoringStatus": {
+      "post": {
+        "operationId": "LandingZonesConfigurations_UpdateAuthoringStatus",
+        "tags": [
+          "LandingZonesConfigurations"
+        ],
+        "description": "Provides a mechanism to update the authoring status.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the landing zone configuration resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateAuthoringStatusRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdateAuthoringStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LandingZonesConfigurations_UpdateAuthoringStatus_0": {
+            "$ref": "./examples/LandingZoneConfigurations_UpdateAuthoringStatus.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Sovereign/landingZoneRegistrations": {
+      "get": {
+        "operationId": "LandingZoneRegistrations_ListByTenant",
+        "tags": [
+          "LandingZoneRegistrations"
+        ],
+        "description": "List LandingZoneRegistration resources by tenant",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LandingZoneRegistrationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LandingZoneRegistrations_ListByTenant_0": {
+            "$ref": "./examples/LandingZoneRegistrations_ListByTenant.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Sovereign/landingZoneRegistrations/{name}": {
+      "get": {
+        "operationId": "LandingZoneRegistrations_Get",
+        "tags": [
+          "LandingZoneRegistrations"
+        ],
+        "description": "Get a LandingZoneRegistration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the Landing Zone registration resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LandingZoneRegistration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LandingZoneRegistrations_Get_0": {
+            "$ref": "./examples/LandingZoneRegistration_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "LandingZoneRegistrations_CreateOrUpdate",
+        "tags": [
+          "LandingZoneRegistrations"
+        ],
+        "description": "Create a LandingZoneRegistration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the Landing Zone registration resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LandingZoneRegistration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'LandingZoneRegistration' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LandingZoneRegistration"
+            }
+          },
+          "201": {
+            "description": "Resource 'LandingZoneRegistration' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LandingZoneRegistration"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LandingZoneRegistrations_CreateOrUpdate_0": {
+            "$ref": "./examples/LandingZoneRegistration_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "LandingZoneRegistrations_Update",
+        "tags": [
+          "LandingZoneRegistrations"
+        ],
+        "description": "Update a LandingZoneRegistration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the Landing Zone registration resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LandingZoneRegistrationUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LandingZoneRegistration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LandingZoneRegistrations_Update_0": {
+            "$ref": "./examples/LandingZoneRegistration_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "LandingZoneRegistrations_Delete",
+        "tags": [
+          "LandingZoneRegistrations"
+        ],
+        "description": "Delete a LandingZoneRegistration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the Landing Zone registration resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LandingZoneRegistrations_Delete_0": {
+            "$ref": "./examples/LandingZoneRegistration_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.Sovereign/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List_0": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AuthoringStatus": {
+      "type": "string",
+      "description": "The authoring status for a landing zone configuration.",
+      "enum": [
+        "Authoring",
+        "ReadyForUse",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "AuthoringStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Authoring",
+            "value": "Authoring",
+            "description": "This is the default status when a create configuration request is made. In this state, the Landing Zone configuration can be updated."
+          },
+          {
+            "name": "ReadyForUse",
+            "value": "ReadyForUse",
+            "description": "This status is set when the configuration changes are complete and the configuration is ready for code generation"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "This status is set when the landing zone configuration is no longer in use."
+          }
+        ]
+      }
+    },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      }
+    },
+    "DecommissionedManagementGroupProperties": {
+      "type": "object",
+      "description": "Decommissioned management group properties.",
+      "properties": {
+        "policyInitiativesAssignmentProperties": {
+          "type": "array",
+          "description": "Array of initiative assignments to be applied to the management group.",
+          "items": {
+            "$ref": "#/definitions/PolicyInitiativeAssignmentProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "create": {
+          "type": "boolean",
+          "description": "When set to false, this management group will not be created. The default value is false."
+        }
+      },
+      "required": [
+        "policyInitiativesAssignmentProperties",
+        "create"
+      ]
+    },
+    "DecommissionedManagementGroupPropertiesUpdate": {
+      "type": "object",
+      "description": "Decommissioned management group properties.",
+      "properties": {
+        "policyInitiativesAssignmentProperties": {
+          "type": "array",
+          "description": "Array of initiative assignments to be applied to the management group.",
+          "items": {
+            "$ref": "#/definitions/PolicyInitiativeAssignmentProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "create": {
+          "type": "boolean",
+          "description": "When set to false, this management group will not be created. The default value is false."
+        }
+      }
+    },
+    "FirewallCreationOptions": {
+      "type": "string",
+      "description": "The input values for creating or using an existing firewall resource.",
+      "enum": [
+        "None",
+        "Standard",
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "FirewallCreationOptions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Value when a firewall resource is not created."
+          },
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Value when the firewall creation is based on the standard SKU."
+          },
+          {
+            "name": "Premium",
+            "value": "Premium",
+            "description": "Value when the firewall creation is based on the premium SKU."
+          }
+        ]
+      }
+    },
+    "GenerateLandingZoneRequest": {
+      "type": "object",
+      "description": "The request to generate code for a landing zone.",
+      "properties": {
+        "infrastructureAsCodeOutputOptions": {
+          "$ref": "#/definitions/InfrastructureAsCodeOutputOptions",
+          "description": "The export options available for code generation."
+        },
+        "existingManagementSubscriptionId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Management subscription fully qualified Id.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Subscription/aliases"
+              }
+            ]
+          }
+        },
+        "existingIdentitySubscriptionId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Identity subscription fully qualified Id.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Subscription/aliases"
+              }
+            ]
+          }
+        },
+        "existingConnectivitySubscriptionId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Connectivity subscription fully qualified Id.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Subscription/aliases"
+              }
+            ]
+          }
+        },
+        "subscriptionBillingScope": {
+          "type": "string",
+          "description": "The full resource ID of billing scope associated to the EA, MCA or MPA account you wish to create the subscription in."
+        },
+        "existingTopLevelMgParentId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Optional parent for management group hierarchy, used as intermediate root management group parent, if specified. If empty, default will deploy beneath tenant toot management group.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Management/managementGroups"
+              }
+            ]
+          }
+        },
+        "deploymentPrefix": {
+          "type": "string",
+          "description": "The prefix that will be added to all resources created by this deployment.",
+          "minLength": 2,
+          "maxLength": 5,
+          "pattern": "^([a-zA-Z0-9-]*)$"
+        },
+        "deploymentSuffix": {
+          "type": "string",
+          "description": "The suffix that will be added to all resources created by this deployment.",
+          "minLength": 2,
+          "maxLength": 5
+        },
+        "topLevelMgDisplayName": {
+          "type": "string",
+          "description": "The top level management group display name.",
+          "minLength": 1,
+          "maxLength": 90
+        },
+        "deploymentLocation": {
+          "type": "string",
+          "description": "Location to run deployment(s) from the list of azure regions.",
+          "pattern": "^([a-zA-Z0-9]+)$"
+        },
+        "organization": {
+          "type": "string",
+          "description": "The name of the country, region or agency the landing zone is being deployed for."
+        }
+      },
+      "required": [
+        "infrastructureAsCodeOutputOptions",
+        "deploymentPrefix",
+        "topLevelMgDisplayName",
+        "deploymentLocation"
+      ]
+    },
+    "GenerateLandingZoneResponse": {
+      "type": "object",
+      "description": "The response for the request to generate landing zone code.",
+      "properties": {
+        "topLevelMgDisplayName": {
+          "type": "string",
+          "description": "The top level Management Group display name."
+        },
+        "landingZoneConfigurationName": {
+          "type": "string",
+          "description": "The name of the Landing Zone configuration resource."
+        },
+        "generatedCodeUrl": {
+          "type": "string",
+          "format": "password",
+          "description": "The url to access the generated code..",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "topLevelMgDisplayName",
+        "landingZoneConfigurationName",
+        "generatedCodeUrl"
+      ]
+    },
+    "InfrastructureAsCodeOutputOptions": {
+      "type": "string",
+      "description": "Output options for landing zone code generation.",
+      "enum": [
+        "Bicep"
+      ],
+      "x-ms-enum": {
+        "name": "InfrastructureAsCodeOutputOptions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Bicep",
+            "value": "Bicep",
+            "description": "Value when generating Landing Zone code in Bicep."
+          }
+        ]
+      }
+    },
+    "LandingZoneConfiguration": {
+      "type": "object",
+      "description": "The Landing Zone configuration resource type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LandingZoneConfigurationProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "LandingZoneConfigurationListResult": {
+      "type": "object",
+      "description": "The response of a LandingZoneConfiguration list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LandingZoneConfiguration items on this page",
+          "items": {
+            "$ref": "#/definitions/LandingZoneConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LandingZoneConfigurationProperties": {
+      "type": "object",
+      "description": "The properties of landing zone configuration resource type.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The status of a user-initiated, control-plane operation on the landing zone configuration.",
+          "readOnly": true
+        },
+        "authoringStatus": {
+          "$ref": "#/definitions/AuthoringStatus",
+          "description": "The status for the landing zone configuration workflow.",
+          "readOnly": true
+        },
+        "ddosProtectionCreationOption": {
+          "$ref": "#/definitions/ResourceCreationOptions",
+          "description": "To deploy ddos, choose Yes, otherwise No. Select Existing to provide an existing ddos protection plan."
+        },
+        "existingDdosProtectionId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource id of the ddos protection plan.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/ddosProtectionPlans"
+              }
+            ]
+          }
+        },
+        "logAnalyticsWorkspaceCreationOption": {
+          "$ref": "#/definitions/ResourceCreationOptions",
+          "description": "To deploy log analytics workspace, choose Yes, otherwise No. Select UseExisting to provide an existing log analytics workspace."
+        },
+        "existingLogAnalyticsWorkspaceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource id of the log analytics workspace that was created to centralize log ingestion.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.OperationalInsights/workspaces"
+              }
+            ]
+          }
+        },
+        "tags": {
+          "type": "array",
+          "description": "Array of tag objects in format of {'name':'a tag name', 'value':'a tag value'}.",
+          "items": {
+            "$ref": "#/definitions/Tags"
+          },
+          "x-ms-identifiers": []
+        },
+        "firewallCreationOption": {
+          "$ref": "#/definitions/FirewallCreationOptions",
+          "description": "To deploy firewall, choose the Standard/Premium based on the desired SKU. Choose None for no firewall and UseExisting for a pre existing one."
+        },
+        "firewallSubnetCidrBlock": {
+          "type": "string",
+          "description": "Azure firewall subnet. IPv4 CIDR block."
+        },
+        "gatewaySubnetCidrBlock": {
+          "type": "string",
+          "description": "Gateway subnet. IPv4 CIDR block."
+        },
+        "logRetentionInDays": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Set how long logs are retained for, in days. Minimum length is 30 and maximum is 730",
+          "minimum": 30,
+          "maximum": 730
+        },
+        "hubNetworkCidrBlock": {
+          "type": "string",
+          "description": "The address space for the VNET. IPv4 CIDR block."
+        },
+        "azureBastionCreationOption": {
+          "$ref": "#/definitions/ResourceCreationOptions",
+          "description": "To deploy the bastion service, choose Yes, otherwise No. Choose UseExisting for existing bastion service."
+        },
+        "existingAzureBastionId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource id of azure bastion.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/bastionHosts"
+              }
+            ]
+          }
+        },
+        "azureBastionSubnetCidrBlock": {
+          "type": "string",
+          "description": "Azure bastion subnet. IP v4 CIDR block."
+        },
+        "landingZonesMgChildren": {
+          "type": "array",
+          "description": "Landing zone children management group properties",
+          "items": {
+            "$ref": "#/definitions/LandingZoneManagementGroupProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "topLevelMgMetadata": {
+          "$ref": "#/definitions/ManagementGroupProperties",
+          "description": "This will be applied to the root of the landing zone deployment."
+        },
+        "landingZonesMgMetadata": {
+          "$ref": "#/definitions/ManagementGroupProperties",
+          "description": "This will be applied to the landing zone management groups."
+        },
+        "platformMgMetadata": {
+          "$ref": "#/definitions/ManagementGroupProperties",
+          "description": "This will be applied to the platform management group."
+        },
+        "platformManagementMgMetadata": {
+          "$ref": "#/definitions/ManagementGroupProperties",
+          "description": "This will be applied to the management management group under platform."
+        },
+        "platformConnectivityMgMetadata": {
+          "$ref": "#/definitions/ManagementGroupProperties",
+          "description": "This will be applied to the connectivity management group under platform."
+        },
+        "platformIdentityMgMetadata": {
+          "$ref": "#/definitions/ManagementGroupProperties",
+          "description": "This will be applied to the identity management group under platform."
+        },
+        "decommissionedMgMetadata": {
+          "$ref": "#/definitions/DecommissionedManagementGroupProperties",
+          "description": "This will be applied to the decommissioned management group."
+        },
+        "sandboxMgMetadata": {
+          "$ref": "#/definitions/SandboxManagementGroupProperties",
+          "description": "This will be applied to the sandbox management group."
+        }
+      },
+      "required": [
+        "ddosProtectionCreationOption",
+        "logAnalyticsWorkspaceCreationOption",
+        "firewallCreationOption",
+        "gatewaySubnetCidrBlock",
+        "logRetentionInDays",
+        "hubNetworkCidrBlock",
+        "azureBastionCreationOption"
+      ]
+    },
+    "LandingZoneConfigurationUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the LandingZoneConfiguration.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LandingZoneConfigurationUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "LandingZoneConfigurationUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the LandingZoneConfiguration.",
+      "properties": {
+        "ddosProtectionCreationOption": {
+          "$ref": "#/definitions/ResourceCreationOptions",
+          "description": "To deploy ddos, choose Yes, otherwise No. Select Existing to provide an existing ddos protection plan."
+        },
+        "existingDdosProtectionId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource id of the ddos protection plan.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/ddosProtectionPlans"
+              }
+            ]
+          }
+        },
+        "logAnalyticsWorkspaceCreationOption": {
+          "$ref": "#/definitions/ResourceCreationOptions",
+          "description": "To deploy log analytics workspace, choose Yes, otherwise No. Select UseExisting to provide an existing log analytics workspace."
+        },
+        "existingLogAnalyticsWorkspaceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource id of the log analytics workspace that was created to centralize log ingestion.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.OperationalInsights/workspaces"
+              }
+            ]
+          }
+        },
+        "tags": {
+          "type": "array",
+          "description": "Array of tag objects in format of {'name':'a tag name', 'value':'a tag value'}.",
+          "items": {
+            "$ref": "#/definitions/Tags"
+          },
+          "x-ms-identifiers": []
+        },
+        "firewallCreationOption": {
+          "$ref": "#/definitions/FirewallCreationOptions",
+          "description": "To deploy firewall, choose the Standard/Premium based on the desired SKU. Choose None for no firewall and UseExisting for a pre existing one."
+        },
+        "firewallSubnetCidrBlock": {
+          "type": "string",
+          "description": "Azure firewall subnet. IPv4 CIDR block."
+        },
+        "gatewaySubnetCidrBlock": {
+          "type": "string",
+          "description": "Gateway subnet. IPv4 CIDR block."
+        },
+        "logRetentionInDays": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Set how long logs are retained for, in days. Minimum length is 30 and maximum is 730",
+          "minimum": 30,
+          "maximum": 730
+        },
+        "hubNetworkCidrBlock": {
+          "type": "string",
+          "description": "The address space for the VNET. IPv4 CIDR block."
+        },
+        "azureBastionCreationOption": {
+          "$ref": "#/definitions/ResourceCreationOptions",
+          "description": "To deploy the bastion service, choose Yes, otherwise No. Choose UseExisting for existing bastion service."
+        },
+        "existingAzureBastionId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource id of azure bastion.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/bastionHosts"
+              }
+            ]
+          }
+        },
+        "azureBastionSubnetCidrBlock": {
+          "type": "string",
+          "description": "Azure bastion subnet. IP v4 CIDR block."
+        },
+        "landingZonesMgChildren": {
+          "type": "array",
+          "description": "Landing zone children management group properties",
+          "items": {
+            "$ref": "#/definitions/LandingZoneManagementGroupProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "topLevelMgMetadata": {
+          "$ref": "#/definitions/ManagementGroupPropertiesUpdate",
+          "description": "This will be applied to the root of the landing zone deployment."
+        },
+        "landingZonesMgMetadata": {
+          "$ref": "#/definitions/ManagementGroupPropertiesUpdate",
+          "description": "This will be applied to the landing zone management groups."
+        },
+        "platformMgMetadata": {
+          "$ref": "#/definitions/ManagementGroupPropertiesUpdate",
+          "description": "This will be applied to the platform management group."
+        },
+        "platformManagementMgMetadata": {
+          "$ref": "#/definitions/ManagementGroupPropertiesUpdate",
+          "description": "This will be applied to the management management group under platform."
+        },
+        "platformConnectivityMgMetadata": {
+          "$ref": "#/definitions/ManagementGroupPropertiesUpdate",
+          "description": "This will be applied to the connectivity management group under platform."
+        },
+        "platformIdentityMgMetadata": {
+          "$ref": "#/definitions/ManagementGroupPropertiesUpdate",
+          "description": "This will be applied to the identity management group under platform."
+        },
+        "decommissionedMgMetadata": {
+          "$ref": "#/definitions/DecommissionedManagementGroupPropertiesUpdate",
+          "description": "This will be applied to the decommissioned management group."
+        },
+        "sandboxMgMetadata": {
+          "$ref": "#/definitions/SandboxManagementGroupPropertiesUpdate",
+          "description": "This will be applied to the sandbox management group."
+        }
+      }
+    },
+    "LandingZoneManagementGroupProperties": {
+      "type": "object",
+      "description": "Landing zone management group properties.",
+      "properties": {
+        "policyInitiativesAssignmentProperties": {
+          "type": "array",
+          "description": "Array of initiative assignments to be applied to the management group.",
+          "items": {
+            "$ref": "#/definitions/PolicyInitiativeAssignmentProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "name": {
+          "type": "string",
+          "description": "Management group name."
+        }
+      },
+      "required": [
+        "policyInitiativesAssignmentProperties",
+        "name"
+      ]
+    },
+    "LandingZoneRegistration": {
+      "type": "object",
+      "description": "The Landing Zone registration resource type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LandingZoneRegistrationProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "LandingZoneRegistrationListResult": {
+      "type": "object",
+      "description": "The response of a LandingZoneRegistration list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LandingZoneRegistration items on this page",
+          "items": {
+            "$ref": "#/definitions/LandingZoneRegistration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LandingZoneRegistrationProperties": {
+      "type": "object",
+      "description": "The properties of the Landing Zone registration resource type.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The status of a user-initiated, control-plane operation on the Landing Zone registration resource type.",
+          "readOnly": true
+        },
+        "existingTopLevelMgId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource id of the top level management group",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Management/managementGroups"
+              }
+            ]
+          }
+        },
+        "existingLandingZoneConfigurationId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource id of the associated landing zone configuration.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Sovereign/landingZoneConfigurations"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "existingTopLevelMgId",
+        "existingLandingZoneConfigurationId"
+      ]
+    },
+    "LandingZoneRegistrationUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the LandingZoneRegistration.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LandingZoneRegistrationUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "LandingZoneRegistrationUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the LandingZoneRegistration.",
+      "properties": {
+        "existingTopLevelMgId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource id of the top level management group",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Management/managementGroups"
+              }
+            ]
+          }
+        },
+        "existingLandingZoneConfigurationId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource id of the associated landing zone configuration.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Sovereign/landingZoneConfigurations"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "ManagementGroupProperties": {
+      "type": "object",
+      "description": "Details of the policy and initiatives associated with the management group.",
+      "properties": {
+        "policyInitiativesAssignmentProperties": {
+          "type": "array",
+          "description": "Array of initiative assignments to be applied to the management group.",
+          "items": {
+            "$ref": "#/definitions/PolicyInitiativeAssignmentProperties"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "policyInitiativesAssignmentProperties"
+      ]
+    },
+    "ManagementGroupPropertiesUpdate": {
+      "type": "object",
+      "description": "Details of the policy and initiatives associated with the management group.",
+      "properties": {
+        "policyInitiativesAssignmentProperties": {
+          "type": "array",
+          "description": "Array of initiative assignments to be applied to the management group.",
+          "items": {
+            "$ref": "#/definitions/PolicyInitiativeAssignmentProperties"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "PolicyInitiativeAssignmentProperties": {
+      "type": "object",
+      "description": "Details of policy assignments",
+      "properties": {
+        "policyInitiativeId": {
+          "type": "string",
+          "description": "The fully qualified id of the policy initiative."
+        },
+        "assignmentParameters": {
+          "type": "object",
+          "description": "The parameters for the assignment of policy initiatives.",
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "policyInitiativeId",
+        "assignmentParameters"
+      ]
+    },
+    "ResourceCreationOptions": {
+      "type": "string",
+      "description": "Options for resource creation.",
+      "enum": [
+        "Yes",
+        "No",
+        "UseExisting"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceCreationOptions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Yes",
+            "value": "Yes",
+            "description": "Value to create a new resource."
+          },
+          {
+            "name": "No",
+            "value": "No",
+            "description": "Value to not create a new resource."
+          },
+          {
+            "name": "UseExisting",
+            "value": "UseExisting",
+            "description": "Value to use an existing resource."
+          }
+        ]
+      }
+    },
+    "SandboxManagementGroupProperties": {
+      "type": "object",
+      "description": "Sandbox management group properties.",
+      "properties": {
+        "policyInitiativesAssignmentProperties": {
+          "type": "array",
+          "description": "Array of initiative assignments to be applied to the management group.",
+          "items": {
+            "$ref": "#/definitions/PolicyInitiativeAssignmentProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "create": {
+          "type": "boolean",
+          "description": "When set to false this management group will not be created. The default value is false."
+        }
+      },
+      "required": [
+        "policyInitiativesAssignmentProperties",
+        "create"
+      ]
+    },
+    "SandboxManagementGroupPropertiesUpdate": {
+      "type": "object",
+      "description": "Sandbox management group properties.",
+      "properties": {
+        "policyInitiativesAssignmentProperties": {
+          "type": "array",
+          "description": "Array of initiative assignments to be applied to the management group.",
+          "items": {
+            "$ref": "#/definitions/PolicyInitiativeAssignmentProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "create": {
+          "type": "boolean",
+          "description": "When set to false this management group will not be created. The default value is false."
+        }
+      }
+    },
+    "Tags": {
+      "type": "object",
+      "description": "The details associated with tags.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "A tag name."
+        },
+        "value": {
+          "type": "string",
+          "description": "A tag value."
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "UpdateAuthoringStatusRequest": {
+      "type": "object",
+      "description": "The request to update authoring status of a configuration.",
+      "properties": {
+        "authoringStatus": {
+          "$ref": "#/definitions/AuthoringStatus",
+          "description": "The value of the authoring status to be updated."
+        }
+      },
+      "required": [
+        "authoringStatus"
+      ]
+    },
+    "UpdateAuthoringStatusResponse": {
+      "type": "object",
+      "description": "The response for the request to update authoring status.",
+      "properties": {
+        "landingZoneConfigurationName": {
+          "type": "string",
+          "description": "The name of the landing zone configuration resource."
+        },
+        "authoringStatus": {
+          "$ref": "#/definitions/AuthoringStatus",
+          "description": "The value of the authoring status to be updated."
+        }
+      },
+      "required": [
+        "landingZoneConfigurationName",
+        "authoringStatus"
+      ]
+    },
+    "Versions": {
+      "type": "string",
+      "description": "The Microsoft Sovereign Provider version.",
+      "enum": [
+        "2023-09-28-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Preview20230928",
+            "value": "2023-09-28-preview",
+            "description": "Preview version."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

@@ -47,6 +47,11 @@ input-file:
   - Microsoft.HybridNetwork/stable/2023-09-01/pureProxyArtifact.json
   - Microsoft.HybridNetwork/stable/2023-09-01/site.json
   - Microsoft.HybridNetwork/stable/2023-09-01/siteNetworkService.json
+
+suppressions:
+  - code: PatchSkuProperty
+    from: siteNetworkService.json
+    reason: sku cannot be patched
 ```
 
 ### Tag: package-2023-04-01-preview
@@ -68,6 +73,7 @@ input-file:
   - Microsoft.HybridNetwork/preview/2023-04-01-preview/pureProxyArtifact.json
   - Microsoft.HybridNetwork/preview/2023-04-01-preview/site.json
   - Microsoft.HybridNetwork/preview/2023-04-01-preview/siteNetworkService.json
+  - Microsoft.HybridNetwork/preview/2023-04-01-preview/serviceManagementContainer.json
 ```
 
 ### Tag: package-2023-01-01
@@ -157,6 +163,25 @@ input-file:
   - Microsoft.HybridNetwork/preview/2022-01-01-preview/vendor.json
   - Microsoft.HybridNetwork/preview/2022-01-01-preview/networkFunctionVendor.json
   - Microsoft.HybridNetwork/preview/2022-01-01-preview/vendorNetworkFunction.json
+```
+---
+
+## Suppression
+``` yaml
+suppressions:
+  - code: LroPostReturn
+    reason: POST action endpoints have no return body
+    from: serviceManagementContainer.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/serviceManagementContainers/{serviceManagementContainerName}/updateSpecifications/{updateSpecificationName}/rollouts/{rolloutName}/start"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/serviceManagementContainers/{serviceManagementContainerName}/updateSpecifications/{updateSpecificationName}/rollouts/{rolloutName}/cancel"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/serviceManagementContainers/{serviceManagementContainerName}/updateSpecifications/{updateSpecificationName}/rollouts/{rolloutName}/continue"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/serviceManagementContainers/{serviceManagementContainerName}/updateSpecifications/{updateSpecificationName}/rollouts/{rolloutName}/suspend"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/serviceManagementContainers/{serviceManagementContainerName}/updateSpecifications/{updateSpecificationName}/rollouts/{rolloutName}/resume"].post
+  - code: GetCollectionOnlyHasValueAndNextLink
+    reason: false positive for singleton resource
+    from: serviceManagementContainer.json
+
 ```
 ---
 

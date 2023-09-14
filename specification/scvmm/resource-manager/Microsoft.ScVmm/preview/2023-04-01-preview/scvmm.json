@@ -3538,6 +3538,13 @@
             "description": "Whether force delete was specified.",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "deleteFromHost",
+            "description": "Whether to disable the VM from azure and also delete it from VMM.",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "responses": {
@@ -4895,6 +4902,11 @@
           "description": "Gets or sets os sku.",
           "type": "string",
           "readOnly": true
+        },
+        "osVersion": {
+          "description": "Gets os version.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -5987,6 +5999,11 @@
           "type": "string",
           "readOnly": true
         },
+        "osVersion": {
+          "description": "Gets os version.",
+          "type": "string",
+          "readOnly": true
+        },
         "powerState": {
           "description": "Gets the power state of the virtual machine.",
           "type": "string",
@@ -6457,7 +6474,11 @@
           ],
           "x-ms-secret": true
         }
-      }
+      },
+      "required": [
+        "username",
+        "password"
+      ]
     },
     "HttpProxyConfiguration": {
       "description": "HTTP Proxy configuration for the VM.",

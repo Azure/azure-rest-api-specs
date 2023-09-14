@@ -1143,6 +1143,14 @@
           "description": "Enter a business function/department identifier to group multiple SIDs.",
           "readOnly": true
         },
+        "serverCount": {
+          "description": "Server count for various SAP Instance type servers ('ASCS', 'DB', 'APP', 'SCS', 'WEBDISP') in this SAP Instance.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
         "isAssessmentReady": {
           "description": "Marks if this instance is assessment ready.",
           "type": "boolean",
@@ -1175,12 +1183,6 @@
         "instanceSid": {
           "type": "string",
           "description": "This is the Instance SID for ASCS/AP/DB instance.  An SAP system with HANA database for example could have a different SID for database Instance than that of ASCS instance.",
-          "readOnly": true
-        },
-        "isDrInstance": {
-          "description": "Marks if this instance a DR instance. Only valid for a Production environment.",
-          "type": "boolean",
-          "default": false,
           "readOnly": true
         },
         "sapProduct": {

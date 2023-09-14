@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "subscriptionId": "subscription-id",
+    "resourceGroupName": "contoso-rg1",
+    "testBaseAccountName": "contoso-testBaseAccount1",
+    "imageDefinitionName": "contoso-image-def",
+    "api-version": "2023-06-15-preview",
+    "parameters": {
+      "properties": {
+        "architecture": "x64",
+        "securityType": "Standard",
+        "osState": "Generalized"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "contoso-image-def",
+        "id": "/subscriptions/subscription-id/resourceGroups/contoso-rg1/providers/Microsoft.TestBase/testBaseAccounts/contoso-testBaseAccount1/imageDefinitions/contoso-image-def",
+        "type": "Microsoft.TestBase/testBaseAccounts/imageDefinitions",
+        "properties": {
+          "architecture": "x64",
+          "securityType": "Standard",
+          "osState": "Generalized"
+        }
+      }
+    }
+  }
+}

@@ -131,21 +131,6 @@
               "$ref": "#/definitions/ManagedGateway"
             }
           },
-          "202": {
-            "description": "accepted operation",
-            "schema": {
-              "$ref": "#/definitions/ManagedGateway"
-            },
-            "headers": {
-              "Location": {
-                "type": "string"
-              },
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "The URL to retrieve the status of the asynchronous operation."
-              }
-            }
-          },
           "default": {
             "description": "An error response providing a description of the reason for the operation's failure.",
             "schema": {
@@ -308,6 +293,48 @@
         "installType": {
           "description": "Install type of gateway resource.",
           "type": "string",
+          "readOnly": true
+        },
+        "autoUpgrade": {
+          "description": "Update type of monitored resource.",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "autoUpgrade",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "totalAlerts": {
+          "description": "total alerts on gateway resource.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "totalAgents": {
+          "description": "total agents on gateway resource.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "operatingSystem": {
+          "description": "operatingSystem of gateway resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "machineType": {
+          "description": "machineType of gateway resource.",
+          "type": "string",
+          "enum": [
+            "Azure",
+            "Azure Arc",
+            "On-Prem"
+          ],
+          "x-ms-enum": {
+            "name": "machineType",
+            "modelAsString": true
+          },
           "readOnly": true
         },
         "provisioningState": {

@@ -13,12 +13,11 @@ enum Versions {
   @doc("Version 1 preview.")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v1_preview)
-  v1_preview: "2023-06-01-preview"
+  v1_preview: "2023-06-01-preview",
 }
 
 @doc("Base storage resource properties that can be extended for storage arm resources.")
 model BaseStorageResourceProperties is BaseResourceProperties {
-
   @doc("Subnet Id for Vnet injection.")
   @visibility("read", "create")
   subnetId: string;
@@ -42,15 +41,13 @@ model BaseStorageResourceProperties is BaseResourceProperties {
 
 @doc("iSCSI is a storage networking standard.")
 model Iscsi {
-
   @doc("iSCSI IP/port pairs used for establishing connections and exchanging data.")
   @visibility("read")
-  ips?: Ip[]
+  ips?: Ip[];
 }
 
 @doc("Azure VmWare Service properties. VASA is vSphere Storage APIs for Storage Awareness.")
 model AzureVmwareService {
-
   @doc("VASA Provider user name.")
   @visibility("read")
   vasaProviderUsername?: string;
@@ -71,7 +68,6 @@ model AzureVmwareService {
 
 @doc("Describes iSCSI endpoint and IQN.")
 model VasaIscsiEndpoint {
-
   @doc("iSCSI IP address.")
   address: string;
 
