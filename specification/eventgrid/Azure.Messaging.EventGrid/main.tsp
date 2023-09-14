@@ -39,7 +39,7 @@ namespace EventGrid {
     v2023_06_01_preview: "2023-06-01-preview",
 
     @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-    v2023_09_01_preview: "2023-09-01-preview",
+    v2023_09_01_preview: "2023-10-01-preview",
   }
 
   alias StandardOperations = Azure.Core.StandardResourceOperations;
@@ -81,7 +81,7 @@ namespace EventGrid {
 
   @doc("Properties of the Event Broker operation.")
   model BrokerProperties {
-    @doc("The token used to lock the event.")
+    @doc("The token of the lock on the event.")
     lockToken: string;
 
     @doc("The attempt count for delivering the event.")
@@ -103,34 +103,34 @@ namespace EventGrid {
     value: ReceiveDetails[];
   }
 
-  @doc("Failed LockToken information.")
+  @doc("Failed lock token information.")
   model FailedLockToken {
-    @doc("LockToken value")
+    @doc("The lock token of an entry in the request.")
     lockToken: string;
 
-    @doc("Error code related to the token. Example of such error codes are BadToken: which indicates the Token is not formatted correctly, TokenLost: which indicates that token is not found, and InternalServerError: For any internal server errors.")
+    @doc("Error code related to the lock token. Example of such error codes are TokenLost: which indicates that token is not found, and InternalServerError: For any internal server errors.")
     errorCode: string;
 
-    @doc("Description of the token error.")
+    @doc("Description of the lock token error.")
     errorDescription: string;
   }
 
   @doc("Supported delays for release operation.")
   enum ReleaseDelay {
     @doc("Release the event after 0 seconds.")
-    ZeroSeconds: 0,
+    ReleaseEventIn0Seconds: 0,
 
     @doc("Release the event after 10 seconds.")
-    TenSeconds: 10,
+    ReleaseEventIn10Seconds: 10,
 
     @doc("Release the event after 60 seconds.")
-    SixtySeconds: 60,
+    ReleaseEventIn60Seconds: 60,
 
     @doc("Release the event after 600 seconds.")
-    SixHundredSeconds: 600,
+    ReleaseEventIn600Seconds: 600,
 
     @doc("Release the event after 3600 seconds.")
-    ThirtyThousandSixHundredSeconds: 3600,
+    ReleaseEventIn3600Seconds: 3600,
   }
 
   @doc("The result of the Publish operation.")
@@ -138,61 +138,61 @@ namespace EventGrid {
 
   @doc("The result of the Acknowledge operation.")
   model AcknowledgeResult {
-    @doc("Array of LockToken values for failed cloud events. Each LockToken includes the lock token value along with the related error information (namely, the error code and description).")
+    @doc("Array of FailedLockToken for failed cloud events. Each FailedLockToken includes the lock token along with the related error information (namely, the error code and description).")
     failedLockTokens: FailedLockToken[];
 
-    @doc("Array of lock tokens values for the successfully acknowledged cloud events.")
+    @doc("Array of lock tokens for the successfully acknowledged cloud events.")
     succeededLockTokens: string[];
   }
 
   @doc("The result of the Release operation.")
   model ReleaseResult {
-    @doc("Array of LockToken values for failed cloud events. Each LockToken includes the lock token value along with the related error information (namely, the error code and description).")
+    @doc("Array of FailedLockToken for failed cloud events. Each FailedLockToken includes the lock token along with the related error information (namely, the error code and description).")
     failedLockTokens: FailedLockToken[];
 
-    @doc("Array of lock tokens values for the successfully released cloud events.")
+    @doc("Array of lock tokens for the successfully released cloud events.")
     succeededLockTokens: string[];
   }
 
   @doc("The result of the Reject operation.")
   model RejectResult {
-    @doc("Array of LockToken values for failed cloud events. Each LockToken includes the lock token value along with the related error information (namely, the error code and description).")
+    @doc("Array of FailedLockToken for failed cloud events. Each FailedLockToken includes the lock token along with the related error information (namely, the error code and description).")
     failedLockTokens: FailedLockToken[];
 
-    @doc("Array of lock tokens values for the successfully rejected cloud events.")
+    @doc("Array of lock tokens for the successfully rejected cloud events.")
     succeededLockTokens: string[];
   }
 
   @doc("The result of the RenewLock operation.")
   model RenewCloudEventLocksResult {
-    @doc("Array of LockToken values for failed cloud events. Each LockToken includes the lock token value along with the related error information (namely, the error code and description).")
+    @doc("Array of FailedLockToken for failed cloud events. Each FailedLockToken includes the lock token along with the related error information (namely, the error code and description).")
     failedLockTokens: FailedLockToken[];
 
-    @doc("Array of lock tokens values for the successfully renewed locks.")
+    @doc("Array of lock tokens for the successfully renewed locks.")
     succeededLockTokens: string[];
   }
 
-  @doc("Array of lock token strings for the corresponding received Cloud Events to be released.")
+  @doc("Array of lock tokens for the corresponding received Cloud Events to be released.")
   model ReleaseOptions {
-    @doc("String array of lock tokens.")
+    @doc("Array of lock tokens.")
     lockTokens: string[];
   }
 
-  @doc("Array of lock token strings for the corresponding received Cloud Events to be acknowledged.")
+  @doc("Array of lock tokens for the corresponding received Cloud Events to be acknowledged.")
   model AcknowledgeOptions {
-    @doc("String array of lock tokens.")
+    @doc("Array of lock tokens.")
     lockTokens: string[];
   }
 
-  @doc("Array of lock token strings for the corresponding received Cloud Events to be rejected.")
+  @doc("Array of lock tokens for the corresponding received Cloud Events to be rejected.")
   model RejectOptions {
-    @doc("String array of lock tokens.")
+    @doc("Array of lock tokens.")
     lockTokens: string[];
   }
 
-  @doc("Array of lock token strings for the corresponding received Cloud Events to be renewed.")
+  @doc("Array of lock tokens for the corresponding received Cloud Events to be renewed.")
   model RenewLockOptions {
-    @doc("String array of lock tokens.")
+    @doc("Array of lock tokens.")
     lockTokens: string[];
   }
 
@@ -282,7 +282,7 @@ namespace EventGrid {
   // Acknowledge Operation:
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:acknowledge&apiVersion={apiVersion}
 
-  @doc("Acknowledge batch of Cloud Events. The server responds with an HTTP 200 status code if at least one event is successfully acknowledged. The response body will include the set of successfully acknowledged lockTokens, along with other failed lockTokens with their corresponding error information. Successfully acknowledged events will no longer be available to any consumer.")
+  @doc("Acknowledge batch of Cloud Events. The server responds with an HTTP 200 status code if the request is successfully accepted. The response body will include the set of successfully acknowledged lockTokens, along with other failed lockTokens with their corresponding error information. Successfully acknowledged events will no longer be available to any consumer.")
   @action("acknowledge")
   op acknowledgeCloudEvents is StandardOperations.ResourceAction<
     EventSubscription,
@@ -301,7 +301,7 @@ namespace EventGrid {
   // Release Operation:
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release?api-version={apiVersion}
 
-  @doc("Release batch of Cloud Events with an optional delay in seconds. The server responds with an HTTP 200 status code if at least one event is successfully released. The response body will include the set of successfully released lockTokens, along with other failed lockTokens with their corresponding error information.")
+  @doc("Release batch of Cloud Events with an optional delay in seconds. The server responds with an HTTP 200 status code if the request is successfully accepted. The response body will include the set of successfully released lockTokens, along with other failed lockTokens with their corresponding error information.")
   @action("release")
   op releaseCloudEvents is StandardOperations.ResourceAction<
     EventSubscription,
@@ -324,7 +324,7 @@ namespace EventGrid {
   // Reject Operation:
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:reject?api-version={apiVersion}
 
-  @doc("Reject batch of Cloud Events.")
+  @doc("Reject batch of Cloud Events. The server responds with an HTTP 200 status code if the request is successfully accepted. The response body will include the set of successfully rejected lockTokens, along with other failed lockTokens with their corresponding error information.")
   @action("reject")
   op rejectCloudEvents is StandardOperations.ResourceAction<
     EventSubscription,
@@ -343,7 +343,7 @@ namespace EventGrid {
   // RenewLock Operation:
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:renewlock?api-version={apiVersion}
 
-  @doc("Renew lock for batch of Cloud Events.")
+  @doc("Renew lock for batch of Cloud Events. The server responds with an HTTP 200 status code if the request is successfully accepted. The response body will include the set of successfully renewed lockTokens, along with other failed lockTokens with their corresponding error information.")
   @action("renewlock")
   op renewCloudEventLocks is StandardOperations.ResourceAction<
     EventSubscription,
