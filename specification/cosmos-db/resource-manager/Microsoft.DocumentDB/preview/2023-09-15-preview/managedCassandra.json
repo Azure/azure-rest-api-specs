@@ -684,6 +684,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/forceDeallocate"
           }
         ],
         "responses": {
@@ -787,6 +790,14 @@
       "minLength": 1,
       "maxLength": 100,
       "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$"
+    },
+    "forceDeallocate": {
+      "name": "x-ms-force-deallocate",
+      "in": "header",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method",
+      "description": "Force to deallocate a cluster of Cluster Type Production. Force to deallocate a cluster of Cluster Type Production might cause data loss"
     },
     "dataCenterNameParameter": {
       "name": "dataCenterName",
@@ -1027,9 +1038,35 @@
               "type": "boolean",
               "description": "Whether Cassandra audit logging is enabled"
             },
+            "clusterType": {
+              "type": "string",
+              "description": "Type of the cluster. If set to Production, some operations might not be permitted on cluster.",
+              "enum": [
+                "Production",
+                "NonProduction"
+              ],
+              "x-ms-enum": {
+                "name": "ClusterType",
+                "modelAsString": true
+              }
+            },
             "provisionError": {
               "$ref": "#/definitions/CassandraError",
               "description": "Error related to resource provisioning."
+            },
+            "extensions": {
+              "type": "array",
+              "description": "Extensions to be added or updated on cluster.",
+              "items": {
+                "type": "string"
+              }
+            },
+            "backupSchedules": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BackupSchedule"
+              },
+              "description": "List of backup schedules that define when you want to back up your data."
             }
           }
         }
@@ -1183,6 +1220,10 @@
                       "description": "A float representing the current system-wide CPU utilization as a percentage.",
                       "type": "number",
                       "format": "double"
+                    },
+                    "isLatestModel": {
+                      "type": "boolean",
+                      "description": "If node has been updated to latest model"
                     }
                   }
                 }
@@ -1331,21 +1372,39 @@
     "BackupResource": {
       "description": "A restorable backup of a Cassandra cluster.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "cosmos-db.json#/definitions/ARMProxyResource"
-        }
-      ],
       "properties": {
-        "properties": {
-          "type": "object",
-          "properties": {
-            "timestamp": {
-              "type": "string",
-              "format": "date-time",
-              "description": "The time this backup was taken, formatted like 2021-01-21T17:35:21"
-            }
+        "backupId": {
+          "description": "The unique identifier of backup.",
+          "type": "string"
+        },
+        "backupState": {
+          "description": "The current state of the backup.",
+          "type": "string",
+          "enum": [
+            "Initiated",
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "BackupState",
+            "modelAsString": true
           }
+        },
+        "backupStartTimestamp": {
+          "description": "The time at which the backup process begins.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "backupStopTimestamp": {
+          "description": "The time at which the backup process ends.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "backupExpiryTimestamp": {
+          "description": "The time at which the backup will expire.",
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -1378,6 +1437,24 @@
         "pem": {
           "description": "PEM formatted public key.",
           "type": "string"
+        }
+      }
+    },
+    "BackupSchedule": {
+      "type": "object",
+      "properties": {
+        "scheduleName": {
+          "description": "The unique identifier of backup schedule.",
+          "type": "string"
+        },
+        "cronExpression": {
+          "description": "The cron expression that defines when you want to back up your data.",
+          "type": "string"
+        },
+        "retentionInHours": {
+          "description": "The retention period (hours) of the backups. If you want to retain data forever, set retention to 0.",
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
