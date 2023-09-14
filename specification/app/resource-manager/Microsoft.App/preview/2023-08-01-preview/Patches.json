@@ -319,14 +319,6 @@
             "read",
             "update"
           ]
-        },
-        "patchDetails": {
-          "description": "Detailed info describes the patch operation for the target container app.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PatchDetails"
-          },
-          "x-ms-client-flatten": true
         }
       },
       "description": "Container App Patch",
@@ -410,6 +402,7 @@
         "newImageName": {
           "type": "string",
           "description": "The name of the new image created by the patch.",
+          "readOnly": true,
           "required": false
         },
         "newLayer": {
@@ -429,7 +422,8 @@
             }
           },
           "description": "New layer update details in the target image.",
-          "required": false
+          "required": false,
+          "readOnly": true
         },
         "oldLayer": {
           "type": "object",
@@ -448,7 +442,8 @@
             }
           },
           "description": "The old layer details in the target image.",
-          "required": false
+          "required": false,
+          "readOnly": true
         },
         "patchType": {
           "type": "string",
@@ -463,7 +458,8 @@
           "x-ms-enum": {
             "name": "PatchType",
             "modelAsString": true
-          }
+          },
+          "readOnly": true
         }
       },
       "readOnly": true
@@ -506,6 +502,14 @@
           "type": "string",
           "format": "date-time",
           "description": "The UTC timestamp that describes when the patch object was last updated.",
+          "readOnly": true
+        },
+        "patchDetails": {
+          "description": "Detailed info describes the patch operation for the target container app.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PatchDetails"
+          },
           "readOnly": true
         }
       },
