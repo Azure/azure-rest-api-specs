@@ -379,6 +379,12 @@
     "PatchDetails": {
       "description": "The detailed info of patch operation performing when applying a patch.",
       "type": "object",
+      "required": [
+        "targetContainerName",
+        "targetImage",
+        "lastDetectionTime",
+        "detectionStatus"
+      ],
       "properties": {
         "targetContainerName": {
           "type": "string",
@@ -404,8 +410,7 @@
         "newImageName": {
           "type": "string",
           "description": "The name of the new image created by the patch.",
-          "readOnly": true,
-          "required": false
+          "readOnly": true
         },
         "newLayer": {
           "type": "object",
@@ -424,7 +429,7 @@
             }
           },
           "description": "New layer update details in the target image.",
-          "required": false,
+          "required": [],
           "readOnly": true
         },
         "oldLayer": {
@@ -444,7 +449,7 @@
             }
           },
           "description": "The old layer details in the target image.",
-          "required": false,
+          "required": [],
           "readOnly": true
         },
         "patchType": {
@@ -456,7 +461,6 @@
             "FrameworkAndOSSecurity",
             "Other"
           ],
-          "required": false,
           "x-ms-enum": {
             "name": "PatchType",
             "modelAsString": true
