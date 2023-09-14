@@ -483,13 +483,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/ipamPools/{poolName}/allocateCidrsForResource": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/ipamPools/{poolName}/allocateAzureResource": {
       "post": {
         "tags": [
           "IpamPool"
         ],
-        "summary": "Allocate CIDR for Resource from the Pool.",
-        "operationId": "IpamPool_AllocateCidr",
+        "summary": "Allocate Azure Resource.",
+        "operationId": "IpamPool_AllocateAzureResource",
         "consumes": [
           "application/json"
         ],
@@ -523,15 +523,21 @@
           {
             "in": "body",
             "name": "body",
-            "description": "PoolAllocation request object.",
+            "description": "Allocation request object.",
             "schema": {
-              "$ref": "#/definitions/PoolAllocationRequest"
+              "$ref": "#/definitions/AllocationRequest"
             }
           }
         ],
         "responses": {
-          "202": {
-            "description": "Allocate CIDR",
+          "200": {
+            "description": "Azure Resource was updated",
+            "schema": {
+              "$ref": "#/definitions/PoolAssociation"
+            }
+          },
+          "201": {
+            "description": "Azure Resource was allocated",
             "schema": {
               "$ref": "#/definitions/PoolAssociation"
             }
@@ -544,8 +550,81 @@
           }
         },
         "x-ms-examples": {
-          "IpamPool_AllocateCidr": {
-            "$ref": "./examples/IpamPool_AllocateCidr.json"
+          "IpamPool_AllocateAzureResource": {
+            "$ref": "./examples/IpamPool_AllocateAzureResource.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/ipamPools/{poolName}/allocateNonAzureResource": {
+      "post": {
+        "tags": [
+          "IpamPool"
+        ],
+        "summary": "Allocate Non-Azure Resource.",
+        "operationId": "IpamPool_AllocateNonAzureResource",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkManagerName",
+            "description": "Network Manager resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "poolName",
+            "description": "Pool resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Allocation request object.",
+            "schema": {
+              "$ref": "#/definitions/NonAzureAllocationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Non-Azure Resource was updated",
+            "schema": {
+              "$ref": "#/definitions/PoolAssociation"
+            }
+          },
+          "201": {
+            "description": "Non-Azure Resource was allocated",
+            "schema": {
+              "$ref": "#/definitions/PoolAssociation"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IpamPool_AllocateNonAzureResource": {
+            "$ref": "./examples/IpamPool_AllocateNonAzureResource.json"
           }
         }
       }
@@ -701,6 +780,17 @@
     }
   },
   "definitions": {
+    "AllocationRequest": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string"
+        },
+        "numberOfIPAddressesToAllocate": {
+          "type": "string"
+        }
+      }
+    },
     "AssociationStatus": {
       "enum": [
         "Allocation",
@@ -812,24 +902,23 @@
         }
       }
     },
-    "PoolAllocationRequest": {
+    "NonAzureAllocationRequest": {
       "type": "object",
       "properties": {
-        "resourceId": {
+        "description": {
           "type": "string"
         },
         "addressPrefixes": {
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "readOnly": true
+          }
+        },
+        "resourceId": {
+          "type": "string"
         },
         "numberOfIPAddressesToAllocate": {
           "type": "string"
-        },
-        "isStaticCidr": {
-          "type": "boolean"
         }
       }
     },

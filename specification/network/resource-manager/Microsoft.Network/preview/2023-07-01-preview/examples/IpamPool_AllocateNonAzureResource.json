@@ -1,0 +1,62 @@
+{
+  "title": "Allocate Azure Resource",
+  "parameters": {
+    "api-version": "2023-07-01-preview",
+    "subscriptionId": "11111111-1111-1111-1111-111111111111",
+    "resourceGroupName": "rg1",
+    "networkManagerName": "TestNetworkManager",
+    "poolName": "TestPool",
+    "parameters": {
+      "resourceId": "OnPremResources",
+      "description": "test description",
+      "addressPrefixes": [
+        "10.0.0.0/24"
+      ],
+      "numberOfIPAddressesToAllocate": ""
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "resourceId": "OnPremResources",
+        "poolId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/TestNetworkManager/ipamPools/TestPool",
+        "description": "test description",
+        "addressPrefixes": [
+          "10.0.0.0/24"
+        ],
+        "allocatedPrefixes": [],
+        "totalIps": "256",
+        "allocatedIps": "0",
+        "usedIps": "256",
+        "associationStatus": "Allocation",
+        "createdAt": "2020-09-09T20:00:00.0000000Z",
+        "reservationTTL": "",
+        "compliancy": {
+          "inScope": "Compliant",
+          "overlapping": "Compliant"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "resourceId": "OnPremResources",
+        "poolId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/TestNetworkManager/ipamPools/TestPool",
+        "description": "test description",
+        "addressPrefixes": [
+          "10.0.0.0/24"
+        ],
+        "allocatedPrefixes": [],
+        "totalIps": "256",
+        "allocatedIps": "0",
+        "usedIps": "256",
+        "associationStatus": "Allocation",
+        "createdAt": "2020-09-09T20:00:00.0000000Z",
+        "reservationTTL": "",
+        "compliancy": {
+          "inScope": "Compliant",
+          "overlapping": "Compliant"
+        }
+      }
+    }
+  }
+}
