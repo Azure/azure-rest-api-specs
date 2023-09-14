@@ -2430,18 +2430,7 @@
         "status": {
           "description": "Status of the Provisioning for the managed network of a machine learning workspace.",
           "$ref": "#/definitions/ManagedNetworkProvisionStatus"
-        }
-      }
-    },
-    "ManagedNetworkSettingsEx": {
-      "description": "Managed network settings with changeable isolation modes info included for a machine learning workspace.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ManagedNetworkSettings"
-        }
-      ],
-      "properties": {
+        },
         "changeableIsolationModes": {
           "description": "Detail isolation modes for the managed network of a machine learning workspace.",
           "type": "array",
@@ -3438,7 +3427,7 @@
           }
         },
         "managedNetwork": {
-          "$ref": "#/definitions/ManagedNetworkSettingsEx"
+          "$ref": "#/definitions/ManagedNetworkSettings"
         },
         "mlFlowTrackingUri": {
           "description": "The URI associated with this workspace that machine learning flow must point at to set up tracking.",
@@ -3605,7 +3594,7 @@
           "type": "string"
         },
         "managedNetwork": {
-          "$ref": "#/definitions/ManagedNetworkSettingsEx"
+          "$ref": "#/definitions/ManagedNetworkSettings"
         },
         "primaryUserAssignedIdentity": {
           "description": "The user assigned identity resource id that represents the workspace identity.",
