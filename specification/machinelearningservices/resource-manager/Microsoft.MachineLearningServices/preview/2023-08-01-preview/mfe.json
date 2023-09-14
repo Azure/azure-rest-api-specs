@@ -8977,6 +8977,7 @@
                   {
                       "in": "path",
                       "name": "groupName",
+                      "description": "InferenceGroup name.",
                       "required": true,
                       "type": "string",
                       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
@@ -9078,6 +9079,7 @@
                   {
                       "in": "path",
                       "name": "groupName",
+                      "description": "InferenceGroup name.",
                       "required": true,
                       "type": "string",
                       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
@@ -9169,6 +9171,7 @@
                   {
                       "in": "path",
                       "name": "groupName",
+                      "description": "InferenceGroup name.",
                       "required": true,
                       "type": "string",
                       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
@@ -9238,6 +9241,7 @@
                   {
                       "in": "path",
                       "name": "groupName",
+                      "description": "InferenceGroup name.",
                       "required": true,
                       "type": "string",
                       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
@@ -9338,6 +9342,7 @@
                   {
                       "in": "path",
                       "name": "groupName",
+                      "description": "InferenceGroup name.",
                       "required": true,
                       "type": "string",
                       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
@@ -13427,9 +13432,9 @@
       "ActualInstanceCountInfo": {
           "type": "object",
           "properties": {
-              "acked": {
+              "acknowleged": {
                   "format": "int32",
-                  "description": "Gets or sets the actual number of instances which has ack from container in the group.",
+                  "description": "Gets or sets the actual number of instances which has been acknowleged from container in the group.",
                   "default": 0,
                   "type": "integer"
               },
@@ -20313,11 +20318,13 @@
               "bonusExtraCapacity": {
                   "format": "int32",
                   "description": "Capacity to be used from the pool's reserved capacity.\r\noptional",
+                  "default": 0,
                   "type": "integer"
               },
               "priority": {
                   "format": "int32",
                   "description": "Priority of the group within the N:Microsoft.MachineLearning.ManagementFrontEnd.Contracts.V20230801Preview.Pools.InferencePools.",
+                  "default": 0,
                   "type": "integer"
               },
               "provisioningState": {
