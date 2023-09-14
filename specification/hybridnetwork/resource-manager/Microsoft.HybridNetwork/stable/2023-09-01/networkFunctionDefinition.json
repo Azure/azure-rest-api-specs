@@ -1029,6 +1029,38 @@
           "description": "Helm secret release values.",
           "type": "string",
           "x-ms-secret": true
+        },
+        "options": {
+          "type": "object",
+          "description": "The helm deployment options",
+          "properties": {
+            "installOptions": {
+              "$ref": "#/definitions/HelmDeploymentOptions",
+              "description": "The helm deployment install options"
+            },
+            "upgradeOptions": {
+              "$ref": "#/definitions/HelmDeploymentOptions",
+              "description": "The helm deployment upgrade options"
+            }
+          }
+        }
+      }
+    },
+    "HelmDeploymentOptions": {
+      "type": "object",
+      "description": "The helm deployment install options",
+      "properties": {
+        "atomic": {
+          "type": "string",
+          "description": "The helm deployment atomic options"
+        },
+        "wait": {
+          "type": "string",
+          "description": "The helm deployment wait options"
+        },
+        "timeout": {
+          "type": "string",
+          "description": "The helm deployment timeout options"
         }
       }
     },
