@@ -12399,16 +12399,6 @@
       },
       "additionalProperties": false
     },
-    "AzMonMonitoringAlertNotificationSettings": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/MonitoringAlertNotificationSettingsBase"
-        }
-      ],
-      "x-ms-discriminator-value": "AzureMonitor",
-      "additionalProperties": false
-    },
     "AzureBlobDatastore": {
       "description": "Azure Blob datastore configuration.",
       "type": "object",
@@ -14939,6 +14929,15 @@
           ],
           "x-nullable": true
         },
+        "featureImportanceSettings": {
+          "description": "The settings for computing feature importance.",
+          "$ref": "#/definitions/FeatureImportanceSettings",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
         "features": {
           "description": "The feature filter which identifies which feature to calculate drift over.",
           "$ref": "#/definitions/MonitoringFeatureFilterBase",
@@ -15683,27 +15682,6 @@
       },
       "additionalProperties": false
     },
-    "EmailMonitoringAlertNotificationSettings": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/MonitoringAlertNotificationSettingsBase"
-        }
-      ],
-      "properties": {
-        "emailNotificationSetting": {
-          "description": "Configuration for notification.",
-          "$ref": "#/definitions/NotificationSetting",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ],
-          "x-nullable": true
-        }
-      },
-      "x-ms-discriminator-value": "Email",
-      "additionalProperties": false
-    },
     "EmailNotificationEnableType": {
       "description": "Enum to determine the email notification type.",
       "enum": [
@@ -16444,6 +16422,44 @@
             "value": "Boolean"
           }
         ]
+      },
+      "additionalProperties": false
+    },
+    "FeatureImportanceMode": {
+      "description": "The mode of operation for computing feature importance.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "FeatureImportanceMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Enabled",
+            "description": "Enables computing feature importance within a signal."
+          },
+          {
+            "value": "Disabled",
+            "description": "Disables computing feature importance within a signal."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "FeatureImportanceSettings": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "description": "The mode of operation for computing feature importance.",
+          "$ref": "#/definitions/FeatureImportanceMode"
+        },
+        "targetColumnn": {
+          "description": "The name of the target column within the input data asset.",
+          "type": "string",
+          "x-nullable": true
+        }
       },
       "additionalProperties": false
     },
@@ -17427,7 +17443,7 @@
           "x-ms-identifiers": []
         },
         "productionData": {
-          "description": "Gets or sets the target data for computing metrics.",
+          "description": "Gets or sets the production data for computing metrics.",
           "type": "array",
           "items": {
             "description": "Monitoring input data base definition.",
@@ -17442,7 +17458,7 @@
         },
         "samplingRate": {
           "format": "double",
-          "description": "[Required] The sample rate of the target data, should be greater than 0 and at most 1.",
+          "description": "[Required] The sample rate of the production data, should be greater than 0 and at most 1.",
           "type": "number",
           "x-ms-mutability": [
             "create",
@@ -17462,7 +17478,7 @@
       "x-ms-discriminator-value": "GenerationSafetyQuality",
       "additionalProperties": false
     },
-    "GenerationTokenStatisticsMetric": {
+    "GenerationTokenUsageMetric": {
       "description": "Generation token statistics metric enum.",
       "enum": [
         "TotalTokenCount",
@@ -17470,7 +17486,7 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "GenerationTokenStatisticsMetric",
+        "name": "GenerationTokenUsageMetric",
         "modelAsString": true,
         "values": [
           {
@@ -17483,7 +17499,7 @@
       },
       "additionalProperties": false
     },
-    "GenerationTokenStatisticsMetricThreshold": {
+    "GenerationTokenUsageMetricThreshold": {
       "description": "Generation token statistics metric threshold definition.",
       "required": [
         "metric"
@@ -17492,7 +17508,7 @@
       "properties": {
         "metric": {
           "description": "[Required] Gets or sets the feature attribution metric to calculate.",
-          "$ref": "#/definitions/GenerationTokenStatisticsMetric",
+          "$ref": "#/definitions/GenerationTokenUsageMetric",
           "x-ms-mutability": [
             "create",
             "read"
@@ -17510,8 +17526,8 @@
       },
       "additionalProperties": false
     },
-    "GenerationTokenStatisticsSignal": {
-      "description": "Generation token statistics signal definition.",
+    "GenerationTokenUsageSignal": {
+      "description": "Generation token usage signal definition.",
       "required": [
         "metricThresholds",
         "samplingRate"
@@ -17527,7 +17543,7 @@
           "description": "[Required] Gets or sets the metrics to calculate and the corresponding thresholds.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/GenerationTokenStatisticsMetricThreshold"
+            "$ref": "#/definitions/GenerationTokenUsageMetricThreshold"
           },
           "x-ms-mutability": [
             "create",
@@ -17536,17 +17552,22 @@
           "x-ms-identifiers": []
         },
         "productionData": {
-          "description": "Gets or sets the target data for computing metrics.",
-          "$ref": "#/definitions/MonitoringInputDataBase",
+          "description": "Gets or sets the production data for computing metrics.",
+          "type": "array",
+          "items": {
+            "description": "Monitoring input data base definition.",
+            "$ref": "#/definitions/MonitoringInputDataBase"
+          },
           "x-ms-mutability": [
             "create",
             "read"
           ],
-          "x-nullable": true
+          "x-nullable": true,
+          "x-ms-identifiers": []
         },
         "samplingRate": {
           "format": "double",
-          "description": "[Required] The sample rate of the target data, should be greater than 0 and at most 1.",
+          "description": "[Required] The sample rate of the production data, should be greater than 0 and at most 1.",
           "type": "number",
           "x-ms-mutability": [
             "create",
@@ -20890,9 +20911,9 @@
       ],
       "type": "object",
       "properties": {
-        "alertNotificationSetting": {
+        "alertNotificationSettings": {
           "description": "The monitor's notification settings.",
-          "$ref": "#/definitions/MonitoringAlertNotificationSettingsBase",
+          "$ref": "#/definitions/MonitorNotificationSettings",
           "x-ms-mutability": [
             "create",
             "read"
@@ -20927,6 +20948,21 @@
             "create",
             "read"
           ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "MonitorNotificationSettings": {
+      "type": "object",
+      "properties": {
+        "emailNotificationSettings": {
+          "description": "Configuration for notification.",
+          "$ref": "#/definitions/NotificationSetting",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -20975,45 +21011,6 @@
         }
       },
       "x-ms-discriminator-value": "ServerlessSpark",
-      "additionalProperties": false
-    },
-    "MonitoringAlertNotificationSettingsBase": {
-      "required": [
-        "alertNotificationType"
-      ],
-      "type": "object",
-      "properties": {
-        "alertNotificationType": {
-          "description": "[Required] Specifies the type of signal to monitor.",
-          "$ref": "#/definitions/MonitoringAlertNotificationType",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      },
-      "discriminator": "alertNotificationType"
-    },
-    "MonitoringAlertNotificationType": {
-      "enum": [
-        "AzureMonitor",
-        "Email"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "MonitoringAlertNotificationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "AzureMonitor",
-            "description": "Settings for Azure Monitor based alerting."
-          },
-          {
-            "value": "Email",
-            "description": "Settings for AML email notifications."
-          }
-        ]
-      },
       "additionalProperties": false
     },
     "MonitoringDataSegment": {
@@ -21173,7 +21170,7 @@
       "description": "Monitoring input data type enum.",
       "enum": [
         "Static",
-        "Trailing",
+        "Rolling",
         "Fixed"
       ],
       "type": "string",
@@ -21186,8 +21183,8 @@
             "description": "An input data with a fixed window size."
           },
           {
-            "value": "Trailing",
-            "description": "An input data which trailing relatively to the monitor's current run."
+            "value": "Rolling",
+            "description": "An input data which rolls relatively to the monitor's current run time."
           },
           {
             "value": "Fixed",
@@ -21219,23 +21216,23 @@
       },
       "additionalProperties": false
     },
-    "MonitoringNotificationMode": {
+    "MonitoringNotificationType": {
       "enum": [
-        "Disabled",
-        "Enabled"
+        "AzureMonitor",
+        "AmlNotification"
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "MonitoringNotificationMode",
+        "name": "MonitoringNotificationType",
         "modelAsString": true,
         "values": [
           {
-            "value": "Disabled",
-            "description": "Disabled notifications will not produce emails/metrics leveraged for alerting."
+            "value": "AzureMonitor",
+            "description": "Enables notifications through Azure Monitor by posting metrics to the workspace's Azure Monitor instance."
           },
           {
-            "value": "Enabled",
-            "description": "Enabled notification will produce emails/metrics leveraged for alerting."
+            "value": "AmlNotification",
+            "description": "Enables email notifications through AML notifications."
           }
         ]
       },
@@ -21247,14 +21244,18 @@
       ],
       "type": "object",
       "properties": {
-        "mode": {
+        "notificationTypes": {
           "description": "The current notification mode for this signal.",
-          "default": "Disabled",
-          "$ref": "#/definitions/MonitoringNotificationMode",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitoringNotificationType"
+          },
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true,
+          "x-ms-identifiers": []
         },
         "properties": {
           "description": "Property dictionary. Properties can be added, but not removed or altered.",
@@ -23300,7 +23301,6 @@
     "PredictionDriftMonitoringSignal": {
       "required": [
         "metricThresholds",
-        "modelType",
         "productionData",
         "referenceData"
       ],
@@ -23322,14 +23322,6 @@
             "read"
           ],
           "x-ms-identifiers": []
-        },
-        "modelType": {
-          "description": "[Required] The type of the model monitored.",
-          "$ref": "#/definitions/MonitoringModelType",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
         },
         "productionData": {
           "description": "[Required] The data which drift will be calculated for.",
@@ -24074,6 +24066,50 @@
           "x-nullable": true
         }
       },
+      "additionalProperties": false
+    },
+    "RollingInputData": {
+      "description": "Rolling input data definition.",
+      "required": [
+        "windowOffset",
+        "windowSize"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MonitoringInputDataBase"
+        }
+      ],
+      "properties": {
+        "preprocessingComponentId": {
+          "description": "The ARM resource ID of the component resource used to preprocess the data.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "windowOffset": {
+          "format": "duration",
+          "description": "[Required] The time offset between the end of the data window and the monitor's current run time.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "windowSize": {
+          "format": "duration",
+          "description": "[Required] The size of the trailing data window.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "Rolling",
       "additionalProperties": false
     },
     "RollingRateType": {
@@ -26306,50 +26342,6 @@
         }
       },
       "x-ms-discriminator-value": "TopNByAttribution",
-      "additionalProperties": false
-    },
-    "TrailingInputData": {
-      "description": "Trailing input data definition.",
-      "required": [
-        "windowOffset",
-        "windowSize"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/MonitoringInputDataBase"
-        }
-      ],
-      "properties": {
-        "preprocessingComponentId": {
-          "description": "The ARM resource ID of the component resource used to preprocess the data.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "windowOffset": {
-          "format": "duration",
-          "description": "[Required] The time offset between the end of the data window and the monitor's current run time.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "windowSize": {
-          "format": "duration",
-          "description": "[Required] The size of the trailing data window.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      },
-      "x-ms-discriminator-value": "Trailing",
       "additionalProperties": false
     },
     "TrainingMode": {
