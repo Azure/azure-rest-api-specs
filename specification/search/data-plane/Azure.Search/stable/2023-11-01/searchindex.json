@@ -186,7 +186,8 @@
             "type": "string",
             "enum": [
               "simple",
-              "full"
+              "full",
+              "semantic"
             ],
             "x-ms-enum": {
               "name": "QueryType",
@@ -201,6 +202,11 @@
                   "value": "full",
                   "name": "Full",
                   "description": "Uses the full Lucene query syntax for searches. Search text is interpreted using the Lucene query language which allows field-specific and weighted searches, as well as other advanced features."
+                },
+                {
+                  "value": "semantic",
+                  "name": "Semantic",
+                  "description": "Best suited for queries expressed in natural language as opposed to keywords. Improves precision of search results by re-ranking the top search results using a ranking model trained on the Web corpus."
                 }
               ]
             },
@@ -229,6 +235,113 @@
             "in": "query",
             "type": "string",
             "description": "The name of a scoring profile to evaluate match scores for matching documents in order to sort the results.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "semanticConfiguration",
+            "in": "query",
+            "type": "string",
+            "description": "The name of the semantic configuration that lists which fields should be used for semantic ranking, captions, highlights, and answers",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "semanticErrorHandling",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "partial",
+              "fail"
+            ],
+            "x-ms-enum": {
+              "name": "SemanticErrorHandling",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "partial",
+                  "name": "Partial",
+                  "description": "If the semantic processing fails, partial results still return. The definition of partial results depends on what semantic step failed and what was the reason for failure."
+                },
+                {
+                  "value": "fail",
+                  "name": "Fail",
+                  "description": "If there is an exception during the semantic processing step, the query will fail and return the appropriate HTTP code depending on the error."
+                }
+              ]
+            },
+            "description": "Allows the user to choose whether a semantic call should fail completely, or to return partial results.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "semanticMaxWaitInMilliseconds",
+            "in": "query",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 700,
+            "description": "Allows the user to set an upper bound on the amount of time it takes for semantic enrichment to finish processing before the request fails.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "answers",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "none",
+              "extractive"
+            ],
+            "x-ms-enum": {
+              "name": "Answers",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "none",
+                  "name": "None",
+                  "description": "Do not return answers for the query."
+                },
+                {
+                  "value": "extractive",
+                  "name": "Extractive",
+                  "description": "Extracts answer candidates from the contents of the documents returned in response to a query expressed as a question in natural language."
+                }
+              ]
+            },
+            "description": "This parameter is only valid if the query type is 'semantic'. If set, the query returns answers extracted from key passages in the highest ranked documents. The number of answers returned can be configured by appending the pipe character '|' followed by the 'count-<number of answers>' option after the answers parameter value, such as 'extractive|count-3'. Default count is 1. The confidence threshold can be configured by appending the pipe character '|' followed by the 'threshold-<confidence threshold>' option after the answers parameter value, such as 'extractive|threshold-0.9'. Default threshold is 0.7.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "captions",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "none",
+              "extractive"
+            ],
+            "x-ms-enum": {
+              "name": "Captions",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "none",
+                  "name": "None",
+                  "description": "Do not return captions for the query."
+                },
+                {
+                  "value": "extractive",
+                  "name": "Extractive",
+                  "description": "Extracts captions from the matching documents that contain passages relevant to the search query."
+                }
+              ]
+            },
+            "description": "This parameter is only valid if the query type is 'semantic'. If set, the query returns captions extracted from key passages in the highest ranked documents. When Captions is set to 'extractive', highlighting is enabled by default, and can be configured by appending the pipe character '|' followed by the 'highlight-<true/false>' option, such as 'extractive|highlight-true'. Defaults to 'None'.",
             "x-ms-parameter-grouping": {
               "name": "SearchOptions"
             }
@@ -992,6 +1105,105 @@
       "additionalProperties": true,
       "description": "A single bucket of a facet query result. Reports the number of documents with a field value falling within a particular range or having a particular value or interval."
     },
+    "AnswerResult": {
+      "properties": {
+        "score": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "The score value represents how relevant the answer is to the query relative to other answers returned for the query."
+        },
+        "key": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The key of the document the answer was extracted from."
+        },
+        "text": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The text passage extracted from the document contents as the answer."
+        },
+        "highlights": {
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true,
+          "description": "Same text passage as in the Text property with highlighted text phrases most relevant to the query."
+        }
+      },
+      "additionalProperties": true,
+      "description": "An answer is a text passage extracted from the contents of the most relevant documents that matched the query. Answers are extracted from the top search results. Answer candidates are scored and the top answers are selected."
+    },
+    "CaptionResult": {
+      "properties": {
+        "text": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A representative text passage extracted from the document most relevant to the search query."
+        },
+        "highlights": {
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true,
+          "description": "Same text passage as in the Text property with highlighted phrases most relevant to the query."
+        }
+      },
+      "additionalProperties": true,
+      "description": "Captions are the most representative passages from the document relatively to the search query. They are often used as document summary. Captions are only returned for queries of type 'semantic'.."
+    },
+    "SemanticPartialResponseReason": {
+      "type": "string",
+      "enum": [
+        "maxWaitExceeded",
+        "capacityOverloaded",
+        "transient"
+      ],
+      "x-ms-enum": {
+        "name": "SemanticPartialResponseReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "maxWaitExceeded",
+            "name": "MaxWaitExceeded",
+            "description": "If 'semanticMaxWaitInMilliseconds' was set and the semantic processing duration exceeded that value. Only the base results were returned."
+          },
+          {
+            "value": "capacityOverloaded",
+            "name": "CapacityOverloaded",
+            "description": "The request was throttled. Only the base results were returned."
+          },
+          {
+            "value": "transient",
+            "name": "Transient",
+            "description": "At least one step of the semantic process failed."
+          }
+        ]
+      },
+      "description": "Reason that a partial response was returned for a semantic search request."
+    },
+    "SemanticPartialResponseType": {
+      "type": "string",
+      "enum": [
+        "baseResults",
+        "rerankedResults"
+      ],
+      "x-ms-enum": {
+        "name": "SemanticPartialResponseType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "baseResults",
+            "name": "BaseResults",
+            "description": "Results without any semantic enrichment or reranking."
+          },
+          {
+            "value": "rerankedResults",
+            "name": "RerankedResults",
+            "description": "Results have been reranked with the reranker model and will include semantic captions. They will not include any answers, answers highlights or caption highlights."
+          }
+        ]
+      },
+      "description": "Type of partial response that was returned for a semantic search request."
+    },
     "SearchDocumentsResult": {
       "properties": {
         "@odata.count": {
@@ -1020,11 +1232,33 @@
           "x-ms-client-name": "Facets",
           "description": "The facet query results for the search operation, organized as a collection of buckets for each faceted field; null if the query did not include any facet expressions."
         },
+        "@search.answers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnswerResult"
+          },
+          "readOnly": true,
+          "x-ms-client-name": "Answers",
+          "x-nullable": true,
+          "description": "The answers query results for the search operation; null if the answers query parameter was not specified or set to 'none'."
+        },
         "@search.nextPageParameters": {
           "$ref": "#/definitions/SearchRequest",
           "readOnly": true,
           "x-ms-client-name": "NextPageParameters",
           "description": "Continuation JSON payload returned when Azure Cognitive Search can't return all the requested results in a single Search response. You can use this JSON along with @odata.nextLink to formulate another POST Search request to get the next part of the search response."
+        },
+        "@search.semanticPartialResponseReason": {
+          "$ref": "#/definitions/SemanticPartialResponseReason",
+          "readOnly": true,
+          "x-ms-client-name": "SemanticPartialResponseReason",
+          "description": "Reason that a partial response was returned for a semantic search request."
+        },
+        "@search.semanticPartialResponseType": {
+          "$ref": "#/definitions/SemanticPartialResponseType",
+          "readOnly": true,
+          "x-ms-client-name": "SemanticPartialResponseType",
+          "description": "Type of partial response that was returned for a semantic search request."
         },
         "value": {
           "type": "array",
@@ -1057,6 +1291,14 @@
           "x-nullable": false,
           "description": "The relevance score of the document compared to other documents returned by the query."
         },
+        "@search.rerankerScore": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "x-ms-client-name": "RerankerScore",
+          "x-nullable": true,
+          "description": "The relevance score computed by the semantic ranker for the top search results. Search results are sorted by the RerankerScore first and then by the Score. RerankerScore is only returned for queries of type 'semantic'."
+        },
         "@search.highlights": {
           "type": "object",
           "additionalProperties": {
@@ -1068,6 +1310,16 @@
           "readOnly": true,
           "x-ms-client-name": "Highlights",
           "description": "Text fragments from the document that indicate the matching search terms, organized by each applicable field; null if hit highlighting was not enabled for the query."
+        },
+        "@search.captions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CaptionResult"
+          },
+          "readOnly": true,
+          "x-ms-client-name": "Captions",
+          "x-nullable": true,
+          "description": "Captions are the most representative passages from the document relatively to the search query. They are often used as document summary. Captions are only returned for queries of type 'semantic'."
         }
       },
       "required": [
@@ -1187,6 +1439,30 @@
       ],
       "description": "Response containing the status of operations for all documents in the indexing request."
     },
+    "SemanticErrorHandling": {
+      "type": "string",
+      "enum": [
+        "partial",
+        "fail"
+      ],
+      "x-ms-enum": {
+        "name": "SemanticErrorHandling",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "partial",
+            "name": "Partial",
+            "description": "If the semantic processing fails, partial results still return. The definition of partial results depends on what semantic step failed and what was the reason for failure."
+          },
+          {
+            "value": "fail",
+            "name": "Fail",
+            "description": "If there is an exception during the semantic processing step, the query will fail and return the appropriate HTTP code depending on the error."
+          }
+        ]
+      },
+      "description": "Allows the user to choose whether a semantic call should fail completely, or to return partial results."
+    },
     "SearchMode": {
       "type": "string",
       "enum": [
@@ -1215,7 +1491,8 @@
       "type": "string",
       "enum": [
         "simple",
-        "full"
+        "full",
+        "semantic"
       ],
       "x-ms-enum": {
         "name": "QueryType",
@@ -1230,10 +1507,63 @@
             "value": "full",
             "name": "Full",
             "description": "Uses the full Lucene query syntax for searches. Search text is interpreted using the Lucene query language which allows field-specific and weighted searches, as well as other advanced features."
+          },
+          {
+            "value": "semantic",
+            "name": "Semantic",
+            "description": "Best suited for queries expressed in natural language as opposed to keywords. Improves precision of search results by re-ranking the top search results using a ranking model trained on the Web corpus."
           }
         ]
       },
       "description": "Specifies the syntax of the search query. The default is 'simple'. Use 'full' if your query uses the Lucene query syntax."
+    },
+    "Answers": {
+      "type": "string",
+      "enum": [
+        "none",
+        "extractive"
+      ],
+      "x-ms-enum": {
+        "name": "QueryAnswerType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "none",
+            "name": "None",
+            "description": "Do not return answers for the query."
+          },
+          {
+            "value": "extractive",
+            "name": "Extractive",
+            "description": "Extracts answer candidates from the contents of the documents returned in response to a query expressed as a question in natural language."
+          }
+        ]
+      },
+      "description": "This parameter is only valid if the query type is 'semantic'. If set, the query returns answers extracted from key passages in the highest ranked documents. The number of answers returned can be configured by appending the pipe character '|' followed by the 'count-<number of answers>' option after the answers parameter value, such as 'extractive|count-3'. Default count is 1. The confidence threshold can be configured by appending the pipe character '|' followed by the 'threshold-<confidence threshold>' option after the answers parameter value, such as 'extractive|threshold-0.9'. Default threshold is 0.7."
+    },
+    "Captions": {
+      "type": "string",
+      "enum": [
+        "none",
+        "extractive"
+      ],
+      "x-ms-enum": {
+        "name": "QueryCaptionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "none",
+            "name": "None",
+            "description": "Do not return captions for the query."
+          },
+          {
+            "value": "extractive",
+            "name": "Extractive",
+            "description": "Extracts captions from the matching documents that contain passages relevant to the search query."
+          }
+        ]
+      },
+      "description": "This parameter is only valid if the query type is 'semantic'. If set, the query returns captions extracted from key passages in the highest ranked documents. When Captions is set to 'extractive', highlighting is enabled by default, and can be configured by appending the pipe character '|' followed by the 'highlight-<true/false>' option, such as 'extractive|highlight-true'. Defaults to 'None'."
     },
     "ScoringStatistics": {
       "type": "string",
@@ -1358,6 +1688,29 @@
         "scoringProfile": {
           "type": "string",
           "description": "The name of a scoring profile to evaluate match scores for matching documents in order to sort the results."
+        },
+        "semanticConfiguration": {
+          "type": "string",
+          "description": "The name of a semantic configuration that will be used when processing documents for queries of type semantic."
+        },
+        "semanticErrorHandling": {
+          "$ref": "#/definitions/SemanticErrorHandling",
+          "description": "Allows the user to choose whether a semantic call should fail completely (default / current behavior), or to return partial results."
+        },
+        "semanticMaxWaitInMilliseconds": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true,
+          "minimum": 700,
+          "description": "Allows the user to set an upper bound on the amount of time it takes for semantic enrichment to finish processing before the request fails."
+        },
+        "answers": {
+          "$ref": "#/definitions/Answers",
+          "description": "A value that specifies whether answers should be returned as part of the search response."
+        },
+        "captions": {
+          "$ref": "#/definitions/Captions",
+          "description": "A value that specifies whether captions should be returned as part of the search response."
         },
         "search": {
           "type": "string",
