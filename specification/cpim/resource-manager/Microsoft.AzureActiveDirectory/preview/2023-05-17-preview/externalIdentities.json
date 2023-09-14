@@ -3,7 +3,7 @@
   "info": {
     "title": "ExternalIdentities",
     "version": "2023-05-17-preview",
-    "description": "Manage the Azure resource for an Azure Active Directory B2C tenant, Guest Usages, and Microsoft Entra ID for customers resource for External Identities in Microsoft Entra"
+    "description": "Manage the Azure resource for an Azure Active Directory B2C tenant, Guest Usages, and Azure AD for customers resource for External Identities in Azure AD"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -27,7 +27,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Microsoft Entra ID OAuth2 Flow",
+      "description": "Azure Active Directory OAuth2 Flow",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -420,7 +420,7 @@
           }
         },
         "summary": "Creates a Guest Usages resource",
-        "description": "Creates a Guest Usages resource, which is used to linking a subscription to an instance of Microsoft Entra External ID. [Learn more](https://aka.ms/extidbilling).",
+        "description": "Creates a Guest Usages resource, which is used to linking a subscription to an instance of Azure AD External Identities. [Learn more](https://aka.ms/extidbilling).",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -675,7 +675,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureActiveDirectory/ciamDirectories": {
       "get": {
-        "description": "Get all the Microsoft Entra ID for customers tenants resources in a resource group.",
+        "description": "Get all the Azure AD for customers tenants resources in a resource group.",
         "operationId": "CIAMTenants_ListByResourceGroup",
         "tags": [
           "CIAMTenants"
@@ -698,7 +698,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of Microsoft Entra ID for customers tenants in resource group successfully retrieved.",
+            "description": "List of Azure AD for customers tenants in resource group successfully retrieved.",
             "schema": {
               "$ref": "#/definitions/CIAMTenantResourceList"
             }
@@ -717,7 +717,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureActiveDirectory/ciamDirectories": {
       "get": {
-        "description": "Get all the Microsoft Entra ID for customers tenant resources in a subscription.",
+        "description": "Get all the Azure AD for customers tenant resources in a subscription.",
         "operationId": "CIAMTenants_ListBySubscription",
         "tags": [
           "CIAMTenants"
@@ -737,7 +737,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Microsoft Entra ID for customers tenant resources in subscription successfully retrieved.",
+            "description": "Azure AD for customers tenant resources in subscription successfully retrieved.",
             "schema": {
               "$ref": "#/definitions/CIAMTenantResourceList"
             }
@@ -756,7 +756,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureActiveDirectory/ciamDirectories/{resourceName}": {
       "get": {
-        "description": "Get the Microsoft Entra ID for customers tenant resource.",
+        "description": "Get the Azure AD for customers tenant resource.",
         "operationId": "CIAMTenants_Get",
         "tags": [
           "CIAMTenants"
@@ -782,7 +782,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Microsoft Entra ID for customers tenant resource successfully retrieved.",
+            "description": "Azure AD for customers tenant resource successfully retrieved.",
             "schema": {
               "$ref": "#/definitions/CIAMTenantResource"
             }
@@ -797,7 +797,7 @@
       },
       "put": {
         "operationId": "CIAMTenants_Create",
-        "description": "Initiates an async request to create both the Microsoft Entra ID for customers tenant and the corresponding Azure resource linked to a subscription. Note: Please check name availability before creating a new tenant",
+        "description": "Initiates an async request to create both the Azure AD for customers tenant and the corresponding Azure resource linked to a subscription. Note: Please check name availability before creating a new tenant",
         "x-ms-examples": {
           "Create_CIAM_tenant": {
             "$ref": "./examples/CIAM/createCIAMTenant.json"
@@ -821,7 +821,7 @@
           },
           {
             "name": "createCIAMTenantRequestBody",
-            "description": "Request body to create an Microsoft Entra ID for customers tenant",
+            "description": "Request body to create an Azure AD for customers tenant",
             "in": "body",
             "required": true,
             "schema": {
@@ -831,13 +831,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Successfully updated an existing Microsoft Entra ID for customers tenant resource.",
+            "description": "OK - Successfully updated an existing Azure AD for customers tenant resource.",
             "schema": {
               "$ref": "#/definitions/CIAMTenantResource"
             }
           },
           "201": {
-            "description": "Microsoft Entra ID for customers tenant create request was successfully started and will complete asynchronously.",
+            "description": "Azure AD for customers tenant create request was successfully started and will complete asynchronously.",
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
@@ -865,7 +865,7 @@
         }
       },
       "patch": {
-        "description": "Update the Microsoft Entra ID for customers tenant resource.",
+        "description": "Update the Azure AD for customers tenant resource.",
         "operationId": "CIAMTenants_Update",
         "tags": [
           "CIAMTenants"
@@ -890,7 +890,7 @@
           },
           {
             "name": "updateCIAMTenantRequestBody",
-            "description": "Request body to update Microsoft Entra ID for customers tenant resource.",
+            "description": "Request body to update Azure AD for customers tenant resource.",
             "in": "body",
             "schema": {
               "$ref": "#/definitions/CIAMTenantUpdateRequest"
@@ -899,7 +899,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Updated the Microsoft Entra ID for customers tenant resource.",
+            "description": "Updated the Azure AD for customers tenant resource.",
             "schema": {
               "$ref": "#/definitions/CIAMTenantResource"
             }
@@ -914,7 +914,7 @@
       },
       "delete": {
         "operationId": "CIAMTenants_Delete",
-        "description": "Initiates an async operation to delete the Microsoft Entra ID for customers tenant and Azure resource. The resource deletion can only happen as the last step in [the tenant deletion process](https://aka.ms/delete-ciam-tenant). ",
+        "description": "Initiates an async operation to delete the Azure AD for customers tenant and Azure resource. The resource deletion can only happen as the last step in [the tenant deletion process](https://aka.ms/delete-ciam-tenant). ",
         "x-ms-examples": {
           "Delete_CIAM_tenant": {
             "$ref": "./examples/CIAM/deleteCIAMTenant.json"
@@ -956,7 +956,7 @@
             }
           },
           "204": {
-            "description": "NoContent - Microsoft Entra ID for customers tenant resource successfully deleted or didn't exist."
+            "description": "NoContent - Azure AD for customers tenant resource successfully deleted or didn't exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1443,11 +1443,11 @@
       }
     },
     "CIAMTenantResourceList": {
-      "description": "The collection of Microsoft Entra ID for customers tenant resources",
+      "description": "The collection of Azure AD for customers tenant resources",
       "type": "object",
       "properties": {
         "value": {
-          "description": "List of Microsoft Entra ID for customers tenant resources",
+          "description": "List of Azure AD for customers tenant resources",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -1455,7 +1455,7 @@
           }
         },
         "nextLink": {
-          "description": "The URL to get the next set of Microsoft Entra ID for customers tenant resources.",
+          "description": "The URL to get the next set of Azure AD for customers tenant resources.",
           "type": "string",
           "readOnly": true,
           "x-nullable": true
@@ -1464,7 +1464,7 @@
     },
     "CreateCIAMTenantProperties": {
       "type": "object",
-      "description": "These properties are used to create the Microsoft Entra ID for customers tenant. These properties are not part of the Azure resource.",
+      "description": "These properties are used to create the Azure AD for customers tenant. These properties are not part of the Azure resource.",
       "required": [
         "displayName",
         "countryCode"
@@ -1476,7 +1476,7 @@
       "x-ms-client-flatten": true,
       "properties": {
         "displayName": {
-          "description": "The display name of the Microsoft Entra ID for customers tenant.",
+          "description": "The display name of the Azure AD for customers tenant.",
           "type": "string",
           "x-ms-mutability": [
             "create",
@@ -1494,7 +1494,7 @@
       }
     },
     "CIAMResourceSKU": {
-      "description": "SKU properties of the Microsoft Entra ID for customers tenant. Learn more about Microsoft Entra ID for customers billing at [https://aka.ms/ciambilling](https://aka.ms/ciambilling).",
+      "description": "SKU properties of the Azure AD for customers tenant. Learn more about Azure AD for customers billing at [https://aka.ms/ciambilling](https://aka.ms/ciambilling).",
       "type": "object",
       "required": [
         "name",
@@ -1531,7 +1531,7 @@
             "values": [
               {
                 "value": "A0",
-                "description": "The SKU tier used for all Microsoft Entra ID for customers tenants."
+                "description": "The SKU tier used for all Azure AD for customers tenants."
               }
             ]
           }
@@ -1539,7 +1539,7 @@
       }
     },
     "CIAMTenantResourceProperties": {
-      "description": "Properties of the Microsoft Entra ID for customers tenant Azure resource.",
+      "description": "Properties of the Azure AD for customers tenant Azure resource.",
       "type": "object",
       "required": [
         "createTenantProperties"
@@ -1565,7 +1565,7 @@
             "billingType": {
               "type": "string",
               "readOnly": true,
-              "description": "The type of billing. Will be MAU for all new customers. Cannot be changed if value is 'MAU'. Learn more about Microsoft Entra ID for customers billing at [aka.ms/b2cBilling](https://aka.ms/b2cbilling).",
+              "description": "The type of billing. Will be MAU for all new customers. Cannot be changed if value is 'MAU'. Learn more about Azure AD for customers billing at [aka.ms/b2cBilling](https://aka.ms/b2cbilling).",
               "enum": [
                 "MAU"
               ],
@@ -1575,7 +1575,7 @@
                 "values": [
                   {
                     "value": "MAU",
-                    "description": "Microsoft Entra ID for customers usage is billed to a linked Azure subscription and uses a monthly active users (MAU) billing model."
+                    "description": "Azure AD for customers usage is billed to a linked Azure subscription and uses a monthly active users (MAU) billing model."
                   }
                 ]
               }
@@ -1589,7 +1589,7 @@
         },
         "tenantId": {
           "type": "string",
-          "description": "An identifier of the Microsoft Entra ID for customers tenant.",
+          "description": "An identifier of the Azure AD for customers tenant.",
           "x-ms-mutability": [
             "create",
             "read"
@@ -1599,7 +1599,7 @@
     },
     "CIAMTenantUpdateRequest": {
       "type": "object",
-      "description": "The request body to update the Microsoft Entra ID for customers tenant resource.",
+      "description": "The request body to update the Azure AD for customers tenant resource.",
       "properties": {
         "sku": {
           "$ref": "#/definitions/CIAMResourceSKU"
@@ -1665,7 +1665,7 @@
     },
     "CIAMTenantResource": {
       "type": "object",
-      "description": "The Microsoft Entra ID for customers resource.",
+      "description": "The Azure AD for customers resource.",
       "required": [
         "location",
         "sku",
@@ -1676,16 +1676,16 @@
         "id": {
           "type": "string",
           "readOnly": true,
-          "description": "An identifier that represents the Microsoft Entra ID for customers tenant resource."
+          "description": "An identifier that represents the Azure AD for customers tenant resource."
         },
         "name": {
           "type": "string",
           "readOnly": true,
-          "description": "The name of the Microsoft Entra ID for customers tenant resource."
+          "description": "The name of the Azure AD for customers tenant resource."
         },
         "type": {
           "type": "string",
-          "description": "The type of the Microsoft Entra ID for customers tenant resource.",
+          "description": "The type of the Azure AD for customers tenant resource.",
           "readOnly": true,
           "enum": [
             "Microsoft.AzureActiveDirectory/ciamDirectories"
@@ -1696,7 +1696,7 @@
             "values": [
               {
                 "value": "Microsoft.AzureActiveDirectory/ciamDirectories",
-                "description": "The resource type for Microsoft Entra ID for customers tenant resource."
+                "description": "The resource type for Azure AD for customers tenant resource."
               }
             ]
           }
@@ -1737,7 +1737,7 @@
         "properties": {
           "$ref": "#/definitions/CIAMTenantResourceProperties",
           "x-ms-client-flatten": true,
-          "description": "The Microsoft Entra ID for customers tenant resource properties"
+          "description": "The Azure AD for customers tenant resource properties"
         },
         "tags": {
           "type": "object",
