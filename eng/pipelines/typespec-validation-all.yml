@@ -35,25 +35,14 @@ jobs:
     vmImage: $(OSVmImage)
 
   steps:
-  - script: git -c user.name="azure-sdk" -c user.email="azuresdk@microsoft.com" merge origin/main
-    displayName: git merge origin/main
-
-  # Remove lockfile to update all packages to latest "next" version
-  - script: rm package-lock.json
-    displayName: rm package-lock.json
-
   - script: npm --version --loglevel info
     displayName: npm --version
 
-  - script: npm install
-    displayName: npm install
+  - script: npm ci
+    displayName: npm ci
 
   - script: npm ls -a
     displayName: npm ls -a
-    condition: succeededOrFailed()
-
-  - script: git restore package-lock.json
-    displayName: Revert package-lock.json
     condition: succeededOrFailed()
 
   - pwsh: |
