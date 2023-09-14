@@ -39,33 +39,7 @@
         },
         "properties": {
           "description": "properties in the resource payload of the resource whose availability status has been impacted",
-          "$ref": "#/definitions/ResourcePayloadForAvailabilityStatusChangedEvent"
-        }
-      }
-    },
-    "ResourcePayloadForAvailabilityStatusChangedEvent": {
-      "description": "details of the properties bag of the resource whose availability status has been influenced",
-      "type": "object",
-      "properties": {
-        "targetResourceId": {
-          "description": "the base resource for which the availability status information is being requested",
-          "type": "string"
-        },
-        "targetResourceType": {
-          "description": "the type of the base resource",
-          "type": "string"
-        },
-        "occurredTime": {
-          "description": "The time of the actual event emission by Geneva Health",
-          "type": "string"
-        },
-        "previousAvailabilityState": {
-          "description": "previous availability status of the base resource",
-          "type": "string"
-        },
-        "availabilityState": {
-          "description": "current availability status of the base resource",
-          "type": "string"
+          "type": "object"
         }
       }
     },
@@ -101,45 +75,7 @@
         },
         "properties": {
           "description": "properties in the resource payload of the resource whose availability status has been impacted",
-          "$ref": "#/definitions/ResourcePayloadForResourceAnnotatedEvent"
-        }
-      }
-    },
-    "ResourceInfoAboutResourceAnnotatedEvent": {
-      "description": "Properties bag of the base resource for which the annotation event is being emitted",
-      "type": "object",
-      "properties": {
-        "targetResourceId": {
-          "description": "the base resource for which the resource annotation event is being requested",
-          "type": "string"
-        },
-        "targetResourceType": {
-          "description": "the type of the base resource for which the annotation event is being emitted",
-          "type": "string"
-        },
-        "occurredTime": {
-          "description": "The time of the actual annotation event emission by Geneva Health",
-          "type": "string"
-        },
-        "annotationName": {
-          "description": "The name of the annotation event being emitted. refer - https://learn.microsoft.com/en-us/azure/service-health/resource-health-vm-annotation",
-          "type": "string"
-        },
-        "reason": {
-          "description": "Brief statement on why the resource availability was changed",
-          "type": "string"
-        },
-        "summary": {
-          "description": "Detailed statement on the cause for change in the resource availability",
-          "type": "string"
-        },
-        "context": {
-          "description": "Indicates whether resource availability was influenced by Azure or User activity",
-          "type": "string"
-        },
-        "category": {
-          "description": "Indicates whether resource availability was influenced due to planned or unplanned activity. This is only applicable for platform initiated events",
-          "type": "string"
+          "type": "object"
         }
       }
     }
