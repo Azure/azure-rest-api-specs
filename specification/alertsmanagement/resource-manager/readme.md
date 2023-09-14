@@ -35,6 +35,10 @@ directive:
     reason: The rule applied incorrectly to base class.
     where:
       - $.definitions.ManagedResource
+  - suppress: TopLevelResourcesListBySubscription
+    reason: The list by scope includes also list by subscription.
+    where:
+      - $.definitions.ManagedResource
 ```
 
 ``` yaml
