@@ -28,10 +28,6 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-// @@internal(Azure.Messaging.EventGrid.PublishBatchOfCloudEvents);
-// @@internal(Azure.Messaging.EventGrid.PublishCloudEvent);
-// @@internal(Azure.Messaging.EventGrid.ReceiveBatchOfCloudEvents);
-
 @@usage(EventGrid.ApiManagementUserCreatedEventData, Usage.output);
 @@access(EventGrid.ApiManagementUserCreatedEventData, Access.public);
 @@usage(EventGrid.ApiManagementUserUpdatedEventData, Usage.output);
