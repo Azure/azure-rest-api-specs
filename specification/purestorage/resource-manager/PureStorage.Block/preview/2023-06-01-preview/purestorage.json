@@ -1181,93 +1181,6 @@
         }
       }
     },
-    "LiftrBase.Address": {
-      "type": "object",
-      "description": "Address details.",
-      "properties": {
-        "addressLine1": {
-          "type": "string",
-          "description": "Address line 1"
-        },
-        "addressLine2": {
-          "type": "string",
-          "description": "Address line 2"
-        },
-        "city": {
-          "type": "string",
-          "description": "Name of the city"
-        },
-        "state": {
-          "type": "string",
-          "description": "Name of the state"
-        },
-        "country": {
-          "type": "string",
-          "description": "Name of the country"
-        },
-        "postalCode": {
-          "type": "string",
-          "description": "Postal code"
-        }
-      },
-      "required": [
-        "addressLine1",
-        "city",
-        "state",
-        "country",
-        "postalCode"
-      ]
-    },
-    "LiftrBase.AddressUpdate": {
-      "type": "object",
-      "description": "Address details.",
-      "properties": {
-        "addressLine1": {
-          "type": "string",
-          "description": "Address line 1"
-        },
-        "addressLine2": {
-          "type": "string",
-          "description": "Address line 2"
-        },
-        "city": {
-          "type": "string",
-          "description": "Name of the city"
-        },
-        "state": {
-          "type": "string",
-          "description": "Name of the state"
-        },
-        "country": {
-          "type": "string",
-          "description": "Name of the country"
-        },
-        "postalCode": {
-          "type": "string",
-          "description": "Postal code"
-        }
-      }
-    },
-    "LiftrBase.CompanyDetails": {
-      "type": "object",
-      "description": "Company details.",
-      "properties": {
-        "address": {
-          "$ref": "#/definitions/LiftrBase.Address",
-          "description": "Company address."
-        }
-      }
-    },
-    "LiftrBase.CompanyDetailsUpdate": {
-      "type": "object",
-      "description": "Company details.",
-      "properties": {
-        "address": {
-          "$ref": "#/definitions/LiftrBase.AddressUpdate",
-          "description": "Company address."
-        }
-      }
-    },
     "LiftrBase.MarketplaceDetails": {
       "type": "object",
       "description": "Marketplace details of a resource.",
@@ -1454,10 +1367,6 @@
         "phoneNumber": {
           "type": "string",
           "description": "User's phone number"
-        },
-        "companyDetails": {
-          "$ref": "#/definitions/LiftrBase.CompanyDetails",
-          "description": "User's company details"
         }
       },
       "required": [
@@ -1489,10 +1398,6 @@
         "phoneNumber": {
           "type": "string",
           "description": "User's phone number"
-        },
-        "companyDetails": {
-          "$ref": "#/definitions/LiftrBase.CompanyDetailsUpdate",
-          "description": "User's company details"
         }
       }
     },
