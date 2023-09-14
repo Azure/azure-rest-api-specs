@@ -446,9 +446,13 @@
               "environment",
               "deployment"
             ],
+            "x-ms-enum": {
+              "name": "MetadataAssignmentEntity",
+              "modelAsString": true
+            },
             "in": "query",
             "required": true,
-            "description": "The API catalog entity the metadata schema is requested for."
+            "description": "An entity the metadata schema is requested for."
           }
         ],
         "responses": {
@@ -2283,33 +2287,7 @@
           ],
           "x-ms-enum": {
             "name": "ApiType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "rest",
-                "description": "REST"
-              },
-              {
-                "value": "graphql",
-                "description": "GraphQL"
-              },
-              {
-                "value": "grpc",
-                "description": "gRPC"
-              },
-              {
-                "value": "soap",
-                "description": "SOAP"
-              },
-              {
-                "value": "webhook",
-                "description": "Webhook"
-              },
-              {
-                "value": "websocket",
-                "description": "WebSocket"
-              }
-            ]
+            "modelAsString": true
           },
           "example": "graphql"
         },
@@ -2534,8 +2512,9 @@
       ]
     },
     "EnvironmentProperties": {
-      "title": "Environment entity properties",
       "type": "object",
+      "title": "Environment entity properties",
+      "description": "Environment properties entity.",
       "properties": {
         "title": {
           "type": "string",
@@ -2556,6 +2535,10 @@
             "staging",
             "production"
           ],
+          "x-ms-enum": {
+            "name": "EnvironmentType",
+            "modelAsString": true
+          },
           "example": "production"
         },
         "server": {
@@ -2567,8 +2550,7 @@
         "customProperties": {
           "$ref": "#/definitions/CustomProperties"
         }
-      },
-      "description": "Environment properties entity."
+      }
     },
     "EnvironmentCollection": {
       "type": "object",
@@ -2794,6 +2776,10 @@
         "deprecated",
         "retired"
       ],
+      "x-ms-enum": {
+        "name": "LifecycleStage",
+        "modelAsString": true
+      },
       "example": "development"
     },
     "TermsOfService": {
@@ -2914,6 +2900,10 @@
             "Kubernetes",
             "MuleSoft API Management"
           ],
+          "x-ms-enum": {
+            "name": "EnvironmentServerType",
+            "modelAsString": true
+          },
           "example": "Azure API Management"
         },
         "managementPortalUri": {
@@ -2951,7 +2941,11 @@
       "enum": [
         "active",
         "inactive"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentState",
+        "modelAsString": true
+      }
     },
     "Onboarding": {
       "properties": {
@@ -2982,6 +2976,10 @@
             "deployment",
             "environment"
           ],
+          "x-ms-enum": {
+            "name": "MetadataAssignmentEntity",
+            "modelAsString": true
+          },
           "example": "api"
         },
         "required": {
