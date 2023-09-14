@@ -8790,8 +8790,65 @@
                       }
                   }
               },
+              "x-ms-examples": {
+                  "ListSkus Workspace Inference Pool.": {
+                      "$ref": "./examples/Workspace/InferencePool/listSkus.json"
+                  }
+              },
               "x-ms-pageable": {
                   "nextLinkName": "nextLink"
+              }
+          }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{name}/status": {
+          "post": {
+              "tags": [
+                  "InferencePool"
+              ],
+              "summary": "Retrieve inference group status.",
+              "operationId": "InferencePools_GetStatus",
+              "produces": [
+                  "application/json"
+              ],
+              "parameters": [
+                  {
+                      "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+                  },
+                  {
+                      "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+                  },
+                  {
+                      "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+                  },
+                  {
+                      "in": "path",
+                      "name": "name",
+                      "description": "InferencePool name.",
+                      "required": true,
+                      "type": "string"
+                  },
+                  {
+                      "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "Success",
+                      "schema": {
+                          "$ref": "#/definitions/PoolStatus"
+                      }
+                  },
+                  "default": {
+                      "description": "Error",
+                      "schema": {
+                          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                      }
+                  }
+              },
+              "x-ms-examples": {
+                  "GetStatus Workspace Inference Pool.": {
+                      "$ref": "./examples/Workspace/InferencePool/getStatus.json"
+                  }
               }
           }
       },
@@ -8894,7 +8951,7 @@
               "tags": [
                   "InferenceEndpoint"
               ],
-              "summary": "List Inference Groups.",
+              "summary": "List Inference Endpoints.",
               "operationId": "InferenceEndpoints_List",
               "produces": [
                   "application/json"
@@ -9348,144 +9405,6 @@
               }
           }
       },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/endpoints/{version}": {
-          "delete": {
-              "tags": [
-                  "InferenceEndpoint"
-              ],
-              "summary": "Delete version.",
-              "operationId": "InferenceEndpoints_Delete",
-              "produces": [
-                  "application/json"
-              ],
-              "parameters": [
-                  {
-                      "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-                  },
-                  {
-                      "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-                  },
-                  {
-                      "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-                  },
-                  {
-                      "in": "path",
-                      "name": "poolName",
-                      "required": true,
-                      "type": "string"
-                  },
-                  {
-                      "in": "path",
-                      "name": "groupName",
-                      "required": true,
-                      "type": "string"
-                  },
-                  {
-                      "in": "path",
-                      "name": "version",
-                      "description": "Version identifier.",
-                      "required": true,
-                      "type": "string"
-                  },
-                  {
-                      "in": "query",
-                      "name": "name",
-                      "description": "Container name.",
-                      "type": "string"
-                  },
-                  {
-                      "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-                  }
-              ],
-              "responses": {
-                  "200": {
-                      "description": "Success"
-                  },
-                  "204": {
-                      "description": "No Content"
-                  },
-                  "default": {
-                      "description": "Error",
-                      "schema": {
-                          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-                      }
-                  }
-              },
-              "x-ms-examples": {
-                  "Delete Workspace Inference Endpoint.": {
-                      "$ref": "./examples/Workspace/InferenceEndpoint/delete.json"
-                  }
-              }
-          },
-          "get": {
-              "tags": [
-                  "InferenceEndpoint"
-              ],
-              "summary": "Get version.",
-              "operationId": "InferenceEndpoints_Get",
-              "produces": [
-                  "application/json"
-              ],
-              "parameters": [
-                  {
-                      "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-                  },
-                  {
-                      "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-                  },
-                  {
-                      "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-                  },
-                  {
-                      "in": "path",
-                      "name": "poolName",
-                      "required": true,
-                      "type": "string"
-                  },
-                  {
-                      "in": "path",
-                      "name": "groupName",
-                      "required": true,
-                      "type": "string"
-                  },
-                  {
-                      "in": "path",
-                      "name": "version",
-                      "description": "Version identifier.",
-                      "required": true,
-                      "type": "string"
-                  },
-                  {
-                      "in": "query",
-                      "name": "name",
-                      "description": "Container name.",
-                      "type": "string"
-                  },
-                  {
-                      "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-                  }
-              ],
-              "responses": {
-                  "200": {
-                      "description": "Success",
-                      "schema": {
-                          "$ref": "#/definitions/InferenceEndpointResource"
-                      }
-                  },
-                  "default": {
-                      "description": "Error",
-                      "schema": {
-                          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-                      }
-                  }
-              },
-              "x-ms-examples": {
-                  "Get Workspace Inference Endpoint.": {
-                      "$ref": "./examples/Workspace/InferenceEndpoint/get.json"
-                  }
-              }
-          }
-      },
       "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{name}": {
           "delete": {
               "tags": [
@@ -9876,8 +9795,72 @@
                       }
                   }
               },
+              "x-ms-examples": {
+                  "ListSkus Workspace Inference Group.": {
+                      "$ref": "./examples/Workspace/InferenceGroup/listSkus.json"
+                  }
+              },
               "x-ms-pageable": {
                   "nextLinkName": "nextLink"
+              }
+          }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{name}/status": {
+          "post": {
+              "tags": [
+                  "InferenceGroup"
+              ],
+              "summary": "Retrieve inference group status.",
+              "operationId": "InferenceGroups_GetStatus",
+              "produces": [
+                  "application/json"
+              ],
+              "parameters": [
+                  {
+                      "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+                  },
+                  {
+                      "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+                  },
+                  {
+                      "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+                  },
+                  {
+                      "in": "path",
+                      "name": "poolName",
+                      "description": "InferencePool name.",
+                      "required": true,
+                      "type": "string"
+                  },
+                  {
+                      "in": "path",
+                      "name": "name",
+                      "description": "InferenceGroup name.",
+                      "required": true,
+                      "type": "string"
+                  },
+                  {
+                      "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "Success",
+                      "schema": {
+                          "$ref": "#/definitions/GroupStatus"
+                      }
+                  },
+                  "default": {
+                      "description": "Error",
+                      "schema": {
+                          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                      }
+                  }
+              },
+              "x-ms-examples": {
+                  "GetStatus Workspace Inference Group.": {
+                      "$ref": "./examples/Workspace/InferenceGroup/getStatus.json"
+                  }
               }
           }
       },
@@ -13439,6 +13422,24 @@
               }
           },
           "x-ms-discriminator-value": "AccountKey",
+          "additionalProperties": false
+      },
+      "ActualInstanceCountInfo": {
+          "type": "object",
+          "properties": {
+              "acked": {
+                  "format": "int32",
+                  "description": "Gets or sets the actual number of instances which has ack from container in the group.",
+                  "default": 0,
+                  "type": "integer"
+              },
+              "total": {
+                  "format": "int32",
+                  "description": "Gets or sets the request number of instances for the group.",
+                  "default": 0,
+                  "type": "integer"
+              }
+          },
           "additionalProperties": false
       },
       "AllFeatures": {
@@ -19135,6 +19136,37 @@
           "x-ms-discriminator-value": "Grid",
           "additionalProperties": false
       },
+      "GroupStatus": {
+          "type": "object",
+          "properties": {
+              "actualInstanceCountInfo": {
+                  "description": "Gets or sets the actual number of instances for the group.",
+                  "$ref": "#/definitions/ActualInstanceCountInfo",
+                  "x-nullable": true
+              },
+              "endpointCount": {
+                  "format": "int32",
+                  "description": "Gets or sets the actual number of endpoints in the group.",
+                  "default": 0,
+                  "type": "integer"
+              },
+              "eventLog": {
+                  "description": "Gets or sets event log for inference group.",
+                  "type": "array",
+                  "items": {
+                      "type": "object"
+                  },
+                  "x-nullable": true
+              },
+              "requestedInstanceCount": {
+                  "format": "int32",
+                  "description": "Gets or sets the request number of instances for the group.",
+                  "default": 0,
+                  "type": "integer"
+              }
+          },
+          "additionalProperties": false
+      },
       "HdfsDatastore": {
           "required": [
               "nameNodeAddress"
@@ -20219,26 +20251,6 @@
           "x-ms-client-name": "InferenceEndpointProperties",
           "additionalProperties": false
       },
-      "InferenceEndpointResource": {
-          "description": "Azure Resource Manager resource envelope.",
-          "required": [
-              "properties"
-          ],
-          "type": "object",
-          "allOf": [
-              {
-                  "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
-              }
-          ],
-          "properties": {
-              "properties": {
-                  "description": "[Required] Additional attributes of the entity.",
-                  "$ref": "#/definitions/InferenceEndpoint"
-              }
-          },
-          "x-ms-client-name": "InferenceEndpoint",
-          "additionalProperties": false
-      },
       "InferenceEndpointTrackedResource": {
           "required": [
               "location",
@@ -20298,7 +20310,7 @@
               }
           ],
           "properties": {
-              "bonusCapacity": {
+              "bonusExtraCapacity": {
                   "format": "int32",
                   "description": "Capacity to be used from the pool's reserved capacity.\r\noptional",
                   "type": "integer"
@@ -20382,11 +20394,6 @@
               }
           ],
           "properties": {
-              "appInsightsEnabled": {
-                  "description": "If true, enables Application Insights logging.",
-                  "default": false,
-                  "type": "boolean"
-              },
               "codeConfiguration": {
                   "description": "Code configuration for the inference pool.",
                   "$ref": "#/definitions/CodeConfiguration",
@@ -25172,6 +25179,38 @@
                       "value": "Canceled"
                   }
               ]
+          },
+          "additionalProperties": false
+      },
+      "PoolStatus": {
+          "type": "object",
+          "properties": {
+              "actualInstanceCount": {
+                  "format": "int32",
+                  "description": "Gets or sets the actual number of instances for the pool.",
+                  "default": 0,
+                  "type": "integer"
+              },
+              "eventLog": {
+                  "description": "Gets or sets event log for inference pool.",
+                  "type": "array",
+                  "items": {
+                      "type": "object"
+                  },
+                  "x-nullable": true
+              },
+              "groupCount": {
+                  "format": "int32",
+                  "description": "Gets or sets the actual number of groups in the pool.",
+                  "default": 0,
+                  "type": "integer"
+              },
+              "requestedInstanceCount": {
+                  "format": "int32",
+                  "description": "Gets or sets the request number of instances for the pool.",
+                  "default": 0,
+                  "type": "integer"
+              }
           },
           "additionalProperties": false
       },
