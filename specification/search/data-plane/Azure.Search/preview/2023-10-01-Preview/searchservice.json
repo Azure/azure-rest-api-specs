@@ -6436,57 +6436,6 @@
       },
       "description": "Contains the parameters specific to generating vector embeddings via a custom endpoint."
     },
-    "AmlVectorizer": {
-      "type": "object",
-      "x-ms-discriminator-value": "aml",
-      "allOf": [
-        {
-          "$ref": "#/definitions/VectorSearchVectorizer"
-        }
-      ],
-      "properties": {
-        "amlParameters": {
-          "x-ms-client-name": "AmlVectorizerParameters",
-          "$ref": "#/definitions/AmlParameters",
-          "description": "Contains the parameters specific to generating vector embeddings via a custom Azure Machine Learning model."
-        }
-      },
-      "description": "Contains the parameters specific to generating vector embeddings via a custom Azure Machine Learning model."
-    },
-    "AmlParameters": {
-      "type": "object",
-      "properties": {
-        "uri": {
-          "x-ms-client-name": "ScoringUri",
-          "type": "string",
-          "x-nullable": true,
-          "description": "(Required for no authentication or key authentication) The scoring URI of the AML service to which the JSON payload will be sent. Only the https URI scheme is allowed."
-        },
-        "key": {
-          "x-ms-client-name": "AuthenticationKey",
-          "type": "string",
-          "x-nullable": true,
-          "description": "(Required for key authentication) The key for the AML service."
-        },
-        "resourceId": {
-          "type": "string",
-          "x-nullable": true,
-          "description": "(Required for token authentication). The Azure Resource Manager resource ID of the AML service. It should be in the format subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.MachineLearningServices/workspaces/{workspace-name}/services/{service_name}."
-        },
-        "timeout": {
-          "type": "string",
-          "format": "duration",
-          "x-nullable": true,
-          "description": "(Optional) When specified, indicates the timeout for the http client making the API call."
-        },
-        "region": {
-          "type": "string",
-          "x-nullable": true,
-          "description": "(Optional for token authentication). The region the AML service is deployed in."
-        }
-      },
-      "description": "Contains the parameters specific to generating vector embeddings via a custom Azure Machine Learning model"
-    },
     "DataSourceCredentials": {
       "properties": {
         "connectionString": {
