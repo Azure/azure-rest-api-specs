@@ -356,7 +356,6 @@
         "ImagePushPullFailed",
         "ManuallySkipped"
       ],
-      "required": false,
       "x-ms-enum": {
         "name": "PatchApplyStatus",
         "modelAsString": true
@@ -383,16 +382,19 @@
       "properties": {
         "targetContainerName": {
           "type": "string",
-          "description": "The name of the target container for the patch."
+          "description": "The name of the target container for the patch.",
+          "readOnly": true
         },
         "targetImage": {
           "type": "string",
-          "description": "The name of the target image for the patch."
+          "description": "The name of the target image for the patch.",
+          "readOnly": true
         },
         "lastDetectionTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The UTC timestamp that describes the latest detection was done."
+          "description": "The UTC timestamp that describes the latest detection was done.",
+          "readOnly": true
         },
         "detectionStatus": {
           "$ref": "#/definitions/DetectionStatus",
@@ -510,6 +512,7 @@
           "items": {
             "$ref": "#/definitions/PatchDetails"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         }
       },
