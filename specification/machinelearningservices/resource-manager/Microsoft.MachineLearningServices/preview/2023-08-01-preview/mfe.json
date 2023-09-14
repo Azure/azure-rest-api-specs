@@ -15118,6 +15118,15 @@
           ],
           "x-nullable": true
         },
+        "featureImportanceSettings": {
+          "description": "The settings for computing feature importance.",
+          "$ref": "#/definitions/FeatureImportanceSettings",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
         "features": {
           "description": "The features to calculate drift over.",
           "$ref": "#/definitions/MonitoringFeatureFilterBase",
@@ -16305,6 +16314,27 @@
         }
       ],
       "properties": {
+        "featureDataTypeOverride": {
+          "description": "A dictionary that maps feature names to their respective data types.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/MonitoringFeatureDataType"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "featureImportanceSettings": {
+          "description": "The settings for computing feature importance.",
+          "$ref": "#/definitions/FeatureImportanceSettings",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
         "metricThreshold": {
           "description": "[Required] A list of metrics to calculate and their associated thresholds.",
           "$ref": "#/definitions/FeatureAttributionMetricThreshold",
@@ -16428,8 +16458,8 @@
     "FeatureImportanceMode": {
       "description": "The mode of operation for computing feature importance.",
       "enum": [
-        "Enabled",
-        "Disabled"
+        "Disabled",
+        "Enabled"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -16437,12 +16467,12 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "Enabled",
-            "description": "Enables computing feature importance within a signal."
-          },
-          {
             "value": "Disabled",
             "description": "Disables computing feature importance within a signal."
+          },
+          {
+            "value": "Enabled",
+            "description": "Enables computing feature importance within a signal."
           }
         ]
       },
@@ -16453,6 +16483,7 @@
       "properties": {
         "mode": {
           "description": "The mode of operation for computing feature importance.",
+          "default": "Disabled",
           "$ref": "#/definitions/FeatureImportanceMode"
         },
         "targetColumn": {
@@ -20628,7 +20659,7 @@
           ]
         },
         "productionData": {
-          "description": "[Required] The data produced by the production service which drift will be calculated for.",
+          "description": "[Required] The data produced by the production service which performance will be calculated for.",
           "type": "array",
           "items": {
             "description": "Monitoring input data base definition.",
@@ -20641,7 +20672,7 @@
           "x-ms-identifiers": []
         },
         "referenceData": {
-          "description": "[Required] The data to calculate drift against.",
+          "description": "[Required] The reference data used as the basis to calculate model performance.",
           "$ref": "#/definitions/MonitoringInputDataBase",
           "x-ms-mutability": [
             "create",
@@ -20952,12 +20983,31 @@
       },
       "additionalProperties": false
     },
+    "MonitorEmailNotificationSettings": {
+      "type": "object",
+      "properties": {
+        "emails": {
+          "description": "This is the email recipient list which has a limitation of 499 characters in total concat with comma seperator.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "additionalProperties": false
+    },
     "MonitorNotificationSettings": {
       "type": "object",
       "properties": {
         "emailNotificationSettings": {
-          "description": "Configuration for notification.",
-          "$ref": "#/definitions/NotificationSetting",
+          "description": "The AML notification email settings.",
+          "$ref": "#/definitions/MonitorEmailNotificationSettings",
           "x-ms-mutability": [
             "create",
             "read"
@@ -21218,8 +21268,8 @@
     },
     "MonitoringNotificationType": {
       "enum": [
-        "AzureMonitor",
-        "AmlNotification"
+        "AmlNotification",
+        "AzureMonitor"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -21227,12 +21277,12 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "AzureMonitor",
-            "description": "Enables notifications through Azure Monitor by posting metrics to the workspace's Azure Monitor instance."
-          },
-          {
             "value": "AmlNotification",
             "description": "Enables email notifications through AML notifications."
+          },
+          {
+            "value": "AzureMonitor",
+            "description": "Enables notifications through Azure Monitor by posting metrics to the workspace's Azure Monitor instance."
           }
         ]
       },
@@ -23311,6 +23361,18 @@
         }
       ],
       "properties": {
+        "featureDataTypeOverride": {
+          "description": "A dictionary that maps feature names to their respective data types.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/MonitoringFeatureDataType"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
         "metricThresholds": {
           "description": "[Required] A list of metrics to calculate and their associated thresholds.",
           "type": "array",
