@@ -1980,9 +1980,6 @@
           "Environments_CreateOrUpdate": {
             "$ref": "./examples/Environments_CreateOrUpdate.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       },
       "delete": {
@@ -2182,7 +2179,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetadataAssignment"
-          }
+          },
+          "x-ms-identifiers":["entity"]
         }
       },
       "required": [
@@ -2344,7 +2342,8 @@
           "items": {
             "$ref": "#/definitions/ExternalDocumentation"
           },
-          "maxItems": 20
+          "maxItems": 20,
+          "x-ms-identifiers":[]
         },
         "contacts": {
           "type": "array",
