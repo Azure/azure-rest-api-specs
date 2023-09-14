@@ -95,12 +95,7 @@
             "$ref": "../../../common-types/v1/entity-types.json#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
-            "name": "updateName",
-            "in": "path",
-            "required": true,
-            "description": "Name of update",
-            "type": "string",
-            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+            "$ref": "#/definitions/UpdateName"
           }
         ],
         "responses": {
@@ -140,12 +135,7 @@
             "$ref": "../../../common-types/v1/entity-types.json#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
-            "name": "updateName",
-            "in": "path",
-            "required": true,
-            "description": "Name of update",
-            "type": "string",
-            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+            "$ref": "#/definitions/UpdateName"
           },
           {
             "name": "resource",
@@ -214,12 +204,7 @@
             "$ref": "../../../common-types/v1/entity-types.json#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
-            "name": "updateName",
-            "in": "path",
-            "required": true,
-            "description": "Name of update",
-            "type": "string",
-            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+            "$ref": "#/definitions/UpdateName"
           },
           {
             "name": "properties",
@@ -271,12 +256,7 @@
             "$ref": "../../../common-types/v1/entity-types.json#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
-            "name": "updateName",
-            "in": "path",
-            "required": true,
-            "description": "Name of update",
-            "type": "string",
-            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+            "$ref": "#/definitions/UpdateName"
           }
         ],
         "responses": {
@@ -420,6 +400,14 @@
         }
       },
       "description": "The updatable properties of the Update."
+    },
+    "UpdateName": {
+      "name": "updateName",
+      "in": "path",
+      "required": true,
+      "description": "Name of update",
+      "type": "string",
+      "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
     }
   }
 }

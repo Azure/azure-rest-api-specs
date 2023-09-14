@@ -95,12 +95,7 @@
             "$ref": "../../../common-types/v1/entity-types.json#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
-            "name": "connectivityStatusName",
-            "in": "path",
-            "required": true,
-            "description": "Name of ConnectivityStatus",
-            "type": "string",
-            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+            "$ref": "#/definitions/ConnectivityStatusName"
           }
         ],
         "responses": {
@@ -140,12 +135,7 @@
             "$ref": "../../../common-types/v1/entity-types.json#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
-            "name": "connectivityStatusName",
-            "in": "path",
-            "required": true,
-            "description": "Name of ConnectivityStatus",
-            "type": "string",
-            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+            "$ref": "#/definitions/ConnectivityStatusName"
           },
           {
             "name": "resource",
@@ -211,12 +201,7 @@
             "$ref": "../../../common-types/v1/entity-types.json#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
-            "name": "connectivityStatusName",
-            "in": "path",
-            "required": true,
-            "description": "Name of ConnectivityStatus",
-            "type": "string",
-            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+            "$ref": "#/definitions/ConnectivityStatusName"
           },
           {
             "name": "properties",
@@ -265,12 +250,7 @@
             "$ref": "../../../common-types/v1/entity-types.json#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
-            "name": "connectivityStatusName",
-            "in": "path",
-            "required": true,
-            "description": "Name of ConnectivityStatus",
-            "type": "string",
-            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+            "$ref": "#/definitions/ConnectivityStatusName"
           }
         ],
         "responses": {
@@ -428,6 +408,14 @@
         }
       },
       "description": "The updatable properties of the ConnectivityStatus."
+    },
+    "ConnectivityStatusName": {
+      "name": "connectivityStatusName",
+      "in": "path",
+      "required": true,
+      "description": "Name of ConnectivityStatus",
+      "type": "string",
+      "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
     }
   }
 }

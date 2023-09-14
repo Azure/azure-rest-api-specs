@@ -48,7 +48,7 @@
           "Sites"
         ],
         "operationId": "ListSites_BySubscription",
-        "description": "List Site resources by Subscription",
+        "description": "List Site resources by subscription",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -543,60 +543,6 @@
     }
   },
   "definitions": {
-    "ProvisioningState": {
-      "type": "string",
-      "description": "The provisioning state of a resource.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "Provisioning",
-        "Updating",
-        "Deleting",
-        "Accepted"
-      ],
-      "x-ms-enum": {
-        "name": "ProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          },
-          {
-            "name": "Provisioning",
-            "value": "Provisioning",
-            "description": "The resource is being provisioned"
-          },
-          {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "The resource is updating"
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "The resource is being deleted"
-          },
-          {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "The resource create request has been accepted"
-          }
-        ]
-      }
-    },
     "Site": {
       "type": "object",
       "properties": {
@@ -662,7 +608,7 @@
           }
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "../../../../common-types/v1/entity-types.json#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
         }
