@@ -6,7 +6,7 @@
     "ledgerName": "DummyLedgerName",
     "confidentialLedger": {
       "restoreRegion": "EastUS",
-      "sasUrl": "DummySASUri"
+      "uri": "DummySASUri"
     }
   },
   "responses": {
@@ -15,9 +15,9 @@
         "message": "Backup Created for Ledger: DummyLedgerName."
       }
     },
-    "201": {
-      "body": {
-        "message": "Backup Created for Ledger: DummyLedgerName."
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "http://azure.async.operation/status"
       }
     }
   }

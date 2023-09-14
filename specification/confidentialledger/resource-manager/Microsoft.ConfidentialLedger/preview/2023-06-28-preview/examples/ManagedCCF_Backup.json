@@ -6,7 +6,7 @@
     "appName": "DummyMccfAppName",
     "ManagedCCF": {
       "restoreRegion": "EastUS",
-      "sasUrl": "DummySASUri"
+      "uri": "DummySASUri"
     }
   },
   "responses": {
@@ -15,9 +15,9 @@
         "message": "Backup Created for ManagedCCF App : DummyMccfAppName."
       }
     },
-    "201": {
-      "body": {
-        "message": "Backup Created for ManagedCCF App : DummyMccfAppName."
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "http://azure.async.operation/status"
       }
     }
   }

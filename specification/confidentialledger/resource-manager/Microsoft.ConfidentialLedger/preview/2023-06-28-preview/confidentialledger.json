@@ -421,6 +421,7 @@
         "summary": "Performs the backup operation on a Confidential Ledger Resource.",
         "description": "Backs up a Confidential Ledger Resource.",
         "operationId": "Ledger_Backup",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -451,11 +452,8 @@
               "$ref": "#/definitions/ConfidentialLedgerBackupRestoreResponse"
             }
           },
-          "201": {
-            "description": "The Confidential Ledger Resource will be backed up asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/ConfidentialLedgerBackupRestoreResponse"
-            }
+          "202": {
+            "description": "The Confidential Ledger Resource will be backed up asynchronously."
           },
           "default": {
             "description": "Error response describing the reason for operation failure. 404 - NotFound (Confidential Ledger does not exist.)",
@@ -479,6 +477,7 @@
         "summary": "Performs the restore operation to spin up a newly restored Confidential Ledger Resource.",
         "description": "Restores a Confidential Ledger Resource.",
         "operationId": "Ledger_Restore",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -509,11 +508,8 @@
               "$ref": "#/definitions/ConfidentialLedgerBackupRestoreResponse"
             }
           },
-          "201": {
-            "description": "The Confidential Ledger Resource will be restored asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/ConfidentialLedgerBackupRestoreResponse"
-            }
+          "202": {
+            "description": "The Confidential Ledger Resource will be restored asynchronously."
           },
           "default": {
             "description": "Error response describing the reason for operation failure.",
@@ -748,7 +744,7 @@
           "readOnly": false,
           "description": "The region where the backup of the Ledger Resource will eventually be restored to."
         },
-        "sasUrl": {
+        "uri": {
           "type": "string",
           "readOnly": false,
           "description": "SAS URI used to access the backup Fileshare."
@@ -769,7 +765,7 @@
           "readOnly": false,
           "description": "The region the Ledger Resource is being restored to."
         },
-        "sasUrl": {
+        "uri": {
           "type": "string",
           "readOnly": false,
           "description": "SAS URI used to access the backup Fileshare."

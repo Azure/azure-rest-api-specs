@@ -7,7 +7,7 @@
     "confidentialLedger": {
       "fileShareName": "DummyFileShareName",
       "restoreRegion": "EastUS",
-      "sasUrl": "DummySASUri"
+      "uri": "DummySASUri"
     }
   },
   "responses": {
@@ -16,9 +16,9 @@
         "message": "Restore Created for Ledger : DummyLedgerName."
       }
     },
-    "201": {
-      "body": {
-        "message": "Restore Created for Ledger : DummyLedgerName."
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "http://azure.async.operation/status"
       }
     }
   }
