@@ -369,52 +369,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/metadataSchemas": {
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ServiceNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "#/parameters/ODataFilterParameter"
-        }
-      ],
-      "get": {
-        "tags": [
-          "MetadataSchema"
-        ],
-        "operationId": "list-metadata-schemas",
-        "summary": "List metadata schemas",
-        "description": "Returns a collection of metadata schemas.",
-        "responses": {
-          "200": {
-            "description": "Paginated collection of metadata schemas.",
-            "schema": {
-              "$ref": "#/definitions/MetadataSchemaCollection"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "MetadataSchemas_List": {
-            "$ref": "./examples/MetadataSchemas_List.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/exportMetadataSchema": {
       "parameters": [
         {
@@ -434,7 +388,7 @@
         "tags": [
           "MetadataSchema"
         ],
-        "operationId": "export-metadata-schema",
+        "operationId": "Services_ExportMetadataSchema",
         "summary": "Export effective metadata schema",
         "description": "Exports the effective metadata schema.",
         "parameters": [
@@ -479,6 +433,52 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/metadataSchemas": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ServiceNameParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/ODataFilterParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "MetadataSchema"
+        ],
+        "operationId": "MetadataSchemas_List",
+        "summary": "List metadata schemas",
+        "description": "Returns a collection of metadata schemas.",
+        "responses": {
+          "200": {
+            "description": "Paginated collection of metadata schemas.",
+            "schema": {
+              "$ref": "#/definitions/MetadataSchemaCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MetadataSchemas_List": {
+            "$ref": "./examples/MetadataSchemas_List.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/metadataSchemas/{metadataSchemaName}": {
       "parameters": [
         {
@@ -498,7 +498,7 @@
         }
       ],
       "get": {
-        "operationId": "get-metadata-schema",
+        "operationId": "MetadataSchemas_Get",
         "summary": "Get metadata schema",
         "description": "Returns details of the metadata schema.",
         "tags": [
@@ -534,7 +534,7 @@
         "tags": [
           "MetadataSchema"
         ],
-        "operationId": "create-or-update-metadata-schema",
+        "operationId": "MetadataSchemas_CreateOrUpdate",
         "summary": "Create or update metadata schema",
         "description": "Creates new or updates existing metadata schema.",
         "parameters": [
@@ -590,7 +590,7 @@
         "tags": [
           "MetadataSchema"
         ],
-        "operationId": "delete-metadata-schema",
+        "operationId": "MetadataSchemas_Delete",
         "summary": "Delete metadata schema",
         "description": "Deletes specified metadata schema.",
         "responses": {
@@ -617,7 +617,7 @@
         "tags": [
           "MetadataSchema"
         ],
-        "operationId": "check-metadata-schema-exists",
+        "operationId": "MetadataSchemas_Head",
         "summary": "Check metadata schema exists",
         "description": "Checks if specified metadata schema exists.",
         "responses": {
@@ -643,7 +643,7 @@
         "tags": [
           "Workspace"
         ],
-        "operationId": "list-workspaces",
+        "operationId": "Workspaces_List",
         "summary": "List workspaces",
         "description": "Returns a collection of workspaces.",
         "responses": {
@@ -703,7 +703,7 @@
         }
       ],
       "get": {
-        "operationId": "get-workspace",
+        "operationId": "Workspaces_Get",
         "summary": "Get workspace",
         "description": "Returns details of the workspace.",
         "tags": [
@@ -739,7 +739,7 @@
         "tags": [
           "Workspace"
         ],
-        "operationId": "create-or-update-workspace",
+        "operationId": "Workspaces_CreateOrUpdate",
         "summary": "Create or update workspace",
         "description": "Creates new or updates existing workspace.",
         "parameters": [
@@ -795,7 +795,7 @@
         "tags": [
           "Workspace"
         ],
-        "operationId": "delete-workspace",
+        "operationId": "Workspaces_Delete",
         "summary": "Delete workspace",
         "description": "Deletes specified workspace.",
         "responses": {
@@ -822,7 +822,7 @@
         "tags": [
           "Workspace"
         ],
-        "operationId": "check-workspace-exists",
+        "operationId": "Workspaces_Head",
         "summary": "Check workspace exists",
         "description": "Checks if specified workspace exists.",
         "responses": {
@@ -848,7 +848,7 @@
         "tags": [
           "Api"
         ],
-        "operationId": "list-apis",
+        "operationId": "Apis_List",
         "summary": "List APIs",
         "description": "Returns a collection of APIs.",
         "parameters": [
@@ -914,7 +914,7 @@
         }
       ],
       "get": {
-        "operationId": "get-api",
+        "operationId": "Apis_Get",
         "summary": "Get API",
         "description": "Returns details of the API.",
         "tags": [
@@ -950,7 +950,7 @@
         "tags": [
           "Api"
         ],
-        "operationId": "create-or-update-api",
+        "operationId": "Apis_CreateOrUpdate",
         "summary": "Create or update API",
         "description": "Creates new or updates existing API.",
         "parameters": [
@@ -1006,7 +1006,7 @@
         "tags": [
           "Api"
         ],
-        "operationId": "delete-api",
+        "operationId": "Apis_Delete",
         "summary": "Delete API",
         "description": "Deletes specified API.",
         "responses": {
@@ -1033,7 +1033,7 @@
         "tags": [
           "Api"
         ],
-        "operationId": "check-api-exists",
+        "operationId": "Apis_Head",
         "summary": "Check if API exists",
         "description": "Checks if specified API exists.",
         "responses": {
@@ -1082,7 +1082,7 @@
         "tags": [
           "ApiVersion"
         ],
-        "operationId": "list-api-versions",
+        "operationId": "ApiVersions_List",
         "summary": "List API versions",
         "description": "Returns a collection of API versions.",
         "responses": {
@@ -1135,7 +1135,7 @@
           "ApiVersion"
         ],
         "summary": "Get API version",
-        "operationId": "get-api-version",
+        "operationId": "ApiVersions_Get",
         "description": "Returns details of the API version.",
         "responses": {
           "200": {
@@ -1168,7 +1168,7 @@
           "ApiVersion"
         ],
         "summary": "Create or update API version",
-        "operationId": "create-or-update-api-version",
+        "operationId": "ApiVersions_CreateOrUpdate",
         "description": "Creates new or updates existing API version.",
         "parameters": [
           {
@@ -1224,7 +1224,7 @@
           "ApiVersion"
         ],
         "summary": "Delete API version",
-        "operationId": "delete-api-version",
+        "operationId": "ApiVersions_Delete",
         "description": "Deletes specified API version",
         "responses": {
           "200": {
@@ -1251,7 +1251,7 @@
           "ApiVersion"
         ],
         "summary": "Check API version exists",
-        "operationId": "check-api-version-exists",
+        "operationId": "ApiVersions_Head",
         "description": "Checks if specified API version exists.",
         "responses": {
           "200": {
@@ -1322,7 +1322,7 @@
             "$ref": "./examples/ApiDefinitions_List.json"
           }
         },
-        "operationId": "list-api-definitions",
+        "operationId": "ApiDefinitions_List",
         "description": "Returns a collection of API definitions."
       }
     },
@@ -1358,7 +1358,7 @@
           "ApiDefinition"
         ],
         "summary": "Get API definition",
-        "operationId": "get-api-definition",
+        "operationId": "ApiDefinitions_Get",
         "description": "Returns details of the API definition.",
         "responses": {
           "200": {
@@ -1390,7 +1390,7 @@
         "tags": [
           "ApiDefinition"
         ],
-        "operationId": "create-or-update-api-definition",
+        "operationId": "ApiDefinitions_CreateOrUpdate",
         "summary": "Create or update API definition",
         "description": "Creates new or updates existing API definition.",
         "parameters": [
@@ -1446,7 +1446,7 @@
         "tags": [
           "ApiDefinition"
         ],
-        "operationId": "delete-api-definition",
+        "operationId": "ApiDefinitions_Delete",
         "summary": "Delete API definition",
         "description": "Deletes specified API definition.",
         "responses": {
@@ -1474,7 +1474,7 @@
           "ApiDefinition"
         ],
         "summary": "Check API definition exists",
-        "operationId": "check-api-definition-exists",
+        "operationId": "ApiDefinitions_Head",
         "description": "Checks if specified API definition exists.",
         "responses": {
           "200": {
@@ -1526,7 +1526,7 @@
           "ApiVersion"
         ],
         "summary": "Import API specification",
-        "operationId": "import-api-specification",
+        "operationId": "ApiDefinitions_ImportSpecification",
         "description": "Imports the API specification.",
         "parameters": [
           {
@@ -1592,7 +1592,7 @@
           "ApiVersion"
         ],
         "summary": "Export API specification",
-        "operationId": "export-api-specification",
+        "operationId": "ApiDefinitions_ExportSpecification",
         "description": "Exports the API specification.",
         "responses": {
           "200": {
@@ -1646,7 +1646,7 @@
         "tags": [
           "Deployment"
         ],
-        "operationId": "list-deployments",
+        "operationId": "Deployments_List",
         "summary": "List deployments",
         "description": "Returns a collection of API deployments.",
         "responses": {
@@ -1699,7 +1699,7 @@
           "Deployment"
         ],
         "summary": "Delete API deployment",
-        "operationId": "delete-deployment",
+        "operationId": "Deployments_Delete",
         "description": "Deletes API deployment.",
         "responses": {
           "200": {
@@ -1725,7 +1725,7 @@
         "tags": [
           "Deployment"
         ],
-        "operationId": "get-deployment",
+        "operationId": "Deployments_Get",
         "summary": "Get API deployment",
         "description": "Returns details of the API deployment.",
         "responses": {
@@ -1758,7 +1758,7 @@
         "tags": [
           "Deployment"
         ],
-        "operationId": "create-or-update-deployment",
+        "operationId": "Deployments_CreateOrUpdate",
         "summary": "Create or update API deployment",
         "description": "Creates new or updates existing API deployment.",
         "parameters": [
@@ -1814,7 +1814,7 @@
         "tags": [
           "Deployment"
         ],
-        "operationId": "check-deployment-exists",
+        "operationId": "Deployments_Head",
         "summary": "Check if API deployment exists",
         "description": "Checks if specified API deployment exists.",
         "responses": {
@@ -1840,7 +1840,7 @@
         "tags": [
           "Environment"
         ],
-        "operationId": "list-environments",
+        "operationId": "Environments_List",
         "summary": "List environments",
         "description": "Returns a collection of environments.",
         "responses": {
@@ -1909,7 +1909,7 @@
         "tags": [
           "Environment"
         ],
-        "operationId": "create-or-update-environment",
+        "operationId": "Environments_CreateOrUpdate",
         "summary": "Create or update environment",
         "description": "Creates new or updates existing environment.",
         "parameters": [
@@ -1965,7 +1965,7 @@
         "tags": [
           "Environment"
         ],
-        "operationId": "delete-environment",
+        "operationId": "Environments_Delete",
         "summary": "Delete environment",
         "description": "Deletes the environment.",
         "responses": {
@@ -1992,7 +1992,7 @@
         "tags": [
           "Environment"
         ],
-        "operationId": "check-environment-exists",
+        "operationId": "Environments_Head",
         "summary": "Check if environment exists",
         "description": "Checks if specified environment exists.",
         "responses": {
@@ -2016,7 +2016,7 @@
         "tags": [
           "Environment"
         ],
-        "operationId": "get-environment",
+        "operationId": "Environments_Get",
         "summary": "Get environment",
         "description": "Returns details of the environment.",
         "responses": {
@@ -2129,6 +2129,9 @@
       "description": "The service properties to be updated."
     },
     "MetadataSchema": {
+      "type": "object",
+      "title": "Metadata schema",
+      "description": "Metadata schema entity. Used to define metadata for the entities in API catalog.",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
@@ -2140,14 +2143,12 @@
           "$ref": "#/definitions/MetadataSchemaProperties",
           "description": "Metadata schema properties."
         }
-      },
-      "description": "Metadata schema entity. Used to define metadata for the entities in API catalog.",
-      "title": "Metadata schema"
+      }
     },
     "MetadataSchemaProperties": {
+      "type": "object",
       "title": "Metadata schema properties",
       "description": "Metadata schema properties.",
-      "type": "object",
       "properties": {
         "schema": {
           "type": "string",
@@ -2248,6 +2249,7 @@
       "description": "Paginated collection of workspaces."
     },
     "Api": {
+      "type": "object",
       "title": "API",
       "description": "API entity.",
       "allOf": [
@@ -2264,8 +2266,9 @@
       }
     },
     "ApiProperties": {
-      "title": "API properties",
       "type": "object",
+      "title": "API properties",
+      "description": "API properties.",
       "properties": {
         "title": {
           "type": "string",
@@ -2332,8 +2335,7 @@
       "required": [
         "title",
         "type"
-      ],
-      "description": "API properties."
+      ]
     },
     "ApiCollection": {
       "type": "object",
@@ -2361,8 +2363,8 @@
       "description": "Paginated collection of APIs."
     },
     "ApiVersion": {
-      "title": "API version",
       "type": "object",
+      "title": "API version",
       "description": "API version entity.",
       "properties": {
         "properties": {
@@ -2378,9 +2380,9 @@
       ]
     },
     "ApiVersionProperties": {
+      "type": "object",
       "title": "API version properties",
       "description": "API version properties entity.",
-      "type": "object",
       "properties": {
         "title": {
           "type": "string",
@@ -2397,6 +2399,8 @@
     },
     "ApiVersionCollection": {
       "type": "object",
+      "title": "API version collection",
+      "description": "Paginated collection of API versions.",
       "properties": {
         "value": {
           "type": "array",
@@ -2416,13 +2420,11 @@
           "description": "Next page link if any.",
           "readOnly": true
         }
-      },
-      "title": "API version collection",
-      "description": "Paginated collection of API versions."
+      }
     },
     "ApiDefinition": {
-      "title": "API definition",
       "type": "object",
+      "title": "API definition",
       "description": "API definition entity.",
       "properties": {
         "properties": {
@@ -2438,9 +2440,9 @@
       ]
     },
     "ApiDefinitionProperties": {
+      "type": "object",
       "title": "API version properties",
       "description": "API version properties entity.",
-      "type": "object",
       "properties": {
         "title": {
           "type": "string",
@@ -2471,6 +2473,8 @@
     },
     "ApiDefinitionCollection": {
       "type": "object",
+      "title": "API version collection",
+      "description": "Paginated collection of API definitions.",
       "properties": {
         "value": {
           "type": "array",
@@ -2490,9 +2494,7 @@
           "description": "Next page link if any.",
           "readOnly": true
         }
-      },
-      "title": "API version collection",
-      "description": "Paginated collection of API definitions."
+      }
     },
     "Environment": {
       "title": "Environment",
@@ -2700,6 +2702,8 @@
       }
     },
     "ApiSpecExportResult": {
+      "type": "object",
+      "description": "The API specification export result.",
       "properties": {
         "format": {
           "type": "string",
@@ -2726,10 +2730,11 @@
           "type": "string",
           "description": "The result of the export operation."
         }
-      },
-      "description": "The API specification export result."
+      }
     },
     "MetadataSchemaExportResult": {
+      "type": "object",
+      "description": "The metadata schema export result.",
       "properties": {
         "format": {
           "type": "string",
@@ -2756,8 +2761,7 @@
           "type": "string",
           "description": "The result of the export operation."
         }
-      },
-      "description": "The metadata schema export result."
+      }
     },
     "CustomProperties": {
       "title": "Custom properties",
@@ -2857,9 +2861,9 @@
       }
     },
     "License": {
+      "type": "object",
       "title": "License",
       "description": "The license information for the API.",
-      "type": "object",
       "properties": {
         "name": {
           "title": "Name",
