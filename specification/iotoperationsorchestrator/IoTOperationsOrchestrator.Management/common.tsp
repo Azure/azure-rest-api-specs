@@ -57,7 +57,7 @@ model ReconciliationPolicy {
   type: ReconciliationPolicys;
 
   @doc("Policy interval")
-  interval: string;
+  interval?: string;
 }
 
 @doc("Policies to control how the resource should reconcile.")
