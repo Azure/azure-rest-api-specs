@@ -7,10 +7,17 @@
     "api-version": "2023-05-01-preview",
     "parameters": {
       "properties": {
-        "targetDatabase": "testdb",
-        "sourceEndpoint": "TCP://SERVER:7022",
-        "primaryAvailabilityGroupName": "BoxLocalAg1",
-        "secondaryAvailabilityGroupName": "testcl"
+        "instanceLinkRole": "Primary",
+        "instanceAvailabilityGroupName": "testcl",
+        "partnerAvailabilityGroupName": "BoxLocalAg1",
+        "partnerEndpoint": "TCP://SERVER:7022",
+        "failoverMode": "None",
+        "seedingMode": "Automatic",
+        "databases": [
+          {
+            "databaseName": "testdb"
+          }
+        ]
       }
     }
   },
@@ -19,9 +26,12 @@
       "body": {
         "properties": {
           "distributedAvailabilityGroupName": "dag",
+          "instanceLinkRole": "Primary",
+          "instanceAvailabilityGroupName": "testcl",
           "partnerAvailabilityGroupName": "BoxLocalAg1",
           "partnerEndpoint": "TCP://SERVER:7022",
-          "instanceAvailabilityGroupName": "testcl",
+          "failoverMode": "None",
+          "seedingMode": "Automatic",
           "databases": [
             {
               "databaseName": "testdb"
@@ -37,9 +47,12 @@
       "body": {
         "properties": {
           "distributedAvailabilityGroupName": "dag",
+          "instanceLinkRole": "Primary",
+          "instanceAvailabilityGroupName": "testcl",
           "partnerAvailabilityGroupName": "BoxLocalAg1",
           "partnerEndpoint": "TCP://SERVER:7022",
-          "instanceAvailabilityGroupName": "testcl",
+          "failoverMode": "None",
+          "seedingMode": "Automatic",
           "databases": [
             {
               "databaseName": "testdb"
