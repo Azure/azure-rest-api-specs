@@ -65,8 +65,18 @@ model PipelineProperties {
 //   @doc("Next stage in the pipeline.")
 //   next: string[];
 // }
+#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("Stage configurations for all Pipeline processing and output stages.")
-model PipelineInput {}
+model PipelineInput is Record<unknown> {
+  @doc("Programmatic name of the pipeline.")
+  name: string;
+
+  @doc("ARM resource type.")
+  type: string;
+
+  @doc("Next stage in the pipeline.")
+  next: string[];
+}
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("Stage configurations for all Pipeline processing and output stages.")
 model PipelineStages is Record<unknown> {
