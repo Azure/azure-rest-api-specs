@@ -3,7 +3,6 @@ import { CompileRule } from "./rules/compile.js";
 import { FolderStructureRule } from "./rules/folder-structure.js";
 import { FormatRule } from "./rules/format.js";
 import { GitDiffRule } from "./rules/git-diff.js";
-import { LinterRulesetRule } from "./rules/linter-ruleset.js";
 import { NpmPrefixRule } from "./rules/npm-prefix.js";
 
 export async function main() {
@@ -20,7 +19,6 @@ export async function main() {
 
   let rules = [
     new FolderStructureRule(),
-    new LinterRulesetRule(),
     new NpmPrefixRule(),
     new CompileRule(),
     new FormatRule(),
