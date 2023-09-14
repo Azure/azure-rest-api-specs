@@ -26,7 +26,7 @@ These are the global settings for the Resource API.
 
 ``` yaml
 openapi-type: arm
-tag: package-subscriptions-2022-12
+tag: package-2022-12
 ```
 
 ``` yaml $(package-privatelinks)
@@ -42,11 +42,11 @@ tag: package-locks-2020-05
 ```
 
 ``` yaml $(package-policy)
-tag: package-policy-2022-06
+tag: package-policy-2023-04
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2022-09
+tag: package-resources-2023-07
 ```
 
 ``` yaml $(package-subscriptions)
@@ -81,12 +81,89 @@ tag: package-changes-2022-05
 tag: package-snapshots-2022-11
 ```
 
+### Tag: package-policy-2023-04
+
+These settings apply only when `--tag=package-policy-2023-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2023-04'
+input-file:
+- Microsoft.Authorization/stable/2020-09-01/dataPolicyManifests.json
+- Microsoft.Authorization/stable/2023-04-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2023-04-01/policyDefinitionVersions.json
+- Microsoft.Authorization/stable/2023-04-01/policySetDefinitions.json
+- Microsoft.Authorization/stable/2023-04-01/policySetDefinitionVersions.json
+- Microsoft.Authorization/stable/2023-04-01/policyAssignments.json
+- Microsoft.Authorization/preview/2022-07-01-preview/policyExemptions.json
+- Microsoft.Authorization/preview/2022-08-01-preview/policyVariables.json
+- Microsoft.Authorization/preview/2022-08-01-preview/policyVariableValues.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+
+suppressions:
+  - code: PathForPutOperation
+    from: policyDefinitions.json
+    reason: Policy definitions can be created at management group or subscriptions
+  - code: PathForPutOperation
+    from: policySetDefinitions.json
+    reason: Policy sets can be created at management group or subscriptions
+  - code: PathForPutOperation
+    from: policyAssignments.json
+    reason: Policy assignments can be created at management group or subscriptions
+  - code: PathForPutOperation
+    from: policyDefinitionVersions.json
+    reason: Policy definition versions can be created at management group or subscriptions
+  - code: PathForPutOperation
+    from: policySetDefinitionVersions.json
+    reason: Policy set versions can be created at management group or subscriptions
+  - code: DeleteResponseBodyEmpty
+    from: policyAssignments.json
+    reason: Policy assignment body is returned on delete and this must match API
+  - code: RequestSchemaForTrackedResourcesMustHaveTags
+    from: policyAssignments.json
+    reason: Policy assignments are not tracked resources
+  - code: RepeatedPathInfo
+    from: policyAssignments.json
+    reason: Service requires the scope to be in the body
+  - code: PutResponseSchemaDescription
+    from: policyAssignments.json
+    reason: Service only returns 201 on all successful PUTs
+  - code: PutResponseSchemaDescription
+    from: policyDefinitions.json
+    reason: Service only returns 201 on all successful PUTs
+  - code: PutResponseSchemaDescription
+    from: policySetDefinitions.json
+    reason: Service only returns 201 on all successful PUTs
+  - code: UnSupportedPatchProperties
+    from: policyAssignments.json
+    reason: The location property represents the user-assigned identity location and is changeable for policy assignments
+  - code: PathContainsResourceType
+    from: policyAssignments.json
+    reason: The policy assignment id does contain the resource type
+  - code: ResourceNameRestriction
+    from: policyDefinitionVersions.json
+    reason: Using common types for management group name
+  - code: ResourceNameRestriction
+    from: policySetDefinitionVersions.json
+    reason: Using common types for management group name
+
+```
+
+### Tag: package-resources-2023-07
+
+These settings apply only when `--tag=package-resources-2023-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2023-07'
+input-file:
+  - Microsoft.Resources/stable/2023-07-01/resources.json
+```
 
 ### Tag: package-2022-12
 
 These settings apply only when `--tag=package-2022-12` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-12'
+``` yaml $(tag) == 'package-2022-12'
 input-file:
   - Microsoft.Resources/stable/2022-12-01/subscriptions.json
 ```
@@ -315,7 +392,6 @@ These settings apply only when `--tag=package-subscriptions-2022-12` is specifie
 input-file:
 - Microsoft.Resources/stable/2022-12-01/subscriptions.json
 ```
-
 
 ### Tag: package-subscriptions-2021-01
 
@@ -1053,10 +1129,6 @@ directive:
     where: $.definitions.AliasPathMetadata
     from: resources.json
     reason: This was already checked in - not my code
-  - suppress: XmsExamplesRequired
-    where: $.paths
-    from: resources.json
-    reason: Pre-existing lint error. Not related to this version release.
   - suppress: TopLevelResourcesListByResourceGroup
     from: policyDefinitions.json
     reason: Policy definitions are a proxy resource that is only usable on subscriptions or management groups
@@ -1111,6 +1183,105 @@ directive:
       - '$.paths["/{scope}/providers/Microsoft.Resources/tags/default"].patch'
       - '$.paths["/{scope}/providers/Microsoft.Resources/tags/default"].get'
     reason: The tags API does not support system data
+  - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
+    where: $.paths
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: LRO_RESPONSE_HEADER
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: OperationsApiResponseSchema
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: OperationsApiSchemaUsesCommonTypes
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: NoDuplicatePathsForScopeParameter
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: LroLocationHeader
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: LroErrorContent
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: NoErrorCodeResponses
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PutRequestResponseSchemeArm
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PutResponseSchemaDescription
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PostOperationAsyncResponseValidation
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: MissingXmsErrorResponse
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PathForPutOperation
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PathResourceProviderMatchNamespace
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: ParametersOrder
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: SyncPostReturn
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PathContainsResourceType
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: OperationIdNounVerb
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PathForResourceAction
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: UnSupportedPatchProperties
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: LroPostReturn
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: ProvisioningStateSpecifiedForLROPut
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: ProvisioningStateSpecifiedForLROPatch
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: SubscriptionsAndResourceGroupCasing
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: ResourceNameRestriction
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: ConsistentPatchProperties
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: MissingTypeObject
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: TrackedResourcePatchOperation
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: IntegerTypeMustHaveFormat
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: BodyTopLevelProperties
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: TopLevelResourcesListBySubscription
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: XmsParameterLocation
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
 ```
 
 ---
