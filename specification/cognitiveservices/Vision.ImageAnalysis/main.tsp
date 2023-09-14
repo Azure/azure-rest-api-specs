@@ -1,6 +1,5 @@
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 
 using Azure.Core.Traits;
@@ -13,15 +12,35 @@ using Azure.Core;
 @service({
     title: "ImageAnalysis Service",
   })
-  @useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
+
+@versioned(ImageAnalysis.Versions)
+@useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
+@server(
+    "{endpoint}/imageanalysis",
+    "Analyze an image to generate a description of its content.",
+    {
+      @doc("""
+  Supported Cognitive Services endpoints (protocol and hostname, for example:
+  https://<resource-name>.cognitiveservices.azure.com).
+  """)
+      endpoint: string,
+    }
+  )
+
+namespace ImageAnalysis;
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
+enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  namespace Azure.Ai.Vision.ImageAnalysis;
+  v2023_04_30_Preview: "2023-04-30-preview",
+}
+
 
 @doc("Represents a person detected in an image")
 model DetectedPerson {
     @doc("Gets a rectangular boundary within which the person was detected.")
     @visibility("read")
-    boundingBox: Rectangle;
+    boundingBox: BoundingBox;
 
     @doc ("Gets the confidence value of the detected person.")
     @visibility("read")
@@ -29,7 +48,7 @@ model DetectedPerson {
 }
 
 @doc("A basic rectangle")
-model Rectangle{
+model BoundingBox{
   @doc("X coordinate")
   x: int64;
 
@@ -55,7 +74,7 @@ model ContentCaption {
 
     @doc("A rectangular boundary to which the caption applies.")
     @visibility("read")
-    boundingBox: Rectangle;
+    boundingBox: BoundingBox;
 }
 
 @doc("Represent an image tag. A tag can be a recognizable object, living being, scenery, or actions that appear in the image.")
