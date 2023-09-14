@@ -162,6 +162,9 @@
               }
             }
           },
+          "204": {
+            "description": "Patch deletion completed successfully."
+          },
           "default": {
             "description": "Common error response.",
             "schema": {
@@ -311,15 +314,22 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/PatchProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
+          "description": "Properties that describes current states of the patch resource.",
           "x-ms-mutability": [
             "read",
-            "create"
+            "update"
           ]
+        },
+        "patchDetails": {
+          "description": "Detailed info describes the patch operation for the target container app.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PatchDetails"
+          },
+          "x-ms-client-flatten": true
         }
       },
-      "description": "The resource representation of a patch.",
+      "description": "Container App Patch",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -354,7 +364,7 @@
         "ImagePushPullFailed",
         "ManuallySkipped"
       ],
-      "x-nullable": true,
+      "required": false,
       "x-ms-enum": {
         "name": "PatchApplyStatus",
         "modelAsString": true
@@ -376,7 +386,7 @@
       "readOnly": true
     },
     "PatchDetails": {
-      "description": "The details of specific patch item.",
+      "description": "The detailed info of patch operation performing when applying a patch.",
       "type": "object",
       "properties": {
         "targetContainerName": {
@@ -400,7 +410,7 @@
         "newImageName": {
           "type": "string",
           "description": "The name of the new image created by the patch.",
-          "x-nullable": true
+          "required": false
         },
         "newLayer": {
           "type": "object",
@@ -418,8 +428,8 @@
               "description": "The OS name and its version in the new run image for the target image."
             }
           },
-          "description": "The details of new run image for the target image.",
-          "x-nullable": true
+          "description": "New layer update details in the target image.",
+          "required": false
         },
         "oldLayer": {
           "type": "object",
@@ -437,8 +447,8 @@
               "description": "The OS name and its version in the old run image for the target image."
             }
           },
-          "description": "The details of old run image for the target image.",
-          "x-nullable": true
+          "description": "The old layer details in the target image.",
+          "required": false
         },
         "patchType": {
           "type": "string",
@@ -446,10 +456,10 @@
           "enum": [
             "FrameworkSecurity",
             "OSSecurity",
-            "FrameworkAndOS",
+            "FrameworkAndOSSecurity",
             "Other"
           ],
-          "x-nullable": true,
+          "required": false,
           "x-ms-enum": {
             "name": "PatchType",
             "modelAsString": true
@@ -463,14 +473,17 @@
       "properties": {
         "targetEnvironmentId": {
           "format": "arm-id",
+          "type": "string",
           "description": "The id of the target environment for the patch."
         },
         "targetContainerAppId": {
           "format": "arm-id",
+          "type": "string",
           "description": "The id of the target container app for the patch."
         },
         "targetRevisionId": {
           "format": "arm-id",
+          "type": "string",
           "description": "The id of the target revision for the patch."
         },
         "provisioningState": {
@@ -480,50 +493,44 @@
         },
         "patchApplyStatus": {
           "$ref": "#/definitions/PatchApplyStatus",
-          "description": "The status of the patch once it has been provisioned",
+          "description": "The status of the patch operation once it has been provisioned",
           "readOnly": true
         },
         "createdTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The UTC timestamp that describes when the patch object was created."
+          "description": "The UTC timestamp that describes when the patch object was created.",
+          "readOnly": true
         },
         "updatedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The UTC timestamp that describes when the patch object was last updated."
-        },
-        "patchDetails": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PatchDetails"
-          },
-          "description": "Detailed info about the specific patch.",
-          "x-ms-identifiers": []
+          "description": "The UTC timestamp that describes when the patch object was last updated.",
+          "readOnly": true
         }
       },
       "readOnly": true
     },
     "PatchCollection": {
+      "description": "Container App SourceToCloud patch collection",
+      "required": [
+        "value"
+      ],
       "type": "object",
       "properties": {
         "value": {
+          "description": "Collection of patch resources.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PatchResource"
-          },
-          "description": "The PatchResource items on this page"
+          }
         },
         "nextLink": {
+          "description": "the link to the next page of items",
           "type": "string",
-          "format": "uri",
-          "description": "the link to the next page of items"
+          "format": "uri"
         }
-      },
-      "description": "The response of a PatchResource list resources",
-      "required": [
-        "value"
-      ]
+      }
     }
   },
   "parameters": {
