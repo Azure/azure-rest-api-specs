@@ -3260,8 +3260,44 @@
         "flowAnalyticsConfiguration": {
           "$ref": "#/definitions/TrafficAnalyticsProperties",
           "description": "Parameters that define the configuration of traffic analytics."
+        },
+        "identity": {
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The type of identity used for the resource. The type 'UserAssigned' includes set of user assigned identities. The type 'None' will remove any identities from the flowlog.",
+              "enum": [
+                "UserAssigned",
+                "None"
+              ],
+              "x-ms-enum": {
+                "name": "ResourceIdentityType",
+                "modelAsString": false
+              }
+            },
+            "userAssignedIdentities": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "principalId": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The principal id of user assigned identity."
+                  },
+                  "clientId": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The client id of user assigned identity."
+                  }
+                }
+              },
+              "description": "The list of user identities associated with resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
+            }
+          },
+          "description": "Identity for the resource."
         }
-      }
+      },
     },
     "TrafficAnalyticsProperties": {
       "description": "Parameters that define the configuration of traffic analytics.",
