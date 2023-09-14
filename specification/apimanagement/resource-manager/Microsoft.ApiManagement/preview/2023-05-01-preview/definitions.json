@@ -4899,6 +4899,77 @@
       },
       "description": "Policy restrictions contract properties."
     },
+    "AllPoliciesCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AllPoliciesContract"
+          },
+          "description": "AllPolicies Contract value."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "The response of All Policies."
+    },
+    "AllPoliciesContract": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AllPoliciesContractProperties",
+          "description": "Properties of the All Policies."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "AllPolicies Contract details."
+    },
+    "AllPoliciesContractProperties": {
+      "type": "object",
+      "properties": {
+        "referencePolicyId": {
+          "type": "string",
+          "description": "Policy Identifier"
+        },
+        "complianceState": {
+          "type": "string",
+          "description": "Policy Restriction Compliance State",
+          "enum": [
+            "Pending",
+            "NonCompliant",
+            "Compliant"
+          ],
+          "x-ms-enum": {
+            "name": "PolicyComplianceState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Pending",
+                "description": "The policy restriction compliance state has not yet been determined."
+              },
+              {
+                "value": "NonCompliant",
+                "description": "The scope in restriction is out of compliance."
+              },
+              {
+                "value": "Compliant",
+                "description": "The scope in restriction is in compliance."
+              }
+            ]
+          },
+          "default": "Pending"
+        }
+      },
+      "description": "AllPolicies Properties."
+    },
     "ResourceCollection": {
       "type": "object",
       "properties": {

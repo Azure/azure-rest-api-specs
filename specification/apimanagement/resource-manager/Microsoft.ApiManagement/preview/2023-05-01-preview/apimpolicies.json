@@ -58,45 +58,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "|     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| ComplianceState | filter | eq, ne |  |</br>"
-          },
-          {
-            "name": "includeAllPolicies",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "true",
-              "false"
-            ],
-            "x-ms-enum": {
-              "name": "includeAllPoliciesValues",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "true",
-                  "description": "Includes all tenant policies."
-                },
-                {
-                  "value": "false",
-                  "description": "Display only tenant level policy."
-                }
-              ]
-            },
-            "description": "Includes all policies for the tenant in response."
           }
         ],
         "responses": {
           "200": {
             "description": "Returns an array of Policy Contracts.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/PolicyWithComplianceCollection"
+              "$ref": "./definitions.json#/definitions/PolicyCollection"
             }
           },
           "default": {
@@ -196,7 +164,7 @@
           "200": {
             "description": "Get the Global policy definition of the Api Management service.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/PolicyWithComplianceContract"
+              "$ref": "./definitions.json#/definitions/PolicyContract"
             },
             "headers": {
               "ETag": {
@@ -239,7 +207,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./definitions.json#/definitions/PolicyWithComplianceContract"
+              "$ref": "./definitions.json#/definitions/PolicyContract"
             },
             "description": "The policy contents to apply."
           },
@@ -257,7 +225,7 @@
           "201": {
             "description": "Global policy configuration was successfully created.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/PolicyWithComplianceContract"
+              "$ref": "./definitions.json#/definitions/PolicyContract"
             },
             "headers": {
               "ETag": {
@@ -269,7 +237,7 @@
           "200": {
             "description": "Global policy configuration of the Api Management service was successfully updated.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/PolicyWithComplianceContract"
+              "$ref": "./definitions.json#/definitions/PolicyContract"
             },
             "headers": {
               "ETag": {

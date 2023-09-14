@@ -39,6 +39,7 @@ These settings apply only when `--tag=package-preview-2023-05` is specified on t
 ```yaml $(tag) == 'package-preview-2023-05'
 input-file:
   - Microsoft.ApiManagement/preview/2023-05-01-preview/apimanagement.json
+  - Microsoft.ApiManagement/preview/2023-05-01-preview/apimallpolicies.json
   - Microsoft.ApiManagement/preview/2023-05-01-preview/apimapis.json
   - Microsoft.ApiManagement/preview/2023-05-01-preview/apimapisByTags.json
   - Microsoft.ApiManagement/preview/2023-05-01-preview/apimapiversionsets.json
@@ -1059,4 +1060,20 @@ directive:
   - suppress: R4009
     from: apimpolicyfragments.json
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version. 
+  - suppress: PropertiesTypeObjectNoDefinition
+    from: definitions.json
+    where: $.definitions.PolicyRestrictionCollection.properties.nextLink
+    reason: Invalid error, nextLink is a string, not an object
+  - suppress: PropertiesTypeObjectNoDefinition
+    from: definitions.json
+	where: $.definitions.PolicyRestrictionContractProperties
+	reason: Invalid error
+  - suppress: PropertiesTypeObjectNoDefinition
+	from: definitions.json
+	where: $.definitions.AllPoliciesCollection.properties.nextLink
+    reason: Invalid error
+  - suppress: PropertiesTypeObjectNoDefinition
+    from: definitions.json  
+    where: $.definitions.AllPoliciesContractProperties
+    reason: Invalid error
 ```
