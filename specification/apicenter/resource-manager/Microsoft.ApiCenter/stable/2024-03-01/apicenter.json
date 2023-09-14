@@ -476,6 +476,9 @@
           "MetadataSchemas_List": {
             "$ref": "./examples/MetadataSchemas_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -664,6 +667,9 @@
           "Workspaces_List": {
             "$ref": "./examples/Workspaces_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       },
       "parameters": [
@@ -889,6 +895,9 @@
           "Apis_List": {
             "$ref": "./examples/Apis_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1103,6 +1112,9 @@
           "ApiVersions_List": {
             "$ref": "./examples/ApiVersions_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1302,7 +1314,9 @@
         "tags": [
           "ApiDefinition"
         ],
+        "operationId": "ApiDefinitions_List",
         "summary": "List API definitions",
+        "description": "Returns a collection of API definitions.",
         "responses": {
           "200": {
             "description": "Paginated collection of API definitions.",
@@ -1322,8 +1336,9 @@
             "$ref": "./examples/ApiDefinitions_List.json"
           }
         },
-        "operationId": "ApiDefinitions_List",
-        "description": "Returns a collection of API definitions."
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/apis/{apiName}/versions/{versionName}/definitions/{definitionName}": {
@@ -1667,6 +1682,9 @@
           "Deployments_List": {
             "$ref": "./examples/Deployments_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1861,6 +1879,9 @@
           "Environments_List": {
             "$ref": "./examples/Environments_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       },
       "parameters": [
@@ -1959,6 +1980,9 @@
           "Environments_CreateOrUpdate": {
             "$ref": "./examples/Environments_CreateOrUpdate.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       },
       "delete": {
@@ -2166,6 +2190,7 @@
       ]
     },
     "MetadataSchemaCollection": {
+      "type": "object",
       "title": "Metadata schema collection",
       "description": "Paginated collection of metadata schemas.",
       "properties": {
@@ -2190,6 +2215,7 @@
       }
     },
     "Workspace": {
+      "type": "object",
       "title": "Workspace",
       "description": "Workspace entity.",
       "allOf": [
@@ -2225,6 +2251,7 @@
       "description": "Workspace properties."
     },
     "WorkspaceCollection": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -2952,6 +2979,7 @@
       }
     },
     "Onboarding": {
+      "type": "object",
       "properties": {
         "instructions": {
           "type": "string",
