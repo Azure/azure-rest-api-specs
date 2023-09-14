@@ -9032,6 +9032,19 @@
       "x-ms-discriminator-value": "AccountKey",
       "additionalProperties": false
     },
+    "AllFeatures": {
+      "required": [
+        "filterType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MonitoringFeatureFilterBase"
+        }
+      ],
+      "x-ms-discriminator-value": "AllFeatures",
+      "additionalProperties": false
+    },
     "AllNodes": {
       "description": "All nodes means the service will be running on all of the nodes of the job",
       "type": "object",
@@ -9052,6 +9065,17 @@
         }
       ],
       "x-ms-discriminator-value": "AMLToken",
+      "additionalProperties": false
+    },
+    "AmlTokenComputeIdentity": {
+      "description": "AML token compute identity definition.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MonitorComputeIdentityBase"
+        }
+      ],
+      "x-ms-discriminator-value": "AmlToken",
       "additionalProperties": false
     },
     "AssetBase": {
@@ -10086,6 +10110,156 @@
       },
       "additionalProperties": false
     },
+    "CategoricalDataDriftMetric": {
+      "enum": [
+        "JensenShannonDistance",
+        "PopulationStabilityIndex",
+        "PearsonsChiSquaredTest"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CategoricalDataDriftMetric",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "JensenShannonDistance",
+            "description": "The Jensen Shannon Distance (JSD) metric."
+          },
+          {
+            "value": "PopulationStabilityIndex",
+            "description": "The Population Stability Index (PSI) metric."
+          },
+          {
+            "value": "PearsonsChiSquaredTest",
+            "description": "The Pearsons Chi Squared Test metric."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "CategoricalDataDriftMetricThreshold": {
+      "required": [
+        "metric"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataDriftMetricThresholdBase"
+        }
+      ],
+      "properties": {
+        "metric": {
+          "description": "[Required] The categorical data drift metric to calculate.",
+          "$ref": "#/definitions/CategoricalDataDriftMetric",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "Categorical",
+      "additionalProperties": false
+    },
+    "CategoricalDataQualityMetric": {
+      "enum": [
+        "NullValueRate",
+        "DataTypeErrorRate",
+        "OutOfBoundsRate"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CategoricalDataQualityMetric",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "NullValueRate",
+            "description": "Calculates the rate of null values."
+          },
+          {
+            "value": "DataTypeErrorRate",
+            "description": "Calculates the rate of data type errors."
+          },
+          {
+            "value": "OutOfBoundsRate",
+            "description": "Calculates the rate values are out of bounds."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "CategoricalDataQualityMetricThreshold": {
+      "required": [
+        "metric"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataQualityMetricThresholdBase"
+        }
+      ],
+      "properties": {
+        "metric": {
+          "description": "[Required] The categorical data quality metric to calculate.",
+          "$ref": "#/definitions/CategoricalDataQualityMetric",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "Categorical",
+      "additionalProperties": false
+    },
+    "CategoricalPredictionDriftMetric": {
+      "enum": [
+        "JensenShannonDistance",
+        "PopulationStabilityIndex",
+        "PearsonsChiSquaredTest"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CategoricalPredictionDriftMetric",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "JensenShannonDistance",
+            "description": "The Jensen Shannon Distance (JSD) metric."
+          },
+          {
+            "value": "PopulationStabilityIndex",
+            "description": "The Population Stability Index (PSI) metric."
+          },
+          {
+            "value": "PearsonsChiSquaredTest",
+            "description": "The Pearsons Chi Squared Test metric."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "CategoricalPredictionDriftMetricThreshold": {
+      "required": [
+        "metric"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PredictionDriftMetricThresholdBase"
+        }
+      ],
+      "properties": {
+        "metric": {
+          "description": "[Required] The categorical prediction drift metric to calculate.",
+          "$ref": "#/definitions/CategoricalPredictionDriftMetric",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "Categorical",
+      "additionalProperties": false
+    },
     "CertificateDatastoreCredentials": {
       "description": "Certificate datastore credentials configuration.",
       "required": [
@@ -10889,6 +11063,29 @@
       },
       "additionalProperties": false
     },
+    "CreateMonitorAction": {
+      "required": [
+        "monitorDefinition"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScheduleActionBase"
+        }
+      ],
+      "properties": {
+        "monitorDefinition": {
+          "description": "[Required] Defines the monitor.",
+          "$ref": "#/definitions/MonitorDefinition",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "CreateMonitor",
+      "additionalProperties": false
+    },
     "CredentialsType": {
       "description": "Enum to determine the datastore credentials type.",
       "enum": [
@@ -10964,6 +11161,34 @@
       "x-ms-discriminator-value": "Custom",
       "additionalProperties": false
     },
+    "CustomMetricThreshold": {
+      "required": [
+        "metric"
+      ],
+      "type": "object",
+      "properties": {
+        "metric": {
+          "description": "[Required] The user-defined metric to calculate.",
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "threshold": {
+          "description": "The threshold value. If null, a default value will be set depending on the selected metric.",
+          "$ref": "#/definitions/MonitoringThreshold",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
     "CustomModelJobInput": {
       "type": "object",
       "allOf": [
@@ -10988,6 +11213,72 @@
         }
       ],
       "x-ms-discriminator-value": "custom_model",
+      "additionalProperties": false
+    },
+    "CustomMonitoringSignal": {
+      "required": [
+        "componentId",
+        "metricThresholds"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MonitoringSignalBase"
+        }
+      ],
+      "properties": {
+        "componentId": {
+          "description": "[Required] ARM resource ID of the component resource used to calculate the custom metrics.",
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "inputAssets": {
+          "description": "Monitoring assets to take as input. Key is the component input port name, value is the data asset.",
+          "type": "object",
+          "additionalProperties": {
+            "description": "Monitoring input data base definition.",
+            "$ref": "#/definitions/MonitoringInputDataBase",
+            "x-nullable": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "inputs": {
+          "description": "Extra component parameters to take as input. Key is the component literal input port name, value is the parameter value.",
+          "type": "object",
+          "additionalProperties": {
+            "description": "Command job definition.",
+            "$ref": "#/definitions/JobInput",
+            "x-nullable": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "metricThresholds": {
+          "description": "[Required] A list of metrics to calculate and their associated thresholds.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomMetricThreshold"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-ms-identifiers": []
+        }
+      },
+      "x-ms-discriminator-value": "Custom",
       "additionalProperties": false
     },
     "CustomNCrossValidations": {
@@ -11136,6 +11427,107 @@
       },
       "additionalProperties": false
     },
+    "DataDriftMetricThresholdBase": {
+      "required": [
+        "dataType"
+      ],
+      "type": "object",
+      "properties": {
+        "dataType": {
+          "description": "[Required] Specifies the data type of the metric threshold.",
+          "$ref": "#/definitions/MonitoringFeatureDataType",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "threshold": {
+          "description": "The threshold value. If null, a default value will be set depending on the selected metric.",
+          "$ref": "#/definitions/MonitoringThreshold",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        }
+      },
+      "discriminator": "dataType"
+    },
+    "DataDriftMonitoringSignal": {
+      "required": [
+        "metricThresholds",
+        "productionData",
+        "referenceData"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MonitoringSignalBase"
+        }
+      ],
+      "properties": {
+        "featureDataTypeOverride": {
+          "description": "A dictionary that maps feature names to their respective data types.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/MonitoringFeatureDataType"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "featureImportanceSettings": {
+          "description": "The settings for computing feature importance.",
+          "$ref": "#/definitions/FeatureImportanceSettings",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "features": {
+          "description": "The feature filter which identifies which feature to calculate drift over.",
+          "$ref": "#/definitions/MonitoringFeatureFilterBase",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "metricThresholds": {
+          "description": "[Required] A list of metrics to calculate and their associated thresholds.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataDriftMetricThresholdBase"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-ms-identifiers": []
+        },
+        "productionData": {
+          "description": "[Required] The data which drift will be calculated for.",
+          "$ref": "#/definitions/MonitoringInputDataBase",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "referenceData": {
+          "description": "[Required] The data to calculate drift against.",
+          "$ref": "#/definitions/MonitoringInputDataBase",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "DataDrift",
+      "additionalProperties": false
+    },
     "DataPathAssetReference": {
       "description": "Reference to an asset via its path in a datastore.",
       "type": "object",
@@ -11157,6 +11549,107 @@
         }
       },
       "x-ms-discriminator-value": "DataPath",
+      "additionalProperties": false
+    },
+    "DataQualityMetricThresholdBase": {
+      "required": [
+        "dataType"
+      ],
+      "type": "object",
+      "properties": {
+        "dataType": {
+          "description": "[Required] Specifies the data type of the metric threshold.",
+          "$ref": "#/definitions/MonitoringFeatureDataType",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "threshold": {
+          "description": "The threshold value. If null, a default value will be set depending on the selected metric.",
+          "$ref": "#/definitions/MonitoringThreshold",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        }
+      },
+      "discriminator": "dataType"
+    },
+    "DataQualityMonitoringSignal": {
+      "required": [
+        "metricThresholds",
+        "productionData",
+        "referenceData"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MonitoringSignalBase"
+        }
+      ],
+      "properties": {
+        "featureDataTypeOverride": {
+          "description": "A dictionary that maps feature names to their respective data types.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/MonitoringFeatureDataType"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "featureImportanceSettings": {
+          "description": "The settings for computing feature importance.",
+          "$ref": "#/definitions/FeatureImportanceSettings",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "features": {
+          "description": "The features to calculate drift over.",
+          "$ref": "#/definitions/MonitoringFeatureFilterBase",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "metricThresholds": {
+          "description": "[Required] A list of metrics to calculate and their associated thresholds.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataQualityMetricThresholdBase"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-ms-identifiers": []
+        },
+        "productionData": {
+          "description": "[Required] The data produced by the production service which drift will be calculated for.",
+          "$ref": "#/definitions/MonitoringInputDataBase",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "referenceData": {
+          "description": "[Required] The data to calculate drift against.",
+          "$ref": "#/definitions/MonitoringInputDataBase",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "DataQuality",
       "additionalProperties": false
     },
     "DataType": {
@@ -12059,6 +12552,155 @@
       },
       "additionalProperties": false
     },
+    "FeatureAttributionDriftMonitoringSignal": {
+      "required": [
+        "metricThreshold",
+        "productionData",
+        "referenceData"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MonitoringSignalBase"
+        }
+      ],
+      "properties": {
+        "featureDataTypeOverride": {
+          "description": "A dictionary that maps feature names to their respective data types.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/MonitoringFeatureDataType"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "featureImportanceSettings": {
+          "description": "The settings for computing feature importance.",
+          "$ref": "#/definitions/FeatureImportanceSettings",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "metricThreshold": {
+          "description": "[Required] A list of metrics to calculate and their associated thresholds.",
+          "$ref": "#/definitions/FeatureAttributionMetricThreshold",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "productionData": {
+          "description": "[Required] The data which drift will be calculated for.",
+          "type": "array",
+          "items": {
+            "description": "Monitoring input data base definition.",
+            "$ref": "#/definitions/MonitoringInputDataBase"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-ms-identifiers": []
+        },
+        "referenceData": {
+          "description": "[Required] The data to calculate drift against.",
+          "$ref": "#/definitions/MonitoringInputDataBase",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "FeatureAttributionDrift",
+      "additionalProperties": false
+    },
+    "FeatureAttributionMetric": {
+      "enum": [
+        "NormalizedDiscountedCumulativeGain"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "FeatureAttributionMetric",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "NormalizedDiscountedCumulativeGain",
+            "description": "The Normalized Discounted Cumulative Gain metric."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "FeatureAttributionMetricThreshold": {
+      "required": [
+        "metric"
+      ],
+      "type": "object",
+      "properties": {
+        "metric": {
+          "description": "[Required] The feature attribution metric to calculate.",
+          "$ref": "#/definitions/FeatureAttributionMetric",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "threshold": {
+          "description": "The threshold value. If null, a default value will be set depending on the selected metric.",
+          "$ref": "#/definitions/MonitoringThreshold",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "FeatureImportanceMode": {
+      "description": "The mode of operation for computing feature importance.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "FeatureImportanceMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Disabled",
+            "description": "Disables computing feature importance within a signal."
+          },
+          {
+            "value": "Enabled",
+            "description": "Enables computing feature importance within a signal."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "FeatureImportanceSettings": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "description": "The mode of operation for computing feature importance.",
+          "default": "Disabled",
+          "$ref": "#/definitions/FeatureImportanceMode"
+        },
+        "targetColumn": {
+          "description": "The name of the target column within the input data asset.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
     "FeatureLags": {
       "description": "Flag for generating lags for the numeric features.",
       "enum": [
@@ -12080,6 +12722,33 @@
           }
         ]
       },
+      "additionalProperties": false
+    },
+    "FeatureSubset": {
+      "required": [
+        "features",
+        "filterType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MonitoringFeatureFilterBase"
+        }
+      ],
+      "properties": {
+        "features": {
+          "description": "[Required] The list of features to include.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "FeatureSubset",
       "additionalProperties": false
     },
     "FeaturizationMode": {
@@ -12120,6 +12789,17 @@
           "x-nullable": true
         }
       },
+      "additionalProperties": false
+    },
+    "FixedInputData": {
+      "description": "Fixed input data definition.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MonitoringInputDataBase"
+        }
+      ],
+      "x-ms-discriminator-value": "Fixed",
       "additionalProperties": false
     },
     "FlavorData": {
@@ -14249,6 +14929,24 @@
       "x-ms-discriminator-value": "mltable",
       "additionalProperties": false
     },
+    "ManagedComputeIdentity": {
+      "description": "Managed compute identity definition.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MonitorComputeIdentityBase"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "description": "Managed service identity (system assigned and/or user assigned identities)",
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "x-nullable": true
+        }
+      },
+      "x-ms-discriminator-value": "ManagedIdentity",
+      "additionalProperties": false
+    },
     "ManagedIdentity": {
       "description": "Managed identity configuration.",
       "type": "object",
@@ -14409,6 +15107,31 @@
       },
       "additionalProperties": false
     },
+    "ModelTaskType": {
+      "description": "Model task type enum.",
+      "enum": [
+        "Classification",
+        "Regression",
+        "QuestionAnswering"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ModelTaskType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Classification"
+          },
+          {
+            "value": "Regression"
+          },
+          {
+            "value": "QuestionAnswering"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
     "ModelVersion": {
       "description": "Model asset version details.",
       "type": "object",
@@ -14493,6 +15216,525 @@
           "items": {
             "$ref": "#/definitions/ModelVersionResource"
           }
+        }
+      },
+      "additionalProperties": false
+    },
+    "MonitorComputeConfigurationBase": {
+      "description": "Monitor compute configuration base definition.",
+      "required": [
+        "computeType"
+      ],
+      "type": "object",
+      "properties": {
+        "computeType": {
+          "description": "[Required] Specifies the type of signal to monitor.",
+          "$ref": "#/definitions/MonitorComputeType",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "discriminator": "computeType"
+    },
+    "MonitorComputeIdentityBase": {
+      "description": "Monitor compute identity base definition.",
+      "required": [
+        "computeIdentityType"
+      ],
+      "type": "object",
+      "properties": {
+        "computeIdentityType": {
+          "description": "[Required] Monitor compute identity type enum.",
+          "$ref": "#/definitions/MonitorComputeIdentityType",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "discriminator": "computeIdentityType"
+    },
+    "MonitorComputeIdentityType": {
+      "description": "Monitor compute identity type enum.",
+      "enum": [
+        "AmlToken",
+        "ManagedIdentity"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MonitorComputeIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AmlToken",
+            "description": "Authenticates through user's AML token."
+          },
+          {
+            "value": "ManagedIdentity",
+            "description": "Authenticates through a user-provided managed identity."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "MonitorComputeType": {
+      "description": "Monitor compute type enum.",
+      "enum": [
+        "ServerlessSpark"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MonitorComputeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "ServerlessSpark",
+            "description": "Serverless Spark compute."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "MonitorDefinition": {
+      "required": [
+        "computeConfiguration",
+        "signals"
+      ],
+      "type": "object",
+      "properties": {
+        "alertNotificationSettings": {
+          "description": "The monitor's notification settings.",
+          "$ref": "#/definitions/MonitorNotificationSettings",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "computeConfiguration": {
+          "description": "[Required] The ARM resource ID of the compute resource to run the monitoring job on.",
+          "$ref": "#/definitions/MonitorComputeConfigurationBase",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "monitoringTarget": {
+          "description": "The ARM resource ID of either the model or deployment targeted by this monitor.",
+          "$ref": "#/definitions/MonitoringTarget",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "signals": {
+          "description": "[Required] The signals to monitor.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/MonitoringSignalBase",
+            "x-nullable": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "MonitorEmailNotificationSettings": {
+      "type": "object",
+      "properties": {
+        "emails": {
+          "description": "This is the email recipient list which has a limitation of 499 characters in total.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "additionalProperties": false
+    },
+    "MonitorNotificationSettings": {
+      "type": "object",
+      "properties": {
+        "emailNotificationSettings": {
+          "description": "The AML notification email settings.",
+          "$ref": "#/definitions/MonitorEmailNotificationSettings",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "MonitorServerlessSparkCompute": {
+      "description": "Monitor serverless spark compute definition.",
+      "required": [
+        "computeIdentity",
+        "instanceType",
+        "runtimeVersion"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MonitorComputeConfigurationBase"
+        }
+      ],
+      "properties": {
+        "computeIdentity": {
+          "description": "[Required] The identity scheme leveraged to by the spark jobs running on serverless Spark.",
+          "$ref": "#/definitions/MonitorComputeIdentityBase",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "instanceType": {
+          "description": "[Required] The instance type running the Spark job.",
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "runtimeVersion": {
+          "description": "[Required] The Spark runtime version.",
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "ServerlessSpark",
+      "additionalProperties": false
+    },
+    "MonitoringFeatureDataType": {
+      "enum": [
+        "Numerical",
+        "Categorical"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MonitoringFeatureDataType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Numerical",
+            "description": "Used for features of numerical data type."
+          },
+          {
+            "value": "Categorical",
+            "description": "Used for features of categorical data type."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "MonitoringFeatureFilterBase": {
+      "required": [
+        "filterType"
+      ],
+      "type": "object",
+      "properties": {
+        "filterType": {
+          "description": "[Required] Specifies the feature filter to leverage when selecting features to calculate metrics over.",
+          "$ref": "#/definitions/MonitoringFeatureFilterType",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "discriminator": "filterType"
+    },
+    "MonitoringFeatureFilterType": {
+      "enum": [
+        "AllFeatures",
+        "TopNByAttribution",
+        "FeatureSubset"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MonitoringFeatureFilterType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AllFeatures",
+            "description": "Includes all features."
+          },
+          {
+            "value": "TopNByAttribution",
+            "description": "Only includes the top contributing features, measured by feature attribution."
+          },
+          {
+            "value": "FeatureSubset",
+            "description": "Includes a user-defined subset of features."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "MonitoringInputDataBase": {
+      "description": "Monitoring input data base definition.",
+      "required": [
+        "inputDataType",
+        "jobInputType",
+        "uri"
+      ],
+      "type": "object",
+      "properties": {
+        "columns": {
+          "description": "Mapping of column names to special uses.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "dataContext": {
+          "description": "The context metadata of the data source.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "inputDataType": {
+          "description": "[Required] Specifies the type of signal to monitor.",
+          "$ref": "#/definitions/MonitoringInputDataType",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "jobInputType": {
+          "description": "[Required] Specifies the type of job.",
+          "$ref": "#/definitions/JobInputType",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "uri": {
+          "description": "[Required] Input Asset URI.",
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "discriminator": "inputDataType"
+    },
+    "MonitoringInputDataType": {
+      "description": "Monitoring input data type enum.",
+      "enum": [
+        "Static",
+        "Rolling",
+        "Fixed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MonitoringInputDataType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Static",
+            "description": "An input data with a fixed window size."
+          },
+          {
+            "value": "Rolling",
+            "description": "An input data which rolls relatively to the monitor's current run time."
+          },
+          {
+            "value": "Fixed",
+            "description": "An input data with tabular format which doesn't require preprocessing."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "MonitoringNotificationType": {
+      "enum": [
+        "AmlNotification"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MonitoringNotificationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AmlNotification",
+            "description": "Enables email notifications through AML notifications."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "MonitoringSignalBase": {
+      "required": [
+        "signalType"
+      ],
+      "type": "object",
+      "properties": {
+        "notificationTypes": {
+          "description": "The current notification mode for this signal.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitoringNotificationType"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true,
+          "x-ms-identifiers": []
+        },
+        "properties": {
+          "description": "Property dictionary. Properties can be added, but not removed or altered.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
+        },
+        "signalType": {
+          "description": "[Required] Specifies the type of signal to monitor.",
+          "$ref": "#/definitions/MonitoringSignalType",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "discriminator": "signalType"
+    },
+    "MonitoringSignalType": {
+      "enum": [
+        "DataDrift",
+        "PredictionDrift",
+        "DataQuality",
+        "FeatureAttributionDrift",
+        "Custom",
+        "ModelPerformance",
+        "GenerationSafetyQuality",
+        "GenerationTokenStatistics"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MonitoringSignalType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "DataDrift",
+            "description": "Tracks model input data distribution change, comparing against training data or past production data."
+          },
+          {
+            "value": "PredictionDrift",
+            "description": "Tracks prediction result data distribution change, comparing against validation/test label data or past production data."
+          },
+          {
+            "value": "DataQuality",
+            "description": "Tracks model input data integrity."
+          },
+          {
+            "value": "FeatureAttributionDrift",
+            "description": "Tracks feature importance change in production, comparing against feature importance at training time."
+          },
+          {
+            "value": "Custom",
+            "description": "Tracks a custom signal provided by users."
+          },
+          {
+            "value": "ModelPerformance",
+            "description": "Tracks model performance based on ground truth data."
+          },
+          {
+            "value": "GenerationSafetyQuality",
+            "description": "Tracks the safety and quality of generated content."
+          },
+          {
+            "value": "GenerationTokenStatistics",
+            "description": "Tracks the token usage of generative endpoints."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "MonitoringTarget": {
+      "description": "Monitoring target definition.",
+      "required": [
+        "taskType"
+      ],
+      "type": "object",
+      "properties": {
+        "deploymentId": {
+          "description": "The ARM resource ID of either the deployment targeted by this monitor.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "modelId": {
+          "description": "The ARM resource ID of either the model targeted by this monitor.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "taskType": {
+          "description": "[Required] The machine learning task type of the model.",
+          "$ref": "#/definitions/ModelTaskType",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "MonitoringThreshold": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "format": "double",
+          "description": "The threshold value. If null, the set default is dependent on the metric type.",
+          "type": "number",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -14661,6 +15903,162 @@
         }
       ],
       "x-ms-discriminator-value": "None",
+      "additionalProperties": false
+    },
+    "NumericalDataDriftMetric": {
+      "enum": [
+        "JensenShannonDistance",
+        "PopulationStabilityIndex",
+        "NormalizedWassersteinDistance",
+        "TwoSampleKolmogorovSmirnovTest"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "NumericalDataDriftMetric",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "JensenShannonDistance",
+            "description": "The Jensen Shannon Distance (JSD) metric."
+          },
+          {
+            "value": "PopulationStabilityIndex",
+            "description": "The Population Stability Index (PSI) metric."
+          },
+          {
+            "value": "NormalizedWassersteinDistance",
+            "description": "The Normalized Wasserstein Distance metric."
+          },
+          {
+            "value": "TwoSampleKolmogorovSmirnovTest",
+            "description": "The Two Sample Kolmogorov-Smirnov Test (two-sample K–S) metric."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "NumericalDataDriftMetricThreshold": {
+      "required": [
+        "metric"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataDriftMetricThresholdBase"
+        }
+      ],
+      "properties": {
+        "metric": {
+          "description": "[Required] The numerical data drift metric to calculate.",
+          "$ref": "#/definitions/NumericalDataDriftMetric"
+        }
+      },
+      "x-ms-discriminator-value": "Numerical",
+      "additionalProperties": false
+    },
+    "NumericalDataQualityMetric": {
+      "enum": [
+        "NullValueRate",
+        "DataTypeErrorRate",
+        "OutOfBoundsRate"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "NumericalDataQualityMetric",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "NullValueRate",
+            "description": "Calculates the rate of null values."
+          },
+          {
+            "value": "DataTypeErrorRate",
+            "description": "Calculates the rate of data type errors."
+          },
+          {
+            "value": "OutOfBoundsRate",
+            "description": "Calculates the rate values are out of bounds."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "NumericalDataQualityMetricThreshold": {
+      "required": [
+        "metric"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataQualityMetricThresholdBase"
+        }
+      ],
+      "properties": {
+        "metric": {
+          "description": "[Required] The numerical data quality metric to calculate.",
+          "$ref": "#/definitions/NumericalDataQualityMetric",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "Numerical",
+      "additionalProperties": false
+    },
+    "NumericalPredictionDriftMetric": {
+      "enum": [
+        "JensenShannonDistance",
+        "PopulationStabilityIndex",
+        "NormalizedWassersteinDistance",
+        "TwoSampleKolmogorovSmirnovTest"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "NumericalPredictionDriftMetric",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "JensenShannonDistance",
+            "description": "The Jensen Shannon Distance (JSD) metric."
+          },
+          {
+            "value": "PopulationStabilityIndex",
+            "description": "The Population Stability Index (PSI) metric."
+          },
+          {
+            "value": "NormalizedWassersteinDistance",
+            "description": "The Normalized Wasserstein Distance metric."
+          },
+          {
+            "value": "TwoSampleKolmogorovSmirnovTest",
+            "description": "The Two Sample Kolmogorov-Smirnov Test (two-sample K–S) metric."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "NumericalPredictionDriftMetricThreshold": {
+      "required": [
+        "metric"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PredictionDriftMetricThresholdBase"
+        }
+      ],
+      "properties": {
+        "metric": {
+          "description": "[Required] The numerical prediction drift metric to calculate.",
+          "$ref": "#/definitions/NumericalPredictionDriftMetric",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "Numerical",
       "additionalProperties": false
     },
     "ObjectDetectionPrimaryMetrics": {
@@ -15347,6 +16745,89 @@
       "x-ms-discriminator-value": "Pipeline",
       "additionalProperties": false
     },
+    "PredictionDriftMetricThresholdBase": {
+      "required": [
+        "dataType"
+      ],
+      "type": "object",
+      "properties": {
+        "dataType": {
+          "description": "[Required] Specifies the data type of the metric threshold.",
+          "$ref": "#/definitions/MonitoringFeatureDataType",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "threshold": {
+          "description": "The threshold value. If null, a default value will be set depending on the selected metric.",
+          "$ref": "#/definitions/MonitoringThreshold",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        }
+      },
+      "discriminator": "dataType"
+    },
+    "PredictionDriftMonitoringSignal": {
+      "required": [
+        "metricThresholds",
+        "productionData",
+        "referenceData"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MonitoringSignalBase"
+        }
+      ],
+      "properties": {
+        "featureDataTypeOverride": {
+          "description": "A dictionary that maps feature names to their respective data types.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/MonitoringFeatureDataType"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "metricThresholds": {
+          "description": "[Required] A list of metrics to calculate and their associated thresholds.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PredictionDriftMetricThresholdBase"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-ms-identifiers": []
+        },
+        "productionData": {
+          "description": "[Required] The data which drift will be calculated for.",
+          "$ref": "#/definitions/MonitoringInputDataBase",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "referenceData": {
+          "description": "[Required] The data to calculate drift against.",
+          "$ref": "#/definitions/MonitoringInputDataBase",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "PredictionDrift",
+      "additionalProperties": false
+    },
     "ProbeSettings": {
       "description": "Deployment container liveness/readiness probe configuration.",
       "type": "object",
@@ -15856,6 +17337,50 @@
       },
       "additionalProperties": false
     },
+    "RollingInputData": {
+      "description": "Rolling input data definition.",
+      "required": [
+        "windowOffset",
+        "windowSize"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MonitoringInputDataBase"
+        }
+      ],
+      "properties": {
+        "preprocessingComponentId": {
+          "description": "The ARM resource ID of the component resource used to preprocess the data.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "windowOffset": {
+          "format": "duration",
+          "description": "[Required] The time offset between the end of the data window and the monitor's current run time.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "windowSize": {
+          "format": "duration",
+          "description": "[Required] The size of the trailing data window.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "Rolling",
+      "additionalProperties": false
+    },
     "Route": {
       "required": [
         "path",
@@ -16080,7 +17605,8 @@
     "ScheduleActionType": {
       "enum": [
         "CreateJob",
-        "InvokeBatchEndpoint"
+        "InvokeBatchEndpoint",
+        "CreateMonitor"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -16092,6 +17618,9 @@
           },
           {
             "value": "InvokeBatchEndpoint"
+          },
+          {
+            "value": "CreateMonitor"
           }
         ]
       },
@@ -16584,6 +18113,50 @@
           }
         ]
       },
+      "additionalProperties": false
+    },
+    "StaticInputData": {
+      "description": "Static input data definition.",
+      "required": [
+        "windowEnd",
+        "windowStart"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MonitoringInputDataBase"
+        }
+      ],
+      "properties": {
+        "preprocessingComponentId": {
+          "description": "The ARM resource ID of the component resource used to preprocess the data.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "windowEnd": {
+          "format": "date-time",
+          "description": "[Required] The end date of the data window.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "windowStart": {
+          "format": "date-time",
+          "description": "[Required] The start date of the data window.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "Static",
       "additionalProperties": false
     },
     "StochasticOptimizer": {
@@ -17202,6 +18775,31 @@
         }
       },
       "x-ms-discriminator-value": "TextNER",
+      "additionalProperties": false
+    },
+    "TopNFeaturesByAttribution": {
+      "required": [
+        "filterType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MonitoringFeatureFilterBase"
+        }
+      ],
+      "properties": {
+        "top": {
+          "format": "int32",
+          "description": "The number of top features to include.",
+          "default": 10,
+          "type": "integer",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "TopNByAttribution",
       "additionalProperties": false
     },
     "TrainingSettings": {
