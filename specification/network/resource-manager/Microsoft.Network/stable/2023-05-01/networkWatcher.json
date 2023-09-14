@@ -3106,50 +3106,46 @@
     },
     "RequestIdentityObjectForUserAssigned": {
       "properties": {
-        "identity": {
-          "type": {
-            "type": "string",
-            "description": "The type of identity used for the resource. The type 'UserAssigned' includes set of user assigned identities. The type 'None' will remove any identities from the flowlog.",
-            "enum": [
-              "UserAssigned",
-              "None"
-            ],
-            "x-ms-enum": {
-              "name": "ResourceIdentityType",
-              "modelAsString": false
-            }
-          },
-          "userAssignedIdentities": {
-            "type": "object",
-            "description": "The list of user identities associated with resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for the resource. The type 'UserAssigned' includes set of user assigned identities. The type 'None' will remove any identities from the flowlog.",
+          "enum": [
+            "UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
           }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The list of user identities associated with resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
         }
       },
       "description": "Identity for the resource."
     },
     "ResultIdentityObjectForUserAssigned": {
       "properties": {
-        "identity": {
-          "type": {
-            "type": "string",
-            "description": "The type of identity used for the resource. The type 'UserAssigned' includes set of user assigned identities. The type 'None' will remove any identities from the flowlog.",
-            "enum": [
-              "UserAssigned",
-              "None"
-            ],
-            "x-ms-enum": {
-              "name": "ResourceIdentityType",
-              "modelAsString": false
-            }
-          },
-          "userAssignedIdentities": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "object",
-              "$ref": "#/definitions/UserIdentityProperties"
-            },
-            "description": "The list of user identities associated with resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for the resource. The type 'UserAssigned' includes set of user assigned identities. The type 'None' will remove any identities from the flowlog.",
+          "enum": [
+            "UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
           }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "$ref": "#/definitions/UserIdentityProperties"
+          },
+          "description": "The list of user identities associated with resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
         }
       },
       "description": "Identity for the resource."
