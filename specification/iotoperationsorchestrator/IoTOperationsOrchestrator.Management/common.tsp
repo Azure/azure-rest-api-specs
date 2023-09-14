@@ -54,14 +54,14 @@ model ComponentProperties {
 @doc("Reconciliation Policy")
 model ReconciliationPolicy {
   @doc("Policy type")
-  type: ReconciliationPolicys;
+  type: ReconciliationPolicies;
 
   @doc("Policy interval")
   interval?: string;
 }
 
 @doc("Policies to control how the resource should reconcile.")
-enum ReconciliationPolicys {
+enum ReconciliationPolicies {
   @doc("Allows resource to reconcile periodically.")
   periodic: "periodic",
 }
