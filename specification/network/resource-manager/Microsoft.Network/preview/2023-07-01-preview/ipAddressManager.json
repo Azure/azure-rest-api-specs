@@ -388,10 +388,7 @@
             "name": "body",
             "description": "List of strings that represent resource ids to associate.",
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+              "$ref": "#/definitions/AssociationRequest"
             }
           }
         ],
@@ -458,10 +455,7 @@
             "name": "body",
             "description": "List of strings that represents resource ids to disassociate.",
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+              "$ref": "#/definitions/AssociationRequest"
             }
           }
         ],
@@ -788,6 +782,17 @@
         },
         "numberOfIPAddressesToAllocate": {
           "type": "string"
+        }
+      }
+    },
+    "AssociationRequest": {
+      "type": "object",
+      "properties": {
+        "resourceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
