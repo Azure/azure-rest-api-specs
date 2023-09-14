@@ -71,7 +71,7 @@ model NetworkFunctionResourceProperties {
  * @template TResource the resource being patched
  * @template TBaseParameters Optional. Allows overriding the operation parameters
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-outside-interface" "This is a valid template"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "This is a valid template"
 @autoRoute
 @doc("Create a {name}", TResource)
 @OpenAPI.extension("x-ms-long-running-operation", true)
