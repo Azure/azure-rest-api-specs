@@ -189,9 +189,7 @@
               "Retry-After": {
                 "description": "Duration the client should wait between requests, in seconds.",
                 "type": "integer",
-                "format": "int32",
-                "maximum": 600,
-                "minimum": 10
+                "format": "int32"
               }
             }
           },
@@ -758,9 +756,7 @@
               "Retry-After": {
                 "description": "Duration the client should wait between requests, in seconds.",
                 "type": "integer",
-                "format": "int32",
-                "maximum": 600,
-                "minimum": 10
+                "format": "int32"
               }
             }
           },
@@ -2429,29 +2425,11 @@
           "additionalProperties": {
             "description": "Outbound Rule for the managed network of a machine learning workspace.",
             "$ref": "#/definitions/OutboundRule"
-          },
-          "x-nullable": true
+          }
         },
         "status": {
           "description": "Status of the Provisioning for the managed network of a machine learning workspace.",
           "$ref": "#/definitions/ManagedNetworkProvisionStatus"
-        }
-      }
-    },
-    "ManagedNetworkSettingsEx": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ManagedNetworkSettings"
-        }
-      ],
-      "properties": {
-        "changeableIsolationModes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IsolationMode"
-          },
-          "readOnly": true
         }
       }
     },
@@ -2572,22 +2550,22 @@
       }
     },
     "OutboundRule": {
-      "description": "Outbound Rule for the managed network of a machine learning workspace.",
+      "description": "Outbound rule for the managed network of a machine learning workspace.",
       "required": [
         "type"
       ],
       "type": "object",
       "properties": {
         "category": {
-          "description": "Category of a managed network Outbound Rule of a machine learning workspace.",
+          "description": "Category of a managed network outbound rule of a machine learning workspace.",
           "$ref": "#/definitions/RuleCategory"
         },
         "status": {
-          "description": "Type of a managed network Outbound Rule of a machine learning workspace.",
+          "description": "Type of a managed network outbound rule of a machine learning workspace.",
           "$ref": "#/definitions/RuleStatus"
         },
         "type": {
-          "description": "Type of a managed network Outbound Rule of a machine learning workspace.",
+          "description": "Type of a managed network outbound rule of a machine learning workspace.",
           "$ref": "#/definitions/RuleType"
         }
       },
@@ -2743,7 +2721,8 @@
       "type": "object",
       "properties": {
         "serviceResourceId": {
-          "type": "string"
+          "type": "string",
+          "format": "arm-id"
         },
         "sparkEnabled": {
           "type": "boolean"
@@ -3203,13 +3182,17 @@
           "$ref": "#/definitions/ConnectionCategory"
         },
         "createdByWorkspaceArmId": {
-          "type": "string"
+          "description": "The arm id of the workspace which created this connection",
+          "type": "string",
+          "format": "arm-id",
+          "readOnly": true
         },
         "expiryTime": {
           "format": "date-time",
           "type": "string"
         },
         "isSharedToAll": {
+          "description": "whether this connection will be shared to all the project workspace under the hub",
           "type": "boolean"
         },
         "metadata": {
@@ -3219,6 +3202,7 @@
           }
         },
         "sharedUserList": {
+          "description": "list of user id who can access this connection",
           "type": "array",
           "items": {
             "type": "string"
@@ -3435,7 +3419,7 @@
           }
         },
         "managedNetwork": {
-          "$ref": "#/definitions/ManagedNetworkSettingsEx"
+          "$ref": "#/definitions/ManagedNetworkSettings"
         },
         "mlFlowTrackingUri": {
           "description": "The URI associated with this workspace that machine learning flow must point at to set up tracking.",
@@ -3602,7 +3586,7 @@
           "type": "string"
         },
         "managedNetwork": {
-          "$ref": "#/definitions/ManagedNetworkSettingsEx"
+          "$ref": "#/definitions/ManagedNetworkSettings"
         },
         "primaryUserAssignedIdentity": {
           "description": "The user assigned identity resource id that represents the workspace identity.",
