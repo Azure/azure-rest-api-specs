@@ -1138,8 +1138,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FlowLogInformation",
-              "$ref1": "#/definitions/RequestIdentityObjectForUserAssigned"
+              "$ref": "#/definitions/FlowLogInformationRequest"
             },
             "description": "Parameters that define the configuration of flow log."
           },
@@ -1154,15 +1153,13 @@
           "200": {
             "description": "Successful request for setting flow log and traffic analytics (optional) configuration.",
             "schema": {
-              "$ref": "#/definitions/FlowLogInformation",
-              "$ref1": "#/definitions/ResultIdentityObjectForUserAssigned"
+              "$ref": "#/definitions/FlowLogInformationResponse"
             }
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
             "schema": {
-              "$ref": "#/definitions/FlowLogInformation",
-              "$ref1": "#/definitions/ResultIdentityObjectForUserAssigned"
+              "$ref": "#/definitions/FlowLogInformationResponse"
             }
           },
           "default": {
@@ -1226,15 +1223,13 @@
           "200": {
             "description": "Successful request for query flow log and traffic analytics (optional) status.",
             "schema": {
-              "$ref": "#/definitions/FlowLogInformation",
-              "$ref1": "#/definitions/ResultIdentityObjectForUserAssigned"
+              "$ref": "#/definitions/FlowLogInformationResponse"
             }
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
             "schema": {
-              "$ref": "#/definitions/FlowLogInformation",
-              "$ref1": "#/definitions/ResultIdentityObjectForUserAssigned"
+              "$ref": "#/definitions/FlowLogInformationResponse"
             }
           },
           "default": {
@@ -3111,7 +3106,7 @@
     },
     "RequestIdentityObjectForUserAssigned": {
       "properties": {
-        "indentity": {
+        "identity": {
           "type": {
             "type": "string",
             "description": "The type of identity used for the resource. The type 'UserAssigned' includes set of user assigned identities. The type 'None' will remove any identities from the flowlog.",
@@ -3134,7 +3129,7 @@
     },
     "ResultIdentityObjectForUserAssigned": {
       "properties": {
-        "indentity": {
+        "identity": {
           "type": {
             "type": "string",
             "description": "The type of identity used for the resource. The type 'UserAssigned' includes set of user assigned identities. The type 'None' will remove any identities from the flowlog.",
@@ -3185,12 +3180,15 @@
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "identity": {
+          "description": "Identity of the workspace",
+          "$ref": "#/definitions/ResultIdentityObjectForUserAssigned"
         }
       },
       "allOf": [
         {
-          "$ref": "./network.json#/definitions/Resource",
-          "$ref1": "#/definitions/ResultIdentityObjectForUserAssigned"
+          "$ref": "./network.json#/definitions/Resource"
         }
       ],
       "description": "A flow log resource."
@@ -3313,7 +3311,7 @@
         }
       }
     },
-    "FlowLogInformation": {
+    "FlowLogInformationRequest": {
       "description": "Information on the configuration of flow log and traffic analytics (optional) .",
       "required": [
         "targetResourceId",
@@ -3334,40 +3332,34 @@
           "description": "Parameters that define the configuration of traffic analytics."
         },
         "identity": {
-          "properties": {
-            "type": {
-              "type": "string",
-              "description": "The type of identity used for the resource. The type 'UserAssigned' includes set of user assigned identities. The type 'None' will remove any identities from the flowlog.",
-              "enum": [
-                "UserAssigned",
-                "None"
-              ],
-              "x-ms-enum": {
-                "name": "ResourceIdentityType",
-                "modelAsString": false
-              }
-            },
-            "userAssignedIdentities": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "object",
-                "properties": {
-                  "principalId": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The principal id of user assigned identity."
-                  },
-                  "clientId": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The client id of user assigned identity."
-                  }
-                }
-              },
-              "description": "The list of user identities associated with resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
-            }
-          },
-          "description": "Identity for the resource."
+          "description": "Identity of the workspace",
+          "$ref": "#/definitions/RequestIdentityObjectForUserAssigned"
+        }
+      }
+    },
+    "FlowLogInformationResponse": {
+      "description": "Information on the configuration of flow log and traffic analytics (optional) .",
+      "required": [
+        "targetResourceId",
+        "properties"
+      ],
+      "properties": {
+        "targetResourceId": {
+          "description": "The ID of the resource to configure for flow log and traffic analytics (optional) .",
+          "type": "string"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FlowLogProperties",
+          "description": "Properties of the flow log."
+        },
+        "flowAnalyticsConfiguration": {
+          "$ref": "#/definitions/TrafficAnalyticsProperties",
+          "description": "Parameters that define the configuration of traffic analytics."
+        },
+        "identity": {
+          "description": "Identity of the workspace",
+          "$ref": "#/definitions/ResultIdentityObjectForUserAssigned"
         }
       }
     },
