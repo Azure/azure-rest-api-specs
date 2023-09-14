@@ -9,8 +9,7 @@ alias Response = {
   @doc("A processing job identifier.")
   @visibility("read")
   @key
-  @format("uuid")
-  jobId: string;
+  jobId: Azure.Core.uuid;
 
   @doc("The date and time when the processing job was created.")
   @visibility("read")
