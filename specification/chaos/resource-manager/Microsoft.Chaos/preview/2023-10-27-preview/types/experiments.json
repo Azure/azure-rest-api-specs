@@ -109,12 +109,36 @@
           "description": "A boolean value that indicates if experiment should be started on creation or not.",
           "type": "boolean",
           "x-nullable": true
+        },
+        "customerDataStorage": {
+          "description": "Optional customer-managed Storage account where Experiment schema will be stored.",
+          "$ref": "#/definitions/customerDataStorageProperties",
+          "x-nullable": true
         }
       },
       "required": [
         "steps",
         "selectors"
       ],
+      "additionalProperties": false
+    },
+    "customerDataStorageProperties": {
+      "description": "Model that represents the Customer Managed Storage for an Experiment.",
+      "type": "object",
+      "properties": {
+        "storageAccountResourceId": {
+          "type": "string",
+          "description": "ARM Resource ID of the Storage account to use for Customer Data storage."
+        },
+        "blobContainerName": {
+          "type": "string",
+          "description": "Name of the Azure Blob Storage container to use or create.",
+          "maxLength": 63,
+          "minLength": 3,
+          "pattern": "^[a-z0-9]([a-z0-9]|(-(?!-))){1,61}[a-z0-9]$",
+          "x-nullable": true
+        }
+      },
       "additionalProperties": false
     },
     "experimentListResult": {
