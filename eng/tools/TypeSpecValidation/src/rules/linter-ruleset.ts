@@ -1,6 +1,6 @@
 import { readFile } from "fs/promises";
 import path from "path";
-import { parseDocument } from "yaml";
+// import { parseDocument } from "yaml";
 import { checkFileExists } from "../utils.js";
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
@@ -20,7 +20,7 @@ export class LinterRulesetRule implements Rule {
     console.assert(checkFileExists(configFile));
 
     const file = await readFile(configFile);
-    parseDocument()
+    // parseDocument()
 
     return {
       success: success,
