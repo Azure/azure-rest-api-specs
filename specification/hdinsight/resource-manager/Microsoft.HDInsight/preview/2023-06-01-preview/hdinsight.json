@@ -1082,9 +1082,7 @@
           "description": "The number of virtual machines.",
           "type": "integer",
           "format": "int32",
-          "default": 3,
-          "maximum": 10,
-          "minimum": 3
+          "readOnly": true
         }
       }
     },
@@ -2254,6 +2252,7 @@
       "description": "The metastore specification for Spark cluster.",
       "required": [
         "dbServerHost",
+        "dbName",
         "dbUserName",
         "dbPasswordSecretName",
         "keyVaultId"

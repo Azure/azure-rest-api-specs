@@ -27,7 +27,7 @@ These are the global settings for the voiceservices.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-04-03
+tag: package-2023-07-13-preview
 ```
 
 ### Tag: package-2022-12-01-preview
@@ -64,6 +64,15 @@ These settings apply only when `--tag=package-2023-04-03` is specified on the co
 ```yaml $(tag) == 'package-2023-04-03'
 input-file:
   - Microsoft.VoiceServices/stable/2023-04-03/voiceservices.json
+```
+
+### Tag: package-2023-07-13-preview
+
+These settings apply only when `--tag=package-2023-07-13-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-07-13-preview'
+input-file:
+  - Microsoft.VoiceServices/preview/2023-07-13-preview/voiceservices.json
 ```
 
 ---

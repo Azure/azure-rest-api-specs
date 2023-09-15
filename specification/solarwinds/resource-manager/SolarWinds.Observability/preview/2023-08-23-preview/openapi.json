@@ -1,0 +1,2100 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SolarWinds.Observability",
+    "version": "2023-08-23-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Organizations"
+    },
+    {
+      "name": "TagRules"
+    }
+  ],
+  "paths": {
+    "/providers/SolarWinds.Observability/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/SolarWinds.Observability/organizations": {
+      "get": {
+        "operationId": "Organizations_ListBySubscription",
+        "tags": [
+          "Organizations"
+        ],
+        "description": "List SolarWindsOrganizationResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SolarWindsOrganizationResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organizations_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/Organizations_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/SolarWinds.Observability/organizations": {
+      "get": {
+        "operationId": "Organizations_ListByResourceGroup",
+        "tags": [
+          "Organizations"
+        ],
+        "description": "List SolarWindsOrganizationResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SolarWindsOrganizationResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organizations_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/Organizations_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/SolarWinds.Observability/organizations/{organizationName}": {
+      "get": {
+        "operationId": "Organizations_Get",
+        "tags": [
+          "Organizations"
+        ],
+        "description": "Get a SolarWindsOrganizationResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Organizations resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SolarWindsOrganizationResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organizations_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Organizations_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Organizations_Create",
+        "tags": [
+          "Organizations"
+        ],
+        "description": "Create a SolarWindsOrganizationResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Organizations resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SolarWindsOrganizationResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SolarWindsOrganizationResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SolarWindsOrganizationResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'SolarWindsOrganizationResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SolarWindsOrganizationResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organizations_Create_MaximumSet_Gen": {
+            "$ref": "./examples/Organizations_Create_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Organizations_Update",
+        "tags": [
+          "Organizations"
+        ],
+        "description": "Update a SolarWindsOrganizationResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Organizations resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SolarWindsOrganizationResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SolarWindsOrganizationResource"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organizations_Update_MaximumSet_Gen": {
+            "$ref": "./examples/Organizations_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Organizations_Delete",
+        "tags": [
+          "Organizations"
+        ],
+        "description": "Delete a SolarWindsOrganizationResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Organizations resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organizations_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/Organizations_Delete_MaximumSet_Gen.json"
+          },
+          "Organizations_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/Organizations_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/SolarWinds.Observability/organizations/{organizationName}/getMetricStatus": {
+      "post": {
+        "operationId": "Organizations_GetMetricStatus",
+        "tags": [
+          "Organizations"
+        ],
+        "description": "Get metric status",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Organizations resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          },
+          {
+            "$ref": "#/parameters/MetricsStatusRequestParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MetricsStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organizations_GetMetricStatus_MaximumSet_Gen": {
+            "$ref": "./examples/Organizations_GetMetricStatus_MaximumSet_Gen.json"
+          },
+          "Organizations_GetMetricStatus_MinimumSet_Gen": {
+            "$ref": "./examples/Organizations_GetMetricStatus_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/SolarWinds.Observability/organizations/{organizationName}/listMonitoredResources": {
+      "post": {
+        "operationId": "Organizations_ListMonitoredResources",
+        "tags": [
+          "Organizations"
+        ],
+        "description": "List the resources currently being monitored by the SolarWinds organization resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Organizations resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MonitoredResourceListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organizations_ListMonitoredResources_MaximumSet_Gen": {
+            "$ref": "./examples/Organizations_ListMonitoredResources_MaximumSet_Gen.json"
+          },
+          "Organizations_ListMonitoredResources_MinimumSet_Gen": {
+            "$ref": "./examples/Organizations_ListMonitoredResources_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/SolarWinds.Observability/organizations/{organizationName}/tagRules": {
+      "get": {
+        "operationId": "TagRules_ListBySolarWindsOrganizationResource",
+        "tags": [
+          "TagRules"
+        ],
+        "description": "List TagRule resources by SolarWindsOrganizationResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Organizations resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TagRuleListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TagRules_ListBySolarWindsOrganizationResource_MaximumSet_Gen": {
+            "$ref": "./examples/TagRules_ListBySolarWindsOrganizationResource_MaximumSet_Gen.json"
+          },
+          "TagRules_ListBySolarWindsOrganizationResource_MinimumSet_Gen": {
+            "$ref": "./examples/TagRules_ListBySolarWindsOrganizationResource_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/SolarWinds.Observability/organizations/{organizationName}/tagRules/{ruleSetName}": {
+      "get": {
+        "operationId": "TagRules_Get",
+        "tags": [
+          "TagRules"
+        ],
+        "description": "Get a TagRule",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Organizations resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          },
+          {
+            "name": "ruleSetName",
+            "in": "path",
+            "description": "Name of the TagRule",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TagRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TagRules_Get_MaximumSet_Gen": {
+            "$ref": "./examples/TagRules_Get_MaximumSet_Gen.json"
+          },
+          "TagRules_Get_MinimumSet_Gen": {
+            "$ref": "./examples/TagRules_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "TagRules_CreateOrUpdate",
+        "tags": [
+          "TagRules"
+        ],
+        "description": "Create a TagRule",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Organizations resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          },
+          {
+            "name": "ruleSetName",
+            "in": "path",
+            "description": "Name of the TagRule",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'TagRule' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/TagRule"
+            }
+          },
+          "201": {
+            "description": "Resource 'TagRule' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/TagRule"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TagRules_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/TagRules_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "TagRules_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/TagRules_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "TagRules_Update",
+        "tags": [
+          "TagRules"
+        ],
+        "description": "Update a TagRule",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Organizations resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          },
+          {
+            "name": "ruleSetName",
+            "in": "path",
+            "description": "Name of the TagRule",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsPatchModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TagRule"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TagRules_Update_MaximumSet_Gen": {
+            "$ref": "./examples/TagRules_Update_MaximumSet_Gen.json"
+          },
+          "TagRules_Update_MinimumSet_Gen": {
+            "$ref": "./examples/TagRules_Update_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "TagRules_Delete",
+        "tags": [
+          "TagRules"
+        ],
+        "description": "Delete a TagRule",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Organizations resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          },
+          {
+            "name": "ruleSetName",
+            "in": "path",
+            "description": "Name of the TagRule",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TagRules_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/TagRules_Delete_MaximumSet_Gen.json"
+          },
+          "TagRules_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/TagRules_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "BillingSource": {
+      "type": "string",
+      "description": "Billing source",
+      "enum": [
+        "AZURE"
+      ],
+      "x-ms-enum": {
+        "name": "BillingSource",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AZURE",
+            "value": "AZURE",
+            "description": "Billing source is Azure"
+          }
+        ]
+      }
+    },
+    "BillingSourceValues": {
+      "type": "string",
+      "description": "Billing source",
+      "enum": [
+        "AZURE"
+      ],
+      "x-ms-enum": {
+        "name": "BillingSourceValues",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AZURE",
+            "value": "AZURE",
+            "description": "Billing source is Azure"
+          }
+        ]
+      }
+    },
+    "CompanyDetails": {
+      "type": "object",
+      "description": "Details of the company",
+      "properties": {
+        "companyName": {
+          "type": "string",
+          "description": "Name of the company"
+        },
+        "officeAddress": {
+          "type": "string",
+          "description": "Address of the company"
+        },
+        "country": {
+          "type": "string",
+          "description": "Name of the country"
+        },
+        "domain": {
+          "type": "string",
+          "description": "Domain name"
+        },
+        "business": {
+          "type": "string",
+          "description": "Business name"
+        },
+        "numberOfEmployees": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of employees in the company"
+        }
+      }
+    },
+    "CompanyDetailsUpdate": {
+      "type": "object",
+      "description": "Company details of SolarWinds Organization resource",
+      "properties": {
+        "companyName": {
+          "type": "string",
+          "description": "Name of the company"
+        },
+        "officeAddress": {
+          "type": "string",
+          "description": "Address of the company"
+        },
+        "country": {
+          "type": "string",
+          "description": "Name of the country"
+        },
+        "domain": {
+          "type": "string",
+          "description": "Domain name"
+        },
+        "business": {
+          "type": "string",
+          "description": "Business name"
+        },
+        "numberOfEmployees": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of employees in the company"
+        }
+      }
+    },
+    "FilteringTag": {
+      "type": "object",
+      "description": "The definition of a filtering tag. Filtering tags are used for capturing resources and include/exclude them from being monitored.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name (also known as the key) of the tag."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the tag."
+        },
+        "action": {
+          "$ref": "#/definitions/TagAction",
+          "description": "Valid actions for a filtering tag. Exclusion takes priority over inclusion."
+        }
+      }
+    },
+    "LiftrResourceCategories": {
+      "type": "string",
+      "description": "Liftr Resource category.",
+      "enum": [
+        "Unknown",
+        "MonitorLogs"
+      ],
+      "x-ms-enum": {
+        "name": "LiftrResourceCategories",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Liftr Resource category is unknown"
+          },
+          {
+            "name": "MonitorLogs",
+            "value": "MonitorLogs",
+            "description": "Liftr Resource category is monitor logs"
+          }
+        ]
+      }
+    },
+    "LiftrResourceCategoriesValues": {
+      "type": "string",
+      "description": "Liftr Resource category.",
+      "enum": [
+        "Unknown",
+        "MonitorLogs"
+      ],
+      "x-ms-enum": {
+        "name": "LiftrResourceCategoriesValues",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Liftr Resource category is unknown"
+          },
+          {
+            "name": "MonitorLogs",
+            "value": "MonitorLogs",
+            "description": "Liftr Resource category is monitor logs"
+          }
+        ]
+      }
+    },
+    "LogRules": {
+      "type": "object",
+      "description": "Set of rules for sending logs for the Monitor resource.",
+      "properties": {
+        "sendAadLogs": {
+          "$ref": "#/definitions/SendAadLogsStatus",
+          "description": "Flag specifying if AAD logs should be sent for the Monitor resource."
+        },
+        "sendSubscriptionLogs": {
+          "$ref": "#/definitions/SendSubscriptionLogsStatus",
+          "description": "Flag specifying if subscription logs should be sent for the Monitor resource."
+        },
+        "sendActivityLogs": {
+          "$ref": "#/definitions/SendActivityLogsStatus",
+          "description": "Flag specifying if activity logs from Azure resources should be sent for the Monitor resource."
+        },
+        "filteringTags": {
+          "type": "array",
+          "description": "List of filtering tags to be used for capturing logs. This only takes effect if SendActivityLogs flag is enabled. If empty, all resources will be captured.\nIf only Exclude action is specified, the rules will apply to the list of all available resources. If Include actions are specified, the rules will only include resources with the associated tags.",
+          "items": {
+            "$ref": "#/definitions/FilteringTag"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "MarketplaceDetails": {
+      "type": "object",
+      "description": "Marketplace details",
+      "properties": {
+        "marketplaceSubscriptionId": {
+          "type": "string",
+          "description": "Marketplace Subscription Id"
+        },
+        "offerDetails": {
+          "$ref": "#/definitions/OfferDetails",
+          "description": "Marketplace offer details."
+        }
+      },
+      "required": [
+        "marketplaceSubscriptionId",
+        "offerDetails"
+      ]
+    },
+    "MarketplaceDetailsUpdate": {
+      "type": "object",
+      "description": "Marketplace details",
+      "properties": {
+        "marketplaceSubscriptionId": {
+          "type": "string",
+          "description": "Marketplace Subscription Id"
+        },
+        "offerDetails": {
+          "$ref": "#/definitions/OfferDetailsUpdate",
+          "description": "Marketplace offer details."
+        }
+      }
+    },
+    "MetricRules": {
+      "type": "object",
+      "description": "Set of rules for sending metrics for the Monitor resource.",
+      "properties": {
+        "sendMetrics": {
+          "$ref": "#/definitions/SendMetricsStatus",
+          "description": "Flag specifying if metrics should be sent for the Monitor resource."
+        },
+        "filteringTags": {
+          "type": "array",
+          "description": "List of filtering tags to be used for capturing metrics.",
+          "items": {
+            "$ref": "#/definitions/FilteringTag"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "MetricsStatusRequest": {
+      "type": "object",
+      "description": "Request of get metrics status Operation.",
+      "properties": {
+        "azureResourceIds": {
+          "type": "array",
+          "description": "Azure resource IDs",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MetricsStatusResponse": {
+      "type": "object",
+      "description": "Response of get metrics status Operation.",
+      "properties": {
+        "azureResourceIds": {
+          "type": "array",
+          "description": "Azure resource IDs",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MonitoredResource": {
+      "type": "object",
+      "description": "Details of resource being monitored by SolarWinds monitor resource",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ARM id of the resource."
+        },
+        "sendingLogs": {
+          "$ref": "#/definitions/SendingLogsStatus",
+          "description": "Flag indicating if resource is sending logs to SolarWinds."
+        },
+        "reasonForLogsStatus": {
+          "type": "string",
+          "description": "Reason for why the resource is sending logs (or why it is not sending)."
+        },
+        "sendingMetrics": {
+          "$ref": "#/definitions/SendingMetricsStatus",
+          "description": "Flag indicating if resource is sending metrics to SolarWinds."
+        },
+        "reasonForMetricsStatus": {
+          "type": "string",
+          "description": "Reason for why the resource is sending metrics (or why it is not sending)."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "MonitoredResourceListResponse": {
+      "type": "object",
+      "description": "List of all the resources being monitored by SolarWinds organization resource",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The MonitoredResource items on this page",
+          "items": {
+            "$ref": "#/definitions/MonitoredResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MonitoringStatus": {
+      "type": "string",
+      "description": "Flag specifying if the resource monitoring is enabled or disabled.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "MonitoringStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "monitoring is enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "monitoring is disabled"
+          }
+        ]
+      }
+    },
+    "MonitoringStatusValues": {
+      "type": "string",
+      "description": "Flag specifying if the resource monitoring is enabled or disabled.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "MonitoringStatusValues",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "monitoring is enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "monitoring is disabled"
+          }
+        ]
+      }
+    },
+    "MonitoringTagRulesProperties": {
+      "type": "object",
+      "description": "The resource-specific properties for this resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State of the resource",
+          "readOnly": true
+        },
+        "logRules": {
+          "$ref": "#/definitions/LogRules",
+          "description": "Set of rules for sending logs for the Monitor resource."
+        },
+        "metricRules": {
+          "$ref": "#/definitions/MetricRules",
+          "description": "Set of rules for sending metrics for the Monitor resource."
+        }
+      }
+    },
+    "OfferDetails": {
+      "type": "object",
+      "description": "Details of the product offering.",
+      "properties": {
+        "publisherId": {
+          "type": "string",
+          "description": "Id of the product publisher.",
+          "maxLength": 50
+        },
+        "offerId": {
+          "type": "string",
+          "description": "Id of the product offering.",
+          "maxLength": 50
+        },
+        "planId": {
+          "type": "string",
+          "description": "Id of the product offer plan.",
+          "maxLength": 50
+        },
+        "planName": {
+          "type": "string",
+          "description": "Name of the product offer plan.",
+          "maxLength": 50
+        },
+        "termUnit": {
+          "type": "string",
+          "description": "Offer plan term unit.",
+          "maxLength": 25
+        },
+        "termId": {
+          "type": "string",
+          "description": "Offer plan term id.",
+          "maxLength": 50
+        }
+      },
+      "required": [
+        "publisherId",
+        "offerId",
+        "planId",
+        "planName",
+        "termId"
+      ]
+    },
+    "OfferDetailsUpdate": {
+      "type": "object",
+      "description": "Details of the product offering",
+      "properties": {
+        "publisherId": {
+          "type": "string",
+          "description": "Id of the product publisher.",
+          "maxLength": 50
+        },
+        "offerId": {
+          "type": "string",
+          "description": "Id of the product offering.",
+          "maxLength": 50
+        },
+        "planId": {
+          "type": "string",
+          "description": "Id of the product offer plan.",
+          "maxLength": 50
+        },
+        "planName": {
+          "type": "string",
+          "description": "Name of the product offer plan.",
+          "maxLength": 50
+        },
+        "termUnit": {
+          "type": "string",
+          "description": "Offer plan term unit.",
+          "maxLength": 25
+        },
+        "termId": {
+          "type": "string",
+          "description": "Offer plan term id.",
+          "maxLength": 50
+        }
+      }
+    },
+    "OrganizationInfo": {
+      "type": "object",
+      "description": "Organization Info of the SolarWinds account",
+      "properties": {
+        "organizationId": {
+          "type": "string",
+          "description": "Organization id"
+        },
+        "regionId": {
+          "type": "string",
+          "description": "SolarWinds account region"
+        }
+      }
+    },
+    "OrganizationProperties": {
+      "type": "object",
+      "description": "Properties specific to the SolarWinds Observability Organization resource",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State of the resource",
+          "readOnly": true
+        },
+        "monitoringStatus": {
+          "$ref": "#/definitions/MonitoringStatus",
+          "description": "MonitoringStatus of the resource",
+          "readOnly": true
+        },
+        "solarWindsOrganizationProperties": {
+          "$ref": "#/definitions/SolarWindsOrganizationProperties",
+          "description": "SW Organization properties"
+        },
+        "marketplaceDetails": {
+          "$ref": "#/definitions/MarketplaceDetails",
+          "description": "Marketplace details"
+        },
+        "userDetails": {
+          "$ref": "#/definitions/UserDetails",
+          "description": "User details"
+        },
+        "companyDetails": {
+          "$ref": "#/definitions/CompanyDetails",
+          "description": "Company Details"
+        },
+        "ingestionKey": {
+          "$ref": "#/definitions/SecureString",
+          "description": "Ingestion key"
+        },
+        "existingResourceId": {
+          "type": "string",
+          "description": "Existing Resource Id"
+        },
+        "liftrResourceCategory": {
+          "$ref": "#/definitions/LiftrResourceCategories",
+          "description": "Liftr resource category",
+          "readOnly": true
+        },
+        "liftrResourcePreference": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Liftr resource preference. The priority of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "OrganizationPropertiesCustomUpdate": {
+      "type": "object",
+      "description": "Patchable Properties of the Organization observability resource",
+      "properties": {
+        "solarWindsOrganizationProperties": {
+          "$ref": "#/definitions/SolarWindsOrganizationPropertiesUpdate",
+          "description": "SW Organization properties"
+        },
+        "marketplaceDetails": {
+          "$ref": "#/definitions/MarketplaceDetailsUpdate",
+          "description": "Marketplace details"
+        },
+        "userDetails": {
+          "$ref": "#/definitions/UserDetailsUpdate",
+          "description": "User details"
+        },
+        "companyDetails": {
+          "$ref": "#/definitions/CompanyDetailsUpdate",
+          "description": "Company Details"
+        },
+        "existingResourceId": {
+          "type": "string",
+          "description": "Existing Resource Id"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning State of the Monitor resource",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Deleted",
+        "NotSpecified"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Monitor resource creation request accepted"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Monitor resource creation started"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Monitor resource is being updated"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Monitor resource deletion started"
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "Monitor resource is deleted"
+          },
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "Monitor resource state is unknown"
+          }
+        ]
+      }
+    },
+    "SecureString": {
+      "type": "string",
+      "format": "password",
+      "description": "Credential string",
+      "x-ms-secret": true
+    },
+    "SendAadLogsStatus": {
+      "type": "string",
+      "description": "Indicates whether AAD logs are being sent.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "SendAadLogsStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "AAD logs are enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "AAD logs are disabled"
+          }
+        ]
+      }
+    },
+    "SendAadLogsStatusValues": {
+      "type": "string",
+      "description": "Indicates whether AAD logs are being sent.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "SendAadLogsStatusValues",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "AAD logs are enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "AAD logs are disabled"
+          }
+        ]
+      }
+    },
+    "SendActivityLogsStatus": {
+      "type": "string",
+      "description": "Indicates whether activity logs are being sent.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "SendActivityLogsStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Activity logs are enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Activity logs are disabled"
+          }
+        ]
+      }
+    },
+    "SendActivityLogsStatusValues": {
+      "type": "string",
+      "description": "Indicates whether activity logs are being sent.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "SendActivityLogsStatusValues",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Activity logs are enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Activity logs are disabled"
+          }
+        ]
+      }
+    },
+    "SendMetricsStatus": {
+      "type": "string",
+      "description": "Indicates whether metrics are being sent.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "SendMetricsStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Metrics are enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Metrics are disabled"
+          }
+        ]
+      }
+    },
+    "SendSubscriptionLogsStatus": {
+      "type": "string",
+      "description": "Indicates whether subscription logs are being sent.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "SendSubscriptionLogsStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "subscription logs are enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "subscription logs are disabled"
+          }
+        ]
+      }
+    },
+    "SendSubscriptionLogsStatusValues": {
+      "type": "string",
+      "description": "Indicates whether subscription logs are being sent.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "SendSubscriptionLogsStatusValues",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "subscription logs are enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "subscription logs are disabled"
+          }
+        ]
+      }
+    },
+    "SendingLogsStatus": {
+      "type": "string",
+      "description": "Indicates whether logs are being sent.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "SendingLogsStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "logs are enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "logs are disabled"
+          }
+        ]
+      }
+    },
+    "SendingLogsStatusValues": {
+      "type": "string",
+      "description": "Indicates whether logs are being sent.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "SendingLogsStatusValues",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "logs are enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "logs are disabled"
+          }
+        ]
+      }
+    },
+    "SendingMetricsStatus": {
+      "type": "string",
+      "description": "Indicates whether metrics are being sent.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "SendingMetricsStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Metrics are enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Metrics are disabled"
+          }
+        ]
+      }
+    },
+    "SolarWindsOrganizationProperties": {
+      "type": "object",
+      "description": "Properties of the SolarWinds account",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "User id"
+        },
+        "organizationInfo": {
+          "$ref": "#/definitions/OrganizationInfo",
+          "description": "SolarWinds Organization Information"
+        },
+        "tagRule": {
+          "$ref": "#/definitions/TagRule",
+          "description": "A tag rule belonging to SolarWinds account"
+        }
+      }
+    },
+    "SolarWindsOrganizationPropertiesUpdate": {
+      "type": "object",
+      "description": "Patchable properties of a solarWinds Organization",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "User id"
+        },
+        "organizationInfo": {
+          "$ref": "#/definitions/OrganizationInfo",
+          "description": "SolarWinds Organization Information"
+        },
+        "tagRule": {
+          "$ref": "#/definitions/TagRuleUpdate",
+          "description": "A tag rule belonging to SolarWinds account"
+        }
+      }
+    },
+    "SolarWindsOrganizationResource": {
+      "type": "object",
+      "description": "A Organization Resource by SolarWinds",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OrganizationProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SolarWindsOrganizationResourceListResult": {
+      "type": "object",
+      "description": "The response of a SolarWindsOrganizationResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SolarWindsOrganizationResource items on this page",
+          "items": {
+            "$ref": "#/definitions/SolarWindsOrganizationResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SolarWindsOrganizationResourceUpdate": {
+      "type": "object",
+      "description": "The template for adding optional properties.",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/OrganizationPropertiesCustomUpdate",
+          "description": "Patchable Properties of the Organization observability resource"
+        }
+      }
+    },
+    "TagAction": {
+      "type": "string",
+      "description": "Valid actions for a filtering tag. Exclusion takes priority over inclusion.",
+      "enum": [
+        "Include",
+        "Exclude"
+      ],
+      "x-ms-enum": {
+        "name": "TagAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Include",
+            "value": "Include",
+            "description": "tags are included"
+          },
+          {
+            "name": "Exclude",
+            "value": "Exclude",
+            "description": "tags are excluded"
+          }
+        ]
+      }
+    },
+    "TagActionValues": {
+      "type": "string",
+      "description": "Valid actions for a filtering tag. Exclusion takes priority over inclusion.",
+      "enum": [
+        "Include",
+        "Exclude"
+      ],
+      "x-ms-enum": {
+        "name": "TagActionValues",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Include",
+            "value": "Include",
+            "description": "tags are included"
+          },
+          {
+            "name": "Exclude",
+            "value": "Exclude",
+            "description": "tags are excluded"
+          }
+        ]
+      }
+    },
+    "TagRule": {
+      "type": "object",
+      "description": "A tag rule belonging to SolarWinds account",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MonitoringTagRulesProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "TagRuleListResult": {
+      "type": "object",
+      "description": "The response of a TagRule list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TagRule items on this page",
+          "items": {
+            "$ref": "#/definitions/TagRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "TagRulePropertiesPatchModel": {
+      "type": "object",
+      "description": "Model for patching TagRule properties",
+      "properties": {
+        "logRules": {
+          "$ref": "#/definitions/LogRules",
+          "description": "Set of rules for sending logs for the Monitor resource."
+        },
+        "metricRules": {
+          "$ref": "#/definitions/MetricRules",
+          "description": "Set of rules for sending metrics for the Monitor resource."
+        }
+      }
+    },
+    "TagRulePropertiesUpdate": {
+      "type": "object",
+      "description": "The template for adding optional properties.",
+      "properties": {
+        "logRules": {
+          "$ref": "#/definitions/LogRules",
+          "description": "Set of rules for sending logs for the Monitor resource."
+        },
+        "metricRules": {
+          "$ref": "#/definitions/MetricRules",
+          "description": "Set of rules for sending metrics for the Monitor resource."
+        }
+      }
+    },
+    "TagRuleUpdate": {
+      "type": "object",
+      "description": "The patchable Tag Rule",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TagRulePropertiesUpdate",
+          "description": "The patchable TagRule properties."
+        }
+      }
+    },
+    "TagsPatchModel": {
+      "type": "object",
+      "description": "Model for patching TagRules",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "TagRule name",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/TagRulePropertiesPatchModel",
+          "description": "TagRule properties"
+        }
+      }
+    },
+    "UserDetails": {
+      "type": "object",
+      "description": "User Info of SolarWinds Organization resource",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "description": "User first name.",
+          "maxLength": 50
+        },
+        "lastName": {
+          "type": "string",
+          "description": "User last name.",
+          "maxLength": 50
+        },
+        "emailAddress": {
+          "$ref": "#/definitions/email",
+          "description": "User email address."
+        },
+        "alternateEmail": {
+          "type": "string",
+          "description": "Alternate Email address"
+        },
+        "upn": {
+          "type": "string",
+          "description": "UPN of user"
+        },
+        "address": {
+          "type": "string",
+          "description": "Address of user"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "Phone number of the user used by for contacting them if needed",
+          "maxLength": 40
+        },
+        "country": {
+          "type": "string",
+          "description": "Country of the user"
+        }
+      },
+      "required": [
+        "firstName",
+        "lastName",
+        "emailAddress"
+      ]
+    },
+    "UserDetailsUpdate": {
+      "type": "object",
+      "description": "User Info of SolarWinds Organization resource",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "description": "User first name.",
+          "maxLength": 50
+        },
+        "lastName": {
+          "type": "string",
+          "description": "User last name.",
+          "maxLength": 50
+        },
+        "emailAddress": {
+          "$ref": "#/definitions/email",
+          "description": "User email address."
+        },
+        "alternateEmail": {
+          "type": "string",
+          "description": "Alternate Email address"
+        },
+        "upn": {
+          "type": "string",
+          "description": "UPN of user"
+        },
+        "address": {
+          "type": "string",
+          "description": "Address of user"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "Phone number of the user used by for contacting them if needed",
+          "maxLength": 40
+        },
+        "country": {
+          "type": "string",
+          "description": "Country of the user"
+        }
+      }
+    },
+    "email": {
+      "type": "string",
+      "description": "Reusable representation of an email address",
+      "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$"
+    }
+  },
+  "parameters": {
+    "MetricsStatusRequestParameter": {
+      "name": "request",
+      "in": "body",
+      "description": "The details of the get metrics status request.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/MetricsStatusRequest"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

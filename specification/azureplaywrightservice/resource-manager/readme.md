@@ -27,7 +27,16 @@ These are the global settings for the azureplaywrightservice.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-06-01-preview
+tag: package-2023-09-01-preview
+```
+
+### Tag: package-2023-09-01-preview
+
+These settings apply only when `--tag=package-2023-09-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-09-01-preview'
+input-file:
+  - Microsoft.AzurePlaywrightService/preview/2023-09-01-preview/azureplaywrightservice.json
 ```
 
 ### Tag: package-2023-06-01-preview
@@ -89,3 +98,7 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## Java
+
+See configuration in [readme.csharp.md](./readme.java.md)
