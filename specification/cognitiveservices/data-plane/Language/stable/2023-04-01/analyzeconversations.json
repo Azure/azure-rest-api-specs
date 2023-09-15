@@ -14,11 +14,11 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}",
+    "hostTemplate": "{Endpoint}",
     "useSchemePrefix": false,
     "parameters": [
       {
-        "name": "endpoint",
+        "name": "Endpoint",
         "in": "path",
         "required": true,
         "description": "Supported Cognitive Services endpoint (e.g., https://<resource-name>.api.cognitiveservices.azure.com).",
@@ -34,13 +34,12 @@
   ],
   "security": [
     {
-      "apim_key": []
+      "ApiKeyAuth": []
     }
   ],
   "securityDefinitions": {
-    "apim_key": {
+    "ApiKeyAuth": {
       "type": "apiKey",
-      "description": "A subscription key for a Language service resource",
       "in": "header",
       "name": "Ocp-Apim-Subscription-Key"
     }
@@ -267,7 +266,7 @@
         "flows"
       ]
     },
-    "AbstractiveSummarizationTaskParameterBase": {
+    "AbstractiveSummarizationTaskParametersBase": {
       "type": "object",
       "properties": {
         "sentenceCount": {
@@ -573,7 +572,7 @@
     },
     "AnalyzeConversationResultsKind": {
       "type": "string",
-      "description": "Enumeration of results for supported conversation analysis tasks.",
+      "description": "Enumeration of results for supported conversation analysis Results.",
       "enum": [
         "ConversationalSummarizationResults"
       ],
@@ -611,14 +610,11 @@
       "type": "object",
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/ConversationSummarizationTaskParameters",
+          "$ref": "#/definitions/ConversationSummarizationTaskParametersBase",
           "description": "parameters"
         }
       },
       "description": "Task definition for conversational summarization.",
-      "required": [
-        "parameters"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/AnalyzeConversationLROTask"
@@ -661,10 +657,7 @@
       "type": "object",
       "properties": {
         "kind": {
-          "type": "string",
-          "enum": [
-            "ConversationResult"
-          ],
+          "$ref": "#/definitions/AnalyzeConversationTaskResultsKind",
           "description": "The base class of a conversation input task result."
         }
       },
@@ -1366,6 +1359,16 @@
     "ConversationSummarizationTaskParameters": {
       "type": "object",
       "properties": {
+        "modelVersion": {
+          "type": "string",
+          "description": "model version",
+          "default": "latest"
+        },
+        "loggingOptOut": {
+          "type": "boolean",
+          "description": "logging opt out",
+          "default": false
+        },
         "sentenceCount": {
           "type": "integer",
           "format": "int32",
@@ -1380,7 +1383,37 @@
           "items": {
             "$ref": "#/definitions/SummaryAspect"
           },
-          "description": "Supported parameters for a conversational summarization task.",
+          "description": "Array of Summary Aspects",
+          "x-typespec-name": "SummaryAspect[]"
+        }
+      },
+      "description": "Supported parameters for pre-build conversational summarization task.",
+      "required": [
+        "modelVersion",
+        "loggingOptOut",
+        "sentenceCount",
+        "stringIndexType",
+        "summaryAspects"
+      ]
+    },
+    "ConversationSummarizationTaskParametersBase": {
+      "type": "object",
+      "properties": {
+        "sentenceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "It controls the approximate number of sentences in the output summaries."
+        },
+        "stringIndexType": {
+          "$ref": "#/definitions/StringIndexType",
+          "description": "String index type"
+        },
+        "summaryAspects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SummaryAspect"
+          },
+          "description": "Array of Summary Aspects",
           "x-typespec-name": "SummaryAspect[]"
         }
       },
@@ -1389,11 +1422,6 @@
         "sentenceCount",
         "stringIndexType",
         "summaryAspects"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltTaskParameters"
-        }
       ]
     },
     "ConversationTargetIntentResult": {
@@ -1598,6 +1626,61 @@
         {
           "$ref": "#/definitions/BaseResolution"
         }
+      ]
+    },
+    "CustomResult": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          },
+          "description": "Errors by document id.",
+          "x-typespec-name": "DocumentError[]"
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
+        },
+        "projectName": {
+          "type": "string",
+          "description": "This field indicates the project name for the model."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "This field indicates the deployment name for the model."
+        }
+      },
+      "description": "Custom Task Results",
+      "required": [
+        "errors",
+        "projectName",
+        "deploymentName"
+      ]
+    },
+    "CustomTaskParameters": {
+      "type": "object",
+      "properties": {
+        "loggingOptOut": {
+          "type": "boolean",
+          "description": "logging opt out",
+          "default": false
+        },
+        "projectName": {
+          "type": "string",
+          "description": "This field indicates the project name for the model."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "This field indicates the deployment name for the model."
+        }
+      },
+      "description": "Parameters object for a text analysis task using custom models.",
+      "required": [
+        "loggingOptOut",
+        "projectName",
+        "deploymentName"
       ]
     },
     "DateTimeResolution": {
@@ -2211,8 +2294,9 @@
       "properties": {
         "result": {
           "type": "object",
+          "additionalProperties": true,
           "description": "The actual response from a LUIS Generally Available application.",
-          "x-typespec-name": "Record<never>"
+          "x-typespec-name": "Record<unknown>"
         }
       },
       "description": "It is a wrap up of LUIS Generally Available response.",
@@ -2607,6 +2691,30 @@
       },
       "description": "Transcript content response that the service generates, with all necessary personally identifiable information redacted."
     },
+    "RedactionCharacter": {
+      "type": "string",
+      "description": "Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction.",
+      "enum": [
+        "!",
+        "#",
+        "$",
+        "%",
+        "&",
+        "*",
+        "+",
+        "-",
+        "=",
+        "?",
+        "@",
+        "^",
+        "_",
+        "~"
+      ],
+      "x-ms-enum": {
+        "name": "RedactionCharacter",
+        "modelAsString": true
+      }
+    },
     "RegexKey": {
       "type": "object",
       "properties": {
@@ -2927,6 +3035,37 @@
     "SummaryResult": {
       "type": "object",
       "properties": {
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          },
+          "description": "Errors by document id.",
+          "x-typespec-name": "DocumentError[]"
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "statistics"
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "This field indicates which model is used for scoring."
+        }
+      },
+      "description": "Summary Results",
+      "required": [
+        "errors",
+        "modelVersion"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SummaryResultBase"
+        }
+      ]
+    },
+    "SummaryResultBase": {
+      "type": "object",
+      "properties": {
         "conversations": {
           "type": "array",
           "items": {
@@ -2936,14 +3075,9 @@
           "x-typespec-name": "ConversationsSummaryResult[]"
         }
       },
-      "description": "Summary Results",
+      "description": "Summary Results Base",
       "required": [
         "conversations"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltResult"
-        }
       ]
     },
     "SummaryResultItem": {
@@ -3256,7 +3390,8 @@
       "description": "Analyze Conversations Service Versions",
       "enum": [
         "2022-05-01",
-        "2023-04-01"
+        "2023-04-01",
+        "2023-04-15-preview"
       ],
       "x-ms-enum": {
         "name": "Versions",
@@ -3271,6 +3406,11 @@
             "name": "v2023_04_01",
             "value": "2023-04-01",
             "description": "Version 2023-04-01"
+          },
+          {
+            "name": "v2023_04_15_preview",
+            "value": "2023-04-15-preview",
+            "description": "Version 2023-04-15-preview"
           }
         ]
       }
@@ -3403,41 +3543,6 @@
         {
           "$ref": "#/definitions/AudioTiming"
         }
-      ]
-    },
-    "apim_key": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "apiKey"
-          ],
-          "description": "API key authentication"
-        },
-        "in": {
-          "type": "string",
-          "enum": [
-            "header"
-          ],
-          "description": "location of the API key"
-        },
-        "name": {
-          "type": "string",
-          "enum": [
-            "Ocp-Apim-Subscription-Key"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "description": "name of the API key"
-        }
-      },
-      "description": "A subscription key for a Language service resource",
-      "required": [
-        "type",
-        "in",
-        "name"
       ]
     },
     "extraInformationKind": {

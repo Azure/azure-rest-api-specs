@@ -1,3 +1,4 @@
+
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
@@ -133,14 +134,12 @@ model JobState {
 }
 
 @doc("job errors")
-@added(Versions.v2023_04_01)
 model JobErrors {
     @doc("errors")
     errors: Array<ErrorResponse>;
 }
 
 @doc("Contains details of errors encountered during a job execution.")
-@added(Versions.v2023_04_01)
 model DocumentError {
     @doc("The ID of the input document.")
     id: string;
@@ -150,7 +149,6 @@ model DocumentError {
 }
 
 @doc("Contains details of warnings encountered during a job execution.")
-@added(Versions.v2023_04_01)
 model InputWarning {
     @doc("Warning code.")
     code: string;
@@ -163,7 +161,6 @@ model InputWarning {
 }
 
 @doc("if showStats=true was specified in the request this field will contain information about the request payload.")
-@added(Versions.v2023_04_01)
 model RequestStatistics {
     @doc("Number of documents submitted in the request.")
     documentsCount: int32;
@@ -179,7 +176,6 @@ model RequestStatistics {
 }
 
 @doc("Pre built result")
-@added(Versions.v2023_04_01)
 model PreBuiltResult {
     @doc("Errors by document id.")
     errors: Array<DocumentError>;
@@ -493,7 +489,7 @@ model SentimentConfidenceScores {
 
 @doc("Supported parameters for an Abstractive Summarization task.")
 @added(Versions.v2023_04_01)
-model AbstractiveSummarizationTaskParameterBase {
+model AbstractiveSummarizationTaskParametersBase {
     @doc("It controls the approximate number of sentences in the output summaries.")
     sentenceCount: int32;
 
@@ -509,4 +505,62 @@ model SummaryContext {
 
     @doc("The length of the context. Use of different 'stringIndexType' values can affect the length returned.")
     length: int32;
+}
+
+@doc("Parameters object for a text analysis task using custom models.")
+model CustomTaskParameters {
+    ...TaskParameters;
+
+    @doc("This field indicates the project name for the model.")
+    projectName: string,
+
+    @doc("This field indicates the deployment name for the model.")
+    deploymentName: string
+}
+
+@doc("Custom Task Results")
+model CustomResult {
+    @doc("Errors by document id.")
+    errors: Array<DocumentError>,
+
+    @doc("if showStats=true was specified in the request this field will contain information about the request payload.")
+    statistics?: RequestStatistics,
+
+    @doc("This field indicates the project name for the model.")
+    projectName: string,
+
+    @doc("This field indicates the deployment name for the model.")
+    deploymentName: string,
+}
+
+@doc("Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction.")
+enum RedactionCharacter{
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    `!`,
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    `#`,
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    `$`,
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    `%`,
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    `&`,
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    `*`,
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    `+`,
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    `-`,
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    `=`,
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    `?`,
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    `@`,
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    `^`,
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    `_`,
+    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    `~`,
 }

@@ -43,6 +43,10 @@ enum Versions {
   @doc("Version 2023-04-01")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_04_01: "2023-04-01",
+
+  @doc("Version 2023-04-15-preview")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2023_04_15_preview: "2023-04-15-preview",
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
@@ -608,13 +612,37 @@ model AnalyzeConversationLROTask extends TaskIdentifier {
 enum AnalyzeConversationLROTaskKind {
   @doc("Conversational Summarization Task")
   ConversationalSummarizationTask,
+
+  @added(Versions.v2023_04_15_preview)
+  @doc("Conversational PII Task")
+  ConversationalPIITask,
+  
+  @added(Versions.v2023_04_15_preview)
+  @doc("Custom Conversational Summarization Task")
+  CustomConversationalSummarizationTask,
+  
+  @added(Versions.v2023_04_15_preview)
+  @doc("Conversational Sentiment Task")
+  ConversationalSentimentTask
 }
 
-@doc("Enumeration of results for supported conversation analysis tasks.")
+@doc("Enumeration of results for supported conversation analysis Results.")
 @added(Versions.v2023_04_01)
 enum AnalyzeConversationResultsKind {
   @doc("Conversational Summarization Results")
   ConversationalSummarizationResults,
+  
+  @added(Versions.v2023_04_15_preview)
+  @doc("Conversational PII Results")
+  ConversationalPIIResults,
+  
+  @added(Versions.v2023_04_15_preview)
+  @doc("Custom Conversational Summarization Results")
+  CustomConversationalSummarizationResults,
+  
+  @added(Versions.v2023_04_15_preview)
+  @doc("Conversational Sentiment Results")
+  ConversationalSentimentResults
 }
 
 @doc("Contains the status of the submitted job for analyzing a conversation, along with related statistics.")
@@ -815,6 +843,221 @@ model ConversationRequestStatistics extends RequestStatistics {
 @added(Versions.v2023_04_01)
 model ConversationItemLevelTiming extends AudioTiming {}
 
+@added(Versions.v2023_04_15_preview)
+@doc("Task definition for conversational sentiment.")
+model AnalyzeConversationalSentimentTask extends AnalyzeConversationLROTask {
+  @doc("discriminator kind")
+  kind: AnalyzeConversationLROTaskKind.ConversationalSentimentTask,
+
+  @doc("temp doc")
+  properties: ConversationalSentimentTaskParameters,
+}
+
+@added(Versions.v2023_04_15_preview)
+@doc("Supported parameters for a conversational sentiment task.")
+model ConversationalSentimentTaskParameters extends PreBuiltTaskParameters{
+  @doc("For transcript conversations, this parameter provides information regarding which content type should be used for sentiment analysis. The details of the sentiment analysis - like the offset, length and the text itself - will correspond to the text type selected here.")
+  predictionSource?: TranscriptContentType;
+}
+
+@added(Versions.v2023_04_15_preview)
+@doc("Result from the sentiment analysis operation performed on a list of conversations.")
+model AnalyzeConversationSentimentResult extends AnalyzeConversationJobResult {
+  @doc("discriminator kind")
+  kind: AnalyzeConversationResultsKind.ConversationalSentimentResults;
+
+  @doc("The result from sentiment analysis operation for each conversation.")
+  results: ConversationSentimentResults
+}
+
+@added(Versions.v2023_04_15_preview)
+@doc("The result from sentiment analysis operation for each conversation.")
+model ConversationSentimentResults extends PreBuiltResult{
+  @doc("Array of ConversationSentimentResults")
+  conversations: Array<ConversationSentimentResultsConversation>
+}
+
+@added(Versions.v2023_04_15_preview)
+@doc("The result from sentiment analysis operation for each conversation.")
+model ConversationSentimentResultsConversation {
+  ...ConversationSentimentResult;
+  ...ConversationResultBase
+}
+
+@added(Versions.v2023_04_15_preview)
+@doc("The result from sentiment analysis operation for each conversation item.")
+model ConversationSentimentResult {
+  @doc("Enumeration of Sentiment operation results for all the conversation items in a conversation.")
+  conversationItems: Array<ConversationSentimentItemResult>
+}
+
+@added(Versions.v2023_04_15_preview)
+@doc("Sentiment operation results for a conversation items")
+model ConversationSentimentItemResult {
+  @doc("The identifier for the conversation item")
+  id: string,
+
+  @doc("The identifier for the speaker")
+  participantId: string,
+
+  @doc("Predicted sentiment")
+  sentiment: Sentiment,
+
+  @doc("Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative.")
+  confidenceScores: SentimentConfidenceScores,
+}
+
+@added(Versions.v2023_04_15_preview)
+@doc("Text that has been catorgerized into pre-defined classes or types such as: person, location, event, product, and organization.")
+model Entity {
+  @doc("Entity text as appears in the request.")
+  text: string,
+
+  @doc("Entity type.")
+  category: string,
+
+  @doc("(Optional) Entity sub type.")
+  subcategory?: string,
+
+  @doc("Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned.")
+  offset: int32,
+
+  @doc("Length for the entity text. Use of different 'stringIndexType' values can affect the length returned.")
+  length: int32,
+
+  @doc("Confidence score between 0 and 1 of the extracted entity.")
+  confidenceScore: float64,
+}
+
+@added(Versions.v2023_04_15_preview)
+@doc("Result from the personally identifiable information detection and redaction operation performed on a list of conversations.")
+model AnalyzeConversationConversationPiiResult extends AnalyzeConversationJobResult {
+  @doc("discriminator kind")
+  kind: AnalyzeConversationResultsKind.ConversationalPIIResults;
+
+  @doc("results")
+  results: ConversationPiiResults;
+}
+
+@added(Versions.v2023_04_15_preview)
+@doc("The result from PII detection and redaction operation for each conversation.")
+model ConversationPiiResults extends PreBuiltResult{
+  @doc("array of conversations")
+  conversations: Array<ConversationalPiiResultWithResultBase>;
+}
+
+@added(Versions.v2023_04_15_preview)
+@doc("temp doc")
+model ConversationalPiiResultWithResultBase extends ConversationResultBase{
+  ...ConversationPiiResult;
+}
+
+@added(Versions.v2023_04_15_preview)
+@doc("The result from PII detection and redaction operation for each conversation.")
+model ConversationPiiResult {
+  @doc("List of conversationItems")
+  conversationItems: Array<ConversationPiiItemResult>;
+}
+
+@added(Versions.v2023_04_15_preview)
+@doc("The result from PII detection and redaction operation for each conversation.")
+model ConversationPiiItemResult {
+  @doc("Id of the result")
+  id: string,
+
+  @doc("Transcript content response that the service generates, with all necessary personally identifiable information redacted.")
+  redactedContent: RedactedTranscriptContent;
+
+  @doc("Array of Entities")
+  entities: Array<Entity>
+}
+
+@added(Versions.v2023_04_15_preview)
+@doc("Supported parameters for a conversational pii task.")
+model ConversationPiiTaskParameters extends PreBuiltTaskParameters{
+  @doc("Array of ConversationPIICategories")
+  piiCategories?: Array<ConversationPIICategories>;
+
+  @doc("Flag to indicate if response should include audio stream offset and duration for any detected entities to be redacted. By default, audio timing of redacted entities are not included.")
+  redactAudioTiming?: boolean;
+
+  @doc("For transcript conversations, this parameter provides information regarding which content type (ITN, Text, Lexical, Masked ITN) should be used for entity detection. The details of the entities detected - like the offset, length and the text itself - will correspond to the text type selected here.")
+  redactionSource?: TranscriptContentType;
+
+  @doc("Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction.")
+  redactionCharacter?: RedactionCharacter;
+
+  @doc("List of categories that need to be excluded instead of included.")
+  excludePiiCategories?: Array<ConversationPIICategoriesExclude>;
+}
+
+@added(Versions.v2023_04_15_preview)
+@doc("Describes the PII categories to return for detection. If not provided, 'default' categories will be returned which will vary with the language.")
+enum ConversationPIICategories {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  Address,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  CreditCardNumber,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  Email,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  Person,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  NumericIdentifier,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  PhoneNumber,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  USSocialSecurityNumber,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  Miscellaneous,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  All,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  Default,
+}
+
+@added(Versions.v2023_04_15_preview)
+@doc("Describes the PII categories to exclude for detection. If not provided, 'default' categories will be returned which will vary with the language.")
+enum ConversationPIICategoriesExclude {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  Address,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  CreditCardNumber,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  Email,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  Person,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  NumericIdentifier,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  PhoneNumber,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  USSocialSecurityNumber,
+}
+
+@added(Versions.v2023_04_15_preview)
+@doc("Enumeration of supported transcript content types.")
+enum TranscriptContentType {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  lexical,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  itn,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  maskedItn,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  text,
+}
+
+@doc("Task definition for custom conversational summarization.")
+@added(Versions.v2023_04_15_preview)
+model AnalyzeCustomConversationSummarizationTask extends AnalyzeConversationLROTask {
+  @doc("discriminator kind")
+  kind: AnalyzeConversationLROTaskKind.CustomConversationalSummarizationTask;
+
+  @doc("parameters")
+  parameters?: CustomConversationSummarizationTaskParameters;
+}
+
 @doc("Task definition for conversational summarization.")
 @added(Versions.v2023_04_01)
 model AnalyzeConversationSummarizationTask extends AnalyzeConversationLROTask {
@@ -822,16 +1065,30 @@ model AnalyzeConversationSummarizationTask extends AnalyzeConversationLROTask {
   kind: AnalyzeConversationLROTaskKind.ConversationalSummarizationTask;
 
   @doc("parameters")
-  parameters: ConversationSummarizationTaskParameters;
+  parameters?: ConversationSummarizationTaskParametersBase;
 }
 
 @doc("Supported parameters for a conversational summarization task.")
 @added(Versions.v2023_04_01)
-model ConversationSummarizationTaskParameters extends PreBuiltTaskParameters {
-  ...AbstractiveSummarizationTaskParameterBase;
+model ConversationSummarizationTaskParametersBase {
+  ...AbstractiveSummarizationTaskParametersBase;
 
-  @doc("Supported parameters for a conversational summarization task.")
+  @doc("Array of Summary Aspects")
   summaryAspects: Array<SummaryAspect>;
+}
+
+@doc("Supported parameters for pre-build conversational summarization task.")
+@added(Versions.v2023_04_01)
+model ConversationSummarizationTaskParameters {
+  ...PreBuiltTaskParameters;
+  ...ConversationSummarizationTaskParametersBase;
+}
+
+@doc("Supported parameters for a custom conversation summarization task.")
+@added(Versions.v2023_04_15_preview)
+model CustomConversationSummarizationTaskParameters {
+  ...CustomTaskParameters;
+  ...ConversationSummarizationTaskParametersBase;
 }
 
 @doc("Supported parameters for a conversational summarization task.")
@@ -860,11 +1117,32 @@ model AnalyzeConversationSummarizationResult extends AnalyzeConversationJobResul
   results: SummaryResult;
 }
 
-@doc("Summary Results")
+@doc("Result for the custom summarization task on the conversation.")
+@added(Versions.v2023_04_15_preview)
+model AnalyzeCustomConversationSummarizationResult {
+  ...AnalyzeConversationJobResult;
+
+  @doc("Custom Summary Result")
+  results: CustomSummaryResult
+}
+
+@doc("Summary Results Base")
 @added(Versions.v2023_04_01)
-model SummaryResult extends PreBuiltResult {
+model SummaryResultBase {
   @doc("array of conversations")
   conversations: Array<ConversationsSummaryResult>;
+}
+
+@doc("Summary Results")
+@added(Versions.v2023_04_01)
+model SummaryResult extends SummaryResultBase{
+  ...PreBuiltResult;
+}
+
+@added(Versions.v2023_04_15_preview)
+@doc("Custom Summary Results")
+model CustomSummaryResult extends SummaryResultBase{
+ ...CustomResult;
 }
 
 @doc("Conversations Summary Result")
