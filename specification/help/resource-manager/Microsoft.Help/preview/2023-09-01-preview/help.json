@@ -123,7 +123,7 @@
         "tags": [
           "diagnostics"
         ],
-        "description": "Diagnostics tells you precisely the root cause of the issue and how to address it. You can get diagnostics once you discover and identify the relevant solution for your Azure issue.<br/><br/> You can create diagnostics using the ‘solutionId’  from Solution Discovery API response and ‘additionalParameters’ <br/><br/> <b>Note: </b>‘requiredParameterSets’ from Solutions Discovery API response must be passed via ‘additionalParameters’ as an input to Diagnostics API",
+        "description": "Diagnostics tells you precisely the root cause of the issue and the steps to address it. You can get diagnostics once you discover the relevant solution for your Azure issue. <br/><br/> <b>Note: </b> ‘requiredInputs’ from Discovery solutions response must be passed via ‘additionalParameters’ as an input to Diagnostics and Solutions API",
         "operationId": "Diagnostics_Create",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -217,7 +217,7 @@
         "tags": [
           "discoverySolutions"
         ],
-        "description": "Solutions Discovery is the initial point of entry within Help API, which helps you identify the relevant solutions for your Azure issue.<br/><br/> You can discover solutions using resourceUri + ProblemClassificationId (Note: ProblemClassificationId is mandatory filter.).<br/><br/>We will do our best in returning relevant diagnostics and solutions for your Azure issue.<br/><br/> Get the problemClassificationId(s) using this [reference](https://learn.microsoft.com/rest/api/support/problem-classifications/list?tabs=HTTP).<br/><br/> <b>Note: </b> ‘requiredParameterSets’ from Solutions Discovery API response must be passed via ‘additionalParameters’ as an input to Diagnostics API.",
+        "description": "Discovery Solutions is the initial entry point within Help API, which identifies relevant Azure diagnostics and solutions. We will do our best to return the most effective solutions based on the type of inputs as indicated below, in the request URL  <br/><br/> Mandatory input :  problemClassificationId (Use the [problemClassification API](https://learn.microsoft.com/rest/api/support/problem-classifications/list?tabs=HTTP)) <br/><br/>Optional input     :  resourceUri OR resource Type <br/><br/> <b>Note: </b>  ‘requiredInputs’ from Discovery solutions response must be passed via ‘additionalParameters’ as an input to Diagnostics and Solutions API.",
         "operationId": "DiscoverySolution_List",
         "parameters": [
           {
@@ -265,7 +265,7 @@
         "tags": [
           "solutions"
         ],
-        "description": "Create solution API",
+        "description": "Solutions are a rich, insightful and a centralized self help experience that brings all the relevant content to troubleshoot an Azure issue into a unified experience. Solutions include the following components : Text, <Diagnostics> , <Troubleshooters>, Images , Video tutorials, Tables , custom charts, images , AzureKB, etc, with capabilities to support new solutions types in the future.  ",
         "operationId": "Solution_Create",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
