@@ -37,9 +37,10 @@ These settings apply only when `--tag=package-preview-2023-11` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-11'
 input-file:
-  - preview/2023-11-01-preview/backupTypes.json
   - preview/2023-11-01-preview/connectors.json
+  - ../common-types/v1/commonTypes.json
 ```
+
 ### Tag: package-preview-2023-10
 
 These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
