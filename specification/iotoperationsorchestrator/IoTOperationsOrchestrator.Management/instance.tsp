@@ -58,9 +58,8 @@ model TargetSelectorProperties {
   name?: string;
 
   @doc("Unique selector for the target such as a label.")
-  selector?: {};
+  selector?: Record<unknown>;
 }
-
 @armResourceOperations
 interface Instances {
   get is ArmResourceRead<Instance>;

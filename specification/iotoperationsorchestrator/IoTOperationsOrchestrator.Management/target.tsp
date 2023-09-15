@@ -64,13 +64,13 @@ model TopologiesProperties {
 @doc("Defines a component binding for a provider.")
 model BindingProperties {
   @doc("Configuration values for the binding.")
-  config: {};
+  config: Record<unknown>;
 
   @doc("Name of the provider.")
   provider: string;
 
   @doc("Role that the provider binds to with the component.")
-  role: {};
+  role: Record<unknown>;
 }
 
 @armResourceOperations

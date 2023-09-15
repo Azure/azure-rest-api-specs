@@ -46,7 +46,7 @@ model ComponentProperties {
   name: string;
 
   @doc("Properties of the component.")
-  properties?: {};
+  properties?: Record<unknown>;
 
   @doc("Component type.")
   type: string;
@@ -57,6 +57,7 @@ model ReconciliationPolicy {
   @doc("Policy type")
   type: ReconciliationPolicies;
 
+  @minLength(1)
   @doc("Policy interval")
   interval?: string;
 }

@@ -1076,7 +1076,7 @@
         "config": {
           "type": "object",
           "description": "Configuration values for the binding.",
-          "properties": {}
+          "additionalProperties": {}
         },
         "provider": {
           "type": "string",
@@ -1085,7 +1085,7 @@
         "role": {
           "type": "object",
           "description": "Role that the provider binds to with the component.",
-          "properties": {}
+          "additionalProperties": {}
         }
       },
       "required": [
@@ -1112,7 +1112,7 @@
         "properties": {
           "type": "object",
           "description": "Properties of the component.",
-          "properties": {}
+          "additionalProperties": {}
         },
         "type": {
           "type": "string",
@@ -1314,7 +1314,8 @@
         },
         "interval": {
           "type": "string",
-          "description": "Policy interval"
+          "description": "Policy interval",
+          "minLength": 1
         }
       },
       "required": [
@@ -1511,7 +1512,7 @@
         "selector": {
           "type": "object",
           "description": "Unique selector for the target such as a label.",
-          "properties": {}
+          "additionalProperties": {}
         }
       }
     },
