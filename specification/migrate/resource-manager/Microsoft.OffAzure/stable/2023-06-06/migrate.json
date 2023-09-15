@@ -895,8 +895,7 @@
             "in": "path",
             "required": true,
             "description": " Cluster ARM name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -951,8 +950,7 @@
             "in": "path",
             "required": true,
             "description": " Cluster ARM name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           },
           {
             "name": "body",
@@ -1033,8 +1031,7 @@
             "in": "path",
             "required": true,
             "description": " Cluster ARM name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -1816,20 +1813,6 @@
           "200": {
             "description": "Resource deleted successfully."
           },
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "Location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
-              }
-            }
-          },
           "204": {
             "description": "Resource deleted successfully."
           },
@@ -1840,10 +1823,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "HypervHostController_Delete_MaximumSet_Gen": {
             "$ref": "./examples/HypervHostController_Delete_MaximumSet_Gen.json"
@@ -4464,6 +4443,20 @@
           "200": {
             "description": "Resource deleted successfully."
           },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
           "204": {
             "description": "Resource deleted successfully."
           },
@@ -4474,6 +4467,10 @@
             }
           }
         },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "PrivateEndpointConnectionController_Delete_MaximumSet_Gen": {
             "$ref": "./examples/PrivateEndpointConnectionController_Delete_MaximumSet_Gen.json"
@@ -5262,6 +5259,20 @@
           "200": {
             "description": "Resource deleted successfully."
           },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
           "204": {
             "description": "Resource deleted successfully."
           },
@@ -5272,6 +5283,10 @@
             }
           }
         },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "SqlDiscoverySiteDataSourceController_Delete_MaximumSet_Gen": {
             "$ref": "./examples/SqlDiscoverySiteDataSourceController_Delete_MaximumSet_Gen.json"
@@ -5282,13 +5297,80 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/errorDetailedSummary": {
+      "post": {
+        "tags": [
+          "SqlSitesController"
+        ],
+        "operationId": "SqlSitesController_ErrorDetailedSummary",
+        "description": "Method to get error detailed summary from SQL site.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "description": "Site name",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "sqlSiteName",
+            "in": "path",
+            "required": true,
+            "description": "SQL site name.",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The content of the action request",
+            "schema": {
+              "$ref": "#/definitions/ErrorSummaryRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlSiteErrorDetails"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SqlSitesController_ErrorDetailedSummary_MaximumSet_Gen": {
+            "$ref": "./examples/SqlSitesController_ErrorDetailedSummary_MaximumSet_Gen.json"
+          },
+          "SqlSitesController_ErrorDetailedSummary_MinimumSet_Gen": {
+            "$ref": "./examples/SqlSitesController_ErrorDetailedSummary_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/errorSummary": {
       "post": {
         "tags": [
           "SqlSitesController"
         ],
         "operationId": "SqlSitesController_ErrorSummary",
-        "description": "MMethod to get error summary from SQL site.",
+        "description": "Method to get error summary from SQL site.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -6680,20 +6762,6 @@
           "200": {
             "description": "Resource deleted successfully."
           },
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "Location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
-              }
-            }
-          },
           "204": {
             "description": "Resource deleted successfully."
           },
@@ -6704,10 +6772,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "WebAppSitesController_Delete_MaximumSet_Gen": {
             "$ref": "./examples/WebAppSitesController_Delete_MaximumSet_Gen.json"
@@ -10825,8 +10889,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -10873,8 +10936,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -10921,8 +10983,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           },
           {
             "name": "body",
@@ -10991,8 +11052,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           },
           {
             "name": "body",
@@ -11050,8 +11110,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           },
           {
             "name": "mapRequest",
@@ -11129,8 +11188,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           },
           {
             "name": "body",
@@ -11190,8 +11248,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           },
           {
             "name": "body",
@@ -11251,8 +11308,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           },
           {
             "name": "body",
@@ -11332,8 +11388,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           },
           {
             "name": "requestBody",
@@ -11411,8 +11466,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           },
           {
             "name": "body",
@@ -11490,8 +11544,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           },
           {
             "name": "body",
@@ -11569,8 +11622,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           },
           {
             "name": "mapRequest",
@@ -11648,8 +11700,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           },
           {
             "name": "mapRequest",
@@ -11727,8 +11778,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -11780,8 +11830,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           },
           {
             "name": "hostName",
@@ -11838,8 +11887,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -11891,8 +11939,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           },
           {
             "name": "jobName",
@@ -11949,8 +11996,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -12029,8 +12075,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -12082,8 +12127,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           },
           {
             "name": "machineName",
@@ -12138,8 +12182,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           },
           {
             "name": "machineName",
@@ -12205,8 +12248,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           },
           {
             "name": "machineName",
@@ -12266,8 +12308,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           },
           {
             "name": "machineName",
@@ -12345,8 +12386,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           },
           {
             "name": "machineName",
@@ -12423,8 +12463,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           },
           {
             "name": "machineName",
@@ -12501,8 +12540,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           },
           {
             "name": "operationStatusName",
@@ -12559,8 +12597,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -12612,8 +12649,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           },
           {
             "name": "accountName",
@@ -12670,8 +12706,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           },
           {
             "name": "mapRequest",
@@ -12749,8 +12784,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -12799,8 +12833,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           },
           {
             "name": "updateMachineDepMapStatus",
@@ -12878,8 +12911,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           },
           {
             "name": "metaData",
@@ -12957,8 +12989,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           },
           {
             "name": "updateMachineRunAsAccount",
@@ -13036,8 +13067,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           },
           {
             "name": "updateMachineTags",
@@ -13122,8 +13152,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -13175,8 +13204,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           },
           {
             "name": "vcenterName",
@@ -13231,8 +13259,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           },
           {
             "name": "vcenterName",
@@ -13313,8 +13340,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           },
           {
             "name": "vcenterName",
@@ -13329,6 +13355,20 @@
           "200": {
             "description": "Resource deleted successfully."
           },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
           "204": {
             "description": "Resource deleted successfully."
           },
@@ -13339,6 +13379,10 @@
             }
           }
         },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "VcenterController_Delete_MaximumSet_Gen": {
             "$ref": "./examples/VcenterController_Delete_MaximumSet_Gen.json"
@@ -14194,6 +14238,91 @@
         }
       },
       "description": "Discovery site data source properties class."
+    },
+    "ErrorDetailedSummary": {
+      "type": "object",
+      "properties": {
+        "countOfServersAffected": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count of servers affected by the error."
+        },
+        "message": {
+          "type": "string",
+          "description": "Gets the error message.",
+          "readOnly": true
+        },
+        "messageParameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets the message parameters.",
+          "x-typespec-name": "Record<string>",
+          "readOnly": true
+        },
+        "applianceName": {
+          "type": "string",
+          "description": "Gets the appliance name.",
+          "readOnly": true
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the error ID.",
+          "readOnly": true
+        },
+        "code": {
+          "type": "string",
+          "description": "Gets the error name.",
+          "readOnly": true
+        },
+        "possibleCauses": {
+          "type": "string",
+          "description": "Gets the possible causes of error.",
+          "readOnly": true
+        },
+        "recommendedAction": {
+          "type": "string",
+          "description": "Gets the recommended action to resolve error.",
+          "readOnly": true
+        },
+        "severity": {
+          "type": "string",
+          "description": "Gets the error severity.",
+          "readOnly": true
+        },
+        "summaryMessage": {
+          "type": "string",
+          "description": "Gets the error summary message.",
+          "readOnly": true
+        },
+        "source": {
+          "$ref": "#/definitions/MicrosoftAzureFDSWebRoleHealthErrorDetailsSource",
+          "description": "Gets the error source.",
+          "readOnly": true
+        },
+        "updatedTimeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the time stamp when the error was updated.",
+          "readOnly": true
+        },
+        "runAsAccountId": {
+          "type": "string",
+          "description": "Gets run as account id used while performing discovery of entity.",
+          "readOnly": true
+        },
+        "discoveryScope": {
+          "$ref": "#/definitions/HealthErrorDetailsDiscoveryScope",
+          "description": "Gets discovery scope for which error is encountered.",
+          "readOnly": true
+        }
+      },
+      "description": "The site detailed error summary model.",
+      "required": [
+        "countOfServersAffected"
+      ]
     },
     "ErrorDetails": {
       "type": "object",
@@ -20338,6 +20467,28 @@
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "SqlSiteErrorDetails": {
+      "type": "object",
+      "properties": {
+        "applianceName": {
+          "type": "string",
+          "description": "Appliance Name."
+        },
+        "siteErrorDetails": {
+          "$ref": "#/definitions/ErrorDetailedSummary",
+          "description": "Gets the error detailed summary."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to fetch more models."
+        }
+      },
+      "description": "Sql site error detailed summary.",
+      "required": [
+        "applianceName",
+        "siteErrorDetails"
       ]
     },
     "SqlSiteListResult": {
