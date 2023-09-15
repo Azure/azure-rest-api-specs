@@ -52,13 +52,13 @@ model ComponentProperties {
   type: string;
 }
 
-@doc("Reconciliation Policy")
+@doc("Reconciliation Policy.")
 model ReconciliationPolicy {
   @doc("Policy type")
   type: ReconciliationPolicies;
 
   @minLength(1)
-  @doc("Policy interval")
+  @doc("Policy interval.")
   interval?: string;
 }
 

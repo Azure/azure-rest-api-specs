@@ -43,7 +43,7 @@ model TargetProperties {
   @OpenAPI.extension("x-ms-identifiers", [])
   topologies?: TopologiesProperties[];
 
-  @doc("Reconciliation Policy")
+  @doc("Reconciliation Policy.")
   reconciliationPolicy?: ReconciliationPolicy;
 
   @doc("Version of the particular resource.")

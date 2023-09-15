@@ -35,13 +35,13 @@ model InstanceProperties {
   @doc("Deployment scope (such as Kubernetes namespace).")
   scope?: string;
 
-  @doc("Name of the solution")
+  @doc("Name of the solution.")
   solution?: string;
 
   @doc("Defines the Target the Instance will deploy to.")
   target?: TargetSelectorProperties;
 
-  @doc("Reconciliation Policy")
+  @doc("Reconciliation Policy.")
   reconciliationPolicy?: ReconciliationPolicy;
 
   @doc("Version of the particular resource.")
