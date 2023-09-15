@@ -772,7 +772,7 @@
           "default": {
             "description": "The delete request has failed; error response details : 4xx/5xx for ispCustomer",
             "schema": {
-                "$ref": "#/definitions/MCCErrorResponse"
+              "$ref": "#/definitions/MCCErrorResponse"
             }
           }
         },
@@ -1071,7 +1071,7 @@
           "default": {
             "description": "The delete request has failed; error response details : 4xx/5xx for ispCacheNode",
             "schema": {
-                "$ref": "#/definitions/MCCErrorResponse"
+              "$ref": "#/definitions/MCCErrorResponse"
             }
           }
         },
@@ -2079,15 +2079,15 @@
         "customerEntitlement_SkuId": {
           "type": "string",
           "description": "customer entitlement sku id"
-        },        
+        },
         "customerEntitlement_SkuGuid": {
           "type": "string",
           "description": "customer entitlement sku guid"
-        },        
+        },
         "customerEntitlement_SkuName": {
           "type": "string",
           "description": "customer entitlement sku name"
-        },               
+        },
         "customerEntitlement_Expiration": {
           "type": "string",
           "description": "customer entitlement expiration"
@@ -2114,7 +2114,6 @@
         }
       }
     },
-
     "CreateOrUpdateCacheNodeResponse": {
       "type": "object",
       "description": "Represents the high level cache node properties needed to provision cache node resources",
@@ -2258,7 +2257,7 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/BgpConfiguration",
           "description": "bgp configuration of the cache node"
-        },        
+        },
         "proxyIP": {
           "type": "string",
           "description": "proxy ip property in the MCC Object"
@@ -2285,7 +2284,6 @@
         }
       }
     },
-
     "CreateOrUpdateCustomerRequest": {
       "type": "object",
       "description": "Represents the high level Nodes needed to provision customer resources",
@@ -3085,27 +3083,26 @@
       }
     }
   },
-    "parameters": {
-      "CacheNodeNameParameter": {
-        "name": "cacheNodeResourceName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "Name of the ConnectedCache resource",
-        "maxLength": 90,
-        "minLength": 1,
-        "x-ms-parameter-location": "method"
-      },
-      "CustomerNameParameter": {
-        "name": "customerResourceName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "Name of the Customer resource",
-        "maxLength": 90,
-        "minLength": 1,
-        "x-ms-parameter-location": "method"
-      }
+  "parameters": {
+    "CacheNodeNameParameter": {
+      "name": "cacheNodeResourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the ConnectedCache resource",
+      "maxLength": 90,
+      "minLength": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "CustomerNameParameter": {
+      "name": "customerResourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the Customer resource",
+      "maxLength": 90,
+      "minLength": 1,
+      "x-ms-parameter-location": "method"
     }
   }
-  
+}
