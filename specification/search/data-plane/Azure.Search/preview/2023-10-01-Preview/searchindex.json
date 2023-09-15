@@ -1865,7 +1865,7 @@
         },
         "exhaustive": {
           "type": "boolean",
-          "description": "If set to true, will compute the exact nearest neighbors by searching through all the training points returning the true k nearest neighbors."
+          "description": "When true, triggers an exhaustive k-nearest neighbor search across all vectors within the vector index. Useful for scenarios where exact matches are critical, such as determining ground truth values."
         }
       },
       "required": [
@@ -1922,12 +1922,12 @@
           {
             "value": "postFilter",
             "name": "PostFilter",
-            "description": "The search data will be filtered after the vector search query is performed."
+            "description": "The filter will be applied after the candidate set of vector results is returned. Depending on the filter selectivity, this can result in fewer results than requested by the parameter 'k'."
           },
           {
             "value": "preFilter",
             "name": "PreFilter",
-            "description": "The search data will be filtered before the vector search query is performed."
+            "description": "The filter will be applied before the search query."
           }
         ]
       },

@@ -6143,7 +6143,7 @@
           "items": {
             "$ref": "#/definitions/VectorSearchAlgorithmConfiguration"
           },
-          "description": "Contains configuration options specific to the algorithm used during indexing time."
+          "description": "Contains configuration options specific to the algorithm used during indexing and/or querying."
         },
         "vectorizers": {
           "type": "array",
@@ -6168,7 +6168,7 @@
         },
         "algorithm": {
           "type": "string",
-          "description": "The name of the vector search algorithm configuration that specifies the algorithm and optional parameters for searching the vector field.",
+          "description": "The name of the vector search algorithm configuration that specifies the algorithm and optional parameters.",
           "x-nullable": false
         },
         "vectorizer": {
@@ -6205,7 +6205,7 @@
         "name",
         "kind"
       ],
-      "description": "Contains configuration options specific to the algorithm used during indexing time."
+      "description": "Contains configuration options specific to the algorithm used during indexing and/or querying."
     },
     "HnswVectorSearchAlgorithmConfiguration": {
       "type": "object",
@@ -6222,7 +6222,7 @@
           "description": "Contains the parameters specific to hnsw algorithm."
         }
       },
-      "description": "Contains configuration options specific to the hnsw approximate nearest neighbors algorithm used during indexing time."
+      "description": "Contains configuration options specific to the hnsw approximate nearest neighbors algorithm used during indexing and querying. The hnsw algorithm offers a tunable trade-off between search speed and accuracy."
     },
     "HnswParameters": {
       "type": "object",
@@ -6252,7 +6252,7 @@
           "minimum": 100,
           "maximum": 1000,
           "default": 500,
-          "description": "The size of the dynamic list containing the nearest neighbors, which is used during search time. Increasing this parameter may improve search results, at the expense of slower search. Increasing this parameter leads to diminishing returns.."
+          "description": "The size of the dynamic list containing the nearest neighbors, which is used during search time. Increasing this parameter may improve search results, at the expense of slower search. At a certain point, increasing this parameter leads to diminishing returns."
         },
         "metric": {
           "$ref": "#/definitions/VectorSearchAlgorithmMetric",
@@ -6277,7 +6277,7 @@
           "description": "Contains the parameters specific to exhaustive KNN algorithm."
         }
       },
-      "description": "Contains configuration options specific to the exhaustive KNN algorithm used during indexing time."
+      "description": "Contains configuration options specific to the exhaustive KNN algorithm used during querying, which will perform brute-force search across the entire vector index."
     },
     "ExhaustiveKnnParameters": {
       "type": "object",
