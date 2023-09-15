@@ -1,0 +1,25 @@
+{
+    "parameters": {
+        "Endpoint": "https://eastus.api.cognitive.microsoft.com/",
+        "Ocp-Apim-Subscription-Key": "{API Key}",
+        "id": "812ebf7a-b564-4de4-a188-324995cd5b33"
+    },
+    "responses": {
+        "204": {
+            "headers": {}
+        },
+        "400": {
+            "headers": {},
+            "body": {
+                "error": {
+                    "code": "BadRequest",
+                    "message": "Request is invalid.",
+                    "innererror": {
+                        "code": "DeleteNotAllowed",
+                        "message": "We can't delete project 'Jenny' for you at this time. Remove all models and endpoints in this project and try again."
+                    }
+                }
+            }
+        }
+    }
+}
