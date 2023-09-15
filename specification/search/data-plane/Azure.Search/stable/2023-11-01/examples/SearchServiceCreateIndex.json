@@ -23,6 +23,14 @@
           "facetable": false
         },
         {
+          "name": "descriptionEmbedding",
+          "type": "Collection(Edm.Single)",
+          "dimensions": 1536,
+          "vectorSearchProfile": "myHnswProfile",
+          "searchable": true,
+          "retrievable": true
+        },
+        {
           "name": "description_fr",
           "type": "Edm.String",
           "filterable": false,
@@ -153,6 +161,24 @@
             }
           }
         ]
+      },
+      "vectorSearch": {
+        "profiles": [
+          {
+            "name": "myHnswProfile",
+            "algorithm": "myHnsw"
+          }
+        ],
+        "algorithms": [
+          {
+            "name": "myHnsw",
+            "kind": "hnsw",
+            "hnswParameters": {
+              "m": 4,
+              "metric": "cosine"
+            }
+          }
+        ]
       }
     }
   },
@@ -202,6 +228,22 @@
             "searchAnalyzer": null,
             "analyzer": null,
             "synonymMaps": []
+          },
+          {
+            "name": "descriptionEmbedding",
+            "type": "Collection(Edm.Single)",
+            "searchable": true,
+            "filterable": false,
+            "retrievable": true,
+            "sortable": false,
+            "facetable": false,
+            "key": false,
+            "indexAnalyzer": null,
+            "searchAnalyzer": null,
+            "analyzer": null,
+            "synonymMaps": [],
+            "dimensions": 1536,
+            "vectorSearchProfile": "myHnswProfile"
           },
           {
             "name": "description_fr",
@@ -419,6 +461,26 @@
                     "fieldName": "category"
                   }
                 ]
+              }
+            }
+          ]
+        },
+        "vectorSearch": {
+          "profiles": [
+            {
+              "name": "myHnswProfile",
+              "algorithm": "myHnsw"
+            }
+          ],
+          "algorithms": [
+            {
+              "name": "myHnsw",
+              "kind": "hnsw",
+              "hnswParameters": {
+                "m": 4,
+                "metric": "cosine",
+                "efSearch": 500,
+                "efConstruction": 400
               }
             }
           ]
