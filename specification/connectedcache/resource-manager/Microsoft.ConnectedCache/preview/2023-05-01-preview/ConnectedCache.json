@@ -207,7 +207,10 @@
             "description": "The request was successful; Cache Node does not exist"
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 409 - Conflict"
+            "description": "Error response describing the reason for operation failure. 409 - Conflict",
+            "schema": {
+              "$ref": "#/definitions/MCCErrorResponse"
+            }
           }
         }
       },
@@ -487,7 +490,10 @@
             "description": "The request was successful; Cache Node does not exist"
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 409 - Conflict"
+            "description": "Error response describing the reason for operation failure. 409 - Conflict",
+            "schema": {
+              "$ref": "#/definitions/MCCErrorResponse"
+            }
           }
         }
       },
@@ -1671,7 +1677,10 @@
             "description": "The delete request was successful; the enterpriseMccCacheNode does not exists"
           },
           "default": {
-            "description": "The delete request has failed; error response details : 4xx/5xx for enterpriseMccCacheNode"
+            "description": "The delete request has failed; error response details : 4xx/5xx for enterpriseMccCacheNode",
+            "schema": {
+              "$ref": "#/definitions/MCCErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
