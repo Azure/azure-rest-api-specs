@@ -577,7 +577,7 @@
           "200": {
             "description": "Response containing the requested document.",
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/LookupDocument"
             }
           },
           "default": {
@@ -1228,6 +1228,11 @@
       ],
       "additionalProperties": true,
       "description": "Contains a document found by a search query, plus associated metadata."
+    },
+    "LookupDocument": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "A document retrieved via a document lookup operation."
     },
     "IndexBatch": {
       "properties": {
