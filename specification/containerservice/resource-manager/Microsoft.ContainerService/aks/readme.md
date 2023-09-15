@@ -369,15 +369,6 @@ input-file:
   - stable/2022-02-01/managedClusters.json
 ```
 
-### Tag: package-preview-2022-02
-
-These settings apply only when `--tag=package-preview-2022-02` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2022-02'
-input-file:
-  - preview/2022-02-02-preview/managedClusters.json
-```
-
 ### Tag: package-2022-01
 
 These settings apply only when `--tag=package-2022-01` is specified on the command line.
@@ -394,15 +385,6 @@ These settings apply only when `--tag=package-preview-2022-01` is specified on t
 ``` yaml $(tag) == 'package-preview-2022-01'
 input-file:
   - preview/2022-01-02-preview/managedClusters.json
-```
-
-### Tag: package-preview-2021-11
-
-These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2021-11'
-input-file:
-  - preview/2021-11-01-preview/managedClusters.json
 ```
 
 ### Tag: package-2021-10
@@ -666,18 +648,6 @@ input-file:
 - stable/2017-09-30/location.json
 ```
 
-### Tag: package-2018-08-preview
-
-These settings apply only when `--tag=package-2018-08-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2018-08-preview'
-input-file:
-- preview/2018-09-30-preview/openShiftManagedClusters.json
-- stable/2017-07-01/containerService.json
-- preview/2018-08-01-preview/managedClusters.json
-- stable/2017-09-30/location.json
-```
-
 ### Tag: package-2018-09-30-preview
 
 These settings apply only when `--tag=package-2018-09-30-preview` is specified on the command line.
@@ -900,15 +870,6 @@ These settings apply only when `--tag=package-2018-09-preview-only` is specified
 ``` yaml $(tag) == 'package-2018-09-preview-only'
 input-file:
 - preview/2018-09-30-preview/openShiftManagedClusters.json
-```
-
-### Tag: package-2018-08-preview-only
-
-These settings apply only when `--tag=package-2018-08-preview-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2018-08-preview-only'
-input-file:
-- preview/2018-08-01-preview/managedClusters.json
 ```
 
 ### Tag: package-2018-03-only

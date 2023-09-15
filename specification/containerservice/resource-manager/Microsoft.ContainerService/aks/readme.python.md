@@ -50,10 +50,8 @@ batch:
   - tag: package-2022-03
   - tag: package-preview-2022-03
   - tag: package-2022-02
-  - tag: package-preview-2022-02
   - tag: package-2022-01
   - tag: package-preview-2022-01
-  - tag: package-preview-2021-11
   - tag: package-2021-10
   - tag: package-2021-09
   - tag: package-2021-08
@@ -79,7 +77,6 @@ batch:
   - tag: package-2019-04-01-only
   - tag: package-2019-02-only
   - tag: package-2018-09-preview-only
-  - tag: package-2018-08-preview-only
   - tag: package-2018-03-only
   - tag: package-2019-09-preview-only
   - tag: package-2017-07
@@ -402,16 +399,6 @@ namespace: azure.mgmt.containerservice.v2022_02_01
 output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2022_02_01
 ```
 
-### Tag: package-preview-2022-02 and python
-
-These settings apply only when `--tag=package-preview-2022-02 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-preview-2022-02' && $(python)
-namespace: azure.mgmt.containerservice.v2022_02_02_preview
-output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2022_02_02_preview
-```
-
 ### Tag: package-2022-01 and python
 
 These settings apply only when `--tag=package-2022-01 --python` is specified on the command line.
@@ -430,16 +417,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-preview-2022-01' && $(python)
 namespace: azure.mgmt.containerservice.v2022_01_02_preview
 output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2022_01_02_preview
-```
-
-### Tag: package-preview-2021-11 and python
-
-These settings apply only when `--tag=package-preview-2021-11 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-preview-2021-11' && $(python)
-namespace: azure.mgmt.containerservice.v2021_11_01_preview
-output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2021_11_01_preview
 ```
 
 ### Tag: package-2021-10 and python
@@ -690,16 +667,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2018-09-preview-only' && $(python)
 namespace: azure.mgmt.containerservice.v2018_09_30_preview
 output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2018_09_30_preview
-```
-
-### Tag: package-2018-08-preview-only and python
-
-These settings apply only when `--tag=package-2018-08-preview-only --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2018-08-preview-only' && $(python)
-namespace: azure.mgmt.containerservice.v2018_08_01_preview
-output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2018_08_01_preview
 ```
 
 ### Tag: package-2018-03-only and python
