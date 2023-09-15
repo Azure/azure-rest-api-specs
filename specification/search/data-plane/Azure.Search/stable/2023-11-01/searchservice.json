@@ -7218,11 +7218,6 @@
             "url": "https://docs.microsoft.com/azure/search/index-ranking-similarity"
           }
         },
-        "@odata.etag": {
-          "x-ms-client-name": "ETag",
-          "type": "string",
-          "description": "The ETag of the index."
-        },
         "semantic": {
           "$ref": "#/definitions/SemanticSettings",
           "description": "Defines parameters for a search index that influence semantic capabilities.",
@@ -7231,6 +7226,17 @@
           },
           "x-ms-client-name": "SemanticSettings",
           "x-nullable": true
+        },
+        "vectorSearch": {
+          "$ref": "#/definitions/VectorSearch",
+          "description": "Contains configuration options related to vector search.",
+          "x-ms-client-name": "VectorSearch",
+          "x-nullable": true
+        },
+        "@odata.etag": {
+          "x-ms-client-name": "ETag",
+          "type": "string",
+          "description": "The ETag of the index."
         }
       },
       "required": [
