@@ -1,0 +1,36 @@
+{
+  "title": "CarbonEmissionReports_ListByTenant",
+  "operationId": "CarbonEmissionReports_ListByTenant",
+  "parameters": {
+    "api-version": "2023-04-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "SummaryReport",
+            "properties": {
+              "dimensions": [
+                {
+                  "propertyName": "Location",
+                  "valueType": "string",
+                  "description": "Emission Location"
+                }
+              ],
+              "filters": [
+                {
+                  "propertyName": "ServiceType",
+                  "valueType": "string",
+                  "description": "service type"
+                }
+              ]
+            },
+            "type": "Microsoft.Carbon/carbonEmissionReports",
+            "id": "/providers/Microsoft.Carbon/carbonEmissionReports/SummaryReport"
+          }
+        ]
+      }
+    }
+  }
+}

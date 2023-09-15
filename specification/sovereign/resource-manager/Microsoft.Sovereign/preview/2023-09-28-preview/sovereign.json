@@ -873,15 +873,11 @@
             ]
           }
         },
-        "billingScopeAccountId": {
+        "subscriptionBillingScope": {
           "type": "string",
-          "description": "Billing scope account id"
+          "description": "The full resource ID of billing scope associated to the EA, MCA or MPA account you wish to create the subscription in."
         },
-        "enrollmentAccountId": {
-          "type": "string",
-          "description": "Enrollment id"
-        },
-        "existingTopLevelManagementGroupParentId": {
+        "existingTopLevelMgParentId": {
           "type": "string",
           "format": "arm-id",
           "description": "Optional parent for management group hierarchy, used as intermediate root management group parent, if specified. If empty, default will deploy beneath tenant toot management group.",
@@ -906,7 +902,7 @@
           "minLength": 2,
           "maxLength": 5
         },
-        "topLevelManagementGroupDisplayName": {
+        "topLevelMgDisplayName": {
           "type": "string",
           "description": "The top level management group display name.",
           "minLength": 1,
@@ -925,7 +921,7 @@
       "required": [
         "infrastructureAsCodeOutputOptions",
         "deploymentPrefix",
-        "topLevelManagementGroupDisplayName",
+        "topLevelMgDisplayName",
         "deploymentLocation"
       ]
     },
@@ -933,7 +929,7 @@
       "type": "object",
       "description": "The response for the request to generate landing zone code.",
       "properties": {
-        "topLevelManagementGroupDisplayName": {
+        "topLevelMgDisplayName": {
           "type": "string",
           "description": "The top level Management Group display name."
         },
@@ -949,7 +945,7 @@
         }
       },
       "required": [
-        "topLevelManagementGroupDisplayName",
+        "topLevelMgDisplayName",
         "landingZoneConfigurationName",
         "generatedCodeUrl"
       ]
@@ -1372,7 +1368,7 @@
           "description": "The status of a user-initiated, control-plane operation on the Landing Zone registration resource type.",
           "readOnly": true
         },
-        "existingTopLevelManagementGroupId": {
+        "existingTopLevelMgId": {
           "type": "string",
           "format": "arm-id",
           "description": "The resource id of the top level management group",
@@ -1398,7 +1394,7 @@
         }
       },
       "required": [
-        "existingTopLevelManagementGroupId",
+        "existingTopLevelMgId",
         "existingLandingZoneConfigurationId"
       ]
     },
@@ -1416,7 +1412,7 @@
       "type": "object",
       "description": "The updatable properties of the LandingZoneRegistration.",
       "properties": {
-        "existingTopLevelManagementGroupId": {
+        "existingTopLevelMgId": {
           "type": "string",
           "format": "arm-id",
           "description": "The resource id of the top level management group",

@@ -343,6 +343,12 @@
           },
           "Create Infrastructure (with OS configuration) with Azure Compute Gallery Image": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_Custom_Image.json"
+          },
+          "Create Infrastructure (with OS configuration) with trusted access enabled": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_WithOSConfig_WithTrustedAccess.json"
+          },
+          "Register with trusted access enabled": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_Discover_TrustedAccessEnable.json"
           }
         },
         "description": "Creates a Virtual Instance for SAP solutions (VIS) resource",
@@ -440,6 +446,9 @@
         "x-ms-examples": {
           "SAPVirtualInstances_Update": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Update.json"
+          },
+          "SAPVirtualInstances_TrustedAccessEnable_Update": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_TrustedAccessEnable_Update.json"
           }
         },
         "description": "Updates a Virtual Instance for SAP solutions resource",
@@ -466,6 +475,12 @@
           }
         ],
         "responses": {
+          "201": {
+            "description": "Describes the Virtual Instance for SAP solutions resource which is successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/SAPVirtualInstance"
+            }
+          },
           "200": {
             "description": "Describes the Virtual Instance for SAP solutions resource which is successfully updated.",
             "schema": {
@@ -2278,6 +2293,18 @@
         "modelAsString": true
       }
     },
+    "ManagedResourcesNetworkAccessType": {
+      "description": "Defines the network access type for managed resources.",
+      "enum": [
+        "Public",
+        "Private"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ManagedResourcesNetworkAccessType",
+        "modelAsString": true
+      }
+    },
     "SAPVirtualInstanceError": {
       "type": "object",
       "properties": {
@@ -2302,6 +2329,11 @@
         },
         "identity": {
           "$ref": "../../../common-types/v1/commonTypes.json#/definitions/UserAssignedServiceIdentity"
+        },
+        "managedResourcesNetworkAccessType": {
+          "$ref": "#/definitions/ManagedResourcesNetworkAccessType",
+          "description": "Specifies the network access configuration for the resources that will be deployed in the Managed Resource Group. The options to choose from are Public and Private. If 'Private' is chosen, the Storage Account service tag should be enabled on the subnets in which the SAP VMs exist. This is required for establishing connectivity between VM extensions and the managed resource group storage account. This setting is currently applicable only to Storage Account. Learn more here https://go.microsoft.com/fwlink/?linkid=2247228",
+          "default": "Public"
         }
       }
     },
@@ -3812,6 +3844,11 @@
             "read"
           ]
         },
+        "managedResourcesNetworkAccessType": {
+          "$ref": "#/definitions/ManagedResourcesNetworkAccessType",
+          "description": "Specifies the network access configuration for the resources that will be deployed in the Managed Resource Group. The options to choose from are Public and Private. If 'Private' is chosen, the Storage Account service tag should be enabled on the subnets in which the SAP VMs exist. This is required for establishing connectivity between VM extensions and the managed resource group storage account. This setting is currently applicable only to Storage Account. Learn more here https://go.microsoft.com/fwlink/?linkid=2247228",
+          "default": "Public"
+        },
         "configuration": {
           "description": "Defines if the SAP system is being created using Azure Center for SAP solutions (ACSS) or if an existing SAP system is being registered with ACSS",
           "$ref": "#/definitions/SAPConfiguration"
@@ -3990,6 +4027,11 @@
           "description": "Application server instance ICM HTTPS Port.",
           "readOnly": true,
           "x-nullable": true
+        },
+        "dispatcherStatus": {
+          "type": "string",
+          "description": "Application server instance dispatcher status.",
+          "readOnly": true
         },
         "loadBalancerDetails": {
           "description": "The Load Balancer details such as LoadBalancer ID attached to Application Server Virtual Machines",
