@@ -8053,7 +8053,8 @@
         "Premium_P1",
         "Premium_P2",
         "Premium_P3",
-        "Ultra"
+        "Ultra",
+        "PremiumV2"
       ],
       "x-ms-enum": {
         "name": "AzureDiskSize",
@@ -8222,6 +8223,10 @@
           {
             "name": "Ultra",
             "value": "Ultra"
+          },
+          {
+            "name": "PremiumV2",
+            "value": "PremiumV2"
           }
         ]
       }
@@ -8386,6 +8391,24 @@
           "format": "float",
           "description": "Gets the managed disk storage cost.",
           "readOnly": true
+        },
+        "recommendedSizeInGib": {
+          "type": "number",
+          "format": "float",
+          "description": "Gets the recommended in GB of the managed disk.",
+          "readOnly": true
+        },
+        "recommendedThroughputInMbps": {
+          "type": "number",
+          "format": "float",
+          "description": "Gets the recommended throughput in MBPS of the managed disk.",
+          "readOnly": true
+        },
+        "recommendedIOPS": {
+          "type": "number",
+          "format": "float",
+          "description": "Gets the recommended IOPS of the managed disk.",
+          "readOnly": true
         }
       },
       "description": "Class representing an Azure Managed Disk SKU."
@@ -8410,7 +8433,8 @@
         "StandardSSD",
         "Premium",
         "StandardOrPremium",
-        "Ultra"
+        "Ultra",
+        "PremiumV2"
       ],
       "x-ms-enum": {
         "name": "AzureManagedDiskSkuDTODiskType",
