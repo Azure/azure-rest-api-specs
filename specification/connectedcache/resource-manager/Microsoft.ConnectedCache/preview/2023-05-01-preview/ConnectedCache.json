@@ -1371,7 +1371,10 @@
             "description": "The delete request was successful; the enterpriseMccCustomer does not exists"
           },
           "default": {
-            "description": "The delete request has failed; error response details : 4xx/5xx for enterpriseMccCustomer"
+            "description": "The delete request has failed; error response details : 4xx/5xx for enterpriseMccCustomer",
+            "schema": {
+              "$ref": "#/definitions/MCCErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -1786,6 +1789,7 @@
   },
   "definitions": {
     "MCCErrorResponse": {
+      "type": "object",
       "description": "Error response indicates that the service is not able to process the incoming request",
       "properties": {
         "status": {
@@ -1830,15 +1834,18 @@
         },
         "sizeInGb": {
           "description": "physical size of the drive used for caching content",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "cacheNumber": {
           "description": "corresponding nginx cache number. Valid cache numbers are 1 - 10",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "nginxMapping": {
           "description": "full binding for corresponding nginx cache drive",
-          "type": "string"
+          "type": "string",
+          "format": "int32"
         }
       }
     },
@@ -1997,15 +2004,15 @@
           "description": "cache efficiency"
         },
         "CustomerProperties_Overview_AverageEgressMbps": {
-          "type": "integer",
+          "type": "number",
           "description": "average egress in mbps"
         },
         "CustomerProperties_Overview_AverageMissMbps": {
-          "type": "integer",
+          "type": "number",
           "description": "average miss throughput in mbps"
         },
         "CustomerProperties_Overview_EgressMbpsMax": {
-          "type": "integer",
+          "type": "number",
           "description": "max egress in mbps"
         },
         "CustomerProperties_Overview_EgressMbpsMaxDateTime": {
@@ -2013,7 +2020,7 @@
           "description": "timestamp of max egress"
         },
         "CustomerProperties_Overview_MissMbpsMax": {
-          "type": "integer",
+          "type": "number",
           "description": "max miss throughput"
         },
         "CustomerProperties_Overview_MissMbpsMaxDateTime": {
@@ -2021,28 +2028,32 @@
           "description": "timestamp of miss max throughput"
         },
         "CustomerProperties_Overview_CacheNodesHealthyCount": {
+          "description": "count of healthy cache nodes",
           "type": "integer",
-          "description": "count of healthy cache nodes"
+          "format": "int32"
         },
         "CustomerProperties_Overview_CacheNodesUnhealthyCount": {
+          "description": "count of unhealthy cache nodes",
           "type": "integer",
-          "description": "count of unhealthy cache nodes"
+          "format": "int32"
         },
         "signupStatus": {
           "type": "boolean",
           "description": "status of signup"
         },
         "signupStatusCode": {
+          "description": "status of signup",
           "type": "integer",
-          "description": "status of signup"
+          "format": "int32"
         },
         "signupStatusText": {
           "type": "string",
           "description": "status of signup"
         },
         "signupPhaseStatusCode": {
+          "description": "statusCode of signup phase",
           "type": "integer",
-          "description": "statusCode of signup phase"
+          "format": "int32"
         },
         "signupPhaseStatusText": {
           "type": "string",
@@ -2073,8 +2084,8 @@
           "description": "asn of the customer"
         },
         "customerAsn_EstimatedEgressPeekGbps": {
-          "type": "string",
-          "description": "the estimated customer asn peering Peek in Gigabits per second"
+          "description": "the estimated customer asn peering Peek in Gigabits per second",
+          "type": "number"
         },
         "customerEntitlement_SkuId": {
           "type": "string",
@@ -2622,6 +2633,7 @@
       }
     },
     "ResourceProviderOperationList": {
+      "type": "object",
       "title": "Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results",
       "description": "List containing this Resource Provider's available operations",
       "properties": {
