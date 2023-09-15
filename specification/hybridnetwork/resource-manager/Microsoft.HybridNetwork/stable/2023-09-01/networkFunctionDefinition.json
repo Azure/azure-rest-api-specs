@@ -1039,18 +1039,36 @@
           "description": "The helm deployment options",
           "properties": {
             "installOptions": {
-              "$ref": "#/definitions/HelmDeploymentOptions",
+              "$ref": "#/definitions/HelmInstallOptions",
               "description": "The helm deployment install options"
             },
             "upgradeOptions": {
-              "$ref": "#/definitions/HelmDeploymentOptions",
+              "$ref": "#/definitions/HelmUpgradeOptions",
               "description": "The helm deployment upgrade options"
             }
           }
         }
       }
     },
-    "HelmDeploymentOptions": {
+    "HelmInstallOptions": {
+      "type": "object",
+      "description": "The helm deployment install options",
+      "properties": {
+        "atomic": {
+          "type": "string",
+          "description": "The helm deployment atomic options"
+        },
+        "wait": {
+          "type": "string",
+          "description": "The helm deployment wait options"
+        },
+        "timeout": {
+          "type": "string",
+          "description": "The helm deployment timeout options"
+        }
+      }
+    },
+    "HelmUpgradeOptions": {
       "type": "object",
       "description": "The helm deployment install options",
       "properties": {
