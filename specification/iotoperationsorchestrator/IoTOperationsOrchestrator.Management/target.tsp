@@ -70,7 +70,7 @@ model BindingProperties {
   provider: string;
 
   @doc("Role that the provider binds to with the component.")
-  role: Record<unknown>;
+  role: string;
 }
 
 @armResourceOperations
