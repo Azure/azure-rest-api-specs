@@ -400,7 +400,9 @@
             "openapi+json-link",
             "graphql-link",
             "odata",
-            "odata-link"
+            "odata-link",
+            "grpc",
+            "grpc-link"
           ],
           "x-ms-enum": {
             "name": "ContentFormat",
@@ -457,6 +459,14 @@
               {
                 "value": "odata-link",
                 "description": "The OData metadata document hosted on a publicly accessible internet address."
+              },
+              {
+                "value": "grpc",
+                "description": "The contents are inline and Content Type is a gRPC protobuf file."
+              },
+              {
+                "value": "grpc-link",
+                "description": "The gRPC protobuf file is hosted on a publicly accessible internet address."
               }
             ]
           }
@@ -483,7 +493,8 @@
             "soap",
             "websocket",
             "graphql",
-            "odata"
+            "odata",
+            "grpc"
           ],
           "x-ms-client-name": "SoapApiType",
           "x-ms-enum": {
@@ -514,6 +525,11 @@
                 "value": "odata",
                 "description": "Imports the API having a OData front end.",
                 "name": "OData"
+              },
+              {
+                "value": "grpc",
+                "description": "Imports the API having a gRPC front end.",
+                "name": "gRPC"
               }
             ]
           }
@@ -574,7 +590,8 @@
             "soap",
             "websocket",
             "graphql",
-            "odata"
+            "odata",
+            "grpc"
           ],
           "x-ms-client-name": "ApiType",
           "x-ms-enum": {
@@ -6298,7 +6315,7 @@
       "properties": {
         "contentType": {
           "type": "string",
-          "description": "Must be a valid a media type used in a Content-Type header as defined in the RFC 2616. Media type of the schema document (e.g. application/json, application/xml). </br> - `Swagger` Schema use `application/vnd.ms-azure-apim.swagger.definitions+json` </br> - `WSDL` Schema use `application/vnd.ms-azure-apim.xsd+xml` </br> - `OpenApi` Schema use `application/vnd.oai.openapi.components+json` </br> - `WADL Schema` use `application/vnd.ms-azure-apim.wadl.grammars+xml` </br> - `OData Schema` use `application/vnd.ms-azure-apim.odata.schema`."
+          "description": "Must be a valid a media type used in a Content-Type header as defined in the RFC 2616. Media type of the schema document (e.g. application/json, application/xml). </br> - `Swagger` Schema use `application/vnd.ms-azure-apim.swagger.definitions+json` </br> - `WSDL` Schema use `application/vnd.ms-azure-apim.xsd+xml` </br> - `OpenApi` Schema use `application/vnd.oai.openapi.components+json` </br> - `WADL Schema` use `application/vnd.ms-azure-apim.wadl.grammars+xml` </br> - `OData Schema` use `application/vnd.ms-azure-apim.odata.schema` </br> - `gRPC Schema` use `text/protobuf`."
         },
         "document": {
           "x-ms-client-flatten": true,
