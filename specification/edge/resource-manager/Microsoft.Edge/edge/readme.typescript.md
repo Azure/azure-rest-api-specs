@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-edgeupdates"
-  output-folder: "$(typescript-sdks-folder)/sdk/edgeupdates/arm-edgeupdates"
+  package-name: "@azure/arm-edge"
+  output-folder: "$(typescript-sdks-folder)/sdk/edge/arm-edge"
   payload-flattening-threshold: 1
   clear-output-folder: true
   generate-metadata: true
