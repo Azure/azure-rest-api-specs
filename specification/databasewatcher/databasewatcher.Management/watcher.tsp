@@ -7,7 +7,8 @@ import "./sqlDbSingleDatabaseTarget.tsp";
 import "./sqlDbElasticPoolTarget.tsp";
 import "./sqlMiTarget.tsp";
 import "./sqlVmTarget.tsp";
-import "./privateConnection.tsp";
+import "./sharedPrivateLinkResource.tsp";
+import "./privateLinkResource.tsp";
 
 @service({
   title: "Microsoft.DatabaseWatcher",
@@ -161,27 +162,6 @@ interface Watchers {
   stop(
     ...ResourceInstanceParameters<Watcher>,
   ): ArmAcceptedResponse | ArmResponse<Watcher> | ErrorResponse;
-}
-
-@parentResource(Watcher)
-model Target is ProxyResource<TargetProperties> {
-  @doc("The target resource name.")
-  @key("targetName")
-  @pattern("^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$")
-  @segment("targets")
-  @path
-  name: string;
-}
-
-@added(Versions.v2023_09_01_preview)
-@parentResource(Watcher)
-model PrivateConnection is ProxyResource<PrivateConnectionProperties> {
-  @doc("The private connection resource name.")
-  @key("privateConnectionName")
-  @pattern("^[a-zA-Z0-9]{1}[a-zA-Z0-9-_.]{0,62}[a-zA-Z0-9_]{1}$")
-  @segment("privateConnections")
-  @path
-  name: string;
 }
 
 @doc("The monitoring collection status of a watcher.")
