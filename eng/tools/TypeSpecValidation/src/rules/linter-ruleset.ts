@@ -1,4 +1,4 @@
-import { readFile } from "fs/promises";
+// import { readFile } from "fs/promises";
 import path from "path";
 // import { parseDocument } from "yaml";
 import { checkFileExists } from "../utils.js";
@@ -19,7 +19,7 @@ export class LinterRulesetRule implements Rule {
     // FolderStructure rule should ensure config file exists
     console.assert(checkFileExists(configFile));
 
-    const file = await readFile(configFile);
+    // const file = await readFile(configFile);
     // parseDocument()
 
     return {
