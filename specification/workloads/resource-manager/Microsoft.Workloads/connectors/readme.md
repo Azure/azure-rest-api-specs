@@ -39,6 +39,7 @@ These settings apply only when `--tag=package-preview-2023-11` is specified on t
 input-file:
   - preview/2023-11-01-preview/connectors.json
   - ../common-types/v1/commonTypes.json
+  - ../operations/preview/2023-11-01-preview/operations.json
 ```
 
 ### Tag: package-preview-2023-10
