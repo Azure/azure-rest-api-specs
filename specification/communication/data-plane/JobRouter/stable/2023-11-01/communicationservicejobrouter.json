@@ -1759,7 +1759,7 @@
       "properties": {
         "scoringRule": {
           "$ref": "#/definitions/RouterRule",
-          "description": "A rule of one of the following types:\n            \nStaticRule:  A rule\nproviding static rules that always return the same result, regardless of\ninput.\nDirectMapRule:  A rule that return the same labels as the input\nlabels.\nExpressionRule: A rule providing inline expression\nrules.\nAzureFunctionRule: A rule providing a binding to an HTTP Triggered Azure\nFunction.\nWebhookRule: A rule providing a binding to a webserver following\nOAuth2.0 authentication protocol."
+          "description": "A rule of one of the following types:\n            \nStaticRule:  A rule\nproviding static rules that always return the same result, regardless of\ninput.\nDirectMapRule:  A rule that return the same labels as the input\nlabels.\nExpressionRule: A rule providing inline expression\nrules.\nFunctionRule: A rule providing a binding to an HTTP Triggered Azure\nFunction.\nWebhookRule: A rule providing a binding to a webserver following\nOAuth2.0 authentication protocol."
         },
         "scoringRuleOptions": {
           "$ref": "#/definitions/ScoringRuleOptions",
@@ -1853,7 +1853,7 @@
         },
         "prioritizationRule": {
           "$ref": "#/definitions/RouterRule",
-          "description": "A rule of one of the following types:\n            \nStaticRule:  A rule\nproviding static rules that always return the same result, regardless of\ninput.\nDirectMapRule:  A rule that return the same labels as the input\nlabels.\nExpressionRule: A rule providing inline expression\nrules.\nAzureFunctionRule: A rule providing a binding to an HTTP Triggered Azure\nFunction.\nWebhookRule: A rule providing a binding to a webserver following\nOAuth2.0 authentication protocol."
+          "description": "A rule of one of the following types:\n            \nStaticRule:  A rule\nproviding static rules that always return the same result, regardless of\ninput.\nDirectMapRule:  A rule that return the same labels as the input\nlabels.\nExpressionRule: A rule providing inline expression\nrules.\nFunctionRule: A rule providing a binding to an HTTP Triggered Azure\nFunction.\nWebhookRule: A rule providing a binding to a webserver following\nOAuth2.0 authentication protocol."
         },
         "workerSelectors": {
           "type": "array",
@@ -1928,7 +1928,7 @@
       "properties": {
         "condition": {
           "$ref": "#/definitions/RouterRule",
-          "description": "A rule of one of the following types:\n            \nStaticRule:  A rule\nproviding static rules that always return the same result, regardless of\ninput.\nDirectMapRule:  A rule that return the same labels as the input\nlabels.\nExpressionRule: A rule providing inline expression\nrules.\nAzureFunctionRule: A rule providing a binding to an HTTP Triggered Azure\nFunction.\nWebhookRule: A rule providing a binding to a webserver following\nOAuth2.0 authentication protocol."
+          "description": "A rule of one of the following types:\n            \nStaticRule:  A rule\nproviding static rules that always return the same result, regardless of\ninput.\nDirectMapRule:  A rule that return the same labels as the input\nlabels.\nExpressionRule: A rule providing inline expression\nrules.\nFunctionRule: A rule providing a binding to an HTTP Triggered Azure\nFunction.\nWebhookRule: A rule providing a binding to a webserver following\nOAuth2.0 authentication protocol."
         },
         "queueSelectors": {
           "type": "array",
@@ -1956,7 +1956,7 @@
       "properties": {
         "condition": {
           "$ref": "#/definitions/RouterRule",
-          "description": "A rule of one of the following types:\n            \nStaticRule:  A rule\nproviding static rules that always return the same result, regardless of\ninput.\nDirectMapRule:  A rule that return the same labels as the input\nlabels.\nExpressionRule: A rule providing inline expression\nrules.\nAzureFunctionRule: A rule providing a binding to an HTTP Triggered Azure\nFunction.\nWebhookRule: A rule providing a binding to a webserver following\nOAuth2.0 authentication protocol."
+          "description": "A rule of one of the following types:\n            \nStaticRule:  A rule\nproviding static rules that always return the same result, regardless of\ninput.\nDirectMapRule:  A rule that return the same labels as the input\nlabels.\nExpressionRule: A rule providing inline expression\nrules.\nFunctionRule: A rule providing a binding to an HTTP Triggered Azure\nFunction.\nWebhookRule: A rule providing a binding to a webserver following\nOAuth2.0 authentication protocol."
         },
         "workerSelectors": {
           "type": "array",
@@ -2198,6 +2198,7 @@
       "properties": {
         "functionUri": {
           "type": "string",
+          "format": "uri",
           "description": "URL for Azure Function"
         },
         "credential": {
@@ -3056,7 +3057,7 @@
     },
     "RouterRule": {
       "type": "object",
-      "description": "A rule of one of the following types:\n            \nStaticRule:  A rule\nproviding static rules that always return the same result, regardless of\ninput.\nDirectMapRule:  A rule that return the same labels as the input\nlabels.\nExpressionRule: A rule providing inline expression\nrules.\nAzureFunctionRule: A rule providing a binding to an HTTP Triggered Azure\nFunction.\nWebhookRule: A rule providing a binding to a webserver following\nOAuth2.0 authentication protocol.",
+      "description": "A rule of one of the following types:\n            \nStaticRule:  A rule\nproviding static rules that always return the same result, regardless of\ninput.\nDirectMapRule:  A rule that return the same labels as the input\nlabels.\nExpressionRule: A rule providing inline expression\nrules.\nFunctionRule: A rule providing a binding to an HTTP Triggered Azure\nFunction.\nWebhookRule: A rule providing a binding to a webserver following\nOAuth2.0 authentication protocol.",
       "properties": {
         "kind": {
           "type": "string",
@@ -3284,7 +3285,7 @@
       "properties": {
         "rule": {
           "$ref": "#/definitions/RouterRule",
-          "description": "A rule of one of the following types:\n            \nStaticRule:  A rule\nproviding static rules that always return the same result, regardless of\ninput.\nDirectMapRule:  A rule that return the same labels as the input\nlabels.\nExpressionRule: A rule providing inline expression\nrules.\nAzureFunctionRule: A rule providing a binding to an HTTP Triggered Azure\nFunction.\nWebhookRule: A rule providing a binding to a webserver following\nOAuth2.0 authentication protocol."
+          "description": "A rule of one of the following types:\n            \nStaticRule:  A rule\nproviding static rules that always return the same result, regardless of\ninput.\nDirectMapRule:  A rule that return the same labels as the input\nlabels.\nExpressionRule: A rule providing inline expression\nrules.\nFunctionRule: A rule providing a binding to an HTTP Triggered Azure\nFunction.\nWebhookRule: A rule providing a binding to a webserver following\nOAuth2.0 authentication protocol."
         }
       },
       "required": [
@@ -3303,7 +3304,7 @@
       "properties": {
         "rule": {
           "$ref": "#/definitions/RouterRule",
-          "description": "A rule of one of the following types:\n            \nStaticRule:  A rule\nproviding static rules that always return the same result, regardless of\ninput.\nDirectMapRule:  A rule that return the same labels as the input\nlabels.\nExpressionRule: A rule providing inline expression\nrules.\nAzureFunctionRule: A rule providing a binding to an HTTP Triggered Azure\nFunction.\nWebhookRule: A rule providing a binding to a webserver following\nOAuth2.0 authentication protocol."
+          "description": "A rule of one of the following types:\n            \nStaticRule:  A rule\nproviding static rules that always return the same result, regardless of\ninput.\nDirectMapRule:  A rule that return the same labels as the input\nlabels.\nExpressionRule: A rule providing inline expression\nrules.\nFunctionRule: A rule providing a binding to an HTTP Triggered Azure\nFunction.\nWebhookRule: A rule providing a binding to a webserver following\nOAuth2.0 authentication protocol."
         }
       },
       "required": [
@@ -3485,6 +3486,7 @@
       "properties": {
         "authorizationServerUri": {
           "type": "string",
+          "format": "uri",
           "description": "Uri for Authorization Server."
         },
         "clientCredential": {
@@ -3493,6 +3495,7 @@
         },
         "webhookUri": {
           "type": "string",
+          "format": "uri",
           "description": "Uri for Contoso's Web Server."
         }
       },
