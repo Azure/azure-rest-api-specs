@@ -83,11 +83,6 @@ model FleetHubProfile {
   @visibility("read")
   @doc("The Azure Portal FQDN of the Fleet hub.")
   portalFqdn?: string;
-
-  @added(Versions.v2023_08_15_preview)
-  @doc("The virtual machine size of the Fleet hub.")
-  @visibility("read", "create")
-  vmSize?: string;
 }
 
 scalar SubnetResourceId
@@ -118,6 +113,11 @@ model AgentProfile {
   @visibility("read", "create")
   @doc("The ID of the subnet which the Fleet hub node will join on startup. If this is not specified, a vnet and subnet will be generated and used.")
   subnetId?: SubnetResourceId;
+
+  @added(Versions.v2023_08_15_preview)
+  @doc("The virtual machine size of the Fleet hub.")
+  @visibility("read", "create")
+  vmSize?: string;
 }
 
 @lroStatus
