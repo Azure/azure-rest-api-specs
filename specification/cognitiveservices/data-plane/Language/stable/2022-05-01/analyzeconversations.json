@@ -14,11 +14,11 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}",
+    "hostTemplate": "{Endpoint}",
     "useSchemePrefix": false,
     "parameters": [
       {
-        "name": "endpoint",
+        "name": "Endpoint",
         "in": "path",
         "required": true,
         "description": "Supported Cognitive Services endpoint (e.g., https://<resource-name>.api.cognitiveservices.azure.com).",
@@ -34,13 +34,12 @@
   ],
   "security": [
     {
-      "apim_key": []
+      "ApiKeyAuth": []
     }
   ],
   "securityDefinitions": {
-    "apim_key": {
+    "ApiKeyAuth": {
       "type": "apiKey",
-      "description": "A subscription key for a Language service resource",
       "in": "header",
       "name": "Ocp-Apim-Subscription-Key"
     }
@@ -226,10 +225,7 @@
       "type": "object",
       "properties": {
         "kind": {
-          "type": "string",
-          "enum": [
-            "ConversationResult"
-          ],
+          "$ref": "#/definitions/AnalyzeConversationTaskResultsKind",
           "description": "The base class of a conversation input task result."
         }
       },
@@ -1338,8 +1334,9 @@
       "properties": {
         "result": {
           "type": "object",
+          "additionalProperties": true,
           "description": "The actual response from a LUIS Generally Available application.",
-          "x-typespec-name": "Record<never>"
+          "x-typespec-name": "Record<unknown>"
         }
       },
       "description": "It is a wrap up of LUIS Generally Available response.",
@@ -2047,41 +2044,6 @@
         "name": "WeightUnit",
         "modelAsString": true
       }
-    },
-    "apim_key": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "apiKey"
-          ],
-          "description": "API key authentication"
-        },
-        "in": {
-          "type": "string",
-          "enum": [
-            "header"
-          ],
-          "description": "location of the API key"
-        },
-        "name": {
-          "type": "string",
-          "enum": [
-            "Ocp-Apim-Subscription-Key"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "description": "name of the API key"
-        }
-      },
-      "description": "A subscription key for a Language service resource",
-      "required": [
-        "type",
-        "in",
-        "name"
-      ]
     },
     "extraInformationKind": {
       "type": "string",
