@@ -5530,6 +5530,183 @@
       },
       "description": "Ranking function based on the Okapi BM25 similarity algorithm. BM25 is a TF-IDF-like algorithm that includes length normalization (controlled by the 'b' parameter) as well as term frequency saturation (controlled by the 'k1' parameter)."
     },
+    "VectorSearch": {
+      "type": "object",
+      "properties": {
+        "profiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VectorSearchProfile"
+          },
+          "description": "Defines combinations of configurations to use with vector search."
+        },
+        "algorithms": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VectorSearchAlgorithmConfiguration"
+          },
+          "description": "Contains configuration options specific to the algorithm used during indexing and/or querying."
+        }
+      },
+      "description": "Contains configuration options related to vector search."
+    },
+    "VectorSearchProfile": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "externalDocs": {
+            "url": "https://docs.microsoft.com/rest/api/searchservice/Naming-rules"
+          },
+          "type": "string",
+          "description": "The name to associate with this particular vector search profile.",
+          "x-nullable": false
+        },
+        "algorithm": {
+          "type": "string",
+          "description": "The name of the vector search algorithm configuration that specifies the algorithm and optional parameters.",
+          "x-nullable": false
+        }
+      },
+      "required": [
+        "name",
+        "algorithm"
+      ],
+      "description": "Defines a combination of configurations to use with vector search."
+    },
+    "VectorSearchAlgorithmConfiguration": {
+      "type": "object",
+      "discriminator": "kind",
+      "properties": {
+        "name": {
+          "externalDocs": {
+            "url": "https://docs.microsoft.com/rest/api/searchservice/Naming-rules"
+          },
+          "type": "string",
+          "description": "The name to associate with this particular configuration.",
+          "x-nullable": false
+        },
+        "kind": {
+          "type": "string",
+          "description": "The name of the kind of algorithm being configured for use with vector search.",
+          "x-nullable": false
+        }
+      },
+      "required": [
+        "name",
+        "kind"
+      ],
+      "description": "Contains configuration options specific to the algorithm used during indexing and/or querying."
+    },
+    "HnswVectorSearchAlgorithmConfiguration": {
+      "type": "object",
+      "x-ms-discriminator-value": "hnsw",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VectorSearchAlgorithmConfiguration"
+        }
+      ],
+      "properties": {
+        "hnswParameters": {
+          "x-ms-client-name": "Parameters",
+          "$ref": "#/definitions/HnswParameters",
+          "description": "Contains the parameters specific to hnsw algorithm."
+        }
+      },
+      "description": "Contains configuration options specific to the hnsw approximate nearest neighbors algorithm used during indexing and querying. The hnsw algorithm offers a tunable trade-off between search speed and accuracy."
+    },
+    "HnswParameters": {
+      "type": "object",
+      "properties": {
+        "m": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true,
+          "minimum": 4,
+          "maximum": 10,
+          "default": 4,
+          "description": "The number of bi-directional links created for every new element during construction. Increasing this parameter value may improve recall and reduce retrieval times for datasets with high intrinsic dimensionality at the expense of increased memory consumption and longer indexing time."
+        },
+        "efConstruction": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true,
+          "minimum": 100,
+          "maximum": 1000,
+          "default": 400,
+          "description": "The size of the dynamic list containing the nearest neighbors, which is used during index time. Increasing this parameter may improve index quality, at the expense of increased indexing time. At a certain point, increasing this parameter leads to diminishing returns."
+        },
+        "efSearch": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true,
+          "minimum": 100,
+          "maximum": 1000,
+          "default": 500,
+          "description": "The size of the dynamic list containing the nearest neighbors, which is used during search time. Increasing this parameter may improve search results, at the expense of slower search. At a certain point, increasing this parameter leads to diminishing returns."
+        },
+        "metric": {
+          "$ref": "#/definitions/VectorSearchAlgorithmMetric",
+          "x-nullable": true,
+          "description": "The similarity metric to use for vector comparisons."
+        }
+      },
+      "description": "Contains the parameters specific to hnsw algorithm."
+    },
+    "ExhaustiveKnnVectorSearchAlgorithmConfiguration": {
+      "type": "object",
+      "x-ms-discriminator-value": "exhaustiveKnn",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VectorSearchAlgorithmConfiguration"
+        }
+      ],
+      "properties": {
+        "exhaustiveKnnParameters": {
+          "x-ms-client-name": "Parameters",
+          "$ref": "#/definitions/ExhaustiveKnnParameters",
+          "description": "Contains the parameters specific to exhaustive KNN algorithm."
+        }
+      },
+      "description": "Contains configuration options specific to the exhaustive KNN algorithm used during querying, which will perform brute-force search across the entire vector index."
+    },
+    "ExhaustiveKnnParameters": {
+      "type": "object",
+      "properties": {
+        "metric": {
+          "$ref": "#/definitions/VectorSearchAlgorithmMetric",
+          "x-nullable": true,
+          "description": "The similarity metric to use for vector comparisons."
+        }
+      },
+      "description": "Contains the parameters specific to exhaustive KNN algorithm."
+    },
+    "VectorSearchAlgorithmMetric": {
+      "type": "string",
+      "enum": [
+        "cosine",
+        "euclidean",
+        "dotProduct"
+      ],
+      "x-ms-enum": {
+        "name": "VectorSearchAlgorithmMetric",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "cosine",
+            "name": "Cosine"
+          },
+          {
+            "value": "euclidean",
+            "name": "Euclidean"
+          },
+          {
+            "value": "dotProduct",
+            "name": "DotProduct"
+          }
+        ]
+      },
+      "description": "The similarity metric to use for vector comparisons."
+    },
     "DataSourceCredentials": {
       "properties": {
         "connectionString": {
@@ -6527,6 +6704,19 @@
           "$ref": "#/definitions/LexicalAnalyzerName",
           "description": "The name of the analyzer used at indexing time for the field. This option can be used only with searchable fields. It must be set together with searchAnalyzer and it cannot be set together with the analyzer option.  This property cannot be set to the name of a language analyzer; use the analyzer property instead if you need a language analyzer. Once the analyzer is chosen, it cannot be changed for the field. Must be null for complex fields.",
           "x-nullable": true
+        },
+        "dimensions": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true,
+          "minimum": 2,
+          "maximum": 2048,
+          "description": "The dimensionality of the vector field."
+        },
+        "vectorSearchProfile": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The name of the vector search profile that specifies the algorithm to use when searching the vector field."
         },
         "synonymMaps": {
           "externalDocs": {

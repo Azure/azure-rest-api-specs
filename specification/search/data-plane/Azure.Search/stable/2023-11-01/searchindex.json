@@ -1394,6 +1394,78 @@
       },
       "description": "Specifies the syntax of the search query. The default is 'simple'. Use 'full' if your query uses the Lucene query syntax."
     },
+    "Vector": {
+      "type": "object",
+      "discriminator": "kind",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The name of the kind of vector query being performed.",
+          "x-nullable": false
+        },
+        "k": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of nearest neighbors to return as top hits."
+        },
+        "fields": {
+          "type": "string",
+          "description": "Vector Fields of type Collection(Edm.Single) to be included in the vector searched."
+        },
+        "exhaustive": {
+          "type": "boolean",
+          "description": "When true, triggers an exhaustive k-nearest neighbor search across all vectors within the vector index. Useful for scenarios where exact matches are critical, such as determining ground truth values."
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "description": "The query parameters for vector and hybrid search queries."
+    },
+    "RawVector": {
+      "type": "object",
+      "x-ms-discriminator-value": "vector",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Vector"
+        }
+      ],
+      "properties": {
+        "vector": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "float"
+          },
+          "description": "The vector representation of a search query."
+        }
+      },
+      "description": "The query parameters to use for vector search when a raw vector value is provided."
+    },
+    "VectorFilterMode": {
+      "type": "string",
+      "enum": [
+        "postFilter",
+        "preFilter"
+      ],
+      "x-ms-enum": {
+        "name": "VectorFilterMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "postFilter",
+            "name": "PostFilter",
+            "description": "The filter will be applied after the candidate set of vector results is returned. Depending on the filter selectivity, this can result in fewer results than requested by the parameter 'k'."
+          },
+          {
+            "value": "preFilter",
+            "name": "PreFilter",
+            "description": "The filter will be applied before the search query."
+          }
+        ]
+      },
+      "description": "Determines whether or not filters are applied before or after the vector search is performed."
+    },
     "ScoringStatistics": {
       "type": "string",
       "enum": [
@@ -1567,6 +1639,21 @@
         "captions": {
           "$ref": "#/definitions/Captions",
           "description": "A value that specifies whether captions should be returned as part of the search response."
+        },
+        "semanticFields": {
+          "type": "string",
+          "description": "The comma-separated list of field names used for semantic search."
+        },
+        "vectors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Vector"
+          },
+          "description": "The query parameters for vector and hybrid search queries."
+        },
+        "vectorFilterMode": {
+          "$ref": "#/definitions/VectorFilterMode",
+          "description": "Determines whether or not filters are applied before or after the vector search is performed. Default is 'preFilter' for new indexes."
         }
       },
       "description": "Parameters for filtering, sorting, faceting, paging, and other search query behaviors."
