@@ -14,6 +14,7 @@ model Action {
   @doc("The name of the action to perform. This should match an action defined in the service's constitution, so that it can be invoked by the `apply` function of the constitution if the proposal is accepted.")
   name: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type can be anything."
   @doc("Arguments to modify the behavior of this action. The schema is determined by the action implementation, and should be validated by a `validate` call in the constitution.")
   args?: unknown;
 }
