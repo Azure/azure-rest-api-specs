@@ -35,7 +35,7 @@ tag: package-2023-08-preview
 
 These settings apply only when `--tag=package-2023-08-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-08-preview'
+``` yaml $(tag) == 'package-2023-08-preview'
 input-file:
   - preview/2023-08-15-preview/fleets.json
 ```
