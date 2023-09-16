@@ -4084,77 +4084,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/deployments/{deploymentName}/publish": {
-      "post": {
-        "tags": [
-          "BatchDeployment"
-        ],
-        "summary": "This API is not applicable.",
-        "operationId": "BatchDeployments_Publish",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "in": "path",
-            "name": "endpointName",
-            "description": "Endpoint name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "deploymentName",
-            "description": "Inference deployment identifier.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DestinationAsset"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Publish Workspace Batch Deployment.": {
-            "$ref": "./examples/Workspace/BatchDeployment/publish.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/listkeys": {
       "post": {
         "tags": [
@@ -4204,6 +4133,10 @@
           "ListKeys Workspace Batch Endpoint.": {
             "$ref": "./examples/Workspace/BatchEndpoint/listKeys.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -9017,77 +8950,6 @@
         "x-ms-examples": {
           "Get Online Deployment Logs.": {
             "$ref": "./examples/OnlineDeployment/getLogs.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}/publish": {
-      "post": {
-        "tags": [
-          "OnlineDeployment"
-        ],
-        "summary": "This API is not applicable.",
-        "operationId": "OnlineDeployments_Publish",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "in": "path",
-            "name": "endpointName",
-            "description": "Inference endpoint name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "deploymentName",
-            "description": "The name and identifier for the endpoint.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DestinationAsset"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Publish Workspace Online Deployment.": {
-            "$ref": "./examples/Workspace/OnlineDeployment/publish.json"
           }
         }
       }
