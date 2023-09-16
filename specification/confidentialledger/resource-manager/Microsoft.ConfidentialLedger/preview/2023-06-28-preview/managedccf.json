@@ -211,13 +211,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful and Managed CCF was recovered; response contains the Managed CCF",
+            "description": "The request was successful and Managed CCF was recovered; response contains the Managed CCF.",
             "schema": {
               "$ref": "#/definitions/ManagedCCF"
             }
           },
-          "201": {
-            "description": "The Managed CCF resource will be updated asynchronously"
+          "202": {
+            "description": "The Managed CCF resource will be updated asynchronously. Check the provisioningState field to monitor the progress of your operation."
           },
           "default": {
             "description": "Error response describing the reason for operation failure.",
@@ -640,7 +640,10 @@
           "readOnly": false,
           "description": "SAS URI used to access the backup Fileshare."
         }
-      }
+      },
+      "required": [
+        "uri"
+      ]
     },
     "ManagedCCFRestore": {
       "description": "Object representing Restore properties of Managed CCF Resource.",
@@ -661,7 +664,12 @@
           "readOnly": false,
           "description": "SAS URI used to access the backup Fileshare."
         }
-      }
+      },
+      "required": [
+        "fileShareName",
+        "restoreRegion",
+        "uri"
+      ]
     },
     "ManagedCCFBackupRestoreResponse": {
       "description": "Object representing Backup and Restore responses of Managed CCF Resource.",
