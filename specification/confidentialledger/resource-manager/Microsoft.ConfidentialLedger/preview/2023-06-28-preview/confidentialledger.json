@@ -449,7 +449,7 @@
           "200": {
             "description": "The request was successful; response contains a message stating the Confidential Ledger Resource is successfully being backed up.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedgerBackupRestoreResponse"
+              "$ref": "#/definitions/ConfidentialLedgerBackupResponse"
             }
           },
           "202": {
@@ -505,7 +505,7 @@
           "200": {
             "description": "The request was successful; response contains a message stating the Confidential Ledger Resource is successfully being restored.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedgerBackupRestoreResponse"
+              "$ref": "#/definitions/ConfidentialLedgerRestoreResponse"
             }
           },
           "202": {
@@ -780,14 +780,25 @@
         "uri"
       ]
     },
-    "ConfidentialLedgerBackupRestoreResponse": {
-      "description": "Object representing Backup and Restore responses of Confidential Ledger Resource.",
+    "ConfidentialLedgerBackupResponse": {
+      "description": "Object representing the backup response of a Confidential Ledger Resource.",
       "type": "object",
       "properties": {
         "message": {
           "type": "string",
           "readOnly": true,
-          "description": "Response body stating if the Confidential Ledger Resource is being backed up or restored."
+          "description": "Response body stating if the Confidential Ledger Resource is being backed up."
+        }
+      }
+    },
+    "ConfidentialLedgerRestoreResponse": {
+      "description": "Object representing the backup response of a Confidential Ledger Resource.",
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Response body stating if the Confidential Ledger Resource is being restored."
         }
       }
     },

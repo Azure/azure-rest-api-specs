@@ -364,7 +364,7 @@
           "200": {
             "description": "The request was successful; response contains a message stating the Managed CCF Resource is successfully being backed up.",
             "schema": {
-              "$ref": "#/definitions/ManagedCCFBackupRestoreResponse"
+              "$ref": "#/definitions/ManagedCCFBackupResponse"
             }
           },
           "202": {
@@ -420,7 +420,7 @@
           "200": {
             "description": "The request was successful; response contains a message stating the Managed CCF Resource is successfully being restored.",
             "schema": {
-              "$ref": "#/definitions/ManagedCCFBackupRestoreResponse"
+              "$ref": "#/definitions/ManagedCCFRestoreResponse"
             }
           },
           "202": {
@@ -671,14 +671,25 @@
         "uri"
       ]
     },
-    "ManagedCCFBackupRestoreResponse": {
-      "description": "Object representing Backup and Restore responses of Managed CCF Resource.",
+    "ManagedCCFBackupResponse": {
+      "description": "Object representing the backup response of a Managed CCF Resource.",
       "type": "object",
       "properties": {
         "message": {
           "type": "string",
           "readOnly": true,
-          "description": "Response body stating if the Managed CCF Resource is being backed up or restored."
+          "description": "Response body stating if the Managed CCF Resource is being backed."
+        }
+      }
+    },
+    "ManagedCCFRestoreResponse": {
+      "description": "Object representing the restore response of a Managed CCF Resource.",
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Response body stating if the Managed CCF Resource is being restored."
         }
       }
     }
