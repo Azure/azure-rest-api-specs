@@ -210,12 +210,12 @@ model Project {
   @pattern("^[a-zA-Z][0-9A-Za-z-]*[0-9a-zA-Z]$")
   @key("projectName")
   @visibility("read", "query")
-  @maxLength(255)
+  @maxLength(128)
   @minLength(3)
   projectName: string;
 
   @doc("Project description.")
-  @maxLength(1024)
+  @maxLength(255)
   description?: string;
 
   @doc("Project modality.")
@@ -223,7 +223,7 @@ model Project {
   modality: ContentModality;
 
   @doc("Project display name.")
-  @maxLength(255)
+  @maxLength(128)
   @minLength(3)
   displayName?: string;
 
