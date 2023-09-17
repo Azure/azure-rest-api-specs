@@ -223,7 +223,7 @@
                 }
             }
         },
-        "/api/texttospeech/projects/{projectid}/consents": {
+        "/api/texttospeech/projects/{projectId}/consents": {
             "get": {
                 "tags": [
                     "Projects controller:"
@@ -290,7 +290,7 @@
                 }
             }
         },
-        "/api/texttospeech/projects/{projectid}/endpoints": {
+        "/api/texttospeech/projects/{projectId}/endpoints": {
             "get": {
                 "tags": [
                     "Projects controller:"
@@ -357,7 +357,7 @@
                 }
             }
         },
-        "/api/texttospeech/projects/{projectid}/models": {
+        "/api/texttospeech/projects/{projectId}/models": {
             "get": {
                 "tags": [
                     "Projects controller:"
@@ -429,13 +429,13 @@
                 }
             }
         },
-        "/api/texttospeech/projects/{projectid}/trainingsets": {
+        "/api/texttospeech/projects/{projectId}/trainingsets": {
             "get": {
                 "tags": [
                     "Projects controller:"
                 ],
                 "summary": "Get Training Sets for Project",
-                "description": "Gets the list of trainig sets for specified project.",
+                "description": "Gets the list of training sets for specified project.",
                 "operationId": "Projects_ListTrainingSets",
                 "produces": [
                     "application/json"
@@ -496,7 +496,7 @@
                 }
             }
         },
-        "/api/texttospeech/projects/{projectid}/zeroshots": {
+        "/api/texttospeech/projects/{projectId}/zeroshots": {
             "get": {
                 "tags": [
                     "Projects controller:"
@@ -557,7 +557,7 @@
                     "nextLinkName": "@nextLink"
                 },
                 "x-ms-examples": {
-                    "Get all zeroshot models in a project": {
+                    "Get all zero shot prompts in a project": {
                         "$ref": "./examples/get_project_zeroshots.json"
                     }
                 }
@@ -2171,7 +2171,7 @@
                     }
                 ],
                 "x-ms-examples": {
-                    "Create a zeroshot model": {
+                    "Create a zero shot prompt": {
                         "$ref": "./examples/create_zeroshot.json"
                     }
                 }
@@ -2233,7 +2233,7 @@
                     "nextLinkName": "@nextLink"
                 },
                 "x-ms-examples": {
-                    "Get all zeroshot models": {
+                    "Get all zero shot prompts": {
                         "$ref": "./examples/get_zeroshots.json"
                     }
                 }
@@ -2281,7 +2281,7 @@
                     }
                 ],
                 "x-ms-examples": {
-                    "Get a zeroshot model": {
+                    "Get a zero shot prompt": {
                         "$ref": "./examples/get_zeroshot.json"
                     }
                 }
@@ -2314,7 +2314,7 @@
                     }
                 ],
                 "x-ms-examples": {
-                    "Delete a zeroshot model": {
+                    "Delete a zero shot prompt": {
                         "$ref": "./examples/delete_zeroshot.json"
                     }
                 }
@@ -2349,7 +2349,7 @@
                     }
                 ],
                 "x-ms-examples": {
-                    "Get zeroshot base models": {
+                    "Get zero shot base models": {
                         "$ref": "./examples/get_zeroshot_base_models.json"
                     }
                 }
@@ -3185,20 +3185,6 @@
             ],
             "type": "object",
             "properties": {
-                "project": {
-                    "$ref": "#/definitions/ResourceReference"
-                },
-                "consent": {
-                    "$ref": "#/definitions/ResourceReference"
-                },
-                "properties": {
-                    "$ref": "#/definitions/ZeroShotProperties"
-                },
-                "promptId": {
-                    "format": "uuid",
-                    "type": "string",
-                    "readOnly": true
-                },
                 "status": {
                     "$ref": "#/definitions/Status"
                 },
@@ -3222,6 +3208,20 @@
                 },
                 "createdDateTime": {
                     "format": "date-time",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "project": {
+                    "$ref": "#/definitions/ResourceReference"
+                },
+                "consent": {
+                    "$ref": "#/definitions/ResourceReference"
+                },
+                "properties": {
+                    "$ref": "#/definitions/ZeroShotProperties"
+                },
+                "promptId": {
+                    "format": "uuid",
                     "type": "string",
                     "readOnly": true
                 }
