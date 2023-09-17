@@ -48,12 +48,11 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "Bad Request",
+                    "default": {
+                        "description": "An error occurred.",
                         "schema": {
                             "$ref": "#/definitions/ErrorResponse"
-                        },
-                        "x-ms-error-response": true
+                        }
                     }
                 },
                 "security": [
@@ -108,6 +107,12 @@
                         "schema": {
                             "$ref": "#/definitions/PaginatedResources`1_Project"
                         }
+                    },
+                    "default": {
+                        "description": "An error occurred.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
                     }
                 },
                 "security": [
@@ -154,12 +159,11 @@
                             "$ref": "#/definitions/Project"
                         }
                     },
-                    "404": {
-                        "description": "Not Found",
+                    "default": {
+                        "description": "An error occurred.",
                         "schema": {
                             "$ref": "#/definitions/ErrorResponse"
-                        },
-                        "x-ms-error-response": true
+                        }
                     }
                 },
                 "security": [
@@ -202,12 +206,11 @@
                     "204": {
                         "description": "No Content"
                     },
-                    "400": {
-                        "description": "Bad Request",
+                    "default": {
+                        "description": "An error occurred.",
                         "schema": {
                             "$ref": "#/definitions/ErrorResponse"
-                        },
-                        "x-ms-error-response": true
+                        }
                     }
                 },
                 "security": [
@@ -270,6 +273,12 @@
                         "description": "Success",
                         "schema": {
                             "$ref": "#/definitions/PaginatedResources`1_Consent"
+                        }
+                    },
+                    "default": {
+                        "description": "An error occurred.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
                         }
                     }
                 },
@@ -337,6 +346,12 @@
                         "description": "Success",
                         "schema": {
                             "$ref": "#/definitions/PaginatedResources`1_Endpoint"
+                        }
+                    },
+                    "default": {
+                        "description": "An error occurred.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
                         }
                     }
                 },
@@ -410,6 +425,12 @@
                         "schema": {
                             "$ref": "#/definitions/PaginatedResources`1_ProModel"
                         }
+                    },
+                    "default": {
+                        "description": "An error occurred.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
                     }
                 },
                 "security": [
@@ -477,6 +498,12 @@
                         "schema": {
                             "$ref": "#/definitions/PaginatedResources`1_Trainingset"
                         }
+                    },
+                    "default": {
+                        "description": "An error occurred.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
                     }
                 },
                 "security": [
@@ -543,6 +570,12 @@
                         "description": "Success",
                         "schema": {
                             "$ref": "#/definitions/PaginatedResources`1_ZeroShotPrompt"
+                        }
+                    },
+                    "default": {
+                        "description": "An error occurred.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
                         }
                     }
                 },
@@ -647,12 +680,11 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "Bad Request",
+                    "default": {
+                        "description": "An error occurred.",
                         "schema": {
                             "$ref": "#/definitions/ErrorResponse"
-                        },
-                        "x-ms-error-response": true
+                        }
                     }
                 },
                 "security": [
@@ -707,6 +739,12 @@
                         "schema": {
                             "$ref": "#/definitions/PaginatedResources`1_Consent"
                         }
+                    },
+                    "default": {
+                        "description": "An error occurred.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
                     }
                 },
                 "security": [
@@ -753,12 +791,11 @@
                             "$ref": "#/definitions/Consent"
                         }
                     },
-                    "404": {
-                        "description": "Not Found",
+                    "default": {
+                        "description": "An error occurred.",
                         "schema": {
-                            "$ref": "#/definitions/EntityError"
-                        },
-                        "x-ms-error-response": true
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
                     }
                 },
                 "security": [
@@ -780,6 +817,9 @@
                 "summary": "Delete Consent",
                 "description": "Deletes the consent identified by the given ID.",
                 "operationId": "Consents_Delete",
+                "produces": [
+                    "application/json"
+                ],
                 "parameters": [
                     {
                         "in": "path",
@@ -792,6 +832,12 @@
                 "responses": {
                     "204": {
                         "description": "No Content"
+                    },
+                    "default": {
+                        "description": "An error occurred.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
                     }
                 },
                 "security": [
@@ -843,6 +889,12 @@
                                 "type": "string",
                                 "format": "uri"
                             }
+                        }
+                    },
+                    "default": {
+                        "description": "An error occurred.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
                         }
                     }
                 },
@@ -898,6 +950,12 @@
                         "schema": {
                             "$ref": "#/definitions/PaginatedResources`1_Trainingset"
                         }
+                    },
+                    "default": {
+                        "description": "An error occurred.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
                     }
                 },
                 "security": [
@@ -944,12 +1002,11 @@
                             "$ref": "#/definitions/Trainingset"
                         }
                     },
-                    "404": {
-                        "description": "Not Found",
+                    "default": {
+                        "description": "An error occurred.",
                         "schema": {
                             "$ref": "#/definitions/ErrorResponse"
-                        },
-                        "x-ms-error-response": true
+                        }
                     }
                 },
                 "security": [
@@ -987,12 +1044,11 @@
                     "204": {
                         "description": "No Content"
                     },
-                    "400": {
-                        "description": "Bad Request",
+                    "default": {
+                        "description": "An error occurred.",
                         "schema": {
                             "$ref": "#/definitions/ErrorResponse"
-                        },
-                        "x-ms-error-response": true
+                        }
                     }
                 },
                 "security": [
@@ -1055,19 +1111,11 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "Bad Request",
+                    "default": {
+                        "description": "An error occurred.",
                         "schema": {
                             "$ref": "#/definitions/ErrorResponse"
-                        },
-                        "x-ms-error-response": true
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        },
-                        "x-ms-error-response": true
+                        }
                     }
                 },
                 "security": [
@@ -1114,12 +1162,11 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "Not Found",
+                    "default": {
+                        "description": "An error occurred.",
                         "schema": {
                             "$ref": "#/definitions/ErrorResponse"
-                        },
-                        "x-ms-error-response": true
+                        }
                     }
                 },
                 "security": [
@@ -1175,12 +1222,11 @@
                     "200": {
                         "description": "Success"
                     },
-                    "404": {
-                        "description": "Not Found",
+                    "default": {
+                        "description": "An error occurred.",
                         "schema": {
                             "$ref": "#/definitions/ErrorResponse"
-                        },
-                        "x-ms-error-response": true
+                        }
                     }
                 },
                 "security": [
@@ -1243,19 +1289,11 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "Bad Request",
+                    "default": {
+                        "description": "An error occurred.",
                         "schema": {
                             "$ref": "#/definitions/ErrorResponse"
-                        },
-                        "x-ms-error-response": true
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        },
-                        "x-ms-error-response": true
+                        }
                     }
                 },
                 "security": [
@@ -1302,12 +1340,11 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "Not Found",
+                    "default": {
+                        "description": "An error occurred.",
                         "schema": {
                             "$ref": "#/definitions/ErrorResponse"
-                        },
-                        "x-ms-error-response": true
+                        }
                     }
                 },
                 "security": [
@@ -1363,12 +1400,11 @@
                     "200": {
                         "description": "Success"
                     },
-                    "404": {
-                        "description": "Not Found",
+                    "default": {
+                        "description": "An error occurred.",
                         "schema": {
                             "$ref": "#/definitions/ErrorResponse"
-                        },
-                        "x-ms-error-response": true
+                        }
                     }
                 },
                 "security": [
@@ -1431,19 +1467,11 @@
                     "200": {
                         "description": "Success"
                     },
-                    "400": {
-                        "description": "Bad Request",
+                    "default": {
+                        "description": "An error occurred.",
                         "schema": {
                             "$ref": "#/definitions/ErrorResponse"
-                        },
-                        "x-ms-error-response": true
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        },
-                        "x-ms-error-response": true
+                        }
                     }
                 },
                 "security": [
@@ -1530,12 +1558,11 @@
                     "200": {
                         "description": "Success"
                     },
-                    "404": {
-                        "description": "Not Found",
+                    "default": {
+                        "description": "An error occurred.",
                         "schema": {
                             "$ref": "#/definitions/ErrorResponse"
-                        },
-                        "x-ms-error-response": true
+                        }
                     }
                 },
                 "security": [
@@ -1589,12 +1616,11 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "Bad Request",
+                    "default": {
+                        "description": "An error occurred.",
                         "schema": {
                             "$ref": "#/definitions/ErrorResponse"
-                        },
-                        "x-ms-error-response": true
+                        }
                     }
                 },
                 "security": [
@@ -1656,6 +1682,12 @@
                         "schema": {
                             "$ref": "#/definitions/PaginatedResources`1_ProModel"
                         }
+                    },
+                    "default": {
+                        "description": "An error occurred.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
                     }
                 },
                 "security": [
@@ -1702,12 +1734,11 @@
                             "$ref": "#/definitions/Model"
                         }
                     },
-                    "404": {
-                        "description": "Not Found",
+                    "default": {
+                        "description": "An error occurred.",
                         "schema": {
                             "$ref": "#/definitions/ErrorResponse"
-                        },
-                        "x-ms-error-response": true
+                        }
                     }
                 },
                 "security": [
@@ -1729,6 +1760,9 @@
                 "summary": "Delete Model",
                 "description": "Deletes the model identified by the given ID.",
                 "operationId": "Models_Delete",
+                "produces": [
+                    "application/json"
+                ],
                 "parameters": [
                     {
                         "in": "path",
@@ -1741,6 +1775,12 @@
                 "responses": {
                     "204": {
                         "description": "No Content"
+                    },
+                    "default": {
+                        "description": "An error occurred.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
                     }
                 },
                 "security": [
@@ -1775,6 +1815,12 @@
                             "items": {
                                 "$ref": "#/definitions/Recipe"
                             }
+                        }
+                    },
+                    "default": {
+                        "description": "An error occurred.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
                         }
                     }
                 },
@@ -1832,6 +1878,12 @@
                         "schema": {
                             "$ref": "#/definitions/PaginatedResources`1_Endpoint"
                         }
+                    },
+                    "default": {
+                        "description": "An error occurred.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
                     }
                 },
                 "security": [
@@ -1886,6 +1938,12 @@
                                 "format": "uri"
                             }
                         }
+                    },
+                    "default": {
+                        "description": "An error occurred.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
                     }
                 },
                 "security": [
@@ -1928,12 +1986,11 @@
                             "$ref": "#/definitions/Endpoint"
                         }
                     },
-                    "404": {
-                        "description": "Not Found",
+                    "default": {
+                        "description": "An error occurred.",
                         "schema": {
                             "$ref": "#/definitions/ErrorResponse"
-                        },
-                        "x-ms-error-response": true
+                        }
                     }
                 },
                 "security": [
@@ -1955,6 +2012,9 @@
                 "summary": "Delete Endpoint",
                 "description": "Deletes the endpoint identified by the given ID.",
                 "operationId": "Endpoints_Delete",
+                "produces": [
+                    "application/json"
+                ],
                 "parameters": [
                     {
                         "in": "path",
@@ -1967,6 +2027,12 @@
                 "responses": {
                     "204": {
                         "description": "No Content"
+                    },
+                    "default": {
+                        "description": "An error occurred.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
                     }
                 },
                 "security": [
@@ -2018,6 +2084,12 @@
                                 "type": "string",
                                 "format": "uri"
                             }
+                        }
+                    },
+                    "default": {
+                        "description": "An error occurred.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
                         }
                     }
                 },
@@ -2074,6 +2146,12 @@
                                 "type": "string",
                                 "format": "uri"
                             }
+                        }
+                    },
+                    "default": {
+                        "description": "An error occurred.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
                         }
                     }
                 },
@@ -2162,6 +2240,12 @@
                                 "format": "uri"
                             }
                         }
+                    },
+                    "default": {
+                        "description": "An error occurred.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
                     }
                 },
                 "security": [
@@ -2220,6 +2304,12 @@
                         "schema": {
                             "$ref": "#/definitions/PaginatedResources`1_ZeroShotPrompt"
                         }
+                    },
+                    "default": {
+                        "description": "An error occurred.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
                     }
                 },
                 "security": [
@@ -2266,12 +2356,11 @@
                             "$ref": "#/definitions/ZeroShotPrompt"
                         }
                     },
-                    "404": {
-                        "description": "Not Found",
+                    "default": {
+                        "description": "An error occurred.",
                         "schema": {
                             "$ref": "#/definitions/ErrorResponse"
-                        },
-                        "x-ms-error-response": true
+                        }
                     }
                 },
                 "security": [
@@ -2293,6 +2382,9 @@
                 "summary": "Delete Zero Shot Model",
                 "description": "Deletes zero shot model identified by the given ID.",
                 "operationId": "ZeroShotModels_Delete",
+                "produces": [
+                    "application/json"
+                ],
                 "parameters": [
                     {
                         "in": "path",
@@ -2305,6 +2397,12 @@
                 "responses": {
                     "204": {
                         "description": "No Content"
+                    },
+                    "default": {
+                        "description": "An error occurred.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
                     }
                 },
                 "security": [
@@ -2339,6 +2437,12 @@
                             "items": {
                                 "$ref": "#/definitions/BaseModel"
                             }
+                        }
+                    },
+                    "default": {
+                        "description": "An error occurred.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
                         }
                     }
                 },
@@ -2660,17 +2764,6 @@
             "properties": {
                 "kind": {
                     "$ref": "#/definitions/EndpointKind"
-                }
-            }
-        },
-        "EntityError": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "type": "string"
-                },
-                "message": {
-                    "type": "string"
                 }
             }
         },
