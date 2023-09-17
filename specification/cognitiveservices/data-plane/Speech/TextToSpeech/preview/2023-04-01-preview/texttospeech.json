@@ -1158,7 +1158,8 @@
                         "headers": {
                             "Retry-After": {
                                 "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                                "type": "integer"
+                                "type": "integer",
+                                "format": "int32"
                             }
                         }
                     },
@@ -1336,7 +1337,8 @@
                         "headers": {
                             "Retry-After": {
                                 "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                                "type": "integer"
+                                "type": "integer",
+                                "format": "int32"
                             }
                         }
                     },
@@ -2077,7 +2079,8 @@
                         "headers": {
                             "Retry-After": {
                                 "description": "The minimum number of seconds to wait before accessing the resource created in this operation.",
-                                "type": "integer"
+                                "type": "integer",
+                                "format": "int32"
                             },
                             "Location": {
                                 "description": "The location of the created resource.",
@@ -2139,7 +2142,8 @@
                         "headers": {
                             "Retry-After": {
                                 "description": "The minimum number of seconds to wait before accessing the resource created in this operation.",
-                                "type": "integer"
+                                "type": "integer",
+                                "format": "int32"
                             },
                             "Location": {
                                 "description": "The location of the created resource.",
@@ -3348,23 +3352,28 @@
         "https"
     ],
     "x-ms-parameterized-host": {
-        "hostTemplate": "{Endpoint}/texttospeech/v2023-04-01-preview",
+        "hostTemplate": "{endpoint}/texttospeech",
         "useSchemePrefix": false,
         "parameters": [
             {
-                "$ref": "#/parameters/Endpoint"
+                "name": "endpoint",
+                "in": "path",
+                "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
+                "required": true,
+                "type": "string"
             }
         ]
     },
     "parameters": {
-        "Endpoint": {
-            "name": "Endpoint",
-            "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
-            "x-ms-parameter-location": "client",
+        "Azure.Core.Foundations.ApiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
             "required": true,
             "type": "string",
-            "in": "path",
-            "x-ms-skip-url-encoding": true
+            "minLength": 1,
+            "x-ms-parameter-location": "method",
+            "x-ms-client-name": "apiVersion"
         }
     }
 }
