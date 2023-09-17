@@ -257,11 +257,8 @@ model TextCategoryPolicy {
   @doc("Text category.")
   category: TextCategory;
 
-  @doc("Severity less than the threshold will be treated as accepted for the category. The value can only be 2, 4, 6 for FourSeverityLevels.")
+  @doc("Severity less than the threshold will be treated as accepted for the category. The value can only be 2, 4, 6 for FourSeverityLevels. If the threshold is -1, it means all content are accepted.")
   acceptSeverityThreshold?: int32;
-
-  @doc("The judgement kind to help server make judgement.")
-  judgementKind: JudgmentKind;
 }
 
 @added(ContentSafety.Versions.v2023_10_15_Preview)
@@ -270,11 +267,8 @@ model ImageCategoryPolicy {
   @doc("Image category.")
   category: ImageCategory;
   
-  @doc("Severity less than the threshold will be treated as accepted for the category. The value can only be 2, 4, 6 for FourSeverityLevels.")
-  acceptSeverityThreshold?: int32;
-  
-  @doc("The judgement kind to help server make judgement.")
-  judgementKind: JudgmentKind;
+  @doc("Severity less than the threshold will be treated as accepted for the category. The value can only be -1, 2, 4, 6 for FourSeverityLevels. If the threshold is -1, it means all content are accepted.")
+  acceptSeverityThreshold: int32;
 }
 
 @added(ContentSafety.Versions.v2023_10_15_Preview)
@@ -312,12 +306,12 @@ model BlocklistPolicy {
   haltOnBlocklistHit?: boolean;
 }
 
-@added(ContentSafety.Versions.v2023_10_15_Preview)
-@doc("Judgement kind.")
-enum JudgmentKind {
-  @doc("Treat all content as accepted no matter what the predicted value is.")
-  AcceptAll,
-  @doc("Accept only when the predicted severity is less than the severity threshold.")
-  AcceptLessThan,
-}
+// @added(ContentSafety.Versions.v2023_10_15_Preview)
+// @doc("Judgement kind.")
+// enum JudgmentKind {
+//   @doc("Treat all content as accepted no matter what the predicted value is.")
+//   AcceptAll,
+//   @doc("Accept only when the predicted severity is less than the severity threshold.")
+//   AcceptLessThan,
+// }
 
