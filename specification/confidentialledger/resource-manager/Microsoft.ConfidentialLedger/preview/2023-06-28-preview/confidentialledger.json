@@ -296,7 +296,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful and ledger was recovered; response contains the Confidential Ledger",
+            "description": "The request was successful and ledger was updated; response contains the Confidential Ledger",
             "schema": {
               "$ref": "#/definitions/ConfidentialLedger"
             }
@@ -736,13 +736,13 @@
       }
     },
     "ConfidentialLedgerBackup": {
-      "description": "Object representing Backup properties of Confidential Ledger Resource.",
+      "description": "Object representing Backup properties of a Confidential Ledger Resource.",
       "type": "object",
       "properties": {
         "restoreRegion": {
           "type": "string",
           "readOnly": false,
-          "description": "The region where the backup of the Ledger Resource will eventually be restored to."
+          "description": "The region where the backup of the ledger will eventually be restored to."
         },
         "uri": {
           "type": "string",
@@ -755,23 +755,23 @@
       ]
     },
     "ConfidentialLedgerRestore": {
-      "description": "Object representing Restore properties of Confidential Ledger Resource.",
+      "description": "Object representing Restore properties of a Confidential Ledger Resource.",
       "type": "object",
       "properties": {
         "fileShareName": {
           "type": "string",
           "readOnly": false,
-          "description": "Fileshare Name where the Confidential Ledger Resource backup is stored."
+          "description": "Fileshare where the ledger backup is stored."
         },
         "restoreRegion": {
           "type": "string",
           "readOnly": false,
-          "description": "The region the Ledger Resource is being restored to."
+          "description": "The region the ledger is being restored to."
         },
         "uri": {
           "type": "string",
           "readOnly": false,
-          "description": "SAS URI used to access the backup Fileshare."
+          "description": "SAS URI used to access the backup fileshare."
         }
       },
       "required": [
@@ -787,7 +787,7 @@
         "message": {
           "type": "string",
           "readOnly": true,
-          "description": "Response body stating if the Confidential Ledger Resource is being backed up."
+          "description": "Response body stating if the ledger is being backed up."
         }
       }
     },
@@ -798,7 +798,7 @@
         "message": {
           "type": "string",
           "readOnly": true,
-          "description": "Response body stating if the Confidential Ledger Resource is being restored."
+          "description": "Response body stating if the ledger is being restored."
         }
       }
     },

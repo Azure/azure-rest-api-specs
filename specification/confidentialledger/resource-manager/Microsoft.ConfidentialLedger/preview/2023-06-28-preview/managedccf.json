@@ -211,7 +211,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful and Managed CCF was recovered; response contains the Managed CCF.",
+            "description": "The request was successful and Managed CCF was updated; response contains the Managed CCF.",
             "schema": {
               "$ref": "#/definitions/ManagedCCF"
             }
@@ -627,13 +627,13 @@
       }
     },
     "ManagedCCFBackup": {
-      "description": "Object representing Backup properties of Managed CCF Resource.",
+      "description": "Object representing Backup properties of a Managed CCF Resource.",
       "type": "object",
       "properties": {
         "restoreRegion": {
           "type": "string",
           "readOnly": false,
-          "description": "The region where the backup of the Managed CCF Resource will eventually be restored to."
+          "description": "The region where the backup of the managed CCF resource will eventually be restored to."
         },
         "uri": {
           "type": "string",
@@ -652,12 +652,12 @@
         "fileShareName": {
           "type": "string",
           "readOnly": false,
-          "description": "Fileshare Name where the Managed CCF Resource backup is stored."
+          "description": "Fileshare where the managed CCF resource backup is stored."
         },
         "restoreRegion": {
           "type": "string",
           "readOnly": false,
-          "description": "The region the Managed CCF Resource is being restored to."
+          "description": "The region the managed CCF resource is being restored to."
         },
         "uri": {
           "type": "string",
@@ -678,7 +678,7 @@
         "message": {
           "type": "string",
           "readOnly": true,
-          "description": "Response body stating if the Managed CCF Resource is being backed."
+          "description": "Response body stating if the managed CCF resource is being backed up."
         }
       }
     },
@@ -689,7 +689,7 @@
         "message": {
           "type": "string",
           "readOnly": true,
-          "description": "Response body stating if the Managed CCF Resource is being restored."
+          "description": "Response body stating if the managed CCF resource is being restored."
         }
       }
     }
