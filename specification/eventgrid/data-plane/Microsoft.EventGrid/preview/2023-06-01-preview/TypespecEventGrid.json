@@ -20,8 +20,8 @@
       {
         "name": "endpoint",
         "in": "path",
-        "required": true,
         "description": "The host name of the namespace, e.g. namespaceName1.westus-1.eventgrid.azure.net",
+        "required": true,
         "type": "string",
         "format": "uri",
         "x-ms-skip-url-encoding": true
@@ -93,8 +93,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -162,8 +162,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -221,8 +221,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -280,8 +280,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -339,8 +339,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -748,7 +748,7 @@
         "properties": {
           "type": "object",
           "description": "The thread properties",
-          "additionalProperties": true
+          "additionalProperties": {}
         },
         "participants": {
           "type": "array",
@@ -776,7 +776,7 @@
         "properties": {
           "type": "object",
           "description": "The thread properties",
-          "additionalProperties": true
+          "additionalProperties": {}
         },
         "participants": {
           "type": "array",
@@ -1039,6 +1039,10 @@
         "sender": {
           "type": "string",
           "description": "The Sender Email Address"
+        },
+        "recipient": {
+          "type": "string",
+          "description": "The Recipient Email Address"
         },
         "messageId": {
           "type": "string",
@@ -1679,6 +1683,75 @@
         }
       }
     },
+    "AppConfigurationSnapshotCreatedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.SnapshotCreated event.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the snapshot."
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag representing the new state of the snapshot."
+        },
+        "syncToken": {
+          "type": "string",
+          "description": "The sync token representing the server state after the event."
+        }
+      },
+      "required": [
+        "name",
+        "etag",
+        "syncToken"
+      ]
+    },
+    "AppConfigurationSnapshotEventData": {
+      "type": "object",
+      "description": "Schema of common properties of snapshot events",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the snapshot."
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag representing the new state of the snapshot."
+        },
+        "syncToken": {
+          "type": "string",
+          "description": "The sync token representing the server state after the event."
+        }
+      },
+      "required": [
+        "name",
+        "etag",
+        "syncToken"
+      ]
+    },
+    "AppConfigurationSnapshotModifiedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.SnapshotModified event.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the snapshot."
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag representing the new state of the snapshot."
+        },
+        "syncToken": {
+          "type": "string",
+          "description": "The sync token representing the server state after the event."
+        }
+      },
+      "required": [
+        "name",
+        "etag",
+        "syncToken"
+      ]
+    },
     "AppEventTypeDetail": {
       "type": "object",
       "description": "Detail of action on the app.",
@@ -2022,7 +2095,6 @@
     "ContainerRegistryChartDeletedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ChartDeleted event.",
-      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/ContainerRegistryArtifactEventData"
@@ -2032,7 +2104,6 @@
     "ContainerRegistryChartPushedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ChartPushed event.",
-      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/ContainerRegistryArtifactEventData"
@@ -2181,7 +2252,6 @@
     "ContainerRegistryImageDeletedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ImageDeleted event.",
-      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/ContainerRegistryEventData"
@@ -2191,7 +2261,6 @@
     "ContainerRegistryImagePushedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ImagePushed event.",
-      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/ContainerRegistryEventData"
@@ -2201,7 +2270,6 @@
     "ContainerServiceClusterSupportEndedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.ClusterSupportEnded event",
-      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/ContainerServiceClusterSupportEventData"
@@ -2211,7 +2279,6 @@
     "ContainerServiceClusterSupportEndingEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.ClusterSupportEnding event",
-      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/ContainerServiceClusterSupportEventData"
@@ -2263,7 +2330,6 @@
     "ContainerServiceNodePoolRollingFailedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingFailed event",
-      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/ContainerServiceNodePoolRollingEventData"
@@ -2273,7 +2339,6 @@
     "ContainerServiceNodePoolRollingStartedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingStarted event",
-      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/ContainerServiceNodePoolRollingEventData"
@@ -2283,7 +2348,6 @@
     "ContainerServiceNodePoolRollingSucceededEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingSucceeded event",
-      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/ContainerServiceNodePoolRollingEventData"
@@ -2527,13 +2591,13 @@
         }
       }
     },
-    "EventGridNamespaceMQTTClientCreatedOrUpdatedEventData": {
+    "EventGridMQTTClientCreatedOrUpdatedEventData": {
       "type": "object",
       "description": "Event data for Microsoft.EventGrid.MQTTClientCreatedOrUpdated event.",
       "properties": {
         "clientAuthenticationName": {
           "type": "string",
-          "description": "Unique identifier for the MQTT client that the client presents to the service for authentication. This case-insensitive string can be up to 128 characters long, and supports UTF-8 characters."
+          "description": "Unique identifier for the MQTT client that the client presents to the service\nfor authentication. This case-sensitive string can be up to 128 characters\nlong, and supports UTF-8 characters."
         },
         "clientName": {
           "type": "string",
@@ -2544,16 +2608,18 @@
           "description": "Name of the Event Grid namespace where the MQTT client was created or updated."
         },
         "state": {
-          "type": "string",
-          "description": "Configured state of the client. The value could be Enabled or Disabled."
+          "$ref": "#/definitions/EventGridMQTTClientState",
+          "description": "Configured state of the client. The value could be Enabled or Disabled"
         },
         "createdOn": {
           "type": "string",
+          "format": "date-time",
           "description": "Time the client resource is created based on the provider's UTC time."
         },
         "updatedOn": {
           "type": "string",
-          "description": "Time the client resource is last updated based on the provider's UTC time. If the client resource was never updated, this value is identical to the value of the `createdOn` property."
+          "format": "date-time",
+          "description": "Time the client resource is last updated based on the provider's UTC time. If\nthe client resource was never updated, this value is identical to the value of\nthe 'createdOn' property."
         },
         "attributes": {
           "type": "object",
@@ -2564,13 +2630,13 @@
         }
       }
     },
-    "EventGridNamespaceMQTTClientDeletedEventData": {
+    "EventGridMQTTClientDeletedEventData": {
       "type": "object",
       "description": "Event data for Microsoft.EventGrid.MQTTClientDeleted event.",
       "properties": {
         "clientAuthenticationName": {
           "type": "string",
-          "description": "Unique identifier for the MQTT client that the client presents to the service for authentication. This case-insensitive string can be up to 128 characters long, and supports UTF-8 characters."
+          "description": "Unique identifier for the MQTT client that the client presents to the service\nfor authentication. This case-sensitive string can be up to 128 characters\nlong, and supports UTF-8 characters."
         },
         "clientName": {
           "type": "string",
@@ -2578,56 +2644,186 @@
         },
         "namespaceName": {
           "type": "string",
-          "description": "Name of the Event Grid namespace where the MQTT client was deleted."
+          "description": "Name of the Event Grid namespace where the MQTT client was created or updated."
         }
       }
     },
-    "EventGridNamespaceMQTTClientSessionConnectedEventData": {
+    "EventGridMQTTClientDisconnectionReason": {
+      "type": "string",
+      "description": "EventGrid MQTT Client Disconnection Reason",
+      "enum": [
+        "ClientAuthenticationError",
+        "ClientAuthorizationError",
+        "ClientError",
+        "ClientInitiatedDisconnect",
+        "ConnectionLost",
+        "IpForbidden",
+        "QuotaExceeded",
+        "ServerError",
+        "ServerInitiatedDisconnect",
+        "SessionOverflow",
+        "SessionTakenOver"
+      ],
+      "x-ms-enum": {
+        "name": "EventGridMQTTClientDisconnectionReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ClientAuthenticationError",
+            "value": "ClientAuthenticationError",
+            "description": "The client got disconnected for any authentication reasons (for example,\ncertificate expired, client got disabled, or client configuration changed)."
+          },
+          {
+            "name": "ClientAuthorizationError",
+            "value": "ClientAuthorizationError",
+            "description": "The client got disconnected for any authorization reasons (for example, because\nof a change in the configuration of topic spaces, permission bindings, or\nclient groups)."
+          },
+          {
+            "name": "ClientError",
+            "value": "ClientError",
+            "description": "The client sent a bad request or used one of the unsupported features that\nresulted in a connection termination by the service."
+          },
+          {
+            "name": "ClientInitiatedDisconnect",
+            "value": "ClientInitiatedDisconnect",
+            "description": "The client initiates a graceful disconnect through a DISCONNECT packet for MQTT\nor a close frame for MQTT over WebSocket."
+          },
+          {
+            "name": "ConnectionLost",
+            "value": "ConnectionLost",
+            "description": "The client-server connection is lost. (EXCHANGE ONLINE PROTECTION)."
+          },
+          {
+            "name": "IpForbidden",
+            "value": "IpForbidden",
+            "description": "The client's IP address is blocked by IP filter or Private links configuration."
+          },
+          {
+            "name": "QuotaExceeded",
+            "value": "QuotaExceeded",
+            "description": "The client exceeded one or more of the throttling limits that resulted in a\nconnection termination by the service."
+          },
+          {
+            "name": "ServerError",
+            "value": "ServerError",
+            "description": "The connection got terminated due to an unexpected server error."
+          },
+          {
+            "name": "ServerInitiatedDisconnect",
+            "value": "ServerInitiatedDisconnect",
+            "description": "The server initiates a graceful disconnect for any operational reason."
+          },
+          {
+            "name": "SessionOverflow",
+            "value": "SessionOverflow",
+            "description": "The client's queue for unacknowledged QoS1 messages reached its limit, which\nresulted in a connection termination by the server."
+          },
+          {
+            "name": "SessionTakenOver",
+            "value": "SessionTakenOver",
+            "description": "The client reconnected with the same authentication name, which resulted in the\ntermination of the previous connection."
+          }
+        ]
+      }
+    },
+    "EventGridMQTTClientEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for MQTT Client state changes.",
+      "properties": {
+        "clientAuthenticationName": {
+          "type": "string",
+          "description": "Unique identifier for the MQTT client that the client presents to the service\nfor authentication. This case-sensitive string can be up to 128 characters\nlong, and supports UTF-8 characters."
+        },
+        "clientName": {
+          "type": "string",
+          "description": "Name of the client resource in the Event Grid namespace."
+        },
+        "namespaceName": {
+          "type": "string",
+          "description": "Name of the Event Grid namespace where the MQTT client was created or updated."
+        }
+      }
+    },
+    "EventGridMQTTClientSessionConnectedEventData": {
       "type": "object",
       "description": "Event data for Microsoft.EventGrid.MQTTClientSessionConnected event.",
       "properties": {
         "clientAuthenticationName": {
           "type": "string",
-          "description": "Unique identifier for the MQTT client that the client presents to the service for authentication. This case-insensitive string can be up to 128 characters long, and supports UTF-8 characters."
+          "description": "Unique identifier for the MQTT client that the client presents to the service\nfor authentication. This case-sensitive string can be up to 128 characters\nlong, and supports UTF-8 characters."
         },
-        "clientSessionName": {
+        "clientName": {
           "type": "string",
-          "description": "Unique identifier for the MQTT client's session. This case-sensitive string can be up to 128 characters long, and supports UTF-8 characters."
+          "description": "Name of the client resource in the Event Grid namespace."
         },
         "namespaceName": {
           "type": "string",
-          "description": "Name of the Event Grid namespace where the MQTT client was connected."
+          "description": "Name of the Event Grid namespace where the MQTT client was created or updated."
+        },
+        "clientSessionName": {
+          "type": "string",
+          "description": "Unique identifier for the MQTT client's session. This case-sensitive string can\nbe up to 128 characters long, and supports UTF-8 characters."
         },
         "sequenceNumber": {
-          "type": "string",
-          "description": "A number that helps indicate order of MQTT client session connected or disconnected events. Latest event will have a sequence number that is higher than the previous event."
+          "type": "integer",
+          "format": "int32",
+          "description": "A number that helps indicate order of MQTT client session connected or\ndisconnected events. Latest event will have a sequence number that is higher\nthan the previous event."
         }
       }
     },
-    "EventGridNamespaceMQTTClientSessionDisconnectedEventData": {
+    "EventGridMQTTClientSessionDisconnectedEventData": {
       "type": "object",
       "description": "Event data for Microsoft.EventGrid.MQTTClientSessionDisconnected event.",
       "properties": {
         "clientAuthenticationName": {
           "type": "string",
-          "description": "Unique identifier for the MQTT client that the client presents to the service for authentication. This case-insensitive string can be up to 128 characters long, and supports UTF-8 characters."
+          "description": "Unique identifier for the MQTT client that the client presents to the service\nfor authentication. This case-sensitive string can be up to 128 characters\nlong, and supports UTF-8 characters."
         },
-        "clientSessionName": {
+        "clientName": {
           "type": "string",
-          "description": "Unique identifier for the MQTT client's session. This case-sensitive string can be up to 128 characters long, and supports UTF-8 characters."
+          "description": "Name of the client resource in the Event Grid namespace."
         },
         "namespaceName": {
           "type": "string",
-          "description": "Name of the Event Grid namespace where the MQTT client was disconnected."
+          "description": "Name of the Event Grid namespace where the MQTT client was created or updated."
+        },
+        "clientSessionName": {
+          "type": "string",
+          "description": "Unique identifier for the MQTT client's session. This case-sensitive string can\nbe up to 128 characters long, and supports UTF-8 characters."
         },
         "sequenceNumber": {
-          "type": "string",
-          "description": "A number that helps indicate order of MQTT client session connected or disconnected events. Latest event will have a sequence number that is higher than the previous event."
+          "type": "integer",
+          "format": "int32",
+          "description": "A number that helps indicate order of MQTT client session connected or\ndisconnected events. Latest event will have a sequence number that is higher\nthan the previous event."
         },
         "disconnectionReason": {
-          "type": "string",
-          "description": "Reason for the disconnection of the MQTT client's session. The value could be one of the values in the disconnection reasons table."
+          "$ref": "#/definitions/EventGridMQTTClientDisconnectionReason",
+          "description": "Reason for the disconnection of the MQTT client's session. The value could be\none of the values in the disconnection reasons table."
         }
+      }
+    },
+    "EventGridMQTTClientState": {
+      "type": "string",
+      "description": "EventGrid MQTT Client State",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "EventGridMQTTClientState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disabled"
+          }
+        ]
       }
     },
     "EventHubCaptureFileCreatedEventData": {
@@ -3861,7 +4057,6 @@
     "IotHubDeviceConnectedEventData": {
       "type": "object",
       "description": "Event data for Microsoft.Devices.DeviceConnected event.",
-      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/DeviceConnectionStateEventProperties"
@@ -3871,7 +4066,6 @@
     "IotHubDeviceCreatedEventData": {
       "type": "object",
       "description": "Event data for Microsoft.Devices.DeviceCreated event.",
-      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/DeviceLifeCycleEventProperties"
@@ -3881,7 +4075,6 @@
     "IotHubDeviceDeletedEventData": {
       "type": "object",
       "description": "Event data for Microsoft.Devices.DeviceDeleted event.",
-      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/DeviceLifeCycleEventProperties"
@@ -3891,7 +4084,6 @@
     "IotHubDeviceDisconnectedEventData": {
       "type": "object",
       "description": "Event data for Microsoft.Devices.DeviceDisconnected event.",
-      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/DeviceConnectionStateEventProperties"
@@ -3901,7 +4093,6 @@
     "IotHubDeviceTelemetryEventData": {
       "type": "object",
       "description": "Event data for Microsoft.Devices.DeviceTelemetry event.",
-      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/DeviceTelemetryEventProperties"
@@ -4462,7 +4653,6 @@
     "MapsGeofenceEnteredEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceEntered event.",
-      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/MapsGeofenceEventProperties"
@@ -4504,7 +4694,6 @@
     "MapsGeofenceExitedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceExited event.",
-      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/MapsGeofenceEventProperties"
@@ -4547,7 +4736,6 @@
     "MapsGeofenceResultEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceResult event.",
-      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/MapsGeofenceEventProperties"
@@ -5738,8 +5926,7 @@
     },
     "PublishResult": {
       "type": "object",
-      "description": "The result of the Publish operation.",
-      "properties": {}
+      "description": "The result of the Publish operation."
     },
     "ReceiveDetails": {
       "type": "object",
@@ -7195,7 +7382,7 @@
     },
     "SubscriptionDeletedEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.EventGrid.SubscriptionDeletedEvent event.",
+      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.EventGrid.SubscriptionDeletedEvent event.",
       "properties": {
         "eventSubscriptionId": {
           "type": "string",
@@ -7206,27 +7393,27 @@
     },
     "SubscriptionValidationEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.EventGrid.SubscriptionValidationEvent event.",
+      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.EventGrid.SubscriptionValidationEvent event.",
       "properties": {
         "validationCode": {
           "type": "string",
-          "description": "The validation code sent by Azure Event Grid to validate an event subscription. To complete the validation handshake, the subscriber must either respond with this validation code as part of the validation response, or perform a GET request on the validationUrl (available starting version 2018-05-01-preview).",
+          "description": "The validation code sent by Azure Event Grid to validate an event subscription.\nTo complete the validation handshake, the subscriber must either respond with\nthis validation code as part of the validation response, or perform a GET\nrequest on the validationUrl (available starting version 2018-05-01-preview).",
           "readOnly": true
         },
         "validationUrl": {
           "type": "string",
-          "description": "The validation URL sent by Azure Event Grid (available starting version 2018-05-01-preview). To complete the validation handshake, the subscriber must either respond with the validationCode as part of the validation response, or perform a GET request on the validationUrl (available starting version 2018-05-01-preview).",
+          "description": "The validation URL sent by Azure Event Grid (available starting version\n2018-05-01-preview). To complete the validation handshake, the subscriber must\neither respond with the validationCode as part of the validation response, or\nperform a GET request on the validationUrl (available starting version\n2018-05-01-preview).",
           "readOnly": true
         }
       }
     },
     "SubscriptionValidationResponse": {
       "type": "object",
-      "description": "To complete an event subscription validation handshake, a subscriber can use either the validationCode or the validationUrl received in a SubscriptionValidationEvent. When the validationCode is used, the SubscriptionValidationResponse can be used to build the response.",
+      "description": "To complete an event subscription validation handshake, a subscriber can use\neither the validationCode or the validationUrl received in a\nSubscriptionValidationEvent. When the validationCode is used, the\nSubscriptionValidationResponse can be used to build the response.",
       "properties": {
         "validationResponse": {
           "type": "string",
-          "description": "The validation response sent by the subscriber to Azure Event Grid to complete the validation of an event subscription."
+          "description": "The validation response sent by the subscriber to Azure Event Grid to complete\nthe validation of an event subscription."
         }
       }
     },
