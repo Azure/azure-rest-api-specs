@@ -180,11 +180,13 @@ enum ExpressionRouterRuleLanguage {
   powerFx,
 }
 
+@resource("classificationPolicies")
 @doc("A container for the rules that govern how jobs are classified.")
 model ClassificationPolicy {
+  @key("id")
   @doc("Unique identifier of this policy.")
   @visibility("read")
-  id?: string;
+  id: string;
 
   @doc("Friendly name of this policy.")
   name?: string;

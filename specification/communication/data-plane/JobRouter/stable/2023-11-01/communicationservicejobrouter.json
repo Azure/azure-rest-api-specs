@@ -128,17 +128,17 @@
           {
             "name": "id",
             "in": "path",
-            "description": "Id of the classification policy.",
+            "description": "Unique identifier of this policy.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "patch",
+            "name": "resource",
             "in": "body",
-            "description": "Model of classification policy properties to be patched. See also:\nhttps://datatracker.ietf.org/doc/html/rfc7386.",
+            "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ClassificationPolicy"
+              "$ref": "#/definitions/ClassificationPolicyUpdate"
             }
           }
         ],
@@ -1863,7 +1863,10 @@
           },
           "x-ms-identifiers": []
         }
-      }
+      },
+      "required": [
+        "id"
+      ]
     },
     "ClassificationPolicyItem": {
       "type": "object",
@@ -1876,6 +1879,40 @@
         "etag": {
           "type": "string",
           "description": "(Optional) The Concurrency Token."
+        }
+      }
+    },
+    "ClassificationPolicyUpdate": {
+      "type": "object",
+      "description": "A container for the rules that govern how jobs are classified.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Friendly name of this policy."
+        },
+        "fallbackQueueId": {
+          "type": "string",
+          "description": "The fallback queue to select if the queue selector doesn't find a match."
+        },
+        "queueSelectors": {
+          "type": "array",
+          "description": "The queue selectors to resolve a queue for a given job.",
+          "items": {
+            "$ref": "#/definitions/QueueSelectorAttachment"
+          },
+          "x-ms-identifiers": []
+        },
+        "prioritizationRule": {
+          "$ref": "#/definitions/RouterRule",
+          "description": "A rule of one of the following types:\n            \nStaticRule:  A rule\nproviding static rules that always return the same result, regardless of\ninput.\nDirectMapRule:  A rule that return the same labels as the input\nlabels.\nExpressionRule: A rule providing inline expression\nrules.\nFunctionRule: A rule providing a binding to an HTTP Triggered Azure\nFunction.\nWebhookRule: A rule providing a binding to a webserver following\nOAuth2.0 authentication protocol."
+        },
+        "workerSelectors": {
+          "type": "array",
+          "description": "The worker label selectors to attach to a given job.",
+          "items": {
+            "$ref": "#/definitions/WorkerSelectorAttachment"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
