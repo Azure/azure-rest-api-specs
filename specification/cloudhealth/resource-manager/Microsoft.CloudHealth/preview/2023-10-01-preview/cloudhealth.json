@@ -1311,8 +1311,7 @@
       "type": "string",
       "description": "Supported kinds of authentication settings as discriminator",
       "enum": [
-        "ManagedIdentity",
-        "BasicAuth"
+        "ManagedIdentity"
       ],
       "x-ms-enum": {
         "name": "AuthenticationKind",
@@ -1379,11 +1378,10 @@
           "type": "string",
           "description": "Kind of the authentication setting",
           "enum": [
-            "ManagedIdentity",
-            "BasicAuth"
+            "ManagedIdentity"
           ],
           "x-ms-enum": {
-            "name": "string",
+            "name": "AuthenticationKindEnum",
             "modelAsString": true
           }
         }
@@ -1467,40 +1465,6 @@
         "authenticationSetting",
         "azureResourceId"
       ]
-    },
-    "BasicAuthenticationSettingProperties": {
-      "type": "object",
-      "description": "Authentication setting properties for basic auth using username and password",
-      "properties": {
-        "username": {
-          "type": "string",
-          "description": "User name for basic authentication",
-          "minLength": 1,
-          "maxLength": 500
-        },
-        "password": {
-          "type": "string",
-          "format": "password",
-          "description": "Password for basic authentication",
-          "minLength": 1,
-          "maxLength": 500,
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ],
-          "x-ms-secret": true
-        }
-      },
-      "required": [
-        "username",
-        "password"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AuthenticationSettingProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "BasicAuth"
     },
     "DependentEntitiesSignalGroup": {
       "type": "object",
@@ -2360,7 +2324,7 @@
             "PrometheusMetricsQuery"
           ],
           "x-ms-enum": {
-            "name": "string",
+            "name": "SignalKindEnum",
             "modelAsString": true
           }
         },

@@ -14,8 +14,8 @@ using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.CloudHealth")
 @service({
-  title: "Microsoft.CloudHealth",
-  version: "2023-10-01-preview",
+    title: "Microsoft.CloudHealth",
+    version: "2023-10-01-preview",
 })
 @useDependency(Azure.Core.Versions.v1_0_Preview_2)
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
@@ -39,6 +39,7 @@ model HealthModel is TrackedResource<HealthModelProperties> {
     @path
     @segment("healthmodels")
     name: stringResourceName;
+
     ...ManagedServiceIdentity;
     ...ResourceSku;
 }
@@ -69,7 +70,7 @@ enum EnabledState {
 enum HealthModelProvisioningState {
     ...ResourceProvisioningState, // include standard provisioning states
     Creating,
-    Deleting
+    Deleting,
 }
 
 @doc("A signal definition in a health model")
@@ -84,10 +85,10 @@ model SignalDefinition is ProxyResource<SignalDefinitionProperties> {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
 @doc("Supported signal kinds as discriminator")
-enum SignalKind{
+enum SignalKind {
     AzureResourceMetric,
     LogAnalyticsQuery,
-    PrometheusMetricsQuery
+    PrometheusMetricsQuery,
 }
 
 @doc("SignalDefinition properties")
@@ -104,6 +105,13 @@ model SignalDefinitionProperties {
 
     @doc("Kind of the signal definition")
     @knownValues(SignalKind)
+    @extension(
+        "x-ms-enum",
+        {
+            name: "SignalKindEnum",
+            modelAsString: true,
+        }
+    )
     signalKind: string; // Cannot use enum directly due to bug https://github.com/Azure/typespec-azure/issues/3574
 
     @doc("Interval in which the signal is being evaluated.")
@@ -312,9 +320,8 @@ model AuthenticationSetting is ProxyResource<AuthenticationSettingProperties> {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
 @doc("Supported kinds of authentication settings as discriminator")
-enum AuthenticationKind{
+enum AuthenticationKind {
     ManagedIdentity,
-    BasicAuth 
 }
 
 @doc("Authentication setting properties")
@@ -331,11 +338,19 @@ model AuthenticationSettingProperties {
 
     @doc("Kind of the authentication setting")
     @knownValues(AuthenticationKind)
+    @extension(
+        "x-ms-enum",
+        {
+            name: "AuthenticationKindEnum",
+            modelAsString: true,
+        }
+    )
     authenticationKind: string; // Cannot use enum directly due to bug https://github.com/Azure/typespec-azure/issues/3574
 }
 
 @doc("Authentication setting properties for Azure Managed Identity")
-model ManagedIdentityAuthenticationSettingProperties extends AuthenticationSettingProperties {
+model ManagedIdentityAuthenticationSettingProperties
+    extends AuthenticationSettingProperties {
     @doc("Kind of the authentication setting")
     authenticationKind: "ManagedIdentity";
 
@@ -343,24 +358,6 @@ model ManagedIdentityAuthenticationSettingProperties extends AuthenticationSetti
     @minLength(1)
     @maxLength(500)
     managedIdentityName: string;
-}
-
-@doc("Authentication setting properties for basic auth using username and password")
-model BasicAuthenticationSettingProperties extends AuthenticationSettingProperties {
-    @doc("Kind of the authentication setting")
-    authenticationKind: "BasicAuth";
-
-    @doc("User name for basic authentication")
-    @minLength(1)
-    @maxLength(500)
-    username: string;
-
-    @doc("Password for basic authentication")
-    @minLength(1)
-    @maxLength(500)
-    @secret
-    @visibility("create", "update")
-    password: string;
 }
 
 @doc("An entity (aka node) a health model")
@@ -457,7 +454,7 @@ model SignalAssignmentGroup {
     @extension("x-ms-identifiers", [])
     @maxItems(50)
     signalAssignments?: SignalAssignment[];
-    
+
     @doc("Reference to the name of the authentication setting which is used for querying the data source")
     authenticationSetting: stringResourceName;
 }
@@ -580,14 +577,13 @@ interface HealthModels {
 }
 
 @armResourceOperations
-interface SignalDefinitions{
+interface SignalDefinitions {
     get is ArmResourceRead<SignalDefinition>;
     createOrUpdate is ArmResourceCreateOrUpdateSync<SignalDefinition>;
     delete is ArmResourceDeleteSync<SignalDefinition>;
 
     listByParent is ArmResourceListByParent<SignalDefinition>;
 }
-
 
 @armResourceOperations
 interface AuthenticationSettings {
@@ -597,7 +593,6 @@ interface AuthenticationSettings {
 
     listByParent is ArmResourceListByParent<AuthenticationSetting>;
 }
-
 
 @armResourceOperations
 interface Entities {
