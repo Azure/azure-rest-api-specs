@@ -31,7 +31,7 @@ These settings apply only when `--tag=package-2022-10-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2022-10-01-preview'
 input-file:
-  - Microsoft.Dashboard/stable/2022-10-01-preview/grafana.json
+  - Microsoft.Dashboard/preview/2022-10-01-preview/grafana.json
 ```
 
 ### Tag: package-2022-08-01
