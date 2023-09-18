@@ -128,7 +128,15 @@
       "properties": {
         "storageAccountResourceId": {
           "type": "string",
-          "description": "ARM Resource ID of the Storage account to use for Customer Data storage."
+          "description": "ARM Resource ID of the Storage account to use for Customer Data storage.",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          }
         },
         "blobContainerName": {
           "type": "string",
