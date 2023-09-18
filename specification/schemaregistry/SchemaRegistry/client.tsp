@@ -3,5 +3,5 @@ import "./main.tsp";
  
 using Azure.ClientGenerator.Core;
 
-@@access(Azure.SchemaRegistry.Version, "private");
-@@access(Azure.SchemaRegistry.SchemaGroup, "private");
+@@access(Azure.SchemaRegistry.Version, "internal");
+@@access(Azure.SchemaRegistry.SchemaGroup, "internal");
