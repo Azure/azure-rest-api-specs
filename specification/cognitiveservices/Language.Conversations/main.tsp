@@ -1,3 +1,4 @@
+import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "@typespec/openapi";
