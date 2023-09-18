@@ -314,7 +314,7 @@ model AuthenticationSetting is ProxyResource<AuthenticationSettingProperties> {
 @doc("Supported kinds of authentication settings as discriminator")
 enum AuthenticationKind{
     ManagedIdentity,
-    Other // for future extensibility, not used yet but linter needs at least two enum values
+    BasicAuth 
 }
 
 @doc("Authentication setting properties")
@@ -343,6 +343,24 @@ model ManagedIdentityAuthenticationSettingProperties extends AuthenticationSetti
     @minLength(1)
     @maxLength(500)
     managedIdentityName: string;
+}
+
+@doc("Authentication setting properties for basic auth using username and password")
+model BasicAuthenticationSettingProperties extends AuthenticationSettingProperties {
+    @doc("Kind of the authentication setting")
+    authenticationKind: "BasicAuth";
+
+    @doc("User name for basic authentication")
+    @minLength(1)
+    @maxLength(500)
+    username: string;
+
+    @doc("Password for basic authentication")
+    @minLength(1)
+    @maxLength(500)
+    @secret
+    @visibility("create", "update")
+    password: string;
 }
 
 @doc("An entity (aka node) a health model")
