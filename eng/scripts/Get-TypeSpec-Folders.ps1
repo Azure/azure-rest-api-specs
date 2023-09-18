@@ -62,7 +62,7 @@ foreach ($file in $changedFiles) {
 }
 
 foreach ($skippedTypespecFolder in $skippedTypespecFolders | Select-Object -Unique) {
-  Write-Host "Cannot find directory $skippedTypespecFolder."
+  Write-Host "Cannot find directory $skippedTypespecFolder"
 }
 
 $typespecFolders = $typespecFolders | Select-Object -Unique | Sort-Object
