@@ -1,16 +1,14 @@
 {
   "parameters": {
-    "api-version": "2023-11-15-preview",
-    "subscriptionId": "a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b",
-    "resourceGroupName": "test-arcappliance-resgrp",
-    "resourceName": "test-hybridakscluster"
+    "connectedClusterResourceUri": "subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/test-hybridakscluster",
+    "api-version": "2023-11-15-preview"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourceGroups/test-arcappliance-resgrp/providers/Microsoft.HybridContainerService/provisionedClusters/test-hybridakscluster",
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/test-hybridakscluster/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default",
         "name": "test-hybridakscluster",
-        "type": "microsoft.hybridcontainerservice/provisionedclusters",
+        "type": "Microsoft.HybridContainerService/provisionedClusterInstances",
         "location": "westus",
         "extendedLocation": {
           "name": "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourcegroups/test-arcappliance-resgrp/providers/microsoft.extendedlocation/customlocations/testcustomlocation",
@@ -82,11 +80,6 @@
             "azureHybridBenefit": "NotApplicable"
           }
         }
-      }
-    },
-    "202": {
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.HybridContainerService/locations/westus/operations/00000000-0000-0000-0000-000000000000?api-version=2018-07-31"
       }
     }
   }
