@@ -34,6 +34,104 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/freeHourBalances": {
+      "get": {
+        "tags": [
+          "Free Hour Balances"
+        ],
+        "operationId": "FreeHourBalances_List",
+        "summary": "List the Free Hour Balances of a Test Base Account. The result collection will only contain one element as all the data will be nested in a singleton object.",
+        "description": "Return the Test Base free hour balances list.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succeeded to list the Test Base free hour balances.",
+            "schema": {
+              "$ref": "#/definitions/FreeHourBalancesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "FreeHourBalancesList": {
+            "$ref": "./examples/FreeHourBalancesList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/freeHourBalances/{freeHourBalanceName}": {
+      "get": {
+        "tags": [
+          "Free Hour Balances"
+        ],
+        "operationId": "FreeHourBalances_Get",
+        "summary": "Get the Free Hour Balance of a Test Base Account.",
+        "description": "Return the Test Base free hour balance.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FreeHourBalanceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succeeded to get the Test Base free hour balance.",
+            "schema": {
+              "$ref": "#/definitions/FreeHourBalanceResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FreeHourBalanceGet": {
+            "$ref": "./examples/FreeHourBalanceGet.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.TestBase/skus": {
       "get": {
         "tags": [
@@ -4141,6 +4239,9 @@
           "items": {
             "$ref": "#/definitions/GalleryAppDefinition"
           },
+          "x-ms-identifiers": [
+            "skuId"
+          ],
           "readOnly": true
         },
         "tests": {
@@ -5829,6 +5930,28 @@
     "BillingHubFreeHourIncrementEntry": {
       "type": "object",
       "properties": {
+        "freeHourType": {
+          "type": "string",
+          "enum": [
+            "Permanent",
+            "Temporary"
+          ],
+          "x-ms-enum": {
+            "name": "freeHourType",
+            "modelAsString": true
+          }
+        },
+        "freeHourStatus": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Suspended"
+          ],
+          "x-ms-enum": {
+            "name": "freeHourStatus",
+            "modelAsString": true
+          }
+        },
         "createTimeStamp": {
           "type": "string",
           "format": "date-time"
@@ -6212,6 +6335,40 @@
         }
       },
       "description": "Properties for in-place upgrade test result."
+    },
+    "FreeHourBalancesListResult": {
+      "description": "A list of Test Base Free Hour Balances. It will only contain one element as all the data will be nested in a singleton object.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FreeHourBalanceResource"
+          },
+          "description": "The list of FreeHourBalances."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if value contains incomplete list of results."
+        }
+      }
+    },
+    "FreeHourBalanceResource": {
+      "description": "The Free Hour Balance Resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BillingHubGetFreeHourBalanceResponse",
+          "description": "Properties of a Free Hour Balance."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
     }
   },
   "parameters": {
@@ -6371,6 +6528,22 @@
       "format": "int32",
       "x-ms-parameter-location": "method",
       "description": "According to the reverse order of time, how many first ones are taken."
+    },
+    "FreeHourBalanceNameParameter": {
+      "name": "freeHourBalanceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "TenantLevel",
+        "SubscriptionLevel"
+      ],
+      "x-ms-enum": {
+        "name": "freeHourBalanceName",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method",
+      "description": "The name of the free hour balance of a Test Base Account."
     }
   }
 }
