@@ -8,35 +8,46 @@ using Azure.Core.Traits;
 
 namespace AzureCommunicationRoutingService;
 
+alias ServiceTraits = NoRepeatableRequests &
+  NoConditionalRequests & NoClientRequestId;
+
+alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
+
 interface JobRouterAdministrationOperations {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+//   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+//   @summary("Creates or updates a classification policy.")
+//   @doc("Creates or updates a classification policy.")
+//   @route("/routing/classificationPolicies/{id}")
+//   @patch
+//   upsertClassificationPolicy is Azure.Core.Foundations.Operation<
+//     {
+//       @doc("content type")
+//       @header("content-type")
+//       contentType: "application/merge-patch+json";
+
+//       @doc("Id of the classification policy.")
+//       @path
+//       id: string;
+      
+//       @doc("""
+// Model of classification policy properties to be patched. See also:
+// https://datatracker.ietf.org/doc/html/rfc7386.
+// """)
+//       @body
+//       patch: ClassificationPolicy;
+//     },
+//     {
+//       @statusCode statuscode: 200 | 201;
+
+//       @body result: ClassificationPolicy;
+//     }
+//   >;
+  
+  #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops"
+  @route("/routing")
   @summary("Creates or updates a classification policy.")
   @doc("Creates or updates a classification policy.")
-  @route("/routing/classificationPolicies/{id}")
-  @patch
-  upsertClassificationPolicy is Azure.Core.Foundations.Operation<
-    {
-      @doc("content type")
-      @header("content-type")
-      contentType: "application/merge-patch+json";
-
-      @doc("Id of the classification policy.")
-      @path
-      id: string;
-      
-      @doc("""
-Model of classification policy properties to be patched. See also:
-https://datatracker.ietf.org/doc/html/rfc7386.
-""")
-      @body
-      patch: ClassificationPolicy;
-    },
-    {
-      @statusCode statuscode: 200 | 201;
-
-      @body result: ClassificationPolicy;
-    }
-  >;
+  upsertClassificationPolicy is Operations.ResourceCreateOrUpdate<ClassificationPolicy>;
   
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("Retrieves an existing classification policy by Id.")
