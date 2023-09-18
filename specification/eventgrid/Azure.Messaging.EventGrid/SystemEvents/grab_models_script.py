@@ -44,9 +44,7 @@ for file_name in file_names:
 
 # For each model_name add @@include to it
 include_statement = "@@usage("
-model_names_with_usage = [include_statement + model_name + ", Usage.output);" for model_name in model_names] 
-model_names_with_access = ["@@access(" + model_name + ", Access.public);" for model_name in model_names]
+model_names_with_include = [include_statement + model_name + ", Usage.input | Usage.output);" for model_name in model_names]    
 
-for i in range(len(model_names_with_usage)):
-    print(model_names_with_usage[i])
-    print(model_names_with_access[i])
+for model in model_names_with_include:
+    print(model)
