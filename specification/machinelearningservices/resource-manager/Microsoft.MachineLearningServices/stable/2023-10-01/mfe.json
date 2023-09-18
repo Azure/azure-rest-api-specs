@@ -1917,6 +1917,78 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/datareferences/{name}/versions/{version}": {
+      "post": {
+        "tags": [
+          "DataReference"
+        ],
+        "summary": "Get blob reference SAS Uri.",
+        "operationId": "RegistryDataReferences_GetBlobReferenceSAS",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "registries.json#/parameters/RegistryNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Data reference name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Asset id and blob uri.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetBlobReferenceSASRequestDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GetBlobReferenceSASResponseDto"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetBlobReferenceSAS Data Reference.": {
+            "$ref": "./examples/DataReference/getBlobReferenceSAS.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/environments": {
       "get": {
         "tags": [
@@ -4561,6 +4633,94 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}/publish": {
+      "post": {
+        "tags": [
+          "CodeVersion"
+        ],
+        "summary": "Publish version asset into registry.",
+        "operationId": "CodeVersions_Publish",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Destination registry info",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DestinationAsset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Publish Workspace Code Version.": {
+            "$ref": "./examples/Workspace/CodeVersion/publish.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}/startPendingUpload": {
       "post": {
         "tags": [
@@ -5171,6 +5331,94 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}/versions/{version}/publish": {
+      "post": {
+        "tags": [
+          "ComponentVersion"
+        ],
+        "summary": "Publish version asset into registry.",
+        "operationId": "ComponentVersions_Publish",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Destination registry info",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DestinationAsset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Publish Workspace Component Version.": {
+            "$ref": "./examples/Workspace/ComponentVersion/publish.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data": {
       "get": {
         "tags": [
@@ -5713,6 +5961,94 @@
           "CreateOrUpdate Workspace Data Version Base.": {
             "$ref": "./examples/Workspace/DataVersionBase/createOrUpdate.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions/{version}/publish": {
+      "post": {
+        "tags": [
+          "DataVersion"
+        ],
+        "summary": "Publish version asset into registry.",
+        "operationId": "DataVersions_Publish",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Destination registry info",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DestinationAsset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Publish Workspace Data Version Base.": {
+            "$ref": "./examples/Workspace/DataVersionBase/publish.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -6588,6 +6924,94 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}/versions/{version}/publish": {
+      "post": {
+        "tags": [
+          "EnvironmentVersion"
+        ],
+        "summary": "Publish version asset into registry.",
+        "operationId": "EnvironmentVersions_Publish",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Destination registry info",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DestinationAsset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Publish Workspace Environment Version.": {
+            "$ref": "./examples/Workspace/EnvironmentVersion/publish.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/jobs": {
       "get": {
         "tags": [
@@ -6832,7 +7256,7 @@
         "tags": [
           "Job"
         ],
-        "summary": "Creates and executes a Job.",
+        "summary": "Creates and executes a Job.\r\nFor update case, the Tags in the definition passed in will replace Tags in the existing job.",
         "operationId": "Jobs_CreateOrUpdate",
         "consumes": [
           "application/json"
@@ -7556,6 +7980,94 @@
           "CreateOrUpdate Workspace Model Version.": {
             "$ref": "./examples/Workspace/ModelVersion/createOrUpdate.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions/{version}/publish": {
+      "post": {
+        "tags": [
+          "ModelVersion"
+        ],
+        "summary": "Publish version asset into registry.",
+        "operationId": "ModelVersions_Publish",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Destination registry info",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DestinationAsset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Publish Workspace Model Version.": {
+            "$ref": "./examples/Workspace/ModelVersion/publish.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -9076,6 +9588,17 @@
         }
       ],
       "x-ms-discriminator-value": "AmlToken",
+      "additionalProperties": false
+    },
+    "AnonymousAccessCredential": {
+      "description": "Access credential with no credentials",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataReferenceCredential"
+        }
+      ],
+      "x-ms-discriminator-value": "NoCredentials",
       "additionalProperties": false
     },
     "AssetBase": {
@@ -11652,6 +12175,49 @@
       "x-ms-discriminator-value": "DataQuality",
       "additionalProperties": false
     },
+    "DataReferenceCredential": {
+      "description": "DataReferenceCredential base class",
+      "required": [
+        "credentialType"
+      ],
+      "type": "object",
+      "properties": {
+        "credentialType": {
+          "description": "[Required] Credential type used to authentication with storage.",
+          "$ref": "#/definitions/DataReferenceCredentialType"
+        }
+      },
+      "discriminator": "credentialType"
+    },
+    "DataReferenceCredentialType": {
+      "description": "Enum to determine the DataReference credentials type.",
+      "enum": [
+        "SAS",
+        "DockerCredentials",
+        "ManagedIdentity",
+        "NoCredentials"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DataReferenceCredentialType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "SAS"
+          },
+          {
+            "value": "DockerCredentials"
+          },
+          {
+            "value": "ManagedIdentity"
+          },
+          {
+            "value": "NoCredentials"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
     "DataType": {
       "description": "Enum to determine the type of data.",
       "enum": [
@@ -11966,6 +12532,28 @@
       ],
       "additionalProperties": false
     },
+    "DestinationAsset": {
+      "description": "Publishing destination registry asset information",
+      "type": "object",
+      "properties": {
+        "destinationName": {
+          "description": "Destination asset name",
+          "type": "string",
+          "x-nullable": true
+        },
+        "destinationVersion": {
+          "description": "Destination asset version",
+          "type": "string",
+          "x-nullable": true
+        },
+        "registryName": {
+          "description": "Destination registry name",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
     "DistributionConfiguration": {
       "description": "Base definition for job distribution configuration.",
       "required": [
@@ -12007,6 +12595,29 @@
           }
         ]
       },
+      "additionalProperties": false
+    },
+    "DockerCredential": {
+      "description": "Credential for docker with username and password",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataReferenceCredential"
+        }
+      ],
+      "properties": {
+        "password": {
+          "description": "DockerCredential user password",
+          "type": "string",
+          "x-nullable": true
+        },
+        "userName": {
+          "description": "DockerCredential user name",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "x-ms-discriminator-value": "DockerCredentials",
       "additionalProperties": false
     },
     "EarlyTerminationPolicy": {
@@ -13129,6 +13740,58 @@
           "items": {
             "$ref": "#/definitions/ForecastingModels"
           },
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "GetBlobReferenceForConsumptionDto": {
+      "type": "object",
+      "properties": {
+        "blobUri": {
+          "format": "uri",
+          "description": "Blob uri, example: https://blob.windows.core.net/Container/Path",
+          "type": "string",
+          "x-nullable": true
+        },
+        "credential": {
+          "description": "Credential info to access storage account",
+          "$ref": "#/definitions/DataReferenceCredential",
+          "x-nullable": true
+        },
+        "storageAccountArmId": {
+          "description": "The ARM id of the storage account",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "GetBlobReferenceSASRequestDto": {
+      "description": "BlobReferenceSASRequest for getBlobReferenceSAS API",
+      "type": "object",
+      "properties": {
+        "assetId": {
+          "description": "Id of the asset to be accessed",
+          "type": "string",
+          "x-nullable": true
+        },
+        "blobUri": {
+          "format": "uri",
+          "description": "Blob uri of the asset to be accessed",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "GetBlobReferenceSASResponseDto": {
+      "description": "BlobReferenceSASResponse for getBlobReferenceSAS API",
+      "type": "object",
+      "properties": {
+        "blobReferenceForConsumption": {
+          "description": "Blob reference for consumption details",
+          "$ref": "#/definitions/GetBlobReferenceForConsumptionDto",
           "x-nullable": true
         }
       },
@@ -14987,6 +15650,44 @@
         }
       },
       "x-ms-discriminator-value": "Managed",
+      "additionalProperties": false
+    },
+    "ManagedIdentityCredential": {
+      "description": "Credential for user managed identity",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataReferenceCredential"
+        }
+      ],
+      "properties": {
+        "managedIdentityType": {
+          "description": "ManagedIdentityCredential identity type",
+          "type": "string",
+          "x-nullable": true
+        },
+        "userManagedIdentityClientId": {
+          "description": "ClientId for the UAMI. For ManagedIdentityType = SystemManaged, this field is null.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "userManagedIdentityPrincipalId": {
+          "description": "PrincipalId for the UAMI. For ManagedIdentityType = SystemManaged, this field is null.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "userManagedIdentityResourceId": {
+          "description": "Full arm scope for the Id. For ManagedIdentityType = SystemManaged, this field is null.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "userManagedIdentityTenantId": {
+          "description": "TenantId for the UAMI. For ManagedIdentityType = SystemManaged, this field is null.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "x-ms-discriminator-value": "ManagedIdentity",
       "additionalProperties": false
     },
     "ManagedOnlineDeployment": {
@@ -17400,6 +18101,25 @@
           "type": "integer"
         }
       },
+      "additionalProperties": false
+    },
+    "SASCredential": {
+      "description": "Access with full SAS uri",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataReferenceCredential"
+        }
+      ],
+      "properties": {
+        "sasUri": {
+          "format": "uri",
+          "description": "Full SAS Uri, including the storage, container/blob path and SAS token",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "x-ms-discriminator-value": "SAS",
       "additionalProperties": false
     },
     "SASCredentialDto": {
