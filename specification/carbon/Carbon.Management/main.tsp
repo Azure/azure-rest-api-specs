@@ -382,6 +382,67 @@ model CarbonEmissionDataAvailableDateRange {
   endDate: string;
 }
 
+@doc("Carbon Emission Report resource")
+model CarbonEmissionReport is ProxyResource<CarbonEmissionReportProperties> {
+  @doc("Name of Report")
+  @key("carbonEmissionReportName")
+  @path
+  @segment("carbonEmissionReports")
+  name: string;
+}
+
+@doc("CarbonEmissionReport properties")
+model CarbonEmissionReportProperties {
+  @doc("Report dimension properties")
+  @extension("x-ms-identifiers", [])
+  @visibility("read")
+  dimensions: CarbonEmissionReportProperty[];
+
+  @doc("Report filters properties")
+  @extension("x-ms-identifiers", [])
+  @visibility("read")
+  filters: CarbonEmissionReportProperty[];
+
+  @visibility("read")
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState;
+}
+
+@doc("CarbonEmissionReport property")
+model CarbonEmissionReportProperty {
+  @doc("Report property name")
+  propertyName: string;
+
+  @doc("Report property value type")
+  valueType: string;
+
+  @doc("Report property description information")
+  description: string;
+}
+
+@doc("The provisioning state of a resource.")
+@lroStatus
+enum ProvisioningState {
+  ...ResourceProvisioningState,
+
+  @doc("The resource is being provisioned")
+  Provisioning,
+
+  @doc("The resource is updating")
+  Updating,
+
+  @doc("The resource is being deleted")
+  Deleting,
+
+  @doc("The resource create request has been accepted")
+  Accepted,
+}
+
+@armResourceOperations
+interface CarbonEmissionReports
+  extends TenantResourceRead<CarbonEmissionReport>,
+    TenantResourceListByParent<CarbonEmissionReport> {}
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Each resource interface must have an @armResourceOperations decorator."
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-missing-decorator" "Resource POST operation must be decorated with @armResourceAction or @armResourceCollectionAction."
 interface CarbonService {
