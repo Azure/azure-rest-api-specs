@@ -39,14 +39,6 @@ input-file:
 - Microsoft.Carbon/preview/2023-04-01-preview/main.json
 ```
 
-``` yaml
-suppressions:
-  - code: TopLevelResourcesListBySubscription
-    reason: There is Tenant level, pure proxy resource. 
-    from: main.json
-    where: $.definitions.CarbonEmissionReport
-```
-
 # Code Generation
 
 ## Swagger to SDK
