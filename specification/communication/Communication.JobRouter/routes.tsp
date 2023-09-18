@@ -6,6 +6,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core.Traits;
 
+@route("/routing")
 namespace AzureCommunicationRoutingService;
 
 alias ServiceTraits = NoRepeatableRequests &
@@ -13,7 +14,6 @@ alias ServiceTraits = NoRepeatableRequests &
 
 alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
-@route("/routing")
 interface JobRouterAdministrationOperations {
   
   @summary("Creates or updates a classification policy.")
@@ -122,7 +122,6 @@ interface JobRouterAdministrationOperations {
   >;
 }
 
-@route("/routing")
 interface JobRouterOperations {
   @summary("Creates or updates a router job.")
   @doc("Creates or updates a router job.")
