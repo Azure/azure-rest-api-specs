@@ -197,11 +197,7 @@
           "enum": [
             "Conversation"
           ],
-          "description": "The base class of a conversation input task.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The base class of a conversation input task."
         }
       },
       "description": "The base class of a conversation input task.",
@@ -735,6 +731,9 @@
         }
       },
       "description": "A wrap up of Conversation project response.",
+      "required": [
+        "result"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/TargetIntentResult"
@@ -824,6 +823,22 @@
         }
       ]
     },
+    "Conversations": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      },
+      "description": "Resource model",
+      "required": [
+        "id"
+      ]
+    },
     "CurrencyResolution": {
       "type": "object",
       "properties": {
@@ -853,66 +868,11 @@
         }
       ]
     },
-    "CustomResult": {
-      "type": "object",
-      "properties": {
-        "errors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DocumentErrorItem"
-          },
-          "description": "Errors by document id.",
-          "x-typespec-name": "DocumentError[]"
-        },
-        "statistics": {
-          "$ref": "#/definitions/RequestStatistics",
-          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
-        },
-        "projectName": {
-          "type": "string",
-          "description": "This field indicates the project name for the model."
-        },
-        "deploymentName": {
-          "type": "string",
-          "description": "This field indicates the deployment name for the model."
-        }
-      },
-      "description": "Custom Task Results",
-      "required": [
-        "errors",
-        "projectName",
-        "deploymentName"
-      ]
-    },
-    "CustomTaskParameters": {
-      "type": "object",
-      "properties": {
-        "loggingOptOut": {
-          "type": "boolean",
-          "description": "logging opt out",
-          "default": false
-        },
-        "projectName": {
-          "type": "string",
-          "description": "This field indicates the project name for the model."
-        },
-        "deploymentName": {
-          "type": "string",
-          "description": "This field indicates the deployment name for the model."
-        }
-      },
-      "description": "Parameters object for a text analysis task using custom models.",
-      "required": [
-        "loggingOptOut",
-        "projectName",
-        "deploymentName"
-      ]
-    },
     "DateTimeResolution": {
       "type": "object",
       "properties": {
         "timex": {
-          "type": "string",
+          "$ref": "#/definitions/TimeExpression",
           "description": "An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
         },
         "dateTimeSubKind": {
@@ -954,42 +914,6 @@
         "name": "DateTimeSubKind",
         "modelAsString": true
       }
-    },
-    "DocumentError": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ID of the input document."
-        },
-        "error": {
-          "$ref": "#/definitions/ErrorResponse",
-          "description": "Error encountered."
-        }
-      },
-      "description": "Contains details of errors encountered during a job execution.",
-      "required": [
-        "id",
-        "error"
-      ]
-    },
-    "DocumentErrorItem": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ID of the input document."
-        },
-        "error": {
-          "$ref": "#/definitions/ErrorResponseItem",
-          "description": "Error encountered."
-        }
-      },
-      "description": "Contains details of errors encountered during a job execution.",
-      "required": [
-        "id",
-        "error"
-      ]
     },
     "EntitySubtype": {
       "type": "object",
@@ -1040,23 +964,6 @@
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
           "description": "The error object."
-        }
-      },
-      "description": "Error response.",
-      "required": [
-        "error"
-      ]
-    },
-    "ErrorResponseItem": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "The error object."
-        },
-        "errorCode": {
-          "type": "string",
-          "description": "String error code indicating what went wrong."
         }
       },
       "description": "Error response.",
@@ -1176,46 +1083,6 @@
         }
       ],
       "additionalProperties": true
-    },
-    "InputWarning": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Warning code."
-        },
-        "message": {
-          "type": "string",
-          "description": "Warning message."
-        },
-        "targetRef": {
-          "type": "string",
-          "description": "A JSON pointer reference indicating the target object."
-        }
-      },
-      "description": "Contains details of warnings encountered during a job execution.",
-      "required": [
-        "code",
-        "message"
-      ]
-    },
-    "JobErrors": {
-      "type": "object",
-      "properties": {
-        "errors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorResponseItem"
-          },
-          "x-ms-identifiers": [],
-          "description": "errors",
-          "x-typespec-name": "ErrorResponse[]"
-        }
-      },
-      "description": "job errors",
-      "required": [
-        "errors"
-      ]
     },
     "KnowledgeBaseAnswer": {
       "type": "object",
@@ -1676,32 +1543,6 @@
         }
       ]
     },
-    "PreBuiltResult": {
-      "type": "object",
-      "properties": {
-        "errors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DocumentErrorItem"
-          },
-          "description": "Errors by document id.",
-          "x-typespec-name": "DocumentError[]"
-        },
-        "statistics": {
-          "$ref": "#/definitions/RequestStatistics",
-          "description": "statistics"
-        },
-        "modelVersion": {
-          "type": "string",
-          "description": "This field indicates which model is used for scoring."
-        }
-      },
-      "description": "Pre built result",
-      "required": [
-        "errors",
-        "modelVersion"
-      ]
-    },
     "QuantityResolution": {
       "type": "object",
       "properties": {
@@ -1809,30 +1650,6 @@
         ]
       }
     },
-    "RedactionCharacter": {
-      "type": "string",
-      "description": "Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction.",
-      "enum": [
-        "!",
-        "#",
-        "$",
-        "%",
-        "&",
-        "*",
-        "+",
-        "-",
-        "=",
-        "?",
-        "@",
-        "^",
-        "_",
-        "~"
-      ],
-      "x-ms-enum": {
-        "name": "RedactionCharacter",
-        "modelAsString": true
-      }
-    },
     "RelativeTo": {
       "type": "string",
       "description": "The reference point that the ordinal number denotes.",
@@ -1845,38 +1662,6 @@
         "name": "RelativeTo",
         "modelAsString": true
       }
-    },
-    "RequestStatistics": {
-      "type": "object",
-      "properties": {
-        "documentsCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of documents submitted in the request."
-        },
-        "validDocumentCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of valid documents. This excludes empty, over-size limit or non-supported languages documents."
-        },
-        "erroneousDocumentCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of invalid documents. This includes empty, over-size limit or non-supported languages documents."
-        },
-        "transactionsCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Number of transactions for the request."
-        }
-      },
-      "description": "if showStats=true was specified in the request this field will contain information about the request payload.",
-      "required": [
-        "documentsCount",
-        "validDocumentCount",
-        "erroneousDocumentCount",
-        "transactionsCount"
-      ]
     },
     "ShortAnswerOptions": {
       "type": "object",
@@ -2090,12 +1875,12 @@
       "type": "object",
       "properties": {
         "begin": {
-          "type": "string",
-          "description": "represents the resolution of a date and/or time span. An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
+          "$ref": "#/definitions/TimeExpression",
+          "description": "represents the resolution of a date and/or time span."
         },
         "end": {
-          "type": "string",
-          "description": "represents the resolution of a date and/or time span. An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
+          "$ref": "#/definitions/TimeExpression",
+          "description": "represents the resolution of a date and/or time span."
         },
         "duration": {
           "type": "string",
@@ -2131,13 +1916,16 @@
         }
       ]
     },
+    "TimeExpression": {
+      "type": "object",
+      "properties": {},
+      "description": "An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
+    },
     "Versions": {
       "type": "string",
       "description": "Analyze Conversations Service Versions",
       "enum": [
-        "2022-05-01",
-        "2023-04-01",
-        "2023-04-15-preview"
+        "2022-05-01"
       ],
       "x-ms-enum": {
         "name": "Versions",
@@ -2147,16 +1935,6 @@
             "name": "v2022_05_01",
             "value": "2022-05-01",
             "description": "Version 2022-05-01"
-          },
-          {
-            "name": "v2023_04_01",
-            "value": "2023-04-01",
-            "description": "Version 2023-04-01"
-          },
-          {
-            "name": "v2023_04_15_preview",
-            "value": "2023-04-15-preview",
-            "description": "Version 2023-04-15-preview"
           }
         ]
       }
@@ -2278,8 +2056,7 @@
       "description": "The extra information object kind.",
       "enum": [
         "EntitySubtype",
-        "ListKey",
-        "RegexKey"
+        "ListKey"
       ],
       "x-ms-enum": {
         "name": "extraInformationKind",

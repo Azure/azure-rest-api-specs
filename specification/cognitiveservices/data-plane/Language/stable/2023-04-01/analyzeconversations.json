@@ -2,642 +2,240 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Cognitive Language Service - Analyze Conversations",
-    "version": "2023-04-01",
     "description": "The language service conversations API is a suite of natural language processing (NLP) skills that can be used to analyze structured conversations (textual or spoken). The synchronous API in this suite accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, Conversational Language Understanding, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\n\n In some cases, this API needs to forward requests and responses between the caller and an upstream service. The asynchronous APIs in this suite enable tasks like Conversation Summarization and Conversational PII detection.",
-    "x-typespec-generated": [
-      {
-        "emitter": "@azure-tools/typespec-autorest"
-      }
-    ]
+    "version": "2023-04-01"
   },
-  "schemes": [
-    "https"
+  "securityDefinitions": {
+    "AADToken": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently, Azure Active Directory [v1.0 or v2.0](https://docs.microsoft.com/azure/active-directory/develop/azure-ad-endpoint-comparison) supports Work, School, and Guests but does not support Personal accounts.",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": "https://cognitiveservices.azure.com/.default"
+      }
+    },
+    "apim_key": {
+      "type": "apiKey",
+      "description": "A subscription key for a Language service resource.",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "AADToken": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
+    },
+    {
+      "apim_key": []
+    }
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}",
+    "hostTemplate": "{Endpoint}/language",
     "useSchemePrefix": false,
     "parameters": [
       {
-        "name": "Endpoint",
-        "in": "path",
-        "required": true,
-        "description": "Supported Cognitive Services endpoint (e.g., https://<resource-name>.api.cognitiveservices.azure.com).",
-        "type": "string"
+        "$ref": "common.json#/parameters/Endpoint"
       }
     ]
   },
-  "produces": [
-    "application/json"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "security": [
-    {
-      "ApiKeyAuth": []
-    }
-  ],
-  "securityDefinitions": {
-    "ApiKeyAuth": {
-      "type": "apiKey",
-      "in": "header",
-      "name": "Ocp-Apim-Subscription-Key"
-    }
-  },
-  "tags": [],
   "paths": {
-    "/language/:analyze-conversations": {
+    "/:analyze-conversations": {
       "post": {
-        "operationId": "AnalyzeConversation",
+        "operationId": "ConversationAnalysis_AnalyzeConversation",
         "description": "Analyzes the input conversation utterance.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "body",
+            "description": "A single conversational task to execute.",
             "in": "body",
+            "name": "body",
             "schema": {
               "$ref": "#/definitions/AnalyzeConversationTask"
             },
             "required": true
           }
         ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "The conversation analysis response.",
             "schema": {
               "$ref": "#/definitions/AnalyzeConversationTaskResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
+                "description": "The error code for specific error that occurred.",
                 "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Conversation project result": {
+            "$ref": "./examples/conversations/SuccessfulAnalyzeConversations.json"
+          },
+          "Arbitration result": {
+            "$ref": "./examples/conversations/SuccessfulAnalyzeConversationsArbitration.json"
+          },
+          "Orchestrator direct target result": {
+            "$ref": "./examples/conversations/SuccessfulAnalyzeConversationsArbitrationDirectTarget.json"
           }
         }
       }
     },
-    "/language/analyze-conversations/jobs": {
+    "/analyze-conversations/jobs": {
       "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "description": "Submit a collection of conversations for analysis. Specify one or more unique tasks to be executed.",
         "operationId": "AnalyzeConversation_SubmitJob",
-        "description": "Analyzes the input conversation utterance.",
+        "summary": "Submit analysis job for conversations",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "resource",
+            "description": "Collection of conversations to analyze and one or more tasks to execute.",
             "in": "body",
-            "required": true,
-            "description": "The resource instance.",
+            "name": "body",
             "schema": {
               "$ref": "#/definitions/AnalyzeConversationJobsInput"
-            }
+            },
+            "required": true
           }
         ],
         "responses": {
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "description": "A successful call results in an Operation-Location header that's used to check the status of the analysis job.",
             "headers": {
-              "Location": {
-                "description": "The location of an instance of AnalyzeConversationJobsInput",
-                "type": "string",
-                "format": "uri"
+              "Operation-Location": {
+                "type": "string"
               }
             }
           },
           "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
+            "description": "Error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "common.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-examples": {
+          "Successful Conversation Summarization Analysis Job Request": {
+            "$ref": "./examples/conversations/SuccessfulConversationSummarySubmit.json"
+          },
+          "Successful Conversation Summarization Task Submit": {
+            "$ref": "./examples/conversations/SuccessfulConversationSummarizationTaskSubmit.json"
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
-    "/language/analyze-conversations/jobs/{jobId}": {
+    "/analyze-conversations/jobs/{jobId}": {
       "get": {
+        "produces": [
+          "application/json"
+        ],
+        "description": "Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.",
         "operationId": "AnalyzeConversation_JobStatus",
         "summary": "Get analysis status and results",
-        "description": "Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "jobId",
-            "in": "path",
-            "required": true,
-            "description": "job ID",
-            "type": "string"
+            "$ref": "common.json#/parameters/JobId"
           },
           {
-            "name": "showStats",
-            "in": "query",
-            "required": false,
-            "description": "(Optional) if set to true, response will contain request and document level statistics.",
-            "type": "boolean"
+            "$ref": "common.json#/parameters/ShowStats"
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Analysis job status and metadata.",
             "schema": {
               "$ref": "#/definitions/AnalyzeConversationJobState"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
+            "description": "Error encountered.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "common.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Text Conversation Analysis Job Status Request": {
+            "$ref": "./examples/conversations/SuccessfulConversationSummarizationTaskStatusRequest.json"
+          },
+          "Successful Get Conversation Summarization Result": {
+            "$ref": "./examples/conversations/SuccessfulConversationSummarizationTaskResult.json"
           }
         }
       }
     },
-    "/language/analyze-conversations/jobs/{jobId}:cancel": {
-      "delete": {
+    "/analyze-conversations/jobs/{jobId}:cancel": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "description": "Cancel a long-running job for text analysis of conversations.",
         "operationId": "AnalyzeConversation_CancelJob",
         "summary": "Cancel a long-running Text Analysis conversations job",
-        "description": "Cancel a long-running job for text analysis of conversations.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "jobId",
-            "in": "path",
-            "required": true,
-            "description": "job ID",
-            "type": "string"
+            "$ref": "common.json#/parameters/JobId"
           }
         ],
         "responses": {
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "description": "The request to cancel a job has been received.",
             "headers": {
               "Operation-Location": {
-                "description": "The location for monitoring the operation state.",
-                "type": "string",
-                "format": "uri"
+                "type": "string"
               }
-            },
-            "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "The unique ID of the operation."
-                },
-                "status": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-                  "description": "The status of the operation"
-                },
-                "error": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
-                  "description": "Error object that describes the error when status is \"Failed\"."
-                }
-              },
-              "description": "Provides status details for long running operations.",
-              "required": [
-                "id",
-                "status"
-              ],
-              "x-typespec-name": "Azure.Core.Foundations.OperationStatus<never, Azure.Core.Foundations.Error>"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
+            "description": "Unexpected error.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "common.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-examples": {
+          "Successful Job Delete Request": {
+            "$ref": "./examples/conversations/SuccessfulAnalyzeConversationsJobsCancelRequest.json"
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
   "definitions": {
-    "AADToken": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "oauth2"
-          ],
-          "description": "OAuth2 authentication"
-        },
-        "flows": {
-          "type": "array",
-          "items": {},
-          "x-typespec-name": "[(anonymous model)]",
-          "description": "Supported OAuth2 flows"
-        }
-      },
-      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently, Azure Active Directory [v1.0 or v2.0](https://docs.microsoft.com/azure/active-directory/develop/azure-ad-endpoint-comparison) supports Work, School, and Guests but does not support Personal accounts.",
-      "required": [
-        "type",
-        "flows"
-      ]
-    },
-    "AbstractiveSummarizationTaskParametersBase": {
-      "type": "object",
-      "properties": {
-        "sentenceCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "It controls the approximate number of sentences in the output summaries."
-        },
-        "stringIndexType": {
-          "$ref": "#/definitions/StringIndexType",
-          "description": "String index type"
-        }
-      },
-      "description": "Supported parameters for an Abstractive Summarization task.",
-      "required": [
-        "sentenceCount",
-        "stringIndexType"
-      ]
-    },
-    "AgeResolution": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "number",
-          "format": "double",
-          "description": "The numeric value that the extracted text denotes."
-        },
-        "unit": {
-          "$ref": "#/definitions/AgeUnit",
-          "description": "The Age Unit of measurement"
-        }
-      },
-      "description": "Represents the Age entity resolution model.",
-      "required": [
-        "value",
-        "unit"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        }
-      ]
-    },
-    "AgeUnit": {
-      "type": "string",
-      "description": "The Age Unit of measurement",
-      "enum": [
-        "Unspecified",
-        "Year",
-        "Month",
-        "Week",
-        "Day"
-      ],
-      "x-ms-enum": {
-        "name": "AgeUnit",
-        "modelAsString": true
-      }
-    },
-    "AnalysisParameters": {
-      "type": "object",
-      "properties": {
-        "targetProjectKind": {
-          "$ref": "#/definitions/targetProjectKind",
-          "description": "The type of a target service"
-        },
-        "apiVersion": {
-          "type": "string",
-          "description": "The API version to use when call a specific target service."
-        }
-      },
-      "description": "This is the parameter set of either the Orchestration project itself or one of the target services.",
-      "discriminator": "targetProjectKind",
-      "required": [
-        "targetProjectKind"
-      ]
-    },
-    "AnalyzeConversationJobResult": {
-      "type": "object",
-      "properties": {
-        "taskName": {
-          "type": "string",
-          "description": "task name"
-        },
-        "kind": {
-          "$ref": "#/definitions/AnalyzeConversationResultsKind",
-          "description": "discriminator kind"
-        }
-      },
-      "description": "Container for results of all tasks in the conversation job.",
-      "discriminator": "kind",
-      "required": [
-        "taskName",
-        "kind"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/TaskState"
-        }
-      ]
-    },
-    "AnalyzeConversationJobState": {
-      "type": "object",
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "display name"
-        },
-        "createdDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date and time job created"
-        },
-        "expirationDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date and time job expires"
-        },
-        "jobId": {
-          "type": "string",
-          "description": "job ID",
-          "readOnly": true
-        },
-        "lastUpdateDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "last updated date and time"
-        },
-        "status": {
-          "$ref": "#/definitions/State",
-          "description": "status"
-        },
-        "errors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorResponse"
-          },
-          "x-ms-identifiers": [],
-          "description": "errors",
-          "x-typespec-name": "ErrorResponse[]"
-        },
-        "nextlink": {
-          "type": "string",
-          "description": "next link"
-        },
-        "tasks": {
-          "type": "object",
-          "properties": {
-            "completed": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Count of tasks that finished successfully."
-            },
-            "failed": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Count of tasks that failed."
-            },
-            "inProgress": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Count of tasks that are currently in progress."
-            },
-            "total": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Total count of tasks submitted as part of the job."
-            },
-            "items": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/AnalyzeConversationJobResult"
-              },
-              "x-ms-identifiers": [],
-              "description": "List of results from tasks (if available).",
-              "x-typespec-name": "AnalyzeConversationJobResult[]"
-            }
-          },
-          "description": "tasks",
-          "required": [
-            "completed",
-            "failed",
-            "inProgress",
-            "total"
-          ],
-          "x-typespec-name": "(anonymous model)"
-        },
-        "statistics": {
-          "$ref": "#/definitions/ConversationRequestStatistics",
-          "description": "Contains the statistics for the submitted job."
-        }
-      },
-      "description": "Contains the status of the submitted job for analyzing a conversation, along with related statistics.",
-      "required": [
-        "createdDateTime",
-        "jobId",
-        "lastUpdateDateTime",
-        "status",
-        "tasks"
-      ]
-    },
-    "AnalyzeConversationJobStatistics": {
-      "type": "object",
-      "properties": {
-        "statistics": {
-          "$ref": "#/definitions/ConversationRequestStatistics",
-          "description": "Contains the statistics for the submitted job."
-        }
-      },
-      "description": "Contains the statistics for the submitted job."
-    },
-    "AnalyzeConversationJobsInput": {
-      "type": "object",
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "Display name for the analysis job."
-        },
-        "analysisInput": {
-          "$ref": "#/definitions/MultiLanguageConversationAnalysisInput",
-          "description": "Analysis Input",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tasks": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AnalyzeConversationLROTask"
-          },
-          "x-ms-identifiers": [],
-          "description": "Set of tasks to execute on the input conversation.",
-          "x-typespec-name": "AnalyzeConversationLROTask[]"
-        }
-      },
-      "description": "It is a wrap up a Question Answering KB response.",
-      "required": [
-        "analysisInput",
-        "tasks"
-      ]
-    },
-    "AnalyzeConversationLROTask": {
-      "type": "object",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/AnalyzeConversationLROTaskKind",
-          "description": "Enumeration of supported analysis tasks on a collection of conversations."
-        }
-      },
-      "description": "Base class for a long-running conversation input task.",
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/TaskIdentifier"
-        }
-      ]
-    },
-    "AnalyzeConversationLROTaskKind": {
-      "type": "string",
-      "description": "Enumeration of supported analysis tasks on a collection of conversations.",
-      "enum": [
-        "ConversationalSummarizationTask"
-      ],
-      "x-ms-enum": {
-        "name": "AnalyzeConversationLROTaskKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ConversationalSummarizationTask",
-            "value": "ConversationalSummarizationTask",
-            "description": "Conversational Summarization Task"
-          }
-        ]
-      }
-    },
-    "AnalyzeConversationResult": {
-      "type": "object",
-      "properties": {
-        "query": {
-          "type": "string",
-          "description": "The conversation utterance given by the caller."
-        },
-        "detectedLanguage": {
-          "type": "string",
-          "description": "The system detected language for the query in BCP 47 language representation.."
-        },
-        "prediction": {
-          "$ref": "#/definitions/BasePrediction",
-          "description": "The prediction result of a conversation project."
-        }
-      },
-      "description": "Represents a conversation analysis response.",
-      "required": [
-        "query",
-        "prediction"
-      ]
-    },
-    "AnalyzeConversationResultsKind": {
-      "type": "string",
-      "description": "Enumeration of results for supported conversation analysis Results.",
-      "enum": [
-        "ConversationalSummarizationResults"
-      ],
-      "x-ms-enum": {
-        "name": "AnalyzeConversationResultsKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ConversationalSummarizationResults",
-            "value": "ConversationalSummarizationResults",
-            "description": "Conversational Summarization Results"
-          }
-        ]
-      }
-    },
-    "AnalyzeConversationSummarizationResult": {
-      "type": "object",
-      "properties": {
-        "results": {
-          "$ref": "#/definitions/SummaryResult",
-          "description": "results"
-        }
-      },
-      "description": "Result for the summarization task on the conversation.",
-      "required": [
-        "results"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeConversationJobResult"
-        }
-      ]
-    },
-    "AnalyzeConversationSummarizationTask": {
-      "type": "object",
-      "properties": {
-        "parameters": {
-          "$ref": "#/definitions/ConversationSummarizationTaskParametersBase",
-          "description": "parameters"
-        }
-      },
-      "description": "Task definition for conversational summarization.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeConversationLROTask"
-        }
-      ]
-    },
-    "AnalyzeConversationTask": {
-      "type": "object",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "enum": [
-            "Conversation"
-          ],
-          "description": "The base class of a conversation input task.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "description": "The base class of a conversation input task.",
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
-    },
     "AnalyzeConversationTaskKind": {
       "type": "string",
       "description": "Enumeration of supported Conversation tasks.",
@@ -649,23 +247,9 @@
         "modelAsString": true
       }
     },
-    "AnalyzeConversationTaskResult": {
-      "type": "object",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/AnalyzeConversationTaskResultsKind",
-          "description": "The base class of a conversation input task result."
-        }
-      },
-      "description": "The base class of a conversation input task result.",
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
-    },
     "AnalyzeConversationTaskResultsKind": {
       "type": "string",
-      "description": "Enumeration of supported conversational task results.",
+      "description": "Enumeration of supported conversational task results",
       "enum": [
         "ConversationResult"
       ],
@@ -674,750 +258,57 @@
         "modelAsString": true
       }
     },
-    "AnswerSpan": {
+    "AnalyzeConversationTask": {
       "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "description": "Predicted text of answer span."
-        },
-        "confidenceScore": {
-          "type": "number",
-          "format": "double",
-          "description": "Predicted score of answer span, value ranges from 0 to 1.",
-          "minimum": 0,
-          "maximum": 1
-        },
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The answer span offset from the start of answer."
-        },
-        "length": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The length of the answer span."
-        }
-      },
-      "description": "Answer span object of QnA."
-    },
-    "AnswersOptions": {
-      "type": "object",
-      "properties": {
-        "qnaId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Exact QnA ID to fetch from the knowledge base, this field takes priority over question."
-        },
-        "question": {
-          "type": "string",
-          "description": "User question to query against the knowledge base."
-        },
-        "top": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Max number of answers to be returned for the question."
-        },
-        "userId": {
-          "type": "string",
-          "description": "Unique identifier for the user."
-        },
-        "confidenceScoreThreshold": {
-          "type": "number",
-          "format": "double",
-          "description": "Minimum threshold score for answers, value ranges from 0 to 1.",
-          "minimum": 0,
-          "maximum": 1,
-          "x-ms-client-name": "confidenceThreshold"
-        },
-        "context": {
-          "$ref": "#/definitions/KnowledgeBaseAnswerContext",
-          "description": "Context object with previous QnA's information.",
-          "x-ms-client-name": "answerContext"
-        },
-        "rankerType": {
-          "$ref": "#/definitions/RankerKind",
-          "description": "Type of ranker to be used.",
-          "x-ms-client-name": "rankerKind"
-        },
-        "filters": {
-          "$ref": "#/definitions/QueryFilters",
-          "description": "Filter QnAs based on given metadata list and knowledge base sources."
-        },
-        "answerSpanRequest": {
-          "$ref": "#/definitions/ShortAnswerOptions",
-          "description": "To configure Answer span prediction feature.",
-          "x-ms-client-name": "shortAnswerOptions"
-        },
-        "includeUnstructuredSources": {
-          "type": "boolean",
-          "description": "(Optional) Flag to enable Query over Unstructured Sources."
-        }
-      },
-      "description": "Parameters to query a knowledge base."
-    },
-    "AnswersResult": {
-      "type": "object",
-      "properties": {
-        "answers": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/KnowledgeBaseAnswer"
-          },
-          "description": "Represents Answer Result list.",
-          "x-typespec-name": "KnowledgeBaseAnswer[]"
-        }
-      },
-      "description": "Represents List of Question Answers."
-    },
-    "AreaResolution": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "number",
-          "format": "double",
-          "description": "The numeric value that the extracted text denotes."
-        },
-        "unit": {
-          "$ref": "#/definitions/AreaUnit",
-          "description": "The area Unit of measurement"
-        }
-      },
-      "description": "Represents the area entity resolution model.",
+      "description": "The base class of a conversation input task.",
+      "discriminator": "kind",
       "required": [
-        "value",
-        "unit"
+        "kind"
       ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AnalyzeConversationTaskKind"
         }
-      ]
-    },
-    "AreaUnit": {
-      "type": "string",
-      "description": "The area unit of measurement.",
-      "enum": [
-        "Unspecified",
-        "SquareKilometer",
-        "SquareHectometer",
-        "SquareDecameter",
-        "SquareDecimeter",
-        "SquareMeter",
-        "SquareCentimeter",
-        "SquareMillimeter",
-        "SquareInch",
-        "SquareFoot",
-        "SquareMile",
-        "SquareYard",
-        "Acre"
-      ],
-      "x-ms-enum": {
-        "name": "AreaUnit",
-        "modelAsString": true
       }
     },
-    "AudioTiming": {
+    "AnalyzeConversationTaskResult": {
       "type": "object",
-      "properties": {
-        "offset": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Offset from the start of speech audio, in ticks. 1 tick = 100 nanoseconds."
-        },
-        "duration": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Duration of word articulation, in ticks. 1 tick = 100 nanoseconds."
-        }
-      },
-      "description": "Audio timing information."
-    },
-    "Azure.Core.Foundations.Error": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "One of a server-defined set of error codes."
-        },
-        "message": {
-          "type": "string",
-          "description": "A human-readable representation of the error."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": [],
-          "description": "An array of details about specific errors that led to this reported error.",
-          "x-typespec-name": "Azure.Core.Foundations.Error[]"
-        },
-        "innererror": {
-          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
-          "description": "An object containing more specific information than the current object about the error."
-        }
-      },
-      "description": "The error object.",
+      "description": "The base class of a conversation task result.",
+      "discriminator": "kind",
       "required": [
-        "code",
-        "message"
-      ]
-    },
-    "Azure.Core.Foundations.ErrorResponse": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "The error object."
-        }
-      },
-      "description": "A response containing error details.",
-      "required": [
-        "error"
-      ]
-    },
-    "Azure.Core.Foundations.InnerError": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "One of a server-defined set of error codes."
-        },
-        "innererror": {
-          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
-          "description": "Inner error."
-        }
-      },
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses."
-    },
-    "Azure.Core.Foundations.OperationState": {
-      "type": "string",
-      "description": "Enum describing allowed operation states.",
-      "enum": [
-        "InProgress",
-        "Succeeded",
-        "Failed",
-        "Canceled"
+        "kind"
       ],
-      "x-ms-enum": {
-        "name": "OperationState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "The operation is in progress."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "The operation has completed successfully."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "The operation has failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "The operation has been canceled by the user."
-          }
-        ]
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AnalyzeConversationTaskResultsKind"
+        }
       }
     },
-    "BaseExtraInformation": {
+    "ConversationalTask": {
       "type": "object",
-      "properties": {
-        "extraInformationKind": {
-          "$ref": "#/definitions/extraInformationKind",
-          "description": "The extra information object kind."
-        }
-      },
-      "description": "The abstract base object for entity extra information.",
-      "discriminator": "extraInformationKind",
-      "required": [
-        "extraInformationKind"
-      ]
-    },
-    "BasePrediction": {
-      "type": "object",
-      "properties": {
-        "projectKind": {
-          "$ref": "#/definitions/projectKind",
-          "description": "The type of the project."
-        },
-        "topIntent": {
-          "type": "string",
-          "description": "The intent with the highest score."
-        }
-      },
-      "description": "This is the base class of prediction",
-      "discriminator": "projectKind",
-      "required": [
-        "projectKind"
-      ]
-    },
-    "BaseResolution": {
-      "type": "object",
-      "properties": {
-        "resolutionKind": {
-          "$ref": "#/definitions/resolutionKind",
-          "description": "The entity resolution object kind."
-        }
-      },
-      "description": "The abstract base class for entity resolutions.",
-      "discriminator": "resolutionKind",
-      "required": [
-        "resolutionKind"
-      ]
-    },
-    "BooleanResolution": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "boolean",
-          "description": "A resolution for boolean expressions"
-        }
-      },
-      "description": "A resolution for boolean expressions",
-      "required": [
-        "value"
-      ],
+      "description": "The input for a custom conversation task.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseResolution"
-        }
-      ]
-    },
-    "Conversation": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the conversation."
-        },
-        "language": {
-          "type": "string",
-          "description": "Language of the conversation item in BCP-47 format."
-        },
-        "modality": {
-          "$ref": "#/definitions/Modality",
-          "description": "modality"
-        },
-        "domain": {
-          "$ref": "#/definitions/ConversationDomain",
-          "description": "domain"
-        }
-      },
-      "description": "Complete ordered set of utterances (spoken or written) by one or more speakers to be used for analysis.",
-      "discriminator": "modality",
-      "required": [
-        "id",
-        "language",
-        "modality"
-      ]
-    },
-    "ConversationAnalysisOptions": {
-      "type": "object",
-      "properties": {
-        "conversationItem": {
-          "$ref": "#/definitions/ConversationItemBase",
-          "description": "The abstract base for a user input formatted conversation (e.g., Text, Transcript)."
-        }
-      },
-      "description": "The input ConversationItem and its optional parameters",
-      "required": [
-        "conversationItem"
-      ]
-    },
-    "ConversationCallingOptions": {
-      "type": "object",
-      "properties": {
-        "language": {
-          "type": "string",
-          "description": "The language of the query in BCP 47 language representation."
-        },
-        "verbose": {
-          "type": "boolean",
-          "description": "If true, the service will return more detailed information."
-        },
-        "isLoggingEnabled": {
-          "type": "boolean",
-          "description": "If true, the query will be saved for customers to further review in authoring, to improve the model quality."
-        }
-      },
-      "description": "The option to set to call a Conversation project."
-    },
-    "ConversationDomain": {
-      "type": "string",
-      "description": "Enumeration of supported conversational domains.",
-      "enum": [
-        "finance",
-        "healthcare",
-        "generic"
-      ],
-      "x-ms-enum": {
-        "name": "ConversationDomain",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "finance",
-            "value": "finance",
-            "description": "Enumeration of supported conversational domains."
-          },
-          {
-            "name": "healthcare",
-            "value": "healthcare",
-            "description": "Enumeration of supported conversational domains."
-          },
-          {
-            "name": "generic",
-            "value": "generic",
-            "description": "Enumeration of supported conversational domains."
-          }
-        ]
-      }
-    },
-    "ConversationEntity": {
-      "type": "object",
-      "properties": {
-        "category": {
-          "type": "string",
-          "description": "The entity category."
-        },
-        "text": {
-          "type": "string",
-          "description": "The predicted entity text."
-        },
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The starting index of this entity in the query."
-        },
-        "length": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The length of the text."
-        },
-        "confidenceScore": {
-          "type": "number",
-          "format": "float",
-          "description": "The entity confidence score.",
-          "x-ms-client-name": "confidence"
-        },
-        "resolutions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BaseResolution"
-          },
-          "x-ms-identifiers": [],
-          "description": "The collection of entity resolution objects.",
-          "x-typespec-name": "BaseResolution[]"
-        },
-        "extraInformation": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BaseExtraInformation"
-          },
-          "x-ms-identifiers": [],
-          "description": "The collection of entity extra information objects.",
-          "x-typespec-name": "BaseExtraInformation[]"
-        }
-      },
-      "description": "The entity extraction result of a Conversation project.",
-      "required": [
-        "category",
-        "text",
-        "offset",
-        "length",
-        "confidenceScore"
-      ]
-    },
-    "ConversationIntent": {
-      "type": "object",
-      "properties": {
-        "category": {
-          "type": "string",
-          "description": "A predicted class."
-        },
-        "confidenceScore": {
-          "type": "number",
-          "format": "float",
-          "description": "The confidence score of the class from 0.0 to 1.0.",
-          "minimum": 0,
-          "maximum": 1,
-          "x-ms-client-name": "confidence"
-        }
-      },
-      "description": "The intent classification result of a Conversation project.",
-      "required": [
-        "category",
-        "confidenceScore"
-      ]
-    },
-    "ConversationItemBase": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ID of a conversation item."
-        },
-        "participantId": {
-          "type": "string",
-          "description": "The participant ID of a conversation item."
-        },
-        "language": {
-          "type": "string",
-          "description": "The override language of a conversation item in BCP 47 language representation."
-        },
-        "modality": {
-          "$ref": "#/definitions/Modality",
-          "description": "Enumeration of supported conversational modalities."
-        }
-      },
-      "description": "The abstract base for a user input formatted conversation (e.g., Text, Transcript).",
-      "required": [
-        "id",
-        "participantId"
-      ],
-      "allOf": [
-        {
-          "type": "object",
-          "additionalProperties": true,
-          "x-typespec-name": "Record<unknown>"
+          "$ref": "#/definitions/AnalyzeConversationTask"
         }
       ],
-      "additionalProperties": true
-    },
-    "ConversationItemLevelTiming": {
-      "type": "object",
-      "properties": {},
-      "description": "Audio timing at the conversation item level.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AudioTiming"
-        }
-      ]
-    },
-    "ConversationParameters": {
-      "type": "object",
       "properties": {
-        "callingOptions": {
-          "$ref": "#/definitions/ConversationCallingOptions",
-          "description": "The option to set to call a Conversation project."
-        }
-      },
-      "description": "This is a set of request parameters for Customized Conversation projects.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalysisParameters"
-        }
-      ]
-    },
-    "ConversationPrediction": {
-      "type": "object",
-      "properties": {
-        "intents": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ConversationIntent"
-          },
-          "x-ms-identifiers": [],
-          "description": "The intent classification results.",
-          "x-typespec-name": "ConversationIntent[]"
+        "analysisInput": {
+          "$ref": "#/definitions/ConversationAnalysisOptions"
         },
-        "entities": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ConversationEntity"
-          },
-          "x-ms-identifiers": [],
-          "description": "The entity extraction results.",
-          "x-typespec-name": "ConversationEntity[]"
+        "parameters": {
+          "$ref": "#/definitions/ConversationTaskParameters"
         }
       },
-      "description": "Represents the prediction section of a Conversation project.",
+      "x-ms-discriminator-value": "Conversation",
       "required": [
-        "intents",
-        "entities"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/BasePrediction"
-        }
-      ]
-    },
-    "ConversationRequestStatistics": {
-      "type": "object",
-      "properties": {
-        "conversationsCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of conversations submitted in the request."
-        },
-        "validConversationCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of conversation documents. This excludes documents that are empty, over the size limit, or in unsupported languages."
-        },
-        "erroneousConversationsCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of invalid documents. This includes documents that are empty, over the size limit, or in unsupported languages."
-        }
-      },
-      "description": "if showStats=true was specified in the request, this field contains information about the request payload.",
-      "required": [
-        "conversationsCount",
-        "validConversationCount",
-        "erroneousConversationsCount"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/RequestStatistics"
-        }
-      ]
-    },
-    "ConversationResult": {
-      "type": "object",
-      "properties": {
-        "query": {
-          "type": "string",
-          "description": "The same query given in request."
-        },
-        "detectedLanguage": {
-          "type": "string",
-          "description": "The detected language from the query in BCP 47 language representation."
-        },
-        "prediction": {
-          "$ref": "#/definitions/ConversationPrediction",
-          "description": "The predicted result for the query."
-        }
-      },
-      "description": "The response returned by a Conversation project.",
-      "required": [
-        "query"
-      ]
-    },
-    "ConversationResultBase": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique, non-empty conversation identifier."
-        },
-        "warnings": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InputWarning"
-          },
-          "x-ms-identifiers": [],
-          "description": "Warnings encountered in processing the document.",
-          "x-typespec-name": "InputWarning[]"
-        },
-        "statistics": {
-          "$ref": "#/definitions/ConversationStatistics",
-          "description": "If showStats=true was specified in the request this field will contain information about the conversation payload."
-        }
-      },
-      "description": "Shared attributes for all conversational task results.",
-      "required": [
-        "id",
-        "warnings"
-      ]
-    },
-    "ConversationStatistics": {
-      "type": "object",
-      "properties": {
-        "transactionsCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of text units for the request."
-        }
-      },
-      "description": "If showStats=true was specified in the request, this field contains information about the conversation payload.",
-      "required": [
-        "transactionsCount"
-      ]
-    },
-    "ConversationSummarizationTaskParameters": {
-      "type": "object",
-      "properties": {
-        "summaryAspects": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SummaryAspect"
-          },
-          "description": "Array of Summary Aspects",
-          "x-typespec-name": "SummaryAspect[]"
-        },
-        "sentenceCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "It controls the approximate number of sentences in the output summaries."
-        },
-        "stringIndexType": {
-          "$ref": "#/definitions/StringIndexType",
-          "description": "String index type"
-        }
-      },
-      "description": "Supported parameters for pre-build conversational summarization task.",
-      "required": [
-        "summaryAspects",
-        "sentenceCount",
-        "stringIndexType"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltTaskParameters"
-        }
-      ]
-    },
-    "ConversationSummarizationTaskParametersBase": {
-      "type": "object",
-      "properties": {
-        "summaryAspects": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SummaryAspect"
-          },
-          "description": "Array of Summary Aspects",
-          "x-typespec-name": "SummaryAspect[]"
-        }
-      },
-      "description": "Supported parameters for a conversational summarization task.",
-      "required": [
-        "summaryAspects"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AbstractiveSummarizationTaskParametersBase"
-        }
-      ]
-    },
-    "ConversationTargetIntentResult": {
-      "type": "object",
-      "properties": {
-        "result": {
-          "$ref": "#/definitions/ConversationResult",
-          "description": "The actual response from a Conversation project."
-        }
-      },
-      "description": "A wrap up of Conversation project response.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TargetIntentResult"
-        }
+        "analysisInput",
+        "parameters"
       ]
     },
     "ConversationTaskParameters": {
       "type": "object",
+      "description": "Input parameters necessary for a Conversation task.",
       "properties": {
         "projectName": {
           "type": "string",
@@ -1436,8 +327,7 @@
           "description": "If true, the service will keep the query for further review."
         },
         "stringIndexType": {
-          "$ref": "#/definitions/StringIndexType",
-          "description": "Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets."
+          "$ref": "common.json#/definitions/StringIndexType"
         },
         "directTarget": {
           "type": "string",
@@ -1445,141 +335,899 @@
         },
         "targetProjectParameters": {
           "type": "object",
+          "description": "A dictionary representing the parameters for each target project.",
           "additionalProperties": {
             "$ref": "#/definitions/AnalysisParameters"
-          },
-          "description": "A dictionary representing the parameters for each target project.",
-          "x-typespec-name": "Record<AnalysisParameters>"
+          }
         }
       },
-      "description": "Input parameters necessary for a Conversation task.",
       "required": [
         "projectName",
         "deploymentName"
       ]
     },
-    "ConversationTaskState": {
-      "type": "object",
-      "properties": {
-        "tasks": {
-          "type": "object",
-          "properties": {
-            "completed": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Count of tasks that finished successfully."
-            },
-            "failed": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Count of tasks that failed."
-            },
-            "inProgress": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Count of tasks that are currently in progress."
-            },
-            "total": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Total count of tasks submitted as part of the job."
-            },
-            "items": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/AnalyzeConversationJobResult"
-              },
-              "x-ms-identifiers": [],
-              "description": "List of results from tasks (if available).",
-              "x-typespec-name": "AnalyzeConversationJobResult[]"
-            }
-          },
-          "description": "tasks",
-          "required": [
-            "completed",
-            "failed",
-            "inProgress",
-            "total"
-          ],
-          "x-typespec-name": "(anonymous model)"
-        }
-      },
-      "description": "Contains the state for the tasks that are being executed as part of the submitted job for analyzing a conversation.",
-      "required": [
-        "tasks"
-      ]
-    },
-    "ConversationalTask": {
-      "type": "object",
-      "properties": {
-        "analysisInput": {
-          "$ref": "#/definitions/ConversationAnalysisOptions",
-          "description": "The input ConversationItem and its optional parameters"
-        },
-        "parameters": {
-          "$ref": "#/definitions/ConversationTaskParameters",
-          "description": "Input parameters necessary for a Conversation task."
-        }
-      },
-      "description": "The input for a custom conversation task.",
-      "required": [
-        "analysisInput",
-        "parameters"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeConversationTask"
-        }
-      ]
-    },
     "ConversationalTaskResult": {
-      "type": "object",
-      "properties": {
-        "result": {
-          "$ref": "#/definitions/AnalyzeConversationResult",
-          "description": "Represents a conversation analysis response."
-        }
-      },
       "description": "The results of a Conversation task.",
-      "required": [
-        "result"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/AnalyzeConversationTaskResult"
         }
-      ]
-    },
-    "ConversationsSummaryResult": {
+      ],
       "type": "object",
       "properties": {
-        "summaries": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SummaryResultItem"
-          },
-          "x-ms-identifiers": [],
-          "description": "array of summaries",
-          "x-typespec-name": "SummaryResultItem[]"
+        "result": {
+          "$ref": "#/definitions/AnalyzeConversationResult"
         }
       },
-      "description": "Conversations Summary Result",
       "required": [
-        "summaries"
+        "result"
+      ],
+      "x-ms-discriminator-value": "ConversationResult"
+    },
+    "ConversationItemBase": {
+      "type": "object",
+      "description": "The abstract base for a user input formatted conversation (e.g., Text, Transcript).",
+      "properties": {
+        "id": {
+          "description": "The ID of a conversation item.",
+          "type": "string"
+        },
+        "participantId": {
+          "description": "The participant ID of a conversation item.",
+          "type": "string"
+        },
+        "language": {
+          "description": "The override language of a conversation item in BCP 47 language representation.",
+          "type": "string"
+        },
+        "modality": {
+          "$ref": "#/definitions/Modality"
+        },
+        "role": {
+          "type": "string",
+          "description": "Role of the participant.",
+          "enum": [
+            "agent",
+            "customer",
+            "generic"
+          ],
+          "x-ms-enum": {
+            "name": "role",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "participantId",
+        "id"
+      ],
+      "additionalProperties": true
+    },
+    "TextConversationItem": {
+      "type": "object",
+      "description": "The text modality of an input conversation.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationItemBase"
+        }
+      ],
+      "properties": {
+        "text": {
+          "description": "The text input",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "ConversationAnalysisOptions": {
+      "type": "object",
+      "description": "The input ConversationItem and its optional parameters",
+      "required": [
+        "conversationItem"
+      ],
+      "properties": {
+        "conversationItem": {
+          "$ref": "#/definitions/ConversationItemBase"
+        }
+      }
+    },
+    "AnalysisParameters": {
+      "type": "object",
+      "description": "This is the parameter set of either the Orchestration project itself or one of the target services.",
+      "required": [
+        "targetProjectKind"
+      ],
+      "discriminator": "targetProjectKind",
+      "properties": {
+        "targetProjectKind": {
+          "type": "string",
+          "description": "The type of a target service.",
+          "enum": [
+            "Luis",
+            "Conversation",
+            "QuestionAnswering",
+            "NonLinked"
+          ],
+          "x-ms-enum": {
+            "name": "targetProjectKind",
+            "modelAsString": true
+          }
+        },
+        "apiVersion": {
+          "type": "string",
+          "description": "The API version to use when call a specific target service."
+        }
+      }
+    },
+    "NoneLinkedTargetIntentResult": {
+      "type": "object",
+      "description": "A wrap up of non-linked intent response.",
+      "x-ms-discriminator-value": "NonLinked",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetIntentResult"
+        }
+      ],
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/ConversationResult",
+          "description": "The actual response from a Conversation project."
+        }
+      }
+    },
+    "LuisParameters": {
+      "description": "This is a set of request parameters for LUIS Generally Available projects.",
+      "x-ms-discriminator-value": "Luis",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalysisParameters"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "The utterance to predict."
+        },
+        "callingOptions": {
+          "type": "object",
+          "description": "This customizes how the service calls LUIS Generally Available projects.",
+          "$ref": "#/definitions/LuisCallingOptions"
+        }
+      },
+      "additionalProperties": true
+    },
+    "LuisCallingOptions": {
+      "description": "This customizes how the service calls LUIS Generally Available projects.",
+      "type": "object",
+      "properties": {
+        "verbose": {
+          "description": "Enable verbose response.",
+          "type": "boolean"
+        },
+        "log": {
+          "description": "Save log to add in training utterances later.",
+          "type": "boolean"
+        },
+        "show-all-intents": {
+          "description": "Set true to show all intents.",
+          "type": "boolean"
+        },
+        "timezoneOffset": {
+          "type": "number",
+          "description": "The timezone offset for the location of the request."
+        },
+        "spellCheck": {
+          "type": "boolean",
+          "description": "Enable spell checking."
+        },
+        "bing-spell-check-subscription-key": {
+          "description": "The subscription key to use when enabling Bing spell check",
+          "type": "string"
+        }
+      }
+    },
+    "ConversationParameters": {
+      "type": "object",
+      "description": "This is a set of request parameters for Customized Conversation projects.",
+      "x-ms-discriminator-value": "Conversation",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalysisParameters"
+        }
+      ],
+      "properties": {
+        "callingOptions": {
+          "type": "object",
+          "$ref": "#/definitions/ConversationCallingOptions"
+        }
+      }
+    },
+    "ConversationCallingOptions": {
+      "type": "object",
+      "description": "The option to set to call a Conversation project.",
+      "properties": {
+        "language": {
+          "description": "The language of the query in BCP 47 language representation..",
+          "type": "string"
+        },
+        "verbose": {
+          "description": "If true, the service will return more detailed information.",
+          "type": "boolean"
+        },
+        "isLoggingEnabled": {
+          "description": "If true, the query will be saved for customers to further review in authoring, to improve the model quality.",
+          "type": "boolean"
+        }
+      }
+    },
+    "QuestionAnsweringParameters": {
+      "type": "object",
+      "description": "This is a set of request parameters for Question Answering knowledge bases.",
+      "x-ms-discriminator-value": "QuestionAnswering",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalysisParameters"
+        }
+      ],
+      "properties": {
+        "callingOptions": {
+          "description": "The options sent to a Question Answering KB.",
+          "$ref": "common.json#/definitions/AnswersOptions"
+        }
+      }
+    },
+    "AnalyzeConversationResult": {
+      "type": "object",
+      "description": "Represents a conversation analysis response.",
+      "required": [
+        "query",
+        "prediction"
+      ],
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The conversation utterance given by the caller."
+        },
+        "detectedLanguage": {
+          "type": "string",
+          "description": "The system detected language for the query in BCP 47 language representation.."
+        },
+        "prediction": {
+          "description": "The prediction result of a conversation project.",
+          "$ref": "#/definitions/BasePrediction"
+        }
+      }
+    },
+    "BasePrediction": {
+      "type": "object",
+      "description": "This is the base class of prediction",
+      "required": [
+        "projectKind"
+      ],
+      "discriminator": "projectKind",
+      "properties": {
+        "projectKind": {
+          "type": "string",
+          "description": "The type of the project.",
+          "enum": [
+            "Conversation",
+            "Orchestration"
+          ],
+          "x-ms-enum": {
+            "name": "projectKind",
+            "modelAsString": true
+          }
+        },
+        "topIntent": {
+          "type": "string",
+          "description": "The intent with the highest score."
+        }
+      }
+    },
+    "OrchestrationPrediction": {
+      "type": "object",
+      "description": "This represents the prediction result of an Orchestration project.",
+      "x-ms-discriminator-value": "Orchestration",
+      "required": [
+        "intents"
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConversationResultBase"
+          "$ref": "#/definitions/BasePrediction"
         }
+      ],
+      "properties": {
+        "intents": {
+          "description": "A dictionary that contains all intents. A key is an intent name and a value is its confidence score and target type. The top intent's value also contains the actual response from the target project.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/TargetIntentResult"
+          }
+        }
+      }
+    },
+    "TargetIntentResult": {
+      "type": "object",
+      "description": "This is the base class of an intent prediction",
+      "discriminator": "targetProjectKind",
+      "required": [
+        "confidenceScore",
+        "targetProjectKind"
+      ],
+      "properties": {
+        "targetProjectKind": {
+          "type": "string",
+          "description": "This discriminator property specifies the type of the target project that returns the response.",
+          "enum": [
+            "Luis",
+            "Conversation",
+            "QuestionAnswering",
+            "NonLinked"
+          ],
+          "x-ms-enum": {
+            "name": "targetProjectKind",
+            "modelAsString": true
+          }
+        },
+        "apiVersion": {
+          "type": "string",
+          "description": "The API version used to call a target service."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "x-ms-client-name": "confidence",
+          "description": "The prediction score and it ranges from 0.0 to 1.0.",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "ConversationTargetIntentResult": {
+      "type": "object",
+      "description": "A wrap up of Conversation project response.",
+      "x-ms-discriminator-value": "Conversation",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetIntentResult"
+        }
+      ],
+      "properties": {
+        "result": {
+          "type": "object",
+          "$ref": "#/definitions/ConversationResult",
+          "description": "The actual response from a Conversation project."
+        }
+      }
+    },
+    "ConversationResult": {
+      "type": "object",
+      "description": "The response returned by a Conversation project.",
+      "required": [
+        "query"
+      ],
+      "properties": {
+        "query": {
+          "description": "The same query given in request.",
+          "type": "string"
+        },
+        "detectedLanguage": {
+          "description": "The detected language from the query in BCP 47 language representation..",
+          "type": "string"
+        },
+        "prediction": {
+          "description": "The predicted result for the query.",
+          "$ref": "#/definitions/ConversationPrediction"
+        }
+      }
+    },
+    "ConversationPrediction": {
+      "type": "object",
+      "description": "Represents the prediction section of a Conversation project.",
+      "x-ms-discriminator-value": "Conversation",
+      "required": [
+        "intents",
+        "entities"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BasePrediction"
+        }
+      ],
+      "properties": {
+        "intents": {
+          "description": "The intent classification results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConversationIntent"
+          }
+        },
+        "entities": {
+          "description": "The entity extraction results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConversationEntity"
+          }
+        }
+      }
+    },
+    "ConversationIntent": {
+      "type": "object",
+      "description": "The intent classification result of a Conversation project.",
+      "required": [
+        "category",
+        "confidenceScore"
+      ],
+      "properties": {
+        "category": {
+          "description": "A predicted class.",
+          "type": "string"
+        },
+        "confidenceScore": {
+          "format": "float",
+          "x-ms-client-name": "confidence",
+          "description": "The confidence score of the class from 0.0 to 1.0.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "ConversationEntity": {
+      "type": "object",
+      "description": "The entity extraction result of a Conversation project.",
+      "required": [
+        "category",
+        "text",
+        "offset",
+        "length",
+        "confidenceScore"
+      ],
+      "properties": {
+        "category": {
+          "description": "The entity category.",
+          "type": "string"
+        },
+        "text": {
+          "description": "The predicted entity text.",
+          "type": "string"
+        },
+        "offset": {
+          "format": "int32",
+          "description": "The starting index of this entity in the query.",
+          "type": "integer"
+        },
+        "length": {
+          "format": "int32",
+          "description": "The length of the text.",
+          "type": "integer"
+        },
+        "confidenceScore": {
+          "format": "float",
+          "x-ms-client-name": "confidence",
+          "description": "The entity confidence score.",
+          "type": "number"
+        },
+        "resolutions": {
+          "description": "The collection of entity resolution objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseResolution"
+          }
+        },
+        "extraInformation": {
+          "description": "The collection of entity extra information objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseExtraInformation"
+          }
+        }
+      }
+    },
+    "BaseResolution": {
+      "description": "The abstract base class for entity resolutions.",
+      "type": "object",
+      "discriminator": "resolutionKind",
+      "properties": {
+        "resolutionKind": {
+          "description": "The entity resolution object kind.",
+          "type": "string",
+          "enum": [
+            "BooleanResolution",
+            "DateTimeResolution",
+            "NumberResolution",
+            "OrdinalResolution",
+            "SpeedResolution",
+            "WeightResolution",
+            "LengthResolution",
+            "VolumeResolution",
+            "AreaResolution",
+            "AgeResolution",
+            "InformationResolution",
+            "TemperatureResolution",
+            "CurrencyResolution",
+            "NumericRangeResolution",
+            "TemporalSpanResolution"
+          ],
+          "x-ms-enum": {
+            "name": "ResolutionKind",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "resolutionKind"
+      ]
+    },
+    "QuantityResolution": {
+      "description": "Represents resolutions for quantities.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "The numeric value that the extracted text denotes."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AgeResolution": {
+      "description": "Represents the Age entity resolution model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        },
+        {
+          "$ref": "#/definitions/QuantityResolution"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "AgeResolution",
+      "properties": {
+        "unit": {
+          "type": "string",
+          "enum": [
+            "Unspecified",
+            "Year",
+            "Month",
+            "Week",
+            "Day"
+          ],
+          "x-ms-enum": {
+            "name": "AgeUnit",
+            "modelAsString": true
+          },
+          "description": "The Age Unit of measurement"
+        }
+      },
+      "required": [
+        "unit"
+      ]
+    },
+    "VolumeResolution": {
+      "description": "Represents the volume entity resolution model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        },
+        {
+          "$ref": "#/definitions/QuantityResolution"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "VolumeResolution",
+      "properties": {
+        "unit": {
+          "type": "string",
+          "enum": [
+            "Unspecified",
+            "CubicMeter",
+            "CubicCentimeter",
+            "CubicMillimeter",
+            "Hectoliter",
+            "Decaliter",
+            "Liter",
+            "Centiliter",
+            "Milliliter",
+            "CubicYard",
+            "CubicInch",
+            "CubicFoot",
+            "CubicMile",
+            "FluidOunce",
+            "Teaspoon",
+            "Tablespoon",
+            "Pint",
+            "Quart",
+            "Cup",
+            "Gill",
+            "Pinch",
+            "FluidDram",
+            "Barrel",
+            "Minim",
+            "Cord",
+            "Peck",
+            "Bushel",
+            "Hogshead"
+          ],
+          "x-ms-enum": {
+            "name": "VolumeUnit",
+            "modelAsString": true
+          },
+          "description": "The Volume Unit of measurement"
+        }
+      },
+      "required": [
+        "unit"
+      ]
+    },
+    "SpeedResolution": {
+      "description": "Represents the speed entity resolution model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        },
+        {
+          "$ref": "#/definitions/QuantityResolution"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "SpeedResolution",
+      "properties": {
+        "unit": {
+          "type": "string",
+          "enum": [
+            "Unspecified",
+            "MetersPerSecond",
+            "KilometersPerHour",
+            "KilometersPerMinute",
+            "KilometersPerSecond",
+            "MilesPerHour",
+            "Knot",
+            "FootPerSecond",
+            "FootPerMinute",
+            "YardsPerMinute",
+            "YardsPerSecond",
+            "MetersPerMillisecond",
+            "CentimetersPerMillisecond",
+            "KilometersPerMillisecond"
+          ],
+          "x-ms-enum": {
+            "name": "SpeedUnit",
+            "modelAsString": true
+          },
+          "description": "The speed Unit of measurement"
+        }
+      },
+      "required": [
+        "unit"
+      ]
+    },
+    "AreaResolution": {
+      "description": "Represents the area entity resolution model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        },
+        {
+          "$ref": "#/definitions/QuantityResolution"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "AreaResolution",
+      "properties": {
+        "unit": {
+          "type": "string",
+          "enum": [
+            "Unspecified",
+            "SquareKilometer",
+            "SquareHectometer",
+            "SquareDecameter",
+            "SquareDecimeter",
+            "SquareMeter",
+            "SquareCentimeter",
+            "SquareMillimeter",
+            "SquareInch",
+            "SquareFoot",
+            "SquareMile",
+            "SquareYard",
+            "Acre"
+          ],
+          "x-ms-enum": {
+            "name": "AreaUnit",
+            "modelAsString": true
+          },
+          "description": "The area Unit of measurement"
+        }
+      },
+      "required": [
+        "unit"
+      ]
+    },
+    "LengthResolution": {
+      "description": "Represents the length entity resolution model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        },
+        {
+          "$ref": "#/definitions/QuantityResolution"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "LengthResolution",
+      "properties": {
+        "unit": {
+          "type": "string",
+          "enum": [
+            "Unspecified",
+            "Kilometer",
+            "Hectometer",
+            "Decameter",
+            "Meter",
+            "Decimeter",
+            "Centimeter",
+            "Millimeter",
+            "Micrometer",
+            "Nanometer",
+            "Picometer",
+            "Mile",
+            "Yard",
+            "Inch",
+            "Foot",
+            "LightYear",
+            "Pt"
+          ],
+          "x-ms-enum": {
+            "name": "LengthUnit",
+            "modelAsString": true
+          },
+          "description": "The length Unit of measurement"
+        }
+      },
+      "required": [
+        "unit"
+      ]
+    },
+    "InformationResolution": {
+      "description": "Represents the information (data) entity resolution model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        },
+        {
+          "$ref": "#/definitions/QuantityResolution"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "InformationResolution",
+      "properties": {
+        "unit": {
+          "type": "string",
+          "enum": [
+            "Unspecified",
+            "Bit",
+            "Kilobit",
+            "Megabit",
+            "Gigabit",
+            "Terabit",
+            "Petabit",
+            "Byte",
+            "Kilobyte",
+            "Megabyte",
+            "Gigabyte",
+            "Terabyte",
+            "Petabyte"
+          ],
+          "x-ms-enum": {
+            "name": "InformationUnit",
+            "modelAsString": true
+          },
+          "description": "The information (data) Unit of measurement."
+        }
+      },
+      "required": [
+        "unit"
+      ]
+    },
+    "TemperatureResolution": {
+      "description": "Represents the temperature entity resolution model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        },
+        {
+          "$ref": "#/definitions/QuantityResolution"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "TemperatureResolution",
+      "properties": {
+        "unit": {
+          "type": "string",
+          "enum": [
+            "Unspecified",
+            "Fahrenheit",
+            "Kelvin",
+            "Rankine",
+            "Celsius"
+          ],
+          "x-ms-enum": {
+            "name": "TemperatureUnit",
+            "modelAsString": true
+          },
+          "description": "The temperature Unit of measurement."
+        }
+      },
+      "required": [
+        "unit"
+      ]
+    },
+    "WeightResolution": {
+      "description": "Represents the weight entity resolution model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        },
+        {
+          "$ref": "#/definitions/QuantityResolution"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "WeightResolution",
+      "properties": {
+        "unit": {
+          "type": "string",
+          "enum": [
+            "Unspecified",
+            "Kilogram",
+            "Gram",
+            "Milligram",
+            "Gallon",
+            "MetricTon",
+            "Ton",
+            "Pound",
+            "Ounce",
+            "Grain",
+            "PennyWeight",
+            "LongTonBritish",
+            "ShortTonUS",
+            "ShortHundredWeightUS",
+            "Stone",
+            "Dram"
+          ],
+          "x-ms-enum": {
+            "name": "WeightUnit",
+            "modelAsString": true
+          },
+          "description": "The weight Unit of measurement."
+        }
+      },
+      "required": [
+        "unit"
       ]
     },
     "CurrencyResolution": {
+      "description": "Represents the currency entity resolution model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        },
+        {
+          "$ref": "#/definitions/QuantityResolution"
+        }
+      ],
       "type": "object",
+      "x-ms-discriminator-value": "CurrencyResolution",
       "properties": {
         "ISO4217": {
           "type": "string",
-          "description": "The alphabetic code based on another ISO standard, ISO 3166, which lists the codes for country names. The first two letters of the ISO 4217 three-letter code are the same as the code for the country name, and, where possible, the third letter corresponds to the first letter of the currency name.",
-          "x-ms-client-name": "iso4217"
+          "description": "The alphabetic code based on another ISO standard, ISO 3166, which lists the codes for country names. The first two letters of the ISO 4217 three-letter code are the same as the code for the country name, and, where possible, the third letter corresponds to the first letter of the currency name."
         },
         "value": {
           "type": "number",
@@ -1591,81 +1239,55 @@
           "description": "The unit of the amount captured in the extracted entity"
         }
       },
-      "description": "Represents the currency entity resolution model.",
       "required": [
         "value",
         "unit"
-      ],
+      ]
+    },
+    "BooleanResolution": {
+      "description": "A resolution for boolean expressions",
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
         }
-      ]
-    },
-    "CustomResult": {
+      ],
       "type": "object",
+      "x-ms-discriminator-value": "BooleanResolution",
       "properties": {
-        "errors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DocumentError"
-          },
-          "description": "Errors by document id.",
-          "x-typespec-name": "DocumentError[]"
-        },
-        "statistics": {
-          "$ref": "#/definitions/RequestStatistics",
-          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
-        },
-        "projectName": {
-          "type": "string",
-          "description": "This field indicates the project name for the model."
-        },
-        "deploymentName": {
-          "type": "string",
-          "description": "This field indicates the deployment name for the model."
+        "value": {
+          "type": "boolean"
         }
       },
-      "description": "Custom Task Results",
       "required": [
-        "errors",
-        "projectName",
-        "deploymentName"
-      ]
-    },
-    "CustomTaskParameters": {
-      "type": "object",
-      "properties": {
-        "loggingOptOut": {
-          "type": "boolean",
-          "description": "logging opt out",
-          "default": false
-        },
-        "projectName": {
-          "type": "string",
-          "description": "This field indicates the project name for the model."
-        },
-        "deploymentName": {
-          "type": "string",
-          "description": "This field indicates the deployment name for the model."
-        }
-      },
-      "description": "Parameters object for a text analysis task using custom models.",
-      "required": [
-        "loggingOptOut",
-        "projectName",
-        "deploymentName"
+        "value"
       ]
     },
     "DateTimeResolution": {
+      "description": "A resolution for datetime entity instances.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        }
+      ],
       "type": "object",
+      "x-ms-discriminator-value": "DateTimeResolution",
       "properties": {
         "timex": {
-          "type": "string",
-          "description": "An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
+          "$ref": "#/definitions/TimeExpression"
         },
         "dateTimeSubKind": {
-          "$ref": "#/definitions/DateTimeSubKind",
+          "type": "string",
+          "enum": [
+            "Time",
+            "Date",
+            "DateTime",
+            "Duration",
+            "Set"
+          ],
+          "x-ms-enum": {
+            "name": "DateTimeSubKind",
+            "modelAsString": true
+          },
           "description": "The DateTime SubKind"
         },
         "value": {
@@ -1673,716 +1295,39 @@
           "description": "The actual time that the extracted text denote."
         },
         "modifier": {
-          "$ref": "#/definitions/TemporalModifier",
-          "description": "An optional modifier of a date/time instance."
+          "$ref": "#/definitions/TemporalModifier"
         }
       },
-      "description": "A resolution for datetime entity instances.",
       "required": [
         "timex",
         "dateTimeSubKind",
         "value"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        }
       ]
-    },
-    "DateTimeSubKind": {
-      "type": "string",
-      "description": "The Datetime SubKind.",
-      "enum": [
-        "Time",
-        "Date",
-        "DateTime",
-        "Duration",
-        "Set"
-      ],
-      "x-ms-enum": {
-        "name": "DateTimeSubKind",
-        "modelAsString": true
-      }
-    },
-    "DocumentError": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ID of the input document."
-        },
-        "error": {
-          "$ref": "#/definitions/ErrorResponse",
-          "description": "Error encountered."
-        }
-      },
-      "description": "Contains details of errors encountered during a job execution.",
-      "required": [
-        "id",
-        "error"
-      ]
-    },
-    "EntitySubtype": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "The Subtype of an extracted entity type."
-        }
-      },
-      "description": "The concrete entity Subtype model of extra information.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseExtraInformation"
-        }
-      ]
-    },
-    "ErrorCode": {
-      "type": "string",
-      "description": "Human-readable error code.",
-      "enum": [
-        "InvalidRequest",
-        "InvalidArgument",
-        "Unauthorized",
-        "Forbidden",
-        "NotFound",
-        "ProjectNotFound",
-        "OperationNotFound",
-        "AzureCognitiveSearchNotFound",
-        "AzureCognitiveSearchIndexNotFound",
-        "TooManyRequests",
-        "AzureCognitiveSearchThrottling",
-        "AzureCognitiveSearchIndexLimitReached",
-        "InternalServerError",
-        "ServiceUnavailable",
-        "Timeout",
-        "QuotaExceeded",
-        "Conflict",
-        "Warning"
-      ],
-      "x-ms-enum": {
-        "name": "ErrorCode",
-        "modelAsString": true
-      }
-    },
-    "ErrorResponse": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "The error object."
-        },
-        "errorCode": {
-          "type": "string",
-          "description": "String error code indicating what went wrong."
-        }
-      },
-      "description": "Error response.",
-      "required": [
-        "error"
-      ]
-    },
-    "InformationResolution": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "number",
-          "format": "double",
-          "description": "The numeric value that the extracted text denotes."
-        },
-        "unit": {
-          "$ref": "#/definitions/InformationUnit",
-          "description": "The information (data) Unit of measurement."
-        }
-      },
-      "description": "Represents the information (data) entity resolution model.",
-      "required": [
-        "value",
-        "unit"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        }
-      ]
-    },
-    "InformationUnit": {
-      "type": "string",
-      "description": "The information (data) Unit of measurement.",
-      "enum": [
-        "Unspecified",
-        "Bit",
-        "Kilobit",
-        "Megabit",
-        "Gigabit",
-        "Terabit",
-        "Petabit",
-        "Byte",
-        "Kilobyte",
-        "Megabyte",
-        "Gigabyte",
-        "Terabyte",
-        "Petabyte"
-      ],
-      "x-ms-enum": {
-        "name": "InformationUnit",
-        "modelAsString": true
-      }
-    },
-    "InnerErrorCode": {
-      "type": "string",
-      "description": "Human-readable error code.",
-      "enum": [
-        "InvalidRequest",
-        "InvalidParameterValue",
-        "KnowledgeBaseNotFound",
-        "AzureCognitiveSearchNotFound",
-        "AzureCognitiveSearchThrottling",
-        "ExtractionFailure",
-        "InvalidRequestBodyFormat",
-        "EmptyRequest",
-        "MissingInputDocuments",
-        "InvalidDocument",
-        "ModelVersionIncorrect",
-        "InvalidDocumentBatch",
-        "UnsupportedLanguageCode",
-        "InvalidCountryHint"
-      ],
-      "x-ms-enum": {
-        "name": "InnerErrorCode",
-        "modelAsString": true
-      }
-    },
-    "InnerErrorModel": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "$ref": "#/definitions/InnerErrorCode",
-          "description": "One of a server-defined set of error codes."
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message."
-        },
-        "details": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Error details.",
-          "x-typespec-name": "Record<string>"
-        },
-        "target": {
-          "type": "string",
-          "description": "Error target."
-        },
-        "innererror": {
-          "$ref": "#/definitions/InnerErrorModel",
-          "description": "An object containing more specific information than the current object about the error."
-        }
-      },
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
-      "required": [
-        "code",
-        "message"
-      ],
-      "allOf": [
-        {
-          "type": "object",
-          "additionalProperties": true,
-          "x-typespec-name": "Record<unknown>"
-        }
-      ],
-      "additionalProperties": true
-    },
-    "InputWarning": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Warning code."
-        },
-        "message": {
-          "type": "string",
-          "description": "Warning message."
-        },
-        "targetRef": {
-          "type": "string",
-          "description": "A JSON pointer reference indicating the target object."
-        }
-      },
-      "description": "Contains details of warnings encountered during a job execution.",
-      "required": [
-        "code",
-        "message"
-      ]
-    },
-    "ItemizedSummaryContext": {
-      "type": "object",
-      "properties": {
-        "conversationItemId": {
-          "type": "string",
-          "description": "Reference to the ID of ConversationItem."
-        }
-      },
-      "description": "Context of the summary with a conversation item ID.",
-      "required": [
-        "conversationItemId"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/SummaryContext"
-        }
-      ]
-    },
-    "JobErrors": {
-      "type": "object",
-      "properties": {
-        "errors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorResponse"
-          },
-          "x-ms-identifiers": [],
-          "description": "errors",
-          "x-typespec-name": "ErrorResponse[]"
-        }
-      },
-      "description": "job errors",
-      "required": [
-        "errors"
-      ]
-    },
-    "JobState": {
-      "type": "object",
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "display name"
-        },
-        "createdDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date and time job created"
-        },
-        "expirationDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date and time job expires"
-        },
-        "jobId": {
-          "type": "string",
-          "description": "job ID",
-          "readOnly": true
-        },
-        "lastUpdateDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "last updated date and time"
-        },
-        "status": {
-          "$ref": "#/definitions/State",
-          "description": "status"
-        },
-        "errors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorResponse"
-          },
-          "x-ms-identifiers": [],
-          "description": "errors",
-          "x-typespec-name": "ErrorResponse[]"
-        },
-        "nextlink": {
-          "type": "string",
-          "description": "next link"
-        }
-      },
-      "description": "job state",
-      "required": [
-        "createdDateTime",
-        "jobId",
-        "lastUpdateDateTime",
-        "status"
-      ]
-    },
-    "KnowledgeBaseAnswer": {
-      "type": "object",
-      "properties": {
-        "questions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "List of questions associated with the answer.",
-          "x-typespec-name": "string[]"
-        },
-        "answer": {
-          "type": "string",
-          "description": "Answer text."
-        },
-        "confidenceScore": {
-          "type": "number",
-          "format": "double",
-          "description": "Answer confidence score, value ranges from 0 to 1.",
-          "minimum": 0,
-          "maximum": 1,
-          "x-ms-client-name": "confidence"
-        },
-        "id": {
-          "type": "integer",
-          "format": "int32",
-          "description": "ID of the QnA result.",
-          "x-ms-client-name": "qnaId"
-        },
-        "source": {
-          "type": "string",
-          "description": "Source of QnA result."
-        },
-        "metadata": {
-          "$ref": "#/definitions/object",
-          "description": "Metadata associated with the answer, useful to categorize or filter question answers."
-        },
-        "dialog": {
-          "$ref": "#/definitions/KnowledgeBaseAnswerDialog",
-          "description": "Dialog associated with Answer."
-        },
-        "answerSpan": {
-          "$ref": "#/definitions/AnswerSpan",
-          "description": "Answer span object of QnA with respect to user's question.",
-          "x-ms-client-name": "shortAnswer"
-        }
-      },
-      "description": "Represents knowledge base answer."
-    },
-    "KnowledgeBaseAnswerContext": {
-      "type": "object",
-      "properties": {
-        "previousQnaId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Previous turn top answer result QnA ID."
-        },
-        "previousUserQuery": {
-          "type": "string",
-          "description": "Previous user query.",
-          "x-ms-client-name": "previousQuestion"
-        }
-      },
-      "description": "Context object with previous QnA's information.",
-      "required": [
-        "previousQnaId"
-      ]
-    },
-    "KnowledgeBaseAnswerDialog": {
-      "type": "object",
-      "properties": {
-        "isContextOnly": {
-          "type": "boolean",
-          "description": "To mark if a prompt is relevant only with a previous question or not. If true, do not include this QnA as search result for queries without context; otherwise, if false, ignores context and includes this QnA in search result."
-        },
-        "prompts": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/KnowledgeBaseAnswerPrompt"
-          },
-          "x-ms-identifiers": [],
-          "description": "List of prompts associated with the answer.",
-          "x-typespec-name": "KnowledgeBaseAnswerPrompt[]",
-          "maxItems": 20
-        }
-      },
-      "description": "Dialog associated with Answer."
-    },
-    "KnowledgeBaseAnswerPrompt": {
-      "type": "object",
-      "properties": {
-        "displayOrder": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Index of the prompt - used in ordering of the prompts."
-        },
-        "qnaId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "QnA ID corresponding to the prompt."
-        },
-        "displayText": {
-          "type": "string",
-          "description": "Text displayed to represent a follow up question prompt.",
-          "maxLength": 200
-        }
-      },
-      "description": "Prompt for an answer.",
-      "required": [
-        "displayOrder",
-        "qnaId",
-        "displayText"
-      ]
-    },
-    "LengthResolution": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "number",
-          "format": "double",
-          "description": "The numeric value that the extracted text denotes."
-        },
-        "unit": {
-          "$ref": "#/definitions/LengthUnit",
-          "description": "The length Unit of measurement"
-        }
-      },
-      "description": "Represents the length entity resolution model.",
-      "required": [
-        "value",
-        "unit"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        }
-      ]
-    },
-    "LengthUnit": {
-      "type": "string",
-      "description": "The length unit of measurement.",
-      "enum": [
-        "Unspecified",
-        "Kilometer",
-        "Hectometer",
-        "Decameter",
-        "Meter",
-        "Decimeter",
-        "Centimeter",
-        "Millimeter",
-        "Micrometer",
-        "Nanometer",
-        "Picometer",
-        "Mile",
-        "Yard",
-        "Inch",
-        "Foot",
-        "LightYear",
-        "Pt"
-      ],
-      "x-ms-enum": {
-        "name": "LengthUnit",
-        "modelAsString": true
-      }
-    },
-    "ListKey": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "type": "string",
-          "description": "The canonical form of the extracted entity."
-        }
-      },
-      "description": "The list key extra data kind.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseExtraInformation"
-        }
-      ]
-    },
-    "LogicalOperationKind": {
-      "type": "string",
-      "description": "Set to 'OR' or 'AND' for using corresponding logical operation.",
-      "enum": [
-        "AND",
-        "OR"
-      ],
-      "x-ms-enum": {
-        "name": "LogicalOperationKind",
-        "modelAsString": true
-      }
-    },
-    "LuisCallingOptions": {
-      "type": "object",
-      "properties": {
-        "verbose": {
-          "type": "boolean",
-          "description": "Enable verbose response."
-        },
-        "log": {
-          "type": "boolean",
-          "description": "Save log to add in training utterances later."
-        },
-        "show-all-intents": {
-          "type": "boolean",
-          "description": "Set true to show all intents."
-        },
-        "timezoneOffset": {
-          "type": "number",
-          "format": "float",
-          "description": "The timezone offset for the location of the request."
-        },
-        "spellCheck": {
-          "type": "boolean",
-          "description": "Enable spell checking."
-        },
-        "bing-spell-check-subscription-key": {
-          "type": "string",
-          "description": "The subscription key to use when enabling Bing spell check"
-        }
-      },
-      "description": "This customizes how the service calls LUIS Generally Available projects."
-    },
-    "LuisParameters": {
-      "type": "object",
-      "properties": {
-        "targetProjectKind": {
-          "$ref": "#/definitions/targetProjectKind",
-          "description": "The type of a target service"
-        },
-        "apiVersion": {
-          "type": "string",
-          "description": "The API version to use when call a specific target service."
-        },
-        "query": {
-          "type": "string",
-          "description": "The utterance to predict.",
-          "maxLength": 500
-        },
-        "callingOptions": {
-          "$ref": "#/definitions/LuisCallingOptions",
-          "description": "This customizes how the service calls LUIS Generally Available projects."
-        }
-      },
-      "description": "This is a set of request parameters for LUIS Generally Available projects.",
-      "required": [
-        "targetProjectKind"
-      ],
-      "allOf": [
-        {
-          "type": "object",
-          "additionalProperties": true,
-          "x-typespec-name": "Record<unknown>"
-        }
-      ],
-      "additionalProperties": true
-    },
-    "LuisTargetIntentResult": {
-      "type": "object",
-      "properties": {
-        "result": {
-          "type": "object",
-          "additionalProperties": true,
-          "description": "The actual response from a LUIS Generally Available application.",
-          "x-typespec-name": "Record<unknown>"
-        }
-      },
-      "description": "It is a wrap up of LUIS Generally Available response.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TargetIntentResult"
-        }
-      ]
-    },
-    "MetadataFilter": {
-      "type": "object",
-      "properties": {
-        "metadata": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MetadataRecord"
-          },
-          "x-ms-identifiers": [],
-          "description": "List of metadata.",
-          "x-typespec-name": "MetadataRecord[]"
-        },
-        "logicalOperation": {
-          "$ref": "#/definitions/LogicalOperationKind",
-          "description": "Operation used to join metadata filters.",
-          "default": "AND"
-        }
-      },
-      "description": "Find QnAs that are associated with the given list of metadata."
-    },
-    "MetadataRecord": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "type": "string",
-          "description": "Metadata Key from Metadata dictionary used in the QnA."
-        },
-        "value": {
-          "type": "string",
-          "description": "Metadata Value from Metadata dictionary used in the QnA."
-        }
-      },
-      "description": "Object to provide the key value pair for each metadata.",
-      "required": [
-        "key",
-        "value"
-      ]
-    },
-    "Modality": {
-      "type": "string",
-      "description": "Enumeration of supported conversational modalities.",
-      "enum": [
-        "transcript",
-        "text"
-      ],
-      "x-ms-enum": {
-        "name": "Modality",
-        "modelAsString": true
-      }
-    },
-    "MultiLanguageConversationAnalysisInput": {
-      "type": "object",
-      "properties": {
-        "conversations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Conversation"
-          },
-          "description": "Array of conversation items",
-          "x-typespec-name": "Conversation[]"
-        }
-      },
-      "description": "Multi Language Conversation Analysis Input",
-      "required": [
-        "conversations"
-      ]
-    },
-    "NoneLinkedTargetIntentResult": {
-      "type": "object",
-      "properties": {
-        "result": {
-          "$ref": "#/definitions/ConversationResult",
-          "description": "The actual response from a Conversation project."
-        }
-      },
-      "description": "A wrap up of non-linked intent response.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TargetIntentResult"
-        }
-      ]
-    },
-    "NumberKind": {
-      "type": "string",
-      "description": "The type of the extracted number entity.",
-      "enum": [
-        "Integer",
-        "Decimal",
-        "Power",
-        "Fraction",
-        "Percent",
-        "Unspecified"
-      ],
-      "x-ms-enum": {
-        "name": "NumberKind",
-        "modelAsString": true
-      }
     },
     "NumberResolution": {
+      "description": "A resolution for numeric entity instances.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        }
+      ],
       "type": "object",
+      "x-ms-discriminator-value": "NumberResolution",
       "properties": {
         "numberKind": {
-          "$ref": "#/definitions/NumberKind",
+          "type": "string",
+          "enum": [
+            "Integer",
+            "Decimal",
+            "Power",
+            "Fraction",
+            "Percent",
+            "Unspecified"
+          ],
+          "x-ms-enum": {
+            "name": "NumberKind",
+            "modelAsString": true
+          },
           "description": "The type of the extracted number entity."
         },
         "value": {
@@ -2391,22 +1336,106 @@
           "description": "A numeric representation of what the extracted text denotes."
         }
       },
-      "description": "A resolution for numeric entity instances.",
       "required": [
         "numberKind",
         "value"
-      ],
+      ]
+    },
+    "OrdinalResolution": {
+      "description": "A resolution for ordinal numbers entity instances.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
         }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "OrdinalResolution",
+      "properties": {
+        "offset": {
+          "type": "string",
+          "description": "The offset With respect to the reference (e.g., offset = -1 in \"show me the second to last\""
+        },
+        "relativeTo": {
+          "type": "string",
+          "enum": [
+            "Current",
+            "End",
+            "Start"
+          ],
+          "x-ms-enum": {
+            "name": "RelativeTo",
+            "modelAsString": true
+          },
+          "description": "The reference point that the ordinal number denotes."
+        },
+        "value": {
+          "type": "string",
+          "description": "A simple arithmetic expression that the ordinal denotes."
+        }
+      },
+      "required": [
+        "offset",
+        "relativeTo",
+        "value"
       ]
     },
-    "NumericRangeResolution": {
+    "TemporalSpanResolution": {
+      "description": "represents the resolution of a date and/or time span.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        }
+      ],
       "type": "object",
+      "x-ms-discriminator-value": "TemporalSpanResolution",
+      "properties": {
+        "begin": {
+          "$ref": "#/definitions/TimeExpression"
+        },
+        "end": {
+          "$ref": "#/definitions/TimeExpression"
+        },
+        "duration": {
+          "type": "string",
+          "description": "An optional duration value formatted based on the ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations)"
+        },
+        "modifier": {
+          "$ref": "#/definitions/TemporalModifier"
+        },
+        "timex": {
+          "type": "string",
+          "description": "An optional triplet containing the beginning, the end, and the duration all stated as ISO 8601 formatted strings."
+        }
+      }
+    },
+    "NumericRangeResolution": {
+      "description": "represents the resolution of numeric intervals.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResolution"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "NumericRangeResolution",
       "properties": {
         "rangeKind": {
-          "$ref": "#/definitions/RangeKind",
+          "type": "string",
+          "enum": [
+            "Number",
+            "Speed",
+            "Weight",
+            "Length",
+            "Volume",
+            "Area",
+            "Age",
+            "Information",
+            "Temperature",
+            "Currency"
+          ],
+          "x-ms-enum": {
+            "name": "RangeKind",
+            "modelAsString": true
+          },
           "description": "The kind of range that the resolution object represents."
         },
         "minimum": {
@@ -2420,774 +1449,11 @@
           "description": "The ending value of the interval."
         }
       },
-      "description": "represents the resolution of numeric intervals.",
       "required": [
         "rangeKind",
         "minimum",
         "maximum"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        }
       ]
-    },
-    "OrchestrationPrediction": {
-      "type": "object",
-      "properties": {
-        "intents": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/TargetIntentResult"
-          },
-          "description": "A dictionary that contains all intents. A key is an intent name and a value is its confidence score and target type. The top intent's value also contains the actual response from the target project.",
-          "x-typespec-name": "Record<TargetIntentResult>"
-        }
-      },
-      "description": "This represents the prediction result of an Orchestration project.",
-      "required": [
-        "intents"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/BasePrediction"
-        }
-      ]
-    },
-    "OrdinalResolution": {
-      "type": "object",
-      "properties": {
-        "offset": {
-          "type": "string",
-          "description": "The offset With respect to the reference (e.g., offset = -1 in \"show me the second to last\""
-        },
-        "relativeTo": {
-          "$ref": "#/definitions/RelativeTo",
-          "description": "The reference point that the ordinal number denotes."
-        },
-        "value": {
-          "type": "string",
-          "description": "A simple arithmetic expression that the ordinal denotes."
-        }
-      },
-      "description": "A resolution for ordinal numbers entity instances.",
-      "required": [
-        "offset",
-        "relativeTo",
-        "value"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        }
-      ]
-    },
-    "PreBuiltResult": {
-      "type": "object",
-      "properties": {
-        "errors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DocumentError"
-          },
-          "description": "Errors by document id.",
-          "x-typespec-name": "DocumentError[]"
-        },
-        "statistics": {
-          "$ref": "#/definitions/RequestStatistics",
-          "description": "statistics"
-        },
-        "modelVersion": {
-          "type": "string",
-          "description": "This field indicates which model is used for scoring."
-        }
-      },
-      "description": "Pre built result",
-      "required": [
-        "errors",
-        "modelVersion"
-      ]
-    },
-    "PreBuiltTaskParameters": {
-      "type": "object",
-      "properties": {
-        "modelVersion": {
-          "type": "string",
-          "description": "model version",
-          "default": "latest"
-        }
-      },
-      "description": "Parameters object for a text analysis task using pre-built models.",
-      "required": [
-        "modelVersion"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/TaskParameters"
-        }
-      ]
-    },
-    "QuantityResolution": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "number",
-          "format": "double",
-          "description": "The numeric value that the extracted text denotes."
-        }
-      },
-      "description": "Represents resolutions for quantities.",
-      "required": [
-        "value"
-      ]
-    },
-    "QueryFilters": {
-      "type": "object",
-      "properties": {
-        "metadataFilter": {
-          "$ref": "#/definitions/MetadataFilter",
-          "description": "filters over knowledge base."
-        },
-        "sourceFilter": {
-          "$ref": "#/definitions/SourceFilter",
-          "description": "filters over knowledge base."
-        },
-        "logicalOperation": {
-          "$ref": "#/definitions/LogicalOperationKind",
-          "description": "Logical operation used to join metadata filter with source filter.",
-          "default": "AND"
-        }
-      },
-      "description": "filters over knowledge base."
-    },
-    "QuestionAnsweringParameters": {
-      "type": "object",
-      "properties": {
-        "callingOptions": {
-          "$ref": "#/definitions/AnswersOptions",
-          "description": "The options sent to a Question Answering KB."
-        }
-      },
-      "description": "This is a set of request parameters for Question Answering knowledge bases.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalysisParameters"
-        }
-      ]
-    },
-    "QuestionAnsweringTargetIntentResult": {
-      "type": "object",
-      "properties": {
-        "result": {
-          "$ref": "#/definitions/AnswersResult",
-          "description": "The generated answer by a Question Answering KB."
-        }
-      },
-      "description": "It is a wrap up a Question Answering KB response.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TargetIntentResult"
-        }
-      ]
-    },
-    "RangeKind": {
-      "type": "string",
-      "description": "The kind of range that the resolution object represents.",
-      "enum": [
-        "Number",
-        "Speed",
-        "Weight",
-        "Length",
-        "Volume",
-        "Area",
-        "Age",
-        "Information",
-        "Temperature",
-        "Currency"
-      ],
-      "x-ms-enum": {
-        "name": "RangeKind",
-        "modelAsString": true
-      }
-    },
-    "RankerKind": {
-      "type": "string",
-      "description": "Type of ranker to be used",
-      "enum": [
-        "Default ranker",
-        "Question only ranker"
-      ],
-      "x-ms-enum": {
-        "name": "RankerKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Default",
-            "value": "Default ranker",
-            "description": "Default ranker."
-          },
-          {
-            "name": "Question",
-            "value": "Question only ranker",
-            "description": "Question only ranker."
-          }
-        ]
-      }
-    },
-    "RedactedTranscriptContent": {
-      "type": "object",
-      "properties": {
-        "itn": {
-          "type": "string",
-          "description": "Redacted output for input in inverse-text-normalized format."
-        },
-        "maskedItn": {
-          "type": "string",
-          "description": "Redacted output for input in masked inverse-text-normalized format."
-        },
-        "text": {
-          "type": "string",
-          "description": "Redacted output for input in text (Microsoft's speech-to-text 'display') format."
-        },
-        "lexical": {
-          "type": "string",
-          "description": "Redacted output for input in lexical format."
-        },
-        "audioTimings": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AudioTiming"
-          },
-          "x-ms-identifiers": [],
-          "description": "List of redacted audio segments.",
-          "x-typespec-name": "AudioTiming[]"
-        }
-      },
-      "description": "Transcript content response that the service generates, with all necessary personally identifiable information redacted."
-    },
-    "RedactionCharacter": {
-      "type": "string",
-      "description": "Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction.",
-      "enum": [
-        "!",
-        "#",
-        "$",
-        "%",
-        "&",
-        "*",
-        "+",
-        "-",
-        "=",
-        "?",
-        "@",
-        "^",
-        "_",
-        "~"
-      ],
-      "x-ms-enum": {
-        "name": "RedactionCharacter",
-        "modelAsString": true
-      }
-    },
-    "RegexKey": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "type": "string",
-          "description": "The key of the regex pattern used in extracting the entity."
-        },
-        "regexPattern": {
-          "type": "string",
-          "description": "The .NET regex pattern used in extracting the entity. Please visit https://docs.microsoft.com/dotnet/standard/base-types/regular-expressions for more information about .NET regular expressions."
-        }
-      },
-      "description": "The regex key extra data kind.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseExtraInformation"
-        }
-      ]
-    },
-    "RelativeTo": {
-      "type": "string",
-      "description": "The reference point that the ordinal number denotes.",
-      "enum": [
-        "Current",
-        "End",
-        "Start"
-      ],
-      "x-ms-enum": {
-        "name": "RelativeTo",
-        "modelAsString": true
-      }
-    },
-    "RequestStatistics": {
-      "type": "object",
-      "properties": {
-        "documentsCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of documents submitted in the request."
-        },
-        "validDocumentCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of valid documents. This excludes empty, over-size limit or non-supported languages documents."
-        },
-        "erroneousDocumentCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of invalid documents. This includes empty, over-size limit or non-supported languages documents."
-        },
-        "transactionsCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Number of transactions for the request."
-        }
-      },
-      "description": "if showStats=true was specified in the request this field will contain information about the request payload.",
-      "required": [
-        "documentsCount",
-        "validDocumentCount",
-        "erroneousDocumentCount",
-        "transactionsCount"
-      ]
-    },
-    "Sentiment": {
-      "type": "string",
-      "description": "Predicted sentiment",
-      "enum": [
-        "positive",
-        "neutral",
-        "negative",
-        "mixed"
-      ],
-      "x-ms-enum": {
-        "name": "Sentiment",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "positive",
-            "value": "positive",
-            "description": "Positive statement"
-          },
-          {
-            "name": "neutral",
-            "value": "neutral",
-            "description": "Neutral statement"
-          },
-          {
-            "name": "negative",
-            "value": "negative",
-            "description": "Negative statement"
-          },
-          {
-            "name": "mixed",
-            "value": "mixed",
-            "description": "Mixed statement"
-          }
-        ]
-      }
-    },
-    "SentimentConfidenceScores": {
-      "type": "object",
-      "properties": {
-        "positive": {
-          "type": "number",
-          "format": "double",
-          "description": "Confidence score for positive sentiment"
-        },
-        "neutral": {
-          "type": "number",
-          "format": "double",
-          "description": "Confidence score for neutral sentiment"
-        },
-        "negative": {
-          "type": "number",
-          "format": "double",
-          "description": "Confidence score for negative sentiment"
-        }
-      },
-      "description": "Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative.",
-      "required": [
-        "positive",
-        "neutral",
-        "negative"
-      ]
-    },
-    "ShortAnswerOptions": {
-      "type": "object",
-      "properties": {
-        "enable": {
-          "type": "boolean",
-          "description": "Enable or disable Answer Span prediction."
-        },
-        "confidenceScoreThreshold": {
-          "type": "number",
-          "format": "double",
-          "description": "Minimum threshold score required to include an answer span, value ranges from 0 to 1.",
-          "minimum": 0,
-          "maximum": 1,
-          "x-ms-client-name": "confidenceThreshold"
-        },
-        "topAnswersWithSpan": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of Top answers to be considered for span prediction from 1 to 10.",
-          "minimum": 1,
-          "maximum": 10,
-          "x-ms-client-name": "top"
-        }
-      },
-      "description": "To configure Answer span prediction feature.",
-      "required": [
-        "enable"
-      ]
-    },
-    "SourceFilter": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "description": "Find QnAs that are associated with any of the given list of sources in knowledge base."
-    },
-    "SpeedResolution": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "number",
-          "format": "double",
-          "description": "The numeric value that the extracted text denotes."
-        },
-        "unit": {
-          "$ref": "#/definitions/SpeedUnit",
-          "description": "The speed Unit of measurement"
-        }
-      },
-      "description": "Represents the speed entity resolution model.",
-      "required": [
-        "value",
-        "unit"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        }
-      ]
-    },
-    "SpeedUnit": {
-      "type": "string",
-      "description": "The speed Unit of measurement",
-      "enum": [
-        "Unspecified",
-        "MetersPerSecond",
-        "KilometersPerHour",
-        "KilometersPerMinute",
-        "KilometersPerSecond",
-        "MilesPerHour",
-        "Knot",
-        "FootPerSecond",
-        "FootPerMinute",
-        "YardsPerMinute",
-        "YardsPerSecond",
-        "MetersPerMillisecond",
-        "CentimetersPerMillisecond",
-        "KilometersPerMillisecond"
-      ],
-      "x-ms-enum": {
-        "name": "SpeedUnit",
-        "modelAsString": true
-      }
-    },
-    "State": {
-      "type": "string",
-      "description": "The status of the task at the mentioned last update time.",
-      "enum": [
-        "notStarted",
-        "running",
-        "succeeded",
-        "partiallyCompleted",
-        "failed",
-        "cancelled",
-        "cancelling"
-      ],
-      "x-ms-enum": {
-        "name": "State",
-        "modelAsString": true
-      }
-    },
-    "StringIndexType": {
-      "type": "string",
-      "description": "Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.",
-      "enum": [
-        "TextElements_v8",
-        "UnicodeCodePoint",
-        "Utf16CodeUnit"
-      ],
-      "x-ms-enum": {
-        "name": "StringIndexType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "TextElements_v8",
-            "value": "TextElements_v8",
-            "description": "Returned offset and length values will correspond to TextElements (Graphemes and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this option if your application is written in .Net Framework or .Net Core and you will be using StringInfo."
-          },
-          {
-            "name": "UnicodeCodePoint",
-            "value": "UnicodeCodePoint",
-            "description": "Returned offset and length values will correspond to Unicode code points. Use this option if your application is written in a language that support Unicode, for example Python."
-          },
-          {
-            "name": "Utf16CodeUnit",
-            "value": "Utf16CodeUnit",
-            "description": "Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
-          }
-        ]
-      }
-    },
-    "SummaryAspect": {
-      "type": "string",
-      "description": "Supported parameters for a conversational summarization task.",
-      "enum": [
-        "issue",
-        "resolution",
-        "chapterTitle",
-        "narrative"
-      ],
-      "x-ms-enum": {
-        "name": "SummaryAspect",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "issue",
-            "value": "issue",
-            "description": "Summary of issues in transcripts of web chats and service calls between customer-service agents and customers."
-          },
-          {
-            "name": "resolution",
-            "value": "resolution",
-            "description": "Summary of resolutions in transcripts of web chats and service calls between customer-service agents and customers."
-          },
-          {
-            "name": "chapterTitle",
-            "value": "chapterTitle",
-            "description": "Chapter title of any conversation. It's usually one phrase or several phrases naturally combined. Long conversations tend to have more chapters. You can find the chapter boundary from the summary context."
-          },
-          {
-            "name": "narrative",
-            "value": "narrative",
-            "description": "Generic narrative summary of any conversation. It generally converts the conversational language into formal written language, compresses the text length, and keeps the salient information."
-          }
-        ]
-      }
-    },
-    "SummaryContext": {
-      "type": "object",
-      "properties": {
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Start position for the context. Use of different 'stringIndexType' values can affect the offset returned."
-        },
-        "length": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The length of the context. Use of different 'stringIndexType' values can affect the length returned."
-        }
-      },
-      "description": "The context of the summary.",
-      "required": [
-        "offset",
-        "length"
-      ]
-    },
-    "SummaryResult": {
-      "type": "object",
-      "properties": {
-        "errors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DocumentError"
-          },
-          "description": "Errors by document id.",
-          "x-typespec-name": "DocumentError[]"
-        },
-        "statistics": {
-          "$ref": "#/definitions/RequestStatistics",
-          "description": "statistics"
-        },
-        "modelVersion": {
-          "type": "string",
-          "description": "This field indicates which model is used for scoring."
-        }
-      },
-      "description": "Summary Results",
-      "required": [
-        "errors",
-        "modelVersion"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/SummaryResultBase"
-        }
-      ]
-    },
-    "SummaryResultBase": {
-      "type": "object",
-      "properties": {
-        "conversations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ConversationsSummaryResult"
-          },
-          "description": "array of conversations",
-          "x-typespec-name": "ConversationsSummaryResult[]"
-        }
-      },
-      "description": "Summary Results Base",
-      "required": [
-        "conversations"
-      ]
-    },
-    "SummaryResultItem": {
-      "type": "object",
-      "properties": {
-        "aspect": {
-          "type": "string",
-          "description": "aspect"
-        },
-        "text": {
-          "type": "string",
-          "description": "text"
-        },
-        "contexts": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ItemizedSummaryContext"
-          },
-          "x-ms-identifiers": [],
-          "description": "Context list of the summary.",
-          "x-typespec-name": "ItemizedSummaryContext[]"
-        }
-      },
-      "description": "Summary Result Item",
-      "required": [
-        "aspect",
-        "text"
-      ]
-    },
-    "TargetIntentResult": {
-      "type": "object",
-      "properties": {
-        "targetProjectKind": {
-          "$ref": "#/definitions/targetProjectKind",
-          "description": "This is the base class of an intent prediction"
-        },
-        "apiVersion": {
-          "type": "string",
-          "description": "The API version used to call a target service."
-        },
-        "confidenceScore": {
-          "type": "number",
-          "format": "double",
-          "description": "The prediction score and it ranges from 0.0 to 1.0.",
-          "minimum": 0,
-          "maximum": 1,
-          "x-ms-client-name": "confidence"
-        }
-      },
-      "description": "This is the base class of an intent prediction",
-      "discriminator": "targetProjectKind",
-      "required": [
-        "targetProjectKind",
-        "confidenceScore"
-      ]
-    },
-    "TaskIdentifier": {
-      "type": "object",
-      "properties": {
-        "taskName": {
-          "type": "string",
-          "description": "task name"
-        }
-      },
-      "description": "Base task object.",
-      "required": [
-        "taskName"
-      ]
-    },
-    "TaskParameters": {
-      "type": "object",
-      "properties": {
-        "loggingOptOut": {
-          "type": "boolean",
-          "description": "logging opt out",
-          "default": false
-        }
-      },
-      "description": "Base parameters object for a text analysis task.",
-      "required": [
-        "loggingOptOut"
-      ]
-    },
-    "TaskState": {
-      "type": "object",
-      "properties": {
-        "lastUpdateDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last updated time in UTC for the task."
-        },
-        "status": {
-          "$ref": "#/definitions/State",
-          "description": "The status of the task at the mentioned last update time."
-        }
-      },
-      "description": "Returns the current state of the task.",
-      "required": [
-        "lastUpdateDateTime",
-        "status"
-      ]
-    },
-    "TemperatureResolution": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "number",
-          "format": "double",
-          "description": "The numeric value that the extracted text denotes."
-        },
-        "unit": {
-          "$ref": "#/definitions/TemperatureUnit",
-          "description": "The temperature Unit of measurement."
-        }
-      },
-      "description": "Represents the temperature entity resolution model.",
-      "required": [
-        "value",
-        "unit"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        }
-      ]
-    },
-    "TemperatureUnit": {
-      "type": "string",
-      "description": "The temperature Unit of measurement.",
-      "enum": [
-        "Unspecified",
-        "Fahrenheit",
-        "Kelvin",
-        "Rankine",
-        "Celsius"
-      ],
-      "x-ms-enum": {
-        "name": "TemperatureUnit",
-        "modelAsString": true
-      }
     },
     "TemporalModifier": {
       "type": "string",
@@ -3217,50 +1483,339 @@
         "modelAsString": true
       }
     },
-    "TemporalSpanResolution": {
+    "TimeExpression": {
+      "type": "string",
+      "description": "An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
+    },
+    "BaseExtraInformation": {
+      "description": "The abstract base object for entity extra information.",
       "type": "object",
+      "discriminator": "extraInformationKind",
       "properties": {
-        "begin": {
+        "extraInformationKind": {
+          "description": "The extra information object kind.",
           "type": "string",
-          "description": "represents the resolution of a date and/or time span. An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
-        },
-        "end": {
-          "type": "string",
-          "description": "represents the resolution of a date and/or time span. An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
-        },
-        "duration": {
-          "type": "string",
-          "description": "An optional duration value formatted based on the ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations)"
-        },
-        "modifier": {
-          "$ref": "#/definitions/TemporalModifier",
-          "description": "An optional modifier of a date/time instance."
-        },
-        "timex": {
-          "type": "string",
-          "description": "An optional triplet containing the beginning, the end, and the duration all stated as ISO 8601 formatted strings."
+          "enum": [
+            "EntitySubtype",
+            "ListKey",
+            "RegexKey"
+          ],
+          "x-ms-enum": {
+            "name": "ExtraInformationKind",
+            "modelAsString": true
+          }
         }
       },
-      "description": "represents the resolution of a date and/or time span.",
+      "required": [
+        "extraInformationKind"
+      ]
+    },
+    "EntitySubtype": {
+      "description": "The concrete entity Subtype model of extra information.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseResolution"
+          "$ref": "#/definitions/BaseExtraInformation"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "EntitySubtype",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The Subtype of an extracted entity type."
+        }
+      }
+    },
+    "ListKey": {
+      "description": "The list key extra data kind.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseExtraInformation"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "ListKey",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The canonical form of the extracted entity."
+        }
+      }
+    },
+    "RegexKey": {
+      "description": "The regex key extra data kind.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseExtraInformation"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "RegexKey",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key of the regex pattern used in extracting the entity."
+        },
+        "regexPattern": {
+          "type": "string",
+          "description": "The .NET regex pattern used in extracting the entity. Please visit https://docs.microsoft.com/dotnet/standard/base-types/regular-expressions for more information about .NET regular expressions."
+        }
+      }
+    },
+    "LuisTargetIntentResult": {
+      "type": "object",
+      "description": "It is a wrap up of LUIS Generally Available response.",
+      "x-ms-discriminator-value": "Luis",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetIntentResult"
+        }
+      ],
+      "properties": {
+        "result": {
+          "type": "object",
+          "description": "The actual response from a LUIS Generally Available application."
+        }
+      }
+    },
+    "QuestionAnsweringTargetIntentResult": {
+      "type": "object",
+      "description": "It is a wrap up a Question Answering KB response.",
+      "x-ms-discriminator-value": "QuestionAnswering",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetIntentResult"
+        }
+      ],
+      "properties": {
+        "result": {
+          "description": "The generated answer by a Question Answering KB.",
+          "$ref": "common.json#/definitions/AnswersResult"
+        }
+      }
+    },
+    "AnalyzeConversationJobsInput": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "Display name for the analysis job.",
+          "type": "string"
+        },
+        "analysisInput": {
+          "$ref": "#/definitions/MultiLanguageConversationAnalysisInput"
+        },
+        "tasks": {
+          "description": "Set of tasks to execute on the input conversation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnalyzeConversationLROTask"
+          }
+        }
+      },
+      "required": [
+        "analysisInput",
+        "tasks"
+      ]
+    },
+    "AnalyzeConversationLROTask": {
+      "type": "object",
+      "description": "Base class for a long-running conversation input task.",
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AnalyzeConversationLROTaskKind"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/TaskIdentifier"
         }
       ]
     },
-    "TextConversation": {
-      "type": "object",
+    "AnalyzeConversationLROTaskKind": {
+      "type": "string",
+      "description": "Enumeration of supported analysis tasks on a collection of conversations.",
+      "enum": [
+        "ConversationalSummarizationTask"
+      ],
+      "x-ms-enum": {
+        "name": "AnalyzeConversationLROTaskKind",
+        "modelAsString": true
+      }
+    },
+    "AnalyzeConversationResultsKind": {
+      "type": "string",
+      "description": "Enumeration of results for supported conversation analysis tasks.",
+      "enum": [
+        "ConversationalSummarizationResults"
+      ],
+      "x-ms-enum": {
+        "name": "AnalyzeConversationResultsKind",
+        "modelAsString": true
+      }
+    },
+    "AnalyzeConversationJobState": {
+      "description": "Contains the status of the submitted job for analyzing a conversation, along with related statistics.",
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/JobState"
+        },
+        {
+          "$ref": "#/definitions/ConversationTasksState"
+        },
+        {
+          "$ref": "#/definitions/AnalyzeConversationJobStatistics"
+        }
+      ]
+    },
+    "AnalyzeConversationJobStatistics": {
+      "description": "Contains the statistics for the submitted job.",
       "properties": {
-        "conversationItems": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TextConversationItem"
-          },
-          "description": "Ordered list of text conversation items in the conversation.",
-          "x-typespec-name": "TextConversationItem[]"
+        "statistics": {
+          "$ref": "#/definitions/ConversationRequestStatistics"
         }
       },
-      "description": "model for text conversation",
+      "type": "object"
+    },
+    "ConversationTasksState": {
+      "description": "Contains the state for the tasks that are being executed as part of the submitted job for analyzing a conversation.",
+      "properties": {
+        "tasks": {
+          "properties": {
+            "completed": {
+              "description": "Count of tasks that finished successfully.",
+              "type": "integer",
+              "format": "int32"
+            },
+            "failed": {
+              "description": "Count of tasks that failed.",
+              "type": "integer",
+              "format": "int32"
+            },
+            "inProgress": {
+              "description": "Count of tasks that are currently in progress.",
+              "type": "integer",
+              "format": "int32"
+            },
+            "total": {
+              "description": "Total count of tasks submitted as part of the job.",
+              "type": "integer",
+              "format": "int32"
+            },
+            "items": {
+              "description": "List of results from tasks (if available).",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AnalyzeConversationJobResult"
+              }
+            }
+          },
+          "required": [
+            "total",
+            "completed",
+            "failed",
+            "inProgress"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "tasks"
+      ],
+      "type": "object"
+    },
+    "AnalyzeConversationJobResult": {
+      "type": "object",
+      "description": "Container for results of all tasks in the conversation job.",
+      "discriminator": "kind",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AnalyzeConversationResultsKind"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/TaskState"
+        },
+        {
+          "$ref": "common.json#/definitions/TaskIdentifier"
+        }
+      ],
+      "required": [
+        "kind"
+      ]
+    },
+    "MultiLanguageConversationAnalysisInput": {
+      "type": "object",
+      "required": [
+        "conversations"
+      ],
+      "properties": {
+        "conversations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Conversation"
+          }
+        }
+      }
+    },
+    "Conversation": {
+      "type": "object",
+      "description": "Complete ordered set of utterances (spoken or written) by one or more speakers to be used for analysis.",
+      "discriminator": "modality",
+      "required": [
+        "id",
+        "language",
+        "modality"
+      ],
+      "properties": {
+        "id": {
+          "description": "Unique identifier for the conversation.",
+          "type": "string"
+        },
+        "language": {
+          "description": "Language of the conversation item in BCP-47 format.",
+          "type": "string"
+        },
+        "modality": {
+          "$ref": "#/definitions/Modality"
+        },
+        "domain": {
+          "$ref": "#/definitions/ConversationDomain"
+        }
+      }
+    },
+    "Modality": {
+      "type": "string",
+      "description": "Enumeration of supported conversational modalities.",
+      "enum": [
+        "transcript",
+        "text"
+      ],
+      "x-ms-enum": {
+        "name": "InputModality",
+        "modelAsString": true
+      }
+    },
+    "ConversationDomain": {
+      "type": "string",
+      "description": "Enumeration of supported conversational domains.",
+      "enum": [
+        "finance",
+        "healthcare",
+        "generic"
+      ],
+      "x-ms-enum": {
+        "name": "ConversationDomain",
+        "modelAsString": true
+      }
+    },
+    "TextConversation": {
+      "type": "object",
+      "x-ms-discriminator-value": "text",
       "required": [
         "conversationItems"
       ],
@@ -3268,50 +1823,52 @@
         {
           "$ref": "#/definitions/Conversation"
         }
-      ]
-    },
-    "TextConversationItem": {
-      "type": "object",
+      ],
       "properties": {
-        "text": {
-          "type": "string",
-          "description": "The text input"
+        "conversationItems": {
+          "description": "Ordered list of text conversation items in the conversation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextConversationItem"
+          }
         }
-      },
-      "description": "The text modality of an input conversation.",
+      }
+    },
+    "TranscriptConversation": {
+      "type": "object",
+      "x-ms-discriminator-value": "transcript",
       "required": [
-        "text"
+        "conversationItems"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Conversation"
+        }
+      ],
+      "properties": {
+        "conversationItems": {
+          "description": "Ordered list of transcript conversation items in the conversation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TranscriptConversationItem"
+          }
+        }
+      }
+    },
+    "TranscriptConversationItem": {
+      "type": "object",
+      "description": "Additional properties for supporting transcript conversation.",
+      "required": [
+        "text",
+        "lexical",
+        "itn",
+        "maskedItn"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/ConversationItemBase"
         }
-      ]
-    },
-    "TranscriptConversation": {
-      "type": "object",
-      "properties": {
-        "conversationItems": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TranscriptConversationItem"
-          },
-          "description": "Ordered list of transcript conversation items in the conversation.",
-          "x-typespec-name": "TranscriptConversationItem[]"
-        }
-      },
-      "description": "model for transcript conversation",
-      "required": [
-        "conversationItems"
       ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Conversation"
-        }
-      ]
-    },
-    "TranscriptConversationItem": {
-      "type": "object",
       "properties": {
         "itn": {
           "type": "string",
@@ -3329,260 +1886,329 @@
           "type": "string",
           "description": "Lexical form of the recognized text from the speech-to-text API, with the actual words recognized."
         },
-        "conversationItemLevelTiming": {
-          "$ref": "#/definitions/ConversationItemLevelTiming",
-          "description": "Audio timing at the conversation item level. This still can help with AI quality if word-level audio timings are not available."
-        }
-      },
-      "description": "Additional properties for supporting transcript conversation.",
-      "required": [
-        "itn",
-        "maskedItn",
-        "text",
-        "lexical"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConversationItemBase"
-        }
-      ]
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Analyze Conversations Service Versions",
-      "enum": [
-        "2022-05-01",
-        "2023-04-01",
-        "2023-04-15-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2022_05_01",
-            "value": "2022-05-01",
-            "description": "Version 2022-05-01"
-          },
-          {
-            "name": "v2023_04_01",
-            "value": "2023-04-01",
-            "description": "Version 2023-04-01"
-          },
-          {
-            "name": "v2023_04_15_preview",
-            "value": "2023-04-15-preview",
-            "description": "Version 2023-04-15-preview"
+        "wordLevelTimings": {
+          "type": "array",
+          "description": "List of word-level audio timing information.",
+          "items": {
+            "$ref": "#/definitions/WordLevelTiming"
           }
-        ]
+        },
+        "conversationItemLevelTiming": {
+          "description": "Audio timing at the conversation item level. This still can help with AI quality if word-level audio timings are not available.",
+          "$ref": "#/definitions/ConversationItemLevelTiming"
+        }
       }
     },
-    "VolumeResolution": {
+    "RedactedTranscriptContent": {
       "type": "object",
+      "description": "Transcript content response that the service generates, with all necessary personally identifiable information redacted.",
       "properties": {
-        "value": {
-          "type": "number",
-          "format": "double",
-          "description": "The numeric value that the extracted text denotes."
+        "itn": {
+          "type": "string",
+          "description": "Redacted output for input in inverse-text-normalized format."
         },
-        "unit": {
-          "$ref": "#/definitions/VolumeUnit",
-          "description": "The Volume Unit of measurement"
-        }
-      },
-      "description": "Represents the volume entity resolution model.",
-      "required": [
-        "value",
-        "unit"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        }
-      ]
-    },
-    "VolumeUnit": {
-      "type": "string",
-      "description": "The Volume Unit of measurement",
-      "enum": [
-        "Unspecified",
-        "CubicMeter",
-        "CubicCentimeter",
-        "CubicMillimeter",
-        "Hectoliter",
-        "Decaliter",
-        "Liter",
-        "Centiliter",
-        "Milliliter",
-        "CubicYard",
-        "CubicInch",
-        "CubicFoot",
-        "CubicMile",
-        "FluidOunce",
-        "Teaspoon",
-        "Tablespoon",
-        "Pint",
-        "Quart",
-        "Cup",
-        "Gill",
-        "Pinch",
-        "FluidDram",
-        "Barrel",
-        "Minim",
-        "Cord",
-        "Peck",
-        "Bushel",
-        "Hogshead"
-      ],
-      "x-ms-enum": {
-        "name": "VolumeUnit",
-        "modelAsString": true
-      }
-    },
-    "WeightResolution": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "number",
-          "format": "double",
-          "description": "The numeric value that the extracted text denotes."
+        "maskedItn": {
+          "type": "string",
+          "description": "Redacted output for input in masked inverse-text-normalized format."
         },
-        "unit": {
-          "$ref": "#/definitions/WeightUnit",
-          "description": "The weight Unit of measurement."
+        "text": {
+          "type": "string",
+          "description": "Redacted output for input in text (Microsoft's speech-to-text 'display') format."
+        },
+        "lexical": {
+          "type": "string",
+          "description": "Redacted output for input in lexical format."
+        },
+        "audioTimings": {
+          "type": "array",
+          "description": "List of redacted audio segments.",
+          "items": {
+            "$ref": "#/definitions/AudioTiming"
+          }
         }
-      },
-      "description": "Represents the weight entity resolution model.",
-      "required": [
-        "value",
-        "unit"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        }
-      ]
-    },
-    "WeightUnit": {
-      "type": "string",
-      "description": "The weight Unit of measurement.",
-      "enum": [
-        "Unspecified",
-        "Kilogram",
-        "Gram",
-        "Milligram",
-        "Gallon",
-        "MetricTon",
-        "Ton",
-        "Pound",
-        "Ounce",
-        "Grain",
-        "PennyWeight",
-        "LongTonBritish",
-        "ShortTonUS",
-        "ShortHundredWeightUS",
-        "Stone",
-        "Dram"
-      ],
-      "x-ms-enum": {
-        "name": "WeightUnit",
-        "modelAsString": true
       }
     },
     "WordLevelTiming": {
       "type": "object",
+      "description": "Word-level timing information that the speech-to-text API generates. The words in this object should have 1:1 correspondence with the lexical input to allow for audio redaction.",
       "properties": {
         "word": {
           "type": "string",
           "description": "Recognized word."
         }
       },
-      "description": "Word-level timing information that the speech-to-text API generates. The words in this object should have 1:1 correspondence with the lexical input to allow for audio redaction.",
       "allOf": [
         {
           "$ref": "#/definitions/AudioTiming"
         }
       ]
     },
-    "extraInformationKind": {
-      "type": "string",
-      "description": "The extra information object kind.",
-      "enum": [
-        "EntitySubtype",
-        "ListKey",
-        "RegexKey"
-      ],
-      "x-ms-enum": {
-        "name": "extraInformationKind",
-        "modelAsString": true
-      }
-    },
-    "object": {
+    "AudioTiming": {
       "type": "object",
-      "properties": {},
-      "description": "Represent a model"
-    },
-    "projectKind": {
-      "type": "string",
-      "description": "The type of the project.",
-      "enum": [
-        "Conversation",
-        "Orchestration"
-      ],
-      "x-ms-enum": {
-        "name": "projectKind",
-        "modelAsString": true
+      "description": "Audio timing information.",
+      "properties": {
+        "offset": {
+          "description": "Offset from the start of speech audio, in ticks. 1 tick = 100 nanoseconds.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "duration": {
+          "description": "Duration of word articulation, in ticks. 1 tick = 100 nanoseconds.",
+          "type": "integer",
+          "format": "int64"
+        }
       }
     },
-    "resolutionKind": {
-      "type": "string",
-      "description": "The entity resolution object kind.",
-      "enum": [
-        "BooleanResolution",
-        "DateTimeResolution",
-        "NumberResolution",
-        "OrdinalResolution",
-        "SpeedResolution",
-        "WeightResolution",
-        "LengthResolution",
-        "VolumeResolution",
-        "AreaResolution",
-        "AgeResolution",
-        "InformationResolution",
-        "TemperatureResolution",
-        "CurrencyResolution",
-        "NumericRangeResolution",
-        "TemporalSpanResolution"
+    "ConversationResultBase": {
+      "type": "object",
+      "description": "Shared attributes for all conversational task results.",
+      "required": [
+        "id",
+        "warnings"
       ],
-      "x-ms-enum": {
-        "name": "resolutionKind",
-        "modelAsString": true
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty conversation identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered in processing the document.",
+          "items": {
+            "$ref": "common.json#/definitions/InputWarning"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/ConversationStatistics"
+        }
       }
     },
-    "targetProjectKind": {
-      "type": "string",
-      "description": "The type of a target service.",
-      "enum": [
-        "Luis",
-        "Conversation",
-        "QuestionAnswering",
-        "NonLinked"
+    "ConversationStatistics": {
+      "type": "object",
+      "description": "If showStats=true was specified in the request, this field contains information about the conversation payload.",
+      "required": [
+        "transactionsCount"
       ],
-      "x-ms-enum": {
-        "name": "targetProjectKind",
-        "modelAsString": true
+      "properties": {
+        "transactionsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of text units for the request."
+        }
       }
+    },
+    "ConversationRequestStatistics": {
+      "type": "object",
+      "description": "if showStats=true was specified in the request, this field contains information about the request payload.",
+      "required": [
+        "conversationsCount",
+        "validConversationsCount",
+        "erroneousConversationsCount"
+      ],
+      "properties": {
+        "conversationsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of conversations submitted in the request."
+        },
+        "validConversationsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of conversation documents. This excludes documents that are empty, over the size limit, or in unsupported languages."
+        },
+        "erroneousConversationsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of invalid documents. This includes documents that are empty, over the size limit, or in unsupported languages."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/RequestStatistics"
+        }
+      ]
+    },
+    "ConversationItemLevelTiming": {
+      "type": "object",
+      "description": "Audio timing at the conversation item level.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AudioTiming"
+        }
+      ]
+    },
+    "AnalyzeConversationSummarizationTask": {
+      "type": "object",
+      "description": "Task definition for conversational summarization.",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/ConversationSummarizationTaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeConversationLROTask"
+        }
+      ],
+      "x-ms-discriminator-value": "ConversationalSummarizationTask"
+    },
+    "ConversationSummarizationTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for a conversational summarization task.",
+      "required": [
+        "summaryAspects"
+      ],
+      "properties": {
+        "summaryAspects": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "issue",
+              "resolution",
+              "chapterTitle",
+              "narrative"
+            ],
+            "x-ms-enum": {
+              "name": "SummaryAspect",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "issue",
+                  "description": "Summary of issues in transcripts of web chats and service calls between customer-service agents and customers."
+                },
+                {
+                  "value": "resolution",
+                  "description": "Summary of resolutions in transcripts of web chats and service calls between customer-service agents and customers."
+                },
+                {
+                  "value": "chapterTitle",
+                  "description": "Chapter title of any conversation. It's usually one phrase or several phrases naturally combined. Long conversations tend to have more chapters. You can find the chapter boundary from the summary context."
+                },
+                {
+                  "value": "narrative",
+                  "description": "Generic narrative summary of any conversation. It generally converts the conversational language into formal written language, compresses the text length, and keeps the salient information."
+                }
+              ]
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+        },
+        {
+          "$ref": "common.json#/definitions/AbstractiveSummarizationTaskParametersBase"
+        }
+      ]
+    },
+    "AnalyzeConversationSummarizationResult": {
+      "type": "object",
+      "description": "Result for the summarization task on the conversation.",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/SummaryResult"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeConversationJobResult"
+        }
+      ],
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "ConversationalSummarizationResults"
+    },
+    "SummaryResult": {
+      "type": "object",
+      "required": [
+        "conversations"
+      ],
+      "properties": {
+        "conversations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConversationsSummaryResult"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/PreBuiltResult"
+        }
+      ]
+    },
+    "ConversationsSummaryResult": {
+      "type": "object",
+      "required": [
+        "summaries"
+      ],
+      "properties": {
+        "summaries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SummaryResultItem"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationResultBase"
+        }
+      ]
+    },
+    "SummaryResultItem": {
+      "type": "object",
+      "properties": {
+        "aspect": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "contexts": {
+          "type": "array",
+          "description": "Context list of the summary.",
+          "items": {
+            "$ref": "#/definitions/ItemizedSummaryContext"
+          }
+        }
+      },
+      "required": [
+        "aspect",
+        "text"
+      ]
+    },
+    "ItemizedSummaryContext": {
+      "type": "object",
+      "description": "Context of the summary with a conversation item ID.",
+      "required": [
+        "conversationItemId"
+      ],
+      "properties": {
+        "conversationItemId": {
+          "type": "string",
+          "description": "Reference to the ID of ConversationItem."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/SummaryContext"
+        }
+      ]
     }
   },
   "parameters": {
-    "Azure.Core.Foundations.ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
+    "ConversationAnalysisOptions": {
+      "name": "ConversationAnalysisOptions",
+      "in": "body",
       "required": true,
-      "description": "The API version to use for this operation.",
-      "x-ms-client-name": "apiVersion",
-      "type": "string",
-      "minLength": 1,
+      "schema": {
+        "$ref": "#/definitions/ConversationAnalysisOptions"
+      },
+      "description": "Post body of the request.",
       "x-ms-parameter-location": "method"
     }
   }

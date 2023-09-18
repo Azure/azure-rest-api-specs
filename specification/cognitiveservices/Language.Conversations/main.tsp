@@ -1,15 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
-import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
-import "@azure-tools/typespec-autorest";
 import "./common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using OpenAPI;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
@@ -41,14 +38,15 @@ enum Versions {
   @doc("Version 2022-05-01")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2022_05_01: "2022-05-01",
+}
 
-  @doc("Version 2023-04-01")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2023_04_01: "2023-04-01",
-
-  @doc("Version 2023-04-15-preview")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2023_04_15_preview: "2023-04-15-preview",
+@doc("Resource model")
+@TypeSpec.Rest.resource("language")
+model Conversations {
+  @key
+  @doc("id")
+  @visibility("create")
+  id: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
@@ -78,10 +76,7 @@ enum AnalyzeConversationTaskResultsKind {
 
 @discriminator("kind")
 @doc("The base class of a conversation input task.")
-@resource("language")
 model AnalyzeConversationTask {
-  @key
-  @visibility("read", "create")
   @doc("The base class of a conversation input task.")
   kind: AnalyzeConversationTaskKind.Conversation;
 }
@@ -169,7 +164,6 @@ model LuisCallingOptions {
   @doc("Enable verbose response.")
   verbose?: boolean;
 
-
   @doc("Save log to add in training utterances later.")
   log?: boolean;
 
@@ -240,7 +234,7 @@ model ConversationTargetIntentResult extends TargetIntentResult {
   targetProjectKind: targetProjectKind.Conversation;
 
   @doc("The actual response from a Conversation project.")
-  result?: ConversationResult;
+  result: ConversationResult;
 }
 
 @doc("The response returned by a Conversation project.")
@@ -318,8 +312,6 @@ enum extraInformationKind {
   EntitySubtype,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'ListKey' should have a documentation or description, please use decorator @doc to add it."
   ListKey,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'RegexKey' should have a documentation or description, please use decorator @doc to add it."
-  RegexKey,
 }
 
 @doc("The concrete entity Subtype model of extra information.")
@@ -338,19 +330,6 @@ model ListKey extends BaseExtraInformation {
 
   @doc("The canonical form of the extracted entity.")
   key?: string;
-}
-
-@doc("The regex key extra data kind.")
-@added(Versions.v2023_04_01)
-model RegexKey extends BaseExtraInformation {
-  @doc("The regex key extra data kind.")
-  extraInformationKind: extraInformationKind.RegexKey;
-
-  @doc("The key of the regex pattern used in extracting the entity.")
-  key?: string;
-
-  @doc("The .NET regex pattern used in extracting the entity. Please visit https://docs.microsoft.com/dotnet/standard/base-types/regular-expressions for more information about .NET regular expressions.")
-  regexPattern?: string;
 }
 
 @doc("The abstract base class for entity resolutions.")
@@ -484,7 +463,7 @@ model DateTimeResolution extends BaseResolution {
   resolutionKind: resolutionKind.DateTimeResolution;
 
   @doc("An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)")
-  timex: string;
+  timex: TimeExpression;
 
   @doc("The DateTime SubKind")
   dateTimeSubKind: DateTimeSubKind;
@@ -528,21 +507,17 @@ model TemporalSpanResolution extends BaseResolution {
   @doc("represents the resolution of a date and/or time span.")
   resolutionKind: resolutionKind.TemporalSpanResolution;
 
-  @doc("represents the resolution of a date and/or time span. An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)")
-  begin?: string;
+  @doc("represents the resolution of a date and/or time span.")
+  begin?: TimeExpression;
 
-  @doc("represents the resolution of a date and/or time span. An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)")
-  end?: string;
+  @doc("represents the resolution of a date and/or time span.")
+  end?: TimeExpression;
 
   @doc("An optional duration value formatted based on the ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations)")
   duration?: string;
 
   @doc("An optional modifier of a date/time instance.")
   modifier?: TemporalModifier;
-
-  @doc("An optional triplet containing the beginning, the end, and the duration all stated as ISO 8601 formatted strings.")
-  @added(Versions.v2023_04_01)
-  timex?: string;
 }
 
 @doc("represents the resolution of numeric intervals.")
@@ -559,6 +534,9 @@ model NumericRangeResolution extends BaseResolution {
   @doc("The ending value of the interval.")
   maximum: float64;
 }
+
+@doc("An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)")
+model TimeExpression {}
 
 @doc("It is a wrap up of LUIS Generally Available response.")
 model LuisTargetIntentResult extends TargetIntentResult {
@@ -577,595 +555,6 @@ model QuestionAnsweringTargetIntentResult extends TargetIntentResult {
 
   @doc("The generated answer by a Question Answering KB.")
   result?: AnswersResult;
-}
-
-@doc("It is a wrap up a Question Answering KB response.")
-@added(Versions.v2023_04_01)
-@resource("language/analyze-conversations/jobs")
-model AnalyzeConversationJobsInput {
-  @doc("Display name for the analysis job.")
-  displayName?: string;
-
-  @added(Versions.v2023_04_01)
-  @doc("Analysis Input")
-  @key
-  @visibility("read", "create")
-  analysisInput: MultiLanguageConversationAnalysisInput;
-
-  @added(Versions.v2023_04_01)
-  @doc("Set of tasks to execute on the input conversation.")
-  tasks: Array<AnalyzeConversationLROTask>;
-}
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
-@doc("Base class for a long-running conversation input task.")
-@discriminator("kind")
-@added(Versions.v2023_04_01)
-model AnalyzeConversationLROTask extends TaskIdentifier {
-  @doc("Enumeration of supported analysis tasks on a collection of conversations.")
-  kind: AnalyzeConversationLROTaskKind;
-}
-
-@doc("Enumeration of supported analysis tasks on a collection of conversations.")
-@added(Versions.v2023_04_01)
-enum AnalyzeConversationLROTaskKind {
-  @doc("Conversational Summarization Task")
-  ConversationalSummarizationTask,
-
-  @added(Versions.v2023_04_15_preview)
-  @doc("Conversational PII Task")
-  ConversationalPIITask,
-  
-  @added(Versions.v2023_04_15_preview)
-  @doc("Custom Conversational Summarization Task")
-  CustomConversationalSummarizationTask,
-  
-  @added(Versions.v2023_04_15_preview)
-  @doc("Conversational Sentiment Task")
-  ConversationalSentimentTask
-}
-
-@doc("Enumeration of results for supported conversation analysis Results.")
-@added(Versions.v2023_04_01)
-enum AnalyzeConversationResultsKind {
-  @doc("Conversational Summarization Results")
-  ConversationalSummarizationResults,
-  
-  @added(Versions.v2023_04_15_preview)
-  @doc("Conversational PII Results")
-  ConversationalPIIResults,
-  
-  @added(Versions.v2023_04_15_preview)
-  @doc("Custom Conversational Summarization Results")
-  CustomConversationalSummarizationResults,
-  
-  @added(Versions.v2023_04_15_preview)
-  @doc("Conversational Sentiment Results")
-  ConversationalSentimentResults
-}
-
-@doc("Contains the status of the submitted job for analyzing a conversation, along with related statistics.")
-@added(Versions.v2023_04_01)
-@resource("language/analyze-conversations/jobs")
-model AnalyzeConversationJobState {
-  ...JobState;
-  ...ConversationTaskState;
-  ...AnalyzeConversationJobStatistics;
-}
-
-@doc("Contains the statistics for the submitted job.")
-@added(Versions.v2023_04_01)
-model AnalyzeConversationJobStatistics {
-  @doc("Contains the statistics for the submitted job.")
-  statistics?: ConversationRequestStatistics;
-}
-
-@doc("Contains the state for the tasks that are being executed as part of the submitted job for analyzing a conversation.")
-@added(Versions.v2023_04_01)
-model ConversationTaskState {
-  @doc("tasks")
-  tasks: {
-    @doc("Count of tasks that finished successfully.")
-    completed: int32;
-
-    @doc("Count of tasks that failed.")
-    failed: int32;
-
-    @doc("Count of tasks that are currently in progress.")
-    inProgress: int32;
-
-    @doc("Total count of tasks submitted as part of the job.")
-    total: int32;
-
-    @doc("List of results from tasks (if available).")
-    @added(Versions.v2023_04_01)
-    items?: Array<AnalyzeConversationJobResult>;
-  };
-}
-
-@doc("Container for results of all tasks in the conversation job.")
-@discriminator("kind")
-@added(Versions.v2023_04_01)
-model AnalyzeConversationJobResult extends TaskState {
-  ...TaskIdentifier;
-
-  @doc("discriminator kind")
-  kind: AnalyzeConversationResultsKind;
-}
-
-@doc("Multi Language Conversation Analysis Input")
-@added(Versions.v2023_04_01)
-model MultiLanguageConversationAnalysisInput {
-  @doc("Array of conversation items")
-  conversations: Array<Conversation>;
-}
-
-@doc("Complete ordered set of utterances (spoken or written) by one or more speakers to be used for analysis.")
-@added(Versions.v2023_04_01)
-@discriminator("modality")
-model Conversation {
-  @doc("Unique identifier for the conversation.")
-  id: string;
-
-  @doc("Language of the conversation item in BCP-47 format.")
-  language: string;
-
-  @doc("modality")
-  modality: Modality;
-
-  @doc("domain")
-  domain?: ConversationDomain;
-}
-
-@doc("Enumeration of supported conversational domains.")
-@added(Versions.v2023_04_01)
-enum ConversationDomain {
-  @doc("Enumeration of supported conversational domains.")
-  finance,
-
-  @doc("Enumeration of supported conversational domains.")
-  healthcare,
-
-  @doc("Enumeration of supported conversational domains.")
-  generic,
-}
-
-@doc("model for text conversation")
-@added(Versions.v2023_04_01)
-model TextConversation extends Conversation {
-  @doc("modality discriminator")
-  modality: Modality.text;
-
-  @doc("Ordered list of text conversation items in the conversation.")
-  conversationItems: Array<TextConversationItem>;
-}
-
-@doc("model for transcript conversation")
-@added(Versions.v2023_04_01)
-model TranscriptConversation extends Conversation {
-  @doc("modality discriminator")
-  modality: Modality.transcript;
-
-  @doc("Ordered list of transcript conversation items in the conversation.")
-  conversationItems: Array<TranscriptConversationItem>;
-}
-
-@doc("Additional properties for supporting transcript conversation.")
-@added(Versions.v2023_04_01)
-model TranscriptConversationItem extends ConversationItemBase {
-  @doc("Inverse text normalization (ITN) representation of input. The inverse-text-normalized form is the recognized text from Microsoft's speech-to-text API, with phone numbers, numbers, abbreviations, and other transformations applied.")
-  itn: string;
-
-  @doc("Inverse-text-normalized format with profanity masking applied.")
-  maskedItn: string;
-
-  @doc("Display form of the recognized text from the speech-to-text API, with punctuation and capitalization added.")
-  text: string;
-
-  @doc("Lexical form of the recognized text from the speech-to-text API, with the actual words recognized.")
-  lexical: string;
-
-  @doc("Audio timing at the conversation item level. This still can help with AI quality if word-level audio timings are not available.")
-  conversationItemLevelTiming?: ConversationItemLevelTiming;
-}
-
-@doc("Transcript content response that the service generates, with all necessary personally identifiable information redacted.")
-@added(Versions.v2023_04_01)
-model RedactedTranscriptContent {
-  @doc("Redacted output for input in inverse-text-normalized format.")
-  itn?: string;
-
-  @doc("Redacted output for input in masked inverse-text-normalized format.")
-  maskedItn?: string;
-
-  @doc("Redacted output for input in text (Microsoft's speech-to-text 'display') format.")
-  text?: string;
-
-  @doc("Redacted output for input in lexical format.")
-  lexical?: string;
-
-  @doc("List of redacted audio segments.")
-  audioTimings?: Array<AudioTiming>;
-}
-
-@doc("Word-level timing information that the speech-to-text API generates. The words in this object should have 1:1 correspondence with the lexical input to allow for audio redaction.")
-@added(Versions.v2023_04_01)
-model WordLevelTiming extends AudioTiming {
-  @doc("Recognized word.")
-  word?: string;
-}
-
-@doc("Audio timing information.")
-@added(Versions.v2023_04_01)
-model AudioTiming {
-  @doc("Offset from the start of speech audio, in ticks. 1 tick = 100 nanoseconds.")
-  offset?: int64;
-
-  @doc("Duration of word articulation, in ticks. 1 tick = 100 nanoseconds.")
-  duration?: int64;
-}
-
-@doc("Shared attributes for all conversational task results.")
-@added(Versions.v2023_04_01)
-model ConversationResultBase {
-  @doc("Unique, non-empty conversation identifier.")
-  id: string;
-
-  @doc("Warnings encountered in processing the document.")
-  warnings: Array<InputWarning>;
-
-  @doc("If showStats=true was specified in the request this field will contain information about the conversation payload.")
-  statistics?: ConversationStatistics;
-}
-
-@doc("If showStats=true was specified in the request, this field contains information about the conversation payload.")
-@added(Versions.v2023_04_01)
-model ConversationStatistics {
-  @doc("Number of text units for the request.")
-  transactionsCount: int32;
-}
-
-@doc("if showStats=true was specified in the request, this field contains information about the request payload.")
-@added(Versions.v2023_04_01)
-model ConversationRequestStatistics extends RequestStatistics {
-  @doc("Number of conversations submitted in the request.")
-  conversationsCount: int32;
-
-  @doc("Number of conversation documents. This excludes documents that are empty, over the size limit, or in unsupported languages.")
-  validConversationCount: int32;
-
-  @doc("Number of invalid documents. This includes documents that are empty, over the size limit, or in unsupported languages.")
-  erroneousConversationsCount: int32;
-}
-
-@doc("Audio timing at the conversation item level.")
-@added(Versions.v2023_04_01)
-model ConversationItemLevelTiming extends AudioTiming {}
-
-@added(Versions.v2023_04_15_preview)
-@doc("Task definition for conversational sentiment.")
-model AnalyzeConversationalSentimentTask extends AnalyzeConversationLROTask {
-  @doc("discriminator kind")
-  kind: AnalyzeConversationLROTaskKind.ConversationalSentimentTask,
-
-  @doc("Supported parameters for a conversational sentiment task.")
-  properties?: ConversationalSentimentTaskParameters,
-}
-
-@added(Versions.v2023_04_15_preview)
-@doc("Supported parameters for a conversational sentiment task.")
-model ConversationalSentimentTaskParameters extends PreBuiltTaskParameters{
-  @doc("For transcript conversations, this parameter provides information regarding which content type should be used for sentiment analysis. The details of the sentiment analysis - like the offset, length and the text itself - will correspond to the text type selected here.")
-  predictionSource?: TranscriptContentType;
-}
-
-@added(Versions.v2023_04_15_preview)
-@doc("Result from the sentiment analysis operation performed on a list of conversations.")
-model AnalyzeConversationSentimentResult extends AnalyzeConversationJobResult {
-  @doc("discriminator kind")
-  kind: AnalyzeConversationResultsKind.ConversationalSentimentResults;
-
-  @doc("The result from sentiment analysis operation for each conversation.")
-  results: ConversationSentimentResults
-}
-
-@added(Versions.v2023_04_15_preview)
-@doc("The result from sentiment analysis operation for each conversation.")
-model ConversationSentimentResults extends PreBuiltResult{
-  @doc("Array of ConversationSentimentResults")
-  conversations: Array<ConversationSentimentResultsConversation>
-}
-
-@added(Versions.v2023_04_15_preview)
-@doc("The result from sentiment analysis operation for each conversation.")
-model ConversationSentimentResultsConversation extends ConversationSentimentResult{
-  ...ConversationResultBase
-}
-
-@added(Versions.v2023_04_15_preview)
-@doc("The result from sentiment analysis operation for each conversation item.")
-model ConversationSentimentResult {
-  @doc("Enumeration of Sentiment operation results for all the conversation items in a conversation.")
-  conversationItems: Array<ConversationSentimentItemResult>
-}
-
-@added(Versions.v2023_04_15_preview)
-@doc("Sentiment operation results for a conversation items")
-model ConversationSentimentItemResult {
-  @doc("The identifier for the conversation item")
-  id: string,
-
-  @doc("The identifier for the speaker")
-  participantId: string,
-
-  @doc("Predicted sentiment")
-  sentiment: Sentiment,
-
-  @doc("Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative.")
-  confidenceScores: SentimentConfidenceScores,
-}
-
-@added(Versions.v2023_04_15_preview)
-@doc("Text that has been catorgerized into pre-defined classes or types such as: person, location, event, product, and organization.")
-model Entity {
-  @doc("Entity text as appears in the request.")
-  text: string,
-
-  @doc("Entity type.")
-  category: string,
-
-  @doc("(Optional) Entity sub type.")
-  subcategory?: string,
-
-  @doc("Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned.")
-  offset: int32,
-
-  @doc("Length for the entity text. Use of different 'stringIndexType' values can affect the length returned.")
-  length: int32,
-
-  @doc("Confidence score between 0 and 1 of the extracted entity.")
-  confidenceScore: float64,
-}
-
-@added(Versions.v2023_04_15_preview)
-@doc("Result from the personally identifiable information detection and redaction operation performed on a list of conversations.")
-model AnalyzeConversationConversationPiiResult extends AnalyzeConversationJobResult {
-  @doc("discriminator kind")
-  kind: AnalyzeConversationResultsKind.ConversationalPIIResults;
-
-  @doc("results")
-  results: ConversationPiiResults;
-}
-
-@added(Versions.v2023_04_15_preview)
-@doc("The result from PII detection and redaction operation for each conversation.")
-model ConversationPiiResults extends PreBuiltResult{
-  @doc("array of conversations")
-  conversations: Array<ConversationalPiiResultWithResultBase>;
-}
-
-@added(Versions.v2023_04_15_preview)
-@doc("Conversation PII result item")
-model ConversationalPiiResultWithResultBase extends ConversationPiiResult{
-  ...ConversationResultBase;
-}
-
-@added(Versions.v2023_04_15_preview)
-@doc("The result from PII detection and redaction operation for each conversation.")
-model ConversationPiiResult {
-  @doc("List of conversationItems")
-  conversationItems: Array<ConversationPiiItemResult>;
-}
-
-@added(Versions.v2023_04_15_preview)
-@doc("The result from PII detection and redaction operation for each conversation.")
-model ConversationPiiItemResult {
-  @doc("Id of the result")
-  id: string,
-
-  @doc("Transcript content response that the service generates, with all necessary personally identifiable information redacted.")
-  redactedContent: RedactedTranscriptContent;
-
-  @doc("Array of Entities")
-  entities: Array<Entity>
-}
-
-@added(Versions.v2023_04_15_preview)
-@doc("Supported parameters for a conversational pii task.")
-model ConversationPiiTaskParameters extends PreBuiltTaskParameters{
-  @doc("Array of ConversationPIICategories")
-  piiCategories?: Array<ConversationPIICategories>;
-
-  @doc("Flag to indicate if response should include audio stream offset and duration for any detected entities to be redacted. By default, audio timing of redacted entities are not included.")
-  redactAudioTiming?: boolean;
-
-  @doc("For transcript conversations, this parameter provides information regarding which content type (ITN, Text, Lexical, Masked ITN) should be used for entity detection. The details of the entities detected - like the offset, length and the text itself - will correspond to the text type selected here.")
-  redactionSource?: TranscriptContentType;
-
-  @doc("Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction.")
-  redactionCharacter?: RedactionCharacter;
-
-  @doc("List of categories that need to be excluded instead of included.")
-  excludePiiCategories?: Array<ConversationPIICategoriesExclude>;
-}
-
-@added(Versions.v2023_04_15_preview)
-@doc("Describes the PII categories to return for detection. If not provided, 'default' categories will be returned which will vary with the language.")
-enum ConversationPIICategories {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  Address,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  CreditCardNumber,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  Email,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  Person,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  NumericIdentifier,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  PhoneNumber,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  USSocialSecurityNumber,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  Miscellaneous,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  All,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  Default,
-}
-
-@added(Versions.v2023_04_15_preview)
-@doc("Describes the PII categories to exclude for detection. If not provided, 'default' categories will be returned which will vary with the language.")
-enum ConversationPIICategoriesExclude {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  Address,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  CreditCardNumber,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  Email,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  Person,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  NumericIdentifier,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  PhoneNumber,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  USSocialSecurityNumber,
-}
-
-@added(Versions.v2023_04_15_preview)
-@doc("Enumeration of supported transcript content types.")
-enum TranscriptContentType {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  lexical,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  itn,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  maskedItn,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  text,
-}
-
-@doc("Task definition for custom conversational summarization.")
-@added(Versions.v2023_04_15_preview)
-model AnalyzeCustomConversationSummarizationTask extends AnalyzeConversationLROTask {
-  @doc("discriminator kind")
-  kind: AnalyzeConversationLROTaskKind.CustomConversationalSummarizationTask;
-
-  @doc("parameters")
-  parameters?: CustomConversationSummarizationTaskParameters;
-}
-
-@doc("Task definition for conversational summarization.")
-@added(Versions.v2023_04_01)
-model AnalyzeConversationSummarizationTask extends AnalyzeConversationLROTask {
-  @doc("discriminator kind")
-  kind: AnalyzeConversationLROTaskKind.ConversationalSummarizationTask;
-
-  @doc("parameters")
-  parameters?: ConversationSummarizationTaskParametersBase;
-}
-
-@doc("Supported parameters for a conversational summarization task.")
-@added(Versions.v2023_04_01)
-model ConversationSummarizationTaskParametersBase  extends AbstractiveSummarizationTaskParametersBase{
-
-  @doc("Array of Summary Aspects")
-  summaryAspects: Array<SummaryAspect>;
-}
-
-@doc("Supported parameters for pre-build conversational summarization task.")
-@added(Versions.v2023_04_01)
-model ConversationSummarizationTaskParameters extends PreBuiltTaskParameters {
-  ...ConversationSummarizationTaskParametersBase;
-}
-
-@doc("Supported parameters for a custom conversation summarization task.")
-@added(Versions.v2023_04_15_preview)
-model CustomConversationSummarizationTaskParameters extends CustomTaskParameters{
-  ...ConversationSummarizationTaskParametersBase;
-}
-
-@doc("Supported parameters for a conversational summarization task.")
-@added(Versions.v2023_04_01)
-enum SummaryAspect {
-  @doc("Summary of issues in transcripts of web chats and service calls between customer-service agents and customers.")
-  issue,
-
-  @doc("Summary of resolutions in transcripts of web chats and service calls between customer-service agents and customers.")
-  resolution,
-
-  @doc("Chapter title of any conversation. It's usually one phrase or several phrases naturally combined. Long conversations tend to have more chapters. You can find the chapter boundary from the summary context.")
-  chapterTitle,
-
-  @doc("Generic narrative summary of any conversation. It generally converts the conversational language into formal written language, compresses the text length, and keeps the salient information.")
-  narrative,
-}
-
-@doc("Result for the summarization task on the conversation.")
-@added(Versions.v2023_04_01)
-model AnalyzeConversationSummarizationResult extends AnalyzeConversationJobResult {
-  @doc("discriminator kind")
-  kind: AnalyzeConversationResultsKind.ConversationalSummarizationResults;
-
-  @doc("results")
-  results: SummaryResult;
-}
-
-@doc("Result for the custom summarization task on the conversation.")
-@added(Versions.v2023_04_15_preview)
-model AnalyzeCustomConversationSummarizationResult extends AnalyzeConversationJobResult {
-  @doc("discriminator kind")
-  kind: AnalyzeConversationResultsKind.CustomConversationalSummarizationResults;
-
-  @doc("Custom Summary Result")
-  results: CustomSummaryResult
-}
-
-@doc("Summary Results Base")
-@added(Versions.v2023_04_01)
-model SummaryResultBase {
-  @doc("array of conversations")
-  conversations: Array<ConversationsSummaryResult>;
-}
-
-@doc("Summary Results")
-@added(Versions.v2023_04_01)
-model SummaryResult extends SummaryResultBase{
-  ...PreBuiltResult;
-}
-
-@added(Versions.v2023_04_15_preview)
-@doc("Custom Summary Results")
-model CustomSummaryResult extends SummaryResultBase{
- ...CustomResult;
-}
-
-@doc("Conversations Summary Result")
-@added(Versions.v2023_04_01)
-model ConversationsSummaryResult extends ConversationResultBase {
-  @doc("array of summaries")
-  summaries: Array<SummaryResultItem>;
-}
-
-@doc("Summary Result Item")
-@added(Versions.v2023_04_01)
-model SummaryResultItem {
-  @doc("aspect")
-  aspect: string;
-
-  @doc("text")
-  text: string;
-
-  @doc("Context list of the summary.")
-  contexts?: Array<ItemizedSummaryContext>;
-}
-
-@doc("Context of the summary with a conversation item ID.")
-@added(Versions.v2023_04_01)
-model ItemizedSummaryContext extends SummaryContext {
-  @doc("Reference to the ID of ConversationItem.")
-  conversationItemId: string;
 }
 
 @doc("Input parameters necessary for a Conversation task.")
@@ -1624,7 +1013,7 @@ enum VolumeUnit {
   Minim,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Cord' should have a documentation or description, please use decorator @doc to add it."
   Cord,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Cord' should have a documentation or description, please use decorator @doc to add it."
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Peck' should have a documentation or description, please use decorator @doc to add it."
   Peck,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Bushel' should have a documentation or description, please use decorator @doc to add it."
   Bushel,
@@ -1669,17 +1058,11 @@ enum WeightUnit {
   Dram,
 }
 
-alias ServiceTraits = NoRepeatableRequests & NoConditionalRequests & NoClientRequestId;
-
-alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
-
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "Operation ID is automatically generated by the OpenAPI emitters and should not normally be specified."
 @doc("Analyzes the input conversation utterance.")
-@actionSeparator("/:")
-@action("analyze-conversations")
-@operationId("AnalyzeConversation")
+@TypeSpec.Rest.actionSeparator("/:")
+@TypeSpec.Rest.action("analyze-conversations")
 //removed examples due to bug
-// @Autorest.example(
+// @example(
 //   "../../../../data-plane/Language/stable/2022-05-01/examples/conversations/SuccessfulAnalyzeConversations.json",
 //   "Conversation project result"
 // )
@@ -1692,37 +1075,8 @@ alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 //   "Orchestration direct target result"
 // )
 @convenientAPI(false)
-op analyzeConversation is Operations.ResourceCollectionAction<
-    AnalyzeConversationTask,
-    AnalyzeConversationTask,
-    AnalyzeConversationTaskResult
-  >;
-
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "Operation ID is automatically generated by the OpenAPI emitters and should not normally be specified."
-@added(Versions.v2023_04_01)
-@doc("Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.")
-@summary("Get analysis status and results")
-@operationId("AnalyzeConversation_JobStatus")
-op jobStatus is Operations.ResourceRead<
-  AnalyzeConversationJobState, 
-  ShowStatsQueryParameter
+op analyzeConversation is Azure.Core.StandardResourceOperations.ResourceCollectionAction<
+  Conversations,
+  AnalyzeConversationTask,
+  AnalyzeConversationTaskResult
 >;
-
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "Operation ID is automatically generated by the OpenAPI emitters and should not normally be specified."
-@added(Versions.v2023_04_01)
-@doc("Analyzes the input conversation utterance.")
-@operationId("AnalyzeConversation_SubmitJob")
-@convenientAPI(false)
-@pollingOperation(jobStatus)
-op submitJob is Operations.LongRunningResourceCreateWithServiceProvidedName<AnalyzeConversationJobsInput>;
-
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "Operation ID is automatically generated by the OpenAPI emitters and should not normally be specified."
-@added(Versions.v2023_04_01)
-@doc("Cancel a long-running job for text analysis of conversations.")
-@summary("Cancel a long-running Text Analysis conversations job")
-@pollingOperation(jobStatus)
-@operationId("AnalyzeConversation_CancelJob")
-@actionSeparator(":")
-@action("cancel")
-op cancel is Operations.LongRunningResourceDelete<AnalyzeConversationJobState, TypeSpec.Http.AcceptedResponse>;
-
