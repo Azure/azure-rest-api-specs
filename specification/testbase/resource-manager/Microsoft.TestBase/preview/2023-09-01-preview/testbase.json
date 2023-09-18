@@ -40,7 +40,7 @@
           "Free Hour Balances"
         ],
         "operationId": "FreeHourBalances_List",
-        "summary": "List the Free Hour Balances of a Test Base Account. The result collection will only contain one element as all the data will be nested in a singleton object.",
+        "summary": "List all the free hour balances of a test base account. The result collection will only contain one element as all the data will be nested in a singleton object.",
         "description": "Return the Test Base free hour balances list.",
         "produces": [
           "application/json"
@@ -89,7 +89,7 @@
           "Free Hour Balances"
         ],
         "operationId": "FreeHourBalances_Get",
-        "summary": "Get the Free Hour Balance of a Test Base Account.",
+        "summary": "Get the free hour balance of a test base account.",
         "description": "Return the Test Base free hour balance.",
         "produces": [
           "application/json"
@@ -135,7 +135,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.TestBase/skus": {
       "get": {
         "tags": [
-          "Test Base Account"
+          "test base account"
         ],
         "operationId": "Skus_List",
         "description": "Lists the available SKUs of Test Base Account in a subscription.",
@@ -2951,7 +2951,7 @@
           "200": {
             "description": "Success. The response describes the list of operations.",
             "schema": {
-              "$ref": "#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -3802,7 +3802,7 @@
         },
         "isConsented": {
           "type": "boolean",
-          "description": "Whether the statement of the gallery application is accepted.",
+          "description": "Whether the disclaimer of the gallery application is accepted.",
           "default": false
         }
       },
@@ -3942,21 +3942,21 @@
       ]
     },
     "WingetAppSkuProperties": {
-      "description": "The detailed properties of a winget Gallery application SKU.",
+      "description": "The detailed properties of a winget gallery application SKU.",
       "type": "object",
       "x-ms-discriminator-value": "Winget",
       "properties": {
         "version": {
           "type": "string",
-          "description": "The version of a winget Gallery application SKU."
+          "description": "The version of a winget gallery application SKU."
         },
         "license": {
           "type": "string",
-          "description": "The license description of a winget Gallery application SKU."
+          "description": "The license description of a winget gallery application SKU."
         },
         "licenseUrl": {
           "type": "string",
-          "description": "The license URL of a winget Gallery application SKU."
+          "description": "The license URL of a winget gallery application SKU."
         }
       },
       "allOf": [
@@ -5599,82 +5599,6 @@
         }
       }
     },
-    "OperationListResult": {
-      "description": "A list of operations supported by the resource provider.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "x-ms-identifiers": [],
-          "description": "List of operations supported by the Test Base resource provider."
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "URL to get the next set of operation list results if there are any."
-        }
-      }
-    },
-    "Operation": {
-      "description": "REST API operation",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "isDataAction": {
-          "description": "Indicates whether the operation is a data action",
-          "readOnly": true,
-          "type": "boolean"
-        },
-        "origin": {
-          "description": "Origin of the operation",
-          "readOnly": true,
-          "type": "string"
-        },
-        "display": {
-          "description": "The object that describes the operation.",
-          "type": "object",
-          "properties": {
-            "provider": {
-              "description": "The resource provider name: Microsoft.TestBase.",
-              "readOnly": true,
-              "type": "string"
-            },
-            "operation": {
-              "description": "Operation type: read, write, delete, listPackages, etc.",
-              "readOnly": true,
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource type on which the operation is performed.",
-              "readOnly": true,
-              "type": "string"
-            },
-            "description": {
-              "description": "Friendly name of the operation.",
-              "readOnly": true,
-              "type": "string"
-            }
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/OperationProperties",
-          "description": "Extra properties of the operation.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "OperationProperties": {
-      "description": "Operation properties.",
-      "type": "object",
-      "properties": {}
-    },
     "EmailEventListResult": {
       "description": "A list of email events.",
       "type": "object",
@@ -6527,7 +6451,7 @@
       "type": "integer",
       "format": "int32",
       "x-ms-parameter-location": "method",
-      "description": "According to the reverse order of time, how many first ones are taken."
+      "description": "How many of the sorted items to consider including in the result set."
     },
     "FreeHourBalanceNameParameter": {
       "name": "freeHourBalanceName",
