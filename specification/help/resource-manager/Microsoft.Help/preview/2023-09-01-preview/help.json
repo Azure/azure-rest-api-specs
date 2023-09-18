@@ -76,7 +76,7 @@
         "tags": [
           "checkNameAvailability"
         ],
-        "description": "This API is used to check the uniqueness of a resource name used for a diagnostic or solutions",
+        "description": "This API is used to check the uniqueness of a resource name used for a diagnostic,troubleshooter or solutions",
         "operationId": "CheckNameAvailability_Post",
         "parameters": [
           {
@@ -217,7 +217,7 @@
         "tags": [
           "discoverySolutions"
         ],
-        "description": "Discovery Solutions is the initial entry point within Help API, which identifies relevant Azure diagnostics and solutions. We will do our best to return the most effective solutions based on the type of inputs as indicated below, in the request URL  <br/><br/> Mandatory input :  problemClassificationId (Use the [problemClassification API](https://learn.microsoft.com/rest/api/support/problem-classifications/list?tabs=HTTP)) <br/>Optional input: resourceUri OR resource Type <br/><br/> <b>Note: </b>  ‘requiredInputs’ from Discovery solutions response must be passed via ‘additionalParameters’ as an input to Diagnostics and Solutions API.",
+        "description": "Lists the relevant Azure diagnostics and solutions using [problemClassification API](https://learn.microsoft.com/rest/api/support/problem-classifications/list?tabs=HTTP)) AND  resourceUri or resourceType.<br/> Discovery Solutions is the initial entry point within Help API, which identifies relevant Azure diagnostics and solutions. We will do our best to return the most effective solutions based on the type of inputs, in the request URL  <br/><br/> Mandatory input :  problemClassificationId (Use the [problemClassification API](https://learn.microsoft.com/rest/api/support/problem-classifications/list?tabs=HTTP)) <br/>Optional input: resourceUri OR resource Type <br/><br/> <b>Note: </b>  ‘requiredInputs’ from Discovery solutions response must be passed via ‘additionalParameters’ as an input to Diagnostics and Solutions API.",
         "operationId": "DiscoverySolution_List",
         "parameters": [
           {
@@ -265,7 +265,7 @@
         "tags": [
           "solutions"
         ],
-        "description": "Solutions are a rich, insightful and a centralized self help experience that brings all the relevant content to troubleshoot an Azure issue into a unified experience. Solutions include the following components : Text, <Diagnostics> , <Troubleshooters>, Images , Video tutorials, Tables , custom charts, images , AzureKB, etc, with capabilities to support new solutions types in the future. Each solution type may require one or more ‘requiredParameters’ that are required to execute the individual solution component. In the absence of the ‘requiredParameters’ it is likely that some of the solutions might fail execution, and you might see an empty response. <br/><br/> <b>Note:</b>  <br/>1. ‘requiredInputs’ from Discovery solutions response must be passed via ‘parameters’ in the request body of Solutions API. <br/>2. ‘requiredParameters’ from the Solutions response is the same as ‘ additionalParameters’ in the request for diagnostics <br/>3. ‘requiredParameters’ from the Solutions response is the same as ‘properties.parameters’ in the request for Troubleshooters",
+        "description": "Creates a solution for the specific Azure resource or subscription using the triggering criteria ‘solutionId and requiredInputs’ from discovery solutions.<br/> Solutions are a rich, insightful and a centralized self help experience that brings all the relevant content to troubleshoot an Azure issue into a unified experience. Solutions include the following components : Text, Diagnostics , Troubleshooters, Images , Video tutorials, Tables , custom charts, images , AzureKB, etc, with capabilities to support new solutions types in the future. Each solution type may require one or more ‘requiredParameters’ that are required to execute the individual solution component. In the absence of the ‘requiredParameters’ it is likely that some of the solutions might fail execution, and you might see an empty response. <br/><br/> <b>Note:</b>  <br/>1. ‘requiredInputs’ from Discovery solutions response must be passed via ‘parameters’ in the request body of Solutions API. <br/>2. ‘requiredParameters’ from the Solutions response is the same as ‘ additionalParameters’ in the request for diagnostics <br/>3. ‘requiredParameters’ from the Solutions response is the same as ‘properties.parameters’ in the request for Troubleshooters",
         "operationId": "Solution_Create",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -424,7 +424,7 @@
         "tags": [
           "troubleshooter"
         ],
-        "description": "Troubleshooters are step-by-step interactive guidance that scope the problem by collecting additional inputs from you in each step to solve Azure issues. You will be guided down decision tree style workflow. At the end of a Troubleshooter workflow, you will be presented the best possible solution to the issue. <br/> Create API creates the Troubleshooter API using ‘parameters’ and ‘solutionId’ <br/><br/> <b>Note:</b> ‘requiredParameters’ from solutions response must be passed via ‘properties. parameters’ in the request body of Troubleshooters API.",
+        "description": "Creates the specific troubleshooter action under a resource or subscription using the ‘solutionId’ and  ‘properties.parameters’ as the trigger. <br/>Troubleshooters are step-by-step interactive guidance that scope the problem by collecting additional inputs from you in each step to solve Azure issues. You will be guided down decision tree style workflow. At the end of a Troubleshooter workflow, you will be presented the best possible solution to the issue. <br/> Create API creates the Troubleshooter API using ‘parameters’ and ‘solutionId’ <br/><br/> <b>Note:</b> ‘requiredParameters’ from solutions response must be passed via ‘properties. parameters’ in the request body of Troubleshooters API.",
         "operationId": "Troubleshooters_Create",
         "parameters": [
           {
@@ -514,7 +514,7 @@
         "tags": [
           "troubleshooter"
         ],
-        "description": "Continue API is used to provide inputs that are required by the steps for the troubleshooter resource name to continue the request. ",
+        "description": "Uses ‘stepId’ and ‘responses’ as the trigger to continue the troubleshooting steps for the respective troubleshooter resource name. <br/>Continue API is used to provide inputs that are required by the steps for the troubleshooter resource name to continue the request. ",
         "operationId": "Troubleshooters_Continue",
         "parameters": [
           {
