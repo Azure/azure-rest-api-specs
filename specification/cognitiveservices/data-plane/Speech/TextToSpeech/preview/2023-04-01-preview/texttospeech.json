@@ -1,13 +1,13 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "Custom Voice API",
-        "description": "Custom Voice API for model training and deployment.",
+        "title": "Custom Voice API v2023-04-01-preview",
+        "description": "Custom Voice API v2023-04-01-preview.",
         "contact": {
             "name": "Cognitive Services - Speech Services",
             "url": "https://docs.microsoft.com/azure/cognitive-services/speech-service/support"
         },
-        "version": "2023-04-01-preview"
+        "version": "v2023-04-01-preview"
     },
     "paths": {
         "/api/texttospeech/projects": {
@@ -1089,7 +1089,7 @@
                     },
                     {
                         "in": "query",
-                        "name": "blockid",
+                        "name": "blockId",
                         "description": "A valid Base64 string value that identifies the block. Prior to encoding, the string must be less than or equal to 64 bytes in size. For a given blob, the length of the value specified for the blockid parameter must be the same size for each block. Note that the Base64 string must be URL-encoded.",
                         "required": true,
                         "type": "string"
@@ -1268,7 +1268,7 @@
                     },
                     {
                         "in": "query",
-                        "name": "blockid",
+                        "name": "blockId",
                         "description": "A valid Base64 string value that identifies the block. Prior to encoding, the string must be less than or equal to 64 bytes in size. For a given blob, the length of the value specified for the blockid parameter must be the same size for each block. Note that the Base64 string must be URL-encoded.",
                         "required": true,
                         "type": "string"
@@ -1467,7 +1467,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Success"
+                        "description": "Success",
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     "default": {
                         "description": "An error occurred.",
@@ -1558,7 +1561,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Success"
+                        "description": "Success",
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     "default": {
                         "description": "An error occurred.",
@@ -2514,6 +2520,20 @@
             ],
             "type": "object",
             "properties": {
+                "voiceTalentName": {
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "companyName": {
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "locale": {
+                    "type": "string"
+                },
+                "project": {
+                    "$ref": "#/definitions/ResourceReference"
+                },
                 "status": {
                     "$ref": "#/definitions/Status"
                 },
@@ -2539,20 +2559,6 @@
                     "format": "date-time",
                     "type": "string",
                     "readOnly": true
-                },
-                "voiceTalentName": {
-                    "minLength": 1,
-                    "type": "string"
-                },
-                "companyName": {
-                    "minLength": 1,
-                    "type": "string"
-                },
-                "locale": {
-                    "type": "string"
-                },
-                "project": {
-                    "$ref": "#/definitions/ResourceReference"
                 }
             }
         },
@@ -3282,6 +3288,20 @@
             ],
             "type": "object",
             "properties": {
+                "project": {
+                    "$ref": "#/definitions/ResourceReference"
+                },
+                "consent": {
+                    "$ref": "#/definitions/ResourceReference"
+                },
+                "properties": {
+                    "$ref": "#/definitions/ZeroShotProperties"
+                },
+                "promptId": {
+                    "format": "uuid",
+                    "type": "string",
+                    "readOnly": true
+                },
                 "status": {
                     "$ref": "#/definitions/Status"
                 },
@@ -3305,20 +3325,6 @@
                 },
                 "createdDateTime": {
                     "format": "date-time",
-                    "type": "string",
-                    "readOnly": true
-                },
-                "project": {
-                    "$ref": "#/definitions/ResourceReference"
-                },
-                "consent": {
-                    "$ref": "#/definitions/ResourceReference"
-                },
-                "properties": {
-                    "$ref": "#/definitions/ZeroShotProperties"
-                },
-                "promptId": {
-                    "format": "uuid",
                     "type": "string",
                     "readOnly": true
                 }
