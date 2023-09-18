@@ -166,8 +166,7 @@
                     "description": "The family of payment method.",
                     "enum": [
                         "CreditCard",
-                        "CheckWire",
-                        "Unknown"
+                        "CheckWire"
                     ],
                     "type": "string",
                     "x-ms-enum": {
@@ -189,23 +188,22 @@
                     "x-ms-identifiers": [
                     ]
                 },
+                "paymentMethodType": {
+                    "description": "The type of payment method.",
+                    "readOnly": true,
+                    "type": "string"
+                },
                 "status": {
                     "description": "Status of the payment method.",
                     "enum": [
                         "Active",
-                        "Inactive",
-                        "Unknown"
+                        "Inactive"
                     ],
                     "type": "string",
                     "x-ms-enum": {
                         "modelAsString": true,
                         "name": "paymentMethodStatus"
                     }
-                },
-                "type": {
-                    "description": "The type of payment method.",
-                    "readOnly": true,
-                    "type": "string"
                 }
             },
             "type": "object"
