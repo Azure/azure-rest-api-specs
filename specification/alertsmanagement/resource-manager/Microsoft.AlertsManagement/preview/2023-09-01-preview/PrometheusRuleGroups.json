@@ -512,15 +512,8 @@
       "description": "Specifies the Prometheus alert rule configuration.",
       "properties": {
         "autoResolved": {
-          "type": "string",
-          "description": "Enable alert auto-resolution.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "type": "boolean",
+          "description": "Enable alert auto-resolution."
         },
         "timeToResolve": {
           "type": "string",
@@ -598,8 +591,15 @@
       ],
       "properties": {
         "includeResults": {
-          "type": "boolean",
-          "description": "Include the query results in the alert."
+          "description": "Include the query results in the alert.",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
         },
         "query": {
           "type": "string",

@@ -28,7 +28,7 @@
               {
                 "title": "Number of OOM killed events by container",
                 "type": "PrometheusRangeQuery",
-                "includeResults": true,
+                "includeResults": "Enabled",
                 "query": "sum by (cluster,container,replicaset,namespace)(label_replace( kube_pod_container_status_last_terminated_reason{reason='OOMKilled', cluster='cluster1', namespace='namespace1'}'}, 'replicaset', '$1', 'pod', '(.*)(-[a-z0-9]{5})$')) > 0",
                 "variables": {},
                 "lookbackPeriod": "PT15M",
@@ -69,7 +69,7 @@
                 {
                   "title": "Number of OOM killed events by container",
                   "type": "PrometheusRangeQuery",
-                  "includeResults": true,
+                  "includeResults": "Enabled",
                   "query": "sum by (cluster,container,replicaset,namespace)(label_replace( kube_pod_container_status_last_terminated_reason{reason='OOMKilled', cluster='cluster1', namespace='namespace1'}'}, 'replicaset', '$1', 'pod', '(.*)(-[a-z0-9]{5})$')) > 0",
                   "variables": {},
                   "lookbackPeriod": "PT15M",
@@ -109,7 +109,7 @@
                 {
                   "title": "Number of OOM killed events by container",
                   "type": "PrometheusRangeQuery",
-                  "includeResults": true,
+                  "includeResults": "Enabled",
                   "query": "sum by (cluster,container,replicaset,namespace)(label_replace( kube_pod_container_status_last_terminated_reason{reason='OOMKilled', cluster='cluster1', namespace='namespace1'}'}, 'replicaset', '$1', 'pod', '(.*)(-[a-z0-9]{5})$')) > 0",
                   "variables": {},
                   "lookbackPeriod": "PT15M",
