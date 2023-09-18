@@ -51,8 +51,12 @@ else {
 $typespecFolders = @()
 foreach ($file in $changedFiles) {
   if ($file -match 'specification\/[^\/]*\/') {
-    $typespecFolder = (Get-ChildItem -path $matches[0] tspconfig.* -Recurse).Directory.FullName | ForEach-Object {if ($_) { [IO.Path]::GetRelativePath($($pwd.path), $_) }}
-    $typespecFolders += $typespecFolder -replace '\\', '/'
+    if (Test-Path $matches[0]) {
+      $typespecFolder = (Get-ChildItem -path $matches[0] tspconfig.* -Recurse).Directory.FullName | ForEach-Object {if ($_) { [IO.Path]::GetRelativePath($($pwd.path), $_) }}
+      $typespecFolders += $typespecFolder -replace '\\', '/'
+    } else {
+      Write-Host "Cannot find directory $($matches[0])"
+    }
   }
 }
 
