@@ -735,9 +735,6 @@
         }
       },
       "description": "A wrap up of Conversation project response.",
-      "required": [
-        "result"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/TargetIntentResult"
@@ -915,7 +912,7 @@
       "type": "object",
       "properties": {
         "timex": {
-          "$ref": "#/definitions/TimeExpression",
+          "type": "string",
           "description": "An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
         },
         "dateTimeSubKind": {
@@ -2093,12 +2090,12 @@
       "type": "object",
       "properties": {
         "begin": {
-          "$ref": "#/definitions/TimeExpression",
-          "description": "represents the resolution of a date and/or time span."
+          "type": "string",
+          "description": "represents the resolution of a date and/or time span. An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
         },
         "end": {
-          "$ref": "#/definitions/TimeExpression",
-          "description": "represents the resolution of a date and/or time span."
+          "type": "string",
+          "description": "represents the resolution of a date and/or time span. An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
         },
         "duration": {
           "type": "string",
@@ -2133,11 +2130,6 @@
           "$ref": "#/definitions/ConversationItemBase"
         }
       ]
-    },
-    "TimeExpression": {
-      "type": "object",
-      "properties": {},
-      "description": "An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
     },
     "Versions": {
       "type": "string",

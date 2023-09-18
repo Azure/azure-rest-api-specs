@@ -7,6 +7,7 @@ import "@azure-tools/typespec-autorest";
 import "./common.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Rest;
 using OpenAPI;
 using TypeSpec.Versioning;
 using Azure.Core;
@@ -76,7 +77,7 @@ enum AnalyzeConversationTaskResultsKind {
 
 @discriminator("kind")
 @doc("The base class of a conversation input task.")
-@TypeSpec.Rest.resource("language")
+@resource("language")
 model AnalyzeConversationTask {
   @key
   @visibility("read", "create")
@@ -238,7 +239,7 @@ model ConversationTargetIntentResult extends TargetIntentResult {
   targetProjectKind: targetProjectKind.Conversation;
 
   @doc("The actual response from a Conversation project.")
-  result: ConversationResult;
+  result?: ConversationResult;
 }
 
 @doc("The response returned by a Conversation project.")
@@ -345,10 +346,10 @@ model RegexKey extends BaseExtraInformation {
   extraInformationKind: extraInformationKind.RegexKey;
 
   @doc("The key of the regex pattern used in extracting the entity.")
-  key: string;
+  key?: string;
 
   @doc("The .NET regex pattern used in extracting the entity. Please visit https://docs.microsoft.com/dotnet/standard/base-types/regular-expressions for more information about .NET regular expressions.")
-  regexPattern: string;
+  regexPattern?: string;
 }
 
 @doc("The abstract base class for entity resolutions.")
@@ -482,7 +483,7 @@ model DateTimeResolution extends BaseResolution {
   resolutionKind: resolutionKind.DateTimeResolution;
 
   @doc("An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)")
-  timex: TimeExpression;
+  timex: string;
 
   @doc("The DateTime SubKind")
   dateTimeSubKind: DateTimeSubKind;
@@ -526,11 +527,11 @@ model TemporalSpanResolution extends BaseResolution {
   @doc("represents the resolution of a date and/or time span.")
   resolutionKind: resolutionKind.TemporalSpanResolution;
 
-  @doc("represents the resolution of a date and/or time span.")
-  begin?: TimeExpression;
+  @doc("represents the resolution of a date and/or time span. An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)")
+  begin?: string;
 
-  @doc("represents the resolution of a date and/or time span.")
-  end?: TimeExpression;
+  @doc("represents the resolution of a date and/or time span. An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)")
+  end?: string;
 
   @doc("An optional duration value formatted based on the ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations)")
   duration?: string;
@@ -540,7 +541,7 @@ model TemporalSpanResolution extends BaseResolution {
 
   @doc("An optional triplet containing the beginning, the end, and the duration all stated as ISO 8601 formatted strings.")
   @added(Versions.v2023_04_01)
-  timex: string;
+  timex?: string;
 }
 
 @doc("represents the resolution of numeric intervals.")
@@ -557,9 +558,6 @@ model NumericRangeResolution extends BaseResolution {
   @doc("The ending value of the interval.")
   maximum: float64;
 }
-
-@doc("An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)")
-model TimeExpression {}
 
 @doc("It is a wrap up of LUIS Generally Available response.")
 model LuisTargetIntentResult extends TargetIntentResult {
@@ -582,7 +580,7 @@ model QuestionAnsweringTargetIntentResult extends TargetIntentResult {
 
 @doc("It is a wrap up a Question Answering KB response.")
 @added(Versions.v2023_04_01)
-@TypeSpec.Rest.resource("language/analyze-conversations/jobs")
+@resource("language/analyze-conversations/jobs")
 model AnalyzeConversationJobsInput {
   @doc("Display name for the analysis job.")
   displayName?: string;
@@ -647,7 +645,7 @@ enum AnalyzeConversationResultsKind {
 
 @doc("Contains the status of the submitted job for analyzing a conversation, along with related statistics.")
 @added(Versions.v2023_04_01)
-@TypeSpec.Rest.resource("language/analyze-conversations/jobs")
+@resource("language/analyze-conversations/jobs")
 model AnalyzeConversationJobState {
   ...JobState;
   ...ConversationTaskState;
@@ -658,7 +656,7 @@ model AnalyzeConversationJobState {
 @added(Versions.v2023_04_01)
 model AnalyzeConversationJobStatistics {
   @doc("Contains the statistics for the submitted job.")
-  statistics: ConversationRequestStatistics;
+  statistics?: ConversationRequestStatistics;
 }
 
 @doc("Contains the state for the tasks that are being executed as part of the submitted job for analyzing a conversation.")
@@ -715,7 +713,7 @@ model Conversation {
   modality: Modality;
 
   @doc("domain")
-  domain: ConversationDomain;
+  domain?: ConversationDomain;
 }
 
 @doc("Enumeration of supported conversational domains.")
@@ -793,17 +791,17 @@ model RedactedTranscriptContent {
 @added(Versions.v2023_04_01)
 model WordLevelTiming extends AudioTiming {
   @doc("Recognized word.")
-  word: string;
+  word?: string;
 }
 
 @doc("Audio timing information.")
 @added(Versions.v2023_04_01)
 model AudioTiming {
   @doc("Offset from the start of speech audio, in ticks. 1 tick = 100 nanoseconds.")
-  offset: int64;
+  offset?: int64;
 
   @doc("Duration of word articulation, in ticks. 1 tick = 100 nanoseconds.")
-  duration: int64;
+  duration?: int64;
 }
 
 @doc("Shared attributes for all conversational task results.")
@@ -815,8 +813,8 @@ model ConversationResultBase {
   @doc("Warnings encountered in processing the document.")
   warnings: Array<InputWarning>;
 
-  @doc("statistics")
-  statistics: ConversationStatistics;
+  @doc("If showStats=true was specified in the request this field will contain information about the conversation payload.")
+  statistics?: ConversationStatistics;
 }
 
 @doc("If showStats=true was specified in the request, this field contains information about the conversation payload.")
@@ -849,8 +847,8 @@ model AnalyzeConversationalSentimentTask extends AnalyzeConversationLROTask {
   @doc("discriminator kind")
   kind: AnalyzeConversationLROTaskKind.ConversationalSentimentTask,
 
-  @doc("temp doc")
-  properties: ConversationalSentimentTaskParameters,
+  @doc("Supported parameters for a conversational sentiment task.")
+  properties?: ConversationalSentimentTaskParameters,
 }
 
 @added(Versions.v2023_04_15_preview)
@@ -879,8 +877,7 @@ model ConversationSentimentResults extends PreBuiltResult{
 
 @added(Versions.v2023_04_15_preview)
 @doc("The result from sentiment analysis operation for each conversation.")
-model ConversationSentimentResultsConversation {
-  ...ConversationSentimentResult;
+model ConversationSentimentResultsConversation extends ConversationSentimentResult{
   ...ConversationResultBase
 }
 
@@ -947,9 +944,9 @@ model ConversationPiiResults extends PreBuiltResult{
 }
 
 @added(Versions.v2023_04_15_preview)
-@doc("temp doc")
-model ConversationalPiiResultWithResultBase extends ConversationResultBase{
-  ...ConversationPiiResult;
+@doc("Conversation PII result item")
+model ConversationalPiiResultWithResultBase extends ConversationPiiResult{
+  ...ConversationResultBase;
 }
 
 @added(Versions.v2023_04_15_preview)
@@ -1070,8 +1067,7 @@ model AnalyzeConversationSummarizationTask extends AnalyzeConversationLROTask {
 
 @doc("Supported parameters for a conversational summarization task.")
 @added(Versions.v2023_04_01)
-model ConversationSummarizationTaskParametersBase {
-  ...AbstractiveSummarizationTaskParametersBase;
+model ConversationSummarizationTaskParametersBase  extends AbstractiveSummarizationTaskParametersBase{
 
   @doc("Array of Summary Aspects")
   summaryAspects: Array<SummaryAspect>;
@@ -1079,15 +1075,13 @@ model ConversationSummarizationTaskParametersBase {
 
 @doc("Supported parameters for pre-build conversational summarization task.")
 @added(Versions.v2023_04_01)
-model ConversationSummarizationTaskParameters {
-  ...PreBuiltTaskParameters;
+model ConversationSummarizationTaskParameters extends PreBuiltTaskParameters {
   ...ConversationSummarizationTaskParametersBase;
 }
 
 @doc("Supported parameters for a custom conversation summarization task.")
 @added(Versions.v2023_04_15_preview)
-model CustomConversationSummarizationTaskParameters {
-  ...CustomTaskParameters;
+model CustomConversationSummarizationTaskParameters extends CustomTaskParameters{
   ...ConversationSummarizationTaskParametersBase;
 }
 
@@ -1119,8 +1113,9 @@ model AnalyzeConversationSummarizationResult extends AnalyzeConversationJobResul
 
 @doc("Result for the custom summarization task on the conversation.")
 @added(Versions.v2023_04_15_preview)
-model AnalyzeCustomConversationSummarizationResult {
-  ...AnalyzeConversationJobResult;
+model AnalyzeCustomConversationSummarizationResult extends AnalyzeConversationJobResult {
+  @doc("discriminator kind")
+  kind: AnalyzeConversationResultsKind.CustomConversationalSummarizationResults;
 
   @doc("Custom Summary Result")
   results: CustomSummaryResult
@@ -1679,8 +1674,8 @@ alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Operation ID is automatically generated by the OpenAPI emitters and should not normally be specified."
 @doc("Analyzes the input conversation utterance.")
-@TypeSpec.Rest.actionSeparator("/:")
-@TypeSpec.Rest.action("analyze-conversations")
+@actionSeparator("/:")
+@action("analyze-conversations")
 @operationId("AnalyzeConversation")
 //removed examples due to bug
 // @Autorest.example(
@@ -1726,7 +1721,7 @@ op submitJob is Operations.LongRunningResourceCreateWithServiceProvidedName<Anal
 @summary("Cancel a long-running Text Analysis conversations job")
 @pollingOperation(jobStatus)
 @operationId("AnalyzeConversation_CancelJob")
-@TypeSpec.Rest.actionSeparator(":")
-@TypeSpec.Rest.action("cancel")
+@actionSeparator(":")
+@action("cancel")
 op cancel is Operations.LongRunningResourceDelete<AnalyzeConversationJobState, TypeSpec.Http.AcceptedResponse>;
 

@@ -481,8 +481,7 @@
         "jobId",
         "lastUpdateDateTime",
         "status",
-        "tasks",
-        "statistics"
+        "tasks"
       ]
     },
     "AnalyzeConversationJobStatistics": {
@@ -493,10 +492,7 @@
           "description": "Contains the statistics for the submitted job."
         }
       },
-      "description": "Contains the statistics for the submitted job.",
-      "required": [
-        "statistics"
-      ]
+      "description": "Contains the statistics for the submitted job."
     },
     "AnalyzeConversationJobsInput": {
       "type": "object",
@@ -755,13 +751,10 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ConversationalSentimentTaskParameters",
-          "description": "temp doc"
+          "description": "Supported parameters for a conversational sentiment task."
         }
       },
       "description": "Task definition for conversational sentiment.",
-      "required": [
-        "properties"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/AnalyzeConversationLROTask"
@@ -771,23 +764,6 @@
     "AnalyzeCustomConversationSummarizationResult": {
       "type": "object",
       "properties": {
-        "taskName": {
-          "type": "string",
-          "description": "task name"
-        },
-        "kind": {
-          "$ref": "#/definitions/AnalyzeConversationResultsKind",
-          "description": "discriminator kind"
-        },
-        "lastUpdateDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last updated time in UTC for the task."
-        },
-        "status": {
-          "$ref": "#/definitions/State",
-          "description": "The status of the task at the mentioned last update time."
-        },
         "results": {
           "$ref": "#/definitions/CustomSummaryResult",
           "description": "Custom Summary Result"
@@ -795,11 +771,12 @@
       },
       "description": "Result for the custom summarization task on the conversation.",
       "required": [
-        "taskName",
-        "kind",
-        "lastUpdateDateTime",
-        "status",
         "results"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeConversationJobResult"
+        }
       ]
     },
     "AnalyzeCustomConversationSummarizationTask": {
@@ -974,11 +951,7 @@
           "description": "Duration of word articulation, in ticks. 1 tick = 100 nanoseconds."
         }
       },
-      "description": "Audio timing information.",
-      "required": [
-        "offset",
-        "duration"
-      ]
+      "description": "Audio timing information."
     },
     "Azure.Core.Foundations.Error": {
       "type": "object",
@@ -1167,8 +1140,7 @@
       "required": [
         "id",
         "language",
-        "modality",
-        "domain"
+        "modality"
       ]
     },
     "ConversationAnalysisOptions": {
@@ -1614,14 +1586,13 @@
         },
         "statistics": {
           "$ref": "#/definitions/ConversationStatistics",
-          "description": "statistics"
+          "description": "If showStats=true was specified in the request this field will contain information about the conversation payload."
         }
       },
       "description": "Shared attributes for all conversational task results.",
       "required": [
         "id",
-        "warnings",
-        "statistics"
+        "warnings"
       ]
     },
     "ConversationSentimentItemResult": {
@@ -1694,14 +1665,6 @@
     "ConversationSentimentResultsConversation": {
       "type": "object",
       "properties": {
-        "conversationItems": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ConversationSentimentItemResult"
-          },
-          "description": "Enumeration of Sentiment operation results for all the conversation items in a conversation.",
-          "x-typespec-name": "ConversationSentimentItemResult[]"
-        },
         "id": {
           "type": "string",
           "description": "Unique, non-empty conversation identifier."
@@ -1717,15 +1680,18 @@
         },
         "statistics": {
           "$ref": "#/definitions/ConversationStatistics",
-          "description": "statistics"
+          "description": "If showStats=true was specified in the request this field will contain information about the conversation payload."
         }
       },
       "description": "The result from sentiment analysis operation for each conversation.",
       "required": [
-        "conversationItems",
         "id",
-        "warnings",
-        "statistics"
+        "warnings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationSentimentResult"
+        }
       ]
     },
     "ConversationStatistics": {
@@ -1745,25 +1711,6 @@
     "ConversationSummarizationTaskParameters": {
       "type": "object",
       "properties": {
-        "modelVersion": {
-          "type": "string",
-          "description": "model version",
-          "default": "latest"
-        },
-        "loggingOptOut": {
-          "type": "boolean",
-          "description": "logging opt out",
-          "default": false
-        },
-        "sentenceCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "It controls the approximate number of sentences in the output summaries."
-        },
-        "stringIndexType": {
-          "$ref": "#/definitions/StringIndexType",
-          "description": "String index type"
-        },
         "summaryAspects": {
           "type": "array",
           "items": {
@@ -1771,20 +1718,7 @@
           },
           "description": "Array of Summary Aspects",
           "x-typespec-name": "SummaryAspect[]"
-        }
-      },
-      "description": "Supported parameters for pre-build conversational summarization task.",
-      "required": [
-        "modelVersion",
-        "loggingOptOut",
-        "sentenceCount",
-        "stringIndexType",
-        "summaryAspects"
-      ]
-    },
-    "ConversationSummarizationTaskParametersBase": {
-      "type": "object",
-      "properties": {
+        },
         "sentenceCount": {
           "type": "integer",
           "format": "int32",
@@ -1793,7 +1727,23 @@
         "stringIndexType": {
           "$ref": "#/definitions/StringIndexType",
           "description": "String index type"
-        },
+        }
+      },
+      "description": "Supported parameters for pre-build conversational summarization task.",
+      "required": [
+        "summaryAspects",
+        "sentenceCount",
+        "stringIndexType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PreBuiltTaskParameters"
+        }
+      ]
+    },
+    "ConversationSummarizationTaskParametersBase": {
+      "type": "object",
+      "properties": {
         "summaryAspects": {
           "type": "array",
           "items": {
@@ -1805,9 +1755,12 @@
       },
       "description": "Supported parameters for a conversational summarization task.",
       "required": [
-        "sentenceCount",
-        "stringIndexType",
         "summaryAspects"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AbstractiveSummarizationTaskParametersBase"
+        }
       ]
     },
     "ConversationTargetIntentResult": {
@@ -1819,9 +1772,6 @@
         }
       },
       "description": "A wrap up of Conversation project response.",
-      "required": [
-        "result"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/TargetIntentResult"
@@ -1924,22 +1874,32 @@
     "ConversationalPiiResultWithResultBase": {
       "type": "object",
       "properties": {
-        "conversationItems": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty conversation identifier."
+        },
+        "warnings": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ConversationPiiItemResult"
+            "$ref": "#/definitions/InputWarning"
           },
-          "description": "List of conversationItems",
-          "x-typespec-name": "ConversationPiiItemResult[]"
+          "x-ms-identifiers": [],
+          "description": "Warnings encountered in processing the document.",
+          "x-typespec-name": "InputWarning[]"
+        },
+        "statistics": {
+          "$ref": "#/definitions/ConversationStatistics",
+          "description": "If showStats=true was specified in the request this field will contain information about the conversation payload."
         }
       },
-      "description": "temp doc",
+      "description": "Conversation PII result item",
       "required": [
-        "conversationItems"
+        "id",
+        "warnings"
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConversationResultBase"
+          "$ref": "#/definitions/ConversationPiiResult"
         }
       ]
     },
@@ -2054,18 +2014,13 @@
     "CustomConversationSummarizationTaskParameters": {
       "type": "object",
       "properties": {
-        "loggingOptOut": {
-          "type": "boolean",
-          "description": "logging opt out",
-          "default": false
-        },
-        "projectName": {
-          "type": "string",
-          "description": "This field indicates the project name for the model."
-        },
-        "deploymentName": {
-          "type": "string",
-          "description": "This field indicates the deployment name for the model."
+        "summaryAspects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SummaryAspect"
+          },
+          "description": "Array of Summary Aspects",
+          "x-typespec-name": "SummaryAspect[]"
         },
         "sentenceCount": {
           "type": "integer",
@@ -2075,24 +2030,18 @@
         "stringIndexType": {
           "$ref": "#/definitions/StringIndexType",
           "description": "String index type"
-        },
-        "summaryAspects": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SummaryAspect"
-          },
-          "description": "Array of Summary Aspects",
-          "x-typespec-name": "SummaryAspect[]"
         }
       },
       "description": "Supported parameters for a custom conversation summarization task.",
       "required": [
-        "loggingOptOut",
-        "projectName",
-        "deploymentName",
+        "summaryAspects",
         "sentenceCount",
-        "stringIndexType",
-        "summaryAspects"
+        "stringIndexType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomTaskParameters"
+        }
       ]
     },
     "CustomResult": {
@@ -2190,7 +2139,7 @@
       "type": "object",
       "properties": {
         "timex": {
-          "$ref": "#/definitions/TimeExpression",
+          "type": "string",
           "description": "An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
         },
         "dateTimeSubKind": {
@@ -3271,10 +3220,6 @@
         }
       },
       "description": "The regex key extra data kind.",
-      "required": [
-        "key",
-        "regexPattern"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/BaseExtraInformation"
@@ -3794,12 +3739,12 @@
       "type": "object",
       "properties": {
         "begin": {
-          "$ref": "#/definitions/TimeExpression",
-          "description": "represents the resolution of a date and/or time span."
+          "type": "string",
+          "description": "represents the resolution of a date and/or time span. An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
         },
         "end": {
-          "$ref": "#/definitions/TimeExpression",
-          "description": "represents the resolution of a date and/or time span."
+          "type": "string",
+          "description": "represents the resolution of a date and/or time span. An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
         },
         "duration": {
           "type": "string",
@@ -3815,9 +3760,6 @@
         }
       },
       "description": "represents the resolution of a date and/or time span.",
-      "required": [
-        "timex"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
@@ -3863,11 +3805,6 @@
           "$ref": "#/definitions/ConversationItemBase"
         }
       ]
-    },
-    "TimeExpression": {
-      "type": "object",
-      "properties": {},
-      "description": "An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
     },
     "TranscriptContentType": {
       "type": "string",
@@ -4093,9 +4030,6 @@
         }
       },
       "description": "Word-level timing information that the speech-to-text API generates. The words in this object should have 1:1 correspondence with the lexical input to allow for audio redaction.",
-      "required": [
-        "word"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/AudioTiming"
