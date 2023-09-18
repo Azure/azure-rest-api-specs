@@ -42,7 +42,13 @@
       "name": "Operations"
     },
     {
+      "name": "Reservations"
+    },
+    {
       "name": "StoragePools"
+    },
+    {
+      "name": "AvsStorageContainers"
     }
   ],
   "paths": {
@@ -78,6 +84,48 @@
           },
           "Operations_List_MinSet": {
             "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/PureStorage.Block/reservations": {
+      "get": {
+        "operationId": "Reservations_ListBySubscription",
+        "tags": [
+          "Reservations"
+        ],
+        "description": "List Reservation resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReservationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reservations_ListBySubscription": {
+            "$ref": "./examples/Reservations_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "Reservations_ListBySubscription_MinSet": {
+            "$ref": "./examples/Reservations_ListBySubscription_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -127,6 +175,312 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/reservations": {
+      "get": {
+        "operationId": "Reservations_ListByResourceGroup",
+        "tags": [
+          "Reservations"
+        ],
+        "description": "List Reservation resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReservationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reservations_ListByResourceGroup": {
+            "$ref": "./examples/Reservations_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "Reservations_ListByResourceGroup_MinSet": {
+            "$ref": "./examples/Reservations_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/reservations/{reservationName}": {
+      "get": {
+        "operationId": "Reservations_Get",
+        "tags": [
+          "Reservations"
+        ],
+        "description": "Get a Reservation",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "reservationName",
+            "in": "path",
+            "description": "The name of the reservation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LiftrBase.Storage.Reservation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reservations_Get": {
+            "$ref": "./examples/Reservations_Get_MaximumSet_Gen.json"
+          },
+          "Reservations_Get_MinSet": {
+            "$ref": "./examples/Reservations_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Reservations_Create",
+        "tags": [
+          "Reservations"
+        ],
+        "description": "Create a Reservation",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "reservationName",
+            "in": "path",
+            "description": "The name of the reservation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LiftrBase.Storage.Reservation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Reservation' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LiftrBase.Storage.Reservation"
+            }
+          },
+          "201": {
+            "description": "Resource 'Reservation' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LiftrBase.Storage.Reservation"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reservations_Create": {
+            "$ref": "./examples/Reservations_Create_MaximumSet_Gen.json"
+          },
+          "Reservations_Create_MinSet": {
+            "$ref": "./examples/Reservations_Create_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Reservations_Update",
+        "tags": [
+          "Reservations"
+        ],
+        "description": "Update a Reservation",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "reservationName",
+            "in": "path",
+            "description": "The name of the reservation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReservationUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LiftrBase.Storage.Reservation"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reservations_Update": {
+            "$ref": "./examples/Reservations_Update_MaximumSet_Gen.json"
+          },
+          "Reservations_Update_MinSet": {
+            "$ref": "./examples/Reservations_Update_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Reservations_Delete",
+        "tags": [
+          "Reservations"
+        ],
+        "description": "Delete a Reservation",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "reservationName",
+            "in": "path",
+            "description": "The name of the reservation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reservations_Delete": {
+            "$ref": "./examples/Reservations_Delete_MaximumSet_Gen.json"
+          },
+          "Reservations_Delete_MinSet": {
+            "$ref": "./examples/Reservations_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools": {
       "get": {
         "operationId": "StoragePools_ListByResourceGroup",
@@ -172,7 +526,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePool}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}": {
       "get": {
         "operationId": "StoragePools_Get",
         "tags": [
@@ -190,9 +544,9 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "storagePool",
+            "name": "storagePoolName",
             "in": "path",
-            "description": "Name of the storage pool.",
+            "description": "Name of the Storage Pool.",
             "required": true,
             "type": "string",
             "minLength": 4,
@@ -239,9 +593,9 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "storagePool",
+            "name": "storagePoolName",
             "in": "path",
-            "description": "Name of the storage pool.",
+            "description": "Name of the Storage Pool.",
             "required": true,
             "type": "string",
             "minLength": 4,
@@ -287,9 +641,6 @@
         "x-ms-examples": {
           "StoragePools_Create": {
             "$ref": "./examples/StoragePools_Create_MaximumSet_Gen.json"
-          },
-          "StoragePools_Create_MinSet": {
-            "$ref": "./examples/StoragePools_Create_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -314,9 +665,9 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "storagePool",
+            "name": "storagePoolName",
             "in": "path",
-            "description": "Name of the storage pool.",
+            "description": "Name of the Storage Pool.",
             "required": true,
             "type": "string",
             "minLength": 4,
@@ -390,9 +741,9 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "storagePool",
+            "name": "storagePoolName",
             "in": "path",
-            "description": "Name of the storage pool.",
+            "description": "Name of the Storage Pool.",
             "required": true,
             "type": "string",
             "minLength": 4,
@@ -440,9 +791,315 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/avsStorageContainers": {
+      "get": {
+        "operationId": "AvsStorageContainers_ListByStoragePool",
+        "tags": [
+          "AvsStorageContainers"
+        ],
+        "description": "List AvsStorageContainer resources by StoragePool",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storagePoolName",
+            "in": "path",
+            "description": "Name of the Storage Pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 20
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AvsStorageContainerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AvsStorageContainers_ListByStoragePool": {
+            "$ref": "./examples/AvsStorageContainers_ListByStoragePool_MaximumSet_Gen.json"
+          },
+          "AvsStorageContainers_ListByStoragePool_MinSet": {
+            "$ref": "./examples/AvsStorageContainers_ListByStoragePool_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/avsStorageContainers/{storageContainerName}": {
+      "get": {
+        "operationId": "AvsStorageContainers_Get",
+        "tags": [
+          "AvsStorageContainers"
+        ],
+        "description": "Get a AvsStorageContainer",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storagePoolName",
+            "in": "path",
+            "description": "Name of the Storage Pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 20
+          },
+          {
+            "name": "storageContainerName",
+            "in": "path",
+            "description": "The name of the storage container.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z\\-_]{1,32}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AvsStorageContainer"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AvsStorageContainers_Get": {
+            "$ref": "./examples/AvsStorageContainers_Get_MaximumSet_Gen.json"
+          },
+          "AvsStorageContainers_Get_MinSet": {
+            "$ref": "./examples/AvsStorageContainers_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AvsStorageContainers_Create",
+        "tags": [
+          "AvsStorageContainers"
+        ],
+        "description": "Create a AvsStorageContainer",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storagePoolName",
+            "in": "path",
+            "description": "Name of the Storage Pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 20
+          },
+          {
+            "name": "storageContainerName",
+            "in": "path",
+            "description": "The name of the storage container.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z\\-_]{1,32}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AvsStorageContainer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AvsStorageContainer"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AvsStorageContainers_Create": {
+            "$ref": "./examples/AvsStorageContainers_Create_MaximumSet_Gen.json"
+          },
+          "AvsStorageContainers_Create_MinSet": {
+            "$ref": "./examples/AvsStorageContainers_Create_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "AvsStorageContainers_Delete",
+        "tags": [
+          "AvsStorageContainers"
+        ],
+        "description": "Delete a AvsStorageContainer",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storagePoolName",
+            "in": "path",
+            "description": "Name of the Storage Pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 20
+          },
+          {
+            "name": "storageContainerName",
+            "in": "path",
+            "description": "The name of the storage container.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z\\-_]{1,32}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AvsStorageContainers_Delete": {
+            "$ref": "./examples/AvsStorageContainers_Delete_MaximumSet_Gen.json"
+          },
+          "AvsStorageContainers_Delete_MinSet": {
+            "$ref": "./examples/AvsStorageContainers_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
+    "AvsStorageContainer": {
+      "type": "object",
+      "description": "The AVS Storage Container resource type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AvsStorageContainerProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AvsStorageContainerListResult": {
+      "type": "object",
+      "description": "The response of a AvsStorageContainer list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AvsStorageContainer items on this page",
+          "items": {
+            "$ref": "#/definitions/AvsStorageContainer"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AvsStorageContainerProperties": {
+      "type": "object",
+      "description": "The properties of an AVS Storage Container resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
+    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -473,25 +1130,56 @@
         ]
       }
     },
-    "LiftrBase.Ip": {
+    "AzureVmwareService": {
       "type": "object",
-      "description": "IP/port pair.",
+      "description": "Azure VmWare Service properties. VASA is vSphere Storage APIs for Storage Awareness.",
       "properties": {
-        "address": {
+        "storageProviderId": {
           "type": "string",
-          "description": "IP address."
+          "description": "Internal VMware id identifying this StoragePool as a storage provider."
         },
-        "port": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Port number.",
-          "minimum": 1,
-          "maximum": 65535
+        "sddc": {
+          "type": "string",
+          "description": "Resource id pointing at the AVS SDDC the pool is configured with (used by AVS Resource Provider to keep track of attached pools)."
+        },
+        "vasaProviderPassword": {
+          "type": "string",
+          "format": "password",
+          "description": "Password for VASA service login, disabled if omitted or set to null.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
         }
       },
       "required": [
-        "address"
+        "storageProviderId"
       ]
+    },
+    "AzureVmwareServiceUpdate": {
+      "type": "object",
+      "description": "Azure VmWare Service properties. VASA is vSphere Storage APIs for Storage Awareness.",
+      "properties": {
+        "storageProviderId": {
+          "type": "string",
+          "description": "Internal VMware id identifying this StoragePool as a storage provider."
+        },
+        "sddc": {
+          "type": "string",
+          "description": "Resource id pointing at the AVS SDDC the pool is configured with (used by AVS Resource Provider to keep track of attached pools)."
+        },
+        "vasaProviderPassword": {
+          "type": "string",
+          "format": "password",
+          "description": "Password for VASA service login, disabled if omitted or set to null.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        }
+      }
     },
     "LiftrBase.MarketplaceDetails": {
       "type": "object",
@@ -499,7 +1187,11 @@
       "properties": {
         "subscriptionId": {
           "type": "string",
-          "description": "Marketplace Subscription Id"
+          "description": "Azure subscription id for the the marketplace offer is purchased from"
+        },
+        "subscriptionStatus": {
+          "$ref": "#/definitions/LiftrBase.MarketplaceSubscriptionStatus",
+          "description": "Marketplace subscription status"
         },
         "offerDetails": {
           "$ref": "#/definitions/LiftrBase.OfferDetails",
@@ -510,6 +1202,42 @@
         "subscriptionId",
         "offerDetails"
       ]
+    },
+    "LiftrBase.MarketplaceSubscriptionStatus": {
+      "type": "string",
+      "description": "Marketplace subscription status of a resource.",
+      "enum": [
+        "PendingFulfillmentStart",
+        "Subscribed",
+        "Suspended",
+        "Unsubscribed"
+      ],
+      "x-ms-enum": {
+        "name": "MarketplaceSubscriptionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PendingFulfillmentStart",
+            "value": "PendingFulfillmentStart",
+            "description": "Purchased but not yet activated"
+          },
+          {
+            "name": "Subscribed",
+            "value": "Subscribed",
+            "description": "Marketplace subscription is activated"
+          },
+          {
+            "name": "Suspended",
+            "value": "Suspended",
+            "description": "This state indicates that a customer's payment for the Marketplace service was not received"
+          },
+          {
+            "name": "Unsubscribed",
+            "value": "Unsubscribed",
+            "description": "Customer has cancelled the subscription"
+          }
+        ]
+      }
     },
     "LiftrBase.OfferDetails": {
       "type": "object",
@@ -533,11 +1261,11 @@
         },
         "termUnit": {
           "type": "string",
-          "description": "Plan Display Name for the marketplace offer"
+          "description": "Term Unit for the marketplace offer"
         },
         "termId": {
           "type": "string",
-          "description": "Plan Display Name for the marketplace offer"
+          "description": "Term ID for the marketplace offer"
         }
       },
       "required": [
@@ -546,66 +1274,29 @@
         "planId"
       ]
     },
-    "LiftrBase.Storage.AzureVmwareService": {
+    "LiftrBase.Storage.Reservation": {
       "type": "object",
-      "description": "Azure VmWare Service properties. VASA is vSphere Storage APIs for Storage Awareness.",
+      "description": "Reservation resource type.",
       "properties": {
-        "vasaProviderUsername": {
-          "type": "string",
-          "description": "VASA Provider user name.",
-          "readOnly": true
-        },
-        "vasaProviderUrls": {
-          "type": "array",
-          "description": "VASA Provider URL.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "vasaIscsiEndpoints": {
-          "type": "array",
-          "description": "Array of iSCSI endpoint and IQN.",
-          "items": {
-            "$ref": "#/definitions/LiftrBase.Storage.VasaIscsiEndpoint"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        },
-        "vasaProviderPassword": {
-          "type": "string",
-          "format": "password",
-          "description": "Password for VASA service login.",
+        "properties": {
+          "$ref": "#/definitions/LiftrBase.Storage.ReservationProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
           "x-ms-mutability": [
-            "update",
+            "read",
             "create"
-          ],
-          "x-ms-secret": true
+          ]
         }
       },
-      "required": [
-        "vasaProviderPassword"
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
       ]
     },
-    "LiftrBase.Storage.AzureVmwareServiceUpdate": {
+    "LiftrBase.Storage.ReservationProperties": {
       "type": "object",
-      "description": "Azure VmWare Service properties. VASA is vSphere Storage APIs for Storage Awareness.",
-      "properties": {
-        "vasaProviderPassword": {
-          "type": "string",
-          "format": "password",
-          "description": "Password for VASA service login.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ],
-          "x-ms-secret": true
-        }
-      }
-    },
-    "LiftrBase.Storage.BaseStorageResourceProperties": {
-      "type": "object",
-      "description": "Base storage resource properties that can be extended for storage arm resources.",
+      "description": "Properties of a Reservation resource.",
       "properties": {
         "marketplace": {
           "$ref": "#/definitions/LiftrBase.MarketplaceDetails",
@@ -623,92 +1314,35 @@
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
-        },
-        "subnetId": {
-          "type": "string",
-          "description": "Subnet Id for Vnet injection.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "availabilityZone": {
-          "type": "string",
-          "description": "Azure Availability Zone to create the Pool in.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "provisionedBandwidth": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Bandwidth provisioned by customer in bytes/second.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "iscsi": {
-          "$ref": "#/definitions/LiftrBase.Storage.Iscsi",
-          "description": "iSCSI standard.",
-          "readOnly": true
-        },
-        "avs": {
-          "$ref": "#/definitions/LiftrBase.Storage.AzureVmwareService",
-          "description": "Azure VmWare Service Properties.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
         }
       },
       "required": [
         "marketplace",
-        "user",
-        "subnetId"
+        "user"
       ]
     },
-    "LiftrBase.Storage.Iscsi": {
+    "LiftrBase.Storage.VnetInjection": {
       "type": "object",
-      "description": "iSCSI is a storage networking standard.",
+      "description": "Describes parameters for Virtual Network to deploy to (VNet injection).",
       "properties": {
-        "ips": {
-          "type": "array",
-          "description": "iSCSI IP/port pairs used for establishing connections and exchanging data.",
-          "items": {
-            "$ref": "#/definitions/LiftrBase.Ip"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "LiftrBase.Storage.VasaIscsiEndpoint": {
-      "type": "object",
-      "description": "Describes iSCSI endpoint and IQN.",
-      "properties": {
-        "address": {
+        "subnetId": {
           "type": "string",
-          "description": "iSCSI IP address."
-        },
-        "port": {
-          "type": "integer",
-          "format": "int32",
-          "description": "iSCSI TCP port."
-        },
-        "iqn": {
-          "type": "string",
-          "description": "iSCSI Qualified Name."
+          "description": "Full Azure Resource ID of the Virtual Network subnet to make the Pool visible in."
         }
       },
       "required": [
-        "address",
-        "port",
-        "iqn"
+        "subnetId"
       ]
+    },
+    "LiftrBase.Storage.VnetInjectionUpdate": {
+      "type": "object",
+      "description": "Describes parameters for Virtual Network to deploy to (VNet injection).",
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "description": "Full Azure Resource ID of the Virtual Network subnet to make the Pool visible in."
+        }
+      }
     },
     "LiftrBase.UserDetails": {
       "type": "object",
@@ -716,15 +1350,15 @@
       "properties": {
         "firstName": {
           "type": "string",
-          "description": "User first name."
+          "description": "First name of the user"
         },
         "lastName": {
           "type": "string",
-          "description": "User last name."
+          "description": "Last name of the user"
         },
         "emailAddress": {
           "$ref": "#/definitions/LiftrBase.email",
-          "description": "User email address."
+          "description": "Email address of the user"
         },
         "upn": {
           "type": "string",
@@ -747,15 +1381,15 @@
       "properties": {
         "firstName": {
           "type": "string",
-          "description": "User first name."
+          "description": "First name of the user"
         },
         "lastName": {
           "type": "string",
-          "description": "User last name."
+          "description": "Last name of the user"
         },
         "emailAddress": {
           "$ref": "#/definitions/LiftrBase.email",
-          "description": "User email address."
+          "description": "Email address of the user"
         },
         "upn": {
           "type": "string",
@@ -772,12 +1406,60 @@
       "description": "Reusable representation of an email address.",
       "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$"
     },
+    "ReservationListResult": {
+      "type": "object",
+      "description": "The response of a Reservation list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Reservation items on this page",
+          "items": {
+            "$ref": "#/definitions/LiftrBase.Storage.Reservation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ReservationUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the Reservation.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ReservationUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ReservationUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Reservation.",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/LiftrBase.UserDetailsUpdate",
+          "description": "Details of the user."
+        }
+      }
+    },
     "StoragePool": {
       "type": "object",
-      "description": "StoragePool resource.",
+      "description": "Storage Pool resource type.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/LiftrBase.Storage.BaseStorageResourceProperties",
+          "$ref": "#/definitions/StoragePoolProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -813,6 +1495,62 @@
         "value"
       ]
     },
+    "StoragePoolProperties": {
+      "type": "object",
+      "description": "Properties of a Storage Pool resource.",
+      "properties": {
+        "storagePoolId": {
+          "type": "string",
+          "description": "ID of StoragePool in Pure Storage systems.",
+          "readOnly": true
+        },
+        "availabilityZone": {
+          "type": "string",
+          "description": "Azure Availability Zone the Pool is located in."
+        },
+        "vnetInjection": {
+          "$ref": "#/definitions/LiftrBase.Storage.VnetInjection",
+          "description": "Describes parameters for Virtual Network to deploy to (VNet injection)."
+        },
+        "dataRetentionPeriod": {
+          "type": "integer",
+          "format": "int64",
+          "description": "How long a deleted object is kept before eradication (time in seconds).",
+          "readOnly": true
+        },
+        "avsEnabled": {
+          "type": "boolean",
+          "description": "if true, VASA support is enabled and the AVS configuration parameters below may be passed to change the current password. if false, VASA support will be disabled (but previous password configuration is not lost)."
+        },
+        "provisionedBandwidthMbPerSec": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total bandwidth provisioned for the pool (in MB/s)."
+        },
+        "avs": {
+          "$ref": "#/definitions/AzureVmwareService",
+          "description": "Presented if avsEnabled is true."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        },
+        "reservationResourceId": {
+          "type": "string",
+          "description": "Resource id of the reservation resource. The RP should make sure this is a valid resource before allowing StoragePool creation to continue."
+        }
+      },
+      "required": [
+        "storagePoolId",
+        "availabilityZone",
+        "vnetInjection",
+        "dataRetentionPeriod",
+        "avsEnabled",
+        "provisionedBandwidthMbPerSec",
+        "reservationResourceId"
+      ]
+    },
     "StoragePoolUpdate": {
       "type": "object",
       "description": "The type used for update operations of the StoragePool.",
@@ -834,34 +1572,36 @@
       "type": "object",
       "description": "The updatable properties of the StoragePool.",
       "properties": {
-        "user": {
-          "$ref": "#/definitions/LiftrBase.UserDetailsUpdate",
-          "description": "Details of the user."
+        "availabilityZone": {
+          "type": "string",
+          "description": "Azure Availability Zone the Pool is located in."
         },
-        "provisionedBandwidth": {
+        "vnetInjection": {
+          "$ref": "#/definitions/LiftrBase.Storage.VnetInjectionUpdate",
+          "description": "Describes parameters for Virtual Network to deploy to (VNet injection)."
+        },
+        "avsEnabled": {
+          "type": "boolean",
+          "description": "if true, VASA support is enabled and the AVS configuration parameters below may be passed to change the current password. if false, VASA support will be disabled (but previous password configuration is not lost)."
+        },
+        "provisionedBandwidthMbPerSec": {
           "type": "integer",
           "format": "int64",
-          "description": "Bandwidth provisioned by customer in bytes/second.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "description": "Total bandwidth provisioned for the pool (in MB/s)."
         },
         "avs": {
-          "$ref": "#/definitions/LiftrBase.Storage.AzureVmwareServiceUpdate",
-          "description": "Azure VmWare Service Properties.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "$ref": "#/definitions/AzureVmwareServiceUpdate",
+          "description": "Presented if avsEnabled is true."
+        },
+        "reservationResourceId": {
+          "type": "string",
+          "description": "Resource id of the reservation resource. The RP should make sure this is a valid resource before allowing StoragePool creation to continue."
         }
       }
     },
     "Versions": {
       "type": "string",
-      "description": "API versions of PureStorage.Block",
+      "description": "Supported versions for PureStorage.Block.",
       "enum": [
         "2023-06-01-preview"
       ],
