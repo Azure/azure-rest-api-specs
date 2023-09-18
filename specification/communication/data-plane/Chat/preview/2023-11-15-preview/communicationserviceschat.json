@@ -1626,6 +1626,9 @@
             "$ref": "#/definitions/ChatParticipant"
           }
         },
+        "retentionPolicy": {
+          "$ref": "#/definitions/ChatRetentionPolicy"
+        },
         "metadata": {
           "description": "Contextual metadata for the thread. The metadata consists of name/value pairs. The total size of all metadata pairs can be up to 1KB in size.",
           "type": "object",
@@ -1669,6 +1672,9 @@
           "description": "The timestamp when the chat thread was deleted. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
           "type": "string",
           "example": "2020-10-30T10:50:50Z"
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/ChatRetentionPolicy"
         },
         "metadata": {
           "description": "Contextual metadata for the thread. The metadata consists of name/value pairs. The total size of all metadata pairs can be up to 1KB in size.",
@@ -1759,6 +1765,9 @@
           "type": "string",
           "example": "Lunch Thread"
         },
+        "retentionPolicy": {
+          "$ref": "#/definitions/ChatRetentionPolicy"
+        },
         "metadata": {
           "description": "Contextual metadata for the thread. The metadata consists of name/value pairs. The total size of all metadata pairs can be up to 1KB in size.",
           "type": "object",
@@ -1778,6 +1787,53 @@
           "example": "Bob Admin"
         }
       }
+    },
+    "ChatRetentionPolicy": {
+      "description": "Data retention policy for auto deletion. It's not updatable after creation.",
+      "type": "object",
+      "discriminator": "kind",
+      "properties": {
+        "kind": {
+          "description": "Retention Policy Type",
+          "enum": [
+            "threadCreationDate"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RetentionPolicyKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "threadCreationDate",
+                "description": "Thread retention policy based on thread creation date."
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "ThreadCreationDateRetentionPolicy": {
+      "description": "Thread retention policy based on thread creation date.",
+      "type": "object",
+      "x-ms-discriminator-value": "threadCreationDate",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRetentionPolicy"
+        }
+      ],
+      "properties": {
+        "deleteThreadAfterDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Indicates how many days after the thread creation the thread will be deleted. Only 90 is accepted for now."
+        }
+      },
+      "required": [
+        "deleteThreadAfterDays"
+      ]
     }
   },
   "parameters": {
