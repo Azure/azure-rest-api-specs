@@ -26,6 +26,7 @@ These are the global settings for the cloudhealth.
 
 ```yaml
 openapi-type: arm
+openapi-subtype: rpaas
 tag: package-2023-10-01-preview
 ```
 

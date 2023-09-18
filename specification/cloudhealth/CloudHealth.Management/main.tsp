@@ -271,7 +271,7 @@ enum SignalOperator {
     @doc("Equal to")
     Equals,
 
-    @doc("Contains")
+    @doc("Contains (only applicable for text data type)")
     Contains,
 }
 
@@ -314,6 +314,7 @@ model AuthenticationSetting is ProxyResource<AuthenticationSettingProperties> {
 @doc("Supported kinds of authentication settings as discriminator")
 enum AuthenticationKind{
     ManagedIdentity,
+    Other // for future extensibility, not used yet but linter needs at least two enum values
 }
 
 @doc("Authentication setting properties")
