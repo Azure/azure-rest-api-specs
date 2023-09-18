@@ -518,7 +518,7 @@ scalar AzureMonitorWorkspaceResourceId
 @doc("A relationship (aka edge) between two entities in a health model")
 @parentResource(HealthModel)
 model Relationship is ProxyResource<RelationshipProperties> {
-    @doc("Name of the relationship. Must be unique within a health model. For example, a concatination of parentEntityName and childEntityName can be used as the name.")
+    @doc("Name of the relationship. Must be unique within a health model. For example, a concatenation of parentEntityName and childEntityName can be used as the name.")
     @key("relationshipName")
     @segment("relationships")
     @path
