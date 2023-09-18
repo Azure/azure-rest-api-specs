@@ -6,13 +6,13 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-storagetasks
-namespace: azure.mgmt.storagetasks
+package-name: azure-mgmt-storageactions
+namespace: azure.mgmt.storageactions
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/storagetasks/azure-mgmt-storagetasks/azure/mgmt/storagetasks
+output-folder: $(python-sdks-folder)/storageactions/azure-mgmt-storageactions/azure/mgmt/storageactions
 ```
