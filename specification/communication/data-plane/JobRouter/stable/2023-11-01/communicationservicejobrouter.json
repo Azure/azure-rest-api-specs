@@ -88,7 +88,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "Id of the classification policy.",
+            "description": "Unique identifier of this policy.",
             "required": true,
             "type": "string"
           }
@@ -180,7 +180,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "Id of the classification policy.",
+            "description": "Unique identifier of this policy.",
             "required": true,
             "type": "string"
           }
@@ -259,7 +259,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "Id of the distribution policy.",
+            "description": "The unique identifier of the policy.",
             "required": true,
             "type": "string"
           }
@@ -299,17 +299,17 @@
           {
             "name": "id",
             "in": "path",
-            "description": "Id of the distribution policy.",
+            "description": "The unique identifier of the policy.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "patch",
+            "name": "resource",
             "in": "body",
-            "description": "Model of distribution policy properties to be patched. See also:\nhttps://datatracker.ietf.org/doc/html/rfc7386.",
+            "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DistributionPolicy"
+              "$ref": "#/definitions/DistributionPolicyUpdate"
             }
           }
         ],
@@ -351,7 +351,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "Id of the distribution policy.",
+            "description": "The unique identifier of the policy.",
             "required": true,
             "type": "string"
           }
@@ -430,7 +430,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "Id of the exception policy to retrieve.",
+            "description": "The Id of the exception policy",
             "required": true,
             "type": "string"
           }
@@ -470,17 +470,17 @@
           {
             "name": "id",
             "in": "path",
-            "description": "Id of the exception policy.",
+            "description": "The Id of the exception policy",
             "required": true,
             "type": "string"
           },
           {
-            "name": "patch",
+            "name": "resource",
             "in": "body",
-            "description": "Model of exception policy properties to be patched. See also:\nhttps://datatracker.ietf.org/doc/html/rfc7386",
+            "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ExceptionPolicy"
+              "$ref": "#/definitions/ExceptionPolicyUpdate"
             }
           }
         ],
@@ -522,7 +522,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "Id of the exception policy to delete.",
+            "description": "The Id of the exception policy",
             "required": true,
             "type": "string"
           }
@@ -737,7 +737,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "Id of the job to retrieve.",
+            "description": "The id of the job.",
             "required": true,
             "type": "string"
           }
@@ -777,17 +777,17 @@
           {
             "name": "id",
             "in": "path",
-            "description": "Id of the job.",
+            "description": "The id of the job.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "patch",
+            "name": "resource",
             "in": "body",
-            "description": "Model of job properties to be created or patched. See also:\nhttps://datatracker.ietf.org/doc/html/rfc7386.",
+            "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RouterJob"
+              "$ref": "#/definitions/RouterJobUpdate"
             }
           }
         ],
@@ -829,7 +829,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "Id of the job.",
+            "description": "The id of the job.",
             "required": true,
             "type": "string"
           }
@@ -1183,7 +1183,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "Id of the queue to retrieve.",
+            "description": "The Id of this queue",
             "required": true,
             "type": "string"
           }
@@ -1223,17 +1223,17 @@
           {
             "name": "id",
             "in": "path",
-            "description": "Id of the queue.",
+            "description": "The Id of this queue",
             "required": true,
             "type": "string"
           },
           {
-            "name": "patch",
+            "name": "resource",
             "in": "body",
-            "description": "Model of queue properties to be patched. See also:\nhttps://datatracker.ietf.org/doc/html/rfc7386.",
+            "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RouterQueue"
+              "$ref": "#/definitions/RouterQueueUpdate"
             }
           }
         ],
@@ -1275,7 +1275,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "Id of the queue to delete.",
+            "description": "The Id of this queue",
             "required": true,
             "type": "string"
           }
@@ -1338,7 +1338,7 @@
         }
       }
     },
-    "/routing/workers": {
+    "/routing/routing/workers": {
       "get": {
         "operationId": "JobRouterOperations_ListWorkers",
         "summary": "Retrieves existing workers.",
@@ -1453,7 +1453,7 @@
           {
             "name": "workerId",
             "in": "path",
-            "description": "Id of the worker to retrieve.",
+            "description": "Id of the worker.",
             "required": true,
             "type": "string"
           }
@@ -1498,12 +1498,12 @@
             "type": "string"
           },
           {
-            "name": "patch",
+            "name": "resource",
             "in": "body",
-            "description": "Model of worker properties to be created or patched. See also:\nhttps://datatracker.ietf.org/doc/html/rfc7386.",
+            "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RouterWorker"
+              "$ref": "#/definitions/RouterWorkerUpdate"
             }
           }
         ],
@@ -1545,7 +1545,7 @@
           {
             "name": "workerId",
             "in": "path",
-            "description": "Id of the worker to delete.",
+            "description": "Id of the worker.",
             "required": true,
             "type": "string"
           }
@@ -1826,6 +1826,22 @@
         "capacityCostPerJob"
       ]
     },
+    "ChannelConfigurationUpdate": {
+      "type": "object",
+      "description": "Represents the capacity a job in this channel will consume from a worker",
+      "properties": {
+        "capacityCostPerJob": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The amount of capacity that an instance of a job of this channel will consume\nof the total worker capacity."
+        },
+        "maxNumberOfJobs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of jobs that can be supported concurrently for this channel."
+        }
+      }
+    },
     "ClassificationPolicy": {
       "type": "object",
       "description": "A container for the rules that govern how jobs are classified.",
@@ -2087,7 +2103,10 @@
           "$ref": "#/definitions/DistributionMode",
           "description": "Abstract base class for defining a distribution mode"
         }
-      }
+      },
+      "required": [
+        "id"
+      ]
     },
     "DistributionPolicyItem": {
       "type": "object",
@@ -2100,6 +2119,25 @@
         "etag": {
           "type": "string",
           "description": "(Optional) The Concurrency Token."
+        }
+      }
+    },
+    "DistributionPolicyUpdate": {
+      "type": "object",
+      "description": "Policy governing how jobs are distributed to workers",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The human readable name of the policy."
+        },
+        "offerExpiresAfterSeconds": {
+          "type": "number",
+          "format": "float",
+          "description": "The number of seconds after which any offers created under this policy will be\nexpired."
+        },
+        "mode": {
+          "$ref": "#/definitions/DistributionMode",
+          "description": "Abstract base class for defining a distribution mode"
         }
       }
     },
@@ -2137,7 +2175,10 @@
             "$ref": "#/definitions/ExceptionRule"
           }
         }
-      }
+      },
+      "required": [
+        "id"
+      ]
     },
     "ExceptionPolicyItem": {
       "type": "object",
@@ -2150,6 +2191,23 @@
         "etag": {
           "type": "string",
           "description": "(Optional) The Concurrency Token."
+        }
+      }
+    },
+    "ExceptionPolicyUpdate": {
+      "type": "object",
+      "description": "A policy that defines actions to execute when exception are triggered.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "(Optional) The name of the exception policy."
+        },
+        "exceptionRules": {
+          "type": "object",
+          "description": "(Optional) A dictionary collection of exception rules on the exception policy.\nKey is the Id of each exception rule.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ExceptionRuleUpdate"
+          }
         }
       }
     },
@@ -2173,6 +2231,23 @@
         "trigger",
         "actions"
       ]
+    },
+    "ExceptionRuleUpdate": {
+      "type": "object",
+      "description": "A rule that defines actions to execute upon a specific trigger.",
+      "properties": {
+        "trigger": {
+          "$ref": "#/definitions/ExceptionTrigger",
+          "description": "The trigger for this exception rule"
+        },
+        "actions": {
+          "type": "object",
+          "description": "A dictionary collection of actions to perform once the exception is triggered.\nKey is the Id of each exception action.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ExceptionAction"
+          }
+        }
+      }
     },
     "ExceptionTrigger": {
       "type": "object",
@@ -2794,7 +2869,10 @@
           "$ref": "#/definitions/JobMatchingMode",
           "description": "The matching mode to be applied to this job.\n            \nSupported types:\n    \n       \nQueueAndMatchMode: Used when matching worker to a job is required to be\ndone right after job is queued.\nScheduleAndSuspendMode: Used for scheduling\njobs to be queued at a future time. At specified time, matching of a worker to\nthe job will not start automatically.\nSuspendMode: Used when matching workers\nto a job needs to be suspended."
         }
-      }
+      },
+      "required": [
+        "id"
+      ]
     },
     "RouterJobAssignment": {
       "type": "object",
@@ -2997,6 +3075,66 @@
         ]
       }
     },
+    "RouterJobUpdate": {
+      "type": "object",
+      "description": "A unit of work to be routed",
+      "properties": {
+        "channelReference": {
+          "type": "string",
+          "description": "Reference to an external parent context, eg. call ID."
+        },
+        "channelId": {
+          "type": "string",
+          "description": "The channel identifier. eg. voice, chat, etc."
+        },
+        "classificationPolicyId": {
+          "type": "string",
+          "description": "The Id of the Classification policy used for classifying a job."
+        },
+        "queueId": {
+          "type": "string",
+          "description": "The Id of the Queue that this job is queued to."
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The priority of this job."
+        },
+        "dispositionCode": {
+          "type": "string",
+          "description": "Reason code for cancelled or closed jobs."
+        },
+        "requestedWorkerSelectors": {
+          "type": "array",
+          "description": "A collection of manually specified label selectors, which a worker must satisfy\nin order to process this job.",
+          "items": {
+            "$ref": "#/definitions/RouterWorkerSelector"
+          },
+          "x-ms-identifiers": []
+        },
+        "labels": {
+          "type": "object",
+          "description": "A set of key/value pairs that are identifying attributes used by the rules\nengines to make decisions.",
+          "additionalProperties": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "A set of non-identifying attributes attached to this job",
+          "additionalProperties": true
+        },
+        "notes": {
+          "type": "object",
+          "description": "Notes attached to a job, sorted by timestamp",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "matchingMode": {
+          "$ref": "#/definitions/JobMatchingMode",
+          "description": "The matching mode to be applied to this job.\n            \nSupported types:\n    \n       \nQueueAndMatchMode: Used when matching worker to a job is required to be\ndone right after job is queued.\nScheduleAndSuspendMode: Used for scheduling\njobs to be queued at a future time. At specified time, matching of a worker to\nthe job will not start automatically.\nSuspendMode: Used when matching workers\nto a job needs to be suspended."
+        }
+      }
+    },
     "RouterQueue": {
       "type": "object",
       "description": "A queue that can contain jobs to be routed.",
@@ -3023,7 +3161,10 @@
           "type": "string",
           "description": "(Optional) The ID of the exception policy that determines various job\nescalation rules."
         }
-      }
+      },
+      "required": [
+        "id"
+      ]
     },
     "RouterQueueItem": {
       "type": "object",
@@ -3091,6 +3232,29 @@
         "queueId",
         "length"
       ]
+    },
+    "RouterQueueUpdate": {
+      "type": "object",
+      "description": "A queue that can contain jobs to be routed.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of this queue."
+        },
+        "distributionPolicyId": {
+          "type": "string",
+          "description": "The ID of the distribution policy that will determine how a job is distributed\nto workers."
+        },
+        "labels": {
+          "type": "object",
+          "description": "A set of key/value pairs that are identifying attributes used by the rules\nengines to make decisions.",
+          "additionalProperties": true
+        },
+        "exceptionPolicyId": {
+          "type": "string",
+          "description": "(Optional) The ID of the exception policy that determines various job\nescalation rules."
+        }
+      }
     },
     "RouterRule": {
       "type": "object",
@@ -3175,7 +3339,10 @@
           "type": "boolean",
           "description": "A flag indicating this worker is open to receive offers or not."
         }
-      }
+      },
+      "required": [
+        "id"
+      ]
     },
     "RouterWorkerAssignment": {
       "type": "object",
@@ -3314,6 +3481,43 @@
             "description": "Worker is not active. No new offers are sent."
           }
         ]
+      }
+    },
+    "RouterWorkerUpdate": {
+      "type": "object",
+      "description": "An entity for jobs to be routed to",
+      "properties": {
+        "queueAssignments": {
+          "type": "object",
+          "description": "The queue(s) that this worker can receive work from.",
+          "additionalProperties": true
+        },
+        "totalCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total capacity score this worker has to manage multiple concurrent jobs."
+        },
+        "labels": {
+          "type": "object",
+          "description": "A set of key/value pairs that are identifying attributes used by the rules\nengines to make decisions.",
+          "additionalProperties": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "A set of non-identifying attributes attached to this worker.",
+          "additionalProperties": true
+        },
+        "channelConfigurations": {
+          "type": "object",
+          "description": "The channel(s) this worker can handle and their impact on the workers capacity.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ChannelConfigurationUpdate"
+          }
+        },
+        "availableForOffers": {
+          "type": "boolean",
+          "description": "A flag indicating this worker is open to receive offers or not."
+        }
       }
     },
     "RuleEngineQueueSelectorAttachment": {

@@ -249,11 +249,13 @@ model ClassificationPolicyItem {
   etag?: string;
 }
 
+@resource("distributionPolicies")
 @doc("Policy governing how jobs are distributed to workers")
 model DistributionPolicy {
+  @key("id")
   @doc("The unique identifier of the policy.")
   @visibility("read")
-  id?: string;
+  id: string;
 
   @doc("The human readable name of the policy.")
   name?: string;
@@ -302,11 +304,13 @@ model DistributionPolicyItem {
   etag?: string;
 }
 
+@resource("exceptionPolicies")
 @doc("A policy that defines actions to execute when exception are triggered.")
 model ExceptionPolicy {
+  @key("id")
   @doc("The Id of the exception policy")
   @visibility("read")
-  id?: string;
+  id: string;
 
   @doc("(Optional) The name of the exception policy.")
   name?: string;
@@ -346,11 +350,13 @@ model ExceptionPolicyItem {
   etag?: string;
 }
 
+@resource("jobs")
 @doc("A unit of work to be routed")
 model RouterJob {
+  @key("id")
   @doc("The id of the job.")
   @visibility("read")
-  id?: string;
+  id: string;
 
   @doc("Reference to an external parent context, eg. call ID.")
   channelReference?: string;
@@ -667,11 +673,13 @@ declined the job will also be eligible for the job at that time.
   retryOfferAt?: utcDateTime;
 }
 
+@resource("queues")
 @doc("A queue that can contain jobs to be routed.")
 model RouterQueue {
+  @key("id")
   @doc("The Id of this queue")
   @visibility("read")
-  id?: string;
+  id: string;
 
   @doc("The name of this queue.")
   name?: string;
@@ -725,11 +733,13 @@ by job priority
   longestJobWaitTimeMinutes?: float32;
 }
 
+@resource("workers")
 @doc("An entity for jobs to be routed to")
 model RouterWorker {
+  @key("workerId")
   @doc("Id of the worker.")
   @visibility("read")
-  id?: string;
+  id: string;
 
   @doc("The current state of the worker.")
   @visibility("read")
