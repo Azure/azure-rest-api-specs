@@ -26,18 +26,9 @@ These are the global settings for the communicationservices.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-preview-2023-11
+tag: package-chat-2021-03-07
 ```
 
-
-### Tag: package-preview-2023-11
-
-These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2023-11'
-input-file:
-  - preview/2023-11-15-preview/communicationserviceschat.json
-```
 ### Tag: package-2020-09-21-preview2
 
 These settings apply only when `--tag=package-2020-09-21-preview2` is specified on the command line.
@@ -146,6 +137,15 @@ input-file:
   - preview/2023-07-01-preview/communicationserviceschat.json
 title:
   Azure Communication Services
+```
+
+### Tag: package-chat-2023-11-15-preview
+
+These settings apply only when `--tag=package-chat-2023-11-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-chat-2023-11-15-preview'
+input-file:
+  - preview/2023-11-15-preview/communicationserviceschat.json
 ```
 
 ---
