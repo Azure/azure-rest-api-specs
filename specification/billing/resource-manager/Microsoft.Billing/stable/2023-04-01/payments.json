@@ -1,631 +1,569 @@
 {
-    "info": {
-      "description": "The billing client allows you to view and manage your billing details programmatically.",
-      "title": "PaymentManagementClient",
-      "version": "2023-04-01"
-    },
-    "paths": {
-      "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/paymentMethodLinks": {
-        "get": {
-          "description": "Lists payment methods attached to a billing profile. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
-          "externalDocs": {
-            "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-          },
-          "operationId": "PaymentMethods_ListByBillingProfile",
-          "parameters": [
-            {
-              "$ref": "./types.json#/parameters/billingAccountName"
-            },
-            {
-              "$ref": "./types.json#/parameters/billingProfileName"
-            },
-            {
-              "$ref": "./types.json#/parameters/apiVersionParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK. The request has succeeded.",
-              "schema": {
-                "$ref": "#/definitions/PaymentMethodLinksListResult"
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "./types.json#/definitions/ArmErrorResponse"
-              }
-            }
-          },
-          "tags": [
-            "PaymentMethods"
-          ],
-          "x-ms-examples": {
-            "PaymentMethodsListByBillingProfile": {
-              "$ref": "./examples/PaymentMethodAtBillingProfile_List.json"
-            }
-          },
-          "x-ms-pageable": {
-            "nextLinkName": "nextLink"
-          }
-        }
-      },
-      "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/paymentMethodLinks/{paymentMethodName}": {
-        "get": {
-          "description": "Gets a payment method linked with a billing profile. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
-          "externalDocs": {
-            "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-          },
-          "operationId": "PaymentMethods_GetByBillingProfile",
-          "parameters": [
-            {
-              "$ref": "./types.json#/parameters/billingAccountName"
-            },
-            {
-              "$ref": "./types.json#/parameters/billingProfileName"
-            },
-            {
-              "$ref": "#/parameters/paymentMethodName"
-            },
-            {
-              "$ref": "./types.json#/parameters/apiVersionParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK. The request has succeeded.",
-              "schema": {
-                "$ref": "#/definitions/PaymentMethodLink"
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "./types.json#/definitions/ArmErrorResponse"
-              }
-            }
-          },
-          "tags": [
-            "PaymentMethods"
-          ],
-          "x-ms-examples": {
-            "PaymentMethodsGetByBillingProfile": {
-              "$ref": "./examples/PaymentMethodAtBillingProfile_Get.json"
-            }
-          }
-        }
-      },
-      "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/paymentMethods": {
-        "get": {
-          "description": "Lists the payment methods available for a billing account. Along with the payment methods owned by the caller, these payment methods can be attached to a billing profile to make payments. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
-          "externalDocs": {
-            "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-          },
-          "operationId": "PaymentMethods_ListByBillingAccount",
-          "parameters": [
-            {
-              "$ref": "./types.json#/parameters/billingAccountName"
-            },
-            {
-              "$ref": "./types.json#/parameters/apiVersionParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK. The request has succeeded.",
-              "schema": {
-                "$ref": "#/definitions/PaymentMethodsListResult"
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "./types.json#/definitions/ArmErrorResponse"
-              }
-            }
-          },
-          "tags": [
-            "PaymentMethods"
-          ],
-          "x-ms-examples": {
-            "PaymentMethodsListByBillingAccount": {
-              "$ref": "./examples/PaymentMethodAtBillingAccount_List.json"
-            }
-          },
-          "x-ms-pageable": {
-            "nextLinkName": "nextLink"
-          }
-        }
-      },
-      "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/paymentMethods/{paymentMethodName}": {
-        "get": {
-          "description": "Gets a payment method available for a billing account. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
-          "externalDocs": {
-            "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-          },
-          "operationId": "PaymentMethods_GetByBillingAccount",
-          "parameters": [
-            {
-              "$ref": "./types.json#/parameters/apiVersionParameter"
-            },
-            {
-              "$ref": "./types.json#/parameters/billingAccountName"
-            },
-            {
-              "$ref": "#/parameters/paymentMethodName"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK. The request has succeeded.",
-              "schema": {
-                "$ref": "#/definitions/PaymentMethod"
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "./types.json#/definitions/ArmErrorResponse"
-              }
-            }
-          },
-          "tags": [
-            "PaymentMethods"
-          ],
-          "x-ms-examples": {
-            "PaymentMethodGetAtBillingProfile": {
-              "$ref": "./examples/PaymentMethodAtBillingAccount_Get.json"
-            }
-          }
-        }
-      },
-      "/providers/Microsoft.Billing/paymentMethods": {
-        "get": {
-          "description": "Lists the payment methods owned by the caller.",
-          "externalDocs": {
-            "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-          },
-          "operationId": "PaymentMethods_ListByUser",
-          "parameters": [
-            {
-              "$ref": "./types.json#/parameters/apiVersionParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK. The request has succeeded.",
-              "schema": {
-                "$ref": "#/definitions/PaymentMethodsListResult"
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "./types.json#/definitions/ArmErrorResponse"
-              }
-            }
-          },
-          "tags": [
-            "PaymentMethods"
-          ],
-          "x-ms-examples": {
-            "ListPaymentMethodOwnedByUser": {
-              "$ref": "./examples/PaymentMethodOwnedByUser_List.json"
-            }
-          },
-          "x-ms-pageable": {
-            "nextLinkName": "nextLink"
-          }
-        }
-      },
-      "/providers/Microsoft.Billing/paymentMethods/{paymentMethodName}": {
-        "delete": {
-          "description": "Deletes a payment method owned by the caller.",
-          "externalDocs": {
-            "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-          },
-          "operationId": "PaymentMethods_DeleteByUser",
-          "parameters": [
-            {
-              "$ref": "./types.json#/parameters/apiVersionParameter"
-            },
-            {
-              "$ref": "#/parameters/paymentMethodName"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK. The request has succeeded."
-            },
-            "204": {
-              "description": "The resource was not found."
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "./types.json#/definitions/ArmErrorResponse"
-              }
-            }
-          },
-          "tags": [
-            "PaymentMethods"
-          ],
-          "x-ms-examples": {
-            "DeletePaymentMethodOwnedByUser": {
-              "$ref": "./examples/PaymentMethodOwnedByUser_Delete.json"
-            }
-          }
-        },
-        "get": {
-          "description": "Gets a payment method owned by the caller.",
-          "externalDocs": {
-            "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-          },
-          "operationId": "PaymentMethods_GetByUser",
-          "parameters": [
-            {
-              "$ref": "./types.json#/parameters/apiVersionParameter"
-            },
-            {
-              "$ref": "#/parameters/paymentMethodName"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK. The request has succeeded.",
-              "schema": {
-                "$ref": "#/definitions/PaymentMethod"
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "./types.json#/definitions/ArmErrorResponse"
-              }
-            }
-          },
-          "tags": [
-            "PaymentMethods"
-          ],
-          "x-ms-examples": {
-            "GetPaymentMethodOwnedByUser": {
-              "$ref": "./examples/PaymentMethodOwnedByUser_Get.json"
-            }
-          }
-        }
-      }
-    },
+    "consumes": [
+        "application/json"
+    ],
     "definitions": {
-      "PaymentMethod": {
-        "allOf": [
-          {
-            "$ref": "./types.json#/definitions/ArmResource"
-          }
-        ],
-        "description": "A payment method.",
-        "properties": {
-          "properties": {
-            "$ref": "#/definitions/PaymentMethodProperties",
-            "description": "Payment method properties",
-            "x-ms-client-flatten": true
-          }
+        "PaymentMethod": {
+            "allOf": [
+                {
+                    "$ref": "./types.json#/definitions/ArmResource"
+                }
+            ],
+            "description": "A payment method.",
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/PaymentMethodProperties",
+                    "description": "Payment method properties",
+                    "x-ms-client-flatten": true
+                }
+            },
+            "type": "object"
         },
-        "type": "object"
-      },
-      "PaymentMethodLink": {
-        "allOf": [
-          {
-            "$ref": "./types.json#/definitions/ArmResource"
-          }
-        ],
-        "description": "A payment method link.",
-        "properties": {
-          "properties": {
-            "$ref": "#/definitions/PaymentMethodLinkProperties",
-            "title": "Payment method link properties",
-            "x-ms-client-flatten": true
-          }
+        "PaymentMethodLink": {
+            "allOf": [
+                {
+                    "$ref": "./types.json#/definitions/ArmResource"
+                }
+            ],
+            "description": "A payment method link.",
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/PaymentMethodLinkProperties",
+                    "title": "Payment method link properties",
+                    "x-ms-client-flatten": true
+                }
+            },
+            "type": "object"
         },
-        "type": "object"
-      },
-      "PaymentMethodLinkProperties": {
-        "description": "The properties of a payment method link.",
-        "type": "object",
-        "properties": {
-          "paymentMethodId": {
-            "description": "Id of payment method. Example: /providers/Microsoft.Billing/paymentMethods/ABCDABCDABC0",
-            "type": "string"
-          },
-          "family": {
-            "description": "The family of payment method.",
-            "type": "string",
-            "readOnly": true,
-            "enum": ["CreditCard", "CheckWire"],
-            "x-ms-enum": {
-              "name": "paymentMethodFamily",
-              "modelAsString": true
-            }
-          },
-          "paymentMethodType": {
-            "description": "The type of payment method.",
-            "type": "string",
-            "readOnly": true
-          },
-          "accountHolderName": {
-            "description": "The account holder name for the payment method. This is only supported for payment methods with family CreditCard.",
-            "type": "string",
-            "readOnly": true
-          },
-          "expiration": {
-            "description": "The expiration month and year of the payment method. This is only supported for payment methods with family CreditCard.",
-            "type": "string",
-            "readOnly": true
-          },
-          "lastFourDigits": {
-            "description": "Last four digits of payment method.",
-            "type": "string",
-            "readOnly": true
-          },
-          "displayName": {
-            "description": "The display name of the payment method.",
-            "type": "string",
-            "readOnly": true
-          },
-          "logos": {
-            "description": "The list of logos for the payment method.",
-            "type": "array",
-            "x-ms-identifiers": [],
-            "readOnly": true,
-            "items": {
-              "$ref": "#/definitions/PaymentMethodLogo"
-            }
-          },
-          "status": {
-            "description": "Status of the payment method.",
-            "type": "string",
-            "readOnly": true,
-            "enum": ["Active", "Inactive"],
-            "x-ms-enum": {
-              "name": "paymentMethodStatus",
-              "modelAsString": true
-            }
-          }
-        }
-      },
-      "PaymentMethodLinksListResult": {
-        "description": "The list of payment method links.",
-        "properties": {
-          "nextLink": {
-            "description": "The link (url) to the next page of results.",
-            "readOnly": true,
-            "type": "string"
-          },
-          "value": {
+        "PaymentMethodLinkProperties": {
+            "description": "The properties of a payment method link.",
+            "properties": {
+                "accountHolderName": {
+                    "description": "The account holder name for the payment method. This is only supported for payment methods with family CreditCard.",
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "displayName": {
+                    "description": "The display name of the payment method.",
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "expiration": {
+                    "description": "The expiration month and year of the payment method. This is only supported for payment methods with family CreditCard.",
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "family": {
+                    "description": "The family of payment method.",
+                    "enum": [
+                        "CreditCard",
+                        "CheckWire"
+                    ],
+                    "readOnly": true,
+                    "type": "string",
+                    "x-ms-enum": {
+                        "modelAsString": true,
+                        "name": "paymentMethodFamily"
+                    }
+                },
+                "lastFourDigits": {
+                    "description": "Last four digits of payment method.",
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "logos": {
+                    "description": "The list of logos for the payment method.",
+                    "items": {
+                        "$ref": "#/definitions/PaymentMethodLogo"
+                    },
+                    "readOnly": true,
+                    "type": "array",
+                    "x-ms-identifiers": [
+                    ]
+                },
+                "paymentMethodId": {
+                    "description": "Id of payment method. Example: /providers/Microsoft.Billing/paymentMethods/ABCDABCDABC0",
+                    "type": "string"
+                },
+                "paymentMethodType": {
+                    "description": "The type of payment method.",
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "status": {
+                    "description": "Status of the payment method.",
+                    "enum": [
+                        "Active",
+                        "Inactive"
+                    ],
+                    "readOnly": true,
+                    "type": "string",
+                    "x-ms-enum": {
+                        "modelAsString": true,
+                        "name": "paymentMethodStatus"
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "PaymentMethodLinksListResult": {
             "description": "The list of payment method links.",
-            "items": {
-              "$ref": "#/definitions/PaymentMethodLink"
+            "properties": {
+                "nextLink": {
+                    "description": "The link (url) to the next page of results.",
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "value": {
+                    "description": "The list of payment method links.",
+                    "items": {
+                        "$ref": "#/definitions/PaymentMethodLink"
+                    },
+                    "readOnly": true,
+                    "type": "array",
+                    "x-ms-identifiers": [
+                        "id"
+                    ]
+                }
             },
-            "readOnly": true,
-            "type": "array",
-            "x-ms-identifiers": [
-              "id"
-            ]
-          }
+            "type": "object"
         },
-        "type": "object"
-      },
-      "PaymentMethodLogo": {
-        "description": "Logo of payment method.",
-        "properties": {
-          "mimeType": {
-            "description": "MIME type of the logo.",
-            "readOnly": true,
-            "type": "string"
-          },
-          "url": {
-            "description": "Public URL of image of the logo.",
-            "readOnly": true,
-            "type": "string"
-          }
-        },
-        "type": "object"
-      },
-      "PaymentMethodProjectionProperties": {
-        "description": "The properties of a payment method projection.",
-        "properties": {
-          "accountHolderName": {
-            "description": "The account holder name for the payment method. This is only supported for payment methods with family CreditCard.",
-            "readOnly": true,
-            "type": "string"
-          },
-          "displayName": {
-            "description": "The display name of the payment method.",
-            "readOnly": true,
-            "type": "string"
-          },
-          "expiration": {
-            "description": "The expiration month and year of the payment method. This is only supported for payment methods with family CreditCard.",
-            "readOnly": true,
-            "type": "string"
-          },
-          "family": {
-            "description": "The family of payment method.",
-            "enum": [
-              "CreditCard",
-              "CheckWire",
-              "Unknown"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "modelAsString": true,
-              "name": "paymentMethodFamily"
-            }
-          },
-          "id": {
-            "description": "Id of payment method.",
-            "readOnly": true,
-            "type": "string"
-          },
-          "lastFourDigits": {
-            "description": "Last four digits of payment method.",
-            "readOnly": true,
-            "type": "string"
-          },
-          "logos": {
-            "description": "The list of logos for the payment method.",
-            "items": {
-              "$ref": "#/definitions/PaymentMethodLogo"
+        "PaymentMethodLogo": {
+            "description": "Logo of payment method.",
+            "properties": {
+                "mimeType": {
+                    "description": "MIME type of the logo.",
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "url": {
+                    "description": "Public URL of image of the logo.",
+                    "readOnly": true,
+                    "type": "string"
+                }
             },
-            "type": "array",
-            "x-ms-identifiers": []
-          },
-          "status": {
-            "description": "Status of the payment method.",
-            "enum": [
-              "Active",
-              "Inactive",
-              "Unknown"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "modelAsString": true,
-              "name": "paymentMethodStatus"
-            }
-          },
-          "type": {
-            "description": "The type of payment method.",
-            "readOnly": true,
-            "type": "string"
-          }
+            "type": "object"
         },
-        "type": "object"
-      },
-      "PaymentMethodProperties": {
-        "description": "The properties of a payment method.",
-        "properties": {
-          "accountHolderName": {
-            "description": "The account holder name for the payment method. This is only supported for payment methods with family CreditCard.",
-            "readOnly": true,
-            "type": "string"
-          },
-          "displayName": {
-            "description": "The display name of the payment method.",
-            "readOnly": true,
-            "type": "string"
-          },
-          "expiration": {
-            "description": "The expiration month and year of the payment method. This is only supported for payment methods with family CreditCard.",
-            "readOnly": true,
-            "type": "string"
-          },
-          "family": {
-            "description": "The family of payment method.",
-            "enum": [
-              "CreditCard",
-              "CheckWire",
-              "Unknown"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "modelAsString": true,
-              "name": "paymentMethodFamily"
-            }
-          },
-          "lastFourDigits": {
-            "description": "Last four digits of payment method.",
-            "readOnly": true,
-            "type": "string"
-          },
-          "logos": {
-            "description": "The list of logos for the payment method.",
-            "items": {
-              "$ref": "#/definitions/PaymentMethodLogo"
+        "PaymentMethodProperties": {
+            "description": "The properties of a payment method.",
+            "properties": {
+                "accountHolderName": {
+                    "description": "The account holder name for the payment method. This is only supported for payment methods with family CreditCard.",
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "displayName": {
+                    "description": "The display name of the payment method.",
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "expiration": {
+                    "description": "The expiration month and year of the payment method. This is only supported for payment methods with family CreditCard.",
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "family": {
+                    "description": "The family of payment method.",
+                    "enum": [
+                        "CreditCard",
+                        "CheckWire",
+                        "Unknown"
+                    ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "modelAsString": true,
+                        "name": "paymentMethodFamily"
+                    }
+                },
+                "lastFourDigits": {
+                    "description": "Last four digits of payment method.",
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "logos": {
+                    "description": "The list of logos for the payment method.",
+                    "items": {
+                        "$ref": "#/definitions/PaymentMethodLogo"
+                    },
+                    "type": "array",
+                    "x-ms-identifiers": [
+                    ]
+                },
+                "status": {
+                    "description": "Status of the payment method.",
+                    "enum": [
+                        "Active",
+                        "Inactive",
+                        "Unknown"
+                    ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "modelAsString": true,
+                        "name": "paymentMethodStatus"
+                    }
+                },
+                "type": {
+                    "description": "The type of payment method.",
+                    "readOnly": true,
+                    "type": "string"
+                }
             },
-            "type": "array",
-            "x-ms-identifiers": []
-          },
-          "status": {
-            "description": "Status of the payment method.",
-            "enum": [
-              "Active",
-              "Inactive",
-              "Unknown"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "modelAsString": true,
-              "name": "paymentMethodStatus"
-            }
-          },
-          "type": {
-            "description": "The type of payment method.",
-            "readOnly": true,
-            "type": "string"
-          }
+            "type": "object"
         },
-        "type": "object"
-      },
-      "PaymentMethodsListResult": {
-        "description": "The list of payment methods.",
-        "properties": {
-          "nextLink": {
-            "description": "The link (url) to the next page of results.",
-            "readOnly": true,
-            "type": "string"
-          },
-          "value": {
+        "PaymentMethodsListResult": {
             "description": "The list of payment methods.",
-            "items": {
-              "$ref": "#/definitions/PaymentMethod"
+            "properties": {
+                "nextLink": {
+                    "description": "The link (url) to the next page of results.",
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "value": {
+                    "description": "The list of payment methods.",
+                    "items": {
+                        "$ref": "#/definitions/PaymentMethod"
+                    },
+                    "readOnly": true,
+                    "type": "array"
+                }
             },
-            "readOnly": true,
-            "type": "array"
-          }
-        },
-        "type": "object",
-        "x-ms-identifiers": [
-          "id"
-        ]
-      }
+            "type": "object",
+            "x-ms-identifiers": [
+                "id"
+            ]
+        }
     },
     "host": "management.azure.com",
-    "parameters": {
-      "paymentMethodName": {
-        "description": "The ID that uniquely identifies a payment method.",
-        "in": "path",
-        "name": "paymentMethodName",
-        "required": true,
-        "type": "string",
-        "pattern": ".*",
-        "x-ms-parameter-location": "method"
-      }
+    "info": {
+        "description": "The billing client allows you to view and manage your billing details programmatically.",
+        "title": "PaymentManagementClient",
+        "version": "2023-04-01"
     },
-    "consumes": [
-      "application/json"
-    ],
+    "parameters": {
+        "paymentMethodName": {
+            "description": "The ID that uniquely identifies a payment method.",
+            "in": "path",
+            "name": "paymentMethodName",
+            "pattern": ".*",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        }
+    },
+    "paths": {
+        "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/paymentMethodLinks": {
+            "get": {
+                "description": "Lists payment methods attached to a billing profile. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+                "externalDocs": {
+                    "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+                },
+                "operationId": "PaymentMethods_ListByBillingProfile",
+                "parameters": [
+                    {
+                        "$ref": "./types.json#/parameters/billingAccountName"
+                    },
+                    {
+                        "$ref": "./types.json#/parameters/billingProfileName"
+                    },
+                    {
+                        "$ref": "./types.json#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/PaymentMethodLinksListResult"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "./types.json#/definitions/ArmErrorResponse"
+                        }
+                    }
+                },
+                "tags": [
+                    "PaymentMethods"
+                ],
+                "x-ms-examples": {
+                    "PaymentMethodsListByBillingProfile": {
+                        "$ref": "./examples/PaymentMethodAtBillingProfile_List.json"
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/paymentMethodLinks/{paymentMethodName}": {
+            "get": {
+                "description": "Gets a payment method linked with a billing profile. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+                "externalDocs": {
+                    "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+                },
+                "operationId": "PaymentMethods_GetByBillingProfile",
+                "parameters": [
+                    {
+                        "$ref": "./types.json#/parameters/billingAccountName"
+                    },
+                    {
+                        "$ref": "./types.json#/parameters/billingProfileName"
+                    },
+                    {
+                        "$ref": "#/parameters/paymentMethodName"
+                    },
+                    {
+                        "$ref": "./types.json#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/PaymentMethodLink"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "./types.json#/definitions/ArmErrorResponse"
+                        }
+                    }
+                },
+                "tags": [
+                    "PaymentMethods"
+                ],
+                "x-ms-examples": {
+                    "PaymentMethodsGetByBillingProfile": {
+                        "$ref": "./examples/PaymentMethodAtBillingProfile_Get.json"
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/paymentMethods": {
+            "get": {
+                "description": "Lists the payment methods available for a billing account. Along with the payment methods owned by the caller, these payment methods can be attached to a billing profile to make payments. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+                "externalDocs": {
+                    "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+                },
+                "operationId": "PaymentMethods_ListByBillingAccount",
+                "parameters": [
+                    {
+                        "$ref": "./types.json#/parameters/billingAccountName"
+                    },
+                    {
+                        "$ref": "./types.json#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/PaymentMethodsListResult"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "./types.json#/definitions/ArmErrorResponse"
+                        }
+                    }
+                },
+                "tags": [
+                    "PaymentMethods"
+                ],
+                "x-ms-examples": {
+                    "PaymentMethodsListByBillingAccount": {
+                        "$ref": "./examples/PaymentMethodAtBillingAccount_List.json"
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/paymentMethods/{paymentMethodName}": {
+            "get": {
+                "description": "Gets a payment method available for a billing account. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+                "externalDocs": {
+                    "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+                },
+                "operationId": "PaymentMethods_GetByBillingAccount",
+                "parameters": [
+                    {
+                        "$ref": "./types.json#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "$ref": "./types.json#/parameters/billingAccountName"
+                    },
+                    {
+                        "$ref": "#/parameters/paymentMethodName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/PaymentMethod"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "./types.json#/definitions/ArmErrorResponse"
+                        }
+                    }
+                },
+                "tags": [
+                    "PaymentMethods"
+                ],
+                "x-ms-examples": {
+                    "PaymentMethodGetAtBillingProfile": {
+                        "$ref": "./examples/PaymentMethodAtBillingAccount_Get.json"
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.Billing/paymentMethods": {
+            "get": {
+                "description": "Lists the payment methods owned by the caller.",
+                "externalDocs": {
+                    "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+                },
+                "operationId": "PaymentMethods_ListByUser",
+                "parameters": [
+                    {
+                        "$ref": "./types.json#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/PaymentMethodsListResult"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "./types.json#/definitions/ArmErrorResponse"
+                        }
+                    }
+                },
+                "tags": [
+                    "PaymentMethods"
+                ],
+                "x-ms-examples": {
+                    "ListPaymentMethodOwnedByUser": {
+                        "$ref": "./examples/PaymentMethodOwnedByUser_List.json"
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/providers/Microsoft.Billing/paymentMethods/{paymentMethodName}": {
+            "delete": {
+                "description": "Deletes a payment method owned by the caller.",
+                "externalDocs": {
+                    "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+                },
+                "operationId": "PaymentMethods_DeleteByUser",
+                "parameters": [
+                    {
+                        "$ref": "./types.json#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/paymentMethodName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded."
+                    },
+                    "204": {
+                        "description": "The resource was not found."
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "./types.json#/definitions/ArmErrorResponse"
+                        }
+                    }
+                },
+                "tags": [
+                    "PaymentMethods"
+                ],
+                "x-ms-examples": {
+                    "DeletePaymentMethodOwnedByUser": {
+                        "$ref": "./examples/PaymentMethodOwnedByUser_Delete.json"
+                    }
+                }
+            },
+            "get": {
+                "description": "Gets a payment method owned by the caller.",
+                "externalDocs": {
+                    "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+                },
+                "operationId": "PaymentMethods_GetByUser",
+                "parameters": [
+                    {
+                        "$ref": "./types.json#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/paymentMethodName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/PaymentMethod"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "./types.json#/definitions/ArmErrorResponse"
+                        }
+                    }
+                },
+                "tags": [
+                    "PaymentMethods"
+                ],
+                "x-ms-examples": {
+                    "GetPaymentMethodOwnedByUser": {
+                        "$ref": "./examples/PaymentMethodOwnedByUser_Get.json"
+                    }
+                }
+            }
+        }
+    },
     "produces": [
-      "application/json"
+        "application/json"
     ],
     "schemes": [
-      "https"
+        "https"
     ],
     "security": [
-      {
-        "azure_auth": [
-          "user_impersonation"
-        ]
-      }
+        {
+            "azure_auth": [
+                "user_impersonation"
+            ]
+        }
     ],
     "securityDefinitions": {
-      "azure_auth": {
-        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-        "description": "Azure Active Directory OAuth2 Flow.",
-        "flow": "implicit",
-        "scopes": {
-          "user_impersonation": "impersonate your user account"
-        },
-        "type": "oauth2"
-      }
+        "azure_auth": {
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "description": "Azure Active Directory OAuth2 Flow.",
+            "flow": "implicit",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            },
+            "type": "oauth2"
+        }
     },
     "swagger": "2.0"
-  }
+}
