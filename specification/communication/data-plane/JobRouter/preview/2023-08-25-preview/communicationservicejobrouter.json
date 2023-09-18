@@ -2407,20 +2407,24 @@
       "type": "object",
       "properties": {
         "required": {
-          "description": "Determines whether this parameter will be required when escalating. Setting this will take priority over the Preferred flag.",
+          "description": "Determines whether this parameter will be required when escalating. Setting this to true will override the Preferred flag.",
           "type": "boolean"
         },
         "requiredForSeconds": {
           "format": "int32",
-          "description": "When Required is set to true, this controls how long this parameter will be required for in seconds.",
+          "description": "When Required is set to true, this controls the duration for which the parameter will be required for in seconds.",
           "type": "integer"
         },
+        "prioritized": {
+          "description": "When Required is set to true, then for the required duration this will prioritized.",
+          "type": "boolean"
+        },
         "preferred": {
-          "description": "Prefer an escalation target with this parameter, but not mandatory.",
+          "description": "Prefer an escalation target with this parameter, but is not required",
           "type": "boolean"
         },
         "targetName": {
-          "description": "Overrides the name of this parameter when finding an escalation target",
+          "description": "Set a different name for this parameter when finding an escalation target",
           "type": "string"
         }
       }
@@ -2660,7 +2664,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "RouterIntentParameterType",
+            "name": "IntentParameterType",
             "modelAsString": true
           }
         },
@@ -2680,7 +2684,7 @@
           "type": "boolean"
         },
         "defaultValue": {
-          "description": "Default value for this parameter, if not provided during intent classification",
+          "description": "A default value, which is used if no value is returned during the classification",
           "type": "string"
         },
         "escalationOptions": {
