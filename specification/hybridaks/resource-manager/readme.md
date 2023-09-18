@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-preview-2023-11` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-11'
 input-file:
-  - Microsoft.HybridContainerService/preview/2023-11-15-preview/provisionedClusters.json
+  - Microsoft.HybridContainerService/preview/2023-11-15-preview/provisionedClusterInstances.json
   - Microsoft.HybridContainerService/preview/2023-11-15-preview/virtualNetworks.json
 suppressions:
   - code: TopLevelResourcesListBySubscription
