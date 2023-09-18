@@ -251,6 +251,9 @@
           "additionalProperties": {
             "$ref": "#/definitions/TieringPolicy"
           }
+        },
+        "snapshotBackupAdditionalDetails": {
+          "$ref": "#/definitions/SnapshotBackupAdditionalDetails"
         }
       }
     },
@@ -291,6 +294,31 @@
             "name": "RetentionDurationType",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "UserAssignedIdentityProperties": {
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string"
+        },
+        "principalId": {
+          "type": "string"
+        }
+      }
+    },
+    "UserAssignedManagedIdentityDetails": {
+      "type": "object",
+      "properties": {
+        "identityArmId": {
+          "type": "string"
+        },
+        "identityName": {
+          "type": "string"
+        },
+        "userAssignedIdentityProperties": {
+          "$ref": "#/definitions/UserAssignedIdentityProperties"
         }
       }
     },
@@ -394,6 +422,22 @@
         }
       },
       "x-ms-discriminator-value": "SimpleSchedulePolicyV2"
+    },
+    "SnapshotBackupAdditionalDetails": {
+      "description": "Snapshot Backup related fields for WorkloadType SaPHanaSystem",
+      "type": "object",
+      "properties": {
+        "instantRpRetentionRangeInDays": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "instantRPDetails": {
+          "type": "string"
+        },
+        "userAssignedManagedIdentityDetails": {
+          "$ref": "#/definitions/UserAssignedManagedIdentityDetails"
+        }
+      }
     },
     "HourlySchedule": {
       "type": "object",
