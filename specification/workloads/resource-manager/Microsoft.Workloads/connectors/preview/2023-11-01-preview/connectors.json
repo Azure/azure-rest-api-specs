@@ -615,6 +615,290 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/connectors/{connectorName}/amsInsights/{insightsName}": {
+      "get": {
+        "tags": [
+          "AMSInsightsConnection"
+        ],
+        "operationId": "AMSInsightsConnections_Get",
+        "x-ms-examples": {
+          "Gets the insights connection resource of Azure Monitor For SAP.": {
+            "$ref": "./examples/AMSInsights/AMSInsightsConnections_Get.json"
+          }
+        },
+        "description": "Gets the insights connection resource of Azure Monitor For SAP.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InsightsNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describes the Insights connection resource.",
+            "schema": {
+              "$ref": "#/definitions/AMSInsightsConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AMSInsightsConnection"
+        ],
+        "operationId": "AMSInsightsConnections_Create",
+        "x-ms-examples": {
+          "Create a insights connection with insights msi.": {
+            "$ref": "./examples/AMSInsights/AMSInsightsConnection_Create.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "produces": [
+          "application/json"
+        ],
+        "description": "Creates the insights connection resource of Azure Monitor For SAP.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InsightsNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The request body of Inisghts connection of Azure Monitor For SAP.",
+            "schema": {
+              "$ref": "#/definitions/AMSInsightsConnection"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Describes the insights connection resource of Azure Monitor For SAP.",
+            "schema": {
+              "$ref": "#/definitions/AMSInsightsConnection"
+            }
+          },
+          "200": {
+            "description": "Describes the insights connection resource of Azure Monitor For SAP.",
+            "schema": {
+              "$ref": "#/definitions/AMSInsightsConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AMSInsightsConnection"
+        ],
+        "operationId": "AMSInsightsConnections_Update",
+        "x-ms-examples": {
+          "Update a insights connection resource of Azure Monitor For SAP.": {
+            "$ref": "./examples/AMSInsights/AMSInsightsConnection_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "produces": [
+          "application/json"
+        ],
+        "description": "updates the insights connection resource of Azure Monitor For SAP. <br><br>This can be used to update tags on the resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InsightsNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The request body of insights connection resource of Azure Monitor For SAP.",
+            "schema": {
+              "$ref": "#/definitions/UpdateAMSInsightsConnectionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Describes the insights connection resource of Azure Monitor For SAP.",
+            "schema": {
+              "$ref": "#/definitions/AMSInsightsConnection"
+            }
+          },
+          "200": {
+            "description": "Describes the insights connection resource of Azure Monitor For SAP.",
+            "schema": {
+              "$ref": "#/definitions/AMSInsightsConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AMSInsightsConnection"
+        ],
+        "operationId": "AMSInsightsConnections_Delete",
+        "x-ms-examples": {
+          "Delete the insights connection resource of Azure Monitor For SAP.": {
+            "$ref": "./examples/AMSInsights/AMSInsightsConnection_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "produces": [
+          "application/json"
+        ],
+        "description": "Deletes the insights connection resource of Azure Monitor For SAP.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InsightsNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/connectors/{connectorName}/amsinsights": {
+      "get": {
+        "tags": [
+          "AMSInsightsConnections"
+        ],
+        "operationId": "AMSInsightsConnections_List",
+        "x-ms-examples": {
+          "List the insights connection resources of Azure Monitor For SAP under the given connector resource.": {
+            "$ref": "./examples/AMSInsights/AMSInsightsConnections_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "description": "Lists the insights connection resources of Azure Monitor For SAP under the given connector resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectorNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describes the insights connection resource of Azure Monitor For SAP.",
+            "schema": {
+              "$ref": "#/definitions/AMSInsightsConnectionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -653,6 +937,19 @@
     },
     "UpdateACSSBackupConnectionRequest": {
       "description": "Defines the request body for updating backup connection resource of virtual instance for SAP.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Gets or sets the Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "UpdateAMSInsightsConnectionRequest": {
+      "description": "Defines the request body for updating insights connection resource of Azure Monitor for SAP.",
       "type": "object",
       "properties": {
         "tags": {
@@ -748,6 +1045,27 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ACSSBackupConnection"
+          }
+        },
+        "nextLink": {
+          "description": "Gets the value of next link.",
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "AMSInsightsConnectionList": {
+      "description": "Defines the collection of Insights connection resources of Azure Monitor for SAP.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "description": "Gets the list of Insights connection resources of Azure Monitor for SAP.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AMSInsightsConnection"
           }
         },
         "nextLink": {
@@ -997,6 +1315,24 @@
         }
       }
     },
+    "AMSInsightsConnectionProperties": {
+      "description": "Defines the insights connection properties for a Azure Monitor for SAP.",
+      "type": "object",
+      "properties": {
+        "insightsData": {
+          "$ref": "#/definitions/InsightsData"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ConnectorProvisioningState",
+          "readOnly": true
+        },
+        "errors": {
+          "description": "Defines the errors related to insights connection resource of Azure Monitor for SAP.",
+          "readOnly": true,
+          "$ref": "#/definitions/ConnectorErrorDefinition"
+        }
+      }
+    },
     "BackupData": {
       "description": "Information about the recovery services vault and backup policy used for backup.",
       "type": "object",
@@ -1031,6 +1367,29 @@
         "modelAsString": true
       }
     },
+    "InsightsData": {
+      "description": "Information about the insights resource.",
+      "type": "object",
+      "properties": {
+        "inputData": {
+          "$ref": "#/definitions/InsightsInputData"
+        },
+        "id": {
+          "type": "string",
+          "description": "ARM Id used for Creation of Insights resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "InsightsInputData": {
+      "description": "Information about the inputs for insights resource.",
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "../../../common-types/v1/commonTypes.json#/definitions/UserAssignedServiceIdentity"
+        }
+      }
+    },
     "ACSSBackupConnection": {
       "description": "Define the backup connection resource of virtual instance for SAP..",
       "type": "object",
@@ -1043,6 +1402,21 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ACSSBackupConnectionProperties"
+        }
+      }
+    },
+    "AMSInsightsConnection": {
+      "description": "Define the insights connection resource of Azure Monitor for SAP..",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AMSInsightsConnectionProperties"
         }
       }
     },
@@ -1097,6 +1471,14 @@
       "required": true,
       "type": "string",
       "description": "The name of the backup connection resource of virtual instance for SAP.",
+      "x-ms-parameter-location": "method"
+    },
+    "InsightsNameParameter": {
+      "name": "insightsName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Insights connection resource of Azure Monitor for SAP.",
       "x-ms-parameter-location": "method"
     }
   }
