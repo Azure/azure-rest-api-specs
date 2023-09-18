@@ -718,13 +718,13 @@
           "200": {
             "description": "The put request was successful; response contains the ispCustomer",
             "schema": {
-              "$ref": "#/definitions/CreateOrUpdateCustomerResponse"
+              "$ref": "#/definitions/MccCustomerResource"
             }
           },
           "201": {
             "description": "The put request was successful; response contains the updated ispCustomer",
             "schema": {
-              "$ref": "#/definitions/CreateOrUpdateCustomerResponse"
+              "$ref": "#/definitions/MccCustomerResource"
             }
           },
           "default": {
@@ -1014,13 +1014,13 @@
           "200": {
             "description": "The put request was successful; response contains the ispCacheNode",
             "schema": {
-              "$ref": "#/definitions/CreateOrUpdateCacheNodeResponse"
+              "$ref": "#/definitions/MccCacheNodeResource"
             }
           },
           "201": {
             "description": "The put request was successful; response contains the updated ispCacheNode",
             "schema": {
-              "$ref": "#/definitions/CreateOrUpdateCacheNodeResponse"
+              "$ref": "#/definitions/MccCacheNodeResource"
             }
           },
           "default": {
@@ -1319,13 +1319,13 @@
           "200": {
             "description": "The put request was successful; response contains the enterpriseMccCustomer",
             "schema": {
-              "$ref": "#/definitions/CreateOrUpdateCustomerResponse"
+              "$ref": "#/definitions/MccCustomerResource"
             }
           },
           "201": {
             "description": "The put request was successful; response contains the updated enterpriseMccCustomer",
             "schema": {
-              "$ref": "#/definitions/CreateOrUpdateCustomerResponse"
+              "$ref": "#/definitions/MccCustomerResource"
             }
           },
           "default": {
@@ -1563,7 +1563,7 @@
           "200": {
             "description": "The get request was successful; response contains enterpriseMccCacheNode",
             "schema": {
-              "$ref": "#/definitions/ConnectedCache"
+              "$ref": "#/definitions/MccCacheNodeResource"
             }
           },
           "default": {
@@ -1616,13 +1616,13 @@
           "200": {
             "description": "The put request was successful; response contains the enterpriseMccCacheNode",
             "schema": {
-              "$ref": "#/definitions/CreateOrUpdateCacheNodeResponse"
+              "$ref": "#/definitions/MccCacheNodeResource"
             }
           },
           "201": {
             "description": "The put request was successful; response contains the updated enterpriseMccCacheNode",
             "schema": {
-              "$ref": "#/definitions/CreateOrUpdateCacheNodeResponse"
+              "$ref": "#/definitions/MccCacheNodeResource"
             }
           },
           "default": {
@@ -1919,87 +1919,6 @@
         }
       }
     },
-    "CreateOrUpdateCustomerResponse": {
-      "type": "object",
-      "description": "Represents the high level customer properties needed to provision customer resources",
-      "required": [
-        "location"
-      ],
-      "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource",
-      "properties": {
-        "properties": {
-          "type": "object",
-          "description": "Create or update customer response entity",
-          "title": "Create or update customer response entity",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CreateOrUpdateCustomerResponseEntity"
-        },
-        "systemData": {
-          "readOnly": true,
-          "description": "The system meta data relating to this resource",
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
-        }
-      }
-    },
-    "CreateOrUpdateCustomerResponseEntity": {
-      "type": "object",
-      "description": "Model representing customer for ConnectedCache resource",
-      "properties": {
-        "provisioningState": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The provisioned state of the resource",
-          "enum": [
-            "Unknown",
-            "Accepted",
-            "Succeeded",
-            "Failed",
-            "Cancelled",
-            "Upgrading",
-            "Deleting"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
-        },
-        "customer": {
-          "type": "object",
-          "title": "MCC customer entity details",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CustomerEntity",
-          "description": " Mcc Customer entity"
-        },
-        "additionalCustomerProperties": {
-          "type": "object",
-          "title": "Additional customer properties",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AdditionalCustomerProperties",
-          "description": " Mcc Customer entity"
-        },
-        "statusCode": {
-          "type": "string",
-          "description": "statusCode used to get code details of MCC response object"
-        },
-        "statusText": {
-          "type": "string",
-          "description": "statusText used to get status details in string format of MCC response object"
-        },
-        "statusDetails": {
-          "type": "string",
-          "description": "statusDetails used to get inner details of MCC response object"
-        },
-        "status": {
-          "description": "status of the HTTP error code",
-          "type": "string",
-          "readOnly": true
-        },
-        "error": {
-          "$ref": "#/definitions/ErrorDefinition",
-          "description": "The error details"
-        }
-      }
-    },
     "AdditionalCustomerProperties": {
       "type": "object",
       "description": "Model representing customer for connected cache resource",
@@ -2131,86 +2050,6 @@
         "optionalProperty5": {
           "type": "string",
           "description": "optional property#5 of MCC response object"
-        }
-      }
-    },
-    "CreateOrUpdateCacheNodeResponse": {
-      "type": "object",
-      "description": "Represents the high level cache node properties needed to provision cache node resources",
-      "required": [
-        "location"
-      ],
-      "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource",
-      "properties": {
-        "properties": {
-          "description": "Create or update cache node response entity",
-          "title": "Create or update cache node response entity",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CreateOrUpdateCacheNodeResponseEntity"
-        },
-        "systemData": {
-          "readOnly": true,
-          "description": "The system meta data relating to this resource",
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
-        }
-      }
-    },
-    "CreateOrUpdateCacheNodeResponseEntity": {
-      "type": "object",
-      "description": "Model representing cache node for ConnectedCache resource",
-      "properties": {
-        "provisioningState": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The provisioned state of the resource",
-          "enum": [
-            "Unknown",
-            "Accepted",
-            "Succeeded",
-            "Failed",
-            "Cancelled",
-            "Upgrading",
-            "Deleting"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
-        },
-        "cacheNode": {
-          "type": "object",
-          "title": "MCC cache node entity details",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CacheNodeEntity",
-          "description": "Mcc cache node entity"
-        },
-        "additionalCacheNodeProperties": {
-          "type": "object",
-          "title": "Additional cache node properties",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AdditionalCacheNodeProperties",
-          "description": " Mcc cache node entity"
-        },
-        "statusCode": {
-          "type": "string",
-          "description": "statusCode used to get code details of MCC response object"
-        },
-        "statusText": {
-          "type": "string",
-          "description": "statusText used to get status details in string format of MCC response object"
-        },
-        "statusDetails": {
-          "type": "string",
-          "description": "statusDetails used to get inner details of MCC response object"
-        },
-        "status": {
-          "description": "status of the HTTP error code",
-          "type": "string",
-          "readOnly": true
-        },
-        "error": {
-          "$ref": "#/definitions/ErrorDefinition",
-          "description": "The error details"
         }
       }
     },
