@@ -12,37 +12,38 @@ that describes the schemas for its events.
 This configuration enables packaging all of the above as one EventGrid data plane library.
 This enables customers to download one EventGrid data plane library instead of having to install separate packages to get the event schemas for each service.
 
-### Guidelines for defining a new event 
+### Guidelines for defining a new event in Typespec
 
 > **_NOTE:_** New events must not be delivered to Event Grid production endpoints until the events have been reviewed with the Azure SDK Architecture board and the PR is merged into main. The architecture board meeting will be scheduled by a member of the Azure SDK team - you do not need to use the scheduling tool. Once the PR is merged to main, the events are considered GA regardless of whether docs list them as being in preview. This is because customers cannot control which version of events they consume - it is entirely up to the service publishing the events. Any breaking changes to events would need to be implemented as a new event type. Full details can be found in the [Azure Breaking Changes Policy](http://aka.ms/AzBreakingChangesPolicy/), Section 4.
 
-In order to automate the mapping of event definition with event type, please follow the guidelines below when adding new events to your swagger:
+In order to automate the mapping of event definition with event type, please follow the guidelines below when adding new events to your typespec:
 - The name of a new event definition should have `EventData` suffix. For e.g. `AcsChatMessageReceivedEventData`.
 - The description of the new event should include the event type. This is the `eventType` name in an `EventGridEvent` or `type` name in `CloudEvent`. For e.g. `"Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event."` Here `Microsoft.Communication.ChatMessageReceived` is the event name. If your event is in preview, you may add the word preview: `"Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived preview event."`
 
+#### Write in Typespec
+
+Under the `Azure.Messaging.EventGrid/SystemEvents` folder find or create your service's `.tsp` file. This is where you will add your new event. For help with typespec conventions refer to [this doc](https://microsoft.github.io/typespec/) about typespec basics. Each new event will be represented as a typespec `model`. After you create your new event, in the `client.tsp` file you need to add `@@usage(EventGrid.YourEventName, Usage.output)` and `@@access(EventGrid.YourEventName, Access.public)`.
+
 A sample valid event definition is shown below:
 ~~~ markdown
-```json
-"AcsChatMessageReceivedEventData": {
-  "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event.",
-  "allOf": [
-    {
-      "$ref": "#/definitions/AcsChatMessageEventBaseProperties"
-    }
-  ],
-  "properties": {
-    "messageBody": {
-      "description": "The body of the chat message",
-      "type": "string"
-    }
-  }
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event.")
+model AcsChatMessageReceivedEventData {
+  ...AcsChatMessageEventBaseProperties;
+
+  @doc("The body of the chat message.")
+  messageBody ?: string;
 }
-```
+~~~
+
+Adding `@usage` and `@access` to `client.tsp`:
+~~~ markdown
+
+@@usage(EventGrid.AcsChatMessageReceivedEventData, Usage.input);
+@@access(EventGrid.AcsChatMessageReceivedEventData, Access.public)
 ~~~
 
 In addition to the event schema definition, you must provide a JSON example of a real event the service can trigger in the Event Grid schema and CloudEvents schema. These examples must be close to your JSON in a "examples\event-grid-schema" and "examples\cloud-events-schema" folders respectively, and called using snakeCase based on the event final name. The example should contain the envelope. Example should NOT be handcrafted, but an actual result from a server test environment like canary (it's not required that the event is deployed in production yet). No PR will be accepted without the example.
-
-**Note:** If you already have an event type example created you can use the following [tool](https://github.com/robece/schema-converter) to convert event files from Event Grid schema to Cloud Events schema or vice versa.
 
 For the previous schema, the example file should be called "chat_message_received.json" and contains:
 ~~~ markdown
