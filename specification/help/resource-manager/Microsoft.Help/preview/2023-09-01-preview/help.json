@@ -1715,7 +1715,35 @@
         },
         "questionType": {
           "description": "Text Input. Will be a single line input.",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "RadioButton",
+            "Dropdown" ,
+            "TextInput",
+            "MultiLineInfoBox"
+          ],
+          "x-ms-enum": {
+            "name": "importanceLevel",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "RadioButton",
+                "description": "SingleChoice radio button"
+              },
+              {
+                "value": "Dropdown",
+                "description": "SingleChoice dropdown."
+              },
+              {
+                "value": "TextInput",
+                "description": "Text Input"
+              },
+              {
+                "value": "MultiLineInfoBox",
+                "description": "MultiLineInfoBox"
+              }
+            ]
+          }
         },
         "response": {
           "description": "Response key for SingleInput. For Multi-line test/open ended question it is free form text",
