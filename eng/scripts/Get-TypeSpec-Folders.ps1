@@ -55,7 +55,7 @@ foreach ($file in $changedFiles) {
       $typespecFolder = (Get-ChildItem -path $matches[0] tspconfig.* -Recurse).Directory.FullName | ForEach-Object {if ($_) { [IO.Path]::GetRelativePath($($pwd.path), $_) }}
       $typespecFolders += $typespecFolder -replace '\\', '/'
     } else {
-      Write-Host "Cannot find directoy $($matches[0])"
+      Write-Host "Cannot find directory $($matches[0])"
     }
   }
 }
