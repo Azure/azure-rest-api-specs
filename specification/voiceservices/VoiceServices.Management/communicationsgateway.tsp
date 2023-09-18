@@ -57,8 +57,6 @@ interface TestLines
 @doc("A CommunicationsGateway resource")
 model CommunicationsGateway
   is TrackedResource<CommunicationsGatewayProperties> {
-  ...ManagedServiceIdentity;
-
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   @key("communicationsGatewayName")
   @segment("communicationsGateways")
@@ -66,6 +64,11 @@ model CommunicationsGateway
   @visibility("Read")
   @path
   name: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Add property for versioning"
+  @added(Versions.v2023_04_03)
+  @doc("The managed service identities assigned to this resource.")
+  identity?: Azure.ResourceManager.Foundations.ManagedIdentityProperties;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Add property for versioning"
   @added(Versions.v2023_07_13_preview)
@@ -225,6 +228,7 @@ model CommunicationsGatewayProperties is ResourceProperties {
   @visibility("read", "update", "create")
   onPremMcpEnabled?: boolean = false;
 
+  @added(Versions.v2023_04_03)
   @doc("Whether an integrated Mobile Control Point is in use.")
   @visibility("read", "update", "create")
   integratedMcpEnabled?: boolean = false;

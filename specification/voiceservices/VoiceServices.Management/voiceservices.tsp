@@ -19,6 +19,10 @@ namespace Microsoft.VoiceServices;
 
 @doc("API Versions")
 enum Versions {
+  @doc("2023-01-31")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  v2023_01_31: "2023-01-31",
+
   @doc("2023-04-03")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2023_04_03: "2023-04-03",
