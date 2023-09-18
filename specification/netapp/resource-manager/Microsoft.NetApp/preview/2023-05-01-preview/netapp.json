@@ -2251,51 +2251,51 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/peerClusterForOnPremMigration": {
       "post": {
-          "summary": "Start Cluster peering",
-          "description": "Starts peering the cluster for this migration volume",
-          "tags": [
-              "Volumes OnPrem Migration"
-          ],
-          "operationId": "Volumes_PeerClusterForOnPremMigration",
-          "parameters": [
-              {
-                "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-              },
-              {
-                "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-              },
-              {
-                  "$ref": "#/parameters/AccountName"
-              },
-              {
-                  "$ref": "#/parameters/PoolName"
-              },
-              {
-                  "$ref": "#/parameters/VolumeName"
-              },
-              {
-                "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-              },
-              {
-                  "name": "body",
-                  "description": "Cluster peer request object supplied in the body of the operation.",
-                  "in": "body",
-                  "required": true,
-                  "schema": {
-                      "$ref": "#/definitions/peerClusterForVolumeMigrationRequest"
-                  }
-              }
-          ],
-          "x-ms-long-running-operation": true,
-          "x-ms-long-running-operation-options": {
-              "final-state-via": "location",
-              "final-state-schema": "#/definitions/clusterPeerCommandResponse"
+        "summary": "Start Cluster peering",
+        "description": "Starts peering the cluster for this migration volume",
+        "tags": [
+          "Volumes OnPrem Migration"
+        ],
+        "operationId": "Volumes_PeerClusterForOnPremMigration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
-          "x-ms-examples": {
-            "Volumes_PeerClusterForOnPremMigration": {
-              "$ref": "examples/Volumes_PeerClusterForOnPremMigration.json"
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "Cluster peer request object supplied in the body of the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/peerClusterForVolumeMigrationRequest"
             }
-          },
+          }
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/clusterPeerCommandResponse"
+        },
+        "x-ms-examples": {
+          "Volumes_PeerClusterForOnPremMigration": {
+            "$ref": "examples/Volumes_PeerClusterForOnPremMigration.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "OK",
@@ -2319,45 +2319,45 @@
           }
         }
       }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/createOnPremMigrationReplication": {
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/createOnPremMigrationReplication": {
       "post": {
-          "summary": "Start migration process",
-          "description": "Starts SVM peering and returns a command to be run on the external ONTAP to accept it.  Once the SVM's have been peered a SnapMirror will be created",
-          "tags": [
-              "Volumes OnPrem Migration"
-          ],
-          "operationId": "Volumes_CreateOnPremMigrationReplication",
-          "parameters": [
-              {
-                "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-              },
-              {
-                "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-              },
-              {
-                  "$ref": "#/parameters/AccountName"
-              },
-              {
-                  "$ref": "#/parameters/PoolName"
-              },
-              {
-                  "$ref": "#/parameters/VolumeName"
-              },
-              {
-                "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-              }
-          ],
-          "x-ms-long-running-operation": true,
-          "x-ms-long-running-operation-options": {
-              "final-state-via": "location",
-              "final-state-schema": "#/definitions/svmPeerCommandResponse"
+        "summary": "Start migration process",
+        "description": "Starts SVM peering and returns a command to be run on the external ONTAP to accept it.  Once the SVM's have been peered a SnapMirror will be created",
+        "tags": [
+          "Volumes OnPrem Migration"
+        ],
+        "operationId": "Volumes_CreateOnPremMigrationReplication",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
-          "x-ms-examples": {
-            "Volumes_CreateOnPremMigrationReplication": {
-              "$ref": "examples/Volumes_CreateOnPremMigrationReplication.json"
-            }
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/svmPeerCommandResponse"
+        },
+        "x-ms-examples": {
+          "Volumes_CreateOnPremMigrationReplication": {
+            "$ref": "examples/Volumes_CreateOnPremMigrationReplication.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "OK",
@@ -9518,7 +9518,14 @@
           "type": "array",
           "minItems": 1,
           "description": "A list of IC-LIF IPs that can be used to connect to the On-prem cluster",
-          "example": [ "0.0.0.1", "0.0.0.2", "0.0.0.3", "0.0.0.4", "0.0.0.5", "0.0.0.6" ],
+          "example": [
+            "0.0.0.1",
+            "0.0.0.2",
+            "0.0.0.3",
+            "0.0.0.4",
+            "0.0.0.5",
+            "0.0.0.6"
+          ],
           "items": {
             "type": "string"
           }
