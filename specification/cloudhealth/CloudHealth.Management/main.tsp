@@ -22,7 +22,7 @@ using Azure.ResourceManager;
 namespace Microsoft.CloudHealth;
 
 // Regex for all our resource name validations
-alias resourceNameRegex = "^(?=[a-zA-Z0-9-]{3,60}$)(?!-)(?!.*--)[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*$";
+alias resourceNameRegex = "^[a-zA-Z0-9][a-zA-Z0-9-]{1,58}[a-zA-Z0-9]$";
 
 @pattern(resourceNameRegex)
 scalar stringResourceName extends string;
