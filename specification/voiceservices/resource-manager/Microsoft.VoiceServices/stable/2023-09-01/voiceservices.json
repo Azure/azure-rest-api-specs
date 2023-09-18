@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.VoiceServices",
-    "version": "2023-01-31",
+    "version": "2023-09-01",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -865,6 +865,14 @@
             "read",
             "create"
           ]
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
         }
       },
       "allOf": [
@@ -1007,6 +1015,16 @@
             "create"
           ]
         },
+        "integratedMcpEnabled": {
+          "type": "boolean",
+          "description": "Whether an integrated Mobile Control Point is in use.",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
         "emergencyDialStrings": {
           "type": "array",
           "description": "A list of dial strings used for emergency calling.",
@@ -1036,6 +1054,14 @@
       "type": "object",
       "description": "The type used for update operations of the CommunicationsGateway.",
       "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
