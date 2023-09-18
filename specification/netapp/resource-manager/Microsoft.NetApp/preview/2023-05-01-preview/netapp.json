@@ -292,6 +292,83 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/regionInfos": {
+      "get": {
+        "summary": "Describes region specific information.",
+        "description": "Provides region specific information.",
+        "tags": [
+          "NetApp Resource"
+        ],
+        "operationId": "NetAppResourceRegionInfos_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/regionInfosList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "RegionInfos_List": {
+            "$ref": "examples/RegionInfos_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/regionInfos/default": {
+      "get": {
+        "summary": "Describes region specific information.",
+        "description": "Provides storage to network proximity and logical zone mapping information.",
+        "tags": [
+          "NetApp Resource"
+        ],
+        "operationId": "NetAppResourceRegionInfos_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/regionInfoResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "RegionInfos_Get": {
+            "$ref": "examples/RegionInfos_Get.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/regionInfo": {
       "get": {
         "summary": "Describes region specific information.",
@@ -325,6 +402,118 @@
         "x-ms-examples": {
           "RegionInfo_Query": {
             "$ref": "examples/RegionInfo.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/queryNetworkSiblingSet": {
+      "post": {
+        "tags": [
+          "NetApp Resource"
+        ],
+        "summary": "Describe a network sibling set",
+        "description": "Get details of the specified network sibling set.",
+        "operationId": "NetAppResource_QueryNetworkSiblingSet",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Network sibling set to query.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QueryNetworkSiblingSetRequest"
+            },
+            "x-ms-client-flatten": true
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/networkSiblingSet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkSiblingSet_Query": {
+            "$ref": "examples/NetworkSiblingSet_Query.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/updateNetworkSiblingSet": {
+      "post": {
+        "tags": [
+          "NetApp Resource"
+        ],
+        "summary": "Update the network features of a network sibling set",
+        "description": "Update the network features of the specified network sibling set.",
+        "operationId": "NetAppResource_UpdateNetworkSiblingSet",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update for the specified network sibling set.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateNetworkSiblingSetRequest"
+            },
+            "x-ms-client-flatten": true
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/networkSiblingSet"
+            }
+          },
+          "202": {
+            "description": "Accepted -- Update request accepted; operation will complete asynchronously",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "NetworkFeatures_Update": {
+            "$ref": "examples/NetworkSiblingSet_Update.json"
           }
         }
       }
@@ -648,6 +837,62 @@
         "x-ms-examples": {
           "Accounts_RenewCredentials": {
             "$ref": "examples/Accounts_RenewCredentials.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/migrateEncryption": {
+      "post": {
+        "tags": [
+          "NetApp Accounts"
+        ],
+        "operationId": "Accounts_MigrateEncryptionKey",
+        "summary": "Migrate volumes encryption key source.",
+        "description": "Migrates all volumes in a VNet to a different encryption key source (Microsoft-managed key or Azure Key Vault). Operation fails if targeted volumes share encryption sibling set with volumes from another account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "The required parameters to perform encryption migration.",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/encryptionMigrationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - terminal state"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Accounts_MigrateEncryptionKey": {
+            "$ref": "examples/Accounts_MigrateEncryptionKey.json"
           }
         }
       }
@@ -1176,6 +1421,67 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/populateAvailabilityZone": {
+      "post": {
+        "tags": [
+          "Volumes"
+        ],
+        "summary": "Populate Availability Zone",
+        "description": "This operation will populate availability zone information for a volume",
+        "operationId": "Volumes_PopulateAvailabilityZone",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/volume"
+            }
+          },
+          "202": {
+            "description": "Accepted -- populate availability zone accepted; operation will complete asynchronously",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Volumes_PopulateAvailabilityZones": {
+            "$ref": "examples/Volumes_PopulateAvailabilityZones.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/revert": {
       "post": {
         "tags": [
@@ -1278,6 +1584,59 @@
         "x-ms-examples": {
           "Volumes_ResetCifsPassword": {
             "$ref": "examples/Volumes_ResetCifsPassword.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/splitCloneFromParent": {
+      "post": {
+        "tags": [
+          "Split clone volume"
+        ],
+        "summary": "Split clone from parent volume",
+        "description": " Split operation to convert clone volume to an independent volume.",
+        "operationId": "Volumes_SplitCloneFromParent",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - terminal state"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Volumes_SplitClone": {
+            "$ref": "examples/Volumes_SplitClone.json"
           }
         }
       }
@@ -1785,6 +2144,61 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/performReplicationTransfer": {
+      "post": {
+        "tags": [
+          "Volumes OnPrem Migration"
+        ],
+        "summary": "Perform a replication transfer",
+        "description": "Performs an adhoc replication transfer on a volume with volumeType Migration",
+        "operationId": "Volumes_PerformReplicationTransfer",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - terminal state"
+          },
+          "204": {
+            "description": "NoContent",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Volumes_PerformReplicationTransfer": {
+            "$ref": "examples/Volumes_PerformReplicationTransfer.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/reinitializeReplication": {
       "post": {
         "tags": [
@@ -1831,6 +2245,139 @@
         "x-ms-examples": {
           "Volumes_ReInitializeReplication": {
             "$ref": "examples/Volumes_ReInitializeReplication.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/peerClusterForOnPremMigration": {
+      "post": {
+          "summary": "Start Cluster peering",
+          "description": "Starts peering the cluster for this migration volume",
+          "tags": [
+              "Volumes OnPrem Migration"
+          ],
+          "operationId": "Volumes_PeerClusterForOnPremMigration",
+          "parameters": [
+              {
+                "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+              },
+              {
+                "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+              },
+              {
+                  "$ref": "#/parameters/AccountName"
+              },
+              {
+                  "$ref": "#/parameters/PoolName"
+              },
+              {
+                  "$ref": "#/parameters/VolumeName"
+              },
+              {
+                "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+              },
+              {
+                  "name": "body",
+                  "description": "Cluster peer request object supplied in the body of the operation.",
+                  "in": "body",
+                  "required": true,
+                  "schema": {
+                      "$ref": "#/definitions/peerClusterForVolumeMigrationRequest"
+                  }
+              }
+          ],
+          "x-ms-long-running-operation": true,
+          "x-ms-long-running-operation-options": {
+              "final-state-via": "location",
+              "final-state-schema": "#/definitions/clusterPeerCommandResponse"
+          },
+          "x-ms-examples": {
+            "Volumes_PeerClusterForOnPremMigration": {
+              "$ref": "examples/Volumes_PeerClusterForOnPremMigration.json"
+            }
+          },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/clusterPeerCommandResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+  },
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/createOnPremMigrationReplication": {
+      "post": {
+          "summary": "Start migration process",
+          "description": "Starts SVM peering and returns a command to be run on the external ONTAP to accept it.  Once the SVM's have been peered a SnapMirror will be created",
+          "tags": [
+              "Volumes OnPrem Migration"
+          ],
+          "operationId": "Volumes_CreateOnPremMigrationReplication",
+          "parameters": [
+              {
+                "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+              },
+              {
+                "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+              },
+              {
+                  "$ref": "#/parameters/AccountName"
+              },
+              {
+                  "$ref": "#/parameters/PoolName"
+              },
+              {
+                  "$ref": "#/parameters/VolumeName"
+              },
+              {
+                "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+              }
+          ],
+          "x-ms-long-running-operation": true,
+          "x-ms-long-running-operation-options": {
+              "final-state-via": "location",
+              "final-state-schema": "#/definitions/svmPeerCommandResponse"
+          },
+          "x-ms-examples": {
+            "Volumes_CreateOnPremMigrationReplication": {
+              "$ref": "examples/Volumes_CreateOnPremMigrationReplication.json"
+            }
+          },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/svmPeerCommandResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -3792,8 +4339,11 @@
           }
         },
         "x-ms-examples": {
-          "VolumeGroups_List": {
-            "$ref": "examples/VolumeGroups_List.json"
+          "VolumeGroups_List_SapHana": {
+            "$ref": "examples/VolumeGroups_List_SapHana.json"
+          },
+          "VolumeGroups_List_Oracle": {
+            "$ref": "examples/VolumeGroups_List_Oracle.json"
           }
         }
       }
@@ -3835,8 +4385,11 @@
           }
         },
         "x-ms-examples": {
-          "VolumeGroups_Get": {
-            "$ref": "examples/VolumeGroups_Get.json"
+          "VolumeGroups_Get_SapHana": {
+            "$ref": "examples/VolumeGroups_Get_SapHana.json"
+          },
+          "VolumeGroups_Get_Oracle": {
+            "$ref": "examples/VolumeGroups_Get_Oracle.json"
           }
         }
       },
@@ -3886,8 +4439,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "VolumeGroups_Create": {
-            "$ref": "examples/VolumeGroups_Create.json"
+          "VolumeGroups_Create_SapHana": {
+            "$ref": "examples/VolumeGroups_Create_SapHana.json"
+          },
+          "VolumeGroups_Create_Oracle": {
+            "$ref": "examples/VolumeGroups_Create_Oracle.json"
           }
         }
       },
@@ -4984,6 +5540,39 @@
         }
       }
     },
+    "regionInfosList": {
+      "description": "List of regionInfo resources",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A list of regionInfo resources",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/regionInfoResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results."
+        }
+      }
+    },
+    "regionInfoResource": {
+      "description": "Information regarding regionInfo Item.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "regionInfo properties",
+          "$ref": "#/definitions/regionInfo",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "regionInfo": {
       "description": "Provides region specific information.",
       "type": "object",
@@ -5310,6 +5899,20 @@
           "readOnly": true,
           "x-nullable": true,
           "description": "Shows the status of disableShowmount for all volumes under the subscription, null equals false"
+        },
+        "nfsV4IDDomain": {
+          "type": "string",
+          "description": "Domain for NFSv4 user ID mapping. This property will be set for all NetApp accounts in the subscription and region and only affect non ldap NFSv4 volumes.",
+          "maxLength": 255,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9.-]{0,253}[a-zA-Z0-9]$",
+          "x-nullable": true,
+          "example": "defaultv4iddomain.com"
+        },
+        "isMultiAdEnabled": {
+          "type": "boolean",
+          "readOnly": true,
+          "x-nullable": true,
+          "description": "This will have true value only if account is Multiple AD enabled."
         }
       }
     },
@@ -5329,6 +5932,7 @@
         "password": {
           "type": "string",
           "x-ms-secret": true,
+          "maxLength": 64,
           "description": "Plain text password of Active Directory domain administrator, value is masked in the response"
         },
         "domain": {
@@ -5984,9 +6588,9 @@
           "title": "usageThreshold",
           "type": "integer",
           "format": "int64",
-          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. Minimum size is 100 GiB. Upper limit is 100TiB, 500Tib for LargeVolume. Specified in bytes.",
+          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. Minimum size is 100 GiB. Upper limit is 100TiB, 500Tib for LargeVolume or 2400Tib for LargeVolume on exceptional basis. Specified in bytes.",
           "minimum": 107374182400,
-          "maximum": 549755813888000,
+          "maximum": 2638827906662400,
           "default": 107374182400,
           "example": 107374182400
         },
@@ -6061,29 +6665,7 @@
           "description": "The Azure Resource URI for a delegated subnet. Must have the delegation Microsoft.NetApp/volumes"
         },
         "networkFeatures": {
-          "title": "Network features",
-          "description": "Basic network, or Standard features available to the volume.",
-          "type": "string",
-          "enum": [
-            "Basic",
-            "Standard"
-          ],
-          "x-ms-enum": {
-            "name": "NetworkFeatures",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Basic",
-                "description": "Basic network feature."
-              },
-              {
-                "value": "Standard",
-                "description": "Standard network feature."
-              }
-            ]
-          },
-          "example": "Standard",
-          "default": "Basic"
+          "$ref": "#/definitions/networkFeatures"
         },
         "networkSiblingSetId": {
           "title": "Network Sibling Set ID",
@@ -6144,7 +6726,7 @@
         },
         "volumeType": {
           "type": "string",
-          "description": "What type of volume is this. For destination volumes in Cross Region Replication, set type to DataProtection",
+          "description": "What type of volume is this. For destination volumes in Cross Region Replication, set type to DataProtection. For creating clone volume, set type to ShortTermClone",
           "example": "DataProtection"
         },
         "dataProtection": {
@@ -6215,52 +6797,10 @@
           "default": false
         },
         "smbAccessBasedEnumeration": {
-          "title": "smbAccessBasedEnumeration",
-          "type": "string",
-          "description": "Enables access based enumeration share property for SMB Shares. Only applicable for SMB/DualProtocol volume",
-          "enum": [
-            "Disabled",
-            "Enabled"
-          ],
-          "x-ms-enum": {
-            "name": "smbAccessBasedEnumeration",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Disabled",
-                "description": "smbAccessBasedEnumeration share setting is disabled"
-              },
-              {
-                "value": "Enabled",
-                "description": "smbAccessBasedEnumeration share setting is enabled"
-              }
-            ]
-          },
-          "example": "Enabled"
+          "$ref": "#/definitions/smbAccessBasedEnumeration"
         },
         "smbNonBrowsable": {
-          "title": "smbNonBrowsable",
-          "type": "string",
-          "description": "Enables non browsable property for SMB Shares. Only applicable for SMB/DualProtocol volume",
-          "enum": [
-            "Disabled",
-            "Enabled"
-          ],
-          "x-ms-enum": {
-            "name": "smbNonBrowsable",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Disabled",
-                "description": "smbNonBrowsable share setting is disabled"
-              },
-              {
-                "value": "Enabled",
-                "description": "smbNonBrowsable share setting is enabled"
-              }
-            ]
-          },
-          "example": "Enabled"
+          "$ref": "#/definitions/smbNonBrowsable"
         },
         "smbContinuouslyAvailable": {
           "type": "boolean",
@@ -6272,7 +6812,7 @@
           "title": "Maximum throughput in MiB/s that can be achieved by this volume and this will be accepted as input only for manual qosType volume",
           "type": "number",
           "x-nullable": true,
-          "example": 128.22
+          "example": 128.223
         },
         "actualThroughputMibps": {
           "type": "number",
@@ -6327,14 +6867,16 @@
           "maximum": 63,
           "format": "int32"
         },
+        "coolAccessRetrievalPolicy": {
+          "$ref": "#/definitions/coolAccessRetrievalPolicy"
+        },
         "unixPermissions": {
           "type": "string",
           "description": "UNIX permissions for NFS volume accepted in octal 4 digit format. First digit selects the set user ID(4), set group ID (2) and sticky (1) attributes. Second digit selects permission for the owner of the file: read (4), write (2) and execute (1). Third selects permissions for other users in the same group. the fourth for other users not in the group. 0755 - gives read/write/execute permissions to owner and read/execute to group and other users.",
           "minLength": 4,
           "maxLength": 4,
           "x-nullable": true,
-          "example": "0770",
-          "default": "0770"
+          "example": "0770"
         },
         "cloneProgress": {
           "description": "When a volume is being restored from another volume's snapshot, will show the percentage completion of this cloning process. When this value is empty/null there is no cloning process currently happening on this volume. This value will update every 5 minutes during cloning.",
@@ -6517,6 +7059,14 @@
           "example": "/subscriptions/aaaaaaaa-1234-1234-1224-234567891011/resourceGroups/testGroup/providers/Microsoft.NetApp/netAppAccounts/accountOriginatingResourceId/capacityPools/originatingResourceIdPool/volumes/theOriginalVolume/snapshots/theSnapshot",
           "readOnly": true,
           "x-nullable": true
+        },
+        "inheritedSizeInBytes": {
+          "title": "inheritedSizeInBytes",
+          "type": "integer",
+          "format": "int64",
+          "description": "Space shared by short term clone volume with parent volume in bytes.",
+          "readOnly": true,
+          "x-nullable": true
         }
       }
     },
@@ -6635,13 +7185,11 @@
     "replicationObject": {
       "description": "Replication properties",
       "type": "object",
-      "required": [
-        "remoteVolumeResourceId"
-      ],
       "properties": {
         "replicationId": {
           "type": "string",
-          "description": "Id"
+          "description": "Id",
+          "readOnly": true
         },
         "endpointType": {
           "type": "string",
@@ -6670,11 +7218,43 @@
         },
         "remoteVolumeResourceId": {
           "type": "string",
-          "description": "The resource ID of the remote volume."
+          "description": "The resource ID of the remote volume. Required for cross region and cross zone replication"
+        },
+        "remotePath": {
+          "description": "The full path to a volume that is to be migrated into ANF. Required for Migration volumes",
+          "type": "object",
+          "$ref": "#/definitions/remotePath",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "remoteVolumeRegion": {
           "type": "string",
           "description": "The remote region for the other end of the Volume Replication."
+        }
+      }
+    },
+    "remotePath": {
+      "description": "The full path to a volume that is to be migrated into ANF. Required for Migration volumes",
+      "type": "object",
+      "required": [
+        "externalHostName",
+        "serverName",
+        "volumeName"
+      ],
+      "properties": {
+        "externalHostName": {
+          "type": "string",
+          "description": "The Path to a Ontap Host"
+        },
+        "serverName": {
+          "type": "string",
+          "description": "The name of a server on the Ontap Host"
+        },
+        "volumeName": {
+          "type": "string",
+          "description": "The name of a volume on the server"
         }
       }
     },
@@ -6849,9 +7429,9 @@
           "title": "usageThreshold",
           "type": "integer",
           "format": "int64",
-          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. Minimum size is 100 GiB. Upper limit is 100TiB, 500Tib for LargeVolume. Specified in bytes.",
+          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. Minimum size is 100 GiB. Upper limit is 100TiB, 500Tib for LargeVolume or 2400Tib for LargeVolume on exceptional basis. Specified in bytes.",
           "minimum": 107374182400,
-          "maximum": 549755813888000,
+          "maximum": 2638827906662400,
           "default": 107374182400,
           "example": 107374182400
         },
@@ -6935,59 +7515,18 @@
           "maximum": 63,
           "format": "int32"
         },
-        "smbAccessBasedEnumeration": {
-          "title": "smbAccessBasedEnumeration",
-          "type": "string",
-          "description": "Enables access based enumeration share property for SMB Shares. Only applicable for SMB/DualProtocol volume",
-          "enum": [
-            "Disabled",
-            "Enabled"
-          ],
-          "x-ms-enum": {
-            "name": "smbAccessBasedEnumeration",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Disabled",
-                "description": "smbAccessBasedEnumeration share setting is disabled"
-              },
-              {
-                "value": "Enabled",
-                "description": "smbAccessBasedEnumeration share setting is enabled"
-              }
-            ]
-          },
-          "x-nullable": true,
-          "example": "Enabled"
-        },
-        "smbNonBrowsable": {
-          "title": "smbNonBrowsable",
-          "type": "string",
-          "description": "Enables non browsable property for SMB Shares. Only applicable for SMB/DualProtocol volume",
-          "enum": [
-            "Disabled",
-            "Enabled"
-          ],
-          "x-ms-enum": {
-            "name": "smbNonBrowsable",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Disabled",
-                "description": "smbNonBrowsable share setting is disabled"
-              },
-              {
-                "value": "Enabled",
-                "description": "smbNonBrowsable share setting is enabled"
-              }
-            ]
-          },
-          "x-nullable": true,
-          "example": "Enabled"
+        "coolAccessRetrievalPolicy": {
+          "$ref": "#/definitions/coolAccessRetrievalPolicy"
         },
         "snapshotDirectoryVisible": {
           "type": "boolean",
           "description": "If enabled (true) the volume will contain a read-only snapshot directory which provides access to each of the volume's snapshots."
+        },
+        "smbAccessBasedEnumeration": {
+          "$ref": "#/definitions/smbAccessBasedEnumeration"
+        },
+        "smbNonBrowsable": {
+          "$ref": "#/definitions/smbNonBrowsable"
         }
       }
     },
@@ -7632,7 +8171,11 @@
           "type": "boolean",
           "description": "Manual backup an already existing snapshot. This will always be false for scheduled backups and true/false for manual backups",
           "example": true,
-          "default": false
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "snapshotName": {
           "type": "string",
@@ -7641,6 +8184,11 @@
             "read",
             "create"
           ]
+        },
+        "backupPolicyResourceId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "ResourceId used to identify the backup policy"
         }
       }
     },
@@ -8217,7 +8765,8 @@
           "type": "string",
           "description": "Application Type",
           "enum": [
-            "SAP-HANA"
+            "SAP-HANA",
+            "ORACLE"
           ],
           "x-ms-enum": {
             "name": "ApplicationType",
@@ -8240,11 +8789,6 @@
           "x-ms-identifiers": [
             "key"
           ]
-        },
-        "deploymentSpecId": {
-          "type": "string",
-          "description": "Application specific identifier of deployment rules for the volume group",
-          "example": "20542149-bfca-5618-1879-9863dc6767f1"
         },
         "volumesCount": {
           "type": "integer",
@@ -8324,6 +8868,20 @@
           "description": "Resource tags",
           "$ref": "#/definitions/resourceTags"
         },
+        "zones": {
+          "type": "array",
+          "description": "Availability Zone",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "items": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1,
+            "example": "1"
+          }
+        },
         "properties": {
           "description": "Volume properties",
           "$ref": "#/definitions/volumeProperties",
@@ -8349,6 +8907,192 @@
           "description": "Value for an application specific parameter for the placement of volumes in the volume group",
           "example": "value1"
         }
+      }
+    },
+    "networkSiblingSet": {
+      "title": "Network sibling set",
+      "description": "Describes the contents of a network sibling set.",
+      "type": "object",
+      "properties": {
+        "networkSiblingSetId": {
+          "$ref": "#/definitions/networkSiblingSetId"
+        },
+        "subnetId": {
+          "$ref": "#/definitions/subnetId"
+        },
+        "networkSiblingSetStateId": {
+          "$ref": "#/definitions/networkSiblingSetStateId"
+        },
+        "networkFeatures": {
+          "$ref": "#/definitions/networkFeatures"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/networkSiblingSetProvisioningState"
+        },
+        "nicInfoList": {
+          "type": "array",
+          "x-ms-identifiers": [],
+          "description": "List of NIC information",
+          "items": {
+            "$ref": "#/definitions/nicInfo"
+          }
+        }
+      }
+    },
+    "QueryNetworkSiblingSetRequest": {
+      "title": "QueryNetworkSiblingSetRequest",
+      "description": "Network sibling set query.",
+      "type": "object",
+      "required": [
+        "networkSiblingSetId",
+        "subnetId"
+      ],
+      "properties": {
+        "networkSiblingSetId": {
+          "$ref": "#/definitions/networkSiblingSetId"
+        },
+        "subnetId": {
+          "$ref": "#/definitions/subnetId"
+        }
+      }
+    },
+    "UpdateNetworkSiblingSetRequest": {
+      "title": "UpdateNetworkSiblingSetRequest",
+      "description": "Network sibling set update.",
+      "type": "object",
+      "required": [
+        "networkSiblingSetId",
+        "subnetId",
+        "networkSiblingSetStateId",
+        "networkFeatures"
+      ],
+      "properties": {
+        "networkSiblingSetId": {
+          "$ref": "#/definitions/networkSiblingSetId"
+        },
+        "subnetId": {
+          "$ref": "#/definitions/subnetId"
+        },
+        "networkSiblingSetStateId": {
+          "$ref": "#/definitions/networkSiblingSetStateId"
+        },
+        "networkFeatures": {
+          "$ref": "#/definitions/networkFeatures",
+          "description": "Network features available to the volume, some such"
+        }
+      }
+    },
+    "networkFeatures": {
+      "title": "Network features",
+      "description": "Network features available to the volume, or current state of update.",
+      "type": "string",
+      "enum": [
+        "Basic",
+        "Standard",
+        "Basic_Standard",
+        "Standard_Basic"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkFeatures",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Basic",
+            "description": "Basic network features."
+          },
+          {
+            "value": "Standard",
+            "description": "Standard network features."
+          },
+          {
+            "value": "Basic_Standard",
+            "description": "Updating from Basic to Standard network features."
+          },
+          {
+            "value": "Standard_Basic",
+            "description": "Updating from Standard to Basic network features."
+          }
+        ]
+      },
+      "example": "Standard",
+      "default": "Basic"
+    },
+    "networkSiblingSetProvisioningState": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Gets the status of the NetworkSiblingSet at the time the operation was called.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkSiblingSetProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "networkSiblingSetId": {
+      "title": "Network Sibling Set ID",
+      "description": "Network Sibling Set ID for a group of volumes sharing networking resources in a subnet.",
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+      "maxLength": 36,
+      "minLength": 36,
+      "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
+    },
+    "networkSiblingSetStateId": {
+      "title": "Network sibling set state Id",
+      "description": "Network sibling set state Id identifying the current state of the sibling set.",
+      "type": "string",
+      "example": "12345_44420.8001578125"
+    },
+    "nicInfo": {
+      "title": "NIC information",
+      "description": "NIC information and list of volumes for which the NIC has the primary mount ip address.",
+      "type": "object",
+      "properties": {
+        "ipAddress": {
+          "$ref": "#/definitions/ipAddress"
+        },
+        "volumeResourceIds": {
+          "$ref": "#/definitions/volumeResourceIds"
+        }
+      }
+    },
+    "ipAddress": {
+      "title": "ipAddress",
+      "type": "string",
+      "readOnly": true,
+      "example": "1.2.3.4"
+    },
+    "volumeResourceIds": {
+      "title": "Volume resource Ids",
+      "type": "array",
+      "items": {
+        "title": "Resource Id of volume",
+        "type": "string",
+        "format": "arm-id",
+        "x-ms-arm-id-details": {
+          "allowedResources": [
+            {
+              "type": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes"
+            }
+          ]
+        }
+      }
+    },
+    "subnetId": {
+      "title": "Subnet resource Id",
+      "description": "The Azure Resource URI for a delegated subnet. Must have the delegation Microsoft.NetApp/volumes. Example /subscriptions/subscriptionId/resourceGroups/resourceGroup/providers/Microsoft.Network/virtualNetworks/testVnet/subnets/{mySubnet}",
+      "type": "string",
+      "format": "arm-id",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Network/virtualNetworks/subnets"
+          }
+        ]
       }
     },
     "snapshotRestoreFiles": {
@@ -8382,7 +9126,7 @@
       }
     },
     "backupRestoreFiles": {
-      "description": "Restore payload for single file backup restore",
+      "description": "Restore payload for Single File Backup Restore",
       "type": "object",
       "required": [
         "fileList",
@@ -8634,6 +9378,28 @@
         "modelAsString": false
       }
     },
+    "encryptionMigrationRequest": {
+      "description": "Encryption migration request",
+      "type": "object",
+      "required": [
+        "virtualNetworkId",
+        "privateEndpointId"
+      ],
+      "properties": {
+        "virtualNetworkId": {
+          "title": "virtualNetworkId",
+          "type": "string",
+          "description": "Identifier for the virtual network",
+          "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.Network/virtualNetworks/vnet1"
+        },
+        "privateEndpointId": {
+          "title": "privateEndpointId",
+          "type": "string",
+          "description": "Identifier of the private endpoint to reach the Azure Key Vault",
+          "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.Network/privateEndpoints/privateIP1"
+        }
+      }
+    },
     "backupVaultsList": {
       "description": "List of Backup Vaults",
       "type": "object",
@@ -8707,6 +9473,106 @@
           "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/backupVaults/backupVault1"
         }
       }
+    },
+    "coolAccessRetrievalPolicy": {
+      "type": "string",
+      "description": "coolAccessRetrievalPolicy determines the data retrieval behavior from the cool tier to standard storage based on the read pattern for cool access enabled volumes. The possible values for this field are: \n Default - Data will be pulled from cool tier to standard storage on random reads. This policy is the default.\n OnRead - All client-driven data read is pulled from cool tier to standard storage on both sequential and random reads.\n Never - No client-driven data is pulled from cool tier to standard storage.",
+      "enum": [
+        "Default",
+        "OnRead",
+        "Never"
+      ],
+      "x-ms-enum": {
+        "name": "coolAccessRetrievalPolicy",
+        "modelAsString": true
+      }
+    },
+    "clusterPeerCommandResponse": {
+      "description": "Information about cluster peering process",
+      "type": "object",
+      "properties": {
+        "peerAcceptCommand": {
+          "description": "A command that needs to be run on the external ontap to accept cluster peering.  Will only be present if <code>clusterPeeringStatus</code> is <code>pending</code>",
+          "type": "string"
+        }
+      }
+    },
+    "svmPeerCommandResponse": {
+      "description": "Information about svm peering process",
+      "type": "object",
+      "properties": {
+        "svmPeeringCommand": {
+          "description": "A command that needs to be run on the external ontap to accept svm peering.  Will only be present if <code>svmPeeringStatus</code> is <code>pending</code>",
+          "type": "string"
+        }
+      }
+    },
+    "peerClusterForVolumeMigrationRequest": {
+      "description": "Source Cluster properties for a cluster peer request",
+      "type": "object",
+      "required": [
+        "peerAddresses"
+      ],
+      "properties": {
+        "peerAddresses": {
+          "type": "array",
+          "minItems": 1,
+          "description": "A list of IC-LIF IPs that can be used to connect to the On-prem cluster",
+          "example": [ "0.0.0.1", "0.0.0.2", "0.0.0.3", "0.0.0.4", "0.0.0.5", "0.0.0.6" ],
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "smbAccessBasedEnumeration": {
+      "title": "smbAccessBasedEnumeration",
+      "type": "string",
+      "description": "Enables access-based enumeration share property for SMB Shares. Only applicable for SMB/DualProtocol volume",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "smbAccessBasedEnumeration",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Disabled",
+            "description": "smbAccessBasedEnumeration share setting is disabled"
+          },
+          {
+            "value": "Enabled",
+            "description": "smbAccessBasedEnumeration share setting is enabled"
+          }
+        ]
+      },
+      "x-nullable": true,
+      "example": "Enabled"
+    },
+    "smbNonBrowsable": {
+      "title": "smbNonBrowsable",
+      "type": "string",
+      "description": "Enables non-browsable property for SMB Shares. Only applicable for SMB/DualProtocol volume",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "smbNonBrowsable",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Disabled",
+            "description": "smbNonBrowsable share setting is disabled"
+          },
+          {
+            "value": "Enabled",
+            "description": "smbNonBrowsable share setting is enabled"
+          }
+        ]
+      },
+      "example": "Enabled"
     }
   },
   "parameters": {
