@@ -34,25 +34,19 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/provisionedClusters/{resourceName}": {
+    "/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default": {
       "get": {
-        "operationId": "ProvisionedClusters_Get",
+        "operationId": "provisionedClusterInstances_Get",
         "x-ms-examples": {
-          "GetProvisionedCluster": {
-            "$ref": "./examples/GetProvisionedCluster.json"
+          "GetProvisionedClusterInstance": {
+            "$ref": "./examples/GetProvisionedClusterInstance.json"
           }
         },
-        "summary": "Gets the provisioned cluster",
-        "description": "Gets the Hybrid AKS provisioned cluster",
+        "summary": "Gets the provisioned cluster instance",
+        "description": "Gets the Hybrid AKS provisioned cluster instance",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
+            "$ref": "#/parameters/connectedClusterResourceUriParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -60,7 +54,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Gets the provisionedClusters resource.",
+            "description": "Gets the default provisionedClusterInstances resource.",
             "schema": {
               "$ref": "#/definitions/provisionedClusters"
             }
@@ -74,33 +68,27 @@
         }
       },
       "put": {
-        "operationId": "ProvisionedClusters_CreateOrUpdate",
+        "operationId": "provisionedClusterInstances_CreateOrUpdate",
         "x-ms-examples": {
-          "PutProvisionedCluster": {
-            "$ref": "./examples/PutProvisionedCluster.json"
+          "PutProvisionedClusterInstance": {
+            "$ref": "./examples/PutProvisionedClusterInstance.json"
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "summary": "Creates the provisioned cluster",
-        "description": "Creates the Hybrid AKS provisioned cluster",
+        "summary": "Creates the provisioned cluster instance",
+        "description": "Creates the Hybrid AKS provisioned cluster instance",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
+            "$ref": "#/parameters/connectedClusterResourceUriParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "provisionedClusters",
+            "name": "provisionedClusterInstance",
             "in": "body",
             "required": true,
             "schema": {
@@ -110,13 +98,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Updates the provisionedClusters resource.",
+            "description": "Updates the provisionedClusterInstances resource.",
             "schema": {
               "$ref": "#/definitions/provisionedClusters"
             }
           },
           "201": {
-            "description": "Creates the provisionedClusters resource.",
+            "description": "Creates the provisionedClusterInstances resource.",
             "schema": {
               "$ref": "#/definitions/provisionedClusters"
             }
@@ -130,23 +118,17 @@
         }
       },
       "delete": {
-        "operationId": "ProvisionedClusters_Delete",
+        "operationId": "provisionedClusterInstances_Delete",
         "x-ms-examples": {
-          "DeleteProvisionedCluster": {
-            "$ref": "./examples/DeleteProvisionedCluster.json"
+          "DeleteProvisionedClusterInstance": {
+            "$ref": "./examples/DeleteProvisionedClusterInstance.json"
           }
         },
-        "summary": "Deletes the provisioned cluster",
-        "description": "Deletes the Hybrid AKS provisioned cluster",
+        "summary": "Deletes the provisioned cluster instance",
+        "description": "Deletes the Hybrid AKS provisioned cluster instance",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
+            "$ref": "#/parameters/connectedClusterResourceUriParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -177,33 +159,27 @@
         }
       },
       "patch": {
-        "operationId": "ProvisionedClusters_Update",
+        "operationId": "provisionedClusterInstances_Update",
         "x-ms-examples": {
-          "UpdateProvisionedCluster": {
-            "$ref": "./examples/UpdateProvisionedCluster.json"
+          "UpdateProvisionedClusterInstance": {
+            "$ref": "./examples/UpdateProvisionedClusterInstance.json"
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "summary": "Updates the provisioned cluster",
-        "description": "Updates the Hybrid AKS provisioned cluster",
+        "summary": "Updates the provisioned cluster instance",
+        "description": "Updates the Hybrid AKS provisioned cluster instance",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
+            "$ref": "#/parameters/connectedClusterResourceUriParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "provisionedClusters",
+            "name": "provisionedClusterInstance",
             "in": "body",
             "required": true,
             "schema": {
@@ -213,13 +189,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success. Updated the provisionedClusters resource.",
+            "description": "Success. Updated the provisionedClusterInstances resource.",
             "schema": {
               "$ref": "#/definitions/provisionedClusters"
             }
           },
           "202": {
-            "description": "Updates the provisionedClusters resource.",
+            "description": "Updates the provisionedClusterInstances resource.",
             "headers": {
               "Location": {
                 "type": "string"
@@ -238,22 +214,19 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/provisionedClusters": {
+    "/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances": {
       "get": {
-        "operationId": "ProvisionedClusters_ListByResourceGroup",
+        "operationId": "provisionedClusterInstances_List",
         "x-ms-examples": {
-          "ListProvisionedClusterByResourceGroup": {
-            "$ref": "./examples/ListProvisionedClusterByResourceGroup.json"
+          "ListProvisionedClusterInstances": {
+            "$ref": "./examples/ListProvisionedClusterInstances.json"
           }
         },
-        "summary": "Gets the provisioned clusters in a resource group",
-        "description": "Gets the Hybrid AKS provisioned cluster in a resource group",
+        "summary": "Gets the provisioned cluster instances associated with the connected cluster",
+        "description": "Gets the Hybrid AKS provisioned cluster instances associated with the connected cluster",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/connectedClusterResourceUriParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -261,7 +234,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Lists all provisionedClusters under the resource group.",
+            "description": "Lists all provisionedClusterInstances associated with the connected cluster.",
             "schema": {
               "$ref": "#/definitions/provisionedClustersListResult"
             }
@@ -278,62 +251,19 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridContainerService/provisionedClusters": {
-      "get": {
-        "operationId": "ProvisionedClusters_ListBySubscription",
-        "x-ms-examples": {
-          "ListProvisionedClusterBySubscription": {
-            "$ref": "./examples/ListProvisionedClusterBySubscription.json"
-          }
-        },
-        "summary": "Gets the provisioned clusters in a subscription",
-        "description": "Gets the Hybrid AKS provisioned cluster in a subscription",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Lists all provisionedClusters under the subscription.",
-            "schema": {
-              "$ref": "#/definitions/provisionedClustersListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/provisionedClusters/{resourceName}/upgradeProfiles/default": {
+    "/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/upgradeProfiles/default": {
       "get": {
         "tags": [
-          "ProvisionedClusters"
+          "provisionedClusterInstances"
         ],
-        "operationId": "ProvisionedClusters_GetUpgradeProfile",
-        "summary": "Gets the upgrade profile of a provisioned cluster.",
+        "operationId": "provisionedClusterInstances_GetUpgradeProfile",
+        "summary": "Gets the upgrade profile of a provisioned cluster instance.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/connectedClusterResourceUriParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
           }
         ],
         "responses": {
@@ -351,13 +281,13 @@
           }
         },
         "x-ms-examples": {
-          "GetUpgradeProfileForProvisionedCluster": {
-            "$ref": "./examples/ProvisionedClustersGetUpgradeProfile.json"
+          "GetUpgradeProfileForProvisionedClusterInstance": {
+            "$ref": "./examples/ProvisionedClusterInstanceGetUpgradeProfile.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/provisionedClusters/{resourceName}/hybridIdentityMetadata/{hybridIdentityMetadataResourceName}": {
+    "/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/hybridIdentityMetadata/default": {
       "put": {
         "operationId": "HybridIdentityMetadata_Put",
         "x-ms-examples": {
@@ -369,16 +299,7 @@
         "description": "Creates the hybrid identity metadata proxy resource that facilitates the managed identity provisioning.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/hybridIdentityMetadataResourceNameParameter"
+            "$ref": "#/parameters/connectedClusterResourceUriParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -424,16 +345,7 @@
         "description": "Get the hybrid identity metadata proxy resource.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/hybridIdentityMetadataResourceNameParameter"
+            "$ref": "#/parameters/connectedClusterResourceUriParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -441,7 +353,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Get the hybridIdentityMetadata resource for the given AKS Edge cluster.",
+            "description": "Get the hybridIdentityMetadata resource for the provisioned cluster instance.",
             "schema": {
               "$ref": "#/definitions/hybridIdentityMetadata"
             }
@@ -465,16 +377,7 @@
         "description": "Deletes the hybrid identity metadata proxy resource.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/hybridIdentityMetadataResourceNameParameter"
+            "$ref": "#/parameters/connectedClusterResourceUriParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -505,11 +408,11 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/provisionedClusters/{resourceName}/hybridIdentityMetadata": {
+    "/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/hybridIdentityMetadata": {
       "get": {
         "operationId": "HybridIdentityMetadata_ListByCluster",
-        "summary": "Lists the hybrid identity metadata resources in a cluster",
-        "description": "Lists the hybrid identity metadata proxy resource in a cluster.",
+        "summary": "Lists the hybrid identity metadata resources in a provisioned cluster instance",
+        "description": "Lists the hybrid identity metadata proxy resource in a provisioned cluster instance.",
         "x-ms-examples": {
           "HybridIdentityMetadataListByCluster": {
             "$ref": "./examples/HybridIdentityMetadataListByCluster.json"
@@ -520,13 +423,7 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
+            "$ref": "#/parameters/connectedClusterResourceUriParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -551,11 +448,11 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/provisionedClusters/{resourceName}/agentPools/{agentPoolName}": {
+    "/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/agentPools/{agentPoolName}": {
       "get": {
         "operationId": "agentPool_Get",
-        "summary": "Gets the agent pool in the provisioned cluster",
-        "description": "Gets the agent pool in the Hybrid AKS provisioned cluster",
+        "summary": "Gets the agent pool in the provisioned cluster instance",
+        "description": "Gets the agent pool in the Hybrid AKS provisioned cluster instance",
         "x-ms-examples": {
           "GetAgentPool": {
             "$ref": "./examples/GetAgentPool.json"
@@ -563,13 +460,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
+            "$ref": "#/parameters/connectedClusterResourceUriParameter"
           },
           {
             "$ref": "#/parameters/agentPoolNameParameter"
@@ -599,8 +490,8 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "summary": "Creates the agent pool in the provisioned cluster",
-        "description": "Creates the agent pool in the Hybrid AKS provisioned cluster",
+        "summary": "Creates the agent pool in the provisioned cluster instance",
+        "description": "Creates the agent pool in the Hybrid AKS provisioned cluster instance",
         "x-ms-examples": {
           "PutAgentPool": {
             "$ref": "./examples/PutAgentPool.json"
@@ -608,13 +499,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
+            "$ref": "#/parameters/connectedClusterResourceUriParameter"
           },
           {
             "$ref": "#/parameters/agentPoolNameParameter"
@@ -633,13 +518,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Updates the agent pool in the provisionedClusters resource.",
+            "description": "Updates the agent pool in the provisionedClusterInstances resource.",
             "schema": {
               "$ref": "#/definitions/agentPool"
             }
           },
           "201": {
-            "description": "Creates the agent pool in the provisionedClusters resource.",
+            "description": "Creates the agent pool in the provisionedClusterInstances resource.",
             "schema": {
               "$ref": "#/definitions/agentPool"
             }
@@ -654,8 +539,8 @@
       },
       "delete": {
         "operationId": "agentPool_Delete",
-        "summary": "Deletes the agent pool in the provisioned cluster",
-        "description": "Deletes the agent pool in the Hybrid AKS provisioned cluster",
+        "summary": "Deletes the agent pool in the provisioned cluster instance",
+        "description": "Deletes the agent pool in the Hybrid AKS provisioned cluster instance",
         "x-ms-examples": {
           "DeleteAgentPool": {
             "$ref": "./examples/DeleteAgentPool.json"
@@ -663,13 +548,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
+            "$ref": "#/parameters/connectedClusterResourceUriParameter"
           },
           {
             "$ref": "#/parameters/agentPoolNameParameter"
@@ -704,8 +583,8 @@
       },
       "patch": {
         "operationId": "agentPool_Update",
-        "summary": "Updates the agent pool in the provisioned cluster",
-        "description": "Updates the agent pool in the Hybrid AKS provisioned cluster",
+        "summary": "Updates the agent pool in the provisioned cluster instance",
+        "description": "Updates the agent pool in the Hybrid AKS provisioned cluster instance",
         "x-ms-examples": {
           "UpdateAgentPool": {
             "$ref": "./examples/UpdateAgentPool.json"
@@ -713,13 +592,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
+            "$ref": "#/parameters/connectedClusterResourceUriParameter"
           },
           {
             "$ref": "#/parameters/agentPoolNameParameter"
@@ -742,13 +615,13 @@
         },
         "responses": {
           "200": {
-            "description": "Updates the agent pool in the provisionedClusters resource.",
+            "description": "Updates the agent pool in the provisionedClusterInstances resource.",
             "schema": {
               "$ref": "#/definitions/agentPool"
             }
           },
           "202": {
-            "description": "Updates the agent pool in the provisionedClusters resource.",
+            "description": "Updates the agent pool in the provisionedClusterInstances resource.",
             "schema": {
               "$ref": "#/definitions/agentPool"
             }
@@ -762,25 +635,19 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/provisionedClusters/{resourceName}/agentPools": {
+    "/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/agentPools": {
       "get": {
         "operationId": "agentPool_ListByProvisionedCluster",
-        "summary": "Gets the agent pools in the provisioned cluster",
-        "description": "Gets the agent pools in the Hybrid AKS provisioned cluster",
+        "summary": "Gets the agent pools in the provisioned cluster instance",
+        "description": "Gets the agent pools in the Hybrid AKS provisioned cluster instance",
         "x-ms-examples": {
-          "ListAgentPoolByProvisionedCluster": {
-            "$ref": "./examples/ListAgentPoolByProvisionedCluster.json"
+          "ListAgentPoolByProvisionedClusterInstance": {
+            "$ref": "./examples/ListAgentPoolByProvisionedClusterInstance.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
+            "$ref": "#/parameters/connectedClusterResourceUriParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -788,7 +655,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Gets all the agentPools in the provisionedCluster resource.",
+            "description": "Gets all the agentPools in the provisionedClusterInstances resource.",
             "schema": {
               "$ref": "#/definitions/agentPoolListResult"
             }
@@ -799,18 +666,15 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/provisionedClusters/{resourceName}/upgradeNodeImageVersionForEntireCluster": {
+    "/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/upgradeNodeImageVersionForEntireCluster": {
       "post": {
         "tags": [
-          "ProvisionedClusters"
+          "provisionedClusterInstances"
         ],
-        "operationId": "ProvisionedClusters_UpgradeNodeImageVersionForEntireCluster",
+        "operationId": "provisionedClusterInstances_UpgradeNodeImageVersionForEntireCluster",
         "summary": "Upgrades the node image version of the cluster control plane and all agent pools to the latest.",
         "description": "Upgrading the node image version of a cluster applies the newest OS and runtime updates to the nodes.",
         "parameters": [
@@ -818,13 +682,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
+            "$ref": "#/parameters/connectedClusterResourceUriParameter"
           }
         ],
         "responses": {
@@ -855,31 +713,25 @@
         },
         "x-ms-examples": {
           "UpgradeClusterNodeImageVersion": {
-            "$ref": "./examples/ProvisionedClustersUpgradeNodeImageVersionForEntireCluster.json"
+            "$ref": "./examples/ProvisionedClusterInstanceUpgradeNodeImageVersionForEntireCluster.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/provisionedClusters/{resourceName}/listClusterUserCredential": {
+    "/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/listClusterUserCredential": {
       "post": {
         "tags": [
-          "ProvisionedClusters"
+          "provisionedClusterInstances"
         ],
-        "operationId": "ProvisionedClusters_ListClusterUserCredentials",
-        "summary": "Listing the AAD user credentials of a provisioned cluster used only in direct mode.",
-        "description": "Lists the AAD user credentials of a provisioned cluster used only in direct mode.",
+        "operationId": "provisionedClusterInstances_ListClusterUserCredentials",
+        "summary": "Listing the AAD user credentials of a provisioned cluster instance used only in direct mode.",
+        "description": "Lists the AAD user credentials of a provisioned cluster instance used only in direct mode.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
+            "$ref": "#/parameters/connectedClusterResourceUriParameter"
           }
         ],
         "responses": {
@@ -911,31 +763,25 @@
         },
         "x-ms-examples": {
           "ListClusterUserCredentials": {
-            "$ref": "./examples/ProvisionedClustersListClusterUserCredentials.json"
+            "$ref": "./examples/ProvisionedClusterInstanceListClusterUserCredentials.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/provisionedClusters/{resourceName}/listClusterAdminCredential": {
+    "/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/listClusterAdminCredential": {
       "post": {
         "tags": [
-          "ProvisionedClusters"
+          "provisionedClusterInstances"
         ],
-        "operationId": "ProvisionedClusters_ListClusterAdminCredentials",
-        "summary": "Listing the admin credentials of a provisioned cluster used only in direct mode.",
-        "description": "Lists the admin credentials of a provisioned cluster used only in direct mode.",
+        "operationId": "provisionedClusterInstances_ListClusterAdminCredentials",
+        "summary": "Listing the admin credentials of a provisioned cluster instance used only in direct mode.",
+        "description": "Lists the admin credentials of a provisioned cluster instance used only in direct mode.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
+            "$ref": "#/parameters/connectedClusterResourceUriParameter"
           }
         ],
         "responses": {
@@ -967,7 +813,7 @@
         },
         "x-ms-examples": {
           "ListClusterAdminCredentials": {
-            "$ref": "./examples/ProvisionedClustersListClusterAdminCredentials.json"
+            "$ref": "./examples/ProvisionedClusterInstanceListClusterAdminCredentials.json"
           }
         }
       }
@@ -1364,7 +1210,7 @@
       },
       "description": "The credential result response."
     },
-    "provisionedClustersProperties": {
+    "provisionedClusterProperties": {
       "type": "object",
       "properties": {
         "aadProfile": {
@@ -1494,7 +1340,7 @@
           "$ref": "#/definitions/provisionedClusterIdentity"
         },
         "properties": {
-          "$ref": "#/definitions/provisionedClustersProperties"
+          "$ref": "#/definitions/provisionedClusterProperties"
         },
         "systemData": {
           "readOnly": true,
@@ -1509,7 +1355,7 @@
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
-      "description": "The provisionedClusters resource definition."
+      "description": "The provisionedClusterInstances resource definition."
     },
     "provisionedClustersPatch": {
       "type": "object",
@@ -1526,7 +1372,7 @@
           "description": "The identity of the provisioned cluster."
         }
       },
-      "description": "The provisionedClusters resource patch definition."
+      "description": "The provisionedClusterInstances resource patch definition."
     },
     "provisionedClustersListResult": {
       "type": "object",
@@ -2535,28 +2381,6 @@
     }
   },
   "parameters": {
-    "ResourceNameParameter": {
-      "name": "resourceName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 63,
-      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
-      "description": "Parameter for the name of the provisioned cluster",
-      "x-ms-parameter-location": "method"
-    },
-    "hybridIdentityMetadataResourceNameParameter": {
-      "name": "hybridIdentityMetadataResourceName",
-      "description": "Parameter for the name of the hybrid identity metadata resource.",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
-      "x-ms-parameter-location": "method",
-      "maxLength": 64,
-      "minLength": 3
-    },
     "agentPoolNameParameter": {
       "name": "agentPoolName",
       "description": "Parameter for the name of the agent pool in the provisioned cluster",
@@ -2574,6 +2398,15 @@
       "required": true,
       "type": "string",
       "description": "The fully qualified Azure Resource manager identifier of the custom location resource.",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    },
+    "connectedClusterResourceUriParameter": {
+      "name": "connectedClusterResourceUri",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The fully qualified Azure Resource manager identifier of the connected cluster resource.",
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "method"
     }
