@@ -8438,7 +8438,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{inferencePoolName}": {
       "delete": {
         "tags": [
           "InferencePool"
@@ -8460,8 +8460,8 @@
           },
           {
             "in": "path",
-            "name": "name",
-            "description": "InferencePool name.",
+            "name": "inferencePoolName",
+            "description": "Name of InferencePool",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
@@ -8536,8 +8536,8 @@
           },
           {
             "in": "path",
-            "name": "name",
-            "description": "InferencePool name.",
+            "name": "inferencePoolName",
+            "description": "Name of InferencePool",
             "required": true,
             "type": "string"
           },
@@ -8589,8 +8589,8 @@
           },
           {
             "in": "path",
-            "name": "name",
-            "description": "InferencePool name.",
+            "name": "inferencePoolName",
+            "description": "Name of InferencePool",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
@@ -8674,8 +8674,8 @@
           },
           {
             "in": "path",
-            "name": "name",
-            "description": "InferencePool name.",
+            "name": "inferencePoolName",
+            "description": "Name of InferencePool",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
@@ -8735,7 +8735,59 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{name}/skus": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{inferencePoolName}/fetchStatus": {
+      "post": {
+        "tags": [
+          "InferencePool"
+        ],
+        "summary": "Retrieve inference pool status.",
+        "operationId": "InferencePools_GetStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "inferencePoolName",
+            "description": "Name of InferencePool",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PoolStatus"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetStatus Workspace Inference Pool.": {
+            "$ref": "./examples/Workspace/InferencePool/getStatus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{inferencePoolName}/skus": {
       "get": {
         "tags": [
           "InferencePool"
@@ -8757,7 +8809,7 @@
           },
           {
             "in": "path",
-            "name": "name",
+            "name": "inferencePoolName",
             "description": "Inference Group name.",
             "required": true,
             "type": "string"
@@ -8797,58 +8849,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{name}/status": {
-      "post": {
-        "tags": [
-          "InferencePool"
-        ],
-        "summary": "Retrieve inference pool status.",
-        "operationId": "InferencePools_GetStatus",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "in": "path",
-            "name": "name",
-            "description": "InferencePool name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/PoolStatus"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetStatus Workspace Inference Pool.": {
-            "$ref": "./examples/Workspace/InferencePool/getStatus.json"
-          }
         }
       }
     },
@@ -8943,6 +8943,334 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}": {
+      "delete": {
+        "tags": [
+          "InferenceGroup"
+        ],
+        "summary": "Delete InferenceGroup (asynchronous).",
+        "operationId": "InferenceGroups_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "poolName",
+            "description": "InferencePool name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "in": "path",
+            "name": "groupName",
+            "description": "InferenceGroup name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Workspace Inference Group.": {
+            "$ref": "./examples/Workspace/InferenceGroup/delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "InferenceGroup"
+        ],
+        "summary": "Get InferenceGroup.",
+        "operationId": "InferenceGroups_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "poolName",
+            "description": "InferencePool name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "in": "path",
+            "name": "groupName",
+            "description": "InferenceGroup name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/InferenceGroupMinimalTrackedResourceWithSku"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Workspace Inference Group.": {
+            "$ref": "./examples/Workspace/InferenceGroup/get.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "InferenceGroup"
+        ],
+        "summary": "Update InferenceGroup (asynchronous).",
+        "operationId": "InferenceGroups_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "poolName",
+            "description": "InferencePool name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "groupName",
+            "description": "InferenceGroup name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Online Endpoint entity to apply during operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PartialMinimalTrackedResourceWithSku"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/InferenceGroupMinimalTrackedResourceWithSku"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Workspace Inference Group.": {
+            "$ref": "./examples/Workspace/InferenceGroup/update.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "put": {
+        "tags": [
+          "InferenceGroup"
+        ],
+        "summary": "Create or update InferenceGroup (asynchronous).",
+        "operationId": "InferenceGroups_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "poolName",
+            "description": "InferencePool name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "in": "path",
+            "name": "groupName",
+            "description": "InferenceGroup name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "InferenceGroup entity to apply during operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InferenceGroupMinimalTrackedResourceWithSku"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create or update request is successful.",
+            "schema": {
+              "$ref": "#/definitions/InferenceGroupMinimalTrackedResourceWithSku"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/InferenceGroupMinimalTrackedResourceWithSku"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Workspace Inference Group.": {
+            "$ref": "./examples/Workspace/InferenceGroup/createOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
         }
       }
     },
@@ -9048,7 +9376,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/endpoints/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/endpoints/{endpointName}": {
       "delete": {
         "tags": [
           "InferenceEndpoint"
@@ -9086,7 +9414,7 @@
           },
           {
             "in": "path",
-            "name": "name",
+            "name": "endpointName",
             "description": "InferenceEndpoint name.",
             "required": true,
             "type": "string",
@@ -9178,7 +9506,7 @@
           },
           {
             "in": "path",
-            "name": "name",
+            "name": "endpointName",
             "description": "InferenceEndpoint name.",
             "required": true,
             "type": "string",
@@ -9248,7 +9576,7 @@
           },
           {
             "in": "path",
-            "name": "name",
+            "name": "endpointName",
             "description": "InferenceEndpoint name.",
             "required": true,
             "type": "string",
@@ -9349,7 +9677,7 @@
           },
           {
             "in": "path",
-            "name": "name",
+            "name": "endpointName",
             "description": "InferenceEndpoint name.",
             "required": true,
             "type": "string",
@@ -9410,159 +9738,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{name}": {
-      "delete": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/fetchStatus": {
+      "post": {
         "tags": [
           "InferenceGroup"
         ],
-        "summary": "Delete InferenceGroup (asynchronous).",
-        "operationId": "InferenceGroups_Delete",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "in": "path",
-            "name": "poolName",
-            "description": "InferencePool name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "in": "path",
-            "name": "name",
-            "description": "InferenceGroup name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "x-ms-async-operation-timeout": {
-                "description": "Timeout for the client to use when polling the asynchronous operation.",
-                "type": "string",
-                "format": "duration"
-              },
-              "Location": {
-                "description": "URI to poll for asynchronous operation result.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "Duration the client should wait between requests, in seconds.",
-                "type": "integer",
-                "format": "int32",
-                "maximum": 600,
-                "minimum": 10
-              }
-            }
-          },
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete Workspace Inference Group.": {
-            "$ref": "./examples/Workspace/InferenceGroup/delete.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      },
-      "get": {
-        "tags": [
-          "InferenceGroup"
-        ],
-        "summary": "Get InferenceGroup.",
-        "operationId": "InferenceGroups_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "in": "path",
-            "name": "poolName",
-            "description": "InferencePool name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "in": "path",
-            "name": "name",
-            "description": "InferenceGroup name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/InferenceGroupMinimalTrackedResourceWithSku"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Workspace Inference Group.": {
-            "$ref": "./examples/Workspace/InferenceGroup/get.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "InferenceGroup"
-        ],
-        "summary": "Update InferenceGroup (asynchronous).",
-        "operationId": "InferenceGroups_Update",
-        "consumes": [
-          "application/json"
-        ],
+        "summary": "Retrieve inference group status.",
+        "operationId": "InferenceGroups_GetStatus",
         "produces": [
           "application/json"
         ],
@@ -9585,50 +9767,20 @@
           },
           {
             "in": "path",
-            "name": "name",
+            "name": "groupName",
             "description": "InferenceGroup name.",
             "required": true,
             "type": "string"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Online Endpoint entity to apply during operation.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PartialMinimalTrackedResourceWithSku"
-            }
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/InferenceGroupMinimalTrackedResourceWithSku"
-            }
-          },
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "x-ms-async-operation-timeout": {
-                "description": "Timeout for the client to use when polling the asynchronous operation.",
-                "type": "string",
-                "format": "duration"
-              },
-              "Location": {
-                "description": "URI to poll for asynchronous operation result.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "Duration the client should wait between requests, in seconds.",
-                "type": "integer",
-                "format": "int32",
-                "maximum": 600,
-                "minimum": 10
-              }
+              "$ref": "#/definitions/GroupStatus"
             }
           },
           "default": {
@@ -9639,106 +9791,13 @@
           }
         },
         "x-ms-examples": {
-          "Update Workspace Inference Group.": {
-            "$ref": "./examples/Workspace/InferenceGroup/update.json"
+          "GetStatus Workspace Inference Group.": {
+            "$ref": "./examples/Workspace/InferenceGroup/getStatus.json"
           }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "put": {
-        "tags": [
-          "InferenceGroup"
-        ],
-        "summary": "Create or update InferenceGroup (asynchronous).",
-        "operationId": "InferenceGroups_CreateOrUpdate",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "in": "path",
-            "name": "poolName",
-            "description": "InferencePool name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "in": "path",
-            "name": "name",
-            "description": "InferenceGroup name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "InferenceGroup entity to apply during operation.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/InferenceGroupMinimalTrackedResourceWithSku"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Create or update request is successful.",
-            "schema": {
-              "$ref": "#/definitions/InferenceGroupMinimalTrackedResourceWithSku"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/InferenceGroupMinimalTrackedResourceWithSku"
-            },
-            "headers": {
-              "x-ms-async-operation-timeout": {
-                "description": "Timeout for the client to use when polling the asynchronous operation.",
-                "type": "string",
-                "format": "duration"
-              },
-              "Azure-AsyncOperation": {
-                "description": "URI to poll for asynchronous operation status.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CreateOrUpdate Workspace Inference Group.": {
-            "$ref": "./examples/Workspace/InferenceGroup/createOrUpdate.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{name}/skus": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/skus": {
       "get": {
         "tags": [
           "InferenceGroup"
@@ -9767,7 +9826,7 @@
           },
           {
             "in": "path",
-            "name": "name",
+            "name": "groupName",
             "description": "Inference Group name.",
             "required": true,
             "type": "string"
@@ -9807,65 +9866,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{name}/status": {
-      "post": {
-        "tags": [
-          "InferenceGroup"
-        ],
-        "summary": "Retrieve inference group status.",
-        "operationId": "InferenceGroups_GetStatus",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "in": "path",
-            "name": "poolName",
-            "description": "InferencePool name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "name",
-            "description": "InferenceGroup name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/GroupStatus"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetStatus Workspace Inference Group.": {
-            "$ref": "./examples/Workspace/InferenceGroup/getStatus.json"
-          }
         }
       }
     },
@@ -17467,7 +17467,7 @@
         },
         "scoringUri": {
           "format": "uri",
-          "description": "Endpoint URI for the inference endpoint.",
+          "description": "Endpoint URI.",
           "type": "string",
           "readOnly": true,
           "x-ms-mutability": [
