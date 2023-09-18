@@ -1,25 +1,22 @@
 {
-    "title": "HealthModels_Get",
-    "operationId": "HealthModels_Get",
-    "parameters": {
-      "subscriptionId": "d86fd9b0-81f7-47d8-822c-df5c09a0a6cd",
-      "resourceGroupName": "myResourceGroup",
-      "healthModelName": "myModel1",
-      "api-version": "2023-10-01-preview"
-    },
-    "responses": {
-      "200": {
-        "body": {
-          "id": "/subscriptions/d86fd9b0-81f7-47d8-822c-df5c09a0a6cd/resourcegroups/myResourceGroup/providers/Microsoft.CloudHealth/healthmodels/myModel1",
-          "name": "myModel1",
-          "type": "Microsoft.CloudHealth/healthmodels",
-          "location": "eastus2",
-          "properties": {
-            "provisioningState": "Succeeded",
-            "enabledState": "Disabled",
-            "dataplaneEndpoint": "https://foo.bar.eastus2.cloudhealth.azure.com"
-          }
+  "operationId": "HealthModels_Get",
+  "title": "GetHealthModel",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2021-08-01-preview",
+    "HealthModelName": "Jack"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.CloudHealth/employees/Jack",
+        "name": "Jack",
+        "type": "Microsoft.HealthModel/employees",
+        "properties": {
+          "ProvisioningState": "Succeeded"
         }
       }
     }
   }
+}
