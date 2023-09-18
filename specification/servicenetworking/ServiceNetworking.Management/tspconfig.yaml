@@ -1,3 +1,6 @@
+parameters:  
+  "service-dir":
+    default: "sdk/servicenetworking"
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
@@ -9,3 +12,6 @@ options:
     emitter-output-dir: "{project-root}/.."
     examples-directory: "examples"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/TrafficController.json"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-servicenetworking"
+    package-name: "{package-dir}"
