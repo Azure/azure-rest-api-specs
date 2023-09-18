@@ -6832,7 +6832,7 @@
         "tags": [
           "Job"
         ],
-        "summary": "Creates and executes a Job.",
+        "summary": "Creates and executes a Job.\r\nFor update case, the Tags in the definition passed in will replace Tags in the existing job.",
         "operationId": "Jobs_CreateOrUpdate",
         "consumes": [
           "application/json"
@@ -11228,7 +11228,7 @@
       ],
       "properties": {
         "componentId": {
-          "description": "[Required] ARM resource ID of the component resource used to calculate the custom metrics.",
+          "description": "[Required] Reference to the component asset used to calculate the custom metrics.",
           "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
@@ -15414,7 +15414,7 @@
         "runtimeVersion": {
           "description": "[Required] The Spark runtime version.",
           "minLength": 1,
-          "pattern": "[a-zA-Z0-9_]",
+          "pattern": "^[0-9]+\\.[0-9]+$",
           "type": "string",
           "x-ms-mutability": [
             "create",
@@ -17351,7 +17351,7 @@
       ],
       "properties": {
         "preprocessingComponentId": {
-          "description": "The ARM resource ID of the component resource used to preprocess the data.",
+          "description": "Reference to the component asset used to preprocess the data.",
           "type": "string",
           "x-ms-mutability": [
             "create",
@@ -18129,7 +18129,7 @@
       ],
       "properties": {
         "preprocessingComponentId": {
-          "description": "The ARM resource ID of the component resource used to preprocess the data.",
+          "description": "Reference to the component asset used to preprocess the data.",
           "type": "string",
           "x-ms-mutability": [
             "create",
