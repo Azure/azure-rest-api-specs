@@ -6983,6 +6983,7 @@
         "clusterId": {
           "description": "The resource ID of the cluster this bare metal machine is associated with.",
           "type": "string",
+          "format": "arm-id",
           "readOnly": true
         },
         "cordonStatus": {
@@ -7108,7 +7109,15 @@
         },
         "rackId": {
           "description": "The resource ID of the rack where this bare metal machine resides.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetworkCloud/racks"
+              }
+            ]
+          }
         },
         "rackSlot": {
           "description": "The rack slot in which this bare metal machine is located, ordered from the bottom up i.e. the lowest slot is 1.",
@@ -7680,6 +7689,7 @@
         "clusterId": {
           "description": "The resource ID of the Network Cloud cluster this cloud services network is associated with.",
           "type": "string",
+          "format": "arm-id",
           "readOnly": true
         },
         "detailedStatus": {
@@ -7991,6 +8001,14 @@
         "analyticsWorkspaceId": {
           "description": "The resource ID of the Log Analytics workspace that is used for the logs collection.",
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.OperationalInsights/workspaces"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -8044,6 +8062,7 @@
         "fabricControllerId": {
           "description": "The resource ID of the fabric controller that has one to one mapping with the cluster manager.",
           "type": "string",
+          "format": "arm-id",
           "x-ms-mutability": [
             "read",
             "create"
@@ -8309,11 +8328,7 @@
         },
         "analyticsWorkspaceId": {
           "description": "The resource ID of the Log Analytics Workspace that will be used for storing relevant logs.",
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "type": "string"
         },
         "availableUpgradeVersions": {
           "description": "The list of cluster runtime version upgrades available for this cluster.",
@@ -8372,6 +8387,14 @@
         "clusterManagerId": {
           "description": "The resource ID of the cluster manager that manages this cluster. This is set by the Cluster Manager when the cluster is created.",
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetworkCloud/clusterManagers"
+              }
+            ]
+          },
           "readOnly": true
         },
         "clusterServicePrincipal": {
@@ -8458,6 +8481,7 @@
         "networkFabricId": {
           "description": "The resource ID of the Network Fabric associated with the cluster.",
           "type": "string",
+          "format": "arm-id",
           "x-ms-mutability": [
             "read",
             "create"
@@ -8548,7 +8572,15 @@
         },
         "keyVaultId": {
           "description": "The resource ID of the key vault to archive the secrets of the cluster.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.KeyVault/vaults"
+              }
+            ]
+          }
         }
       }
     },
@@ -8752,6 +8784,14 @@
         "privateLinkServiceId": {
           "description": "The resource ID of the private link service that is used to provide virtual machine console access.",
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/privateLinkServices"
+              }
+            ]
+          },
           "readOnly": true
         },
         "provisioningState": {
@@ -9336,6 +9376,14 @@
         "agentPoolId": {
           "description": "The resource ID of the agent pool that this node belongs to. This value is not represented on control plane nodes.",
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetworkCloud/kubernetesClusters/agentPools"
+              }
+            ]
+          },
           "readOnly": true
         },
         "availabilityZone": {
@@ -9346,6 +9394,7 @@
         "bareMetalMachineId": {
           "description": "The resource ID of the bare metal machine that hosts this node.",
           "type": "string",
+          "format": "arm-id",
           "readOnly": true
         },
         "cpuCores": {
@@ -9564,11 +9613,20 @@
         "clusterId": {
           "description": "The resource ID of the Network Cloud cluster.",
           "type": "string",
+          "format": "arm-id",
           "readOnly": true
         },
         "connectedClusterId": {
           "description": "The resource ID of the connected cluster set up when this Kubernetes cluster is created.",
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Kubernetes/connectedClusters"
+              }
+            ]
+          },
           "readOnly": true
         },
         "controlPlaneKubernetesVersion": {
@@ -9751,6 +9809,14 @@
         "networkId": {
           "description": "The resource ID of the network that is being configured for attachment.",
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetworkCloud/l2Networks"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -9826,6 +9892,7 @@
         "clusterId": {
           "description": "The resource ID of the Network Cloud cluster this L2 network is associated with.",
           "type": "string",
+          "format": "arm-id",
           "readOnly": true
         },
         "detailedStatus": {
@@ -9886,6 +9953,7 @@
         "l2IsolationDomainId": {
           "description": "The resource ID of the Network Fabric l2IsolationDomain.",
           "type": "string",
+          "format": "arm-id",
           "x-ms-mutability": [
             "read",
             "create"
@@ -9969,6 +10037,14 @@
         "networkId": {
           "description": "The resource ID of the network that is being configured for attachment.",
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetworkCloud/l3Networks"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -10045,6 +10121,7 @@
         "clusterId": {
           "description": "The resource ID of the Network Cloud cluster this L3 network is associated with.",
           "type": "string",
+          "format": "arm-id",
           "readOnly": true
         },
         "detailedStatus": {
@@ -10152,6 +10229,7 @@
         "l3IsolationDomainId": {
           "description": "The resource ID of the Network Fabric l3IsolationDomain.",
           "type": "string",
+          "format": "arm-id",
           "x-ms-mutability": [
             "read",
             "create"
@@ -10389,6 +10467,7 @@
         "attachedNetworkId": {
           "description": "The resource ID of the associated network attached to the virtual machine.\nIt can be one of cloudServicesNetwork, l3Network, l2Network or trunkedNetwork resources.",
           "type": "string",
+          "format": "arm-id",
           "x-ms-mutability": [
             "read",
             "create"
@@ -10482,6 +10561,7 @@
         "cloudServicesNetworkId": {
           "description": "The resource ID of the associated Cloud Services network.",
           "type": "string",
+          "format": "arm-id",
           "x-ms-mutability": [
             "read",
             "create"
@@ -10490,6 +10570,7 @@
         "cniNetworkId": {
           "description": "The resource ID of the Layer 3 network that is used for creation of the Container Networking Interface network.",
           "type": "string",
+          "format": "arm-id",
           "x-ms-mutability": [
             "read",
             "create"
@@ -10686,7 +10767,8 @@
         },
         "networkRackId": {
           "description": "The resource ID of the network rack that matches this rack definition.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id"
         },
         "rackLocation": {
           "description": "The free-form description of the rack's location.",
@@ -10701,7 +10783,15 @@
         },
         "rackSkuId": {
           "description": "The resource ID of the sku for the rack being added.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetworkCloud/rackSkus"
+              }
+            ]
+          }
         },
         "storageApplianceConfigurationData": {
           "description": "The list of storage appliance configuration data for this rack.",
@@ -10766,6 +10856,7 @@
         "clusterId": {
           "description": "The resource ID of the cluster the rack is created for. This value is set when the rack is created by the cluster.",
           "type": "string",
+          "format": "arm-id",
           "readOnly": true
         },
         "detailedStatus": {
@@ -10816,7 +10907,15 @@
         },
         "rackSkuId": {
           "description": "The SKU for the rack.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetworkCloud/rackSkus"
+              }
+            ]
+          }
         }
       }
     },
@@ -11320,6 +11419,7 @@
         "clusterId": {
           "description": "The resource ID of the cluster this storage appliance is associated with.",
           "type": "string",
+          "format": "arm-id",
           "readOnly": true
         },
         "detailedStatus": {
@@ -11365,6 +11465,7 @@
         "rackId": {
           "description": "The resource ID of the rack where this storage appliance resides.",
           "type": "string",
+          "format": "arm-id",
           "x-ms-mutability": [
             "read",
             "create"
@@ -11524,6 +11625,14 @@
         "networkId": {
           "description": "The resource ID of the network that is being configured for attachment.",
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetworkCloud/trunkedNetworks"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -11600,6 +11709,7 @@
         "clusterId": {
           "description": "The resource ID of the Network Cloud cluster this trunked network is associated with.",
           "type": "string",
+          "format": "arm-id",
           "readOnly": true
         },
         "detailedStatus": {
@@ -11848,6 +11958,7 @@
         "resourceId": {
           "description": "The resource ID of the target object that the placement hints will be checked against, e.g., the bare metal node to host the virtual machine.",
           "type": "string",
+          "format": "arm-id",
           "minLength": 1,
           "x-ms-mutability": [
             "read",
@@ -11936,8 +12047,9 @@
           "readOnly": true
         },
         "bareMetalMachineId": {
-          "description": "The resource ID of the bare metal machine the virtual machine has landed to.",
+          "description": "The resource ID of the bare metal machine that hosts the virtual machine.",
           "type": "string",
+          "format": "arm-id",
           "readOnly": true
         },
         "bootMethod": {
@@ -11968,6 +12080,7 @@
         "clusterId": {
           "description": "The resource ID of the cluster the virtual machine is created for.",
           "type": "string",
+          "format": "arm-id",
           "readOnly": true
         },
         "cpuCores": {
