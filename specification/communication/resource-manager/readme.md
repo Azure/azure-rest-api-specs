@@ -42,6 +42,7 @@ input-file:
   - Microsoft.Communication/preview/2023-06-01-preview/Domains.json
   - Microsoft.Communication/preview/2023-06-01-preview/EmailServices.json
   - Microsoft.Communication/preview/2023-06-01-preview/SenderUsernames.json
+  - Microsoft.Communication/preview/2023-06-01-preview/SuppressionLists.json
 ```
 ### Tag: package-preview-2023-04
 
