@@ -108,7 +108,7 @@ model SignalDefinitionProperties {
     @extension(
         "x-ms-enum",
         {
-            name: "SignalKindEnum",
+            name: "SignalKindEnum", // Adding this manually to fix linter issue when using @knownValues
             modelAsString: true,
         }
     )
@@ -341,7 +341,7 @@ model AuthenticationSettingProperties {
     @extension(
         "x-ms-enum",
         {
-            name: "AuthenticationKindEnum",
+            name: "AuthenticationKindEnum", // Adding this manually to fix linter issue when using @knownValues
             modelAsString: true,
         }
     )
