@@ -6373,15 +6373,10 @@
           "type": "string",
           "description": "API key for the designated Azure Open AI resource."
         },
-        "authResourceId": {
-          "type": "string",
-          "x-nullable": true,
-          "description": "This value should be the application ID created for the Azure Open AI resource when it was registered with Azure Active Directory. When specified, the query connects to the Azure Open AI resource using a managed ID (either system or user-assigned) of the search service and the access token of the resource, using this value as the resource id for creating the scope of the access token."
-        },
         "authIdentity": {
           "$ref": "#/definitions/SearchIndexerDataIdentity",
           "x-nullable": true,
-          "description": "The user-assigned managed identity used for outbound connections. If an authResourceId is provided and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared."
+          "description": "The user-assigned managed identity used for outbound connections."
         }
       },
       "description": "Contains the parameters specific to using the Azure Open AI service for vectorization at query time."
@@ -9424,15 +9419,10 @@
           "type": "string",
           "description": "API key for the designated Azure Open AI resource."
         },
-        "authResourceId": {
-          "type": "string",
-          "x-nullable": true,
-          "description": "This value should be the application ID created for the Azure Open AI resource when it was registered with Azure Active Directory. When specified, the skill connects to the Azure Open AI resource using a managed ID (either system or user-assigned) of the search service and the access token of the resource, using this value as the resource id for creating the scope of the access token."
-        },
         "authIdentity": {
           "$ref": "#/definitions/SearchIndexerDataIdentity",
           "x-nullable": true,
-          "description": "The user-assigned managed identity used for outbound connections. If an authResourceId is provided and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared."
+          "description": "The user-assigned managed identity used for outbound connections."
         }
       },
       "description": "Allows you to generate a vector embedding for a given text input using the Azure Open AI service."
