@@ -449,6 +449,9 @@
           "description": "The billing account name.",
           "type": "string"
         },
+        "tradeName": {
+          "type": "string"
+        },
         "enrollmentDetails": {
           "description": "The properties of an enrollment.",
           "allOf": [
@@ -459,6 +462,10 @@
         },
         "hasReadAccess": {
           "description": "Indicates whether user has read access to the billing account.",
+          "type": "boolean"
+        },
+        "hasNoBillingProfiles": {
+          "description": "TODO",
           "type": "boolean"
         },
         "notificationEmailAddress": {
@@ -476,6 +483,13 @@
               "$ref": "./types.json#/definitions/AddressDetails"
             }
           ]
+        },
+        "taxIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TaxIdentifier"
+          },
+          "x-ms-identifiers": []
         },
         "registrationNumber": {
           "description": "Describes the registration number of the organization linked with the billing account.",
@@ -637,6 +651,63 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
+        }
+      }
+    },
+    "TaxIdentifier": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "description": "TODO",
+          "enum": [
+            "Unknown",
+            "BrazilCcmId",
+            "BrazilCnpjId",
+            "BrazilCpfId",
+            "CanadianFederalExempt",
+            "CanadianProvinceExempt",
+            "ExternalTaxation",
+            "IndiaFederalTanId",
+            "IndiaFederalServiceTaxId",
+            "IndiaPanId",
+            "IndiaStateCstId",
+            "IndiaStateGstINId",
+            "IndiaStateVatId",
+            "IntlExempt",
+            "USExempt",
+            "VatId",
+            "LoveCode",
+            "MobileBarCode",
+            "NationalIdentificationNumber",
+            "PublicSectorId"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TaxIdentifierType",
+            "modelAsString": true
+          }
+        },
+        "scope": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "status": {
+          "description": "TODO",
+          "enum": [
+            "Unknown",
+            "Valid",
+            "Invalid"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TaxIdentifierStatus",
+            "modelAsString": true
+          }
         }
       }
     },
