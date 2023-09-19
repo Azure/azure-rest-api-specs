@@ -1,0 +1,53 @@
+{
+    "parameters": {
+      "subscriptionId": "{subscription-id}",
+      "resourceGroupName": "myResourceGroup",
+      "api-version": "2023-08-15-preview",
+      "diskAccessName": "myPrivateAccess",
+      "privateEndpointConnectionName": "myPrivateEndpointConnection",
+      "privateEndpointConnection": {
+        "properties": {
+          "privateLinkServiceConnectionState": {
+            "status": "Approved",
+            "description": "Approving myPrivateEndpointConnection"
+          }
+        }
+      }
+    },
+    "responses": {
+      "202": {
+        "body": {
+          "name": "myPrivateEndpointConenction",
+          "type": "Microsoft.Chaos/privateAccesses/privateEndpointConnections",
+          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Chaos/privateAccesses/myPrivateAccess/privateEndpoinConnections/myPrivateEndpointConnectionName",
+          "properties": {
+            "privateEndpoint": {
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+            },
+            "privateLinkServiceConnectionState": {
+              "actionsRequired": "None",
+              "description": "Approving myPrivateEndpointConnection",
+              "status": "Approved"
+            }
+          }
+        }
+      },
+      "200": {
+        "body": {
+          "name": "myPrivateEndpointConnectionName",
+          "type": "Microsoft.Chaos/privateAccesses/PrivateEndpointConnections",
+          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Chaos/privateAccesses/myPrivateAccess/privateEndpoinConnections/myPrivateEndpointConnectionName",
+          "properties": {
+            "privateEndpoint": {
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+            },
+            "privateLinkServiceConnectionState": {
+              "actionsRequired": "None",
+              "description": "Approving myPrivateEndpointConnection",
+              "status": "Approved"
+            }
+          }
+        }
+      }
+    }
+  }
