@@ -2898,7 +2898,7 @@
     },
     "ConnectedCache": {
       "type": "object",
-      "description": "ConnectedCache Resource. Represents the high level Nodes needed to provision CacheNode resources",
+      "description": "ConnectedCache Resource. Represents the high level Nodes needed to provision CacheNode resources and customer reources used in private preview",
       "required": [
         "location"
       ],
@@ -2908,12 +2908,75 @@
           "description": "Additional ConnectedCache properties",
           "title": "ConnectedCache Additional properties",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CacheNode"
+          "$ref": "#/definitions/CacheNodeOldResponse"
         },
         "systemData": {
           "readOnly": true,
           "description": "The system meta data relating to this resource",
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+        }
+      }
+    },
+    "CacheNodeOldResponse": {
+      "type": "object",
+      "description": "Model representing Cache Node for ConnectedCache resource",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The provisioned state of the resource",
+          "enum": [
+            "Unknown",
+            "Accepted",
+            "Succeeded",
+            "Failed",
+            "Cancelled",
+            "Upgrading",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "customer": {
+          "type": "object",
+          "description": " Mcc Customer Json response"
+        },
+        "additionalCustomerProperties": {
+          "type": "object",
+          "description": "additional Mcc Customer Json properties",
+          "additionalProperties": {}
+        },
+        "cacheNode": {
+          "type": "object",
+          "description": " Mcc Cache Node Json response"
+        },
+        "additionalCacheNodeProperties": {
+          "type": "object",
+          "description": "additional Mcc Cache Node Json properties for BGP and Update and IOT central",
+          "additionalProperties": {}
+        },
+        "statusCode": {
+          "type": "string",
+          "description": "statusCode used to get code details of MCC response object"
+        },
+        "statusText": {
+          "type": "string",
+          "description": "statusText used to get status details in string format of MCC response object"
+        },
+        "statusDetails": {
+          "type": "string",
+          "description": "statusDetails used to get inner details of MCC response object"
+        },
+        "status": {
+          "description": "status of the HTTP error code",
+          "type": "string",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details"
         }
       }
     },
