@@ -391,13 +391,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}/statuses": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}/executions": {
       "get": {
-        "description": "Get a list of statuses of a Experiment resource.",
+        "description": "Get a list of execution of an Experiment resource.",
         "tags": [
           "Experiments"
         ],
-        "operationId": "Experiments_ListAllStatuses",
+        "operationId": "Experiments_ListAllExecutions",
         "parameters": [
           {
             "$ref": "./types/common.json#/parameters/apiVersion"
@@ -414,9 +414,9 @@
         ],
         "responses": {
           "200": {
-            "description": "List of statuses returned if request was successful.",
+            "description": "List of executions returned if request was successful.",
             "schema": {
-              "$ref": "./types/experiments.json#/definitions/experimentStatusListResult"
+              "$ref": "./types/experiments.json#/definitions/experimentExecutionListResult"
             }
           },
           "default": {
@@ -430,19 +430,19 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List all statuses of a Experiment.": {
-            "$ref": "./examples/ListExperimentStatuses.json"
+          "List all executions of am Experiment.": {
+            "$ref": "./examples/ListExperimentExecutions.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}/statuses/{statusId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}/executions/{executionId}": {
       "get": {
-        "description": "Get a status of a Experiment resource.",
+        "description": "Get an execution of an Experiment resource.",
         "tags": [
           "Experiments"
         ],
-        "operationId": "Experiments_GetStatus",
+        "operationId": "Experiments_GetExecution",
         "parameters": [
           {
             "$ref": "./types/common.json#/parameters/apiVersion"
@@ -457,14 +457,14 @@
             "$ref": "./types/experiments.json#/parameters/experimentName"
           },
           {
-            "$ref": "./types/experiments.json#/parameters/statusId"
+            "$ref": "./types/experiments.json#/parameters/executionId"
           }
         ],
         "responses": {
           "200": {
-            "description": "Status returned if request was successful.",
+            "description": "Execution returned if request was successful.",
             "schema": {
-              "$ref": "./types/experiments.json#/definitions/experimentStatus"
+              "$ref": "./types/experiments.json#/definitions/experimentExecutionProperties"
             }
           },
           "default": {
@@ -475,98 +475,8 @@
           }
         },
         "x-ms-examples": {
-          "Get the status of a Experiment.": {
-            "$ref": "./examples/GetAExperimentStatus.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}/executionDetails": {
-      "get": {
-        "tags": [
-          "Experiments"
-        ],
-        "description": "Get a list of execution details of a Experiment resource.",
-        "operationId": "Experiments_ListExecutionDetails",
-        "parameters": [
-          {
-            "$ref": "./types/common.json#/parameters/apiVersion"
-          },
-          {
-            "$ref": "./types/common.json#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "./types/common.json#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "./types/experiments.json#/parameters/experimentName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Execution detail if request was successful.",
-            "schema": {
-              "$ref": "./types/experiments.json#/definitions/experimentExecutionDetailsListResult"
-            }
-          },
-          "default": {
-            "description": "Error response returned if request was unsuccessful.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "List experiment executions details": {
-            "$ref": "./examples/ListExperimentExecutionsDetails.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}/executionDetails/{executionDetailsId}": {
-      "get": {
-        "tags": [
-          "Experiments"
-        ],
-        "description": "Get an execution detail of a Experiment resource.",
-        "operationId": "Experiments_GetExecutionDetails",
-        "parameters": [
-          {
-            "$ref": "./types/common.json#/parameters/apiVersion"
-          },
-          {
-            "$ref": "./types/common.json#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "./types/common.json#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "./types/experiments.json#/parameters/experimentName"
-          },
-          {
-            "$ref": "./types/experiments.json#/parameters/executionDetailsId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "List of execution details in request was successful.",
-            "schema": {
-              "$ref": "./types/experiments.json#/definitions/experimentExecutionDetails"
-            }
-          },
-          "default": {
-            "description": "Error response returned if request was unsuccessful.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get experiment execution details": {
-            "$ref": "./examples/GetAExperimentExecutionDetails.json"
+          "Get the execution of a Experiment.": {
+            "$ref": "./examples/GetAnExperimentExecution.json"
           }
         }
       }
