@@ -2764,6 +2764,12 @@
     "AbstractiveSummarizationTaskParameters": {
       "type": "object",
       "description": "Supported parameters for the pre-build Abstractive Summarization task.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "(Optional) If provided, the query will be used to extract most relevant sentences from the document."
+        }
+      },
       "allOf": [
         {
           "$ref": "common.json#/definitions/AbstractiveSummarizationTaskParametersBase"
