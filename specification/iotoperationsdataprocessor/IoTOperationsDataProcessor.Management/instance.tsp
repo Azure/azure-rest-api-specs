@@ -45,7 +45,7 @@ interface Instances {
   get is ArmResourceRead<Instance>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Instance>;
   update is ArmCustomPatchSync<Instance>;
-  delete is ArmResourceDeleteAsync<Instance>;
+  delete is ArmResourceDeleteWithoutOkAsync<Instance>;
   listByResourceGroup is ArmResourceListByParent<Instance>;
   listBySubscription is ArmListBySubscription<Instance>;
 }

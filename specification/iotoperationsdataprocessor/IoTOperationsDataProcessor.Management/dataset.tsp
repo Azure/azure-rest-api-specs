@@ -62,6 +62,6 @@ interface Datasets {
   get is ArmResourceRead<Dataset>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Dataset>;
   update is ArmCustomPatchSync<Dataset>;
-  delete is ArmResourceDeleteAsync<Dataset>;
+  delete is ArmResourceDeleteWithoutOkAsync<Dataset>;
   listByInstance is ArmResourceListByParent<Dataset>;
 }

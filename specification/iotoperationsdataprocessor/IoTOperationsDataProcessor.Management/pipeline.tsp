@@ -46,27 +46,15 @@ model PipelineProperties {
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("Map of stage ids to stage configurations for all pipeline processing and output stages.")
-  stages: PipelineStages;
+  stages: Record<PipelineStage>;
 
   @doc("The status of the last operation.")
   @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
-// #suppress "@azure-tools/typespec-azure-core/bad-record-type"
-// @doc("Information about where to pull input data from.")
-// model PipelineInput is Record<unknown>{
-//   @doc("Programmatic name of the pipeline.")
-//   name: string;
-
-//   @doc("ARM resource type.")
-//   type: string;
-
-//   @doc("Next stage in the pipeline.")
-//   next: string[];
-// }
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
-@doc("Stage configurations for all Pipeline processing and output stages.")
+@doc("Stage configuration for Pipeline input stage.")
 model PipelineInput is Record<unknown> {
   @doc("Programmatic name of the pipeline.")
   name: string;
@@ -77,17 +65,18 @@ model PipelineInput is Record<unknown> {
   @doc("Next stage in the pipeline.")
   next: string[];
 }
+
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("Stage configurations for all Pipeline processing and output stages.")
-model PipelineStages is Record<unknown> {
+model PipelineStage is Record<unknown> {
   @doc("Programmatic name of the pipeline.")
   name: string;
 
   @doc("ARM resource type.")
   type: string;
 
-  @doc("Next stage in the pipeline.")
-  next: string[];
+  @doc("Next stage in the pipeline. Not required if output stage.")
+  next?: string[];
 }
 
 @armResourceOperations
@@ -95,7 +84,7 @@ interface Pipelines {
   get is ArmResourceRead<Pipeline>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Pipeline>;
   update is ArmCustomPatchSync<Pipeline>;
-  delete is ArmResourceDeleteAsync<Pipeline>;
+  delete is ArmResourceDeleteWithoutOkAsync<Pipeline>;
   listByInstance is ArmResourceListByParent<Pipeline>;
 }
 

@@ -367,9 +367,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -684,9 +681,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -1001,9 +995,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -1272,7 +1263,7 @@
     },
     "PipelineInput": {
       "type": "object",
-      "description": "Stage configurations for all Pipeline processing and output stages.",
+      "description": "Stage configuration for Pipeline input stage.",
       "properties": {
         "name": {
           "type": "string",
@@ -1335,8 +1326,11 @@
           "description": "Information about where to pull input data from."
         },
         "stages": {
-          "$ref": "#/definitions/PipelineStages",
-          "description": "Map of stage ids to stage configurations for all pipeline processing and output stages."
+          "type": "object",
+          "description": "Map of stage ids to stage configurations for all pipeline processing and output stages.",
+          "additionalProperties": {
+            "$ref": "#/definitions/PipelineStage"
+          }
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -1350,7 +1344,7 @@
         "stages"
       ]
     },
-    "PipelineStages": {
+    "PipelineStage": {
       "type": "object",
       "description": "Stage configurations for all Pipeline processing and output stages.",
       "properties": {
@@ -1364,7 +1358,7 @@
         },
         "next": {
           "type": "array",
-          "description": "Next stage in the pipeline.",
+          "description": "Next stage in the pipeline. Not required if output stage.",
           "items": {
             "type": "string"
           }
@@ -1372,8 +1366,7 @@
       },
       "required": [
         "name",
-        "type",
-        "next"
+        "type"
       ],
       "additionalProperties": {}
     },
