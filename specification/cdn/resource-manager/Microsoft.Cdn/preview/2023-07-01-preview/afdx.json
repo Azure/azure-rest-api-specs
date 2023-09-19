@@ -6028,38 +6028,11 @@
           "description": "Defines which query string parameters in the url to be considered for expires, key id etc. ",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/UrlSigningParamIdentifier"
+            "$ref": "./cdn.json#/definitions/UrlSigningParamIdentifier"
           },
           "x-ms-identifiers": [
             "paramName"
           ]
-        }
-      }
-    },
-    "UrlSigningParamIdentifier": {
-      "description": "Defines how to identify a parameter for a specific purpose e.g. expires",
-      "type": "object",
-      "required": [
-        "paramIndicator",
-        "paramName"
-      ],
-      "properties": {
-        "paramIndicator": {
-          "description": "Indicates the purpose of the parameter",
-          "type": "string",
-          "enum": [
-            "Expires",
-            "KeyId",
-            "Signature"
-          ],
-          "x-ms-enum": {
-            "name": "paramIndicator",
-            "modelAsString": true
-          }
-        },
-        "paramName": {
-          "description": "Parameter name",
-          "type": "string"
         }
       }
     },
