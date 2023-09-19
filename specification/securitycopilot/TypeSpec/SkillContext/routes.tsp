@@ -8,7 +8,6 @@ using TypeSpec.Http;
 @route("/skillContext")
 @summary("Operations for skills to interact with security copilot ")
 namespace SkillContext {
-
   @get
   @doc("Get the SkillContext for the current skill invocation")
   op getSkillContext(

@@ -2,6 +2,7 @@
 enum SkillSourceType {
   @doc("Uri")
   Uri,
+
   @doc("StringType")
   StringType,
 }
@@ -10,10 +11,13 @@ enum SkillSourceType {
 enum ProgressLogLevel {
   @doc("Error log")
   Error,
+
   @doc("Warning log")
   Warning,
+
   @doc("Information log")
   Information,
+
   @doc("Verbose log")
   Verbose,
 }

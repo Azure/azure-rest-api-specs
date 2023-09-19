@@ -87,6 +87,7 @@ model SkillsetConfiguration {
     @doc("The authentication configurations of the skillset")
     //authConfigurations: SkillsetAuthentication;
     authConfigurations: Record<SkillsetAuthConfiguration>;
+
     //authConfigurations: Dictionary<SkillsetAuthType, SkillsetAuthConfiguration>;
 
     @doc("The scope of the skillset")
@@ -94,24 +95,24 @@ model SkillsetConfiguration {
 }
 
 @doc("skillsetAuth dictionary")
-model SkillsetAuthentication{
+model SkillsetAuthentication {
     Basic?: SkillsetAuthConfiguration;
     ApiKey?: SkillsetAuthConfiguration;
 
     @doc("The skillset supports OAuth authorization code flow authentication TODO what does this mean")
-    OAuthAuthorizationCodeFlow?: SkillsetAuthConfiguration,
+    OAuthAuthorizationCodeFlow?: SkillsetAuthConfiguration;
 
     @doc("The skillset supports OAuth client credentials flow TODO what does this mean")
-    OAuthClientCredentialsFlow?: SkillsetAuthConfiguration,
+    OAuthClientCredentialsFlow?: SkillsetAuthConfiguration;
 
     @doc("The skillset supports AAD authentication")
-    AAD?: SkillsetAuthConfiguration,
+    AAD?: SkillsetAuthConfiguration;
 
     @doc("The skillset supports service HTTP authentication TODO what does this mean")
-    ServiceHttp?: SkillsetAuthConfiguration,
+    ServiceHttp?: SkillsetAuthConfiguration;
 
     @doc("The skillset supports AAD delegated authentication TODO what does this mean")
-    AADDelegated?: SkillsetAuthConfiguration,
+    AADDelegated?: SkillsetAuthConfiguration;
 }
 
 @doc("Settings for a given authentication configuration")
