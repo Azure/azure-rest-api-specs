@@ -20,8 +20,8 @@
       {
         "name": "Endpoint",
         "in": "path",
-        "description": "Supported Cognitive Services endpoint (e.g., https://<resource-name>.api.cognitiveservices.azure.com).",
         "required": true,
+        "description": "Supported Cognitive Services endpoint (e.g., https://<resource-name>.api.cognitiveservices.azure.com).",
         "type": "string"
       }
     ]
@@ -77,8 +77,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
               }
             }
           }
@@ -646,10 +646,11 @@
         "id",
         "participantId"
       ],
+      "additionalProperties": true,
       "allOf": [
         {
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": true
         }
       ]
     },
@@ -1168,10 +1169,11 @@
         "code",
         "message"
       ],
+      "additionalProperties": true,
       "allOf": [
         {
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": true
         }
       ]
     },
@@ -1462,10 +1464,11 @@
       "required": [
         "targetProjectKind"
       ],
+      "additionalProperties": true,
       "allOf": [
         {
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": true
         }
       ]
     },
@@ -1476,7 +1479,7 @@
         "result": {
           "type": "object",
           "description": "The actual response from a LUIS Generally Available application.",
-          "additionalProperties": {}
+          "additionalProperties": true
         }
       },
       "allOf": [
@@ -2292,7 +2295,8 @@
     },
     "object": {
       "type": "object",
-      "description": "Represent a model"
+      "description": "Represent a model",
+      "properties": {}
     },
     "projectKind": {
       "type": "string",

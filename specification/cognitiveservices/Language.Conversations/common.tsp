@@ -123,6 +123,7 @@ model JobState {
     lastUpdateDateTime: utcDateTime;
 
     @doc("status")
+    // @lroStatus commented because State throws error because enums not capatalized
     status: State;
 
     @doc("errors")
