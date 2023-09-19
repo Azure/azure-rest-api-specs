@@ -16,18 +16,22 @@ namespace ImageAnalysis;
 @doc("Performs a single Image Analysis operation")
 @actionSeparator("/")
 @route("imageanalysis:analyze")
+
 @post
 op analyze is Azure.Core.RpcOperation<
 {
-  @query({name:"features", format:"multi"})
+  @query({name:"features", format:"csv"})
   @doc("A string indicating what visual feature types to return. Multiple values should be comma-separated. Valid visual feature types include: Categories, Tags, Description, Faces, ImageType, Color, Adult, Brands, Objects, and Celebrities. If VisualFeatures is not specified, then Categories, Tags, and Description are included in the response by default.")
-  visualFeatures?: Array<string>,
+  visualFeatures?: Array<string>;
 
   @query("overload")
-  overload: string = "stream",
+  overload: "stream";
+
+  @header("Content-Type")
+  contentType: "application/octet-stream";
 
   @body
-  imageContents:bytes,
+  imageContents:bytes;
 },
 ImageAnalysisResult
 >;
