@@ -37,7 +37,6 @@ openapi-type: arm
 tag: package-2023-07
 ```
 
-
 ### Tag: package-2023-07
 
 These settings apply only when `--tag=package-2023-07` is specified on the command line.
@@ -46,6 +45,16 @@ These settings apply only when `--tag=package-2023-07` is specified on the comma
 input-file:
   - stable/2023-07-01/managedClusters.json
 ```
+
+### Tag: package-preview-2023-07
+
+These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-07'
+input-file:
+  - preview/2023-07-02-preview/managedClusters.json
+```
+
 ### Tag: package-2023-06
 
 These settings apply only when `--tag=package-2023-06` is specified on the command line.
