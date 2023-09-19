@@ -46,6 +46,9 @@ suppressions:
   - code: TopLevelResourcesListBySubscription
     where: $.definitions.VmSkuProfile
     reason: Since skus/default resource is defined as an extension resource to the custom location, this rule does not apply. The skus can vary from one custom location to another and we can't really have a ListBySubscription operation for skus.
+  - code: TopLevelResourcesListBySubscription
+    where: $.definitions.provisionedClusters
+    reason: Since provisionedClusters/default resource is defined as an extension resource to the connected cluster resource, we can't really list by subscription and this rule does not apply.
   - code: GetCollectionOnlyHasValueAndNextLink
     reason: This is a false alarm for the /default APIs, as they return a singleton resource and not a collection of resources
 ```
