@@ -683,7 +683,6 @@ model Tasks {
   total: int32;
 
   @doc("List of results from tasks (if available).")
-  @added(Versions.v2023_04_01)
   items?: Array<AnalyzeConversationJobResult>;
 };
 
