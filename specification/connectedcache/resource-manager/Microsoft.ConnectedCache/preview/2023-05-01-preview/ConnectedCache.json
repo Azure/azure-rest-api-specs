@@ -1128,13 +1128,13 @@
           "200": {
             "description": "The update request was successful; the response contains the updated ispCacheNode",
             "schema": {
-              "$ref": "#/definitions/ConnectedCache"
+              "$ref": "#/definitions/MccCacheNodeResource"
             }
           },
           "201": {
             "description": "The update request was successful; the ispCacheNode does not exists",
             "schema": {
-              "$ref": "#/definitions/ConnectedCache"
+              "$ref": "#/definitions/MccCacheNodeResource"
             }
           },
           "default": {
@@ -1183,7 +1183,7 @@
           "default": {
             "description": "The get request has failed; error response details : 4xx/5xx for ispCacheNode resources",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MCCErrorResponse"
             }
           }
         },
@@ -2108,6 +2108,7 @@
         },
         "driveConfiguration": {
           "type": "array",
+          "x-ms-client-flatten": true,
           "items": {
             "$ref": "#/definitions/CacheNodeDriveConfiguration"
           },
@@ -2492,6 +2493,7 @@
         "value": {
           "description": "Resource provider operations list",
           "type": "array",
+          "x-ms-client-flatten": true,
           "items": {
             "$ref": "#/definitions/ResourceProviderOperationDefinition"
           }
