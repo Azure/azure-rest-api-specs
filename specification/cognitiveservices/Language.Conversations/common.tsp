@@ -33,8 +33,6 @@ model InnerErrorModel extends Record<unknown> {
     innererror?: InnerErrorModel;
 }
 
-alias Language = string;
-
 @doc("Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.")
 enum StringIndexType {
     @doc("Returned offset and length values will correspond to TextElements (Graphemes and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this option if your application is written in .Net Framework or .Net Core and you will be using StringInfo.")

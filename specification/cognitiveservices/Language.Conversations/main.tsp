@@ -1707,6 +1707,7 @@ op analyzeConversation is Operations.ResourceCollectionAction<
 @added(Versions.v2023_04_01)
 @doc("Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.")
 @summary("Get analysis status and results")
+@convenientAPI(false)
 // @operationId("AnalyzeConversation_JobStatus") commented due to generating C# sdk error
 op analyzeConversationJobStatus is Operations.ResourceRead<
   AnalyzeConversationJobState, 
@@ -1728,6 +1729,7 @@ op analyzeConversationSubmitJob is Operations.LongRunningResourceCreateWithServi
 @doc("Cancel a long-running job for text analysis of conversations.")
 @summary("Cancel a long-running Text Analysis conversations job")
 @pollingOperation(analyzeConversationJobStatus)
+@convenientAPI(false)
 // @operationId("AnalyzeConversation_CancelJob")
 @actionSeparator(":")
 @action("cancel")
