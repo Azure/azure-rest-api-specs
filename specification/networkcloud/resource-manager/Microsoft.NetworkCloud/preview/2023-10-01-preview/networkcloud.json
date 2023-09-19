@@ -8557,19 +8557,6 @@
         "keyVaultId"
       ],
       "properties": {
-        "enabled": {
-          "description": "The indicator if the specified key vault should be used to archive the secrets of the cluster.",
-          "type": "string",
-          "default": "False",
-          "enum": [
-            "True",
-            "False"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "ClusterSecretArchiveEnabled"
-          }
-        },
         "keyVaultId": {
           "description": "The resource ID of the key vault to archive the secrets of the cluster.",
           "type": "string",
@@ -8581,6 +8568,19 @@
               }
             ]
           }
+        },
+        "useKeyVault": {
+          "description": "The indicator if the specified key vault should be used to archive the secrets of the cluster.",
+          "type": "string",
+          "default": "False",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ClusterSecretArchiveEnabled"
+          }
         }
       }
     },
@@ -8588,7 +8588,7 @@
       "type": "object",
       "title": "ClusterUpdateStrategy represents the strategy for updating the cluster.",
       "required": [
-        "strategy",
+        "strategyType",
         "thresholdType",
         "thresholdValue"
       ],
@@ -8599,7 +8599,7 @@
           "format": "int64",
           "minimum": 1
         },
-        "strategy": {
+        "strategyType": {
           "description": "The mode of operation for runtime protection.",
           "type": "string",
           "enum": [
