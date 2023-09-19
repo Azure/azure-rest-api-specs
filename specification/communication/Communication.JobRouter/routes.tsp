@@ -10,21 +10,25 @@ namespace AzureCommunicationRoutingService;
 
 alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests & NoClientRequestId;
+alias PatchOperationTraits = NoRepeatableRequests & NoClientRequestId & SupportsRouterConditionalPatchUpdateRequests & RouterReturnConditionalResponseHeaders;
+alias GetOperationTraits = ServiceTraits & RouterReturnConditionalResponseHeaders;
 
 alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
+alias GetOperations = Azure.Core.ResourceOperations<GetOperationTraits>;
+alias PatchOperations = Azure.Core.ResourceOperations<PatchOperationTraits>;
 
 interface JobRouterAdministrationOperations {
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   @summary("Creates or updates a classification policy.")
   @doc("Creates or updates a classification policy.")
   @route("/routing")
-  upsertClassificationPolicy is Operations.ResourceCreateOrUpdate<ClassificationPolicy>;
+  upsertClassificationPolicy is PatchOperations.ResourceCreateOrUpdate<ClassificationPolicy>;
   
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   @summary("Retrieves an existing classification policy by Id.")
   @doc("Retrieves an existing classification policy by Id.")
   @route("/routing")
-  getClassificationPolicy is Operations.ResourceRead<ClassificationPolicy>;
+  getClassificationPolicy is GetOperations.ResourceRead<ClassificationPolicy>;
   
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   @summary("Delete a classification policy by Id.")
@@ -50,13 +54,13 @@ interface JobRouterAdministrationOperations {
   @summary("Creates or updates a distribution policy.")
   @doc("Creates or updates a distribution policy.")
   @route("/routing")
-  upsertDistributionPolicy is Operations.ResourceCreateOrUpdate<DistributionPolicy>;
+  upsertDistributionPolicy is PatchOperations.ResourceCreateOrUpdate<DistributionPolicy>;
   
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   @summary("Retrieves an existing distribution policy by Id.")
   @doc("Retrieves an existing distribution policy by Id.")
   @route("/routing")
-  getDistributionPolicy is Operations.ResourceRead<DistributionPolicy>;
+  getDistributionPolicy is GetOperations.ResourceRead<DistributionPolicy>;
   
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   @summary("Delete a distribution policy by Id.")
@@ -82,13 +86,13 @@ interface JobRouterAdministrationOperations {
   @summary("Creates or updates a exception policy.")
   @doc("Creates or updates a exception policy.")
   @route("/routing")
-  upsertExceptionPolicy is Operations.ResourceCreateOrUpdate<ExceptionPolicy>;
+  upsertExceptionPolicy is PatchOperations.ResourceCreateOrUpdate<ExceptionPolicy>;
   
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   @summary("Retrieves an existing exception policy by Id.")
   @doc("Retrieves an existing exception policy by Id.")
   @route("/routing")
-  getExceptionPolicy is Operations.ResourceRead<ExceptionPolicy>;
+  getExceptionPolicy is GetOperations.ResourceRead<ExceptionPolicy>;
   
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   @summary("Deletes a exception policy by Id.")
@@ -114,13 +118,13 @@ interface JobRouterAdministrationOperations {
   @summary("Creates or updates a queue.")
   @doc("Creates or updates a queue.")
   @route("/routing")
-  upsertQueue is Operations.ResourceCreateOrUpdate<RouterQueue>;
+  upsertQueue is PatchOperations.ResourceCreateOrUpdate<RouterQueue>;
   
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   @summary("Retrieves an existing queue by Id.")
   @doc("Retrieves an existing queue by Id.")
   @route("/routing")
-  getQueue is Operations.ResourceRead<RouterQueue>;
+  getQueue is GetOperations.ResourceRead<RouterQueue>;
   
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   @summary("Deletes a queue by Id.")
@@ -148,13 +152,13 @@ interface JobRouterOperations {
   @summary("Creates or updates a router job.")
   @doc("Creates or updates a router job.")
   @route("/routing")
-  upsertJob is Operations.ResourceCreateOrUpdate<RouterJob>;
+  upsertJob is PatchOperations.ResourceCreateOrUpdate<RouterJob>;
   
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   @summary("Retrieves an existing job by Id.")
   @doc("Retrieves an existing job by Id.")
   @route("/routing")
-  getJob is Operations.ResourceRead<RouterJob>;
+  getJob is GetOperations.ResourceRead<RouterJob>;
   
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   @summary("Deletes a job and all of its traces.")
@@ -385,13 +389,13 @@ accepted the job already.
   @summary("Creates or updates a worker.")
   @doc("Creates or updates a worker.")
   @route("/routing")
-  upsertWorker is Operations.ResourceCreateOrUpdate<RouterWorker>;
+  upsertWorker is PatchOperations.ResourceCreateOrUpdate<RouterWorker>;
   
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   @summary("Retrieves an existing worker by Id.")
   @doc("Retrieves an existing worker by Id.")
   @route("/routing")
-  getWorker is Operations.ResourceRead<RouterWorker>;
+  getWorker is GetOperations.ResourceRead<RouterWorker>;
   
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   @summary("Deletes a worker and all of its traces.")

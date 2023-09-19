@@ -6,11 +6,64 @@ import "@azure-tools/typespec-azure-core";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using TypeSpec.Reflection;
 using Azure.Core;
 using Azure.Core.Traits;
 
 @versioned(AzureCommunicationRoutingService.Versions)
 namespace AzureCommunicationRoutingService;
+
+
+@doc("Provides the 'Last-Modified' header to enable conditional (cached) requests")
+model LastModifiedResponseEnvelope {
+  @header("Last-Modified")
+  @visibility("read")
+  @doc("The last modified timestamp.")
+  lastModifiedTimestamp?: string;
+}
+
+// https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#conditional-requests
+
+@doc("Provides the 'If-*' headers to enable conditional (cached) responses for JobRouter.")
+model RouterConditionalRequestHeaders {
+  @visibility("read", "query", "create", "update", "delete")
+  @header("If-Match")
+  @doc("The request should only proceed if an entity matches this string.")
+  ifMatch?: string;
+
+  @visibility("read", "query", "create", "update", "delete")
+  @header("If-Unmodified-Since")
+  @doc("The request should only proceed if the entity was not modified after this time.")
+  ifUnmodifiedSince?: utcDateTime;
+}
+
+/**
+ * Provides conditional request headers for requests and ETag headers for responses for JobRouter.
+ * JobRouter support conditional updates based on 'If-Match' and/or 'If-Unmodified-Since' headers only.
+ * @template TVersionAdded The version when the trait was added to the specification.
+ *           Leave this empty if the trait is always supported.
+ */
+@trait("ConditionalRequests")
+@traitAdded(TVersionAdded)
+model SupportsRouterConditionalPatchUpdateRequests<TVersionAdded extends EnumMember | null = null> {
+  #suppress "@azure-tools/typespec-providerhub/no-inline-model" "This inline model is never used directly in operations."
+  conditionalRequests: {
+    @traitContext(TraitContext.Update)
+    @traitLocation(TraitLocation.Parameters)
+    parameters: RouterConditionalRequestHeaders;
+  };
+}
+
+@trait("RouterReturnConditionalResponseHeaders")
+@traitAdded(TVersionAdded)
+model RouterReturnConditionalResponseHeaders<TVersionAdded extends EnumMember | null = null> {
+  conditionalResponseHeaders: {
+    @traitContext(TraitContext.Create | TraitContext.Update | TraitContext.Read)
+    @traitLocation(TraitLocation.Response)
+    response: EtagResponseEnvelope & LastModifiedResponseEnvelope;
+  };
+}
+
 
 @doc("The status of the Job.")
 enum RouterJobStatus {
