@@ -47,15 +47,21 @@ model DatasetProperties {
   ttl?: string;
 
   @doc("List of keys that can be used for joining on enrich.")
-  keys?: DatasetPropertyKeys;
+  keys?: Record<DatasetPropertyKey>;
 
   @doc("The status of the last operation.")
   @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
-@doc("List of keys that can be used for joining on enrich.")
-model DatasetPropertyKeys {}
+@doc("Key that can be used for joining on enrich.")
+model DatasetPropertyKey {
+  @doc("Path to the input value from the message.")
+  path: string;
+
+  @doc("If true the property will be used as a primary key. At most one primary key can exists.")
+  primaryKey?: boolean;
+}
 
 @armResourceOperations
 interface Datasets {
