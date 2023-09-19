@@ -1,6 +1,6 @@
-import "../healthinsights.common/model.common.request.tsp";
-import "../healthinsights.common/model.common.response.tsp";
-import "../healthinsights.common/model.common.shared.tsp";
+import "../HealthInsights.Common/model.common.request.tsp";
+import "../HealthInsights.Common/model.common.response.tsp";
+import "../HealthInsights.Common/model.common.shared.tsp";
 
 using TypeSpec.Rest;
 

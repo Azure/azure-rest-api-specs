@@ -3,7 +3,7 @@ import "@typespec/rest";
 import "@typespec/http";
 
 import "./model.oncophenotype.tsp";
-import "../healthinsights.common/primitives.tsp";
+import "../HealthInsights.Common/primitives.tsp";
 
 using Azure.Core;
 using TypeSpec.Rest;
