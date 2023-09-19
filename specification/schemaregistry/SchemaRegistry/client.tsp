@@ -3,5 +3,5 @@ import "./main.tsp";
  
 using Azure.ClientGenerator.Core;
 
-@@exclude(Azure.SchemaRegistry.Version);
-@@exclude(Azure.SchemaRegistry.SchemaGroup);
+@@access(Azure.SchemaRegistry.Version, Access.internal);
+@@access(Azure.SchemaRegistry.SchemaGroup, Access.internal);
