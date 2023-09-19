@@ -17,7 +17,7 @@ using Azure.Core;
 @versioned(ImageAnalysis.Versions)
 @useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
 @server(
-    "{endpoint}/imageanalysis",
+    "{endpoint}/computervision",
     "Analyze an image to generate a description of its content.",
     {
       @doc("""
@@ -33,6 +33,6 @@ namespace ImageAnalysis;
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2023_04_30_Preview: "2023-04-30-preview",
+  v2023_04_01_Preview: "2023-04-01-preview",
 }
 
