@@ -660,7 +660,7 @@
           },
           {
             "in": "formData",
-            "name": "audiodata",
+            "name": "audioData",
             "description": "An audio file containing the audio data.",
             "required": true,
             "type": "file"
@@ -1428,10 +1428,10 @@
           "Trainingsets:"
         ],
         "summary": "Open Training Set",
-        "description": "Opens the tranining set to upload data blocks.",
+        "description": "Opens the trainining set to upload data blocks.",
         "operationId": "TrainingSets_Open",
         "consumes": [
-          "multipart/form-data"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -1445,24 +1445,12 @@
             "format": "uuid"
           },
           {
-            "in": "formData",
-            "name": "displayName",
-            "description": "The name of this upload.",
+            "in": "body",
+            "name": "dataset",
             "required": true,
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "name": "description",
-            "description": "Optional description of this upload.",
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "name": "kind",
-            "description": "The kind of this upload.",
-            "required": true,
-            "type": "string"
+            "schema": {
+              "$ref": "#/definitions/DatasetDefinition"
+            }
           }
         ],
         "responses": {
@@ -2520,20 +2508,6 @@
       ],
       "type": "object",
       "properties": {
-        "voiceTalentName": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "companyName": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "locale": {
-          "type": "string"
-        },
-        "project": {
-          "$ref": "#/definitions/ResourceReference"
-        },
         "status": {
           "$ref": "#/definitions/Status"
         },
@@ -2559,6 +2533,39 @@
           "format": "date-time",
           "type": "string",
           "readOnly": true
+        },
+        "voiceTalentName": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "companyName": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "locale": {
+          "type": "string"
+        },
+        "project": {
+          "$ref": "#/definitions/ResourceReference"
+        }
+      }
+    },
+    "DatasetDefinition": {
+      "required": [
+        "displayName",
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/DatasetKind"
+        },
+        "displayName": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
         }
       }
     },
@@ -2673,7 +2680,7 @@
         "LocaleNotFoundInTrainingSet",
         "VoiceLocaleSameAsDataLocale",
         "InconsistentVoiceAndDataLocales",
-        "StyleNameOnlyForMultistyleModel",
+        "StyleNameOnlyForMultiStyleModel",
         "MissingStyleName",
         "StyleNameTooLong",
         "InvalidStyleName",
@@ -2697,7 +2704,7 @@
         "DuplicateCustomStyleName",
         "InvalidCustomStyleName",
         "NotEnoughValidWaves",
-        "MultipleTrainingSetsOnlyForMultistyle",
+        "MultipleTrainingSetsOnlyForMultiStyle",
         "IncorrectTrainingParameters",
         "InvalidVoiceConsentType",
         "ReachedCustomStyleNamesLimit",
@@ -3062,6 +3069,23 @@
         }
       }
     },
+    "PresetStyleItem": {
+      "type": "object",
+      "properties": {
+        "male": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "female": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "Project": {
       "required": [
         "displayName",
@@ -3150,13 +3174,7 @@
         "presetStyles": {
           "type": "object",
           "additionalProperties": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
+            "$ref": "#/definitions/PresetStyleItem"
           },
           "readOnly": true
         }
@@ -3297,7 +3315,7 @@
         "properties": {
           "$ref": "#/definitions/ZeroShotProperties"
         },
-        "promptId": {
+        "speakerProfileId": {
           "format": "uuid",
           "type": "string",
           "readOnly": true
