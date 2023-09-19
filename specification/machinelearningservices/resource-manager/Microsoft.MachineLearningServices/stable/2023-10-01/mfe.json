@@ -15602,7 +15602,7 @@
       ],
       "properties": {
         "identity": {
-          "description": "Managed service identity (system assigned and/or user assigned identities)",
+          "description": "The identity which will be leveraged by the monitoring jobs.",
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
           "x-nullable": true
         }
@@ -15812,8 +15812,7 @@
       "description": "Model task type enum.",
       "enum": [
         "Classification",
-        "Regression",
-        "QuestionAnswering"
+        "Regression"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -15825,9 +15824,6 @@
           },
           {
             "value": "Regression"
-          },
-          {
-            "value": "QuestionAnswering"
           }
         ]
       },
@@ -15947,7 +15943,7 @@
       "type": "object",
       "properties": {
         "computeIdentityType": {
-          "description": "[Required] Monitor compute identity type enum.",
+          "description": "[Required] Specifies the type of identiy to use within the monitoring jobs.",
           "$ref": "#/definitions/MonitorComputeIdentityType",
           "x-ms-mutability": [
             "create",
@@ -16023,7 +16019,7 @@
           ]
         },
         "monitoringTarget": {
-          "description": "The ARM resource ID of either the model or deployment targeted by this monitor.",
+          "description": "The entities targeted by the monitor.",
           "$ref": "#/definitions/MonitoringTarget",
           "x-ms-mutability": [
             "create",
@@ -16050,7 +16046,7 @@
       "type": "object",
       "properties": {
         "emails": {
-          "description": "This is the email recipient list which has a limitation of 499 characters in total.",
+          "description": "The email recipient list which has a limitation of 499 characters in total.",
           "type": "array",
           "items": {
             "type": "string"
@@ -16342,10 +16338,7 @@
         "PredictionDrift",
         "DataQuality",
         "FeatureAttributionDrift",
-        "Custom",
-        "ModelPerformance",
-        "GenerationSafetyQuality",
-        "GenerationTokenStatistics"
+        "Custom"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -16371,18 +16364,6 @@
           {
             "value": "Custom",
             "description": "Tracks a custom signal provided by users."
-          },
-          {
-            "value": "ModelPerformance",
-            "description": "Tracks model performance based on ground truth data."
-          },
-          {
-            "value": "GenerationSafetyQuality",
-            "description": "Tracks the safety and quality of generated content."
-          },
-          {
-            "value": "GenerationTokenStatistics",
-            "description": "Tracks the token usage of generative endpoints."
           }
         ]
       },
@@ -16396,7 +16377,7 @@
       "type": "object",
       "properties": {
         "deploymentId": {
-          "description": "The ARM resource ID of either the deployment targeted by this monitor.",
+          "description": "Reference to the deployment asset targeted by this monitor.",
           "type": "string",
           "x-ms-mutability": [
             "create",
@@ -16405,7 +16386,7 @@
           "x-nullable": true
         },
         "modelId": {
-          "description": "The ARM resource ID of either the model targeted by this monitor.",
+          "description": "Reference to the model asset targeted by this monitor.",
           "type": "string",
           "x-ms-mutability": [
             "create",
@@ -16414,7 +16395,7 @@
           "x-nullable": true
         },
         "taskType": {
-          "description": "[Required] The machine learning task type of the model.",
+          "description": "[Required] The machine learning task type of the monitored model.",
           "$ref": "#/definitions/ModelTaskType",
           "x-ms-mutability": [
             "create",
@@ -18071,7 +18052,7 @@
         },
         "windowSize": {
           "format": "duration",
-          "description": "[Required] The size of the trailing data window.",
+          "description": "[Required] The size of the rolling data window.",
           "type": "string",
           "x-ms-mutability": [
             "create",
