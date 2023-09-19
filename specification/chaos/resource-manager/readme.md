@@ -43,6 +43,7 @@ input-file:
   - Microsoft.Chaos/preview/2023-09-01-preview/operations.json
   - Microsoft.Chaos/preview/2023-09-01-preview/targetTypes.json
   - Microsoft.Chaos/preview/2023-09-01-preview/targets.json
+  - Microsoft.Chaos/preview/2023-09-01-preview/operationStatuses.json
 directive:
   - from: swagger-document
     where: "$.definitions.action"

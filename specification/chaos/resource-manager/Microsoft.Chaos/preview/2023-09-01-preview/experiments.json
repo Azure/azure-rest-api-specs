@@ -149,11 +149,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Request was successful."
-          },
-          "204": {
-            "description": "Request was successful."
+          "202": {
+            "description": "Asynchronous delete operation."
           },
           "default": {
             "description": "Error response returned if request was unsuccessful.",
@@ -161,6 +158,10 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Delete a Experiment in a resource group.": {
@@ -238,8 +239,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Experiment resource returned if request was successful.",
+          "201": {
+            "description": "Long running create/update operation.",
             "schema": {
               "$ref": "./types/experiments.json#/definitions/experiment"
             }
@@ -250,6 +251,10 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Create/update a Experiment in a resource group.": {
@@ -287,8 +292,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Experiment resource returned if request was successful.",
+          "202": {
+            "description": "Long running update operation.",
             "schema": {
               "$ref": "./types/experiments.json#/definitions/experiment"
             }
@@ -299,6 +304,10 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Patch an Experiment in a resource group.": {
@@ -330,10 +339,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Operation result returned if request was successful.",
-            "schema": {
-              "$ref": "./types/experiments.json#/definitions/experimentCancelOperationResult"
-            }
+            "description": "Long running cancel operation."
           },
           "default": {
             "description": "Error response returned if request was unsuccessful.",
@@ -341,6 +347,10 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Cancel a running Experiment.": {
@@ -372,10 +382,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Operation result returned if request was successful.",
-            "schema": {
-              "$ref": "./types/experiments.json#/definitions/experimentStartOperationResult"
-            }
+            "description": "Long running start experiment operation."
           },
           "default": {
             "description": "Error response returned if request was unsuccessful.",
@@ -383,6 +390,10 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Start a Experiment.": {
