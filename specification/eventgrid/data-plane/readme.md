@@ -270,7 +270,10 @@ input-file:
   - $(this-folder)/Microsoft.ContainerService/stable/2018-01-01/ContainerService.json
   - $(this-folder)/Microsoft.ApiManagement/stable/2018-01-01/APIManagement.json
   - $(this-folder)/Microsoft.HealthcareApis/stable/2018-01-01/HealthcareApis.json
-  - $(this-folder)/Microsoft.ResourceNotifications/stable/2018-01-01/*.json
+  - $(this-folder)/Microsoft.ResourceNotifications/stable/2018-01-01/Resources.json
+  - $(this-folder)/Microsoft.ResourceNotifications/stable/2018-01-01/HealthResources.json
+  - $(this-folder)/Microsoft.ResourceNotifications/stable/2018-01-01/MaintenanceResources.json
+  
 
 ```
 
