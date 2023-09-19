@@ -539,32 +539,32 @@ enum RedactionCharacter{
     redactionCharacter,
     #suppress "@azure-tools/typespec-azure-core/documentation-required"
     redactChar,
-    #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `!`,
-    #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `#`,
-    #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `$`,
-    #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `%`,
-    #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `&`,
-    #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `*`,
-    #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `+`,
-    #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `-`,
-    #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `=`,
-    #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `?`,
-    #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `@`,
-    #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `^`,
-    #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `_`,
-    #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `~`,
+    // #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    // `!`,
+    // #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    // `#`,
+    // #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    // `$`,
+    // #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    // `%`,
+    // #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    // `&`,
+    // #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    // `*`,
+    // #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    // `+`,
+    // #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    // `-`,
+    // #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    // `=`,
+    // #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    // `?`,
+    // #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    // `@`,
+    // #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    // `^`,
+    // #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    // `_`,
+    // #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    // `~`,
 }
