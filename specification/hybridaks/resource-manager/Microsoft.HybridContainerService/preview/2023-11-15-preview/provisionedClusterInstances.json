@@ -1313,10 +1313,6 @@
           },
           "description": "HybridAKSClusterStatus defines the observed state of HybridAKSCluster"
         },
-        "securityProfile": {
-          "$ref": "#/definitions/ProvisionedClusterSecurityProfile",
-          "description": "The security profile for the provisioned cluster."
-        },
         "oidcIssuerProfile": {
           "$ref": "#/definitions/ProvisionedClusterOIDCIssuerProfile",
           "description": "The OIDC issuer profile of the provisioned cluster."
@@ -1598,27 +1594,6 @@
           "type": "string"
         }
       }
-    },
-    "ProvisionedClusterSecurityProfile": {
-      "type": "object",
-      "properties": {
-        "workloadIdentity": {
-          "$ref": "#/definitions/ProvisionedClusterSecurityProfileWorkloadIdentity",
-          "description": "Workload identity settings for the security profile. Workload identity enables Kubernetes applications to access Azure cloud resources securely with Azure AD."
-        }
-      },
-      "description": "The security profile for the provisioned cluster."
-    },
-    "ProvisionedClusterSecurityProfileWorkloadIdentity": {
-      "type": "object",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Whether the workload identity is enabled.",
-          "default": false
-        }
-      },
-      "description": "The workload identity profile of the provisioned cluster."
     },
     "ProvisionedClusterOIDCIssuerProfile": {
       "type": "object",
