@@ -1250,8 +1250,9 @@
           "description": "Source of QnA result."
         },
         "metadata": {
-          "$ref": "#/definitions/object",
-          "description": "Metadata associated with the answer, useful to categorize or filter question answers."
+          "type": "object",
+          "description": "Metadata associated with the answer, useful to categorize or filter question answers.",
+          "additionalProperties": true
         },
         "dialog": {
           "$ref": "#/definitions/KnowledgeBaseAnswerDialog",
@@ -2280,11 +2281,6 @@
         "name": "extraInformationKind",
         "modelAsString": true
       }
-    },
-    "object": {
-      "type": "object",
-      "description": "Represent a model",
-      "properties": {}
     },
     "projectKind": {
       "type": "string",

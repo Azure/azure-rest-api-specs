@@ -214,7 +214,7 @@ model KnowledgeBaseAnswer {
 
     #suppress "deprecated" " Deprecated: object is deprecated. Please use {} for an empty model, `Record<unknown>` for a record with unknown property types, `unknown[]` for an array."
     @doc("Metadata associated with the answer, useful to categorize or filter question answers.")
-    metadata?: object;
+    metadata?: Record<unknown>;
 
     @doc("Dialog associated with Answer.")
     dialog?: KnowledgeBaseAnswerDialog;
