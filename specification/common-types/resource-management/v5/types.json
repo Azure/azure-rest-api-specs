@@ -627,40 +627,6 @@
           "type": "string"
         }
       }
-    },
-    "ArtifactBodyParametersParameters": {
-      "type": "object",
-      "properties": {
-        "api-version": {
-          "type": "string"
-        },
-        "helmChartName": {
-          "type": "string"
-        },
-        "nfAppName": {
-          "type": "string"
-        },
-        "deploymentValues": {
-          "type": "string"
-        },
-        "roleOverrideValues": {
-          "type": "string"
-        },
-        "publisherScopeName": {
-          "type": "string",
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
-          "maxLength": 64,
-          "description": "The name of the publisher scope.",
-          "x-ms-parameter-location": "method"
-        },
-        "publisherLocationName": {
-          "type": "string",
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
-          "maxLength": 64,
-          "description": "The name of the publisher location.",
-          "x-ms-parameter-location": "method"
-        }
-      }
     }
   },
   "parameters": {
@@ -753,14 +719,6 @@
       "type": "string",
       "description": "The If-None-Match header that makes a request conditional.",
       "x-ms-parameter-location": "method"
-    },
-    "ArtifactBodyParameters": {
-      "name": "artifactParameters",
-      "in": "body",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/ArtifactBodyParametersParameters"
-      }
     }
   }
 }
