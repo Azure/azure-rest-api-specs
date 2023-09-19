@@ -253,7 +253,8 @@
           }
         },
         "snapshotBackupAdditionalDetails": {
-          "$ref": "#/definitions/SnapshotBackupAdditionalDetails"
+          "$ref": "#/definitions/SnapshotBackupAdditionalDetails",
+          "description": "Hana DB insatnce snapshot backup additional details."
         }
       }
     },
@@ -298,6 +299,7 @@
       }
     },
     "UserAssignedIdentityProperties": {
+      "description": "User assigned managed identity properties.",
       "type": "object",
       "properties": {
         "clientId": {
@@ -309,6 +311,7 @@
       }
     },
     "UserAssignedManagedIdentityDetails": {
+      "description": "User assigned managed identity details.",
       "type": "object",
       "properties": {
         "identityArmId": {
@@ -424,18 +427,21 @@
       "x-ms-discriminator-value": "SimpleSchedulePolicyV2"
     },
     "SnapshotBackupAdditionalDetails": {
-      "description": "Snapshot Backup related fields for WorkloadType SaPHanaSystem",
+      "description": "Snapshot Backup related fields for WorkloadType SAP Hana system",
       "type": "object",
       "properties": {
         "instantRpRetentionRangeInDays": {
           "format": "int32",
+          "description": "Retention range for instant Rp in days.",
           "type": "integer"
         },
         "instantRPDetails": {
+          "description": "Instant RP details for the snaphot.",
           "type": "string"
         },
         "userAssignedManagedIdentityDetails": {
-          "$ref": "#/definitions/UserAssignedManagedIdentityDetails"
+          "$ref": "#/definitions/UserAssignedManagedIdentityDetails",
+          "description": "User Assigned managed identity details used for snapshot policy."
         }
       }
     },
