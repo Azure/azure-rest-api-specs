@@ -56,16 +56,14 @@ model InstanceProperties {
 model TargetSelectorProperties {
   @doc("Name of the target.")
   name?: string;
-
-  @doc("Unique selector for the target such as a label.")
-  selector?: Record<unknown>;
 }
+
 @armResourceOperations
 interface Instances {
   get is ArmResourceRead<Instance>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Instance>;
   update is ArmCustomPatchSync<Instance>;
-  delete is ArmResourceDeleteAsync<Instance>;
+  delete is ArmResourceDeleteWithoutOkAsync<Instance>;
   listByResourceGroup is ArmResourceListByParent<Instance>;
   listBySubscription is ArmListBySubscription<Instance>;
 }

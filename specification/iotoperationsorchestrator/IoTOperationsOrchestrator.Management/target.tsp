@@ -78,7 +78,7 @@ interface Targets {
   get is ArmResourceRead<Target>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Target>;
   update is ArmCustomPatchSync<Target>;
-  delete is ArmResourceDeleteAsync<Target>;
+  delete is ArmResourceDeleteWithoutOkAsync<Target>;
   listByResourceGroup is ArmResourceListByParent<Target>;
   listBySubscription is ArmListBySubscription<Target>;
 }

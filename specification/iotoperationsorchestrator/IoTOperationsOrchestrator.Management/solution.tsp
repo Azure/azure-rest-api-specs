@@ -49,7 +49,7 @@ interface Solutions {
   get is ArmResourceRead<Solution>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Solution>;
   update is ArmCustomPatchSync<Solution>;
-  delete is ArmResourceDeleteAsync<Solution>;
+  delete is ArmResourceDeleteWithoutOkAsync<Solution>;
   listByResourceGroup is ArmResourceListByParent<Solution>;
   listBySubscription is ArmListBySubscription<Solution>;
 }
