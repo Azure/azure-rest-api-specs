@@ -34,7 +34,7 @@ model Pipeline is TrackedResource<PipelineProperties> {
 
 @doc("The properties of a Pipeline resource.")
 model PipelineProperties {
-  @doc("Detailed description of the pipeline for customer consumption.")
+  @doc("Detailed description of the Pipeline.")
   description?: string;
 
   @doc("Flag indicating whether the pipeline should be running or not.")
