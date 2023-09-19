@@ -1313,10 +1313,6 @@
           },
           "description": "HybridAKSClusterStatus defines the observed state of HybridAKSCluster"
         },
-        "oidcIssuerProfile": {
-          "$ref": "#/definitions/ProvisionedClusterOIDCIssuerProfile",
-          "description": "The OIDC issuer profile of the provisioned cluster."
-        },
         "licenseProfile": {
           "$ref": "#/definitions/ProvisionedClusterLicenseProfile",
           "description": "The license profile of the provisioned cluster."
@@ -1594,22 +1590,6 @@
           "type": "string"
         }
       }
-    },
-    "ProvisionedClusterOIDCIssuerProfile": {
-      "type": "object",
-      "properties": {
-        "issuerURL": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The OIDC issuer url of the provisioned cluster."
-        },
-        "enabled": {
-          "type": "boolean",
-          "description": "Whether the OIDC issuer is enabled.",
-          "default": false
-        }
-      },
-      "description": "The OIDC issuer profile of the provisioned cluster."
     },
     "ProvisionedClusterLicenseProfile": {
       "type": "object",
