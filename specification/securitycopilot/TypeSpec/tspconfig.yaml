@@ -1,0 +1,54 @@
+parameters:
+  "service-dir":
+    default: "sdk/securitycopilot"
+  "version-name":
+    default: "2023-08-01-preview"
+  "python-sdk-folder":
+    default: "./tsp-output/securitycopilot-sdk-for-python/"
+  "java-sdk-folder":
+    default: "../securitycopilot-sdk-for-java/"
+  "js-sdk-folder":
+    default: "./tsp-output/securitycopilot-sdk-for-js/"
+  "csharp-sdk-folder":
+    default: "../securitycopilot-sdk-for-net/"
+  "package": 
+    default: "Microsoft.Security.Copilot.SkillsetAuthoring"
+  "autorest-dir":
+    default: "../openapi2/preview"
+  "openapi-dir":
+    default: "../openapi3/preview"
+emit: [
+  "@typespec/openapi3",
+  "@azure-tools/typespec-autorest",
+  "@azure-tools/typespec-csharp",
+  #"@azure-tools/typespec-java",
+  #"@azure-tools/typespec-python",
+  #"@azure-tools/typespec-ts"
+]
+options:
+  "@typespec/openapi3":
+    emitter-output-dir: "{project-root}/{openapi-dir}"
+    output-file: "SecurityCopilotSkillContextAPI.OpenAPI3.{version-name}"
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{project-root}/{autorest-dir}"
+    output-file: "SecurityCopilotSkillContextAPI.OpenAPI2.{version-name}"
+  "@azure-tools/typespec-csharp":
+    package-dir: "Microsoft.Security.Copilot.SkillsetAuthoring"
+    namespace: "{package-dir}"
+    clear-output-folder: false
+    save-inputs: true
+  "@azure-tools/typespec-java":
+    package-name: "{package}"
+    emitter-output-dir: "{project-root}/{java-sdk-folder}/{version-name}/{package-name}"
+    namespace: "{package}"
+    clear-output-folder: false
+  "@azure-tools/typespec-python":
+    package-name: "{package}"
+    emitter-output-dir: "{project-root}/{python-sdk-folder}/{version-name}/{package-name}"
+    namespace: "{package}"
+    clear-output-folder: false
+  "@azure-tools/typespec-ts":
+    package-name: "{package}"
+    emitter-output-dir: "{project-root}/{js-sdk-folder}/{version-name}/{package-name}"
+    namespace: "{package}"
+    clear-output-folder: false
