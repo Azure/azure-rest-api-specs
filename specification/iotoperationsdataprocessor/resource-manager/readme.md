@@ -20,27 +20,6 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ## Configuration
 
-## Suppression
-
-``` yaml
-directive:
-  - suppress: PutRequestResponseSchemeArm
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperationsDataProcessor/instances/{instanceName}/datasets/{datasetName}"].put
-    reason: This is a false positive, Datasets GET & PUT responses return '#/definitions/Dataset'
-  - suppress: PutRequestResponseSchemeArm
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperationsDataProcessor/instances/{instanceName}/pipelines/{pipelineName}"].put
-    reason: This is a false positive, Pipelines GET & PUT responses return '#/definitions/Pipeline'
-  - suppress: PutResponseSchemaDescription
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperationsDataProcessor/instances/{instanceName}"].put.responses
-    reason: Typespec does not allow you to update description of common ARM responses.
-  - suppress: PutResponseSchemaDescription
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperationsDataProcessor/instances/{instanceName}/datasets/{datasetName}"].put.responses
-    reason: Typespec does not allow you to update description of common ARM responses.
-  - suppress: PutResponseSchemaDescription
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperationsDataProcessor/instances/{instanceName}/pipelines/{pipelineName}"].put.responses
-    reason: Typespec does not allow you to update description of common ARM responses.
-```
-
 ### Basic Information
 
 These are the global settings for the IoTOperationsDataProcessor.
