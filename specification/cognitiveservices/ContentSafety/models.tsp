@@ -257,7 +257,7 @@ model TextCategoryPolicy {
   @doc("Text category.")
   category: TextCategory;
 
-  @doc("Severity less than the threshold will be treated as accepted for the category. The value can only be 2, 4, 6 for FourSeverityLevels. If the threshold is -1, it means all content are accepted.")
+  @doc("Severity less than the threshold will be treated as accepted for the category. The value can only be 2, 4, 6 for FourSeverityLevels. If the threshold is undefined, it means all content are accepted.")
   acceptSeverityThreshold?: int32;
 }
 
@@ -267,7 +267,7 @@ model ImageCategoryPolicy {
   @doc("Image category.")
   category: ImageCategory;
   
-  @doc("Severity less than the threshold will be treated as accepted for the category. The value can only be -1, 2, 4, 6 for FourSeverityLevels. If the threshold is -1, it means all content are accepted.")
+  @doc("Severity less than the threshold will be treated as accepted for the category. The value can only be -1, 2, 4, 6 for FourSeverityLevels. If the threshold is undefined, it means all content are accepted.")
   acceptSeverityThreshold: int32;
 }
 
