@@ -12,22 +12,14 @@ clear-output-folder: true
 no-namespace-folders: true
 ```
 
-### Tag: package-2020-06-searchservice-preview
+### Python multi-client
 
-These settings apply only when `--tag=package-2020-06-searchservice-preview` is specified on the command line.
+Generate all API versions currently shipped for this package
 
-``` yaml $(tag) == 'package-2020-06-searchservice-preview'
-namespace: azure.search.documents.indexes
-output-folder: $(python-sdks-folder)/search/azure-search-documents/azure/search/documents/indexes/_generated
-```
-
-### Tag: package-2020-06-searchindex-preview
-
-These settings apply only when `--tag=package-2020-06-searchindex-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-06-searchindex-preview'
-namespace: azure.search.documents
-output-folder: $(python-sdks-folder)/search/azure-search-documents/azure/search/documents/_generated
+```yaml
+batch:
+  - tag: package-2021-04-searchservice-preview
+  - tag: package-2021-04-searchindex-preview
 ```
 
 ### Tag: package-2021-04-searchservice-preview
