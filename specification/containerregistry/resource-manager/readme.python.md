@@ -23,6 +23,7 @@ clear-output-folder: true
 batch:
   - tag: package-2023-08-preview-only
   - tag: package-2023-07-only
+  - tag: package-2023-06-preview-only
   - tag: package-2023-01-preview-only
   - tag: package-2022-12-only
   - tag: package-2022-02-preview-only
@@ -67,6 +68,16 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2023-07-only' && $(python)
 namespace: azure.mgmt.containerregistry.v2023_07_01
 output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2023_07_01
+```
+
+### Tag: package-2023-06-preview-only and python
+
+These settings apply only when `--tag=package-2023-06-preview-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2023-06-preview-only' && $(python)
+namespace: azure.mgmt.containerregistry.v2023_06_06_preview
+output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2023_06_01_preview
 ```
 
 ### Tag: package-2023-01-preview-only and python
