@@ -2,20 +2,20 @@
   "parameters": {
     "api-version": "2023-09-01-preview",
     "scope": "subscriptions/mySubscription/resourcegroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-rp",
-    "troubleshooterName": "abf168ed-1b54-454a-86f6-e4b62253d3b1"
+    "troubleshooterName": "SampleTroubleshooterName"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/0d0fcd2e-c4fd-4349-8497-200edb3923c6/resourceGroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-non-read/providers/Microsoft.Help/troubleshooter/abf168ed-1b54-454a-86f6-e4b62253d3b1",
+        "id": "/subscriptions/mySubscription/resourcegroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-rp/providers/Microsoft.Help/troubleshooter/SampleTroubleshooterName",
         "type": "Microsoft.Help/troubleshooters",
-        "name": "abf168ed-1b54-454a-86f6-e4b62253d3b1",
+        "name": "SampleTroubleshooterName",
         "properties": {
-          "solutionId": "2c8d3037-e8dc-4544-8243-6bb29100b5fc",
+          "solutionId": "SampleTroubleshooterSolutionId",
           "provisioningState": "Succeeded",
           "steps": [
             {
-              "id": "1c8dr037-e8dc-4544-8243-6bb29100b5fc",
+              "id": "SampleId",
               "title": "Step title",
               "description": "step description",
               "guidance": "IP address is used to check if the VM would be reachable from the given IP Address. We have prepopulated the IP address from your browser. If the field is left empty, the generic internet address space will be used.",
@@ -25,7 +25,7 @@
               "isLastStep": true,
               "inputs": [
                 {
-                  "questionId": "6cbe3f23-f3c2-41f3-886e-0cfbeee19b24",
+                  "questionId": "SampleQuestionId",
                   "questionType": "MultiChoice",
                   "questionContent": "Is VPN Connected?",
                   "questionContentType": "Text",
