@@ -647,9 +647,8 @@ enum AnalyzeConversationResultsKind {
 @doc("Contains the status of the submitted job for analyzing a conversation, along with related statistics.")
 @added(Versions.v2023_04_01)
 @resource("language/analyze-conversations/jobs")
-model AnalyzeConversationJobState {
+model AnalyzeConversationJobState extends ConversationTasksState{
   ...JobState;
-  ...ConversationTasksState;
   ...AnalyzeConversationJobStatistics;
 }
 

@@ -429,10 +429,6 @@
           "type": "string",
           "description": "next link"
         },
-        "tasks": {
-          "$ref": "#/definitions/Tasks",
-          "description": "Contains the state for the tasks that are being executed as part of the submitted job for analyzing a conversation."
-        },
         "statistics": {
           "$ref": "#/definitions/ConversationRequestStatistics",
           "description": "Contains the statistics for the submitted job."
@@ -442,8 +438,12 @@
         "createdDateTime",
         "jobId",
         "lastUpdateDateTime",
-        "status",
-        "tasks"
+        "status"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationTasksState"
+        }
       ]
     },
     "AnalyzeConversationJobStatistics": {
