@@ -31,6 +31,7 @@ batch:
   - tag: package-2020-10
   - tag: package-2020-08
   - tag: package-2022-10-01
+  - tag: package-2023-09-01
 ```
 
 ### Tag: package-2020-08 and java
@@ -79,8 +80,8 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 
 ``` yaml $(tag) == 'package-2021-12-01-preview' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.loganalytics.v2020_03_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/loganalytics/mgmt-v2021_03_01_privatepreview
+  namespace: com.microsoft.azure.management.loganalytics.v2021_12_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/loganalytics/mgmt-v2021_12_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -92,8 +93,21 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 
 ``` yaml $(tag) == 'package-2022-10-01' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.loganalytics.v2020_03_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/loganalytics/mgmt-v2021_03_01_privatepreview
+  namespace: com.microsoft.azure.management.loganalytics.v2022_10_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/loganalytics/mgmt-v2022_10_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2023-09-01 and java
+
+These settings apply only when `--tag=package-2023-09-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2023-09-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.loganalytics.v2023_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/loganalytics/mgmt-v2023_09_01
 regenerate-manager: true
 generate-interface: true
 ```
