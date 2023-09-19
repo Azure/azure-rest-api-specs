@@ -13165,6 +13165,7 @@
     },
     "FeatureAttributionDriftMonitoringSignal": {
       "required": [
+        "featureImportanceSettings",
         "metricThreshold",
         "productionData",
         "referenceData"
@@ -13189,13 +13190,12 @@
           "x-nullable": true
         },
         "featureImportanceSettings": {
-          "description": "The settings for computing feature importance.",
+          "description": "[Required] The settings for computing feature importance.",
           "$ref": "#/definitions/FeatureImportanceSettings",
           "x-ms-mutability": [
             "create",
             "read"
-          ],
-          "x-nullable": true
+          ]
         },
         "metricThreshold": {
           "description": "[Required] A list of metrics to calculate and their associated thresholds.",
