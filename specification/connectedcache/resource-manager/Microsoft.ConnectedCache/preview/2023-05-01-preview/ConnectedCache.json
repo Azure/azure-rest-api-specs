@@ -2108,10 +2108,12 @@
         },
         "driveConfiguration": {
           "type": "array",
-          "x-ms-client-flatten": true,
           "items": {
             "$ref": "#/definitions/CacheNodeDriveConfiguration"
           },
+          "x-ms-identifiers": [
+            "message"
+          ],
           "description": "drive configurations for the cache node"
         },
         "bgpConfiguration": {
@@ -2493,10 +2495,12 @@
         "value": {
           "description": "Resource provider operations list",
           "type": "array",
-          "x-ms-client-flatten": true,
           "items": {
             "$ref": "#/definitions/ResourceProviderOperationDefinition"
-          }
+          },
+          "x-ms-identifiers": [
+            "message"
+          ]
         },
         "nextLink": {
           "description": "The URI that can be used to request the next page for list of Azure operations",
