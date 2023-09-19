@@ -649,7 +649,7 @@ enum AnalyzeConversationResultsKind {
 @resource("language/analyze-conversations/jobs")
 model AnalyzeConversationJobState {
   ...JobState;
-  ...ConversationTaskState;
+  ...ConversationTasksState;
   ...AnalyzeConversationJobStatistics;
 }
 
@@ -662,26 +662,31 @@ model AnalyzeConversationJobStatistics {
 
 @doc("Contains the state for the tasks that are being executed as part of the submitted job for analyzing a conversation.")
 @added(Versions.v2023_04_01)
-model ConversationTaskState {
-  @doc("tasks")
-  tasks: {
-    @doc("Count of tasks that finished successfully.")
-    completed: int32;
-
-    @doc("Count of tasks that failed.")
-    failed: int32;
-
-    @doc("Count of tasks that are currently in progress.")
-    inProgress: int32;
-
-    @doc("Total count of tasks submitted as part of the job.")
-    total: int32;
-
-    @doc("List of results from tasks (if available).")
-    @added(Versions.v2023_04_01)
-    items?: Array<AnalyzeConversationJobResult>;
-  };
+model ConversationTasksState {
+  @doc("Contains the state for the tasks that are being executed as part of the submitted job for analyzing a conversation.")
+  tasks: Tasks;
 }
+
+@doc("Contains the state for the tasks that are being executed as part of the submitted job for analyzing a conversation.")
+@added(Versions.v2023_04_01)
+model Tasks {
+  @doc("Count of tasks that finished successfully.")
+  completed: int32;
+
+  @doc("Count of tasks that failed.")
+  failed: int32;
+
+  @doc("Count of tasks that are currently in progress.")
+  inProgress: int32;
+
+  @doc("Total count of tasks submitted as part of the job.")
+  total: int32;
+
+  @doc("List of results from tasks (if available).")
+  @added(Versions.v2023_04_01)
+  items?: Array<AnalyzeConversationJobResult>;
+};
+
 
 @doc("Container for results of all tasks in the conversation job.")
 @discriminator("kind")

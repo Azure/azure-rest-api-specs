@@ -411,44 +411,8 @@
           "description": "next link"
         },
         "tasks": {
-          "type": "object",
-          "description": "tasks",
-          "properties": {
-            "completed": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Count of tasks that finished successfully."
-            },
-            "failed": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Count of tasks that failed."
-            },
-            "inProgress": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Count of tasks that are currently in progress."
-            },
-            "total": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Total count of tasks submitted as part of the job."
-            },
-            "items": {
-              "type": "array",
-              "description": "List of results from tasks (if available).",
-              "items": {
-                "$ref": "#/definitions/AnalyzeConversationJobResult"
-              },
-              "x-ms-identifiers": []
-            }
-          },
-          "required": [
-            "completed",
-            "failed",
-            "inProgress",
-            "total"
-          ]
+          "$ref": "#/definitions/Tasks",
+          "description": "Contains the state for the tasks that are being executed as part of the submitted job for analyzing a conversation."
         },
         "statistics": {
           "$ref": "#/definitions/ConversationRequestStatistics",
@@ -1450,49 +1414,13 @@
         "deploymentName"
       ]
     },
-    "ConversationTaskState": {
+    "ConversationTasksState": {
       "type": "object",
       "description": "Contains the state for the tasks that are being executed as part of the submitted job for analyzing a conversation.",
       "properties": {
         "tasks": {
-          "type": "object",
-          "description": "tasks",
-          "properties": {
-            "completed": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Count of tasks that finished successfully."
-            },
-            "failed": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Count of tasks that failed."
-            },
-            "inProgress": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Count of tasks that are currently in progress."
-            },
-            "total": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Total count of tasks submitted as part of the job."
-            },
-            "items": {
-              "type": "array",
-              "description": "List of results from tasks (if available).",
-              "items": {
-                "$ref": "#/definitions/AnalyzeConversationJobResult"
-              },
-              "x-ms-identifiers": []
-            }
-          },
-          "required": [
-            "completed",
-            "failed",
-            "inProgress",
-            "total"
-          ]
+          "$ref": "#/definitions/Tasks",
+          "description": "Contains the state for the tasks that are being executed as part of the submitted job for analyzing a conversation."
         }
       },
       "required": [
@@ -3126,6 +3054,46 @@
       "required": [
         "lastUpdateDateTime",
         "status"
+      ]
+    },
+    "Tasks": {
+      "type": "object",
+      "description": "Contains the state for the tasks that are being executed as part of the submitted job for analyzing a conversation.",
+      "properties": {
+        "completed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of tasks that finished successfully."
+        },
+        "failed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of tasks that failed."
+        },
+        "inProgress": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of tasks that are currently in progress."
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total count of tasks submitted as part of the job."
+        },
+        "items": {
+          "type": "array",
+          "description": "List of results from tasks (if available).",
+          "items": {
+            "$ref": "#/definitions/AnalyzeConversationJobResult"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "completed",
+        "failed",
+        "inProgress",
+        "total"
       ]
     },
     "TemperatureResolution": {
