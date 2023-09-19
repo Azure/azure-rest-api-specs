@@ -11,14 +11,14 @@ namespace SkillContext {
   @get
   @doc("Get the SkillContext for the current skill invocation")
   op getSkillContext(
-    @header `X-MS-SecurityCopilot-EvaluationToken`: string,
+    @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
   ): SkillContextResponse | UnauthorizedResponse;
 
   @post
   @route("invokeSkill")
   @doc("Invokes a skill. Allows current skill to invoke dependency skills.")
   op invokeSkill(
-    @header `X-MS-SecurityCopilot-EvaluationToken`: string,
+    @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
     @body invokeSkill: InvokeSkillRequest,
   ): OutputSkillVariable | BadRequestResponse;
 
@@ -26,14 +26,14 @@ namespace SkillContext {
   @route("promptHistory")
   @doc("Get prompt history")
   op getPromptHistory(
-    @header `X-MS-SecurityCopilot-EvaluationToken`: string,
+    @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
   ): PromptHistoryResponse | UnauthorizedResponse;
 
   @post
   @route("logProgress")
   @doc("Log a progress message for a skill invocation")
   op logProgress(
-    @header `X-MS-SecurityCopilot-EvaluationToken`: string,
+    @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
     @body logProgressRequest: LogProgressRequest,
   ): NoContentResponse | UnauthorizedResponse | BadRequestResponse;
 
@@ -41,7 +41,7 @@ namespace SkillContext {
   @route("setOutput")
   @doc("Sets the skill output")
   op setSkillOutput(
-    @header `X-MS-SecurityCopilot-EvaluationToken`: string,
+    @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
     @body outputSkillVariable: OutputSkillVariable,
   ): NoContentResponse | UnauthorizedResponse | BadRequestResponse;
 
@@ -49,20 +49,20 @@ namespace SkillContext {
   @route("skillsetSettings")
   @doc("Sets the skillset settings")
   op skillsetSettings(
-    @header `X-MS-SecurityCopilot-EvaluationToken`: string,
+    @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
   ): SkillsetConfiguration | UnauthorizedResponse;
 
   @post
   @route("setSkillInvocationStarted")
   @doc("Notifies security copilot backend service that the skill has been invoked")
   op setSkillInvocationStarted(
-    @header `X-MS-SecurityCopilot-EvaluationToken`: string,
+    @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
   ): NoContentResponse;
 
   @post
   @route("setSkillInvocationCompleted")
   @doc("Notifies security copilot backend service that the skill invocation has completed")
   op setSkillInvocationCompleted(
-    @header `X-MS-SecurityCopilot-EvaluationToken`: string,
+    @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
   ): NoContentResponse;
 }
