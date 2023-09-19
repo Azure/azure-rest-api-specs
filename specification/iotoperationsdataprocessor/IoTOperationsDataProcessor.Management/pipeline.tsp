@@ -60,7 +60,7 @@ model PipelineInput is Record<unknown> {
   type: string;
 
   @doc("Description for stage.")
-  description: string;
+  description?: string;
 
   @doc("Next stage in the pipeline.")
   next: string[];
@@ -73,7 +73,7 @@ model PipelineStage is Record<unknown> {
   type: string;
 
   @doc("Description for stage.")
-  description: string;
+  description?: string;
 
   @doc("Next stage in the pipeline. Not required if output stage.")
   next?: string[];
