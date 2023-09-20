@@ -98,6 +98,23 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2023-07-01-preview/virtualNetworks.json
 ```
 
+### Tag: package-2023-06
+
+These settings apply only when `--tag=package-2023-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-06'
+input-file:
+  - Microsoft.AzureStackHCI/stable/2023-06-01/arcSettings.json
+  - Microsoft.AzureStackHCI/stable/2023-06-01/clusters.json
+  - Microsoft.AzureStackHCI/stable/2023-06-01/extensions.json
+  - Microsoft.AzureStackHCI/stable/2023-06-01/offers.json
+  - Microsoft.AzureStackHCI/stable/2023-06-01/operations.json
+  - Microsoft.AzureStackHCI/stable/2023-06-01/publishers.json
+  - Microsoft.AzureStackHCI/stable/2023-06-01/skus.json
+  - Microsoft.AzureStackHCI/stable/2023-06-01/updateRuns.json
+  - Microsoft.AzureStackHCI/stable/2023-06-01/updateSummaries.json
+  - Microsoft.AzureStackHCI/stable/2023-06-01/updates.json
+```
 ### Tag: package-2023-03
 
 These settings apply only when `--tag=package-2023-03` is specified on the command line.
