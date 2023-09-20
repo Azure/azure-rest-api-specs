@@ -588,7 +588,7 @@ model AnalyzeConversationJobsInput {
 
   @doc("Analysis Input")
   @key
-  @visibility("read", "create")
+  @visibility("read", "create", "query", "update", "delete")
   analysisInput: MultiLanguageConversationAnalysisInput;
 
   @doc("Set of tasks to execute on the input conversation.")
