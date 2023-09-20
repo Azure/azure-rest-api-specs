@@ -102,7 +102,7 @@ input-file:
   - Microsoft.AlertsManagement/stable/2023-03-01/PrometheusRuleGroups.json
   - Microsoft.AlertsManagement/preview/2023-07-12-preview/AlertsManagement.json
   - Microsoft.AlertsManagement/preview/2019-05-05-preview/SmartGroups.json
-  - Microsoft.AlertsManagement/preview/2023-01-01-preview/AlertRuleRecommendations.json
+  - Microsoft.AlertsManagement/preview/2023-08-01-preview/AlertRuleRecommendations.json
   - Microsoft.AlertsManagement/preview/2023-05-01-preview/AlertProcessingRules.json
 ```
 ### Tag: package-2021-08
