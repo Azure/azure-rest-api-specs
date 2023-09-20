@@ -803,12 +803,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}/fetchTelemetry": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}/fetchTelemetryRecords": {
       "post": {
         "tags": [
           "SqlServerInstances"
         ],
-        "operationId": "SqlServerInstances_fetchTelemetry",
+        "operationId": "SqlServerInstances_fetchTelemetryRecords",
         "description": "Retrieves SQL Server instance telemetry",
         "parameters": [
           {
@@ -866,13 +866,12 @@
         },
         "x-ms-examples": {
           "Retrieves Arc SQL Server cpu utilization telemetry": {
-            "$ref": "./examples/FetchSqlServerInstanceTelemetry.json"
+            "$ref": "./examples/FetchSqlServerInstanceTelemetryRecords.json"
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "./sqlServerInstances.json#/definitions/SqlServerInstanceTelemetryResponse"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
