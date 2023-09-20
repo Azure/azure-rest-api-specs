@@ -5490,7 +5490,7 @@
         },
         "triggerType": {
           "description": "[Required] The schedule trigger type.",
-          "$ref": "./mfe.json#/definitions/TriggerType"
+          "$ref": "#/definitions/ComputeTriggerType"
         },
         "recurrence": {
           "description": "Required if triggerType is Recurrence.",
@@ -5505,6 +5505,26 @@
           "$ref": "#/definitions/ScheduleBase"
         }
       }
+    },
+    "ComputeTriggerType": {
+      "enum": [
+        "Recurrence",
+        "Cron"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ComputeTriggerType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Recurrence"
+          },
+          {
+            "value": "Cron"
+          }
+        ]
+      },
+      "additionalProperties": false
     },
     "ScheduleBase": {
       "type": "object",
