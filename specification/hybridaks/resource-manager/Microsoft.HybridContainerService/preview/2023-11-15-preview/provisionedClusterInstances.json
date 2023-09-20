@@ -1166,16 +1166,6 @@
           "description": "LinuxProfile - The profile for Linux VMs in the Provisioned Cluster.",
           "$ref": "#/definitions/LinuxProfileProperties"
         },
-        "features": {
-          "type": "object",
-          "description": "Additional features specs like Arc Agent Onboarding.",
-          "properties": {
-            "arcAgentProfile": {
-              "description": "Arc agentry configuration for the provisioned cluster.",
-              "$ref": "#/definitions/ArcAgentProfile"
-            }
-          }
-        },
         "controlPlane": {
           "$ref": "#/definitions/ControlPlaneProfile",
           "description": "ControlPlane - ControlPlane Configuration"
@@ -1659,29 +1649,6 @@
               },
               "description": "Array of references to azure resource corresponding to the Network object e.g. /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/logicalNetworks/{logicalNetworkName}"
             }
-          }
-        }
-      }
-    },
-    "ArcAgentProfile": {
-      "description": "Defines the Arc Agent properties for the Provisioned clusters.",
-      "type": "object",
-      "properties": {
-        "agentVersion": {
-          "type": "string",
-          "description": "Version of the Arc agents to be installed on the provisioned Provisioned cluster resource"
-        },
-        "agentAutoUpgrade": {
-          "type": "string",
-          "description": "Indicates whether the Arc agents on the provisioned clusters be upgraded automatically to the latest version. Defaults to Enabled.",
-          "default": "Enabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "AutoUpgradeOptions",
-            "modelAsString": true
           }
         }
       }
