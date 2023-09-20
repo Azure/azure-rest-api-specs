@@ -19,6 +19,16 @@ directive:
   - rename-model:
       from: DockerBuildStep
       to: DockerTaskStep
+  - from: containerregistry_build.json
+    where: $.definitions.IdentityProperties.properties
+    transform: >
+      $.principalId['readOnly'] = true;
+      $.tenantId['readOnly'] = true;
+  - from: containerregistry_build.json
+    where: $.definitions.UserIdentityProperties.properties
+    transform: >
+      $.principalId['readOnly'] = true;
+      $.clientId['readOnly'] = true;
 ```
 
 ### Java multi-api
