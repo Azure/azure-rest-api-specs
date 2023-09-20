@@ -6,7 +6,7 @@ parameters:
       - "specification/contosowidgetmanager/Contoso.WidgetManager.Shared/"
     default: ""
 emit:
-  - "@azure-tools/typespec-autorest"
+  - "@azure-tools/typespec-ts"
 linter:
   extends:
     - "@azure-tools/typespec-azure-core/all"
@@ -26,9 +26,14 @@ options:
     model-namespace: false
     namespace: "{package-dir}"
   "@azure-tools/typespec-ts":
-    package-dir: "contosowidgetmanager-rest"
+    title: "Contoso Widget Manager"
+    generateMetadata: true
+    generateTest: false
+    "emitter-output-dir": "C:/repos/azure-sdk-for-js/sdk/contoso/contoso-widgetmanager-rest"
     packageDetails:
       name: "@azure-rest/contoso-widgetmanager-rest"
+      description: "Contoso Widget Manager"
+      version: "1.0.0-beta.1"
   "@azure-tools/typespec-java":
     package-dir: "azure-contoso-widgetmanager"
     namespace: com.azure.contoso.widgetmanager
