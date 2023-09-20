@@ -1543,6 +1543,394 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/locations/{location}/fetchSecondaryRecoveryPoints": {
+      "post": {
+        "tags": [
+          "FetchSecondaryRecoveryPoints"
+        ],
+        "description": "Returns a list of Secondary Recovery Points for a DataSource in a vault, that can be used for Cross Region Restore.",
+        "operationId": "SecondaryRPs_Fetch",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FetchSecondaryRPsRequestParameters"
+            }
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData filter options.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "skipToken Filter.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AzureBackupRecoveryPointResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-odata": "#/definitions/RecoveryPointsFilters",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Fetch SecondaryRPs": {
+            "$ref": "./examples/CrossRegionRestore/FetchSecondaryRPs.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/locations/{location}/crossRegionRestore": {
+      "post": {
+        "tags": [
+          "BackupInstances"
+        ],
+        "operationId": "BackupInstances_TriggerCrossRegionRestore",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request body for trigger CRR operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CrossRegionRestoreRequestObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Contains additional information like job Id",
+            "schema": {
+              "$ref": "#/definitions/OperationJobExtendedInfo"
+            }
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that represents the seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Trigger Cross Region Restore": {
+            "$ref": "./examples/CrossRegionRestore/TriggerCrossRegionRestore.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/locations/{location}/validateCrossRegionRestore": {
+      "post": {
+        "tags": [
+          "BackupInstances"
+        ],
+        "operationId": "BackupInstances_ValidateCrossRegionRestore",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidateCrossRegionRestoreRequestObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Contains additional information like job Id",
+            "schema": {
+              "$ref": "#/definitions/OperationJobExtendedInfo"
+            }
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that represents the seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Validate Cross Region Restore": {
+            "$ref": "./examples/CrossRegionRestore/ValidateCrossRegionRestore.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/locations/{location}/fetchCrossRegionRestoreJob": {
+      "post": {
+        "tags": [
+          "DppJob"
+        ],
+        "operationId": "CrossRegionRestoreJob_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CrossRegionRestoreJobRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details about a Cross Region Restore Job",
+            "schema": {
+              "$ref": "#/definitions/AzureBackupJobResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Cross Region Restore Job": {
+            "$ref": "./examples/CrossRegionRestore/FetchCrossRegionRestoreJob.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/locations/{location}/fetchCrossRegionRestoreJobs": {
+      "post": {
+        "tags": [
+          "DppJob"
+        ],
+        "operationId": "CrossRegionRestoreJobs_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CrossRegionRestoreJobsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Cross Region Restore Jobs",
+            "schema": {
+              "$ref": "#/definitions/AzureBackupJobResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Cross Region Restore Jobs": {
+            "$ref": "./examples/CrossRegionRestore/FetchCrossRegionRestoreJobs.json"
+          }
+        }
+      }
+    },
+    "/{resourceId}/providers/Microsoft.DataProtection/backupInstances": {
+      "get": {
+        "tags": [
+          "BackupInstancesExtensionRouting"
+        ],
+        "description": "Gets a list of backup instances associated with a tracked resource",
+        "operationId": "BackupInstancesExtensionRouting_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BackupInstanceResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List BackupInstances associated with an azure resource": {
+            "$ref": "./examples/BackupInstanceOperations/ListBackupInstancesExtensionRouting.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}/rehydrate": {
       "post": {
         "description": "rehydrate recovery point for restore for a BackupInstance",
@@ -4157,6 +4545,40 @@
       ],
       "type": "object"
     },
+    "CrossRegionRestoreJobRequest": {
+      "required": [
+        "sourceRegion",
+        "sourceBackupVaultId",
+        "jobId"
+      ],
+      "type": "object",
+      "properties": {
+        "sourceRegion": {
+          "type": "string"
+        },
+        "sourceBackupVaultId": {
+          "type": "string"
+        },
+        "jobId": {
+          "type": "string"
+        }
+      }
+    },
+    "CrossRegionRestoreJobsRequest": {
+      "required": [
+        "sourceRegion",
+        "sourceBackupVaultId"
+      ],
+      "type": "object",
+      "properties": {
+        "sourceRegion": {
+          "type": "string"
+        },
+        "sourceBackupVaultId": {
+          "type": "string"
+        }
+      }
+    },
     "AzureBackupJobResource": {
       "allOf": [
         {
@@ -5157,6 +5579,20 @@
       },
       "title": "ClientDiscoveryValueForSingleApi",
       "type": "object"
+    },
+    "FetchSecondaryRPsRequestParameters": {
+      "description": "Information about BI whose secondary RecoveryPoints are requested\r\nSource region and\r\nBI ARM path",
+      "type": "object",
+      "properties": {
+        "sourceRegion": {
+          "description": "Source region in which BackupInstance is located",
+          "type": "string"
+        },
+        "sourceBackupInstanceId": {
+          "description": "ARM Path of BackupInstance",
+          "type": "string"
+        }
+      }
     },
     "CloudError": {
       "description": "An error response from Azure Backup.",
@@ -6283,6 +6719,58 @@
       "required": [
         "objectType"
       ]
+    },
+    "CrossRegionRestoreDetails": {
+      "description": "Cross Region Restore details",
+      "required": [
+        "sourceRegion",
+        "sourceBackupInstanceId"
+      ],
+      "type": "object",
+      "properties": {
+        "sourceRegion": {
+          "type": "string"
+        },
+        "sourceBackupInstanceId": {
+          "type": "string"
+        }
+      }
+    },
+    "ValidateCrossRegionRestoreRequestObject": {
+      "description": "Cross Region Restore Request Object",
+      "required": [
+        "restoreRequestObject",
+        "crossRegionRestoreDetails"
+      ],
+      "type": "object",
+      "properties": {
+        "restoreRequestObject": {
+          "$ref": "#/definitions/AzureBackupRestoreRequest",
+          "description": "Gets or sets the restore request object."
+        },
+        "crossRegionRestoreDetails": {
+          "$ref": "#/definitions/CrossRegionRestoreDetails",
+          "description": "Cross region restore details."
+        }
+      }
+    },
+    "CrossRegionRestoreRequestObject": {
+      "description": "Cross Region Restore Request Object",
+      "required": [
+        "restoreRequestObject",
+        "crossRegionRestoreDetails"
+      ],
+      "type": "object",
+      "properties": {
+        "restoreRequestObject": {
+          "$ref": "#/definitions/AzureBackupRestoreRequest",
+          "description": "Gets or sets the restore request object."
+        },
+        "crossRegionRestoreDetails": {
+          "$ref": "#/definitions/CrossRegionRestoreDetails",
+          "description": "Cross region restore details."
+        }
+      }
     },
     "OperationJobExtendedInfo": {
       "allOf": [
@@ -7607,6 +8095,15 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "ResourceId": {
+      "name": "resourceId",
+      "in": "path",
+      "description": "ARM path of the resource to be protected using Microsoft.DataProtection",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
     }
   },
   "securityDefinitions": {
