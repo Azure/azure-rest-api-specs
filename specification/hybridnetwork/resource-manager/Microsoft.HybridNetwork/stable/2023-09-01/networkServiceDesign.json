@@ -740,7 +740,6 @@
           "description": "The provisioning state of the network service design version resource."
         },
         "versionState": {
-          "type": "string",
           "readOnly": true,
           "description": "The network service design version state.",
           "$ref": "#/definitions/NSDVersionState"
@@ -802,7 +801,8 @@
         },
         "type": {
           "$ref": "#/definitions/Type",
-          "description": "The resource element template type."
+          "description": "The resource element template type.",
+          "x-ms-client-name": "ResourceElementType"
         },
         "dependsOnProfile": {
           "$ref": "./common.json#/definitions/DependsOnProfile",
@@ -834,7 +834,6 @@
       ],
       "properties": {
         "configuration": {
-          "type": "object",
           "$ref": "#/definitions/ArmResourceDefinitionResourceElementTemplate",
           "description": "The resource element template type."
         }
@@ -869,7 +868,6 @@
       ],
       "properties": {
         "configuration": {
-          "type": "object",
           "$ref": "#/definitions/ArmResourceDefinitionResourceElementTemplate",
           "description": "The resource element template type."
         }
