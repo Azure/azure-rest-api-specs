@@ -20,8 +20,8 @@
       {
         "name": "Endpoint",
         "in": "path",
-        "required": true,
         "description": "Supported Cognitive Services endpoint (e.g., https://<resource-name>.api.cognitiveservices.azure.com).",
+        "required": true,
         "type": "string"
       }
     ]
@@ -77,8 +77,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -121,8 +121,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -167,8 +167,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -232,8 +232,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -584,11 +584,8 @@
       "description": "The base class of a conversation input task.",
       "properties": {
         "kind": {
-          "type": "string",
+          "$ref": "#/definitions/AnalyzeConversationTaskKind",
           "description": "The base class of a conversation input task.",
-          "enum": [
-            "Conversation"
-          ],
           "x-ms-mutability": [
             "read",
             "create"
@@ -1146,18 +1143,16 @@
         "id",
         "participantId"
       ],
-      "additionalProperties": true,
       "allOf": [
         {
           "type": "object",
-          "additionalProperties": true
+          "additionalProperties": {}
         }
       ]
     },
     "ConversationItemLevelTiming": {
       "type": "object",
       "description": "Audio timing at the conversation item level.",
-      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/AudioTiming"
@@ -1807,11 +1802,10 @@
         "code",
         "message"
       ],
-      "additionalProperties": true,
       "allOf": [
         {
           "type": "object",
-          "additionalProperties": true
+          "additionalProperties": {}
         }
       ]
     },
@@ -1960,7 +1954,7 @@
         "metadata": {
           "type": "object",
           "description": "Metadata associated with the answer, useful to categorize or filter question answers.",
-          "additionalProperties": true
+          "additionalProperties": {}
         },
         "dialog": {
           "$ref": "#/definitions/KnowledgeBaseAnswerDialog",
@@ -2173,11 +2167,10 @@
       "required": [
         "targetProjectKind"
       ],
-      "additionalProperties": true,
       "allOf": [
         {
           "type": "object",
-          "additionalProperties": true
+          "additionalProperties": {}
         }
       ]
     },
@@ -2188,7 +2181,7 @@
         "result": {
           "type": "object",
           "description": "The actual response from a LUIS Generally Available application.",
-          "additionalProperties": true
+          "additionalProperties": {}
         }
       },
       "allOf": [

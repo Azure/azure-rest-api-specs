@@ -83,7 +83,7 @@ model AnalyzeConversationTask {
   @key
   @visibility("read", "create")
   @doc("The base class of a conversation input task.")
-  kind: AnalyzeConversationTaskKind.Conversation;
+  kind: AnalyzeConversationTaskKind;
 }
 
 @doc("The base class of a conversation input task result.")
