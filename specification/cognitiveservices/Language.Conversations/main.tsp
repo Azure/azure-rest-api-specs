@@ -1694,7 +1694,6 @@ alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 //   "../../../../data-plane/Language/stable/2022-05-01/examples/conversations/SuccessfulAnalyzeConversationsArbitrationDirectTarget.json",
 //   "Orchestration direct target result"
 // )
-@convenientAPI(false)
 op analyzeConversation is Operations.ResourceCollectionAction<
     AnalyzeConversationTask,
     AnalyzeConversationTask,
