@@ -586,13 +586,11 @@ model AnalyzeConversationJobsInput {
   @doc("Display name for the analysis job.")
   displayName?: string;
 
-  @added(Versions.v2023_04_01)
   @doc("Analysis Input")
   @key
   @visibility("read", "create")
   analysisInput: MultiLanguageConversationAnalysisInput;
 
-  @added(Versions.v2023_04_01)
   @doc("Set of tasks to execute on the input conversation.")
   tasks: Array<AnalyzeConversationLROTask>;
 }
