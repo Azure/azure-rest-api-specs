@@ -3531,7 +3531,7 @@
         },
         "schedule": {
           "description": "[Required] The recurrence schedule.",
-          "$ref": "./mfe.json#/definitions/RecurrenceSchedule"
+          "$ref": "#/definitions/ComputeRecurrenceSchedule"
         }
       }
     },
@@ -3568,6 +3568,97 @@
           {
             "value": "Month",
             "description": "Month frequency"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "ComputeRecurrenceSchedule": {
+      "required": [
+        "hours",
+        "minutes"
+      ],
+      "type": "object",
+      "properties": {
+        "hours": {
+          "description": "[Required] List of hours for the schedule.",
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "minutes": {
+          "description": "[Required] List of minutes for the schedule.",
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "monthDays": {
+          "description": "List of month days for the schedule",
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "x-nullable": true
+        },
+        "weekDays": {
+          "description": "List of days for the schedule.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComputeWeekDay"
+          },
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "ComputeWeekDay": {
+      "description": "Enum of weekday",
+      "enum": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ComputeWeekDay",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Monday",
+            "description": "Monday weekday"
+          },
+          {
+            "value": "Tuesday",
+            "description": "Tuesday weekday"
+          },
+          {
+            "value": "Wednesday",
+            "description": "Wednesday weekday"
+          },
+          {
+            "value": "Thursday",
+            "description": "Thursday weekday"
+          },
+          {
+            "value": "Friday",
+            "description": "Friday weekday"
+          },
+          {
+            "value": "Saturday",
+            "description": "Saturday weekday"
+          },
+          {
+            "value": "Sunday",
+            "description": "Sunday weekday"
           }
         ]
       },
