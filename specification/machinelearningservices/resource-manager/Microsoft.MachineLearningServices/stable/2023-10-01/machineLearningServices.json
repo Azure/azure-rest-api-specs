@@ -5607,7 +5607,7 @@
       "properties": {
         "frequency": {
           "description": "[Required] The frequency to trigger schedule.",
-          "$ref": "./mfe.json#/definitions/RecurrenceFrequency"
+          "$ref": "#/definitions/ComputeRecurrenceFrequency"
         },
         "interval": {
           "description": "[Required] Specifies schedule interval in conjunction with frequency",
@@ -5629,6 +5629,44 @@
           "$ref": "./mfe.json#/definitions/RecurrenceSchedule"
         }
       }
+    },
+    "ComputeRecurrenceFrequency": {
+      "description": "Enum to describe the frequency of a compute recurrence schedule",
+      "enum": [
+        "Minute",
+        "Hour",
+        "Day",
+        "Week",
+        "Month"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ComputeRecurrenceFrequency",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Minute",
+            "description": "Minute frequency"
+          },
+          {
+            "value": "Hour",
+            "description": "Hour frequency"
+          },
+          {
+            "value": "Day",
+            "description": "Day frequency"
+          },
+          {
+            "value": "Week",
+            "description": "Week frequency"
+          },
+          {
+            "value": "Month",
+            "description": "Month frequency"
+          }
+        ]
+      },
+      "additionalProperties": false
     },
     "Cron": {
       "type": "object",
