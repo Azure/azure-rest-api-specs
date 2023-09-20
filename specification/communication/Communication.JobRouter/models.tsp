@@ -296,10 +296,10 @@ model ClassificationPolicyCollection
 @doc("Paged instance of ClassificationPolicy")
 model ClassificationPolicyItem {
   @doc("A container for the rules that govern how jobs are classified.")
-  classificationPolicy?: ClassificationPolicy;
+  classificationPolicy: ClassificationPolicy;
 
   @doc("(Optional) The Concurrency Token.")
-  etag?: string;
+  etag: eTag;
 }
 
 @resource("distributionPolicies")
@@ -351,10 +351,10 @@ model DistributionPolicyCollection is Azure.Core.Page<DistributionPolicyItem>;
 @doc("Paged instance of DistributionPolicy")
 model DistributionPolicyItem {
   @doc("Policy governing how jobs are distributed to workers")
-  distributionPolicy?: DistributionPolicy;
+  distributionPolicy: DistributionPolicy;
 
   @doc("(Optional) The Concurrency Token.")
-  etag?: string;
+  etag: eTag;
 }
 
 @resource("exceptionPolicies")
@@ -397,10 +397,10 @@ model ExceptionPolicyCollection is Azure.Core.Page<ExceptionPolicyItem>;
 @doc("Paged instance of ExceptionPolicy")
 model ExceptionPolicyItem {
   @doc("A policy that defines actions to execute when exception are triggered.")
-  exceptionPolicy?: ExceptionPolicy;
+  exceptionPolicy: ExceptionPolicy;
 
   @doc("(Optional) The Concurrency Token.")
-  etag?: string;
+  etag: eTag;
 }
 
 @resource("jobs")
@@ -420,7 +420,6 @@ model RouterJob {
 
   @doc("The time a job was queued in UTC.")
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   enqueuedAt?: utcDateTime;
 
   @doc("The channel identifier. eg. voice, chat, etc.")
@@ -520,7 +519,7 @@ label selector
 
   @doc("The time at which this worker selector expires in UTC")
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  
   expiresAt?: utcDateTime;
 }
 
@@ -533,15 +532,15 @@ model RouterJobAssignment {
   workerId?: string;
 
   @doc("The assignment time of the job in UTC.")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  
   assignedAt: utcDateTime;
 
   @doc("The time the job was marked as completed after being assigned in UTC.")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  
   completedAt?: utcDateTime;
 
   @doc("The time the job was marked as closed after being completed in UTC.")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  
   closedAt?: utcDateTime;
 }
 
@@ -589,7 +588,7 @@ automatically.
 """)
 model ScheduleAndSuspendMode {
   @doc("Scheduled time.")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  
   scheduleAt?: utcDateTime;
 }
 
@@ -638,7 +637,7 @@ JobClosedEvent notification.
 If provided, worker capacity is released along
 with a JobClosedEvent notification at a future time in UTC.
 """)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  
   closeAt?: utcDateTime;
 
   @doc("""
@@ -654,10 +653,10 @@ model RouterJobCollection is Azure.Core.Page<RouterJobItem>;
 @doc("Paged instance of RouterJob")
 model RouterJobItem {
   @doc("A unit of work to be routed")
-  job?: RouterJob;
+  job: RouterJob;
 
   @doc("(Optional) The Concurrency Token.")
-  etag?: string;
+  etag: eTag;
 }
 
 @doc("Position and estimated wait time for a job.")
@@ -722,7 +721,7 @@ re-matched to
 eligible workers at the retry time in UTC.  The worker that
 declined the job will also be eligible for the job at that time.
 """)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  
   retryOfferAt?: utcDateTime;
 }
 
@@ -762,10 +761,10 @@ model RouterQueueCollection is Azure.Core.Page<RouterQueueItem>;
 @doc("Paged instance of RouterQueue")
 model RouterQueueItem {
   @doc("A queue that can contain jobs to be routed.")
-  queue?: RouterQueue;
+  queue: RouterQueue;
 
   @doc("(Optional) The Concurrency Token.")
-  etag?: string;
+  etag: eTag;
 }
 
 @doc("Statistics for the queue")
@@ -859,11 +858,11 @@ model RouterJobOffer {
   capacityCost: int32;
 
   @doc("The time the offer was created in UTC.")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  
   offeredAt?: utcDateTime;
 
   @doc("The time that the offer will expire in UTC.")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  
   expiresAt?: utcDateTime;
 }
 
@@ -879,7 +878,7 @@ model RouterWorkerAssignment {
   capacityCost: int32;
 
   @doc("The assignment time of the job in UTC.")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  
   assignedAt: utcDateTime;
 }
 
@@ -889,10 +888,10 @@ model RouterWorkerCollection is Azure.Core.Page<RouterWorkerItem>;
 @doc("Paged instance of RouterWorker")
 model RouterWorkerItem {
   @doc("An entity for jobs to be routed to")
-  worker?: RouterWorker;
+  worker: RouterWorker;
 
   @doc("(Optional) The Concurrency Token.")
-  etag?: string;
+  etag: eTag;
 }
 
 @doc("Jobs are distributed to the worker with the strongest abilities available.")
