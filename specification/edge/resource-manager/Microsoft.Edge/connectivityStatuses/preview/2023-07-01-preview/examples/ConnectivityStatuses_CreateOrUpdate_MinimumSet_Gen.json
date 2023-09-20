@@ -1,5 +1,5 @@
 {
-  "title": "ConnectivityStatuses_CreateOrUpdate_MinimumSet_Gen",
+  "title": "ConnectivityStatuses_CreateOrUpdate",
   "operationId": "ConnectivityStatuses_CreateOrUpdate",
   "parameters": {
     "api-version": "2023-07-01-preview",
@@ -7,17 +7,19 @@
     "connectivityStatusName": "string",
     "resource": {
       "properties": {
-        "status": "Connected"
+        "status": "string",
+        "provisioningState": "Succeeded"
       }
     }
   },
   "responses": {
     "200": {
-      "body": {
-        "id": "/subscriptions/554276ED-59D4-4B48-B634-2663CFC8A6AD/resourceGroups/rgupdates/providers/Microsoft.AzureStackHCI/clusters/name/providers/Microsoft.Edge/connectivityStatuses/default"
-      }
+      "body": {}
     },
     "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
       "body": {
         "id": "/subscriptions/554276ED-59D4-4B48-B634-2663CFC8A6AD/resourceGroups/rgupdates/providers/Microsoft.AzureStackHCI/clusters/name/providers/Microsoft.Edge/connectivityStatuses/default"
       }
