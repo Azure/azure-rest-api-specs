@@ -120,7 +120,7 @@ model QuotaProperties {
 model FreeTrialProperties {
   @doc("The playwright account id.")
   @visibility("read")
-  accountId: uuid;
+  accountId: string;
 
   @doc("The free-trial createdAt utcDateTime.")
   @visibility("read")
