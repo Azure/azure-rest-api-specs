@@ -240,8 +240,11 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Asset Endpoint Profile deletion is successful."
+          },
           "202": {
-            "description": "Async operation to delete the Asset Endpoint Profile.",
+            "description": "Async operation to delete the Asset Endpoint Profile is created.",
             "headers": {
               "Location": {
                 "type": "string"
@@ -249,7 +252,7 @@
             }
           },
           "204": {
-            "description": "Asset Endpoint Profile delete successful."
+            "description": "Asset Endpoint Profile deletion no-op since the resource does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -313,8 +316,8 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]*[a-zA-Z0-9]$",
-      "maxLength": 64,
+      "pattern": "^[a-z0-9][a-z0-9-]{1,60}[a-z0-9]$",
+      "maxLength": 63,
       "minLength": 3
     }
   },

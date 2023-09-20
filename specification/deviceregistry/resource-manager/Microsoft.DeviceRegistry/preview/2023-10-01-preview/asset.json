@@ -246,16 +246,19 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Asset deletion is successful."
+          },
           "202": {
             "headers": {
               "Location": {
                 "type": "string"
               }
             },
-            "description": "Async operation to delete the Asset."
+            "description": "Async operation to delete the Asset is created."
           },
           "204": {
-            "description": "Asset delete successful."
+            "description": "Asset deletion no-op since the resource does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -322,8 +325,8 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]*[a-zA-Z0-9]$",
-      "maxLength": 64,
+      "pattern": "^[a-z0-9][a-z0-9-]{1,60}[a-z0-9]$",
+      "maxLength": 63,
       "minLength": 3
     }
   },
@@ -351,6 +354,9 @@
       ],
       "properties": {
         "properties": {
+          "required": [
+            "assetEndpointProfileUri"
+          ],
           "$ref": "#/definitions/AssetProperties",
           "description": "Asset resource properties."
         },
@@ -435,13 +441,13 @@
           "type": "string",
           "description": "Human-readable description of the asset."
         },
-        "connectivityProfileUri": {
+        "assetEndpointProfileUri": {
           "type": "string",
           "x-ms-mutability": [
             "read",
             "create"
           ],
-          "description": "A reference to the connectivity profile (connection information) used by brokers to connect to an endpoint that provides data points for this asset. Must have the format <ModuleCR.metadata.namespace>/<ModuleCR.metadata.name>."
+          "description": "A reference to the asset endpoint profile (connection information) used by brokers to connect to an endpoint that provides data points for this asset. Must have the format <ModuleCR.metadata.namespace>/<ModuleCR.metadata.name>."
         },
         "version": {
           "type": "integer",
@@ -488,6 +494,11 @@
         "defaultEventsConfiguration": {
           "type": "string",
           "description": "Protocol-specific default configuration for all events. Each event can have its own configuration that overrides the default settings here. This assumes that each asset instance has one protocol."
+        },
+        "attributes": {
+          "type": "object",
+          "description": "A set of key-value pairs that contain custom attributes set by the customer.",
+          "additionalProperties": true
         },
         "dataPoints": {
           "type": "array",
