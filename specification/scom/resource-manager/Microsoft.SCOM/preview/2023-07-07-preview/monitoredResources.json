@@ -116,6 +116,15 @@
           },
           {
             "$ref": "#/parameters/monitoredResourceName"
+          },
+          {
+            "name": "MonitoredResource",
+            "description": "SCOM Monitored Resource",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MonitoredResource"
+            }
           }
         ],
         "responses": {
@@ -269,6 +278,18 @@
         "domainName": {
           "description": "The domain name associated with the monitored resource.",
           "type": "string"
+        },
+        "extensionStatus": {
+          "description": "The status of the agent extension that is being installed.",
+          "type": "string",
+          "enum": [
+            "Failed",
+            "Succeed"
+          ],
+          "x-ms-enum": {
+            "name": "extensionStatus",
+            "modelAsString": true
+          }
         },
         "managementServerEndpoint": {
           "description": "The management server endpoint to which the monitored resource is directed.",
