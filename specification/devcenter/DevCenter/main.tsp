@@ -1,19 +1,24 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "./routes.tsp";
+import "@azure-tools/typespec-azure-core";
+import "./environments/routes.tsp";
 
+using Azure.Core;
+using TypeSpec.Versioning;
 using TypeSpec.Rest;
 using TypeSpec.Http;
+
+@useDependency(Versions.v1_0_Preview_2)
 @service({
   title: "DevCenter",
   version: "2023-04-01",
 })
 @server(
   "{endpoint}",
-  "Deployment Environments API.",
+  "DevCenter service",
   {
     endpoint: string,
   }
 )
-@doc("Deployment Environments API.")
+@doc("DevCenter service")
 namespace DevCenter;
