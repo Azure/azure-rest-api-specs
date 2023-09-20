@@ -29,6 +29,7 @@ batch:
 These settings apply only when `--tag=package-2021-04-searchservice-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2021-04-searchservice-preview'
+title: SearchServiceClient
 namespace: azure.search.documents.indexes
 output-folder: $(python-sdks-folder)/search/azure-search-documents/azure/search/documents/indexes/_generated
 ```
@@ -38,6 +39,7 @@ output-folder: $(python-sdks-folder)/search/azure-search-documents/azure/search/
 These settings apply only when `--tag=package-2021-04-searchindex-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2021-04-searchindex-preview'
+title: SearchIndexClient
 namespace: azure.search.documents
 output-folder: $(python-sdks-folder)/search/azure-search-documents/azure/search/documents/_generated
 ```
