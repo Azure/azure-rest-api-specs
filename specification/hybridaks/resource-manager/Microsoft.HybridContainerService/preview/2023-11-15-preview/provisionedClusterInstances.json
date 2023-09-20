@@ -157,61 +157,6 @@
             }
           }
         }
-      },
-      "patch": {
-        "operationId": "provisionedClusterInstances_Update",
-        "x-ms-examples": {
-          "UpdateProvisionedClusterInstance": {
-            "$ref": "./examples/UpdateProvisionedClusterInstance.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "summary": "Updates the provisioned cluster instance",
-        "description": "Updates the Hybrid AKS provisioned cluster instance",
-        "parameters": [
-          {
-            "$ref": "#/parameters/connectedClusterResourceUriParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "provisionedClusterInstance",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/provisionedClustersPatch"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success. Updated the provisionedClusterInstances resource.",
-            "schema": {
-              "$ref": "#/definitions/provisionedClusters"
-            }
-          },
-          "202": {
-            "description": "Updates the provisionedClusterInstances resource.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/provisionedClusters"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
       }
     },
     "/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances": {
@@ -1327,33 +1272,16 @@
         "properties": {
           "$ref": "#/definitions/provisionedClusterProperties"
         },
-        "systemData": {
-          "readOnly": true,
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
-        },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation"
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "The provisionedClusterInstances resource definition."
-    },
-    "provisionedClustersPatch": {
-      "type": "object",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "description": "The provisionedClusterInstances resource patch definition."
     },
     "provisionedClustersListResult": {
       "type": "object",
