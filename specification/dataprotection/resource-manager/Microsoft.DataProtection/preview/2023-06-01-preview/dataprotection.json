@@ -91,12 +91,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Contains additional information like job Id",
-            "schema": {
-              "$ref": "#/definitions/OperationJobExtendedInfo"
-            }
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -113,6 +107,12 @@
                 "type": "integer",
                 "format": "int32"
               }
+            }
+          },
+          "200": {
+            "description": "Contains additional information like job Id",
+            "schema": {
+              "$ref": "#/definitions/OperationJobExtendedInfo"
             }
           },
           "default": {
@@ -436,7 +436,7 @@
           },
           "Create BackupVault With MSI": {
             "$ref": "./examples/VaultCRUD/PutBackupVaultWithMSI.json"
-          },
+},
           "Create BackupVault With CMK": {
             "$ref": "./examples/VaultCRUD/PutBackupVaultWithCMK.json"
           }
@@ -1172,9 +1172,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Ok"
-          },
           "202": {
             "description": "The operation will be completed asynchronously.",
             "headers": {
@@ -1195,6 +1192,9 @@
           },
           "204": {
             "description": "NoContent"
+          },
+          "200": {
+            "description": "Ok"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1284,7 +1284,10 @@
             "$ref": "./examples/BackupInstanceOperations/TriggerBackup.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/validateForBackup": {
@@ -1357,7 +1360,10 @@
             "$ref": "./examples/BackupInstanceOperations/ValidateForBackup.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}/operationResults/{operationId}": {
@@ -1537,394 +1543,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/locations/{location}/fetchSecondaryRecoveryPoints": {
-      "post": {
-        "tags": [
-          "FetchSecondaryRecoveryPoints"
-        ],
-        "description": "Returns a list of Secondary Recovery Points for a DataSource in a vault, that can be used for Cross Region Restore.",
-        "operationId": "SecondaryRPs_Fetch",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "Request body for operation",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FetchSecondaryRPsRequestParameters"
-            }
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "OData filter options.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "description": "skipToken Filter.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/AzureBackupRecoveryPointResourceList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-odata": "#/definitions/RecoveryPointsFilters",
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Fetch SecondaryRPs": {
-            "$ref": "./examples/CrossRegionRestore/FetchSecondaryRPs.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/locations/{location}/crossRegionRestore": {
-      "post": {
-        "tags": [
-          "BackupInstances"
-        ],
-        "operationId": "BackupInstances_TriggerCrossRegionRestore",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "Request body for trigger CRR operation",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CrossRegionRestoreRequestObject"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Contains additional information like job Id",
-            "schema": {
-              "$ref": "#/definitions/OperationJobExtendedInfo"
-            }
-          },
-          "202": {
-            "description": "The operation will be completed asynchronously.",
-            "headers": {
-              "Location": {
-                "description": "The URL of the resource used to check the status of the asynchronous operation.",
-                "type": "string"
-              },
-              "Azure-AsyncOperation": {
-                "description": "The URL of the resource used to check the status of the asynchronous operation.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that represents the seconds.",
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "Trigger Cross Region Restore": {
-            "$ref": "./examples/CrossRegionRestore/TriggerCrossRegionRestore.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/locations/{location}/validateCrossRegionRestore": {
-      "post": {
-        "tags": [
-          "BackupInstances"
-        ],
-        "operationId": "BackupInstances_ValidateCrossRegionRestore",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "Request body for operation",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ValidateCrossRegionRestoreRequestObject"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Contains additional information like job Id",
-            "schema": {
-              "$ref": "#/definitions/OperationJobExtendedInfo"
-            }
-          },
-          "202": {
-            "description": "The operation will be completed asynchronously.",
-            "headers": {
-              "Location": {
-                "description": "The URL of the resource used to check the status of the asynchronous operation.",
-                "type": "string"
-              },
-              "Azure-AsyncOperation": {
-                "description": "The URL of the resource used to check the status of the asynchronous operation.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that represents the seconds.",
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Validate Cross Region Restore": {
-            "$ref": "./examples/CrossRegionRestore/ValidateCrossRegionRestore.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/locations/{location}/fetchCrossRegionRestoreJob": {
-      "post": {
-        "tags": [
-          "DppJob"
-        ],
-        "operationId": "CrossRegionRestoreJob_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "Request body for operation",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CrossRegionRestoreJobRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Details about a Cross Region Restore Job",
-            "schema": {
-              "$ref": "#/definitions/AzureBackupJobResource"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Cross Region Restore Job": {
-            "$ref": "./examples/CrossRegionRestore/FetchCrossRegionRestoreJob.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/locations/{location}/fetchCrossRegionRestoreJobs": {
-      "post": {
-        "tags": [
-          "DppJob"
-        ],
-        "operationId": "CrossRegionRestoreJobs_List",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "Request body for operation",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CrossRegionRestoreJobsRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "List of Cross Region Restore Jobs",
-            "schema": {
-              "$ref": "#/definitions/AzureBackupJobResourceList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "List Cross Region Restore Jobs": {
-            "$ref": "./examples/CrossRegionRestore/FetchCrossRegionRestoreJobs.json"
-          }
-        }
-      }
-    },
-    "/{resourceId}/providers/Microsoft.DataProtection/backupInstances": {
-      "get": {
-        "tags": [
-          "BackupInstancesExtensionRouting"
-        ],
-        "description": "Gets a list of backup instances associated with a tracked resource",
-        "operationId": "BackupInstancesExtensionRouting_List",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/BackupInstanceResourceList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "List BackupInstances associated with an azure resource": {
-            "$ref": "./examples/BackupInstanceOperations/ListBackupInstancesExtensionRouting.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}/rehydrate": {
       "post": {
         "description": "rehydrate recovery point for restore for a BackupInstance",
@@ -2067,6 +1685,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Trigger Restore": {
             "$ref": "./examples/BackupInstanceOperations/TriggerRestore.json"
@@ -2478,6 +2099,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Validate Restore": {
             "$ref": "./examples/BackupInstanceOperations/ValidateRestore.json"
@@ -4460,6 +4084,11 @@
           "readOnly": true,
           "type": "string"
         },
+        "rehydrationPriority": {
+          "description": "Priority to be used for rehydration",
+          "readOnly": true,
+          "type": "string"
+        },
         "restoreType": {
           "description": "It indicates the sub type of operation i.e. in case of Restore it can be ALR/OLR",
           "readOnly": true,
@@ -4527,40 +4156,6 @@
         "supportedActions"
       ],
       "type": "object"
-    },
-    "CrossRegionRestoreJobRequest": {
-      "required": [
-        "sourceRegion",
-        "sourceBackupVaultId",
-        "jobId"
-      ],
-      "type": "object",
-      "properties": {
-        "sourceRegion": {
-          "type": "string"
-        },
-        "sourceBackupVaultId": {
-          "type": "string"
-        },
-        "jobId": {
-          "type": "string"
-        }
-      }
-    },
-    "CrossRegionRestoreJobsRequest": {
-      "required": [
-        "sourceRegion",
-        "sourceBackupVaultId"
-      ],
-      "type": "object",
-      "properties": {
-        "sourceRegion": {
-          "type": "string"
-        },
-        "sourceBackupVaultId": {
-          "type": "string"
-        }
-      }
     },
     "AzureBackupJobResource": {
       "allOf": [
@@ -4886,46 +4481,54 @@
       ],
       "properties": {
         "snapshotVolumes": {
-          "description": "Gets or sets the volume snapshot property. This property if enabled will take volume snapshots during restore.",
+          "description": "Gets or sets the volume snapshot property. This property if enabled will take volume snapshots during backup.",
           "type": "boolean"
         },
         "includeClusterScopeResources": {
-          "description": "Gets or sets the include cluster resources property. This property if enabled will include cluster scope resources during restore.",
+          "description": "Gets or sets the include cluster resources property. This property if enabled will include cluster scope resources during backup.",
           "type": "boolean"
         },
         "includedNamespaces": {
-          "description": "Gets or sets the include namespaces property. This property sets the namespaces to be included during restore.",
+          "description": "Gets or sets the include namespaces property. This property sets the namespaces to be included during backup.",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "excludedNamespaces": {
-          "description": "Gets or sets the exclude namespaces property. This property sets the namespaces to be excluded during restore.",
+          "description": "Gets or sets the exclude namespaces property. This property sets the namespaces to be excluded during backup.",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "includedResourceTypes": {
-          "description": "Gets or sets the include resource types property. This property sets the resource types to be included during restore.",
+          "description": "Gets or sets the include resource types property. This property sets the resource types to be included during backup.",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "excludedResourceTypes": {
-          "description": "Gets or sets the exclude resource types property. This property sets the resource types to be excluded during restore.",
+          "description": "Gets or sets the exclude resource types property. This property sets the resource types to be excluded during backup.",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "labelSelectors": {
-          "description": "Gets or sets the LabelSelectors property. This property sets the resource with such label selectors to be included during restore.",
+          "description": "Gets or sets the LabelSelectors property. This property sets the resource with such label selectors to be included during backup.",
           "items": {
             "type": "string"
           },
+          "type": "array"
+        },
+        "backupHookReferences": {
+          "description": "Gets or sets the backup hook references. This property sets the hook reference to be executed during backup.",
+          "items": {
+            "$ref": "#/definitions/NamespacedNameResource"
+          },
+          "x-ms-identifiers": [],
           "type": "array"
         }
       },
@@ -5385,6 +4988,28 @@
       "title": "BasePolicyRule",
       "type": "object"
     },
+    "BaseResourceProperties": {
+      "description": "Properties which are specific to datasource/datasourceSets",
+      "required": [
+        "objectType"
+      ],
+      "type": "object",
+      "properties": {
+        "objectType": {
+          "description": "Type of the specific object - used for deserializing",
+          "type": "string",
+          "readOnly": false,
+          "enum": [
+            "DefaultResourceProperties"
+          ],
+          "x-ms-enum": {
+            "name": "ResourcePropertiesObjectType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "objectType"
+    },
     "CheckNameAvailabilityRequest": {
       "description": "CheckNameAvailability Request",
       "properties": {
@@ -5532,20 +5157,6 @@
       },
       "title": "ClientDiscoveryValueForSingleApi",
       "type": "object"
-    },
-    "FetchSecondaryRPsRequestParameters": {
-      "description": "Information about BI whose secondary RecoveryPoints are requested\r\nSource region and\r\nBI ARM path",
-      "type": "object",
-      "properties": {
-        "sourceRegion": {
-          "description": "Source region in which BackupInstance is located",
-          "type": "string"
-        },
-        "sourceBackupInstanceId": {
-          "description": "ARM Path of BackupInstance",
-          "type": "string"
-        }
-      }
     },
     "CloudError": {
       "description": "An error response from Azure Backup.",
@@ -5704,6 +5315,10 @@
         "resourceUri": {
           "description": "Uri of the resource.",
           "type": "string"
+        },
+        "resourceProperties": {
+          "$ref": "#/definitions/BaseResourceProperties",
+          "description": "Properties specific to data source"
         }
       },
       "required": [
@@ -5742,6 +5357,10 @@
         "resourceUri": {
           "description": "Uri of the resource.",
           "type": "string"
+        },
+        "resourceProperties": {
+          "$ref": "#/definitions/BaseResourceProperties",
+          "description": "Properties specific to data source set"
         }
       },
       "required": [
@@ -5859,6 +5478,19 @@
         }
       }
     },
+    "DefaultResourceProperties": {
+      "description": "Default source properties",
+      "required": [
+        "objectType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "DefaultResourceProperties"
+    },
     "DeletedBackupInstanceResource": {
       "description": "Deleted Backup Instance",
       "type": "object",
@@ -5959,28 +5591,12 @@
           "description": "Gets or sets the user assigned identities.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/UserAssignedIdentityDetails"
+            "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/UserAssignedIdentity"
           }
         }
       },
       "title": "DppIdentityDetails",
       "type": "object"
-    },
-    "UserAssignedIdentityDetails": {
-      "description": "User Assigned Identity Details",
-      "type": "object",
-      "properties": {
-        "clientId": {
-          "description": "The Client Id of the User Assigned Managed Identity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "principalId": {
-          "description": "The Object Id of the User Assigned Managed Identity.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
     },
     "DppBaseResourceList": {
       "description": "Base for all lists of V2 resources.",
@@ -6668,58 +6284,6 @@
         "objectType"
       ]
     },
-    "CrossRegionRestoreDetails": {
-      "description": "Cross Region Restore details",
-      "required": [
-        "sourceRegion",
-        "sourceBackupInstanceId"
-      ],
-      "type": "object",
-      "properties": {
-        "sourceRegion": {
-          "type": "string"
-        },
-        "sourceBackupInstanceId": {
-          "type": "string"
-        }
-      }
-    },
-    "ValidateCrossRegionRestoreRequestObject": {
-      "description": "Cross Region Restore Request Object",
-      "required": [
-        "restoreRequestObject",
-        "crossRegionRestoreDetails"
-      ],
-      "type": "object",
-      "properties": {
-        "restoreRequestObject": {
-          "$ref": "#/definitions/AzureBackupRestoreRequest",
-          "description": "Gets or sets the restore request object."
-        },
-        "crossRegionRestoreDetails": {
-          "$ref": "#/definitions/CrossRegionRestoreDetails",
-          "description": "Cross region restore details."
-        }
-      }
-    },
-    "CrossRegionRestoreRequestObject": {
-      "description": "Cross Region Restore Request Object",
-      "required": [
-        "restoreRequestObject",
-        "crossRegionRestoreDetails"
-      ],
-      "type": "object",
-      "properties": {
-        "restoreRequestObject": {
-          "$ref": "#/definitions/AzureBackupRestoreRequest",
-          "description": "Gets or sets the restore request object."
-        },
-        "crossRegionRestoreDetails": {
-          "$ref": "#/definitions/CrossRegionRestoreDetails",
-          "description": "Cross region restore details."
-        }
-      }
-    },
     "OperationJobExtendedInfo": {
       "allOf": [
         {
@@ -6941,6 +6505,21 @@
       },
       "x-ms-discriminator-value": "KubernetesStorageClassRestoreCriteria"
     },
+    "NamespacedNameResource": {
+      "description": "Class to refer resources which contains namespace and name",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the resource",
+          "type": "string"
+        },
+        "namespace": {
+          "description": "Namespace in which the resource exists",
+          "type": "string"
+        }
+      },
+      "title": "NamespacedNameResource"
+    },
     "KubernetesPVRestoreCriteria": {
       "description": "Item Level kubernetes persistent volume target info for restore operation",
       "type": "object",
@@ -7042,6 +6621,14 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "restoreHookReferences": {
+          "description": "Gets or sets the restore hook references. This property sets the hook reference to be executed during restore.",
+          "items": {
+            "$ref": "#/definitions/NamespacedNameResource"
+          },
+          "x-ms-identifiers": [],
+          "type": "array"
         }
       },
       "x-ms-discriminator-value": "KubernetesClusterRestoreCriteria"
@@ -8020,15 +7607,6 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
-    },
-    "ResourceId": {
-      "name": "resourceId",
-      "in": "path",
-      "description": "ARM path of the resource to be protected using Microsoft.DataProtection",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
     }
   },
   "securityDefinitions": {
