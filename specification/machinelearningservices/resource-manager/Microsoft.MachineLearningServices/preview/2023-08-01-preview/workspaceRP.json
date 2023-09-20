@@ -3409,6 +3409,15 @@
             "read"
           ]
         },
+        "serverlessComputeCustomSubnet": {
+          "description": "The resource ID of an existing virtual network subnet in which serverless compute nodes should be deployed",
+          "type": "string",
+          "format": "arm-id"
+        },
+        "serverlessComputeNoPublicIP": {
+          "description": "The flag to signal if serverless compute nodes deployed in custom vNet would have no public IP addresses for a workspace with private endpoint",
+          "type": "boolean"
+        },
         "publicNetworkAccess": {
           "description": "Whether requests from Public Network are allowed.",
           "$ref": "#/definitions/PublicNetworkAccessType"
@@ -3531,6 +3540,15 @@
         "publicNetworkAccess": {
           "description": "Whether requests from Public Network are allowed.",
           "$ref": "#/definitions/PublicNetworkAccessType"
+        },
+        "serverlessComputeCustomSubnet": {
+          "description": "The resource ID of an existing virtual network subnet in which serverless compute nodes should be deployed",
+          "type": "string",
+          "format": "arm-id"
+        },
+        "serverlessComputeNoPublicIP": {
+          "description": "The flag to signal if serverless compute nodes deployed in custom vNet would have no public IP addresses for a workspace with private endpoint",
+          "type": "boolean"
         },
         "serviceManagedResourcesSettings": {
           "description": "The service managed resource settings.",
