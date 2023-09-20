@@ -1970,20 +1970,21 @@
         },
         "type": {
           "type": "string",
+          "foramt":  "arm-id",
           "enum": [
-            "single",
-            "pool"
+            "Single",
+            "Pool"
           ],
           "x-ms-enum": {
             "name": "BackendType",
             "modelAsString": true,
             "values": [
               {
-                "value": "single",
+                "value": "Single",
                 "description": "supports single backend"
               },
               {
-                "value": "pool",
+                "value": "Pool",
                 "description": "supports pool backend"
               }
             ]
@@ -2400,21 +2401,28 @@
           "items": {
             "$ref": "#/definitions/BackendPoolItem"
           },
-          "minItems": 1
+          "minItems": 1,
+          "x-ms-identifiers": [
+            "type"
+          ]
         }
       }
     },
     "BackendPoolItem": {
       "type": "object",
-      "description": "Pool service information",
+      "description": "Backend pool service information",
       "properties": {
         "id": {
           "type": "string",
+          "format": "arm-id",
           "description": "The unique ARM id of the backend entity. The ARM id should refer to an already existing backend entity.",
           "example": {
             "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/proxybackend"
           }
-        }
+        },
+        "required": [
+          "id"
+        ]
       }
     },
     "BearerTokenSendingMethodsContract": {
