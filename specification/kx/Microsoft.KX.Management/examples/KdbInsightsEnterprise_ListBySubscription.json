@@ -2,7 +2,7 @@
   "operationId": "KdbInsightsEnterprise_ListBySubscription",
   "title": "KdbInsightsEnterprise_ListBySubscription_1",
   "parameters": {
-    "api-version": "2022-11-01-preview",
+    "api-version": "2023-09-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
@@ -20,22 +20,25 @@
               "provisioningState": "Succeeded",
               "uiUsername": "kdbuser01",
               "emailAddress": "kdbuser01@email.com",
-              "systemNodePoolVmSize": "Standard_D2d_v4",
-              "userNodePoolVmSize": "Standard_D8ds_v4",
-              "isRookCeph": true,
-              "securityMonitoringEnabled": true,
+              "systemNodePoolVmSize": "Standard_D4d_v4",
+              "systemNodePoolVmCount": 3,
+              "userNodePoolVmSize": "Standard_D16ds_v4",
+              "userNodePoolVmCount": 3,
+              "isRookCeph": false,
+              "securityMonitoringEnabled": false,
               "isPremiumStorageEnabled": false,
+              "vnetAddressSpace": "10.0.0.0/16",
+              "authorizedIpRanges": "20.38.1.0/24",
               "readWriteManyStorageClass": "azurefile-premium-kxi-nfs",
-              "rtStorageClass": "managed-csi",
-              "readWriteOnceStorageClass": "managed-csi",
-              "isNotificationsOn": true,
               "clientNotificationAddress": "kdbuser01@email.com",
-              "vnetAddressSpace": "10.0.0.6/16",
-              "isAuthorizedIpRanges": true,
-              "authorizedIpRanges": "255.255.255.255",
-              "aksContainerInsightsRetentionDays": 50,
-              "aksLogRetentionDays": 50,
-              "aksMetricsRetentionDays": 50,
+              "aksContainerInsightsRetentionDays": 30,
+              "aksLogRetentionDays": 30,
+              "aksMetricsRetentionDays": 30,
+              "availabilityZones": [
+                "1",
+                "2",
+                "3"
+              ],
               "managedResourceGroupConfiguration": {
                 "name": "managedRG",
                 "location": "eastus"
