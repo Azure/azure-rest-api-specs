@@ -976,7 +976,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ListApplicationVersionsBodyParameters"
+              "$ref": "./common.json#/parameter/ListApplicationVersionsBodyParameters"
             }
           }
         ],
@@ -1039,7 +1039,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ListImagesBodyParameters"
+              "$ref": "./common.json#/parameter/ListImagesBodyParameters"
             }
           }
         ],
@@ -1459,28 +1459,6 @@
       "x-ms-enum": {
         "name": "ArtifactState",
         "modelAsString": true
-      }
-    },
-    "ListApplicationVersionsBodyParameters": {
-      "type": "object",
-      "properties": {
-        "nfAppName": {
-          "type": "string"
-        }
-      }
-    },
-    "ListImagesBodyParameters": {
-      "type": "object",
-      "properties": {
-        "nfAppName": {
-          "type": "string"
-        },
-        "deploymentValues": {
-          "type": "string"
-        },
-        "helmChartVersion": {
-          "type": "string"
-        }
       }
     }
   }
