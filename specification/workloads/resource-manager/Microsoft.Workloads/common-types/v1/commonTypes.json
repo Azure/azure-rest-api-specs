@@ -57,11 +57,20 @@
         },
         "userAssignedIdentities": {
           "description": "User assigned identities dictionary",
-          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/UserAssignedIdentities"
+          "$ref": "#/definitions/userAssignedIdentities"
         }
       },
       "required": [
         "type"
+      ]
+    },
+    "userAssignedIdentities": {
+      "description": "User assigned identities dictionary",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/UserAssignedIdentities"
+        }
       ]
     }
   },
