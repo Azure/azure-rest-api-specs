@@ -562,19 +562,35 @@
       "description": "The name of the rollout",
       "x-ms-parameter-location": "method"
     },
+    "ListApplicationVersionsParameters": {
+      "name": "artifactParameters",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "./common.json#/parameters/ListApplicationVersionsBodyParameters"
+      }
+    },
     "ListApplicationVersionsBodyParameters": {
       "type": "object",
       "properties": {
-        "nfAppName": {
+        "networkFunctionApplicationName": {
           "type": "string",
           "description": "Network function application name."
         }
       }
     },
+    "ListArtifactsParameters": {
+      "name": "artifactParameters",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "./common.json#/parameters/ListArtifactsBodyParameters"
+      }
+    },
     "ListArtifactsBodyParameters": {
       "type": "object",
       "properties": {
-        "nfAppName": {
+        "networkFunctionApplicationName": {
           "type": "string",
           "description": "Network function application name."
         },

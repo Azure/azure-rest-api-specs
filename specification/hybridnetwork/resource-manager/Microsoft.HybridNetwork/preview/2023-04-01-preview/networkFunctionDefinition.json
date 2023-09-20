@@ -932,6 +932,122 @@
           "final-state-via": "location"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/networkFunctionDefinitionGroups/{networkFunctionDefinitionGroupName}/networkFunctionDefinitionVersions/{networkFunctionDefinitionVersionName}/listApplicationVersions": {
+      "post": {
+        "tags": [
+          "NetworkFunctionDefinitionVersions"
+        ],
+        "operationId": "ApplicationVersionsList_Post",
+        "description": "Get information about helm package versions in network function definition version overview.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionDefinitionGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionDefinitionVersionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ListApplicationVersionsParameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operations returns the list of helm chart versions.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactOverviewList"
+            }
+          },
+          "202": {
+            "description": "Request of getting list of helm chart versions is accepted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get network function definition version overview": {
+            "$ref": "./examples/NetworkFunctionDefinitionVersionListApplicationVersions.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/networkFunctionDefinitionGroups/{networkFunctionDefinitionGroupName}/networkFunctionDefinitionVersions/{networkFunctionDefinitionVersionName}/listArtifacts": {
+      "post": {
+        "tags": [
+          "NetworkFunctionDefinitionVersions"
+        ],
+        "operationId": "ArtifactList_Post",
+        "description": "Get information about artifacts in a helm package in network function definition version overview.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionDefinitionGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionDefinitionVersionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ListArtifactsParameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operations returns the list of images.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactOverviewList"
+            }
+          },
+          "202": {
+            "description": "Request of getting list of images is accepted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get network function definition version overview": {
+            "$ref": "./examples/NetworkFunctionDefinitionVersionListArtifacts.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
     }
   },
   "definitions": {
@@ -1907,6 +2023,83 @@
             "create"
           ]
         }
+      }
+    },
+    "ArtifactOverviewList": {
+      "description": "Proxy Artifact list.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArtifactOverviewPropertiesValue"
+          },
+          "description": "The artifact list properties."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      }
+    },
+    "ArtifactOverviewPropertiesValue": {
+      "type": "object",
+      "properties": {
+        "artifactName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "ArtifactType": {
+          "type": "string",
+          "description": "The artifact type.",
+          "enum": [
+            "Unknown",
+            "OCIArtifact",
+            "VhdImageFile",
+            "ArmTemplate",
+            "ImageFile"
+          ],
+          "x-ms-enum": {
+            "name": "ArtifactType",
+            "modelAsString": true
+          }
+        },
+        "artifactVersion": {
+          "type": "string",
+          "description": "The artifact version."
+        },
+        "artifactState": {
+          "$ref": "#/definitions/ArtifactState",
+          "description": "The artifact state"
+        },
+        "shaHash": {
+          "type": "string",
+          "description": "The artifact sha hash."
+        },
+        "artifactSize": {
+          "type": "string",
+          "description": "The artifact size."
+        },
+        "mediaType": {
+          "type": "string",
+          "description": "The media type for artifact."
+        }
+      }
+    },
+    "ArtifactState": {
+      "type": "string",
+      "description": "The artifact state.",
+      "enum": [
+        "Unknown",
+        "Preview",
+        "Active",
+        "Deprecated"
+      ],
+      "x-ms-enum": {
+        "name": "ArtifactState",
+        "modelAsString": true
       }
     }
   }
