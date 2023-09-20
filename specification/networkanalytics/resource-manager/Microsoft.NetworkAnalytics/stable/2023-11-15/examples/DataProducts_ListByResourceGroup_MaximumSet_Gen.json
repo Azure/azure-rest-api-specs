@@ -3,8 +3,8 @@
   "operationId": "DataProducts_ListByResourceGroup",
   "parameters": {
     "api-version": "2023-11-15",
-    "subscriptionId": "0A13E048-FDC3-4028-AAFD-66A3C54B9655",
-    "resourceGroupName": "rgnetworkanalytics"
+    "subscriptionId": "00000000-0000-0000-0000-00000000000",
+    "resourceGroupName": "aoiresourceGroupName"
   },
   "responses": {
     "200": {
@@ -12,92 +12,94 @@
         "value": [
           {
             "properties": {
-              "resourceGuid": "zxxxoczmmuxwg",
+              "resourceGuid": "00000000-0000-0000-0000-000000000000",
               "provisioningState": "Succeeded",
-              "publisher": "ifkexofryrjmkunifqnkssfarh",
-              "product": "jlg",
-              "majorVersion": "eg",
+              "publisher": "Microsoft",
+              "product": "MCC",
+              "majorVersion": "1.0.0",
               "owners": [
-                "umswnirlkf"
+                "abc@micros.com"
               ],
-              "redundancy": "Enabled",
-              "purviewAccount": "nfqmjusigobjuzqjfei",
-              "purviewCollection": "qgkm",
-              "privateLinksEnabled": "Enabled",
+              "redundancy": "Disabled",
+              "purviewAccount": "testpurview",
+              "purviewCollection": "134567890",
+              "privateLinksEnabled": "Disabled",
               "publicNetworkAccess": "Enabled",
               "customerManagedKeyEncryptionEnabled": "Enabled",
               "customerEncryptionKey": {
-                "keyVaultUri": "apuwkibkrjrerfgpluyqcomqmdebvn",
-                "keyName": "vvvalgbufctktcdpktuz",
-                "keyVersion": "dvqxgqffhddbitxykulwyhhpi"
+                "keyVaultUri": "https://KeyVault.vault.azure.net",
+                "keyName": "keyName",
+                "keyVersion": "keyVersion"
               },
               "networkacls": {
                 "virtualNetworkRule": [
                   {
-                    "id": "mdfhsdpmwpvvzzfglokeeoodvae",
-                    "action": "uozxblbnpthrpgns",
-                    "state": "pmagbgwv"
+                    "id": "/subscriptions/subscriptionId/resourcegroups/resourceGroupName/providers/Microsoft.Network/virtualNetworks/virtualNetworkName/subnets/subnetName",
+                    "action": "Allow",
+                    "state": "Succeeded"
                   }
                 ],
                 "ipRules": [
                   {
-                    "value": "fxfhhxej",
-                    "action": "cfytnhpmbbyznstgjltjth"
+                    "value": "1.1.1.1",
+                    "action": "Allow"
                   }
                 ],
                 "allowedQueryIpRangeList": [
-                  "fmxgswsuapvjpfhzoykmogfnz"
+                  "1.1.1.1",
+                  "1.1.1.2"
                 ],
                 "defaultAction": "Allow"
               },
               "managedResourceGroupConfiguration": {
-                "name": "zjrvyvjwbkafl",
-                "location": "gvgplg"
+                "name": "managedResourceGroupName",
+                "location": "eastus"
               },
               "availableMinorVersions": [
-                "vg"
+                "1.0.1",
+                "1.0.2"
               ],
-              "currentMinorVersion": "gvxnup",
-              "documentation": "wjftipzvevwj",
+              "currentMinorVersion": "1.0.1",
+              "documentation": "https://learn.microsoft.com/",
               "consumptionEndpoints": {
-                "ingestionUrl": "qempsa",
+                "ingestionUrl": "https://aoiingestionstorageResourceName.blob.core.windows.net",
                 "ingestionResourceId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.Storage/storageAccounts/storageResourceName",
-                "fileAccessUrl": "alguvpbqgctuthwxrjajnhygjlqx",
+                "fileAccessUrl": "https://operatorinsightsstorageResourceName.blob.core.windows.net",
                 "fileAccessResourceId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.Storage/storageAccounts/storageResourceName",
-                "queryUrl": "rbimhcwozjisuriokxjxdrnywp",
+                "queryUrl": "https://opinsightsclusterName.regionName.kusto.windows.net",
                 "queryResourceId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.Kusto/clusters/clusterName"
               },
-              "keyVaultUrl": "aicvlmiqfnwigd"
+              "keyVaultUrl": "https://myKeyVault.vault.azure.net"
             },
             "identity": {
-              "principalId": "00cc4014-482e-4de9-9932-83415cc75f45",
-              "tenantId": "bdb2c88c-9cfd-4e19-927d-51e875f6912b",
-              "type": "None",
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "tenantId": "00000000-0000-0000-0000-000000000000",
+              "type": "IdentityType",
               "userAssignedIdentities": {
                 "key8474": {
-                  "principalId": "400bd05f-395f-45a6-ba75-72601df80107",
-                  "clientId": "7b93bf67-60ac-4909-a987-ac438e69f9ba"
+                  "principalId": "00000000-0000-0000-0000-000000000000",
+                  "clientId": "00000000-0000-0000-0000-000000000000"
                 }
               }
             },
+            "id": "/subscriptions/00000000-0000-0000-0000-00000000000/resourceGroups/aoiresourceGroupName/providers/Microsoft.NetworkAnalytics/DataProducts/dataproduct01",
+            "name": "dataproduct01",
+            "type": "Microsoft.NetworkAnalytics/DataProducts",
+            "location": "eastus",
             "tags": {
-              "key2931": "mrzx"
+              "userSpecifiedKeyName": "userSpecifiedKeyValue"
             },
-            "location": "ticxyirxlwetjjxi",
-            "id": "wyphdpdiqizrxwydfyzvdm",
-            "name": "zsv",
-            "type": "fiseljahagmmbu",
             "systemData": {
-              "createdBy": "rkufnukeus",
+              "createdBy": "abc@micros.com",
               "createdByType": "User",
-              "createdAt": "2023-08-24T05:34:56.063Z",
-              "lastModifiedBy": "kezxaanurqur",
+              "createdAt": "2023-09-04T08:26:27.1506343Z",
+              "lastModifiedBy": "abc@micros.com",
               "lastModifiedByType": "User",
-              "lastModifiedAt": "2023-08-24T05:34:56.063Z"
+              "lastModifiedAt": "2023-09-04T08:26:27.1506343Z"
             }
           }
         ],
-        "nextLink": "https://microsoft.com/a"
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/aoiresourceGroupName/providers/Microsoft.NetworkAnalytics/DataProducts?api-version=2023-11-15$skiptoken=aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
       }
     }
   }
