@@ -1717,7 +1717,6 @@ op analyzeConversationJobStatus is Operations.ResourceRead<
 @added(Versions.v2023_04_01)
 @doc("Analyzes the input conversation utterance.")
 // @operationId("AnalyzeConversation_SubmitJob")
-@convenientAPI(false)
 @pollingOperation(analyzeConversationJobStatus)
 op analyzeConversationSubmitJob is Operations.LongRunningResourceCreateWithServiceProvidedName<AnalyzeConversationJobsInput>;
 
@@ -1729,6 +1728,7 @@ op analyzeConversationSubmitJob is Operations.LongRunningResourceCreateWithServi
 @pollingOperation(analyzeConversationJobStatus)
 // @operationId("AnalyzeConversation_CancelJob")
 @actionSeparator(":")
+@convenientAPI(false)
 @action("cancel")
 op analyzeConversationCancelJob is Operations.LongRunningResourceDelete<AnalyzeConversationJobState, TypeSpec.Http.AcceptedResponse>;
 
