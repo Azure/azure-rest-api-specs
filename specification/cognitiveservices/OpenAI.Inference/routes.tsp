@@ -7,7 +7,8 @@ import "./models/completions.create.tsp";
 import "./models/chat.completions.tsp";
 import "./models/embeddings.create.tsp";
 import "./models/images.tsp";
-import "./models/audio.tsp";
+import "./models/audio.transcription.tsp";
+import "./models/audio.translation.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -174,6 +175,6 @@ Gets English language transcribed text and associated metadata from provided spo
 op getAudioTranslationAsResponseObject is Azure.Core.ResourceAction<
   Deployment,
   AudioTranslationOptions,  // response_format must be unspecified (json) or one of: json, verbose_json
-  AudioTranscription,
+  AudioTranslation,
   MultipartFormDataRequestHeadersTraits
 >;

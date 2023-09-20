@@ -1,6 +1,5 @@
 import "@typespec/versioning";
-import "./chat.completions.tsp";
-import "./azure.cognitive.search.options.tsp";
+import "./audio.common.tsp";
 
 namespace Azure.OpenAI;
 
@@ -79,57 +78,6 @@ model AudioTranscriptionOptions {
 }
 
 @doc("""
-The configuration information for an audio translation request.
-""")
-@added(ServiceApiVersions.v2023_09_01_Preview)
-model AudioTranslationOptions {
-  @doc("""
-  The audio data to transcribe. This must be the binary content of a file in one of the supported media formats:
-  flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.
-  """)
-  @projectedName("csharp", "AudioData")
-  file: bytes;
-
-  @doc("""
-  The requested format of the transcription response data, which will influence the content and detail of the result.
-  """)
-  @projectedName("json", "response_format")
-  responseFormat?: AudioTranscriptionFormat;
-
-  @doc("""
-  An optional hint to guide the model's style or continue from a prior audio segment. The written language of the
-  prompt should match the primary spoken language of the audio data.
-  """)
-  prompt?: string;
-
-  @doc("""
-  The sampling temperature, between 0 and 1.
-  Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
-  If set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.
-  """)
-  temperature?: float32;
-
-  @doc("""
-  The model to use for this transcription request.
-  """)
-  // Implementation note: developer-facing specification of deployment or model by clients should be controlled either
-  // via an operation parameter or by this request body field -- but only one of those. This field should be hidden by
-  // clients if operation parameters are used and populated into the request body on an as-needed basis.
-  @projectedName("csharp", "InternalNonAzureModelName")
-  `model`?: string;
-}
-
-@doc("Defines the possible descriptors for available audio operation responses.")
-@added(ServiceApiVersions.v2023_09_01_Preview)
-enum AudioTaskLabel {
-  @doc("Accompanying response data resulted from an audio transcription task.")
-  transcribe: "transcribe",
-
-  @doc("Accompanying response data resulted from an audio translation task.")
-  translate: "translate",
-}
-
-@doc("""
 Extended information about a single segment of transcribed audio data.
 Segments generally represent roughly 5-10 seconds of speech. Segment boundaries typically occur between words but not
 necessarily sentences.
@@ -187,6 +135,7 @@ model AudioTranscription {
   text: string;
 
   @doc("The label that describes which operation type generated the accompanying response data.")
+  @projectedName("csharp", "InternalAudioTaskLabel")
   task?: AudioTaskLabel;
 
   @doc("""

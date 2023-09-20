@@ -161,7 +161,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/AudioTranscription"
+              "$ref": "#/definitions/AudioTranslation"
             }
           },
           "default": {
@@ -693,6 +693,81 @@
         "seek"
       ]
     },
+    "AudioTranslation": {
+      "type": "object",
+      "description": "Result information for an operation that translated spoken audio into written text.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The translated text for the provided audio data."
+        },
+        "task": {
+          "$ref": "#/definitions/AudioTaskLabel",
+          "description": "The label that describes which operation type generated the accompanying response data."
+        },
+        "language": {
+          "type": "string",
+          "description": "The spoken language that was detected in the translated audio data.\nThis is expressed as a two-letter ISO-639-1 language code like 'en' or 'fr'."
+        },
+        "duration": {
+          "type": "number",
+          "format": "float",
+          "description": "The total duration of the audio processed to produce accompanying translation information."
+        },
+        "segments": {
+          "type": "array",
+          "description": "A collection of information about the timing, probabilities, and other detail of each processed audio segment.",
+          "items": {
+            "$ref": "#/definitions/AudioTranslationSegment"
+          }
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "AudioTranslationFormat": {
+      "type": "string",
+      "description": "Defines available options for the underlying response format of output translation information.",
+      "enum": [
+        "json",
+        "verbose_json",
+        "text",
+        "srt",
+        "vtt"
+      ],
+      "x-ms-enum": {
+        "name": "AudioTranslationFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "json",
+            "value": "json",
+            "description": "Use a response body that is a JSON object containing a single 'text' field for the translation."
+          },
+          {
+            "name": "verbose_json",
+            "value": "verbose_json",
+            "description": "Use a response body that is a JSON object containing translation text along with timing, segments, and other\nmetadata."
+          },
+          {
+            "name": "text",
+            "value": "text",
+            "description": "Use a response body that is plain text containing the raw, unannotated translation."
+          },
+          {
+            "name": "srt",
+            "value": "srt",
+            "description": "Use a response body that is plain text in SubRip (SRT) format that also includes timing information."
+          },
+          {
+            "name": "vtt",
+            "value": "vtt",
+            "description": "Use a response body that is plain text in Web Video Text Tracks (VTT) format that also includes timing information."
+          }
+        ]
+      }
+    },
     "AudioTranslationOptions": {
       "type": "object",
       "description": "The configuration information for an audio translation request.",
@@ -700,11 +775,11 @@
         "file": {
           "type": "string",
           "format": "byte",
-          "description": "The audio data to transcribe. This must be the binary content of a file in one of the supported media formats:\nflac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm."
+          "description": "The audio data to translate. This must be the binary content of a file in one of the supported media formats:\nflac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm."
         },
         "response_format": {
-          "$ref": "#/definitions/AudioTranscriptionFormat",
-          "description": "The requested format of the transcription response data, which will influence the content and detail of the result.",
+          "$ref": "#/definitions/AudioTranslationFormat",
+          "description": "The requested format of the translation response data, which will influence the content and detail of the result.",
           "x-ms-client-name": "responseFormat"
         },
         "prompt": {
@@ -718,11 +793,84 @@
         },
         "model": {
           "type": "string",
-          "description": "The model to use for this transcription request."
+          "description": "The model to use for this translation request."
         }
       },
       "required": [
         "file"
+      ]
+    },
+    "AudioTranslationSegment": {
+      "type": "object",
+      "description": "Extended information about a single segment of translated audio data.\nSegments generally represent roughly 5-10 seconds of speech. Segment boundaries typically occur between words but not\nnecessarily sentences.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The 0-based index of this segment within a translation."
+        },
+        "start": {
+          "type": "number",
+          "format": "float",
+          "description": "The time at which this segment started relative to the beginning of the translated audio."
+        },
+        "end": {
+          "type": "number",
+          "format": "float",
+          "description": "The time at which this segment ended relative to the beginning of the translated audio."
+        },
+        "text": {
+          "type": "string",
+          "description": "The translated text that was part of this audio segment."
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "The temperature score associated with this audio segment."
+        },
+        "avg_logprob": {
+          "type": "number",
+          "format": "float",
+          "description": "The average log probability associated with this audio segment.",
+          "x-ms-client-name": "avgLogprob"
+        },
+        "compression_ratio": {
+          "type": "number",
+          "format": "float",
+          "description": "The compression ratio of this audio segment.",
+          "x-ms-client-name": "compressionRatio"
+        },
+        "no_speech_prob": {
+          "type": "number",
+          "format": "float",
+          "description": "The probability of no speech detection within this audio segment.",
+          "x-ms-client-name": "noSpeechProb"
+        },
+        "tokens": {
+          "type": "array",
+          "description": "The token IDs matching the translated text in this audio segment.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "seek": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The seek position associated with the processing of this audio segment.\nSeek positions are expressed as hundredths of seconds.\nThe model may process several segments from a single seek position, so while the seek position will never represent\na later time than the segment's start, the segment's start may represent a significantly later time than the\nsegment's associated seek position."
+        }
+      },
+      "required": [
+        "id",
+        "start",
+        "end",
+        "text",
+        "temperature",
+        "avg_logprob",
+        "compression_ratio",
+        "no_speech_prob",
+        "tokens",
+        "seek"
       ]
     },
     "Azure.Core.Foundations.Error": {
@@ -1881,7 +2029,7 @@
     "AudioTranslationOptions.file": {
       "name": "file",
       "in": "formData",
-      "description": "The audio data to transcribe. This must be the binary content of a file in one of the supported media formats:\nflac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.",
+      "description": "The audio data to translate. This must be the binary content of a file in one of the supported media formats:\nflac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.",
       "required": true,
       "type": "string",
       "format": "byte",
@@ -1890,7 +2038,7 @@
     "AudioTranslationOptions.model": {
       "name": "model",
       "in": "formData",
-      "description": "The model to use for this transcription request.",
+      "description": "The model to use for this translation request.",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -1906,7 +2054,7 @@
     "AudioTranslationOptions.responseFormat": {
       "name": "response_format",
       "in": "formData",
-      "description": "The requested format of the transcription response data, which will influence the content and detail of the result.",
+      "description": "The requested format of the translation response data, which will influence the content and detail of the result.",
       "required": false,
       "type": "string",
       "enum": [
@@ -1917,23 +2065,23 @@
         "vtt"
       ],
       "x-ms-enum": {
-        "name": "AudioTranscriptionFormat",
+        "name": "AudioTranslationFormat",
         "modelAsString": true,
         "values": [
           {
             "name": "json",
             "value": "json",
-            "description": "Use a response body that is a JSON object containing a single 'text' field for the transcription."
+            "description": "Use a response body that is a JSON object containing a single 'text' field for the translation."
           },
           {
             "name": "verbose_json",
             "value": "verbose_json",
-            "description": "Use a response body that is a JSON object containing transcription text along with timing, segments, and other\nmetadata."
+            "description": "Use a response body that is a JSON object containing translation text along with timing, segments, and other\nmetadata."
           },
           {
             "name": "text",
             "value": "text",
-            "description": "Use a response body that is plain text containing the raw, unannotated transcription."
+            "description": "Use a response body that is plain text containing the raw, unannotated translation."
           },
           {
             "name": "srt",
