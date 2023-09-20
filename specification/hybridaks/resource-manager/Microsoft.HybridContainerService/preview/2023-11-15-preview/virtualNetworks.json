@@ -62,7 +62,7 @@
           "200": {
             "description": "Retrieves the virtualNetwork resource.",
             "schema": {
-              "$ref": "#/definitions/virtualNetworks"
+              "$ref": "#/definitions/virtualNetwork"
             }
           },
           "default": {
@@ -104,7 +104,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/virtualNetworks"
+              "$ref": "#/definitions/virtualNetwork"
             }
           }
         ],
@@ -112,13 +112,13 @@
           "200": {
             "description": "Updates the virtualNetworks resource.",
             "schema": {
-              "$ref": "#/definitions/virtualNetworks"
+              "$ref": "#/definitions/virtualNetwork"
             }
           },
           "201": {
             "description": "Creates the virtualNetworks resource.",
             "schema": {
-              "$ref": "#/definitions/virtualNetworks"
+              "$ref": "#/definitions/virtualNetwork"
             }
           },
           "default": {
@@ -215,7 +215,7 @@
           "200": {
             "description": "Updates the virtualNetworks resource.",
             "schema": {
-              "$ref": "#/definitions/virtualNetworks"
+              "$ref": "#/definitions/virtualNetwork"
             }
           },
           "202": {
@@ -309,7 +309,7 @@
     }
   },
   "definitions": {
-    "virtualNetworksProperties": {
+    "virtualNetworkProperties": {
       "type": "object",
       "x-ms-client-flatten": true,
       "properties": {
@@ -432,7 +432,7 @@
                 },
                 "phase": {
                   "type": "string",
-                  "description": "Phase represents the current phase of cluster actuation. E.g. Pending, Running, Terminating, Failed etc."
+                  "description": "Phase represents the current phase of the virtual network provisioning. E.g. Pending, Running, Terminating, Failed etc."
                 },
                 "status": {
                   "type": "string"
@@ -446,12 +446,12 @@
       },
       "description": "HybridAKSNetworkSpec defines the desired state of HybridAKSNetwork"
     },
-    "virtualNetworks": {
+    "virtualNetwork": {
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
         "properties": {
-          "$ref": "#/definitions/virtualNetworksProperties"
+          "$ref": "#/definitions/virtualNetworkProperties"
         },
         "systemData": {
           "readOnly": true,
@@ -497,7 +497,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/virtualNetworks"
+            "$ref": "#/definitions/virtualNetwork"
           }
         },
         "nextLink": {
