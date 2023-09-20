@@ -587,10 +587,10 @@ model AnalyzeConversationJobsInput {
   displayName?: string;
 
   @doc("Analysis Input")
-  @key
-  @visibility("read", "create", "query", "update", "delete")
   analysisInput: MultiLanguageConversationAnalysisInput;
 
+  @key
+  @visibility("read", "create")
   @doc("Set of tasks to execute on the input conversation.")
   tasks: Array<AnalyzeConversationLROTask>;
 }

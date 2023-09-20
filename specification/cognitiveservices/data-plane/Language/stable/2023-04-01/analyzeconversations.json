@@ -447,12 +447,7 @@
         },
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageConversationAnalysisInput",
-          "description": "Analysis Input",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "description": "Analysis Input"
         },
         "tasks": {
           "type": "array",
@@ -460,7 +455,11 @@
           "items": {
             "$ref": "#/definitions/AnalyzeConversationLROTask"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [],
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
