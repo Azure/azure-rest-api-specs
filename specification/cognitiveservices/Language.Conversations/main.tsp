@@ -1727,7 +1727,6 @@ op analyzeConversationSubmitJob is Operations.LongRunningResourceCreateWithServi
 @doc("Cancel a long-running job for text analysis of conversations.")
 @summary("Cancel a long-running Text Analysis conversations job")
 @pollingOperation(analyzeConversationJobStatus)
-@convenientAPI(false)
 // @operationId("AnalyzeConversation_CancelJob")
 @actionSeparator(":")
 @action("cancel")
