@@ -703,5 +703,6 @@ interface LambdaFunctionConfigurations {
 //
 // Related information for backend service:
 // AWS Servcie : Lambda
+// Product Version : 3.7.601.0
 // SDK Version : 3.7.200.1
 //--------------------------------------------------------------------------------------------
