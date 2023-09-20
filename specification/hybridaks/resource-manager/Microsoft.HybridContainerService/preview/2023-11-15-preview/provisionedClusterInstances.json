@@ -1324,9 +1324,6 @@
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
-        "identity": {
-          "$ref": "#/definitions/provisionedClusterIdentity"
-        },
         "properties": {
           "$ref": "#/definitions/provisionedClusterProperties"
         },
@@ -1354,10 +1351,6 @@
             "type": "string"
           },
           "description": "Resource tags"
-        },
-        "identity": {
-          "$ref": "#/definitions/provisionedClusterIdentity",
-          "description": "The identity of the provisioned cluster."
         }
       },
       "description": "The provisionedClusterInstances resource patch definition."
@@ -1816,38 +1809,6 @@
         }
       }
     },
-    "provisionedClusterIdentity": {
-      "type": "object",
-      "required": [
-        "type"
-      ],
-      "properties": {
-        "principalId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The principal id of provisioned cluster identity. This property will only be provided for a system assigned identity."
-        },
-        "tenantId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The tenant id associated with the provisioned cluster. This property will only be provided for a system assigned identity."
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of identity used for the provisioned cluster. The type SystemAssigned, includes a system created identity. The type None means no identity is assigned to the provisioned cluster.",
-          "enum": [
-            "None",
-            "SystemAssigned"
-          ],
-          "default": "SystemAssigned",
-          "x-ms-enum": {
-            "name": "ResourceIdentityType",
-            "modelAsString": false
-          }
-        }
-      },
-      "description": "Identity for the Provisioned cluster."
-    },
     "hybridIdentityMetadata": {
       "description": "Defines the hybridIdentityMetadata.",
       "required": [
@@ -1884,10 +1845,6 @@
         "publicKey": {
           "description": "Onboarding public key for provisioning the Managed identity for the HybridAKS cluster.",
           "type": "string"
-        },
-        "identity": {
-          "$ref": "#/definitions/provisionedClusterIdentity",
-          "description": "The identity of the provisioned cluster."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState"
