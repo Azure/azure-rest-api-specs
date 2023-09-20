@@ -1561,6 +1561,18 @@
     "NetworkProfile": {
       "type": "object",
       "properties": {
+        "loadBalancerProfile": {
+          "type": "object",
+          "description": "LoadBalancerProfile - Profile of the cluster load balancer.",
+          "properties": {
+            "count": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Count - Number of load balancer VMs. The default value is 0.",
+              "default": 0
+            }
+          }
+        },
         "networkPolicy": {
           "type": "string",
           "description": "NetworkPolicy - Network policy used for building Kubernetes network. Possible values include: 'calico', 'flannel'. Default is 'calico'",

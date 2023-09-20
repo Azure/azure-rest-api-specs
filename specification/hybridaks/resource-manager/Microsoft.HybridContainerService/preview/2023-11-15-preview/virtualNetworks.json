@@ -316,6 +316,24 @@
         "infraVnetProfile": {
           "type": "object",
           "properties": {
+            "hci": {
+              "type": "object",
+              "properties": {
+                "mocGroup": {
+                  "type": "string",
+                  "description": "Resource group in MOC(Microsoft On-premises Cloud)"
+                },
+                "mocLocation": {
+                  "type": "string",
+                  "description": "Location in MOC(Microsoft On-premises Cloud)"
+                },
+                "mocVnetName": {
+                  "type": "string",
+                  "description": "Virtual Network name in MOC(Microsoft On-premises Cloud)"
+                }
+              },
+              "description": "Infra network profile for HCI platform"
+            },
             "vmware": {
               "type": "object",
               "properties": {
