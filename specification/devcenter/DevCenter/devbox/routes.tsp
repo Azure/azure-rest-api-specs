@@ -420,7 +420,7 @@ authentication context.
   >;
 }
 
-interface DevCenterOperations {
+interface DevBoxesDevCenterOperations {
   @doc("Lists Dev Boxes that the caller has access to in the DevCenter.")
   @route("/devboxes")
   @get
