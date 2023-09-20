@@ -1337,9 +1337,6 @@
               "Location": {
                 "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/MigrationService"
             }
           }
         },
@@ -1999,7 +1996,18 @@
         },
         "migrationService": {
           "description": "Resource Id of the Migration Service.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.DataMigration/migrationServices"
+              },
+              {
+                "type": "Microsoft.DataMigration/sqlMigrationServices"
+              }
+            ]
+          }
         },
         "migrationOperationId": {
           "description": "ID tracking current migration operation.",
@@ -2102,6 +2110,7 @@
         "password": {
           "description": "Password to connect to Mongo.",
           "type": "string",
+          "x-ms-secret": true,
           "x-ms-mutability": [
             "create",
             "update"
@@ -2118,6 +2127,7 @@
         "connectionString": {
           "description": "ConnectionString to connect to Mongo.",
           "type": "string",
+          "x-ms-secret": true,
           "x-ms-mutability": [
             "create",
             "update"
@@ -2131,11 +2141,13 @@
       "properties": {
         "sourceDatabase": {
           "description": "Source database name.",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "sourceCollection": {
           "description": "Source collection name.",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "targetDatabase": {
           "description": "Target database name.",
