@@ -22,7 +22,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the storagetasks.
+These are the global settings for the storageactions.
 
 ```yaml
 openapi-type: arm
@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2023-01-01` is specified on the co
 
 ```yaml $(tag) == 'package-2023-01-01'
 input-file:
-  - Microsoft.StorageTasks/stable/2023-01-01/storagetasks.json
+  - Microsoft.StorageActions/stable/2023-01-01/storageactions.json
 ```
 
 ---
@@ -55,7 +55,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
     after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_storagetasks']
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_storageactions']
 ```
 
 ## Go

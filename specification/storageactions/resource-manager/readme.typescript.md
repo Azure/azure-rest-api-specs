@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ```yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-storagetasks"
-  output-folder: "$(typescript-sdks-folder)/sdk/storagetaskss/arm-storagetasks"
+  package-name: "@azure/arm-storageactions"
+  output-folder: "$(typescript-sdks-folder)/sdk/storageactions/arm-storageactions"
   payload-flattening-threshold: 1
   generate-metadata: true
 ```

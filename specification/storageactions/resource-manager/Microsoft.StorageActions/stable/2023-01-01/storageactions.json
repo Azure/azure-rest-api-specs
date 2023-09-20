@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "StorageTasksManagementClient",
-    "description": "The Azure Storage Tasks Management API.",
+    "title": "StorageActionsManagementClient",
+    "description": "The Azure Storage Actions Management API.",
     "version": "2023-01-01"
   },
   "host": "management.azure.com",
@@ -16,12 +16,12 @@
     "application/json"
   ],
   "paths": {
-    "/providers/Microsoft.StorageTasks/operations": {
+    "/providers/Microsoft.StorageActions/operations": {
       "get": {
         "tags": [
-          "Storage Tasks Operations"
+          "Storage Actions Operations"
         ],
-        "description": "Lists all of the available Storage Tasks Rest API operations.",
+        "description": "Lists all of the available Storage Actions Rest API operations.",
         "operationId": "Operations_List",
         "x-ms-examples": {
           "OperationsList": {
@@ -52,7 +52,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageTasks/storageTasks/{storageTaskName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageActions/storageTasks/{storageTaskName}": {
       "put": {
         "tags": [
           "StorageTasks"
@@ -271,7 +271,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageTasks/storageTasks": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageActions/storageTasks": {
       "get": {
         "tags": [
           "StorageTasks"
@@ -310,7 +310,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageTasks/storageTasks": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageActions/storageTasks": {
       "get": {
         "tags": [
           "StorageTasks"
@@ -352,7 +352,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageTasks/storageTasks/{storageTaskName}/storageTaskAssignments": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageActions/storageTasks/{storageTaskName}/storageTaskAssignments": {
       "get": {
         "tags": [
           "StorageTasks"
@@ -403,7 +403,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageTasks/storageTasks/{storageTaskName}/reports": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageActions/storageTasks/{storageTaskName}/reports": {
       "get": {
         "tags": [
           "StorageTasks"
@@ -460,7 +460,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageTasks/previewActions": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageActions/locations/{location}/previewActions": {
       "post": {
         "tags": [
           "StorageTasks"
@@ -478,6 +478,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location to perform preview of the actions."
           },
           {
             "name": "parameters",
@@ -890,7 +897,7 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.StorageTasks/storageTasks"
+                "type": "Microsoft.StorageActions/storageTasks"
               }
             ]
           },

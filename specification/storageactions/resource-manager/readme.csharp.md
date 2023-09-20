@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 2
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.Azure.Management.StorageTasks
-  output-folder: $(csharp-sdks-folder)/StorageTasks/Microsoft.Azure.Management.StorageTasks/src/Generated
+  namespace: Microsoft.Azure.Management.StorageActions
+  output-folder: $(csharp-sdks-folder)/StorageActions/Microsoft.Azure.Management.StorageActions/src/Generated
 ```
