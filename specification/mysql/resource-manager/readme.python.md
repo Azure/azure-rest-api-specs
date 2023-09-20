@@ -27,6 +27,10 @@ batch:
   - tag: package-2020-01-01
 ```
 
+``` yaml $(multiapiscript)
+clear-output-folder: false
+```
+
 ### Tag: package-flexibleserver-2023-06-01-preview and python
 
 These settings apply only when `--tag=package-flexibleserver-2023-06-01-preview --python` is specified on the command line.
