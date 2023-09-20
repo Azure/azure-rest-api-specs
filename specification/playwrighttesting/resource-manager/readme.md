@@ -25,7 +25,10 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 These are the global settings for the playwrighttesting.
 
 ```yaml
+title: PlaywrightTestingClient
+description: Azure Playwright testing management service
 openapi-type: arm
+openapi-subtype: rpaas
 tag: package-2023-10-01-preview
 ```
 
