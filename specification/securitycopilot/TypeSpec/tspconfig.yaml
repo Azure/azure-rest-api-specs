@@ -21,9 +21,9 @@ emit: [
   "@typespec/openapi3",
   "@azure-tools/typespec-autorest",
   "@azure-tools/typespec-csharp",
-  #"@azure-tools/typespec-java",
-  #"@azure-tools/typespec-python",
-  #"@azure-tools/typespec-ts"
+  "@azure-tools/typespec-java",
+  "@azure-tools/typespec-python",
+  "@azure-tools/typespec-ts"
 ]
 options:
   "@typespec/openapi3":
@@ -33,22 +33,22 @@ options:
     emitter-output-dir: "{project-root}/{autorest-dir}"
     output-file: "SecurityCopilotSkillContextAPI.OpenAPI2.{version-name}"
   "@azure-tools/typespec-csharp":
-    package-dir: "Microsoft.Security.Copilot.SkillsetAuthoring"
-    namespace: "{package-dir}"
+    package-dir: "{package}"
+    namespace: "{package}"
     clear-output-folder: false
     save-inputs: true
   "@azure-tools/typespec-java":
-    package-name: "{package}"
-    emitter-output-dir: "{project-root}/{java-sdk-folder}/{version-name}/{package-name}"
+    package-dir: "{package}"
     namespace: "{package}"
     clear-output-folder: false
+    save-inputs: true
   "@azure-tools/typespec-python":
-    package-name: "{package}"
-    emitter-output-dir: "{project-root}/{python-sdk-folder}/{version-name}/{package-name}"
+    package-dir: "{package}"
     namespace: "{package}"
     clear-output-folder: false
+    save-inputs: true
   "@azure-tools/typespec-ts":
-    package-name: "{package}"
-    emitter-output-dir: "{project-root}/{js-sdk-folder}/{version-name}/{package-name}"
+    package-dir: "{package}"
     namespace: "{package}"
     clear-output-folder: false
+    save-inputs: true
