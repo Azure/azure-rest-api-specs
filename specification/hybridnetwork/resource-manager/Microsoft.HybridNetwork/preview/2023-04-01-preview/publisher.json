@@ -950,8 +950,8 @@
         "tags": [
           "NetworkFunctionDefinitionVersions"
         ],
-        "operationId": "HelmPackageVersionsList_Post",
-        "description": "Get information about network function definition version overview.",
+        "operationId": "ApplicationVersionsList_Post",
+        "description": "Get information about helm package versions in network function definition version overview.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -976,7 +976,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./common.json#/parameter/ListApplicationVersionsBodyParameters"
+              "$ref": "./common.json#/parameters/ListApplicationVersionsBodyParameters"
             }
           }
         ],
@@ -1008,13 +1008,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/networkFunctionDefinitionGroups/{networkFunctionDefinitionGroupName}/networkFunctionDefinitionVersions/{networkFunctionDefinitionVersionName}/listImages": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/networkFunctionDefinitionGroups/{networkFunctionDefinitionGroupName}/networkFunctionDefinitionVersions/{networkFunctionDefinitionVersionName}/listArtifacts": {
       "post": {
         "tags": [
           "NetworkFunctionDefinitionVersions"
         ],
-        "operationId": "ImageList_Post",
-        "description": "Get information about images in a helm chart in network function definition version overview.",
+        "operationId": "ArtifactList_Post",
+        "description": "Get information about artifacts in a helm package in network function definition version overview.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1039,7 +1039,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./common.json#/parameter/ListImagesBodyParameters"
+              "$ref": "./common.json#/parameters/ListArtifactsBodyParameters"
             }
           }
         ],
@@ -1062,7 +1062,7 @@
         },
         "x-ms-examples": {
           "Get network function definition version overview": {
-            "$ref": "./examples/NetworkFunctionDefinitionVersionListImages.json"
+            "$ref": "./examples/NetworkFunctionDefinitionVersionListArtifacts.json"
           }
         },
         "x-ms-long-running-operation": true,
