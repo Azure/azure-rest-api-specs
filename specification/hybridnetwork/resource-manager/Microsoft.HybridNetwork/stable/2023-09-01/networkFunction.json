@@ -201,6 +201,9 @@
           "Create network function resource": {
             "$ref": "./examples/NetworkFunctionCreate.json"
           },
+          "Create network function resource with secrets": {
+            "$ref": "./examples/NetworkFunctionCreateSecret.json"
+          },
           "Create first party network function resource": {
             "$ref": "./examples/NetworkFunctionFirstPartyCreate.json"
           },
@@ -531,6 +534,10 @@
     "NetworkFunctionPropertiesFormat": {
       "type": "object",
       "description": "Network function properties.",
+      "required": [
+        "configurationType"
+      ],
+      "discriminator": "configurationType",
       "properties": {
         "provisioningState": {
           "readOnly": true,
@@ -578,18 +585,9 @@
           "type": "boolean",
           "description": "Indicates if software updates are allowed during deployment."
         },
-        "deploymentValues": {
-          "type": "string",
-          "description": "The JSON-serialized deployment values from the user."
-        },
-        "secretDeploymentValues": {
-          "type": "string",
-          "description": "The JSON-serialized secret deployment values from the user.",
-          "x-ms-secret": true,
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ]
+        "configurationType": {
+          "$ref": "./common.json#/definitions/configurationType",
+          "description": "The value which indicates if NF  values are secrets"
         },
         "roleOverrideValues": {
           "type": "array",
@@ -599,6 +597,43 @@
           "description": "The role configuration override values from the user."
         }
       }
+    },
+    "NetworkFunctionValueWithSecrets": {
+      "description": "NetworkFunction with secrets.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkFunctionPropertiesFormat"
+        }
+      ],
+      "properties": {
+        "secretDeploymentValues": {
+          "type": "string",
+          "description": "The JSON-serialized secret deployment values from the user. This contains secrets like passwords,keys etc",
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "Secret"
+    },
+    "NetworkFunctionValueWithoutSecrets": {
+      "description": "NetworkFunction with no secrets.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkFunctionPropertiesFormat"
+        }
+      ],
+      "properties": {
+        "deploymentValues": {
+          "type": "string",
+          "description": "The JSON-serialized deployment values from the user."
+        }
+      },
+      "x-ms-discriminator-value": "Open"
     },
     "NetworkFunctionListResult": {
       "type": "object",
