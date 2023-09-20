@@ -317,7 +317,7 @@ model DistributionPolicy {
 The number of seconds after which any offers created under this policy will be
 expired.
 """)
-  offerExpiresAfterSeconds?: float32;
+  offerExpiresAfterSeconds?: float64;
 
   @doc("Abstract base class for defining a distribution mode")
   mode?: DistributionMode;
@@ -508,7 +508,7 @@ label selector
   value?: unknown;
 
   @doc("Describes how long this label selector is valid in seconds.")
-  expiresAfterSeconds?: float32;
+  expiresAfterSeconds?: float64;
 
   @doc("Pushes the job to the front of the queue as long as this selector is active.")
   expedite?: boolean;
@@ -674,7 +674,7 @@ model RouterJobPositionDetails {
   queueLength: int32;
 
   @doc("Estimated wait time of the job rounded up to the nearest minute")
-  estimatedWaitTimeMinutes: float32;
+  estimatedWaitTimeMinutes: float64;
 }
 
 @doc("Request payload for unassigning a job.")
@@ -779,10 +779,10 @@ model RouterQueueStatistics {
 The estimated wait time of this queue rounded up to the nearest minute, grouped
 by job priority
 """)
-  estimatedWaitTimeMinutes?: Record<float32>;
+  estimatedWaitTimeMinutes?: Record<float64>;
 
   @doc("The wait time of the job that has been enqueued in this queue for the longest.")
-  longestJobWaitTimeMinutes?: float32;
+  longestJobWaitTimeMinutes?: float64;
 }
 
 @resource("workers")
@@ -828,7 +828,7 @@ A value indicating the workers capacity. A value of '1' means all capacity is
 consumed. A value of '0' means no capacity is currently consumed.
 """)
   @visibility("read")
-  loadRatio?: float32;
+  loadRatio?: float64;
 
   @doc("A flag indicating this worker is open to receive offers or not.")
   availableForOffers?: boolean;
@@ -1191,7 +1191,7 @@ model PassThroughWorkerSelectorAttachment extends WorkerSelectorAttachment {
   labelOperator: LabelOperator;
 
   @doc("Describes how long the attached label selector is valid in seconds.")
-  expiresAfterSeconds?: float32;
+  expiresAfterSeconds?: float64;
 
   @doc("The type discriminator describing the type of worker selector attachment")
   kind: "pass-through";
@@ -1212,7 +1212,7 @@ for weighted distributions.
 """)
 model QueueWeightedAllocation {
   @doc("The percentage of this weight, expressed as a fraction of 1.")
-  weight: float32;
+  weight: float64;
 
   @doc("""
 A collection of queue selectors that will be applied if this allocation is
@@ -1333,7 +1333,7 @@ selection
 @doc("Trigger for an exception action on exceeding wait time")
 model WaitTimeExceptionTrigger extends ExceptionTrigger {
   @doc("Threshold for wait time for this trigger.")
-  thresholdSeconds: float32;
+  thresholdSeconds: float64;
 
   @doc("The type discriminator describing a sub-type of ExceptionTrigger")
   kind: "wait-time";
@@ -1390,7 +1390,7 @@ for weighted distributions.
 """)
 model WorkerWeightedAllocation {
   @doc("The percentage of this weight, expressed as a fraction of 1.")
-  weight: float32;
+  weight: float64;
 
   @doc("""
 A collection of worker selectors that will be applied if this allocation is
