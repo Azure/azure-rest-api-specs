@@ -515,41 +515,25 @@
       "type": "object",
       "properties": {
         "listName": {
-          "description": "The the name of the suppression list. This value must match one of the valid sender usernames of the sending domain.",
+          "description": "The the name of the suppression list. This value must match one of the valid sender usernames of the sending domain. This value can be null; a null listName will apply suppress the address from all emails sent by the parent domainsResource.",
           "type": "string"
         },
         "dataLocation": {
-          "description": "The location where the SuppressionList resource data is stored at rest.",
-          "type": "string"
+          "description": "The location where the SuppressionList resource data is stored at rest. This property does not need to be set, the dataLocation of the parent domainsResource is used for storeing suppressionList data.",
+          "type": "string",
+          "readOnly": true
         },
         "lastUpdatedTimeStamp": {
           "description": "The date the resource was last updated.",
-          "type": "string"
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
         },
         "createdTimeStamp": {
           "description": "The date the resource was created.",
-          "type": "string"
-        }
-      }
-    },
-    "SuppressionListRemoveRequest": {
-      "description": "Object that describes what address will be removed from the suppression list.",
-      "type": "object",
-      "required": [
-        "addresses"
-      ],
-      "properties": {
-        "suppressionListName": {
-          "description": "Optional parameter to operate on suppression list associated with a valid sender user name. When this parameter is not present, by default the domain level suppression list will be operated on.",
-          "type": "string"
-        },
-        "addresses": {
-          "description": "List of email addresses to remove.",
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "type": "string"
-          }
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
         }
       }
     },
