@@ -26,7 +26,7 @@ These are the global settings for the AppPlatform API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-03
+tag: package-preview-2023-09
 ```
 
 ### Suppression
@@ -44,25 +44,62 @@ directive:
   - suppress: R3021
     from: appplatform.json
     reason:  The resource type name 'Spring' is a trademark so cannot be changed to be camel-case
+  - suppress: PathResourceTypeNameCamelCase
+    from: appplatform.json
+    reason:  The resource type name 'Spring' is a trademark so cannot be changed to be camel-case
+  - suppress: LroErrorContent
+    from: appplatform.json
+    reason:  Keeping it for legacy tooling. Will fix the error in next version
     #where:
     #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/configServers/default"]
     #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/monitoringSettings/default"]
+
+suppressions:
+  - code: LroPostReturn
+    reason: start,stop,flushDNSsetting api do not have return body in async operation
 ```
 
+
+### Tag: package-preview-2023-09
+
+These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-09'
+input-file:
+  - Microsoft.AppPlatform/preview/2023-09-01-preview/appplatform.json
+```
+### Tag: package-preview-2023-07
+
+These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-07'
+input-file:
+  - Microsoft.AppPlatform/preview/2023-07-01-preview/appplatform.json
+```
+
+### Tag: package-preview-2023-05
+
+These settings apply only when `--tag=package-preview-2023-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-05'
+input-file:
+  - Microsoft.AppPlatform/preview/2023-05-01-preview/appplatform.json
+```
 
 ### Tag: package-preview-2023-03
 
 These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-03'
+``` yaml $(tag) == 'package-preview-2023-03'
 input-file:
   - Microsoft.AppPlatform/preview/2023-03-01-preview/appplatform.json
 ```
 
 ### Tag: package-preview-2023-01
+
 These settings apply only when `--tag=package-preview-2023-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-01'
+``` yaml $(tag) == 'package-preview-2023-01'
 input-file:
   - Microsoft.AppPlatform/preview/2023-01-01-preview/appplatform.json
 ```
@@ -77,25 +114,28 @@ input-file:
 ```
 
 ### Tag: package-preview-2022-11
+
 These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-11'
+``` yaml $(tag) == 'package-preview-2022-11'
 input-file:
   - Microsoft.AppPlatform/preview/2022-11-01-preview/appplatform.json
 ```
 
 ### Tag: package-preview-2022-09
+
 These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-09'
+``` yaml $(tag) == 'package-preview-2022-09'
 input-file:
   - Microsoft.AppPlatform/preview/2022-09-01-preview/appplatform.json
 ```
 
 ### Tag: package-preview-2022-05
+
 These settings apply only when `--tag=package-preview-2022-05` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-05'
+``` yaml $(tag) == 'package-preview-2022-05'
 input-file:
   - Microsoft.AppPlatform/preview/2022-05-01-preview/appplatform.json
 ```
@@ -110,9 +150,10 @@ input-file:
 ```
 
 ### Tag: package-preview-2022-03
+
 These settings apply only when `--tag=package-preview-2022-03` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-03'
+``` yaml $(tag) == 'package-preview-2022-03'
 input-file:
   - Microsoft.AppPlatform/preview/2022-03-01-preview/appplatform.json
 ```
@@ -121,7 +162,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2022-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-01'
+``` yaml $(tag) == 'package-preview-2022-01'
 input-file:
   - Microsoft.AppPlatform/preview/2022-01-01-preview/appplatform.json
 ```
@@ -130,10 +171,11 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2021-09` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-09'
+``` yaml $(tag) == 'package-preview-2021-09'
 input-file:
   - Microsoft.AppPlatform/preview/2021-09-01-preview/appplatform.json
 ```
+
 ### Tag: package-preview-2021-06
 
 These settings apply only when `--tag=package-preview-2021-06` is specified on the command line.

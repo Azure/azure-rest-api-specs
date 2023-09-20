@@ -6143,6 +6143,7 @@
     },
     "VectorSearchAlgorithmConfiguration": {
       "type": "object",
+      "discriminator": "kind",
       "properties": {
         "name": {
           "externalDocs": {
@@ -6156,10 +6157,6 @@
           "type": "string",
           "description": "The name of the kind of algorithm being configured for use with vector search. Only `hnsw` is supported in the current preview.",
           "x-nullable": false
-        },
-        "hnswParameters": {
-          "$ref": "#/definitions/HnswParameters",
-          "description": "Contains the parameters specific to hnsw algorithm."
         }
       },
       "required": [
@@ -6167,6 +6164,23 @@
         "kind"
       ],
       "description": "Contains configuration options specific to the algorithm used during indexing time."
+    },
+    "HnswVectorSearchAlgorithmConfiguration": {
+      "type": "object",
+      "x-ms-discriminator-value": "hnsw",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VectorSearchAlgorithmConfiguration"
+        }
+      ],
+      "properties": {
+        "hnswParameters": {
+          "x-ms-client-name": "Parameters",
+          "$ref": "#/definitions/HnswParameters",
+          "description": "Contains the parameters specific to hnsw algorithm."
+        }
+      },
+      "description": "Contains configuration options specific to the hnsw approximate nearest neighbors algorithm used during indexing time."
     },
     "HnswParameters": {
       "type": "object",
@@ -7398,7 +7412,7 @@
         },
         "vectorSearchConfiguration": {
           "type": "string",
-          "x-nullable": false,
+          "x-nullable": true,
           "description": "The name of the vector search algorithm configuration that specifies the algorithm and optional parameters for searching the vector field."
         },
         "synonymMaps": {
@@ -7981,6 +7995,12 @@
           "x-nullable": false,
           "readOnly": true,
           "description": "The amount of storage in bytes consumed by the index."
+        },
+        "vectorIndexSize": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "The amount of memory in bytes consumed by vectors in the index."
         }
       },
       "required": [
@@ -11430,15 +11450,23 @@
           "x-ms-client-name": "skillsetCounter",
           "$ref": "#/definitions/ResourceCounter",
           "description": "Total number of skillsets."
+        },
+        "vectorIndexSize": {
+          "x-ms-client-name": "vectorIndexSizeCounter",
+          "$ref": "#/definitions/ResourceCounter",
+          "description": "Total memory consumption of all vector indexes within the service, in bytes."
         }
       },
       "required": [
+        "aliasesCount",
         "documentCount",
         "indexesCount",
         "indexersCount",
         "dataSourcesCount",
         "storageSize",
-        "synonymMaps"
+        "synonymMaps",
+        "skillsetCount",
+        "vectorIndexSize"
       ],
       "description": "Represents service-level resource counters and quotas."
     },
