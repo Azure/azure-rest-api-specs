@@ -2330,7 +2330,7 @@
         "resourceId": {
           "type": "string",
           "x-ms-client-name": "ResourceId",
-          "description": "Resource ID of the resource managing the volume."
+          "description": "Resource ID of the resource managing the volume, this is a restricted field and can only be set for internal use."
         }
       }
     },
@@ -2353,6 +2353,10 @@
           "description": "Volume size.",
           "type": "integer",
           "format": "int64"
+        },
+        "managedBy": {
+          "description": "Parent resource information.",
+          "$ref": "#/definitions/ManagedByInfo"
         }
       }
     },
