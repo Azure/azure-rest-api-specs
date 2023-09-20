@@ -344,6 +344,32 @@
           "description": "The storage account container sas uri"
         }
       }
+    },
+    "ListArtifactsBodyParameters": {
+      "type": "object",
+      "properties": {
+        "networkFunctionApplicationName": {
+          "type": "string",
+          "description": "Network function application name."
+        },
+        "deploymentValues": {
+          "type": "string",
+          "description": "Deployment values for the network function definition version."
+        },
+        "helmPackageVersion": {
+          "type": "string",
+          "description": "The version of the helm package."
+        }
+      }
+    },
+    "ListApplicationVersionsBodyParameters": {
+      "type": "object",
+      "properties": {
+        "networkFunctionApplicationName": {
+          "type": "string",
+          "description": "Network function application name."
+        }
+      }
     }
   },
   "parameters": {
@@ -570,38 +596,12 @@
         "$ref": "./common.json#/parameters/ListApplicationVersionsBodyParameters"
       }
     },
-    "ListApplicationVersionsBodyParameters": {
-      "type": "object",
-      "properties": {
-        "networkFunctionApplicationName": {
-          "type": "string",
-          "description": "Network function application name."
-        }
-      }
-    },
     "ListArtifactsParameters": {
       "name": "artifactParameters",
       "in": "body",
       "required": true,
       "schema": {
         "$ref": "./common.json#/parameters/ListArtifactsBodyParameters"
-      }
-    },
-    "ListArtifactsBodyParameters": {
-      "type": "object",
-      "properties": {
-        "networkFunctionApplicationName": {
-          "type": "string",
-          "description": "Network function application name."
-        },
-        "deploymentValues": {
-          "type": "string",
-          "description": "Deployment values for the network function definition version."
-        },
-        "helmPackageVersion": {
-          "type": "string",
-          "description": "The version of the helm package."
-        }
       }
     }
   }
