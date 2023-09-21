@@ -24,7 +24,7 @@ using Azure.Core;
   Supported Cognitive Services endpoints (protocol and hostname, for example:
   https://<resource-name>.cognitiveservices.azure.com).
   """)
-      endpoint: string,
+      endpoint: url,
     }
   )
 
