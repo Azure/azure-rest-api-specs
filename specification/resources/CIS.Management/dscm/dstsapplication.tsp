@@ -139,8 +139,19 @@ enum dstsApplicationProvisioningState {
 @armResourceOperations
 interface DstsApplication {
   @doc("dstsApplication creation")
-  @example("./examples/CreateDstsApplication.json", "Create dstsApplication")
+  @example(
+    "./examples/DstsApplication_CreateOrUpdate.json",
+    "Create DstsApplication"
+  )
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DstsApplicationResource>;
+  @example(
+    "./examples/DstsApplication_ListBySubscription.json",
+    "ListBySubscription DstsApplication"
+  )
   listBySubscription is ArmListBySubscription<DstsApplicationResource>;
+  @example(
+    "./examples/DstsApplication_ListByResourceGroup.json",
+    "ListByResourceGroup DstsApplication"
+  )
   listByResourceGroup is ArmResourceListByParent<DstsApplicationResource>;
 }
