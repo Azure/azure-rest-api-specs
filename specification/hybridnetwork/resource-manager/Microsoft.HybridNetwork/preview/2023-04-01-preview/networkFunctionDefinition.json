@@ -938,7 +938,7 @@
         "tags": [
           "NetworkFunctionDefinitionVersions"
         ],
-        "operationId": "ApplicationVersionsList_Post",
+        "operationId": "NetworkFunctionDefinitionVersions_ListApplicationVersions",
         "description": "Get information about helm package versions in network function definition version overview.",
         "parameters": [
           {
@@ -960,7 +960,15 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./common.json#/parameters/ListApplicationVersionsParameters"
+            "ListApplicationVersionsParameters": {
+              "name": "artifactParameters",
+              "description": "Post body parameters for list application versions API.",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/ListApplicationVersionsBodyParameters"
+              }
+            }
           }
         ],
         "responses": {
@@ -981,7 +989,7 @@
           }
         },
         "x-ms-examples": {
-          "Get network function definition version overview": {
+          "Get network function application versions overview": {
             "$ref": "./examples/NetworkFunctionDefinitionVersionListApplicationVersions.json"
           }
         },
@@ -996,7 +1004,7 @@
         "tags": [
           "NetworkFunctionDefinitionVersions"
         ],
-        "operationId": "ArtifactList_Post",
+        "operationId": "NetworkFunctionDefinitionVersions_ListArtifact",
         "description": "Get information about artifacts in a helm package in network function definition version overview.",
         "parameters": [
           {
@@ -1018,7 +1026,15 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./common.json#/parameters/ListArtifactsParameters"
+            "ListArtifactsParameters": {
+              "name": "artifactParameters",
+              "description": "Post body parameters for list artifacts API.",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/ListArtifactsBodyParameters"
+              }
+            }
           }
         ],
         "responses": {
@@ -1039,7 +1055,7 @@
           }
         },
         "x-ms-examples": {
-          "Get network function definition version overview": {
+          "Get artifacts overview in network function definition version": {
             "$ref": "./examples/NetworkFunctionDefinitionVersionListArtifacts.json"
           }
         },
@@ -2071,7 +2087,7 @@
           "description": "The artifact version."
         },
         "artifactState": {
-          "$ref": "#/definitions/ArtifactState",
+          "$ref": "./pureProxyArtifact.json#/definitions/ArtifactState",
           "description": "The artifact state"
         },
         "shaHash": {
@@ -2088,18 +2104,30 @@
         }
       }
     },
-    "ArtifactState": {
-      "type": "string",
-      "description": "The artifact state.",
-      "enum": [
-        "Unknown",
-        "Preview",
-        "Active",
-        "Deprecated"
-      ],
-      "x-ms-enum": {
-        "name": "ArtifactState",
-        "modelAsString": true
+    "ListArtifactsBodyParameters": {
+      "type": "object",
+      "properties": {
+        "networkFunctionApplicationName": {
+          "type": "string",
+          "description": "Network function application name."
+        },
+        "deploymentValues": {
+          "type": "string",
+          "description": "Deployment values for the network function definition version."
+        },
+        "helmPackageVersion": {
+          "type": "string",
+          "description": "The version of the helm package."
+        }
+      }
+    },
+    "ListApplicationVersionsBodyParameters": {
+      "type": "object",
+      "properties": {
+        "networkFunctionApplicationName": {
+          "type": "string",
+          "description": "Network function application name."
+        }
       }
     }
   }
