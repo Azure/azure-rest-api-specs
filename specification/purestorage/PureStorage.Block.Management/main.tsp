@@ -45,7 +45,7 @@ model StoragePool is TrackedResource<StoragePoolProperties> {
 model StoragePoolProperties {
   @doc("ID of StoragePool in Pure Storage systems.")
   @visibility("read")
-  storagePoolId: string;
+  storagePoolId?: string;
 
   @doc("Azure Availability Zone the Pool is located in.")
   availabilityZone: string;
@@ -55,7 +55,7 @@ model StoragePoolProperties {
 
   @doc("How long a deleted object is kept before eradication (time in seconds).")
   @visibility("read")
-  dataRetentionPeriod: int64;
+  dataRetentionPeriod?: int64;
 
   @doc("if true, VASA support is enabled and the AVS configuration parameters below may be passed to change the current password. if false, VASA support will be disabled (but previous password configuration is not lost).")
   avsEnabled: boolean;
