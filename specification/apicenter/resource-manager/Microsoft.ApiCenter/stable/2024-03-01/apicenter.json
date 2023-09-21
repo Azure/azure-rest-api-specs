@@ -2088,15 +2088,10 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ServiceProperties",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The identity of the service."
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
         }
       },
       "description": "The service entity.",
@@ -2134,10 +2129,13 @@
       "description": "The properties of the service.",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation."
+          "$ref": "#/definitions/ProvisioningState"
         }
-      }
+      },
+      "x-ms-mutability": [
+        "read",
+        "create"
+      ]
     },
     "ServiceUpdate": {
       "type": "object",
@@ -2161,8 +2159,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/MetadataSchemaProperties",
-          "description": "Metadata schema properties."
+          "$ref": "#/definitions/MetadataSchemaProperties"
         }
       }
     },
@@ -2226,8 +2223,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/WorkspaceProperties",
-          "description": "Workspace properties."
+          "$ref": "#/definitions/WorkspaceProperties"
         }
       }
     },
@@ -2287,8 +2283,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ApiProperties",
-          "description": "API properties."
+          "$ref": "#/definitions/ApiProperties"
         }
       }
     },
@@ -2398,8 +2393,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ApiVersionProperties",
-          "description": "API properties."
+          "$ref": "#/definitions/ApiVersionProperties"
         }
       },
       "allOf": [
@@ -2458,8 +2452,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ApiDefinitionProperties",
-          "description": "API definition properties."
+          "$ref": "#/definitions/ApiDefinitionProperties"
         }
       },
       "allOf": [
@@ -2532,8 +2525,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/EnvironmentProperties",
-          "description": "Environment properties."
+          "$ref": "#/definitions/EnvironmentProperties"
         }
       },
       "allOf": [
@@ -2615,8 +2607,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DeploymentProperties",
-          "description": "Deployment properties."
+          "$ref": "#/definitions/DeploymentProperties"
         }
       },
       "allOf": [
@@ -2636,6 +2627,7 @@
           "example": "Production deployment"
         },
         "description": {
+          "type": "string",
           "title": "Description",
           "description": "Description of the deployment.",
           "maxLength": 500,
@@ -2883,7 +2875,6 @@
           "title": "Email address",
           "description": "Email address of the contact.",
           "type": "string",
-          "format": "email",
           "maxLength": 100,
           "example": "john@contoso.com"
         }
