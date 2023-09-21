@@ -250,12 +250,12 @@
             "description": "Asset deletion is successful."
           },
           "202": {
+            "description": "Async operation to delete the Asset is created.",
             "headers": {
               "Location": {
                 "type": "string"
               }
-            },
-            "description": "Async operation to delete the Asset is created."
+            }
           },
           "204": {
             "description": "Asset deletion no-op since the resource does not exist."
@@ -451,7 +451,7 @@
         },
         "version": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "An integer that is incremented each time the resource is modified.",
           "readOnly": true
         },
@@ -487,6 +487,11 @@
           "type": "string",
           "description": "Asset serial number."
         },
+        "attributes": {
+          "type": "object",
+          "description": "A set of key-value pairs that contain custom attributes set by the customer.",
+          "additionalProperties": true
+        },
         "defaultDataPointsConfiguration": {
           "type": "string",
           "description": "Protocol-specific default configuration for all data points. Each data point can have its own configuration that overrides the default settings here. This assumes that each asset instance has one protocol."
@@ -494,11 +499,6 @@
         "defaultEventsConfiguration": {
           "type": "string",
           "description": "Protocol-specific default configuration for all events. Each event can have its own configuration that overrides the default settings here. This assumes that each asset instance has one protocol."
-        },
-        "attributes": {
-          "type": "object",
-          "description": "A set of key-value pairs that contain custom attributes set by the customer.",
-          "additionalProperties": true
         },
         "dataPoints": {
           "type": "array",
@@ -630,7 +630,7 @@
                 "properties": {
                   "code": {
                     "type": "integer",
-                    "format": "int64",
+                    "format": "int32",
                     "description": "Error code for classification of errors (ex: 400, 404, 500, etc.)."
                   },
                   "message": {
@@ -644,7 +644,7 @@
             },
             "version": {
               "type": "integer",
-              "format": "int64",
+              "format": "int32",
               "description": "A read only incremental counter indicating the number of times the configuration has been modified from the perspective of the current actual (Edge) state of the Asset. Edge would be the only writer of this value and would sync back up to the cloud. In steady state, this should equal version."
             }
           },
