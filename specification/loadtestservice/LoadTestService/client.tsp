@@ -25,6 +25,7 @@ interface AdministrationOperations {
     GetTestFile is LoadTestAdministration.getTestFile;
     ListTestFiles is LoadTestAdministration.listTestFiles;
     ListTests is LoadTestAdministration.listTests;
+    #suppress "@azure-tools/typespec-azure-core/byos"
     @projectedName("python", "BeginUploadTestFile")
     UploadTestFile is LoadTestAdministration.uploadTestFile;
     DeleteTestFile is LoadTestAdministration.deleteTestFile;

@@ -159,20 +159,28 @@ enum TestType{
   JMXTest
 }
 
-@added(APIVersions.v2023_04_01_preview)
-@doc("Load Type")
-enum LoadType{
-  @doc("Constant Load")
-  Constant,
-  @doc("Linear Load")
-  Linear,
-  @doc("StepUp Load")
-  StepUp,
-  @doc("Spike Load")
-  Spike,
+@doc("File info")
+@resource("files")
+@parentResource(Test)
+model TestFileInfo extends FileInfo {
+  @doc("Name of the file.")
+  @key
+  @visibility("create")
+  fileName: string;
+}
+
+@doc("File info")
+@resource("files")
+@parentResource(TestRun)
+model TestRunFileInfo extends FileInfo {
+  @doc("Name of the file.")
+  @key
+  @visibility("create")
+  fileName: string;
 }
 
 @doc("Load test model")
+@resource("tests")
 model Test {
   @doc("Pass fail criteria for a test.")
   passFailCriteria?: PassFailCriteria;
@@ -209,9 +217,10 @@ SECRET_VALUE.
 
   @doc("Unique test name as identifier.")
   @maxLength(50)
-    @minLength(2)
+  @minLength(2)
+  @key
   @visibility("read")
-  testId?: string;
+  testId: string;
 
   @maxLength(100)
   @doc("The test description.")
@@ -351,69 +360,9 @@ not required to upload.
   @doc("Configuration for quick load test")
   optionalLoadTestConfig?: OptionalLoadTestConfig;
 
-  @doc("Configurations for the URL based load test.")
-  @added(APIVersions.v2023_04_01_preview)
-  baseUrlLoadTestConfig?: BaseUrlLoadTestConfig;
-
   @added(APIVersions.v2023_04_01_preview)
   @doc("Type of test. e.g. QuickTest, UrlTest or JMXTest")
   testType?: TestType;
-}
-
-@doc("Configurations for the URL based load test.")
-@added(APIVersions.v2023_04_01_preview)
-model BaseUrlLoadTestConfig {
-  @doc("Type of load. e.g. Linear, Constant, StepUp, Spike")
-  loadType: LoadType;
-
-  @doc("No of concurrent virtual users")
-  virtualUsersPerEngine?: int32; 
-
-  @doc("Test run duration in seconds")
-  durationInSeconds?: int32;     
-}
-
-@doc("Configurations for the URL based load test with spike load pattern.")
-@added(APIVersions.v2023_04_01_preview)
-model SpikeUrlLoadTestConfig extends BaseUrlLoadTestConfig{
-  @doc("Type of load. e.g. Linear, Constant, StepUp, Spike")
-  loadType: LoadType.Spike;
-
-  @doc("Time to maintain a higher load after a spike in traffic in seconds")
-  spikeHoldLoadInSeconds?: int32;
-
-  @doc("Multiplier applied to the base load during a spike in traffic")
-  spikeMultiplier?: float32;  
-}
-
-@doc("Configurations for the URL based load test with step up load pattern.")
-@added(APIVersions.v2023_04_01_preview)
-model StepUpUrlLoadTestConfig extends BaseUrlLoadTestConfig{
-  @doc("Type of load. e.g. Linear, Constant, StepUp, Spike")
-  loadType: LoadType.StepUp;
-
-  @doc("Number of steps in the ramp - up phase")
-  rampUpSteps?: int32;  
-
-  @doc("Ramp up time in seconds")
-  rampUpTimeInSeconds?: int32;   
-}
-
-@doc("Configurations for the URL based load test with linear load pattern.")
-@added(APIVersions.v2023_04_01_preview)
-model LinearUrlLoadTestConfig extends BaseUrlLoadTestConfig {
-  @doc("Type of load. e.g. Linear, Constant, StepUp, Spike")
-  loadType: LoadType.Linear; 
-
-  @doc("Ramp up time seconds")
-  rampUpTimeInSeconds?: int32;   
-}
-
-@doc("Configurations for the URL based load test with constant load pattern.")
-@added(APIVersions.v2023_04_01_preview)
-model ConstantUrlLoadTestConfig extends BaseUrlLoadTestConfig {
-  @doc("Type of load. e.g. Linear, Constant, StepUp, Spike")
-  loadType: LoadType.Constant;  
 }
 
 @doc("Configuration for quick load test")
@@ -464,9 +413,6 @@ model TestInputArtifacts {
 model FileInfo {
   @doc("File URL.")
   url?: string;
-
-  @doc("Name of the file.")
-  fileName?: string;
 
   @doc("File type")
   fileType?: FileType;
@@ -641,12 +587,14 @@ model ResourceMetric {
 }
 
 @doc("Load test run model")
+@resource("testruns")
 model TestRun {
   @doc("Unique test run name as identifier")
   @visibility("read")
   @maxLength(50)
   @minLength(2)
-  testRunId?: string;
+  @key
+  testRunId: string;
 
   @doc("Pass fail criteria for a test.")
   passFailCriteria?: PassFailCriteria;

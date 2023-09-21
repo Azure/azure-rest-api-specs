@@ -13,67 +13,22 @@ using Autorest;
 
 namespace Microsoft.LoadTestService;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @tag("Test")
 interface LoadTestAdministration {
   @summary("Create a new test or update an existing test.")
   @doc("Create a new test or update an existing test.")
-  @route("/tests/{testId}")
-  @patch
   @example("./examples/CreateOrUpdateTest.json", "CreateOrUpdateTest")
-  createOrUpdateTest is Azure.Core.Foundations.Operation<
-    {
-      @header 
-      @doc("Content type.")
-      contentType: "application/merge-patch+json",
-      
-      @doc("""
-Unique name for the load test, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
-      @path
-      testId: string;
-
-      @doc("Load test model")
-      @body
-      body: Test;
-    },
-    ResourceCreatedOrOkResponse<Test>, {}, ErrorResponseBody
-  >;
-
+  createOrUpdateTest is StandardResourceOperations.ResourceCreateOrUpdate<Test>;
+  
   @summary("Delete a test by its name.")
   @doc("Delete a test by its name.")
-  @route("/tests/{testId}")
-  @delete
   @example("./examples/DeleteTest.json", "DeleteTest")
-  deleteTest is Azure.Core.Foundations.Operation<
-    {
-      @doc("""
-Unique name for the load test, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
-      @path
-      testId: string;
-    },
-    void, {}, ErrorResponseBody
-  >;
+  deleteTest is StandardResourceOperations.ResourceDelete<Test>;
 
   @summary("Get load test details by test name")
   @doc("Get load test details by test name")
-  @route("/tests/{testId}")
-  @get
   @example("./examples/GetTest.json", "GetTest")
-  getTest is Azure.Core.Foundations.Operation<
-    {
-      @doc("""
-Unique name for the load test, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
-      @path
-      testId: string;
-    },
-    Test, {}, ErrorResponseBody
-  >;
+  getTest is StandardResourceOperations.ResourceRead<Test>;
 
   @summary("""
 Get all load tests by the fully qualified resource Id e.g
@@ -83,47 +38,10 @@ subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/lo
 Get all load tests by the fully qualified resource Id e.g
 subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
 """)
-  @route("/tests")
-  @get
   @example("./examples/ListTests.json", "ListTests")
-  listTests is Azure.Core.Foundations.Operation<
-    {
-      @doc("""
-Sort on the supported fields in (field asc/desc) format. eg:
-lastModifiedDateTime asc. Supported fields - lastModifiedDateTime
-""")
-      @query
-      orderby?: string;
+  listTests is StandardResourceOperations.ResourceList<Test>;
 
-      @doc("""
-Prefix based, case sensitive search on searchable fields - displayName,
-createdBy. For example, to search for a test, with display name is Login Test,
-the search parameter can be Login.
-""")
-      @query
-      search?: string;
-
-      @doc("""
-Start DateTime(ISO 8601 literal format) of the last updated time range to
-filter tests.
-""")
-      @query
-      lastModifiedStartTime?: utcDateTime;
-
-      @doc("""
-End DateTime(ISO 8601 literal format) of the last updated time range to filter
-tests.
-""")
-      @query
-      lastModifiedEndTime?: utcDateTime;
-
-      @doc("Number of results in response.")
-      @query
-      maxpagesize?: int32;
-    },
-    TestsList, {}, ErrorResponseBody
-  >;
-
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/byos"  //It is limiting for users to have storage first before creating a load test also it will be breaking change for us.
   @summary("""
 Upload input file for a given test name. File size can't be more than 50 MB.
@@ -168,63 +86,20 @@ numeric, underscore or hyphen characters.
 
   @summary("Get test file by the file name.")
   @doc("Get test file by the file name.")
-  @route("/tests/{testId}/files/{fileName}")
-  @get
   @example("./examples/GetTestFile.json", "GetTestFile")
-  getTestFile is Azure.Core.Foundations.Operation<
-    {
-      @doc("""
-Unique name for the load test, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
-      @path
-      testId: string;
-
-      @doc("File name with file extension like app.jmx")
-      @path
-      fileName: string;
-    },
-    FileInfo, {}, ErrorResponseBody
-  >;
+  getTestFile is StandardResourceOperations.ResourceRead<TestFileInfo>;
 
   @summary("Delete file by the file name for a test")
   @doc("Delete file by the file name for a test")
-  @route("/tests/{testId}/files/{fileName}")
-  @delete
   @example("./examples/DeleteTestFile.json", "DeleteTestFile")
-  deleteTestFile is Azure.Core.Foundations.Operation<
-    {
-      @doc("""
-Unique name for the load test, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
-      @path
-      testId: string;
-
-      @doc("File name with file extension like app.jmx")
-      @path
-      fileName: string;
-    },
-    void, {}, ErrorResponseBody
-  >;
+  deleteTestFile is StandardResourceOperations.ResourceDelete<TestFileInfo>;
 
   @summary("Get all test files.")
   @doc("Get all test files.")
-  @route("/tests/{testId}/files")
-  @get
   @example("./examples/ListTestFiles.json", "ListTestFiles")
-  listTestFiles is Azure.Core.Foundations.Operation<
-    {
-      @doc("""
-Unique name for the load test, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
-      @path
-      testId: string;
-    },
-    FileInfoList, {}, ErrorResponseBody
-  >;
+  listTestFiles is StandardResourceOperations.ResourceList<TestFileInfo>;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("Associate an app component (collection of azure resources) to a test")
   @doc("Associate an app component (collection of azure resources) to a test")
   @route("/tests/{testId}/app-components")
@@ -250,6 +125,7 @@ numeric, underscore or hyphen characters.
     ResourceCreatedOrOkResponse<TestAppComponents>, {}, ErrorResponseBody
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("Get associated app component (collection of azure resources) for the given test.")
   @doc("Get associated app component (collection of azure resources) for the given test.")
   @route("/tests/{testId}/app-components")
@@ -267,6 +143,7 @@ numeric, underscore or hyphen characters.
     TestAppComponents, {}, ErrorResponseBody
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("Configure server metrics for a test")
   @doc("Configure server metrics for a test")
   @route("/tests/{testId}/server-metrics-config")
@@ -292,6 +169,7 @@ numeric, underscore or hyphen characters.
     ResourceCreatedOrOkResponse<TestServerMetricConfig>, {}, ErrorResponseBody
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("List server metrics configuration for the given test.")
   @doc("List server metrics configuration for the given test.")
   @route("/tests/{testId}/server-metrics-config")
@@ -310,160 +188,39 @@ numeric, underscore or hyphen characters.
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @tag("TestRun")
 interface LoadTestRun {
   @summary("Get test run details by name.")
   @doc("Get test run details by name.")
-  @route("/test-runs/{testRunId}")
-  @get
   @example("./examples/GetTestRun.json", "GetTestRun")
-  getTestRun is Azure.Core.Foundations.Operation<
-    {
-      @doc("""
-Unique name for the load test run, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
-      @path
-      testRunId: string;
-    },
-    TestRun, {}, ErrorResponseBody
-  >;
+  getTestRun is StandardResourceOperations.ResourceRead<TestRun>;
 
   @summary("Create and start a new test run with the given name.")
   @doc("Create and start a new test run with the given name.")
-  @route("/test-runs/{testRunId}")
-  @patch
   @example("./examples/CreateOrUpdateTestRun.json", "CreateOrUpdateTestRun")
-  createOrUpdateTestRun is Azure.Core.Foundations.Operation<
-    {
-      @header 
-      @doc("Content type.")
-      contentType: "application/merge-patch+json",
-      
-      @doc("""
-Unique name for the load test run, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
-      @path
-      testRunId: string;
-
-      @doc("""
-Existing test run identifier that should be rerun, if this is provided, the
-test will run with the JMX file, configuration and app components from the
-existing test run. You can override the configuration values for new test run
-in the request body.
-""")
-      @query
-      oldTestRunId?: string;
-
-      @doc("Load test run model")
-      @body
-      body: TestRun;
-    },
-    ResourceCreatedOrOkResponse<TestRun>, {}, ErrorResponseBody
-  >;
+  createOrUpdateTestRun is StandardResourceOperations.ResourceCreateOrUpdate<TestRun>;
 
   @summary("Delete a test run by its name.")
   @doc("Delete a test run by its name.")
-  @route("/test-runs/{testRunId}")
-  @delete
   @example("./examples/DeleteTestRun.json", "DeleteTestRun")
-  deleteTestRun is Azure.Core.Foundations.Operation<
-    {
-      @doc("""
-Unique name for the load test run, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
-      @path
-      testRunId: string;
-    },
-    void, {}, ErrorResponseBody
-  >;
+  deleteTestRun is StandardResourceOperations.ResourceDelete<TestRun>;
 
   @summary("Get test run file by file name.")
   @doc("Get test run file by file name.")
-  @route("/test-runs/{testRunId}/files/{fileName}")
-  @get
   @example("./examples/GetTestRunFile.json", "GetTestRunFile")
-  getTestRunFile is Azure.Core.Foundations.Operation<
-    {
-      @doc("""
-Unique name for the load test run, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
-      @path
-      testRunId: string;
+  listTestRuns is StandardResourceOperations.ResourceList<TestRun>;
 
-      @doc("Test run file name with file extension")
-      @path
-      fileName: string;
-    },
-    FileInfo, {}, ErrorResponseBody
-  >;
-
-  @summary("Get all test runs with given filters")
-  @doc("Get all test runs with given filters")
-  @route("/test-runs")
-  @get
-  @example("./examples/ListTestRuns.json", "ListTestRuns")
-  listTestRuns is Azure.Core.Foundations.Operation<
-    {
-      @doc("""
-Sort on the supported fields in (field asc/desc) format. eg: executedDateTime
-asc. Supported fields - executedDateTime
-""")
-      @query
-      orderby?: string;
-
-      @doc("""
-Prefix based, case sensitive search on searchable fields - description,
-executedUser. For example, to search for a test run, with description 500 VUs,
-the search parameter can be 500.
-""")
-      @query
-      search?: string;
-
-      @doc("Unique name of an existing load test.")
-      @query
-      testId?: string;
-
-      @doc("Start DateTime(ISO 8601 literal format) of test-run execution time filter range.")
-      @query
-      executionFrom?: utcDateTime;
-
-      @doc("End DateTime(ISO 8601 literal format) of test-run execution time filter range.")
-      @query
-      executionTo?: utcDateTime;
-
-      @doc("Comma separated list of test run status.")
-      @query
-      status?: string;
-
-      @doc("Number of results in response.")
-      @query
-      maxpagesize?: int32;
-    },
-    TestRunsList, {}, ErrorResponseBody
-  >;
+  @summary("Get test run file by file name.")
+  @doc("Get test run file by file name.")
+  @example("./examples/GetTestRunFile.json", "GetTestRunFile")
+  getTestRunFile is StandardResourceOperations.ResourceRead<TestRunFileInfo>;
 
   @summary("Stop test run by name.")
   @doc("Stop test run by name.")
-  @route("/test-runs/{testRunId}:stop")
-  @post
   @example("./examples/StopTestRun.json", "StopTestRun")
-  stopTestRun is Azure.Core.Foundations.Operation<
-    {
-      @doc("""
-Unique name for the load test run, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
-      @path
-      testRunId: string;
-    },
-    TestRun, {}, ErrorResponseBody
-  >;
+  stop is StandardResourceOperations.ResourceAction<TestRun, {}, TestRun, {}>;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("List the metric namespaces for a load test run.")
   @doc("List the metric namespaces for a load test run.")
   @route("/test-runs/{testRunId}/metric-namespaces")
@@ -481,6 +238,7 @@ numeric, underscore or hyphen characters.
     MetricNamespaceCollection, {}, ErrorResponseBody
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("List the metric definitions for a load test run.")
   @doc("List the metric definitions for a load test run.")
   @route("/test-runs/{testRunId}/metric-definitions")
@@ -502,6 +260,7 @@ numeric, underscore or hyphen characters.
     MetricDefinitionCollection, {}, ErrorResponseBody
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("List the metric values for a load test run.")
   @doc("List the metric values for a load test run.")
   @route("/test-runs/{testRunId}/metrics")
@@ -520,7 +279,6 @@ numeric, underscore or hyphen characters.
       @query
       aggregation?: string;
 
-      // TODO: check DPG sdks, this is the correct definition but might cause breaks for some languages
       @doc("The interval (i.e. timegrain) of the query.")
       @query
       interval?: Interval = Interval.PT1M;
@@ -547,13 +305,7 @@ The timespan of the query. It is a string with the following format 'startDateTi
     Metrics, {}, ErrorResponseBody
   >;
 
-  // @summary("List the dimension values for the given metric dimension name.")
-  // @doc("List the dimension values for the given metric dimension name.")
-  // //@route("/test-runs/{testRunId}/metrics/dimensions/{metricDimensionName}/values")
-  // listMetricDimensionValues is Azure.Core.ResourceList<
-  //   DimensionValueList, QueryParametersTrait<MetricDimensions>
-  // >;
-
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("List the dimension values for the given metric dimension name.")
   @doc("List the dimension values for the given metric dimension name.")
   @route("/test-runs/{testRunId}/metrics/dimensions/{name}/values")
@@ -576,31 +328,8 @@ numeric, underscore or hyphen characters.
   DimensionValueList, {}, ErrorResponseBody
 >;
 
-  // @summary("List the dimension values for the given metric dimension name.")
-  // @doc("List the dimension values for the given metric dimension name.")
-  // @route("/test-runs/{testRunId}/metrics/dimensions/{name}/values")
-  // @get
-  // listMetricDimensionValues(
-  //   @query apiVersion: string,
 
-  //   @doc("""
-  //   Unique name for the load test run, must contain only lower-case alphabetic,
-  //   numeric, underscore or hyphen characters.
-  //   """)
-  //   @path
-  //   testRunId: string;
-
-  //   @doc("Dimension name")
-  //   @path
-  //   name: string;
-
-  //   ...MetricDimensions;
-
-  // ): Record<string> | ErrorResponseBody;
-  
-  // listMetricDimensionValue is ResourceOperations.ResourceList<
-  //   DimensionValueList, QueryParametersTrait<MetricDimensions>>;
-
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("Associate an app component (collection of azure resources) to a test run")
   @doc("Associate an app component (collection of azure resources) to a test run")
   @route("/test-runs/{testRunId}/app-components")
@@ -626,6 +355,7 @@ numeric, underscore or hyphen characters.
     ResourceCreatedOrOkResponse<TestRunAppComponents>, {}, ErrorResponseBody
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("""
 Get associated app component (collection of azure resources) for the given test
 run.
@@ -649,6 +379,7 @@ numeric, underscore or hyphen characters.
     TestRunAppComponents, {}, ErrorResponseBody
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("Configure server metrics for a test run")
   @doc("Configure server metrics for a test run")
   @route("/test-runs/{testRunId}/server-metrics-config")
@@ -674,20 +405,20 @@ numeric, underscore or hyphen characters.
     ResourceCreatedOrOkResponse<TestRunServerMetricConfig>, {}, ErrorResponseBody
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("List server metrics configuration for the given test run.")
   @doc("List server metrics configuration for the given test run.")
   @route("/test-runs/{testRunId}/server-metrics-config")
   @get
   @example("./examples/ListTestRunServerMetricsConfig.json", "ListTestRunServerMetricsConfig")
-  op getServerMetricsConfig(
-      @doc("API version")
-      @query("api-version")
-      apiVersion: string,
+  getServerMetricsConfig is Azure.Core.Foundations.Operation<
+    {
       @doc("""
 Unique name for the load test run, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
       @path
       testRunId: string;
-  ) : TestRunServerMetricConfig | ErrorResponseBody;
+  }, TestRunServerMetricConfig, {}, ErrorResponseBody>;
+
 };
