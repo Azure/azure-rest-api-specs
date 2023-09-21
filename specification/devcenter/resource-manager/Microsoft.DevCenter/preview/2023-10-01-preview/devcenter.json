@@ -3176,31 +3176,31 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/environmentDefinitions/{environmentDefinitionName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/DevCenterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "#/parameters/EnvironmentDefinitionNameParameter"
+        }
+      ],
       "get": {
         "tags": [
           "Environment Definitions"
         ],
         "description": "Gets an environment definition from the catalog.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DevCenterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/CatalogNameParameter"
-          },
-          {
-            "$ref": "#/parameters/EnvironmentDefinitionNameParameter"
-          }
-        ],
         "operationId": "EnvironmentDefinitions_Get",
         "responses": {
           "200": {
@@ -3502,6 +3502,18 @@
         "adoGit": {
           "description": "Properties for an Azure DevOps catalog type.",
           "$ref": "#/definitions/GitCatalog"
+        },
+        "syncType": {
+          "enum": [
+            "Manual",
+            "Scheduled"
+          ],
+          "description": "Indicates the type of sync that is configured for the catalog.",
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CatalogSyncType",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -3574,43 +3586,37 @@
           "description": "Count of catalog items added during synchronization.",
           "type": "integer",
           "format": "int32",
-          "readOnly": true,
-          "minimum": 0
+          "readOnly": true
         },
         "updated": {
           "description": "Count of catalog items updated during synchronization.",
           "type": "integer",
           "format": "int32",
-          "readOnly": true,
-          "minimum": 0
+          "readOnly": true
         },
         "unchanged": {
           "description": "Count of catalog items that were unchanged during synchronization.",
           "type": "integer",
           "format": "int32",
-          "readOnly": true,
-          "minimum": 0
+          "readOnly": true
         },
         "removed": {
           "description": "Count of catalog items removed during synchronization.",
           "type": "integer",
           "format": "int32",
-          "readOnly": true,
-          "minimum": 0
+          "readOnly": true
         },
         "validationErrors": {
           "description": "Count of catalog items that had validation errors during synchronization.",
           "type": "integer",
           "format": "int32",
-          "readOnly": true,
-          "minimum": 0
+          "readOnly": true
         },
         "synchronizationErrors": {
           "description": "Count of synchronization errors that occured during synchronization.",
           "type": "integer",
           "format": "int32",
-          "readOnly": true,
-          "minimum": 0
+          "readOnly": true
         }
       }
     },

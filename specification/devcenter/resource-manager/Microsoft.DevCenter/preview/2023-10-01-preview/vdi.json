@@ -218,6 +218,9 @@
         "x-ms-examples": {
           "Pools_CreateOrUpdate": {
             "$ref": "./examples/Pools_Put.json"
+          },
+          "Pools_CreateOrUpdateWithManagedNetwork": {
+            "$ref": "./examples/Pools_PutWithManagedNetwork.json"
           }
         }
       },
@@ -1090,6 +1093,17 @@
         "displayName": {
           "type": "string",
           "description": "The display name of the pool."
+        },
+        "virtualNetworkType": {
+          "description": "Indicates whether the pool uses a Virtual Network managed by Microsoft or a customer provided network.",
+          "$ref": "#/definitions/VirtualNetworkType"
+        },
+        "managedVirtualNetworkRegions": {
+          "type": "array",
+          "description": "The regions of the managed virtual network (required when managedNetworkType is Managed).",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1197,6 +1211,18 @@
       ],
       "x-ms-enum": {
         "name": "SingleSignOnStatus",
+        "modelAsString": true
+      }
+    },
+    "VirtualNetworkType": {
+      "description": "Indicates a pool uses a Virtual Network managed by Microsoft (Managed), or a customer provided Network (Unmanaged).",
+      "type": "string",
+      "enum": [
+        "Managed",
+        "Unmanaged"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualNetworkType",
         "modelAsString": true
       }
     },
