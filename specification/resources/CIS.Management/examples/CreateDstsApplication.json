@@ -1,12 +1,18 @@
 {
-  "title": "CreateDstsApplications",
-  "operationId": "DstsApplications_CreateOrUpdate",
+  "title": "CreateDstsApplication",
+  "operationId": "DstsApplication_CreateOrUpdate",
   "parameters": {
     "subscriptionId": "mySubscriptionId",
     "resourceGroupName": "myResourceGroup",
     "resourceName": "prodUSEastAzcis",
+    "resource": {
+      "location": "eastus",
+      "tags": {
+        "Team": "Dev Exp"
+      }
+    },
     "api-version": "2023-08-22-preview",
-    "DstsApplications": {
+    "DstsApplicationProvide": {
       "location": "eastus",
       "properties": {
         "applicationAccount": {
@@ -79,7 +85,6 @@
         "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroup/providers/Microsoft.AzureCIS/dstsApplications/prodUSEastAzcis",
         "name": "prodUSEastAzcis",
         "type": "Microsoft.AzureCIS/dstsApplications",
-        "location": "eastus",
         "properties": {
           "applicationAccount": {
             "dstsInstance": "Instance 1",
@@ -150,7 +155,6 @@
         "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroup/providers/Microsoft.AzureCIS/dstsApplications/prodUSEastAzcis",
         "name": "prodUSEastAzcis",
         "type": "Microsoft.AzureCIS/dstsApplications",
-        "location": "eastus",
         "properties": {
           "applicationAccount": {
             "dstsInstance": "Instance 1",

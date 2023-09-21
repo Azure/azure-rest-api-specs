@@ -43,7 +43,7 @@
       "name": "Operations"
     },
     {
-      "name": "DstsApplications"
+      "name": "DstsApplication"
     }
   ],
   "paths": {
@@ -80,11 +80,11 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureCIS/dstsApplications": {
       "get": {
-        "operationId": "DstsApplications_ListBySubscription",
+        "operationId": "DstsApplication_ListBySubscription",
         "tags": [
-          "DstsApplications"
+          "DstsApplication"
         ],
-        "description": "List DstsApplicationsResource resources by subscription ID",
+        "description": "List DstsApplicationResource resources by subscription ID",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -97,7 +97,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DstsApplicationsResourceListResult"
+              "$ref": "#/definitions/DstsApplicationResourceListResult"
             }
           },
           "default": {
@@ -114,11 +114,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCIS/dstsApplications": {
       "get": {
-        "operationId": "DstsApplications_ListByResourceGroup",
+        "operationId": "DstsApplication_ListByResourceGroup",
         "tags": [
-          "DstsApplications"
+          "DstsApplication"
         ],
-        "description": "List DstsApplicationsResource resources by resource group",
+        "description": "List DstsApplicationResource resources by resource group",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -134,7 +134,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DstsApplicationsResourceListResult"
+              "$ref": "#/definitions/DstsApplicationResourceListResult"
             }
           },
           "default": {
@@ -151,11 +151,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCIS/dstsApplications/{resourceName}": {
       "put": {
-        "operationId": "DstsApplications_CreateOrUpdate",
+        "operationId": "DstsApplication_CreateOrUpdate",
         "tags": [
-          "DstsApplications"
+          "DstsApplication"
         ],
-        "description": "dstsApplications creation",
+        "description": "dstsApplication creation",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -180,21 +180,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DstsApplicationsResource"
+              "$ref": "#/definitions/DstsApplicationResource"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'DstsApplicationsResource' update operation succeeded",
+            "description": "Resource 'DstsApplicationResource' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/DstsApplicationsResource"
+              "$ref": "#/definitions/DstsApplicationResource"
             }
           },
           "201": {
-            "description": "Resource 'DstsApplicationsResource' create operation succeeded",
+            "description": "Resource 'DstsApplicationResource' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/DstsApplicationsResource"
+              "$ref": "#/definitions/DstsApplicationResource"
             },
             "headers": {
               "Retry-After": {
@@ -212,11 +212,11 @@
           }
         },
         "x-ms-examples": {
-          "Create dstsApplications": {
-            "$ref": "./examples/CreateDstsApplications.json"
+          "Create dstsApplication": {
+            "$ref": "./examples/CreateDstsApplication.json"
           },
-          "CreateDstsApplications": {
-            "$ref": "./examples/CreateDstsApplications.json"
+          "CreateDstsApplication": {
+            "$ref": "./examples/CreateDstsApplication.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -385,12 +385,12 @@
         "cloudId"
       ]
     },
-    "DstsApplicationsResource": {
+    "DstsApplicationResource": {
       "type": "object",
       "description": "dstsApplication Resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/DstsApplicationsResourceProperties",
+          "$ref": "#/definitions/DstsApplicationResourceProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -405,15 +405,15 @@
         }
       ]
     },
-    "DstsApplicationsResourceListResult": {
+    "DstsApplicationResourceListResult": {
       "type": "object",
-      "description": "The response of a DstsApplicationsResource list operation.",
+      "description": "The response of a DstsApplicationResource list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The DstsApplicationsResource items on this page",
+          "description": "The DstsApplicationResource items on this page",
           "items": {
-            "$ref": "#/definitions/DstsApplicationsResource"
+            "$ref": "#/definitions/DstsApplicationResource"
           }
         },
         "nextLink": {
@@ -426,9 +426,9 @@
         "value"
       ]
     },
-    "DstsApplicationsResourceProperties": {
+    "DstsApplicationResourceProperties": {
       "type": "object",
-      "description": "dstsApplications properties",
+      "description": "dstsApplication properties",
       "properties": {
         "applicationAccount": {
           "$ref": "#/definitions/ApplicationAccount",
@@ -439,7 +439,7 @@
           "description": "The application group. Optional."
         },
         "provisioningState": {
-          "$ref": "#/definitions/dstsApplicationsProvisioningState",
+          "$ref": "#/definitions/dstsApplicationProvisioningState",
           "description": "Provisioning state",
           "readOnly": true
         }
@@ -461,7 +461,7 @@
         "toIpAddress"
       ]
     },
-    "dstsApplicationsProvisioningState": {
+    "dstsApplicationProvisioningState": {
       "type": "string",
       "description": "Provisioning status of the resource.",
       "enum": [
@@ -471,7 +471,7 @@
         "Accepted"
       ],
       "x-ms-enum": {
-        "name": "dstsApplicationsProvisioningState",
+        "name": "dstsApplicationProvisioningState",
         "modelAsString": true,
         "values": [
           {

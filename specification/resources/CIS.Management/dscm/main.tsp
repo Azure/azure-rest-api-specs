@@ -1,4 +1,4 @@
-import "./dstsapplications.tsp";
+import "./dstsapplication.tsp";
 
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
