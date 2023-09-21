@@ -56,20 +56,30 @@ model TaskState {
 }
 
 @doc("The status of the task at the mentioned last update time.")
+@lroStatus
 @added(Versions.v2023_04_01)
 enum State {
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'notStarted' should have a documentation or description, please use decorator @doc to add it."
     notStarted,
+
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'running' should have a documentation or description, please use decorator @doc to add it."
     running,
+
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'succeeded' should have a documentation or description, please use decorator @doc to add it."
+    @lroSucceeded
     succeeded,
+
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'partiallyCompleted' should have a documentation or description, please use decorator @doc to add it."
     partiallyCompleted,
+
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'failed' should have a documentation or description, please use decorator @doc to add it."
+    @lroFailed
     failed,
+
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'cancelled' should have a documentation or description, please use decorator @doc to add it."
+    @lroCanceled
     cancelled,
+
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'cancelling' should have a documentation or description, please use decorator @doc to add it."
     cancelling,
 }
@@ -114,7 +124,7 @@ model JobState {
 
     @doc("job ID")
     @key
-    @visibility("read")
+    @visibility("read", "create")
     jobId: string;
 
     @doc("last updated date and time")
