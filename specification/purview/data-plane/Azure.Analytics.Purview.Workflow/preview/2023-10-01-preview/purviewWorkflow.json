@@ -223,7 +223,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/WorkflowValidationRuleViolation"
+              "$ref": "#/definitions/WorkflowValidationRuleViolationsList"
             }
           },
           "default": {
@@ -740,7 +740,7 @@
         "id": {
           "type": "string",
           "format": "uuid",
-          "description": "The ID of workflow."
+          "description": "The id of workflow."
         },
         "triggers": {
           "$ref": "#/definitions/Triggers"
@@ -1869,7 +1869,7 @@
       "items": {
         "type": "string"
       },
-      "description": "Filter items by workflow ID list.",
+      "description": "Filter items by workflow id list.",
       "x-ms-parameter-location": "method"
     },
     "runStatuses": {
@@ -1926,10 +1926,9 @@
       "required": false,
       "type": "array",
       "items": {
-        "type": "string",
-        "description": "Requestors' IDs to filter."
+        "type": "string"
       },
-      "description": "Requestors' IDs to filter.",
+      "description": "Requestors' ids to filter.",
       "x-ms-parameter-location": "method"
     },
     "assignees": {
@@ -1938,10 +1937,9 @@
       "required": false,
       "type": "array",
       "items": {
-        "type": "string",
-        "description": "Assignees' IDs to filter."
+        "type": "string"
       },
-      "description": "Assignees' IDs to filter.",
+      "description": "Assignees' ids to filter.",
       "x-ms-parameter-location": "method"
     },
     "workflowNameKeyword": {
@@ -1989,7 +1987,7 @@
           "modelAsString": true
         }
       },
-      "description": "To filter workflow runs in user's view or admin's view.",
+      "description": "To filter user's workflow runs or view as admin.",
       "x-ms-parameter-location": "method"
     }
   }
