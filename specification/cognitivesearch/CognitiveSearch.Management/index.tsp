@@ -141,23 +141,39 @@ model Index is TrackedResource<IndexProperties> {
   }
 
 @lroStatus
+@doc("Provisioning state of the index resource.")
 enum ProvisioningState {
-  ...ResourceProvisioningState,
+  ...ResourceProvisioningState,  
+  @doc("Index is provisioning.")
   Provisioning,
+
+  @doc("Index is deleting.")
   Deleting,
+
+  @doc("Index is accepted.")
   Accepted,
 }
 
-@doc("Authentication options for accessing the dataplane")
+@doc("Authentication options for accessing the dataplane.")
 enum AuthOption {
+  @doc("Azure Active Directory authentication option.")
   AadOnly,
+
+  @doc("Azure Active Directory and ApiKeys authentication option.")
   AadAndApiKeys
 }
 
-@doc("ApiKeys used to access the dataplane")
+@doc("ApiKeys used to access the dataplane.")
 enum KeyKind {
+  @doc("Primary read-write ApiKey.")
   PrimaryReadWriteKey,
+
+  @doc("Secondary read-write ApiKey.")
   SecondaryReadWriteKey,
+
+  @doc("Primary read-only ApiKey.")
   PrimaryReadOnlyKey,
+
+  @doc("Secondary read-only ApiKey.")
   SecondaryReadOnlyKey
 }
