@@ -386,10 +386,10 @@
         ],
         "responses": {
           "202": {
-            "description": "The user details are being deleted.",
+            "description": "Request to delete user details was accepted.",
             "headers": {
               "location": {
-                "description": "Location header contains the URL where the status of the long running operation can be checked",
+                "description": "Location header",
                 "type": "string"
               },
               "Azure-AsyncOperation": {
@@ -408,7 +408,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/generateSsoUrl": {
