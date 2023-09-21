@@ -607,6 +607,7 @@ model AnalyzeConversationLROTask extends TaskIdentifier {
 @doc("Enumeration of supported analysis tasks on a collection of conversations.")
 @added(Versions.v2023_04_01)
 enum AnalyzeConversationLROTaskKind {
+  @added(Versions.v2023_04_01)
   @doc("Conversational Summarization Task")
   ConversationalSummarizationTask,
 
@@ -626,6 +627,7 @@ enum AnalyzeConversationLROTaskKind {
 @doc("Enumeration of results for supported conversation analysis Results.")
 @added(Versions.v2023_04_01)
 enum AnalyzeConversationResultsKind {
+  @added(Versions.v2023_04_01)
   @doc("Conversational Summarization Results")
   ConversationalSummarizationResults,
   

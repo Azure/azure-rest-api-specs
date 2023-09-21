@@ -88,7 +88,7 @@ enum State {
 @added(Versions.v2023_04_01)
 model TaskIdentifier {
     @doc("task name")
-    taskName: string;
+    taskName?: string;
 }
 
 @doc("Base parameters object for a text analysis task.")
