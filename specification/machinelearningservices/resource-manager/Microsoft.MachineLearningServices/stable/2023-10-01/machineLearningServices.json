@@ -2498,6 +2498,15 @@
           ],
           "description": "The list of private endpoint connections in the workspace."
         },
+        "serverlessComputeCustomSubnet": {
+          "description": "The resource ID of an existing virtual network subnet in which serverless compute nodes should be deployed",
+          "type": "string",
+          "format": "arm-id"
+        },
+        "serverlessComputeNoPublicIP": {
+          "description": "The flag to signal if serverless compute nodes deployed in custom vNet would have no public IP addresses for a workspace with private endpoint",
+          "type": "boolean"
+        },
         "sharedPrivateLinkResources": {
           "type": "array",
           "items": {
@@ -2595,6 +2604,15 @@
         "primaryUserAssignedIdentity": {
           "description": "The user assigned identity resource id that represents the workspace identity.",
           "type": "string"
+        },
+        "serverlessComputeCustomSubnet": {
+          "description": "The resource ID of an existing virtual network subnet in which serverless compute nodes should be deployed",
+          "type": "string",
+          "format": "arm-id"
+        },
+        "serverlessComputeNoPublicIP": {
+          "description": "The flag to signal if serverless compute nodes deployed in custom vNet would have no public IP addresses for a workspace with private endpoint",
+          "type": "boolean"
         },
         "publicNetworkAccess": {
           "type": "string",
