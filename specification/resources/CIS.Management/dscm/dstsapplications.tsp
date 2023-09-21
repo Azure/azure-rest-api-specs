@@ -121,7 +121,7 @@ model ApplicationGroup {
   regions?: Array<string>;
 }
 
-@doc("Class for a contiguous range of IP Adresses.")
+@doc("Class for a contiguous range of IP Addresses.")
 model IpRange {
   @doc("To IP address.")
   toIpAddress: string;
@@ -139,10 +139,7 @@ enum dstsApplicationsProvisioningState {
 @armResourceOperations
 interface DstsApplications {
   @doc("dstsApplications creation")
-  @example(
-    "./examples/CreateDstsApplications.json",
-    "Create dstsApplications"
-  )
+  @example("./examples/CreateDstsApplications.json", "Create dstsApplications")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DstsApplicationsResource>;
   listBySubscription is ArmListBySubscription<DstsApplicationsResource>;
   listByResourceGroup is ArmResourceListByParent<DstsApplicationsResource>;
