@@ -953,6 +953,70 @@
         }
       }
     },
+    "/calling/callConnections/{callConnectionId}/participants:cancelAddParticipant": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Cancel add participant operation.",
+        "description": "Cancel add participant operation.",
+        "operationId": "CallConnection_CancelAddParticipant",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cancelAddParticipantRequest",
+            "in": "body",
+            "description": "Cancellation request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CancelAddParticipantRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "Repeatability-Request-ID",
+            "in": "header",
+            "description": "If specified, the client directs that the request is repeatable; that is, that the client can make the request multiple times with the same Repeatability-Request-Id and get back an appropriate response without the server executing the request multiple times. The value of the Repeatability-Request-Id is an opaque string representing a client-generated unique identifier for the request. It is a version 4 (random) UUID.",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "Repeatability-First-Sent",
+            "in": "header",
+            "description": "If Repeatability-Request-ID header is specified, then Repeatability-First-Sent header must also be specified. The value should be the date and time at which the request was first created, expressed using the IMF-fixdate form of HTTP-date. Example: Sun, 06 Nov 1994 08:49:37 GMT.",
+            "type": "string",
+            "format": "date-time-rfc1123"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Returns the cancelAddParticipant response",
+            "schema": {
+              "$ref": "#/definitions/CancelAddParticipantResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CallConnection_CancelAddParticipant": {
+            "$ref": "./examples/CallConnection_CancelAddParticipant.json"
+          }
+        }
+      }
+    },
     "/calling/callConnections/{callConnectionId}/participants/{participantRawId}": {
       "get": {
         "tags": [
@@ -1417,6 +1481,14 @@
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
+        },
+        "transferee": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "Transferee is the participant who is transferring the call."
+        },
+        "callbackUri": {
+          "description": "The callback URI to override the main callback URI.",
+          "type": "string"
         }
       }
     },
@@ -1456,6 +1528,10 @@
         },
         "operationContext": {
           "description": "The value to identify context of the operation.",
+          "type": "string"
+        },
+        "callbackUri": {
+          "description": "The callback URI to override the main callback URI.",
           "type": "string"
         }
       }
@@ -1618,6 +1694,10 @@
         "operationContext": {
           "description": "The value to identify context of the operation.",
           "type": "string"
+        },
+        "callbackUri": {
+          "description": "The callback URI to override the main callback URI.",
+          "type": "string"
         }
       }
     },
@@ -1764,6 +1844,10 @@
         "operationContext": {
           "description": "The value to identify context of the operation.",
           "type": "string"
+        },
+        "callbackUri": {
+          "description": "The callback URI to override the main callback URI.",
+          "type": "string"
         }
       }
     },
@@ -1787,6 +1871,10 @@
         },
         "operationContext": {
           "description": "The value to identify context of the operation.",
+          "type": "string"
+        },
+        "callbackUri": {
+          "description": "The callback URI to override the main callback URI.",
           "type": "string"
         }
       }
@@ -1863,6 +1951,10 @@
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
+        },
+        "callbackUri": {
+          "description": "The callback URI to override the main callback URI.",
+          "type": "string"
         }
       }
     },
@@ -1876,6 +1968,10 @@
         },
         "operationContext": {
           "description": "The operation context provided by client.",
+          "type": "string"
+        },
+        "invitationId": {
+          "description": "Invitation ID used to add a participant.",
           "type": "string"
         }
       }
@@ -1893,6 +1989,10 @@
         },
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "callbackUri": {
+          "description": "The callback URI to override the main callback URI.",
           "type": "string"
         }
       }
@@ -1931,6 +2031,41 @@
       "description": "The result payload for muting participants from the call.",
       "type": "object",
       "properties": {
+        "operationContext": {
+          "description": "The operation context provided by client.",
+          "type": "string"
+        }
+      }
+    },
+    "CancelAddParticipantRequest": {
+      "description": "Request payload for cancelling add participant request.",
+      "required": [
+        "invitationId"
+      ],
+      "type": "object",
+      "properties": {
+        "invitationId": {
+          "description": "Invitation ID used to add a participant.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "callbackUri": {
+          "description": "The callback URI to override the main callback URI.",
+          "type": "string"
+        }
+      }
+    },
+    "CancelAddParticipantResponse": {
+      "description": "Response payload for cancel add participant request.",
+      "type": "object",
+      "properties": {
+        "invitationId": {
+          "description": "Invitation ID used to cancel the add participant action.",
+          "type": "string"
+        },
         "operationContext": {
           "description": "The operation context provided by client.",
           "type": "string"
