@@ -381,7 +381,15 @@
         },
         "maintenanceConfigurationId": {
           "description": "Specifies maintenance configuration id to apply to this managed instance.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Maintenance/publicMaintenanceConfigurations"
+              }
+            ]
+          }
         }
       }
     },
