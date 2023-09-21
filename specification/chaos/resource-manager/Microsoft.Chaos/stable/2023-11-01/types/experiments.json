@@ -576,17 +576,39 @@
         }
       }
     },
+    "experimentExecution": {
+      "type": "object",
+      "description": "Model that represents the execution of a Experiment.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "String of the resource type.",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "description": "String of the fully qualified resource ID.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "String of the resource name.",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "The properties of experiment execution status.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/experimentExecutionProperties"
+        }
+      },
+      "additionalProperties": false
+    },
     "experimentExecutionProperties": {
       "description": "Model that represents the execution properties of an Experiment.",
       "type": "object",
       "properties": {
         "status": {
           "description": "The status of the execution.",
-          "type": "string",
-          "readOnly": true
-        },
-        "failureReason": {
-          "description": "The reason why the execution failed.",
           "type": "string",
           "readOnly": true
         },
@@ -611,13 +633,13 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/experimentExecutionProperties"
+            "$ref": "#/definitions/experimentExecution"
           },
           "description": "List of Experiment executions.",
           "readOnly": true
         },
         "nextLink": {
-          "$ref": "./common.json#/definitions/urlNullable",
+          "$ref": "./types/common.json#/definitions/urlNullable",
           "description": "URL to retrieve the next page of Experiment executions.",
           "readOnly": true
         }
