@@ -27,7 +27,7 @@ op analyzeStream is Azure.Core.RpcOperation<
       name: "features",
       format: "csv",
     })
-    @doc("A string indicating what visual feature types to return. Multiple values should be comma-separated. Valid visual feature types include: Categories, Tags, Description, Faces, ImageType, Color, Adult, Brands, Objects, and Celebrities. If VisualFeatures is not specified, then Categories, Tags, and Description are included in the response by default.")
+    @doc("A string indicating what visual feature types to return. Multiple values should be comma-separated. Valid visual feature types include: Tags, Caption, DenseCaptions, Objects, Read, SmartCrops, People. If VisualFeatures is not specified, then Categories, Tags, and Description are included in the response by default.")
     visualFeatures?: Array<visualFeatures>;
 
     @doc("Impl Detail")
@@ -42,7 +42,7 @@ op analyzeStream is Azure.Core.RpcOperation<
     @doc("The name of the custom trained model. This parameter needs to be specified if the parameter \"features\" is not specified.")
     modelName?: string;
 
-    @query("langauge")
+    @query("language")
     @doc("The desired language for output generation. If this parameter is not specified, the default value is \"en\". See https://aka.ms/cv-languages for a list of supported languages.")
     language?: string = "en";
 
@@ -84,7 +84,7 @@ op analyzeUrl is Azure.Core.RpcOperation<
     @doc("The name of the custom trained model. This parameter needs to be specified if the parameter \"features\" is not specified.")
     modelName?: string;
 
-    @query("langauge")
+    @query("language")
     @doc("The desired language for output generation. If this parameter is not specified, the default value is \"en\". See https://aka.ms/cv-languages for a list of supported languages.")
     language?: string = "en";
 
