@@ -34,8 +34,8 @@ op analyzeFromStream is Azure.Core.RpcOperation<
     @query("overload")
     overload: "stream";
 
-    @doc("Impl Detail")
-    @header("Content-Type")
+    @doc("The format of the image stream")
+    @header()
     contentType: "application/octet-stream";
 
     @query("model-name")
@@ -119,9 +119,9 @@ op segmentFromUrl is Azure.Core.RpcOperation<
   @query("mode")
   mode: segmentationMode;
 
-  @doc("Impl Detail")
-  @query("accept")
-  accept: "image/png";
+  @doc("The format of the image stream")
+  @header()
+  contentType: "application/octet-stream";
 },
 {
   @header 
@@ -145,7 +145,7 @@ op segmentFromStream is Azure.Core.RpcOperation<
 
   @doc("The format of the image stream")
   @header()
-  contentType:"image/jpeg" | "image/png" | "image/bmp" | "image/gif" | "image/tiff" | "application/octet-stream";
+  contentType: "application/octet-stream";
 
   @doc("The type of segmentation to perform")
   @query("mode")

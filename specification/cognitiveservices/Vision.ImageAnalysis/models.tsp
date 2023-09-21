@@ -327,19 +327,3 @@ model ImageUrl{
   @doc("Publicly reachable URL of an image.")
   url:url;
 }
-
-@doc("Image stream format")
-enum imageStreamFormat {
-  @doc("JPEG")
-  "image/jpeg",
-  @doc("PNG")
-  "image/png",
-  @doc("BMP")
-  "image/bmp",
-  @doc("GIF")
-  "image/gif",
-  @doc("TIFF")
-  "image/tiff",
-  @doc("octet-stream")
-  "application/octet-stream"
-}
