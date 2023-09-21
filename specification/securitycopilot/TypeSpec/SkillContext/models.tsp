@@ -52,8 +52,8 @@ model InvokeSkillRequest {
   @doc("Name of skill to be invoked")
   SkillName: string;
 
-  // @doc("Skill inputs")
-  // inputs?: Record<SkillVariable>;
+  @doc("Skill inputs")
+  inputs?: Record<SkillVariable>;
 }
 
 @doc("Skill variable parent entity adding additional attribute 'skillsource' to provide visibility to users as to what data/information was used in generating the output of a skill")
