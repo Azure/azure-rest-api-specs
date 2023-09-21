@@ -50,7 +50,7 @@ model Account {
   @key("accountId")
   @doc("The account id.")
   @visibility("read")
-  accountId: string;
+  id: string;
 
   @doc("The ARM fully-qualified resource id for the account.")
   @visibility("read")
@@ -60,63 +60,105 @@ model Account {
   @visibility("read")
   name: string;
 
+  @doc("The state of account - Active | Inactive")
+  @visibility("read")
+  state: AccountState;
+
+  @doc("The ARM-based subscription id for the account.")
+  @visibility("read")
+  subscriptionId: uuid;
+
+  @doc("The ARM-based subscription state - Registered | Unregistered | Warned | Suspended | Deleted")
+  @visibility("read")
+  subscriptionState: SubscriptionState;
+
   @doc("The Azure tenant id of the account.")
   @visibility("read")
-  tenantId?: uuid;
+  tenantId: uuid;
 
   @doc("The account resource ARM location, for eg. eastus, southeastasia.")
   @visibility("read")
   location: string;
 
-  @doc("The regionalAffinity feature enablement status for the account.")
+  @doc("This property sets the connection region for Playwright client workers to cloud-hosted browsers. If enabled, workers connect to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure region in which the workspace was initially created.")
   @visibility("read")
   regionalAffinity?: EnablementStatus = EnablementStatus.Enabled;
 
-  @doc("The scalableExecution feature enablement status for the account.")
+  @doc("When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations.")
   @visibility("read")
   scalableExecution?: EnablementStatus = EnablementStatus.Enabled;
 
-  @doc("The reporting feature enablement status for the account.")
+  @doc("When enabled, this feature allows the workspace to upload and display test results, including artifacts like traces and screenshots, in the Playwright portal. This enables faster and more efficient troubleshooting.")
   @visibility("read")
   reporting?: EnablementStatus = EnablementStatus.Disabled;
 }
 
-@doc("Model of an access-key linked to an account.")
-@resource("access-keys")
-@parentResource(Account)
-model AccessKey {
-  @key("accessKeyId")
-  @doc("The access-key id.")
-  @visibility("read")
-  accessKeyId: uuid;
+@doc("The account state.")
+enum AccountState {
+  @doc("The account is Active.")
+  Active,
 
-  @doc("The access-key name.")
+  @doc("The account is Inactive.")
+  Inactive,
+}
+
+@doc("The ARM-based subscription state.")
+enum SubscriptionState {
+  @doc("The subscription state is Registered.")
+  Registered,
+
+  @doc("The subscription state is Warned.")
+  Warned,
+
+  @doc("The subscription state is Suspended.")
+  Suspended,
+
+  @doc("The subscription state is Deleted.")
+  Deleted,
+
+  @doc("The subscription state is Unregistered.")
+  Unregistered,
+}
+
+@doc("Model of an access-token linked to an account.")
+@resource("access-tokens")
+@parentResource(Account)
+model AccessToken {
+  @key("accessTokenId")
+  @doc("The access-token id.")
+  @visibility("read")
+  id: uuid;
+
+  @minLength(3)
+  @maxLength(64)
+  @pattern("^[a-zA-Z]{1}[a-zA-Z0-9]{2,63}$")
+  @doc("The access-token name.")
   @visibility("read", "create")
   name: string;
 
-  @doc("The access-key JWT token.")
+  @doc("The access-token value in JWT format.")
   @visibility("read")
   jwtToken?: string;
 
-  @doc("The access-key createdAt utcDateTime.")
+  @doc("The access-token createdAt utcDateTime.")
   @visibility("read")
-  createdAt: utcDateTime;
+  createdAt?: utcDateTime;
 
-  @doc("The access-key expiryAt utcDateTime.")
+  @doc("The access-token expiryAt utcDateTime.")
   @visibility("read", "create")
   expiryAt: utcDateTime;
 
-  @doc("The access-key state.")
+  @doc("The access-token state - Active | Expired.")
   @visibility("read")
-  state: AccessKeyState;
+  state?: AccessTokenState;
 }
 
-@doc("The access-key state.")
-enum AccessKeyState {
-  @doc("The access-key is Active.")
+@doc("The access-token state.")
+enum AccessTokenState {
+  @doc("The access-token is Active.")
   Active,
 
-  @doc("The access-key is Expired.")
+  @doc("The access-token is Expired.")
   Expired,
 }
 
@@ -137,24 +179,33 @@ alias ServiceTraits = NoRepeatableRequests &
 
 alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
-interface AccessKeys {
-  // AccessKey Operations
+interface AccessTokens {
+  // AccessToken Operations
 
-  @doc("Creates an access-key with given access-key id in guid format.")
-  @example("./AccessKeys_CreateAccessKey.json", "AccessKeys_CreateAccessKey")
-  createAccessKey is Operations.ResourceCreateOrReplace<AccessKey>;
+  @doc("Creates an access-token with given access-token id in guid format.")
+  @example(
+    "./AccessTokens_CreateAccessToken.json",
+    "AccessTokens_CreateAccessToken"
+  )
+  createAccessToken is Operations.ResourceCreateOrReplace<AccessToken>;
 
-  @doc("Get an access-key for given access-key id in guid format.")
-  @example("./AccessKeys_GetAccessKey.json", "AccessKeys_GetAccessKey")
-  getAccessKey is Operations.ResourceRead<AccessKey>;
+  @doc("Get an access-token for given access-token id in guid format.")
+  @example("./AccessTokens_GetAccessToken.json", "AccessTokens_GetAccessToken")
+  getAccessToken is Operations.ResourceRead<AccessToken>;
 
-  @doc("Revoke an access-key with given access-key id in guid format.")
-  @example("./AccessKeys_DeleteAccessKey.json", "AccessKeys_DeleteAccessKey")
-  deleteAccessKey is Operations.ResourceDelete<AccessKey>;
+  @doc("Revoke an access-token with given access-token id in guid format.")
+  @example(
+    "./AccessTokens_DeleteAccessToken.json",
+    "AccessTokens_DeleteAccessToken"
+  )
+  deleteAccessToken is Operations.ResourceDelete<AccessToken>;
 
-  @doc("List access-keys for a given accountId.")
-  @example("./AccessKeys_ListAccessKeys.json", "AccessKeys_ListAccessKeys")
-  listAccessKeys is Operations.ResourceList<AccessKey>;
+  @doc("List access-tokens for a given accountId.")
+  @example(
+    "./AccessTokens_ListAccessTokens.json",
+    "AccessTokens_ListAccessTokens"
+  )
+  listAccessTokens is Operations.ResourceList<AccessToken>;
 }
 
 interface Accounts {
