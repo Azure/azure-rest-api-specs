@@ -13606,11 +13606,6 @@
       ],
       "type": "object",
       "properties": {
-        "excessCapacityReservation": {
-          "description": "Specifies the policy for distributing excess capacity\r\nbetween children within this group.",
-          "$ref": "#/definitions/ExcessCapacityReservation",
-          "x-nullable": true
-        },
         "offer": {
           "description": "Offer used by this capacity reservation group.",
           "$ref": "#/definitions/ServerlessOffer",
@@ -16594,44 +16589,6 @@
             "$ref": "#/definitions/EnvironmentVersionResource"
           }
         }
-      },
-      "additionalProperties": false
-    },
-    "ExcessCapacityReservation": {
-      "required": [
-        "policyType",
-        "weights"
-      ],
-      "type": "object",
-      "properties": {
-        "policyType": {
-          "description": "[Required] The Policy Type for a Capacity Reservation Group",
-          "$ref": "#/definitions/ExcessCapacityReservationPolicyType"
-        },
-        "weights": {
-          "description": "[Required] Distribution weights of excess capacity.",
-          "type": "object",
-          "additionalProperties": {
-            "format": "int32",
-            "type": "integer"
-          }
-        }
-      },
-      "additionalProperties": false
-    },
-    "ExcessCapacityReservationPolicyType": {
-      "enum": [
-        "Weighted"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ExcessCapacityReservationPolicyType",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Weighted"
-          }
-        ]
       },
       "additionalProperties": false
     },
