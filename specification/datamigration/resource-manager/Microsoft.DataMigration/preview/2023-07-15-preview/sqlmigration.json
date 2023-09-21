@@ -19,10 +19,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{targetResourceName}/providers/Microsoft.DataMigration/databaseMigrations/{migrationName}": {
       "get": {
         "tags": [
-          "DatabaseMigrationsCosmosDbMongo"
+          "DatabaseMigrations"
         ],
         "description": "Get Database Migration resource.",
-        "operationId": "DatabaseMigrationsCosmosDbRUMongo_Get",
+        "operationId": "DatabaseMigrationsMongoToCosmosDbRUMongo_Get",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -62,10 +62,10 @@
       },
       "put": {
         "tags": [
-          "DatabaseMigrationsCosmosDbMongo"
+          "DatabaseMigrations"
         ],
         "description": "Create or Update Database Migration resource.",
-        "operationId": "DatabaseMigrationsCosmosDbRUMongo_Create",
+        "operationId": "DatabaseMigrationsMongoToCosmosDbRUMongo_Create",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -121,10 +121,10 @@
       },
       "delete": {
         "tags": [
-          "DatabaseMigrationsCosmosDbMongo"
+          "DatabaseMigrations"
         ],
         "description": "Delete Database Migration resource.",
-        "operationId": "DatabaseMigrationsCosmosDbRUMongo_Delete",
+        "operationId": "DatabaseMigrationsMongoToCosmosDbRUMongo_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -176,10 +176,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{targetResourceName}/providers/Microsoft.DataMigration/databaseMigrations": {
       "get": {
         "tags": [
-          "DatabaseMigrationsCosmosDbMongo"
+          "DatabaseMigrations"
         ],
         "description": "Get Database Migration resources for the scope.",
-        "operationId": "DatabaseMigrationsCosmosDbRUMongo_GetForScope",
+        "operationId": "DatabaseMigrationsMongoToCosmosDbRUMongo_GetForScope",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -221,10 +221,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/mongoClusters/{targetResourceName}/providers/Microsoft.DataMigration/databaseMigrations/{migrationName}": {
       "get": {
         "tags": [
-          "DatabaseMigrationsCosmosDbMongo"
+          "DatabaseMigrations"
         ],
         "description": "Get Database Migration resource.",
-        "operationId": "DatabaseMigrationsCosmosDbvCoreMongo_Get",
+        "operationId": "DatabaseMigrationsMongoToCosmosDbvCoreMongo_Get",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -264,10 +264,10 @@
       },
       "put": {
         "tags": [
-          "DatabaseMigrationsCosmosDbMongo"
+          "DatabaseMigrations"
         ],
         "description": "Create or Update Database Migration resource.",
-        "operationId": "DatabaseMigrationsCosmosDbvCoreMongo_Create",
+        "operationId": "DatabaseMigrationsMongoToCosmosDbvCoreMongo_Create",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -323,10 +323,10 @@
       },
       "delete": {
         "tags": [
-          "DatabaseMigrationsCosmosDbMongo"
+          "DatabaseMigrations"
         ],
         "description": "Delete Database Migration resource.",
-        "operationId": "DatabaseMigrationsCosmosDbvCoreMongo_Delete",
+        "operationId": "DatabaseMigrationsMongoToCosmosDbvCoreMongo_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -378,10 +378,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/mongoClusters/{targetResourceName}/providers/Microsoft.DataMigration/databaseMigrations": {
       "get": {
         "tags": [
-          "DatabaseMigrationsCosmosDbMongo"
+          "DatabaseMigrations"
         ],
         "description": "Get Database Migration resources for the scope.",
-        "operationId": "DatabaseMigrationsCosmosDbvCoreMongo_GetForScope",
+        "operationId": "DatabaseMigrationsMongoToCosmosDbvCoreMongo_GetForScope",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -1455,6 +1455,9 @@
             "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was provided for parameter '{0}'.\n\n * 400 EmptyRequiredRequestBody - The request body must not be empty.\n\n * 400 GenericUser - User Failure when calling other Resource Provider.\n\n * 400 OperationIdNotFound - Operation ID '{0}' not found.\n\n * 400 OperationTypeNotFound - Operation Type '{0}' not found.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 DeleteServiceNotAllowed - One or more migrations attached to the migration service '{0}' are currently running. To delete the migration service, please wait until all migrations have completed or cancel the migrations manually and retry deleting the service. Running migrations are: '{1}'\n\n * 400 ServiceNameInvalid - Service name '{0}' is not valid. Please refer https://aka.ms/dmsv2naming for naming rules.\n\n * 403 AccessDenied - Access denied.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 405 SubscriptionNotReady - Subscription is not in Ready state.\n\n * 405 MigrationServiceNotSupported - \n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SubscriptionOperationInProgress - An operation on subscription is already in progress\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out.\n\n * 500 GenericSystem - System Failure when calling other Resource Provider.\n\n * 500 NoAdfInRegion - "
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "List database migrations attached to the service.": {
             "$ref": "./examples/ListMigrationsByMigrationService.json"
@@ -2010,7 +2013,7 @@
           }
         },
         "migrationOperationId": {
-          "description": "ID tracking current migration operation.",
+          "description": "ID for current migration operation.",
           "type": "string"
         },
         "migrationFailureError": {
