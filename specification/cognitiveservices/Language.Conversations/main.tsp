@@ -1702,7 +1702,7 @@ op analyzeConversation is Operations.ResourceCollectionAction<
 model SubmitAccepted {
   @statusCode _: 202;
 
-  @pollingLocation // this marks the response property or header that will contain a link to the Status Monitor
+  @pollingLocation
   @header("Operation-Location") 
   operationLocation: ResourceLocation<ResourceOperationStatus<AnalyzeConversationJobState>>;
 };
