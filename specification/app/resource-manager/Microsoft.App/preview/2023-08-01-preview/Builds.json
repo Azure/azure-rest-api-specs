@@ -308,12 +308,12 @@
           "description": "Configuration of the build."
         },
         "uploadEndpoint": {
-          "$ref": "#/definitions/BuildEndpoint",
+          "$ref": "#/definitions/Endpoint",
           "description": "Endpoint to which the source code should be uploaded.",
           "readOnly": true
         },
         "logStreamEndpoint": {
-          "$ref": "#/definitions/BuildEndpoint",
+          "$ref": "#/definitions/Endpoint",
           "description": "Endpoint from which the build logs can be streamed.",
           "readOnly": true
         }
@@ -393,7 +393,7 @@
         "server"
       ]
     },
-    "BuildEndpoint": {
+    "Endpoint": {
       "type": "object",
       "properties": {
         "endpoint": {
@@ -402,6 +402,7 @@
         },
         "token": {
           "type": "string",
+          "x-ms-secret": true,
           "description": "Authentication token to be passed to the endpoint via headers."
         }
       },
