@@ -8,7 +8,7 @@ openapi-type: arm
 openapi-subtype: rpaas
 ```
 
-```yaml $(tag) == '2021-08-10-privatepreview'
+```yaml $(tag) == '2023-08-22-preview'
 input-file: 
   - preview/2023-08-22-preview/dscm.json
 ```
