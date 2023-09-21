@@ -1747,7 +1747,7 @@ model SubmitAccepted {
 
 @added(Versions.v2023_04_01)
 @route("/language/analyze-conversations/jobs/{jobId}")
-op analyzeConversationJobStatus2(
+op analyzeConversationJobStatus(
   @doc("(Optional) if set to true, response will contain request and document level statistics.")
   @query showStats?: boolean, 
   @query `api-version`: Versions, 
@@ -1756,11 +1756,11 @@ op analyzeConversationJobStatus2(
 @added(Versions.v2023_04_01)
 @route("/language/analyze-conversations/jobs")
 @post
-@pollingOperation(analyzeConversationJobStatus2)
-op analyzeConversationSubmitJob2(@query `api-version`: Versions, analyzeConversationJobsInput: AnalyzeConversationJobsInput): SubmitAccepted | Azure.Core.Foundations.ErrorResponse;
+@pollingOperation(analyzeConversationJobStatus)
+op analyzeConversationSubmitJob(@query `api-version`: Versions, analyzeConversationJobsInput: AnalyzeConversationJobsInput): SubmitAccepted | Azure.Core.Foundations.ErrorResponse;
 
 @added(Versions.v2023_04_01)
 @route("/language/analyze-conversations/jobs/{jobId}:cancel")
 @post
-@pollingOperation(analyzeConversationJobStatus2)
-op analyzeConversationCancelJob2(@query `api-version`: Versions,  @pollingOperationParameter(analyzeConversationJobStatus2::parameters.jobId) @path jobId: string): SubmitAccepted | Azure.Core.Foundations.ErrorResponse;
+@pollingOperation(analyzeConversationJobStatus)
+op analyzeConversationCancelJob(@query `api-version`: Versions,  @pollingOperationParameter(analyzeConversationJobStatus::parameters.jobId) @path jobId: string): SubmitAccepted | Azure.Core.Foundations.ErrorResponse;
