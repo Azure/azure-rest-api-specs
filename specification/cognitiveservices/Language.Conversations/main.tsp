@@ -81,7 +81,6 @@ enum AnalyzeConversationTaskResultsKind {
 @resource("language")
 model AnalyzeConversationTask {
   @key
-  @visibility("read", "create")
   @doc("The base class of a conversation input task.")
   kind: AnalyzeConversationTaskKind;
 }
@@ -590,7 +589,6 @@ model AnalyzeConversationJobsInput {
   analysisInput: MultiLanguageConversationAnalysisInput;
 
   @key
-  @visibility("read", "create")
   @doc("Set of tasks to execute on the input conversation.")
   tasks: Array<AnalyzeConversationLROTask>;
 }

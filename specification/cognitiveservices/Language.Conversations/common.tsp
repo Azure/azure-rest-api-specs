@@ -124,7 +124,6 @@ model JobState {
 
     @doc("job ID")
     @key
-    @visibility("read", "create")
     jobId: string;
 
     @doc("last updated date and time")
