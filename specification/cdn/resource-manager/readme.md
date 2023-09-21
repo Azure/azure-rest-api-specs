@@ -30,7 +30,20 @@ description: Cdn Management Client
 openapi-type: arm
 tag: package-2023-05
 ```
+### Tag: package-preview-2023-07
 
+These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-07'
+input-file:
+  - Microsoft.Cdn/preview/2023-07-01-preview/afdx.json
+  - Microsoft.Cdn/preview/2023-07-01-preview/cdn.json
+  - Microsoft.Cdn/preview/2023-07-01-preview/cdnwebapplicationfirewall.json
+
+suppressions:
+  - code: PutRequestResponseSchemeArm
+    reason: False alarm. PUT request body is not superset of GET response body. We also do not support PATCH on keyGroups resource by design.  
+```
 
 ### Tag: package-2023-05
 

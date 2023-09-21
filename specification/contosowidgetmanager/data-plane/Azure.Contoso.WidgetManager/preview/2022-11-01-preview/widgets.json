@@ -52,26 +52,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Paged collection of WidgetSuite items",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "The WidgetSuite items on this page",
-                  "items": {
-                    "$ref": "#/definitions/WidgetSuite"
-                  },
-                  "x-ms-identifiers": []
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "The link to the next page of items"
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/PagedWidgetSuite"
             }
           },
           "default": {
@@ -81,8 +62,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -127,8 +108,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -162,7 +143,7 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/WidgetSuiteUpdate"
+              "$ref": "#/definitions/WidgetSuiteCreateOrUpdate"
             }
           }
         ],
@@ -200,8 +181,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -210,7 +191,8 @@
           "Widgets_CreateOrUpdateWidget": {
             "$ref": "./examples/Widgets_CreateOrUpdateWidgetSample.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Widgets_DeleteWidget",
@@ -267,8 +249,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -277,7 +259,8 @@
           "Delete widget by widget name using long-running operation.": {
             "$ref": "./examples/Widgets_DeleteWidgetSample.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/widgets/{widgetName}/operations/{operationId}": {
@@ -340,8 +323,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -471,7 +454,7 @@
         "createdAt"
       ]
     },
-    "FakedSharedModelUpdate": {
+    "FakedSharedModelCreateOrUpdate": {
       "type": "object",
       "description": "Faked shared model",
       "properties": {
@@ -485,6 +468,28 @@
           "description": "The created date."
         }
       }
+    },
+    "PagedWidgetSuite": {
+      "type": "object",
+      "description": "Paged collection of WidgetSuite items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The WidgetSuite items on this page",
+          "items": {
+            "$ref": "#/definitions/WidgetSuite"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "Versions": {
       "type": "string",
@@ -527,7 +532,7 @@
         "manufacturerId"
       ]
     },
-    "WidgetSuiteUpdate": {
+    "WidgetSuiteCreateOrUpdate": {
       "type": "object",
       "description": "A widget.",
       "properties": {
@@ -536,7 +541,7 @@
           "description": "The ID of the widget's manufacturer."
         },
         "sharedModel": {
-          "$ref": "#/definitions/FakedSharedModelUpdate",
+          "$ref": "#/definitions/FakedSharedModelCreateOrUpdate",
           "description": "The faked shared model."
         }
       }
