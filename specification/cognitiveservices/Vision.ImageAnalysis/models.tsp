@@ -283,7 +283,7 @@ model ImageAnalysisClientOptions {
   @doc("The name of the custom trained model. This parameter needs to be specified if the parameter \"features\" is not specified.")
   modelName?: string;
 
-  @query("langauge")
+  @query("language")
   @doc("The desired language for output generation. If this parameter is not specified, the default value is \"en\". See https://aka.ms/cv-languages for a list of supported languages.")
   language?: string = "en";
 
