@@ -108,6 +108,7 @@ model DeviceGroupProperties {
 enum OSFeedType {
   /** Retail OS feed type. */
   Retail,
+
   /** Retail evaluation OS feed type. */
   RetailEval,
 }
@@ -116,6 +117,7 @@ enum OSFeedType {
 enum UpdatePolicy {
   /** Update all policy. */
   UpdateAll,
+
   /** No update for 3rd party app policy. */
   No3rdPartyAppUpdates,
 }
