@@ -905,6 +905,7 @@
       "properties": {
         "timex": {
           "type": "string",
+          "format": "date-time",
           "description": "An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
         },
         "dateTimeSubKind": {
@@ -1823,7 +1824,65 @@
       ],
       "x-ms-enum": {
         "name": "RedactionCharacter",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "explationPoint",
+            "value": "!"
+          },
+          {
+            "name": "numberSign",
+            "value": "#"
+          },
+          {
+            "name": "dollar",
+            "value": "$"
+          },
+          {
+            "name": "perCent",
+            "value": "%"
+          },
+          {
+            "name": "ampersand",
+            "value": "&"
+          },
+          {
+            "name": "asterisk",
+            "value": "*"
+          },
+          {
+            "name": "plus",
+            "value": "+"
+          },
+          {
+            "name": "minus",
+            "value": "-"
+          },
+          {
+            "name": "equals",
+            "value": "="
+          },
+          {
+            "name": "questionMark",
+            "value": "?"
+          },
+          {
+            "name": "atSign",
+            "value": "@"
+          },
+          {
+            "name": "caret",
+            "value": "^"
+          },
+          {
+            "name": "underscore",
+            "value": "_"
+          },
+          {
+            "name": "tilde",
+            "value": "~"
+          }
+        ]
       }
     },
     "RelativeTo": {
@@ -2087,14 +2146,17 @@
       "properties": {
         "begin": {
           "type": "string",
+          "format": "date-time",
           "description": "represents the resolution of a date and/or time span. An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
         },
         "end": {
           "type": "string",
+          "format": "date-time",
           "description": "represents the resolution of a date and/or time span. An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
         },
         "duration": {
           "type": "string",
+          "format": "duration",
           "description": "An optional duration value formatted based on the ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations)"
         },
         "modifier": {

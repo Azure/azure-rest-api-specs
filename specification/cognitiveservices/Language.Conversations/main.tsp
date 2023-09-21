@@ -483,7 +483,7 @@ model DateTimeResolution extends BaseResolution {
   resolutionKind: resolutionKind.DateTimeResolution;
 
   @doc("An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)")
-  timex: string;
+  timex: utcDateTime;
 
   @doc("The DateTime SubKind")
   dateTimeSubKind: DateTimeSubKind;
@@ -528,13 +528,13 @@ model TemporalSpanResolution extends BaseResolution {
   resolutionKind: resolutionKind.TemporalSpanResolution;
 
   @doc("represents the resolution of a date and/or time span. An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)")
-  begin?: string;
+  begin?: utcDateTime;
 
   @doc("represents the resolution of a date and/or time span. An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)")
-  end?: string;
+  end?: utcDateTime;
 
   @doc("An optional duration value formatted based on the ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations)")
-  duration?: string;
+  duration?: duration;
 
   @doc("An optional modifier of a date/time instance.")
   modifier?: TemporalModifier;

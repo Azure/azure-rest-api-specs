@@ -542,31 +542,31 @@ model CustomResult {
 @doc("Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction.")
 enum RedactionCharacter{
     #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `!`,
+    explationPoint: "!",
     #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `#`,
+    numberSign: "#",
     #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `$`,
+    dollar: "$",
     #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `%`,
+    perCent: "%",
     #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `&`,
+    ampersand: "&",
     #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `*`,
+    asterisk: "*",
     #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `+`,
+    plus: "+",
     #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `-`,
+    minus: "-",
     #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `=`,
+    equals: "=",
     #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `?`,
+    questionMark: "?",
     #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `@`,
+    atSign: "@",
     #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `^`,
+    caret: "^",
     #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `_`,
+    underscore: "_",
     #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `~`,
+    tilde: "~",
 }
