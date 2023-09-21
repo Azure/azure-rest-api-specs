@@ -551,8 +551,8 @@
         "description": "Approve an approval.",
         "operationId": "Approval_Approve",
         "x-ms-examples": {
-          "ApprovalTask_Approve": {
-            "$ref": "./examples/ApproveApprovalTask.json"
+          "Approval_Approve": {
+            "$ref": "./examples/ApproveApproval.json"
           }
         },
         "parameters": [
@@ -566,7 +566,7 @@
             "name": "approvalResponseComment",
             "in": "body",
             "required": true,
-            "description": "The request body of approving an approval request.",
+            "description": "The request body of approving an approval type of workflow task.",
             "schema": {
               "$ref": "#/definitions/ApprovalResponseComment"
             }
@@ -591,10 +591,10 @@
           "WorkflowTasks"
         ],
         "description": "Reject an approval.",
-        "operationId": "ApprovalTask_Reject",
+        "operationId": "Approval_Reject",
         "x-ms-examples": {
-          "ApprovalRequest_Reject": {
-            "$ref": "./examples/RejectApprovalTask.json"
+          "Approval_Reject": {
+            "$ref": "./examples/RejectApproval.json"
           }
         },
         "parameters": [
@@ -608,7 +608,7 @@
             "name": "approvalResponseComment",
             "in": "body",
             "required": true,
-            "description": "The request body of rejecting an approval request.",
+            "description": "The request body of rejecting an approval type of workflow task.",
             "schema": {
               "$ref": "#/definitions/ApprovalResponseComment"
             }
@@ -635,7 +635,7 @@
         "description": "Reassign a workflow task.",
         "operationId": "WorkflowTask_Reassign",
         "x-ms-examples": {
-          "ApprovalRequest_Reassign": {
+          "WorkflowTask_Reassign": {
             "$ref": "./examples/ReassignWorkflowTask.json"
           }
         },
@@ -1493,7 +1493,7 @@
     },
     "Approval": {
       "x-ms-discriminator-value": "Approval",
-      "description": "The workflow approval task properties.",
+      "description": "The workflow approval properties.",
       "type": "object",
       "allOf": [
         {
@@ -1511,11 +1511,11 @@
     },
     "ApprovalDetail": {
       "type": "object",
-      "description": "The approval task details",
+      "description": "The approval details",
       "properties": {
         "approvalType": {
           "type": "string",
-          "description": "The approval type of an approval task.",
+          "description": "The approval type of an approval.",
           "enum": [
             "PendingOnAny",
             "PendingOnAll"
@@ -1527,7 +1527,7 @@
         },
         "status": {
           "type": "string",
-          "description": "The status of an approval task.",
+          "description": "The status of an approval.",
           "enum": [
             "Pending",
             "Approved",
@@ -1535,7 +1535,7 @@
             "Canceled"
           ],
           "x-ms-enum": {
-            "name": "ApprovalTaskStatus",
+            "name": "ApprovalStatus",
             "modelAsString": true
           }
         },
@@ -1555,11 +1555,11 @@
     },
     "ApproverResponse": {
       "type": "object",
-      "description": "The response of approvers for a workflow task.",
+      "description": "The response of approvers for an approval type of workflow task.",
       "properties": {
         "reply": {
           "type": "string",
-          "description": "The response for an approval task.",
+          "description": "The response for an approval type of workflow task.",
           "enum": [
             "Approved",
             "Rejected",
@@ -1572,7 +1572,7 @@
         },
         "comment": {
           "type": "string",
-          "description": "The comment of approving or rejecting an approval request."
+          "description": "The comment of approving or rejecting an approval type of workflow task."
         },
         "responseTime": {
           "type": "string",
@@ -1655,7 +1655,7 @@
       "properties": {
         "comment": {
           "type": "string",
-          "description": "The comment of approving or rejecting an approval request."
+          "description": "The comment of approving or rejecting an approval type of workflow task."
         }
       }
     },

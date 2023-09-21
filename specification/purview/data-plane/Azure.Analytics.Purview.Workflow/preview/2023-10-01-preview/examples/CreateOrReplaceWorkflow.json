@@ -33,7 +33,7 @@
               "and": [
                 {
                   "equals": [
-                    "@outputs('Start and wait for an approval')['body/outcome']",
+                    "@{outputs('Start and wait for an approval')['outcome']}",
                     "Approved"
                   ]
                 }
@@ -49,9 +49,9 @@
                 "inputs": {
                   "parameters": {
                     "emailSubject": "Glossary Term Create - APPROVED",
-                    "emailMessage": "Your request for Glossary Term @{triggerBody()['request']['term']['name']} is approved.",
+                    "emailMessage": "Your request for Glossary Term @{runInput()['term']['name']} is approved.",
                     "emailRecipients": [
-                      "@{triggerBody()['request']['requestor']}"
+                      "@{runInput()['requestor']}"
                     ]
                   }
                 },
@@ -69,9 +69,9 @@
                   "inputs": {
                     "parameters": {
                       "emailSubject": "Glossary Term Create - REJECTED",
-                      "emailMessage": "Your request for Glossary Term @{triggerBody()['request']['term']['name']} is rejected.",
+                      "emailMessage": "Your request for Glossary Term @{runInput()['term']['name']} is rejected.",
                       "emailRecipients": [
-                        "@{triggerBody()['request']['requestor']}"
+                        "@{runInput()['requestor']}"
                       ]
                     }
                   },
@@ -127,7 +127,7 @@
                 "and": [
                   {
                     "equals": [
-                      "@outputs('Start and wait for an approval')['body/outcome']",
+                      "@{outputs('Start and wait for an approval')['outcome']}",
                       "Approved"
                     ]
                   }
@@ -143,9 +143,9 @@
                   "inputs": {
                     "parameters": {
                       "emailSubject": "Glossary Term Create - APPROVED",
-                      "emailMessage": "Your request for Glossary Term @{triggerBody()['request']['term']['name']} is approved.",
+                      "emailMessage": "Your request for Glossary Term @{runInput()['term']['name']} is approved.",
                       "emailRecipients": [
-                        "@{triggerBody()['request']['requestor']}"
+                        "@{runInput()['requestor']}"
                       ]
                     }
                   },
@@ -167,9 +167,9 @@
                     "inputs": {
                       "parameters": {
                         "emailSubject": "Glossary Term Create - REJECTED",
-                        "emailMessage": "Your request for Glossary Term @{triggerBody()['request']['term']['name']} is rejected.",
+                        "emailMessage": "Your request for Glossary Term @{runInput()['term']['name']} is rejected.",
                         "emailRecipients": [
-                          "@{triggerBody()['request']['requestor']}"
+                          "@{runInput()['requestor']}"
                         ]
                       }
                     },
