@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
 
+using TypeSpec.Versioning;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
@@ -222,5 +223,98 @@ authentication context.
       top: int32;
     },
     EnvironmentTypeListResult
+  >;
+
+  
+  @added(APIVersions.v2023_09_01_preview)
+  @doc("Lists operations on the environment which have occurred within the past 90 days")
+  @route("/projects/{projectName}/users/{userId}/environments/{environmentName}/operations")
+  @get
+  ListOperations is Azure.Core.Foundations.Operation<
+    {
+      @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
+      @query
+      top: int32;
+
+      @doc("An OData filter clause to apply to the operation.")
+      @query
+      filter: string;
+
+      @doc("The DevCenter Project upon which to execute operations.")
+      @path
+      projectName: string;
+
+      @doc("""
+The AAD object id of the user. If value is 'me', the identity is taken from the
+authentication context.
+""")
+      @path
+      userId: string;
+
+      @doc("The name of the environment.")
+      @path
+      environmentName: string;
+    },
+    EnvironmentOperationListResult
+  >;
+
+  @added(APIVersions.v2023_09_01_preview)
+  @doc("Gets an environment action result.")
+  @route("/projects/{projectName}/users/{userId}/environments/{environmentName}/operations/{operationId}")
+  @get
+  GetOperation is Azure.Core.Foundations.Operation<
+    {
+      @doc("The DevCenter Project upon which to execute operations.")
+      @path
+      projectName: string;
+
+      @doc("""
+The AAD object id of the user. If value is 'me', the identity is taken from the
+authentication context.
+""")
+      @path
+      userId: string;
+
+      @doc("The name of the environment.")
+      @path
+      environmentName: string;
+
+      @doc("The id of the operation on an environment.")
+      @path
+      operationId: string;
+    },
+    EnvironmentOperation
+  >;
+
+  @added(APIVersions.v2023_09_01_preview)
+  @doc("Gets the logs for an operation on an environment.")
+  @route("/projects/{projectName}/users/{userId}/environments/{environmentName}/operations/{operationId}/logs")
+  @get
+  GetLogsByOperation is Azure.Core.Foundations.Operation<
+    {
+      @doc("The DevCenter Project upon which to execute operations.")
+      @path
+      projectName: string;
+
+      @doc("""
+The AAD object id of the user. If value is 'me', the identity is taken from the
+authentication context.
+""")
+      @path
+      userId: string;
+
+      @doc("The name of the environment.")
+      @path
+      environmentName: string;
+
+      @doc("The id of the operation on an environment.")
+      @path
+      operationId: string;
+
+      @doc("Accept header")
+      @header
+      Accept: "text/plain";
+    },
+    void
   >;
 }

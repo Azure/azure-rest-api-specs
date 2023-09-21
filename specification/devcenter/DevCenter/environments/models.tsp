@@ -3,6 +3,7 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "../shared/models.tsp";
 
+using TypeSpec.Versioning;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
@@ -154,4 +155,48 @@ or management group.
 
   @doc("Indicates whether this environment type is enabled for use in this project.")
   status: EnvironmentTypeEnableStatus;
+}
+
+@added(APIVersions.v2023_09_01_preview)
+enum EnvironmentOperationStatus {
+  @doc("The operation has not started.") NotStarted,
+  @doc("The operation is running.") Running,
+  @doc("The operation succeeded.") Succeeded,
+  @doc("The operation was canceled.") Canceled,
+  @doc("The operation failed.") Failed,
+}
+
+@added(APIVersions.v2023_09_01_preview)
+@doc("The action results list result.")
+model EnvironmentOperationListResult is Azure.Core.Page<EnvironmentOperation>;
+
+@added(APIVersions.v2023_09_01_preview)
+@doc("Information about an operation on an environment.")
+@discriminator("kind")
+model EnvironmentOperation {
+  @doc("The unique URI for the environment operation.")
+  uri: string;
+
+  @doc("Unique identifier for the environment operation.")
+  operationId: string;
+
+  @doc("The operation status.")
+  status: EnvironmentOperationStatus;
+
+  @doc("The object ID of the actor which initiated the operation.")
+  createdByObjectId?: string;
+
+  @doc("The time the operation started.")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  startTime?: utcDateTime;
+
+  @doc("The time the operation finished.")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  endTime?: utcDateTime;
+
+  @doc("Parameters object for the environment at the time of the operation.")
+  environmentParameters?: unknown;
+
+  @doc("Provisioning or operation error details. Populated only for error states.")
+  error?: CloudErrorBody;
 }
