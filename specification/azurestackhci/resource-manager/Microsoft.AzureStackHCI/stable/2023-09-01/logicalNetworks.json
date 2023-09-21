@@ -330,121 +330,7 @@
         "subnets": {
           "type": "array",
           "items": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string",
-                "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[_a-zA-Z0-9]$",
-                "description": "Name - The name of the resource that is unique within a resource group. This name can be used to access the resource."
-              },
-              "properties": {
-                "type": "object",
-                "x-ms-client-flatten": true,
-                "properties": {
-                  "addressPrefixes": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "description": "AddressPrefixes - List of CIDRs for this subnet - IPv4, IPv6"
-                  },
-                  "ipAllocationMethod": {
-                    "type": "string",
-                    "description": "IPAllocationMethod - The IP address allocation method. Possible values include: 'Static', 'Dynamic'",
-                    "enum": [
-                      "Dynamic",
-                      "Static"
-                    ],
-                    "x-ms-enum": {
-                      "name": "IpAllocationMethodEnum",
-                      "modelAsString": true
-                    }
-                  },
-                  "ipConfigurationReferences": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "description": "IPConfigurationID"
-                        }
-                      },
-                      "description": "IPConfigurationReference - Describes a IPConfiguration under the logical network"
-                    },
-                    "x-ms-identifiers": [],
-                    "description": "IPConfigurationReferences - list of IPConfigurationReferences"
-                  },
-                  "routeTable": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string",
-                        "description": "Etag - Gets a unique read-only string that changes whenever the resource is updated."
-                      },
-                      "name": {
-                        "type": "string",
-                        "description": "Name - READ-ONLY; Resource name."
-                      },
-                      "properties": {
-                        "type": "object",
-                        "x-ms-client-flatten": true,
-                        "properties": {
-                          "routes": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "name": {
-                                  "type": "string",
-                                  "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[_a-zA-Z0-9]$",
-                                  "description": "Name - name of the subnet"
-                                },
-                                "properties": {
-                                  "type": "object",
-                                  "x-ms-client-flatten": true,
-                                  "properties": {
-                                    "addressPrefix": {
-                                      "type": "string",
-                                      "description": "AddressPrefix - The destination CIDR to which the route applies."
-                                    },
-                                    "nextHopIpAddress": {
-                                      "type": "string",
-                                      "description": "NextHopIPAddress - The IP address packets should be forwarded to. Next hop values are only allowed in routes where the next hop type is VirtualAppliance."
-                                    }
-                                  },
-                                  "description": "RoutePropertiesFormat - Properties of the route."
-                                }
-                              },
-                              "description": "Route is associated with a subnet."
-                            },
-                            "description": "Routes - Collection of routes contained within a route table.",
-                            "x-ms-identifiers": []
-                          }
-                        },
-                        "description": "RouteTablePropertiesFormat route Table resource."
-                      }
-                    },
-                    "description": "RouteTable for the subnet"
-                  },
-                  "ipPools": {
-                    "type": "array",
-                    "description": "network associated pool of IP Addresses",
-                    "items": {
-                      "$ref": "#/definitions/IPPool"
-                    },
-                    "x-ms-identifiers": []
-                  },
-                  "vlan": {
-                    "type": "integer",
-                    "format": "int32",
-                    "description": "Vlan to use for the subnet"
-                  }
-                },
-                "description": "SubnetProperties - Properties of the subnet."
-              }
-            },
-            "description": "Subnet subnet in a logical network resource."
+            "$ref": "#/definitions/Subnet"
           },
           "description": "Subnet - list of subnets under the logical network",
           "x-ms-identifiers": []
@@ -558,6 +444,149 @@
         },
         "info": {
           "$ref": "#/definitions/IPPoolInfo"
+        }
+      }
+    },
+    "RoutePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "addressPrefix": {
+          "type": "string",
+          "description": "The destination CIDR to which the route applies."
+        },
+        "nextHopIpAddress": {
+          "type": "string",
+          "description": "The IP address packets should be forwarded to. Next hop values are only allowed in routes where the next hop type is VirtualAppliance."
+        }
+      },
+      "description": "RoutePropertiesFormat - Route resource."
+    },
+    "Route": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RoutePropertiesFormat",
+          "description": "Properties of the route."
+        },
+        "name": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[_a-zA-Z0-9]$",
+          "description": "Name - name of the subnet"
+        }
+      },
+      "description": "Route - Route resource."
+    },
+    "RouteTablePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "routes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Route"
+          },
+          "description": "Collection of routes contained within a route table.",
+          "x-ms-identifiers": []
+        }
+      },
+      "description": "RouteTablePropertiesFormat - Route Table resource."
+    },
+    "RouteTable": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Etag - Gets a unique read-only string that changes whenever the resource is updated."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name - READ-ONLY; Resource name."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RouteTablePropertiesFormat",
+          "description": "Properties of the route table."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type - READ-ONLY; Resource type."
+        }
+      },
+      "description": "Route table resource."
+    },
+    "SubnetPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "addressPrefix": {
+          "type": "string",
+          "description": "The address prefix for the subnet: Cidr for this subnet - IPv4, IPv6."
+        },
+        "addressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of address prefixes for the subnet."
+        },
+        "ipAllocationMethod": {
+          "type": "string",
+          "description": "IPAllocationMethod - The IP address allocation method. Possible values include: 'Static', 'Dynamic'",
+          "enum": [
+            "Dynamic",
+            "Static"
+          ],
+          "x-ms-enum": {
+            "name": "IpAllocationMethodEnum",
+            "modelAsString": true
+          }
+        },
+        "ipConfigurationReferences": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "ID": {
+                "type": "string",
+                "description": "IPConfigurationID"
+              }
+            },
+            "description": "IPConfigurationReference - Describes a IPConfiguration under the virtual network"
+          },
+          "x-ms-identifiers": [],
+          "description": "IPConfigurationReferences - list of IPConfigurationReferences"
+        },
+        "routeTable": {
+          "type": "object",
+          "$ref": "#/definitions/RouteTable"
+        },
+        "ipPools": {
+          "type": "array",
+          "description": "network associated pool of IP Addresses",
+          "items": {
+            "$ref": "#/definitions/IPPool"
+          },
+          "x-ms-identifiers": []
+        },
+        "vlan": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Vlan to use for the subnet"
+        }
+      },
+      "description": "Properties of the subnet."
+    },
+    "Subnet": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SubnetPropertiesFormat",
+          "description": "Properties of the subnet."
+        },
+        "name": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[_a-zA-Z0-9]$",
+          "description": "Name - The name of the resource that is unique within a resource group. This name can be used to access the resource."
         }
       }
     },
