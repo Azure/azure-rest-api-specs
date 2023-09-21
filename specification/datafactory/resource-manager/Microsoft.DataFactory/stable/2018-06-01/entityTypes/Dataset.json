@@ -290,6 +290,15 @@
         }
       ]
     },
+    "LakehouseLocation": {
+      "description": "The location of Microsoft Fabric Lakehouse Files dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetLocation"
+        }
+      ]
+    },
     "DatasetDataElement": {
       "description": "Columns that define the structure of the dataset.",
       "type": "object",
@@ -3576,6 +3585,33 @@
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "The database name of delta table. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "LakehouseTableDataset": {
+      "x-ms-discriminator-value": "LakehouseTable",
+      "description": "Microsoft Fabric Lakehouse Table.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Microsoft Fabric Lakehouse Table dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureBlobFSDatasetTypeProperties"
+        }
+      }
+    },
+    "LakehouseTableDatasetTypeProperties": {
+      "description": "Microsoft Fabric Lakehouse Table dataset properties.",
+      "properties": {
+        "table": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The name of Microsoft Fabric Lakehouse Table. Type: string (or Expression with resultType string)."
         }
       }
     }
