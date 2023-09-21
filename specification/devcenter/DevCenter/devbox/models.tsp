@@ -66,8 +66,22 @@ enum DevBoxActionDelayResultStatus {
 @doc("The Pool list result")
 model PoolListResult is Azure.Core.Page<Pool>;
 
+@doc("Project user")
+@resource("users")
+@parentResource(Project)
+model User {
+  @key("userName")
+  @visibility("read")
+  @doc("User name")
+  name: string;
+}
+
 @doc("A pool of Dev Boxes.")
+@resource("pools")
+@parentResource(Project)
 model Pool {
+  @key("poolName")
+  @visibility("read")
   @doc("Pool name")
   name: string;
 
@@ -176,7 +190,11 @@ is detected.
 model ScheduleListResult is Azure.Core.Page<Schedule>;
 
 @doc("A Schedule to execute action.")
+@resource("schedules")
+@parentResource(Pool)
 model Schedule {
+  @key("scheduleName")
+  @visibility("read")
   @doc("Display name for the Schedule")
   name: string;
 
@@ -197,10 +215,13 @@ model Schedule {
 model DevBoxListResult is Azure.Core.Page<DevBox>;
 
 @doc("A Dev Box")
+@resource("devboxes")
+@parentResource(User)
 model DevBox {
+  @key("devBoxName")
   @doc("Display name for the Dev Box")
   @visibility("read")
-  name?: string;
+  name: string; // TODO: (devBoxName) Please double check that this is the correct type for your scenario.
 
   @doc("Name of the project this Dev Box belongs to")
   @visibility("read")
@@ -288,7 +309,11 @@ model RemoteConnection {
 model DevBoxActionsListResult is Azure.Core.Page<DevBoxAction>;
 
 @doc("An action which will take place on a Dev Box.")
+@resource("actions")
+@parentResource(DevBox)
 model DevBoxAction {
+  @key("actionName")
+  @visibility("read")
   @doc("The name of the action.")
   name: string;
 

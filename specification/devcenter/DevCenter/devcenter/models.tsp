@@ -12,7 +12,10 @@ namespace DevCenter;
 model ProjectListResult is Azure.Core.Page<Project>;
 
 @doc("Project details.")
+@resource("projects")
 model Project {
+  @key("projectName")
+  @visibility("read")
   @doc("Name of the project")
   name: string;
 

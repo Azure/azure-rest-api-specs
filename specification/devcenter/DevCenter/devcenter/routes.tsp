@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
 
+using Azure.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
@@ -25,14 +26,15 @@ interface DevCenterOperations {
   >;
 
   @doc("Gets a project.")
-  @route("/projects/{projectName}")
-  @get
-  GetProject is Azure.Core.Foundations.Operation<
-    {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @path
-      projectName: string;
-    },
-    Project
-  >;
+  // @route("/projects/{projectName}")
+  // @get
+  // GetProject is Azure.Core.Foundations.Operation<
+  //   {
+  //     @doc("The DevCenter Project upon which to execute operations.")
+  //     @path
+  //     projectName: string;
+  //   },
+  //   Project
+  // >;
+  GetProject is StandardResourceOperations.ResourceRead<Project>;
 }

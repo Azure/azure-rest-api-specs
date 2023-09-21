@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
 
+using Azure.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
@@ -29,20 +30,21 @@ interface DevBoxesOperations {
   >;
 
   @doc("Gets a pool")
-  @route("/projects/{projectName}/pools/{poolName}")
-  @get
-  GetPool is Azure.Core.Foundations.Operation<
-    {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @path
-      projectName: string;
+  // @route("/projects/{projectName}/pools/{poolName}")
+  // @get
+  // GetPool is Azure.Core.Foundations.Operation<
+  //   {
+  //     @doc("The DevCenter Project upon which to execute operations.")
+  //     @path
+  //     projectName: string;
 
-      @doc("The name of a pool of Dev Boxes.")
-      @path
-      poolName: string;
-    },
-    Pool
-  >;
+  //     @doc("The name of a pool of Dev Boxes.")
+  //     @path
+  //     poolName: string;
+  //   },
+  //   Pool
+  // >;
+  GetPool is StandardResourceOperations.ResourceRead<Pool>;
 
   @doc("Lists available schedules for a pool.")
   @route("/projects/{projectName}/pools/{poolName}/schedules")
@@ -69,24 +71,25 @@ interface DevBoxesOperations {
   >;
 
   @doc("Gets a schedule.")
-  @route("/projects/{projectName}/pools/{poolName}/schedules/{scheduleName}")
-  @get
-  GetScheduleByPool is Azure.Core.Foundations.Operation<
-    {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @path
-      projectName: string;
+  // @route("/projects/{projectName}/pools/{poolName}/schedules/{scheduleName}")
+  // @get
+  // GetScheduleByPool is Azure.Core.Foundations.Operation<
+  //   {
+  //     @doc("The DevCenter Project upon which to execute operations.")
+  //     @path
+  //     projectName: string;
 
-      @doc("The name of a pool of Dev Boxes.")
-      @path
-      poolName: string;
+  //     @doc("The name of a pool of Dev Boxes.")
+  //     @path
+  //     poolName: string;
 
-      @doc("The name of a schedule.")
-      @path
-      scheduleName: string;
-    },
-    Schedule
-  >;
+  //     @doc("The name of a schedule.")
+  //     @path
+  //     scheduleName: string;
+  //   },
+  //   Schedule
+  // >;
+  GetScheduleByPool is StandardResourceOperations.ResourceRead<Schedule>;
 
   @doc("Lists Dev Boxes in the project for a particular user.")
   @route("/projects/{projectName}/users/{userId}/devboxes")
@@ -116,27 +119,28 @@ authentication context.
   >;
 
   @doc("Gets a Dev Box")
-  @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
-  @get
-  GetDevBoxByUser is Azure.Core.Foundations.Operation<
-    {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @path
-      projectName: string;
+//   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
+//   @get
+//   GetDevBoxByUser is Azure.Core.Foundations.Operation<
+//     {
+//       @doc("The DevCenter Project upon which to execute operations.")
+//       @path
+//       projectName: string;
 
-      @doc("""
-The AAD object id of the user. If value is 'me', the identity is taken from the
-authentication context.
-""")
-      @path
-      userId: string;
+//       @doc("""
+// The AAD object id of the user. If value is 'me', the identity is taken from the
+// authentication context.
+// """)
+//       @path
+//       userId: string;
 
-      @doc("The name of a Dev Box.")
-      @path
-      devBoxName: string;
-    },
-    DevBox
-  >;
+//       @doc("The name of a Dev Box.")
+//       @path
+//       devBoxName: string;
+//     },
+//     DevBox
+//   >;
+  GetDevBoxByUser is StandardResourceOperations.ResourceRead<DevBox>;
 
   @doc("Creates or replaces a Dev Box.")
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
@@ -308,31 +312,32 @@ authentication context.
   >;
 
   @doc("Gets an action.")
-  @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}")
-  @get
-  GetAction is Azure.Core.Foundations.Operation<
-    {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @path
-      projectName: string;
+//   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}")
+//   @get
+//   GetAction is Azure.Core.Foundations.Operation<
+//     {
+//       @doc("The DevCenter Project upon which to execute operations.")
+//       @path
+//       projectName: string;
 
-      @doc("""
-The AAD object id of the user. If value is 'me', the identity is taken from the
-authentication context.
-""")
-      @path
-      userId: string;
+//       @doc("""
+// The AAD object id of the user. If value is 'me', the identity is taken from the
+// authentication context.
+// """)
+//       @path
+//       userId: string;
 
-      @doc("The name of a Dev Box.")
-      @path
-      devBoxName: string;
+//       @doc("The name of a Dev Box.")
+//       @path
+//       devBoxName: string;
 
-      @doc("The name of an action that will take place on a Dev Box.")
-      @path
-      actionName: string;
-    },
-    DevBoxAction
-  >;
+//       @doc("The name of an action that will take place on a Dev Box.")
+//       @path
+//       actionName: string;
+//     },
+//     DevBoxAction
+//   >;
+  GetAction is StandardResourceOperations.ResourceRead<DevBoxAction>;
 
   @doc("Skips an occurrence of an action.")
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}:skip")
