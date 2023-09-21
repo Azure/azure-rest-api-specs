@@ -6196,7 +6196,7 @@
           "x-nullable": false
         },
         "kind": {
-          "type": "string",
+          "$ref": "#/definitions/VectorSearchAlgorithmKind",
           "description": "The name of the kind of algorithm being configured for use with vector search.",
           "x-nullable": false
         }
@@ -6317,6 +6317,30 @@
       },
       "description": "The similarity metric to use for vector comparisons."
     },
+    "VectorSearchAlgorithmKind": {
+      "type": "string",
+      "enum": [
+        "hnsw",
+        "exhaustiveKnn"
+      ],
+      "x-ms-enum": {
+        "name": "VectorSearchAlgorithmKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "hnsw",
+            "name": "Hnsw",
+            "description": "Hnsw (Hierarchical Navigable Small World), a type of approximate nearest neighbors algorithm."
+          },
+          {
+            "value": "exhaustiveKnn",
+            "name": "ExhaustiveKnn",
+            "description": "Exhaustive KNN algorithm which will perform brute-force search."
+          }
+        ]
+      },
+      "description": "The algorithm used for indexing and querying."
+    },
     "VectorSearchVectorizer": {
       "type": "object",
       "discriminator": "kind",
@@ -6330,7 +6354,7 @@
           "x-nullable": false
         },
         "kind": {
-          "type": "string",
+          "$ref": "#/definitions/VectorSearchVectorizerKind",
           "description": "The name of the kind of vectorization method being configured for use with vector search.",
           "x-nullable": false
         }
@@ -6356,7 +6380,7 @@
           "description": "Contains the parameters specific to Azure Open AI embedding vectorization."
         }
       },
-      "description": "Contains the parameters specific to using the Azure Open AI service for vectorization at query time."
+      "description": "Contains the parameters specific to using an Azure Open AI service for vectorization at query time."
     },
     "AzureOpenAIParameters": {
       "type": "object",
@@ -6373,18 +6397,13 @@
           "type": "string",
           "description": "API key for the designated Azure Open AI resource."
         },
-        "authResourceId": {
-          "type": "string",
-          "x-nullable": true,
-          "description": "This value should be the application ID created for the Azure Open AI resource when it was registered with Azure Active Directory. When specified, the query connects to the Azure Open AI resource using a managed ID (either system or user-assigned) of the search service and the access token of the resource, using this value as the resource id for creating the scope of the access token."
-        },
         "authIdentity": {
           "$ref": "#/definitions/SearchIndexerDataIdentity",
           "x-nullable": true,
-          "description": "The user-assigned managed identity used for outbound connections. If an authResourceId is provided and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared."
+          "description": "The user-assigned managed identity used for outbound connections."
         }
       },
-      "description": "Contains the parameters specific to using the Azure Open AI service for vectorization at query time."
+      "description": "Contains the parameters specific to using an Azure Open AI service for vectorization at query time."
     },
     "CustomVectorizer": {
       "type": "object",
@@ -6435,6 +6454,30 @@
         }
       },
       "description": "Contains the parameters specific to generating vector embeddings via a custom endpoint."
+    },
+    "VectorSearchVectorizerKind": {
+      "type": "string",
+      "enum": [
+        "azureOpenAI",
+        "customWebApi"
+      ],
+      "x-ms-enum": {
+        "name": "VectorSearchVectorizerKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "azureOpenAI",
+            "name": "AzureOpenAI",
+            "description": "Generate embeddings using an Azure Open AI service at query time."
+          },
+          {
+            "value": "customWebApi",
+            "name": "CustomWebApi",
+            "description": "Generate embeddings using a custom web endpoint at query time."
+          }
+        ]
+      },
+      "description": "The vectorization method to be used during query time."
     },
     "DataSourceCredentials": {
       "properties": {
@@ -9424,15 +9467,10 @@
           "type": "string",
           "description": "API key for the designated Azure Open AI resource."
         },
-        "authResourceId": {
-          "type": "string",
-          "x-nullable": true,
-          "description": "This value should be the application ID created for the Azure Open AI resource when it was registered with Azure Active Directory. When specified, the skill connects to the Azure Open AI resource using a managed ID (either system or user-assigned) of the search service and the access token of the resource, using this value as the resource id for creating the scope of the access token."
-        },
         "authIdentity": {
           "$ref": "#/definitions/SearchIndexerDataIdentity",
           "x-nullable": true,
-          "description": "The user-assigned managed identity used for outbound connections. If an authResourceId is provided and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared."
+          "description": "The user-assigned managed identity used for outbound connections."
         }
       },
       "description": "Allows you to generate a vector embedding for a given text input using the Azure Open AI service."
