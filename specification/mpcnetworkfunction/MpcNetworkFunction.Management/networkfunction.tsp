@@ -74,8 +74,8 @@ model NetworkFunctionResourceProperties {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "This is a valid template"
 @autoRoute
 @doc("Create a {name}", TResource)
-@OpenAPI.extension("x-ms-long-running-operation", true)
-@OpenAPI.extension(
+@TypeSpec.OpenAPI.extension("x-ms-long-running-operation", true)
+@TypeSpec.OpenAPI.extension(
   "x-ms-long-running-operation-options",
   {
     `final-state-via`: "azure-async-operation",
