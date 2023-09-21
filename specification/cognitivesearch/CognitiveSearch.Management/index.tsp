@@ -15,8 +15,8 @@ using Azure.ResourceManager;
 
 @armProviderNamespace
 @service({
-    title: "IndexManagementClient",
-    version: "2023-05-01-preview",
+  title: "IndexManagementClient",
+  version: "2023-05-01-preview",
 })
 @doc("CognitiveSearch Resource Provider management API.")
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
@@ -28,7 +28,10 @@ interface OperationExtensions {
   @armResourceAction(TResource)
   @post
   @doc("List resource")
-  op ArmResourceActionNoRequestBodySync<TResource extends ArmResource, TResponse extends {}>(
+  ArmResourceActionNoRequestBodySync<
+    TResource extends ArmResource,
+    TResponse extends {}
+  >(
     ...ResourceInstanceParameters<TResource, BaseParameters<TResource>>,
   ): ArmResponse<TResponse> | ErrorResponse;
 }
@@ -37,113 +40,121 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @armResourceOperations
 interface IndexOperations {
-    listByResourceGroup is ArmResourceListByParent<Index>;
+  listByResourceGroup is ArmResourceListByParent<Index>;
 
-    listBySubscription is ArmListBySubscription<Index>;
-  
-    get is ArmResourceRead<Index>;
-  
-    createOrUpdate is ArmResourceCreateOrUpdateAsync<Index>;
-  
-    update is ArmResourcePatchAsync<Index, IndexProperties>;
-  
-    delete is ArmResourceDeleteAsync<Index>;
+  listBySubscription is ArmListBySubscription<Index>;
 
-    @doc("List ApiKeys used to access the dataplane.")
-    listKeys is OperationExtensions.ArmResourceActionNoRequestBodySync<Index, IndexKeys>;
+  get is ArmResourceRead<Index>;
 
-    @doc("Regenerates an ApiKey.")
-    regenerateKey is ArmResourceActionSync<Index, RegenerateKeyParameters, IndexKeys>; 
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<Index>;
+
+  update is ArmResourcePatchAsync<Index, IndexProperties>;
+
+  delete is ArmResourceDeleteAsync<Index>;
+
+  @doc("List ApiKeys used to access the dataplane.")
+  listKeys is OperationExtensions.ArmResourceActionNoRequestBodySync<
+    Index,
+    IndexKeys
+  >;
+
+  @doc("Regenerates an ApiKey.")
+  regenerateKey is ArmResourceActionSync<
+    Index,
+    RegenerateKeyParameters,
+    IndexKeys
+  >;
 }
 
 @doc("An index resource")
 model Index is TrackedResource<IndexProperties> {
-    @path
-    @key("name")
-    @segment("indexes")
-    @visibility("read")
-    @doc("The name of the index resource.")
-    name: string;
-  }
+  @path
+  @key("name")
+  @segment("indexes")
+  @visibility("read")
+  @doc("The name of the index resource.")
+  name: string;
+}
 
-  @doc("The properties of the index.")
-  model IndexProperties {
-    @visibility("read")
-    @doc("The current provisioning state of the index.")
-    provisioningState?: ProvisioningState;
-    
-    @visibility("read")
-    @doc("The endpoint at which the index can be accessed.")
-    endpoint?: string;
-  
-    @doc("The capacity allocated to the index for querying.")
-    queryCapacity: Capacity;
-  
-    @doc("The capacity allocated to the index for indexing documents.")
-    indexingCapacity: Capacity;
+@doc("The properties of the index.")
+model IndexProperties {
+  @visibility("read")
+  @doc("The current provisioning state of the index.")
+  provisioningState?: ProvisioningState;
 
-    @doc("Authentication option to be used when accessing the dataplane")
-    authOption?: AuthOption;
-  }
-  
-  @doc("The capacity will autoscale between the minimum and maximum number of vCores based on the usage of your index.")
-  model Capacity {
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Name is in camel case."
-    @doc("The minimum number of vCores that the index will consume. Represented with discrete values: 1, 2, 3, … to 16.")
-    minVCores: float32;
-  
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Name is in camel case."
-    @doc("The maximum number of vCores that the index can consume. Represented with discrete values: 1, 2, 3, … to 16.")
-    maxVCores: float32;
-  
-    @doc("Pausing strategy for the index")
-    autoPause: Pause;
-  }
-  
-  @discriminator("type")
+  @visibility("read")
+  @doc("The endpoint at which the index can be accessed.")
+  endpoint?: string;
+
+  @doc("The capacity allocated to the index for querying.")
+  queryCapacity: Capacity;
+
+  @doc("The capacity allocated to the index for indexing documents.")
+  indexingCapacity: Capacity;
+
+  @doc("Authentication option to be used when accessing the dataplane")
+  authOption?: AuthOption;
+}
+
+@doc("The capacity will autoscale between the minimum and maximum number of vCores based on the usage of your index.")
+model Capacity {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Name is in camel case."
+  @doc("The minimum number of vCores that the index will consume. Represented with discrete values: 1, 2, 3, … to 16.")
+  minVCores: float32;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Name is in camel case."
+  @doc("The maximum number of vCores that the index can consume. Represented with discrete values: 1, 2, 3, … to 16.")
+  maxVCores: float32;
+
   @doc("Pausing strategy for the index")
-  model Pause {}
-  
-  @doc("When the pause strategy is set to 'Delay', the index will enter a paused state after not being used for a fixed amount of time.")
-  model DelayPause extends Pause {
-    @doc("Specifies the type of pausing strategy as 'Delay'.")
-    type: "Delay";
-  
-    @doc("The interval after which an index is paused if not in use.")
-    duration: duration;
-  }
-  
-  @doc("When the pause strategy is set to 'None', the index will remain always active.")
-  model NonePause extends Pause {
-    @doc("Specifies the type of pausing strategy as 'None'.")
-    type: "None";
-  }
+  autoPause: Pause;
+}
 
-  @doc("The list of all ApiKeys used to access the dataplane.")
-  model IndexKeys {
-    @doc("Primary read-write ApiKey.")
-    primaryReadWriteKey: string;
-  
-    @doc("Secondary read-write ApiKey.")
-    secondaryReadWriteKey: string;
+@discriminator("type")
+@doc("Pausing strategy for the index")
+model Pause {}
 
-    @doc("Primary read-only ApiKey.")
-    primaryReadOnlyKey: string;
-  
-    @doc("Secondary read-only ApiKey.")
-    secondaryReadOnlyKey: string;
-  }
+@doc("When the pause strategy is set to 'Delay', the index will enter a paused state after not being used for a fixed amount of time.")
+model DelayPause extends Pause {
+  @doc("Specifies the type of pausing strategy as 'Delay'.")
+  type: "Delay";
 
-  @doc("Regenerates a specific kind of ApiKey.")
-  model RegenerateKeyParameters {
-    @doc("The kind of ApiKey to regenerate.")
-    keyKind: KeyKind;
-  }
+  @doc("The interval after which an index is paused if not in use.")
+  duration: duration;
+}
+
+@doc("When the pause strategy is set to 'None', the index will remain always active.")
+model NonePause extends Pause {
+  @doc("Specifies the type of pausing strategy as 'None'.")
+  type: "None";
+}
+
+@doc("The list of all ApiKeys used to access the dataplane.")
+model IndexKeys {
+  @doc("Primary read-write ApiKey.")
+  primaryReadWriteKey: string;
+
+  @doc("Secondary read-write ApiKey.")
+  secondaryReadWriteKey: string;
+
+  @doc("Primary read-only ApiKey.")
+  primaryReadOnlyKey: string;
+
+  @doc("Secondary read-only ApiKey.")
+  secondaryReadOnlyKey: string;
+}
+
+@doc("Regenerates a specific kind of ApiKey.")
+model RegenerateKeyParameters {
+  @doc("The kind of ApiKey to regenerate.")
+  keyKind: KeyKind;
+}
 
 @lroStatus
 @doc("Provisioning state of the index resource.")
 enum ProvisioningState {
-  ...ResourceProvisioningState,  
+  ...ResourceProvisioningState,
+
   @doc("Index is provisioning.")
   Provisioning,
 
@@ -160,7 +171,7 @@ enum AuthOption {
   AadOnly,
 
   @doc("Azure Active Directory and ApiKeys authentication option.")
-  AadAndApiKeys
+  AadAndApiKeys,
 }
 
 @doc("ApiKeys used to access the dataplane.")
@@ -175,5 +186,5 @@ enum KeyKind {
   PrimaryReadOnlyKey,
 
   @doc("Secondary read-only ApiKey.")
-  SecondaryReadOnlyKey
+  SecondaryReadOnlyKey,
 }
