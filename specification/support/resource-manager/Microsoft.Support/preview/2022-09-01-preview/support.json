@@ -1979,7 +1979,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "Successfully uploaded file content."
           },
           "default": {
@@ -2032,7 +2032,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "Successfully uploaded file content."
           },
           "default": {
@@ -2860,24 +2860,20 @@
       "type": "object",
       "properties": {
         "properties": {
-          "properties": {
-            "messages": {
-              "description": "List of chat transcript communication resources.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ChatTranscriptDetailsProperties"
-              },
-              "x-ms-identifiers": []
+          "messages": {
+            "description": "List of chat transcript communication resources.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ChatTranscriptDetailsProperties"
             },
-            "startTime": {
-              "format": "date-time",
-              "description": "Time in UTC (ISO 8601 format) when the chat began.",
-              "type": "string",
-              "readOnly": true
-            }
+            "x-ms-identifiers": []
           },
-          "type": "object",
-          "description": "List of chat transcript communication resources."
+          "startTime": {
+            "format": "date-time",
+            "description": "Time in UTC (ISO 8601 format) when the chat began.",
+            "type": "string",
+            "readOnly": true
+          }
         }
       },
       "allOf": [
@@ -2936,27 +2932,17 @@
       "description": "Object that represents FileWorkspaceDetails resource",
       "type": "object",
       "properties": {
-        "id": {
-          "description": "Id of the resource",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Name of the resource",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Type of the resource 'Microsoft.Support/fileWorkspaces'",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/FileWorkspaceDetailsProperties",
           "description": "Properties of the resource"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
     },
     "FileWorkspaceDetailsProperties": {
       "description": "Describes the properties of a file workspace.",
@@ -2998,27 +2984,17 @@
       "description": "Object that represents File Details resource",
       "type": "object",
       "properties": {
-        "id": {
-          "description": "Id of the resource",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Name of the resource",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Type of the resource 'Microsoft.Support/files'",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/FileDetailsProperties",
           "description": "Properties of the resource"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
     },
     "FileDetailsProperties": {
       "description": "Describes the properties of a file.",
@@ -3032,15 +3008,15 @@
         },
         "chunkSize": {
           "description": "Size of each chunk",
-          "type": "string"
+          "type": "number"
         },
         "fileSize": {
           "description": "Size of the file to be uploaded",
-          "type": "string"
+          "type": "number"
         },
         "numberOfChunks": {
-          "description": "Size of the file to be uploaded",
-          "type": "string"
+          "description": "Number of chunks to be uploaded",
+          "type": "number"
         }
       }
     },
@@ -3054,7 +3030,7 @@
         },
         "chunkIndex": {
           "description": "Index of the uploaded chunk (Index starts at 0)",
-          "type": "string"
+          "type": "number"
         }
       }
     }
