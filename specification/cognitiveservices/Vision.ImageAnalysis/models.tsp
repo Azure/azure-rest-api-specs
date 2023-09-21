@@ -314,8 +314,32 @@ enum visualFeatures{
   "people"
 }
 
+@doc("The analysis mode requested.")
+enum segmentationMode {
+  @doc("Remove the background")
+  "backgroundRemoval",
+  @doc("Matt the foreground")
+  "foregroundMatting"
+}
+
 @doc("A JSON document with a URL pointing to the image that is to be analyzed.")
 model ImageUrl{
   @doc("Publicly reachable URL of an image.")
   url:url;
+}
+
+@doc("Image stream format")
+enum imageStreamFormat {
+  @doc("JPEG")
+  "image/jpeg",
+  @doc("PNG")
+  "image/png",
+  @doc("BMP")
+  "image/bmp",
+  @doc("GIF")
+  "image/gif",
+  @doc("TIFF")
+  "image/tiff",
+  @doc("octet-stream")
+  "application/octet-stream"
 }

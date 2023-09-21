@@ -21,7 +21,7 @@ namespace ImageAnalysis;
 @post
 @sharedRoute
 @action("analyze")
-op analyzeStream is Azure.Core.RpcOperation<
+op analyzeFromStream is Azure.Core.RpcOperation<
   {
     @query({
       name: "features",
@@ -67,7 +67,7 @@ op analyzeStream is Azure.Core.RpcOperation<
 @post
 @sharedRoute
 @action("analyze")
-op analyzeUrl is Azure.Core.RpcOperation<
+op analyzeFromUrl is Azure.Core.RpcOperation<
   {
     @doc("Impl Detail")
     @header("Content-Type")
@@ -102,3 +102,62 @@ op analyzeUrl is Azure.Core.RpcOperation<
   },
   ImageAnalysisResult
 >;
+
+@doc("Segment the input image. An image stream of content type 'image/png' is returned, where the pixel values depend on the analysis mode. The returned image has the same dimensions as the input image for modes: foregroundMatting. The returned image has the same aspect ratio and same dimensions as the input image up to a limit of 16 megapixels for modes: backgroundRemoval.")
+@actionSeparator("/")
+@route("imageanalysis:segment")
+@post
+@sharedRoute
+@action("segment")
+op segmentFromUrl is Azure.Core.RpcOperation<
+{
+  @doc("The image to be analyzed")
+  @body
+  imageContents: ImageUrl;
+
+  @doc("The type of segmentation to perform")
+  @query("mode")
+  mode: segmentationMode;
+
+  @doc("Impl Detail")
+  @query("accept")
+  accept: "image/png";
+},
+{
+  @header 
+  contentType: "image/png";
+  @body
+  bytes:bytes
+} >;
+
+#suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to segment an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
+@doc("Segment the input image. An image stream of content type 'image/png' is returned, where the pixel values depend on the analysis mode. The returned image has the same dimensions as the input image for modes: foregroundMatting. The returned image has the same aspect ratio and same dimensions as the input image up to a limit of 16 megapixels for modes: backgroundRemoval.")
+@actionSeparator("/")
+@route("imageanalysis:segment")
+@post
+@sharedRoute
+@action("segment")
+op segmentFromStream is Azure.Core.RpcOperation<
+{
+  @doc("The image to be analyzed")
+  @body
+  imageContents: bytes;
+
+  @doc("The format of the image stream")
+  @header()
+  contentType:"image/jpeg" | "image/png" | "image/bmp" | "image/gif" | "image/tiff" | "application/octet-stream";
+
+  @doc("The type of segmentation to perform")
+  @query("mode")
+  mode: segmentationMode;
+
+  @doc("Impl Detail")
+  @query("overload")
+  overload: "stream";
+},
+{
+  @header 
+  contentType: "image/png";
+  @body
+  bytes:bytes
+} >;
