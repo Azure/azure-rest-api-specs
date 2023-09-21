@@ -1976,9 +1976,20 @@
           ]
         },
         "provisioningState": {
-          "description": "Provisioning State of migration. ProvisioningState as Succeeded implies that validations have been performed and migration has started.",
+          "enum": [
+            "Provisioning",
+            "Updating",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "description": "Provisioning State of migration. ProvisioningState as Succeeded implies that validations have been performed and migration has started."
         },
         "migrationStatus": {
           "description": "Migration status.",
@@ -2060,9 +2071,20 @@
       "type": "object",
       "properties": {
         "migrationStatus": {
-          "description": "Migration Status",
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Completed",
+            "Failed",
+            "Canceled"
+          ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "MongoMigrationStatus",
+            "modelAsString": true
+          },
+          "description": "Migration Status"
         },
         "migrationError": {
           "description": "Migration Error",
@@ -3071,9 +3093,20 @@
       "type": "object",
       "properties": {
         "provisioningState": {
-          "description": "Provisioning state to track the async operation status.",
+          "enum": [
+            "Provisioning",
+            "Updating",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "description": "Provisioning state to track the async operation status."
         },
         "integrationRuntimeState": {
           "description": "Current state of the Integration runtime.",
