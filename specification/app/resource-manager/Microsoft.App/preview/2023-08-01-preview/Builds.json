@@ -308,8 +308,13 @@
           "description": "Configuration of the build."
         },
         "uploadEndpoint": {
-          "type": "string",
+          "$ref": "#/definitions/BuildEndpoint",
           "description": "Endpoint to which the source code should be uploaded.",
+          "readOnly": true
+        },
+        "logStreamEndpoint": {
+          "$ref": "#/definitions/BuildEndpoint",
+          "description": "Endpoint from which the build logs can be streamed.",
           "readOnly": true
         }
       },
@@ -386,6 +391,23 @@
       "description": "Container registry that the final image will be uploaded to.",
       "required": [
         "server"
+      ]
+    },
+    "BuildEndpoint": {
+      "type": "object",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "description": "Endpoint url."
+        },
+        "token": {
+          "type": "string",
+          "description": "Authentication token to be passed to the endpoint via headers."
+        }
+      },
+      "description": "Endpoint to interact with the build once it has been provisioned.",
+      "required": [
+        "endpoint"
       ]
     },
     "EnvironmentVariable": {
