@@ -11,7 +11,7 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
-using OpenAPI;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.MobilePacketCore;
 
