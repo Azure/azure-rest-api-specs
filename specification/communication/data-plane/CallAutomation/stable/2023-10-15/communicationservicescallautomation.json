@@ -2366,6 +2366,14 @@
         "resultInformation": {
           "$ref": "#/definitions/ResultInformation",
           "description": "Contains the resulting SIP code, sub-code and message."
+        },
+        "transferTarget": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "Target who the call is transferred to."
+        },
+        "transferee": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "the participant who is being transferred away."
         }
       }
     },
@@ -2482,6 +2490,66 @@
         "participant": {
           "$ref": "#/definitions/CommunicationIdentifierModel",
           "description": "Participant"
+        }
+      }
+    },
+    "AddParticipantCancelled": {
+      "description": "Successful cancel add participant event.",
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "participant": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "Participant that has been cancelled."
+        },
+        "invitationId": {
+          "description": "Invitation ID used to cancel the request.",
+          "type": "string"
+        }
+      }
+    },
+    "CancelAddParticipantFailed": {
+      "description": "Failed cancel add participant event.",
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code/sub-code and message from NGC services."
+        },
+        "invitationId": {
+          "description": "Invitation ID used to cancel the request.",
+          "type": "string"
         }
       }
     },
