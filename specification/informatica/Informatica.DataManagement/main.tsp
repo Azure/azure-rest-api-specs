@@ -74,6 +74,107 @@ interface Organizations
   getServerlessMetadata(
     ...ResourceInstanceParameters<InformaticaOrganizationResource>,
   ): ArmResponse<ServerlessMetadataResponse> | ErrorResponse;
+
+  @doc("Gets all serverless runtime resources in a given informatica organization resource.")
+  @armResourceAction(InformaticaOrganizationResource)
+  @post
+  getAllServerlessRuntimes(
+    ...ResourceInstanceParameters<InformaticaOrganizationResource>,
+  ): ArmResponse<InformaticaServerlessRuntimeResourceList> | ErrorResponse;
+}
+
+
+@doc("A list of serverless runtime resources as fetched using the informatica APIs")
+model InformaticaServerlessRuntimeResourceList {
+  @doc("List of runtime resources for the fetch all API")
+  informaticaRuntimeResources : InfaRuntimeResource[],
+}
+
+@doc("Informatica runtime resource as received via the informatica fetch all runtime environments API")
+model InfaRuntimeResource {
+  @doc("Environment name")
+  name : string;
+
+  @doc("Created time")
+  createdTime: string;
+
+  @doc("Updated Time")
+  updatedTime: string;
+
+  @doc("Created by")
+  createdBy: string;
+
+  @doc("Last Updated by")
+  updatedBy: string;
+
+  @doc("Informatica serverless runtime id")
+  id: string;
+
+  @doc("Environment Type")
+  type: RuntimeType;
+
+  @doc("Status of the environment")
+  status: string;
+
+  @doc("Display message for the given status")
+  statusLocalized: string;
+
+  @doc("status message")
+  statusMessage: string;
+
+  @doc("Serverless Config Properties")
+  serverlessConfigProperties: InfaServerlessConfigProperties;
+
+  @doc("Description of the runtime resource")
+  description?: string
+}
+
+@doc("InfaServerlessConfigProperties for the fetch all serverless API as received from informatica API response")
+model InfaServerlessConfigProperties {
+  @doc("subnet name")
+  subnet?: string;
+
+  @doc("applicationType name")
+  applicationType?: string;
+
+  @doc("Resource group name")
+  resourceGroupName?: string;
+
+  @doc("network Security Group")
+  nsg?: string;
+
+  @doc("Advanced custom properties")
+  advancedCustomProperties?: string;
+
+  @doc("Supplementary File location")
+  supplementaryFileLocation?: string;
+
+  @doc("Serverless Account Platform")
+  platform?: string;
+
+  @doc("Tags for the resource")
+  tags?: string;
+
+  @doc("virtual network")
+  vnet?: string;
+
+  @doc("Execution timeout")
+  executionTimeout?: string;
+
+  @doc("Compute Units")
+  computeUnits?: string;
+
+  @doc("Tenant ID")
+  tenantId?: string;
+
+  @doc("subscription ID")
+  subscriptionId?: string;
+
+  @doc("region name for the runtime environment")
+  region?: string;
+
+  @doc("Serverless Arm Resource ID")
+  serverlessArmResourceId?: string;
 }
 
 @doc("A Serverless Runtime environment  resource by Informatica.")
@@ -156,27 +257,27 @@ model MarketplaceDetails {
 
 @doc("Details of the product offering.")
 model OfferDetails {
-  @maxLength(50)
+  @maxLength(250)
   @doc("Id of the product publisher.")
   publisherId: string;
 
-  @maxLength(50)
+  @maxLength(250)
   @doc("Id of the product offering.")
   offerId: string;
 
-  @maxLength(50)
+  @maxLength(250)
   @doc("Id of the product offer plan.")
   planId: string;
 
-  @maxLength(50)
+  @maxLength(250)
   @doc("Name of the product offer plan.")
   planName: string;
 
-  @maxLength(25)
+  @maxLength(50)
   @doc("Offer plan term unit.")
   termUnit?: string;
 
-  @maxLength(50)
+  @maxLength(250)
   @doc("Offer plan term id.")
   termId: string;
 }
@@ -261,6 +362,12 @@ model InformaticaServerlessRuntimeProperties {
 
   @doc("Compute units of the serverless runtime.")
   computeUnits?: string;
+
+  @doc("Serverless Execution timeout")
+  executionTimeout?: string;
+
+  @doc("Serverless account creation location")
+  serverlessAccountLocation: string;
 
   @doc("Informatica Serverless Network profile properties.")
   serverlessRuntimeNetworkProfile?: ServerlessRuntimeNetworkProfile;
@@ -350,7 +457,7 @@ model CdiConfigProps {
   engineName: string;
 
   @doc("EngineVersion of the application config.")
-  name: string;
+  engineVersion: string;
 
   @doc("ApplicationConfigs of the CDI or CDIE.")
   @extension("x-ms-identifiers", [])
@@ -372,7 +479,7 @@ model ApplicationConfigs {
   platform: string;
 
   @doc("Customized value of the application config.")
-  customized: string;
+  customized: boolean;
 
   @doc("Default value of the application config.")
   defaultValue: string;
