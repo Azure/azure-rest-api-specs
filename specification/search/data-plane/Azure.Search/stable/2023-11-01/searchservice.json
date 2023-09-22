@@ -5586,7 +5586,7 @@
           "x-nullable": false
         },
         "kind": {
-          "type": "string",
+          "$ref": "#/definitions/VectorSearchAlgorithmKind",
           "description": "The name of the kind of algorithm being configured for use with vector search.",
           "x-nullable": false
         }
@@ -5706,6 +5706,30 @@
         ]
       },
       "description": "The similarity metric to use for vector comparisons."
+    },
+    "VectorSearchAlgorithmKind": {
+      "type": "string",
+      "enum": [
+        "hnsw",
+        "exhaustiveKnn"
+      ],
+      "x-ms-enum": {
+        "name": "VectorSearchAlgorithmKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "hnsw",
+            "name": "Hnsw",
+            "description": "Hnsw (Hierarchical Navigable Small World), a type of approximate nearest neighbors algorithm."
+          },
+          {
+            "value": "exhaustiveKnn",
+            "name": "ExhaustiveKnn",
+            "description": "Exhaustive KNN algorithm which will perform brute-force search."
+          }
+        ]
+      },
+      "description": "The algorithm used for indexing and querying."
     },
     "DataSourceCredentials": {
       "properties": {
