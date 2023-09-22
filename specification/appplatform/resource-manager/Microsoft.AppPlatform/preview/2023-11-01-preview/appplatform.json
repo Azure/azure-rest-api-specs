@@ -13890,6 +13890,11 @@
         "operatorProperties": {
           "$ref": "#/definitions/GatewayOperatorProperties",
           "readOnly": true
+        },
+        "responseCacheProperties": {
+          "$ref": "#/definitions/GatewayResponseCacheProperties",
+          "description": "The properties to configure different types of response cache for Spring Cloud Gateway.",
+          "x-ms-client-flatten": false
         }
       }
     },
@@ -14287,6 +14292,70 @@
           "type": "string"
         }
       }
+    },
+    "GatewayResponseCacheProperties": {
+      "description": "Spring Cloud Gateway response cache properties.",
+      "required": [
+        "responseCacheType"
+      ],
+      "type": "object",
+      "properties": {
+        "responseCacheType": {
+          "description": "The type of the response cache.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "discriminator": "responseCacheType"
+    },
+    "GatewayLocalResponseCachePerRouteProperties": {
+      "description": "Spring Cloud Gateway local response cache per route properties.",
+      "required": [
+        "responseCacheType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GatewayResponseCacheProperties"
+        }
+      ],
+      "properties": {
+        "size": {
+          "description": "Maximum size of cache (10MB, 900KB, 1GB...) to determine if the cache needs to evict some entries.",
+          "type": "string"
+        },
+        "timeToLive": {
+          "description": "Time before a cached entry is expired (300s, 5m, 1h...)",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "LocalCachePerRoute"
+    },
+    "GatewayLocalResponseCachePerInstanceProperties": {
+      "description": "Spring Cloud Gateway local response cache per instance properties.",
+      "required": [
+        "responseCacheType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GatewayResponseCacheProperties"
+        }
+      ],
+      "properties": {
+        "size": {
+          "description": "Maximum size of cache (10MB, 900KB, 1GB...) to determine if the cache needs to evict some entries",
+          "type": "string"
+        },
+        "timeToLive": {
+          "description": "Time before a cached entry is expired (300s, 5m, 1h...)",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "LocalCachePerInstance"
     },
     "ApiPortalResourceCollection": {
       "description": "Object that includes an array of API portal resources and a possible link for next set",
