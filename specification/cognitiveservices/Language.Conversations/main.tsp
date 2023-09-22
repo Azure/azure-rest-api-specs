@@ -644,7 +644,7 @@ enum AnalyzeConversationResultsKind {
 
 @doc("Contains the status of the submitted job for analyzing a conversation, along with related statistics.")
 @added(Versions.v2023_04_01)
-@resource("language/analyze-conversations/jobs")
+// @resource("language/analyze-conversations/jobs")
 model AnalyzeConversationJobState{
   ...JobState;
   ...ConversationTasksState;
@@ -1727,8 +1727,6 @@ op analyzeConversation is Operations.ResourceCollectionAction<
 // @post
 // @pollingOperation(analyzeConversationJobStatus)
 // op analyzeConversationCancelJob(@query `api-version`: Versions,  @pollingOperationParameter(analyzeConversationJobStatus::parameters.jobId) @path jobId: string): SubmitAccepted | Azure.Core.Foundations.ErrorResponse;
-
-
 
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Allowed because this is a non-standard status polling operation."
