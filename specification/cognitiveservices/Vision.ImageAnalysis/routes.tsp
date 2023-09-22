@@ -30,7 +30,7 @@ op analyzeFromStream is Azure.Core.RpcOperation<
     @doc("A string indicating what visual feature types to return. Multiple values should be comma-separated. Valid visual feature types include: Categories, Tags, Description, Faces, ImageType, Color, Adult, Brands, Objects, and Celebrities. If VisualFeatures is not specified, then Categories, Tags, and Description are included in the response by default.")
     visualFeatures?: Array<visualFeatures>;
 
-    @doc("The format of the image stream")
+    @doc("The format of the HTTP payload.")
     @header()
     contentType: "application/octet-stream";
 
@@ -65,7 +65,7 @@ op analyzeFromStream is Azure.Core.RpcOperation<
 @action("analyze")
 op analyzeFromUrl is Azure.Core.RpcOperation<
   {
-    @doc("Impl Detail")
+    @doc("The format of the HTTP payload.")
     @header("Content-Type")
     contentType: "application/json";
 
@@ -115,7 +115,7 @@ op segmentFromUrl is Azure.Core.RpcOperation<
   @query("mode")
   mode: segmentationMode;
 
-  @doc("The format of the image stream")
+  @doc("The format of the HTTP payload.")
   @header()
   contentType: "application/octet-stream";
 },
@@ -139,7 +139,7 @@ op segmentFromStream is Azure.Core.RpcOperation<
   @body
   imageContents: bytes;
 
-  @doc("The format of the image stream")
+  @doc("The format of the HTTP payload.")
   @header()
   contentType: "application/octet-stream";
 
