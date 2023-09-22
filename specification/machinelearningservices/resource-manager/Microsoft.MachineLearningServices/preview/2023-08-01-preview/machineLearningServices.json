@@ -2997,7 +2997,7 @@
           ],
           "type": "string",
           "title": "Type of the image",
-          "description": "Type of the image. Possible values are: docker - For docker images. azureml - For AzureML images",
+          "description": "Type of the image. Possible values are: docker - For docker images. azureml - For AzureML Environment images (custom and curated)",
           "x-ms-enum": {
             "name": "ImageType",
             "modelAsString": true
@@ -3005,7 +3005,11 @@
         },
         "reference": {
           "type": "string",
-          "description": "Image reference URL"
+          "description": "Image reference URL if type is docker. Environment name if type is azureml"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of image being used. If latest then skip this field"
         }
       },
       "additionalProperties": true
@@ -3180,7 +3184,7 @@
     },
     "JupyterKernelConfig": {
       "type": "object",
-      "description": "Jupyter kernel configuration",
+      "description": "Jupyter kernel configuration.",
       "properties": {
         "argv": {
           "type": "array",
@@ -3198,8 +3202,7 @@
           "type": "string",
           "description": "Language of the kernel [Example value: python]"
         }
-      },
-      "additionalProperties": true
+      }
     },
     "ComputeInstanceAutologgerSettings": {
       "type": "object",
