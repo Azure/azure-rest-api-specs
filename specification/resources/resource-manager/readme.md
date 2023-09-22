@@ -78,9 +78,18 @@ tag: package-changes-2022-05
 ```
 
 ``` yaml $(package-snapshots)
-tag: package-snapshots-2022-11
+tag: package-2023-10
 ```
 
+
+### Tag: package-2023-10
+
+These settings apply only when `--tag=package-2023-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-10'
+input-file:
+  - Microsoft.Resources/stable/2023-10-01/resources.json
+```
 ### Tag: package-policy-2023-04
 
 These settings apply only when `--tag=package-policy-2023-04` is specified on the command line.
