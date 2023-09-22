@@ -9330,6 +9330,39 @@
         "id": {
           "description": "The unique build id of this build result",
           "type": "string"
+        },
+        "provisioningState": {
+          "description": "The provisioning state of this build result",
+          "enum": [
+            "Queuing",
+            "Building",
+            "Succeeded",
+            "Failed",
+            "Deleting"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "BuildResultProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "image": {
+          "description": "The container image of this build result",
+          "type": "string"
+        },
+        "lastTransitionTime": {
+          "format": "date-time",
+          "description": "The last transition time of this build result",
+          "type": "string"
+        },
+        "lastTransitionReason": {
+          "description": "The last transition reason of this build result",
+          "type": "string"
+        },
+        "lastTransitionStatus": {
+          "description": "The last transition status of this build result",
+          "type": "string"
         }
       }
     },
