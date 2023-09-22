@@ -45,7 +45,7 @@ suppressions:
   - code: LroPostReturn
     reason: LRO does not return 200.
   - code: TrackedResourcePatchOperation
-    reason: server side don't support Patch yet.
+    reason: server side don't support Patch yet track with https://msdata.visualstudio.com/Vienna/_workitems/edit/2702298.
     where:
       - $.definitions.PrivateEndpointConnection
 ```
