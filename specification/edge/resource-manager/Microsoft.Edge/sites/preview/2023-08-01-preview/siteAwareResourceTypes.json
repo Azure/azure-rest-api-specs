@@ -50,7 +50,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SiteAwareResourceTypesList"
+              "$ref": "#/definitions/SiteAwareResourceTypes"
             }
           },
           "default": {
@@ -60,44 +60,109 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "List Site Aware Resource Types": {
-            "$ref": "./examples/GetSiteAwareResourceTypesList.json"
+          "Show All Site Aware Resource Types": {
+            "$ref": "./examples/GetSiteAwareResourceTypes.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "SiteAwareResourceTypesList": {
-      "description": "The list of Resource Types which support Sites operations and can be displayed under this view.",
-      "required": [
-        "value"
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
       ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The value.",
-          "uniqueItems": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SiteAwareResourceType"
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
           },
-          "x-ms-identifiers": [
-            "displayName"
-          ]
-        },
-        "nextLink": {
-          "description": "Link to the next set of results.",
-          "type": "string"
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      }
+    },
+    "SiteAwareResourceTypes": {
+      "description": "Name of Resource Type which recognizes Sites and displays capabilities.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SiteAwareResourceTypesProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         }
       }
     },
-    "SiteAwareResourceType": {
-      "description": "Name of Resource Type which recognizes Sites and displays capabilities.",
+    "SiteAwareResourceTypesProperties": {
+      "description": "SiteAwareResourceTypes API Properties",
+      "type": "object",
+      "properties": {
+        "supportedResourceTypes": {
+          "description": "Details for each SiteAwareResourceType",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SiteAwareResourceTypesDetails"
+          },
+          "x-ms-identifiers": [
+            "resourceType"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "SiteAwareResourceTypesDetails": {
+      "description": "The properties of the site Resource Types which support Sites operations and can be displayed under this view.",
       "type": "object",
       "properties": {
         "displayName": {
