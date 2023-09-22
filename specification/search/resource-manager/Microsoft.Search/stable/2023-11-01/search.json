@@ -384,6 +384,9 @@
           },
           "SearchCreateOrUpdateServiceWithCmkEnforcement": {
             "$ref": "./examples/SearchCreateOrUpdateServiceWithCmkEnforcement.json"
+          },
+          "SearchCreateOrUpdateWithSemanticSearch": {
+            "$ref": "./examples/SearchCreateOrUpdateWithSemanticSearch.json"
           }
         },
         "description": "Creates or updates a search service in the given resource group. If the search service already exists, all properties will be updated with the given values.",
@@ -468,6 +471,9 @@
           },
           "SearchUpdateServiceWithCmkEnforcement": {
             "$ref": "./examples/SearchUpdateServiceWithCmkEnforcement.json"
+          },
+          "SearchUpdateServiceWithSemanticSearch": {
+            "$ref": "./examples/SearchUpdateServiceWithSemanticSearch.json"
           }
         },
         "description": "Updates an existing search service in the given resource group.",
@@ -1245,6 +1251,102 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Search/locations/{location}/usages": {
+      "get": {
+        "tags": [
+          "Usages"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "operationId": "Usages_ListBySubscription",
+        "x-ms-examples": {
+          "GetQuotaUsagesList": {
+            "$ref": "./examples/GetQuotaUsagesList.json"
+          }
+        },
+        "description": "Gets a list of all Search quota usages in the given subscription.",
+        "externalDocs": {
+          "url": "https://aka.ms/search-manage"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation succeeded. The response contains the list of all Search quota usages for the given subscription.",
+            "schema": {
+              "$ref": "#/definitions/QuotaUsagesListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred during the operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Search/locations/{location}/usages/{skuName}": {
+      "get": {
+        "tags": [
+          "Usages"
+        ],
+        "operationId": "UsageBySubscriptionSku",
+        "x-ms-examples": {
+          "GetQuotaUsage": {
+            "$ref": "./examples/GetQuotaUsage.json"
+          }
+        },
+        "description": "Gets the quota usage for a search sku in the given subscription.",
+        "externalDocs": {
+          "url": "https://aka.ms/search-manage"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/SkuNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation succeeded. The response contains the quota usage of a search service sku for the given subscription.",
+            "schema": {
+              "$ref": "#/definitions/QuotaUsageResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred during the operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1710,6 +1812,36 @@
       "description": "Response containing a list of Private Endpoint connections.",
       "x-ms-external": true
     },
+    "SemanticSearch": {
+      "type": "string",
+      "enum": [
+        "disabled",
+        "free",
+        "standard"
+      ],
+      "x-ms-enum": {
+        "name": "SearchSemanticSearch",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "disabled",
+            "name": "disabled",
+            "description": "Indicates that semantic search is disabled for the search service."
+          },
+          {
+            "value": "free",
+            "name": "free",
+            "description": "Enables semantic search on a search service and indicates that it is to be used within the limits of the free tier. This would cap the volume of semantic search requests and is offered at no extra charge. This is the default."
+          },
+          {
+            "value": "standard",
+            "name": "standard",
+            "description": "Enables semantic search on a search service as a billable feature, with higher throughput and volume of semantic search queries."
+          }
+        ]
+      },
+      "description": "Sets options that control the availability of semantic search. This configuration is only possible for certain Azure Cognitive Search SKUs in certain locations."
+    },
     "SharedPrivateLinkResource": {
       "properties": {
         "properties": {
@@ -2130,6 +2262,11 @@
           },
           "description": "The list of private endpoint connections to the Azure Cognitive Search service."
         },
+        "semanticSearch": {
+          "$ref": "#/definitions/SemanticSearch",
+          "x-nullable": true,
+          "description": "Sets options that control the availability of semantic search. This configuration is only possible for certain Azure Cognitive Search SKUs in certain locations."
+        },
         "sharedPrivateLinkResources": {
           "readOnly": true,
           "type": "array",
@@ -2300,6 +2437,61 @@
         "type"
       ],
       "description": "Identity for the resource."
+    },
+    "QuotaUsagesListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QuotaUsageResult"
+          },
+          "description": "The quota usages for the SKUs supported by Azure Cognitive Search."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Request URL that can be used to query next page of quota usages. Returned when the total number of requested quota usages exceed maximum page size."
+        }
+      },
+      "description": "Response containing the quota usage information for all the supported skus of Azure Cognitive Search service.",
+      "x-ms-external": true
+    },
+    "QuotaUsageResult": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource id of the quota usage sku endpoint for Microsoft.Search provider."
+        },
+        "unit": {
+          "type": "string",
+          "description": "The unit of measurement for the search sku."
+        },
+        "currentValue": {
+          "type": "integer",
+          "description": "The currently used up value for the particular search sku."
+        },
+        "limit": {
+          "type": "integer",
+          "description": "The quota limit for the particular search sku."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "string",
+              "description": "The sku name supported by Azure Cognitive Search."
+            },
+            "localizedValue": {
+              "type": "string",
+              "description": "The localized string value for the sku supported by Azure Cognitive Search."
+            }
+          },
+          "description": "The name of the sku supported by Azure Cognitive Search."
+        }
+      },
+      "description": "Describes the quota usage for a particular sku supported by Azure Cognitive Search."
     }
   },
   "parameters": {
@@ -2370,6 +2562,20 @@
       "required": true,
       "type": "string",
       "description": "The API version to use for each request."
+    },
+    "LocationParameter": {
+      "name": "location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The unique location name for a Microsoft Azure geographic region."
+    },
+    "SkuNameParameter": {
+      "name": "skuName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The unique search service sku name supported by Azure Cognitive Search."
     }
   }
 }
