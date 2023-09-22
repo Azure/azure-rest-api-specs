@@ -13,6 +13,10 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-kubernetesconfiguration
 directive:
   - from: fluxconfiguration.json
+    where: $.definitions.KustomizationDefinition.properties.wait
+    transform: >
+      $["x-ms-client-name"] = "enableWait"
+  - from: fluxconfiguration.json
     where: $.definitions.KustomizationPatchDefinition.properties.wait
     transform: >
       $["x-ms-client-name"] = "enableWait"
