@@ -7,7 +7,7 @@ import "@azure-tools/typespec-azure-core";
   {
     type: OAuth2FlowType.implicit;
     authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
-    scopes: ["https://eventgrid.azure.net"];
+    scopes: ["https://eventgrid.azure.net/.default"];
   }
 ]>)
 @service({
