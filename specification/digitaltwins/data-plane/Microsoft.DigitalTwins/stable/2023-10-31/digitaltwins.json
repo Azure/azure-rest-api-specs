@@ -1537,7 +1537,7 @@
           "Jobs"
         ],
         "operationId": "ImportJobs_Delete",
-        "description": "Deletes an import job.\nStatus codes:\n* 204 No Content\n* 400 Bad Request\n  * ValidationFailed - The import job request is not valid.",
+        "description": "Deletes an import job. This is simply used to remove a job id, so it may be reused later. It can not be used to stop entities from being imported.\nStatus codes:\n* 204 No Content\n* 400 Bad Request\n  * ValidationFailed - The import job request is not valid.",
         "x-ms-examples": {
           "Delete an import job": {
             "$ref": "./examples/ImportJobDelete.json"
@@ -1584,7 +1584,7 @@
           "Jobs"
         ],
         "operationId": "ImportJobs_Cancel",
-        "description": "Cancels an import job.\nStatus codes:\n* 200 Request Accepted\n* 400 Bad Request\n  * ValidationFailed - The import job request is not valid.",
+        "description": "Cancels an import job that is currently running. It will finish the imports that are in progress, but prevent any subsequent entities from being imported as part of this job. Note this will leave your instance in an unknown state.\nStatus codes:\n* 200 Request Accepted\n* 400 Bad Request\n  * ValidationFailed - The import job request is not valid.",
         "x-ms-examples": {
           "Cancel a job": {
             "$ref": "./examples/ImportJobCancel.json"
@@ -1620,7 +1620,7 @@
         }
       }
     },
-    "/jobs/delete": {
+    "/jobs/deletions": {
       "parameters": [
         {
           "$ref": "#/parameters/traceparent"
@@ -1635,7 +1635,7 @@
         ],
         "operationId": "DeleteJobs_Add",
         "x-ms-long-running-operation": true,
-        "description": "Creates a delete job.\nStatus codes:\n* 202 Created\n* 400 Bad Request\n  * JobLimitReached - The maximum number of delete jobs allowed has been reached. \n  * ValidationFailed - Operation-Id already exists.",
+        "description": "Initiates a job which deletes all models, twins, and relationships on the instance. Does not delete any other entities on the instance.\nStatus codes:\n* 202 Created\n* 400 Bad Request\n  * JobLimitReached - The maximum number of delete jobs allowed has been reached. \n  * ValidationFailed - Operation-Id already exists. \n  * Timeout - Job execution time exceeded set timeout value.",
         "x-ms-examples": {
           "Add a job": {
             "$ref": "./examples/DeleteJobPost.json"
@@ -1647,6 +1647,9 @@
           },
           {
             "$ref": "#/parameters/operation-id"
+          },
+          {
+            "$ref": "#/parameters/timeoutInMinutes"
           }
         ],
         "responses": {
@@ -1681,7 +1684,7 @@
           "Jobs"
         ],
         "operationId": "DeleteJobs_List",
-        "description": "Retrieves all Delete jobs.\nStatus codes:\n* 200 OK",
+        "description": "Retrieves all deletion jobs. This may be useful to find a delete job that was previously requested, or to view a history of delete jobs that have run or are currently running on the instance.\nStatus codes:\n* 200 OK",
         "x-ms-examples": {
           "Get all import jobs": {
             "$ref": "./examples/DeleteJobList.json"
@@ -1720,7 +1723,7 @@
         }
       }
     },
-    "/jobs/delete/{id}": {
+    "/jobs/deletions/{id}": {
       "parameters": [
         {
           "$ref": "#/parameters/traceparent"
@@ -2302,6 +2305,13 @@
       "name": "operation-id",
       "in": "header",
       "description": "ID for the operation's status monitor. The ID is generated if header was not passed by the client.",
+      "required": false,
+      "type": "string"
+    },
+    "timeoutInMinutes": {
+      "name": "timeoutInMinutes",
+      "in": "header",
+      "description": "Desired timeout for the delete job. If the timeout is reached the job with fail with an error, finish deletions currently in progress, and prevent any subsequent deletions from starting. Note this will leave your instance in an unknown state.",
       "required": false,
       "type": "string"
     },
