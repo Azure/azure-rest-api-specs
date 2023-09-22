@@ -30,10 +30,6 @@ op analyzeFromStream is Azure.Core.RpcOperation<
     @doc("A string indicating what visual feature types to return. Multiple values should be comma-separated. Valid visual feature types include: Categories, Tags, Description, Faces, ImageType, Color, Adult, Brands, Objects, and Celebrities. If VisualFeatures is not specified, then Categories, Tags, and Description are included in the response by default.")
     visualFeatures?: Array<visualFeatures>;
 
-    @doc("Impl Detail")
-    @query("overload")
-    overload: "stream";
-
     @doc("The format of the image stream")
     @header()
     contentType: "application/octet-stream";
@@ -150,10 +146,6 @@ op segmentFromStream is Azure.Core.RpcOperation<
   @doc("The type of segmentation to perform")
   @query("mode")
   mode: segmentationMode;
-
-  @doc("Impl Detail")
-  @query("overload")
-  overload: "stream";
 },
 {
   @header 
