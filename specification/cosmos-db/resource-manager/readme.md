@@ -66,7 +66,6 @@ input-file:
   - Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json
   - Microsoft.DocumentDB/preview/2023-09-15-preview/services.json
 ```
-
 ### Tag: package-preview-2023-03-15
 
 These settings apply only when `--tag=package-preview-2023-03-15` is specified on the command line.
