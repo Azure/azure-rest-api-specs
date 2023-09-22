@@ -85,18 +85,134 @@
         }
       }
     },
-    "/language/analyze-conversations/jobs/{jobId}": {
-      "get": {
-        "operationId": "GetJobStatus",
-        "description": "Returns the status of the images operation",
+    "/language/analyze-conversations2/jobs": {
+      "post": {
+        "operationId": "AnalyzeConversationSubmitJob",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "description": "Analyze Conversations Service Versions",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "2022-05-01",
+              "2023-04-01",
+              "2023-04-15-preview"
+            ],
+            "x-ms-enum": {
+              "name": "Versions",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "v2022_05_01",
+                  "value": "2022-05-01",
+                  "description": "Version 2022-05-01"
+                },
+                {
+                  "name": "v2023_04_01",
+                  "value": "2023-04-01",
+                  "description": "Version 2023-04-01"
+                },
+                {
+                  "name": "v2023_04_15_preview",
+                  "value": "2023-04-15-preview",
+                  "description": "Version 2023-04-15-preview"
+                }
+              ]
+            }
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "analyzeConversationJobsInput": {
+                  "$ref": "#/definitions/AnalyzeConversationJobsInput"
+                }
+              },
+              "required": [
+                "analyzeConversationJobsInput"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of ResourceOperationStatus"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/language/analyze-conversations2/jobs/{jobId}": {
+      "get": {
+        "operationId": "AnalyzeConversationJobStatus",
+        "parameters": [
+          {
+            "name": "showStats",
+            "in": "query",
+            "description": "(Optional) if set to true, response will contain request and document level statistics.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "Analyze Conversations Service Versions",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "2022-05-01",
+              "2023-04-01",
+              "2023-04-15-preview"
+            ],
+            "x-ms-enum": {
+              "name": "Versions",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "v2022_05_01",
+                  "value": "2022-05-01",
+                  "description": "Version 2022-05-01"
+                },
+                {
+                  "name": "v2023_04_01",
+                  "value": "2023-04-01",
+                  "description": "Version 2023-04-01"
+                },
+                {
+                  "name": "v2023_04_15_preview",
+                  "value": "2023-04-15-preview",
+                  "description": "Version 2023-04-15-preview"
+                }
+              ]
+            }
           },
           {
             "name": "jobId",
             "in": "path",
-            "description": ".",
             "required": true,
             "type": "string"
           }
@@ -121,6 +237,77 @@
             }
           }
         }
+      }
+    },
+    "/language/analyze-conversations2/jobs/{jobId}:cancel": {
+      "post": {
+        "operationId": "AnalyzeConversationCancelJob",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "Analyze Conversations Service Versions",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "2022-05-01",
+              "2023-04-01",
+              "2023-04-15-preview"
+            ],
+            "x-ms-enum": {
+              "name": "Versions",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "v2022_05_01",
+                  "value": "2022-05-01",
+                  "description": "Version 2022-05-01"
+                },
+                {
+                  "name": "v2023_04_01",
+                  "value": "2023-04-01",
+                  "description": "Version 2023-04-01"
+                },
+                {
+                  "name": "v2023_04_15_preview",
+                  "value": "2023-04-15-preview",
+                  "description": "Version 2023-04-15-preview"
+                }
+              ]
+            }
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of ResourceOperationStatus"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -3266,6 +3453,9 @@
           }
         ]
       }
+    },
+    "SubmitAccepted": {
+      "type": "object"
     },
     "SummaryAspect": {
       "type": "string",

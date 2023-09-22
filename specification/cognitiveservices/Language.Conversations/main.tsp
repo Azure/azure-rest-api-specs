@@ -1699,43 +1699,33 @@ op analyzeConversation is Operations.ResourceCollectionAction<
     AnalyzeConversationTaskResult
   >;
 
-// @added(Versions.v2023_04_01)
-// model SubmitAccepted {
-//   @statusCode _: 202;
-
-//   @pollingLocation
-//   @header("Operation-Location") 
-//   operationLocation: ResourceLocation<ResourceOperationStatus<AnalyzeConversationJobState>>;
-// };
-
-// @added(Versions.v2023_04_01)
-// @route("/language/analyze-conversations2/jobs/{jobId}")
-// op analyzeConversationJobStatus(
-//   @doc("(Optional) if set to true, response will contain request and document level statistics.")
-//   @query showStats?: boolean, 
-//   @query `api-version`: Versions, 
-//   @path jobId: string): AnalyzeConversationJobState | Azure.Core.Foundations.ErrorResponse;
-
-// @added(Versions.v2023_04_01)
-// @route("/language/analyze-conversations2/jobs")
-// @post
-// @pollingOperation(analyzeConversationJobStatus)
-// op analyzeConversationSubmitJob(@query `api-version`: Versions, analyzeConversationJobsInput: AnalyzeConversationJobsInput): SubmitAccepted | Azure.Core.Foundations.ErrorResponse;
-
-// @added(Versions.v2023_04_01)
-// @route("/language/analyze-conversations2/jobs/{jobId}:cancel")
-// @post
-// @pollingOperation(analyzeConversationJobStatus)
-// op analyzeConversationCancelJob(@query `api-version`: Versions,  @pollingOperationParameter(analyzeConversationJobStatus::parameters.jobId) @path jobId: string): SubmitAccepted | Azure.Core.Foundations.ErrorResponse;
-
-
-#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Allowed because this is a non-standard status polling operation."
-@doc("Returns the status of the images operation")
 @added(Versions.v2023_04_01)
-@route("/language/analyze-conversations/jobs/{jobId}")
-op getJobStatus is RpcOperation<
-  {
-    @doc(".") @path jobId: string;
-  },
-  AnalyzeConversationJobState
->;
+@route("/language/analyze-conversations2/jobs/{jobId}")
+op analyzeConversationJobStatus(
+  @doc("(Optional) if set to true, response will contain request and document level statistics.")
+  @query showStats?: boolean, 
+  @query `api-version`: Versions, 
+  @path jobId: string): AnalyzeConversationJobState | Azure.Core.Foundations.ErrorResponse;
+
+
+@added(Versions.v2023_04_01)
+model SubmitAccepted {
+  @statusCode _: 202;
+
+  @pollingLocation
+  @header("Operation-Location") 
+  operationLocation: ResourceLocation<ResourceOperationStatus<AnalyzeConversationJobState>>;
+};
+  
+@added(Versions.v2023_04_01)
+@route("/language/analyze-conversations2/jobs")
+@post
+@pollingOperation(analyzeConversationJobStatus)
+op analyzeConversationSubmitJob(@query `api-version`: Versions, analyzeConversationJobsInput: AnalyzeConversationJobsInput): SubmitAccepted | Azure.Core.Foundations.ErrorResponse;
+
+@added(Versions.v2023_04_01)
+@route("/language/analyze-conversations2/jobs/{jobId}:cancel")
+@post
+@pollingOperation(analyzeConversationJobStatus)
+op analyzeConversationCancelJob(@query `api-version`: Versions,  @pollingOperationParameter(analyzeConversationJobStatus::parameters.jobId) @path jobId: string): SubmitAccepted | Azure.Core.Foundations.ErrorResponse;
+
