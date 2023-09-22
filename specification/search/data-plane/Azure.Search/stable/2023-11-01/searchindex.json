@@ -1399,13 +1399,13 @@
       },
       "description": "Specifies the syntax of the search query. The default is 'simple'. Use 'full' if your query uses the Lucene query syntax."
     },
-    "Vector": {
+    "VectorQuery": {
       "type": "object",
       "discriminator": "kind",
       "properties": {
         "kind": {
-          "type": "string",
-          "description": "The name of the kind of vector query being performed.",
+          "$ref": "#/definitions/VectorQueryKind",
+          "description": "The kind of vector query being performed.",
           "x-nullable": false
         },
         "k": {
@@ -1427,12 +1427,12 @@
       ],
       "description": "The query parameters for vector and hybrid search queries."
     },
-    "RawVector": {
+    "RawVectorQuery": {
       "type": "object",
       "x-ms-discriminator-value": "vector",
       "allOf": [
         {
-          "$ref": "#/definitions/Vector"
+          "$ref": "#/definitions/VectorQuery"
         }
       ],
       "properties": {
@@ -1446,6 +1446,30 @@
         }
       },
       "description": "The query parameters to use for vector search when a raw vector value is provided."
+    },
+    "VectorQueryKind": {
+      "type": "string",
+      "enum": [
+        "vector",
+        "text"
+      ],
+      "x-ms-enum": {
+        "name": "VectorQueryKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "vector",
+            "name": "Vector",
+            "description": "Vector query where a raw vector value is provided."
+          },
+          {
+            "value": "text",
+            "name": "Text",
+            "description": "Vector query where a text value that needs to be vectorized is provided."
+          }
+        ]
+      },
+      "description": "The kind of vector query being performed."
     },
     "VectorFilterMode": {
       "type": "string",
@@ -1645,10 +1669,10 @@
           "$ref": "#/definitions/Captions",
           "description": "A value that specifies whether captions should be returned as part of the search response."
         },
-        "vectors": {
+        "vectorQueries": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Vector"
+            "$ref": "#/definitions/VectorQuery"
           },
           "description": "The query parameters for vector and hybrid search queries."
         },
