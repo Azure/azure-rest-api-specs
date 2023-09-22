@@ -285,6 +285,14 @@ enum visualFeatures{
   "people"
 }
 
+@doc("The segmentation mode requested.")
+enum segmentationMode {
+  @doc("Remove the background")
+  "backgroundRemoval",
+  @doc("Matt the foreground")
+  "foregroundMatting"
+}
+
 @doc("A JSON document with a URL pointing to the image that is to be analyzed.")
 model ImageUrl{
   @doc("Publicly reachable URL of an image.")
