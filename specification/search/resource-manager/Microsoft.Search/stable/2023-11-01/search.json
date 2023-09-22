@@ -2439,6 +2439,7 @@
       "description": "Identity for the resource."
     },
     "QuotaUsagesListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "readOnly": true,
@@ -2458,6 +2459,7 @@
       "x-ms-external": true
     },
     "QuotaUsageResult": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -2469,10 +2471,12 @@
         },
         "currentValue": {
           "type": "integer",
+          "format": "int32",
           "description": "The currently used up value for the particular search sku."
         },
         "limit": {
           "type": "integer",
+          "format": "int32",
           "description": "The quota limit for the particular search sku."
         },
         "name": {
