@@ -15,11 +15,32 @@ namespace Microsoft.LoadTestService;
 
 @tag("Test")
 interface LoadTestAdministration {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("Create a new test or update an existing test.")
   @doc("Create a new test or update an existing test.")
+  @route("/tests/{testId}")
+  @patch
   @example("./examples/CreateOrUpdateTest.json", "CreateOrUpdateTest")
-  createOrUpdateTest is StandardResourceOperations.ResourceCreateOrUpdate<Test>;
-  
+  createOrUpdateTest is Azure.Core.Foundations.Operation<
+    {
+      @header 
+      @doc("Content type.")
+      contentType: "application/merge-patch+json",
+
+      @doc("""
+Unique name for the load test, must contain only lower-case alphabetic,
+numeric, underscore or hyphen characters.
+""")
+      @path
+      testId: string;
+
+      @doc("Load test model")
+      @body
+      body: Test;
+    },
+    ResourceCreatedOrOkResponse<Test>, {}, ErrorResponseBody
+  >;
+
   @summary("Delete a test by its name.")
   @doc("Delete a test by its name.")
   @example("./examples/DeleteTest.json", "DeleteTest")
@@ -195,10 +216,40 @@ interface LoadTestRun {
   @example("./examples/GetTestRun.json", "GetTestRun")
   getTestRun is StandardResourceOperations.ResourceRead<TestRun>;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("Create and start a new test run with the given name.")
   @doc("Create and start a new test run with the given name.")
+  @route("/test-runs/{testRunId}")
+  @patch
   @example("./examples/CreateOrUpdateTestRun.json", "CreateOrUpdateTestRun")
-  createOrUpdateTestRun is StandardResourceOperations.ResourceCreateOrUpdate<TestRun>;
+  createOrUpdateTestRun is Azure.Core.Foundations.Operation<
+    {
+      @header 
+      @doc("Content type.")
+      contentType: "application/merge-patch+json",
+
+      @doc("""
+Unique name for the load test run, must contain only lower-case alphabetic,
+numeric, underscore or hyphen characters.
+""")
+      @path
+      testRunId: string;
+
+      @doc("""
+Existing test run identifier that should be rerun, if this is provided, the
+test will run with the JMX file, configuration and app components from the
+existing test run. You can override the configuration values for new test run
+in the request body.
+""")
+      @query
+      oldTestRunId?: string;
+
+      @doc("Load test run model")
+      @body
+      body: TestRun;
+    },
+    ResourceCreatedOrOkResponse<TestRun>, {}, ErrorResponseBody
+  >;
 
   @summary("Delete a test run by its name.")
   @doc("Delete a test run by its name.")

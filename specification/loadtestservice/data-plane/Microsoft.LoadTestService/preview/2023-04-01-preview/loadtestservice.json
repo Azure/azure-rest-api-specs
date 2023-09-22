@@ -58,6 +58,81 @@
     }
   ],
   "paths": {
+    "/test-runs/{testRunId}": {
+      "patch": {
+        "operationId": "LoadTestRun_CreateOrUpdateTestRun",
+        "tags": [
+          "TestRun"
+        ],
+        "summary": "Create and start a new test run with the given name.",
+        "description": "Create and start a new test run with the given name.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "testRunId",
+            "in": "path",
+            "description": "Unique name for the load test run, must contain only lower-case alphabetic,\nnumeric, underscore or hyphen characters.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "oldTestRunId",
+            "in": "query",
+            "description": "Existing test run identifier that should be rerun, if this is provided, the\ntest will run with the JMX file, configuration and app components from the\nexisting test run. You can override the configuration values for new test run\nin the request body.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Load test run model",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestRunUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TestRun"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/TestRun"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateTestRun": {
+            "$ref": "./examples/CreateOrUpdateTestRun.json"
+          },
+          "Create/update and start a load test run": {
+            "$ref": "./examples/CreateOrUpdateTestRun.json"
+          }
+        }
+      }
+    },
     "/test-runs/{testRunId}/app-components": {
       "get": {
         "operationId": "LoadTestRun_GetAppComponents",
@@ -718,74 +793,6 @@
           }
         }
       },
-      "patch": {
-        "operationId": "LoadTestRun_CreateOrUpdateTestRun",
-        "tags": [
-          "TestRun"
-        ],
-        "summary": "Create and start a new test run with the given name.",
-        "description": "Create and start a new test run with the given name.",
-        "consumes": [
-          "application/merge-patch+json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "testRunId",
-            "in": "path",
-            "description": "Unique test run name as identifier",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 50
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "The resource instance.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TestRunUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/TestRun"
-            }
-          },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/TestRun"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CreateOrUpdateTestRun": {
-            "$ref": "./examples/CreateOrUpdateTestRun.json"
-          },
-          "Create/update and start a load test run": {
-            "$ref": "./examples/CreateOrUpdateTestRun.json"
-          }
-        }
-      },
       "delete": {
         "operationId": "LoadTestRun_DeleteTestRun",
         "tags": [
@@ -1075,16 +1082,14 @@
           {
             "name": "testId",
             "in": "path",
-            "description": "Unique test name as identifier.",
+            "description": "Unique name for the load test, must contain only lower-case alphabetic,\nnumeric, underscore or hyphen characters.",
             "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 50
+            "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
-            "description": "The resource instance.",
+            "description": "Load test model",
             "required": true,
             "schema": {
               "$ref": "#/definitions/TestUpdate"
@@ -1107,11 +1112,11 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseBody"
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
+                "description": "The error code for specific error that occurred.",
                 "type": "string"
               }
             }
