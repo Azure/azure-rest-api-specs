@@ -31,10 +31,6 @@ op analyzeStream is Azure.Core.RpcOperation<
     visualFeatures?: Array<visualFeatures>;
 
     @doc("Impl Detail")
-    @query("overload")
-    overload: "stream";
-
-    @doc("Impl Detail")
     @header("Content-Type")
     contentType: "application/octet-stream";
 
@@ -46,9 +42,12 @@ op analyzeStream is Azure.Core.RpcOperation<
     @doc("The desired language for output generation. If this parameter is not specified, the default value is \"en\". See https://aka.ms/cv-languages for a list of supported languages.")
     language?: string = "en";
 
-    @query("smartcrops-aspect-ratios")
+    @query({
+      name: "smartcrops-aspect-ratios",
+      format: "csv"
+    })
     @doc("A list of aspect ratios to use for smartCrops feature. Aspect ratios are calculated by dividing the target crop width by the height. Supported values are between 0.75 and 1.8 (inclusive). Multiple values should be comma-separated. If this parameter is not specified, the service will return one crop suggestion with an aspect ratio it sees fit between 0.5 and 2.0 (inclusive).")
-    smartCropsAspectRatios?: string;
+    smartCropsAspectRatios?: Array<float32>;
 
     @query("gender-neutral-caption")
     @doc("Boolean flag for enabling gender-neutral captioning for caption and denseCaptions features. If this parameter is not specified, the default value is \"false\".")
@@ -88,9 +87,12 @@ op analyzeUrl is Azure.Core.RpcOperation<
     @doc("The desired language for output generation. If this parameter is not specified, the default value is \"en\". See https://aka.ms/cv-languages for a list of supported languages.")
     language?: string = "en";
 
-    @query("smartcrops-aspect-ratios")
+    @query({
+      name: "smartcrops-aspect-ratios",
+      format: "csv"
+    })
     @doc("A list of aspect ratios to use for smartCrops feature. Aspect ratios are calculated by dividing the target crop width by the height. Supported values are between 0.75 and 1.8 (inclusive). Multiple values should be comma-separated. If this parameter is not specified, the service will return one crop suggestion with an aspect ratio it sees fit between 0.5 and 2.0 (inclusive).")
-    smartCropsAspectRatios?: string;
+    smartCropsAspectRatios?: Array<float32>;
 
     @query("gender-neutral-caption")
     @doc("Boolean flag for enabling gender-neutral captioning for caption and denseCaptions features. If this parameter is not specified, the default value is \"false\".")
