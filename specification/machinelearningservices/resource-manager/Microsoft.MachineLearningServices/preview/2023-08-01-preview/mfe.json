@@ -26,12 +26,6 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "query",
-            "name": "groupId",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -156,9 +150,6 @@
           "Get Capacity Reservation Group.": {
             "$ref": "./examples/CapacityReservationGroup/get.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       },
       "patch": {
@@ -24991,6 +24982,9 @@
             "x-nullable": true
           },
           "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
           "x-nullable": true
         }
       },
