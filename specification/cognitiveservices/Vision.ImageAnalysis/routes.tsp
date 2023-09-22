@@ -31,6 +31,10 @@ op analyzeStream is Azure.Core.RpcOperation<
     visualFeatures?: Array<visualFeatures>;
 
     @doc("Impl Detail")
+    @query("overload")
+    overload: "stream";
+
+    @doc("Impl Detail")
     @header("Content-Type")
     contentType: "application/octet-stream";
 
