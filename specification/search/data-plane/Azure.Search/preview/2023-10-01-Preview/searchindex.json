@@ -1845,13 +1845,13 @@
       },
       "description": "This parameter is only valid if the query type is 'semantic'. If set, the query returns captions extracted from key passages in the highest ranked documents. When Captions is set to 'extractive', highlighting is enabled by default, and can be configured by appending the pipe character '|' followed by the 'highlight-<true/false>' option, such as 'extractive|highlight-true'. Defaults to 'None'."
     },
-    "Vector": {
+    "VectorQuery": {
       "type": "object",
       "discriminator": "kind",
       "properties": {
         "kind": {
-          "type": "string",
-          "description": "The name of the kind of vector query being performed.",
+          "$ref": "#/definitions/VectorQueryKind",
+          "description": "The kind of vector query being performed.",
           "x-nullable": false
         },
         "k": {
@@ -1873,12 +1873,12 @@
       ],
       "description": "The query parameters for vector and hybrid search queries."
     },
-    "RawVector": {
+    "RawVectorQuery": {
       "type": "object",
       "x-ms-discriminator-value": "vector",
       "allOf": [
         {
-          "$ref": "#/definitions/Vector"
+          "$ref": "#/definitions/VectorQuery"
         }
       ],
       "properties": {
@@ -1898,7 +1898,7 @@
       "x-ms-discriminator-value": "text",
       "allOf": [
         {
-          "$ref": "#/definitions/Vector"
+          "$ref": "#/definitions/VectorQuery"
         }
       ],
       "properties": {
@@ -1908,6 +1908,30 @@
         }
       },
       "description": "The query parameters to use for vector search when a text value that needs to be vectorized is provided."
+    },
+    "VectorQueryKind": {
+      "type": "string",
+      "enum": [
+        "vector",
+        "text"
+      ],
+      "x-ms-enum": {
+        "name": "VectorQueryKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "vector",
+            "name": "Vector",
+            "description": "Vector query where a raw vector value is provided."
+          },
+          {
+            "value": "text",
+            "name": "Text",
+            "description": "Vector query where a text value that needs to be vectorized is provided."
+          }
+        ]
+      },
+      "description": "The kind of vector query being performed."
     },
     "VectorFilterMode": {
       "type": "string",
@@ -2571,10 +2595,10 @@
           "type": "string",
           "description": "The comma-separated list of field names used for semantic search."
         },
-        "vectors": {
+        "vectorQueries": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Vector"
+            "$ref": "#/definitions/VectorQuery"
           },
           "description": "The query parameters for vector and hybrid search queries."
         },
