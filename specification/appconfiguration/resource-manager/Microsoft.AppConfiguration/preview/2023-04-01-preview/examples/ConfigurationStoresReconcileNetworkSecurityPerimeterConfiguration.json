@@ -1,0 +1,57 @@
+{
+    "parameters": {
+      "subscriptionId": "c80fb759-c965-4c6a-9110-9b2b2d038882",
+      "resourceGroupName": "myResourceGroup",
+      "configStoreName": "contoso",
+      "nspConfigurationName": "00000000-0000-0000-0000-000000000000.testAssociation",
+      "api-version": "2023-04-01-preview"
+    },
+    "responses": {
+      "200": {
+        "body": {
+            "id": "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourceGroups/myResourceGroup/providers/Microsoft.AppConfiguration/configurationStores/contoso/networkSecurityPerimeterConfigurations/00000000-0000-0000-0000-000000000000.testAssociation",
+            "name": "00000000-0000-0000-0000-000000000000.testAssociation",
+            "type": "Microsoft.AppConfiguration/configurationStores/networkSecurityPerimeterConfigurations",
+            "properties": {
+                "provisioningState": "Accepted",
+                "provisioningIssues": [
+                ],
+                "networkSecurityPerimeter": {
+                  "id": "/subscriptions/networkSubId/resourceGroups/networkRG/providers/Microsoft.Network/networkSecurityPerimeters/perimeter1",
+                  "perimeterGuid": "00000000-0000-0000-0000-000000000000",
+                  "location": "westus"
+                },
+                "resourceAssociation": {
+                  "name": "testAssociation",
+                  "accessMode": "Enforced"
+                },
+                "profile": {
+                  "name": "profile1",
+                  "accessRulesVersion": "0",
+                  "accessRules": [
+                    {
+                      "name": "rule1",
+                      "properties": {
+                        "direction": "Inbound",
+                        "addressPrefixes": [
+                          "148.0.0.0/8",
+                          "152.4.6.0/24"
+                        ]
+                      }
+                    }
+                  ],
+                  "diagnosticSettingsVersion": "0",
+                  "enabledLogCategories": [
+                    "category1"
+                  ]
+                }
+              }
+            }
+        },
+        "202": {
+            "headers": {
+                "Azure-AsyncOperation": "https://management.azure.com/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourceGroups/myResourceGroup/providers/Microsoft.AppConfiguration/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2023-04-01-preview"
+              }
+        }
+      }
+  }
