@@ -2860,20 +2860,9 @@
       "type": "object",
       "properties": {
         "properties": {
-          "messages": {
-            "description": "List of chat transcript communication resources.",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/ChatTranscriptDetailsProperties"
-            },
-            "x-ms-identifiers": []
-          },
-          "startTime": {
-            "format": "date-time",
-            "description": "Time in UTC (ISO 8601 format) when the chat began.",
-            "type": "string",
-            "readOnly": true
-          }
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ChatTranscriptDetailsProperties",
+          "description": "Properties of the resource."          
         }
       },
       "allOf": [
@@ -2884,6 +2873,29 @@
     },
     "ChatTranscriptDetailsProperties": {
       "description": "Describes the properties of a Chat Transcript Details resource.",
+      "required": [
+        "body"
+      ],
+      "type": "object",
+      "properties": {
+        "messages": {
+          "description": "List of chat transcript communication resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MessageProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "Time in UTC (ISO 8601 format) when the chat began.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MessageProperties": {
+      "description": "Describes the properties of a Message Details resource.",
       "required": [
         "body"
       ],
