@@ -222,6 +222,9 @@ model ReadResult {
 
   @doc("Extracted font styles.")
   styles: Array<DocumentStyle>;
+
+  @doc("The model used to generate the Read result.")
+  modelVersion: string;
 }
 
 @doc("Smart cropping result.")
