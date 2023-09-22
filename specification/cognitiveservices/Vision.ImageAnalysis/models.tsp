@@ -314,7 +314,7 @@ enum visualFeatures{
   "people"
 }
 
-@doc("The analysis mode requested.")
+@doc("The segmentation mode requested.")
 enum segmentationMode {
   @doc("Remove the background")
   "backgroundRemoval",
