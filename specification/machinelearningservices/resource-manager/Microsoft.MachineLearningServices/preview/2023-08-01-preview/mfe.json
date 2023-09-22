@@ -8735,7 +8735,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{inferencePoolName}/fetchStatus": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{inferencePoolName}/getStatus": {
       "post": {
         "tags": [
           "InferencePool"
@@ -8849,6 +8849,430 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints": {
+      "get": {
+        "tags": [
+          "InferenceEndpoint"
+        ],
+        "summary": "List Inference Endpoints.",
+        "operationId": "InferenceEndpoints_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "poolName",
+            "description": "Name of the InferencePool.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "count",
+            "description": "Number of InferenceEndpoint to be retrieved in a page of results.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "in": "query",
+            "name": "tags",
+            "description": "A set of tags with which to filter the returned models. It is a comma separated string of tags key or tags key=value. Example: tagKey1,tagKey2,tagKey3=value3 .",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "properties",
+            "description": "A set of properties with which to filter the returned models. It is a comma separated string of properties key and/or properties key=value Example: propKey1,propKey2,propKey3=value3 .",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "orderBy",
+            "description": "The option to order the response.",
+            "type": "string",
+            "enum": [
+              "CreatedAtDesc",
+              "CreatedAtAsc",
+              "UpdatedAtDesc",
+              "UpdatedAtAsc"
+            ],
+            "x-ms-enum": {
+              "name": "OrderString",
+              "modelAsString": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/InferenceEndpointMinimalTrackedResourceArmPaginatedResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Workspace Inference Endpoint.": {
+            "$ref": "./examples/Workspace/InferenceEndpoint/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints/{endpointName}": {
+      "delete": {
+        "tags": [
+          "InferenceEndpoint"
+        ],
+        "summary": "Delete InferenceEndpoint (asynchronous).",
+        "operationId": "InferenceEndpoints_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "poolName",
+            "description": "InferencePool name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "InferenceEndpoint name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Workspace Inference Endpoint.": {
+            "$ref": "./examples/Workspace/InferenceEndpoint/delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "InferenceEndpoint"
+        ],
+        "summary": "Get InferenceEndpoint.",
+        "operationId": "InferenceEndpoints_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "poolName",
+            "description": "InferencePool name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "InferenceEndpoint name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/InferenceEndpointMinimalTrackedResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Workspace Inference Endpoint.": {
+            "$ref": "./examples/Workspace/InferenceEndpoint/get.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "InferenceEndpoint"
+        ],
+        "summary": "Update InferenceEndpoint (asynchronous).",
+        "operationId": "InferenceEndpoints_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "poolName",
+            "description": "InferencePool name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "InferenceEndpoint name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Online Endpoint entity to apply during operation.",
+            "required": true,
+            "schema": {
+              "description": "Strictly used in update requests."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/InferenceEndpointMinimalTrackedResource"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Workspace Inference Endpoint.": {
+            "$ref": "./examples/Workspace/InferenceEndpoint/update.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "put": {
+        "tags": [
+          "InferenceEndpoint"
+        ],
+        "summary": "Create or update InferenceEndpoint (asynchronous).",
+        "operationId": "InferenceEndpoints_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "poolName",
+            "description": "InferencePool name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "InferenceEndpoint name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "InferenceEndpoint entity to apply during operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InferenceEndpointMinimalTrackedResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create or update request is successful.",
+            "schema": {
+              "$ref": "#/definitions/InferenceEndpointMinimalTrackedResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/InferenceEndpointMinimalTrackedResource"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Workspace Inference Endpoint.": {
+            "$ref": "./examples/Workspace/InferenceEndpoint/createOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
         }
       }
     },
@@ -9274,471 +9698,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/endpoints": {
-      "get": {
-        "tags": [
-          "InferenceEndpoint"
-        ],
-        "summary": "List Inference Endpoints.",
-        "operationId": "InferenceEndpoints_List",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "in": "path",
-            "name": "poolName",
-            "description": "Name of the InferencePool.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "in": "path",
-            "name": "groupName",
-            "description": "InferenceGroup name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "query",
-            "name": "count",
-            "description": "Number of InferenceEndpoint to be retrieved in a page of results.",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
-          },
-          {
-            "in": "query",
-            "name": "tags",
-            "description": "A set of tags with which to filter the returned models. It is a comma separated string of tags key or tags key=value. Example: tagKey1,tagKey2,tagKey3=value3 .",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "properties",
-            "description": "A set of properties with which to filter the returned models. It is a comma separated string of properties key and/or properties key=value Example: propKey1,propKey2,propKey3=value3 .",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "orderBy",
-            "description": "The option to order the response.",
-            "type": "string",
-            "enum": [
-              "CreatedAtDesc",
-              "CreatedAtAsc",
-              "UpdatedAtDesc",
-              "UpdatedAtAsc"
-            ],
-            "x-ms-enum": {
-              "name": "OrderString",
-              "modelAsString": true
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/InferenceEndpointMinimalTrackedResourceArmPaginatedResult"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List Workspace Inference Endpoint.": {
-            "$ref": "./examples/Workspace/InferenceEndpoint/list.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/endpoints/{endpointName}": {
-      "delete": {
-        "tags": [
-          "InferenceEndpoint"
-        ],
-        "summary": "Delete InferenceEndpoint (asynchronous).",
-        "operationId": "InferenceEndpoints_Delete",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "in": "path",
-            "name": "poolName",
-            "description": "InferencePool name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "in": "path",
-            "name": "groupName",
-            "description": "InferenceGroup name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "in": "path",
-            "name": "endpointName",
-            "description": "InferenceEndpoint name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "x-ms-async-operation-timeout": {
-                "description": "Timeout for the client to use when polling the asynchronous operation.",
-                "type": "string",
-                "format": "duration"
-              },
-              "Location": {
-                "description": "URI to poll for asynchronous operation result.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "Duration the client should wait between requests, in seconds.",
-                "type": "integer",
-                "format": "int32",
-                "maximum": 600,
-                "minimum": 10
-              }
-            }
-          },
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete Workspace Inference Endpoint.": {
-            "$ref": "./examples/Workspace/InferenceEndpoint/delete.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      },
-      "get": {
-        "tags": [
-          "InferenceEndpoint"
-        ],
-        "summary": "Get InferenceEndpoint.",
-        "operationId": "InferenceEndpoints_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "in": "path",
-            "name": "poolName",
-            "description": "InferencePool name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "in": "path",
-            "name": "groupName",
-            "description": "InferenceGroup name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "in": "path",
-            "name": "endpointName",
-            "description": "InferenceEndpoint name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/InferenceEndpointMinimalTrackedResource"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Workspace Inference Endpoint.": {
-            "$ref": "./examples/Workspace/InferenceEndpoint/get.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "InferenceEndpoint"
-        ],
-        "summary": "Update InferenceEndpoint (asynchronous).",
-        "operationId": "InferenceEndpoints_Update",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "in": "path",
-            "name": "poolName",
-            "description": "InferencePool name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "in": "path",
-            "name": "groupName",
-            "description": "InferenceGroup name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "in": "path",
-            "name": "endpointName",
-            "description": "InferenceEndpoint name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Online Endpoint entity to apply during operation.",
-            "required": true,
-            "schema": {
-              "description": "Strictly used in update requests."
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/InferenceEndpointMinimalTrackedResource"
-            }
-          },
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "x-ms-async-operation-timeout": {
-                "description": "Timeout for the client to use when polling the asynchronous operation.",
-                "type": "string",
-                "format": "duration"
-              },
-              "Location": {
-                "description": "URI to poll for asynchronous operation result.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "Duration the client should wait between requests, in seconds.",
-                "type": "integer",
-                "format": "int32",
-                "maximum": 600,
-                "minimum": 10
-              }
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update Workspace Inference Endpoint.": {
-            "$ref": "./examples/Workspace/InferenceEndpoint/update.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "put": {
-        "tags": [
-          "InferenceEndpoint"
-        ],
-        "summary": "Create or update InferenceEndpoint (asynchronous).",
-        "operationId": "InferenceEndpoints_CreateOrUpdate",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "in": "path",
-            "name": "poolName",
-            "description": "InferencePool name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "in": "path",
-            "name": "groupName",
-            "description": "InferenceGroup name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "in": "path",
-            "name": "endpointName",
-            "description": "InferenceEndpoint name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "InferenceEndpoint entity to apply during operation.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/InferenceEndpointMinimalTrackedResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Create or update request is successful.",
-            "schema": {
-              "$ref": "#/definitions/InferenceEndpointMinimalTrackedResource"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/InferenceEndpointMinimalTrackedResource"
-            },
-            "headers": {
-              "x-ms-async-operation-timeout": {
-                "description": "Timeout for the client to use when polling the asynchronous operation.",
-                "type": "string",
-                "format": "duration"
-              },
-              "Azure-AsyncOperation": {
-                "description": "URI to poll for asynchronous operation status.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CreateOrUpdate Workspace Inference Endpoint.": {
-            "$ref": "./examples/Workspace/InferenceEndpoint/createOrUpdate.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/fetchStatus": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/getStatus": {
       "post": {
         "tags": [
           "InferenceGroup"
@@ -13957,16 +13917,6 @@
       },
       "additionalProperties": false
     },
-    "AzMonMonitoringAlertNotificationSettings": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/MonitoringAlertNotificationSettingsBase"
-        }
-      ],
-      "x-ms-discriminator-value": "AzureMonitor",
-      "additionalProperties": false
-    },
     "AzureBlobDatastore": {
       "description": "Azure Blob datastore configuration.",
       "type": "object",
@@ -15413,7 +15363,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -15478,7 +15428,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -15752,7 +15702,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -15834,7 +15784,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -16407,7 +16357,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -16491,6 +16441,15 @@
           "additionalProperties": {
             "$ref": "#/definitions/MonitoringFeatureDataType"
           },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "featureImportanceSettings": {
+          "description": "The settings for computing feature importance.",
+          "$ref": "#/definitions/FeatureImportanceSettings",
           "x-ms-mutability": [
             "create",
             "read"
@@ -16677,6 +16636,15 @@
           ],
           "x-nullable": true
         },
+        "featureImportanceSettings": {
+          "description": "The settings for computing feature importance.",
+          "$ref": "#/definitions/FeatureImportanceSettings",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
         "features": {
           "description": "The features to calculate drift over.",
           "$ref": "#/definitions/MonitoringFeatureFilterBase",
@@ -16800,7 +16768,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -16954,7 +16922,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -17239,27 +17207,6 @@
           }
         ]
       },
-      "additionalProperties": false
-    },
-    "EmailMonitoringAlertNotificationSettings": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/MonitoringAlertNotificationSettingsBase"
-        }
-      ],
-      "properties": {
-        "emailNotificationSetting": {
-          "description": "Configuration for notification.",
-          "$ref": "#/definitions/NotificationSetting",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ],
-          "x-nullable": true
-        }
-      },
-      "x-ms-discriminator-value": "Email",
       "additionalProperties": false
     },
     "EmailNotificationEnableType": {
@@ -17585,7 +17532,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -17738,7 +17685,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -17885,6 +17832,27 @@
         }
       ],
       "properties": {
+        "featureDataTypeOverride": {
+          "description": "A dictionary that maps feature names to their respective data types.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/MonitoringFeatureDataType"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "featureImportanceSettings": {
+          "description": "The settings for computing feature importance.",
+          "$ref": "#/definitions/FeatureImportanceSettings",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
         "metricThreshold": {
           "description": "[Required] A list of metrics to calculate and their associated thresholds.",
           "$ref": "#/definitions/FeatureAttributionMetricThreshold",
@@ -18005,6 +17973,45 @@
       },
       "additionalProperties": false
     },
+    "FeatureImportanceMode": {
+      "description": "The mode of operation for computing feature importance.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "FeatureImportanceMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Disabled",
+            "description": "Disables computing feature importance within a signal."
+          },
+          {
+            "value": "Enabled",
+            "description": "Enables computing feature importance within a signal."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "FeatureImportanceSettings": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "description": "The mode of operation for computing feature importance.",
+          "default": "Disabled",
+          "$ref": "#/definitions/FeatureImportanceMode"
+        },
+        "targetColumn": {
+          "description": "The name of the target column within the input data asset.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
     "FeatureLags": {
       "description": "Flag for generating lags for the numeric features.",
       "enum": [
@@ -18036,7 +18043,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -18141,7 +18148,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -18309,7 +18316,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -18368,7 +18375,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -18441,7 +18448,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -18985,7 +18992,7 @@
           "x-ms-identifiers": []
         },
         "productionData": {
-          "description": "Gets or sets the target data for computing metrics.",
+          "description": "Gets or sets the production data for computing metrics.",
           "type": "array",
           "items": {
             "description": "Monitoring input data base definition.",
@@ -19000,7 +19007,7 @@
         },
         "samplingRate": {
           "format": "double",
-          "description": "[Required] The sample rate of the target data, should be greater than 0 and at most 1.",
+          "description": "[Required] The sample rate of the production data, should be greater than 0 and at most 1.",
           "type": "number",
           "x-ms-mutability": [
             "create",
@@ -19020,7 +19027,7 @@
       "x-ms-discriminator-value": "GenerationSafetyQuality",
       "additionalProperties": false
     },
-    "GenerationTokenStatisticsMetric": {
+    "GenerationTokenUsageMetric": {
       "description": "Generation token statistics metric enum.",
       "enum": [
         "TotalTokenCount",
@@ -19028,7 +19035,7 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "GenerationTokenStatisticsMetric",
+        "name": "GenerationTokenUsageMetric",
         "modelAsString": true,
         "values": [
           {
@@ -19041,7 +19048,7 @@
       },
       "additionalProperties": false
     },
-    "GenerationTokenStatisticsMetricThreshold": {
+    "GenerationTokenUsageMetricThreshold": {
       "description": "Generation token statistics metric threshold definition.",
       "required": [
         "metric"
@@ -19050,7 +19057,7 @@
       "properties": {
         "metric": {
           "description": "[Required] Gets or sets the feature attribution metric to calculate.",
-          "$ref": "#/definitions/GenerationTokenStatisticsMetric",
+          "$ref": "#/definitions/GenerationTokenUsageMetric",
           "x-ms-mutability": [
             "create",
             "read"
@@ -19068,8 +19075,8 @@
       },
       "additionalProperties": false
     },
-    "GenerationTokenStatisticsSignal": {
-      "description": "Generation token statistics signal definition.",
+    "GenerationTokenUsageSignal": {
+      "description": "Generation token usage signal definition.",
       "required": [
         "metricThresholds",
         "samplingRate"
@@ -19085,7 +19092,7 @@
           "description": "[Required] Gets or sets the metrics to calculate and the corresponding thresholds.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/GenerationTokenStatisticsMetricThreshold"
+            "$ref": "#/definitions/GenerationTokenUsageMetricThreshold"
           },
           "x-ms-mutability": [
             "create",
@@ -19094,17 +19101,22 @@
           "x-ms-identifiers": []
         },
         "productionData": {
-          "description": "Gets or sets the target data for computing metrics.",
-          "$ref": "#/definitions/MonitoringInputDataBase",
+          "description": "Gets or sets the production data for computing metrics.",
+          "type": "array",
+          "items": {
+            "description": "Monitoring input data base definition.",
+            "$ref": "#/definitions/MonitoringInputDataBase"
+          },
           "x-ms-mutability": [
             "create",
             "read"
           ],
-          "x-nullable": true
+          "x-nullable": true,
+          "x-ms-identifiers": []
         },
         "samplingRate": {
           "format": "double",
-          "description": "[Required] The sample rate of the target data, should be greater than 0 and at most 1.",
+          "description": "[Required] The sample rate of the production data, should be greater than 0 and at most 1.",
           "type": "number",
           "x-ms-mutability": [
             "create",
@@ -20225,7 +20237,8 @@
     "InferenceEndpoint": {
       "description": "InferenceEndpoint configuration",
       "required": [
-        "authMode"
+        "authMode",
+        "groupId"
       ],
       "type": "object",
       "allOf": [
@@ -20247,6 +20260,12 @@
             "read"
           ],
           "x-nullable": true
+        },
+        "groupId": {
+          "description": "[Required] Group within the same pool with which this endpoint needs to be associated with.",
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string"
         },
         "provisioningState": {
           "description": "Provisioning state for the endpoint.",
@@ -20834,7 +20853,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -21786,7 +21805,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -22419,7 +22438,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -22536,7 +22555,7 @@
           ]
         },
         "productionData": {
-          "description": "[Required] The data produced by the production service which drift will be calculated for.",
+          "description": "[Required] The data produced by the production service which performance will be calculated for.",
           "type": "array",
           "items": {
             "description": "Monitoring input data base definition.",
@@ -22549,7 +22568,7 @@
           "x-ms-identifiers": []
         },
         "referenceData": {
-          "description": "[Required] The data to calculate drift against.",
+          "description": "[Required] The reference data used as the basis to calculate model performance.",
           "$ref": "#/definitions/MonitoringInputDataBase",
           "x-ms-mutability": [
             "create",
@@ -22705,7 +22724,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -22819,9 +22838,9 @@
       ],
       "type": "object",
       "properties": {
-        "alertNotificationSetting": {
+        "alertNotificationSettings": {
           "description": "The monitor's notification settings.",
-          "$ref": "#/definitions/MonitoringAlertNotificationSettingsBase",
+          "$ref": "#/definitions/MonitorNotificationSettings",
           "x-ms-mutability": [
             "create",
             "read"
@@ -22856,6 +22875,40 @@
             "create",
             "read"
           ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "MonitorEmailNotificationSettings": {
+      "type": "object",
+      "properties": {
+        "emails": {
+          "description": "This is the email recipient list which has a limitation of 499 characters in total.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "additionalProperties": false
+    },
+    "MonitorNotificationSettings": {
+      "type": "object",
+      "properties": {
+        "emailNotificationSettings": {
+          "description": "The AML notification email settings.",
+          "$ref": "#/definitions/MonitorEmailNotificationSettings",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -22904,45 +22957,6 @@
         }
       },
       "x-ms-discriminator-value": "ServerlessSpark",
-      "additionalProperties": false
-    },
-    "MonitoringAlertNotificationSettingsBase": {
-      "required": [
-        "alertNotificationType"
-      ],
-      "type": "object",
-      "properties": {
-        "alertNotificationType": {
-          "description": "[Required] Specifies the type of signal to monitor.",
-          "$ref": "#/definitions/MonitoringAlertNotificationType",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      },
-      "discriminator": "alertNotificationType"
-    },
-    "MonitoringAlertNotificationType": {
-      "enum": [
-        "AzureMonitor",
-        "Email"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "MonitoringAlertNotificationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "AzureMonitor",
-            "description": "Settings for Azure Monitor based alerting."
-          },
-          {
-            "value": "Email",
-            "description": "Settings for AML email notifications."
-          }
-        ]
-      },
       "additionalProperties": false
     },
     "MonitoringDataSegment": {
@@ -23102,7 +23116,7 @@
       "description": "Monitoring input data type enum.",
       "enum": [
         "Static",
-        "Trailing",
+        "Rolling",
         "Fixed"
       ],
       "type": "string",
@@ -23115,8 +23129,8 @@
             "description": "An input data with a fixed window size."
           },
           {
-            "value": "Trailing",
-            "description": "An input data which trailing relatively to the monitor's current run."
+            "value": "Rolling",
+            "description": "An input data which rolls relatively to the monitor's current run time."
           },
           {
             "value": "Fixed",
@@ -23148,23 +23162,23 @@
       },
       "additionalProperties": false
     },
-    "MonitoringNotificationMode": {
+    "MonitoringNotificationType": {
       "enum": [
-        "Disabled",
-        "Enabled"
+        "AmlNotification",
+        "AzureMonitor"
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "MonitoringNotificationMode",
+        "name": "MonitoringNotificationType",
         "modelAsString": true,
         "values": [
           {
-            "value": "Disabled",
-            "description": "Disabled notifications will not produce emails/metrics leveraged for alerting."
+            "value": "AmlNotification",
+            "description": "Enables email notifications through AML notifications."
           },
           {
-            "value": "Enabled",
-            "description": "Enabled notification will produce emails/metrics leveraged for alerting."
+            "value": "AzureMonitor",
+            "description": "Enables notifications through Azure Monitor by posting metrics to the workspace's Azure Monitor instance."
           }
         ]
       },
@@ -23176,14 +23190,18 @@
       ],
       "type": "object",
       "properties": {
-        "mode": {
+        "notificationTypes": {
           "description": "The current notification mode for this signal.",
-          "default": "Disabled",
-          "$ref": "#/definitions/MonitoringNotificationMode",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitoringNotificationType"
+          },
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true,
+          "x-ms-identifiers": []
         },
         "properties": {
           "description": "Property dictionary. Properties can be added, but not removed or altered.",
@@ -25344,7 +25362,6 @@
     "PredictionDriftMonitoringSignal": {
       "required": [
         "metricThresholds",
-        "modelType",
         "productionData",
         "referenceData"
       ],
@@ -25355,6 +25372,18 @@
         }
       ],
       "properties": {
+        "featureDataTypeOverride": {
+          "description": "A dictionary that maps feature names to their respective data types.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/MonitoringFeatureDataType"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
         "metricThresholds": {
           "description": "[Required] A list of metrics to calculate and their associated thresholds.",
           "type": "array",
@@ -25366,14 +25395,6 @@
             "read"
           ],
           "x-ms-identifiers": []
-        },
-        "modelType": {
-          "description": "[Required] The type of the model monitored.",
-          "$ref": "#/definitions/MonitoringModelType",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
         },
         "productionData": {
           "description": "[Required] The data which drift will be calculated for.",
@@ -25484,7 +25505,7 @@
       "type": "object",
       "properties": {
         "description": {
-          "description": "Description of the endpoint deployment.",
+          "description": "Description of the resource.",
           "type": "string",
           "x-nullable": true
         },
@@ -26160,6 +26181,50 @@
       },
       "additionalProperties": false
     },
+    "RollingInputData": {
+      "description": "Rolling input data definition.",
+      "required": [
+        "windowOffset",
+        "windowSize"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MonitoringInputDataBase"
+        }
+      ],
+      "properties": {
+        "preprocessingComponentId": {
+          "description": "The ARM resource ID of the component resource used to preprocess the data.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "windowOffset": {
+          "format": "duration",
+          "description": "[Required] The time offset between the end of the data window and the monitor's current run time.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "windowSize": {
+          "format": "duration",
+          "description": "[Required] The size of the trailing data window.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "Rolling",
+      "additionalProperties": false
+    },
     "RollingRateType": {
       "enum": [
         "Year",
@@ -26509,7 +26574,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -27041,6 +27106,19 @@
         "environmentId": {
           "description": "The ARM resource ID of the Environment specification for the job.",
           "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "environmentVariables": {
+          "description": "Environment variables included in the job.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
           "x-ms-mutability": [
             "create",
             "read"
@@ -28390,50 +28468,6 @@
         }
       },
       "x-ms-discriminator-value": "TopNByAttribution",
-      "additionalProperties": false
-    },
-    "TrailingInputData": {
-      "description": "Trailing input data definition.",
-      "required": [
-        "windowOffset",
-        "windowSize"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/MonitoringInputDataBase"
-        }
-      ],
-      "properties": {
-        "preprocessingComponentId": {
-          "description": "The ARM resource ID of the component resource used to preprocess the data.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "windowOffset": {
-          "format": "duration",
-          "description": "[Required] The time offset between the end of the data window and the monitor's current run time.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "windowSize": {
-          "format": "duration",
-          "description": "[Required] The size of the trailing data window.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      },
-      "x-ms-discriminator-value": "Trailing",
       "additionalProperties": false
     },
     "TrainingMode": {
