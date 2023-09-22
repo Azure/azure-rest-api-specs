@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure CodeSigning",
+    "title": "Azure Developer Signing",
     "version": "2023-06-15-preview",
-    "description": "Azure CodeSigning is a service that provides managed code signing for all.",
+    "description": "Azure Developer Signing is a service that provides managed artifact signing for all.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -51,26 +51,26 @@
   },
   "tags": [],
   "paths": {
-    "/codesigningaccounts/{codeSigningAccountName}/certificateprofiles/{certificateProfileName}:sign": {
+    "/codesigningaccounts/{accountName}/certificateprofiles/{certificateProfile}:sign": {
       "post": {
         "operationId": "CertificateProfileOperations_Sign",
-        "summary": "Submit a codesign operation.",
-        "description": "Submit a codesign operation under the created codesign account and profile name provided.",
+        "summary": "Submit a sign operation.",
+        "description": "Submit a sign operation under the created account and profile name provided.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "codeSigningAccountName",
+            "name": "accountName",
             "in": "path",
-            "description": "Azure CodeSigning account name.",
+            "description": "Azure Developer Signing account name.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "certificateProfileName",
+            "name": "certificateProfile",
             "in": "path",
-            "description": "Azure Codesigning certificate profile name under a codesign account.",
+            "description": "Azure Developer Signing certificate profile name under an account.",
             "required": true,
             "type": "string"
           },
@@ -79,7 +79,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CodeSigningSubmissionOptions"
+              "$ref": "#/definitions/SigningPayloadOptions"
             }
           }
         ],
@@ -103,7 +103,7 @@
                   "description": "Error object that describes the error when status is \"Failed\"."
                 },
                 "result": {
-                  "$ref": "#/definitions/CodeSignOperationStatus",
+                  "$ref": "#/definitions/SignResult",
                   "description": "The result of the operation."
                 }
               },
@@ -141,10 +141,10 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/codesigningaccounts/{codeSigningAccountName}/certificateprofiles/{certificateProfileName}/sign/{operationId}": {
+    "/codesigningaccounts/{accountName}/certificateprofiles/{certificateProfile}/sign/{operationId}": {
       "get": {
-        "operationId": "CertificateProfileOperations_GetCodeSigningStatus",
-        "summary": "Gets the status of a codesigning operation.",
+        "operationId": "CertificateProfileOperations_GetSigningStatus",
+        "summary": "Gets the status of a signing operation.",
         "description": "This status operation requires that a Sign request has been submitted and the operationId is known.",
         "parameters": [
           {
@@ -158,10 +158,10 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/CodeSigningOptions.codeSigningAccountName"
+            "$ref": "#/parameters/SigningOptions.accountName"
           },
           {
-            "$ref": "#/parameters/CodeSigningOptions.certificateProfileName"
+            "$ref": "#/parameters/SigningOptions.certificateProfile"
           }
         ],
         "responses": {
@@ -184,7 +184,7 @@
                   "description": "Error object that describes the error when status is \"Failed\"."
                 },
                 "result": {
-                  "$ref": "#/definitions/CodeSignResult",
+                  "$ref": "#/definitions/SignResult",
                   "description": "The result of the operation."
                 }
               },
@@ -209,31 +209,31 @@
         },
         "x-ms-examples": {
           "Gets the status of a codesign operation.": {
-            "$ref": "./examples/CertificateProfileOperations_GetCodeSigningStatus.json"
+            "$ref": "./examples/CertificateProfileOperations_GetSigningStatus.json"
           }
         }
       }
     },
-    "/codesigningaccounts/{codeSigningAccountName}/certificateprofiles/{certificateProfileName}/sign/eku": {
+    "/codesigningaccounts/{accountName}/certificateprofiles/{certificateProfile}/sign/eku": {
       "get": {
-        "operationId": "CertificateProfileOperations_ListSignEkus",
+        "operationId": "CertificateProfileOperations_ListExtendedKeyUsages",
         "summary": "Gets a list of extended key usage object identifiers that are allowed for this account and profile combination.",
-        "description": "The list of extended key usages are used to determine the purpose of the certificate usage as part of the codesigning operation.",
+        "description": "The list of extended key usages are used to determine the purpose of the certificate usage as part of the signing operation.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "codeSigningAccountName",
+            "name": "accountName",
             "in": "path",
-            "description": "Azure CodeSigning account name.",
+            "description": "Azure Developer Signing account name.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "certificateProfileName",
+            "name": "certificateProfile",
             "in": "path",
-            "description": "Azure Codesigning certificate profile name under a codesign account.",
+            "description": "Azure Developer Signing certificate profile name under an account.",
             "required": true,
             "type": "string"
           }
@@ -260,7 +260,7 @@
         },
         "x-ms-examples": {
           "Gets a list of extended key usage object identifiers that are allowed.": {
-            "$ref": "./examples/CertificateProfileOperations_ListSignEkus.json"
+            "$ref": "./examples/CertificateProfileOperations_ListExtendedKeyUsages.json"
           }
         },
         "x-ms-pageable": {
@@ -268,10 +268,10 @@
         }
       }
     },
-    "/codesigningaccounts/{codeSigningAccountName}/certificateprofiles/{certificateProfileName}/sign/rootcert": {
+    "/codesigningaccounts/{accountName}/certificateprofiles/{certificateProfile}/sign/rootcert": {
       "get": {
         "operationId": "CertificateProfileOperations_GetSignRootCertificate",
-        "summary": "Gets the codesigning root certificate on the certificate chain for that account and profile name.",
+        "summary": "Gets the signing root certificate on the certificate chain for that account and profile name.",
         "description": "The root certificate is generated as part of the initial account creation and it is used to sign the bits for the profile provided.",
         "produces": [
           "application/x-x509-ca-cert",
@@ -282,10 +282,10 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/CodeSigningOptions.codeSigningAccountName"
+            "$ref": "#/parameters/SigningOptions.accountName"
           },
           {
-            "$ref": "#/parameters/CodeSigningOptions.certificateProfileName"
+            "$ref": "#/parameters/SigningOptions.certificateProfile"
           }
         ],
         "responses": {
@@ -414,13 +414,13 @@
         ]
       }
     },
-    "CertificateProfile": {
+    "CertificateProfileName": {
       "type": "object",
-      "description": "Azure CodeSigning certificate profile configured on a codesign account.",
+      "description": "Azure Developer Signing certificate profile configured on an account.",
       "properties": {
-        "certificateProfileName": {
+        "certificateProfile": {
           "type": "string",
-          "description": "Azure Codesigning certificate profile name under a codesign account.",
+          "description": "Azure Developer Signing certificate profile name under an account.",
           "x-ms-mutability": [
             "read",
             "update"
@@ -428,119 +428,21 @@
         }
       },
       "required": [
-        "certificateProfileName"
-      ]
-    },
-    "CodeSignOperationStatus": {
-      "type": "object",
-      "description": "The codesign operation status response.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique Id of the operation."
-        },
-        "signResult": {
-          "$ref": "#/definitions/CodeSignResult",
-          "description": "The result of the codesign operation including the signature and signing certificate."
-        }
-      },
-      "required": [
-        "id"
-      ]
-    },
-    "CodeSignResult": {
-      "type": "object",
-      "description": "The sign status model.",
-      "properties": {
-        "operationId": {
-          "type": "string",
-          "description": "Response Id of the codesign operation."
-        },
-        "signature": {
-          "type": "string",
-          "format": "byte",
-          "description": "Digital signature of the requested content digest."
-        },
-        "signingCertificate": {
-          "type": "string",
-          "format": "byte",
-          "description": "Signing certificate corresponding to the private key used to codesign the requested\ndigest."
-        }
-      },
-      "required": [
-        "operationId"
-      ]
-    },
-    "CodeSigningAccount": {
-      "type": "object",
-      "description": "Azure CodeSigning customer account created upon registration on the service.",
-      "properties": {
-        "codeSigningAccountName": {
-          "type": "string",
-          "description": "Azure CodeSigning account name.",
-          "x-ms-mutability": [
-            "read",
-            "update"
-          ]
-        }
-      },
-      "required": [
-        "codeSigningAccountName"
-      ]
-    },
-    "CodeSigningSubmissionOptions": {
-      "type": "object",
-      "description": "The codesign request information to be signed by the service.",
-      "properties": {
-        "signatureAlgorithm": {
-          "$ref": "#/definitions/SignatureAlgorithm",
-          "description": "The supported signature algorithm identifiers."
-        },
-        "digest": {
-          "type": "string",
-          "format": "byte",
-          "description": "Content digest to codesign."
-        },
-        "fileHashList": {
-          "type": "array",
-          "description": "List of full file digital signatures.",
-          "items": {
-            "type": "string",
-            "format": "byte"
-          }
-        },
-        "authenticodeHashList": {
-          "type": "array",
-          "description": "List of authenticode digital signatures.",
-          "items": {
-            "type": "string",
-            "format": "byte"
-          }
-        }
-      },
-      "required": [
-        "signatureAlgorithm",
-        "digest"
+        "certificateProfile"
       ]
     },
     "ExtendedKeyUsage": {
       "type": "object",
-      "description": "Extended key usage object identifier that are allowed.",
+      "description": "Extended key usage object identifier that are allowable.",
       "properties": {
-        "ekus": {
-          "type": "array",
-          "description": "An element of ekus.",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update"
-          ]
+        "eku": {
+          "type": "string",
+          "description": "An oid string that represents an eku.",
+          "readOnly": true
         }
       },
       "required": [
-        "ekus"
+        "eku"
       ]
     },
     "PagedExtendedKeyUsage": {
@@ -564,6 +466,22 @@
       "required": [
         "value"
       ]
+    },
+    "SignResult": {
+      "type": "object",
+      "description": "The sign status model.",
+      "properties": {
+        "signature": {
+          "type": "string",
+          "format": "byte",
+          "description": "Digital signature of the requested content digest."
+        },
+        "signingCertificate": {
+          "type": "string",
+          "format": "byte",
+          "description": "Signing certificate corresponding to the private key used to sign the requested \ndigest."
+        }
+      }
     },
     "SignatureAlgorithm": {
       "type": "string",
@@ -637,6 +555,58 @@
         ]
       }
     },
+    "SigningAccount": {
+      "type": "object",
+      "description": "Azure Developer Signing customer account created upon registration on the service.",
+      "properties": {
+        "accountName": {
+          "type": "string",
+          "description": "Azure Developer Signing account name.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        }
+      },
+      "required": [
+        "accountName"
+      ]
+    },
+    "SigningPayloadOptions": {
+      "type": "object",
+      "description": "The artifact request information to be signed by the service.",
+      "properties": {
+        "signatureAlgorithm": {
+          "$ref": "#/definitions/SignatureAlgorithm",
+          "description": "The supported signature algorithm identifiers."
+        },
+        "digest": {
+          "type": "string",
+          "format": "byte",
+          "description": "Content digest to sign."
+        },
+        "fileHashList": {
+          "type": "array",
+          "description": "List of full file digital signatures.",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
+        },
+        "authenticodeHashList": {
+          "type": "array",
+          "description": "List of authenticode digital signatures.",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
+        }
+      },
+      "required": [
+        "signatureAlgorithm",
+        "digest"
+      ]
+    },
     "Versions": {
       "type": "string",
       "description": "Versions info.",
@@ -667,18 +637,18 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
     },
-    "CodeSigningOptions.certificateProfileName": {
-      "name": "certificateProfileName",
+    "SigningOptions.accountName": {
+      "name": "accountName",
       "in": "path",
-      "description": "Certificate profile name.",
+      "description": "Signing account name.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "CodeSigningOptions.codeSigningAccountName": {
-      "name": "codeSigningAccountName",
+    "SigningOptions.certificateProfile": {
+      "name": "certificateProfile",
       "in": "path",
-      "description": "CodeSigning account name.",
+      "description": "Signing Certificate profile name.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"

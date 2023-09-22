@@ -11,22 +11,22 @@ options:
     azure-resource-provider-folder: "data-plane"
     emitter-output-dir: "{project-root}/.."
     examples-directory: "examples"
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/azure.codesigning.json"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/azure.developer.signing.json"
   "@azure-tools/typespec-python":
-    package-dir: "azure-codesigning"
+    package-dir: "azure-developer-signing"
     package-name: "{package-dir}"
   "@azure-tools/typespec-csharp":
     clear-output-folder: true
-    package-dir: "Azure.CodeSigning"
+    package-dir: "Azure.Developer.Signing"
     model-namespace: false
     namespace: "{package-dir}"
   "@azure-tools/typespec-ts":
-    package-dir: "azurecodesigning-rest"
+    package-dir: "azure-developer-signing-rest"
     generateMetadata: true
     generateTest: true
     packageDetails:
-      name: "@azure-rest/azure-codesigning-rest"
-      description: "Azure Codesigning Service"
+      name: "@azure-rest/developer-signing"
+      description: "Azure developer signing service"
   "@azure-tools/typespec-java":
-    package-dir: "azure-codesigning"
-    namespace: com.azure.codesigning
+    package-dir: "com.azure.developer.signing"
+    namespace: Azure.Developer.Signing
