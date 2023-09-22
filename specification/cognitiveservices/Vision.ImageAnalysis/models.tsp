@@ -3,32 +3,6 @@ import "@typespec/http";
 namespace ImageAnalysis;
 using TypeSpec.Http;
 
-@doc("An object describing adult content match.")
-model AdultMatch {
-  @visibility("read")
-  @doc("Gets the confidence score of whether the image contains adult content.")
-  confidence: float64;
-
-  @doc("A value indicating if the image is matched adult content.")
-  @visibility("read")
-  isMatch: boolean;
-}
-
-@doc("An object describing whether the image contains adult-oriented content and/or is racy.")
-model AdultResult {
-  @doc("Gets a value indicating if the image is adult-oriented content.")
-  @visibility("read")
-  adult: AdultMatch;
-
-  @doc("Gets a value indicating if the image is gorey content.")
-  @visibility("read")
-  gore: AdultMatch;
-
-  @doc("Gets a value indicating if the image is racy content.")
-  @visibility("read")
-  racy: AdultMatch;
-}
-
 @doc("A basic rectangle")
 model BoundingBox {
   @doc("X coordinate")
@@ -84,9 +58,6 @@ model DenseCaptionsResult {
 model DetectedObject {
   @doc("Gets a rectangular boundary within which the object was detected.")
   boundingBox: BoundingBox;
-
-  @doc("Id of the detected objet.")
-  id: string;
 
   @doc("Classification confidences of the detected object.")
   tags: Array<Tag>;
@@ -177,9 +148,6 @@ model DocumentWord {
 
 @doc("Describe the combined results of different types of image analysis.")
 model ImageAnalysisResult {
-  @doc("An AdultResult for the immage.")
-  adultResult?: AdultResult;
-
   @doc("A CaptionResult for the image.")
   captionResult?: CaptionResult;
 
@@ -190,7 +158,7 @@ model ImageAnalysisResult {
   denseCaptionsResult?: DenseCaptionsResult;
 
   @doc("The model used for the analysis")
-  metadata: ImageMetadataApiModel;
+  metadata: ImageMetadata;
 
   @doc("The model used for the analysis")
   modelVersion: string;
@@ -212,7 +180,7 @@ model ImageAnalysisResult {
 }
 
 @doc("The image metadata information such as height and width.")
-model ImageMetadataApiModel {
+model ImageMetadata {
   @doc("The height of the image in pixels.")
   height: int64;
 
