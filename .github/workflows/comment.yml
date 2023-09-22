@@ -28,11 +28,37 @@ jobs:
             return
           }
           $label = 'MergeRequested'
-          Write-Host "gh pr edit $($payload.issue.number) --add-label `"$label`""
-          gh pr edit $payload.issue.html_url --add-label "$label"
-          if ($LASTEXITCODE) {
-            Write-Warning "Failed to add label"
-            exit $LASTEXITCODE
+          
+          $retryCount = 0
+          $maxRetries = 5
+          $retryDelay = 5 # Initial retry delay in seconds
+
+          while ($retryCount -lt $maxRetries) {
+            Write-Host "Attempt $(retryCount+1) out of $(maxRetries): gh pr edit $($payload.issue.number) --add-label `"$label`""
+            gh pr edit $payload.issue.html_url --add-label "$label"
+            
+            if ($LASTEXITCODE -eq 0) {
+              Write-Host "Label added successfully on attempt $(retryCount+1) out of $maxRetries"
+              break
+            } else {
+              Write-Warning "Failed to add label on attempt $(retryCount+1) out of $maxRetries"
+              $retryCount++
+              if ($retryCount -lt $maxRetries) {
+                # Exponential backoff in seconds: 
+                #  5 =  1*5
+                # 10 =  2*5
+                # 20 =  4*5
+                # 40 =  8*5
+                $retryDelay = [math]::Pow(2, $retryCount) * $retryDelay
+                Write-Host "Sleeping for $retryDelay seconds."
+                Start-Sleep -Seconds $retryDelay
+              }
+            }
+          }
+
+          if ($retryCount -ge $maxRetries) {
+            Write-Error "Max retry attempts of $maxRetries exhausted. Exiting with error."
+            exit 1
           }
         env:
           PAYLOAD: ${{ toJson(github.event) }}
