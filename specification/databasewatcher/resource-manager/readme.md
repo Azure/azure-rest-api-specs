@@ -46,6 +46,10 @@ These settings apply only when `--tag=package-2023-09-01-preview` is specified o
 ```yaml $(tag) == 'package-2023-09-01-preview'
 input-file:
   - Microsoft.DatabaseWatcher/preview/2023-09-01-preview/Watcher.json
+
+suppressions:
+  - code: ImplementPrivateEndpointAPIs
+    reason: We are not onboarding to the private endpoints feature as a target resource, so the other endpoints are not applicable for us. `GET privateLinkResources` is required to implement discoverability for the Shared Private Endpoints feature.
 ```
 
 ---

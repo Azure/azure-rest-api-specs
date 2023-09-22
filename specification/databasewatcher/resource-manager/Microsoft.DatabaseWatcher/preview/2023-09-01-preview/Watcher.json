@@ -48,7 +48,10 @@
       "name": "Targets"
     },
     {
-      "name": "PrivateConnections"
+      "name": "SharedPrivateLinkResources"
+    },
+    {
+      "name": "PrivateLinkResources"
     }
   ],
   "paths": {
@@ -251,13 +254,13 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Resource 'Watcher' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/Watcher"
             }
           },
           "201": {
-            "description": "ARM create operation completed successfully.",
+            "description": "Resource 'Watcher' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Watcher"
             },
@@ -422,13 +425,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DatabaseWatcher/watchers/{watcherName}/privateConnections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DatabaseWatcher/watchers/{watcherName}/privateLinkResources": {
       "get": {
-        "operationId": "PrivateConnections_ListByWatcher",
+        "operationId": "PrivateLinkResources_ListByWatcher",
         "tags": [
-          "PrivateConnections"
+          "PrivateLinkResources"
         ],
-        "description": "List PrivateConnection resources by Watcher",
+        "description": "List PrivateLinkResource resources by Watcher",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -452,7 +455,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PrivateConnectionListResult"
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
             }
           },
           "default": {
@@ -463,8 +466,8 @@
           }
         },
         "x-ms-examples": {
-          "PrivateConnections_ListByWatcher": {
-            "$ref": "./examples/PrivateConnections_ListByWatcher_200.json"
+          "PrivateLinkResources_ListByWatcher": {
+            "$ref": "./examples/PrivateLinkResources_ListByWatcher_200.json"
           }
         },
         "x-ms-pageable": {
@@ -472,13 +475,63 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DatabaseWatcher/watchers/{watcherName}/privateConnections/{privateConnectionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DatabaseWatcher/watchers/{watcherName}/sharedPrivateLinkResources": {
       "get": {
-        "operationId": "PrivateConnections_Get",
+        "operationId": "SharedPrivateLinkResources_ListByWatcher",
         "tags": [
-          "PrivateConnections"
+          "SharedPrivateLinkResources"
         ],
-        "description": "Get a PrivateConnection",
+        "description": "List SharedPrivateLinkResource resources by Watcher",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "watcherName",
+            "in": "path",
+            "description": "The database watcher name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SharedPrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SharedPrivateLinkResources_ListByWatcher": {
+            "$ref": "./examples/SharedPrivateLinkResources_ListByWatcher_200.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DatabaseWatcher/watchers/{watcherName}/sharedPrivateLinkResources/{sharedPrivateLinkResourceName}": {
+      "get": {
+        "operationId": "SharedPrivateLinkResources_Get",
+        "tags": [
+          "SharedPrivateLinkResources"
+        ],
+        "description": "Get a SharedPrivateLinkResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -498,9 +551,9 @@
             "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$"
           },
           {
-            "name": "privateConnectionName",
+            "name": "sharedPrivateLinkResourceName",
             "in": "path",
-            "description": "The private connection resource name.",
+            "description": "The Shared Private Link resource name.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_.]{0,62}[a-zA-Z0-9_]{1}$"
@@ -510,7 +563,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PrivateConnection"
+              "$ref": "#/definitions/SharedPrivateLinkResource"
             }
           },
           "default": {
@@ -521,17 +574,17 @@
           }
         },
         "x-ms-examples": {
-          "PrivateConnections_Get": {
-            "$ref": "./examples/PrivateConnections_Get_200.json"
+          "SharedPrivateLinkResources_Get": {
+            "$ref": "./examples/SharedPrivateLinkResources_Get_200.json"
           }
         }
       },
       "put": {
-        "operationId": "PrivateConnections_CreateOrUpdate",
+        "operationId": "SharedPrivateLinkResources_Create",
         "tags": [
-          "PrivateConnections"
+          "SharedPrivateLinkResources"
         ],
-        "description": "Create a PrivateConnection",
+        "description": "Create a SharedPrivateLinkResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -551,9 +604,9 @@
             "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$"
           },
           {
-            "name": "privateConnectionName",
+            "name": "sharedPrivateLinkResourceName",
             "in": "path",
-            "description": "The private connection resource name.",
+            "description": "The Shared Private Link resource name.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_.]{0,62}[a-zA-Z0-9_]{1}$"
@@ -564,21 +617,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateConnection"
+              "$ref": "#/definitions/SharedPrivateLinkResource"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Resource 'SharedPrivateLinkResource' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/PrivateConnection"
+              "$ref": "#/definitions/SharedPrivateLinkResource"
             }
           },
           "201": {
-            "description": "ARM create operation completed successfully.",
+            "description": "Resource 'SharedPrivateLinkResource' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/PrivateConnection"
+              "$ref": "#/definitions/SharedPrivateLinkResource"
             },
             "headers": {
               "Retry-After": {
@@ -596,8 +649,8 @@
           }
         },
         "x-ms-examples": {
-          "PrivateConnections_CreateOrUpdate": {
-            "$ref": "./examples/PrivateConnections_CreateOrUpdate_200.json"
+          "SharedPrivateLinkResources_Create": {
+            "$ref": "./examples/SharedPrivateLinkResources_Create_200.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -606,11 +659,11 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "PrivateConnections_Delete",
+        "operationId": "SharedPrivateLinkResources_Delete",
         "tags": [
-          "PrivateConnections"
+          "SharedPrivateLinkResources"
         ],
-        "description": "Delete a PrivateConnection",
+        "description": "Delete a SharedPrivateLinkResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -630,9 +683,9 @@
             "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$"
           },
           {
-            "name": "privateConnectionName",
+            "name": "sharedPrivateLinkResourceName",
             "in": "path",
-            "description": "The private connection resource name.",
+            "description": "The Shared Private Link resource name.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_.]{0,62}[a-zA-Z0-9_]{1}$"
@@ -667,8 +720,8 @@
           }
         },
         "x-ms-examples": {
-          "PrivateConnections_Delete": {
-            "$ref": "./examples/PrivateConnections_Delete_200.json"
+          "SharedPrivateLinkResources_Delete": {
+            "$ref": "./examples/SharedPrivateLinkResources_Delete_200.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -947,13 +1000,13 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Resource 'Target' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/Target"
             }
           },
           "201": {
-            "description": "ARM create operation completed successfully.",
+            "description": "Resource 'Target' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Target"
             },
@@ -1221,12 +1274,12 @@
         ]
       }
     },
-    "PrivateConnection": {
+    "PrivateLinkResource": {
       "type": "object",
       "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/PrivateConnectionProperties",
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -1241,15 +1294,15 @@
         }
       ]
     },
-    "PrivateConnectionListResult": {
+    "PrivateLinkResourceListResult": {
       "type": "object",
-      "description": "The response of a PrivateConnection list operation.",
+      "description": "The response of a PrivateLinkResource list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The PrivateConnection items on this page",
+          "description": "The PrivateLinkResource items on this page",
           "items": {
-            "$ref": "#/definitions/PrivateConnection"
+            "$ref": "#/definitions/PrivateLinkResource"
           }
         },
         "nextLink": {
@@ -1262,17 +1315,159 @@
         "value"
       ]
     },
-    "PrivateConnectionProperties": {
+    "PrivateLinkResourceProperties": {
       "type": "object",
-      "description": "The generic properties of a private connection, which uses a private endpoint for the target resource.",
+      "description": "Properties of a private link resource.",
       "properties": {
-        "resourceId": {
+        "groupId": {
           "type": "string",
-          "description": "The ARM ResourceId of the private connection target."
+          "description": "The private link resource group id.",
+          "readOnly": true
         },
-        "resourceFullyQualifiedDomainName": {
+        "requiredMembers": {
+          "type": "array",
+          "description": "The private link resource required member names.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "description": "The private link resource private link DNS zone name.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "shareablePrivateLinkResourceTypes": {
+          "type": "array",
+          "description": "The list of resource types that support Azure Private Link, and are supported by database watcher.",
+          "items": {
+            "$ref": "#/definitions/ShareablePrivateLinkResourceType"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "ShareablePrivateLinkResourceProperties": {
+      "type": "object",
+      "description": "The properties of a resource type that supports Azure Private Link, supported by database watcher.",
+      "properties": {
+        "type": {
           "type": "string",
-          "description": "The fully qualified domain name (FQDN) of the target resource (e.g. some-resource.eastus.kusto.windows.net)."
+          "description": "The resource provider type for the resource that supports Azure Private Link.",
+          "readOnly": true
+        },
+        "groupId": {
+          "type": "string",
+          "description": "The resource provider group id for the resource that supports Azure Private Link.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the resource type that supports Azure Private Link.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "type",
+        "groupId",
+        "description"
+      ]
+    },
+    "ShareablePrivateLinkResourceType": {
+      "type": "object",
+      "description": "The resources that that support Azure Private Link, and are supported by database watcher.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource type that supports Azure Private Link, supported by database watcher.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ShareablePrivateLinkResourceProperties",
+          "description": "The properties of a resource type that supports Azure Private Link, supported by database watcher.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ]
+    },
+    "SharedPrivateLinkResource": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SharedPrivateLinkResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SharedPrivateLinkResourceListResult": {
+      "type": "object",
+      "description": "The response of a SharedPrivateLinkResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SharedPrivateLinkResource items on this page",
+          "items": {
+            "$ref": "#/definitions/SharedPrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SharedPrivateLinkResourceProperties": {
+      "type": "object",
+      "description": "The generic properties of a Shared Private Link resource.",
+      "properties": {
+        "privateLinkResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource id of the resource the shared private link resource is for.",
+          "x-ms-arm-id-details": {
+            "allowedResources": []
+          }
+        },
+        "groupId": {
+          "type": "string",
+          "description": "The group id from the provider of resource the shared private link resource is for."
+        },
+        "requestMessage": {
+          "type": "string",
+          "description": "The request message for requesting approval of the shared private link resource."
+        },
+        "resourceRegion": {
+          "type": "string",
+          "description": "Optional. Can be used to specify the Azure Resource Manager location of the resource to which a shared private link is to be created. This is only required for those resources whose DNS configuration are regional (such as Kusto)."
+        },
+        "status": {
+          "$ref": "#/definitions/SharedPrivateLinkResourceStatus",
+          "description": "Status of the shared private link resource. Can be Pending, Approved, Rejected or Disconnected.",
+          "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
@@ -1281,9 +1476,46 @@
         }
       },
       "required": [
-        "resourceId",
-        "resourceFullyQualifiedDomainName"
+        "privateLinkResourceId",
+        "groupId",
+        "requestMessage"
       ]
+    },
+    "SharedPrivateLinkResourceStatus": {
+      "type": "string",
+      "description": "Status of the shared private link resource. Can be Pending, Approved, Rejected or Disconnected.",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected",
+        "Disconnected"
+      ],
+      "x-ms-enum": {
+        "name": "SharedPrivateLinkResourceStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "The shared private link connection request was not yet authorized by the resource owner."
+          },
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "The shared private link connection request was approved by the resource owner."
+          },
+          {
+            "name": "Rejected",
+            "value": "Rejected",
+            "description": "The shared private link connection request was rejected by the resource owner."
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "The shared private link connection request was disconnected by the resource owner."
+          }
+        ]
+      }
     },
     "SqlDbElasticPoolTargetProperties": {
       "type": "object",
