@@ -1,6 +1,6 @@
 # CI Fix Guide
 
-Short link: https://aka.ms/ci-fix
+Short link: https://aka.ms/azsdk/ci-fix
 
 This page provides detailed instructions on how to diagnose, reproduce, fix and get help on various [automated validation tooling] failures on your [Azure REST API specs PR].
 
@@ -30,18 +30,8 @@ cd specification/contosowidgetmanager
 # Install the dependencies to the local 'node_modules' folder.
 npm install
 
-# Compile TypeScript. Compilation will fail, this is expected. But it will compile 'scripts/prettier-swagger-plugin', which is what we need.
-npx tsc 
-
-# As of 5/25/2023, the prettier version should be 2.1.2
-npx prettier --version
-
 # Run 'prettier --check' to verify the problems can be reproduced locally
 npx prettier --check **/*.json
-
-# Run 'prettier --list-different' to understand which files have problems.
-# Note: there is no way to view the exact problems without actually changing the affected files. See https://github.com/prettier/prettier/issues/6069.
-npx prettier --list-different **/*.json
 
 # Run 'prettier --write' to fix the problems.
 npx prettier --write **/*.json
@@ -109,7 +99,11 @@ To reproduce LintDiff failures locally, see [CONTRIBUTING.md / How to locally re
 
 ## Avocado
 
-Run avocado locally:
+### Get help fixing Avocado validation failures
+
+Refer to [Avocado README](https://github.com/Azure/avocado/blob/master/README.md) for detailed description of validations and how-to-fix guidance.
+
+### Run avocado locally
 
 ```
 npm install -g @azure/avocado
@@ -123,8 +117,6 @@ Note: When running in Swagger PR pipeline, Avocado only report errors with file 
 
 - Run all specs: Clone the repo `azure/azure-rest-api-specs` and run "avocado" in folder `azure/azure-rest-api-specs`.
 - Run single service specs: create a folder `specification`. and move your service specs folder in `specification`. run "avocado"
-
-Refer to [Avocado Readme](https://github.com/Azure/avocado/blob/master/README.md) for detailed description of validations and how-to-fix guidance.
 
 ## API Doc Preview
 

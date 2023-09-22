@@ -444,20 +444,8 @@
       "properties": {
         "state": {
           "type": "string",
-          "description": "The state of the CA certificate.",
-          "items": {
-            "type": "string",
-            "enum": [
-              "NotIssued",
-              "PendingEnrollment",
-              "Issued"
-            ],
-            "x-ms-enum": {
-              "name": "CertificateState",
-              "modelAsString": true
-            }
-          },
-          "maxItems": 100
+          "description": "The state of the CA certificate. This value is read-only and provided for informative purposes. The state can be one of the following: \"Issued\" or \"PendingEnrollment\".",
+          "readOnly": true
         },
         "issuer": {
           "type": "string",

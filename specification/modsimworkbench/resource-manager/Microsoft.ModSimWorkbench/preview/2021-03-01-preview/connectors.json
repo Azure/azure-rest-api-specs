@@ -619,102 +619,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/chambers/{chamberName}/connectors/{name}/licenseAdd": {
-      "post": {
-        "tags": [
-          "connectors_LicenseAdd"
-        ],
-        "description": "Add license to an ModSim Workbench connector.",
-        "operationId": "connectors_LicenseAdd",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "in": "path",
-            "name": "resourceGroup",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group"
-          },
-          {
-            "in": "path",
-            "name": "workbenchName",
-            "required": true,
-            "type": "string",
-            "description": "The name of the workbench"
-          },
-          {
-            "name": "chamberName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the chamber."
-          },
-          {
-            "in": "path",
-            "name": "name",
-            "required": true,
-            "type": "string",
-            "description": "The name of the connector."
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "description": "License key parameters",
-            "schema": {
-              "$ref": "#/definitions/LicenseKeyParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Default Error Response",
-            "schema": {
-              "$ref": "./modsimworkbenches.json#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "Connectors License Add": {
-            "$ref": "./examples/ConnectorsLicenseAdd.json"
-          }
-        },
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ]
-      }
     }
   },
   "definitions": {
@@ -759,10 +663,6 @@
           "description": "The reply URL of OTDS for Azure AD app.",
           "type": "string",
           "readOnly": true
-        },
-        "licenseKeyUri": {
-          "description": "The license key uri.",
-          "type": "string"
         }
       },
       "description": "Etx properties."
@@ -789,16 +689,12 @@
           "enum": [
             "ExpressRoute",
             "None",
-            "Vpn"
+            "VPN"
           ],
           "x-ms-enum": {
             "name": "GatewayType",
             "modelAsString": true
           }
-        },
-        "gatewayVnetId": {
-          "type": "string",
-          "description": "Gets or sets the GatewayVnetId."
         },
         "accessUrl": {
           "type": "string",
@@ -856,24 +752,15 @@
       "type": "object",
       "properties": {
         "accessConfigurations": {
-          "type": "object",
-          "items": {
-            "$ref": "#/definitions/AccessConfiguration"
-          },
+          "$ref": "#/definitions/AccessConfiguration",
           "description": "Gets or sets the Access Configuration."
         },
         "remoteDesktop": {
-          "type": "object",
-          "items": {
-            "$ref": "#/definitions/RemoteDesktop"
-          },
+          "$ref": "#/definitions/RemoteDesktop",
           "description": "Gets or sets the Remote Desktop."
         },
         "networkAcls": {
-          "type": "object",
-          "items": {
-            "$ref": "#/definitions/NetworkAcls"
-          },
+          "$ref": "#/definitions/NetworkAcls",
           "description": "Specifies set of source IP address ranges to allow access the ModSim Workbench workbench."
         },
         "provisioningState": {
@@ -899,17 +786,6 @@
           "$ref": "./modsimworkbenches.json#/definitions/Resource"
         }
       ]
-    },
-    "LicenseKeyParameters": {
-      "type": "object",
-      "description": "License Key Parameters",
-      "properties": {
-        "licenseKey": {
-          "x-ms-secret": true,
-          "description": "Value of License Key",
-          "type": "string"
-        }
-      }
     }
   }
 }

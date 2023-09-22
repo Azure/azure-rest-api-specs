@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "test-rg",
+    "testBaseAccountName": "test-tb",
+    "testConfigurationName": "2426d7d1-055d-426e-81d3-a308c7749513",
+    "api-version": "2023-08-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.TestBase/testBaseAccounts/test-tb/testConfigurations/2426d7d1-055d-426e-81d3-a308c7749513",
+        "name": "2426d7d1-055d-426e-81d3-a308c7749513",
+        "type": "Microsoft.TestBase/testBaseAccounts/testConfigurations",
+        "systemData": {
+          "createdBy": "2022-06-21T08:51:41.093Z",
+          "createdByType": "User",
+          "createdAt": "2022-06-21T08:51:41.093Z",
+          "lastModifiedBy": "test@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-06-21T08:51:41.093Z"
+        },
+        "properties": {
+          "packageIds": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg1/providers/Microsoft.TestBase/testBaseAccounts/contoso-testBaseAccount1/packages/contoso-package1"
+          ],
+          "triggerType": "Custom",
+          "testMatrix": {
+            "updateType": "SecurityUpdate",
+            "securityUpdateSpec": {
+              "targetOSs": [
+                "Windows 10 2004",
+                "Windows 10 1903",
+                "Windows 10 1809"
+              ]
+            }
+          },
+          "isEnabled": true,
+          "testEnvironment": {
+            "vmConfigurationTypeName": "vmConfig1"
+          },
+          "customTriggerSpec": {
+            "executionScheduleTime": "08:51:41",
+            "recurringType": "ByDay"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

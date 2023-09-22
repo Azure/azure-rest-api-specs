@@ -709,6 +709,14 @@
             "URI": {
               "type": "object",
               "$ref": "#/definitions/SubjectAlternativeNameRule"
+            },
+            "UPN": {
+              "type": "object",
+              "$ref": "#/definitions/SubjectAlternativeNameRule"
+            },
+            "EMAIL": {
+              "type": "object",
+              "$ref": "#/definitions/SubjectAlternativeNameRule"
             }
           },
           "maxItems": 100,
@@ -843,24 +851,8 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": [
-              "ServerAuth",
-              "ClientAuth",
-              "CodeSigning",
-              "EmailProtection",
-              "IpsecEndSystem",
-              "IpsecTunnel",
-              "IpsecUser",
-              "TimeStamping",
-              "OcspSigning",
-              "SmartCardLogon"
-            ],
-            "x-ms-enum": {
-              "name": "ValueExtendedKeyUsage",
-              "modelAsString": true
-            },
-            "maxItems": 10,
-            "x-ms-identifiers": []
+            "description": "An EKU. This must be either one of the following (AnyExtendedKeyUsage, ServerAuth, ClientAuth, CodeSigning, EmailProtection, IpsecEndSystem, IpsecTunnel, IpsecUser, TimeStamping, OcspSigning, SmartCardLogon, AttestationIdentityKey) or an OID.",
+            "readOnly": false
           }
         },
         "allowed": {
@@ -868,22 +860,22 @@
           "type": "string",
           "items": {
             "type": "string",
-            "enum": [
-              "ServerAuth",
-              "ClientAuth",
-              "CodeSigning",
-              "EmailProtection",
-              "IpsecEndSystem",
-              "IpsecTunnel",
-              "IpsecUser",
-              "TimeStamping",
-              "OcspSigning",
-              "SmartCardLogon"
-            ],
-            "x-ms-enum": {
-              "name": "AllowedExtendedKeyUsage",
-              "modelAsString": true
-            }
+            "description": "An EKU. This must be either one of the following (AnyExtendedKeyUsage, ServerAuth, ClientAuth, CodeSigning, EmailProtection, IpsecEndSystem, IpsecTunnel, IpsecUser, TimeStamping, OcspSigning, SmartCardLogon, AttestationIdentityKey) or an OID.",
+            "readOnly": false
+          }
+        },
+        "extendedKeyUsageMode": {
+          "description": "When true the certificate authority (CA) will allow anyExtendedKeyUsage extendedKeyUsage (EKU) in enrolled certificate and not enforce that the issuing CA certificate have a superset of the enrolled certificate EKUs.",
+          "type": "string",
+          "readOnly": false,
+          "x-ms-client-default": "RestrictToIssuingCaExtendedKeyUsage",
+          "enum": [
+            "AllowAnyExtendedKeyUsage",
+            "RestrictToIssuingCaExtendedKeyUsage"
+          ],
+          "x-ms-enum": {
+            "name": "ExtendedKeyUsageMode",
+            "modelAsString": true
           }
         }
       }
