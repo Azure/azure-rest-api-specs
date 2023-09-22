@@ -27,15 +27,15 @@ These are the global settings for the azureintegrationspaces.
 ``` yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-preview-2023-11
+tag: package-2023-11-14-preview
 ```
 
 
-### Tag: package-preview-2023-11
+### Tag: package-2023-11-14-preview
 
-These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
+These settings apply only when `--tag=package-2023-11-14-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-11'
+```yaml $(tag) == 'package-2023-11-14-preview'
 input-file:
   - Microsoft.IntegrationSpaces/preview/2023-11-14-preview/openapi.json
 ```
