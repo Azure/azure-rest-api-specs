@@ -590,14 +590,14 @@ model AnalyzeConversationJobsInput {
   analysisInput: MultiLanguageConversationAnalysisInput;
 
   @doc("Set of tasks to execute on the input conversation.")
-  tasks: Array<AnalyzeConversationLROTask>;
+  tasks: Array<AnalyzeConversationLroTask>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
 @doc("Base class for a long-running conversation input task.")
 @discriminator("kind")
 @added(Versions.v2023_04_01)
-model AnalyzeConversationLROTask extends TaskIdentifier {
+model AnalyzeConversationLroTask extends TaskIdentifier {
   @doc("Enumeration of supported analysis tasks on a collection of conversations.")
   kind: AnalyzeConversationLROTaskKind;
 }
@@ -619,7 +619,7 @@ enum AnalyzeConversationLROTaskKind {
   
   @added(Versions.v2023_04_15_preview)
   @doc("Conversational Sentiment Task")
-  ConversationalSentimentTask
+  ConversationalSentimentTask,
 }
 
 @doc("Enumeration of results for supported conversation analysis Results.")
@@ -645,8 +645,9 @@ enum AnalyzeConversationResultsKind {
 @doc("Contains the status of the submitted job for analyzing a conversation, along with related statistics.")
 @added(Versions.v2023_04_01)
 @resource("language/analyze-conversations/jobs")
-model AnalyzeConversationJobState extends ConversationTasksState{
+model AnalyzeConversationJobState{
   ...JobState;
+  ...ConversationTasksState;
   ...AnalyzeConversationJobStatistics;
 }
 
@@ -845,7 +846,7 @@ model ConversationItemLevelTiming extends AudioTiming {}
 
 @added(Versions.v2023_04_15_preview)
 @doc("Task definition for conversational sentiment.")
-model AnalyzeConversationalSentimentTask extends AnalyzeConversationLROTask {
+model AnalyzeConversationalSentimentTask extends AnalyzeConversationLroTask {
   @doc("discriminator kind")
   kind: AnalyzeConversationLROTaskKind.ConversationalSentimentTask,
 
@@ -1049,7 +1050,7 @@ enum TranscriptContentType {
 
 @doc("Task definition for custom conversational summarization.")
 @added(Versions.v2023_04_15_preview)
-model AnalyzeCustomConversationSummarizationTask extends AnalyzeConversationLROTask {
+model AnalyzeCustomConversationSummarizationTask extends AnalyzeConversationLroTask {
   @doc("discriminator kind")
   kind: AnalyzeConversationLROTaskKind.CustomConversationalSummarizationTask;
 
@@ -1059,7 +1060,7 @@ model AnalyzeCustomConversationSummarizationTask extends AnalyzeConversationLROT
 
 @doc("Task definition for conversational summarization.")
 @added(Versions.v2023_04_01)
-model AnalyzeConversationSummarizationTask extends AnalyzeConversationLROTask {
+model AnalyzeConversationSummarizationTask extends AnalyzeConversationLroTask {
   @doc("discriminator kind")
   kind: AnalyzeConversationLROTaskKind.ConversationalSummarizationTask;
 

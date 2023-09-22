@@ -380,6 +380,10 @@
           "type": "string",
           "description": "next link"
         },
+        "tasks": {
+          "$ref": "#/definitions/Tasks",
+          "description": "Contains the state for the tasks that are being executed as part of the submitted job for analyzing a conversation."
+        },
         "statistics": {
           "$ref": "#/definitions/ConversationRequestStatistics",
           "description": "Contains the statistics for the submitted job."
@@ -389,12 +393,8 @@
         "createdDateTime",
         "jobId",
         "lastUpdateDateTime",
-        "status"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConversationTasksState"
-        }
+        "status",
+        "tasks"
       ]
     },
     "AnalyzeConversationJobStatistics": {
@@ -423,7 +423,7 @@
           "type": "array",
           "description": "Set of tasks to execute on the input conversation.",
           "items": {
-            "$ref": "#/definitions/AnalyzeConversationLROTask"
+            "$ref": "#/definitions/AnalyzeConversationLroTask"
           },
           "x-ms-identifiers": []
         }
@@ -431,25 +431,6 @@
       "required": [
         "analysisInput",
         "tasks"
-      ]
-    },
-    "AnalyzeConversationLROTask": {
-      "type": "object",
-      "description": "Base class for a long-running conversation input task.",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/AnalyzeConversationLROTaskKind",
-          "description": "Enumeration of supported analysis tasks on a collection of conversations."
-        }
-      },
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/TaskIdentifier"
-        }
       ]
     },
     "AnalyzeConversationLROTaskKind": {
@@ -469,6 +450,25 @@
           }
         ]
       }
+    },
+    "AnalyzeConversationLroTask": {
+      "type": "object",
+      "description": "Base class for a long-running conversation input task.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AnalyzeConversationLROTaskKind",
+          "description": "Enumeration of supported analysis tasks on a collection of conversations."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskIdentifier"
+        }
+      ]
     },
     "AnalyzeConversationResult": {
       "type": "object",
@@ -540,7 +540,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeConversationLROTask"
+          "$ref": "#/definitions/AnalyzeConversationLroTask"
         }
       ],
       "x-ms-discriminator-value": "ConversationalSummarizationTask"
