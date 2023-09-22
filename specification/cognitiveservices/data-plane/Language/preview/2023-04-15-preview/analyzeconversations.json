@@ -174,6 +174,44 @@
           }
         }
       }
+    },
+    "/language/analyze-conversations2/jobs/{jobId}": {
+      "get": {
+        "operationId": "GetImageOperationStatus",
+        "description": "Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": ".",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeConversationJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -3318,9 +3356,6 @@
           }
         ]
       }
-    },
-    "SubmitAccepted": {
-      "type": "object"
     },
     "SummaryAspect": {
       "type": "string",
