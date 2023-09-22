@@ -1,0 +1,22 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "cassandra-prod-rg",
+    "api-version": "2023-09-15",
+    "clusterName": "cassandra-prod",
+    "body": {
+      "command": "nodetool status",
+      "host": "10.0.1.12"
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DocumentDB/locations/westus/operationsStatus/318653d0-3da5-4814-b8f6-429f2af0b2a4?api-version=2023-09-15"
+      },
+      "body": {
+        "commandOutput": "Datacenter: datacenter1\n=======================\n"
+      }
+    }
+  }
+}
