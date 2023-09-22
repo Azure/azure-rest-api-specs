@@ -10,23 +10,28 @@
     "MaintenanceResourcesScheduledEventEmittedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ResourceNotifications.MaintenanceResources.ScheduledEventEmitted event.",
       "type": "object",
-      "properties": {
-        "resourceInfo": {
-          "description": "Data specific to the resource",
-          "$ref": "#/definitions/ResourceInfoForScheduledEventEmittedEvent"
-        },
-        "apiVersion": {
-          "description": "api version of the resource payload",
-          "type": "string"
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthResourcesResourceEventData"
         }
-      },
+      ],
       "x-ms-examples": {
         "MaintenanceResourcesScheduledEventEmittedEventGridSchema": {
           "$ref": "./examples/event-grid-schema/MaintenanceResources_ScheduledEventEmitted.json"
         }
       }
     },
-    "ResourceInfoForScheduledEventEmittedEvent": {
+    "MaintenanceResourcesEventData": {
+      "description": "Resource information related to scheduled event",
+      "type": "object",
+      "properties": {
+        "resourceInfo": {
+          "description": "Data specific to the resource",
+          "$ref": "#/definitions/MaintenanceResourcesResourceInfo"
+        }
+      }
+    },
+    "MaintenanceResourcesResourceInfo": {
       "description": "Resource information related to scheduled event",
       "type": "object",
       "properties": {

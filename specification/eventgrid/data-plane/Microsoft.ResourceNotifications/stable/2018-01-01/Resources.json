@@ -10,72 +10,42 @@
     "ResourceManagementCreatedOrUpdatedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ResourceNotifications.Resources.CreatedOrUpdated event.",
       "type": "object",
-      "properties": {
-        "resourceInfo": {
-          "description": "Data specific to the resource",
-          "$ref": "#/definitions/ResourceInfoAboutCreatedOrUpdatedEvent"
-        },
-        "apiVersion": {
-          "description": "api version of the resource payload",
-          "type": "string"
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceManagementEventData"
         }
-      },
+      ],
       "x-ms-examples": {
         "ResourceManagementCreatedorUpdatedEventGridSchema": {
           "$ref": "./examples/event-grid-schema/Resources_CreatedOrUpdated.json"
         }
       }
     },
-    "ResourceInfoAboutCreatedOrUpdatedEvent": {
-      "description": "details of resourceInfo",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "id of the base resource which is being created or updated",
-          "type": "string"
-        },
-        "name": {
-          "description": "name of the resource being created or updated",
-          "type": "string"
-        },
-        "type": {
-          "description": "the type of the resource being created or updated",
-          "type": "string"
-        },
-        "location": {
-          "description": "the location of the resource being created or updated",
-          "type": "string"
-        },
-        "tags": {
-          "description": "tags on the resource being created or updated",
-          "type": "string"
-        },
-        "properties": {
-          "description": "properties in the resource payload",
-          "type": "object"
-        }
-      }
-    },
     "ResourceManagementDeletedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ResourceNotifications.Resources.Deleted event.",
       "type": "object",
-      "properties": {
-        "resourceInfo": {
-          "description": "Data specific to the resource",
-          "$ref": "#/definitions/ResourceInfoAboutDeletedEvent"
-        },
-        "apiVersion": {
-          "description": "api version of the resource payload",
-          "type": "string"
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceManagementEventData"
         }
-      },
+      ],
       "x-ms-examples": {
         "ResourceManagementDeletedEventGridSchema": {
           "$ref": "./examples/event-grid-schema/Resources_Deleted.json"
         }
       }
     },
-    "ResourceInfoAboutDeletedEvent": {
+    "ResourceManagementEventData": {
+      "description": "Resource information related to resource being deleted. Resource properties bag not present",
+      "type": "object",
+      "properties": {
+        "resourceInfo": {
+          "description": "Data specific to the resource",
+          "$ref": "#/definitions/ResourceManagementResourceInfo"
+        }
+      }
+    },
+    "ResourceManagementResourceInfo": {
       "description": "Resource information related to resource being deleted. Resource properties bag not present",
       "type": "object",
       "properties": {
