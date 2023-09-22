@@ -2220,11 +2220,11 @@
       "type": "object",
       "properties": {
         "description": {
-          "description": "Description of Secondary consent.",
+          "description": "User consent description.",
           "type": "string"
         },
         "type": {
-          "description": "Type of Secondary consent.",
+          "description": "The Azure service for which secondary consent is needed for case creation.",
           "type": "string"
         }
       }
@@ -2773,10 +2773,18 @@
       "properties": {
         "userConsent": {
           "description": "User consent value provided",
-          "type": "string"
+          "enum": [
+            "Yes",
+            "No"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "UserConsent",
+            "modelAsString": true
+          }
         },
         "type": {
-          "description": "Type of user consent.",
+          "description": "The service name for which the secondary consent is being provided. The value needs to be retrieved from the Problem Classification API response.",
           "type": "string"
         }
       }
@@ -2867,7 +2875,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -2949,7 +2957,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -3001,7 +3009,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
