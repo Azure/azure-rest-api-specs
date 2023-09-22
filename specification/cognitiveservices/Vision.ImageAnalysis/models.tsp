@@ -158,7 +158,7 @@ model ImageAnalysisResult {
   denseCaptionsResult?: DenseCaptionsResult;
 
   @doc("The model used for the analysis")
-  metadata: ImageMetadataApiModel;
+  metadata: ImageMetadata;
 
   @doc("The model used for the analysis")
   modelVersion: string;
