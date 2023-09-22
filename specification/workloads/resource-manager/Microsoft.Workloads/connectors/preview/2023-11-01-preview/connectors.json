@@ -212,10 +212,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
-            }
+            "description": "OK"
           },
           "202": {
             "description": "Accepted",
@@ -487,7 +484,7 @@
           }
         ],
         "responses": {
-          "201": {
+          "202": {
             "description": "Describes the backup connection resource of virtual instance for SAP.",
             "schema": {
               "$ref": "#/definitions/ACSSBackupConnection"
@@ -541,10 +538,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
-            }
+            "description": "OK"
           },
           "202": {
             "description": "Accepted",
@@ -768,7 +762,7 @@
           }
         ],
         "responses": {
-          "201": {
+          "202": {
             "description": "Describes the insights connection resource of Azure Monitor For SAP.",
             "schema": {
               "$ref": "#/definitions/AMSInsightsConnection"
@@ -825,10 +819,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
-            }
+            "description": "OK"
           },
           "202": {
             "description": "Accepted",
@@ -1374,8 +1365,9 @@
         "inputData": {
           "$ref": "#/definitions/InsightsInputData"
         },
-        "id": {
+        "insightsResourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "ARM Id for Insights resource Created.",
           "readOnly": true
         }
