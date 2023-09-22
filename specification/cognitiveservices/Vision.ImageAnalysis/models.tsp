@@ -21,7 +21,7 @@ model BoundingBox {
 @doc("A brief description of what the image depicts.")
 model CaptionResult {
   @doc("The level of confidence the service has in the caption.")
-  confidence: float32;
+  confidence: float64;
 
   @doc("The text of the caption.")
   text: string;
@@ -30,7 +30,7 @@ model CaptionResult {
 @doc("A region identified for smart cropping. There will be one region returned for each requested aspect ratio.")
 model CropRegion {
   @doc("The aspect ratio of the crop region.")
-  aspectRatio: float32;
+  aspectRatio: float64;
 
   @doc("The bounding box of the crop region.")
   boundingBox: BoundingBox;
@@ -39,7 +39,7 @@ model CropRegion {
 @doc("A brief description of what the image depicts.")
 model DenseCaption {
   @doc("The level of confidence the service has in the caption.")
-  confidence: float32;
+  confidence: float64;
 
   @doc("The text of the caption.")
   text: string;
@@ -71,13 +71,13 @@ model DetectedPerson {
 
   @doc("Gets the confidence value of the detected person.")
   @visibility("read")
-  confidence: float32;
+  confidence: float64;
 }
 
 @doc("A content line object consisting of an adjacent sequence of content elements, such as words and selection marks.")
 model DocumentLine {
   @doc("The bounding box of the line.")
-  boundingBox: Array<float32>;
+  boundingBox: Array<float64>;
 
   @doc("Concatenated content of the contained elements in reading order.")
   content: string;
@@ -89,10 +89,10 @@ model DocumentLine {
 @doc("The content and layout elements extracted from a page from the input.")
 model DocumentPage {
   @doc("The general orientation of the content in clockwise direction, measured in degrees between (-180, 180].")
-  angle: float32;
+  angle: float64;
 
   @doc("The height of the image/PDF in pixels/inches, respectively.")
-  height: float32;
+  height: float64;
 
   @doc("Extracted lines from the page, potentially containing both textual and visual elements.")
   lines: Array<DocumentLine>;
@@ -104,7 +104,7 @@ model DocumentPage {
   spans: Array<DocumentSpan>;
 
   @doc("The width of the image/PDF in pixels/inches, respectively.")
-  width: float32;
+  width: float64;
 
   @doc("Extracted words from the page.")
   words: Array<DocumentWord>;
@@ -122,7 +122,7 @@ model DocumentSpan {
 @doc("An object representing observed text styles.")
 model DocumentStyle {
   @doc("Confidence of correctly identifying the style.")
-  confidence: float32;
+  confidence: float64;
 
   @doc("Is content handwritten or not.")
   isHandwritten: boolean;
@@ -134,10 +134,10 @@ model DocumentStyle {
 @doc("A word object consisting of a contiguous sequence of characters. For non-space delimited languages,\r\nsuch as Chinese, Japanese, and Korean, each character is represented as its own word.")
 model DocumentWord {
   @doc("Bounding box of the word.")
-  boundingBox: Array<float32>;
+  boundingBox: Array<float64>;
 
   @doc("Confidence of correctly extracting the word.")
-  confidence: float32;
+  confidence: float64;
 
   @doc("Text content of the word.")
   content: string;
@@ -233,7 +233,7 @@ model SmartCropsResult {
 @doc("An entity observation in the image, along with the confidence score.")
 model Tag {
   @doc("The level of confidence that the entity was observed.")
-  confidence: float32;
+  confidence: float64;
 
   @doc("Name of the entity.")
   name: string;
