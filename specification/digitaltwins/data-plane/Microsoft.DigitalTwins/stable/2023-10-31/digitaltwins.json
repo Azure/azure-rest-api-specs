@@ -1584,7 +1584,7 @@
           "Jobs"
         ],
         "operationId": "ImportJobs_Cancel",
-        "description": "Cancels an import job that is currently running. It will finish the imports that are in progress, but prevent any subsequent entities from being imported as part of this job. Note this will leave your instance in an unknown state.\nStatus codes:\n* 200 Request Accepted\n* 400 Bad Request\n  * ValidationFailed - The import job request is not valid.",
+        "description": "Cancels an import job that is currently running. Service will stop any import operations triggered by the current import job that are in progress, and go to a cancelled state. Please note that this will leave your instance in an unknown state as there won't be any rollback operation. \nStatus codes:\n* 200 Request Accepted\n* 400 Bad Request\n  * ValidationFailed - The import job request is not valid.",
         "x-ms-examples": {
           "Cancel a job": {
             "$ref": "./examples/ImportJobCancel.json"
@@ -1635,7 +1635,7 @@
         ],
         "operationId": "DeleteJobs_Add",
         "x-ms-long-running-operation": true,
-        "description": "Initiates a job which deletes all models, twins, and relationships on the instance. Does not delete any other entities on the instance.\nStatus codes:\n* 202 Created\n* 400 Bad Request\n  * JobLimitReached - The maximum number of delete jobs allowed has been reached. \n  * ValidationFailed - Operation-Id already exists. \n  * Timeout - Job execution time exceeded set timeout value.",
+        "description": "Initiates a job which deletes all models, twins, and relationships on the instance. Does not delete any other types of entities.\nStatus codes:\n* 202 Created\n* 400 Bad Request\n  * JobLimitReached - The maximum number of delete jobs allowed has been reached. \n  * ValidationFailed - Operation-Id already exists.",
         "x-ms-examples": {
           "Add a job": {
             "$ref": "./examples/DeleteJobPost.json"
@@ -2310,10 +2310,10 @@
     },
     "timeoutInMinutes": {
       "name": "timeoutInMinutes",
-      "in": "header",
-      "description": "Desired timeout for the delete job. If the timeout is reached the job with fail with an error, finish deletions currently in progress, and prevent any subsequent deletions from starting. Note this will leave your instance in an unknown state.",
+      "in": "query",
+      "description": "Desired timeout for the delete job. Once the specified timeout is reached, service will stop any delete operations triggered by the current delete job that are in progress, and go to a failed state. Please note that this will leave your instance in an unknown state as there won't be any rollback operation.",
       "required": false,
-      "type": "string"
+      "type": "integer"
     },
     "if-none-match-star": {
       "name": "If-None-Match",
