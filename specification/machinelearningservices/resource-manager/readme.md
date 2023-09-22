@@ -44,6 +44,10 @@ input-file:
 suppressions:
   - code: LroPostReturn
     reason: LRO does not return 200.
+  - code: TrackedResourcePatchOperation
+    reason: server side don't support Patch yet.
+    where:
+      - $.definitions.PrivateEndpointConnection
 ```
 ### Tag: package-preview-2023-06
 
