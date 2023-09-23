@@ -83,6 +83,67 @@ interface Organizations
   ): ArmResponse<InformaticaServerlessRuntimeResourceList> | ErrorResponse;
 }
 
+@armResourceOperations
+interface ServerlessRuntimes
+  extends Azure.ResourceManager.TrackedResourceOperations<
+      InformaticaServerlessRuntimeResource,
+      InformaticaServerlessRuntimeProperties
+    > {
+  get is ArmResourceRead<InformaticaServerlessRuntimeResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<InformaticaServerlessRuntimeResource>;
+  delete is ArmResourceDeleteAsync<InformaticaServerlessRuntimeResource>;
+  update is ArmCustomPatchSync<
+    InformaticaServerlessRuntimeResource,
+    InformaticaServerlessRuntimeProperties
+  >;
+
+  @doc("Gets all dependencies for a serverless runtime resource")
+  @armResourceAction(InformaticaServerlessRuntimeResource)
+  @post
+  checkDependencies(
+    ...ResourceInstanceParameters<InformaticaServerlessRuntimeResource>,
+  ): ArmResponse<CheckDependenciesResponse> | ErrorResponse;
+
+  @doc("Gets all dependencies for a serverless runtime resource")
+  @armResourceAction(InformaticaServerlessRuntimeResource)
+  @post
+  startFailedServerlessRuntime(
+    ...ResourceInstanceParameters<InformaticaServerlessRuntimeResource>,
+  ): ArmNoContentResponse | ErrorResponse;
+}
+
+@doc("Model for the check dependencies API for an informatica serverless runtime resource")
+model CheckDependenciesResponse {
+  @doc("Count of dependencies")
+  count: int32;
+
+  @doc("id of resource")
+  id: string;
+
+  @doc("List of dependencies")
+  references: ServerlessRuntimeDependency[];
+}
+
+@doc("Dependency reference for a serverless runtime resource")
+model ServerlessRuntimeDependency {
+  @doc("Dependency ID")
+  id: string;
+
+  @doc("Application context ID")
+  appContextId: string;
+
+  @doc("Dependency path")
+  path: string;
+
+  @doc("document type")
+  documentType: string;
+
+  @doc("description of Dependency")
+  description: string;
+
+  @doc("Last Update Time")
+  lastUpdatedTime: string;
+}
 
 @doc("A list of serverless runtime resources as fetched using the informatica APIs")
 model InformaticaServerlessRuntimeResourceList {
@@ -186,21 +247,6 @@ model InformaticaServerlessRuntimeResource
   @doc("Name of the Serverless Runtime resource")
   @path
   name: string;
-}
-
-@armResourceOperations
-interface ServerlessRuntimes
-  extends Azure.ResourceManager.TrackedResourceOperations<
-      InformaticaServerlessRuntimeResource,
-      InformaticaServerlessRuntimeProperties
-    > {
-  get is ArmResourceRead<InformaticaServerlessRuntimeResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<InformaticaServerlessRuntimeResource>;
-  delete is ArmResourceDeleteAsync<InformaticaServerlessRuntimeResource>;
-  update is ArmCustomPatchSync<
-    InformaticaServerlessRuntimeResource,
-    InformaticaServerlessRuntimeProperties
-  >;
 }
 
 @doc("Properties specific to the Informatica DataManagement Organization resource.")
