@@ -69,62 +69,8 @@
     }
   },
   "definitions": {
-    "ProvisioningState": {
-      "type": "string",
-      "description": "The provisioning state of a resource.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "Provisioning",
-        "Updating",
-        "Deleting",
-        "Accepted"
-      ],
-      "x-ms-enum": {
-        "name": "ProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          },
-          {
-            "name": "Provisioning",
-            "value": "Provisioning",
-            "description": "The resource is being provisioned"
-          },
-          {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "The resource is updating"
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "The resource is being deleted"
-          },
-          {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "The resource create request has been accepted"
-          }
-        ]
-      }
-    },
     "SiteAwareResourceTypes": {
-      "description": "Name of Resource Type which recognizes Sites and displays capabilities.",
+      "description": "Displays all the resource types which support Sites.",
       "type": "object",
       "allOf": [
         {
@@ -134,13 +80,13 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SiteAwareResourceTypesProperties",
-          "description": "The resource-specific properties for this resource.",
+          "description": "The properties for this resource type.",
           "x-ms-client-flatten": true
         }
       }
     },
     "SiteAwareResourceTypesProperties": {
-      "description": "SiteAwareResourceTypes API Properties",
+      "description": "Properties of the SiteAwareResourceTypes resource type.",
       "type": "object",
       "properties": {
         "supportedResourceTypes": {
@@ -155,23 +101,23 @@
           ]
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "./edgesites.json#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
         }
       }
     },
     "SiteAwareResourceTypesDetails": {
-      "description": "The properties of the site Resource Types which support Sites operations and can be displayed under this view.",
+      "description": "The properties and availability status of each resource type which recognises Sites as an aggregation concept.",
       "type": "object",
       "properties": {
         "displayName": {
-          "description": "Portal Display Name",
+          "description": "Name to be displayed on portal.",
           "type": "string",
           "readOnly": true
         },
         "resourceType": {
-          "description": "Name of the operation.",
+          "description": "Fully qualified name of the resource type.",
           "type": "string",
           "readOnly": true
         },
@@ -189,7 +135,7 @@
           "readOnly": true
         },
         "supportedCapabilities": {
-          "description": "Aggregation Capabilities",
+          "description": "Aggregation properties which are currently supported.",
           "type": "array",
           "items": {
             "type": "string",
