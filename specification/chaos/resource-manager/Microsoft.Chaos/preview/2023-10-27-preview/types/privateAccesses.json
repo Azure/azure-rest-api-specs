@@ -1,243 +1,245 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "title": "PrivateAccesses types",
-      "version": "2023-08-15-preview"
+  "swagger": "2.0",
+  "info": {
+    "title": "PrivateAccesses types",
+    "version": "2023-10-27-preview"
+  },
+  "paths": {},
+  "definitions": {
+    "PrivateAccess": {
+      "type": "object",
+      "description": "PrivateAccesses tracked resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "description": "The system metadata of the private access resource.",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the private access resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateAccessProperties",
+          "x-ms-client-flatten": true,
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "required": [
+        "properties"
+      ]
     },
-    "paths": {},
-    "definitions": {
-      "application": {
-        "type": "object",
-        "description": "PrivateAccesses tracked resource.",
-        "allOf": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
-          }
-        ],
-        "properties": {
-          "systemData": {
-            "description": "The system metadata of the private access resource.",
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-            "readOnly": true
-          },
-          "location": {
-            "type": "string",
-            "description": "Location of the private access resource."
-          },
-          "properties": {
-            "$ref": "#/definitions/privateAccessProperties",
-            "x-ms-client-flatten": true,
-            "description": "The resource-specific properties for this resource."
-          }
-        },
-        "required": [
-          "properties"
-        ]
-      },
-      "PrivateAccessUpdate": {
-        "description": "An update to a private access.",
-        "type": "object",
-        "properties": {
-          "tags": {
-            "description": "Resource tags.",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
+    "PrivateAccessUpdate": {
+      "description": "An update to a private access.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
           }
         }
-      },
-      "PrivateAccessProperties": {
-        "type": "object",
-        "properties": {
-            "privateEndpointConnections": {
-                "type": "array",
-                "readOnly": true,
-                "items": {
-                  "$ref": "#/definitions/PrivateEndpointConnection"
-                },
-                "description": "A readonly collection of private endpoint connection. Currently only one endpoint connection is supported."
-              }
-          }
-        },
-        "description": "The properties of a private access resource",
-      },
-      "PrivateAccessListResult": {
-        "type": "object",
-        "description": "Model that represents a list of private access resources and a link for pagination.",
-        "properties": {
-          "value": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/PrivateAccess"
-            },
-            "description": "List of private access resources.",
-            "readOnly": true
-          },
-          "nextLink": {
-            "$ref": "./common.json#/definitions/urlNullable",
-            "description": "URL to retrieve the next page of private access resources.",
-            "readOnly": true
-          }
-        }
-      },"PrivateLinkResourceListResult": {
-        "properties": {
-          "value": {
-            "type": "array",
-            "description": "Array of private link resources",
-            "items": {
-              "$ref": "#/definitions/PrivateLinkResource"
-            }
-          }
-        },
-        "description": "A list of private link resources"
-      },
-      "PrivateLinkResource": {
-        "properties": {
-          "properties": {
-            "$ref": "#/definitions/PrivateLinkResourceProperties",
-            "description": "Resource properties.",
-            "x-ms-client-flatten": true
-          },
-          "id": {
-            "readOnly": true,
-            "type": "string",
-            "description": "private link resource Id"
-          },
-          "name": {
-            "readOnly": true,
-            "type": "string",
-            "description": "private link resource name"
-          },
-          "type": {
-            "readOnly": true,
-            "type": "string",
-            "description": "private link resource type"
-          }
-        },
-        "description": "A private link resource"
-      },
-      "PrivateLinkResourceProperties": {
-        "properties": {
-          "groupId": {
-            "description": "The private link resource group id.",
-            "type": "string",
-            "readOnly": true
-          },
-          "requiredMembers": {
-            "description": "The private link resource required member names.",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "readOnly": true
-          },
-          "requiredZoneNames": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "The private link resource DNS zone name."
-          }
-        },
-        "description": "Properties of a private link resource."
-      },"PrivateEndpoint": {
-        "properties": {
-          "id": {
-            "readOnly": true,
-            "type": "string",
-            "description": "The ARM identifier for Private Endpoint"
-          }
-        },
-        "description": "The Private Endpoint resource."
-      },
-      "PrivateEndpointServiceConnectionStatus": {
-        "type": "string",
-        "description": "The private endpoint connection status.",
-        "enum": [
-          "Pending",
-          "Approved",
-          "Rejected"
-        ],
-        "x-ms-enum": {
-          "name": "PrivateEndpointServiceConnectionStatus",
-          "modelAsString": true
-        }
-      },
-      "PrivateLinkServiceConnectionState": {
-        "properties": {
-          "status": {
-            "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus",
-            "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service."
-          },
-          "description": {
-            "type": "string",
-            "description": "The reason for approval/rejection of the connection."
-          },
-          "actionsRequired": {
-            "type": "string",
-            "description": "A message indicating if changes on the service provider require any updates on the consumer."
-          }
-        },
-        "description": "A collection of information about the state of the connection between service consumer and provider."
-      },
-      "PrivateEndpointConnectionProperties": {
-        "properties": {
-          "privateEndpoint": {
-            "$ref": "#/definitions/PrivateEndpoint",
-            "description": "The resource of private end point.",
-            "readOnly": true
-          },
-          "privateLinkServiceConnectionState": {
-            "$ref": "#/definitions/PrivateLinkServiceConnectionState",
-            "description": "A collection of information about the state of the connection between PrivateAccess and Virtual Network."
-          }
-        },
-        "required": [
-          "privateLinkServiceConnectionState"
-        ],
-        "description": "Properties of the PrivateEndpointConnectProperties."
-      },
-      "PrivateEndpointConnection": {
-        "properties": {
-          "properties": {
-            "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-            "x-ms-client-flatten": true,
-            "description": "Resource properties."
-          },
-          "id": {
-            "readOnly": true,
-            "type": "string",
-            "description": "private endpoint connection Id"
-          },
-          "name": {
-            "readOnly": true,
-            "type": "string",
-            "description": "private endpoint connection name"
-          },
-          "type": {
-            "readOnly": true,
-            "type": "string",
-            "description": "private endpoint connection type"
-          }
-        },
-        "description": "The Private Endpoint Connection resource.",
-        "x-ms-azure-resource": true
-      },
-      "PrivateEndpointConnectionListResult": {
-        "properties": {
-          "value": {
-            "type": "array",
-            "description": "Array of private endpoint connections",
-            "items": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
-          },
-          "nextLink": {
-            "type": "string",
-            "description": "The uri to fetch the next page of snapshots. Call ListNext() with this to fetch the next page of snapshots."
-          }
-        },
-        "description": "A list of private link resources"
       }
+    },
+    "PrivateAccessProperties": {
+      "type": "object",
+      "description": "The properties of a private access resource",
+      "properties": {
+        "privateEndpointConnections": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "description": "A readonly collection of private endpoint connection. Currently only one endpoint connection is supported."
+        }
+      }
+    },
+    "PrivateAccessListResult": {
+      "type": "object",
+      "description": "Model that represents a list of private access resources and a link for pagination.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateAccess"
+          },
+          "description": "List of private access resources.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "$ref": "./common.json#/definitions/urlNullable",
+          "description": "URL to retrieve the next page of private access resources.",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkResourceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private link resources",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        }
+      },
+      "description": "A list of private link resources"
+    },
+    "PrivateLinkResource": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "private link resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "private link resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "private link resource type"
+        }
+      },
+      "description": "A private link resource"
+    },
+    "PrivateLinkResourceProperties": {
+      "properties": {
+        "groupId": {
+          "description": "The private link resource group id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "description": "The private link resource required member names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The private link resource DNS zone name."
+        }
+      },
+      "description": "Properties of a private link resource."
+    },
+    "PrivateEndpoint": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ARM identifier for Private Endpoint"
+        }
+      },
+      "description": "The Private Endpoint resource."
+    },
+    "PrivateEndpointServiceConnectionStatus": {
+      "type": "string",
+      "description": "The private endpoint connection status.",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointServiceConnectionStatus",
+        "modelAsString": true
+      }
+    },
+    "PrivateLinkServiceConnectionState": {
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus",
+          "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service."
+        },
+        "description": {
+          "type": "string",
+          "description": "The reason for approval/rejection of the connection."
+        },
+        "actionsRequired": {
+          "type": "string",
+          "description": "A message indicating if changes on the service provider require any updates on the consumer."
+        }
+      },
+      "description": "A collection of information about the state of the connection between service consumer and provider."
+    },
+    "PrivateEndpointConnectionProperties": {
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint",
+          "description": "The resource of private end point.",
+          "readOnly": true
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
+          "description": "A collection of information about the state of the connection between PrivateAccess and Virtual Network."
+        }
+      },
+      "required": [
+        "privateLinkServiceConnectionState"
+      ],
+      "description": "Properties of the PrivateEndpointConnectProperties."
+    },
+    "PrivateEndpointConnection": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "x-ms-client-flatten": true,
+          "description": "Resource properties."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "private endpoint connection Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "private endpoint connection name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "private endpoint connection type"
+        }
+      },
+      "description": "The Private Endpoint Connection resource.",
+      "x-ms-azure-resource": true
+    },
+    "PrivateEndpointConnectionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private endpoint connections",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of snapshots. Call ListNext() with this to fetch the next page of snapshots."
+        }
+      },
+      "description": "A list of private link resources"
+    }
+  }
 }
