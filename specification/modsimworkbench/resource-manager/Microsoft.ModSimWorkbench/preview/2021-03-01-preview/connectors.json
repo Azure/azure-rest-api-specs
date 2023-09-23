@@ -752,15 +752,24 @@
       "type": "object",
       "properties": {
         "accessConfigurations": {
-          "$ref": "#/definitions/AccessConfiguration",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/AccessConfiguration"
+          },
           "description": "Gets or sets the Access Configuration."
         },
         "remoteDesktop": {
-          "$ref": "#/definitions/RemoteDesktop",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/RemoteDesktop"
+          },
           "description": "Gets or sets the Remote Desktop."
         },
         "networkAcls": {
-          "$ref": "#/definitions/NetworkAcls",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/NetworkAcls"
+          },
           "description": "Specifies set of source IP address ranges to allow access the ModSim Workbench workbench."
         },
         "provisioningState": {
