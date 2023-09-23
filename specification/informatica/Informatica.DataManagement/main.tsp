@@ -148,13 +148,13 @@ model ServerlessRuntimeDependency {
 @doc("A list of serverless runtime resources as fetched using the informatica APIs")
 model InformaticaServerlessRuntimeResourceList {
   @doc("List of runtime resources for the fetch all API")
-  informaticaRuntimeResources : InfaRuntimeResource[],
+  informaticaRuntimeResources: InfaRuntimeResource[];
 }
 
 @doc("Informatica runtime resource as received via the informatica fetch all runtime environments API")
 model InfaRuntimeResource {
   @doc("Environment name")
-  name : string;
+  name: string;
 
   @doc("Created time")
   createdTime: string;
@@ -187,7 +187,7 @@ model InfaRuntimeResource {
   serverlessConfigProperties: InfaServerlessConfigProperties;
 
   @doc("Description of the runtime resource")
-  description?: string
+  description?: string;
 }
 
 @doc("InfaServerlessConfigProperties for the fetch all serverless API as received from informatica API response")
