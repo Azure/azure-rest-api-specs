@@ -426,7 +426,18 @@
         "severity": {
           "type": "integer",
           "format": "int32",
-          "description": "The severity of the alerts fired by the rule. Must be between 0 and 4."
+          "description": "The severity of the alerts fired by the rule. Must be between 0 and 4.",
+          "enum": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "x-ms-enum": {
+            "name": "Severity",
+            "modelAsString": false
+          }
         },
         "for": {
           "type": "string",
