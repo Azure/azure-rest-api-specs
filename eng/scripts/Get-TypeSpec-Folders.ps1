@@ -31,6 +31,8 @@ else {
 
   $engFiles = $changedFiles | Where-Object {if ($_) { $_.StartsWith('eng') }}
 
+  $commonTypesFiles = $changedFiles | Where-Object {if ($_) { $_.StartsWith('specification/common-types') }}
+
   $rootFilesImpactingTypeSpec = @(
     ".gitattributes",
     ".prettierrc.json",
@@ -40,7 +42,7 @@ else {
   )
   $repoRootFiles = $changedFiles | Where-Object {$_ -in $rootFilesImpactingTypeSpec}
 
-  if (($Env:BUILD_REPOSITORY_NAME -eq 'azure/azure-rest-api-specs') -and ($engFiles -or $repoRootFiles)) {
+  if (($Env:BUILD_REPOSITORY_NAME -eq 'azure/azure-rest-api-specs') -and ($engFiles -or $commonTypesFiles -or $repoRootFiles)) {
     $changedFiles = $allChangedFiles
   }
   else {
