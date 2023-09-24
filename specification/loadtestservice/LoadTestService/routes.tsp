@@ -102,7 +102,7 @@ numeric, underscore or hyphen characters.
       @body
       body: bytes;
     },
-    ResourceCreatedResponse<FileInfo>, {}, ErrorResponseBody
+    ResourceCreatedResponse<TestFileInfo>, {}, ErrorResponseBody
   >;
 
   @summary("Get test file by the file name.")
