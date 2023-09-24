@@ -2047,28 +2047,6 @@
         }
       }
     },
-    "FileInfoList": {
-      "type": "object",
-      "description": "Collection of files.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The FileInfo items on this page",
-          "items": {
-            "$ref": "#/definitions/FileInfo"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "FileStatus": {
       "type": "string",
       "description": "File status",
@@ -3111,26 +3089,26 @@
       "description": "The input artifacts for the test.",
       "properties": {
         "configFileInfo": {
-          "$ref": "#/definitions/FileInfo",
+          "$ref": "#/definitions/TestFileInfo",
           "description": "File info"
         },
         "testScriptFileInfo": {
-          "$ref": "#/definitions/FileInfo",
+          "$ref": "#/definitions/TestFileInfo",
           "description": "File info"
         },
         "userPropFileInfo": {
-          "$ref": "#/definitions/FileInfo",
+          "$ref": "#/definitions/TestFileInfo",
           "description": "File info"
         },
         "inputArtifactsZipFileInfo": {
-          "$ref": "#/definitions/FileInfo",
+          "$ref": "#/definitions/TestFileInfo",
           "description": "File info"
         },
         "additionalFileInfo": {
           "type": "array",
           "description": "Additional supported files for the test run",
           "items": {
-            "$ref": "#/definitions/FileInfo"
+            "$ref": "#/definitions/TestFileInfo"
           },
           "readOnly": true,
           "x-ms-identifiers": []
@@ -3384,26 +3362,26 @@
       "description": "The input artifacts for the test run.",
       "properties": {
         "configFileInfo": {
-          "$ref": "#/definitions/FileInfo",
+          "$ref": "#/definitions/TestRunFileInfo",
           "description": "File info"
         },
         "testScriptFileInfo": {
-          "$ref": "#/definitions/FileInfo",
+          "$ref": "#/definitions/TestRunFileInfo",
           "description": "File info"
         },
         "userPropFileInfo": {
-          "$ref": "#/definitions/FileInfo",
+          "$ref": "#/definitions/TestRunFileInfo",
           "description": "File info"
         },
         "inputArtifactsZipFileInfo": {
-          "$ref": "#/definitions/FileInfo",
+          "$ref": "#/definitions/TestRunFileInfo",
           "description": "File info"
         },
         "additionalFileInfo": {
           "type": "array",
           "description": "Additional supported files for the test run",
           "items": {
-            "$ref": "#/definitions/FileInfo"
+            "$ref": "#/definitions/TestRunFileInfo"
           },
           "readOnly": true,
           "x-ms-identifiers": []
@@ -3415,11 +3393,11 @@
       "description": "The output artifacts for the test run.",
       "properties": {
         "resultFileInfo": {
-          "$ref": "#/definitions/FileInfo",
+          "$ref": "#/definitions/TestRunFileInfo",
           "description": "File info"
         },
         "logsFileInfo": {
-          "$ref": "#/definitions/FileInfo",
+          "$ref": "#/definitions/TestRunFileInfo",
           "description": "File info"
         }
       }

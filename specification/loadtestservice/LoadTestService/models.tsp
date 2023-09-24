@@ -389,24 +389,24 @@ model OptionalLoadTestConfig {
 @doc("The input artifacts for the test.")
 model TestInputArtifacts {
   @doc("File info")
-  configFileInfo?: FileInfo;
+  configFileInfo?: TestFileInfo;
 
   @doc("File info")
-  testScriptFileInfo?: FileInfo;
+  testScriptFileInfo?: TestFileInfo;
  
   @doc("File info")
-  userPropFileInfo?: FileInfo;
+  userPropFileInfo?: TestFileInfo;
 
   @doc("File info")
-  inputArtifactsZipFileInfo?: FileInfo;
+  inputArtifactsZipFileInfo?: TestFileInfo;
 
   @added(APIVersions.v2023_04_01_preview)
   @doc("The config json file for url based test")
-  urlTestsConfigFileInfo?: FileInfo;
+  urlTestsConfigFileInfo?: TestFileInfo;
 
   @doc("Additional supported files for the test run")
   @visibility("read")
-  additionalFileInfo?: FileInfo[];
+  additionalFileInfo?: TestFileInfo[];
 }
 
 @doc("File info")
@@ -456,10 +456,6 @@ model Error {
 @doc("Collection of tests")
 @friendlyName("TestsList")
 model TestsList is Azure.Core.Page<Test>;
-
-@doc("Collection of files.")
-@friendlyName("FileInfoList")
-model FileInfoList is Azure.Core.Page<FileInfo>;
 
 @doc("Test app component")
 model TestAppComponents {
@@ -781,33 +777,33 @@ model TestRunArtifacts {
 @doc("The input artifacts for the test run.")
 model TestRunInputArtifacts {
   @doc("File info")
-  configFileInfo?: FileInfo;
+  configFileInfo?: TestRunFileInfo;
 
   @doc("File info")
-  testScriptFileInfo?: FileInfo;
+  testScriptFileInfo?: TestRunFileInfo;
 
   @doc("File info")
-  userPropFileInfo?: FileInfo;
+  userPropFileInfo?: TestRunFileInfo;
 
   @doc("File info")
-  inputArtifactsZipFileInfo?: FileInfo;
+  inputArtifactsZipFileInfo?: TestRunFileInfo;
 
   @added(APIVersions.v2023_04_01_preview)
   @doc("The config json file for url based test")
-  urlTestsConfigFileInfo?: FileInfo;
+  urlTestsConfigFileInfo?: TestRunFileInfo;
 
   @doc("Additional supported files for the test run")
   @visibility("read")
-  additionalFileInfo?: FileInfo[];
+  additionalFileInfo?: TestRunFileInfo[];
 }
 
 @doc("The output artifacts for the test run.")
 model TestRunOutputArtifacts {
   @doc("File info")
-  resultFileInfo?: FileInfo;
+  resultFileInfo?: TestRunFileInfo;
 
   @doc("File info")
-  logsFileInfo?: FileInfo;
+  logsFileInfo?: TestRunFileInfo;
 }
 
 @doc("Collection of test runs")
