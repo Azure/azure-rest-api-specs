@@ -165,7 +165,7 @@ enum TestType{
 model TestFileInfo extends FileInfo {
   @doc("Name of the file.")
   @key
-  @visibility("read")
+  @visibility
   fileName: string;
 }
 
@@ -175,7 +175,7 @@ model TestFileInfo extends FileInfo {
 model TestRunFileInfo extends FileInfo {
   @doc("Name of the file.")
   @key
-  @visibility("read")
+  @visibility
   fileName: string;
 }
 

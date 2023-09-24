@@ -58,7 +58,122 @@
     }
   ],
   "paths": {
+    "/test-runs": {
+      "get": {
+        "operationId": "LoadTestRun_ListTestRuns",
+        "tags": [
+          "TestRun"
+        ],
+        "summary": "Get test run file by file name.",
+        "description": "Get test run file by file name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "description": "Paged collection of TestRun items",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "description": "The TestRun items on this page",
+                  "items": {
+                    "$ref": "#/definitions/TestRun"
+                  },
+                  "x-ms-identifiers": []
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items"
+                }
+              },
+              "required": [
+                "value"
+              ]
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetTestRunFile": {
+            "$ref": "./examples/GetTestRunFile.json"
+          },
+          "List test runs.": {
+            "$ref": "./examples/ListTestRuns.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/test-runs/{testRunId}": {
+      "get": {
+        "operationId": "LoadTestRun_GetTestRun",
+        "tags": [
+          "TestRun"
+        ],
+        "summary": "Get test run details by name.",
+        "description": "Get test run details by name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "testRunId",
+            "in": "path",
+            "description": "Unique test run name as identifier",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TestRun"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetTestRun": {
+            "$ref": "./examples/GetTestRun.json"
+          },
+          "Get a load test run.": {
+            "$ref": "./examples/GetTestRun.json"
+          }
+        }
+      },
       "patch": {
         "operationId": "LoadTestRun_CreateOrUpdateTestRun",
         "tags": [
@@ -129,6 +244,102 @@
           },
           "Create/update and start a load test run": {
             "$ref": "./examples/CreateOrUpdateTestRun.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "LoadTestRun_DeleteTestRun",
+        "tags": [
+          "TestRun"
+        ],
+        "summary": "Delete a test run by its name.",
+        "description": "Delete a test run by its name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "testRunId",
+            "in": "path",
+            "description": "Unique test run name as identifier",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteTestRun": {
+            "$ref": "./examples/DeleteTestRun.json"
+          },
+          "Delete a load test run": {
+            "$ref": "./examples/DeleteTestRun.json"
+          }
+        }
+      }
+    },
+    "/test-runs/{testRunId}:stop": {
+      "post": {
+        "operationId": "LoadTestRun_Stop",
+        "tags": [
+          "TestRun"
+        ],
+        "summary": "Stop test run by name.",
+        "description": "Stop test run by name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "testRunId",
+            "in": "path",
+            "description": "Unique test run name as identifier",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TestRun"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StopTestRun": {
+            "$ref": "./examples/StopTestRun.json"
           }
         }
       }
@@ -245,6 +456,65 @@
           },
           "Add or update app components to a load test run": {
             "$ref": "./examples/CreateOrUpdateTestRunAppComponents.json"
+          }
+        }
+      }
+    },
+    "/test-runs/{testRunId}/files/{fileName}": {
+      "get": {
+        "operationId": "LoadTestRun_GetTestRunFile",
+        "tags": [
+          "TestRun"
+        ],
+        "summary": "Get test run file by file name.",
+        "description": "Get test run file by file name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "testRunId",
+            "in": "path",
+            "description": "Unique test run name as identifier",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50
+          },
+          {
+            "name": "fileName",
+            "in": "path",
+            "description": "Name of the file.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TestRunFileInfo"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetTestRunFile": {
+            "$ref": "./examples/GetTestRunFile.json"
+          },
+          "Get a file associated to a load test run.": {
+            "$ref": "./examples/GetTestRunFile.json"
           }
         }
       }
@@ -673,278 +943,6 @@
           },
           "Add or update server metrics configuration for a load test run": {
             "$ref": "./examples/CreateOrUpdateTestRunServerMetricsConfig.json"
-          }
-        }
-      }
-    },
-    "/testruns": {
-      "get": {
-        "operationId": "LoadTestRun_ListTestRuns",
-        "tags": [
-          "TestRun"
-        ],
-        "summary": "Get test run file by file name.",
-        "description": "Get test run file by file name.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "type": "object",
-              "description": "Paged collection of TestRun items",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "The TestRun items on this page",
-                  "items": {
-                    "$ref": "#/definitions/TestRun"
-                  },
-                  "x-ms-identifiers": []
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "The link to the next page of items"
-                }
-              },
-              "required": [
-                "value"
-              ]
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetTestRunFile": {
-            "$ref": "./examples/GetTestRunFile.json"
-          },
-          "List test runs.": {
-            "$ref": "./examples/ListTestRuns.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/testruns/{testRunId}": {
-      "get": {
-        "operationId": "LoadTestRun_GetTestRun",
-        "tags": [
-          "TestRun"
-        ],
-        "summary": "Get test run details by name.",
-        "description": "Get test run details by name.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "testRunId",
-            "in": "path",
-            "description": "Unique test run name as identifier",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 50
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/TestRun"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetTestRun": {
-            "$ref": "./examples/GetTestRun.json"
-          },
-          "Get a load test run.": {
-            "$ref": "./examples/GetTestRun.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "LoadTestRun_DeleteTestRun",
-        "tags": [
-          "TestRun"
-        ],
-        "summary": "Delete a test run by its name.",
-        "description": "Delete a test run by its name.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "testRunId",
-            "in": "path",
-            "description": "Unique test run name as identifier",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 50
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DeleteTestRun": {
-            "$ref": "./examples/DeleteTestRun.json"
-          },
-          "Delete a load test run": {
-            "$ref": "./examples/DeleteTestRun.json"
-          }
-        }
-      }
-    },
-    "/testruns/{testRunId}:stop": {
-      "post": {
-        "operationId": "LoadTestRun_Stop",
-        "tags": [
-          "TestRun"
-        ],
-        "summary": "Stop test run by name.",
-        "description": "Stop test run by name.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "testRunId",
-            "in": "path",
-            "description": "Unique test run name as identifier",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 50
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/TestRun"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "StopTestRun": {
-            "$ref": "./examples/StopTestRun.json"
-          }
-        }
-      }
-    },
-    "/testruns/{testRunId}/files/{fileName}": {
-      "get": {
-        "operationId": "LoadTestRun_GetTestRunFile",
-        "tags": [
-          "TestRun"
-        ],
-        "summary": "Get test run file by file name.",
-        "description": "Get test run file by file name.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "testRunId",
-            "in": "path",
-            "description": "Unique test run name as identifier",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 50
-          },
-          {
-            "name": "fileName",
-            "in": "path",
-            "description": "Name of the file.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/TestRunFileInfo"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetTestRunFile": {
-            "$ref": "./examples/GetTestRunFile.json"
-          },
-          "Get a file associated to a load test run.": {
-            "$ref": "./examples/GetTestRunFile.json"
           }
         }
       }
@@ -3096,10 +3094,7 @@
       "properties": {
         "fileName": {
           "type": "string",
-          "description": "Name of the file.",
-          "x-ms-mutability": [
-            "create"
-          ]
+          "description": "Name of the file."
         }
       },
       "required": [
@@ -3372,10 +3367,7 @@
       "properties": {
         "fileName": {
           "type": "string",
-          "description": "Name of the file.",
-          "x-ms-mutability": [
-            "create"
-          ]
+          "description": "Name of the file."
         }
       },
       "required": [
