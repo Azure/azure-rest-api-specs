@@ -587,7 +587,7 @@ model ResourceMetric {
 }
 
 @doc("Load test run model")
-@resource("testruns")
+@resource("test-runs")
 model TestRun {
   @doc("Unique test run name as identifier")
   @visibility("read")
