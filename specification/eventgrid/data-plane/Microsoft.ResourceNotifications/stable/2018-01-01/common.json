@@ -2,16 +2,16 @@
   "swagger": "2.0",
   "info": {
     "version": "2018-01-01",
-    "title": "Schema of the common properties applicable to all the system topic types events provided by Azure Resource Notifications (ARN) service. ARN system topics have been enabled using Azure Event Grid",
-    "description": "Describes the schema of the the common properties for all the events published by ARN specific system topics to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."
+    "title": "Schema of the common properties for Azure Resource Notifications (ARN) System topics",
+    "description": "Describes the schema of the the common properties across all topic types published by ARN to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."
   },
   "paths": {},
   "definitions": {
     "AzureResourceNotificationsEventData": {
-      "description": "details of the common properties across all ARN system topic events",
+      "description": "Describes the schema of the common properties across all ARN system topic events",
       "type": "object",
       "properties": {
-        "ResourceInfo": {
+        "resourceInfo": {
           "description": "details of resourceInfo",
           "type": "object",
           "properties": {
@@ -44,7 +44,7 @@
             }
           }
         },
-        "OperationalInfo": {
+        "operationalInfo": {
           "description": "details of operational info",
           "type": "object",
           "properties": {
@@ -60,6 +60,48 @@
           "type": "string"
         }
       }
+    },
+
+    "AzureResourceNotificationsDeletedEventData":{
+      "description": "Describes the schema of the common properties across all ARN system topic deleted events",
+      "type": "object",
+      "properties": {
+        "resourceInfo": {
+          "description": "Data specific to the resource",
+          "type": "object",
+          "properties": {
+            "id": {
+              "description": "id of the resource which is being deleted",
+              "type": "string"
+            },
+            "name": {
+              "description": "name of the resource being deleted",
+              "type": "string"
+            },
+            "type": {
+              "description": "the type of the resource being deleted",
+              "type": "string"
+            }
+          }
+        },
+        "operationalInfo": {
+          "description": "details of operational info",
+          "type": "object",
+          "properties": {
+            "ResourceEventTime": {
+              "description": "Date and Time when resource was updated",
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        }
+      },
+      "x-ms-examples": {
+        "ResourceManagementDeletedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/Resources_Deleted.json"
+        }
+      }
+
     }
   }
 }

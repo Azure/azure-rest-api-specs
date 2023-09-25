@@ -24,41 +24,11 @@
     "ResourceManagementDeletedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ResourceNotifications.Resources.Deleted event.",
       "type": "object",
-      "properties": {
-        "resourceInfo": {
-          "description": "Data specific to the resource",
-          "type": "object",
-          "properties": {
-            "id": {
-              "description": "id of the resource which is being deleted",
-              "type": "string"
-            },
-            "name": {
-              "description": "name of the resource being deleted",
-              "type": "string"
-            },
-            "type": {
-              "description": "the type of the resource being deleted",
-              "type": "string"
-            }
-          }
-        },
-        "OperationalInfo": {
-          "description": "details of operational info",
-          "type": "object",
-          "properties": {
-            "ResourceEventTime": {
-              "description": "Date and Time when resource was updated",
-              "type": "string",
-              "format": "date-time"
-            }
-          }
-        },
-        "apiVersion": {
-          "description": "api version of the resource properties bag",
-          "type": "string"
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/AzureResourceNotificationsDeletedEventData"
         }
-      },
+      ],
       "x-ms-examples": {
         "ResourceManagementDeletedEventGridSchema": {
           "$ref": "./examples/event-grid-schema/Resources_Deleted.json"
