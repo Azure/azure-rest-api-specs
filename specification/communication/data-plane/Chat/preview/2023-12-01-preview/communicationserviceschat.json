@@ -22,20 +22,6 @@
         "parameters": [
           {
             "in": "header",
-            "name": "content-type",
-            "description": "The content type of the request. currently we only support application/octet-stream",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "header",
-            "name": "stream-content-length",
-            "description": "The content length of the image body.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "header",
             "name": "image-filename",
             "description": "The file name of the image.",
             "required": false,
@@ -96,11 +82,11 @@
             },
             "x-ms-error-response": true
           }
-        }
-      },
-      "x-ms-examples": {
-        "Upload Image": {
-          "$ref": "./examples/Images_UploadImage.json"
+        },
+        "x-ms-examples": {
+          "Upload Image": {
+            "$ref": "./examples/Images_UploadImage.json"
+          }
         }
       }
     },
@@ -1327,8 +1313,8 @@
           "example": "0-image-w4y58hfdu82374832"
         },
         "attachmentType": {
-          "description": "This field would be teams inline Image",
-          "example": "teamsInlineImage"
+          "description": "This field would be `image` or `inlineImage`.",
+          "example": "inlineImage"
         }
       }
     },
@@ -1502,8 +1488,8 @@
     "AttachmentType": {
       "description": "The type of attachment.",
       "enum": [
-        "teamsInlineImage",
-        "teamsImage",
+        "inlineImage",
+        "image",
         "file"
       ],
       "type": "string",
