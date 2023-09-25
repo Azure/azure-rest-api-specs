@@ -854,7 +854,7 @@ model AnalyzeConversationalSentimentTask extends AnalyzeConversationLroTask {
   kind: AnalyzeConversationLROTaskKind.ConversationalSentimentTask,
 
   @doc("Supported parameters for a conversational sentiment task.")
-  properties?: ConversationalSentimentTaskParameters,
+  parameters?: ConversationalSentimentTaskParameters,
 }
 
 @added(Versions.v2023_04_15_preview)
@@ -975,6 +975,16 @@ model ConversationPiiItemResult {
 
   @doc("Array of Entities")
   entities: Array<Entity>
+}
+
+@added(Versions.v2023_04_15_preview)
+@doc("Task definition for a PII redaction in conversations.")
+model AnalyzeConversationPiiTask extends AnalyzeConversationLroTask{
+  @doc("discriminator kind")
+  kind: AnalyzeConversationLROTaskKind.ConversationalPIITask;
+
+  @doc("parameters")
+  parameters?: ConversationPiiTaskParameters;
 }
 
 @added(Versions.v2023_04_15_preview)
