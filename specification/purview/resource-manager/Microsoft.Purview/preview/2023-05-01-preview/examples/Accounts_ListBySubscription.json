@@ -40,10 +40,39 @@
               },
               "endpoints": {
                 "catalog": "https://account1.catalog.purview.azure-test.com",
-                "scan": "https://account1.scan.purview.azure-test.com",
-                "guardian": "https://account1.guardian.purview.azure-test.com"
+                "scan": "https://account1.scan.purview.azure-test.com"
               },
-              "publicNetworkAccess": "Enabled"
+              "privateEndpointConnections": [
+                {
+                  "properties": {
+                    "provisioningState": "Succeeded",
+                    "privateEndpoint": {
+                      "id": "/subscriptions/baca8a88-4527-4c35-a13e-b2775ce0d7fc/resourceGroups/nrpResourceGroupName/providers/Microsoft.Network/privateEndpoints/peName"
+                    },
+                    "privateLinkServiceConnectionState": {
+                      "status": "Pending",
+                      "description": "Please approve my connection, thanks.",
+                      "actionsRequired": "None"
+                    }
+                  },
+                  "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/SampleResourceGroup/providers/Microsoft.Purview/accounts/account1/privateEndpointConnections/peName-8536c337-7b36-4d67-a7ce-081655baf59e",
+                  "name": "peName-8536c337-7b36-4d67-a7ce-081655baf59e",
+                  "type": "Microsoft.Purview/accounts/privateEndpointConnections"
+                }
+              ],
+              "publicNetworkAccess": "Enabled",
+              "managedResourceGroupName": "managed-rg-mwjotkl",
+              "managedResourcesPublicNetworkAccess": "Enabled",
+              "managedResources": {
+                "resourceGroup": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/managed-rg-mwjotkl",
+                "storageAccount": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/managed-rg-mwjotkl/providers/Microsoft.Storage/storageAccounts/scanwestustzaagzr",
+                "eventHubNamespace": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/managed-rg-mwjotkl/providers/Microsoft.EventHub/namespaces/atlas-westusdddnbtp"
+              },
+              "ingestionStorage": {
+                "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/ingestion-storage-rg-mwjotkl",
+                "primaryEndpoint": "https://ingestioneastusddnpkar.z31.blob.storage.azure.net/",
+                "publicNetworkAccess": "Enabled"
+              }
             }
           },
           {
@@ -64,14 +93,47 @@
               "lastModifiedAt": "2021-03-16T23:24:34.3430059Z"
             },
             "properties": {
-              "friendlyName": "friendly-account1",
+              "friendlyName": "friendly-account2",
               "provisioningState": "Succeeded",
+              "accountStatus": {
+                "accountProvisioningState": "Succeeded",
+                "errorDetails": {}
+              },
               "endpoints": {
                 "catalog": "https://account2.catalog.purview.azure-test.com",
-                "scan": "https://account2.scan.purview.azure-test.com",
-                "guardian": "https://account1.guardian.purview.azure-test.com"
+                "scan": "https://account2.scan.purview.azure-test.com"
               },
-              "publicNetworkAccess": "Enabled"
+              "privateEndpointConnections": [
+                {
+                  "properties": {
+                    "provisioningState": "Succeeded",
+                    "privateEndpoint": {
+                      "id": "/subscriptions/baca8a88-4527-4c35-a13e-b2775ce0d7fc/resourceGroups/nrpResourceGroupName/providers/Microsoft.Network/privateEndpoints/peName"
+                    },
+                    "privateLinkServiceConnectionState": {
+                      "status": "Pending",
+                      "description": "Please approve my connection, thanks.",
+                      "actionsRequired": "None"
+                    }
+                  },
+                  "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/SampleResourceGroup/providers/Microsoft.Purview/accounts/account1/privateEndpointConnections/peName-8536c337-7b36-4d67-a7ce-081655baf59e",
+                  "name": "peName-8536c337-7b36-4d67-a7ce-081655baf59e",
+                  "type": "Microsoft.Purview/accounts/privateEndpointConnections"
+                }
+              ],
+              "publicNetworkAccess": "Enabled",
+              "managedResourceGroupName": "managed-rg-mwjotkl",
+              "managedResourcesPublicNetworkAccess": "Enabled",
+              "managedResources": {
+                "resourceGroup": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/managed-rg-mwjotkl",
+                "storageAccount": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/managed-rg-mwjotkl/providers/Microsoft.Storage/storageAccounts/scanwestustzaagzr",
+                "eventHubNamespace": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/managed-rg-mwjotkl/providers/Microsoft.EventHub/namespaces/atlas-westusdddnbtp"
+              },
+              "ingestionStorage": {
+                "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/ingestion-storage-rg-mwjotkl",
+                "primaryEndpoint": "https://ingestioneastusddnpkar.z31.blob.storage.azure.net/",
+                "publicNetworkAccess": "Enabled"
+              }
             }
           }
         ]

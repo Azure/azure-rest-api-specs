@@ -26,9 +26,17 @@ These are the global settings for the Purview API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-05
+tag: package-2023-05-01-preview
 ```
 
+### Tag: package-2023-05-01-preview
+
+These settings apply only when `--tag=package-2023-05-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-05-01-preview'
+input-file:
+- Microsoft.Purview/preview/2023-05-01-preview/purview.json
+```
 
 ### Tag: package-preview-2023-05
 
@@ -92,7 +100,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Purview
-  output-folder: $(csharp-sdks-folder)/Purview/Microsoft.Azure.Management.Purview/src/Generated
+  output-folder: $(csharp-sdks-folder)/Purview/Management.Purview/Generated
   clear-output-folder: true
 ```
 
@@ -118,5 +126,16 @@ directive:
       - $.definitions.CheckNameAvailabilityResult.properties.nameAvailable
       - $.definitions.DimensionProperties.properties.toBeExportedForCustomer
     reason:
-      - Check name model is set by ARM team https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/proxy-api-reference.md#check-name-availability-requests
+      - Check name model is set by ARM team https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/proxy-api-reference.md#check-name-availability-requests  
+  - suppress: R2025 # NextLinkPropertyMustExist
+    where:
+      - $.definitions.UsageList.properties.nextLink
+    reason:
+      - Check Usage response model set by ARM team https://armwiki.azurewebsites.net/api_contracts/UsagesAPIContract.html?q=usages
+  - suppress: PatchSkuProperty
+    from: purview.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Purview/accounts/{accountName}"].patch.parameters[4]
+    reason:
+      - The service does not support SKU since V1.
 ```
