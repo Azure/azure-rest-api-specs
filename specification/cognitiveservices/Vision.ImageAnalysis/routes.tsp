@@ -105,6 +105,7 @@ op analyzeFromUrl is Azure.Core.RpcOperation<
   ImageAnalysisResult
 >;
 
+#suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to analyze an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
 @doc("Segment the input image. An image stream of content type 'image/png' is returned, where the pixel values depend on the analysis mode. The returned image has the same dimensions as the input image for modes: foregroundMatting. The returned image has the same aspect ratio and same dimensions as the input image up to a limit of 16 megapixels for modes: backgroundRemoval.")
 @actionSeparator("/")
 @route("imageanalysis:segment")
@@ -123,7 +124,7 @@ op segmentFromUrl is Azure.Core.RpcOperation<
 
   @doc("The format of the HTTP payload.")
   @header()
-  contentType: "application/octet-stream";
+  contentType: "application/json";
 },
 {
   @header 
