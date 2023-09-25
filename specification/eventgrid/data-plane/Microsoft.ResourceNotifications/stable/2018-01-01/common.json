@@ -1,0 +1,64 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"version": "2018-01-01",
+		"title": "Schema of the common properties applicable to all the system topic types events provided by Azure Resource Notifications (ARN) service. ARN system topics have been enabled using Azure Event Grid",
+		"description": "Describes the schema of the the common properties for all the events published by ARN specific system topics to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."
+	},
+	"paths": {},
+	"definitions": {
+		"AzureResourceNotificationsEventData": {
+			"description": "details of the common properties across all ARN system topic events",
+			"type": "object",
+			"properties": {
+				"ResourceInfo": {
+					"description": "details of resourceInfo",
+					"type": "object",
+					"properties": {
+						"id": {
+							"description": "id of the resource for which the event is being emitted",
+							"type": "string"
+						},
+						"name": {
+							"description": "name of the resource for which the event is being emitted",
+							"type": "string"
+						},
+						"type": {
+							"description": "the type of the resource for which the event is being emitted",
+							"type": "string"
+						},
+						"location": {
+							"description": "the location of the resource for which the event is being emitted",
+							"type": "string"
+						},
+						"tags": {
+							"description": "the tags on the resource for which the event is being emitted",
+							"type": "string"
+						},
+						"properties": {
+							"description": "properties in the payload of the resource for which the event is being emitted",
+							"type": "object",
+							"additionalProperties": {
+								"type": "object"
+							}
+						}
+					}
+				},
+        "OperationalInfo": {
+          "description": "details of operational info",
+          "type": "object",
+          "properties": {
+            "ResourceEventTime": {
+              "description": "DateTime when resource was updated",
+              "type": "DateTime"
+            }
+          },
+          "apiVersion": {
+            "description": "api version of the resource properties bag",
+            "type": "string"
+          }
+        }
+			}
+		}
+	}
+}
