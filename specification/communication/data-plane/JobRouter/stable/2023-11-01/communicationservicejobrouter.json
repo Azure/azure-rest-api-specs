@@ -2616,6 +2616,7 @@
           "description": "Discriminator value used to differentiate between supported matching mode types."
         },
         "queueAndMatchMode": {
+          "$ref": "#/definitions/QueueAndMatchMode",
           "description": "Describes a matching mode where matching worker to a job is automatically\nstarted after job is queued successfully."
         },
         "scheduleAndSuspendMode": {
@@ -2623,6 +2624,7 @@
           "description": "Describes a matching mode used for scheduling jobs to be queued at a future\ntime.\nAt the specified time, matching worker to a job will not start\nautomatically."
         },
         "suspendMode": {
+          "$ref": "#/definitions/SuspendMode",
           "description": "Describes a matching mode where matching worker to a job is suspended."
         }
       }
@@ -2912,6 +2914,10 @@
         }
       ],
       "x-ms-discriminator-value": "pass-through"
+    },
+    "QueueAndMatchMode": {
+      "type": "object",
+      "description": "Describes a matching mode where matching worker to a job is automatically started after job is queued successfully."
     },
     "QueueLengthExceptionTrigger": {
       "type": "object",
@@ -3399,6 +3405,10 @@
         "id"
       ]
     },
+    "RouterQueueAssignment": {
+      "type": "object",
+      "description": "An assignment of a worker to a queue"
+    },
     "RouterQueueCreateOrUpdate": {
       "type": "object",
       "description": "A queue that can contain jobs to be routed.",
@@ -3524,7 +3534,9 @@
         "queueAssignments": {
           "type": "object",
           "description": "The queue(s) that this worker can receive work from.",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "$ref": "#/definitions/RouterQueueAssignment"
+          }
         },
         "totalCapacity": {
           "type": "integer",
@@ -3618,7 +3630,9 @@
         "queueAssignments": {
           "type": "object",
           "description": "The queue(s) that this worker can receive work from.",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "$ref": "#/definitions/RouterQueueAssignment"
+          }
         },
         "totalCapacity": {
           "type": "integer",
@@ -3912,6 +3926,10 @@
         }
       ],
       "x-ms-discriminator-value": "static"
+    },
+    "SuspendMode": {
+      "type": "object",
+      "description": "Describes a matching mode where matching worker to a job is suspended."
     },
     "UnassignJobRequest": {
       "type": "object",

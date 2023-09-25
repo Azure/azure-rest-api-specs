@@ -566,7 +566,7 @@ model JobMatchingMode {
 Describes a matching mode where matching worker to a job is automatically
 started after job is queued successfully.
 """)
-  queueAndMatchMode?: unknown;
+  queueAndMatchMode?: QueueAndMatchMode;
 
   @doc("""
 Describes a matching mode used for scheduling jobs to be queued at a future
@@ -577,7 +577,7 @@ automatically.
   scheduleAndSuspendMode?: ScheduleAndSuspendMode;
 
   @doc("Describes a matching mode where matching worker to a job is suspended.")
-  suspendMode?: unknown;
+  suspendMode?: SuspendMode;
 }
 
 @doc("""
@@ -591,6 +591,12 @@ model ScheduleAndSuspendMode {
   
   scheduleAt?: utcDateTime;
 }
+
+@doc("Describes a matching mode where matching worker to a job is automatically started after job is queued successfully.")
+model QueueAndMatchMode {}
+
+@doc("Describes a matching mode where matching worker to a job is suspended.")
+model SuspendMode {}
 
 @doc("Request payload for deleting a job")
 model CancelJobRequest {
@@ -785,6 +791,9 @@ by job priority
   longestJobWaitTimeMinutes?: float64;
 }
 
+@doc("An assignment of a worker to a queue")
+model RouterQueueAssignment {}
+
 @resource("workers")
 @doc("An entity for jobs to be routed to")
 model RouterWorker {
@@ -798,7 +807,7 @@ model RouterWorker {
   state?: RouterWorkerState;
   
   @doc("The queue(s) that this worker can receive work from.")
-  queueAssignments?: Record<unknown>;
+  queueAssignments?: Record<RouterQueueAssignment>;
 
   @doc("The total capacity score this worker has to manage multiple concurrent jobs.")
   totalCapacity?: int32;

@@ -1,3 +1,6 @@
+// cheat-sheet - https://microsoft.github.io/typespec/standard-library/http/cheat-sheet
+// tsp compile main.tsp --emit @azure-tools/typespec-autorest
+
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
