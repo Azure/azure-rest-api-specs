@@ -5,6 +5,8 @@
     "scanName": "myScanName",
     "api-version": "2023-09-01",
     "body": {
+      "name": "myScanName",
+      "id": "datasources/myDataSource/scans/myScanName",
       "kind": "AzureStorageCredential",
       "properties": {
         "credential": {
@@ -14,10 +16,14 @@
         "connectedVia": null,
         "scanRulesetName": "AzureStorage",
         "scanRulesetType": "System",
+        "workers": null,
         "collection": {
-          "referenceName": "Collection-rZX"
+          "lastModifiedAt": "2021-09-15T21:20:08.2944382Z",
+          "referenceName": "Collection-rZX",
+          "type": "CollectionReference"
         }
-      }
+      },
+      "scanResults": null
     }
   },
   "responses": {
@@ -29,6 +35,7 @@
         "name": "myScanName",
         "id": "datasources/myDataSource/scans/myScanName",
         "kind": "AzureStorageCredential",
+        "creationType": "Manual",
         "properties": {
           "credential": {
             "referenceName": "CredentialAKV",
@@ -42,9 +49,10 @@
             "lastModifiedAt": "2021-09-15T21:20:08.2944382Z",
             "referenceName": "Collection-rZX",
             "type": "CollectionReference"
-          }
-        },
-        "scanResults": null
+          },
+          "domain": "domainName",
+          "lastModifiedAt": "2022-08-05T07:25:22.5148717Z"
+        }
       }
     },
     "201": {
@@ -55,11 +63,13 @@
         "name": "myScanName",
         "id": "datasources/myDataSource/scans/myScanName",
         "kind": "AzureStorageCredential",
+        "creationType": "Manual",
         "properties": {
           "credential": {
             "referenceName": "CredentialAKV",
             "credentialType": "AccountKey"
           },
+          "connectedVia": null,
           "scanRulesetName": "AzureStorage",
           "scanRulesetType": "System",
           "workers": null,
@@ -67,9 +77,10 @@
             "lastModifiedAt": "2021-09-15T21:20:08.2944382Z",
             "referenceName": "Collection-rZX",
             "type": "CollectionReference"
-          }
-        },
-        "scanResults": null
+          },
+          "domain": "domainName",
+          "lastModifiedAt": "2022-08-05T07:25:22.5148717Z"
+        }
       }
     }
   }
