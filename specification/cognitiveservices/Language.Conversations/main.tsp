@@ -1700,7 +1700,7 @@ op analyzeConversation is Operations.ResourceCollectionAction<
   >;
 
 @added(Versions.v2023_04_01)
-@route("/language/analyze-conversations2/jobs/{jobId}")
+@route("/language/analyze-conversations/jobs/{jobId}")
 op analyzeConversationJobStatus(
   @doc("(Optional) if set to true, response will contain request and document level statistics.")
   @query showStats?: boolean, 
@@ -1718,13 +1718,13 @@ model SubmitAccepted {
 };
   
 @added(Versions.v2023_04_01)
-@route("/language/analyze-conversations2/jobs")
+@route("/language/analyze-conversations/jobs")
 @post
 @pollingOperation(analyzeConversationJobStatus)
 op analyzeConversationSubmitJob(@query `api-version`: Versions, analyzeConversationJobsInput: AnalyzeConversationJobsInput): SubmitAccepted | Azure.Core.Foundations.ErrorResponse;
 
 @added(Versions.v2023_04_01)
-@route("/language/analyze-conversations2/jobs/{jobId}:cancel")
+@route("/language/analyze-conversations/jobs/{jobId}:cancel")
 @post
 @pollingOperation(analyzeConversationJobStatus)
 op analyzeConversationCancelJob(@query `api-version`: Versions,  @pollingOperationParameter(analyzeConversationJobStatus::parameters.jobId) @path jobId: string): SubmitAccepted | Azure.Core.Foundations.ErrorResponse;
