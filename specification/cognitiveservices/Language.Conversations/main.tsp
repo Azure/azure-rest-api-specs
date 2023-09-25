@@ -1143,7 +1143,7 @@ model SummaryResult{
 
 @added(Versions.v2023_04_15_preview)
 @doc("Custom Summary Results")
-model CustomSummaryResult extends SummaryResultBase{
+model CustomSummaryResult{
   ...SummaryResultBase;
   ...CustomResult;
 }
