@@ -9,7 +9,23 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
-namespace Language.Conversations;
+@versioned(Versions)
+namespace Language;
+
+@doc("Language Service Versions")
+enum Versions {
+  @doc("Version 2022-05-01")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2022_05_01: "2022-05-01",
+
+  @doc("Version 2023-04-01")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2023_04_01: "2023-04-01",
+
+  @doc("Version 2023-04-15-preview")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2023_04_15_preview: "2023-04-15-preview",
+}
 
 @doc("Error response.")
 model ErrorResponse is Azure.Core.Foundations.ErrorResponse;
@@ -466,7 +482,6 @@ enum ErrorCode {
 }
 
 @doc("Predicted sentiment")
-@added(Versions.v2023_04_01)
 enum Sentiment {
     @doc("Positive statement")
     positive,
