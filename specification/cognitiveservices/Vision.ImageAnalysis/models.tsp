@@ -3,6 +3,34 @@ import "@typespec/http";
 namespace ImageAnalysis;
 using TypeSpec.Http;
 
+model SharedAnalyzeQuery {
+    @query({
+      name: "features",
+      format: "csv",
+    })
+    @doc("A string indicating what visual feature types to return. Multiple values should be comma-separated. Valid visual feature types include: Tags, Caption, DenseCaptions, Objects, Read, SmartCrops, People. If VisualFeatures is not specified, then Categories, Tags, and Description are included in the response by default.")
+    visualFeatures?: Array<visualFeatures>;
+
+    @query("model-name")
+    @doc("The name of the custom trained model. This parameter needs to be specified if the parameter \"features\" is not specified.")
+    modelName?: string;
+
+    @query("language")
+    @doc("The desired language for output generation. If this parameter is not specified, the default value is \"en\". See https://aka.ms/cv-languages for a list of supported languages.")
+    language?: string = "en";
+
+    @query({
+      name: "smartcrops-aspect-ratios",
+      format: "csv"
+    })
+    @doc("A list of aspect ratios to use for smartCrops feature. Aspect ratios are calculated by dividing the target crop width by the height. Supported values are between 0.75 and 1.8 (inclusive). Multiple values should be comma-separated. If this parameter is not specified, the service will return one crop suggestion with an aspect ratio it sees fit between 0.5 and 2.0 (inclusive).")
+    smartCropsAspectRatios?: Array<float64>;
+
+    @query("gender-neutral-caption")
+    @doc("Boolean flag for enabling gender-neutral captioning for caption and denseCaptions features. If this parameter is not specified, the default value is \"false\".")
+    genderNeutralCaption?: boolean = false;
+}
+
 @doc("A basic rectangle")
 model BoundingBox {
   @doc("X coordinate")
