@@ -310,18 +310,64 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/language/analyze-conversations2/jobs/{jobId}": {
+    "/widgets": {
       "get": {
-        "operationId": "GetImageOperationStatus",
-        "description": "Returns the status of the images operation",
+        "operationId": "Widgets_ListWidgets",
+        "description": "List Widget resources",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "jobId",
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SelectQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedWidget"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/widgets/{widgetName}": {
+      "get": {
+        "operationId": "Widgets_GetWidget",
+        "description": "Get a Widget",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "widgetName",
             "in": "path",
-            "description": ".",
+            "description": "The widget name.",
             "required": true,
             "type": "string"
           }
@@ -330,7 +376,207 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/AnalyzeConversationJobState"
+              "$ref": "#/definitions/Widget"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Widgets_CreateOrUpdateWidget",
+        "description": "Creates or updates a Widget asynchronously",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "widgetName",
+            "in": "path",
+            "description": "The widget name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WidgetCreateOrUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Widget"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/Widget"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Widgets_DeleteWidget",
+        "description": "Delete a Widget asynchronously.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "widgetName",
+            "in": "path",
+            "description": "The widget name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/widgets/{widgetName}/operations/{operationId}": {
+      "get": {
+        "operationId": "Widgets_GetWidgetOperationStatus",
+        "description": "Gets status of a Widget operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "widgetName",
+            "in": "path",
+            "description": "The widget name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The unique ID of the operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/Widget",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
             }
           },
           "default": {
@@ -949,6 +1195,47 @@
           "description": "Inner error."
         }
       }
+    },
+    "Azure.Core.Foundations.OperationState": {
+      "type": "string",
+      "description": "Enum describing allowed operation states.",
+      "enum": [
+        "InProgress",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation has completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation has been canceled by the user."
+          }
+        ]
+      }
+    },
+    "Azure.Core.eTag": {
+      "type": "string",
+      "format": "eTag",
+      "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
     },
     "BaseExtraInformation": {
       "type": "object",
@@ -2252,6 +2539,30 @@
       ],
       "x-ms-discriminator-value": "Luis"
     },
+    "ManufacturerId": {
+      "type": "string",
+      "description": "Widget part Manufacturers",
+      "enum": [
+        "ManufacturerA",
+        "ManufacturerB"
+      ],
+      "x-ms-enum": {
+        "name": "ManufacturerId",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ManufacturerA",
+            "value": "ManufacturerA",
+            "description": "ManufacturerA"
+          },
+          {
+            "name": "ManufacturerB",
+            "value": "ManufacturerB",
+            "description": "ManufacturerB"
+          }
+        ]
+      }
+    },
     "MetadataFilter": {
       "type": "object",
       "description": "Find QnAs that are associated with the given list of metadata.",
@@ -2455,6 +2766,28 @@
         }
       ],
       "x-ms-discriminator-value": "OrdinalResolution"
+    },
+    "PagedWidget": {
+      "type": "object",
+      "description": "Paged collection of Widget items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Widget items on this page",
+          "items": {
+            "$ref": "#/definitions/Widget"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "PreBuiltResult": {
       "type": "object",
@@ -3567,6 +3900,160 @@
         "modelAsString": true
       }
     },
+    "Widget": {
+      "type": "object",
+      "description": "A widget.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The widget name.",
+          "readOnly": true
+        },
+        "color": {
+          "$ref": "#/definitions/WidgetColor",
+          "description": "The widget color."
+        },
+        "manufacturerId": {
+          "type": "string",
+          "description": "The ID of the widget's manufacturer."
+        },
+        "widgetParts": {
+          "type": "array",
+          "description": "Parts on Widget",
+          "items": {
+            "$ref": "#/definitions/WidgetPart"
+          },
+          "x-ms-identifiers": []
+        },
+        "etag": {
+          "$ref": "#/definitions/Azure.Core.eTag",
+          "description": "The entity tag for this resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name",
+        "color",
+        "manufacturerId",
+        "widgetParts",
+        "etag"
+      ]
+    },
+    "WidgetColor": {
+      "type": "string",
+      "description": "The color of a widget.",
+      "enum": [
+        "Black",
+        "White",
+        "Red",
+        "Green",
+        "Blue"
+      ],
+      "x-ms-enum": {
+        "name": "WidgetColor",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Black",
+            "value": "Black",
+            "description": "Black"
+          },
+          {
+            "name": "White",
+            "value": "White",
+            "description": "White"
+          },
+          {
+            "name": "Red",
+            "value": "Red",
+            "description": "Red"
+          },
+          {
+            "name": "Green",
+            "value": "Green",
+            "description": "Green"
+          },
+          {
+            "name": "Blue",
+            "value": "Blue",
+            "description": "Blue"
+          }
+        ]
+      }
+    },
+    "WidgetCreateOrUpdate": {
+      "type": "object",
+      "description": "A widget.",
+      "properties": {
+        "color": {
+          "$ref": "#/definitions/WidgetColor",
+          "description": "The widget color."
+        },
+        "manufacturerId": {
+          "type": "string",
+          "description": "The ID of the widget's manufacturer."
+        },
+        "widgetParts": {
+          "type": "array",
+          "description": "Parts on Widget",
+          "items": {
+            "$ref": "#/definitions/WidgetPart"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "WidgetPart": {
+      "type": "object",
+      "description": "A widget's part.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the part.",
+          "readOnly": true
+        },
+        "partId": {
+          "type": "string",
+          "description": "The ID to use for reordering the part."
+        },
+        "manufacturerId": {
+          "$ref": "#/definitions/ManufacturerId",
+          "description": "The ID of the part's manufacturer."
+        },
+        "etag": {
+          "$ref": "#/definitions/Azure.Core.eTag",
+          "description": "The entity tag for this resource.",
+          "readOnly": true
+        }
+      },
+      "discriminator": "manufacturerId",
+      "required": [
+        "name",
+        "partId",
+        "manufacturerId",
+        "etag"
+      ]
+    },
+    "WidgetPartA": {
+      "type": "object",
+      "description": "WidgetPartA",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WidgetPart"
+        }
+      ],
+      "x-ms-discriminator-value": "ManufacturerA"
+    },
+    "WidgetPartB": {
+      "type": "object",
+      "description": "WidgetPartB",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WidgetPart"
+        }
+      ],
+      "x-ms-discriminator-value": "ManufacturerB"
+    },
     "WordLevelTiming": {
       "type": "object",
       "description": "Word-level timing information that the speech-to-text API generates. The words in this object should have 1:1 correspondence with the lexical input to allow for audio redaction.",
@@ -3657,6 +4144,46 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "Azure.Core.MaxPageSizeQueryParameter": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "The maximum number of result items per page.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.SelectQueryParameter": {
+      "name": "select",
+      "in": "query",
+      "description": "Select the specified fields to be included in the response.",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "multi",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.SkipQueryParameter": {
+      "name": "skip",
+      "in": "query",
+      "description": "The number of result items to skip.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.TopQueryParameter": {
+      "name": "top",
+      "in": "query",
+      "description": "The number of result items to return.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
     }
   }
 }
