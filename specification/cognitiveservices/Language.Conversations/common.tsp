@@ -33,8 +33,6 @@ model InnerErrorModel extends Record<unknown> {
     innererror?: InnerErrorModel;
 }
 
-alias Language = string;
-
 @doc("Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.")
 enum StringIndexType {
     @doc("Returned offset and length values will correspond to TextElements (Graphemes and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this option if your application is written in .Net Framework or .Net Core and you will be using StringInfo.")
@@ -58,20 +56,30 @@ model TaskState {
 }
 
 @doc("The status of the task at the mentioned last update time.")
+@lroStatus
 @added(Versions.v2023_04_01)
 enum State {
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'notStarted' should have a documentation or description, please use decorator @doc to add it."
     notStarted,
+
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'running' should have a documentation or description, please use decorator @doc to add it."
     running,
+
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'succeeded' should have a documentation or description, please use decorator @doc to add it."
+    @lroSucceeded
     succeeded,
+
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'partiallyCompleted' should have a documentation or description, please use decorator @doc to add it."
     partiallyCompleted,
+
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'failed' should have a documentation or description, please use decorator @doc to add it."
+    @lroFailed
     failed,
+
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'cancelled' should have a documentation or description, please use decorator @doc to add it."
+    @lroCanceled
     cancelled,
+
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'cancelling' should have a documentation or description, please use decorator @doc to add it."
     cancelling,
 }
@@ -80,7 +88,7 @@ enum State {
 @added(Versions.v2023_04_01)
 model TaskIdentifier {
     @doc("task name")
-    taskName: string;
+    taskName?: string;
 }
 
 @doc("Base parameters object for a text analysis task.")
@@ -213,9 +221,9 @@ model KnowledgeBaseAnswer {
     @doc("Source of QnA result.")
     source?: string;
 
-    #suppress "deprecated" " Deprecated: object is deprecated. Please use {} for an empty model, `Record<unknown>` for a record with unknown property types, `unknown[]` for an array."
+    #suppress "@azure-tools/typespec-azure-core/bad-record-type" "KnowledgeBaseAnswer.metadata should not use ': Record<unknown>'. Use ': Record<string>' instead."
     @doc("Metadata associated with the answer, useful to categorize or filter question answers.")
-    metadata?: object;
+    metadata?: Record<unknown>;
 
     @doc("Dialog associated with Answer.")
     dialog?: KnowledgeBaseAnswerDialog;
@@ -535,31 +543,45 @@ model CustomResult {
 @doc("Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction.")
 enum RedactionCharacter{
     #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `!`,
+    explationPoint: "!",
+
     #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `#`,
+    numberSign: "#",
+
     #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `$`,
+    dollar: "$",
+
     #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `%`,
+    perCent: "%",
+
     #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `&`,
+    ampersand: "&",
+
     #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `*`,
+    asterisk: "*",
+
     #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `+`,
+    plus: "+",
+
     #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `-`,
+    minus: "-",
+
     #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `=`,
+    equals: "=",
+
     #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `?`,
+    questionMark: "?",
+    
     #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `@`,
+    atSign: "@",
+
     #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `^`,
+    caret: "^",
+
     #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `_`,
+    underscore: "_",
+
     #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    `~`,
+    tilde: "~",
+
 }
