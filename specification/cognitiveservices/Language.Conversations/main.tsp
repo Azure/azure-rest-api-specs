@@ -1792,10 +1792,15 @@ model Widget {
   manufacturerId: string;
 
   @doc("Parts on Widget")
-  widgetParts: Array<WidgetPart>;
+  widgetParts: WidgetParts;
 
   ...EtagProperty;
 }
+model WidgetParts {
+  @doc("Parts on Widget")
+  parts: Array<WidgetPart>;
+}
+
 
 @doc("A widget's part.")
 @resource("parts")

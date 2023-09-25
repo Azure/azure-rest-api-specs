@@ -4444,12 +4444,8 @@
           "description": "The ID of the widget's manufacturer."
         },
         "widgetParts": {
-          "type": "array",
-          "description": "Parts on Widget",
-          "items": {
-            "$ref": "#/definitions/WidgetPart"
-          },
-          "x-ms-identifiers": []
+          "$ref": "#/definitions/WidgetParts",
+          "description": "Parts on Widget"
         },
         "etag": {
           "$ref": "#/definitions/Azure.Core.eTag",
@@ -4520,12 +4516,8 @@
           "description": "The ID of the widget's manufacturer."
         },
         "widgetParts": {
-          "type": "array",
-          "description": "Parts on Widget",
-          "items": {
-            "$ref": "#/definitions/WidgetPart"
-          },
-          "x-ms-identifiers": []
+          "$ref": "#/definitions/WidgetPartsCreateOrUpdate",
+          "description": "Parts on Widget"
         }
       }
     },
@@ -4579,6 +4571,35 @@
         }
       ],
       "x-ms-discriminator-value": "ManufacturerB"
+    },
+    "WidgetParts": {
+      "type": "object",
+      "properties": {
+        "parts": {
+          "type": "array",
+          "description": "Parts on Widget",
+          "items": {
+            "$ref": "#/definitions/WidgetPart"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "parts"
+      ]
+    },
+    "WidgetPartsCreateOrUpdate": {
+      "type": "object",
+      "properties": {
+        "parts": {
+          "type": "array",
+          "description": "Parts on Widget",
+          "items": {
+            "$ref": "#/definitions/WidgetPart"
+          },
+          "x-ms-identifiers": []
+        }
+      }
     },
     "WordLevelTiming": {
       "type": "object",
