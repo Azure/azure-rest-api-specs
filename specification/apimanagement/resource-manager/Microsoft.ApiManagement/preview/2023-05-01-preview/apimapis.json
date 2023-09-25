@@ -313,14 +313,13 @@
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
-              }
-            }
-          },
-          "202": {
-            "description": "Request to create or update API was accepted. Location header contains the URL where the status of the long running operation can be checked.",
-            "headers": {
+              },
               "location": {
-                "description": "Location header",
+                "description": "Location header contains the URL where the status of the long running operation can be checked",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked",
                 "type": "string"
               }
             }
@@ -333,6 +332,14 @@
             "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              },
+              "location": {
+                "description": "Location header contains the URL where the status of the long running operation can be checked",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked",
                 "type": "string"
               }
             }
@@ -454,6 +461,10 @@
             "headers": {
               "location": {
                 "description": "Location header",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked",
                 "type": "string"
               }
             }
@@ -3024,15 +3035,6 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Request to create or update Api schema was accepted.",
-            "headers": {
-              "location": {
-                "description": "Location header",
-                "type": "string"
-              }
-            }
-          },
           "201": {
             "description": "Api schema configuration was successfully created.",
             "schema": {
@@ -3041,6 +3043,14 @@
             "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              },
+              "location": {
+                "description": "Location header contains the URL where the status of the long running operation can be checked",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked",
                 "type": "string"
               }
             }
@@ -3053,6 +3063,14 @@
             "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              },
+              "location": {
+                "description": "Location header contains the URL where the status of the long running operation can be checked",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked",
                 "type": "string"
               }
             }

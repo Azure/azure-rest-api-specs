@@ -251,6 +251,14 @@
               "ETag": {
                 "description": "Current entity state version",
                 "type": "string"
+              },
+              "location": {
+                "description": "Location header contains the URL where the status of the long running operation can be checked",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked",
+                "type": "string"
               }
             }
           },
@@ -263,13 +271,13 @@
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
-              }
-            }
-          },
-          "202": {
-            "description": "Request to create or update the policy fragment was accepted. Location header contains the URL where the status of the long running operation can be checked.",
-            "headers": {
+              },
               "location": {
+                "description": "Location header contains the URL where the status of the long running operation can be checked",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked",
                 "type": "string"
               }
             }
