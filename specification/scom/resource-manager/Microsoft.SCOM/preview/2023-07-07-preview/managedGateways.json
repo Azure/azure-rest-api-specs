@@ -116,6 +116,15 @@
           },
           {
             "$ref": "#/parameters/managedGatewayName"
+          },
+          {
+            "name": "ManagedGateway",
+            "description": "SCOM Managed Gateway Resource",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedGateway"
+            }
           }
         ],
         "responses": {
@@ -269,6 +278,18 @@
         "domainName": {
           "description": "The domain name associated with the gateway to be monitored.",
           "type": "string"
+        },
+        "extensionStatus": {
+          "description": "The status of the agent extension that is being installed.",
+          "type": "string",
+          "enum": [
+            "Failed",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "extensionStatus",
+            "modelAsString": true
+          }
         },
         "managementServerEndpoint": {
           "description": "The management server endpoint to which the gateway is directed.",
