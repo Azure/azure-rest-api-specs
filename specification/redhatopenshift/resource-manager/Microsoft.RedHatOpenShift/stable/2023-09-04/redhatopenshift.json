@@ -548,7 +548,7 @@
         "tags": [
           "OpenShiftClusters"
         ],
-        "summary": "Updates a OpenShift cluster with the specified subscription, resource group and resource name.",
+        "summary": "Creates or updates a OpenShift cluster with the specified subscription, resource group and resource name.",
         "description": "The operation returns properties of a OpenShift cluster.",
         "operationId": "OpenShiftClusters_Update",
         "parameters": [
@@ -600,7 +600,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Updates a OpenShift cluster with the specified subscription, resource group and resource name.": {
+          "Creates or updates a OpenShift cluster with the specified subscription, resource group and resource name.": {
             "$ref": "./examples/OpenShiftClusters_Update.json"
           }
         }
@@ -2097,8 +2097,8 @@
           },
           "x-ms-identifiers": []
         },
-        "workerProfilesStatus": {
-          "description": "The cluster worker profiles status.",
+        "activeWorkerProfiles": {
+          "description": "The cluster active worker profiles.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/WorkerProfile"
@@ -2243,27 +2243,20 @@
         "Disabled",
         "Enabled"
       ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "PreconfiguredNSG",
-        "modelAsString": true
-      }
+      "type": "string"
     },
     "ProvisioningState": {
       "description": "ProvisioningState represents a provisioning state.",
       "enum": [
         "AdminUpdating",
+        "Cancelled",
         "Creating",
         "Deleting",
         "Failed",
         "Succeeded",
         "Updating"
       ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ProvisioningState",
-        "modelAsString": true
-      }
+      "type": "string"
     },
     "Secret": {
       "description": "Secret represents a secret.",
@@ -2510,18 +2503,18 @@
           "description": "The size of the worker VMs."
         },
         "diskSizeGB": {
+          "format": "int32",
           "description": "The disk size of the worker VMs.",
-          "type": "integer",
-          "format": "int32"
+          "type": "integer"
         },
         "subnetId": {
           "description": "The Azure resource ID of the worker subnet.",
           "type": "string"
         },
         "count": {
+          "format": "int32",
           "description": "The number of worker VMs.",
-          "type": "integer",
-          "format": "int32"
+          "type": "integer"
         },
         "encryptionAtHost": {
           "$ref": "#/definitions/EncryptionAtHost",
