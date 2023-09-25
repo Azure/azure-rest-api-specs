@@ -140,24 +140,6 @@
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "./types.json#/parameters/filter"
-          },
-          {
-            "$ref": "./types.json#/parameters/orderBy"
-          },
-          {
-            "$ref": "./types.json#/parameters/top"
-          },
-          {
-            "$ref": "./types.json#/parameters/skip"
-          },
-          {
-            "$ref": "./types.json#/parameters/count"
-          },
-          {
-            "$ref": "./types.json#/parameters/search"
           }
         ],
         "responses": {
@@ -369,7 +351,7 @@
         "billingRelationshipType": {
           "description": "Identifies which services and purchases are paid by a billing profile.",
           "enum": [
-            "Unknown",
+            "Other",
             "Direct",
             "IndirectCustomer",
             "IndirectPartner",
@@ -384,7 +366,7 @@
           }
         },
         "billTo": {
-          "description": "Address details.",
+          "description": "Billing address.",
           "allOf": [
             {
               "$ref": "./types.json#/definitions/AddressDetails"
@@ -397,7 +379,7 @@
           "readOnly": true
         },
         "displayName": {
-          "description": "The name of the billing profile for the invoice section or customer.",
+          "description": "The name of the billing profile.",
           "type": "string"
         },
         "enabledAzurePlans": {
@@ -417,7 +399,7 @@
           "description": "Identifies the billing profile that is linked to another billing profile in indirect purchase motion.",
           "allOf": [
             {
-              "$ref": "#/definitions/IndirectRelationshipInfo"
+              "$ref": "./types.json#/definitions/IndirectRelationshipInfo"
             }
           ]
         },
@@ -445,7 +427,7 @@
           "type": "string"
         },
         "shipTo": {
-          "description": "Address details.",
+          "description": "The default address where the products are shipped, or the services are being used. If a ship to is not specified for a product or a subscription, then this address will be used.",
           "allOf": [
             {
               "$ref": "./types.json#/definitions/AddressDetails"
@@ -453,7 +435,7 @@
           ]
         },
         "soldTo": {
-          "description": "Address details.",
+          "description": "The address of the individual or organization that is responsible for the billing account.",
           "allOf": [
             {
               "$ref": "./types.json#/definitions/AddressDetails"
@@ -474,7 +456,7 @@
           }
         },
         "spendingLimitDetails": {
-          "description": "Identifies the billing profile that is linked to another billing profile in indirect purchase motion.",
+          "description": "The details of billing profile spending limit.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SpendingLimitDetails"
@@ -485,7 +467,7 @@
         "status": {
           "description": "The status of the billing profile.",
           "enum": [
-            "Unknown",
+            "Other",
             "Active",
             "Disabled",
             "Warned",
@@ -502,6 +484,7 @@
         "statusReasonCode": {
           "description": "Reason for the specified billing profile status.",
           "enum": [
+            "Other",
             "PastDue",
             "UnusualActivity",
             "SpendingLimitReached",
@@ -532,8 +515,8 @@
           "items": {
             "description": "Identifies the cloud environments that are associated with an invoice section. This is a system managed optional field and gets updated as the invoice section gets associated with accounts in various clouds.",
             "enum": [
-              "Unknown",
-              "AirgapTest",
+              "Other",
+              "Internal",
               "USGov",
               "USNat",
               "USSec"
@@ -604,24 +587,6 @@
         }
       }
     },
-    "IndirectRelationshipInfo": {
-      "description": "Identifies the billing profile that is linked to another billing profile in indirect purchase motion.",
-      "type": "object",
-      "properties": {
-        "billingAccountName": {
-          "description": "The billing account name of the partner or the customer for an indirect motion.",
-          "type": "string"
-        },
-        "billingProfileName": {
-          "description": "The billing profile name of the partner or the customer for an indirect motion. This field is not populated for Enterprise Agreement billing accounts.",
-          "type": "string"
-        },
-        "displayName": {
-          "description": "The display name of the partner or customer for an indirect motion.",
-          "type": "string"
-        }
-      }
-    },
     "SpendingLimitDetails": {
       "description": "The billing profile spending limit.",
       "type": "object",
@@ -648,7 +613,7 @@
         "type": {
           "description": "The type of spending limit.",
           "enum": [
-            "Unknown",
+            "Other",
             "None",
             "FreeAccount",
             "Sandbox",
@@ -673,7 +638,7 @@
         "status": {
           "description": "The status of current spending limit.",
           "enum": [
-            "Unknown",
+            "Other",
             "None",
             "Active",
             "Expired",

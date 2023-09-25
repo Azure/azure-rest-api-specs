@@ -212,10 +212,10 @@
           },
           {
             "in": "query",
-            "name": "excludeAccountsWithoutBillingProfiles",
-            "description": "When true, results will exclude Billing Accounts that are not fully created if the user has one of the following AAD roles: Global Administrator, Global Reader, Billing Administrator.",
+            "name": "includeAccountsWithoutBillingProfiles",
+            "description": "When true, results will include Billing Accounts that are not fully created if the user has one of the following AAD roles: Global Administrator, Global Reader, Billing Administrator.",
             "type": "boolean",
-            "default": true
+            "default": false
           },
           {
             "in": "query",
@@ -361,7 +361,7 @@
         "accountStatus": {
           "description": "The current status of the billing account.",
           "enum": [
-            "Unknown",
+            "Other",
             "Active",
             "UnderReview",
             "Disabled",
@@ -380,7 +380,7 @@
         "accountType": {
           "description": "The type of customer.",
           "enum": [
-            "Unknown",
+            "Other",
             "Enterprise",
             "Individual",
             "Partner",
@@ -400,7 +400,7 @@
         "accountSubType": {
           "description": "The tier of the account.",
           "enum": [
-            "Unknown",
+            "Other",
             "None",
             "Individual",
             "Standard",
@@ -416,6 +416,7 @@
         "accountStatusReasonCode": {
           "description": "Reason for the specified billing account status.",
           "enum": [
+            "Other",
             "UnusualActivity",
             "ManuallyTerminated",
             "Expired",
@@ -432,7 +433,7 @@
         "agreementType": {
           "description": "The type of agreement.",
           "enum": [
-            "Unknown",
+            "Other",
             "MicrosoftCustomerAgreement",
             "EnterpriseAgreement",
             "MicrosoftOnlineServicesProgram",
@@ -447,9 +448,6 @@
         },
         "displayName": {
           "description": "The billing account name.",
-          "type": "string"
-        },
-        "tradeName": {
           "type": "string"
         },
         "enrollmentDetails": {
@@ -477,19 +475,12 @@
           "type": "string"
         },
         "soldTo": {
-          "description": "Address details.",
+          "description": "The address of the individual or organization that is responsible for the billing account.",
           "allOf": [
             {
               "$ref": "./types.json#/definitions/AddressDetails"
             }
           ]
-        },
-        "taxIds": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TaxIdentifier"
-          },
-          "x-ms-identifiers": []
         },
         "registrationNumber": {
           "description": "Describes the registration number of the organization linked with the billing account.",
@@ -541,7 +532,7 @@
         "extendedTermOption": {
           "description": "The billing account extension opted by the company.",
           "enum": [
-            "Unknown",
+            "Other",
             "Opted-In",
             "Opted-Out"
           ],
@@ -555,7 +546,7 @@
         "supportLevel": {
           "description": "The support level offer associated with an enrollment.",
           "enum": [
-            "None",
+            "Other",
             "Standard",
             "Pro-Direct",
             "Developer"
@@ -584,7 +575,7 @@
         "markupStatus": {
           "description": "Markup status of enrollment, applicable only for indirect enrollments.",
           "enum": [
-            "Unknown",
+            "Other",
             "Disabled",
             "Preview",
             "Published",
@@ -598,35 +589,17 @@
           }
         },
         "indirectRelationshipInfo": {
-          "description": "Identifies the billing profile that is linked to another billing profile in indirect purchase motion.",
+          "description": "The properties of an enrollment which are applicable only for indirect enrollments.",
           "allOf": [
             {
-              "$ref": "#/definitions/IndirectRelationshipInfo"
+              "$ref": "./types.json#/definitions/IndirectRelationshipInfo"
             }
           ]
         },
-        "enrollmentInvoiceRecipient": {
+        "invoiceRecipient": {
           "description": "The contact who receives invoices of the enrollment.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "IndirectRelationshipInfo": {
-      "description": "Identifies the billing profile that is linked to another billing profile in indirect purchase motion.",
-      "type": "object",
-      "properties": {
-        "billingAccountName": {
-          "description": "The billing account name of the partner or the customer for an indirect motion.",
-          "type": "string"
-        },
-        "billingProfileName": {
-          "description": "The billing profile name of the partner or the customer for an indirect motion. This field is not populated for Enterprise Agreement billing accounts.",
-          "type": "string"
-        },
-        "displayName": {
-          "description": "The display name of the partner or customer for an indirect motion.",
-          "type": "string"
         }
       }
     },
@@ -651,63 +624,6 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
-        }
-      }
-    },
-    "TaxIdentifier": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "type": {
-          "description": "TODO",
-          "enum": [
-            "Unknown",
-            "BrazilCcmId",
-            "BrazilCnpjId",
-            "BrazilCpfId",
-            "CanadianFederalExempt",
-            "CanadianProvinceExempt",
-            "ExternalTaxation",
-            "IndiaFederalTanId",
-            "IndiaFederalServiceTaxId",
-            "IndiaPanId",
-            "IndiaStateCstId",
-            "IndiaStateGstINId",
-            "IndiaStateVatId",
-            "IntlExempt",
-            "USExempt",
-            "VatId",
-            "LoveCode",
-            "MobileBarCode",
-            "NationalIdentificationNumber",
-            "PublicSectorId"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "TaxIdentifierType",
-            "modelAsString": true
-          }
-        },
-        "scope": {
-          "type": "string"
-        },
-        "country": {
-          "type": "string"
-        },
-        "status": {
-          "description": "TODO",
-          "enum": [
-            "Unknown",
-            "Valid",
-            "Invalid"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "TaxIdentifierStatus",
-            "modelAsString": true
-          }
         }
       }
     },

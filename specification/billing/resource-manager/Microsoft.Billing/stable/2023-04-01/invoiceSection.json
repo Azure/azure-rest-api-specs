@@ -323,11 +323,9 @@
         "code": {
           "description": "Code for the delete invoice section validation.",
           "enum": [
-            "Unknown",
-            "AzureSubscriptions",
+            "Other",
             "LastInvoiceSection",
             "ActiveAzurePlans",
-            "RecurringCharges",
             "ReservedInstances",
             "ActiveBillingSubscriptions"
           ],
@@ -423,7 +421,7 @@
         "state": {
           "description": "Identifies the status of an invoice section.",
           "enum": [
-            "Unknown",
+            "Other",
             "Active",
             "Deleted",
             "Disabled",
@@ -440,7 +438,7 @@
         "status": {
           "description": "Identifies the status of an invoice section.",
           "enum": [
-            "Unknown",
+            "Other",
             "Active",
             "Deleted",
             "Disabled",
@@ -457,6 +455,7 @@
         "reasonCode": {
           "description": "Reason for the specified invoice section status.",
           "enum": [
+            "Other",
             "PastDue",
             "UnusualActivity"
           ],
@@ -480,8 +479,8 @@
         "targetCloud": {
           "description": "Identifies the cloud environments that are associated with an invoice section. This is a system managed optional field and gets updated as the invoice section gets associated with accounts in various clouds.",
           "enum": [
-            "Unknown",
-            "AirgapTest",
+            "Other",
+            "Internal",
             "USGov",
             "USNat",
             "USSec"
