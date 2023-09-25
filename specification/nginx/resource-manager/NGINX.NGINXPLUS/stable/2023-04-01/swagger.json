@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Nginx.NginxPlus",
-    "version": "2022-08-01"
+    "version": "2023-04-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -31,7 +31,7 @@
         "tags": [
           "NginxCertificate"
         ],
-        "summary": "Get a certificate of given Nginx deployment",
+        "summary": "Get a certificate of given NGINX deployment",
         "operationId": "Certificates_Get",
         "produces": [
           "application/json"
@@ -81,7 +81,7 @@
         "tags": [
           "NginxCertificate"
         ],
-        "summary": "Create or update the Nginx certificates for given Nginx deployment",
+        "summary": "Create or update the NGINX certificates for given NGINX deployment",
         "operationId": "Certificates_CreateOrUpdate",
         "consumes": [
           "application/json"
@@ -152,7 +152,7 @@
         "tags": [
           "NginxCertificate"
         ],
-        "summary": "Deletes a certificate from the nginx deployment",
+        "summary": "Deletes a certificate from the NGINX deployment",
         "operationId": "Certificates_Delete",
         "produces": [
           "application/json"
@@ -208,7 +208,7 @@
         "tags": [
           "NginxCertificate"
         ],
-        "summary": "List all certificates of given Nginx deployment",
+        "summary": "List all certificates of given NGINX deployment",
         "operationId": "Certificates_List",
         "produces": [
           "application/json"
@@ -256,7 +256,7 @@
         "tags": [
           "NginxConfiguration"
         ],
-        "summary": "List the Nginx configuration of given Nginx deployment.",
+        "summary": "List the NGINX configuration of given NGINX deployment.",
         "operationId": "Configurations_List",
         "produces": [
           "application/json"
@@ -304,7 +304,7 @@
         "tags": [
           "NginxConfiguration"
         ],
-        "summary": "Get the Nginx configuration of given Nginx deployment",
+        "summary": "Get the NGINX configuration of given NGINX deployment",
         "operationId": "Configurations_Get",
         "produces": [
           "application/json"
@@ -322,7 +322,7 @@
           {
             "in": "path",
             "name": "configurationName",
-            "description": "The name of configuration, only 'default' is supported value due to the singleton of Nginx conf",
+            "description": "The name of configuration, only 'default' is supported value due to the singleton of NGINX conf",
             "required": true,
             "type": "string"
           },
@@ -354,7 +354,7 @@
         "tags": [
           "NginxConfiguration"
         ],
-        "summary": "Create or update the Nginx configuration for given Nginx deployment",
+        "summary": "Create or update the NGINX configuration for given NGINX deployment",
         "operationId": "Configurations_CreateOrUpdate",
         "consumes": [
           "application/json"
@@ -375,7 +375,7 @@
           {
             "in": "path",
             "name": "configurationName",
-            "description": "The name of configuration, only 'default' is supported value due to the singleton of Nginx conf",
+            "description": "The name of configuration, only 'default' is supported value due to the singleton of NGINX conf",
             "required": true,
             "type": "string"
           },
@@ -385,7 +385,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "The Nginx configuration",
+            "description": "The NGINX configuration",
             "schema": {
               "$ref": "#/definitions/NginxConfiguration"
             }
@@ -425,7 +425,7 @@
         "tags": [
           "NginxConfiguration"
         ],
-        "summary": "Reset the Nginx configuration of given Nginx deployment to default",
+        "summary": "Reset the NGINX configuration of given NGINX deployment to default",
         "operationId": "Configurations_Delete",
         "produces": [
           "application/json"
@@ -443,7 +443,7 @@
           {
             "in": "path",
             "name": "configurationName",
-            "description": "The name of configuration, only 'default' is supported value due to the singleton of Nginx conf",
+            "description": "The name of configuration, only 'default' is supported value due to the singleton of NGINX conf",
             "required": true,
             "type": "string"
           },
@@ -481,7 +481,7 @@
         "tags": [
           "NginxDeployment"
         ],
-        "summary": "Get the Nginx deployment",
+        "summary": "Get the NGINX deployment",
         "operationId": "Deployments_Get",
         "produces": [
           "application/json"
@@ -524,7 +524,7 @@
         "tags": [
           "NginxDeployment"
         ],
-        "summary": "Create or update the Nginx deployment",
+        "summary": "Create or update the NGINX deployment",
         "operationId": "Deployments_CreateOrUpdate",
         "consumes": [
           "application/json"
@@ -587,7 +587,7 @@
         "tags": [
           "NginxDeployment"
         ],
-        "summary": "Update the Nginx deployment",
+        "summary": "Update the NGINX deployment",
         "operationId": "Deployments_Update",
         "consumes": [
           "application/json"
@@ -647,7 +647,7 @@
         "tags": [
           "NginxDeployment"
         ],
-        "summary": "Delete the Nginx deployment resource",
+        "summary": "Delete the NGINX deployment resource",
         "operationId": "Deployments_Delete",
         "produces": [
           "application/json"
@@ -696,7 +696,7 @@
         "tags": [
           "NginxDeployment"
         ],
-        "summary": "List the Nginx deployments resources",
+        "summary": "List the NGINX deployments resources",
         "operationId": "Deployments_List",
         "produces": [
           "application/json"
@@ -738,7 +738,7 @@
         "tags": [
           "NginxDeployment"
         ],
-        "summary": "List all Nginx deployments under the specified resource group.",
+        "summary": "List all NGINX deployments under the specified resource group.",
         "operationId": "Deployments_ListByResourceGroup",
         "produces": [
           "application/json"
@@ -783,7 +783,7 @@
         "tags": [
           "NginxDeployment"
         ],
-        "summary": "List all operations provided by Nginx.NginxPlus for the 2022-08-01 api version.",
+        "summary": "List all operations provided by Nginx.NginxPlus for the 2023-04-01 api version.",
         "operationId": "Operations_List",
         "produces": [
           "application/json"
@@ -874,12 +874,6 @@
         "properties": {
           "$ref": "#/definitions/NginxCertificateProperties"
         },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "location": {
           "type": "string"
         },
@@ -919,6 +913,13 @@
       "properties": {
         "data": {
           "type": "string"
+        },
+        "protectedFiles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -968,12 +969,6 @@
         },
         "properties": {
           "$ref": "#/definitions/NginxConfigurationProperties"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "location": {
           "type": "string"
@@ -1180,6 +1175,32 @@
         }
       }
     },
+    "NginxDeploymentScalingProperties": {
+      "type": "object",
+      "properties": {
+        "capacity": {
+          "format": "int32",
+          "type": "integer",
+          "example": 20
+        }
+      }
+    },
+    "NginxDeploymentUserProfile": {
+      "type": "object",
+      "properties": {
+        "preferredEmail": {
+          "type": "string",
+          "format": "email",
+          "pattern": "^$|^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$",
+          "description": "The preferred support contact email address of the user used for sending alerts and notification. Can be an empty string or a valid email address.",
+          "example": [
+            "",
+            "john.doe@example.com",
+            "tom@example.com"
+          ]
+        }
+      }
+    },
     "NginxDeploymentProperties": {
       "type": "object",
       "properties": {
@@ -1207,6 +1228,12 @@
         },
         "logging": {
           "$ref": "#/definitions/NginxLogging"
+        },
+        "scalingProperties": {
+          "$ref": "#/definitions/NginxDeploymentScalingProperties"
+        },
+        "userProfile": {
+          "$ref": "#/definitions/NginxDeploymentUserProfile"
         }
       }
     },
@@ -1258,6 +1285,12 @@
         },
         "logging": {
           "$ref": "#/definitions/NginxLogging"
+        },
+        "scalingProperties": {
+          "$ref": "#/definitions/NginxDeploymentScalingProperties"
+        },
+        "userProfile": {
+          "$ref": "#/definitions/NginxDeploymentUserProfile"
         }
       }
     },
@@ -1361,7 +1394,7 @@
     "DeploymentNameParameter": {
       "in": "path",
       "name": "deploymentName",
-      "description": "The name of targeted Nginx deployment",
+      "description": "The name of targeted NGINX deployment",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
